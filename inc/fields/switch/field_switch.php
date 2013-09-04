@@ -69,7 +69,7 @@ class Redux_Framework_switch extends Redux_Framework{
 			echo '<input type="hidden" class="'.$fold.'checkbox checkbox-input'.$class.'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" />';
 		echo '</div>';
 
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 		
 	}//function
 	
@@ -83,16 +83,16 @@ class Redux_Framework_switch extends Redux_Framework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'sof-switch-js', 
-			SOF_URL.'fields/switch/field_switch.js', 
+			'redux-switch-js', 
+			REDUX_URL.'inc/fields/switch/field_switch.js', 
 			array('jquery'),
 			time(),
 			true
 		);		
 
 		wp_enqueue_style(
-			'sof-switch-css', 
-			SOF_URL.'fields/switch/field_switch.css', 
+			'redux-switch-css', 
+			REDUX_URL.'inc/fields/switch/field_switch.css', 
 			time(),
 			true
 		);		

@@ -35,7 +35,7 @@ class Redux_Framework_date extends Redux_Framework{
 		
 		echo '<input type="text" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" class="redux-datepicker'.$class.'" />';
 		
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 		
 	}//function
 	
@@ -49,7 +49,7 @@ class Redux_Framework_date extends Redux_Framework{
 	 * @since Redux_Framework 1.0.0
 	*/
 	function enqueue(){
-		wp_enqueue_style('redux-jquery-ui-css');
+		wp_enqueue_style('jquery-ui-css');
 		wp_enqueue_script(
 			'redux-field-date-js', 
 			REDUX_URL.'inc/fields/date/field_date.js', 

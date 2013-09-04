@@ -42,11 +42,11 @@ class Redux_Framework_color_gradient extends Redux_Framework{
 
 		echo '<div class="redux-color-gradient-container" id="'.$this->field['id'].'">';
 
-		echo '<strong>' . __('From ', 'simple-options') . '</strong>&nbsp;<input id="'.$this->field['id'].'-from" name="'.$this->args['opt_name'].'['.$this->field['id'].'][from]" value="'.$this->value['from'].'" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std']['from'] . '" />';
+		echo '<strong>' . __('From ', 'redux') . '</strong>&nbsp;<input id="'.$this->field['id'].'-from" name="'.$this->args['opt_name'].'['.$this->field['id'].'][from]" value="'.$this->value['from'].'" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std']['from'] . '" />';
 
-		echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . __('To ', 'simple-options') . '</strong>&nbsp;<input id="'.$this->field['id'].'-to" name="'.$this->args['opt_name'].'['.$this->field['id'].'][to]" value="'.$this->value['to'].'" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std']['to'] . '" />';
+		echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . __('To ', 'redux') . '</strong>&nbsp;<input id="'.$this->field['id'].'-to" name="'.$this->args['opt_name'].'['.$this->field['id'].'][to]" value="'.$this->value['to'].'" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std']['to'] . '" />';
 		
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 		
 		echo '</div>';
 		
@@ -63,7 +63,7 @@ class Redux_Framework_color_gradient extends Redux_Framework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'simple-options-field-color-js', 
+			'redux-field-color-js', 
 			REDUX_URL.'inc/fields/color/field_color.js', 
 			array('jquery', 'wp-color-picker'),
 			time(),
@@ -71,7 +71,7 @@ class Redux_Framework_color_gradient extends Redux_Framework{
 		);
 
 		wp_enqueue_style(
-			'simple-options-field-color-js', 
+			'redux-field-color-js', 
 			REDUX_URL.'inc/fields/color/field_color.css', 
 			time(),
 			true

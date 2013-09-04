@@ -60,6 +60,37 @@ function change_framework_args($args){
 function setup_framework_options(){
     $args = array();
 
+
+    // For use with a tab below
+		$tabs = array();
+    if (function_exists('wp_get_theme')){
+        $theme_data = wp_get_theme();
+        $item_name = $theme_data->get('Name'); 
+        $item_uri = $theme_data->get('ThemeURI');
+        $description = $theme_data->get('Description');
+        $author = $theme_data->get('Author');
+        $author_uri = $theme_data->get('AuthorURI');
+        $version = $theme_data->get('Version');
+        $tags = $theme_data->get('Tags');
+    }else{
+        $theme_data = get_theme_data(trailingslashit(get_stylesheet_directory()) . 'style.css');
+        $item_name = $theme_data['Name']; 
+        $item_uri = $theme_data['URI'];
+        $description = $theme_data['Description'];
+        $author = $theme_data['Author'];
+        $author_uri = $theme_data['AuthorURI'];
+        $version = $theme_data['Version'];
+        $tags = $theme_data['Tags'];
+     }
+    
+    $item_info = '<div class="redux-opts-section-desc">';
+    $item_info .= '<p class="redux-opts-item-data description item-uri">' . __('<strong>Theme URL:</strong> ', 'redux-framework') . '<a href="' . $item_uri . '" target="_blank">' . $item_uri . '</a></p>';
+    $item_info .= '<p class="redux-opts-item-data description item-author">' . __('<strong>Author:</strong> ', 'redux-framework') . ($author_uri ? '<a href="' . $author_uri . '" target="_blank">' . $author . '</a>' : $author) . '</p>';
+    $item_info .= '<p class="redux-opts-item-data description item-version">' . __('<strong>Version:</strong> ', 'redux-framework') . $version . '</p>';
+    $item_info .= '<p class="redux-opts-item-data description item-description">' . $description . '</p>';
+    $item_info .= '<p class="redux-opts-item-data description item-tags">' . __('<strong>Tags:</strong> ', 'redux-framework') . implode(', ', $tags) . '</p>';
+    $item_info .= '</div>';    
+
     // Setting dev mode to true allows you to view the class settings/info in the panel.
     // Default: true
     //$args['dev_mode'] = true;
@@ -77,8 +108,8 @@ function setup_framework_options(){
 
 	$theme = wp_get_theme();
 
-	$args['display_name'] = $theme['Name'];
-	$args['display_version'] = $theme['Version'];
+	$args['display_name'] = $item_name;
+	$args['display_version'] = $version;
 
     // If you want to use Google Webfonts, you MUST define the api key.
     //$args['google_api_key'] = 'xxxx';
@@ -217,7 +248,7 @@ function setup_framework_options(){
             array(
                 'id' => '1', // The item ID must be unique
                 'type' => 'text', // Built-in field types include:
-                // text, textarea, editor, checkbox, multi_checkbox, radio, radio_img, button_set,
+                // text, textarea, editor, checkbox, multi_checkbox, radio, images, button_set,
                 // select, multi_select, color, date, divide, info, upload
                 'title' => __('Text Option', 'redux-framework'),
                 'subtitle' => __('This is a little space under the field title which can be used for additonal info.', 'redux-framework'),
@@ -384,11 +415,10 @@ function setup_framework_options(){
         'fields' => array(
             array(
                 'id' => 'switch',
-                'type' => 'checkbox',
+                'type' => 'switch',
                 'title' => __('Switch Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-                'switch' => true,
                 'std' => '1' // 1 = checked | 0 = unchecked
             ),
             array(
@@ -420,7 +450,7 @@ function setup_framework_options(){
             ),
             array(
                 'id' => '13',
-                'type' => 'radio_img',
+                'type' => 'images',
                 'title' => __('Radio Image Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
@@ -433,8 +463,8 @@ function setup_framework_options(){
                 'std' => '2'
             ),
             array(
-                'id' => 'radio_img',
-                'type' => 'radio_img',
+                'id' => 'images',
+                'type' => 'images',
                 'title' => __('Radio Image Option For Layout', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This uses some of the built in images, you can use them for layout options.', 'redux-framework'),
@@ -465,12 +495,13 @@ function setup_framework_options(){
             ),
             array(
                 'id' => '15',
-                'type' => 'multi_select',
+                'type' => 'select',
                 'title' => __('Multi Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
                 'options' => array('1' => 'Opt 1', '2' => 'Opt 2', '3' => 'Opt 3'), // Must provide key => value pairs for radio options
-                'std' => array('2', '3')
+                'std' => array('2', '3'),
+                'multi' => true
             )                                    
         )
     );
@@ -522,31 +553,37 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'pages_select',
-                'type' => 'pages_select',
+                'type' => 'select',
                 'title' => __('Pages Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a drop down menu of all the sites pages.', 'redux-framework'),
+                'data' => 'pages',
                 'args' => array() // Uses get_pages()
             ),
             array(
-                'id' => 'pages_multi_select',
-                'type' => 'pages_multi_select',
+                'id' => 'select',
+                'type' => 'select',
                 'title' => __('Pages Multiple Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a multi select menu of all the sites pages.', 'redux-framework'),
-                'args' => array('number' => '5') // Uses get_pages()
+                'args' => array('number' => '5'), // Uses get_pages()
+                'multi' => true,
+                'data' => 'pages',
             ),
             array(
                 'id' => 'posts_select',
-                'type' => 'posts_select',
+                'type' => 'select',
                 'title' => __('Posts Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a drop down menu of all the sites posts.', 'redux-framework'),
-                'args' => array('numberposts' => '10') // Uses get_posts()
+                'args' => array('numberposts' => '10'), // Uses get_posts()
+                'data' => 'posts',
             ),
             array(
                 'id' => 'posts_multi_select',
-                'type' => 'posts_multi_select',
+                'type' => 'select',
+                'multi' => true,
+                'data' => 'posts',
                 'title' => __('Posts Multiple Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a multi select menu of all the sites posts.', 'redux-framework'),
@@ -554,7 +591,8 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'tags_select',
-                'type' => 'tags_select',
+                'type' => 'select',
+                'data' => 'tags',
                 'title' => __('Tags Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a drop down menu of all the sites tags.', 'redux-framework'),
@@ -562,7 +600,9 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'tags_multi_select',
-                'type' => 'tags_multi_select',
+                'type' => 'select',
+                'multi' => true,
+                'data' => 'tags',                
                 'title' => __('Tags Multiple Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a multi select menu of all the sites tags.', 'redux-framework'),
@@ -570,7 +610,8 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'cats_select',
-                'type' => 'cats_select',
+                'type' => 'select',
+                'data' => 'categories',
                 'title' => __('Cats Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a drop down menu of all the sites cats.', 'redux-framework'),
@@ -578,7 +619,9 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'cats_multi_select',
-                'type' => 'cats_multi_select',
+                'type' => 'select',
+                'multi' => true,
+                'data' => 'categories',
                 'title' => __('Cats Multiple Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a multi select menu of all the sites cats.', 'redux-framework'),
@@ -586,7 +629,8 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'menu_select',
-                'type' => 'menu_select',
+                'type' => 'select',
+                'data' => 'menu',
                 'title' => __('Menu Select Option', 'redux-framework'),
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a drop down menu of all the sites menus.', 'redux-framework'),
@@ -594,34 +638,37 @@ function setup_framework_options(){
             ),
             array(
                 'id' => 'select_hide_below',
-                'type' => 'select_hide_below',
+                'type' => 'select',
                 'title' => __('Select Hide Below Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field requires certain options to be checked before the below field will be shown.', 'redux-framework'),
                 'options' => array(
-                    '1' => array('name' => 'Opt 1 field below allowed', 'allow' => 'true'),
-                    '2' => array('name' => 'Opt 2 field below hidden', 'allow' => 'false'),
-                    '3' => array('name' => 'Opt 3 field below allowed', 'allow' => 'true')
+                    '1' => 'Opt 1 field below allowed',
+                    '2' => 'Opt 2 field below hidden',
+                    '3' => 'Opt 3 field below allowed',
                 ), // Must provide key => value(array) pairs for select options
                 'std' => '2'
             ),
             array(
                 'id' => 'menu_location_select',
-                'type' => 'menu_location_select',
+                'type' => 'select',
+                'data' => 'menu_location',
                 'title' => __('Menu Location Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
-                'desc' => __('This field creates a drop down menu of all the themes menu locations.', 'redux-framework')
+                'desc' => __('This field creates a drop down menu of all the themes menu locations.', 'redux-framework'),
+                'fold' => array('select_hide_below'=>"2")
             ),
             array(
                 'id' => 'checkbox_hide_below',
-                'type' => 'checkbox_hide_below',
+                'type' => 'checkbox',
                 'title' => __('Checkbox to hide below', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a checkbox which will allow the user to use the next setting.', 'redux-framework'),
             ),
             array(
                 'id' => 'post_type_select',
-                'type' => 'post_type_select',
+                'type' => 'select',
+                'data' => 'post_type',
                 'title' => __('Post Type Select Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This field creates a drop down menu of all registered post types.', 'redux-framework'),
@@ -641,7 +688,17 @@ function setup_framework_options(){
                 'title' => __('Google Webfonts', 'redux-framework'), 
                 'subtitle' => __('This is a completely unique field type', 'redux-framework'),
                 'desc' => __('This is a simple implementation of the developer API for Google Webfonts. Don\'t forget to set your API key!', 'redux-framework')
-            )                            
+            ),
+            array(
+                'id' => 'slider',
+                'type' => 'slider',
+                'title' => __('Slider', 'redux-framework'), 
+                'min' => 25,
+                'max' => 100,
+                'subtitle' => __('Min: 25  Max 100', 'redux-framework'),
+                'desc' => __('This is a simple implementation of the developer API for Google Webfonts. Don\'t forget to set your API key!', 'redux-framework')
+            )  
+
         )
     );
 
@@ -684,33 +741,7 @@ function setup_framework_options(){
         )
     );
                 
-    $tabs = array();
-
-    if (function_exists('wp_get_theme')){
-        $theme_data = wp_get_theme();
-        $item_uri = $theme_data->get('ThemeURI');
-        $description = $theme_data->get('Description');
-        $author = $theme_data->get('Author');
-        $author_uri = $theme_data->get('AuthorURI');
-        $version = $theme_data->get('Version');
-        $tags = $theme_data->get('Tags');
-    }else{
-        $theme_data = get_theme_data(trailingslashit(get_stylesheet_directory()) . 'style.css');
-        $item_uri = $theme_data['URI'];
-        $description = $theme_data['Description'];
-        $author = $theme_data['Author'];
-        $author_uri = $theme_data['AuthorURI'];
-        $version = $theme_data['Version'];
-        $tags = $theme_data['Tags'];
-     }
     
-    $item_info = '<div class="redux-opts-section-desc">';
-    $item_info .= '<p class="redux-opts-item-data description item-uri">' . __('<strong>Theme URL:</strong> ', 'redux-framework') . '<a href="' . $item_uri . '" target="_blank">' . $item_uri . '</a></p>';
-    $item_info .= '<p class="redux-opts-item-data description item-author">' . __('<strong>Author:</strong> ', 'redux-framework') . ($author_uri ? '<a href="' . $author_uri . '" target="_blank">' . $author . '</a>' : $author) . '</p>';
-    $item_info .= '<p class="redux-opts-item-data description item-version">' . __('<strong>Version:</strong> ', 'redux-framework') . $version . '</p>';
-    $item_info .= '<p class="redux-opts-item-data description item-description">' . $description . '</p>';
-    $item_info .= '<p class="redux-opts-item-data description item-tags">' . __('<strong>Tags:</strong> ', 'redux-framework') . implode(', ', $tags) . '</p>';
-    $item_info .= '</div>';
 
     $tabs['item_info'] = array(
 		'icon' => 'info-sign',

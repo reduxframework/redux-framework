@@ -44,7 +44,7 @@ class Redux_Framework_border extends Redux_Framework{
 			$this->field['max'] = 10;
 		}		
 		
-		echo '<div class="sof-border-container">';
+		echo '<div class="redux-border-container">';
 
 		$options = array(''=>'None', 'solid'=>'Solid', 'dashed'=>'Dashed', 'dotted'=>'Dotted');
 
@@ -52,21 +52,21 @@ class Redux_Framework_border extends Redux_Framework{
 		if (!empty($this->field['compiler']) && $this->field['compiler']) {
 			$class .= " compiler";
 		}
-		echo '<div class="sof-border">';
+		echo '<div class="redux-border">';
 		
-			echo '<select original-title="'.__('Border size','simple-options').'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" class="tips sof-border-size mini'.$class.'" rows="6">';
+			echo '<select original-title="'.__('Border size','redux').'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" class="tips redux-border-size mini'.$class.'" rows="6">';
 				for ($k = $this->field['min']; $k <= $this->field['max']; $k++) {
 					echo '<option value="'.$k.'"'.selected($this->value['size'], $k, false).'>'.$k.'</option>';
 				}//foreach
 			echo '</select>';	
-			echo '<select original-title="'.__('Border style','simple-options').'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][style]" class="tips sof-border-style'.$class.'" rows="6">';
+			echo '<select original-title="'.__('Border style','redux').'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][style]" class="tips redux-border-style'.$class.'" rows="6">';
 				foreach($options as $k => $v){
 					echo '<option value="'.$k.'"'.selected($this->value['style'], $k, false).'>'.$v.'</option>';
 				}//foreach
 			echo '</select>';	
-			echo '<input name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" id="' . $this->field['id'] . '-color" class="sof-border-color sof-color ' . $class . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $this->field['std']['color'] . '" />';
+			echo '<input name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" id="' . $this->field['id'] . '-color" class="redux-border-color redux-color ' . $class . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $this->field['std']['color'] . '" />';
 			
-			echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+			echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 			
 			echo '</div>';
 		echo '</div>';
@@ -84,23 +84,23 @@ class Redux_Framework_border extends Redux_Framework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'simple-options-field-color-js', 
-			SOF_URL.'fields/color/field_color.js', 
+			'redux-field-color-js', 
+			REDUX_URL.'inc/fields/color/field_color.js', 
 			array('jquery', 'wp-color-picker'),
 			time(),
 			true
 		);
 
 		wp_enqueue_style(
-			'simple-options-field-color-css', 
-			SOF_URL.'fields/color/field_color.css', 
+			'redux-field-color-css', 
+			REDUX_URL.'inc/fields/color/field_color.css', 
 			time(),
 			true
 		);		
 		
 		wp_enqueue_style(
-			'simple-options-field-border-css', 
-			SOF_URL.'fields/border/field_border.css', 
+			'redux-field-border-css', 
+			REDUX_URL.'inc/fields/border/field_border.css', 
 			time(),
 			true
 		);		

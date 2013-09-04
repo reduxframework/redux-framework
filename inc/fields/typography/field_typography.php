@@ -246,7 +246,7 @@ class Redux_Framework_typography extends Redux_Framework{
 	    echo '<p class="'.$this->field['id'].'_previewer typography-preview" '. $g_size .'>'. $g_text .'</p>';
 	    echo "</div>";
 
-	    echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+	    echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
     endif;
 
 	}//function

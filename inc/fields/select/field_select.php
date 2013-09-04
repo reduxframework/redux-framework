@@ -80,6 +80,11 @@ class Redux_Framework_select extends Redux_Framework{
 						$this->field['options'][$tag->term_id] = $tag->name;
 					}//foreach
 				}//if
+			} else if ($this->field['data'] == "menu_location" || $this->field['data'] == "menu_locations") {
+				global $_wp_registered_nav_menus;
+				foreach($_wp_registered_nav_menus as $k => $v) {
+           $this->field['options'][$k] = $v;
+        }
 			}//if
 		}//if
 
@@ -105,8 +110,10 @@ class Redux_Framework_select extends Redux_Framework{
 				$nameBrackets = "[]";
 			}
 
+			$placeholder = (isset($this->field['placeholder'])) ? esc_attr($this->field['placeholder']) : '';
 
-			echo '<select'.$multi.' id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item'.$class.'"'.$width.' rows="6">';
+			echo '<select'.$multi.' id="'.$this->field['id'].'" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item'.$class.'"'.$width.' rows="6">';
+				echo '<option></option>';
 				foreach($this->field['options'] as $k => $v){
 					if (is_array($this->value)) {
 						$selected = (is_array($this->value) && in_array($k, $this->value))?' selected="selected"':'';					
@@ -116,9 +123,11 @@ class Redux_Framework_select extends Redux_Framework{
 					echo '<option value="'.$k.'"'.$selected.'>'.$v.'</option>';
 				}//foreach
 			echo '</select>';			
+		} else {
+			echo '<strong>'._('No items of this type were found.', 'redux-framework').'</strong>';
 		}
 
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 		
 	}//function
 

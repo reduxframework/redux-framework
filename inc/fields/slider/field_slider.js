@@ -2,7 +2,7 @@ jQuery.noConflict();
 
 
 jQuery(document).ready(function(){
-	jQuery('.sof_slider').each(function() {
+	jQuery('.redux_slider').each(function() {
 		//slider init
 
 		var id = jQuery(this).attr('id');
@@ -19,7 +19,7 @@ jQuery(document).ready(function(){
 			slide: function( event, ui ) {
 				var input = jQuery("#" + sliderParam.id);
 				input.val( ui.value );
-				sof_change(input);
+				redux_change(input);
 			}
 		});
 

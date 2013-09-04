@@ -12,7 +12,7 @@ class Redux_Validation_no_special_chars extends Redux_Framework {
 		
 		parent::__construct();
 		$this->field = $field;
-		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('You must not enter any special characters in this field, all special characters have been removed.', 'simple-options');
+		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('You must not enter any special characters in this field, all special characters have been removed.', 'redux');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();

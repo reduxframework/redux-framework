@@ -67,13 +67,16 @@ class Redux_Framework_slider extends Redux_Framework{
 		}
 
 		$params = array(
-				'id' => $this->field['id'],
-				'min' => $this->field['min'],
-				'max' => $this->field['max'],
-				'step' => $this->field['step'],
-				'val' => $this->value,
-				'std' => $this->field['std'],
+				'id' => '',
+				'min' => '',
+				'max' => '',
+				'step' => '',
+				'val' => '',
+				'std' => '',
 			);
+
+		$params = wp_parse_args( $this->field, $params );
+		$params['val'] = $this->value;
 
 		// Don't allow input edit if there's a step
 		$readonly = "";
@@ -81,11 +84,11 @@ class Redux_Framework_slider extends Redux_Framework{
 			$readonly = ' readonly="readonly"';
 		}
 
-		wp_localize_script( 'sof-slider-js', $this->field['id'].'Param', $params );
+		wp_localize_script( 'redux-slider-js', $this->field['id'].'Param', $params );
 	
 		//html output
 		echo '<input type="text" name="'.$this->args['opt_name'].'['.$this->field['id'].']" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$class.'"'.$readonly.'/>';
-		echo '<div id="'.$this->field['id'].'-slider" class="sof_slider"></div>';
+		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider"></div>';
 		
 		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
 		
@@ -101,16 +104,16 @@ class Redux_Framework_slider extends Redux_Framework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'sof-slider-js', 
-			SOF_URL.'fields/slider/field_slider.js', 
+			'redux-slider-js', 
+			REDUX_URL.'inc/fields/slider/field_slider.js', 
 			array('jquery'),
 			time(),
 			true
 		);		
 
 		wp_enqueue_style(
-			'sof-slider-css', 
-			SOF_URL.'fields/slider/field_slider.css', 
+			'redux-slider-css', 
+			REDUX_URL.'inc/fields/slider/field_slider.css', 
 			time(),
 			true
 		);		

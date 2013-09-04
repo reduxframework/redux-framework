@@ -12,7 +12,7 @@ class Redux_Validation_date extends Redux_Framework {
 		
 		parent::__construct();
 		$this->field = $field;
-		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid date.', 'simple-options');
+		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid date.', 'redux');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();

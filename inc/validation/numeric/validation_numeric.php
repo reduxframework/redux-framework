@@ -12,7 +12,7 @@ class Redux_Validation_numeric extends Redux_Framework {
 		
 		parent::__construct();
 		$this->field = $field;
-		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('You must provide a numerical value for this option.', 'simple-options');
+		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('You must provide a numerical value for this option.', 'redux');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();

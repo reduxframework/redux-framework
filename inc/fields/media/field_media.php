@@ -106,7 +106,7 @@ class Redux_Framework_media extends Redux_Framework{
 
 		echo '</div>' . "\n";
 		
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 		
 	}//function
 	
@@ -130,7 +130,7 @@ class Redux_Framework_media extends Redux_Framework{
 		}
 
 		wp_enqueue_script(
-			'simple-options-media-js',
+			'redux-media-js',
 			REDUX_URL.'inc/fields/media/field_media.js',
 			array('jquery', 'wp-color-picker'),
 			time(),
@@ -138,7 +138,7 @@ class Redux_Framework_media extends Redux_Framework{
 		);
 
 		wp_enqueue_style(
-			'simple-options-media-css',
+			'redux-media-css',
 			REDUX_URL.'inc/fields/media/field_media.css',
 			time(),
 			true

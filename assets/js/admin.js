@@ -346,8 +346,6 @@ var confirmOnPageExit = function (e) {
 		}
 	});
 	
-
-	
 	jQuery('#redux-import-code-button').click(function(){
 		if(jQuery('#redux-import-link-wrapper').is(':visible')){
 			jQuery('#redux-import-link-wrapper').fadeOut('fast');
@@ -422,7 +420,7 @@ jQuery.fn.isOnScreen = function(){
 
 	
   jQuery('#redux-save, #redux-imported').delay(4000).slideUp();
-  jQuery('#redux-field-errors').delay(5000).slideUp();
+  jQuery('#redux-field-errors').delay(8000).slideUp();
 
 
   jQuery('.redux-save').click(function() {
@@ -470,7 +468,7 @@ jQuery.fn.isOnScreen = function(){
 	});  
 	
 
-
+/*
 	// Markdown Viewer for Theme Documentation
 	if ($('#theme_docs_section_group').length != 0) {
 		var converter = new Showdown.converter();
@@ -478,6 +476,7 @@ jQuery.fn.isOnScreen = function(){
 		text = converter.makeHtml(text);
 		jQuery('#theme_docs_section_group').html(text);
 	}
+*/
 
 });
 

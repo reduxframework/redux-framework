@@ -37,7 +37,7 @@ class Redux_Framework_images extends Redux_Framework{
 			
 		if (!empty($this->field['options'])) {
 
-			echo '<ul class="sof-images">';
+			echo '<ul class="redux-images">';
 			
 			foreach($this->field['options'] as $k => $v){
 
@@ -73,7 +73,7 @@ class Redux_Framework_images extends Redux_Framework{
 					$theValue = $v['img'];
 				}
 
-				$selected = (checked($this->value, $theValue, false) != '')?' sof-images-selected':'';
+				$selected = (checked($this->value, $theValue, false) != '')?' redux-images-selected':'';
 
 				$presets = "";
 				if (!empty($this->field['presets']) && $this->field['presets'] && !empty($v['presets'])) {
@@ -81,16 +81,16 @@ class Redux_Framework_images extends Redux_Framework{
 					if (!is_array($v['presets'])) {
 						$v['presets'] = json_decode($v['presets'], true);
 					}
-					$v['presets']['simple-options-backup'] = 1;
+					$v['presets']['redux-backup'] = 1;
 
 					$presets = ' data-presets="'.htmlspecialchars(json_encode($v['presets']), ENT_QUOTES, 'UTF-8').'"';
 					$selected = "";
-					$class .= " sof-presets";
+					$class .= " redux-presets";
 				}				
 
 				
-				echo '<li class="sof-images">';
-				echo '<label class="'.$selected.' sof-images-'.$this->field['id'].'" for="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'">';
+				echo '<li class="redux-images">';
+				echo '<label class="'.$selected.' redux-images-'.$this->field['id'].'" for="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'">';
 
 
 				echo '<input type="radio" class="noUpdate' . $class . '" id="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$theValue.'" '.checked($this->value, $theValue, false).$presets.'/>';
@@ -109,7 +109,7 @@ class Redux_Framework_images extends Redux_Framework{
 				
 			echo '</ul>';		
 			if (!empty($this->field['presets']) && $this->field['presets']) {
-				echo '<div class="sof-presets-bar"><input type="button" class="sof-save-preset button-primary" value="Load Preset"></div>';
+				echo '<div class="redux-presets-bar"><input type="button" class="redux-save-preset button-primary" value="Load Preset"></div>';
 			}
 
 		}
@@ -132,16 +132,16 @@ class Redux_Framework_images extends Redux_Framework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'simple-options-field-images-js', 
-			SOF_URL.'fields/images/field_images.js', 
+			'redux-field-images-js', 
+			REDUX_URL.'inc/fields/images/field_images.js', 
 			array('jquery'),
 			time(),
 			true
 		);
 
 		wp_enqueue_style(
-			'simple-options-field-images-css', 
-			SOF_URL.'fields/images/field_images.css',
+			'redux-field-images-css', 
+			REDUX_URL.'inc/fields/images/field_images.css',
 			time(),
 			true
 		);		

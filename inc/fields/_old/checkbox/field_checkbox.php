@@ -1,5 +1,5 @@
 <?php
-class Redux_Framework_textarea {
+class Redux_Framework_checkbox {
 
     /**
      * Field Constructor.
@@ -21,23 +21,21 @@ class Redux_Framework_textarea {
      *
      * @since Redux_Framework 1.0.0
     */
-
-
-
-
     function render() {
         $name = $this->args['opt_name'] . '[' . $this->field['id'] . ']';
         $id = $this->field['id'];
-        $class = (isset($this->field['class'])) ? $this->field['class'] : 'large-text';
-        $placeholder = (isset($this->field['placeholder'])) ? ' placeholder="' . esc_attr($this->field['placeholder']) . '" ' : '';
-        $rows = (isset($this->field['placeholder'])) ? $this->field['rows'] : 6;
+        $desc = isset($this->field['desc']) ? $this->field['desc'] : '';
+        $class = isset($this->field['class']) ? $this->field['class'] : '';
+        $switch = isset($this->field['switch']) ? $this->field['switch'] : false;
         ?>
 
-        <textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>" <?php echo $placeholder; ?> class="<?php echo $class; ?>" rows="<?php echo $rows; ?>"><?php echo esc_attr($this->value); ?></textarea>
-
-        <?php if($this->field['desc'] != '') : ?>
-            <br/><span class="description"><?php echo $this->field['desc']; ?></span>
-        <?php endif; ?>
+    	<label <?php if($switch) : ?>class="switch_wrap"<?php endif; ?>>
+			<input name="<?php echo $name; ?>" id="<?php echo $id; ?>" class="<?php echo $class; ?>" value="1" <?php echo checked($this->value, '1', FALSE); ?> type="checkbox" />
+			<?php if($switch) : ?><div class="switch"><span class="bullet"></span></div><?php endif; ?>
+		</label>
+		<?php if($desc != '') : ?>
+			<label for="<?php echo $id; ?>"><?php echo $desc; ?></label>
+		<?php endif; ?>
 
         <?php
     }

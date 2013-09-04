@@ -321,7 +321,7 @@ if(!class_exists('Redux_Framework') ){
 			$wp_styles->add_data('redux-elusive-icon-ie7', 'conditional', 'lte IE 7' );
 
 			wp_register_style(
-				'redux-jquery-ui-css',
+				'jquery-ui-css',
 				apply_filters('redux-ui-theme', REDUX_URL . 'assets/css/vendor/jquery-ui-aristo/aristo.css'),
 				'',
 				time(),

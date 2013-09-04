@@ -37,7 +37,7 @@ class Redux_Framework_color extends Redux_Framework{
 
 		echo '<input name="'.$this->args['opt_name'].'['.$this->field['id'].']" id="' . $this->field['id'] . '" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std'] . '" />';
 		
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
 		
 		echo '</div>';
 

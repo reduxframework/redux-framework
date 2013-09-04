@@ -24,6 +24,6 @@ class Redux_Framework_password {
     function render() {
         $class = (isset($this->field['class'])) ? $this->field['class'] : 'regular-text';
         echo '<input type="password" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr($this->value) . '" class="' . $class . '" />';
-        echo (isset($this->field['desc']) && !empty($this->field['desc'])) ? ' <span class="description">' . $this->field['desc'] . '</span>' : '';
+        echo (isset($this->field['desc']) && !empty($this->field['desc'])) ? '<br /><span class="description">' . $this->field['desc'] . '</span>' : '';
     }
 }

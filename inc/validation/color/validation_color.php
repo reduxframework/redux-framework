@@ -12,7 +12,7 @@ class Redux_Validation_color extends Redux_Framework {
 		
 		parent::__construct();
 		$this->field = $field;
-		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid color value.', 'simple-options');
+		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid color value.', 'redux');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();
