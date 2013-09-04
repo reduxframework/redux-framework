@@ -6,6 +6,6 @@ jQuery(document).ready(function(){
 	 * Adds datepicker js
 	 *
 	 */
-	jQuery('.simple-options-datepicker').datepicker();
+	jQuery('.redux-datepicker').datepicker();
 	
 });

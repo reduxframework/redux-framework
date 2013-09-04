@@ -7,13 +7,13 @@
 	width:125px!important;
 }
 
-.sof-typography-container select,.typography-style,.typography-script {
+.redux-typography-container select,.typography-style,.typography-script {
 	float:left;
 	display:block;
 	width:340px;
 }
 
-.sof-typography-container .select_wrapper {
+.redux-typography-container .select_wrapper {
 	float:left;
 	margin-right:10px;
 	display:block;
@@ -35,13 +35,13 @@
 	margin-top:8px;
 }
 
-#simple-options-main input.sof-typography-color {
+#redux-main input.redux-typography-color {
 	float: left;
 	width: 70px;
 	margin-left: 5px;
 }
 
-.sof-typography-container .input-append {
+.redux-typography-container .input-append {
 	font-size:0;
 	white-space:nowrap;
 	float:left;
@@ -49,29 +49,29 @@
 	margin-bottom:3px;
 }
 
-.sof-typography-container .input-append .add-on {
+.redux-typography-container .input-append .add-on {
 	border-top-right-radius:3px;
 	border-bottom-right-radius:3px;
 }
 
-#simple-options-main .sof-typography-container .input-append input {
+#redux-main .redux-typography-container .input-append input {
 	border-top-right-radius:0;
 	border-bottom-right-radius:0;
 	margin-right:0;
 }
 
-#simple-options-main .sof-typography-container .typography-family select,#simple-options-main .sof-typography-container .typography-family {
+#redux-main .redux-typography-container .typography-family select,#redux-main .redux-typography-container .typography-family {
 	width:340px!important;
 }
 
-.sof-typography, .typography-color {
+.redux-typography, .typography-color {
 	margin-bottom:5px;
 }
 
-#simple-options-main .sof-typography-container .typography-style select,#simple-options-main .sof-typography-container .typography-style {
+#redux-main .redux-typography-container .typography-style select,#redux-main .redux-typography-container .typography-style {
 	width:150px!important;
 }
 
-#simple-options-main .sof-typography-container .typography-script select,#simple-options-main .sof-typography-container .typography-script {
+#redux-main .redux-typography-container .typography-script select,#redux-main .redux-typography-container .typography-script {
 	width:120px!important;
 }

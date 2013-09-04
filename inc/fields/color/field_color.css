@@ -4,21 +4,21 @@
 /* Color picker overwrite
 /*-------------------------------------------------------------------------------------------*/
 
-#simple-options-main input.sof-color {
+#redux-main input.redux-color {
 	float: left;
 	width: 70px;
 	margin-left: 5px;
 }
-#simple-options-main .wp-color-result.wp-picker-open {
+#redux-main .wp-color-result.wp-picker-open {
 t2op: -3px;
 }
-#simple-options-main #content .section-color .controls {
+#redux-main #content .section-color .controls {
 width: 345px;
 }
-#simple-options-main #content .section-color .explain {
+#redux-main #content .section-color .explain {
 width: 225px;
 }
-#simple-options-main .iris-picker .iris-strip .ui-slider-handle {
+#redux-main .iris-picker .iris-strip .ui-slider-handle {
 	position: absolute;
 	background: none!important;
 	right: -3px;
@@ -32,7 +32,7 @@ width: 225px;
 	z-index: 5;
 	cursor: ns-resize;
 }
-#simple-options-main .iris-picker .iris-slider-offset {
+#redux-main .iris-picker .iris-slider-offset {
 	position: absolute;
 	top: 0px;
 	left: 0;
@@ -43,25 +43,25 @@ width: 225px;
 	border: 0!important;
 	height: auto;
 }
-#simple-options-main .wp-picker-container .wp-color-result {
+#redux-main .wp-picker-container .wp-color-result {
 	outline: 0; 
 	margin: 0; 
 }
 
-#simple-options-main .sof-color-gradient {
+#redux-main .redux-color-gradient {
 	line-height: 24px;
 }
 
-#simple-options-main .wp-picker-container .wp-picker-open {
+#redux-main .wp-picker-container .wp-picker-open {
 	m2argin-top: -23px; 
 }
 
-#simple-options-main .wp-picker-container input {
+#redux-main .wp-picker-container input {
 	margin-bottom: inherit;
 	margin-top: inherit;
 
 }
 
-#simple-options-main .wp-picker-container .wp-picker-default {
+#redux-main .wp-picker-container .wp-picker-default {
 	padding: 0 10px 1px;
 }

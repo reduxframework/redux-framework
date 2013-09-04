@@ -1,12 +1,12 @@
 <?php
-class Simple_Options_typography extends Simple_Options{	
+class Redux_Framework_typography extends Redux_Framework{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
@@ -24,11 +24,11 @@ class Simple_Options_typography extends Simple_Options{
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function render(){
 
-		global $wp_filesystem, $Simple_Options;
+		global $wp_filesystem, $Redux_Framework;
 
 		// Initialize the Wordpress filesystem, no more using file_put_contents function
 		if (empty($wp_filesystem)) {
@@ -65,7 +65,7 @@ class Simple_Options_typography extends Simple_Options{
 		}
 	
 		
-	  echo '<div id="'.$this->field['id'].'-container" class="sof-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
+	  echo '<div id="'.$this->field['id'].'-container" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
 
 	  /**
 			Font Family
@@ -74,8 +74,8 @@ class Simple_Options_typography extends Simple_Options{
 
 	  	$output = "";
 
-	    echo '<div class="select_wrapper typography-family" original-title="'.__('Font family','simple-options').'" style="width: 220px; margin-right: 5px;">';
-	    echo '<select class="sof-typography sof-typography-family '.$class.'" id="'.$this->field['id'].'-family" name="'.$this->args['opt_name'].'['.$this->field['id'].'][family]" data-id="'.$this->field['id'].'" data-value="'.$this->value['family'].'">';
+	    echo '<div class="select_wrapper typography-family" original-title="'.__('Font family','redux-').'" style="width: 220px; margin-right: 5px;">';
+	    echo '<select class="redux-typography redux-typography-family '.$class.'" id="'.$this->field['id'].'-family" name="'.$this->args['opt_name'].'['.$this->field['id'].'][family]" data-id="'.$this->field['id'].'" data-value="'.$this->value['family'].'">';
 		 	echo '<optgroup label="Standard Fonts">';
 
 		 	if (empty($this->field['fonts'])) {
@@ -108,12 +108,12 @@ class Simple_Options_typography extends Simple_Options{
 	      $output .= '<option data-google="false" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($this->value['family'], $i, false) . '>'. $family .'</option>';
 	    }
 	    $output .= '</optgroup>';
-			if( !file_exists( dirname(__FILE__) . '/googlefonts.html' ) && !empty($Simple_Options->args['google_api_key']) ) {
+			if( !file_exists( dirname(__FILE__) . '/googlefonts.html' ) && !empty($Redux_Framework->args['google_api_key']) ) {
 				$this->getGoogleFonts($wp_filesystem);
 			}
 
 			if( file_exists( dirname(__FILE__) . '/googlefonts.html' )) {
-				$output .= $wp_filesystem->get_contents(SOF_DIR.'fields/typography/googlefonts.html');
+				$output .= $wp_filesystem->get_contents(REDUX_DIR.'fields/typography/googlefonts.html');
 				$google = true;
 			}	
 
@@ -124,7 +124,7 @@ class Simple_Options_typography extends Simple_Options{
 	    echo '</select></div>';
 
 	    if ($google) { // Set a flag so we know to set a header style or not
-				echo '<input type="hidden" class="sof-typography-google'.$class.'" id="'.$this->field['id'].'-google" name="'.$this->args['opt_name'].'['.$this->field['id'].'][google]" type="text" value="'. $this->value['google'] .'" data-id="'.$this->field['id'].'" />';	    	
+				echo '<input type="hidden" class="redux-typography-google'.$class.'" id="'.$this->field['id'].'-google" name="'.$this->args['opt_name'].'['.$this->field['id'].'][google]" type="text" value="'. $this->value['google'] .'" data-id="'.$this->field['id'].'" />';	    	
 	    }
 	  
 	  endif;
@@ -135,8 +135,8 @@ class Simple_Options_typography extends Simple_Options{
     Font Weight 
     **/
     if(empty($this->value['display']['style'])):
-      echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','simple-options').'">';
-      echo '<select class="sof-typography sof-typography-style select'.$class.'" original-title="'.__('Font style','simple-options').'" name="'.$this->field['id'].'[style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'">';
+      echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-').'">';
+      echo '<select class="redux-typography redux-typography-style select'.$class.'" original-title="'.__('Font style','redux-').'" name="'.$this->field['id'].'[style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'">';
 		 	if (empty($this->value['style'])) {
 		 		echo '<option value="">Inherit</option>';
 		 	}
@@ -182,8 +182,8 @@ class Simple_Options_typography extends Simple_Options{
     Font Script 
     **/
     if(empty($this->value['display']['script'])):
-      echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font script','simple-options').'">';
-      echo '<select class="sof-typography sof-typography-script'.$class.'" original-title="'.__('Font script','simple-options').'"  id="'.$this->field['id'].'-script" name="'.$this->args['opt_name'].'['.$this->field['id'].'][script]">';
+      echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font script','redux-').'">';
+      echo '<select class="redux-typography redux-typography-script'.$class.'" original-title="'.__('Font script','redux-').'"  id="'.$this->field['id'].'-script" name="'.$this->args['opt_name'].'['.$this->field['id'].'][script]">';
       if (isset($gfonts[$this->value['family']])) {
         $styles = array();
         foreach ($gfonts[$this->value['family']]['subsets'] as $k=>$v) {
@@ -199,7 +199,7 @@ class Simple_Options_typography extends Simple_Options{
 		Font Size
 		**/
   	if(empty($this->value['display']['size'])):
-    	echo '<div class="input-append"><input type="text" class="span2 sof-typography-size mini'.$class.'" original-title="'.__('Font size','simple-options').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" value="'.$this->value['size'].'"><span class="add-on">'.$unit.'</span></div>';
+    	echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$class.'" original-title="'.__('Font size','redux-').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" value="'.$this->value['size'].'"><span class="add-on">'.$unit.'</span></div>';
   	endif;
 
 
@@ -207,7 +207,7 @@ class Simple_Options_typography extends Simple_Options{
 		Line Height 
 		**/
 		if(empty($this->value['display']['height'])):
-		 	echo '<div class="input-append"><input type="text" class="span2 sof-typography sof-typography-height mini'.$class.'" original-title="'.__('Font height','simple-options').'" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'"><span class="add-on">'.$unit.'</span></div>';
+		 	echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$class.'" original-title="'.__('Font height','redux-').'" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'"><span class="add-on">'.$unit.'</span></div>';
 		endif;
 
 
@@ -224,7 +224,7 @@ class Simple_Options_typography extends Simple_Options{
 				$default = $this->field['std']['color'];
 			}
       echo '<div id="' . $this->field['id'] . '_color_picker" class="colorSelector typography-color"><div style="background-color: '.$this->value['color'].'"></div></div>';
-      echo '<input data-default-color="'.$default.'" class="sof-color sof-typography-color'.$class.'" original-title="'.__('Font color','simple-options').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
+      echo '<input data-default-color="'.$default.'" class="redux-color redux-typography-color'.$class.'" original-title="'.__('Font color','redux-').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
     endif;
 
 
@@ -257,48 +257,37 @@ class Simple_Options_typography extends Simple_Options{
 	 *
 	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function enqueue(){
-		global $Simple_Options;
+		global $Redux_Framework;
 	
 		wp_enqueue_script(
-			'simple-options-field-typography-js', 
-			SOF_URL.'fields/typography/field_typography.js', 
-			array('jquery', 'wp-color-picker', 'simple-options-field-color-js'),
+			'redux-field-typography-js', 
+			REDUX_URL.'inc/fields/typography/field_typography.js', 
+			array('jquery', 'wp-color-picker', 'redux--field-color-js'),
 			time(),
 			true
 		);
 
 		wp_enqueue_style(
-			'simple-options-field-typography-css', 
-			SOF_URL.'fields/typography/field_typography.css', 
+			'redux-field-typography-css', 
+			REDUX_URL.'inc/fields/typography/field_typography.css', 
 			time(),
 			true
 		);	
 
 		wp_enqueue_script(
-			'select2', 
-			SOF_URL.'fields/select/select2/select2.min.js', 
-			array('jquery'),
-			time(),
-			true
-		);
-
-		wp_enqueue_script(
 			'select2-init', 
-			SOF_URL.'fields/select/field_select.js', 
+			REDUX_URL.'inc/fields/select/field_select.js', 
 			array('jquery'),
 			time(),
 			true
 		);		
 
-		wp_enqueue_style(
-			'select2', 
-			SOF_URL.'fields/select/select2/select2.css', 
-			time(),
-			true
-		);				
+		wp_enqueue_script( 'select2-js' );
+
+		wp_enqueue_style( 'select2-css' );				
 		
 	}//function
 
@@ -308,7 +297,7 @@ class Simple_Options_typography extends Simple_Options{
 	 *
 	 * Used to retrieve and append the proper stylesheet to the page.
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function getGoogleScript($font) {
 	  $link = 'http://fonts.googleapis.com/css?family='.str_replace(" ","+",$font['face']);
@@ -325,12 +314,12 @@ class Simple_Options_typography extends Simple_Options{
 	 *
 	 * Used to retrieve Google Web Fonts from their API
 	 *
-	 * @since Simple_Options 0.2.0
+	 * @since Redux_Framework 0.2.0
 	*/	
 	function getGoogleFonts($wp_filesystem) {
-		global $Simple_Options;
+		global $Redux_Framework;
 
-		$key = $Simple_Options->args['google_api_key'];
+		$key = $Redux_Framework->args['google_api_key'];
 
 		$sid = session_id();
 		if($sid) {
@@ -386,7 +375,7 @@ class Simple_Options_typography extends Simple_Options{
 	 *
 	 * Clean up the Google Webfonts subsets to be human readable
 	 *
-	 * @since Simple_Options 0.2.0
+	 * @since Redux_Framework 0.2.0
 	*/	
 	function getSubsets($var) {
 		$result = array();
@@ -406,7 +395,7 @@ class Simple_Options_typography extends Simple_Options{
 	 *
 	 * Clean up the Google Webfonts variants to be human readable
 	 *
-	 * @since Simple_Options 0.2.0
+	 * @since Redux_Framework 0.2.0
 	*/		
 	function getVariants($var) {
 		$result = array();

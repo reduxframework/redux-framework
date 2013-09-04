@@ -1,12 +1,12 @@
 <?php
-class Simple_Options_select extends Simple_Options{	
+class Redux_Framework_select extends Redux_Framework{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
@@ -24,7 +24,7 @@ class Simple_Options_select extends Simple_Options{
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function render(){
 
@@ -106,7 +106,7 @@ class Simple_Options_select extends Simple_Options{
 			}
 
 
-			echo '<select'.$multi.' id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="sof-select-item'.$class.'"'.$width.' rows="6">';
+			echo '<select'.$multi.' id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item'.$class.'"'.$width.' rows="6">';
 				foreach($this->field['options'] as $k => $v){
 					if (is_array($this->value)) {
 						$selected = (is_array($this->value) && in_array($k, $this->value))?' selected="selected"':'';					
@@ -121,12 +121,6 @@ class Simple_Options_select extends Simple_Options{
 		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
 		
 	}//function
-	
-
-	function getData($type) {
-
-
-	}
 
 	
 	/**
@@ -134,29 +128,17 @@ class Simple_Options_select extends Simple_Options{
 	 *
 	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
 	 *
-	 * @since Simple_Options 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function enqueue(){
 		
-		wp_enqueue_script(
-			'select2', 
-			SOF_URL.'fields/select/select2/select2.min.js', 
-			array('jquery'),
-			time(),
-			true
-		);
+		wp_enqueue_script( 'select2-js' );
+		wp_enqueue_style( 'select2-css' );
 
 		wp_enqueue_script(
 			'select2-init', 
-			SOF_URL.'fields/select/field_select.js', 
-			array('jquery'),
-			time(),
-			true
-		);		
-
-		wp_enqueue_style(
-			'select2', 
-			SOF_URL.'fields/select/select2/select2.css', 
+			REDUX_URL.'inc/fields/select/field_select.js', 
+			array('jquery', 'select2-js'),
 			time(),
 			true
 		);		

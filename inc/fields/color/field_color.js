@@ -1,9 +1,9 @@
 
 
 jQuery(document).ready(function(){
-	jQuery('.sof-color-init').wpColorPicker({
-    change: function(event, ui){
-    	sof_change(jQuery(this));
+	jQuery('.redux-color-init').wpColorPicker({
+    change: function(){
+			sof_change(jQuery(this));
     }
 });
 
@@ -42,25 +42,24 @@ jQuery(document).ready(function(){
 	    return colour;
 	}
 
-	jQuery('.sof-color').on('focus', function() {
+	jQuery('.redux-color').on('focus', function() {
 		jQuery(this).data('oldcolor', jQuery(this).val());
 	});
 
-	jQuery('.sof-color').on('keyup', function() {
+	jQuery('.redux-color').on('keyup', function() {
 			jQuery(this).val(sof_color_validate(this));
 	});
 
-	jQuery('.sof-color').on('blur', function() {
+	jQuery('.redux-color').on('blur', function() {
 		var value = jQuery(this).val();
 		if (sof_color_validate(this) == value) {
-			console.log(value.indexOf("#"));
 			if (value.indexOf("#") != 0) {
 				jQuery(this).val(jQuery(this).data('oldcolor'));
 			}
 		} 
 	});	
 
-	jQuery('.sof-color').on('keydown', function() {
+	jQuery('.redux-color').on('keydown', function() {
 		jQuery(this).data('oldkeypress', jQuery(this).val());
 	});	
 
@@ -74,7 +73,7 @@ jQuery(document).ready(function(){
 
 /*
 	jQuery('#color-background').val('#000000');
-	if (jQuery('#color-background').hasClass('sof-color')) {
+	if (jQuery('#color-background').hasClass('redux-color')) {
 		jQuery('#color-background').change();
 		jQuery('#color-background').keyup();
 	}

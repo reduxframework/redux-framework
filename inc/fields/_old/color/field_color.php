@@ -1,12 +1,12 @@
 <?php
-class Redux_Options_color {
+class Redux_Framework_color {
 
     /**
      * Field Constructor.
      *
      * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
      *
-     * @since Redux_Options 1.0.0
+     * @since Redux_Framework 1.0.0
     */
     function __construct($field = array(), $value ='', $parent) {
         $this->field = $field;
@@ -19,7 +19,7 @@ class Redux_Options_color {
      *
      * Takes the vars and outputs the HTML for the field in the settings
      *
-     * @since Redux_Options 1.0.0
+     * @since Redux_Framework 1.0.0
     */
     function render() {
         $class = (isset($this->field['class'])) ? $this->field['class'] : '';
@@ -41,14 +41,14 @@ class Redux_Options_color {
      *
      * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
      *
-     * @since Redux_Options 1.0.0
+     * @since Redux_Framework 1.0.0
     */
     function enqueue() {
         if(get_bloginfo('version') >= '3.5') {
             wp_enqueue_style('wp-color-picker');
             wp_enqueue_script(
                 'redux-opts-field-color-js',
-                Redux_OPTIONS_URL . 'fields/color/field_color.js',
+                REDUX_URL . 'inc/fields/color/field_color.js',
                 array('wp-color-picker'),
                 time(),
                 true
@@ -56,7 +56,7 @@ class Redux_Options_color {
         } else {
             wp_enqueue_script(
                 'redux-opts-field-color-js', 
-                Redux_OPTIONS_URL . 'fields/color/field_color_farb.js', 
+                REDUX_URL . 'inc/fields/color/field_color_farb.js', 
                 array('jquery', 'farbtastic'),
                 time(),
                 true
