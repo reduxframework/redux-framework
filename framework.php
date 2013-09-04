@@ -341,7 +341,7 @@ if(!class_exists('Redux_Framework') ){
 
 			wp_enqueue_script(
 				'redux-js',
-				REDUX_URL . 'assets/js/admin.js',
+				REDUX_URL . 'assets/js/admin.min.js',
 				array('jquery','jquery-cookie'),
 				time(),
 				true

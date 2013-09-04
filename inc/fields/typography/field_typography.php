@@ -260,12 +260,14 @@ class Redux_Framework_typography extends Redux_Framework{
 	 * @since Redux_Framework 1.0.0
 	*/
 	function enqueue(){
-		global $Redux_Framework;
-	
+
+		wp_enqueue_script( 'select2-js' );
+		wp_enqueue_style( 'select2-css' );	
+
 		wp_enqueue_script(
 			'redux-field-typography-js', 
-			REDUX_URL.'inc/fields/typography/field_typography.js', 
-			array('jquery', 'wp-color-picker', 'redux--field-color-js'),
+			REDUX_URL.'inc/fields/typography/field_typography.min.js', 
+			array('jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js', 'jquery-numeric', 'jquery-tipsy'),
 			time(),
 			true
 		);
@@ -276,18 +278,7 @@ class Redux_Framework_typography extends Redux_Framework{
 			time(),
 			true
 		);	
-
-		wp_enqueue_script(
-			'select2-init', 
-			REDUX_URL.'inc/fields/select/field_select.js', 
-			array('jquery'),
-			time(),
-			true
-		);		
-
-		wp_enqueue_script( 'select2-js' );
-
-		wp_enqueue_style( 'select2-css' );				
+			
 		
 	}//function
 

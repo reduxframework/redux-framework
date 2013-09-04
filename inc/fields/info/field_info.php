@@ -1,28 +1,48 @@
 <?php
-class Redux_Framework_info {
-
-    /**
-     * Field Constructor.
-     *
-     * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-     *
-     * @since Redux_Framework 1.0.0
-    */
-    function __construct($field = array(), $value ='', $parent) {
-        $this->field = $field;
+class Redux_Framework_info extends Redux_Framework{	
+	
+	/**
+	 * Field Constructor.
+	 *
+	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+	 *
+	 * @since Redux_Framework 1.0.0
+	*/
+	function __construct($field = array(), $value ='', $parent){
+		
+		parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
+		$this->field = $field;
 		$this->value = $value;
-		$this->args = $parent->args;
-    }
+		//$this->render();
+		
+	}//function
+	
+	
+	
+	/**
+	 * Field Render Function.
+	 *
+	 * Takes the vars and outputs the HTML for the field in the settings
+	 *
+	 * @since Redux_Framework 1.0.0
+	*/
+	function render(){
+		
+		$class = (isset($this->field['class']))?' '.$this->field['class']:'';		
 
-    /**
-     * Field Render Function.
-     *
-     * Takes the vars and outputs the HTML for the field in the settings
-     *
-     * @since Redux_Framework 1.0.0
-    */
-    function render() {
-        $class = (isset($this->field['class'])) ? ' ' . $this->field['class'] : '';
-        echo '</td></tr></table><div class="redux-opts-info-field' . $class . '">' . $this->field['desc'] . '</div><table class="form-table no-border"><tbody><tr><th></th><td>';
-    }
-}
+		if (empty($this->field['desc']) && !empty($this->field['std'])) {
+			$this->field['desc'] = $this->field['std'];
+		}
+
+		if (!isset($this->field['fold-ids'])) { $this->field['fold-ids'] = ""; }
+		if (!isset($this->field['fold-vals'])) { $this->field['fold-vals'] = ""; }
+
+		echo '</td></tr></table><div class="redux-info-field'.$class.'">';
+			echo '<input type="hidden" '.$this->field['fold-ids'].' id="info-field foldChild-'.$this->field['id'].'" class="fold-data" value="'.$this->field['fold-vals'].'" />';
+			echo $this->field['desc'];
+		echo '</div><table class="form-table no-border"><tbody><tr><th></th><td>';
+		
+	}//function
+	
+}//class
+?>

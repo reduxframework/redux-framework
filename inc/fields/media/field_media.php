@@ -34,10 +34,10 @@ class Redux_Framework_media extends Redux_Framework{
 			$class .= " compiler";
 		}
 		
-		$hide = '';
+		$hide = 'hide ';
 
-		if (!empty($this->field['mode']) && $this->field['mode'] == "min") {
-			$hide ='hide ';
+		if (!empty($this->field['show_url']) && $this->field['show_url'] === true) {
+			$hide ='';
 		}
 
 		// No errors please
@@ -79,6 +79,20 @@ class Redux_Framework_media extends Redux_Framework{
 		echo '<input type="hidden" class="upload-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" "'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'. $this->value['height'] .'" />';
 		echo '<input type="hidden" class="upload-width" name="'.$this->args['opt_name'].'['.$this->field['id'].'][width]" "'.$this->args['opt_name'].'['.$this->field['id'].'][width]" value="'. $this->value['width'] .'" />';
 
+
+
+		//Preview
+		$hide = '';
+		if (empty($this->value['url'])) {
+			$hide =" hide";
+		}
+
+		echo '<div class="screenshot'.$hide.'">';
+		echo '<a class="of-uploaded-image" href="'. $this->value['url'] . '">';
+		echo '<img class="redux-option-image" id="image_'.$this->field['id'].'" src="'.$this->value['url'].'" alt="" />';
+		echo '</a>';
+		echo '</div>';
+		
 		//Upload controls DIV
 		echo '<div class="upload_button_div">';
 		//If the user has WP3.5+ show upload/remove button
@@ -91,18 +105,6 @@ class Redux_Framework_media extends Redux_Framework{
 			echo '<span class="button remove-image'. $hide.'" id="reset_'. $this->field['id'] .'" rel="'.$this->field['id'].'">Remove</span>';
 
 		echo '</div>' . "\n";
-
-		//Preview
-		$hide = '';
-		if (empty($this->value['url'])) {
-			$hide =" hide";
-		}
-
-		echo '<div class="screenshot'.$hide.'">';
-		echo '<a class="of-uploaded-image" href="'. $this->value['url'] . '">';
-		echo '<img class="sof-option-image" id="image_'.$this->field['id'].'" src="'.$this->value['url'].'" alt="" />';
-		echo '</a>';
-		echo '</div>';
 		
 		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
 		
@@ -129,7 +131,7 @@ class Redux_Framework_media extends Redux_Framework{
 
 		wp_enqueue_script(
 			'simple-options-media-js',
-			SOF_URL.'fields/media/field_media.js',
+			REDUX_URL.'inc/fields/media/field_media.js',
 			array('jquery', 'wp-color-picker'),
 			time(),
 			true
@@ -137,7 +139,7 @@ class Redux_Framework_media extends Redux_Framework{
 
 		wp_enqueue_style(
 			'simple-options-media-css',
-			SOF_URL.'fields/media/field_media.css',
+			REDUX_URL.'inc/fields/media/field_media.css',
 			time(),
 			true
 		);

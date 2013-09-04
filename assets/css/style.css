@@ -1054,7 +1054,7 @@ color: #777;
 }
 #redux-sidebar #redux-group-menu li a{
 	display:block;
-	padding: 12px 14px;
+	padding: 12px 8px;
 	background: #eeeeee;
 	border-width: 1px 0px 1px 0px;
 	border-style: solid;
@@ -1082,7 +1082,7 @@ color: #777;
 }
 #redux-sidebar #redux-group-menu li a:hover{
 	background:#eeeeee;
-	width:174px;
+	width:184px;
 	color: #D54E21;
 	margin-right:-2px;
 	opacity: 1;
@@ -1090,7 +1090,7 @@ color: #777;
 #redux-sidebar #redux-group-menu li.active a{
 	background:#FCFCFC;
 	color: #797979;
-	width:174px;
+	width:184px;
 	opacity: 1;
 	margin-right:-2px;
 }
@@ -1667,4 +1667,7 @@ label.radio, label.multicheck {
 
 .wrap {
 	margin-top: 0;
+}
+.redux-group-tab-link-li i {
+	margin-right: 10px;
 }

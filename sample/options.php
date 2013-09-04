@@ -515,7 +515,7 @@ function setup_framework_options(){
 			),
             array(
                 'id' => '19',
-                'type' => 'upload',
+                'type' => 'media',
                 'title' => __('Upload Option', 'redux-framework'), 
                 'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
                 'desc' => __('This is the description field, again good for additional info.', 'redux-framework')

@@ -1,12 +1,12 @@
 <?php
-class SOF_Validation_str_replace extends Redex_Framework {	
+class Redux_Validation_str_replace extends Redux_Framework {	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Redex_Framework 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function __construct($field, $value, $current) {
 		
@@ -25,7 +25,7 @@ class SOF_Validation_str_replace extends Redex_Framework {
 	 *
 	 * Takes the vars and validates them
 	 *
-	 * @since Redex_Framework 1.0.0
+	 * @since Redux_Framework 1.0.0
 	*/
 	function validate() {
 		
