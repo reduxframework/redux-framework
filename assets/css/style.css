@@ -574,6 +574,24 @@ color: #777;
 	box-shadow: inset 0 1px 0 #fff;
 }
 
+#redux-intro-text {
+	background: #f3f3f3;
+	border: solid #d8d8d8;	
+	border-bottom: 1px solid #d8d8d8;
+	border-width:0px 1px 1px 1px;
+	height: 14px;
+	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
+	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
+	box-shadow: inset 0 1px 0 #fcfcfc;
+	padding: 3px;
+}
+
+#redux-intro-text p {
+	margin: 0px;
+	font-family: "Lucida Grande", Sans-serif;
+	color: #888888;
+}
+
 #redux-container #info_bar {
 	background: #f3f3f3;
 	border:solid #d8d8d8;
