@@ -27,7 +27,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 if( !class_exists( 'ReduxFramework_button_set' ) ) {
 
     /**
-     * Main ReduxFramework_border class
+     * Main ReduxFramework_button_set class
      *
      * @since       1.0.0
      */
