@@ -694,9 +694,10 @@ function setup_framework_options(){
                 'type' => 'slider',
                 'title' => __('Slider', 'redux-framework'), 
                 'min' => 25,
+                'std' => 40,
                 'max' => 100,
-                'subtitle' => __('Min: 25  Max 100', 'redux-framework'),
-                'desc' => __('This is a simple implementation of the developer API for Google Webfonts. Don\'t forget to set your API key!', 'redux-framework')
+                'subtitle' => __('Min: 25  Max: 100 Std: 40', 'redux-framework'),
+                'desc' => __('Sliders are quite useful. Give it a go!', 'redux-framework')
             )  
 
         )

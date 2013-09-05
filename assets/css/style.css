@@ -647,12 +647,9 @@ color: #777;
 #redux-header .logo span {
 	color:#888888;
 }
-#redux-header .icon-option {
+#redux-header .icon32 {
 	float: right;
-	height: 32px;
-	width: 32px;
-	background: url(../img/menu_icon.png) no-repeat;
-	margin:20px 30px 0;
+	margin:16px 16px 0;
 }
 .redux-timer {
 	text-align: center;

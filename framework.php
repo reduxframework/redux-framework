@@ -678,10 +678,6 @@ if(!class_exists('Redux_Framework') ){
 			echo '<div class="clear"></div><div class="wrap">';
 			echo '<noscript><div class="no-js">Warning- This options panel will not work properly without javascript!</div></noscript>';
 			echo '<input type="hidden" id="ajaxsecurity" name="security" value="'.wp_create_nonce('of_ajax_nonce').'" />';
-			if ( $title = get_admin_page_title() && get_admin_page_title() != "" ) {
-				echo '<div id="'.$this->args['page_icon'].'" class="icon32"><br/></div>';
-				echo '<h2 id="redux-heading">'.get_admin_page_title().'</h2>';
-			}
 			echo (isset($this->args['intro_text']))?$this->args['intro_text']:'';
 
 			do_action('redux-page-before-form-' . $this->args['opt_name']);
@@ -706,7 +702,7 @@ if(!class_exists('Redux_Framework') ){
 					echo '</div>';
 				}
 				// DOVY!
-				echo '<div class="icon-option '.$this->args['page_icon'].'"></div>';
+				echo '<div id="'.$this->args['page_icon'].'" class="icon32"></div>';
 				echo '<div class="clear"></div><!--clearfix-->';
 			echo '</div>';
 			echo '<div id="redux-sticky">';

@@ -160,17 +160,11 @@ jQuery(document).ready(function($) {
 			jQuery(this).val(ui.color.toString());
 			typographySelect(jQuery(this).closest('.redux-typography-container').attr('id'), $(this));
 		},
-	}); /**	Tipsy @since v1.3 */
-	if (jQuery().tipsy) {
-		$('.redux-typography-size, .redux-typography-height, .redux-typography-family, .redux-typography-style, .redux-typography-script').tipsy({
-			fade: true,
-			gravity: 's',
-			opacity: 0.7,
-		});
-	}
+	});
 	jQuery(".redux-typography-size, .redux-typography-height").numeric({
 		negative: false
 	});
+//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-script").select2({
 	jQuery(".redux-typography-family").select2({
 		width: 'resolve',
 		triggerChange: true,

@@ -90,7 +90,7 @@ class Redux_Framework_slider extends Redux_Framework{
 		echo '<input type="text" name="'.$this->args['opt_name'].'['.$this->field['id'].']" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$class.'"'.$readonly.'/>';
 		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider"></div>';
 		
-		echo (isset($this->field['description']) && !empty($this->field['description']))?'<div class="description">'.$this->field['description'].'</div>':'';
+		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="desc">'.$this->field['desc'].'</div>':'';
 		
 	}//function
 	

@@ -137,7 +137,7 @@ class Redux_Framework_typography extends Redux_Framework{
     **/
     if(empty($this->value['display']['style'])):
       echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-framework').'">';
-      echo '<select data-placeholder="'.__('Font style','redux-framework').'" class="redux-typography redux-typography-style select'.$class.'" original-title="'.__('Font style','redux-framework').'" name="'.$this->field['id'].'[style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'">';
+      echo '<select data-placeholder="'.__('Style','redux-framework').'" class="redux-typography redux-typography-style select'.$class.'" original-title="'.__('Font style','redux-framework').'" name="'.$this->field['id'].'[style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'">';
 		 	if (empty($this->value['style'])) {
 		 		echo '<option value=""></option>';
 		 	}
@@ -184,7 +184,10 @@ class Redux_Framework_typography extends Redux_Framework{
     **/
     if(empty($this->value['display']['script'])):
       echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font script','redux-framework').'">';
-      echo '<select data-placeholder="'.__('Font script','redux-framework').'" class="redux-typography redux-typography-script'.$class.'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-script" name="'.$this->args['opt_name'].'['.$this->field['id'].'][script]">';
+      echo '<select data-placeholder="'.__('Script','redux-framework').'" class="redux-typography redux-typography-script'.$class.'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-script" name="'.$this->args['opt_name'].'['.$this->field['id'].'][script]">';
+		 	if (empty($this->value['script'])) {
+		 		echo '<option value=""></option>';
+		 	}
       if (isset($gfonts[$this->value['family']])) {
         $styles = array();
         foreach ($gfonts[$this->value['family']]['subsets'] as $k=>$v) {
@@ -200,7 +203,7 @@ class Redux_Framework_typography extends Redux_Framework{
 		Font Size
 		**/
   	if(empty($this->value['display']['size'])):
-    	echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$class.'" original-title="'.__('Font size','redux-framework').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" value="'.$this->value['size'].'"><span class="add-on">'.$unit.'</span></div>';
+    	echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$class.'" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" value="'.$this->value['size'].'"><span class="add-on">'.$unit.'</span></div>';
   	endif;
 
 
@@ -208,7 +211,7 @@ class Redux_Framework_typography extends Redux_Framework{
 		Line Height 
 		**/
 		if(empty($this->value['display']['height'])):
-		 	echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$class.'" original-title="'.__('Font height','redux-framework').'" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'"><span class="add-on">'.$unit.'</span></div>';
+		 	echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$class.'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'"><span class="add-on">'.$unit.'</span></div>';
 		endif;
 
 
@@ -268,7 +271,7 @@ class Redux_Framework_typography extends Redux_Framework{
 		wp_enqueue_script(
 			'redux-field-typography-js', 
 			REDUX_URL.'inc/fields/typography/field_typography.js', 
-			array('jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js', 'jquery-numeric', 'jquery-tipsy'),
+			array('jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js', 'jquery-numeric'),
 			time(),
 			true
 		);
