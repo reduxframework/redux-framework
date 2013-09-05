@@ -133,7 +133,7 @@ class Redux_Framework_images extends Redux_Framework{
 		
 		wp_enqueue_script(
 			'redux-field-images-js', 
-			REDUX_URL.'inc/fields/images/field_images.js', 
+			REDUX_URL.'inc/fields/images/field_images.min.js', 
 			array('jquery'),
 			time(),
 			true

@@ -40,12 +40,12 @@ jQuery(document).ready(function($) {
 		var html = "";
 
 		if (google && $(selector).hasClass('redux-typography-family')) {
-			html = '<option value="">Select style</option>';
+			html = '<option value=""></option>';
 			for (var i = 0; i <= Object.size(details.variants); i++) {
 				if (details.variants[i] === null) {
 					continue;
 				}
-				if (details.variants[i].id === style || Object.size(details.variants) === 1) {
+				if ( (details.variants[i] && details.variants[i].id === style) || Object.size(details.variants) === 1) {
 					selected = ' selected="selected"';
 					$('#' + mainID + ' .typography-style span').text(details.variants[i].name.replace('+', ' '));
 				} else {
@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
 				html += '<option value="' + details.variants[i].id + '"' + selected + '>' + details.variants[i].name.replace(/\+/g, " ") + '</option>';
 			}
 			$('#' + mainID + ' .redux-typography-style').html(html);
-			html = '<option value="">Select script</option>';
+			html = '<option value=""></option>';
 			for (i = 0; i <= Object.size(details.subsets); i++) {
 				if (details.subsets[i] === null) {
 					continue;
@@ -74,7 +74,7 @@ jQuery(document).ready(function($) {
 				$('#' + mainID + ' .redux-typography-style').html('');
 				$('#' + mainID + ' .typography-style span').text('');
 				$('#' + mainID + ' .typography-script span').text('');
-				html = '<option value="">Select style</option>';
+				html = '<option value=""></option>';
 				$.each(details, function(index, value) {
 					if (index === "normal") {
 						selected = ' selected="selected"';
@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
 		var _linkclass = 'style_link_' + mainID;
 		if (family) { //if var exists and isset
 			//Check if selected is not equal with "Select a font" and execute the script.
-			if (family !== 'none' && family !== 'Select a font') {
+			if (family !== 'none' && family !== '') {
 				//remove other elements crested in <head>
 				$('.' + _linkclass).remove();
 				//replace spaces with "+" sign
@@ -140,7 +140,9 @@ jQuery(document).ready(function($) {
 	//init for each element
 	jQuery('.redux-typography-container').each(function() {
 		var face = jQuery('#' + jQuery(this).attr('id') + " .redux-typography-family");
-		jQuery(face).val(face.data('value'));
+		if (face.data('value') !== "") {
+			jQuery(face).val(face.data('value'));
+		}
 		typographySelect(jQuery(this).attr('id'), $(this));
 	});
 	//init when value is changed
@@ -171,6 +173,7 @@ jQuery(document).ready(function($) {
 	});
 	jQuery(".redux-typography-family").select2({
 		width: 'resolve',
-		triggerChange: true
+		triggerChange: true,
+		allowClear: true
 	});
 });

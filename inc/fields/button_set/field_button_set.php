@@ -63,7 +63,7 @@ class Redux_Framework_button_set extends Redux_Framework{
 
 		wp_enqueue_script(
 			'redux-field-button_set-js', 
-			REDUX_URL.'inc/fields/button_set/field_button_set.js', 
+			REDUX_URL.'inc/fields/button_set/field_button_set.min.js', 
 			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog'),
 			time(),
 			true

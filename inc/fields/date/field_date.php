@@ -52,7 +52,7 @@ class Redux_Framework_date extends Redux_Framework{
 		wp_enqueue_style('jquery-ui-css');
 		wp_enqueue_script(
 			'redux-field-date-js', 
-			REDUX_URL.'inc/fields/date/field_date.js', 
+			REDUX_URL.'inc/fields/date/field_date.min.js', 
 			array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'),
 			time(),
 			true
