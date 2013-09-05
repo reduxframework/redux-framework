@@ -93,6 +93,7 @@ jQuery('.redux-action_bar, .redux-presets-bar').click(function() {
 });
 
 function verify_fold(variable) {
+	return;
 	jQuery(document).ready(function($){		
 		// Hide errors if the user changed the field
 		

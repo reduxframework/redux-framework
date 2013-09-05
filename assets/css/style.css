@@ -304,15 +304,21 @@ color: #777;
 	margin-right: 3px;
 }
 #redux-sidebar #redux-group-menu li.active a:hover{
-	color: #D54E21;
+	color: #269ad6;
 }
 #redux-sidebar #redux-group-menu li a:hover{
 	background:#eeeeee;
 	width:184px;
-	color: #D54E21;
+	color: #269ad6;
 	margin-right:-2px;
 	opacity: 1;
 }
+#redux-sidebar #redux-group-menu li a:hover i{
+
+}
+
+
+
 #redux-sidebar #redux-group-menu li.active a{
 	background:#FCFCFC;
 	color: #797979;
@@ -584,6 +590,7 @@ color: #777;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
 	padding: 3px;
+	padding: 10px 10px;
 }
 
 #redux-intro-text p {
@@ -916,4 +923,9 @@ label.radio, label.multicheck {
 }
 .redux-group-tab-link-li i {
 	margin-right: 10px;
+}
+.showDefaults {
+	font-weight: normal;
+	font-size: .8em;
+	color: #888;
 }

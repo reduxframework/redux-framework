@@ -8,10 +8,10 @@ class ReduxFramework_password {
      *
      * @since ReduxFramework 1.0.1
     */
-    function __construct($field = array(), $value ='', $parent) {
-        $this->field = $field;
-		$this->value = $value;
-		$this->args = $parent->args;
+    function __construct( $field = array(), $value ='', $parent ) {
+      $this->field = $field;
+			$this->value = $value;
+			$this->args = $parent->args;
     }
 
     /**
@@ -22,8 +22,21 @@ class ReduxFramework_password {
      * @since ReduxFramework 1.0.1
     */
     function render() {
+	if (!empty($this->field['username']) && $this->field['username'] === true ) {
+		$defaults = array(
+				'username'=>'',
+				'password'=>'',
+			);
+		$this->value = wp_parse_args( $this->value, $defaults );
+	}
         $class = (isset($this->field['class'])) ? $this->field['class'] : 'regular-text';
-        echo '<input type="password" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr($this->value) . '" class="' . $class . '" />';
+	$this->field['username'] = true;
+	if (!empty($this->field['username']) && $this->field['username'] === true ) {
+		echo '<input type="input" autocomplete="off" placeholder="'.__( 'Username', 'redux-framework' ).'" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr($this->value['username']) . '" class="' . $class . '" style="margin-right: 5px;" />';
+					echo '<input type="password" autocomplete="off" placeholder="'.__( 'Password', 'redux-framework' ).'" id="' . $this->field['id'] . '[password]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr($this->value['password']) . '" class="' . $class . '" />';
+	} else {
+		echo '<input type="password" autocomplete="off" placeholder="'.__( 'Password', 'redux-framework' ).'" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr($this->value) . '" class="' . $class . '" />';
+	}
         echo (isset($this->field['desc']) && !empty($this->field['desc'])) ? '<br /><span class="description">' . $this->field['desc'] . '</span>' : '';
     }
 }

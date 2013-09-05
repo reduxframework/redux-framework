@@ -161,7 +161,7 @@ function setup_framework_options(){
 	$args['import_icon_class'] = 'icon-large';
 
     // Set a custom option name. Don't forget to replace spaces with underscores!
-    $args['opt_name'] = 'twenty_eleven2';
+    $args['opt_name'] = 'twenty_eleven22';
 
     // Set a custom menu icon.
     //$args['menu_icon'] = '';
@@ -177,6 +177,9 @@ function setup_framework_options(){
     // Set a custom page slug for options page (wp-admin/themes.php?page=***).
     // Default: redux_options
     $args['page_slug'] = 'redux_options';
+
+    $args['std_show'] = true;
+    $args['std_mark'] = '*';
 
     // Set a custom page capability.
     // Default: manage_options
@@ -283,6 +286,7 @@ function setup_framework_options(){
                 'title' => __('Multi Text Option', 'redux-framework'),
                 'subtitle' => __('This is a little space under the field title which can be used for additonal info.', 'redux-framework'),
                 'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
+		'std' => array(0=>'This', 1 => 'is', 2 => 'useful'),
             ),
             array(
                 'id' => '3',
@@ -682,6 +686,7 @@ function setup_framework_options(){
                 'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework'),
                 'callback' => 'my_custom_field'
             ),
+
             array(
                 'id' => 'typography',
                 'type' => 'typography',
@@ -690,6 +695,19 @@ function setup_framework_options(){
                 'desc' => __('This is a simple implementation of the developer API for Google Webfonts. Don\'t forget to set your API key!', 'redux-framework')
             ),
             array(
+			'id'=>'typography-limited',
+		'type' => 'typography',
+		'google'=>false,
+		'size'=>false,
+		'height'=>false,
+		'color'=>false,
+		'script'=>false,
+		'preview'=>false,
+		'title' => __('Google Webfonts', 'redux-framework'),
+		'subtitle' => __('This is a completely unique field type', 'redux-framework'),
+		'desc' => __('This is a simple implementation of the developer API for Google Webfonts. Don\'t forget to set your API key!', 'redux-framework')
+	    ),
+	    array(
                 'id' => 'slider',
                 'type' => 'slider',
                 'title' => __('Slider', 'redux-framework'), 
