@@ -1061,15 +1061,6 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/typography\/field_typography.min.min.js",
       "fileType" : 64
     },
-    "\/inc\/fields\/text\/field_text.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/text\/field_text.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_65_ffffff_1x400.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1080,6 +1071,15 @@
       "outputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_65_ffffff_1x400.png",
       "initialSize" : 105,
       "fileType" : 8192
+    },
+    "\/inc\/fields\/text\/field_text.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/text\/field_text.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/img\/toggle_tabs.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1224,15 +1224,6 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/inc\/fields\/editor\/field_editor.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_cd0a0a_256x240.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1243,6 +1234,15 @@
       "outputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_cd0a0a_256x240.png",
       "initialSize" : 4369,
       "fileType" : 8192
+    },
+    "\/inc\/fields\/editor\/field_editor.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_75_dadada_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1901,8 +1901,8 @@
     "\/assets\/less\/elusive-webfont.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/assets\/less\/elusive-webfont.less",
-      "outputAbbreviatedPath" : "\/assets\/less\/elusive-webfont.css",
-      "outputPathIsSetByUser" : 0,
+      "outputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css",
+      "outputPathIsSetByUser" : 1,
       "strictUnits" : 0,
       "relativeURLS" : 0,
       "ignore" : 0,

@@ -94,8 +94,7 @@ a{outline:0 !important}
 #redux-main select,#redux-main .select_wrapper{width:340px}
 #redux-main textarea{width:100%}
 #redux-main input[type=text]{width:340px}
-#redux-main input.checkbox{width:30px}
-#redux-main input.radio{width:30px}
+#redux-main input.checkbox,#redux-main input.radio{margin-right:10px;width:auto}
 label.radio,label.multicheck{position:relative}
 #redux-main .input-text-small{width:60px;margin-right:10px}
 #redux-main .meta-two{margin-right:10px}
