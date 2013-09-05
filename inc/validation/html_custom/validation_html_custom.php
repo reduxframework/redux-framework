@@ -1,12 +1,12 @@
 <?php
-class Redux_Validation_html_custom extends Redux_Framework {	
+class Redux_Validation_html_custom extends ReduxFramework {	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field, $value, $current) {
 		
@@ -25,7 +25,7 @@ class Redux_Validation_html_custom extends Redux_Framework {
 	 *
 	 * Takes the vars and validates them
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function validate() {
 		

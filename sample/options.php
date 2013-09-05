@@ -7,7 +7,7 @@
  *
  */
 //define('REDUX_URL', site_url('path the options folder'));
-if(!class_exists('Redux_Framework')){
+if(!class_exists('ReduxFramework')){
     require_once(dirname(__FILE__) . '/../framework.php');
 }
 
@@ -760,8 +760,8 @@ function setup_framework_options(){
         );
     }
 
-    global $Redux_Framework;
-    $Redux_Framework = new Redux_Framework($sections, $args, $tabs);
+    global $ReduxFramework;
+    $ReduxFramework = new ReduxFramework($sections, $args, $tabs);
 
 }
 add_action('init', 'setup_framework_options', 0);

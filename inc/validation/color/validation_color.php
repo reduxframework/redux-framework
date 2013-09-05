@@ -1,12 +1,12 @@
 <?php
-class Redux_Validation_color extends Redux_Framework {	
+class Redux_Validation_color extends ReduxFramework {	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Redux_Framework 3.0.0
+	 * @since ReduxFramework 3.0.0
 	*/
 	function __construct($field, $value, $current) {
 		
@@ -24,7 +24,7 @@ class Redux_Validation_color extends Redux_Framework {
 	 *
 	 * Takes the user's input color value and returns it only if it's a valid color.
 	 *
-	 * @since Redux_Framework 3.0.0
+	 * @since ReduxFramework 3.0.0
 	*/	
 	function validate_color($color) {
 
@@ -51,7 +51,7 @@ class Redux_Validation_color extends Redux_Framework {
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since Redux_Framework 3.0.0
+	 * @since ReduxFramework 3.0.0
 	*/
 	function validate() {
 		

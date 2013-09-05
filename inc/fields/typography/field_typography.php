@@ -1,12 +1,12 @@
 <?php
-class Redux_Framework_typography extends Redux_Framework{	
+class ReduxFramework_typography extends ReduxFramework{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
@@ -24,11 +24,11 @@ class Redux_Framework_typography extends Redux_Framework{
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
 
-		global $wp_filesystem, $Redux_Framework;
+		global $wp_filesystem, $ReduxFramework;
 
 		// Initialize the Wordpress filesystem, no more using file_put_contents function
 		if (empty($wp_filesystem)) {
@@ -109,7 +109,7 @@ class Redux_Framework_typography extends Redux_Framework{
 	      $output .= '<option data-google="false" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($this->value['family'], $i, false) . '>'. $family .'</option>';
 	    }
 	    $output .= '</optgroup>';
-			if( !file_exists( REDUX_DIR.'inc/fields/typography/googlefonts.html' ) && !empty($Redux_Framework->args['google_api_key']) ) {
+			if( !file_exists( REDUX_DIR.'inc/fields/typography/googlefonts.html' ) && !empty($ReduxFramework->args['google_api_key']) ) {
 				$this->getGoogleFonts($wp_filesystem);
 			}
 
@@ -261,7 +261,7 @@ class Redux_Framework_typography extends Redux_Framework{
 	 *
 	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function enqueue(){
 
@@ -292,7 +292,7 @@ class Redux_Framework_typography extends Redux_Framework{
 	 *
 	 * Used to retrieve and append the proper stylesheet to the page.
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function getGoogleScript($font) {
 	  $link = 'http://fonts.googleapis.com/css?family='.str_replace(" ","+",$font['face']);
@@ -309,12 +309,12 @@ class Redux_Framework_typography extends Redux_Framework{
 	 *
 	 * Used to retrieve Google Web Fonts from their API
 	 *
-	 * @since Redux_Framework 0.2.0
+	 * @since ReduxFramework 0.2.0
 	*/	
 	function getGoogleFonts($wp_filesystem) {
-		global $Redux_Framework;
+		global $ReduxFramework;
 
-		$key = $Redux_Framework->args['google_api_key'];
+		$key = $ReduxFramework->args['google_api_key'];
 
 		$sid = session_id();
 		if($sid) {
@@ -370,7 +370,7 @@ class Redux_Framework_typography extends Redux_Framework{
 	 *
 	 * Clean up the Google Webfonts subsets to be human readable
 	 *
-	 * @since Redux_Framework 0.2.0
+	 * @since ReduxFramework 0.2.0
 	*/	
 	function getSubsets($var) {
 		$result = array();
@@ -390,7 +390,7 @@ class Redux_Framework_typography extends Redux_Framework{
 	 *
 	 * Clean up the Google Webfonts variants to be human readable
 	 *
-	 * @since Redux_Framework 0.2.0
+	 * @since ReduxFramework 0.2.0
 	*/		
 	function getVariants($var) {
 		$result = array();

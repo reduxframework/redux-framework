@@ -1,5 +1,5 @@
 <?php
-if(!class_exists('Redux_Framework') ){
+if(!class_exists('ReduxFramework') ){
 
 	// Windows-proof constants: replace backward by forward slashes - thanks to: https://github.com/peterbouwmeester
 	$fslashed_dir = trailingslashit(str_replace('\\','/', dirname(__FILE__)));
@@ -13,7 +13,7 @@ if(!class_exists('Redux_Framework') ){
 		define('REDUX_URL', site_url(str_replace($fslashed_abs, '', $fslashed_dir)));
 	}
 
-	class Redux_Framework {
+	class ReduxFramework {
 
 		protected $framework_url = 'http://www.reduxframework.com/';
 		protected $framework_version = '3.0.0';
@@ -30,7 +30,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Class Constructor. Defines the args for the theme options class
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 * @param $array $args Arguments. Class constructor arguments.
 		 */
 		function __construct($sections = array(), $args = array(), $extra_tabs = array()) {
@@ -89,7 +89,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * ->_get_std(); This is used to return the std value if std_show is set
 		 *
-		 * @since Redux_Framework 1.0.1
+		 * @since ReduxFramework 1.0.1
 		 * @param string $opt_name: option name to return
 		 * @param mixed $default (null): value to return if std not set
 		 */
@@ -107,7 +107,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * ->get(); This is used to return and option value from the options array
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 * @param string $opt_name: option name to return
 		 * @param mixed $default (null): value to return if option not set
 		 */
@@ -118,7 +118,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * ->set(); This is used to set an arbitrary option in the options array
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 * @param string $opt_name the name of the option being added
 		 * @param mixed $value the value of the option being added
 		 */
@@ -132,7 +132,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * ->show(); This is used to echo and option value from the options array
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 * @param $array $args Arguments. Class constructor arguments.
 		 */
 		function show($opt_name, $default = '') {
@@ -147,7 +147,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Get default options into an array suitable for the settings API
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _default_values() {
 			if(!is_null($this->sections) && is_null($this->options_defaults)) {
@@ -169,7 +169,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Set default options on admin_init if option doesn't exist
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _set_default_options() {
 			if(!get_option($this->args['opt_name'])) {
@@ -181,7 +181,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Class Options Page Function, creates main options page.
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _options_page() {
 			if($this->args['page_type'] == 'submenu') {
@@ -263,7 +263,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * enqueue styles/js for options page
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _enqueue() {
 			global $wp_styles;
@@ -387,7 +387,7 @@ if(!class_exists('Redux_Framework') ){
 				if(isset($section['fields'])) {
 					foreach($section['fields'] as $fieldk => $field) {
 						if(isset($field['type'])) {
-							$field_class = 'Redux_Framework_' . $field['type'];
+							$field_class = 'ReduxFramework_' . $field['type'];
 							if(!class_exists($field_class)) {
 								$class_file = apply_filters('redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class);
 								if($class_file)
@@ -407,7 +407,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Download the options file, or display it
 		 *
-		 * @since Redux_Framework 3.0.0
+		 * @since ReduxFramework 3.0.0
 		 */
 		function _download_options(){
 			//-'.$this->args['opt_name']
@@ -449,7 +449,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Show page help
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _load_page() {
 
@@ -477,7 +477,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Do action redux-admin-head for options page
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function admin_head() {
 			do_action('redux-admin-head-' . $this->args['opt_name'], $this);
@@ -490,7 +490,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Register Option for use
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _register_setting() {
 			register_setting($this->args['opt_name'] . '_group', $this->args['opt_name'], array(&$this,'_validate_options'));
@@ -530,7 +530,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Validate the Options options before insertion
 		 *
-		 * @since Redux_Framework 3.0.0
+		 * @since ReduxFramework 3.0.0
 		 */
 		function _validate_options($plugin_options) {
 			set_transient('redux-saved', '1', 1000 );
@@ -593,7 +593,7 @@ if(!class_exists('Redux_Framework') ){
 		 * Validate values from options form (used in settings api validate function)
 		 * calls the custom validation class for the field so authors can override with custom classes
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _validate_values($plugin_options, $options) {
 			foreach($this->sections as $k => $section) {
@@ -662,7 +662,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * HTML OUTPUT.
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _options_page_html() {
 
@@ -915,7 +915,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * JS to display the errors on the page
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _errors_js() {
 			if(isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true' && get_transient('redux-errors-' . $this->args['opt_name'])) {
@@ -948,7 +948,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * JS to display the warnings on the page
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _warnings_js() {
 			if(isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true' && get_transient('redux-warnings-' . $this->args['opt_name'])) {
@@ -981,7 +981,7 @@ if(!class_exists('Redux_Framework') ){
 		/**
 		 * Section HTML OUTPUT.
 		 *
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _section_desc($section) {
 			$id = trim(rtrim($section['id'], '_section'), $this->args['opt_name']);
@@ -995,7 +995,7 @@ if(!class_exists('Redux_Framework') ){
 		 * Field HTML OUTPUT.
 		 *
 		 * Gets option from options array, then calls the specific field type class - allows extending by other devs
-		 * @since Redux_Framework 1.0.0
+		 * @since ReduxFramework 1.0.0
 		 */
 		function _field_input($field) {
 
@@ -1042,7 +1042,7 @@ if(!class_exists('Redux_Framework') ){
 			}
 
 			if(isset($field['type'])) {
-				$field_class = 'Redux_Framework_'.$field['type'];
+				$field_class = 'ReduxFramework_'.$field['type'];
 
 				if(!class_exists($field_class)) {
 					$class_file = apply_filters('redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class);

@@ -1,12 +1,12 @@
 <?php
-class Redux_Framework_google_webfonts {
+class ReduxFramework_google_webfonts {
 
     /**
      * Field Constructor.
      *
      * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
      *
-     * @since Redux_Framework 1.0.0
+     * @since ReduxFramework 1.0.0
     */
     function __construct($field = array(), $value ='', $parent) {
         $this->field = $field;
@@ -19,7 +19,7 @@ class Redux_Framework_google_webfonts {
      *
      * Takes the vars and outputs the HTML for the field in the settings
      *
-     * @since Redux_Framework 1.0.0
+     * @since ReduxFramework 1.0.0
     */
     function render() {
         echo '<p class="description" style="color:red;">' . __('The fonts provided below are free to use custom fonts from the <a href="http://www.google.com/webfonts" target="_blank">Google Web Fonts directory</a>', 'redux-framework') . '</p>';
@@ -35,7 +35,7 @@ class Redux_Framework_google_webfonts {
      *
      * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
      *
-     * @since Redux_Framework 1.0.0
+     * @since ReduxFramework 1.0.0
     */
     function enqueue() {
         wp_enqueue_script(

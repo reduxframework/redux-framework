@@ -1,12 +1,12 @@
 <?php
-class Redux_Framework_slider extends Redux_Framework{	
+class ReduxFramework_slider extends ReduxFramework{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Redux_Framework 0.0.4
+	 * @since ReduxFramework 0.0.4
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
@@ -24,7 +24,7 @@ class Redux_Framework_slider extends Redux_Framework{
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since Redux_Framework 0.0.4
+	 * @since ReduxFramework 0.0.4
 	*/
 	function render(){
 		
@@ -99,7 +99,7 @@ class Redux_Framework_slider extends Redux_Framework{
 	 *
 	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
 	 *
-	 * @since Redux_Framework 0.0.4
+	 * @since ReduxFramework 0.0.4
 	*/
 	function enqueue(){
 		

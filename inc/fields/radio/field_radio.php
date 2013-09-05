@@ -1,12 +1,12 @@
 <?php
-class Redux_Framework_radio extends Redux_Framework{	
+class ReduxFramework_radio extends ReduxFramework{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
@@ -24,7 +24,7 @@ class Redux_Framework_radio extends Redux_Framework{
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since Redux_Framework 1.0.0
+	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
 		
