@@ -1,150 +1,181 @@
 <?php
-class ReduxFramework_media extends ReduxFramework{	
-	
-	/**
-	 * Field Constructor.
-	 *
-	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-	 *
-	 * @since ReduxFramework 1.0.0
-	*/
-	function __construct($field = array(), $value ='', $parent){
-		
-		parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
-		$this->field = $field;
-		$this->value = $value;
-		//$this->render();
-		
-	}//function
-	
-	
-	
-	/**
-	 * Field Render Function.
-	 *
-	 * Takes the vars and outputs the HTML for the field in the settings
-	 *
-	 * @since ReduxFramework 1.0.0
-	*/
-	function render(){
+/**
+ * Redux Framework is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * Redux Framework is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @package     ReduxFramework
+ * @subpackage  Field_Media
+ * @author      Daniel J Griffiths (Ghost1227)
+ * @author      Dovy Paukstys
+ * @version     3.0.0
+ */
 
+// Exit if accessed directly
+if( !defined( 'ABSPATH' ) ) exit;
 
-		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
-		if (!empty($this->field['compiler']) && $this->field['compiler']) {
-			$class .= " compiler";
-		}
-		
-		$hide = 'hide ';
+// Don't duplicate me!
+if( !class_exists( 'ReduxFramework_media' ) ) {
 
-		if (!empty($this->field['show_url']) && $this->field['show_url'] === true) {
-			$hide ='';
-		}
+    /**
+     * Main ReduxFramework_media class
+     *
+     * @since       1.0.0
+     */
+    class ReduxFramework_media extends ReduxFramework {
+    
+        /**
+         * Field Constructor.
+         *
+         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function __construct( $field = array(), $value ='', $parent ) {
+        
+            parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
 
-		// No errors please
-		$defaults = array(
-			'id' => '',
-			'url' => '',
-			'width'=>'',
-			'height'=>'',
-			);
+            $this->field = $field;
+            $this->value = $value;
+        
+        }
 
-		$this->value = wp_parse_args( $this->value, $defaults );
+        /**
+         * Field Render Function.
+         *
+         * Takes the vars and outputs the HTML for the field in the settings
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function render() {
 
-	  if ( empty($this->value) && !empty($this->field['std']) ) { // If there are standard values and value is empty
-	  	if (is_array($this->field['std'])) { // If array
-	  		if (!empty($this->field['std']['id'])) { // Set the ID
-	  			$this->value['id'] = $this->field['std']['id'];
-	  		}
-	  		if (!empty($this->field['std']['url'])) { // Set the URL
-	  			$this->value['url'] = $this->field['std']['url'];
-	  		}	  		
-	  	} else {
-		  	if (is_numeric($this->field['std'])) { // Check if it's an attachment ID
-		  		$this->value['id'] = $this->field['std'];
-		  	} else { // Must be a URL
-		  		$this->value['url'] = $this->field['std']; 
-		  	}	  		
-	  	}
-	  }
+            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
+        
+            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
+                $class .= ' compiler';
+        
+            $hide = 'hide ';
 
-	  if (empty($this->value['url']) && !empty($this->value['id'])) {
-	  	$img = wp_get_attachment_image_src( $this->value['id'], 'full' );
-	  	$this->value['url'] = $img[0];
-	  	$this->value['width'] = $img[1];
-	  	$this->value['height'] = $img[2];
-	  }
+            if( !empty( $this->field['show_url'] ) && $this->field['show_url'] === true )
+                $hide = '';
 
-		echo '<input class="'.$hide.'upload'.$class.'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][url]" id="'.$this->args['opt_name'].'['.$this->field['id'].'][url]" value="'. $this->value['url'] .'" readonly="readonly" />';
-		echo '<input type="hidden" class="upload-id" name="'.$this->args['opt_name'].'['.$this->field['id'].'][id]" "'.$this->args['opt_name'].'['.$this->field['id'].'][id]" value="'. $this->value['id'] .'" />';
-		echo '<input type="hidden" class="upload-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" "'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'. $this->value['height'] .'" />';
-		echo '<input type="hidden" class="upload-width" name="'.$this->args['opt_name'].'['.$this->field['id'].'][width]" "'.$this->args['opt_name'].'['.$this->field['id'].'][width]" value="'. $this->value['width'] .'" />';
+            // No errors please
+            $defaults = array(
+                'id'    => '',
+                'url'   => '',
+                'width' => '',
+                'height'=> '',
+            );
 
+            $this->value = wp_parse_args( $this->value, $defaults );
 
+            if( empty( $this->value ) && !empty( $this->field['std'] ) ) { // If there are standard values and value is empty
+                if( is_array( $this->field['std'] ) ) {
+                    if( !empty( $this->field['std']['id'] ) ) {
+                        $this->value['id'] = $this->field['std']['id'];
+                    }
 
-		//Preview
-		$hide = '';
-		if (empty($this->value['url'])) {
-			$hide =" hide";
-		}
+                    if( !empty( $this->field['std']['url'] ) ) {
+                        $this->value['url'] = $this->field['std']['url'];
+                    }           
+                } else {
+                    if( is_numeric( $this->field['std'] ) ) { // Check if it's an attachment ID
+                        $this->value['id'] = $this->field['std'];
+                    } else { // Must be a URL
+                        $this->value['url'] = $this->field['std'];
+                    }           
+                }
+            }
 
-		echo '<div class="screenshot'.$hide.'">';
-		echo '<a class="of-uploaded-image" href="'. $this->value['url'] . '">';
-		echo '<img class="redux-option-image" id="image_'.$this->field['id'].'" src="'.$this->value['url'].'" alt="" />';
-		echo '</a>';
-		echo '</div>';
-		
-		//Upload controls DIV
-		echo '<div class="upload_button_div">';
-		//If the user has WP3.5+ show upload/remove button
+            if( empty( $this->value['url'] ) && !empty( $this->value['id'] ) ) {
+                $img = wp_get_attachment_image_src( $this->value['id'], 'full' );
+                $this->value['url'] = $img[0];
+                $this->value['width'] = $img[1];
+                $this->value['height'] = $img[2];
+            }
 
-			echo '<span class="button media_upload_button" id="'.$this->field['id'].'">Upload</span>';
-			$hide = '';
-			if ( empty( $this->value['url'] ) || $this->value['url'] == "" ) {
-				$hide =' hide';
-			}
-			echo '<span class="button remove-image'. $hide.'" id="reset_'. $this->field['id'] .'" rel="'.$this->field['id'].'">Remove</span>';
+            echo '<input class="' . $hide . 'upload' . $class . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][url]" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '" readonly="readonly" />';
+            echo '<input type="hidden" class="upload-id" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][id]" "' . $this->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
+            echo '<input type="hidden" class="upload-height" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][height]" "' . $this->args['opt_name'] . '[' . $this->field['id'] . '][height]" value="' . $this->value['height'] . '" />';
+            echo '<input type="hidden" class="upload-width" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][width]" "' . $this->args['opt_name'] . '[' . $this->field['id'] . '][width]" value="' . $this->value['width'] . '" />';
 
-		echo '</div>' . "\n";
-		
-		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
-		
-	}//function
-	
+            //Preview
+            $hide = '';
+            if( empty( $this->value['url'] ) )
+                $hide = ' hide';
 
-	/**
-	 * Enqueue Function.
-	 *
-	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
-	 *
-	 * @since ReduxFramework 1.0.0
-	*/
-	function enqueue(){
+            echo '<div class="screenshot' . $hide . '">';
+            echo '<a class="of-uploaded-image" href="' . $this->value['url'] . '">';
+            echo '<img class="redux-option-image" id="image_' . $this->field['id'] . '" src="' . $this->value['url'] . '" alt="" />';
+            echo '</a>';
+            echo '</div>';
+        
+            //Upload controls DIV
+            echo '<div class="upload_button_div">';
 
-		if(function_exists('wp_enqueue_media')) {
-			wp_enqueue_media();
-		}
-		else {
-			wp_enqueue_script('media-upload');
-			wp_enqueue_script('thickbox');
-			wp_enqueue_style('thickbox');
-		}
+            //If the user has WP3.5+ show upload/remove button
+            echo '<span class="button media_upload_button" id="' . $this->field['id'] . '">' . __( 'Upload', 'redux-framework' ) . '</span>';
+            
+            $hide = '';
+            if( empty( $this->value['url'] ) || $this->value['url'] == '' )
+                $hide =' hide';
 
-		wp_enqueue_script(
-			'redux-media-js',
-			REDUX_URL.'inc/fields/media/field_media.js',
-			array('jquery', 'wp-color-picker'),
-			time(),
-			true
-		);
+            echo '<span class="button remove-image' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __( 'Remove', 'redux-framework' ) . '</span>';
 
-		wp_enqueue_style(
-			'redux-media-css',
-			REDUX_URL.'inc/fields/media/field_media.css',
-			time(),
-			true
-		);
+            echo '</div>' . "\n";
+        
+            echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
+        
+        }
 
-	}//function
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function enqueue() {
 
-}//class
+            if( function_exists( 'wp_enqueue_media' ) ) {
+                wp_enqueue_media();
+            } else {
+                wp_enqueue_script( 'media-upload' );
+                wp_enqueue_script( 'thickbox' );
+                wp_enqueue_style( 'thickbox' );
+            }
+
+            wp_enqueue_script(
+                'redux-media-js',
+                REDUX_URL . 'inc/fields/media/field_media.js',
+                array( 'jquery', 'wp-color-picker' ),
+                time(),
+                true
+            );
+
+            wp_enqueue_style(
+                'redux-media-css',
+                REDUX_URL . 'inc/fields/media/field_media.css',
+                time(),
+                true
+            );
+
+        }
+    }
+}
 ?>
