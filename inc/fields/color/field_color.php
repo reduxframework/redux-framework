@@ -66,10 +66,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 
 			$class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
 		
-			if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-				$class .= " compiler";
-
-			echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std'] . '" />';
+			echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
 		
 			echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 		

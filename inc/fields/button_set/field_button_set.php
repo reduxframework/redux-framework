@@ -65,9 +65,6 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
         
             $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
         
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= " compiler";
-        
             echo '<fieldset class="buttonset">';
             
             foreach( $this->field['options'] as $k => $v ) {

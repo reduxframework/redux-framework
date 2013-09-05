@@ -64,8 +64,8 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
         
             $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] : '';     
 
-            if( empty( $this->field['desc'] ) && !empty( $this->field['std'] ) )
-                $this->field['desc'] = $this->field['std'];
+            if( empty( $this->field['desc'] ) && !empty( $this->field['default'] ) )
+                $this->field['desc'] = $this->field['default'];
 
             if( !isset( $this->field['fold-ids'] ) )
                 $this->field['fold-ids'] = '';
@@ -74,7 +74,6 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
                 $this->field['fold-vals'] = '';
 
             echo '</td></tr></table><div class="redux-info-field' . $class . '">';
-            echo '<input type="hidden" ' . $this->field['fold-ids'] . ' id="info-field foldChild-' . $this->field['id'] . '" class="fold-data" value="' . $this->field['fold-vals'] . '" />';
             echo $this->field['desc'];
             echo '</div><table class="form-table no-border"><tbody><tr><th></th><td>';
         

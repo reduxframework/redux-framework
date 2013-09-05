@@ -64,9 +64,6 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
 
             $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : 'regular-text';
 
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= ' compiler';
-
             echo '<ul id="' . $this->field['id'] . '-ul">';
         
             if( isset( $this->value ) && is_array( $this->value ) ) {
@@ -99,7 +96,7 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
         
             wp_enqueue_script(
                 'redux-field-multi-text-js', 
-                REDUX_URL . 'inc/fields/multi_text/field_multi_text.js', 
+                REDUX_URL . 'inc/fields/multi_text/field_multi_text.min.js', 
                 array( 'jquery' ),
                 time(),
                 true

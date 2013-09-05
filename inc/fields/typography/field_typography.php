@@ -38,9 +38,6 @@ class ReduxFramework_typography extends ReduxFramework{
 
 
 		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
-		if (!empty($this->field['compiler']) && $this->field['compiler']) {
-			$class .= " compiler";
-		}		
 	
 		// No errors please
 		$defaults = array(
@@ -68,8 +65,8 @@ class ReduxFramework_typography extends ReduxFramework{
 		$this->value = wp_parse_args( $this->value, $defaults );
 
 
-		if(!empty($this->field['std'])) { 
-			$this->value = wp_parse_args( $this->value, $this->field['std'] );
+		if(!empty($this->field['default'])) { 
+			$this->value = wp_parse_args( $this->value, $this->field['default'] );
 		}
 
 		$units = array('px', 'em', '%');
@@ -234,10 +231,10 @@ class ReduxFramework_typography extends ReduxFramework{
     **/
     if ($this->field['color'] === true):
     	$default = "";
-    	if (empty($this->field['std']['color']) && !empty($this->field['color'])) {
+    	if (empty($this->field['default']['color']) && !empty($this->field['color'])) {
     		$default = $this->value['color'];
-			} else if (!empty($this->field['std']['color'])) {
-				$default = $this->field['std']['color'];
+			} else if (!empty($this->field['default']['color'])) {
+				$default = $this->field['default']['color'];
 			}
       echo '<div id="' . $this->field['id'] . '_color_picker" class="colorSelector typography-color"><div style="background-color: '.$this->value['color'].'"></div></div>';
       echo '<input data-default-color="'.$default.'" class="redux-color redux-typography-color'.$class.'" original-title="'.__('Font color','redux-framework').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
@@ -282,7 +279,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
 		wp_enqueue_script(
 			'redux-field-typography-js', 
-			REDUX_URL.'inc/fields/typography/field_typography.js', 
+			REDUX_URL.'inc/fields/typography/field_typography.min.js', 
 			array('jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js', 'jquery-numeric'),
 			time(),
 			true

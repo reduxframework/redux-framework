@@ -137,7 +137,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
     
             echo '<fieldset>';
 
-            if( !empty( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['std'] ) ) ) {
+            if( !empty( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['default'] ) ) ) {
                 echo '<ul>';
             
                 foreach( $this->field['options'] as $k => $v ) {

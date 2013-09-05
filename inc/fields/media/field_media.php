@@ -64,9 +64,6 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
 
             $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
         
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= ' compiler';
-        
             $hide = 'hide ';
 
             if( !empty( $this->field['show_url'] ) && $this->field['show_url'] === true )
@@ -82,20 +79,20 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
 
             $this->value = wp_parse_args( $this->value, $defaults );
 
-            if( empty( $this->value ) && !empty( $this->field['std'] ) ) { // If there are standard values and value is empty
-                if( is_array( $this->field['std'] ) ) {
-                    if( !empty( $this->field['std']['id'] ) ) {
-                        $this->value['id'] = $this->field['std']['id'];
+            if( empty( $this->value ) && !empty( $this->field['default'] ) ) { // If there are standard values and value is empty
+                if( is_array( $this->field['default'] ) ) {
+                    if( !empty( $this->field['default']['id'] ) ) {
+                        $this->value['id'] = $this->field['default']['id'];
                     }
 
-                    if( !empty( $this->field['std']['url'] ) ) {
-                        $this->value['url'] = $this->field['std']['url'];
+                    if( !empty( $this->field['default']['url'] ) ) {
+                        $this->value['url'] = $this->field['default']['url'];
                     }           
                 } else {
-                    if( is_numeric( $this->field['std'] ) ) { // Check if it's an attachment ID
-                        $this->value['id'] = $this->field['std'];
+                    if( is_numeric( $this->field['default'] ) ) { // Check if it's an attachment ID
+                        $this->value['id'] = $this->field['default'];
                     } else { // Must be a URL
-                        $this->value['url'] = $this->field['std'];
+                        $this->value['url'] = $this->field['default'];
                     }           
                 }
             }
@@ -162,7 +159,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
 
             wp_enqueue_script(
                 'redux-media-js',
-                REDUX_URL . 'inc/fields/media/field_media.js',
+                REDUX_URL . 'inc/fields/media/field_media.min.js',
                 array( 'jquery', 'wp-color-picker' ),
                 time(),
                 true

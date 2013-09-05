@@ -1,7 +1,9 @@
+/* global redux_change */
+
 jQuery(document).ready(function(){
 	
 	jQuery('.redux-multi-text-remove').on('click', function(){
-		sof_change();
+		redux_change();
 		jQuery(this).prev('input[type="text"]').val('');
 		jQuery(this).parent().fadeOut('slow', function(){jQuery(this).remove();});
 	});

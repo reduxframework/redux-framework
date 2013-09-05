@@ -1,4 +1,4 @@
-/*global $, jQuery, document, redux_change, redux_color_validate*/
+/*global jQuery, document, redux_change */
 
 var tcolour;
 jQuery(document).ready(function () {

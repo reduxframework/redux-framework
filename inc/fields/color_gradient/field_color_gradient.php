@@ -71,15 +71,12 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
             $this->value = wp_parse_args( $this->value, $defaults );
 
             $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
-        
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= " compiler";
 
             echo '<div class="redux-color-gradient-container" id="' . $this->field['id'] . '">';
 
-            echo '<strong>' . __( 'From ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-from" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][from]" value="'.$this->value['from'].'" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std']['from'] . '" />';
+            echo '<strong>' . __( 'From ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-from" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][from]" value="'.$this->value['from'].'" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default']['from'] . '" />';
 
-            echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . __( 'To ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-to" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][to]" value="' . $this->value['to'] . '" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['std']['to'] . '" />';
+            echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . __( 'To ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-to" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][to]" value="' . $this->value['to'] . '" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default']['to'] . '" />';
         
             echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
         
@@ -100,7 +97,7 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
         
             wp_enqueue_script(
                 'redux-field-color-js', 
-                REDUX_URL . 'inc/fields/color/field_color.js', 
+                REDUX_URL . 'inc/fields/color/field_color.min.js', 
                 array( 'jquery', 'wp-color-picker' ),
                 time(),
                 true

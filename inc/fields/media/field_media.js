@@ -1,4 +1,4 @@
-/*global $, jQuery, document, redux_change, redux_file_bindings, frame:true, wp:true*/
+/*global jQuery, document, redux_change, redux_file_bindings, frame:true, wp:true*/
 
 jQuery.noConflict();
 

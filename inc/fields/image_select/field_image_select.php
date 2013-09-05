@@ -24,14 +24,14 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_images' ) ) {
+if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
     /**
-     * Main ReduxFramework_images class
+     * Main ReduxFramework_image_select class
      *
      * @since       1.0.0
      */
-    class ReduxFramework_images extends ReduxFramework {
+    class ReduxFramework_image_select extends ReduxFramework {
     
         /**
          * Field Constructor.
@@ -71,7 +71,7 @@ if( !class_exists( 'ReduxFramework_images' ) ) {
             
             if( !empty( $this->field['options'] ) ) {
 
-                echo '<ul class="redux-images">';
+                echo '<ul class="redux-image-select">';
             
                 foreach( $this->field['options'] as $k => $v ) {
 
@@ -109,7 +109,7 @@ if( !class_exists( 'ReduxFramework_images' ) ) {
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true )
                         $theValue = $v['img'];
 
-                    $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-images-selected' : '';
+                    $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
 
                     $presets = '';
                 
@@ -125,8 +125,8 @@ if( !class_exists( 'ReduxFramework_images' ) ) {
                         $class .= ' redux-presets';
                     }               
 
-                    echo '<li class="redux-images">';
-                    echo '<label class="' . $selected . ' redux-images-' . $this->field['id'] . '" for="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
+                    echo '<li class="redux-image-select">';
+                    echo '<label class="' . $selected . ' redux-image-select-' . $this->field['id'] . '" for="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
 
                     echo '<input type="radio" class="noUpdate' . $class . '" id="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
 
@@ -168,16 +168,16 @@ if( !class_exists( 'ReduxFramework_images' ) ) {
         public function enqueue() {
         
             wp_enqueue_script(
-                'redux-field-images-js', 
-                REDUX_URL . 'inc/fields/images/field_images.min.js', 
+                'redux-field-image-select-js', 
+                REDUX_URL . 'inc/fields/image_select/field_image_select.min.js', 
                 array( 'jquery' ),
                 time(),
                 true
             );
 
             wp_enqueue_style(
-                'redux-field-images-css', 
-                REDUX_URL . 'inc/fields/images/field_images.css',
+                'redux-field-image-select-css', 
+                REDUX_URL . 'inc/fields/image_select/field_image_select.css',
                 time(),
                 true
             );

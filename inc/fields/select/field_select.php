@@ -110,7 +110,7 @@ class ReduxFramework_select extends ReduxFramework{
 				$nameBrackets = "[]";
 			}
 
-			$placeholder = (isset($this->field['placeholder'])) ? esc_attr($this->field['placeholder']) : '';
+			$placeholder = (isset($this->field['placeholder'])) ? esc_attr($this->field['placeholder']) : __( 'Select an item', 'redux-framework' );
 
 			echo '<select'.$multi.' id="'.$this->field['id'].'" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item'.$class.'"'.$width.' rows="6">';
 				echo '<option></option>';

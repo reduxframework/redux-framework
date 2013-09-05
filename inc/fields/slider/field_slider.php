@@ -51,8 +51,8 @@ class ReduxFramework_slider extends ReduxFramework{
 			$this->field['step'] = intval($this->field['step']);
 		}	
 	
-		if(empty($this->value) && !empty($this->field['std'])) { 
-			$this->value = intval($this->field['std']);
+		if(empty($this->value) && !empty($this->field['default'])) { 
+			$this->value = intval($this->field['default']);
 		}
 
 		if (empty($this->value)) {
@@ -72,7 +72,7 @@ class ReduxFramework_slider extends ReduxFramework{
 				'max' => '',
 				'step' => '',
 				'val' => '',
-				'std' => '',
+				'default' => '',
 			);
 
 		$params = wp_parse_args( $this->field, $params );

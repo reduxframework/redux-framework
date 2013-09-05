@@ -59,7 +59,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $warnings            = array();
         public $options             = array();
         public $options_defaults    = null;
-	public $folds    						= array();
+		public $folds    			= array();
 
         /**
          * Class Constructor. Defines the args for the theme options class
@@ -98,15 +98,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			$defaults['transient'] 			= false;
 			$defaults['transient_time'] 	= 2 * MINUTE_IN_SECONDS;
 
-
             // The defaults are set so it will preserve the old behavior.
-            $defaults['std_show']           = false; // If true, it shows the std value
-            $defaults['std_mark']           = ''; // What to print by the field's title if the value shown is std
+            $defaults['default_show']		= false; // If true, it shows the default value
+            $defaults['default_mark']		= ''; // What to print by the field's title if the value shown is default
 
-	    // Set values
+	    	// Set values
             $this->args = wp_parse_args( $args, $defaults );
-	    $this->sections = $sections;
-						$this->extra_tabs = $extra_tabs;
+	    	$this->sections = $sections;
+			$this->extra_tabs = $extra_tabs;
 
             // Set option with defaults
             add_action( 'init', array( &$this, '_set_default_options' ) );
@@ -123,18 +122,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
         }
 
         /**
-         * ->_get_std(); This is used to return the std value if std_show is set
+         * ->_get_default(); This is used to return the default value if default_show is set
          *
          * @since       1.0.1
          * @access      public
          * @param       string $opt_name The option name to return
-         * @param       mixed $default (null)  The value to return if std not set
+         * @param       mixed $default (null)  The value to return if default not set
          * @return      mixed $default
          */
-        public function _get_std( $opt_name, $default = null ) {
-            if( $this->args['std_show'] == true ) {
-                if( isset( $_GET['settings-updated'] ) || $_GET['settings-updated'] == 'true' || get_transient( 'redux-saved' ) == '1' )
-                    return;
+        public function _get_default( $opt_name, $default = null ) {
+            if( $this->args['default_show'] == true ) {
+                if( (isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true') || get_transient( 'redux-saved-' . $this->args['opt_name'] ) == '1' ) {
+                	return;
+                }
+
+                    
 
                 if( is_null( $this->options_defaults ) )
                     $this->_default_values(); // fill cache
@@ -154,7 +156,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      mixed
          */
         public function get( $opt_name, $default = null ) {
-            return ( !empty( $this->options[$opt_name] ) ) ? $this->options[$opt_name] : $this->_get_std( $opt_name, $default );
+            return ( !empty( $this->options[$opt_name] ) ) ? $this->options[$opt_name] : $this->_get_default( $opt_name, $default );
         }
 
         /**
@@ -169,7 +171,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function set( $opt_name = '', $value = '' ) {
             if( $opt_name != '' ) {
                 $this->options[$opt_name] = $value;
-		$this->update_option( $this->options );
+				$this->update_option( $this->options );
             }
         }
 
@@ -226,7 +228,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( !is_array( $option ) && $option != '' ) {
                 echo $option;
             } elseif( $default != '' ) {
-                echo $this->_get_std( $opt_name, $default );
+                echo $this->_get_default( $opt_name, $default );
             }
         }
 
@@ -243,70 +245,70 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 foreach( $this->sections as $section ) {
                     if( isset( $section['fields'] ) ) {
                         foreach( $section['fields'] as $field ) {
-                            if( isset( $field['std'] ) )
-                                $this->options_defaults[$field['id']] = $field['std'];
+                            if( isset( $field['default'] ) ) {
+                            	$this->options_defaults[$field['id']] = $field['default'];
+                            }
                         }
                     }
                 }
             }
-
             return $this->options_defaults;
         }
 
 
-	/**
-	 * Get fold values into an array suitable for setting folds
-	 *
-	 * @since ReduxFramework 1.0.0
-	 */
-	function _fold_values() {
-	    /*
-	    Folds work by setting the folds value like so
-	    $this->folds['parentID']['parentValue'][] = 'childId'
-	    */
-	    $folds = array();
-	    if( !is_null( $this->sections ) && is_null( $this->options_defaults ) ) {
-		foreach( $this->sections as $section ) {
-		    if( isset( $section['fields'] ) ) {
-			foreach( $section['fields'] as $field ) {
-			    if( isset( $field['fold'] ) )
-				if ( !is_array( $field['fold'] ) ) {
-				    /*
-					Example variable:
-					    $var = array(
-						'fold' => 'id'
-						);
-				    */
-				    $folds[$field['fold']][1][] = $field['id'];
-				} else {
-				    foreach( $field['fold'] as $foldk=>$foldv ) {
-					if ( is_array( $foldv ) ) {
-					    /*
-						Example variable:
-						    $var = array(
-							'fold' => array( 'id' => array(1, 5) )
-						    );
-					    */
-					    foreach ($foldv as $foldvValue) {
-						$folds[$foldk][$foldvValue][] = $field['id'];
+		/**
+		 * Get fold values into an array suitable for setting folds
+		 *
+		 * @since ReduxFramework 1.0.0
+		 */
+		function _fold_values() {
+		    /*
+		    Folds work by setting the folds value like so
+		    $this->folds['parentID']['parentValue'][] = 'childId'
+		    */
+		    $folds = array();
+		    if( !is_null( $this->sections ) && is_null( $this->options_defaults ) ) {
+			foreach( $this->sections as $section ) {
+			    if( isset( $section['fields'] ) ) {
+					foreach( $section['fields'] as $field ) {
+					    if( isset( $field['fold'] ) )
+							if ( !is_array( $field['fold'] ) ) {
+							    /*
+								Example variable:
+								    $var = array(
+									'fold' => 'id'
+									);
+							    */
+							    $folds[$field['fold']][1][] = $field['id'];
+							} else {
+							    foreach( $field['fold'] as $foldk=>$foldv ) {
+									if ( is_array( $foldv ) ) {
+									    /*
+										Example variable:
+										    $var = array(
+											'fold' => array( 'id' => array(1, 5) )
+										    );
+									    */
+									    foreach ($foldv as $foldvValue) {
+											$folds[$foldk][$foldvValue][] = $field['id'];
+									    }
+									} else {
+									    /*
+										Example variable:
+										    $var = array(
+											'fold' => array( 'id' => 1 )
+										    );
+									    */
+									    $folds[$foldk][$foldv][] = $field['id'];
+									}
+							    }
+							}
 					    }
-					} else {
-					    /*
-						Example variable:
-						    $var = array(
-							'fold' => array( 'id' => 1 )
-						    );
-					    */
-					    $folds[$foldk][$foldv][] = $field['id'];
 					}
-				    }
-				}
 			    }
 			}
-		    }
+		    return $folds;
 		}
-	    return $folds;
-	}
 
         /**
          * Set default options on admin_init if option doesn't exist
@@ -316,24 +318,24 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _set_default_options() {
-	    // Get args
-	    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
+		    // Get args
+		    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
 
-	    // Get sections
-	    $this->sections = apply_filters( 'redux-sections-' . $this->args['opt_name'], $this->sections );
+		    // Get sections
+		    $this->sections = apply_filters( 'redux-sections-' . $this->args['opt_name'], $this->sections );
 
-	    // Get extra tabs
-	    $this->extra_tabs = apply_filters( 'redux-extra-tabs-' . $this->args['opt_name'], $this->extra_tabs );
+		    // Get extra tabs
+		    $this->extra_tabs = apply_filters( 'redux-extra-tabs-' . $this->args['opt_name'], $this->extra_tabs );
 
-	    // Grab database values
-	    $this->options = $this->get_options();
+		    // Grab database values
+		    $this->options = $this->get_options();
 
-	    // Set defaults if empty
-	    if( empty( $this->options ) && !empty( $this->sections ) ) {
-		$defaults = $this->_default_values();
-		$this->set_options( $defaults );
-		$this->options = $defaults;
-	    }
+		    // Set defaults if empty
+		    if( empty( $this->options ) && !empty( $this->sections ) ) {
+				$defaults = $this->_default_values();
+				$this->set_options( $defaults );
+				$this->options = $defaults;
+		    }
         }
 
         /**
@@ -479,7 +481,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'jquery-ui-css',
-                apply_filters( 'redux-ui-theme', REDUX_URL . 'assets/css/vendor/jquery-ui-aristo/aristo.css' ),
+                apply_filters( 'redux-ui-theme', REDUX_URL . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 '',
                 time(),
                 'all'
@@ -590,7 +592,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 exit;
             }
 
-            $backup_options = get_option( str_replace( 'redux-', '', $_GET['feed'] ) );
+            $backup_options = $this->get_options( str_replace( 'redux-', '', $_GET['feed'] ) );
             $backup_options['redux-backup'] = '1';
             $content = json_encode( $backup_options );
 
@@ -695,21 +697,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
                         if( isset( $field['title'] ) ) {
-			    $std_mark = ( !empty($field['std']) && $this->options[$field['id']] == $field['std'] && !empty( $this->args['std_mark'] ) && isset( $field['std'] ) ) ? $this->args['std_mark'] : '';
-                            $th = $field['title'] . $std_mark;
-			    if( isset( $field['subtitle'] ) ) {
-				$th .= '<span class="description">' . $field['subtitle'] . '</span>';
-			    }
+			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
+                            $th = $field['title'] . $default_mark;
+						    if( isset( $field['subtitle'] ) ) {
+								$th .= '<span class="description">' . $field['subtitle'] . '</span>';
+						    }
                         } else {
-				$th = '';
-			}
+							$th = '';
+						}
 
-			if ( $this->args['std_show'] === true && !empty( $field['std'] ) ) {
-			    if (!is_array($field['std'])) {
-				$default_output = __( 'Default', 'redux-framework' ) . ": " . $field['std'];
+			if ( $this->args['default_show'] === true && !empty( $field['default'] ) ) {
+			    if (!is_array($field['default'])) {
+				$default_output = __( 'Default', 'redux-framework' ) . ": " . $field['default'];
 			    } else {
 				$default_output = "";
-				foreach( $field['std'] as $defaultk => $defaultv ) {
+				foreach( $field['default'] as $defaultk => $defaultv ) {
 				    $default_output .= $defaultk . ": " . $defaultv.', ';
 				}
 				if ( !empty( $default_output ) ) {
@@ -735,6 +737,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			    $field['fold_children'] = $this->folds[ $field['id'] ];
 			    $field['class'] .= " foldParent";
 			}
+			if ( !empty( $this->compiler ) ) {
+				$field['clas'] .= " compiler";
+			}
 			$this->sections[$k]['fields'][$fieldk] = $field;
 
                         add_settings_field( $fieldk . '_field', $th, array( &$this, '_field_input' ), $this->args['opt_name'] . $k . '_section_group', $this->args['opt_name'] . $k . '_section', $field ); // checkbox
@@ -753,7 +758,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      
          */
         public function _validate_options( $plugin_options ) {
-            set_transient( 'redux-saved', '1', 1000 );
+            set_transient( 'redux-saved-' . $this->args['opt_name'], '1', 1000 );
 
             if( !empty( $plugin_options['import'] ) ) {
                 if( $plugin_options['import_code'] != '' ) {
@@ -772,18 +777,18 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         setcookie( 'redux_current_tab', '', 1, '/' );
                     }
 
-                    set_transient( 'redux-compiler', '1', 1000 );
+                    set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
-		    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
-			$this->set_options( $plugin_options );
-		    }
+				    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
+						$this->set_options( $plugin_options );
+				    }
                     return $plugin_options;
                 }
             }
 
             if( !empty( $plugin_options['defaults'] ) ) {
                 $plugin_options = $this->_default_values();
-                set_transient( 'redux-compiler', '1', 1000 );
+                set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                 unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
 		if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
 		    $this->set_options( $plugin_options );
@@ -803,7 +808,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             do_action( 'redux-validate-' . $this->args['opt_name'], $plugin_options, $this->options );
 
             if( !empty( $plugin_options['compiler'] ) )
-                set_transient( 'redux-compiler', '1', 1000 );
+                set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
 
             unset( $plugin_options['defaults'] );
             unset( $plugin_options['import'] );
@@ -906,8 +911,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Add the JS for warning handling before the form
             add_action( 'redux-page-before-form-' . $this->args['opt_name'], array( &$this, '_warnings_js' ), 2 );
 
-            $saved = get_transient( 'redux-saved' );
-            delete_transient( 'redux-saved' );
+            $saved = get_transient( 'redux-saved-' . $this->args['opt_name'] );
+            delete_transient( 'redux-saved-' . $this->args['opt_name'] );
 
             echo '<div class="clear"></div>';
             echo '<div class="wrap">';
@@ -1005,10 +1010,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="icon-' . $section['icon'] . $icon_class . '"></i> ';
                 }
 
-                // DOVY! REPLACE $k with $section['ID'] when used properly.
-                echo '<li id="' . $k . '_section_group_li" class="redux-group-tab-link-li">';
-                echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k . '">' . $icon . '<span>' . $section['title'] . '</span></a>';
-                echo '</li>';
+				if (isset($section['type']) && $section['type'] == "divide") {
+					echo '<li class="divide">&nbsp;</li>';
+				} else {
+					// DOVY! REPLACE $k with $section['ID'] when used properly.
+	                echo '<li id="' . $k . '_section_group_li" class="redux-group-tab-link-li">';
+	                echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k . '">' . $icon . '<span>' . $section['title'] . '</span></a>';
+	                echo '</li>';							
+				}                
             }
 
             echo '<li class="divide">&nbsp;</li>';
@@ -1197,8 +1206,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _errors_js() {
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && get_transient( 'redux-errors-' . $this->args['opt_name'] ) ) {
-                $errors = get_transient( 'redux-errors-' . $this->args['opt_name'] );
+        	$errors = get_transient( 'redux-errors-' . $this->args['opt_name'] );
+            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $errors ) {
                 $section_errors = array();
 
                 foreach( $errors as $error ) {
@@ -1236,8 +1245,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _warnings_js() {
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && get_transient( 'redux-warnings-' . $this->args['opt_name'] ) ) {
-                $warnings = get_transient( 'redux-warnings-' . $this->args['opt_name'] );
+        	$warnings = get_transient( 'redux-warnings-' . $this->args['opt_name'] );
+            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $warnings ) {
                 $section_warnings = array();
 
                 foreach( $warnings as $warning ) {
@@ -1278,8 +1287,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _section_desc( $section ) {
             $id = trim( rtrim( $section['id'], '_section' ), $this->args['opt_name'] );
 
-            if( isset( $this->sections[$id]['desc'] ) && !empty( $this->sections[$id]['desc'] ) )
-                echo '<div class="redux-section-desc">' . $this->sections[$id]['desc'] . '</div>';
+            if( isset( $this->sections[$id]['desc'] ) && !empty( $this->sections[$id]['desc'] ) ) {
+            	echo '<div class="redux-section-desc">' . $this->sections[$id]['desc'] . '</div>';
+            }
         }
 
         /**

@@ -73,7 +73,7 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
             );
 
             $this->value = wp_parse_args( $this->value, $defaults );
-            $this->field['std'] = wp_parse_args( $this->field['std'], $defaults );  
+            $this->field['default'] = wp_parse_args( $this->field['default'], $defaults );  
 
             if( empty( $this->field['min'] ) )
                 $this->field['min'] = 0;
@@ -91,9 +91,6 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
             );
 
             $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
-
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= " compiler";
 
             echo '<div class="redux-border">';
         
@@ -113,7 +110,7 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
 
             echo '</select>';   
 
-            echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][color]" id="' . $this->field['id'] . '-color" class="redux-border-color redux-color ' . $class . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $this->field['std']['color'] . '" />';
+            echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][color]" id="' . $this->field['id'] . '-color" class="redux-border-color redux-color ' . $class . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $this->field['default']['color'] . '" />';
             
             echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
             
