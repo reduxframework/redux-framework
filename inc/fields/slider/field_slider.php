@@ -51,12 +51,16 @@ class ReduxFramework_slider extends ReduxFramework{
 			$this->field['step'] = intval($this->field['step']);
 		}	
 	
-		if(empty($this->value) && !empty($this->field['default'])) { 
+		if(empty($this->value) && !empty($this->field['default']) && intval($this->field['min']) >= 1 ) { 
 			$this->value = intval($this->field['default']);
 		}
 
-		if (empty($this->value)) {
+		if (empty($this->value) && intval($this->field['min']) >= 1) {
 			$this->value = intval($this->field['min']);
+		}
+
+		if (empty($this->value)) {
+			$this->value = 0;
 		}
 
 		// Extra Validation

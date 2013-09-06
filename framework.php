@@ -95,7 +95,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['footer_credit']      = __( '<span id="footer-thankyou">Options panel created using <a href="' . $this->framework_url . '" target="_blank">Redux Framework</a> v' . $this->framework_version . '</span>', 'redux-framework' );
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = __( '', 'redux-framework' );
-			$defaults['theme_mods'] 		= false;
+			$defaults['theme_mods'] 		= true;
 			$defaults['theme_mods_expand'] 	= false;
 			$defaults['transient'] 			= false;
 			$defaults['transient_time'] 	= 1 * MINUTE_IN_SECONDS;
@@ -879,7 +879,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if( class_exists( $validate ) ) {
                             	//!DOVY - DB saving stuff. Is this right?
                             	if (empty($options[$field['id']])) {
-                            		//$options[$field['id']] = "";
+                            		$options[$field['id']] = '';
                             	}
 
                                 $validation = new $validate( $field, $plugin_options[$field['id']], $options[$field['id']] );
