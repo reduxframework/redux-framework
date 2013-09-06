@@ -8,6 +8,7 @@ The items on this list need to be accomplished before the official release of Re
 * Data-based checkbox and selects fail to show if no data is available. Ideally, it should show a single disabled entry such as '--No Data Available--'.
 * Multiselect fields aren't showing complete placeholders (cutting off at 'Select an').
 * I'd like to find a better theme for the date dropdown, it doesn't quite seem to fit.
+* Fix responsive CSS
 
 ## Spelling/Textual Issues ##
 
