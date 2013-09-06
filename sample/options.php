@@ -845,7 +845,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'switch-custom',
 				'type' => 'switch', 
-				'title' => __('Switch - Custom Titles)', 'redux-framework'),
+				'title' => __('Switch - Custom Titles', 'redux-framework'),
 				'subtitle'=> __('Look, it\'s on! Also hidden child elements!', 'redux-framework'),
 				"default" 		=> 0,
 				'on' => 'Enabled',

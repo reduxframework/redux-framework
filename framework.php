@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -95,8 +96,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = __( '', 'redux-framework' );
 			$defaults['theme_mods'] 		= false;
+			$defaults['theme_mods_expand'] 	= false;
 			$defaults['transient'] 			= false;
-			$defaults['transient_time'] 	= 2 * MINUTE_IN_SECONDS;
+			$defaults['transient_time'] 	= 1 * MINUTE_IN_SECONDS;
 
             // The defaults are set so it will preserve the old behavior.
             $defaults['default_show']		= false; // If true, it shows the default value
@@ -134,9 +136,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( $this->args['default_show'] == true ) {
                 if( (isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true') || get_transient( 'redux-saved-' . $this->args['opt_name'] ) == '1' ) {
                 	return;
-                }
-
-                    
+                }   
 
                 if( is_null( $this->options_defaults ) )
                     $this->_default_values(); // fill cache
@@ -183,13 +183,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 * @param mixed $value the value of the option being added
 		 */
 		function set_options( $value = '' ) {
-			if( $value = '' ) {
+			if( !empty($value) ) {
 				if ( $this->args['transient'] === true ) {
-					set_transient( $this->args['opt_name'], $value, $this->args['transient_time'] );
+					set_transient( $this->args['opt_name'] . '-transient', $value, $this->args['transient_time'] );
 				} else if ( $this->args['theme_mods'] === true ) {
-					set_theme_mod( $this->args['opt_name'], $value );
+					set_theme_mod( $this->args['opt_name'] . '-mods', $value );	
+				} else if ( $this->args['theme_mods_expand'] === true ) {
+					foreach ( $value as $k=>$v ) {
+						set_theme_mod( $k, $v );
+					}
 				} else {
-					set_options( $this->args['opt_name'], $value );
+					update_option( $this->args['opt_name'], $value );
 				}
 			}
 		}
@@ -200,17 +204,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 * @since ReduxFramework 3.0.0
 		 */
 		function get_options() {
+			$defaults = false;
+			if ( !empty( $this->defaults ) ) {
+				$defaults = $this->defaults;
+			}			
 			if ( $this->args['transient'] === true ) {
-				$result = get_transient( $this->args['opt_name'] );
+				$result = get_transient( $this->args['opt_name'] . '-transient' );
 			} else if ($this->args['theme_mods'] === true ) {
-				$result = get_theme_mod( $this->args['opt_name'] );
+				$result = get_theme_mod( $this->args['opt_name'] . '-mods' );
+			} else if ( $this->args['theme_mods_expand'] === true ) {
+				$result = get_theme_mods();
 			} else {
-				$defaults = false;
-				if ( !empty( $this->defaults ) ) {
-					$defaults = $this->defaults;
-				}
 				$result = get_option( $this->args['opt_name'], $defaults );
 			}
+			//print_r($result);
 			return $result;
 		}
 
@@ -706,41 +713,41 @@ if( !class_exists( 'ReduxFramework' ) ) {
 							$th = '';
 						}
 
-			if ( $this->args['default_show'] === true && !empty( $field['default'] ) ) {
-			    if (!is_array($field['default'])) {
-				$default_output = __( 'Default', 'redux-framework' ) . ": " . $field['default'];
-			    } else {
-				$default_output = "";
-				foreach( $field['default'] as $defaultk => $defaultv ) {
-				    $default_output .= $defaultk . ": " . $defaultv.', ';
-				}
-				if ( !empty( $default_output ) ) {
-				    $default_output = substr($default_output, 0, -2);
-				}
-			    }
-			    $th .= '<span class="showDefaults">'.$default_output.'</span>';
-                        }
+						if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] ) {
+						    if (!is_array($field['default'])) {
+								$default_output = __( 'Default', 'redux-framework' ) . ": " . $field['default'];
+						    } else {
+								$default_output = "";
+								foreach( $field['default'] as $defaultk => $defaultv ) {
+								    $default_output .= $defaultk . ": " . $defaultv.', ';
+								}
+								if ( !empty( $default_output ) ) {
+								    $default_output = substr($default_output, 0, -2);
+								}
+						   	}
+						    $th .= '<span class="showDefaults">'.$default_output.'</span>';
+			            }
 
-                        $field = apply_filters( 'redux-field-' . $field['id'] . 'modifier-' . $this->args['opt_name'], $field );
+			            $field = apply_filters( 'redux-field-' . $field['id'] . 'modifier-' . $this->args['opt_name'], $field );
 
-			if ( !empty( $field['fold'] ) ) { // This has some fold items, hide it by default
-			    if ( empty( $field['class'] ) ) {
-				$field['class'] = "fold";
-			    } else {
-				$field['class'] .= " fold";
-			    }
-			    if ( empty( $this->folds ) ) { // Get the fold values
-				$this->folds = $this->_fold_values();
-			    }
-			}
-			if ( !empty( $this->folds[$field['id']] ) ) { // Sets the values you shoe fold children on
-			    $field['fold_children'] = $this->folds[ $field['id'] ];
-			    $field['class'] .= " foldParent";
-			}
-			if ( !empty( $this->compiler ) ) {
-				$field['clas'] .= " compiler";
-			}
-			$this->sections[$k]['fields'][$fieldk] = $field;
+						if ( !empty( $field['fold'] ) ) { // This has some fold items, hide it by default
+						    if ( empty( $field['class'] ) ) {
+								$field['class'] = "fold";
+						    } else {
+								$field['class'] .= " fold";
+						    }
+						    if ( empty( $this->folds ) ) { // Get the fold values
+								$this->folds = $this->_fold_values();
+						    }
+						}
+						if ( !empty( $this->folds[$field['id']] ) ) { // Sets the values you shoe fold children on
+						    $field['fold_children'] = $this->folds[ $field['id'] ];
+						    $field['class'] .= " foldParent";
+						}
+						if ( !empty( $this->compiler ) ) {
+							$field['clas'] .= " compiler";
+						}
+						$this->sections[$k]['fields'][$fieldk] = $field;
 
                         add_settings_field( $fieldk . '_field', $th, array( &$this, '_field_input' ), $this->args['opt_name'] . $k . '_section_group', $this->args['opt_name'] . $k . '_section', $field ); // checkbox
                     }
@@ -781,6 +788,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
 				    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
 						$this->set_options( $plugin_options );
+						return $this->options;
 				    }
                     return $plugin_options;
                 }
@@ -790,9 +798,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $plugin_options = $this->_default_values();
                 set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                 unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
-		if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
-		    $this->set_options( $plugin_options );
-		}
+				if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
+				    $this->set_options( $plugin_options );
+					return $this->options;
+				}
                 return $plugin_options;
             }
 
@@ -807,17 +816,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             do_action( 'redux-validate-' . $this->args['opt_name'], $plugin_options, $this->options );
 
-            if( !empty( $plugin_options['compiler'] ) )
-                set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+            if( !empty( $plugin_options['compiler'] ) ) {
+            	set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+            }
 
             unset( $plugin_options['defaults'] );
             unset( $plugin_options['import'] );
             unset( $plugin_options['import_code'] );
             unset( $plugin_options['import_link'] );
             unset( $plugin_options['compiler'] );
-	    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
-		$this->set_options( $plugin_options );
-	    }
+		    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
+				$this->set_options( $plugin_options );
+				return $this->options;
+		    }
             return $plugin_options;
         }
 
@@ -866,6 +877,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
 
                             if( class_exists( $validate ) ) {
+                            	//!DOVY - DB saving stuff. Is this right?
+                            	if (empty($options[$field['id']])) {
+                            		//$options[$field['id']] = "";
+                            	}
+
                                 $validation = new $validate( $field, $plugin_options[$field['id']], $options[$field['id']] );
                                 $plugin_options[$field['id']] = $validation->value;
 
