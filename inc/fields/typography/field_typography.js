@@ -21,10 +21,10 @@ jQuery(document).ready(function($) {
 
 	function typographySelect(mainID, selector) {
 		if ($(selector).hasClass('redux-typography-family')) {
-			$('#' + mainID + ' .typography-style span').text('');
-			$('#' + mainID + ' .typography-script span').text('');
-			$('#' + mainID + ' .redux-typography-style').val('');
-			$('#' + mainID + ' .redux-typography-script').val('');
+			//$('#' + mainID + ' .typography-style span').text('');
+			//$('#' + mainID + ' .typography-script span').text('');
+			//$('#' + mainID + ' .redux-typography-style').val('');
+			//$('#' + mainID + ' .redux-typography-script').val('');
 		}
 		var family = $('#' + mainID + ' select.redux-typography-family ').val();
 		var size = $('#' + mainID + ' .redux-typography-size').val();
@@ -34,20 +34,22 @@ jQuery(document).ready(function($) {
 		var color = $('#' + mainID + ' .redux-typography-color').val();
 		var units = $('#' + mainID).data('units');
 		var option = $('#' + mainID + ' .redux-typography-family option:selected');
+		console.log(jQuery.parseJSON(decodeURIComponent(option.data('details'))));
 		var google = option.data('google');
 		var details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
 		var selected = "";
 		var html = "";
 
-		if (google && $(selector).hasClass('redux-typography-family')) {
+		if ($(selector).hasClass('redux-typography-family')) {
 			html = '<option value=""></option>';
-			for (var i = 0; i <= Object.size(details.variants); i++) {
+			for (var i = 0; i < Object.size(details.variants); i++) {
 				if (details.variants[i] === null) {
 					continue;
 				}
-				if ( (details.variants[i] && details.variants[i].id === style) || Object.size(details.variants) === 1) {
+				console.log(details.variants[i]);
+				if ( (typeof(details.variants[i].id) !== undefined && details.variants[i] && details.variants[i].id === style) || Object.size(details.variants) === 1) {
 					selected = ' selected="selected"';
-					$('#' + mainID + ' .typography-style span').text(details.variants[i].name.replace('+', ' '));
+					$('#' + mainID + ' .typography-style .select2-chosen').text(details.variants[i].name.replace('+', ' '));
 				} else {
 					selected = "";
 				}
@@ -56,29 +58,31 @@ jQuery(document).ready(function($) {
 			$('#' + mainID + ' .redux-typography-style').html(html);
 			html = '<option value=""></option>';
 			for (i = 0; i <= Object.size(details.subsets); i++) {
-				if (details.subsets[i] === null) {
+				if (typeof(details.subsets[i]) === undefined) {
 					continue;
 				}
 				if (details.subsets[i].id === script || Object.size(details.subsets) === 1) {
 					selected = ' selected="selected"';
-					$('#' + mainID + ' .typography-script span').text(details.subsets[i].name.replace('+', ' '));
+					$('#' + mainID + ' .typography-script .select2-chosen').text(details.subsets[i].name.replace('+', ' '));
 				} else {
 					selected = "";
 				}
 				html += '<option value="' + details.subsets[i].id + '"' + selected + '>' + details.subsets[i].name.replace(/\+/g, " ") + '</option>';
 			}
 			$('#' + mainID + ' .redux-typography-script').html(html);
-		} else {
+		} 
+
+		/*else {
 			if ($(selector).hasClass('redux-typography-family')) {
 				$('#' + mainID + ' .redux-typography-script').html('');
 				$('#' + mainID + ' .redux-typography-style').html('');
-				$('#' + mainID + ' .typography-style span').text('');
-				$('#' + mainID + ' .typography-script span').text('');
+				$('#' + mainID + ' .typography-style .select2-chosen').text('');
+				$('#' + mainID + ' .typography-script .select2-chosen').text('');
 				html = '<option value=""></option>';
 				$.each(details, function(index, value) {
 					if (index === "normal") {
 						selected = ' selected="selected"';
-						$('#' + mainID + ' .typography-style span').text(value);
+						$('#' + mainID + ' .typography-style .select2-chosen').text(value);
 					} else {
 						selected = "";
 					}
@@ -87,6 +91,7 @@ jQuery(document).ready(function($) {
 				$('#' + mainID + ' .redux-typography-style').html(html);
 			}
 		}
+		*/
 		var _linkclass = 'style_link_' + mainID;
 		if (family) { //if var exists and isset
 			//Check if selected is not equal with "Select a font" and execute the script.
@@ -134,8 +139,8 @@ jQuery(document).ready(function($) {
 			}
 			$('#' + mainID + ' .typography-preview').css('color', color);
 		}
-		$('#' + mainID + ' .typography-style span').text($('#' + mainID + ' .redux-typography-style option:selected').text());
-		$('#' + mainID + ' .typography-script span').text($('#' + mainID + ' .redux-typography-script option:selected').text());
+		$('#' + mainID + ' .typography-style .select2-chosen').text($('#' + mainID + ' .redux-typography-style option:selected').text());
+		$('#' + mainID + ' .typography-script .select2-chosen').text($('#' + mainID + ' .redux-typography-script option:selected').text());
 	}
 	//init for each element
 	jQuery('.redux-typography-container').each(function() {
@@ -164,8 +169,8 @@ jQuery(document).ready(function($) {
 	jQuery(".redux-typography-size, .redux-typography-height").numeric({
 		negative: false
 	});
-//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-script").select2({
-	jQuery(".redux-typography-family").select2({
+jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-script").select2({
+//	jQuery(".redux-typography-family").select2({
 		width: 'resolve',
 		triggerChange: true,
 		allowClear: true

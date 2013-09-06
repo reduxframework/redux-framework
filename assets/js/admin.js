@@ -2,6 +2,7 @@
 
 jQuery.noConflict();
 var confirmOnPageExit = function(e) {
+	return; // ONLY FOR DEBUGGING
 		// If we haven't been passed the event get the window.event
 		e = e || window.event;
 		var message = redux_opts.save_pending;

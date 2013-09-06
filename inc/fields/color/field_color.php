@@ -67,7 +67,12 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 			$class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
 		
 			echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '" class="redux-color redux-color-init ' . $class . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
-		
+			$tChecked = "";
+			if ( $this->value == "transparent" ) {
+				$tChecked = ' checked="checked"';
+			}
+			echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'].'" value="1"'.$tChecked.'> Transparent</label>';
+
 			echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 		
 			echo '</div>';

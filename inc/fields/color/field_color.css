@@ -25,3 +25,4 @@ input[type="text"].iris-error{background-color:#ffebe8;border-color:#c00;color:#
 #redux-main .wp-picker-container .wp-picker-open{m2argin-top:-23px}
 #redux-main .wp-picker-container input{margin-bottom:inherit;margin-top:inherit}
 #redux-main .wp-picker-container .wp-picker-default{padding:0 10px 1px}
+#redux-main input.color-transparency{margin-left:10px;margin-right:3px}

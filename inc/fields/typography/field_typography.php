@@ -142,11 +142,11 @@ class ReduxFramework_typography extends ReduxFramework{
 
 
     /** 
-    Font Weight 
+    Font Style/Weight 
     **/
     if ($this->field['style'] === true):
       echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-framework').'">';
-      echo '<select data-placeholder="'.__('Style','redux-framework').'" class="redux-typography redux-typography-style select'.$class.'" original-title="'.__('Font style','redux-framework').'" name="'.$this->field['id'].'[style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'" data-value="'.$this->value['style'].'">';
+      echo '<select data-placeholder="'.__('Style','redux-framework').'" class="redux-typography redux-typography-style select'.$class.'" original-title="'.__('Font style','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'" data-value="'.$this->value['style'].'">';
 		 	if (empty($this->value['style'])) {
 		 		echo '<option value=""></option>';
 		 	}
