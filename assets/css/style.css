@@ -143,3 +143,4 @@ label.radio,label.multicheck{position:relative}
 .wrap{margin-top:0}
 .redux-group-tab-link-li i{margin-right:10px}
 .showDefaults{font-weight:normal;font-size:.8em;color:#888}
+.select2-default{width:auto !important}
