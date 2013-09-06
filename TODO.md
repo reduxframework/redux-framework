@@ -15,7 +15,8 @@ The items on this list need to be accomplished before the official release of Re
 
 ## Other Issues ##
 
-* Currently missing fields (at least in the demo) - raw HTML, switch
+* Currently missing fields (at least in the demo) - raw HTML
 * Add debugging info to Dev Mode tab
 * Can we find a better place to put the footer_text content? Doesn't feel right now.
 * Update sample options to show the correct facebook link, and drop LinkedIn
+* Update sample options home tab
