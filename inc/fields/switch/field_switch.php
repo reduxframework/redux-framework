@@ -28,13 +28,10 @@ class ReduxFramework_switch extends ReduxFramework{
 	*/
 	function render(){
 
-		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
+		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
 		if (!empty($this->field['compiler']) && $this->field['compiler']) {
 			$class .= " compiler";
 		}
-
-		$fold = '';
-		//if (array_key_exists("folds",$this->value)) $fold="s_fld ";
 		
 		$cb_enabled = $cb_disabled = '';//no errors, please
 					
@@ -59,14 +56,14 @@ class ReduxFramework_switch extends ReduxFramework{
 		//Label OFF
 		if(!isset($this->field['off'])){
 			$off = "Off";
-		}else{
+		} else{
 			$off = $this->field['off'];
 		}
 		
 		echo '<div class="switch-options">';
-			echo '<label class="'.$fold.'cb-enable'. $cb_enabled .'" data-id="'.$this->field['id'].'"><span>'. $on .'</span></label>';
-			echo '<label class="'.$fold.'cb-disable'. $cb_disabled .'" data-id="'.$this->field['id'].'"><span>'. $off .'</span></label>';
-			echo '<input type="hidden" class="'.$fold.'checkbox checkbox-input'.$class.'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" />';
+			echo '<label class="cb-enable'. $cb_enabled .'" data-id="'.$this->field['id'].'"><span>'. $on .'</span></label>';
+			echo '<label class="cb-disable'. $cb_disabled .'" data-id="'.$this->field['id'].'"><span>'. $off .'</span></label>';
+			echo '<input type="hidden" class="checkbox checkbox-input'.$class.'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" />';
 		echo '</div>';
 
 		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';

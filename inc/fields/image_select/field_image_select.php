@@ -62,7 +62,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
          */
         public function render() {
         
-            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
+            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] : '';
 
             if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
                 $class .= ' compiler';
@@ -71,7 +71,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
             
             if( !empty( $this->field['options'] ) ) {
 
-                echo '<ul class="redux-image-select">';
+                echo '<ul class="redux-image-select" id="'.$this->field['id'].'">';
             
                 foreach( $this->field['options'] as $k => $v ) {
 

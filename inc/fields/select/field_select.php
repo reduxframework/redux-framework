@@ -88,7 +88,7 @@ class ReduxFramework_select extends ReduxFramework{
 			}//if
 		}//if
 
-		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
+		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
 		if (!empty($this->field['compiler']) && $this->field['compiler']) {
 			$class .= " compiler";
 		}

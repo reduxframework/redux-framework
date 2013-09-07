@@ -28,7 +28,7 @@ class ReduxFramework_slider extends ReduxFramework{
 	*/
 	function render(){
 		
-		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
+		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
 		if (!empty($this->field['compiler']) && $this->field['compiler']) {
 			$class .= " compiler";
 		}
@@ -110,7 +110,7 @@ class ReduxFramework_slider extends ReduxFramework{
 		wp_enqueue_script(
 			'redux-slider-js', 
 			REDUX_URL.'inc/fields/slider/field_slider.min.js', 
-			array('jquery'),
+			array('jquery', 'jquery-numeric'),
 			time(),
 			true
 		);		

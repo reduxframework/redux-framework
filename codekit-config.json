@@ -957,17 +957,6 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_ua.min.js",
       "fileType" : 64
     },
-    "\/assets\/img\/social\/Google.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Google.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Google.png",
-      "initialSize" : 704,
-      "fileType" : 8192
-    },
     "\/assets\/js\/vendor\/jquery.numeric.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -978,6 +967,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/jquery.numeric.min.js",
       "fileType" : 64
+    },
+    "\/assets\/img\/social\/Google.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Google.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Google.png",
+      "initialSize" : 704,
+      "fileType" : 8192
     },
     "\/inc\/fields\/_old\/menu_select\/field_menu_select.php" : {
       "ignoreWasSetByUser" : 0,

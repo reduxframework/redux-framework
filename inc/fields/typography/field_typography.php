@@ -37,7 +37,7 @@ class ReduxFramework_typography extends ReduxFramework{
 		}  
 
 
-		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
+		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
 	
 		// No errors please
 		$defaults = array(
@@ -78,7 +78,7 @@ class ReduxFramework_typography extends ReduxFramework{
 	
 		
 	  echo '<div id="'.$this->field['id'].'-container" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
-
+echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 	  /**
 			Font Family
 		**/
@@ -273,7 +273,6 @@ class ReduxFramework_typography extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function enqueue(){
-
 		wp_enqueue_script( 'select2-js' );
 		wp_enqueue_style( 'select2-css' );	
 

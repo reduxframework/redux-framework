@@ -17,61 +17,68 @@ jQuery('.redux-action_bar, .redux-presets-bar').click(function() {
 	window.onbeforeunload = null;
 });
 
-function verify_fold(variable) {
-	console.log(variable);
-	/*
-	return;
-	jQuery(document).ready(function($) {
-		// Hide errors if the user changed the field
-		if (variable.hasClass('fold')) {
-			var varVisible = jQuery('#' + variable.attr('id')).closest('td').is(":visible");
-			var fold = variable.attr('data-fold').split(',');
-			var value = variable.val();
-			$.each(fold, function(n) {
-				var theData = variable.data(fold[n]);
-				var hide = false;
-				if (theData === value) {
-					hide = true;
-				}
-				if (theData instanceof String) {
-					if (theData.indexOf(",") !== -1) {
-						theData = theData.split(",");
-					} else {
-						theData = theData.split();
-					}
-				}
-				if (!hide && jQuery.inArray(value, theData) !== -1) {
-					hide = true;
-				}
-				var foldChild = jQuery('#' + fold[n]);
-				if (!hide && varVisible) {
-					jQuery('#foldChild-' + fold[n]).parent().parent().fadeIn('medium', function() {
-						if (foldChild.hasClass('fold')) {
-							verify_fold(foldChild);
-						}
-					});
-				} else {
-					jQuery('#foldChild-' + fold[n]).parent().parent().fadeOut('medium', function() {
-						if (foldChild.hasClass('fold')) {
-							verify_fold(foldChild);
-						}
-					});
-				}
-			});
-		}
-	});
-*/
+
+
+function enumerate(o,s){
+
+    //if s isn't defined, set it to an empty string
+    s = typeof s !== 'undefined' ? s : "";
+
+    //iterate across o, passing keys as k and values as v
+    $.each(o, function(k,v){
+
+        //if v has nested depth
+        if(typeof v == "object"){
+
+            //write the key to the console
+            console.log(s+k+": ");
+
+            //recursively call enumerate on the nested properties
+            enumerate(v,s+"  ");
+
+        } else {
+
+            //log the key & value
+            console.log(s+k+": "+v);
+        }
+    });
 }
 
+	function verify_fold(item) {
+		jQuery(document).ready(function($) {
+		var itemVal = item.val();
+			$.each( redux_opts.folds[item.attr('id')] , function( index, value ) {
+				var show = false;
+				for (var i = 0; i < value.length; i++) {
+					if (value[i] == itemVal) {
+						show = true;
+					}
+				};
+				var hidden = jQuery('#'+index).parents("tr:first").is(":hidden");
+				if (show && hidden) {
+					if (jQuery('#'+index).parents("tr:first").is(":hidden")) {
+						jQuery('#'+index).parents("tr:first").fadeIn();
+					}
+				} else if (!show && !hidden) {
+					if (jQuery('#'+index).parents("tr:first").is(":visible")) {
+						jQuery('#'+index).parents("tr:first").fadeOut();
+					}
+				}			
+			});
+		});
+	}
+
+
 function redux_change(variable) {
-	//console.log('value changed!');
 	if (variable.hasClass('compiler')) {
 		jQuery('#redux-compiler-hook').val(1);
 		//console.log('Compiler init');
 	}
+	if (variable.hasClass('foldParent')) {
+		verify_fold(variable);
+	}
 	window.onbeforeunload = confirmOnPageExit;
 	jQuery(document).ready(function($) {
-		verify_fold(variable); // Verify if the variable is visible
 		if ($(this).hasClass('redux-field-error')) {
 			$(this).removeClass('redux-field-error');
 			$(this).parent().find('.redux-th-error').slideUp();
@@ -89,6 +96,7 @@ function redux_change(variable) {
 }
 
 jQuery(document).ready(function($) { /**	Tipsy @since v1.3 */
+
 	if (jQuery().tipsy) {
 		$('.tips').tipsy({
 			fade: true,
@@ -98,26 +106,10 @@ jQuery(document).ready(function($) { /**	Tipsy @since v1.3 */
 	}
 
 /**
-		Unfolding elements. Used by switch, checkbox, select
-	**/
-	//(un)fold options in a checkbox-group
-	jQuery('.fld').click(function() {
-		var $fold = '.f_' + this.id;
-		$($fold).slideToggle('normal', "swing");
-	});
-	// (un)fold options where the id equals the value
-	jQuery('.fld-parent').change(function() {
-		var $fold = '.f_' + this.id + "-" + this.val();
-		$($fold).slideToggle('normal', "swing");
-	});
-/**
 		Current tab checks, based on cookies
 	**/
 	jQuery('.redux-group-tab-link-a').click(function() {
 		relid = jQuery(this).data('rel'); // The group ID of interest
-		$('#' + relid).children('.fold').each(function() {
-			verify_fold(jQuery(this));
-		});
 		// Set the proper page cookie
 		$.cookie('redux_current_tab', relid, {
 			expires: 7,
@@ -299,39 +291,7 @@ jQuery(document).ready(function($) { /**	Tipsy @since v1.3 */
 	jQuery('.redux-save').click(function() {
 		window.onbeforeunload = null;
 	});
-	jQuery('.fold-data').each(function() {
-		var id = jQuery(this).attr('id').replace("foldChild-", "");
-		var foldata = jQuery(this).attr('id');
-		var data = jQuery(this).val(); // Items that make this element fold
-		var split = "";
-		if (data.indexOf(",") !== -1) {
-			split = data.split(',');
-		} else {
-			split = data.split();
-		}
-		jQuery.each(split, function(n) {
-			var fid = jQuery('#' + split[n]); // ID of the unit that causes a fold
-			fid.addClass('fold'); // Add the fold class
-			var ndata = jQuery('#' + foldata).attr('data-' + split[n]); // The values of fid that cause the fold
-			if (fid.attr('data-' + id)) { // If this fold object already has values that cause a fold
-				ndata = fid.attr('data-' + id) + "," + ndata;
-			}
-			fid.attr('data-' + id, ndata);
-			// This is where we say, these are the elements that cause you to hide!
-			var fold = "";
-			var fdata = jQuery('#' + split[n]);
-			var currentData = jQuery('#' + split[n]).attr('data-fold');
-			if (typeof(fdata) !== 'undefined' && typeof(currentData) !== 'undefined') {
-				fold += jQuery('#' + split[n]).attr('data-fold'); // All what's already there	
-			}
-			if (fold !== "") {
-				fold += ",";
-			}
-			fold += id;
-			jQuery('#' + split[n]).attr('data-fold', fold);
-			verify_fold(jQuery('#' + split[n]));
-		});
-	});
+	
 /*
 	// Markdown Viewer for Theme Documentation
 	if ($('#theme_docs_section_group').length !== 0) {
@@ -341,4 +301,19 @@ jQuery(document).ready(function($) { /**	Tipsy @since v1.3 */
 		jQuery('#theme_docs_section_group').html(text);
 	}
 */
+
+
+	// Hide the fold elements on load
+	jQuery('.fold').each(function() {
+		jQuery(this).parents("tr:first").hide();
+	});
+	// Hide the fold elements on load
+	jQuery('.foldParent').each(function() {
+		verify_fold(jQuery(this));
+	});
+
+
+	
+
 });
+

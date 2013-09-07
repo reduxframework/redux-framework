@@ -855,12 +855,29 @@ function setup_framework_options(){
 			array(
 				'id'=>'switch-fold',
 				'type' => 'switch', 
-				'fold' => array('switch-custom'),						
+				//'fold' => array('switch-custom'),						
 				'title' => __('Switch - With Hidden Items (NESTED!)', 'redux-framework'),
 				'subtitle'=> __('Also called a "fold" parent.', 'redux-framework'),
 				'desc' => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework'),
-				'default' 		=> 0,
+				'default' => 0,
 				),	
+			array(
+				'id'=>'patterns',
+				'type' => 'image_select', 
+				'tiles' => true,
+				'fold' => array('switch-fold'=>0),
+				'title' => __('Images Option (with pattern=>true)', 'redux-framework'),
+				'subtitle'=> __('Select a background pattern.', 'redux-framework'),
+				'default' 		=> 0,
+				'options' => array(
+								'1' => array('alt' => '1 Column', 'img' => REDUX_URL.'assets/img/1col.png'),
+								'2' => array('alt' => '2 Column Left', 'img' => REDUX_URL.'assets/img/2cl.png'),
+								'3' => array('alt' => '2 Column Right', 'img' => REDUX_URL.'assets/img/2cr.png'),
+								'4' => array('alt' => '3 Column Middle', 'img' => REDUX_URL.'assets/img/3cm.png'),
+								'5' => array('alt' => '3 Column Left', 'img' => REDUX_URL.'assets/img/3cl.png'),
+								'6' => array('alt' => '3 Column Right', 'img' => REDUX_URL.'assets/img/3cr.png')
+									),
+				),			
             array(
                 "id" => "homepage_blocks",
                 "type" => "sorter",
@@ -887,23 +904,7 @@ function setup_framework_options(){
 				'subtitle'=> __('Unlimited slider with drag and drop sortings.', 'redux-framework'),
 				),
 */
-			array(
-				'id'=>'patterns',
-				'type' => 'image_select', 
-				'tiles' => true,
-				'fold' => array('switch-fold'=>array(0)),
-				'title' => __('Images Option (with pattern=>true)', 'redux-framework'),
-				'subtitle'=> __('Select a background pattern.', 'redux-framework'),
-				'default' 		=> 0,
-				'options' => array(
-								'1' => array('alt' => '1 Column', 'img' => REDUX_URL.'assets/img/1col.png'),
-								'2' => array('alt' => '2 Column Left', 'img' => REDUX_URL.'assets/img/2cl.png'),
-								'3' => array('alt' => '2 Column Right', 'img' => REDUX_URL.'assets/img/2cr.png'),
-								'4' => array('alt' => '3 Column Middle', 'img' => REDUX_URL.'assets/img/3cm.png'),
-								'5' => array('alt' => '3 Column Left', 'img' => REDUX_URL.'assets/img/3cl.png'),
-								'6' => array('alt' => '3 Column Right', 'img' => REDUX_URL.'assets/img/3cr.png')
-									),
-				),		
+					
 			array(
 				'id'=>'presets',
 				'type' => 'image_select', 

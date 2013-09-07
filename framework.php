@@ -138,8 +138,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 	return;
                 }   
 
-                if( is_null( $this->options_defaults ) )
-                    $this->_default_values(); // fill cache
+                if( is_null( $this->options_defaults ) ) {
+                	$this->_default_values(); // fill cache
+                }
 
                 $default = array_key_exists( $opt_name, $this->options_defaults ) ? $this->options_defaults[$opt_name] : $default;
             }
@@ -195,6 +196,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				} else {
 					update_option( $this->args['opt_name'], $value );
 				}
+				do_action( 'redux-saved-' . $this->args['opt_name'] , $value );
 			}
 		}
 
@@ -275,46 +277,68 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		    */
 		    $folds = array();
 		    if( !is_null( $this->sections ) && is_null( $this->options_defaults ) ) {
-			foreach( $this->sections as $section ) {
-			    if( isset( $section['fields'] ) ) {
-					foreach( $section['fields'] as $field ) {
-					    if( isset( $field['fold'] ) )
-							if ( !is_array( $field['fold'] ) ) {
-							    /*
-								Example variable:
-								    $var = array(
-									'fold' => 'id'
-									);
-							    */
-							    $folds[$field['fold']][1][] = $field['id'];
-							} else {
-							    foreach( $field['fold'] as $foldk=>$foldv ) {
-									if ( is_array( $foldv ) ) {
-									    /*
-										Example variable:
-										    $var = array(
-											'fold' => array( 'id' => array(1, 5) )
-										    );
-									    */
-									    foreach ($foldv as $foldvValue) {
-											$folds[$foldk][$foldvValue][] = $field['id'];
-									    }
-									} else {
-									    /*
-										Example variable:
-										    $var = array(
-											'fold' => array( 'id' => 1 )
-										    );
-									    */
-									    $folds[$foldk][$foldv][] = $field['id'];
-									}
-							    }
-							}
-					    }
-					}
-			    }
+				foreach( $this->sections as $section ) {
+				    if( isset( $section['fields'] ) ) {
+						foreach( $section['fields'] as $field ) {
+						    if( isset( $field['fold'] ) ) {
+								if ( !is_array( $field['fold'] ) ) {
+								    /*
+									Example variable:
+									    $var = array(
+										'fold' => 'id'
+										);
+								    */
+								    $folds[$field['fold']][$field['id']][] = 1;
+								} else {
+								    foreach( $field['fold'] as $foldk=>$foldv ) {
+										if ( is_array( $foldv ) ) {
+										    /*
+											Example variable:
+											    $var = array(
+												'fold' => array( 'id' => array(1, 5) )
+											    );
+										    */
+											
+										    foreach ($foldv as $foldvValue) {
+										    	//echo $field['id']." key-".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
+												$folds[$foldk][$field['id']][] = $foldvValue;
+										    }
+										} else {
+											//!DOVY If there's a problem, this is where it's at. These two cases.
+											//This may be able to solve this issue if these don't work
+											//if (count($field['fold']) == count($field['fold'], COUNT_RECURSIVE)) {
+											//}
+
+											if (count($field['fold']) === 1 && is_numeric($foldk)) {
+												/*
+												Example variable:
+												    $var = array(
+													'fold' => array( 'id' )
+												    );
+											    */	
+	  											$folds[$foldv][$field['id']] = array(1);
+											} else {
+											    /*
+												Example variable:
+												    $var = array(
+													'fold' => array( 'id' => 1 )
+												    );
+											    */						
+											    if (empty($foldv)) {
+											    	$foldv = 0;
+											    }
+												$folds[$foldk][$field['id']] = array($foldv);	
+											}
+										}
+								    }
+								}
+						    }
+						}
+				    }
+				}
+				return $folds;
 			}
-		    return $folds;
+		    
 		}
 
         /**
@@ -337,12 +361,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		    // Grab database values
 		    $this->options = $this->get_options();
 
+            // Get the fold values
+            $this->folds = $this->_fold_values();		    
+
 		    // Set defaults if empty
 		    if( empty( $this->options ) && !empty( $this->sections ) ) {
 				$defaults = $this->_default_values();
 				$this->set_options( $defaults );
 				$this->options = $defaults;
 		    }
+
+			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
+				delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
+				do_action('redux-compiler-' . $this->args['opt_name'], $this->options );
+			}		    
         }
 
         /**
@@ -507,7 +539,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'redux-js',
-                REDUX_URL . 'assets/js/admin.min.js',
+                REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
+                //REDUX_URL . 'assets/js/admin.min.js',
                 array( 'jquery','jquery-cookie' ),
                 time(),
                 true
@@ -552,7 +585,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
                     'reset_confirm'     => __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 
                     'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
-                    'opt_name'          => $this->args['opt_name']
+                    'opt_name'          => $this->args['opt_name'],
+                    'folds'				=> $this->folds
                 )
             );
 
@@ -727,25 +761,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						   	}
 						    $th .= '<span class="showDefaults">'.$default_output.'</span>';
 			            }
-
+			            if (!isset($field['class'])) { // No errors please
+			            	$field['class'] = "";
+			            }
 			            $field = apply_filters( 'redux-field-' . $field['id'] . 'modifier-' . $this->args['opt_name'], $field );
-
 						if ( !empty( $field['fold'] ) ) { // This has some fold items, hide it by default
 						    if ( empty( $field['class'] ) ) {
 								$field['class'] = "fold";
 						    } else {
 								$field['class'] .= " fold";
 						    }
-						    if ( empty( $this->folds ) ) { // Get the fold values
-								$this->folds = $this->_fold_values();
-						    }
 						}
 						if ( !empty( $this->folds[$field['id']] ) ) { // Sets the values you shoe fold children on
-						    $field['fold_children'] = $this->folds[ $field['id'] ];
 						    $field['class'] .= " foldParent";
 						}
 						if ( !empty( $this->compiler ) ) {
-							$field['clas'] .= " compiler";
+							$field['class'] .= " compiler";
 						}
 						$this->sections[$k]['fields'][$fieldk] = $field;
 
@@ -754,6 +785,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
             }
             do_action( 'redux-register-settings-' . $this->args['opt_name'] );
+
         }
 
         /**
@@ -878,7 +910,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                             if( class_exists( $validate ) ) {
                             	//!DOVY - DB saving stuff. Is this right?
-                            	if (empty($options[$field['id']])) {
+                            	if ( empty ( $options[$field['id']] ) ) {
                             		$options[$field['id']] = '';
                             	}
 
