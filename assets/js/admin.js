@@ -1,8 +1,8 @@
-/*global jQuery, document, redux_opts, confirm, relid:true, console */
+/*global jQuery, document, redux_opts, confirm, relid:true */
 
 jQuery.noConflict();
 var confirmOnPageExit = function(e) {
-	return; // ONLY FOR DEBUGGING
+	//return; // ONLY FOR DEBUGGING
 		// If we haven't been passed the event get the window.event
 		e = e || window.event;
 		var message = redux_opts.save_pending;
@@ -13,57 +13,51 @@ var confirmOnPageExit = function(e) {
 		// For Chrome, Safari, IE8+ and Opera 12+
 		return message;
 	};
-jQuery('.redux-action_bar, .redux-presets-bar').click(function() {
-	window.onbeforeunload = null;
-});
 
-
-
-function enumerate(o,s){
-
-    //if s isn't defined, set it to an empty string
-    s = typeof s !== 'undefined' ? s : "";
-
-    //iterate across o, passing keys as k and values as v
-    $.each(o, function(k,v){
-
-        //if v has nested depth
-        if(typeof v == "object"){
-
-            //write the key to the console
-            console.log(s+k+": ");
-
-            //recursively call enumerate on the nested properties
-            enumerate(v,s+"  ");
-
-        } else {
-
-            //log the key & value
-            console.log(s+k+": "+v);
-        }
-    });
-}
-
+	
 	function verify_fold(item) {
 		jQuery(document).ready(function($) {
 		var itemVal = item.val();
 			$.each( redux_opts.folds[item.attr('id')] , function( index, value ) {
 				var show = false;
-				for (var i = 0; i < value.length; i++) {
-					if (value[i] == itemVal) {
+				for ( var i = 0; i < value.length; i++ ) {
+					/**
+						DO NOT change this comarison to === even if JSLint says so. 
+						Will not work unless you cast to string like so:
+						String(value[i]) === String(itemVal)
+
+						BUT if you do so the cascading effect ceases to work!
+
+						LEAVE AS IS
+
+					**/
+					if ( value[i] == itemVal ) {
 						show = true;
 					}
-				};
+				}
 				var hidden = jQuery('#'+index).parents("tr:first").is(":hidden");
-				if (show && hidden) {
-					if (jQuery('#'+index).parents("tr:first").is(":hidden")) {
-						jQuery('#'+index).parents("tr:first").fadeIn();
+				if ( jQuery(item).parents("tr:first").is(":hidden") ) {
+					show = false;
+				}
+				if ( show && hidden ) {
+					if ( jQuery('#'+index).parents("tr:first").is(":hidden") ) {
+						jQuery('#'+index).parents("tr:first").fadeIn('medium', function() {
+							// Cascade the fold effect
+							if ( jQuery('#'+index).hasClass('foldParent') ) {
+								verify_fold( jQuery('#'+index) );
+							}
+						});
 					}
-				} else if (!show && !hidden) {
-					if (jQuery('#'+index).parents("tr:first").is(":visible")) {
-						jQuery('#'+index).parents("tr:first").fadeOut();
+				} else if ( !show && !hidden ) {
+					if ( jQuery('#'+index).parents("tr:first").is(":visible") ) {
+						jQuery('#'+index).parents("tr:first").fadeOut( 400, function() {
+							// Cascade the fold effect
+							if ( jQuery('#'+index).hasClass('foldParent') ) {
+								verify_fold( jQuery('#'+index) );
+							}
+						});
 					}
-				}			
+				}
 			});
 		});
 	}
@@ -95,8 +89,14 @@ function redux_change(variable) {
 	});
 }
 
-jQuery(document).ready(function($) { /**	Tipsy @since v1.3 */
+jQuery(document).ready(function($) {
 
+	jQuery('.redux-action_bar, .redux-presets-bar').on('click', function() {
+		window.onbeforeunload = null;
+	});
+
+
+	/**	Tipsy @since v1.3 */
 	if (jQuery().tipsy) {
 		$('.tips').tipsy({
 			fade: true,

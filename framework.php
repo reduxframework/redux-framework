@@ -539,8 +539,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'redux-js',
-                REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
-                //REDUX_URL . 'assets/js/admin.min.js',
+                //REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
+                REDUX_URL . 'assets/js/admin.min.js',
                 array( 'jquery','jquery-cookie' ),
                 time(),
                 true

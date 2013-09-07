@@ -855,7 +855,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'switch-fold',
 				'type' => 'switch', 
-				//'fold' => array('switch-custom'),						
+				'fold' => array('switch-custom'),						
 				'title' => __('Switch - With Hidden Items (NESTED!)', 'redux-framework'),
 				'subtitle'=> __('Also called a "fold" parent.', 'redux-framework'),
 				'desc' => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework'),
