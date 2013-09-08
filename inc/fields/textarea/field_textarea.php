@@ -28,12 +28,11 @@ class ReduxFramework_textarea {
     function render() {
         $name = $this->args['opt_name'] . '[' . $this->field['id'] . ']';
         $id = $this->field['id'];
-        $class = (isset($this->field['class'])) ? $this->field['class'] : 'large-text';
         $placeholder = (isset($this->field['placeholder'])) ? ' placeholder="' . esc_attr($this->field['placeholder']) . '" ' : '';
         $rows = (isset($this->field['placeholder'])) ? $this->field['rows'] : 6;
         ?>
 
-        <textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>" <?php echo $placeholder; ?> class="<?php echo $class; ?>" rows="<?php echo $rows; ?>"><?php echo esc_attr($this->value); ?></textarea>
+        <textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>" <?php echo $placeholder; ?> class="large-text <?php echo $this->field['class']; ?>" rows="<?php echo $rows; ?>"><?php echo esc_attr($this->value); ?></textarea>
 
         <?php if($this->field['desc'] != '') : ?>
             <br/><span class="description"><?php echo $this->field['desc']; ?></span>

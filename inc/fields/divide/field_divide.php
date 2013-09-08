@@ -62,9 +62,7 @@ if( !class_exists( 'ReduxFramework_divide' ) ) {
 		 */
 		public function render() {
 		
-			$class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '' : '';
-		
-			echo '</td></tr></table><div class="hr' . $class . '"/><div class="inner"><span>&nbsp;</span></div></div><table class="form-table no-border"><tbody><tr><th></th><td>';
+			echo '</td></tr></table><div class="hr' . $this->field['class'] . '"/><div class="inner"><span>&nbsp;</span></div></div><table class="form-table no-border"><tbody><tr><th></th><td>';
 
 		}
 	}	

@@ -62,14 +62,9 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          */
         public function render() {
         
-            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
-
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= ' compiler';
-        
             $settings = array(
                 'textarea_name' => $this->args['opt_name'] . '[' . $this->field['id'] . ']', 
-                'editor_class'  => $class
+                'editor_class'  => $this->field['class']
             );
 
             wp_editor( $this->value, $this->field['id'], $settings );

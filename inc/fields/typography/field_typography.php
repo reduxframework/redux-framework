@@ -35,9 +35,6 @@ class ReduxFramework_typography extends ReduxFramework{
 			require_once(ABSPATH .'/wp-admin/includes/file.php');
 			WP_Filesystem();
 		}  
-
-
-		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
 	
 		// No errors please
 		$defaults = array(
@@ -85,7 +82,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 	  if ($this->field['family'] === true):
 
 	    echo '<div class="select_wrapper typography-family" style="width: 220px; margin-right: 5px;">';
-	    echo '<select data-placeholder="'.__('Font family','redux-framework').'" class="redux-typography redux-typography-family '.$class.'" id="'.$this->field['id'].'-family" name="'.$this->args['opt_name'].'['.$this->field['id'].'][family]" data-id="'.$this->field['id'].'" data-value="'.$this->value['family'].'">';
+	    echo '<select data-placeholder="'.__('Font family','redux-framework').'" class="redux-typography redux-typography-family '.$this->field['class'].'" id="'.$this->field['id'].'-family" name="'.$this->args['opt_name'].'['.$this->field['id'].'][family]" data-id="'.$this->field['id'].'" data-value="'.$this->value['family'].'">';
 		 	echo '<option data-google="false" data-details="" value=""></option>';
 		 	echo '<optgroup label="Standard Fonts">';
 
@@ -134,7 +131,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 	    echo '</select></div>';
 
 	    if ($this->field['google'] === true) { // Set a flag so we know to set a header style or not
-				echo '<input type="hidden" class="redux-typography-google'.$class.'" id="'.$this->field['id'].'-google" name="'.$this->args['opt_name'].'['.$this->field['id'].'][google]" type="text" value="'. $this->field['google'] .'" data-id="'.$this->field['id'].'" />';
+				echo '<input type="hidden" class="redux-typography-google'.$this->field['class'].'" id="'.$this->field['id'].'-google" name="'.$this->args['opt_name'].'['.$this->field['id'].'][google]" type="text" value="'. $this->field['google'] .'" data-id="'.$this->field['id'].'" />';
 	    }
 	  
 	  endif;
@@ -146,7 +143,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
     **/
     if ($this->field['style'] === true):
       echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-framework').'">';
-      echo '<select data-placeholder="'.__('Style','redux-framework').'" class="redux-typography redux-typography-style select'.$class.'" original-title="'.__('Font style','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'" data-value="'.$this->value['style'].'">';
+      echo '<select data-placeholder="'.__('Style','redux-framework').'" class="redux-typography redux-typography-style select'.$this->field['class'].'" original-title="'.__('Font style','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][style]" id="'. $this->field['id'].'_style" data-id="'.$this->field['id'].'" data-value="'.$this->value['style'].'">';
 		 	if (empty($this->value['style'])) {
 		 		echo '<option value=""></option>';
 		 	}
@@ -193,7 +190,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
     **/
     if ($this->field['style'] === true || $this->field['google'] === true):
       echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font script','redux-framework').'">';
-      echo '<select data-placeholder="'.__('Script','redux-framework').'" class="redux-typography redux-typography-script'.$class.'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-script" name="'.$this->args['opt_name'].'['.$this->field['id'].'][script]" data-value="'.$this->value['script'].'">';
+      echo '<select data-placeholder="'.__('Script','redux-framework').'" class="redux-typography redux-typography-script'.$this->field['class'].'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-script" name="'.$this->args['opt_name'].'['.$this->field['id'].'][script]" data-value="'.$this->value['script'].'">';
 		 	if (empty($this->value['script'])) {
 		 		echo '<option value=""></option>';
 		 	}
@@ -212,7 +209,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 		Font Size
 		**/
 	if ($this->field['size'] === true):
-	echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$class.'" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" value="'.$this->value['size'].'" data-value="'.$this->value['size'].'"><span class="add-on">'.$unit.'</span></div>';
+	echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$this->field['class'].'" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][size]" value="'.$this->value['size'].'" data-value="'.$this->value['size'].'"><span class="add-on">'.$unit.'</span></div>';
   	endif;
 
 
@@ -220,7 +217,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 		Line Height 
 		**/
 		if ($this->field['height'] === true):
-			echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$class.'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'" data-value="'.$this->value['height'].'"><span class="add-on">'.$unit.'</span></div>';
+			echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$this->field['class'].'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'" data-value="'.$this->value['height'].'"><span class="add-on">'.$unit.'</span></div>';
 		endif;
 
 
@@ -237,7 +234,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 				$default = $this->field['default']['color'];
 			}
       echo '<div id="' . $this->field['id'] . '_color_picker" class="colorSelector typography-color"><div style="background-color: '.$this->value['color'].'"></div></div>';
-      echo '<input data-default-color="'.$default.'" class="redux-color redux-typography-color'.$class.'" original-title="'.__('Font color','redux-framework').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
+      echo '<input data-default-color="'.$default.'" class="redux-color redux-typography-color'.$this->field['class'].'" original-title="'.__('Font color','redux-framework').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
     endif;
 
 

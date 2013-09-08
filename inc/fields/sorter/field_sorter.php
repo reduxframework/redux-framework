@@ -41,7 +41,6 @@ class ReduxFramework_sorter extends ReduxFramework {
      */
     function render() {
         $output = '';
-        $class = (isset($this->field['class'])) ? $this->field['class'] : 'sorter';
         $value = $this->value;
         $options = $this->field['options'];
 
@@ -80,7 +79,7 @@ class ReduxFramework_sorter extends ReduxFramework {
             var_opt_name = '<?php echo $this->args['opt_name']; ?>';
         </script>
         <?php
-        $output .= '<div id="' . $this->field['id'] . '" class="' . $class . '">';
+        $output .= '<div id="' . $this->field['id'] . '" class="sorter ' . $this->field['class'] . '">';
         if ($value) {
             foreach ($options as $group => $sortlist) {
                 $output .= '<ul id="' . $this->field['id'] . '_' . $group . '" class="sortlist_' . $this->field['id'] . '">';

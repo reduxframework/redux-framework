@@ -62,8 +62,6 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
          * @return      void
          */
         public function render() {
-        
-            $class = ( isset( $this->field['class'] ) ) ? $this->field['class'] : '';
 
             // Use data from Wordpress to populate options array
             if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
@@ -130,10 +128,10 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
                 }
             }
 
-            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
+            $this->field['class'] = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
 
             if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= " compiler";
+                $this->field['class'] .= " compiler";
     
             echo '<fieldset>';
 
@@ -146,7 +144,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
 
                     echo '<li>';
                     echo '<label for="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
-                    echo '<input type="checkbox" class="checkbox' . $class . '" id="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']" value="1" ' . checked( $this->value[$k], '1', false ) . '/>';
+                    echo '<input type="checkbox" class="checkbox' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']" value="1" ' . checked( $this->value[$k], '1', false ) . '/>';
                     echo ' ' . $v . '</label>';
                     echo '</li>';
                 
@@ -160,7 +158,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
 
                 echo ( $this->field['desc'] != '' ) ? ' <label for="' . $this->field['id'] . '">' : '';
         
-                echo '<input type="checkbox" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="1" class="checkbox' . $class . '" ' . checked( $this->value, '1', false ) . '/>';
+                echo '<input type="checkbox" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="1" class="checkbox' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
         
                 echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? ' ' . $this->field['desc'] . '</label>' : '';
 

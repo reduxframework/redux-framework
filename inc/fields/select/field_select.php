@@ -88,10 +88,6 @@ class ReduxFramework_select extends ReduxFramework{
 			}//if
 		}//if
 
-		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
-		if (!empty($this->field['compiler']) && $this->field['compiler']) {
-			$class .= " compiler";
-		}
 		if (!empty($this->field['options'])) {
 			if (isset($this->field['multi']) && $this->field['multi']) {
 				$multi = ' multiple="multiple"';
@@ -112,7 +108,7 @@ class ReduxFramework_select extends ReduxFramework{
 
 			$placeholder = (isset($this->field['placeholder'])) ? esc_attr($this->field['placeholder']) : __( 'Select an item', 'redux-framework' );
 
-			echo '<select'.$multi.' id="'.$this->field['id'].'" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item'.$class.'"'.$width.' rows="6">';
+			echo '<select'.$multi.' id="'.$this->field['id'].'" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item'.$this->field['class'].'"'.$width.' rows="6">';
 				echo '<option></option>';
 				foreach($this->field['options'] as $k => $v){
 					if (is_array($this->value)) {

@@ -27,11 +27,6 @@ class ReduxFramework_slider extends ReduxFramework{
 	 * @since ReduxFramework 0.0.4
 	*/
 	function render(){
-		
-		$class = (isset($this->field['class']))?' '.$this->field['class']:'';
-		if (!empty($this->field['compiler']) && $this->field['compiler']) {
-			$class .= " compiler";
-		}
 
 		if( empty($this->field['min']) ) { 
 			$this->field['min'] = 0; 
@@ -91,7 +86,7 @@ class ReduxFramework_slider extends ReduxFramework{
 		wp_localize_script( 'redux-slider-js', $this->field['id'].'Param', $params );
 	
 		//html output
-		echo '<input type="text" name="'.$this->args['opt_name'].'['.$this->field['id'].']" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$class.'"'.$readonly.'/>';
+		echo '<input type="text" name="'.$this->args['opt_name'].'['.$this->field['id'].']" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$this->field['class'].'"'.$readonly.'/>';
 		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider"></div>';
 		
 		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="desc">'.$this->field['desc'].'</div>':'';

@@ -61,12 +61,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
          * @return      void
          */
         public function render() {
-        
-            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] : '';
-
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $class .= ' compiler';
-        
+                
             echo '<fieldset>';
             
             if( !empty( $this->field['options'] ) ) {
@@ -122,13 +117,13 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                         $presets = ' data-presets="' . htmlspecialchars( json_encode( $v['presets'] ), ENT_QUOTES, 'UTF-8' ) . '"';
                         $selected = '';
-                        $class .= ' redux-presets';
+                        $this->field['class'] .= ' redux-presets';
                     }               
 
                     echo '<li class="redux-image-select">';
                     echo '<label class="' . $selected . ' redux-image-select-' . $this->field['id'] . '" for="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
 
-                    echo '<input type="radio" class="noUpdate' . $class . '" id="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
+                    echo '<input type="radio" class="noUpdate' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
 
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         echo '<span class="tiles" style="background-image: url(' . $v['img'] . ');">&nbsp;</span>';

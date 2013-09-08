@@ -28,11 +28,6 @@ class ReduxFramework_radio extends ReduxFramework{
 	*/
 	function render(){
 		
-		$class = (isset($this->field['class']))?' '.$this->field['class'].'" ':'';
-		if (!empty($this->field['compiler']) && $this->field['compiler']) {
-			$class .= " compiler";
-		}
-
 		/**
 			Use data from Wordpress to populate options array
 		**/
@@ -102,7 +97,7 @@ class ReduxFramework_radio extends ReduxFramework{
 				
 				echo '<li>';
 				echo '<label for="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'">';
-				echo '<input type="radio" class="radio' . $class . '" id="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$k.'" '.checked($this->value, $k, false).'/>';
+				echo '<input type="radio" class="radio' . $this->field['class'] . '" id="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$k.'" '.checked($this->value, $k, false).'/>';
 				echo ' <span>'.$v.'</span>';
 				echo '</label>';
 				echo '</li>';
