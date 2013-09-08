@@ -463,63 +463,14 @@ color: #777;
 }
 
 
-
-
-@media screen and (max-width : 900px) {
-	#redux-sidebar{
-		width:42px;
-	}
-	#redux-main{
-		margin-left:43px;
-		width: auto;
-		max-width: 100%;
-	}
-	.redux-group-tab-link-a{
-		position: relative;
-	}
-	.redux-group-tab-link-a span{
-		display:none;
-		position:absolute;
-		top: 0;
-		left:44px;
-		padding: 14px;
-		width: 200px;
-		background: #eeeeee;
-		border: 1px solid #E7E7E7;
-		border-width: 1px 1px 1px 0px;
-	}
-	.redux-group-tab-link-a:hover > span{
-		display: block;
-	}
-	#redux-sidebar #redux-group-menu li a,
-	#redux-sidebar #redux-group-menu li a:hover,
-	#redux-sidebar #redux-group-menu li.active a,
-	#redux-sidebar #redux-group-menu li.active a:hover{
-		width:15px;
-	}
-	
-	table.form-table, .form-table > thead, .form-table > tbody, .form-table > tbody > tr > th, .form-table > tbody > tr > td, .form-table > tbody > tr {
-		display: block !important;
-		width: 100% !important;
-		padding: 0px !important;
-	}
-	.form-table > tbody > tr > th, .form-table > tbody > tr > td{
-		padding: 10px !important;
-	}
-	.form-table > tbody > tr > td span.description{
-		display: block;
-	}
+.redux-group-tab-link-a i{
+	position: absolute;
+}	
+.redux-group-tab-link-a span {
+	display: block;
+	padding-left: 30px;
+	z-index: 1;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -558,30 +509,13 @@ color: #777;
 	float: right;
 }
 
-#redux-header {
-	height: 70px;
-	background:#f1f1f1;
-	border: 1px solid #ccc;
-	-webkit-border-radius: 6px 6px 0 0;
-	-moz-border-radius: 6px 6px 0 0;
-	border-radius: 6px 6px 0 0;
-	background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
-	background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: linear-gradient(top,#f9f9f9,#ececec);
-	-moz-box-shadow: inset 0 1px 0 #fff;
-	-webkit-box-shadow: inset 0 1px 0 #fff;
-	box-shadow: inset 0 1px 0 #fff;
-}
+
 
 #redux-intro-text {
 	background: #f3f3f3;
 	border: solid #d8d8d8;	
 	border-bottom: 1px solid #d8d8d8;
 	border-width:0px 1px 1px 1px;
-	height: 14px;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
@@ -594,20 +528,24 @@ color: #777;
 	font-family: "Lucida Grande", Sans-serif;
 	color: #888888;
 }
-
+.mp6 #redux-container #info_bar {
+	padding: 6px 10px 6px 6px;
+}
+.mp6 #redux-container #info_bar a {
+	margin-top: 2px;
+}
 #redux-container #info_bar {
 	background: #f3f3f3;
 	border:solid #d8d8d8;
 	border-bottom:1px solid #D8D8D8;
 	border-width:0px 1px 1px 1px;
-	padding: 6px 10px 0px 6px;
-	height: 31px;
-	z-index: 99999999999999;
+	padding: 6px 10px 6px 6px;
 	text-align: right;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
 }
+
 
 #redux-container #expand_options{
 	cursor: pointer;
@@ -631,15 +569,8 @@ color: #777;
 
 
 
-
-
-
-
-
-
-
 #redux-header {
-	height: 70px;
+	
 	background:#f1f1f1;
 	border: 1px solid #ccc;
 	-webkit-border-radius: 6px 6px 0 0;
@@ -657,7 +588,7 @@ color: #777;
 }
 #redux-header .logo {
 	float: left;
-	margin:10px 20px 10px 0;
+	margin:20px 10px;
 }
 
 #redux-header .logo h2 {
@@ -690,9 +621,6 @@ color: #777;
 	box-shadow: inset 0 1px 0 #fcfcfc;
 }
 
-
-
-
 #redux-main textarea, #redux-main input, #redux-main select, #redux-main button {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -711,6 +639,9 @@ color: #777;
 
 #redux-main input, #redux-main select, #redux-main .sortlist_homepage_blocks, #redux-main textarea, .wp-picker-container, .switch-options {
 	margin-bottom: 7px;
+}
+#redux-main label input {
+	margin-bottom: 0;
 }
 
 #redux-main .select2-container input {
@@ -744,7 +675,7 @@ color: #777;
 }
 #redux-main input.checkbox, #redux-main input.radio {
 	margin-right: 10px;
-	width: auto;
+	
 }
 label.radio, label.multicheck {
   position: relative;
@@ -925,3 +856,74 @@ label.radio, label.multicheck {
 .select2-default {
 	width: auto !important;
 }
+
+@media screen and (max-width : 900px) {
+	#redux-sidebar{
+		width:42px;
+	}
+
+	#redux-main{
+		margin-left:43px;
+		width: auto;
+		max-width: 100%;
+	}
+	.redux-group-tab-link-a{
+		position: relative;
+	}
+	.redux-group-tab-link-a i{
+		position: inherit;
+	}	
+	.redux-group-tab-link-a span{
+		display:none;
+		position:absolute;
+		top: 0;
+		left:44px;
+		padding: 12px;
+		width: 200px;
+		background: #eeeeee;
+		border: 1px solid #E7E7E7;
+		border-width: 1px 1px 1px 0px;
+	}
+	.redux-group-tab-link-a:hover > span{
+		display: block;
+	}
+	#redux-sidebar #redux-group-menu li a,
+	#redux-sidebar #redux-group-menu li a:hover,
+	#redux-sidebar #redux-group-menu li.active a,
+	#redux-sidebar #redux-group-menu li.active a:hover{
+		width:auto;
+	}
+	
+	table.form-table, .form-table > thead, .form-table > tbody, .form-table > tbody > tr > th, .form-table > tbody > tr > td, .form-table > tbody > tr {
+		display: block !important;
+		width: 100% !important;
+		padding: 0px !important;
+	}
+	.form-table > tbody > tr > th, .form-table > tbody > tr > td{
+		padding: 10px !important;
+	}
+	.form-table > tbody > tr > td span.description{
+		display: block;
+	}
+}
+
+//mp6 fixes
+@media screen and (max-width : 783px) {
+	.mp6 #redux-container #info_bar {
+		height: auto;
+		padding-bottom: 1px;
+	}
+	.mp6 #redux-container #info_bar a {
+		margin-top: 5px;
+	}
+}
+.mp6 .icon-themes {
+	display: none;
+}
+
+
+
+
+
+
+
