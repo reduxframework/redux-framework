@@ -61,8 +61,6 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
          * @return      void
          */
         public function render() {
-        
-            $class = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] : '';     
 
             if( empty( $this->field['desc'] ) && !empty( $this->field['default'] ) )
                 $this->field['desc'] = $this->field['default'];
@@ -73,7 +71,7 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
             if( !isset( $this->field['fold-vals'] ) )
                 $this->field['fold-vals'] = '';
 
-            echo '</td></tr></table><div class="redux-info-field' . $class . '">';
+            echo '</td></tr></table><div class="redux-info-field' . $this->field['class'] . '">';
             echo $this->field['desc'];
             echo '</div><table class="form-table no-border"><tbody><tr><th></th><td>';
         

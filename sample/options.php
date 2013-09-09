@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 /*
  *
  * Require the framework class before doing anything else, so we can use the defined URLs and directories.
@@ -771,12 +774,32 @@ function setup_framework_options(){
     );
 **/                
 
+    //Background Patterns Reader
+    $sample_patterns_path = REDUX_DIR . 'sample/sample_files/patterns/';
+    $sample_patterns_url  = REDUX_URL . 'sample/sample_files/patterns/';
+    $sample_patterns      = array();
+
+    if ( is_dir( $sample_patterns_path ) ) :
+    	
+      if ( $sample_patterns_dir = opendir( $sample_patterns_path ) ) :
+      	$sample_patterns = array();
+
+        while ( ( $sample_patterns_file = readdir( $sample_patterns_dir ) ) !== false ) {
+
+          if( stristr( $sample_patterns_file, '.png' ) !== false || stristr( $sample_patterns_file, '.jpg' ) !== false ) {
+          	$name = explode(".", $sample_patterns_file);
+          	$name = str_replace('.'.end($name), '', $sample_patterns_file);
+          	$sample_patterns[] = array( 'alt'=>$name,'img' => $sample_patterns_url . $sample_patterns_file );
+          }
+        }
+      endif;
+    endif;
 
 
 	$sections[] = array(
 		'title' => __('Home Settings', 'redux-framework'),
 		'header' => __('Welcome to the Simple Options Framework Demo', 'redux-framework'),
-		'desc' => __('Simple Options Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="http://github.com/SimpleRain/SimpleOptions/">http://github.com/SimpleRain/SimpleOptions/</a>', 'redux-framework'),
+		'desc' => __('Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'redux-framework'),
 		'icon_class' => 'icon-large',
 		'icon' => 'home',
 		'fields' => array(
@@ -869,14 +892,8 @@ function setup_framework_options(){
 				'title' => __('Images Option (with pattern=>true)', 'redux-framework'),
 				'subtitle'=> __('Select a background pattern.', 'redux-framework'),
 				'default' 		=> 0,
-				'options' => array(
-								'1' => array('alt' => '1 Column', 'img' => REDUX_URL.'assets/img/1col.png'),
-								'2' => array('alt' => '2 Column Left', 'img' => REDUX_URL.'assets/img/2cl.png'),
-								'3' => array('alt' => '2 Column Right', 'img' => REDUX_URL.'assets/img/2cr.png'),
-								'4' => array('alt' => '3 Column Middle', 'img' => REDUX_URL.'assets/img/3cm.png'),
-								'5' => array('alt' => '3 Column Left', 'img' => REDUX_URL.'assets/img/3cl.png'),
-								'6' => array('alt' => '3 Column Right', 'img' => REDUX_URL.'assets/img/3cr.png')
-									),
+				'options' => $sample_patterns
+				,
 				),			
             array(
                 "id" => "homepage_blocks",
@@ -914,8 +931,8 @@ function setup_framework_options(){
 				'default' 		=> 0,
 				'desc'=> __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework'),
 				'options' => array(
-								'1' => array('alt' => '1 Column', 'img' => REDUX_URL.'assets/img/1col.png', 'presets'=>array('slider2'=>12,'patterns'=>2)),
-								'2' => array('alt' => '2 Column Left', 'img' => REDUX_URL.'assets/img/2cl.png', 'presets'=>'{"slider2":"30", "patterns":"5"}'),
+								'1' => array('alt' => 'Preset 1', 'img' => REDUX_URL.'sample/sample_files/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
+								'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'sample/sample_files/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
 									),
 				),					
 
@@ -1473,6 +1490,13 @@ function setup_framework_options(){
 				'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework'),
 				'callback' => 'my_custom_field'
 				),
+			array(
+				'id'=>"repeatable",
+				'type' => 'repeatable',//doesnt need to be called for callback fields
+				'title' => __('Repeatable', 'redux-framework'), 
+				'subtitle' => __('Did this work?', 'redux-framework'),
+				'desc' => __('Giving it the college try!', 'redux-framework'),
+				),			
 			)
 		);    
 

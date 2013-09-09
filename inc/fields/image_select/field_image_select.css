@@ -6,3 +6,4 @@
 .redux-image-select-selected img,.redux-image-select-selected .tiles{border-color:#c9c9c9}
 .redux-image-select{margin:0 !important}
 .redux-image-select .tiles{display:block;background-color:#fff;background-repeat:repeat;width:40px;height:40px}
+#tilesFullView{font-size:0;line-height:0;position:absolute;border:1px solid #ccc;background:#333;padding:5px;margin:0;display:none;color:#fff}#tilesFullView img{margin:0;padding:0}

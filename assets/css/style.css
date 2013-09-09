@@ -63,7 +63,7 @@ a{outline:0 !important}
 #redux-import-action span{color:#b94a48}
 .redux-screenshot{max-width:300px;display:block}
 .redux-group-tab-link-a i{position:absolute}
-.redux-group-tab-link-a span{display:block;padding-left:30px;z-index:1}
+.redux-group-tab-link-a span{display:block;padding-left:30px;z-index:0}
 #ui-datepicker-div{display:none}
 #redux-container .ajax-loading-img-top{margin:5px 4px 0;float:left}
 #redux-container .ajax-loading{margin:3px 4px 0;float:right}

@@ -62,6 +62,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @return      void
          */
         public function render() {
+        	print_r($this->value);
         
             echo '<fieldset class="buttonset">';
             
