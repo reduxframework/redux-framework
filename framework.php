@@ -202,9 +202,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				}
 				do_action( 'redux-saved-' . $this->args['opt_name'] , $value );
 				// Set a global variable by the global_variable agument.
-				$options = $this->args['global_variable'];
-				global $$options;
-				$$options = $value;
+				if ( $defaults['theme_mods_expand'] ) {
+					$options = $this->args['global_variable'];
+					global $$options;
+					$$options = $value;					
+				}
 			}
 		}
 
@@ -228,9 +230,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$result = get_option( $this->args['opt_name'], $defaults );
 			}
 			// Set a global variable by the global_variable agument.
-			$options = $this->args['global_variable'];
-			global $$options;
-			$$options = $result;			
+			if ( $defaults['theme_mods_expand'] ) {			
+				$options = $this->args['global_variable'];
+				global $$options;
+				$$options = $result;			
+			}
 			//print_r($result);
 			return $result;
 		}
