@@ -4,6 +4,7 @@ jQuery.noConflict();
 /** Fire up jQuery - let's dance!
  */
 jQuery(document).ready(function($) {
+	return;
 	Object.size = function(obj) {
 		var size = 0,
 			key;

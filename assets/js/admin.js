@@ -10,6 +10,7 @@ var confirmOnPageExit = function(e) {
 		if (e) {
 			e.returnValue = message;
 		}
+		window.onbeforeunload = null;
 		// For Chrome, Safari, IE8+ and Opera 12+
 		return message;
 	};
@@ -72,21 +73,21 @@ function redux_change(variable) {
 		verify_fold(variable);
 	}
 	window.onbeforeunload = confirmOnPageExit;
-	jQuery(document).ready(function($) {
-		if ($(this).hasClass('redux-field-error')) {
-			$(this).removeClass('redux-field-error');
-			$(this).parent().find('.redux-th-error').slideUp();
-			var parentID = $(this).closest('.redux-group-tab').attr('id');
-			var hideError = true;
-			$('#' + parentID + ' .redux-field-error').each(function() {
-				hideError = false;
-			});
-			if (hideError) {
-				jQuery('#' + parentID + '_li .redux-menu-error').hide();
-			}
+	if (jQuery(variable).hasClass('redux-field-error')) {
+		jQuery(variable).removeClass('redux-field-error');
+		jQuery(variable).parent().find('.redux-th-error').slideUp();
+		var parentID = jQuery(variable).closest('.redux-group-tab').attr('id');
+		var hideError = true;
+		jQuery('#' + parentID + ' .redux-field-error').each(function() {
+			hideError = false;
+		});
+		if (hideError) {
+			jQuery('#' + parentID + '_li .redux-menu-error').hide();
+			jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
 		}
-		$('#redux-save-warn').slideDown();
-	});
+	}
+	jQuery('#redux-save-warn').slideDown();
+	
 }
 
 jQuery(document).ready(function($) {
@@ -312,7 +313,37 @@ jQuery(document).ready(function($) {
 		verify_fold(jQuery(this));
 	});
 
+	$('#printReduxObject').on('click', function() {
+		console.log( jQuery.parseJSON( decodeURIComponent( jQuery("#redux-object").val() ) ) );
+	});
+	
+	// Display errors on page load
+	if (redux_opts.errors !== undefined ) {
+		jQuery("#redux-field-errors span").html(redux_opts.errors.total);
+		jQuery("#redux-field-errors").show();
+		jQuery.each( redux_opts.errors.errors, function( sectionID, sectionArray ) {
+			jQuery("#" +sectionID+ "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
+            jQuery("#" +sectionID+ "_section_group_li_a").addClass("hasError");
+			jQuery.each( sectionArray.errors , function( key, value ) {
+                jQuery("#" + value['id']).addClass("redux-field-error");
+                jQuery("#" + value['id']).parents("td:first").append('<span class="redux-th-error">' +value['msg'] + '</span>');
+  			});
+		});
+	}
 
+	// Display warnings on page load
+	if (redux_opts.warnings !== undefined ) {
+		jQuery("#redux-field-warnings span").html(redux_opts.warnings.total);
+		jQuery("#redux-field-warnings").show();
+		jQuery.each( redux_opts.warnings.warnings, function( sectionID, sectionArray ) {
+			jQuery("#" +sectionID+ "_section_group_li_a").prepend('<span class="redux-menu-warning">' + sectionArray.total + '</span>');
+            jQuery("#" +sectionID+ "_section_group_li_a").addClass("hasWarning");
+			jQuery.each( sectionArray.warnings , function( key, value ) {
+                jQuery("#" + value['id']).addClass("redux-field-warning");
+                jQuery("#" + value['id']).parents("td:first").append('<span class="redux-th-warning">' +value['msg'] + '</span>');
+  			});
+		});
+	}	
 	
 
 });

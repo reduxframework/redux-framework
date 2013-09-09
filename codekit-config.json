@@ -117,26 +117,6 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.min.js",
       "fileType" : 64
     },
-    "\/assets\/img\/social\/Forrst.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
-      "initialSize" : 625,
-      "fileType" : 8192
-    },
-    "\/inc\/fields\/_old\/pages_select\/field_pages_select.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/pages_select\/field_pages_select.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/inc\/fields\/switch\/field_switch.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.less",
@@ -153,6 +133,26 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/inc\/fields\/_old\/pages_select\/field_pages_select.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/pages_select\/field_pages_select.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/assets\/img\/social\/Forrst.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
+      "initialSize" : 625,
+      "fileType" : 8192
     },
     "\/inc\/fields\/date\/field_date.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -215,6 +215,17 @@
       "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
+    },
+    "\/sample\/sample_files\/presets\/preset2.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset2.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset2.png",
+      "initialSize" : 36611,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_mk.js" : {
       "ignoreWasSetByUser" : 0,
@@ -529,14 +540,16 @@
       "initialSize" : 730,
       "fileType" : 8192
     },
-    "\/inc\/fields\/media\/field_media.php" : {
+    "\/assets\/img\/social\/Newsvine.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/media\/field_media.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
+      "initialSize" : 654,
+      "fileType" : 8192
     },
     "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.js" : {
       "ignoreWasSetByUser" : 0,
@@ -549,16 +562,14 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.min.js",
       "fileType" : 64
     },
-    "\/assets\/img\/social\/Newsvine.png" : {
+    "\/inc\/fields\/media\/field_media.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
-      "initialSize" : 654,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/inc\/fields\/media\/field_media.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/js\/vendor\/jquery.tipsy.js" : {
       "ignoreWasSetByUser" : 0,
@@ -699,6 +710,23 @@
       "inputAbbreviatedPath" : "\/inc\/fields\/_old\/multi_select\/field_multi_select.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.less" : {
+      "ieCompatibility" : 1,
+      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.less",
+      "outputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css",
+      "outputPathIsSetByUser" : 0,
+      "strictUnits" : 0,
+      "relativeURLS" : 0,
+      "ignore" : 0,
+      "strictImports" : 0,
+      "ignoreWasSetByUser" : 0,
+      "shouldRunBless" : 1,
+      "hidden" : 0,
+      "strictMath" : 0,
+      "outputStyle" : 1,
+      "fileType" : 1,
+      "debugStyle" : 0
     },
     "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.php" : {
       "ignoreWasSetByUser" : 0,
@@ -914,6 +942,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_ro.min.js",
       "fileType" : 64
+    },
+    "\/sample\/sample_files\/presets\/preset1.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset1.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset1.png",
+      "initialSize" : 28987,
+      "fileType" : 8192
     },
     "\/assets\/img\/social\/Facebook.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1244,6 +1283,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/inc\/fields\/repeatable\/field_repeatable.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/repeatable\/field_repeatable.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_75_dadada_1x400.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1354,8 +1402,8 @@
       "fileType" : 2048
     },
     "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont-ie7.css" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont-ie7.css",
@@ -1427,6 +1475,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_vi.min.js",
       "fileType" : 64
+    },
+    "\/sample\/sample_files\/patterns\/triangular.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/triangular.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/triangular.png",
+      "initialSize" : 210,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_ja.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1536,6 +1595,17 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/sample\/sample_files\/patterns\/wild_flowers.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/wild_flowers.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/wild_flowers.png",
+      "initialSize" : 47151,
+      "fileType" : 8192
+    },
     "\/assets\/js\/vendor\/select2\/select2_locale_ca.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1546,15 +1616,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_ca.min.js",
       "fileType" : 64
-    },
-    "\/assets\/css\/custom.css" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/css\/custom.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_sv.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1614,16 +1675,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/assets\/img\/3-col-portfolio.png" : {
+    "\/assets\/js\/vendor\/select2\/select2_locale_lv.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
-      "initialSize" : 1025,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.min.js",
+      "fileType" : 64
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_it.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1647,16 +1708,16 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_fr.min.js",
       "fileType" : 64
     },
-    "\/assets\/js\/vendor\/select2\/select2_locale_lv.js" : {
+    "\/assets\/img\/3-col-portfolio.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.min.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
+      "initialSize" : 1025,
+      "fileType" : 8192
     },
     "\/assets\/js\/admin.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1790,6 +1851,17 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/sample\/sample_files\/patterns\/tree_bark.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/tree_bark.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/tree_bark.png",
+      "initialSize" : 42360,
+      "fileType" : 8192
+    },
     "\/inc\/fields\/typography\/field_typography.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/typography\/field_typography.less",
@@ -1850,8 +1922,8 @@
       "fileType" : 64
     },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/jquery-ui-1.10.0.custom.css" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/jquery-ui-1.10.0.custom.css",
@@ -1897,23 +1969,6 @@
       "inputAbbreviatedPath" : "\/inc\/validation\/css\/validation_css.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
-    },
-    "\/assets\/less\/elusive-webfont.less" : {
-      "ieCompatibility" : 1,
-      "inputAbbreviatedPath" : "\/assets\/less\/elusive-webfont.less",
-      "outputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css",
-      "outputPathIsSetByUser" : 1,
-      "strictUnits" : 0,
-      "relativeURLS" : 0,
-      "ignore" : 0,
-      "strictImports" : 0,
-      "ignoreWasSetByUser" : 0,
-      "shouldRunBless" : 1,
-      "hidden" : 0,
-      "strictMath" : 0,
-      "outputStyle" : 1,
-      "fileType" : 1,
-      "debugStyle" : 0
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_gl.js" : {
       "ignoreWasSetByUser" : 0,
@@ -2007,6 +2062,17 @@
       "inputAbbreviatedPath" : "\/inc\/fields\/_old\/multi_text\/field_multi_text.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/sample\/sample_files\/patterns\/triangular_@2X.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/triangular_@2X.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/triangular_@2X.png",
+      "initialSize" : 212,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_lt.js" : {
       "ignoreWasSetByUser" : 0,

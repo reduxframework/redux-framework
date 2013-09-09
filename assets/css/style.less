@@ -392,7 +392,7 @@ color: #777;
 	font-weight:normal;
 	display:block;
 }
-.redux-group-tab .form-table tr td .redux-field-error{
+#redux-main .redux-group-tab .form-table tr td input.redux-field-error{
 	border-color:#B94A48;
 }
 
@@ -468,14 +468,15 @@ color: #777;
 }	
 .redux-group-tab-link-a span {
 	display: block;
-	padding-left: 30px;
-	z-index: -0;
+	z-index: 0;
 }
 
-
-
-
-
+.redux-group-tab-link-a span.group_title {
+	padding-left: 30px;
+}
+.redux-group-tab-link-li a.hasError span.group_title {
+	padding-right: 25px;
+}
 
 #ui-datepicker-div {
 	display: none;
@@ -608,14 +609,10 @@ color: #777;
 	font-size: 10px;
 	color: #888;
 }
-#redux-container .form-table ul {
-	m2argin: 0;
-}
 
 .sticky-footer-fixed {
 	background: #f3f3f3;
-	border-top: 1px solid #d8d8d8;
-	z2-index: 99999999999999;
+	border-top: 1px solid #d8d8d8 !important;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
@@ -845,9 +842,7 @@ label.radio, label.multicheck {
 .wrap {
 	margin-top: 0;
 }
-.redux-group-tab-link-li i {
-	margin-right: 10px;
-}
+
 .showDefaults {
 	font-weight: normal;
 	font-size: .8em;

@@ -101,7 +101,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			$defaults['theme_mods'] 		= false;
 			$defaults['theme_mods_expand'] 	= false;
 			$defaults['transient'] 			= false;
-			$defaults['global_variable'] 	= 'redux';
+			$defaults['global_variable'] 	= '';
 			$defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
             // The defaults are set so it will preserve the old behavior.
@@ -110,6 +110,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 	    	// Set values
             $this->args = wp_parse_args( $args, $defaults );
+            if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
+            	$this->args['global_variable'] = str_replace('-', '_', $this->args['opt_name']);
+            }
 	    	$this->sections = $sections;
 			$this->extra_tabs = $extra_tabs;
 
@@ -367,6 +370,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _set_default_options() {
 		    // Get args
 		    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
+            if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
+            	$this->args['global_variable'] = str_replace('-', '_', $this->args['opt_name']);
+            }
 
 		    // Get sections
 		    $this->sections = apply_filters( 'redux-sections-' . $this->args['opt_name'], $this->sections );
@@ -501,14 +507,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             );
 
             wp_register_style(
-                'redux-custom-css',
-                REDUX_URL . 'assets/css/custom.css',
-                array( 'farbtastic' ),
-                time(),
-                'all'
-            );
-
-            wp_register_style(
                 'redux-elusive-icon',
                 REDUX_URL . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
                 array(),
@@ -592,18 +590,53 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 array( 'jquery' ),
                 time(),
                 true
-            );                              
+            );     
 
-            wp_localize_script(
-                'redux-js', 
-                'redux_opts', 
-                array(
+            $localize = array(
                     'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
                     'reset_confirm'     => __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 
                     'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
                     'opt_name'          => $this->args['opt_name'],
-                    'folds'				=> $this->folds
-                )
+                    'folds'				=> $this->folds,
+                );       
+
+            // Construct the errors array. 
+            $errors = get_transient( 'redux-errors-' . $this->args['opt_name'] );
+            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $errors ) ) {
+            	$theTotal = 0;
+            	foreach($errors as $error) {
+            		$theErrors[$error['section_id']]['errors'][] = $error;
+            		if (!isset($theErrors[$error['section_id']]['total'])) {
+            			$theErrors[$error['section_id']]['total'] = 0;
+            		}
+            		$theErrors[$error['section_id']]['total']++;
+					$theTotal++;
+            	}
+            	delete_transient( 'redux-errors-' . $this->args['opt_name'] );
+            	$localize['errors'] = array('total'=>$theTotal, 'errors'=>$theErrors);
+            }
+
+            // Construct the errors array. 
+            $warnings = get_transient( 'redux-warnings-' . $this->args['opt_name'] );
+            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $warnings ) ) {
+            	$theTotal = 0;
+            	foreach($warnings as $warning) {
+            		$theWarnings[$warning['section_id']]['warnings'][] = $warning;
+            		if (!isset($theWarnings[$warning['section_id']]['total'])) {
+            			$theWarnings[$warning['section_id']]['total'] = 0;
+            		}
+            		$theWarnings[$warning['section_id']]['total']++;
+					$theTotal++;
+            	}
+            	delete_transient( 'redux-warnings-' . $this->args['opt_name'] );
+            	$localize['warnings'] = array('total'=>$theTotal, 'warnings'=>$theWarnings);
+            }
+
+            // Values used by the javascript
+            wp_localize_script(
+                'redux-js', 
+                'redux_opts', 
+                $localize
             );
 
             do_action( 'redux-enqueue-' . $this->args['opt_name'] );
@@ -856,11 +889,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Validate fields (if needed)
             $plugin_options = $this->_validate_values( $plugin_options, $this->options );
 
-            if( $this->errors )
-                set_transient( 'redux-errors-' . $this->args['opt_name'], $this->errors, 1000 );
+            if( $this->errors ) {
+            	set_transient( 'redux-errors-' . $this->args['opt_name'], $this->errors, 1000 );
+            }
 
-            if( $this->warnings )
-                set_transient( 'redux-warnings-' . $this->args['opt_name'], $this->warnings, 1000 );
+            if( $this->warnings ) {
+            	set_transient( 'redux-warnings-' . $this->args['opt_name'], $this->warnings, 1000 );
+            }               
 
             do_action( 'redux-validate-' . $this->args['opt_name'], $plugin_options, $this->options );
 
@@ -969,12 +1004,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _options_page_html() {
 
-            // Add the JS for error handling before the form
-            add_action( 'redux-page-before-form-' . $this->args['opt_name'], array( &$this, '_errors_js' ), 1 );
-
-            // Add the JS for warning handling before the form
-            add_action( 'redux-page-before-form-' . $this->args['opt_name'], array( &$this, '_warnings_js' ), 2 );
-
             $saved = get_transient( 'redux-saved-' . $this->args['opt_name'] );
             delete_transient( 'redux-saved-' . $this->args['opt_name'] );
 
@@ -1079,7 +1108,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				} else {
 					// DOVY! REPLACE $k with $section['ID'] when used properly.
 	                echo '<li id="' . $k . '_section_group_li" class="redux-group-tab-link-li">';
-	                echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k . '">' . $icon . '<span>' . $section['title'] . '</span></a>';
+	                echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
 	                echo '</li>';							
 				}                
             }
@@ -1098,7 +1127,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $icon = ( !isset( $this->args['import_icon'] ) ) ? '<i class="icon-refresh' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['import_icon'] . $icon_class . '"></i> ';
                 }
 
-                echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="redux-group-tab-link-a" data-rel="import_export_default">' . $icon . ' <span>' . __( 'Import / Export', 'redux-framework' ) . '</span></a>';
+                echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="redux-group-tab-link-a" data-rel="import_export_default">' . $icon . ' <span class="group_title">' . __( 'Import / Export', 'redux-framework' ) . '</span></a>';
                 echo '</li>';
      
                 echo '<li class="divide">&nbsp;</li>';
@@ -1113,7 +1142,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         $icon = ( !isset( $tab['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="icon-' . $tab['icon'] . $icon_class . '"></i> ';
                     }
                     echo '<li id="' . $k . '_section_group_li" class="redux-group-tab-link-li">';
-                    echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="' . $k . '">' . $icon . '<span>' . $tab['title'] . '</span></a>';
+                    echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="' . $k . '">' . $icon . '<span class="group_title">' . $tab['title'] . '</span></a>';
                     echo '</li>';
                 }
             }
@@ -1128,7 +1157,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $icon = ( !isset( $this->args['dev_mode_icon'] ) ) ? '<i class="icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['dev_mode_icon'] . $icon_class . '"></i> ';
                 }
 
-                echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span>' . __( 'Dev Mode Info', 'redux-framework' ) . '</span></a>';
+                echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span class="group_title">' . __( 'Dev Mode Info', 'redux-framework' ) . '</span></a>';
                 echo '</li>';
             }
 
@@ -1208,14 +1237,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '</textarea>';
                 echo '</div>';
 
-                // Javascript object debug
-                echo '<script>'
-                    .'function redux_object() {'
-                    .'console.log( jQuery.parseJSON( decodeURIComponent( jQuery("#redux-object").val() ) ) );'
-                    .'return;'
-                    .'}'
-                    .'</script>';
-                echo '<input type="hidden" id="redux-object" value="' . urlencode( json_encode( $this ) ) . '" /><a href="javascript:redux_object()" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
+                echo '<input type="hidden" id="redux-object" value="' . urlencode( json_encode( $this ) ) . '" /><a href="#" id="printReduxObject" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
                 // END Javascript object debug
 
                 echo '</div>';
@@ -1263,84 +1285,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if ( $this->args['dev_mode'] === true )
                 echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds</div>';
-        }
-
-        /**
-         * JS to display the errors on the page
-         *
-         * @since       1.0.0
-         * @access      public
-         * @return      void
-         */
-        public function _errors_js() {
-        	$errors = get_transient( 'redux-errors-' . $this->args['opt_name'] );
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $errors ) {
-                $section_errors = array();
-
-                foreach( $errors as $error ) {
-                    $section_errors[$error['section_id']] = ( isset( $section_errors[$error['section_id']] ) ) ? $section_errors[$error['section_id']] : 0;
-                    $section_errors[$error['section_id']]++;
-                }
-
-                // DOVY! MOVE THIS TO THE ADMIN JS, shouldn't be here
-                echo '<script type="text/javascript">';
-                echo 'jQuery(document).ready(function(){';
-                echo 'jQuery("#redux-field-errors span").html("' . count($errors) . '");';
-                echo 'jQuery("#redux-field-errors").show();';
-
-                foreach( $section_errors as $sectionkey => $section_error ) {
-                    echo 'jQuery("#' . $sectionkey . '_section_group_li_a").append("<span class=\"redux-menu-error\">' . $section_error . '</span>");';
-                }
-
-                foreach( $errors as $error ) {
-                    echo 'jQuery("#' . $error['id'] . '").addClass("redux-field-error");';
-                    echo 'jQuery("#' . $error['id'] . '").closest("td").append("<span class=\"redux-th-error\">' . $error['msg'] . '</span>");';
-                }
-
-                echo '});';
-                echo '</script>';
-
-                delete_transient( 'redux-errors-' . $this->args['opt_name'] );
-            }
-        }
-
-        /**
-         * JS to display the warnings on the page
-         *
-         * @since       1.0.0
-         * @access      public
-         * @return      void
-         */
-        public function _warnings_js() {
-        	$warnings = get_transient( 'redux-warnings-' . $this->args['opt_name'] );
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $warnings ) {
-                $section_warnings = array();
-
-                foreach( $warnings as $warning ) {
-                    $section_warnings[$warning['section_id']] = ( isset( $section_warnings[$warning['section_id']] ) ) ? $section_warnings[$warning['section_id']] : 0;
-                    $section_warnings[$warning['section_id']]++;
-                }
-
-                // DOVY! MOVE THIS TO THE ADMIN JS, shouldn't be here
-                echo '<script type="text/javascript">';
-                echo 'jQuery(document).ready(function(){';
-                echo 'jQuery("#redux-field-warnings span").html("' . count($warnings) . '");';
-                echo 'jQuery("#redux-field-warnings").show();';
-
-                foreach( $section_warnings as $sectionkey => $section_warning ) {
-                    echo 'jQuery("#' . $sectionkey . '_section_group_li_a").append("<span class=\"redux-menu-warning\">' . $section_warning . '</span>");';
-                }
-
-                foreach( $warnings as $warning ) {
-                    echo 'jQuery("#' . $warning['id'] . '").addClass("redux-field-warning");';
-                    echo 'jQuery("#' . $warning['id'] . '").closest("td").append("<span class=\"redux-th-warning\">' . $warning['msg'] . '</span>");';
-                }
-
-                echo '});';
-                echo '</script>';
-
-                delete_transient( 'redux-warnings-' . $this->args['opt_name'] );
-            }
         }
 
         /**
