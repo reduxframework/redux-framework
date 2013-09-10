@@ -1,8 +1,7 @@
-/*global jQuery, document, redux_opts, confirm, relid:true */
-
+/*global jQuery, document, redux_opts, confirm, relid:true, console */
 jQuery.noConflict();
 var confirmOnPageExit = function(e) {
-	//return; // ONLY FOR DEBUGGING
+		//return; // ONLY FOR DEBUGGING
 		// If we haven't been passed the event get the window.event
 		e = e || window.event;
 		var message = redux_opts.save_pending;
@@ -14,16 +13,15 @@ var confirmOnPageExit = function(e) {
 		// For Chrome, Safari, IE8+ and Opera 12+
 		return message;
 	};
+console.log(redux_opts.folds);
 
-	console.log(redux_opts.folds);
-	
-	function verify_fold(item) {
-		jQuery(document).ready(function($) {
+function verify_fold(item) {
+	jQuery(document).ready(function($) {
 		var itemVal = item.val();
-			$.each( redux_opts.folds[item.attr('id')] , function( index, value ) {
-				var show = false;
-				for ( var i = 0; i < value.length; i++ ) {
-					/**
+		$.each(redux_opts.folds[item.attr('id')], function(index, value) {
+			var show = false;
+			for (var i = 0; i < value.length; i++) {
+/**
 						DO NOT change this comarison to === even if JSLint says so. 
 						Will not work unless you cast to string like so:
 						String(value[i]) === String(itemVal)
@@ -33,45 +31,44 @@ var confirmOnPageExit = function(e) {
 						LEAVE AS IS
 
 					**/
-					if ( value[i] == itemVal ) {
-						show = true;
-					}
+				/*jshint eqeqeq: false */
+				if (value[i] == itemVal) {
+					show = true;
 				}
-				var hidden = jQuery('#'+index).parents("tr:first").is(":hidden");
-				if ( jQuery(item).parents("tr:first").is(":hidden") ) {
-					show = false;
+				/*jshint eqeqeq: true */
+			}
+			var hidden = jQuery('#' + index).parents("tr:first").is(":hidden");
+			if (jQuery(item).parents("tr:first").is(":hidden")) {
+				show = false;
+			}
+			if (show) {
+				if (hidden) {
+					jQuery('#' + index).parents("tr:first").fadeIn('medium', function() {
+						// Cascade the fold effect
+						if (jQuery('#' + index).hasClass('foldParent')) {
+							verify_fold(jQuery('#' + index));
+						}
+					});
 				}
-				console.log('show: '+show+' Hidden: '+hidden+ ' - '+index);
-				if ( show ) {
-					if ( hidden ) {
-						jQuery('#'+index).parents("tr:first").fadeIn('medium', function() {
-							// Cascade the fold effect
-							if ( jQuery('#'+index).hasClass('foldParent') ) {
-								verify_fold( jQuery('#'+index) );
-							}
-						});
-					}
-				} else if ( !show ) {
-					if ( !hidden ) {
-						jQuery('#'+index).parents("tr:first").fadeOut( 400, function() {
-							// Cascade the fold effect
-							if ( jQuery('#'+index).hasClass('foldParent') ) {
-								verify_fold( jQuery('#'+index) );
-							}
-						});
-					}
+			} else if (!show) {
+				if (!hidden) {
+					jQuery('#' + index).parents("tr:first").fadeOut(400, function() {
+						// Cascade the fold effect
+						if (jQuery('#' + index).hasClass('foldParent')) {
+							verify_fold(jQuery('#' + index));
+						}
+					});
 				}
-			});
+			}
 		});
-	}
-
+	});
+}
 
 function redux_change(variable) {
 	if (variable.hasClass('compiler')) {
 		jQuery('#redux-compiler-hook').val(1);
 		//console.log('Compiler init');
 	}
-	console.log(variable);
 	if (variable.hasClass('foldParent')) {
 		verify_fold(variable);
 	}
@@ -90,17 +87,11 @@ function redux_change(variable) {
 		}
 	}
 	jQuery('#redux-save-warn').slideDown();
-	
 }
-
 jQuery(document).ready(function($) {
-
 	jQuery('.redux-action_bar, .redux-presets-bar').on('click', function() {
 		window.onbeforeunload = null;
-	});
-
-
-	/**	Tipsy @since v1.3 */
+	}); /**	Tipsy @since v1.3 */
 	if (jQuery().tipsy) {
 		$('.tips').tipsy({
 			fade: true,
@@ -108,7 +99,6 @@ jQuery(document).ready(function($) {
 			opacity: 0.7,
 		});
 	}
-
 /**
 		Current tab checks, based on cookies
 	**/
@@ -121,7 +111,6 @@ jQuery(document).ready(function($) {
 		});
 		// Remove the old active tab
 		var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel');
-
 		jQuery('#' + oldid + '_section_group_li').removeClass('active');
 		// Show the group
 		jQuery('#' + oldid + '_section_group').hide();
@@ -295,7 +284,6 @@ jQuery(document).ready(function($) {
 	jQuery('.redux-save').click(function() {
 		window.onbeforeunload = null;
 	});
-	
 /*
 	// Markdown Viewer for Theme Documentation
 	if ($('#theme_docs_section_group').length !== 0) {
@@ -305,8 +293,6 @@ jQuery(document).ready(function($) {
 		jQuery('#theme_docs_section_group').html(text);
 	}
 */
-
-
 	// Hide the fold elements on load
 	jQuery('.fold').each(function() {
 		jQuery(this).parents("tr:first").hide();
@@ -315,39 +301,33 @@ jQuery(document).ready(function($) {
 	jQuery('.foldParent').each(function() {
 		verify_fold(jQuery(this));
 	});
-
 	$('#printReduxObject').on('click', function() {
-		console.log( jQuery.parseJSON( decodeURIComponent( jQuery("#redux-object").val() ) ) );
+		console.log(jQuery.parseJSON(decodeURIComponent(jQuery("#redux-object").val())));
 	});
-	
 	// Display errors on page load
-	if (redux_opts.errors !== undefined ) {
+	if (redux_opts.errors !== undefined) {
 		jQuery("#redux-field-errors span").html(redux_opts.errors.total);
 		jQuery("#redux-field-errors").show();
-		jQuery.each( redux_opts.errors.errors, function( sectionID, sectionArray ) {
-			jQuery("#" +sectionID+ "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
-            jQuery("#" +sectionID+ "_section_group_li_a").addClass("hasError");
-			jQuery.each( sectionArray.errors , function( key, value ) {
-                jQuery("#" + value['id']).addClass("redux-field-error");
-                jQuery("#" + value['id']).parents("td:first").append('<span class="redux-th-error">' +value['msg'] + '</span>');
-  			});
+		jQuery.each(redux_opts.errors.errors, function(sectionID, sectionArray) {
+			jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
+			jQuery("#" + sectionID + "_section_group_li_a").addClass("hasError");
+			jQuery.each(sectionArray.errors, function(key, value) {
+				jQuery("#" + value.id).addClass("redux-field-error");
+				jQuery("#" + value.id).parents("td:first").append('<span class="redux-th-error">' + value.msg + '</span>');
+			});
 		});
 	}
-
 	// Display warnings on page load
-	if (redux_opts.warnings !== undefined ) {
+	if (redux_opts.warnings !== undefined) {
 		jQuery("#redux-field-warnings span").html(redux_opts.warnings.total);
 		jQuery("#redux-field-warnings").show();
-		jQuery.each( redux_opts.warnings.warnings, function( sectionID, sectionArray ) {
-			jQuery("#" +sectionID+ "_section_group_li_a").prepend('<span class="redux-menu-warning">' + sectionArray.total + '</span>');
-            jQuery("#" +sectionID+ "_section_group_li_a").addClass("hasWarning");
-			jQuery.each( sectionArray.warnings , function( key, value ) {
-                jQuery("#" + value['id']).addClass("redux-field-warning");
-                jQuery("#" + value['id']).parents("td:first").append('<span class="redux-th-warning">' +value['msg'] + '</span>');
-  			});
+		jQuery.each(redux_opts.warnings.warnings, function(sectionID, sectionArray) {
+			jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-warning">' + sectionArray.total + '</span>');
+			jQuery("#" + sectionID + "_section_group_li_a").addClass("hasWarning");
+			jQuery.each(sectionArray.warnings, function(key, value) {
+				jQuery("#" + value.id).addClass("redux-field-warning");
+				jQuery("#" + value.id).parents("td:first").append('<span class="redux-th-warning">' + value.msg + '</span>');
+			});
 		});
-	}	
-	
-
+	}
 });
-

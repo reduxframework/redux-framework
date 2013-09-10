@@ -806,13 +806,19 @@ label.radio, label.multicheck {
   .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
   
 .input-append {
-	
 	margin-right: 10px;
 }
 #redux-main .input-append input {
 	border-right: 0;
 	margin-bottom: 0;
 }
+
+#redux-main .input-prepend input {
+	border-left: 0;
+	margin-bottom: 0;
+}
+
+
 
 .input-append .add-on, .input-prepend .add-on {
 	width: auto;
@@ -826,8 +832,47 @@ label.radio, label.multicheck {
 	text-shadow: 0 1px 0 #FFF;
 	background-color: #EEE;
 	border: 1px solid #CCC;
+
 }
 
+.input-prepend .add-on {
+	b2order-right: 1px;
+}
+
+.input-append, .input-prepend {
+	font-size:0;
+	white-space:nowrap;
+	float:left;
+	display:inline-block;
+	margin-bottom:3px;
+}
+
+#redux-main .input-append {
+	input {
+		border-top-right-radius:0;
+		border-bottom-right-radius:0;
+		margin-right:0;
+	}
+	.add-on {
+		border-top-right-radius:3px;
+		border-bottom-right-radius:3px;
+	}
+}
+#redux-main .input-prepend {
+	input {
+		border-top-left-radius:0;
+		border-bottom-left-radius:0;
+		margin-left:0;
+	}
+	.add-on {
+		border-top-left-radius:3px;
+		border-bottom-left-radius:3px;
+	}
+}
+
+#redux-main td {
+	padding: 8px 0;
+}
 
 #redux-main .mini, #redux-main input[type=text].mini {
 	width: 50px;

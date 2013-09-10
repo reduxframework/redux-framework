@@ -1043,7 +1043,15 @@ function setup_framework_options(){
 				'subtitle' => __('Only color validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'default' => array('color' => '#1e73be', 'style' => 'solid', 'width'=>'3')
-				),					
+				),	
+			array(
+				'id'=>'spacing',
+				'type' => 'spacing',
+				'title' => __('Padding/Margin Option', 'redux-framework'),
+				'subtitle' => __('Allow your users to choose the spacing or margin they want.', 'redux-framework'),
+				'desc' => __('You can enable or diable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework'),
+				'default' => array('top' => 5, 'bottom' => 6, 'left'=>2, 'right'=>4)
+				),									
 			array(
 				'id'=>'body-font',
 				'type' => 'typography',

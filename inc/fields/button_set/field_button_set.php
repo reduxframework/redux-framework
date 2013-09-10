@@ -62,14 +62,13 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @return      void
          */
         public function render() {
-        	print_r($this->value);
         
             echo '<fieldset class="buttonset">';
             
             foreach( $this->field['options'] as $k => $v ) {
                 
-                echo '<input type="radio" id="' . $this->field['id'] . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
-                echo '<label for="' . $this->field['id'] . '_' . array_search( $k, array_keys($this->field['options'] ) ) . '">' . $v . '</label>';
+                echo '<input type="radio" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . array_search( $k, array_keys( $this->field['options'] ) ) . ']" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
+                echo '<label for="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . array_search( $k, array_keys($this->field['options'] ) ) . ']">' . $v . '</label>';
                 
             }
             

@@ -63,7 +63,7 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
          */
         public function render() {
         	print_r($this->value);
-        	echo "yo";
+
         	$fields = array(
 			array(
 				'id'=>'test1',
@@ -90,7 +90,14 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
 				'title' => __('Post Type Select Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-				),							
+				),	
+			array(
+				'id'=>'17',
+				'type' => 'date',
+				'title' => __('Date Option', 'redux-framework'), 
+				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
+				'desc' => __('This is the description field, again good for additional info.', 'redux-framework')
+				),										
         		);
         	echo '<div class="repeater" style="background: #eee; padding: 20px;">';
         
@@ -101,7 +108,7 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
         		}
         		$field['id'] = $this->field['id'].']['.$field['id'];
         		$field['class'] = "";
-        		echo $this->value[$id];
+        		echo $this->value[$id]."<br />";
         		$this->parent->_field_input($field, $this->value[$id]);
         	}        	
         	echo '</div>';

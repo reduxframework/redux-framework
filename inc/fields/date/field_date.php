@@ -65,7 +65,7 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 			if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
 				$this->field['class'] .= ' compiler';
 		
-			echo '<input type="text" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $this->value . '" class="redux-datepicker' . $this->field['class'] . '" />';
+			echo '<input type="text" id="'. str_replace(']','_',str_replace('[','_', $this->args['opt_name'] . '[' . $this->field['id'] . ']' ) ).'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $this->value . '" class="redux-datepicker' . $this->field['class'] . '" />';
 		
 			echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 		
