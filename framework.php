@@ -815,11 +815,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			            }
 			            $field = apply_filters( 'redux-field-' . $field['id'] . 'modifier-' . $this->args['opt_name'], $field );
 						if ( !empty( $field['fold'] ) ) { // This has some fold items, hide it by default
-						    if ( empty( $field['class'] ) ) {
-								$field['class'] = "fold";
-						    } else {
-								$field['class'] .= " fold";
-						    }
+						    $field['class'] .= " fold";
 						}
 						if ( !empty( $this->folds[$field['id']] ) ) { // Sets the values you shoe fold children on
 						    $field['class'] .= " foldParent";

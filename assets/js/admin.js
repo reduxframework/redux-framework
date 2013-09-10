@@ -15,6 +15,7 @@ var confirmOnPageExit = function(e) {
 		return message;
 	};
 
+	console.log(redux_opts.folds);
 	
 	function verify_fold(item) {
 		jQuery(document).ready(function($) {
@@ -40,8 +41,9 @@ var confirmOnPageExit = function(e) {
 				if ( jQuery(item).parents("tr:first").is(":hidden") ) {
 					show = false;
 				}
-				if ( show && hidden ) {
-					if ( jQuery('#'+index).parents("tr:first").is(":hidden") ) {
+				console.log('show: '+show+' Hidden: '+hidden+ ' - '+index);
+				if ( show ) {
+					if ( hidden ) {
 						jQuery('#'+index).parents("tr:first").fadeIn('medium', function() {
 							// Cascade the fold effect
 							if ( jQuery('#'+index).hasClass('foldParent') ) {
@@ -49,8 +51,8 @@ var confirmOnPageExit = function(e) {
 							}
 						});
 					}
-				} else if ( !show && !hidden ) {
-					if ( jQuery('#'+index).parents("tr:first").is(":visible") ) {
+				} else if ( !show ) {
+					if ( !hidden ) {
 						jQuery('#'+index).parents("tr:first").fadeOut( 400, function() {
 							// Cascade the fold effect
 							if ( jQuery('#'+index).hasClass('foldParent') ) {
@@ -69,6 +71,7 @@ function redux_change(variable) {
 		jQuery('#redux-compiler-hook').val(1);
 		//console.log('Compiler init');
 	}
+	console.log(variable);
 	if (variable.hasClass('foldParent')) {
 		verify_fold(variable);
 	}

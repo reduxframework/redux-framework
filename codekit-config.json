@@ -117,6 +117,26 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.min.js",
       "fileType" : 64
     },
+    "\/assets\/img\/social\/Forrst.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
+      "initialSize" : 625,
+      "fileType" : 8192
+    },
+    "\/inc\/fields\/_old\/pages_select\/field_pages_select.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/pages_select\/field_pages_select.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/switch\/field_switch.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.less",
@@ -133,26 +153,6 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/inc\/fields\/_old\/pages_select\/field_pages_select.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/pages_select\/field_pages_select.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/assets\/img\/social\/Forrst.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Forrst.png",
-      "initialSize" : 625,
-      "fileType" : 8192
     },
     "\/inc\/fields\/date\/field_date.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -540,16 +540,14 @@
       "initialSize" : 730,
       "fileType" : 8192
     },
-    "\/assets\/img\/social\/Newsvine.png" : {
+    "\/inc\/fields\/media\/field_media.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
-      "initialSize" : 654,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/inc\/fields\/media\/field_media.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.js" : {
       "ignoreWasSetByUser" : 0,
@@ -562,14 +560,16 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.min.js",
       "fileType" : 64
     },
-    "\/inc\/fields\/media\/field_media.php" : {
+    "\/assets\/img\/social\/Newsvine.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/media\/field_media.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Newsvine.png",
+      "initialSize" : 654,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/jquery.tipsy.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1675,16 +1675,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/assets\/js\/vendor\/select2\/select2_locale_lv.js" : {
+    "\/assets\/img\/3-col-portfolio.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.min.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
+      "initialSize" : 1025,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_it.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1708,16 +1708,16 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_fr.min.js",
       "fileType" : 64
     },
-    "\/assets\/img\/3-col-portfolio.png" : {
+    "\/assets\/js\/vendor\/select2\/select2_locale_lv.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/3-col-portfolio.png",
-      "initialSize" : 1025,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lv.min.js",
+      "fileType" : 64
     },
     "\/assets\/js\/admin.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1888,17 +1888,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/assets\/img\/social\/Squidoo.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Squidoo.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Squidoo.png",
-      "initialSize" : 747,
-      "fileType" : 8192
-    },
     "\/assets\/js\/vendor\/select2\/select2_locale_nl.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1909,6 +1898,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_nl.min.js",
       "fileType" : 64
+    },
+    "\/assets\/img\/social\/Squidoo.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Squidoo.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Squidoo.png",
+      "initialSize" : 747,
+      "fileType" : 8192
     },
     "\/inc\/fields\/select\/field_select.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -2367,15 +2367,6 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/_old\/color\/field_color.min.js",
       "fileType" : 64
     },
-    "\/inc\/fields\/image_select\/field_image_select.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/assets\/js\/vendor\/select2\/select2_locale_hu.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2387,15 +2378,6 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_hu.min.js",
       "fileType" : 64
     },
-    "\/inc\/fields\/_old\/radio\/field_radio.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/radio\/field_radio.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/js\/vendor\/select2\/select2_locale_es.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2406,6 +2388,24 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_es.min.js",
       "fileType" : 64
+    },
+    "\/inc\/fields\/_old\/radio\/field_radio.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/radio\/field_radio.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/inc\/fields\/image_select\/field_image_select.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/inc\/fields\/_old\/upload\/field_upload.js" : {
       "ignoreWasSetByUser" : 0,
