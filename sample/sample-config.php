@@ -116,13 +116,13 @@ function setup_framework_options(){
 		ob_end_clean();
 
 
-	if( file_exists( REDUX_DIR.'sample/sample_files/info-html.html' )) {
+	if( file_exists( REDUX_DIR.'sample/info-html.html' )) {
 		global $wp_filesystem;
 		if (empty($wp_filesystem)) {
 			require_once(ABSPATH .'/wp-admin/includes/file.php');
 			WP_Filesystem();
 		}  		
-		$sampleHTML = $wp_filesystem->get_contents(REDUX_DIR.'sample/sample_files/info-html.html');
+		$sampleHTML = $wp_filesystem->get_contents(REDUX_DIR.'sample/info-html.html');
 	}
 
 
@@ -264,8 +264,8 @@ function setup_framework_options(){
     $sections = array();              
 
     //Background Patterns Reader
-    $sample_patterns_path = REDUX_DIR . 'sample/sample_files/patterns/';
-    $sample_patterns_url  = REDUX_URL . 'sample/sample_files/patterns/';
+    $sample_patterns_path = REDUX_DIR . 'sample/patterns/';
+    $sample_patterns_url  = REDUX_URL . 'sample/patterns/';
     $sample_patterns      = array();
 
     if ( is_dir( $sample_patterns_path ) ) :
@@ -420,8 +420,8 @@ function setup_framework_options(){
 				'default' 		=> 0,
 				'desc'=> __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework'),
 				'options' => array(
-								'1' => array('alt' => 'Preset 1', 'img' => REDUX_URL.'sample/sample_files/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
-								'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'sample/sample_files/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
+								'1' => array('alt' => 'Preset 1', 'img' => REDUX_URL.'sample/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
+								'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
 									),
 				),					
 
