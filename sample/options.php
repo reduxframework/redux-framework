@@ -1506,8 +1506,9 @@ function setup_framework_options(){
 				'subtitle' => __('Group any items together.', 'redux-framework'),
 				'desc' => __('No limit as to what you can group. Just don\'t try to group a group.', 'redux-framework'),
 				),			
+				*/
 			)
-			*/
+
 		);    
 
     $tabs['item_info'] = array(
