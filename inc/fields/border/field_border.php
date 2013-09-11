@@ -129,7 +129,7 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
         
             wp_enqueue_script(
                 'redux-field-color-js', 
-                REDUX_URL . 'inc/fields/color/field_color.js', 
+                REDUX_URL . 'inc/fields/color/field_color.min.js', 
                 array( 'jquery', 'wp-color-picker' ),
                 time(),
                 true

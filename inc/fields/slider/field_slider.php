@@ -118,7 +118,7 @@ class ReduxFramework_slider extends ReduxFramework{
 		
 		wp_enqueue_script(
 			'redux-field-slider-js', 
-			REDUX_URL.'inc/fields/slider/field_slider.js', 
+			REDUX_URL.'inc/fields/slider/field_slider.min.js', 
 			array('jquery', 'jquery-numeric'),
 			time(),
 			true
