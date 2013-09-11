@@ -61,7 +61,6 @@ class ReduxFramework_typography extends ReduxFramework{
 
 		$this->value = wp_parse_args( $this->value, $defaults );
 
-
 		if(!empty($this->field['default'])) { 
 			$this->value = wp_parse_args( $this->value, $this->field['default'] );
 		}
@@ -75,7 +74,7 @@ class ReduxFramework_typography extends ReduxFramework{
 	
 		
 	  echo '<div id="'.$this->field['id'].'-container" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
-echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
+
 	  /**
 			Font Family
 		**/
@@ -112,7 +111,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 				$google = false;
 			}
 			// Standard sizes for normal fonts
-			$font_sizes = urlencode( json_encode( array( '400'=>'Normal', '700'=>'Bold', '400-italic'=>'Normal Italic', '700-italic'=>'Bold Italic' ) ) );
+			$font_sizes = urlencode( json_encode( array( '400'=>'Normal 400', '700'=>'Bold 700', '400-italic'=>'Normal 400 Italic', '700-italic'=>'Bold 700 Italic' ) ) );
 	    foreach ($this->field['fonts'] as $i=>$family) {
 	      echo '<option data-google="false" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($this->value['family'], $i, false) . '>'. $family .'</option>';
 	    }
@@ -275,7 +274,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 
 		wp_enqueue_script(
 			'redux-field-typography-js', 
-			REDUX_URL.'inc/fields/typography/field_typography.min.js', 
+			REDUX_URL.'inc/fields/typography/field_typography.js', 
 			array('jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js', 'jquery-numeric'),
 			time(),
 			true
@@ -320,17 +319,17 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 		global $ReduxFramework;
 
 		$key = $ReduxFramework->args['google_api_key'];
-
+/*
 		$sid = session_id();
 		if($sid) {
 		    $googleArray = $_SESSION['googleArray'];
 		} else {
 		    session_start();
 		    $googleArray = array();
-		}		
+		}
 
 		if (empty($_SESSION['googleArray'])) :
-			
+			*/
 			if( !file_exists( REDUX_DIR.'inc/fields/typography/googlefonts.json' ) ) {
 		  	$result = wp_remote_get( 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$key);
 		  	if ($result['response']['code'] == 200) {
@@ -342,7 +341,7 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 							'subsets' => $this->getSubsets($font->subsets)
 						);
 					}
-
+					
 					$wp_filesystem->put_contents(
 					  REDUX_DIR.'inc/fields/typography/googlefonts.json',
 					  json_encode($googleArray),
@@ -359,10 +358,11 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 	      $gfonts .= '<option data-details="'.urlencode(json_encode($face)).'" data-google="true" value="'.$i.'">'. $i .'</option>';
 	    }
 	    $gfonts .= '</optgroup>';			
-	  endif;
+	  //endif;
     if (empty($googleArray)) {
 			$gfonts = "";	
     }
+
 		$wp_filesystem->put_contents(
 		  REDUX_DIR.'inc/fields/typography/googlefonts.html',
 		  $gfonts,
@@ -421,15 +421,20 @@ echo "<h4>This field is currently broken. It will be fixed shortly.</h4><br />";
 			} else if ($v[0] == 9) {
 				$name = 'Ultra-Bold 900';
 			}
+			if ($v == "regular") {
+				$v = "400";
+			}
 			if (strpos($v,"italic") || $v == "italic") {
 				$name .= " Italic";
 				$name = trim($name);
-				array_push($italic, array('id'=>$v, 'name'=>$name));
+				$italic[] = array('id'=>$v, 'name'=>$name);
 			} else {
-				array_push($result, array('id'=>$v, 'name'=>$name));
+				$result[] = array('id'=>$v, 'name'=>$name);
 			}
 		}
+
 		array_push($result, array_pop($italic));
+
 		return array_filter($result);
 	}//function
 

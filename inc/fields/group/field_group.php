@@ -24,14 +24,14 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_repeatable' ) ) {
+if( !class_exists( 'ReduxFramework_group' ) ) {
 
     /**
      * Main ReduxFramework_info class
      *
      * @since       1.0.0
      */
-    class ReduxFramework_repeatable extends ReduxFramework {
+    class ReduxFramework_group extends ReduxFramework {
     
         /**
          * Field Constructor.
@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
 
         	$fields = array(
 			array(
-				'id'=>'test1',
+				'id'=>'test1g',
 				'type' => 'button_set',
 				'title' => __('Button Set Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
@@ -75,7 +75,7 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
 				'default' => '2'
 				),
 			array(
-				'id'=>'test2',
+				'id'=>'test2g',
 				'type' => 'button_set',
 				'title' => __('Button Set Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
@@ -84,7 +84,7 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
 				'default' => '2'
 				),			
 			array(
-				'id'=>'select-post-type',
+				'id'=>'select-post-typeg',
 				'type' => 'select',
 				'data' => 'post_type',
 				'title' => __('Post Type Select Option', 'redux-framework'), 
@@ -92,14 +92,14 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				),	
 			array(
-				'id'=>'17',
+				'id'=>'17g',
 				'type' => 'date',
 				'title' => __('Date Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework')
 				),										
         		);
-        	echo '<div class="repeater" style="background: #eee; padding: 20px;">';
+        	echo '<div class="redux-group">';
         
         	foreach ($fields as $field) {
         		$id = $field['id'];
@@ -112,8 +112,30 @@ if( !class_exists( 'ReduxFramework_repeatable' ) ) {
         		$this->parent->_field_input($field, $this->value[$id]);
         	}        	
         	echo '</div>';
+        	echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
         
-        }
-    }
+        } //function
+
+
+		/**
+	 	 * Enqueue Function.
+		 *
+		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 *
+		 * @since 		1.0.0
+		 * @access		public
+		 * @return		void
+		 */
+		public function enqueue() {
+		
+			wp_enqueue_style(
+				'redux-field-group-css', 
+				REDUX_URL . 'inc/fields/group/field_group.css',
+				time(),
+				true
+			);
+		}
+
+    }//if
 }
 ?>

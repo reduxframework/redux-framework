@@ -13,7 +13,6 @@ var confirmOnPageExit = function(e) {
 		// For Chrome, Safari, IE8+ and Opera 12+
 		return message;
 	};
-console.log(redux_opts.folds);
 
 function verify_fold(item) {
 	jQuery(document).ready(function($) {

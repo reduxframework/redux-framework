@@ -1499,11 +1499,11 @@ function setup_framework_options(){
 				'callback' => 'my_custom_field'
 				),
 			array(
-				'id'=>"repeatable",
-				'type' => 'repeatable',//doesnt need to be called for callback fields
-				'title' => __('Repeatable', 'redux-framework'), 
-				'subtitle' => __('Did this work?', 'redux-framework'),
-				'desc' => __('Giving it the college try!', 'redux-framework'),
+				'id'=>"group",
+				'type' => 'group',//doesnt need to be called for callback fields
+				'title' => __('Group', 'redux-framework'), 
+				'subtitle' => __('Group any items together.', 'redux-framework'),
+				'desc' => __('No limit as to what you can group. Just don\'t try to group a group.', 'redux-framework'),
 				),			
 			)
 		);    

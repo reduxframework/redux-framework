@@ -61,15 +61,16 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 	 	 * @return		void
 		 */
 		public function render() {
+
 		
 			echo '<div class="redux-color-container">';
 		
-			echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
+			echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
 			$tChecked = "";
 			if ( $this->value == "transparent" ) {
 				$tChecked = ' checked="checked"';
 			}
-			echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'].'" value="1"'.$tChecked.'> Transparent</label>';
+			echo '<label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '-transparency" data-id="'.strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')).'" value="1"'.$tChecked.'> Transparent</label>';
 
 			echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 		
