@@ -1,4 +1,4 @@
-/*global jQuery, document, redux_opts, confirm, relid:true, console */
+/*global jQuery, document, redux_opts, confirm, relid:true, console, jsonView */
 jQuery.noConflict();
 var confirmOnPageExit = function(e) {
 		//return; // ONLY FOR DEBUGGING
@@ -20,7 +20,7 @@ function verify_fold(item) {
 		if (item.hasClass('redux-info')) {
 			return;
 		} else {
-			var itemVal = item.val();	
+			var itemVal = item.val();
 		}
 
 		if (redux_opts.folds[item.attr('id')]) {
@@ -66,7 +66,7 @@ function verify_fold(item) {
 						});
 					}
 				}
-			});			
+			});
 		}
 		
 	});
@@ -309,9 +309,14 @@ jQuery(document).ready(function($) {
 	jQuery('.foldParent').each(function() {
 		verify_fold(jQuery(this));
 	});
-	$('#printReduxObject').on('click', function() {
-		console.log(jQuery.parseJSON(decodeURIComponent(jQuery("#redux-object").val())));
+	$('#consolePrintObject').on('click', function() {
+		console.log(jQuery.parseJSON(jQuery("#redux-object-json").html()));
 	});
+
+	if (typeof jsonView === 'function') {
+		jsonView('#redux-object-json', '#redux-object-browser');
+	}
+
 	// Display errors on page load
 	if (redux_opts.errors !== undefined) {
 		jQuery("#redux-field-errors span").html(redux_opts.errors.total);
@@ -338,4 +343,9 @@ jQuery(document).ready(function($) {
 			});
 		});
 	}
+
+
+
+	
+
 });

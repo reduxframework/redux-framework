@@ -13,6 +13,7 @@ class ReduxFramework_typography extends ReduxFramework{
 		parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
 		$this->field = $field;
 		$this->value = $value;
+		$this->googleAPIKey = $parent->args['google_api_key'];
 		//$this->render();
 		
 	}//function
@@ -316,9 +317,7 @@ class ReduxFramework_typography extends ReduxFramework{
 	 * @since ReduxFramework 0.2.0
 	*/	
 	function getGoogleFonts($wp_filesystem) {
-		global $ReduxFramework;
-
-		$key = $ReduxFramework->args['google_api_key'];
+		
 /*
 		$sid = session_id();
 		if($sid) {
@@ -331,7 +330,7 @@ class ReduxFramework_typography extends ReduxFramework{
 		if (empty($_SESSION['googleArray'])) :
 			*/
 			if( !file_exists( REDUX_DIR.'inc/fields/typography/googlefonts.json' ) ) {
-		  	$result = wp_remote_get( 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$key);
+		  	$result = wp_remote_get( 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$this->googleAPIKey);
 		  	if ($result['response']['code'] == 200) {
 		  		$result = json_decode($result['body']);
 		  		$res = array();

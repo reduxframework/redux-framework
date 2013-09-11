@@ -553,6 +553,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
 
+            if ( $this->args['dev_mode'] === true) { // Pretty object output
+	            wp_enqueue_script(
+	                'json-view-js',
+	                REDUX_URL . 'assets/js/vendor/jsonview.min.js',
+	                array( 'jquery' ),
+	                time(),
+	                true
+	            );
+            }
+
             wp_enqueue_script(
                 'redux-js',
                 //REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
@@ -592,7 +602,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 array( 'jquery' ),
                 time(),
                 true
-            );     
+            );    
 
             $localize = array(
                     'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
@@ -1230,12 +1240,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '<h3>' . __( 'Dev Mode Info', 'redux-framework' ) . '</h3>';
                 echo '<div class="redux-section-desc">';
 
-                echo '<textarea class="large-text" rows="24">' . print_r( $this, true );
+                echo '<div id="redux-object-browser"></div>';
 
-                echo '</textarea>';
                 echo '</div>';
 
-                echo '<input type="hidden" id="redux-object" value="' . urlencode( json_encode( $this ) ) . '" /><a href="#" id="printReduxObject" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
+                echo '<div id="redux-object-json" class="hide">'.json_encode($this, true).'</div>';
+
+                echo '<a href="#" id="consolePrintObject" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
                 // END Javascript object debug
 
                 echo '</div>';
