@@ -1498,6 +1498,7 @@ function setup_framework_options(){
 				'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework'),
 				'callback' => 'my_custom_field'
 				),
+			/*
 			array(
 				'id'=>"group",
 				'type' => 'group',//doesnt need to be called for callback fields
@@ -1506,6 +1507,7 @@ function setup_framework_options(){
 				'desc' => __('No limit as to what you can group. Just don\'t try to group a group.', 'redux-framework'),
 				),			
 			)
+			*/
 		);    
 
     $tabs['item_info'] = array(

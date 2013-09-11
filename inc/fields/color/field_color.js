@@ -1,6 +1,9 @@
 /*global jQuery, document, redux_change */
+
 var tcolour;
+
 jQuery(document).ready(function() {
+
 	jQuery('.redux-color-init').wpColorPicker({
 		change: function(u) {
 			redux_change(jQuery(this));
@@ -8,6 +11,7 @@ jQuery(document).ready(function() {
 		}
 	});
 
+	// Name check, converts name to hex
 	function colourNameToHex(colour) {
 		tcolour = colour.replace(/^\s\s*/, '').replace(/\s\s*$/, '').replace("#", "");
 		var colours = {
@@ -158,9 +162,11 @@ jQuery(document).ready(function() {
 		}
 		return colour;
 	}
+
 	jQuery('.redux-color').on('focus', function() {
 		jQuery(this).data('oldcolor', jQuery(this).val());
 	});
+
 	jQuery('.redux-color').on('keyup', function() {
 		var value = jQuery(this).val();
 		var color = redux_color_validate(this);
@@ -175,6 +181,8 @@ jQuery(document).ready(function() {
 			}
 		}
 	});
+
+	// Replace and validate field on blur
 	jQuery('.redux-color').on('blur', function() {
 		var value = jQuery(this).val();
 		var id = '#' + jQuery(this).attr('id');
@@ -190,10 +198,13 @@ jQuery(document).ready(function() {
 			jQuery(id + '-transparency').removeAttr('checked');
 		}
 	});
+
+	// Store the old valid color on keydown
 	jQuery('.redux-color').on('keydown', function() {
 		jQuery(this).data('oldkeypress', jQuery(this).val());
 	});
 
+	// Run the validation
 	function redux_color_validate(field) {
 		var value = jQuery(field).val();
 		if (colourNameToHex(value) !== value.replace('#', '')) {
@@ -201,6 +212,8 @@ jQuery(document).ready(function() {
 		}
 		return value;
 	}
+
+	// When transparency checkbox is clicked
 	jQuery('.color-transparency').on('click', function() {
 		if (jQuery(this).is(":checked")) {
 			jQuery('#' + jQuery(this).data('id')).val('transparent');
@@ -211,4 +224,5 @@ jQuery(document).ready(function() {
 			}
 		}
 	});
+
 });

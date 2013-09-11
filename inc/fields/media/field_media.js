@@ -1,20 +1,18 @@
 /* global redux_change, wp */
 
-jQuery.noConflict();
-
-/** Fire up jQuery - let's dance!
- */
 jQuery(document).ready(function($){
 
 	/**
-	  * Media Uploader
-	  * Dependencies		: jquery, wp media uploader
-	  * Feature added by	: Smartik - http://smartik.ws/
-	  * Date				: 05.28.2013
-	  */
+		* Media Uploader
+		* Dependencies		: jquery, wp media uploader
+		* Feature added by	: Smartik - http://smartik.ws/
+		* Date				: 05.28.2013
+	*/
+
+	// Add a file via the wp.media function
 	function redux_add_file(event, selector) {
 
-		var upload = $(".uploaded-file"), frame;
+		var frame;
 		var $el = $(this);
 
 		event.preventDefault();
@@ -63,15 +61,18 @@ jQuery(document).ready(function($){
 			selector.find('.media_upload_button').unbind();
 			selector.find('.remove-image').removeClass('hide');//show "Remove" button
 			selector.find('.redux-background-properties').slideDown();
-			redux_file_bindings();
+
 		});
 
 		// Finally, open the modal.
 		frame.open();
 	}
 
+
+	// Function to remove the image on click. Still requires a save
 	function redux_remove_file(selector) {
 
+		// This shouldn't have been run...
 		if (!selector.find('.remove-image').addClass('hide')) {
 			return;
 		}
@@ -84,29 +85,28 @@ jQuery(document).ready(function($){
 		selector.find('.upload-width').val('');
 		selector.find('.redux-background-properties').hide();
 		var screenshot = selector.find('.screenshot');
-		//if (!screenshot.hasClass('min')) {
-			screenshot.slideUp();
-		//}
+		
+		// Hide the screenshot
+		screenshot.slideUp();
+
 		selector.find('.remove-file').unbind();
 		// We don't display the upload button if .upload-notice is present
 		// This means the user doesn't have the WordPress 3.5 Media Library Support
 		if ( $('.section-upload .upload-notice').length > 0 ) {
 			$('.media_upload_button').remove();
 		}
-		redux_file_bindings();
+
 	}
 
-	function redux_file_bindings() {
-		$('.remove-image, .remove-file').on('click', function() {
-			redux_remove_file( $(this).parents('td') );
+	// Remove the image button
+	$('.remove-image, .remove-file').on('click', function() {
+		redux_remove_file( $(this).parents('td') );
 	});
 
+	// Upload media button
 	$('.media_upload_button').unbind('click').click( function( event ) {
 		redux_add_file(event, $(this).parents('td'));
 	});
-    }
-
-    redux_file_bindings();
 
 
 });

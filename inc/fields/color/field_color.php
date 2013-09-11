@@ -97,6 +97,8 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 				true
 			);
 
+			wp_enqueue_style( 'wp-color-picker' );
+
 			wp_enqueue_style(
 				'redux-field-color-css', 
 				REDUX_URL . 'inc/fields/color/field_color.css', 
