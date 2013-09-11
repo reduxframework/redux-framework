@@ -26,6 +26,8 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
+	define('REDUX_VERSION', '3.0.0');
+
     // Windows-proof constants: replace backward by forward slashes
     // Thanks to: https://github.com/peterbouwmeester
     $fslashed_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
@@ -49,7 +51,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // Protected vars
         // These two are actually really unnecessary and should be deprecated
         protected $framework_url        = 'http://www.reduxframework.com/';
-        protected $framework_version    = '3.0.0';
+        protected $framework_version    = REDUX_VERSION;
 
         // Public vars
         public $page                = '';

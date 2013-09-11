@@ -462,17 +462,18 @@ color: #777;
 	display:block;
 }
 
-
-.redux-group-tab-link-a i{
-	position: absolute;
-}	
-.redux-group-tab-link-a span {
-	display: block;
-	z-index: 0;
-}
-
-.redux-group-tab-link-a span.group_title {
-	padding-left: 30px;
+.redux-group-tab-link-a {
+	position: relative;
+	i{
+		position: absolute;
+	}	
+	span {
+		display: block;
+		z-index: 0;
+		&.group_title {
+			padding-left: 30px;
+		}
+	}
 }
 .redux-group-tab-link-li a.hasError span.group_title {
 	padding-right: 25px;
