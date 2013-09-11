@@ -156,7 +156,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             }
 
             wp_enqueue_script(
-                'redux-media-js',
+                'redux-field-media-js',
                 REDUX_URL . 'inc/fields/media/field_media.min.js',
                 array( 'jquery', 'wp-color-picker' ),
                 time(),
@@ -164,7 +164,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             );
 
             wp_enqueue_style(
-                'redux-media-css',
+                'redux-field-media-css',
                 REDUX_URL . 'inc/fields/media/field_media.css',
                 time(),
                 true

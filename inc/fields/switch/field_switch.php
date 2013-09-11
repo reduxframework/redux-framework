@@ -75,7 +75,7 @@ class ReduxFramework_switch extends ReduxFramework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'redux-switch-js', 
+			'redux-field-switch-js', 
 			REDUX_URL.'inc/fields/switch/field_switch.min.js', 
 			array('jquery'),
 			time(),
@@ -83,7 +83,7 @@ class ReduxFramework_switch extends ReduxFramework{
 		);		
 
 		wp_enqueue_style(
-			'redux-switch-css', 
+			'redux-field-switch-css', 
 			REDUX_URL.'inc/fields/switch/field_switch.css', 
 			time(),
 			true

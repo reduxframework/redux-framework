@@ -16,50 +16,59 @@ var confirmOnPageExit = function(e) {
 
 function verify_fold(item) {
 	jQuery(document).ready(function($) {
-		var itemVal = item.val();
-		$.each(redux_opts.folds[item.attr('id')], function(index, value) {
-			var show = false;
-			for (var i = 0; i < value.length; i++) {
-/**
-						DO NOT change this comarison to === even if JSLint says so. 
-						Will not work unless you cast to string like so:
-						String(value[i]) === String(itemVal)
+		
+		if (item.hasClass('redux-info')) {
+			return;
+		} else {
+			var itemVal = item.val();	
+		}
 
-						BUT if you do so the cascading effect ceases to work!
+		if (redux_opts.folds[item.attr('id')]) {
+			$.each(redux_opts.folds[item.attr('id')], function(index, value) {
+				var show = false;
+				for (var i = 0; i < value.length; i++) {
+	/**
+							DO NOT change this comarison to === even if JSLint says so. 
+							Will not work unless you cast to string like so:
+							String(value[i]) === String(itemVal)
 
-						LEAVE AS IS
+							BUT if you do so the cascading effect ceases to work!
 
-					**/
-				/*jshint eqeqeq: false */
-				if (value[i] == itemVal) {
-					show = true;
+							LEAVE AS IS
+
+						**/
+					/*jshint eqeqeq: false */
+					if (value[i] == itemVal) {
+						show = true;
+					}
+					/*jshint eqeqeq: true */
 				}
-				/*jshint eqeqeq: true */
-			}
-			var hidden = jQuery('#' + index).parents("tr:first").is(":hidden");
-			if (jQuery(item).parents("tr:first").is(":hidden")) {
-				show = false;
-			}
-			if (show) {
-				if (hidden) {
-					jQuery('#' + index).parents("tr:first").fadeIn('medium', function() {
-						// Cascade the fold effect
-						if (jQuery('#' + index).hasClass('foldParent')) {
-							verify_fold(jQuery('#' + index));
-						}
-					});
+				var hidden = jQuery('#' + index).parents("tr:first").is(":hidden");
+				if (jQuery(item).parents("tr:first").is(":hidden")) {
+					show = false;
 				}
-			} else if (!show) {
-				if (!hidden) {
-					jQuery('#' + index).parents("tr:first").fadeOut(400, function() {
-						// Cascade the fold effect
-						if (jQuery('#' + index).hasClass('foldParent')) {
-							verify_fold(jQuery('#' + index));
-						}
-					});
+				if (show) {
+					if (hidden) {
+						jQuery('#' + index).parents("tr:first").fadeIn('medium', function() {
+							// Cascade the fold effect
+							if (jQuery('#' + index).hasClass('foldParent')) {
+								verify_fold(jQuery('#' + index));
+							}
+						});
+					}
+				} else if (!show) {
+					if (!hidden) {
+						jQuery('#' + index).parents("tr:first").fadeOut(400, function() {
+							// Cascade the fold effect
+							if (jQuery('#' + index).hasClass('foldParent')) {
+								verify_fold(jQuery('#' + index));
+							}
+						});
+					}
 				}
-			}
-		});
+			});			
+		}
+		
 	});
 }
 

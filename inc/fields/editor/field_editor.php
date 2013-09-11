@@ -72,6 +72,28 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
             echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
         
         }
+
+
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function enqueue() {
+
+            wp_enqueue_style(
+                'redux-field-editor-css', 
+                REDUX_URL . 'inc/fields/editor/field_editor.css',
+                time(),
+                true
+            );
+        
+        }
+
     }
 }
 ?>

@@ -66,33 +66,65 @@ function setup_framework_options(){
 
     // For use with a tab below
 		$tabs = array();
-    if (function_exists('wp_get_theme')){
-        $theme_data = wp_get_theme();
+
+		ob_start();
+
+		$ct = wp_get_theme();
+        $theme_data = $ct;
         $item_name = $theme_data->get('Name'); 
-        $item_uri = $theme_data->get('ThemeURI');
-        $description = $theme_data->get('Description');
-        $author = $theme_data->get('Author');
-        $author_uri = $theme_data->get('AuthorURI');
-        $version = $theme_data->get('Version');
-        $tags = $theme_data->get('Tags');
-    }else{
-        $theme_data = get_theme_data(trailingslashit(get_stylesheet_directory()) . 'style.css');
-        $item_name = $theme_data['Name']; 
-        $item_uri = $theme_data['URI'];
-        $description = $theme_data['Description'];
-        $author = $theme_data['Author'];
-        $author_uri = $theme_data['AuthorURI'];
-        $version = $theme_data['Version'];
-        $tags = $theme_data['Tags'];
-     }
-    
-    $item_info = '<div class="redux-opts-section-desc">';
-    $item_info .= '<p class="redux-opts-item-data description item-uri">' . __('<strong>Theme URL:</strong> ', 'redux-framework') . '<a href="' . $item_uri . '" target="_blank">' . $item_uri . '</a></p>';
-    $item_info .= '<p class="redux-opts-item-data description item-author">' . __('<strong>Author:</strong> ', 'redux-framework') . ($author_uri ? '<a href="' . $author_uri . '" target="_blank">' . $author . '</a>' : $author) . '</p>';
-    $item_info .= '<p class="redux-opts-item-data description item-version">' . __('<strong>Version:</strong> ', 'redux-framework') . $version . '</p>';
-    $item_info .= '<p class="redux-opts-item-data description item-description">' . $description . '</p>';
-    $item_info .= '<p class="redux-opts-item-data description item-tags">' . __('<strong>Tags:</strong> ', 'redux-framework') . implode(', ', $tags) . '</p>';
-    $item_info .= '</div>';    
+		$tags = $ct->Tags;
+		$screenshot = $ct->get_screenshot();
+		$class = $screenshot ? 'has-screenshot' : '';
+
+		$customize_title = sprintf( __( 'Customize &#8220;%s&#8221;' ), $ct->display('Name') );
+
+		?>
+		<div id="current-theme" class="<?php echo esc_attr( $class ); ?>">
+			<?php if ( $screenshot ) : ?>
+				<?php if ( current_user_can( 'edit_theme_options' ) ) : ?>
+				<a href="<?php echo wp_customize_url(); ?>" class="load-customize hide-if-no-customize" title="<?php echo esc_attr( $customize_title ); ?>">
+					<img src="<?php echo esc_url( $screenshot ); ?>" alt="<?php esc_attr_e( 'Current theme preview' ); ?>" />
+				</a>
+				<?php endif; ?>
+				<img class="hide-if-customize" src="<?php echo esc_url( $screenshot ); ?>" alt="<?php esc_attr_e( 'Current theme preview' ); ?>" />
+			<?php endif; ?>
+
+			<h4>
+				<?php echo $ct->display('Name'); ?>
+			</h4>
+
+			<div>
+				<ul class="theme-info">
+					<li><?php printf( __('By %s'), $ct->display('Author') ); ?></li>
+					<li><?php printf( __('Version %s'), $ct->display('Version') ); ?></li>
+					<li><?php echo '<strong>'.__('Tags', 'redux-framework').':</strong> '; ?><?php printf( $ct->display('Tags') ); ?></li>
+				</ul>
+				<p class="theme-description"><?php echo $ct->display('Description'); ?></p>
+				<?php if ( $ct->parent() ) {
+					printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.' ) . '</p>',
+						__( 'http://codex.wordpress.org/Child_Themes' ),
+						$ct->parent()->display( 'Name' ) );
+				} ?>
+				
+			</div>
+
+		</div>
+
+		<?php
+		$item_info = ob_get_contents();
+		    
+		ob_end_clean();
+
+
+	if( file_exists( REDUX_DIR.'sample/sample_files/info-html.html' )) {
+		global $wp_filesystem;
+		if (empty($wp_filesystem)) {
+			require_once(ABSPATH .'/wp-admin/includes/file.php');
+			WP_Filesystem();
+		}  		
+		$sampleHTML = $wp_filesystem->get_contents(REDUX_DIR.'sample/sample_files/info-html.html');
+	}
+
 
     // Setting dev mode to true allows you to view the class settings/info in the panel.
     // Default: true
@@ -111,8 +143,8 @@ function setup_framework_options(){
 
 	$theme = wp_get_theme();
 
-	$args['display_name'] = $item_name;
-	$args['display_version'] = $version;
+	$args['display_name'] = $theme->get('Name');
+	$args['display_version'] = $theme->get('Version');
 
     // If you want to use Google Webfonts, you MUST define the api key.
     $args['google_api_key'] = 'AIzaSyAX_2L_UzCDPEnAHTG7zhESRVpMPS4ssII';
@@ -1488,8 +1520,16 @@ function setup_framework_options(){
 			array(
 				'id'=>'23',
 				'type' => 'info',
+				'fold' => array('18'=>array('1', '2')),
 				'desc' => __('<p class="description">This is the info field, if you want to break sections up.</p>', 'redux-framework')
-				),					
+				),			
+			array(
+				'id'=>'raw_info',
+				'type' => 'info',
+				'fold' => array('18'=>array('1', '2')),
+				'raw_html'=>true,
+				'desc' => $sampleHTML,
+				),							
 			array(
 				'id'=>"custom_callback",
 				//'type' => 'nothing',//doesnt need to be called for callback fields

@@ -141,7 +141,7 @@ class ReduxFramework_select extends ReduxFramework{
 		wp_enqueue_style( 'select2-css' );
 
 		wp_enqueue_script(
-			'select2-init', 
+			'field-select-js', 
 			REDUX_URL.'inc/fields/select/field_select.min.js', 
 			array('jquery', 'select2-js'),
 			time(),

@@ -63,7 +63,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          */
         public function render() {
         
-            echo '<fieldset class="buttonset">';
+            echo '<fieldset class="buttonset ui-buttonset">';
             
             foreach( $this->field['options'] as $k => $v ) {
                 
@@ -93,7 +93,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
             wp_enqueue_style( 'jquery-ui-css' );
 
             wp_enqueue_script(
-                'redux-field-button_set-js', 
+                'redux-field-button-set-js', 
                 REDUX_URL . 'inc/fields/button_set/field_button_set.min.js', 
                 array( 'jquery', 'jquery-ui-core', 'jquery-ui-dialog' ),
                 time(),

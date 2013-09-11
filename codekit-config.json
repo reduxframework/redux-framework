@@ -148,15 +148,6 @@
       "initialSize" : 625,
       "fileType" : 8192
     },
-    "\/inc\/fields\/_old\/pages_select\/field_pages_select.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/pages_select\/field_pages_select.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/inc\/fields\/switch\/field_switch.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.less",
@@ -174,6 +165,15 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/inc\/fields\/_old\/pages_select\/field_pages_select.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/pages_select\/field_pages_select.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/date\/field_date.min.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -184,6 +184,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/inc\/fields\/date\/field_date.min.min.js",
       "fileType" : 64
+    },
+    "\/inc\/fields\/editor\/field_editor.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/inc\/fields\/image_select\/field_image_select.js" : {
       "ignoreWasSetByUser" : 0,
@@ -267,14 +276,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/inc\/validation\/preg_replace\/validation_preg_replace.php" : {
+    "\/assets\/img\/3cl.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/validation\/preg_replace\/validation_preg_replace.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/assets\/img\/3cl.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/3cl.png",
+      "initialSize" : 3156,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_de.js" : {
       "ignoreWasSetByUser" : 0,
@@ -287,16 +298,14 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_de.min.js",
       "fileType" : 64
     },
-    "\/assets\/img\/3cl.png" : {
+    "\/inc\/validation\/preg_replace\/validation_preg_replace.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/3cl.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/3cl.png",
-      "initialSize" : 3156,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/inc\/validation\/preg_replace\/validation_preg_replace.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_hr.js" : {
       "ignoreWasSetByUser" : 0,
@@ -331,15 +340,6 @@
       "initialSize" : 634,
       "fileType" : 8192
     },
-    "\/inc\/fields\/image_select\/field_image_select2.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select2.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/img\/1col.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -372,6 +372,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.min.min.js",
       "fileType" : 64
+    },
+    "\/sample\/sample_files\/info-html.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/info-html.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_pl.js" : {
       "ignoreWasSetByUser" : 0,
@@ -649,6 +658,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/inc\/validation\/url\/validation_url.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/validation\/url\/validation_url.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/_old\/date\/field_date.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -659,15 +677,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/inc\/fields\/_old\/date\/field_date.min.js",
       "fileType" : 64
-    },
-    "\/inc\/validation\/url\/validation_url.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/validation\/url\/validation_url.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/inc\/fields\/button_set\/field_button_set.js" : {
       "ignoreWasSetByUser" : 0,
@@ -722,12 +731,38 @@
       "initialSize" : 1033,
       "fileType" : 8192
     },
+    "\/inc\/fields\/multi_text\/field_multi_text.less" : {
+      "ieCompatibility" : 1,
+      "inputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.less",
+      "outputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.css",
+      "outputPathIsSetByUser" : 0,
+      "strictUnits" : 0,
+      "relativeURLS" : 0,
+      "ignore" : 0,
+      "strictImports" : 0,
+      "ignoreWasSetByUser" : 0,
+      "shouldRunBless" : 1,
+      "hidden" : 0,
+      "strictMath" : 0,
+      "outputStyle" : 1,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
     "\/inc\/fields\/_old\/multi_select\/field_multi_select.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/inc\/fields\/_old\/multi_select\/field_multi_select.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -747,15 +782,6 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/checkbox_hide_below\/field_checkbox_hide_below.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/inc\/fields\/date\/field_date.php" : {
       "ignoreWasSetByUser" : 0,
@@ -815,15 +841,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/sample\/options.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/sample\/options.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/inc\/fields\/image_select\/field_image_select.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select.less",
@@ -851,6 +868,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_sk.min.js",
       "fileType" : 64
+    },
+    "\/sample\/options.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/options.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/inc\/fields\/checkbox\/field_checkbox.php" : {
       "ignoreWasSetByUser" : 0,
@@ -952,17 +978,6 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/button_set\/field_button_set.min.min.js",
       "fileType" : 64
     },
-    "\/sample\/sample_files\/presets\/preset1.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset1.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset1.png",
-      "initialSize" : 18478,
-      "fileType" : 8192
-    },
     "\/assets\/js\/vendor\/select2\/select2_locale_ro.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -973,6 +988,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_ro.min.js",
       "fileType" : 64
+    },
+    "\/sample\/sample_files\/presets\/preset1.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset1.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/presets\/preset1.png",
+      "initialSize" : 18478,
+      "fileType" : 8192
     },
     "\/assets\/img\/social\/Facebook.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1246,17 +1272,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/assets\/js\/vendor\/select2\/select2_locale_cs.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_cs.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_cs.min.js",
-      "fileType" : 64
-    },
     "\/inc\/fields\/_old\/tags_multi_select\/field_tags_multi_select.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1324,6 +1339,17 @@
       "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/assets\/js\/vendor\/select2\/select2_locale_cs.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_cs.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_cs.min.js",
+      "fileType" : 64
     },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_75_dadada_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1443,15 +1469,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/tests\/includes\/unittests-config.travis.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/tests\/includes\/unittests-config.travis.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/inc\/fields\/group\/field_group.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/group\/field_group.less",
@@ -1468,6 +1485,15 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/inc\/fields\/_old\/checkbox\/field_checkbox.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/checkbox\/field_checkbox.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/js\/vendor\/select2\/select2.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1497,21 +1523,21 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/inc\/fields\/_old\/checkbox\/field_checkbox.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/_old\/checkbox\/field_checkbox.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/inc\/fields\/_old\/upload\/field_upload.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/inc\/fields\/_old\/upload\/field_upload.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/tests\/includes\/unittests-config.travis.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/tests\/includes\/unittests-config.travis.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -1705,6 +1731,23 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/inc\/fields\/editor\/field_editor.less" : {
+      "ieCompatibility" : 1,
+      "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.less",
+      "outputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.css",
+      "outputPathIsSetByUser" : 0,
+      "strictUnits" : 0,
+      "relativeURLS" : 0,
+      "ignore" : 0,
+      "strictImports" : 0,
+      "ignoreWasSetByUser" : 0,
+      "shouldRunBless" : 1,
+      "hidden" : 0,
+      "strictMath" : 0,
+      "outputStyle" : 1,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_222222_256x240.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1892,6 +1935,26 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/inc\/fields\/switch\/field_switch.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/sample\/sample_files\/patterns\/tree_bark.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/tree_bark.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/tree_bark.png",
+      "initialSize" : 42360,
+      "fileType" : 8192
+    },
     "\/inc\/fields\/typography\/field_typography.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/typography\/field_typography.less",
@@ -1908,17 +1971,6 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/sample\/sample_files\/patterns\/tree_bark.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/tree_bark.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/sample\/sample_files\/patterns\/tree_bark.png",
-      "initialSize" : 42360,
-      "fileType" : 8192
     },
     "\/inc\/validation\/comma_numeric\/validation_comma_numeric.php" : {
       "ignoreWasSetByUser" : 0,
@@ -1950,15 +2002,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_nl.min.js",
       "fileType" : 64
-    },
-    "\/inc\/fields\/switch\/field_switch.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/inc\/fields\/select\/field_select.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -2241,6 +2284,15 @@
       "initialSize" : 693,
       "fileType" : 8192
     },
+    "\/inc\/fields\/group\/field_group.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/group\/field_group.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/_old\/upload\/field_upload_3_4.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2251,15 +2303,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/inc\/fields\/_old\/upload\/field_upload_3_4.min.js",
       "fileType" : 64
-    },
-    "\/inc\/fields\/group\/field_group.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/group\/field_group.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_f6cf3b_256x240.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2516,6 +2559,23 @@
       "initialSize" : 2985,
       "fileType" : 8192
     },
+    "\/inc\/fields\/info\/field_info.less" : {
+      "ieCompatibility" : 1,
+      "inputAbbreviatedPath" : "\/inc\/fields\/info\/field_info.less",
+      "outputAbbreviatedPath" : "\/inc\/fields\/info\/field_info.css",
+      "outputPathIsSetByUser" : 0,
+      "strictUnits" : 0,
+      "relativeURLS" : 0,
+      "ignore" : 0,
+      "strictImports" : 0,
+      "ignoreWasSetByUser" : 0,
+      "shouldRunBless" : 1,
+      "hidden" : 0,
+      "strictMath" : 0,
+      "outputStyle" : 1,
+      "fileType" : 1,
+      "debugStyle" : 0
+    },
     "\/inc\/validation\/email\/validation_email.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2588,6 +2648,24 @@
       "outputAbbreviatedPath" : "\/assets\/img\/3cm.png",
       "initialSize" : 3036,
       "fileType" : 8192
+    },
+    "\/inc\/fields\/multi_text\/field_multi_text.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/inc\/fields\/info\/field_info.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/info\/field_info.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_zh-CN.js" : {
       "ignoreWasSetByUser" : 0,

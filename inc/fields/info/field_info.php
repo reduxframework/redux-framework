@@ -71,11 +71,37 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
             if( !isset( $this->field['fold-vals'] ) )
                 $this->field['fold-vals'] = '';
 
-            echo '</td></tr></table><div class="redux-info-field' . $this->field['class'] . '">';
+            if ( empty( $this->field['raw_html'] ) ) {
+            	$this->field['class'] .= " redux-info-field";
+            }
+
+            echo '</td></tr></table><div id="' . $this->field['id'] . '" class="redux-info ' . $this->field['class'] . '">';
             echo $this->field['desc'];
-            echo '</div><table class="form-table no-border"><tbody><tr><th></th><td>';
+            echo '</div><table class="form-table no-border" style="margin-top: 0;"><tbody><tr><th></th><td>';
         
         }
+
+
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function enqueue() {
+
+            wp_enqueue_style(
+                'redux-field-info-css',
+                REDUX_URL . 'inc/fields/info/field_info.css',
+                time(),
+                true
+            );
+
+        }
+
     }
 }
 ?>

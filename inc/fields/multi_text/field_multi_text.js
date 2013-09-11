@@ -2,10 +2,10 @@
 
 jQuery(document).ready(function(){
 	
-	jQuery('.redux-multi-text-remove').on('click', function(){
-		redux_change();
+	jQuery('.redux-multi-text-remove').live('click', function(){
+		redux_change(jQuery(this));
 		jQuery(this).prev('input[type="text"]').val('');
-		jQuery(this).parent().fadeOut('slow', function(){jQuery(this).remove();});
+		jQuery(this).parent().slideUp('medium', function(){jQuery(this).remove();});
 	});
 	
 	jQuery('.redux-multi-text-add').click(function(){

@@ -120,7 +120,14 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
                 REDUX_URL . 'inc/fields/color/field_color.css', 
                 time(),
                 true
-            );      
+            ); 
+
+			wp_enqueue_style(
+				'redux-field-color-css', 
+				REDUX_URL . 'inc/fields/color/field_color.css', 
+				time(),
+				true
+			);                 
         
         }
     }

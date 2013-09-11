@@ -83,11 +83,25 @@ class ReduxFramework_slider extends ReduxFramework{
 			$readonly = ' readonly="readonly"';
 		}
 
-		wp_localize_script( 'redux-slider-js', $this->field['id'].'Param', $params );
+		// Use javascript globalization, better than any other method.
+		global $wp_scripts;
+		$data = $wp_scripts->get_data('redux-field-slider-js', 'data');
+
+		if(!empty($data)) { // Adding to the previous localize script object
+		  if(!is_array($data)) {
+		    $data = json_decode(str_replace('var reduxSliders = ', '', substr($data, 0, -1)), true);
+		  }
+		  foreach($data as $key => $value) {
+		    $localized_data[$key] = $value;
+		  }
+		  $wp_scripts->add_data('redux-field-slider-js', 'data', '');
+		}
+		$localized_data[$this->field['id']] = $params;
+		wp_localize_script('redux-field-slider-js', 'reduxSliders', $localized_data);		
 	
 		//html output
 		echo '<input type="text" name="'.$this->args['opt_name'].'['.$this->field['id'].']" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$this->field['class'].'"'.$readonly.'/>';
-		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider"></div>';
+		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider" rel="'.$this->field['id'].'"></div>';
 		
 		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="desc">'.$this->field['desc'].'</div>':'';
 		
@@ -103,15 +117,15 @@ class ReduxFramework_slider extends ReduxFramework{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'redux-slider-js', 
-			REDUX_URL.'inc/fields/slider/field_slider.min.js', 
+			'redux-field-slider-js', 
+			REDUX_URL.'inc/fields/slider/field_slider.js', 
 			array('jquery', 'jquery-numeric'),
 			time(),
 			true
 		);		
 
 		wp_enqueue_style(
-			'redux-slider-css', 
+			'redux-field-slider-css', 
 			REDUX_URL.'inc/fields/slider/field_slider.css', 
 			time(),
 			true
