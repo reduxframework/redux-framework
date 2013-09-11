@@ -84,11 +84,11 @@ class ReduxFramework_spacing extends ReduxFramework{
 
 
 
-
 			/** 
 			Units
 			**/
-			if ($this->field['units'] === true):
+
+			if ( empty( $this->field['units'] ) ):
 			  echo '<div class="select_wrapper spacing-units" original-title="'.__('Units','redux-framework').'">';
 			  echo '<select data-placeholder="'.__('Units','redux-framework').'" class="redux-spacing redux-spacing-units select'.$this->field['class'].'" original-title="'.__('Units','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][units]" id="'. $this->field['id'].'_units">';
 				 	if (empty($this->value['units'])) {
@@ -97,12 +97,14 @@ class ReduxFramework_spacing extends ReduxFramework{
 				 	echo '<option value="px" '.selected($this->value['units'], 'px', false).'>px</option>';
 				 	echo '<option value="em"'.selected($this->value['units'], 'em', false).'>em</option>';
 				 	echo '<option value="%"'.selected($this->value['units'], '%', false).'>%</option>';
-
-
-
 			  echo '</select></div>';
-
+			else :
+				echo '<div class="select_wrapper spacing-units" original-title="'.__('Units','redux-framework').'">';
+			  	echo '<select data-placeholder="'.__('Units','redux-framework').'" class="redux-spacing redux-spacing-units select'.$this->field['class'].'" original-title="'.__('Units','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][units]" id="'. $this->field['id'].'_units">';
+				 	echo '<option value="'.$this->field['units'].'" selected="selected">'.$this->field['units'].'</option>';
+			  echo '</select></div>';				
 			endif;
+
 
 
 	  	echo "</div>";
