@@ -717,13 +717,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo $content;
                 exit;
             } else {
-                header( 'Content-type: text/json' );
-                header( 'Content-type: application/json' );
+                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+                header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
                 header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
-                header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
-                header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-                header( 'Cache-Control: post-check=0, pre-check=0', false );
-                header( 'Pragma: no-cache' );
+-               header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+-               header( 'Cache-Control: post-check=0, pre-check=0', false );
+-               header( 'Pragma: no-cache' );
+
+                // Can't include the type. Thanks old Firefox and IE. BAH.
+                //header("Content-type: application/json");
                 echo $content;
                 exit;
             }
