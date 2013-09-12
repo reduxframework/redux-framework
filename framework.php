@@ -850,7 +850,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						if ( !empty( $this->folds[$field['id']] ) ) { // Sets the values you shoe fold children on
 						    $field['class'] .= " foldParent";
 						}
-						if ( !empty( $this->compiler ) ) {
+
+						if ( !empty( $field['compiler'] ) ) {
 							$field['class'] .= " compiler";
 						}
 						$this->sections[$k]['fields'][$fieldk] = $field;
