@@ -395,11 +395,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$this->set_options( $defaults );
 				$this->options = $defaults;
 		    }
-
-			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
-				delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
-				do_action('redux-compiler-' . $this->args['opt_name'], $this->options );
-			}		    
+	    
         }
 
         /**
@@ -870,10 +866,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$this->set_options( $this->options );
 			}
 
-			if (get_transient( 'simple-options-compiler' )) {
-				delete_transient( 'simple-options-compiler' );
-				do_action('simple_options_compiler', $this->options);	
-			}
+			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
+				delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
+				do_action('redux-compiler-' . $this->args['opt_name'], $this->options );
+			}				
 
         }
 
