@@ -104,7 +104,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			$defaults['theme_mods'] 		= false;
 			$defaults['theme_mods_expand'] 	= false;
 			$defaults['transient'] 			= false;
-			$defaults['global_variable'] 	= 'redux';
+			$defaults['global_variable'] 	= '';
 			$defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
             // The defaults are set so it will preserve the old behavior.
@@ -112,10 +112,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['default_mark']		= ''; // What to print by the field's title if the value shown is default
 
 	    	// Set values
+
             $this->args = wp_parse_args( $args, $defaults );
-            if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
-            	$this->args['global_variable'] = str_replace('-', '_', $this->args['opt_name']);
+
+            if ( $this->args['global_variable'] !== false ) {
+            	if ( $this->args['global_variable'] == "" ) {
+            		$this->args['global_variable'] = str_replace('-', '_', $this->args['opt_name']);	
+            	}
+            	$variable = $this->args['global_variable'];
+            	global $$variable;
+            	if ( empty( $$variable ) ) {
+            		$this->options = $this->get_options();
+            	}
             }
+
+
+
 	    	$this->sections = $sections;
 			$this->extra_tabs = $extra_tabs;
 
@@ -373,6 +385,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _set_default_options() {
 		    // Get args
 		    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
+
+		    // Fix the global variable name
             if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
             	$this->args['global_variable'] = str_replace('-', '_', $this->args['opt_name']);
             }
@@ -817,14 +831,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         } else {
 							$th = '';
 						}
-
+						if (!isset($field['id'])) {
+							print_r($field);
+						}
 						// Set the default if it's a new field
 						if (!isset($this->options[$field['id']])) {
 			                if( is_null( $this->options_defaults ) ) {
 			                	$this->_default_values(); // fill cache
 			                }
-
-			                $this->options[$field['id']] = array_key_exists( $field['id'], $this->options_defaults ) ? $this->options_defaults[$field['id']] : '';
+			                if ( !empty( $this->options_defaults ) ) {
+			                	$this->options[$field['id']] = array_key_exists( $field['id'], $this->options_defaults ) ? $this->options_defaults[$field['id']] : '';	
+			                }
 							$runUpdate = true;
 						}						
 

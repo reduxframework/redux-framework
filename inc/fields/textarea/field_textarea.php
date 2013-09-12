@@ -34,10 +34,7 @@ class ReduxFramework_textarea {
 
         <textarea name="<?php echo $name; ?>" id="<?php echo $id; ?>" <?php echo $placeholder; ?> class="large-text <?php echo $this->field['class']; ?>" rows="<?php echo $rows; ?>"><?php echo esc_attr($this->value); ?></textarea>
 
-        <?php if($this->field['desc'] != '') : ?>
-            <br/><span class="description"><?php echo $this->field['desc']; ?></span>
-        <?php endif; ?>
-
         <?php
+        echo (isset($this->field['desc']) && !empty($this->field['desc'])) ? '<br /><span class="description">' . $this->field['desc'] . '</span>' : '';
     }
 }
