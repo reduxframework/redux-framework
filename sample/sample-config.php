@@ -997,7 +997,19 @@ function setup_framework_options(){
 				'type' => 'info',
 				'fold' => array('18'=>array('1', '2')),
 				'desc' => __('<p class="description">This is the info field, if you want to break sections up.</p>', 'redux-framework')
-				),			
+            ),
+            array(
+                'id'=>'info_warning',
+                'type'=>'info',
+                'style'=>'warning',
+                'desc' => __( '<p class="description">This is an info field with the warning style applied.</p>', 'redux-framework')
+            ),
+            array(
+                'id'=>'info_success',
+                'type'=>'info',
+                'style'=>'success',
+                'desc' => __( '<p class="description">This is an info field with the success style applied.</p>', 'redux-framework')
+            ),
 			array(
 				'id'=>'raw_info',
 				'type' => 'info',
