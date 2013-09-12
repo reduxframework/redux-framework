@@ -81,7 +81,6 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
                     }
                 } else if( $this->field['data'] == 'menus' || $this->field['data'] == 'menu' ) {
                     $menus = wp_get_nav_menus( $args );
-
                     if( !empty( $menus ) ) {
                         foreach( $menus as $k=>$item ) {
                             $this->field['options'][$item->term_id] = $item->name;
@@ -128,11 +127,6 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
                 }
             }
 
-            $this->field['class'] = ( isset( $this->field['class'] ) ) ? ' ' . $this->field['class'] . '" ' : '';
-
-            if( !empty( $this->field['compiler'] ) && $this->field['compiler'] )
-                $this->field['class'] .= " compiler";
-    
             echo '<fieldset>';
 
             if( !empty( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['default'] ) ) ) {
@@ -144,7 +138,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
 
                     echo '<li>';
                     echo '<label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
-                    echo '<input type="checkbox" class="checkbox' . $this->field['class'] . '" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']" value="1" ' . checked( $this->value[$k], '1', false ) . '/>';
+                    echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']" value="1" ' . checked( $this->value[$k], '1', false ) . '/>';
                     echo ' ' . $v . '</label>';
                     echo '</li>';
                 
@@ -158,7 +152,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
 
                 echo ( $this->field['desc'] != '' ) ? ' <label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '">' : '';
         
-                echo '<input type="checkbox" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="1" class="checkbox' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
+                echo '<input type="checkbox" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="1" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
         
                 echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? ' ' . $this->field['desc'] . '</label>' : '';
 

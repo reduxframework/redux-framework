@@ -117,6 +117,15 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_fr.min.js",
       "fileType" : 64
     },
+    "\/inc\/fields\/switch\/field_switch.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/assets\/img\/2cr.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -127,17 +136,6 @@
       "outputAbbreviatedPath" : "\/assets\/img\/2cr.png",
       "initialSize" : 2985,
       "fileType" : 8192
-    },
-    "\/assets\/js\/vendor\/lte-ie7.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/lte-ie7.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/lte-ie7.min.js",
-      "fileType" : 64
     },
     "\/inc\/validation\/html\/validation_html.php" : {
       "ignoreWasSetByUser" : 0,
@@ -168,14 +166,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/inc\/fields\/switch\/field_switch.php" : {
+    "\/assets\/js\/vendor\/lte-ie7.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/lte-ie7.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/lte-ie7.min.js",
+      "fileType" : 64
     },
     "\/assets\/img\/social\/Blogger.png" : {
       "ignoreWasSetByUser" : 0,
@@ -199,24 +199,6 @@
       "initialSize" : 712,
       "fileType" : 8192
     },
-    "\/inc\/fields\/multi_checkbox\/field_multi_checkbox.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/multi_checkbox\/field_multi_checkbox.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/inc\/fields\/image_select\/field_image_select.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/inc\/fields\/multi_text\/field_multi_text.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -227,6 +209,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.min.js",
       "fileType" : 64
+    },
+    "\/inc\/fields\/image_select\/field_image_select.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/sample\/info-html.html" : {
       "ignoreWasSetByUser" : 0,
@@ -259,15 +250,6 @@
       "initialSize" : 1690,
       "fileType" : 8192
     },
-    "\/assets\/css\/style.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/css\/style.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/inc\/validation\/numeric\/validation_numeric.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -276,6 +258,15 @@
       "inputAbbreviatedPath" : "\/inc\/validation\/numeric\/validation_numeric.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/assets\/css\/style.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/css\/style.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/assets\/img\/social\/WordPress.png" : {
       "ignoreWasSetByUser" : 0,
@@ -288,14 +279,16 @@
       "initialSize" : 766,
       "fileType" : 8192
     },
-    "\/inc\/validation\/js\/validation_js.php" : {
+    "\/inc\/fields\/slider\/slider-control.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/validation\/js\/validation_js.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/inc\/fields\/slider\/slider-control.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/inc\/fields\/slider\/slider-control.png",
+      "initialSize" : 1690,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/jsonview.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -308,6 +301,15 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/jsonview.min.min.js",
       "fileType" : 64
     },
+    "\/inc\/validation\/js\/validation_js.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/validation\/js\/validation_js.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/sysinfo.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -316,17 +318,6 @@
       "inputAbbreviatedPath" : "\/inc\/sysinfo.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
-    },
-    "\/inc\/fields\/slider\/slider-control.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/slider\/slider-control.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/inc\/fields\/slider\/slider-control.png",
-      "initialSize" : 1690,
-      "fileType" : 8192
     },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_75_e6e6e6_1x400.png" : {
       "ignoreWasSetByUser" : 0,
@@ -430,6 +421,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
+    "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/assets\/js\/vendor\/select2\/select2_locale_vi.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -452,17 +452,6 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_fi.min.js",
       "fileType" : 64
     },
-    "\/assets\/js\/vendor\/select2\/select2_locale_id.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_id.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_id.min.js",
-      "fileType" : 64
-    },
     "\/assets\/js\/admin.min.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -474,24 +463,15 @@
       "outputAbbreviatedPath" : "\/assets\/js\/admin.min.min.js",
       "fileType" : 64
     },
-    "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css" : {
+    "\/assets\/js\/vendor\/select2\/select2_locale_id.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
-    "\/inc\/fields\/date\/field_date.min.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/date\/field_date.min.js",
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_id.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/inc\/fields\/date\/field_date.min.min.js",
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_id.min.js",
       "fileType" : 64
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_lt.js" : {
@@ -503,6 +483,17 @@
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_lt.min.js",
+      "fileType" : 64
+    },
+    "\/inc\/fields\/date\/field_date.min.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/date\/field_date.min.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/inc\/fields\/date\/field_date.min.min.js",
       "fileType" : 64
     },
     "\/inc\/fields\/multi_text\/field_multi_text.php" : {
@@ -531,16 +522,14 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/assets\/img\/social\/GrooveShark.png" : {
+    "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont-ie7.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/GrooveShark.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/GrooveShark.png",
-      "initialSize" : 725,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont-ie7.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_da.js" : {
       "ignoreWasSetByUser" : 0,
@@ -552,6 +541,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_da.min.js",
       "fileType" : 64
+    },
+    "\/assets\/img\/social\/GrooveShark.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/GrooveShark.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/GrooveShark.png",
+      "initialSize" : 725,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_hu.js" : {
       "ignoreWasSetByUser" : 0,
@@ -574,15 +574,6 @@
       "outputAbbreviatedPath" : "\/sample\/patterns\/tree_bark.png",
       "initialSize" : 42360,
       "fileType" : 8192
-    },
-    "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont-ie7.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/elusive-icons\/elusive-webfont-ie7.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/assets\/js\/vendor\/select2\/select2.js" : {
       "ignoreWasSetByUser" : 0,
@@ -672,16 +663,16 @@
       "initialSize" : 36611,
       "fileType" : 8192
     },
-    "\/assets\/img\/social\/Drupal.png" : {
+    "\/assets\/js\/vendor\/select2\/select2_locale_mk.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Drupal.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Drupal.png",
-      "initialSize" : 701,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_mk.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_mk.min.js",
+      "fileType" : 64
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_ca.js" : {
       "ignoreWasSetByUser" : 0,
@@ -705,16 +696,16 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_de.min.js",
       "fileType" : 64
     },
-    "\/assets\/js\/vendor\/select2\/select2_locale_mk.js" : {
+    "\/assets\/img\/social\/Drupal.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_mk.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_mk.min.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Drupal.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Drupal.png",
+      "initialSize" : 701,
+      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_sv.js" : {
       "ignoreWasSetByUser" : 0,
@@ -727,15 +718,6 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_sv.min.js",
       "fileType" : 64
     },
-    "\/inc\/validation\/str_replace\/validation_str_replace.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/validation\/str_replace\/validation_str_replace.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/img\/social\/YouTube.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -746,6 +728,15 @@
       "outputAbbreviatedPath" : "\/assets\/img\/social\/YouTube.png",
       "initialSize" : 765,
       "fileType" : 8192
+    },
+    "\/inc\/validation\/str_replace\/validation_str_replace.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/validation\/str_replace\/validation_str_replace.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/inc\/fields\/info\/field_info.css" : {
       "ignoreWasSetByUser" : 0,
@@ -796,17 +787,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/assets\/img\/social\/Flickr.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/Flickr.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/Flickr.png",
-      "initialSize" : 666,
-      "fileType" : 8192
-    },
     "\/inc\/fields\/group\/field_group.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/group\/field_group.less",
@@ -823,6 +803,17 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/assets\/img\/social\/Flickr.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/Flickr.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/Flickr.png",
+      "initialSize" : 666,
+      "fileType" : 8192
     },
     "\/inc\/validation\/date\/validation_date.php" : {
       "ignoreWasSetByUser" : 0,
@@ -861,6 +852,15 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/tests\/includes\/clover.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/tests\/includes\/clover.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/media\/field_media.min.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -871,15 +871,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/inc\/fields\/media\/field_media.min.min.js",
       "fileType" : 64
-    },
-    "\/tests\/includes\/clover.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/tests\/includes\/clover.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/inc\/fields\/typography\/field_typography.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1013,6 +1004,26 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_eu.min.js",
       "fileType" : 64
     },
+    "\/assets\/img\/toggle_tabs.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/toggle_tabs.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/toggle_tabs.png",
+      "initialSize" : 358,
+      "fileType" : 8192
+    },
+    "\/inc\/fields\/select\/field_select.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/select\/field_select.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/slider\/field_slider.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/slider\/field_slider.less",
@@ -1029,26 +1040,6 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/inc\/fields\/select\/field_select.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/select\/field_select.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/assets\/img\/toggle_tabs.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/toggle_tabs.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/toggle_tabs.png",
-      "initialSize" : 358,
-      "fileType" : 8192
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_gl.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1119,17 +1110,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/assets\/img\/social\/deviantART.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/deviantART.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/deviantART.png",
-      "initialSize" : 666,
-      "fileType" : 8192
-    },
     "\/assets\/js\/vendor\/select2\/select2_locale_ko.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1140,6 +1120,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_ko.min.js",
       "fileType" : 64
+    },
+    "\/assets\/img\/social\/deviantART.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/deviantART.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/deviantART.png",
+      "initialSize" : 666,
+      "fileType" : 8192
     },
     "\/assets\/img\/fs-sprite.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1183,26 +1174,6 @@
       "initialSize" : 613,
       "fileType" : 8192
     },
-    "\/assets\/js\/vendor\/select2\/select2_locale_pt-PT.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_pt-PT.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_pt-PT.min.js",
-      "fileType" : 64
-    },
-    "\/inc\/fields\/multi_text\/field_multi_text.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/assets\/img\/social\/Windows.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1213,6 +1184,26 @@
       "outputAbbreviatedPath" : "\/assets\/img\/social\/Windows.png",
       "initialSize" : 709,
       "fileType" : 8192
+    },
+    "\/inc\/fields\/multi_text\/field_multi_text.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
+    "\/assets\/js\/vendor\/select2\/select2_locale_pt-PT.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_pt-PT.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_pt-PT.min.js",
+      "fileType" : 64
     },
     "\/assets\/img\/social\/Google.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1370,6 +1361,15 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.min.min.js",
       "fileType" : 64
     },
+    "\/inc\/validation\/no_html\/validation_no_html.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/validation\/no_html\/validation_no_html.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_f6cf3b_256x240.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1380,15 +1380,6 @@
       "outputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_f6cf3b_256x240.png",
       "initialSize" : 8884,
       "fileType" : 8192
-    },
-    "\/inc\/validation\/no_html\/validation_no_html.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/validation\/no_html\/validation_no_html.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/assets\/js\/vendor\/select2\/select2_locale_pt-BR.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1421,6 +1412,15 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/slider\/field_slider.min.min.js",
       "fileType" : 64
     },
+    "\/inc\/fields\/editor\/field_editor.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/assets\/img\/social\/Twitter.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1431,15 +1431,6 @@
       "outputAbbreviatedPath" : "\/assets\/img\/social\/Twitter.png",
       "initialSize" : 693,
       "fileType" : 8192
-    },
-    "\/inc\/fields\/editor\/field_editor.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/editor\/field_editor.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/inc\/fields\/button_set\/field_button_set.php" : {
       "ignoreWasSetByUser" : 0,
@@ -1664,17 +1655,6 @@
       "initialSize" : 680,
       "fileType" : 8192
     },
-    "\/assets\/img\/social\/DailyBooth.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/DailyBooth.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/DailyBooth.png",
-      "initialSize" : 730,
-      "fileType" : 8192
-    },
     "\/inc\/fields\/multi_text\/field_multi_text.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/multi_text\/field_multi_text.less",
@@ -1692,14 +1672,16 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
-    "\/inc\/fields\/switch\/field_switch.css" : {
+    "\/assets\/img\/social\/DailyBooth.png" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/DailyBooth.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/DailyBooth.png",
+      "initialSize" : 730,
+      "fileType" : 8192
     },
     "\/inc\/validation\/comma_numeric\/validation_comma_numeric.php" : {
       "ignoreWasSetByUser" : 0,
@@ -1709,6 +1691,15 @@
       "inputAbbreviatedPath" : "\/inc\/validation\/comma_numeric\/validation_comma_numeric.php",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
+    },
+    "\/inc\/fields\/switch\/field_switch.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/inc\/fields\/color\/field_color.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1874,15 +1865,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/inc\/fields\/color_gradient\/field_color_gradient.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/color_gradient\/field_color_gradient.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/img\/2cl.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1893,6 +1875,15 @@
       "outputAbbreviatedPath" : "\/assets\/img\/2cl.png",
       "initialSize" : 2984,
       "fileType" : 8192
+    },
+    "\/inc\/fields\/color_gradient\/field_color_gradient.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/color_gradient\/field_color_gradient.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/inc\/fields\/sorter\/field_sorter.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1958,15 +1949,6 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_ja.min.js",
       "fileType" : 64
     },
-    "\/inc\/fields\/info\/field_info.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/info\/field_info.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/assets\/img\/1c.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1977,6 +1959,17 @@
       "outputAbbreviatedPath" : "\/assets\/img\/1c.png",
       "initialSize" : 138,
       "fileType" : 8192
+    },
+    "\/inc\/fields\/color\/field_color.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.min.js",
+      "fileType" : 64
     },
     "\/inc\/fields\/slider\/field_slider.php" : {
       "ignoreWasSetByUser" : 0,
@@ -2009,16 +2002,16 @@
       "outputAbbreviatedPath" : "\/inc\/fields\/image_select\/field_image_select.min.min.js",
       "fileType" : 64
     },
-    "\/inc\/fields\/color\/field_color.js" : {
+    "\/sample\/presets\/preset1.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/inc\/fields\/color\/field_color.min.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/sample\/presets\/preset1.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/sample\/presets\/preset1.png",
+      "initialSize" : 18478,
+      "fileType" : 8192
     },
     "\/assets\/img\/social\/Tumblr.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2031,16 +2024,14 @@
       "initialSize" : 602,
       "fileType" : 8192
     },
-    "\/sample\/presets\/preset1.png" : {
+    "\/inc\/fields\/info\/field_info.php" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/sample\/presets\/preset1.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/sample\/presets\/preset1.png",
-      "initialSize" : 18478,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/inc\/fields\/info\/field_info.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/assets\/img\/social\/Facebook.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2064,26 +2055,6 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_es.min.js",
       "fileType" : 64
     },
-    "\/tests\/includes\/install.php" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/tests\/includes\/install.php",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/inc\/fields\/switch\/field_switch.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.min.js",
-      "fileType" : 64
-    },
     "\/inc\/fields\/border\/field_border.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/border\/field_border.less",
@@ -2101,6 +2072,15 @@
       "fileType" : 1,
       "debugStyle" : 0
     },
+    "\/tests\/includes\/install.php" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/tests\/includes\/install.php",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/inc\/fields\/media\/field_media.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/media\/field_media.less",
@@ -2117,6 +2097,17 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
+    },
+    "\/inc\/fields\/switch\/field_switch.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/inc\/fields\/switch\/field_switch.min.js",
+      "fileType" : 64
     },
     "\/inc\/fields\/media\/field_media.php" : {
       "ignoreWasSetByUser" : 0,
@@ -2158,6 +2149,15 @@
       "outputAbbreviatedPath" : "\/assets\/js\/vendor\/select2\/select2_locale_zh-CN.min.js",
       "fileType" : 64
     },
+    "\/assets\/css\/vendor\/jquery-ui-bootstrap\/jquery-ui-1.10.0.custom.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/jquery-ui-1.10.0.custom.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-icons_454545_256x240.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -2169,14 +2169,16 @@
       "initialSize" : 4369,
       "fileType" : 8192
     },
-    "\/assets\/css\/vendor\/jquery-ui-bootstrap\/jquery-ui-1.10.0.custom.css" : {
+    "\/assets\/img\/social\/LinkedIn.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/jquery-ui-1.10.0.custom.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/assets\/img\/social\/LinkedIn.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/img\/social\/LinkedIn.png",
+      "initialSize" : 636,
+      "fileType" : 8192
     },
     "\/inc\/fields\/color\/field_color.less" : {
       "ieCompatibility" : 1,
@@ -2194,17 +2196,6 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/inc\/fields\/slider\/field_slider.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/inc\/fields\/slider\/field_slider.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/inc\/fields\/slider\/field_slider.min.js",
-      "fileType" : 64
     },
     "\/sample\/patterns\/triangular.png" : {
       "ignoreWasSetByUser" : 0,
@@ -2259,6 +2250,28 @@
       "initialSize" : 654,
       "fileType" : 8192
     },
+    "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_55_fbf9ee_1x400.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_55_fbf9ee_1x400.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_55_fbf9ee_1x400.png",
+      "initialSize" : 120,
+      "fileType" : 8192
+    },
+    "\/inc\/fields\/slider\/field_slider.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/inc\/fields\/slider\/field_slider.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/inc\/fields\/slider\/field_slider.min.js",
+      "fileType" : 64
+    },
     "\/inc\/fields\/spacing\/field_spacing.less" : {
       "ieCompatibility" : 1,
       "inputAbbreviatedPath" : "\/inc\/fields\/spacing\/field_spacing.less",
@@ -2275,28 +2288,6 @@
       "outputStyle" : 1,
       "fileType" : 1,
       "debugStyle" : 0
-    },
-    "\/assets\/img\/social\/LinkedIn.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/img\/social\/LinkedIn.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/img\/social\/LinkedIn.png",
-      "initialSize" : 636,
-      "fileType" : 8192
-    },
-    "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_55_fbf9ee_1x400.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_55_fbf9ee_1x400.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/assets\/css\/vendor\/jquery-ui-bootstrap\/images\/ui-bg_glass_55_fbf9ee_1x400.png",
-      "initialSize" : 120,
-      "fileType" : 8192
     },
     "\/assets\/img\/social\/SoundCloud.png" : {
       "ignoreWasSetByUser" : 0,
