@@ -424,16 +424,18 @@ function setup_framework_options(){
 								'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
 									),
 				),					
-
 			array(
 				'id'=>'typography',
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
-				'default'=> array('color'=>"#333", 'style'=>'700', 'family'=>'Courier, monospace', 'size'=>33, 'height'=>'40'),
+				'default'=> array(
+					'color'=>"#333", 
+					'style'=>'700', 
+					'family'=>'Courier, monospace', 
+					'size'=>33, 
+					'height'=>'40'),
 				),	
-
-
 			),
 		);
 
@@ -548,10 +550,6 @@ function setup_framework_options(){
 				'title' => __('Body Font', 'redux-framework'),
 				'subtitle' => __('Specify the body font properties.', 'redux-framework'),
 				'default' => array(
-					'color'=>'#dd9933',
-					'font-size'=>30,
-					'font-family'=>'Arial, Helvetica, sans-serif',
-					'font-weight'=>'Normal',
 					),
 				),					
 			array(
