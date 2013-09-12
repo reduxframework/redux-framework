@@ -1070,3 +1070,14 @@ function validate_callback_function($field, $value, $existing_value) {
     }
     return $return;
 }
+
+/*
+	This is a test function that will let you see when the compiler hook occurs. 
+	It only runs if a field	set with compiler=>true is changed.
+*/
+function testCompiler() {
+	//echo "Compiler hook!";
+}
+add_action('redux-compiler-twenty_eleven22', 'testCompiler');
+
+

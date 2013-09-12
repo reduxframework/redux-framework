@@ -70,7 +70,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 			if ( $this->value == "transparent" ) {
 				$tChecked = ' checked="checked"';
 			}
-			echo '<label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '-transparency" data-id="'.strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')).'" value="1"'.$tChecked.'> Transparent</label>';
+			echo '<label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '-transparency" data-id="'.strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')).'" value="1"'.$tChecked.'> Transparent</label>';
 
 			echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 		
