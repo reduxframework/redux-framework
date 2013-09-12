@@ -824,13 +824,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
                         if( isset( $field['title'] ) ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
-                            $th = $field['title'] . $default_mark;
+                            $th = '';
+                            if (!empty($field['title'])) {
+                            	$th = $field['title'] . $default_mark;	
+                            }
 						    if( isset( $field['subtitle'] ) ) {
 								$th .= '<span class="description">' . $field['subtitle'] . '</span>';
 						    }
-                        } else {
-							$th = '';
-						}
+                        } 
 						if (!isset($field['id'])) {
 							print_r($field);
 						}
