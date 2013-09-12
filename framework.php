@@ -820,6 +820,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
 							$th = '';
 						}
 
+						// Set the default if it's a new field
+						if (!isset($this->options[$field['id']])) {
+			                if( is_null( $this->options_defaults ) ) {
+			                	$this->_default_values(); // fill cache
+			                }
+
+			                $this->options[$field['id']] = array_key_exists( $field['id'], $this->options_defaults ) ? $this->options_defaults[$field['id']] : '';
+							$runUpdate = true;
+						}						
+
 						if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] ) {
 						    if (!is_array($field['default'])) {
 								$default_output = __( 'Default', 'redux-framework' ) . ": " . $field['default'];
@@ -853,7 +863,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
             }
+
             do_action( 'redux-register-settings-' . $this->args['opt_name'] );
+
+			if ($runUpdate) { // Always update the DB with new fields
+				$this->set_options( $this->options );
+			}
+
+			if (get_transient( 'simple-options-compiler' )) {
+				delete_transient( 'simple-options-compiler' );
+				do_action('simple_options_compiler', $this->options);	
+			}
 
         }
 

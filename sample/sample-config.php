@@ -425,7 +425,7 @@ function setup_framework_options(){
 									),
 				),					
 			array(
-				'id'=>'typography',
+				'id'=>'typography6',
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
@@ -545,11 +545,15 @@ function setup_framework_options(){
 				'default' => array('top' => 5, 'bottom' => 6, 'left'=>2, 'right'=>4)
 				),									
 			array(
-				'id'=>'body-font',
+				'id'=>'body-font2',
 				'type' => 'typography',
 				'title' => __('Body Font', 'redux-framework'),
 				'subtitle' => __('Specify the body font properties.', 'redux-framework'),
 				'default' => array(
+					'color'=>'#dd9933',
+					'font-size'=>30,
+					'font-family'=>'Arial, Helvetica, sans-serif',
+					'font-weight'=>'Normal',
 					),
 				),					
 			array(
