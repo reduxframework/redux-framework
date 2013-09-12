@@ -44,6 +44,9 @@ if( !class_exists( 'Simple_System_Info' ) ) {
         public function get( $show_inactive = false, $id = 'system-info-box', $class = null ) {
             global $wpdb;
 
+            if( !defined( 'SSINFO_VERSION' ) )
+                define( 'SSINFO_VERSION', '1.0.0' );
+
             // We need the Browser class!
             if( !class_exists( 'Browser' ) )
                 require_once 'browser.php';
@@ -132,6 +135,8 @@ if( !class_exists( 'Simple_System_Info' ) ) {
             foreach( $plugins as $plugin_path => $plugin ) {
                 if( !in_array( $plugin_path, $active_plugins ) )
                     continue;
+
+                if( $plugin['Name'] !== 'Redux Framework' ) continue;
 
                 $return .= $plugin['Name'] . ': ' . $plugin['Version'] . "\n";
             }
