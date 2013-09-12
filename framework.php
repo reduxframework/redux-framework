@@ -1233,7 +1233,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 echo '</div>';
 
-                echo '<p id="redux-import-action"><input type="submit" id="redux-import" name="' . $this->args['opt_name'] . '[import]" class="button-primary" value="' . __( 'Import', 'redux-framework' ) . '"> <span>' . apply_filters( 'redux-import-warning', __( 'WARNING! This will overwrite any existing options, please proceed with caution!', 'redux-framework' ) ) . '</span></p>';
+                echo '<p id="redux-import-action"><input type="submit" id="redux-import" name="' . $this->args['opt_name'] . '[import]" class="button-primary" value="' . __( 'Import', 'redux-framework' ) . '">&nbsp;&nbsp;<span>' . apply_filters( 'redux-import-warning', __( 'WARNING! This will overwrite all existing option values, please proceed with caution!', 'redux-framework' ) ) . '</span></p>';
                 echo '<div class="hr"/><div class="inner"><span>&nbsp;</span></div></div>';
 
                 echo '<h4>' . __( 'Export Options', 'redux-framework' ) . '</h4>';
