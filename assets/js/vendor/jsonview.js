@@ -1,3 +1,5 @@
+
+/* global console, jsonView */
 /*
  * ViewJSON
  * Version 1.0
@@ -22,7 +24,7 @@ function collapse(evt) {
 		return;
 	}
 	target = target[0];
-	if (target.style.display == 'none') {
+	if (target.style.display === 'none') {
 		var ellipsis = target.parentNode.getElementsByClassName('ellipsis')[0];
 		target.parentNode.removeChild(ellipsis);
 		target.style.display = '';
@@ -33,12 +35,12 @@ function collapse(evt) {
 		ellipsis.innerHTML = ' &hellip; ';
 		target.parentNode.insertBefore(ellipsis, target);
 	}
-	collapser.innerHTML = (collapser.innerHTML == '-') ? '+' : '-';
+	collapser.innerHTML = (collapser.innerHTML === '-') ? '+' : '-';
 }
 
 function addCollapser(item) {
 	// This mainly filters out the root object (which shouldn't be collapsible)
-	if (item.nodeName != 'LI') {
+	if (item.nodeName !== 'LI') {
 		return;
 	}
 	var collapser = document.createElement('div');
@@ -49,35 +51,31 @@ function addCollapser(item) {
 }
 
 function jsonView(id, target) {
-	this.debug = true;
-
-	if (id.indexOf("#") != -1) {
+	this.debug = false;
+	if (id.indexOf("#") !== -1) {
 		this.idType = "id";
 		this.id = id.replace('#', '');
-	} else if (id.indexOf(".") != -1) {
+	} else if (id.indexOf(".") !== -1) {
 		this.idType = "class";
 		this.id = id.replace('.', '');
 	} else {
-		if (this.debug)
-			console.log("Can't find that element");
+		if (this.debug) { console.log("Can't find that element"); }
 		return;
 	}
-	console.log(this.id);
+	
 	this.data = document.getElementById(this.id).innerHTML;
-
 	if (typeof(target) !== undefined) {
-		if (target.indexOf("#") != -1) {
+		if (target.indexOf("#") !== -1) {
 			this.targetType = "id";
 			this.target = target.replace('#', '');
-		} else if (id.indexOf(".") != -1) {
+		} else if (id.indexOf(".") !== -1) {
 			this.targetType = "class";
 			this.target = target.replace('.', '');
 		} else {
-			if (this.debug)
-				console.log("Can't find the target element");
+			if (this.debug) { console.log("Can't find the target element"); }
 			return;
-		}		
-	}	
+		}
+	}
 	// Note: now using "*.json*" URI matching rather than these page regexes -- save CPU cycles!
 	// var is_json = /^\s*(\{.*\})\s*$/.test(this.data);
 	// var is_jsonp = /^.*\(\s*(\{.*\})\s*\)$/.test(this.data);
@@ -85,8 +83,7 @@ function jsonView(id, target) {
 	// Our manifest specifies that we only do URLs matching '.json', so attempt to sanitize any HTML
 	// added by Chrome's "text/plain" or "text/html" handlers
 	if (/^\<pre.*\>(.*)\<\/pre\>$/.test(this.data)) {
-		if (this.debug)
-			console.log("JSONView: data is wrapped in <pre>...</pre>, stripping HTML...");
+		if (this.debug) { console.log("JSONView: data is wrapped in <pre>...</pre>, stripping HTML..."); }
 		this.data = this.data.replace(/<(?:.|\s)*?>/g, ''); //Aggressively strip HTML.
 	}
 	// Test if what remains is JSON or JSONp
@@ -95,11 +92,9 @@ function jsonView(id, target) {
 	var jsonp_regex2 = /([\[\{][\s\S]*[\]\}])\);/ // more liberal support... this allows us to pass the jsonp.json & jsonp2.json tests
 	var is_json = json_regex.test(this.data);
 	var is_jsonp = jsonp_regex.test(this.data);
-	if (this.debug)
-		console.log("JSONView: is_json=" + is_json + " is_jsonp=" + is_jsonp);
+	if (this.debug) { console.log("JSONView: is_json=" + is_json + " is_jsonp=" + is_jsonp); }
 	if (is_json || is_jsonp) {
-		if (this.debug)
-			console.log("JSONView: sexytime!");
+		if (this.debug) { console.log("JSONView: sexytime!"); }
 		// JSONFormatter json->HTML prototype straight from Firefox JSONView
 		// For reference: http://code.google.com/p/jsonview
 
@@ -117,21 +112,21 @@ function jsonView(id, target) {
 			valueToHTML: function(value) {
 				var valueType = typeof value;
 				var output = "";
-				if (value == null) {
+				if (value === null) {
 					output += this.decorateWithSpan('null', 'null');
-				} else if (value && value.constructor == Array) {
+				} else if (value && value.constructor === Array) {
 					output += this.arrayToHTML(value);
-				} else if (valueType == 'object') {
+				} else if (valueType === 'object') {
 					output += this.objectToHTML(value);
-				} else if (valueType == 'number') {
+				} else if (valueType === 'number') {
 					output += this.decorateWithSpan(value, 'num');
-				} else if (valueType == 'string') {
+				} else if (valueType === 'string') {
 					if (/^(http|https):\/\/[^\s]+$/.test(value)) {
 						output += '<a href="' + value + '">' + this.htmlEncode(value) + '</a>';
 					} else {
 						output += this.decorateWithSpan('"' + value + '"', 'string');
 					}
-				} else if (valueType == 'boolean') {
+				} else if (valueType === 'boolean') {
 					output += this.decorateWithSpan(value, 'bool');
 				}
 				return output;
@@ -195,7 +190,7 @@ function jsonView(id, target) {
 				return this.toHTML(output, uri + ' - Error');
 			},
 			// Wrap the HTML fragment in a full document. Used by jsonToHTML and errorPage.
-			toHTML: function(content, title) {
+			toHTML: function(content) {
 				return content;
 			}
 		};
@@ -218,18 +213,15 @@ function jsonView(id, target) {
 		var cleanData = '',
 			callback = '';
 		var callback_results = jsonp_regex.exec(this.data);
-		if (callback_results && callback_results.length == 3) {
-			if (this.debug)
-				console.log("THIS IS JSONp");
+		if (callback_results && callback_results.length === 3) {
+			if (this.debug) { console.log("THIS IS JSONp"); }
 			callback = callback_results[1];
 			cleanData = callback_results[2];
 		} else {
-			if (this.debug)
-				console.log("Vanilla JSON");
+			if (this.debug) { console.log("Vanilla JSON"); }
 			cleanData = this.data;
 		}
-		if (this.debug)
-			console.log(cleanData);
+		if (this.debug) { console.log(cleanData); }
 		// Covert, and catch exceptions on failure
 		try {
 			// var jsonObj = this.nativeJSON.decode(cleanData);
@@ -240,29 +232,27 @@ function jsonView(id, target) {
 				throw "There was no object!";
 			}
 		} catch (e) {
-			if (this.debug)
-				console.log(e);
+			if (this.debug) { console.log(e); }
 			outputDoc = this.jsonFormatter.errorPage(e, this.data);
 		}
 		var links = '<style type="text/css">.jsonViewOutput .prop{font-weight:700;}.jsonViewOutput .null{color:red;}.jsonViewOutput .string{color:green;}.jsonViewOutput .collapser{position:absolute;left:-1em;cursor:pointer;}.jsonViewOutput li{position:relative;}.jsonViewOutput li:after{content:\',\';}.jsonViewOutput li:last-child:after{content:\'\';}.jsonViewOutput #error{-moz-border-radius:8px;border:1px solid #970000;background-color:#F7E8E8;margin:.5em;padding:.5em;}.jsonViewOutput .errormessage{font-family:monospace;}.jsonViewOutput #json{font-family:monospace;font-size:1.1em;}.jsonViewOutput ul{list-style:none;margin:0 0 0 2em;padding:0;}.jsonViewOutput h1{font-size:1.2em;}.jsonViewOutput .callback + #json{padding-left:1em;}.jsonViewOutput .callback{font-family:monospace;color:#A52A2A;}.jsonViewOutput .bool,.jsonViewOutput .num{color:blue;}</style>';
-		
-		if (this.targetType != undefined) {
+		if (this.targetType !== undefined) {
 			this.idType = this.targetType;
 			this.id = this.target;
 		}
-
-		if (this.idType == "class") {
-			var el = document.getElementsByClassName(this.id);
-			if(el) {
+		var el;
+		if (this.idType === "class") {
+			el = document.getElementsByClassName(this.id);
+			if (el) {
 				el.className += el.className ? ' jsonViewOutput' : 'jsonViewOutput';
-  				el.innerHTML = links + outputDoc;
-  			}
-		} else if (this.idType == "id") {
-			var el = document.getElementById(this.id);
-			if(el) {
+				el.innerHTML = links + outputDoc;
+			}
+		} else if (this.idType === "id") {
+			el = document.getElementById(this.id);
+			if (el) {
 				el.className += el.className ? ' jsonViewOutput' : 'jsonViewOutput';
-  				el.innerHTML = links + outputDoc;
-  			}			
+				el.innerHTML = links + outputDoc;
+			}
 			el.innerHTML = links + outputDoc;
 		}
 		var items = document.getElementsByClassName('collapsible');
