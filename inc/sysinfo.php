@@ -136,7 +136,7 @@ if( !class_exists( 'Simple_System_Info' ) ) {
                 if( !in_array( $plugin_path, $active_plugins ) )
                     continue;
 
-                if( $plugin['Name'] !== 'Redux Framework' ) continue;
+                //if( $plugin['Name'] !== 'Redux Framework' ) continue;
 
                 $return .= $plugin['Name'] . ': ' . $plugin['Version'] . "\n";
             }
