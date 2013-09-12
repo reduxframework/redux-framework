@@ -104,7 +104,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			$defaults['theme_mods'] 		= false;
 			$defaults['theme_mods_expand'] 	= false;
 			$defaults['transient'] 			= false;
-			$defaults['global_variable'] 	= '';
+			$defaults['global_variable'] 	= 'redux';
 			$defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
             // The defaults are set so it will preserve the old behavior.
@@ -208,7 +208,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				}
 				do_action( 'redux-saved-' . $this->args['opt_name'] , $value );
 				// Set a global variable by the global_variable agument.
-				if ( !empty( $defaults['theme_mods_expand'] ) && $defaults['theme_mods_expand'] ) {
+				if ( $this->args['global_variable'] ) {
 					$options = $this->args['global_variable'];
 					global $$options;
 					$$options = $value;					
@@ -236,7 +236,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$result = get_option( $this->args['opt_name'], $defaults );
 			}
 			// Set a global variable by the global_variable agument.
-			if ( $defaults['theme_mods_expand'] ) {			
+			if ( $this->args['global_variable'] ) {
 				$options = $this->args['global_variable'];
 				global $$options;
 				$$options = $result;			

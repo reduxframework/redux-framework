@@ -1,17 +1,14 @@
 <?php
 
-
-
-
 /*
  *
  * Require the framework class before doing anything else, so we can use the defined URLs and directories.
  * If you are running on Windows you may have URL problems which can be fixed by defining the framework url first.
  *
  */
-//define('REDUX_URL', site_url('path the options folder'));
-if(!class_exists('ReduxFramework')){
-    require_once(dirname(__FILE__) . '/../framework.php');
+
+if(!class_exists( 'ReduxFramework' ) && file_exists( dirname(__FILE__) . '/../framework.php' ) ){
+    require_once( dirname(__FILE__) . '/../framework.php' );
 }
 
 /*
@@ -36,7 +33,7 @@ function add_another_section($sections){
 
     return $sections;
 }
-//add_filter('redux-opts-sections-twenty_eleven', 'add_another_section');
+add_filter('redux-opts-sections-twenty_eleven', 'add_another_section');
 
 
 /*
@@ -140,6 +137,7 @@ function setup_framework_options(){
 	// This is ignored unless $args['icon_type'] = 'iconfont'
 	// Default: null
 	$args['dev_mode_icon_class'] = 'icon-large';
+	$args['system_info_icon_class'] = 'icon-large';
 
 	$theme = wp_get_theme();
 
@@ -196,7 +194,7 @@ function setup_framework_options(){
 	$args['import_icon_class'] = 'icon-large';
 
     // Set a custom option name. Don't forget to replace spaces with underscores!
-    $args['opt_name'] = 'twenty_eleven22';
+    $args['opt_name'] = 'twenty_eleven';
 
     // Set a custom menu icon.
     //$args['menu_icon'] = '';
@@ -1078,6 +1076,6 @@ function validate_callback_function($field, $value, $existing_value) {
 function testCompiler() {
 	//echo "Compiler hook!";
 }
-add_action('redux-compiler-twenty_eleven22', 'testCompiler');
+add_action('redux-compiler-twenty_eleven', 'testCompiler');
 
 
