@@ -96,6 +96,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['allow_sub_menu']     = true;
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = true;
+            $defaults['system_info']        = true;
             $defaults['admin_stylesheet']   = 'standard';
             $defaults['footer_credit']      = __( '<span id="footer-thankyou">Options panel created using <a href="' . $this->framework_url . '" target="_blank">Redux Framework</a> v' . $this->framework_version . '</span>', 'redux-framework' );
             $defaults['help_tabs']          = array();
@@ -480,6 +481,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $this->args['page_cap'],
                             $this->args['page_slug'] . '&tab=dev_mode_default',
                             create_function('$a', "return null;")
+                        );
+                    }
+
+                    if( true === $this->args['system_info'] ) {
+                        add_submenu_page(
+                            $this->args['page_slug'],
+                            __( 'System Info', 'redux-framework' ),
+                            __( 'System Info', 'redux-framework' ),
+                            $this->args['page_cap'],
+                            $this->args['page_slug'] . '&tab=system_info_default',
+                            create_function( '$a', "return null;" )
                         );
                     }
                 }
@@ -1169,6 +1181,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '</li>';
             }
 
+            if( $this->args['system_info'] === true ) {
+                echo '<li id="system_info_default_section_group_li" class="redux-group-tab-link-li">';
+
+                if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
+                    $icon = ( !isset( $this->args['system_info_icon'] ) ) ? '' : '<img src="' . $this->args['system_info_icon'] . '" /> ';
+                } else {
+                    $icon_class = ( !isset( $this->args['system_info_icon_class'] ) ) ? '' : ' ' . $this->args['system_info_icon_class'];
+                    $icon = ( !isset( $this->args['system_info_icon'] ) ) ? '<i class="icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['system_info_icon'] . $icon_class . '"></i> ';
+                }
+
+                echo '<a href="javascript:void(0);" id="system_info_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="system_info_default">' . $icon . ' <span class="group_title">' . __( 'System Info', 'redux-framework' ) . '</span></a>';
+                echo '</li>';
+            }
+
             echo '</ul>';
             echo '</div>';
 
@@ -1248,6 +1274,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 echo '<a href="#" id="consolePrintObject" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
                 // END Javascript object debug
+
+                echo '</div>';
+            }
+
+            if( $this->args['system_info'] === true ) {
+                require_once 'inc/sysinfo.php';
+                $system_info = new Simple_System_Info();
+
+                echo '<div id="system_info_default_section_group' . '" class="redux-group-tab">';
+                echo '<h3>' . __( 'System Info', 'redux-framework' ) . '</h3>';
+
+                echo '<div id="redux-system-info">';
+                echo $system_info->get();
+                echo '</div>';
 
                 echo '</div>';
             }

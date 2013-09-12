@@ -141,6 +141,21 @@ function setup_framework_options(){
 	// Default: null
 	$args['dev_mode_icon_class'] = 'icon-large';
 
+    // Setting system info to true allows you to view system info relative to debugging.
+    // Default: true
+    // $args['dev_mode'] = true;
+
+    // Set the icon for the system info tab.
+    // If $args['icon_type'] = 'image', this should be the path to the icon.
+    // If $args['icon_type'] = 'iconfont', this should be the icon name.
+    // Default: info-sign
+    // $args['system_info_icon'] = 'info-sign';
+
+    // Set the class for the system info tab icon.
+    // This is ignored unless $args['icon_type'] = 'iconfont'
+    // Default: null
+    $args['system_info_icon_class'] = 'icon-large';
+
 	$theme = wp_get_theme();
 
 	$args['display_name'] = $theme->get('Name');
