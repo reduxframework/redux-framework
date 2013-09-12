@@ -1286,7 +1286,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '<h3>' . __( 'System Info', 'redux-framework' ) . '</h3>';
 
                 echo '<div id="redux-system-info">';
-                echo $system_info->get();
+                echo $system_info->get( true );
                 echo '</div>';
 
                 echo '</div>';
