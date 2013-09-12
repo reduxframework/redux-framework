@@ -208,7 +208,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				}
 				do_action( 'redux-saved-' . $this->args['opt_name'] , $value );
 				// Set a global variable by the global_variable agument.
-				if ( $defaults['theme_mods_expand'] ) {
+				if ( !empty( $defaults['theme_mods_expand'] ) && $defaults['theme_mods_expand'] ) {
 					$options = $this->args['global_variable'];
 					global $$options;
 					$$options = $value;					
