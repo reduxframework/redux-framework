@@ -71,11 +71,17 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
             if( !isset( $this->field['fold-vals'] ) )
                 $this->field['fold-vals'] = '';
 
-            if ( empty( $this->field['raw_html'] ) ) {
-            	$this->field['class'] .= " redux-info-field";
+            if( empty( $this->field['raw_html'] ) ) {
+                $this->field['class'] .= ' redux-info-field';
+
+                if( !isset( $this->field['style'] ) ) {
+                    $this->field['style'] = 'notice';
+                }
+
+                $this->field['style'] = ' redux-' . $this->field['style'];
             }
 
-            echo '</td></tr></table><div id="' . $this->field['id'] . '" class="redux-info ' . $this->field['class'] . '">';
+            echo '</td></tr></table><div id="' . $this->field['id'] . '" class="redux-info' . $this->field['style'] . $this->field['class'] . '">';
             echo $this->field['desc'];
             echo '</div><table class="form-table no-border" style="margin-top: 0;"><tbody><tr><th></th><td>';
         
