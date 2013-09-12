@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 		//$('#' + mainID + ' select.redux-typography-script').val('');
 		var google = option.data('google'); // Check if font is a google font
 		// Page load. Speeds things up memory wise to offload to client
-		if (!$('#' + mainID).hasClass('typography-initialized') && google) {
+		if (!$('#' + mainID).hasClass('typography-initialized')) {
 			style = $('#' + mainID + ' select.redux-typography-style').data('value');
 			script = $('#' + mainID + ' select.redux-typography-script').data('value');
 			if (style !== "") {
@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 			} else {
 				if (details) {
 					$.each(details, function(index, value) {
-						if (index === "normal") {
+						if (index === style || index === "normal") {
 							selected = ' selected="selected"';
 							$('#' + mainID + ' .typography-style .select2-chosen').text(value);
 						} else {
