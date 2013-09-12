@@ -141,21 +141,6 @@ function setup_framework_options(){
 	// Default: null
 	$args['dev_mode_icon_class'] = 'icon-large';
 
-    // Setting system info to true allows you to view system info relative to debugging.
-    // Default: true
-    // $args['dev_mode'] = true;
-
-    // Set the icon for the system info tab.
-    // If $args['icon_type'] = 'image', this should be the path to the icon.
-    // If $args['icon_type'] = 'iconfont', this should be the icon name.
-    // Default: info-sign
-    // $args['system_info_icon'] = 'info-sign';
-
-    // Set the class for the system info tab icon.
-    // This is ignored unless $args['icon_type'] = 'iconfont'
-    // Default: null
-    $args['system_info_icon_class'] = 'icon-large';
-
 	$theme = wp_get_theme();
 
 	$args['display_name'] = $theme->get('Name');
@@ -445,6 +430,7 @@ function setup_framework_options(){
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
+				'default'=> array('color'=>"#333", 'style'=>'700', 'family'=>'Courier, monospace', 'size'=>33, 'height'=>'40'),
 				),	
 
 
