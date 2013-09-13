@@ -35,7 +35,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 			'bottom'=> true,
 			'left'	=> true,
 			'right'	=> true,
-			'units'	=> true,
 			);
 		$this->field = wp_parse_args( $this->field, $defaults );
 
