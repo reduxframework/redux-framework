@@ -138,6 +138,8 @@ function setup_framework_options(){
 	// Default: null
     $args['dev_mode_icon_class'] = 'icon-large';
 
+    // Set a custom option name. Don't forget to replace spaces with underscores!
+    $args['opt_name'] = 'twenty_eleven';
 
     // Setting system info to true allows you to view info useful for debugging.
     // Default: true
@@ -173,15 +175,6 @@ function setup_framework_options(){
     // Default: 'standard'
     //$args['admin_stylesheet'] = 'standard';
 
-    // Add HTML before the form.
-    $args['intro_text'] = __('<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework');
-
-    // Add content after the form.
-    $args['footer_text'] = __('<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework');
-
-    // Set footer/credit line.
-    //$args['footer_credit'] = __('<p>This text is displayed in the options panel footer across from the WordPress version (where it normally says \'Thank you for creating with WordPress\'). This field accepts all HTML.</p>', 'redux-framework');
-
     // Setup custom links in the footer for share icons
     $args['share_icons']['twitter'] = array(
         'link' => 'http://twitter.com/ghost1227',
@@ -208,9 +201,6 @@ function setup_framework_options(){
 	// This is ignored unless $args['icon_type'] = 'iconfont'
 	// Default: null
 	$args['import_icon_class'] = 'icon-large';
-
-    // Set a custom option name. Don't forget to replace spaces with underscores!
-    $args['opt_name'] = 'twenty_eleven';
 
     // Set a custom menu icon.
     //$args['menu_icon'] = '';
@@ -274,6 +264,26 @@ function setup_framework_options(){
 
     // Set the help sidebar for the options page.                                        
     $args['help_sidebar'] = __('<p>This is the sidebar content, HTML is allowed.</p>', 'redux-framework');
+
+
+    // Add HTML before the form.
+    if (!isset($args['global_variable']) || $args['global_variable'] !== false ) {
+    	if (!empty($args['global_variable'])) {
+    		$v = $args['global_variable'];
+    	} else {
+    		$v = str_replace("-", "_", $args['opt_name']);
+    	}
+    	$args['intro_text'] = __('<p>Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: <strong>$'.$v.'</strong></p>', 'redux-framework');
+    } else {
+    	$args['intro_text'] = __('<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework');
+    }
+
+    // Add content after the form.
+    $args['footer_text'] = __('<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework');
+
+    // Set footer/credit line.
+    //$args['footer_credit'] = __('<p>This text is displayed in the options panel footer across from the WordPress version (where it normally says \'Thank you for creating with WordPress\'). This field accepts all HTML.</p>', 'redux-framework');
+
 
     $sections = array();              
 
@@ -554,6 +564,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'spacing',
 				'type' => 'spacing',
+				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
 				'title' => __('Padding/Margin Option', 'redux-framework'),
 				'subtitle' => __('Allow your users to choose the spacing or margin they want.', 'redux-framework'),
 				'desc' => __('You can enable or diable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework'),
