@@ -321,6 +321,7 @@ function setup_framework_options(){
 				'id'=>'media',
 				'type' => 'media', 
 				'title' => __('Media', 'redux-framework'),
+				'compiler' => 'true',
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
 				),
 
