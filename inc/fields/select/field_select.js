@@ -1,8 +1,9 @@
 jQuery(document).ready(function(){
 
 	function addIconToSelect(icon) {
-
-        return "<span class='elusive'><i class='" + icon.id + "'></i>" + "&nbsp;&nbsp;" + icon.id.toUpperCase() + "</span>";
+		if ( icon.hasOwnProperty( 'id' ) ) {
+			return "<span class='elusive'><i class='" + icon.id + "'></i>" + "&nbsp;&nbsp;" + icon.id.toUpperCase() + "</span>";
+		}
 
     }
 
