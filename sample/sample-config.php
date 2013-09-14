@@ -480,6 +480,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'layout',
 				'type' => 'image_select',
+				'compiler'=>true,
 				'title' => __('Main Layout', 'redux-framework'), 
 				'subtitle' => __('Select main content and sidebar alignment. Choose between 1, 2 or 3 column layout.', 'redux-framework'),
 				'options' => array(
