@@ -1,3 +1,32 @@
 jQuery(document).ready(function(){
-	jQuery(".redux-select-item").select2({width: 'resolve', triggerChange: true, allowClear: true});
+
+	function addIconToSelect(icon) {
+
+        var originalOption = icon.element;
+        var txt = icon.text.split(' ').slice(1).join(' ');
+
+        return "<span class='elusive'><i class='" + icon.id + "'></i>" + "&nbsp;&nbsp;" + icon.id.toUpperCase() + "</span>";
+
+    }
+
+	jQuery('.redux-select-item').each(function() {
+		if ( jQuery(this).hasClass('elusive-icons') ) {
+			jQuery(this).select2({
+					width: 'resolve', 
+					triggerChange: true, 
+					allowClear: true,
+					formatResult: addIconToSelect,
+		            formatSelection: addIconToSelect,
+		            escapeMarkup: function(m) { return m; }
+			});			
+		} else {
+			jQuery(this).select2({
+					width: 'resolve', 
+					triggerChange: true, 
+					allowClear: true,
+			});	
+		}
+
+	});
+
 });

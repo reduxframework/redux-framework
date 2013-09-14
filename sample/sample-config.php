@@ -945,6 +945,14 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				),
+			array(
+				'id'=>'select-elusive',
+				'type' => 'select',
+				'data' => 'elusive-icons',
+				'title' => __('Elusive Icons Select Option', 'redux-framework'), 
+				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
+				'desc' => __('Here\'s a list of all the elusive icons by name and icon.', 'redux-framework'),
+				),			
 			)
 		);
 
