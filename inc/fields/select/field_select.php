@@ -120,7 +120,7 @@ class ReduxFramework_select extends ReduxFramework{
 				}//foreach
 			echo '</select>';			
 		} else {
-			echo '<strong>'._('No items of this type were found.', 'redux-framework').'</strong>';
+			echo '<strong>'.__('No items of this type were found.', 'redux-framework').'</strong>';
 		}
 
 		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';

@@ -88,7 +88,7 @@ class ReduxFramework_sorter extends ReduxFramework {
                     $output .= '<input class="sorter-placebo" type="hidden" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $group . '][placebo]" value="placebo">';
                     if ($key != "placebo") {
                         $output .= '<li id="' . $key . '" class="sortee">';
-                        $output .= '<input class="position" type="hidden" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $group . '][' . $key . ']" value="' . $list . '">';
+                        $output .= '<input class="position  ' . $this->field['class'] . '" type="hidden" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $group . '][' . $key . ']" value="' . $list . '">';
                         $output .= $list;
                         $output .= '</li>';
                     }

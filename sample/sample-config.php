@@ -326,13 +326,21 @@ function setup_framework_options(){
 				),
 
 			array(
-				'id'=>'media-min',
+				'id'=>'media-nourl',
 				'type' => 'media', 
-				'mode'=> 'min',
-				'title' => __('Media Minimalistic (min)', 'redux-framework'),
+				'url'=> true,
+				'title' => __('Media No URL', 'redux-framework'),
 				'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
-				),				
+				),	
+			array(
+				'id'=>'media-nopreview',
+				'type' => 'media', 
+				'preview'=> false,
+				'title' => __('Media No Preview', 'redux-framework'),
+				'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
+				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
+				),								
 		/*
 			array(
 				'id'=>'gallery',
@@ -414,6 +422,7 @@ function setup_framework_options(){
                 "type" => "sorter",
                 "title" => "Homepage Layout Manager",
                 "desc" => "Organize how you want the layout to appear on the homepage",
+                "compiler"=>'true',
                 'options' => array(
                     "enabled" => array(
                         "placebo" => "placebo", //REQUIRED!
@@ -694,8 +703,8 @@ function setup_framework_options(){
 				'validate' => 'no_html',
 				'default' => 'No HTML is allowed in here.'
 				),
-			"6"=>array(
-				'id'=>'',
+			array(
+				'id'=>'6',
 				'type' => 'textarea',
 				'title' => __('Textarea Option - HTML Validated', 'redux-framework'), 
 				'subtitle' => __('HTML Allowed (wp_kses)', 'redux-framework'),
@@ -710,7 +719,7 @@ function setup_framework_options(){
 				'subtitle' => __('Custom HTML Allowed (wp_kses)', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'validate' => 'html_custom',
-				'default' => 'Some HTML is allowed in here.',
+				'default' => '<p>Some HTML is allowed in here.</p>',
 				'allowed_html' => array('') //see http://codex.wordpress.org/Function_Reference/wp_kses
 				),
 			array(
@@ -868,8 +877,8 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				),	
-			"select-tags"=>array(
-				'id'=>'',
+			array(
+				'id'=>'select-tags',
 				'type' => 'select',
 				'data' => 'tags',
 				'title' => __('Tags Select Option', 'redux-framework'), 

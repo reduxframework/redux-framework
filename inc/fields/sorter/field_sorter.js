@@ -1,3 +1,4 @@
+/* global redux_change */
 /*
  * Field Sorter jquery function
  * Based on
@@ -19,6 +20,7 @@ jQuery(function() {
                     var listID = jQuery(this).parent().attr('id');
                     var parentID = jQuery(this).parent().parent().attr('id');
                     parentID = parentID.replace(id + '_', '');
+                    redux_change(jQuery(this));
                     var optionID = jQuery(this).parent().parent().parent().attr('id');
                     jQuery(this).prop("name", optionID + '[' + optionID + '][' + parentID + '][' + listID + ']');
                 });
