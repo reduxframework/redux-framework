@@ -140,9 +140,6 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                 }
                 
                 echo '</ul>';       
-            
-                if( !empty( $this->field['presets'] ) && $this->field['presets'] )
-                    echo '<div class="redux-presets-bar"><input type="button" class="redux-save-preset button-primary" value="' . __( 'Load Preset', 'redux-framework' ) . '"></div>';
 
             }
 
