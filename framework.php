@@ -319,9 +319,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 										'fold' => 'id'
 										);
 								    */
-								    $folds[$field['fold']][$field['id']][] = 1;
-								} else {
+								    $folds[$field['fold']]['children'][1][] = $field['id'];
+								    $folds[$field['id']]['parent'] = $field['fold'];
+								} else {										    										
 								    foreach( $field['fold'] as $foldk=>$foldv ) {
+								    	
 										if ( is_array( $foldv ) ) {
 										    /*
 											Example variable:
@@ -331,10 +333,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 										    */
 											
 										    foreach ($foldv as $foldvValue) {
-										    	//echo $field['id']." key-".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
-												$folds[$foldk][$field['id']][] = $foldvValue;
+										    	//echo 'id: '.$field['id']." key: ".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
+												$folds[$foldk]['children'][$foldvValue][] = $field['id'];
+												$folds[$field['id']]['parent'] = $foldk;
 										    }
 										} else {
+											
 											//!DOVY If there's a problem, this is where it's at. These two cases.
 											//This may be able to solve this issue if these don't work
 											//if (count($field['fold']) == count($field['fold'], COUNT_RECURSIVE)) {
@@ -347,7 +351,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 													'fold' => array( 'id' )
 												    );
 											    */	
-	  											$folds[$foldv][$field['id']] = array(1);
+												$folds[$field['id']]['parent'] = $foldv;
+	  											$folds[$foldv]['children'][1] = $field['id'];
 											} else {
 											    /*
 												Example variable:
@@ -358,7 +363,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 											    if (empty($foldv)) {
 											    	$foldv = 0;
 											    }
-												$folds[$foldk][$field['id']] = array($foldv);	
+											    $folds[$field['id']]['parent'] = $foldk;
+												$folds[$foldk]['children'][$foldv][] = $field['id'];	
 											}
 										}
 								    }
@@ -367,6 +373,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						}
 				    }
 				}
+				/*
+				echo "<pre>";
+				print_r($folds);
+				exit();
+				*/
 				return $folds;
 			}
 		    
@@ -584,8 +595,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'redux-js',
-                //REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
-                REDUX_URL . 'assets/js/admin.min.js',
+                REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
+                //REDUX_URL . 'assets/js/admin.min.js',
                 array( 'jquery','jquery-cookie' ),
                 time(),
                 true
@@ -629,6 +640,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
                     'opt_name'          => $this->args['opt_name'],
                     'folds'				=> $this->folds,
+                    'options'			=> $this->options,
+                    'defaults'			=> $this->options_defaults,
                 );       
 
             // Construct the errors array. 
@@ -861,10 +874,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			            	$field['class'] = "";
 			            }
 			            $field = apply_filters( 'redux-field-' . $field['id'] . 'modifier-' . $this->args['opt_name'], $field );
-						if ( !empty( $field['fold'] ) ) { // This has some fold items, hide it by default
+						if ( !empty( $this->folds[$field['id']]['parent'] ) ) { // This has some fold items, hide it by default
 						    $field['class'] .= " fold";
 						}
-						if ( !empty( $this->folds[$field['id']] ) ) { // Sets the values you shoe fold children on
+						if ( !empty( $this->folds[$field['id']]['children'] ) ) { // Sets the values you shoe fold children on
 						    $field['class'] .= " foldParent";
 						}
 
@@ -1170,6 +1183,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					// DOVY! REPLACE $k with $section['ID'] when used properly.
 	                echo '<li id="' . $k . '_section_group_li" class="redux-group-tab-link-li">';
 	                echo '<a href="javascript:void(0);" id="' . $k . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
+	                if ( !empty( $section['sections'] ) ) {
+	                	echo '<ul id="' . $k . '_section_group_li_subsections" class="sub">';
+	                	foreach ($section['sections'] as $k2 => $subsection) {
+	                		echo '<li id="' . $k . '_section_group_li" class="redux-group-tab-link-li">';
+	                		echo '<a href="javascript:void(0);" id="' . $k . '_section_group_subsection_li_a" class="redux-group-tab-link-a" data-rel="' . $k .'sub-'.$k2.'"><span class="group_title">' . $subsection['title'] . '</span></a>';
+	                		echo '</li>';
+	                	}
+	                	echo '</ul>';
+	                }
 	                echo '</li>';							
 				}                
             }
@@ -1243,7 +1265,26 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             foreach( $this->sections as $k => $section ) {
                 echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
-                do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );
+                if ( !empty( $section['sections'] ) ) {
+                	$tabs = "";
+		            echo '<div id="' . $k . '_section_tabs' . '" class="redux-section-tabs">';
+		            echo '<ul>';                	
+                	foreach ($section['sections'] as $subkey => $subsection) {
+                		echo '<li><a href="#'.$k.'_section-tab-'.$subkey.'">'.$subsection['title'].'</a></li>';
+                	}
+		            echo '</ul>';
+               		foreach ($section['sections'] as $subkey => $subsection) {
+               			echo '<div id="' . $k .'sub-'.$subkey. '_section_group' . '" class="redux-group-tab">';
+                		echo '<div id="'.$k.'_section-tab-'.$subkey.'">';
+                		echo "hello".$subkey;
+                		do_settings_sections( $this->args['opt_name'] . $k . '_tab_'.$subkey.'_section_group' );	
+                		echo "</div>";
+                	}
+                	echo "</div>";
+                } else {
+                	do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );	
+                }
+
                 echo '</div>';
             }
 
