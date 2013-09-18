@@ -1025,20 +1025,23 @@ function setup_framework_options(){
 			array(
 				'id'=>'23',
 				'type' => 'info',
-				'fold' => array('18'=>array('1', '2')),
-				'desc' => __('<p class="description">This is the info field, if you want to break sections up.</p>', 'redux-framework')
+                'fold' => array('18'=>array('1', '2')),
+				'desc' => __('This is the info field, if you want to break sections up.', 'redux-framework')
             ),
             array(
                 'id'=>'info_warning',
                 'type'=>'info',
                 'style'=>'warning',
-                'desc' => __( '<p class="description">This is an info field with the warning style applied.</p>', 'redux-framework')
+                'header'=> __( 'This is a header.', 'redux-framework' ),
+                'desc' => __( 'This is an info field with the warning style applied and a header.', 'redux-framework')
             ),
             array(
                 'id'=>'info_success',
                 'type'=>'info',
                 'style'=>'success',
-                'desc' => __( '<p class="description">This is an info field with the success style applied.</p>', 'redux-framework')
+                'icon'=>'info-sign',
+                'header'=> __( 'This is a header.', 'redux-framework' ),
+                'desc' => __( 'This is an info field with the success style applied, a header and an icon.', 'redux-framework')
             ),
 			array(
 				'id'=>'raw_info',
