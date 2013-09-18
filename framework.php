@@ -101,9 +101,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['footer_credit']      = __( '<span id="footer-thankyou">Options panel created using <a href="' . $this->framework_url . '" target="_blank">Redux Framework</a> v' . $this->framework_version . '</span>', 'redux-framework' );
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = __( '', 'redux-framework' );
-			$defaults['theme_mods'] 		= false;
-			$defaults['theme_mods_expand'] 	= false;
-			$defaults['transient'] 			= false;
+            $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
 			$defaults['global_variable'] 	= '';
 			$defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
@@ -204,11 +202,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 */
 		function set_options( $value = '' ) {
 			if( !empty($value) ) {
-				if ( $this->args['transient'] === true ) {
+				if ( $this->args['database'] === 'transient' ) {
 					set_transient( $this->args['opt_name'] . '-transient', $value, $this->args['transient_time'] );
-				} else if ( $this->args['theme_mods'] === true ) {
+				} else if ( $this->args['database'] === 'theme_mods' ) {
 					set_theme_mod( $this->args['opt_name'] . '-mods', $value );	
-				} else if ( $this->args['theme_mods_expand'] === true ) {
+				} else if ( $this->args['database'] === 'theme_mods_expanded' ) {
 					foreach ( $value as $k=>$v ) {
 						set_theme_mod( $k, $v );
 					}
@@ -235,11 +233,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			if ( !empty( $this->defaults ) ) {
 				$defaults = $this->defaults;
 			}			
-			if ( $this->args['transient'] === true ) {
+			if ( $this->args['database'] === "transient" ) {
 				$result = get_transient( $this->args['opt_name'] . '-transient' );
-			} else if ($this->args['theme_mods'] === true ) {
+			} else if ($this->args['database'] === "theme_mods" ) {
 				$result = get_theme_mod( $this->args['opt_name'] . '-mods' );
-			} else if ( $this->args['theme_mods_expand'] === true ) {
+			} else if ( $this->args['database'] === 'theme_mods_expanded' ) {
 				$result = get_theme_mods();
 			} else {
 				$result = get_option( $this->args['opt_name'], $defaults );
@@ -857,30 +855,30 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						}						
 
 						if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] ) {
+							$default_output = "";
 						    if (!is_array($field['default'])) {
-								$default_output = __( 'Default', 'redux-framework' ) . ": ";
 								if ( !empty( $field['options'][$field['default']] ) ) {
 									$default_output .= $field['options'][$field['default']].", ";
 								} else if ( !empty( $field['options'][$field['default']] ) ) {
 									$default_output .= $field['options'][$field['default']].", ";
-								} else {
-									$default_output .= $field['default'].', ';
+								} else if ( !empty( $field['default'] ) ) {
+									$default_output .= $field['default'] . ', ';
 								}
 						    } else {
-								$default_output = __( 'Default', 'redux-framework' ) . ": ";
+								
 								foreach( $field['default'] as $defaultk => $defaultv ) {
 									if ( !empty( $field['options'][$defaultv] ) ) {
 										$default_output .= $field['options'][$defaultv].", ";
 									} else if ( !empty( $field['options'][$defaultk] ) ) {
 										$default_output .= $field['options'][$defaultk].", ";
-									} else {
+									} else if ( !empty( $defaultv ) ) {
 										$default_output .= $defaultv.',';
 									}
 								}
 						   	}
 							if ( !empty( $default_output ) ) {
-							    $default_output = substr($default_output, 0, -2);
-							}						   	
+							    $default_output = __( 'Default', 'redux-framework' ) . ": " . substr($default_output, 0, -2);
+							}				   	
 						    $th .= '<span class="showDefaults">'.$default_output.'</span>';
 			            }
 			            if (!isset($field['class'])) { // No errors please
@@ -952,7 +950,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                     set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
-				    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
+				    if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 						$this->set_options( $plugin_options );
 						return $this->options;
 				    }
@@ -964,7 +962,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $plugin_options = $this->_default_values();
                 set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                 unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
-				if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
+				if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 				    $this->set_options( $plugin_options );
 					return $this->options;
 				}
@@ -993,7 +991,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             unset( $plugin_options['import_code'] );
             unset( $plugin_options['import_link'] );
             unset( $plugin_options['compiler'] );
-		    if ( $this->args['transient'] == true || $this->args['theme_mods'] == true ) {
+		    if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 				$this->set_options( $plugin_options );
 				return $this->options;
 		    }
