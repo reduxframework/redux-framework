@@ -832,9 +832,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
+                    	$th = "";
                         if( isset( $field['title'] ) ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
-                            $th = '';
                             if (!empty($field['title'])) {
                             	$th = $field['title'] . $default_mark;	
                             }
@@ -858,16 +858,29 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 						if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] ) {
 						    if (!is_array($field['default'])) {
-								$default_output = __( 'Default', 'redux-framework' ) . ": " . $field['default'];
-						    } else {
-								$default_output = "";
-								foreach( $field['default'] as $defaultk => $defaultv ) {
-								    $default_output .= $defaultk . ": " . $defaultv.', ';
+								$default_output = __( 'Default', 'redux-framework' ) . ": ";
+								if ( !empty( $field['options'][$field['default']] ) ) {
+									$default_output .= $field['options'][$field['default']].", ";
+								} else if ( !empty( $field['options'][$field['default']] ) ) {
+									$default_output .= $field['options'][$field['default']].", ";
+								} else {
+									$default_output .= $field['default'].', ';
 								}
-								if ( !empty( $default_output ) ) {
-								    $default_output = substr($default_output, 0, -2);
+						    } else {
+								$default_output = __( 'Default', 'redux-framework' ) . ": ";
+								foreach( $field['default'] as $defaultk => $defaultv ) {
+									if ( !empty( $field['options'][$defaultv] ) ) {
+										$default_output .= $field['options'][$defaultv].", ";
+									} else if ( !empty( $field['options'][$defaultk] ) ) {
+										$default_output .= $field['options'][$defaultk].", ";
+									} else {
+										$default_output .= $defaultv.',';
+									}
 								}
 						   	}
+							if ( !empty( $default_output ) ) {
+							    $default_output = substr($default_output, 0, -2);
+							}						   	
 						    $th .= '<span class="showDefaults">'.$default_output.'</span>';
 			            }
 			            if (!isset($field['class'])) { // No errors please
