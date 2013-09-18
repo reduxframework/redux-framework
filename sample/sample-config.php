@@ -1,15 +1,17 @@
 <?php
 
+/**
+	ReduxFramework Sample Config File
+	For full documentation, please visit http://reduxframework.com/docs/
+**/
+
+
 /*
  *
  * Require the framework class before doing anything else, so we can use the defined URLs and directories.
  * If you are running on Windows you may have URL problems which can be fixed by defining the framework url first.
  *
  */
-
-if(!class_exists( 'ReduxFramework' ) && file_exists( dirname(__FILE__) . '/../framework.php' ) ){
-    require_once( dirname(__FILE__) . '/../framework.php' );
-}
 
 /*
  *
