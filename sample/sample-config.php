@@ -162,6 +162,7 @@ function setup_framework_options(){
 	$theme = wp_get_theme();
 
 	$args['display_name'] = $theme->get('Name');
+	$args['database'] = "theme_mods_expanded";
 	$args['display_version'] = $theme->get('Version');
 
     // If you want to use Google Webfonts, you MUST define the api key.
