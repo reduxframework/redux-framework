@@ -795,7 +795,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @access      public
          * @return      string $this->args['footer_credit']
          */
-        public function admin_footer_text( $footer_text ) {
+        public function admin_footer_text( ) {
             return $this->args['footer_credit'];
         }
 
@@ -1488,7 +1488,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     	$value = $v;
                     }
                     do_action( 'redux-before-field-' . $this->args['opt_name'], $field, $value );
-                    $render = '';
                     $render = new $field_class( $field, $value, $this );
                     $render->render();
                     do_action( 'redux-after-field-' . $this->args['opt_name'], $field, $value );

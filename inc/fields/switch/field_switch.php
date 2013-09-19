@@ -35,9 +35,7 @@ class ReduxFramework_switch extends ReduxFramework{
 		//Get selected
 		if ( (int) $this->value == 1 ){
 			$cb_enabled = ' selected';
-			$cb_disabled = '';
 		}else {
-			$cb_enabled = '';
 			$cb_disabled = ' selected';
 		}
 		

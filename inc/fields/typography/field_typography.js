@@ -175,7 +175,7 @@ jQuery(document).ready(function($) {
 			redux_change(jQuery(this));
 			jQuery(this).val(ui.color.toString());
 			typographySelect(jQuery(this));
-		},
+		}
 	});
 	jQuery(".redux-typography-size, .redux-typography-height").numeric({
 		negative: false

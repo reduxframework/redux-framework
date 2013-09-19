@@ -107,9 +107,6 @@ class ReduxFramework_typography extends ReduxFramework{
 		    );
 		 	}
 			
-			if ($this->field['google'] === true) {
-				$google = false;
-			}
 			// Standard sizes for normal fonts
 			$font_sizes = urlencode( json_encode( array( '400'=>'Normal 400', '700'=>'Bold 700', '400-italic'=>'Normal 400 Italic', '700-italic'=>'Bold 700 Italic' ) ) );
 	    foreach ($this->field['fonts'] as $i=>$family) {
@@ -123,7 +120,6 @@ class ReduxFramework_typography extends ReduxFramework{
 
 				if( file_exists( REDUX_DIR.'inc/fields/typography/googlefonts.html' )) {
 					echo $wp_filesystem->get_contents(REDUX_DIR.'inc/fields/typography/googlefonts.html');
-					$google = true;
 				}
 			}
 
@@ -146,28 +142,8 @@ class ReduxFramework_typography extends ReduxFramework{
 		 	if (empty($this->value['style'])) {
 		 		echo '<option value=""></option>';
 		 	}
-      $styles = array('100'=>'Ultra-Light 100',
-                '200'=>'Light 200',
-                '300'=>'Book 300',
-                '400'=>'Normal 400',
-                '500'=>'Medium 500',
-                '600'=>'Semi-Bold 600',
-                '700'=>'Bold 700',
-                '800'=>'Extra-Bold 800',
-                '900'=>'Ultra-Bold 900',
-                '100-italic'=>'Ultra-Light 100 Italic',
-                '200-italic'=>'Light 200 Italic',
-                '300-italic'=>'Book 300 Italic',
-                '400-italic'=>'Normal 400 Italic',
-                '500-italic'=>'Medium 500 Italic',
-                '600-italic'=>'Semi-Bold 600 Italic',
-                '700-italic'=>'Bold 700 Italic',
-                '800-italic'=>'Extra-Bold 800 Italic',
-                '900-italic'=>'Ultra-Bold 900 Italic',
-              );
       $nonGStyles = array('200'=>'Lighter','400'=>'Normal','700'=>'Bold','900'=>'Bolder');
       if (isset($gfonts[$this->value['family']])) {
-        $styles = array();
         foreach ($gfonts[$this->value['family']]['variants'] as $k=>$v) {
           echo '<option value="'. $v['id'] .'" ' . selected($this->value['style'], $v['id'], false) . '>'. $v['name'] .'</option>';
         }
@@ -194,7 +170,6 @@ class ReduxFramework_typography extends ReduxFramework{
 		 		echo '<option value=""></option>';
 		 	}
       if (isset($gfonts[$this->value['family']])) {
-        $styles = array();
         foreach ($gfonts[$this->value['family']]['subsets'] as $k=>$v) {
           echo '<option value="'. $v['id'] .'" ' . selected($this->value['style'], $v['id'], false) . '>'. $v['name'] .'</option>';
         }
@@ -332,7 +307,6 @@ class ReduxFramework_typography extends ReduxFramework{
 		  	$result = wp_remote_get( 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$this->googleAPIKey);
 		  	if ($result['response']['code'] == 200) {
 		  		$result = json_decode($result['body']);
-		  		$res = array();
 					foreach ($result->items as $font) {
 						$googleArray[$font->family] = array(
 							'variants' => $this->getVariants($font->variants),
@@ -350,7 +324,6 @@ class ReduxFramework_typography extends ReduxFramework{
 			if (empty($googleArray)) {
 				$googleArray = json_decode($wp_filesystem->get_contents(REDUX_DIR.'inc/fields/typography/googlefonts.json' ), true );
 			}
-			$hasGoogle = false;
 			$gfonts = '<optgroup label="Google Web Fonts">';
 	    foreach ($googleArray as $i => $face) {
 	      $gfonts .= '<option data-details="'.urlencode(json_encode($face)).'" data-google="true" value="'.$i.'">'. $i .'</option>';
