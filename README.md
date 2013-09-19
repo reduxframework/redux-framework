@@ -36,8 +36,7 @@ Redux can be downloaded in several ways which are outlined below. Please use whi
 
 ### Download as a .zip archive ###
 
-* Stable release: [download](https://github.com/ghost1227/Redux-Framework/archive/stable.zip) 
-* Dev release: [download](https://github.com/ghost1227/Redux-Framework/archive/master.zip)
+* Stable release: [download](https://github.com/ghost1227/Redux-Framework/archive/master.zip)
 
 Once you have downloaded the framework, upload the .zip file to the root of your project and unzip it as follows:
 
@@ -51,24 +50,12 @@ $ unzip Redux-Framework-master.zip -d Redux-Framework
 *Stable release*
 ```bash
 $ cd my-project
-$ git clone git://github.com/ghost1227/Redux-Framework/ -b stable
-```
-
-*Dev release*
-```bash
-$ cd my-project
 $ git clone git://github.com/ghost1227/Redux-Framework/
 ```
 
 ### Cloning the repository as a git submodule ###
 
 *Stable release*
-```bash
-$ cd my-project
-$ git submodule add git://github.com/ghost1227/Redux-Framework/ -b stable
-```
-
-*Dev release*
 ```bash
 $ cd my-project
 $ git submodule add git://github.com/ghost1227/Redux-Framework/
