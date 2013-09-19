@@ -17,58 +17,77 @@ var confirmOnPageExit = function(e) {
 function verify_fold(item) {
 	jQuery(document).ready(function($) {
 		
-		if (item.hasClass('redux-info')) {
+		if (item.hasClass('redux-info') || item.hasClass('redux-typography')) {
 			return;
-		} else {
-			var itemVal = item.val();
 		}
 
-		if (redux_opts.folds[item.attr('id')]) {
-			$.each(redux_opts.folds[item.attr('id')], function(index, value) {
-				var show = false;
-				for (var i = 0; i < value.length; i++) {
-	/**
-							DO NOT change this comarison to === even if JSLint says so. 
-							Will not work unless you cast to string like so:
-							String(value[i]) === String(itemVal)
+		var id = item.attr('id');
+		var itemVal = item.val();
 
-							BUT if you do so the cascading effect ceases to work!
+		if ( redux_opts.folds[ id ] ) {
 
-							LEAVE AS IS
+/*
+		if ( redux_opts.folds[ id ].parent && jQuery( '#' + redux_opts.folds[ id ].parent ).is('hidden') ) {
+			console.log('Going to parent: '+redux_opts.folds[ id ].parent+' for field: '+id);
+			//verify_fold( jQuery( '#' + redux_opts.folds[ id ].parent ) );
+		} 
+*/
+			if ( redux_opts.folds[ id ].children ) {
+				//console.log('Children for: '+id);
 
-						**/
-					/*jshint eqeqeq: false */
-					if (value[i] == itemVal) {
-						show = true;
-					}
-					/*jshint eqeqeq: true */
-				}
-				var hidden = jQuery('#' + index).parents("tr:first").is(":hidden");
-				if (jQuery(item).parents("tr:first").is(":hidden")) {
-					show = false;
-				}
-				if (show) {
-					if (hidden) {
-						jQuery('#' + index).parents("tr:first").fadeIn('medium', function() {
-							// Cascade the fold effect
-							if (jQuery('#' + index).hasClass('foldParent')) {
-								verify_fold(jQuery('#' + index));
+				var theChildren = {};
+				$.each(redux_opts.folds[ id ].children, function(index, value) {
+					$.each(value, function(index2, value2) { // Each of the children for this value
+						if ( ! theChildren[value2] ) { // Create an object if it's not there
+							theChildren[value2] = { show:false, hidden:false };
+						}
+						//console.log('id: '+id+' childID: '+value2+' parent value: '+index+' itemVal: '+itemVal);
+						if ( index == itemVal || theChildren[value2] === true ) { // Check to see if it's in the criteria
+							theChildren[value2].show = true;
+							//console.log('theChildren['+value2+'].show = true');
+						}
+
+						if ( theChildren[value2].show === true && jQuery('#' + id).parents("tr:first").hasClass("hiddenFold") ) {
+							theChildren[value2].show = false; // If this item is hidden, hide this child
+							//console.log('set '+value2+' false');
+						}
+
+						if ( theChildren[value2].show === true && jQuery( '#' + redux_opts.folds[ id ].parent ).hasClass('hiddenFold') ) {
+							theChildren[value2].show = false; // If the parent of the item is hidden, hide this child
+							//console.log('set '+value2+' false2');
+						}
+						// Current visibility of this child node
+						theChildren[value2].hidden = jQuery('#' + value2).parents("tr:first").hasClass("hiddenFold");
+					});
+				});
+
+				//console.log(theChildren);
+
+				$.each(theChildren, function(index) {
+
+					var parent = jQuery('#' + index).parents("tr:first");
+					
+					if ( theChildren[index].show === true ) {
+						//console.log('FadeIn '+index);
+						parent.removeClass('hiddenFold');
+						parent.fadeIn('medium', function() {
+							if ( redux_opts.folds[ index ] && redux_opts.folds[ index ].children ) {
+								verify_fold(jQuery('#'+index)); // Now iterate the children
+							}
+						});
+					} else if ( theChildren[index].hidden === false ) {
+						//console.log('FadeOut '+index);
+						parent.addClass('hiddenFold');
+						parent.fadeOut('medium', function() {
+							if ( redux_opts.folds[ index ].children ) {
+								verify_fold(jQuery('#'+index)); // Now iterate the children
 							}
 						});
 					}
-				} else if (!show) {
-					if (!hidden) {
-						jQuery('#' + index).parents("tr:first").fadeOut(400, function() {
-							// Cascade the fold effect
-							if (jQuery('#' + index).hasClass('foldParent')) {
-								verify_fold(jQuery('#' + index));
-							}
-						});
-					}
-				}
-			});
+				});
+			}
 		}
-		
+			
 	});
 }
 
@@ -302,13 +321,27 @@ jQuery(document).ready(function($) {
 	}
 */
 	// Hide the fold elements on load
+	
 	jQuery('.fold').each(function() {
+		jQuery(this).parents("tr:first").addClass('hiddenFold');
 		jQuery(this).parents("tr:first").hide();
 	});
-	// Hide the fold elements on load
-	jQuery('.foldParent').each(function() {
-	//	verify_fold(jQuery(this));
-	});
+
+
+ 
+	jQuery( ".fold" ).promise().done(function() {
+		// Hide the fold elements on load
+		jQuery('.foldParent').each(function() {
+			var id = jQuery(this).attr('id');
+			if ( redux_opts.folds[ id ] ) {
+				if ( !redux_opts.folds[ id ].parent  ) {
+					verify_fold( jQuery( this ) );
+				}
+			}
+		});
+	});	
+	
+
 	$('#consolePrintObject').on('click', function() {
 		console.log(jQuery.parseJSON(jQuery("#redux-object-json").html()));
 	});
@@ -346,6 +379,19 @@ jQuery(document).ready(function($) {
 
 
 
-	
+	//jQuery( ".redux-section-tabs" ).tabs();
+	jQuery('.redux-section-tabs div').hide();
+	jQuery('.redux-section-tabs div:first').show();
+	jQuery('.redux-section-tabs ul li:first').addClass('active');
+ 
+	jQuery('.redux-section-tabs ul li a').click(function(){
+		jQuery('.redux-section-tabs ul li').removeClass('active');
+		jQuery(this).parent().addClass('active');
+		var currentTab = $(this).attr('href');
+		jQuery('.redux-section-tabs div').hide();
+		jQuery(currentTab).fadeIn();
+		return false;
+	});
+
 
 });
