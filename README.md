@@ -87,7 +87,34 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ## Changelog ##
 
-### Development Branch ###
+### Master ###
+
+* Removed get() and show()
+* Fixed huge performance bug
+* More bugfixes
+* Fixed spacing field
+
+### Version 3.0.0 Beta (September 12, 2013)
+
+* Massive code overhaul
+* Replaced redundant field types with data elements
+* Migrated to company repo
+* Added several new storage methods
+* Numerous bugfixes
+* Renamed std argument to default
+* Added MP6 support
+* Complete CSS rewrite
+* Globals are now conditional
+* Added nesting support
+* Added repeatable field
+* Restyled Dev Mode
+* Added System Info tab
+* Added compiler hooks
+* Added style and icon support to info field
+* Switched to Elusive Icons
+* Huge performance updates
+
+### Version 2.0.1 Final (September 1, 2013) ###
 
 * Added option to override ```icon_type``` per icon
 * Minor bug/versioning fixes
