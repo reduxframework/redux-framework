@@ -690,12 +690,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                             if( !class_exists( $field_class ) ) {
                                 $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                                $ext_class_file = apply_filters( 'redux-ext-typeclass-load', REDUX_DIR . 'extensions/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
-                                if( $class_file ) {
+                                if( file_exists( $class_file ) ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
+                                } elseif( file_exists( $ext_class_file ) ) {
+                                    require_once( $ext_class_file );
                                 }
-
                             }
 
                             if( class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
@@ -1042,12 +1044,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                             if( !class_exists( $validate ) ) {
                                 $class_file = apply_filters( 'redux-validateclass-load', REDUX_DIR . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
+                                $ext_class_file = apply_filters( 'redux-ext-typeclass-load', REDUX_DIR . 'extensions/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
-                                if( $class_file ) {
+                                if( file_exists( $class_file ) ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
+                                } elseif( file_exists( $ext_class_file ) ) {
+                                    require_once( $ext_class_file );
                                 }
-
                             }
 
                             if( class_exists( $validate ) ) {
@@ -1492,12 +1496,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( !class_exists( $field_class ) ) {
                     $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                    $ext_class_file = apply_filters( 'redux-ext-typeclass-load', REDUX_DIR . 'extensions/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
-                    if( $class_file ) {
+                    if( file_exists( $class_file ) ) {
                         /** @noinspection PhpIncludeInspection */
                         require_once($class_file);
+                    } elseif( file_exists( $ext_class_file ) ) {
+                        require_once($ext_class_file);
                     }
-
                 }
 
                 if( class_exists( $field_class ) ) {
