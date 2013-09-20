@@ -32,17 +32,17 @@ jQuery(document).ready(function($) {
 		var size = $('#' + mainID + ' .redux-typography-size').val();
 		var height = $('#' + mainID + ' .redux-typography-height').val();
 		var style = $('#' + mainID + ' select.redux-typography-style').val();
-		var script = $('#' + mainID + ' select.redux-typography-script').val();
+		var script = $('#' + mainID + ' select.redux-typography-subsets').val();
 		var color = $('#' + mainID + ' .redux-typography-color').val();
 		var units = $('#' + mainID).data('units');
 		var option = $('#' + mainID + ' .redux-typography-family option:selected');
 		//$('#' + mainID + ' select.redux-typography-style').val('');
-		//$('#' + mainID + ' select.redux-typography-script').val('');
+		//$('#' + mainID + ' select.redux-typography-subsets').val('');
 		var google = option.data('google'); // Check if font is a google font
 		// Page load. Speeds things up memory wise to offload to client
 		if (!$('#' + mainID).hasClass('typography-initialized')) {
 			style = $('#' + mainID + ' select.redux-typography-style').data('value');
-			script = $('#' + mainID + ' select.redux-typography-script').data('value');
+			script = $('#' + mainID + ' select.redux-typography-subsets').data('value');
 			if (style !== "") {
 				style = String(style);
 			}
@@ -79,7 +79,8 @@ jQuery(document).ready(function($) {
 					}
 					html += '<option value="' + subset.id + '"' + selected + '>' + subset.name.replace(/\+/g, " ") + '</option>';
 				});
-				$('#' + mainID + ' .redux-typography-script').html(html);
+				$('#' + mainID + ' .redux-typography-subsets').html(html);
+				$('#' + mainID + ' .redux-typography-subsets').fadeIn('fast');
 			} else {
 				if (details) {
 					$.each(details, function(index, value) {
@@ -92,6 +93,7 @@ jQuery(document).ready(function($) {
 						html += '<option value="' + index + '"' + selected + '>' + value.replace('+', ' ') + '</option>';
 					});
 					$('#' + mainID + ' .redux-typography-style').html(html);
+					$('#' + mainID + ' .redux-typography-subsets').fadeOut('fast');
 				}
 			}
 		}
@@ -103,9 +105,9 @@ jQuery(document).ready(function($) {
 		} else if (style === "400") {
 			$('#' + mainID + ' select.redux-typography-style').val(style);
 		}
-		if ($('#' + mainID + " select.redux-typography-script option[value='" + script + "']").length === 0) {
+		if ($('#' + mainID + " select.redux-typography-subsets option[value='" + script + "']").length === 0) {
 			script = "";
-			$('#' + mainID + ' select.redux-typography-script').val('');
+			$('#' + mainID + ' select.redux-typography-subsets').val('');
 		}
 
 		var _linkclass = 'style_link_' + mainID;
@@ -134,10 +136,14 @@ jQuery(document).ready(function($) {
 				$('#' + mainID + ' .typography-preview').css('font-style', "normal");
 				
 				// Weight and italic
-				if (style.indexOf("italic") != -1) {
+				if (style.indexOf("italic") !== -1) {
 					$('#' + mainID + ' .typography-preview').css('font-style', 'italic');	
+					$('#' + mainID + ' .typography-font-style').val('italic');	
 					style = style.replace('italic', '');
+				} else {
+					$('#' + mainID + ' .typography-font-style').val('');	
 				}
+				$('#' + mainID + ' .typography-font-weight').val(style);	
 				$('#' + mainID + ' .typography-preview').css('font-weight', style);
 
 				//show in the preview box the font
@@ -146,15 +152,19 @@ jQuery(document).ready(function($) {
 				//if selected is not a font remove style "font-family" at preview box
 				$('#' + mainID + ' .typography-preview').css('font-family', '');
 			}
-			if (height) {
-				$('#' + mainID + ' .typography-preview').css('line-height', height + units);
-			} else {
-				$('#' + mainID + ' .typography-preview').css('line-height', size + units);
+			if (!height) {
+				height = size;
 			}
+			$('#' + mainID + ' .typography-preview').css('line-height', height + units);
+			$('#' + mainID + ' .typography-font-size').val(size + units);
+			$('#' + mainID + ' .typography-line-height').val(height + units);
+
 			$('#' + mainID + ' .typography-preview').css('color', color);
 		}
 		$('#' + mainID + ' .typography-style .select2-chosen').text($('#' + mainID + ' .redux-typography-style option:selected').text());
-		$('#' + mainID + ' .typography-script .select2-chosen').text($('#' + mainID + ' .redux-typography-script option:selected').text());
+		$('#' + mainID + ' .typography-script .select2-chosen').text($('#' + mainID + ' .redux-typography-subsets option:selected').text());
+
+
 	}
 	//init for each element
 	jQuery('.redux-typography-container').each(function() {
@@ -183,7 +193,7 @@ jQuery(document).ready(function($) {
 	jQuery(".redux-typography-size, .redux-typography-height").numeric({
 		negative: false
 	});
-	//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-script").select2({
+	//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
 	jQuery(".redux-typography-family").select2({
 		width: 'resolve',
 		triggerChange: true,
