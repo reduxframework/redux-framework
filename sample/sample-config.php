@@ -837,9 +837,9 @@ function setup_framework_options(){
         	    	)
 	        	),	
 			array(
-	            'id' => 'text_sortable',
+	            'id' => 'check_sortable',
     	        'type' => 'sortable',
-    	        'mode' => 'checkbox',
+    	        'mode' => 'checkbox', // checkbox or text
         	    'title' => __('Sortable Text Option', 'redux-framework'),
             	'sub_desc' => __('Define and reorder these however you want.', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
