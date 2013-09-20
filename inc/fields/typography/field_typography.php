@@ -106,7 +106,7 @@ class ReduxFramework_typography extends ReduxFramework{
             }
 
             // Standard sizes for normal fonts
-            $font_sizes = urlencode( json_encode( array( '400'=>'Normal 400', '700'=>'Bold 700', '400-italic'=>'Normal 400 Italic', '700-italic'=>'Bold 700 Italic' ) ) );
+            $font_sizes = urlencode( json_encode( array( '400'=>'Normal 400', '700'=>'Bold 700', '400italic'=>'Normal 400 Italic', '700italic'=>'Bold 700 Italic' ) ) );
             foreach ($this->field['fonts'] as $i=>$family) {
                 echo '<option data-google="false" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($this->value['family'], $i, false) . '>'. $family .'</option>';
             }

@@ -132,10 +132,13 @@ jQuery(document).ready(function($) {
 				}
 				$('#' + mainID + ' .typography-preview').css('font-size', size + units);
 				$('#' + mainID + ' .typography-preview').css('font-style', "normal");
+				
 				// Weight and italic
-				var n = style.split("-");
-				$('#' + mainID + ' .typography-preview').css('font-weight', n[0]);
-				$('#' + mainID + ' .typography-preview').css('font-style', n[1]);
+				if (style.indexOf("italic") != -1) {
+					$('#' + mainID + ' .typography-preview').css('font-style', 'italic');	
+					style = style.replace('italic', '');
+				}
+				$('#' + mainID + ' .typography-preview').css('font-weight', style);
 
 				//show in the preview box the font
 				$('#' + mainID + ' .typography-preview').css('font-family', family + ', sans-serif');
