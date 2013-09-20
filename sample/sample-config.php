@@ -584,7 +584,16 @@ function setup_framework_options(){
 				'subtitle' => __('Allow your users to choose the spacing or margin they want.', 'redux-framework'),
 				'desc' => __('You can enable or diable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework'),
 				'default' => array('top' => 5, 'bottom' => 6, 'left'=>2, 'right'=>4)
-				),									
+				),	
+			array(
+				'id'=>'dimensions',
+				'type' => 'dimensions',
+				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
+				'title' => __('Dimensions (Width/Height) Option', 'redux-framework'),
+				'subtitle' => __('Allow your users to choose width, height, and/or unit.', 'redux-framework'),
+				'desc' => __('You can enable or diable any piece of this field. Width, Height, or Units.', 'redux-framework'),
+				'default' => array('width' => 200, 'height'=>'100', 'units'=>'em')
+				),												
 			array(
 				'id'=>'body-font2',
 				'type' => 'typography',

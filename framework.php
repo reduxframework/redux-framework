@@ -254,6 +254,84 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			return $result;
 		}
 
+/**
+		 * ->get_options(); This is used to get options from the database
+		 *
+		 * @since ReduxFramework 3.0.0
+		 */
+		function get_wordpress_data($type = false, $args = array()) {
+			$data = "";
+			if ( !empty($type) ) {
+
+				/**
+					Use data from Wordpress to populate options array
+				**/
+				if (!empty($type) && empty($data)) {
+					if (empty($args)) {
+						$args = array();
+					}
+					$data = array();
+					$args = wp_parse_args($args, array());	
+					if ($type == "categories" || $type == "category") {
+						$cats = get_categories($args); 
+						if (!empty($cats)) {		
+							foreach ( $cats as $cat ) {
+								$data[$cat->term_id] = $cat->name;
+							}//foreach
+						} // If
+					} else if ($type == "menus" || $type == "menu") {
+						$menus = wp_get_nav_menus($args);
+						if(!empty($menus)) {
+							foreach ($menus as $item) {
+								$data[$item->term_id] = $item->name;
+							}//foreach
+						}//if
+					} else if ($type == "pages" || $type == "page") {
+						$pages = get_pages($args); 
+						if (!empty($pages)) {
+							foreach ( $pages as $page ) {
+								$data[$page->ID] = $page->post_title;
+							}//foreach
+						}//if
+					} else if ($type == "posts" || $type == "post") {
+						$posts = get_posts($args); 
+						if (!empty($posts)) {
+							foreach ( $posts as $post ) {
+								$data[$post->ID] = $post->post_title;
+							}//foreach
+						}//if
+					} else if ($type == "post_type" || $type == "post_types") {
+						$post_types = get_post_types($args, 'object'); 
+						if (!empty($post_types)) {
+							foreach ( $post_types as $k => $post_type ) {
+								$data[$k] = $post_type->labels->name;
+							}//foreach
+						}//if
+					} else if ($type == "tags" || $type == "tag") {
+						$tags = get_tags($args); 
+						if (!empty($tags)) {
+							foreach ( $tags as $tag ) {
+								$data[$tag->term_id] = $tag->name;
+							}//foreach
+						}//if
+					} else if ($type == "menu_location" || $type == "menu_locations") {
+						global $_wp_registered_nav_menus;
+						foreach($_wp_registered_nav_menus as $k => $v) {
+		           			$data[$k] = $v;
+		        		}
+					}//if
+					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive") {
+						require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');
+						foreach($elusiveIcons as $k) {
+		           			$data[$k] = $k;
+		        		}
+					}//if			
+				}//if
+			}
+
+			return $data;
+		}		
+
         /**
          * ->show(); This is used to echo and option value from the options array
          *
@@ -489,8 +567,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     if( true === $this->args['dev_mode'] ) {
                         add_submenu_page(
                             $this->args['page_slug'],
-                            __( 'Dev Mode Info', 'redux-framework' ),
-                            __( 'Dev Mode Info', 'redux-framework' ),
+                            __( 'Options Object', 'redux-framework' ),
+                            __( 'Options Object', 'redux-framework' ),
                             $this->args['page_cap'],
                             $this->args['page_slug'] . '&tab=dev_mode_default',
                             create_function('$a', "return null;")
@@ -690,14 +768,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                             if( !class_exists( $field_class ) ) {
                                 $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
-                                $ext_class_file = apply_filters( 'redux-ext-typeclass-load', REDUX_DIR . 'extensions/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
-                                if( file_exists( $class_file ) ) {
+                                if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
-                                } elseif( file_exists( $ext_class_file ) ) {
-                                    require_once( $ext_class_file );
                                 }
+
                             }
 
                             if( class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
@@ -877,7 +953,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 									} else if ( !empty( $field['options'][$defaultk] ) ) {
 										$default_output .= $field['options'][$defaultk].", ";
 									} else if ( !empty( $defaultv ) ) {
-										$default_output .= $defaultv.',';
+										$default_output .= $defaultv.', ';
 									}
 								}
 						   	}
@@ -1044,14 +1120,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                             if( !class_exists( $validate ) ) {
                                 $class_file = apply_filters( 'redux-validateclass-load', REDUX_DIR . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
-                                $ext_class_file = apply_filters( 'redux-ext-typeclass-load', REDUX_DIR . 'extensions/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
-                                if( file_exists( $class_file ) ) {
+                                if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
-                                } elseif( file_exists( $ext_class_file ) ) {
-                                    require_once( $ext_class_file );
                                 }
+
                             }
 
                             if( class_exists( $validate ) ) {
@@ -1263,7 +1337,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $icon = ( !isset( $this->args['dev_mode_icon'] ) ) ? '<i class="icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['dev_mode_icon'] . $icon_class . '"></i> ';
                 }
 
-                echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span class="group_title">' . __( 'Dev Mode Info', 'redux-framework' ) . '</span></a>';
+                echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span class="group_title">' . __( 'Options Object', 'redux-framework' ) . '</span></a>';
                 echo '</li>';
             }
 
@@ -1370,7 +1444,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( $this->args['dev_mode'] === true ) {
                 echo '<div id="dev_mode_default_section_group' . '" class="redux-group-tab">';
-                echo '<h3>' . __( 'Dev Mode Info', 'redux-framework' ) . '</h3>';
+                echo '<h3>' . __( 'Options Object', 'redux-framework' ) . '</h3>';
                 echo '<div class="redux-section-desc">';
 
                 echo '<div id="redux-object-browser"></div>';
@@ -1496,14 +1570,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( !class_exists( $field_class ) ) {
                     $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
-                    $ext_class_file = apply_filters( 'redux-ext-typeclass-load', REDUX_DIR . 'extensions/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
-                    if( file_exists( $class_file ) ) {
+                    if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
                         require_once($class_file);
-                    } elseif( file_exists( $ext_class_file ) ) {
-                        require_once($ext_class_file);
                     }
+
                 }
 
                 if( class_exists( $field_class ) ) {

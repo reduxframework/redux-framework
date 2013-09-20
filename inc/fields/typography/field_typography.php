@@ -142,7 +142,7 @@ class ReduxFramework_typography extends ReduxFramework{
             }
             $nonGStyles = array('200'=>'Lighter','400'=>'Normal','700'=>'Bold','900'=>'Bolder');
             if (isset($gfonts[$this->value['family']])) {
-                foreach ($gfonts[$this->value['family']]['variants'] as $k=>$v) {
+                foreach ($gfonts[$this->value['family']]['variants'] as $v) {
                     echo '<option value="'. $v['id'] .'" ' . selected($this->value['style'], $v['id'], false) . '>'. $v['name'] .'</option>';
                 }
             } else {
@@ -168,7 +168,7 @@ class ReduxFramework_typography extends ReduxFramework{
                 echo '<option value=""></option>';
             }
             if (isset($gfonts[$this->value['family']])) {
-                foreach ($gfonts[$this->value['family']]['subsets'] as $k=>$v) {
+                foreach ($gfonts[$this->value['family']]['subsets'] as $v) {
                     echo '<option value="'. $v['id'] .'" ' . selected($this->value['style'], $v['id'], false) . '>'. $v['name'] .'</option>';
                 }
             }
@@ -410,4 +410,3 @@ class ReduxFramework_typography extends ReduxFramework{
 
 
 }//class
-?>
