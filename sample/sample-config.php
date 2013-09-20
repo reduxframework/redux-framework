@@ -823,7 +823,32 @@ function setup_framework_options(){
 								'6' => array('alt' => '3 Column Right', 'img' => REDUX_URL.'assets/img/3cr.png')
 									),//Must provide key => value(array:title|img) pairs for radio options
 				'default' => '2'
-				)																		
+				),
+			array(
+	            'id' => 'text_sortable',
+    	        'type' => 'sortable',
+        	    'title' => __('Sortable Text Option', 'redux-framework'),
+            	'sub_desc' => __('Define and reorder these however you want.', 'redux-framework'),
+				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
+	            'options' => array(
+    	            'si1' => 'Item 1',
+        	        'si2' => 'Item 2',
+            	    'si3' => 'Item 3',
+        	    	)
+	        	),	
+			array(
+	            'id' => 'text_sortable',
+    	        'type' => 'sortable',
+    	        'mode' => 'checkbox',
+        	    'title' => __('Sortable Text Option', 'redux-framework'),
+            	'sub_desc' => __('Define and reorder these however you want.', 'redux-framework'),
+				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
+	            'options' => array(
+    	            'si1' => 'Item 1',
+        	        'si2' => 'Item 2',
+            	    'si3' => 'Item 3',
+        	    	)
+	        	),	        																						
 			)
 		);
 	$sections[] = array(
