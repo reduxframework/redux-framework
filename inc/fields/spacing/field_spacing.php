@@ -42,7 +42,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 		$defaults = array(
 			'top'=>'',
 			'right'=>'',
-			'mode' => ''
+			'mode' => '',
 			'bottom'=>'',
 			'left'=>'',
 			'units'=>'px',
