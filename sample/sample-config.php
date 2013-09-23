@@ -440,15 +440,13 @@ function setup_framework_options(){
                     )
                 ),
             ),
-/*
 			array(
 				'id'=>'slides',
-				'type' => 'slides', 
+				'type' => 'slides',
 				'title' => __('Slides Options', 'redux-framework'),
-				'subtitle'=> __('Unlimited slider with drag and drop sortings.', 'redux-framework'),
-				),
-*/
-					
+				'subtitle'=> __('Unlimited slides with drag and drop sortings.', 'redux-framework'),
+				'desc' => __('This field will store all slides values into a multidimensional array to use into a foreach loop.', 'redux-framework')
+			),
 			array(
 				'id'=>'presets',
 				'type' => 'image_select', 
