@@ -202,7 +202,7 @@ if (!class_exists('ReduxFramework_slides')) {
 
             wp_enqueue_style(
                 'redux-field-slides-css',
-                REDUX_URL . 'inc/fields/slides/field_slides.min.css',
+                REDUX_URL . 'inc/fields/slides/field_slides.css',
                 time(),
                 true
             );

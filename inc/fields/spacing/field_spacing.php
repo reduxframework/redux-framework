@@ -31,6 +31,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 		// No errors please
 		$defaults = array(
 			'units' => '',
+			'mode' => '',
 			'top'	=> true,
 			'bottom'=> true,
 			'left'	=> true,
@@ -50,6 +51,12 @@ class ReduxFramework_spacing extends ReduxFramework{
 
 		$this->value = wp_parse_args( $this->value, $defaults );
 
+		if ( empty( $this->value['units'] ) || ( !in_array($this->value['units'], array( '%, in, cm, mm, em, ex, pt, pc, px' ) ) ) ) {
+			if ( empty( $this->field['units'] ) || ( !in_array($this->field['units'], array( '%, in, cm, mm, em, ex, pt, pc, px' ) ) ) ) {
+				$this->field['units'] = "px";
+			}
+			$this->value['units'] = $this->field['units'];
+		}
 
 		if ( $this->field['mode'] !== "margin" && $this->field['mode'] !== "padding" ) {
 			$mode = "";
@@ -65,30 +72,45 @@ class ReduxFramework_spacing extends ReduxFramework{
 			Top
 			**/
 			if ($this->field['top'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-up icon-large"></i></span><input type="text" class="redux-spacing-top mini'.$this->field['class'].'" placeholder="'.__('Top','redux-framework').'" id="'.$this->field['id'].'-top" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'top]" value="'.$this->value['top'].'"></div>';
+				if ( !empty($this->value['top'] ) &&  strpos( $this->value['top'], $this->value['units'] ) === false ) {
+					$this->value['top'] = filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['top'] = $this->value['top'].$this->value['units'];
+				}
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-up icon-large"></i></span><input type="text" class="redux-spacing-top redux-spacing-input mini'.$this->field['class'].'" placeholder="'.__('Top','redux-framework').'" rel="'.$this->field['id'].'-top" value="'.str_replace($this->value['units'], "", $this->value['top']).'"><input type="hidden" placeholder="'.__('Top','redux-framework').'" id="'.$this->field['id'].'-top" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'top]" value="'.$this->value['top'].'"></div>';
 		  	endif;
 
 			/**
 			Right
 			**/
 			if ($this->field['right'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-right icon-large"></i></span><input type="text" class="redux-spacing-right mini'.$this->field['class'].'" placeholder="'.__('Right','redux-framework').'" id="'.$this->field['id'].'-right" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'right]" value="'.$this->value['right'].'"></div>';
+				if ( !empty($this->value['right'] ) &&  strpos( $this->value['right'], $this->value['units'] ) === false ) {
+					$this->value['right'] = filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['right'] = $this->value['right'].$this->value['units'];
+				}				
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-right icon-large"></i></span><input type="text" class="redux-spacing-right redux-spacing-input mini'.$this->field['class'].'" placeholder="'.__('Right','redux-framework').'" rel="'.$this->field['id'].'-right" value="'.str_replace($this->value['units'], "", $this->value['right']).'"><input type="hidden" class="redux-spacing-right mini'.$this->field['class'].'" placeholder="'.__('Right','redux-framework').'" id="'.$this->field['id'].'-right" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'right]" value="'.$this->value['right'].'"></div>';
 		  	endif;
 
 			/**
 			Bottom
 			**/
 			if ($this->field['bottom'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-down icon-large"></i></span><input type="text" class="redux-spacing-bottom mini'.$this->field['class'].'" placeholder="'.__('Bottom','redux-framework').'" id="'.$this->field['id'].'-bottom" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'bottom]" value="'.$this->value['bottom'].'"></div>';
+				if ( !empty($this->value['bottom'] ) &&  strpos( $this->value['bottom'], $this->value['units'] ) === false ) {
+					$this->value['bottom'] = filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['bottom'] = $this->value['bottom'].$this->value['units'];
+				}					
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-down icon-large"></i></span><input type="text" class="redux-spacing-bottom redux-spacing-input mini'.$this->field['class'].'" placeholder="'.__('Bottom','redux-framework').'" rel="'.$this->field['id'].'-bottom" value="'.str_replace($this->value['units'], "", $this->value['bottom']).'"><input type="hidden" class="redux-spacing-bottom mini'.$this->field['class'].'" placeholder="'.__('Bottom','redux-framework').'" id="'.$this->field['id'].'-bottom" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'bottom]" value="'.$this->value['bottom'].'"></div>';
 		  	endif;
 
 			/**
 			Left
 			**/
 			if ($this->field['left'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-left icon-large"></i></span><input type="text" class="redux-spacing-left mini'.$this->field['class'].'" placeholder="'.__('Left','redux-framework').'" id="'.$this->field['id'].'-left" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'left]" value="'.$this->value['left'].'"></div>';
+				if ( !empty($this->value['left'] ) &&  strpos( $this->value['left'], $this->value['units'] ) === false ) {
+					$this->value['left'] = filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['left'] = $this->value['left'].$this->value['units'];
+				}									
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-left icon-large"></i></span><input type="text" class="redux-spacing-left redux-spacing-input mini'.$this->field['class'].'" placeholder="'.__('Left','redux-framework').'" rel="'.$this->field['id'].'-left" value="'.str_replace($this->value['units'], "", $this->value['left']).'"><input type="hidden" class="redux-spacing-left mini'.$this->field['class'].'" placeholder="'.__('Left','redux-framework').'" id="'.$this->field['id'].'-left" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'left]" value="'.$this->value['left'].'"></div>';
 		  	endif;		
-
 
 
 			/** 
