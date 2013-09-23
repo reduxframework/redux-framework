@@ -42,12 +42,22 @@ class ReduxFramework_spacing extends ReduxFramework{
 		$defaults = array(
 			'top'=>'',
 			'right'=>'',
+			'mode' => ''
 			'bottom'=>'',
 			'left'=>'',
 			'units'=>'px',
 		);
 
 		$this->value = wp_parse_args( $this->value, $defaults );
+
+
+		if ( $this->field['mode'] !== "margin" && $this->field['mode'] !== "padding" ) {
+			$mode = "";
+		}
+		
+		if ( !empty( $this->field['mode'] ) ) {
+			$this->field['mode'] = $this->field['mode']."-";
+		}
 		
 	  	echo '<fieldset id="'.$this->field['id'].'" class="redux-spacing-container">';
 
@@ -55,28 +65,28 @@ class ReduxFramework_spacing extends ReduxFramework{
 			Top
 			**/
 			if ($this->field['top'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-up icon-large"></i></span><input type="text" class="redux-spacing-top mini'.$this->field['class'].'" placeholder="'.__('Top','redux-framework').'" id="'.$this->field['id'].'-top" name="'.$this->args['opt_name'].'['.$this->field['id'].'][top]" value="'.$this->value['top'].'"></div>';
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-up icon-large"></i></span><input type="text" class="redux-spacing-top mini'.$this->field['class'].'" placeholder="'.__('Top','redux-framework').'" id="'.$this->field['id'].'-top" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'top]" value="'.$this->value['top'].'"></div>';
 		  	endif;
 
 			/**
 			Right
 			**/
 			if ($this->field['right'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-right icon-large"></i></span><input type="text" class="redux-spacing-right mini'.$this->field['class'].'" placeholder="'.__('Right','redux-framework').'" id="'.$this->field['id'].'-right" name="'.$this->args['opt_name'].'['.$this->field['id'].'][right]" value="'.$this->value['right'].'"></div>';
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-right icon-large"></i></span><input type="text" class="redux-spacing-right mini'.$this->field['class'].'" placeholder="'.__('Right','redux-framework').'" id="'.$this->field['id'].'-right" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'right]" value="'.$this->value['right'].'"></div>';
 		  	endif;
 
 			/**
 			Bottom
 			**/
 			if ($this->field['bottom'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-down icon-large"></i></span><input type="text" class="redux-spacing-bottom mini'.$this->field['class'].'" placeholder="'.__('Bottom','redux-framework').'" id="'.$this->field['id'].'-bottom" name="'.$this->args['opt_name'].'['.$this->field['id'].'][bottom]" value="'.$this->value['bottom'].'"></div>';
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-down icon-large"></i></span><input type="text" class="redux-spacing-bottom mini'.$this->field['class'].'" placeholder="'.__('Bottom','redux-framework').'" id="'.$this->field['id'].'-bottom" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'bottom]" value="'.$this->value['bottom'].'"></div>';
 		  	endif;
 
 			/**
 			Left
 			**/
 			if ($this->field['left'] === true):
-				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-left icon-large"></i></span><input type="text" class="redux-spacing-left mini'.$this->field['class'].'" placeholder="'.__('Left','redux-framework').'" id="'.$this->field['id'].'-left" name="'.$this->args['opt_name'].'['.$this->field['id'].'][left]" value="'.$this->value['left'].'"></div>';
+				echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-arrow-left icon-large"></i></span><input type="text" class="redux-spacing-left mini'.$this->field['class'].'" placeholder="'.__('Left','redux-framework').'" id="'.$this->field['id'].'-left" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'left]" value="'.$this->value['left'].'"></div>';
 		  	endif;		
 
 
