@@ -597,6 +597,7 @@ function setup_framework_options(){
 				'type' => 'typography',
 				'title' => __('Body Font', 'redux-framework'),
 				'subtitle' => __('Specify the body font properties.', 'redux-framework'),
+				'google'=>true,
 				'default' => array(
 					'color'=>'#dd9933',
 					'font-size'=>30,
