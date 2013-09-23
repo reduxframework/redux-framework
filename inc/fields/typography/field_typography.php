@@ -27,7 +27,7 @@ class ReduxFramework_typography extends ReduxFramework{
      */
     function render(){
 
-        print_r($this->field);
+        //print_r($this->field);
 
         global $wp_filesystem;
 
