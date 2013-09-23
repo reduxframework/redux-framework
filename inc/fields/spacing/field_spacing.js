@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery('.redux-spacing-units').on('change', function() {
-		jQuery('.redux-spacing-input').change();
+		jQuery(this).parents('.redux-spacing-container:first').find('.redux-spacing-input').change();
 	});
 
 });
