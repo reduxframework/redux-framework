@@ -277,6 +277,15 @@ class ReduxFramework_typography extends ReduxFramework{
         wp_enqueue_script( 'select2-js' );
         wp_enqueue_style( 'select2-css' );
 
+        wp_enqueue_style( 'wp-color-picker' );
+
+        wp_enqueue_style(
+            'redux-field-color-css', 
+            REDUX_URL . 'inc/fields/color/field_color.css', 
+            time(),
+            true
+        );
+
         wp_enqueue_script(
             'redux-field-typography-js',
             REDUX_URL.'inc/fields/typography/field_typography.min.js',
