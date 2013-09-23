@@ -82,14 +82,12 @@ class ReduxFramework_dimensions extends ReduxFramework{
 				 	echo '<option value="em"'.selected($this->value['units'], 'em', false).'>em</option>';
 				 	echo '<option value="%"'.selected($this->value['units'], '%', false).'>%</option>';
 				}
+				
 				echo '</select></div>';
 
 			endif;
 
-
-
 	  	echo "</fieldset>";
-
 
 	}//function
 	
@@ -118,8 +116,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			REDUX_URL.'inc/fields/dimensions/field_dimensions.css', 
 			time(),
 			true
-		);	
-			
+		);
 		
 	}//function
 	
