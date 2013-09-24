@@ -26,7 +26,7 @@ class ReduxFramework_password {
     		$defaults = array(
     				'username'=>'',
     				'password'=>'',
-                    'placeholder' => array('password'=>'Password', 'username'=>'Username')
+                    'placeholder' => array('password'=>__( 'Password', 'redux-framework' ), 'username'=>__( 'Username', 'redux-framework' ))
     			);
     		$this->value = wp_parse_args( $this->value, $defaults );
     	}
@@ -44,10 +44,10 @@ class ReduxFramework_password {
             }
 
             if (!empty($this->field['username']) && $this->field['username'] === true ) {
-        		echo '<input type="input" autocomplete="off" placeholder="'.__( 'Username', 'redux-framework' ).'" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr($this->value['username']) . '" class="regular-text ' . $this->field['class'] . '" style="margin-right: 5px;" />';
-        		echo '<input type="password" autocomplete="off" placeholder="'.__( 'Password', 'redux-framework' ).'" id="' . $this->field['id'] . '[password]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr($this->value['password']) . '" class="regular-text ' . $this->field['class'] . '" />';
+        		echo '<input type="input" autocomplete="off" placeholder="'.$this->value['placeholder']['username'].'" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr($this->value['username']) . '" class="regular-text ' . $this->field['class'] . '" style="margin-right: 5px;" />';
+        		echo '<input type="password" autocomplete="off" placeholder="'.$this->value['placeholder']['password'].'" id="' . $this->field['id'] . '[password]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr($this->value['password']) . '" class="regular-text ' . $this->field['class'] . '" />';
         	} else {
-        		echo '<input type="password" autocomplete="off" placeholder="'.__( 'Password', 'redux-framework' ).'" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr($this->value) . '" class="' . $this->field['class'] . '" />';
+        		echo '<input type="password" autocomplete="off" placeholder="'.$this->value['placeholder']['password'].'" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr($this->value) . '" class="' . $this->field['class'] . '" />';
         	}
             echo (isset($this->field['desc']) && !empty($this->field['desc'])) ? '<br /><span class="description">' . $this->field['desc'] . '</span>' : '';
         echo '</fieldset>';
