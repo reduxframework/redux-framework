@@ -90,7 +90,9 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 		 * @return		void
 		 */
 		public function enqueue() {
-		
+
+			wp_enqueue_style( 'wp-color-picker' );
+
 			wp_enqueue_script(
 				'redux-field-color-js', 
 				REDUX_URL . 'inc/fields/color/field_color.min.js', 
@@ -98,8 +100,6 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 				time(),
 				true
 			);
-
-			wp_enqueue_style( 'wp-color-picker' );
 
 			wp_enqueue_style(
 				'redux-field-color-css', 
