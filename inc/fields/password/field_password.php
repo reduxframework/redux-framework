@@ -26,11 +26,23 @@ class ReduxFramework_password {
     		$defaults = array(
     				'username'=>'',
     				'password'=>'',
+                    'placeholder' => array('password'=>'Password', 'username'=>'Username')
     			);
     		$this->value = wp_parse_args( $this->value, $defaults );
     	}
         echo '<fieldset id="'.$this->field['id'].'" class="redux-password-container">';
-    	
+
+            if ( !empty($this->field['placeholder'] ) ) {
+                if ( is_array( $this->field['placeholder'] ) && !empty( $this->field['placeholder']['password'] ) ) {
+                    $this->value['placeholder']['password'] = $this->field['placeholder']['password'];
+                }
+                if ( is_array( $this->field['placeholder'] ) && !empty( $this->field['placeholder']['username'] ) ) {
+                    $this->value['placeholder']['username'] = $this->field['placeholder']['username'];
+                }                
+            } else {
+                $this->value['placeholder']['password'] = $this->field['placeholder'];
+            }
+
             if (!empty($this->field['username']) && $this->field['username'] === true ) {
         		echo '<input type="input" autocomplete="off" placeholder="'.__( 'Username', 'redux-framework' ).'" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr($this->value['username']) . '" class="regular-text ' . $this->field['class'] . '" style="margin-right: 5px;" />';
         		echo '<input type="password" autocomplete="off" placeholder="'.__( 'Password', 'redux-framework' ).'" id="' . $this->field['id'] . '[password]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr($this->value['password']) . '" class="regular-text ' . $this->field['class'] . '" />';
