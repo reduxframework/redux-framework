@@ -32,6 +32,8 @@ jQuery(document).ready(function($) {
 		var familyBackup = $('#' + mainID + ' select.redux-typography-family-backup').val();
 		var size = $('#' + mainID + ' .redux-typography-size').val();
 		var height = $('#' + mainID + ' .redux-typography-height').val();
+		var word = $('#' + mainID + ' .redux-typography-word').val(); // New Word-Spacing
+		var letter = $('#' + mainID + ' .redux-typography-letter').val(); // New Letter-Spacing
 		var style = $('#' + mainID + ' select.redux-typography-style').val();
 		var script = $('#' + mainID + ' select.redux-typography-subsets').val();
 		var color = $('#' + mainID + ' .redux-typography-color').val();
@@ -169,8 +171,12 @@ jQuery(document).ready(function($) {
 				height = size;
 			}
 			$('#' + mainID + ' .typography-preview').css('line-height', height + units);
+			$('#' + mainID + ' .typography-preview').css('word-spacing', word + units);
+			$('#' + mainID + ' .typography-preview').css('letter-spacing', letter + units);
 			$('#' + mainID + ' .typography-font-size').val(size + units);
 			$('#' + mainID + ' .typography-line-height').val(height + units);
+			$('#' + mainID + ' .typography-word-spacing').val(word + units);
+			$('#' + mainID + ' .typography-letter-spacing').val(letter + units);
 
 			$('#' + mainID + ' .typography-preview').css('color', color);
 			
@@ -194,7 +200,7 @@ jQuery(document).ready(function($) {
 		typographySelect(this);
 	});
 	//init when value is changed
-	jQuery('.redux-typography-size, .redux-typography-height').keyup(function() {
+	jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter').keyup(function() {
 		typographySelect(this);
 	});
 	// Have to redeclare the wpColorPicker to get a callback function
@@ -205,7 +211,7 @@ jQuery(document).ready(function($) {
 			typographySelect(jQuery(this));
 		}
 	});
-	jQuery(".redux-typography-size, .redux-typography-height").numeric({
+	jQuery(".redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter").numeric({
 		negative: false
 	});
 	//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({

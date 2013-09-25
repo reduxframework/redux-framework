@@ -47,6 +47,8 @@ class ReduxFramework_typography extends ReduxFramework{
             'color' => true,
             'preview' => true,
             'line-height' => true,
+            'word-spacing' => true,
+            'letter-spacing' => true,
             'google' => true,
         );
         $this->field = wp_parse_args( $this->field, $defaults );
@@ -54,6 +56,8 @@ class ReduxFramework_typography extends ReduxFramework{
         $defaults = array(
             'font-family'=>'',
             'line-height'=>'',
+            'word-spacing' => '',
+            'letter-spacing' => '',
             'subsets'=>'',
             'google'=>false,
             'font-script'=>'',
@@ -217,7 +221,23 @@ class ReduxFramework_typography extends ReduxFramework{
              **/
             if ($this->field['line-height'] === true):
                 echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$this->field['class'].'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" value="'.str_replace($unit, '', $this->value['line-height']).'" data-value="'.str_replace($unit, '', $this->value['line-height']).'"><span class="add-on">'.$unit.'</span></div>';
-            	echo '<input type="hidden" class="typography-line-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][line-height]" value="'.$this->value['line-height'].'"  />';
+                echo '<input type="hidden" class="typography-line-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][line-height]" value="'.$this->value['line-height'].'"  />';
+            endif;
+
+            /**
+            Word Spacing
+             **/
+            if ($this->field['word-spacing'] === true):
+                echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-word mini'.$this->field['class'].'" placeholder="'.__('Word Spacing','redux-framework').'" id="'.$this->field['id'].'-word" value="'.str_replace($unit, '', $this->value['word-spacing']).'" data-value="'.str_replace($unit, '', $this->value['word-spacing']).'"><span class="add-on">'.$unit.'</span></div>';
+                echo '<input type="hidden" class="typography-word-spacing" name="'.$this->args['opt_name'].'['.$this->field['id'].'][word-spacing]" value="'.$this->value['word-spacing'].'"  />';
+            endif;
+
+            /**
+            Letter Spacing
+             **/
+            if ($this->field['letter-spacing'] === true):
+                echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-letter mini'.$this->field['class'].'" placeholder="'.__('Letter Spacing','redux-framework').'" id="'.$this->field['id'].'-letter" value="'.str_replace($unit, '', $this->value['letter-spacing']).'" data-value="'.str_replace($unit, '', $this->value['letter-spacing']).'"><span class="add-on">'.$unit.'</span></div>';
+            	echo '<input type="hidden" class="typography-letter-spacing" name="'.$this->args['opt_name'].'['.$this->field['id'].'][letter-spacing]" value="'.$this->value['letter-spacing'].'"  />';
             endif;
 
             /**
