@@ -567,6 +567,18 @@ function setup_framework_options(){
 				'default' => array('from' => '#1e73be', 'to' => '#00897e')
 				),
 			array(
+				'id'=>'link-color',
+				'type' => 'links_color',
+				'title' => __('Links Color Option', 'redux-framework'),
+				'subtitle' => __('Only color validation can be done on this field type', 'redux-framework'),
+				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
+				'default' => array(
+					'show_regular' => true,
+					'show_hover' => true,
+					'show_active' => true
+				)
+			),
+			array(
 				'id'=>'header-border',
 				'type' => 'border',
 				'title' => __('Header Border Option', 'redux-framework'),
