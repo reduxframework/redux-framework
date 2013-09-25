@@ -47,8 +47,8 @@ class ReduxFramework_typography extends ReduxFramework{
             'color' => true,
             'preview' => true,
             'line-height' => true,
-            'word-spacing' => true,
-            'letter-spacing' => true,
+            'word-spacing' => false,
+            'letter-spacing' => false,
             'google' => true,
         );
         $this->field = wp_parse_args( $this->field, $defaults );
