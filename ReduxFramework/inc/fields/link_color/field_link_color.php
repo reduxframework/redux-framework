@@ -25,14 +25,14 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_links_color' ) ) {
+if( !class_exists( 'ReduxFramework_link_color' ) ) {
 
     /**
-     * Main ReduxFramework_links_color class
+     * Main ReduxFramework_link_color class
      *
      * @since       1.0.0
      */
-    class ReduxFramework_links_color extends ReduxFramework {
+    class ReduxFramework_link_color extends ReduxFramework {
     
         /**
          * Field Constructor.
@@ -77,24 +77,25 @@ if( !class_exists( 'ReduxFramework_links_color' ) ) {
             );
 
             $this->value = wp_parse_args( $this->value, $defaults );
+            $this->field['default'] = wp_parse_args( $this->field['default'], $defaults );
 
             echo '<div class="redux-color-gradient-container" id="' . $this->field['id'] . '">';
 
             if ($this->field['show_regular'] === true):
 
-            echo '<strong>' . __( 'Regular State ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-regular" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][regular]" value="'.$this->value['regular'].'" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['regular'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+            echo '<strong>' . __( 'Regular', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-regular" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][regular]" value="'.$this->value['regular'].'" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['regular'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
 
             endif;
 
             if ($this->field['show_hover'] === true):
 
-            echo '<strong>' . __( 'Hover State ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][hover]" value="' . $this->value['hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['hover'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+            echo '<strong>' . __( 'Hover', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][hover]" value="' . $this->value['hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['hover'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
 
             endif;
 
             if ($this->field['show_active'] === true):
 
-            echo '<strong>' . __( 'Active State ', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-active" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][active]" value="' . $this->value['active'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['active'] . '" />';
+            echo '<strong>' . __( 'Active', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-active" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][active]" value="' . $this->value['active'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['active'] . '" />';
 
             endif;
 

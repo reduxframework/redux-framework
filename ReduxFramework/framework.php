@@ -126,8 +126,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             	}
             }
 
-
-
 		    $this->sections = $sections;
 			$this->extra_tabs = $extra_tabs;
 
@@ -235,6 +233,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			if ( !empty( $this->defaults ) ) {
 				$defaults = $this->defaults;
 			}			
+
 			if ( $this->args['database'] === "transient" ) {
 				$result = get_transient( $this->args['opt_name'] . '-transient' );
 			} else if ($this->args['database'] === "theme_mods" ) {
@@ -242,8 +241,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			} else if ( $this->args['database'] === 'theme_mods_expanded' ) {
 				$result = get_theme_mods();
 			} else {
-				$result = get_option( $this->args['opt_name'], $defaults );
+				$result = get_option( $this->args['opt_name']);
 			}
+			if ( empty( $result ) && !empty( $defaults ) ) {
+				$results = $defaults;
+				$this->set_options($results);
+			}			
 			// Set a global variable by the global_variable agument.
 			if ( $this->args['global_variable'] ) {
 				$options = $this->args['global_variable'];

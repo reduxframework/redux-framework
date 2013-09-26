@@ -109,13 +109,13 @@ function setup_framework_options(){
 		ob_end_clean();
 
 
-	if( file_exists( REDUX_DIR.'sample/info-html.html' )) {
+	if( file_exists( dirname(__FILE__).'/info-html.html' )) {
 		global $wp_filesystem;
 		if (empty($wp_filesystem)) {
 			require_once(ABSPATH .'/wp-admin/includes/file.php');
 			WP_Filesystem();
 		}  		
-		$sampleHTML = $wp_filesystem->get_contents(REDUX_DIR.'sample/info-html.html');
+		$sampleHTML = $wp_filesystem->get_contents(dirname(__FILE__).'/info-html.html');
 	}
 
 
@@ -156,7 +156,7 @@ function setup_framework_options(){
 	$theme = wp_get_theme();
 
 	$args['display_name'] = $theme->get('Name');
-	$args['database'] = "theme_mods_expanded";
+	//$args['database'] = "theme_mods_expanded";
 	$args['display_version'] = $theme->get('Version');
 
     // If you want to use Google Webfonts, you MUST define the api key.
@@ -450,8 +450,8 @@ function setup_framework_options(){
 				'default' 		=> 0,
 				'desc'=> __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework'),
 				'options' => array(
-								'1' => array('alt' => 'Preset 1', 'img' => REDUX_URL.'sample/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
-								'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
+								'1' => array('alt' => 'Preset 1', 'img' => REDUX_URL.'../sample/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
+								'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'../sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
 									),
 				),					
 			array(
@@ -562,7 +562,7 @@ function setup_framework_options(){
 				),
 			array(
 				'id'=>'link-color',
-				'type' => 'links_color',
+				'type' => 'link_color',
 				'title' => __('Links Color Option', 'redux-framework'),
 				'subtitle' => __('Only color validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
@@ -1136,6 +1136,7 @@ function setup_framework_options(){
 }
 add_action('init', 'setup_framework_options', 0);
 
+
 /*
  * 
  * Custom function for the callback referenced above
@@ -1183,3 +1184,11 @@ function testCompiler() {
 add_action('redux-compiler-redux-sample-file', 'testCompiler');
 
 
+
+/**
+	Use this function to hide the activation notice telling users about a sample panel.
+**/
+function removeReduxAdminNotice() {
+	delete_option('REDUX_FRAMEWORK_PLUGIN_ACTIVATED_NOTICES');
+}
+add_action('redux_framework_plugin_admin_notice', 'removeReduxAdminNotice');
