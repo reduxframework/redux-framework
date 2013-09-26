@@ -6,12 +6,6 @@
 **/
 
 
-/*
- *
- * Require the framework class before doing anything else, so we can use the defined URLs and directories.
- * If you are running on Windows you may have URL problems which can be fixed by defining the framework url first.
- *
- */
 
 /*
  *
@@ -35,7 +29,7 @@ function add_another_section($sections){
 
     return $sections;
 }
-add_filter('redux-opts-sections-twenty_eleven', 'add_another_section');
+add_filter('redux-opts-sections-redux-sample', 'add_another_section');
 
 
 /*
@@ -48,7 +42,7 @@ function change_framework_args($args){
     
     return $args;
 }
-//add_filter('redux-opts-args-twenty_eleven', 'change_framework_args');
+//add_filter('redux-opts-args-redux-sample-file', 'change_framework_args');
 
 
 /*
@@ -1186,6 +1180,6 @@ function validate_callback_function($field, $value, $existing_value) {
 function testCompiler() {
 	//echo "Compiler hook!";
 }
-add_action('redux-compiler-twenty_eleven', 'testCompiler');
+add_action('redux-compiler-redux-sample-file', 'testCompiler');
 
 
