@@ -93,8 +93,8 @@ class ReduxFrameworkPlugin {
 
 		add_filter( 'plugin_row_meta', array($this, 'ts_plugin_meta_links'), 10, 2 );
 
-		if ( !class_exists( 'Redux_Framework' ) && file_exists( dirname( __FILE__ ) . '/ReduxFramework/framework.php' ) ) {
-			require_once( dirname( __FILE__ ) . '/ReduxFramework/framework.php' );
+		if ( !class_exists( 'Redux_Framework' ) && file_exists( dirname( __FILE__ ) . '/ReduxCore/framework.php' ) ) {
+			require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
 		}
 
 		$options = get_option( 'REDUX_FRAMEWORK_PLUGIN' );
@@ -359,7 +359,7 @@ class ReduxFrameworkPlugin {
 		$extra .='</span>';
 
 		$plugin = str_replace('class-redux-plugin', 'redux-framework', plugin_basename(__FILE__));
-		$array = array( '<a href="https://github.com/ReduxFramework/ReduxFramework" target="_blank">Github Repo</a>', '<a href="https://github.com/ReduxFramework/ReduxFramework/issues/" target="_blank">Support Forum</a>'.$extra  );
+		$array = array( '<a href="https://github.com/ReduxCore/ReduxFramework" target="_blank">Github Repo</a>', '<a href="https://github.com/ReduxCore/ReduxCore/issues/" target="_blank">Support Forum</a>'.$extra  );
 		// create link
 		if ( $file == $plugin ) {
 			return array_merge(
