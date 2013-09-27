@@ -115,7 +115,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 				}
 				
 				if( count( $response ) == 0 || strtotime( $response[0]->commit->author->date ) <= filemtime( dirname( __FILE__ ).'/index.php' ) ){
-					echo "No Updates";
+					echo '<h4 style="text-align: center;width: 60%;margin: 0px auto;padding: 30px;">No new updates exist</h4>';
 				} else {
 					echo '<link href="https://github.global.ssl.fastly.net/assets/github-40dbdfedaeb30d1adccdc9a437de4819a3b9c098.css" media="all" rel="stylesheet" type="text/css" />';
 					?>
@@ -390,11 +390,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 						return $this->github_data;
 					}
 
-					
-
 					if ( $this->config['mode'] == "releases" ) {
-
-
 
 						// Sort and get latest tag
 						$tags = array_map(create_function('$t', 'return $t->name;'), $response);
@@ -421,9 +417,8 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 
 						$github_data->package = $this->config['github_url'] . '/zipball/' . $newest_tag;
 
-					} else {
+					} else { // Commits
 						if ( strtotime($response[0]->commit->author->date) <= filemtime( dirname( __FILE__ ).'/index.php' ) ) {
-							
 							$this->github_data = false; // Up to date
 							return $this->github_data;							
 						}
@@ -439,7 +434,10 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 				}
 
 				// Store the data in this class instance for future calls
-				$this->github_data = $github_data;
+				if ( !empty( $this->github_data ) ) {
+					$this->github_data = $github_data;	
+				}
+				
 			}
 
 			return $github_data;
@@ -522,9 +520,9 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 		public function api_check( $transient ) {
 			// Check if the transient contains the 'checked' information
 			// If not, just return its value without hacking it
-			$response = false;			
+			$response = false;		
 
-			if ( empty( $transient->checked ) && !$this->override_transients() ) {
+			if ( empty( $this->config['new_version'] ) || ( empty( $transient->checked ) && !$this->override_transients() ) ) {
 				return $transient;
 			}
 			// check the version and decide if it's new
