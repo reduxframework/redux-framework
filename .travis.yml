@@ -7,10 +7,14 @@ php:
 
 env:
     - WP_VERSION=master WP_MULTISITE=0
+    - WP_VERSION=3.6.1 WP_MULTISITE=0
+    - WP_VERSION=3.6 WP_MULTISITE=0
     - WP_VERSION=3.5.2 WP_MULTISITE=0
     - WP_VERSION=3.5.1 WP_MULTISITE=0
     - WP_VERSION=3.5 WP_MULTISITE=0
     - WP_VERSION=master WP_MULTISITE=1
+    - WP_VERSION=3.6.1 WP_MULTISITE=1
+    - WP_VERSION=3.6 WP_MULTISITE=1
     - WP_VERSION=3.5.2 WP_MULTISITE=1
     - WP_VERSION=3.5.1 WP_MULTISITE=1
     - WP_VERSION=3.5 WP_MULTISITE=1
@@ -37,5 +41,6 @@ notifications:
     email:
         recipients:
           - ghost1227@reduxframework.com
+          - dovy@reduxframework.com
         on_success: change
         on_failure: always
