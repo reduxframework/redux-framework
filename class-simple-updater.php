@@ -103,7 +103,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 			if ( $_GET['plugin'] == $this->config["proper_folder_name"] ) {
 				
 				$url = sprintf('https://api.github.com/repos/%s/%s/commits?since=%s', urlencode($this->config['github_user']), urlencode($this->config['github_repo'] ), date("c", filemtime( dirname( __FILE__ )."/index.php" )));	
-				$response = get_transient($this->config['mode'].'-'.md5($url));
+				$response = get_site_transient($this->config['mode'].'-'.md5($url));
 
 				if ( empty( $response ) || !empty( $reponse->message ) ) {
 					$raw_response = wp_remote_get($url, array('sslverify' => false, 'timeout' => 10));
@@ -112,15 +112,18 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 						exit();
 					}
 					$response = json_decode($raw_response['body']);
-					set_transient( $this->config['mode'].'-'.md5($url), $response, 60*60*(1/2) );
+					set_site_transient( $this->config['mode'].'-'.md5($url), $response, 60*60*(1/2) );
 				}
 
 				if ( !empty( $response->message ) ) {
 					echo '<h4 style="text-align: center;width: 60%;margin: 0px auto;padding: 30px;">'.$response->message.'</h4>';
 					exit();
-				}				
+				}
+
+
+
 				
-				if(count($response) == 0){
+				if( count( $response ) == 0 || $response[0]->commit->author->date <= filemtime( dirname( __FILE__ ).'/index.php' ) ){
 					echo "No Updates";
 				} else {
 					echo '<link href="https://github.global.ssl.fastly.net/assets/github-40dbdfedaeb30d1adccdc9a437de4819a3b9c098.css" media="all" rel="stylesheet" type="text/css" />';
@@ -138,7 +141,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 					
 					foreach ( $response as $commit ) { 
 
-						$dStart = new DateTime($commit->commit->committer->date);
+						$dStart = new DateTime($commit->commit->author->date);
    						$dEnd  = new DateTime('NOW');
    						$dDiff = $dStart->diff($dEnd);
    
@@ -154,8 +157,8 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 			                <a href="https://github.com/ReduxFramework/ReduxFramework/tree/<?php echo $commit->sha; ?>" class="browse-button" title="Browse the code at this point in the history" rel="nofollow" target="_blank">Browse code <span class="octicon octicon-arrow-right"></span></a>
 			              </div>
 			              <div class="authorship">
-			                <span class="author-name"><a href="https://github.com/<?php echo $commit->commit->committer->name; ?>" rel="author" target="_blank"><?php echo $commit->commit->committer->name; ?></a></span>
-			                authored <time class="js-relative-date" datetime="<?php echo date('Y-m-d H:i:s',strtotime($commit->commit->committer->date)); ?>" title="<?php echo $commit->commit->committer->date; ?>"><?php 
+			                <span class="author-name"><a href="https://github.com/<?php echo $commit->commit->author->name; ?>" rel="author" target="_blank"><?php echo $commit->commit->author->name; ?></a></span>
+			                authored <time class="js-relative-date" datetime="<?php echo date('Y-m-d H:i:s',strtotime($commit->commit->author->date)); ?>" title="<?php echo $commit->commit->author->date; ?>"><?php 
 			                if ($dDiff->days < 1) {
 			                	if ($dDiff->h == 1) {
 			                		echo __('an hour ago', 'redux-framework');
@@ -347,7 +350,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 						$url = sprintf('https://api.github.com/repos/%s/%s/commits?since=%s', urlencode($this->config['github_user']), urlencode($this->config['github_repo'] ), date("c", filemtime( dirname( __FILE__ ).'/index.php' )));	
 					}
 					
-					$response = get_transient($this->config['mode'].'-'.md5($url)); // Note: WP transients fail if key is long than 45 characters
+					$response = get_site_transient($this->config['mode'].'-'.md5($url)); // Note: WP transients fail if key is long than 45 characters
 
 					if(empty($response)){
 						$raw_response = wp_remote_get($url, array('sslverify' => false, 'timeout' => 10));
@@ -363,7 +366,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 						}
 
 						//set cache, just 60 seconds
-						set_transient($this->config['mode'].'-'.md5($url), $response, 60*60*(1/2));
+						set_site_transient($this->config['mode'].'-'.md5($url), $response, 60*60*(1/2));
 					}
 
 					if(isset($response->message)){
@@ -406,7 +409,10 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 						$github_data->package = $this->config['github_url'] . '/zipball/' . $newest_tag;
 
 					} else {
-					
+						
+						if ( $response[0]->commit->author->date <= filemtime( dirname( __FILE__ ).'/index.php' ) ) {
+							return false; // Up to date
+						}
 						$newest_tag = $response[0]->sha;
 						$github_data->current = $newest_tag;
 						$github_data->new_version = $newest_tag;
@@ -508,7 +514,6 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 			if ( empty( $transient->checked ) && !$this->override_transients() ) {
 				return $transient;
 			}
-
 			// check the version and decide if it's new
 			if ( $this->config['mode'] == "release" ) {
 				$update = version_compare( $this->config['new_version'], $this->config['version'] );

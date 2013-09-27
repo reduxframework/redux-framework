@@ -37,3 +37,15 @@ register_activation_hook( __FILE__, array( 'ReduxFrameworkPlugin', 'activate' ) 
 register_deactivation_hook( __FILE__, array( 'ReduxFrameworkPlugin', 'deactivate' ) );
 
 add_action( 'plugins_loaded', array( 'ReduxFrameworkPlugin', 'get_instance' ) );
+
+
+
+
+//add_action( 'plugins_loaded', 'wpse_92517_init' );
+function wpse_92517_init() {
+ 	echo "is_multisite() ".is_multisite();	
+ 	echo "is_super_admin() ".is_super_admin();	
+ 	echo "is_main_site() ".is_main_site();	
+ 	echo "get_current_blog_id() ".get_current_blog_id();
+ 	echo 'is_network_admin() '.is_network_admin();
+}

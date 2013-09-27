@@ -39,10 +39,7 @@ class ReduxFrameworkPlugin {
 	 *
 	 * @var      array
 	 */
-	protected $options = array(
-							'demo'=>false, 
-							'nightly'=>true
-						);		
+	protected $options = array();		
 
 	/**
 	 * Unique identifier for your plugin.
@@ -81,6 +78,9 @@ class ReduxFrameworkPlugin {
 	 */
 	private function __construct() {
 
+
+
+
 		// Load plugin text domain
 		add_action( 'wp_loaded', array( $this, 'load_plugin_textdomain' ) );
 
@@ -97,15 +97,13 @@ class ReduxFrameworkPlugin {
 			require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
 		}
 
+		$defaults = array(
+							'demo'=>false, 
+							'nightly'=>true
+						);
 		$options = get_option( 'REDUX_FRAMEWORK_PLUGIN' );
-
-		if ( !empty( $options['demo'] ) ) {
-			$this->options['demo'] = true;
-		}
-		if ( !empty( $options['nightly'] ) ) {
-			$this->options['nightly'] = true;
-		}		
-
+		$this->options = wp_parse_args( $options, $defaults );
+	
 		if ($this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
 			require_once( dirname( __FILE__ ) . '/sample/sample-config.php' );
 		}
@@ -247,7 +245,7 @@ class ReduxFrameworkPlugin {
 	 */
 	private static function single_activate() {
 			$notices = get_option('REDUX_FRAMEWORK_PLUGIN_ACTIVATED_NOTICES', array());
-			$notices[]= __("Redux Framework has an embedded demo.", 'redux-framework').' <a href="'.admin_url( 'plugins.php?redux_framework_plugin=demo' ).'">'.__("Click here to activate the sample config file.", 'redux-framework')."</a>";
+			$notices[]= __("Redux Framework has an embedded demo.", 'redux-framework').' <a href="./plugins.php?redux_framework_plugin=demo">'.__("Click here to activate the sample config file.", 'redux-framework')."</a>";
 			update_option('REDUX_FRAMEWORK_PLUGIN_ACTIVATED_NOTICES', $notices);			
 	}
 
@@ -295,7 +293,7 @@ class ReduxFrameworkPlugin {
 		global $pagenow;
 
 		if ( $pagenow == "plugins.php" && is_admin() && !empty( $_GET['redux_framework_plugin'] ) ) {
-			$url = admin_url( 'plugins.php');
+			$url = "./plugins.php";
 
 			if ( $_GET['redux_framework_plugin'] == 'demo') {
 				if ( $this->options['demo'] == false ) {
@@ -341,20 +339,28 @@ class ReduxFrameworkPlugin {
 	 	$extra = '<br /><span style="display: block; padding-top: 6px;">';
 		
 		if ($this->options['demo']) {
-			$demoText = '<a href="' . admin_url( 'plugins.php?redux_framework_plugin=demo' ) . '" style="color: #bc0b0b;">' . __( 'Deactivate Demo Mode', $this->plugin_slug ) . '</a>';
+			$demoText = '<a href="./plugins.php?redux_framework_plugin=demo" style="color: #bc0b0b;">' . __( 'Deactivate Demo Mode', $this->plugin_slug ) . '</a>';
 		} else {
-			$demoText = '<a href="' . admin_url( 'plugins.php?redux_framework_plugin=demo' ) . '">' . __( 'Activate Demo Mode', $this->plugin_slug ) . '</a>';
+			$demoText = '<a href="./plugins.php?redux_framework_plugin=demo">' . __( 'Activate Demo Mode', $this->plugin_slug ) . '</a>';
 		}
-
-		$extra .= $demoText;
+		
 		
 		if ($this->options['nightly']) {
-			$nightlyText = '<a href="' . admin_url( 'plugins.php?redux_framework_plugin=nightly' ) . '" style="color: #bc0b0b;">' . __( 'Disable Nightly Updates', $this->plugin_slug ) . '</a>';
+			$nightlyText = '<a href="./plugins.php?redux_framework_plugin=nightly" style="color: #bc0b0b;">' . __( 'Disable Nightly Updates', $this->plugin_slug ) . '</a>';
 		} else {
-			$nightlyText = '<a href="' . admin_url( 'plugins.php?redux_framework_plugin=nightly' ) . '">' . __( 'Enable Nightly Updates', $this->plugin_slug ) . '</a>';
-			
+			$nightlyText = '<a href="./plugins.php?redux_framework_plugin=nightly">' . __( 'Enable Nightly Updates', $this->plugin_slug ) . '</a>';
 		}
-		$extra .= ' | '.$nightlyText;
+
+		if ( (is_multisite() && !is_network_admin()) || !is_multisite() ) {
+			$extra .= $demoText;	
+		}
+
+		if ( (is_multisite() && is_network_admin()) || !is_multisite() ) {
+			if ( (is_multisite() && !is_network_admin()) || !is_multisite() ) {
+				$extra .= ' | ';	
+			}			
+			$extra .= $nightlyText;
+		}
 
 		$extra .='</span>';
 
