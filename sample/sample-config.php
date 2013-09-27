@@ -459,6 +459,7 @@ function setup_framework_options(){
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'compiler'=>true,
+				'units'=>'em',				
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
 					'color'=>"#333", 

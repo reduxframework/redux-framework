@@ -73,6 +73,11 @@ class ReduxFramework_typography extends ReduxFramework{
             $this->value = wp_parse_args( $this->value, $this->field['default'] );
         }
 
+        if (empty($this->field['units']) && !empty($this->field['default']['units'])) {
+            $this->field['units'] = $this->field['default']['units'];
+            unset($this->field['default']['units']);
+        }
+
         $units = array('px', 'em', '%');
         if (!empty($this->field['units']) && in_array($this->field['units'], $units)) {
             $unit = $this->field['units'];
