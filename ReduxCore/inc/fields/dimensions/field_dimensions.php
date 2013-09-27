@@ -30,11 +30,22 @@ class ReduxFramework_dimensions extends ReduxFramework{
 	
 		// No errors please
 		$defaults = array(
-			'units' => '',
-			'width'	=> true,
-			'height'=> true,
+			'units' 			=> '',
+			'width'				=> true,
+			'height'			=> true,
+			'units_extended'	=> false,
 			);
 		$this->field = wp_parse_args( $this->field, $defaults );
+
+		if ( !empty( $this->field['units'] ) ) {
+			$this->value['units'] = $this->field['units'];
+		}
+
+		if (  !in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+			if ( !empty( $this->field['units'] ) && in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+				$this->value['units'] = $this->field['units'];	
+			}
+		}
 
 		$defaults = array(
 			'width'=>'',
@@ -43,13 +54,6 @@ class ReduxFramework_dimensions extends ReduxFramework{
 		);
 
 		$this->value = wp_parse_args( $this->value, $defaults );
-
-		if ( empty( $this->value['units'] ) || ( !in_array($this->value['units'], array( '%, in, cm, mm, em, ex, pt, pc, px' ) ) ) ) {
-			if ( empty( $this->field['units'] ) || ( !in_array($this->field['units'], array( '%, in, cm, mm, em, ex, pt, pc, px' ) ) ) ) {
-				$this->field['units'] = "px";
-			}
-			$this->value['units'] = $this->field['units'];
-		}		
 
 	  	echo '<fieldset id="'.$this->field['id'].'" class="redux-dimensions-container" data-id="'.$this->field['id'].'">';
 
@@ -82,15 +86,19 @@ class ReduxFramework_dimensions extends ReduxFramework{
 				echo '<div class="select_wrapper dimensions-units" original-title="'.__('Units','redux-framework').'">';
 				echo '<select data-placeholder="'.__('Units','redux-framework').'" class="redux-dimensions redux-dimensions-units select'.$this->field['class'].'" original-title="'.__('Units','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][units]" id="'. $this->field['id'].'_units">';
 				
-				$testUnits = array('px', 'em', '%');
-
+				if ( $this->field['units_extended'] ) {
+					$testUnits = array('px', 'em', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
+				} else {
+					$testUnits = array('px', 'em', '%');
+				}
+				
 				if ( in_array($this->field['units'], $testUnits) ) {
 					echo '<option value="'.$this->field['units'].'" selected="selected">'.$this->field['units'].'</option>';
 				} else {
+					foreach($testUnits as $aUnit) {
+						echo '<option value="'.$aUnit.'" '.selected($this->value['units'], $aUnit, false).'>'.$aUnit.'</option>';
+					}
 
-					echo '<option value="px" '.selected($this->value['units'], 'px', false).'>px</option>';
-				 	echo '<option value="em"'.selected($this->value['units'], 'em', false).'>em</option>';
-				 	echo '<option value="%"'.selected($this->value['units'], '%', false).'>%</option>';
 				}
 				
 				echo '</select></div>';

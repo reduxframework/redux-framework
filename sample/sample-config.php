@@ -585,6 +585,7 @@ function setup_framework_options(){
 				'id'=>'spacing',
 				'type' => 'spacing',
 				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
+				//'units_extended' => 'true', // Allow users to select any type of unit
 				'title' => __('Padding/Margin Option', 'redux-framework'),
 				'subtitle' => __('Allow your users to choose the spacing or margin they want.', 'redux-framework'),
 				'desc' => __('You can enable or diable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework'),
@@ -594,10 +595,11 @@ function setup_framework_options(){
 				'id'=>'dimensions',
 				'type' => 'dimensions',
 				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
+				//'units_extended' => 'true', // Allow users to select any type of unit
 				'title' => __('Dimensions (Width/Height) Option', 'redux-framework'),
 				'subtitle' => __('Allow your users to choose width, height, and/or unit.', 'redux-framework'),
 				'desc' => __('You can enable or diable any piece of this field. Width, Height, or Units.', 'redux-framework'),
-				'default' => array('width' => 200, 'height'=>'100', 'units'=>'em')
+				'default' => array('width' => 200, 'height'=>'100', )
 				),												
 			array(
 				'id'=>'body-font2',

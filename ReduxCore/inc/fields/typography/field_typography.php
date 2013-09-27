@@ -75,15 +75,11 @@ class ReduxFramework_typography extends ReduxFramework{
 
         if (empty($this->field['units']) && !empty($this->field['default']['units'])) {
             $this->field['units'] = $this->field['default']['units'];
-            unset($this->field['default']['units']);
+        }          
+        if ( empty( $this->field['units'] ) || !in_array( $this->field['units'], array( 'px', 'em', '%' ) ) ) {
+            $this->field['units'] = 'px';
         }
-
-        $units = array('px', 'em', '%');
-        if (!empty($this->field['units']) && in_array($this->field['units'], $units)) {
-            $unit = $this->field['units'];
-        } else {
-            $unit = 'px';
-        }
+        $unit = $this->field['units'];
 
 		if ($this->field['font-family'] === true):
         
