@@ -70,7 +70,6 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 			);
 
 			$this->config = wp_parse_args( $config, $defaults );
-
 			$this->set_defaults();
 
 			// if the minimum config isn't set, issue a warning and bail
@@ -94,7 +93,7 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 			// set sslverify for zip download
 			add_filter( 'http_request_args', array( $this, 'http_request_sslverify' ), 10, 2 );
 
-			add_action('install_plugins_pre_plugin-information', array( $this, 'bypass_plugin_details' ), 10, 2 );
+			add_action('install_plugins_pre_plugin-information', array( $this, 'bypass_plugin_details' ), 10, 8 );
 
 		}
 
@@ -103,27 +102,19 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 			if ( $_GET['plugin'] == $this->config["proper_folder_name"] ) {
 				
 				$url = sprintf('https://api.github.com/repos/%s/%s/commits?since=%s', urlencode($this->config['github_user']), urlencode($this->config['github_repo'] ), date("c", filemtime( dirname( __FILE__ )."/index.php" )));	
-				$response = get_site_transient($this->config['mode'].'-'.md5($url));
+				$response = $this->github_api($url);
 
 				if ( empty( $response ) || !empty( $reponse->message ) ) {
-					$raw_response = wp_remote_get($url, array('sslverify' => false, 'timeout' => 10));
-					if ( is_wp_error( $raw_response ) ){
-						$data->response['error'] = "Error response from " . $url;
-						exit();
-					}
-					$response = json_decode($raw_response['body']);
-					set_site_transient( $this->config['mode'].'-'.md5($url), $response, 60*60*(1/2) );
+					$this->config['force_update'] = true;
+					$response = $this->github_api($url);
 				}
 
 				if ( !empty( $response->message ) ) {
 					echo '<h4 style="text-align: center;width: 60%;margin: 0px auto;padding: 30px;">'.$response->message.'</h4>';
 					exit();
 				}
-
-
-
 				
-				if( count( $response ) == 0 || $response[0]->commit->author->date <= filemtime( dirname( __FILE__ ).'/index.php' ) ){
+				if( count( $response ) == 0 || strtotime( $response[0]->commit->author->date ) <= filemtime( dirname( __FILE__ ).'/index.php' ) ){
 					echo "No Updates";
 				} else {
 					echo '<link href="https://github.global.ssl.fastly.net/assets/github-40dbdfedaeb30d1adccdc9a437de4819a3b9c098.css" media="all" rel="stylesheet" type="text/css" />';
@@ -329,6 +320,34 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 		}
 
 
+		public function github_api($url) {
+
+			if (empty($url)) {
+				return;
+			}
+
+			if (!$this->override_transients()) {
+				$response = get_site_transient($this->config['mode'].'-'.$this->config['slug'].'-'.md5($url)); // Note: WP transients fail if key is long than 45 characters
+			}
+
+			if ( empty( $response ) ) {
+				$raw_response = wp_remote_get($url, array('sslverify' => false, 'timeout' => 10));
+				if ( is_wp_error( $raw_response ) ) {
+					$data->response['error'] = "Error response from " . $url;
+					return false;
+				}
+				$response = json_decode($raw_response['body']);
+				if ( empty( $response->message ) ) {
+					set_site_transient($this->config['mode'].'-'.$this->config['slug'].'-'.md5($url), $response, 60*60*2);
+				}
+			}
+
+			if ( !empty( $response ) ) {
+				return $response;
+			}
+
+		}
+
 		/**
 		 * Get GitHub Data from the specified repository
 		 *
@@ -336,41 +355,24 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 		 * @return array $github_data the data
 		 */
 		public function get_github_data() {
-
-			if ( isset( $this->github_data ) && ! empty( $this->github_data ) ) {
+			if ( isset( $this->github_data ) ) {
 				$github_data = $this->github_data;
 			} else {
+				if (!$this->override_transients()) {
+					$github_data = get_site_transient( $this->config['slug'].'-'.$this->config['slug'].'_github_data' );
+				}
+				
+				if ( !isset( $github_data ) || !$github_data || '' == $github_data ) {
 
-				$github_data = get_site_transient( $this->config['slug'].'_github_data' );
-
-				if ( $this->override_transients() || ( ! isset( $github_data ) || ! $github_data || '' == $github_data ) ) {
 					if ( $this->config['mode'] == "releases" ) {
 						$url = sprintf('https://api.github.com/repos/%s/%s/tags', urlencode($this->config['github_user']), urlencode($this->config['github_repo']));	
 					} else {
 						$url = sprintf('https://api.github.com/repos/%s/%s/commits?since=%s', urlencode($this->config['github_user']), urlencode($this->config['github_repo'] ), date("c", filemtime( dirname( __FILE__ ).'/index.php' )));	
 					}
+
+					$response = $this->github_api($url);
 					
-					$response = get_site_transient($this->config['mode'].'-'.md5($url)); // Note: WP transients fail if key is long than 45 characters
-
-					if(empty($response)){
-						$raw_response = wp_remote_get($url, array('sslverify' => false, 'timeout' => 10));
-						if ( is_wp_error( $raw_response ) ){
-							$data->response['error'] = "Error response from " . $url;
-							return false;
-						}
-						$response = json_decode($raw_response['body']);
-
-						if(count($response) == 0){
-							$data->response['error'] = "There are no versions available at the Github repo.";
-							return false;
-						}
-
-						//set cache, just 60 seconds
-						set_site_transient($this->config['mode'].'-'.md5($url), $response, 60*60*(1/2));
-					}
-
 					if(isset($response->message)){
-
 						if(is_array($response->message)){
 							$errors = '';
 							foreach ( $response->message as $error) {
@@ -383,10 +385,17 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 					}
 
 					if (!empty($data->response['error'])) {
-						return false;
+						echo $data->response['error'];
+						$this->github_data = false;
+						return $this->github_data;
 					}
 
+					
+
 					if ( $this->config['mode'] == "releases" ) {
+
+
+
 						// Sort and get latest tag
 						$tags = array_map(create_function('$t', 'return $t->name;'), $response);
 						usort($tags, "version_compare");
@@ -398,31 +407,35 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 							echo "No Rollback version found!"; // DEBUG
 							continue;
 						}
+
 						// check and generate download link
 						$newest_tag = array_pop($tags);
-						if(version_compare($this->config['version'],  $newest_tag, '>=')){
+						if(version_compare($this->config['version'],  $newest_tag, '<=')){
 							// up-to-date!
-							return false;
+							$this->github_data = false;
+							return $this->github_data;
 						}
 
+
 						$github_data->new_version = $newest_tag;
+
 						$github_data->package = $this->config['github_url'] . '/zipball/' . $newest_tag;
 
 					} else {
-						
-						if ( $response[0]->commit->author->date <= filemtime( dirname( __FILE__ ).'/index.php' ) ) {
-							return false; // Up to date
+						if ( strtotime($response[0]->commit->author->date) <= filemtime( dirname( __FILE__ ).'/index.php' ) ) {
+							
+							$this->github_data = false; // Up to date
+							return $this->github_data;							
 						}
 						$newest_tag = $response[0]->sha;
 						$github_data->current = $newest_tag;
 						$github_data->new_version = $newest_tag;
 						$github_data->package = $this->config['github_url'] . '/archive/' . $newest_tag.'.zip';
-
 					}
 
 					// refresh every 2 hours
-					set_site_transient( $this->config['slug'].'_github_data', $github_data, 60*60*2 );
-					//set_site_transient( $this->config['slug'].'_github_data_'.$this->config['mode'], $github_data, 6 ); // DEBUG
+					set_site_transient( $this->config['slug'].'-'.$this->config['slug'].'_github_data', $github_data, 60*60*2 );
+					delete_site_transient('update_plugins');
 				}
 
 				// Store the data in this class instance for future calls

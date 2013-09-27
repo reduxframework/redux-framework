@@ -72,6 +72,15 @@ class ReduxFrameworkPlugin {
 	protected $plugin_screen_hook_suffix = null;
 
 	/**
+	 * Network activated plugins
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      string
+	 */
+	protected $plugin_network_activated = false;
+
+	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
 	 *
 	 * @since     1.0.0
@@ -79,7 +88,24 @@ class ReduxFrameworkPlugin {
 	private function __construct() {
 
 
-
+		$defaults = array(
+						'demo'			=> false, 
+						'nightly'		=> true,
+						'api_refresh' 	=> false
+					);
+		// Grabbing the options if plugin is network activated
+		if ( is_multisite() ) {
+			$plugins = get_site_option( 'active_sitewide_plugins');
+			foreach($plugins as $file => $k) {
+				if ( strpos($file,'redux-framework.php') !== false ) {
+					$this->plugin_network_activated = true;
+					$this->options = get_site_option( 'REDUX_FRAMEWORK_PLUGIN', $defaults );
+				}
+			}
+		}
+		if ( empty($this->options) ) {
+			$this->options = get_option( 'REDUX_FRAMEWORK_PLUGIN', $defaults );
+		}
 
 		// Load plugin text domain
 		add_action( 'wp_loaded', array( $this, 'load_plugin_textdomain' ) );
@@ -97,13 +123,7 @@ class ReduxFrameworkPlugin {
 			require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
 		}
 
-		$defaults = array(
-							'demo'=>false, 
-							'nightly'=>true
-						);
-		$options = get_option( 'REDUX_FRAMEWORK_PLUGIN' );
-		$this->options = wp_parse_args( $options, $defaults );
-	
+		
 		if ($this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
 			require_once( dirname( __FILE__ ) . '/sample/sample-config.php' );
 		}
@@ -118,13 +138,14 @@ class ReduxFrameworkPlugin {
 			if ( $this->options['nightly'] ) {
 				$config['mode'] = "commits";
 			}
-			if ( isset( $options['api_refresh'] ) && $options['api_refresh'] == true ) {
+			if ( !empty( $this->options['api_refresh'] ) && $this->options['api_refresh'] == true ) {
+				unset($this->options['api_refresh']);
 				delete_site_transient('update_plugins');
 				update_option( 'REDUX_FRAMEWORK_PLUGIN', $this->options );
 				$config['force_update'] = true;
 			}
 
-		  	$test = new Simple_Updater( $config );
+		  	$updater = new Simple_Updater( $config );
 
 		}		
 
@@ -309,9 +330,22 @@ class ReduxFrameworkPlugin {
 					$this->options['nightly'] = false;
 				}
 				$this->options['api_refresh'] = true;
-			}			
+			}	
+			/*
+			echo '<br />is_multisite() '.is_multisite();
+			echo '<br />is_network_admin() '.is_network_admin();
+			echo '<br />get_current_blog_id() '.get_current_blog_id();
+			echo '<br />is_main_site() '.is_main_site();
+			echo '<br />is_super_admin() '.is_super_admin();
+			echo '<br />is_plugin_active() '.is_plugin_active(dirname(__FILE__)."/redux-framework.php");
 
-			update_option( 'REDUX_FRAMEWORK_PLUGIN', $this->options );		
+			echo '<br />get_current_blog_id() '.get_current_blog_id();
+			*/
+			if ( is_multisite() && is_network_admin() && $this->plugin_network_activated ) {
+				update_site_option( 'REDUX_FRAMEWORK_PLUGIN', $this->options );
+			} else {
+				update_option( 'REDUX_FRAMEWORK_PLUGIN', $this->options );	
+			}
 			wp_redirect( $url );
 
 		}
@@ -335,7 +369,10 @@ class ReduxFrameworkPlugin {
 	}
 
 	function ts_plugin_meta_links( $links, $file ) {
-	 
+		if ( strpos($file,'redux-framework.php') === false ) {
+    		return $links;
+		}
+
 	 	$extra = '<br /><span style="display: block; padding-top: 6px;">';
 		
 		if ($this->options['demo']) {
@@ -344,6 +381,7 @@ class ReduxFrameworkPlugin {
 			$demoText = '<a href="./plugins.php?redux_framework_plugin=demo">' . __( 'Activate Demo Mode', $this->plugin_slug ) . '</a>';
 		}
 		
+
 		
 		if ($this->options['nightly']) {
 			$nightlyText = '<a href="./plugins.php?redux_framework_plugin=nightly" style="color: #bc0b0b;">' . __( 'Disable Nightly Updates', $this->plugin_slug ) . '</a>';
@@ -351,14 +389,14 @@ class ReduxFrameworkPlugin {
 			$nightlyText = '<a href="./plugins.php?redux_framework_plugin=nightly">' . __( 'Enable Nightly Updates', $this->plugin_slug ) . '</a>';
 		}
 
-		if ( (is_multisite() && !is_network_admin()) || !is_multisite() ) {
-			$extra .= $demoText;	
+		if ( is_multisite() && $this->plugin_network_activated || !is_network_admin() || !is_multisite()) {
+			$extra .= $demoText;
 		}
-
+		
 		if ( (is_multisite() && is_network_admin()) || !is_multisite() ) {
-			if ( (is_multisite() && !is_network_admin()) || !is_multisite() ) {
-				$extra .= ' | ';	
-			}			
+			if ( is_multisite() && $this->plugin_network_activated || !is_network_admin() || !is_multisite()) {
+			$extra .= ' | ';
+			}
 			$extra .= $nightlyText;
 		}
 
