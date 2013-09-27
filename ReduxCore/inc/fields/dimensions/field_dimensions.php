@@ -72,7 +72,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			**/
 			if ($this->field['height'] === true):
 				echo '<div class="field-dimensions-input input-prepend">';
-				echo '<span class="add-on"><i class="icon-resize-horizontal icon-large"></i></span>';
+				echo '<span class="add-on"><i class="icon-resize-vertical icon-large"></i></span>';
 				echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini'.$this->field['class'].'" placeholder="'.__('height','redux-framework').'" rel="'.$this->field['id'].'-height" value="'.filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT).'">';
 				echo '<input type="hidden" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'"></div>';
 		  	endif;
@@ -102,6 +102,8 @@ class ReduxFramework_dimensions extends ReduxFramework{
 				}
 				
 				echo '</select></div>';
+
+				echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 
 			//endif;
 
