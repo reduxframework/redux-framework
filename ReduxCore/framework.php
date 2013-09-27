@@ -1034,6 +1034,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
 
                     set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+                    $plugin_options['REDUX_COMPILER'] = time();
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
 				    if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 						$this->set_options( $plugin_options );
@@ -1048,6 +1049,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( !empty( $plugin_options['defaults'] ) ) {
                 $plugin_options = $this->_default_values();
                 set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+                $plugin_options['REDUX_COMPILER'] = time();
                 unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
 				if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 				    $this->set_options( $plugin_options );
@@ -1070,6 +1072,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             do_action( 'redux-validate-' . $this->args['opt_name'], $plugin_options, $this->options );
 
             if( !empty( $plugin_options['compiler'] ) ) {
+            	$plugin_options['REDUX_COMPILER'] = time();
             	set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 2000 );
             }
 
