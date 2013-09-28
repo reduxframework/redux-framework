@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery('.redux-spacing-input').on('change', function() {
-		var units = jQuery(this).parents('.redux-spacing-container:first').find('.redux-spacing-units  option:selected').val();
+		var units = jQuery(this).parents('.redux-spacing-container:first').find('.redux-spacing-units option:selected').val();
 		var id = jQuery(this).attr('rel');
 		jQuery('#'+id).val(jQuery(this).val()+units);
 	});

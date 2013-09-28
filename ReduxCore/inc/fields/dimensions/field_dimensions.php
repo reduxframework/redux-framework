@@ -61,6 +61,10 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			Width
 			**/
 			if ($this->field['width'] === true):
+				if ( !empty($this->value['width'] ) &&  strpos( $this->value['width'], $this->value['units'] ) === false ) {
+					$this->value['width'] = filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['width'] = $this->value['width'].$this->value['units'];
+				}				
 				echo '<div class="field-dimensions-input input-prepend">';
 				echo '<span class="add-on"><i class="icon-resize-horizontal icon-large"></i></span>';
 				echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini'.$this->field['class'].'" placeholder="'.__('Width','redux-framework').'" rel="'.$this->field['id'].'-width" value="'.filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT).'">';
@@ -71,6 +75,10 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			Height
 			**/
 			if ($this->field['height'] === true):
+				if ( !empty($this->value['height'] ) &&  strpos( $this->value['height'], $this->value['units'] ) === false ) {
+					$this->value['height'] = filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['height'] = $this->value['height'].$this->value['units'];
+				}					
 				echo '<div class="field-dimensions-input input-prepend">';
 				echo '<span class="add-on"><i class="icon-resize-vertical icon-large"></i></span>';
 				echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini'.$this->field['class'].'" placeholder="'.__('height','redux-framework').'" rel="'.$this->field['id'].'-height" value="'.filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT).'">';
