@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<phpunit	
-		 bootstrap="bootstrap_tests.php"
-		 backupGlobals="false"
-		 colors="true"
+<phpunit
+	bootstrap="bootstrap_tests.php"
+	backupGlobals="false"
+	colors="true"
 >
-	<testsuites>
-		<testsuite name="Redux Framework Test Suite">
-			<directory prefix="test_" suffix=".php">tests</directory>
-		</testsuite>
-	</testsuites>
-	<logging>
-		<log type="coverage-clover" target="./tests/clover.xml"/>
-	</logging>
+    <testsuites>
+        <!-- Default test suite to run all tests -->
+        <testsuite>
+            <directory prefix="test_" suffix=".php">tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

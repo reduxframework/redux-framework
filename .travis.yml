@@ -25,7 +25,7 @@ before_script:
 
 script:
     - phpunit
-    - php tests/includes/clover.php tests/clover.xml 90
+    #- php tests/includes/clover.php tests/clover.xml 90
 
 notifications:
     email:
