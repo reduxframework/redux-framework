@@ -22,6 +22,10 @@ function verify_fold(item) {
 		}
 
 		var id = item.attr('id');
+		if (item.hasClass('ui-helper-hidden-accessible')) {
+			id = item.attr('id');
+		}
+		//console.log(id);
 		var itemVal = item.val();
 
 		if ( redux_opts.folds[ id ] ) {

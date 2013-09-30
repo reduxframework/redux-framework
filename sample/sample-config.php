@@ -285,8 +285,8 @@ function setup_framework_options(){
     $sections = array();              
 
     //Background Patterns Reader
-    $sample_patterns_path = REDUX_DIR . 'sample/patterns/';
-    $sample_patterns_url  = REDUX_URL . 'sample/patterns/';
+    $sample_patterns_path = REDUX_DIR . '../sample/patterns/';
+    $sample_patterns_url  = REDUX_URL . '../sample/patterns/';
     $sample_patterns      = array();
 
     if ( is_dir( $sample_patterns_path ) ) :

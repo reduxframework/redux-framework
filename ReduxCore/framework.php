@@ -455,6 +455,37 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				    }
 				}
 			}
+			/*
+			$parents = array();
+			$toHide = array();
+			foreach ($folds as $k=>$fold) { // ParentFolds WITHOUT parents
+				if ( empty( $fold['children'] ) || !empty( $fold['children']['parents'] ) ) {
+					continue;
+				}
+				$fold['value'] = $this->options[$k];
+				foreach ($fold['children'] as $key =>$value) {
+					if ($key == $fold['value']) {
+						unset($fold['children'][$key]);
+					}
+				}
+				if (empty($fold['children'])) {
+					continue;
+				}
+				foreach ($fold['children'] as $key => $value) {
+					foreach ($value as $k=> $hidden) {
+						$toHide[$hidden]=true;
+						
+					}
+				}				
+				$parents[] = $fold;
+			}
+
+
+
+			print_r($parents);
+			print_r($toHide);
+*/
+			
 			return $folds;
 		    
 		}

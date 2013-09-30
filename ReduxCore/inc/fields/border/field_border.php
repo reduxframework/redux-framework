@@ -100,7 +100,7 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
 
 	            echo '<div class="redux-border">';
 	        
-    	            echo '<select original-title="' . __( 'Border size', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-width]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-width]" class="tips redux-border-size mini' . $this->field['class'] . '" rows="6">';
+    	            echo '<select original-title="' . __( 'Border size', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-width]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-width]" class="tips redux-border-size mini' . $this->field['class'] . '" rows="6" data-id="'.$this->field['id'].'">';
 
     	            for( $k = $this->field['min']; $k <= $this->field['max']; $k++ ) {
     	                echo '<option value="' . $k.$this->field['units'] . '"' . selected( $this->value['border-width'], $k.$this->field['units'], false) . '>' . $k . '</option>';
@@ -108,7 +108,7 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
 
     	            echo '</select>';
 
-    	            echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-style]" class="tips redux-border-style' . $this->field['class'] . '" rows="6">';
+    	            echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-style]" class="tips redux-border-style' . $this->field['class'] . '" rows="6" data-id="'.$this->field['id'].'">';
 
     	            foreach( $options as $k => $v ) {
     	                echo '<option value="' . $k . '"' . selected( $this->value['border-style'], $k, false ) . '>' . $v . '</option>';
@@ -116,7 +116,7 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
 
     	            echo '</select>';   
 
-    	            echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-color]" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['border-color'] . '"  data-default-color="' . $this->field['border-color'] . '" />';
+    	            echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-color]" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['border-color'] . '"  data-default-color="' . $this->field['border-color'] . '" data-id="'.$this->field['id'].'" />';
     	            
     	            echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 	            
