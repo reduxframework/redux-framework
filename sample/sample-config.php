@@ -459,6 +459,15 @@ function setup_framework_options(){
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'compiler'=>true,
+				'google'=>false, // Disable google fonts. Won't work if you haven't defined your google api key
+				//'font-style'=>false, // Includes font-style and weight. Can use font-style or font-weight to declare
+				'subsets'=>false, // Only appears if google is true and subsets not set to false
+				//'font-size'=>false,
+				//'line-height'=>false,
+				//'word-spacing'=>true, // Defaults to false
+				//'letter-spacing'=>true, // Defaults to false
+				//'color'=>false,
+				//'preview'=>false, // Disable the previewer
 				'units'=>'em',				
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(

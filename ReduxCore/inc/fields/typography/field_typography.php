@@ -43,6 +43,7 @@ class ReduxFramework_typography extends ReduxFramework{
             'font-size' => true,
             'subsets' => true,
             'font-weight' => true,
+            'font-style' => true,
             'font-backup' => false,
             'color' => true,
             'preview' => true,
@@ -162,7 +163,7 @@ class ReduxFramework_typography extends ReduxFramework{
             /**
             Font Style/Weight
              **/
-            if ($this->field['font-weight'] === true):
+            if ($this->field['font-style'] === true || $this->field['font-weight'] === true):
                 echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-framework').'">';
             	$style = $this->value['font-weight'].$this->value['font-style'];
                 echo '<input type="hidden" class="typography-font-weight" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-weight]" val="'.$this->value['font-weight'].'" /> ';
@@ -192,7 +193,7 @@ class ReduxFramework_typography extends ReduxFramework{
             /**
             Font Script
              **/
-            if ($this->field['subsets'] === true || $this->field['google'] === true):
+            if ($this->field['subsets'] === true && $this->field['google'] === true):
                 echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font subsets','redux-framework').'">';
                 echo '<select data-placeholder="'.__('Subsets','redux-framework').'" class="redux-typography redux-typography-subsets'.$this->field['class'].'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-subsets" name="'.$this->args['opt_name'].'['.$this->field['id'].'][subsets]" data-value="'.$this->value['subsets'].'">';
                 if (empty($this->value['subsets'])) {
