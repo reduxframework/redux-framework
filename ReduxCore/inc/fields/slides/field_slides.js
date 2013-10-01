@@ -1,4 +1,4 @@
-/* global redux_change */
+/* global redux_change, wp */
 
 jQuery(document).ready(function () {
 
@@ -36,7 +36,7 @@ jQuery(document).ready(function () {
     });
 
     jQuery('.slide-title').keyup(function(event) {
-        newTitle = event.target.value;
+        var newTitle = event.target.value;
         jQuery(this).parents().eq(3).find('.redux-slides-header').text(newTitle);
     });
 
@@ -115,7 +115,7 @@ jQuery(document).ready(function () {
             if ( attachment.attributes.type === 'image' ) {
                 selector.find('.screenshot').empty().hide().append('<img class="redux-slides-image" src="' + attachment.attributes.url + '">').slideDown('fast');
             }
-           // selector.find('.media_upload_button').unbind();
+           // selector.find('.media_upload_button_slide').unbind();
             selector.find('.remove-image').removeClass('hide');//show "Remove" button
             selector.find('.redux-background-properties').slideDown();
 
@@ -150,7 +150,7 @@ jQuery(document).ready(function () {
         // We don't display the upload button if .upload-notice is present
         // This means the user doesn't have the WordPress 3.5 Media Library Support
         if ( jQuery('.section-upload .upload-notice').length > 0 ) {
-            jQuery('.media_upload_button').remove();
+            jQuery('.media_upload_button_slide').remove();
         }
 
     }
@@ -161,7 +161,7 @@ jQuery(document).ready(function () {
     });
 
     // Upload media button
-    jQuery('.media_upload_button').unbind('click').click( function( event ) {
+    jQuery('.media_upload_button_slide').unbind('click').click( function( event ) {
         redux_add_file(event, jQuery(this).parents().eq(2));
     });
 

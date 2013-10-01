@@ -94,6 +94,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['page_type']          = 'menu';
             $defaults['page_parent']        = 'themes.php';
             $defaults['page_position']      = null;
+            $defaults['enqueue']      		= true;
             $defaults['allow_sub_menu']     = true;
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = false;
@@ -485,7 +486,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			print_r($parents);
 			print_r($toHide);
 */
-			
+
 			return $folds;
 		    
 		}

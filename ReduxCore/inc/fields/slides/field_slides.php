@@ -107,7 +107,7 @@ if (!class_exists('ReduxFramework_slides')) {
 
                         echo '<div class="redux_slides_add_remove">';
 
-                        echo '<span class="button media_upload_button" id="add_slide_' . $x . '">' . __('Upload', 'redux-framework') . '</span>';
+                        echo '<span class="button media_upload_button_slide" id="add_slide_' . $x . '">' . __('Upload', 'redux-framework') . '</span>';
 
                         $hide = '';
                         if (empty($slide['slide_image_url']) || $slide['slide_image_url'] == '')
