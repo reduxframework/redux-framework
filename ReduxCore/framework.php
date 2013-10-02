@@ -638,6 +638,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue() {
             global $wp_styles;
 
+	    wp_enqueue_script('jquery');
+	    wp_enqueue_script('jquery-ui-core');
+
             wp_register_style(
                 'redux-css',
                 REDUX_URL . 'assets/css/style.css',
