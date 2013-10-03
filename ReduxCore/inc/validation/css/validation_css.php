@@ -1,5 +1,5 @@
 <?php
-class Redux_Validation_html extends ReduxFramework {	
+class Redux_Validation_css extends ReduxFramework {	
 	
 	/**
 	 * Field Constructor.
