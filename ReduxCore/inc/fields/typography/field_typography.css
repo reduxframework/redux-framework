@@ -1,7 +1,7 @@
 #redux-main .select_wrapper.typography-style span {
   display: none;
 }
-#redux-main .wp-picker-container {
+#redux-main .redux-typography-container .wp-picker-container {
   float: left;
 }
 #redux-main .redux-typography-container select,
