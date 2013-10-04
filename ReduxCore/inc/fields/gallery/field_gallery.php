@@ -61,10 +61,10 @@ if (!class_exists('ReduxFramework_gallery')) {
          */
         public function render() {
 
-            echo '<fieldset id="' . $this->field['id'] . '" class="' . $this->field['class'] . '">';
+            echo '<fieldset id="' . $this->field['id'] . '" class="redux-gallery-container">';
 
             echo '<a href="#" onclick="return false;" class="gallery-attachments button button-large">' . __('Add/Edit Gallery', 'so-panels') . '</a>';
-            echo '<input type="text" class="gallery_values hide" value="' . esc_attr($this->value) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" />';
+            echo '<input type="hidden" class="gallery_values ' . $this->field['class'] . '" value="' . esc_attr($this->value) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" />';
 
             echo '<div class="screenshot">';
             if (!empty($this->value)) :
@@ -102,7 +102,7 @@ if (!class_exists('ReduxFramework_gallery')) {
             }
 
             wp_enqueue_script(
-                    'redux-field-gallery-js', REDUX_URL . 'inc/fields/gallery/field_gallery.js', array('jquery', 'wp-color-picker'), time(), true
+                    'redux-field-gallery-js', REDUX_URL . 'inc/fields/gallery/field_gallery.min.js', array('jquery', 'wp-color-picker'), time(), true
             );
 
         }

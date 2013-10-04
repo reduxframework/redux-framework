@@ -1,6 +1,9 @@
 #redux-main .select_wrapper.typography-style span {
   display: none;
 }
+#redux-main .wp-picker-container {
+  float: left;
+}
 #redux-main .redux-typography-container select,
 #redux-main .redux-typography-container .typography-style,
 #redux-main .redux-typography-container .typography-script {
@@ -38,6 +41,9 @@
   height: auto;
   margin: 5px 0 10px;
   overflow: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 #redux-main .redux-typography-container input.redux-typography-color {
   float: left;
