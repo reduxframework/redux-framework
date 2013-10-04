@@ -977,7 +977,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 							$default_output = "";
 						    if (!is_array($field['default'])) {
 								if ( !empty( $field['options'][$field['default']] ) ) {
-									$default_output .= $field['options'][$field['default']].", ";
+									$default_output .= serialize($field['options'][$field['default']]).", ";
 								} else if ( !empty( $field['options'][$field['default']] ) ) {
 									$default_output .= $field['options'][$field['default']].", ";
 								} else if ( !empty( $field['default'] ) ) {
