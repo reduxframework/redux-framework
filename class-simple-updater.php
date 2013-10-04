@@ -330,10 +330,11 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 				$response = get_site_transient($this->config['mode'].'-'.$this->config['slug'].'-'.md5($url)); // Note: WP transients fail if key is long than 45 characters
 			}
 
-			if ( empty( $response ) ) {
+			if ( !isset( $response ) ) {
 				$raw_response = wp_remote_get($url, array('sslverify' => false, 'timeout' => 10));
 				if ( is_wp_error( $raw_response ) ) {
 					$data->response['error'] = "Error response from " . $url;
+					set_site_transient($this->config['mode'].'-'.$this->config['slug'].'-'.md5($url), false, 60*60*2);
 					return false;
 				}
 				$response = json_decode($raw_response['body']);
@@ -371,6 +372,10 @@ if ( ! class_exists( 'Simple_Updater' ) ):
 					}
 
 					$response = $this->github_api($url);
+
+					if (empty($response)) {
+						return;
+					}
 					
 					if(isset($response->message)){
 						if(is_array($response->message)){
