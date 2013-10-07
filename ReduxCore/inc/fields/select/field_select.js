@@ -23,6 +23,9 @@ jQuery(document).ready(function(){
 					triggerChange: true,
 					allowClear: true
 			});
+                        jQuery(this).on("change", function(e) { 
+                            redux_change(jQuery(jQuery(this).attr('id')));
+                        });
 		}
 
 	});

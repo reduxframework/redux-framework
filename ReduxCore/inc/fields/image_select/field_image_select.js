@@ -22,6 +22,7 @@ jQuery(document).ready(function() {
 			} else {}
 			return false;
 		} else {
+                        redux_change(jQuery(this).find('input[type="radio"]'));
 			jQuery('label[for="' + id + '"]').addClass('redux-image-select-selected');
 		}
 	});
