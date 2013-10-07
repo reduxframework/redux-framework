@@ -100,14 +100,14 @@ jQuery(document).ready(function($){
 
 	// Remove the image button
 	$('.remove-image, .remove-file').on('click', function() {
-		redux_remove_file( $(this).parents('td') );
-		redux_change($(this).parents('td:first').find('.upload'));
+		redux_remove_file( $(this).closest('td') );
+		redux_change($(this).closest('td:first').find('.upload'));
 	});
 
 	// Upload media button
 	$('.media_upload_button').unbind('click').click( function( event ) {
-		redux_add_file(event, $(this).parents('td'));
-		redux_change($(this).parents('td:first').find('.upload'));
+		redux_add_file(event, $(this).closest('td'));
+		redux_change($(this).closest('td:first').find('.upload'));
 	});
 
 

@@ -22,7 +22,7 @@
                 // Activate the media editor
                 var $$ = $(this);
 
-                var current_gallery = $(this).parents('td');
+                var current_gallery = $(this).closest('td');
                 var val = current_gallery.find('.gallery_values').val();
 
                 var frame = wp.media.gallery.edit('[gallery ids="' + val + '"]');
