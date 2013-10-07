@@ -28,9 +28,17 @@ jQuery(document).ready(function() {
 	});
 
 	// Used to display a full image preview of a tile/pattern
-	var xOffset = 10; // these 2 variable determine the popup's distance from the cursor
+	jQuery('.tiles').tipsy({
+		gravity: jQuery.fn.tipsy.autoWE,
+		fade: true,
+		html: true,
+		title : function(){
+			return "<img src='" + jQuery(this).attr('rel') + "' style='max-width:150px;' alt='' />";
+		},
+		opacity: 1,
+	});
+	/*var xOffset = 10; // these 2 variable determine the popup's distance from the cursor
 	var yOffset = 30;
-	
 	jQuery(".tiles").hover(function(e) {
 		jQuery("body").append("<div id='tilesFullView'><img src='" + jQuery(this).attr('rel') + "' alt='' /></div>");
 		jQuery("#tilesFullView").css("top", (e.pageY - xOffset) + "px").css("left", (e.pageX + yOffset) + "px").fadeIn("fast");
@@ -40,7 +48,7 @@ jQuery(document).ready(function() {
 	
 	jQuery(".tiles").mousemove(function(e) {
 		jQuery("#tilesFullView").css("top", (e.pageY - xOffset) + "px").css("left", (e.pageX + yOffset) + "px");
-	});
+	});*/
 
 
 });
