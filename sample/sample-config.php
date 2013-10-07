@@ -1127,6 +1127,24 @@ function setup_framework_options(){
 				'title' => __('Group', 'redux-framework'), 
 				'subtitle' => __('Group any items together.', 'redux-framework'),
 				'desc' => __('No limit as to what you can group. Just don\'t try to group a group.', 'redux-framework'),
+				'subfields' => 
+					array(
+						array(
+                            'id'=>'tracking-code-group',
+                            'type' => 'textarea',
+                            'title' => __('Tracking Code', 'redux-framework'), 
+                            'subtitle' => __('Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'redux-framework'),
+                            'desc' => 'Validate that it\'s javascript!',
+							),
+						array(
+                            'id'=>'media-group',
+                            'type' => 'media', 
+                            'url'=> true,
+                            'title' => __('Media No URL', 'redux-framework'),
+                            'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
+                            'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
+							),
+						),
 				),			
 				*/
 			)

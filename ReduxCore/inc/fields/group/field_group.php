@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,14 +18,15 @@
  * @subpackage  Field_Info
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
+ * @author      Abdullah Almesbahi
  * @version     3.0.0
  */
-
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH'))
+    exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_group' ) ) {
+if (!class_exists('ReduxFramework_group')) {
 
     /**
      * Main ReduxFramework_info class
@@ -32,7 +34,7 @@ if( !class_exists( 'ReduxFramework_group' ) ) {
      * @since       1.0.0
      */
     class ReduxFramework_group extends ReduxFramework {
-    
+
         /**
          * Field Constructor.
          *
@@ -42,14 +44,13 @@ if( !class_exists( 'ReduxFramework_group' ) ) {
          * @access      public
          * @return      void
          */
-        public function __construct( $field = array(), $value ='', $parent ) {
-        
-            parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
+        public function __construct($field = array(), $value = '', $parent) {
+
+            parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
 
             $this->field = $field;
             $this->value = $value;
             $this->parent = $parent;
-        
         }
 
         /**
@@ -62,77 +63,107 @@ if( !class_exists( 'ReduxFramework_group' ) ) {
          * @return      void
          */
         public function render() {
-        	print_r($this->value);
+            if (empty($this->value) || !is_array($this->value)) {
+                $this->value = array(
+                    array(
+                        'slide_title' => __('New', 'redux-framework').' '.$this->field['groupname'],
+                        'slide_sort' => '0',
+                    )
+                );
+            }
 
-        	$fields = array(
-			array(
-				'id'=>'test1g',
-				'type' => 'button_set',
-				'title' => __('Button Set Option', 'redux-framework'), 
-				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
-				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
-				'default' => '2'
-				),
-			array(
-				'id'=>'test2g',
-				'type' => 'button_set',
-				'title' => __('Button Set Option', 'redux-framework'), 
-				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
-				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
-				'default' => '2'
-				),			
-			array(
-				'id'=>'select-post-typeg',
-				'type' => 'select',
-				'data' => 'post_type',
-				'title' => __('Post Type Select Option', 'redux-framework'), 
-				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
-				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-				),	
-			array(
-				'id'=>'17g',
-				'type' => 'date',
-				'title' => __('Date Option', 'redux-framework'), 
-				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
-				'desc' => __('This is the description field, again good for additional info.', 'redux-framework')
-				),										
-        		);
-        	echo '<div class="redux-group">';
-        
-        	foreach ($fields as $field) {
-        		if (empty($this->value[$field['id']])) {
-        			$this->value[$field['id']] = "";
-        		}
-        		$field['class'] .= " group";
-        		echo $this->value[$field['id']]."<br />";
-        		$this->parent->_field_input($field, $this->value[$field['id']]);
-        	}        	
-        	echo '</div>';
-        	echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
-        
-        } //function
+            echo '<div class="redux-group">';
+            echo '<div id="redux-groups-accordion">';
+            $x = 0;
 
+            $groups = $this->value;
+            foreach ($groups as $group) {
 
-		/**
-	 	 * Enqueue Function.
-		 *
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
-		 *
-		 * @since 		1.0.0
-		 * @access		public
-		 * @return		void
-		 */
-		public function enqueue() {
-		
-			wp_enqueue_style(
-				'redux-field-group-css', 
-				REDUX_URL . 'inc/fields/group/field_group.css',
-				time(),
-				true
-			);
-		}
+                echo '<div class="redux-groups-accordion-group"><h3><span class="redux-groups-header">' . $group['slide_title'] . '</span></h3>';
+                echo '<div>';//according content open
+                
+                echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';
+                
+                echo '<h4>' . __('Group Title', 'redux-framework') . '</h4>';
+                echo '<fieldset><input type="text" id="' . $this->field['id'] . '-slide_title_' . $x . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_title]" value="' . esc_attr($group['slide_title']) . '" class="regular-text slide-title" /></fieldset>';
+                echo '<input type="hidden" class="slide-sort" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_sort]" id="' . $this->field['id'] . '-slide_sort_' . $x . '" value="' . $group['slide_sort'] . '" />';
+                foreach ($this->field['subfields'] as $field) {
+                    //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
+                    $this->enqueue_dependencies($field['type']);
+                    
+                    echo '<tr><td>';
+                    $field['class'] .= " group";
 
-    }//if
+                    if (!empty($field['title']))
+                        echo '<h4>' . $field['title'] . '</h4>';
+                    if (!empty($field['subtitle']))
+                        echo '<span class="description">' . $field['subtitle'] . '</span>';
+                    $value = empty($this->parent->options[$field['id']][$x]) ? " " : $this->parent->options[$field['id']][$x];
+
+                    ob_start();
+                    $this->parent->_field_input($field, $value);
+                    $_field = $this->support_multi(ob_get_contents(), $field, $x);
+                    ob_end_clean();
+                    echo $_field;
+                    
+                    echo '</td></tr>';
+                }
+                echo '</table>';
+                echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '.$this->field['groupname']. '</a>';
+                echo '</div></div>';
+                $x++;
+            }
+
+            echo '</div><a href="javascript:void(0);" class="button redux-groups-add button-primary" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][slide_title][]">' . __('Add', 'redux-framework') .' '.$this->field['groupname']. '</a><br/>';
+
+            echo '</div>';
+            echo ( isset($this->field['desc']) && !empty($this->field['desc']) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
+        }
+
+        function support_multi($content, $field, $sort) {
+            //convert name
+            $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+            $content = str_replace($name, $name . '[' . $sort . ']', $content);
+            return $content;
+        }
+
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since 		1.0.0
+         * @access		public
+         * @return		void
+         */
+        public function enqueue() {
+            wp_enqueue_script(
+                    'redux-field-group-js', REDUX_URL . 'inc/fields/group/field_group.min.js', array('jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker'), time(), true
+            );
+
+            wp_enqueue_style(
+                    'redux-field-group-css', REDUX_URL . 'inc/fields/group/field_group.css', time(), true
+            );
+        }
+
+        public function enqueue_dependencies($field_type) {
+            $field_class = 'ReduxFramework_' . $field_type;
+
+            if (!class_exists($field_class)) {
+                $class_file = apply_filters('redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field_type . '/field_' . $field_type . '.php', $field_class);
+
+                if ($class_file) {
+                    /** @noinspection PhpIncludeInspection */
+                    require_once( $class_file );
+                }
+            }
+
+            if (class_exists($field_class) && method_exists($field_class, 'enqueue')) {
+                $enqueue = new $field_class('', '', $this);
+                $enqueue->enqueue();
+            }
+        }
+
+    }
+
 }
