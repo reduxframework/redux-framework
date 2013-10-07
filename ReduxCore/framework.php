@@ -1310,8 +1310,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div id="redux-sidebar">';
             echo '<ul id="redux-group-menu">';
             foreach( $this->sections as $k => $section ) {
-                if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                    $icon = ( !isset( $section['icon'] ) ) ? '' : '<img src="' . $section['icon'] . '" /> ';
+            	if( (isset($this->args['icon_type']) && $this->args['icon_type'] == 'image') || (isset($section['icon_type']) && $section['icon_type'] == 'image')) {
+                //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
+                    $icon = ( !isset( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $section['icon'] . '" /> ';
                 } else {
                     $icon_class = ( !isset( $section['icon_class'] ) ) ? '' : ' ' . $section['icon_class'];
                     $icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="icon-' . $section['icon'] . $icon_class . '"></i> ';
