@@ -92,7 +92,10 @@ if (!class_exists('ReduxFramework_group')) {
                     $this->enqueue_dependencies($field['type']);
                     
                     echo '<tr><td>';
-                    $field['class'] .= " group";
+                    if(isset($field['class']))
+                        $field['class'] .= " group";
+                    else
+                        $field['class'] = " group";
 
                     if (!empty($field['title']))
                         echo '<h4>' . $field['title'] . '</h4>';

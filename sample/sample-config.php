@@ -1127,6 +1127,7 @@ function setup_framework_options(){
 				'title' => __('Group', 'redux-framework'), 
 				'subtitle' => __('Group any items together.', 'redux-framework'),
 				'desc' => __('No limit as to what you can group. Just don\'t try to group a group.', 'redux-framework'),
+				'groupname' => __('Group', 'redux-framework'), // Group name
 				'subfields' => 
 					array(
 						array(

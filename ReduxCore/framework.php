@@ -1622,7 +1622,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 if( class_exists( $field_class ) ) {
-                    $value = $this->options[$field['id']];
+                    $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
                     if ($v != "") {
                     	$value = $v;
                     }
