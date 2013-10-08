@@ -283,9 +283,11 @@ border: 1px solid #e5e5e5;
 #redux-sidebar #redux-group-menu li a img{
 	width: 16px;
 	height: 16px;
-	/*vertical-align:middle;*/
+	/*vertical-align:middle;
 	margin-bottom:-3px;
-	margin-right: 3px;
+	margin-right: 3px;*/
+	position: absolute;
+	left: 15px;
 }
 #redux-sidebar #redux-group-menu li.active a:hover{
 	color: #269ad6;
@@ -459,6 +461,7 @@ border: 1px solid #e5e5e5;
 		z-index: 0;
 		&.group_title {
 			padding-left: 30px;
+			display: inline-table;
 		}
 	}
 }
