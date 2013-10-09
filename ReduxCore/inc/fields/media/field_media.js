@@ -12,10 +12,10 @@ jQuery(document).ready(function($){
 	// Add a file via the wp.media function
 	function redux_add_file(event, selector) {
 
+		event.preventDefault();
+
 		var frame;
 		var $el = $(this);
-
-		event.preventDefault();
 
 		// If the media frame already exists, reopen it.
 		if ( frame ) {
@@ -58,7 +58,6 @@ jQuery(document).ready(function($){
 			if ( attachment.attributes.type === 'image' && !selector.find('.upload').hasClass('noPreview') ) {
 				selector.find('.screenshot').empty().hide().append('<img class="redux-option-image" src="' + attachment.attributes.url + '">').slideDown('fast');
 			}
-			selector.find('.media_upload_button').unbind();
 			selector.find('.remove-image').removeClass('hide');//show "Remove" button
 			selector.find('.redux-background-properties').slideDown();
 
@@ -99,13 +98,13 @@ jQuery(document).ready(function($){
 	}
 
 	// Remove the image button
-	$('.remove-image, .remove-file').on('click', function() {
+	$('.remove-image, .remove-file').unbind('click').on('click', function() {
 		redux_remove_file( $(this).closest('td') );
 		redux_change($(this).closest('td:first').find('.upload'));
 	});
 
 	// Upload media button
-	$('.media_upload_button').unbind('click').click( function( event ) {
+	$('.media_upload_button').unbind('click').on('click', function( event ) {
 		redux_add_file(event, $(this).closest('td'));
 		redux_change($(this).closest('td:first').find('.upload'));
 	});
