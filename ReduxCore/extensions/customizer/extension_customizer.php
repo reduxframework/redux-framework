@@ -162,17 +162,25 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
 
               $customSetting = array(
-                'type'          => 'theme_mod',
+                'type'          => 'option',
                 'capabilities'  => 'manage_theme_options',
                 'default'       =>  $option['default']
-              );              
+              );     
+
+
+              $option['id'] = $this->args['opt_name'].'['.$option['id'].']';
+
+              if ($option['type'] != "heading" || !empty($option['type'])) {
+                
+                $wp_customize->add_setting( $option['id'], $customSetting);
+              }                       
 
               switch( $option['type'] ) {
                 case 'heading':
                   // We don't want to put up the section unless it's used by something visible in the customizer
                   $section        = $option;
                   $section['id']  = strtolower( str_replace( " ", "", $option['title'] ) );
-                  $order['option']=-500;
+                  $order['heading']=-500;
                   if (!empty( $option['priority'] ) ) {
                     $section['priority'] = $option['priority'];
                   } else {
@@ -182,7 +190,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'text':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
@@ -193,7 +200,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'select':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
@@ -205,7 +211,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'radio':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
@@ -217,7 +222,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'checkbox':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
@@ -228,7 +232,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'media':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
@@ -238,7 +241,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'color':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
@@ -248,7 +250,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                   break;
 
                 case 'switch':
-                  $wp_customize->add_setting( $option['id'], $customSetting);
                   $wp_customize->add_control( $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
