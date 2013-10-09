@@ -147,7 +147,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
 			// Register extensions
-            add_action( 'init', array( &$this, '_register_extensions' ), 20 );
+            //add_action( 'init', array( &$this, '_register_extensions' ), 20 );
+            $this->_register_extensions();
 
 
             // Hook into the WP feeds for downloading exported settings
@@ -336,13 +337,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		        		}
 					}//if
 					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive") {
-						require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');
+						global $elusiveIcons;
+						if (empty($elusiveIcons)) {
+							require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');	
+						}
 						foreach($elusiveIcons as $k) {
 		           			$data[$k] = $k;
 		        		}
 					}//if			
 				}//if
-			}
+			}//if
 
 			return $data;
 		}		

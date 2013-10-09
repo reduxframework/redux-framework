@@ -2,7 +2,7 @@
 	// Array of Elusive Icons 
 	// Contributed by @WhatJustHappened 
 	// Last updated: 14 Sept. 2013
-
+	global $elusiveIcons;
 	$elusiveIcons = array(
 		'icon-glass',
 		'icon-music',
