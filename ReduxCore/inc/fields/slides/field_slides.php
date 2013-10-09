@@ -180,8 +180,23 @@ if (!class_exists('ReduxFramework_slides')) {
          * @return      void
          */
 
-        public function enqueue()
-        {
+        public function enqueue() {
+
+
+            wp_enqueue_script(
+                'redux-field-media-js',
+                REDUX_URL . 'inc/fields/media/field_media.js',
+                array( 'jquery', 'wp-color-picker' ),
+                time(),
+                true
+            );
+
+            wp_enqueue_style(
+                'redux-field-media-css',
+                REDUX_URL . 'inc/fields/media/field_media.css',
+                time(),
+                true
+            );            
 
             wp_enqueue_script(
                 'redux-field-slides-js',

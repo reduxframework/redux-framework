@@ -64,6 +64,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $options             = array();
         public $options_defaults    = null;
 		public $folds    			= array();
+		public $url;
+		public $dir;
 
         /**
          * Class Constructor. Defines the args for the theme options class
@@ -104,6 +106,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = __( '', 'redux-framework' );
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
+            $defaults['customizer'] 		= true; // setting to true forces get_theme_mod_expanded
 			$defaults['global_variable'] 	= '';
             /** @noinspection PhpUndefinedConstantInspection */
             $defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
@@ -113,8 +116,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['default_mark']		= ''; // What to print by the field's title if the value shown is default
 
 	    	// Set values
-
             $this->args = wp_parse_args( $args, $defaults );
+
+			if ( empty( $this->dir ) ) {
+            	$this->dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+            	$this->url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->dir ) );
+            }
 
             if ( $this->args['global_variable'] !== false ) {
             	if ( $this->args['global_variable'] == "" ) {
@@ -138,6 +145,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             // Register setting
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
+
+			// Register extensions
+            //add_action( 'init', array( &$this, '_register_extensions' ), 20 );
+            $this->_register_extensions();
+
 
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
@@ -325,7 +337,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		        		}
 					}//if
 					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive") {
-						require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');
+						global $elusiveIcons;
+						if (empty($elusiveIcons)) {
+							require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');	
+						}
 						foreach($elusiveIcons as $k) {
 		           			$data[$k] = $k;
 		        		}
@@ -333,7 +348,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						$data = call_user_func($args[0]);
 					}//if			
 				}//if
-			}
+			}//if
 
 			return $data;
 		}		
@@ -944,6 +959,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     continue;
                 }
 
+				if ( empty( $section['id'] ) ) {
+                	$section['id'] = strtolower( str_replace( " ", "", $section['title'] ) );	
+                }                   
+
                 // DOVY! Replace $k with $section['id'] when ready
                 $section = apply_filters( 'redux-section-' . $k . '-modifier-' . $this->args['opt_name'], $section );
 
@@ -1036,6 +1055,41 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			}				
 
         }
+
+        /**
+         * Register Extensions for use
+         *
+         * @since       3.0.0
+         * @access      public
+         * @return      void
+         */
+        public function _register_extensions() {
+        	
+        	$path = dirname( __FILE__ ) . '/extensions';
+			$folders = scandir( $path, 1 );		   
+
+		    foreach($folders as $folder){
+
+		    	if ($folder === '.' or $folder === '..' or !is_dir($path . '/' . $folder) ) {
+		    		continue;	
+		    	} 
+				$extension_class = 'ReduxFramework_Extension_' . $folder;
+
+                if( !class_exists( $extension_class ) ) {
+                    $class_file = apply_filters( 'redux-extensionclass-load', $this->dir . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class );
+
+                    if( $class_file ) {
+                        /** @noinspection PhpIncludeInspection */
+                        require_once( $class_file );
+                        $extension = new $extension_class( $this );
+                 	}
+                }
+                		   		
+		    }    
+
+		    do_action( 'redux-register-extensions-' . $this->args['opt_name'], $this );        			
+
+        }        
 
         /**
          * Validate the Options options before insertion

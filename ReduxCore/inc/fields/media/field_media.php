@@ -132,7 +132,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
                 echo '<div class="upload_button_div">';
 
                 //If the user has WP3.5+ show upload/remove button
-                echo '<span class="button media_upload_button" id="' . $this->field['id'] . '">' . __( 'Upload', 'redux-framework' ) . '</span>';
+                echo '<span class="button media_upload_button" id="' . $this->field['id'] . '-media">' . __( 'Upload', 'redux-framework' ) . '</span>';
                 
                 $hide = '';
                 if( empty( $this->value['url'] ) || $this->value['url'] == '' )
@@ -167,7 +167,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
 
             wp_enqueue_script(
                 'redux-field-media-js',
-                REDUX_URL . 'inc/fields/media/field_media.min.js',
+                REDUX_URL . 'inc/fields/media/field_media.js',
                 array( 'jquery', 'wp-color-picker' ),
                 time(),
                 true

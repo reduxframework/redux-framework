@@ -39,6 +39,7 @@ function redux_add_file(event, selector) {
 	var jQueryel = jQuery(this);
 	
 
+
 	// If the media frame already exists, reopen it.
 	if ( frame ) {
 		frame.open();
@@ -83,7 +84,6 @@ function redux_add_file(event, selector) {
 		//selector.find('.media_upload_button').unbind();
 		selector.find('.remove-image').removeClass('hide');//show "Remove" button
 		selector.find('.redux-background-properties').slideDown();
-
 	});
 
 	// Finally, open the modal.
