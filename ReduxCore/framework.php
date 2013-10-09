@@ -329,6 +329,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						foreach($elusiveIcons as $k) {
 		           			$data[$k] = $k;
 		        		}
+					}else if ($type == "callback") {
+						$data = call_user_func($args[0]);
 					}//if			
 				}//if
 			}
@@ -1629,7 +1631,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                     do_action( 'redux-before-field-' . $this->args['opt_name'], $field, $value );
                     $render = new $field_class( $field, $value, $this );
+                    
+                    ob_start();
                     $render->render();
+                    //$_render = ob_get_contents();
+                    $_render = apply_filters('redux-field-'.$this->args['opt_name'],ob_get_contents(),$field);
+                    ob_end_clean();
+                    //$_render = apply_filters('redux-field-'.$this->args['opt_name'],$_render,$field);
+                    echo $_render;
+
                     do_action( 'redux-after-field-' . $this->args['opt_name'], $field, $value );
                 }
             }

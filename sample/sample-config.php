@@ -909,6 +909,7 @@ function setup_framework_options(){
 				'id'=>'select-categories',
 				'type' => 'select',
 				'data' => 'categories',
+				//'args' => array('type'=>'post','orderby'=>'name','order'=> 'ASC'),
 				'title' => __('Categories Select Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),

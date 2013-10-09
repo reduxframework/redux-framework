@@ -69,7 +69,7 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
 	                'editor_class'  => $this->field['class']
 	            );
 
-	            wp_editor( $this->value, $this->field['id'].'-editor', $settings );
+	            wp_editor( $this->value, 'redux-editor', $settings );
 	        
 	            echo ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
 	        	
