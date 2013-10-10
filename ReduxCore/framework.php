@@ -1042,17 +1042,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
 							$default_output = "";
 						    if (!is_array($field['default'])) {
 								if ( !empty( $field['options'][$field['default']] ) ) {
-									// TODO: This serialize fix may not be the best solution. Look into it. PHP 5.4 error without serialize
-									$default_output .= serialize($field['options'][$field['default']]).", ";
+									if (!empty($field['options'][$field['default']]['alt'])) {
+										$default_output .= $field['options'][$field['default']]['alt'] . ', ';
+									} else {
+										// TODO: This serialize fix may not be the best solution. Look into it. PHP 5.4 error without serialize
+										$default_output .= serialize($field['options'][$field['default']]).", ";	
+									}
 								} else if ( !empty( $field['options'][$field['default']] ) ) {
 									$default_output .= $field['options'][$field['default']].", ";
 								} else if ( !empty( $field['default'] ) ) {
 									$default_output .= $field['default'] . ', ';
 								}
 						    } else {
-								
 								foreach( $field['default'] as $defaultk => $defaultv ) {
-									if ( !empty( $field['options'][$defaultv] ) ) {
+									if (!empty($field['options'][$defaultv]['alt'])) {
+										$default_output .= $field['options'][$defaultv]['alt'] . ', ';
+									} else if ( !empty( $field['options'][$defaultv] ) ) {
 										$default_output .= $field['options'][$defaultv].", ";
 									} else if ( !empty( $field['options'][$defaultk] ) ) {
 										$default_output .= $field['options'][$defaultk].", ";
