@@ -19,6 +19,12 @@ class ReduxFramework_select extends ReduxFramework{
         if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
 			if (empty($this->field['args'])) {
 				$this->field['args'] = array();
+			}
+			if ($this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) {
+       			$icons_file = REDUX_DIR.'inc/fields/select/elusive-icons.php';
+       			$icons_file = apply_filters('redux-font-icons-file',$icons_file);
+       			if(file_exists($icons_file))
+       				require_once $icons_file;
 			}        	
         	$this->field['options'] = $parent->get_wordpress_data($this->field['data'], $this->field['args']);
         }
@@ -37,7 +43,7 @@ class ReduxFramework_select extends ReduxFramework{
 	function render(){
 
 		if ( !empty($this->field['data']) && ( $this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) ) {
-       		$this->field['class'] = " elusive-icons";
+       		$this->field['class'] = " font-icons";
 		}//if
 
 		echo '<fieldset id="'.$this->field['id'].'" class="redux-select-container">';

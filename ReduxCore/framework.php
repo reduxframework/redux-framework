@@ -336,12 +336,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		           			$data[$k] = $v;
 		        		}
 					}//if
-					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive") {
-						global $elusiveIcons;
-						if (empty($elusiveIcons)) {
-							require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');	
-						}
-						foreach($elusiveIcons as $k) {
+					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" || 
+							 $type == "font-icon" || $type == "font-icons" || $type == "icons") {
+						$font_icons = apply_filters('redux-font-icons',array());
+						foreach($font_icons as $k) {
 		           			$data[$k] = $k;
 		        		}
 					}else if ($type == "callback") {

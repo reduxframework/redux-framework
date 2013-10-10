@@ -9,7 +9,7 @@
 
     $.redux.select = function(){
     	$('.redux-select-item').each(function() {
-			if ( $(this).hasClass('elusive-icons') ) {
+			if ( $(this).hasClass('font-icons') ) {
 				$(this).select2({
 					width: 'resolve',
 					triggerChange: true,
