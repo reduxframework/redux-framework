@@ -49,12 +49,10 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
        * @return      void
        */
       public function __construct( $parent ) {
-        
         global $pagenow;
         if ($pagenow !== "customize.php") {
           return;
         }
-
         
         parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
       
@@ -70,12 +68,12 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         */
 
-        add_action( 'admin_init', array( &$this, '_enqueue' ), 20 );
+        add_action( 'admin_init', array( &$this, '_enqueue' ), 30 );
 
         add_action( 'customize_register', array( &$this, '_register_customizer_controls' ) ); // Create controls
 
-        add_action( 'wp_head', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
-        add_action( 'customize_preview_init', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
+        add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
+        add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
         add_action( 'customize_save', array( &$this, 'customizer_save_before' ) ); // Before save
         add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
         if ( empty( $this->extension_dir ) ) {
@@ -90,6 +88,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         // All sections, settings, and controls will be added here
         public function _register_customizer_controls( $wp_customize ) {
+          
+          
           if ( $this->args['customizer'] === false ) {
             return;
           }
@@ -361,7 +361,7 @@ static_front_page - Static Front Page
               if( isset( $field['type'] ) ) {
                 $field_class = 'ReduxFramework_' . $field['type'];
                 if( !class_exists( $field_class ) ) {
-                  $class_file = apply_filters( 'redux-typeclass-load', $this->dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                  $class_file = apply_filters( 'redux-typeclass-load', $this->path . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
                   if( $class_file ) {
                     /** @noinspection PhpIncludeInspection */
                     require_once( $class_file );

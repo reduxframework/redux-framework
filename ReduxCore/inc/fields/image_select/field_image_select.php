@@ -62,8 +62,6 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
          */
         public function render() {
                 
-            echo '<fieldset id="'.$this->field['id'].'" class="redux-image-select-container">';
-            
             if( !empty( $this->field['options'] ) ) {
 
                 echo '<ul class="redux-image-select">';
@@ -102,7 +100,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                     $theValue = $k;
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
-                    	$theValue = $v['img'];
+                        $theValue = $v['img'];
                     }
 
                     $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
@@ -143,10 +141,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
             }
 
-            echo '</fieldset>';
 
-            echo ( isset( $this->field['description'] ) && !empty( $this->field['description'] ) ) ? '<div class="description">' . $this->field['description'] . '</div>' : '';
-        
         }
     
         /**

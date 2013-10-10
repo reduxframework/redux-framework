@@ -317,26 +317,20 @@ function setup_framework_options(){
 			array(
 				'id'=>'media',
 				'type' => 'media', 
-				'title' => __('Media', 'redux-framework'),
+				'url'=> true,
+				'title' => __('Media w/ URL', 'redux-framework'),
 				'compiler' => 'true',
+				'desc'=> __('Basic media uploader with disabled URL input field.', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
 				),
 
 			array(
 				'id'=>'media-nourl',
 				'type' => 'media', 
-				'url'=> true,
-				'title' => __('Media No URL', 'redux-framework'),
+				'title' => __('Media w/o URL', 'redux-framework'),
 				'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
 				),	
-            array(
-                'id' => 'gallery',
-                'type' => 'gallery',
-                'title' => __('Add/Edit Gallery', 'so-panels'),
-                'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the Wordpress native uploader', 'so-panels'),
-                'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-                ),			
 			array(
 				'id'=>'media-nopreview',
 				'type' => 'media', 
@@ -344,7 +338,14 @@ function setup_framework_options(){
 				'title' => __('Media No Preview', 'redux-framework'),
 				'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
-				),								
+				),			
+            array(
+                'id' => 'gallery',
+                'type' => 'gallery',
+                'title' => __('Add/Edit Gallery', 'so-panels'),
+                'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the Wordpress native uploader', 'so-panels'),
+                'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
+                ),
 		/*
 			array(
 				'id'=>'gallery',
@@ -466,7 +467,7 @@ function setup_framework_options(){
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'compiler'=>true,
-				'google'=>false, // Disable google fonts. Won't work if you haven't defined your google api key
+				'google'=>true, // Disable google fonts. Won't work if you haven't defined your google api key
 				//'font-style'=>false, // Includes font-style and weight. Can use font-style or font-weight to declare
 				'subsets'=>false, // Only appears if google is true and subsets not set to false
 				//'font-size'=>false,
@@ -475,6 +476,7 @@ function setup_framework_options(){
 				//'letter-spacing'=>true, // Defaults to false
 				//'color'=>false,
 				//'preview'=>false, // Disable the previewer
+				'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to
 				'units'=>'em',				
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
@@ -520,6 +522,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'tracking-code',
 				'type' => 'textarea',
+				'fold'=>array('layout'=>1),
 				'title' => __('Tracking Code', 'redux-framework'), 
 				'subtitle' => __('Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'redux-framework'),
 				'validate' => 'js',
@@ -594,12 +597,15 @@ function setup_framework_options(){
 				'type' => 'border',
 				'title' => __('Header Border Option', 'redux-framework'),
 				'subtitle' => __('Only color validation can be done on this field type', 'redux-framework'),
+				'output' => array('.site-header'), // An array of CSS selectors to apply this font style to
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'default' => array('color' => '#1e73be', 'style' => 'solid', 'width'=>'3')
 				),	
 			array(
 				'id'=>'spacing',
 				'type' => 'spacing',
+				'output' => array('.site-header'), // An array of CSS selectors to apply this font style to
+				'mode'=>'margin', // absolute, padding, margin, defaults to padding
 				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
 				//'units_extended' => 'true', // Allow users to select any type of unit
 				'title' => __('Padding/Margin Option', 'redux-framework'),
@@ -898,6 +904,7 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
+				'fold'=>array('select'=>array('1','3')),
 				'default' => array('2','3')
 				),
 			array(
@@ -909,7 +916,6 @@ function setup_framework_options(){
 				'id'=>'select-categories',
 				'type' => 'select',
 				'data' => 'categories',
-				//'args' => array('type'=>'post','orderby'=>'name','order'=> 'ASC'),
 				'title' => __('Categories Select Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
