@@ -467,7 +467,7 @@ function setup_framework_options(){
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
 				'compiler'=>true,
-				'google'=>false, // Disable google fonts. Won't work if you haven't defined your google api key
+				'google'=>true, // Disable google fonts. Won't work if you haven't defined your google api key
 				//'font-style'=>false, // Includes font-style and weight. Can use font-style or font-weight to declare
 				'subsets'=>false, // Only appears if google is true and subsets not set to false
 				//'font-size'=>false,
@@ -476,6 +476,7 @@ function setup_framework_options(){
 				//'letter-spacing'=>true, // Defaults to false
 				//'color'=>false,
 				//'preview'=>false, // Disable the previewer
+				'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to
 				'units'=>'em',				
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
@@ -596,12 +597,15 @@ function setup_framework_options(){
 				'type' => 'border',
 				'title' => __('Header Border Option', 'redux-framework'),
 				'subtitle' => __('Only color validation can be done on this field type', 'redux-framework'),
+				'output' => array('.site-header'), // An array of CSS selectors to apply this font style to
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'default' => array('color' => '#1e73be', 'style' => 'solid', 'width'=>'3')
 				),	
 			array(
 				'id'=>'spacing',
 				'type' => 'spacing',
+				'output' => array('.site-header'), // An array of CSS selectors to apply this font style to
+				'mode'=>'margin', // absolute, padding, margin, defaults to padding
 				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
 				//'units_extended' => 'true', // Allow users to select any type of unit
 				'title' => __('Padding/Margin Option', 'redux-framework'),

@@ -66,6 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		public $folds    			= array();
 		public $url 				= '';
 		public $path 				= '';
+		public $output 				= array(); // Fields with CSS output selectors
 
         /**
          * Class Constructor. Defines the args for the theme options class
@@ -150,7 +151,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'init', array( &$this, '_register_extensions' ), 20 );
 
             // Any dynamic CSS output, let's run
-            add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ) );
+            add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 100 );
 
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
@@ -655,7 +656,37 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _enqueue_output() {
-            //echo "Echo output!";
+			foreach( $this->sections as $k => $section ) {
+                if( isset($section['type'] ) && $section['type'] == 'divide' ) {
+                    continue;
+                }
+                if( isset( $section['fields'] ) ) {
+                    foreach( $section['fields'] as $fieldk => $field ) {
+                    	if ( !empty( $field['output'] ) ) {
+							if( isset( $field['type'] ) ) {
+	                            $field_class = 'ReduxFramework_' . $field['type'];
+	                            if( !class_exists( $field_class ) ) {
+	                                $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+	                                if( $class_file ) {
+	                                    /** @noinspection PhpIncludeInspection */
+	                                    require_once( $class_file );
+	                                }
+	                            }	                            
+	                            if( class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
+	                            	if ( !is_array( $field['output'] ) ) {
+                    					$field['output'] = array( $field['output'] );
+                    				}
+									$value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
+                    	
+                    				$enqueue = new $field_class( $field, $value, $this );
+	                                $enqueue->output = $field['output'];
+	                                $enqueue->output();
+	                            }
+	                        }
+                    	}        	
+                    }
+                }
+            }
         }        
 
         /**
@@ -984,6 +1015,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
+                    	
                     	$th = "";
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';

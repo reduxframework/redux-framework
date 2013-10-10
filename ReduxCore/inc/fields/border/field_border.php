@@ -156,5 +156,20 @@ if( !class_exists( 'ReduxFramework_border' ) ) {
             );
 
         }
+
+        public function output() {
+
+            $keys = implode(", ", $this->output);
+            $style = '<style type="text/css" class="redux-'.$this->field['type'].'">';
+                $style .= $keys." {";
+                foreach($this->value as $key=>$value) {
+                    $style .= $key.': '.$value.'; ';
+                }
+                $style .= '}';
+            $style .= '</style>';
+            echo $style;
+            
+        }
+
     }
 }
