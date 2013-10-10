@@ -655,7 +655,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _enqueue_output() {
-            echo "Echo output!";
+            //echo "Echo output!";
         }        
 
         /**
