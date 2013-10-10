@@ -167,7 +167,7 @@ if (!class_exists('ReduxFramework_slides')) {
                 echo '</ul></div></div>';
             }
             echo '</div><a href="javascript:void(0);" class="button redux-slides-add button-primary" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][slide_title][]">' . __('Add Slide', 'redux-framework') . '</a><br/>';
-            echo (isset($this->field['desc']) && !empty($this->field['desc'])) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
+            
         }
 
         /**

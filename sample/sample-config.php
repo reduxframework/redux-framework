@@ -317,26 +317,20 @@ function setup_framework_options(){
 			array(
 				'id'=>'media',
 				'type' => 'media', 
-				'title' => __('Media', 'redux-framework'),
+				'url'=> true,
+				'title' => __('Media w/ URL', 'redux-framework'),
 				'compiler' => 'true',
+				'desc'=> __('Basic media uploader with disabled URL input field.', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
 				),
 
 			array(
 				'id'=>'media-nourl',
 				'type' => 'media', 
-				'url'=> true,
-				'title' => __('Media No URL', 'redux-framework'),
+				'title' => __('Media w/o URL', 'redux-framework'),
 				'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
 				),	
-            array(
-                'id' => 'gallery',
-                'type' => 'gallery',
-                'title' => __('Add/Edit Gallery', 'so-panels'),
-                'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the Wordpress native uploader', 'so-panels'),
-                'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
-                ),			
 			array(
 				'id'=>'media-nopreview',
 				'type' => 'media', 
@@ -344,7 +338,14 @@ function setup_framework_options(){
 				'title' => __('Media No Preview', 'redux-framework'),
 				'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
 				'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
-				),								
+				),			
+            array(
+                'id' => 'gallery',
+                'type' => 'gallery',
+                'title' => __('Add/Edit Gallery', 'so-panels'),
+                'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the Wordpress native uploader', 'so-panels'),
+                'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
+                ),
 		/*
 			array(
 				'id'=>'gallery',
@@ -520,6 +521,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'tracking-code',
 				'type' => 'textarea',
+				'fold'=>array('layout'=>1),
 				'title' => __('Tracking Code', 'redux-framework'), 
 				'subtitle' => __('Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'redux-framework'),
 				'validate' => 'js',
@@ -898,6 +900,7 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
+				'fold'=>array('select'=>array('1','3')),
 				'default' => array('2','3')
 				),
 			array(
@@ -909,7 +912,6 @@ function setup_framework_options(){
 				'id'=>'select-categories',
 				'type' => 'select',
 				'data' => 'categories',
-				//'args' => array('type'=>'post','orderby'=>'name','order'=> 'ASC'),
 				'title' => __('Categories Select Option', 'redux-framework'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),

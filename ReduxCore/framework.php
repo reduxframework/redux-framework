@@ -64,8 +64,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $options             = array();
         public $options_defaults    = null;
 		public $folds    			= array();
-		public $url;
-		public $dir;
+		public $url 				= '';
+		public $path 				= '';
 
         /**
          * Class Constructor. Defines the args for the theme options class
@@ -118,9 +118,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	    	// Set values
             $this->args = wp_parse_args( $args, $defaults );
 
-			if ( empty( $this->dir ) ) {
-            	$this->dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-            	$this->url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->dir ) );
+			if ( empty( $this->path ) ) {
+            	$this->path = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+            	$this->url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->path ) );
             }
 
             if ( $this->args['global_variable'] !== false ) {
@@ -147,9 +147,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
 			// Register extensions
-            //add_action( 'init', array( &$this, '_register_extensions' ), 20 );
-            $this->_register_extensions();
+            add_action( 'init', array( &$this, '_register_extensions' ), 20 );
 
+            // Any dynamic CSS output, let's run
+            add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ) );
 
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
@@ -641,8 +642,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             add_action( 'admin_print_styles-' . $this->page, array( &$this, '_enqueue' ) );
+            
             add_action( 'load-' . $this->page, array( &$this, '_load_page' ) );
         }
+
+        /**
+         * Enqueue CSS/JS for options page
+         *
+         * @since       1.0.0
+         * @access      public
+         * @global      $wp_styles
+         * @return      void
+         */
+        public function _enqueue_output() {
+            echo "Echo output!";
+        }        
 
         /**
          * Enqueue CSS/JS for options page
@@ -1076,7 +1090,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$extension_class = 'ReduxFramework_Extension_' . $folder;
 
                 if( !class_exists( $extension_class ) ) {
-                    $class_file = apply_filters( 'redux-extensionclass-load', $this->dir . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class );
+                    $class_file = apply_filters( 'redux-extensionclass-load', $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class );
 
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
@@ -1692,7 +1706,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $_render = apply_filters('redux-field-'.$this->args['opt_name'],ob_get_contents(),$field);
                     ob_end_clean();
                     //$_render = apply_filters('redux-field-'.$this->args['opt_name'],$_render,$field);
-                    echo $_render;
+                    
+					echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field redux-container-'.$field['type'].'" data-id="'.$field['id'].'">';
+	                    echo $_render;
+
+	                    if (!empty($field['desc'])) {
+	                    	$field['description'] = $field['desc'];
+	                    }
+                    
+                    echo ( isset( $field['description'] ) && !empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
+
+                    echo '</fieldset>';
 
                     do_action( 'redux-after-field-' . $this->args['opt_name'], $field, $value );
                 }

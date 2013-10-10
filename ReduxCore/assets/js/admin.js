@@ -15,16 +15,14 @@ var confirmOnPageExit = function(e) {
 	};
 
 function verify_fold(item) {
+	
 	jQuery(document).ready(function($) {
 		
 		if (item.hasClass('redux-info') || item.hasClass('redux-typography')) {
 			return;
 		}
 
-		var id = item.attr('id');
-		if (item.hasClass('ui-helper-hidden-accessible')) {
-			id = item.attr('id');
-		}
+		var id = item.parents('.redux-field:first').data('id');
 		//console.log(id);
 		var itemVal = item.val();
 
@@ -340,7 +338,7 @@ jQuery(document).ready(function($) {
 	jQuery( ".fold" ).promise().done(function() {
 		// Hide the fold elements on load
 		jQuery('.foldParent').each(function() {
-			var id = jQuery(this).attr('id');
+			var id = jQuery(this).parents('.redux-field:first').data('id');
 			if ( redux_opts.folds[ id ] ) {
 				if ( !redux_opts.folds[ id ].parent  ) {
 					verify_fold( jQuery( this ) );

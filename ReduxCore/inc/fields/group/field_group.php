@@ -120,7 +120,7 @@ if (!class_exists('ReduxFramework_group')) {
             echo '</div><a href="javascript:void(0);" class="button redux-groups-add button-primary" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][slide_title][]">' . __('Add', 'redux-framework') .' '.$this->field['groupname']. '</a><br/>';
 
             echo '</div>';
-            echo ( isset($this->field['desc']) && !empty($this->field['desc']) ) ? '<div class="description">' . $this->field['desc'] . '</div>' : '';
+            
         }
 
         function support_multi($content, $field, $sort) {

@@ -84,7 +84,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
 		if ($this->field['font-family'] === true):
         
-	        echo '<fieldset id="'.$this->field['id'].'" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
+	        echo '<div id="'.$this->field['id'].'" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
 
     	        /**
     	        Font Family
@@ -287,9 +287,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
                 echo '<p class="'.$this->field['id'].'_previewer typography-preview" '. $g_size .'>'. $g_text .'</p>';
                 
-
-                echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
-            echo "</fieldset>";
+            echo "</div>";
         endif;
 
     }//function

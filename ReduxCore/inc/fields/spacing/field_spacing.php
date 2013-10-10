@@ -70,7 +70,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 			$this->field['mode'] = $this->field['mode']."-";
 		}
 		
-	  	echo '<fieldset id="'.$this->field['id'].'" class="redux-spacing-container">';
 
 			/**
 			Top
@@ -146,7 +145,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 
 
 
-	  	echo "</fieldset>";
 
 
 	}//function

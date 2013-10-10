@@ -73,7 +73,7 @@ class ReduxFramework_sortable {
                 echo '</li>';
             }
             echo '</ul>';
-            echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<div class="description">'.$this->field['desc'].'</div>':'';
+            
         echo "</fieldset>";
     }
 
