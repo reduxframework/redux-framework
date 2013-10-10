@@ -357,9 +357,6 @@ class ReduxFramework_typography extends ReduxFramework{
       endif;
       if ( !empty( $this->value['font-style'] ) ) :
         $data['font-style'] = str_replace( '-', '', $this->value['font-style'] );
-        if (!empty($data['font-weight'])) {
-          $data['link'] .=',';
-        }
         $data['link'] .= $this->value['font-style'];
       endif;      
 
@@ -378,7 +375,52 @@ class ReduxFramework_typography extends ReduxFramework{
           global $wp_styles;
 
           if ( !empty( $wp_styles->registered['redux-google-fonts'] ) ) {
-              $wp_styles->registered['redux-google-fonts']->src = $wp_styles->registered['redux-google-fonts']->src.'|'.$font['link'];
+              if (strpos($wp_styles->registered['redux-google-fonts']->src,$font['font-family'].':') !== false ||
+                strpos($wp_styles->registered['redux-google-fonts']->src,$font['font-family'].'|') !== false) {
+                $fonts = str_replace('http://fonts.googleapis.com/css?family=', '', $wp_styles->registered['redux-google-fonts']->src."|".$font['link']);
+                $fonts = explode('|', $fonts);
+                $theFonts = array();
+                foreach($fonts as $aFont) {
+                  $family = "";
+                  $styles = array();
+                  if (strpos($aFont, ':') !== false) {
+                    $getFamily = explode(":", $aFont);
+                    $family = $getFamily[0];
+                  }
+                  if (empty($family)) {
+                    $family = $aFont;
+                  } else {
+                    $styles = str_replace($family.':', "", $aFont);
+                  }
+
+                  if (empty($theFonts[$family])) {
+                    $theFonts[$family] = array();
+                  }
+
+                  if(!in_array($styles, $theFonts[$family] ) ) {
+                    $theFonts[$family][] = $styles;
+                  }
+                }
+                $url = "";
+                foreach ($theFonts as $k=>$v) {
+                  if (!empty($url)) {
+                    $url .= "|";
+                  }
+                  $url .= $k;
+                  if (!empty($v)) {
+                    $url .= ":";
+                    $styles = "";
+                    foreach ($v as $tV) {
+                      if (!empty($styles)) {
+                        $styles .= ",";
+                      }
+                      $styles .= $tV;
+                    }
+                    $url .= $styles;
+                  }
+                }
+              }
+              $wp_styles->registered['redux-google-fonts']->src = 'http://fonts.googleapis.com/css?family='.$url;
           } else {
             wp_register_style( 'redux-google-fonts', 'http://fonts.googleapis.com/css?family='.$font['link'] );
             wp_enqueue_style( 'redux-google-fonts' );  
