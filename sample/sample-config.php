@@ -468,6 +468,7 @@ function setup_framework_options(){
 				'title' => __('Typography', 'redux-framework'),
 				//'compiler'=>true, // Use if you want to hook in your own CSS compiler
 				'google'=>true, // Disable google fonts. Won't work if you haven't defined your google api key
+				'font-backup'=>true, // Select a backup non-google font in addition to a google font
 				//'font-style'=>false, // Includes font-style and weight. Can use font-style or font-weight to declare
 				//'subsets'=>false, // Only appears if google is true and subsets not set to false
 				//'font-size'=>false,

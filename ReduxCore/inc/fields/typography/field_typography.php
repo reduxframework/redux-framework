@@ -27,8 +27,6 @@ class ReduxFramework_typography extends ReduxFramework{
      */
     function render(){
 
-        //print_r($this->field);
-
         global $wp_filesystem;
 
         // Initialize the Wordpress filesystem, no more using file_put_contents function
@@ -69,10 +67,6 @@ class ReduxFramework_typography extends ReduxFramework{
         );
 
         $this->value = wp_parse_args( $this->value, $defaults );
-
-        if(!empty($this->field['default'])) {
-            $this->value = wp_parse_args( $this->value, $this->field['default'] );
-        }
 
         if (empty($this->field['units']) && !empty($this->field['default']['units'])) {
             $this->field['units'] = $this->field['default']['units'];
@@ -242,6 +236,25 @@ class ReduxFramework_typography extends ReduxFramework{
             	echo '<input type="hidden" class="typography-letter-spacing" name="'.$this->args['opt_name'].'['.$this->field['id'].'][letter-spacing]" value="'.$this->value['letter-spacing'].'" data-id="'.$this->field['id'].'"  />';
             endif;
 
+            
+            /**
+            Backup Font
+             **/
+            if ($this->field['font-family'] === true && $this->field['google'] === true) { 
+              // Set a flag so we know to set a header style or not
+                echo '<input type="hidden" class="redux-typography-google'.$this->field['class'].'" id="'.$this->field['id'].'-google" name="'.$this->args['opt_name'].'['.$this->field['id'].'][google]" type="text" value="'. $this->field['google'] .'" data-id="'.$this->field['id'].'" data-id="'.$this->field['id'].'"  />';            
+            
+                if ($this->field['font-backup'] === true) {
+                  echo '<div class="select_wrapper typography-family-backup" style="width: 220px; margin-right: 5px;">';
+                  echo '<select data-placeholder="'.__('Backup Font Family','redux-framework').'" class="redux-typography redux-typography-family-backup '.$this->field['class'].'" id="'.$this->field['id'].'-family-backup" data-id="'.$this->field['id'].'" data-value="'.$family[1].'">';
+                  echo '<option data-google="false" data-details="" value=""></option>';
+                  foreach ($this->field['fonts'] as $i=>$family) {
+                      echo '<option data-google="true" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($fontFamily[1], $i, false) . '>'. $family .'</option>';
+                  }
+                  echo '</select></div>';               
+                }
+            }
+
             /**
             Font Color
              **/
@@ -255,20 +268,6 @@ class ReduxFramework_typography extends ReduxFramework{
                 echo '<div id="' . $this->field['id'] . '_color_picker" class="colorSelector typography-color"><div style="background-color: '.$this->value['color'].'"></div></div>';
                 echo '<input data-default-color="'.$default.'" class="redux-color redux-typography-color'.$this->field['class'].'" original-title="'.__('Font color','redux-framework').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
             endif;
-
-            if ($this->field['font-family'] === true && $this->field['google'] === true) { 
-            	// Set a flag so we know to set a header style or not
-                echo '<input type="hidden" class="redux-typography-google'.$this->field['class'].'" id="'.$this->field['id'].'-google" name="'.$this->args['opt_name'].'['.$this->field['id'].'][google]" type="text" value="'. $this->field['google'] .'" data-id="'.$this->field['id'].'" data-id="'.$this->field['id'].'"  />';            
-                if ($this->field['font-backup'] === true) {
-    				echo '<div class="select_wrapper typography-family-backup" style="width: 220px; margin-right: 5px;">';
-    	            echo '<select data-placeholder="'.__('Backup Font Family','redux-framework').'" class="redux-typography redux-typography-family-backup '.$this->field['class'].'" id="'.$this->field['id'].'-family-backup" data-id="'.$this->field['id'].'" data-value="'.$family[1].'">';
-    	            echo '<option data-google="false" data-details="" value=""></option>';
-    				foreach ($this->field['fonts'] as $i=>$family) {
-    	                echo '<option data-google="true" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($fontFamily[1], $i, false) . '>'. $family .'</option>';
-    	            }
-    	            echo '</select></div>';	            	
-                }
-            }
 
             /**
             Font Preview
@@ -346,7 +345,13 @@ class ReduxFramework_typography extends ReduxFramework{
      */
 
     function getGoogleScript() {
-      $data['link'] = str_replace( ' ', '+', $this->value['font-family'] );
+      if (strpos($this->value['font-family'], ',') !== false) {
+        $family = explode(",", $this->value['font-family']);
+        $data['link'] = str_replace( ' ', '+', $family[0] );
+      } else {
+        $data['link'] = str_replace( ' ', '+', $this->value['font-family'] );
+      }
+      
       $data['font-family'] = $data['link'];
       if ( !empty( $this->value['font-weight'] ) || !empty( $this->value['font-weight'] ) ) {
         $data['link'] .= ':';
@@ -429,7 +434,7 @@ class ReduxFramework_typography extends ReduxFramework{
                 return;
             }
             foreach($this->value as $key=>$value) {
-                if ( $key == "google" || empty( $value ) ) {
+                if ( $key == "google" || $key == "font-backup" || empty( $value ) ) {
                     continue;
                 }
                 $style .= $key.': '.$value.'; ';
