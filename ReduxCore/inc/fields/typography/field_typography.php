@@ -394,10 +394,13 @@ class ReduxFramework_typography extends ReduxFramework{
               $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );
               $newOutCSS = '';
               foreach( $font as $key=>$value) {
-                  if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
-                      continue;
-                  }
-                  $newOutCSS .= $key.': '.$value.';';
+                if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
+                  $value = "normal";
+                }
+                if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
+                    continue;
+                }
+                $newOutCSS .= $key.': '.$value.';';
               }
               if ( !empty( $newOutCSS) ) {
                 $outCSS .= $keys."{".$newOutCSS.'}';
@@ -419,7 +422,7 @@ class ReduxFramework_typography extends ReduxFramework{
                   if ( empty( $fonts[$font['font-family']]['font-style'] ) || !in_array( $style, $fonts[$font['font-family']]['font-style'] ) ) {
                     $fonts[$font['font-family']]['font-style'][] = $style;
                   }                      
-                } 
+                }
                 if ( !empty( $font['subsets'] ) ) {
                   if ( empty( $fonts[$font['font-family']]['subset'] ) || !in_array( $font['subsets'], $fonts[$font['font-family']]['subset'] ) ) {
                     $fonts[$font['font-family']]['subset'][] = $font['subsets'];
