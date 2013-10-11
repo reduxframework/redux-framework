@@ -400,14 +400,14 @@ class ReduxFramework_typography extends ReduxFramework{
                 if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
                     continue;
                 }
-                $newOutCSS .= $key.': '.$value.';';
+                $newOutCSS .= $key.':'.$value.';';
               }
               if ( !empty( $newOutCSS) ) {
                 $outCSS .= $keys."{".$newOutCSS.'}';
               }               
               
               // Google only stuff!
-              if ( filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+              if ( !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
                 $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
                 if ( empty( $fonts[$font['font-family']] ) ) {
                   $fonts[$font['font-family']] = array();  
