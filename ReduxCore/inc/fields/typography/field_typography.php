@@ -369,15 +369,17 @@ class ReduxFramework_typography extends ReduxFramework{
     }   
 
     function output() {
-        if (!empty($this->value['google']) && $this->value['google'] == true) {
+
+        if (!empty($this->value['google']) && filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN)) {
+          
           $font = $this->getGoogleScript();
 
           global $wp_styles;
-
-          if ( !empty( $wp_styles->registered['redux-google-fonts'] ) ) {
+          
               if (strpos($wp_styles->registered['redux-google-fonts']->src,$font['font-family'].':') !== false ||
-                strpos($wp_styles->registered['redux-google-fonts']->src,$font['font-family'].'|') !== false) {
-                $fonts = str_replace('http://fonts.googleapis.com/css?family=', '', $wp_styles->registered['redux-google-fonts']->src."|".$font['link']);
+                strpos($wp_styles->registered['redux-google-fonts']->src,$font['font-family'].'|') !== false ||
+                !empty( $wp_styles->registered['redux-google-fonts'] ) ) {
+                $fonts = str_replace('//fonts.googleapis.com/css?family=', '', $wp_styles->registered['redux-google-fonts']->src."|".$font['link']);
                 $fonts = explode('|', $fonts);
                 $theFonts = array();
                 foreach($fonts as $aFont) {
@@ -408,21 +410,14 @@ class ReduxFramework_typography extends ReduxFramework{
                   }
                   $url .= $k;
                   if (!empty($v)) {
-                    $url .= ":";
-                    $styles = "";
-                    foreach ($v as $tV) {
-                      if (!empty($styles)) {
-                        $styles .= ",";
-                      }
-                      $styles .= $tV;
-                    }
-                    $url .= $styles;
+                    $url .= ":".implode(",", $v);
                   }
                 }
-              }
-              $wp_styles->registered['redux-google-fonts']->src = 'http://fonts.googleapis.com/css?family='.$url;
+              
+
+              $wp_styles->registered['redux-google-fonts']->src = '//fonts.googleapis.com/css?family='.$url;
           } else {
-            wp_register_style( 'redux-google-fonts', 'http://fonts.googleapis.com/css?family='.$font['link'] );
+            wp_register_style( 'redux-google-fonts', '//fonts.googleapis.com/css?family='.$font['link'] );
             wp_enqueue_style( 'redux-google-fonts' );  
           }
         }
@@ -441,7 +436,7 @@ class ReduxFramework_typography extends ReduxFramework{
             }
             $style .= '}';
         $style .= '</style>';
-        echo $style;        
+        echo $style;  
  
     }
 
