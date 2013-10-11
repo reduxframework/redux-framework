@@ -625,7 +625,7 @@ function setup_framework_options(){
 				),												
 			array(
 				'id'=>'body-font2',
-				'type' => '',
+				'type' => 'typography',
 				'title' => __('Body Font', 'redux-framework'),
 				'subtitle' => __('Specify the body font properties.', 'redux-framework'),
 				'google'=>true,
