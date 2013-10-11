@@ -481,10 +481,10 @@ function setup_framework_options(){
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
 					'color'=>"#333", 
-					'style'=>'700', 
-					'family'=>'Courier, monospace', 
-					'size'=>33, 
-					'height'=>'40'),
+					'font-style'=>'700', 
+					'font-family'=>'Courier, monospace', 
+					'font-size'=>33, 
+					'line-height'=>'40'),
 				),	
 			),
 		);
@@ -625,7 +625,7 @@ function setup_framework_options(){
 				),												
 			array(
 				'id'=>'body-font2',
-				'type' => 'typography',
+				'type' => '',
 				'title' => __('Body Font', 'redux-framework'),
 				'subtitle' => __('Specify the body font properties.', 'redux-framework'),
 				'google'=>true,
