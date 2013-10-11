@@ -477,13 +477,13 @@ function setup_framework_options(){
 				//'color'=>false,
 				//'preview'=>false, // Disable the previewer
 				'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to
-				'units'=>'em',				
+				'units'=>'px',				
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
 					'color'=>"#333", 
 					'font-style'=>'700', 
 					'font-family'=>'Courier, monospace', 
-					'font-size'=>33, 
+					'font-size'=>'33px', 
 					'line-height'=>'40'),
 				),	
 			),
@@ -631,7 +631,7 @@ function setup_framework_options(){
 				'google'=>true,
 				'default' => array(
 					'color'=>'#dd9933',
-					'font-size'=>30,
+					'font-size'=>'30px',
 					'font-family'=>'Arial, Helvetica, sans-serif',
 					'font-weight'=>'Normal',
 					),
