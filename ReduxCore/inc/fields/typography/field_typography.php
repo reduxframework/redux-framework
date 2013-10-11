@@ -390,7 +390,7 @@ class ReduxFramework_typography extends ReduxFramework{
               $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );
               $newOutCSS = '';
               foreach( $font as $key=>$value) {
-                  if ( $key == "google" || $key == "font-backup" || empty( $value ) ) {
+                  if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
                       continue;
                   }
                   $newOutCSS .= $key.': '.$value.';';
