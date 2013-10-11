@@ -390,6 +390,10 @@ class ReduxFramework_typography extends ReduxFramework{
 
               $font = $this->parent->options[$field['id']];
 
+              if (empty($font['font-family'])) {
+                continue;
+              }
+
               $keys = implode(",", $field['output']);
               $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );
               $newOutCSS = '';
