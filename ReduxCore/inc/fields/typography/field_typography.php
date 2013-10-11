@@ -438,7 +438,7 @@ class ReduxFramework_typography extends ReduxFramework{
         $version = $this->parent->options['REDUX_last_saved'];
       }
 
-      if ( !empty( $fonts ) && !filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+      if ( !empty( $fonts ) && !empty( $this->parent->options[$field['id']]['google'] ) && !filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
         wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
         wp_enqueue_style( 'redux-google-fonts' ); 
       }
