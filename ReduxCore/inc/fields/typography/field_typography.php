@@ -344,22 +344,26 @@ class ReduxFramework_typography extends ReduxFramework{
      */
     function makeGoogleWebfontLink($fonts) {
       $link = "";
+      $subset = "";
       foreach($fonts as $family=>$font) {
         if (!empty($link)) {
           $link .= "|"; // Append a new font to the string
         }
         $link .= $family;
 
-        if ( !empty( $font['font-style'] ) || !empty( $font['font-subset'] ) ) {
+        if ( !empty( $font['font-style'] ) ) {
           $link .= ':';
           if ( !empty($font['font-style'] ) ) {
             $link .= implode(',', $font['font-style']);
           }
-          if ( !empty( $font['subset'] ) ) {
-            $link .= '&subset='.implode(',', $font['subset']);
-          }
         }
-      }   
+        if ( !empty( $font['subset'] ) ) {
+          $subset .= '&subset='.implode(',', $font['subset']);
+        }        
+      }
+      if (!empty($subset)) {
+        $link .= "&subset=".$subset;
+      }
 
       return '//fonts.googleapis.com/css?family='.$link;
 
@@ -430,6 +434,7 @@ class ReduxFramework_typography extends ReduxFramework{
       if (!empty($this->parent->options['REDUX_last_saved'])) {
         $version = $this->parent->options['REDUX_last_saved'];
       }
+      print_r($fonts);
 
       if ( !empty( $fonts ) && !filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
         wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
