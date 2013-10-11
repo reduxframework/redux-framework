@@ -109,6 +109,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
             $defaults['customizer'] 		= true; // setting to true forces get_theme_mod_expanded
 			$defaults['global_variable'] 	= '';
+			$defaults['output'] 			= true; // Dynamically generate CSS
             /** @noinspection PhpUndefinedConstantInspection */
             $defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
@@ -216,6 +217,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 * @param mixed $value the value of the option being added
 		 */
 		function set_options( $value = '' ) {
+			$value['REDUX_last_saved'] = time();
 			if( !empty($value) ) {
 				if ( $this->args['database'] === 'transient' ) {
 					set_transient( $this->args['opt_name'] . '-transient', $value, $this->args['transient_time'] );
@@ -516,6 +518,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _set_default_options() {
+
 		    // Get args
 		    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
 
@@ -991,6 +994,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _register_setting() {
+
             register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array( &$this,'_validate_options' ) );
 
             if( is_null( $this->sections ) ) return;
