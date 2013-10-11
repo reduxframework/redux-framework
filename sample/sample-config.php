@@ -477,7 +477,7 @@ function setup_framework_options(){
 				//'color'=>false,
 				//'preview'=>false, // Disable the previewer
 				'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
-				'units'=>'px',				
+				'units'=>'px', // Defaults to px
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
 					'color'=>"#333", 
