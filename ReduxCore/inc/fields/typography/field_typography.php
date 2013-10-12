@@ -346,7 +346,7 @@ class ReduxFramework_typography extends ReduxFramework{
      */
     function makeGoogleWebfontLink($fonts) {
       $link = "";
-      $subset = "";
+      $subsets = array();
       foreach($fonts as $family=>$font) {
         if (!empty($link)) {
           $link .= "|"; // Append a new font to the string
@@ -360,11 +360,16 @@ class ReduxFramework_typography extends ReduxFramework{
           }
         }
         if ( !empty( $font['subset'] ) ) {
-          $subset .= '&subset='.implode(',', $font['subset']);
-        }        
+          foreach($font['subset'] as $subset) {
+            if ( !in_array( $subset, $subsets) ) {
+              array_push($subsets, $subset);
+            }  
+          }
+          
+        }
       }
-      if (!empty($subset)) {
-        $link .= "&subset=".$subset;
+      if (!empty($subsets)) {
+        $link .= "&subset=".implode(',', $subsets);
       }
 
       return '//fonts.googleapis.com/css?family='.$link;
@@ -436,6 +441,7 @@ class ReduxFramework_typography extends ReduxFramework{
           }
         }
       } // Typography not set
+
       $version = '';
       if (!empty($this->parent->options['REDUX_last_saved'])) {
         $version = $this->parent->options['REDUX_last_saved'];
