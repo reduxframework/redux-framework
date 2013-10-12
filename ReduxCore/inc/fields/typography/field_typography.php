@@ -85,10 +85,13 @@ class ReduxFramework_typography extends ReduxFramework{
             
             	if ( $this->value['google'] === true || $this->value['google'] === "true" ) {
     	        	$fontFamily = explode(', ', $this->value['font-family'],2);
-    	        	if (empty($fontFamily[0])) {
+    	        	if (empty($fontFamily[0]) && !empty($fontFamily[1])) {
     	        		$fontFamily[0] = $fontFamily[1];
     	        		$fontFamily[1] = "";
-    	        	}      		
+    	        	} else {
+                  $fontFamily[0] = "";
+                  $fontFamily[1] = "";
+                }    		
             	} else {
             		$fontFamily = array();
             		$fontFamily[0] = $this->value['font-family'];
