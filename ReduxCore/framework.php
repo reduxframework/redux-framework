@@ -672,8 +672,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	                                    /** @noinspection PhpIncludeInspection */
 	                                    require_once( $class_file );
 	                                }
-	                            }	                            
-	                            if( class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
+	                            }	   
+	                            if( !empty( $field['output'] ) && !empty( $this->parent->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
 	                            	if ( !is_array( $field['output'] ) ) {
                     					$field['output'] = array( $field['output'] );
                     				}

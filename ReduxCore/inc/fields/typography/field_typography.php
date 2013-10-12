@@ -384,9 +384,6 @@ class ReduxFramework_typography extends ReduxFramework{
         if( isset( $section['fields'] ) ) {
           foreach( $section['fields'] as $field ) {
             if( isset( $field['type'] ) && $field['type'] == "typography" ) {
-              if ( empty( $this->parent->options[$field['id']] ) || empty( $field['output'] ) ) {
-                continue; // There are no saved values
-              }
 
               $font = $this->parent->options[$field['id']];
 
@@ -442,7 +439,7 @@ class ReduxFramework_typography extends ReduxFramework{
         $version = $this->parent->options['REDUX_last_saved'];
       }
 
-      if ( !empty( $fonts ) && !empty( $this->parent->options[$field['id']]['google'] ) && !filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+      if ( !empty( $fonts ) && isset( $this->parent->options[$field['id']]['google'] ) && !filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
         wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
         wp_enqueue_style( 'redux-google-fonts' ); 
       }
