@@ -672,13 +672,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	                                    /** @noinspection PhpIncludeInspection */
 	                                    require_once( $class_file );
 	                                }
-	                            }	   
-	                            if( !empty( $field['output'] ) && !empty( $this->parent->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
+	                            }	
+
+	                            if( !empty( $field['output'] ) && ( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) ) {
 	                            	if ( !is_array( $field['output'] ) ) {
                     					$field['output'] = array( $field['output'] );
                     				}
 									$value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
-                    	
                     				$enqueue = new $field_class( $field, $value, $this );
 	                                $enqueue->output = $field['output'];
 	                                $enqueue->output();

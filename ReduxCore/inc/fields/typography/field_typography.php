@@ -83,13 +83,13 @@ class ReduxFramework_typography extends ReduxFramework{
     	        Font Family
     	         **/
             
-            	if ( $this->value['google'] === true || $this->value['google'] === "true" ) {
+            	if ( filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN) ) {
     	        	$fontFamily = explode(', ', $this->value['font-family'],2);
     	        	if (empty($fontFamily[0]) && !empty($fontFamily[1])) {
     	        		$fontFamily[0] = $fontFamily[1];
     	        		$fontFamily[1] = "";
     	        	} else {
-                  $fontFamily[0] = "";
+                  $fontFamily[0] = $this->value['font-family'];
                   $fontFamily[1] = "";
                 }    		
             	} else {
@@ -374,6 +374,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
     function output() {
       global $wp_styles;
+
       if ( !empty( $this->parent->fieldTypographySet ) ) {
         return; // We only run this function once!
       }
@@ -386,16 +387,15 @@ class ReduxFramework_typography extends ReduxFramework{
       foreach( $this->sections as $section ) {
         if( isset( $section['fields'] ) ) {
           foreach( $section['fields'] as $field ) {
-            if( isset( $field['type'] ) && $field['type'] == "typography" ) {
+            if( isset( $field['type'] ) && $field['type'] == "typography" && !empty( $field['output'] ) ) {
 
               $font = $this->parent->options[$field['id']];
-
-              if (empty($font['font-family'])) {
-                continue;
-              }
-
               $keys = implode(",", $field['output']);
-              $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );
+
+              if ( !empty( $font['font-family'] ) ) {
+                $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );  
+              }
+              
               $newOutCSS = '';
               foreach( $font as $key=>$value) {
                 if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
@@ -411,7 +411,7 @@ class ReduxFramework_typography extends ReduxFramework{
               }               
               
               // Google only stuff!
-              if ( !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+              if ( !empty($font['font-family']) && !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
                 $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
                 if ( empty( $fonts[$font['font-family']] ) ) {
                   $fonts[$font['font-family']] = array();  
@@ -442,7 +442,7 @@ class ReduxFramework_typography extends ReduxFramework{
         $version = $this->parent->options['REDUX_last_saved'];
       }
 
-      if ( !empty( $fonts ) && isset( $this->parent->options[$field['id']]['google'] ) && !filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+      if ( !empty( $fonts ) && filter_var($this->parent->args['output'], FILTER_VALIDATE_BOOLEAN) ) {
         wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
         wp_enqueue_style( 'redux-google-fonts' ); 
       }
