@@ -405,7 +405,7 @@ class ReduxFramework_typography extends ReduxFramework{
                   if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
                     $value = "normal";
                   }
-                  if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
+                  if ( $key == "google" || $key == "subsets" || empty( $value ) ) {
                       continue;
                   }
                   $newOutCSS .= $key.':'.$value.';';
