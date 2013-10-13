@@ -382,7 +382,6 @@ class ReduxFramework_typography extends ReduxFramework{
       if ( !empty( $this->parent->fieldTypographySet ) ) {
         return; // We only run this function once!
       }
-
       
       $this->parent->fieldTypographySet = true;
 
@@ -391,31 +390,33 @@ class ReduxFramework_typography extends ReduxFramework{
       foreach( $this->sections as $section ) {
         if( isset( $section['fields'] ) ) {
           foreach( $section['fields'] as $field ) {
-            if( isset( $field['type'] ) && $field['type'] == "typography" && !empty( $field['output'] ) ) {
+            if( isset( $field['type'] ) && $field['type'] == "typography" ) {
 
               $font = $this->parent->options[$field['id']];
-              $keys = implode(",", $field['output']);
-
+              
               if ( !empty( $font['font-family'] ) ) {
                 $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );  
               }
-              
-              $newOutCSS = '';
-              foreach( $font as $key=>$value) {
-                if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
-                  $value = "normal";
+
+              if ( !empty( $field['output'] ) ) : // Don't create dynamic CSS if output array is not set
+                $keys = implode(",", $field['output']);
+                $newOutCSS = '';
+                foreach( $font as $key=>$value) {
+                  if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
+                    $value = "normal";
+                  }
+                  if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
+                      continue;
+                  }
+                  $newOutCSS .= $key.':'.$value.';';
                 }
-                if ( $key == "google" || $key == "font-backup" || $key == "subsets" || empty( $value ) ) {
-                    continue;
-                }
-                $newOutCSS .= $key.':'.$value.';';
-              }
-              if ( !empty( $newOutCSS) ) {
-                $outCSS .= $keys."{".$newOutCSS.'}';
-              }               
+                if ( !empty( $newOutCSS) ) {
+                  $outCSS .= $keys."{".$newOutCSS.'}';
+                }                 
+              endif;
               
               // Google only stuff!
-              if ( !empty($font['font-family']) && !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+              if ( !empty( $this->parent->args['google_api_key'] ) && !empty($font['font-family']) && !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
                 $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
                 if ( empty( $fonts[$font['font-family']] ) ) {
                   $fonts[$font['font-family']] = array();  

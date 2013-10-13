@@ -54,6 +54,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         protected $framework_url        = 'http://www.reduxframework.com/';
         protected $framework_version    = REDUX_VERSION;
 
+        public $instance			= null;
+
         // Public vars
         public $page                = '';
         public $args                = array();
@@ -149,7 +151,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
 			// Register extensions
-            add_action( 'init', array( &$this, '_register_extensions' ), 20 );
+            add_action( 'init', array( &$this, '_register_extensions' ), 2 );
 
             // Any dynamic CSS output, let's run
             add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 100 );
@@ -157,6 +159,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
+        }
+
+        public function get_instance() {
+        	return $this->instance;
         }
 
         /**
@@ -519,6 +525,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _set_default_options() {
 
+        	$this->instance = $this;
+
 		    // Get args
 		    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
 
@@ -663,28 +671,25 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
-                    	if ( !empty( $field['output'] ) ) {
-							if( isset( $field['type'] ) ) {
-	                            $field_class = 'ReduxFramework_' . $field['type'];
-	                            if( !class_exists( $field_class ) ) {
-	                                $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
-	                                if( $class_file ) {
-	                                    /** @noinspection PhpIncludeInspection */
-	                                    require_once( $class_file );
-	                                }
-	                            }	
+						if( isset( $field['type'] ) ) {
+                            $field_class = 'ReduxFramework_' . $field['type'];
+                            if( !class_exists( $field_class ) ) {
+                                $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                                if( $class_file ) {
+                                    /** @noinspection PhpIncludeInspection */
+                                    require_once( $class_file );
+                                }
+                            }	
 
-	                            if( !empty( $field['output'] ) && ( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) ) {
-	                            	if ( !is_array( $field['output'] ) ) {
-                    					$field['output'] = array( $field['output'] );
-                    				}
-									$value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
-                    				$enqueue = new $field_class( $field, $value, $this );
-	                                $enqueue->output = $field['output'];
-	                                $enqueue->output();
-	                            }
-	                        }
-                    	}        	
+                            if( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
+                            	if ( !empty($field['output']) && !is_array( $field['output'] ) ) {
+                					$field['output'] = array( $field['output'] );
+                				}
+								$value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
+                				$enqueue = new $field_class( $field, $value, $this );
+                                $enqueue->output();
+                            }
+                        }       	
                     }
                 }
             }
@@ -1116,7 +1121,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @access      public
          * @return      void
          */
-        public function _register_extensions() {
+        public function _register_extensions() {        	
         	
         	$path = dirname( __FILE__ ) . '/extensions';
 			$folders = scandir( $path, 1 );		   
@@ -1763,3 +1768,4 @@ if( !class_exists( 'ReduxFramework' ) ) {
         } // function
     } // class
 } // if
+
