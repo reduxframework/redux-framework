@@ -74,7 +74,7 @@
                 	case '=':
                     case 'equals':
                     	//if value was array
-                    	if (value2.indexOf('|') !== -1){
+                    	if (value2.toString().indexOf('|') !== -1){
                     		var value2_array = value2.split('|');
                     		if($.inArray( value1, value2_array ) != -1){
                     			show = true;
@@ -220,16 +220,19 @@ function verify_fold(item) {
 					
 					if ( theChildren[index].show === true ) {
 						//console.log('FadeIn '+index);
-						parent.removeClass('hiddenFold');
+						
 						parent.fadeIn('medium', function() {
+							parent.removeClass('hiddenFold');
 							if ( redux_opts.folds[ index ] && redux_opts.folds[ index ].children ) {
 								//verify_fold(jQuery('#'+index)); // Now iterate the children
 							}
 						});
+
 					} else if ( theChildren[index].hidden === false ) {
 						//console.log('FadeOut '+index);
-						parent.addClass('hiddenFold');
+						
 						parent.fadeOut('medium', function() {
+							parent.addClass('hiddenFold');
 							if ( redux_opts.folds[ index ].children ) {
 								//verify_fold(jQuery('#'+index)); // Now iterate the children
 							}
