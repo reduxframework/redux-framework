@@ -466,25 +466,26 @@ function setup_framework_options(){
 				'id'=>'typography6',
 				'type' => 'typography', 
 				'title' => __('Typography', 'redux-framework'),
-				'compiler'=>true,
+				//'compiler'=>true, // Use if you want to hook in your own CSS compiler
 				'google'=>true, // Disable google fonts. Won't work if you haven't defined your google api key
+				'font-backup'=>true, // Select a backup non-google font in addition to a google font
 				//'font-style'=>false, // Includes font-style and weight. Can use font-style or font-weight to declare
-				'subsets'=>false, // Only appears if google is true and subsets not set to false
+				//'subsets'=>false, // Only appears if google is true and subsets not set to false
 				//'font-size'=>false,
 				//'line-height'=>false,
 				//'word-spacing'=>true, // Defaults to false
 				//'letter-spacing'=>true, // Defaults to false
 				//'color'=>false,
 				//'preview'=>false, // Disable the previewer
-				'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to
-				'units'=>'em',				
+				'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
+				'units'=>'px', // Defaults to px
 				'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework'),
 				'default'=> array(
 					'color'=>"#333", 
-					'style'=>'700', 
-					'family'=>'Courier, monospace', 
-					'size'=>33, 
-					'height'=>'40'),
+					'font-style'=>'700', 
+					'font-family'=>'Courier, monospace', 
+					'font-size'=>'33px', 
+					'line-height'=>'40'),
 				),	
 			),
 		);
@@ -631,7 +632,7 @@ function setup_framework_options(){
 				'google'=>true,
 				'default' => array(
 					'color'=>'#dd9933',
-					'font-size'=>30,
+					'font-size'=>'30px',
 					'font-family'=>'Arial, Helvetica, sans-serif',
 					'font-weight'=>'Normal',
 					),
