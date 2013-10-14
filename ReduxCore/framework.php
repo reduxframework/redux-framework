@@ -70,6 +70,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		public $path 				= '';
 		public $output 				= array(); // Fields with CSS output selectors
 
+        public $fieldsValues        = array(); //all fields values in an id=>value array so we can check dependencies
+        public $fieldsHidden        = array(); //all fields that didnt pass the dependency test and are hidden
+
         /**
          * Class Constructor. Defines the args for the theme options class
          *
@@ -774,8 +777,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'redux-js',
-                //REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
-                REDUX_URL . 'assets/js/admin.min.js',
+                REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
+                //REDUX_URL . 'assets/js/admin.min.js',
                 array( 'jquery','jquery-cookie' ),
                 time(),
                 true
@@ -1746,12 +1749,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     
                     ob_start();
                     $render->render();
-                    //$_render = ob_get_contents();
                     $_render = apply_filters('redux-field-'.$this->args['opt_name'],ob_get_contents(),$field);
                     ob_end_clean();
-                    //$_render = apply_filters('redux-field-'.$this->args['opt_name'],$_render,$field);
-                    
-					echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field redux-container-'.$field['type'].'" data-id="'.$field['id'].'">';
+
+                    //save the values into a unique array in case we need it for dependencies
+                    $this->fieldsValues[$field['id']] = (isset($value['url']) && is_array($value) )?$value['url']:$value;
+                    //create default data und class string and checks the dependencies of an object
+                    extract($this->check_dependencies($field));
+
+					echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field redux-container-'.$field['type'].' '.$class_string.'" data-id="'.$field['id'].'" '.$data_string.'>';
 	                    echo $_render;
 
 	                    if (!empty($field['desc'])) {
@@ -1766,6 +1772,115 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
             }
         } // function
+
+        /**
+         * Checks dependencies between objects based on the $field['required'] array
+         *
+         * If the array is set it needs to have exactly 3 entries.
+         * The first entry describes which field should be monitored by the current field. eg: "content"
+         * The second entry describes the comparison parameter. eg: "equals, not, is_larger, is_smaller ,contains"
+         * The third entry describes the value that we are comparing against.
+         *
+         * Example: if the required array is set to array('content','equals','Hello World'); then the current
+         * field will only be displayed if the field with id "content" has exactly the value "Hello World"
+         * 
+         * @param array $field
+         * @return array $params
+         */
+        public function check_dependencies($field) {
+            $params = array('data_string' => "", 'class_string' => "");
+
+            if (!empty($field['required'])) {
+                $data['check-field'] = $field['required'][0];
+                $data['check-comparison'] = $field['required'][1];
+                $data['check-value'] = $field['required'][2];
+                $params['data_string'] = $this->create_data_string($data);
+                $return = false;
+                //required field must not be hidden. otherwise hide this one by default
+                if (!isset($this->fieldsHidden[$data['check-field']])) {
+                    if (isset($this->fieldsValues[$data['check-field']])) {
+                        //$value1 = isset($this->fieldsValues[$data['check-field']]['url'])?isset($this->fieldsValues[$data['check-field']]['url']):$this->fieldsValues[$data['check-field']];
+                        $value1 = $this->fieldsValues[$data['check-field']];
+                        $value2 = $data['check-value'];
+                        switch ($data['check-comparison']) {
+                            case '=': 
+                            case 'equals': 
+                                if(is_array($value2)){
+                                    if(in_array($value1, $value2))
+                                       $return = true;  
+                                }else{
+                                    if ($value1 == $value2)
+                                        $return = true; 
+                                }
+                                break;
+                            case '!=':    
+                            case 'not':
+                                if(is_array($value2)){
+                                    if(!in_array($value1, $value2))
+                                       $return = true;  
+                                }else{ 
+                                    if ($value1 != $value2)
+                                        $return = true; 
+                                }
+                                break;
+                            case '>':    
+                            case 'greater':    
+                            case 'is_larger': 
+                                if ($value1 > $value2)
+                                    $return = true; 
+                                break;
+                            case '<':
+                            case 'less':    
+                            case 'is_smaller': 
+                                if ($value1 < $value2)
+                                    $return = true; 
+                                break;
+                            case 'contains': 
+                                if (strpos($value1, $value2) !== false)
+                                    $return = true; 
+                                break;
+                            case 'doesnt_contain': 
+                                if (strpos($value1, $value2) === false)
+                                    $return = true; 
+                                break;
+                            case 'is_empty_or': 
+                                if (empty($value1) || $value1 == $value2)
+                                    $return = true; 
+                                break;
+                            case 'not_empty_and': 
+                                if (!empty($value1) && $value1 != $value2)
+                                    $return = true; 
+                                break;
+                        }
+                    }
+                }
+
+                if (!$return) {
+                    $params['class_string'] = ' hiddenFold ';
+                    $this->fieldsHidden[$field['id']] = true;
+                }else{
+                    $params['class_string'] = ' showFold ';
+                }
+            }
+            return $params;
+        }
+
+        /**
+         * converts an array into a html data string
+         *
+         * @param array $data example input: array('id'=>'true')
+         * @return string $data_string example output: data-id='true'
+         */
+        public function create_data_string($data = array()){
+            $data_string = "";
+            
+            foreach($data as $key=>$value){
+                if(is_array($value)) $value = implode("|",$value);
+                $data_string .= " data-$key='$value' ";
+            }
+        
+            return $data_string;
+        } 
     } // class
 } // if
 

@@ -1,4 +1,151 @@
 /*global jQuery, document, redux_opts, confirm, relid:true, console, jsonView */
+(function($){
+	'use strict';
+
+	$.redux = $.redux || {}
+
+	var the_body = $("body");
+
+	$(document).ready(function(){
+
+		$.redux.required();
+
+		the_body.on('check_dependencies', function(event,variable){		
+			$.redux.check_dependencies(event,variable);
+        });
+	});
+	
+	$.redux.required = function(){
+
+		// Hide the fold elements on load ,
+		// It's better to do this by PHP but there is no filter in tr tag , so is not possible
+		// we going to move each attributes we may need for folding to tr tag
+		jQuery('.hiddenFold , .showFold').each(function() {
+			var current 	= $(this), 
+            scope	        = current.parents('tr:eq(0)'),
+            check_data      = current.data();
+
+            if(current.hasClass('hiddenFold')){
+				scope.addClass('hiddenFold').attr('data-check-field' , check_data.checkField)
+					.attr('data-check-comparison' , check_data.checkComparison)
+					.attr('data-check-value' , check_data.checkValue).hide();
+				//we clean here, so we won't get confuse 	
+				current.removeClass('hiddenFold').removeAttr('data-check-field')
+					.removeAttr('data-check-comparison')
+					.removeAttr('data-check-value');	
+			}else{
+				scope.attr('data-check-field' , check_data.checkField)
+					.attr('data-check-comparison' , check_data.checkComparison)
+					.attr('data-check-value' , check_data.checkValue);
+				//we clean here, so we won't get confuse 	
+				current.removeClass('showFold').removeAttr('data-check-field')
+					.removeAttr('data-check-comparison')
+					.removeAttr('data-check-value');	
+			}
+		});
+
+		the_body.on('change', '#redux-main select, #redux-main radio, #redux-main input[type=checkbox], #redux-main input[type=hidden]', function(e){
+	        $.redux.check_dependencies(e,this);
+	        
+	    });
+	}
+
+	$.redux.check_dependencies = function(e,variable){
+		var current 	= $(variable),
+	        scope	= current.parents('#redux-main:eq(0)');
+ 
+        if(!scope.length) scope = the_body;
+
+        var id		= current.parents('fieldset:eq(0)').data('id'),
+        dependent	= scope.find('tr[data-check-field="'+id+'"]'), 
+        value1		= variable.value,
+        is_hidden	= current.parents('fieldset:eq(0)').is('.hiddenFold');
+		
+        if(!dependent.length) return;
+		
+        dependent.each(function(){
+            var current		= $(this), 
+            check_data	= current.data(), 
+            value2		= check_data.checkValue, 
+            show		= false;
+				
+            if(!is_hidden){
+                switch(check_data.checkComparison){
+                	case '=':
+                    case 'equals':
+                    	//if value was array
+                    	if (value2.indexOf('|') !== -1){
+                    		var value2_array = value2.split('|');
+                    		if($.inArray( value1, value2_array ) != -1){
+                    			show = true;
+                    		}
+                    	}else{
+                        	if(value1 == value2) 
+                        		show = true;
+                    	}
+                        break;
+                    case '!=':    
+                    case 'not':
+                    	//if value was array
+                    	if (value2.indexOf('|') !== -1){
+                    		var value2_array = value2.split('|');
+                    		if($.inArray( value1, value2_array ) == -1){
+                    			show = true;
+                    		}
+                    	}else{
+                        	if(value1 != value2) 
+                        		show = true;
+                    	}
+                        break;
+                    case '>':    
+                    case 'greater':    
+                    case 'is_larger':
+                        if(value1 >  value2) 
+                        	show = true;
+                        break;
+                    case '<':
+                    case 'less':    
+                    case 'is_smaller':
+                        if(value1 <  value2) 
+                        	show = true;
+                        break;
+                    case 'contains':
+                        if(value1.indexOf(value2) != -1) 
+                        	show = true;
+                        break;
+                    case 'doesnt_contain':
+                        if(value1.indexOf(value2) == -1) 
+                        	show = true;
+                        break;
+                    case 'is_empty_or':
+                        if(value1 == "" || value1 == value2) 
+                        	show = true;
+                        break;
+                    case 'not_empty_and':
+                        if(value1 != "" && value1 != value2) 
+                        	show = true;
+                        break;
+						
+						
+                }
+            }
+				
+            if(show == true && current.is('.hiddenFold')){
+                current.css({
+                    display:'none'
+                }).removeClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
+                current.slideDown(300);
+            }else if(show == false  && !current.is('.hiddenFold')){
+                current.css({
+                    display:''
+                }).addClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
+                current.slideUp(300);
+            }
+        });
+	}
+
+})(jQuery);
+
 jQuery.noConflict();
 var confirmOnPageExit = function(e) {
 		//return; // ONLY FOR DEBUGGING
@@ -18,6 +165,8 @@ function verify_fold(item) {
 	
 	jQuery(document).ready(function($) {
 		
+
+
 		if (item.hasClass('redux-info') || item.hasClass('redux-typography')) {
 			return;
 		}
@@ -74,7 +223,7 @@ function verify_fold(item) {
 						parent.removeClass('hiddenFold');
 						parent.fadeIn('medium', function() {
 							if ( redux_opts.folds[ index ] && redux_opts.folds[ index ].children ) {
-								verify_fold(jQuery('#'+index)); // Now iterate the children
+								//verify_fold(jQuery('#'+index)); // Now iterate the children
 							}
 						});
 					} else if ( theChildren[index].hidden === false ) {
@@ -82,7 +231,7 @@ function verify_fold(item) {
 						parent.addClass('hiddenFold');
 						parent.fadeOut('medium', function() {
 							if ( redux_opts.folds[ index ].children ) {
-								verify_fold(jQuery('#'+index)); // Now iterate the children
+								//verify_fold(jQuery('#'+index)); // Now iterate the children
 							}
 						});
 					}
@@ -94,12 +243,16 @@ function verify_fold(item) {
 }
 
 function redux_change(variable) {
+	//We need this for switch and image select fields , jquery dosn't catch it on fly
+	if(variable.is('input[type=hidden]') || jQuery(variable).parents('fieldset:eq(0)').is('.redux-container-image_select') )
+		jQuery('body').trigger('check_dependencies' , variable);
+		
 	if (variable.hasClass('compiler')) {
 		jQuery('#redux-compiler-hook').val(1);
 		//console.log('Compiler init');
 	}
 	if (variable.hasClass('foldParent')) {
-		verify_fold(variable);
+		//verify_fold(variable);
 	}
 	window.onbeforeunload = confirmOnPageExit;
 	if (jQuery(variable).hasClass('redux-field-error')) {
@@ -341,7 +494,7 @@ jQuery(document).ready(function($) {
 			var id = jQuery(this).parents('.redux-field:first').data('id');
 			if ( redux_opts.folds[ id ] ) {
 				if ( !redux_opts.folds[ id ].parent  ) {
-					verify_fold( jQuery( this ) );
+					//verify_fold( jQuery( this ) );
 				}
 			}
 		});

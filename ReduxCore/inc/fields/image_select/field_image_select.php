@@ -106,7 +106,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                     $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
 
                     $presets = '';
-                
+                    $this->field['class'] .= ' noUpdate ';
                     if( !empty( $this->field['presets'] ) && $this->field['presets'] && !empty( $v['presets'] ) ) {
 
                         if( !is_array( $v['presets'] ) )
@@ -116,7 +116,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                         $presets = ' data-presets="' . htmlspecialchars( json_encode( $v['presets'] ), ENT_QUOTES, 'UTF-8' ) . '"';
                         $selected = '';
-                        $this->field['class'] .= 'noUpdate redux-presets';
+                        $this->field['class'] .= 'redux-presets';
                     }               
 
                     echo '<li class="redux-image-select">';

@@ -74,7 +74,8 @@ function redux_add_file(event, selector) {
 		if (attachment.attributes.type !== "image") {
 			return;
 		}
-		selector.find('.upload').val(attachment.attributes.url);
+
+		selector.find('.upload').val(attachment.attributes.url).trigger('check_dependencies',selector.find('.upload'));
 		selector.find('.upload-id').val(attachment.attributes.id);
 		selector.find('.upload-height').val(attachment.attributes.height);
 		selector.find('.upload-width').val(attachment.attributes.width);
@@ -101,7 +102,7 @@ function redux_remove_file(selector) {
 
 	redux_change(jQuery('#'+selector.attr('rel')));
 	selector.find('.remove-image').addClass('hide');//hide "Remove" button
-	selector.find('.upload').val('');
+	selector.find('.upload').val('').trigger('check_dependencies',selector.find('.upload'));
 	selector.find('.upload-id').val('');
 	selector.find('.upload-height').val('');
 	selector.find('.upload-width').val('');
