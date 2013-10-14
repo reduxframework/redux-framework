@@ -53,6 +53,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
         $defaults = array(
             'font-family'=>'',
+            'font-backup'=>'',
             'line-height'=>'',
             'word-spacing' => '',
             'letter-spacing' => '',
@@ -84,7 +85,7 @@ class ReduxFramework_typography extends ReduxFramework{
     	         **/
             
             	if ( filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN) ) {
-    	        	$fontFamily = explode(', ', $this->value['font-family'],2);
+                $fontFamily = explode(', ', $this->value['font-family'],2);
     	        	if (empty($fontFamily[0]) && !empty($fontFamily[1])) {
     	        		$fontFamily[0] = $fontFamily[1];
     	        		$fontFamily[1] = "";
@@ -247,10 +248,10 @@ class ReduxFramework_typography extends ReduxFramework{
             
                 if ($this->field['font-backup'] === true) {
                   echo '<div class="select_wrapper typography-family-backup" style="width: 220px; margin-right: 5px;">';
-                  echo '<select data-placeholder="'.__('Backup Font Family','redux-framework').'" class="redux-typography redux-typography-family-backup '.$this->field['class'].'" id="'.$this->field['id'].'-family-backup" data-id="'.$this->field['id'].'" data-value="'.$family[1].'">';
+                  echo '<select data-placeholder="'.__('Backup Font Family','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-backup]" class="redux-typography redux-typography-family-backup '.$this->field['class'].'" id="'.$this->field['id'].'-family-backup" data-id="'.$this->field['id'].'" data-value="'.$this->value['font-backup'].'">';
                   echo '<option data-google="false" data-details="" value=""></option>';
                   foreach ($this->field['fonts'] as $i=>$family) {
-                      echo '<option data-google="true" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($fontFamily[1], $i, false) . '>'. $family .'</option>';
+                      echo '<option data-google="true" data-details="'.$font_sizes.'" value="'. $i .'"' . selected($this->value['font-backup'], $i, false) . '>'. $family .'</option>';
                   }
                   echo '</select></div>';               
                 }
@@ -393,11 +394,10 @@ class ReduxFramework_typography extends ReduxFramework{
             if( isset( $field['type'] ) && $field['type'] == "typography" ) {
 
               $font = $this->parent->options[$field['id']];
-              
+              //echo $font['font-family'];
               if ( !empty( $font['font-family'] ) ) {
-                $font['font-family'] = trim(str_replace( ',', '', $font['font-family'] ) );  
+                $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
               }
-
               if ( !empty( $field['output'] ) ) : // Don't create dynamic CSS if output array is not set
                 $keys = implode(",", $field['output']);
                 $newOutCSS = '';
@@ -405,7 +405,7 @@ class ReduxFramework_typography extends ReduxFramework{
                   if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
                     $value = "normal";
                   }
-                  if ( $key == "google" || $key == "subsets" || empty( $value ) ) {
+                  if ( $key == "google" || $key == "subsets" || $key == "font-backup" || empty( $value ) ) {
                       continue;
                   }
                   $newOutCSS .= $key.':'.$value.';';
@@ -417,6 +417,9 @@ class ReduxFramework_typography extends ReduxFramework{
               
               // Google only stuff!
               if ( !empty( $this->parent->args['google_api_key'] ) && !empty($font['font-family']) && !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+                if ( !empty( $font['font-backup'] ) && !empty( $font['font-family'] ) ) {
+                  $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );
+                }
                 $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
                 if ( empty( $fonts[$font['font-family']] ) ) {
                   $fonts[$font['font-family']] = array();  
