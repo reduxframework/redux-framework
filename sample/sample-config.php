@@ -410,7 +410,7 @@ function setup_framework_options(){
 				'title' => __('Switch - With Hidden Items (NESTED!)', 'redux-framework'),
 				'subtitle'=> __('Also called a "fold" parent.', 'redux-framework'),
 				'desc' => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework'),
-				'default' => 0,
+				'default' => 1,
 				),	
 			array(
 				'id'=>'patterns',
@@ -431,7 +431,7 @@ function setup_framework_options(){
                 "desc" => "Organize how you want the layout to appear on the homepage",
                 "compiler"=>'true',
                 //'fold' => array('switch-fold'=>0),
-                'required' => array('switch-fold','less','1'),	
+                'required' => array('switch-fold','=','0'),	
                 'options' => array(
                     "enabled" => array(
                         "placebo" => "placebo", //REQUIRED!
