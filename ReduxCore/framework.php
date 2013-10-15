@@ -33,6 +33,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
     /** @noinspection PhpUndefinedFunctionInspection */
     $fslashed_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
     $fslashed_abs = trailingslashit( str_replace( '\\', '/', ABSPATH ) );
+    // Fix for when Wordpress is not in the wp-content directory
+    if (strpos($fslashed_dir,$fslashed_abs) === false) {
+        $parts = explode('/', $fslashed_abs);
+        $test = str_replace('/'.max($parts), '', $fslashed_abs);
+        if (strpos($fslashed_dir,$test) !== false) {
+            $fslashed_abs = $test;
+        }
+    }
 
     // Framework base directory
     if( !defined( 'REDUX_DIR') )
