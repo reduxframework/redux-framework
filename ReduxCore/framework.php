@@ -421,28 +421,32 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				foreach( $this->sections as $section ) {
 				    if( isset( $section['fields'] ) ) {
 						foreach( $section['fields'] as $field ) {
-						    if( isset( $field['fold'] ) ) {
-								if ( !is_array( $field['fold'] ) ) {
+						    if( isset( $field['required'] ) ) {
+								if ( !is_array( $field['required'] ) ) {
 								    /*
 									Example variable:
 									    $var = array(
 										'fold' => 'id'
 										);
 								    */
-								    $folds[$field['fold']]['children'][1][] = $field['id'];
-								    $folds[$field['id']]['parent'] = $field['fold'];
-								} else {										    										
-								    foreach( $field['fold'] as $foldk=>$foldv ) {
+								    $folds[$field['required']]['children'][1][] = $field['id'];
+								    $folds[$field['id']]['parent'] = $field['required'];
+								} else {
+                                    $parent = $foldk = $field['required'][0];
+                                    $comparison = $field['required'][1];
+                                    $value = $foldv = $field['required'][2];										    										
+								    //foreach( $field['required'] as $foldk=>$foldv ) {
 								    	
-										if ( is_array( $foldv ) ) {
+
+										if ( is_array( $value ) ) {
 										    /*
 											Example variable:
 											    $var = array(
-												'fold' => array( 'id' => array(1, 5) )
+												'fold' => array( 'id' , '=', array(1, 5) )
 											    );
 										    */
 											
-										    foreach ($foldv as $foldvValue) {
+										    foreach ($value as $foldvValue) {
 										    	//echo 'id: '.$field['id']." key: ".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
 												$folds[$foldk]['children'][$foldvValue][] = $field['id'];
 												$folds[$field['id']]['parent'] = $foldk;
@@ -454,15 +458,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
 											//if (count($field['fold']) == count($field['fold'], COUNT_RECURSIVE)) {
 											//}
 
-											if (count($field['fold']) === 1 && is_numeric($foldk)) {
+											if (count($field['required']) === 1 && is_numeric($foldk)) {
 												/*
 												Example variable:
 												    $var = array(
 													'fold' => array( 'id' )
 												    );
 											    */	
-												$folds[$field['id']]['parent'] = $foldv;
-	  											$folds[$foldv]['children'][1][] = $field['id'];
+												$folds[$field['id']]['parent'] = $foldk;
+	  											$folds[$foldk]['children'][1][] = $field['id'];
 											} else {
 											    /*
 												Example variable:
@@ -477,7 +481,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 												$folds[$foldk]['children'][$foldv][] = $field['id'];	
 											}
 										}
-								    }
+								    //}
 								}
 						    }
 						}
@@ -815,7 +819,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 time(),
                 true
             );    
-
+            
             $localize = array(
                     'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
                     'reset_confirm'     => __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 

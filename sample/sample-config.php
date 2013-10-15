@@ -405,18 +405,16 @@ function setup_framework_options(){
 			array(
 				'id'=>'switch-fold',
 				'type' => 'switch', 
-				//'fold' => array('switch-custom'),
 				'required' => array('switch-custom','=','1'),						
 				'title' => __('Switch - With Hidden Items (NESTED!)', 'redux-framework'),
 				'subtitle'=> __('Also called a "fold" parent.', 'redux-framework'),
 				'desc' => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework'),
-				'default' => 1,
+				'default' => 0,
 				),	
 			array(
 				'id'=>'patterns',
 				'type' => 'image_select', 
 				'tiles' => true,
-				//'fold' => array('switch-fold'=>0),
 				'required' => array('switch-fold','equals','0'),	
 				'title' => __('Images Option (with pattern=>true)', 'redux-framework'),
 				'subtitle'=> __('Select a background pattern.', 'redux-framework'),
@@ -430,8 +428,7 @@ function setup_framework_options(){
                 "title" => "Homepage Layout Manager",
                 "desc" => "Organize how you want the layout to appear on the homepage",
                 "compiler"=>'true',
-                //'fold' => array('switch-fold'=>0),
-                'required' => array('switch-fold','=','0'),	
+                'required' => array('switch-fold','equals','0'),	
                 'options' => array(
                     "enabled" => array(
                         "placebo" => "placebo", //REQUIRED!
@@ -526,7 +523,6 @@ function setup_framework_options(){
 			array(
 				'id'=>'tracking-code',
 				'type' => 'textarea',
-				//'fold'=>array('layout'=>1),
 				'required' => array('layout','equals','1'),	
 				'title' => __('Tracking Code', 'redux-framework'), 
 				'subtitle' => __('Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'redux-framework'),
@@ -909,7 +905,6 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
 				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
-				//'fold'=>array('select'=>array('1','3')),
 				'required' => array('select','equals',array('1','3')),	
 				'default' => array('2','3')
 				),
@@ -1100,7 +1095,6 @@ function setup_framework_options(){
 			array(
 				'id'=>'23',
 				'type' => 'info',
-                //'fold' => array('18'=>array('1', '2')),
                 'required' => array('18','equals',array('1','2')),	
 				'desc' => __('This is the info field, if you want to break sections up.', 'redux-framework')
             ),
@@ -1122,7 +1116,6 @@ function setup_framework_options(){
 			array(
 				'id'=>'raw_info',
 				'type' => 'info',
-				//'fold' => array('18'=>array('1', '2')),
 				'required' => array('18','equals',array('1','2')),
 				'raw_html'=>true,
 				'desc' => $sampleHTML,
