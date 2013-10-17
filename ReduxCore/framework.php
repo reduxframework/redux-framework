@@ -141,7 +141,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             	}
             }
 
-		    $this->sections = $sections;
+		    $this->sections = apply_filters('redux-sections',$sections);
+
 			$this->extra_tabs = $extra_tabs;
 
             // Set option with defaults
@@ -421,68 +422,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				foreach( $this->sections as $section ) {
 				    if( isset( $section['fields'] ) ) {
 						foreach( $section['fields'] as $field ) {
+                            //if we have required option in group field
+                            if(isset($field['subfields']) && is_array($field['subfields'])){
+                                foreach ($field['subfields'] as $subfield) {
+                                    if(isset($subfield['required']))
+                                        $folds = $this->get_fold($subfield);
+                                }
+                            }
 						    if( isset( $field['required'] ) ) {
-								if ( !is_array( $field['required'] ) ) {
-								    /*
-									Example variable:
-									    $var = array(
-										'fold' => 'id'
-										);
-								    */
-								    $folds[$field['required']]['children'][1][] = $field['id'];
-								    $folds[$field['id']]['parent'] = $field['required'];
-								} else {
-                                    $parent = $foldk = $field['required'][0];
-                                    $comparison = $field['required'][1];
-                                    $value = $foldv = $field['required'][2];										    										
-								    //foreach( $field['required'] as $foldk=>$foldv ) {
-								    	
-
-										if ( is_array( $value ) ) {
-										    /*
-											Example variable:
-											    $var = array(
-												'fold' => array( 'id' , '=', array(1, 5) )
-											    );
-										    */
-											
-										    foreach ($value as $foldvValue) {
-										    	//echo 'id: '.$field['id']." key: ".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
-												$folds[$foldk]['children'][$foldvValue][] = $field['id'];
-												$folds[$field['id']]['parent'] = $foldk;
-										    }
-										} else {
-											
-											//!DOVY If there's a problem, this is where it's at. These two cases.
-											//This may be able to solve this issue if these don't work
-											//if (count($field['fold']) == count($field['fold'], COUNT_RECURSIVE)) {
-											//}
-
-											if (count($field['required']) === 1 && is_numeric($foldk)) {
-												/*
-												Example variable:
-												    $var = array(
-													'fold' => array( 'id' )
-												    );
-											    */	
-												$folds[$field['id']]['parent'] = $foldk;
-	  											$folds[$foldk]['children'][1][] = $field['id'];
-											} else {
-											    /*
-												Example variable:
-												    $var = array(
-													'fold' => array( 'id' => 1 )
-												    );
-											    */						
-											    if (empty($foldv)) {
-											    	$foldv = 0;
-											    }
-											    $folds[$field['id']]['parent'] = $foldk;
-												$folds[$foldk]['children'][$foldv][] = $field['id'];	
-											}
-										}
-								    //}
-								}
+                                 $folds = $this->get_fold($field);
 						    }
 						}
 				    }
@@ -518,10 +466,74 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			print_r($parents);
 			print_r($toHide);
 */
-
 			return $folds;
 		    
 		}
+
+        function get_fold($field){
+            if ( !is_array( $field['required'] ) ) {
+                /*
+                Example variable:
+                    $var = array(
+                    'fold' => 'id'
+                    );
+                */
+                $folds[$field['required']]['children'][1][] = $field['id'];
+                $folds[$field['id']]['parent'] = $field['required'];
+            } else {
+                $parent = $foldk = $field['required'][0];
+                $comparison = $field['required'][1];
+                $value = $foldv = $field['required'][2];                                                                                    
+                //foreach( $field['required'] as $foldk=>$foldv ) {
+                    
+
+                    if ( is_array( $value ) ) {
+                        /*
+                        Example variable:
+                            $var = array(
+                            'fold' => array( 'id' , '=', array(1, 5) )
+                            );
+                        */
+                        
+                        foreach ($value as $foldvValue) {
+                            //echo 'id: '.$field['id']." key: ".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
+                            $folds[$foldk]['children'][$foldvValue][] = $field['id'];
+                            $folds[$field['id']]['parent'] = $foldk;
+                        }
+                    } else {
+                        
+                        //!DOVY If there's a problem, this is where it's at. These two cases.
+                        //This may be able to solve this issue if these don't work
+                        //if (count($field['fold']) == count($field['fold'], COUNT_RECURSIVE)) {
+                        //}
+
+                        if (count($field['required']) === 1 && is_numeric($foldk)) {
+                            /*
+                            Example variable:
+                                $var = array(
+                                'fold' => array( 'id' )
+                                );
+                            */  
+                            $folds[$field['id']]['parent'] = $foldk;
+                            $folds[$foldk]['children'][1][] = $field['id'];
+                        } else {
+                            /*
+                            Example variable:
+                                $var = array(
+                                'fold' => array( 'id' => 1 )
+                                );
+                            */                      
+                            if (empty($foldv)) {
+                                $foldv = 0;
+                            }
+                            $folds[$field['id']]['parent'] = $foldk;
+                            $folds[$foldk]['children'][$foldv][] = $field['id'];    
+                        }
+                    }
+                //}
+            }
+            return $folds;
+        }
 
         /**
          * Set default options on admin_init if option doesn't exist
