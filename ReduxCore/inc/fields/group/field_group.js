@@ -35,8 +35,9 @@
             }
         });
         
-        $('.slide-title').live('keyup',function(event) {
-            $(this).parent().parent().parent().find('.redux-groups-header').text(event.target.value);
+        $('.redux-groups-accordion-group input[type=text]').on('keyup',function(event) {
+            $(this).parents('.redux-groups-accordion-group:first').find('.redux-groups-header').text(event.target.value);
+            $(this).parents('.redux-groups-accordion-group:first').find('.slide-title').val(event.target.value);
         });
         
         $('.redux-groups-remove').live('click', function () {

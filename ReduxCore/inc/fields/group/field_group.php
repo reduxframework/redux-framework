@@ -86,8 +86,8 @@ if (!class_exists('ReduxFramework_group')) {
                 
                 echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';
                 
-                echo '<h4>' . __('Group Title', 'redux-framework') . '</h4>';
-                echo '<fieldset><input type="text" id="' . $this->field['id'] . '-slide_title_' . $x . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_title]" value="' . esc_attr($group['slide_title']) . '" class="regular-text slide-title" /></fieldset>';
+                //echo '<h4>' . __('Group Title', 'redux-framework') . '</h4>';
+                echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '-slide_title_' . $x . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_title]" value="' . esc_attr($group['slide_title']) . '" class="regular-text slide-title" /></fieldset>';
                 echo '<input type="hidden" class="slide-sort" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_sort]" id="' . $this->field['id'] . '-slide_sort_' . $x . '" value="' . $group['slide_sort'] . '" />';
                 foreach ($this->field['subfields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
