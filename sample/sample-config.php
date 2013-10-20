@@ -346,14 +346,6 @@ function setup_framework_options(){
                 'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the Wordpress native uploader', 'so-panels'),
                 'desc' => __('This is the description field, again good for additional info.', 'redux-framework'),
                 ),
-		/*
-			array(
-				'id'=>'gallery',
-				'type' => 'gallery', 
-				'title' => __('Gallery', 'redux-framework'),
-				'desc'=> __('Add a gallery using the integrated media gallery of wordpress. No preview, but fully supports order, etc.', 'redux-framework'),
-				),		
-				*/
 			array(
 				'id'=>'slider1',
 				'type' => 'slider', 
@@ -1128,7 +1120,7 @@ function setup_framework_options(){
 				'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework'),
 				'callback' => 'my_custom_field'
 				),
-			/*
+			
 			array(
 				'id'=>"group",
 				'type' => 'group',//doesnt need to be called for callback fields
@@ -1139,23 +1131,30 @@ function setup_framework_options(){
 				'subfields' => 
 					array(
 						array(
-                            'id'=>'tracking-code-group',
-                            'type' => 'textarea',
-                            'title' => __('Tracking Code', 'redux-framework'), 
-                            'subtitle' => __('Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'redux-framework'),
-                            'desc' => 'Validate that it\'s javascript!',
+							'id'=>'switch-fold',
+							'type' => 'switch', 
+							'title' => __('testing fold with Group', 'redux-framework'),
+							'subtitle'=> __('Look, it\'s on!', 'redux-framework'),
+							"default" 		=> 1,
+							),	
+						array(
+                            'id'=>'text-group',
+                            'type' => 'text',
+                            'title' => __('Text', 'redux-framework'), 
+                            'subtitle' => __('Here you put your subtitle', 'redux-framework'),
+                            'required' => array('switch-fold', '=' , '1'),
 							),
 						array(
-                            'id'=>'media-group',
-                            'type' => 'media', 
-                            'url'=> true,
-                            'title' => __('Media No URL', 'redux-framework'),
-                            'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework'),
-                            'subtitle' => __('Upload any media using the Wordpress native uploader', 'redux-framework'),
+							'id'=>'select-group',
+							'type' => 'select',
+							'title' => __('Testing select', 'redux-framework'), 
+							'subtitle' => __('Select your themes alternative color scheme.', 'redux-framework'),
+							'options' => array('default.css'=>'default.css', 'color1.css'=>'color1.css'),
+							'default' => 'default.css',
 							),
 						),
 				),			
-				*/
+				
 			)
 
 		);    

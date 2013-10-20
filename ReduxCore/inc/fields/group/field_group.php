@@ -52,7 +52,6 @@ if (!class_exists('ReduxFramework_group')) {
             $this->value = $value;
             $this->parent = $parent;
 
-            add_filter('redux-support-group' , array($this,'support_multi'),100,3);
         }
 
         /**
@@ -65,6 +64,7 @@ if (!class_exists('ReduxFramework_group')) {
          * @return      void
          */
         public function render() {
+
             if (empty($this->value) || !is_array($this->value)) {
                 $this->value = array(
                     array(
@@ -107,7 +107,16 @@ if (!class_exists('ReduxFramework_group')) {
 
                     ob_start();
                     $this->parent->_field_input($field, $value);
-                    $_field = apply_filters('redux-support-group',ob_get_contents(), $field, $x);
+                    $content = ob_get_contents();
+
+                    //adding sorting number to the name of each fields in group
+                    $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                    $content = str_replace($name, $name . '[' . $x . ']', $content);
+
+                    //we should add $sort to id to fix problem with select field
+                    $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
+                    
+                    $_field = apply_filters('redux-support-group',$content, $field, $x);
                     ob_end_clean();
                     echo $_field;
                     
@@ -126,10 +135,11 @@ if (!class_exists('ReduxFramework_group')) {
         }
 
         function support_multi($content, $field, $sort) {
-            return $content;
             //convert name
             $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
             $content = str_replace($name, $name . '[' . $sort . ']', $content);
+            //we should add $sort to id to fix problem with select field
+            $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
             return $content;
         }
 

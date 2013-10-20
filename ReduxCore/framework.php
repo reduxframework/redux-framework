@@ -434,11 +434,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if(isset($field['subfields']) && is_array($field['subfields'])){
                                 foreach ($field['subfields'] as $subfield) {
                                     if(isset($subfield['required']))
-                                        $folds = $this->get_fold($subfield);
+                                        $this->get_fold($subfield);
                                 }
                             }
 						    if( isset( $field['required'] ) ) {
-                                 $folds = $this->get_fold($field);
+                                $this->get_fold($field);
 						    }
 						}
 				    }
@@ -474,7 +474,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			print_r($parents);
 			print_r($toHide);
 */
-			return $folds;
+			return $this->folds;
 		    
 		}
 
@@ -486,8 +486,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'fold' => 'id'
                     );
                 */
-                $folds[$field['required']]['children'][1][] = $field['id'];
-                $folds[$field['id']]['parent'] = $field['required'];
+                $this->folds[$field['required']]['children'][1][] = $field['id'];
+                $this->folds[$field['id']]['parent'] = $field['required'];
             } else {
                 $parent = $foldk = $field['required'][0];
                 $comparison = $field['required'][1];
@@ -505,8 +505,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         
                         foreach ($value as $foldvValue) {
                             //echo 'id: '.$field['id']." key: ".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
-                            $folds[$foldk]['children'][$foldvValue][] = $field['id'];
-                            $folds[$field['id']]['parent'] = $foldk;
+                            $this->folds[$foldk]['children'][$foldvValue][] = $field['id'];
+                            $this->folds[$field['id']]['parent'] = $foldk;
                         }
                     } else {
                         
@@ -522,8 +522,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 'fold' => array( 'id' )
                                 );
                             */  
-                            $folds[$field['id']]['parent'] = $foldk;
-                            $folds[$foldk]['children'][1][] = $field['id'];
+                            $this->folds[$field['id']]['parent'] = $foldk;
+                            $this->folds[$foldk]['children'][1][] = $field['id'];
                         } else {
                             /*
                             Example variable:
@@ -534,13 +534,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if (empty($foldv)) {
                                 $foldv = 0;
                             }
-                            $folds[$field['id']]['parent'] = $foldk;
-                            $folds[$foldk]['children'][$foldv][] = $field['id'];    
+                            $this->folds[$field['id']]['parent'] = $foldk;
+                            $this->folds[$foldk]['children'][$foldv][] = $field['id'];    
                         }
                     }
                 //}
             }
-            return $folds;
+            return $this->folds;
         }
 
         /**
@@ -883,7 +883,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             	delete_transient( 'redux-warnings-' . $this->args['opt_name'] );
             	$localize['warnings'] = array('total'=>$theTotal, 'warnings'=>$theWarnings);
             }
-
+            
             // Values used by the javascript
             wp_localize_script(
                 'redux-js', 
