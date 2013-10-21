@@ -367,7 +367,16 @@ function setup_framework_options(){
 				"step"		=> "5",
 				"max" 		=> "300",
 				),	
-
+			array(
+				'id'=>'spinner1',
+				'type' => 'spinner', 
+				'title' => __('JQuery UI Spinner Example 1', 'redux-framework'),
+				'desc'=> __('JQuery UI spinner description. Min:20, max: 100, step:20, default value: 40', 'redux-framework'),
+				"default" 	=> "40",
+				"min" 		=> "20",
+				"step"		=> "20",
+				"max" 		=> "100",
+				),
 			array(
 				'id'=>'switch-on',
 				'type' => 'switch', 
