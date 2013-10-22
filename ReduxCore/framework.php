@@ -1055,7 +1055,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
                             if (!empty($field['title'])) {
-                            	$th = $field['title'] . $default_mark;	
+				if ( $field['type'] == 'text' ) {
+                            		$th = '<label for="'. $field['id'] .'-'. $field['type'] .'">'. $field['title'] . $default_mark .'</label>';	
+				} else {
+					$th = $field['title'] . $default_mark;	
+				}
                             }
 						    if( isset( $field['subtitle'] ) ) {
 								$th .= '<span class="description">' . $field['subtitle'] . '</span>';
