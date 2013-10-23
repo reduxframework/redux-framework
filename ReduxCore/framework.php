@@ -1641,7 +1641,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 echo '</div>';
 
-                echo '<div id="redux-object-json" class="hide">'.json_encode($this, true).'</div>';
+                echo '<div id="redux-object-json" class="hide">'.json_encode($this->options).'</div>';
 
                 echo '<a href="#" id="consolePrintObject" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
                 // END Javascript object debug
