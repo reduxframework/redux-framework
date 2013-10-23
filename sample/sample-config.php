@@ -138,8 +138,8 @@ function setup_framework_options(){
     $args['opt_name'] = 'redux_demo';
 
     // Setting system info to true allows you to view info useful for debugging.
-    // Default: true
-    // $args['system_info'] = false;
+    // Default: false
+    //$args['system_info'] = true;
 
     
 	// Set the icon for the system info tab.

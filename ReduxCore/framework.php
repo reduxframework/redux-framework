@@ -114,7 +114,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['allow_sub_menu']     = true;
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = false;
-            $defaults['system_info']        = true;
+            $defaults['system_info']        = false;
             $defaults['admin_stylesheet']   = 'standard';
             $defaults['footer_credit']      = __( '<span id="footer-thankyou">Options panel created using <a href="' . $this->framework_url . '" target="_blank">Redux Framework</a> v' . $this->framework_version . '</span>', 'redux-framework' );
             $defaults['help_tabs']          = array();
