@@ -198,16 +198,13 @@ class ReduxFramework_spacing extends ReduxFramework{
     	}
 
 
-//absolute, padding, margin
+		//absolute, padding, margin
         $keys = implode(",", $this->field['output']);
         $style = '<style type="text/css" class="redux-'.$this->field['type'].'">';
             $style .= $keys."{";
             foreach($this->value as $key=>$value) {
             	if ($key == "units") {
             		continue;
-            	}
-            	if ( !empty( $this->field['mode'] ) ) {
-            		$style .= $this->field['mode'].'-';
             	}
             	if (empty($value)) {
             		$value = 0;
