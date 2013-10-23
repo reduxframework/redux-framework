@@ -30,10 +30,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if (file_exists(dirname(__FILE__).'/.git')) {
-	echo "YES";
-}
-
 require_once( plugin_dir_path( __FILE__ ) . 'class-redux-plugin.php' );
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
