@@ -88,6 +88,7 @@ a{outline:0 !important}
 #redux-main textarea,#redux-main input,#redux-main select,#redux-main button{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;border-style:solid;border-width:1px}
 #redux-main input,#redux-main select,#redux-main textarea{background-color:#f1f1f1;border:1px solid;border-color:#ccc #e6e6e6 #e6e6e6 #ccc;padding:4px;font-family:"Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;font-size:12px}
 #redux-main input,#redux-main select,#redux-main .sortlist_homepage_blocks,#redux-main textarea,.wp-picker-container,.switch-options{margin-bottom:7px}
+#redux-main textarea.wp-editor-area{margin-bottom:0}
 #redux-main label input{margin-bottom:0}
 #redux-main .select2-container input{margin-bottom:0;border:0}
 #redux-main input:hover,#redux-main textarea:hover{background-color:#f9f9f9}
