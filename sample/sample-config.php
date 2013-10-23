@@ -311,7 +311,8 @@ function setup_framework_options(){
 		'header' => __('Welcome to the Simple Options Framework Demo', 'redux-framework'),
 		'desc' => __('Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'redux-framework'),
 		'icon_class' => 'icon-large',
-		'icon' => 'home',
+        'icon' => 'home',
+        // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
 		'fields' => array(
 			
 			array(
@@ -502,7 +503,7 @@ function setup_framework_options(){
 	$sections[] = array(
 		'icon' => 'cogs',
 		'icon_class' => 'icon-large',
-		'title' => __('General Settings', 'redux-framework'),
+        'title' => __('General Settings', 'redux-framework'),
 		'fields' => array(
 			array(
 				'id'=>'layout',

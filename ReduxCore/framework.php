@@ -618,6 +618,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if ( !isset( $section['title'] ) )
                                 continue;
 
+                            if ( isset( $section['submenu'] ) && $section['submenu'] == false )
+                                continue;
+
                             add_submenu_page(
                                 $this->args['page_slug'],
                                 $section['title'],
