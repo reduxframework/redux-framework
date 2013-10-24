@@ -1397,7 +1397,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div id="redux-header">';
                 
             if( !empty( $this->args['display_name'] ) ) {
-                echo '<div class="logo">';
+                echo '<div class="display_header">';
                 echo '<h2>' . $this->args['display_name'] . '</h2>';
 
                 if( !empty( $this->args['display_version'] ) )
