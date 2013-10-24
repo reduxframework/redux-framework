@@ -1,0 +1,9 @@
+~~ IMPORTANT ~~
+
+When running an update/translation please move the `~/sample` directory out of the root ReduxFramework plugin. We don't want to dirty our translation with a bunch of demo strings.
+
+To add a translation, do a pull request from the repo: https://github.com/ReduxFramework/ReduxFramework
+
+If you can't figure out a pull request, just post an issue with the file and we'll take care of it.
+
+Thank you!

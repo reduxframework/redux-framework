@@ -116,9 +116,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['dev_mode']           = false;
             $defaults['system_info']        = false;
             $defaults['admin_stylesheet']   = 'standard';
-            $defaults['footer_credit']      = __( '<span id="footer-thankyou">Options panel created using <a href="' . $this->framework_url . '" target="_blank">Redux Framework</a> v' . $this->framework_version . '</span>', 'redux-framework' );
+            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . '<a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . $this->framework_version . '</span>';
             $defaults['help_tabs']          = array();
-            $defaults['help_sidebar']       = __( '', 'redux-framework' );
+            $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
             $defaults['customizer'] 		= true; // setting to true forces get_theme_mod_expanded
 			$defaults['global_variable'] 	= '';
@@ -1441,15 +1441,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Warning bar
             if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $saved == '1' ) {
                 if( isset( $this->options['REDUX_imported'] ) && $this->options['REDUX_imported'] === 1 ) {
-                    echo '<div id="redux-imported">' . apply_filters( 'redux-imported-text-' . $this->args['opt_name'], '' . __( '<strong>Settings Imported!</strong>', 'redux-framework' ) ) . '</div>';
+                    echo '<div id="redux-imported">' . apply_filters( 'redux-imported-text-' . $this->args['opt_name'], '<strong>' . __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
                 } else {
-                    echo '<div id="redux-save">' . apply_filters( 'redux-saved-text-' . $this->args['opt_name'], __( '<strong>Settings Saved!</strong>', 'redux-framework' ) ) . '</div>';
+                    echo '<div id="redux-save">' . apply_filters( 'redux-saved-text-' . $this->args['opt_name'], '<strong>'.__( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
                 }
             }
 
-            echo '<div id="redux-save-warn">' . apply_filters( 'redux-changed-text-' . $this->args['opt_name'], __( '<strong>Settings have changed, you should save them!</strong>', 'redux-framework' ) ) . '</div>';
-            echo '<div id="redux-field-errors">' . __( '<strong><span></span> error(s) were found!</strong>', 'redux-framework' ) . '</div>';
-            echo '<div id="redux-field-warnings">' . __( '<strong><span></span> warning(s) were found!</strong>', 'redux-framework' ) . '</div>';
+            echo '<div id="redux-save-warn">' . apply_filters( 'redux-changed-text-' . $this->args['opt_name'], '<strong>'.__( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
+            echo '<div id="redux-field-errors"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
+            echo '<div id="redux-field-warnings"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
 
             echo '</div>';
 

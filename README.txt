@@ -8,7 +8,7 @@ Stable tag: 3.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins which comes with a full demo integrated so you can dive right in!
+Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. It comes with an integrated demo so you can dive right in!
 
 == Description ==
 
@@ -69,6 +69,12 @@ Visit our website at [http://reduxframework.com/](http://reduxframework.com/
 = 3.0 =
 Redux is now hosted on Wordpress.org! Update in order to get proper, stable updates.
 
-== Arbitrary section ==
+== Attribution ==
 
-Redux is primarily based on [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) and [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework").
+Redux is was originally based off the following frameworks. 
+* [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) 
+* [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework").
+
+It has now branched and been improved in many ways. If you like what you see, realize this is a labor of love. Consider donating!
+
+[![Donate to the framework](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donate to the framework")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U)
