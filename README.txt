@@ -29,35 +29,56 @@ NOTE: Redux is not intended to be used on its own. It requires a config file
 provided by a third-party theme or plugin developer to actual do anything
 cool!
 
+= Online Demo =
+Don't take our word for it, check out our online demo and try Redux without installing a thing!
+[**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
+
+
+= Docs & Support =
+You can find [docs](http://reduxframework.com/docs/), [FAQs](http://reduxframework.com/docs/) and more detailed information about ReduxFramework on [reduxframework.com](http://reduxframework.com). If you were unable to find the answer to your question on the [FAQs](http://reduxframework.com/docs/) or in any of the [documentation](http://reduxframework.com/docs/), you should search [the issue tracker on Github](https://github.com/ReduxFramework/ReduxFramework/issues). If you can't locate any topics that pertain to your particular issue, [post a new issue](https://github.com/ReduxFramework/ReduxFramework/issues/new) for it.
+
+
+= Redux Framework Needs Your Support =
+It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Redux Framework, and find it useful, please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U). Your donation will help encourage and support the plugin's continued development and better user support.
+
+
+= Translators & Non-English Speakers =
+We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).
+
+
 == Installation ==
 
+= Install the Plugin =
 1. Upload the "redux-framework" directory to "~/wp-content/plugins/".
 2. Activate the plugin through the "Plugins" area in WordPress admin panel.
 
-Once you've done that, you can activate the "Demo Mode" from the "Plugins" area of the admin panel. If you'd prefer to start building your own panel:
+= Activate "Demo Mode" =
+On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.
+
+= Start Building Your Own Panel =
 
 1. Copy the "~/redux-framework/sample/" directory from within the plugin to a directory within your own theme or plugin.
 2. Click on "Deactivate Demo Mode" in the "Plugins" area of the WordPress admin panel to turn off the Redux integrated demo.
 3. Edit the "~/sample/sample-config.php" file (now copied to your plugin or theme directory) and change the $args['opt_name'] value to anything custom you would like. Make sure this is truly unque so other plugins/themes can use Redux.
-4. Include the sample-config.php file: ` <?php require_once(dirname(__FILE__).'/sample/sample-config.php'); ?>` in your theme functions.php file or within your theme's init file.
+4. Include the sample-config.php file: `require_once(dirname(__FILE__).'/sample/sample-config.php');` in your theme functions.php file or within your plugin's init file.
 5. Modify the sample file to your heart's content.
 
-For complete documentation and examples please visit: [http://reduxframework.com/docs/](http://reduxframework.com/docs/)
+= For complete documentation and examples please visit: [http://reduxframework.com/docs/](http://reduxframework.com/docs/) =
 
 
 == Frequently Asked Questions ==
 
 = Why doesn't this plugin do anything? =
 
-Redux is an options framework... in other words, it's not designed to do anything on its own!
+Redux is an options framework... in other words, it's not designed to do anything on its own! You can however activate a demo mode to see how it works. 
 
 = How can I learn more about Redux? =
 
-Visit our website at [http://reduxframework.com/](http://reduxframework.com/
+Visit our website at [http://reduxframework.com/](http://reduxframework.com/)
 
 == Screenshots ==
 
-1. This is the demo mode of Redux Framework. Activate it and you will find a fully-function admin panel that you can play with.
+1. This is the demo mode of Redux Framework. Activate it and you will find a fully-function admin panel that you can play with. On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.
 
 == Changelog ==
 
