@@ -16,8 +16,8 @@
  *
  * @package     ReduxFramework
  * @author      Daniel J Griffiths (Ghost1227)
- * @author      Dovy Paukstys
- * @version     3.0.0
+ * @author      Dovy Paukstys (dovy)
+ * @version     3.0.1
  */
 
 // Exit if accessed directly
@@ -26,7 +26,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
-	define('REDUX_VERSION', '3.0.0');
+	define('REDUX_VERSION', '3.0.1');
 
     // Windows-proof constants: replace backward by forward slashes
     // Thanks to: https://github.com/peterbouwmeester
@@ -1058,11 +1058,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
                             if (!empty($field['title'])) {
-				if ( $field['type'] == 'text' ) {
-                            		$th = '<label for="'. $field['id'] .'-'. $field['type'] .'">'. $field['title'] . $default_mark .'</label>';	
-				} else {
-					$th = $field['title'] . $default_mark;	
-				}
+                                $th = $field['title'] . $default_mark;
                             }
 						    if( isset( $field['subtitle'] ) ) {
 								$th .= '<span class="description">' . $field['subtitle'] . '</span>';
