@@ -166,7 +166,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'init', array( &$this, '_register_extensions' ), 2 );
 
             // Any dynamic CSS output, let's run
-            add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 100 );
+            add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
 
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
