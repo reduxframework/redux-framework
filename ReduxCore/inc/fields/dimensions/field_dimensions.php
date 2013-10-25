@@ -41,7 +41,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			$this->value['units'] = $this->field['units'];
 		}
 
-		if (  !in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+		if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
 			if ( !empty( $this->field['units'] ) && in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
 				$this->value['units'] = $this->field['units'];	
 			}
