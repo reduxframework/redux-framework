@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
 Tested up to: 3.7
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -80,7 +80,14 @@ At least we think so, we hope you feel the same.
 
   
 = Translators & Non-English Speakers =
-We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).
+We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux-framework.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).
+
+= Current Translations =
+
+Special thanks to the following people for language translations:
+
+* German [de_DE] @Abu-Taymiyyah
+* Bahasa Indonesia [id_ID] @riesurya
 
 = Get Involved =
 Redux is an ever-changing, living system. Want to stay up to date or
@@ -89,7 +96,6 @@ contribute? Subscribe to one of our mailing lists or join us on [Twitter](https:
 NOTE: Redux is not intended to be used on its own. It requires a config file
 provided by a third-party theme or plugin developer to actual do anything
 cool!
-
 
 == Installation ==
 
