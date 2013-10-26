@@ -34,8 +34,7 @@ You can find [docs](http://reduxframework.com/docs/), [FAQs](http://reduxframewo
 = Redux Framework Needs Your Support =
 It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Redux Framework, and find it useful, please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U). Your donation will help encourage and support the plugin's continued development and better user support.
 
-= Fields =
-Hold on to your hats. Here are the fields Redux supports:
+= Fields Types =
 
 * Border
 * Button Set
@@ -67,15 +66,12 @@ Hold on to your hats. Here are the fields Redux supports:
  * The most advanced typography module complete with preview, Google fonts, and auto-css output!
 
 = Additional Features =
-As if that's not enough, there's more:
 
 * Field Validation
 * Language Packs
 * Full value escaping
-* Required - Link visibility from parent fields
-	* Set this to affect the visibility of the field on the parent's value.
-* Output CSS Automatically
-	* Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
+* Required - Link visibility from parent fields. Set this to affect the visibility of the field on the parent's value.
+* Output CSS Automatically - Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
 * Oh, and did we mention a fully integrated Google Webfonts setup that will make you so happy you'll want to cry?
 
 
@@ -135,7 +131,10 @@ That's because the real FAQ section is one our site! Please visit [http://reduxf
 
 == Changelog ==
 
-= 3.0.0 =
+= 3.0.2 =
+* Improvements to slides, various field fixes and improvements. Also fixed a few user submitted issues.
+
+= 3.0.1 =
 * Backing out a bit of submitted code that caused the input field to not properly break.
 
 = 3.0.0 =
