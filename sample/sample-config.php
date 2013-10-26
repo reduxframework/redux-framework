@@ -619,7 +619,7 @@ function setup_framework_options(){
 			array(
 				'id'=>'dimensions',
 				'type' => 'dimensions',
-				//'units' => 'em', // You can specify a unit value. Possible: px, em, %
+				'units' => "", // You can specify a unit value. Possible: px, em, %
 				//'units_extended' => 'true', // Allow users to select any type of unit
 				'title' => __('Dimensions (Width/Height) Option', 'redux-framework-demo'),
 				'subtitle' => __('Allow your users to choose width, height, and/or unit.', 'redux-framework-demo'),
@@ -1141,12 +1141,45 @@ function setup_framework_options(){
 				'subfields' => 
 					array(
 						array(
-							'id'=>'switch-fold',
+							'id'=>'group-border',
+							'type' => 'border', 
+							'title' => __('Border', 'redux-framework-demo'),
+							),	
+						array(
+							'id'=>'group-button_set',
+							'type' => 'button_set', 
+							'title' => __('Button Set', 'redux-framework-demo'),
+							'options'=>array(1,2,3)
+							),		
+						array(
+							'id'=>'group-checkbox',
+							'type' => 'checkbox', 
+							'title' => __('Checkbox', 'redux-framework-demo'),
+							'options'=>array(1,2,3)
+							),	
+						array(
+							'id'=>'group-color',
+							'type' => 'color', 
+							'title' => __('Color', 'redux-framework-demo'),
+							),	
+						array(
+							'id'=>'group-color_gradient',
+							'type' => 'color_gradient', 
+							'title' => __('Color Gradient', 'redux-framework-demo'),
+							),	
+						array(
+							'id'=>'group-date',
+							'type' => 'date', 
+							'title' => __('Date', 'redux-framework-demo'),
+							),
+						array(
+							'id'=>'group-switch',
 							'type' => 'switch', 
 							'title' => __('testing fold with Group', 'redux-framework-demo'),
 							'subtitle'=> __('Look, it\'s on!', 'redux-framework-demo'),
 							"default" 		=> 1,
 							),	
+
 						array(
                             'id'=>'text-group',
                             'type' => 'text',

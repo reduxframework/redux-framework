@@ -1,8 +1,39 @@
+
+
 #redux-main .redux-group {
-    /*background: #eee;*/ 
-    padding: 15px 20px;
+    padding: 10px;
     margin-bottom: 7px;
-    padding-top: 0;
+    padding-top: 5px;
+    border: 2px solid #ddd;
+
+    .editHover { background: #fffbe1; }
+
+    legend {
+        display: block;
+        padding: 0 15px;
+        font-weight: bold;
+    }
+    fieldset {
+        padding: 10px;
+    }
+    .slide-title {
+        text-align: center;
+    }
+
+
+    table {
+        border: 0;
+        tr:nth-last-child(2) {
+            border-bottom: 0;
+        }
+        .description{
+            margin:5px 0px 5px 0px;
+        }
+    }
+
+    /*background: #eee;*/ 
+    
+    
     h4{
         margin:5px 0px 0px 0px;
         &:first-child{
@@ -10,7 +41,7 @@
         }
     }
     .description{
-        margin:5px 0 5px 0px;
+        margin:5px 10px 5px 10px;
     }
     #redux-groups-accordion{
         width:100%;
@@ -20,16 +51,22 @@
     }
     .redux-groups-accordion-group > div{
         border: 1px solid #dfdfdf !important;
-        border-radius: 3px !important;
+        -webkit-border-bottom-right-radius: 3px;
+        -webkit-border-bottom-left-radius: 3px;
+        -moz-border-radius-bottomright: 3px;
+        -moz-border-radius-bottomleft: 3px;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;        
         margin-top:0px !important;
-        padding: 10px;
+        padding: 10px 10px 0 10px;
+        background: #f8f8f8;
     }
     .redux-groups-accordion-group h3{
         border: 1px solid #dfdfdf;
         cursor: move;
         font-weight: bold;
         padding: 0 10px;
-        margin-bottom: 10px;
+        margin-bottom: 0;
         height: 40px;
         line-height: 40px;
         background-color: #f1f1f1;
@@ -40,13 +77,17 @@
         background-image: -webkit-linear-gradient(top, #f9f9f9, #ececec);
         background-image: linear-gradient(top, #f9f9f9, #ececec);
         overflow: hidden;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
+        
         -moz-box-shadow: inset 0 1px 0 #fff;
         -webkit-box-shadow: inset 0 1px 0 #fff;
         box-shadow: inset 0 1px 0 #fff;
         text-align: center;
+        -webkit-border-top-left-radius: 3px;
+        -webkit-border-top-right-radius: 3px;
+        -moz-border-radius-topleft: 3px;
+        -moz-border-radius-topright: 3px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
     }
 
     .redux-groups-add{
@@ -59,12 +100,17 @@
         color: #ef521d !important;
         float:right;
         margin-top: 10px;
+        clear: both;
         &:after{
             clear:both;
         }
     }
     .redux-groups-header{
         font-weight: bold;
+        line-height: 40px;
+        min-width: 340px;
+        display: block;
+        cursor: text;
     }
     .redux_groups_add_remove{
         margin-bottom: 10px;

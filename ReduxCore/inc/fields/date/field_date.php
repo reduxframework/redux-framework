@@ -62,7 +62,7 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 		 */
 		public function render() {
 				
-			echo '<input data-id="'.$this->field['id'].'" type="text" id="'. $this->field['id'] .'-date" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $this->value . '" class="redux-datepicker ' . $this->field['class'] . '" />';
+			echo '<input data-id="'.$this->field['id'].'" type="text" id="'. $this->field['id'] .'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $this->value . '" class="redux-datepicker ' . $this->field['class'] . '" />';
 		
 		}
 	
