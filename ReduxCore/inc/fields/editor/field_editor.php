@@ -64,7 +64,9 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
     	
             $settings = array(
                 'textarea_name' => $this->args['opt_name'] . '[' . $this->field['id'] . ']', 
-                'editor_class'  => $this->field['class']
+                'editor_class'  => $this->field['class'],
+                'textarea_rows' => 8,
+                'teeny' => true,
             );
 
             wp_editor( $this->value, $this->field['id'], $settings );
