@@ -67,7 +67,7 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
                 'editor_class'  => $this->field['class']
             );
 
-            wp_editor( $this->value, 'redux-editor', $settings );
+            wp_editor( $this->value, $this->field['id'], $settings );
 
         }
 
