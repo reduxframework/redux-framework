@@ -107,7 +107,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['page_title']         = __( 'Options', 'redux-framework' );
             $defaults['page_slug']          = '_options';
             $defaults['page_cap']           = 'manage_options';
-            $defaults['page_type']          = 'submenu';
+            $defaults['page_type']          = 'menu';
             $defaults['page_parent']        = 'themes.php';
             $defaults['page_position']      = null;
             $defaults['enqueue']      		= true;
