@@ -452,8 +452,9 @@ class ReduxFramework_typography extends ReduxFramework{
       }
 
       if ( !empty( $fonts ) && filter_var($this->parent->args['output'], FILTER_VALIDATE_BOOLEAN) ) {
-        wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
-        wp_enqueue_style( 'redux-google-fonts' ); 
+        echo '<link rel="stylesheet" id="redux-google-fonts-css"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&v='.$version.'" type="text/css" media="all" />';
+        //wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
+        //wp_enqueue_style( 'redux-google-fonts' ); 
       }
       if ( !empty( $outCSS ) ) {
         echo '<style type="text/css" class="redux-'.$this->field['type'].'">'.$outCSS.'</style>';  
