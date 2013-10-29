@@ -738,7 +738,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 	    wp_enqueue_script('jquery');
 	    wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_style( 'jquery-ui-css' );
+        
 
             wp_register_style(
                 'redux-css',
@@ -781,6 +781,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 time(),
                 'all'
             );
+            wp_enqueue_style( 'jquery-ui-css' );
 
             wp_enqueue_style( 'redux-lte-ie8' );
 
