@@ -79,9 +79,9 @@ class ReduxFramework_spacing extends ReduxFramework{
 				continue;
 			}
 			if (strpos($k, $this->field['mode']) === false) {
-				$this->value[$k] = str_replace($oldval['units'], "". $v);
+				$this->value[$k] = str_replace($oldval['units'], "", $v);
 			} else {
-				$this->value[$str_replace($this->field['mode'].'-', "", $k)] = str_replace($oldval['units'], "". $v);
+				$this->value[str_replace($this->field['mode'].'-', "", $k)] = str_replace($oldval['units'], "", $v);
 			}
 		}
 

@@ -115,7 +115,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = false;
             $defaults['system_info']        = false;
-            $defaults['admin_stylesheet']   = 'standard';
             $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . '<a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . $this->framework_version . '</span>';
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
@@ -785,11 +784,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_style( 'redux-lte-ie8' );
 
-            if( $this->args['admin_stylesheet'] == 'standard' ) {
-                wp_enqueue_style( 'redux-css' );
-            } elseif( $this->args['admin_stylesheet'] == 'custom' ) {
-                wp_enqueue_style( 'redux-custom-css' );
-            }
+            wp_enqueue_style( 'redux-css' );
 
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
@@ -1366,7 +1361,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( $saved ) {
             	delete_transient( 'redux-saved-' . $this->args['opt_name'] );	
             }
-            
+            echo '<div class="wrap"><h2></h2></div>'; // Stupid hack for Wordpress alerts and warnings
+
             echo '<div class="clear"></div>';
             echo '<div class="wrap">';
 

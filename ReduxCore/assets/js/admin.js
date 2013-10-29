@@ -133,13 +133,13 @@
                     case '>':    
                     case 'greater':    
                     case 'is_larger':
-                        if(value1 >  value2) 
+                        if(parseFloat(value1) >  parseFloat(value2)) 
                         	show = true;
                         break;
                     case '<':
                     case 'less':    
                     case 'is_smaller':
-                        if(value1 <  value2) 
+                        if(parseFloat(value1) < parseFloat(value2)) 
                         	show = true;
                         break;
                     case 'contains':
@@ -158,8 +158,6 @@
                         if(value1 != "" && value1 != value2) 
                         	show = true;
                         break;
-						
-						
                 }
             }
 				
