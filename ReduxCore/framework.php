@@ -1366,7 +1366,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( $saved ) {
             	delete_transient( 'redux-saved-' . $this->args['opt_name'] );	
             }
-            
+            echo '<div class="wrap"><h2></h2></div>'; // Stupid hack for Wordpress alerts and warnings
+
             echo '<div class="clear"></div>';
             echo '<div class="wrap">';
 
