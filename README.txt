@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
 Tested up to: 3.7
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -136,6 +136,13 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.0.3 =
+* Fixed Issue #129: Spacing field giving an undefined.
+* Fixed Issue #131: Google Fonts stylesheet appending to body and also to the top of the header. Now properly placed both at the end of the head tag as to overload any theme stylesheets.
+* Fixed issue #132 (See #134, thanks @andreilupu): Could not have multiple Wordpress Editors (wp_editor) as the same ID was shared. Also fixed various styles to match Wordpress for this field.
+* Fixed Issue #133: Issue when custom admin stylesheet was used, a JS error resulted.
+
 
 = 3.0.2 =
 * Improvements to slides, various field fixes and improvements. Also fixed a few user submitted issues.

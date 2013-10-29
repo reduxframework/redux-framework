@@ -17,7 +17,7 @@
  * @package     ReduxFramework
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys (dovy)
- * @version     3.0.1
+ * @version     3.0.3
  */
 
 // Exit if accessed directly
@@ -26,7 +26,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
-	define('REDUX_VERSION', '3.0.2');
+	define('REDUX_VERSION', '3.0.3');
 
     // Windows-proof constants: replace backward by forward slashes
     // Thanks to: https://github.com/peterbouwmeester
@@ -738,7 +738,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 	    wp_enqueue_script('jquery');
 	    wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_style( 'jquery-ui-css' );
+        
 
             wp_register_style(
                 'redux-css',
@@ -781,6 +781,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 time(),
                 'all'
             );
+            wp_enqueue_style( 'jquery-ui-css' );
 
             wp_enqueue_style( 'redux-lte-ie8' );
 
