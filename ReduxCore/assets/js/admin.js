@@ -378,7 +378,7 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	$('#toplevel_page_redux_options .wp-submenu a').click(function(e) {
+	$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a').click(function(e) {
 		//if ( $(this).hasClass('wp-menu-open') ) {
 			e.preventDefault();
 			var url = $(this).attr('href').split('&tab=');
@@ -395,10 +395,10 @@ jQuery(document).ready(function($) {
 		relid = jQuery(this).data('rel'); // The group ID of interest
 		// Set the proper page cookie
 
-		$('#toplevel_page_redux_options .wp-submenu a.current').removeClass('current');
-		$('#toplevel_page_redux_options .wp-submenu li.current').removeClass('current');
+		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a.current').removeClass('current');
+		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu li.current').removeClass('current');
 
-		$('#toplevel_page_redux_options .wp-submenu a').each(function() {
+		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a').each(function() {
 			var url = $(this).attr('href').split('&tab=');
 			if (url[1] == relid) {
 				$(this).addClass('current');
