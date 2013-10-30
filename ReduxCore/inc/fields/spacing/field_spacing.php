@@ -27,12 +27,11 @@ class ReduxFramework_spacing extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
-		print_r($this->value);
 	
 		// No errors please
 		$defaults = array(
 			'units' 			=> '',
-			'mode' 				=> '',
+			'mode' 				=> 'padding',
 			'top'				=> true,
 			'bottom'			=> true,
 			'left'				=> true,
@@ -73,7 +72,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 
 		$oldval = $this->value;
 		$this->value = array();
-
 		foreach ($oldval as $k=>$v) {
 			if ($k == "units") {
 				continue;
@@ -96,7 +94,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 		$this->value = wp_parse_args( $this->value, $defaults );
 
 
-print_r($this->value);
 			/**
 			Top
 			**/
