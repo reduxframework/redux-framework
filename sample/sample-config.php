@@ -897,7 +897,7 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
 				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for select options
-				'default' => '2'
+				'default' => '2',
 				),
 			array(
 				'id'=>'15',
@@ -1024,8 +1024,30 @@ function setup_framework_options(){
 				'title' => __('Elusive Icons Select Option', 'redux-framework-demo'), 
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
 				'desc' => __('Here\'s a list of all the elusive icons by name and icon.', 'redux-framework-demo'),
-				),			
+				),
+			array(
+				'id'=>'select-custom-placeholder',
+				'type' => 'select',
+				'title' => __('Custom Placeholder', 'redux-framework-demo'),
+				'placeholder' => 'I am a custom placeholder',
+				'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
+				'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
+			),
+			array(
+				'id'=>'select-custom-select2',
+				'type' => 'select',
+				'title' => __('Custom Select2', 'redux-framework-demo'),
+				'placeholder' => 'A minimal select',
+				'subtitle' => __('No search box / no empty value', 'redux-framework-demo'),
+				'desc' => __('An example of custom select2 params.', 'redux-framework-demo'),
+				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
+				'select2' => array( // here you can provide params for the select2 jquery call
+					'minimumResultsForSearch' => -1, // this way the search box will be disabled
+					'allowClear' => false // don't allow a empty select
+				)
 			)
+		)
 		);
 
 		
