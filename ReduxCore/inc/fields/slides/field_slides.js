@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
         redux_change(jQuery(this));
         jQuery(this).parent().siblings().find('input[type="text"]').val('');
         jQuery(this).parent().siblings().find('input[type="hidden"]').val('');
-        jQuery(this).parents().eq(3).slideUp('medium', function () {
+        jQuery(this).parents('.redux-slides-accordion-group:first').slideUp('medium', function () {
             jQuery(this).remove();
         });
     });
