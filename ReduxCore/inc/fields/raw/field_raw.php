@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_php {
+class ReduxFramework_raw {
 
     /**
      * Field Constructor.
