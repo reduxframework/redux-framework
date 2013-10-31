@@ -855,6 +855,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'folds'				=> $this->folds,
                     'options'			=> $this->options,
                     'defaults'			=> $this->options_defaults,
+                    'slug'              => $this->args['page_slug']
                 );       
 
             // Construct the errors array. 
