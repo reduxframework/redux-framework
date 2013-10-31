@@ -23,6 +23,8 @@
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
+
+
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
@@ -156,7 +158,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_menu', array( &$this, '_internationalization' ) );
 
             // Set option with defaults
-            add_action( 'init', array( &$this, '_set_default_options' ) );
+            add_action( 'plugins_loaded', array( &$this, '_set_default_options' ) );
 
             // Options page
             add_action( 'admin_menu', array( &$this, '_options_page' ) );
@@ -165,7 +167,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
 			// Register extensions
-            add_action( 'init', array( &$this, '_register_extensions' ), 2 );
+            add_action( 'plugins_loaded', array( &$this, '_register_extensions' ), 2 );
 
             // Any dynamic CSS output, let's run
             add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
