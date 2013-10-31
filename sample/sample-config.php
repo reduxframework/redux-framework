@@ -680,7 +680,7 @@ function setup_framework_options(){
 				'subtitle' => __('This must be a URL.', 'redux-framework-demo'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
 				'validate' => 'url',
-				'default' => 'http://no-half-pixels.com'
+				'default' => 'http://reduxframework.com'
 				),
 			array(
 				'id'=>'4',
