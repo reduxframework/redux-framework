@@ -61,7 +61,6 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 	 	 * @return		void
 		 */
 		public function render() {
-			print_r($this->value);
 
 			echo '<input data-id="'.$this->field['id'].'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
 

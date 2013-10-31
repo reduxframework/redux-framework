@@ -27,43 +27,58 @@ class ReduxFramework_dimensions extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
-	
+
 		// No errors please
 		$defaults = array(
-			'units' 			=> '',
 			'width'				=> true,
 			'height'			=> true,
 			'units_extended'	=> false,
 			);
+
+		$this->field['units'] = "em";
+
 		$this->field = wp_parse_args( $this->field, $defaults );
 
-		if ( !empty( $this->field['units'] ) ) {
-			$this->value['units'] = $this->field['units'];
+		if ( isset( $this->field['units'] ) && !in_array($this->field['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+			unset( $this->field['units'] );
+		}	
+
+		if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+			unset( $this->value['units'] );
 		}
 
-		if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			if ( !empty( $this->field['units'] ) && in_array($this->value['units'], array( '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-				$this->value['units'] = $this->field['units'];	
+		if ( isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // Value should equal field units
+			$this->value['units'] = $this->field['units'];
+		} else if ( !isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // If both undefined
+			$this->field['units'] = 'px';
+			$this->value['units'] = 'px';
+		} else if ( !isset( $this->field['units'] ) && isset( $this->value['units'] ) ) { // If Value is defined
+			if ( empty( $this->value['units'] ) ) { // Value can't be empty in this case for this field
+				$this->field['units'] = 'px';
+				$this->value['units'] = 'px';
+			} else {
+				$this->field['units'] = $this->value['units'];	// Make the field have it
 			}
 		}
 
 		$defaults = array(
 			'width'=>'',
 			'height'=>'',
-			'units'=>'px',
 		);
 
 		$this->value = wp_parse_args( $this->value, $defaults );
 
 	  	echo '<fieldset id="'.$this->field['id'].'" class="redux-dimensions-container" data-id="'.$this->field['id'].'">';
-
+	  		echo '<input type="hidden" id="field-units" value="'.$this->field['units'].'"></div>';
 			/**
 			Width
 			**/
 			if ($this->field['width'] === true):
 				if ( !empty($this->value['width'] ) &&  strpos( $this->value['width'], $this->value['units'] ) === false ) {
 					$this->value['width'] = filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT);
-					$this->value['width'] = $this->value['width'].$this->value['units'];
+					if ($this->field['units'] !== false ) {
+						$this->value['width'] .= $this->value['units'];	
+					}
 				}				
 				echo '<div class="field-dimensions-input input-prepend">';
 				echo '<span class="add-on"><i class="icon-resize-horizontal icon-large"></i></span>';
@@ -77,7 +92,9 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			if ($this->field['height'] === true):
 				if ( !empty($this->value['height'] ) &&  strpos( $this->value['height'], $this->value['units'] ) === false ) {
 					$this->value['height'] = filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT);
-					$this->value['height'] = $this->value['height'].$this->value['units'];
+					if ($this->field['units'] !== false ) {
+						$this->value['height'] .= $this->value['units'];	
+					}
 				}					
 				echo '<div class="field-dimensions-input input-prepend">';
 				echo '<span class="add-on"><i class="icon-resize-vertical icon-large"></i></span>';
@@ -89,7 +106,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			Units
 			**/
 
-			if ( $this->field['units'] !== false && $this->field['units'] !== "" ):
+			if ( $this->field['units'] !== false && !isset( $this->field['units'] ) ):
 
 				echo '<div class="select_wrapper dimensions-units" original-title="'.__('Units','redux-framework').'">';
 				echo '<select data-id="'.$this->field['id'].'" data-placeholder="'.__('Units','redux-framework').'" class="redux-dimensions redux-dimensions-units select'.$this->field['class'].'" original-title="'.__('Units','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][units]" id="'. $this->field['id'].'_units">';
