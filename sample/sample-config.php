@@ -531,6 +531,29 @@ function setup_framework_options(){
 				'validate' => 'js',
 				'desc' => 'Validate that it\'s javascript!',
 				),
+            
+            array(
+				'id'=>'css-code',
+				'type' => 'ace_editor',
+				'required' => array('layout','equals','1'),	
+				'title' => __('CSS Code', 'redux-framework-demo'), 
+				'subtitle' => __('Paste your CSS code here.', 'redux-framework-demo'),
+				'mode' => 'css',
+                'theme' => 'monokai',
+				'desc' => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
+                'default' => "#header{\nmargin: 0 auto;\n}"
+				),
+            array(
+				'id'=>'js-code',
+				'type' => 'ace_editor',
+				'required' => array('layout','equals','1'),	
+				'title' => __('JS Code', 'redux-framework-demo'), 
+				'subtitle' => __('Paste your JS code here.', 'redux-framework-demo'),
+				'mode' => 'javascript',
+                'theme' => 'chrome',
+				'desc' => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
+                'default' => "jQuery(document).ready(function(){\n\n});"
+				),
 
 			array(
 				'id'=>'footer-text',
