@@ -68,7 +68,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.0.5 =
-* Fixed how Redux is intitialized so it works in any and all files without hooking into the init function.
+* Fixed how Redux is initialised so it works in any and all files without hooking into the init function.
 * Issue #151: Added thumbnails to media and displayed those instead of full image.
 * Issue #144: Slides had error if last slide was deleted.
 * Color field was outputting hex in the wrong location.
