@@ -120,7 +120,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
-            $defaults['customizer'] 		= true; // setting to true forces get_theme_mod_expanded
+            $defaults['customizer'] 		= false; // setting to true forces get_theme_mod_expanded
 			$defaults['global_variable'] 	= '';
 			$defaults['output'] 			= true; // Dynamically generate CSS
             /** @noinspection PhpUndefinedConstantInspection */
