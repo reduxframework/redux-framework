@@ -123,7 +123,12 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             }
 
             if ( empty( $this->value['thumbnail'] ) && !empty( $this->value['url'] ) ) { // Just in case
-                $this->value['thumbnail'] = $this->value['url'];
+                if ( !empty( $this->value['id'] ) ) {
+                    $image = wp_get_attachment_image_src( $this->value['id'], array(150, 150) );
+                    $this->value['thumbnail'] = $image[0];
+                } else {
+                    $this->value['thumbnail'] = $this->value['url'];    
+                }
             }
 
             echo '<div class="' . $hide . 'screenshot">';
