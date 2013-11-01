@@ -15,9 +15,8 @@
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package     ReduxFramework
- * @author      Daniel J Griffiths (Ghost1227)
- * @author      Dovy Paukstys (dovy)
- * @version     3.0.3
+ * @author      ReduxFramework Team
+ * @version     3.0.5
  */
 
 // Exit if accessed directly
@@ -28,7 +27,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
-	define('REDUX_VERSION', '3.0.4');
+	define('REDUX_VERSION', '3.0.5');
 
     // Windows-proof constants: replace backward by forward slashes
     // Thanks to: https://github.com/peterbouwmeester

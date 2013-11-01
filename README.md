@@ -67,6 +67,45 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.0.5 =
+* Fixed how Redux is intitialized so it works in any and all files without hooking into the init function.
+* Issue #151: Added thumbnails to media and displayed those instead of full image.
+* Issue #144: Slides had error if last slide was deleted.
+* Color field was outputting hex in the wrong location.
+* Slimmed down the ACE Editor field.
+
+= 3.0.4 =
+* Fixed an odd saving issue.
+* Fixed link issues in the framework
+* Issue #135: jQuery UI wasn't being properly queued
+* Issue #140: Admin notice glitch. See http://reduxframework.com/2013/10/wordpress-notifications-custom-options-panels/
+* Use hooks instead of custom variable for custom admin CSS
+* Added "raw" field that allows PHP or a hook to embed anything in the panel.
+* Submenus in Admin now change the tabs without reloading the page.
+* Small fix for multi-text.
+* Added IT_it and RO_ro languages.
+* Updated readme file for languages.
+
+= 3.0.3 =
+* Fixed Issue #129: Spacing field giving an undefined.
+* Fixed Issue #131: Google Fonts stylesheet appending to body and also to the top of the header. Now properly placed both at the end of the head tag as to overload any theme stylesheets.
+* Fixed issue #132 (See #134, thanks @andreilupu): Could not have multiple Wordpress Editors (wp_editor) as the same ID was shared. Also fixed various styles to match Wordpress for this field.
+* Fixed Issue #133: Issue when custom admin stylesheet was used, a JS error resulted.
+
+= 3.0.2 =
+* Improvements to slides, various field fixes and improvements. Also fixed a few user submitted issues.
+
+= 3.0.1 =
+* Backing out a bit of submitted code that caused the input field to not properly break.
+
+= 3.0.0 =
+* Initial Wordpress.org plugin release.
+
+== Upgrade Notice ==
+
+= 3.0 =
+Redux is now hosted on Wordpress.org! Update in order to get proper, stable updates.
+
 * Removed get() and show()
 * Fixed huge performance bug
 * More bugfixes
