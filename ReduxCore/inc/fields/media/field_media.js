@@ -51,12 +51,16 @@ function redux_add_file(event, selector) {
 		selector.find('.upload-height').val(attachment.attributes.height);
 		selector.find('.upload-width').val(attachment.attributes.width);
 		var thumbSrc = attachment.attributes.url;
-		var height = attachment.attributes.height;
-		for (var key in attachment.attributes.sizes) {
-			var object = attachment.attributes.sizes[key];
-			if (object.height < height) {
-				height = object.height;
-				thumbSrc = object.url;
+		if (typeof attachment.attributes.sizes.thumbnail.url !== 'undefined') {
+			thumbSrc = attachment.attributes.sizes.thumbnail.url;
+		} else {
+			var height = attachment.attributes.height;
+			for (var key in attachment.attributes.sizes) {
+				var object = attachment.attributes.sizes[key];
+				if (object.height < height) {
+					height = object.height;
+					thumbSrc = object.url;
+				}
 			}
 		}
 		selector.find('.upload-thumbnail').val(thumbSrc);
