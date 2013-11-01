@@ -4,24 +4,11 @@ Wordpress options framework which uses the [WordPress Settings API](http://codex
 
 ## Getting Started with Redux ##
 
-ReduxFramework has been built from the group up as a auto-updating plugin. Updates are served from the Wordpress.org plugin directory. In this way Redux can be used by Themes and Plugins multiple time through the same insance.
+ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same Wordpress instance. For a guide on getting started please refer to [http://reduxframework.com/docs/getting-started/](http://reduxframework.com/docs/getting-started/).
 
-To install the plugin, just download the master branch zip file, and install as you would any other Wordpress plugin.
+## Please Post Reviews and Spread the Word ##
 
-
-## Creating a config file ##
-
-Inside the plugin directory is a `sample` folder. Copy this into your theme or plugin. DO NOT modify anything within the plugin or you will all your work at each update of the Redux Plugin.
-
-Include the `sample-config.php` file in your theme `functions.php` or plugin as follows:
-
-```php
-require_once('path/to/copied/sample/sample-config.php');
-```
-
-Edit ```sample-config.php``` as needed.
-
-
+ReduxFramework has just released to the Wordpress Plugins directory. Please spread the word, tweet, and (most importantly) post reviews on http://wordpress.org/plugins/redux-framework/. 
 
 
 ## Donate to the Framework ##
@@ -66,6 +53,45 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.0.5 =
+* Fixed how Redux is initialised so it works in any and all files without hooking into the init function.
+* Issue #151: Added thumbnails to media and displayed those instead of full image.
+* Issue #144: Slides had error if last slide was deleted.
+* Color field was outputting hex in the wrong location.
+* Added ACE Editor field, allowing for better inline editing.
+
+= 3.0.4 =
+* Fixed an odd saving issue.
+* Fixed link issues in the framework
+* Issue #135: jQuery UI wasn't being properly queued
+* Issue #140: Admin notice glitch. See http://reduxframework.com/2013/10/wordpress-notifications-custom-options-panels/
+* Use hooks instead of custom variable for custom admin CSS
+* Added "raw" field that allows PHP or a hook to embed anything in the panel.
+* Submenus in Admin now change the tabs without reloading the page.
+* Small fix for multi-text.
+* Added IT_it and RO_ro languages.
+* Updated readme file for languages.
+
+= 3.0.3 =
+* Fixed Issue #129: Spacing field giving an undefined.
+* Fixed Issue #131: Google Fonts stylesheet appending to body and also to the top of the header. Now properly placed both at the end of the head tag as to overload any theme stylesheets.
+* Fixed issue #132 (See #134, thanks @andreilupu): Could not have multiple Wordpress Editors (wp_editor) as the same ID was shared. Also fixed various styles to match Wordpress for this field.
+* Fixed Issue #133: Issue when custom admin stylesheet was used, a JS error resulted.
+
+= 3.0.2 =
+* Improvements to slides, various field fixes and improvements. Also fixed a few user submitted issues.
+
+= 3.0.1 =
+* Backing out a bit of submitted code that caused the input field to not properly break.
+
+= 3.0.0 =
+* Initial Wordpress.org plugin release.
+
+== Upgrade Notice ==
+
+= 3.0 =
+Redux is now hosted on Wordpress.org! Update in order to get proper, stable updates.
 
 * Removed get() and show()
 * Fixed huge performance bug

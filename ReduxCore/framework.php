@@ -15,18 +15,19 @@
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package     ReduxFramework
- * @author      Daniel J Griffiths (Ghost1227)
- * @author      Dovy Paukstys (dovy)
- * @version     3.0.3
+ * @author      ReduxFramework Team
+ * @version     3.0.5
  */
 
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
+
+
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
-	define('REDUX_VERSION', '3.0.3');
+	define('REDUX_VERSION', '3.0.5');
 
     // Windows-proof constants: replace backward by forward slashes
     // Thanks to: https://github.com/peterbouwmeester
@@ -115,7 +116,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = false;
             $defaults['system_info']        = false;
-            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . '<a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . $this->framework_version . '</span>';
+            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . $this->framework_version . '</span>';
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
@@ -152,6 +153,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 			$this->extra_tabs = $extra_tabs;
 
+            // Options page
+            add_action( 'admin_menu', array( &$this, '_internationalization' ) );
+
             // Set option with defaults
             add_action( 'init', array( &$this, '_set_default_options' ) );
 
@@ -170,6 +174,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
+        }
+
+        public function _internationalization() {
+            load_plugin_textdomain('redux-framework', false, basename( dirname( __FILE__ ) ) . '/languages' );
         }
 
         public function get_instance() {
@@ -735,9 +743,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue() {
             global $wp_styles;
 
-	    wp_enqueue_script('jquery');
-	    wp_enqueue_script('jquery-ui-core');
-        
+    	    wp_enqueue_script('jquery');
+	        wp_enqueue_script('jquery-ui-core');
+            add_thickbox();
 
             wp_register_style(
                 'redux-css',
@@ -848,6 +856,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'folds'				=> $this->folds,
                     'options'			=> $this->options,
                     'defaults'			=> $this->options_defaults,
+                    'slug'              => $this->args['page_slug']
                 );       
 
             // Construct the errors array. 
@@ -1054,11 +1063,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
                             if (!empty($field['title'])) {
-                                $th = $field['title'] . $default_mark;
+                                $th = $field['title'] . $default_mark."";
                             }
+          
 						    if( isset( $field['subtitle'] ) ) {
 								$th .= '<span class="description">' . $field['subtitle'] . '</span>';
 						    }
+
+                         
+                           
                         } 
 						if (!isset($field['id'])) {
 							print_r($field);
@@ -1122,6 +1135,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 							$field['class'] .= " compiler";
 						}
 						$this->sections[$k]['fields'][$fieldk] = $field;
+
+                        if( isset( $this->args['display_source'] ) ) {
+                            $th .= '<div id="'.$field['id'].'-settings" style="display:none;"><pre>'.var_export($this->sections[$k]['fields'][$fieldk], true).'</pre></div>';
+                            $th .= '<br /><a href="#TB_inline?width=600&height=800&inlineId='.$field['id'].'-settings" class="thickbox"><small>View Source</small></a>';
+                        }                           
 
                         add_settings_field( $fieldk . '_field', $th, array( &$this, '_field_input' ), $this->args['opt_name'] . $k . '_section_group', $this->args['opt_name'] . $k . '_section', $field ); // checkbox
                     }
@@ -1422,7 +1440,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div id="info_bar">';
             echo '<a href="javascript:void(0);" id="expand_options">' . __( 'Expand', 'redux-framework' ) . '</a>';
             echo '<div class="redux-action_bar">';
-            submit_button( '', 'primary', 'redux_save', false );
+            submit_button( __( 'Save Changes', 'redux-framework'), 'primary', 'redux_save', false );
             echo '&nbsp;';
             submit_button( __( 'Reset to Defaults', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
             echo '</div>';
@@ -1679,7 +1697,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             echo '<div class="redux-action_bar">';
-            submit_button( '', 'primary', 'redux_save', false );
+            submit_button( __( 'Save Changes', 'redux-framework'), 'primary', 'redux_save', false );
             echo '&nbsp;';
             submit_button( __( 'Reset to Defaults', 'redux-framework'), 'secondary', $this->args['opt_name'] . '[defaults]', false );
             echo '</div>';
