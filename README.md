@@ -4,7 +4,7 @@ Wordpress options framework which uses the [WordPress Settings API](http://codex
 
 ## Getting Started with Redux ##
 
-ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same Wordpress instance. For a guide on getting started please refer to [reduxframework.com/docs/getting-started/](reduxframework.com/docs/getting-started/).
+ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same Wordpress instance. For a guide on getting started please refer to [http://reduxframework.com/docs/getting-started/](http://reduxframework.com/docs/getting-started/).
 
 ## Please Post Reviews and Spread the Word ##
 
