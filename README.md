@@ -72,7 +72,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Issue #151: Added thumbnails to media and displayed those instead of full image.
 * Issue #144: Slides had error if last slide was deleted.
 * Color field was outputting hex in the wrong location.
-* Slimmed down the ACE Editor field.
+* Added ACE Editor field, allowing for better inline editing.
 
 = 3.0.4 =
 * Fixed an odd saving issue.
