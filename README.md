@@ -4,24 +4,11 @@ Wordpress options framework which uses the [WordPress Settings API](http://codex
 
 ## Getting Started with Redux ##
 
-ReduxFramework has been built from the group up as a auto-updating plugin. Updates are served from the Wordpress.org plugin directory. In this way Redux can be used by Themes and Plugins multiple time through the same insance.
+ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same Wordpress instance. For a guide on getting started please refer to [reduxframework.com/docs/getting-started/](reduxframework.com/docs/getting-started/).
 
-To install the plugin, just download the master branch zip file, and install as you would any other Wordpress plugin.
+## Please Post Reviews and Spread the Word ##
 
-
-## Creating a config file ##
-
-Inside the plugin directory is a `sample` folder. Copy this into your theme or plugin. DO NOT modify anything within the plugin or you will all your work at each update of the Redux Plugin.
-
-Include the `sample-config.php` file in your theme `functions.php` or plugin as follows:
-
-```php
-require_once('path/to/copied/sample/sample-config.php');
-```
-
-Edit ```sample-config.php``` as needed.
-
-
+ReduxFramework has just released to the Wordpress Plugins directory. Please spread the word, tweet, and (most importantly) post reviews on http://wordpress.org/plugins/redux-framework/. 
 
 
 ## Donate to the Framework ##
