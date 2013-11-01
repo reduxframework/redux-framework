@@ -897,7 +897,7 @@ function setup_framework_options(){
 				'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
 				'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
 				'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for select options
-				'default' => '2',
+				'default' => '2'
 				),
 			array(
 				'id'=>'15',
