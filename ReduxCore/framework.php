@@ -382,6 +382,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						foreach($font_icons as $k) {
 		           			$data[$k] = $k;
 		        		}
+					}else if ($type == "roles") {
+						global $wp_roles;
+                        $data = $wp_roles->get_names();
 					}else if ($type == "callback") {
 						$data = call_user_func($args[0]);
 					}//if			
