@@ -50,6 +50,8 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
             $this->value = $value;
             
             $this->add_text = ( isset($this->field['add_text']) ) ? $this->field['add_text'] : __( 'Add More', 'redux-framework');
+            
+            $this->show_empty = ( isset($this->field['show_empty']) ) ? $this->field['show_empty'] : true;
         
         }
 
@@ -71,11 +73,11 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
                         if( $value != '' )
                             echo '<li><input type="text" id="' . $this->field['id'] . '-' . $k . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][]" value="' . esc_attr( $value ) . '" class="regular-text ' . $this->field['class'] . '" /> <a href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a></li>';
                     }
-                } else {
-                    echo '<li><input type="text" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][]" value="" class="regular-text ' . $this->field['class'] . '" /> <a href="javascript:void(0);" class="button redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a></li>';
+                } elseif($this->show_empty == true ) {
+                    echo '<li><input type="text" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][]" value="" class="regular-text ' . $this->field['class'] . '" /> <a href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a></li>';
                 }
             
-                echo '<li style="display:none;"><input type="text" id="' . $this->field['id'] . '" name="" value="" class="regular-text" /> <a href="javascript:void(0);" class="button redux-multi-text-remove">' . __( 'Remove', 'redux-framework') . '</a></li>';
+                echo '<li style="display:none;"><input type="text" id="' . $this->field['id'] . '" name="" value="" class="regular-text" /> <a href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework') . '</a></li>';
 
             echo '</ul>';
         

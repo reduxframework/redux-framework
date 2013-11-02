@@ -1059,7 +1059,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
 				if ( empty( $section['id'] ) ) {
-                	$section['id'] = strtolower( str_replace( " ", "", $section['title'] ) );	
+                	//$section['id'] = strtolower( str_replace( " ", "", $section['title'] ) );	
+                    $section['id'] = sanitize_html_class( $section['title'] );	
                 }                   
 
                 // DOVY! Replace $k with $section['id'] when ready
