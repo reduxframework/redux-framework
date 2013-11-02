@@ -389,7 +389,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						global $wp_roles;
                         foreach( $wp_roles->roles as $role ){
                             foreach( $role['capabilities'] as $key => $cap ){
-                                $data[$key] = ucwords(str_replace('_', ' ', $key));   
+                                $data[$key] = ucwords(str_replace('_', ' ', $key));
                             }
                         }
 					}else if ($type == "callback") {
