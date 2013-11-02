@@ -48,6 +48,8 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
 
             $this->field = $field;
             $this->value = $value;
+            
+            $this->add_text = ( isset($this->field['add_text']) ) ? $this->field['add_text'] : __( 'Add More', 'redux-framework');
         
         }
 
@@ -77,7 +79,7 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
 
             echo '</ul>';
         
-            echo '<a href="javascript:void(0);" class="button button-primary redux-multi-text-add" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][]">' . __( 'Add More', 'redux-framework') . '</a><br/>';
+            echo '<a href="javascript:void(0);" class="button button-primary redux-multi-text-add" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][]">' . $this->add_text . '</a><br/>';
 
         }   
 
