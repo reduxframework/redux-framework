@@ -88,6 +88,8 @@ Special thanks to the following people for language translations:
 
 * German [de_DE] @Abu-Taymiyyah
 * Bahasa Indonesia [id_ID] @riesurya
+* Tirnovanuaurel [IT_it] [RO_ro] @tirnovanuaurel
+
 
 = Get Involved =
 Redux is an ever-changing, living system. Want to stay up to date or
