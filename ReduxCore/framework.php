@@ -385,6 +385,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					}else if ($type == "roles") {
 						global $wp_roles;
                         $data = $wp_roles->get_names();
+					}else if ($type == "capabilities") {
+						global $wp_roles;
+                        foreach( $wp_roles->roles as $role ){
+                            foreach( $role['capabilities'] as $key => $cap ){
+                                $data[$key] = ucwords(str_replace('_', ' ', $key));   
+                            }
+                        }
 					}else if ($type == "callback") {
 						$data = call_user_func($args[0]);
 					}//if			
