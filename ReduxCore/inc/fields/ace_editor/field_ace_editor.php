@@ -36,7 +36,7 @@ class ReduxFramework_ace_editor {
             <textarea name="<?php echo $name; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
                 <?php echo $this->value; ?>
             </textarea>
-            <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo $this->value; ?></pre>
+            <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars ($this->value); ?></pre>
         </div>
     <?php
         
