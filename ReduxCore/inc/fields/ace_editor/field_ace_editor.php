@@ -10,7 +10,7 @@ class ReduxFramework_ace_editor {
     */
     function __construct($field = array(), $value ='', $parent) {
         $this->field = $field;
-		$this->value = $value;
+		$this->value = trim($value);
 		$this->args = $parent->args;
         if( !isset($this->field['mode']) ){
             $this->field['mode'] = 'javascript';
