@@ -104,6 +104,9 @@ class ReduxFrameworkPlugin {
 			$this->options = get_option( 'ReduxFrameworkPlugin', $defaults );
 		}
 
+		// Load plugin text domain
+		add_action( 'wp_loaded', array( $this, 'load_plugin_textdomain' ) );
+
 		add_action( 'wp_loaded', array( $this, 'redux_options_toggle_check' )  );
 
 		// Activate plugin when new blog is added
@@ -118,7 +121,7 @@ class ReduxFrameworkPlugin {
 		}
 
 		
-		if ($this->options && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
+		if ($this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
 			require_once( dirname( __FILE__ ) . '/sample/sample-config.php' );
 		}
 
@@ -264,6 +267,22 @@ class ReduxFrameworkPlugin {
 	}
 
 	/**
+	 * Load the plugin text domain for translation.
+	 *
+	 * @since    1.0.0
+	 */
+	public function load_plugin_textdomain() {
+
+		$domain = $this->plugin_slug;
+		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+
+		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+		load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/ReduxCore/languages' );
+
+	}
+
+
+	/**
 	 * Turn on or off
 	 *
 	 * @since    1.0.0
@@ -275,10 +294,11 @@ class ReduxFrameworkPlugin {
 			$url = "./plugins.php";
 
 			if ( $_GET['ReduxFrameworkPlugin'] == 'demo') {
-				if ( $this->options == false ) {
-					$this->options = true;
+				if ( $this->options['demo'] == false ) {
+					$this->options['demo'] = true;
+					//$url = admin_url( 'admin.php?page=redux_sample_options');
 				} else {
-					$this->options = false;
+					$this->options['demo'] = false;
 				}
 			}
 			if ( is_multisite() && is_network_admin() && $this->plugin_network_activated ) {
@@ -315,7 +335,7 @@ class ReduxFrameworkPlugin {
 
 	 	$extra = '<br /><span style="display: block; padding-top: 6px;">';
 		
-		if ($this->options) {
+		if ($this->options['demo']) {
 			$demoText = '<a href="./plugins.php?ReduxFrameworkPlugin=demo" style="color: #bc0b0b;">' . __( 'Deactivate Demo Mode', $this->plugin_slug ) . '</a>';
 		} else {
 			$demoText = '<a href="./plugins.php?ReduxFrameworkPlugin=demo">' . __( 'Activate Demo Mode', $this->plugin_slug ) . '</a>';

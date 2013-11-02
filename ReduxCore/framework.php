@@ -153,6 +153,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 			$this->extra_tabs = $extra_tabs;
 
+            // Options page
+            add_action( 'admin_menu', array( &$this, '_internationalization' ) );
+
             // Set option with defaults
             add_action( 'init', array( &$this, '_set_default_options' ) );
 
@@ -171,23 +174,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
-            // Load plugin text domain
-            add_action( 'wp_loaded', array( &$this, '_internationalization' ) );
-            
         }
 
-        /**
-         * Load the plugin text domain for translation.
-         *
-         * @since    3.0.5
-         */
         public function _internationalization() {
-
-            $domain = 'redux-framework';
-            $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-            load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-            load_plugin_textdomain( 'redux-framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
+            load_plugin_textdomain('redux-framework', false, basename( dirname( __FILE__ ) ) . '/languages' );
         }
 
         public function get_instance() {
@@ -1164,7 +1154,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
 				delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
-				do_action( 'redux-compiler-' . $this->args['opt_name'], $this->options );
+				do_action('redux-compiler-' . $this->args['opt_name'], $this->options );
 			}				
 
         }
