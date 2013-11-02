@@ -186,7 +186,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $domain = 'redux-framework';
             $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
             load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-            load_plugin_textdomain( 'redux-framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+            load_textdomain( $domain, dirname( __FILE__ ) . '/languages/' . $domain . '-' . $locale . '.mo' );
+            
 
         }
 
