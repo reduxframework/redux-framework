@@ -1302,7 +1302,7 @@ function removeDemoModeLink() {
 		remove_filter( 'plugin_row_meta', array( ReduxFrameworkPlugin::get_instance(), 'plugin_meta_demo_mode_link'), null, 2 );
 	}
 }
-add_action('init', 'removeDemoModeLink');
+//add_action('init', 'removeDemoModeLink');
 
 
 
