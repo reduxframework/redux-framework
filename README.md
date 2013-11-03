@@ -54,6 +54,21 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.0.6 =
+* Hide customizer fields by default while still under development.
+* Fix Issue 123 - Language translations to actually function properly embedded as well as in the plugin.
+* Fix Issue 151 - Media field uses thumbnail not full image for preview. Also now storing the thumbnail URL. Uses the smallest available size as the thumb regardless of the name.
+* Fix Issue 147 - Option to pass params to select2. Contributed by @andreilupu. Thanks!
+* Added trim function to ace editor value to prevent whitespace before and after value keep being added
+* htmlspecialchars() value in pre editor for ace. to prevent html tags being hidden in editor and rendered in dom
+* Feature: Added optional 'add_text' argument for multi_text field so users can define button text.
+* Added consistent remove button on multi text, and used sanitize function for section id
+* Feature: Added roles as data for field data
+* Feature: Adding data layout options for multi checkbox and radio, we now have quarter, third, half, and full column layouts for these fields.
+* Feature: Eliminate REDUX_DIR and REDUX_URL constants and instead created static ReduxFramework::$_url and ReduxFramework::$_dir for cleaner code.
+Feature: Code at bottom of sample-config.php to hide plugin activation text about a demo plugin as well as code to demo how to hide the plugin demo_mode link.
+* Started work on class definitions of each field and class. Preparing for the panel builder we are planning to make.
+
 = 3.0.5 =
 * Fixed how Redux is initialised so it works in any and all files without hooking into the init function.
 * Issue #151: Added thumbnails to media and displayed those instead of full image.

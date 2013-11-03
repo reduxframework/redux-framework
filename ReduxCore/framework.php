@@ -16,7 +16,7 @@
  *
  * @package     ReduxFramework
  * @author      ReduxFramework Team
- * @version     3.0.5
+ * @version     3.0.6
  */
 
 // Exit if accessed directly
@@ -34,7 +34,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class ReduxFramework {
 
-        public static $_version = '3.0.5';
+        public static $_version = '3.0.6';
         public static $_dir; 
         public static $_url;        
         public static $_properties;

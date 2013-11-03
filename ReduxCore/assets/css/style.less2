@@ -955,6 +955,11 @@ img {
 	}
 }
 
+	.form-table th {
+		min-width: 35%;
+		padding-right: 10px;
+	}
+
 //mp6 fixes
 @media screen and (max-width : 783px) {
 	.mp6 #redux-container #info_bar {
@@ -983,22 +988,4 @@ img {
 
 #redux-main .field-desc {
 	clear: both;
-}
-
-#redux-main .data-full li{
-    width: 100%;
-}
-
-#redux-main .data-half li{
-    width: 50%;
-    float: left;
-}
-
-#redux-main .data-third li{
-    width: 33.3%;
-    float: left;
-}
-#redux-main .data-quarter li{
-    width: 25%;
-    float: left;
 }
