@@ -111,7 +111,8 @@ class ReduxFrameworkPlugin {
 
 		add_action('admin_notices', array( $this, 'admin_notices' ) );
 
-		add_filter( 'plugin_row_meta', array($this, 'ts_plugin_meta_links'), 10, 2 );
+		add_filter( 'plugin_row_meta', array($this, 'plugin_meta_links'), null, 2 );
+		add_filter( 'plugin_row_meta', array($this, 'plugin_meta_demo_mode_link'), null, 2 );
 
 		if ( !class_exists( 'Redux_Framework' ) && file_exists( dirname( __FILE__ ) . '/ReduxCore/framework.php' ) ) {
 			require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
@@ -308,7 +309,25 @@ class ReduxFrameworkPlugin {
 		*/
 	}
 
-	function ts_plugin_meta_links( $links, $file ) {
+	function plugin_meta_links( $links, $file ) {
+		if ( strpos($file,'redux-framework.php') === false ) {
+    		return $links;
+		}
+
+		$plugin = str_replace('class-redux-plugin', 'redux-framework', plugin_basename(__FILE__));
+		$array = array( '<a href="https://github.com/ReduxCore/ReduxFramework" target="_blank">Github Repo</a>', '<a href="https://github.com/ReduxFramework/ReduxFramework/issues/" target="_blank">Issue Tracker</a>' );
+		// create link
+		if ( $file == $plugin ) {
+			return array_merge(
+				$links,
+				$array
+			);
+		}
+		return $links;
+	 
+	}
+
+	function plugin_meta_demo_mode_link( $links, $file ) {
 		if ( strpos($file,'redux-framework.php') === false ) {
     		return $links;
 		}
@@ -329,17 +348,13 @@ class ReduxFrameworkPlugin {
 		$extra .='</span>';
 
 		$plugin = str_replace('class-redux-plugin', 'redux-framework', plugin_basename(__FILE__));
-		$array = array( '<a href="https://github.com/ReduxCore/ReduxFramework" target="_blank">Github Repo</a>', '<a href="https://github.com/ReduxFramework/ReduxFramework/issues/" target="_blank">Issue Tracker</a>'.$extra  );
 		// create link
 		if ( $file == $plugin ) {
-			return array_merge(
-				$links,
-				$array
-			);
+			$links[count($links)-1] .= $extra;
 		}
 		return $links;
 	 
-	}	
+	}		
 
 
 }

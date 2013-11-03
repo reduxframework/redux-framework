@@ -1291,3 +1291,19 @@ add_action('redux-compiler-redux-sample-file', 'testCompiler');
 if ( class_exists('ReduxFrameworkPlugin') ) {
 	//remove_action('admin_notices', array( ReduxFrameworkPlugin::get_instance(), 'admin_notices' ) );	
 }
+
+/**
+
+	Use this code to hide the demo mode link from the plugin page. Only used when Redux is a plugin.
+
+**/
+function removeDemoModeLink() {
+	if ( class_exists('ReduxFrameworkPlugin') ) {
+		remove_filter( 'plugin_row_meta', array( ReduxFrameworkPlugin::get_instance(), 'plugin_meta_demo_mode_link'), null, 2 );
+	}
+}
+add_action('init', 'removeDemoModeLink');
+
+
+
+
