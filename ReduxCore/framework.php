@@ -37,23 +37,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public static $_version = '3.0.5';
         public static $_dir; 
         public static $_url;        
-/**
-
-
-            
-            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . self::$_version . '</span>';
-            $defaults['help_tabs']          = array();
-            $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
-            $defaults['database']           = ''; // possible: options, theme_mods, theme_mods_expanded, transient
-            $defaults['customizer']         = false; // setting to true forces get_theme_mod_expanded
-            $defaults['global_variable']    = '';
-            $defaults['output']             = true; // Dynamically generate CSS
-            $defaults['transient_time']     = 60 * MINUTE_IN_SECONDS;
-
-            // The defaults are set so it will preserve the old behavior.
-            $defaults['default_show']       = false; // If true, it shows the default value
-            $defaults['default_mark']       = ''; // What to print by the field's title if the value shown is default
-*/
         public static $_properties;
 
         static function init() {
@@ -73,6 +56,23 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             self::$_dir = $fslashed_dir;
             self::$_url = site_url( str_replace( $fslashed_abs, '', $fslashed_dir ) );
+
+/**
+        Still need to port these.
+
+            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . self::$_version . '</span>';
+            $defaults['help_tabs']          = array();
+            $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
+            $defaults['database']           = ''; // possible: options, theme_mods, theme_mods_expanded, transient
+            $defaults['customizer']         = false; // setting to true forces get_theme_mod_expanded
+            $defaults['global_variable']    = '';
+            $defaults['output']             = true; // Dynamically generate CSS
+            $defaults['transient_time']     = 60 * MINUTE_IN_SECONDS;
+
+            // The defaults are set so it will preserve the old behavior.
+            $defaults['default_show']       = false; // If true, it shows the default value
+            $defaults['default_mark']       = ''; // What to print by the field's title if the value shown is default
+*/
 
             self::$_properties = array( 
                 'args' => array(

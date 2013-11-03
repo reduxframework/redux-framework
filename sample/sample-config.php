@@ -1285,10 +1285,9 @@ add_action('redux-compiler-redux-sample-file', 'testCompiler');
 
 /**
 
-	Use this function to hide the activation notice telling users about a sample panel.
+	Use this code to hide the activation notice telling users about a sample panel.
 
 **/
-function removeReduxAdminNotice() {
-	delete_option('REDUX_FRAMEWORK_PLUGIN_ACTIVATED_NOTICES');
+if ( class_exists('ReduxFrameworkPlugin') ) {
+	//remove_action('admin_notices', array( ReduxFrameworkPlugin::get_instance(), 'admin_notices' ) );	
 }
-add_action('redux_framework_plugin_admin_notice', 'removeReduxAdminNotice');
