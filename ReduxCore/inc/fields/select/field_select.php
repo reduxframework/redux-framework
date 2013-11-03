@@ -21,7 +21,7 @@ class ReduxFramework_select extends ReduxFramework{
 				$this->field['args'] = array();
 			}
 			if ($this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) {
-       			$icons_file = REDUX_DIR.'inc/fields/select/elusive-icons.php';
+       			$icons_file = ReduxFramework::$_dir.'inc/fields/select/elusive-icons.php';
        			$icons_file = apply_filters('redux-font-icons-file',$icons_file);
        			if(file_exists($icons_file))
        				require_once $icons_file;
@@ -104,7 +104,7 @@ class ReduxFramework_select extends ReduxFramework{
 
 		wp_enqueue_script(
 			'field-select-js', 
-			REDUX_URL.'inc/fields/select/field_select.min.js',
+			ReduxFramework::$_url.'inc/fields/select/field_select.min.js',
 			array('jquery', 'select2-js'),
 			time(),
 			true

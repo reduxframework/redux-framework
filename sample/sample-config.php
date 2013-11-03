@@ -137,12 +137,12 @@ $args['google_api_key'] = 'AIzaSyAX_2L_UzCDPEnAHTG7zhESRVpMPS4ssII';
 $args['share_icons']['twitter'] = array(
     'link' => 'http://twitter.com/ghost1227',
     'title' => 'Follow me on Twitter', 
-    'img' => REDUX_URL . 'assets/img/social/Twitter.png'
+    'img' => ReduxFramework::$_url . 'assets/img/social/Twitter.png'
 );
 $args['share_icons']['linked_in'] = array(
     'link' => 'http://www.linkedin.com/profile/view?id=52559281',
     'title' => 'Find me on LinkedIn', 
-    'img' => REDUX_URL . 'assets/img/social/LinkedIn.png'
+    'img' => ReduxFramework::$_url . 'assets/img/social/LinkedIn.png'
 );
 
 // Enable the import/export feature.
@@ -246,8 +246,8 @@ $args['footer_text'] = __('<p>This text is displayed below the options panel. It
 $sections = array();              
 
 //Background Patterns Reader
-$sample_patterns_path = REDUX_DIR . '../sample/patterns/';
-$sample_patterns_url  = REDUX_URL . '../sample/patterns/';
+$sample_patterns_path = ReduxFramework::$_dir . '../sample/patterns/';
+$sample_patterns_url  = ReduxFramework::$_url . '../sample/patterns/';
 $sample_patterns      = array();
 
 if ( is_dir( $sample_patterns_path ) ) :
@@ -421,8 +421,8 @@ $sections[] = array(
 			'default' 		=> 0,
 			'desc'=> __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework-demo'),
 			'options' => array(
-							'1' => array('alt' => 'Preset 1', 'img' => REDUX_URL.'../sample/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
-							'2' => array('alt' => 'Preset 2', 'img' => REDUX_URL.'../sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
+							'1' => array('alt' => 'Preset 1', 'img' => ReduxFramework::$_url.'../sample/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
+							'2' => array('alt' => 'Preset 2', 'img' => ReduxFramework::$_url.'../sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
 								),
 			),					
 		array(
@@ -473,12 +473,12 @@ $sections[] = array(
 			'title' => __('Main Layout', 'redux-framework-demo'), 
 			'subtitle' => __('Select main content and sidebar alignment. Choose between 1, 2 or 3 column layout.', 'redux-framework-demo'),
 			'options' => array(
-					'1' => array('alt' => '1 Column', 'img' => REDUX_URL.'assets/img/1col.png'),
-					'2' => array('alt' => '2 Column Left', 'img' => REDUX_URL.'assets/img/2cl.png'),
-					'3' => array('alt' => '2 Column Right', 'img' => REDUX_URL.'assets/img/2cr.png'),
-					'4' => array('alt' => '3 Column Middle', 'img' => REDUX_URL.'assets/img/3cm.png'),
-					'5' => array('alt' => '3 Column Left', 'img' => REDUX_URL.'assets/img/3cl.png'),
-					'6' => array('alt' => '3 Column Right', 'img' => REDUX_URL.'assets/img/3cr.png')
+					'1' => array('alt' => '1 Column', 'img' => ReduxFramework::$_url.'assets/img/1col.png'),
+					'2' => array('alt' => '2 Column Left', 'img' => ReduxFramework::$_url.'assets/img/2cl.png'),
+					'3' => array('alt' => '2 Column Right', 'img' => ReduxFramework::$_url.'assets/img/2cr.png'),
+					'4' => array('alt' => '3 Column Middle', 'img' => ReduxFramework::$_url.'assets/img/3cm.png'),
+					'5' => array('alt' => '3 Column Left', 'img' => ReduxFramework::$_url.'assets/img/3cl.png'),
+					'6' => array('alt' => '3 Column Right', 'img' => ReduxFramework::$_url.'assets/img/3cr.png')
 				),
 			'default' => '2'
 			),
@@ -832,12 +832,12 @@ $sections[] = array(
 			'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
 			'desc' => __('This uses some of the built in images, you can use them for layout options.', 'redux-framework-demo'),
 			'options' => array(
-							'1' => array('alt' => '1 Column', 'img' => REDUX_URL.'assets/img/1col.png'),
-							'2' => array('alt' => '2 Column Left', 'img' => REDUX_URL.'assets/img/2cl.png'),
-							'3' => array('alt' => '2 Column Right', 'img' => REDUX_URL.'assets/img/2cr.png'),
-							'4' => array('alt' => '3 Column Middle', 'img' => REDUX_URL.'assets/img/3cm.png'),
-							'5' => array('alt' => '3 Column Left', 'img' => REDUX_URL.'assets/img/3cl.png'),
-							'6' => array('alt' => '3 Column Right', 'img' => REDUX_URL.'assets/img/3cr.png')
+							'1' => array('alt' => '1 Column', 'img' => ReduxFramework::$_url.'assets/img/1col.png'),
+							'2' => array('alt' => '2 Column Left', 'img' => ReduxFramework::$_url.'assets/img/2cl.png'),
+							'3' => array('alt' => '2 Column Right', 'img' => ReduxFramework::$_url.'assets/img/2cr.png'),
+							'4' => array('alt' => '3 Column Middle', 'img' => ReduxFramework::$_url.'assets/img/3cm.png'),
+							'5' => array('alt' => '3 Column Left', 'img' => ReduxFramework::$_url.'assets/img/3cl.png'),
+							'6' => array('alt' => '3 Column Right', 'img' => ReduxFramework::$_url.'assets/img/3cr.png')
 								),//Must provide key => value(array:title|img) pairs for radio options
 			'default' => '2'
 			),
@@ -1058,7 +1058,7 @@ $theme_info .= '</div>';
 
 if(file_exists(dirname(__FILE__).'/README.md')){
 $tabs['theme_docs'] = array(
-			'icon' => REDUX_URL.'assets/img/glyphicons/glyphicons_071_book.png',
+			'icon' => ReduxFramework::$_url.'assets/img/glyphicons/glyphicons_071_book.png',
 			'title' => __('Documentation', 'redux-framework-demo'),
 			'content' => file_get_contents(dirname(__FILE__).'/README.md')
 			);

@@ -189,7 +189,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 
 		wp_enqueue_script(
 			'redux-field-spacing-js', 
-			REDUX_URL.'inc/fields/spacing/field_spacing.min.js', 
+			ReduxFramework::$_url.'inc/fields/spacing/field_spacing.min.js', 
 			array('jquery', 'select2-js', 'jquery-numeric'),
 			time(),
 			true
@@ -197,7 +197,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 
 		wp_enqueue_style(
 			'redux-field-spacing-css', 
-			REDUX_URL.'inc/fields/spacing/field_spacing.css', 
+			ReduxFramework::$_url.'inc/fields/spacing/field_spacing.css', 
 			time(),
 			true
 		);	

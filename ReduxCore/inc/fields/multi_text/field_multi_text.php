@@ -98,7 +98,7 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
         
             wp_enqueue_script(
                 'redux-field-multi-text-js', 
-                REDUX_URL . 'inc/fields/multi_text/field_multi_text.min.js', 
+                ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text.min.js', 
                 array( 'jquery' ),
                 time(),
                 true
@@ -106,7 +106,7 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
 
 			wp_enqueue_style(
 				'redux-field-multi-text-css', 
-				REDUX_URL.'inc/fields/multi_text/field_multi_text.css', 
+				ReduxFramework::$_url.'inc/fields/multi_text/field_multi_text.css', 
 				time(),
 				true
 			);            

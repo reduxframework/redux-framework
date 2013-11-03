@@ -55,20 +55,20 @@ class ReduxFramework_ace_editor {
 
             wp_enqueue_style(
                 'redux-field-ace-editor-css', 
-                REDUX_URL . 'inc/fields/ace_editor/field_ace_editor.css',
+                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.css',
                 time(),
                 true
             );
             wp_register_script(
                 'ace-editor',
-                REDUX_URL . 'inc/fields/ace_editor/ace-min-noconflict/ace.js',
+                ReduxFramework::$_url . 'inc/fields/ace_editor/ace-min-noconflict/ace.js',
                 array( 'jquery' ),
                 time(),
                 true
             );
             wp_enqueue_script(
                 'redux-field-ace-editor-js', 
-                REDUX_URL . 'inc/fields/ace_editor/field_ace_editor.js', 
+                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js', 
                 array( 'ace-editor' ),
                 time(),
                 true

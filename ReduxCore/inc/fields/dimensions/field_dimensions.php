@@ -148,7 +148,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 
 		wp_enqueue_script(
 			'redux-field-dimensions-js', 
-			REDUX_URL.'inc/fields/dimensions/field_dimensions.min.js', 
+			ReduxFramework::$_url.'inc/fields/dimensions/field_dimensions.min.js', 
 			array('jquery', 'select2-js', 'jquery-numeric'),
 			time(),
 			true
@@ -156,7 +156,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 
 		wp_enqueue_style(
 			'redux-field-dimensions-css', 
-			REDUX_URL.'inc/fields/dimensions/field_dimensions.css', 
+			ReduxFramework::$_url.'inc/fields/dimensions/field_dimensions.css', 
 			time(),
 			true
 		);

@@ -27,30 +27,6 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
-	define('REDUX_VERSION', '3.0.5');
-
-    // Windows-proof constants: replace backward by forward slashes
-    // Thanks to: https://github.com/peterbouwmeester
-    /** @noinspection PhpUndefinedFunctionInspection */
-    $fslashed_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-    $fslashed_abs = trailingslashit( str_replace( '\\', '/', ABSPATH ) );
-    // Fix for when Wordpress is not in the wp-content directory
-    if (strpos($fslashed_dir,$fslashed_abs) === false) {
-        $parts = explode('/', $fslashed_abs);
-        $test = str_replace('/'.max($parts), '', $fslashed_abs);
-        if (strpos($fslashed_dir,$test) !== false) {
-            $fslashed_abs = $test;
-        }
-    }
-
-    // Framework base directory
-    if( !defined( 'REDUX_DIR') )
-        define( 'REDUX_DIR', $fslashed_dir );
-
-    // Framework base URL
-    if( !defined( 'REDUX_URL' ) )
-        define( 'REDUX_URL', site_url( str_replace( $fslashed_abs, '', $fslashed_dir ) ) );
-
     /**
      * Main ReduxFramework class
      *
@@ -58,10 +34,148 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class ReduxFramework {
 
+        public static $_version = '3.0.5';
+        public static $_dir; 
+        public static $_url;        
+/**
+            $defaults['enqueue']            = true;
+            $defaults['allow_sub_menu']     = true;
+            $defaults['show_import_export'] = true;
+            $defaults['dev_mode']           = false;
+            $defaults['system_info']        = false;
+            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . self::$_version . '</span>';
+            $defaults['help_tabs']          = array();
+            $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
+            $defaults['database']           = ''; // possible: options, theme_mods, theme_mods_expanded, transient
+            $defaults['customizer']         = false; // setting to true forces get_theme_mod_expanded
+            $defaults['global_variable']    = '';
+            $defaults['output']             = true; // Dynamically generate CSS
+            $defaults['transient_time']     = 60 * MINUTE_IN_SECONDS;
+
+            // The defaults are set so it will preserve the old behavior.
+            $defaults['default_show']       = false; // If true, it shows the default value
+            $defaults['default_mark']       = ''; // What to print by the field's title if the value shown is default
+*/
+        public static $_properties;
+
+        static function init() {
+            // Windows-proof constants: replace backward by forward slashes
+            // Thanks to: @peterbouwmeester
+            /** @noinspection PhpUndefinedFunctionInspection */
+            $fslashed_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+            $fslashed_abs = trailingslashit( str_replace( '\\', '/', ABSPATH ) );
+            // Fix for when Wordpress is not in the wp-content directory
+            if (strpos($fslashed_dir,$fslashed_abs) === false) {
+                $parts = explode('/', $fslashed_abs);
+                $test = str_replace('/'.max($parts), '', $fslashed_abs);
+                if (strpos($fslashed_dir,$test) !== false) {
+                    $fslashed_abs = $test;
+                }
+            }
+
+            self::$_dir = $fslashed_dir;
+            self::$_url = site_url( str_replace( $fslashed_abs, '', $fslashed_dir ) );
+
+            self::$_properties = array( 
+                'args' => array(
+                    'opt_name' => array(
+                            'required', 
+                            'data_type'=>'string', 
+                            'label'=>'Option Name', 
+                            'desc'=>'Must be defined by theme/plugin. Is the unique key allowing multiple instance of Redux within a single Wordpress instance.', 
+                            'default'=>''
+                        ),
+                    'google_api_key' => array(
+                            'data_type'=>'string', 
+                            'label'=>'Google Web Fonts API Key', 
+                            'desc'=>'Key used to request Google Webfonts. Google fonts are omitted without this.', 
+                            'default'=>''
+                        ),
+                    'last_tab' => array( // Do we need this?
+                            'data_type'=>'string', 
+                            'label'=>'Last Tab', 
+                            'desc'=>'Last tab used.', 
+                            'default'=>'0'
+                        ),  
+                    'menu_icon' => array( 
+                            'data_type'=>'string', 
+                            'label'=>'Default Menu Icon', 
+                            'desc'=>'Default menu icon used by sections when one is not specified.', 
+                            'default'=> self::$_url . 'assets/img/menu_icon.png'
+                        ),                  
+
+                    'menu_title' => array( 
+                            'data_type'=>'string', 
+                            'label'=>'Menu Title', 
+                            'desc'=>'Label displayed when the admin menu is available.', 
+                            'default'=> __( 'Options', 'redux-framework' )
+                        ),              
+                    'page_title' => array( 
+                            'data_type'=>'string', 
+                            'label'=>'Page Title', 
+                            'desc'=>'Title used on the panel page.', 
+                            'default'=> __( 'Options', 'redux-framework' )
+                        ),  
+                   'page_icon' => array( 
+                            'data_type'=>'string', 
+                            'label'=>'Page Title', 
+                            'desc'=>'Icon class to be used on the options page.', 
+                            'default'=> 'icon-themes'
+                        ),      
+                   'page_slug' => array( 
+                            'required', 
+                            'data_type'=>'string', 
+                            'label'=>'Page Slug', 
+                            'desc'=>'Slug used to access options panel.', 
+                            'default'=> '_options'
+                        ),    
+                   'page_cap' => array( 
+                            'required', 
+                            'data_type'=>'string', 
+                            'label'=>'Page Capabilities', 
+                            'desc'=>'Permissions needed to access the options panel.', 
+                            'default'=> 'manage_options'
+                        ),  
+                   'page_cap' => array( 
+                            'required', 
+                            'type'=>'string', 
+                            'label'=>'Page Capabilities', 
+                            'desc'=>'Permissions needed to access the options panel.', 
+                            'default'=> 'manage_options'
+                        ),
+                    'page_type' => array(
+                        'required', 
+                        'data_type' => 'varchar',
+                        'label' => 'Page Type',
+                        'desc' => 'Specify if the admin menu should appear or not.',
+                        'default' => 'menu',
+                        'form' => array('type' => 'select', 'options' => array('menu' => 'Admin Menu', 'submenu' => 'Submenu Only')),
+                        'validation' => array('required'),
+                    ), 
+                    'page_parent' => array(
+                        'required', 
+                        'data_type' => 'varchar',
+                        'label' => 'Page Parent',
+                        'desc' => 'Specify if the admin menu should appear or not.',
+                        'default' => 'themes.php',
+                        'form' => array('type' => 'select', 'options' => array('index.php' => 'Dashboard', 'edit.php' => 'Posts', 'upload.php' => 'Media', 'link-manager.php' => 'Links', 'edit.php?post_type=page' => 'pages', 'edit-comments.php' => 'Comments', 'themes.php' => 'Appearance', 'plugins.php' => 'Plugins', 'users.php' => 'Users', 'tools.php' => 'Tools', 'options-general.php' => 'Settings', )),
+                        'validation' => array('required'),
+                    ),                       
+                   'page_position' => array( 
+                            'type'=>'int', 
+                            'label'=>'Page Position', 
+                            'desc'=>'Location where this menu item will appear in the admin menu. Warning, beware of overrides.', 
+                            'default'=> null
+                        ),                                  
+                ),
+            );  
+
+
+        }      
+
         // Protected vars
         // These two are actually really unnecessary and should be deprecated
         protected $framework_url        = 'http://www.reduxframework.com/';
-        protected $framework_version    = REDUX_VERSION;
 
         public $instance			= null;
 
@@ -93,13 +207,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
+            
             // Create defaults array
             $defaults = array();
 
             $defaults['opt_name']           = ''; // Must be defined by theme/plugin
             $defaults['google_api_key']     = ''; // Must be defined to add google fonts to the typography module
             $defaults['last_tab']           = '0';
-            $defaults['menu_icon']          = REDUX_URL . 'assets/img/menu_icon.png';
+            $defaults['menu_icon']          = self::$_url . 'assets/img/menu_icon.png';
             if (defined('MP6')) {
             	$defaults['menu_icon'] 		= '';
             }
@@ -116,7 +231,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = false;
             $defaults['system_info']        = false;
-            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . $this->framework_version . '</span>';
+            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . self::$_version . '</span>';
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
@@ -187,7 +302,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
             load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
             load_textdomain( $domain, dirname( __FILE__ ) . '/languages/' . $domain . '-' . $locale . '.mo' );
-            
 
         }
 
@@ -732,7 +846,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						if( isset( $field['type'] ) ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
                             if( !class_exists( $field_class ) ) {
-                                $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                                $class_file = apply_filters( 'redux-typeclass-load', self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
@@ -770,7 +884,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'redux-css',
-                REDUX_URL . 'assets/css/style.css',
+                self::$_url . 'assets/css/style.css',
                 array( 'farbtastic' ),
                 time(),
                 'all'
@@ -778,7 +892,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'redux-elusive-icon',
-                REDUX_URL . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
+                self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
                 array(),
                 time(),
                 'all'
@@ -786,7 +900,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'redux-elusive-icon-ie7',
-                REDUX_URL . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
+                self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
                 array(),
                 time(),
                 'all'
@@ -794,7 +908,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'select2-css',
-                REDUX_URL . 'assets/js/vendor/select2/select2.css',
+                self::$_url . 'assets/js/vendor/select2/select2.css',
                 array(),
                 time(),
                 'all'
@@ -804,7 +918,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'jquery-ui-css',
-                apply_filters( 'redux-ui-theme', REDUX_URL . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
+                apply_filters( 'redux-ui-theme', self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 '',
                 time(),
                 'all'
@@ -821,7 +935,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( $this->args['dev_mode'] === true) { // Pretty object output
 	            wp_enqueue_script(
 	                'json-view-js',
-	                REDUX_URL . 'assets/js/vendor/jsonview.min.js',
+	                self::$_url . 'assets/js/vendor/jsonview.min.js',
 	                array( 'jquery' ),
 	                time(),
 	                true
@@ -830,8 +944,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'redux-js',
-                //REDUX_URL . 'assets/js/admin.js',// DEBUG ONLY
-                REDUX_URL . 'assets/js/admin.min.js',
+                //self::$_url . 'assets/js/admin.js',// DEBUG ONLY
+                self::$_url . 'assets/js/admin.min.js',
                 array( 'jquery','jquery-cookie' ),
                 time(),
                 true
@@ -839,7 +953,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'jquery-cookie',
-                REDUX_URL . 'assets/js/vendor/cookie.js',
+                self::$_url . 'assets/js/vendor/cookie.js',
                 array( 'jquery' ),
                 time(),
                 true
@@ -847,7 +961,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_script( 
                 'select2-js', 
-                REDUX_URL . 'assets/js/vendor/select2/select2.min.js',
+                self::$_url . 'assets/js/vendor/select2/select2.min.js',
                 array( 'jquery' ),
                 time(),
                 true
@@ -855,7 +969,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_script(
                 'jquery-tipsy',
-                REDUX_URL . 'assets/js/vendor/jquery.tipsy.js',
+                self::$_url . 'assets/js/vendor/jquery.tipsy.js',
                 array( 'jquery' ),
                 time(),
                 true
@@ -863,7 +977,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_script(
                 'jquery-numeric',
-                REDUX_URL . 'assets/js/vendor/jquery.numeric.js ',
+                self::$_url . 'assets/js/vendor/jquery.numeric.js ',
                 array( 'jquery' ),
                 time(),
                 true
@@ -930,7 +1044,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
 
                             if( !class_exists( $field_class ) ) {
-                                $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                                $class_file = apply_filters( 'redux-typeclass-load', self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
@@ -1343,7 +1457,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $validate = 'Redux_Validation_' . $field['validate'];
 
                             if( !class_exists( $validate ) ) {
-                                $class_file = apply_filters( 'redux-validateclass-load', REDUX_DIR . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
+                                $class_file = apply_filters( 'redux-validateclass-load', self::$_dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
@@ -1795,7 +1909,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $field_class = 'ReduxFramework_' . $field['type'];
 
                 if( !class_exists( $field_class ) ) {
-                    $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                    $class_file = apply_filters( 'redux-typeclass-load', self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
 
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
@@ -1947,5 +2061,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             return $data_string;
         } 
     } // class
+    ReduxFramework::init();
+
 } // if
+
 
