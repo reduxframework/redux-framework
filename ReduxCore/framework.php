@@ -38,11 +38,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public static $_dir; 
         public static $_url;        
 /**
-            $defaults['enqueue']            = true;
-            $defaults['allow_sub_menu']     = true;
-            $defaults['show_import_export'] = true;
-            $defaults['dev_mode']           = false;
-            $defaults['system_info']        = false;
+
+
+            
             $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . self::$_version . '</span>';
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
@@ -166,7 +164,43 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             'label'=>'Page Position', 
                             'desc'=>'Location where this menu item will appear in the admin menu. Warning, beware of overrides.', 
                             'default'=> null
-                        ),                                  
+                        ),  
+                    'enqueue' => array(
+                            'required', 
+                            'data_type'=>'boolen', 
+                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
+                            'label'=>'Enqueue Files', 
+                            'desc'=>'Global shut-off for custom CSS enqueing by the framework', 
+                            'default'=>true
+                        ),
+                    'allow_sub_menu' => array(
+                            'data_type'=>'boolen', 
+                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
+                            'label'=>'Allow Submenu', 
+                            'desc'=>'Turn on or off the submenu that will typically be shown under Appearance.', 
+                            'default'=>true
+                        ),                        
+                    'show_import_export' => array(
+                            'data_type'=>'boolen', 
+                            'form' => array('type' => 'radio', 'options' => array(true => 'Show', false => 'Hide')),
+                            'label'=>'Show Import/Export', 
+                            'desc'=>'Show/Hide the import/export tab.', 
+                            'default'=>true
+                        ),  
+                    'dev_mode' => array(
+                            'data_type'=>'boolen', 
+                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
+                            'label'=>'Developer Mode', 
+                            'desc'=>'Turn on or off the dev mode tab.', 
+                            'default'=>false
+                        ), 
+                    'system_info' => array(
+                            'data_type'=>'boolen', 
+                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
+                            'label'=>'System Info', 
+                            'desc'=>'Turn on or off the system info tab.', 
+                            'default'=>false
+                        ),                                                         
                 ),
             );  
 
