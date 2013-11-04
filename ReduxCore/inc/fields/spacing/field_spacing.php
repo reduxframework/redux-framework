@@ -27,7 +27,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
-	
+	$this->field['all'] = true;
 		// No errors please
 		$defaults = array(
 			'units' 			=> '',
@@ -119,7 +119,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 		echo '<input type="hidden" class="field-units" value="'.$this->field['units'].'">';
 
 		if ( isset( $this->field['all'] ) && $this->field['all'] == true ) {
-			echo '<div class="input-prepend"><span class="add-on"><i class="icon-arrow-up icon-large"></i></span><input type="text" class="redux-spacing-all redux-spacing-input mini'.$this->field['class'].'" placeholder="'.__('All','redux-framework').'" rel="'.$this->field['id'].'-all" value="'.$this->value['top'].'"></div>';
+			echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="icon-fullscreen icon-large"></i></span><input type="text" class="redux-spacing-all redux-spacing-input mini'.$this->field['class'].'" placeholder="'.__('All','redux-framework').'" rel="'.$this->field['id'].'-all" value="'.$this->value['top'].'"></div>';
 		}
 
 		echo '<input type="hidden" class="redux-spacing-value" id="'.$this->field['id'].'-top" name="'.$this->args['opt_name'].'['.$this->field['id'].']['.$this->field['mode'].'top]" value="'.$this->value['top'].$this->value['units'].'">';
