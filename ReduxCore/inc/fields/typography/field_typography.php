@@ -48,6 +48,7 @@ class ReduxFramework_typography extends ReduxFramework{
             'word-spacing' => false,
             'letter-spacing' => false,
             'google' => true,
+            'update_weekly' => false // Enable to force updates of Google Fonts to be weekly
         );
         $this->field = wp_parse_args( $this->field, $defaults );
 
@@ -102,8 +103,17 @@ class ReduxFramework_typography extends ReduxFramework{
               echo '<div class="select_wrapper typography-family" style="width: 220px; margin-right: 5px;">';
               echo '<select data-placeholder="'.__('Font family','redux-framework').'" class="redux-typography redux-typography-family '.$this->field['class'].'" id="'.$this->field['id'].'-family" data-id="'.$this->field['id'].'" data-value="'.$fontFamily[0].'">';
               echo '<option data-google="false" data-details="" value=""></option>';
-              if ($this->field['google'] === true && !empty( $this->parent->args['google_api_key'] ) ) {
+              if ( isset($this->field['update_weekly']) && $this->field['update_weekly'] === true && $this->field['google'] === true && !empty( $this->parent->args['google_api_key'] ) ) {
                   echo '<optgroup label="'.__('Standard Fonts', 'redux-framework').'">';
+                  if( file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' )) {
+                    // Keep the fonts updated weekly
+                    $weekback = strtotime( date('jS F Y', time() + (60 * 60 * 24 * -7) ) );
+                    $last_updated = filemtime( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' );
+                    if ( $last_updated < $weekback ) {
+                      unlink( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' );
+                      unlink( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.json' );
+                    }                 
+                  }
               }
               if (empty($this->field['fonts'])) {
                   $this->field['fonts'] = array(
@@ -135,6 +145,7 @@ class ReduxFramework_typography extends ReduxFramework{
               if ($this->field['google'] == true && !empty( $this->parent->args['google_api_key'] ) ) {
 
                   echo '</optgroup>';
+
 
                   if( !file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' ) ) {
                       $this->getGoogleFonts($wp_filesystem);
@@ -481,6 +492,9 @@ class ReduxFramework_typography extends ReduxFramework{
 
                 if (empty($_SESSION['googleArray'])) :
                     */
+
+        
+
         if( !file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.json' ) ) {
             $result = wp_remote_get( 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$this->parent->args['google_api_key']);
             if ($result['response']['code'] == 200) {
