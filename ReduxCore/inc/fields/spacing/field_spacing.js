@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
 			units = jQuery(this).parents('.redux-field:first').find('.redux-spacing-units option:selected').val();
 		}
 		var value = jQuery(this).val();
-		if( typeof units !== 'undefined' ) {
+		if( typeof units !== 'undefined' && value ) {
 			value += units;
 		}
 		if ( jQuery(this).hasClass( 'redux-spacing-all' ) ) {
