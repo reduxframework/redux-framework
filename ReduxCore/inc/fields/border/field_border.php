@@ -186,8 +186,6 @@ class ReduxFramework_border extends ReduxFramework{
             'color' => !empty( $this->value['border-color'] ) ? $this->value['border-color'] : 'inherit',
             'style' => !empty( $this->value['border-style'] ) ? $this->value['border-style'] : 'inherit'
         );
-
-        print_r($value);
     	
 		//absolute, padding, margin
         $keys = implode(",", $this->field['output']);
