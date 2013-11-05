@@ -39,21 +39,21 @@ It is hard to continue development and support for this free plugin without cont
 * Border
 * Button Set
 * Checkbox / Multi-Check
-* Color (Wordpress Native)
+* Color (WordPress Native)
 * Gradient
 * Date
 * Dimensions (Height/Width)
-* Editor (Wordpress Native)
-* Gallery (Wordpress Native)
+* Editor (WordPress Native)
+* Gallery (WordPress Native)
 * Group (Repeatable/Non-Repeatable)
 * Image Select (Patterns/Presets)
 * Info (Header)
 * Link Color
-* Media (Wordpress Native)
+* Media (WordPress Native)
 * Multi-Text
 * Password
-* Radio (w/ Wordpress Data)
-* Select (Select/Multi-Select w/ Select2 & Wordpress Data)
+* Radio (w/ WordPress Data)
+* Select (Select/Multi-Select w/ Select2 & WordPress Data)
 * Slider
 * Sortable (Drag/Drop Checkbox/Input Fields)
 * Sorter (Drag/Drop Manager - Works great for content blocks)
@@ -189,7 +189,7 @@ Feature: Code at bottom of sample-config.php to hide plugin activation text abou
 = 3.0.3 =
 * Fixed Issue #129: Spacing field giving an undefined.
 * Fixed Issue #131: Google Fonts stylesheet appending to body and also to the top of the header. Now properly placed both at the end of the head tag as to overload any theme stylesheets.
-* Fixed issue #132 (See #134, thanks @andreilupu): Could not have multiple Wordpress Editors (wp_editor) as the same ID was shared. Also fixed various styles to match Wordpress for this field.
+* Fixed issue #132 (See #134, thanks @andreilupu): Could not have multiple WordPress Editors (wp_editor) as the same ID was shared. Also fixed various styles to match WordPress for this field.
 * Fixed Issue #133: Issue when custom admin stylesheet was used, a JS error resulted.
 
 = 3.0.2 =
@@ -199,12 +199,12 @@ Feature: Code at bottom of sample-config.php to hide plugin activation text abou
 * Backing out a bit of submitted code that caused the input field to not properly break.
 
 = 3.0.0 =
-* Initial Wordpress.org plugin release.
+* Initial WordPress.org plugin release.
 
 == Upgrade Notice ==
 
 = 3.0 =
-Redux is now hosted on Wordpress.org! Update in order to get proper, stable updates.
+Redux is now hosted on WordPress.org! Update in order to get proper, stable updates.
 
 == Attribution ==
 
