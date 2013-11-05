@@ -922,6 +922,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
     	    wp_enqueue_script('jquery');
 	        wp_enqueue_script('jquery-ui-core');
+            wp_enqueue_script('jquery-ui-sortable');
             add_thickbox();
 
             wp_register_style(
