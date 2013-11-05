@@ -56,6 +56,16 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.0.7 =
+* Feature - Completely redone spacing field. Choose to apply to sides or all at once with CSS output!
+* Feature - Completely redone border field. Choose to apply to sides or all at once with CSS output!
+* Feature - Added opt-in anonymous tracking, allowing us to further analyze usage.
+* Feature - Enable weekly updates of the Google Webfonts cache is desired. Also remove the Google Webfont files from shipping with Redux. Will re-download at first panel run to ensure users always have the most recent copy.
+* Language translation of german updated alone with ReduxFramework pot file.
+* Fix Issue 146 - Spacing field not storing data.
+* Fix - Firefox field description rendering bug.
+* Fix - Small issue where themes without tags were getting errors from the sample data.
+
 = 3.0.6 =
 * Hide customizer fields by default while still under development.
 * Fix Issue 123 - Language translations to actually function properly embedded as well as in the plugin.
