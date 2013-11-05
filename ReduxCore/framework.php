@@ -48,14 +48,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Fix for when Wordpress is not in the wp-content directory
             if (strpos($fslashed_dir,$fslashed_abs) === false) {
                 $parts = explode('/', $fslashed_abs);
-                $test = str_replace('/'.max($parts), '', $fslashed_abs);
+                $test = str_replace('/'.$parts[count($parts)-2], '', $fslashed_abs);
                 if (strpos($fslashed_dir,$test) !== false) {
                     $fslashed_abs = $test;
                 }
             }
 
             self::$_dir = $fslashed_dir;
-            self::$_url = site_url( str_replace( $fslashed_abs, '', $fslashed_dir ) );
+            self::$_url = home_url( str_replace( $fslashed_abs, '', $fslashed_dir ) );
 
 /**
         Still need to port these.
