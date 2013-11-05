@@ -56,6 +56,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.0.8 =
+* Version push to ensure all bugs fixes were deployed to users. Various.
+
 = 3.0.7 =
 * Feature - Completely redone spacing field. Choose to apply to sides or all at once with CSS output!
 * Feature - Completely redone border field. Choose to apply to sides or all at once with CSS output!
