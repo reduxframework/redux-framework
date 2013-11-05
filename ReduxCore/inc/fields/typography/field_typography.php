@@ -25,7 +25,6 @@ class ReduxFramework_typography extends ReduxFramework{
      * @since ReduxFramework 1.0.0
      */
     function render(){
-      print_r($this->value);
 
         global $wp_filesystem;
 
