@@ -3,9 +3,8 @@
  * @package Admin
  */
 
-if ( !class_exists( 'ReduxFrameworkPlugin' ) ) {
-	header( 'HTTP/1.0 403 Forbidden' );
-	die;
+if ( !class_exists( 'ReduxFramework' ) ) {
+	return;
 }
 
 /**
