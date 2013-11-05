@@ -148,7 +148,7 @@ class ReduxFramework_typography extends ReduxFramework{
                   if( !file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' ) ) {
                       $this->getGoogleFonts($wp_filesystem);
                   }
-                  echo "DOVYHERE";
+                  
                   if( file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' )) {
                     echo $wp_filesystem->get_contents( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' );
                   }
