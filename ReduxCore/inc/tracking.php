@@ -26,7 +26,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 
 			$options = get_option( 'Redux_Framework' );
 
-			if ( ! isset( $options['allow_tracking'] ) && $_GET['page'] == $parent->args['page_slug'] ) {
+			if ( ! isset( $options['allow_tracking'] ) && isset( $_GET['page'] ) && $_GET['page'] == $parent->args['page_slug'] ) {
 				wp_enqueue_style( 'wp-pointer' );
 				wp_enqueue_script( 'jquery' );
 				wp_enqueue_script( 'jquery-ui' );
