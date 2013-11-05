@@ -147,7 +147,7 @@ label.radio,label.multicheck{position:relative}
 #redux-main .input-append .add-on{border-top-right-radius:3px;border-bottom-right-radius:3px}
 #redux-main .input-prepend input{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:0}
 #redux-main .input-prepend .add-on{border-top-left-radius:3px;border-bottom-left-radius:3px}
-#redux-main td{padding:20px 0;display:inline-block}
+#redux-main td{padding:20px 0;display:inline-block;width:65%}
 #redux-main .mini,#redux-main input[type=text].mini{width:50px;text-align:center}
 #redux-main .upload{width:80%}
 .wrap{margin-top:0}
