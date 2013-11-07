@@ -309,6 +309,12 @@ class ReduxFrameworkPlugin {
 		*/
 	}
 
+	/**
+	 * @param array $links
+	 * @param string $file
+	 * @return array
+	 * @wp-hook plugin_row_meta
+	 */
 	function plugin_meta_links( $links, $file ) {
 		if ( strpos($file,'redux-framework.php') === false ) {
     		return $links;
@@ -327,6 +333,12 @@ class ReduxFrameworkPlugin {
 	 
 	}
 
+	/**
+	 * @param array $links
+	 * @param string $file
+	 * @return array
+	 * @wp-hook plugin_row_meta
+	 */
 	function plugin_meta_demo_mode_link( $links, $file ) {
 		if ( strpos($file,'redux-framework.php') === false ) {
     		return $links;
