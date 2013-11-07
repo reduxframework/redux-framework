@@ -27,7 +27,7 @@ class ReduxFramework_border extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
-		print_r($this->value);
+		
 		// No errors please
 		$defaults = array(
 			'top'				=> true,
