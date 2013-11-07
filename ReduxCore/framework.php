@@ -475,6 +475,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			$data = "";
 			if ( !empty($type) ) {
 
+                $data = apply_filters( 'redux/options/'.$this->args['opt_name'].'/wordpress_data/'.$type.'/', $data );
+
 				/**
 					Use data from Wordpress to populate options array
 				**/
@@ -505,7 +507,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
 								$data[$page->ID] = $page->post_title;
 							}//foreach
 						}//if
-					} else if ($type == "posts" || $type == "post") {
+                    } else if ($type == "terms" || $type == "term") {
+                        $taxonomies = $args['taxonomies'];
+                        unset($args['taxonomies']);
+                        if (empty($args)) {
+                            $args = array();
+                        }
+                        $terms = get_terms($taxonomies, $args); // this will get nothing
+                        if (!empty($terms)) {       
+                            foreach ( $terms as $term ) {
+                                $data[$term->term_id] = $term->name;
+                            }//foreach
+                        } // If
+                    } else if ($type == "posts" || $type == "post") {
 						$posts = get_posts($args); 
 						if (!empty($posts)) {
 							foreach ( $posts as $post ) {
@@ -553,8 +567,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					}//if			
 				}//if
 			}//if
-			
-			$data = apply_filters( 'redux/options/'.$this->args['opt_name'].'/wordpress_data/'.$type.'/', $data );
 
 			return $data;
 		}		
