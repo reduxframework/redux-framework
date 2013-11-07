@@ -27,7 +27,6 @@ class ReduxFramework_slider extends ReduxFramework{
 	 * @since ReduxFramework 0.0.4
 	*/
 	function render(){
-		print_r($this->value);
 
 		if( empty($this->field['min']) ) { 
 			$this->field['min'] = 0; 
