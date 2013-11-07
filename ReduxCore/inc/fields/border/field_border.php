@@ -27,7 +27,7 @@ class ReduxFramework_border extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
-		print_r($this->value);
+		
 		// No errors please
 		$defaults = array(
 			'top'				=> true,
@@ -59,8 +59,8 @@ class ReduxFramework_border extends ReduxFramework{
             'color' => isset( $this->value['border-color'] ) ? $this->value['border-color'] : $this->value['color'],
             'style' => isset( $this->value['border-style'] ) ? $this->value['border-style'] : $this->value['style']
 		);
-		
-		if ( $this->field['all'] == true && ( isset( $this->value['width'] ) || isset( $this->value['border-width'] ) ) ) {
+
+		if ( ( isset( $this->value['width'] ) || isset( $this->value['border-width'] ) ) ) {
 			if ( isset( $this->value['border-width'] ) && !empty( $this->value['border-width'] ) ) {
 				$this->value['width'] = $this->value['border-width'];
 			}
