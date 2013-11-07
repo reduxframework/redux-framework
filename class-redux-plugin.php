@@ -18,7 +18,6 @@
  * @author  Dovy Paukstys <info@simplerain.com>
  */
 
-/** @noinspection PhpUndefinedClassInspection */
 class ReduxFrameworkPlugin {
 
 	/**
