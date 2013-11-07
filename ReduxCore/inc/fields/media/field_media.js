@@ -45,7 +45,7 @@ function redux_add_file(event, selector) {
 		if (attachment.attributes.type !== "image") {
 			return;
 		}
-		redux_change(selector.find('.upload'));
+
 		selector.find('.upload').val(attachment.attributes.url).trigger('check_dependencies',selector.find('.upload'));
 		selector.find('.upload-id').val(attachment.attributes.id);
 		selector.find('.upload-height').val(attachment.attributes.height);
