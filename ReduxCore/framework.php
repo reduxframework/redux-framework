@@ -554,7 +554,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				}//if
 			}//if
 			
-			$data = apply_filters( 'redux/options/'.$this->args['opt_name'].'/wordpress_data/'$type.'/', $data );
+			$data = apply_filters( 'redux/options/'.$this->args['opt_name'].'/wordpress_data/'.$type.'/', $data );
 
 			return $data;
 		}		
