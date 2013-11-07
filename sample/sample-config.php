@@ -586,7 +586,7 @@ $sections[] = array(
 			'subtitle' => __('Only color validation can be done on this field type', 'redux-framework-demo'),
 			'output' => array('.site-header'), // An array of CSS selectors to apply this font style to
 			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
-			'default' => array('color' => '#1e73be', 'style' => 'solid', 'width'=>'3')
+			'default' => array('border-color' => '#1e73be', 'border-style' => 'solid', 'border-top'=>'3px', 'border-right'=>'3px', 'border-bottom'=>'3px', 'border-left'=>'3px')
 			),	
 		array(
 			'id'=>'spacing',
