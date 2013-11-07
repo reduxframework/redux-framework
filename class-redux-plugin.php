@@ -17,7 +17,7 @@
  * @package ReduxFrameworkPlugin
  * @author  Dovy Paukstys <info@simplerain.com>
  */
-/** @noinspection PhpUndefinedClassInspection */
+
 /** @noinspection PhpUndefinedClassInspection */
 class ReduxFrameworkPlugin {
 
