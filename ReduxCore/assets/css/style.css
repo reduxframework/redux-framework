@@ -74,7 +74,7 @@ a{outline:0 !important}
 #redux-intro-text p{margin:0;font-family:"Lucida Grande",Sans-serif;color:#888}
 .mp6 #redux-container #info_bar{padding:6px 10px 6px 6px}
 .mp6 #redux-container #info_bar a{margin-top:2px}
-#redux-container #info_bar{background:#f3f3f3;border:solid #d8d8d8;border-bottom:1px solid #d8d8d8;border-width:0 1px 1px 1px;padding:6px 10px 6px 6px;text-align:right;-moz-box-shadow:inset 0 1px 0 #fcfcfc;-webkit-box-shadow:inset 0 1px 0 #fcfcfc;box-shadow:inset 0 1px 0 #fcfcfc}
+#redux-container #info_bar{background:#f3f3f3;border-color:#d8d8d8;border-style:solid;border-width:0 1px 1px 1px;padding:6px 10px 6px 6px;text-align:right;-moz-box-shadow:inset 0 1px 0 #fcfcfc;-webkit-box-shadow:inset 0 1px 0 #fcfcfc;box-shadow:inset 0 1px 0 #fcfcfc}
 #redux-container #expand_options{cursor:pointer;display:block;height:22px;width:21px;float:left;font-size:0;text-indent:-9999px;margin:0 0 0 5px;border:1px solid #bbb;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px}
 #redux-container #expand_options{background:url(../img/toggle_tabs.png) no-repeat -2px -26px}
 #redux-container #expand_options.expanded{background:url(../img/toggle_tabs.png) no-repeat -2px -1px}
