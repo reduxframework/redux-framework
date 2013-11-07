@@ -223,13 +223,14 @@ class ReduxFrameworkPlugin {
 	 * @return	array|false	The blog ids, false if no matches.
 	 */
 	private static function get_blog_ids() {
+		/** @global wpdb $wpdb */
 		global $wpdb;
 
 		// get an array of blog ids
 		$sql = "SELECT blog_id FROM $wpdb->blogs
 			WHERE archived = '0' AND spam = '0'
 			AND deleted = '0'";
-        /** @noinspection PhpUndefinedMethodInspection */
+
         return $wpdb->get_col( $sql );
 	}
 
