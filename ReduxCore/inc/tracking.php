@@ -235,8 +235,12 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 					),
 					'options'  => apply_filters( 'Redux/Tracking/Filters', array() ),
 					'theme'    => $theme,
+					'developer'=> apply_filters( 'Redux/Tracking/Developer', array() ),
 					'plugins'  => $plugins,
 				);
+				if (empty($data['developer'])) {
+					unset($data['developer']);
+				}
 
 				$args = array(
 					'body' => $data
