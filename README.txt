@@ -1,5 +1,5 @@
 === Redux Framework ===
-Contributors: ghost1227, dovyp
+Contributors: nohalfpixels, ghost1227, dovyp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
