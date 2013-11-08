@@ -17,10 +17,14 @@ if ( !class_exists( 'ReduxFramework' ) ) {
 
 
 if ( !class_exists( 'Redux_Tracking' ) ) {
+	/**
+	 * Class Redux_Tracking
+	 */
 	class Redux_Tracking extends ReduxFramework {
 
 		/**
 		 * Class constructor
+		 * @param ReduxFramework $parent
 		 */
 		function __construct($parent){
 
