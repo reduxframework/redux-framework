@@ -415,7 +415,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				} else {
 					update_option( $this->args['opt_name'], $value );
 				}
-				// Set a global variable by the global_variable agument.
+				// Set a global variable by the global_variable argument.
 				if ( $this->args['global_variable'] ) {
 					$options = $this->args['global_variable'];
 					global $$options;
