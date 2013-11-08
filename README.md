@@ -81,7 +81,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Feature: Added roles as data for field data
 * Feature: Adding data layout options for multi checkbox and radio, we now have quarter, third, half, and full column layouts for these fields.
 * Feature: Eliminate REDUX_DIR and REDUX_URL constants and instead created static ReduxFramework::$\_url and ReduxFramework::$\_dir for cleaner code.
-Feature: Code at bottom of sample-config.php to hide plugin activation text about a demo plugin as well as code to demo how to hide the plugin demo_mode link.
+* Feature: Code at bottom of sample-config.php to hide plugin activation text about a demo plugin as well as code to demo how to hide the plugin demo_mode link.
 * Started work on class definitions of each field and class. Preparing for the panel builder we are planning to make.
 
 = 3.0.5 =
