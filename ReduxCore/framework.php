@@ -134,13 +134,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             'desc'=>'Permissions needed to access the options panel.', 
                             'default'=> 'manage_options'
                         ),  
-                   'page_cap' => array( 
-                            'required', 
-                            'type'=>'string', 
-                            'label'=>'Page Capabilities', 
-                            'desc'=>'Permissions needed to access the options panel.', 
-                            'default'=> 'manage_options'
-                        ),
                     'page_type' => array(
                         'required', 
                         'data_type' => 'varchar',
