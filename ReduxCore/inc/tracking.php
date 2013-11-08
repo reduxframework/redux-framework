@@ -233,10 +233,14 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 						'spam'     => $comments_count->spam,
 						'pings'    => $wpdb->get_var( "SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_type = 'pingback'" ),
 					),
-					'options'  => apply_filters( 'Redux/Tracking/Filters', array() ),
+					'options'  => apply_filters( 'Redux/Tracking/Options', array() ),
 					'theme'    => $theme,
+					'developer'=> apply_filters( 'Redux/Tracking/Developer', array() ),
 					'plugins'  => $plugins,
 				);
+				if (empty($data['developer'])) {
+					unset($data['developer']);
+				}
 
 				$args = array(
 					'body' => $data
@@ -266,7 +270,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 		return $options;
 	}
 
-	add_filter( 'Redux/Tracking/Filters', 'redux_tracking_additions' );
+	add_filter( 'Redux/Tracking/Options', 'redux_tracking_additions' );
 
 
 	function redux_allow_tracking_callback() {
