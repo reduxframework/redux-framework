@@ -2003,6 +2003,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     //save the values into a unique array in case we need it for dependencies
                     $this->fieldsValues[$field['id']] = (isset($value['url']) && is_array($value) )?$value['url']:$value;
                     //create default data und class string and checks the dependencies of an object
+					$class_string = '';
+					$data_string = '';
                     extract($this->check_dependencies($field));
 
 					echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field redux-container-'.$field['type'].' '.$class_string.'" data-id="'.$field['id'].'" '.$data_string.'>';
