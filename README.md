@@ -196,3 +196,6 @@ Redux is now hosted on WordPress.org! Update in order to get proper, stable upda
 * Made text domain a constant
 * Removed PHP closing tags to prevent issues with newlines
 * Added option to define custom start tab
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/dbb3b94f2607cb4a119a7863c230a98e "githalytics.com")](http://githalytics.com/ReduxFramework/ReduxFramework)
