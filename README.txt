@@ -139,6 +139,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.0.9-beta =
+* Feature - Set default icon class for all sections and tabs, for example: $args['default_icon_class'] = 'icon-large';
+
 = 3.0.8 =
 * Version push to ensure all bugs fixes were deployed to users. Various.
 
