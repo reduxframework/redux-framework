@@ -454,7 +454,8 @@ $sections[] = array(
 			'default'=> array(
 				'color'=>"#333", 
 				'font-style'=>'700', 
-				'font-family'=>'Courier, monospace', 
+				'font-family'=>'Abel', 
+				'google' => true,
 				'font-size'=>'33px', 
 				'line-height'=>'40'),
 			),	
