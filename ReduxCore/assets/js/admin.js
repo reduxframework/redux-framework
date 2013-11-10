@@ -356,8 +356,8 @@ function redux_change(variable) {
 		//verify_fold(variable);
 	}
 	window.onbeforeunload = confirmOnPageExit;
-	if (jQuery(variable).hasClass('redux-field-error')) {
-		jQuery(variable).removeClass('redux-field-error');
+	if (jQuery(variable).parents('fieldset.redux-field:first').hasClass('redux-field-error')) {
+		jQuery(variable).parents('fieldset.redux-field:first').removeClass('redux-field-error');
 		jQuery(variable).parent().find('.redux-th-error').slideUp();
 		var parentID = jQuery(variable).closest('.redux-group-tab').attr('id');
 		var hideError = true;
@@ -603,8 +603,9 @@ jQuery(document).ready(function($) {
 			jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
 			jQuery("#" + sectionID + "_section_group_li_a").addClass("hasError");
 			jQuery.each(sectionArray.errors, function(key, value) {
-				jQuery("#" + value.id).addClass("redux-field-error");
-				jQuery("#" + value.id).parents("td:first").append('<span class="redux-th-error">' + value.msg + '</span>');
+				console.log(value);
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).addClass("redux-field-error");
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
 			});
 		});
 	}
@@ -616,8 +617,8 @@ jQuery(document).ready(function($) {
 			jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-warning">' + sectionArray.total + '</span>');
 			jQuery("#" + sectionID + "_section_group_li_a").addClass("hasWarning");
 			jQuery.each(sectionArray.warnings, function(key, value) {
-				jQuery("#" + value.id).addClass("redux-field-warning");
-				jQuery("#" + value.id).parents("td:first").append('<span class="redux-th-warning">' + value.msg + '</span>');
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).addClass("redux-field-warning");
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).append('<div class="redux-th-warning">' + value.msg + '</div>');
 			});
 		});
 	}
