@@ -399,6 +399,10 @@ jQuery(document).ready(function($) {
 	jQuery('.redux-group-tab-link-a').click(function() {
 		relid = jQuery(this).data('rel'); // The group ID of interest
 		// Set the proper page cookie
+		$.cookie('redux_current_tab', relid, {
+       		expires: 7,
+       		path: '/'
+       	});
 
 		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a.current').removeClass('current');
 		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu li.current').removeClass('current');
