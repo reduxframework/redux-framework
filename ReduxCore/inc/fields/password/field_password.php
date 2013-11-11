@@ -69,7 +69,7 @@ class ReduxFramework_password {
 		}
 
 		// Username field
-		echo '<input type="input" autocomplete="off" placeholder="' . $this->value['placeholder']['username'] . '" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr( $this->value['username'] ) . '" class="regular-text ' . $this->field['class'] . '" style="margin-right: 5px;" />';
+		echo '<input type="input" autocomplete="off" placeholder="' . $this->value['placeholder']['username'] . '" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr( $this->value['username'] ) . '" class="regular-text ' . $this->field['class'] . '" />&nbsp;';
 
 		// Password field
 		echo '<input type="password" autocomplete="off" placeholder="' . $this->value['placeholder']['password'] . '" id="' . $this->field['id'] . '[password]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr( $this->value['password'] ) . '" class="regular-text ' . $this->field['class'] . '" />';
