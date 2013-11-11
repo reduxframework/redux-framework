@@ -124,14 +124,7 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
                 time(),
                 true
             ); 
-
-			wp_enqueue_style(
-				'redux-field-color-css', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.css', 
-				time(),
-				true
-			);                 
-        
+               
         }
     }
 }
