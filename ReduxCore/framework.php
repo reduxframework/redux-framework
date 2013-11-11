@@ -614,6 +614,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
             }
+            $this->options_defaults = apply_filters( 'redux/options/'.$this->args['opt_name'].'/defaults', $this->options_defaults );
+
             return $this->options_defaults;
         }
 
