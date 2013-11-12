@@ -1471,7 +1471,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             	set_transient( 'redux-warnings-' . $this->args['opt_name'], $this->warnings, 1000 );
             }               
 
-            do_action( 'redux-validate-' . $this->args['opt_name'], $plugin_options, $this->options );
+            do_action_ref_array('redux-validate-' . $this->args['opt_name'], array(&$plugin_options, $this->options));
 
             if( !empty( $plugin_options['compiler'] ) ) {
             	$plugin_options['REDUX_COMPILER'] = time();
