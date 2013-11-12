@@ -292,6 +292,7 @@ $sections[] = array(
 			'compiler' => 'true',
 			'desc'=> __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
 			'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+			'default'=>array('url'=>'http://s.wordpress.org/style/images/codeispoetry.png'),
 			),
 
 		array(
