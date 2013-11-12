@@ -35,21 +35,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
     class ReduxFramework {
 
         public static $_version = '3.0.9';
-        public static $_dir; // REMOVE
-        public static $_url; // REMOVE
-        public static $dir; 
-        public static $url;                      
+        public static $_dir;
+        public static $_url;
         public static $_properties;
 
         static function init() {
 
 			// Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-			self::$dir      = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-            self::$_dir     = self::$dir; // REMOVE
+			self::$_dir      = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
 			$wp_content_dir = trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) );
-			$relative_url   = str_replace( $wp_content_dir, '', self::$dir );
-			self::$url      = trailingslashit( WP_CONTENT_URL ) . $relative_url;
-            self::$_url     = self::$url; // REMOVE
+			$relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
+			self::$_url      = trailingslashit( WP_CONTENT_URL ) . $relative_url;
 
 /**
         Still need to port these.
@@ -93,7 +89,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             'data_type'=>'string', 
                             'label'=>'Default Menu Icon', 
                             'desc'=>'Default menu icon used by sections when one is not specified.', 
-                            'default'=> self::$url . 'assets/img/menu_icon.png'
+                            'default'=> self::$_url . 'assets/img/menu_icon.png'
                         ),                  
 
                     'menu_title' => array( 
@@ -233,7 +229,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['opt_name']           = ''; // Must be defined by theme/plugin
             $defaults['google_api_key']     = ''; // Must be defined to add google fonts to the typography module
             $defaults['last_tab']           = '0';
-            $defaults['menu_icon']          = self::$url . 'assets/img/menu_icon.png';
+            $defaults['menu_icon']          = self::$_url . 'assets/img/menu_icon.png';
             if (defined('MP6')) {
             	$defaults['menu_icon'] 		= '';
             }
@@ -912,7 +908,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						if( isset( $field['type'] ) ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
                             if( !class_exists( $field_class ) ) {
-                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
+                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
@@ -952,7 +948,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'redux-css',
-                self::$url . 'assets/css/style.css',
+                self::$_url . 'assets/css/style.css',
                 array( 'farbtastic' ),
                 time(),
                 'all'
@@ -960,7 +956,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'redux-elusive-icon',
-                self::$url . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
+                self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
                 array(),
                 time(),
                 'all'
@@ -968,7 +964,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'redux-elusive-icon-ie7',
-                self::$url . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
+                self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
                 array(),
                 time(),
                 'all'
@@ -976,7 +972,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'select2-css',
-                self::$url . 'assets/js/vendor/select2/select2.css',
+                self::$_url . 'assets/js/vendor/select2/select2.css',
                 array(),
                 time(),
                 'all'
@@ -986,7 +982,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_style(
                 'jquery-ui-css',
-                apply_filters( 'redux/page/'.$this->opt_name.'/enqueue/jquery-ui-css', self::$url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
+                apply_filters( 'redux/page/'.$this->opt_name.'/enqueue/jquery-ui-css', self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 '',
                 time(),
                 'all'
@@ -1003,7 +999,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( $this->args['dev_mode'] === true) { // Pretty object output
 	            wp_enqueue_script(
 	                'json-view-js',
-	                self::$url . 'assets/js/vendor/jsonview.min.js',
+	                self::$_url . 'assets/js/vendor/jsonview.min.js',
 	                array( 'jquery' ),
 	                time(),
 	                true
@@ -1012,8 +1008,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'redux-js',
-                //self::$url . 'assets/js/admin.js',// DEBUG ONLY
-                self::$url . 'assets/js/admin.min.js',
+                //self::$_url . 'assets/js/admin.js',// DEBUG ONLY
+                self::$_url . 'assets/js/admin.min.js',
                 array( 'jquery','jquery-cookie' ),
                 time(),
                 true
@@ -1021,7 +1017,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script(
                 'jquery-cookie',
-                self::$url . 'assets/js/vendor/cookie.js',
+                self::$_url . 'assets/js/vendor/cookie.js',
                 array( 'jquery' ),
                 time(),
                 true
@@ -1029,7 +1025,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_script( 
                 'select2-js', 
-                self::$url . 'assets/js/vendor/select2/select2.min.js',
+                self::$_url . 'assets/js/vendor/select2/select2.min.js',
                 array( 'jquery' ),
                 time(),
                 true
@@ -1037,7 +1033,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_script(
                 'jquery-tipsy',
-                self::$url . 'assets/js/vendor/jquery.tipsy.js',
+                self::$_url . 'assets/js/vendor/jquery.tipsy.js',
                 array( 'jquery' ),
                 time(),
                 true
@@ -1045,7 +1041,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_register_script(
                 'jquery-numeric',
-                self::$url . 'assets/js/vendor/jquery.numeric.js ',
+                self::$_url . 'assets/js/vendor/jquery.numeric.js ',
                 array( 'jquery' ),
                 time(),
                 true
@@ -1113,7 +1109,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
 
                             if( !class_exists( $field_class ) ) {
-                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
+                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
@@ -1533,8 +1529,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $validate = 'Redux_Validation_' . $field['validate'];
 
                             if( !class_exists( $validate ) ) {
-                                $class_file = apply_filters( 'redux-validateclass-load', self::$dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate ); // REMOVE LATER
-                                $class_file = apply_filters( 'redux/validate/'.$this->args['opt_name'].'/class/'.$field['validate'], self::$dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
+                                $class_file = apply_filters( 'redux-validateclass-load', self::$_dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate ); // REMOVE LATER
+                                $class_file = apply_filters( 'redux/validate/'.$this->args['opt_name'].'/class/'.$field['validate'], self::$_dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
@@ -2009,7 +2005,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $field_class = 'ReduxFramework_' . $field['type'];
 
                 if( !class_exists( $field_class ) ) {
-                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
+                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
                         require_once($class_file);
