@@ -611,6 +611,7 @@ $sections[] = array(
 			'mode'=>'margin', // absolute, padding, margin, defaults to padding
 			//'units' => 'em', // You can specify a unit value. Possible: px, em, %
 			//'units_extended' => 'true', // Allow users to select any type of unit
+			//'display_units' => 'false', // Set to false to hide the units if the units are specified
 			'title' => __('Padding/Margin Option', 'redux-framework-demo'),
 			'subtitle' => __('Allow your users to choose the spacing or margin they want.', 'redux-framework-demo'),
 			'desc' => __('You can enable or disable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework-demo'),
