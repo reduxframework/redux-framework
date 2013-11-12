@@ -315,7 +315,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'init', array( &$this, '_register_extensions' ) );
 
             // Any dynamic CSS output, let's run
-            add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
+            if( $this -> args[ 'output' ] == true ){
+            	add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
+            }
 
             // Add tracking. PLEASE leave this in tact! It helps us gain needed statistics of uses. Opt-in of course.
             add_action( 'init', array( &$this, '_tracking' ), 3 );            
