@@ -37,25 +37,28 @@ class ReduxFramework_dimensions extends ReduxFramework{
  
 		$this->field = wp_parse_args( $this->field, $defaults );
 
-		if ( isset( $this->field['units'] ) && !in_array($this->field['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			unset( $this->field['units'] );
-		}	
+		if ( isset( $this->field['units'] ) && !is_array( $this->field['units'] ) ) {
 
-		if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			unset( $this->value['units'] );
-		}
+			if ( isset( $this->field['units'] ) && !in_array($this->field['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+				unset( $this->field['units'] );
+			}	
 
-		if ( isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // Value should equal field units
-			$this->value['units'] = $this->field['units'];
-		} else if ( !isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // If both undefined
-			$this->field['units'] = 'px';
-			$this->value['units'] = 'px';
-		} else if ( !isset( $this->field['units'] ) && isset( $this->value['units'] ) ) { // If Value is defined
-			if ( empty( $this->value['units'] ) ) { // Value can't be empty in this case for this field
+			if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+				unset( $this->value['units'] );
+			}
+
+			if ( isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // Value should equal field units
+				$this->value['units'] = $this->field['units'];
+			} else if ( !isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // If both undefined
 				$this->field['units'] = 'px';
 				$this->value['units'] = 'px';
-			} else {
-				$this->field['units'] = $this->value['units'];	// Make the field have it
+			} else if ( !isset( $this->field['units'] ) && isset( $this->value['units'] ) ) { // If Value is defined
+				if ( empty( $this->value['units'] ) ) { // Value can't be empty in this case for this field
+					$this->field['units'] = 'px';
+					$this->value['units'] = 'px';
+				} else {
+					$this->field['units'] = $this->value['units'];	// Make the field have it
+				}
 			}
 		}
 
@@ -113,6 +116,9 @@ class ReduxFramework_dimensions extends ReduxFramework{
 					$testUnits = array('px', 'em', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
 				} else {
 					$testUnits = array('px', 'em', '%');
+				}
+				if ( $this->field['units'] != "" && is_array( $this->field['units'] ) ) {
+					$testUnits = $this->field['units'];
 				}
 				
 				if ( in_array($this->field['units'], $testUnits) ) {
