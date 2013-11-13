@@ -1682,7 +1682,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						$icon_class = '';
 					}
 
-					$icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="icon-' . $section['icon'] . $icon_class . '"></i> ';
+					$icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="el-icon-' . $section['icon'] . $icon_class . '"></i> ';
                 }
 
 				if (isset($section['type']) && $section['type'] == "divide") {

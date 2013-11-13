@@ -1075,10 +1075,17 @@ if ( !empty( $tags ) ) {
 $theme_info .= '</div>';
 
 if(file_exists(dirname(__FILE__).'/README.md')){
-$tabs['theme_docs'] = array(
+$sections['theme_docs'] = array(
 			'icon' => ReduxFramework::$_url.'assets/img/glyphicons/glyphicons_071_book.png',
 			'title' => __('Documentation', 'redux-framework-demo'),
-			'content' => file_get_contents(dirname(__FILE__).'/README.md')
+			'fields' => array(
+				array(
+					'id'=>'17',
+					'type' => 'raw',
+					'content' => file_get_contents(dirname(__FILE__).'/README.md')
+					),				
+			),
+			
 			);
 }//if
 
