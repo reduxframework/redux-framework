@@ -25,72 +25,15 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-[data-icon]:before {
-  font-family: 'Elusive-Icons';
-  content: attr(data-icon);
-  speak: none;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-
-a [class^="icon-"],
-a [class*=" icon-"] {
-  display: inline-block;
-  text-decoration: inherit;
-}
-
 /* makes the font 33% larger relative to the icon container */
 .icon-large:before {
   vertical-align: middle;
-  font-size: 1.33em;
-}
-
-.btn, .nav-tabs {
-  [class^="icon-"],
-  [class*=" icon-"] {
-  /* keeps button heights with and without icons the same */
-    line-height: .9em;
-  }
-}
-
-li {
-  [class^="el-icon-"],
-  [class*=" el-icon-"] {
-    display: inline-block;
-    width: 1.25em;
-    text-align: center;
-  }
-  .icon-large:before,
-  .icon-large:before {
-    /* 1.5 increased font size for icon-large * 1.25 width */
-    width: 1.5*1.25em;
-  }
-}
-
-ul.icons {
-  list-style-type: none;
-  margin-left: 2em;
-  text-indent: -.8em;
-
-  li {
-    [class^="el-icon-"],
-    [class*=" el-icon-"] {
-      width: .8em;
-    }
-    .icon-large:before,
-    .icon-large:before {
-      /* 1.5 increased font size for icon-large * 1.25 width */
-      vertical-align: initial;
-//      width: 1.5*1.25em;
-    }
-  }
+  font-size: 1.35em;
 }
 
 .btn-large [class^="el-icon-"], .btn-large [class*=" el-icon-"]{
   margin-top: 0;
 }
-
 
 .el-icon-zoom-out:before {
 	content: "\e600";

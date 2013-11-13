@@ -1,12 +1,5 @@
 @font-face{font-family:'Elusive-Icons';src:url('font/Elusive-Icons.eot?v=2');src:url('font/Elusive-Icons.eot?#iefix&v=2') format('embedded-opentype'),url('font/Elusive-Icons.svg#Elusive-Icons?v=2') format('svg'),url('font/Elusive-Icons.woff?v=2') format('woff'),url('font/Elusive-Icons.ttf?v=2') format('truetype');font-weight:normal;font-style:normal}[class*="el-icon-"]{font-family:'Elusive-Icons';speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-[data-icon]:before{font-family:'Elusive-Icons';content:attr(data-icon);speak:none;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased}
-a [class^="icon-"],a [class*=" icon-"]{display:inline-block;text-decoration:inherit}
-.icon-large:before{vertical-align:middle;font-size:1.33em}
-.btn [class^="icon-"],.nav-tabs [class^="icon-"],.btn [class*=" icon-"],.nav-tabs [class*=" icon-"]{line-height:.9em}
-li [class^="el-icon-"],li [class*=" el-icon-"]{display:inline-block;width:1.25em;text-align:center}
-li .icon-large:before,li .icon-large:before{width:1.875em}
-ul.icons{list-style-type:none;margin-left:2em;text-indent:-0.8em}ul.icons li [class^="el-icon-"],ul.icons li [class*=" el-icon-"]{width:.8em}
-ul.icons li .icon-large:before,ul.icons li .icon-large:before{vertical-align:initial}
+.icon-large:before{vertical-align:middle;font-size:1.35em}
 .btn-large [class^="el-icon-"],.btn-large [class*=" el-icon-"]{margin-top:0}
 .el-icon-zoom-out:before{content:"\e600"}
 .el-icon-zoom-in:before{content:"\e601"}
