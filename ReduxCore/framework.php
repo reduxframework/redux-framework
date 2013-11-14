@@ -1499,8 +1499,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $plugin_options[$field['id']] = 0;
                         }
 
-                        if( isset( $field['type'] ) && $field['type'] == 'multi_text' ) continue; // We can't validate this yet
-
                         if( !isset( $plugin_options[$field['id']] ) || $plugin_options[$field['id']] == '' ) continue;
 
                         // Force validate of custom field types
@@ -1536,19 +1534,23 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     foreach ( $plugin_options[$field['id']] as $key => $value ) {
                                         $validation = new $validate( $field, $plugin_options[$field['id']][$key], $options[$field['id']][$key] );
                                         $plugin_options[$field['id']][$key] = $validation->value;
+                                        if( isset( $validation->error ) ) {
+                                            $this->errors[] = $validation->error;
+                                        }
+                                        if( isset( $validation->warning) ) {
+                                            $this->warnings[] = $validation->warning;                                        
+                                        }
                                     }
                                 } else {
                                     $validation = new $validate( $field, $plugin_options[$field['id']], $options[$field['id']] );    
+                                    $plugin_options[$field['id']] = $validation->value;
+                                    if( isset( $validation->error ) ) {
+                                        $this->errors[] = $validation->error;
+                                    }
+                                    if( isset( $validation->warning) ) {
+                                        $this->warnings[] = $validation->warning;                                        
+                                    }                                    
                                 }
-                                
-                                $plugin_options[$field['id']] = $validation->value;
-
-                                if( isset( $validation->error ) )
-                                    $this->errors[] = $validation->error;
-
-                                if( isset( $validation->warning) )
-                                    $this->warnings[] = $validation->warning;
-
                                 continue;
                             }
                         }

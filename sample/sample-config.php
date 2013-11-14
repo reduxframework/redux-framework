@@ -670,8 +670,9 @@ $sections[] = array(
 		array(
 			'id'=>'multi_text',
 			'type' => 'multi_text',
-			'title' => __('Multi Text Option', 'redux-framework-demo'),
-			'subtitle' => __('This is a little space under the Field Title in the Options table, additional info is good in here.', 'redux-framework-demo'),
+			'title' => __('Multi Text Option - Color Validated', 'redux-framework-demo'),
+			'validate' => 'color',
+			'subtitle' => __('If you enter an invalid color it will be removed. Try using the text "blue" as a color.  ;)', 'redux-framework-demo'),
 			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo')
 			),
 		array(
