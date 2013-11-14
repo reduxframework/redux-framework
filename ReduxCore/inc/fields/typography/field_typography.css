@@ -55,3 +55,11 @@
 #redux-main .redux-typography-container .typography-color {
   margin-bottom: 5px;
 }
+#redux-main .redux-typography-container .typography-element-title {
+  font-size: 10px;
+  color: rgb(126, 126, 126);
+  margin-bottom: -2px;
+}
+#redux-main .redux-typography-container .wp-picker-container{
+  margin-top: -4px;
+}
