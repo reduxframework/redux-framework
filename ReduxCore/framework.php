@@ -1532,7 +1532,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             		$options[$field['id']] = '';
                             	}
 
-                                $validation = new $validate( $field, $plugin_options[$field['id']], $options[$field['id']] );
+                                if ( isset( $plugin_options[$field['id']] ) && is_array( $plugin_options[$field['id']] ) ) {
+                                    foreach ( $plugin_options[$field['id']] as $key => $value ) {
+                                        $validation = new $validate( $field, $plugin_options[$field['id']][$key], $options[$field['id']][$key] );
+                                        $plugin_options[$field['id']][$key] = $validation->value;
+                                    }
+                                } else {
+                                    $validation = new $validate( $field, $plugin_options[$field['id']], $options[$field['id']] );    
+                                }
+                                
                                 $plugin_options[$field['id']] = $validation->value;
 
                                 if( isset( $validation->error ) )
