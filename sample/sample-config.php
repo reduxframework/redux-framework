@@ -589,10 +589,10 @@ $sections[] = array(
 			'title' => __('Links Color Option', 'redux-framework-demo'),
 			'subtitle' => __('Only color validation can be done on this field type', 'redux-framework-demo'),
 			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+			//'regular' => false, // Disable Regular Color
+			//'hover' => false, // Disable Hover Color
+			//'active' => false, // Disable Active Color
 			'default' => array(
-				'show_regular' => true,
-				'show_hover' => true,
-				'show_active' => true
 			)
 		),
 		array(
