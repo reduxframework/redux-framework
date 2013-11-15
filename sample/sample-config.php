@@ -283,7 +283,14 @@ $sections[] = array(
     'icon' => 'el-icon-home',
     // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
 	'fields' => array(
-		
+            
+                array(
+                        'id'=>'section-media-start',
+                        'type' => 'section', 
+                        'title' => __('Media Options', 'redux-framework-demo'),
+                        'subtitle'=> __('With the "section" field you can create indent option sections.'),                            
+                        'indent' => true // Indent all options below until the next 'section' option is set.
+                        ),    
 		array(
 			'id'=>'media',
 			'type' => 'media', 
@@ -309,7 +316,13 @@ $sections[] = array(
 			'title' => __('Media No Preview', 'redux-framework-demo'),
 			'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework-demo'),
 			'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-			),			
+			),	
+                array(
+                        'id'=>'section-media-end',
+                        'type' => 'section', 
+                        'title' => '',
+                        'indent' => false // Clean section for options below
+                ),             
         array(
             'id' => 'gallery',
             'type' => 'gallery',
