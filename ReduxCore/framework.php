@@ -554,12 +554,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						global $wp_roles;
                         $data = $wp_roles->get_names();
 					}else if ($type == "sidebars" || $type == "sidebar") {
-                        /** @global GLOBALS */
-                        global $GLOBALS;
-                        foreach ($GLOBALS['wp_registered_sidebars'] as $key=>$value) {
+                        /** @global array $wp_registered_sidebars */
+                        foreach ($wp_registered_sidebars as $key=>$value) {
                             $data[$key] = $value['name'];
                         }
                     }else if ($type == "capabilities") {
+						/** @global WP_Roles $wp_roles */
 						global $wp_roles;
                         foreach( $wp_roles->roles as $role ){
                             foreach( $role['capabilities'] as $key => $cap ){
