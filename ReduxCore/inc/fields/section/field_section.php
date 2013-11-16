@@ -66,13 +66,15 @@ if( !class_exists( 'ReduxFramework_divide' ) ) {
                         $add_class = ' form-table-section-indented';
                     }
                     
-                    echo '</td></tr></table><div id="' . $this->field['id'] . '" class="' . $this->field['style'] . $this->field['class'] . '">';
+                    echo '</td></tr></table><div id="' . $this->field['id'] . '" class="redux-section-head">';
+                    
                     if (!empty($this->field['title'])){
                         echo '<h3>'.$this->field['title'].'</h3>';
                     }
                     if (!empty($this->field['subtitle'])){                    
                     echo '<div class="redux-section-desc">'.$this->field['subtitle'].'</div>';
                     }
+                    
                     echo '</div><table class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td>';  
             
 		}
