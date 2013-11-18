@@ -518,6 +518,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if (empty($args)) {
                             $args = array();
                         }
+                        if (empty($args['args'])) {
+                            $args['args'] = array();
+                        }                        
                         $terms = get_terms($taxonomies, $args['args']); // this will get nothing
                         if (!empty($terms)) {       
                             foreach ( $terms as $term ) {
