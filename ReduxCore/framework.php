@@ -245,6 +245,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['page_position']      = null;
             $defaults['enqueue']      		= true;
             $defaults['allow_sub_menu']     = true;
+            $defaults['save_defaults']      = true; // Save defaults to the DB on it if empty
             $defaults['show_import_export'] = true; // REMOVE
             $defaults['dev_mode']           = false; // REMOVE
             $defaults['system_info']        = false; // REMOVE
@@ -797,7 +798,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		    // Set defaults if empty
 		    if( empty( $this->options ) && !empty( $this->sections ) ) {
 				$defaults = $this->_default_values();
-				$this->set_options( $defaults );
+                if ( $this->args['save_defaults'] == true ) {
+                    $this->set_options( $defaults ); // Only save these defaults to the DB if this argument is set
+                }
 				$this->options = $defaults;
 		    }
 	    
