@@ -319,6 +319,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Load plugin text domain
             add_action( 'wp_loaded', array( &$this, '_internationalization' ) );
             
+            // Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
+            global $pagenow;
+            if ($pagenow === "admin.php") {
+                remove_action('admin_init', 'pb_admin_init');
+            }
+
         }
 
         /**
