@@ -45,11 +45,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
         static function init() {
 
 			// Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-			self::$_dir      = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-			$wp_content_dir  = trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) );
-			$relative_url    = str_replace( $wp_content_dir, '', self::$_dir );
-			$WP_CONTENT_URL  = (empty($_SERVER['HTTPS'])) ? WP_CONTENT_URL : str_replace("http://", "https://", WP_CONTENT_URL );
-			self::$_url      = trailingslashit( $WP_CONTENT_URL ) . $relative_url;
+			self::$_dir     = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+			$wp_content_dir = trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) );
+			$relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
+			$wp_content_url = ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL );
+			self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;
 
 /**
         Still need to port these.
