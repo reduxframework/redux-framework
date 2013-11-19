@@ -569,6 +569,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         $data = $wp_roles->get_names();
 					}else if ($type == "sidebars" || $type == "sidebar") {
                         /** @global array $wp_registered_sidebars */
+                        global $wp_registered_sidebars;
                         foreach ($wp_registered_sidebars as $key=>$value) {
                             $data[$key] = $value['name'];
                         }
