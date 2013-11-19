@@ -1101,8 +1101,6 @@ $sections['theme_docs'] = array(
 
 
 // You can append a new section at any time.
-$sampleHTML = 'Use custom HTML for the info field, including <b>bold</b>, <i>itlaic</i>, <u>underline</u>, <font color=red>colors</font>, <a href=http://www.http://reduxframework.com>hyperlinks</a> and more!';
-
 $sections[] = array(
 	'icon' => 'el-icon-eye-open',
 	'title' => __('Additional Fields', 'redux-framework-demo'),
