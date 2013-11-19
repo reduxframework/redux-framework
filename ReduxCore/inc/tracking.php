@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Admin
+ * @package Redux_Tracking
  */
 
 if ( !class_exists( 'ReduxFramework' ) ) {
