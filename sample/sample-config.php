@@ -1137,7 +1137,7 @@ $sections[] = array(
             'id'=>'info_warning',
             'type'=>'info',
             'style'=>'warning',
-            'header'=> __( 'This is a header.', 'redux-framework-demo' ),
+            'title'=> __( 'This is a title.', 'redux-framework-demo' ),
             'desc' => __( 'This is an info field with the warning style applied and a header.', 'redux-framework-demo')
         ),
         array(
@@ -1145,7 +1145,7 @@ $sections[] = array(
             'type'=>'info',
             'style'=>'success',
             'icon'=>'el-icon-info-sign',
-            'header'=> __( 'This is a header.', 'redux-framework-demo' ),
+            'title'=> __( 'This is a title.', 'redux-framework-demo' ),
             'desc' => __( 'This is an info field with the success style applied, a header and an icon.', 'redux-framework-demo')
         ),
 		array(
