@@ -24,14 +24,14 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_edd' ) ) {
+if( !class_exists( 'ReduxFramework_edd_license' ) ) {
 
     /**
      * Main ReduxFramework_color class
      *
      * @since       1.0.0
      */
-	class ReduxFramework_edd extends ReduxFramework {
+	class ReduxFramework_edd_license extends ReduxFramework {
 	
 		/**
 		 * Field Constructor.
@@ -49,7 +49,27 @@ if( !class_exists( 'ReduxFramework_edd' ) ) {
 			$this->field = $field;
 			$this->value = $value;
 
-			$this->parent = $parent;
+			// Create defaults array
+			$defaults = array(
+				'mode' => '',
+				'path' => '',
+				'remote_api_url' => '',
+				'version' => '',
+				'item_name' => '',
+				'author' => '',
+				'mode' => '',
+			);
+
+			$this->field = wp_parse_args( $this->field, $defaults );    
+
+			$defaults = array(
+				'license' 	=> '',
+				'status' 	=> '',
+			);
+
+			$this->value = wp_parse_args( $this->value, $defaults );			
+
+			$this->parent = $parent;		
 		
 		}
 	
@@ -63,14 +83,14 @@ if( !class_exists( 'ReduxFramework_edd' ) ) {
 	 	 * @return		void
 		 */
 		public function render() {
-
-			$defaults = array(
-				'license' 	=> '',
-				'status' 	=> '',
-			);
-
-			$this->value = wp_parse_args( $this->value, $defaults );
-
+			echo '</td></tr></table><div id="' . $this->field['id'] . '-notice" class="redux-warning  redux-info-field">';
+			echo '<p class="redux-info-icon"><i class="el-icon-info-sign icon-large"></i></p><h1 class="redux-info-desc"><b>License Status: <span id="' . $this->field['id'] . '-status_notice">'.ucfirst($this->value['status']).'</span></b></h1></div>';
+			echo '<div data-id="'.$this->field['id'].'" class="redux-container-edd_field" style="text-align: center;">';
+			echo '<input data-id="'.$this->field['id'].'" type="hidden" class="redux-edd " type="text" id="' . $this->field['id'] . '-field_id" value="' . $this->field['id'] . '" " />'; 
+			echo '<input data-id="'.$this->field['id'].'" type="hidden" class="redux-edd " type="text" id="' . $this->field['id'] . '-remote_api_url" value="' . $this->field['remote_api_url'] . '" " />'; 
+			echo '<input data-id="'.$this->field['id'].'" type="hidden" class="redux-edd " type="text" id="' . $this->field['id'] . '-version" value="' . $this->field['version'] . '" " />'; 
+			echo '<input data-id="'.$this->field['id'].'" type="hidden" class="redux-edd " type="text" id="' . $this->field['id'] . '-item_name" value="' . $this->field['item_name'] . '" " />'; 
+			echo '<input data-id="'.$this->field['id'].'" type="hidden" class="redux-edd " type="text" id="' . $this->field['id'] . '-author" value="' . $this->field['author'] . '" " />'; 
 			echo '<input data-id="'.$this->field['id'].'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][license]"  id="' . $this->field['id'] . '-license" class="redux-edd ' . $this->field['class'] . '"  type="text" value="' . $this->value['license'] . '" " />'; 
 			echo '<input type="hidden" data-id="'.$this->field['id'].'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][status]" id="' . $this->field['id'] . '-status" class="redux-edd ' . $this->field['class'] . '" type="text" value="' . $this->value['status'] . '" " />'; 
 			echo '&nbsp; <a href="#" class="button button-primary redux-EDDAction" data-edd_action="check_license">Verify License</a>';
@@ -81,7 +101,8 @@ if( !class_exists( 'ReduxFramework_edd' ) ) {
 					echo '<input type="hidden" data-id="'.$this->field['id'].'" id="' . $this->field['id'] . '-'.$k.'" class="redux-edd edd-'.$k.'"  type="text" value="' . $v . '" " />';
 				}
 			}
-
+			echo '</div>';
+			echo '<table class="form-table no-border" style="margin-top: 0;"><tbody><tr><th></th><td>';
 		}
 	
 		/**
@@ -97,7 +118,7 @@ if( !class_exists( 'ReduxFramework_edd' ) ) {
 
 			wp_enqueue_script(
 				'redux-field-edd-js', 
-				ReduxFramework::$_url . 'extensions/edd/field_edd.js', 
+				ReduxFramework::$_url . 'extensions/edd/edd_license/field_edd_license.js', 
 				array( 'jquery' ),
 				time(),
 				true
@@ -105,12 +126,11 @@ if( !class_exists( 'ReduxFramework_edd' ) ) {
 
 			wp_enqueue_style(
 				'redux-field-edd-css', 
-				ReduxFramework::$_url . 'extensions/edd/field_edd.css', 
+				ReduxFramework::$_url . 'extensions/edd/edd_license/field_edd_license.css', 
 				time(),
 				true
 			);
 		
 		}
-	
 	}
 }
