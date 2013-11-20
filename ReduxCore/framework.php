@@ -1293,6 +1293,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
+                        if ( !isset( $field['type'] ) ) {
+                            continue; // You need a type!
+                        }
                     	
                     	$th = "";
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" ) {
@@ -1374,9 +1377,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $th .= '<div id="'.$field['id'].'-settings" style="display:none;"><pre>'.var_export($this->sections[$k]['fields'][$fieldk], true).'</pre></div>';
                             $th .= '<br /><a href="#TB_inline?width=600&height=800&inlineId='.$field['id'].'-settings" class="thickbox"><small>View Source</small></a>';
                         }
-                        if ( isset($field['type']) ) {
-                            do_action( 'redux/options/'.$this->args['opt_name'].'/field/'.$field['type'].'/register', $field);    
-                        }
+                        do_action( 'redux/options/'.$this->args['opt_name'].'/field/'.$field['type'].'/register', $field);
                         add_settings_field( $fieldk . '_field', $th, array( &$this, '_field_input' ), $this->args['opt_name'] . $k . '_section_group', $this->args['opt_name'] . $k . '_section', $field ); // checkbox
                     }
                 }
