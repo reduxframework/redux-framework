@@ -74,7 +74,6 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             $this->value = wp_parse_args( $this->value, $defaults );
 
             if ( !isset( $this->field['mode'] ) ) {
-                echo "here1";
                 $this->field['mode'] = "image";
             }
 
@@ -157,7 +156,6 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             echo '</div>';  
 
             if ( ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ) || $this->field['mode'] != false ) {
-                echo "here";
                 // Use javascript globalization, better than any other method.
                 global $wp_scripts;
                 $data = $wp_scripts->get_data('redux-field-media-js', 'data');
