@@ -81,16 +81,17 @@ if (!class_exists('ReduxFramework_group')) {
             echo '<div id="redux-groups-accordion">';
 
             // Create dummy content for the adding new ones
-            echo '<div class="redux-groups-accordion-group redux-dummy" style="display:none" id="redux-dummy-' . $this->field['id'] . '"><h3><span class="redux-groups-header"></span></h3>';
+            echo '<div class="redux-groups-accordion-group redux-dummy" style="display:none" id="redux-dummy-' . $this->field['id'] . '"><h3><span class="redux-groups-header">' . __("New ", "redux-framework") . $this->field['groupname'] . '</span></h3>';
             echo '<div>';//according content open
                 
             echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';    
             echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '_slide-title" data-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_title]" value="" class="regular-text slide-title" /></fieldset>';
             echo '<input type="hidden" class="slide-sort" data-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_sort]" id="' . $this->field['id'] . '-slide_sort" value="" />';
+            $field_is_title = true;
                 foreach ($this->field['subfields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
                     $this->enqueue_dependencies($field['type']);
-                    
+
                     echo '<tr><td>';
                     if(isset($field['class']))
                         $field['class'] .= " group";
@@ -105,6 +106,7 @@ if (!class_exists('ReduxFramework_group')) {
 
                     ob_start();
                     $this->parent->_field_input($field, $value);
+
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
@@ -112,6 +114,11 @@ if (!class_exists('ReduxFramework_group')) {
                     $content = str_replace($name, $name . '[@]', $content);
                     // remove the name property. asigned by the controller, create new data-name property for js
                     $content = str_replace('name', 'data-name', $content);
+
+                    if(($field['type'] === "text") && ($field_is_title)) {
+                        $content = str_replace('>', 'data-title="true" />', $content);
+                        $field_is_title = false;
+                    }
 
                     //we should add $sort to id to fix problem with select field
                     $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
@@ -123,7 +130,7 @@ if (!class_exists('ReduxFramework_group')) {
                     echo '</td></tr>';
                 }
                 echo '</table>';
-                echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '.$this->field['groupname']. '</a>';
+                echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '. $this->field['groupname']. '</a>';
                 echo '</div></div>';
 
             // Create real groups
@@ -138,6 +145,9 @@ if (!class_exists('ReduxFramework_group')) {
                 //echo '<h4>' . __('Group Title', 'redux-framework') . '</h4>';
                 echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '-slide_title_' . $x . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_title]" value="' . esc_attr($group['slide_title']) . '" class="regular-text slide-title" /></fieldset>';
                 echo '<input type="hidden" class="slide-sort" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_sort]" id="' . $this->field['id'] . '-slide_sort_' . $x . '" value="' . $group['slide_sort'] . '" />';
+                
+                $field_is_title = true;
+                
                 foreach ($this->field['subfields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
                     $this->enqueue_dependencies($field['type']);
@@ -164,6 +174,11 @@ if (!class_exists('ReduxFramework_group')) {
 
                     //we should add $sort to id to fix problem with select field
                     $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
+
+                    if(($field['type'] === "text") && ($field_is_title)) {
+                        $content = str_replace('>', 'data-title="true" />', $content);
+                        $field_is_title = false;
+                    }
                     
                     $_field = apply_filters('redux-support-group',$content, $field, $x);
                     ob_end_clean();
