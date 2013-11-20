@@ -651,6 +651,14 @@ $sections[] = array(
 			'desc' => __('This field is even CSS validated!', 'redux-framework-demo'),
 			'validate' => 'css',
 			),
+		array(
+			'id'=>'custom-html',
+			'type' => 'textarea',
+			'title' => __('Custom HTML', 'redux-framework-demo'), 
+			'subtitle' => __('Just like a text box widget.', 'redux-framework-demo'),
+			'desc' => __('This field is even HTML validated!', 'redux-framework-demo'),
+			'validate' => 'html',
+			),		
 	)
 );
 	
