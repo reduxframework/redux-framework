@@ -74,11 +74,60 @@ if (!class_exists('ReduxFramework_group')) {
                 );
             }
 
-            echo '<div class="redux-group">';
-            echo '<div id="redux-groups-accordion">';
-            $x = 0;
-
             $groups = $this->value;
+
+            echo '<div class="redux-group">';
+            echo '<input type="hidden" class="redux-dummy-slide-count" id="redux-dummy-' . $this->field['id'] . '-count" name="redux-dummy-' . $this->field['id'] . '-count" value="' . count($groups) . '" />';
+            echo '<div id="redux-groups-accordion">';
+
+            // Create dummy content for the adding new ones
+            echo '<div class="redux-groups-accordion-group redux-dummy" style="display:none" id="redux-dummy-' . $this->field['id'] . '"><h3><span class="redux-groups-header"></span></h3>';
+            echo '<div>';//according content open
+                
+            echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';    
+            echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '_slide-title" data-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_title]" value="" class="regular-text slide-title" /></fieldset>';
+            echo '<input type="hidden" class="slide-sort" data-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_sort]" id="' . $this->field['id'] . '-slide_sort" value="" />';
+                foreach ($this->field['subfields'] as $field) {
+                    //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
+                    $this->enqueue_dependencies($field['type']);
+                    
+                    echo '<tr><td>';
+                    if(isset($field['class']))
+                        $field['class'] .= " group";
+                    else
+                        $field['class'] = " group";
+
+                    if (!empty($field['title']))
+                        echo '<h4>' . $field['title'] . '</h4>';
+                    if (!empty($field['subtitle']))
+                        echo '<span class="description">' . $field['subtitle'] . '</span>';
+                    $value = empty($this->parent->options[$field['id']][0]) ? "" : $this->parent->options[$field['id']][0];
+
+                    ob_start();
+                    $this->parent->_field_input($field, $value);
+                    $content = ob_get_contents();
+
+                    //adding sorting number to the name of each fields in group
+                    $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                    $content = str_replace($name, $name . '[@]', $content);
+                    // remove the name property. asigned by the controller, create new data-name property for js
+                    $content = str_replace('name', 'data-name', $content);
+
+                    //we should add $sort to id to fix problem with select field
+                    $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
+                    
+                    $_field = apply_filters('redux-support-group',$content, $field, 0);
+                    ob_end_clean();
+                    echo $_field;
+                    
+                    echo '</td></tr>';
+                }
+                echo '</table>';
+                echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '.$this->field['groupname']. '</a>';
+                echo '</div></div>';
+
+            // Create real groups
+            $x = 0;
             foreach ($groups as $group) {
 
                 echo '<div class="redux-groups-accordion-group"><h3><span class="redux-groups-header">' . $group['slide_title'] . '</span></h3>';
@@ -154,7 +203,7 @@ if (!class_exists('ReduxFramework_group')) {
          */
         public function enqueue() {
             wp_enqueue_script(
-                    'redux-field-group-js', ReduxFramework::$_url . 'inc/fields/group/field_group.min.js', array('jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker'), time(), true
+                    'redux-field-group-js', ReduxFramework::$_url . 'inc/fields/group/field_group.js', array('jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker'), time(), true
             );
 
             wp_enqueue_style(
