@@ -35,9 +35,9 @@
             }
         });
         
-        $('.redux-groups-accordion-group input[type=text]:first').on('keyup',function(event) {
-            $(this).parents('.redux-groups-accordion-group:first').find('.redux-groups-header').text(event.target.value);
-            $(this).parents('.redux-groups-accordion-group:first').find('.slide-title').val(event.target.value);
+        $('.redux-groups-accordion-group input[type=text]').on('keyup',function(event) {
+            $(this).closest('.redux-groups-accordion-group').find('.redux-groups-header').text(event.target.value);
+            $(this).closest('.redux-groups-accordion-group').find('.slide-title').val(event.target.value);
         });
         
         $('.redux-groups-remove').live('click', function () {
@@ -59,7 +59,7 @@
             slideCounter.val(parseInt(slideCount)+1 );
             // REMOVE var slideCount1 = slideCount*1 + 1;
 
-            $(newSlide).find('h3').text('').append('<span class="redux-groups-header">New Group</span><span class="ui-accordion-header-icon ui-icon ui-icon-plus"></span>');
+            //$(newSlide).find('h3').text('').append('<span class="redux-groups-header">New Group</span><span class="ui-accordion-header-icon ui-icon ui-icon-plus"></span>');
             $(this).prev().append(newSlide);
 
             // Remove dummy classes from newSlide
