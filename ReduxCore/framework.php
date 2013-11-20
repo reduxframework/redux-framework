@@ -927,7 +927,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue_output() {
 			/** @noinspection PhpUnusedLocalVariableInspection */
 			foreach( $this->sections as $k => $section ) {
-                if( isset($section['type'] ) && $section['type'] == 'divide' ) {
+                if( isset($section['type'] ) && ( $section['type'] == 'divide' ) ) {
                     continue;
                 }
                 if( isset( $section['fields'] ) ) {
@@ -1129,13 +1129,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $localize
             );
 
-            do_action( 'redux-enqueue-' . $this->args['opt_name'] ); // REMOVE
+            do_action( 'redux-enqueue-' . $this->args['opt_name'], $this ); // REMOVE
             do_action( 'redux/page/' . $this->args['opt_name'] . '/enqueue' );
 
             foreach( $this->sections as $section ) {
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $field ) {
-                        if( isset( $field['type'] ) ) {
+                        if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
 
                             if( !class_exists( $field_class ) ) {
