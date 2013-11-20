@@ -147,7 +147,7 @@ if (!class_exists('ReduxFramework_group')) {
                 echo '<input type="hidden" class="slide-sort" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_sort]" id="' . $this->field['id'] . '-slide_sort_' . $x . '" value="' . $group['slide_sort'] . '" />';
                 
                 $field_is_title = true;
-                
+
                 foreach ($this->field['subfields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
                     $this->enqueue_dependencies($field['type']);
@@ -162,10 +162,13 @@ if (!class_exists('ReduxFramework_group')) {
                         echo '<h4>' . $field['title'] . '</h4>';
                     if (!empty($field['subtitle']))
                         echo '<span class="description">' . $field['subtitle'] . '</span>';
-                    $value = empty($this->parent->options[$field['id']][$x]) ? " " : $this->parent->options[$field['id']][$x];
+
+                    $value = current($this->parent->options[$field['id']]);   
+                    $value = empty($value) ? "" : $value;
 
                     ob_start();
                     $this->parent->_field_input($field, $value);
+                    $value = next($this->parent->options[$field['id']]);
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
