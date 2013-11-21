@@ -284,7 +284,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
 		    $this->sections = apply_filters('redux-sections',$sections); // REMOVE LATER
-            $this->sections = apply_filters('redux/options/'.$this->args['opt_name'].'/sections',$sections);
+            $this->sections = apply_filters('redux/options/'.$this->args['opt_name'].'/sections',$this->sections);
 
             if( is_array( $extra_tabs ) && !empty( $extra_tabs ) ) {
                 foreach( $extra_tabs as $k => $tab ) {
@@ -576,7 +576,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" || 
 							 $type == "font-icon" || $type == "font-icons" || $type == "icons") {
 						$font_icons = apply_filters('redux-font-icons',array()); // REMOVE LATER
-                        $font_icons = apply_filters('redux/font-icons',array());
+                        $font_icons = apply_filters('redux/font-icons',$font_icons);
 						foreach($font_icons as $k) {
 		           			$data[$k] = $k;
 		        		}
@@ -1419,7 +1419,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( !class_exists( $extension_class ) ) {
                     $class_file = apply_filters( 'redux-extensionclass-load', $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class ); // REMOVE LATER
-                    $class_file = apply_filters( 'redux/extension/'.$this->args['opt_name'].'/'.$folder, $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class );
+                    $class_file = apply_filters( 'redux/extension/'.$this->args['opt_name'].'/'.$folder, $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $class_file );
 
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
@@ -1562,7 +1562,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                             if( !class_exists( $validate ) ) {
                                 $class_file = apply_filters( 'redux-validateclass-load', self::$_dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate ); // REMOVE LATER
-                                $class_file = apply_filters( 'redux/validate/'.$this->args['opt_name'].'/class/'.$field['validate'], self::$_dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $validate );
+                                $class_file = apply_filters( 'redux/validate/'.$this->args['opt_name'].'/class/'.$field['validate'], self::$_dir . 'inc/validation/' . $field['validate'] . '/validation_' . $field['validate'] . '.php', $class_file );
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
