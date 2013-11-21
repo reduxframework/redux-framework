@@ -2042,8 +2042,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					/** @noinspection PhpUndefinedMethodInspection */
 					$render->render();
                     $_render = apply_filters( 'redux-field-'.$this->args['opt_name'], ob_get_contents(), $field ); // REMOVE
-                    $_render = apply_filters( 'redux/field/'.$this->args['opt_name'].'/'.$field['type'].'/render/after', ob_get_contents(), $field );
-                    $_render = apply_filters( 'redux/field/'.$this->args['opt_name'].'/render/after', ob_get_contents(), $field );
+                    $_render = apply_filters( 'redux/field/'.$this->args['opt_name'].'/'.$field['type'].'/render/after', $_render, $field );
+                    $_render = apply_filters( 'redux/field/'.$this->args['opt_name'].'/render/after', $_render, $field );
                     ob_end_clean();
 
                     //save the values into a unique array in case we need it for dependencies
