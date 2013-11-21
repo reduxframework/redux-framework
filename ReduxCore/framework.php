@@ -1026,6 +1026,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
 
+            if(is_rtl()){
+                wp_register_style(
+                    'redux-rtl-css',
+                    self::$_url . 'assets/css/rtl.css',
+                    '',
+                    time(),
+                    'all'
+                );
+                wp_enqueue_style( 'redux-rtl-css' );
+            } 
+
             if ( $this->args['dev_mode'] === true) { // Pretty object output
 	            wp_enqueue_script(
 	                'json-view-js',
