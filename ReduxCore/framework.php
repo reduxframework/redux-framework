@@ -24,7 +24,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 
 if ( !function_exists( 'wp_get_current_user' ) ) {
     // Fix from @kprovance. Bug #265.
-    require( ABSPATH . WPINC . '/pluggable.php' );
+    //require( ABSPATH . WPINC . '/pluggable.php' );
 }
 
 // Don't duplicate me!
@@ -933,13 +933,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if( isset( $section['fields'] ) ) {
 					/** @noinspection PhpUnusedLocalVariableInspection */
 					foreach( $section['fields'] as $fieldk => $field ) {
-						if( isset( $field['type'] ) ) {
+						if( isset( $field['type'] ) && $field['type'] != "callback"  ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
                             if( !class_exists( $field_class ) ) {
                                 $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                                 $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                                 
-                                if( $class_file ) {
+                                if( $class_file && file_exists($class_file) ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
                                 }
