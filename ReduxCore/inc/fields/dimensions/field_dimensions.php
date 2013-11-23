@@ -55,7 +55,7 @@ class ReduxFramework_dimensions extends ReduxFramework {
             'width' => true,
             'height' => true,
             'units_extended' => false,
-            'units' => '',
+            'units' => 'px',
         );
 
         $this->field = wp_parse_args($this->field, $defaults);
