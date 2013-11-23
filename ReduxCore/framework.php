@@ -304,12 +304,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Register setting
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
-			// Register extensions
-            add_action( 'init', array( &$this, '_register_extensions' ) );
-
             // Any dynamic CSS output, let's run
             if( $this -> args[ 'output' ] == true ){
-            	add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
+                add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
             }
 
             // Add tracking. PLEASE leave this in tact! It helps us gain needed statistics of uses. Opt-in of course.
@@ -431,6 +428,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				if ( $this->args['global_variable'] ) {
 					$options = $this->args['global_variable'];
 					global $$options;
+                    $value = apply_filters( 'redux/options/'.$this->args['opt_name'].'/global_variable', $value );
 					$$options = $value;					
 				}
 				do_action( 'redux-saved-' . $this->args['opt_name'] , $value ); // REMOVE
@@ -466,6 +464,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			if ( $this->args['global_variable'] ) {
 				$options = $this->args['global_variable'];
 				global $$options;
+                $result = apply_filters( 'redux/options/'.$this->args['opt_name'].'/global_variable', $result );
 				$$options = $result;			
 			}
 			//print_r($result);
@@ -2203,5 +2202,3 @@ if( !class_exists( 'ReduxFramework' ) ) {
     ReduxFramework::init();
 
 } // if
-
-
