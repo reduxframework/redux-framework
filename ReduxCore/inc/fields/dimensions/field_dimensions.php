@@ -35,19 +35,21 @@ class ReduxFramework_dimensions extends ReduxFramework {
          * take a dump.
          */
 
-        function array_in_array($needle, $haystack) {
-            //Make sure $needle is an array for foreach
-            if (!is_array($needle)) {
-                $needle = array($needle);
-            }
-            //For each value in $needle, return TRUE if in $haystack
-            foreach ($needle as $pin)
-            //echo 'needle' . $pin;
-                if (in_array($pin, $haystack)) {
-                    return true;
+        if( !function_exists( 'array_in_array' ) ) {
+            function array_in_array($needle, $haystack) {
+                //Make sure $needle is an array for foreach
+                if (!is_array($needle)) {
+                    $needle = array($needle);
                 }
-            //Return FALSE if none of the values from $needle are found in $haystack
-            return false;
+                //For each value in $needle, return TRUE if in $haystack
+                foreach ($needle as $pin)
+                //echo 'needle' . $pin;
+                    if (in_array($pin, $haystack)) {
+                        return true;
+                    }
+                //Return FALSE if none of the values from $needle are found in $haystack
+                return false;
+            }
         }
 
         // No errors please
