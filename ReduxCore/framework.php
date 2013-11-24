@@ -225,6 +225,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 * @return \ReduxFramework
 		 */
         public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
+
+            // Load plugin text domain
+            $this->_internationalization();            
             
             // Create defaults array
             $defaults = array();
@@ -315,9 +318,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
-            // Load plugin text domain
-            add_action( 'wp_loaded', array( &$this, '_internationalization' ) );
-            
             // Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
             global $pagenow;
             if ($pagenow === "admin.php") {
