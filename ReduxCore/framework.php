@@ -227,7 +227,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
 
             // Load plugin text domain
-            $this->_internationalization();            
+            $this->_internationalization($this->args['opt_name']);            
             
             // Create defaults array
             $defaults = array();
@@ -331,10 +331,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
          *
          * @since    3.0.5
          */
-        public function _internationalization() {
+        public function _internationalization($opt_name) {
 
             $domain = 'redux-framework';
-            $locale = apply_filters( 'redux/textdomain/'.$this->args['opt_name'], get_locale(), $domain );
+            $locale = apply_filters( 'redux/textdomain/'. $opt_name, get_locale(), $domain );
             load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
             load_textdomain( $domain, dirname( __FILE__ ) . '/languages/' . $domain . '-' . $locale . '.mo' );
 
