@@ -16,7 +16,7 @@
  *
  * @package     ReduxFramework
  * @author      ReduxFramework Team
- * @version     3.0.9
+ * @version     3.0.9 
  */
 
 // Exit if accessed directly
