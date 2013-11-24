@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework\n"
 "POT-Creation-Date: 2013-11-04 16:16-0700\n"
-"PO-Revision-Date: 2013-11-23 19:30+1000\n"
+"PO-Revision-Date: 2013-11-24 18:27+1000\n"
 "Last-Translator: Art Korotkov\n"
 "Language-Team: ReduxFramework <language@reduxframework.com>\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Некоторые настройки не сохранены. Хоти�
 #: ReduxCore/framework.php:1022
 #: ReduxCore/extensions/customizer/extension_customizer.php:312
 #: ReduxCore/extensions/customizer/extension_customizer.php:343
-msgid "Are you sure? Resetting will loose all custom values."
+msgid "Are you sure? Resetting will lose all custom values."
 msgstr "Вы уверены? Сброс удалит все индивидуальный настройки!"
 
 #: ReduxCore/framework.php:1023
