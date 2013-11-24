@@ -157,7 +157,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             'data_type'=>'bool',
                             'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
                             'label'=>'Enqueue Files', 
-                            'desc'=>'Global shut-off for custom CSS enqueing by the framework', 
+                            'desc'=>'Global shut-off for custom CSS enqueuing by the framework',
                             'default'=>true
                         ),
                     'allow_sub_menu' => array(
@@ -296,7 +296,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $this->sections = apply_filters('redux/options/'.$this->args['opt_name'].'/sections',$this->sections);
 
             if( is_array( $extra_tabs ) && !empty( $extra_tabs ) ) {
-                foreach( $extra_tabs as $k => $tab ) {
+				/** @noinspection PhpUnusedLocalVariableInspection */
+				foreach( $extra_tabs as $k => $tab ) {
                     array_push($this->sections, $tab);
                 }
             }
@@ -324,13 +325,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
-            // Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
-            global $pagenow;
-            if ($pagenow === "admin.php") {
-                remove_action('admin_init', 'pb_admin_init');
-            }
+			// Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
+			/** @global string $pagenow */
+			global $pagenow;
+			if ( $pagenow === 'admin.php' ) {
+				/** @noinspection PhpUndefinedCallbackInspection */
+				remove_action( 'admin_init', 'pb_admin_init' );
+			}
 
-        }
+		}
 
 		/**
 		 * Load the plugin text domain for translation.
@@ -547,7 +550,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             'public' => true,
                             'publicly_queryable' => true,
                             'exclude_from_search' => false,
-                            'publicly_queryable' => true,
                             '_builtin' => false,
                         );
                         $args = wp_parse_args( $args, $defaults );
@@ -941,7 +943,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						if( isset( $field['type'] ) && $field['type'] != "callback"  ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
                             if( !class_exists( $field_class ) ) {
-                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
+//                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                                 $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                                 
                                 if( $class_file && file_exists($class_file) ) {
@@ -1155,7 +1157,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
 
                             if( !class_exists( $field_class ) ) {
-                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
+//                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                                 $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
@@ -2042,7 +2044,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $field_class = 'ReduxFramework_' . $field['type'];
 
                 if( !class_exists( $field_class ) ) {
-                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
+//                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                     $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
