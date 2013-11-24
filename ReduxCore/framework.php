@@ -229,6 +229,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Create defaults array
             $defaults = array();
 
+            $defaults['opt_name'] = isset($args['opt_name']) && $args['opt_name'] != '' ? $args['opt_name'] : 'redux_demo';
+            
+            $this->_internationalization($args['opt_name']);
+
             $defaults['opt_name']           = ''; // Must be defined by theme/plugin
             $defaults['google_api_key']     = ''; // Must be defined to add google fonts to the typography module
             $defaults['last_tab']           = '0';
@@ -267,10 +271,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	    	// Set values
             $this->args = wp_parse_args( $args, $defaults );
 
-			// Load plugin text domain
-			$this->_internationalization( $this->args['opt_name'] );
-
-			if ( empty( $this->path ) ) {
+	    if ( empty( $this->path ) ) {
             	$this->path = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
             	$this->url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->path ) );
             }
