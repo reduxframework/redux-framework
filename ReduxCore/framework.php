@@ -236,7 +236,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			 */
             $defaults['opt_name'] = isset($args['opt_name']) && $args['opt_name'] != '' ? $args['opt_name'] : 'redux_demo';
             
-            $this->_internationalization($args['opt_name']);
+            $this->_internationalization($defaults['opt_name']);
 
             $defaults['opt_name']           = ''; // Must be defined by theme/plugin
             $defaults['google_api_key']     = ''; // Must be defined to add google fonts to the typography module
