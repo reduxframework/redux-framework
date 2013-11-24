@@ -229,6 +229,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Create defaults array
             $defaults = array();
 
+			/**
+			 * Load plugin text domain
+			 * If for some weird reason, we do not have opt_name, will make it demo
+			 * @todo Should we work without opt_name at all?
+			 */
             $defaults['opt_name'] = isset($args['opt_name']) && $args['opt_name'] != '' ? $args['opt_name'] : 'redux_demo';
             
             $this->_internationalization($args['opt_name']);
@@ -327,12 +332,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         }
 
-        /**
-         * Load the plugin text domain for translation.
-         *
-         * @since    3.0.5
-         */
-        public function _internationalization($opt_name) {
+		/**
+		 * Load the plugin text domain for translation.
+		 * @param string $opt_name
+		 * @since    3.0.5
+		 */
+		public function _internationalization( $opt_name ) {
 
             $domain = 'redux-framework';
             $locale = apply_filters( 'redux/textdomain/'. $opt_name, get_locale(), $domain );
