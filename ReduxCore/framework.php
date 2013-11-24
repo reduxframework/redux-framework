@@ -226,9 +226,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 */
         public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
 
-            // Load plugin text domain
-            $this->_internationalization($this->args['opt_name']);            
-            
             // Create defaults array
             $defaults = array();
 
@@ -269,6 +266,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 	    	// Set values
             $this->args = wp_parse_args( $args, $defaults );
+
+			// Load plugin text domain
+			$this->_internationalization( $this->args['opt_name'] );
 
 			if ( empty( $this->path ) ) {
             	$this->path = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
