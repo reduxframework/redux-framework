@@ -66,6 +66,8 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                 echo '<ul class="redux-image-select">';
             
+                $x = 1;
+
                 foreach( $this->field['options'] as $k => $v ) {
 
                     if( !is_array( $v ) )
@@ -120,7 +122,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                     }               
 
                     echo '<li class="redux-image-select">';
-                    echo '<label class="' . $selected . ' redux-image-select-' . $this->field['id'] . '" for="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '">';
+                    echo '<label class="' . $selected . ' redux-image-select-' . $this->field['id'] . '_' . $x . '" for="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '">';
 
                     echo '<input type="radio" class="' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
                     
@@ -135,6 +137,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                     echo '</label>';
                     echo '</li>';
+                    $x++;
                 }
                 
                 echo '</ul>';       
@@ -157,9 +160,10 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
         
             wp_enqueue_script(
                 'redux-field-image-select-js', 
-                ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.min.js', 
+                ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.js', 
                 array( 'jquery' ),
-                time(),
+                //time(),
+                false,
                 true
             );
 
