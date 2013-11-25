@@ -120,7 +120,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                         $presets = ' data-presets="' . htmlspecialchars( json_encode( $v['presets'] ), ENT_QUOTES, 'UTF-8' ) . '"';
                         $is_preset = true;
-                        $selected = '';
+                        //$selected = '';
                         $this->field['class'] .= 'redux-presets';
                     }               
 
