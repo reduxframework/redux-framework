@@ -46,28 +46,10 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
         public function __construct( $field = array(), $value ='', $parent ) {
         
             parent::__construct( $parent->sections, $parent->args );
-
+            $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
-
-            // Setup up default editor_options
-            $settings = array(
-                'textarea_name' => $this->args['opt_name'] . '[' . $this->field['id'] . ']', 
-                'editor_class'  => $this->field['class'],
-                'textarea_rows' => 10, //Wordpress default
-                'teeny' => true,
-            );
-            
-            // If editor_options IS set and editor_options IS an array, then...
-            if (isset($this->field['editor_options']) && is_array($this->field['editor_options'])) {
-                
-                // parse passed options with defaults
-                $this->field['editor_options'] = wp_parse_args( $this->field['editor_options'], $settings );
-            } else {
-                
-                // else use default options only
-                $this->field['editor_options'] = $settings;
-            }            
+           
         }
 
         /**
@@ -80,6 +62,16 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          * @return      void
          */
         public function render() {
+
+            // Setup up default editor_options
+            $defaults = array(
+                'textarea_name' => $this->args['opt_name'] . '[' . $this->field['id'] . ']', 
+                'editor_class'  => $this->field['class'],
+                'textarea_rows' => 10, //Wordpress default
+                'teeny' => true,
+            );
+
+            $this->field['editor_options'] = wp_parse_args( $this->field['editor_options'], $defaults );
             
             wp_editor( $this->value, $this->field['id'], $this->field['editor_options'] );
             
