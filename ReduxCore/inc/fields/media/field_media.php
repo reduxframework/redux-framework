@@ -136,7 +136,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             }
 
             echo '<div class="' . $hide . 'screenshot">';
-            echo '<a class="of-uploaded-image" href="' . $this->value['url'] . '">';
+            echo '<a class="of-uploaded-image" href="' . $this->value['url'] . '" target="_blank">';
             echo '<img class="redux-option-image" id="image_' . $this->field['id'] . '" src="' . $this->value['thumbnail'] . '" alt="" />';
             echo '</a>';
             echo '</div>';
