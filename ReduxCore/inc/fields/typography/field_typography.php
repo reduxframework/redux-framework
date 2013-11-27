@@ -387,7 +387,7 @@ class ReduxFramework_typography extends ReduxFramework{
         }
       }
       if (!empty($subsets)) {
-        $link .= "&subset=".implode(',', $subsets);
+        $link .= "&amp;subset=".implode(',', $subsets);
       }
 
       return '//fonts.googleapis.com/css?family='.$link;
@@ -469,7 +469,7 @@ class ReduxFramework_typography extends ReduxFramework{
       }
 
       if ( !empty( $fonts ) && filter_var($this->parent->args['output'], FILTER_VALIDATE_BOOLEAN) ) {
-        echo '<link rel="stylesheet" id="redux-google-fonts-css"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&v='.$version.'" type="text/css" media="all" />';
+        echo '<link rel="stylesheet" id="redux-google-fonts-css"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&amp;v='.$version.'" type="text/css" media="all" />';
         //wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
         //wp_enqueue_style( 'redux-google-fonts' ); 
       }
