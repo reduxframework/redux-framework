@@ -24,7 +24,7 @@ before_script:
     - source setup.sh
 
 script:
-    - phpunit
+    #- phpunit
     #- php tests/includes/clover.php tests/clover.xml 90
 
 notifications:
@@ -34,6 +34,7 @@ notifications:
           - dovy@reduxframework.com
         on_success: change
         on_failure: always
+
 
 # wordpress-plugin-tests specific config
 # Tells Travis CI not to run unit tests against the setup branch
