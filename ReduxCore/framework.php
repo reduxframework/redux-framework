@@ -242,9 +242,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['google_api_key']     = ''; // Must be defined to add google fonts to the typography module
             $defaults['last_tab']           = '0';
             $defaults['menu_icon']          = self::$_url . 'assets/img/menu_icon.png';
-            if (defined('MP6') || $wp_version >= 3.8) {
-            	$defaults['menu_icon'] 		= '';
-            }
+            $defaults['menu_icon'] 		= '';
             $defaults['menu_title']         = __( 'Options', 'redux-framework' );
             $defaults['page_icon']          = 'icon-themes';
             $defaults['page_title']         = __( 'Options', 'redux-framework' );
