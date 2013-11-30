@@ -24,7 +24,7 @@ before_script:
     - source setup.sh
 
 script:
-    - phpunit
+    #- phpunit
     #- php tests/includes/clover.php tests/clover.xml 90
 
 notifications:
