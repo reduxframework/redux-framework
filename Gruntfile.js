@@ -112,9 +112,7 @@ module.exports = function(grunt) {
       tasks: ['jshint']
     },
     grunt.registerTask('travis', [
-      'jshint',
-      'phpdocumentor',
-      'gh-pages:travis'
+      'jshint'
     ]);
     phpdocumentor: {
       options : {

@@ -4,21 +4,30 @@ php:
 - 5.4
 - 5.5
 env:
+  global:
+    secure: ms6pg+JkqhRPO5TtgpxIMxkBbzUUAuK69c+LHgGYNvVdCg9UbUOhiLeyOBW5uaEnLvMSrpEDDrFhIB2YWu18XCu+YaSXODXsRkiXmNda+OXIcN/7SNoIV3W23y3QAcoGwDFmA7UFLCTs3+bMc/sC1bj6hbh1XSIQZ/R7bfwsWRU=
+  cache:
+    directories:
+      - node_modules
   matrix:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=1
-  #- secure: QTSIA7B1QoCtpYO9C8GnGlNX/wZeIEQgdKKh5KRPG/DsO1UQLWO5Lwd+ELQlQhlA0jTywIhaLmrPgMU9GFY6GtW0T7Z1esqoOnDIRDzLEYe/GVKXroQRrGbuSzznaIN1Qn9JbqS+7S9TAmQK/hh2hBydoW5fztGB2CsD3iObE6w=
+    - WP_VERSION=latest WP_MULTISITE=0
+    - WP_VERSION=latest WP_MULTISITE=1
 before_script:
-- bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-script: phpunit
+  - npm install -g grunt-cli
+  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+script: 
+  - phpunit
+  - grunt travis
+after_script:
+  - grunt phpdocumentor
+  - grunt gh-pages:travis
 notifications:
   email:
     recipients:
-    - ghost1227@reduxframework.com
+    #- ghost1227@reduxframework.com
     - dovy@reduxframework.com
-    on_success: change
     on_failure: always
 branches:
   except:
-  - gh-pages
-  - setup
+    - gh-pages
+    - setup
