@@ -20,7 +20,7 @@ script:
   - npm install
   - grunt jshint
   - grunt phpdocumentor
-  - grunt gh-pages:travis
+  #- grunt gh-pages:travis
 after_script:
 notifications:
   email:

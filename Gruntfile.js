@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     },
     'gh-pages': {
       options: {
-        base: 'docs',
+        base: 'ReduxCore/',
         message: 'Update docs and files to distribute'
       },
       dev: {
@@ -113,8 +113,8 @@ module.exports = function(grunt) {
     },
     phpdocumentor: {
       options : {
-        directory : 'ReduxCore/',
-        target : 'docs'
+        directory : './ReduxCore/',
+        target : './docs/'
       }, 
                       
       /**
