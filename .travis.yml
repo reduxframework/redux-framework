@@ -12,22 +12,23 @@ env:
   matrix:
     - WP_VERSION=latest WP_MULTISITE=0
     - WP_VERSION=latest WP_MULTISITE=1
-before_script:
+install:
   - npm install -g grunt-cli
-  #- pear channel-discover pear.phpdoc.org
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-script: 
-  - phpunit
   - npm install
+  - pear channel-discover pear.phpdoc.org
+  - pear install phpdoc/phpDocumentor
+  - phpenv rehash
+before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+script:
+  - phpunit
   - grunt jshint
+  - grunt phpdocumentor
   #- grunt gh-pages:travis
-after_script:
-  - phpdoc --target docs --directory ReduxCore/
 notifications:
   email:
     recipients:
-    #- ghost1227@reduxframework.com
-    - dovy@reduxframework.com
+      #- ghost1227@reduxframework.com
+      - dovy@reduxframework.com
     on_failure: always
 branches:
   except:
