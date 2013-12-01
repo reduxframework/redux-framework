@@ -111,17 +111,6 @@ module.exports = function(grunt) {
       files: ['<%= jshintFields.files %>'],
       tasks: ['jshint']
     },
-    phpdocumentor: {
-      options : {
-        directory : './ReduxCore/',
-        target : './docs/'
-      }, 
-                      
-      /**
-       * Target used to generate the PHP documentation of the project.
-       */
-      generate : {}
-    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -129,7 +118,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-phpdocumentor');
   grunt.loadNpmTasks('grunt-gh-pages');
 
   // Default task(s).
