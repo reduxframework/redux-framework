@@ -5,7 +5,7 @@ php:
 - 5.5
 env:
   global:
-    secure: ms6pg+JkqhRPO5TtgpxIMxkBbzUUAuK69c+LHgGYNvVdCg9UbUOhiLeyOBW5uaEnLvMSrpEDDrFhIB2YWu18XCu+YaSXODXsRkiXmNda+OXIcN/7SNoIV3W23y3QAcoGwDFmA7UFLCTs3+bMc/sC1bj6hbh1XSIQZ/R7bfwsWRU=
+    secure: HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo=
   cache:
     directories:
       - node_modules

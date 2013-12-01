@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     },
     'gh-pages': {
       options: {
-        base: 'ReduxCore/',
+        base: 'docs/',
         message: 'Update docs and files to distribute'
       },
       dev: {
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       },
       travis: {
         options: {
-          repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
+          repo: 'https://9df69e1d07c99b5b0dc5c3462f672ee2c6289647@github.com/ReduxFramework/ReduxFramework.git',
           user: {
             name: 'Travis',
             email: 'travis@travis-ci.org'
