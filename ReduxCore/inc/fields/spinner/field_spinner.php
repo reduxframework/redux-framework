@@ -14,7 +14,7 @@ class ReduxFramework_spinner extends ReduxFramework {
         parent::__construct($parent->sections, $parent->args);
         $this->field = $field;
         $this->value = $value;
-        //$this->render();
+        $this->clean();
     }
 
     //function
@@ -27,6 +27,26 @@ class ReduxFramework_spinner extends ReduxFramework {
      * @since ReduxFramework 3.0.0
      */
     function render() {
+
+        // Don't allow input edit if there's a step
+        $readonly = "";
+        if (isset($this->field['edit']) && $this->field['edit'] == false) {
+            $readonly = ' readonly="readonly"';
+        }
+
+        echo '<input type="text" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '" value="' . $this->value . '" class="mini spinner-input' . $this->field['class'] . '"' . $readonly . '/>';
+        echo '<div id="' . $this->field['id'] . '-spinner" class="redux_spinner" rel="' . $this->field['id'] . '"></div>';
+
+    }//function
+
+    /**
+     * 
+     * Clean the field data to the fields defaults given the parameters.
+     * 
+     * @since Redux_Framework 3.1.1
+     * 
+     */
+    function clean() {
 
         if (empty($this->field['min'])) {
             $this->field['min'] = 0;
@@ -65,45 +85,7 @@ class ReduxFramework_spinner extends ReduxFramework {
             $this->value = intval($this->field['max']);
         }
 
-        $params = array(
-            'id' => '',
-            'min' => '',
-            'max' => '',
-            'step' => '',
-            'val' => '',
-            'default' => '',
-        );
-
-        $params = wp_parse_args($this->field, $params);
-        $params['val'] = $this->value;
-
-        // Don't allow input edit if there's a step
-        $readonly = "";
-        if (isset($this->field['edit']) && $this->field['edit'] == false) {
-            $readonly = ' readonly="readonly"';
-        }
-
-        // Use javascript globalization, better than any other method.
-        global $wp_scripts;
-        $data = $wp_scripts->get_data('redux-field-spinner-js', 'data');
-
-        if (!empty($data)) { // Adding to the previous localize script object
-            if (!is_array($data)) {
-                $data = json_decode(str_replace('var reduxSpinners = ', '', substr($data, 0, -1)), true);
-            }
-            foreach ($data as $key => $value) {
-                $localized_data[$key] = $value;
-            }
-            $wp_scripts->add_data('redux-field-spinner-js', 'data', '');
-        }
-        $localized_data[$this->field['id']] = $params;
-        wp_localize_script('redux-field-spinner-js', 'reduxSpinners', $localized_data);
-
-        echo '<input type="text" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '" value="' . $this->value . '" class="mini spinner-input' . $this->field['class'] . '"' . $readonly . '/>';
-        echo '<div id="' . $this->field['id'] . '-spinner" class="redux_spinner" rel="' . $this->field['id'] . '"></div>';
     }
-
-//function
 
     /**
      * Enqueue Function.
@@ -123,12 +105,39 @@ class ReduxFramework_spinner extends ReduxFramework {
         );
 
         wp_enqueue_script(
-                'redux-field-spinner-js', ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.min.js', array('jquery', 'redux-spinner-js', 'jquery-numeric', 'jquery-ui-core', 'jquery-ui-dialog', 'redux-typewatch-js'), time(), true
+                'redux-field-spinner-js', ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.js', array('jquery', 'redux-spinner-js', 'jquery-numeric', 'jquery-ui-core', 'jquery-ui-dialog', 'redux-typewatch-js'), time(), true
         );
 
         wp_enqueue_style(
                 'redux-field-spinner-css', ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.css', time(), true
         );
+    }
+
+    /**
+     * 
+     * Functions to pass data from the PHP to the JS at render time.
+     * 
+     * @return array Params to be saved as a javascript object accessable to the UI.
+     * 
+     * @since  Redux_Framework 3.1.1
+     * 
+     */
+    function localize() {
+
+        $params = array(
+            'id' => '',
+            'min' => '',
+            'max' => '',
+            'step' => '',
+            'val' => '',
+            'default' => '',
+        );
+
+        $params = wp_parse_args( $this->field, $params );
+        $params['val'] = $this->value;
+
+        return $params;
+
     }
 
 //function

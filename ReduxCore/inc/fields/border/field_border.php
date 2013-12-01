@@ -193,7 +193,7 @@ class ReduxFramework_border extends ReduxFramework{
 
 		wp_enqueue_script(
 			'redux-field-border-js', 
-			ReduxFramework::$_url.'inc/fields/border/field_border.min.js', 
+			ReduxFramework::$_url.'inc/fields/border/field_border.js', 
 			array('jquery', 'select2-js', 'jquery-numeric'),
 			time(),
 			true

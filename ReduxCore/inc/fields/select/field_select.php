@@ -100,7 +100,7 @@ class ReduxFramework_select extends ReduxFramework{
 
 		wp_enqueue_script(
 			'field-select-js', 
-			ReduxFramework::$_url.'inc/fields/select/field_select.min.js',
+			ReduxFramework::$_url.'inc/fields/select/field_select.js',
 			array('jquery', 'select2-js'),
 			time(),
 			true

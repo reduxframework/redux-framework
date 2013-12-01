@@ -2,7 +2,7 @@
 jQuery(document).ready(function() {
 	jQuery('.redux_slider').each(function() {
 		//slider init
-		var slider = reduxSliders[jQuery(this).attr('rel')];
+		var slider = redux.slider[jQuery(this).attr('rel')];
 	
 		jQuery(this).slider({
 			value: parseInt(slider.val, null),
