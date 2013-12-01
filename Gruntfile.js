@@ -111,9 +111,6 @@ module.exports = function(grunt) {
       files: ['<%= jshintFields.files %>'],
       tasks: ['jshint']
     },
-    grunt.registerTask('travis', [
-      'jshint'
-    ]);
     phpdocumentor: {
       options : {
         directory : 'ReduxCore/',
@@ -137,6 +134,8 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'concat']);
+
+  grunt.registerTask('travis', ['jshint']);
 
   // this would be run by typing "grunt test" on the command line
   grunt.registerTask('test', ['jshint', 'qunit']);  

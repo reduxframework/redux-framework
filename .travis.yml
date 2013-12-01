@@ -18,7 +18,7 @@ before_script:
 script: 
   - phpunit
   - npm install
-  - grunt travis
+  - grunt jshint
 after_script:
   - grunt phpdocumentor
   - grunt gh-pages:travis
