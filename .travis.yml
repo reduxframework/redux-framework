@@ -19,9 +19,9 @@ script:
   - phpunit
   - npm install
   - grunt jshint
-after_script:
   - grunt phpdocumentor
   - grunt gh-pages:travis
+after_script:
 notifications:
   email:
     recipients:
