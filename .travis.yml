@@ -4,21 +4,31 @@ php:
 - 5.4
 - 5.5
 env:
+  global:
+    secure: HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo=
+  cache:
+    directories:
+      - node_modules
   matrix:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=1
-  #- secure: QTSIA7B1QoCtpYO9C8GnGlNX/wZeIEQgdKKh5KRPG/DsO1UQLWO5Lwd+ELQlQhlA0jTywIhaLmrPgMU9GFY6GtW0T7Z1esqoOnDIRDzLEYe/GVKXroQRrGbuSzznaIN1Qn9JbqS+7S9TAmQK/hh2hBydoW5fztGB2CsD3iObE6w=
-before_script:
-- bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-script: phpunit
+    - WP_VERSION=latest WP_MULTISITE=0
+    - WP_VERSION=latest WP_MULTISITE=1
+install:
+  - npm install -g grunt-cli
+  - npm install
+  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then pear channel-discover pear.phpdoc.org && pear install phpdoc/phpDocumentor && pear install Image_GraphViz && phpenv rehash; fi'
+before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+script:
+  - phpunit
+  - grunt jshint
+after_success: 
+  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then phpdoc --target docs --directory ReduxCore/ && grunt gh-pages:travis; fi'
 notifications:
   email:
     recipients:
-    - ghost1227@reduxframework.com
-    - dovy@reduxframework.com
-    on_success: change
+      #- ghost1227@reduxframework.com
+      - dovy@reduxframework.com
     on_failure: always
 branches:
   except:
-  - gh-pages
-  - setup
+    - gh-pages
+    - setup
