@@ -9,7 +9,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 	
 	v2=`find ReduxCore -type f | sort -u | xargs cat | md5sum`
 
-	if [ "$value" == "$value2" ]
+	if [ "$v1" == "$v1" ]
 	then
 	    echo "All files are properly compressed."
 	else
