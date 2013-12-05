@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package     ReduxFramework
- * @author      ReduxFramework Team
- * @version     3.0.9 
+ * @package     Redux_Framework
+ * @subpackage  Core
+ * @author      Redux Framework Team
+ * @version     3.1.2 
  */
 
 // Exit if accessed directly
@@ -209,6 +210,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $warnings            = array();
         public $options             = array();
         public $options_defaults    = null;
+        public $localize_data       = array();
 		public $folds    			= array();
 		public $path 				= '';
 		public $output 				= array(); // Fields with CSS output selectors
@@ -930,6 +932,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _enqueue_output() {
+
 			/** @noinspection PhpUnusedLocalVariableInspection */
 			foreach( $this->sections as $k => $section ) {
                 if( isset($section['type'] ) && ( $section['type'] == 'divide' ) ) {
@@ -976,14 +979,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue() {
             global $wp_styles;
 
-    	    wp_enqueue_script('jquery');
-	        wp_enqueue_script('jquery-ui-core');
-            wp_enqueue_script('jquery-ui-sortable');
-            add_thickbox();
-
             wp_register_style(
                 'redux-css',
-                self::$_url . 'assets/css/style.css',
+                self::$_url . 'assets/css/redux.css',
                 array( 'farbtastic' ),
                 time(),
                 'all'
@@ -1022,6 +1020,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 time(),
                 'all'
             );
+
             wp_enqueue_style( 'jquery-ui-css' );
 
             wp_enqueue_style( 'redux-lte-ie8' );
@@ -1043,6 +1042,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             } 
 
             if ( $this->args['dev_mode'] === true) { // Pretty object output
+                /*
 	            wp_enqueue_script(
 	                'json-view-js',
 	                self::$_url . 'assets/js/vendor/jsonview.min.js',
@@ -1050,24 +1050,30 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	                time(),
 	                true
 	            );
+                */
             }
 
-            wp_enqueue_script(
-                'redux-js',
-                //self::$_url . 'assets/js/admin.js',// DEBUG ONLY
-                self::$_url . 'assets/js/admin.min.js',
-                array( 'jquery','jquery-cookie' ),
-                time(),
-                true
-            );
+            wp_enqueue_script('jquery');
+            wp_enqueue_script('jquery-ui-core');
+            wp_enqueue_script('jquery-ui-sortable');
+            wp_enqueue_style('jquery-ui-sortable');
+            wp_enqueue_script('jquery-ui-datepicker');
+            wp_enqueue_script('jquery-ui-dialog');
+            wp_enqueue_script('jquery-ui-slider');
+            wp_enqueue_script('wp-color-picker');
+            wp_enqueue_script('jquery-ui-accordion');
 
-            wp_enqueue_script(
-                'jquery-cookie',
-                self::$_url . 'assets/js/vendor/cookie.js',
-                array( 'jquery' ),
-                time(),
-                true
-            );
+
+            wp_enqueue_style( 'wp-color-picker' );
+            if ( function_exists( 'wp_enqueue_media' ) ) {
+                wp_enqueue_media();
+            } else {
+                wp_enqueue_script( 'media-upload' );
+                wp_enqueue_script( 'thickbox' );
+                wp_enqueue_style( 'thickbox' );
+            }
+
+            add_thickbox();
 
             wp_register_script( 
                 'select2-js', 
@@ -1077,102 +1083,143 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
+            wp_register_script( 
+                'ace-editor-js', 
+                self::$_url . 'assets/js/vendor/ace_editor/ace.js',
+                array( 'jquery' ),
+                time(),
+                true
+            );         
+
             wp_register_script(
                 'jquery-tipsy',
                 self::$_url . 'assets/js/vendor/jquery.tipsy.js',
                 array( 'jquery' ),
                 time(),
                 true
-            ); 
-
-            wp_register_script(
-                'jquery-numeric',
-                self::$_url . 'assets/js/vendor/jquery.numeric.js ',
-                array( 'jquery' ),
-                time(),
-                true
-            );    
+            );   
             
-            $localize = array(
-                    'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
-                    'reset_confirm'     => __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 
-                    'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
-                    'opt_name'          => $this->args['opt_name'],
-                    'folds'				=> $this->folds,
-                    'options'			=> $this->options,
-                    'defaults'			=> $this->options_defaults,
-                    'slug'              => $this->args['page_slug']
-                );       
-
-            // Construct the errors array. 
-            $errors = get_transient( 'redux-errors-' . $this->args['opt_name'] );
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $errors ) ) {
-            	$theTotal = 0;
-                $theErrors = array();
-            	foreach($errors as $error) {
-            		$theErrors[$error['section_id']]['errors'][] = $error;
-            		if (!isset($theErrors[$error['section_id']]['total'])) {
-            			$theErrors[$error['section_id']]['total'] = 0;
-            		}
-            		$theErrors[$error['section_id']]['total']++;
-					$theTotal++;
-            	}
-            	delete_transient( 'redux-errors-' . $this->args['opt_name'] );
-            	$localize['errors'] = array('total'=>$theTotal, 'errors'=>$theErrors);
-            }
-
-            // Construct the errors array. 
-            $warnings = get_transient( 'redux-warnings-' . $this->args['opt_name'] );
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $warnings ) ) {
-            	$theTotal = 0;
-                $theWarnings = array();
-            	foreach($warnings as $warning) {
-            		$theWarnings[$warning['section_id']]['warnings'][] = $warning;
-            		if (!isset($theWarnings[$warning['section_id']]['total'])) {
-            			$theWarnings[$warning['section_id']]['total'] = 0;
-            		}
-            		$theWarnings[$warning['section_id']]['total']++;
-					$theTotal++;
-            	}
-            	delete_transient( 'redux-warnings-' . $this->args['opt_name'] );
-            	$localize['warnings'] = array('total'=>$theTotal, 'warnings'=>$theWarnings);
+            // Embed the compress version unless in dev mode
+            if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
+                if ( file_exists( self::$_dir . 'assets/js/redux.js' ) ) {
+                    wp_enqueue_script(
+                        'redux-cookie',
+                        self::$_url . 'assets/js/vendor/cookie.js',
+                        array( 'jquery'),
+                        array(),
+                        true
+                    );                                        
+                    wp_register_script(
+                        'redux-js',
+                        self::$_url . 'assets/js/redux.js',
+                        array( 'jquery', 'select2-js', 'ace-editor-js', 'redux-cookie' ),
+                        filemtime( self::$_dir . 'assets/js/redux.js' ),
+                        true
+                    );
+                }
+            } else {
+                if ( file_exists( self::$_dir . 'assets/js/redux.js' ) ) {
+                	wp_register_script(
+                        'redux-js',
+                        self::$_url . 'assets/js/redux.min.js',
+                        array( 'jquery', 'select2-js', 'ace-editor-js' ),
+                        filemtime( self::$_dir . 'assets/js/redux.min.js' ),
+                        true
+                    );
+                }
             }
             
-            // Values used by the javascript
-            wp_localize_script(
-                'redux-js', 
-                'redux_opts', 
-                $localize
-            );
-
-            do_action( 'redux-enqueue-' . $this->args['opt_name'], $this ); // REMOVE
-            do_action( 'redux/page/' . $this->args['opt_name'] . '/enqueue' );
-
             foreach( $this->sections as $section ) {
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $field ) {
                         if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
-
-                            if( !class_exists( $field_class ) ) {
-//                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
-                                $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
-                                if( $class_file ) {
-                                    /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                            $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
+                            if( $class_file ) {
+                                /** @noinspection PhpIncludeInspection */
+                                require_once( $class_file );
+                                if ( method_exists( $field_class, 'enqueue' ) || method_exists( $field_class, 'localize' ) ) {
+                                    $theField = new $field_class( $field, $this->options[$field['id']], $this );
+                                    if ( class_exists($field_class) && isset($this->args['dev_mode']) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
+                                        /** @noinspection PhpUndefinedMethodInspection */
+                                        $theField->enqueue();    
+                                    }
+                                    if ( method_exists( $field_class, 'localize' ) ) {
+                                        /** @noinspection PhpUndefinedMethodInspection */
+                                        $params = $theField->localize();
+                                        if ( !isset( $this->localize_data[$field['type']] ) ) {
+                                            $this->localize_data[$field['type']] = array();
+                                        }
+                                        $this->localize_data[$field['type']][$field['id']] = $theField->localize();
+                                    } 
+                                    unset($theField);                               
                                 }
-
-                            }
-
-                            if( class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
-                                $enqueue = new $field_class( '', '', $this );
-								/** @noinspection PhpUndefinedMethodInspection */
-								$enqueue->enqueue();
                             }
                         }
                     }
                 }
             }
+            if( is_null( $this->options_defaults ) ) {
+                $this->_default_values(); // fill cache
+            }
+            $this->localize_data['folds'] = $this->folds;
+            $this->localize_data['options'] = $this->options;
+            $this->localize_data['defaults'] = $this->options_defaults;
+            $this->localize_data['args'] = array(
+                'save_pending'      	=> __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
+                'reset_confirm'     	=> __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 
+                'reset_section_confirm' => __( 'Are you sure? Resetting will loose all custom values in this section.', 'redux-framework' ), 
+                'preset_confirm'    	=> __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
+                'opt_name'          	=> $this->args['opt_name'],
+                'slug'              	=> $this->args['page_slug']
+            );       
+
+            // Construct the errors array. 
+            $errors = get_transient( 'redux-errors-' . $this->args['opt_name'] );
+            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $errors ) ) {
+                $theTotal = 0;
+                $theErrors = array();
+                foreach($errors as $error) {
+                    $theErrors[$error['section_id']]['errors'][] = $error;
+                    if (!isset($theErrors[$error['section_id']]['total'])) {
+                        $theErrors[$error['section_id']]['total'] = 0;
+                    }
+                    $theErrors[$error['section_id']]['total']++;
+                    $theTotal++;
+                }
+                delete_transient( 'redux-errors-' . $this->args['opt_name'] );
+                $this->localize_data['errors'] = array('total'=>$theTotal, 'errors'=>$theErrors);
+            }
+
+            // Construct the errors array. 
+            $warnings = get_transient( 'redux-warnings-' . $this->args['opt_name'] );
+            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $warnings ) ) {
+                $theTotal = 0;
+                $theWarnings = array();
+                foreach($warnings as $warning) {
+                    $theWarnings[$warning['section_id']]['warnings'][] = $warning;
+                    if (!isset($theWarnings[$warning['section_id']]['total'])) {
+                        $theWarnings[$warning['section_id']]['total'] = 0;
+                    }
+                    $theWarnings[$warning['section_id']]['total']++;
+                    $theTotal++;
+                }
+                delete_transient( 'redux-warnings-' . $this->args['opt_name'] );
+                $this->localize_data['warnings'] = array('total'=>$theTotal, 'warnings'=>$theWarnings);
+            }
+            
+            // Values used by the javascript
+            wp_localize_script(
+                'redux-js', 
+                'redux', 
+                $this->localize_data
+            );
+
+            wp_enqueue_script('redux-js'); // Enque the JS now
+
+            do_action( 'redux-enqueue-' . $this->args['opt_name'], $this ); // REMOVE
+            do_action( 'redux/page/' . $this->args['opt_name'] . '/enqueue' );
+
         }
 
         /**
@@ -1499,16 +1546,35 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             if( !empty( $plugin_options['defaults'] ) ) {
-                $plugin_options = $this->_default_values();
                 set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+                $plugin_options = array();
                 $plugin_options['REDUX_COMPILER'] = time();
-                unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
-				if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
+                if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 				    $this->set_options( $plugin_options );
 					return $this->options;
 				}
                 return $plugin_options;
             }
+            if( isset( $plugin_options['defaults-section'] ) ) {
+            	$compiler = false;
+            	foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
+            		unset($plugin_options[$field['id']]);
+            		if (isset($field['compiler'])) {
+            			$compiler = true;
+            		}
+            	}
+            	if ($compiler) {
+					set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+                	$plugin_options['REDUX_COMPILER'] = time();
+            	}
+            	$plugin_options['defaults'] = true;
+                unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
+				if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
+				    $this->set_options( $plugin_options );
+					return $this->options;
+				}
+                return $plugin_options;
+            }            
 
             // Validate fields (if needed)
             $plugin_options = $this->_validate_values( $plugin_options, $this->options );
@@ -1529,11 +1595,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             	set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 2000 );
             }
 
-            unset( $plugin_options['defaults'] );
-            unset( $plugin_options['import'] );
-            unset( $plugin_options['import_code'] );
-            unset( $plugin_options['import_link'] );
-            unset( $plugin_options['compiler'] );
+            unset( $plugin_options['defaults'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
 		    if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 				$this->set_options( $plugin_options );
 				return $this->options;
@@ -1674,7 +1736,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<form method="post" action="' . './options.php" enctype="multipart/form-data" id="redux-form-wrapper">';
 
             echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
-
+			echo '<input type="hidden" id="currentSection" name="' . $this->args['opt_name'] . '[redux-section]" value="" />';
             settings_fields( $this->args['opt_name'] . '_group' );
 
             // Last tab?
@@ -1719,7 +1781,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div class="redux-action_bar">';
             submit_button( __( 'Save Changes', 'redux-framework'), 'primary', 'redux_save', false );
             echo '&nbsp;';
-            submit_button( __( 'Reset to Defaults', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
+            submit_button( __( 'Reset Section', 'redux-framework'), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
+            echo '&nbsp;';            
+            submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
             echo '</div>';
 
             echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
@@ -1836,7 +1900,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '</ul>';
             echo '</div>';
 
-            echo '<div id="redux-main">';
+            echo '<div class="redux-main">';
 
             foreach( $this->sections as $k => $section ) {
                 echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
@@ -1965,7 +2029,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div class="redux-action_bar">';
             submit_button( __( 'Save Changes', 'redux-framework'), 'primary', 'redux_save', false );
             echo '&nbsp;';
-            submit_button( __( 'Reset to Defaults', 'redux-framework'), 'secondary', $this->args['opt_name'] . '[defaults]', false );
+            submit_button( __( 'Reset Section', 'redux-framework'), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
+            echo '&nbsp;';
+            submit_button( __( 'Reset All', 'redux-framework'), 'secondary', $this->args['opt_name'] . '[defaults]', false );
             echo '</div>';
 
             echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework') . '">&nbsp;</div>';

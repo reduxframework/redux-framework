@@ -324,7 +324,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
         wp_enqueue_script(
             'redux-field-color-js', 
-            ReduxFramework::$_url . 'inc/fields/color/field_color.min.js', 
+            ReduxFramework::$_url . 'inc/fields/color/field_color.js', 
             array( 'jquery', 'wp-color-picker' ),
             time(),
             true
@@ -339,7 +339,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
         wp_enqueue_script(
             'redux-field-typography-js',
-            ReduxFramework::$_url.'inc/fields/typography/field_typography.min.js',
+            ReduxFramework::$_url.'inc/fields/typography/field_typography.js',
             array('jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js', 'jquery-numeric'),
             time(),
             true

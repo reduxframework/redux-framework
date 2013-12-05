@@ -30,7 +30,7 @@ class Redux_Validation_css extends ReduxFramework {
 	function validate() {
 		
 		// Strip all html
-		$this->value = htmlspecialchars_decode(wp_filter_nohtml_kses($this->value));
+		$this->value = wp_filter_nohtml_kses($this->value);
 				
 	}//function
 	

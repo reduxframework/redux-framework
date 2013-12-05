@@ -83,7 +83,7 @@ if( file_exists( dirname(__FILE__).'/info-html.html' )) {
 
 // Setting dev mode to true allows you to view the class settings/info in the panel.
 // Default: true
-$args['dev_mode'] = true;
+//$args['dev_mode'] = true;
 
 // Set the icon for the dev mode tab.
 // If $args['icon_type'] = 'image', this should be the path to the icon.
@@ -396,10 +396,10 @@ $sections[] = array(
 			,
 			),			
         array(
-            "id" => "homepage_blocks",
+            "id" => "homepage_blocks_three",
             "type" => "sorter",
-            "title" => "Homepage Layout Manager",
-            "desc" => "Organize how you want the layout to appear on the homepage",
+            "title" => "Layout Manager Advanced",
+            "subtitle" => "You can add multiple drop areas or columns.",
             "compiler"=>'true',
             'required' => array('switch-fold','equals','0'),	
             'options' => array(
@@ -412,9 +412,31 @@ $sections[] = array(
                 ),
                 "disabled" => array(
                     "placebo" => "placebo", //REQUIRED!
-                )
+                ),
+                "backup" => array(
+                    "placebo" => "placebo", //REQUIRED!
+                ),                
             ),
         ),
+        array(
+            "id" => "homepage_blocks",
+            "type" => "sorter",
+            "title" => "Homepage Layout Manager",
+            "desc" => "Organize how you want the layout to appear on the homepage",
+            "compiler"=>'true',
+            'options' => array(
+                "enabled" => array(
+                    "placebo" => "placebo", //REQUIRED!
+                    "highlights" => "Highlights",
+                    "slider" => "Slider",
+                    "staticpage" => "Static Page",
+                    "services" => "Services"
+                ),
+                "disabled" => array(
+                    "placebo" => "placebo", //REQUIRED!
+                ),
+            ),
+        ),        
 		array(
 			'id'=>'slides',
 			'type' => 'slides',
@@ -752,7 +774,17 @@ $sections[] = array(
 			'validate' => 'email',
 			'msg' => 'custom error message',
 			'default' => 'test@test.com'
-			),				
+			),	
+		array(
+			'id'=>'2test',
+			'type' => 'text',
+			'title' => __('Text Option with Data Attributes', 'redux-framework-demo'),
+			'subtitle' => __('You can also pass an options array if you want. Set the default to whatever you like.', 'redux-framework-demo'),
+			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+			'data' => 'post_type',
+			//'options' => array(1=>'One', 2=>'Two'),
+			//'default' => array(1=>'Onee', 2=>'Twoo'),
+			),						
 		array(
 			'id'=>'multi_text',
 			'type' => 'multi_text',
@@ -1332,7 +1364,7 @@ $ReduxFramework = new ReduxFramework($sections, $args, $tabs);
 function add_another_section($sections){
     //$sections = array();
     $sections[] = array(
-        'title' => __('A Section added by hook', 'redux-framework-demo'),
+        'title' => __('Section via hook', 'redux-framework-demo'),
         'desc' => __('<p class="description">This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.</p>', 'redux-framework-demo'),
 		'icon' => 'el-icon-paper-clip',
 		'icon_class' => 'icon-large',

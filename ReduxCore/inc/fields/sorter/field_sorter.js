@@ -1,4 +1,4 @@
-/* global redux_change, redux_opts */
+/* global redux, redux_opts */
 /*
  * Field Sorter jquery function
  * Based on
@@ -22,7 +22,7 @@ jQuery(function() {
                     parentID = parentID.replace(id + '_', '');
                     redux_change(jQuery(this));
                     var optionID = jQuery(this).parent().parent().parent().attr('id');
-                    jQuery(this).prop("name", redux_opts.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']');
+                    jQuery(this).prop("name", redux.args.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']');
                 });
             }
         });
