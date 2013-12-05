@@ -191,14 +191,14 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'concat', 'uglify:core', 'uglify:extensions']);
-  grunt.registerTask('travis', ['jshint', 'lintPHP', 'gh-pages']);
+  grunt.registerTask('travis', ['jshint', 'lintPHP']);
 
   // this would be run by typing "grunt test" on the command line
   grunt.registerTask('testJS', ['jshint', 'qunit']);  
 
   grunt.registerTask('watchUI', ['watch:ui']);
   grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
-  
+
   grunt.registerTask("lintPHP", ["phplint:plugin", "phplint:core"]);
   grunt.registerTask("compileCSS", ["less:production", "less:development", "less:extensions"]);
   grunt.registerTask('compileJS', ['jshint', 'concat', 'uglify:core', 'uglify:extensions']);
