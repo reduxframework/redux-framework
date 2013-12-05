@@ -983,7 +983,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'redux-css',
                 self::$_url . 'assets/css/redux.css',
                 array( 'farbtastic' ),
-                time(),
+                filemtime( self::$_dir . 'assets/css/redux.css' ),
                 'all'
             );
 
@@ -991,7 +991,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'redux-elusive-icon',
                 self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
                 array(),
-                time(),
+                filemtime( self::$_dir . 'assets/css/vendor/elusive-icons/elusive-webfont.css' ),
                 'all'
             );
 
@@ -999,7 +999,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'redux-elusive-icon-ie7',
                 self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
                 array(),
-                time(),
+                filemtime( self::$_dir . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css' ),
                 'all'
             );
 
@@ -1007,7 +1007,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'select2-css',
                 self::$_url . 'assets/js/vendor/select2/select2.css',
                 array(),
-                time(),
+                filemtime( self::$_dir . 'assets/js/vendor/select2/select2.css' ),
                 'all'
             );          
 
@@ -1017,7 +1017,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'jquery-ui-css',
                 apply_filters( 'redux/page/'.$this->args['opt_name'].'/enqueue/jquery-ui-css', self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 '',
-                time(),
+                filemtime( self::$_dir . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 'all'
             );
 
@@ -1027,6 +1027,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_style( 'redux-css' );
 
+            wp_enqueue_style( 'select2-css' );
+
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
 
@@ -1035,7 +1037,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'redux-rtl-css',
                     self::$_url . 'assets/css/rtl.css',
                     '',
-                    time(),
+                    filemtime( self::$_dir . 'assets/css/rtl.css' ),
                     'all'
                 );
                 wp_enqueue_style( 'redux-rtl-css' );
@@ -1062,15 +1064,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_script('jquery-ui-slider');
             wp_enqueue_script('wp-color-picker');
             wp_enqueue_script('jquery-ui-accordion');
-
-
             wp_enqueue_style( 'wp-color-picker' );
+
             if ( function_exists( 'wp_enqueue_media' ) ) {
                 wp_enqueue_media();
             } else {
                 wp_enqueue_script( 'media-upload' );
-                wp_enqueue_script( 'thickbox' );
-                wp_enqueue_style( 'thickbox' );
             }
 
             add_thickbox();
@@ -1079,7 +1078,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'select2-js', 
                 self::$_url . 'assets/js/vendor/select2/select2.min.js',
                 array( 'jquery' ),
-                time(),
+                filemtime( self::$_dir . 'assets/js/vendor/select2/select2.min.js' ),
                 true
             );
 
@@ -1087,24 +1086,24 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'ace-editor-js', 
                 self::$_url . 'assets/js/vendor/ace_editor/ace.js',
                 array( 'jquery' ),
-                time(),
+                filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
                 true
             );          
             
             // Embed the compress version unless in dev mode
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
-                wp_enqueue_script(
+                wp_register_script(
                     'redux-vendor',
                     self::$_url . 'assets/js/vendor.min.js',
                     array( 'jquery'),
-                    array(),
+                    time(),
                     true
                 );                                        
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    array( 'jquery', 'select2-js', 'ace-editor-js' ),
-                    filemtime( self::$_dir . 'assets/js/redux.js' ),
+                    array( 'jquery', 'select2-js', 'ace-editor-js', 'redux-vendor' ),
+                    time(),
                     true
                 );
             } else {

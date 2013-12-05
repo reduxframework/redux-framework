@@ -24,7 +24,8 @@ jQuery(document).ready(function() {
 		}
 
 		jQuery(".slider-input").numeric({
-			negative: neg,
+			allowPlus: false,
+			allowMinus: neg,
 			min: slider.min,
 			max: slider.max
 		});

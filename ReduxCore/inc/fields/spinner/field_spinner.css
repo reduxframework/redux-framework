@@ -70,8 +70,8 @@
   border: 1px solid #b7b7b7;
 }
 .redux-container-spinner .ui-spinner-button .ui-icon-triangle-1-n {
-  background: url('arrow_right.png') 10px 10px no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADxJREFUeNpsjwsKADAIQu3u3tsRY6M5gz7w0AqSQFLdZ3ZRgmf44JQ/EOZ9oYOsiDviVemP2oYoWCwBBgDpO6VXVo3RyQAAAABJRU5ErkJggg==) 10px 10px no-repeat;
 }
 .redux-container-spinner .ui-spinner-button .ui-icon-triangle-1-s {
-  background: url('arrow_left.png') 10px 10px no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADhJREFUeNpi+P//PwM6bmlpwS4IorEKokggC8Il0AVhEv9x6sAmiaz9P05XIUsygmVRAUiAESDAAFHcpVdWtdj/AAAAAElFTkSuQmCC) 10px 10px no-repeat;
 }

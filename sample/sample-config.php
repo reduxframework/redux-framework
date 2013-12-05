@@ -83,7 +83,7 @@ if( file_exists( dirname(__FILE__).'/info-html.html' )) {
 
 // Setting dev mode to true allows you to view the class settings/info in the panel.
 // Default: true
-$args['dev_mode'] = true;
+//$args['dev_mode'] = true;
 
 // Set the icon for the dev mode tab.
 // If $args['icon_type'] = 'image', this should be the path to the icon.

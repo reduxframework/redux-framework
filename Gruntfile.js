@@ -12,10 +12,11 @@ module.exports = function(grunt) {
         	src: [ 
 				'ReduxCore/assets/js/vendor/cookie.js',
 				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-				'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
+				//'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
 				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
 				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
 				'ReduxCore/assets/js/vendor/spinner_custom.js',
+				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
 				'ReduxCore/inc/fields/**/*.js',
 				'ReduxCore/extensions/**.*.js',
 				'ReduxCore/assets/js/redux.js', 
@@ -26,10 +27,11 @@ module.exports = function(grunt) {
         	src: [ 
 				'ReduxCore/assets/js/vendor/cookie.js',
 				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-				'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
+				//'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
 				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
 				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
 				'ReduxCore/assets/js/vendor/spinner_custom.js',
+				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
         	],
         	dest: 'ReduxCore/assets/js/vendor.min.js'
     	}
@@ -161,6 +163,9 @@ module.exports = function(grunt) {
     },
     less: {
         development: {
+			options: {
+            	paths: 'ReduxCore/',
+    		},        	
             files: [{
                 expand: true,        // Enable dynamic expansion.
                 cwd: 'ReduxCore/inc/fields',  // Src matches are relative to this path.
@@ -183,8 +188,9 @@ module.exports = function(grunt) {
       			compress : true,
             	cleancss : true,
             	ieCompat : true,
-            	relativeUrls : false,
+            	relativeUrls : true,
             	report: 'gzip',
+            	paths: 'ReduxCore/',
     		},
 		    files: {
 		      "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/assets/css/admin.less"],

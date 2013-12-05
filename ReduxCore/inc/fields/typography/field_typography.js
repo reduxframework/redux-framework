@@ -215,9 +215,12 @@ jQuery(document).ready(function($) {
 			typographySelect(jQuery(this));
 		}
 	});
-	jQuery(".redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter").numeric({
-		negative: false
+	jQuery(".redux-typography-size, .redux-typography-word, .redux-typography-letter").numeric({
+		allowMinus: false,
 	});
+	jQuery(".redux-typography-height").numeric({
+		allowMinus: true,
+	});		
 	//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
 	jQuery(".redux-typography-family, .redux-typography-family-backup").select2({
 		width: 'resolve',
