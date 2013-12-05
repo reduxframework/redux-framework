@@ -13,6 +13,8 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 	    echo "All files are properly compressed."
 	else
 		echo "Files are not the same. Committing back to the repo."
+		git config --global user.email "travis@travis-ci.org"
+		git config --global user.name "Travis"
 		git add -A
 		git commit -m "Committing compressed files back to repo."
 		git push
