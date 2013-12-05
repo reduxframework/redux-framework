@@ -5,3 +5,4 @@ node_modules/
 npm-debug.log
 grunt-phplint
 redux
+md5
