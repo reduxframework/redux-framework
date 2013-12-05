@@ -24,6 +24,9 @@ module.exports = function(grunt) {
     	}
     },
     'gh-pages': {
+      options: {
+        
+      },
       dev: {
         src: ['**/*']
       },
@@ -31,13 +34,12 @@ module.exports = function(grunt) {
         options: {
 			base: 'docs/',
 			branch: 'gh-pages',
-			message: 'Updating documentation.'
           	repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
           	user: {
-            	name: 'Travis',
-            	email: 'travis@travis-ci.org'
-          	},
-          	silent: false
+            name: 'Travis',
+            email: 'travis@travis-ci.org'
+          },
+          silent: false
         },
         src: ['**/*']
       },
@@ -45,18 +47,17 @@ module.exports = function(grunt) {
         options: {
 			base: './',
 			branch: 'master',
-			message: 'Pushing compressed js/css files back to Github.'
-          	repo: 'https://' + process.env.GH_TOKEN_MASTER + '@github.com/ReduxFramework/ReduxFramework.git',
+          	repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
           	user: {
-            	name: 'Travis',
-            	email: 'travis@travis-ci.org'
-          	},
-          	silent: false
+            name: 'Travis',
+            email: 'travis@travis-ci.org'
+          },
+          silent: false
         },
         src: ['**/*']
-      },      
-
+      },
     },    
+
     uglify: {
       	core: {
 			options: {
