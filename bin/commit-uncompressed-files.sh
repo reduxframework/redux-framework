@@ -17,7 +17,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 		git remote set-url origin "https://$GH_TOKEN@github.com/ReduxFramework/ReduxFramework.git"
 		git add -A
 		git commit -m "Committing compressed files back to repo."
-		git push origin master
+		git push origin $TRAVIS_BRANCH
 	fi
 
 fi
