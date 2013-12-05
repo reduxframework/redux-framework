@@ -18,7 +18,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 		git status
 		git add -A
 		git commit -m "Committing compressed files back to repo."
-		git push origin $TRAVIS_BRANCH
+		git push origin HEAD:$TRAVIS_BRANCH
 	fi
 
 fi
