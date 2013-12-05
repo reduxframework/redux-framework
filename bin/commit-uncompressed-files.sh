@@ -6,8 +6,8 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
 	v1=`find ReduxCore -type f | sort -u | xargs cat | md5sum`
 
-	grunt compressCSS
-	grunt compressJS
+	grunt compileCSS
+	grunt compileJS
 	
 	v2=`find ReduxCore -type f | sort -u | xargs cat | md5sum`
 
