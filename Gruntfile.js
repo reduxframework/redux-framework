@@ -130,8 +130,8 @@ module.exports = function(grunt) {
     },
     phpdocumentor: {
       options : {
-        directory : './ReduxCore/',
-        target : './docs/'
+        directory : 'ReduxCore/',
+        target : 'docs/'
       }, 
       generate : {}
     },

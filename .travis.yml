@@ -21,7 +21,7 @@ script:
   - phpunit
   - grunt jshint
 after_success: 
-  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then phpdoc --target docs --directory ReduxCore/ && grunt gh-pages:travis; fi'
+  - 'if [[ "$TRAVIS_JOB_NUMBER" == *.1 ]]; then grunt phpdocumentor && grunt gh-pages:travis; fi'
 notifications:
   email:
     recipients:
