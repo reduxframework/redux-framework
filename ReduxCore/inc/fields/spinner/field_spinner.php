@@ -101,7 +101,7 @@ class ReduxFramework_spinner extends ReduxFramework {
         );
 
         wp_enqueue_script(
-                'redux-spinner-js', ReduxFramework::$_url . 'inc/fields/spinner/spinner_custom.js', array('jquery'), time(), true
+                'redux-spinner-js', ReduxFramework::$_url . 'assets/js/vendor/spinner_custom.js', array('jquery'), time(), true
         );
 
         wp_enqueue_script(

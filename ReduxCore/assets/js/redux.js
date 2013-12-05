@@ -406,6 +406,7 @@ jQuery(document).ready(function($) {
 	**/
 	jQuery('.redux-group-tab-link-a').click(function() {
 		relid = jQuery(this).data('rel'); // The group ID of interest
+		jQuery('#currentSection').val(relid);
 		// Set the proper page cookie
 		$.cookie('redux_current_tab', relid, {
 			expires: 7,
@@ -469,6 +470,13 @@ jQuery(document).ready(function($) {
 		}
 		window.onbeforeunload = null;
 	});
+	// Default button clicked
+	jQuery('input[name="' + redux.args.opt_name + '[defaults-section]"]').click(function() {
+		if (!confirm(redux.args.reset_section_confirm)) {
+			return false;
+		}
+		window.onbeforeunload = null;
+	});	
 	jQuery('#expand_options').click(function(e) {
 		e.preventDefault();
 		var trigger = jQuery('#expand_options');

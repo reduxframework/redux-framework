@@ -1,4 +1,4 @@
-/* global confirm, redux_opts, redux_change */
+/* global confirm, redux, redux_change */
 
 jQuery(document).ready(function() {
 
@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 			var presets = jQuery(this).closest('label').find('input');
 			var data = presets.data('presets');
 			if (presets !== undefined && presets !== null) {
-				var answer = confirm(redux_opts.preset_confirm);
+				var answer = confirm(redux.args.preset_confirm);
 				if (answer) {
 					jQuery('label[for="' + id + '"]').addClass('redux-image-select-selected');
 					window.onbeforeunload = null;
@@ -29,7 +29,7 @@ jQuery(document).ready(function() {
 
 	// Used to display a full image preview of a tile/pattern
 	jQuery('.tiles').tipsy({
-		gravity: jQuery.fn.tipsy.autoWE,
+		gravity: 'n',
 		fade: true,
 		html: true,
 		title : function(){
@@ -37,18 +37,5 @@ jQuery(document).ready(function() {
 		},
 		opacity: 1
 	});
-	/*var xOffset = 10; // these 2 variable determine the popup's distance from the cursor
-	var yOffset = 30;
-	jQuery(".tiles").hover(function(e) {
-		jQuery("body").append("<div id='tilesFullView'><img src='" + jQuery(this).attr('rel') + "' alt='' /></div>");
-		jQuery("#tilesFullView").css("top", (e.pageY - xOffset) + "px").css("left", (e.pageX + yOffset) + "px").fadeIn("fast");
-	}, function() {
-		jQuery("#tilesFullView").remove();
-	});
-	
-	jQuery(".tiles").mousemove(function(e) {
-		jQuery("#tilesFullView").css("top", (e.pageY - xOffset) + "px").css("left", (e.pageX + yOffset) + "px");
-	});*/
-
 
 });

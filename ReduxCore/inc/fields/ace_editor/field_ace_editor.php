@@ -84,13 +84,6 @@ class ReduxFramework_ace_editor {
                 time(),
                 true
             );
-            wp_register_script(
-                'ace-editor',
-                ReduxFramework::$_url . 'inc/fields/ace_editor/ace-min-noconflict/ace.js',
-                array( 'jquery' ),
-                time(),
-                true
-            );
             wp_enqueue_script(
                 'redux-field-ace-editor-js', 
                 ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js', 

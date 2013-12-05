@@ -15,7 +15,6 @@ class ReduxFramework_select extends ReduxFramework{
 		$this->value = $value;
 		//$this->render();
 
-		
         if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
 			if (empty($this->field['args'])) {
 				$this->field['args'] = array();
@@ -65,6 +64,7 @@ class ReduxFramework_select extends ReduxFramework{
 			if ( isset($this->field['select2']) ) { // if there are any let's pass them to js
 				$select2_params = json_encode($this->field['select2']);
 				$select2_params = htmlspecialchars( $select2_params , ENT_QUOTES);
+				$select2_params = array();
 				echo '<input type="hidden" class="select2_params" value="'. $select2_params .'">';
 			}
 

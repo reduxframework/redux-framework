@@ -5,26 +5,27 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     concat: {
-      options: {
-        separator: ';'
-      },
-      dest: {
-        src: [ 
-          'ReduxCore/assets/js/vendor/cookie.js',
-          'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-          'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
-          'ReduxCore/assets/js/vendor/jquery.tipsy.js',
-          'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
-          'ReduxCore/assets/js/vendor/spinner_custom.js',
-          'ReduxCore/inc/fields/**/*.js', 
-          'ReduxCore/assets/js/admin.js', 
-        ],
-        dest: 'ReduxCore/assets/js/redux.min.js'
-      }
+		options: {
+        	separator: ';'
+      	},
+      	dest: {
+        	src: [ 
+				'ReduxCore/assets/js/vendor/cookie.js',
+				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
+				'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
+				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
+				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
+				'ReduxCore/assets/js/vendor/spinner_custom.js',
+				'ReduxCore/inc/fields/**/*.js',
+				'ReduxCore/extensions/**.*.js',
+				'ReduxCore/assets/js/redux.js', 
+        	],
+        	dest: 'ReduxCore/assets/js/redux.min.js'
+    	}
     },
     'gh-pages': {
       options: {
-        base: 'docs/',
+        base: 'ReduxCore/',
         message: 'Update docs and files to distribute'
       },
       dev: {
@@ -32,7 +33,7 @@ module.exports = function(grunt) {
       },
       travis: {
         options: {
-          repo: 'https://9df69e1d07c99b5b0dc5c3462f672ee2c6289647@github.com/ReduxFramework/ReduxFramework.git',
+          repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
           user: {
             name: 'Travis',
             email: 'travis@travis-ci.org'
@@ -42,23 +43,33 @@ module.exports = function(grunt) {
         src: ['**/*']
       }
     },    
+
     uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %> */\n',
-      },
-      redux: {
-        files: {
-          'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
-        }
-      }
+      	core: {
+			options: {
+				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+				'<%= grunt.template.today("yyyy-mm-dd") %> */\n',
+			},
+			files: {
+		  	'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
+			}      	
+      	},
+	  	extensions: {  
+			files: [{
+				expand: true,
+				cwd: 'ReduxCore/extensions',
+				src: '**/*.js',
+				ext: '.min.js',
+				dest: 'ReduxCore/extensions'
+			}]					   	
+      	},      
     },    
     qunit: {
       files: ['test/qunit/**/*.html']
     },
     jshint: {
       files: [ 
-      //* // for testing individually
+      /* // for testing individually
         'ReduxCore/inc/fields/ace_editor/*.js',
         'ReduxCore/inc/fields/border/*.js',
         'ReduxCore/inc/fields/button_set/*.js',
@@ -91,9 +102,9 @@ module.exports = function(grunt) {
         'ReduxCore/inc/fields/text/*.js',
         'ReduxCore/inc/fields/textarea/*.js',
         'ReduxCore/inc/fields/typography/*.js',
-      //*/
-        'ReduxCore/assets/js/admin.js',
-        //'ReduxCore/inc/fields/**/*.js',
+      */
+        'ReduxCore/inc/fields/**/*.js',
+        'ReduxCore/assets/js/redux.js'
       ],
       options: {
         expr: true,
@@ -108,8 +119,63 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<%= jshintFields.files %>'],
-      tasks: ['jshint']
+      ui: {
+        files: ['<%= jshint.files %>'],
+        tasks: ['jshint']  
+      },
+      php: {
+        files: ['ReduxCore/**/*.php'],
+        tasks: ['lintCore']  
+      }
+    },
+    phpdocumentor: {
+      options : {
+        directory : './ReduxCore/',
+        target : './docs/'
+      }, 
+      generate : {}
+    },
+    phplint: {
+        options: {
+            swapPath: "./"
+        },
+
+        core: ["ReduxCore/**/*.php"],
+        plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"],
+    },
+    less: {
+        development: {
+            files: [{
+                expand: true,        // Enable dynamic expansion.
+                cwd: 'ReduxCore/inc/fields',  // Src matches are relative to this path.
+                src: ['**/*.less'],     // Actual pattern(s) to match.
+                dest: 'ReduxCore/inc/fields',  // Destination path prefix.
+                ext: '.css',         // Dest filepaths will have this extension.
+            }]
+        },
+        extensions: {
+            files: [{
+                expand: true,        // Enable dynamic expansion.
+                cwd: 'ReduxCore/extensions/',  // Src matches are relative to this path.
+                src: ['**/*.less'],     // Actual pattern(s) to match.
+                dest: 'ReduxCore/extensions/',  // Destination path prefix.
+                ext: '.css',         // Dest filepaths will have this extension.
+            }]
+        },        
+        production: {
+        	options: {
+      			compress : true,
+            	cleancss : true,
+            	ieCompat : true,
+            	relativeUrls : false,
+            	report: 'gzip',
+    		},
+		    files: {
+		      "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/assets/css/admin.less"],
+		      "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
+
+		    }
+        }        
     },
   });
 
@@ -118,14 +184,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-phpdocumentor');
   grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks("grunt-phplint");
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat']);
-
-  grunt.registerTask('travis', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify:core', 'uglify:extensions']);
+  grunt.registerTask('travis', ['jshint', 'lintPHP', 'gh-pages']);
 
   // this would be run by typing "grunt test" on the command line
-  grunt.registerTask('test', ['jshint', 'qunit']);  
+  grunt.registerTask('testJS', ['jshint', 'qunit']);  
+
+  grunt.registerTask('watchUI', ['watch:ui']);
+  grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
+  
+  grunt.registerTask("lintPHP", ["phplint:plugin", "phplint:core"]);
+  grunt.registerTask("compileCSS", ["less:production", "less:development", "less:extensions"]);
+  grunt.registerTask('compileJS', ['jshint', 'concat', 'uglify:core', 'uglify:extensions']);
 
 };

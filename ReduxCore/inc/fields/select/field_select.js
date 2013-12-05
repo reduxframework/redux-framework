@@ -1,3 +1,4 @@
+/* global redux_change */
 (function($){
 	"use strict";
     
@@ -8,7 +9,7 @@
     });
 
     $.redux.select = function() {
-		$('.redux-select-item').each(function() {
+		$('select.redux-select-item').each(function() {
 
 			var default_params = {
 				width: 'resolve',
@@ -27,7 +28,7 @@
 				$(this).select2(default_params);
 			} else {
 				$(this).select2(default_params);
-				$(this).on("change", function(e) { 
+				$(this).on("change", function() {
 					redux_change($($(this)));
 				});
 			}

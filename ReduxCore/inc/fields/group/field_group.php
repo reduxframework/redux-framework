@@ -162,13 +162,18 @@ if (!class_exists('ReduxFramework_group')) {
                         echo '<h4>' . $field['title'] . '</h4>';
                     if (!empty($field['subtitle']))
                         echo '<span class="description">' . $field['subtitle'] . '</span>';
-
-                    $value = current($this->parent->options[$field['id']]);   
+                    if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
+                    	$value = current($this->parent->options[$field['id']]);   	
+                    }
+                    
                     $value = empty($value) ? "" : $value;
 
                     ob_start();
                     $this->parent->_field_input($field, $value);
-                    $value = next($this->parent->options[$field['id']]);
+                    if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
+	                    $value = next($this->parent->options[$field['id']]);
+                    }
+
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
