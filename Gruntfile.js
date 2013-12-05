@@ -25,39 +25,24 @@ module.exports = function(grunt) {
     },
     'gh-pages': {
       options: {
-        
+        base: 'ReduxCore/',
+        message: 'Update docs and files to distribute'
       },
       dev: {
         src: ['**/*']
       },
       travis: {
         options: {
-			base: 'docs/',
-			branch: 'gh-pages',
-          	repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
-          	user: {
+          repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
+          user: {
             name: 'Travis',
             email: 'travis@travis-ci.org'
           },
           silent: false
         },
         src: ['**/*']
-      },
-      compressedFiles: {
-        options: {
-			base: './',
-			branch: 'master',
-          	repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
-          	user: {
-            name: 'Travis',
-            email: 'travis@travis-ci.org'
-          },
-          silent: false
-        },
-        src: ['**/*']
-      },
-    },    
-
+      }
+    },       
     uglify: {
       	core: {
 			options: {
