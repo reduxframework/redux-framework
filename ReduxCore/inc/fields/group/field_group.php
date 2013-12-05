@@ -19,6 +19,7 @@
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
  * @author      Abdullah Almesbahi
+ * @author       Jesús Mendoza (@vertigo7x)
  * @version     3.0.0
  */
 // Exit if accessed directly
@@ -111,7 +112,7 @@ if (!class_exists('ReduxFramework_group')) {
 
                     //adding sorting number to the name of each fields in group
                     $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
-                    $content = str_replace($name, $name . '[@]', $content);
+                    $content = str_replace($name,$this->args['opt_name'] . '[' . $this->field['id'] . '][@]['.$field['id'].']', $content);
                     // remove the name property. asigned by the controller, create new data-name property for js
                     $content = str_replace('name', 'data-name', $content);
 
@@ -162,23 +163,23 @@ if (!class_exists('ReduxFramework_group')) {
                         echo '<h4>' . $field['title'] . '</h4>';
                     if (!empty($field['subtitle']))
                         echo '<span class="description">' . $field['subtitle'] . '</span>';
-                    if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
-                    	$value = current($this->parent->options[$field['id']]);   	
-                    }
+                    //if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
+                    	$value = $group[$field['id']];   	
+                    //}
                     
                     $value = empty($value) ? "" : $value;
 
                     ob_start();
                     $this->parent->_field_input($field, $value);
-                    if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
-	                    $value = next($this->parent->options[$field['id']]);
-                    }
+                    //if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
+	                //    $value = next($this->parent->options[$field['id']]);
+                    //}
 
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
                     $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
-                    $content = str_replace($name, $name . '[' . $x . ']', $content);
+                    $content = str_replace($name, $this->args['opt_name'] . '[' . $this->field['id'] . ']['.$x.']['.$field['id'].']', $content);
 
                     //we should add $sort to id to fix problem with select field
                     $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
