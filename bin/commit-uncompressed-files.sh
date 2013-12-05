@@ -8,7 +8,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 	grunt compileJS
 	v2=`find ReduxCore -type f | sort -u | xargs cat | md5sum`
 	echo "$v2"
-	if [ "$v1" == "$v2" ] then
+	if [ "$v1" == "$v2" ]; then
 	    echo "All files are properly compressed."
 	else
 		echo "Files are not the same. Committing back to the repo."
