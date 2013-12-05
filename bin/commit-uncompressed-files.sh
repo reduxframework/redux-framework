@@ -15,7 +15,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 		echo "Files are not the same. Committing back to the repo."
 		git config --global user.email "travis@travis-ci.org"
 		git config --global user.name "Travis"
-		git remote set-url origin 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git'
+		git remote set-url origin 'https://$GH_TOKEN@github.com/ReduxFramework/ReduxFramework.git'
 		git add -A
 		git commit -m "Committing compressed files back to repo."
 		git push
