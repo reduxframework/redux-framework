@@ -216,8 +216,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function enqueue(){
-		wp_enqueue_script( 'select2-js' );
-		wp_enqueue_style( 'select2-css' );	
 
 		wp_enqueue_script(
 			'redux-field-spacing-js', 

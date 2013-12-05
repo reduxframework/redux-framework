@@ -91,15 +91,6 @@ class ReduxFramework_sortable {
 
     function enqueue() {
 
-        wp_enqueue_script(
-            'redux-field-sortable-js',
-            ReduxFramework::$_url . 'assets/js/vendor/jquery.DragSort.min.js',
-            array('jquery'),
-            time(),
-            true
-        );
-
-
         wp_enqueue_style(
             'redux-field-sortable-css', 
             ReduxFramework::$_url.'inc/fields/sortable/field_sortable.css', 

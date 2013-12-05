@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		options: {
         	separator: ';'
       	},
-      	dest: {
+    	core: {  	
         	src: [ 
 				'ReduxCore/assets/js/vendor/cookie.js',
 				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
@@ -21,6 +21,17 @@ module.exports = function(grunt) {
 				'ReduxCore/assets/js/redux.js', 
         	],
         	dest: 'ReduxCore/assets/js/redux.min.js'
+    	},
+    	vendor: {
+        	src: [ 
+				'ReduxCore/assets/js/vendor/cookie.js',
+				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
+				'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
+				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
+				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
+				'ReduxCore/assets/js/vendor/spinner_custom.js',
+        	],
+        	dest: 'ReduxCore/assets/js/vendor.min.js'
     	}
     },
     'gh-pages': {
@@ -50,7 +61,7 @@ module.exports = function(grunt) {
 				'<%= grunt.template.today("yyyy-mm-dd") %> */\n',
 			},
 			files: {
-		  	'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
+		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
 			}      	
       	},
 	  	extensions: {  
@@ -61,7 +72,12 @@ module.exports = function(grunt) {
 				ext: '.min.js',
 				dest: 'ReduxCore/extensions'
 			}]					   	
-      	},      
+      	},     
+	  	vendor: {  
+			files: {
+		  		'ReduxCore/assets/js/vendor.min.js': ['ReduxCore/assets/js/vendor.min.js']
+			}  				   	
+      	},      	 
     },    
     qunit: {
       files: ['test/qunit/**/*.html']
@@ -103,6 +119,7 @@ module.exports = function(grunt) {
         'ReduxCore/inc/fields/typography/*.js',
       */
         'ReduxCore/inc/fields/**/*.js',
+        //'ReduxCore/extensions/**/field_*.js',
         'ReduxCore/assets/js/redux.js'
       ],
       options: {
@@ -189,7 +206,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify:core', 'uglify:extensions']);
+  grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'uglify:extensions',  'concat:vendor', 'uglify:vendor']);
   grunt.registerTask('travis', ['jshint', 'lintPHP']);
 
   // this would be run by typing "grunt test" on the command line
@@ -200,6 +217,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask("lintPHP", ["phplint:plugin", "phplint:core"]);
   grunt.registerTask("compileCSS", ["less:production", "less:development", "less:extensions"]);
-  grunt.registerTask('compileJS', ['jshint', 'concat', 'uglify:core', 'uglify:extensions']);
+  grunt.registerTask('compileJS', ['jshint', 'concat:core', 'uglify:core', 'uglify:extensions', 'concat:vendor', 'uglify:vendor']);
 
 };

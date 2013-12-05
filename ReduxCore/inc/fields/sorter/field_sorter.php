@@ -119,11 +119,22 @@ class ReduxFramework_sorter extends ReduxFramework {
     }
 
     function enqueue() {
-        wp_register_script('options-sorter', ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.js', array(
-            'jquery'));
-        wp_register_style('options-sorter', ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.css');
-        wp_enqueue_script('options-sorter');
-        wp_enqueue_style('options-sorter');
+    	
+        wp_enqueue_style(
+            'redux-field-sorder-css', 
+            ReduxFramework::$_url.'inc/fields/sorter/field_sorter.css', 
+            time(),
+            true
+        );  
+
+        wp_enqueue_script(
+        	'redux-field-sorter-js', 
+        	ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.js', 
+        	array('jquery'),
+        	time(),
+        	true
+        );
+
     }
 
 }

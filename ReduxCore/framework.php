@@ -1089,36 +1089,26 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 array( 'jquery' ),
                 time(),
                 true
-            );         
-
-            wp_register_script(
-                'jquery-tipsy',
-                self::$_url . 'assets/js/vendor/jquery.tipsy.js',
-                array( 'jquery' ),
-                time(),
-                true
-            );   
+            );          
             
             // Embed the compress version unless in dev mode
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
-                if ( file_exists( self::$_dir . 'assets/js/redux.js' ) ) {
-                    wp_enqueue_script(
-                        'redux-cookie',
-                        self::$_url . 'assets/js/vendor/cookie.js',
-                        array( 'jquery'),
-                        array(),
-                        true
-                    );                                        
-                    wp_register_script(
-                        'redux-js',
-                        self::$_url . 'assets/js/redux.js',
-                        array( 'jquery', 'select2-js', 'ace-editor-js', 'redux-cookie' ),
-                        filemtime( self::$_dir . 'assets/js/redux.js' ),
-                        true
-                    );
-                }
+                wp_enqueue_script(
+                    'redux-vendor',
+                    self::$_url . 'assets/js/vendor.min.js',
+                    array( 'jquery'),
+                    array(),
+                    true
+                );                                        
+                wp_register_script(
+                    'redux-js',
+                    self::$_url . 'assets/js/redux.js',
+                    array( 'jquery', 'select2-js', 'ace-editor-js' ),
+                    filemtime( self::$_dir . 'assets/js/redux.js' ),
+                    true
+                );
             } else {
-                if ( file_exists( self::$_dir . 'assets/js/redux.js' ) ) {
+                if ( file_exists( self::$_dir . 'assets/js/redux.min.js' ) ) {
                 	wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',

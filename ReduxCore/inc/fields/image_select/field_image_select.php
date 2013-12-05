@@ -172,8 +172,6 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                 true
             );
 
-            wp_enqueue_script('jquery-tipsy');
-
             wp_enqueue_style(
                 'redux-field-image-select-css', 
                 ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.css',

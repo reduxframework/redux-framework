@@ -189,14 +189,6 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
          */
         public function enqueue() {
 
-            if( function_exists( 'wp_enqueue_media' ) ) {
-                wp_enqueue_media();
-            } else {
-                wp_enqueue_script( 'media-upload' );
-                wp_enqueue_script( 'thickbox' );
-                wp_enqueue_style( 'thickbox' );
-            }
-
             wp_enqueue_script(
                 'redux-field-media-js',
                 ReduxFramework::$_url . 'inc/fields/media/field_media.js',

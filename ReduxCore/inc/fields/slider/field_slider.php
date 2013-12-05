@@ -73,19 +73,10 @@ class ReduxFramework_slider extends ReduxFramework{
 	 * @since ReduxFramework 0.0.4
 	*/
 	function enqueue(){
-
-		wp_enqueue_script(
-			'redux-typewatch-js', 
-			ReduxFramework::$_url.'assets/js/vendor/jquery.typewatch.min.js', 
-			array('jquery'),
-			time(),
-			true
-		);			
-
 		wp_enqueue_script(
 			'redux-field-slider-js', 
 			ReduxFramework::$_url.'inc/fields/slider/field_slider.js', 
-			array('jquery', 'jquery-numeric', 'jquery-ui-core', 'jquery-ui-slider', 'jquery-ui-dialog', 'redux-typewatch-js'),
+			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog'),
 			time(),
 			true
 		);		

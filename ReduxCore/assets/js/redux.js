@@ -6,6 +6,8 @@
 	var the_body = $("body");
 
 	$(document).ready(function(){
+
+
 		
 		jQuery.fn.isOnScreen = function() {
 			if (!window) {
@@ -670,3 +672,9 @@ jQuery(document).ready(function($) {
 
 
 });
+
+function reduxNearestNumber(n, v) {
+	n = n / v;
+	n = Math.round(n) * v;
+	return n;
+}	

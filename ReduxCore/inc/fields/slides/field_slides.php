@@ -261,15 +261,6 @@ if (!class_exists('ReduxFramework_slides')) {
                 true
             );
 
-            if (function_exists('wp_enqueue_media')) {
-                wp_enqueue_media();
-            }
-            else {
-                wp_enqueue_script('media-upload');
-                wp_enqueue_script('thickbox');
-                wp_enqueue_style('thickbox');
-            }
-
             wp_enqueue_style(
                 'redux-field-slides-css',
                 ReduxFramework::$_url . 'inc/fields/slides/field_slides.css',

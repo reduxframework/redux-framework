@@ -94,9 +94,6 @@ class ReduxFramework_select extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function enqueue(){
-		
-		wp_enqueue_script( 'select2-js' );
-		wp_enqueue_style( 'select2-css' );
 
 		wp_enqueue_script(
 			'field-select-js', 
