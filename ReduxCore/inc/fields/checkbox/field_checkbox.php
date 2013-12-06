@@ -31,17 +31,17 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_checkbox extends ReduxFramework {   
-    
-        /**
-         * Field Constructor.
-         *
-         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-         *
-         * @since       1.0.0
-         * @access      public
-         * @return      void
-         */
+    class ReduxFramework_checkbox extends ReduxFramework {
+
+		/**
+		 * Field Constructor.
+		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+		 * @since       1.0.0
+		 * @access      public
+		 * @param array  $field
+		 * @param string $value
+		 * @param ReduxFramework  $parent
+		 */
         public function __construct( $field = array(), $value ='', $parent ) {
         
             $this->parent = $parent;
