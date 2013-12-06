@@ -34,9 +34,11 @@ class ReduxFramework_ace_editor {
      * @since ReduxFramework 1.0.0
     */
     function __construct($field = array(), $value ='', $parent) {
+        
         $this->field = $field;
 		$this->value = trim($value);
-		$this->args = $parent->args;
+		$this->parent = $parent;
+
         if( !isset($this->field['mode']) ){
             $this->field['mode'] = 'javascript';
         }
@@ -54,7 +56,7 @@ class ReduxFramework_ace_editor {
     */
     function render() {
 
-        $name = $this->args['opt_name'] . '[' . $this->field['id'] . ']';
+        $name = $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']';
 
         ?>
         <div class="ace-wrapper">

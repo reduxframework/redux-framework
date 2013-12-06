@@ -11,10 +11,10 @@ class ReduxFramework_dimensions extends ReduxFramework {
      */
     function __construct($field = array(), $value = '', $parent) {
 
-        parent::__construct($parent->sections, $parent->args);
+        $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-        //$this->render();
+
     }
 
 //function
@@ -225,17 +225,19 @@ class ReduxFramework_dimensions extends ReduxFramework {
             'width' => isset( $this->value['width'] ) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
         ); 
 
+        $style = "";
+
         $keys = implode(",", $this->field['output']);
-        $style = '<style type="text/css" class="redux-'.$this->field['type'].'">';
-            $style .= $keys."{";
-                foreach($cleanValue as $key=>$value) {
-                    if( $value ) {
-                        $style .= $key . ':' . $value . $units . ';';
-                    }
-                }          
-            $style .= '}';
-        $style .= '</style>';
-        echo $style;
+        $style .= $keys."{";
+            foreach($cleanValue as $key=>$value) {
+                if( $value ) {
+                    $style .= $key . ':' . $value . $units . ';';
+                }
+            }          
+        $style .= '}';
+        if ( !empty($style ) ) {
+            $this->parent->outputCSS .= $style;  
+        }
         
     }
 

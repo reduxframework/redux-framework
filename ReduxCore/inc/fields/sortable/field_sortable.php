@@ -9,9 +9,11 @@ class ReduxFramework_sortable {
      * @since Redux_Options 2.0.1
     */
     function __construct($field = array(), $value ='', $parent) {
+       
         $this->field = $field;
         $this->value = $value;
         $this->parent = $parent;
+        
     }
 
     /**

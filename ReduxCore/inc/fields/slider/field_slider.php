@@ -10,7 +10,7 @@ class ReduxFramework_slider extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct($parent->sections, $parent->args);
+		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
 		$this->clean();

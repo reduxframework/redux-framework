@@ -34,7 +34,7 @@ class ReduxFramework_border extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct($parent->sections, $parent->args);
+		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
 		//$this->render();
@@ -222,25 +222,28 @@ class ReduxFramework_border extends ReduxFramework{
             'color' => !empty( $this->value['border-color'] ) ? $this->value['border-color'] : 'inherit',
             'style' => !empty( $this->value['border-style'] ) ? $this->value['border-style'] : 'inherit'
         );
+
+        $outCSS = "";
     	
 		//absolute, padding, margin
         $keys = implode(",", $this->field['output']);
-        $style = '<style type="text/css" class="redux-'.$this->field['type'].'">';
-            $style .= $keys."{";
+            $outCSS .= $keys."{";
 	            if ( !isset( $this->field['all'] ) || $this->field['all'] != true ) {
 					foreach($cleanValue as $key=>$value) {
 		            	if ($key == "color" || $key == "style" ) {
 		            		continue;
 		            	}
-                        $style .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
+                        $outCSS .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
 		            }            	
 	            } else {
-	            	$style .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
+	            	$outCSS .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
 	            }
             
-            $style .= '}';
-        $style .= '</style>';
-        echo $style;
+            $outCSS .= '}';
+
+		if ( !empty($outCSS ) ) {
+			$this->parent->outputCSS .= $outCSS;  
+		}
         
     }	
 	

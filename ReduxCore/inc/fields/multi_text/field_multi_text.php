@@ -44,14 +44,9 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
          */
         public function __construct( $field = array(), $value ='', $parent ) {
         
-            parent::__construct( $parent->sections, $parent->args );
-
+            $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
-            
-            $this->add_text = ( isset($this->field['add_text']) ) ? $this->field['add_text'] : __( 'Add More', 'redux-framework');
-            
-            $this->show_empty = ( isset($this->field['show_empty']) ) ? $this->field['show_empty'] : true;
         
         }
 
@@ -65,6 +60,11 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
          * @return      void
          */
         public function render() {
+
+            $this->add_text = ( isset($this->field['add_text']) ) ? $this->field['add_text'] : __( 'Add More', 'redux-framework');
+            
+            $this->show_empty = ( isset($this->field['show_empty']) ) ? $this->field['show_empty'] : true;
+            
 
             echo '<ul id="' . $this->field['id'] . '-ul" class="redux-multi-text">';
         

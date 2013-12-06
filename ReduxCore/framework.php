@@ -214,6 +214,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		public $folds    			= array();
 		public $path 				= '';
 		public $output 				= array(); // Fields with CSS output selectors
+        public $outputCSS           = null;
 
         public $fieldsValues        = array(); //all fields values in an id=>value array so we can check dependencies
         public $fieldsHidden        = array(); //all fields that didn't pass the dependency test and are hidden
@@ -266,6 +267,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['customizer'] 		= false; // setting to true forces get_theme_mod_expanded
 			$defaults['global_variable'] 	= '';
 			$defaults['output'] 			= true; // Dynamically generate CSS
+            $defaults['output_tag']         = true; // Print Output Tag
             /** @noinspection PhpUndefinedConstantInspection */
             $defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
@@ -315,7 +317,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
             // Any dynamic CSS output, let's run
-            if( $this -> args[ 'output' ] == true ){
+            if( $this->args[ 'output' ] == true ){
                 add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
             }
 
@@ -964,7 +966,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                         }       	
                     }
+                    
                 }
+            }
+
+            if ( !empty( $this->outputCSS ) && $this->args['output_tag'] == true ) {
+                echo '<style type="text/css" class="redux-dynamic-output">'.$this->outputCSS.'</style>';  
             }
         }        
 
@@ -1444,8 +1451,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
 				delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
-				do_action( 'redux-compiler-' . $this->args['opt_name'], $this->options ); // REMOVE
-                do_action( 'redux/options/' . $this->args['opt_name'] . '/compiler', $this->options );
+                $this->args['output_tag'] = false;
+                $this->_enqueue_output();
+				do_action( 'redux-compiler-' . $this->args['opt_name'], $this->options, $this->outputCSS ); // REMOVE
+                do_action( 'redux/options/' . $this->args['opt_name'] . '/compiler', $this->options, $this->outputCSS );
 			}				
 
         }

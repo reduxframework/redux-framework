@@ -9,10 +9,11 @@ class ReduxFramework_raw {
      * @since ReduxFramework 3.0.4
     */
     function __construct($field = array(), $value ='', $parent) {
-        $this->parent = $parent;
+        
         $this->field = $field;
-	$this->value = $value;
-	$this->args = $parent->args;
+        $this->value = $value;
+        $this->parent = $parent;
+        
     }
 
     /**

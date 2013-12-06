@@ -10,23 +10,9 @@ class ReduxFramework_select extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct($parent->sections, $parent->args);
 		$this->field = $field;
 		$this->value = $value;
-		//$this->render();
-
-        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
-			if (empty($this->field['args'])) {
-				$this->field['args'] = array();
-			}
-			if ($this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) {
-       			$icons_file = ReduxFramework::$_dir.'inc/fields/select/elusive-icons.php';
-       			$icons_file = apply_filters('redux-font-icons-file',$icons_file);
-       			if(file_exists($icons_file))
-       				require_once $icons_file;
-			}        	
-        	$this->field['options'] = $parent->get_wordpress_data($this->field['data'], $this->field['args']);
-        }
+		$this->parent = $parent;
 
 	}//function
 	
@@ -40,6 +26,19 @@ class ReduxFramework_select extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
+
+        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
+			if (empty($this->field['args'])) {
+				$this->field['args'] = array();
+			}
+			if ($this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) {
+       			$icons_file = ReduxFramework::$_dir.'inc/fields/select/elusive-icons.php';
+       			$icons_file = apply_filters('redux-font-icons-file',$icons_file);
+       			if(file_exists($icons_file))
+       				require_once $icons_file;
+			}        	
+        	$this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
+        }		
 
 		if ( !empty($this->field['data']) && ( $this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) ) {
        		$this->field['class'] = " font-icons";

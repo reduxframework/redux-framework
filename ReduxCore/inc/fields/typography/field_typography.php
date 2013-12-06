@@ -10,7 +10,6 @@ class ReduxFramework_typography extends ReduxFramework{
      */
     function __construct($field = array(), $value ='', $parent){
 
-        parent::__construct($parent->sections, $parent->args);
         $this->field = $field;
         $this->value = $value;
         $this->parent = $parent;
@@ -470,8 +469,8 @@ class ReduxFramework_typography extends ReduxFramework{
         //wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
         //wp_enqueue_style( 'redux-google-fonts' ); 
       }
-      if ( !empty( $outCSS ) ) {
-        echo '<style type="text/css" class="redux-'.$this->field['type'].'">'.$outCSS.'</style>';  
+      if ( !empty($outCSS ) ) {
+        $this->parent->outputCSS .= $outCSS;  
       }
     }
 

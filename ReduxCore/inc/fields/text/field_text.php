@@ -9,17 +9,11 @@ class ReduxFramework_text {
      * @since ReduxFramework 1.0.0
     */
     function __construct($field = array(), $value ='', $parent) {
+        
         $this->field = $field;
 		$this->value = $value;
-		$this->args = $parent->args;
+		$this->parent = $parent;
 
-        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
-			if (empty($this->field['args'])) {
-				$this->field['args'] = array();
-			}    	
-        	$this->field['options'] = $parent->get_wordpress_data($this->field['data'], $this->field['args']);
-        	$this->field['class'] .= " hasOptions ";
-        }
     }
 
     /**
@@ -30,6 +24,15 @@ class ReduxFramework_text {
      * @since ReduxFramework 1.0.0
     */
     function render() {
+
+        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
+            if (empty($this->field['args'])) {
+                $this->field['args'] = array();
+            }       
+            $this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
+            $this->field['class'] .= " hasOptions ";
+        }
+
     	if (empty($this->value) && !empty( $this->field['data'] ) && !empty( $this->field['options'] )) {
     		$this->value = $this->field['options'];
     	}
@@ -43,13 +46,13 @@ class ReduxFramework_text {
 					$placeholder = (is_array($this->field['placeholder']) && isset($this->field['placeholder'][$k])) ?	' placeholder="' . esc_attr($this->field['placeholder'][$k]) . '" ' : '';
 				}
 				echo '<label for="' . $this->field['id'] . '-text-'.$k.'"><strong>'.$v.'</strong></label> ';
-				echo '<input type="text" id="' . $this->field['id'] . '-text-'.$k.'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']['.$k.']" ' . $placeholder . 'value="' . esc_attr($this->value[$k]) . '" class="regular-text ' . $this->field['class'] . '" /><br />';
+				echo '<input type="text" id="' . $this->field['id'] . '-text-'.$k.'" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']['.$k.']" ' . $placeholder . 'value="' . esc_attr($this->value[$k]) . '" class="regular-text ' . $this->field['class'] . '" /><br />';
 				
 			}//foreach
     		
     	} else {
     		
-    		echo '<input type="text" id="' . $this->field['id'] . '-text" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '" />';
+    		echo '<input type="text" id="' . $this->field['id'] . '-text" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '" />';
     	}
 
     

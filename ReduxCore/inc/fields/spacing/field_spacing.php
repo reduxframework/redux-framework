@@ -10,10 +10,9 @@ class ReduxFramework_spacing extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct($parent->sections, $parent->args);
+		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
-		//$this->render();
 		
 	}//function
 	
@@ -254,7 +253,7 @@ class ReduxFramework_spacing extends ReduxFramework{
     	
 		//absolute, padding, margin
         $keys = implode(",", $this->field['output']);
-        $style = '<style type="text/css" class="redux-'.$this->field['type'].'">';
+        $style = '';
             $style .= $keys."{";
 	            if ( !empty( $mode ) ) {
 					foreach($this->value as $key=>$value) {
@@ -277,8 +276,9 @@ class ReduxFramework_spacing extends ReduxFramework{
 	            }
             
             $style .= '}';
-        $style .= '</style>';
-        echo $style;
+        if ( !empty($style ) ) {
+            $this->parent->outputCSS .= $style;  
+        }
         
     }	
 	

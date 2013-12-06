@@ -26,12 +26,11 @@ class ReduxFramework_sorter extends ReduxFramework {
      * @since Redux_Options 1.0.0
      */
     function __construct($field = array(), $value = '', $parent) {
-        parent::__construct($parent->sections, $parent->args);
+        
+        $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-        if (!is_array($this->value) && isset($this->field['options'])) {
-            $this->value = $this->field['options'];
-        }
+        
     }
 
     /**
@@ -40,6 +39,10 @@ class ReduxFramework_sorter extends ReduxFramework {
      * @since 1.0.0
      */
     function render() {
+
+        if (!is_array($this->value) && isset($this->field['options'])) {
+            $this->value = $this->field['options'];
+        }    	
 
 		// Make sure to get list of all the default blocks first
 	    $all_blocks = !empty( $this->field['options'] ) ? $this->field['options'] : array();

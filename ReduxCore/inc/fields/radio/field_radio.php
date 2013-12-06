@@ -10,19 +10,10 @@ class ReduxFramework_radio extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct($parent->sections, $parent->args);
 		$this->field = $field;
 		$this->value = $value;
-		//$this->render();
+        $this->parent = $parent;
 		
-        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
-			if (empty($this->field['args'])) {
-				$this->field['args'] = array();
-			}        	
-        	$this->field['options'] = $parent->get_wordpress_data($this->field['data'], $this->field['args']);
-        }
-        $this->field['data_class'] = ( isset($this->field['multi_layout']) ) ? 'data-'.$this->field['multi_layout'] : 'data-full';
-
 	}//function
 	
 	
@@ -35,6 +26,14 @@ class ReduxFramework_radio extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
+
+        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
+			if (empty($this->field['args'])) {
+				$this->field['args'] = array();
+			}        	
+        	$this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
+        }
+        $this->field['data_class'] = ( isset($this->field['multi_layout']) ) ? 'data-'.$this->field['multi_layout'] : 'data-full';		
 		
 		if (!empty($this->field['options'])) {
 

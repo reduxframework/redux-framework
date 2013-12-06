@@ -83,7 +83,7 @@ if( file_exists( dirname(__FILE__).'/info-html.html' )) {
 
 // Setting dev mode to true allows you to view the class settings/info in the panel.
 // Default: true
-//$args['dev_mode'] = true;
+$args['dev_mode'] = true;
 
 // Set the icon for the dev mode tab.
 // If $args['icon_type'] = 'image', this should be the path to the icon.
@@ -282,8 +282,16 @@ $sections[] = array(
 	'icon_class' => 'icon-large',
     'icon' => 'el-icon-home',
     // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
-	'fields' => array(
-		
+	'fields' => array(	
+		array(
+			'id'=>'webFonts',
+			'type' => 'media', 
+			'title' => __('Web Fonts', 'redux-framework-demo'),
+			'compiler' => 'true',
+			'mode' => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+			'desc'=> __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
+			'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+			),				
 		array(
 			'id'=>'media',
 			'type' => 'media', 
@@ -532,7 +540,7 @@ $sections[] = array(
 							'1' => array('alt' => 'Preset 1', 'img' => ReduxFramework::$_url.'../sample/presets/preset1.png', 'presets'=>array('switch-on'=>1,'switch-off'=>1, 'switch-custom'=>1)),
 							'2' => array('alt' => 'Preset 2', 'img' => ReduxFramework::$_url.'../sample/presets/preset2.png', 'presets'=>'{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
 								),
-			),					
+			),							
 		array(
 			'id'=>'typography6',
 			'type' => 'typography', 
@@ -605,7 +613,6 @@ $sections[] = array(
         array(
 			'id'=>'css-code',
 			'type' => 'ace_editor',
-			'required' => array('layout','equals','1'),	
 			'title' => __('CSS Code', 'redux-framework-demo'), 
 			'subtitle' => __('Paste your CSS code here.', 'redux-framework-demo'),
 			'mode' => 'css',
@@ -616,7 +623,6 @@ $sections[] = array(
         array(
 			'id'=>'js-code',
 			'type' => 'ace_editor',
-			'required' => array('layout','equals','1'),	
 			'title' => __('JS Code', 'redux-framework-demo'), 
 			'subtitle' => __('Paste your JS code here.', 'redux-framework-demo'),
 			'mode' => 'javascript',
@@ -660,6 +666,7 @@ $sections[] = array(
 		array(
 			'id'=>'color-background',
 			'type' => 'color',
+			'output' => array('.site-title'),
 			'title' => __('Body Background Color', 'redux-framework-demo'), 
 			'subtitle' => __('Pick a background color for the theme (default: #fff).', 'redux-framework-demo'),
 			'default' => '#FFFFFF',
@@ -1271,7 +1278,7 @@ $sections[] = array(
 			'required' => array('18','equals',array('1','2')),
 			'raw_html'=>true,
 			'desc' => $sampleHTML,
-			),							
+			),
 		array(
 			'id'=>"custom_callback",
 			'type' => 'callback',
@@ -1280,7 +1287,6 @@ $sections[] = array(
 			'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework-demo'),
 			'callback' => 'my_custom_field'
 			),
-		
 		array(
 			'id'=>"group",
 			'type' => 'group',//doesn't need to be called for callback fields
@@ -1448,13 +1454,13 @@ function validate_callback_function($field, $value, $existing_value) {
 	It only runs if a field	set with compiler=>true is changed.
 
 **/
-function testCompiler() {
-	echo "Compiler hook!";
+function testCompiler($options, $css) {
+	echo "<h1>The compiler hook has run!";
+	print_r($options); //Option values
+	print_r($css); //So you can compile the CSS within your own file to cache
 }
-//add_filter('redux/options/redux_demo/compiler', 'testCompiler');
+//add_filter('redux/options/redux_demo/compiler', 'testCompiler', 10, 2);
 // replace redux_demo with your opt_name
-
-
 
 
 /**

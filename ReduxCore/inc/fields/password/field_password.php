@@ -10,9 +10,11 @@ class ReduxFramework_password {
 	 * @since ReduxFramework 1.0.1
 	 */
 	function __construct( $field = array(), $value = '', $parent ) {
+		
 		$this->field = $field;
 		$this->value = $value;
-		$this->args  = $parent->args;
+        $this->parent = $parent;
+
 	}
 
 	/**
@@ -70,10 +72,10 @@ class ReduxFramework_password {
 		}
 
 		// Username field
-		echo '<input type="input" autocomplete="off" placeholder="' . $this->value['placeholder']['username'] . '" id="' . $this->field['id'] . '[username]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr( $this->value['username'] ) . '" class="regular-text ' . $this->field['class'] . '" />&nbsp;';
+		echo '<input type="input" autocomplete="off" placeholder="' . $this->value['placeholder']['username'] . '" id="' . $this->field['id'] . '[username]" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][username]" value="' . esc_attr( $this->value['username'] ) . '" class="regular-text ' . $this->field['class'] . '" />&nbsp;';
 
 		// Password field
-		echo '<input type="password" autocomplete="off" placeholder="' . $this->value['placeholder']['password'] . '" id="' . $this->field['id'] . '[password]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr( $this->value['password'] ) . '" class="regular-text ' . $this->field['class'] . '" />';
+		echo '<input type="password" autocomplete="off" placeholder="' . $this->value['placeholder']['password'] . '" id="' . $this->field['id'] . '[password]" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][password]" value="' . esc_attr( $this->value['password'] ) . '" class="regular-text ' . $this->field['class'] . '" />';
 
 	}
 
@@ -90,7 +92,7 @@ class ReduxFramework_password {
 	 * </code>
 	 */
 	private function _render_single_field() {
-		echo '<input type="password" id="' . $this->field['id'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr( $this->value ) . '" class="regular-text ' . $this->field['class'] . '" />';
+		echo '<input type="password" id="' . $this->field['id'] . '" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . esc_attr( $this->value ) . '" class="regular-text ' . $this->field['class'] . '" />';
 	}
 
 }

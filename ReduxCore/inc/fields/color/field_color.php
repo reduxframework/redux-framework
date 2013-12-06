@@ -44,8 +44,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 		 */
 		public function __construct( $field = array(), $value ='', $parent ) {
 		
-			parent::__construct( $parent->sections, $parent->args );
-
+			$this->parent = $parent;
 			$this->field = $field;
 			$this->value = $value;
 		
@@ -102,6 +101,19 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 				true
 			);
 		
+		}
+
+		public function output() {
+			if (isset($this->field['output']) && !empty($this->field['output'])) {
+				$keys = implode(",", $this->field['output']);
+		        $style = '';
+		        if ( !empty( $this->value ) ) {
+		        	$style .= $keys."{";
+		        	$style .= 'color:'.$this->value;
+		        	$style .= '}';
+		        	$this->parent->outputCSS .= $style;  
+		        }
+			}
 		}
 	
 	}
