@@ -1723,7 +1723,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             do_action( 'redux/page/'.$this->args['opt_name'].'/form/before', $this );
 
             // Main container
-            echo '<div id="redux-container">';
+            echo '<div class="redux-container">';
             echo '<form method="post" action="' . './options.php" enctype="multipart/form-data" id="redux-form-wrapper">';
 
             echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
