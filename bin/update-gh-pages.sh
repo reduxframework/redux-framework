@@ -16,6 +16,9 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
   # Generate the docs
   grunt phpdocumentor
   
+  # Copy the github CNAME file to the docs
+  cp bin/CNAME docs/
+  
   # Publish the docs to gh-pages
   grunt gh-pages:travis
 

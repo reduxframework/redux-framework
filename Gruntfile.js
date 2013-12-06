@@ -38,11 +38,10 @@ module.exports = function(grunt) {
     },
     'gh-pages': {
       options: {
-        base: 'docs/',
         message: 'Update docs and files to distribute'
       },
       dev: {
-        src: ['**/*', '../bin/CNAME']
+        src: ['docs/**/*', 'bin/CNAME']
       },
       travis: {
         options: {
