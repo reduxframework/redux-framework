@@ -45,7 +45,7 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          */
         public function __construct( $field = array(), $value ='', $parent ) {
         
-            $this->parent = $parent;
+            parent::__construct( $parent->sections, $parent->args );
             $this->field = $field;
             $this->value = $value;
            
@@ -69,6 +69,10 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
                 'textarea_rows' => 10, //Wordpress default
                 'teeny' => true,
             );
+
+            if ( !isset( $this->field['editor_options'] ) || empty( $this->field['editor_options'] ) ) {
+                $this->field['editor_options'] = array();
+            }
 
             $this->field['editor_options'] = wp_parse_args( $this->field['editor_options'], $defaults );
             

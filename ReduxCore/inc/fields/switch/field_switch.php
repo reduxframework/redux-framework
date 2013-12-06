@@ -10,8 +10,8 @@ class ReduxFramework_switch extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
+		parent::__construct( $parent->sections, $parent->args );
 		$this->field = $field;
-		$this->parent = $parent;
 		$this->value = $value;
 		
 	}//function

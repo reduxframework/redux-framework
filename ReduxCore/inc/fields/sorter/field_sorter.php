@@ -27,7 +27,7 @@ class ReduxFramework_sorter extends ReduxFramework {
      */
     function __construct($field = array(), $value = '', $parent) {
         
-        $this->parent = $parent;
+        parent::__construct( $parent->sections, $parent->args );
         $this->field = $field;
         $this->value = $value;
         

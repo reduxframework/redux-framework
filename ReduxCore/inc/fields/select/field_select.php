@@ -10,9 +10,9 @@ class ReduxFramework_select extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
+		parent::__construct( $parent->sections, $parent->args );
 		$this->field = $field;
 		$this->value = $value;
-		$this->parent = $parent;
 
 	}//function
 	
@@ -37,7 +37,7 @@ class ReduxFramework_select extends ReduxFramework{
        			if(file_exists($icons_file))
        				require_once $icons_file;
 			}        	
-        	$this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
+        	$this->field['options'] = $this->get_wordpress_data($this->field['data'], $this->field['args']);
         }		
 
 		if ( !empty($this->field['data']) && ( $this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) ) {

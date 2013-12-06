@@ -72,7 +72,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          */
         public function __construct( $field = array(), $value ='', $parent ) {
         
-            $this->parent = $parent;
+            parent::__construct( $parent->sections, $parent->args );
             $this->field = $field;
             $this->value = $value;
         

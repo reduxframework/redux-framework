@@ -223,7 +223,7 @@ See blow.
 
 
 
-class ReduxFramework_textarea {
+class ReduxFramework_textarea extends ReduxFramework {
 
     /**
      * Field Constructor.
@@ -289,9 +289,9 @@ class ReduxFramework_textarea {
     */
     function __construct($field = array(), $value ='', $parent) {
         
+        parent::__construct( $parent->sections, $parent->args );
         $this->field = $field;
 		$this->value = $value;
-		$this->parent = $parent;
 
     }
 
@@ -329,7 +329,7 @@ class ReduxFramework_textarea {
      **/
     function render() {
 
-        $name = $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']';
+        $name = $this->args['opt_name'] . '[' . $this->field['id'] . ']';
         $this->field['placeholder'] = isset($this->field['placeholder']) ? $this->field['placeholder'] : "";
         $this->field['rows'] = isset($this->field['rows']) ? $this->field['rows'] : 6;
 

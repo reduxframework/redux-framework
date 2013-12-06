@@ -24,7 +24,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( class_exists( 'ReduxFramework_ace_editor' ) ) return;
 
-class ReduxFramework_ace_editor {
+class ReduxFramework_ace_editor extends ReduxFramework{ 
 
     /**
      * Field Constructor.
@@ -33,18 +33,12 @@ class ReduxFramework_ace_editor {
      *
      * @since ReduxFramework 1.0.0
     */
-    function __construct($field = array(), $value ='', $parent) {
-        
+    public function __construct( $field = array(), $value ='', $parent ) {
+    
+        parent::__construct( $parent->sections, $parent->args );
         $this->field = $field;
 		$this->value = trim($value);
-		$this->parent = $parent;
 
-        if( !isset($this->field['mode']) ){
-            $this->field['mode'] = 'javascript';
-        }
-        if( !isset($this->field['theme']) ){
-            $this->field['theme'] = 'monokai';
-        }
     }
 
     /**
@@ -56,7 +50,14 @@ class ReduxFramework_ace_editor {
     */
     function render() {
 
-        $name = $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']';
+        if( !isset($this->field['mode']) ){
+            $this->field['mode'] = 'javascript';
+        }
+        if( !isset($this->field['theme']) ){
+            $this->field['theme'] = 'monokai';
+        }
+
+        $name = $this->args['opt_name'] . '[' . $this->field['id'] . ']';
 
         ?>
         <div class="ace-wrapper">

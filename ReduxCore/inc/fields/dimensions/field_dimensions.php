@@ -11,7 +11,7 @@ class ReduxFramework_dimensions extends ReduxFramework {
      */
     function __construct($field = array(), $value = '', $parent) {
 
-        $this->parent = $parent;
+        parent::__construct( $parent->sections, $parent->args );
         $this->field = $field;
         $this->value = $value;
 
@@ -236,7 +236,7 @@ class ReduxFramework_dimensions extends ReduxFramework {
             }          
         $style .= '}';
         if ( !empty($style ) ) {
-            $this->parent->outputCSS .= $style;  
+            $this->outputCSS .= $style;  
         }
         
     }

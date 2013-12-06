@@ -11,11 +11,11 @@ class ReduxFramework_spinner extends ReduxFramework {
      */
     function __construct($field = array(), $value = '', $parent) {
 
+        parent::__construct( $parent->sections, $parent->args );
         $this->field = $field;
         $this->value = $value;
-        $this->parent = $parent;
         $this->clean();
-        
+
     }
 
     //function

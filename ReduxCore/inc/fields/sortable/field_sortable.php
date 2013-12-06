@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_sortable {
+class ReduxFramework_sortable extends ReduxFramework {
 
     /**
      * Field Constructor.
@@ -10,10 +10,10 @@ class ReduxFramework_sortable {
     */
     function __construct($field = array(), $value ='', $parent) {
        
+        parent::__construct( $parent->sections, $parent->args );
         $this->field = $field;
         $this->value = $value;
-        $this->parent = $parent;
-        
+
     }
 
     /**
@@ -57,7 +57,7 @@ class ReduxFramework_sortable {
             echo '<li>';
             
             $checked = "";
-            $name = $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']';
+            $name = $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']';
 
             if ( $this->field['mode'] == "checkbox") {
             	$value_display = $this->field['options'][$k];

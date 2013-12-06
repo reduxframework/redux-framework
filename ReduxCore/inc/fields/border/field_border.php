@@ -22,8 +22,9 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( class_exists( 'ReduxFramework_ace_editor' ) ) return;
-class ReduxFramework_border extends ReduxFramework{	
+if( class_exists( 'ReduxFramework_border' ) ) return;
+
+class ReduxFramework_border extends ReduxFramework {	
 	
 	/**
 	 * Field Constructor.
@@ -34,7 +35,7 @@ class ReduxFramework_border extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		$this->parent = $parent;
+		parent::__construct( $parent->sections, $parent->args );
 		$this->field = $field;
 		$this->value = $value;
 		//$this->render();
@@ -242,7 +243,7 @@ class ReduxFramework_border extends ReduxFramework{
             $outCSS .= '}';
 
 		if ( !empty($outCSS ) ) {
-			$this->parent->outputCSS .= $outCSS;  
+			$this->outputCSS .= $outCSS;  
 		}
         
     }	

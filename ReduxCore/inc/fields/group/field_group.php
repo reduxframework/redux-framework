@@ -47,9 +47,9 @@ if (!class_exists('ReduxFramework_group')) {
          */
         public function __construct($field = array(), $value = '', $parent) {
 
+            parent::__construct( $parent->sections, $parent->args );
             $this->field = $field;
             $this->value = $value;
-            $this->parent = $parent;
 
         }
 
@@ -101,15 +101,15 @@ if (!class_exists('ReduxFramework_group')) {
                         echo '<h4>' . $field['title'] . '</h4>';
                     if (!empty($field['subtitle']))
                         echo '<span class="description">' . $field['subtitle'] . '</span>';
-                    $value = empty($this->parent->options[$field['id']][0]) ? "" : $this->parent->options[$field['id']][0];
+                    $value = empty($this->options[$field['id']][0]) ? "" : $this->options[$field['id']][0];
 
                     ob_start();
-                    $this->parent->_field_input($field, $value);
+                    $this->_field_input($field, $value);
 
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
-                    $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                    $name = $this->args['opt_name'] . '[' . $field['id'] . ']';
                     $content = str_replace($name,$this->args['opt_name'] . '[' . $this->field['id'] . '][@]['.$field['id'].']', $content);
                     // remove the name property. asigned by the controller, create new data-name property for js
                     $content = str_replace('name', 'data-name', $content);
@@ -161,22 +161,22 @@ if (!class_exists('ReduxFramework_group')) {
                         echo '<h4>' . $field['title'] . '</h4>';
                     if (!empty($field['subtitle']))
                         echo '<span class="description">' . $field['subtitle'] . '</span>';
-                    //if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
+                    //if (isset($this->options[$field['id']]) && !empty($this->options[$field['id']]) && is_array($this->options[$field['id']])) {
                     	$value = $group[$field['id']];   	
                     //}
                     
                     $value = empty($value) ? "" : $value;
 
                     ob_start();
-                    $this->parent->_field_input($field, $value);
-                    //if (isset($this->parent->options[$field['id']]) && !empty($this->parent->options[$field['id']]) && is_array($this->parent->options[$field['id']])) {
-	                //    $value = next($this->parent->options[$field['id']]);
+                    $this->_field_input($field, $value);
+                    //if (isset($this->options[$field['id']]) && !empty($this->options[$field['id']]) && is_array($this->options[$field['id']])) {
+	                //    $value = next($this->options[$field['id']]);
                     //}
 
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
-                    $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                    $name = $this->args['opt_name'] . '[' . $field['id'] . ']';
                     $content = str_replace($name, $this->args['opt_name'] . '[' . $this->field['id'] . ']['.$x.']['.$field['id'].']', $content);
 
                     //we should add $sort to id to fix problem with select field
@@ -207,7 +207,7 @@ if (!class_exists('ReduxFramework_group')) {
 
         function support_multi($content, $field, $sort) {
             //convert name
-            $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+            $name = $this->args['opt_name'] . '[' . $field['id'] . ']';
             $content = str_replace($name, $name . '[' . $sort . ']', $content);
             //we should add $sort to id to fix problem with select field
             $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
