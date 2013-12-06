@@ -585,12 +585,16 @@ jQuery(document).ready(function($) {
 			jQuery('#redux-footer').removeClass('sticky-footer-fixed');
 		}
 	}
-	jQuery(window).scroll(function() {
-		stickyInfo();
-	});
-	jQuery(window).resize(function() {
-		stickyInfo();
-	});
+	
+	if (jQuery('#redux-footer').length !== 0) {
+		jQuery(window).scroll(function() {
+			stickyInfo();
+		});
+		jQuery(window).resize(function() {
+			stickyInfo();
+		});
+	}
+
 	jQuery('#redux-save, #redux-imported').delay(4000).slideUp();
 	jQuery('#redux-field-errors').delay(8000).slideUp();
 	jQuery('.redux-save').click(function() {

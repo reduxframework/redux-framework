@@ -1459,19 +1459,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _register_extensions() {        	
         	
-        	$path = dirname( __FILE__ ) . '/extensions';
-			$folders = scandir( $path, 1 );		   
+        	$path = dirname( __FILE__ ) . '/extensions/';
+			$folders = scandir( $path, 1 );		 
+
+            do_action( 'redux/extensions/'.$this->args['opt_name'].'/before', $this );  
 
 		    foreach($folders as $folder){
 
-		    	if ($folder === '.' or $folder === '..' or !is_dir($path . '/' . $folder) ) {
+		    	if ($folder === '.' or $folder === '..' or !is_dir($path . $folder) ) {
 		    		continue;	
 		    	} 
 				$extension_class = 'ReduxFramework_Extension_' . $folder;
 
                 if( !class_exists( $extension_class ) ) {
-                    $class_file = apply_filters( 'redux-extensionclass-load', $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class ); // REMOVE LATER
-                    $class_file = apply_filters( 'redux/extension/'.$this->args['opt_name'].'/'.$folder, $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $class_file );
+                    $class_file = apply_filters( 'redux-extensionclass-load', $path . $folder . '/extension_' . $folder . '.php', $extension_class ); // REMOVE LATER
+                    $class_file = apply_filters( 'redux/extension/'.$this->args['opt_name'].'/'.$folder, $path . $folder . '/extension_' . $folder . '.php', $class_file );
 
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
@@ -1484,7 +1486,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		    }    
 
 		    do_action( 'redux-register-extensions-' . $this->args['opt_name'], $this ); // REMOVE
-            do_action( 'redux/extensions/'.$this->args['opt_name'], $this );       			
+            do_action( 'redux/extensions/'.$this->args['opt_name'], $this );
 
         }
 
