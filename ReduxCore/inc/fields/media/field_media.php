@@ -172,11 +172,32 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
                   $wp_scripts->add_data('redux-field-media-js', 'data', '');
                 }
                 $localized_data[$this->field['id']] = $this->field['mode'];
-                wp_localize_script('redux-field-media-js', 'reduxMedia', $localized_data);                  
+                wp_localize_script('redux-js', 'reduxMedia', $localized_data);                  
             }
                            
             
         }
+
+		/**
+		 * 
+		 * Functions to pass data from the PHP to the JS at render time.
+		 * 
+		 * @return array Params to be saved as a javascript object accessable to the UI.
+		 * 
+		 * @since  Redux_Framework 3.1.1
+		 * 
+		 */
+		function localize() {
+            
+            if ( !isset( $this->field['mode'] ) ) {
+                $this->field['mode'] = "image";
+            }
+
+			if ( ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ) || $this->field['mode'] != false ) {
+            	return $this->field['mode'];                      
+            }
+
+		}        
 
         /**
          * Enqueue Function.

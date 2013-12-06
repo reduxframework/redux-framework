@@ -42,7 +42,8 @@ function redux_add_file(event, selector) {
 		// Grab the selected attachment.
 		var attachment = frame.state().get('selection').first();
 		frame.close();
-		if (typeof reduxMedia[jQuery(selector).attr('data-id')] !== 'undefined' && attachment.attributes.type !== reduxMedia[jQuery(selector).attr('data-id')]) {
+
+		if (typeof redux.media[jQuery(selector).attr('data-id')] !== 'undefined' && attachment.attributes.type !== redux.media[jQuery(selector).attr('data-id')]) {
 			return;
 		}
 
