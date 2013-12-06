@@ -406,7 +406,7 @@ class ReduxFramework_typography extends ReduxFramework{
           foreach( $section['fields'] as $field ) {
             if( isset( $field['type'] ) && $field['type'] == "typography" ) {
 
-              $font = $this->options[$field['id']];
+              $font = (isset($this->options[$field['id']])) ? $this->options[$field['id']] : "";
               //echo $font['font-family'];
               if ( !empty( $font['font-family'] ) && !empty( $font['font-backup'] ) ) {
                 $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
@@ -414,15 +414,18 @@ class ReduxFramework_typography extends ReduxFramework{
               if ( !empty( $field['output'] ) ) : // Don't create dynamic CSS if output array is not set
                 $keys = implode(",", $field['output']);
                 $newOutCSS = '';
-                foreach( $font as $key=>$value) {
-                  if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
-                    $value = "normal";
-                  }
-                  if ( $key == "google" || $key == "subsets" || $key == "font-backup" || empty( $value ) ) {
-                      continue;
-                  }
-                  $newOutCSS .= $key.':'.$value.';';
+                if (!empty($font)) {
+                    foreach( $font as $key=>$value) {
+                      if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
+                        $value = "normal";
+                      }
+                      if ( $key == "google" || $key == "subsets" || $key == "font-backup" || empty( $value ) ) {
+                          continue;
+                      }
+                      $newOutCSS .= $key.':'.$value.';';
+                    }                    
                 }
+                
                 if ( !empty( $newOutCSS) ) {
                   $outCSS .= $keys."{".$newOutCSS.'}';
                 }                 
