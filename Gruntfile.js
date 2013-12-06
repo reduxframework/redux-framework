@@ -38,11 +38,11 @@ module.exports = function(grunt) {
     },
     'gh-pages': {
       options: {
-        base: 'ReduxCore/',
+        base: 'docs/',
         message: 'Update docs and files to distribute'
       },
       dev: {
-        src: ['**/*']
+        src: ['**/*', '../bin/CNAME']
       },
       travis: {
         options: {
