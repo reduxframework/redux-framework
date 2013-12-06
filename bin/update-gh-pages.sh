@@ -1,4 +1,6 @@
-if [ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]; then
+#!/usr/bin/env bash
+
+if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
   echo -e "Starting to update documentation\n"
   
