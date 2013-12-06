@@ -169,9 +169,9 @@ class ReduxFramework_dimensions extends ReduxFramework {
 
             //  Extended units, show 'em all
             if ( $this->field['units_extended'] ) {
-                    $testUnits = array('px', 'em', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
+                    $testUnits = array('px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
             } else {
-                    $testUnits = array('px', 'em', '%');
+                    $testUnits = array('px', 'em', 'rem', '%');
             }
             
             if ( $this->field['units'] != "" && is_array( $this->field['units'] ) ) {

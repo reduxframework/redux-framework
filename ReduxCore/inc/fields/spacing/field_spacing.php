@@ -180,9 +180,9 @@ class ReduxFramework_spacing extends ReduxFramework{
 				echo '<select data-placeholder="'.__('Units','redux-framework').'" class="redux-spacing redux-spacing-units select'.$this->field['class'].'" original-title="'.__('Units','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][units]" id="'. $this->field['id'].'_units">';
 
 				if ( $this->field['units_extended'] ) {
-					$testUnits = array('px', 'em', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
+					$testUnits = array('px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
 				} else {
-					$testUnits = array('px', 'em', '%');
+					$testUnits = array('px', 'em', 'rem', '%');
 				}
 				if ( $this->field['units'] != "" ) {
 					$testUnits = array( $this->field['units'] );
