@@ -65,7 +65,9 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
                 'active' => ''
             );
 
-            $this->value = wp_parse_args( $this->value, $defaults );            
+            $this->value = wp_parse_args( $this->value, $defaults );  
+
+            $this->field['default'] = wp_parse_args( $this->field['default'], $defaults );          
         
         }
 
@@ -80,7 +82,7 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
          */
         public function render() {
 
-            $this->field['default'] = wp_parse_args( $this->field['default'], $defaults );
+            
 
             if ($this->field['regular'] == true):
 
