@@ -394,11 +394,11 @@ class ReduxFramework_typography extends ReduxFramework{
     function output() {
       global $wp_styles;
 
-      if ( !empty( $this->fieldTypographySet ) ) {
+      if ( !empty( $this->parent->fieldTypographySet ) ) {
         return; // We only run this function once!
       }
 
-      $this->fieldTypographySet = true;
+      $this->parent->fieldTypographySet = true;
 
       $outCSS = "";
       $fonts = array();
