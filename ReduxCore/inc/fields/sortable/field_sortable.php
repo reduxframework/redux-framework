@@ -8,12 +8,13 @@ class ReduxFramework_sortable extends ReduxFramework {
      *
      * @since Redux_Options 2.0.1
     */
-    function __construct($field = array(), $value ='', $parent) {
-       
+    function __construct( $field = array(), $value ='', $parent ) {
+    
         parent::__construct( $parent->sections, $parent->args );
+        $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-
+    
     }
 
     /**

@@ -8,13 +8,14 @@ class ReduxFramework_spacing extends ReduxFramework{
 	 *
 	 * @since ReduxFramework 1.0.0
 	*/
-	function __construct($field = array(), $value ='', $parent){
-		
+	function __construct( $field = array(), $value ='', $parent ) {
+    
 		parent::__construct( $parent->sections, $parent->args );
+		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
-		
-	}//function
+    
+    }
 	
 	
 	
@@ -277,7 +278,7 @@ class ReduxFramework_spacing extends ReduxFramework{
             
             $style .= '}';
         if ( !empty($style ) ) {
-            $this->outputCSS .= $style;  
+            $this->parent->outputCSS .= $style;  
         }
         
     }	

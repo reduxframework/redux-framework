@@ -9,13 +9,13 @@ class ReduxFramework_spinner extends ReduxFramework {
      *
      * @since ReduxFramework 3.0.0
      */
-    function __construct($field = array(), $value = '', $parent) {
-
+    function __construct( $field = array(), $value ='', $parent ) {
+    
         parent::__construct( $parent->sections, $parent->args );
+        $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-        $this->clean();
-
+    
     }
 
     //function

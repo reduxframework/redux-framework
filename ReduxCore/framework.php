@@ -317,10 +317,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
             // Any dynamic CSS output, let's run
-            if( $this->args[ 'output' ] == true ){
-                add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
-            }
-
+            add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
+            
             // Add tracking. PLEASE leave this in tact! It helps us gain needed statistics of uses. Opt-in of course.
             add_action( 'init', array( &$this, '_tracking' ), 3 );            
 
@@ -935,6 +933,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _enqueue_output() {
 
+            if( $this->args[ 'output' ] == false ) {
+                return;
+            }
+
 			/** @noinspection PhpUnusedLocalVariableInspection */
 			foreach( $this->sections as $k => $section ) {
                 if( isset($section['type'] ) && ( $section['type'] == 'divide' ) ) {
@@ -969,9 +971,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     
                 }
             }
-
             if ( !empty( $this->outputCSS ) && $this->args['output_tag'] == true ) {
-                echo '<style type="text/css" class="redux-dynamic-output">'.$this->outputCSS.'</style>';  
+                echo '<style type="text/css" class="redux-output">'.$this->outputCSS.'</style>';  
             }
         }        
 
@@ -1452,7 +1453,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
 				delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
                 $this->args['output_tag'] = false;
-                $this->_enqueue_output();
+                //$this->_enqueue_output();
 				do_action( 'redux-compiler-' . $this->args['opt_name'], $this->options, $this->outputCSS ); // REMOVE
                 do_action( 'redux/options/' . $this->args['opt_name'] . '/compiler', $this->options, $this->outputCSS );
 			}				

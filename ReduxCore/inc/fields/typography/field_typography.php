@@ -8,13 +8,14 @@ class ReduxFramework_typography extends ReduxFramework{
      *
      * @since ReduxFramework 1.0.0
      */
-    function __construct($field = array(), $value ='', $parent){
-
+    function __construct( $field = array(), $value ='', $parent ) {
+    
         parent::__construct( $parent->sections, $parent->args );
+        $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-
-    }//function
+    
+    }
 
     /**
      * Field Render Function.
@@ -396,17 +397,18 @@ class ReduxFramework_typography extends ReduxFramework{
       if ( !empty( $this->fieldTypographySet ) ) {
         return; // We only run this function once!
       }
-      
+
       $this->fieldTypographySet = true;
 
       $outCSS = "";
       $fonts = array();
       foreach( $this->sections as $section ) {
+
         if( isset( $section['fields'] ) ) {
           foreach( $section['fields'] as $field ) {
             if( isset( $field['type'] ) && $field['type'] == "typography" ) {
 
-              $font = (isset($this->options[$field['id']])) ? $this->options[$field['id']] : "";
+              $font = $this->value;
               //echo $font['font-family'];
               if ( !empty( $font['font-family'] ) && !empty( $font['font-backup'] ) ) {
                 $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
@@ -425,6 +427,7 @@ class ReduxFramework_typography extends ReduxFramework{
                       $newOutCSS .= $key.':'.$value.';';
                     }                    
                 }
+
                 
                 if ( !empty( $newOutCSS) ) {
                   $outCSS .= $keys."{".$newOutCSS.'}';
@@ -473,7 +476,7 @@ class ReduxFramework_typography extends ReduxFramework{
         //wp_enqueue_style( 'redux-google-fonts' ); 
       }
       if ( !empty($outCSS ) ) {
-        $this->outputCSS .= $outCSS;  
+        $this->parent->outputCSS .= $outCSS;  
       }
     }
 

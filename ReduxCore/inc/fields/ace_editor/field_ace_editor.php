@@ -33,11 +33,12 @@ class ReduxFramework_ace_editor extends ReduxFramework{
      *
      * @since ReduxFramework 1.0.0
     */
-    public function __construct( $field = array(), $value ='', $parent ) {
+    function __construct( $field = array(), $value ='', $parent ) {
     
         parent::__construct( $parent->sections, $parent->args );
+        $this->parent = $parent;
         $this->field = $field;
-		$this->value = trim($value);
+        $this->value = trim($value);
 
     }
 

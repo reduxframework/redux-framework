@@ -25,12 +25,13 @@ class ReduxFramework_sorter extends ReduxFramework {
      * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
      * @since Redux_Options 1.0.0
      */
-    function __construct($field = array(), $value = '', $parent) {
-        
-        parent::__construct( $parent->sections, $parent->args );
-        $this->field = $field;
-        $this->value = $value;
-        
+	function __construct( $field = array(), $value ='', $parent ) {
+    
+		parent::__construct( $parent->sections, $parent->args );
+		$this->parent = $parent;
+		$this->field = $field;
+		$this->value = $value;
+    
     }
 
     /**
