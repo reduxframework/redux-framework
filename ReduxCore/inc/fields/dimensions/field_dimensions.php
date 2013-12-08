@@ -219,7 +219,7 @@ class ReduxFramework_dimensions extends ReduxFramework {
             return;
         }
 
-        $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
+        $units = isset( $this->field['units'] ) ? $this->field['units'] : "";
 
         $cleanValue = array(
             'height' => isset( $this->value['height'] ) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
