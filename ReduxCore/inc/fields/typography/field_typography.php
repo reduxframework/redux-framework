@@ -1,4 +1,6 @@
 <?php
+
+
 class ReduxFramework_typography extends ReduxFramework{
 
     /**
@@ -15,13 +17,6 @@ class ReduxFramework_typography extends ReduxFramework{
         $this->field = $field;
         $this->value = $value;
 
-        global $wp_filesystem;
-
-        // Initialize the Wordpress filesystem, no more using file_put_contents function
-        if (empty($wp_filesystem)) {
-            require_once(ABSPATH .'/wp-admin/includes/file.php');
-            WP_Filesystem();
-        }          
     
     }
 
@@ -34,7 +29,13 @@ class ReduxFramework_typography extends ReduxFramework{
      */
     function render(){   
 
-        global $wp_filesystem;   
+        global $wp_filesystem;
+
+        // Initialize the Wordpress filesystem, no more using file_put_contents function
+        if (empty($wp_filesystem)) {
+            require_once(ABSPATH .'/wp-admin/includes/file.php');
+            WP_Filesystem();
+        }          
 
         // No errors please
         $defaults = array(
@@ -513,9 +514,9 @@ class ReduxFramework_typography extends ReduxFramework{
         $version = $this->parent->options['REDUX_last_saved'];
       }
       if ( !empty( $fonts ) && filter_var($this->parent->args['output'], FILTER_VALIDATE_BOOLEAN) ) {
-        echo '<link rel="stylesheet" id="redux-google-fonts"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&amp;v='.$version.'" type="text/css" media="all" />';
-        //wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
-        //wp_enqueue_style( 'redux-google-fonts' ); 
+        //echo '<link rel="stylesheet" id="redux-google-fonts"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&amp;v='.$version.'" type="text/css" media="all" />';
+        wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
+        wp_enqueue_style( 'redux-google-fonts' ); 
       }
       if ( !empty($outCSS ) ) {
         $this->parent->outputCSS .= $outCSS;  
@@ -531,6 +532,13 @@ class ReduxFramework_typography extends ReduxFramework{
     function getGoogleArray() {
 
         global $wp_filesystem;
+
+        // Initialize the Wordpress filesystem, no more using file_put_contents function
+        if (empty($wp_filesystem)) {
+            require_once(ABSPATH .'/wp-admin/includes/file.php');
+            WP_Filesystem();
+        }          
+
 
         if ( isset( $this->parent->googleArray ) && !empty( $this->parent->googleArray ) ) {
             return;
