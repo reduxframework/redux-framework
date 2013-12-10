@@ -62,7 +62,7 @@ class ReduxFramework_ace_editor extends ReduxFramework{
 
         ?>
         <div class="ace-wrapper">
-            <textarea name="<?php echo $name; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
+            <textarea name="<?php echo $name; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor hide" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
                 <?php echo $this->value; ?>
             </textarea>
             <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars ($this->value); ?></pre>
@@ -91,7 +91,7 @@ class ReduxFramework_ace_editor extends ReduxFramework{
             wp_enqueue_script(
                 'redux-field-ace-editor-js', 
                 ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js', 
-                array( 'ace-editor' ),
+                array( 'ace-editor-js' ),
                 time(),
                 true
             );

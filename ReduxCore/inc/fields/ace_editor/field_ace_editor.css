@@ -2,7 +2,6 @@
   position: static;
 }
 .redux-container-ace_editor .ace_editor {
-  display: none;
   height: 200px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;

@@ -1456,8 +1456,24 @@ function validate_callback_function($field, $value, $existing_value) {
 **/
 function testCompiler($options, $css) {
 	echo "<h1>The compiler hook has run!";
-	print_r($options); //Option values
+	//print_r($options); //Option values
 	print_r($css); //So you can compile the CSS within your own file to cache
+    $filename = dirname(__FILE__) . '/avada' . '.css';
+
+		    global $wp_filesystem;
+		    if( empty( $wp_filesystem ) ) {
+		        require_once( ABSPATH .'/wp-admin/includes/file.php' );
+		        WP_Filesystem();
+		    }
+
+		    if( $wp_filesystem ) {
+		        $wp_filesystem->put_contents(
+		            $filename,
+		            $css,
+		            FS_CHMOD_FILE // predefined mode settings for WP files
+		        );
+		    }
+
 }
 //add_filter('redux/options/redux_demo/compiler', 'testCompiler', 10, 2);
 // replace redux_demo with your opt_name
