@@ -566,7 +566,7 @@ $sections[] = array(
 				'font-family'=>'Abel', 
 				'google' => true,
 				'font-size'=>'33px', 
-				'line-height'=>'40'),
+				'line-height'=>'40px'),
 			),	
 		),
 	);

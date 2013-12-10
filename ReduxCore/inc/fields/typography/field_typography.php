@@ -417,7 +417,7 @@ class ReduxFramework_typography extends ReduxFramework{
           foreach( $section['fields'] as $field ) {
             if( isset( $field['type'] ) && $field['type'] == "typography" ) {
 
-              $font = $this->value;
+              $font = $this->parent->options[$field['id']];
               //echo $font['font-family'];
               if ( !empty( $font['font-family'] ) && !empty( $font['font-backup'] ) ) {
                 $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
