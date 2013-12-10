@@ -556,6 +556,7 @@ $sections[] = array(
 			//'letter-spacing'=>true, // Defaults to false
 			//'color'=>false,
 			//'preview'=>false, // Disable the previewer
+			'all_styles' => true, // Enable all Google Font style/weight variations to be added to the page
 			'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
 			'units'=>'px', // Defaults to px
 			'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework-demo'),

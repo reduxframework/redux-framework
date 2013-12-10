@@ -57,6 +57,7 @@ jQuery(document).ready(function($) {
 		}
 		// Get the styles and such from the font
 		var details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
+		$('#' + mainID + ' .redux-typography-font-options').val(decodeURIComponent(option.data('details')));
 		// If we changed the font
 		if ($(selector).hasClass('redux-typography-family')) {
 			var html = '<option value=""></option>';
