@@ -160,26 +160,24 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             
         }
 
-		/**
-		 * 
-		 * Functions to pass data from the PHP to the JS at render time.
-		 * 
-		 * @return array Params to be saved as a javascript object accessable to the UI.
-		 * 
-		 * @since  Redux_Framework 3.1.1
-		 * 
-		 */
-		function localize() {
-            
-            if ( !isset( $this->field['mode'] ) ) {
-                $this->field['mode'] = "image";
-            }
+    		/**
+    		 * 
+    		 * Functions to pass data from the PHP to the JS at render time.
+    		 * 
+    		 * @return array Params to be saved as a javascript object accessable to the UI.
+    		 * 
+    		 * @since  Redux_Framework 3.1.1
+    		 * 
+    		 */
+    		function localize() {
+                
+          if ( !isset( $this->field['mode'] ) ) {
+            $this->field['mode'] = "image";
+          }
 
-			if ( ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ) || $this->field['mode'] != false ) {
-            	return $this->field['mode'];                      
-            }
-
-		}        
+          return array( 'mode' => $this->field['mode'] );
+          
+    		}        
 
         /**
          * Enqueue Function.

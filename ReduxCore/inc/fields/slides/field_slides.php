@@ -97,7 +97,7 @@ if (!class_exists('ReduxFramework_slides')) {
                         $slide['height'] = $img[2];
                     }
 
-                    echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field"><h3><span class="redux-slides-header">' . $slide['title'] . '</span></h3><div>';
+                    echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="'.$this->field['id'].'"><h3><span class="redux-slides-header">' . $slide['title'] . '</span></h3><div>';
 
                     $hide = '';
                     if ( empty( $slide['url'] ) ) {
@@ -162,7 +162,7 @@ if (!class_exists('ReduxFramework_slides')) {
             }
 
             if ($x == 0) {
-                echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field"><h3><span class="redux-slides-header">New Slide</span></h3><div>';
+                echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="'.$this->field.'"><h3><span class="redux-slides-header">New Slide</span></h3><div>';
 
                 $hide = ' hide';
 
@@ -221,7 +221,7 @@ if (!class_exists('ReduxFramework_slides')) {
             }
             echo '</div><a href="javascript:void(0);" class="button redux-slides-add button-primary" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][title][]">' . __('Add Slide', 'redux-framework') . '</a><br/>';
             
-        }
+        }         
 
         /**
          * Enqueue Function.
