@@ -676,9 +676,3 @@ jQuery(document).ready(function($) {
 
 
 });
-
-function reduxNearestNumber(n, v) {
-	n = n / v;
-	n = Math.round(n) * v;
-	return n;
-}	

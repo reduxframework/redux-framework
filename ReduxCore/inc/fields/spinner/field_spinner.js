@@ -1,4 +1,4 @@
-/* global redux_change, reduxNearestNumber */
+/* global redux_change */
 jQuery(document).ready(function() {
 
     jQuery('.redux_spinner').each(function() {
@@ -48,14 +48,16 @@ jQuery(document).ready(function() {
         jQuery(this).removeClass('spinnerInputChange');
 
         var spinner = redux.spinner[jQuery(this).attr('id')];
-        var value = jQuery(this).val();
+        value = jQuery(this).val();
         if (value > spinner.max) {
             value = spinner.max;
         } else if (value < spinner.min) {
             value = spinner.min;
+        } else {
+            value = Math.round(value / spinner.step) * spinner.step;
         }
 
-        jQuery('#' + spinner.id).spinner("value", reduxNearestNumber(value, spinner.step));
+        jQuery('#' + spinner.id).spinner("value", value);
 
     });
 
@@ -68,14 +70,16 @@ jQuery(document).ready(function() {
             jQuery(this).removeClass('spinnerInputChange');
 
             var spinner = redux.spinner[jQuery(this).attr('id')];
-
+            value = jQuery(this).val();
             if (value > spinner.max) {
                 value = spinner.max;
             } else if (value < spinner.min) {
                 value = spinner.min;
+            } else {
+                value = Math.round(value / spinner.step) * spinner.step;
             }
 
-            jQuery('#' + spinner.id).spinner("value", reduxNearestNumber(value, spinner.step));
+            jQuery('#' + spinner.id).spinner("value", value);
 
         },
         wait: 400,
