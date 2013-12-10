@@ -402,7 +402,7 @@ class ReduxFramework_typography extends ReduxFramework{
 
       $outCSS = "";
       $fonts = array();
-      foreach( $this->sections as $section ) {
+      foreach( $this->parent->sections as $section ) {
 
         if( isset( $section['fields'] ) ) {
           foreach( $section['fields'] as $field ) {
@@ -434,8 +434,9 @@ class ReduxFramework_typography extends ReduxFramework{
                 }                 
               endif;
               
+
               // Google only stuff!
-              if ( !empty( $this->args['google_api_key'] ) && !empty($font['font-family']) && !empty($this->options[$field['id']]['google']) && filter_var($this->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
+              if ( !empty( $this->parent->args['google_api_key'] ) && !empty($font['font-family']) && !empty($this->parent->options[$field['id']]['google']) && filter_var($this->parent->options[$field['id']]['google'], FILTER_VALIDATE_BOOLEAN) ) {
                 if ( !empty( $font['font-backup'] ) && !empty( $font['font-family'] ) ) {
                   $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );
                 }
@@ -466,12 +467,11 @@ class ReduxFramework_typography extends ReduxFramework{
       } // Typography not set
 
       $version = '';
-      if (!empty($this->options['REDUX_last_saved'])) {
-        $version = $this->options['REDUX_last_saved'];
+      if (!empty($this->parent->options['REDUX_last_saved'])) {
+        $version = $this->parent->options['REDUX_last_saved'];
       }
-
-      if ( !empty( $fonts ) && filter_var($this->args['output'], FILTER_VALIDATE_BOOLEAN) ) {
-        echo '<link rel="stylesheet" id="redux-google-fonts-css"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&amp;v='.$version.'" type="text/css" media="all" />';
+      if ( !empty( $fonts ) && filter_var($this->parent->args['output'], FILTER_VALIDATE_BOOLEAN) ) {
+        echo '<link rel="stylesheet" id="redux-google-fonts"  href="'.$this->makeGoogleWebfontLink( $fonts ).'&amp;v='.$version.'" type="text/css" media="all" />';
         //wp_register_style( 'redux-google-fonts', $this->makeGoogleWebfontLink( $fonts ), '', $version );
         //wp_enqueue_style( 'redux-google-fonts' ); 
       }
