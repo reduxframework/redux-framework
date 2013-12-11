@@ -23,20 +23,17 @@
 				default_params = $.extend({}, default_params, select2_params);
 			}
 
-
 			if ( $(this).hasClass('font-icons') ) {
 				default_params = $.extend({}, {formatResult: addIconToSelect, formatSelection: addIconToSelect, escapeMarkup: function(m) { return m; } }, default_params);
-				//$(this).select2(default_params);
 			}
 			default_params.bindOrder = 'sortableStop';
-			default_params.sortableOptions = {placeholder : 'ui-state-highlight'};
+			default_params.sortableOptions = { placeholder : 'ui-state-highlight' };
 			$(this).select2Sortable(default_params);
-			//$(this).select2Sortable(default_params);
 
 			$(this).on("change", function() {
+				console.log('here');
 				redux_change($($(this)));
 				$(this).select2SortableOrder();
-				//$('myselectid').select2SortableOrder();
 			});			
 			
 		});

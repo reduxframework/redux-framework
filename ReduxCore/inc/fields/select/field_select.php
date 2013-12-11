@@ -98,14 +98,6 @@ class ReduxFramework_select extends ReduxFramework{
 	function enqueue(){
 
 		wp_enqueue_script(
-			'field-select-sortable', 
-			ReduxFramework::$_url.'assets/js/vendor/select2.sortable.js',
-			array('jquery', 'select2-js'),
-			time(),
-			true
-		);	
-
-		wp_enqueue_script(
 			'field-select-js', 
 			ReduxFramework::$_url.'inc/fields/select/field_select.js',
 			array('jquery', 'select2-js'),
