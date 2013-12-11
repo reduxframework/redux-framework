@@ -80,7 +80,7 @@
 			});
 		});
 
-		the_body.on('change', '#redux-main select, #redux-main radio, #redux-main input[type=checkbox], #redux-main input[type=hidden]', function(e){
+		the_body.on('change', '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]', function(e){
 			$.redux.check_dependencies(e,this);
 		});
 	};
@@ -486,11 +486,11 @@ jQuery(document).ready(function($) {
 		var id = jQuery('#redux-group-menu .active a').data('rel') + '_section_group';
 		if (trigger.hasClass('expanded')) {
 			trigger.removeClass('expanded');
-			jQuery('#redux-main').removeClass('expand');
+			jQuery('.redux-main').removeClass('expand');
 			jQuery('#redux-sidebar').stop().animate({
 				'margin-left': '0px'
 			}, 500);
-			jQuery('#redux-main').stop().animate({
+			jQuery('.redux-main').stop().animate({
 				'margin-left': width
 			}, 500);
 			jQuery('.redux-group-tab').each(function() {
@@ -501,11 +501,11 @@ jQuery(document).ready(function($) {
 			// Show the only active one
 		} else {
 			trigger.addClass('expanded');
-			jQuery('#redux-main').addClass('expand');
+			jQuery('.redux-main').addClass('expand');
 			jQuery('#redux-sidebar').stop().animate({
 				'margin-left': -width - 2
 			}, 500);
-			jQuery('#redux-main').stop().animate({
+			jQuery('.redux-main').stop().animate({
 				'margin-left': '0px'
 			}, 500);
 			jQuery('.redux-group-tab').fadeIn();

@@ -1119,7 +1119,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 	wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',
-                        array( 'jquery', 'select2-js', 'ace-editor-js' ),
+                        array( 'jquery', 'select2-js', 'ace-editor-js', 'redux-vendor' ),
                         filemtime( self::$_dir . 'assets/js/redux.min.js' ),
                         true
                     );
