@@ -1900,7 +1900,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '</ul>';
             echo '</div>';
 
-            echo '<div class="redux-main">';
+            echo '<div class="redux-main" id="redux-main">';
 
             foreach( $this->sections as $k => $section ) {
                 echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
