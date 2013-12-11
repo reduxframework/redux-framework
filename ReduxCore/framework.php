@@ -38,7 +38,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class ReduxFramework {
 
-        public static $_version = '3.1.0';
+        public static $_version = '3.1.2';
         public static $_dir;
         public static $_url;
         public static $_properties;
