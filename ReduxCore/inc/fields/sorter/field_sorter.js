@@ -8,13 +8,13 @@
 
 jQuery(function() {
     /**	Sorter (Layout Manager) */
-    jQuery('.sorter').each(function() {
+    jQuery('.redux-sorter').each(function() {
         var id = jQuery(this).attr('id');
         jQuery('#' + id).find('ul').sortable({
             items: 'li',
             placeholder: "placeholder",
             connectWith: '.sortlist_' + id,
-            opacity: 0.6,
+            opacity: 0.8,
             update: function() {
                 jQuery(this).find('.position').each(function() {
                     var listID = jQuery(this).parent().attr('id');

@@ -28,8 +28,6 @@ class ReduxFramework_select extends ReduxFramework{
 	*/
 	function render(){
 
-		print_r($this->value);
-
         if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
 			if (empty($this->field['args'])) {
 				$this->field['args'] = array();
@@ -114,6 +112,13 @@ class ReduxFramework_select extends ReduxFramework{
 			time(),
 			true
 		);		
+
+		wp_enqueue_style(
+			'redux-field-select-css', 
+			ReduxFramework::$_url.'inc/fields/select/field_select.css', 
+			time(),
+			true
+		);			
 
 	}//function
 

@@ -11,10 +11,8 @@ module.exports = function(grunt) {
     	core: {  	
         	src: [ 
 				'ReduxCore/assets/js/vendor/cookie.js',
-				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-				//'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
 				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
-				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
+				'ReduxCore/assets/js/vendor/jquery.typewatch.js',
 				'ReduxCore/assets/js/vendor/spinner_custom.js',
 				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
 				'ReduxCore/inc/fields/**/*.js',
@@ -26,10 +24,8 @@ module.exports = function(grunt) {
     	vendor: {
         	src: [ 
 				'ReduxCore/assets/js/vendor/cookie.js',
-				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-				//'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
 				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
-				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
+				'ReduxCore/assets/js/vendor/jquery.typewatch.js',
 				'ReduxCore/assets/js/vendor/spinner_custom.js',
 				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
         	],

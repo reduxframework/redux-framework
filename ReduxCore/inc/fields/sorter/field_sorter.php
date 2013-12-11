@@ -90,7 +90,7 @@ class ReduxFramework_sorter extends ReduxFramework {
 			
 
 			    if ($sortlists) {
-			    	echo '<fieldset id="'.$this->field['id'].'" class="redux-sorter-container sorter">';
+			    	echo '<fieldset id="'.$this->field['id'].'" class="redux-sorter-container redux-sorter">';
 
 					foreach ($sortlists as $group=>$sortlist) {
 

@@ -26,6 +26,7 @@ class ReduxFramework_sortable extends ReduxFramework {
     */
     function render() {
 
+
         if ( empty( $this->field['mode'] ) ) {
             $this->field['mode'] = "text";
         }
@@ -100,6 +101,14 @@ class ReduxFramework_sortable extends ReduxFramework {
             time(),
             true
         );  
+
+        wp_enqueue_script(
+            'redux-field-sortable-js', 
+            ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.js', 
+            array('jquery'),
+            time(),
+            true
+        );        
 
     }
 }
