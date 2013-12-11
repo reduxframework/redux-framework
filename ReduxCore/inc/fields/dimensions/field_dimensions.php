@@ -219,7 +219,35 @@ class ReduxFramework_dimensions extends ReduxFramework {
             return;
         }
 
+        // if field units has a value and IS an array, then evaluate as needed.
+        if (isset($this->field['units']) && !is_array($this->field['units'])) {
+
+            //if units fields has a value but units value does not then make units value the field value
+            if (isset($this->field['units']) && !isset($this->value['units']) || $this->field['units'] == false) {
+                $this->value['units'] = $this->field['units'];
+
+            // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
+            } else if (!isset($this->field['units']) && !isset($this->value['units'])) {
+                $this->field['units'] = 'px';
+                $this->value['units'] = 'px';
+
+            // If units field has NO value but units value does, then set unit field to value field
+            } else if (!isset($this->field['units']) && isset($this->value['units'])) {
+                $this->field['units'] = $this->value['units'];
+                
+            // if unit value is set and unit value doesn't equal unit field (coz who knows why)
+            // then set unit value to unit field
+            } elseif (isset($this->value['units']) && $this->value['units'] !== $this->field['units']) {
+                $this->value['units'] = $this->field['units'];
+            }
+
+        // do stuff based on unit field NOT set as an array
+        } elseif (isset($this->field['units']) && is_array($this->field['units'])) {
+            // nothing to do here, but I'm leaving the construct just in case I have to debug this again.
+        }
+
         $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
+
 
         $cleanValue = array(
             'height' => isset( $this->value['height'] ) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
