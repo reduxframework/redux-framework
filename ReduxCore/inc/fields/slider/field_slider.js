@@ -1,5 +1,6 @@
 /* global redux_change */
 jQuery(document).ready(function() {
+	
 	jQuery('.redux_slider').each(function() {
 		//slider init
 		var slider = redux.slider[jQuery(this).attr('rel')];
@@ -39,19 +40,18 @@ jQuery(document).ready(function() {
 
 	});
 
-	// Update the slider from the input and vice versa
-	jQuery(".slider-input").focus(function() {
+	function cleanSliderValue(value, selector, slider) {
 
-		if ( !jQuery(this).hasClass('sliderInputChange') ) {
+		if ( !selector.hasClass('sliderInputChange') ) {
 			return;
-		}
-		jQuery(this).removeClass('sliderInputChange');
+		}		
+		selector.removeClass('sliderInputChange');
 
-		var slider = redux.slider[jQuery(this).attr('id')];
-		value = parseInt(jQuery(this).val());
-		if (value > slider.max) {
+		if (value === "" || value === null) {
+			value = slider.min;
+		} else if (value >= parseInt(slider.max)) {
 			value = slider.max;
-		} else if (value < slider.min) {
+		} else if (value <= parseInt(slider.min)) {
 			value = slider.min;
 		} else {
 			value = Math.round(value / slider.step) * slider.step;
@@ -60,32 +60,21 @@ jQuery(document).ready(function() {
 		jQuery('#' + slider.id + '-slider').slider("value", value);
 		jQuery("#" + slider.id).val(value);
 
+	}
+
+	// Update the slider from the input and vice versa
+	jQuery(".slider-input").blur(function() {
+		cleanSliderValue(jQuery(this).val(), jQuery(this), redux.slider[jQuery(this).attr('id')]);
+	});
+	jQuery(".slider-input").focus(function() {
+		cleanSliderValue(jQuery(this).val(), jQuery(this), redux.slider[jQuery(this).attr('id')]);
 	});
 
 	jQuery('.slider-input').typeWatch({
 		callback:function(value){
-
-			if ( !jQuery(this).hasClass('sliderInputChange') ) {
-				return;
-			}
-			jQuery(this).removeClass('sliderInputChange');
-
-			var slider = redux.slider[jQuery(this).attr('id')];
-			value = parseInt(jQuery(this).val());
-			if (value > slider.max) {
-				value = slider.max;
-			} else if (value < slider.min) {
-				value = slider.min;
-			} else {
-				value = Math.round(value / slider.step) * slider.step;
-			}
-			
-
-			jQuery('#' + slider.id + '-slider').slider("value", value);
-			jQuery("#" + slider.id).val(value);
-
+			cleanSliderValue(jQuery(this).val(), jQuery(this), redux.slider[jQuery(this).attr('id')]);
 		},
-		wait:400,
+		wait:500,
 		highlight:false,
 		captureLength:1
 	});

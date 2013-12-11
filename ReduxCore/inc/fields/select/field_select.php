@@ -28,6 +28,8 @@ class ReduxFramework_select extends ReduxFramework{
 	*/
 	function render(){
 
+		print_r($this->value);
+
         if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
 			if (empty($this->field['args'])) {
 				$this->field['args'] = array();
@@ -59,6 +61,7 @@ class ReduxFramework_select extends ReduxFramework{
 				$nameBrackets = "[]";
 			}
 
+
 			$placeholder = (isset($this->field['placeholder'])) ? esc_attr($this->field['placeholder']) : __( 'Select an item', 'redux-framework' );
 
 			if ( isset($this->field['select2']) ) { // if there are any let's pass them to js
@@ -70,6 +73,7 @@ class ReduxFramework_select extends ReduxFramework{
 
 			echo '<select '.$multi.' id="'.$this->field['id'].'-select" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item '.$this->field['class'].'"'.$width.' rows="6">';
 				echo '<option></option>';
+
 				foreach($this->field['options'] as $k => $v){
 					if (is_array($this->value)) {
 						$selected = (is_array($this->value) && in_array($k, $this->value))?' selected="selected"':'';					
@@ -94,6 +98,14 @@ class ReduxFramework_select extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function enqueue(){
+
+		wp_enqueue_script(
+			'field-select-sortable', 
+			ReduxFramework::$_url.'assets/js/vendor/select2.sortable.js',
+			array('jquery', 'select2-js'),
+			time(),
+			true
+		);	
 
 		wp_enqueue_script(
 			'field-select-js', 

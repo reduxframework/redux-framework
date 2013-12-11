@@ -39,52 +39,42 @@ jQuery(document).ready(function() {
 
     });
 
-    // Update the slider from the input and vice versa
-    jQuery(".spinner-input").focus(function() {
+    function cleanSpinnerValue(value, selector, spinner) {
 
-        if (!jQuery(this).hasClass('spinnerInputChange')) {
+        if ( !selector.hasClass('spinnerInputChange') ) {
             return;
-        }
-        jQuery(this).removeClass('spinnerInputChange');
+        }       
+        selector.removeClass('spinnerInputChange');
 
-        var spinner = redux.spinner[jQuery(this).attr('id')];
-        value = jQuery(this).val();
-        if (value > spinner.max) {
+        if (value === "" || value === null) {
+            value = spinner.min;
+        } else if (value >= parseInt(spinner.max)) {
             value = spinner.max;
-        } else if (value < spinner.min) {
+        } else if (value <= parseInt(spinner.min)) {
             value = spinner.min;
         } else {
             value = Math.round(value / spinner.step) * spinner.step;
         }
 
-        jQuery('#' + spinner.id).spinner("value", value);
+        jQuery("#" + spinner.id).val(value);
 
+    }
+
+    // Update the spinner from the input and vice versa
+    jQuery(".spinner-input").blur(function() {
+//        cleanSpinnerValue(jQuery(this).val(), jQuery(this), redux.spinner[jQuery(this).attr('id')]);
+    });
+    jQuery(".spinner-input").focus(function() {
+        cleanSpinnerValue(jQuery(this).val(), jQuery(this), redux.spinner[jQuery(this).attr('id')]);
     });
 
     jQuery('.spinner-input').typeWatch({
-        callback: function(value) {
-
-            if (!jQuery(this).hasClass('spinnerInputChange')) {
-                return;
-            }
-            jQuery(this).removeClass('spinnerInputChange');
-
-            var spinner = redux.spinner[jQuery(this).attr('id')];
-            value = jQuery(this).val();
-            if (value > spinner.max) {
-                value = spinner.max;
-            } else if (value < spinner.min) {
-                value = spinner.min;
-            } else {
-                value = Math.round(value / spinner.step) * spinner.step;
-            }
-
-            jQuery('#' + spinner.id).spinner("value", value);
-
+        callback:function(value){
+            cleanSpinnerValue(value, jQuery(this), redux.spinner[jQuery(this).attr('id')]);
         },
-        wait: 400,
-        highlight: false,
-        captureLength: 1
+        wait:500,
+        highlight:false,
+        captureLength:1
     });
 
 });
