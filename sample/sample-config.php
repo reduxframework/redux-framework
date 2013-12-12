@@ -319,13 +319,34 @@ $sections[] = array(
 			'desc'=> __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework-demo'),
 			'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
 			),			
-        array(
-            'id' => 'gallery',
-            'type' => 'gallery',
-            'title' => __('Add/Edit Gallery', 'so-panels'),
-            'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'so-panels'),
-            'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
-            ),
+		array(
+			'id' => 'gallery',
+			'type' => 'gallery',
+			'title' => __('Add/Edit Gallery', 'so-panels'),
+			'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'so-panels'),
+			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+		),
+		array(
+			'id'=>'info_warning',
+			'type'=>'info',
+			'title'=> __( 'This is a title.', 'redux-framework-demo' ),
+			'desc' => __( 'This is an info field with the warning style applied and a header.', 'redux-framework-demo')
+		),
+		/*
+		array(
+			'id'=>'divmisc',
+			'type' => 'divide'
+			),
+		*/
+		array(
+			'id' => 'subsection-sliders-start',
+			'type' => 'subsection',
+			'subsectiontitle'=> __( 'Sliders Sub-Section title', 'redux-framework-demo' ),
+			'subtitle' => "Sub-Section subtitle. <b>Sliders are sooooo cool !</b> <br /><i>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</i> ",
+			'desc' => __('This is the description field, again good for additional info about the various subsection options. ', 'redux-framework-demo'),
+			'start' => true,
+			'indent' => true // Indent all options below until the next 'section' option is set.
+		),
 		array(
 			'id'=>'slider1',
 			'type' => 'slider', 
@@ -346,7 +367,14 @@ $sections[] = array(
 			"min" 		=> "0",
 			"step"		=> "5",
 			"max" 		=> "300",
-			),	
+			),
+		array(
+			'id'=>'subsection-sliders-end',
+			'type' => 'subsection', 
+			//'title' => '',
+			'start' => false,
+			'indent' => false // Clean section for options below
+			),
 		array(
 			'id'=>'spinner1',
 			'type' => 'spinner', 
@@ -453,7 +481,7 @@ $sections[] = array(
 			'desc' => __('This field will store all slides values into a multidimensional array to use into a foreach loop.', 'redux-framework-demo')
 		),        
 		array(
-			'id'=>'slides',
+			'id'=>'slides2',
 			'type' => 'slides',
 			'title' => __('Slides Options', 'redux-framework-demo'),
 			'subtitle'=> __('Unlimited slides with drag and drop sortings.', 'redux-framework-demo'),
@@ -545,7 +573,7 @@ $sections[] = array(
 			'id'=>'typography6',
 			'type' => 'typography', 
 			'title' => __('Typography', 'redux-framework-demo'),
-			//'compiler'=>true, // Use if you want to hook in your own CSS compiler
+			'compiler'=>true, // Use if you want to hook in your own CSS compiler
 			'google'=>true, // Disable google fonts. Won't work if you haven't defined your google api key
 			'font-backup'=>true, // Select a backup non-google font in addition to a google font
 			//'font-style'=>false, // Includes font-style and weight. Can use font-style or font-weight to declare
@@ -560,6 +588,7 @@ $sections[] = array(
 			'output' => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
 			'units'=>'px', // Defaults to px
 			'subtitle'=> __('Typography option with each property can be called individually.', 'redux-framework-demo'),
+			'validate_callback' => 'validatetypo6_callback_function',
 			'default'=> array(
 				'color'=>"#333", 
 				'font-style'=>'700', 
@@ -672,6 +701,15 @@ $sections[] = array(
 			'subtitle' => __('Pick a background color for the theme (default: #fff).', 'redux-framework-demo'),
 			'default' => '#FFFFFF',
 			'validate' => 'color',
+			),
+		array(
+			'id'=>'colorrgba1',
+			'type' => 'colorrgba',
+			'output' => array('.colorrgba'),
+			'title' => __('RGBA Background Color', 'redux-framework-demo'), 
+			'subtitle' => __('Pick a background color for the theme.', 'redux-framework-demo'),
+			'default' => array( 'hex' => '#ffffff', 'alpha' => '1.0' ),
+			'validate' => 'colorrgba',
 			),
 		array(
 			'id'=>'color-footer',
@@ -1356,6 +1394,9 @@ if(file_exists(trailingslashit(dirname(__FILE__)) . 'README.html')) {
 global $ReduxFramework;
 $ReduxFramework = new ReduxFramework($sections, $args, $tabs);
 
+global $redux_demo; // This is your opt_name.
+
+
 // END Sample Config
 
 
@@ -1441,7 +1482,50 @@ function validate_callback_function($field, $value, $existing_value) {
         $field['msg'] = 'your custom error message';
     }
     */
+	
+    $return['value'] = $value;
+    if($error == true) {
+        $return['error'] = $field;
+    }
+    return $return;
+}
+
+
+/**
+ 
+	Custom function for the callback validation referenced above
+
+**/
+function validatetypo6_callback_function($field, $value, $existing_value) {
+    $error = false;
+    //$value =  'just testing';
+    /*
+    do your validation
     
+    if(something) {
+        $value = $value;
+    } elseif(something else) {
+        $error = true;
+        $value = $existing_value;
+        $field['msg'] = 'your custom error message';
+    }
+    */
+    
+	error_log("********************************************************************\n", 0);
+/*
+	$fieldrec = var_export($field,true);
+	$mydebug1="field:\n".$fieldrec;
+	error_log($mydebug1, 0);
+*/
+	$fieldrec = var_export($value,true);
+	$mydebug1="value:\n".$fieldrec;
+	error_log($mydebug1, 0);
+	$fieldrec = var_export($existing_value,true);
+	$mydebug1="existing_value:\n".$fieldrec;
+	error_log($mydebug1, 0);
+	error_log("********************************************************************\n", 0);
+		
+
     $return['value'] = $value;
     if($error == true) {
         $return['error'] = $field;
@@ -1456,9 +1540,10 @@ function validate_callback_function($field, $value, $existing_value) {
 
 **/
 function testCompiler($options, $css) {
-	echo "<h1>The compiler hook has run!";
+	global $old_typovalue;
+
 	//print_r($options); //Option values
-	print_r($css); //So you can compile the CSS within your own file to cache
+	//print_r($css); //So you can compile the CSS within your own file to cache
     $filename = dirname(__FILE__) . '/avada' . '.css';
 
 		    global $wp_filesystem;
@@ -1476,7 +1561,7 @@ function testCompiler($options, $css) {
 		    }
 
 }
-//add_filter('redux/options/redux_demo/compiler', 'testCompiler', 10, 2);
+add_filter('redux/options/redux_demo/compiler', 'testCompiler', 10, 2);
 // replace redux_demo with your opt_name
 
 
