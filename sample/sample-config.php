@@ -197,7 +197,7 @@ $args['default_mark'] = '*';
 // Set the parent menu.
 // Default: themes.php
 // A list of available parent menus is available at http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
-//$args['page_parent'] = 'options_general.php';
+//$args['page_parent'] = 'options-general.php';
 
 // Set a custom page location. This allows you to place your menu where you want in the menu order.
 // Must be unique or it will override other items!
