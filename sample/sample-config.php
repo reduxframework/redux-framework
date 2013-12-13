@@ -687,7 +687,7 @@ if (!function_exists('redux_init')) :
 				'title' => __('Color RGBA - BETA', 'redux-framework-demo'), 
 				'subtitle' => __('Gives you the RGBA color. Still quite experimental. Use at your own risk.', 'redux-framework-demo'),
 				'default' => '#dd9933',
-				'validate' => 'color',
+				'validate' => 'colorrgba',
 				),			
 			array(
 				'id'=>'color-header',
