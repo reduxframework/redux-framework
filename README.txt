@@ -142,6 +142,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 = 3.1.2 =
 * Feature - Sortable select boxes!
 * Feature - Reset a section only or the whole panel!
+* New Field - RGBA Color Field!
 * Improvement - Use of REM throughout.
 * Fixed Typography - Fix output option and various small bugs.
 * Fixed Border - Fix output option and various small bugs.

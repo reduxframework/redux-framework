@@ -59,6 +59,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 = 3.1.2 =
 * Feature - Sortable select boxes!
 * Feature - Reset a section only or the whole panel!
+* New Field - RGBA Color Field!
 * Improvement - Use of REM throughout.
 * Fixed Typography - Fix output option and various small bugs.
 * Fixed Border - Fix output option and various small bugs.
