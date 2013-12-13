@@ -1506,7 +1506,7 @@ if ( !function_exists( 'redux_test_compiler' ) ):
 			    }
 
 	}
-	add_filter('redux/options/redux_demo/compiler', 'redux_test_compiler', 10, 2);
+	//add_filter('redux/options/redux_demo/compiler', 'redux_test_compiler', 10, 2);
 	// replace redux_demo with your opt_name
 endif;
 
