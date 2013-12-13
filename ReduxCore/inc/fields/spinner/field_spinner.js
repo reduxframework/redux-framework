@@ -24,7 +24,7 @@ jQuery(document).ready(function() {
             neg = true;
         }
 
-		jQuery(".spinner-input").numeric({
+		jQuery("#" + spinner.id).numeric({
 			allowMinus: neg,
 			min: spinner.min,
 			max: spinner.max
