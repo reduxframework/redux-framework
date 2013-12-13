@@ -167,7 +167,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 * Allow negative values in typography and other fields.
 * WordPress 3.8 computability.
 * CSS validation issue.
-* Feature - User contributed text direction feature. Thanks @
+* Feature - User contributed text direction feature.
 * EDD Extension now fully function for plugins or themes.
 * Removed get_theme_data() fallbacks, we're well pass WordPress 3.4 now.  ;)
 * A ton of other small updates and improvements.
