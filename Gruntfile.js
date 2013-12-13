@@ -140,7 +140,11 @@ module.exports = function(grunt) {
       },
       php: {
         files: ['ReduxCore/**/*.php'],
-        tasks: ['lintCore']  
+        tasks: ['phplint:core']  
+      },
+      css: {
+        files: ['ReduxCore/**/*.less'],
+        tasks: ['less:development']
       }
     },
     phpdocumentor: {

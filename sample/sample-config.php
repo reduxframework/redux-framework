@@ -672,7 +672,7 @@ $sections[] = array(
 			'subtitle' => __('Pick a background color for the theme (default: #fff).', 'redux-framework-demo'),
 			'default' => '#FFFFFF',
 			'validate' => 'color',
-			),
+			),		
 		array(
 			'id'=>'color-footer',
 			'type' => 'color',
@@ -1133,7 +1133,17 @@ $sections[] = array(
 			'title' => __('Post Type Multi Select Option', 'redux-framework-demo'), 
 			'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
 			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
-			),	
+			),
+		array(
+			'id'=>'post-type-multi_select_sortable',
+			'type' => 'select',
+			'data' => 'post_type',
+			'multi' => true,
+			'sortable' => true,
+			'title' => __('Post Type Multi Select Option + Sortable', 'redux-framework-demo'), 
+			'subtitle' => __('This field also has sortable enabled!', 'redux-framework-demo'),
+			'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+			),					
 		array(
 			'id'=>'select-posts',
 			'type' => 'select',
