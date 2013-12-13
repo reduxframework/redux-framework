@@ -29,6 +29,11 @@ class ReduxFramework_select extends ReduxFramework{
 	*/
 	function render(){
 
+		$sortable = (isset($this->field['sortable']) && $this->field['sortable']) ? ' select2-sortable"' : "";
+		if (!empty($sortable)) { // Dummy proofing  :P
+			$this->field['multi'] = true;
+		}
+
         if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
 			if (empty($this->field['args'])) {
 				$this->field['args'] = array();
