@@ -8,13 +8,6 @@
  */
 if(jQuery) (function($) {
 	
-	// html stuff
-	var _before = '<a tabindex="0" class="wp-color-result" />',
-		_after = '<div class="wp-picker-holder" />',
-		_wrap = '<div class="wp-picker-container" />',
-		_button = '<input type="button" class="button button-small hidden" />';
-
-
 	// Defaults
 	$.minicolors = {
 		defaults: {
@@ -125,7 +118,7 @@ if(jQuery) (function($) {
 	// Initialize input elements
 	function init(input, settings) {
 		
-		var minicolors = $('<div class="minicolors wp-picker-container" />'),
+		var minicolors = $('<div class="minicolors" />'),
 			defaults = $.minicolors.defaults;
 		
 		// Do nothing if already initialized

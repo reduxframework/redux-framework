@@ -683,6 +683,14 @@ if (!function_exists('redux_init')) :
 				'validate' => 'color',
 				),
 			array(
+				'id'=>'color-rgba',
+				'type' => 'color_rgba',
+				'title' => __('Color RGBA - BETA', 'redux-framework-demo'), 
+				'subtitle' => __('Gives you the RGBA color. Still quite experimental. Use at your own risk.', 'redux-framework-demo'),
+				'default' => '#dd9933',
+				'validate' => 'color',
+				),			
+			array(
 				'id'=>'color-header',
 				'type' => 'color_gradient',
 				'title' => __('Header Gradient Color Option', 'redux-framework-demo'),
@@ -1307,9 +1315,8 @@ if (!function_exists('redux_init')) :
 			array(
 				'id'=>"group",
 				'type' => 'group',//doesn't need to be called for callback fields
-				'title' => __('Group', 'redux-framework-demo'), 
-				'subtitle' => __('Group any items together.', 'redux-framework-demo'),
-				'desc' => __('No limit as to what you can group. Just don\'t try to group a group.', 'redux-framework-demo'),
+				'title' => __('Group - BETA', 'redux-framework-demo'), 
+				'subtitle' => __('Group any items together. Experimental. Use at your own risk.', 'redux-framework-demo'),
 				'groupname' => __('Group', 'redux-framework-demo'), // Group name
 				'subfields' => 
 					array(
