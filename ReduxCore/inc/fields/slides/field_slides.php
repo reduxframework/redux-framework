@@ -67,6 +67,8 @@ if (!class_exists('ReduxFramework_slides')) {
 
             $x = 0;
 
+            $multi = (isset($this->field['multi']) && $this->field['multi']) ? ' multiple="multiple"' : "";
+
             if (isset($this->value) && is_array($this->value)) {
 
                 $slides = $this->value;
@@ -140,7 +142,6 @@ if (!class_exists('ReduxFramework_slides')) {
                             $select2_params = htmlspecialchars( $select2_params , ENT_QUOTES);
                             echo '<input type="hidden" class="select2_params" value="'. $select2_params .'">';
                         }
-                        $multi = (isset($this->field['multi']) && $this->field['multi']) ? ' multiple="multiple"' : "";
 
                         echo '<select '.$multi.' id="'.$this->field['id'].'-select" data-placeholder="'.$placeholder.'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][select]" class="redux-select-item '.$this->field['class'].'" rows="6">';
                             echo '<option></option>';
