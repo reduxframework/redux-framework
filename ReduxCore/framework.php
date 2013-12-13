@@ -1450,11 +1450,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$this->set_options( $this->options );
 			}
 
-			if (get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
+			if ( get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
                 $this->args['output_tag'] = false;
                 $this->_enqueue_output();
 				do_action( 'redux-compiler-' . $this->args['opt_name'], $this->options, $this->outputCSS ); // REMOVE
                 do_action( 'redux/options/' . $this->args['opt_name'] . '/compiler', $this->options, $this->outputCSS );
+                delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
 			}				
 
         }
