@@ -28,6 +28,14 @@ class ReduxFramework_spacing extends ReduxFramework{
 	*/
 	function render(){
 	
+		if ( isset( $this->field['units'] ) && !in_array( $this->field['units'], array( '', false, '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px' ) ) ) {
+			unset( $this->field['units'] );
+		}	
+
+		if ( isset( $this->value['units'] ) && !in_array( $this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px' ) ) ) {
+			unset( $this->value['units'] );
+		}
+	
 		// No errors please
 		$defaults = array(
 			'units' 			=> '',
@@ -76,13 +84,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 			'left' => isset( $this->value[$this->field['mode'].'-left'] ) ? filter_var($this->value[$this->field['mode'].'-left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION)
 		);
 		
-		if ( isset( $this->field['units'] ) && !in_array( $this->field['units'], array( '', false, '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			unset( $this->field['units'] );
-		}	
 
-		if ( isset( $this->value['units'] ) && !in_array( $this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			unset( $this->value['units'] );
-		}
 
 		if ( isset( $this->field['units'] ) && $this->field['units'] != "" ) {
 			$this->value['units'] = $this->field['units'];
