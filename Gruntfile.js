@@ -15,7 +15,8 @@ module.exports = function(grunt) {
 				'ReduxCore/assets/js/vendor/jquery.typewatch.js',
 				'ReduxCore/assets/js/vendor/spinner_custom.js',
 				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-        'ReduxCore/assets/js/vendor/select2.sortable.js',
+                'ReduxCore/assets/js/vendor/select2.sortable.js',
+                'ReduxCore/assets/js/vendor/minicolors/jquery.minicolors.js',
 				'ReduxCore/inc/fields/**/*.js',
 				'ReduxCore/extensions/**.*.js',
 				'ReduxCore/assets/js/redux.js', 
@@ -29,7 +30,7 @@ module.exports = function(grunt) {
 				'ReduxCore/assets/js/vendor/jquery.typewatch.js',
 				'ReduxCore/assets/js/vendor/spinner_custom.js',
 				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-        'ReduxCore/assets/js/vendor/select2.sortable.js',
+                'ReduxCore/assets/js/vendor/select2.sortable.js',
         	],
         	dest: 'ReduxCore/assets/js/vendor.min.js'
     	}
