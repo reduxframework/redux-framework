@@ -706,10 +706,11 @@ if (!function_exists('redux_init')) :
 				//'regular' => false, // Disable Regular Color
 				//'hover' => false, // Disable Hover Color
 				//'active' => false, // Disable Active Color
+				//'visited' => true, // Enable Visited Color
 				'default' => array(
-					//'regular' => '#aaa',
-					//'hover' => '#bbb',
-					//'active' => '#ccc',
+					'regular' => '#aaa',
+					'hover' => '#bbb',
+					'active' => '#ccc',
 				)
 			),
 			array(
