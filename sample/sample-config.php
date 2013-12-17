@@ -782,11 +782,18 @@ if (!function_exists('redux_init')) :
 		)
 	);
 		
+	/**
+	 *  Note here I used a 'heading' in the sections array construct
+	 *  This allows you to use a different title on your options page
+	 * instead of reusing the 'title' value.  This can be done on any 
+	 * section - kp
+	 */
 	$sections[] = array(
-		'icon' => 'el-icon-bullhorn',
-		'title' => __('Field Validation', 'redux-framework-demo'),
-		'desc' => __('<p class="description">This is the Description. Again HTML is allowed2</p>', 'redux-framework-demo'),
-		'fields' => array(
+		'icon'    => 'el-icon-bullhorn',
+		'title'   => __('Field Validation', 'redux-framework-demo'),
+		'heading' => __('Validate ALL fields within Redux.')
+		'desc'    => __('<p class="description">This is the Description. Again HTML is allowed2</p>', 'redux-framework-demo'),
+		'fields'  => array(
 			array(
 				'id'=>'2',
 				'type' => 'text',
