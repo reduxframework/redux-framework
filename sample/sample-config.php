@@ -791,7 +791,7 @@ if (!function_exists('redux_init')) :
 	$sections[] = array(
 		'icon'    => 'el-icon-bullhorn',
 		'title'   => __('Field Validation', 'redux-framework-demo'),
-		'heading' => __('Validate ALL fields within Redux.')
+		'heading' => __('Validate ALL fields within Redux.'),
 		'desc'    => __('<p class="description">This is the Description. Again HTML is allowed2</p>', 'redux-framework-demo'),
 		'fields'  => array(
 			array(
