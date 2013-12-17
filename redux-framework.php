@@ -41,4 +41,4 @@ register_activation_hook( __FILE__, array( 'ReduxFrameworkPlugin', 'activate' ) 
 register_deactivation_hook( __FILE__, array( 'ReduxFrameworkPlugin', 'deactivate' ) );
 
 // Get plugin instance
-add_action( 'plugins_loaded', array( 'ReduxFrameworkPlugin', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'ReduxFrameworkPlugin', 'instance' ) );
