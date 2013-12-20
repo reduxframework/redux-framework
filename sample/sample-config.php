@@ -95,7 +95,7 @@ if (!function_exists('redux_init')) :
 	// Set the class for the dev mode tab icon.
 	// This is ignored unless $args['icon_type'] = 'iconfont'
 	// Default: null
-	$args['dev_mode_icon_class'] = 'icon-large';
+	//$args['dev_mode_icon_class'] = '';
 
 	// Set a custom option name. Don't forget to replace spaces with underscores!
 	$args['opt_name'] = 'redux_demo';
@@ -160,13 +160,13 @@ if (!function_exists('redux_init')) :
 	// Set the class for the import/export tab icon.
 	// This is ignored unless $args['icon_type'] = 'iconfont'
 	// Default: null
-	$args['import_icon_class'] = 'icon-large';
+	//$args['import_icon_class'] = '';
 
 	/**
 	 * Set default icon class for all sections and tabs
 	 * @since 3.0.9
 	 */
-	$args['default_icon_class'] = 'icon-large';
+	//$args['default_icon_class'] = '';
 
 
 	// Set a custom menu icon.
@@ -279,8 +279,7 @@ if (!function_exists('redux_init')) :
 	$sections[] = array(
 		'title' => __('Home Settings', 'redux-framework-demo'),
 		'desc' => __('Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'redux-framework-demo'),
-		'icon_class' => 'icon-large',
-	    'icon' => 'el-icon-home',
+		'icon' => 'el-icon-home',
 	    // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
 		'fields' => array(	
 			array(
@@ -581,8 +580,7 @@ if (!function_exists('redux_init')) :
 
 	$sections[] = array(
 		'icon' => 'el-icon-cogs',
-		'icon_class' => 'icon-large',
-	    'title' => __('General Settings', 'redux-framework-demo'),
+		'title' => __('General Settings', 'redux-framework-demo'),
 		'fields' => array(
 			array(
 				'id'=>'layout',
@@ -1377,8 +1375,7 @@ if (!function_exists('redux_init')) :
 	if(file_exists(trailingslashit(dirname(__FILE__)) . 'README.html')) {
 	    $tabs['docs'] = array(
 			'icon' => 'el-icon-book',
-			'icon_class' => 'icon-large',
-	        'title' => __('Documentation', 'redux-framework-demo'),
+			    'title' => __('Documentation', 'redux-framework-demo'),
 	        'content' => nl2br(file_get_contents(trailingslashit(dirname(__FILE__)) . 'README.html'))
 	    );
 	}
@@ -1407,8 +1404,7 @@ if ( !function_exists( 'redux_add_another_section' ) ):
 	        'title' => __('Section via hook', 'redux-framework-demo'),
 	        'desc' => __('<p class="description">This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.</p>', 'redux-framework-demo'),
 			'icon' => 'el-icon-paper-clip',
-			'icon_class' => 'icon-large',
-	        // Leave this as a blank section, no options just some intro text set above.
+			    // Leave this as a blank section, no options just some intro text set above.
 	        'fields' => array()
 	    );
 
