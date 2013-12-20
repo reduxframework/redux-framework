@@ -105,9 +105,6 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
                     if (isset($this->field['raw']) && !empty($this->field['raw'])) {
                         echo $this->field['raw'];    
                     }
-                    if ( ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ) {
-                        echo "DESC".$this->field['desc'];
-                    }
                     if ( ( isset( $this->field['title'] ) && !empty( $this->field['title'] ) ) || ( isset( $this->field['desc'] ) && !empty( $this->field['desc'] ) ) ) {
                         echo '<p class="redux-info-desc">' . $this->field['title'] . $this->field['desc'] . '</p>';    
                     }	            	
