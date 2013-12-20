@@ -327,10 +327,7 @@ a {
 	margin-bottom: 10px;
 	color:#666666;
 }
-.redux-group-tab .form-table{
-	clear:none;
-	margin-top:20px;
-}
+
 .redux-group-tab .form-table.no-border{
 	border-top:none;
 }
@@ -350,6 +347,7 @@ a {
 	width:30%;
 	padding:20px 5px 20px 0px;
 }
+
 .redux-group-tab .form-table tr th span:first-child{
 	font-weight: normal;
 	display:block;
@@ -377,6 +375,8 @@ a {
 .redux-main .redux-field-error input, .redux-main .redux-field-error textarea, .redux-main .redux-field-error select {
 	border-color:#B94A48;
 }
+
+
 
 /* reset nested tables for mce */
 .redux-group-tab .form-table tr td table.mceLayout,
@@ -997,4 +997,17 @@ img {
 
 .redux-main .ui-helper-hidden-accessible{
     top:inherit;
+}
+
+.redux-group-tab .form-table:first-child tr th, .redux-group-tab .form-table:first-child tr td {
+	padding-top: 0 !important;
+}
+
+.redux-group-tab .form-table{
+	clear:none;
+	margin-top:0px !important;
+}
+
+.redux-group-tab .form-table tr:first-child th, .redux-group-tab .form-table tr:first-child td {
+	padding-top: 0;
 }
