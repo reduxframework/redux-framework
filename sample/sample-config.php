@@ -1523,16 +1523,14 @@ endif;
 if ( !function_exists( 'redux_remove_demo_options' ) ):
 	function redux_remove_demo_options() {
 		
-		// Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
-		remove_action('admin_notices', array( ReduxFrameworkPlugin::get_instance(), 'admin_notices' ) );	
-
 		// Used to hide the demo mode link from the plugin page. Only used when Redux is a plugin.
 		if ( class_exists('ReduxFrameworkPlugin') ) {
 			remove_filter( 'plugin_row_meta', array( ReduxFrameworkPlugin::get_instance(), 'plugin_meta_demo_mode_link'), null, 2 );
 		}
+
+		// Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
+		remove_action('admin_notices', array( ReduxFrameworkPlugin::get_instance(), 'admin_notices' ) );	
+
 	}
-	//add_action('init', 'redux_remove_demo_options');
+	//add_action( 'redux/plugin/hooks', 'redux_remove_demo_options' );	
 endif;
-
-
-

@@ -192,7 +192,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 ),
             );  
             
-            do_action('redux/loaded');
+            do_action( 'redux/loaded', $this );
 
         }      
 
@@ -326,6 +326,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
+            do_action( 'redux/construct', $this );
+            
 			// Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
 			/** @global string $pagenow */
 			global $pagenow;
@@ -333,6 +335,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				/** @noinspection PhpUndefinedCallbackInspection */
 				remove_action( 'admin_init', 'pb_admin_init' );
 			}
+
+
 
 		}
 
@@ -2276,6 +2280,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             return $data_string;
         } 
     } // class
-    ReduxFramework::init();
+
+    do_action( 'redux/init', ReduxFramework::init() );
 
 } // if

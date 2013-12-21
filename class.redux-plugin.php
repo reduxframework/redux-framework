@@ -160,6 +160,9 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
 
             // Edit plugin metalinks
             add_filter( 'plugin_row_meta', array( $this, 'plugin_metalinks' ), null, 2 );
+
+            do_action( 'redux/plugin/hooks', $this );
+
         }
 
 
