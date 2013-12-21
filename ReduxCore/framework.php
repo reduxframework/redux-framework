@@ -192,7 +192,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 ),
             );  
             
-            do_action( 'redux/loaded', $this );
+            do_action( 'redux/loaded' );
 
         }      
 
