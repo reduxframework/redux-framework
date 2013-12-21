@@ -1566,7 +1566,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( isset( $plugin_options['defaults-section'] ) ) {
             	$compiler = false;
             	foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
-            		unset($plugin_options[$field['id']]);
+            		$plugin_options[$field['id']] = $this->options_defaults[$field['id']];
             		if (isset($field['compiler'])) {
             			$compiler = true;
             		}
@@ -1577,11 +1577,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             	}
             	$plugin_options['defaults'] = true;
                 unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
-				if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
-				    $this->set_options( $plugin_options );
-					return $this->options;
-				}
-                return $plugin_options;
+				$this->set_options( $plugin_options );
+				return $this->options;
             }            
 
             // Validate fields (if needed)
