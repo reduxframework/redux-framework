@@ -246,7 +246,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['google_api_key']     = ''; // Must be defined to add google fonts to the typography module
             $defaults['last_tab']           = '0';
             $defaults['menu_icon']          = self::$_url . 'assets/img/menu_icon.png';
-            $defaults['menu_icon'] 		= '';
             $defaults['menu_title']         = __( 'Options', 'redux-framework' );
             $defaults['page_icon']          = 'icon-themes';
             $defaults['page_title']         = __( 'Options', 'redux-framework' );
@@ -327,7 +326,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
             do_action( 'redux/construct', $this );
-            
+
 			// Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
 			/** @global string $pagenow */
 			global $pagenow;
