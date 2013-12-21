@@ -8,6 +8,9 @@
 .redux-container-checkbox label .field-desc {
   margin-top: 0;
   float: left;
-  width: 95%;
+  width: 93%;
   clear: none;
+}
+.redux-container-checkbox label input {
+  margin-top: 1px;
 }

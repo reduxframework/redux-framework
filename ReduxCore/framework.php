@@ -191,7 +191,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         ),                                                         
                 ),
             );  
-
+            
+            do_action('redux/loaded');
 
         }      
 
@@ -1227,6 +1228,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _download_options(){
+            echo "here";
             /** @noinspection PhpUndefinedConstantInspection */
             if( !isset( $_GET['secret'] ) || $_GET['secret'] != md5( AUTH_KEY . SECURE_AUTH_KEY ) ) {
                 wp_die( 'Invalid Secret for options use' );
