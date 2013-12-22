@@ -572,7 +572,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                         }
 					} else if ($type == "tags" || $type == "tag") {
+						echo "here";
 						$tags = get_tags($args); 
+						print_r(get_tags());
 						if (!empty($tags)) {
 							foreach ( $tags as $tag ) {
 								$data[$tag->term_id] = $tag->name;
