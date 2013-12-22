@@ -60,6 +60,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+= 3.1.4 =
+* Fixed error in redux-framework.php.
+* Added select_image field.
 
 = 3.1.3 =
 * Fixed a few undefined variables
