@@ -1063,6 +1063,20 @@ if (!function_exists('redux_init')) :
 				'required' => array('select','equals',array('1','3')),	
 				'default' => array('2','3')
 				),
+
+		        array(
+		            'id'        => 'opt_sel_img',
+		            'type'      => 'select_image',
+		            'title'     => __('Select Image', 'redux-framework-demo'), 
+		            'subtitle'  => __('A preview of the selected image will appear underneath the select box.', 'redux-framework-demo'),
+		            'options'   => $sample_patterns,
+		            // Alternatively
+		            //'options' => Array(
+		            //                 'img_name' => 'img_path'
+		            //             )
+		            'default'   => 'tree_bark.png',
+		        ),
+				
 			array(
 				'id'=>'multi-info',
 				'type' => 'info',
