@@ -139,6 +139,10 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.4 =
+* Fixed error in redux-framework.php.
+* Added select_image field.
+
 = 3.1.3 =
 * Fixed a few undefined variables
 * Removed old code from the repo.
