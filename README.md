@@ -61,6 +61,19 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.3 =
+* Fixed a few undefined variables
+* Removed old code from the repo.
+* Fix for validation.
+* Remove the compiler hook by default.
+* Fix to sortable field.
+* Added an extra check for link color. Removes user error.
+* Localization updates.
+* Error in slides.
+* Fixed the info box bug with spacing and padding.
+* Fixed the first item in each section having WAY too much padding.  ;)
+* Fixed section reset issue where values weren't being saved to the db properly.
+
 = 3.1.2 =
 * Feature - Sortable select boxes!
 * Feature - Reset a section only or the whole panel!

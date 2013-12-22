@@ -111,7 +111,7 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
 
             	}
 
-            echo '</div><table class="form-table no-border" style="margin-top: 0;"><tbody><tr><th style="padding-top:0;"></th><td style="padding-top:0;">';
+            echo '</div><table class="form-table no-border" style="margin-top: 0;"><tbody><tr style="border-bottom:0;"><th style="padding-top:0;"></th><td style="padding-top:0;">';
         
         }
 
