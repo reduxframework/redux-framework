@@ -1565,7 +1565,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( isset( $plugin_options['defaults-section'] ) ) {
             	$compiler = false;
             	foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
-            		$plugin_options[$field['id']] = $this->options_defaults[$field['id']];
+            		unset($plugin_options[$field['id']]);
+            		if (isset($this->options_defaults[$field['id']])) {
+            			$plugin_options[$field['id']] = $this->options_defaults[$field['id']];	
+            		}
             		if (isset($field['compiler'])) {
             			$compiler = true;
             		}
