@@ -113,7 +113,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 		        if ( !empty( $this->value ) ) {
 
 		        	$style .= $keys."{";
-		        	$style .= 'color:'.$this->value.';';
+		        	$style .= 'background-color:'.$this->value.';';
 		        	$style .= '}';
 		        	$this->parent->outputCSS .= $style;  
 		        }
