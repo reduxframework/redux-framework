@@ -8,7 +8,7 @@
 			});
 		} else {
 			preview.attr('src', $(this).val());
-			preview.fadeIn();
+			preview.fadeIn().css('visibility', 'visible');
 		}
 	});
 
