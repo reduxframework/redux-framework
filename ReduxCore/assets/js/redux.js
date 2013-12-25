@@ -264,6 +264,19 @@ var confirmOnPageExit = function(e) {
 		// For Chrome, Safari, IE8+ and Opera 12+
 		return message;
 	};
+	
+function getContrastColour(hexcolour){
+    
+        hexcolour = hexcolour.replace('#','');
+
+	var r = parseInt(hexcolour.substr(0, 2), 16);
+	var g = parseInt(hexcolour.substr(2, 2), 16);
+	var b = parseInt(hexcolour.substr(4, 2), 16);
+	var res = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+	
+	// Instead of pure black, I opted to use WP 3.8 black, so it looks uniform.  :) - kp
+	return (res >= 128) ? '#444444' : 'white';
+}	
 
 function verify_fold(item) {
 	
