@@ -541,6 +541,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $data[$term->term_id] = $term->name;
                             }//foreach
                         } // If
+                    } else if ($type == "taxonomy" || $type == "taxonomies") {
+                        $taxonomies = get_taxonomies($args); 
+						if (!empty($taxonomies)) {
+							foreach ( $taxonomies as $key => $taxonomy ) {
+								$data[$key] = $taxonomy;
+							}//foreach
+						} // If
                     } else if ($type == "posts" || $type == "post") {
 						$posts = get_posts($args); 
 						if (!empty($posts)) {
