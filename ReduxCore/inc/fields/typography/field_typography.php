@@ -84,8 +84,7 @@ class ReduxFramework_typography extends ReduxFramework{
 		if ($this->field['font-family'] === true):
         
 	        echo '<div id="'.$this->field['id'].'" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
-
-    	        /**
+			    /**
     	        Font Family
     	         **/
             
@@ -106,6 +105,7 @@ class ReduxFramework_typography extends ReduxFramework{
               echo '<input type="hidden" class="redux-typography-font-family '.$this->field['class'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-family]" value="'.$this->value['font-family'].'" data-id="'.$this->field['id'].'"  />';
               echo '<input type="hidden" class="redux-typography-font-options '.$this->field['class'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-options]" value="'.$this->value['font-options'].'" data-id="'.$this->field['id'].'"  />';
               echo '<div class="select_wrapper typography-family" style="width: 220px; margin-right: 5px;">';
+			  echo '<div class="typography-element-title">'.__('Font Family','redux-framework').'</div>';
               echo '<select data-placeholder="'.__('Font family','redux-framework').'" class="redux-typography redux-typography-family '.$this->field['class'].'" id="'.$this->field['id'].'-family" data-id="'.$this->field['id'].'" data-value="'.$fontFamily[0].'">';
               echo '<option data-google="false" data-details="" value=""></option>';
 
@@ -184,6 +184,7 @@ class ReduxFramework_typography extends ReduxFramework{
              **/
             if ($this->field['font-style'] === true || $this->field['font-weight'] === true):
                 echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-framework').'">';
+				echo '<div class="typography-element-title">'.__('Font Style','redux-framework').'</div>';
             	$style = $this->value['font-weight'].$this->value['font-style'];
                 echo '<input type="hidden" class="typography-font-weight" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-weight]" val="'.$this->value['font-weight'].'" data-id="'.$this->field['id'].'"  /> ';
                 echo '<input type="hidden" class="typography-font-style" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-style]" val="'.$this->value['font-style'].'" data-id="'.$this->field['id'].'"  /> ';
@@ -214,6 +215,7 @@ class ReduxFramework_typography extends ReduxFramework{
              **/
             if ($this->field['subsets'] === true && $this->field['google'] === true):
                 echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font subsets','redux-framework').'">';
+				echo '<div class="typography-element-title">'.__('Font Subsets','redux-framework').'</div>';
                 echo '<select data-placeholder="'.__('Subsets','redux-framework').'" class="redux-typography redux-typography-subsets'.$this->field['class'].'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-subsets" name="'.$this->args['opt_name'].'['.$this->field['id'].'][subsets]" data-value="'.$this->value['subsets'].'" data-id="'.$this->field['id'].'" >';
                 if (empty($this->value['subsets'])) {
                     echo '<option value=""></option>';
@@ -232,7 +234,7 @@ class ReduxFramework_typography extends ReduxFramework{
             Font Size
              **/
             if ($this->field['font-size'] === true):
-                echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$this->field['class'].'" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-size]" value="'.str_replace($unit, '', $this->value['font-size']).'" data-value="'.str_replace($unit, '', $this->value['font-size']).'"><span class="add-on">'.$unit.'</span></div>';
+                echo '<div class="input-append"><div class="typography-element-title">'.__('Font Size','redux-framework').'</div><input type="text" class="span2 redux-typography-size mini'.$this->field['class'].'" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-size]" value="'.str_replace($unit, '', $this->value['font-size']).'" data-value="'.str_replace($unit, '', $this->value['font-size']).'"><span class="add-on">'.$unit.'</span></div>';
             	echo '<input type="hidden" class="typography-font-size" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-size]" value="'.$this->value['font-size'].'" data-id="'.$this->field['id'].'"  />';
             endif;
 
@@ -241,7 +243,7 @@ class ReduxFramework_typography extends ReduxFramework{
             Line Height
              **/
             if ($this->field['line-height'] === true):
-                echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$this->field['class'].'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" value="'.str_replace($unit, '', $this->value['line-height']).'" data-value="'.str_replace($unit, '', $this->value['line-height']).'"><span class="add-on">'.$unit.'</span></div>';
+                echo '<div class="input-append"><div class="typography-element-title">'.__('Line Height','redux-framework').'</div><input type="text" class="span2 redux-typography redux-typography-height mini'.$this->field['class'].'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" value="'.str_replace($unit, '', $this->value['line-height']).'" data-value="'.str_replace($unit, '', $this->value['line-height']).'"><span class="add-on">'.$unit.'</span></div>';
                 echo '<input type="hidden" class="typography-line-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][line-height]" value="'.$this->value['line-height'].'" data-id="'.$this->field['id'].'"  />';
             endif;
 
@@ -249,7 +251,7 @@ class ReduxFramework_typography extends ReduxFramework{
             Word Spacing
              **/
             if ($this->field['word-spacing'] === true):
-                echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-word mini'.$this->field['class'].'" placeholder="'.__('Word Spacing','redux-framework').'" id="'.$this->field['id'].'-word" value="'.str_replace($unit, '', $this->value['word-spacing']).'" data-value="'.str_replace($unit, '', $this->value['word-spacing']).'"><span class="add-on">'.$unit.'</span></div>';
+                echo '<div class="input-append"><div class="typography-element-title">'.__('Word Spacing','redux-framework').'</div><input type="text" class="span2 redux-typography redux-typography-word mini'.$this->field['class'].'" placeholder="'.__('Word Spacing','redux-framework').'" id="'.$this->field['id'].'-word" value="'.str_replace($unit, '', $this->value['word-spacing']).'" data-value="'.str_replace($unit, '', $this->value['word-spacing']).'"><span class="add-on">'.$unit.'</span></div>';
                 echo '<input type="hidden" class="typography-word-spacing" name="'.$this->args['opt_name'].'['.$this->field['id'].'][word-spacing]" value="'.$this->value['word-spacing'].'" data-id="'.$this->field['id'].'"  />';
             endif;
 
@@ -271,6 +273,7 @@ class ReduxFramework_typography extends ReduxFramework{
             
                 if ($this->field['font-backup'] === true) {
                   echo '<div class="select_wrapper typography-family-backup" style="width: 220px; margin-right: 5px;">';
+				  echo '<div class="typography-element-title">'.__('Backup Font Family','redux-framework').'</div>';
                   echo '<select data-placeholder="'.__('Backup Font Family','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][font-backup]" class="redux-typography redux-typography-family-backup '.$this->field['class'].'" id="'.$this->field['id'].'-family-backup" data-id="'.$this->field['id'].'" data-value="'.$this->value['font-backup'].'">';
                   echo '<option data-google="false" data-details="" value=""></option>';
                   foreach ($this->field['fonts'] as $i=>$family) {
@@ -290,7 +293,7 @@ class ReduxFramework_typography extends ReduxFramework{
                 } else if (!empty($this->field['default']['color'])) {
                     $default = $this->field['default']['color'];
                 }
-                echo '<div id="' . $this->field['id'] . '_color_picker" class="colorSelector typography-color"><div style="background-color: '.$this->value['color'].'"></div></div>';
+                echo '<div id="' . $this->field['id'] . '_color_picker" class="colorSelector typography-color"><div class="typography-element-title">'.__('Backup Font Family','redux-framework').'</div><div style="background-color: '.$this->value['color'].'"></div></div>';
                 echo '<input data-default-color="'.$default.'" class="redux-color redux-typography-color'.$this->field['class'].'" original-title="'.__('Font color','redux-framework').'" id="'.$this->field['id'].'-color" name="'.$this->args['opt_name'].'['.$this->field['id'].'][color]" type="text" value="'. $this->value['color'] .'" data-id="'.$this->field['id'].'" />';
             endif;
 
