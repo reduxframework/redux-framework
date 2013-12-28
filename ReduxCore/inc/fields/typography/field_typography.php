@@ -546,8 +546,8 @@ class ReduxFramework_typography extends ReduxFramework{
 
         if( !file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.json' ) ) {
           $result = wp_remote_get( 'https://www.googleapis.com/webfonts/v1/webfonts?key='.$this->args['google_api_key']);
-          if ($result['response']['code'] == 200) {
-              $result = json_decode($result['body']);
+          if ($result->response->code == 200) {
+              $result = json_decode($result->body);
               foreach ($result->items as $font) {
                   $this->parent->googleArray[$font->family] = array(
                       'variants' => $this->getVariants($font->variants),
