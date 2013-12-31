@@ -14,7 +14,7 @@ jQuery(document).ready(function () {
       
       aceeditor.on('change', function(e){
           jQuery('#'+area.id).val(aceeditor.getSession().getValue());
-          redux_change(jQuery('#'+area.id));
+          redux_change(jQuery(element));
       });
       
   });

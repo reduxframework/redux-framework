@@ -1399,7 +1399,7 @@ if (!function_exists('redux_init')) :
 
 	// END Sample Config
 	}
-	add_action('init', 'redux_init');
+	add_action('after_setup_theme', 'redux_init');
 endif;
 
 /**

@@ -30,10 +30,10 @@
 }
 .redux-main .iris-picker .iris-slider-offset {
   position: absolute;
-  top: 0px;
+  top: 12px;
   left: 0;
   right: 0;
-  bottom: 12px;
+  bottom: 0;
   width: 28px;
   background: none!important;
   border: 0!important;
