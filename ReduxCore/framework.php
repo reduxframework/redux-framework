@@ -305,7 +305,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $this->_default_values(); 
 
             // Set option with defaults
-            add_action( 'init', array( &$this, '_set_default_options' ), 0 );
+            add_action( 'init', array( &$this, '_set_default_options' ), 101 );
 
             // Options page
             add_action( 'admin_menu', array( &$this, '_options_page' ) );
@@ -314,10 +314,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( 'admin_init', array( &$this, '_register_settings' ) );
 
             // Any dynamic CSS output, let's run
-            add_action( 'wp_head', array( &$this, '_enqueue_output' ), 100 );
+            add_action( 'wp_head', array( &$this, '_enqueue_output' ), 150 );
             
             // Add tracking. PLEASE leave this in tact! It helps us gain needed statistics of uses. Opt-in of course.
-            add_action( 'init', array( &$this, '_tracking' ), 3 );      
+            add_action( 'init', array( &$this, '_tracking' ), 200 );      
 
             // Start internationalization
             add_action( 'init', array( &$this, '_internationalization' ), 100 );            
