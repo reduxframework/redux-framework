@@ -215,7 +215,7 @@ class ReduxFramework_dimensions extends ReduxFramework {
 
     public function output() {
 
-        if ( !isset($this->field['output']) || empty( $this->field['output'] ) ) {
+        if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && !isset( $this->field['compiler'] ) || !is_array( $this->field['compiler'] ) ) {
             return;
         }
 
@@ -256,16 +256,23 @@ class ReduxFramework_dimensions extends ReduxFramework {
 
         $style = "";
 
-        $keys = implode(",", $this->field['output']);
-        $style .= $keys."{";
-            foreach($cleanValue as $key=>$value) {
-                if( $value ) {
-                    $style .= $key . ':' . $value . $units . ';';
-                }
-            }          
-        $style .= '}';
-        if ( !empty($style ) ) {
-            $this->parent->outputCSS .= $style;  
+        foreach($cleanValue as $key=>$value) {
+            if( $value ) {
+                $style .= $key . ':' . $value . $units . ';';
+            }
+        }          
+        if ( !empty( $style ) ) {
+            if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+                $keys = implode(",", $this->field['output']);
+                $style = $keys . "{" . $style . '}';
+                $this->parent->outputCSS .= $style;  
+            }
+
+            if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+                $keys = implode(",", $this->field['compiler']);
+                $style = $keys . "{" . $style . '}';
+                $this->parent->compilerCSS .= $style;  
+            }               
         }
         
     }
