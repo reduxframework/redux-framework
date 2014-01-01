@@ -1163,6 +1163,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 /** @noinspection PhpIncludeInspection */
                                 require_once( $class_file );
                                 if ( method_exists( $field_class, 'enqueue' ) || method_exists( $field_class, 'localize' ) ) {
+                                    if ( !isset( $this->options[$field['id']] ) ) {
+                                        continue;
+                                    }
                                     $theField = new $field_class( $field, $this->options[$field['id']], $this );
                                     if ( class_exists($field_class) && isset($this->args['dev_mode']) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
                                         /** @noinspection PhpUndefinedMethodInspection */
