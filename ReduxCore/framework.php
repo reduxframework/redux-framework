@@ -297,6 +297,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Move to the first loop area!
                 $this->sections = apply_filters('redux-sections',$sections); // REMOVE LATER
+                $this->sections = apply_filters('redux-sections-'.$this->args['opt_name'],$sections); // REMOVE LATER
                 $this->sections = apply_filters('redux/options/'.$this->args['opt_name'].'/sections',$this->sections);
 
                 // Construct hook
