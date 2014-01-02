@@ -117,14 +117,13 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 
 				if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
 					$keys = implode(",", $this->field['output']);
-					$style = $keys . "{" . $style . '}';
-					$this->parent->outputCSS .= $style;  
+					$this->parent->outputCSS .= $keys . "{" . $style . '}';  
 				}
 
 				if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
 					$keys = implode(",", $this->field['compiler']);
 					$style = $keys . "{" . $style . '}';
-					$this->parent->compilerCSS .= $style;  
+					$this->parent->compilerCSS .= $keys . "{" . $style . '}';  
 				}	
 
 	        }

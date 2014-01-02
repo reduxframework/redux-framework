@@ -399,7 +399,7 @@ class ReduxFramework_typography extends ReduxFramework {
     }
 
     function output() {
-      
+
       global $wp_styles;
 
       $font = $this->value;
@@ -408,7 +408,7 @@ class ReduxFramework_typography extends ReduxFramework {
         $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
       }
 
-      if ( !empty( $field['output'] ) ) { // Don't create dynamic CSS if output array is not set
+      if ( !empty( $this->field['output'] ) ) { // Don't create dynamic CSS if output array is not set
         
         $style = '';
         if (!empty($font)) {
@@ -429,14 +429,12 @@ class ReduxFramework_typography extends ReduxFramework {
         if ( !empty( $style ) ) {
           if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
               $keys = implode(",", $this->field['output']);
-              $style = $keys . "{" . $style . '}';
-              $this->parent->outputCSS .= $style;  
+              $this->parent->outputCSS .= $keys . "{" . $style . '}';
           }
 
           if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
               $keys = implode(",", $this->field['compiler']);
-              $style = $keys . "{" . $style . '}';
-              $this->parent->compilerCSS .= $style;  
+              $this->parent->compilerCSS .= $keys . "{" . $style . '}';  
           }
         }
       }

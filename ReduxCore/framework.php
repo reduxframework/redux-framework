@@ -969,14 +969,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
 //                                $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                                 $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                                 
-                                if( $class_file && file_exists($class_file) ) {
+                                if( $class_file && file_exists($class_file) && !class_exists( $field_class ) ) {
                                     /** @noinspection PhpIncludeInspection */
                                     require_once( $class_file );
                                 }
                             }	
 
                             if( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
-                            	if ( !empty($field['output']) && !is_array( $field['output'] ) ) {
+                            	
+                                if ( !empty($field['output']) && !is_array( $field['output'] ) ) {
                 					$field['output'] = array( $field['output'] );
                 				}
 								$value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';

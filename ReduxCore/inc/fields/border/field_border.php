@@ -215,7 +215,7 @@ class ReduxFramework_border extends ReduxFramework {
 		if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && !isset( $this->field['compiler'] ) || !is_array( $this->field['compiler'] ) ) {
 			return;
 		}
-		
+
         $cleanValue = array(
             'top' => !empty( $this->value['border-top'] ) ? $this->value['border-top'] : 'inherit',
             'right' => !empty( $this->value['border-right'] ) ? $this->value['border-right'] : 'inherit',
@@ -225,7 +225,7 @@ class ReduxFramework_border extends ReduxFramework {
             'style' => !empty( $this->value['border-style'] ) ? $this->value['border-style'] : 'inherit'
         );
 
-        $outCSS = "";
+        $style = "";
     	
 		//absolute, padding, margin
         if ( !isset( $this->field['all'] ) || $this->field['all'] != true ) {
@@ -233,22 +233,21 @@ class ReduxFramework_border extends ReduxFramework {
             	if ($key == "color" || $key == "style" ) {
             		continue;
             	}
-                $outCSS .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
+                $style .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
             }            	
         } else {
-        	$outCSS .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
+        	$style .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
         }
 
 		if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
 			$keys = implode(",", $this->field['output']);
-			$outCSS = $keys . "{" . $outCSS . '}';
-			$this->parent->outputCSS .= $outCSS;  
+			$this->parent->outputCSS .= $keys . "{" . $style . '}';
 		}
 
 		if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
 			$keys = implode(",", $this->field['compiler']);
-			$outCSS = $keys . "{" . $outCSS . '}';
-			$this->parent->compilerCSS .= $outCSS;  
+			$style = $keys . "{" . $style . '}';
+			$this->parent->compilerCSS .= $keys . "{" . $style . '}';
 		}		
         
     }	
