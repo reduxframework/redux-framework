@@ -3,7 +3,12 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    po2mo: {
+      files: {
+        src: 'ReduxCore/languages/*.po',
+        expand: true,
+      },
+    },
     concat: {
 		options: {
         	separator: ';'
@@ -227,6 +232,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks("grunt-phplint");
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-po2mo');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', "less:production", "less:development", "less:extensions"]);

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework\n"
-"POT-Creation-Date: 2013-12-31 13:39-0700\n"
-"PO-Revision-Date: 2013-12-31 13:39-0700\n"
+"POT-Creation-Date: 2014-01-01 23:17-0700\n"
+"PO-Revision-Date: 2014-01-01 23:17-0700\n"
 "Last-Translator: Dovy Paukstys <dovy@reduxframework.com>\n"
 "Language-Team: ReduxFramework <language@reduxframework.com>\n"
 "Language: en_US\n"
@@ -21,161 +21,161 @@ msgstr ""
 "X-Poedit-SearchPath-2: .\n"
 
 #: ReduxCore/framework.php:115 ReduxCore/framework.php:121
-#: ReduxCore/framework.php:281 ReduxCore/framework.php:284
+#: ReduxCore/framework.php:285 ReduxCore/framework.php:288
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/framework.php:278
+#: ReduxCore/framework.php:282
 msgid "Options panel created using"
 msgstr ""
 
-#: ReduxCore/framework.php:278
+#: ReduxCore/framework.php:282
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:900 ReduxCore/framework.php:901
-#: ReduxCore/framework.php:1876
+#: ReduxCore/framework.php:911 ReduxCore/framework.php:912
+#: ReduxCore/framework.php:1918
 msgid "Import / Export"
 msgstr ""
 
-#: ReduxCore/framework.php:911 ReduxCore/framework.php:912
-#: ReduxCore/framework.php:1892 ReduxCore/framework.php:1990
+#: ReduxCore/framework.php:922 ReduxCore/framework.php:923
+#: ReduxCore/framework.php:1934 ReduxCore/framework.php:2032
 msgid "Options Object"
 msgstr ""
 
-#: ReduxCore/framework.php:922 ReduxCore/framework.php:923
-#: ReduxCore/framework.php:1906 ReduxCore/framework.php:2010
+#: ReduxCore/framework.php:933 ReduxCore/framework.php:934
+#: ReduxCore/framework.php:1948 ReduxCore/framework.php:2052
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1176
+#: ReduxCore/framework.php:1213
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/framework.php:1177
+#: ReduxCore/framework.php:1214
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/framework.php:1178
+#: ReduxCore/framework.php:1215
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1179
+#: ReduxCore/framework.php:1216
 msgid ""
 "Your current options will be replaced with the values of this preset. Would "
 "you like to proceed?"
 msgstr ""
 
-#: ReduxCore/framework.php:1429
+#: ReduxCore/framework.php:1466
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:1736
+#: ReduxCore/framework.php:1778
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:1790
+#: ReduxCore/framework.php:1832
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:1792 ReduxCore/framework.php:2040
+#: ReduxCore/framework.php:1834 ReduxCore/framework.php:2082
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:1794 ReduxCore/framework.php:2042
+#: ReduxCore/framework.php:1836 ReduxCore/framework.php:2084
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:1796 ReduxCore/framework.php:2044
+#: ReduxCore/framework.php:1838 ReduxCore/framework.php:2086
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:1799 ReduxCore/framework.php:2047
+#: ReduxCore/framework.php:1841 ReduxCore/framework.php:2089
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:1806
+#: ReduxCore/framework.php:1848
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:1808
+#: ReduxCore/framework.php:1850
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:1812
+#: ReduxCore/framework.php:1854
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:1813
+#: ReduxCore/framework.php:1855
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:1814
+#: ReduxCore/framework.php:1856
 msgid "warning(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:1943
+#: ReduxCore/framework.php:1985
 msgid "Import / Export Options"
 msgstr ""
 
-#: ReduxCore/framework.php:1944
+#: ReduxCore/framework.php:1986
 msgid "Import Options"
 msgstr ""
 
-#: ReduxCore/framework.php:1945
+#: ReduxCore/framework.php:1987
 msgid "Import from file"
 msgstr ""
 
-#: ReduxCore/framework.php:1945
+#: ReduxCore/framework.php:1987
 msgid "Import from URL"
 msgstr ""
 
-#: ReduxCore/framework.php:1950
+#: ReduxCore/framework.php:1992
 msgid ""
 "Input your backup file below and hit Import to restore your sites options "
 "from a backup."
 msgstr ""
 
-#: ReduxCore/framework.php:1960
+#: ReduxCore/framework.php:2002
 msgid ""
 "Input the URL to another sites options set and hit Import to load the "
 "options from that site."
 msgstr ""
 
-#: ReduxCore/framework.php:1967
+#: ReduxCore/framework.php:2009
 msgid "Import"
 msgstr ""
 
-#: ReduxCore/framework.php:1967
+#: ReduxCore/framework.php:2009
 msgid ""
 "WARNING! This will overwrite all existing option values, please proceed with "
 "caution!"
 msgstr ""
 
-#: ReduxCore/framework.php:1970
+#: ReduxCore/framework.php:2012
 msgid "Export Options"
 msgstr ""
 
-#: ReduxCore/framework.php:1972
+#: ReduxCore/framework.php:2014
 msgid ""
 "Here you can copy/download your current option settings. Keep this safe as "
 "you can use it as a backup should anything go wrong, or you can use it to "
 "restore your settings on this site (or any other site)."
 msgstr ""
 
-#: ReduxCore/framework.php:1976
+#: ReduxCore/framework.php:2018
 msgid "Copy"
 msgstr ""
 
-#: ReduxCore/framework.php:1976
+#: ReduxCore/framework.php:2018
 msgid "Download"
 msgstr ""
 
-#: ReduxCore/framework.php:1976
+#: ReduxCore/framework.php:2018
 msgid "Copy Link"
 msgstr ""
 
-#: ReduxCore/framework.php:1999
+#: ReduxCore/framework.php:2041
 msgid "Show Object in Javascript Console Object"
 msgstr ""
 
@@ -188,6 +188,7 @@ msgstr ""
 
 #: ReduxCore/extensions/edd/extension_edd.php:170
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:110
+#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:118
 msgid "Not Activated"
 msgstr ""
 
@@ -206,7 +207,7 @@ msgid "%1$s License Key"
 msgstr ""
 
 #: ReduxCore/extensions/edd/edd_license/EDD_License_Handler.php:218
-#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:142
+#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:144
 msgid "Deactivate License"
 msgstr ""
 
@@ -216,15 +217,19 @@ msgid ""
 "stop, 'OK' to update."
 msgstr ""
 
-#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:123
-msgid "License Status"
+#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:124
+msgid "Verifying license..."
 msgstr ""
 
-#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:132
+#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:125
+msgid "Status"
+msgstr ""
+
+#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:134
 msgid "Verify License"
 msgstr ""
 
-#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:137
+#: ReduxCore/extensions/edd/edd_license/field_edd_license.php:139
 msgid "Activate License"
 msgstr ""
 
@@ -475,7 +480,7 @@ msgstr ""
 msgid "Font color"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:590
+#: ReduxCore/inc/fields/typography/field_typography.php:564
 msgid "Google Webfonts"
 msgstr ""
 
