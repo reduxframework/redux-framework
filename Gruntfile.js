@@ -1,3 +1,5 @@
+var shell = require('shelljs');
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -233,6 +235,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-phplint");
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-po2mo');
+
+  grunt.registerTask('langUpdate', "Update languages", function() {
+    shell.exec('tx pull -a');
+    shell.exec('grunt po2mo');
+  });
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', "less:production", "less:development", "less:extensions"]);
