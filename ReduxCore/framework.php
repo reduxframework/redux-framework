@@ -280,7 +280,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 if ( empty( $this->args['footer_credit'] ) ) {
-                    //$this->args['footer_credit'] = '<span id="footer-thankyou">' . sprintf(__("Options panel created using %1$s", $this->args['domain']), '<a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', $this->args['domain']) . '</a> v' . self::$_version) . '</span>';
                     $this->args['footer_credit'] = '<span id="footer-thankyou">' . sprintf( __( 'Options panel created using %1$s', $this->args['domain'] ), '<a href="'.esc_url( $this->framework_url ).'" target="_blank">'.__( 'Redux Framework', $this->args['domain'] ).'</a> v'.self::$_version ) . '</span>';
                 }
                 if ( empty( $this->args['menu_title'] ) ) {
