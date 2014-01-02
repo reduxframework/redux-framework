@@ -278,8 +278,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if ( empty( $this->args['transient_time'] ) ) {
                     $this->args['transient_time'] = 60 * MINUTE_IN_SECONDS;
                 }
+
+
+
+
                 if ( empty( $this->args['footer_credit'] ) ) {
-                    $this->args['footer_credit'] = '<span id="footer-thankyou">' . __( 'Options panel created using', $this->args['domain']) . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', $this->args['domain']) . '</a> v' . self::$_version . '</span>';
+                    $this->args['footer_credit'] = '<span id="footer-thankyou">' . sprintf( __( 'Options panel created using <a href="%s" target="_blank">Redux Framework</a> v%s', 'my-text-domain' ), esc_url( $this->framework_url ), self::$_version ) . '</span>';
                 }
                 if ( empty( $this->args['menu_title'] ) ) {
                     $this->args['menu_title'] = __( 'Options', $this->args['domain'] );
