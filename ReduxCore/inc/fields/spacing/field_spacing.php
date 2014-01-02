@@ -222,7 +222,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 		wp_enqueue_script(
 			'redux-field-spacing-js', 
 			ReduxFramework::$_url.'inc/fields/spacing/field_spacing.js', 
-			array('jquery', 'select2-js', 'jquery-numeric'),
+			array('jquery'),
 			time(),
 			true
 		);

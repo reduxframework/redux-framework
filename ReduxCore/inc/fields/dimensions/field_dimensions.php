@@ -205,11 +205,18 @@ class ReduxFramework_dimensions extends ReduxFramework {
         wp_enqueue_style('select2-css');
 
         wp_enqueue_script(
-                'redux-field-dimensions-js', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.js', array('jquery', 'select2-js', 'jquery-numeric'), time(), true
+            'redux-field-dimensions-js', 
+            ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.js', 
+            array('jquery'), 
+            time(), 
+            true
         );
 
         wp_enqueue_style(
-                'redux-field-dimensions-css', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css', time(), true
+            'redux-field-dimensions-css', 
+            ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css', 
+            time(), 
+            true
         );
     }
 

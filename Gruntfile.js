@@ -233,7 +233,7 @@ module.exports = function(grunt) {
   grunt.registerTask('travis', ['jshint', 'lintPHP']);
 
   // this would be run by typing "grunt test" on the command line
-  grunt.registerTask('testJS', ['jshint', 'qunit']);  
+  grunt.registerTask('testJS', ['jshint', 'concat:core', 'concat:vendor']);  
 
   grunt.registerTask('watchUI', ['watch:ui']);
   grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
