@@ -297,7 +297,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Move to the first loop area!
                 $this->sections = apply_filters('redux-sections',$sections); // REMOVE LATER
-                $this->sections = apply_filters('redux-sections-'.$this->args['opt_name'],$sections); // REMOVE LATER
+                $this->sections = apply_filters('redux-sections-'.$this->args['opt_name'],$this->sections); // REMOVE LATER
                 $this->sections = apply_filters('redux/options/'.$this->args['opt_name'].'/sections',$this->sections);
 
                 // Construct hook
@@ -851,6 +851,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 * @return void
 		 */
         function _options_page() {
+
             if( $this->args['page_type'] == 'submenu' ) {
                 $this->page = add_submenu_page(
                     $this->args['page_parent'],
@@ -1152,6 +1153,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     );
                 }
             }
+  
             
             foreach( $this->sections as $section ) {
                 if( isset( $section['fields'] ) ) {
@@ -1160,14 +1162,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
                             $class_file = apply_filters( 'redux/'.$this->args['opt_name'].'/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field );
                             if( $class_file ) {
-                                /** @noinspection PhpIncludeInspection */
-                                require_once( $class_file );
-                                if ( method_exists( $field_class, 'enqueue' ) || method_exists( $field_class, 'localize' ) ) {
+                                $en = false; // Check if this has been enqueued before
+                                if( !class_exists($field_class) ) {
+                                    /** @noinspection PhpIncludeInspection */
+                                    require_once( $class_file );
+                                    $en = true;
+                                }                                
+                                
+                                if ( ( $en && method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) {
                                     if ( !isset( $this->options[$field['id']] ) ) {
-                                        continue;
+                                        $this->options[$field['id']] = "";
                                     }
                                     $theField = new $field_class( $field, $this->options[$field['id']], $this );
-                                    if ( class_exists($field_class) && isset($this->args['dev_mode']) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
+                                    if ( $en && class_exists($field_class) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
                                         /** @noinspection PhpUndefinedMethodInspection */
                                         $theField->enqueue();    
                                     }
@@ -1186,6 +1193,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
             }
+
 
             $this->localize_data['folds'] = $this->folds;
             $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
@@ -1584,7 +1592,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( !empty( $plugin_options['defaults'] ) ) {
                 set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
-                $plugin_options = array();
+                $plugin_options = $this->_default_values();
                 $plugin_options['REDUX_COMPILER'] = time();
                 if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
 				    $this->set_options( $plugin_options );
@@ -1595,7 +1603,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( isset( $plugin_options['defaults-section'] ) ) {
             	$compiler = false;
             	foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
-                    unset($plugin_options[$field['id']]);
+                    if ( isset( $this->options_defaults[$field['id']] ) ) {
+                        $plugin_options[$field['id']] = $this->options_defaults[$field['id']];
+                    } else {
+                        $plugin_options[$field['id']] = "";
+                    }
             		if (isset($field['compiler'])) {
             			$compiler = true;
             		}
