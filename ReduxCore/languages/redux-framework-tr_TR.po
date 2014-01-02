@@ -1,11 +1,12 @@
 # 
 # Translators:
+# mapazarbasi <mail@abdullahpazarbasi.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: ReduxFramework\n"
 "POT-Creation-Date: 2014-01-01 23:17-0700\n"
-"PO-Revision-Date: 2014-01-02 06:40+0000\n"
-"Last-Translator: dovy <dovy@simplerain.com>\n"
+"PO-Revision-Date: 2014-01-02 07:20+0000\n"
+"Last-Translator: mapazarbasi <mail@abdullahpazarbasi.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/reduxframework/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -219,11 +220,11 @@ msgstr "Bu temayı güncellemek, gerçekleştirdiğiniz bütün özelleştirmele
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:124
 msgid "Verifying license..."
-msgstr ""
+msgstr "Lisans doğrulanıyor..."
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:125
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:134
 msgid "Verify License"
