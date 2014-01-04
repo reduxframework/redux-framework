@@ -294,7 +294,7 @@ function getContrastColour(hexcolour){
 	// This should *not* happen.  If a function passing a value
 	// is canceled, it should pass the current value instead of
 	// a blank.  This is how the Windows Common Controls do it.  :P
-	if (hexcolour) != '' {
+	if (hexcolour !== '') {
 		
 		// Replace the hash with a blank.
 		hexcolour = hexcolour.replace('#','');
