@@ -1,18 +1,18 @@
 # 
 # Translators:
-# riesurya <riesurya@gmail.com>, 2014
+# dariodev <dariodevcic@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: ReduxFramework\n"
 "POT-Creation-Date: 2014-01-02 00:56-0700\n"
-"PO-Revision-Date: 2014-01-03 19:00+0000\n"
-"Last-Translator: riesurya <riesurya@gmail.com>\n"
-"Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/redux-framework/language/id_ID/)\n"
+"PO-Revision-Date: 2014-01-04 00:23+0000\n"
+"Last-Translator: dariodev <dariodevcic@gmail.com>\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/projects/p/redux-framework/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id_ID\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 1.6.3\n"
 "X-Poedit-Basepath: ../../\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_c;_nc\n"
@@ -24,12 +24,12 @@ msgstr ""
 #: ReduxCore/framework.php:115 ReduxCore/framework.php:121
 #: ReduxCore/framework.php:287 ReduxCore/framework.php:290
 msgid "Options"
-msgstr "Options"
+msgstr "Opcije"
 
 #: ReduxCore/framework.php:284
 #, php-format
 msgid "Options panel created using %1$s"
-msgstr "Panel pengaturan dibuat dengan %1$s"
+msgstr "Panel opcija je kreiran koristeći %1$s"
 
 #: ReduxCore/framework.php:284
 msgid "Redux Framework"
@@ -38,190 +38,190 @@ msgstr "Redux Framework"
 #: ReduxCore/framework.php:904 ReduxCore/framework.php:905
 #: ReduxCore/framework.php:1911
 msgid "Import / Export"
-msgstr "Impor / Ekspor"
+msgstr "Uvoz / Izvoz"
 
 #: ReduxCore/framework.php:915 ReduxCore/framework.php:916
 #: ReduxCore/framework.php:1927 ReduxCore/framework.php:2025
 msgid "Options Object"
-msgstr "Data Object Options"
+msgstr "Objekt opcija"
 
 #: ReduxCore/framework.php:926 ReduxCore/framework.php:927
 #: ReduxCore/framework.php:1941 ReduxCore/framework.php:2045
 msgid "System Info"
-msgstr "Informasi System"
+msgstr "Informacije o sustavu"
 
 #: ReduxCore/framework.php:1206
 msgid "You have changes that are not saved. Would you like to save them now?"
-msgstr "Perubahan yang dilakukan belum disimpan. Mau disimpan sekarang ?"
+msgstr "Imate izmjene koje nisu spremljene. Želite li ih spremiti sada?"
 
 #: ReduxCore/framework.php:1207
 msgid "Are you sure? Resetting will lose all custom values."
-msgstr "Yakin ? Reset akan menghapus semua pengaturan yang ada"
+msgstr "Jeste li sigurni? Resetiranjem ćete izgubiti sve prilagođene vrijednosti."
 
 #: ReduxCore/framework.php:1208
 msgid "Are you sure? Resetting will lose all custom values in this section."
-msgstr "Yakin ? Reset akan menghapus semua pengaturan pada bagian ini saja. "
+msgstr "Jeste li sigurni? Resetiranjem ćete izgubiti sve prilagođene vrijednosti u ovoj sekciji."
 
 #: ReduxCore/framework.php:1209
 msgid ""
 "Your current options will be replaced with the values of this preset. Would "
 "you like to proceed?"
-msgstr "Pengaturan saat ini akan diganti dengan pengaturan yang ditetapkan dalam preset. Lanjut?"
+msgstr "Vaše trenutne opcije biti će zamijenjene vrijednostima ovih predefiniranih postavki. Želite li nastaviti?"
 
 #: ReduxCore/framework.php:1459
 msgid "Default"
-msgstr "Standar"
+msgstr "Zadano"
 
 #: ReduxCore/framework.php:1771
 msgid "Warning- This options panel will not work properly without javascript!"
-msgstr "Perhatian- Panel options ini tidak dapat bekerja baik tanpa javascript!"
+msgstr "Upozorenje- Ovaj panel s opcijama neće ispravno raditi bez JavaScript-a!"
 
 #: ReduxCore/framework.php:1825
 msgid "Expand"
-msgstr "Kembangkan"
+msgstr "Proširi"
 
 #: ReduxCore/framework.php:1827 ReduxCore/framework.php:2075
 msgid "Save Changes"
-msgstr "Simpan perubahan"
+msgstr "Spremi promjene"
 
 #: ReduxCore/framework.php:1829 ReduxCore/framework.php:2077
 msgid "Reset Section"
-msgstr "Reset Section"
+msgstr "Resetiraj sekciju"
 
 #: ReduxCore/framework.php:1831 ReduxCore/framework.php:2079
 msgid "Reset All"
-msgstr "Reset Semua"
+msgstr "Resetiraj sve"
 
 #: ReduxCore/framework.php:1834 ReduxCore/framework.php:2082
 msgid "Working..."
-msgstr "Tunggu sebentar..."
+msgstr "Radim..."
 
 #: ReduxCore/framework.php:1841
 msgid "Settings Imported!"
-msgstr "Settingan Berhasil Diimpor!"
+msgstr "Postavke uvezene!"
 
 #: ReduxCore/framework.php:1843
 msgid "Settings Saved!"
-msgstr "Setting Berhasil Disimpan!"
+msgstr "Postavke spremljene!"
 
 #: ReduxCore/framework.php:1847
 msgid "Settings have changed, you should save them!"
-msgstr "Settingan telah berubah, silakan disimpan, klik tombol Simpan!"
+msgstr "Postavke su promijenjene, trebali biste ih spremiti!"
 
 #: ReduxCore/framework.php:1848
 msgid "error(s) were found!"
-msgstr "terdapat error"
+msgstr "greška(e) su pronađene!"
 
 #: ReduxCore/framework.php:1849
 msgid "warning(s) were found!"
-msgstr "ditemukan peringatan (warning)"
+msgstr "upozorenje(a) su pronađena!"
 
 #: ReduxCore/framework.php:1978
 msgid "Import / Export Options"
-msgstr "Pilihan Impor/Ekspor"
+msgstr "Opcije uvoza / izvoza"
 
 #: ReduxCore/framework.php:1979
 msgid "Import Options"
-msgstr "Pilihan Impor"
+msgstr "Opcije uvoza"
 
 #: ReduxCore/framework.php:1980
 msgid "Import from file"
-msgstr "Impor dari berkas"
+msgstr "Uvoz iz datoteke"
 
 #: ReduxCore/framework.php:1980
 msgid "Import from URL"
-msgstr "Impor dari URL"
+msgstr "Uvoz iz URL-a"
 
 #: ReduxCore/framework.php:1985
 msgid ""
 "Input your backup file below and hit Import to restore your sites options "
 "from a backup."
-msgstr "Masukkan berkas cadangan dibawah ini lalu klik tombol Impor untuk menggunakan settingan dari berkas cadangan."
+msgstr "Unesi dolje svoju backup datoteku i lupi Uvoz da povratiš postavke iz backup-a."
 
 #: ReduxCore/framework.php:1995
 msgid ""
 "Input the URL to another sites options set and hit Import to load the "
 "options from that site."
-msgstr "Masukkan URL berkas cadangan, dan klik tombol Impor."
+msgstr "Unesi URL opcija nekog drugog sajta i lupi Uvoz da učitaš opcije iz tog sajta."
 
 #: ReduxCore/framework.php:2002
 msgid "Import"
-msgstr "Impor"
+msgstr "Uvoz"
 
 #: ReduxCore/framework.php:2002
 msgid ""
 "WARNING! This will overwrite all existing option values, please proceed with"
 " caution!"
-msgstr "PERHATIAN! Prosedur berikut akan melakukan penimpaan semua settingan yang ada, pastikan semua sesuai."
+msgstr "UPOZORENJE! Ovo će unijeti nove vrijednosti preko postojećih, molimo nastavite samo ako znate što radite!"
 
 #: ReduxCore/framework.php:2005
 msgid "Export Options"
-msgstr "Pilihan Ekspor"
+msgstr "Opcije izvoza"
 
 #: ReduxCore/framework.php:2007
 msgid ""
 "Here you can copy/download your current option settings. Keep this safe as "
 "you can use it as a backup should anything go wrong, or you can use it to "
 "restore your settings on this site (or any other site)."
-msgstr "Anda dapat menyalin/mendonwload settingan saat ini. Simpan baik-baik sebagai cadangan bila terjadi hal-hal yang tidak diinginkan, atau dapat digunakan untuk mengembalikan settingan pada situs ini ( atau situs mana saja dengan pilihan settingan yang sama )"
+msgstr "Ovdje možete kopirati / preuzeti svoje trenutne postavke opcija. Čuvajte ih na sigurnom kako bi ih mogli koristiti kao backup u slučaju da nešto pođe krivo, također ih možete koristiti za vraćanje postavki na ovom sajtu (ili bilo kojem drugom)."
 
 #: ReduxCore/framework.php:2011
 msgid "Copy"
-msgstr "Salin"
+msgstr "Kopiranje"
 
 #: ReduxCore/framework.php:2011
 msgid "Download"
-msgstr "Download"
+msgstr "Preuzimanje"
 
 #: ReduxCore/framework.php:2011
 msgid "Copy Link"
-msgstr "Salin Link"
+msgstr "Kopiraj link"
 
 #: ReduxCore/framework.php:2034
 msgid "Show Object in Javascript Console Object"
-msgstr "Tampilkan Object pada Konsol Javascript"
+msgstr "Pokaži objekt u Javascript konzoli"
 
 #: ReduxCore/extensions/edd/extension_edd.php:77
 #: ReduxCore/extensions/edd/extension_edd.php:119
 #: ReduxCore/extensions/edd/extension_edd.php:176
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:116
 msgid "Valid"
-msgstr "Valid"
+msgstr "Ispravno"
 
 #: ReduxCore/extensions/edd/extension_edd.php:170
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:110
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:118
 msgid "Not Activated"
-msgstr "Tidak Diaktifkan"
+msgstr "Nije aktivirano"
 
 #: ReduxCore/extensions/edd/extension_edd.php:173
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:114
 msgid "Deactivated"
-msgstr "Dinonaktifkan"
+msgstr "Deaktivirano"
 
 #: ReduxCore/extensions/edd/extension_edd.php:179
 msgid "Not Valid"
-msgstr "Tidak Valid"
+msgstr "Nije ispravno"
 
 #: ReduxCore/extensions/edd/edd_license/EDD_License_Handler.php:112
 #, php-format
 msgid "%1$s License Key"
-msgstr "%1$s Kode Lisensi"
+msgstr "%1$s Licencni ključ"
 
 #: ReduxCore/extensions/edd/edd_license/EDD_License_Handler.php:218
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:144
 msgid "Deactivate License"
-msgstr "Deaktifasi Lisensi"
+msgstr "Deaktiviraj licencu"
 
 #: ReduxCore/extensions/edd/edd_license/EDD_SL_Theme_Updater.php:54
 msgid ""
 "Updating this theme will lose any customizations you have made. 'Cancel' to "
 "stop, 'OK' to update."
-msgstr "Update theme ini akan menghapus semua pengaturan kustom yang dibuat. 'Cancel' untuk membatalkan, 'OK' untuk melanjutkan update."
+msgstr "Ažuriranjem ove teme izgubit ćete sve prilagodbe koje ste napravili. 'Odustani' za prekid, 'OK' za ažuriranje."
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:124
 msgid "Verifying license..."
-msgstr "Sedang memverifikasi lisensi..."
+msgstr "Provjeravam licencu..."
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:125
 msgid "Status"
@@ -229,99 +229,99 @@ msgstr "Status"
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:134
 msgid "Verify License"
-msgstr "Verifikasi Lisensi"
+msgstr "Provjera licence"
 
 #: ReduxCore/extensions/edd/edd_license/field_edd_license.php:139
 msgid "Activate License"
-msgstr "Aktifasi Lisensi"
+msgstr "Aktivacija licence"
 
 #: ReduxCore/inc/tracking.php:59
 msgid "Help improve Our Panel"
-msgstr "Urun peran dalam pengembangan Panel"
+msgstr "Pomozi nam poboljšati naš panel"
 
 #: ReduxCore/inc/tracking.php:60
 msgid ""
 "Please helps us improve our panel by allowing us to gather anonymous usage "
 "stats so we know which configurations, plugins and themes to test with."
-msgstr "Mohon bantuannya untuk mengembangkan panel ini dengan mengijinkan kami untuk memperoleh statistik penggunaan secara anonim sebagai data pengujian konfigurasi, plugins dan themes."
+msgstr "Molimo te pomozi nam poboljšati naš framework dopuštajući nam prikupljanje anonimne statistike korištenja, tako ćemo znati koje sve konfiguracije, dodataka i tema trebamo testirati."
 
 #: ReduxCore/inc/tracking.php:65
 msgid "Allow tracking"
-msgstr "Silakan Tracking"
+msgstr "Dopusti praćenje"
 
 #: ReduxCore/inc/tracking.php:70
 msgid "Do not allow tracking"
-msgstr "Tidak boleh tracking"
+msgstr "Nemoj dopustiti praćenje"
 
 #: ReduxCore/inc/fields/border/field_border.php:112
 #: ReduxCore/inc/fields/spacing/field_spacing.php:125
 msgid "All"
-msgstr "Semua"
+msgstr "Sve"
 
 #: ReduxCore/inc/fields/border/field_border.php:125
 #: ReduxCore/inc/fields/spacing/field_spacing.php:149
 msgid "Top"
-msgstr "Top"
+msgstr "Vrh"
 
 #: ReduxCore/inc/fields/border/field_border.php:132
 #: ReduxCore/inc/fields/spacing/field_spacing.php:156
 msgid "Right"
-msgstr "Right"
+msgstr "Desno"
 
 #: ReduxCore/inc/fields/border/field_border.php:139
 #: ReduxCore/inc/fields/spacing/field_spacing.php:163
 msgid "Bottom"
-msgstr "Bottom"
+msgstr "Dno"
 
 #: ReduxCore/inc/fields/border/field_border.php:146
 #: ReduxCore/inc/fields/spacing/field_spacing.php:170
 msgid "Left"
-msgstr "Left"
+msgstr "Lijevo"
 
 #: ReduxCore/inc/fields/border/field_border.php:162
 msgid "Border style"
-msgstr "Model Border"
+msgstr "Stil ruba"
 
 #: ReduxCore/inc/fields/color/field_color.php:72
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:81
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:91
 #: ReduxCore/inc/fields/color_rgba/field_color_rgba.php:84
 msgid "Transparent"
-msgstr "Transparan"
+msgstr "Prozirno"
 
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:73
 msgid "From "
-msgstr "Dari"
+msgstr "Od"
 
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:84
 msgid "To "
-msgstr "Hingga"
+msgstr "Za"
 
 #: ReduxCore/inc/fields/dimensions/field_dimensions.php:139
 msgid "Width"
-msgstr "Lebar"
+msgstr "Širina"
 
 #: ReduxCore/inc/fields/dimensions/field_dimensions.php:155
 msgid "height"
-msgstr "tinggi"
+msgstr "Visina"
 
 #: ReduxCore/inc/fields/dimensions/field_dimensions.php:168
 #: ReduxCore/inc/fields/dimensions/field_dimensions.php:169
 #: ReduxCore/inc/fields/spacing/field_spacing.php:181
 #: ReduxCore/inc/fields/spacing/field_spacing.php:182
 msgid "Units"
-msgstr "Satuan"
+msgstr "Jedinice"
 
 #: ReduxCore/inc/fields/fonts/field_fonts.php:118
 msgid "No fonts selected"
-msgstr "Tidak ada jenis huruf yang dipilih"
+msgstr "Font nije odabran"
 
 #: ReduxCore/inc/fields/fonts/field_fonts.php:152
 #: ReduxCore/inc/fields/media/field_media.php:150
 #: ReduxCore/inc/fields/slides/field_slides.php:117
 #: ReduxCore/inc/fields/slides/field_slides.php:180
 msgid "Upload"
-msgstr "Unggah"
+msgstr "Upload"
 
 #: ReduxCore/inc/fields/fonts/field_fonts.php:158
 #: ReduxCore/inc/fields/media/field_media.php:156
@@ -331,36 +331,36 @@ msgstr "Unggah"
 #: ReduxCore/inc/fields/slides/field_slides.php:123
 #: ReduxCore/inc/fields/slides/field_slides.php:182
 msgid "Remove"
-msgstr "Hapus"
+msgstr "Ukloni"
 
 #: ReduxCore/inc/fields/gallery/field_gallery.php:77
 msgid "Add/Edit Gallery"
-msgstr "Tambah/Hapus Galeri"
+msgstr "Dodaj/Uredi galeriju"
 
 #: ReduxCore/inc/fields/gallery/field_gallery.php:78
 msgid "Clear Gallery"
-msgstr "Bersihkan Galeri"
+msgstr "Obriši galeriju"
 
 #: ReduxCore/inc/fields/group/field_group.php:71
 msgid "New"
-msgstr "Baru"
+msgstr "Novo"
 
 #: ReduxCore/inc/fields/group/field_group.php:84
 msgid "New "
-msgstr "Baru"
+msgstr "Novo"
 
 #: ReduxCore/inc/fields/group/field_group.php:133
 #: ReduxCore/inc/fields/group/field_group.php:198
 msgid "Delete"
-msgstr "Hapus"
+msgstr "Brisanje"
 
 #: ReduxCore/inc/fields/group/field_group.php:203
 msgid "Add"
-msgstr "Tambah"
+msgstr "Dodaj"
 
 #: ReduxCore/inc/fields/link_color/field_link_color.php:86
 msgid "Regular"
-msgstr "Reguler"
+msgstr "Regular"
 
 #: ReduxCore/inc/fields/link_color/field_link_color.php:90
 msgid "Hover"
@@ -376,39 +376,39 @@ msgstr "Active"
 
 #: ReduxCore/inc/fields/media/field_media.php:116
 msgid "No media selected"
-msgstr "Tidak ada media yang dipilih"
+msgstr "Nema odabranih medijskih datoteka"
 
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:65
 msgid "Add More"
-msgstr "Tambah"
+msgstr "Dodaj još"
 
 #: ReduxCore/inc/fields/password/field_password.php:55
 msgid "Password"
-msgstr "Kata Sandi"
+msgstr "Lozinka"
 
 #: ReduxCore/inc/fields/password/field_password.php:56
 msgid "Username"
-msgstr "Nama Pengguna"
+msgstr "Korisničko ime"
 
 #: ReduxCore/inc/fields/select/field_select.php:69
 #: ReduxCore/inc/fields/select_image/field_select_image.php:59
 msgid "Select an item"
-msgstr "Pilih"
+msgstr "Odaberi stavku"
 
 #: ReduxCore/inc/fields/select/field_select.php:110
 #: ReduxCore/inc/fields/select_image/field_select_image.php:134
 msgid "No items of this type were found."
-msgstr "Tidak ada pilihan untuk field jenis berikut"
+msgstr "Nisu pronađene stavke ovog tipa"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:128
 #: ReduxCore/inc/fields/slides/field_slides.php:187
 msgid "Title"
-msgstr "Judul"
+msgstr "Naslov"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:129
 #: ReduxCore/inc/fields/slides/field_slides.php:189
 msgid "Description"
-msgstr "Deskripsi"
+msgstr "Opis"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:130
 #: ReduxCore/inc/fields/slides/field_slides.php:191
@@ -418,69 +418,69 @@ msgstr "URL"
 #: ReduxCore/inc/fields/slides/field_slides.php:138
 #: ReduxCore/inc/fields/slides/field_slides.php:200
 msgid "Select an Option"
-msgstr "Pilih dari daftar"
+msgstr "Odaberi opciju"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:158
 #: ReduxCore/inc/fields/slides/field_slides.php:220
 msgid "Delete Slide"
-msgstr "Hapus Slide"
+msgstr "Obriši slajd"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:223
 msgid "Add Slide"
-msgstr "Tambah Slide"
+msgstr "Dodaj slajd"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:109
 msgid "Font family"
-msgstr "Jenis Huruf"
+msgstr "Font family"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:150
 msgid "Standard Fonts"
-msgstr "Jenis Huruf Standar"
+msgstr "Standardni fontovi"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:186
 #: ReduxCore/inc/fields/typography/field_typography.php:190
 msgid "Font style"
-msgstr "Model Huruf"
+msgstr "Font style"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:190
 msgid "Style"
-msgstr "Model"
+msgstr "Style"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:216
 msgid "Font subsets"
-msgstr "Subset Huruf"
+msgstr "Font subsets"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:217
 msgid "Subsets"
-msgstr "Subset"
+msgstr "Subsets"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:217
 msgid "Font script"
-msgstr "Bentuk Huruf"
+msgstr "Font script"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:235
 msgid "Size"
-msgstr "Ukuran"
+msgstr "Veličina"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:244
 msgid "Height"
-msgstr "Tinggi"
+msgstr "Visina"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:252
 msgid "Word Spacing"
-msgstr "Jarak antar kata"
+msgstr "Razmak riječi"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:260
 msgid "Letter Spacing"
-msgstr "Jarak antar huruf"
+msgstr "Razmak slova"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:274
 msgid "Backup Font Family"
-msgstr "Cadangan Jenis Huruf"
+msgstr "Spremi font"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:294
 msgid "Font color"
-msgstr "Warna Huruf"
+msgstr "Boja fonta"
 
 #: ReduxCore/inc/fields/typography/field_typography.php:564
 msgid "Google Webfonts"
@@ -490,47 +490,47 @@ msgstr "Google Webfonts"
 #: ReduxCore/inc/validation/color_rgba/validation_color_rgba.php:15
 #: ReduxCore/inc/validation/colorrgba/validation_colorrgba.php:15
 msgid "This field must be a valid color value."
-msgstr "Masukkan hanya nilai warna yang valid"
+msgstr "Ovo polje mora sadržavati ispravnu vrijednost boje"
 
 #: ReduxCore/inc/validation/comma_numeric/validation_comma_numeric.php:15
 msgid ""
 "You must provide a comma separated list of numerical values for this option."
-msgstr "Masukkan daftar berupa barisan angka dibatasi tanda koma"
+msgstr "Morate osigurati zarezom odvojeni popis (en. comma separated) numeričkih vrijednosti za ovu opciju."
 
 #: ReduxCore/inc/validation/date/validation_date.php:15
 msgid "This field must be a valid date."
-msgstr "Masukkan format data yang valid"
+msgstr "Ovo polje mora sadržavati ispravan datum."
 
 #: ReduxCore/inc/validation/email/validation_email.php:15
 msgid "You must provide a valid email for this option."
-msgstr "Masukkan nilai numerik"
+msgstr "Morate unijeti valjanu email adresu za ovu opciju."
 
 #: ReduxCore/inc/validation/no_html/validation_no_html.php:15
 msgid ""
 "You must not enter any HTML in this field, all HTML tags have been removed."
-msgstr "Anda tidak dapat memasukkan segala format HTML pada field ini, semua tag HTML akan dihapus"
+msgstr "Ne smijete unositi HTML u ovo polje, svi HTML tagovi bit će uklonjeni."
 
 #: ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:15
 msgid ""
 "You must not enter any special characters in this field, all special "
 "characters have been removed."
-msgstr "Anda tidak dapat memasukkan spesial karakter pada field ini, semua spesial karakter akan dihapus"
+msgstr "Ne smijete unositi specijalne znakove u ovo polje, svi specijalni znakovi tagovi bit će uklonjeni."
 
 #: ReduxCore/inc/validation/numeric/validation_numeric.php:15
 msgid "You must provide a numerical value for this option."
-msgstr "Masukkan nilai numerik"
+msgstr "Morate unijeti numeričku vrijednost za ovu opciju."
 
 #: ReduxCore/inc/validation/url/validation_url.php:15
 msgid "You must provide a valid URL for this option."
-msgstr "Masukkan nilai numerik"
+msgstr "Morate unijeti valjani URL za ovu opciju."
 
 #: class.redux-plugin.php:277
 msgid "Redux Framework has an embedded demo."
-msgstr "Redux Framework pada mode Demo"
+msgstr "Redux Framework ima ugrađen demo."
 
 #: class.redux-plugin.php:277
 msgid "Click here to activate the sample config file."
-msgstr "Klik untuk mengaktifkan berkas sample config."
+msgstr "Kliknite ovdje za aktivaciju probne konfiguracijske datoteke."
 
 #: class.redux-plugin.php:381
 msgid "Github Repo"
@@ -538,12 +538,12 @@ msgstr "Github Repo"
 
 #: class.redux-plugin.php:382
 msgid "Issue Tracker"
-msgstr "Penelusuran Issue"
+msgstr "Issue Tracker"
 
 #: class.redux-plugin.php:387
 msgid "Deactivate Demo Mode"
-msgstr "Deaktifasi Mode Demo"
+msgstr "Deaktiviraj demo način rada"
 
 #: class.redux-plugin.php:389
 msgid "Activate Demo Mode"
-msgstr "Aktifkan Mode Demo"
+msgstr "Aktiviraj demo način rada"
