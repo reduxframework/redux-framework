@@ -9,7 +9,7 @@ a {
 .ui-datepicker table { background: #fff; }
 
 .redux-container{
-	font-family: "Lucida Grande", Sans-serif;
+	//font-family: "Open Sans","Lucida Grande", Sans-serif;
 	background-color: #eeeeee; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
 	background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%); /* FF3.6+ */
@@ -111,7 +111,7 @@ a {
 #redux-header,
 #redux-footer{
 	text-align:right;
-	padding: 9px 10px 6px 10px
+	padding: 6px 10px;
 }
 #redux-header{
 	border-bottom:1px solid #E7E7E7;
@@ -122,6 +122,11 @@ a {
 }
 #redux-footer #redux-share{
 	float:left;
+	line-height: 28px;
+	font-size: 15px;
+	a {
+		text-decoration: none;
+	}
 }
 #redux-footer #redux-share a{
 	margin-right:10px;
@@ -306,11 +311,6 @@ a {
 	margin-right:-2px;
 }
 
-
-
-
-
-
 .redux-group-tab{
 	display:none;
 	margin-bottom: 30px;
@@ -322,15 +322,10 @@ a {
 	border-bottom: 1px solid #E7E7E7;
 }
 .redux-group-tab .redux-section-desc{
-	
-	font-size:1.1em;
-	margin-bottom: 10px;
+	margin-bottom: 35px;
 	color:#666666;
 }
-.redux-group-tab .form-table{
-	clear:none;
-	margin-top:20px;
-}
+
 .redux-group-tab .form-table.no-border{
 	border-top:none;
 }
@@ -346,10 +341,10 @@ a {
 }
 .redux-group-tab .form-table tr th{
 	font-weight:bold;
-	font-size:1.1em;
 	width:30%;
 	padding:20px 5px 20px 0px;
 }
+
 .redux-group-tab .form-table tr th span:first-child{
 	font-weight: normal;
 	display:block;
@@ -377,6 +372,8 @@ a {
 .redux-main .redux-field-error input, .redux-main .redux-field-error textarea, .redux-main .redux-field-error select {
 	border-color:#B94A48;
 }
+
+
 
 /* reset nested tables for mce */
 .redux-group-tab .form-table tr td table.mceLayout,
@@ -748,16 +745,6 @@ label.radio, label.multicheck {
 	display: none;
 }
 
-.redux-main input.button-primary {
-	border-color: #21759B;
-	border-bottom-color: #1E6A8D;
-	-webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
-	box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
-}
-.redux-main .button, .redux-main .button-secondary, .redux-main .button-primary {
-	padding: 0 10px 1px;
-}
-
 .redux-main input.large-text {
 	width: 100%;
 }
@@ -875,7 +862,7 @@ label.radio, label.multicheck {
 	margin-top: 0;
 }
 
-img {
+.redux-main img {
 	max-width:100%; 
 	max-height:100%;
 }
@@ -919,7 +906,7 @@ img {
 		-moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, .2);
 		box-shadow: 2px 2px 8px rgba(0, 0, 0, .2);
 		border-width: 1px 1px 1px 0px;
-		z-index: 1;
+		z-index: 3;
 	}
 	.redux-group-tab-link-a:hover > span{
 		display: block;
@@ -975,6 +962,7 @@ img {
 
 .redux-main .field-desc {
 	clear: both;
+	font-size: 13px;
 }
 
 .redux-main .data-full li{
@@ -997,4 +985,17 @@ img {
 
 .redux-main .ui-helper-hidden-accessible{
     top:inherit;
+}
+
+.redux-group-tab .form-table:first-child tr th, .redux-group-tab .form-table:first-child tr td {
+	padding-top: 0 !important;
+}
+
+.redux-group-tab .form-table{
+	clear:none;
+	margin-top:0px !important;
+}
+
+.redux-group-tab .form-table tr:first-child th, .redux-group-tab .form-table tr:first-child td {
+	padding-top: 0;
 }

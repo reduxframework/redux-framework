@@ -14,7 +14,8 @@ class ReduxFramework_select extends ReduxFramework{
 		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
-    
+		
+            
     }
 	
 
@@ -27,6 +28,11 @@ class ReduxFramework_select extends ReduxFramework{
 	 * @since ReduxFramework 1.0.0
 	*/
 	function render(){
+
+		$sortable = (isset($this->field['sortable']) && $this->field['sortable']) ? ' select2-sortable"' : "";
+		if (!empty($sortable)) { // Dummy proofing  :P
+			$this->field['multi'] = true;
+		}
 
         if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
 			if (empty($this->field['args'])) {
@@ -65,12 +71,31 @@ class ReduxFramework_select extends ReduxFramework{
 			if ( isset($this->field['select2']) ) { // if there are any let's pass them to js
 				$select2_params = json_encode($this->field['select2']);
 				$select2_params = htmlspecialchars( $select2_params , ENT_QUOTES);
-				$select2_params = array();
+				
 				echo '<input type="hidden" class="select2_params" value="'. $select2_params .'">';
 			}
 
-			echo '<select '.$multi.' id="'.$this->field['id'].'-select" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item '.$this->field['class'].'"'.$width.' rows="6">';
+			if (isset($this->field['multi']) && $this->field['multi'] && isset($this->field['sortable']) && $this->field['sortable'] && !empty($this->value) && is_array($this->value)) {
+				$origOption = $this->field['options'];
+				$this->field['options'] = array();
+				foreach($this->value as $value) {
+					$this->field['options'][$value] = $origOption[$value];
+				}
+				if (count($this->field['options'])< count($origOption)) {
+					foreach ($origOption as $key=>$value) {
+						if (!in_array($key, $this->field['options'])) {
+							$this->field['options'][$key] = $value;
+						}
+					}
+				}
+			}
+		
+			$sortable = (isset($this->field['sortable']) && $this->field['sortable']) ? ' select2-sortable"' : "";
+			echo '<select '.$multi.' id="'.$this->field['id'].'-select" data-placeholder="'.$placeholder.'" name="'.$this->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item '.$this->field['class'].$sortable.'"'.$width.' rows="6">';
 				echo '<option></option>';
+
+
+
 
 				foreach($this->field['options'] as $k => $v){
 					if (is_array($this->value)) {
