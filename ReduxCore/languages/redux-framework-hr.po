@@ -1,12 +1,13 @@
 # 
 # Translators:
+# dariodev <dariodevcic@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
 "POT-Creation-Date: 2014-01-06 15:43:01+00:00\n"
-"PO-Revision-Date: 2014-01-02 06:29+0000\n"
-"Last-Translator: Dovy Paukstys <dovy@reduxframework.com>\n"
+"PO-Revision-Date: 2014-01-06 22:45+0000\n"
+"Last-Translator: dariodev <dariodevcic@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/wp-translations/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,12 +26,12 @@ msgstr ""
 #: ReduxCore/extensions/customizer/extension_customizer.php:341
 #: ReduxCore/framework.php:1232
 msgid "You have changes that are not saved. Would you like to save them now?"
-msgstr ""
+msgstr "Imate izmjene koje nisu spremljene. Želite li ih spremiti sada?"
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:342
 #: ReduxCore/framework.php:1233
 msgid "Are you sure? Resetting will lose all custom values."
-msgstr ""
+msgstr "Jeste li sigurni? Resetiranjem ćete izgubiti sve prilagođene vrijednosti."
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:343
 #: ReduxCore/framework.php:1235
@@ -536,24 +537,24 @@ msgstr ""
 
 #: class.redux-plugin.php:277
 msgid "Redux Framework has an embedded demo."
-msgstr ""
+msgstr "Redux Framework ima ugrađen demo."
 
 #: class.redux-plugin.php:277
 msgid "Click here to activate the sample config file."
-msgstr ""
+msgstr "Kliknite ovdje za aktivaciju probne konfiguracijske datoteke."
 
 #: class.redux-plugin.php:381
 msgid "Github Repo"
-msgstr ""
+msgstr "Github Repozitorij"
 
 #: class.redux-plugin.php:382
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Praćenje problema  "
 
 #: class.redux-plugin.php:387
 msgid "Deactivate Demo Mode"
-msgstr ""
+msgstr "Deaktiviraj demo način rada"
 
 #: class.redux-plugin.php:389
 msgid "Activate Demo Mode"
-msgstr ""
+msgstr "Aktiviraj demo način rada"
