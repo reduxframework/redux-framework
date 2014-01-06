@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Redux Framework\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
 "POT-Creation-Date: 2014-01-06 15:43:01+00:00\n"
-"PO-Revision-Date: 2014-01-06 17:25+0000\n"
+"PO-Revision-Date: 2014-01-06 17:41+0000\n"
 "Last-Translator: sandrobilbeisi <sandro.bilbeisi@gmail.com>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.com/projects/p/wp-translations/language/it_IT/)\n"
 "MIME-Version: 1.0\n"
@@ -290,7 +290,7 @@ msgstr "Trasparente"
 
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:73
 msgid "From "
-msgstr "Fa"
+msgstr "Da"
 
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:84
 msgid "To "
