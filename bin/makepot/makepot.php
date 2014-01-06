@@ -71,7 +71,7 @@ class Redux_Makepot {
 				'title'    => 'Front-end',
 				'file'     => $this->redux_path . 'ReduxCore/languages/redux-framework.pot',
 				'excludes' => array( 'sample/.*' ),
-				'includes' => array( 'ReduxCore/*', 'class.redux-plugin.php', 'redux-framework.php' ),
+				'includes' => array( ),
 			),
 		);
 
