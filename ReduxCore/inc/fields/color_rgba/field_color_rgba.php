@@ -95,8 +95,9 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
 
 	        $style = '';
 	        if ( !empty( $this->value ) ) {
+	        	$mode = ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ? $this->field['mode'] : 'color' );
 
-	        	$style .= 'color:'.$this->value.';';
+	        	$style .= $mode.':'.$this->value.';';
 
 				if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
 					$keys = implode(",", $this->field['output']);
