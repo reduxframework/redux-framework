@@ -212,7 +212,7 @@ class ReduxFramework_border extends ReduxFramework {
 
     public function output() {
 
-		if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && !isset( $this->field['compiler'] ) || !is_array( $this->field['compiler'] ) ) {
+		if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] ) || !is_array( $this->field['compiler'] ) ) ) {
 			return;
 		}
 
