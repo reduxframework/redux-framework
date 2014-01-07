@@ -49,34 +49,34 @@
 
     // Update the background preview
     $.reduxBackground.preview = function(selector) {
-    	var parent = selector.parents('.redux-container-background:first');
-    	var preview = $(parent).find('.body-background_previewer');
-    	
-    	if (!preview) { // No preview present
-    		return;
-    	}
+		var parent = selector.parents('.redux-container-background:first');
+		var preview = $(parent).find('.body-background_previewer');
 
-    	var split = parent.data('id')+'][';
-    	var css = 'height:'+preview.height()+'px;';
-    	$(parent).find('.redux-background-input').each(function() {
-    		var data = $(this).serializeArray();
-    		data = data[0];
-    		if (data && data.name.indexOf('background]') != -1) {
+		if (!preview) { // No preview present
+			return;
+		}
 
-    			data.name = data.name.split(split);
-    			data.name = data.name[1].replace(']', '');
-    			//data[0].name = s.replace(']', '');
-    			if (data.name == "background-image") {
-    				css += data.name+':url("'+data.value+'");';
-    			} else {
-    				css += data.name+':'+data.value+';';	
-    			}
-    		}
-    	});
+		var split = parent.data('id')+'][';
+		var css = 'height:'+preview.height()+'px;';
+		$(parent).find('.redux-background-input').each(function() {
+			var data = $(this).serializeArray();
+			data = data[0];
+			if (data && data.name.indexOf('background]') != -1) {
 
-    	preview.attr('style', css);
+				data.name = data.name.split(split);
+				data.name = data.name[1].replace(']', '');
+				//data[0].name = s.replace(']', '');
+				if (data.name == "background-image") {
+					css += data.name+':url("'+data.value+'");';
+				} else {
+					css += data.name+':'+data.value+';';	
+				}
+			}
+		});
 
-    };
+		preview.attr('style', css);
+
+	};
 
     // Add a file via the wp.media function
     $.reduxBackground.addImage = function (event, selector) {
@@ -155,7 +155,7 @@
 
 		// Finally, open the modal.
 		frame.open();
-	}
+	};
 
     // Update the background preview
     $.reduxBackground.removeImage = function(selector) {
