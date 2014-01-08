@@ -1430,7 +1430,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
                     	
                     	$th = "";
-                        if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" ) {
+                        if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
                             if (!empty($field['title'])) {
                                 $th = $field['title'] . $default_mark."";
@@ -1458,7 +1458,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
 						}	
 
-						if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
+						if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
 							$default_output = "";
 						    if (!is_array($field['default'])) {
 								if ( !empty( $field['options'][$field['default']] ) ) {
@@ -2243,7 +2243,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	                    	$field['description'] = $field['desc'];
 	                    }
                     
-                    echo ( isset( $field['description'] ) && $field['type'] != "info" && $field['type'] != "group" && !empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
+                    echo ( isset( $field['description'] ) && $field['type'] != "info"  && $field['type'] !== "section" && $field['type'] != "group" && !empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
 
                     echo '</fieldset>';
 

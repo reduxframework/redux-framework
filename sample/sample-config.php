@@ -260,7 +260,14 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'mode' => false, // Can be set to false to allow any media type, or can also be set to any mime type.
 						'desc'=> __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
 						'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-						),				
+						),	
+					array(
+                         'id'=>'section-media-start',
+                         'type' => 'section', 
+                         'title' => __('Media Options', 'redux-framework-demo'),
+                         'subtitle'=> __('With the "section" field you can create indent option sections.'),                            
+                         'indent' => true // Indent all options below until the next 'section' option is set.
+                         ),    									
 					array(
 						'id'=>'media',
 						'type' => 'media', 
@@ -272,7 +279,11 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
 						'default'=>array('url'=>'http://s.wordpress.org/style/images/codeispoetry.png'),
 						),
-
+					array(
+                         'id'=>'section-media-end',
+                         'type' => 'section', 
+                         'indent' => false // Indent all options below until the next 'section' option is set.
+                         ),  
 					array(
 						'id'=>'media-nourl',
 						'type' => 'media', 
@@ -727,7 +738,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'subtitle' => __('Allow your users to choose width, height, and/or unit.', 'redux-framework-demo'),
 						'desc' => __('You can enable or disable any piece of this field. Width, Height, or Units.', 'redux-framework-demo'),
 						'default' => array('width' => 200, 'height'=>'100', )
-						),												
+						),																
 					array(
 						'id'=>'body-font2',
 						'type' => 'typography',
@@ -1402,7 +1413,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 				'allow_sub_menu'     	=> true, // Show the sections below the admin menu item or not
 				'menu_title'			=> __( 'Sample Options', 'redux-framework-demo' ),
 	            'page'		 	 		=> __( 'Sample Options', 'redux-framework-demo' ),
-	            'google_api_key'   	 	=> '', // Must be defined to add google fonts to the typography module
+	            'google_api_key'   	 	=> 'AIzaSyAX_2L_UzCDPEnAHTG7zhESRVpMPS4ssII', // Must be defined to add google fonts to the typography module
 	            'global_variable'    	=> '', // Set a different name for your global variable other than the opt_name
 	            'dev_mode'           	=> true, // Show the time the page took to load, etc
 	            'customizer'         	=> true, // Enable basic customizer support
