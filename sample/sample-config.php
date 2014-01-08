@@ -389,7 +389,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 			            "title" => "Layout Manager Advanced",
 			            "subtitle" => "You can add multiple drop areas or columns.",
 			            "compiler"=>'true',
-			            'required' => array('switch-fold','equals','0'),	
+			            //'required' => array('switch-fold','equals','0'),	
 			            'options' => array(
 			                "enabled" => array(
 			                    "placebo" => "placebo", //REQUIRED!
@@ -404,6 +404,10 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 			                "backup" => array(
 			                    "placebo" => "placebo", //REQUIRED!
 			                ),                
+			            ),
+			            'limits' => array(
+			            	"disabled" => 1,
+			            	"backup" => 2,
 			            ),
 			        ),
 			        array(
