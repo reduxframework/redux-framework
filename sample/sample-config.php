@@ -1413,7 +1413,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 				'allow_sub_menu'     	=> true, // Show the sections below the admin menu item or not
 				'menu_title'			=> __( 'Sample Options', 'redux-framework-demo' ),
 	            'page'		 	 		=> __( 'Sample Options', 'redux-framework-demo' ),
-	            'google_api_key'   	 	=> 'AIzaSyAX_2L_UzCDPEnAHTG7zhESRVpMPS4ssII', // Must be defined to add google fonts to the typography module
+	            'google_api_key'   	 	=> '', // Must be defined to add google fonts to the typography module
 	            'global_variable'    	=> '', // Set a different name for your global variable other than the opt_name
 	            'dev_mode'           	=> true, // Show the time the page took to load, etc
 	            'customizer'         	=> true, // Enable basic customizer support

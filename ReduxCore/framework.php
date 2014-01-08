@@ -283,6 +283,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $this->args['page_title'] = __( 'Options', $this->args['domain'] );
             }
             $this->args = apply_filters( 'redux/args/' . $this->args['opt_name'], $this->args ); // Filter the args
+            $this->args = apply_filters( 'redux/options/' . $this->args['opt_name'] . '/args', $this->args ); // Filter the args
                
 
 
