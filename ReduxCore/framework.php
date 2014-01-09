@@ -1203,7 +1203,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     }
                                     $theField = new $field_class( $field, $this->options[$field['id']], $this );
                                     
-                                    if ( !wp_script_is( 'redux-field-'.$field['type'].'-js', 'enqueued' ) && class_exists($field_class) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
+                                    if ( !wp_script_is( 'redux-field-'.$field['type'].'-js', 'enqueued' ) && class_exists($field_class) && method_exists( $field_class, 'enqueue' ) ) {
                                         /** @noinspection PhpUndefinedMethodInspection */
                                         //echo "DOVY";
                                         $theField->enqueue();    
