@@ -159,11 +159,11 @@ class ReduxFramework_typography extends ReduxFramework {
                       $this->getGoogleFonts();
                   }
 
-                  if ( !isset( $this->googleFontHTML ) && !empty( $this->googleFontHTML ) ) {
-                    echo $this->googleFontHTML;
+                  if ( !isset( $this->parent->googleFontHTML ) && !empty( $this->parent->googleFontHTML ) ) {
+                    echo $this->parent->googleFontHTML;
                   } else if( file_exists( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' )) {
                     $googleHTML = $wp_filesystem->get_contents( ReduxFramework::$_dir.'inc/fields/typography/googlefonts.html' );
-                    $this->googleFontHTML = $googleHTML;
+                    $this->parent->googleFontHTML = $googleHTML;
                     echo $googleHTML;
                   }
               }
