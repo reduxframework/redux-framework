@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1038,6 +1037,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             //echo $this->args['page_parent'];
 
             if ( !isset( $_GET['page'] ) || $_GET['page'] != $this->args['page_slug'] ) {
+                if ($pagenow != "edit.php" && $pagenow != "page-new.php" && $pagenow != "post.php")
                 return;
             }
 
