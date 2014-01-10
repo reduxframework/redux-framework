@@ -1037,7 +1037,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             //echo $this->args['page_parent'];
 
             if ( !isset( $_GET['page'] ) || $_GET['page'] != $this->args['page_slug'] ) {
-                if ($pagenow != "edit.php" && $pagenow != "page-new.php" && $pagenow != "post.php")
+                if ($pagenow != "edit.php" && $pagenow != "post-new.php" && $pagenow != "post.php")
                 return;
             }
 
