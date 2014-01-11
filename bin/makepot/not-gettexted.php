@@ -234,7 +234,6 @@ if ( $included_files[0] == __FILE__ ) {
 	 */
 	exit( 'Locked' );
 
-	error_reporting(E_ALL);
 	$not_gettexted = new NotGettexted;
 	$not_gettexted->cli();
 }
