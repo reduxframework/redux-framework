@@ -1,3 +1,8 @@
+
+/*
+	Field Color (color)
+ */
+
 /*global jQuery, document, redux_change */
 (function($){
 	'use strict';
@@ -70,7 +75,7 @@
 				}
 			}
 		});
-	}
+	};
 
 })(jQuery);
 

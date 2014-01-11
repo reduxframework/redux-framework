@@ -42,10 +42,10 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
          * @access      public
          * @return      void
          */
-        public function __construct( $field = array(), $value = '', $parent = '' ) {
+        function __construct( $field = array(), $value ='', $parent ) {
         
-            parent::__construct( $parent->sections, $parent->args );
-
+            //parent::__construct( $parent->sections, $parent->args );
+            $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
         
@@ -66,6 +66,8 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                 echo '<ul class="redux-image-select">';
             
+                $x = 1;
+
                 foreach( $this->field['options'] as $k => $v ) {
 
                     if( !is_array( $v ) )
@@ -106,23 +108,47 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                     $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
 
                     $presets = '';
+                    $is_preset = false;
+
                     $this->field['class'] .= ' noUpdate ';
                     if( !empty( $this->field['presets'] ) && $this->field['presets'] && !empty( $v['presets'] ) ) {
 
                         if( !is_array( $v['presets'] ) )
                             $v['presets'] = json_decode( $v['presets'], true );
+                        
+                        // Only highlight the preset if it's the same
+                        if ($selected) {
+                            foreach($v['presets'] as $pk => $pv) {
+                                if ( empty($pv) && isset( $this->parent->options[$pk] ) && !empty( $this->parent->options[$pk] ) ) {
+                                    $selected = false;
+                                } else if ( !empty( $pv ) && !isset( $this->parent->options[$pk] ) ) {
+                                    $selected = false;
+                                } else if ( isset( $this->parent->options[$pk] ) && $this->parent->options[$pk] != $pv ) {
+                                    $selected = false;
+                                }
+                                if ( !$selected ) { // We're still not using the same preset. Let's unset that shall we?
+                                    $this->value = "";
+                                    break;
+                                }
+                            }  
+                            
+                        }
+                        
 
                         $v['presets']['redux-backup'] = 1;
 
                         $presets = ' data-presets="' . htmlspecialchars( json_encode( $v['presets'] ), ENT_QUOTES, 'UTF-8' ) . '"';
-                        $selected = '';
+                        $is_preset = true;
+                        //$selected = '';
                         $this->field['class'] .= 'redux-presets';
                     }               
 
-                    echo '<li class="redux-image-select">';
-                    echo '<label class="' . $selected . ' redux-image-select-' . $this->field['id'] . '" for="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '">';
+                    $is_preset_class = $is_preset?'-preset-':'';
 
-                    echo '<input type="radio" class="' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
+                    echo '<li class="redux-image-select">';
+                    echo '<label class="' . $selected . ' redux-image-select' . $is_preset_class . $this->field['id'] . '_' . $x . '" for="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '">';
+
+                    echo '<input type="radio" class="' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
                     
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         echo '<span class="tiles" style="background-image: url(' . $v['img'] . ');" rel="'.$v['img'].'"">&nbsp;</span>';
@@ -135,6 +161,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                     echo '</label>';
                     echo '</li>';
+                    $x++;
                 }
                 
                 echo '</ul>';       
@@ -157,13 +184,11 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
         
             wp_enqueue_script(
                 'redux-field-image-select-js', 
-                ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.min.js', 
+                ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.js', 
                 array( 'jquery' ),
                 time(),
                 true
             );
-
-            wp_enqueue_script('jquery-tipsy');
 
             wp_enqueue_style(
                 'redux-field-image-select-css', 

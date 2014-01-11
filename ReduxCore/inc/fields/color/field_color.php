@@ -42,14 +42,14 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 	 	 * @access		public
 	 	 * @return		void
 		 */
-		public function __construct( $field = array(), $value ='', $parent ) {
-		
-			parent::__construct( $parent->sections, $parent->args );
-
+        function __construct( $field = array(), $value ='', $parent ) {
+        
+			//parent::__construct( $parent->sections, $parent->args );
+			$this->parent = $parent;
 			$this->field = $field;
 			$this->value = $value;
-		
-		}
+        
+        }
 	
 		/**
 		 * Field Render Function.
@@ -62,7 +62,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 		 */
 		public function render() {
 
-			echo '<input data-id="'.$this->field['id'].'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
+			echo '<input data-id="'.$this->field['id'].'" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . ( isset($this->field['default']) ? $this->field['default'] : "" ) . '" />';
 
 			if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
 				$tChecked = "";
@@ -89,7 +89,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 
 			wp_enqueue_script(
 				'redux-field-color-js', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.min.js', 
+				ReduxFramework::$_url . 'inc/fields/color/field_color.js', 
 				array( 'jquery', 'wp-color-picker' ),
 				time(),
 				true
@@ -101,6 +101,32 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 				time(),
 				true
 			);
+		
+		}
+
+		public function output() {
+
+			if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] ) || !is_array( $this->field['compiler'] ) ) ) {
+				return;
+			}
+
+	        $style = '';
+	        if ( !empty( $this->value ) ) {	        	
+    			$mode = ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ? $this->field['mode'] : 'color' );
+
+	        	$style .= $mode.':'.$this->value.';';
+
+				if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+					$keys = implode(",", $this->field['output']);
+					$this->parent->outputCSS .= $keys . "{" . $style . '}';  
+				}
+
+				if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+					$keys = implode(",", $this->field['compiler']);
+					$this->parent->compilerCSS .= $keys . "{" . $style . '}';  
+				}	
+
+	        }
 		
 		}
 	

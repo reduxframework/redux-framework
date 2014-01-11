@@ -8,14 +8,14 @@ class ReduxFramework_switch extends ReduxFramework{
 	 *
 	 * @since ReduxFramework 0.0.4
 	*/
-	function __construct($field = array(), $value ='', $parent){
-		
-		parent::__construct($parent->sections, $parent->args);
+	function __construct( $field = array(), $value ='', $parent ) {
+    
+		//parent::__construct( $parent->sections, $parent->args );
+		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
-		//$this->render();
-		
-	}//function
+    
+    }
 	
 
 
@@ -54,7 +54,7 @@ class ReduxFramework_switch extends ReduxFramework{
 		echo '<div class="switch-options">';
 			echo '<label class="cb-enable'. $cb_enabled .'" data-id="'.$this->field['id'].'"><span>'. $on .'</span></label>';
 			echo '<label class="cb-disable'. $cb_disabled .'" data-id="'.$this->field['id'].'"><span>'. $off .'</span></label>';
-			echo '<input type="hidden" class="checkbox checkbox-input'.$this->field['class'].'" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" />';
+			echo '<input type="hidden" class="checkbox checkbox-input'.$this->field['class'].'" id="'.$this->field['id'].'" name="'.$this->parent->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" />';
 		echo '</div>';
 
 	}//function
@@ -70,7 +70,7 @@ class ReduxFramework_switch extends ReduxFramework{
 		
 		wp_enqueue_script(
 			'redux-field-switch-js', 
-			ReduxFramework::$_url.'inc/fields/switch/field_switch.min.js', 
+			ReduxFramework::$_url.'inc/fields/switch/field_switch.js', 
 			array('jquery'),
 			time(),
 			true

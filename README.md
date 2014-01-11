@@ -1,6 +1,16 @@
-# Redux Options Framework [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework)
+# Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/ReduxFramework.png?branch=master)](https://travis-ci.org/ReduxFramework/ReduxFramework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework)
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
+
+## SMOF (Simple Modified Option Users) Converter! ##
+
+Hot off the press, our Redux Converter plugin. It takes your SMOF instance, and allows you to try out Redux without any fear. It also spits out valid PHP source for you if you want to migrate complete with data migration! Give it a try today. It will be in the WordPress.org repo shortly.  ;)
+https://github.com/ReduxFramework/redux-converter
+
+## Help Us Translate Redux ##
+
+Please head over to the wiki to learn how you can help us translate Redux quickly. Any and all are welcome. We appreciate your help!
+https://github.com/ReduxFramework/ReduxFramework/wiki/translate
 
 ## Getting Started with Redux ##
 
@@ -55,6 +65,84 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+= 3.1.4 =
+* Fixed error in redux-framework.php.
+* Added select_image field.
+
+= 3.1.3 =
+* Fixed a few undefined variables
+* Removed old code from the repo.
+* Fix for validation.
+* Remove the compiler hook by default.
+* Fix to sortable field.
+* Added an extra check for link color. Removes user error.
+* Localization updates.
+* Error in slides.
+* Fixed the info box bug with spacing and padding.
+* Fixed the first item in each section having WAY too much padding.  ;)
+* Fixed section reset issue where values weren't being saved to the db properly.
+
+= 3.1.2 =
+* Feature - Sortable select boxes!
+* Feature - Reset a section only or the whole panel!
+* New Field - RGBA Color Field!
+* Improvement - Use of REM throughout.
+* Fixed Typography - Fix output option and various small bugs.
+* Fixed Border - Fix output option and various small bugs.
+* Fixed Dimensions - Fix output option and various small bugs.
+* Fixed Image_select - Various small bugs.
+* Fixed Slides - Various small bugs.
+* Fixed Sortable - Using native jQuery UI library same as within WordPress.
+* Fixed Slider and Spinner Input Field - Values now move to the closest valid value in regards to the step, automatically.
+* Fixed Ace Editor
+* FEATURE - All CSS/JS files are compiled into a single file now! Speed improvements for the backend. 
+* Fix in how WordPress data is received, improved some output.
+* Fix for various fields not triggering fold/compiler/save.
+* Fixed elusive icons to use the new version and classes.
+* Fixed media thumb to only be the thumbnail version.
+* Fixed admin https error with WordPress core not renaming URL.
+* Placeholders throughout the framework are now properly there.
+* Feature - Setting to not save defaults to database on load.
+* Fixed - Computability issue with GT3 builder.
+* Fixed localization issue with default values.
+* Language - Added Russian
+* Feature - Media now can have any content type passed in to limit content types.
+* Allow negative values in typography and other fields.
+* WordPress 3.8 computability.
+* CSS validation issue.
+* Feature - User contributed text direction feature.
+* EDD Extension now fully function for plugins or themes.
+* Removed get_theme_data() fallbacks, we're well pass WordPress 3.4 now.  ;)
+* A ton of other small updates and improvements.
+
+= 3.1.0 =
+* Fix Issue 224 - Image Select width was breaking the panel.
+* Fix Issue 181 - Broken panel in firefox
+* Fix Issue 225 - 0px typography bug. Thanks @partnuz.
+* Fix Issue 228 - Resolved a duplicated enqueue on color_link field. Thanks @vertigo7x.
+* Fix Issue 231 - Field spacing bug fixes.
+* Fix Issue 232 & 233 - Dimensions: bug fix with units and multiple units. Thanks @kpodemski
+* Fix Issue 234 - Pass options as a ref so validating actions can modify/sanitize them. Thanks @ZeroBeeOne
+* Fix Issue 222 - Tab cookie function wasn't working.
+* Feature - Pass params to Select2. Thanks @andreilupu
+* Fix Issue 238 - Fix for conditional output. Thanks @partnuz.
+* Fix Issue 211 - Google Web font wasn't loading at first init of theme.
+* Fix Issue 210 - Elusive Icons update. Changed classes to force use of full elusive name.
+* Fix Issue 247 - Media thumbnails were not showing. Also fixed media to keep the largest file, but display the small version in the panel as a thumb. Thanks @kwayyinfotech.
+* Fix Issue 144 - JS error when no item found in slider.
+* Fix Issue 246 - Typography output errors.
+* Feature & Issue 259 - Multi-Text now support validation!
+* Fix Issue 248/261 - Links color issue. Also fixed color validation.
+* Feature & Issue 262 - Now registered sidebars can be used as a data type.
+* Fix Issue 194/276 - Custom taxonomy terms now passing properly. Thanks @kprovance.
+* Feature & Issue 273 - Argument save_defaults: Disable the auto-save of the default options to the database if not set.
+* Feature - Docs now being moved to the wiki for community participation.
+* Issue 283 - Date placeholder. Thanks @kprovance.
+* Issue 285 - HTTPS errors on admin. Known WordPress bug. Resolved.
+* Fix Issue 288 - Float values now possible for border, dimensions, and spacing.
+* Feature - Media field can now accept non-image files with a argument being set.
+* Fix Issue 252 - Post Type data wasn't working properly. Thanks @Abu-Taymiyyah.
+* Fix Issue 213 - Radio and Button Set wasn't folding.
 
 = 3.0.9 =
 * Feature - Added possibility to set default icon class for all sections and tabs.
