@@ -75,9 +75,6 @@ class Redux_Makepot {
 			),
 		);
 
-		// Ignore some strict standards notices caused by extract/extract.php
-		error_reporting(E_ALL);
-
 		// Load required files and objects
 		require_once 'not-gettexted.php';
 		require_once 'pot-ext-meta.php';
