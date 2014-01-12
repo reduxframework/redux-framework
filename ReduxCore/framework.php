@@ -994,7 +994,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $section['title'],
                                 $this->args['page_permissions'],
                                 $this->args['page_slug'] . '&tab=' . $k,
-                                create_function( '$a', "return null;" )
+                                '__return_null'
                             );
                         }
 
@@ -1009,7 +1009,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             __( 'Import / Export', $this->args['domain'] ),
                             $this->args['page_permissions'],
                             $this->args['page_slug'] . '&tab=import_export_default', 
-                            create_function( '$a', "return null;" )
+                            '__return_null'
                         );
                     }
 
@@ -1020,7 +1020,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             __( 'Options Object', $this->args['domain'] ),
                             $this->args['page_permissions'],
                             $this->args['page_slug'] . '&tab=dev_mode_default',
-                            create_function('$a', "return null;")
+                            '__return_null'
                         );
                     }
 
@@ -1031,7 +1031,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             __( 'System Info', $this->args['domain'] ),
                             $this->args['page_permissions'],
                             $this->args['page_slug'] . '&tab=system_info_default',
-                            create_function( '$a', "return null;" )
+                            '__return_null'
                         );
                     }
                 }
