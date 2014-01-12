@@ -851,12 +851,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				}				
 				$parents[] = $fold;
 			}
-
-
-//*/
             
 			return $this->folds;
-		    
 		}
 
 		/**
@@ -1037,8 +1033,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
             }
             
-            add_action( 'load-' . $this->page, array( &$this, '_load_page' ) );
-        }
+            add_action( "load-{$this->page}", array( &$this, '_load_page' ) );
+        } // _options_page()
 
         /**
          * Enqueue CSS/JS for options page
@@ -1063,7 +1059,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					/** @noinspection PhpUnusedLocalVariableInspection */
 					foreach( $section['fields'] as $fieldk => $field ) {
 						if( isset( $field['type'] ) && $field['type'] != "callback"  ) {
-                            $field_class = 'ReduxFramework_' . $field['type'];
+                            $field_class = "ReduxFramework_{$field['type']}";
                             if( !class_exists( $field_class ) ) {
 
                                 if ( !isset( $field['compiler'] ) ) {
@@ -1783,7 +1779,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 */
         public function _validate_options( $plugin_options ) {
 
-            set_transient( 'redux-saved-' . $this->args['opt_name'], '1', 1000 );
+            set_transient( "redux-saved-{$this->args['opt_name']}", '1', 1000 );
 
             if( !empty( $plugin_options['import'] ) ) {
                 if( $plugin_options['import_code'] != '' ) {
@@ -1917,7 +1913,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
 
                         if( isset( $field['validate'] ) ) {
-                            $validate = 'Redux_Validation_' . $field['validate'];
+                            $validate = "Redux_Validation_{$field['validate']}";
 
                             if( !class_exists( $validate ) ) {
 
@@ -2004,9 +2000,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _options_page_html() {
 
-            $saved = get_transient( 'redux-saved-' . $this->args['opt_name'] );
+            $saved = get_transient( "redux-saved-{$this->args['opt_name']}" );
             if ( $saved ) {
-            	delete_transient( 'redux-saved-' . $this->args['opt_name'] );	
+            	delete_transient( "redux-saved-{$this->args['opt_name']}" );	
             }
             echo '<div class="wrap"><h2></h2></div>'; // Stupid hack for Wordpress alerts and warnings
 
@@ -2035,7 +2031,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
 			echo '<input type="hidden" id="currentSection" name="' . $this->args['opt_name'] . '[redux-section]" value="" />';
-            settings_fields( $this->args['opt_name'] . '_group' );
+            
+            settings_fields( "{$this->args['opt_name']}_group" );
 
             // Last tab?
             if( empty( $this->options['last_tab'] ) )
@@ -2495,7 +2492,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             if( isset( $field['type'] ) ) {
-                $field_class = 'ReduxFramework_' . $field['type'];
+                $field_class = "ReduxFramework_{$field['type']}";
 
                 if( !class_exists( $field_class ) ) {
 //                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
