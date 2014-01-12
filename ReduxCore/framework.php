@@ -515,15 +515,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 					update_option( $this->args['opt_name'], $value );
 				}
 
-				// Set a global variable by the global_variable argument.
-				if ( $this->args['global_variable'] ) {
-					$option_global = $this->args['global_variable'];
-					/**
-					 * filter 'redux/options/{opt_name}/global_variable'
-					 */
-                    $value = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $value );
-					$GLOBALS[ $option_global ] = $value;					
-				}
+				// set global?
+				$this->maybe_set_global_variable();
+
 				/**
 				 * action 'redux-saved-{opt_name}'
 				 * @deprecated
@@ -563,15 +557,28 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$results = $defaults;
 				$this->set_options($results);
 			}	
-			// Set a global variable by the global_variable argument.
-			if ( $this->args['global_variable'] ) {
-				$options = $this->args['global_variable'];
-				global $$options;
-                $result = apply_filters( 'redux/options/'.$this->args['opt_name'].'/global_variable', $result );
-				$$options = $result;			
-			}
+			// set global?
+			$this->maybe_set_global_variable();
 			//print_r($result);
 			return $result;
+		}
+
+		/**
+		 * Maybe set a global variable by the global_variable argument
+		 *
+		 * @return  bool  (global was set)
+		 */
+		function maybe_set_global_variable() {
+			if ( $this->args['global_variable'] ) {
+				$option_global = $this->args['global_variable'];
+				/**
+				 * filter 'redux/options/{opt_name}/global_variable'
+				 */
+				$value = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $value );
+				$GLOBALS[ $option_global ] = $value;
+				return true;					
+			}
+			return false;
 		}
 
         /**
