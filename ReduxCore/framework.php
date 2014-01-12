@@ -481,10 +481,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 				// Set a global variable by the global_variable argument.
 				if ( $this->args['global_variable'] ) {
-					$options = $this->args['global_variable'];
-					global $$options;
-                    $value = apply_filters( 'redux/options/'.$this->args['opt_name'].'/global_variable', $value );
-					$$options = $value;					
+					$option_global = $this->args['global_variable'];
+                    $value = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $value );
+					$GLOBALS[ $option_global ] = $value;					
 				}
 				do_action( 'redux-saved-' . $this->args['opt_name'] , $value ); // REMOVE
                 do_action( 'redux/options/'.$this->args['opt_name'].'/saved', $value );
