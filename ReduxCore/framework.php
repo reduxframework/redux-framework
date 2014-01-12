@@ -1656,10 +1656,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $th .= '<div id="'.$field['id'].'-settings" style="display:none;"><pre>'.var_export($this->sections[$k]['fields'][$fieldk], true).'</pre></div>';
                             $th .= '<br /><a href="#TB_inline?width=600&height=800&inlineId='.$field['id'].'-settings" class="thickbox"><small>View Source</small></a>';
                         }
-                        do_action( 'redux/options/'.$this->args['opt_name'].'/field/'.$field['type'].'/register', $field);
-                        extract($this->check_dependencies($field));
-                        add_settings_field( $fieldk . '_field', $th, array( &$this, '_field_input' ), $this->args['opt_name'] . $k . '_section_group', $this->args['opt_name'] . $k . '_section', $field ); // checkbox
+                        /**
+                         * action 'redux/options/{opt_name}/field/field.type}/register'
+                         */
+                        do_action( "redux/options/{$this->args['opt_name']}/field/{$field['type']}/register", $field );
 
+                        extract($this->check_dependencies($field));
+                        
+                        add_settings_field( 
+                        	"{$fieldk}_field",
+                        	$th,
+                        	array( &$this, '_field_input' ),
+                        	"{$this->args['opt_name']}{$k}_section_group",
+                        	"{$this->args['opt_name']}{$k}_section",
+                        	$field
+                    	); // checkbox
                     }
                 }
             }
@@ -1679,12 +1690,24 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$this->set_options( $this->options );
 			}
 
-			if ( get_transient( 'redux-compiler-' . $this->args['opt_name'] ) ) {
+			if ( get_transient( "redux-compiler-{$this->args['opt_name']}" ) ) {
                 $this->args['output_tag'] = false;
                 $this->_enqueue_output();
-				do_action( 'redux-compiler-' . $this->args['opt_name'], $this->options, $this->compilerCSS ); // REMOVE
-                do_action( 'redux/options/' . $this->args['opt_name'] . '/compiler', $this->options, $this->compilerCSS );
-                delete_transient( 'redux-compiler-' . $this->args['opt_name'] );
+                /**
+                 * action 'redux-compiler-{opt_name}'
+                 * @deprecated
+                 * @param array options
+                 * @param string CSS that get sent to the compiler hook
+                 */
+				do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS ); // REMOVE
+                /**
+                 * action 'redux/options/{opt_name}/compiler'
+                 * @param array options
+                 * @param string CSS that get sent to the compiler hook
+                 */
+                do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS );
+
+                delete_transient( "redux-compiler-{$this->args['opt_name']}" );
 			}				
 
         }
