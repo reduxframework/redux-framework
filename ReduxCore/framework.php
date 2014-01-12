@@ -205,7 +205,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 ),
             );  
 
-        }      
+        } // ::init() 
 
         public $framework_url       = 'http://www.reduxframework.com/';
 		public $instance			= null;
@@ -376,7 +376,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Loaded hook
             do_action( 'redux/loaded', $this );
 
-		}
+		} // __construct()
 
 		/**
 		 * Load the plugin text domain for translation.
@@ -685,7 +685,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			}//if
             
 			return $data;
-		}		
+		} // get_wordpress_data()
 
         /**
          * ->show(); This is used to echo and option value from the options array
@@ -2400,8 +2400,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         
             return $data_string;
         } 
-    } // class
+    } // ReduxFramework
 
     do_action( 'redux/init', ReduxFramework::init() );
 
-} // if
+} // !class_exists ?
