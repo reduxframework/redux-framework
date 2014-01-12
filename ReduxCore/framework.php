@@ -2091,13 +2091,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Warning bar
             if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $saved == '1' ) {
                 if( isset( $this->options['REDUX_imported'] ) && $this->options['REDUX_imported'] === 1 ) {
-                    echo '<div id="redux-imported">' . apply_filters( 'redux-imported-text-' . $this->args['opt_name'], '<strong>' . __( 'Settings Imported!', $this->args['domain'] ) ) . '</strong></div>';
+                	/**
+                	 * filter 'redux-imported-text-{opt_name}'
+                	 */
+                    echo '<div id="redux-imported"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', $this->args['domain'] ) ) . '</strong></div>';
                 } else {
-                    echo '<div id="redux-save">' . apply_filters( 'redux-saved-text-' . $this->args['opt_name'], '<strong>'.__( 'Settings Saved!', $this->args['domain'] ) ) . '</strong></div>';
+                	/**
+                	 * filter 'redux-saved-text-{opt_name}'
+                	 */
+                    echo '<div id="redux-save"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', $this->args['domain'] ) ) . '</strong></div>';
                 }
             }
 
-            echo '<div id="redux-save-warn">' . apply_filters( 'redux-changed-text-' . $this->args['opt_name'], '<strong>'.__( 'Settings have changed, you should save them!', $this->args['domain'] ) ) . '</strong></div>';
+            /**
+             * filter 'redux-changed-text-{opt_name}'
+             */
+            echo '<div id="redux-save-warn"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', $this->args['domain'] ) ) . '</strong></div>';
             echo '<div id="redux-field-errors"><strong><span></span> ' . __( 'error(s) were found!', $this->args['domain'] ) . '</strong></div>';
             echo '<div id="redux-field-warnings"><strong><span></span> ' . __( 'warning(s) were found!', $this->args['domain'] ) . '</strong></div>';
 
