@@ -216,30 +216,42 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'google_api_key'     => '', // Must be defined to add google fonts to the typography module
             'last_tab'           => '',
             'menu_icon'          => '',
-            'menu_title'         => '',
+            'menu_title'         => '', // menu title/text
             'page_icon'          => 'icon-themes',
-            'page_title'         => '',
-            'page_slug'          => '_options',
+            'page_title'         => '', // option page title
+            'page_slug'          => '_options', // ie: {page_parent}?page=_options
             'page_permissions'   => 'manage_options',
-            'menu_type'          => 'menu',
-            'page_parent'        => 'themes.php',
+            'menu_type'          => 'menu', // ('menu'|'submenu')
+            'page_parent'        => 'themes.php', // requires menu_type = 'submenu'
             'page_priority'      => null,
-            'allow_sub_menu'     => true,
+            'allow_sub_menu'     => true, // allow submenus to be added if menu_type == menu
             'save_defaults'      => true, // Save defaults to the DB on it if empty
-            'show_import_export' => true, // REMOVE
-            'dev_mode'           => false, // REMOVE
-            'system_info'        => false, // REMOVE
             'footer_credit'      => '',
             'help_tabs'          => array(),
             'help_sidebar'       => '', // __( '', $this->args['domain'] );
             'database'           => '', // possible: options, theme_mods, theme_mods_expanded, transient
             'customizer'         => false, // setting to true forces get_theme_mod_expanded
-            'global_variable'    => '',
+            'global_variable'    => false, // true: fills global ${opt_name} with opt values
             'output'             => true, // Dynamically generate CSS
             'output_tag'         => true, // Print Output Tag
             'transient_time'     => '',
             'default_show'       => false, // If true, it shows the default value
             'default_mark'       => '', // What to print by the field's title if the value shown is default
+            /**
+             * 'show_import_export'
+             * @deprecated
+             */
+            'show_import_export' => true, // REMOVE
+            /**
+             * 'dev_mode'
+             * @deprecated
+             */
+            'dev_mode'           => false, // REMOVE
+            /**
+             * 'system_info'
+             * @deprecated
+             */
+            'system_info'        => false, // REMOVE
         );
 
         public $sections            = array(); // Sections and fields
