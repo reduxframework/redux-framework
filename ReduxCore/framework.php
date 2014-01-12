@@ -482,11 +482,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				// Set a global variable by the global_variable argument.
 				if ( $this->args['global_variable'] ) {
 					$option_global = $this->args['global_variable'];
+					/**
+					 * filter 'redux/options/{opt_name}/global_variable'
+					 */
                     $value = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $value );
 					$GLOBALS[ $option_global ] = $value;					
 				}
-				do_action( 'redux-saved-' . $this->args['opt_name'] , $value ); // REMOVE
-                do_action( 'redux/options/'.$this->args['opt_name'].'/saved', $value );
+				/**
+				 * action 'redux-saved-{opt_name}'
+				 * @deprecated
+				 */
+				do_action( "redux-saved-{$this->args['opt_name']}", $value ); // REMOVE
+				/**
+				 * action 'redux/options/{opt_name}/saved'
+				 */
+                do_action( "redux/options/{$this->args['opt_name']}/saved", $value );
 			}
 		}
 
