@@ -1385,6 +1385,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             /**
              * action 'redux-enqueue-{opt_name}'
+             * @deprecated
              * @param  object $this ReduxFramework
              */
             do_action( "redux-enqueue-{$this->args['opt_name']}", $this ); // REMOVE
@@ -2017,6 +2018,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             /**
              * action 'redux-page-before-form-{opt_name}'
+             * @deprecated
              */
             do_action( "redux-page-before-form-{$this->args['opt_name']}" ); // Remove
             /**
