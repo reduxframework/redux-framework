@@ -71,6 +71,19 @@ class ReduxFramework_typography extends ReduxFramework {
             'font-size'=>'',
         );
 
+
+	// Since fonts declared is CSS (@font-face) are not rendered in the preview,
+	// they can be declared in a CSS file and passed here so they DO display in
+	// font preview.  Do NOT pass style.css in your theme, as that will mess up
+	// admin page styling.  It's recommended to pass a CSS file with ONLY font 
+	// declarations.
+	
+	// If field is set and not blank, then enqueue field
+        if (isset($this->field['ext-font-css']) && $this->field['ext-font-css'] != ''){
+            wp_register_style('redux-external-fonts', $this->field['ext-font-css']);
+            wp_enqueue_style('redux-external-fonts');
+        }
+
         $this->value = wp_parse_args( $this->value, $defaults );
 
         if (empty($this->field['units']) && !empty($this->field['default']['units'])) {
