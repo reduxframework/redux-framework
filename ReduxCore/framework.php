@@ -1185,7 +1185,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             wp_register_style(
                 'jquery-ui-css',
-                apply_filters( "redux/page/{$this->args[opt_name]}/enqueue/jquery-ui-css", self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
+                apply_filters( "redux/page/{$this->args['opt_name']}/enqueue/jquery-ui-css", self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 '',
                 filemtime( self::$_dir . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ), // todo - version should be based on above post-filter src
                 'all'
