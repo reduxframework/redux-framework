@@ -299,11 +299,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             /**
              * filter 'redux/args/{opt_name}'
+             * @param  array $args  ReduxFramework configuration
              */
             $this->args = apply_filters( "redux/args/{$this->args['opt_name']}", $this->args );
 
             /**
              * filter 'redux/options/{opt_name}/args'
+             * @param  array $args  ReduxFramework configuration
              */
             $this->args = apply_filters( "redux/options/{$this->args['opt_name']}/args", $this->args );
                
@@ -341,15 +343,18 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 /**
 	             * filter 'redux-sections'
 	             * @deprecated
+                 * @param  array $sections field option sections
 	             */
                 $this->sections = apply_filters('redux-sections', $sections); // REMOVE LATER
                 /**
                  * filter 'redux-sections-{opt_name}'
                  * @deprecated
+                 * @param  array $sections field option sections
                  */
                 $this->sections = apply_filters("redux-sections-{$this->args['opt_name']}", $this->sections); // REMOVE LATER
                 /**
 	             * filter 'redux/options/{opt_name}/sections'
+                 * @param  array $sections field option sections
 	             */
                 $this->sections = apply_filters("redux/options/{$this->args['opt_name']}/sections", $this->sections);
 
@@ -415,8 +420,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			 * Locale for text domain
 			 *
 			 * filter 'redux/textdomain/{opt_name}'
-			 *
-			 * @param  string  $this->args['domain']	text domain
+			 * @param string     The locale of the blog or from the 'locale' hook
+			 * @param string     $this->args['domain']	text domain
 			 */
             $locale = apply_filters( "redux/textdomain/{$this->args['opt_name']}", get_locale(), $this->args['domain'] );
 
@@ -573,6 +578,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$option_global = $this->args['global_variable'];
 				/**
 				 * filter 'redux/options/{opt_name}/global_variable'
+                 * @param array $value  option value to set global_variable with
 				 */
 				$value = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $value );
 				$GLOBALS[ $option_global ] = $value;
@@ -592,10 +598,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			/**
 			 * filter 'redux/options/{opt_name}/wordpress_data/{type}/'
 			 * @deprecated
+             * @param string $data
 			 */
             $data = apply_filters( "redux/options/{$this->args['opt_name']}/wordpress_data/$type/", $data ); // REMOVE LATER
             /**
 			 * filter 'redux/options/{opt_name}/data/{type}'
+             * @param string $data
 			 */
             $data = apply_filters( "redux/options/{$this->args['opt_name']}/data/$type", $data ); 
 
@@ -707,10 +715,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 						/**
 						 * filter 'redux-font-icons'
 						 * @deprecated
+                         * @param array [description]
 						 */
 						$font_icons = apply_filters( 'redux-font-icons', array() ); // REMOVE LATER
                         /**
                          * filter 'redux/font-icons'
+                         * @param array [description]
                          */
                         $font_icons = apply_filters( 'redux/font-icons', $font_icons );
 						
@@ -787,6 +797,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
             /**
              * filter 'redux/options/{opt_name}/defaults'
+             * @param array $defaults  option default values
              */
             $this->options_defaults = apply_filters( "redux/options/{$this->args['opt_name']}/defaults", $this->options_defaults );
 
@@ -1071,8 +1082,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                  * Field class file
                                  * 
                                  * filter 'redux/{opt_name}/field/class/{field.type}
-                                 * 
-                                 * @param array $field
+                                 * @param string        field class file
+                                 * @param array $field  field config data
                                  */
                                 $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
                                 
@@ -1283,8 +1294,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                              * Field class file
                              * 
                              * filter 'redux/{opt_name}/field/class/{field.type}
-                             * 
-                             * @param array $field
+                             * @param string        field class file path
+                             * @param array $field  field config data
                              */
                             $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
                                 
@@ -1544,10 +1555,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // DOVY! Replace $k with $section['id'] when ready
                 /**
                  * filter 'redux-section-{index}-modifier-{opt_name}'
+                 * @param array $section  section configuration
                  */
                 $section = apply_filters( "redux-section-{$k}-modifier-{$this->args['opt_name']}", $section );
                 /**
                  * filter 'redux/options/{opt_name}/section/{section.id}'
+                 * @param array $section  section configuration
                  */
                 $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
 		
@@ -1629,10 +1642,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			            /**
 			             * filter 'redux-field-{field.id}modifier-{opt_name}'
 			             * @deprecated
+                         * @param array $field  field config
 			             */
 			            $field = apply_filters( "redux-field-{$field['id']}modifier-{$this->args['opt_name']}", $field ); // REMOVE LATER
 			            /**
 			             * filter 'redux/options/{opt_name}/field/{field.id}'
+                         * @param array $field  field config
 			             */
                         $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}", $field );
 						
@@ -1738,12 +1753,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 	/**
                 	 * filter 'redux-extensionclass-load'
                 	 * @deprecated
-                	 * @param string $extension_class 	Extension class name
+                     * @param string                    extension class file path
+                	 * @param string $extension_class 	extension class name
                 	 */
                     $class_file = apply_filters( "redux-extensionclass-load", "$path/$folder/extension_{$folder}.php", $extension_class ); // REMOVE LATER
                     /**
                      * filter 'redux/extension/{opt_name}/{folder}'
-                     * @param string $extension_class 	Extension class name
+                     * @param string                    extension class file path
+                     * @param string $extension_class 	extension class name
                      */
                     $class_file = apply_filters( "redux/extension/{$this->args['opt_name']}/$folder", "$path/$folder/extension_{$folder}.php", $class_file );
 
@@ -1921,12 +1938,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             	/**
                             	 * filter 'redux-validateclass-load'
                             	 * @deprecated
-                            	 * @param  string $validate  Class name
+                                 * @param string             validation class file path
+                            	 * @param string  $validate  validation class name
                             	 */
                                 $class_file = apply_filters( "redux-validateclass-load", self::$_dir . "inc/validation/{$field['validate']}/validation_{$field['validate']}.php", $validate ); // REMOVE LATER
                                 /**
                                  * filter 'redux/validate/{opt_name}/class/{field.validate}'
-                                 * @param  string $class_file
+                                 * @param string                validation class file path
+                                 * @param string  $class_file   validation class file path
                                  */
                                 $class_file = apply_filters( "redux/validate/{$this->args['opt_name']}/class/{$field['validate']}", self::$_dir . "inc/validation/{$field['validate']}/validation_{$field['validate']}.php", $class_file );
 
@@ -2092,11 +2111,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if( isset( $this->options['REDUX_imported'] ) && $this->options['REDUX_imported'] === 1 ) {
                 	/**
                 	 * filter 'redux-imported-text-{opt_name}'
+                     * @param string  translated "settings imported" text
                 	 */
                     echo '<div id="redux-imported"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', $this->args['domain'] ) ) . '</strong></div>';
                 } else {
                 	/**
                 	 * filter 'redux-saved-text-{opt_name}'
+                     * @param string translated "settings saved" text
                 	 */
                     echo '<div id="redux-save"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', $this->args['domain'] ) ) . '</strong></div>';
                 }
@@ -2104,6 +2125,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             /**
              * filter 'redux-changed-text-{opt_name}'
+             * @param string translated "settings have changed" text
              */
             echo '<div id="redux-save-warn"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', $this->args['domain'] ) ) . '</strong></div>';
             echo '<div id="redux-field-errors"><strong><span></span> ' . __( 'error(s) were found!', $this->args['domain'] ) . '</strong></div>';
@@ -2253,6 +2275,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '<div class="redux-section-desc">';
                 /**
                  * filter 'redux-import-file-description'
+                 * @param string translated settings import instructions text
                  */
                 echo '<p class="description" id="import-code-description">' . apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', $this->args['domain'] ) ) . '</p>';
                 echo '</div>';
@@ -2266,6 +2289,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '<div class="redux-section-desc">';
                 /**
                  * filter 'redux-import-link-description'
+                 * @param string translated settings import instructions text
                  */
                 echo '<p class="description" id="import-link-description">' . apply_filters( 'redux-import-link-description', __( 'Input the URL to another sites options set and hit Import to load the options from that site.', $this->args['domain'] ) ) . '</p>';
                 echo '</div>';
@@ -2281,6 +2305,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '<div class="redux-section-desc">';
                 /**
                  * filter 'redux-backup-description'
+                 * @param string translated settings backup information
                  */
                 echo '<p class="description">' . apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', $this->args['domain'] ) ) . '</p>';
                 echo '</div>';
@@ -2500,6 +2525,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 //                    $class_file = apply_filters( 'redux/field/class/'.$field['type'], self::$_dir . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field ); // REMOVE
                 	/**
                 	 * filter 'redux/{opt_name}/field/class/{field.type}'
+                     * @param string        field class file path
                 	 * @param array $field  field data
                 	 */
                     $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
@@ -2546,16 +2572,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     /**
                      * filter 'redux-field-{opt_name}'
                      * @deprecated
+                     * @param string        rendered field markup
                      * @param array $field  field data
                      */
                     $_render = apply_filters( "redux-field-{$this->args['opt_name']}", ob_get_contents(), $field ); // REMOVE
                     /**
                      * filter 'redux/field/{opt_name}/{field.type}/render/after'
+                     * @param string        rendered field markup
                      * @param array $field  field data
                      */
                     $_render = apply_filters( "redux/field/{$this->args['opt_name']}/{$field['type']}/render/after", $_render, $field );
                     /**
                      * filter 'redux/field/{opt_name}/render/after'
+                     * @param string        rendered field markup
                      * @param array $field  field data
                      */
                     $_render = apply_filters( "redux/field/{$this->args['opt_name']}/render/after", $_render, $field );
