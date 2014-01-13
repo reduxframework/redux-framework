@@ -461,9 +461,6 @@ class ReduxFramework_typography extends ReduxFramework {
         }
         $family = $font['font-family'];
         $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
-        if ( empty( $this->parent->fonts[$font['font-family']] ) ) {
-          $this->parent->typography[$font['font-family']] = array();  
-        }
         if (isset($this->field['all_styles'])) {
             if ( !isset( $font['font-options'] ) ) {
                 $this->getGoogleArray();
