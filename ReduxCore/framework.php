@@ -51,7 +51,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	// ATTENTION DEVS
 	// Please update the build number with each push, no matter how small.
 	// This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.4.22';
+        public static $_version = '3.1.4.23';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1595,6 +1595,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             set_transient( 'redux-saved-' . $this->args['opt_name'], '1', 1000 );
 
+	    // Sets last saved time
+	    $plugin_options['REDUX_last_saved'] = time();
+	    
             if( !empty( $plugin_options['import'] ) ) {
                 if( $plugin_options['import_code'] != '' ) {
                     $import = $plugin_options['import_code'];
