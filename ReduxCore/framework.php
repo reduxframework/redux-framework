@@ -51,7 +51,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 	// ATTENTION DEVS
 	// Please update the build number with each push, no matter how small.
 	// This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.4.21';
+        public static $_version = '3.1.4.22';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -248,16 +248,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
         public $localize_data       = array(); // Information that needs to be localized
-		public $folds    			= array(); // The itms that need to fold.
-		public $path 				= '';
-		public $output 				= array(); // Fields with CSS output selectors
+	public $folds    	    = array(); // The itms that need to fold.
+	public $path 		    = '';
+	public $output 		    = array(); // Fields with CSS output selectors
         public $outputCSS           = null; // CSS that get auto-appended to the header
-        public $compilerCSS           = null; // CSS that get sent to the compiler hook
+        public $compilerCSS         = null; // CSS that get sent to the compiler hook
         public $customizerCSS       = null; // CSS that goes to the customizer
         public $fieldsValues        = array(); //all fields values in an id=>value array so we can check dependencies
         public $fieldsHidden        = array(); //all fields that didn't pass the dependency test and are hidden
         public $toHide              = array(); // Values to hide on page load
-
+	public $typography 	    = null; //values to generate google font CSS
+	
 		/**
 		 * Class Constructor. Defines the args for the theme options class
 		 * @since       1.0.0
