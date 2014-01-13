@@ -1178,11 +1178,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             $wp_styles->add_data( 'redux-elusive-icon-ie7', 'conditional', 'lte IE 7' );
 
+            /**
+             * jQuery UI stylesheet src
+             * filter 'redux/page/{opt_name}/enqueue/jquery-ui-css'
+             * @param string  bundled stylesheet src
+             */
             wp_register_style(
                 'jquery-ui-css',
-                apply_filters( 'redux/page/'.$this->args['opt_name'].'/enqueue/jquery-ui-css', self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
+                apply_filters( "redux/page/{$this->args[opt_name]}/enqueue/jquery-ui-css", self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
                 '',
-                filemtime( self::$_dir . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
+                filemtime( self::$_dir . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ), // todo - version should be based on above post-filter src
                 'all'
             );
 
@@ -2298,6 +2303,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 echo '</div>';
 
+                /**
+                 * filter 'redux-import-warning'
+                 * @param string translated settings import confirmation/warning text
+                 */
                 echo '<p id="redux-import-action"><input type="submit" id="redux-import" name="' . $this->args['opt_name'] . '[import]" class="button-primary" value="' . __( 'Import', $this->args['domain'] ) . '">&nbsp;&nbsp;<span>' . apply_filters( 'redux-import-warning', __( 'WARNING! This will overwrite all existing option values, please proceed with caution!', $this->args['domain'] ) ) . '</span></p>';
                 echo '<div class="hr"/><div class="inner"><span>&nbsp;</span></div></div>';
 
