@@ -66,9 +66,14 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.4.25 =
+* class_exists in field_section checking for incorrect classname.
+* sample_config fix.
+
 = 3.1.4.24 =
 * Compiler not outputting CSS without output set to comthing other than false.
-* Google fonts not rendering on frontend
+* Google fonts not rendering on frontend.
+* sample-config fix.
 
 = 3.1.4 =
 * Fixed error in redux-framework.php.
