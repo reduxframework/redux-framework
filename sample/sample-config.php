@@ -265,7 +265,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
                          'id'=>'section-media-start',
                          'type' => 'section', 
                          'title' => __('Media Options', 'redux-framework-demo'),
-                         'subtitle'=> __('With the "section" field you can create indent option sections.'),                            
+                         'subtitle'=> __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),                            
                          'indent' => true // Indent all options below until the next 'section' option is set.
                          ),    									
 					array(
