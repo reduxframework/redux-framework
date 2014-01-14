@@ -1438,7 +1438,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 	            // CAREFUL -> These options are for advanced use only
 	            'transient_time' 	 	=> 60 * MINUTE_IN_SECONDS,
 	            'output'            	=> true, // Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
-	            'output_tab'            => true, // Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
+	            'output_tag'            	=> true, // Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
 	            //'domain'             	=> 'redux-framework', // Translation domain key. Don't change this unless you want to retranslate all of Redux.
 	            //'footer_credit'      	=> '', // Disable the footer credit of Redux. Please leave if you can help it.
 	            
