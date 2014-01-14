@@ -67,6 +67,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.1.4.25 =
+* Prevent standard fonts from outputting to Google fonts CSS call.
+
+= 3.1.4.25 =
 * class_exists in field_section checking for incorrect classname.
 * sample_config fix.
 
