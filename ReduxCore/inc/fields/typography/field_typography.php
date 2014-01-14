@@ -421,7 +421,9 @@ class ReduxFramework_typography extends ReduxFramework {
         $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
       }
 
-      if ( !empty( $this->field['output'] ) ) { // Don't create dynamic CSS if output array is not set
+      
+      // Don't create dynamic CSS if output array is not set
+      if ( !empty( $this->field['output'] ) || !empty( $this->field['compiler'])) { 
         
         $style = '';
         if (!empty($font)) {
