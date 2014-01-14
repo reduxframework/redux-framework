@@ -423,7 +423,8 @@ class ReduxFramework_typography extends ReduxFramework {
 
       
       // Don't create dynamic CSS if output array is not set
-      if ( !empty( $this->field['output'] ) || !empty( $this->field['compiler'])) { 
+      //if ( !empty( $this->field['output'] ) || !empty( $this->field['compiler'])) { 
+	if ( isset( $this->field['output'] ) && is_array( $this->field['output']) || isset( $this->field['compiler'] ) && is_array( $this->field['compiler']) ) {      
         
         $style = '';
         if (!empty($font)) {
