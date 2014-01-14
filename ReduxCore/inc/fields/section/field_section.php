@@ -24,7 +24,7 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_divide' ) ) {
+if( !class_exists( 'ReduxFramework_section' ) ) {
 
     /**
      * Main ReduxFramework_heading class
