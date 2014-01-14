@@ -458,55 +458,64 @@ class ReduxFramework_typography extends ReduxFramework {
 
       // Google only stuff!
       if ( !empty( $this->parent->args['google_api_key'] ) && !empty($font['font-family']) && !empty( $this->field['google'] ) && filter_var( $this->field['google'], FILTER_VALIDATE_BOOLEAN ) ) {
-
-        if ( !empty( $font['font-backup'] ) && !empty( $font['font-family'] ) ) {
-          $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );
-        }
-        $family = $font['font-family'];
-        $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
-        if ( empty( $this->parent->fonts[$font['font-family']] ) ) {
-          $this->parent->typography[$font['font-family']] = array();  
-        }
-        if (isset($this->field['all_styles'])) {
-            if ( !isset( $font['font-options'] ) ) {
-                $this->getGoogleArray();
-                if ( isset( $this->parent->googleArray ) && !empty( $this->parent->googleArray ) && isset( $this->parent->googleArray[$family] ) ) {
-                    $font['font-options'] = $this->parent->googleArray[$family];
-                }
-            } else {
-                $font['font-options'] = json_decode($font['font-options'], true);
-            }
-        }
-        
-        if ( isset( $font['font-options'] ) && !empty( $font['font-options'] ) && isset( $this->field['all_styles'] ) && filter_var( $this->field['all_styles'], FILTER_VALIDATE_BOOLEAN ) ) {
-            if ( isset( $font['font-options'] ) && !empty( $font['font-options']['variants'] ) ) {
-              if ( !isset( $this->parent->typography[$font['font-family']]['all-styles'] ) || empty( $this->parent->typography[$font['font-family']]['all-styles'] ) ) {
-                  $this->parent->typography[$font['font-family']]['all-styles'] = array();
-                  foreach($font['font-options']['variants'] as $variant) {
-                    $this->parent->typography[$font['font-family']]['all-styles'][] = $variant['id'];
-                  }                        
-              }
-            }                    
-        } 
-        if ( !empty( $font['font-weight'] ) ) {
-          if ( empty( $this->parent->typography[$font['font-family']]['font-weight'] ) || !in_array( $font['font-weight'], $this->parent->typography[$font['font-family']]['font-weight'] ) ) {
-            $style = $font['font-weight'];
-          }
-          if ( !empty( $font['font-style'] ) ) {
-              $style .= $font['font-style'];
-          }                        
-          if ( empty( $this->parent->typography[$font['font-family']]['font-style'] ) || !in_array( $style, $this->parent->typography[$font['font-family']]['font-style'] ) ) {
-            $this->parent->typography[$font['font-family']]['font-style'][] = $style;
-          }                      
-        }
-    
-        if ( !empty( $font['subsets'] ) ) {
-          if ( empty( $this->parent->typography[$font['font-family']]['subset'] ) || !in_array( $font['subsets'], $this->parent->typography[$font['font-family']]['subset'] ) ) {
-            $this->parent->typography[$font['font-family']]['subset'][] = $font['subsets'];
-          }                      
-        }   
-                         
-         
+      	
+	// Added standard font matching check to avoid output to Google fonts call - kp
+        // Ensure the fonts array is NOT empty
+        if (!empty($this->field['fonts'])){
+            //Make the font keys in the array lowercase, for case-insensitive matching
+            $lcFonts = array_change_key_case($this->field['fonts']);
+                
+            // If the lower cased passed font-family is NOT found in the standard font array
+            // Then it's a Google font, so process it for output.
+            if (!array_key_exists(strtolower($font['font-family']), $lcFonts)) {        	
+	        if ( !empty( $font['font-backup'] ) && !empty( $font['font-family'] ) ) {
+	          $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );
+	        }
+	        $family = $font['font-family'];
+	        $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
+	        if ( empty( $this->parent->fonts[$font['font-family']] ) ) {
+	          $this->parent->typography[$font['font-family']] = array();  
+	        }
+	        if (isset($this->field['all_styles'])) {
+	            if ( !isset( $font['font-options'] ) ) {
+	                $this->getGoogleArray();
+	                if ( isset( $this->parent->googleArray ) && !empty( $this->parent->googleArray ) && isset( $this->parent->googleArray[$family] ) ) {
+	                    $font['font-options'] = $this->parent->googleArray[$family];
+	                }
+	            } else {
+	                $font['font-options'] = json_decode($font['font-options'], true);
+	            }
+	        }
+	        
+	        if ( isset( $font['font-options'] ) && !empty( $font['font-options'] ) && isset( $this->field['all_styles'] ) && filter_var( $this->field['all_styles'], FILTER_VALIDATE_BOOLEAN ) ) {
+	            if ( isset( $font['font-options'] ) && !empty( $font['font-options']['variants'] ) ) {
+	              if ( !isset( $this->parent->typography[$font['font-family']]['all-styles'] ) || empty( $this->parent->typography[$font['font-family']]['all-styles'] ) ) {
+	                  $this->parent->typography[$font['font-family']]['all-styles'] = array();
+	                  foreach($font['font-options']['variants'] as $variant) {
+	                    $this->parent->typography[$font['font-family']]['all-styles'][] = $variant['id'];
+	                  }                        
+	              }
+	            }                    
+	        } 
+	        if ( !empty( $font['font-weight'] ) ) {
+	          if ( empty( $this->parent->typography[$font['font-family']]['font-weight'] ) || !in_array( $font['font-weight'], $this->parent->typography[$font['font-family']]['font-weight'] ) ) {
+	            $style = $font['font-weight'];
+	          }
+	          if ( !empty( $font['font-style'] ) ) {
+	              $style .= $font['font-style'];
+	          }                        
+	          if ( empty( $this->parent->typography[$font['font-family']]['font-style'] ) || !in_array( $style, $this->parent->typography[$font['font-family']]['font-style'] ) ) {
+	            $this->parent->typography[$font['font-family']]['font-style'][] = $style;
+	          }                      
+	        }
+	    
+	        if ( !empty( $font['subsets'] ) ) {
+	          if ( empty( $this->parent->typography[$font['font-family']]['subset'] ) || !in_array( $font['subsets'], $this->parent->typography[$font['font-family']]['subset'] ) ) {
+	            $this->parent->typography[$font['font-family']]['subset'][] = $font['subsets'];
+	          }                      
+	        }   
+            } // !array_key_exists    
+        } //!empty fonts array
       } // Typography not set
 
      
