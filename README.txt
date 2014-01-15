@@ -152,6 +152,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 * sample_config fix.
 * Compiler not outputting CSS without output set to comthing other than false.
 * Google fonts not rendering on frontend.
+* Rewrote sample_config as a class
 
 = 3.1.4 =
 * Fixed error in redux-framework.php.
