@@ -198,5 +198,38 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
             );
         
         }
+        
+        public function getCSS() {
+            $css = '';
+            $value = $this->value;
+
+            if (!empty($value)) {
+                $css .= "background-image: url('" . $value . "');";
+            }
+            return $css;
+        }        
+        
+        public function output() {
+            if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] ) || !is_array( $this->field['compiler'] ) ) ) {
+                return;
+            }
+
+            $style = $this->getCSS();
+            echo 'style: ' . $style;
+            if ( !empty( $style ) ) {
+
+                if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+                    $keys = implode(",", $this->field['output']);
+                    $this->parent->outputCSS .= $style;
+                }
+
+                if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+                    $keys = implode(",", $this->field['compiler']);
+                    $style = $keys . "{" . $style . '}';
+                    $this->parent->compilerCSS .= $style; //$keys . "{" . $style . '}';
+                }
+            }
+        }        
+        
     }
 }
