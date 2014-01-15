@@ -139,6 +139,20 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5 =
+* Merge in pull request - 542, code cleanup and better readability
+* Change how HTML is output to support metaboxes
+* CSS only on pages that matter, better checks.
+* font-backup in typography now appends to font-family in output and compiler.
+* More fixes for Google font css outputting.
+* Addded output and compiler to field_image_select.  Images will be output as 'background-image'.
+* Fixed output in field_background.
+* Prevent standard fonts from outputting to Google fonts CSS call.
+* class_exists in field_section checking for incorrect classname.
+* sample_config fix.
+* Compiler not outputting CSS without output set to comthing other than false.
+* Google fonts not rendering on frontend.
+
 = 3.1.4 =
 * Fixed error in redux-framework.php.
 * Added select_image field.
