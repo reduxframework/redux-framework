@@ -66,6 +66,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.4.28 =
+* font-backup in typography now appends to font-family in output and compiler.
+* More fixes for Google font css outputting.
+
 = 3.1.4.27 =
 * Addded output and compiler to field_image_select.  Images will be output as 'background-image'.
 * Fixed output in field_background.
