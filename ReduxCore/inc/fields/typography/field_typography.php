@@ -3,6 +3,31 @@
 
 class ReduxFramework_typography extends ReduxFramework {
 
+    // Please note, if you intend to add fonts to this array,
+    // the font sequence in the key must NOT have spaces after the
+    // comma, or things get broke later on.  Spaces in the value are fine. 
+    // This might be 'fixable' later on with Regex, if the key format becomes
+    // an issue. - kp
+    private $std_fonts = array(
+        "Arial,Helvetica,sans-serif"                        => "Arial, Helvetica, sans-serif",
+        "'Arial Black',Gadget,sans-serif"                   => "'Arial Black', Gadget, sans-serif",
+        "'Bookman Old Style',serif"                         => "'Bookman Old Style', serif",
+        "'Comic Sans MS',cursive"                           => "'Comic Sans MS', cursive",
+        "Courier,monospace"                                 => "Courier, monospace",
+        "Garamond,serif"                                    => "Garamond, serif",
+        "Georgia,serif"                                     => "Georgia, serif",
+        "Impact,Charcoal,sans-serif"                        => "Impact, Charcoal, sans-serif",
+        "'Lucida Console',Monaco,monospace"                 => "'Lucida Console', Monaco, monospace",
+        "'Lucida Sans Unicode','Lucida Grande',sans-serif"  => "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
+        "'MS Sans Serif',Geneva,sans-serif"                 => "'MS Sans Serif', Geneva, sans-serif",
+        "'MS Serif','New York',sans-serif"                  => "'MS Serif', 'New York', sans-serif",
+        "'Palatino Linotype','Book Antiqua',Palatino,serif" => "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+        "Tahoma,Geneva,sans-serif"                          => "Tahoma, Geneva, sans-serif",
+        "'Times New Roman',Times,serif"                     => "'Times New Roman', Times, serif",
+        "'Trebuchet MS',Helvetica,sans-serif"               => "'Trebuchet MS', Helvetica, sans-serif",
+        "Verdana,Geneva,sans-serif"                         => "Verdana, Geneva, sans-serif",    
+    );
+
     /**
      * Field Constructor.
      *
@@ -71,6 +96,7 @@ class ReduxFramework_typography extends ReduxFramework {
             'font-size'=>'',
         );
 
+        $this->value = wp_parse_args( $this->value, $defaults );
 
 	// Since fonts declared is CSS (@font-face) are not rendered in the preview,
 	// they can be declared in a CSS file and passed here so they DO display in
@@ -83,8 +109,6 @@ class ReduxFramework_typography extends ReduxFramework {
             wp_register_style('redux-external-fonts', $this->field['ext-font-css']);
             wp_enqueue_style('redux-external-fonts');
         }
-
-        $this->value = wp_parse_args( $this->value, $defaults );
 
         if (empty($this->field['units']) && !empty($this->field['default']['units'])) {
             $this->field['units'] = $this->field['default']['units'];
@@ -136,25 +160,7 @@ class ReduxFramework_typography extends ReduxFramework {
                   }
               }
               if (empty($this->field['fonts'])) {
-                  $this->field['fonts'] = array(
-                      "Arial, Helvetica, sans-serif" => "Arial, Helvetica, sans-serif",
-                      "'Arial Black', Gadget, sans-serif" => "'Arial Black', Gadget, sans-serif",
-                      "'Bookman Old Style', serif" => "'Bookman Old Style', serif",
-                      "'Comic Sans MS', cursive" => "'Comic Sans MS', cursive",
-                      "Courier, monospace" => "Courier, monospace",
-                      "Garamond, serif" => "Garamond, serif",
-                      "Georgia, serif" => "Georgia, serif",
-                      "Impact, Charcoal, sans-serif" => "Impact, Charcoal, sans-serif",
-                      "'Lucida Console', Monaco, monospace" => "'Lucida Console', Monaco, monospace",
-                      "'Lucida Sans Unicode', 'Lucida Grande', sans-serif" => "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
-                      "'MS Sans Serif', Geneva, sans-serif" => "'MS Sans Serif', Geneva, sans-serif",
-                      "'MS Serif', 'New York', sans-serif" =>"'MS Serif', 'New York', sans-serif",
-                      "'Palatino Linotype', 'Book Antiqua', Palatino, serif" => "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
-                      "Tahoma, Geneva, sans-serif" =>"Tahoma, Geneva, sans-serif",
-                      "'Times New Roman', Times, serif" => "'Times New Roman', Times, serif",
-                      "'Trebuchet MS', Helvetica, sans-serif" => "'Trebuchet MS', Helvetica, sans-serif",
-                      "Verdana, Geneva, sans-serif" => "Verdana, Geneva, sans-serif",
-                  );
+                  $this->field['fonts'] = $this->std_fonts; 
               }
 
               // Standard sizes for normal fonts
@@ -416,14 +422,16 @@ class ReduxFramework_typography extends ReduxFramework {
       global $wp_styles;
 
       $font = $this->value;
-      //echo $font['font-family'];
-      if ( !empty( $font['font-family'] ) && !empty( $font['font-backup'] ) ) {
-        $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );  
-      }
+
+        // Check for font-backup.  If it's set, stick it on a variabhle for 
+        // later use.
+        if (!empty($font['font-family']) && !empty($font['font-backup'])) {
+            $font['font-family'] = str_replace(', ' . $font['font-backup'], '', $font['font-family']);
+            $fontBackup = ',' . $font['font-backup'];
+        }
 
       
       // Don't create dynamic CSS if output array is not set
-      //if ( !empty( $this->field['output'] ) || !empty( $this->field['compiler'])) { 
 	if ( isset( $this->field['output'] ) && is_array( $this->field['output']) || isset( $this->field['compiler'] ) && is_array( $this->field['compiler']) ) {      
         
         $style = '';
@@ -432,13 +440,29 @@ class ReduxFramework_typography extends ReduxFramework {
                 if ($key == 'font-options') {
                     continue;
                 }
-              if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
-                $value = "normal";
-              }
-              if ( $key == "google" || $key == "subsets" || $key == "font-backup" || empty( $value ) ) {
-                  continue;
-              }
-              $style .= $key.':'.$value.';';
+
+                // Check for font-family key
+                if ('font-family' == $key){
+                        
+                    // Ensure fontBackup isn't empty (we already option
+                    // checked this earlier.  No need to do it again.
+                    if ( !empty( $fontBackup ) ) {
+                            
+                        // Apply the backup font to the font-family element
+                        // via the saved variable.  We do this here so it 
+                        // doesn't get appended to the Google stuff below.
+                        $value .= $fontBackup; 
+                    }
+                }
+                
+              	if (empty($value) && in_array($key, array('font-weight', 'font-style'))) {
+                    $value = "normal";
+              	}
+              	
+              	if ( $key == "google" || $key == "subsets" || $key == "font-backup" || empty( $value ) ) {
+                    continue;
+              	}
+              	$style .= $key.':'.$value.';';
             }                    
         }
         
@@ -460,22 +484,40 @@ class ReduxFramework_typography extends ReduxFramework {
       if ( !empty( $this->parent->args['google_api_key'] ) && !empty($font['font-family']) && !empty( $this->field['google'] ) && filter_var( $this->field['google'], FILTER_VALIDATE_BOOLEAN ) ) {
       	
 	// Added standard font matching check to avoid output to Google fonts call - kp
+
+        // If no custom font array was supplied, the load it with default
+        // standard fonts.
+        if (empty($this->field['fonts'])) {
+            $this->field['fonts'] = $this->std_fonts;
+        }
+	
         // Ensure the fonts array is NOT empty
         if (!empty($this->field['fonts'])){
             //Make the font keys in the array lowercase, for case-insensitive matching
             $lcFonts = array_change_key_case($this->field['fonts']);
+
+            // lowercase chosen font for matching purposes
+            $lcFont = strtolower($font['font-family']);
+                
+            // Remove spaces after commas in chosen font for mathcing purposes.
+            $lcFont = str_replace(', ', ',', $lcFont);
                 
             // If the lower cased passed font-family is NOT found in the standard font array
             // Then it's a Google font, so process it for output.
-            if (!array_key_exists(strtolower($font['font-family']), $lcFonts)) {        	
-	        if ( !empty( $font['font-backup'] ) && !empty( $font['font-family'] ) ) {
-	          $font['font-family'] = str_replace( ', '.$font['font-backup'], '', $font['font-family'] );
-	        }
+            if ( ( !array_key_exists( $lcFont, $lcFonts ) ) {        	
 	        $family = $font['font-family'];
+	        
+	        // Strip out spaces in font names and replace with with plus signs
+	        // TODO?: This method doesn't respect spaces after commas, hence the reason
+	        // for the std_font array keys having no spaces after commas.  This could be
+	        // fixed with RegEx in the future.
 	        $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
+	        
+	        // Push data to parent typography variable.
 	        if ( empty( $this->parent->fonts[$font['font-family']] ) ) {
 	          $this->parent->typography[$font['font-family']] = array();  
 	        }
+	        
 	        if (isset($this->field['all_styles'])) {
 	            if ( !isset( $font['font-options'] ) ) {
 	                $this->getGoogleArray();
@@ -517,9 +559,6 @@ class ReduxFramework_typography extends ReduxFramework {
             } // !array_key_exists    
         } //!empty fonts array
       } // Typography not set
-
-     
-
     }
 
 
