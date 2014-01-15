@@ -66,6 +66,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.4.27 =
+* Addded output and compiler to field_image_select.  Images will be output as 'background-image'.
+* Fixed output in field_background.
+
 = 3.1.4.26 =
 * Prevent standard fonts from outputting to Google fonts CSS call.
 
