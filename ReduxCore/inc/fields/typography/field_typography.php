@@ -504,7 +504,7 @@ class ReduxFramework_typography extends ReduxFramework {
                 
             // If the lower cased passed font-family is NOT found in the standard font array
             // Then it's a Google font, so process it for output.
-            if ( ( !array_key_exists( $lcFont, $lcFonts ) ) {        	
+            if ( !array_key_exists( $lcFont, $lcFonts ) ) {
 	        $family = $font['font-family'];
 	        
 	        // Strip out spaces in font names and replace with with plus signs
