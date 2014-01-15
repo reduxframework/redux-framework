@@ -66,6 +66,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.4.29 =
+* Merge in pull request - 542, code cleanup and better readability
+* Change how HTML is output to support metaboxes
+* CSS only on pages that matter, better checks.
+
 = 3.1.4.28 =
 * font-backup in typography now appends to font-family in output and compiler.
 * More fixes for Google font css outputting.
