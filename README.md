@@ -66,30 +66,19 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.1.4.29 =
+= 3.1.5 =
 * Merge in pull request - 542, code cleanup and better readability
 * Change how HTML is output to support metaboxes
 * CSS only on pages that matter, better checks.
-
-= 3.1.4.28 =
 * font-backup in typography now appends to font-family in output and compiler.
 * More fixes for Google font css outputting.
-
-= 3.1.4.27 =
 * Addded output and compiler to field_image_select.  Images will be output as 'background-image'.
 * Fixed output in field_background.
-
-= 3.1.4.26 =
 * Prevent standard fonts from outputting to Google fonts CSS call.
-
-= 3.1.4.25 =
 * class_exists in field_section checking for incorrect classname.
 * sample_config fix.
-
-= 3.1.4.24 =
 * Compiler not outputting CSS without output set to comthing other than false.
 * Google fonts not rendering on frontend.
-* sample-config fix.
 
 = 3.1.4 =
 * Fixed error in redux-framework.php.
