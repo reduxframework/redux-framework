@@ -752,7 +752,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'default' => array(
 							'color'=>'#dd9933',
 							'font-size'=>'30px',
-							'font-family'=>'Arial, Helvetica, sans-serif',
+							'font-family'=>'Arial,Helvetica,sans-serif',
 							'font-weight'=>'Normal',
 							),
 						),					
