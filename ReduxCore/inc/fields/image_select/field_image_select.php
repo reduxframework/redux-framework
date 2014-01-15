@@ -215,7 +215,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
             }
 
             $style = $this->getCSS();
-            echo 'style: ' . $style;
+
             if ( !empty( $style ) ) {
 
                 if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
