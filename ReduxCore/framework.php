@@ -521,7 +521,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				}
 
 				// set global?
-				$this->maybe_set_global_variable();
+				$this->maybe_set_global_variable( $value );
 
 				/**
 				 * action 'redux-saved-{opt_name}'
@@ -563,17 +563,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				$this->set_options($results);
 			}	
 			// set global?
-			$this->maybe_set_global_variable();
+			$this->maybe_set_global_variable( $value );
 			//print_r($result);
 			return $result;
 		}
 
 		/**
 		 * Maybe set a global variable by the global_variable argument
-		 *
-		 * @return  bool  (global was set)
+		 * @param   array $value  global option variable value
+		 * @return  bool          (global was set)
 		 */
-		function maybe_set_global_variable() {
+		function maybe_set_global_variable( $value ) {
 			if ( $this->args['global_variable'] ) {
 				$option_global = $this->args['global_variable'];
 				/**
