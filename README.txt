@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
 Tested up to: 3.8
-Stable tag: 3.1.4
+Stable tag: 3.1.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,6 +38,7 @@ It is hard to continue development and support for this free plugin without cont
 
 * Border
 * Button Set
+* Background
 * Checkbox / Multi-Check
 * Color (WordPress Native)
 * Gradient
@@ -54,6 +55,7 @@ It is hard to continue development and support for this free plugin without cont
 * Password
 * Radio (w/ WordPress Data)
 * Select (Select/Multi-Select w/ Select2 & WordPress Data)
+* Select Image
 * Slider
 * Sortable (Drag/Drop Checkbox/Input Fields)
 * Sorter (Drag/Drop Manager - Works great for content blocks)
@@ -140,6 +142,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 == Changelog ==
 
 = 3.1.5 =
+* Typography font arrays may not contain comma spaces.
 * Merge in pull request - 542, code cleanup and better readability
 * Change how HTML is output to support metaboxes
 * CSS only on pages that matter, better checks.
