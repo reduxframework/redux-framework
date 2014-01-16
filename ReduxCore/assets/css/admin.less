@@ -326,44 +326,44 @@ a {
 	color:#666666;
 }
 
-.redux-group-tab .form-table.no-border{
+.redux-main .form-table.no-border{
 	border-top:none;
 }
-.redux-group-tab .form-table tr{
+.redux-main .form-table tr{
 	border-bottom: 1px solid #E7E7E7;
 }
-.redux-group-tab .form-table tr:last-child{
-	border-bottom: none;
+.redux-main .form-table tr:last-child{
+	border-bottom: none !important;
 }
-.redux-group-tab .form-table tr th,
-.redux-group-tab .form-table tr td{
+.redux-main .form-table tr th,
+.redux-main .form-table tr td{
 	color:#333333;
 }
-.redux-group-tab .form-table tr th{
+.redux-main .form-table tr th{
 	font-weight:bold;
 	width:30%;
 	padding:20px 5px 20px 0px;
 }
 
-.redux-group-tab .form-table tr th span:first-child{
+.redux-main .form-table tr th span:first-child{
 	font-weight: normal;
 	display:block;
 	color:#666666;
 }
 
 
-.redux-group-tab .form-table tr td .redux-th-warning{
+.redux-main .form-table tr td .redux-th-warning{
 	font-size:1em;
     color: #C09853;
 	font-weight:normal;
 	display:block;
 }
-.redux-group-tab .form-table tr td .redux-field-warning{
+.redux-main .form-table tr td .redux-field-warning{
 	border-color:#C09853;
 }
 
 
-.redux-group-tab .form-table tr td .redux-th-error{
+.redux-main .form-table tr td .redux-th-error{
 	font-size:1em;
 	color:#B94A48;
 	font-weight:normal;
@@ -376,9 +376,9 @@ a {
 
 
 /* reset nested tables for mce */
-.redux-group-tab .form-table tr td table.mceLayout,
-.redux-group-tab .form-table tr td table.mceLayout tr,
-.redux-group-tab .form-table tr td table.mceLayout tr td{
+.redux-main .form-table tr td table.mceLayout,
+.redux-main .form-table tr td table.mceLayout tr,
+.redux-main .form-table tr td table.mceLayout tr td{
 	padding:0px;
 	border-width:0px;
 }
@@ -945,6 +945,7 @@ label.radio, label.multicheck {
 	max-width: 100%;
 }
 .redux-main span.description {
+	display: block;
 	font-style: normal;
 }
 .redux-main #redux-system-info textarea {
@@ -978,15 +979,77 @@ label.radio, label.multicheck {
     top:inherit;
 }
 
-.redux-group-tab .form-table:first-child tr th, .redux-group-tab .form-table:first-child tr td {
+.redux-main .form-table:first-child tr th, .redux-main .form-table:first-child tr td {
 	padding-top: 0 !important;
 }
 
-.redux-group-tab .form-table{
+.redux-main .form-table{
 	clear:none;
 	margin-top:0px !important;
 }
 
-.redux-group-tab .form-table tr:first-child th, .redux-group-tab .form-table tr:first-child td {
+.redux-main .form-table tr:first-child th, .redux-main .form-table tr:first-child td {
 	padding-top: 0;
+}
+
+/* Metaboxes CSS overrides */
+.postbox {
+	.redux-container {
+		h3 {
+			padding-left: 0 !important;
+			margin-bottom: 15px !important;
+		}
+		.redux-section-desc {
+			margin-bottom: 20px;
+		}	
+		filter: none;
+		border: none;
+		-moz-border-radius: 0; /* Firefox */
+		-webkit-border-radius: 0; /* Safari, Chrome */
+		border-radius: 0;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		margin: -12px;
+		margin-top: -6px;
+		.redux_main {
+			background:none;
+			border-left:1px solid #D8D8D8;
+			moz-box-shadow: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;	
+
+		}
+		&.redux-no-sections {
+			margin: 0;
+			background: none;
+			.redux-main {
+				background: none;
+				margin-left: inherit;
+				padding: inherit;
+				border-left: none !important;
+				min-height: 0 !important;
+				tr {
+					td {
+						padding-top: 20px !important;
+					}
+					&:last-child {
+						border-bottom: none;
+						th, td {
+							padding-bottom: 0;
+						}
+					}
+				}
+				.form-table:first-child tr:first-child td {
+					padding-top: 0 !important;
+				}
+				.redux-field {
+					margin-bottom: 10px !important;
+				}
+				.redux-field:last-child {
+					margin-bottom: 0 !important;
+				}			
+			}
+		}
+	}
 }

@@ -493,7 +493,9 @@ jQuery(document).ready(function($) {
 		// Show the group
 		jQuery('#' + oldid + '_section_group').hide();
 		jQuery('#' + relid + '_section_group').fadeIn(200, function() {
-			stickyInfo(); // race condition fix
+			if (jQuery('#redux-footer').length !== 0) {
+				stickyInfo(); // race condition fix
+			}
 		});
 		jQuery('#' + relid + '_section_group_li').addClass('active');
 	});
