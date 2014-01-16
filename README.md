@@ -81,7 +81,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Compiler not outputting CSS without output set to comthing other than false.
 * Google fonts not rendering on frontend.
 * Rewrote sample_config as a class
-* 
+
 = 3.1.4 =
 * Fixed error in redux-framework.php.
 * Added select_image field.
