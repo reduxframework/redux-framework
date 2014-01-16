@@ -584,8 +584,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( empty( $result ) && !empty( $defaults ) ) {
                 $results = $defaults;
                 $this->set_options( $results );
+            } else {
+                $this->options = $result;
             }
-            $this->options = $results;
             // Set a global variable by the global_variable argument.
             $this->set_global_variable();
         } // get_options()
