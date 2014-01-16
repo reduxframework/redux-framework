@@ -67,6 +67,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.1.5 =
+* Typography font arrays may not contain comma spaces.
 * Merge in pull request - 542, code cleanup and better readability
 * Change how HTML is output to support metaboxes
 * CSS only on pages that matter, better checks.
