@@ -51,7 +51,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5';
+        public static $_version = '3.1.5.1';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -716,8 +716,24 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }//if
                     else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" || 
                              $type == "font-icon" || $type == "font-icons" || $type == "icons") {
-                        $font_icons = apply_filters('redux-font-icons',array()); // REMOVE LATER
-                        $font_icons = apply_filters('redux/font-icons',$font_icons);
+                        /**
+                        * filter 'redux-font-icons'
+                        * @deprecated
+                        * @param array $font_icons  array of elusive icon classes
+                        */                        
+                        $font_icons = apply_filters( 'redux-font-icons', array() ); // REMOVE LATER
+                        /**
+                        * filter 'redux/font-icons'
+                        * @deprecated
+                        * @param array $font_icons  array of elusive icon classes
+                        */                        
+                        $font_icons = apply_filters( 'redux/font-icons', $font_icons );
+                        /**
+                        * filter 'redux/{opt_name}/field/font/icons'
+                        * @deprecated
+                        * @param array $font_icons  array of elusive icon classes
+                        */                        
+                        $font_icons = apply_filters( "redux/{$this->args['opt_name']}/field/font/icons", $font_icons );                        
                         foreach($font_icons as $k) {
                             $data[$k] = $k;
                         }
@@ -1136,10 +1152,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _enqueue() {
-            global $pagenow;
-
-            //echo $pagenow;
-            //echo $this->args['page_parent'];
 
             global $wp_styles;
 
@@ -1697,7 +1709,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                          */
                         do_action( "redux/options/{$this->args['opt_name']}/field/{$field['type']}/register", $field );
                         extract($this->check_dependencies($field));
-                                                add_settings_field( 
+                        add_settings_field( 
                             "{$fieldk}_field",
                             $th,
                             array( &$this, '_field_input' ),
@@ -2163,7 +2175,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Stickybar
             echo '<div id="redux-sticky">';
             echo '<div id="info_bar">';
-            echo '<a href="javascript:void(0);" id="expand_options">' . __( 'Expand', $this->args['domain'] ) . '</a>';
+            echo '<a href="javascript:void(0);" class="expand_options">' . __( 'Expand', $this->args['domain'] ) . '</a>';
             echo '<div class="redux-action_bar">';
             submit_button( __( 'Save Changes', $this->args['domain']), 'primary', 'redux_save', false );
             echo '&nbsp;';
@@ -2205,8 +2217,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div class="clear"></div>';
 
             // Sidebar
-            echo '<div id="redux-sidebar">';
-            echo '<ul id="redux-group-menu">';
+            echo '<div class="redux-sidebar">';
+            echo '<ul class="redux-group-menu">';
             foreach( $this->sections as $k => $section ) {
                 echo $this->section_menu($k, $section);             
             }
@@ -2815,7 +2827,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
 
     do_action( 'redux/init', ReduxFramework::init() );
-
+    //add_action( 'plugins_loaded', ReduxFramework::init(), 0 );
 
 } // class_exists('ReduxFramework')
 
