@@ -92,9 +92,14 @@ class ReduxFramework_sorter extends ReduxFramework {
 			    if ($sortlists) {
 			    	echo '<fieldset id="'.$this->field['id'].'" class="redux-sorter-container redux-sorter">';
 
-					foreach ($sortlists as $group=>$sortlist) {
+					foreach ( $sortlists as $group => $sortlist ) {
+                        $filled = "";
 
-					    echo '<ul id="'.$this->field['id'].'_'.$group.'" class="sortlist_'.$this->field['id'].'" data-id="'.$this->field['id'].'">';
+                        if ( isset( $this->field['limits'][$group] ) && count( $sortlist ) >= $this->field['limits'][$group] ) {
+                            $filled = " filled";
+                        }
+
+					    echo '<ul id="'.$this->field['id'].'_'.$group.'" class="sortlist_'.$this->field['id'].$filled.'" data-id="'.$this->field['id'].'" data-group-id="' . $group . '">';
 					    echo '<h3>'.$group.'</h3>';
 
 					    foreach ($sortlist as $key => $list) {

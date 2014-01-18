@@ -194,11 +194,11 @@ a {
 }
 
 
-#redux-sidebar,
+.redux-sidebar,
 .redux-main{
 	min-height:300px;
 }
-#redux-sidebar{
+.redux-sidebar{
 	width:200px;
 	float: left;
 }
@@ -247,20 +247,20 @@ a {
 }
 
 
-#redux-sidebar #redux-group-menu{
+.redux-sidebar .redux-group-menu{
 	margin-top:0px;
 }
-#redux-sidebar #redux-group-menu li{
+.redux-sidebar .redux-group-menu li{
 	margin:0px;
 }
-#redux-sidebar #redux-group-menu li.divide{
+.redux-sidebar .redux-group-menu li.divide{
 	padding:0px;
 	border-width: 1px 0px 1px 0px;
 	border-style: solid;
     border-bottom-color: #E7E7E7;
     border-top-color: #F9F9F9;
 }
-#redux-sidebar #redux-group-menu li a{
+.redux-sidebar .redux-group-menu li a{
 	display:block;
 	padding: 12px 4px 12px 14px;
 	background: #eeeeee;
@@ -275,10 +275,10 @@ a {
 	-webkit-transition: none;
 	transition: none;
 }
-#redux-sidebar #redux-group-menu li a.custom-tab{
+.redux-sidebar .redux-group-menu li a.custom-tab{
 	background: #f6f6f6;
 }
-#redux-sidebar #redux-group-menu li a img{
+.redux-sidebar .redux-group-menu li a img{
 	width: 16px;
 	height: 16px;
 	/*vertical-align:middle;
@@ -287,23 +287,23 @@ a {
 	position: absolute;
 	left: 15px;
 }
-#redux-sidebar #redux-group-menu li.active a:hover{
+.redux-sidebar .redux-group-menu li.active a:hover{
 	color: #269ad6;
 }
-#redux-sidebar #redux-group-menu li a:hover{
+.redux-sidebar .redux-group-menu li a:hover{
 	background:#eeeeee;
 	width:184px;
 	color: #269ad6;
 	margin-right:-2px;
 	opacity: 1;
 }
-#redux-sidebar #redux-group-menu li a:hover i{
+.redux-sidebar .redux-group-menu li a:hover i{
 
 }
 
 
 
-#redux-sidebar #redux-group-menu li.active a{
+.redux-sidebar .redux-group-menu li.active a{
 	background:#FCFCFC;
 	color: #797979;
 	width:184px;
@@ -529,7 +529,7 @@ a {
   box-shadow: inset 0 1px 0 #fcfcfc;
 }
 
-.redux-container #expand_options{
+.redux-container .expand_options{
 	cursor: pointer;
 	display: block;
 	height: 22px;
@@ -543,16 +543,13 @@ a {
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 }
-.redux-container  #expand_options { background: url(../img/toggle_tabs.png) no-repeat -2px -26px; }
-.redux-container #expand_options.expanded { background: url(../img/toggle_tabs.png) no-repeat -2px -1px; }
-.redux-container #expand_options:hover {
+.redux-container  .expand_options { background: url(../img/toggle_tabs.png) no-repeat -2px -26px; }
+.redux-container .expand_options.expanded { background: url(../img/toggle_tabs.png) no-repeat -2px -1px; }
+.redux-container .expand_options:hover {
 	border-color: #888;
 }
 
-
-
 #redux-header {
-	
 	background:#f1f1f1;
 	border: 1px solid #ccc;
 	-webkit-border-radius: 10px 10px 0 0;
@@ -812,9 +809,9 @@ label.radio, label.multicheck {
 .input-append, .input-prepend {
 	font-size:0;
 	white-space:nowrap;
-	float:left;
+	float: left;
 	display:inline-block;
-	margin-bottom:5px;
+	margin-bottom: 6px;
 }
 
 .redux-main .input-append {
@@ -869,7 +866,7 @@ label.radio, label.multicheck {
 }
 
 @media screen and (max-width : 1124px) {
-	#redux-sidebar{
+	.redux-sidebar{
 		width:42px;
 	}
 
@@ -902,10 +899,10 @@ label.radio, label.multicheck {
 	.redux-group-tab-link-a:hover > span{
 		display: block;
 	}
-	#redux-sidebar #redux-group-menu li a,
-	#redux-sidebar #redux-group-menu li a:hover,
-	#redux-sidebar #redux-group-menu li.active a,
-	#redux-sidebar #redux-group-menu li.active a:hover{
+	.redux-sidebar .redux-group-menu li a,
+	.redux-sidebar .redux-group-menu li a:hover,
+	.redux-sidebar .redux-group-menu li.active a,
+	.redux-sidebar .redux-group-menu li.active a:hover{
 		width:auto;
 	}
 	
@@ -992,64 +989,4 @@ label.radio, label.multicheck {
 	padding-top: 0;
 }
 
-/* Metaboxes CSS overrides */
-.postbox {
-	.redux-container {
-		h3 {
-			padding-left: 0 !important;
-			margin-bottom: 15px !important;
-		}
-		.redux-section-desc {
-			margin-bottom: 20px;
-		}	
-		filter: none;
-		border: none;
-		-moz-border-radius: 0; /* Firefox */
-		-webkit-border-radius: 0; /* Safari, Chrome */
-		border-radius: 0;
-		-moz-box-shadow: none;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		margin: -12px;
-		margin-top: -6px;
-		.redux_main {
-			background:none;
-			border-left:1px solid #D8D8D8;
-			moz-box-shadow: none;
-			-webkit-box-shadow: none;
-			box-shadow: none;	
 
-		}
-		&.redux-no-sections {
-			margin: 0;
-			background: none;
-			.redux-main {
-				background: none;
-				margin-left: inherit;
-				padding: inherit;
-				border-left: none !important;
-				min-height: 0 !important;
-				tr {
-					td {
-						padding-top: 20px !important;
-					}
-					&:last-child {
-						border-bottom: none;
-						th, td {
-							padding-bottom: 0;
-						}
-					}
-				}
-				.form-table:first-child tr:first-child td {
-					padding-top: 0 !important;
-				}
-				.redux-field {
-					margin-bottom: 10px !important;
-				}
-				.redux-field:last-child {
-					margin-bottom: 0 !important;
-				}			
-			}
-		}
-	}
-}
