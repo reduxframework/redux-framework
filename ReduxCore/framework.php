@@ -1631,7 +1631,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
 
                 $heading = isset($section['heading']) ? $section['heading'] : $section['title'];
-
+                if (isset($section['permissions'])) {
+                    if ( !current_user_can($section['permissions']) ) {
+                        continue;
+                    }                            
+                }
                 add_settings_section( $this->args['opt_name'] . $k . '_section', $heading, array( &$this, '_section_desc' ), $this->args['opt_name'] . $k . '_section_group' );
 
                 if( isset( $section['fields'] ) ) {
@@ -1639,6 +1643,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if ( !isset( $field['type'] ) ) {
                             continue; // You need a type!
                         }
+                        if (isset($field['permissions'])) {
+                            if ( !current_user_can($field['permissions']) ) {
+                                continue;
+                            }                            
+                        }                        
                         
                         $th = "";
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
@@ -1698,6 +1707,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if ( !empty( $field['compiler'] ) ) {
                             $field['class'] .= " compiler";
                         }
+
+
+
                         $this->sections[$k]['fields'][$fieldk] = $field;
 
                         if( isset( $this->args['display_source'] ) ) {
