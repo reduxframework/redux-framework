@@ -35,8 +35,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
       // Protected vars
       protected $redux;
-      private $extension_url;
-      private $extension_dir;
+      private $_extension_url;
+      private $_extension_dir;
       private $parent;
 
       /**
@@ -51,15 +51,20 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
        */
       public function __construct( $parent ) {
         global $pagenow;
-        if ($pagenow !== "customize.php" && $pagenow !== "admin-ajax.php") {
+        if ( ( $pagenow !== "customize.php" && $pagenow !== "admin-ajax.php" && !isset( $GLOBALS['wp_customize'] ) ) ) {
+          return;
+        }
+
+        if ($parent->args['customizer'] === false) {
           return;
         }
 
         $this->parent = $parent;
 
-        if ($parent->args['customizer'] === false) {
-          return;
-        }
+        if ( empty( $this->_extension_dir ) ) {
+          $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+          $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
+        }        
         
         //parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
       
@@ -75,18 +80,15 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
        
 
 
-        add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue' ), 30 ); // Customizer control scripts
+        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
 
-        add_action( 'customize_register', array( &$this, '_register_customizer_controls' ) ); // Create controls
+        add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
 
         //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
         //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
-        add_action( 'customize_save', array( &$this, 'customizer_save_before' ) ); // Before save
-        add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
-        if ( empty( $this->extension_dir ) ) {
-          $this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-          $this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
-        }
+        //add_action( 'customize_save', array( &$this, 'customizer_save_before' ) ); // Before save
+        //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+
 
       }
 
@@ -168,10 +170,14 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
 
               $customSetting = array(
-                'type'          => 'option',
-                'capabilities'  => 'manage_theme_options',
-                'default'       =>  $option['default']
-              );     
+                'default'           =>  $option['default'],
+                'type'              => 'option',
+                'capabilities'      => 'manage_theme_options',
+                'transport'         => 'refresh',
+                'theme_supports'    => '',
+                'sanitize_callback' => array( $this, '_field_validation' ),
+                //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
+              );
 
 
               $option['id'] = $this->parent->args['opt_name'].'['.$option['id'].']';
@@ -280,13 +286,15 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
                 case 'switch':
                   continue;
-                  $wp_customize->add_control( $option['id'], array(
+                  $wp_customize->add_control( new Redux_customizer_switch( $wp_customize, $option['id'], array(
                     'label'   => $option['title'],
                     'section' => $section['id'],
                     'settings'=> $option['id'],
+                    'field'=> $option,
+                    'ReduxFramework' => $this->parent,
                     'priority'=> $option['priority'],
-                    'type'    => 'checkbox',
-                  ) );
+                  ) ) );
+
                   break;
 
                 default:
@@ -311,9 +319,9 @@ static_front_page - Static Front Page
 
         }
 
-      public function customizer_save_before($wp_customize) {
+      public function customizer_save_before( $plugin_options ) {
 
-        print_r($wp_customize);
+        return $parent->_field_input( $plugin_options );
 
       }    
 
@@ -321,6 +329,7 @@ static_front_page - Static Front Page
 //echo "there";
   //      print_r($wp_customize);
         //exit();
+        return $wp_customize;
 
       }              
 
@@ -333,7 +342,7 @@ static_front_page - Static Front Page
        * @return      void
        */
       public function _enqueue_previewer() {
-        wp_enqueue_script( 'redux-extension-previewer-js', $this->extension_url . 'assets/js/preview.js' );
+        wp_enqueue_script( 'redux-extension-previewer-js', $this->_extension_url . 'assets/js/preview.js' );
         $localize = array(
           'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
           'reset_confirm'     => __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ), 
@@ -360,9 +369,9 @@ static_front_page - Static Front Page
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'wp-pointer' );
         // Remove when code is in place!
-        wp_enqueue_script('redux-extension-customizer-js', $this->extension_url . 'assets/js/customizer.js');
+        wp_enqueue_script('redux-extension-customizer-js', $this->_extension_url . 'assets/js/customizer.js');
         // Get styles
-        wp_enqueue_style('redux-extension-customizer-css', $this->extension_url . 'assets/css/customizer.css');
+        wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
 
 
         $localize = array(
@@ -371,7 +380,7 @@ static_front_page - Static Front Page
           'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset.  Would you like to proceed?', 'redux-framework' ), 
           'opt_name'          => $this->args['opt_name'],
           //'folds'       => $this->folds,
-          'options'     => $this->parent->options,
+          'field'     => $this->parent->options,
           'defaults'      => $this->parent->options_defaults,
         );       
 
@@ -419,33 +428,18 @@ static_front_page - Static Front Page
       }
 
       /**
-       * Validate the Options options before insertion
+       * Validate the options before insertion
        *
        * @since       3.0.0
        * @access      public
        * @param       array $plugin_options The options array
        * @return      
        */
-      public function _validate_options( $plugin_options ) {
-
-          return $plugin_options;
+      public function _field_validation( $plugin_options ) {
+        return $plugin_options;
+        return $this->parent->_validate_options( $plugin_options );
       }
 
-      /**
-       * Validate values from options form (used in settings api validate function)
-       * calls the custom validation class for the field so authors can override with custom classes
-       *
-       * @since       1.0.0
-       * @access      public
-       * @param       array $plugin_options
-       * @param       array $options
-       * @return      array $plugin_options
-       */
-      public function _validate_values( $plugin_options, $options ) {
-
-
-          return $plugin_options;
-      }
 
       /**
        * HTML OUTPUT.
