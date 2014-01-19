@@ -55,10 +55,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
           return;
         }
 
-        if ($parent->args['customizer'] === false) {
-          return;
-        }
-
         $this->parent = $parent;
 
         if ( empty( $this->_extension_dir ) ) {
@@ -86,7 +82,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
         //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
-        //add_action( 'customize_save', array( &$this, 'customizer_save_before' ) ); // Before save
+        add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
         //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
 
 
@@ -116,8 +112,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
               continue;
             }
 
-
-
             if ( empty( $section['desc'] ) && !empty( $section['subtitle'] ) ) {
               $section['desc'] = $section['subtitle'];
             }
@@ -144,8 +138,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
             foreach( $section['fields'] as $skey => $option ) {
 
-              if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
-                //continue;
+              if ( $this->parent->args['customizer'] === false && ( !isset( $option['customizer'] ) || $option['customizer'] === false ) ) {
+                continue;
               }
 
               //Change the item priority if not set
@@ -175,7 +169,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                 'capabilities'      => 'manage_theme_options',
                 'transport'         => 'refresh',
                 'theme_supports'    => '',
-                'sanitize_callback' => array( $this, '_field_validation' ),
+                //'sanitize_callback' => array( $this, '_field_validation' ),
                 //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
               );
 
@@ -435,7 +429,9 @@ static_front_page - Static Front Page
        * @param       array $plugin_options The options array
        * @return      
        */
-      public function _field_validation( $plugin_options ) {
+      public function _field_validation( $plugin_options, $two ) {
+        echo "dovy";
+        echo $two;
         return $plugin_options;
         return $this->parent->_validate_options( $plugin_options );
       }
