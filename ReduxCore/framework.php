@@ -539,7 +539,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     update_option( $this->args['opt_name'], $value );
                 }
 
-                $this->optons = $value;
+                $this->options = $value;
 
                 // Set global variable
                 $this->set_global_variable();
