@@ -208,7 +208,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         }// ::init() 
 
         public $framework_url       = 'http://www.reduxframework.com/';
-        public $instance            = null;
+        static $instance            = null;
         public $page                = '';
         public $args                = array(
             'opt_name'           => '', // Must be defined by theme/plugin
@@ -377,14 +377,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //add_action( 'init', array( &$this, '_set_default_options' ), 101 );
 
                 // Options page
-                add_action( 'admin_menu', array( &$this, '_options_page' ) );
+                add_action( 'admin_menu', array( $this, '_options_page' ) );
 
                 // Register setting
-                add_action( 'admin_init', array( &$this, '_register_settings' ) );
+                add_action( 'admin_init', array( $this, '_register_settings' ) );
 
                 // Enqueue the admin page CSS and JS
                 if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                    add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue' ) );
+                    add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
                 }
 
                 // Any dynamic CSS output, let's run
@@ -397,7 +397,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //add_action( 'init', array( &$this, '_internationalization' ), 100 );            
 
                 // Hook into the WP feeds for downloading exported settings
-                add_action( "do_feed_reduxopts-{$this->args['opt_name']}", array( &$this, '_download_options' ), 1, 1 );
+                add_action( "do_feed_redux_options_{$this->args['opt_name']}", array( $this, '_download_options' ), 1, 1 );
+
+                // Hook into the WP feeds for downloading exported settings
+                add_action( "do_feed_redux_settings_{$this->args['opt_name']}", array( $this, '_download_settings' ), 1, 1 );
+
 
             }
 
@@ -440,7 +444,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return ReduxFramework
          */
         public function get_instance() {
-            return $this->instance;
+            return self::$instance;
         } // get_instance()
 
         public function _tracking() {
@@ -1078,6 +1082,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _enqueue_output() {
 
+
+
+
             if( $this->args[ 'output' ] == false && $this->args[ 'compiler' ] == false ) {
                 return;
             }
@@ -1444,7 +1451,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $this->get_options();
             $backup_options = $this->options;
             $backup_options['redux-backup'] = '1';
-            $content = json_encode( $backup_options );
+            $content = json_encode( $backup_options, true );
 
             if( isset( $_GET['action'] ) && $_GET['action'] == 'download_options' ) {
                 header( 'Content-Description: File Transfer' );
@@ -1470,6 +1477,57 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 exit;
             }
         }
+
+        /**
+         * Download the options file, or display it
+         *
+         * @since       3.0.0
+         * @access      public
+         * @return      void
+         */
+        public function _download_settings(){
+            /** @noinspection PhpUndefinedConstantInspection */
+            if( !isset( $_GET['secret'] ) || $_GET['secret'] != md5( AUTH_KEY . SECURE_AUTH_KEY ) ) {
+                wp_die( 'Invalid Secret for options use' );
+                exit;
+            }
+
+            if( !isset( $_GET['feed'] ) ){
+                wp_die( 'No Feed Defined' );
+                exit;
+            }
+            $this->get_options();
+            $settings = array(
+                'args' => $this->args,
+                'sections' => $this->sections,
+                'options' => $this->options,
+            );
+            $content = json_encode( $settings, true );
+
+            if( isset( $_GET['action'] ) && $_GET['action'] == 'download_settings' ) {
+                header( 'Content-Description: File Transfer' );
+                header( 'Content-type: application/txt' );
+                header( 'Content-Disposition: attachment; filename="' . str_replace( 'redux-', '', $_GET['feed'] ) . '_settings_backup_' . date( 'd-m-Y' ) . '.json"' );
+                header( 'Content-Transfer-Encoding: binary' );
+                header( 'Expires: 0' );
+                header( 'Cache-Control: must-revalidate' );
+                header( 'Pragma: public' );
+                echo $content;
+                exit;
+            } else {
+                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+                header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT"); 
+                header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
+                header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+                header( 'Cache-Control: post-check=0, pre-check=0', false );
+                header( 'Pragma: no-cache' );
+
+                // Can't include the type. Thanks old Firefox and IE. BAH.
+                //header("Content-type: application/json");
+                echo $content;
+                exit;
+            }
+        }        
 
         /**
          * Show page help
@@ -2376,14 +2434,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 
                 /** @noinspection PhpUndefinedConstantInspection */
-                echo '<p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary">' . __( 'Copy', $this->args['domain'] ) . '</a> <a href="' . add_query_arg( array( 'feed' => 'reduxopts-' . $this->args['opt_name'], 'action' => 'download_options', 'secret' => md5( AUTH_KEY . SECURE_AUTH_KEY ) ), site_url() ) . '" id="redux-export-code-dl" class="button-primary">' . __( 'Download', $this->args['domain'] ) . '</a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary">' . __( 'Copy Link', $this->args['domain'] ) . '</a></p>';
+                echo '<p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary">' . __( 'Copy', $this->args['domain'] ) . '</a> <a href="' . add_query_arg( array( 'feed' => 'redux_options_' . $this->args['opt_name'], 'action' => 'download_options', 'secret' => md5( AUTH_KEY . SECURE_AUTH_KEY ) ), site_url() ) . '" id="redux-export-code-dl" class="button-primary">' . __( 'Download', $this->args['domain'] ) . '</a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary">' . __( 'Copy Link', $this->args['domain'] ) . '</a></p>';
                 $backup_options = $this->options;
                 $backup_options['redux-backup'] = '1';
                 echo '<textarea class="large-text noUpdate" id="redux-export-code" rows="8">';
                 print_r( json_encode( $backup_options ) );
                 echo '</textarea>';
                 /** @noinspection PhpUndefinedConstantInspection */
-                echo '<input type="text" class="large-text noUpdate" id="redux-export-link-value" value="' . add_query_arg( array( 'feed' => 'reduxopts-' . $this->args['opt_name'], 'secret' => md5( AUTH_KEY.SECURE_AUTH_KEY ) ), site_url() ) . '" />';
+                echo '<input type="text" class="large-text noUpdate" id="redux-export-link-value" value="' . add_query_arg( array( 'feed' => 'redux_options_' . $this->args['opt_name'], 'secret' => md5( AUTH_KEY.SECURE_AUTH_KEY ) ), site_url() ) . '" />';
 
                 echo '</div>';
             }
