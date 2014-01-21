@@ -1078,7 +1078,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _enqueue_output() {
 
-            if( $this->args[ 'output' ] == false ) {
+            if( $this->args[ 'output' ] == false && $this->args[ 'compiler' ] == false ) {
                 return;
             }
 
@@ -1140,6 +1140,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
                 //wp_enqueue_style( 'redux-google-fonts' ); 
             }
+
 
         } // _enqueue_output()     
 
