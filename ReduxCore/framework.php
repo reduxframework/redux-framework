@@ -2700,9 +2700,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     ob_start();
                     /** @noinspection PhpUndefinedMethodInspection */
                     $render->render();
+                    /*
+                    
                     echo "<pre>";
                     print_r($value);
                     echo "</pre>";
+                    */
                        /**
                      * filter 'redux-field-{opt_name}'
                      * @deprecated
