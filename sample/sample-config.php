@@ -65,10 +65,11 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 		**/
 
 		function compiler_action($options, $css) {
-			echo "<h1>The compiler hook has run!";
+			//echo "<h1>The compiler hook has run!";
 			//print_r($options); //Option values
 			
-			// print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
+			//print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
+
 			/*
 			// Demo of how to use the dynamic CSS and write your own static CSS file
 		    $filename = dirname(__FILE__) . '/style' . '.css';
