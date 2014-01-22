@@ -1954,7 +1954,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                 $plugin_options = $this->options_defaults;
                 $plugin_options['REDUX_COMPILER'] = time();
-                //$this->set_options( $plugin_options );
+                $this->set_options( $plugin_options );
                 return $plugin_options;
             }
             if( isset( $plugin_options['defaults-section'] ) ) {
