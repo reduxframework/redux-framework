@@ -2449,7 +2449,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $backup_options = $this->options;
                 $backup_options['redux-backup'] = '1';
                 echo '<textarea class="large-text noUpdate" id="redux-export-code" rows="8">';
-                print_r( json_encode( $backup_options ) );
+                print_r( json_encode( $backup_options, true ) );
                 echo '</textarea>';
                 /** @noinspection PhpUndefinedConstantInspection */
                 echo '<input type="text" class="large-text noUpdate" id="redux-export-link-value" value="' . add_query_arg( array( 'feed' => 'redux_options_' . $this->args['opt_name'], 'secret' => md5( AUTH_KEY.SECURE_AUTH_KEY ) ), site_url() ) . '" />';
@@ -2461,15 +2461,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '<div id="dev_mode_default_section_group' . '" class="redux-group-tab">';
                 echo '<h3>' . __( 'Options Object', $this->args['domain'] ) . '</h3>';
                 echo '<div class="redux-section-desc">';
-
-                echo '<div id="redux-object-browser"></div>';
-
+                    echo '<div id="redux-object-browser"></div>';
                 echo '</div>';
 
-                echo '<div id="redux-object-json" class="hide">'.json_encode($this->options).'</div>';
+                echo '<div id="redux-object-json" class="hide">'.json_encode($this->options, true).'</div>';
 
                 echo '<a href="#" id="consolePrintObject" class="button">' . __( 'Show Object in Javascript Console Object', $this->args['domain'] ) . '</a>';
-                // END Javascript object debug
+                // END Javascript object debug                
 
                 echo '</div>';
             }
