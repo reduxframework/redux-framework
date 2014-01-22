@@ -101,7 +101,7 @@ class ReduxFramework_select extends ReduxFramework{
 			}
 		
 			$sortable = (isset($this->field['sortable']) && $this->field['sortable']) ? ' select2-sortable"' : "";
-			echo '<select '.$multi.' id="'.$this->field['id'].'-select" data-placeholder="'.$placeholder.'" name="'.$this->parent->args['opt_name'].'['.$this->field['id'].']'.$nameBrackets.'" class="redux-select-item '.$this->field['class'].$sortable.'"'.$width.' rows="6">';
+			echo '<select '.$multi.' id="'.$this->field['id'].'-select" data-placeholder="'.$placeholder.'" name="' . $this->field['name'] . ''.$nameBrackets.'" class="redux-select-item '.$this->field['class'].$sortable.'"'.$width.' rows="6">';
 				echo '<option></option>';
 
 

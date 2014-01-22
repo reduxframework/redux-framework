@@ -6,7 +6,8 @@
 
 
 	$(document).ready(function(){
-
+		// Intense debug  ;)
+		//jQuery('input[type="hidden"]').attr("type","text");
 		//console.log(redux);
 		
 		jQuery.fn.isOnScreen = function() {

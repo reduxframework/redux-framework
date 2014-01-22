@@ -54,7 +54,7 @@ class ReduxFramework_switch extends ReduxFramework{
 		echo '<div class="switch-options">';
 			echo '<label class="cb-enable'. $cb_enabled .'" data-id="'.$this->field['id'].'"><span>'. $on .'</span></label>';
 			echo '<label class="cb-disable'. $cb_disabled .'" data-id="'.$this->field['id'].'"><span>'. $off .'</span></label>';
-			echo '<input type="hidden" class="checkbox checkbox-input'.$this->field['class'].'" id="'.$this->field['id'].'" name="'.$this->parent->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" />';
+			echo '<input type="hidden" class="checkbox checkbox-input'.$this->field['class'].'" id="'.$this->field['id'].'" name="' . $this->field['name'] . '" value="'.$this->value.'" />';
 		echo '</div>';
 
 	}//function

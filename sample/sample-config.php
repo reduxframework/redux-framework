@@ -392,17 +392,14 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 			            //'required' => array('switch-fold','equals','0'),	
 			            'options' => array(
 			                "enabled" => array(
-			                    "placebo" => "placebo", //REQUIRED!
 			                    "highlights" => "Highlights",
 			                    "slider" => "Slider",
 			                    "staticpage" => "Static Page",
 			                    "services" => "Services"
 			                ),
 			                "disabled" => array(
-			                    "placebo" => "placebo", //REQUIRED!
 			                ),
 			                "backup" => array(
-			                    "placebo" => "placebo", //REQUIRED!
 			                ),                
 			            ),
 			            'limits' => array(
@@ -417,15 +414,13 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 			            "desc" => "Organize how you want the layout to appear on the homepage",
 			            "compiler"=>'true',
 			            'options' => array(
-			                "enabled" => array(
-			                    "placebo" => "placebo", //REQUIRED!
+			                "disabled" => array(
 			                    "highlights" => "Highlights",
-			                    "slider" => "Slider",
+			                    "slider" => "Slider",			                    
+			                ),
+			                "enabled" => array(
 			                    "staticpage" => "Static Page",
 			                    "services" => "Services"
-			                ),
-			                "disabled" => array(
-			                    "placebo" => "placebo", //REQUIRED!
 			                ),
 			            ),
 			        ),        
@@ -615,6 +610,16 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'desc' => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
 			            'default' => "jQuery(document).ready(function(){\n\n});"
 						),
+			        array(
+						'id'=>'php-code',
+						'type' => 'ace_editor',
+						'title' => __('JS Code', 'redux-framework-demo'), 
+						'subtitle' => __('Paste your JS code here.', 'redux-framework-demo'),
+						'mode' => 'php',
+			            'theme' => 'chrome',
+						'desc' => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
+			            'default' => "jQuery(document).ready(function(){\n\n});"
+						),			        
 
 					array(
 						'id'=>'footer-text',
@@ -1364,7 +1369,6 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						)
 					),   
 				);
-
 
 			if(file_exists(trailingslashit(dirname(__FILE__)) . 'README.html')) {
 			    $tabs['docs'] = array(

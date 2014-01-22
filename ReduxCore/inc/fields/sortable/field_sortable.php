@@ -52,14 +52,13 @@ class ReduxFramework_sortable extends ReduxFramework {
             }
         }
 
-        echo '<ul id="'.$this->field['id'].'-list" class="redux-sortable ' . $class . '">';
+        echo '<ul id="' . $this->field['id'].'-list" class="redux-sortable ' . $class . '">';
 
         foreach ($this->value as $k => $nicename) {
             
             echo '<li>';
             
             $checked = "";
-            $name = $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']';
 
             if ( $this->field['mode'] == "checkbox") {
             	$value_display = $this->value[$k];
@@ -68,13 +67,13 @@ class ReduxFramework_sortable extends ReduxFramework {
                 }
                 $class .= " checkbox_sortable";
 
-                echo '<input type="hidden" name="'.$name.'" id="'.$this->field['id'].'-'.$k.'-hidden" value="'.$value_display.'" />';
-                $name = "";
+                echo '<input type="hidden" name="' . $this->field['name'] . '[' . $k . ']" id="' . $this->field['id'].'-' . $k.'-hidden" value="' . $value_display.'" />';
+                
                 echo '<div class="checkbox-container">';
             } else {
             	$value_display = isset($this->value[$k]) ? $this->value[$k] : '';
             }
-            echo '<input rel="'.$this->field['id'].'-'.$k.'-hidden" class="' . $class . '" '.$checked.'type="'.$this->field['mode'].'" id="' . $this->field['id'] . '[' . $k . ']" name="'.$name.'" value="' . esc_attr($value_display) . '" placeholder="' . $nicename . '" />';
+            echo '<input rel="' . $this->field['id'].'-' . $k.'-hidden" class="' . $class . '" ' . $checked.'type="' . $this->field['mode'].'" id="' . $this->field['id'] . '[' . $k . ']" name="' . $this->field['name'] . '[' . $k . ']" value="' . esc_attr($value_display) . '" placeholder="' . $nicename . '" />';
 
             echo '<span class="compact drag"><i class="el-icon-move icon-large"></i></span>';
             if ( $this->field['mode'] == "checkbox" || (isset( $this->field['label'] ) && $this->field['label'] == true ) ) {

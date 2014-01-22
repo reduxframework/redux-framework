@@ -2,6 +2,10 @@
 	margin-top: 7px;
 }
 
+.form-table > tbody > tr > th {
+	width: 30%
+}
+
 a {
    outline: 0 !important;
 }
@@ -339,17 +343,24 @@ a {
 .redux-main .form-table tr td{
 	color:#333333;
 }
-.redux-main .form-table tr th{
+.form-table th, .form-table td {
+	margin: 0;
+	padding: 0;
+	width: auto;
+
+}
+.redux_field_th {
 	font-weight:bold;
-	width:30%;
-	padding:20px 5px 20px 0px;
+	//width:30%;
+	padding:20px 10px 20px 0px;
+	display: block;
+	span:first-child{
+		font-weight: normal;
+		display:block;
+		color:#666666;
+	}
 }
 
-.redux-main .form-table tr th span:first-child{
-	font-weight: normal;
-	display:block;
-	color:#666666;
-}
 
 
 .redux-main .form-table tr td .redux-th-warning{
@@ -837,7 +848,7 @@ label.radio, label.multicheck {
 	}
 }
 
-.redux-main td {
+.redux-main .redux-field-container  {
 	padding: 20px 0;
 }
 
@@ -917,9 +928,6 @@ label.radio, label.multicheck {
 	.form-table > tbody > tr > th, .form-table > tbody > tr > td{
 		padding: 10px !important;
 	}
-	.form-table > tbody > tr > th {
-		width: 35%
-	}
 }
 
 //mp6 fixes
@@ -990,3 +998,7 @@ label.radio, label.multicheck {
 }
 
 
+
+pre {
+  overflow: hidden;
+}

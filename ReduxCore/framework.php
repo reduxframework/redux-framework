@@ -16,7 +16,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.1.4 
+ * @version     3.1.5
  */
 
 // Exit if accessed directly
@@ -51,7 +51,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.1';
+        public static $_version = '3.1.5.2';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1725,6 +1725,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             print_r($field);
                             echo "</pre><br />";
                         }
+                        
+                        $field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
+
+                        if (!empty($th)) {
+                            $th = '<div class="redux_field_th">'.$th.'</div>';
+                        }
 
                         // Set the default value if present
                         $this->options_defaults[$field['id']] = isset( $this->options_defaults[$field['id']] ) ? $this->options_defaults[$field['id']] : '';
@@ -1972,7 +1978,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
                 $plugin_options['defaults'] = true;
                 unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
-                //$this->set_options( $plugin_options );
+                $this->set_options( $plugin_options );
                 return $plugin_options;
             }            
 
@@ -1981,7 +1987,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( !empty( $this->errors ) || !empty( $this->warnings ) ) {
                 set_transient( 'redux-notices-' . $this->args['opt_name'], array( 'errors' => $this->errors, 'warnings' => $this->warnings ), 1000 );
-            }    
+            }              
 
             /**
              * action 'redux-validate-{opt_name}'
@@ -2021,7 +2027,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _validate_values( $plugin_options, $options ) {
             foreach( $this->sections as $k => $section ) {
                 if( isset( $section['fields'] ) ) {
-                    foreach( $section['fields'] as $field ) {
+                    foreach( $section['fields'] as $fkey => $field ) {
                         $field['section_id'] = $k;
 
                         if( isset( $field['type'] ) && ( $field['type'] == 'checkbox' || $field['type'] == 'checkbox_hide_below' || $field['type'] == 'checkbox_hide_all' ) ) {
@@ -2081,7 +2087,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                             $after = $options[$field['id']][$key];
                                         }                                        
                                         $validation = new $validate( $field, $before, $after );
-                                        $plugin_options[$field['id']][$key] = $validation->value;
+                                        if ( !empty( $validation->value ) ) {
+                                            $plugin_options[$field['id']][$key] = $validation->value;    
+                                        } else {
+                                            unset( $plugin_options[$field['id']][$key] );
+                                        }
+                                        
                                         if( isset( $validation->error ) ) {
                                             $this->errors[] = $validation->error;
                                         }
@@ -2689,6 +2700,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     ob_start();
                     /** @noinspection PhpUndefinedMethodInspection */
                     $render->render();
+                    echo "<pre>";
+                    print_r($value);
+                    echo "</pre>";
                        /**
                      * filter 'redux-field-{opt_name}'
                      * @deprecated
@@ -2731,7 +2745,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      */
                     do_action( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", $field, $value );
                     
-                    echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field redux-container-'.$field['type'].' '.$class_string.'" data-id="'.$field['id'].'" '.$data_string.'>';
+                    echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field-container redux-field redux-container-'.$field['type'].' '.$class_string.'" data-id="'.$field['id'].'" '.$data_string.'>';
                         echo $_render;
 
                         if (!empty($field['desc'])) {

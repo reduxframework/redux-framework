@@ -10,8 +10,6 @@ jQuery(document).ready(function() {
             redux_change(jQuery(this));
         }        
     });
-
-    jQuery( ".redux-sortable" ).disableSelection();	
 	
 	jQuery('.checkbox_sortable').on('click', function() {
 		if (jQuery(this).is(":checked")) {

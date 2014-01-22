@@ -102,14 +102,18 @@ class ReduxFramework_sorter extends ReduxFramework {
 					    echo '<ul id="'.$this->field['id'].'_'.$group.'" class="sortlist_'.$this->field['id'].$filled.'" data-id="'.$this->field['id'].'" data-group-id="' . $group . '">';
 					    echo '<h3>'.$group.'</h3>';
 
+                        if (!isset($sortlist['placebo'])){
+                            array_unshift($sortlist, array( "placebo" => "placebo" ));
+                        }
+
 					    foreach ($sortlist as $key => $list) {
 
-							echo '<input class="sorter-placebo" type="hidden" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $group . '][placebo]" value="placebo">';
+							echo '<input class="sorter-placebo" type="hidden" name="' . $this->field['id'] . '[' . $group . '][placebo]" value="placebo">';
 
 							if ($key != "placebo") {
 
 							    echo '<li id="'.$key.'" class="sortee">';
-							    echo '<input class="position '.$this->field['class'].'" type="hidden" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $group . '][' . $key . ']" value="'.$list.'">';
+							    echo '<input class="position '.$this->field['class'].'" type="hidden" name="' . $this->field['id'] . '[' . $group . '][' . $key . ']" value="'.$list.'">';
 							    echo $list;
 							    echo '</li>';
 

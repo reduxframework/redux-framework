@@ -62,7 +62,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 		 */
 		public function render() {
 
-			echo '<input data-id="'.$this->field['id'].'" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . ( isset($this->field['default']) ? $this->field['default'] : "" ) . '" />';
+			echo '<input data-id="'.$this->field['id'].'" name="' . $this->field['name'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . ( isset($this->field['default']) ? $this->field['default'] : "" ) . '" />';
 
 			if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
 				$tChecked = "";
