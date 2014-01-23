@@ -1,0 +1,16 @@
+{
+  "name": "ReduxFramework/ReduxFramework",
+  "authors": [
+    {
+      name: "Redux Framework Team"
+    }
+  ],
+  "type": "library",
+  "description": "Redux is a simple, truly extensible options framework for WordPress themes and plugins.",
+  "homepage": "http://reduxframework.com",
+  "license": "GPL-3.0+",
+  "keywords": ["settings", "wordpress", "options"],
+  "require" : {
+    "php" : ">=5.2.0"
+  }
+}
