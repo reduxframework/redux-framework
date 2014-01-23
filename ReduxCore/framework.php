@@ -965,7 +965,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _default_cleanup() {
 
-            $this->instance = $this;
+            //$this->instance = $this;
 
             // Fix the global variable name
             if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
