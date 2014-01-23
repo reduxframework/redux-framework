@@ -2,7 +2,7 @@
   "name": "ReduxFramework/ReduxFramework",
   "authors": [
     {
-      name: "Redux Framework Team"
+      "name": "Redux Framework Team"
     }
   ],
   "type": "library",
