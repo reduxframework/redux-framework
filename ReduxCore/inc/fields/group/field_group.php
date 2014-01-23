@@ -110,7 +110,7 @@ if (!class_exists('ReduxFramework_group')) {
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
-                    $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                    $name = '[' . $field['id'] . ']';
                     $content = str_replace($name,$this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@]['.$field['id'].']', $content);
                     // remove the name property. asigned by the controller, create new data-name property for js
                     $content = str_replace('name', 'data-name', $content);
@@ -177,7 +177,7 @@ if (!class_exists('ReduxFramework_group')) {
                     $content = ob_get_contents();
 
                     //adding sorting number to the name of each fields in group
-                    $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                    $name = '[' . $field['id'] . ']';
                     $content = str_replace($name, $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']['.$x.']['.$field['id'].']', $content);
 
                     //we should add $sort to id to fix problem with select field
