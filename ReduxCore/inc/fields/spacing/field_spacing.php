@@ -184,7 +184,7 @@ class ReduxFramework_spacing extends ReduxFramework{
 				if ( $this->field['units_extended'] ) {
 					$testUnits = array('px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
 				} else {
-					$testUnits = array('px', 'em', 'rem', '%');
+					$testUnits = array('px', 'em', 'pt', 'rem', '%');
 				}
 				if ( $this->field['units'] != "" ) {
 					$testUnits = array( $this->field['units'] );

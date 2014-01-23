@@ -39,7 +39,7 @@ class ReduxFramework_raw extends ReduxFramework {
         do_action('redux-field-raw-'.$this->parent->args['opt_name'].'-'.$this->field['id']);
 
         echo '</fieldset>';
-        echo '</td></tr></table><table class="form-table no-border" style="margin-top: 0;"><tbody><tr><th></th><td>';        
+        echo '</td></tr></table><table class="form-table no-border" style="margin-top: 0;"><tbody><tr style="border-bottom: 0;"><th></th><td>';        
 
     }
 }

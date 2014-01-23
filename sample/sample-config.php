@@ -1323,7 +1323,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'title' => __('Group - BETA', 'redux-framework-demo'), 
 						'subtitle' => __('Group any items together. Experimental. Use at your own risk.', 'redux-framework-demo'),
 						'groupname' => __('Group', 'redux-framework-demo'), // Group name
-						'subfields' => 
+						'fields' => 
 							array(
 								array(
 									'id'=>'switch-fold',

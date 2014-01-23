@@ -74,6 +74,10 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
             		$this->value = array();
             	}
 
+                if ( !empty( $this->field['options'] ) && isset( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
+                    $this->field['options'] = $this->field['default'];
+                }
+
                 foreach( $this->field['options'] as $k => $v ) {
                 	
                     if (empty($this->value[$k])) {
@@ -90,7 +94,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
 
                 echo '</ul>';   
 
-            } else {
+            } else if ( empty( $this->field['data'] ) ) {
                 
                 echo ( ! empty( $this->field['desc'] ) ) ? ' <label for="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '">' : '';
                 
