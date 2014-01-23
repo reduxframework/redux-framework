@@ -208,7 +208,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         }// ::init() 
 
         public $framework_url       = 'http://www.reduxframework.com/';
-        static $instance            = null;
+        public $instance            = null;
         public $page                = '';
         public $args                = array(
             'opt_name'           => '', // Must be defined by theme/plugin
@@ -1649,6 +1649,30 @@ if( !class_exists( 'ReduxFramework' ) ) {
           return $default_output;
         } // get_default_output_string()
 
+        public function get_header_html( $field ) {
+            $th = "";
+            if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
+                $default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
+                if (!empty($field['title'])) {
+                    $th = $field['title'] . $default_mark."";
+                }
+
+                if( isset( $field['subtitle'] ) ) {
+                    $th .= '<span class="description">' . $field['subtitle'] . '</span>';
+                }
+            } 
+
+            if (!empty($th)) {
+                $th = '<div class="redux_field_th">'.$th.'</div>';
+            }
+
+            if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
+                $th .= $this->get_default_output_string($field);
+            } 
+
+            return $th;  
+        }
+
 
         /**
          * Register Option for use
@@ -1708,29 +1732,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }                            
                         }                        
                         
-                        $th = "";
-                        if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
-                            $default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
-                            if (!empty($field['title'])) {
-                                $th = $field['title'] . $default_mark."";
-                            }
-          
-                            if( isset( $field['subtitle'] ) ) {
-                                $th .= '<span class="description">' . $field['subtitle'] . '</span>';
-                            }
-  
-                        } 
                         if (!isset($field['id'])) {
-                            echo '<br /><h3>No field ID is set. Here\'s the field:</h3><pre>';
+                            echo '<br /><h3>No field ID is set.</h3><pre>';
                             print_r($field);
                             echo "</pre><br />";
+                            continue;
                         }
                         
-                        $field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
+                        $th = $this->get_header_html( $field );                     
 
-                        if (!empty($th)) {
-                            $th = '<div class="redux_field_th">'.$th.'</div>';
-                        }
+                        $field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
 
                         // Set the default value if present
                         $this->options_defaults[$field['id']] = isset( $this->options_defaults[$field['id']] ) ? $this->options_defaults[$field['id']] : '';
@@ -1743,9 +1754,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                         }   
 
-                        if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
-                            $th .= $this->get_default_output_string($field);
-                        }
                         if (!isset($field['class'])) { // No errors please
                             $field['class'] = "";
                         }
