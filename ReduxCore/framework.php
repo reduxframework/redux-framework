@@ -615,9 +615,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * @param string $data
              */
             $data = apply_filters( "redux/options/{$this->args['opt_name']}/data/$type", $data ); 
-
-            if ( empty( $data ) && isset( $this->wp_data[$type.implode( '-' , $args )] ) ) {
-                $data = $this->wp_data[$type.implode( '-' , $args )];
+            $argsKey = "";
+            foreach($args as $key => $value) {
+                if (!is_array($value)) {
+                    $argsKey .= $value."-";
+                } else {
+                    $argsKey .= implode( "-", $value);
+                }
+            }
+            if ( empty( $data ) && isset( $this->wp_data[$type.$argsKey] ) ) {
+                $data = $this->wp_data[$type.$argsKey];
             }
 
             if ( empty($data) && !empty($type) ) {
@@ -764,7 +771,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }//if           
                 }//if
                 
-                $this->wp_data[$type.implode( '-' , $args )] = $data;
+                $this->wp_data[$type.$argsKey] = $data;
 
             }//if
             
