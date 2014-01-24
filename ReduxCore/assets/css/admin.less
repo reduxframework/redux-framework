@@ -14,22 +14,22 @@ a {
 
 .redux-container{
 	//font-family: "Open Sans","Lucida Grande", Sans-serif;
-	background-color: #eeeeee; /* Old browsers */
+	background-color: #f5f5f5; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
-	background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%); /* FF3.6+ */
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-	background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Chrome 10+,Safari 5.1+ */
-	background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* IE10+ */
-	background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background-image: -moz-linear-gradient(top, #f2f2f2 0%, #f5f5f5 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#f5f5f5)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* Chrome 10+,Safari 5.1+ */
+	background-image: -ms-linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* IE10+ */
+	background-image: -o-linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* Opera 11.10+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-	background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
-	border: 1px solid #e5e5e5;
-	-moz-border-radius: 10px; /* Firefox */
-	-webkit-border-radius: 10px; /* Safari, Chrome */
-	border-radius: 10px;
-	-moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.1);
+	background-image: linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* W3C */
+	border: 1px solid #dedede;
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+box-shadow: 0 1px 1px rgba(0,0,0,.04);
+
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+	
+	
 	margin-top:20px;
 	overflow: hidden;
 }
@@ -66,7 +66,6 @@ a {
 .redux-container .hr .inner span {
 	background-color: #FCFCFC;
 	border-color: #E7E7E7;
-	border-radius: 20px;
 	height: 5px;
 	width: 5px;
 	border-width: 2px;
@@ -214,9 +213,6 @@ a {
 	float:right;
     padding: 6px 7px 4px 7px;
     margin-left:4px;
-	-moz-border-radius: 20px; /* Firefox */
-	-webkit-border-radius: 20px; /* Safari, Chrome */
-	border-radius: 20px;
 	font-family: sans-serif;
     font-size: 9px;
     font-weight: bold;
@@ -230,9 +226,6 @@ a {
 	float:right;
     padding: 6px 7px 4px 7px;
     margin-left:4px;
-	-moz-border-radius: 20px; /* Firefox */
-	-webkit-border-radius: 20px; /* Safari, Chrome */
-	border-radius: 20px;
 	font-family: sans-serif;
     font-size: 9px;
     font-weight: bold;
@@ -267,7 +260,8 @@ a {
 .redux-sidebar .redux-group-menu li a{
 	display:block;
 	padding: 12px 4px 12px 14px;
-	background: #eeeeee;
+	background: #e0e0e0;
+	background: transparent;
 	border-width: 1px 0px 1px 0px;
 	border-style: solid;
 	border-bottom-color: #E7E7E7;
@@ -291,13 +285,11 @@ a {
 	position: absolute;
 	left: 15px;
 }
-.redux-sidebar .redux-group-menu li.active a:hover{
-	color: #269ad6;
-}
+
 .redux-sidebar .redux-group-menu li a:hover{
-	background:#eeeeee;
+	background:#e5e5e5;
 	width:184px;
-	color: #269ad6;
+	color: #777;
 	margin-right:-2px;
 	opacity: 1;
 }
@@ -309,7 +301,7 @@ a {
 
 .redux-sidebar .redux-group-menu li.active a{
 	background:#FCFCFC;
-	color: #797979;
+	color: #269ad6;
 	width:184px;
 	opacity: 1;
 	margin-right:-2px;
@@ -506,9 +498,7 @@ a {
 
 #redux-intro-text {
 	background: #f3f3f3;
-	border: solid #d8d8d8;	
-	border-bottom: 1px solid #d8d8d8;
-	border-width:0px 1px 1px 1px;
+	border-bottom: 1px solid #dedede;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
@@ -530,9 +520,7 @@ a {
 
 .redux-container #info_bar {
   background: #f3f3f3;
-  border-color: #d8d8d8;
-  border-style: solid;
-  border-width: 0px 1px 1px 1px;
+  border-bottom: 1px solid #dedede;
   padding: 6px 10px 6px 6px;
   text-align: right;
   -moz-box-shadow: inset 0 1px 0 #fcfcfc;
@@ -548,7 +536,7 @@ a {
 	float: left;
 	font-size:0px;
 	text-indent: -9999px;
-	margin: 0 0 0 5px;
+	margin: 1px 0 0 5px;
 	border: 1px solid #bbb;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -562,19 +550,12 @@ a {
 
 #redux-header {
 	background:#f1f1f1;
-	border: 1px solid #ccc;
-	-webkit-border-radius: 10px 10px 0 0;
-	-moz-border-radius: 10px 10px 0 0;
-	border-radius: 10px 10px 0 0;
 	background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
 	background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: linear-gradient(top,#f9f9f9,#ececec);
-	-moz-box-shadow: inset 0 1px 0 #fff;
-	-webkit-box-shadow: inset 0 1px 0 #fff;
-	box-shadow: inset 0 1px 0 #fff;
 }
 #redux-header .display_header {
 	float: left;
@@ -601,7 +582,7 @@ a {
 
 .sticky-footer-fixed {
 	background: #f3f3f3;
-	border-top: 1px solid #d8d8d8 !important;
+	border-top: 1px solid #dedede !important;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
