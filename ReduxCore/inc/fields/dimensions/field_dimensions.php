@@ -222,10 +222,6 @@ class ReduxFramework_dimensions extends ReduxFramework {
 
     public function output() {
 
-        if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] )  ) ) {
-            return;
-        }
-
         // if field units has a value and IS an array, then evaluate as needed.
         if (isset($this->field['units']) && !is_array($this->field['units'])) {
 

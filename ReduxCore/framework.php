@@ -1135,7 +1135,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
                                 $enqueue = new $field_class( $field, $value, $this );
                                 /** @noinspection PhpUndefinedMethodInspection */
-                                $enqueue->output();
+                                if ( isset( $field['output'] ) || isset( $field['compiler'] ) ) {
+                                    $enqueue->output();
+                                }
                             }
                         }           
                     }

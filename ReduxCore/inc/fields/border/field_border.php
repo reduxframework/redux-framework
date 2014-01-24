@@ -212,10 +212,6 @@ class ReduxFramework_border extends ReduxFramework {
 
     public function output() {
 
-		if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] )  ) ) {
-			return;
-		}
-
         $cleanValue = array(
             'top' => !empty( $this->value['border-top'] ) ? $this->value['border-top'] : 'inherit',
             'right' => !empty( $this->value['border-right'] ) ? $this->value['border-right'] : 'inherit',

@@ -425,10 +425,6 @@ class ReduxFramework_typography extends ReduxFramework {
             $fontBackup = ',' . $font['font-backup'];
         }
 
-      
-      // Don't create dynamic CSS if output array is not set
-	if ( isset( $this->field['output'] ) && is_array( $this->field['output']) || isset( $this->field['compiler'] ) && is_array( $this->field['compiler']) ) {      
-        
         $style = '';
         if (!empty($font)) {
             foreach( $font as $key=>$value) {
@@ -472,7 +468,6 @@ class ReduxFramework_typography extends ReduxFramework {
               $this->parent->compilerCSS .= $keys . "{" . $style . '}';  
           }
         }
-      }
       
 
       // Google only stuff!

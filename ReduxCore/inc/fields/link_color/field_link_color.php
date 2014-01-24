@@ -130,10 +130,6 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
 
         public function output() {
 
-            if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] )  ) ) {
-                return;
-            }
-
             $style = array();
 
             if ( !empty( $this->value['regular'] ) && $this->field['regular'] === true && $this->field['default']['regular'] !== false ) {

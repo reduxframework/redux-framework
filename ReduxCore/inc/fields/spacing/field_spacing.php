@@ -239,10 +239,6 @@ class ReduxFramework_spacing extends ReduxFramework{
 
     public function output() {
 
-        if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && !isset( $this->field['compiler'] )  ) {
-            return;
-        }  
-
         if ( !isset( $this->field['mode'] ) ) {
         	$this->field['mode'] = "padding";
         }
