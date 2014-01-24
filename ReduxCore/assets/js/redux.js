@@ -596,7 +596,7 @@ jQuery(document).ready(function($) {
 	if (jQuery('#redux-imported').is(':visible')) {
 		jQuery('#redux-imported').slideDown();
 	}
-	jQuery(document.body).on('change', 'input, textarea, select', function() {
+	jQuery(document.body).on('change', '.redux-field input, .redux-field textarea, .redux-field select', function() {
 		if (!jQuery(this).hasClass('noUpdate')) {
 			redux_change(jQuery(this));
 		}

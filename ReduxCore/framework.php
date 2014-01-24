@@ -1350,11 +1350,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     }
                                     if ( method_exists( $field_class, 'localize' ) ) {
                                         /** @noinspection PhpUndefinedMethodInspection */
-                                        $params = $theField->localize();
+                                        $params = $theField->localize($field);
                                         if ( !isset( $this->localize_data[$field['type']] ) ) {
                                             $this->localize_data[$field['type']] = array();
                                         }
-                                        $this->localize_data[$field['type']][$field['id']] = $theField->localize();
+                                        $this->localize_data[$field['type']][$field['id']] = $theField->localize($field);
                                     } 
                                     unset($theField);                               
                                 }

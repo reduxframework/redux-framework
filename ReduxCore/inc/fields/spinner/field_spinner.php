@@ -123,7 +123,7 @@ class ReduxFramework_spinner extends ReduxFramework {
      * @since  Redux_Framework 3.1.1
      * 
      */
-    function localize() {
+    function localize($field, $value = "") {
 
         $params = array(
             'id' => '',
@@ -134,8 +134,11 @@ class ReduxFramework_spinner extends ReduxFramework {
             'default' => '',
         );
 
-        $params = wp_parse_args( $this->field, $params );
-        $params['val'] = $this->value;
+        $params = wp_parse_args( $field, $params );
+        if ( empty( $value ) ) {
+            $value = $this->value;
+        }       
+        $params['val'] = $value;
 
         return $params;
 

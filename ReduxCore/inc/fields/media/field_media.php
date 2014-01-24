@@ -169,13 +169,21 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
     		 * @since  Redux_Framework 3.1.1
     		 * 
     		 */
-    		function localize() {
+    		function localize($field, $value = "") {
                 
-          if ( !isset( $this->field['mode'] ) ) {
-            $this->field['mode'] = "image";
-          }
+          $params = array();
 
-          return array( 'mode' => $this->field['mode'] );
+          if ( !isset( $field['mode'] ) ) {
+            $field['mode'] = "image";
+          }          
+          $params['mode'] = $field['mode'];
+
+          if ( empty( $value ) ) {
+            $value = $this->value;
+          }   
+          $params['val'] = $value;
+
+          return $params;
           
     		}        
 

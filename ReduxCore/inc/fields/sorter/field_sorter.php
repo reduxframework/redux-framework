@@ -160,13 +160,18 @@ class ReduxFramework_sorter extends ReduxFramework {
      * @since  Redux_Framework 3.1.5
      * 
      */
-    function localize() {
+    function localize($field, $value = "") {
 
     	$params = array();
     	
-    	if ( isset( $this->field['limits'] ) && !empty( $this->field['limits'] ) ) {
-    		$params = $this->field['limits'];
+    	if ( isset( $field['limits'] ) && !empty( $field['limits'] ) ) {
+    		$params['limits'] = $field['limits'];
     	}
+
+        if ( empty( $value ) ) {
+            $value = $this->value;
+        }       
+        $params['val'] = $value;
 
         return $params;
 
