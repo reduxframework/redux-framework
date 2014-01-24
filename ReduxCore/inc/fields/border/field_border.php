@@ -244,7 +244,7 @@ class ReduxFramework_border extends ReduxFramework {
 			$this->parent->outputCSS .= $keys . "{" . $style . '}';
 		}
 
-		if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+		if ( !empty( $this->field['compiler'] ) && $this->field['compiler'] == true ) {
 			$keys = implode(",", $this->field['compiler']);
 			$style = $keys . "{" . $style . '}';
 			$this->parent->compilerCSS .= $keys . "{" . $style . '}';
