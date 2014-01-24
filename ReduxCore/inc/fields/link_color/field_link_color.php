@@ -160,7 +160,7 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
                     }
                     $this->parent->outputCSS .= $styleString;  
                 }
-                if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+                if ( !empty( $this->field['compiler'] ) && $this->field['compiler'] == true ) {
                     $styleString = "";                  
                     foreach($style as $key=>$value) {
                         if (is_numeric($key)) {
