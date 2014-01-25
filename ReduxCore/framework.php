@@ -41,6 +41,9 @@ if(has_action('ecpt_field_options_')) {
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
 
+    // General helper functions
+    include_once(dirname(__FILE__).'/inc/class.redux_helpers.php');
+
     /**
      * Main ReduxFramework class
      *
@@ -2000,7 +2003,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }            
 
             // Validate fields (if needed)
-            $plugin_options = $this->_validate_values( $plugin_options, $this->options );
+            $plugin_options = $this->_validate_values( $plugin_options, $this->options, $this->sections );
 
             if( !empty( $this->errors ) || !empty( $this->warnings ) ) {
                 set_transient( 'redux-notices-' . $this->args['opt_name'], array( 'errors' => $this->errors, 'warnings' => $this->warnings ), 1000 );
@@ -2041,15 +2044,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param       array $options
          * @return      array $plugin_options
          */
-        public function _validate_values( $plugin_options, $options ) {
-            foreach( $this->sections as $k => $section ) {
+        public function _validate_values( $plugin_options, $options, $sections ) {
+            foreach( $sections as $k => $section ) {
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fkey => $field ) {
                         $field['section_id'] = $k;
 
                         if( isset( $field['type'] ) && ( $field['type'] == 'checkbox' || $field['type'] == 'checkbox_hide_below' || $field['type'] == 'checkbox_hide_all' ) ) {
-                            if( !isset( $plugin_options[$field['id']] ) )
+                            if( !isset( $plugin_options[$field['id']] ) ) {
                                 $plugin_options[$field['id']] = 0;
+                            }
                         }
 
                         if( !isset( $plugin_options[$field['id']] ) || $plugin_options[$field['id']] == '' ) continue;
