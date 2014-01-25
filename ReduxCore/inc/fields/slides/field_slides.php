@@ -119,8 +119,9 @@ if (!class_exists('ReduxFramework_slides')) {
                     echo '<span class="button media_upload_button" id="add_' . $x . '">' . __('Upload', 'redux-framework') . '</span>';
 
                     $hide = '';
-                    if (empty($slide['url']) || $slide['url'] == '')
+                    if ( empty( $slide['url'] ) || $slide['url'] == '' ) {
                         $hide = ' hide';
+                    }
 
                     echo '<span class="button remove-image' . $hide . '" id="reset_' . $x . '" rel="' . $slide['attachment_id'] . '">' . __('Remove', 'redux-framework') . '</span>';
 
@@ -197,6 +198,7 @@ if (!class_exists('ReduxFramework_slides')) {
                 echo '<input type="hidden" class="upload" name="' . $this->field['name'] . '[' . $x . '][url]" id="' . $this->field['id'] . '-image_url_' . $x . '" value="" readonly="readonly" />';
                 echo '<input type="hidden" class="upload-height" name="' . $this->field['name'] . '[' . $x . '][height]" id="' . $this->field['id'] . '-image_height_' . $x . '" value="" />';
                 echo '<input type="hidden" class="upload-width" name="' . $this->field['name'] . '[' . $x . '][width]" id="' . $this->field['id'] . '-image_width_' . $x . '" value="" /></li>';
+                echo '<input type="hidden" class="upload-thumbnail" name="' . $this->field['name'] . '[' . $x . '][thumb]" id="' . $this->field['id'] . '-thumb_url_' . $x . '" value="" /></li>';
 
                     if ( isset( $this->field['options'] ) && !empty( $this->field['options'] ) ) {
                         $placeholder = (isset($this->field['placeholder']['select'])) ? esc_attr($this->field['placeholder']['select']) : __( 'Select an Option', 'redux-framework' );

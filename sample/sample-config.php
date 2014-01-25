@@ -433,7 +433,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'desc' => __('This field will store all slides values into a multidimensional array to use into a foreach loop.', 'redux-framework-demo')
 					),        
 					array(
-						'id'=>'slides',
+						'id'=>'slides2',
 						'type' => 'slides',
 						'title' => __('Slides Options', 'redux-framework-demo'),
 						'subtitle'=> __('Unlimited slides with drag and drop sortings.', 'redux-framework-demo'),
@@ -686,6 +686,8 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'title' => __('Color RGBA - BETA', 'redux-framework-demo'), 
 						'subtitle' => __('Gives you the RGBA color. Still quite experimental. Use at your own risk.', 'redux-framework-demo'),
 						'default' => array( 'color' => '#dd9933', 'alpha' => '1.0' ),
+						'output' => array('body'),
+						'mode' => 'background',
 						'validate' => 'colorrgba',
 						),			
 					array(
