@@ -86,6 +86,7 @@ if (!class_exists('ReduxFramework_slides')) {
                         'description' => '',
                         'sort' => '',
                         'url' => '',
+                        'image' => '',
                         'thumb' => '',
                         'attachment_id' => '',
                         'height' => '',
@@ -94,9 +95,9 @@ if (!class_exists('ReduxFramework_slides')) {
                     );
                     $slide = wp_parse_args( $slide, $defaults );
 
-                    if (empty($slide['url']) && !empty($slide['attachment_id'])) {
+                    if ( empty( $slide['thumb'] ) && !empty( $slide['attachment_id'] ) ) {
                         $img = wp_get_attachment_image_src($slide['attachment_id'], 'full');
-                        $slide['url'] = $img[0];
+                        $slide['image'] = $img[0];
                         $slide['width'] = $img[1];
                         $slide['height'] = $img[2];
                     }
@@ -104,12 +105,13 @@ if (!class_exists('ReduxFramework_slides')) {
                     echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="'.$this->field['id'].'"><h3><span class="redux-slides-header">' . $slide['title'] . '</span></h3><div>';
 
                     $hide = '';
-                    if ( empty( $slide['url'] ) ) {
+                    if ( empty( $slide['image'] ) ) {
                         $hide = ' hide';
                     }
 
+
                     echo '<div class="screenshot' . $hide . '">';
-                    echo '<a class="of-uploaded-image" href="' . $slide['url'] . '">';
+                    echo '<a class="of-uploaded-image" href="' . $slide['image'] . '">';
                     echo '<img class="redux-slides-image" id="image_image_id_' . $x . '" src="' . $slide['thumb'] . '" alt="" target="_blank" rel="external" />';
                     echo '</a>';
                     echo '</div>';
@@ -119,7 +121,7 @@ if (!class_exists('ReduxFramework_slides')) {
                     echo '<span class="button media_upload_button" id="add_' . $x . '">' . __('Upload', 'redux-framework') . '</span>';
 
                     $hide = '';
-                    if ( empty( $slide['url'] ) || $slide['url'] == '' ) {
+                    if ( empty( $slide['image'] ) || $slide['image'] == '' ) {
                         $hide = ' hide';
                     }
 
@@ -137,7 +139,7 @@ if (!class_exists('ReduxFramework_slides')) {
                     echo '<li><input type="hidden" class="slide-sort" name="' . $this->field['name'] . '[' . $x . '][sort]" id="' . $this->field['id'] . '-sort_' . $x . '" value="' . $slide['sort'] . '" />';
                     echo '<li><input type="hidden" class="upload-id" name="' . $this->field['name'] . '[' . $x . '][attachment_id]" id="' . $this->field['id'] . '-image_id_' . $x . '" value="' . $slide['attachment_id'] . '" />';
                     echo '<input type="hidden" class="upload-thumbnail" name="' . $this->field['name'] . '[' . $x . '][thumb]" id="' . $this->field['id'] . '-thumb_url_' . $x . '" value="' . $slide['thumb'] . '" readonly="readonly" />';
-                    echo '<input type="hidden" class="upload" name="' . $this->field['name'] . '[' . $x . '][image]" id="' . $this->field['id'] . '-image_url_' . $x . '" value="' . $slide['url'] . '" readonly="readonly" />';
+                    echo '<input type="hidden" class="upload" name="' . $this->field['name'] . '[' . $x . '][image]" id="' . $this->field['id'] . '-image_url_' . $x . '" value="' . $slide['image'] . '" readonly="readonly" />';
                     echo '<input type="hidden" class="upload-height" name="' . $this->field['name'] . '[' . $x . '][height]" id="' . $this->field['id'] . '-image_height_' . $x . '" value="' . $slide['height'] . '" />';
                     echo '<input type="hidden" class="upload-width" name="' . $this->field['name'] . '[' . $x . '][width]" id="' . $this->field['id'] . '-image_width_' . $x . '" value="' . $slide['width'] . '" /></li>';
 /*
