@@ -112,10 +112,10 @@ class ReduxFramework_border extends ReduxFramework {
 			echo '<div class="field-border-input input-prepend"><span class="add-on"><i class="el-icon-fullscreen icon-large"></i></span><input type="text" class="redux-border-all redux-border-input mini'.$this->field['class'].'" placeholder="'.__('All','redux-framework').'" rel="'.$this->field['id'].'-all" value="'.$this->value['top'].'"></div>';
 		}
 
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-top" name="' . $this->field['name'] . '[border-top]" value="' . ( $this->value['top'] ? $this->value['top'] . 'px' : '' ) . '">';
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-right" name="' . $this->field['name'] . '[border-right]" value="' . ( $this->value['right'] ? $this->value['right'] . 'px' : '' ) . '">';
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-bottom" name="' . $this->field['name'] . '[border-bottom]" value="' . ( $this->value['bottom'] ? $this->value['bottom'] . 'px' : '' ) . '">';
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-left" name="' . $this->field['name'] . '[border-left]" value="' . ( $this->value['left'] ? $this->value['left'] . 'px' : '' ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-top" name="' . $this->field['name'] . '[border-top]" value="' . ( $this->value['top'] ? $this->value['top'] . 'px' : 0 ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-right" name="' . $this->field['name'] . '[border-right]" value="' . ( $this->value['right'] ? $this->value['right'] . 'px' : 0 ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-bottom" name="' . $this->field['name'] . '[border-bottom]" value="' . ( $this->value['bottom'] ? $this->value['bottom'] . 'px' : 0 ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-left" name="' . $this->field['name'] . '[border-left]" value="' . ( $this->value['left'] ? $this->value['left'] . 'px' : 0 ) . '">';
 
 		if ( !isset( $this->field['all'] ) || $this->field['all'] !== true ) :
 			/**
