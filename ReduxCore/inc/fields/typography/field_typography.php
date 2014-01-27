@@ -246,7 +246,7 @@ class ReduxFramework_typography extends ReduxFramework {
             Font Size
              **/
             if ($this->field['font-size'] === true):
-                echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$this->field['class'].' tips" title="Size" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="' . $this->field['name'] . '[font-size]" value="'.str_replace($unit, '', $this->value['font-size']).'" data-value="'.str_replace($unit, '', $this->value['font-size']).'"><span class="add-on">'.$unit.'</span></div>';
+                echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini'.$this->field['class'].' tips" title="'.__('Size','redux-framework').'" placeholder="'.__('Size','redux-framework').'" id="'.$this->field['id'].'-size" name="' . $this->field['name'] . '[font-size]" value="'.str_replace($unit, '', $this->value['font-size']).'" data-value="'.str_replace($unit, '', $this->value['font-size']).'"><span class="add-on">'.$unit.'</span></div>';
             	echo '<input type="hidden" class="typography-font-size" name="' . $this->field['name'] . '[font-size]" value="'.$this->value['font-size'].'" data-id="'.$this->field['id'].'"  />';
             endif;
 
@@ -255,7 +255,7 @@ class ReduxFramework_typography extends ReduxFramework {
             Line Height
              **/
             if ($this->field['line-height'] === true):
-                echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$this->field['class'].'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" value="'.str_replace($unit, '', $this->value['line-height']).'" data-value="'.str_replace($unit, '', $this->value['line-height']).'"><span class="add-on">'.$unit.'</span></div>';
+                echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini'.$this->field['class'].' tips" title="'.__('Height','redux-framework').'" placeholder="'.__('Height','redux-framework').'" id="'.$this->field['id'].'-height" value="'.str_replace($unit, '', $this->value['line-height']).'" data-value="'.str_replace($unit, '', $this->value['line-height']).'"><span class="add-on">'.$unit.'</span></div>';
                 echo '<input type="hidden" class="typography-line-height" name="' . $this->field['name'] . '[line-height]" value="'.$this->value['line-height'].'" data-id="'.$this->field['id'].'"  />';
             endif;
 
