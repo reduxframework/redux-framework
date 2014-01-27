@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     po2mo: {
       options: {
-        removeFiles: true,
+        
       },
       files: {
         src: 'ReduxCore/languages/*.po',
@@ -242,6 +242,7 @@ module.exports = function(grunt) {
   grunt.registerTask('langUpdate', "Update languages", function() {
     shell.exec('tx pull -a --minimum-perc=25');
     shell.exec('grunt po2mo');
+    shell.exec('rm -f ReduxCore/languages/*.po');
     shell.exec('php bin/makepot/gen.php');
   });
 

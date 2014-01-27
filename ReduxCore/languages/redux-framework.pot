@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework 3.1.5 Front-end\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-01-23 04:51:01+00:00\n"
+"POT-Creation-Date: 2014-01-27 20:30:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,17 +21,17 @@ msgstr ""
 "X-Poedit-SearchPath-2: .\n"
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:341
-#: ReduxCore/framework.php:1366
+#: ReduxCore/framework.php:1375
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:342
-#: ReduxCore/framework.php:1367
+#: ReduxCore/framework.php:1376
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:343
-#: ReduxCore/framework.php:1369
+#: ReduxCore/framework.php:1378
 msgid "Your current options will be replaced with the values of this preset. Would you like to proceed?"
 msgstr ""
 
@@ -98,150 +98,148 @@ msgstr ""
 msgid "Not Valid"
 msgstr ""
 
-#: ReduxCore/extensions/metaboxes/extension_metaboxes.php:197
-#: ReduxCore/framework.php:117 ReduxCore/framework.php:123
-#: ReduxCore/framework.php:295 ReduxCore/framework.php:298
+#: ReduxCore/framework.php:120 ReduxCore/framework.php:126
+#: ReduxCore/framework.php:298 ReduxCore/framework.php:301
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/extensions/metaboxes/extension_metaboxes.php:249
-#: ReduxCore/framework.php:2268
-msgid "Expand"
-msgstr ""
-
-#: ReduxCore/framework.php:292
+#: ReduxCore/framework.php:295
 msgid "Options panel created using %1$s"
 msgstr ""
 
-#: ReduxCore/framework.php:292
+#: ReduxCore/framework.php:295
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:1036 ReduxCore/framework.php:1037
-#: ReduxCore/framework.php:2339
+#: ReduxCore/framework.php:1046 ReduxCore/framework.php:1047
+#: ReduxCore/framework.php:2349
 msgid "Import / Export"
 msgstr ""
 
-#: ReduxCore/framework.php:1048 ReduxCore/framework.php:1049
-#: ReduxCore/framework.php:2355 ReduxCore/framework.php:2470
+#: ReduxCore/framework.php:1058 ReduxCore/framework.php:1059
+#: ReduxCore/framework.php:2365 ReduxCore/framework.php:2480
 msgid "Options Object"
 msgstr ""
 
-#: ReduxCore/framework.php:1060 ReduxCore/framework.php:1061
-#: ReduxCore/framework.php:2369 ReduxCore/framework.php:2488
+#: ReduxCore/framework.php:1070 ReduxCore/framework.php:1071
+#: ReduxCore/framework.php:2379 ReduxCore/framework.php:2498
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1368
+#: ReduxCore/framework.php:1377
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1644
+#: ReduxCore/framework.php:1653
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:2206
+#: ReduxCore/framework.php:2216
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:2270 ReduxCore/framework.php:2538
+#: ReduxCore/framework.php:2278
+msgid "Expand"
+msgstr ""
+
+#: ReduxCore/framework.php:2280 ReduxCore/framework.php:2548
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:2272 ReduxCore/framework.php:2540
+#: ReduxCore/framework.php:2282 ReduxCore/framework.php:2550
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:2274 ReduxCore/framework.php:2542
+#: ReduxCore/framework.php:2284 ReduxCore/framework.php:2552
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:2277 ReduxCore/framework.php:2545
+#: ReduxCore/framework.php:2287 ReduxCore/framework.php:2555
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:2288
+#: ReduxCore/framework.php:2298
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:2294
+#: ReduxCore/framework.php:2304
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:2301
+#: ReduxCore/framework.php:2311
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:2302
+#: ReduxCore/framework.php:2312
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:2303
+#: ReduxCore/framework.php:2313
 msgid "warning(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:2406
+#: ReduxCore/framework.php:2416
 #: ReduxCore/inc/fields/backup/field_backup.php:101
 msgid "Import / Export Options"
 msgstr ""
 
-#: ReduxCore/framework.php:2407
+#: ReduxCore/framework.php:2417
 msgid "Import Options"
 msgstr ""
 
-#: ReduxCore/framework.php:2408 ReduxCore/inc/fields/backup/field_backup.php:79
+#: ReduxCore/framework.php:2418 ReduxCore/inc/fields/backup/field_backup.php:79
 msgid "Import from file"
 msgstr ""
 
-#: ReduxCore/framework.php:2408 ReduxCore/inc/fields/backup/field_backup.php:79
+#: ReduxCore/framework.php:2418 ReduxCore/inc/fields/backup/field_backup.php:79
 msgid "Import from URL"
 msgstr ""
 
-#: ReduxCore/framework.php:2417 ReduxCore/inc/fields/backup/field_backup.php:84
+#: ReduxCore/framework.php:2427 ReduxCore/inc/fields/backup/field_backup.php:84
 msgid "Input your backup file below and hit Import to restore your sites options from a backup."
 msgstr ""
 
-#: ReduxCore/framework.php:2431
+#: ReduxCore/framework.php:2441
 #: ReduxCore/inc/fields/backup/field_backup.php:116
 msgid "Input the URL to another sites options set and hit Import to load the options from that site."
 msgstr ""
 
-#: ReduxCore/framework.php:2442
+#: ReduxCore/framework.php:2452
 #: ReduxCore/inc/fields/backup/field_backup.php:123
 msgid "Import"
 msgstr ""
 
-#: ReduxCore/framework.php:2442
+#: ReduxCore/framework.php:2452
 #: ReduxCore/inc/fields/backup/field_backup.php:123
 msgid "WARNING! This will overwrite all existing option values, please proceed with caution!"
 msgstr ""
 
-#: ReduxCore/framework.php:2445
+#: ReduxCore/framework.php:2455
 #: ReduxCore/inc/fields/backup/field_backup.php:126
 msgid "Export Options"
 msgstr ""
 
-#: ReduxCore/framework.php:2451
+#: ReduxCore/framework.php:2461
 #: ReduxCore/inc/fields/backup/field_backup.php:128
 msgid "Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site)."
 msgstr ""
 
-#: ReduxCore/framework.php:2456
+#: ReduxCore/framework.php:2466
 #: ReduxCore/inc/fields/backup/field_backup.php:132
 msgid "Copy"
 msgstr ""
 
-#: ReduxCore/framework.php:2456
+#: ReduxCore/framework.php:2466
 #: ReduxCore/inc/fields/backup/field_backup.php:132
 msgid "Download"
 msgstr ""
 
-#: ReduxCore/framework.php:2456
+#: ReduxCore/framework.php:2466
 #: ReduxCore/inc/fields/backup/field_backup.php:132
 msgid "Copy Link"
 msgstr ""
 
-#: ReduxCore/framework.php:2477
+#: ReduxCore/framework.php:2487
 msgid "Show Object in Javascript Console Object"
 msgstr ""
 
@@ -284,8 +282,8 @@ msgstr ""
 
 #: ReduxCore/inc/fields/background/field_background.php:307
 #: ReduxCore/inc/fields/media/field_media.php:150
-#: ReduxCore/inc/fields/slides/field_slides.php:119
-#: ReduxCore/inc/fields/slides/field_slides.php:182
+#: ReduxCore/inc/fields/slides/field_slides.php:121
+#: ReduxCore/inc/fields/slides/field_slides.php:190
 msgid "Upload"
 msgstr ""
 
@@ -294,8 +292,8 @@ msgstr ""
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:75
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:79
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:82
-#: ReduxCore/inc/fields/slides/field_slides.php:125
-#: ReduxCore/inc/fields/slides/field_slides.php:184
+#: ReduxCore/inc/fields/slides/field_slides.php:128
+#: ReduxCore/inc/fields/slides/field_slides.php:192
 msgid "Remove"
 msgstr ""
 
@@ -359,18 +357,20 @@ msgstr ""
 msgid "Clear Gallery"
 msgstr ""
 
-#: ReduxCore/inc/fields/group/field_group.php:85
-#: group-current/field_group.php:71
+#: ReduxCore/inc/fields/group/field_group.php:76
 msgid "New"
 msgstr ""
 
-#: ReduxCore/inc/fields/group/field_group.php:228
-#: group-current/field_group.php:133 group-current/field_group.php:198
+#: ReduxCore/inc/fields/group/field_group.php:89
+msgid "New "
+msgstr ""
+
+#: ReduxCore/inc/fields/group/field_group.php:138
+#: ReduxCore/inc/fields/group/field_group.php:203
 msgid "Delete"
 msgstr ""
 
-#: ReduxCore/inc/fields/group/field_group.php:236
-#: group-current/field_group.php:203
+#: ReduxCore/inc/fields/group/field_group.php:208
 msgid "Add"
 msgstr ""
 
@@ -412,32 +412,27 @@ msgstr ""
 msgid "No items of this type were found."
 msgstr ""
 
-#: ReduxCore/inc/fields/slides/field_slides.php:130
-#: ReduxCore/inc/fields/slides/field_slides.php:189
+#: ReduxCore/inc/fields/slides/field_slides.php:133
+#: ReduxCore/inc/fields/slides/field_slides.php:197
 msgid "Title"
 msgstr ""
 
-#: ReduxCore/inc/fields/slides/field_slides.php:131
-#: ReduxCore/inc/fields/slides/field_slides.php:191
+#: ReduxCore/inc/fields/slides/field_slides.php:135
+#: ReduxCore/inc/fields/slides/field_slides.php:199
 msgid "Description"
 msgstr ""
 
-#: ReduxCore/inc/fields/slides/field_slides.php:132
-#: ReduxCore/inc/fields/slides/field_slides.php:193
+#: ReduxCore/inc/fields/slides/field_slides.php:137
+#: ReduxCore/inc/fields/slides/field_slides.php:201
 msgid "URL"
 msgstr ""
 
-#: ReduxCore/inc/fields/slides/field_slides.php:140
-#: ReduxCore/inc/fields/slides/field_slides.php:202
-msgid "Select an Option"
-msgstr ""
-
-#: ReduxCore/inc/fields/slides/field_slides.php:160
-#: ReduxCore/inc/fields/slides/field_slides.php:222
+#: ReduxCore/inc/fields/slides/field_slides.php:168
+#: ReduxCore/inc/fields/slides/field_slides.php:231
 msgid "Delete Slide"
 msgstr ""
 
-#: ReduxCore/inc/fields/slides/field_slides.php:225
+#: ReduxCore/inc/fields/slides/field_slides.php:234
 msgid "Add Slide"
 msgstr ""
 
@@ -494,7 +489,7 @@ msgstr ""
 msgid "Font color"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:637
+#: ReduxCore/inc/fields/typography/field_typography.php:632
 msgid "Google Webfonts"
 msgstr ""
 
@@ -570,8 +565,4 @@ msgstr ""
 
 #: class.redux-plugin.php:389
 msgid "Activate Demo Mode"
-msgstr ""
-
-#: group-current/field_group.php:84
-msgid "New "
 msgstr ""
