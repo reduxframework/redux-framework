@@ -58,6 +58,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public static $_dir;
         public static $_url;
         public static $_properties;
+        public static $_is_plugin = true;
 
         static function init() {
 
@@ -66,7 +67,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $wp_content_dir = trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) );
             $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
             $wp_content_url = ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL );
-            self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;
+            self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;                     
+
+            // See if Redux is a plugin or not
+            if (strpos(__FILE__,TEMPLATEPATH) !== false) {
+                self::$_is_plugin = false;
+            }
 
 /**
         Still need to port these.
@@ -425,6 +431,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @since    3.0.5
          */
         public function _internationalization() {
+
             /**
              * Locale for text domain
              *
