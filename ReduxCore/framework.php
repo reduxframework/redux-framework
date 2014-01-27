@@ -242,6 +242,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'customizer'         => false, // setting to true forces get_theme_mod_expanded
             'global_variable'    => '', // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
             'output'             => true, // Dynamically generate CSS
+            'compiler'           => true, // Initiate the compiler hook
             'output_tag'         => true, // Print Output Tag
             'transient_time'     => '',
             'default_show'       => false, // If true, it shows the default value
