@@ -24,10 +24,10 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
   # Re-Deploy the heroku demo app and pull the newest code
   gem install heroku
-  ruby travis_deployer.rb
   heroku keys:clear
   heroku keys:add
-  heroku plugins:install https://github.com/heroku/heroku-repo.git
-  heroku repo:rebuild -a redux-premium
+  git clone git@heroku.com:redux-premium.git
+  cd redux-premium
+  git reset HEAD~; git push -f heroku master;
 
 fi
