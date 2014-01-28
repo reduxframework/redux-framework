@@ -432,6 +432,7 @@ class ReduxFramework_typography extends ReduxFramework {
                     continue;
                 }
 
+
                 // Check for font-family key
                 if ('font-family' == $key){
                         
@@ -513,7 +514,7 @@ class ReduxFramework_typography extends ReduxFramework {
 	        $font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
 	        
 	        // Push data to parent typography variable.
-	        if ( empty( $this->parent->fonts[$font['font-family']] ) ) {
+	        if ( empty( $this->parent->typography[$font['font-family']] ) ) {
 	          $this->parent->typography[$font['font-family']] = array();  
 	        }
 	        
@@ -544,7 +545,8 @@ class ReduxFramework_typography extends ReduxFramework {
 	          }
 	          if ( !empty( $font['font-style'] ) ) {
 	              $style .= $font['font-style'];
-	          }                        
+	          }           
+
 	          if ( empty( $this->parent->typography[$font['font-family']]['font-style'] ) || !in_array( $style, $this->parent->typography[$font['font-family']]['font-style'] ) ) {
 	            $this->parent->typography[$font['font-family']]['font-style'][] = $style;
 	          }                      
@@ -558,6 +560,7 @@ class ReduxFramework_typography extends ReduxFramework {
             } // !array_key_exists    
         } //!empty fonts array
       } // Typography not set
+      //print_r($this->parent->typography);
     }
 
 

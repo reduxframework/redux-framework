@@ -1136,7 +1136,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
                                 $enqueue = new $field_class( $field, $value, $this );
                                 /** @noinspection PhpUndefinedMethodInspection */
-                                if ( ( isset( $field['output'] ) && !empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && !empty( $field['compiler'] ) ) ) {
+                                if ( ( ( isset( $field['output'] ) && !empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && !empty( $field['compiler'] ) ) || $field['type'] == "typography" ) ) {
                                     $enqueue->output();
                                 }
                             }
