@@ -113,7 +113,7 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
         
             wp_enqueue_script(
                 'redux-field-color-js', 
-                ReduxFramework::$_url . 'inc/fields/color/field_color.min.js', 
+                ReduxFramework::$_url . 'inc/fields/color/field_color.js', 
                 array( 'jquery', 'wp-color-picker' ),
                 time(),
                 true
@@ -151,7 +151,11 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
                         if (is_numeric($key)) {
                             $styleString .= implode(",", $this->field['output']) . "{" . $value . '}';
                         } else {
-                            $styleString .= implode(":".$key.",", $this->field['output']) . "{" . $value . '}';
+                            if (count($key) == 1) {
+                                $styleString .= $this->field['output'][0].":".$key . "{" . $value . '}';
+                            } else {
+                                $styleString .= implode(":".$key.",", $this->field['output']) . "{" . $value . '}';    
+                            }                            
                         }
                     }
                     $this->parent->outputCSS .= $styleString;  
