@@ -54,7 +54,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.2';
+        public static $_version = '3.1.5.3';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -672,13 +672,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     } else if ($type == "terms" || $type == "term") {
                         $taxonomies = $args['taxonomies'];
                         unset($args['taxonomies']);
-                        if (empty($args)) {
-                            $args = array();
-                        }
-                        if (empty($args['args'])) {
-                            $args['args'] = array();
-                        }                        
-                        $terms = get_terms($taxonomies, $args['args']); // this will get nothing
+                        $terms = get_terms($taxonomies, $args); // this will get nothing
                         if (!empty($terms)) {       
                             foreach ( $terms as $term ) {
                                 $data[$term->term_id] = $term->name;
