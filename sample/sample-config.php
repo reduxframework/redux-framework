@@ -35,9 +35,6 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 				return;
 			}
 			
-			$this->ReduxFramework = new ReduxFramework($this->sections, $this->args);
-			
-
 			// If Redux is running as a plugin, this will remove the demo notice and links
 			//add_action( 'redux/plugin/hooks', array( $this, 'remove_demo' ) );
 			
@@ -53,6 +50,8 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 
 			// Dynamically add a section. Can be also used to modify sections/fields
 			add_filter('redux/options/'.$this->args['opt_name'].'/sections', array( $this, 'dynamic_section' ) );
+
+			$this->ReduxFramework = new ReduxFramework($this->sections, $this->args);
 
 		}
 
