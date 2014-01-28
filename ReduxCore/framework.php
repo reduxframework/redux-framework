@@ -555,7 +555,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 $this->options = $value;
 
-                // Set global variable
+                // Set a global variable by the global_variable argument.
                 $this->set_global_variable();
 
                 /**
@@ -1797,7 +1797,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $field['class'] .= " compiler";
                         }
 
-
+                        if ( isset( $field['unit'] ) && !isset( $field['units'] ) ) {
+                            $field['units'] = $field['unit'];
+                            unset( $field['unit'] );
+                        }
 
                         $this->sections[$k]['fields'][$fieldk] = $field;
 
