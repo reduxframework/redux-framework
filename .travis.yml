@@ -34,5 +34,10 @@ branches:
   - gh-pages
   - setup
 deploy:
+  provider: heroku
   api_key:
     secure: S8IDcJnGxUcOS7QnSVON5imakmLdmHV92zVy7GKAbjK0ZBNp0cSLhT8dKD2ayjVsY454y8WBoK0byJiUpjtd72QIM1KAMcnklrnssj+0D1uTvW+q/qkC9yQzJzjhw+XH5T8CNamjbJmiYjHoQ7VcpLwTd23RgRMOeBHfnBLjLSo=
+  run:
+    - "rake db:migrate"
+    - restart
+    - "rake cleanup"
