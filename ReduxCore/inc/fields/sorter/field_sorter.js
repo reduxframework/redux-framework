@@ -18,10 +18,11 @@ jQuery(function() {
 			stop: function(event, ui) {
 				var sorter = redux.sorter[jQuery(this).attr('data-id')];
 				var id = jQuery(this).find('h3').text();
-				if ( sorter && sorter[id].limits ) {
-					if(jQuery(this).children('li').length >= sorter[id].limits) {
+
+				if ( sorter.limits && id && sorter.limits[id] ) {
+					if(jQuery(this).children('li').length >= sorter.limits[id]) {
 						jQuery(this).addClass('filled');
-						if (jQuery(this).children('li').length > sorter[id].limits) {
+						if (jQuery(this).children('li').length > sorter.limits[id]) {
 							jQuery(ui.sender).sortable('cancel');	
 						}
 					} else {
@@ -33,10 +34,10 @@ jQuery(function() {
 
 				var sorter = redux.sorter[jQuery(this).attr('data-id')];
 				var id = jQuery(this).find('h3').text();
-				if ( sorter && sorter[id].limits ) {
-					if(jQuery(this).children('li').length >= sorter[id].limits) {
+				if ( sorter.limits && id && sorter.limits[id] ) {
+					if(jQuery(this).children('li').length >= sorter.limits[id]) {
 						jQuery(this).addClass('filled');
-						if (jQuery(this).children('li').length > sorter[id].limits) {
+						if (jQuery(this).children('li').length > sorter.limits[id]) {
 							jQuery(ui.sender).sortable('cancel');	
 						}
 					} else {

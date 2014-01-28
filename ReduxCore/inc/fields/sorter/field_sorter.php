@@ -108,12 +108,12 @@ class ReduxFramework_sorter extends ReduxFramework {
 
 					    foreach ($sortlist as $key => $list) {
 
-							echo '<input class="sorter-placebo" type="hidden" name="' . $this->field['id'] . '[' . $group . '][placebo]" value="placebo">';
+							echo '<input class="sorter-placebo" type="hidden" name="' . $this->field['name'] . '[' . $group . '][placebo]" value="placebo">';
 
 							if ($key != "placebo") {
 
 							    echo '<li id="'.$key.'" class="sortee">';
-							    echo '<input class="position '.$this->field['class'].'" type="hidden" name="' . $this->field['id'] . '[' . $group . '][' . $key . ']" value="'.$list.'">';
+							    echo '<input class="position '.$this->field['class'].'" type="hidden" name="' . $this->field['name'] . '[' . $group . '][' . $key . ']" value="'.$list.'">';
 							    echo $list;
 							    echo '</li>';
 
