@@ -35,6 +35,7 @@ branches:
   - setup
 deploy:
   provider: heroku
+  app: redux-premium
   api_key:
     secure: S8IDcJnGxUcOS7QnSVON5imakmLdmHV92zVy7GKAbjK0ZBNp0cSLhT8dKD2ayjVsY454y8WBoK0byJiUpjtd72QIM1KAMcnklrnssj+0D1uTvW+q/qkC9yQzJzjhw+XH5T8CNamjbJmiYjHoQ7VcpLwTd23RgRMOeBHfnBLjLSo=
   run:
