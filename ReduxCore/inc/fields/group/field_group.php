@@ -153,7 +153,7 @@ if (!class_exists('ReduxFramework_group')) {
                 
                 $field_is_title = true;
 
-                foreach ($this->field['subfields'] as $field) {
+                foreach ($this->field['fields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
                     $this->enqueue_dependencies($field['type']);
                     
