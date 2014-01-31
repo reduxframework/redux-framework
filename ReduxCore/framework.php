@@ -380,6 +380,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Register extra extensions
                 $this->_register_extensions(); 
+
+                // Grab database values
+                $this->get_options();                
                 
                 $this->_tracking();
 
@@ -982,9 +985,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
                 $this->args['global_variable'] = str_replace('-', '_', $this->args['opt_name']);
             }
-
-            // Grab database values
-            $this->get_options();
         
         }
 
@@ -1902,7 +1902,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         /** @noinspection PhpIncludeInspection */
                         require_once( $class_file );
                         /** @noinspection PhpUnusedLocalVariableInspection */
-                        $extension = new $extension_class( $this );
+                        $extension = new $extension_class( $this );                                            
                     }
                 }
                                 
