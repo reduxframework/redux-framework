@@ -457,11 +457,9 @@ jQuery(document).ready(function($) {
 
 	$('#toplevel_page_'+redux.args.slug+' .wp-submenu a').click(function(e) {
 		if ( $(this).hasClass('wp-menu-open') ) {
-			console.log('here');
 			e.preventDefault();
 			var url = $(this).attr('href').split('&tab=');
 			$('#'+url[1]+'_section_group_li_a').click();
-			console.log(url[1]);
 			return false;	
 		}
 	});

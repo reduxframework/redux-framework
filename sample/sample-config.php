@@ -382,7 +382,7 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'default' 		=> 0,
 						'options' => $sample_patterns
 						,
-						),			
+						),
 			        array(
 			            "id" => "homepage_blocks_three",
 			            "type" => "sorter",
@@ -1247,39 +1247,6 @@ if ( !class_exists( "Redux_Framework_sample_config" ) ) {
 						'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework-demo'),
 						'callback' => 'redux_my_custom_field'
 						),
-					array(
-						'id'=>"group",
-						'type' => 'group',//doesn't need to be called for callback fields
-						'title' => __('Group - BETA', 'redux-framework-demo'), 
-						'subtitle' => __('Group any items together. Experimental. Use at your own risk.', 'redux-framework-demo'),
-						'groupname' => __('Group', 'redux-framework-demo'), // Group name
-						'fields' => 
-							array(
-								array(
-									'id'=>'switch-fold',
-									'type' => 'switch', 
-									'title' => __('testing fold with Group', 'redux-framework-demo'),
-									'subtitle'=> __('Look, it\'s on!', 'redux-framework-demo'),
-									"default" 		=> 1,
-									),	
-								array(
-			                        'id'=>'text-group',
-			                        'type' => 'text',
-			                        'title' => __('Text', 'redux-framework-demo'), 
-			                        'subtitle' => __('Here you put your subtitle', 'redux-framework-demo'),
-			                        'required' => array('switch-fold', '=' , '1'),
-									),
-								array(
-									'id'=>'select-group',
-									'type' => 'select',
-									'title' => __('Testing select', 'redux-framework-demo'), 
-									'subtitle' => __('Select your themes alternative color scheme.', 'redux-framework-demo'),
-									'options' => array('default.css'=>'default.css', 'color1.css'=>'color1.css'),
-									'default' => 'default.css',
-									),
-								),
-						),			
-						
 					)
 
 				);   
