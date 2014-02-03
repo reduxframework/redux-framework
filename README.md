@@ -66,6 +66,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.5.6 =
+* Changed media field 'read-only' to 'readonly' to vonform to HTML standards.
+
 = 3.1.5.5 =
 * Media field fix.
 
