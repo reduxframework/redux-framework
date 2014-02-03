@@ -141,6 +141,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.5 =
+* Media field fix.
+
 = 3.1.5.4 =
 * Added 'read-only' option for media text field.
 
