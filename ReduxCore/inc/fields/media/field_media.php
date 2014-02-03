@@ -116,7 +116,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected','redux-framework');
             
             $readOnly = ' readonly="readonly"';
-            if ( isset($this->field['read-only']) && $this->field['read-only'] === false ) {
+            if ( isset($this->field['readonly']) && $this->field['readonly'] === false ) {
                 $readOnly = '';
             }
             
