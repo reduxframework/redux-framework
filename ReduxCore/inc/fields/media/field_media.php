@@ -69,7 +69,6 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
                 'width'     => '',
                 'height'    => '',
                 'thumbnail' => '',
-                'read-only' => true,
             );
 
             $this->value = wp_parse_args( $this->value, $defaults );
@@ -115,7 +114,11 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             }   
 
             $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected','redux-framework');
-            $readOnly = $this->value['read-only'] ? ' readonly="readonly"' : '';
+            
+            $readOnly = ' readonly="readonly"';
+            if ( isset($this->field['read-only']) && $this->field['read-only'] === false ) {
+                $readOnly = '';
+            }
             
             echo '<input placeholder="' . $placeholder .'" type="text" class="' . $hide . 'upload ' . $this->field['class'] . '" name="' . $this->field['name'] . '[url]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '"' . $readOnly . '/>';
             echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->field['name'] . '[id]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
