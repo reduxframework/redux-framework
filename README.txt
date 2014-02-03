@@ -141,6 +141,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.4 =
+* Added 'read-only' option for media text field.
+
 = 3.1.5 =
 * Typography font arrays may not contain comma spaces.
 * Merge in pull request - 542, code cleanup and better readability
