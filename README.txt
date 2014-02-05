@@ -141,6 +141,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.7 =
+* Fixed 'not_empty' field validation.
+
 = 3.1.5.6 =
 * Changed media field 'read-only' to 'readonly' to vonform to HTML standards.
 
