@@ -74,7 +74,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
             		$this->value = array();
             	}
 
-                if ( !empty( $this->field['options'] ) && isset( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
+                if ( empty( $this->field['options'] ) && isset( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
                     $this->field['options'] = $this->field['default'];
                 }
 
