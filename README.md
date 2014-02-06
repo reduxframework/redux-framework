@@ -66,6 +66,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.5.9 =
+* Fixed outstanding render issues with spacing field.
+ 
 = 3.1.5.8 =
 * Fixed plgins using Redux from load failure.
  
