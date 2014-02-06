@@ -141,6 +141,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.10 =
+* Fixed issues with checkboxes displaying default values instead of labels.
+
 = 3.1.5.9 =
 * Fixed outstanding render issues with spacing field.
 
