@@ -66,6 +66,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.5.12 =
+* Specified default color not set when clicking the color box default button.
+
 = 3.1.5.11 =
 * Removed wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
 * Sorter field options are now saved as default in database.
