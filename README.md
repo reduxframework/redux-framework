@@ -66,6 +66,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.5.14 =
+* Fixed: 'sortable' field type not saving options as default.
+
 = 3.1.5.12 =
 * Specified default color not set when clicking the color box default button.
 
