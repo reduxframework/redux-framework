@@ -249,7 +249,7 @@ class ReduxFramework_dimensions extends ReduxFramework {
             // nothing to do here, but I'm leaving the construct just in case I have to debug this again.
         }
 
-        $units = isset( $this->field['units'] ) ? $this->field['units'] : "";
+        $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
 
 
         $cleanValue = array(
