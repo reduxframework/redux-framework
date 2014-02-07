@@ -141,6 +141,10 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.11 =
+* Removed wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
+* Sorter field options are now saved as default in database.
+
 = 3.1.5.10 =
 * Fixed issues with checkboxes displaying default values instead of labels.
 
