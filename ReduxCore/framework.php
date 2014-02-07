@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.12';
+        public static $_version = '3.1.5.14';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -813,6 +813,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         foreach( $section['fields'] as $field ) {
                             if( isset( $field['default'] ) ) {
                                 $this->options_defaults[$field['id']] = $field['default'];
+                            } elseif (isset($field['options'])) {
+                                $this->options_defaults[$field['id']] = $field['options'];
                             }
                         }
                     }
@@ -1764,7 +1766,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         } elseif ( !isset( $this->options[$field['id']] ) && isset( $field['options'] )) {
                             
                             // If sorter field, check for options as save them as defaults
-                            if ($field['type'] == 'sorter') {
+                            if ($field['type'] == 'sorter' || $field['type'] == 'sortable') {
                                 $this->options_defaults[$field['id']] = $this->options[$field['id']] = $field['options'];
                                 $doUpdate = true;
                             }
