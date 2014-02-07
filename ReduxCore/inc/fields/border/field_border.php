@@ -231,7 +231,7 @@ class ReduxFramework_border extends ReduxFramework {
                 $style .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
             }            	
         } else {
-        	$style .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
+        	$style .= 'border:' . $cleanValue['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
         }
 
 		if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
