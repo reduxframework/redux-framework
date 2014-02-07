@@ -25,13 +25,20 @@
 
 			if ( $(this).hasClass('font-icons') ) {
 				default_params = $.extend({}, {formatResult: addIconToSelect, formatSelection: addIconToSelect, escapeMarkup: function(m) { return m; } }, default_params);
-				$(this).select2(default_params);
-			} else {
-				$(this).select2(default_params);
-				$(this).on("change", function() {
-					redux_change($($(this)));
-				});
 			}
+			$(this).select2(default_params);
+			if ($(this).hasClass('select2-sortable')) {
+				default_params = {};
+				default_params.bindOrder = 'sortableStop';
+				default_params.sortableOptions = { placeholder : 'ui-state-highlight' };
+				$(this).select2Sortable(default_params);				
+			}
+
+			$(this).on("change", function() {
+				redux_change($($(this)));
+				$(this).select2SortableOrder();
+			});			
+			
 		});
 	};
 

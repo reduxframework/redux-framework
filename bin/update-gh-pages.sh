@@ -22,4 +22,10 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
   # Publish the docs to gh-pages
   grunt gh-pages:travis
 
+  # Re-Deploy the heroku demo app and pull the newest code
+  #gem install heroku
+  #git clone git@heroku.com:redux-premium.git
+  #cd redux-premium
+  #git reset HEAD~; git push -f heroku master;
+
 fi

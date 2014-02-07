@@ -1,3 +1,8 @@
+
+/*
+	Field Color (color)
+ */
+
 /*global jQuery, document, redux_change */
 (function($){
 	'use strict';
@@ -15,6 +20,9 @@
 			change: function(u) {
 				redux_change($(this));
 				$('#' + u.target.id + '-transparency').removeAttr('checked');
+			},
+			clear: function() {
+				redux_change($(this).parent().find('.redux-color-init'));
 			}
 		});
 

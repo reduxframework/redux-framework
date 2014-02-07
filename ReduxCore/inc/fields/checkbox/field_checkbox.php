@@ -44,7 +44,7 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
          */
         function __construct( $field = array(), $value ='', $parent ) {
         
-			parent::__construct( $parent->sections, $parent->args );
+			//parent::__construct( $parent->sections, $parent->args );
 			$this->parent = $parent;
 			$this->field = $field;
 			$this->value = $value;
@@ -63,13 +63,6 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
          */
         public function render() {
 
-
-	        if( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
-				if (empty($this->field['args'])) {
-					$this->field['args'] = array();
-				}        	
-	        	$this->field['options'] = $this->get_wordpress_data($this->field['data'], $this->field['args']);
-	        }
             $this->field['data_class'] = ( isset($this->field['multi_layout']) ) ? 'data-'.$this->field['multi_layout'] : 'data-full';
                 	
             if( !empty( $this->field['options'] ) && ( is_array( $this->field['options'] ) || is_array( $this->field['default'] ) ) ) {
@@ -81,6 +74,10 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
             		$this->value = array();
             	}
 
+                if ( empty( $this->field['options'] ) && isset( $this->field['default'] ) && is_array( $this->field['default'] ) ) {
+                    $this->field['options'] = $this->field['default'];
+                }
+
                 foreach( $this->field['options'] as $k => $v ) {
                 	
                     if (empty($this->value[$k])) {
@@ -88,8 +85,8 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
                     }
                     	
                     echo '<li>';
-                    echo '<label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
-                    echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']" value="1" ' . checked( $this->value[$k], '1', false ) . '/>';
+                    echo '<label for="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
+                    echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array('[' => '_', ']' => '')) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->field['name'] . '[' . $k . ']" value="1" ' . checked( $this->value[$k], '1', false ) . '/>';
                     echo ' ' . $v . '</label>';
                     echo '</li>';
                 
@@ -97,16 +94,38 @@ if( !class_exists( 'ReduxFramework_checkbox' ) ) {
 
                 echo '</ul>';   
 
-            } else {
-
-                echo ( ! empty( $this->field['desc'] ) ) ? ' <label for="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '">' : '';
+            } else if ( empty( $this->field['data'] ) ) {
+                
+                echo ( ! empty( $this->field['desc'] ) ) ? ' <label for="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '">' : '';
                 
                 // Got the "Checked" status as "0" or "1" then insert it as the "value" option
-        	$ch_value = checked( $this->value, '1', false )== "" ? "0" : "1";
-                echo '<input type="checkbox" id="' . strtr($this->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
+        	   $ch_value = checked( $this->value, '1', false )== "" ? "0" : "1";
+                echo '<input type="checkbox" id="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '" name="' . $this->field['name'] . '" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
         
             }
 
         }
+
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function enqueue() {
+
+            wp_enqueue_style(
+                'redux-field-checkbox-css', 
+                ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css',
+                time(),
+                true
+            );
+        
+        }
+
     }
+
 }

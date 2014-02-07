@@ -23,12 +23,12 @@ jQuery(document).ready(function () {
     jQuery('.redux-slides-add').click(function () {
 
         var newSlide = jQuery(this).prev().find('.redux-slides-accordion-group:last').clone(true);
-        var slideCount = jQuery(newSlide).find('input[type="text"]').attr("name").match(/\d+/);
+        var slideCount = jQuery(newSlide).find('input[type="text"]').attr("name").match(/[0-9]+(?!.*[0-9])/);
         var slideCount1 = slideCount*1 + 1;
 
         jQuery(newSlide).find('input[type="text"], input[type="hidden"], textarea').each(function(){
 
-            jQuery(this).attr("name", jQuery(this).attr("name").replace(/\d+/, slideCount1) ).attr("id", jQuery(this).attr("id").replace(/\d+/, slideCount1) );
+            jQuery(this).attr("name", jQuery(this).attr("name").replace(/[0-9]+(?!.*[0-9])/, slideCount1) ).attr("id", jQuery(this).attr("id").replace(/[0-9]+(?!.*[0-9])/, slideCount1) );
             jQuery(this).val('');
             if (jQuery(this).hasClass('slide-sort')){
                 jQuery(this).val(slideCount1);

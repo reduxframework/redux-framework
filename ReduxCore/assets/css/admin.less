@@ -1,10 +1,9 @@
-
-#redux-heading{
-	margin-bottom:20px;
-}
-
 .redux-main .description {
 	margin-top: 7px;
+}
+
+.form-table > tbody > tr > th {
+	width: 30%
 }
 
 a {
@@ -13,26 +12,24 @@ a {
 
 .ui-datepicker table { background: #fff; }
 
-.ui-state-highlight { height: 2.5em; line-height: 2.2em; }
-
 .redux-container{
-	font-family: "Lucida Grande", Sans-serif;
-	background-color: #eeeeee; /* Old browsers */
+	//font-family: "Open Sans","Lucida Grande", Sans-serif;
+	background-color: #f5f5f5; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
-	background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%); /* FF3.6+ */
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-	background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Chrome 10+,Safari 5.1+ */
-	background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* IE10+ */
-	background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background-image: -moz-linear-gradient(top, #f2f2f2 0%, #f5f5f5 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#f5f5f5)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* Chrome 10+,Safari 5.1+ */
+	background-image: -ms-linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* IE10+ */
+	background-image: -o-linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* Opera 11.10+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-	background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
-	border: 1px solid #e5e5e5;
-	-moz-border-radius: 10px; /* Firefox */
-	-webkit-border-radius: 10px; /* Safari, Chrome */
-	border-radius: 10px;
-	-moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.1);
+	background-image: linear-gradient(top, #f2f2f2 0%,#f5f5f5 100%); /* W3C */
+	border: 1px solid #dedede;
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+box-shadow: 0 1px 1px rgba(0,0,0,.04);
+
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+	
+	
 	margin-top:20px;
 	overflow: hidden;
 }
@@ -69,7 +66,6 @@ a {
 .redux-container .hr .inner span {
 	background-color: #FCFCFC;
 	border-color: #E7E7E7;
-	border-radius: 20px;
 	height: 5px;
 	width: 5px;
 	border-width: 2px;
@@ -118,7 +114,7 @@ a {
 #redux-header,
 #redux-footer{
 	text-align:right;
-	padding: 9px 10px 6px 10px
+	padding: 6px 10px;
 }
 #redux-header{
 	border-bottom:1px solid #E7E7E7;
@@ -129,6 +125,11 @@ a {
 }
 #redux-footer #redux-share{
 	float:left;
+	line-height: 28px;
+	font-size: 15px;
+	a {
+		text-decoration: none;
+	}
 }
 #redux-footer #redux-share a{
 	margin-right:10px;
@@ -196,11 +197,11 @@ a {
 }
 
 
-#redux-sidebar,
+.redux-sidebar,
 .redux-main{
 	min-height:300px;
 }
-#redux-sidebar{
+.redux-sidebar{
 	width:200px;
 	float: left;
 }
@@ -212,9 +213,6 @@ a {
 	float:right;
     padding: 6px 7px 4px 7px;
     margin-left:4px;
-	-moz-border-radius: 20px; /* Firefox */
-	-webkit-border-radius: 20px; /* Safari, Chrome */
-	border-radius: 20px;
 	font-family: sans-serif;
     font-size: 9px;
     font-weight: bold;
@@ -228,9 +226,6 @@ a {
 	float:right;
     padding: 6px 7px 4px 7px;
     margin-left:4px;
-	-moz-border-radius: 20px; /* Firefox */
-	-webkit-border-radius: 20px; /* Safari, Chrome */
-	border-radius: 20px;
 	font-family: sans-serif;
     font-size: 9px;
     font-weight: bold;
@@ -249,23 +244,24 @@ a {
 }
 
 
-#redux-sidebar #redux-group-menu{
+.redux-sidebar .redux-group-menu{
 	margin-top:0px;
 }
-#redux-sidebar #redux-group-menu li{
+.redux-sidebar .redux-group-menu li{
 	margin:0px;
 }
-#redux-sidebar #redux-group-menu li.divide{
+.redux-sidebar .redux-group-menu li.divide{
 	padding:0px;
 	border-width: 1px 0px 1px 0px;
 	border-style: solid;
     border-bottom-color: #E7E7E7;
     border-top-color: #F9F9F9;
 }
-#redux-sidebar #redux-group-menu li a{
+.redux-sidebar .redux-group-menu li a{
 	display:block;
 	padding: 12px 4px 12px 14px;
-	background: #eeeeee;
+	background: #e0e0e0;
+	background: transparent;
 	border-width: 1px 0px 1px 0px;
 	border-style: solid;
 	border-bottom-color: #E7E7E7;
@@ -277,10 +273,10 @@ a {
 	-webkit-transition: none;
 	transition: none;
 }
-#redux-sidebar #redux-group-menu li a.custom-tab{
+.redux-sidebar .redux-group-menu li a.custom-tab{
 	background: #f6f6f6;
 }
-#redux-sidebar #redux-group-menu li a img{
+.redux-sidebar .redux-group-menu li a img{
 	width: 16px;
 	height: 16px;
 	/*vertical-align:middle;
@@ -289,34 +285,27 @@ a {
 	position: absolute;
 	left: 15px;
 }
-#redux-sidebar #redux-group-menu li.active a:hover{
-	color: #269ad6;
-}
-#redux-sidebar #redux-group-menu li a:hover{
-	background:#eeeeee;
+
+.redux-sidebar .redux-group-menu li a:hover{
+	background:#e5e5e5;
 	width:184px;
-	color: #269ad6;
+	color: #777;
 	margin-right:-2px;
 	opacity: 1;
 }
-#redux-sidebar #redux-group-menu li a:hover i{
+.redux-sidebar .redux-group-menu li a:hover i{
 
 }
 
 
 
-#redux-sidebar #redux-group-menu li.active a{
+.redux-sidebar .redux-group-menu li.active a{
 	background:#FCFCFC;
-	color: #797979;
+	color: #269ad6;
 	width:184px;
 	opacity: 1;
 	margin-right:-2px;
 }
-
-
-
-
-
 
 .redux-group-tab{
 	display:none;
@@ -329,53 +318,55 @@ a {
 	border-bottom: 1px solid #E7E7E7;
 }
 .redux-group-tab .redux-section-desc{
-	
-	font-size:1.1em;
-	margin-bottom: 10px;
+	margin-bottom: 35px;
 	color:#666666;
 }
-.redux-group-tab .form-table{
-	clear:none;
-	margin-top:20px;
-}
-.redux-group-tab .form-table.no-border{
+
+.redux-main .form-table.no-border{
 	border-top:none;
 }
-.redux-group-tab .form-table tr{
+.redux-main .form-table tr{
 	border-bottom: 1px solid #E7E7E7;
 }
-.redux-group-tab .form-table tr:last-child{
-	border-bottom: none;
+.redux-main .form-table tr:last-child{
+	border-bottom: none !important;
 }
-.redux-group-tab .form-table tr th,
-.redux-group-tab .form-table tr td{
+.redux-main .form-table tr th,
+.redux-main .form-table tr td{
 	color:#333333;
 }
-.redux-group-tab .form-table tr th{
+.form-table th, .form-table td {
+	margin: 0;
+	padding: 0;
+	width: auto;
+
+}
+.redux_field_th {
 	font-weight:bold;
-	font-size:1.1em;
-	width:30%;
-	padding:20px 5px 20px 0px;
-}
-.redux-group-tab .form-table tr th span:first-child{
-	font-weight: normal;
-	display:block;
-	color:#666666;
+	//width:30%;
+	padding:20px 10px 20px 0px;
+	display: block;
+	span:first-child{
+		font-weight: normal;
+		display:block;
+		color:#666666;
+	}
 }
 
 
-.redux-group-tab .form-table tr td .redux-th-warning{
+
+.redux-main .form-table tr td .redux-th-warning{
 	font-size:1em;
     color: #C09853;
 	font-weight:normal;
 	display:block;
 }
-.redux-group-tab .form-table tr td .redux-field-warning{
+.redux-main .form-table tr td .redux-field-warning{
 	border-color:#C09853;
 }
 
 
-.redux-group-tab .form-table tr td .redux-th-error{
+.redux-main .form-table tr td .redux-th-error{
 	font-size:1em;
 	color:#B94A48;
 	font-weight:normal;
@@ -385,10 +376,12 @@ a {
 	border-color:#B94A48;
 }
 
+
+
 /* reset nested tables for mce */
-.redux-group-tab .form-table tr td table.mceLayout,
-.redux-group-tab .form-table tr td table.mceLayout tr,
-.redux-group-tab .form-table tr td table.mceLayout tr td{
+.redux-main .form-table tr td table.mceLayout,
+.redux-main .form-table tr td table.mceLayout tr,
+.redux-main .form-table tr td table.mceLayout tr td{
 	padding:0px;
 	border-width:0px;
 }
@@ -505,9 +498,7 @@ a {
 
 #redux-intro-text {
 	background: #f3f3f3;
-	border: solid #d8d8d8;	
-	border-bottom: 1px solid #d8d8d8;
-	border-width:0px 1px 1px 1px;
+	border-bottom: 1px solid #dedede;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
@@ -529,9 +520,7 @@ a {
 
 .redux-container #info_bar {
   background: #f3f3f3;
-  border-color: #d8d8d8;
-  border-style: solid;
-  border-width: 0px 1px 1px 1px;
+  border-bottom: 1px solid #dedede;
   padding: 6px 10px 6px 6px;
   text-align: right;
   -moz-box-shadow: inset 0 1px 0 #fcfcfc;
@@ -539,7 +528,7 @@ a {
   box-shadow: inset 0 1px 0 #fcfcfc;
 }
 
-.redux-container #expand_options{
+.redux-container .expand_options{
 	cursor: pointer;
 	display: block;
 	height: 22px;
@@ -547,36 +536,26 @@ a {
 	float: left;
 	font-size:0px;
 	text-indent: -9999px;
-	margin: 0 0 0 5px;
+	margin: 1px 0 0 5px;
 	border: 1px solid #bbb;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 }
-.redux-container  #expand_options { background: url(../img/toggle_tabs.png) no-repeat -2px -26px; }
-.redux-container #expand_options.expanded { background: url(../img/toggle_tabs.png) no-repeat -2px -1px; }
-.redux-container #expand_options:hover {
+.redux-container  .expand_options { background: url(../img/toggle_tabs.png) no-repeat -2px -26px; }
+.redux-container .expand_options.expanded { background: url(../img/toggle_tabs.png) no-repeat -2px -1px; }
+.redux-container .expand_options:hover {
 	border-color: #888;
 }
 
-
-
 #redux-header {
-	
 	background:#f1f1f1;
-	border: 1px solid #ccc;
-	-webkit-border-radius: 10px 10px 0 0;
-	-moz-border-radius: 10px 10px 0 0;
-	border-radius: 10px 10px 0 0;
 	background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
 	background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: linear-gradient(top,#f9f9f9,#ececec);
-	-moz-box-shadow: inset 0 1px 0 #fff;
-	-webkit-box-shadow: inset 0 1px 0 #fff;
-	box-shadow: inset 0 1px 0 #fff;
 }
 #redux-header .display_header {
 	float: left;
@@ -603,7 +582,7 @@ a {
 
 .sticky-footer-fixed {
 	background: #f3f3f3;
-	border-top: 1px solid #d8d8d8 !important;
+	border-top: 1px solid #dedede !important;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
@@ -755,16 +734,6 @@ label.radio, label.multicheck {
 	display: none;
 }
 
-.redux-main input.button-primary {
-	border-color: #21759B;
-	border-bottom-color: #1E6A8D;
-	-webkit-box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
-	box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
-}
-.redux-main .button, .redux-main .button-secondary, .redux-main .button-primary {
-	padding: 0 10px 1px;
-}
-
 .redux-main input.large-text {
 	width: 100%;
 }
@@ -829,16 +798,12 @@ label.radio, label.multicheck {
 
 }
 
-.input-prepend .add-on {
-	b2order-right: 1px;
-}
-
 .input-append, .input-prepend {
 	font-size:0;
 	white-space:nowrap;
-	float:left;
+	float: left;
 	display:inline-block;
-	margin-bottom:5px;
+	margin-bottom: 6px;
 }
 
 .redux-main .input-append {
@@ -864,7 +829,7 @@ label.radio, label.multicheck {
 	}
 }
 
-.redux-main td {
+.redux-main .redux-field-container  {
 	padding: 20px 0;
 }
 
@@ -873,16 +838,11 @@ label.radio, label.multicheck {
 	text-align: center;
 }
 
-.redux-main .upload {
-	width: 80%;
-}
-
-
 .wrap {
 	margin-top: 0;
 }
 
-img {
+.redux-main img {
 	max-width:100%; 
 	max-height:100%;
 }
@@ -898,7 +858,7 @@ img {
 }
 
 @media screen and (max-width : 1124px) {
-	#redux-sidebar{
+	.redux-sidebar{
 		width:42px;
 	}
 
@@ -926,15 +886,15 @@ img {
 		-moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, .2);
 		box-shadow: 2px 2px 8px rgba(0, 0, 0, .2);
 		border-width: 1px 1px 1px 0px;
-		z-index: 1;
+		z-index: 3;
 	}
 	.redux-group-tab-link-a:hover > span{
 		display: block;
 	}
-	#redux-sidebar #redux-group-menu li a,
-	#redux-sidebar #redux-group-menu li a:hover,
-	#redux-sidebar #redux-group-menu li.active a,
-	#redux-sidebar #redux-group-menu li.active a:hover{
+	.redux-sidebar .redux-group-menu li a,
+	.redux-sidebar .redux-group-menu li a:hover,
+	.redux-sidebar .redux-group-menu li.active a,
+	.redux-sidebar .redux-group-menu li.active a:hover{
 		width:auto;
 	}
 	
@@ -948,9 +908,6 @@ img {
 	}
 	.form-table > tbody > tr > th, .form-table > tbody > tr > td{
 		padding: 10px !important;
-	}
-	.form-table > tbody > tr > th {
-		width: 35%
 	}
 }
 
@@ -974,6 +931,7 @@ img {
 	max-width: 100%;
 }
 .redux-main span.description {
+	display: block;
 	font-style: normal;
 }
 .redux-main #redux-system-info textarea {
@@ -982,6 +940,7 @@ img {
 
 .redux-main .field-desc {
 	clear: both;
+	font-size: 13px;
 }
 
 .redux-main .data-full li{
@@ -1004,4 +963,23 @@ img {
 
 .redux-main .ui-helper-hidden-accessible{
     top:inherit;
+}
+
+.redux-main .form-table:first-child tr th, .redux-main .form-table:first-child tr td {
+	padding-top: 0 !important;
+}
+
+.redux-main .form-table{
+	clear:none;
+	margin-top:0px !important;
+}
+
+.redux-main .form-table tr:first-child th, .redux-main .form-table tr:first-child td {
+	padding-top: 0;
+}
+
+
+
+pre {
+  overflow: hidden;
 }

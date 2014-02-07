@@ -164,8 +164,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 				}
 
 				$comments_count = wp_count_comments();
-
-				$theme_data = (object) get_theme_data( get_stylesheet_directory() . '/style.css' );
+            	$theme_data = wp_get_theme();
 				$theme      = array(
 					'version'  => $theme_data->Version,
 					'name'     => $theme_data->Name,

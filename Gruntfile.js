@@ -1,43 +1,53 @@
+var shell = require('shelljs');
+
 module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    po2mo: {
+      options: {
+        
+      },
+      files: {
+        src: 'ReduxCore/languages/*.po',
+        expand: true,
+      },
+    },
     concat: {
 		options: {
         	separator: ';'
       	},
     	core: {  	
         	src: [ 
-				'ReduxCore/assets/js/vendor/cookie.js',
-				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-				//'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
-				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
-				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
-				'ReduxCore/assets/js/vendor/spinner_custom.js',
-				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-				'ReduxCore/inc/fields/**/*.js',
-				'ReduxCore/extensions/**.*.js',
-				'ReduxCore/assets/js/redux.js', 
+				    'ReduxCore/assets/js/vendor/cookie.js',
+				    'ReduxCore/assets/js/vendor/jquery.tipsy.js',
+				    'ReduxCore/assets/js/vendor/jquery.typewatch.js',
+				    'ReduxCore/assets/js/vendor/spinner_custom.js',
+				    'ReduxCore/assets/js/vendor/jquery.alphanum.js',
+            'ReduxCore/assets/js/vendor/select2.sortable.js',
+            'ReduxCore/assets/js/vendor/minicolors/jquery.minicolors.js',
+				    'ReduxCore/inc/fields/**/*.js',
+            'ReduxCore/extensions/**/*.js',
+				    'ReduxCore/assets/js/redux.js', 
         	],
         	dest: 'ReduxCore/assets/js/redux.min.js'
     	},
     	vendor: {
         	src: [ 
-				'ReduxCore/assets/js/vendor/cookie.js',
-				'ReduxCore/assets/js/vendor/jquery.DragSort.min.js',
-				//'ReduxCore/assets/js/vendor/jquery.numeric.min.js',
-				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
-				'ReduxCore/assets/js/vendor/jquery.typewatch.min.js',
-				'ReduxCore/assets/js/vendor/spinner_custom.js',
-				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
+    				'ReduxCore/assets/js/vendor/cookie.js',
+    				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
+    				'ReduxCore/assets/js/vendor/jquery.typewatch.js',
+    				'ReduxCore/assets/js/vendor/spinner_custom.js',
+    				'ReduxCore/assets/js/vendor/jquery.alphanum.js',
+            'ReduxCore/assets/js/vendor/select2.sortable.js',
         	],
         	dest: 'ReduxCore/assets/js/vendor.min.js'
     	}
     },
     'gh-pages': {
       options: {
+        base: 'docs',
         message: 'Update docs and files to distribute'
       },
       dev: {
@@ -45,7 +55,7 @@ module.exports = function(grunt) {
       },
       travis: {
         options: {
-          repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/ReduxFramework.git',
+          repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/docs.reduxframework.com.git',
           user: {
             name: 'Travis',
             email: 'travis@travis-ci.org'
@@ -57,27 +67,27 @@ module.exports = function(grunt) {
     },       
     uglify: {
       	core: {
-			options: {
-				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-				'<%= grunt.template.today("yyyy-mm-dd") %> */\n',
-			},
-			files: {
-		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
-			}      	
+  			  options: {
+  				  banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+  				  '<%= grunt.template.today("yyyy-mm-dd") %> */\n',
+  			  },
+  			  files: {
+  		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
+  			  }      	
       	},
-	  	extensions: {  
-			files: [{
-				expand: true,
-				cwd: 'ReduxCore/extensions',
-				src: '**/*.js',
-				ext: '.min.js',
-				dest: 'ReduxCore/extensions'
-			}]					   	
-      	},     
+	  	  extensions: {  
+  			files: [{
+  				expand: true,
+  				cwd: 'ReduxCore/extensions',
+  				src: '**/*.js',
+  				ext: '.min.js',
+  				dest: 'ReduxCore/extensions'
+  			}]					   	
+      },     
 	  	vendor: {  
-			files: {
-		  		'ReduxCore/assets/js/vendor.min.js': ['ReduxCore/assets/js/vendor.min.js']
-			}  				   	
+    			files: {
+    		  		'ReduxCore/assets/js/vendor.min.js': ['ReduxCore/assets/js/vendor.min.js']
+    			}  				   	
       	},      	 
     },    
     qunit: {
@@ -120,7 +130,7 @@ module.exports = function(grunt) {
         'ReduxCore/inc/fields/typography/*.js',
       */
         'ReduxCore/inc/fields/**/*.js',
-        //'ReduxCore/extensions/**/field_*.js',
+        'ReduxCore/extensions/**/*.js',
         'ReduxCore/assets/js/redux.js'
       ],
       options: {
@@ -142,7 +152,11 @@ module.exports = function(grunt) {
       },
       php: {
         files: ['ReduxCore/**/*.php'],
-        tasks: ['lintCore']  
+        tasks: ['phplint:core']  
+      },
+      css: {
+        files: ['ReduxCore/**/*.less'],
+        tasks: ['less:development']
       }
     },
     phpdocumentor: {
@@ -162,7 +176,7 @@ module.exports = function(grunt) {
     },
     less: {
         development: {
-			options: {
+			   options: {
             	paths: 'ReduxCore/',
     		},        	
             files: [{
@@ -188,15 +202,29 @@ module.exports = function(grunt) {
             	cleancss : true,
             	ieCompat : true,
             	relativeUrls : true,
-            	report: 'gzip',
             	paths: 'ReduxCore/',
-    		},
-		    files: {
-		      "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/assets/css/admin.less"],
-		      "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
+    		  },
+  		    files: {
+  		      "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less"],
+  		      "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
 
-		    }
-        }        
+  		    }
+        },
+        dist: {
+          options: {
+            compress : true,
+              cleancss : true,
+              ieCompat : true,
+              relativeUrls : true,
+              report: 'gzip',
+              paths: 'ReduxCore/',
+          },
+          files: {
+            "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less"],
+            "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
+
+          }
+        }               
     },
   });
 
@@ -209,19 +237,28 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks("grunt-phplint");
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-po2mo');
+
+  grunt.registerTask('langUpdate', "Update languages", function() {
+    shell.exec('tx pull -a --minimum-perc=25');
+    shell.exec('grunt po2mo');
+    shell.exec('rm -f ReduxCore/languages/*.po');
+    shell.exec('php bin/makepot/gen.php');
+  });
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'uglify:extensions',  'concat:vendor', 'uglify:vendor']);
+  grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', "less:production", "less:development", "less:extensions"]);
   grunt.registerTask('travis', ['jshint', 'lintPHP']);
 
   // this would be run by typing "grunt test" on the command line
-  grunt.registerTask('testJS', ['jshint', 'qunit']);  
+  grunt.registerTask('testJS', ['jshint', 'concat:core', 'concat:vendor']);  
 
   grunt.registerTask('watchUI', ['watch:ui']);
   grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
 
   grunt.registerTask("lintPHP", ["phplint:plugin", "phplint:core"]);
   grunt.registerTask("compileCSS", ["less:production", "less:development", "less:extensions"]);
-  grunt.registerTask('compileJS', ['jshint', 'concat:core', 'uglify:core', 'uglify:extensions', 'concat:vendor', 'uglify:vendor']);
+  grunt.registerTask('compileJS', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor']);
+  grunt.registerTask('compileTestJS', ['jshint', 'concat:core', 'concat:vendor']);
 
 };

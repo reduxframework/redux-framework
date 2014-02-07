@@ -1,8 +1,8 @@
 /* global redux_change */
 (function($){
     "use strict";
-    
-    $.redux.multi_text = $.group || {};
+
+    $.redux = $.redux || {};
 	
     $(document).ready(function () {
         //multi text functionality

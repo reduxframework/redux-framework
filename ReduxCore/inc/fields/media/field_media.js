@@ -43,7 +43,12 @@ function redux_add_file(event, selector) {
 		var attachment = frame.state().get('selection').first();
 		frame.close();
 
-		if (typeof redux.media[jQuery(selector).attr('data-id')] !== 'undefined' && attachment.attributes.type !== redux.media[jQuery(selector).attr('data-id')]) {
+		if ( typeof redux.media[jQuery(selector).attr('data-id')] === 'undefined' ) {
+			redux.media[jQuery(selector).attr('data-id')] = {};
+			redux.media[jQuery(selector).attr('data-id')].mode = "image";
+		}
+
+		if ( redux.media[jQuery(selector).attr('data-id')].mode !== false && attachment.attributes.type !== redux.media[jQuery(selector).attr('data-id')].mode) {
 			return;
 		}
 
@@ -93,6 +98,7 @@ function redux_remove_file(selector) {
 	selector.find('.upload-id').val('');
 	selector.find('.upload-height').val('');
 	selector.find('.upload-width').val('');
+	selector.find('.upload-thumbnail').val('');
 	redux_change( jQuery(selector).find( '.upload-id' ) );
 	selector.find('.redux-background-properties').hide();
 	var screenshot = selector.find('.screenshot');

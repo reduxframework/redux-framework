@@ -72,7 +72,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          */
         function __construct( $field = array(), $value ='', $parent ) {
         
-            parent::__construct( $parent->sections, $parent->args );
+            //parent::__construct( $parent->sections, $parent->args );
             $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
@@ -95,7 +95,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
             
             foreach( $this->field['options'] as $k => $v ) {
                 
-                echo '<input data-id="'.$this->field['id'].'" type="radio" id="'.$this->field['id'].'-buttonset'.$k.'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
+                echo '<input data-id="'.$this->field['id'].'" type="radio" id="'.$this->field['id'].'-buttonset'.$k.'" name="' . $this->field['name'] . '" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
                 echo '<label for="'.$this->field['id'].'-buttonset'.$k.'">' . $v . '</label>';
                 
             }
@@ -118,11 +118,11 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
 
             wp_enqueue_script(
                 'redux-field-button-set-js', 
-                ReduxFramework::$_url . 'inc/fields/button_set/field_button_set.js', 
-                array( 'jquery', 'jquery-ui-core', 'jquery-ui-dialog' ),
+                ReduxFramework::$_url.'inc/fields/button_set/field_button_set.js', 
+                array(),
                 time(),
                 true
-            );
+            );            
 
         }
     

@@ -1,16 +1,16 @@
-/*global jQuery, document*/
+/*global jQuery, document, redux_change */
 
 jQuery(document).ready(function() {
-	function triggerSaveNotice() {
-		jQuery('#redux-opts-save-warn').slideDown('slow');
-	}
 
-	jQuery(".redux-sortable").dragsort({
-		dragSelector: ".drag",
-		dragBetween: false,
-		dragEnd: triggerSaveNotice
-	});
-
+    jQuery( ".redux-sortable" ).sortable({
+        handle: ".drag",
+        placeholder: "ui-state-highlight",
+        opacity: 0.7,
+        update: function() {
+            redux_change(jQuery(this));
+        }        
+    });
+	
 	jQuery('.checkbox_sortable').on('click', function() {
 		if (jQuery(this).is(":checked")) {
 			jQuery('#'+jQuery(this).attr('rel')).val(1);
@@ -18,6 +18,5 @@ jQuery(document).ready(function() {
 			jQuery('#'+jQuery(this).attr('rel')).val('');
 		}
 	});
-
 
 });

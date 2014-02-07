@@ -3,11 +3,12 @@
 	'use strict';
 	$.redux = $.redux || {};
 
-	var the_body = $("body");
+
 
 	$(document).ready(function(){
-
-
+		// Intense debug  ;)
+		//jQuery('input[type="hidden"]').attr("type","text");
+		//console.log(redux);
 		
 		jQuery.fn.isOnScreen = function() {
 			if (!window) {
@@ -26,19 +27,33 @@
 			return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 		};
 
+
 		$.redux.required();
 
-		the_body.on('check_dependencies', function(event,variable){		
-			$.redux.check_dependencies(event,variable);
+		$("body").on('change', '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]', function(e){
+			$.redux.check_dependencies(this);
+		});
+
+		$("body").on('check_dependencies', function(e, variable){		
+			$.redux.check_dependencies(variable);
         });
+
+		//console.log(redux.fieldsHidden);
+		// Hide the hidden fields on load
+		for (var i = 0; i < redux.fieldsHidden.length; i++) {
+			$.redux.check_dependencies(jQuery('#' + redux.fieldsHidden[i]));
+		}
+		
 	});
+
+
 	
 	$.redux.required = function(){
 
 		// Hide the fold elements on load ,
 		// It's better to do this by PHP but there is no filter in tr tag , so is not possible
 		// we going to move each attributes we may need for folding to tr tag
-		$('.hiddenFold , .showFold').each(function() {
+		$('.hiddenFold, .showFold').each(function() {
 			var current		= $(this), 
             scope			= current.parents('tr:eq(0)'),
             check_data		= current.data();
@@ -80,17 +95,15 @@
 			});
 		});
 
-		the_body.on('change', '#redux-main select, #redux-main radio, #redux-main input[type=checkbox], #redux-main input[type=hidden]', function(e){
-			$.redux.check_dependencies(e,this);
-		});
+		
 	};
 
-	$.redux.check_dependencies = function(e,variable){
+	$.redux.check_dependencies = function(variable){
 		
 		var current = $(variable),
 			scope	= current.parents('.redux-group-tab:eq(0)');
  
-        if(!scope.length) scope = the_body;
+        if(!scope.length) scope = $('body');
 
 		// Fix for Checkbox + Required issue
         if( $(variable).prop('type') == "checkbox") {
@@ -109,8 +122,14 @@
             check_data	= current.data(), 
             value2		= check_data.checkValue, 
             show		= false,
+            infoFieldID = '',
             value2_array;
 			
+			var testInfoField = current.find('.redux-field:first');
+			if (testInfoField.hasClass('redux-container-info')) {
+				infoFieldID = current.find('.redux-container-info').data('id');
+			}    
+
             if(!is_hidden){
                 switch(check_data.checkComparison){
 					case '=':
@@ -130,7 +149,7 @@
 					case '!=':    
 					case 'not':
 						//if value was array
-						if (value2.indexOf('|') !== -1){
+						if (value2.toString().indexOf('|') !== -1){
 							value2_array = value2.split('|');
 							if($.inArray( value1, value2_array ) == -1){
 								show = true;
@@ -147,18 +166,27 @@
 						if(parseFloat(value1) >  parseFloat(value2)) 
 							show = true;
 						break;
+					case '>=':    
+						if(parseFloat(value1) >=  parseFloat(value2)) 
+							show = true;
+						break;						
 					case '<':
 					case 'less':    
 					case 'is_smaller':
 						if(parseFloat(value1) < parseFloat(value2)) 
 							show = true;
 						break;
+					case '<=':
+						if(parseFloat(value1) <= parseFloat(value2)) 
+							show = true;
+						break;						
 					case 'contains':
-						if(value1.indexOf(value2) != -1) 
+						if(value1.toString().indexOf(value2) != -1) 
 							show = true;
 						break;
 					case 'doesnt_contain':
-						if(value1.indexOf(value2) == -1) 
+					case 'not_contain':
+						if(value1.toString().indexOf(value2) == -1) 
 							show = true;
 						break;
 					case 'is_empty_or':
@@ -172,18 +200,25 @@
                 }
             }
 				
-            /*if(show == true && current.is('.hiddenFold')){
-                current.css({
-                    display:'none'
+            if(show === true && current.is('.hiddenFold')){
+				if (infoFieldID !== "") {
+					$('#info-'+infoFieldID).css({display:'none'}).fadeIn(300).show();
+				}
+				current.css({
+					display:'none'
                 }).removeClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
-                current.slideDown(300);
-            }else if(show == false  && !current.is('.hiddenFold')){
+                current.fadeIn(300);
+            }else if(show === false  && !current.is('.hiddenFold')){
+				if (infoFieldID !== "") {
+					$('#info-'+infoFieldID).css({display:''}).fadeOut(300).hide();
+				}
                 current.css({
                     display:''
                 }).addClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
-                current.slideUp(300);
-            }*/
-			$.redux.verify_fold($(variable)); 
+                current.fadeOut(300);
+            }
+
+			//$.redux.verify_fold($(variable)); 
         });
 	};
 
@@ -222,6 +257,7 @@
 				$.each(theChildren, function(index) {
 
 					var parent = scope.find('tr[data-check-id="'+index+'"]');
+
 					
 					if ( theChildren[index].show === true ) {
 
@@ -264,10 +300,36 @@ var confirmOnPageExit = function(e) {
 		// For Chrome, Safari, IE8+ and Opera 12+
 		return message;
 	};
+	
+function getContrastColour(hexcolour){
+	// default value is black.
+	retVal = '#444444';
+	
+	// In case - for some reason - a blank value is passed.
+	// This should *not* happen.  If a function passing a value
+	// is canceled, it should pass the current value instead of
+	// a blank.  This is how the Windows Common Controls do it.  :P
+	if (hexcolour !== '') {
+		
+		// Replace the hash with a blank.
+		hexcolour = hexcolour.replace('#','');
+
+		var r = parseInt(hexcolour.substr(0, 2), 16);
+		var g = parseInt(hexcolour.substr(2, 2), 16);
+		var b = parseInt(hexcolour.substr(4, 2), 16);
+		var res = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+	
+		// Instead of pure black, I opted to use WP 3.8 black, so it looks uniform.  :) - kp
+		retVal = (res >= 128) ? '#444444' : '#ffffff';
+	}
+	
+	return retVal;
+}	
 
 function verify_fold(item) {
 	
 	jQuery(document).ready(function($) {
+		console.log(verify_fold);
 		
 
 
@@ -394,13 +456,12 @@ jQuery(document).ready(function($) {
 	}
 
 	$('#toplevel_page_'+redux.args.slug+' .wp-submenu a').click(function(e) {
-		//if ( $(this).hasClass('wp-menu-open') ) {
+		if ( $(this).hasClass('wp-menu-open') ) {
 			e.preventDefault();
 			var url = $(this).attr('href').split('&tab=');
 			$('#'+url[1]+'_section_group_li_a').click();
-			console.log(url[1]);
 			return false;	
-		//}
+		}
 	});
 
 /**
@@ -431,8 +492,10 @@ jQuery(document).ready(function($) {
 		jQuery('#' + oldid + '_section_group_li').removeClass('active');
 		// Show the group
 		jQuery('#' + oldid + '_section_group').hide();
-		jQuery('#' + relid + '_section_group').fadeIn(300, function() {
-			stickyInfo(); // race condition fix
+		jQuery('#' + relid + '_section_group').fadeIn(200, function() {
+			if (jQuery('#redux-footer').length !== 0) {
+				stickyInfo(); // race condition fix
+			}
 		});
 		jQuery('#' + relid + '_section_group_li').addClass('active');
 	});
@@ -479,21 +542,22 @@ jQuery(document).ready(function($) {
 		}
 		window.onbeforeunload = null;
 	});	
-	jQuery('#expand_options').click(function(e) {
-		e.preventDefault();
-		var trigger = jQuery('#expand_options');
-		var width = jQuery('#redux-sidebar').width();
-		var id = jQuery('#redux-group-menu .active a').data('rel') + '_section_group';
+
+	function redux_expand_options(parent) {
+		console.log('here');
+		var trigger = parent.find('.expand_options');
+		var width = parent.find('.redux-sidebar').width();
+		var id = jQuery('.redux-group-menu .active a').data('rel') + '_section_group';
 		if (trigger.hasClass('expanded')) {
 			trigger.removeClass('expanded');
-			jQuery('#redux-main').removeClass('expand');
-			jQuery('#redux-sidebar').stop().animate({
+			parent.find('.redux-main').removeClass('expand');
+			parent.find('.redux-sidebar').stop().animate({
 				'margin-left': '0px'
 			}, 500);
-			jQuery('#redux-main').stop().animate({
+			parent.find('.redux-main').stop().animate({
 				'margin-left': width
 			}, 500);
-			jQuery('.redux-group-tab').each(function() {
+			parent.find('.redux-group-tab').each(function() {
 				if (jQuery(this).attr('id') !== id) {
 					jQuery(this).fadeOut('fast');
 				}
@@ -501,15 +565,22 @@ jQuery(document).ready(function($) {
 			// Show the only active one
 		} else {
 			trigger.addClass('expanded');
-			jQuery('#redux-main').addClass('expand');
-			jQuery('#redux-sidebar').stop().animate({
-				'margin-left': -width - 2
+			parent.find('.redux-main').addClass('expand');
+			parent.find('.redux-sidebar').stop().animate({
+				'margin-left': -width - 102
 			}, 500);
-			jQuery('#redux-main').stop().animate({
+			parent.find('.redux-main').stop().animate({
 				'margin-left': '0px'
 			}, 500);
-			jQuery('.redux-group-tab').fadeIn();
+			parent.find('.redux-group-tab').fadeIn();
 		}
+		return false;
+	}
+
+	jQuery('.expand_options').click(function(e) {
+		e.preventDefault();
+
+		redux_expand_options(jQuery(this).parents('.redux-container:first'));
 		return false;
 	});
 	jQuery('#redux-import').click(function(e) {
@@ -524,7 +595,7 @@ jQuery(document).ready(function($) {
 	if (jQuery('#redux-imported').is(':visible')) {
 		jQuery('#redux-imported').slideDown();
 	}
-	jQuery(document.body).on('change', 'input, textarea, select', function() {
+	jQuery(document.body).on('change', '.redux-field input, .redux-field textarea, .redux-field select', function() {
 		if (!jQuery(this).hasClass('noUpdate')) {
 			redux_change(jQuery(this));
 		}
@@ -676,9 +747,3 @@ jQuery(document).ready(function($) {
 
 
 });
-
-function reduxNearestNumber(n, v) {
-	n = n / v;
-	n = Math.round(n) * v;
-	return n;
-}	

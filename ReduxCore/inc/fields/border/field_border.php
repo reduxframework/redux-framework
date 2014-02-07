@@ -35,7 +35,7 @@ class ReduxFramework_border extends ReduxFramework {
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct( $parent->sections, $parent->args );
+		//parent::__construct( $parent->sections, $parent->args );
 		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
@@ -58,8 +58,8 @@ class ReduxFramework_border extends ReduxFramework {
 			'top'				=> true,
 			'bottom'			=> true,
 			'all'				=> true,
-            'style'             => true,
-            'color'             => true,
+            		'style'             		=> true,
+            		'color'             		=> true,
 			'left'				=> true,
 			'right'				=> true,
 			);
@@ -112,10 +112,10 @@ class ReduxFramework_border extends ReduxFramework {
 			echo '<div class="field-border-input input-prepend"><span class="add-on"><i class="el-icon-fullscreen icon-large"></i></span><input type="text" class="redux-border-all redux-border-input mini'.$this->field['class'].'" placeholder="'.__('All','redux-framework').'" rel="'.$this->field['id'].'-all" value="'.$this->value['top'].'"></div>';
 		}
 
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-top" name="'.$this->args['opt_name'].'['.$this->field['id'].'][border-top]" value="' . ( $this->value['top'] ? $this->value['top'] . 'px' : '' ) . '">';
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-right" name="'.$this->args['opt_name'].'['.$this->field['id'].'][border-right]" value="' . ( $this->value['right'] ? $this->value['right'] . 'px' : '' ) . '">';
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-bottom" name="'.$this->args['opt_name'].'['.$this->field['id'].'][border-bottom]" value="' . ( $this->value['bottom'] ? $this->value['bottom'] . 'px' : '' ) . '">';
-		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-left" name="'.$this->args['opt_name'].'['.$this->field['id'].'][border-left]" value="' . ( $this->value['left'] ? $this->value['left'] . 'px' : '' ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-top" name="' . $this->field['name'] . '[border-top]" value="' . ( $this->value['top'] ? $this->value['top'] . 'px' : 0 ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-right" name="' . $this->field['name'] . '[border-right]" value="' . ( $this->value['right'] ? $this->value['right'] . 'px' : 0 ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-bottom" name="' . $this->field['name'] . '[border-bottom]" value="' . ( $this->value['bottom'] ? $this->value['bottom'] . 'px' : 0 ) . '">';
+		echo '<input type="hidden" class="redux-border-value" id="'.$this->field['id'].'-left" name="' . $this->field['name'] . '[border-left]" value="' . ( $this->value['left'] ? $this->value['left'] . 'px' : 0 ) . '">';
 
 		if ( !isset( $this->field['all'] ) || $this->field['all'] !== true ) :
 			/**
@@ -159,7 +159,7 @@ class ReduxFramework_border extends ReduxFramework {
                     'dotted'    => 'Dotted',
                     'none'      => 'None'
                 );
-                echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-style]" class="tips redux-border-style' . $this->field['class'] . '" rows="6" data-id="'.$this->field['id'].'">';
+                echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][border-style]" class="tips redux-border-style' . $this->field['class'] . '" rows="6" data-id="'.$this->field['id'].'">';
                     foreach( $options as $k => $v ) {
                         echo '<option value="' . $k . '"' . selected( $value['style'], $k, false ) . '>' . $v . '</option>';
                     }
@@ -172,9 +172,8 @@ class ReduxFramework_border extends ReduxFramework {
             **/
 
             if ( $this->field['color'] != false ):
-            	$default = isset( $this->field['border-color'] ) ? $this->field['border-color'] : "";
-            	$default = ( empty( $default ) && isset( $this->field['color'] ) ) ? $this->field['color'] : "";
-                echo '<input name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][border-color]" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $value['color'] . '"  data-default-color="' . $default . '" data-id="'.$this->field['id'].'" />';
+            	$default = isset($this->value['border-color']) ? $this->value['border-color'] : "";
+            	$default = ( empty($default) && isset($this->value['color']) ) ? $this->value['color'] : "#ffffff";                echo '<input name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][border-color]" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $value['color'] . '"  data-default-color="' . $default . '" data-id="'.$this->field['id'].'" />';
             endif;
 
 
@@ -212,9 +211,6 @@ class ReduxFramework_border extends ReduxFramework {
 
     public function output() {
 
-        if ( !isset($this->field['output']) || empty( $this->field['output'] ) ) {
-            return;
-        }    
         $cleanValue = array(
             'top' => !empty( $this->value['border-top'] ) ? $this->value['border-top'] : 'inherit',
             'right' => !empty( $this->value['border-right'] ) ? $this->value['border-right'] : 'inherit',
@@ -224,27 +220,30 @@ class ReduxFramework_border extends ReduxFramework {
             'style' => !empty( $this->value['border-style'] ) ? $this->value['border-style'] : 'inherit'
         );
 
-        $outCSS = "";
+        $style = "";
     	
 		//absolute, padding, margin
-        $keys = implode(",", $this->field['output']);
-            $outCSS .= $keys."{";
-	            if ( !isset( $this->field['all'] ) || $this->field['all'] != true ) {
-					foreach($cleanValue as $key=>$value) {
-		            	if ($key == "color" || $key == "style" ) {
-		            		continue;
-		            	}
-                        $outCSS .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
-		            }            	
-	            } else {
-	            	$outCSS .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
-	            }
-            
-            $outCSS .= '}';
+        if ( !isset( $this->field['all'] ) || $this->field['all'] != true ) {
+			foreach($cleanValue as $key=>$value) {
+            	if ($key == "color" || $key == "style" ) {
+            		continue;
+            	}
+                $style .= 'border-' . $key . ':' . $value . ' '.$cleanValue['style'] . ' '. $cleanValue['color'] . ';';
+            }            	
+        } else {
+        	$style .= 'border:' . $value['top'] . ' ' . $cleanValue['style'] . ' '. $cleanValue['color'] .';';
+        }
 
-		if ( !empty($outCSS ) ) {
-			$this->parent->outputCSS .= $outCSS;  
+		if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+			$keys = implode(",", $this->field['output']);
+			$this->parent->outputCSS .= $keys . "{" . $style . '}';
 		}
+
+		if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+			$keys = implode(",", $this->field['compiler']);
+			$style = $keys . "{" . $style . '}';
+			$this->parent->compilerCSS .= $keys . "{" . $style . '}';
+		}		
         
     }	
 	

@@ -35,7 +35,7 @@ class ReduxFramework_ace_editor extends ReduxFramework{
     */
     function __construct( $field = array(), $value ='', $parent ) {
     
-        parent::__construct( $parent->sections, $parent->args );
+        //parent::__construct( $parent->sections, $parent->args );
         $this->parent = $parent;
         $this->field = $field;
         $this->value = trim($value);
@@ -58,14 +58,12 @@ class ReduxFramework_ace_editor extends ReduxFramework{
             $this->field['theme'] = 'monokai';
         }
 
-        $name = $this->args['opt_name'] . '[' . $this->field['id'] . ']';
-
         ?>
         <div class="ace-wrapper">
-            <textarea name="<?php echo $name; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
+            <textarea name="<?php echo $this->field['name']; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor hide <?php echo $this->field['class']; ?>" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
                 <?php echo $this->value; ?>
             </textarea>
-            <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars ($this->value); ?></pre>
+            <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars( $this->value ); ?></pre>
         </div>
     <?php
         
@@ -91,7 +89,7 @@ class ReduxFramework_ace_editor extends ReduxFramework{
             wp_enqueue_script(
                 'redux-field-ace-editor-js', 
                 ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js', 
-                array( 'ace-editor' ),
+                array( 'jquery', 'ace-editor-js' ),
                 time(),
                 true
             );

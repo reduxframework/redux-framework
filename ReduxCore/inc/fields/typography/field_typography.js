@@ -57,6 +57,7 @@ jQuery(document).ready(function($) {
 		}
 		// Get the styles and such from the font
 		var details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
+		$('#' + mainID + ' .redux-typography-font-options').val(decodeURIComponent(option.data('details')));
 		// If we changed the font
 		if ($(selector).hasClass('redux-typography-family')) {
 			var html = '<option value=""></option>';
@@ -185,7 +186,10 @@ jQuery(document).ready(function($) {
 		$('#' + mainID + ' .typography-word-spacing').val(word + units);
 		$('#' + mainID + ' .typography-letter-spacing').val(letter + units);
 
-		$('#' + mainID + ' .typography-preview').css('color', color);
+		if (color) {
+			$('#' + mainID + ' .typography-preview').css('color', color);
+			$('#' + mainID + ' .typography-preview').css('background-color', getContrastColour(color));	
+		}
 			
 		$('#' + mainID + ' .redux-typography-font-family').val(output);
 		$('#' + mainID + ' .typography-style .select2-chosen').text($('#' + mainID + ' .redux-typography-style option:selected').text());
