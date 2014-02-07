@@ -141,6 +141,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.14 =
+* Fixed: 'sortable' field type not saving options as default.
+
 = 3.1.5.12 =
 * Specified default color not set when clicking the color box default button.
 
