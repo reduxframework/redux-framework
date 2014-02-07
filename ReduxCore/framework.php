@@ -1770,7 +1770,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             // If sorter field, check for options as save them as defaults
                             if ($field['type'] == 'sorter') {
                                 $this->options_defaults[$field['id']] = $this->options[$field['id']] = $field['options'];
-                                $doUpdate = true
+                                $doUpdate = true;
                             }
                         }  
 
