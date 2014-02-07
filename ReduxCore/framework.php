@@ -1757,12 +1757,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // Check fields for values in the default parameter
                         if ( !isset( $this->options[$field['id']] ) && isset( $field['default'] )) {
                             $this->options_defaults[$field['id']] = $this->options[$field['id']] = $field['default'];
-                            
                             $doUpdate = true;
-                            if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
-                                $runUpdate = true;    
-                            }
-                            
+
                         // Check fields that hae no default value, but an options value with settings to
                         // be saved by default                            
                         } elseif ( !isset( $this->options[$field['id']] ) && isset( $field['options'] )) {
