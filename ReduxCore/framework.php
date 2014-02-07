@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.10';
+        public static $_version = '3.1.5.11';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1750,14 +1750,36 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                         // Set the default value if present
                         $this->options_defaults[$field['id']] = isset( $this->options_defaults[$field['id']] ) ? $this->options_defaults[$field['id']] : '';
-                        
+
                         // Set the defaults to the value if not present
-                        if ( !isset( $this->options[$field['id']] ) && isset( $field['default'] ) ) {
+                        $doUpdate = false;
+                        
+                        // Check fields for values in the default parameter
+                        if ( !isset( $this->options[$field['id']] ) && isset( $field['default'] )) {
                             $this->options_defaults[$field['id']] = $this->options[$field['id']] = $field['default'];
+                            
+                            $doUpdate = true;
                             if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
                                 $runUpdate = true;    
                             }
-                        }   
+                            
+                        // Check fields that hae no default value, but an options value with settings to
+                        // be saved by default                            
+                        } elseif ( !isset( $this->options[$field['id']] ) && isset( $field['options'] )) {
+                            
+                            // If sorter field, check for options as save them as defaults
+                            if ($field['type'] == 'sorter') {
+                                $this->options_defaults[$field['id']] = $this->options[$field['id']] = $field['options'];
+                                $doUpdate = true
+                            }
+                        }  
+
+                        if (true == $doUpdate) {
+                            if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
+                                $runUpdate = true;    
+                            }                                                        
+                        }
+                        
 
                         if (!isset($field['class'])) { // No errors please
                             $field['class'] = "";
