@@ -23,7 +23,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @since ReduxFramework 3.0.4
          * @author @mekshq, http://mekshq.com/how-to-convert-hexadecimal-color-code-to-rgb-or-rgba-using-php/
         */
-        function hex2rgba($color, $opacity = false) {
+        public static function hex2rgba($color, $opacity = false) {
 
             $default = 'rgb(0,0,0)';
 
