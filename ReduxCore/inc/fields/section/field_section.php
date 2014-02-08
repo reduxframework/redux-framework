@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_section' ) ) {
      * @since       1.0.0
      */
 	class ReduxFramework_section extends ReduxFramework {
-	
+
 		/**
 		 * Field Constructor.
 		 *
@@ -59,8 +59,8 @@ if( !class_exists( 'ReduxFramework_section' ) ) {
 		 * @access		public
 		 * @return		void
 		 */
-		public function render() {   
-                    
+		public function render() {
+
 	        // No errors please
 	        $defaults = array(
 	            'indent' => '',
@@ -70,21 +70,32 @@ if( !class_exists( 'ReduxFramework_section' ) ) {
 	            'subtitle' => '',
 	        );
 	        $this->field = wp_parse_args( $this->field, $defaults );
-
+            $guid = uniqid();
 	        $add_class = '';
-	        if (isset($this->field['indent']) && !empty($this->field['indent'])){                                                
+	        if (isset($this->field['indent']) && !empty($this->field['indent'])){
 	            $add_class = ' form-table-section-indented';
 	        }
-	        
+
 	        echo '</td></tr></table><div id="' . $this->field['id'] . '" class="' . $this->field['style'] . $this->field['class'] . '">';
 	        if (!empty($this->field['title'])){
 	            echo '<h3>'.$this->field['title'].'</h3>';
 	        }
-	        if (!empty($this->field['subtitle'])){                    
+	        if (!empty($this->field['subtitle'])){
 	        	echo '<div class="redux-section-desc">'.$this->field['subtitle'].'</div>';
 	        }
-	        echo '</div><table class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td>';  
-            
+	        echo '</div><table class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td id="'. $guid .'">';
+            // delete the tr afterwards
+			?>
+			<script type="text/javascript">
+			    jQuery(document).ready(function(){
+
+                   var elem = jQuery("#<?php echo $guid?>");
+                    var prevelem = elem.closest("table").prev("h3").prev("p").prev("table");
+                    prevelem.find("tr").last().remove();
+			        elem.parent().remove();
+			    });
+		    </script>';
+		    <?php
 		}
-	}	
+	}
 }
