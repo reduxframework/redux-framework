@@ -3,14 +3,14 @@
     "use strict";
 
     $.redux.group = $.group || {};
-	
+
     $(document).ready(function () {
         //Group functionality
         $.redux.group();
     });
-    
+
     $.redux.group = function(){
-        $("#redux-groups-accordion")
+        $(".redux-groups-accordion")
         .accordion({
             header: "> div > h3",
             collapsible: true,
@@ -34,7 +34,15 @@
                 });
             }
         });
-        
+
+        $(".redux-group").each(function(){
+           var $this = $(this);
+           var title = $this.find(".redux-title-subtitle").first();
+           var thcontent = title.html();
+           title.remove();
+           $this.parents("td").first().siblings("th").first().append(thcontent);
+        });
+
         $('.redux-groups-accordion-group input[data-title="true"]').on('keyup',function(event) {
             $(this).closest('.redux-groups-accordion-group').find('.redux-groups-header').text(event.target.value);
             $(this).closest('.redux-groups-accordion-group').find('.slide-title').val(event.target.value);

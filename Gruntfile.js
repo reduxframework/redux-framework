@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     po2mo: {
       options: {
-        
+
       },
       files: {
         src: 'ReduxCore/languages/*.po',
@@ -18,8 +18,8 @@ module.exports = function(grunt) {
 		options: {
         	separator: ';'
       	},
-    	core: {  	
-        	src: [ 
+    	core: {
+        	src: [
 				    'ReduxCore/assets/js/vendor/cookie.js',
 				    'ReduxCore/assets/js/vendor/jquery.tipsy.js',
 				    'ReduxCore/assets/js/vendor/jquery.typewatch.js',
@@ -29,12 +29,12 @@ module.exports = function(grunt) {
             'ReduxCore/assets/js/vendor/minicolors/jquery.minicolors.js',
 				    'ReduxCore/inc/fields/**/*.js',
             'ReduxCore/extensions/**/*.js',
-				    'ReduxCore/assets/js/redux.js', 
+				    'ReduxCore/assets/js/redux.js',
         	],
         	dest: 'ReduxCore/assets/js/redux.min.js'
     	},
     	vendor: {
-        	src: [ 
+        	src: [
     				'ReduxCore/assets/js/vendor/cookie.js',
     				'ReduxCore/assets/js/vendor/jquery.tipsy.js',
     				'ReduxCore/assets/js/vendor/jquery.typewatch.js',
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         },
         src: ['**/*']
       }
-    },       
+    },
     uglify: {
       	core: {
   			  options: {
@@ -73,28 +73,28 @@ module.exports = function(grunt) {
   			  },
   			  files: {
   		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
-  			  }      	
+  			  }
       	},
-	  	  extensions: {  
+	  	  extensions: {
   			files: [{
   				expand: true,
   				cwd: 'ReduxCore/extensions',
   				src: '**/*.js',
   				ext: '.min.js',
   				dest: 'ReduxCore/extensions'
-  			}]					   	
-      },     
-	  	vendor: {  
+  			}]
+      },
+	  	vendor: {
     			files: {
     		  		'ReduxCore/assets/js/vendor.min.js': ['ReduxCore/assets/js/vendor.min.js']
-    			}  				   	
-      	},      	 
-    },    
+    			}
+      	},
+    },
     qunit: {
       files: ['test/qunit/**/*.html']
     },
     jshint: {
-      files: [ 
+      files: [
       /* // for testing individually
         'ReduxCore/inc/fields/ace_editor/*.js',
         'ReduxCore/inc/fields/border/*.js',
@@ -141,6 +141,7 @@ module.exports = function(grunt) {
           console: true,
           redux_change: true,
           module: true,
+          
           document: true,
         }
       }
@@ -148,11 +149,11 @@ module.exports = function(grunt) {
     watch: {
       ui: {
         files: ['<%= jshint.files %>'],
-        tasks: ['jshint']  
+        tasks: ['jshint']
       },
       php: {
         files: ['ReduxCore/**/*.php'],
-        tasks: ['phplint:core']  
+        tasks: ['phplint:core']
       },
       css: {
         files: ['ReduxCore/**/*.less'],
@@ -163,7 +164,7 @@ module.exports = function(grunt) {
       options : {
         directory : 'ReduxCore/',
         target : 'docs/'
-      }, 
+      },
       generate : {}
     },
     phplint: {
@@ -178,7 +179,7 @@ module.exports = function(grunt) {
         development: {
 			   options: {
             	paths: 'ReduxCore/',
-    		},        	
+    		},
             files: [{
                 expand: true,        // Enable dynamic expansion.
                 cwd: 'ReduxCore/inc/fields',  // Src matches are relative to this path.
@@ -195,7 +196,7 @@ module.exports = function(grunt) {
                 dest: 'ReduxCore/extensions/',  // Destination path prefix.
                 ext: '.css',         // Dest filepaths will have this extension.
             }]
-        },        
+        },
         production: {
         	options: {
       			compress : true,
@@ -224,7 +225,7 @@ module.exports = function(grunt) {
             "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
 
           }
-        }               
+        }
     },
   });
 
@@ -251,7 +252,7 @@ module.exports = function(grunt) {
   grunt.registerTask('travis', ['jshint', 'lintPHP']);
 
   // this would be run by typing "grunt test" on the command line
-  grunt.registerTask('testJS', ['jshint', 'concat:core', 'concat:vendor']);  
+  grunt.registerTask('testJS', ['jshint', 'concat:core', 'concat:vendor']);
 
   grunt.registerTask('watchUI', ['watch:ui']);
   grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
