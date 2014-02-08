@@ -66,6 +66,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.5.15 =
+* Fixed: Default color in border field not saving properly.
+* Fixed: hex2rgba in class.redux_helpers.php changed to static.
+
 = 3.1.5.14 =
 * Fixed: 'sortable' field type not saving options as default.
 
