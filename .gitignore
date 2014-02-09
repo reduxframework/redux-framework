@@ -12,6 +12,10 @@ panels
 .gitignore
 gruntexec.bat
 grutwatch.bat
+<<<<<<< HEAD
 reporter.log
 ReduxCore/assets/img/social/*
 ReduxCore/**/*.min.js
+=======
+reporter.log
+>>>>>>> c12fb7bc7653b50c38b523da10c3cd35784a54d5
