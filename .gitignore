@@ -7,3 +7,9 @@ grunt-phplint
 redux
 md5
 output
+config.php
+panels
+.gitignore
+gruntexec.bat
+grutwatch.bat
+reporter.log
