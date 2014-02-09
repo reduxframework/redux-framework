@@ -811,10 +811,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 foreach( $this->sections as $section ) {
                     if( isset( $section['fields'] ) ) {
                         foreach( $section['fields'] as $field ) {
-                            if( isset( $field['default'] ) ) {
-                                $this->options_defaults[$field['id']] = $field['default'];
-                            } elseif (isset($field['options'])) {
-                                $this->options_defaults[$field['id']] = $field['options'];
+                            if($field['type']==='group'){
+                                foreach($field['subfields'] as $subfield){
+                                    $this->options_defaults[$field['id']][0]['slide_title'] = __('New', 'redux-framework-demo') .' '. $field['groupname'];
+                                    $this->options_defaults[$field['id']][0]['slide_sort'] = 0;
+                                    if( isset( $subfield['default'] ) ) {
+                                        $this->options_defaults[$field['id']][0][$subfield['id']] = $subfield['default'];
+                                    } elseif (isset($field['options'])) {
+                                        $this->options_defaults[$field['id']][0][$subfield['id']] = $subfield['options'];
+                                    }
+                                }
+                            }else{
+                                if( isset( $field['default'] ) ) {
+                                    $this->options_defaults[$field['id']] = $field['default'];
+                                } elseif (isset($field['options'])) {
+                                    $this->options_defaults[$field['id']] = $field['options'];
+                                }
                             }
                         }
                     }
@@ -1315,7 +1327,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
             }
 
-           
+
 
             // added support for groups with recursion
             foreach( $this->sections as $section ) {

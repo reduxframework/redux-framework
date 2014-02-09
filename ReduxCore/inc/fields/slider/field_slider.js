@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
         if(slider === undefined){
             return;
         }
+
 		jQuery(this).slider({
             value: (slider.val==="")?0:parseInt(slider.val, null),
 			min: parseInt(slider.min, null),
@@ -15,7 +16,7 @@ jQuery(document).ready(function() {
 			range: "min",
 			slide: function(event, ui) {
                 var input = jQuery(this).prevAll("input.slider-input").first();
-				input.val(ui.value);	
+				input.val(ui.value);
 				redux_change(input);
 			}
 		});
@@ -34,7 +35,7 @@ jQuery(document).ready(function() {
 		});
 
 	});
-	
+
 	// Update the slider from the input and vice versa
 	jQuery(".slider-input").keyup(function() {
 
@@ -46,7 +47,7 @@ jQuery(document).ready(function() {
 
 		if ( !selector.hasClass('sliderInputChange') ) {
 			return;
-		}		
+		}
 		selector.removeClass('sliderInputChange');
 
 		if (value === "" || value === null) {

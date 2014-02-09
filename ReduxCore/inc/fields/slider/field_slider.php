@@ -1,6 +1,6 @@
 <?php
-class ReduxFramework_slider extends ReduxFramework{	
-	
+class ReduxFramework_slider extends ReduxFramework{
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,50 +9,51 @@ class ReduxFramework_slider extends ReduxFramework{
 	 * @since ReduxFramework 0.0.4
 	*/
 	function __construct( $field = array(), $value ='', $parent ) {
-    
+
 		//parent::__construct( $parent->sections, $parent->args );
 		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
-    
+		$this->clean();
+
     }
-	
+
 	/**
-	 * 
+	 *
 	 * Clean the field data to the fields defaults given the parameters.
-	 * 
+	 *
 	 * @since Redux_Framework 3.1.1
-	 * 
+	 *
 	 */
 	function clean() {
 
-		if( empty( $this->field['min'] ) ) { 
-			$this->field['min'] = 0; 
+		if( empty( $this->field['min'] ) ) {
+			$this->field['min'] = 0;
 		} else {
 			$this->field['min'] = intval( $this->field['min'] );
 		}
-	
-		if( empty( $this->field['max'] ) ) { 
-			$this->field['max'] = intval( $this->field['min'] ) + 1; 
+
+		if( empty( $this->field['max'] ) ) {
+			$this->field['max'] = intval( $this->field['min'] ) + 1;
 		} else {
 			$this->field['max'] = intval( $this->field['max'] );
-		}		
-	
-		if( empty( $this->field['step'] ) || $this->field['step'] > $this->field['max'] ) { 
-			$this->field['step'] = 1; 
+		}
+
+		if( empty( $this->field['step'] ) || $this->field['step'] > $this->field['max'] ) {
+			$this->field['step'] = 1;
 		} else {
 			$this->field['step'] = intval( $this->field['step'] );
-		}	
-	
-		if ( empty( $this->value ) && !empty( $this->field['default'] ) && intval( $this->field['min'] ) >= 1 ) { 
+		}
+
+		if ( empty( $this->value ) && !empty( $this->field['default'] ) ) {
 			$this->value = intval( $this->field['default'] );
 		}
 
-		if ( empty( $this->value ) && intval( $this->field['min'] ) >= 1 ) {
+		else if ( empty( $this->value ) && !empty( $this->field['min'] ) ) {
 			$this->value = intval( $this->field['min'] );
 		}
 
-		if ( empty( $this->value ) ) {
+		else if ( empty( $this->value ) ) {
 			$this->value = 0;
 		}
 
@@ -64,7 +65,7 @@ class ReduxFramework_slider extends ReduxFramework{
 		}
 
 	}
-	
+
 	/**
 	 * Enqueue Function.
 	 *
@@ -90,31 +91,31 @@ class ReduxFramework_slider extends ReduxFramework{
         );
 
 		wp_enqueue_script(
-			'redux-field-slider-js', 
-			ReduxFramework::$_url.'inc/fields/slider/field_slider.js', 
+			'redux-field-slider-js',
+			ReduxFramework::$_url.'inc/fields/slider/field_slider.js',
 			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog'),
 			time(),
 			true
-		);		
+		);
 
 		wp_enqueue_style(
-			'redux-field-slider-css', 
-			ReduxFramework::$_url.'inc/fields/slider/field_slider.css', 
+			'redux-field-slider-css',
+			ReduxFramework::$_url.'inc/fields/slider/field_slider.css',
 			time(),
 			true
-		);		
+		);
 
 	}//function
 
 
 	/**
-	 * 
+	 *
 	 * Functions to pass data from the PHP to the JS at render time.
-	 * 
+	 *
 	 * @return array Params to be saved as a javascript object accessable to the UI.
-	 * 
+	 *
 	 * @since  Redux_Framework 3.1.1
-	 * 
+	 *
 	 */
 	function localize($field, $value = "") {
 
@@ -131,7 +132,7 @@ class ReduxFramework_slider extends ReduxFramework{
 
 		if ( empty( $value ) ) {
 			$value = $this->value;
-		}		
+		}
 		$params['val'] = $value;
 
 		return $params;
@@ -150,11 +151,11 @@ class ReduxFramework_slider extends ReduxFramework{
 
 		// Don't allow input edit if there's a step
 		$readonly = "";
-		
+
 		if ( isset($this->field['edit']) && $this->field['edit'] == false ) {
 			$readonly = ' readonly="readonly"';
 		}
-		
+
 		echo '<input type="text" name="' . $this->field['name'] . '" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$this->field['class'].'"'.$readonly.'/>';
 		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider" rel="'.$this->field['id'].'"></div>';
 
