@@ -46,12 +46,12 @@ if (!class_exists('ReduxFramework_group')) {
          * @return      void
          */
         function __construct( $field = array(), $value ='', $parent ) {
-        
+
             //parent::__construct( $parent->sections, $parent->args );
             $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
-        
+
         }
 
         /**
@@ -83,20 +83,24 @@ if (!class_exists('ReduxFramework_group')) {
 
             echo '<div class="redux-group">';
             echo '<input type="hidden" class="redux-dummy-slide-count" id="redux-dummy-' . $this->field['id'] . '-count" name="redux-dummy-' . $this->field['id'] . '-count" value="' . count($groups) . '" />';
-            echo '<div id="redux-groups-accordion">';
+
+            // Create temporary title container
+            echo '<div class="redux-title-subtitle" style="display:none"><div class="redux_field_th">'.$this->field["title"].'<span class="description">' .$this->field["subtitle"]. '</span></div></div>';
+
+            echo '<div class="redux-groups-accordion">';
 
             // Create dummy content for the adding new ones
             echo '<div class="redux-groups-accordion-group redux-dummy" style="display:none" id="redux-dummy-' . $this->field['id'] . '"><h3><span class="redux-groups-header">' . __("New ", "redux-framework") . $this->field['groupname'] . '</span></h3>';
             echo '<div>';//according content open
-                
-            echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';    
+
+
+            echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';
             echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '_slide-title" data-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_title]" value="" class="regular-text slide-title" /></fieldset>';
             echo '<input type="hidden" class="slide-sort" data-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_sort]" id="' . $this->field['id'] . '-slide_sort" value="" />';
             $field_is_title = true;
                 foreach ($this->field['fields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
                     $this->enqueue_dependencies($field['type']);
-
                     echo '<tr><td>';
                     if(isset($field['class']))
                         $field['class'] .= " group";
@@ -127,11 +131,11 @@ if (!class_exists('ReduxFramework_group')) {
 
                     //we should add $sort to id to fix problem with select field
                     $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
-                    
+
                     $_field = apply_filters('redux-support-group',$content, $field, 0);
                     ob_end_clean();
                     echo $_field;
-                    
+
                     echo '</td></tr>';
                 }
                 echo '</table>';
@@ -144,61 +148,77 @@ if (!class_exists('ReduxFramework_group')) {
 
                 echo '<div class="redux-groups-accordion-group"><h3><span class="redux-groups-header">' . $group['slide_title'] . '</span></h3>';
                 echo '<div>';//according content open
-                
+
                 echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';
-                
+
                 //echo '<h4>' . __('Group Title', 'redux-framework') . '</h4>';
                 echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '-slide_title_' . $x . '" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_title]" value="' . esc_attr($group['slide_title']) . '" class="regular-text slide-title" /></fieldset>';
                 echo '<input type="hidden" class="slide-sort" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_sort]" id="' . $this->field['id'] . '-slide_sort_' . $x . '" value="' . $group['slide_sort'] . '" />';
-                
+
                 $field_is_title = true;
 
                 foreach ($this->field['fields'] as $field) {
                     //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
                     $this->enqueue_dependencies($field['type']);
-                    
-                    echo '<tr><td>';
+
+                    $field['id'] = $field['id'] . "-" . $x;
+
+                    // fix for required attribute
+                    if(isset($field["required"])){
+                        $field["required"][0] = $field["required"][0] . "-" . $x;
+                    }
+
+                    echo '<tr><th scope="row">';
                     if(isset($field['class']))
                         $field['class'] .= " group";
                     else
                         $field['class'] = " group";
 
+                    echo '<div class="redux_field_th">';
                     if (!empty($field['title']))
-                        echo '<h4>' . $field['title'] . '</h4>';
+                        echo $field['title'];
                     if (!empty($field['subtitle']))
                         echo '<span class="description">' . $field['subtitle'] . '</span>';
                     if (isset($group[$field['id']]) && !empty($group[$field['id']])) {
-                    	$value = $group[$field['id']];   	
+                    	$value = $group[$field['id']];
                     }
-                    
+                    echo '</div>';
+
                     $value = empty($value) ? "" : $value;
 
+                    echo '</th><td>';
+
+                    //echo "<pre style='white-space: pre-wrap;word-wrap: break-word;width:400px;'>".var_export($field,true)."</pre>";
+
                     ob_start();
+
                     $this->_field_input($field, $value);
-                    //if (isset($this->options[$field['id']]) && !empty($this->options[$field['id']]) && is_array($this->options[$field['id']])) {
-	                //    $value = next($this->options[$field['id']]);
-                    //}
 
                     $content = ob_get_contents();
 
-                    //adding sorting number to the name of each fields in group
-                    $name = '[' . $field['id'] . ']';
-                    $content = str_replace($name, $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']['.$x.']['.$field['id'].']', $content);
+                    // fix input names
+                    $name_prefix = $this->parent->args["opt_name"] . '[' . $this->field["id"] . '][' . $x . '][' . $field['id'] . ']';
+                    $content = preg_replace_callback('/(<input[^>]+name=[\'"])([^\'"]*)([\'"][^>]*>)/i',
+                    function($matches)use($name_prefix){
+                        if(substr($matches[1],0,strlen($input_name)) !== $input_name){
+                            return $matches[1].$name_prefix.$matches[2].$matches[3];
+                        }
+                    }, $content);
 
-                    //we should add $sort to id to fix problem with select field
-                    $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
-
+                    // make first text input the title of the group
                     if(($field['type'] === "text") && ($field_is_title)) {
                         $content = str_replace('>', 'data-title="true" />', $content);
                         $field_is_title = false;
                     }
-                    
+
                     $_field = apply_filters('redux-support-group',$content, $field, $x);
                     ob_end_clean();
-                    echo $_field;
-                    
+                    echo $content;
+                    //echo "<pre style='white-space: pre-wrap;word-wrap: break-word;width:400px;'>".htmlspecialchars($content)."</pre>";
+                    //echo "<pre style='white-space: pre-wrap;word-wrap: break-word;width:400px;'>".var_export($field,true)."</pre>";
                     echo '</td></tr>';
                 }
+
                 echo '</table>';
                 echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '.$this->field['groupname']. '</a>';
                 echo '</div></div>';
@@ -208,13 +228,12 @@ if (!class_exists('ReduxFramework_group')) {
             echo '</div><a href="javascript:void(0);" class="button redux-groups-add button-primary" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][slide_title][]">' . __('Add', 'redux-framework') .' '.$this->field['groupname']. '</a><br/>';
 
             echo '</div>';
-            
         }
 
         function support_multi($content, $field, $sort) {
             //convert name
-            $name = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
-            $content = str_replace($name, $name . '[' . $sort . ']', $content);
+            //$name = $this->parent->args["opt_name"] . '[' . $this->field["id"] . ']['. $x . '][' . $field['id'] . ']';
+            //$content = str_replace($name, $name . '[' . $sort . ']', $content);
             //we should add $sort to id to fix problem with select field
             $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
             return $content;
@@ -231,17 +250,17 @@ if (!class_exists('ReduxFramework_group')) {
          */
         public function enqueue() {
             wp_enqueue_script(
-                'redux-field-group-js', 
-                ReduxFramework::$_url . 'inc/fields/group/field_group.js', 
-                array('jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker'), 
-                time(), 
+                'redux-field-group-js',
+                ReduxFramework::$_url . 'inc/fields/group/field_group.js',
+                array('jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker'),
+                time(),
                 true
             );
 
             wp_enqueue_style(
-                'redux-field-group-css', 
-                ReduxFramework::$_url . 'inc/fields/group/field_group.css', 
-                time(), 
+                'redux-field-group-css',
+                ReduxFramework::$_url . 'inc/fields/group/field_group.css',
+                time(),
                 true
             );
         }

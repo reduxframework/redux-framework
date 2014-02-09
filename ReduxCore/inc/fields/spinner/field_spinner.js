@@ -4,6 +4,10 @@ jQuery(document).ready(function() {
     jQuery('.redux_spinner').each(function() {
         //slider init
         var spinner = redux.spinner[jQuery(this).attr('rel')];
+        
+        if(spinner === undefined){
+             return;
+        }
 
         jQuery("#" + spinner.id).spinner({
             value: parseInt(spinner.val, null),

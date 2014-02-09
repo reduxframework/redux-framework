@@ -10,12 +10,12 @@ class ReduxFramework_spinner extends ReduxFramework {
      * @since ReduxFramework 3.0.0
      */
     function __construct( $field = array(), $value ='', $parent ) {
-    
+
         //parent::__construct( $parent->sections, $parent->args );
         $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-    
+        $this->clean();
     }
 
     //function
@@ -41,11 +41,11 @@ class ReduxFramework_spinner extends ReduxFramework {
     }//function
 
     /**
-     * 
+     *
      * Clean the field data to the fields defaults given the parameters.
-     * 
+     *
      * @since Redux_Framework 3.1.1
-     * 
+     *
      */
     function clean() {
 
@@ -67,15 +67,15 @@ class ReduxFramework_spinner extends ReduxFramework {
             $this->field['step'] = intval($this->field['step']);
         }
 
-        if (empty($this->value) && !empty($this->field['default']) && intval($this->field['min']) >= 1) {
+        if (empty($this->value) && !empty($this->field['default'])) {
             $this->value = intval($this->field['default']);
         }
 
-        if (empty($this->value) && intval($this->field['min']) >= 1) {
+        else if (empty($this->value) && !empty($this->field['min'])) {
             $this->value = intval($this->field['min']);
         }
 
-        if (empty($this->value)) {
+        else if (empty($this->value)) {
             $this->value = 0;
         }
 
@@ -98,30 +98,30 @@ class ReduxFramework_spinner extends ReduxFramework {
     function enqueue() {
 
 		wp_enqueue_script(
-			'redux-field-spinner-js', 
-			ReduxFramework::$_url.'inc/fields/spinner/field_spinner.js', 
+			'redux-field-spinner-js',
+			ReduxFramework::$_url.'inc/fields/spinner/field_spinner.js',
 			array('jquery', 'redux-vendor', 'jquery-ui-core', 'jquery-ui-dialog'),
 			time(),
 			true
 		);
 
 		wp_enqueue_style(
-			'redux-field-spacing-css', 
-			ReduxFramework::$_url.'inc/fields/spinner/field_spinner.css', 
+			'redux-field-spacing-css',
+			ReduxFramework::$_url.'inc/fields/spinner/field_spinner.css',
 			time(),
 			true
-		);	    	
+		);
 
     }
 
     /**
-     * 
+     *
      * Functions to pass data from the PHP to the JS at render time.
-     * 
+     *
      * @return array Params to be saved as a javascript object accessable to the UI.
-     * 
+     *
      * @since  Redux_Framework 3.1.1
-     * 
+     *
      */
     function localize($field, $value = "") {
 
@@ -137,7 +137,7 @@ class ReduxFramework_spinner extends ReduxFramework {
         $params = wp_parse_args( $field, $params );
         if ( empty( $value ) ) {
             $value = $this->value;
-        }       
+        }
         $params['val'] = $value;
 
         return $params;

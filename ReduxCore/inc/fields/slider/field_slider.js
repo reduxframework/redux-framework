@@ -4,16 +4,19 @@ jQuery(document).ready(function() {
 	jQuery('.redux_slider').each(function() {
 		//slider init
 		var slider = redux.slider[jQuery(this).attr('rel')];
-	
+        if(slider === undefined){
+            return;
+        }
+
 		jQuery(this).slider({
-			value: parseInt(slider.val, null),
+            value: (slider.val==="")?0:parseInt(slider.val, null),
 			min: parseInt(slider.min, null),
 			max: parseInt(slider.max, null),
 			step: parseInt(slider.step, null),
 			range: "min",
 			slide: function(event, ui) {
-				var input = jQuery("#" + slider.id);
-				input.val(ui.value);	
+                var input = jQuery(this).prevAll("input.slider-input").first();
+				input.val(ui.value);
 				redux_change(input);
 			}
 		});
@@ -32,7 +35,7 @@ jQuery(document).ready(function() {
 		});
 
 	});
-	
+
 	// Update the slider from the input and vice versa
 	jQuery(".slider-input").keyup(function() {
 
@@ -44,7 +47,7 @@ jQuery(document).ready(function() {
 
 		if ( !selector.hasClass('sliderInputChange') ) {
 			return;
-		}		
+		}
 		selector.removeClass('sliderInputChange');
 
 		if (value === "" || value === null) {
