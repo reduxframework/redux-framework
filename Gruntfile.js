@@ -30,6 +30,7 @@ module.exports = function(grunt) {
 				    'ReduxCore/inc/fields/**/*.js',
             'ReduxCore/extensions/**/*.js',
 				    'ReduxCore/assets/js/redux.js',
+				    '!ReduxCore/**/*.min.js'
         	],
         	dest: 'ReduxCore/assets/js/redux.min.js'
     	},
@@ -72,14 +73,15 @@ module.exports = function(grunt) {
   				  '<%= grunt.template.today("yyyy-mm-dd") %> */\n',
   			  },
   			  files: {
-  		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
+  		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js'],
+  		  		'ReduxCore/extensions/edd/edd_license/field_edd_license.min.js' : ['ReduxCore/extensions/edd/edd_license/field_edd_license.js']
   			  }
       	},
 	  	  extensions: {
   			files: [{
   				expand: true,
   				cwd: 'ReduxCore/extensions',
-  				src: '**/*.js',
+  				src: ['**/*.js','!ReduxCore/**/*.min.js'],
   				ext: '.min.js',
   				dest: 'ReduxCore/extensions'
   			}]
@@ -135,6 +137,10 @@ module.exports = function(grunt) {
       ],
       options: {
         expr: true,
+        ignores: [
+            'ReduxCore/inc/fields/**/*.min.js',
+            'ReduxCore/extensions/**/*.min.js'
+        ],
         // options here to override JSHint defaults
         globals: {
           jQuery: true,
