@@ -196,7 +196,7 @@ class ReduxFramework_typography extends ReduxFramework {
             /**
             Font Style/Weight
              **/
-            if ($this->field['font-style'] === true || $this->field['font-weight'] === true):
+            if ($this->field['font-style'] === true && $this->field['font-weight'] === true):
                 echo '<div class="select_wrapper typography-style" original-title="'.__('Font style','redux-framework').'">';
             	$style = $this->value['font-weight'].$this->value['font-style'];
                 echo '<input type="hidden" class="typography-font-weight" name="' . $this->field['name'] . '[font-weight]" val="'.$this->value['font-weight'].'" data-id="'.$this->field['id'].'"  /> ';
