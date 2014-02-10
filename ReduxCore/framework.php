@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.16';
+        public static $_version = '3.1.5.17';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -60,6 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
             self::$_dir     = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
             $wp_content_dir = trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) );
+            $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
             $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
             $wp_content_url = ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL );
             self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;                     
