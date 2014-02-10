@@ -17,7 +17,11 @@ if (!class_exists("Redux_Framework_sample_config")) {
         public $ReduxFramework;
 
         public function __construct() {
+            $this->initSettings();
+            add_action('plugins_loaded', array($this, 'initSettings'), 10);
+        }
 
+        public function initSettings() {
             // Just for demo purposes. Not needed per say.
             $this->theme = wp_get_theme();
 
@@ -47,7 +51,6 @@ if (!class_exists("Redux_Framework_sample_config")) {
             add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
 
             $this->ReduxFramework = new ReduxFramework($this->sections, $this->args);
-
         }
 
         /**
