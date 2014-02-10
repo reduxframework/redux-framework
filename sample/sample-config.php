@@ -17,7 +17,6 @@ if (!class_exists("Redux_Framework_sample_config")) {
         public $ReduxFramework;
 
         public function __construct() {
-            $this->initSettings();
             add_action('plugins_loaded', array($this, 'initSettings'), 10);
         }
 
