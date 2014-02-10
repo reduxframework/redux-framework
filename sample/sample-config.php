@@ -18,7 +18,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
 
         public function __construct() {
             // This is needed. Bah WordPress bugs.  ;)
-            if (ReduxFramework::$is_plugin) {
+            if (ReduxFramework::$_is_plugin) {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);    
             } else {
                 $this->initSettings();
