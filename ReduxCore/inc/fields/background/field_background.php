@@ -350,7 +350,7 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
             wp_enqueue_script(
                 'redux-field-background-js',
                 ReduxFramework::$_url . 'inc/fields/background/field_background.js',
-                array( 'jquery', 'wp-color-picker' ),
+                array( 'jquery', 'wp-color-picker', 'select2-js' ),
                 time(),
                 true
             );
@@ -361,6 +361,13 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
                 time(),
                 true
             );
+
+            wp_enqueue_style(
+                'redux-field-select-css', 
+                ReduxFramework::$_url.'inc/fields/select/field_select.css', 
+                time(),
+                true
+            );  
 
         }
 
