@@ -703,16 +703,21 @@ class ReduxFramework_typography extends ReduxFramework {
             if ($v == "regular") {
                 $v = "400";
             }
-            if (strpos($v,"italic") || $v == "italic") {
+              if (strpos($v,"italic") || $v == "italic") {
                 $name .= " Italic";
                 $name = trim($name);
+                if ($v == "italic") {
+                    $v = "400italic";
+                }
                 $italic[] = array('id'=>$v, 'name'=>$name);
             } else {
                 $result[] = array('id'=>$v, 'name'=>$name);
             }
         }
-
-        array_push($result, array_pop($italic));
+        
+        foreach($italic as $item) {
+            $result[] = $item;
+        }
 
         return array_filter($result);
     }//function
