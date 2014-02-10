@@ -1690,6 +1690,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _register_settings() {
 
+            // TODO - REMOVE
+            // Not used by new sample-config, but in here for legacy builds
+            // This is bad and can break things. Hehe.
+            if( !function_exists( 'wp_get_current_user' ) ) {
+                include(ABSPATH . "wp-includes/pluggable.php"); 
+            }               
+
             register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array( &$this,'_validate_options' ) );
 
             if( is_null( $this->sections ) ) return;
