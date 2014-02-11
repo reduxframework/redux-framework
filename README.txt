@@ -144,6 +144,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 = 3.1.5.15 =
 * Fixed: Default color in border field not saving properly.
 * Fixed: hex2rgba in class.redux_helpers.php changed to static.
+* Removed EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
 
 = 3.1.5.14 =
 * Fixed: 'sortable' field type not saving options as default.
