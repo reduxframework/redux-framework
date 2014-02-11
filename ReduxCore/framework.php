@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.18';
+        public static $_version = '3.1.5.19';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1126,7 +1126,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 }
                             }   
 
-                            if( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
+                            if( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) && $this->_can_output_css($field) ) {
                                 
                                 if ( !empty($field['output']) && !is_array( $field['output'] ) ) {
                                     $field['output'] = array( $field['output'] );
@@ -2850,6 +2850,92 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
         }  // _field_input()
 
+        /**
+         * Can Output CSS
+         * Check if a field meets its requirements before outputting to CSS
+         * @param $field
+         * @return bool
+         */
+        public function _can_output_css($field) {
+            if (!empty($field['required'])) {
+                $data['check-field'] = $field['required'][0];
+                $data['check-comparison'] = $field['required'][1];
+                $data['check-value'] = $field['required'][2];
+                $return = false;
+                $global_var = $GLOBALS[$this->args['global_variable']];
+                if (isset($global_var[$data['check-field']])) {
+                    $value1 = $global_var[$data['check-field']];
+                    $value2 = $data['check-value'];
+                    switch ($data['check-comparison']) {
+                        case '=':
+                        case 'equals':
+                            if(is_array($value2)){
+                                if(in_array($value1, $value2))
+                                    $return = true;
+                            }else{
+                                if ($value1 == $value2)
+                                    $return = true;
+                            }
+                            break;
+                        case '!=':
+                        case 'not':
+                            if(is_array($value2)){
+                                if(!in_array($value1, $value2))
+                                    $return = true;
+                            }else{
+                                if ($value1 != $value2)
+                                    $return = true;
+                            }
+                            break;
+                        case '>':
+                        case 'greater':
+                        case 'is_larger':
+                            if ($value1 > $value2)
+                                $return = true;
+                            break;
+                        case '>=':
+                        case 'greater_equal':
+                        case 'is_larger_equal':
+                            if ($value1 >= $value2)
+                                $return = true;
+                            break;
+                        case '<':
+                        case 'less':
+                        case 'is_smaller':
+                            if ($value1 < $value2)
+                                $return = true;
+                            break;
+                        case '<=':
+                        case 'less_equal':
+                        case 'is_smaller_equal':
+                            if ($value1 <= $value2)
+                                $return = true;
+                            break;
+                        case 'contains':
+                            if (strpos($value1, $value2) !== false)
+                                $return = true;
+                            break;
+                        case 'doesnt_contain':
+                        case 'not_contain':
+                            if (strpos($value1, $value2) === false)
+                                $return = true;
+                            break;
+                        case 'is_empty_or':
+                            if (empty($value1) || $value1 == $value2)
+                                $return = true;
+                            break;
+                        case 'not_empty_and':
+                            if (!empty($value1) && $value1 != $value2)
+                                $return = true;
+                            break;
+                    }
+
+                    return $return;
+                }
+            }
+
+            return true;
+        } // _can_output_css
 
         /**
          * Checks dependencies between objects based on the $field['required'] array
