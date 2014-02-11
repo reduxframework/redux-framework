@@ -63,21 +63,23 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          */
         public function render() {
 
-            // Setup up default editor_options
+            // Setup up default args
             $defaults = array(
                 'textarea_name' => $this->field['name'], 
                 'editor_class'  => $this->field['class'],
                 'textarea_rows' => 10, //Wordpress default
                 'teeny' => true,
+                'args' => array();
             );
 
-            if ( !isset( $this->field['editor_options'] ) || empty( $this->field['editor_options'] ) ) {
-                $this->field['editor_options'] = array();
+            if ( isset( $this->field['editor_options'] ) && empty( $this->field['args'] ) ) {
+                $this->field['args'] = $this->field['editor_options'];
+                unset( $this->field['editor_options'] );
             }
 
-            $this->field['editor_options'] = wp_parse_args( $this->field['editor_options'], $defaults );
+            $this->field['args'] = wp_parse_args( $this->field['args'], $defaults );
             
-            wp_editor( $this->value, $this->field['id'], $this->field['editor_options'] );
+            wp_editor( $this->value, $this->field['id'], $this->field['args'] );
             
         }
 
