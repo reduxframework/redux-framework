@@ -222,7 +222,7 @@ class ReduxFramework_spacing extends ReduxFramework{
         /**
           Units
          * */
-        if ($this->field['units'] !== false && !isset($absolute) && $this->field['display_units'] == true):
+        if ($this->field['units'] !== false && is_array( $this->field['units'] ) && !isset($absolute) && $this->field['display_units'] == true):
 
             echo '<div class="select_wrapper spacing-units" original-title="' . __('Units', 'redux-framework') . '">';
             echo '<select data-placeholder="' . __('Units', 'redux-framework') . '" class="redux-spacing redux-spacing-units select' . $this->field['class'] . '" original-title="' . __('Units', 'redux-framework') . '" name="' . $this->field['name'] . '[units]" id="' . $this->field['id'] . '_units">';
