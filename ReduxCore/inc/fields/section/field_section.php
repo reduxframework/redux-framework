@@ -97,5 +97,23 @@ if( !class_exists( 'ReduxFramework_section' ) ) {
 		    </script>';
 		    <?php
 		}
+
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since ReduxFramework 1.0.0
+         */
+        function enqueue(){
+            wp_enqueue_style(
+                'redux-field-section-css',
+                ReduxFramework::$_url.'inc/fields/section/field_section.css',
+                time(),
+                true
+            );
+
+
+        }//function
 	}
 }
