@@ -1,8 +1,10 @@
 # Attend the Redux Framework Webinar
-We are holding a webinar Saturday, February 15 @ 19:00 GMT. Please stop by to learn all things Redux and get any help you may need or want. Registration is open, sign up here: https://www2.gotomeeting.com/register/180324930
+We are holding a webinar Saturday, February 15 @ 19:00 GMT. Please stop by to learn all things Redux and get any help you may need or want. Registration is now open: https://www2.gotomeeting.com/register/180324930
 
 
 --------
+
+
 
 # Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/ReduxFramework.png?branch=master)](https://travis-ci.org/ReduxFramework/ReduxFramework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework)
 
