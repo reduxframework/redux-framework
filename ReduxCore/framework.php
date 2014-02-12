@@ -387,6 +387,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Options page
                 add_action( 'admin_menu', array( $this, '_options_page' ) );
+                // Admin Bar menu
+                add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ) , 999 );
 
                 // Register setting
                 add_action( 'admin_init', array( $this, '_register_settings' ) );
@@ -1080,6 +1082,53 @@ if( !class_exists( 'ReduxFramework' ) ) {
             add_action( "load-{$this->page}", array( &$this, '_load_page' ) );
 
         } // _options_page()
+        /**
+         * Add admin bar menu
+         *
+         * @since       3.1.5.16
+         * @access      public
+         * @global      $wp_styles
+         * @return      void
+         */
+    	function _admin_bar_menu()
+    	{
+    		global $menu, $submenu, $wp_admin_bar, $redux_demo;
+    		$ct = wp_get_theme();
+    		$theme_data = $ct;
+    		if ( !is_super_admin() || !is_admin_bar_showing() )
+    			return;
+    		if($menu){
+    			foreach($menu as $menu_item):
+    				if($menu_item[2]===$this->args["page_slug"]){
+    					$nodeargs = array(
+    						'id'    => $menu_item[2],
+    						'title' => "<span class='ab-icon dashicons-admin-generic'></span>".$menu_item[0],
+    						'href'  => admin_url('admin.php?page='.$menu_item[2]),
+    						'meta'  => array( )
+    					);
+    					$wp_admin_bar->add_node( $nodeargs );
+    					break;
+    				}
+    				endforeach;
+    			foreach($submenu[$this->args["page_slug"]] as $index => $redux_options_submenu):
+    				$subnodeargs = array(
+    					'id'    => $this->args["page_slug"] . '_' . $index,
+    					'title' => $redux_options_submenu[0],
+    					'parent'=> $this->args["page_slug"],
+    					'href'  => admin_url('admin.php?page='.$redux_options_submenu[2]),
+    				);
+    				$wp_admin_bar->add_node( $subnodeargs );
+    				endforeach;
+    		}else{
+    			$nodeargs = array(
+    				'id'    => $this->args["page_slug"],
+    				'title' => "<span class='ab-icon dashicons-admin-generic'></span>" . $theme_data->get('Name') . " " . __('Options', 'redux-framework-demo'),
+    				'href'  => admin_url('admin.php?page='.$this->args["page_slug"]),
+    				'meta'  => array()
+    			);
+    			$wp_admin_bar->add_node( $nodeargs );
+    		}
+    	} // _admin_bar_menu()
 
         /**
          * Enqueue CSS/JS for options page
