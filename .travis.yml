@@ -28,6 +28,7 @@ notifications:
   email:
     recipients:
     - dovy@reduxframework.com
+    - kevin.provance@gmail.com
     on_failure: always
 branches:
   except:
