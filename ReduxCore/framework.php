@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.21';
+        public static $_version = '3.1.5.22';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -854,8 +854,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     if( isset( $section['fields'] ) ) {
                         foreach( $section['fields'] as $field ) {
                             //if we have required option in group field
-                            if(isset($field['subfields']) && is_array($field['subfields'])){
-                                foreach ($field['subfields'] as $subfield) {
+                            if(isset($field['fields']) && is_array($field['fields'])){
+                                foreach ($field['fields'] as $subfield) {
                                     if(isset($subfield['required']))
                                         $this->get_fold($subfield);
                                 }
