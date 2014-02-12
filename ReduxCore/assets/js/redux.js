@@ -132,8 +132,9 @@
                 infoFieldID = current.find('.redux-container-info').data('id');
             }
 
-            var testInfoField = current.find('.redux-field:first');
-            if (testInfoField.hasClass('redux-container-section')) {
+            // Eat it, Travis!
+            var testInfoField2 = current.find('.redux-field:first');
+            if (testInfoField2.hasClass('redux-container-section')) {
                 infoFieldID = current.find('.redux-container-section').data('id');
             }
 
