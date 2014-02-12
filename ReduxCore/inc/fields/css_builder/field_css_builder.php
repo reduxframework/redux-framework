@@ -50,19 +50,16 @@ if( !class_exists( 'ReduxFramework_css_builder' ) ) {
             $this->field = $field;
             $this->value = $value;
             $this->properties = array();
-            $json_decoded_properties = json_decode(file_get_contents(dirname(__FILE__)."/css_properties.list"));
+            $json_decoded_properties = json_decode(file_get_contents(dirname(__FILE__)."/css_properties.list"),true);
             foreach($json_decoded_properties as $css_section => $css_values){
-                foreach($css_values as $css_value){
-                    $css_value_array = (Array)$css_value;
+                foreach($css_values as $css_indx=>$css_value){
                     $indx = count($this->properties);
                     $this->properties[$indx] = array();
-                    $this->properties[$indx]["property"] = $css_value_array["property"];
-                    $this->properties[$indx]["group"] = (!empty((string)$css_section)?(string)$css_section:"");
-                    $this->properties[$indx]["description"] = $css_value_array["description"];
+                    $this->properties[$indx]["property"] = $css_value["property"];
+                    $this->properties[$indx]["group"] = $css_section;
+                    $this->properties[$indx]["description"] = $css_value["description"];
                 }
             }
-
-            // file_put_contents("c:\\taha.txt",var_export($this->properties,true));
 
         }
 
@@ -106,7 +103,7 @@ if( !class_exists( 'ReduxFramework_css_builder' ) ) {
             $last_option_group = "";
             $options_grouped = false;
             foreach($this->properties as $index => $keyword){
-                if(isset($this->field["filter"]) && in_array($keyword["group"],$this->field["exclude_group"])){
+                if(isset($this->field["exclude_group"]) && in_array($keyword["group"],$this->field["exclude_group"])){
                     continue;
                 }
                 if($keyword["group"]!=$last_option_group){
