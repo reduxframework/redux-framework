@@ -19,7 +19,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
         public function __construct() {
             // This is needed. Bah WordPress bugs.  ;)
             if (ReduxFramework::$_is_plugin) {
-                add_action('plugins_loaded', array($this, 'initSettings'), 10);    
+                add_action('plugins_loaded', array($this, 'initSettings'), 10);
             } else {
                 $this->initSettings();
             }
@@ -45,7 +45,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
             // If Redux is running as a plugin, this will remove the demo notice and links
             //add_action( 'redux/plugin/hooks', array( $this, 'remove_demo' ) );
             // Function to test the compiler hook and demo CSS output.
-            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2); 
+            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
             // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
             // Change the arguments after they've been declared, but before the panel is created
             //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
@@ -371,7 +371,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         "title" => "Layout Manager Advanced",
                         "subtitle" => "You can add multiple drop areas or columns.",
                         "compiler" => 'true',
-                        //'required' => array('switch-fold','equals','0'),	
+                        //'required' => array('switch-fold','equals','0'),
                         'options' => array(
                             "enabled" => array(
                                 "highlights" => "Highlights",
@@ -693,7 +693,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
             /**
              *  Note here I used a 'heading' in the sections array construct
              *  This allows you to use a different title on your options page
-             * instead of reusing the 'title' value.  This can be done on any 
+             * instead of reusing the 'title' value.  This can be done on any
              * section - kp
              */
             $this->sections[] = array(
@@ -1143,6 +1143,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
             $theme_info .= '</div>';
 
             if (file_exists(dirname(__FILE__) . '/README.md')) {
+                require_once dirname(__FILE__)."/ReduxCore/inc/markdown.php";
                 $this->sections['theme_docs'] = array(
                     'icon' => ReduxFramework::$_url . 'assets/img/glyphicons/glyphicons_071_book.png',
                     'title' => __('Documentation', 'redux-framework-demo'),
@@ -1150,7 +1151,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         array(
                             'id' => '17',
                             'type' => 'raw',
-                            'content' => file_get_contents(dirname(__FILE__) . '/README.md')
+                            'content' => Parsedown::instance()->parse(file_get_contents(dirname(__FILE__).'/README.md'))
                         ),
                     ),
                 );
@@ -1310,11 +1311,11 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'show_import_export' => true, // REMOVE
                 'system_info' => false, // REMOVE
                 'help_tabs' => array(),
-                'help_sidebar' => '', // __( '', $this->args['domain'] );            
+                'help_sidebar' => '', // __( '', $this->args['domain'] );
             );
 
 
-            // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.		
+            // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
             $this->args['share_icons'][] = array(
                 'url' => 'https://github.com/ReduxFramework/ReduxFramework',
                 'title' => 'Visit us on GitHub',
