@@ -75,7 +75,7 @@ if( !class_exists( 'ReduxFramework_section' ) ) {
 	        if (isset($this->field['indent']) && !empty($this->field['indent'])){
 	            $add_class = ' form-table-section-indented';
 	        }
-
+            echo '<style>#'.$this->parent->args['opt_name'].'-'.$this->field['id'].' {padding: 10px 0;}</style>';
 	        echo '</td></tr></table><div id="' . $this->field['id'] . '" class="' . $this->field['style'] . $this->field['class'] . '">';
 	        if (!empty($this->field['title'])){
 	            echo '<h3>'.$this->field['title'].'</h3>';

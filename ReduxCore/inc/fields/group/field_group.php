@@ -64,25 +64,18 @@ if (!class_exists('ReduxFramework_group')) {
          * @return      void
          */
         public function render() {
+            print_r($this->value);
 
             if ( isset( $this->field['subfields'] ) && empty( $this->field['fields'] ) ) {
                 $this->field['fields'] = $this->field['subfields'];
                 unset( $this->field['subfields'] );
             }
 
-            if (empty($this->value) || !is_array($this->value)) {
-                $this->value = array(
-                    array(
-                        'slide_title' => __('New', 'redux-framework').' '.$this->field['groupname'],
-                        'slide_sort' => '0',
-                    )
-                );
+            $groups = $this->value;
+            if (!isset($this->field['groupname'])) {
+                $this->field['groupname'] = "";
             }
 
-            $groups = $this->value;
-
-            echo '<div class="redux-group">';
-            echo '<input type="hidden" class="redux-dummy-slide-count" id="redux-dummy-' . $this->field['id'] . '-count" name="redux-dummy-' . $this->field['id'] . '-count" value="' . count($groups) . '" />';
             echo '<div id="redux-groups-accordion">';
 
             // Create dummy content for the adding new ones
@@ -90,124 +83,52 @@ if (!class_exists('ReduxFramework_group')) {
             echo '<div>';//according content open
                 
             echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';    
-            echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '_slide-title" data-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_title]" value="" class="regular-text slide-title" /></fieldset>';
-            echo '<input type="hidden" class="slide-sort" data-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_sort]" id="' . $this->field['id'] . '-slide_sort" value="" />';
-            $field_is_title = true;
-                foreach ($this->field['fields'] as $field) {
-                    //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
-                    $this->enqueue_dependencies($field['type']);
 
-                    echo '<tr><td>';
-                    if(isset($field['class']))
-                        $field['class'] .= " group";
-                    else
-                        $field['class'] = " group";
+            //echo '<input type="hidden" class="slide-sort" data-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@][slide_sort]" id="' . $this->field['id'] . '-slide_sort" value="" />';
+            //$field_is_title = true;
+                foreach( $this->field['fields'] as $key => $field ) {
+                                $field['name'] = $this->parent->args['opt_name'] . '[' . $field['id'] . ']';
+                                echo '<tr valign="top">';
+                                $th = "";
+                                if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
+                                    $default_mark = ( isset( $field['default'] ) && !empty($field['default']) && isset($this->parent->options[$field['id']]) && $this->parent->options[$field['id']] == $field['default'] && !empty( $this->parent->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->parent->args['default_mark'] : '';
+                                    if ( !empty( $field['title'] ) ) {
+                                        $th = $field['title'] . $default_mark."";
+                                    }
 
-                    if (!empty($field['title']))
-                        echo '<h4>' . $field['title'] . '</h4>';
-                    if (!empty($field['subtitle']))
-                        echo '<span class="description">' . $field['subtitle'] . '</span>';
-                    $value = empty($this->options[$field['id']][0]) ? "" : $this->options[$field['id']][0];
+                                    if( isset( $field['subtitle'] ) ) {
+                                        $th .= '<span class="description">' . $field['subtitle'] . '</span>';
+                                    }
+                                } 
+                                // TITLE
+                                // Show if various
+                                // 
+                                $th .= $this->parent->get_default_output_string($field); // Get the default output string if set
 
-                    ob_start();
-                    $this->_field_input($field, $value);
+                                echo '<th scope="row"><div class="redux_field_th">'.$th.'</div></th>';
+                                echo '<td>';
 
-                    $content = ob_get_contents();
+                                if (!isset($field['class'])) {
+                                    $field['class'] = "";
+                                }
 
-                    //adding sorting number to the name of each fields in group
-                    $name = '[' . $field['id'] . ']';
-                    $content = str_replace($name,$this->parent->args['opt_name'] . '[' . $this->field['id'] . '][@]['.$field['id'].']', $content);
-                    // remove the name property. asigned by the controller, create new data-name property for js
-                    $content = str_replace('name', 'data-name', $content);
-
-                    if(($field['type'] === "text") && ($field_is_title)) {
-                        $content = str_replace('>', 'data-title="true" />', $content);
-                        $field_is_title = false;
-                    }
-
-                    //we should add $sort to id to fix problem with select field
-                    $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
-                    
-                    $_field = apply_filters('redux-support-group',$content, $field, 0);
-                    ob_end_clean();
-                    echo $_field;
-                    
-                    echo '</td></tr>';
-                }
+                                $field['name_suffix'] = "[]";
+                                if (isset($this->value[$key])) {
+                                    $value = $this->value[$key];
+                                } else {
+                                    $value = "";
+                                }
+                                $this->parent->_field_input($field, $value);
+                                echo '</td></tr>';
+                            }
                 echo '</table>';
                 echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '. $this->field['groupname']. '</a>';
                 echo '</div></div>';
 
-            // Create real groups
-            $x = 0;
-            foreach ($groups as $group) {
-
-                echo '<div class="redux-groups-accordion-group"><h3><span class="redux-groups-header">' . $group['slide_title'] . '</span></h3>';
-                echo '<div>';//according content open
-                
-                echo '<table style="margin-top: 0;" class="redux-groups-accordion redux-group form-table no-border">';
-                
-                //echo '<h4>' . __('Group Title', 'redux-framework') . '</h4>';
-                echo '<fieldset><input type="hidden" id="' . $this->field['id'] . '-slide_title_' . $x . '" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_title]" value="' . esc_attr($group['slide_title']) . '" class="regular-text slide-title" /></fieldset>';
-                echo '<input type="hidden" class="slide-sort" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $x . '][slide_sort]" id="' . $this->field['id'] . '-slide_sort_' . $x . '" value="' . $group['slide_sort'] . '" />';
-                
-                $field_is_title = true;
-
-                foreach ($this->field['fields'] as $field) {
-                    //we will enqueue all CSS/JS for sub fields if it wasn't enqueued
-                    $this->enqueue_dependencies($field['type']);
-                    
-                    echo '<tr><td>';
-                    if(isset($field['class']))
-                        $field['class'] .= " group";
-                    else
-                        $field['class'] = " group";
-
-                    if (!empty($field['title']))
-                        echo '<h4>' . $field['title'] . '</h4>';
-                    if (!empty($field['subtitle']))
-                        echo '<span class="description">' . $field['subtitle'] . '</span>';
-                    if (isset($group[$field['id']]) && !empty($group[$field['id']])) {
-                    	$value = $group[$field['id']];   	
-                    }
-                    
-                    $value = empty($value) ? "" : $value;
-
-                    ob_start();
-                    $this->_field_input($field, $value);
-                    //if (isset($this->options[$field['id']]) && !empty($this->options[$field['id']]) && is_array($this->options[$field['id']])) {
-	                //    $value = next($this->options[$field['id']]);
-                    //}
-
-                    $content = ob_get_contents();
-
-                    //adding sorting number to the name of each fields in group
-                    $name = '[' . $field['id'] . ']';
-                    $content = str_replace($name, $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']['.$x.']['.$field['id'].']', $content);
-
-                    //we should add $sort to id to fix problem with select field
-                    $content = str_replace(' id="'.$field['id'].'-select"', ' id="'.$field['id'].'-select-'.$sort.'"', $content);
-
-                    if(($field['type'] === "text") && ($field_is_title)) {
-                        $content = str_replace('>', 'data-title="true" />', $content);
-                        $field_is_title = false;
-                    }
-                    
-                    $_field = apply_filters('redux-support-group',$content, $field, $x);
-                    ob_end_clean();
-                    echo $_field;
-                    
-                    echo '</td></tr>';
-                }
-                echo '</table>';
-                echo '<a href="javascript:void(0);" class="button deletion redux-groups-remove">' . __('Delete', 'redux-framework').' '.$this->field['groupname']. '</a>';
-                echo '</div></div>';
-                $x++;
-            }
 
             echo '</div><a href="javascript:void(0);" class="button redux-groups-add button-primary" rel-id="' . $this->field['id'] . '-ul" rel-name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][slide_title][]">' . __('Add', 'redux-framework') .' '.$this->field['groupname']. '</a><br/>';
 
-            echo '</div>';
+            //echo '</div>';
             
         }
 
