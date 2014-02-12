@@ -315,7 +315,7 @@ static_front_page - Static Front Page
 
       public function customizer_save_before( $plugin_options ) {
 
-        return $parent->_field_input( $plugin_options );
+        //$parent->_field_input( $plugin_options );
 
       }    
 
