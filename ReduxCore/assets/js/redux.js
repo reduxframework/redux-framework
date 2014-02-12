@@ -455,8 +455,8 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	$('#toplevel_page_'+redux.args.slug+' .wp-submenu a').click(function(e) {
-		if ( $(this).hasClass('wp-menu-open') ) {
+	$('#toplevel_page_'+redux.args.slug+' .wp-submenu a, #wp-admin-bar-'+redux.args.slug+' a.ab-item').click(function(e) {
+        if ( $('#toplevel_page_'+redux.args.slug).hasClass('wp-menu-open') || $(this).hasClass('ab-item') ) {
 			e.preventDefault();
 			var url = $(this).attr('href').split('&tab=');
 			$('#'+url[1]+'_section_group_li_a').click();
