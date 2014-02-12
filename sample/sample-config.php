@@ -238,6 +238,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'icon' => 'el-icon-home',
                 // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                 'fields' => array(
+                
                     array(
                         'id' => 'webFonts',
                         'type' => 'media',
@@ -1142,15 +1143,16 @@ if (!class_exists("Redux_Framework_sample_config")) {
             }
             $theme_info .= '</div>';
 
-            if (file_exists(dirname(__FILE__) . '/README.md')) {
+            if (file_exists(dirname(__FILE__) . '/../README.md')) {
                 $this->sections['theme_docs'] = array(
-                    'icon' => ReduxFramework::$_url . 'assets/img/glyphicons/glyphicons_071_book.png',
+                    'icon' => 'el-icon-list-alt',
                     'title' => __('Documentation', 'redux-framework-demo'),
                     'fields' => array(
                         array(
                             'id' => '17',
                             'type' => 'raw',
-                            'content' => file_get_contents(dirname(__FILE__) . '/README.md')
+                            'markdown' => true,
+                            'content' => file_get_contents(dirname(__FILE__) . '/../README.md')
                         ),
                     ),
                 );
