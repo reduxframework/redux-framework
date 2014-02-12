@@ -155,7 +155,7 @@ class ReduxFramework_slider extends ReduxFramework{
 			$readonly = ' readonly="readonly"';
 		}
 		
-		echo '<input type="text" name="' . $this->field['name'] . '" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$this->field['class'].'"'.$readonly.'/>';
+		echo '<input type="text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$this->field['class'].'"'.$readonly.'/>';
 		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider" rel="'.$this->field['id'].'"></div>';
 
 	}//function

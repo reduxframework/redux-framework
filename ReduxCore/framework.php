@@ -2763,6 +2763,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      */
                     do_action( "redux/field/{$this->args['opt_name']}/render/before", $field, $value );
 
+                    if ( !isset( $field['name_suffix'] ) ) {
+                        $field['name_suffix'] = "";
+                    }
+
                     $render = new $field_class( $field, $value, $this );
                     ob_start();
                     /** @noinspection PhpUndefinedMethodInspection */

@@ -47,13 +47,13 @@ class ReduxFramework_text extends ReduxFramework {
 					$placeholder = (is_array($this->field['placeholder']) && isset($this->field['placeholder'][$k])) ?	' placeholder="' . esc_attr($this->field['placeholder'][$k]) . '" ' : '';
 				}
 				echo '<label for="' . $this->field['id'] . '-text-'.$k.'"><strong>'.$v.'</strong></label> ';
-				echo '<input type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . '['.$k.']" ' . $placeholder . 'value="' . esc_attr($this->value[$k]) . '" class="regular-text ' . $this->field['class'] . '" /><br />';
+				echo '<input type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . '['.$k.']' . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value[$k]) . '" class="regular-text ' . $this->field['class'] . '" /><br />';
 				
 			}//foreach
     		
     	} else {
     		
-    		echo '<input type="text" id="' . $this->field['id'] . '-text" name="' . $this->field['name'] . '" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '" />';
+    		echo '<input type="text" id="' . $this->field['id'] . '-text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '" />';
     	}
 
     

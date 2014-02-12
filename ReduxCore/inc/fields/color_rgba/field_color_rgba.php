@@ -72,9 +72,9 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
 			);
 			$this->value = wp_parse_args( $this->value, $defaults );
 
-			echo '<input data-id="'.$this->field['id'].'" name="' . $this->field['name'] . '[color]" id="' . $this->field['id'] . '-color" class="redux-color_rgba redux-color_rgba-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $this->field['default']['color'] . '" data-defaultvalue="' . $this->field['default']['color'] . '" data-opacity="' . $this->value['alpha'] .'" />';
+			echo '<input data-id="'.$this->field['id'].'" name="' . $this->field['name'] . '[color]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color_rgba redux-color_rgba-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $this->field['default']['color'] . '" data-defaultvalue="' . $this->field['default']['color'] . '" data-opacity="' . $this->value['alpha'] .'" />';
 			
-			echo '<input data-id="'.$this->field['id'] . '-alpha" name="' . $this->field['name'] . '[alpha]" id="' . $this->field['id'] . '-alpha" type="hidden" value="'.$this->value['alpha'].'" />';
+			echo '<input data-id="'.$this->field['id'] . '-alpha" name="' . $this->field['name'] . '[alpha]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-alpha" type="hidden" value="'.$this->value['alpha'].'" />';
 			
 			if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
 				$tChecked = "";

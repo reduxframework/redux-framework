@@ -333,7 +333,7 @@ class ReduxFramework_textarea extends ReduxFramework {
         $this->field['placeholder'] = isset($this->field['placeholder']) ? $this->field['placeholder'] : "";
         $this->field['rows'] = isset($this->field['rows']) ? $this->field['rows'] : 6;
 
-        ?><textarea name="<?php echo $this->field['name']; ?>" id="<?php echo $this->field['id']; ?>-textarea" placeholder="<?php echo esc_attr($this->field['placeholder']); ?>" class="large-text <?php echo $this->field['class']; ?>" rows="<?php echo $this->field['rows']; ?>"><?php echo $this->value; ?></textarea><?php
+        ?><textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>" id="<?php echo $this->field['id']; ?>-textarea" placeholder="<?php echo esc_attr($this->field['placeholder']); ?>" class="large-text <?php echo $this->field['class']; ?>" rows="<?php echo $this->field['rows']; ?>"><?php echo $this->value; ?></textarea><?php
         
     }
 }

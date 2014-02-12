@@ -95,7 +95,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
             
             foreach( $this->field['options'] as $k => $v ) {
                 
-                echo '<input data-id="'.$this->field['id'].'" type="radio" id="'.$this->field['id'].'-buttonset'.$k.'" name="' . $this->field['name'] . '" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
+                echo '<input data-id="'.$this->field['id'].'" type="radio" id="'.$this->field['id'].'-buttonset'.$k.'" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
                 echo '<label for="'.$this->field['id'].'-buttonset'.$k.'">' . $v . '</label>';
                 
             }

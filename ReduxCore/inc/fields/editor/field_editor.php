@@ -63,13 +63,16 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          */
         public function render() {
 
+            if ( !isset( $this->field['args'] ) ) {
+                $this->field['args'] = array();
+            }
+
             // Setup up default args
             $defaults = array(
                 'textarea_name' => $this->field['name'], 
                 'editor_class'  => $this->field['class'],
                 'textarea_rows' => 10, //Wordpress default
                 'teeny' => true,
-                'args' => array()
             );
 
             if ( isset( $this->field['editor_options'] ) && empty( $this->field['args'] ) ) {
