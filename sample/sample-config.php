@@ -1163,6 +1163,15 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'redux-framework-demo'),
                 'fields' => array(
                     array(
+						'id'=>'css-builder',
+						'type' => 'css_builder',
+						'title' => __('CSS Builder', 'redux-framework-demo'),
+						'compiler' => 'true',
+						'exclude_group' => array("Filter Effects"),
+						'subtitle' => __('If you enter an invalid color it will be removed. Try using the text "blue" as a color.  ;)', 'redux-framework-demo'),
+						'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo')
+						),
+                    array(
                         'id' => '17',
                         'type' => 'date',
                         'title' => __('Date Option', 'redux-framework-demo'),
