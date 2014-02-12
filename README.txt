@@ -141,6 +141,12 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.5.22 =
+* Added: Admin-bar menu
+* Fixed: Section field now folds.
+* Fixed: wp_content_dir path now handles double forward slashes.
+* Fixed: Typography field missing italics in Google fonts.
+
 = 3.1.5.15 =
 * Fixed: Default color in border field not saving properly.
 * Fixed: hex2rgba in class.redux_helpers.php changed to static.
