@@ -1,0 +1,20 @@
+.redux-container-css_builder ul.redux-css-builder {
+  margin: 0;
+  padding: 0;
+}
+.redux-container-css_builder .redux-css-builder-remove {
+  color: #F00;
+  padding: 2px 4px;
+  margin-left: 5px;
+}
+.redux-container-css_builder .redux-css-builder-remove:hover {
+  background: red;
+  color: #fff;
+  text-decoration: none;
+}
+.redux-container-css_builder .redux-css-builder-add {
+  margin-bottom: 5px;
+}
+.redux-container-css_builder .redux-css-builder-select {
+  width: 240px;
+}
