@@ -185,7 +185,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             'label'=>'Allow Submenu', 
                             'desc'=>'Turn on or off the submenu that will typically be shown under Appearance.', 
                             'default'=>true
-                        ),                        
+                        ),
+					'allow_admin_bar_menu' => array(
+                            'data_type'=>'bool',
+                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
+                            'label'=>'Show Admin Bar Menu', 
+                            'desc'=>'Turn on or off the Admin Bar Menu that will display on the Wordpress Admin Bar.', 
+                            'default'=>true
+                        ),  
                     'show_import_export' => array(
                             'data_type'=>'bool',
                             'form' => array('type' => 'radio', 'options' => array(true => 'Show', false => 'Hide')),
@@ -230,6 +237,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'page_parent'        => 'themes.php', // requires menu_type = 'submenu
             'page_priority'      => null,
             'allow_sub_menu'     => true, // allow submenus to be added if menu_type == menu
+			'allow_admin_bar_menu'=> true, // show admin bar menu 
             'save_defaults'      => true, // Save defaults to the DB on it if empty
             'footer_credit'      => '',
             'help_tabs'          => array(),
@@ -387,8 +395,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Options page
                 add_action( 'admin_menu', array( $this, '_options_page' ) );
-                // Admin Bar menu
-                add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ) , 999 );
+                
+				// Admin Bar menu
+				if($this->args['allow_admin_bar_menu']){
+					add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ) , 999 );
+				}
 
                 // Register setting
                 add_action( 'admin_init', array( $this, '_register_settings' ) );
