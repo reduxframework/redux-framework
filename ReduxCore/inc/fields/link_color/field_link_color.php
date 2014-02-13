@@ -166,7 +166,11 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
                         if (is_numeric($key)) {
                             $styleString .= implode(",", $this->field['compiler']) . "{" . $value . '}';
                         } else {
-                            $styleString .= implode(":".$key.",", $this->field['compiler']) . "{" . $value . '}';
+                            if (count($key) == 1) {
+                                $styleString .= $this->field['compiler'][0].":".$key . "{" . $value . '}';
+                            } else {
+                                $styleString .= implode(":".$key.",", $this->field['compiler']) . "{" . $value . '}';    
+                            }
                         }
                     }
                     $this->parent->compilerCSS .= $styleString;  
