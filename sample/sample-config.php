@@ -3,9 +3,6 @@
   ReduxFramework Sample Config File
   For full documentation, please visit: https://github.com/ReduxFramework/ReduxFramework/wiki
  * */
-if (!class_exists("ReduxFramework")) {
-    return;
-}
 
 if (!class_exists("Redux_Framework_sample_config")) {
 
@@ -18,14 +15,19 @@ if (!class_exists("Redux_Framework_sample_config")) {
 
         public function __construct() {
             // This is needed. Bah WordPress bugs.  ;)
-            if (ReduxFramework::$_is_plugin) {
-                add_action('plugins_loaded', array($this, 'initSettings'), 10);    
-            } else {
+            if ( defined('TEMPLATEPATH') && strpos(__FILE__,TEMPLATEPATH) !== false) {
                 $this->initSettings();
+            } else {
+                add_action('plugins_loaded', array($this, 'initSettings'), 10);    
             }
         }
 
         public function initSettings() {
+
+            if ( !class_exists("ReduxFramework" ) ) {
+                return;
+            }       
+            
             // Just for demo purposes. Not needed per say.
             $this->theme = wp_get_theme();
 
