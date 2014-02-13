@@ -36,14 +36,16 @@ It is hard to continue development and support for this free plugin without cont
 
 = Fields Types =
 
+* Background
 * Border
 * Button Set
-* Background
 * Checkbox / Multi-Check
 * Color (WordPress Native)
-* Gradient
+* Color Gradient
+* Color RGBA
 * Date
 * Dimensions (Height/Width)
+* Divider
 * Editor (WordPress Native)
 * Gallery (WordPress Native)
 * Image Select (Patterns/Presets)
@@ -53,9 +55,12 @@ It is hard to continue development and support for this free plugin without cont
 * Multi-Text
 * Password
 * Radio (w/ WordPress Data)
+* Raw
+* Section
 * Select (Select/Multi-Select w/ Select2 & WordPress Data)
 * Select Image
 * Slider
+* Slides
 * Sortable (Drag/Drop Checkbox/Input Fields)
 * Sorter (Drag/Drop Manager - Works great for content blocks)
 * Spacing (Margin/Padding/Absolute)
@@ -141,7 +146,8 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 == Changelog ==
 
 = 3.1.6.1 =
-Modified: Removed raw_align field and added align option to raw field. See wiki for more info.
+* Modified: Removed raw_align field and added align option to raw field. See wiki for more info.
+* Added:    'mode' option to image_select, so CSS output element may be specified.
 
 = 3.1.6 =
 * Fixed:    CSS spacing issue
