@@ -76,6 +76,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.6.1 =
 * Modified: Removed raw_align field and added align option to raw field.  See wiki for more info.
+* Added:    'mode' option to image_select, so CSS output element may be specified.
 
 = 3.1.6 =
 * Fixed:    CSS spacing issue
