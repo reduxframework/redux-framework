@@ -74,6 +74,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.6 =
+* Remove group field for now
+* Fixed CSS spacing issue
+* Customizer now works and doesn't break other customizer fields outside of Redux.
+* Endless bug fixes
+* Metabox support via extension http://reduxframework.com/extensions/
+
 = 3.1.5.22 =
 * Added: Admin-bar menu
 * Fixed: Section field now folds.

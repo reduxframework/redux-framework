@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.5.23';
+        public static $_version = '3.1.6';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -214,6 +214,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         public $framework_url       = 'http://www.reduxframework.com/';
         public $instance            = null;
+        public $admin_notices       = array();
         public $page                = '';
         public $args                = array(
             'opt_name'           => '', // Must be defined by theme/plugin
@@ -395,6 +396,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Register setting
                 add_action( 'admin_init', array( $this, '_register_settings' ) );
 
+                // Display admin notices
+                add_action( 'admin_notices', array( $this, '_admin_notices' ) );
+
                 // Enqueue the admin page CSS and JS
                 if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                     add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
@@ -428,6 +432,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
             do_action( 'redux/loaded', $this );
 
         } // __construct()
+
+        function _admin_notices() {
+            if (!empty($this->admin_notices)) {
+                foreach( $this->admin_notices as $notice ) {
+                    echo '<div class="'.$notice['type'].'"><p>' . $notice['msg'] . '</p></div>';
+                }
+                $this->admin_notices = array();
+            }
+        }
 
         /**
          * Load the plugin text domain for translation.
@@ -1372,7 +1385,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             foreach( $this->sections as $section ) {
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $field ) {
-                        if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+                        // TODO AFTER GROUP WORKS - Revert IF below
+                        // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+                        if( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
                             $field_class = 'ReduxFramework_' . $field['type'];
                             /**
                              * Field class file
@@ -1792,6 +1807,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
                         if ( !isset( $field['type'] ) ) {
                             continue; // You need a type!
+                        }
+                        // TODO AFTER GROUP WORKS - Remove IF statement
+                        if ( $field['type'] == "group" ) {
+                            if ( $this->args['dev_mode'] ) {
+                                $this->admin_notices[] = array(
+                                    'type' => 'error',
+                                    'msg' => 'The <strong>group field</strong> has been <strong>removed</strong> until it works better. This message will only appear in dev_mode.',
+                                );
+                            }
+                            continue; // Disabled for now
                         }
                         if (isset($field['permissions'])) {
                             if ( !current_user_can($field['permissions']) ) {
