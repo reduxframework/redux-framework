@@ -1126,15 +1126,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         break;
                     }
                     endforeach;
-                foreach($submenu[$this->args["page_slug"]] as $index => $redux_options_submenu):
-                    $subnodeargs = array(
-                        'id'    => $this->args["page_slug"] . '_' . $index,
-                        'title' => $redux_options_submenu[0],
-                        'parent'=> $this->args["page_slug"],
-                        'href'  => admin_url('admin.php?page='.$redux_options_submenu[2]),
-                    );
-                    $wp_admin_bar->add_node( $subnodeargs );
+                if ( isset( $submenu[$this->args["page_slug"]] ) && is_array( $submenu[$this->args["page_slug"]] ) ) {
+                    foreach($submenu[$this->args["page_slug"]] as $index => $redux_options_submenu):
+                        $subnodeargs = array(
+                            'id'    => $this->args["page_slug"] . '_' . $index,
+                            'title' => $redux_options_submenu[0],
+                            'parent'=> $this->args["page_slug"],
+                            'href'  => admin_url('admin.php?page='.$redux_options_submenu[2]),
+                        );
+                        $wp_admin_bar->add_node( $subnodeargs );
                     endforeach;
+                }
             }else{
                 $nodeargs = array(
                     'id'    => $this->args["page_slug"],
