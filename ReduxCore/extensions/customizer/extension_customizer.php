@@ -49,47 +49,56 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
        * @param       array $extra_tabs Extra panel tabs.
        * @return      void
        */
-      public function __construct( $parent ) {
-        global $pagenow;
-        if ( ( $pagenow !== "customize.php" && $pagenow !== "admin-ajax.php" && !isset( $GLOBALS['wp_customize'] ) ) ) {
-          return;
+        public function __construct( $parent ) {
+            global $pagenow;
+            if ( ( $pagenow !== "customize.php" && $pagenow !== "admin-ajax.php" && !isset( $GLOBALS['wp_customize'] ) ) ) {
+              return;
+            }
+
+            $this->parent = $parent;       
+
+            if ( empty( $this->_extension_dir ) ) {
+              $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+              $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
+            }        
+            
+            //parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
+          
+            // Create defaults array
+            $defaults = array();
+            /*
+              customize_controls_init
+              customize_controls_enqueue_scripts
+              customize_controls_print_styles
+              customize_controls_print_scripts
+              customize_controls_print_footer_scripts
+            */
+           
+
+
+            add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
+
+            add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
+
+            //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
+            //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
+            //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
+            //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+            add_action( "load_textdomain", array( $this, '_override_values' ), 100 ); 
+
         }
 
-        $this->parent = $parent;
-
-        if ( empty( $this->_extension_dir ) ) {
-          $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-          $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
-        }        
-        
-        //parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
-      
-        // Create defaults array
-        $defaults = array();
-        /*
-          customize_controls_init
-          customize_controls_enqueue_scripts
-          customize_controls_print_styles
-          customize_controls_print_scripts
-          customize_controls_print_footer_scripts
-        */
-       
-
-
-        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
-
-        add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
-
-        //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
-        //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
-        //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
-        //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
-
-
-      }
-
-
-
+        public function _override_values( $data ) {
+            if( isset( $_POST['customized'] ) ) {
+                $options = json_decode(stripslashes_deep($_POST['customized']), true);
+                foreach( $options as $key => $value ) {
+                    if (strpos($key, $this->parent->args['opt_name']) !== false) {
+                        $key = str_replace($this->parent->args['opt_name'].'[', '', rtrim($key, "]"));
+                        $GLOBALS[$this->parent->args['global_variable']][$key] = $value;
+                    }
+                }
+            } 
+        }
 
         // All sections, settings, and controls will be added here
         public function _register_customizer_controls( $wp_customize ) {
@@ -327,7 +336,7 @@ static_front_page - Static Front Page
 //echo "there";
   //      print_r($wp_customize);
         //exit();
-        return $wp_customize;
+        //return $wp_customize;
 
       }              
 
