@@ -149,7 +149,6 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                     echo '<label class="' . $selected . ' redux-image-select' . $is_preset_class . $this->field['id'] . '_' . $x . '" for="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '">';
 
                     echo '<input type="radio" class="' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . (array_search( $k, array_keys( $this->field['options'] ) ) + 1) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
-                    
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         echo '<span class="tiles" style="background-image: url(' . $v['img'] . ');" rel="'.$v['img'].'"">&nbsp;</span>';
                     } else {
@@ -199,22 +198,34 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
         
         }
         
-        public function getCSS() {
+        public function getCSS($mode = '') {
             $css = '';
             $value = $this->value;
 
             if (!empty($value)) {
-                $css .= "background-image: url('" . $value . "');";
+                switch($mode) {
+                    case 'background-image':
+                        $output = "background-image: url('" . $value . "');";
+                    break;
+
+                    default:
+                        $output = $mode . ": " . $value . ";";
+                }
             }
+            
+           $css .= $output; 
+            
             return $css;
         }        
         
         public function output() {
+            $mode = ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ? $this->field['mode'] : 'background-image' );
+            
             if ( ( !isset( $this->field['output'] ) || !is_array( $this->field['output'] ) ) && ( !isset( $this->field['compiler'] )  ) ) {
                 return;
             }
 
-            $style = $this->getCSS();
+            $style = $this->getCSS($mode);
 
             if ( !empty( $style ) ) {
 
