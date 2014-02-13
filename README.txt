@@ -166,6 +166,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 * Fixed:    Media field.
 * Added:    'read-only' option for media text field.
 * Added:    'mode' option to image_select, so CSS output element may be specified.
+* Added:    Admin Bar menu for option panel.
 * Modified: media field 'read-only' to 'readonly' to vonform to HTML standards.
 * Modified: Removed raw_align field and added align option to raw field. See wiki for more info.
 * Removed:  EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
