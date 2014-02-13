@@ -1809,7 +1809,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             continue; // You need a type!
                         }
                         // TODO AFTER GROUP WORKS - Remove IF statement
-                        if ( $field['type'] == "group" ) {
+                        
+                        if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                             if ( $this->args['dev_mode'] ) {
                                 $this->admin_notices[] = array(
                                     'type' => 'error',
