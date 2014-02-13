@@ -82,7 +82,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
         //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
-        add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
+        //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
         //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
 
 
@@ -108,7 +108,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
           foreach( $this->parent->sections as $key => $section ) {
             
-            if ( empty( $section['fields'] ) ) {
+            if ( empty( $section['fields'] ) || ( isset( $section['type'] ) && $section['type'] == "divide" ) ) {
               continue;
             }
 
@@ -122,6 +122,10 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
             if ( empty( $section['id'] ) ) {
               $section['id'] = strtolower( str_replace( " ", "", $section['title'] ) ); 
+            }
+
+            if (!isset($section['title'])) {
+                print_r($section);
             }
 
             if (empty($section['priority'])) {
