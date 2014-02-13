@@ -70,6 +70,8 @@ if (!class_exists('ReduxFramework_section')) {
                 'subtitle' => '',
             );
             $this->field = wp_parse_args($this->field, $defaults);
+            
+            $guid = uniqid();
 
             $add_class = '';
             if (isset($this->field['indent']) && !empty($this->field['indent'])) {
@@ -85,7 +87,20 @@ if (!class_exists('ReduxFramework_section')) {
                 echo '<div class="redux-section-desc">' . $this->field['subtitle'] . '</div>';
             }
 
-            echo '</div><table class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td>';
+            //echo '</div><table class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td>';
+            echo '</div><table class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td id="'. $guid .'">';
+            
+            // delete the tr afterwards
+?>
+            <script type="text/javascript">
+                jQuery(document).ready(function(){
+                    var elem = jQuery("#<?php echo $guid?>");
+                    var prevelem = elem.closest("table").prev("h3").prev("p").prev("table");
+                    prevelem.find("tr").last().remove();
+			        elem.parent().remove();
+			    });
+		    </script>';
+<?php             
         }
 
         public function enqueue() {
