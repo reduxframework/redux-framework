@@ -145,10 +145,6 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
-= 3.1.6.1 =
-* Modified: Removed raw_align field and added align option to raw field. See wiki for more info.
-* Added:    'mode' option to image_select, so CSS output element may be specified.
-
 = 3.1.6 =
 * Fixed:    CSS spacing issue
 * Fixed:    Customizer now works and doesn't break other customizer fields outside of Redux.
@@ -169,7 +165,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 * Fixed:    'not_empty' field validation.
 * Fixed:    Media field.
 * Added:    'read-only' option for media text field.
+* Added:    'mode' option to image_select, so CSS output element may be specified.
 * Modified: media field 'read-only' to 'readonly' to vonform to HTML standards.
+* Modified: Removed raw_align field and added align option to raw field. See wiki for more info.
 * Removed:  EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
 * Removed:  Group field, temporarily.
 * Removed:  wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
