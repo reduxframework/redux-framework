@@ -74,55 +74,34 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.6.1 =
+* Modified: Removed raw_align field and added align option to raw field.  See wiki for more info.
+
 = 3.1.6 =
-* Remove group field for now
-* Fixed CSS spacing issue
-* Customizer now works and doesn't break other customizer fields outside of Redux.
-* Endless bug fixes
-* Metabox support via extension http://reduxframework.com/extensions/
-
-= 3.1.5.22 =
-* Added: Admin-bar menu
-* Fixed: Section field now folds.
-* Fixed: wp_content_dir path now handles double forward slashes.
-* Fixed: Typography field missing italics in Google fonts.
-
-= 3.1.5.15 =
-* Fixed: Default color in border field not saving properly.
-* Fixed: hex2rgba in class.redux_helpers.php changed to static.
-* Removed EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
-
-= 3.1.5.14 =
-* Fixed: 'sortable' field type not saving options as default.
-
-= 3.1.5.12 =
-* Specified default color not set when clicking the color box default button.
-
-= 3.1.5.11 =
-* Removed wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
-* Sorter field options are now saved as default in database.
-
-= 3.1.5.10 =
-* Fixed issues with checkboxes displaying default values instead of labels.
-
-= 3.1.5.9 =
-* Fixed outstanding render issues with spacing field.
+* Fixed:    CSS spacing issue
+* Fixed:    Customizer now works and doesn't break other customizer fields outside of Redux.
+* Fixed:    Several minor bug fixes
+* Added:    Metabox support via extension http://reduxframework.com/extensions/
+* Added:    Admin-bar menu
+* Fixed:    Section field now folds.
+* Fixed:    wp_content_dir path now handles double forward slashes.
+* Fixed:    Typography field missing italics in Google fonts.
+* Fixed:    Default color in border field not saving properly.
+* Fixed:    hex2rgba in class.redux_helpers.php changed to static.
+* Fixed:    'sortable' field type not saving options as default.
+* Fixed:    Specified default color not set when clicking the color box default button.
+* Fixed:    Sorter field options are now saved as default in database.
+* Fixed:    Issues with checkboxes displaying default values instead of labels.
+* Fixed:    Outstanding render issues with spacing field.
+* Fixed:    Plugins using Redux from load failure.
+* Fixed:    'not_empty' field validation.
+* Fixed:    Media field.
+* Added:    'read-only' option for media text field.
+* Modified: media field 'read-only' to 'readonly' to vonform to HTML standards.
+* Removed:  EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
+* Removed:  Group field, temporarily.
+* Removed:  wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
  
-= 3.1.5.8 =
-* Fixed plgins using Redux from load failure.
- 
-= 3.1.5.7 =
-* Fixed 'not_empty' field validation.
-* 
-= 3.1.5.6 =
-* Changed media field 'read-only' to 'readonly' to vonform to HTML standards.
-
-= 3.1.5.5 =
-* Media field fix.
-
-= 3.1.5.4 =
-* Added 'read-only' option for media text field.
-
 = 3.1.5 =
 * Typography font arrays may not contain comma spaces.
 * Merge in pull request - 542, code cleanup and better readability
