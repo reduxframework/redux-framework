@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.6.1 =
+* Added:    Dismiss option to admin notices (internal function)
+
 = 3.1.6 =
 * Fixed:    CSS spacing issue
 * Fixed:    Customizer now works and doesn't break other customizer fields outside of Redux.
