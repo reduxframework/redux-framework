@@ -30,7 +30,7 @@ class Redux_Validation_email extends ReduxFramework {
 	*/
 	function validate() {
 		
-		if(!is_email($this->value)){
+		if(!is_email($this->value) || !isset( $this->value ) || empty( $this->value )){
 			$this->value = (isset($this->current))?$this->current:'';
 			$this->error = $this->field;
 		}
