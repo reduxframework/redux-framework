@@ -2227,7 +2227,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if (isset($field['validate'])) {
                             
                             // Make sure 'validate field' is set to 'not_empty'
-                            if ($field['validate'] == 'not_empty') {
+                            if ($field['validate'] == 'not_empty' || $field['validate'] == 'email') {
                                 
                                 // Set the flag.
                                 $isNotEmpty = true;
