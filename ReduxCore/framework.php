@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.6';
+        public static $_version = '3.1.6.1';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -399,6 +399,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Display admin notices
                 add_action( 'admin_notices', array( $this, '_admin_notices' ) );
 
+                // Check for dismissed admin notices.
+                add_action( 'admin_init', array( $this, '_dismiss_admin_notice' ) );
+
                 // Enqueue the admin page CSS and JS
                 if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                     add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
@@ -433,14 +436,69 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         } // __construct()
 
-        function _admin_notices() {
+        public function _admin_notices() {
+            global $current_user, $pagenow;
+
+            // Check for an active admin notice array
             if (!empty($this->admin_notices)) {
+
+                // Enum admin notices
                 foreach( $this->admin_notices as $notice ) {
-                    echo '<div class="'.$notice['type'].'"><p>' . $notice['msg'] . '</p></div>';
+                    if (true == $notice['dismiss']) {
+                        if ( !get_user_meta( $userid, 'ignore_' . $notice['id'] ) ) {
+                            
+                            // Get user ID
+                            $userid = $current_user->ID;
+                            
+                            // Check if we are on admin.php.  If we are, we have
+                            // to get the current page slug and tab, so we can
+                            // feed it back to Wordpress.  Why>  admin.php cannot
+                            // be accessed without the page parameter.  We add the
+                            // tab to return the user to the last panel they were
+                            // on.
+                            if ($pagenow == 'admin.php') {
+                                
+                                // Get the current page.  To avoid errors, we'll set
+                                // the redux page slug if the GET is empty.
+                                $pageName   = empty($_GET['page']) ? '&amp;page=' . $this->args['page_slug'] : '&amp;page=' . $_GET['page'];
+                                
+                                // Ditto for the current tab.
+                                $curTab     = empty($_GET['tab']) ? '&amp;tab=0' : '&amp;tab=' . $_GET['tab'];
+                            }   
+                            
+                            // Print the notice with the dismiss link
+                            echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __('Dismiss', $this->args['domain']) . '</a>.</p></div>';
+                        }                        
+                    } else {
+                        
+                        // Standard notice
+                        echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
+                    }
+
                 }
+                
+                // Clear the admin notice array
                 $this->admin_notices = array();
+                
             }
         }
+
+        public function _dismiss_admin_notice() {
+	        global $current_user;
+            
+	        // Verify the dismiss and id parameters are present.
+	        if ( isset( $_GET['dismiss'] ) && 'true' == $_GET['dismiss'] && isset( $_GET['id']  ) ) {
+                
+                // Get the user id
+                $userid = $current_user->ID;
+                
+                // Get the notice id
+                $id = $_GET['id'];
+                
+                // Add the dismiss request to the user meta.
+	            add_user_meta( $userid, 'ignore_' . $id, 'true', true );
+	        }
+	    }
 
         /**
          * Load the plugin text domain for translation.
@@ -1813,12 +1871,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // TODO AFTER GROUP WORKS - Remove IF statement
                         
                         if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                            if ( $this->args['dev_mode'] ) {
+                            //if ( $this->args['dev_mode'] ) {
                                 $this->admin_notices[] = array(
-                                    'type' => 'error',
-                                    'msg' => 'The <strong>group field</strong> has been <strong>removed</strong> until it works better. This message will only appear in dev_mode.',
+                                    'type'      => 'error',
+                                    'msg'       => 'The <strong>group field</strong> has been <strong>removed</strong> while we retool it for improved performance.',
+                                    'id'        => 'group_err',
+                                    'dismiss'   => true,
                                 );
-                            }
+                            //}
                             continue; // Disabled for now
                         }
                         if (isset($field['permissions'])) {
