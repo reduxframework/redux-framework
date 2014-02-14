@@ -19,6 +19,8 @@
  * @version     3.0.0
  */
 
+
+
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
@@ -50,6 +52,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
        * @return      void
        */
         public function __construct( $parent ) {
+            //add_action('wp_head', array( $this, '_enqueue_new' ));
+            
             global $pagenow;
             if ( ( $pagenow !== "customize.php" && $pagenow !== "admin-ajax.php" && !isset( $GLOBALS['wp_customize'] ) ) ) {
               return;
@@ -76,6 +80,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
            
 
 
+            
+
             add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
 
             add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
@@ -85,7 +91,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
             //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
             //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
             add_action( "load_textdomain", array( $this, '_override_values' ), 100 ); 
-
+            //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 ); 
+            //$this->_enqueue_new();
         }
 
         public function _override_values( $data ) {
@@ -98,6 +105,36 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                     }
                 }
             } 
+        }
+
+        public function _enqueue_new() {
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/codemirror.min.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/colors-control.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/customizer-control.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/fonts-customizer-admin.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/header-control.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/header-models.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/jquery.slimscroll.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/jquery.ui.droppable.min.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/media-editor.min.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/new-customizer.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/previewing.js'."'></script>";
+            //echo "<script type='text/javascript' src='".$this->_extension_url . 'new/theme-customizer.js'."'></script>";
+
+            /*
+            wp_enqueue_script('redux-extension-customizer-codemirror-js', $this->_extension_url . 'new/codemirror.min.js');
+            wp_enqueue_script('redux-extension-customizer-color-js', $this->_extension_url . 'new/colors-control.js');
+            wp_enqueue_script('redux-extension-customizer-controls-js', $this->_extension_url . 'new/customizer-control.js');
+            wp_enqueue_script('redux-extension-customizer-fonts-js', $this->_extension_url . 'new/fonts-customizer-admin.js');
+            wp_enqueue_script('redux-extension-customizer-header-js', $this->_extension_url . 'new/header-control.js');
+            wp_enqueue_script('redux-extension-customizer-models-js', $this->_extension_url . 'new/header-models.js');
+            wp_enqueue_script('redux-extension-customizer-slimscroll-js', $this->_extension_url . 'new/jquery.slimscroll.js');
+            wp_enqueue_script('redux-extension-customizer-droppable-js', $this->_extension_url . 'new/jquery.ui.droppable.min.js');
+            wp_enqueue_script('redux-extension-customizer-editor-js', $this->_extension_url . 'new/media-editor.min.js');
+            wp_enqueue_script('redux-extension-customizer-new-js', $this->_extension_url . 'new/new-customizer.js');
+            wp_enqueue_script('redux-extension-customizer-previewing-js', $this->_extension_url . 'new/previewing.js');
+            wp_enqueue_script('redux-extension-customizer-theme-js', $this->_extension_url . 'new/theme-customizer.js');
+*/
         }
 
         // All sections, settings, and controls will be added here
@@ -116,28 +153,37 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
           );
 
           foreach( $this->parent->sections as $key => $section ) {
-            
+
+            // Not a type that should go on the customizer
             if ( empty( $section['fields'] ) || ( isset( $section['type'] ) && $section['type'] == "divide" ) ) {
               continue;
             }
 
+            // If section customizer is set to false
+            if ( isset( $section['customizer'] ) && $section['customizer'] === false ) {
+                continue;
+            }
+
+            // No errors please
+            if ( !isset( $section['desc'] ) ) {
+              $section['desc'] = "";
+            }              
+
+            // Fill the description if there is a subtitle
             if ( empty( $section['desc'] ) && !empty( $section['subtitle'] ) ) {
               $section['desc'] = $section['subtitle'];
             }
 
-            if ( !isset( $section['desc'] ) ) {
-              $section['desc'] = "";
-            }            
-
+            // Let's make a section ID from the title
             if ( empty( $section['id'] ) ) {
               $section['id'] = strtolower( str_replace( " ", "", $section['title'] ) ); 
             }
-
+            // No title is present, let's show what section is missing a title
             if (!isset($section['title'])) {
                 print_r($section);
             }
-
-            if (empty($section['priority'])) {
+            // Let's set a default priority
+            if ( empty( $section['priority'] ) ) {
                 $section['priority'] = $order['heading'];
                 $order['heading']++;              
             }
@@ -150,10 +196,12 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
 
             foreach( $section['fields'] as $skey => $option ) {
-
-              if ( $this->parent->args['customizer'] === false && ( !isset( $option['customizer'] ) || $option['customizer'] === false ) ) {
-                continue;
-              }
+                if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
+                    continue;
+                }
+                if ( $this->parent->args['customizer'] === false && ( !isset( $option['customizer'] ) || $option['customizer'] !== true ) ) {
+                    continue;
+                }
 
               //Change the item priority if not set
               if ( $option['type'] != 'heading' && !isset( $option['priority'] ) ) {
@@ -381,6 +429,8 @@ static_front_page - Static Front Page
         wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
 
 
+
+
         $localize = array(
           'save_pending'      => __( 'You have changes that are not saved.  Would you like to save them now?', 'redux-framework' ), 
           'reset_confirm'     => __( 'Are you sure?  Resetting will lose all custom values.', 'redux-framework' ), 
@@ -420,6 +470,11 @@ static_front_page - Static Front Page
             }
           }
         }
+
+
+
+
+
       }
 
       /**
