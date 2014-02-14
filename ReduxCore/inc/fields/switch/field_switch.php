@@ -39,14 +39,14 @@ class ReduxFramework_switch extends ReduxFramework{
 		
 		//Label ON
 		if(!isset($this->field['on'])){
-			$on = "On";
+			$on = __('On');
 		}else{
 			$on = $this->field['on'];
 		}
 		
 		//Label OFF
 		if(!isset($this->field['off'])){
-			$off = "Off";
+			$off = __('Off');
 		} else{
 			$off = $this->field['off'];
 		}
