@@ -76,6 +76,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.6.2 =
 * Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
 
 = 3.1.6.1 =
 * Added:    Dismiss option to admin notices (internal function)
