@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework 3.1.6 Front-end\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-02-13 01:49:44+00:00\n"
+"POT-Creation-Date: 2014-02-14 22:33:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,36 +20,36 @@ msgstr ""
 "X-Poedit-SearchPath-1: ReduxCore/languages\n"
 "X-Poedit-SearchPath-2: .\n"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:341
-#: ReduxCore/framework.php:1441
+#: ReduxCore/extensions/customizer/extension_customizer.php:402
+#: ReduxCore/framework.php:1501
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:342
-#: ReduxCore/framework.php:1442
+#: ReduxCore/extensions/customizer/extension_customizer.php:403
+#: ReduxCore/framework.php:1502
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:343
-#: ReduxCore/framework.php:1444
+#: ReduxCore/extensions/customizer/extension_customizer.php:404
+#: ReduxCore/framework.php:1504
 msgid "Your current options will be replaced with the values of this preset. Would you like to proceed?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:372
+#: ReduxCore/extensions/customizer/extension_customizer.php:435
 msgid "You have changes that are not saved.  Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:373
+#: ReduxCore/extensions/customizer/extension_customizer.php:436
 msgid "Are you sure?  Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:374
+#: ReduxCore/extensions/customizer/extension_customizer.php:437
 msgid "Your current options will be replaced with the values of this preset.  Would you like to proceed?"
 msgstr ""
 
 #: ReduxCore/framework.php:122 ReduxCore/framework.php:128
 #: ReduxCore/framework.php:303 ReduxCore/framework.php:306
-#: ReduxCore/framework.php:1141
+#: ReduxCore/framework.php:1201
 msgid "Options"
 msgstr ""
 
@@ -61,126 +61,130 @@ msgstr ""
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:1062 ReduxCore/framework.php:1063
-#: ReduxCore/framework.php:2477
+#: ReduxCore/framework.php:470
+msgid "Dismiss"
+msgstr ""
+
+#: ReduxCore/framework.php:1120 ReduxCore/framework.php:1121
+#: ReduxCore/framework.php:2540
 msgid "Import / Export"
 msgstr ""
 
-#: ReduxCore/framework.php:1074 ReduxCore/framework.php:1075
-#: ReduxCore/framework.php:2493 ReduxCore/framework.php:2608
+#: ReduxCore/framework.php:1132 ReduxCore/framework.php:1133
+#: ReduxCore/framework.php:2556 ReduxCore/framework.php:2671
 msgid "Options Object"
 msgstr ""
 
-#: ReduxCore/framework.php:1086 ReduxCore/framework.php:1087
-#: ReduxCore/framework.php:2507 ReduxCore/framework.php:2626
+#: ReduxCore/framework.php:1144 ReduxCore/framework.php:1145
+#: ReduxCore/framework.php:2570 ReduxCore/framework.php:2689
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1443
+#: ReduxCore/framework.php:1503
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1719
+#: ReduxCore/framework.php:1779
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:2344
+#: ReduxCore/framework.php:2407
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:2406
+#: ReduxCore/framework.php:2469
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:2408 ReduxCore/framework.php:2676
+#: ReduxCore/framework.php:2471 ReduxCore/framework.php:2739
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:2410 ReduxCore/framework.php:2678
+#: ReduxCore/framework.php:2473 ReduxCore/framework.php:2741
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:2412 ReduxCore/framework.php:2680
+#: ReduxCore/framework.php:2475 ReduxCore/framework.php:2743
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:2415 ReduxCore/framework.php:2683
+#: ReduxCore/framework.php:2478 ReduxCore/framework.php:2746
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:2426
+#: ReduxCore/framework.php:2489
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:2432
+#: ReduxCore/framework.php:2495
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:2439
+#: ReduxCore/framework.php:2502
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:2440
+#: ReduxCore/framework.php:2503
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:2441
+#: ReduxCore/framework.php:2504
 msgid "warning(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:2544
+#: ReduxCore/framework.php:2607
 msgid "Import / Export Options"
 msgstr ""
 
-#: ReduxCore/framework.php:2545
+#: ReduxCore/framework.php:2608
 msgid "Import Options"
 msgstr ""
 
-#: ReduxCore/framework.php:2546
+#: ReduxCore/framework.php:2609
 msgid "Import from file"
 msgstr ""
 
-#: ReduxCore/framework.php:2546
+#: ReduxCore/framework.php:2609
 msgid "Import from URL"
 msgstr ""
 
-#: ReduxCore/framework.php:2555
+#: ReduxCore/framework.php:2618
 msgid "Input your backup file below and hit Import to restore your sites options from a backup."
 msgstr ""
 
-#: ReduxCore/framework.php:2569
+#: ReduxCore/framework.php:2632
 msgid "Input the URL to another sites options set and hit Import to load the options from that site."
 msgstr ""
 
-#: ReduxCore/framework.php:2580
+#: ReduxCore/framework.php:2643
 msgid "Import"
 msgstr ""
 
-#: ReduxCore/framework.php:2580
+#: ReduxCore/framework.php:2643
 msgid "WARNING! This will overwrite all existing option values, please proceed with caution!"
 msgstr ""
 
-#: ReduxCore/framework.php:2583
+#: ReduxCore/framework.php:2646
 msgid "Export Options"
 msgstr ""
 
-#: ReduxCore/framework.php:2589
+#: ReduxCore/framework.php:2652
 msgid "Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site)."
 msgstr ""
 
-#: ReduxCore/framework.php:2594
+#: ReduxCore/framework.php:2657
 msgid "Copy"
 msgstr ""
 
-#: ReduxCore/framework.php:2594
+#: ReduxCore/framework.php:2657
 msgid "Download"
 msgstr ""
 
-#: ReduxCore/framework.php:2594
+#: ReduxCore/framework.php:2657
 msgid "Copy Link"
 msgstr ""
 
-#: ReduxCore/framework.php:2615
+#: ReduxCore/framework.php:2678
 msgid "Show Object in Javascript Console Object"
 msgstr ""
 
@@ -370,6 +374,14 @@ msgstr ""
 
 #: ReduxCore/inc/fields/slides/field_slides.php:234
 msgid "Add Slide"
+msgstr ""
+
+#: ReduxCore/inc/fields/switch/field_switch.php:42
+msgid "On"
+msgstr ""
+
+#: ReduxCore/inc/fields/switch/field_switch.php:49
+msgid "Off"
 msgstr ""
 
 #: ReduxCore/inc/fields/typography/field_typography.php:141

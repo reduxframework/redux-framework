@@ -37,19 +37,19 @@ class ReduxFramework_switch extends ReduxFramework{
 			$cb_disabled = ' selected';
 		}
 		
-		//Label ON
-		if(!isset($this->field['on'])){
-			$on = __('On');
-		}else{
-			$on = $this->field['on'];
-		}
-		
-		//Label OFF
-		if(!isset($this->field['off'])){
-			$off = __('Off');
-		} else{
-			$off = $this->field['off'];
-		}
+        //Label ON
+        if(!isset($this->field['on'])){
+            $on = __('On','redux-framework');
+        }else{
+            $on = $this->field['on'];
+        }
+        
+        //Label OFF
+        if(!isset($this->field['off'])){
+            $off = __('Off','redux-framework');
+        } else{
+            $off = $this->field['off'];
+        }
 
 		echo '<div class="switch-options">';
 			echo '<label class="cb-enable'. $cb_enabled .'" data-id="'.$this->field['id'].'"><span>'. $on .'</span></label>';
