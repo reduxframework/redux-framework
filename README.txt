@@ -147,6 +147,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 = 3.1.6.2 =
 * Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
 
 = 3.1.6.1 =
 * Added:    Dismiss option to admin notices (internal function)
