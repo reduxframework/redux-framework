@@ -145,6 +145,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.6.1 =
+* Added:    Dismiss option to admin notices (internal function)
+
 = 3.1.6 =
 * Fixed:    CSS spacing issue
 * Fixed:    Customizer now works and doesn't break other customizer fields outside of Redux.
