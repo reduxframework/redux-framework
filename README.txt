@@ -145,6 +145,9 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.6.2 =
+* Fixed:    On and Off for switch field not displaying language translation.
+
 = 3.1.6.1 =
 * Added:    Dismiss option to admin notices (internal function)
 
