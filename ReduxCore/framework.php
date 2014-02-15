@@ -846,6 +846,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                         }
                     }else if ($type == "callback") {
+                        if ( !is_array( $args ) ) {
+                            $args = array( $args );
+                        }
                         $data = call_user_func($args[0]);
                     }//if           
                 }//if
