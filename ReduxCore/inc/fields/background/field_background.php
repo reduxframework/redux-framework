@@ -346,8 +346,6 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
          * @return      void
          */
         public function enqueue() {
-            wp_enqueue_script('select2-js');
-            wp_enqueue_style('select2-css');
 
             wp_enqueue_script(
                 'redux-field-background-js',
