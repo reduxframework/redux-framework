@@ -445,10 +445,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Enum admin notices
                 foreach( $this->admin_notices as $notice ) {
                     if (true == $notice['dismiss']) {
+                        
+                        // Get user ID
+                        $userid = $current_user->ID;
+                        
                         if ( !get_user_meta( $userid, 'ignore_' . $notice['id'] ) ) {
-                            
-                            // Get user ID
-                            $userid = $current_user->ID;
                             
                             // Check if we are on admin.php.  If we are, we have
                             // to get the current page slug and tab, so we can
