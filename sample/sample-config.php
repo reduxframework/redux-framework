@@ -1288,6 +1288,9 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'allow_sub_menu' => true, // Show the sections below the admin menu item or not
                 'menu_title' => __('Sample Options', 'redux-framework-demo'),
                 'page' => __('Sample Options', 'redux-framework-demo'),
+                
+                // You will need to generate a Google API key to use this feature.
+                // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
                 'google_api_key' => '', // Must be defined to add google fonts to the typography module
                 //'admin_bar' => false, // Show the panel pages on the admin bar
                 'global_variable' => '', // Set a different name for your global variable other than the opt_name
