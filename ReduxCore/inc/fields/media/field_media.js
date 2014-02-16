@@ -43,12 +43,12 @@ function redux_add_file(event, selector) {
 		var attachment = frame.state().get('selection').first();
 		frame.close();
 
-		if ( typeof jQuery.redux.media[jQuery(selector).attr('data-id')] === 'undefined' ) {
-			jQuery.redux.media[jQuery(selector).attr('data-id')] = {};
-			jQuery.redux.media[jQuery(selector).attr('data-id')].mode = "image";
+		if ( typeof redux.media[jQuery(selector).attr('data-id')] === 'undefined' ) {
+			redux.media[jQuery(selector).attr('data-id')] = {};
+			redux.media[jQuery(selector).attr('data-id')].mode = "image";
 		}
 
-		if ( jQuery.redux.media[jQuery(selector).attr('data-id')].mode !== false && attachment.attributes.type !== jQuery.redux.media[jQuery(selector).attr('data-id')].mode) {
+		if ( redux.media[jQuery(selector).attr('data-id')].mode !== false && attachment.attributes.type !== redux.media[jQuery(selector).attr('data-id')].mode) {
 			return;
 		}
 
