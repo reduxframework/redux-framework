@@ -74,14 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.1.6.3 =
-* Fixed:    Servers returning forwards slashes in __FILE__, while Redux is installed embedded would not show options menu.
-
-= 3.1.6.2 =
+= 3.1.7 =
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
 * Fixed:    On and Off for switch field not displaying language translation.
 * Fixed:    email validation allowing a blank field.
-
-= 3.1.6.1 =
 * Added:    Dismiss option to admin notices (internal function)
 
 = 3.1.6 =
