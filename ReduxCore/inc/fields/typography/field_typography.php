@@ -99,11 +99,6 @@ class ReduxFramework_typography extends ReduxFramework {
 	// admin page styling.  It's recommended to pass a CSS file with ONLY font 
 	// declarations.
 	
-	// If field is set and not blank, then enqueue field
-        if (isset($this->field['ext-font-css']) && $this->field['ext-font-css'] != ''){
-            wp_register_style('redux-external-fonts', $this->field['ext-font-css']);
-            wp_enqueue_style('redux-external-fonts');
-        }
 
         if (empty($this->field['units']) && !empty($this->field['default']['units'])) {
             $this->field['units'] = $this->field['default']['units'];
@@ -367,6 +362,12 @@ class ReduxFramework_typography extends ReduxFramework {
             time(),
             true
         );
+        
+        //external font style support
+        if (isset($this->field['ext-font-css']) && $this->field['ext-font-css'] != ''){
+            wp_register_style('redux-external-fonts', $this->field['ext-font-css']);
+            wp_enqueue_style('redux-external-fonts');
+        }
 
 
     }//function
