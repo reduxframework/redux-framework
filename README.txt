@@ -145,8 +145,11 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
-= 3.1.6.3 =
-* Fixed:    Servers returning forwards slashes in __FILE__, while Redux is installed embedded would not show options menu.
+= 3.1.7 =
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Added:    Dismiss option to admin notices (internal function)
 
 = 3.1.6.2 =
 * Fixed:    On and Off for switch field not displaying language translation.
