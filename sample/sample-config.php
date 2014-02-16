@@ -14,8 +14,13 @@ if (!class_exists("Redux_Framework_sample_config")) {
         public $ReduxFramework;
 
         public function __construct() {
+          
+            // All slashes need to be facing the same direction, so unpredicable things happen.
+            $tp = TEMPLATEPATH;
+            $tp = str_replace('/','\\',$tp);
+            
             // This is needed. Bah WordPress bugs.  ;)
-            if ( defined('TEMPLATEPATH') && strpos(__FILE__,TEMPLATEPATH) !== false) {
+            if ( defined('TEMPLATEPATH') && strpos(__FILE__, $tp) !== false) {
                 $this->initSettings();
             } else {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);    
