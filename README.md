@@ -1,5 +1,5 @@
 # The Redux Framework Webinar was a SMASHING success!
-A **huge** thank you to everyone who showed up to support us in our first Redux Framework webinar.  It was a pleasure to meet and interact with all of you.  For those who missed it - or were unable to attend -  we recorded the event and will be posting a link to the video in the next day or so.  Stay tuned for details on our next webinar, comin in March of 2014!  - Dovy, Dan, and Kevin
+A **huge** thank you to everyone who showed up to support us in our first Redux Framework webinar.  It was a pleasure to meet and interact with all of you.  For those who missed it - or were unable to attend -  we recorded the event and will be posting a link to the video in the next day or so.  Stay tuned for details on our next webinar, coming in March of 2014!  - Dovy, Dan, and Kevin
 
  
 --------
