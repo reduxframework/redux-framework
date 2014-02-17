@@ -1,0 +1,18 @@
+.redux-main .redux-container-background {
+  .background-position, .background-attachment, .background-clip, .background-origin, .background-size, .background-repeat {
+    width: 200px !important;
+    margin-right: 10px;
+    margin-bottom: 7px;
+    select {
+      width: 200px !important;
+      margin-right: 10px;
+      margin-bottom: 7px;
+    }
+  }
+  .body-background_previewer {
+    display: block;
+    width: 100%;
+    margin: 5px 0 10px;
+    border: 1px dotted lightgray;
+  }
+}
