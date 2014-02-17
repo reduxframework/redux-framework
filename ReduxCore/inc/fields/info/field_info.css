@@ -92,6 +92,9 @@
   display: inline-block;
   vertical-align: top;
 }
+.redux-notice-field.redux-info {
+  border-left: 4px solid #0099d5;
+}
 .redux-notice-field.redux-success {
   border-left: 4px solid #7ad03a;
 }

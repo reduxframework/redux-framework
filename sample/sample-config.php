@@ -1229,6 +1229,14 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'desc' => __('This is an info notice field with the normal style applied, a header and an icon.', 'redux-framework-demo')
                     ),
                     array(
+                        'id' => 'notice_info',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'info',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the info style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
                         'id' => 'notice_warning',
                         'type' => 'info',
                         'notice' => true,
