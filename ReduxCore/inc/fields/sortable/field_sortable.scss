@@ -1,0 +1,21 @@
+.redux-container-sortable {
+  label {
+    margin-right: 10px;
+    width: 300px;
+  }
+  input {
+    margin-right: 10px;
+  }
+  .checkbox-container {
+    width: 364px;
+    .drag {
+      float: right;
+      margin-left: 10px;
+    }
+  }
+  li.ui-state-highlight {
+    height: 30px;
+    width: 364px;
+    margin-bottom: 13px;
+  }
+}
