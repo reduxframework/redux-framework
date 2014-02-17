@@ -239,6 +239,9 @@
                 }).addClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
                 current.fadeOut(300);
             }
+            
+            //force rehid of empty elements
+            $('td > fieldset:empty,td > div:empty').parent().parent().hide();
 
             //$.redux.verify_fold($(variable));
         });
