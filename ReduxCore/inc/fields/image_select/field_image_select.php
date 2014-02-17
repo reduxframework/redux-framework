@@ -111,27 +111,33 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                     $is_preset = false;
 
                     $this->field['class'] .= ' noUpdate ';
-                    if( !empty( $this->field['presets'] ) && $this->field['presets'] && !empty( $v['presets'] ) ) {
+                    if( $this->field['presets'] ) {
+                        if (!isset($v['presets'])) {
+                            $v['presets'] = array();
+                        }
 
                         if( !is_array( $v['presets'] ) )
                             $v['presets'] = json_decode( $v['presets'], true );
                         
                         // Only highlight the preset if it's the same
                         if ($selected) {
-                            foreach($v['presets'] as $pk => $pv) {
-                                if ( empty($pv) && isset( $this->parent->options[$pk] ) && !empty( $this->parent->options[$pk] ) ) {
-                                    $selected = false;
-                                } else if ( !empty( $pv ) && !isset( $this->parent->options[$pk] ) ) {
-                                    $selected = false;
-                                } else if ( isset( $this->parent->options[$pk] ) && $this->parent->options[$pk] != $pv ) {
-                                    $selected = false;
-                                }
-                                if ( !$selected ) { // We're still not using the same preset. Let's unset that shall we?
-                                    $this->value = "";
-                                    break;
-                                }
-                            }  
-                            
+                            if (empty($v['presets'])) {
+                                $selected = false;
+                            } else {
+                                foreach($v['presets'] as $pk => $pv) {
+                                    if ( empty($pv) && isset( $this->parent->options[$pk] ) && !empty( $this->parent->options[$pk] ) ) {
+                                        $selected = false;
+                                    } else if ( !empty( $pv ) && !isset( $this->parent->options[$pk] ) ) {
+                                        $selected = false;
+                                    } else if ( isset( $this->parent->options[$pk] ) && $this->parent->options[$pk] != $pv ) {
+                                        $selected = false;
+                                    }
+                                    if ( !$selected ) { // We're still not using the same preset. Let's unset that shall we?
+                                        $this->value = "";
+                                        break;
+                                    }
+                                } 
+                            }
                         }
                         
 

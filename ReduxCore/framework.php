@@ -2118,8 +2118,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $plugin_options['REDUX_imported'] = 1;
                     foreach($imported_options as $key => $value) {
                         $plugin_options[$key] = $value;
-                    }                    
-                    
+                    } 
+
+                    /**
+                     * action 'redux/options/{opt_name}/import'
+                     * @param  &array [&$plugin_options, redux_options]
+                     */
+                    do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(&$plugin_options, $imported_options));
+
                     // Remove the import/export tab cookie.
                     if( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
                         setcookie( 'redux_current_tab', '', 1, '/' );
