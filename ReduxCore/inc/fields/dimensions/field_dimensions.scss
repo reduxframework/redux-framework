@@ -1,0 +1,14 @@
+.redux-dimensions-container {
+  .select_wrapper {
+    float: left;
+    width: inherit;
+    select {
+      width: 80px;
+      float: left;
+    }
+  }
+  .field-dimensions-input {
+    margin-right: 10px;
+    margin-bottom: 7px;
+  }
+}
