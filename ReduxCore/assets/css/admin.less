@@ -113,9 +113,7 @@ a {
 	text-align:right;
 	padding: 6px 10px;
 }
-#redux-header{
-	border-bottom:1px solid #E7E7E7;
-}
+
 #redux-footer{
 	border-top:1px solid #E7E7E7;
 	z-index: 2;
@@ -547,12 +545,7 @@ a {
 
 #redux-header {
 	background:#f1f1f1;
-	background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
-	background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: linear-gradient(top,#f9f9f9,#ececec);
+	border-bottom: 3px solid blue;
 }
 #redux-header .display_header {
 	float: left;
@@ -982,28 +975,65 @@ pre {
 }
 
 
-
-
-
-
-
-.admin-color-midnight .redux-sidebar .redux-group-menu li.active a,
-.admin-color-midnight #redux-share a{
-	color:#e14d43
-}
-.admin-color-coffee .redux-sidebar .redux-group-menu li.active a,
-.admin-color-coffee #redux-share a{
-	color:#59524c
-}
-.admin-color-ectoplasm .redux-sidebar .redux-group-menu li.active a,
-.admin-color-ectoplasm #redux-share a{
-	color:#a3b745
-}
-.admin-color-ocean .redux-sidebar .redux-group-menu li.active a,
-.admin-color-ocean #redux-share a{
-	color:#9ebaa0
-}
-.admin-color-sunrise .redux-sidebar .redux-group-menu li.active a,
-.admin-color-sunrise #redux-share a{
-	color:#cf4944
-}
+/* Admin color tweaks thanks to AJ Clarke (WPExplorer) */
+#redux-header { background: #222222; border-color: #0074a2; }
+#redux-header h2 { color: #fff; }
+#redux-header .display_header span { color: #bbb; }
+.redux-sidebar .redux-group-menu li.active { border-left: 3px solid #0074a2 }
+.redux-container-image_select .redux-image-select-selected img { border-color: #0074a2 }
+/*Light admin*/
+.admin-color-light #redux-header .display_header span { color: #e6e6e6; }
+.admin-color-light #redux-header { background: #888888; border-color: #04a4cc; }
+.admin-color-light .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #04a4cc }
+.admin-color-light .redux-sidebar .redux-group-menu li.active a { color: #888888; }
+.admin-color-light .redux-container-image_select .redux-image-select-selected img { border-color: #04a4cc }
+.admin-color-light #redux-footer #redux-share a { color: #04a4cc; }
+.admin-color-light #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #888888; }
+/*Blue admin*/  
+.admin-color-blue #redux-header .display_header span { color: #e2ecf1; }
+.admin-color-blue #redux-header { background: #096484; border-color: #4796b3; }
+.admin-color-blue .redux-sidebar .redux-group-menu li.active a { color: #4796b3; }
+.admin-color-blue .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #4796b3 }
+.admin-color-blue .redux-container-image_select .redux-image-select-selected img { border-color: #4796b3 }
+.admin-color-blue #redux-footer #redux-share a { color: #4796b3; }
+.admin-color-blue #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #096484; }
+/*Coffee admin*/
+.admin-color-coffee #redux-header .display_header span { color: #cdcbc9; }
+.admin-color-coffee #redux-header { background: #46403c; border-color: #c7a589; }
+.admin-color-coffee .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #c7a589 }
+.admin-color-coffee .redux-sidebar .redux-group-menu li.active a { color: #46403c; }
+.admin-color-coffee .redux-container-image_select .redux-image-select-selected img { border-color: #c7a589 }
+.admin-color-coffee #redux-footer #redux-share a { color: #c7a589; }
+.admin-color-coffee #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #46403c; }
+/*Ectoplasm admin*/
+.admin-color-ectoplasm #redux-header .display_header span { color: #cbc5d3; }
+.admin-color-ectoplasm #redux-header { background: #413256; border-color: #a3b745; }
+.admin-color-ectoplasm .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #a3b745 }
+.admin-color-ectoplasm .redux-sidebar .redux-group-menu li.active a { color: #413256; }
+.admin-color-ectoplasm .redux-container-image_select .redux-image-select-selected img { border-color: #a3b745 }
+.admin-color-ectoplasm #redux-footer #redux-share a { color: #a3b745; }
+.admin-color-ectoplasm #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #413256; }
+/*Midnight admin*/
+.admin-color-midnight #redux-header .display_header span { color: #c2c4c5; }
+.admin-color-midnight #redux-header { background: #363b3f; border-color: #e14d43; }
+.admin-color-midnight .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #e14d43 }
+.admin-color-midnight .redux-sidebar .redux-group-menu li.active a { color: #363b3f; }
+.admin-color-midnight .redux-container-image_select .redux-image-select-selected img { border-color: #e14d43 }
+.admin-color-midnight #redux-footer #redux-share a { color: #e14d43; }
+.admin-color-midnight #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #363b3f; }
+/*Ocean admin*/
+.admin-color-ocean #redux-header .display_header span { color: #d5dddf; }
+.admin-color-ocean #redux-header { background: #627c83; border-color: #9ebaa0; }
+.admin-color-ocean .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #9ebaa0 }
+.admin-color-ocean .redux-sidebar .redux-group-menu li.active a { color: #627c83; }
+.admin-color-ocean .redux-container-image_select .redux-image-select-selected img { border-color: #9ebaa0 }
+.admin-color-ocean #redux-footer #redux-share a { color: #9ebaa0; }
+.admin-color-ocean #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #627c83; }
+/*Sunrise admin*/
+.admin-color-sunrise #redux-header .display_header span { color: #f0c8c6; }
+.admin-color-sunrise #redux-header { background: #b43c38; border-color: #dd823b; }
+.admin-color-sunrise .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #dd823b }
+.admin-color-sunrise .redux-sidebar .redux-group-menu li.active a { color: #b43c38; }
+.admin-color-sunrise .redux-container-image_select .redux-image-select-selected img { border-color: #dd823b }
+.admin-color-sunrise #redux-footer #redux-share a { color: #dd823b; }
+.admin-color-sunrise #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #b43c38; }
