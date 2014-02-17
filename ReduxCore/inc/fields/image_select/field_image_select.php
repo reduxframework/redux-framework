@@ -111,7 +111,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                     $is_preset = false;
 
                     $this->field['class'] .= ' noUpdate ';
-                    if( $this->field['presets'] ) {
+                    if( isset($this->field['presets']) &&  $this->field['presets'] !== false ) {
                         if (!isset($v['presets'])) {
                             $v['presets'] = array();
                         }

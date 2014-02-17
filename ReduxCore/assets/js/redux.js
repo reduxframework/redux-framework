@@ -44,6 +44,7 @@
             $.redux.check_dependencies(jQuery('#' + redux.fieldsHidden[i]));
         }
 
+
     });
 
 
