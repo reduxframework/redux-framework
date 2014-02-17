@@ -16,6 +16,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
     class Redux_Helpers {
 
         /**
+         * Take a path and return it clean
+         * @param string $path
+         * @since    3.1.7
+         */
+        public static function cleanFilePath( $path ) {
+            $path = str_replace('','', str_replace( array( "\\", "\\\\" ), '/', $path ) );
+            if ($path[ strlen($path)-1 ] === '/') {
+                $path = rtrim($path, '/');
+            }
+            return $path;
+        }
+
+        /**
          * Field Render Function.
          *
          * Takes the color hex value and converts to a rgba.

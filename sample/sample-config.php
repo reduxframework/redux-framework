@@ -14,13 +14,8 @@ if (!class_exists("Redux_Framework_sample_config")) {
         public $ReduxFramework;
 
         public function __construct() {
-          
-            // All slashes need to be facing the same direction, so unpredicable things happen.
-            $tp = TEMPLATEPATH;
-            $tp = str_replace('/','\\',$tp);
-            
             // This is needed. Bah WordPress bugs.  ;)
-            if ( defined('TEMPLATEPATH') && strpos(__FILE__, $tp) !== false) {
+            if ( defined('TEMPLATEPATH') && strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( TEMPLATEPATH ) ) !== false) {
                 $this->initSettings();
             } else {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);    
@@ -1293,7 +1288,6 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'allow_sub_menu' => true, // Show the sections below the admin menu item or not
                 'menu_title' => __('Sample Options', 'redux-framework-demo'),
                 'page' => __('Sample Options', 'redux-framework-demo'),
-                
                 // You will need to generate a Google API key to use this feature.
                 // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
                 'google_api_key' => '', // Must be defined to add google fonts to the typography module
