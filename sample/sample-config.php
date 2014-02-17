@@ -1207,11 +1207,53 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'desc' => __('This is an info field with the success style applied, a header and an icon.', 'redux-framework-demo')
                     ),
                     array(
+                        'id' => 'info_critical',
+                        'type' => 'info',
+                        'style' => 'critical',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info field with the critical style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
                         'id' => 'raw_info',
                         'type' => 'info',
                         'required' => array('18', 'equals', array('1', '2')),
                         'raw_html' => true,
                         'desc' => $sampleHTML,
+                    ),
+                    array(
+                        'id' => 'notice_normal',
+                        'type' => 'info',
+                        'notice' => true,
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the normal style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_warning',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'warning',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the warning style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_success',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'success',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the success style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_critical',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'critical',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an notice field with the critical style applied, a header and an icon.', 'redux-framework-demo')
                     ),
                     array(
                         'id' => "custom_callback",

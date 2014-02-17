@@ -65,12 +65,10 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
             $defaults = array(
                 'title' => '',
                 'desc' => '',
+                'notice' => false,
+                'style' => ''
             );
             $this->field = wp_parse_args( $this->field, $defaults );
-
-        	if ( !isset( $this->field['style'] ) ) {
-        		$this->field['style'] = "";
-        	}
 
             if( empty( $this->field['desc'] ) && !empty( $this->field['default'] ) ) {
             	$this->field['desc'] = $this->field['default'];
@@ -87,7 +85,11 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
             }
 
             if( empty( $this->field['raw_html'] ) ) {
-                $this->field['class'] .= ' redux-info-field';
+                if($this->field['notice'] == true){
+                    $this->field['class'] .= ' redux-notice-field';
+                }else{
+                    $this->field['class'] .= ' redux-info-field';
+                }
 
                 if( empty( $this->field['style'] ) ) {
                     $this->field['style'] = 'normal';
