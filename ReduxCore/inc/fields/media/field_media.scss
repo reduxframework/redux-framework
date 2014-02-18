@@ -32,11 +32,12 @@
   }
   .redux-option-image {
     max-height: 340px;
-    max-width: 340px;
+    max-width:340px;
     padding: 5px;
     margin-top: 10px;
-    border: 1px solid #e3e3e3;
-    background: #f7f7f7;
+    margin-right: 15px;
+    border:1px solid #e3e3e3;
+    background:#f7f7f7;
     -moz-border-radius: 3px;
     -khtml-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -44,5 +45,8 @@
   }
   .redux-main .upload {
     width: 80% !important;
+  }
+  .screenshot {
+    margin-bottom: 10px;
   }
 }
