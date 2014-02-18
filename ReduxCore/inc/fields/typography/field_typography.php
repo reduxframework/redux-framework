@@ -64,6 +64,7 @@ class ReduxFramework_typography extends ReduxFramework {
             'subsets' => true,
             'font-weight' => true,
             'font-style' => true,
+            'text-align' => true,
             'font-backup' => false,
             'color' => true,
             'preview' => true,
@@ -79,6 +80,7 @@ class ReduxFramework_typography extends ReduxFramework {
             'font-family'=>'',
             'font-options'=>'',
             'font-backup'=>'',
+            'text-align'=>'',
             'line-height'=>'',
             'word-spacing' => '',
             'letter-spacing' => '',
@@ -276,6 +278,25 @@ class ReduxFramework_typography extends ReduxFramework {
             endif;
 
             
+            /**
+            Font Script
+             **/
+            if ( $this->field['text-align'] === true ):
+                echo '<div class="select_wrapper typography-align tooltip" original-title="'.__('Text Align','redux-framework').'">';
+                echo '<select data-placeholder="'.__('Text Align','redux-framework').'" class="redux-typography redux-typography-align'.$this->field['class'].'" original-title="'.__('Text Align','redux-framework').'"  id="'.$this->field['id'].'-align" name="' . $this->field['name'] . '[text-align]' . $this->field['name_suffix'] . '" data-value="'.$this->value['text-align'].'" data-id="'.$this->field['id'].'" >';
+                echo '<option value=""></option>';
+                $align = array(
+                  'inherit', 'left', 'right', 'center', 'justify', 'initial'
+                );
+                
+                foreach ($align as $v) {
+                    echo '<option value="'. $v .'" ' . selected($this->value['text-align'], $v, false) . '>'. ucfirst( $v ) .'</option>';
+                }
+            
+                echo '</select></div>';
+
+            endif;
+
             /**
             Backup Font
              **/

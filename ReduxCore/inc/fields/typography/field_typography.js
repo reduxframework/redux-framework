@@ -34,6 +34,7 @@ jQuery(document).ready(function($) {
 		var height = $('#' + mainID + ' .redux-typography-height').val();
 		var word = $('#' + mainID + ' .redux-typography-word').val(); // New Word-Spacing
 		var letter = $('#' + mainID + ' .redux-typography-letter').val(); // New Letter-Spacing
+		var align = $('#' + mainID + ' select.redux-typography-align').val(); // text-align
 		var style = $('#' + mainID + ' select.redux-typography-style').val();
 		var script = $('#' + mainID + ' select.redux-typography-subsets').val();
 		var color = $('#' + mainID + ' .redux-typography-color').val();
@@ -194,6 +195,11 @@ jQuery(document).ready(function($) {
 		$('#' + mainID + ' .redux-typography-font-family').val(output);
 		$('#' + mainID + ' .typography-style .select2-chosen').text($('#' + mainID + ' .redux-typography-style option:selected').text());
 		$('#' + mainID + ' .typography-script .select2-chosen').text($('#' + mainID + ' .redux-typography-subsets option:selected').text());
+
+		if (align) {
+			$('#' + mainID + ' .typography-preview').css('text-align', align);	
+		}
+		
 	}
 	//init for each element
 	jQuery('.redux-typography-container').each(function() {
@@ -208,7 +214,7 @@ jQuery(document).ready(function($) {
 		typographySelect(this);
 	});
 	//init when value is changed
-	jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter').keyup(function() {
+	jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-align').keyup(function() {
 		typographySelect(this);
 	});
 	// Have to redeclare the wpColorPicker to get a callback function
@@ -226,7 +232,7 @@ jQuery(document).ready(function($) {
 		allowMinus: true,
 	});		
 	//jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
-	jQuery(".redux-typography-family, .redux-typography-family-backup").select2({
+	jQuery(".redux-typography-family, .redux-typography-family-backup, .redux-typography-align").select2({
 		width: 'resolve',
 		triggerChange: true,
 		allowClear: true

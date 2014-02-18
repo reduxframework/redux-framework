@@ -78,7 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
 * Fixed:    On and Off for switch field not displaying language translation.
 * Fixed:    email validation allowing a blank field.
+* Fixed:    Now allow for empty values as valid keys.
 * Added:    Dismiss option to admin notices (internal function)
+* Added:    Text-align to typography field.
 
 = 3.1.6 =
 * Fixed:    CSS spacing issue

@@ -23,7 +23,9 @@
   margin-right: 0;
 }
 .redux-main .redux-typography-container .typography-style,
-.redux-main .redux-typography-container .typography-style select {
+.redux-main .redux-typography-container .typography-style select,
+.redux-main .redux-typography-container .typography-align,
+.redux-main .redux-typography-container .typography-align select {
   width: 125px!important;
 }
 .redux-main .redux-typography-container .select_wrapper {
