@@ -2819,7 +2819,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param string $v
          * @return      void
          */
-        public function _field_input( $field, $v = "" ) {
+        public function _field_input( $field, $v = null ) {
 
             if( isset( $field['callback'] ) && function_exists( $field['callback'] ) ) {
                $value = ( isset( $this->options[$field['id']] ) ) ? $this->options[$field['id']] : '';
@@ -2890,7 +2890,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( class_exists( $field_class ) ) {
                     $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
-                    if ($v != "") {
+                    if ( $v !== null ) {
                         $value = $v;
                     }
                     /**
