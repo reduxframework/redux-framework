@@ -129,9 +129,9 @@ class ReduxFramework_slider extends ReduxFramework{
 
 		$params = wp_parse_args( $field, $params );
 
-		if ( empty( $value ) ) {
+		if ( empty( $value ) && isset( $this->value ) ) {
 			$value = $this->value;
-		}		
+		}
 		$params['val'] = $value;
 
 		return $params;
@@ -148,13 +148,15 @@ class ReduxFramework_slider extends ReduxFramework{
 	*/
 	function render(){
 
+		$this->clean();
+
 		// Don't allow input edit if there's a step
 		$readonly = "";
 		
 		if ( isset($this->field['edit']) && $this->field['edit'] == false ) {
 			$readonly = ' readonly="readonly"';
 		}
-		
+
 		echo '<input type="text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '" value="'. $this->value .'" class="mini slider-input'.$this->field['class'].'"'.$readonly.'/>';
 		echo '<div id="'.$this->field['id'].'-slider" class="redux_slider" rel="'.$this->field['id'].'"></div>';
 
