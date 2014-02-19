@@ -1475,10 +1475,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     }
                                     $theField = new $field_class( $field, $this->options[$field['id']], $this );
                                     
-                                    if ( !wp_script_is( 'redux-field-'.$field['type'].'-js', 'enqueued' ) && class_exists($field_class) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
-                                        /** @noinspection PhpUndefinedMethodInspection */
-                                        //echo "DOVY";
-                                        $theField->enqueue();    
+                                    // Move dev_mode check to a new if/then block
+                                    if ( !wp_script_is( 'redux-field-'.$field['type'].'-js', 'enqueued' ) && class_exists($field_class) && method_exists( $field_class, 'enqueue' ) ) {
+                                    	
+                                    	// Checking for extension field AND dev_mode = false OR dev_mode = true
+                                    	// Since extension fields use 'extension_dir' exclusively, we can detect them here.
+                                    	// Also checking for dev_mode = true doesn't mess up the JS combinine.
+					if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
+                                            /** @noinspection PhpUndefinedMethodInspection */
+                                            $theField->enqueue();
+                                        }
                                     }
                                     if ( method_exists( $field_class, 'localize' ) ) {
                                         /** @noinspection PhpUndefinedMethodInspection */
