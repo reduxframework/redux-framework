@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.7.6 =
+* Fixed:    Background field now works with dynamic preview as it should.
+
 = 3.1.7.5 =
 * Fixed:    Extension fields now enqueueing properly.
 
