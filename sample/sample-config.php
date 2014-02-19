@@ -580,7 +580,6 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'title' => __('Body Background', 'redux-framework-demo'),
                         'subtitle' => __('Body background with image, color, etc.', 'redux-framework-demo'),
                     //'default' => '#FFFFFF',
-                    //'validate' => 'color',
                     ),
                     array(
                         'id' => 'color-footer',
