@@ -47,7 +47,7 @@
     // Update the background preview
     $.reduxBackground.preview = function(selector) {
 		var parent = selector.parents('.redux-container-background:first');
-		var preview = $(parent).find('.body-background_previewer');
+		var preview = $(parent).find('.background-preview');
 
 		if (!preview) { // No preview present
 			return;
@@ -58,7 +58,8 @@
 		$(parent).find('.redux-background-input').each(function() {
 			var data = $(this).serializeArray();
 			data = data[0];
-			if (data && data.name.indexOf('background]') != -1) {
+			
+			if (data && data.name.indexOf('[background-') != -1) {
 				if (data.value !== "") {
 					data.name = data.name.split(split);
 					data.name = data.name[1].replace(']', '');
@@ -68,7 +69,6 @@
 						css += data.name+':'+data.value+';';	
 					}					
 				}
-				
 			}
 		});
 
