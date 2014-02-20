@@ -76,6 +76,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.7.7 =
 * Fixed:    Spacing field kicking back notices and warnings when 'output' wasn't set.
+* Modified: Added file_exists check to all include lines in framework.php
 
 = 3.1.7.6 =
 * Fixed:    Background field now works with dynamic preview as it should.
