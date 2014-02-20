@@ -1251,9 +1251,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 
                                 if( $class_file && file_exists($class_file) && !class_exists( $field_class ) ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    if (file_exists($class_file)) {
-                                    	require_once( $class_file );
-                                    }
+                              	    require_once( $class_file );
                                 }
                             }   
 
@@ -2297,7 +2295,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    if (file_exists($class_file) {
+                                    if ( file_exists( $class_file ) ) {
                                     	require_once( $class_file );
                                     }
                                 }
