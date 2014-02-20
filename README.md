@@ -74,24 +74,14 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.1.7.8 =
+= 3.1.8 =
 * Fixed:    Improper enqueue in tracking class.
 * Fixed:    Few classes missed for various fields.
-
-= 3.1.7.7 =
 * Fixed:    Spacing field kicking back notices and warnings when 'output' wasn't set.
 * Modified: Added file_exists check to all include lines in framework.php
-
-= 3.1.7.6 =
 * Fixed:    Background field now works with dynamic preview as it should.
-
-= 3.1.7.5 =
 * Fixed:    Extension fields now enqueueing properly.
-
-= 3.1.7.4 =
 * Added:    Text-align to typography field.
-* 
-= 3.1.7 =
 * Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
 * Fixed:    On and Off for switch field not displaying language translation.
 * Fixed:    email validation allowing a blank field.

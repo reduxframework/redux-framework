@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
 Tested up to: 3.8.1
-Stable tag: 3.1.6
+Stable tag: 3.1.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -145,17 +145,27 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 
 == Changelog ==
 
+= 3.1.8 =
+* Fixed:    Improper enqueue in tracking class.
+* Fixed:    Few classes missed for various fields.
+* Fixed:    Spacing field kicking back notices and warnings when 'output' wasn't set.
+* Modified: Added file_exists check to all include lines in framework.php
+* Fixed:    Background field now works with dynamic preview as it should.
+* Fixed:    Extension fields now enqueueing properly.
+* Added:    Text-align to typography field.
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Fixed:    Now allow for empty values as valid keys.
+* Added:    Dismiss option to admin notices (internal function)
+
 = 3.1.7 =
 * Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
 * Fixed:    On and Off for switch field not displaying language translation.
 * Fixed:    email validation allowing a blank field.
 * Added:    Dismiss option to admin notices (internal function)
-
-= 3.1.6.2 =
 * Fixed:    On and Off for switch field not displaying language translation.
 * Fixed:    email validation allowing a blank field.
-
-= 3.1.6.1 =
 * Added:    Dismiss option to admin notices (internal function)
 
 = 3.1.6 =
