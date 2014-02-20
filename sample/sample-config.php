@@ -14,6 +14,11 @@ if (!class_exists("Redux_Framework_sample_config")) {
         public $ReduxFramework;
 
         public function __construct() {
+
+            if ( !class_exists("ReduxFramework" ) ) {
+                return;
+            }    
+
             // This is needed. Bah WordPress bugs.  ;)
             if ( defined('TEMPLATEPATH') && strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( TEMPLATEPATH ) ) !== false) {
                 $this->initSettings();
@@ -23,10 +28,6 @@ if (!class_exists("Redux_Framework_sample_config")) {
         }
 
         public function initSettings() {
-
-            if ( !class_exists("ReduxFramework" ) ) {
-                return;
-            }       
             
             // Just for demo purposes. Not needed per say.
             $this->theme = wp_get_theme();
