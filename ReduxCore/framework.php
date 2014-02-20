@@ -1251,7 +1251,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 
                                 if( $class_file && file_exists($class_file) && !class_exists( $field_class ) ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                                    if (file_exists($class_file)) {
+                                    	require_once( $class_file );
+                                    }
                                 }
                             }   
 
@@ -1464,7 +1466,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if( $class_file ) {
                                 if( !class_exists($field_class) ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                                    if (file_exists($class_file)) {
+                                    	require_once( $class_file );
+                                    }
                                 }
 
                                 
@@ -2073,7 +2077,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
-                        require_once( $class_file );
+                        if (file_exists($class_file)) {
+                            require_once( $class_file );
+                        }
                         /** @noinspection PhpUnusedLocalVariableInspection */
                         $extension = new $extension_class( $this );                                            
                     }
@@ -2291,7 +2297,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                                    if (file_exists($class_file) {
+                                    	require_once( $class_file );
+                                    }
                                 }
 
                             }
@@ -2889,7 +2897,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
-                        require_once($class_file);
+                        if (file_exists($class_file)) {
+                            require_once($class_file);
+                        }
                     }
 
                 }
