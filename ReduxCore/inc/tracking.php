@@ -31,12 +31,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 			$options = get_option( 'Redux_Framework' );
 
 			if ( ! isset( $options['allow_tracking'] ) && isset( $_GET['page'] ) && $_GET['page'] == $parent->args['page_slug'] ) {
-				wp_enqueue_style( 'wp-pointer' );
-				wp_enqueue_script( 'jquery' );
-				wp_enqueue_script( 'jquery-ui' );
-				wp_enqueue_script( 'wp-pointer' );
-				wp_enqueue_script( 'utils' );
-				add_action( 'admin_print_footer_scripts', array( $this, 'tracking_request' ) );
+				add_action( 'admin_enqueue_scripts', array( $this, 'tracking' ) );
 			} 
 
 			if ($options['allow_tracking'] == true) {
@@ -48,6 +43,15 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 			}
 		}
 
+
+		function _enqueue() {
+			wp_enqueue_style( 'wp-pointer' );
+			wp_enqueue_script( 'jquery' );
+			wp_enqueue_script( 'jquery-ui' );
+			wp_enqueue_script( 'wp-pointer' );
+			wp_enqueue_script( 'utils' );
+			add_action( 'admin_print_footer_scripts', array( $this, 'tracking_request' ) );			
+		}
 
 		/**
 		 * Shows a popup that asks for permission to allow tracking.
