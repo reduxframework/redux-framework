@@ -293,8 +293,6 @@ class ReduxFramework_spacing extends ReduxFramework{
     	$mode = ( $this->field['mode'] != "absolute" ) ? $this->field['mode'] : "";
     	$units = isset( $this->value['units'] ) ? $this->value['units'] : "";
     	
-		//absolute, padding, margin
-        $keys = implode(",", $this->field['output']);
         $style = '';
 
         if ( !empty( $mode ) ) {
