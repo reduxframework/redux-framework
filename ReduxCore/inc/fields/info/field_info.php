@@ -98,7 +98,7 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
                 $this->field['style'] = 'redux-' . $this->field['style'].' ';
             }
 
-            echo '</td></tr></table><div id="info-' . $this->field['id'] . '" class="' . $this->field['style'] . $this->field['class'] . '">';
+            echo '</td></tr></table><div id="info-' . $this->field['id'] . '" class="' . $this->field['style'] . $this->field['class'] . ' redux-field-'.$this->field['type'].'">';
 
             	if ( !empty($this->field['raw_html']) && $this->field['raw_html'] ) {
             		echo $this->field['desc'];
