@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.2 =
+* Added:      email_not_empty validation field.
+* Reverted:   email validation field only checks for valid email.  not_empty check moved to new validation field.
+
 = 3.1.8.1 =
 * Fixed:      Hide demo hook wasn't hiding demo links.
 
