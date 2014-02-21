@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.1 =
+* Fixed:      Hide demo hook wasn't hiding demo links.
+
 = 3.1.8 =
 * Fixed:    Improper enqueue in tracking class.
 * Fixed:    Few classes missed for various fields.
