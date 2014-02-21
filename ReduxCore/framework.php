@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.1';
+        public static $_version = '3.1.8.2';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -2245,8 +2245,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // Make sure 'validate' field is set.
                         if (isset($field['validate'])) {
                             
-                            // Make sure 'validate field' is set to 'not_empty'
-                            if ($field['validate'] == 'not_empty' || $field['validate'] == 'email') {
+                            // Make sure 'validate field' is set to 'not_empty' or 'email_not_empty'
+                            if ($field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty') {
                                 
                                 // Set the flag.
                                 $isNotEmpty = true;
