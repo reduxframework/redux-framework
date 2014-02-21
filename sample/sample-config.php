@@ -46,7 +46,8 @@ if (!class_exists("Redux_Framework_sample_config")) {
             }
 
             // If Redux is running as a plugin, this will remove the demo notice and links
-            //add_action( 'redux/plugin/hooks', array( $this, 'remove_demo' ) );
+            //add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
+            
             // Function to test the compiler hook and demo CSS output.
             //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2); 
             // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
@@ -139,11 +140,12 @@ if (!class_exists("Redux_Framework_sample_config")) {
 
             // Used to hide the demo mode link from the plugin page. Only used when Redux is a plugin.
             if (class_exists('ReduxFrameworkPlugin')) {
-                remove_filter('plugin_row_meta', array(ReduxFrameworkPlugin::get_instance(), 'plugin_meta_demo_mode_link'), null, 2);
+                remove_filter('plugin_row_meta', array(ReduxFrameworkPlugin::instance(), 'plugin_metalinks'), null, 2);
+                
+                // Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
+                remove_action('admin_notices', array(ReduxFrameworkPlugin::instance(), 'admin_notices'));
+                
             }
-
-            // Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
-            remove_action('admin_notices', array(ReduxFrameworkPlugin::get_instance(), 'admin_notices'));
         }
 
         public function setSections() {
