@@ -452,7 +452,7 @@ class Parsedown
                                 break;
                             }
 
-                            $reference['»'] = substr($substring, 1, $position - 1);
+                            $reference['&raquo;'] = substr($substring, 1, $position - 1);
 
                             $substring = substr($substring, $position + 1);
                         }
@@ -462,13 +462,13 @@ class Parsedown
 
                             if ($position === false)
                             {
-                                $reference['»'] = $substring;
+                                $reference['&raquo;'] = $substring;
 
                                 $substring = false;
                             }
                             else
                             {
-                                $reference['»'] = substr($substring, 0, $position);
+                                $reference['&raquo;'] = substr($substring, 0, $position);
 
                                 $substring = substr($substring, $position + 1);
                             }
@@ -626,7 +626,7 @@ class Parsedown
 
         unset($blocks[0]);
 
-        # $blocks » HTML
+        # $blocks &raquo; HTML
 
         $markup = '';
 
@@ -836,7 +836,7 @@ class Parsedown
 
                         if ($remaining_text[0] === '(' and preg_match('/\([ ]*(.*?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*\)/', $remaining_text, $matches))
                         {
-                            $element['»'] = $matches[1];
+                            $element['&raquo;'] = $matches[1];
 
                             if (isset($matches[2]))
                             {
@@ -860,7 +860,7 @@ class Parsedown
 
                             if (isset($this->reference_map[$reference]))
                             {
-                                $element['»'] = $this->reference_map[$reference]['»'];
+                                $element['&raquo;'] = $this->reference_map[$reference]['&raquo;'];
 
                                 if (isset($this->reference_map[$reference]['#']))
                                 {
@@ -880,12 +880,12 @@ class Parsedown
 
                     if (isset($element))
                     {
-                        $element['»'] = str_replace('&', '&amp;', $element['»']);
-                        $element['»'] = str_replace('<', '&lt;', $element['»']);
+                        $element['&raquo;'] = str_replace('&', '&amp;', $element['&raquo;']);
+                        $element['&raquo;'] = str_replace('<', '&lt;', $element['&raquo;']);
 
                         if ($element['!'])
                         {
-                            $markup .= '<img alt="'.$element['a'].'" src="'.$element['»'].'"';
+                            $markup .= '<img alt="'.$element['a'].'" src="'.$element['&raquo;'].'"';
 
                             if (isset($element['#']))
                             {
@@ -898,7 +898,7 @@ class Parsedown
                         {
                             $element['a'] = $this->parse_span_elements($element['a'], $markers);
 
-                            $markup .= '<a href="'.$element['»'].'"';
+                            $markup .= '<a href="'.$element['&raquo;'].'"';
 
                             if (isset($element['#']))
                             {
