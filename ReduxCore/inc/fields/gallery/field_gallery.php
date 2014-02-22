@@ -31,7 +31,7 @@ if (!class_exists('ReduxFramework_gallery')) {
      *
      * @since       3.0.0
      */
-    class ReduxFramework_gallery extends ReduxFramework {
+    class ReduxFramework_gallery {
 
         /**
          * Field Constructor.

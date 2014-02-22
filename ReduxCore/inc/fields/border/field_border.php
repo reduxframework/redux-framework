@@ -24,7 +24,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( class_exists( 'ReduxFramework_border' ) ) return;
 
-class ReduxFramework_border extends ReduxFramework {	
+class ReduxFramework_border {	
 	
 	/**
 	 * Field Constructor.

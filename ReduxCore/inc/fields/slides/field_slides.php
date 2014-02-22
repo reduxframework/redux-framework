@@ -32,7 +32,7 @@ if (!class_exists('ReduxFramework_slides')) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_slides extends ReduxFramework{
+    class ReduxFramework_slides {
 
         /**
          * Field Constructor.

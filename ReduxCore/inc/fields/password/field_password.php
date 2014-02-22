@@ -2,7 +2,7 @@
 /**
  * Class ReduxFramework_password
  */
-class ReduxFramework_password extends ReduxFramework {
+class ReduxFramework_password {
 
 	/**
 	 * Field Constructor.

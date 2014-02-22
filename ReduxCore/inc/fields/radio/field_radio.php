@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_radio extends ReduxFramework{	
+class ReduxFramework_radio {	
 	
 	/**
 	 * Field Constructor.
@@ -32,7 +32,7 @@ class ReduxFramework_radio extends ReduxFramework{
 			if (empty($this->field['args'])) {
 				$this->field['args'] = array();
 			}        	
-        	$this->field['options'] = $this->get_wordpress_data($this->field['data'], $this->field['args']);
+        	$this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
         }
         $this->field['data_class'] = ( isset($this->field['multi_layout']) ) ? 'data-'.$this->field['multi_layout'] : 'data-full';		
 		

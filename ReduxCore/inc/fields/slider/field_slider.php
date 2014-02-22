@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_slider extends ReduxFramework{	
+class ReduxFramework_slider {	
 	
 	/**
 	 * Field Constructor.

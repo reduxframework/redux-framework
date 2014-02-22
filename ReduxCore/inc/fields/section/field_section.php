@@ -31,7 +31,7 @@ if (!class_exists('ReduxFramework_section')) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_section extends ReduxFramework {
+    class ReduxFramework_section {
 
         /**
          * Field Constructor.

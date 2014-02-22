@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_sortable extends ReduxFramework {
+class ReduxFramework_sortable {
 
     /**
      * Field Constructor.

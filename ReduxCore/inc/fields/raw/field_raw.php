@@ -1,6 +1,6 @@
 <?php
 
-class ReduxFramework_raw extends ReduxFramework {
+class ReduxFramework_raw {
 
     /**
      * Field Constructor.

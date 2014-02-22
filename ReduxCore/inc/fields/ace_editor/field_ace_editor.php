@@ -24,7 +24,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( class_exists( 'ReduxFramework_ace_editor' ) ) return;
 
-class ReduxFramework_ace_editor extends ReduxFramework{ 
+class ReduxFramework_ace_editor { 
 
     /**
      * Field Constructor.

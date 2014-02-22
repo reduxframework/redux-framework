@@ -9,7 +9,7 @@
  * @since 3.1.2
  */
 
-class ReduxFramework_select_image extends ReduxFramework {
+class ReduxFramework_select_image {
 
     /**
      * Field Constructor.
@@ -19,7 +19,6 @@ class ReduxFramework_select_image extends ReduxFramework {
      * @since ReduxFramework 1.0.0
      */
     function __construct($field = array(), $value = '', $parent) {
-        //parent::__construct($parent->sections, $parent->args);
         $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;

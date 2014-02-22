@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_divide' ) ) {
      *
      * @since       1.0.0
      */
-	class ReduxFramework_divide extends ReduxFramework {
+	class ReduxFramework_divide {
 	
 		/**
 		 * Field Constructor.

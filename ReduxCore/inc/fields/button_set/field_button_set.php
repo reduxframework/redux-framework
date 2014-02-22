@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_button_set extends ReduxFramework {
+    class ReduxFramework_button_set {
     
         /**
          * Holds configuration settings for each field in a model.

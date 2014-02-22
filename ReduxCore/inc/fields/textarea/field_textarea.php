@@ -223,7 +223,7 @@ See blow.
 
 
 
-class ReduxFramework_textarea extends ReduxFramework {
+class ReduxFramework_textarea {
 
     /**
      * Field Constructor.

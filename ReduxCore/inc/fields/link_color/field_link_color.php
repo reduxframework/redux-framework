@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_link_color' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_link_color extends ReduxFramework {
+    class ReduxFramework_link_color {
     
         /**
          * Field Constructor.

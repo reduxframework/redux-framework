@@ -30,7 +30,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
      *
      * @since       1.0.0
      */
-	class ReduxFramework_color_rgba extends ReduxFramework {
+	class ReduxFramework_color_rgba {
 	
 		/**
 		 * Field Constructor.

@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_image_select extends ReduxFramework {
+    class ReduxFramework_image_select {
     
         /**
          * Field Constructor.

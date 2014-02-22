@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_media extends ReduxFramework {
+    class ReduxFramework_media {
     
         /**
          * Field Constructor.

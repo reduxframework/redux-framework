@@ -34,7 +34,7 @@ if (!class_exists('ReduxFramework_group')) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_group extends ReduxFramework {
+    class ReduxFramework_group {
 
         /**
          * Field Constructor.

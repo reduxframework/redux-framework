@@ -1,7 +1,7 @@
 <?php
 
 
-class ReduxFramework_typography extends ReduxFramework {
+class ReduxFramework_typography {
 
     private $std_fonts = array(
         "Arial, Helvetica, sans-serif"                          => "Arial, Helvetica, sans-serif",

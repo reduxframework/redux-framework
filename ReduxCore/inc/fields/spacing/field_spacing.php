@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_spacing extends ReduxFramework{	
+class ReduxFramework_spacing {	
 	
 	/**
 	 * Field Constructor.

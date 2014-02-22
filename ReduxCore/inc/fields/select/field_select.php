@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_select extends ReduxFramework{	
+class ReduxFramework_select {	
 	
 	/**
 	 * Field Constructor.
@@ -54,7 +54,7 @@ class ReduxFramework_select extends ReduxFramework{
        				require_once( $icons_file );
        			}
 			}        	
-        	$this->field['options'] = $this->get_wordpress_data($this->field['data'], $this->field['args']);
+        	$this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
         }		
 
 		if ( !empty($this->field['data']) && ( $this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) ) {

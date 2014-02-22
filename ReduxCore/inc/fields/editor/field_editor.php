@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_editor extends ReduxFramework {
+    class ReduxFramework_editor {
     
         /**
          * Field Constructor.

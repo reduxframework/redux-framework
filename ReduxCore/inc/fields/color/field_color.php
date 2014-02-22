@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
      *
      * @since       1.0.0
      */
-	class ReduxFramework_color extends ReduxFramework {
+	class ReduxFramework_color {
 	
 		/**
 		 * Field Constructor.

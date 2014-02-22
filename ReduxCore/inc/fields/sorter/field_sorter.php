@@ -18,7 +18,7 @@
  * Twitter: http://twitter.com/syamilmj
  * Website: http://aquagraphite.com
  */
-class ReduxFramework_sorter extends ReduxFramework {
+class ReduxFramework_sorter {
 
     /**
      * Field Constructor.
@@ -27,7 +27,6 @@ class ReduxFramework_sorter extends ReduxFramework {
      */
 	function __construct( $field = array(), $value ='', $parent ) {
     
-		//parent::__construct( $parent->sections, $parent->args );
 		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;

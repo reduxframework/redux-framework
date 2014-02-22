@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_text extends ReduxFramework {
+class ReduxFramework_text {
 
     /**
      * Field Constructor.
@@ -30,7 +30,7 @@ class ReduxFramework_text extends ReduxFramework {
             if (empty($this->field['args'])) {
                 $this->field['args'] = array();
             }       
-            $this->field['options'] = $this->get_wordpress_data($this->field['data'], $this->field['args']);
+            $this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
             $this->field['class'] .= " hasOptions ";
         }
 

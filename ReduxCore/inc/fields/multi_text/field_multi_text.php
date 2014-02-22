@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_multi_text' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_multi_text extends ReduxFramework {
+    class ReduxFramework_multi_text {
     
         /**
          * Field Constructor.

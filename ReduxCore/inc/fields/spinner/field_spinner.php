@@ -1,6 +1,6 @@
 <?php
 
-class ReduxFramework_spinner extends ReduxFramework {
+class ReduxFramework_spinner {
 
     /**
      * Field Constructor.

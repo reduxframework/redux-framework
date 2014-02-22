@@ -1,6 +1,6 @@
 <?php
 
-class ReduxFramework_dimensions extends ReduxFramework {
+class ReduxFramework_dimensions {
 
     /**
      * Field Constructor.

@@ -1,5 +1,5 @@
 <?php
-class ReduxFramework_switch extends ReduxFramework{	
+class ReduxFramework_switch {	
 	
 	/**
 	 * Field Constructor.
