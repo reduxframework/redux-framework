@@ -86,6 +86,11 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
             return self::$instance;
         }
 
+        // Shim since we changed the function name. Deprecated.
+        public static function get_instance() {
+            return self::instance();
+        }
+
 
         /**
          * Get Redux options
