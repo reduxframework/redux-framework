@@ -133,14 +133,16 @@ jQuery(document).ready(function($) {
 			var the_font = family.replace(/\s+/g, '+');
 			if (google) {
 				//add reference to google font family
-				var link = 'http://fonts.googleapis.com/css?family=' + the_font;
+				var link = the_font;
 				if (style) {
 					link += ':' + style.replace(/\-/g, " ");
 				}
 				if (script) {
 					link += '&subset=' + script;
 				}
-				$('head').append('<link href="' + link + '" rel="stylesheet" type="text/css" class="' + _linkclass + '">');
+				WebFont.load({ google: {families: [link]}});
+				//link = 'http://fonts.googleapis.com/css?family=' + link;
+				//$('head').append('<link href="' + link + '" rel="stylesheet" type="text/css" class="' + _linkclass + '">');
 				$('#' + mainID + ' .redux-typography-google').val(true);
 			} else {
 				$('#' + mainID + ' .redux-typography-google').val(false);

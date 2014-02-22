@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.2';
+        public static $_version = '3.1.8.3';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1279,7 +1279,32 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( !empty( $this->typography ) && !empty( $this->typography ) && filter_var( $this->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
                 $version = !empty( $this->options['REDUX_last_saved'] ) ? $this->options['REDUX_last_saved'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
-                echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                
+                if (!empty($this->typography)) {
+                    $families = array();
+                    foreach($this->typography as $key => $value) {
+                        $families[] = $key;
+                    }
+                    ?>
+                    <script>
+                      WebFontConfig = {
+                        google: {
+                          families: [<?php echo $typography->makeGoogleWebfontString( $this->typography )?>]
+                        }
+                      };
+                      (function() {
+                        var wf = document.createElement('script');
+                        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.0/webfont.js';
+                        wf.type = 'text/javascript';
+                        wf.async = 'true';
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(wf, s);
+                      })();
+                    </script>                    
+                    <?php
+                }
+                
+                //echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
                 //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
                 //wp_enqueue_style( 'redux-google-fonts' ); 
             }
@@ -1468,8 +1493,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     }
                                 }
 
-                                
-
                                 if ( ( method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) {
                                     if ( !isset( $this->options[$field['id']] ) ) {
                                         $this->options[$field['id']] = "";
@@ -1482,7 +1505,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     	// Checking for extension field AND dev_mode = false OR dev_mode = true
                                     	// Since extension fields use 'extension_dir' exclusively, we can detect them here.
                                     	// Also checking for dev_mode = true doesn't mess up the JS combinine.
-					if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
+					                    if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
                                             /** @noinspection PhpUndefinedMethodInspection */
                                             $theField->enqueue();
                                         }
@@ -1562,6 +1585,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
             );
 
             wp_enqueue_script('redux-js'); // Enque the JS now
+
+            wp_enqueue_script( 
+                'webfontloader', 
+                'https://ajax.googleapis.com/ajax/libs/webfont/1.5.0/webfont.js',
+                array( 'jquery' ),
+                '1.5.0',
+                true
+            );
 
             /**
              * action 'redux-enqueue-{opt_name}'

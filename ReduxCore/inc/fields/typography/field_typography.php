@@ -433,6 +433,46 @@ class ReduxFramework_typography {
 
     }
 
+    /**
+     * makeGoogleWebfontString Function.
+     *
+     * Creates the google fonts link.
+     *
+     * @since ReduxFramework 3.1.8
+     */
+    function makeGoogleWebfontString($fonts) {
+      $link = "";
+      $subsets = array();
+      foreach($fonts as $family=>$font) {
+        if (!empty($link)) {
+          $link .= "', '"; // Append a new font to the string
+        }
+        $link .= $family;
+
+        if ( !empty( $font['font-style'] ) ) {
+            $link .= ':';
+            if ( !empty($font['all-styles']) ) {
+                $link .= implode(',', $font['all-styles']);
+            } else if ( !empty($font['font-style'] ) ) {
+                $link .= implode(',', $font['font-style']);
+            }
+        }
+        if ( !empty( $font['subset'] ) ) {
+          foreach($font['subset'] as $subset) {
+            if ( !in_array( $subset, $subsets) ) {
+              array_push($subsets, $subset);
+            }  
+          }
+        }
+      }
+      if (!empty($subsets)) {
+        $link .= "&amp;subset=".implode(',', $subsets);
+      }
+
+      return "'".$link."'";
+
+    }    
+
     function output() {
 
       global $wp_styles;
