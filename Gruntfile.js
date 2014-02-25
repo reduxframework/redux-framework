@@ -68,8 +68,8 @@ module.exports = function(grunt) {
     uglify: {
       	core: {
   			  options: {
-  				  banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-  				  '<%= grunt.template.today("yyyy-mm-dd") %> */\n',
+  				  //banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+  				  //'<%= grunt.template.today("yyyy-mm-dd") %> */\n',
   			  },
   			  files: {
   		  		'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
