@@ -128,6 +128,11 @@ jQuery(document).ready(function($) {
 	
 		//remove other elements crested in <head>
 		$('.' + _linkclass).remove();
+		
+                if (family == undefined) {
+                    family = null;
+                }
+                
 		if (family !== null) {
 			//replace spaces with "+" sign
 			var the_font = family.replace(/\s+/g, '+');
