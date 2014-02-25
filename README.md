@@ -76,7 +76,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.8.4 =
 * Added:      Support for using the divide field in folding.
-* 
+* Added:      Error trapping in typography.js for those still attempting to use typography with no font-family.
+
 = 3.1.8.3 =
 * Added:      Full asynchronous font loading.
 * 
