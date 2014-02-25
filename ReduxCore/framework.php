@@ -1924,18 +1924,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             continue; // Disabled for now
                         }
                         
-                        // Typography without font-family warning.
-                        // Removed when fixed.
-                        if ($field['type'] == 'typography' && isset($field['font-family']) && (false == $field['font-family']) && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                            $this->admin_notices[] = array(
-                                'type'      => 'error',
-                                'msg'       => 'The typography field, <strong>' . $field['id'] . '</strong> *requires* a font-family selection, or the other fields will improperly function.  The field has been hidden until font-family is set to true.  We will address this issue at a later date.',
-                                'id'        => 'font_familt_err',
-                                'dismiss'   => true,
-                            );
-                            continue;
-                        }
-                        
+
                         if (isset($field['permissions'])) {
                             if ( !current_user_can($field['permissions']) ) {
                                 continue;
