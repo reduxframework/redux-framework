@@ -115,10 +115,12 @@ class ReduxFramework_typography {
         }
         $unit = $this->field['units'];
 
-		if ($this->field['font-family'] === true):
-        
-	        echo '<div id="'.$this->field['id'].'" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
 
+            echo '<div id="'.$this->field['id'].'" class="redux-typography-container" data-id="'.$this->field['id'].'" data-units="'.$unit.'">';
+
+		        if ($this->field['font-family'] === true) {
+        
+	        
     	        /**
     	        Font Family
     	         **/
@@ -190,8 +192,8 @@ class ReduxFramework_typography {
               	// Set a flag so we know to set a header style or not
                   echo '<input type="hidden" class="redux-typography-google'.$this->field['class'].'" id="'.$this->field['id'].'-google" name="' . $this->field['name'] . '[google]' . $this->field['name_suffix'] . '" type="text" value="'. $this->field['google'] .'" data-id="'.$this->field['id'].'" />';            
               }
-
-            endif;
+            }
+            
 
 
 
@@ -228,7 +230,7 @@ class ReduxFramework_typography {
             /**
             Font Script
              **/
-            if ($this->field['subsets'] === true && $this->field['google'] === true):
+            if ( $this->field['font-family'] === true && $this->field['subsets'] === true && $this->field['google'] === true ):
                 echo '<div class="select_wrapper typography-script tooltip" original-title="'.__('Font subsets','redux-framework').'">';
                 echo '<select data-placeholder="'.__('Subsets','redux-framework').'" class="redux-typography redux-typography-subsets'.$this->field['class'].'" original-title="'.__('Font script','redux-framework').'"  id="'.$this->field['id'].'-subsets" name="' . $this->field['name'] . '[subsets]' . $this->field['name_suffix'] . '" data-value="'.$this->value['subsets'].'" data-id="'.$this->field['id'].'" >';
                 if (empty($this->value['subsets'])) {

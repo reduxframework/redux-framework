@@ -22,13 +22,16 @@ jQuery(document).ready(function($) {
 	};
 
 	function typographySelect(selector) {
-		var mainID = jQuery(selector).parents('.redux-typography-container:first').attr('id');
+		var mainID = jQuery(selector).parents('.redux-container-typography:first').attr('data-id');
 		if ($(selector).hasClass('redux-typography-family')) {
 			//$('#' + mainID + ' .typography-style span').text('');
 			//$('#' + mainID + ' .typography-script span').text('');
 		}
 		// Set all the variables to be checked against
 		var family = $('#' + mainID + ' select.redux-typography-family').val();
+		if (!family) {
+			family = "inherit";
+		}
 		var familyBackup = $('#' + mainID + ' select.redux-typography-family-backup').val();
 		var size = $('#' + mainID + ' .redux-typography-size').val();
 		var height = $('#' + mainID + ' .redux-typography-height').val();
@@ -128,12 +131,7 @@ jQuery(document).ready(function($) {
 	
 		//remove other elements crested in <head>
 		$('.' + _linkclass).remove();
-		
-                if (family === undefined) {
-                    family = null;
-                }
-                
-		if (family !== null) {
+		if (family !== null && family !== "inherit") {
 			//replace spaces with "+" sign
 			var the_font = family.replace(/\s+/g, '+');
 			if (google) {
@@ -178,12 +176,14 @@ jQuery(document).ready(function($) {
 		if (!height) {
 			height = size;
 		}
+
 		$('#' + mainID + ' .typography-preview').css('line-height', height + units);
 		$('#' + mainID + ' .typography-preview').css('word-spacing', word + units);
 		$('#' + mainID + ' .typography-preview').css('letter-spacing', letter + units);
 		if( size === '' ){
 			$('#' + mainID + ' .typography-font-size').val( '' );
 		}else{
+			console.log('here-font-size');
 			$('#' + mainID + ' .typography-font-size').val(size + units);
 		}
 		if( height === '' ){
