@@ -129,7 +129,7 @@ jQuery(document).ready(function($) {
 		//remove other elements crested in <head>
 		$('.' + _linkclass).remove();
 		
-                if (family == undefined) {
+                if (family === undefined) {
                     family = null;
                 }
                 
