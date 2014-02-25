@@ -127,6 +127,8 @@
                     value2 = check_data.checkValue,
                     show = false,
                     infoFieldID = '',
+                    sectionFieldID = '',
+                    divideFieldID = '',                    
                     value2_array;
 
             var testInfoField = current.find('.redux-field:first');
@@ -135,9 +137,15 @@
             }
 
             // Eat it, Travis!
-            var testInfoField2 = current.find('.redux-field:first');
-            if (testInfoField2.hasClass('redux-container-section')) {
-                infoFieldID = current.find('.redux-container-section').data('id');
+            var testSectionField = current.find('.redux-field:first');
+            if (testSectionField.hasClass('redux-container-section')) {
+                sectionFieldID = current.find('.redux-container-section').data('id');
+            }
+
+            // Divide field
+            var testDivideField = current.find('.redux-field:first');
+            if (testDivideField.hasClass('redux-container-divide')) {
+                divideFieldID = current.find('.redux-container-divide').data('id');
             }
 
             if (!is_hidden) {
@@ -211,14 +219,16 @@
             }
 
             if (show === true && current.is('.hiddenFold')) {
-
                 if (infoFieldID !== "") {
                     $('#info-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
-                    //$('#section-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
                 }
 
-                if (infoFieldID !== "") {
-                    $('#section-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
+                if (sectionFieldID !== "") {
+                    $('#section-' + sectionFieldID).css({display: 'none'}).fadeIn(300).show();
+                }
+
+                if (divideFieldID !== "") {
+                    $('#' + divideFieldID + '-divide').css({display: 'none'}).fadeIn(300).show();
                 }
 
                 current.css({
@@ -230,8 +240,13 @@
                     $('#info-' + infoFieldID).css({display: ''}).fadeOut(300).hide();
                 }
 
-                if (infoFieldID !== "") {
-                    $('#section-' + infoFieldID).css({display: ''}).fadeOut(300).hide();
+                if (sectionFieldID !== "") {
+                    $('#section-' + sectionFieldID).css({display: ''}).fadeOut(300).hide();
+                }
+
+                if (divideFieldID !== "") {
+                    $('#' + divideFieldID + '-divide' ).css({display: ''}).fadeOut(300).hide();
+                    console.log ('divide hide');
                 }
 
                 current.css({
