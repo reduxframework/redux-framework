@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.5 =
+* Added:      Font family not required for the typography module any longer.
+
 = 3.1.8.4 =
 * Added:      Support for using the divide field in folding.
 * Added:      Error trapping in typography.js for those still attempting to use typography with no font-family.
