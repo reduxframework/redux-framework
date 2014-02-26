@@ -974,66 +974,140 @@ pre {
   overflow: hidden;
 }
 
-
-/* Admin color tweaks thanks to AJ Clarke (WPExplorer) */
-#redux-header { background: #222222; border-color: #0074a2; }
+/* Default admin theme */
 #redux-header h2 { color: #fff; }
-#redux-header .display_header span { color: #bbb; }
-.redux-sidebar .redux-group-menu li.active { border-left: 3px solid #0074a2 }
-.redux-container-image_select .redux-image-select-selected img { border-color: #0074a2 }
-/*Light admin*/
-.admin-color-light #redux-header .display_header span { color: #e6e6e6; }
-.admin-color-light #redux-header { background: #888888; border-color: #04a4cc; }
-.admin-color-light .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #04a4cc }
-.admin-color-light .redux-sidebar .redux-group-menu li.active a { color: #888888; }
-.admin-color-light .redux-container-image_select .redux-image-select-selected img { border-color: #04a4cc }
-.admin-color-light #redux-footer #redux-share a { color: #04a4cc; }
-.admin-color-light #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #888888; }
-/*Blue admin*/  
-.admin-color-blue #redux-header .display_header span { color: #e2ecf1; }
-.admin-color-blue #redux-header { background: #096484; border-color: #4796b3; }
-.admin-color-blue .redux-sidebar .redux-group-menu li.active a { color: #4796b3; }
-.admin-color-blue .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #4796b3 }
-.admin-color-blue .redux-container-image_select .redux-image-select-selected img { border-color: #4796b3 }
-.admin-color-blue #redux-footer #redux-share a { color: #4796b3; }
-.admin-color-blue #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #096484; }
-/*Coffee admin*/
-.admin-color-coffee #redux-header .display_header span { color: #cdcbc9; }
-.admin-color-coffee #redux-header { background: #46403c; border-color: #c7a589; }
-.admin-color-coffee .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #c7a589 }
-.admin-color-coffee .redux-sidebar .redux-group-menu li.active a { color: #46403c; }
-.admin-color-coffee .redux-container-image_select .redux-image-select-selected img { border-color: #c7a589 }
-.admin-color-coffee #redux-footer #redux-share a { color: #c7a589; }
-.admin-color-coffee #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #46403c; }
-/*Ectoplasm admin*/
-.admin-color-ectoplasm #redux-header .display_header span { color: #cbc5d3; }
-.admin-color-ectoplasm #redux-header { background: #413256; border-color: #a3b745; }
-.admin-color-ectoplasm .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #a3b745 }
-.admin-color-ectoplasm .redux-sidebar .redux-group-menu li.active a { color: #413256; }
-.admin-color-ectoplasm .redux-container-image_select .redux-image-select-selected img { border-color: #a3b745 }
-.admin-color-ectoplasm #redux-footer #redux-share a { color: #a3b745; }
-.admin-color-ectoplasm #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #413256; }
-/*Midnight admin*/
-.admin-color-midnight #redux-header .display_header span { color: #c2c4c5; }
-.admin-color-midnight #redux-header { background: #363b3f; border-color: #e14d43; }
-.admin-color-midnight .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #e14d43 }
-.admin-color-midnight .redux-sidebar .redux-group-menu li.active a { color: #363b3f; }
-.admin-color-midnight .redux-container-image_select .redux-image-select-selected img { border-color: #e14d43 }
-.admin-color-midnight #redux-footer #redux-share a { color: #e14d43; }
-.admin-color-midnight #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #363b3f; }
-/*Ocean admin*/
-.admin-color-ocean #redux-header .display_header span { color: #d5dddf; }
-.admin-color-ocean #redux-header { background: #627c83; border-color: #9ebaa0; }
-.admin-color-ocean .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #9ebaa0 }
-.admin-color-ocean .redux-sidebar .redux-group-menu li.active a { color: #627c83; }
-.admin-color-ocean .redux-container-image_select .redux-image-select-selected img { border-color: #9ebaa0 }
-.admin-color-ocean #redux-footer #redux-share a { color: #9ebaa0; }
-.admin-color-ocean #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #627c83; }
-/*Sunrise admin*/
-.admin-color-sunrise #redux-header .display_header span { color: #f0c8c6; }
-.admin-color-sunrise #redux-header { background: #b43c38; border-color: #dd823b; }
-.admin-color-sunrise .redux-sidebar .redux-group-menu li.active { border-left: 3px solid #dd823b }
-.admin-color-sunrise .redux-sidebar .redux-group-menu li.active a { color: #b43c38; }
-.admin-color-sunrise .redux-container-image_select .redux-image-select-selected img { border-color: #dd823b }
-.admin-color-sunrise #redux-footer #redux-share a { color: #dd823b; }
-.admin-color-sunrise #redux-footer #redux-share a:hover, .admin-color-light #redux-footer #redux-share a:active { color: #b43c38; }
+
+/* Fresh admin theme */
+.admin-color-fresh {
+    @darkthemecolor: #bbb;
+    @secondarythemecolor: #222222;
+    @accentthemecolor: #0074a2;
+    #redux-header .display_header span { color: @darkthemecolor; }
+    #redux-header { background: @secondarythemecolor; border-color: @accentthemecolor; }
+    .redux-sidebar .redux-group-menu li.active { 
+        border-left: 3px solid @accentthemecolor;
+        a {
+            color: @secondarythemecolor;
+        }
+    }
+    .redux-container-image_select .redux-image-select-selected img { border-color: @accentthemecolor; }
+    #redux-footer #redux-share a { 
+        color: @accentthemecolor; 
+        &:hover, &:active, &:visited {
+            color: @secondarythemecolor;
+        }
+    } 
+    .redux-container-switch {
+        .cb-disable span, .cb-enabled span {
+            background: #e8e8e8;
+        }
+        .cb-enable.selected span {
+            background: lighten(@accentthemecolor, 15%);
+            border-right: 0;
+        }
+        .cb-disable.selected span {
+            background: @darkthemecolor;
+            color: #fff;
+        }
+    }   
+}
+
+
+
+
+.backgroundGradient(@to: darken(@to, 5%), @from: lighten(@to, 7%)) {
+    background-color: @to;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(@from), to(@to));
+    background-image: -moz-linear-gradient(top, @from, @to);
+    background-image: -ms-linear-gradient(top, @from, @to);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @from), color-stop(100%, @to));
+    background-image: -webkit-linear-gradient(top, @from, @to);
+    background-image: -o-linear-gradient(top, @from, @to);
+    background-image: linear-gradient(top, @from, @to);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to', GradientType=0);
+}
+
+.adminThemeColorOverrides (@darkColor, @accentColor, @secondaryColor) {
+    
+    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+        .backgroundGradient(#f5f5f5, #f8f8f8);
+        border-color: #ccc;
+    }
+    .redux-container-switch .cb-disable.selected {
+        .backgroundGradient(#646464, #929292);
+        border-color: #767676;
+    }
+    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
+        .backgroundGradient(@accentColor);
+        border-color: darken( @accentColor, 15% );
+        border-color: darken( @accentColor, 10% );
+        -webkit-box-shadow: inset 0 1px 0 lighten( @accentColor, 15% ), 0 1px 0 rgba(0,0,0,.15);
+        box-shadow: inset 0 1px 0 lighten( @accentColor, 15% ), 0 1px 0 rgba(0,0,0,.15);
+       
+    }
+    
+    #redux-header .display_header span { color: @darkColor; }
+    #redux-header { background: @secondaryColor; border-color: @accentColor; }
+    .redux-sidebar .redux-group-menu li.active { 
+        border-left: 3px solid @accentColor;
+        a {
+            color: @secondaryColor;
+        }
+    }
+    .redux-container-image_select .redux-image-select-selected img { border-color: @accentColor; }
+    #redux-footer #redux-share a { 
+        color: @accentColor; 
+        &:hover, &:active {
+            color: darken(@accentColor, 20%);
+        }
+    }
+    .select2-results .select2-highlighted {
+        background: @accentColor;
+    }
+    .select2-drop-active, 
+    .select2-container-multi.select2-container-active .select2-choices, 
+    .select2-drop.select2-drop-above.select2-drop-active,
+    .select2-container-active .select2-choice, 
+    .select2-container-active .select2-choices, 
+    .select2-dropdown-open.select2-drop-above .select2-choice, 
+    .select2-dropdown-open.select2-drop-above .select2-choices {
+        border-color: @accentColor;
+    }
+    .select2-dropdown-open.select2-drop-above .select2-choice, 
+    .select2-dropdown-open.select2-drop-above .select2-choices {
+        border-top: inherit;
+    }
+    .ui-slider .ui-slider-range {
+        .backgroundGradient(lighten(@accentColor, 3%));
+    }
+
+}
+/* Light admin theme */
+.admin-color-light {
+    .adminThemeColorOverrides(#e6e6e6, #04a4cc, #888888);
+}
+/* Blue admin theme */
+.admin-color-blue {
+    .adminThemeColorOverrides(#e2ecf1, #4796b3, #096484);
+}
+/* Coffee admin theme */
+.admin-color-coffee {
+    .adminThemeColorOverrides(#cdcbc9, #c7a589, #46403c);
+}
+/* Ectoplasm admin theme */
+.admin-color-ectoplasm {
+    .adminThemeColorOverrides(#cbc5d3, #a3b745, #413256);
+}
+/* Midnight admin theme */
+.admin-color-midnight {
+    .adminThemeColorOverrides(#c2c4c5, #e14d43, #363b3f);
+}
+/* Ocean admin theme */
+.admin-color-ocean { 
+    .adminThemeColorOverrides(#d5dddf, #9ebaa0, #627c83);
+}
+/* Sunrise admin theme */
+.admin-color-sunrise { 
+    .adminThemeColorOverrides(#f0c8c6, #dd823b, #b43c38);
+}
+

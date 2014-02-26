@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.6 =
+* Added:      Complete Wordpress admin color styles. Blessed LESS/SCSS mixins.  ;)
+
 = 3.1.8.5 =
 * Added:      Font family not required for the typography module any longer.
 
