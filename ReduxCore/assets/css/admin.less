@@ -977,43 +977,6 @@ pre {
 /* Default admin theme */
 #redux-header h2 { color: #fff; }
 
-/* Fresh admin theme */
-.admin-color-fresh {
-    @darkthemecolor: #bbb;
-    @secondarythemecolor: #222222;
-    @accentthemecolor: #0074a2;
-    #redux-header .display_header span { color: @darkthemecolor; }
-    #redux-header { background: @secondarythemecolor; border-color: @accentthemecolor; }
-    .redux-sidebar .redux-group-menu li.active { 
-        border-left: 3px solid @accentthemecolor;
-        a {
-            color: @secondarythemecolor;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img { border-color: @accentthemecolor; }
-    #redux-footer #redux-share a { 
-        color: @accentthemecolor; 
-        &:hover, &:active, &:visited {
-            color: @secondarythemecolor;
-        }
-    } 
-    .redux-container-switch {
-        .cb-disable span, .cb-enabled span {
-            background: #e8e8e8;
-        }
-        .cb-enable.selected span {
-            background: lighten(@accentthemecolor, 15%);
-            border-right: 0;
-        }
-        .cb-disable.selected span {
-            background: @darkthemecolor;
-            color: #fff;
-        }
-    }   
-}
-
-
-
 
 .backgroundGradient(@to: darken(@to, 5%), @from: lighten(@to, 7%)) {
     background-color: @to;
@@ -1082,6 +1045,12 @@ pre {
     }
 
 }
+
+/* Light fresh theme */
+.admin-color-fresh {
+    .adminThemeColorOverrides(#bbb, #0074a2, #222222);
+}
+
 /* Light admin theme */
 .admin-color-light {
     .adminThemeColorOverrides(#e6e6e6, #04a4cc, #888888);
