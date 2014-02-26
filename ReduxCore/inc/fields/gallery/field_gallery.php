@@ -102,7 +102,7 @@ if (!class_exists('ReduxFramework_gallery')) {
             wp_enqueue_script(
                 'redux-field-gallery-js', 
                 ReduxFramework::$_url . 'inc/fields/gallery/field_gallery.js', 
-                array('jquery', 'wp-color-picker'), 
+                array('jquery'), 
                 time(), 
                 true
             );
