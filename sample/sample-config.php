@@ -254,7 +254,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
                         'hint' => array(
                             'title'     => '',
-                            'content'      => 'This is a <b>helptip</b> for webFonts',
+                            'content'      => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
                         )
                     ),
                     array(
@@ -275,8 +275,8 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
                         'default' => array('url' => 'http://s.wordpress.org/style/images/codeispoetry.png'),
                         'hint' => array(
-                            'title'     => 'Tip Title 2',
-                            'content'   => 'This is a <b>helptip</b> for media',
+                            'title'     => 'Hint Title',
+                            'content'   => 'This is a <b>hint</b> for the media field with a Title.',
                         )
                     ),
                     array(
@@ -726,8 +726,8 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'msg' => 'custom error message',
                         'default' => 'test@test.com',
                         'text_hint' => array(
-                            'title' => 'Text Title',
-                            'content' => 'Now is te time...'
+                            'title' => 'Valid Email Required!',
+                            'content' => 'This field required a valid email address.'
                         )
                     ),
                     array(
@@ -758,7 +758,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'default' => 'http://reduxframework.com',
                         'text_hint' => array(
                             'title' => '',
-                            'content' => '...for all good men...'
+                            'content' => 'Please enter a valid <strong>URL</strong> in this field.'
                         )
 
                     ),
