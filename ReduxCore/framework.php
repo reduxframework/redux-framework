@@ -1934,7 +1934,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function get_header_html( $field ) {
             global $current_user;
 
+            // Set to empty string to avoid wanrings.
+            $hint = '';
             $th = "";
+            
             if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
                 $default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
 
@@ -1943,9 +1946,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                     // Set show_hints flag to true, so helptab will be displayed.
                     $this->show_hints = true;
-
-                    // Set to empty string to avoid wanrings.
-                    $hint = '';
 
                     // Get user pref for displaying hints.
                     if ('true' == get_user_meta( $current_user->ID, 'ignore_hints', true)) {
