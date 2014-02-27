@@ -48,8 +48,6 @@
 
     });
 
-
-
     $.redux.required = function() {
 
         // Hide the fold elements on load ,
@@ -96,8 +94,6 @@
                 }
             });
         });
-
-
     };
 
     $.redux.check_dependencies = function(variable) {
@@ -246,7 +242,6 @@
 
                 if (divideFieldID !== "") {
                     $('#' + divideFieldID + '-divide' ).css({display: ''}).fadeOut(300).hide();
-                    console.log ('divide hide');
                 }
 
                 current.css({
@@ -323,10 +318,10 @@
             }
         }
     };
-
 })(jQuery);
 
 jQuery.noConflict();
+
 var confirmOnPageExit = function(e) {
     //return; // ONLY FOR DEBUGGING
     // If we haven't been passed the event get the window.event
@@ -340,6 +335,38 @@ var confirmOnPageExit = function(e) {
     // For Chrome, Safari, IE8+ and Opera 12+
     return message;
 };
+
+function verifyPos(s, b) {
+
+    // trim off spaces
+    s = s.replace(/^\s+|\s+$/gm,'');
+
+    // position value is blank, set the default
+    if (s == '' || s.search(' ') == -1) {
+        if (b == true) {
+            return 'top left';
+        } else {
+            return 'bottom right';
+        }
+    }
+
+    // split string into array
+    var split = s.split(' ');
+
+    // Evaluate first string.  Must be top, center, or bottom
+    var paramOne = b ? 'top': 'bottom';
+    if (split[0] == 'top' || split[0] == 'center' || split[0] == 'bottom') {
+        paramOne = split[0];
+    }
+
+    // Evaluate second string.  Must be left, center, or right.
+    var paramTwo = b ? 'left' : 'right';
+    if (split[1] == 'left' || split[1] == 'center' || split[1] == 'right') {
+        paramTwo = split[1];
+    }
+
+    return paramOne + ' ' + paramTwo;
+}
 
 function getContrastColour(hexcolour) {
     // default value is black.
@@ -487,12 +514,137 @@ jQuery(document).ready(function($) {
     jQuery('.redux-action_bar, .redux-presets-bar').on('click', function() {
         window.onbeforeunload = null;
     }); /**	Tipsy @since v1.3 DEPRICATE? */
+    
     if (jQuery().tipsy) {
         $('.tips').tipsy({
             fade: true,
             gravity: 's',
             opacity: 0.7
         });
+    }
+
+    if (jQuery().qtip){
+        // Shadow
+        var shadow = '';
+        var tip_shadow = redux.args.hints.tip_style.shadow;
+        if (tip_shadow == true) {
+            shadow = 'qtip-shadow';
+        }
+
+        // Color
+        var color = '';
+        var tip_color = redux.args.hints.tip_style.color;
+        if (!tip_color == '') {
+            color = 'qtip-' + tip_color;
+        }
+
+        // Rounded
+        var rounded = '';
+        var tip_rounded = redux.args.hints.tip_style.rounded;
+        if (tip_rounded == true) {
+            rounded = 'qtip-rounded';
+        }
+
+        // Tip style
+        var style = '';
+        var tip_style = redux.args.hints.tip_style.style;
+        if (!tip_style == '') {
+            style = 'qtip-' + tip_style;
+        }
+
+        var classes = shadow + ',' + color + ',' + rounded + ',' + style;
+        classes = classes.replace(/,/g, ' ');
+
+        // Get position data
+        var myPos = redux.args.hints.tip_position.my;
+        var atPos = redux.args.hints.tip_position.at;
+
+        // Gotta be lowercase, and in proper format
+        myPos = verifyPos(myPos.toLowerCase(), true);
+        atPos = verifyPos(atPos.toLowerCase(), false);
+
+        // Tooltip trigger action
+        var showEvent = redux.args.hints.tip_effect.show.event;
+        var hideEvent = redux.args.hints.tip_effect.hide.event;
+        
+        // Tip show effect
+        var tipShowEffect   = redux.args.hints.tip_effect.show.effect;
+        var tipShowDuration = redux.args.hints.tip_effect.show.duration;
+        
+        // Tip hide effect
+        var tipHideEffect   = redux.args.hints.tip_effect.hide.effect;
+        var tipHideDuration = redux.args.hints.tip_effect.hide.duration;
+        
+        $('div.redux-qtip').each(function() {
+            $(this).qtip({         
+
+            content: {
+                text: $(this).attr('qtip-content'),
+                title: $(this).attr('qtip-title')
+            },
+            
+            show: {
+                effect: function () {
+                    switch (tipShowEffect) {
+                        case 'slide':
+                            $(this).slideDown(tipShowDuration);
+                        break;
+                        case 'fade':
+                            $(this).fadeIn(tipShowDuration);
+                        break;        
+                        default:
+                            $(this).show();
+                        break;                            
+                    }
+                },
+                event: showEvent,
+            },
+
+            hide: {
+                effect: function() {
+                    switch (tipHideEffect) {
+                        case 'slide':
+                            $(this).slideUp(tipHideDuration);
+                        break;
+                        case 'fade':
+                            $(this).fadeOut(tipHideDuration);
+                        break;        
+                        default:
+                            $(this).show(tipHideDuration);
+                        break;                            
+                    }
+                },
+               event: hideEvent,
+            },
+
+            style: {
+                classes: classes,
+            },
+
+            position: {
+                my: myPos,
+                at: atPos,
+            },
+            });
+        });
+       // });
+
+        $('input[qtip-content]').each(function() {
+            $(this).qtip({ 
+                content: {
+                    text: $(this).attr('qtip-content'),
+                    title: $(this).attr('qtip-title')
+                },
+                show: 'focus',
+                hide: 'blur',
+                style: classes,
+                position: {
+                    my: myPos,
+                    at: atPos,
+
+                },            
+            });
+        });        
     }
 
     $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a, #wp-admin-bar-' + redux.args.slug + ' a.ab-item').click(function(e) {
