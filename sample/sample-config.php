@@ -17,18 +17,18 @@ if (!class_exists("Redux_Framework_sample_config")) {
 
             if ( !class_exists("ReduxFramework" ) ) {
                 return;
-            }    
+            }
 
             // This is needed. Bah WordPress bugs.  ;)
             if ( defined('TEMPLATEPATH') && strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( TEMPLATEPATH ) ) !== false) {
                 $this->initSettings();
             } else {
-                add_action('plugins_loaded', array($this, 'initSettings'), 10);    
+                add_action('plugins_loaded', array($this, 'initSettings'), 10);
             }
         }
 
         public function initSettings() {
-            
+
             // Just for demo purposes. Not needed per say.
             $this->theme = wp_get_theme();
 
@@ -47,9 +47,9 @@ if (!class_exists("Redux_Framework_sample_config")) {
 
             // If Redux is running as a plugin, this will remove the demo notice and links
             //add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
-            
+
             // Function to test the compiler hook and demo CSS output.
-            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2); 
+            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
             // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
             // Change the arguments after they've been declared, but before the panel is created
             //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
@@ -141,10 +141,10 @@ if (!class_exists("Redux_Framework_sample_config")) {
             // Used to hide the demo mode link from the plugin page. Only used when Redux is a plugin.
             if (class_exists('ReduxFrameworkPlugin')) {
                 remove_filter('plugin_row_meta', array(ReduxFrameworkPlugin::instance(), 'plugin_metalinks'), null, 2);
-                
+
                 // Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
                 remove_action('admin_notices', array(ReduxFrameworkPlugin::instance(), 'admin_notices'));
-                
+
             }
         }
 
@@ -243,7 +243,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'icon' => 'el-icon-home',
                 // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                 'fields' => array(
-                
+
                     array(
                         'id' => 'webFonts',
                         'type' => 'media',
@@ -252,6 +252,10 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'mode' => false, // Can be set to false to allow any media type, or can also be set to any mime type.
                         'desc' => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
                         'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                        'hint' => array(
+                            'title'     => '',
+                            'content'      => 'This is a <b>helptip</b> for webFonts',
+                        )
                     ),
                     array(
                         'id' => 'section-media-start',
@@ -270,6 +274,10 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'desc' => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
                         'subtitle' => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
                         'default' => array('url' => 'http://s.wordpress.org/style/images/codeispoetry.png'),
+                        'hint' => array(
+                            'title'     => 'Tip Title 2',
+                            'content'   => 'This is a <b>helptip</b> for media',
+                        )
                     ),
                     array(
                         'id' => 'section-media-end',
@@ -360,6 +368,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'desc' => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
                         'default' => 0,
                     ),
+
                     array(
                         'id' => 'patterns',
                         'type' => 'image_select',
@@ -377,7 +386,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         "title" => "Layout Manager Advanced",
                         "subtitle" => "You can add multiple drop areas or columns.",
                         "compiler" => 'true',
-                        //'required' => array('switch-fold','equals','0'),	
+                        //'required' => array('switch-fold','equals','0'),
                         'options' => array(
                             "enabled" => array(
                                 "highlights" => "Highlights",
@@ -698,7 +707,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
             /**
              *  Note here I used a 'heading' in the sections array construct
              *  This allows you to use a different title on your options page
-             * instead of reusing the 'title' value.  This can be done on any 
+             * instead of reusing the 'title' value.  This can be done on any
              * section - kp
              */
             $this->sections[] = array(
@@ -715,7 +724,11 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
                         'validate' => 'email',
                         'msg' => 'custom error message',
-                        'default' => 'test@test.com'
+                        'default' => 'test@test.com',
+                        'text_hint' => array(
+                            'title' => 'Text Title',
+                            'content' => 'Now is te time...'
+                        )
                     ),
                     array(
                         'id' => '2test',
@@ -742,7 +755,12 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'subtitle' => __('This must be a URL.', 'redux-framework-demo'),
                         'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
                         'validate' => 'url',
-                        'default' => 'http://reduxframework.com'
+                        'default' => 'http://reduxframework.com',
+                        'text_hint' => array(
+                            'title' => '',
+                            'content' => '...for all good men...'
+                        )
+
                     ),
                     array(
                         'id' => '4',
@@ -1369,11 +1387,40 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'show_import_export' => true, // REMOVE
                 'system_info' => false, // REMOVE
                 'help_tabs' => array(),
-                'help_sidebar' => '', // __( '', $this->args['domain'] );            
+                'help_sidebar' => '', // __( '', $this->args['domain'] );
+                'hints' => array(
+                    'icon'              => 'icon-question-sign',
+                    'icon_position'     => 'right',
+                    'icon_color'        => 'lightgray',
+                    'icon_size'         => 'normal',
+
+                    'tip_style'         => array(
+                        'color'     => 'light',
+                        'shadow'    => true,
+                        'rounded'   => false,
+                        'style'     => '',
+                    ),
+                    'tip_position'      => array(
+                        'my' => 'top left',
+                        'at' => 'bottom right',
+                    ),
+                    'tip_effect' => array(
+                        'show' => array(
+                            'effect'    => 'slide',
+                            'duration'  => '500',
+                            'event'     => 'mouseover',
+                        ),
+                        'hide' => array(
+                            'effect'    => 'slide',
+                            'duration'  => '500',
+                            'event'     => 'click mouseleave',
+                        ),
+                    ),
+                )
             );
 
 
-            // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.		
+            // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
             $this->args['share_icons'][] = array(
                 'url' => 'https://github.com/ReduxFramework/ReduxFramework',
                 'title' => 'Visit us on GitHub',

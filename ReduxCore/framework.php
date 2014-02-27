@@ -1454,7 +1454,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_script('jquery-ui-sortable');
             wp_enqueue_style('jquery-ui-sortable');
             wp_enqueue_script('jquery-ui-datepicker');
-            wp_enqueue_script('jquery-ui-tooltip');
             wp_enqueue_script('jquery-ui-dialog');
             wp_enqueue_script('jquery-ui-slider');
             wp_enqueue_script('wp-color-picker');
@@ -1505,7 +1504,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    array( 'jquery', 'select2-js', 'ace-editor-js', 'qtip-js', 'redux-vendor' ),
+                    array( 'jquery', 'select2-js', 'ace-editor-js',  'qtip-js', 'redux-vendor' ),
                     time(),
                     true
                 );
@@ -1514,13 +1513,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',
-                        array( 'jquery', 'select2-js', 'ace-editor-js' ),
+                        array( 'jquery', 'select2-js',  'qtip-js', 'ace-editor-js' ),
                         filemtime( self::$_dir . 'assets/js/redux.min.js' ),
                         true
                     );
                 }
             }
-
 
             foreach( $this->sections as $section ) {
                 if( isset( $section['fields'] ) ) {
@@ -1937,7 +1935,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Set to empty string to avoid wanrings.
             $hint = '';
             $th = "";
-            
+
             if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
                 $default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
 
