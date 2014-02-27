@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.7 =
+* Added:      Hints!  More info:  https://github.com/ReduxFramework/ReduxFramework/wiki/Using-Hints-in-Fields
+
 = 3.1.8.6 =
 * Added:      Complete Wordpress admin color styles. Blessed LESS/SCSS mixins.  ;)
 
