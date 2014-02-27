@@ -342,8 +342,8 @@ function verifyPos(s, b) {
     s = s.replace(/^\s+|\s+$/gm,'');
 
     // position value is blank, set the default
-    if (s == '' || s.search(' ') == -1) {
-        if (b == true) {
+    if (s === '' || s.search(' ') == -1) {
+        if (b === true) {
             return 'top left';
         } else {
             return 'bottom right';
@@ -527,28 +527,28 @@ jQuery(document).ready(function($) {
         // Shadow
         var shadow = '';
         var tip_shadow = redux.args.hints.tip_style.shadow;
-        if (tip_shadow == true) {
+        if (tip_shadow === true) {
             shadow = 'qtip-shadow';
         }
 
         // Color
         var color = '';
         var tip_color = redux.args.hints.tip_style.color;
-        if (!tip_color == '') {
+        if (tip_color !== '') {
             color = 'qtip-' + tip_color;
         }
 
         // Rounded
         var rounded = '';
         var tip_rounded = redux.args.hints.tip_style.rounded;
-        if (tip_rounded == true) {
+        if (tip_rounded === true) {
             rounded = 'qtip-rounded';
         }
 
         // Tip style
         var style = '';
         var tip_style = redux.args.hints.tip_style.style;
-        if (!tip_style == '') {
+        if (tip_style !== '') {
             style = 'qtip-' + tip_style;
         }
 
