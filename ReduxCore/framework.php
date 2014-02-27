@@ -1805,7 +1805,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $url = '<a class="redux_hint_status" href="?dismiss=' . $dismiss . '&amp;id=hints&amp;page=' . $curPage . '&amp;tab=' . $curTab . '">' . $s . ' hints</a>';
 
                 $event = 'moving the mouse over';
-                if ('click' == $this->args['hints']['tip_show_event']) {
+                if ('click' == $this->args['hints']['tip_effect']['show']['event']) {
                     $event = 'clicking';
                 }
 
