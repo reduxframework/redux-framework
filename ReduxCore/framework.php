@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.7';
+        public static $_version = '3.1.8.8';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1306,13 +1306,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( !empty( $this->outputCSS ) && $this->args['output_tag'] == true ) {
                 echo '<style type="text/css" class="options-output">'.$this->outputCSS.'</style>';
             }
-
-
+            
             if ( !empty( $this->typography ) && !empty( $this->typography ) && filter_var( $this->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
                 $version = !empty( $this->options['REDUX_last_saved'] ) ? $this->options['REDUX_last_saved'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
-
-                if (!empty($this->typography)) {
+                
+                if ( $this->args['async_typography'] && !empty($this->typography)) {
                     $families = array();
                     foreach($this->typography as $key => $value) {
                         $families[] = $key;
@@ -1332,15 +1331,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(wf, s);
                       })();
-                    </script>
+                    </script><style>.wf-loading{visibility:hidden;}</style>                   
                     <?php
+                } else {
+                    echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
+                    wp_enqueue_style( 'redux-google-fonts' );                     
                 }
-
-                //echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
-                //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
-                //wp_enqueue_style( 'redux-google-fonts' );
             }
-
 
         } // _enqueue_output()
 
