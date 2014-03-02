@@ -650,7 +650,7 @@ class ReduxFramework_typography {
         
         if (!file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json')) {
             
-            $result = wp_remote_get(apply_filters('redux-google-fonts-api-url', 'https://www.googleapis.com/webfonts/v1/webfonts?key=') . $this->parent->args['google_api_key']);
+            $result = wp_remote_get(apply_filters('redux-google-fonts-api-url', 'https://www.googleapis.com/webfonts/v1/webfonts?key=') . $this->parent->args['google_api_key'], array( 'sslverify' => false ));
             
             if (!is_wp_error($result) && $result['response']['code'] == 200) {
                 $result = json_decode($result['body']);
