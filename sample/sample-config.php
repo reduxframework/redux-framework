@@ -537,12 +537,12 @@ if (!class_exists("Redux_Framework_sample_config")) {
                     array(
                         'id' => 'php-code',
                         'type' => 'ace_editor',
-                        'title' => __('JS Code', 'redux-framework-demo'),
-                        'subtitle' => __('Paste your JS code here.', 'redux-framework-demo'),
+                        'title' => __('PHP Code', 'redux-framework-demo'),
+                        'subtitle' => __('Paste your PHP code here.', 'redux-framework-demo'),
                         'mode' => 'php',
                         'theme' => 'chrome',
                         'desc' => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
-                        'default' => "jQuery(document).ready(function(){\n\n});"
+                        'default' => "<?php\nisset ( $redux ) ? true : false;\n?>"
                     ),
                     array(
                         'id' => 'footer-text',
