@@ -1311,7 +1311,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $version = !empty( $this->options['REDUX_last_saved'] ) ? $this->options['REDUX_last_saved'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
                 
-                if ( $this->args['async_typography'] && !empty($this->typography)) {
+                if ( isset( $this->args['async_typography'] ) && $this->args['async_typography'] && !empty($this->typography)) {
                     $families = array();
                     foreach($this->typography as $key => $value) {
                         $families[] = $key;
