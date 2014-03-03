@@ -232,6 +232,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'allow_sub_menu'     => true, // allow submenus to be added if menu_type == menu
             'save_defaults'      => true, // Save defaults to the DB on it if empty
             'footer_credit'      => '',
+            'async_typography'   => false
             'admin_bar'          => true, // Show the panel pages on the admin bar
             'help_tabs'          => array(),
             'help_sidebar'       => '', // __( '', 'redux-framework' );
@@ -1311,7 +1312,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $version = !empty( $this->options['REDUX_last_saved'] ) ? $this->options['REDUX_last_saved'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
                 
-                if ( isset( $this->args['async_typography'] ) && $this->args['async_typography'] && !empty($this->typography)) {
+                if ( $this->args['async_typography'] && !empty($this->typography)) {
                     $families = array();
                     foreach($this->typography as $key => $value) {
                         $families[] = $key;
