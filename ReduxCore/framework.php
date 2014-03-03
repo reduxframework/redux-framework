@@ -1302,7 +1302,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
                     }
 
-                }
+                } 
             }
             if ( !empty( $this->outputCSS ) && $this->args['output_tag'] == true ) {
                 echo '<style type="text/css" class="options-output">'.$this->outputCSS.'</style>';
