@@ -232,7 +232,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'allow_sub_menu'     => true, // allow submenus to be added if menu_type == menu
             'save_defaults'      => true, // Save defaults to the DB on it if empty
             'footer_credit'      => '',
-            'async_typography'   => false
+            'async_typography'   => false,
             'admin_bar'          => true, // Show the panel pages on the admin bar
             'help_tabs'          => array(),
             'help_sidebar'       => '', // __( '', 'redux-framework' );
