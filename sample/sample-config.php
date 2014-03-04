@@ -578,7 +578,7 @@ array(
                         'mode' => 'php',
                         'theme' => 'chrome',
                         'desc' => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
-                        'default' => "<?php\nisset ( $redux ) ? true : false;\n?>"
+                        'default' => '<?php\nisset ( $redux ) ? true : false;\n?>'
                     ),
                     array(
                         'id' => 'footer-text',
