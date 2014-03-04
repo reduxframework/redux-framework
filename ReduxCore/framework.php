@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.10';
+        public static $_version = '3.1.8.11';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1302,16 +1302,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
                     }
 
-                } 
+                }
             }
             if ( !empty( $this->outputCSS ) && $this->args['output_tag'] == true ) {
                 echo '<style type="text/css" class="options-output">'.$this->outputCSS.'</style>';
             }
-            
+
             if ( !empty( $this->typography ) && !empty( $this->typography ) && filter_var( $this->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
                 $version = !empty( $this->options['REDUX_last_saved'] ) ? $this->options['REDUX_last_saved'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
-                
+
                 if ( $this->args['async_typography'] && !empty($this->typography)) {
                     $families = array();
                     foreach($this->typography as $key => $value) {
@@ -1332,12 +1332,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(wf, s);
                       })();
-                    </script><style>.wf-loading{visibility:hidden;}</style>                   
+                    </script><style>.wf-loading{visibility:hidden;}</style>
                     <?php
                 } else {
                     echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
                     wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
-                    wp_enqueue_style( 'redux-google-fonts' );                     
+                    wp_enqueue_style( 'redux-google-fonts' );
                 }
             }
 
@@ -1804,7 +1804,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // current page parameters
                 $curPage    = $_GET['page'];
-                
+
                 $curTab = '0';
                 if (isset($_GET['tab'])) {
                     $curTab = $_GET['tab'];
@@ -2348,6 +2348,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $plugin_options = $this->options_defaults;
                 $plugin_options['REDUX_COMPILER'] = time();
                 $this->set_options( $plugin_options );
+
+                /**
+                 * action 'redux/options/{opt_name}/reset'
+                 * @param object $this ReduxFramework
+                 */
+                do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
+
                 return $plugin_options;
             }
             if( isset( $plugin_options['defaults-section'] ) ) {
@@ -2372,6 +2379,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $plugin_options['defaults'] = true;
                 unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
                 $this->set_options( $plugin_options );
+
+                /**
+                 * action 'redux/options/{opt_name}/section/reset'
+                 * @param object $this ReduxFramework
+                 */
+                do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+
                 return $plugin_options;
             }
 
