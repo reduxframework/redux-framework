@@ -1,14 +1,25 @@
-.redux-container-slider .ui-slider {
+.redux-container-slider .redux-slider-container {
+  margin-left: 25px;
+  margin-right: 25px;
   width: 200px;
   display: inline-block;
 }
-.redux-container-slider .redux_slider {
-  margin-left: 15px;
-}
-.redux-container-slider .slider-input {
-  width: auto !important;
+.redux-container-slider .redux-slider-input,
+.redux-container-slider .redux-slider-select-one,
+.redux-container-slider .redux-slider-select-two {
+  width: 100px !important;
   text-align: center;
 }
-.redux-container-slider .ui-slider-range.ui-widget-header {
-  margin-top: 0;
+.redux-container-slider .redux-slider-label {
+  position: absolute;
+  margin-left: -5px;
+}
+.redux-container-slider .redux-slider-label-one {
+  position: absolute;
+  margin-left: -22px;
+}
+.redux-container-slider .redux-slider-label-two {
+  position: absolute;
+  margin-top: -21px;
+  margin-left: 245px;
 }
