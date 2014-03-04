@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.9';
+        public static $_version = '3.1.8.10';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1396,6 +1396,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
             );
 
 
+            wp_register_style(
+                'nouislider-css',
+                self::$_url . 'assets/css/vendor/nouislider/jquery.nouislider.css',
+                array(),
+                filemtime( self::$_dir . 'assets/css/vendor/nouislider/jquery.nouislider.css' ),
+                'all'
+            );
+
             $wp_styles->add_data( 'redux-elusive-icon-ie7', 'conditional', 'lte IE 7' );
 
             /**
@@ -1484,6 +1492,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
             );
 
             wp_register_script(
+                'nouislider-js',
+                self::$_url . 'assets/js/vendor/nouislider/jquery.nouislider.js',
+                array( 'jquery' ),
+                filemtime( self::$_dir . 'assets/js/vendor/nouislider/jquery.nouislider.js' ),
+                true
+            );
+
+            wp_register_script(
                 'ace-editor-js',
                 self::$_url . 'assets/js/vendor/ace_editor/ace.js',
                 array( 'jquery' ),
@@ -1503,7 +1519,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    array( 'jquery', 'select2-js', 'ace-editor-js',  'qtip-js', 'redux-vendor' ),
+                    array( 'jquery', 'select2-js', 'ace-editor-js',  'qtip-js', 'nouislider-js', 'redux-vendor' ),
                     time(),
                     true
                 );
@@ -1512,7 +1528,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',
-                        array( 'jquery', 'select2-js',  'qtip-js', 'ace-editor-js' ),
+                        array( 'jquery', 'select2-js',  'qtip-js', 'nouislider-js', 'ace-editor-js' ),
                         filemtime( self::$_dir . 'assets/js/redux.min.js' ),
                         true
                     );
