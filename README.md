@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.10 =
+* Added:      New slider.  Better looking UI, double handles and support for floating point values.  See the wiki for more info.
+
 = 3.1.8.9 =
 * Fixed:      link_color field showing notice on default, if user enters no defaults.
 * Fixed:      Fixed tab notice in framework.php if no tab parameter is set in URL.
