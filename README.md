@@ -76,6 +76,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.8.11 =
 * Added:      Action hooks for options reset and options reset section.
+* Added:      Theme responsive for date picker.
 
 = 3.1.8.10 =
 * Added:      New slider.  Better looking UI, double handles and support for floating point values.  See the wiki for more info.
