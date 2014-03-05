@@ -193,9 +193,13 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 					);
 				}
 
+                $version = explode('.', PHP_VERSION);
+                $version = array('major' => $version[0], 'minor' => $version[1], 'release' => $version[2], 'full' => PHP_VERSION );
+
 				$data = array(
 					'_id' => $hash,
 					'localhost' => ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0,
+                    'php_version' => $version,
 					'site'     => array(
 						'hash'      => $hash,
 						'version'   => get_bloginfo( 'version' ),
