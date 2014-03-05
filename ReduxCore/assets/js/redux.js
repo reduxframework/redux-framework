@@ -513,15 +513,7 @@ function redux_change(variable) {
 jQuery(document).ready(function($) {
     jQuery('.redux-action_bar, .redux-presets-bar').on('click', function() {
         window.onbeforeunload = null;
-    }); /**	Tipsy @since v1.3 DEPRICATE? */
-    
-    if (jQuery().tipsy) {
-        $('.tips').tipsy({
-            fade: true,
-            gravity: 's',
-            opacity: 0.7
-        });
-    }
+    }); 
 
     if (jQuery().qtip){
         // Shadow
