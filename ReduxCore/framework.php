@@ -770,6 +770,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }//foreach
                         }//if
                     } else if ($type == "pages" || $type == "page") {
+                        if (!isset($args['posts_per_page'])) {
+                            $args['posts_per_page'] = 20;
+                        }                        
                         $pages = get_pages($args);
                         if (!empty($pages)) {
                             foreach ( $pages as $page ) {
