@@ -1424,6 +1424,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_style( 'redux-lte-ie8' );
             wp_enqueue_style( 'redux-css' );
             wp_enqueue_style( 'select2-css' );
+            wp_enqueue_style( 'nouislider-css' );
             wp_enqueue_style( 'qtip-css' );
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
