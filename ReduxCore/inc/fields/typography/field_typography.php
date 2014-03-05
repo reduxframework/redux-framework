@@ -191,7 +191,7 @@ class ReduxFramework_typography {
                 $this->field['custom_fonts'] = apply_filters("Redux/{$this->parent->args['opt_name']}/Field/Typography/Custom_Fonts", array());
                 if (!empty($this->field['custom_fonts'])) {
                     echo '</optgroup><optgroup label="' . __('Custom WebFonts', 'redux-framework') . '">';
-                    foreach ($this->field['custom_fonts'] as $family) {
+                    foreach ( $this->field['custom_fonts'] as $family => $v ) {
                         echo '<option data-google="false" data-details="' . $font_sizes . '" value="' . $family . '"' . selected($this->value['font-family'], $family, false) . '>' . $family . '</option>';
                     }
                 }
