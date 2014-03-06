@@ -1612,3 +1612,15 @@ div.wijmo-wijmenu .wijmo-wijmenu-child .wijmo-wijmenu-text
   filter: none;
 }
 
+.ui-widget-overlay {
+    z-index: 99998 !important;
+    background: #000 !important;
+}
+.ui-dialog {
+    z-index: 99999 !important;
+}
+.fixed-dialog{
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
