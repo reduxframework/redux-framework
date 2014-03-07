@@ -2330,7 +2330,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     } else {
                         $import = str_replace("\\/","/", $import);
                         $import = str_replace('"','\\\\"',$import);
-                        $imported_options = json_decode('"' . htmlspecialchars_decode($import) . '"', true);
+                        $imported_options = json_decode( htmlspecialchars_decode($import) , true);
                     }
                 }
 
