@@ -566,7 +566,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         public function _tracking() {
             include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
-            new Redux_Tracking($this);
+            $tracking = Redux_Tracking::get_instance();
+            $tracking->load($this);
         } // _tracking()
 
         /**

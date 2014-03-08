@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Redux_Tracking
  */
@@ -20,31 +21,69 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 	/**
 	 * Class Redux_Tracking
 	 */
-	class Redux_Tracking extends ReduxFramework {
+	class Redux_Tracking {
+        public $options = array();
+        public $parent;
+        /** Refers to a single instance of this class. */
+        private static $instance = null;
 
+        /**
+         * Creates or returns an instance of this class.
+         *
+         * @return  Foo A single instance of this class.
+         */
+        public static function get_instance() {
+     
+            if ( null == self::$instance ) {
+                self::$instance = new self;
+            }
+     
+            return self::$instance;
+     
+        } // end get_instance;        
 		/**
 		 * Class constructor
 		 * @param ReduxFramework $parent
 		 */
-		function __construct($parent){
+		function __construct() {
 
-			$options = get_option( 'Redux_Framework' );
+        }
+        public function load( $parent ) {
+            $this->parent = $parent;
+            //delete_option('redux-framework-tracking');
+            $this->options = get_option( 'redux-framework-tracking' );
+            $this->options['dev_mode'] = $parent->args['dev_mode'];
 
-			if ( ! isset( $options['allow_tracking'] ) && isset( $_GET['page'] ) && $_GET['page'] == $parent->args['page_slug'] ) {
-				add_action( 'admin_enqueue_scripts', array( $this, 'tracking' ) );
-			} 
+            if ( !isset( $this->options['hash'] ) || !$this->options['hash'] || empty( $this->options['hash'] ) ) {
+                $this->options['hash'] = md5( site_url() .'-'. $_SERVER['REMOTE_ADDR'] );
+                update_option( 'redux-framework-tracking', $this->options );
+            }
+            if (isset($_GET['redux_framework_disable_tracking']) && !empty($_GET['redux_framework_disable_tracking'])) {
+                $this->options['allow_tracking'] = false;
+                update_option('redux-framework-tracking', $this->options);
+            }
+            if (isset($_GET['redux_framework_enable_tracking']) && !empty($_GET['redux_framework_enable_tracking'])) {
+                $this->options['allow_tracking'] = true;
+                update_option('redux-framework-tracking', $this->options);
+            }                        
+            if ( isset( $_GET['page'] ) && $_GET['page'] == $this->parent->args['page_slug'] ) {
+                if ( ! isset( $this->options['allow_tracking'] ) ) {
+                    add_action( 'admin_enqueue_scripts', array( $this, '_enqueue_tracking' ) );
+                } else if ( ! isset( $this->options['tour'] ) && ( $this->parent->args['dev_mode'] == "true" || $this->parent->args['page_slug'] == "redux_demo" ) ) {
+                    add_action( 'admin_enqueue_scripts', array( $this, '_enqueue_newsletter' ) );
+                }
+            }
 
-			if ($options['allow_tracking'] == true) {
-				// The tracking checks daily, but only sends new data every 7 days.
-				if ( !wp_next_scheduled( 'redux_tracking' ) ) {
-					wp_schedule_event( time(), 'daily', 'redux_tracking' );
-				}
-				add_action( 'redux_tracking', array( $this, 'tracking' ) );
-			}
-		}
+            if (isset($this->options['allow_tracking']) && $this->options['allow_tracking'] == true) {
+                // The tracking checks daily, but only sends new data every 7 days.
+                if ( !wp_next_scheduled( 'redux_tracking' ) ) {
+                    wp_schedule_event( time(), 'daily', 'redux_tracking' );
+                }
+                add_action( 'redux_tracking', array( $this, 'tracking' ) );
+            }            
+        }
 
-
-		function _enqueue() {
+		function _enqueue_tracking() {
 			wp_enqueue_style( 'wp-pointer' );
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'jquery-ui' );
@@ -52,6 +91,15 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 			wp_enqueue_script( 'utils' );
 			add_action( 'admin_print_footer_scripts', array( $this, 'tracking_request' ) );			
 		}
+
+        function _enqueue_newsletter() {
+            wp_enqueue_style( 'wp-pointer' );
+            wp_enqueue_script( 'jquery' );
+            wp_enqueue_script( 'jquery-ui' );
+            wp_enqueue_script( 'wp-pointer' );
+            wp_enqueue_script( 'utils' );
+            add_action( 'admin_print_footer_scripts', array( $this, 'newsletter_request' ) );         
+        }        
 
 		/**
 		 * Shows a popup that asks for permission to allow tracking.
@@ -61,7 +109,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 			$nonce = wp_create_nonce( 'redux_activate_tracking' );
 
 			$content = '<h3>' . __( 'Help improve Our Panel', 'redux-framework' ) . '</h3>';
-			$content .= '<p>' . __( 'Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test with.', 'redux-framework' ) . '</p>';
+			$content .= '<p>' . __( 'Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatability.', 'redux-framework' ) . '</p>';
 			$opt_arr = array(
 				'content'  => $content,
 				'position' => array( 'edge' => 'top', 'align' => 'center' )
@@ -73,7 +121,32 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 
 			$this->print_scripts( $id, $opt_arr, __( 'Do not allow tracking', 'redux-framework' ), $button2, $function2, $function1 );
 		}		
+        /**
+         * Shows a popup that asks for permission to allow tracking.
+         */
+        function newsletter_request() {
+            $id    = '#wpadminbar';
+            $nonce = wp_create_nonce( 'redux_activate_tracking' );
 
+
+            $content  = '<h3>' . __( 'Welcome to the Redux Demo Panel', 'redux-framework' ) . '</h3>';
+            $content .= '<p><strong>'.__( 'Getting Started', 'redux-framework' ).'</strong><br>'.sprintf( __( 'This panel demonstrates many of the features of Redux. Before you dig in, we suggest you read %1$s to get up to speed.', 'redux-framework' ), '<a href="https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started" target="_blank">'.__( 'our documentation', 'redux-framework' ).'</a>' );
+            $content .= '<p><strong>'.__( 'Redux Extensions', 'redux-framework' ).'</strong><br>'.sprintf( __( 'Did you know that Redux has extensions which greatly enhance the features? Visit out %1$s to learn more.', 'redux-framework' ), '<a href="http://reduxframework.com/extensions/" target="_blank">'.__( 'extensions directory', 'redux-framework' ).'</a>' );
+            $content .= '<p><strong>'.__( 'Like Redux?', 'redux-framework' ).'</strong><br>'.sprintf( __( 'If you like Redux, please %1$s and consider making a %2$s to keep development moving forward.', 'redux-framework' ), '<a target="_blank" href="http://wordpress.org/extend/plugins/redux-framework/">'.__( 'rate it 5 stars on WordPress.org', 'redux-framework' ).'</a>', '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U" target="_blank">'.__( 'donation', 'redux-framework' ).'</a>' );
+            $content .= '<p><strong>'.__( 'Newsletter', 'redux-framework' ).'</strong><br>'.__( 'If you would like to keep up to with all things Redux, subscribe to our newsletter', 'redux-framework' ).':</p>';
+            $content .= '<form action="http://reduxframework.us7.list-manage.com/subscribe/post?u=564f5178f6cc288064f332efd&amp;id=15211c6546" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate><p style="text-align: center;"><label for="mce-EMAIL">'.__( 'Email address', 'redux-framework' ).' </label><input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="'.__( 'Subscribe', 'redux-framework' ).'" name="subscribe" id="mc-embedded-subscribe" class="button button-primary"></p></form>';
+            $opt_arr = array(
+                'content'  => $content,
+                'position' => array( 'edge' => 'top', 'align' => 'center' ),
+                'pointerWidth' => 450
+            );
+
+            $function1 = 'redux_store_answer("tour","' . $nonce . '")';
+
+            $this->print_scripts( $id, $opt_arr, __( 'Close', 'redux-framework' ), false, '', $function1 );
+
+
+        }
 
 		/**
 		 * Prints the pointer script
@@ -86,9 +159,11 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 		 * @param string      $button1_function The JavaScript function to attach to button 1
 		 */
 		function print_scripts( $selector, $options, $button1, $button2 = false, $button2_function = '', $button1_function = '' ) {
+
 			?>
 			<script type="text/javascript">
 				//<![CDATA[
+                //
 				(function ($) {
 					$(document).ready(function(){
 					var redux_pointer_options = <?php echo json_encode( $options ); ?>, setup;
@@ -109,6 +184,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 							button = jQuery('<a id="pointer-close" style="margin-left:5px" class="button-secondary">' + '<?php echo $button1; ?>' + '</a>');
 							button.bind('click.pointer', function () {
 								t.element.pointer('close');
+                                console.log('close button');
 							});
 							return button;
 						},
@@ -125,12 +201,19 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 						});
 						jQuery('#pointer-close').click(function () {
 							<?php if ( $button1_function == '' ) { ?>
-							redux_setIgnore("tour", "wp-pointer-0", "<?php echo wp_create_nonce( 'wpseo-ignore' ); ?>");
+                                redux_store_answer(input, nonce)
+							//redux_setIgnore("tour", "wp-pointer-0", "<?php echo wp_create_nonce( 'redux-ignore' ); ?>");
 							<?php } else { ?>
 							<?php echo $button1_function; ?>
 							<?php } ?>
 						});
-						<?php } ?>
+						<?php } else if ($button1 && !$button2) { ?>
+                            jQuery('#pointer-close').click(function () {
+                                <?php if ( $button1_function != '' ) { ?>
+                                    <?php echo $button1_function; ?>
+                                <?php } ?>
+                            });
+                        <?php } ?>
 					};
 
 					if (redux_pointer_options.position && redux_pointer_options.position.defer_loading)
@@ -151,16 +234,8 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 		function tracking() {
 			// Start of Metrics
 			global $blog_id, $wpdb;
-
-			$hash = get_option( 'Redux_Tracking_Hash' );
-			if ( !isset( $hash ) || !$hash || empty( $hash ) ) {
-				$hash = md5( site_url() .'-'. $_SERVER['REMOTE_ADDR'] );
-				update_option( 'Redux_Tracking_Hash', $hash );
-			}
-
 			$data = get_transient( 'redux_tracking_cache' );
 			if ( !$data ) {
-
 				$pts = array();
 				foreach ( get_post_types( array( 'public' => true ) ) as $pt ) {
 					$count    = wp_count_posts( $pt );
@@ -176,11 +251,11 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 					'template' => $theme_data->Template,
 				);			
 
+                if ( !function_exists( 'get_plugin_data' ) ) {
+                    require_once( ABSPATH . 'wp-admin/includes/admin.php' );
+                }
 				$plugins = array();
-				foreach ( get_option( 'active_plugins' ) as $plugin_path ) {
-					if ( !function_exists( 'get_plugin_data' ) )
-						require_once( ABSPATH . 'wp-admin/includes/admin.php' );
-
+				foreach ( get_option( 'active_plugins', array() ) as $plugin_path ) {
 					$plugin_info = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
 
 					$slug           = str_replace( '/' . basename( $plugin_path ), '', $plugin_path );
@@ -192,20 +267,36 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 						'author_uri' => $plugin_info['AuthorURI'],
 					);
 				}
+                if( is_multisite() ) {
+                    foreach ( get_option( 'active_sitewide_plugins', array() ) as $plugin_path ) {
+                        $plugin_info = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
+                        $slug           = str_replace( '/' . basename( $plugin_path ), '', $plugin_path );
+                        $plugins[$slug] = array(
+                            'version'    => $plugin_info['Version'],
+                            'name'       => $plugin_info['Name'],
+                            'plugin_uri' => $plugin_info['PluginURI'],
+                            'author'     => $plugin_info['AuthorName'],
+                            'author_uri' => $plugin_info['AuthorURI'],
+                        );
+                    }
+                }
+
 
                 $version = explode('.', PHP_VERSION);
-                $version = array('major' => $version[0], 'minor' => $version[1], 'release' => $version[2], 'full' => PHP_VERSION );
+                $version = array('major' => $version[0], 'minor' => $version[0].'.'.$version[1], 'release' => PHP_VERSION );
 
 				$data = array(
-					'_id' => $hash,
+					'_id' => $this->options['hash'],
 					'localhost' => ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0,
-                    'php_version' => $version,
+                    'php' => $version,
 					'site'     => array(
-						'hash'      => $hash,
+						'hash'      => $this->options['hash'],
 						'version'   => get_bloginfo( 'version' ),
 						'multisite' => is_multisite(),
 						'users'     => $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $wpdb->users INNER JOIN $wpdb->usermeta ON ({$wpdb->users}.ID = {$wpdb->usermeta}.user_id) WHERE 1 = 1 AND ( {$wpdb->usermeta}.meta_key = %s )", 'wp_' . $blog_id . '_capabilities' ) ),
-						'lang'      => get_locale()
+						'lang'      => get_locale(),
+                        'wp_debug'  => ( defined( 'WP_DEBUG' ) ? WP_DEBUG ? true : false : false ),
+                        'memory'    => WP_MEMORY_LIMIT,
 					),
 					'pts'      => $pts,
 					'comments' => array(
@@ -216,22 +307,46 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 					),
 					'options'  => apply_filters( 'redux/tracking/options', array() ),
 					'theme'    => $theme,
+                    'redux'    => array(
+                                    'mode' => ReduxFramework::$_is_plugin ? 'plugin' : 'theme',
+                                    'version' => ReduxFramework::$_version,
+                                    'demo_mode' => get_option( 'ReduxFrameworkPlugin'),
+                                  ),
 					'developer'=> apply_filters( 'redux/tracking/developer', array() ),
 					'plugins'  => $plugins,
 				);
+
+                $parts = explode(' ', $_SERVER['SERVER_SOFTWARE']);
+                $software = array();
+                foreach($parts as $part) {
+                    if ($part[0] == "(") {
+                        continue;
+                    }
+                    if (strpos($part,'/') !== false) {
+                        $chunk = explode("/", $part);
+                        $software[strtolower($chunk[0])] = $chunk[1];
+                    }
+                }
+                $software['full'] = $_SERVER['SERVER_SOFTWARE'];
+                $data['environment'] = $software;
+                if (function_exists('mysql_get_server_info')) {
+                    $data['environment']['mysql'] = mysql_get_server_info();
+                }
 				if (empty($data['developer'])) {
 					unset($data['developer']);
 				}
 				$args = array(
 					'body' => $data
 				);
-				$response = wp_remote_post( 'https://redux-tracking.herokuapp.com', $args );
+
+				$response = wp_remote_post( 'http://tracking.dev/local.php', $args );
 
 				// Store for a week, then push data again.
 				set_transient( 'redux_tracking_cache', true, 7 * 60 * 60 * 24 );
 			}
 		}
 	}
+    Redux_Tracking::get_instance();
 
 
 	/**
@@ -252,16 +367,19 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 
 
 	function redux_allow_tracking_callback() {
-
 		// Verify that the incoming request is coming with the security nonce
 		if( wp_verify_nonce( $_REQUEST['nonce'], 'redux_activate_tracking' ) ) {
-			$option = get_option('Redux_Framework');
-			$option['allow_tracking'] = $_REQUEST['allow_tracking'];
-			if ( update_option( 'Redux_Framework', $option ) ) {
-				die( '1' );
-			} else {
-				die( '0' );
-			}
+			$options = get_option('redux-framework-tracking');
+            if ($_REQUEST['allow_tracking'] == "tour") {
+                $options['tour'] = 1;
+            } else {
+                $options['allow_tracking'] = $_REQUEST['allow_tracking'];    
+            }
+            if ( update_option( 'redux-framework-tracking', $options ) ) {
+                die( '1' );
+            } else {
+                die( '0' );
+            }
 		} else {
 			// Send -1 if the attempt to save via Ajax was completed invalid.
 			die( '-1' );
