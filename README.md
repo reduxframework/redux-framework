@@ -75,6 +75,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.1.8.12 =
+* Added:      Newsletter sign-up popup at first load of the Redux options panel.
+
+= 3.1.8.12 =
 * Added:      Added PHP 5.2 support for import/export.
 
 = 3.1.8.11 =
