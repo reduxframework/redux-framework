@@ -1323,11 +1323,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                     ?>
                     <script>
-                      WebFontConfig = {
-                        google: {
-                          families: [<?php echo $typography->makeGoogleWebfontString( $this->typography )?>]
-                        }
-                      };
+
+                      /* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
+                      if (typeof WebFontConfig === "undefined") { WebFontConfig = new Object(); }
+                      WebFontConfig['google'] = { families: [<?php echo $typography->makeGoogleWebfontString( $this->typography )?>] };
+
                       (function() {
                         var wf = document.createElement('script');
                         wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.0/webfont.js';
