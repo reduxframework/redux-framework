@@ -1,10 +1,10 @@
 .redux-main .select_wrapper.typography-style span {
   display: none;
 }
-.redux-main .redux-typography-container #size-bar {
+.redux-main .redux-typography-container .typography-size-bar {
   clear: left;
 }
-.redux-main .redux-typography-container #style-bar {
+.redux-main .redux-typography-container .typography-style-bar {
   clear: left;
 }
 .redux-main .redux-typography-container .wp-picker-container {
@@ -21,11 +21,12 @@
 .redux-main .redux-typography-container .typography-family,
 .redux-main .redux-typography-container .typography-family select {
   width: 340px !important;
+  margin-right: 5px;
 }
 .redux-main .redux-typography-container .typography-family-backup,
 .redux-main .redux-typography-container .typography-family-backup select {
   width: 340px !important;
-  margin-left: 5px !important;
+  margin-left: 0px !important;
 }
 .redux-main .redux-typography-container .typography-script,
 .redux-main .redux-typography-container .typography-script select,

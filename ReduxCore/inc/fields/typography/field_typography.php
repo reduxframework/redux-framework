@@ -135,7 +135,7 @@ class ReduxFramework_typography {
         echo '<div id="' . $this->field['id'] . '" class="redux-typography-container" data-id="' . $this->field['id'] . '" data-units="' . $unit . '">';
         
         // Open font bar div
-        echo '<div id="font-bar">';
+        echo '<div class="typography-font-bar">';
         
         if ($this->field['font-family'] === true) {
             /**
@@ -249,7 +249,7 @@ class ReduxFramework_typography {
         echo '</div>';
         
         // Open style bar div
-        echo '<div id="style-bar">';
+        echo '<div class="typography-style-bar">';
         /**
          Font Style/Weight
          *
@@ -352,7 +352,7 @@ class ReduxFramework_typography {
         echo '</div>';
         
         // Open size-bar div
-        echo '<div id="size-bar">';
+        echo '<div class="typography-size-bar">';
         
         /**
          Font Size
