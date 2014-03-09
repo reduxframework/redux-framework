@@ -74,7 +74,17 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.1.8.12 =
+= 3.1.8.15 =
+* Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is available on in dev_mode, and may be turned off by setting the `update_notice` argument to false.  See the Arguments page of the wiki for more details.
+* Added:      text-transform option for the typography field.
+* Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is as follows:
+
+              [family-font] [backup-font]
+              [style] [script] [align] [transform]
+              [size] [height] [word space] [letter space]
+              [color]
+
+= 3.1.8.14 =
 * Added:      Newsletter sign-up popup at first load of the Redux options panel.
 
 = 3.1.8.12 =

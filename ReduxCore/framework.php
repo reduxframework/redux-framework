@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.14';
+        public static $_version = '3.1.8.13';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -245,33 +245,34 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'transient_time'     => '',
             'default_show'       => false, // If true, it shows the default value
             'default_mark'       => '', // What to print by the field's title if the value shown is default
-                'hints' => array(
-                    'icon'              => 'icon-question-sign',
-                    'icon_position'     => 'right',
-                    'icon_color'        => 'lightgray',
-                    'icon_size'         => 'normal',
+            'update_notice'      => true,
+            'hints' => array(
+                'icon'              => 'icon-question-sign',
+                'icon_position'     => 'right',
+                'icon_color'        => 'lightgray',
+                'icon_size'         => 'normal',
 
-                    'tip_style'         => array(
-                        'color'     => 'light',
-                        'shadow'    => true,
-                        'rounded'   => false,
-                        'style'     => '',
+                'tip_style'         => array(
+                    'color'     => 'light',
+                    'shadow'    => true,
+                    'rounded'   => false,
+                    'style'     => '',
+                ),
+                'tip_position'      => array(
+                    'my' => 'top_left',
+                    'at' => 'bottom_right',
+                ),
+                'tip_effect' => array(
+                    'show' => array(
+                        'effect'    => 'slide',
+                        'duration'  => '500',
                     ),
-                    'tip_position'      => array(
-                        'my' => 'top_left',
-                        'at' => 'bottom_right',
-                    ),
-                    'tip_effect' => array(
-                        'show' => array(
-                            'effect'    => 'slide',
-                            'duration'  => '500',
-                        ),
-                        'hide' => array(
-                            'effect'    => 'fade',
-                            'duration'  => '500',
-                        ),
+                    'hide' => array(
+                        'effect'    => 'fade',
+                        'duration'  => '500',
                     ),
                 ),
+            ),
 
             /**
              * 'show_import_export'
@@ -425,6 +426,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Register setting
                 add_action( 'admin_init', array( $this, '_register_settings' ) );
 
+                // Display admin notices in dev_mode
+                if (true == $this->args['dev_mode']) {
+                    if (true == $this->args['update_notice']) {
+                        add_action( 'admin_init', array( $this, '_update_check' ) );
+                    }
+                }
+                
                 // Display admin notices
                 add_action( 'admin_notices', array( $this, '_admin_notices' ) );
 
@@ -465,6 +473,64 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         } // __construct()
 
+        public function _update_check() {
+            
+            // Get the raw framework.php from github
+            $gitpage = wp_remote_get(
+                    'https://raw.github.com/ReduxFramework/redux-framework/master/ReduxCore/framework.php', 
+                    array( 
+                        'headers'   => array( 
+                            'Accept-Encoding' => '' 
+                        ), 
+                        'sslverify' => true, 
+                        'timeout'   => 300
+                    ));
+            
+            // Is the response code the corect one?
+            if (200 == $gitpage['response']['code']) {
+
+                // Get the page text.
+                $body = $gitpage['body'];
+                
+                // Find version line in framework.php
+                $needle = 'public static $_version =';
+                $pos = strpos($body, $needle);
+
+                // If it's there, continue.  We don't want errors if $pos = 0.
+                if ($pos > 0) {
+                    
+                    // Look for the semi-colon at the end of the version line
+                    $semi = strpos($body,";", $pos);
+
+                    // Error avoidance.  If the semi-colon is there, continue.
+                    if ($semi > 0 ) {
+
+                        // Extract the version line
+                        $text = substr($body, $pos, ($semi - $pos));
+
+                        // Find the first quote around the veersion number.
+                        $quote = strpos($body,"'", $pos);
+
+                        // Extract the version number
+                        $ver = substr($body, $quote, ($semi - $quote) );
+                        
+                        // Strip off quotes.
+                        $ver = str_replace("'",'',$ver);
+
+                        // Set up admin notice on new version
+                        if (1 == strcmp($ver, self::$_version)) {
+                            $this->admin_notices[] = array(
+                                'type'      => 'updated',
+                                'msg'       => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . self::$_version . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
+                                'id'        => 'dev_notice_' . $ver,
+                                'dismiss'   => true,
+                            );                            
+                        }
+                    }
+                }
+            }
+        }
+        
         public function _admin_notices() {
             global $current_user, $pagenow;
 
