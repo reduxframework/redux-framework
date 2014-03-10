@@ -77,6 +77,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 = 3.1.8.15 =
 * Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is available on in dev_mode, and may be turned off by setting the `update_notice` argument to false.  See the Arguments page of the wiki for more details.
 * Added:      text-transform option for the typography field.
+* Fixed:      image_select images not resizing properly in FF and IE.
 * Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is as follows:
 
               [family-font] [backup-font]
