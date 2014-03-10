@@ -1,3 +1,8 @@
+.redux-container-image_select .redux-table-container {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
 .redux-container-image_select .redux-image-select input[type='radio'] {
   display: none;
 }
