@@ -487,7 +487,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     ));
             
             // Is the response code the corect one?
-            if (200 == $gitpage['response']['code']) {
+            if (200 == $gitpage['response']['code'] || is_wp_error($gitpage)) {
 
                 // Get the page text.
                 $body = $gitpage['body'];
