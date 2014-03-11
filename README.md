@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.16 =
+* Fixed:      Error on update_check when the response code was something other than 200.
+* Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
+
 = 3.1.8.15 =
 * Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is available on in dev_mode, and may be turned off by setting the `update_notice` argument to false.  See the Arguments page of the wiki for more details.
 * Added:      text-transform option for the typography field.
