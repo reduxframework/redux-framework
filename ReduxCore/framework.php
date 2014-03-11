@@ -487,7 +487,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     ));
             
             // Is the response code the corect one?
-            if (200 == $gitpage['response']['code'] || is_wp_error($gitpage)) {
+            if (!is_wp_error($gitpage) || isset($gitpage['body'])) {
 
                 // Get the page text.
                 $body = $gitpage['body'];
@@ -1405,7 +1405,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     </script><style>.wf-loading{visibility:hidden;}</style>
                     <?php
                 } else {
-                    echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    //echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
                     wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
                     wp_enqueue_style( 'redux-google-fonts' );
                 }
