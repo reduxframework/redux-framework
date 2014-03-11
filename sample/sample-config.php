@@ -1242,6 +1242,16 @@ array(
                         'default' => '2'
                     ),
                     array(
+                        'id' => '18b',
+                        'type' => 'button_set',
+                        'title' => __('Button Set, Multi Select', 'redux-framework-demo'),
+                        'subtitle' => __('No validation can be done on this field type', 'redux-framework-demo'),
+                        'desc' => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+                        'multi' => true,
+                        'options' => array('1' => 'Opt 1', '2' => 'Opt 2', '3' => 'Opt 3'), //Must provide key => value pairs for radio options
+                        'default' => '2'
+                    ),                    
+                    array(
                         'id' => '23',
                         'type' => 'info',
                         'required' => array('18', 'equals', array('1', '2')),

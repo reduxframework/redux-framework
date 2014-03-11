@@ -5,7 +5,12 @@
 
 /*global jQuery, document*/
 jQuery(document).ready(function () {
-
-  jQuery('.buttonset').buttonset();
+    jQuery('.buttonset').each(function() {
+        if ( jQuery(this).is(':checkbox') ) {
+            jQuery(this).find('.buttonset-item').button();
+        } 
+        jQuery('.buttonset').buttonset();
+    });
+  
   
 });
