@@ -157,6 +157,7 @@
                     // Uncomment when selectize is live
                     // var selectize = select[0].selectize;
                     // selectize.setValue(slider.val()[0]);
+                    redux_change(slider);
                 },
             });
 
