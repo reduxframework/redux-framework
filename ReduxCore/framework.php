@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.17';
+        public static $_version = '3.1.8.18';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -487,44 +487,45 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     ));
             
             // Is the response code the corect one?
-            if (!is_wp_error($gitpage) || isset($gitpage['body'])) {
+            if (!is_wp_error($gitpage)) {
+                if (isset($gitpage['body'])) {
+                    // Get the page text.
+                    $body = $gitpage['body'];
 
-                // Get the page text.
-                $body = $gitpage['body'];
-                
-                // Find version line in framework.php
-                $needle = 'public static $_version =';
-                $pos = strpos($body, $needle);
+                    // Find version line in framework.php
+                    $needle = 'public static $_version =';
+                    $pos = strpos($body, $needle);
 
-                // If it's there, continue.  We don't want errors if $pos = 0.
-                if ($pos > 0) {
-                    
-                    // Look for the semi-colon at the end of the version line
-                    $semi = strpos($body,";", $pos);
+                    // If it's there, continue.  We don't want errors if $pos = 0.
+                    if ($pos > 0) {
 
-                    // Error avoidance.  If the semi-colon is there, continue.
-                    if ($semi > 0 ) {
+                        // Look for the semi-colon at the end of the version line
+                        $semi = strpos($body,";", $pos);
 
-                        // Extract the version line
-                        $text = substr($body, $pos, ($semi - $pos));
+                        // Error avoidance.  If the semi-colon is there, continue.
+                        if ($semi > 0 ) {
 
-                        // Find the first quote around the veersion number.
-                        $quote = strpos($body,"'", $pos);
+                            // Extract the version line
+                            $text = substr($body, $pos, ($semi - $pos));
 
-                        // Extract the version number
-                        $ver = substr($body, $quote, ($semi - $quote) );
-                        
-                        // Strip off quotes.
-                        $ver = str_replace("'",'',$ver);
+                            // Find the first quote around the veersion number.
+                            $quote = strpos($body,"'", $pos);
 
-                        // Set up admin notice on new version
-                        if (1 == strcmp($ver, self::$_version)) {
-                            $this->admin_notices[] = array(
-                                'type'      => 'updated',
-                                'msg'       => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . self::$_version . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
-                                'id'        => 'dev_notice_' . $ver,
-                                'dismiss'   => true,
-                            );                            
+                            // Extract the version number
+                            $ver = substr($body, $quote, ($semi - $quote) );
+
+                            // Strip off quotes.
+                            $ver = str_replace("'",'',$ver);
+
+                            // Set up admin notice on new version
+                            if (1 == strcmp($ver, self::$_version)) {
+                                $this->admin_notices[] = array(
+                                    'type'      => 'updated',
+                                    'msg'       => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . self::$_version . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
+                                    'id'        => 'dev_notice_' . $ver,
+                                    'dismiss'   => true,
+                                );                            
+                            }
                         }
                     }
                 }
@@ -1405,9 +1406,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     </script><style>.wf-loading{visibility:hidden;}</style>
                     <?php
                 } else {
-                    //echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
-                    wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
-                    wp_enqueue_style( 'redux-google-fonts' );
+                    echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
+                    //wp_enqueue_style( 'redux-google-fonts' );
                 }
             }
 

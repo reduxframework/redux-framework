@@ -74,6 +74,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.18 =
+* Fixed:      update_check produced a fatal error on a local install with no internet connection.
+* Modified:   Google font CSS moved to header so pages will pass HTML5 validation.
+
+= 3.1.8.17 =
+* Fixed:      Compiler hook failing on slider.
+
 = 3.1.8.16 =
 * Fixed:      Error on update_check when the response code was something other than 200.
 * Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
