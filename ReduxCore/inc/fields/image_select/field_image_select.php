@@ -238,13 +238,14 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                 if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
                     $keys = implode(",", $this->field['output']);
+                    $style = $keys . "{" . $style . '}';
                     $this->parent->outputCSS .= $style;
                 }
 
                 if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
                     $keys = implode(",", $this->field['compiler']);
                     $style = $keys . "{" . $style . '}';
-                    $this->parent->compilerCSS .= $style; //$keys . "{" . $style . '}';
+                    $this->parent->compilerCSS .= $style;
                 }
             }
         }        
