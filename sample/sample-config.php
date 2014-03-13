@@ -20,7 +20,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
             }
 
             // This is needed. Bah WordPress bugs.  ;)
-            if ( defined('TEMPLATEPATH') && strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( TEMPLATEPATH ) ) !== false) {
+            if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), get_stylesheet_directory() ) !== false) {
                 $this->initSettings();
             } else {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);
