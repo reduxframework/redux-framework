@@ -74,6 +74,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.19 =
+* Modified:   Typography word and letter spacing now accept negative values.
+* Modified:   Typography preview shows spaces between upper and lower case groupings.
+* Fixed:      Compiler output for slider field.
+
 = 3.1.8.18 =
 * Fixed:      update_check produced a fatal error on a local install with no internet connection.
 * Modified:   Google font CSS moved to header so pages will pass HTML5 validation.
