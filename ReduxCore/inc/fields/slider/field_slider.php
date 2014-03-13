@@ -314,7 +314,7 @@ class ReduxFramework_slider {
 
         // DIV output
         echo '<div ' . '
-                class="redux-slider-container"' . '
+                class="redux-slider-container"' . ' ' . $this->field['class'] . '
                 id="'               . $fieldID                      . '" ' . '
                 data-id="'          . $fieldID                      . '" ' . '
                 data-min="'         . $this->field['min']           . '" ' . '

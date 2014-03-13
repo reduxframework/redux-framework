@@ -157,7 +157,7 @@
                     // Uncomment when selectize is live
                     // var selectize = select[0].selectize;
                     // selectize.setValue(slider.val()[0]);
-                    redux_change(slider);
+                    redux_change(jQuery(this).parents('.redux-field-container:first').find('input'));
                 },
             });
 
