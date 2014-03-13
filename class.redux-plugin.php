@@ -88,7 +88,13 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
 
         // Shim since we changed the function name. Deprecated.
         public static function get_instance() {
-            return self::instance();
+            if( !self::$instance ) {
+                self::$instance = new self;
+                self::$instance->get_redux_options();
+                self::$instance->includes();
+                self::$instance->hooks();
+            }
+            return self::$instance;
         }
 
 
