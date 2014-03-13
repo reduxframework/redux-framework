@@ -237,10 +237,12 @@ jQuery(document).ready(function($) {
             typographySelect(jQuery(this));
         }
     });
-    jQuery(".redux-typography-size, .redux-typography-word, .redux-typography-letter").numeric({
+    
+    jQuery(".redux-typography-size").numeric({
         allowMinus: false,
     });
-    jQuery(".redux-typography-height").numeric({
+    
+    jQuery(".redux-typography-height .redux-typography-word, .redux-typography-letter").numeric({
         allowMinus: true,
     });
     //jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
