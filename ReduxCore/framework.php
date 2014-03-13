@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.8.19';
+        public static $_version = '3.1.8.20';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;
 
             // See if Redux is a plugin or not
-            if ( defined('TEMPLATEPATH') && strpos(__FILE__,TEMPLATEPATH) !== false) {
+            if ( strpos( __FILE__, get_stylesheet_directory() ) !== false ) {
                 self::$_is_plugin = false;
             }
 
