@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;
 
             // See if Redux is a plugin or not
-            if ( strpos( __FILE__, get_stylesheet_directory() ) !== false ) {
+            if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath(get_stylesheet_directory()) ) !== false) {
                 self::$_is_plugin = false;
             }
 
