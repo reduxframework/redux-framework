@@ -863,7 +863,7 @@ jQuery(document).ready(function($) {
      BEGIN dev_mode commands
      **/
     $('#consolePrintObject').on('click', function() {
-        //console.log(jQuery.parseJSON(jQuery("#redux-object-json").html()));
+        console.log(jQuery.parseJSON(jQuery("#redux-object-json").html()));
     });
 
     if (typeof jsonView === 'function') {
