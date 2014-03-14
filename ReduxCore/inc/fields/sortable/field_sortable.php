@@ -14,7 +14,6 @@ class ReduxFramework_sortable {
         $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-    
     }
 
     /**
@@ -25,7 +24,6 @@ class ReduxFramework_sortable {
      * @since Redux_Options 2.0.1
     */
     function render() {
-
 
         if ( empty( $this->field['mode'] ) ) {
             $this->field['mode'] = "text";
@@ -38,22 +36,51 @@ class ReduxFramework_sortable {
         $class = (isset($this->field['class'])) ? $this->field['class'] : '';
         $options = $this->field['options'];
 
+        // This is to weed out missing options that might be in the default
+        // Why?  Who knows.  Call it a dummy check.
         if (!empty($this->value)) {
-            foreach ($this->value as $k=>$v) {
+            foreach ($this->value as $k => $v) {
                 if (!isset($options[$k])) {
                     unset($this->value[$k]);
                 }
             }
         }
 
-        foreach ($options as $k=>$v) {
+        $noSort = false;
+        foreach ($options as $k => $v) {
             if (!isset($this->value[$k])) {
-                $this->value[$k] = $v;
+                
+                // A save has previously been done.
+                if (array_key_exists($k,$this->value)) {
+                    $this->value[$k] = $v;
+                    
+                // Missing database entry, meaning no save has yet been done.
+                } else {
+                    $noSort = true;
+                    $this->value[$k] = '';
+                }
             }
+        }
+        
+        // If missing database entries are found, it means no save has been done
+        // and therefore no sort should be done.  Set the default array in the same
+        // order as the options array.  Why?  The sort order is based on the
+        // saved default array.  If entries are missing, the sort is messed up. 
+        // - kp
+        if (true == $noSort) {
+            $dummyArr = array();
+            
+            foreach ($options as $k => $v) {
+                $dummyArr[$k] = $this->value[$k];
+            }
+            unset ($this->value);
+            $this->value = $dummyArr;
+            unset ($dummytArr);
         }
 
         echo '<ul id="' . $this->field['id'].'-list" class="redux-sortable ' . $class . '">';
 
+        
         foreach ($this->value as $k => $nicename) {
             
             echo '<li>';
@@ -62,6 +89,7 @@ class ReduxFramework_sortable {
 
             if ( $this->field['mode'] == "checkbox") {
             	$value_display = $this->value[$k];
+                
                 if (!empty($this->value[$k])) {
                     $checked = 'checked="checked" ';
                 }
