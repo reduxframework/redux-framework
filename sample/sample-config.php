@@ -1300,7 +1300,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                             '2' => 'Opt 2', 
                             '3' => 'Opt 3'
                         ), 
-                        'default'   => '2'
+                        'default'   => array('2', '3')
                     ),
                     array(
                         'id'        => 'opt-info-field',
