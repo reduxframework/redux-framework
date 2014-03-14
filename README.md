@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.20 =
+* Fixed:      Javascript console object not printing options object.
+* Fixed:      Load errors from child themes no longer occur.
+
 = 3.1.8.19 =
 * Modified:   Typography word and letter spacing now accept negative values.
 * Modified:   Typography preview shows spaces between upper and lower case groupings.
