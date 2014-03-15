@@ -144,7 +144,10 @@ jQuery(document).ready(function($) {
                 if (script) {
                     link += '&subset=' + script;
                 }
-                WebFont.load({google: {families: [link]}});
+                
+                if (WebFont) {
+                    WebFont.load({google: {families: [link]}});
+                }
                 //link = 'http://fonts.googleapis.com/css?family=' + link;
                 //$('head').append('<link href="' + link + '" rel="stylesheet" type="text/css" class="' + _linkclass + '">');
                 $('#' + mainID + ' .redux-typography-google').val(true);
