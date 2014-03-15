@@ -76,6 +76,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.8.22 =
 * Fixed:      Typography custom preview text/size not outputting.
+* Fixed:      No font selected in typography would default to 'inherit'.
 
 = 3.1.8.21 =
 * Fixed:      Sortable field, when used a checkboxes, were all checked by default, even when set not to be.
