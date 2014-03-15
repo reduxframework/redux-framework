@@ -1668,6 +1668,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'reset_confirm'         => __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ),
                 'reset_section_confirm' => __( 'Are you sure? Resetting will lose all custom values in this section.', 'redux-framework' ),
                 'preset_confirm'        => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ),
+                'please_wait'        => __( 'Please Wait', 'redux-framework' ),
                 'opt_name'              => $this->args['opt_name'],
                 'slug'                  => $this->args['page_slug'],
                 'hints'                 => $this->args['hints'],
