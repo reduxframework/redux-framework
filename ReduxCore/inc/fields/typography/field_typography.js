@@ -29,9 +29,9 @@ jQuery(document).ready(function($) {
         }
         // Set all the variables to be checked against
         var family = $('#' + mainID + ' select.redux-typography-family').val();
-        //if (!family) {
-            //family = "inherit";
-        //}
+        if (!family) {
+            family = null; //"inherit";
+        }
         var familyBackup = $('#' + mainID + ' select.redux-typography-family-backup').val();
         var size = $('#' + mainID + ' .redux-typography-size').val();
         var height = $('#' + mainID + ' .redux-typography-height').val();

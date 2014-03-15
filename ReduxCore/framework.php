@@ -3109,7 +3109,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     echo "</pre>";
                 }
 
-                echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds</div>';
+                echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds<br/>Redux is currently set to developer mode.</div>';
 
             }
 
