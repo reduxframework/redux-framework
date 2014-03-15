@@ -29,9 +29,9 @@ jQuery(document).ready(function($) {
         }
         // Set all the variables to be checked against
         var family = $('#' + mainID + ' select.redux-typography-family').val();
-        if (!family) {
-            family = "inherit";
-        }
+        //if (!family) {
+            //family = "inherit";
+        //}
         var familyBackup = $('#' + mainID + ' select.redux-typography-family-backup').val();
         var size = $('#' + mainID + ' .redux-typography-size').val();
         var height = $('#' + mainID + ' .redux-typography-height').val();
@@ -175,7 +175,7 @@ jQuery(document).ready(function($) {
 
         if (family === 'none' && family === '') {
             //if selected is not a font remove style "font-family" at preview box
-            $('#' + mainID + ' .typography-preview').css('font-family', '');
+            $('#' + mainID + ' .typography-preview').css('font-family', 'inherit');
         }
         if (!height) {
             height = size;
