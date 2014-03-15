@@ -400,7 +400,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * action 'redux/construct'
                  * @param object $this ReduxFramework
                  */
-                do_action( 'redux/contruct', $this );
+                do_action( 'redux/construct', $this );
 
                 // Set the default values
                 $this->_default_cleanup();
