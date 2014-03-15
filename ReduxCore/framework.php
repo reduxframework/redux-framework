@@ -1883,7 +1883,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 global $current_user;
 
                 // Users enable/disable hint choice
-                $hint_status = get_user_meta( $current_user->ID, 'ignore_hints' ) ? get_user_meta( $current_user->ID, 'ignore_hints', true ): false;
+                $hint_status = get_user_meta( $current_user->ID, 'ignore_hints' ) ? get_user_meta( $current_user->ID, 'ignore_hints', true ): 'true';
 
                 // current page parameters
                 $curPage    = $_GET['page'];
@@ -2048,7 +2048,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $this->show_hints = true;
 
                     // Get user pref for displaying hints.
-                    if ('true' == get_user_meta( $current_user->ID, 'ignore_hints', true)) {
+                    $metaVal = get_user_meta( $current_user->ID, 'ignore_hints', true);
+                    if ('true' == $metaVal || empty($metaVal)) {
 
                         // Set hand cursor for clickable hints
                         $pointer = '';
@@ -2061,8 +2062,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $size = '18px';
                         }
 
+                        // In case docs are ignored.
+                        $titleParam = isset($field['hint']['title']) ? $field['hint']['title'] : '';
+                        $contentParam = isset($field['hint']['content']) ? $field['hint']['content'] : '';
+
                         // Set hint html with appropriate position css
-                        $hint = '<div class="redux-qtip" style="float:' . $this->args['hints']['icon_position'] . '; font-size: ' . $size . '; color:' . $this->args['hints']['icon_color'] . '; cursor: ' . $pointer . ';" qtip-title="' . $field['hint']['title'] . '" qtip-content="' . $field['hint']['content'] . '"><i class="el-icon-question-sign"></i>&nbsp&nbsp</div>';
+                        $hint = '<div class="redux-qtip" style="float:' . $this->args['hints']['icon_position'] . '; font-size: ' . $size . '; color:' . $this->args['hints']['icon_color'] . '; cursor: ' . $pointer . ';" qtip-title="' . $titleParam . '" qtip-content="' . $contentParam . '"><i class="el-icon-question-sign"></i>&nbsp&nbsp</div>';
                     }
                 }
 
