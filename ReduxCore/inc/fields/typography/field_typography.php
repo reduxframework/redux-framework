@@ -193,7 +193,7 @@ class ReduxFramework_typography {
                 echo '<option data-google="false" data-details="' . $font_sizes . '" value="' . $i . '"' . selected($this->value['font-family'], $i, false) . '>' . $family . '</option>';
             }
             if ($this->field['custom_fonts'] !== false) {
-                $this->field['custom_fonts'] = apply_filters("Redux/{$this->parent->args['opt_name']}/Field/Typography/Custom_Fonts", array());
+                $this->field['custom_fonts'] = apply_filters("redux/{$this->parent->args['opt_name']}/field/typography/custom_fonts", array());
                 if (!empty($this->field['custom_fonts'])) {
                     foreach ($this->field['custom_fonts'] as $group => $fonts) {
                         echo '</optgroup><optgroup label="' . $group . '">';
