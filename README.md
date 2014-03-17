@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.8.23 =
+* Modified:   Separated Import/Export from the core.  It can now be used as a field.
+
 = 3.1.8.22 =
 * Fixed:      Typography custom preview text/size not outputting.
 * Fixed:      No font selected in typography would default to 'inherit'.

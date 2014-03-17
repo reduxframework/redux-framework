@@ -60,7 +60,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
             //add_filter('redux/options/'.$this->args['opt_name'].'/defaults', array( $this,'change_defaults' ) );
             
             // Dynamically add a section. Can be also used to modify sections/fields
-            add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
+            //add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
 
             $this->ReduxFramework = new ReduxFramework($this->sections, $this->args);
         }
@@ -233,6 +233,21 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 $sampleHTML = $wp_filesystem->get_contents(dirname(__FILE__) . '/info-html.html');
             }
 
+            $this->sections[] = array(
+                'title'     => __('Import / Export', 'redux-framework-demo'),
+                'desc'      => __('Import and Export your Redux Framework settings from file, text or URL.', 'redux-framework-demo'),
+                'icon'      => 'el-icon-refresh',
+                'fields'    => array(
+                    array(
+                        'id'            => 'opt-io',
+                        'type'          => 'import_export',
+                        'title'         => 'Import Export',
+                        'subtitle'      => 'Save and restore your Redux options',
+                        'full_width'    => false,
+                    ),
+                ),
+            );
+            
             // ACTUAL DECLARATION OF SECTIONS
             $this->sections[] = array(
                 'title'     => __('Home Settings', 'redux-framework-demo'),
@@ -240,6 +255,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'icon'      => 'el-icon-home',
                 // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                 'fields'    => array(
+
                     array(
                         'id'        => 'opt-web-fonts',
                         'type'      => 'media',
@@ -249,7 +265,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
                         'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
                         'hint'      => array(
-                            'title'     => '',
+                            //'title'     => '',
                             'content'   => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
                         )
                     ),
@@ -270,10 +286,10 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
                         'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
                         'default'   => array('url' => 'http://s.wordpress.org/style/images/codeispoetry.png'),
-                        'hint'      => array(
-                            'title'     => 'Hint Title',
-                            'content'   => 'This is a <b>hint</b> for the media field with a Title.',
-                        )
+                        //'hint'      => array(
+                        //    'title'     => 'Hint Title',
+                        //    'content'   => 'This is a <b>hint</b> for the media field with a Title.',
+                        //)
                     ),
                     array(
                         'id'        => 'section-media-end',
@@ -501,6 +517,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                             'google'        => true,
                             'font-size'     => '33px',
                             'line-height'   => '40px'),
+                        'preview' => array('text' => 'ooga booga'),
                     ),
                 ),
             );
@@ -764,10 +781,10 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'validate'  => 'email',
                         'msg'       => 'custom error message',
                         'default'   => 'test@test.com',
-                        'text_hint' => array(
-                            'title'     => 'Valid Email Required!',
-                            'content'   => 'This field required a valid email address.'
-                        )
+//                        'text_hint' => array(
+//                            'title'     => 'Valid Email Required!',
+//                            'content'   => 'This field required a valid email address.'
+//                        )
                     ),
                     array(
                         'id'        => 'opt-text-post-type',
@@ -793,10 +810,10 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'desc'      => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
                         'validate'  => 'url',
                         'default'   => 'http://reduxframework.com',
-                        'text_hint' => array(
-                            'title'     => '',
-                            'content'   => 'Please enter a valid <strong>URL</strong> in this field.'
-                        )
+//                        'text_hint' => array(
+//                            'title'     => '',
+//                            'content'   => 'Please enter a valid <strong>URL</strong> in this field.'
+//                        )
                     ),
                     array(
                         'id'        => 'opt-text-numeric',
@@ -1392,6 +1409,21 @@ if (!class_exists('Redux_Framework_sample_config')) {
             );
 
             $this->sections[] = array(
+                'title'     => __('Import / Export', 'redux-framework-demo'),
+                'desc'      => __('Import and Export your Redux Framework settings from file, text or URL.', 'redux-framework-demo'),
+                'icon'      => 'el-icon-refresh',
+                'fields'    => array(
+                    array(
+                        'id'            => 'opt-import-export',
+                        'type'          => 'import_export',
+                        'title'         => 'Import Export',
+                        'subtitle'      => 'Save and restore your Redux options',
+                        'full_width'    => false,
+                    ),
+                ),
+            );                     
+                    
+            $this->sections[] = array(
                 'type' => 'divide',
             );
 
@@ -1477,6 +1509,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'save_defaults'     => true,                    // On load save the defaults to DB before user clicks save or not
                 'default_show'      => false,                   // If true, shows the default value next to each field that is not the default value.
                 'default_mark'      => '',                      // What to print by the field's title if the value shown is default. Suggested: *
+                'show_import_export' => true,                   // Shows the Import/Export panel when not used as a field.
                 
                 // CAREFUL -> These options are for advanced use only
                 'transient_time'    => 60 * MINUTE_IN_SECONDS,
@@ -1486,7 +1519,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 
                 // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
                 'database'              => '', // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-                'show_import_export'    => true, // REMOVE
                 'system_info'           => false, // REMOVE
 
                 // HINTS
