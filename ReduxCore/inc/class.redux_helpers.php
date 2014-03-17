@@ -15,6 +15,30 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class Redux_Helpers {
 
+        public static function array_in_array($needle, $haystack) {
+            //Make sure $needle is an array for foreach
+            if (!is_array($needle)) {
+                $needle = array($needle);
+            }
+            //For each value in $needle, return TRUE if in $haystack
+            foreach ($needle as $pin)
+            //echo 'needle' . $pin;
+                if (in_array($pin, $haystack)) {
+                    return true;
+                }
+            //Return FALSE if none of the values from $needle are found in $haystack
+            return false;
+        }
+        
+        public static function recursive_array_search($needle, $haystack) {
+            foreach($haystack as $key => $value) {
+                if($needle === $value || (is_array($value) && self::recursive_array_search($needle, $value) !== false)) {
+                    return true;
+                }
+            }
+            return false;
+        }        
+        
         /**
          * Take a path and return it clean
          * @param string $path

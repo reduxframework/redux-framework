@@ -767,12 +767,7 @@ jQuery(document).ready(function($) {
         redux_expand_options(jQuery(this).parents('.redux-container:first'));
         return false;
     });
-    jQuery('#redux-import').click(function(e) {
-        if (jQuery('#import-code-value').val() === "" && jQuery('#import-link-value').val() === "") {
-            e.preventDefault();
-            return false;
-        }
-    });
+    
     if (jQuery('#redux-save').is(':visible')) {
         jQuery('#redux-save').slideDown();
     }
@@ -783,32 +778,6 @@ jQuery(document).ready(function($) {
         if (!jQuery(this).hasClass('noUpdate')) {
             redux_change(jQuery(this));
         }
-    });
-    jQuery('#redux-import-code-button').click(function() {
-        if (jQuery('#redux-import-link-wrapper').is(':visible')) {
-            jQuery('#redux-import-link-wrapper').fadeOut('fast');
-            jQuery('#import-link-value').val('');
-        }
-        jQuery('#redux-import-code-wrapper').fadeIn('slow');
-    });
-    jQuery('#redux-import-link-button').click(function() {
-        if (jQuery('#redux-import-code-wrapper').is(':visible')) {
-            jQuery('#redux-import-code-wrapper').fadeOut('fast');
-            jQuery('#import-code-value').val('');
-        }
-        jQuery('#redux-import-link-wrapper').fadeIn('slow');
-    });
-    jQuery('#redux-export-code-copy').click(function() {
-        if (jQuery('#redux-export-link-value').is(':visible')) {
-            jQuery('#redux-export-link-value').fadeOut('slow');
-        }
-        jQuery('#redux-export-code').toggle('fade');
-    });
-    jQuery('#redux-export-link').click(function() {
-        if (jQuery('#redux-export-code').is(':visible')) {
-            jQuery('#redux-export-code').fadeOut('slow');
-        }
-        jQuery('#redux-export-link-value').toggle('fade');
     });
 
     /**

@@ -274,16 +274,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 ),
             ),
 
-            /**
-             * 'show_import_export'
-             * @deprecated
-             */
-            'show_import_export' => true, // REMOVE
-            /**
-             * 'dev_mode'
-             * @deprecated
-             */
-            'dev_mode'           => false, // REMOVE
+            'show_import_export' => true,
+            'dev_mode'           => false,
+            
             /**
              * 'system_info'
              * @deprecated
@@ -297,18 +290,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
         public $localize_data       = array(); // Information that needs to be localized
-        public $folds           = array(); // The itms that need to fold.
-        public $path            = '';
-        public $output          = array(); // Fields with CSS output selectors
+        public $folds               = array(); // The itms that need to fold.
+        public $path                = '';
+        public $output              = array(); // Fields with CSS output selectors
         public $outputCSS           = null; // CSS that get auto-appended to the header
         public $compilerCSS         = null; // CSS that get sent to the compiler hook
         public $customizerCSS       = null; // CSS that goes to the customizer
         public $fieldsValues        = array(); //all fields values in an id=>value array so we can check dependencies
         public $fieldsHidden        = array(); //all fields that didn't pass the dependency test and are hidden
         public $toHide              = array(); // Values to hide on page load
-        public $typography      = null; //values to generate google font CSS
-
-        private $show_hints     = false;
+        public $typography          = null; //values to generate google font CSS
+        public $import_export       = null;
+        private $show_hints         = false;
+        
         /**
          * Class Constructor. Defines the args for the theme options class
          * @since       1.0.0
@@ -452,14 +446,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Start internationalization
                 //add_action( 'init', array( &$this, '_internationalization' ), 100 );
-
-                // Hook into the WP feeds for downloading exported settings
-                add_action( "do_feed_redux_options_{$this->args['opt_name']}", array( $this, '_download_options' ), 1, 1 );
-
-                // Hook into the WP feeds for downloading exported settings
-                add_action( "do_feed_redux_settings_{$this->args['opt_name']}", array( $this, '_download_settings' ), 1, 1 );
-
-
+                
+                include_once(self::$_dir . 'inc/import_export.php');
+                $this->import_export = new Redux_import_export($this);
+                
             }
 
 
@@ -1167,7 +1157,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
         }
-
+        
         /**
          * Class Options Page Function, creates main options page.
          * @since       1.0.0
@@ -1200,12 +1190,18 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     if( !isset( $section['type'] ) || $section['type'] != 'divide' ) {
 
                         foreach( $this->sections as $k => $section ) {
-                            if ( !isset( $section['title'] ) )
+                            if ( !isset( $section['title'] ) ){
                                 continue;
+                            }
 
-                            if ( isset( $section['submenu'] ) && $section['submenu'] == false )
+                            if ( false == $this->import_export->is_field) {
+                                $this->import_export->is_field = Redux_Helpers::recursive_array_search('import_export', $section['fields']);
+                            }
+
+                            if ( isset( $section['submenu'] ) && $section['submenu'] == false ){
                                 continue;
-
+                            }
+                            
                             add_submenu_page(
                                 $this->args['page_slug'],
                                 $section['title'],
@@ -1221,16 +1217,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         remove_submenu_page( $this->args['page_slug'], $this->args['page_slug'] );
                     }
 
-                    if( true === $this->args['show_import_export'] ) {
-                        add_submenu_page(
-                            $this->args['page_slug'],
-                            __( 'Import / Export', 'redux-framework' ),
-                            __( 'Import / Export', 'redux-framework' ),
-                            $this->args['page_permissions'],
-                            $this->args['page_slug'] . '&tab=import_export_default',
-                            //create_function( '$a', "return null;" )
-                            '__return_null'
-                        );
+                    if( true === $this->args['show_import_export'] && false == $this->import_export->is_field ) {
+                        $this->import_export->add_submenu();
                     }
 
                     if( true === $this->args['dev_mode'] ) {
@@ -1240,7 +1228,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             __( 'Options Object', 'redux-framework' ),
                             $this->args['page_permissions'],
                             $this->args['page_slug'] . '&tab=dev_mode_default',
-                            //create_function('$a', "return null;")
                             '__return_null'
                         );
                     }
@@ -1252,7 +1239,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             __( 'System Info', 'redux-framework' ),
                             $this->args['page_permissions'],
                             $this->args['page_slug'] . '&tab=system_info_default',
-                            //create_function( '$a', "return null;" )
                             '__return_null'
                         );
                     }
@@ -1423,7 +1409,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _enqueue() {
-
+            
             global $wp_styles;
 
             wp_register_style(
@@ -1489,7 +1475,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 filemtime( self::$_dir . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ), // todo - version should be based on above post-filter src
                 'all'
             );
-
 
             wp_enqueue_style( 'jquery-ui-css' );
             wp_enqueue_style( 'redux-lte-ie8' );
@@ -1608,6 +1593,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // TODO AFTER GROUP WORKS - Revert IF below
                         // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
                         if( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
+                            
+                            //if ('import_export' == $field['type']) {
+                            //    $this->import_export->is_field = true;
+                            //}
+                            
                             $field_class = 'ReduxFramework_' . $field['type'];
                             /**
                              * Field class file
@@ -1739,122 +1729,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             do_action( "redux/page/{$this->args['opt_name']}/enqueue" );
         } // _enqueue()
-
-
-        /**
-         * Download the options file, or display it
-         *
-         * @since       3.0.0
-         * @access      public
-         * @return      void
-         */
-        public function _download_options(){
-            /** @noinspection PhpUndefinedConstantInspection */
-            if( !isset( $_GET['secret'] ) || $_GET['secret'] != md5( AUTH_KEY . SECURE_AUTH_KEY ) ) {
-                wp_die( 'Invalid Secret for options use' );
-                exit;
-            }
-
-            if( !isset( $_GET['feed'] ) ){
-                wp_die( 'No Feed Defined' );
-                exit;
-            }
-            $this->get_options();
-            $backup_options = $this->options;
-            $backup_options['redux-backup'] = '1';
-
-
-            //$content = json_encode( $backup_options, true );
-
-            if (version_compare(phpversion(), "5.3.0", ">=")) {
-                $content = json_encode( $backup_options, true ) ;
-            } else {
-                $content = json_encode( $backup_options ) ;
-            }
-
-
-            if( isset( $_GET['action'] ) && $_GET['action'] == 'download_options' ) {
-                header( 'Content-Description: File Transfer' );
-                header( 'Content-type: application/txt' );
-                header( 'Content-Disposition: attachment; filename="' . str_replace( 'redux-', '', $_GET['feed'] ) . '_backup_' . date( 'd-m-Y' ) . '.json"' );
-                header( 'Content-Transfer-Encoding: binary' );
-                header( 'Expires: 0' );
-                header( 'Cache-Control: must-revalidate' );
-                header( 'Pragma: public' );
-                echo $content;
-                exit;
-            } else {
-                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT");
-                header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
-                header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-                header( 'Cache-Control: post-check=0, pre-check=0', false );
-                header( 'Pragma: no-cache' );
-
-                // Can't include the type. Thanks old Firefox and IE. BAH.
-                //header("Content-type: application/json");
-                echo $content;
-                exit;
-            }
-        }
-
-
-        /**
-         * Download the options file, or display it
-         *
-         * @since       3.0.0
-         * @access      public
-         * @return      void
-         */
-        public function _download_settings(){
-            /** @noinspection PhpUndefinedConstantInspection */
-            if( !isset( $_GET['secret'] ) || $_GET['secret'] != md5( AUTH_KEY . SECURE_AUTH_KEY ) ) {
-                wp_die( 'Invalid Secret for options use' );
-                exit;
-            }
-
-            if( !isset( $_GET['feed'] ) ){
-                wp_die( 'No Feed Defined' );
-                exit;
-            }
-            $this->get_options();
-            $settings = array(
-                'args' => $this->args,
-                'sections' => $this->sections,
-                'options' => $this->options,
-            );
-            //$content = json_encode( $settings, true );
-
-            if (version_compare(phpversion(), "5.3.0", ">=")) {
-                $content = json_encode( $backup_options, true ) ;
-            } else {
-                $content = json_encode( $backup_options ) ;
-            }
-
-            if( isset( $_GET['action'] ) && $_GET['action'] == 'download_settings' ) {
-                header( 'Content-Description: File Transfer' );
-                header( 'Content-type: application/txt' );
-                header( 'Content-Disposition: attachment; filename="' . str_replace( 'redux-', '', $_GET['feed'] ) . '_settings_backup_' . date( 'd-m-Y' ) . '.json"' );
-                header( 'Content-Transfer-Encoding: binary' );
-                header( 'Expires: 0' );
-                header( 'Cache-Control: must-revalidate' );
-                header( 'Pragma: public' );
-                echo $content;
-                exit;
-            } else {
-                header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT");
-                header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
-                header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-                header( 'Cache-Control: post-check=0, pre-check=0', false );
-                header( 'Pragma: no-cache' );
-
-                // Can't include the type. Thanks old Firefox and IE. BAH.
-                //header("Content-type: application/json");
-                echo $content;
-                exit;
-            }
-        }
 
         /**
          * Show page help
@@ -2847,20 +2721,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             do_action( "redux/page/{$this->args['opt_name']}/menu/after", $this );
 
-            if( $this->args['show_import_export'] === true ) {
-                echo '<li id="import_export_default_section_group_li" class="redux-group-tab-link-li">';
-
-                if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                    $icon = ( !isset( $this->args['import_icon'] ) ) ? '' : '<img src="' . $this->args['import_icon'] . '" /> ';
-                } else {
-                    $icon_class = ( !isset( $this->args['import_icon_class'] ) ) ? '' : ' ' . $this->args['import_icon_class'];
-                    $icon = ( !isset( $this->args['import_icon'] ) ) ? '<i class="el-icon-refresh' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['import_icon'] . $icon_class . '"></i> ';
-                }
-
-                echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="redux-group-tab-link-a" data-rel="import_export_default">' . $icon . ' <span class="group_title">' . __( 'Import / Export', 'redux-framework' ) . '</span></a>';
-                echo '</li>';
-
-                echo '<li class="divide">&nbsp;</li>';
+            // Import / Export tab
+            if( true == $this->args['show_import_export'] && false == $this->import_export->is_field ) {
+                $this->import_export->render_tab();
             }
 
             if( $this->args['dev_mode'] === true ) {
@@ -2921,82 +2784,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '</div>';
             }
 
-            if( $this->args['show_import_export'] === true ) {
-                echo '<div id="import_export_default_section_group' . '" class="redux-group-tab">';
-
-                echo '<h3>' . __( 'Import / Export Options', 'redux-framework' ) . '</h3>';
-                echo '<h4>' . __( 'Import Options', 'redux-framework' ) . '</h4>';
-                echo '<p><a href="javascript:void(0);" id="redux-import-code-button" class="button-secondary">' . __( 'Import from file', 'redux-framework' ) . '</a> <a href="javascript:void(0);" id="redux-import-link-button" class="button-secondary">' . __( 'Import from URL', 'redux-framework' ) . '</a></p>';
-
-                echo '<div id="redux-import-code-wrapper">';
-
-                echo '<div class="redux-section-desc">';
-                /**
-                 * filter 'redux-import-file-description'
-                 * @param string translated settings import instructions text
-                 */
-                echo '<p class="description" id="import-code-description">' . apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', 'redux-framework' ) ) . '</p>';
-                echo '</div>';
-
-                echo '<textarea id="import-code-value" name="' . $this->args['opt_name'] . '[import_code]" class="large-text noUpdate" rows="8"></textarea>';
-
-                echo '</div>';
-
-                echo '<div id="redux-import-link-wrapper">';
-
-                echo '<div class="redux-section-desc">';
-                /**
-                 * filter 'redux-import-link-description'
-                 * @param string translated settings import instructions text
-                 */
-                echo '<p class="description" id="import-link-description">' . apply_filters( 'redux-import-link-description', __( 'Input the URL to another sites options set and hit Import to load the options from that site.', 'redux-framework' ) ) . '</p>';
-                echo '</div>';
-
-                echo '<input type="text" id="import-link-value" name="' . $this->args['opt_name'] . '[import_link]" class="large-text noUpdate" value="" />';
-
-                echo '</div>';
-
-                /**
-                 * filter 'redux-import-warning'
-                 * @param string translated settings import confirmation/warning text
-                 */
-                echo '<p id="redux-import-action"><input type="submit" id="redux-import" name="' . $this->args['opt_name'] . '[import]" class="button-primary" value="' . __( 'Import', 'redux-framework' ) . '">&nbsp;&nbsp;<span>' . apply_filters( 'redux-import-warning', __( 'WARNING! This will overwrite all existing option values, please proceed with caution!', 'redux-framework' ) ) . '</span></p>';
-                echo '<div class="hr"/><div class="inner"><span>&nbsp;</span></div></div>';
-
-                echo '<h4>' . __( 'Export Options', 'redux-framework' ) . '</h4>';
-                echo '<div class="redux-section-desc">';
-                /**
-                 * filter 'redux-backup-description'
-                 * @param string translated settings backup information
-                 */
-                echo '<p class="description">' . apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'redux-framework' ) ) . '</p>';
-                echo '</div>';
-
-
-                /** @noinspection PhpUndefinedConstantInspection */
-                echo '<p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary">' . __( 'Copy', 'redux-framework' ) . '</a> <a href="' . add_query_arg( array( 'feed' => 'redux_options_' . $this->args['opt_name'], 'action' => 'download_options', 'secret' => md5( AUTH_KEY . SECURE_AUTH_KEY ) ), site_url() ) . '" id="redux-export-code-dl" class="button-primary">' . __( 'Download', 'redux-framework' ) . '</a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary">' . __( 'Copy Link', 'redux-framework' ) . '</a></p>';
-                $backup_options = $this->options;
-                $backup_options['redux-backup'] = '1';
-                echo '<textarea class="large-text noUpdate" id="redux-export-code" rows="8">';
-
-                if (version_compare(phpversion(), "5.3.0", ">=")) {
-                    print_r( json_encode( $backup_options, true ) );
-                } else {
-                    print_r( json_encode( $backup_options ) );
-                }
-
-                echo '</textarea>';
-                /** @noinspection PhpUndefinedConstantInspection */
-                echo '<input type="text" class="large-text noUpdate" id="redux-export-link-value" value="' . add_query_arg( array( 'feed' => 'redux_options_' . $this->args['opt_name'], 'secret' => md5( AUTH_KEY.SECURE_AUTH_KEY ) ), site_url() ) . '" />';
-
-                echo '</div>';
+            if( true == $this->args['show_import_export'] && false == $this->import_export->is_field ) {
+                $this->import_export->enqueue();
+                $this->import_export->render();
+                
             }
 
             if( $this->args['dev_mode'] === true ) {
                 echo '<div id="dev_mode_default_section_group' . '" class="redux-group-tab">';
                 echo '<h3>' . __( 'Options Object', 'redux-framework' ) . '</h3>';
                 echo '<div class="redux-section-desc">';
-                    echo '<div id="redux-object-browser"></div>';
+                echo '<div id="redux-object-browser"></div>';
                 echo '</div>';
 
                 if (version_compare(phpversion(), "5.3.0", ">=")) {
@@ -3100,9 +2898,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '</div><!--wrap-->';
 
             if ( $this->args['dev_mode'] === true ) {
-
-
-
                 if (current_user_can('administrator')){
                     global $wpdb;
                     echo "<br /><pre>";
@@ -3111,10 +2906,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds<br/>Redux is currently set to developer mode.</div>';
-
             }
-
-
         }
 
         /**

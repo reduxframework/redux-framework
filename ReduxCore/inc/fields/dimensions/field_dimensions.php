@@ -9,13 +9,12 @@ class ReduxFramework_dimensions {
      *
      * @since ReduxFramework 1.0.0
      */
-    function __construct( $field = array(), $value ='', $parent ) {
-    
+    function __construct($field = array(), $value = '', $parent) {
+
         //parent::__construct( $parent->sections, $parent->args );
         $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-    
     }
 
 //function
@@ -36,37 +35,20 @@ class ReduxFramework_dimensions {
          * take a dump.
          */
 
-        if( !function_exists( 'array_in_array' ) ) {
-            function array_in_array($needle, $haystack) {
-                //Make sure $needle is an array for foreach
-                if (!is_array($needle)) {
-                    $needle = array($needle);
-                }
-                //For each value in $needle, return TRUE if in $haystack
-                foreach ($needle as $pin)
-                //echo 'needle' . $pin;
-                    if (in_array($pin, $haystack)) {
-                        return true;
-                    }
-                //Return FALSE if none of the values from $needle are found in $haystack
-                return false;
-            }
-        }
-
         // No errors please
         $defaults = array(
-            'width' => true,
-            'height' => true,
-            'units_extended' => false,
-            'units' => 'px',
+            'width'             => true,
+            'height'            => true,
+            'units_extended'    => false,
+            'units'             => 'px',
         );
 
         $this->field = wp_parse_args($this->field, $defaults);
 
         $defaults = array(
-            'width' => '',
-            'height' => '',
-            'units' => 'px'
+            'width'     => '',
+            'height'    => '',
+            'units'     => 'px'
         );
 
         $this->value = wp_parse_args($this->value, $defaults);
@@ -77,12 +59,12 @@ class ReduxFramework_dimensions {
          */
 
         // If units field has a value but is not an acceptable value, unset the variable
-        if (isset($this->field['units']) && !array_in_array($this->field['units'], array('', false, '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px'))) {
+        if (isset($this->field['units']) && !Redux_Helpers::array_in_array($this->field['units'], array('', false, '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px'))) {
             unset($this->field['units']);
         }
 
         //if there is a default unit value  but is not an accepted value, unset the variable
-        if (isset($this->value['units']) && !array_in_array($this->value['units'], array('', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px'))) {
+        if (isset($this->value['units']) && !Redux_Helpers::array_in_array($this->value['units'], array('', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px'))) {
             unset($this->value['units']);
         }
 
@@ -98,32 +80,32 @@ class ReduxFramework_dimensions {
             if (isset($this->field['units']) && !isset($this->value['units']) || $this->field['units'] == false) {
                 $this->value['units'] = $this->field['units'];
 
-            // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
+                // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
             } else if (!isset($this->field['units']) && !isset($this->value['units'])) {
                 $this->field['units'] = 'px';
                 $this->value['units'] = 'px';
 
-            // If units field has NO value but units value does, then set unit field to value field
+                // If units field has NO value but units value does, then set unit field to value field
             } else if (!isset($this->field['units']) && isset($this->value['units'])) {
                 $this->field['units'] = $this->value['units'];
-                
-            // if unit value is set and unit value doesn't equal unit field (coz who knows why)
-            // then set unit value to unit field
+
+                // if unit value is set and unit value doesn't equal unit field (coz who knows why)
+                // then set unit value to unit field
             } elseif (isset($this->value['units']) && $this->value['units'] !== $this->field['units']) {
                 $this->value['units'] = $this->field['units'];
             }
 
-        // do stuff based on unit field NOT set as an array
+            // do stuff based on unit field NOT set as an array
         } elseif (isset($this->field['units']) && is_array($this->field['units'])) {
             // nothing to do here, but I'm leaving the construct just in case I have to debug this again.
         }
 
         echo '<fieldset id="' . $this->field['id'] . '" class="redux-dimensions-container" data-id="' . $this->field['id'] . '">';
-        
+
         // This used to be unit field, but was giving the PHP index error when it was an array,
         // so I changed it.
         echo '<input type="hidden" class="field-units" value="' . $this->value['units'] . '">';
-        
+
         /**
           Width
          * */
@@ -158,27 +140,26 @@ class ReduxFramework_dimensions {
 
         /**
           Units
-        **/
-
+         * */
         // If units field is set and units field NOT false then
         // fill out the options object and show it, otherwise it's hidden
         // and the default units value will apply.
-         
-        if (isset($this->field['units']) && $this->field['units'] !== false){
+
+        if (isset($this->field['units']) && $this->field['units'] !== false) {
             echo '<div class="select_wrapper dimensions-units" original-title="' . __('Units', 'redux-framework') . '">';
             echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . __('Units', 'redux-framework') . '" class="redux-dimensions redux-dimensions-units select' . $this->field['class'] . '" original-title="' . __('Units', 'redux-framework') . '" name="' . $this->field['name'] . '[units]' . $this->field['name_suffix'] . '">';
 
             //  Extended units, show 'em all
-            if ( $this->field['units_extended'] ) {
-                    $testUnits = array('px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc'); 
+            if ($this->field['units_extended']) {
+                $testUnits = array('px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');
             } else {
-                    $testUnits = array('px', 'em', 'rem', '%');
+                $testUnits = array('px', 'em', 'rem', '%');
             }
-            
-            if ( $this->field['units'] != "" && is_array( $this->field['units'] ) ) {
-                    $testUnits = $this->field['units'];
+
+            if ($this->field['units'] != "" && is_array($this->field['units'])) {
+                $testUnits = $this->field['units'];
             }
-                                
+
             if (in_array($this->field['units'], $testUnits)) {
                 echo '<option value="' . $this->field['units'] . '" selected="selected">' . $this->field['units'] . '</option>';
             } else {
@@ -205,18 +186,11 @@ class ReduxFramework_dimensions {
         wp_enqueue_style('select2-css');
 
         wp_enqueue_script(
-            'redux-field-dimensions-js', 
-            ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.js', 
-            array('jquery'), 
-            time(), 
-            true
+                'redux-field-dimensions-js', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.js', array('jquery'), time(), true
         );
 
         wp_enqueue_style(
-            'redux-field-dimensions-css', 
-            ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css', 
-            time(), 
-            true
+                'redux-field-dimensions-css', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css', time(), true
         );
     }
 
@@ -229,53 +203,52 @@ class ReduxFramework_dimensions {
             if (isset($this->field['units']) && !isset($this->value['units']) || $this->field['units'] == false) {
                 $this->value['units'] = $this->field['units'];
 
-            // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
+                // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
             } else if (!isset($this->field['units']) && !isset($this->value['units'])) {
                 $this->field['units'] = 'px';
                 $this->value['units'] = 'px';
 
-            // If units field has NO value but units value does, then set unit field to value field
+                // If units field has NO value but units value does, then set unit field to value field
             } else if (!isset($this->field['units']) && isset($this->value['units'])) {
                 $this->field['units'] = $this->value['units'];
-                
-            // if unit value is set and unit value doesn't equal unit field (coz who knows why)
-            // then set unit value to unit field
+
+                // if unit value is set and unit value doesn't equal unit field (coz who knows why)
+                // then set unit value to unit field
             } elseif (isset($this->value['units']) && $this->value['units'] !== $this->field['units']) {
                 $this->value['units'] = $this->field['units'];
             }
 
-        // do stuff based on unit field NOT set as an array
+            // do stuff based on unit field NOT set as an array
         } elseif (isset($this->field['units']) && is_array($this->field['units'])) {
             // nothing to do here, but I'm leaving the construct just in case I have to debug this again.
         }
 
-        $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
+        $units = isset($this->value['units']) ? $this->value['units'] : "";
 
 
         $cleanValue = array(
-            'height' => isset( $this->value['height'] ) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
-            'width' => isset( $this->value['width'] ) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
-        ); 
+            'height' => isset($this->value['height']) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
+            'width' => isset($this->value['width']) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
+        );
 
         $style = "";
 
-        foreach($cleanValue as $key=>$value) {
-            if( $value ) {
+        foreach ($cleanValue as $key => $value) {
+            if ($value) {
                 $style .= $key . ':' . $value . $units . ';';
             }
-        }          
-        if ( !empty( $style ) ) {
-            if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+        }
+        if (!empty($style)) {
+            if (!empty($this->field['output']) && is_array($this->field['output'])) {
                 $keys = implode(",", $this->field['output']);
                 $this->parent->outputCSS .= $keys . "{" . $style . '}';
             }
 
-            if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+            if (!empty($this->field['compiler']) && is_array($this->field['compiler'])) {
                 $keys = implode(",", $this->field['compiler']);
                 $this->parent->compilerCSS .= $keys . "{" . $style . '}';
-            }               
+            }
         }
-        
     }
 
 //function

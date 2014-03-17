@@ -1,31 +1,29 @@
 <?php
-class ReduxFramework_spacing {	
-	
-	/**
-	 * Field Constructor.
-	 *
-	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-	 *
-	 * @since ReduxFramework 1.0.0
-	*/
-	function __construct( $field = array(), $value ='', $parent ) {
-    
-		//parent::__construct( $parent->sections, $parent->args );
-		$this->parent = $parent;
-		$this->field = $field;
-		$this->value = $value;
-    
+
+class ReduxFramework_spacing {
+
+    /**
+     * Field Constructor.
+     *
+     * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+     *
+     * @since ReduxFramework 1.0.0
+     */
+    function __construct($field = array(), $value = '', $parent) {
+
+        //parent::__construct( $parent->sections, $parent->args );
+        $this->parent   = $parent;
+        $this->field    = $field;
+        $this->value    = $value;
     }
-	
-	
-	
-	/**
-	 * Field Render Function.
-	 *
-	 * Takes the vars and outputs the HTML for the field in the settings
-	 *
-	 * @since ReduxFramework 1.0.0
-	*/
+
+    /**
+     * Field Render Function.
+     *
+     * Takes the vars and outputs the HTML for the field in the settings
+     *
+     * @since ReduxFramework 1.0.0
+     */
     function render() {
         /*
          * So, in_array() wasn't doing it's job for checking a passed array for a proper value.
@@ -34,64 +32,45 @@ class ReduxFramework_spacing {
          * take a dump.
          */
 
-        if (!function_exists('array_in_array')) {
-
-            function array_in_array($needle, $haystack) {
-                //Make sure $needle is an array for foreach
-                if (!is_array($needle)) {
-                    $needle = array($needle);
-                }
-                //For each value in $needle, return TRUE if in $haystack
-                foreach ($needle as $pin)
-                //echo 'needle' . $pin;
-                    if (in_array($pin, $haystack)) {
-                        return true;
-                    }
-                //Return FALSE if none of the values from $needle are found in $haystack
-                return false;
-            }
-
-        }
-        
         // No errors please
         // Set field values
         $defaults = array(
-            'units'             => '',
-            'mode'              => 'padding',
-            'top'               => true,
-            'bottom'            => true,
-            'all'               => false,
-            'left'              => true,
-            'right'             => true,
-            'units_extended'    => false,
-            'display_units'     => true
+            'units' => '',
+            'mode' => 'padding',
+            'top' => true,
+            'bottom' => true,
+            'all' => false,
+            'left' => true,
+            'right' => true,
+            'units_extended' => false,
+            'display_units' => true
         );
-        
+
         $this->field = wp_parse_args($this->field, $defaults);
 
         // Set default values
         $defaults = array(
-            'top'       => '',
-            'right'     => '',
-            'bottom'    => '',
-            'left'      => '',
-            'units'     => 'px'
+            'top' => '',
+            'right' => '',
+            'bottom' => '',
+            'left' => '',
+            'units' => 'px'
         );
 
-        $this->value = wp_parse_args($this->value, $defaults);        
-        
+        $this->value = wp_parse_args($this->value, $defaults);
+
         /*
          * Acceptable values checks.  If the passed variable doesn't pass muster, we unset them
          * and reset them with default values to avoid errors.
          */
-        
+
         // If units field has a value but is not an acceptable value, unset the variable
-        if (isset($this->field['units']) && !array_in_array($this->field['units'], array('', false, '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px'))) {
+        if (isset($this->field['units']) && !Redux_Helpers::array_in_array($this->field['units'], array('', false, '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px'))) {
             unset($this->field['units']);
         }
 
         //if there is a default unit value  but is not an accepted value, unset the variable
-        if (isset($this->value['units']) && !array_in_array($this->value['units'], array('', '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px'))) {
+        if (isset($this->value['units']) && !Redux_Helpers::array_in_array($this->value['units'], array('', '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px'))) {
             unset($this->value['units']);
         }
 
@@ -112,35 +91,35 @@ class ReduxFramework_spacing {
         }
 
         $value = array(
-            'top'       => isset($this->value[$this->field['mode'] . '-top']) ?     filter_var($this->value[$this->field['mode'] . '-top'],     FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'right'     => isset($this->value[$this->field['mode'] . '-right']) ?   filter_var($this->value[$this->field['mode'] . '-right'],   FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'bottom'    => isset($this->value[$this->field['mode'] . '-bottom']) ?  filter_var($this->value[$this->field['mode'] . '-bottom'],  FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'left'      => isset($this->value[$this->field['mode'] . '-left']) ?    filter_var($this->value[$this->field['mode'] . '-left'],    FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION)
+            'top' => isset($this->value[$this->field['mode'] . '-top']) ? filter_var($this->value[$this->field['mode'] . '-top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'right' => isset($this->value[$this->field['mode'] . '-right']) ? filter_var($this->value[$this->field['mode'] . '-right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'bottom' => isset($this->value[$this->field['mode'] . '-bottom']) ? filter_var($this->value[$this->field['mode'] . '-bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'left' => isset($this->value[$this->field['mode'] . '-left']) ? filter_var($this->value[$this->field['mode'] . '-left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION)
         );
 
         // if field units has a value and is NOT an array, then evaluate as needed.
         if (isset($this->field['units']) && !is_array($this->field['units'])) {
-            
+
             //if units fields has a value and is not empty but units value does not then make units value the field value
-            if (isset($this->field['units']) && $this->field['units'] != "" && !isset($this->value['units']) || $this->field['units'] == false ) {
+            if (isset($this->field['units']) && $this->field['units'] != "" && !isset($this->value['units']) || $this->field['units'] == false) {
                 $this->value['units'] = $this->field['units'];
-                
-            // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
+
+                // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
             } else if (!isset($this->field['units']) && !isset($this->value['units'])) {
                 $this->field['units'] = 'px';
-                $this->value['units'] = 'px';            
-                
-            // If units field has NO value but units value does, then set unit field to value field
+                $this->value['units'] = 'px';
+
+                // If units field has NO value but units value does, then set unit field to value field
             } else if (!isset($this->field['units']) && isset($this->value['units'])) { // If Value is defined            
                 $this->field['units'] = $this->value['units'];
-                
-            // if unit value is set and unit value doesn't equal unit field (coz who knows why)
-            // then set unit value to unit field                
+
+                // if unit value is set and unit value doesn't equal unit field (coz who knows why)
+                // then set unit value to unit field                
             } elseif (isset($this->value['units']) && $this->value['units'] !== $this->field['units']) {
                 $this->value['units'] = $this->field['units'];
             }
-            
-        // do stuff based on unit field NOT set as an array
+
+            // do stuff based on unit field NOT set as an array
         } elseif (isset($this->field['units']) && is_array($this->field['units'])) {
             // nothing to do here, but I'm leaving the construct just in case I have to debug this again.
         }
@@ -157,11 +136,11 @@ class ReduxFramework_spacing {
 
 
         $defaults = array(
-            'top'       => '',
-            'right'     => '',
-            'bottom'    => '',
-            'left'      => '',
-            'units'     => ''
+            'top' => '',
+            'right' => '',
+            'bottom' => '',
+            'left' => '',
+            'units' => ''
         );
 
         $this->value = wp_parse_args($this->value, $defaults);
@@ -222,7 +201,7 @@ class ReduxFramework_spacing {
         /**
           Units
          * */
-        if ($this->field['units'] !== false && is_array( $this->field['units'] ) && !isset($absolute) && $this->field['display_units'] == true):
+        if ($this->field['units'] !== false && is_array($this->field['units']) && !isset($absolute) && $this->field['display_units'] == true):
 
             echo '<div class="select_wrapper spacing-units" original-title="' . __('Units', 'redux-framework') . '">';
             echo '<select data-placeholder="' . __('Units', 'redux-framework') . '" class="redux-spacing redux-spacing-units select' . $this->field['class'] . '" original-title="' . __('Units', 'redux-framework') . '" name="' . $this->field['name'] . '[units]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '_units">';
@@ -232,7 +211,7 @@ class ReduxFramework_spacing {
             } else {
                 $testUnits = array('px', 'em', 'pt', 'rem', '%');
             }
-            
+
             if ($this->field['units'] != "" || is_array($this->field['units'])) {
                 //$testUnits = array($this->field['units']);
                 $testUnits = $this->field['units'];
@@ -251,84 +230,76 @@ class ReduxFramework_spacing {
 
         endif;
     }
-	
-	
-	/**
-	 * Enqueue Function.
-	 *
-	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
-	 *
-	 * @since ReduxFramework 1.0.0
-	*/
-	function enqueue(){
 
-		wp_enqueue_script(
-			'redux-field-spacing-js', 
-			ReduxFramework::$_url.'inc/fields/spacing/field_spacing.js', 
-			array('jquery'),
-			time(),
-			true
-		);
+    /**
+     * Enqueue Function.
+     *
+     * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+     *
+     * @since ReduxFramework 1.0.0
+     */
+    function enqueue() {
 
-		wp_enqueue_style(
-			'redux-field-spacing-css', 
-			ReduxFramework::$_url.'inc/fields/spacing/field_spacing.css', 
-			time(),
-			true
-		);	
-			
-		
-	}//function
+        wp_enqueue_script(
+                'redux-field-spacing-js', ReduxFramework::$_url . 'inc/fields/spacing/field_spacing.js', array('jquery'), time(), true
+        );
+
+        wp_enqueue_style(
+                'redux-field-spacing-css', ReduxFramework::$_url . 'inc/fields/spacing/field_spacing.css', time(), true
+        );
+    }
+
+//function
 
     public function output() {
 
-        if ( !isset( $this->field['mode'] ) ) {
-        	$this->field['mode'] = "padding";
+        if (!isset($this->field['mode'])) {
+            $this->field['mode'] = "padding";
         }
 
-    	if ( isset( $this->field['mode'] ) && !in_array( $this->field['mode'], array( 'padding', 'absolute', 'margin') ) ) {
-    		$this->field['mode'] = "";
-    	}
+        if (isset($this->field['mode']) && !in_array($this->field['mode'], array('padding', 'absolute', 'margin'))) {
+            $this->field['mode'] = "";
+        }
 
-    	$mode = ( $this->field['mode'] != "absolute" ) ? $this->field['mode'] : "";
-    	$units = isset( $this->value['units'] ) ? $this->value['units'] : "";
-    	
+        $mode = ( $this->field['mode'] != "absolute" ) ? $this->field['mode'] : "";
+        $units = isset($this->value['units']) ? $this->value['units'] : "";
+
         $style = '';
 
-        if ( !empty( $mode ) ) {
-			foreach($this->value as $key=>$value) {
-            	if ($key == "units") {
-            		continue;
-            	}
-            	if (empty($value)) {
-            		$value = 0;
-            	}
-                $style .= $key.':'.$value.';';
-            }            	
+        if (!empty($mode)) {
+            foreach ($this->value as $key => $value) {
+                if ($key == "units") {
+                    continue;
+                }
+                if (empty($value)) {
+                    $value = 0;
+                }
+                $style .= $key . ':' . $value . ';';
+            }
         } else {
-			$cleanValue = array(
-				'top' => isset( $this->value[$mode.'-top'] ) ? filter_var($this->value[$mode.'-top'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_INT),
-				'right' => isset( $this->value[$mode.'-right'] ) ? filter_var($this->value[$mode.'-right'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_INT),
-				'bottom' => isset( $this->value[$mode.'-bottom'] ) ? filter_var($this->value[$mode.'-bottom'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_INT),
-				'left' => isset( $this->value[$mode.'-left'] ) ? filter_var($this->value[$mode.'-left'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_INT)
-			);	            	
-        	$style .= $mode.':'.$cleanValue['top'].$units.';';
+            $cleanValue = array(
+                'top' => isset($this->value[$mode . '-top']) ? filter_var($this->value[$mode . '-top'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_INT),
+                'right' => isset($this->value[$mode . '-right']) ? filter_var($this->value[$mode . '-right'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_INT),
+                'bottom' => isset($this->value[$mode . '-bottom']) ? filter_var($this->value[$mode . '-bottom'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_INT),
+                'left' => isset($this->value[$mode . '-left']) ? filter_var($this->value[$mode . '-left'], FILTER_SANITIZE_NUMBER_INT) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_INT)
+            );
+            $style .= $mode . ':' . $cleanValue['top'] . $units . ';';
         }
-            
-        if ( !empty($style ) ) {
-            
-            if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+
+        if (!empty($style)) {
+
+            if (!empty($this->field['output']) && is_array($this->field['output'])) {
                 $keys = implode(",", $this->field['output']);
                 $this->parent->outputCSS .= $keys . "{" . $style . '}';
             }
 
-            if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+            if (!empty($this->field['compiler']) && is_array($this->field['compiler'])) {
                 $keys = implode(",", $this->field['compiler']);
                 $this->parent->compilerCSS .= $keys . "{" . $style . '}';
-            }   
-
+            }
         }
-        
-    }	
-	
-}//class
+    }
+
+}
+
+//class
