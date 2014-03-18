@@ -472,7 +472,7 @@ class ReduxFramework_typography {
         $subsets = array();
         foreach ($fonts as $family => $font) {
             if (!empty($link)) {
-                $link.= "|"; // Append a new font to the string
+                $link.= "%7C"; // Append a new font to the string
                 
                 
             }
