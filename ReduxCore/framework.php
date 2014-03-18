@@ -132,6 +132,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     ),
                 ),
             ),
+            'fields_exclude_titles' => array( 'info' , 'group' , 'section'),
 
             'show_import_export' => true,
             'dev_mode'           => false,
