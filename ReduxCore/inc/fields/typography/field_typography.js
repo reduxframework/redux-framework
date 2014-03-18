@@ -144,7 +144,7 @@ jQuery(document).ready(function($) {
                 if (script) {
                     link += '&subset=' + script;
                 }
-                
+
                 if (WebFont) {
                     WebFont.load({google: {families: [link]}});
                 }
@@ -210,7 +210,7 @@ jQuery(document).ready(function($) {
         if (align) {
             $('#' + mainID + ' .typography-preview').css('text-align', align);
         }
-        
+
         if (transform) {
             $('#' + mainID + ' .typography-preview').css('text-transform', transform);
         }
@@ -240,12 +240,12 @@ jQuery(document).ready(function($) {
             typographySelect(jQuery(this));
         }
     });
-    
+
     jQuery(".redux-typography-size").numeric({
         allowMinus: false,
     });
-    
-    jQuery(".redux-typography-height .redux-typography-word, .redux-typography-letter").numeric({
+
+    jQuery(".redux-typography-height, .redux-typography-word, .redux-typography-letter").numeric({
         allowMinus: true,
     });
     //jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
@@ -253,5 +253,20 @@ jQuery(document).ready(function($) {
         width: 'resolve',
         triggerChange: true,
         allowClear: true
+    });
+
+    jQuery('.redux-typography-qtip').each(function() {
+        $(this).qtip({
+//            text: function(event, api) {
+//                return $(this).attr('qtip-content');
+//            },
+            //text: 'Me',
+            style: 'qtip-tipsy black',
+            position: {
+                my: 'bottom center', // Position my top left...
+                at: 'top center', // at the bottom right of...
+            }
+
+        });
     });
 });

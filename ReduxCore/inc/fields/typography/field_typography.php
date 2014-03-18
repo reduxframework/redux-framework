@@ -252,6 +252,7 @@ class ReduxFramework_typography {
         
         // Open style bar div
         echo '<div class="typography-style-bar">';
+        
         /**
          Font Style/Weight
          *
@@ -284,6 +285,7 @@ class ReduxFramework_typography {
             
             echo '</select></div>';
         endif;
+        
         /**
          Font Script
          *
@@ -361,7 +363,7 @@ class ReduxFramework_typography {
          *
          */
         if ($this->field['font-size'] === true):
-            echo '<div class="input-append"><input type="text" class="span2 redux-typography-size mini' . $this->field['class'] . ' tips" title="' . __('Size', 'redux-framework') . '" placeholder="' . __('Size', 'redux-framework') . '" id="' . $this->field['id'] . '-size" name="' . $this->field['name'] . '[font-size]' . $this->field['name_suffix'] . '" value="' . str_replace($unit, '', $this->value['font-size']) . '" data-value="' . str_replace($unit, '', $this->value['font-size']) . '"><span class="add-on">' . $unit . '</span></div>';
+            echo '<div class="input-append"><input type="text" qtip-tip="Size" class="span2 redux-typography-size mini' . $this->field['class'] . ' redux-typography-qtip" title="' . __('Size', 'redux-framework') . '" placeholder="' . __('Size', 'redux-framework') . '" id="' . $this->field['id'] . '-size" name="' . $this->field['name'] . '[font-size]' . $this->field['name_suffix'] . '" value="' . str_replace($unit, '', $this->value['font-size']) . '" data-value="' . str_replace($unit, '', $this->value['font-size']) . '"><span class="add-on">' . $unit . '</span></div>';
             echo '<input type="hidden" class="typography-font-size" name="' . $this->field['name'] . '[font-size]" value="' . $this->value['font-size'] . '" data-id="' . $this->field['id'] . '"  />';
         endif;
         /**
@@ -369,7 +371,7 @@ class ReduxFramework_typography {
          *
          */
         if ($this->field['line-height'] === true):
-            echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-height mini' . $this->field['class'] . ' tips" title="' . __('Height', 'redux-framework') . '" placeholder="' . __('Height', 'redux-framework') . '" id="' . $this->field['id'] . '-height" value="' . str_replace($unit, '', $this->value['line-height']) . '" data-value="' . str_replace($unit, '', $this->value['line-height']) . '"><span class="add-on">' . $unit . '</span></div>';
+            echo '<div class="input-append"><input type="text" qtip-tip="Height" class="span2 redux-typography redux-typography-height mini' . $this->field['class'] . ' redux-typography-qtip" title="' . __('Height', 'redux-framework') . '" placeholder="' . __('Height', 'redux-framework') . '" id="' . $this->field['id'] . '-height" value="' . str_replace($unit, '', $this->value['line-height']) . '" data-value="' . str_replace($unit, '', $this->value['line-height']) . '"><span class="add-on">' . $unit . '</span></div>';
             echo '<input type="hidden" class="typography-line-height" name="' . $this->field['name'] . '[line-height]' . $this->field['name_suffix'] . '" value="' . $this->value['line-height'] . '" data-id="' . $this->field['id'] . '"  />';
         endif;
         /**
@@ -377,7 +379,7 @@ class ReduxFramework_typography {
          *
          */
         if ($this->field['word-spacing'] === true):
-            echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-word mini' . $this->field['class'] . '" placeholder="' . __('Word Spacing', 'redux-framework') . '" id="' . $this->field['id'] . '-word" value="' . str_replace($unit, '', $this->value['word-spacing']) . '" data-value="' . str_replace($unit, '', $this->value['word-spacing']) . '"><span class="add-on">' . $unit . '</span></div>';
+            echo '<div class="input-append"><input type="text" qtip-tip="Word Spacing" class="span2 redux-typography redux-typography-qtip redux-typography-word mini' . $this->field['class'] . '" placeholder="' . __('Word Spacing', 'redux-framework') . '" id="' . $this->field['id'] . '-word" value="' . str_replace($unit, '', $this->value['word-spacing']) . '" data-value="' . str_replace($unit, '', $this->value['word-spacing']) . '"><span class="add-on">' . $unit . '</span></div>';
             echo '<input type="hidden" class="typography-word-spacing" name="' . $this->field['name'] . '[word-spacing]' . $this->field['name_suffix'] . '" value="' . $this->value['word-spacing'] . '" data-id="' . $this->field['id'] . '"  />';
         endif;
         
@@ -386,7 +388,7 @@ class ReduxFramework_typography {
          *
          */
         if ($this->field['letter-spacing'] === true):
-            echo '<div class="input-append"><input type="text" class="span2 redux-typography redux-typography-letter mini' . $this->field['class'] . '" placeholder="' . __('Letter Spacing', 'redux-framework') . '" id="' . $this->field['id'] . '-letter" value="' . str_replace($unit, '', $this->value['letter-spacing']) . '" data-value="' . str_replace($unit, '', $this->value['letter-spacing']) . '"><span class="add-on">' . $unit . '</span></div>';
+            echo '<div class="input-append"><input type="text" qtip-tip="Letter Spacing" class="span2 redux-typography-qtip redux-typography redux-typography-letter mini' . $this->field['class'] . '" placeholder="' . __('Letter Spacing', 'redux-framework') . '" id="' . $this->field['id'] . '-letter" value="' . str_replace($unit, '', $this->value['letter-spacing']) . '" data-value="' . str_replace($unit, '', $this->value['letter-spacing']) . '"><span class="add-on">' . $unit . '</span></div>';
             echo '<input type="hidden" class="typography-letter-spacing" name="' . $this->field['name'] . '[letter-spacing]' . $this->field['name_suffix'] . '" value="' . $this->value['letter-spacing'] . '" data-id="' . $this->field['id'] . '"  />';
         endif;
         
