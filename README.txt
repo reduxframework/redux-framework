@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
 Tested up to: 3.8.1
-Stable tag: 3.1.8
+Stable tag: 3.1.9
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,6 +50,7 @@ It is hard to continue development and support for this free plugin without cont
 * Gallery (WordPress Native)
 * Image Select (Patterns/Presets)
 * Info (Header)
+* Import/Export
 * Link Color
 * Media (WordPress Native)
 * Multi-Text
@@ -144,6 +145,51 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.1.9 =
+* Fixed:      Typography custom preview text/size not outputting.
+* Fixed:      No font selected in typography would default to 'inherit'.
+* Fixed:      Hint feature kicking back a notice if no title was specified.
+* Fixed:      Sortable field, when used a checkboxes, were all checked by default, even when set not to be.
+* Fixed:      button_set field not setting properly in multi mode.
+* Fixed:      Javascript console object not printing options object.
+* Fixed:      Load errors from child themes no longer occur.
+* Fixed:      Compiler output for slider field.
+* Fixed:      update_check produced a fatal error on a local install with no internet connection.
+* Fixed:      Compiler hook failing on slider.
+* Fixed:      Error on update_check when the response code was something other than 200.
+* Fixed:      image_select images not resizing properly in FF and IE.
+* Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is as follows:
+* Fixed:      link_color field showing notice on default, if user enters no defaults.
+* Fixed:      Fixed tab notice in framework.php if no tab parameter is set in URL.
+* Fixed:      Hide demo hook wasn't hiding demo links.
+* Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is available on in dev_mode, and may be turned off by setting the `update_notice` argument to false.  See the Arguments page of the wiki for more details.
+* Added:      text-transform option for the typography field.
+* Added:      Newsletter sign-up popup at first load of the Redux options panel.
+* Added:      Added PHP 5.2 support for import/export.
+* Added:      Action hooks for options reset and options reset section.
+* Added:      Theme responsive for date picker.
+* Added:      New slider.  Better looking UI, double handles and support for floating point values.  See the wiki for more info.
+* Added:      Typography improvements.
+* Added:      Hints!  More info:  https://github.com/ReduxFramework/ReduxFramework/wiki/Using-Hints-in-Fields
+* Added:      Complete Wordpress admin color styles. Blessed LESS/SCSS mixins.  ;)
+* Added:      Font family not required for the typography module any longer.
+* Added:      Support for using the divide field in folding.
+* Added:      Error trapping in typography.js for those still attempting to use typography with no font-family.
+* Added:      Full asynchronous font loading.
+* Added:      email_not_empty validation field.
+* Modified:   Typography word and letter spacing now accept negative values.
+* Modified:   Typography preview shows spaces between upper and lower case groupings.
+* Modified:   Google font CSS moved to header so pages will pass HTML5 validation.
+* Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
+* Modified:   RGBA Field stability.  Thank you, SilverKenn.
+* Modified:   Separated Import/Export from the core.  It can now be used as a field.
+
+              [family-font] [backup-font]
+              [style] [script] [align] [transform]
+              [size] [height] [word space] [letter space]
+              [color]
+* Reverted:   email validation field only checks for valid email.  not_empty check moved to new validation field.
 
 = 3.1.8 =
 * Fixed:    Improper enqueue in tracking class.

@@ -60,42 +60,56 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @since ReduxFramework 3.0.4
          * @author @mekshq, http://mekshq.com/how-to-convert-hexadecimal-color-code-to-rgb-or-rgba-using-php/
         */
-        public static function hex2rgba($color, $opacity = false) {
-
-            $default = 'rgb(0,0,0)';
-
-            //Return default if no color provided
-            if(empty($color))
-                  return $default; 
-
-            //Sanitize $color if "#" is provided 
-                if ($color[0] == '#' ) {
-                    $color = substr( $color, 1 );
-                }
-
-                //Check if color has 6 or 3 characters and get values
-                if (strlen($color) == 6) {
-                        $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
-                } elseif ( strlen( $color ) == 3 ) {
-                        $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
-                } else {
-                        return $default;
-                }
-
-                //Convert hexadec to rgb
-                $rgb =  array_map('hexdec', $hex);
-
-                //Check if opacity is set(rgba or rgb)
-                if($opacity){
-                    if(abs($opacity) > 1)
-                        $opacity = 1.0;
-                    $output = 'rgba('.implode(",",$rgb).','.$opacity.')';
-                } else {
-                    $output = 'rgb('.implode(",",$rgb).')';
-                }
-
-                //Return rgb(a) color string
-                return $output;
-        }
+//        public static function hex2rgba($color, $opacity = false) {
+//
+//            $default = 'rgb(0,0,0)';
+//
+//            //Return default if no color provided
+//            if(empty($color))
+//                  return $default; 
+//
+//            //Sanitize $color if "#" is provided 
+//                if ($color[0] == '#' ) {
+//                    $color = substr( $color, 1 );
+//                }
+//
+//                //Check if color has 6 or 3 characters and get values
+//                if (strlen($color) == 6) {
+//                        $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+//                } elseif ( strlen( $color ) == 3 ) {
+//                        $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+//                } else {
+//                        return $default;
+//                }
+//
+//                //Convert hexadec to rgb
+//                $rgb =  array_map('hexdec', $hex);
+//
+//                //Check if opacity is set(rgba or rgb)
+//                if($opacity){
+//                    if(abs($opacity) > 1)
+//                        $opacity = 1.0;
+//                    $output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+//                } else {
+//                    $output = 'rgb('.implode(",",$rgb).')';
+//                }
+//
+//                //Return rgb(a) color string
+//                return $output;
+//        }
+        public static function hex2rgba($hex) {
+            $hex = str_replace("#", "", $hex);
+            if(strlen($hex) == 3) {
+                $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+                $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+                $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+            } else {
+                $r = hexdec(substr($hex,0,2));
+                $g = hexdec(substr($hex,2,2));
+                $b = hexdec(substr($hex,4,2));
+            }
+            $rgb = $r.','.$g.','.$b; 
+            return $rgb;
+        }        
     }
 }
