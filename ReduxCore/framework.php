@@ -229,6 +229,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         array_push($this->sections, $tab);
                     }
                 }
+                
+                $this -> args[ 'fields_exclude_titles' ] = array_combine( $this -> args[ 'fields_exclude_titles' ] , $this -> args[ 'fields_exclude_titles' ]  );
 
                 // Move to the first loop area!
                 /**
@@ -1756,7 +1758,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $hint = '';
             $th = "";
 
-            if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
+            if( isset( $field['title'] ) && isset( $field['type'] ) && !isset( $this -> args[ 'fields_exclude_titles' ] ) 
+) {
                 $default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
 
                 // If a hint is specified in the field, process it.
@@ -1806,7 +1809,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $th = '<div class="redux_field_th">' . $th . '</div>';
             }
 
-            if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
+            if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset($this->options[$field['id']]) && $this->options[$field['id']] != $field['default'] && !isset( $this -> args[ 'fields_exclude_titles' ] ) && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
                 $th .= $this->get_default_output_string($field);
             }
 
@@ -2914,7 +2917,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $field['description'] = $field['desc'];
                         }
 
-                    echo ( isset( $field['description'] ) && $field['type'] != "info"  && $field['type'] !== "section" && $field['type'] != "group" && !empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
+                    echo ( isset( $field['description'] ) && !isset( $this -> args[ 'fields_exclude_titles' ] ) && !empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
 
                     if (!isset($field['fields']) || empty($field['fields'])) {
                         echo '</fieldset>';
