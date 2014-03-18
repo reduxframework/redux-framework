@@ -69,147 +69,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath(get_stylesheet_directory()) ) !== false) {
                 self::$_is_plugin = false;
             }
-
-/**
-        Still need to port these.
-
-            $defaults['footer_credit']      = '<span id="footer-thankyou">' . __( 'Options panel created using', 'redux-framework') . ' <a href="' . $this->framework_url . '" target="_blank">' . __('Redux Framework', 'redux-framework') . '</a> v' . self::$_version . '</span>';
-            $defaults['help_tabs']          = array();
-            $defaults['help_sidebar']       = ''; // __( '', 'redux-framework' );
-            $defaults['database']           = ''; // possible: options, theme_mods, theme_mods_expanded, transient
-            $defaults['customizer']         = false; // setting to true forces get_theme_mod_expanded
-            $defaults['global_variable']    = '';
-            $defaults['output']             = true; // Dynamically generate CSS
-            $defaults['transient_time']     = 60 * MINUTE_IN_SECONDS;
-
-            // The defaults are set so it will preserve the old behavior.
-            $defaults['default_show']       = false; // If true, it shows the default value
-            $defaults['default_mark']       = ''; // What to print by the field's title if the value shown is default
-**/
-
-            self::$_properties = array(
-                'args' => array(
-                    'opt_name' => array(
-                            'required',
-                            'data_type'=>'string',
-                            'label'=>'Option Name',
-                            'desc'=>'Must be defined by theme/plugin. Is the unique key allowing multiple instance of Redux within a single Wordpress instance.',
-                            'default'=>''
-                        ),
-                    'google_api_key' => array(
-                            'data_type'=>'string',
-                            'label'=>'Google Web Fonts API Key',
-                            'desc'=>'Key used to request Google Webfonts. Google fonts are omitted without this.',
-                            'default'=>''
-                        ),
-                    'last_tab' => array( // Do we need this?
-                            'data_type'=>'string',
-                            'label'=>'Last Tab',
-                            'desc'=>'Last tab used.',
-                            'default'=>'0'
-                        ),
-                    'menu_icon' => array(
-                            'data_type'=>'string',
-                            'label'=>'Default Menu Icon',
-                            'desc'=>'Default menu icon used by sections when one is not specified.',
-                            'default'=> self::$_url . 'assets/img/menu_icon.png'
-                        ),
-
-                    'menu_title' => array(
-                            'data_type'=>'string',
-                            'label'=>'Menu Title',
-                            'desc'=>'Label displayed when the admin menu is available.',
-                            'default'=> __( 'Options', 'redux-framework' )
-                        ),
-                    'page_title' => array(
-                            'data_type'=>'string',
-                            'label'=>'Page Title',
-                            'desc'=>'Title used on the panel page.',
-                            'default'=> __( 'Options', 'redux-framework' )
-                        ),
-                   'page_icon' => array(
-                            'data_type'=>'string',
-                            'label'=>'Page Title',
-                            'desc'=>'Icon class to be used on the options page.',
-                            'default'=> 'icon-themes'
-                        ),
-                   'page_slug' => array(
-                            'required',
-                            'data_type'=>'string',
-                            'label'=>'Page Slug',
-                            'desc'=>'Slug used to access options panel.',
-                            'default'=> '_options'
-                        ),
-                   'page_permissions' => array(
-                            'required',
-                            'data_type'=>'string',
-                            'label'=>'Page Capabilities',
-                            'desc'=>'Permissions needed to access the options panel.',
-                            'default'=> 'manage_options'
-                        ),
-                    'menu_type' => array(
-                        'required',
-                        'data_type' => 'varchar',
-                        'label' => 'Page Type',
-                        'desc' => 'Specify if the admin menu should appear or not.',
-                        'default' => 'menu',
-                        'form' => array('type' => 'select', 'options' => array('menu' => 'Admin Menu', 'submenu' => 'Submenu Only')),
-                        'validation' => array('required'),
-                    ),
-                    'page_parent' => array(
-                        'required',
-                        'data_type' => 'varchar',
-                        'label' => 'Page Parent',
-                        'desc' => 'Specify if the admin menu should appear or not.',
-                        'default' => 'themes.php',
-                        'form' => array('type' => 'select', 'options' => array('index.php' => 'Dashboard', 'edit.php' => 'Posts', 'upload.php' => 'Media', 'link-manager.php' => 'Links', 'edit.php?post_type=page' => 'pages', 'edit-comments.php' => 'Comments', 'themes.php' => 'Appearance', 'plugins.php' => 'Plugins', 'users.php' => 'Users', 'tools.php' => 'Tools', 'options-general.php' => 'Settings', )),
-                        'validation' => array('required'),
-                    ),
-                   'page_priority' => array(
-                            'type'=>'int',
-                            'label'=>'Page Position',
-                            'desc'=>'Location where this menu item will appear in the admin menu. Warning, beware of overrides.',
-                            'default'=> null
-                        ),
-                    'output' => array(
-                            'required',
-                            'data_type'=>'bool',
-                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
-                            'label'=>'Output/Generate CSS',
-                            'desc'=>'Global shut-off for dynamic CSS output by the framework',
-                            'default'=>true
-                        ),
-                    'allow_sub_menu' => array(
-                            'data_type'=>'bool',
-                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
-                            'label'=>'Allow Submenu',
-                            'desc'=>'Turn on or off the submenu that will typically be shown under Appearance.',
-                            'default'=>true
-                        ),
-                    'show_import_export' => array(
-                            'data_type'=>'bool',
-                            'form' => array('type' => 'radio', 'options' => array(true => 'Show', false => 'Hide')),
-                            'label'=>'Show Import/Export',
-                            'desc'=>'Show/Hide the import/export tab.',
-                            'default'=>true
-                        ),
-                    'dev_mode' => array(
-                            'data_type'=>'bool',
-                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
-                            'label'=>'Developer Mode',
-                            'desc'=>'Turn on or off the dev mode tab.',
-                            'default'=>false
-                        ),
-                    'system_info' => array(
-                            'data_type'=>'bool',
-                            'form' => array('type' => 'radio', 'options' => array(true => 'Enabled', false => 'Disabled')),
-                            'label'=>'System Info',
-                            'desc'=>'Turn on or off the system info tab.',
-                            'default'=>false
-                        ),
-                ),
-            );
-
         }// ::init()
 
         public $framework_url       = 'http://www.reduxframework.com/';
@@ -301,6 +160,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $toHide              = array(); // Values to hide on page load
         public $typography          = null; //values to generate google font CSS
         public $import_export       = null;
+        public $debug               = null;
         private $show_hints         = false;
         
         /**
@@ -422,6 +282,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Display admin notices in dev_mode
                 if (true == $this->args['dev_mode']) {
+                    include_once(self::$_dir . 'inc/debug.php');
+                    $this->debug = new ReduxDebugObject($this);
+                    
                     if (true == $this->args['update_notice']) {
                         add_action( 'admin_init', array( $this, '_update_check' ) );
                     }
@@ -449,7 +312,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 
                 include_once(self::$_dir . 'inc/import_export.php');
                 $this->import_export = new Redux_import_export($this);
-                
             }
 
 
@@ -1222,14 +1084,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
 
                     if( true === $this->args['dev_mode'] ) {
-                        add_submenu_page(
-                            $this->args['page_slug'],
-                            __( 'Options Object', 'redux-framework' ),
-                            __( 'Options Object', 'redux-framework' ),
-                            $this->args['page_permissions'],
-                            $this->args['page_slug'] . '&tab=dev_mode_default',
-                            '__return_null'
-                        );
+                        $this->debug->add_submenu();
                     }
 
                     if( true === $this->args['system_info'] ) {
@@ -1496,18 +1351,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 wp_enqueue_style( 'redux-rtl-css' );
             }
 
-            if ( $this->args['dev_mode'] === true) { // Pretty object output
-                /*
-                wp_enqueue_script(
-                    'json-view-js',
-                    self::$_url . 'assets/js/vendor/jsonview.min.js',
-                    array( 'jquery' ),
-                    time(),
-                    true
-                );
-                */
-            }
-
             wp_enqueue_script('jquery');
             wp_enqueue_script('jquery-ui-core');
             wp_enqueue_script('jquery-ui-sortable');
@@ -1627,7 +1470,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     	// Checking for extension field AND dev_mode = false OR dev_mode = true
                                     	// Since extension fields use 'extension_dir' exclusively, we can detect them here.
                                     	// Also checking for dev_mode = true doesn't mess up the JS combinine.
-					                    if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
+					if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
                                             /** @noinspection PhpUndefinedMethodInspection */
                                             $theField->enqueue();
                                         }
@@ -2726,18 +2569,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $this->import_export->render_tab();
             }
 
+            // Debug tab
             if( $this->args['dev_mode'] === true ) {
-                echo '<li id="dev_mode_default_section_group_li" class="redux-group-tab-link-li">';
-
-                if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                    $icon = ( !isset( $this->args['dev_mode_icon'] ) ) ? '' : '<img src="' . $this->args['dev_mode_icon'] . '" /> ';
-                } else {
-                    $icon_class = ( !isset( $this->args['dev_mode_icon_class'] ) ) ? '' : ' ' . $this->args['dev_mode_icon_class'];
-                    $icon = ( !isset( $this->args['dev_mode_icon'] ) ) ? '<i class="el-icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['dev_mode_icon'] . $icon_class . '"></i> ';
-                }
-
-                echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span class="group_title">' . __( 'Options Object', 'redux-framework' ) . '</span></a>';
-                echo '</li>';
+                $this->debug->render_tab();
             }
 
             if( $this->args['system_info'] === true ) {
@@ -2784,31 +2618,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 echo '</div>';
             }
 
+            // Import / Export output
             if( true == $this->args['show_import_export'] && false == $this->import_export->is_field ) {
                 $this->import_export->enqueue();
                 $this->import_export->render();
                 
             }
 
+            // Debug object output
             if( $this->args['dev_mode'] === true ) {
-                echo '<div id="dev_mode_default_section_group' . '" class="redux-group-tab">';
-                echo '<h3>' . __( 'Options Object', 'redux-framework' ) . '</h3>';
-                echo '<div class="redux-section-desc">';
-                echo '<div id="redux-object-browser"></div>';
-                echo '</div>';
-
-                if (version_compare(phpversion(), "5.3.0", ">=")) {
-                    $json = json_encode( $this->options, true ) ;
-                } else {
-                    $json = json_encode( $this->options );
-                }
-
-                echo '<div id="redux-object-json" class="hide">' . $json . '</div>';
-
-                echo '<a href="#" id="consolePrintObject" class="button">' . __( 'Show Object in Javascript Console Object', 'redux-framework' ) . '</a>';
-                // END Javascript object debug
-
-                echo '</div>';
+                $this->debug->render();
             }
 
             if( $this->args['system_info'] === true ) {
