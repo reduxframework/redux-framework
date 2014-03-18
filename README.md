@@ -1,12 +1,12 @@
-# The Redux Framework Webinar was a SMASHING success!
-A **huge** thank you to everyone who showed up to support us in our first Redux Framework webinar.  It was a pleasure to meet and interact with all of you.  For those who missed it - or were unable to attend -  a video of the event is here: http://youtu.be/ymMpeBaaLXI.  Stay tuned for details on our next webinar, coming in March of 2014!  - Dovy, Dan, and Kevin
-
+# [docs.reduxframework.com](http://docs.reduxframework.com)
+Need a little help with Redux?  Come check out our brand new documentation site, chock full of tutorials and examples!
  
+
 --------
 
 
 
-## Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/redux-framework.png?branch=master)](https://travis-ci.org/ReduxFramework/ReduxFramework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+## Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/redux-framework.png?branch=master)](https://travis-ci.org/ReduxFramework/redux-framework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/redux-framework.png?label=ready)](https://waffle.io/ReduxFramework/redux-framework) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
 
