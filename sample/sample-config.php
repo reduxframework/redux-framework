@@ -1495,6 +1495,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'default_show'      => false,                   // If true, shows the default value next to each field that is not the default value.
                 'default_mark'      => '',                      // What to print by the field's title if the value shown is default. Suggested: *
                 'show_import_export' => true,                   // Shows the Import/Export panel when not used as a field.
+                'fields_exclude_titles' => array( 'info' , 'group' , 'section' ), // Excludes fields titles from displaying
                 
                 // CAREFUL -> These options are for advanced use only
                 'transient_time'    => 60 * MINUTE_IN_SECONDS,
