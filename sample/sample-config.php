@@ -233,21 +233,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 $sampleHTML = $wp_filesystem->get_contents(dirname(__FILE__) . '/info-html.html');
             }
 
-            $this->sections[] = array(
-                'title'     => __('Import / Export', 'redux-framework-demo'),
-                'desc'      => __('Import and Export your Redux Framework settings from file, text or URL.', 'redux-framework-demo'),
-                'icon'      => 'el-icon-refresh',
-                'fields'    => array(
-                    array(
-                        'id'            => 'opt-io',
-                        'type'          => 'import_export',
-                        'title'         => 'Import Export',
-                        'subtitle'      => 'Save and restore your Redux options',
-                        'full_width'    => false,
-                    ),
-                ),
-            );
-            
             // ACTUAL DECLARATION OF SECTIONS
             $this->sections[] = array(
                 'title'     => __('Home Settings', 'redux-framework-demo'),
@@ -1519,7 +1504,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 
                 // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
                 'database'              => '', // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-                'system_info'           => false, // REMOVE
+                'system_info'           => true, // REMOVE
 
                 // HINTS
                 'hints' => array(
