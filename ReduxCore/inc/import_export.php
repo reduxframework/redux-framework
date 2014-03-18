@@ -65,7 +65,7 @@ if( !class_exists( 'Redux_import_export' ) ) {
             $bDoClose   = false;
             
             if (false == $this->is_field) {
-                $c = 'redux-group-tab-link-li';
+                $c = 'redux-group-tab-link-li hide';
             } elseif (true == $this->is_field && false == $fullWidth)  {
                 echo '</td></tr></table><table class="form-table no-border redux-group-table redux-raw-table" style="margin-top: -20px;"><tbody><tr><td>';
                 $bDoClose = true;
