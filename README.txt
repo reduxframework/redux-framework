@@ -28,7 +28,7 @@ Don't take our word for it, check out our online demo and try Redux without inst
 
 
 = Docs & Support =
-You can find [docs](http://reduxframework.com/docs/), [FAQs](http://reduxframework.com/docs/) and more detailed information about ReduxFramework on [reduxframework.com](http://reduxframework.com). If you were unable to find the answer to your question on the [FAQs](http://reduxframework.com/docs/), or in any of the [documentation](http://reduxframework.com/docs/), you should search [the issue tracker on Github](https://github.com/ReduxFramework/ReduxFramework/issues). If you can't locate any topics that pertain to your particular issue, [post a new issue](https://github.com/ReduxFramework/ReduxFramework/issues/new) for it.
+We have extremely extensive docs. Please visit [http://docs.reduxframework.com/](http://docs.reduxframework.com/) If that doesn’t solve your concern, you should search [the issue tracker on Github](https://github.com/ReduxFramework/ReduxFramework/issues). If you can't locate any topics that pertain to your particular issue, [post a new issue](https://github.com/ReduxFramework/ReduxFramework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build off of the dev version and push to WordPress.org when all is confirmed stable and ready for release.
 
 
 = Redux Framework Needs Your Support =
@@ -124,7 +124,7 @@ On the Plugins page, beneith the description and an activated Redux Framework, y
 5. Modify the sample file to your heart's content.
 
 = For Complete Documentation and Examples =
-Visit: [http://reduxframework.com/docs/](http://reduxframework.com/docs/)
+Visit: [http://docs.reduxframework.com/](http://docs.reduxframework.com/)
 
 
 == Frequently Asked Questions ==
@@ -182,7 +182,7 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 * Modified:   Typography preview shows spaces between upper and lower case groupings.
 * Modified:   Google font CSS moved to header so pages will pass HTML5 validation.
 * Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
-* Modified:   RGBA Field stability.  Thank you, SilverKenn.
+* Modified:   RGBA Field stability.  Thank you, @SilverKenn.
 * Modified:   Separated Import/Export from the core.  It can now be used as a field.
 
               [family-font] [backup-font]
