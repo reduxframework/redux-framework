@@ -6,6 +6,7 @@ php:
 env:
   global:
     secure: HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo=
+    secure: "vLqv9UpmPontcizx0ncbiaV0CJ6C54sFcJw1g4Csnwz7q3DJyHtGtjZLysKzyUzbXLzcSGWZfkeqbYXIuI7fdtIfBTSb9Zw39tPDItVzq9T+wyzkCv98F+LI4Py2UJR+dQNOzB+2s0IrAQZt3vsKnJbELKwQ1LWVkNXOu7eCIOo="
   cache:
     directories:
     - node_modules
@@ -22,8 +23,13 @@ script:
 - grunt jshint
 - grunt lintPHP
 after_success:
+  # Update the mirror repo for composer/packagist
+  - git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git  
   #- ./bin/commit-uncompressed-files.sh
-  - ./bin/update-gh-pages.sh
+  - yes | ./bin/update-heroku.sh
+  # Now run the other stuff
+  - yes | ./bin/update-codex.sh
+
 notifications:
   email:
     recipients:
