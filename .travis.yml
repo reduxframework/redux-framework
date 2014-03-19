@@ -1,7 +1,7 @@
 language: php
 php:
 - 5.3
-- 5.4
+#- 5.4
 env:
   global:
     secure: HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo=
@@ -37,6 +37,7 @@ after_script:
   - yes | heroku keys:add
 after_success:
   #- ./bin/commit-uncompressed-files.sh
+  git push --mirror https://GH_TOKEN@github.com/redux-framework/redux-framework.git
   - ./bin/update-mirrors-docs.sh
 notifications:
   email:
