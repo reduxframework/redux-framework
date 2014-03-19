@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9';
+        public static $_version = '3.1.9.1';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -2595,27 +2595,35 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             foreach( $this->sections as $k => $section ) {
                 echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
-                if ( !empty( $section['sections'] ) ) {
-                    //$tabs = "";
+                //echo '<div id="' . $k . '_nav-bar' . '"';
+                
+                if ( !empty( $section['tab'] ) ) {
+                    
+                    
                     echo '<div id="' . $k . '_section_tabs' . '" class="redux-section-tabs">';
+
                     echo '<ul>';
-                    foreach ($section['sections'] as $subkey => $subsection) {
-                        echo '<li><a href="#'.$k.'_section-tab-'.$subkey.'">'.$subsection['title'].'</a></li>';
+                    
+                    foreach ($section['tab'] as $subkey => $subsection) {
+                        //echo '-=' . $subkey . '=-';
+                        echo '<li style="display:inline;"><a href="#' . $k . '_section-tab-' . $subkey . '">' . $subsection['title'] . '</a></li>';
                     }
+                    
                     echo '</ul>';
-                    foreach ($section['sections'] as $subkey => $subsection) {
-                        echo '<div id="' . $k .'sub-'.$subkey. '_section_group' . '" class="redux-group-tab">';
-                        echo '<div id="'.$k.'_section-tab-'.$subkey.'">';
-                        echo "hello".$subkey;
-                        do_settings_sections( $this->args['opt_name'] . $k . '_tab_'.$subkey.'_section_group' );
+                    foreach ($section['tab'] as $subkey => $subsection) {
+                        echo '<div id="' . $k .'sub-'.$subkey. '_section_group' . '" class="redux-group-tab" style="display:block;">';
+                        echo '<div id="' . $k . '_section-tab-' . $subkey . '">';
+                        echo "hello ".$subkey;
+                        do_settings_sections( $this->args['opt_name'] . $k . '_tab_' . $subkey . '_section_group' );
+                        echo "</div>";
                         echo "</div>";
                     }
                     echo "</div>";
                 } else {
                     do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );
                 }
-
-                echo '</div>';
+                echo "</div>";
+                //echo '</div>';
             }
 
             // Import / Export output

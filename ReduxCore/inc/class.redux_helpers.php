@@ -15,6 +15,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class Redux_Helpers {
 
+        public static function isParentTheme() {
+            if (strpos(self::cleanFilePath(__FILE__), self::cleanFilePath(get_template_directory())) !== false) {
+                return true;
+            }            
+            return false;
+        }
+        
+        public static function isChildTheme() {
+            if (strpos(self::cleanFilePath(__FILE__), self::cleanFilePath(get_stylesheet_directory())) !== false) {
+                return true;
+            }
+            return false;
+        }
+        
         public static function array_in_array($needle, $haystack) {
             //Make sure $needle is an array for foreach
             if (!is_array($needle)) {

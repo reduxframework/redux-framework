@@ -363,7 +363,7 @@ class ReduxFramework_typography {
          *
          */
         if ($this->field['font-size'] === true):
-            echo '<div class="input-append"><input type="text" qtip-tip="Size" class="span2 redux-typography-size mini' . $this->field['class'] . ' redux-typography-qtip" title="' . __('Size', 'redux-framework') . '" placeholder="' . __('Size', 'redux-framework') . '" id="' . $this->field['id'] . '-size" name="' . $this->field['name'] . '[font-size]' . $this->field['name_suffix'] . '" value="' . str_replace($unit, '', $this->value['font-size']) . '" data-value="' . str_replace($unit, '', $this->value['font-size']) . '"><span class="add-on">' . $unit . '</span></div>';
+            echo '<div class="input-append"><input type="text" qtip-tip="Size" class="span2 redux-typography redux-typography-size mini' . $this->field['class'] . ' redux-typography-qtip" title="' . __('Size', 'redux-framework') . '" placeholder="' . __('Size', 'redux-framework') . '" id="' . $this->field['id'] . '-size" name="' . $this->field['name'] . '[font-size]' . $this->field['name_suffix'] . '" value="' . str_replace($unit, '', $this->value['font-size']) . '" data-value="' . str_replace($unit, '', $this->value['font-size']) . '"><span class="add-on">' . $unit . '</span></div>';
             echo '<input type="hidden" class="typography-font-size" name="' . $this->field['name'] . '[font-size]" value="' . $this->value['font-size'] . '" data-id="' . $this->field['id'] . '"  />';
         endif;
         /**
