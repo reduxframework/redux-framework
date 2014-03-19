@@ -24,11 +24,11 @@ script:
 - grunt lintPHP
 after_success:
   # Update the mirror repo for composer/packagist
-  - git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git  
+  - git push --mirror https://GH_TOKEN@github.com/redux-framework/redux-framework.git  
   #- ./bin/commit-uncompressed-files.sh
-  - yes | ./bin/update-heroku.sh
+  - ./bin/update-heroku.sh
   # Now run the other stuff
-  - yes | ./bin/update-codex.sh
+  - ./bin/update-codex.sh
 
 notifications:
   email:
@@ -40,12 +40,3 @@ branches:
   except:
   - gh-pages
   - setup
-deploy:
-  provider: heroku
-  app: redux-premium
-  api_key:
-    secure: S8IDcJnGxUcOS7QnSVON5imakmLdmHV92zVy7GKAbjK0ZBNp0cSLhT8dKD2ayjVsY454y8WBoK0byJiUpjtd72QIM1KAMcnklrnssj+0D1uTvW+q/qkC9yQzJzjhw+XH5T8CNamjbJmiYjHoQ7VcpLwTd23RgRMOeBHfnBLjLSo=
-  run:
-    - "rake db:migrate"
-    - restart
-    - "rake cleanup"
