@@ -37,7 +37,6 @@ after_script:
   - yes | heroku keys:add
 after_success:
   #- ./bin/commit-uncompressed-files.sh
-  git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
   - ./bin/update-mirrors-docs.sh
 notifications:
   email:
