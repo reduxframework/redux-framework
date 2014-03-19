@@ -23,12 +23,21 @@ script:
 - grunt jshint
 - grunt lintPHP
 after_success:
-  # Update the mirror repo for composer/packagist
-  - git push --mirror https://GH_TOKEN@github.com/redux-framework/redux-framework.git  
+  # Install the Heroku gem (or the Heroku toolbelt)
+  - gem install heroku
+  # Add your Heroku git repo:
+  - git remote add heroku git@heroku.com:redux-premium.git
+  # Turn off warnings about SSH keys:
+  - echo "Host heroku.com" >> ~/.ssh/config
+  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  - echo "   CheckHostIP no" >> ~/.ssh/config
+  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # Clear your current Heroku SSH keys:
+  - heroku keys:clear
+  # Add a new SSH key to Heroku
+  - yes | heroku keys:add
   #- ./bin/commit-uncompressed-files.sh
-  - ./bin/update-heroku.sh
-  # Now run the other stuff
-  - ./bin/update-codex.sh
+  - ./bin/update-mirrors-docs.sh
 
 notifications:
   email:
