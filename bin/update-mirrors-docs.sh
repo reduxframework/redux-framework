@@ -3,15 +3,15 @@
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
 	# Update the mirror repo for composer/packagist
-	git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git  
+	git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
 
 	# Re-Deploy the heroku demo app and pull the newest code
-	git clone git@heroku.com:redux-premium.git
-	cd redux-premium
-	git reset HEAD~; git push -f heroku master;
+#	git clone git@heroku.com:redux-premium.git
+#	cd redux-premium
+#	git reset HEAD~; git push -f heroku master;
 
-	cd ..
-	rm -fr redux-premium
+#	cd ..
+#	rm -fr $HOME/redux-premium
 
 	echo -e "Starting to update documentation\n"
 
@@ -34,7 +34,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 	grunt gh-pages:travis
 
 	# Clean out the docs directory
-	git rm -fr docs/  
+	git rm -fr $HOME/docs/  
 
 
 fi
