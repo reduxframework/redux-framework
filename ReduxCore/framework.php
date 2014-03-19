@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.1';
+        public static $_version = '3.1.9.2';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -310,7 +310,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Start internationalization
                 //add_action( 'init', array( &$this, '_internationalization' ), 100 );
                 
-                include_once(self::$_dir . 'inc/import_export.php');
+                require_once(self::$_dir . 'inc/fields/import_export/import_export.php');
                 $this->import_export = new Redux_import_export($this);
             }
 
@@ -2108,28 +2108,35 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
 
+
             if( !empty( $plugin_options['import'] ) ) {
+
                 if( $plugin_options['import_code'] != '' ) {
                     $import = $plugin_options['import_code'];
                 } elseif( $plugin_options['import_link'] != '' ) {
                     $import = wp_remote_retrieve_body( wp_remote_get( $plugin_options['import_link'] ) );
+
                 }
 
                 if ( !empty( $import ) ) {
                     if (version_compare(phpversion(), "5.3.0", ">=")) {
-                        $imported_options = json_decode( htmlspecialchars_decode( $import ), true );
+                        $imported_options = json_decode( $import, true );
                     } else {
-                        $import = str_replace("\\/","/", $import);
-                        $import = str_replace('"','\\\\"',$import);
-                        $imported_options = json_decode( htmlspecialchars_decode($import) , true);
+                        if (function_exists('stripslashes')) {
+                            $import = get_magic_quotes_gpc() ? stripslashes($import) : $import;
+                        } else if (function_exists('strip_slashes')) {
+                            $import = get_magic_quotes_gpc() ? strip_slashes($import) : $import;
+                        }
+                        $imported_options = json_decode( $import ) ;
+                        $imported_options = (array) $imported_options;
                     }
                 }
 
                 if( !empty( $imported_options ) && is_array( $imported_options ) && isset( $imported_options['redux-backup'] ) && $imported_options['redux-backup'] == '1' ) {
-                    $plugin_options['REDUX_imported'] = 1;
                     foreach($imported_options as $key => $value) {
                         $plugin_options[$key] = $value;
                     }
+                    $plugin_options['REDUX_imported'] = 1;
 
                     /**
                      * action 'redux/options/{opt_name}/import'

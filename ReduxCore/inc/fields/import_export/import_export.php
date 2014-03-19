@@ -38,11 +38,11 @@ if( !class_exists( 'Redux_import_export' ) ) {
         public function __construct( $parent ) {  
             $this->parent = $parent;
 
-            add_action("wp_ajax_link_options",              array($this, "link_options"));
-            add_action("wp_ajax_nopriv_link_options",       array($this, "link_options"));
+            add_action("wp_ajax_redux_link_options",              array($this, "link_options"));
+            add_action("wp_ajax_nopriv_redux_link_options",       array($this, "link_options"));
             
-            add_action("wp_ajax_download_options",          array($this, "download_options"));
-            add_action("wp_ajax_nopriv_download_options",   array($this, "download_options"));
+            add_action("wp_ajax_redux_download_options",          array($this, "download_options"));
+            add_action("wp_ajax_nopriv_redux_download_options",   array($this, "download_options"));
         }
 
         /**
@@ -82,20 +82,15 @@ if( !class_exists( 'Redux_import_export' ) ) {
 
             echo '<div id="redux-import-code-wrapper">';
 
-            echo '<div class="redux-section-desc">';
             echo '<p class="description" id="import-code-description">' . apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', 'redux-framework' ) ) . '</p>';
-            echo '</div>';
-
+            
             echo '<textarea id="import-code-value" name="' . $this->parent->args['opt_name'] . '[import_code]" class="large-text noUpdate" rows="8"></textarea>';
 
             echo '</div>';
 
             echo '<div id="redux-import-link-wrapper">';
 
-            echo '<div class="redux-section-desc">';
-
             echo '<p class="description" id="import-link-description">' . apply_filters( 'redux-import-link-description', __( 'Input the URL to another sites options set and hit Import to load the options from that site.', 'redux-framework' ) ) . '</p>';
-            echo '</div>';
 
             echo '<input type="text" id="import-link-value" name="' . $this->parent->args['opt_name'] . '[import_link]" class="large-text noUpdate" value="" />';
 
@@ -110,24 +105,26 @@ if( !class_exists( 'Redux_import_export' ) ) {
             echo '<p class="description">' . apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'redux-framework' ) ) . '</p>';
             echo '</div>';
 
-            $link = admin_url('admin-ajax.php?action=download_options&secret=' . $secret);
+            $link = admin_url('admin-ajax.php?action=redux_download_options&secret=' . $secret);
             echo '<p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary">' . __( 'Copy', 'redux-framework' ) . '</a> <a href="' . $link . '" id="redux-export-code-dl" class="button-primary">' . __( 'Download', 'redux-framework' ) . '</a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary">' . __( 'Copy Link', 'redux-framework' ) . '</a></p>';
             
             $backup_options = $this->parent->options;
             $backup_options['redux-backup'] = '1';
+            echo "<p>";
             echo '<textarea class="large-text noUpdate" id="redux-export-code" rows="8">';
 
             if (version_compare(phpversion(), "5.3.0", ">=")) {
-                print_r( json_encode( $backup_options, true ) );
+                echo json_encode( $backup_options, true );
             } else {
-                print_r( json_encode( $backup_options ) );
+                echo json_encode( addslashes( $backup_options ) );
             }
 
             echo '</textarea>';
 
-            $link = admin_url('admin-ajax.php?action=link_options&secret=' . $secret);
+            $link = admin_url('admin-ajax.php?action=redux_link_options&secret=' . $secret);
 
             echo '<input type="text" class="large-text noUpdate" id="redux-export-link-value" value="' . $link . '" />';
+            echo "</p>";
             echo '</div>';
             
             if (true == $bDoClose) {
@@ -186,7 +183,16 @@ if( !class_exists( 'Redux_import_export' ) ) {
             }
             
             $var = $this->parent->options;
-            print_r($var);
+            $var['redux-backup'] = '1';
+            if ( isset( $var['REDUX_imported'] ) ) {
+                unset( $var['REDUX_imported'] );
+            }
+            if (version_compare(phpversion(), "5.3.0", ">=")) {
+                echo json_encode( $var, true );
+            } else {
+                echo json_encode( $var );
+            }
+
             die();            
         }
         
@@ -200,14 +206,16 @@ if( !class_exists( 'Redux_import_export' ) ) {
             $this->parent->get_options();
             $backup_options = $this->parent->options;
             $backup_options['redux-backup'] = '1';
-
+            if ( isset( $var['REDUX_imported'] ) ) {
+                unset( $var['REDUX_imported'] );
+            }
             if (version_compare(phpversion(), "5.3.0", ">=")) {
                 $content = json_encode( $backup_options, true ) ;
             } else {
-                $content = json_encode( $backup_options ) ;
+                $content = json_encode( $backup_options );
             }
 
-            if( isset( $_GET['action'] ) && $_GET['action'] == 'download_options' ) {
+            if( isset( $_GET['action'] ) && $_GET['action'] == 'redux_download_options' ) {
                 header( 'Content-Description: File Transfer' );
                 header( 'Content-type: application/txt' );
                 header( 'Content-Disposition: attachment; filename="redux_options_' . $this->parent->args['opt_name'] . '_backup_' . date( 'd-m-Y' ) . '.json"' );

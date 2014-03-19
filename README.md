@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.2 =
+* Fixed:      Inconsistencies in import/export across different versions of PHP.
+
 = 3.1.9.1 =
 * Fixed:      Redux checks for child or parent theme exclusively before loading.
 
