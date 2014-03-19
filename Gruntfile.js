@@ -54,7 +54,7 @@ module.exports = function(grunt) {
             },
             travis: {
                 options: {
-                    repo: 'https://' + process.env.GH_API_KEY + '@github.com/ReduxFramework/docs.reduxframework.com.git',
+                    repo: 'https://' + process.env.GH_TOKEN + '@github.com/ReduxFramework/docs.reduxframework.com.git',
                     user: {
                         name: 'Travis',
                         email: 'travis@travis-ci.org'

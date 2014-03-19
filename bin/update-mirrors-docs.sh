@@ -3,7 +3,7 @@
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
 	# Update the mirror repo for composer/packagist
-	git push --mirror https://${GH_API_KEY}@github.com/redux-framework/redux-framework.git
+	git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
 
 	# Re-Deploy the heroku demo app and pull the newest code
 	git clone git@heroku.com:redux-premium.git
