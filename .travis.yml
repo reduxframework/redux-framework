@@ -1,8 +1,8 @@
 language: php
 php:
-- 5.2
+#- 5.2
 - 5.3
-- 5.4
+#- 5.4
 env:
   global:
     secure: HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo=
