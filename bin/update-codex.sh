@@ -10,6 +10,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
   echo -e "Starting dev demo push to Heroku\n"
   git clone git@heroku.com:redux-premium.git redux-premium
   cd redux-premium
+  git remote add heroku git@heroku.com:redux-premium.git 
   git reset HEAD~; git push -f heroku master;
   cd ..
   rm -fr redux-premium
