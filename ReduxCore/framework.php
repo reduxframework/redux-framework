@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.2';
+        public static $_version = '3.1.9.3';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1056,7 +1056,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 continue;
                             }
 
-                            if ( false == $this->import_export->is_field) {
+                            if ( false == $this->import_export->is_field && isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
                                 $this->import_export->is_field = Redux_Helpers::recursive_array_search('import_export', $section['fields']);
                             }
 
