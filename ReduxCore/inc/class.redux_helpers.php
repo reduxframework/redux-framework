@@ -15,15 +15,26 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class Redux_Helpers {
 
-        public static function isParentTheme() {
-            if (strpos(self::cleanFilePath(__FILE__), self::cleanFilePath(get_template_directory())) !== false) {
+        public static function isParentTheme($file) {
+            if (strpos(self::cleanFilePath($file), self::cleanFilePath(get_template_directory())) !== false) {
                 return true;
             }            
             return false;
         }
         
-        public static function isChildTheme() {
-            if (strpos(self::cleanFilePath(__FILE__), self::cleanFilePath(get_stylesheet_directory())) !== false) {
+        public static function isChildTheme($file) {
+            if (strpos(self::cleanFilePath($file), self::cleanFilePath(get_stylesheet_directory())) !== false) {
+                return true;
+            }
+            return false;
+        }
+
+        private static function reduxAsPlugin() {
+            return ReduxFramework::$_as_plugin;
+        }
+        
+        public static function isTheme ($file) {
+            if (true == self::isChildTheme($file) || true == self::isParentTheme($file)) {
                 return true;
             }
             return false;

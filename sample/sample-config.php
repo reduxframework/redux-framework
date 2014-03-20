@@ -21,11 +21,12 @@ if (!class_exists('Redux_Framework_sample_config')) {
             }
 
             // This is needed. Bah WordPress bugs.  ;)
-            if (true == Redux_Helpers::isChildTheme() || true == Redux_Helpers::isParentTheme()) {
+            if (  true == Redux_Helpers::isTheme(__FILE__) ) {
                 $this->initSettings();
             } else {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);
             }
+
         }
 
         public function initSettings() {

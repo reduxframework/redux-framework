@@ -54,6 +54,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public static $_url;
         public static $_properties;
         public static $_is_plugin = true;
+        public static $_as_plugin = false;
 
         static function init() {
 
@@ -405,6 +406,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             // be accessed without the page parameter.  We add the
                             // tab to return the user to the last panel they were
                             // on.
+                            $pageName = '';
+                            $curTab = '';
                             if ($pagenow == 'admin.php') {
 
                                 // Get the current page.  To avoid errors, we'll set
