@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.4 =
+* Fixed:      Continuing effort to ensure proper loading of config from child themes.
+
 = 3.1.9.3 =
 * Fixed:      Import/Export array search bug if section['fields'] is not defined.
 
