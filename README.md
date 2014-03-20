@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.3 =
+* Fixed:      Import/Export array search bug if section['fields'] is not defined.
+
 = 3.1.9.2 =
 * Fixed:      Inconsistencies in import/export across different versions of PHP.
 
