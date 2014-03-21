@@ -2454,7 +2454,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<noscript><div class="no-js">' . __( 'Warning- This options panel will not work properly without javascript!', 'redux-framework' ) . '</div></noscript>';
 
             // Security is vital!
-            echo '<input type="hidden" id="ajaxsecurity" name="security" value="' . wp_create_nonce( 'of_ajax_nonce' ) . '" />';
+            echo '<input type="hidden" id="ajaxsecurity" name="security" value="' . wp_create_nonce( 'redux_ajax_nonce' ) . '" />';
 
             /**
              * action 'redux-page-before-form-{opt_name}'
