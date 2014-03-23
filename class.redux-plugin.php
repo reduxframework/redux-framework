@@ -146,7 +146,9 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
                 require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
             }
             
-            ReduxFramework::$_as_plugin = true;
+            if (isset(ReduxFramework::$_as_plugin)) {
+                ReduxFramework::$_as_plugin = true;
+            }
 
             if( file_exists( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' ) ) {
                 require_once( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' );
@@ -177,12 +179,24 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
 
             // Edit plugin metalinks
             add_filter( 'plugin_row_meta', array( $this, 'plugin_metalinks' ), null, 2 );
+            
+            add_action( 'activated_plugin', array( $this, 'load_first' ) );
 
             do_action( 'redux/plugin/hooks', $this );
 
         }
 
-
+	public function load_first() {
+            $path = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
+            if ( $plugins = get_option( 'active_plugins' ) ) {
+                if ( $key = array_search( $path, $plugins ) ) {
+                    array_splice( $plugins, $key, 1 );
+                    array_unshift( $plugins, $path );
+                    update_option( 'active_plugins', $plugins );
+                }
+            }
+        }
+        
         /**
          * Fired on plugin activation
          *
