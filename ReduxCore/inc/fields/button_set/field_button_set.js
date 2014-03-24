@@ -9,8 +9,6 @@ jQuery(document).ready(function () {
         if ( jQuery(this).is(':checkbox') ) {
             jQuery(this).find('.buttonset-item').button();
         } 
-        jQuery('.buttonset').buttonset();
-    });
-  
-  
+        jQuery(this).buttonset();
+    });  
 });
