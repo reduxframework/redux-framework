@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.4';
+        public static $_version = '3.1.9.5';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -849,7 +849,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 foreach( $this->sections as $section ) {
                     if( isset( $section['fields'] ) ) {
                         foreach( $section['fields'] as $field ) {
-                            if( isset( $field['default'] ) ) {
+                            if (empty($field['id'])) {
+                                continue;
+                            }
+   			    if( isset( $field['default'] ) ) {
                                 $this->options_defaults[$field['id']] = $field['default'];
                             } elseif (isset($field['options'])) {
                                 $this->options_defaults[$field['id']] = $field['options'];

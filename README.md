@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.5 =
+* Fixed:      Massive speed issue with button_set. Resolved.
+* Fixed:      Issue where default values throws an error if ID is not set.
+
 = 3.1.9.4 =
 * Fixed:      Continuing effort to ensure proper loading of config from child themes.
 
