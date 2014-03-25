@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.7';
+        public static $_version = '3.1.9.8';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1479,14 +1479,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
-            wp_register_script(
-                'ace-editor-js',
-                self::$_url . 'assets/js/vendor/ace_editor/ace.js',
-                array( 'jquery' ),
-                filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
-                true
-            );
-
             // Embed the compress version unless in dev mode
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
                 wp_register_script(
@@ -1537,6 +1529,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
                             if( $class_file ) {
                                 if( !class_exists($field_class) ) {
+                                    if ( $field['type'] == "ace_editor" ) {
+                                        wp_register_script(
+                                            'ace-editor-js',
+                                            self::$_url . 'assets/js/vendor/ace_editor/ace.js',
+                                            array( 'jquery' ),
+                                            filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
+                                            true
+                                        );
+                                    }
                                     /** @noinspection PhpIncludeInspection */
                                     if (file_exists($class_file)) {
                                     	require_once( $class_file );
@@ -1555,7 +1556,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     	// Checking for extension field AND dev_mode = false OR dev_mode = true
                                     	// Since extension fields use 'extension_dir' exclusively, we can detect them here.
                                     	// Also checking for dev_mode = true doesn't mess up the JS combinine.
-					if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
+					                    if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
                                             /** @noinspection PhpUndefinedMethodInspection */
                                             $theField->enqueue();
                                         }
