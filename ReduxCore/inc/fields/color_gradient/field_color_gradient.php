@@ -85,7 +85,7 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
         	
         	if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
 				$tChecked = "";
-				if ( $this->value['from'] == "transparent" ) {
+				if ( $this->value['to'] == "transparent" ) {
 					$tChecked = ' checked="checked"';
 				}
 				echo '<label for="' . $this->field['id'] . '-to-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . $this->field['id'] . '-to-transparency" data-id="' . $this->field['id'] . '-to" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';	

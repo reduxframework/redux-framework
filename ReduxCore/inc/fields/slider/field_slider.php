@@ -215,12 +215,35 @@ class ReduxFramework_slider {
         wp_enqueue_style('nouislider-css');
 
         wp_enqueue_script(
-                'redux-field-slider-js', ReduxFramework::$_url . 'inc/fields/slider/field_slider.js', array('jquery', 'nouislider-js'), time(), true
+            'redux-field-slider-js', 
+            ReduxFramework::$_url . 'inc/fields/slider/field_slider.js', 
+            array('jquery', 'nouislider-js'), 
+            time(), 
+            true
         );
 
         wp_enqueue_style(
-                'redux-field-slider-css', ReduxFramework::$_url . 'inc/fields/slider/field_slider.css', time(), true
+            'redux-field-slider-css', 
+            ReduxFramework::$_url . 'inc/fields/slider/field_slider.css', 
+            time(), 
+            true
         );
+
+        wp_enqueue_script(
+            'redux-field-select-js',
+            ReduxFramework::$_url.'inc/fields/select/field_select.js',
+            array('jquery', 'select2-js'),
+            time(),
+            true
+        );
+
+        wp_enqueue_style(
+            'redux-redux-field-select-css',
+            ReduxFramework::$_url.'inc/fields/select/field_select.css',
+            time(),
+            true
+        );
+
     }
 
 //function
