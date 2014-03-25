@@ -1025,6 +1025,78 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
         }
+
+        /**
+         * Class Add Sub Menu Function, creates options submenu in Wordpress admin area.
+         * @since       3.1.9
+         * @access      private
+         * @return      void
+         */
+        private function add_submenu($page_parent, $page_title, $menu_title, $page_permissions, $page_slug) {
+
+            // Just in case. One never knows.
+            $page_parent = strtolower($page_parent);
+
+            $test = array(
+                'index.php'                 => 'dashboard',
+                'edit.php'                  => 'posts',
+                'upload.php'                => 'media',
+                'link-manager.php'          => 'links',
+                'edit.php?post_type=page'   => 'pages',
+                'edit-comments.php'         => 'comments',
+                'themes.php'                => 'theme',
+                'plugins.php'               => 'plugins',
+                'users.php'                 => 'users',
+                'tools.php'                 => 'management',
+                'options-general.php'       => 'options',
+            );
+
+            if (isset($test[$page_parent])) {
+                $function = 'add_' . $test[$page_parent] . '_page';
+                $this->page = $function(
+                        $page_title, $menu_title, $page_permissions, $page_slug, array($this, '_options_page_html')
+                );
+            } else {
+                // Network settings and Post type menus. These do not have
+                // wrappers and need to be appened to using add_submenu_page.
+                // Okay, since we've left the post type menu appending
+                // as default, we need to validate it, so anything that
+                // isn't post_type=<post_type> doesn't get through and mess
+                // things up.
+
+                $addMenu = false;
+                if ('settings.php' != $page_parent) {
+                    // Establish the needle
+                    $needle = '?post_type=';
+
+                    // Check if it exists in the page_parent (how I miss instr)
+                    $needlePos = strrpos($page_parent, $needle);
+
+                    // It's there, so...
+                    if ($needlePos > 0) {
+
+                        // Get the post type.
+                        $postType = substr($page_parent, $needlePos + strlen($needle));
+
+                        // Ensure it exists.
+                        if (post_type_exists($postType)) {
+                            // Set flag to add the menu page
+                            $addMenu = true;
+                        }
+                    }
+                } else {
+                    // The page_parent was settings.php, so set menu add
+                    // flag to true.
+                    $addMenu = true;
+                }
+                // Add the submenu if it's permitted.
+                if (true == $addMenu) {
+                    $this->page = add_submenu_page(
+                            $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(&$this, '_options_page_html')
+                    );
+                }
+            }
+        }        
         
         /**
          * Class Options Page Function, creates main options page.
@@ -1035,14 +1107,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
         function _options_page() {
 
             if( $this->args['menu_type'] == 'submenu' ) {
-                $this->page = add_submenu_page(
+                /* $this->page = add_submenu_page(
                     $this->args['page_parent'],
                     $this->args['page_title'],
                     $this->args['menu_title'],
                     $this->args['page_permissions'],
                     $this->args['page_slug'],
                     array( &$this, '_options_page_html' )
-                );
+                ); */
+                $this->add_submenu(
+                    $this->args['page_parent'], 
+                    $this->args['page_title'], 
+                    $this->args['menu_title'], 
+                    $this->args['page_permissions'], 
+                    $this->args['page_slug']
+                );                
             } else {
                 $this->page = add_menu_page(
                     $this->args['page_title'],
