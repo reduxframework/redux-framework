@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.6 =
+* Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP approved API is used in it's place to being Redux up to wp.org theme check standards.
+
 = 3.1.9.5 =
 * Fixed:      Massive speed issue with button_set. Resolved.
 * Fixed:      Issue where default values throws an error if ID is not set.
