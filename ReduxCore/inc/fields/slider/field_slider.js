@@ -200,7 +200,7 @@
                 }
             }
         });
-    $('.redux-slider-select-one, .redux-slider-select-two').select2({
+    $('select.redux-slider-select-one, select.redux-slider-select-two').select2({
         width: 'resolve',
         triggerChange: true,
         allowClear: true
