@@ -1491,7 +1491,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    array( 'jquery', 'select2-js', 'ace-editor-js',  'qtip-js', 'nouislider-js', 'redux-vendor' ),
+                    array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js', 'redux-vendor' ),
                     time(),
                     true
                 );
@@ -1530,7 +1530,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if( $class_file ) {
                                 if( !class_exists($field_class) ) {
                                     if ( $field['type'] == "ace_editor" ) {
-                                        wp_register_script(
+                                        wp_enqueue_script(
                                             'ace-editor-js',
                                             self::$_url . 'assets/js/vendor/ace_editor/ace.js',
                                             array( 'jquery' ),
