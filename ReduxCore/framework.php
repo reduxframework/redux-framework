@@ -1105,16 +1105,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return void
          */
         function _options_page() {
-
+            $this->import_export->in_field();
+            
             if( $this->args['menu_type'] == 'submenu' ) {
-                /* $this->page = add_submenu_page(
-                    $this->args['page_parent'],
-                    $this->args['page_title'],
-                    $this->args['menu_title'],
-                    $this->args['page_permissions'],
-                    $this->args['page_slug'],
-                    array( &$this, '_options_page_html' )
-                ); */
                 $this->add_submenu(
                     $this->args['page_parent'], 
                     $this->args['page_title'], 
@@ -1122,6 +1115,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $this->args['page_permissions'], 
                     $this->args['page_slug']
                 );                
+                
             } else {
                 $this->page = add_menu_page(
                     $this->args['page_title'],
@@ -1134,17 +1128,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 );
 
                 if( true === $this->args['allow_sub_menu'] ) {
+                    
                     if( !isset( $section['type'] ) || $section['type'] != 'divide' ) {
 
                         foreach( $this->sections as $k => $section ) {
                             if ( !isset( $section['title'] ) ){
                                 continue;
                             }
-
-                            if ( false == $this->import_export->is_field && isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
-                                $this->import_export->is_field = Redux_Helpers::recursive_array_search('import_export', $section['fields']);
-                            }
-
+                            
                             if ( isset( $section['submenu'] ) && $section['submenu'] == false ){
                                 continue;
                             }

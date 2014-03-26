@@ -132,6 +132,17 @@ if( !class_exists( 'Redux_import_export' ) ) {
             }
         }
         
+        public function in_field(){
+            foreach( $this->parent->sections as $k => $section ) {
+                if ( !isset( $section['title'] ) ){
+                    continue;
+                }                
+                if ( false == $this->is_field && isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
+                    $this->is_field = Redux_Helpers::recursive_array_search('import_export', $section['fields']);
+                }                
+            }
+        }
+        
         public function render_tab(){
             echo '<li id="import_export_default_section_group_li" class="redux-group-tab-link-li">';
 
