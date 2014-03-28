@@ -1471,16 +1471,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
+            $ace_prereq = null;
             if (Redux_Helpers::isFieldInUse($this, 'ace_editor')){
+                $ace_prereq = 'ace-editor-js';
+                
                 wp_enqueue_script(
-                    'ace-editor-js',
+                    $ace_prereq,
                     self::$_url . 'assets/js/vendor/ace_editor/ace.js',
                     array( 'jquery' ),
                     filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
                     true
                 );
             }
-                                        
+
+            $arrEnq = array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js' );
+            
             // Embed the compress version unless in dev mode
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
                 wp_register_script(
@@ -1490,19 +1495,30 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     time(),
                     true
                 );
+                
+                $arrDev = $arrEnq;
+                if ('' != $ace_prereq) {
+                    array_push($arrDev, $ace_prereq, 'redux-vendor');
+                }
+                
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js', 'redux-vendor', 'ace-editor-js' ),
+                    $arrDev,
                     time(),
                     true
                 );
             } else {
+                $arrProd = $arrEnq;
+                if ('' != $ace_prereq) {
+                    array_push($arrProd, $ace_prereq);
+                }
+
                 if ( file_exists( self::$_dir . 'assets/js/redux.min.js' ) ) {
                     wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',
-                        array( 'jquery', 'select2-js',  'qtip-js', 'nouislider-js', 'ace-editor-js' ),
+                        $arrProd,
                         filemtime( self::$_dir . 'assets/js/redux.min.js' ),
                         true
                     );
