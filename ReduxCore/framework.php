@@ -1520,15 +1520,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
                             if( $class_file ) {
                                 if( !class_exists($field_class) ) {
-                                    if ( $field['type'] == "ace_editor" ) {
-                                        wp_enqueue_script(
-                                            'ace-editor-js',
-                                            self::$_url . 'assets/js/vendor/ace_editor/ace.js',
-                                            array( 'jquery' ),
-                                            filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
-                                            true
-                                        );
-                                    }
+                                    
                                     /** @noinspection PhpIncludeInspection */
                                     if (file_exists($class_file)) {
                                     	require_once( $class_file );
