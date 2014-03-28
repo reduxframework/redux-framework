@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.10';
+        public static $_version = '3.1.9.11';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -1471,6 +1471,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
+            // Register ACE if it's being used
             $ace_prereq = null;
             if (Redux_Helpers::isFieldInUse($this, 'ace_editor')){
                 $ace_prereq = 'ace-editor-js';
@@ -1484,9 +1485,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 );
             }
 
+            // default JS dependency aarray
             $arrEnq = array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js' );
             
             // Embed the compress version unless in dev mode
+            // dev_mode = true
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
                 wp_register_script(
                     'redux-vendor',
@@ -1496,11 +1499,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     true
                 );
                 
+                // push redux-cendor into dep array
                 $arrDev = $arrEnq;
-                if ('' != $ace_prereq) {
-                    array_push($arrDev, $ace_prereq, 'redux-vendor');
-                }
+                array_push($arrDev, 'redux-vendor');
                 
+                // If ACE is loaded, push in into the dep array
+                if ('' != $ace_prereq) {
+                    array_push($arrDev, $ace_prereq);
+                }
+
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
@@ -1508,7 +1515,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     time(),
                     true
                 );
+                
+            // dev_mode - false
             } else {
+                
+                // If ACE loaded, push into the dep array
                 $arrProd = $arrEnq;
                 if ('' != $ace_prereq) {
                     array_push($arrProd, $ace_prereq);

@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.11 =
+* Fixed:      select2 not rendering properly when dev_mode = false, because of ace_editor fix.
+* Fixed:      Removed mistakenly compiled test code from redux.js.
+
 = 3.1.9.10 =
 * Fixed:      ace_editor not rendering properly in certain instances.
 * Modified:   Small change to import_export field in checking for existing instance of itself.
