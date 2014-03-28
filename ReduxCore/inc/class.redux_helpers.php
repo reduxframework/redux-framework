@@ -4,7 +4,7 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework' ) ) {
+if( !class_exists( 'Redux_Helpers' ) ) {
 
     /**
      * Redux Helpers Class
@@ -15,6 +15,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class Redux_Helpers {
 
+        public static function isFieldInUse($parent, $field) {
+          foreach( $parent->sections as $k => $section ) {
+                if ( !isset( $section['title'] ) ){
+                    continue;
+                }                
+                if ( isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
+                    if ( Redux_Helpers::recursive_array_search($field, $section['fields'])) {
+                        return true;
+                        continue;
+                    }
+                }                
+            }            
+        }
+        
         public static function isParentTheme($file) {
             if (strpos(self::cleanFilePath($file), self::cleanFilePath(get_template_directory())) !== false) {
                 return true;

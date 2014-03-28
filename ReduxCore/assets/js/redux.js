@@ -110,9 +110,9 @@
         }
 
         var id = current.parents('.redux-field:first').data('id'),
-                dependent = scope.find('tr[data-check-field="' + id + '"]'),
-                value1 = variable.value,
-                is_hidden = current.parents('tr:eq(0)').is('.hiddenFold');
+            dependent = scope.find('tr[data-check-field="' + id + '"]'),
+            value1 = variable.value,
+            is_hidden = current.parents('tr:eq(0)').is('.hiddenFold');
 
         if (!dependent.length)
             return;

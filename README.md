@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.10 =
+* Fixed:      ace_editor not rendering properly in certain instances.
+* Modified:   Small change to import_export field in checking for existing instance of itself.
+
 = 3.1.9.9 =
 * Fixed:      import_export not rendering when the menutype argument was set to menu
 

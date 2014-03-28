@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.9';
+        public static $_version = '3.1.9.10';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -326,6 +326,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         } // __construct()
 
+        
         public function _update_check() {
             
             // Get the raw framework.php from github
@@ -1470,6 +1471,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
+            if (Redux_Helpers::isFieldInUse($this, 'ace_editor')){
+                wp_enqueue_script(
+                    'ace-editor-js',
+                    self::$_url . 'assets/js/vendor/ace_editor/ace.js',
+                    array( 'jquery' ),
+                    filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
+                    true
+                );
+            }
+                                        
             // Embed the compress version unless in dev mode
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
                 wp_register_script(
@@ -1482,7 +1493,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js', 'redux-vendor' ),
+                    array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js', 'redux-vendor', 'ace-editor-js' ),
                     time(),
                     true
                 );
@@ -1491,7 +1502,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',
-                        array( 'jquery', 'select2-js',  'qtip-js', 'nouislider-js' ),
+                        array( 'jquery', 'select2-js',  'qtip-js', 'nouislider-js', 'ace-editor-js' ),
                         filemtime( self::$_dir . 'assets/js/redux.min.js' ),
                         true
                     );
@@ -1520,15 +1531,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
                             if( $class_file ) {
                                 if( !class_exists($field_class) ) {
-                                    if ( $field['type'] == "ace_editor" ) {
-                                        wp_enqueue_script(
-                                            'ace-editor-js',
-                                            self::$_url . 'assets/js/vendor/ace_editor/ace.js',
-                                            array( 'jquery' ),
-                                            filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
-                                            true
-                                        );
-                                    }
                                     /** @noinspection PhpIncludeInspection */
                                     if (file_exists($class_file)) {
                                     	require_once( $class_file );
