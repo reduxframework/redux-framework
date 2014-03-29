@@ -339,7 +339,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 					'body' => $data
 				);
 
-				$response = wp_remote_post( 'http://tracking.dev/local.php', $args );
+				$response = wp_remote_post( 'https://redux-tracking.herokuapp.com', $args );
 
 				// Store for a week, then push data again.
 				set_transient( 'redux_tracking_cache', true, 7 * 60 * 60 * 24 );
