@@ -32,6 +32,14 @@ if(has_action('ecpt_field_options_')) {
     }
 }
 
+if ( !class_exists( 'ReduxFrameworkInstances' ) )
+{
+    // Instance Container
+    include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
+    include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
+    add_action( 'redux/init', 'ReduxFrameworkInstances::get_instance' );
+}
+
 
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
