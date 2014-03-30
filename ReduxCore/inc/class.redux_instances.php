@@ -52,17 +52,15 @@ class ReduxFrameworkInstances
 	}
 
 	private function __construct() {
-
 		add_action( 'redux/construct', array( $this, 'capture' ), 5, 1 );
 	} 
 
-	function capture( $ReduxFramework )
-	{
+	function capture( $ReduxFramework ) {
 		$this->store( $ReduxFramework );
 	}
 
-	private function store( $ReduxFramework )
-	{
+	private function store( $ReduxFramework ) {
+
 		if ( $ReduxFramework instanceof ReduxFramework ) {
 			$key = $ReduxFramework->args['opt_name'];
 			self::$instances[ $key ] = $ReduxFramework;
