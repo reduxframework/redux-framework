@@ -163,7 +163,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $warnings            = array(); // Warnings
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
-        public $localize_data       = array(); // Information that needs to be localized
         public $required            = array(); // Information that needs to be localized
         public $required_child      = array(); // Information that needs to be localized
         public $localize_data       = array(); // Information that needs to be localized
