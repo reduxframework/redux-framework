@@ -1,4 +1,5 @@
-/*global jQuery, document, redux.args, confirm, relid:true, console, jsonView */
+/* global jQuery, document, redux, redux.args, confirm, relid:true, console, jsonView */
+
 (function($) {
     'use strict';
     $.redux = $.redux || {};
@@ -31,18 +32,13 @@
 
         $("body").on('change', '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]', function(e) {
             $.redux.check_dependencies(this);
-
         });
 
         $("body").on('check_dependencies', function(e, variable) {
             $.redux.check_dependencies(variable);
         });
 
-        //console.log(redux.fieldsHidden);
-        // Hide the hidden fields on load
-        for (var i = 0; i < redux.fieldsHidden.length; i++) {
-            $.redux.check_dependencies(jQuery('#' + redux.fieldsHidden[i]));
-        }
+
         
         $('td > fieldset:empty,td > div:empty').parent().parent().hide();
 
@@ -53,271 +49,210 @@
         // Hide the fold elements on load ,
         // It's better to do this by PHP but there is no filter in tr tag , so is not possible
         // we going to move each attributes we may need for folding to tr tag
-        $('.hiddenFold, .showFold').each(function() {
-            var current = $(this),
-                    scope = current.parents('tr:eq(0)'),
-                    check_data = current.data();
-
-            if (current.hasClass('hiddenFold')) {
-                scope.addClass('hiddenFold').attr('data-check-field', check_data.checkField)
-                        .attr('data-check-comparison', check_data.checkComparison)
-                        .attr('data-check-value', check_data.checkValue)
-                        .attr('data-check-id', check_data.id).hide();
-                //we clean here, so we won't get confuse
-                current.removeClass('hiddenFold').removeAttr('data-check-field')
-                        .removeAttr('data-check-comparison')
-                        .removeAttr('data-check-value');
-            } else {
-                scope.attr('data-check-field', check_data.checkField)
-                        .attr('data-check-comparison', check_data.checkComparison)
-                        .attr('data-check-value', check_data.checkValue)
-                        .attr('data-check-id', check_data.id);
-                //we clean here, so we won't get confuse
-                current.removeClass('showFold').removeAttr('data-check-field')
-                        .removeAttr('data-check-comparison')
-                        .removeAttr('data-check-value');
+        $.each( redux.folds, function(i, v){
+            $('#'+redux.args.opt_name+'-'+i).parents('tr:first').addClass('fold');
+            if (v == "hide") {
+                $('#'+redux.args.opt_name+'-'+i).parents('tr:first').addClass('hide');
             }
         });
 
-        $(".fold").promise().done(function() {
-            // Hide the fold elements on load
-            $('.foldParent').each(function() {
-                // in case of a radio input, take in consideration only the checked value
-                if ($(this).attr('type') == 'radio' && $(this).attr('checked') != 'checked') {
-                    return;
-                }
-                var id = $(this).parents('.redux-field:first').data('id');
-                if (redux.folds[ id ]) {
-                    if (!redux.folds[ id ].parent) {
-                        $.redux.verify_fold($(this));
-                    }
-                }
-            });
-        });
+    };
+
+    $.redux.get_container_value = function(id) {
+        
+        var value = $('#'+redux.args.opt_name+'-'+id).serializeForm();
+        if (value !== null && typeof value === 'object' && value.hasOwnProperty(redux.args.opt_name)) {
+            //console.log('object');
+            //console.log(value);
+            value = value[redux.args.opt_name][id];    
+        }
+        //console.log(value);
+        return value;
     };
 
     $.redux.check_dependencies = function(variable) {
-
+        if ( redux.required === null ) {
+            return;
+        }
         var current = $(variable),
-                scope = current.parents('.redux-group-tab:eq(0)');
-
-        if (!scope.length)
-            scope = $('body');
-
-        // Fix for Checkbox + Required issue
-        if ($(variable).prop('type') == "checkbox") {
-            $(variable).is(":checked") ? $(variable).val('1') : $(variable).val('0');
+            id = current.parents('.redux-field:first').data('id');
+        if ( !redux.required.hasOwnProperty(id) ) {
+            return;
         }
 
-        var id = current.parents('.redux-field:first').data('id'),
-            dependent = scope.find('tr[data-check-field="' + id + '"]'),
-            value1 = variable.value,
-            is_hidden = current.parents('tr:eq(0)').is('.hiddenFold');
+        var container = current.parents('.redux-field-container:first'),
+            is_hidden = container.parents('tr:first').hasClass('.hide'),
+            hadSections = false;
 
-        if (!dependent.length)
-            return;
+        $.each(redux.required[id], function(child, dependents) {              
 
-        dependent.each(function() {
-            var current = $(this),
-                    check_data = current.data(),
-                    value2 = check_data.checkValue,
+                var current = $(this),
                     show = false,
-                    infoFieldID = '',
-                    sectionFieldID = '',
-                    divideFieldID = '',                    
-                    value2_array;
+                    childFieldset = $('#'+redux.args.opt_name+'-'+child),
+                    tr = childFieldset.parents('tr:first');
 
-            var testInfoField = current.find('.redux-field:first');
-            if (testInfoField.hasClass('redux-container-info')) {
-                infoFieldID = current.find('.redux-container-info').data('id');
-            }
+                if (!is_hidden) {
+                    show = $.redux.check_parents_dependencies(child);
+                }
 
-            // Eat it, Travis!
-            var testSectionField = current.find('.redux-field:first');
-            if (testSectionField.hasClass('redux-container-section')) {
-                sectionFieldID = current.find('.redux-container-section').data('id');
-            }
-
-            // Divide field
-            var testDivideField = current.find('.redux-field:first');
-            if (testDivideField.hasClass('redux-container-divide')) {
-                divideFieldID = current.find('.redux-container-divide').data('id');
-            }
-
-            if (!is_hidden) {
-                switch (check_data.checkComparison) {
-                    case '=':
-                    case 'equals':
-                        //if value was array
-                        if (value2.toString().indexOf('|') !== -1) {
-                            value2_array = value2.split('|');
-                            if ($.inArray(value1, value2_array) != -1) {
-                                show = true;
-                            }
-                        } else {
-                            if (value1 == value2) {
-                                show = true;
-                            }
+                if (show === true) {
+                    // Shim for sections
+                    if ( childFieldset.hasClass('redux-container-section') ) {
+                        var div = $('#section-'+child);
+                        if (div.hasClass('redux-section-indent-start') && div.hasClass('hide')) {
+                            $('#section-table-' + child).fadeIn(300).removeClass('hide');
+                            div.fadeIn(300).removeClass('hide');
                         }
-                        break;
-                    case '!=':
-                    case 'not':
-                        //if value was array
-                        if (value2.toString().indexOf('|') !== -1) {
-                            value2_array = value2.split('|');
-                            if ($.inArray(value1, value2_array) == -1) {
-                                show = true;
-                            }
-                        } else {
-                            if (value1 != value2) {
-                                show = true;
-                            }
-                        }
-                        break;
-                    case '>':
-                    case 'greater':
-                    case 'is_larger':
-                        if (parseFloat(value1) > parseFloat(value2))
-                            show = true;
-                        break;
-                    case '>=':
-                        if (parseFloat(value1) >= parseFloat(value2))
-                            show = true;
-                        break;
-                    case '<':
-                    case 'less':
-                    case 'is_smaller':
-                        if (parseFloat(value1) < parseFloat(value2))
-                            show = true;
-                        break;
-                    case '<=':
-                        if (parseFloat(value1) <= parseFloat(value2))
-                            show = true;
-                        break;
-                    case 'contains':
-                        if (value1.toString().indexOf(value2) != -1)
-                            show = true;
-                        break;
-                    case 'doesnt_contain':
-                    case 'not_contain':
-                        if (value1.toString().indexOf(value2) == -1)
-                            show = true;
-                        break;
-                    case 'is_empty_or':
-                        if (value1 === "" || value1 == value2)
-                            show = true;
-                        break;
-                    case 'not_empty_and':
-                        if (value1 !== "" && value1 != value2)
-                            show = true;
-                        break;
-                }
-            }
-
-            if (show === true && current.is('.hiddenFold')) {
-                if (infoFieldID !== "") {
-                    $('#info-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
-                }
-
-                if (sectionFieldID !== "") {
-                    $('#section-' + sectionFieldID).css({display: 'none'}).fadeIn(300).show();
-                }
-
-                if (divideFieldID !== "") {
-                    $('#' + divideFieldID + '-divide').css({display: 'none'}).fadeIn(300).show();
-                }
-
-                current.css({
-                    display: 'none'
-                }).removeClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
-                current.fadeIn(300);
-            } else if (show === false && !current.is('.hiddenFold')) {
-                if (infoFieldID !== "") {
-                    $('#info-' + infoFieldID).css({display: ''}).fadeOut(300).hide();
-                }
-
-                if (sectionFieldID !== "") {
-                    $('#section-' + sectionFieldID).css({display: ''}).fadeOut(300).hide();
-                }
-
-                if (divideFieldID !== "") {
-                    $('#' + divideFieldID + '-divide' ).css({display: ''}).fadeOut(300).hide();
-                }
-
-                current.css({
-                    display: ''
-                }).addClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
-                current.fadeOut(300);
-            }
+                    }
+                    tr.fadeIn(300, function() {
+                        jQuery(this).removeClass('hide');
+                        if ( redux.required.hasOwnProperty(child) ) {
+                            $.redux.check_dependencies($('#'+redux.args.opt_name+'-'+child).children().first());
+                        } 
+                    });
+                } else if (show === false) {
+                    tr.fadeOut(100, function() {
+                        jQuery(this).addClass('hide');
+                        if ( redux.required.hasOwnProperty(child) ) {
+                            //console.log('Now check, reverse: '+child);
+                            $.redux.required_recursive_hide(child);                  
+                        }                       
+                    });
+                }  
             
-            //force rehid of empty elements
-            $('td > fieldset:empty,td > div:empty').parent().parent().hide();
+            current.find('select, radio, input[type=checkbox]').trigger('change');
 
-            //$.redux.verify_fold($(variable));
+        });
+    
+    };
+    $.redux.required_recursive_hide = function(id) {
+        if ($('#'+redux.args.opt_name+'-'+id).hasClass('redux-container-section')) {
+            var div = $('#section-'+id);
+            if (div.hasClass('redux-section-indent-start')) {
+                $('#section-table-' + id).fadeOut(50).addClass('hide');
+                div.fadeOut(50).addClass('hide');
+                return;
+            }
+        }
+
+        var toFade = $('#'+redux.args.opt_name+'-'+id).parents('tr:first');
+
+        toFade.fadeOut(50, function() {
+            jQuery(this).addClass('hide');
+            if ($('#'+redux.args.opt_name+'-'+id).hasClass('redux-container-section')) {
+                var div = $('#section-'+id);
+                if (div.hasClass('redux-section-indent-start')) {
+                    $('#section-table-' + id).fadeOut(50).addClass('hide');
+                    div.fadeOut(50).addClass('hide');
+                }
+            }
+            if ( redux.required.hasOwnProperty(id) ) {
+                $.each(redux.required[id], function(child) {
+                    $.redux.required_recursive_hide(child);
+                });
+            }
         });
     };
 
-    $.redux.verify_fold = function(item) {
-        var id = item.parents('.redux-field:first').data('id');
-        var itemVal = item.val();
-        var scope = (item.parents('.redux-groups-accordion-group:first').length > 0) ? item.parents('.redux-groups-accordion-group:first') : item.parents('.redux-group-tab:eq(0)');
-
-        if (redux.folds[ id ]) {
-
-            if (redux.folds[ id ].children) {
-
-                var theChildren = {};
-                $.each(redux.folds[ id ].children, function(index, value) {
-                    $.each(value, function(index2, value2) { // Each of the children for this value
-                        if (!theChildren[value2]) { // Create an object if it's not there
-                            theChildren[value2] = {show: false, hidden: false};
-                        }
-
-                        if (index == itemVal || theChildren[value2] === true) { // Check to see if it's in the criteria
-                            theChildren[value2].show = true;
-                        }
-
-                        if (theChildren[value2].show === true && scope.find('tr[data-check-id="' + id + '"]').hasClass("hiddenFold")) {
-                            theChildren[value2].show = false; // If this item is hidden, hide this child
-                        }
-
-                        if (theChildren[value2].show === true && scope.find('tr[data-check-id="' + redux.folds[ id ].parent + '"]').hasClass('hiddenFold')) {
-                            theChildren[value2].show = false; // If the parent of the item is hidden, hide this child
-                        }
-                        // Current visibility of this child node
-                        theChildren[value2].hidden = scope.find('tr[data-check-id="' + value2 + '"]').hasClass("hiddenFold");
-                    });
-                });
-
-                $.each(theChildren, function(index) {
-
-                    var parent = scope.find('tr[data-check-id="' + index + '"]');
-
-
-                    if (theChildren[index].show === true) {
-
-                        parent.fadeIn('medium', function() {
-                            parent.removeClass('hiddenFold');
-                            if (redux.folds[ index ] && redux.folds[ index ].children) {
-                                // Now iterate the children
-                                $.redux.verify_fold(parent.find('select, radio, input[type=checkbox], input[type=hidden]'));
-                            }
-                        });
-
-                    } else if (theChildren[index].hidden === false) {
-
-                        parent.fadeOut('medium', function() {
-                            parent.addClass('hiddenFold');
-                            if (redux.folds[ index ].children) {
-                                // Now iterate the children
-                                $.redux.verify_fold(parent.find('select, radio, input[type=checkbox], input[type=hidden]'));
-                            }
-                        });
+    $.redux.check_parents_dependencies = function(id) {
+        var show = "";
+        if ( redux.required_child.hasOwnProperty(id) ) {
+            $.each(redux.required_child[id], function(i, parentData) {
+                if ( $('#'+redux.args.opt_name+'-'+parentData.parent).parents('tr:first').hasClass('.hide') ) {
+                    show = false;
+                } else {
+                    if (show !== false) {
+                        var parentValue = $.redux.get_container_value(parentData.parent);
+                        show = $.redux.check_dependencies_visibility(parentValue, parentData);                    
                     }
-                });
-            }
+                }
+            });
+        } else {
+            show = true;
         }
+        return show;
     };
+
+    $.redux.check_dependencies_visibility = function(parentValue, data) {
+        var show = false,
+            checkValue_array,
+            checkValue = data.checkValue, 
+            operation = data.operation;
+        switch (operation) {
+            case '=':
+            case 'equals':
+                //if value was array
+                if (checkValue.toString().indexOf('|') !== -1) {
+                    checkValue_array = checkValue.split('|');
+                    if ($.inArray(parentValue, checkValue_array) != -1) {
+                        show = true;
+                    }
+                } else {
+                    if (parentValue == checkValue) {
+                        show = true;
+                    }
+                }
+                break;
+            case '!=':
+            case 'not':
+                //if value was array
+                if (checkValue.toString().indexOf('|') !== -1) {
+                    checkValue_array = checkValue.split('|');
+                    if ($.inArray(parentValue, checkValue_array) == -1) {
+                        show = true;
+                    }
+                } else {
+                    if (parentValue != checkValue) {
+                        show = true;
+                    }
+                }
+                break;
+            case '>':
+            case 'greater':
+            case 'is_larger':            
+                if (parseFloat(parentValue) > parseFloat(checkValue))
+                    show = true;
+                break;
+            case '>=':
+            case 'greater_equal':
+            case 'is_larger_equal':            
+                if (parseFloat(parentValue) >= parseFloat(checkValue))
+                    show = true;
+                break;
+            case '<':
+            case 'less':
+            case 'is_smaller':            
+                if (parseFloat(parentValue) < parseFloat(checkValue))
+                    show = true;
+                break;
+            case '<=':
+            case 'less_equal':
+            case 'is_smaller_equal':            
+                if (parseFloat(parentValue) <= parseFloat(checkValue))
+                    show = true;
+                break;
+            case 'contains':
+                if (parentValue.toString().indexOf(checkValue) != -1)
+                    show = true;
+                break;
+            case 'doesnt_contain':
+            case 'not_contain':
+                if (parentValue.toString().indexOf(checkValue) == -1)
+                    show = true;
+                break;
+            case 'is_empty_or':
+                if (parentValue === "" || parentValue == checkValue)
+                    show = true;
+                break;
+            case 'not_empty_and':
+                if (parentValue !== "" && parentValue != checkValue)
+                    show = true;
+                break;
+        }
+        return show;
+
+    };
+
 })(jQuery);
 
 jQuery.noConflict();
@@ -683,35 +618,7 @@ jQuery(document).ready(function($) {
         });
         jQuery('#' + relid + '_section_group_li').addClass('active');
     });
-    // Get the URL parameter for tab
 
-    function getURLParameter(name) {
-        return decodeURI((new RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, ''])[1]);
-    }
-    // If the $_GET param of tab is set, use that for the tab that should be open
-    var tab = getURLParameter('tab');
-    if (tab !== "") {
-        if ($.cookie("redux_current_tab_get") !== tab) {
-            $.cookie('redux_current_tab', tab, {
-                expires: 7,
-                path: '/'
-            });
-            $.cookie('redux_current_tab_get', tab, {
-                expires: 7,
-                path: '/'
-            });
-            jQuery('#' + tab + '_section_group_li').click();
-        }
-    } else if ($.cookie('redux_current_tab_get') !== "") {
-        $.removeCookie('redux_current_tab_get');
-    }
-    var sTab = jQuery('#' + $.cookie("redux_current_tab") + '_section_group_li_a');
-    // Tab the first item or the saved one
-    if ($.cookie("redux_current_tab") === null || typeof ($.cookie("redux_current_tab")) === "undefined" || sTab.length === 0) {
-        jQuery('.redux-group-tab-link-a:first').click();
-    } else {
-        sTab.click();
-    }
     // Default button clicked
     jQuery('input[name="' + redux.args.opt_name + '[defaults]"]').click(function() {
         if (!confirm(redux.args.reset_confirm)) {
