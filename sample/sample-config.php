@@ -256,11 +256,19 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         )
                     ),
                     array(
+                        'id'        => 'section-media-checkbox',
+                        'type'      => 'switch',
+                        'title'     => __('Section Show', 'redux-framework-demo'),
+                        'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
+
+                    ),
+                    array(
                         'id'        => 'section-media-start',
                         'type'      => 'section',
                         'title'     => __('Media Options', 'redux-framework-demo'),
                         'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
-                        'indent'    => true // Indent all options below until the next 'section' option is set.
+                        'indent'    => true, // Indent all options below until the next 'section' option is set.
+                        'required'  => array('section-media-checkbox', "=", 1),
                     ),
                     array(
                         'id'        => 'opt-media',
@@ -280,7 +288,8 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     array(
                         'id'        => 'section-media-end',
                         'type'      => 'section',
-                        'indent'    => false // Indent all options below until the next 'section' option is set.
+                        'indent'    => false, // Indent all options below until the next 'section' option is set.
+                        'required'  => array('section-media-checkbox', "=", 1),
                     ),
                     array(
                         'id'        => 'media-no-url',
