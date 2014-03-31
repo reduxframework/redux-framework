@@ -54,7 +54,7 @@
             fieldset.parents('tr:first').addClass('fold');
             if (v == "hide") {
                 fieldset.parents('tr:first').addClass('hide');
-                if (fieldset.hasClass('redux-section-indent-start') && div.hasClass('hide')) {
+                if (fieldset.hasClass('redux-container-section')) {
                     var div = $('#section-'+i);
                     $('#section-table-' + i).hide().addClass('hide');
                     div.hide().addClass('hide');
