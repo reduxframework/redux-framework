@@ -267,7 +267,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $this->current_tab = $_GET['tab'];    
                 }
                 if ($this->current_tab !== "") {
-                    if ($_COOKIE['redux_current_tab_get'] != $this->current_tab) {
+                    if (isset($_COOKIE['redux_current_tab_get']) && $_COOKIE['redux_current_tab_get'] != $this->current_tab) {
                         setcookie ("redux_current_tab", $this->current_tab, time() + ( 3600 * 7 ), "/");
                         setcookie ("redux_current_tab_get", $this->current_tab, time() + ( 3600 * 7 ), "/");
                     } else {
@@ -890,6 +890,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $this->sections[$sk] = $section;
                             }
                             if ($field['type'] == "section" && $field['indent'] == "true") {
+                                $field['class'] = isset($field['class']) ? $field['class'] : '';
                                 $field['class'] .= "redux-section-indent-start";
                                 $this->sections[$sk]['fields'][$k] = $field;
                             }
@@ -3360,13 +3361,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             //required field must not be hidden. otherwise hide this one by default
 
-            if ( !in_array( $data['parent'], $this->fieldsHidden ) && $this->folds[$field['id']] != "hide" ) {
+            if ( !in_array( $data['parent'], $this->fieldsHidden ) && ( !isset($this->folds[$field['id']]) || $this->folds[$field['id']] != "hide") ) {
                 if (isset($this->options[$data['parent']])) {
                     $return = $this->compareValueDependencies($this->options[$data['parent']], $data['checkValue'], $data['operation']);
                 }
             }
 
-            if ( $return && $this->folds[$field['id']] != "hide" ) {
+            if ( (isset($return) && $return) && ( !isset($this->folds[$field['id']]) || $this->folds[$field['id']] != "hide") ) {
                 $this->folds[$field['id']] = "show";
             } else {
                 $this->folds[$field['id']] = "hide";

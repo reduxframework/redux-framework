@@ -88,7 +88,7 @@ if (!class_exists('ReduxFramework_section')) {
             }
 
             //echo '</div><table class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td>';
-            echo '</div><table class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td id="'. $guid .'">';
+            echo '</div><table id="section-table-' . $this->field['id'] . '" class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td id="'. $guid .'">';
             
             // delete the tr afterwards
 ?>
