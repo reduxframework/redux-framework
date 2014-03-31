@@ -33,14 +33,16 @@ if(has_action('ecpt_field_options_')) {
     }
 }
 
-if ( !class_exists( 'ReduxFrameworkInstances' ) )
-{
+if ( !class_exists( 'ReduxFrameworkInstances' ) ) {
     // Instance Container
     include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
     include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
-    add_action( 'redux/init', 'ReduxFrameworkInstances::get_instance' );
+
 }
 
+if ( class_exists( 'ReduxFrameworkInstances' ) ) {
+    add_action('redux/init', 'ReduxFrameworkInstances::get_instance');
+}
 
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
@@ -270,7 +272,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 do_action( 'redux/construct', $this );
 
                 // Determine the currently selected tab
-                $this->current_tab = isset($_COOKIE['redux_current_tab']) ? $_COOKIE['redux_current_tab'] : '';
+                $this->current_tab = isset(i$_COOKIE['redux_current_tab']) ? $_COOKIE['redux_current_tab'] : '';
                 if (isset($_GET['tab'])) {
                     $this->current_tab = $_GET['tab'];    
                 }
