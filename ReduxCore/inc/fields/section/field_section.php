@@ -99,7 +99,7 @@ if (!class_exists('ReduxFramework_section')) {
                     prevelem.find("tr").last().remove();
 			        elem.parent().remove();
 			    });
-		    </script>';
+		    </script>
 <?php             
         }
 
