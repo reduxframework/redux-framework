@@ -262,7 +262,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 do_action( 'redux/construct', $this );
 
                 // Determine the currently selected tab
-                $this->current_tab = $_COOKIE['redux_current_tab'] ? $_COOKIE['redux_current_tab'] : '';
+                $this->current_tab = isset($_COOKIE['redux_current_tab']) ? $_COOKIE['redux_current_tab'] : '';
                 if (isset($_GET['tab'])) {
                     $this->current_tab = $_GET['tab'];    
                 }
