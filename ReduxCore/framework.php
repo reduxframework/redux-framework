@@ -164,6 +164,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
         public $localize_data       = array(); // Information that needs to be localized
+        public $required            = array(); // Information that needs to be localized
+        public $required_child      = array(); // Information that needs to be localized
+        public $localize_data       = array(); // Information that needs to be localized
         public $folds               = array(); // The itms that need to fold.
         public $path                = '';
         public $output              = array(); // Fields with CSS output selectors
@@ -275,7 +278,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if (!isset($_COOKIE) || isset($_COOKIE['redux_current_tab'])) {
                     $_COOKIE['redux_current_tab'] = "";
                 }
-                
+
                 if (isset($_GET['tab'])) {
                     $this->current_tab = $_GET['tab'];    
                 }
