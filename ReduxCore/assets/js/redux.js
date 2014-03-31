@@ -50,9 +50,15 @@
         // It's better to do this by PHP but there is no filter in tr tag , so is not possible
         // we going to move each attributes we may need for folding to tr tag
         $.each( redux.folds, function(i, v){
-            $('#'+redux.args.opt_name+'-'+i).parents('tr:first').addClass('fold');
+            var fieldset = $('#'+redux.args.opt_name+'-'+i);
+            fieldset.parents('tr:first').addClass('fold');
             if (v == "hide") {
-                $('#'+redux.args.opt_name+'-'+i).parents('tr:first').addClass('hide');
+                fieldset.parents('tr:first').addClass('hide');
+                if (fieldset.hasClass('redux-section-indent-start') && div.hasClass('hide')) {
+                    var div = $('#section-'+i);
+                    $('#section-table-' + i).hide().addClass('hide');
+                    div.hide().addClass('hide');
+                }
             }
         });
 
