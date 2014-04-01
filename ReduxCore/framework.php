@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.12';
+        public static $_version = '3.1.9.13';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -3155,85 +3155,31 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return bool
          */
         public function _can_output_css($field) {
+            $return = true;
             if (!empty($field['required'])) {
-                $return = false;
-                $global_var = $GLOBALS[$this->args['global_variable']];
-                if ( isset($global_var[$data['check-field']])) {
-                    $parentValue = $GLOBALS[$this->args['global_variable']][$field['required'][0]];
-                    $checkValue = $field['required'][2];
-                    $operation = $field['required'][1];
-                    $return = $this->compareValueDependencies($parentValue, $checkValue, $operation);
-                    $value1 = $global_var[$data['check-field']];
-                    $value2 = $data['checkValue'];
-                    switch ($data['check-comparison']) {
-                        case '=':
-                        case 'equals':
-                            if(is_array($value2)){
-                                if(in_array($value1, $value2))
-                                    $return = true;
-                            }else{
-                                if ($value1 == $value2)
-                                    $return = true;
+                if (isset($field['required'][0])) {
+                    if (!is_array($field['required'][0]) && count($field['required']) == 3) {
+                        $parentValue = $GLOBALS[$this->args['global_variable']][$field['required'][0]];
+                        $checkValue = $field['required'][2];
+                        $operation = $field['required'][1];
+                        $return = $this->compareValueDependencies($parentValue, $checkValue, $operation);
+                    } else if ( is_array($field['required'][0] ) ) {
+                        foreach ($field['required'] as $required) {
+                            if (!is_array($required[0]) && count($required) == 3) {
+                                $parentValue = $GLOBALS[$this->args['global_variable']][$required[0]];
+                                $checkValue = $required[2];
+                                $operation = $required[1];
+                                $return = $this->compareValueDependencies($parentValue, $checkValue, $operation);
                             }
-                            break;
-                        case '!=':
-                        case 'not':
-                            if(is_array($value2)){
-                                if(!in_array($value1, $value2))
-                                    $return = true;
-                            }else{
-                                if ($value1 != $value2)
-                                    $return = true;
+                            if (!$return) {
+                                return $return;
                             }
-                            break;
-                        case '>':
-                        case 'greater':
-                        case 'is_larger':
-                            if ($value1 > $value2)
-                                $return = true;
-                            break;
-                        case '>=':
-                        case 'greater_equal':
-                        case 'is_larger_equal':
-                            if ($value1 >= $value2)
-                                $return = true;
-                            break;
-                        case '<':
-                        case 'less':
-                        case 'is_smaller':
-                            if ($value1 < $value2)
-                                $return = true;
-                            break;
-                        case '<=':
-                        case 'less_equal':
-                        case 'is_smaller_equal':
-                            if ($value1 <= $value2)
-                                $return = true;
-                            break;
-                        case 'contains':
-                            if (strpos($value1, $value2) !== false)
-                                $return = true;
-                            break;
-                        case 'doesnt_contain':
-                        case 'not_contain':
-                            if (strpos($value1, $value2) === false)
-                                $return = true;
-                            break;
-                        case 'is_empty_or':
-                            if (empty($value1) || $value1 == $value2)
-                                $return = true;
-                            break;
-                        case 'not_empty_and':
-                            if (!empty($value1) && $value1 != $value2)
-                                $return = true;
-                            break;
+                        }
                     }
-
-                    return $return;
                 }
             }
 
-            return true;
+            return $return;
         } // _can_output_css
 
         /**

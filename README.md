@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.13 =
+* Fixed:      Undefined variable issues for new required methods.
+
 = 3.1.9.12 =
 * Fixed:      Default_show display error with a non-array being steralized.
 * Added:      Multiple required parent value checking! Booya!
