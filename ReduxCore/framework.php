@@ -33,16 +33,16 @@ if(has_action('ecpt_field_options_')) {
     }
 }
 
-if ( !class_exists( 'ReduxFrameworkInstances' ) ) {
-    // Instance Container
-    include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
-    include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
-
-}
-
-if ( class_exists( 'ReduxFrameworkInstances' ) ) {
-    add_action('redux/init', 'ReduxFrameworkInstances::get_instance');
-}
+//if ( !class_exists( 'ReduxFrameworkInstances' ) ) {
+//    // Instance Container
+//    include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
+//    include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
+//
+//}
+//
+//if ( class_exists( 'ReduxFrameworkInstances' ) ) {
+//    add_action('redux/init', 'ReduxFrameworkInstances::get_instance');
+//}
 
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
@@ -271,31 +271,31 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * action 'redux/construct'
                  * @param object $this ReduxFramework
                  */
-                do_action( 'redux/construct', $this );
-
-                // Determine the currently selected tab
-                if (!isset($_COOKIE) || isset($_COOKIE['redux_current_tab'])) {
-                    $_COOKIE['redux_current_tab'] = "";
-                }
-
-                if (isset($_GET['tab'])) {
-                    $this->current_tab = $_GET['tab'];    
-                }
-                if ($this->current_tab !== "") {
-                    if (isset($_COOKIE['redux_current_tab_get']) && $_COOKIE['redux_current_tab_get'] != $this->current_tab) {
-                        setcookie ("redux_current_tab", $this->current_tab, time() + ( 3600 * 7 ), "/");
-                        setcookie ("redux_current_tab_get", $this->current_tab, time() + ( 3600 * 7 ), "/");
-                    } else {
-                        setcookie("redux_current_tab_get", 0, time()-3600, '/');
-                    }
-                }
-                if ($this->current_tab == "") {
-                    foreach($this->sections as $key => $val) {
-                        $this->current_tab = $key;
-                        break;
-                    }
-                }
-
+//                do_action( 'redux/construct', $this );
+//
+//                // Determine the currently selected tab
+//                if (!isset($_COOKIE) || isset($_COOKIE['redux_current_tab'])) {
+//                    $_COOKIE['redux_current_tab'] = "";
+//                }
+//
+//                if (isset($_GET['tab'])) {
+//                    $this->current_tab = $_GET['tab'];    
+//                }
+//                if ($this->current_tab !== "") {
+//                    if (isset($_COOKIE['redux_current_tab_get']) && $_COOKIE['redux_current_tab_get'] != $this->current_tab) {
+//                        setcookie ("redux_current_tab", $this->current_tab, time() + ( 3600 * 7 ), "/");
+//                        setcookie ("redux_current_tab_get", $this->current_tab, time() + ( 3600 * 7 ), "/");
+//                    } else {
+//                        setcookie("redux_current_tab_get", 0, time()-3600, '/');
+//                    }
+//                }
+//                if ($this->current_tab == "") {
+//                    foreach($this->sections as $key => $val) {
+//                        $this->current_tab = $key;
+//                        break;
+//                    }
+//                }
+$this->current_tab = 0;
                 // Set the default values
                 $this->_default_cleanup();
                 $this->_internationalization();
@@ -1006,6 +1006,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array
          */
         function get_fold($field){
+            
             if ( !is_array( $field['required'] ) ) {
                 /*
                 Example variable:
@@ -1403,7 +1404,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _enqueue() {
-            
+
             global $wp_styles;
 
             wp_register_style(
@@ -1606,6 +1607,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             foreach( $this->sections as $section ) {
+
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $field ) {
                         // TODO AFTER GROUP WORKS - Revert IF below
@@ -2599,8 +2601,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $string .= '<li class="divide">&nbsp;</li>';
           } else {
             // DOVY! REPLACE $k with $section['ID'] when used properly.
-            $active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
-            $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li '.$active.'">';
+            //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
+            $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
             $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
             if ( !empty( $section['sections'] ) ) {
               $string .= '<ul id="' . $k.$suffix . '_section_group_li_subsections" class="sub">';
@@ -2790,8 +2792,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div class="redux-main">';
 
             foreach( $this->sections as $k => $section ) {
-                $active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
-                echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab"'.$active.'>';
+                
+                //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
+                echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
                 //echo '<div id="' . $k . '_nav-bar' . '"';
                 
                 if ( !empty( $section['tab'] ) ) {
@@ -3242,6 +3245,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         // Compare data for required field
         function compareValueDependencies($parentValue, $checkValue, $operation) {
+
             $return = false;
             switch ($operation) {
                 case '=':
