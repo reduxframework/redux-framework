@@ -33,16 +33,16 @@ if(has_action('ecpt_field_options_')) {
     }
 }
 
-//if ( !class_exists( 'ReduxFrameworkInstances' ) ) {
-//    // Instance Container
-//    include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
-//    include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
-//
-//}
-//
-//if ( class_exists( 'ReduxFrameworkInstances' ) ) {
-//    add_action('redux/init', 'ReduxFrameworkInstances::get_instance');
-//}
+if ( !class_exists( 'ReduxFrameworkInstances' ) ) {
+    // Instance Container
+    include_once(dirname(__FILE__).'/inc/class.redux_instances.php');
+    include_once(dirname(__FILE__).'/inc/lib.redux_instances.php');
+
+}
+
+if ( class_exists( 'ReduxFrameworkInstances' ) ) {
+    add_action('redux/init', 'ReduxFrameworkInstances::get_instance');
+}
 
 // Don't duplicate me!
 if( !class_exists( 'ReduxFramework' ) ) {
@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.14';
+        public static $_version = '3.1.9.15';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -272,8 +272,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * action 'redux/construct'
                  * @param object $this ReduxFramework
                  */
-//                do_action( 'redux/construct', $this );
-//
+                do_action( 'redux/construct', $this );
+
+                // TODO
+                
 //                // Determine the currently selected tab
 //                if (!isset($_COOKIE) || isset($_COOKIE['redux_current_tab'])) {
 //                    $_COOKIE['redux_current_tab'] = "";
@@ -296,7 +298,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 //                        break;
 //                    }
 //                }
-$this->current_tab = 0;
+
                 // Set the default values
                 $this->_default_cleanup();
                 $this->_internationalization();
@@ -327,7 +329,7 @@ $this->current_tab = 0;
                     $this->debug = new ReduxDebugObject($this);
 
                     if (true == $this->args['update_notice']) {
-                        //add_action( 'admin_init', array( $this, '_update_check' ) );
+                        add_action( 'admin_init', array( $this, '_update_check' ) );
                     }
                 }
 
@@ -366,13 +368,7 @@ $this->current_tab = 0;
 
         } // __construct()
 
-        public function _update_check() {
-
-            if (isset($this->update_checked) && $this->update_checked == true) {
-                return;
-            }
-            $this->update_checked = true;
-            
+        private function verFromGit() {
             // Get the raw framework.php from github
             $gitpage = wp_remote_get(
                     'https://raw.github.com/ReduxFramework/redux-framework/master/ReduxCore/framework.php', 
@@ -383,7 +379,7 @@ $this->current_tab = 0;
                         'sslverify' => true, 
                         'timeout'   => 300
                     ));
-            
+
             // Is the response code the corect one?
             if (!is_wp_error($gitpage)) {
                 if (isset($gitpage['body'])) {
@@ -414,19 +410,39 @@ $this->current_tab = 0;
 
                             // Strip off quotes.
                             $ver = str_replace("'",'',$ver);
-
-                            // Set up admin notice on new version
-                            if (1 == strcmp($ver, self::$_version)) {
-                                $this->admin_notices[] = array(
-                                    'type'      => 'updated',
-                                    'msg'       => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . self::$_version . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
-                                    'id'        => 'dev_notice_' . $ver,
-                                    'dismiss'   => true,
-                                );                            
-                            }
+                            
+                            return $ver;
                         }
                     }
                 }
+            }
+        }
+        
+        public function _update_check() {
+            
+            // If no cookie, check for new ver
+            if (!isset($_COOKIE['redux_update_check'])) { // || 1 == strcmp($_COOKIE['redux_update_check'], self::$_version)) {
+
+                // actual ver number from git repo
+                $ver = $this->verFromGit();
+                
+                // hour long cookie.
+                setcookie("redux_update_check", $ver, time() + 3600, '/');
+            } else {
+                
+                // saved value from cookie.  If it's different from current ver
+                // we can still show the update notice.
+                $ver = $_COOKIE['redux_update_check'];
+            }
+            
+            // Set up admin notice on new version
+            if (1 == strcmp($ver, self::$_version)) {
+                $this->admin_notices[] = array(
+                    'type'      => 'updated',
+                    'msg'       => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . self::$_version . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
+                    'id'        => 'dev_notice_' . $ver,
+                    'dismiss'   => true,
+                ); 
             }
         }
         

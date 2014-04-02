@@ -28,19 +28,19 @@
         };
 
 
-//        $.redux.required();
-//
-//        $("body").on('change', '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]', function(e) {
-//            $.redux.check_dependencies(this);
-//        });
-//
-//        $("body").on('check_dependencies', function(e, variable) {
-//            $.redux.check_dependencies(variable);
-//        });
-//
-//
-//        
-//        $('td > fieldset:empty,td > div:empty').parent().parent().hide();
+        $.redux.required();
+
+        $("body").on('change', '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]', function(e) {
+            $.redux.check_dependencies(this);
+        });
+
+        $("body").on('check_dependencies', function(e, variable) {
+            $.redux.check_dependencies(variable);
+        });
+
+
+        
+        $('td > fieldset:empty,td > div:empty').parent().parent().hide();
 
     });
 
@@ -342,8 +342,6 @@ function verify_fold(item) {
     jQuery(document).ready(function($) {
         //console.log(verify_fold);
 
-
-
         if (item.hasClass('redux-info') || item.hasClass('redux-typography')) {
             return;
         }
@@ -632,6 +630,7 @@ jQuery(document).ready(function($) {
     function getURLParameter(name) {
         return decodeURI((new RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, ''])[1]);
     }
+    
     // If the $_GET param of tab is set, use that for the tab that should be open
     var tab = getURLParameter('tab');
     if (tab !== "") {
@@ -650,6 +649,7 @@ jQuery(document).ready(function($) {
         $.removeCookie('redux_current_tab_get');
     }
     var sTab = jQuery('#' + $.cookie("redux_current_tab") + '_section_group_li_a');
+    
     // Tab the first item or the saved one
     if ($.cookie("redux_current_tab") === null || typeof ($.cookie("redux_current_tab")) === "undefined" || sTab.length === 0) {
         jQuery('.redux-group-tab-link-a:first').click();
@@ -664,6 +664,7 @@ jQuery(document).ready(function($) {
         }
         window.onbeforeunload = null;
     });
+    
     // Default button clicked
     jQuery('input[name="' + redux.args.opt_name + '[defaults-section]"]').click(function() {
         if (!confirm(redux.args.reset_section_confirm)) {
