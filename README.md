@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+
+= 3.1.9.21 =
+* Added:      `force_output` are on the field level to bypass the required check that removes the output if the field is hidden. Thanks @rffaguiar.
+
 = 3.1.9.20 =
 * Fixed:      Rare case (mediatemple grid server) when file_get_contents won't work outside of the uploads dir. Used curl to grab the font HTML.  ;)
 

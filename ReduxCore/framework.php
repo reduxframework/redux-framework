@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.20';
+        public static $_version = '3.1.9.21';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -3231,6 +3231,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _can_output_css($field) {
             $return = true;
+            if( isset( $field['force_output'] ) && $field['force_output'] == true ){
+                return $return;
+            }
             if (!empty($field['required'])) {
                 if (isset($field['required'][0])) {
                     if (!is_array($field['required'][0]) && count($field['required']) == 3) {
