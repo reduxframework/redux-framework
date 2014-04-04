@@ -215,6 +215,18 @@ class ReduxFramework_typography {
                     echo $this->parent->googleFontHTML;
                 } else if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
                     $googleHTML = $wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                    // Fallback if file_get_contents won't work for wordpress. MEDIATEMPLE
+                    if (empty($googleHTML)) {
+                        $url = ReduxFramework::$_url . 'inc/fields/typography/googlefonts.html';
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        $googleHTML = curl_exec($ch);
+                        curl_close($ch);
+                        if (empty($googleHTML)) {
+                            $googleHTML = false;
+                        }
+                    }
                     $this->parent->googleFontHTML = $googleHTML;
                     echo $googleHTML;
                 }
