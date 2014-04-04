@@ -251,7 +251,7 @@ if (!class_exists('ReduxFramework_slides')) {
             wp_enqueue_script(
                 'redux-field-media-js',
                 ReduxFramework::$_url . 'inc/fields/media/field_media.js',
-                array( 'jquery', 'wp-color-picker' ),
+                array( 'jquery' ),
                 time(),
                 true
             );

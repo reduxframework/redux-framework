@@ -60,9 +60,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.15';
+        public static $_version = '3.1.9.16';
         public static $_dir;
         public static $_url;
+        public static $wp_content_url;
+        public static $base_wp_content_url;
         public static $_properties;
         public static $_is_plugin = true;
         public static $_as_plugin = false;
@@ -74,8 +76,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
             $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
             $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
-            $wp_content_url = Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) );
-            self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;
+            self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
+            self::$_url     = self::$wp_content_url . $relative_url;
 
             // See if Redux is a plugin or not
             if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath(get_stylesheet_directory()) ) !== false) {
@@ -670,8 +672,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @since ReduxFramework 3.0.0
          */
         function get_options() {
+
             $defaults = false;
-            $results = array();
+
             if ( !empty( $this->defaults ) ) {
                 $defaults = $this->defaults;
             }
@@ -683,7 +686,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             } else if ( $this->args['database'] === 'theme_mods_expanded' ) {
                 $result = get_theme_mods();
             } else {
-                $result = get_option( $this->args['opt_name']);
+                $result = get_option( $this->args['opt_name'], array() );
             }
 
             if ( empty( $result ) && !empty( $defaults ) ) {
@@ -2084,6 +2087,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if ( !isset( $field['type'] ) ) {
                             continue; // You need a type!
                         }
+
                         // TODO AFTER GROUP WORKS - Remove IF statement
 
                         if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
@@ -2137,6 +2141,46 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $doUpdate = true;
                             }
                         }
+
+                        // CORRECT URLS if media URLs are wrong, but attachment IDs are present.
+                        if ( $field['type'] == "media" ) {
+                            if (isset($this->options[$field['id']]['id']) && isset($this->options[$field['id']]['url']) && !empty($this->options[$field['id']]['url']) && strpos($this->options[$field['id']]['url'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
+                                $data = wp_get_attachment_image_src( $this->options[$field['id']]['id'], 'full' );
+                                if ( isset( $data[0] ) && !empty( $data[0] ) ) {
+                                    $this->options[$field['id']]['url'] = $data[0];
+                                    $data = wp_get_attachment_image_src( $this->options[$field['id']]['id'], array(150,150) );
+                                    $this->options[$field['id']]['thumbnail'] = $data[0];
+                                    $doUpdate = true;
+                                }
+                            }
+                        }
+                        if ( $field['type'] == "background" ) {
+
+                            if (isset($this->options[$field['id']]['media']['id']) && isset($this->options[$field['id']]['background-image']) && !empty($this->options[$field['id']]['background-image']) && strpos($this->options[$field['id']]['background-image'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
+                                echo "here-background";
+                                $data = wp_get_attachment_image_src( $this->options[$field['id']]['media']['id'], 'full' );
+                                if ( isset( $data[0] ) && !empty( $data[0] ) ) {
+                                    $this->options[$field['id']]['background-image'] = $data[0];
+                                    $data = wp_get_attachment_image_src( $this->options[$field['id']]['media']['id'], array(150,150) );
+                                    $this->options[$field['id']]['media']['thumbnail'] = $data[0];
+                                    $doUpdate = true;
+                                }
+                            }
+                        }
+                        if ( $field['type'] == "slides" ) {
+                            if (isset($this->options[$field['id']][0]['attachment_id']) && isset($this->options[$field['id']][0]['url']) && !empty($this->options[$field['id']][0]['url']) && strpos($this->options[$field['id']][0]['url'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
+                                foreach($this->options[$field['id']] as $k => $v) {
+                                    $data = wp_get_attachment_image_src( $v['attachment_id'], 'full' );
+                                    if ( isset( $data[0] ) && !empty( $data[0] ) ) {
+                                        $this->options[$field['id']][$k]['url'] = $data[0];
+                                        $data = wp_get_attachment_image_src( $v['attachment_id'], array(150,150) );
+                                        $this->options[$field['id']][$k]['thumb'] = $data[0];
+                                        $doUpdate = true;
+                                    }
+                                }
+                            }
+                        }
+                        // END -> CORRECT URLS if media URLs are wrong, but attachment IDs are present.
 
                         if (true == $doUpdate) {
                             if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
