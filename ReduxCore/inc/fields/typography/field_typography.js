@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 
     Object.size = function(obj) {
         var size = 0,
-                key;
+            key;
         for (key in obj) {
             if (obj.hasOwnProperty(key)) {
                 size++;
@@ -61,8 +61,12 @@ jQuery(document).ready(function($) {
             $('#' + mainID).addClass('typography-initialized');
         }
         // Get the styles and such from the font
-        var details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
-        $('#' + mainID + ' .redux-typography-font-options').val(decodeURIComponent(option.data('details')));
+        var details = "";
+        if (option.data('details')) {
+            details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
+            $('#' + mainID + ' .redux-typography-font-options').val(decodeURIComponent(option.data('details')));
+        }
+
         // If we changed the font
         if ($(selector).hasClass('redux-typography-family')) {
             var html = '<option value=""></option>';
