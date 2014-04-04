@@ -1778,6 +1778,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * action 'redux/page/{opt_name}/enqueue'
              */
             do_action( "redux/page/{$this->args['opt_name']}/enqueue" );
+
+
         } // _enqueue()
 
         /**
@@ -2065,7 +2067,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * filter 'redux/options/{opt_name}/section/{section.id}'
                  * @param array $section  section configuration
                  */
-                $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
+                if (isset($section['id'])) {
+                    $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
+                }
 
                 $heading = isset($section['heading']) ? $section['heading'] : $section['title'];
                 if (isset($section['permissions'])) {
