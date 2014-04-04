@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.1.8
+ * @version     3.2.0
  */
 
 // Exit if accessed directly
@@ -2155,9 +2155,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                         }
                         if ( $field['type'] == "background" ) {
-
                             if (isset($this->options[$field['id']]['media']['id']) && isset($this->options[$field['id']]['background-image']) && !empty($this->options[$field['id']]['background-image']) && strpos($this->options[$field['id']]['background-image'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
-                                echo "here-background";
                                 $data = wp_get_attachment_image_src( $this->options[$field['id']]['media']['id'], 'full' );
                                 if ( isset( $data[0] ) && !empty( $data[0] ) ) {
                                     $this->options[$field['id']]['background-image'] = $data[0];
