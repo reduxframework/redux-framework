@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.18';
+        public static $_version = '3.1.9.19';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1281,7 +1281,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 return;
             if($menu){
                 foreach($menu as $menu_item):
-                    if($menu_item[2]===$this->args["page_slug"]){
+                    if(isset($menu_item[2]) && $menu_item[2]===$this->args["page_slug"]){
                         $nodeargs = array(
                             'id'    => $menu_item[2],
                             'title' => "<span class='ab-icon dashicons-admin-generic'></span>".$menu_item[0],

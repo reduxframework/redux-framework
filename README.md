@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.19 =
+* Fixed:      Undefined index for admin bar.
+
 = 3.1.9.18 =
 * Fixed:      SMALL issue with WordPress 3.9. Now it works.  ;)
 
