@@ -61,6 +61,12 @@
                         div.hide().addClass('hide');
                     }
                 }
+                if (fieldset.hasClass('redux-container-info')) {
+                    $('#info-'+i).hide().addClass('hide');
+                }
+                if (fieldset.hasClass('redux-container-divide')) {
+                    $('#divide-'+i).hide().addClass('hide');
+                }
             }
         });
 
@@ -113,6 +119,12 @@
                             div.fadeIn(300).removeClass('hide');
                         }
                     }
+                    if ( childFieldset.hasClass('redux-container-info') ) {
+                        $('#info-'+child).fadeIn(300).removeClass('hide');
+                    }
+                    if ( childFieldset.hasClass('redux-container-divide') ) {
+                        $('#divide-'+child).fadeIn(300).removeClass('hide');
+                    }
                     tr.fadeIn(300, function() {
                         jQuery(this).removeClass('hide');
                         if ( redux.required.hasOwnProperty(child) ) {
@@ -135,14 +147,6 @@
     
     };
     $.redux.required_recursive_hide = function(id) {
-        if ($('#'+redux.args.opt_name+'-'+id).hasClass('redux-container-section')) {
-            var div = $('#section-'+id);
-            if (div.hasClass('redux-section-indent-start')) {
-                $('#section-table-' + id).fadeOut(50).addClass('hide');
-                div.fadeOut(50).addClass('hide');
-                return;
-            }
-        }
 
         var toFade = $('#'+redux.args.opt_name+'-'+id).parents('tr:first');
 
@@ -154,6 +158,12 @@
                     $('#section-table-' + id).fadeOut(50).addClass('hide');
                     div.fadeOut(50).addClass('hide');
                 }
+            }
+            if ($('#'+redux.args.opt_name+'-'+id).hasClass('redux-container-info')) {
+                $('#info-'+id).fadeOut(50).addClass('hide');
+            }
+            if ($('#'+redux.args.opt_name+'-'+id).hasClass('redux-container-divide')) {
+                $('#divide-'+id).fadeOut(50).addClass('hide');
             }
             if ( redux.required.hasOwnProperty(id) ) {
                 $.each(redux.required[id], function(child) {
