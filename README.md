@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.23 =
+* Fixed:      Import/Export fix.  Thanks, CGlingener!
+
 = 3.1.9.22 =
 * Added:      Save warning now is sticky to the top and responsive.
 * Fixed:      Mobile fixes for Redux. Looks great on small screens how.
