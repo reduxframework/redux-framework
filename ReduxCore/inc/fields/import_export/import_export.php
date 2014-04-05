@@ -113,11 +113,7 @@ if( !class_exists( 'Redux_import_export' ) ) {
             echo "<p>";
             echo '<textarea class="large-text noUpdate" id="redux-export-code" rows="8">';
 
-            if (version_compare(phpversion(), "5.3.0", ">=")) {
-                echo json_encode( $backup_options, true );
-            } else {
-                echo json_encode( addslashes( $backup_options ) );
-            }
+			echo json_encode( $backup_options );
 
             echo '</textarea>';
 
