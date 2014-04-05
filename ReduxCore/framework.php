@@ -2373,6 +2373,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 if ( !empty( $import ) ) {
+
+					$imported_options = json_decode( $import, true );
+
+					/**
+					 * No version check, cause Wordpress handles magic quotes
+					 * and another stripslashes would break the $import
+					 *
                     if (version_compare(phpversion(), "5.3.0", ">=")) {
                         $imported_options = json_decode( $import, true );
                     } else {
@@ -2381,9 +2388,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         } else if (function_exists('strip_slashes')) {
                             $import = get_magic_quotes_gpc() ? strip_slashes($import) : $import;
                         }
-                        $imported_options = json_decode( $import ) ;
-                        $imported_options = (array) $imported_options;
+                        $imported_options = json_decode( $import, true );
                     }
+					*/
                 }
 
                 if( !empty( $imported_options ) && is_array( $imported_options ) && isset( $imported_options['redux-backup'] ) && $imported_options['redux-backup'] == '1' ) {
