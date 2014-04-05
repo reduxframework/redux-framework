@@ -2373,6 +2373,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 if ( !empty( $import ) ) {
+                    $imported_options = json_decode( $import, true );
+                    
                     if (version_compare(phpversion(), "5.3.0", ">=")) {
                         $imported_options = json_decode( $import, true );
                     } else {
@@ -2381,8 +2383,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         } else if (function_exists('strip_slashes')) {
                             $import = get_magic_quotes_gpc() ? strip_slashes($import) : $import;
                         }
-                        $imported_options = json_decode( $import ) ;
-                        $imported_options = (array) $imported_options;
+//                      $imported_options = json_decode( $import ) ;
+    //                  $imported_options = (array) $imported_options;
+                        $imported_options = json_decode( $import, true );
                     }
                 }
 
