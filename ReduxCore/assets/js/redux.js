@@ -460,6 +460,7 @@ function redux_change(variable) {
             jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
         }
     }
+    // TODO Check
     jQuery('#redux-save-warn').slideDown();
 }
 jQuery(document).ready(function($) {
@@ -723,12 +724,9 @@ jQuery(document).ready(function($) {
         redux_expand_options(jQuery(this).parents('.redux-container:first'));
         return false;
     });
-    
-    if (jQuery('#redux-save').is(':visible')) {
-        jQuery('#redux-save').slideDown();
-    }
-    if (jQuery('#redux-imported').is(':visible')) {
-        jQuery('#redux-imported').slideDown();
+
+    if (jQuery('#saved_notice').is(':visible')) {
+        jQuery('#saved_notice').slideDown();
     }
     jQuery(document.body).on('change', '.redux-field input, .redux-field textarea, .redux-field select', function() {
         if (!jQuery(this).hasClass('noUpdate')) {
@@ -744,17 +742,28 @@ jQuery(document).ready(function($) {
         height: stickyHeight
     });
 
+    window.onresize = function(event) {
+        if (jQuery('#redux-sticky').hasClass('sticky-save-warn')) {
+            console.log('resize');
+         //   jQuery('#redux-save-warn').css('left', jQuery('#redux-intro-text').width())
+        }
+    };
+
     function stickyInfo() {
         var stickyWidth = jQuery('#info_bar').width() - 2;
         if (!jQuery('#info_bar').isOnScreen() && !jQuery('#redux-footer-sticky').isOnScreen()) {
+            jQuery('#redux-sticky').addClass('sticky-save-warn');
             jQuery('#redux-footer').css({
                 position: 'fixed',
                 bottom: '0',
                 width: stickyWidth
             });
             jQuery('#redux-footer').addClass('sticky-footer-fixed');
+
+            jQuery('#redux-save-warn').css('left', jQuery('#redux-sticky').offset().left);
             jQuery('#redux-sticky-padder').show();
         } else {
+            jQuery('#redux-sticky').removeClass('sticky-save-warn');
             jQuery('#redux-footer').css({
                 background: '#eee',
                 position: 'inherit',
@@ -774,8 +783,7 @@ jQuery(document).ready(function($) {
             stickyInfo();
         });
     }
-
-    jQuery('#redux-save, #redux-imported').delay(4000).slideUp();
+    jQuery('#saved_notice').delay(4000).slideUp();
     jQuery('#redux-field-errors').delay(8000).slideUp();
     jQuery('.redux-save').click(function() {
         window.onbeforeunload = null;
@@ -804,6 +812,7 @@ jQuery(document).ready(function($) {
     // Display errors on page load
     if (redux.errors !== undefined) {
         jQuery("#redux-field-errors span").html(redux.errors.total);
+        // TODO Check
         jQuery("#redux-field-errors").show();
         jQuery.each(redux.errors.errors, function(sectionID, sectionArray) {
             jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
@@ -817,6 +826,7 @@ jQuery(document).ready(function($) {
     }
     // Display warnings on page load
     if (redux.warnings !== undefined) {
+        // TODO check
         jQuery("#redux-field-warnings span").html(redux.warnings.total);
         jQuery("#redux-field-warnings").show();
         jQuery.each(redux.warnings.warnings, function(sectionID, sectionArray) {

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework 3.2.0 Front-end\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-04-04 18:07:32+00:00\n"
+"POT-Creation-Date: 2014-04-05 18:24:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,17 +21,17 @@ msgstr ""
 "X-Poedit-SearchPath-2: .\n"
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:402
-#: ReduxCore/framework.php:1711
+#: ReduxCore/framework.php:1717
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:403
-#: ReduxCore/framework.php:1712
+#: ReduxCore/framework.php:1718
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:404
-#: ReduxCore/framework.php:1714
+#: ReduxCore/framework.php:1720
 msgid "Your current options will be replaced with the values of this preset. Would you like to proceed?"
 msgstr ""
 
@@ -47,65 +47,65 @@ msgstr ""
 msgid "Your current options will be replaced with the values of this preset.  Would you like to proceed?"
 msgstr ""
 
-#: ReduxCore/framework.php:204
+#: ReduxCore/framework.php:205
 msgid "Options panel created using %1$s"
 msgstr ""
 
-#: ReduxCore/framework.php:204
+#: ReduxCore/framework.php:205
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:207 ReduxCore/framework.php:210
-#: ReduxCore/framework.php:1309
+#: ReduxCore/framework.php:208 ReduxCore/framework.php:211
+#: ReduxCore/framework.php:1315
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/framework.php:485
+#: ReduxCore/framework.php:491
 msgid "Dismiss"
 msgstr ""
 
-#: ReduxCore/framework.php:1253 ReduxCore/framework.php:1254
-#: ReduxCore/framework.php:2857 ReduxCore/framework.php:2917
+#: ReduxCore/framework.php:1259 ReduxCore/framework.php:1260
+#: ReduxCore/framework.php:2870 ReduxCore/framework.php:2930
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1713
+#: ReduxCore/framework.php:1719
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1715
+#: ReduxCore/framework.php:1721
 msgid "Please Wait"
 msgstr ""
 
-#: ReduxCore/framework.php:1851
+#: ReduxCore/framework.php:1857
 msgid "Hints"
 msgstr ""
 
-#: ReduxCore/framework.php:1960
+#: ReduxCore/framework.php:1966
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:2714
+#: ReduxCore/framework.php:2713
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:2776
+#: ReduxCore/framework.php:2775
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:2778 ReduxCore/framework.php:2967
+#: ReduxCore/framework.php:2777 ReduxCore/framework.php:2980
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:2780 ReduxCore/framework.php:2969
+#: ReduxCore/framework.php:2779 ReduxCore/framework.php:2982
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:2782 ReduxCore/framework.php:2971
+#: ReduxCore/framework.php:2781 ReduxCore/framework.php:2984
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:2785 ReduxCore/framework.php:2974
+#: ReduxCore/framework.php:2784 ReduxCore/framework.php:2987
 msgid "Working..."
 msgstr ""
 
@@ -113,19 +113,27 @@ msgstr ""
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:2802
-msgid "Settings Saved!"
+#: ReduxCore/framework.php:2803
+msgid "All Defaults Restored!"
 msgstr ""
 
 #: ReduxCore/framework.php:2809
+msgid "Section Defaults Restored!"
+msgstr ""
+
+#: ReduxCore/framework.php:2815
+msgid "Settings Saved!"
+msgstr ""
+
+#: ReduxCore/framework.php:2822
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:2810
+#: ReduxCore/framework.php:2823
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:2811
+#: ReduxCore/framework.php:2824
 msgid "warning(s) were found!"
 msgstr ""
 
@@ -492,50 +500,58 @@ msgid "our documentation"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:134
+msgid "Redux Generator"
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:134
+msgid "Want to get a head start? Use the %1$s. It will create a customized boilerplate theme or a standalone admin folder complete with all things Redux (with the help of Underscores and TGM). Save yourself a headache and try it today."
+msgstr ""
+
+#: ReduxCore/inc/tracking.php:135
 msgid "Redux Extensions"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:134
-msgid "Did you know Redux has extensions, which enhances its features?  Visit our %1$s to learn more!"
+#: ReduxCore/inc/tracking.php:135
+msgid "Did you know we have extensions, which greatly enhance the features of Redux?  Visit our %1$s to learn more!"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:134
+#: ReduxCore/inc/tracking.php:135
 msgid "extensions directory"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:135
+#: ReduxCore/inc/tracking.php:136
 msgid "Like Redux?"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:135
+#: ReduxCore/inc/tracking.php:136
 msgid "If so, please %1$s and consider making a %2$s to keep development of Redux moving forward."
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:135
+#: ReduxCore/inc/tracking.php:136
 msgid "leave us a favorable review on WordPress.org"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:135
+#: ReduxCore/inc/tracking.php:136
 msgid "donation"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:136
+#: ReduxCore/inc/tracking.php:137
 msgid "Newsletter"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:136
+#: ReduxCore/inc/tracking.php:137
 msgid "If you'd like to keep up to with all things Redux, please subscribe to our newsletter"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:137
+#: ReduxCore/inc/tracking.php:138
 msgid "Email address"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:137
+#: ReduxCore/inc/tracking.php:138
 msgid "Subscribe"
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:146
+#: ReduxCore/inc/tracking.php:147
 msgid "Close"
 msgstr ""
 
@@ -587,17 +603,25 @@ msgid "Click here to activate the sample config file."
 msgstr ""
 
 #: class.redux-plugin.php:412
-msgid "Github Repo"
+msgid "Repo"
 msgstr ""
 
 #: class.redux-plugin.php:413
-msgid "Issue Tracker"
+msgid "Generator"
 msgstr ""
 
-#: class.redux-plugin.php:418
-msgid "Deactivate Demo Mode"
+#: class.redux-plugin.php:414
+msgid "Issues"
+msgstr ""
+
+#: class.redux-plugin.php:415
+msgid "Documentation"
 msgstr ""
 
 #: class.redux-plugin.php:420
+msgid "Deactivate Demo Mode"
+msgstr ""
+
+#: class.redux-plugin.php:422
 msgid "Activate Demo Mode"
 msgstr ""

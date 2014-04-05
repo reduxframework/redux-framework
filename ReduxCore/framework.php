@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.21';
+        public static $_version = '3.1.9.22';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -89,6 +89,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $instance            = null;
         public $admin_notices       = array();
         public $page                = '';
+        public $saved               = false;
         public $fields              = array(); // Fields by type used in the panel
         public $current_tab         = ''; // Current section to display, cookies
         public $extensions          = array(); // Extensions by type used in the panel
@@ -248,6 +249,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach( $extra_tabs as $tab ) {
                         array_push($this->sections, $tab);
                     }
+                }
+
+                if (isset($_COOKIE["redux-saved-{$this->args['opt_name']}"])) {
+                    $this->saved = $_COOKIE["redux-saved-{$this->args['opt_name']}"];
+                    setcookie("redux-saved-{$this->args['opt_name']}", 1, time()-3600, "/");
                 }
 
                 // Move to the first loop area!
@@ -1725,7 +1731,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             // Construct the errors array.
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $notices['errors'] ) ) {
+            if( $this->saved && !empty( $notices['errors'] ) ) {
                 $theTotal = 0;
                 $theErrors = array();
                 foreach( $notices['errors'] as $error ) {
@@ -1740,7 +1746,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             // Construct the warnings array.
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && !empty( $notices['warnings'] ) ) {
+            if( $this->saved && !empty( $notices['warnings'] ) ) {
                 $theTotal = 0;
                 $theWarnings = array();
                 foreach( $notices['warnings'] as $warning ) {
@@ -2356,8 +2362,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array|mixed|string|void
          */
         public function _validate_options( $plugin_options ) {
-            setcookie("redux-saved-{$this->args['opt_name']}", 1, 90, "/");
-
+            setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
 
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
@@ -2369,7 +2374,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $import = $plugin_options['import_code'];
                 } elseif( $plugin_options['import_link'] != '' ) {
                     $import = wp_remote_retrieve_body( wp_remote_get( $plugin_options['import_link'] ) );
-
                 }
 
                 if ( !empty( $import ) ) {
@@ -2390,7 +2394,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach($imported_options as $key => $value) {
                         $plugin_options[$key] = $value;
                     }
-                    $plugin_options['REDUX_imported'] = 1;
 
                     /**
                      * action 'redux/options/{opt_name}/import'
@@ -2402,8 +2405,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     if( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
                         setcookie( 'redux_current_tab', '', 1, '/' );
                     }
-                    setcookie( 'redux_current_tab', '', 1, '/', 1000 );
-                    setcookie('redux-compiler-' . $this->args['opt_name'], 1, 1000, "/");
+                    setcookie( 'redux_current_tab', '', 1, '/', time()+1000, "/" );
+                    setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 1000, "/");
+                    setcookie("redux-saved-{$this->args['opt_name']}", 'imported', time() + 1000, "/");
 
                     //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                     $plugin_options['REDUX_COMPILER'] = time();
@@ -2414,13 +2418,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                     return $plugin_options;
                 }
-            } else {
-                $plugin_options['REDUX_imported'] = false;
             }
+
 
             if( !empty( $plugin_options['defaults'] ) ) {
                 //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
-                setcookie('redux-compiler-' . $this->args['opt_name'], 1, 1000, "/");
+                setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
                 $plugin_options = $this->options_defaults;
                 $plugin_options['REDUX_COMPILER'] = time();
                 $this->set_options( $plugin_options );
@@ -2430,6 +2433,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @param object $this ReduxFramework
                  */
                 do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
+
+                setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
 
                 return $plugin_options;
             }
@@ -2449,7 +2454,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
                 if ($compiler) {
-                    setcookie('redux-compiler-' . $this->args['opt_name'], 1, 1000, "/");
+                    setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
                     //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                     $plugin_options['REDUX_COMPILER'] = time();
                 }
@@ -2462,7 +2467,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @param object $this ReduxFramework
                  */
                 do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
-
+                setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                 return $plugin_options;
             }
 
@@ -2471,6 +2476,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( !empty( $this->errors ) || !empty( $this->warnings ) ) {
                 set_transient( 'redux-notices-' . $this->args['opt_name'], array( 'errors' => $this->errors, 'warnings' => $this->warnings ), 1000 );
+                setcookie("redux-notices-{$this->args['opt_name']}", 1, time() + 1000, "/");
             }
 
             /**
@@ -2488,7 +2494,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( !empty( $plugin_options['compiler'] ) ) {
                 $plugin_options['REDUX_COMPILER'] = time();
                 //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 2000 );
-                setcookie('redux-compiler-' . $this->args['opt_name'], 1, 2000, "/");
+                setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
             }
 
             unset( $plugin_options['defaults'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
@@ -2698,13 +2704,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _options_page_html() {
 
-            //setcookie("redux-saved-{$this->args['opt_name']}", 1, 90, "/");
-            $saved = false;
-            if (isset($_COOKIE["redux-saved-{$this->args['opt_name']}"])) {
-                $saved = "redux-saved-{$this->args['opt_name']}";
-                setcookie("redux-saved-{$this->args['opt_name']}", 1, time()-3600, "/");
-            }
-
             echo '<div class="wrap"><h2></h2></div>'; // Stupid hack for Wordpress alerts and warnings
 
             echo '<div class="clear"></div>';
@@ -2739,7 +2738,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( empty( $this->options['last_tab'] ) )
                 $this->options['last_tab'] = '';
 
-            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !$saved ) ? $_GET['tab'] : $this->options['last_tab'];
+            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset($_COOKIE["redux-saved-{$this->args['opt_name']}"]) ) ? $_GET['tab'] : $this->options['last_tab'];
 
             echo '<input type="hidden" id="last_tab" name="' . $this->args['opt_name'] . '[last_tab]" value="' . $this->options['last_tab'] . '" />';
 
@@ -2787,28 +2786,42 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '</div>';
 
             // Warning bar
-            if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' && $saved == '1' ) {
-                if( isset( $this->options['REDUX_imported'] ) && $this->options['REDUX_imported'] === 1 ) {
+            if( $this->saved != false ) {
+                if( $this->saved == "imported" ) {
+
                     /**
                      * filter 'redux-imported-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
-                    echo '<div id="redux-imported"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
+                    echo '<div id="saved_notice" class="admin-notice notice-blue"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
+                    //exit();
+                } else if( $this->saved == "defaults" ) {
+                    /**
+                     * filter 'redux-defaults-text-{opt_name}'
+                     * @param string  translated "settings imported" text
+                     */
+                    echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
+                } else if( $this->saved == "defaults_section" ) {
+                    /**
+                     * filter 'redux-defaults-section-text-{opt_name}'
+                     * @param string  translated "settings imported" text
+                     */
+                    echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
                 } else {
                     /**
                      * filter 'redux-saved-text-{opt_name}'
                      * @param string translated "settings saved" text
                      */
-                    echo '<div id="redux-save"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
+                    echo '<div id="saved_notice" class="admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
                 }
             }
             /**
              * filter 'redux-changed-text-{opt_name}'
              * @param string translated "settings have changed" text
              */
-            echo '<div id="redux-save-warn"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
-            echo '<div id="redux-field-errors"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
-            echo '<div id="redux-field-warnings"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
+            echo '<div id="redux-save-warn" class="notice-yellow"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
+            echo '<div id="redux-field-errors" class="notice-red"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
+            echo '<div id="redux-field-warnings" class="notice-yellow"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
 
             echo '</div>';
 
@@ -3005,6 +3018,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds<br/>Redux is currently set to developer mode.</div>';
             }
+
         }
 
         /**

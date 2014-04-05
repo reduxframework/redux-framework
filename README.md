@@ -74,6 +74,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.22 =
+* Added:      Save warning now is sticky to the top and responsive.
+* Fixed:      Mobile fixes for Redux. Looks great on small screens how.
+* Fixed:      Slight CSS fixes.
+* Fixed:      Compiler fixes and added notices.
+* Added:      Import/Export more reasonable text.
 
 = 3.1.9.21 =
 * Added:      `force_output` are on the field level to bypass the required check that removes the output if the field is hidden. Thanks @rffaguiar.
