@@ -1,10 +1,10 @@
 === Redux Framework ===
-Contributors: nohalfpixels, ghost1227, dovyp, kprovance
+Contributors: ghost1227, dovyp, kprovance
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U
-Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
+Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 3.8.1
-Stable tag: 3.1.9
+Tested up to: 3.9.0
+Stable tag: 3.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,6 +26,13 @@ it would take to build from the ground up!
 Don't take our word for it, check out our online demo and try Redux without installing a thing!
 [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
+= Use Our Custom Generator to Get Started =
+Want to use Redux, but not sure what to do? Use our [generator](http://generate.reduxframework.com/)! It will allow you to make
+a custom theme based on [_s](http://underscores.me), [TGM](http://tgmpluginactivation.com), and [Redux](http://reduxframework.com), and any Redux arguments you want to set.
+Don't want to make your own theme? Then output a custom admin folder that you can place
+in a theme or plugin. Oh and did we mention it's free? Try it today at:
+[**http://generate.reduxframework.com/**](http://generate.reduxframework.com/)
+
 
 = Docs & Support =
 We have extremely extensive docs. Please visit [http://docs.reduxframework.com/](http://docs.reduxframework.com/) If that doesn’t solve your concern, you should search [the issue tracker on Github](https://github.com/ReduxFramework/ReduxFramework/issues). If you can't locate any topics that pertain to your particular issue, [post a new issue](https://github.com/ReduxFramework/ReduxFramework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build off of the dev version and push to WordPress.org when all is confirmed stable and ready for release.
@@ -45,23 +52,23 @@ It is hard to continue development and support for this free plugin without cont
 * Color RGBA
 * Date
 * Dimensions (Height/Width)
-* Divider
+* Divide (Divider)
 * Editor (WordPress Native)
 * Gallery (WordPress Native)
 * Image Select (Patterns/Presets)
-* Info (Header)
 * Import/Export
+* Info (Header/Notice)
 * Link Color
 * Media (WordPress Native)
 * Multi-Text
 * Password
 * Radio (w/ WordPress Data)
-* Raw
-* Section
+* Raw (HTML/PHP/MarkDown)
+* Section (Indent and Group Fields)
 * Select (Select/Multi-Select w/ Select2 & WordPress Data)
 * Select Image
-* Slider
-* Slides
+* Slider (Drag a Handle)
+* Slides (Multiple Images, Titles, and Descriptions)
 * Sortable (Drag/Drop Checkbox/Input Fields)
 * Sorter (Drag/Drop Manager - Works great for content blocks)
 * Spacing (Margin/Padding/Absolute)
@@ -75,28 +82,16 @@ It is hard to continue development and support for this free plugin without cont
 = Additional Features =
 
 * Field Validation
-* Language Packs
+* MANY translations. (See below)
 * Full value escaping
-* Required - Link visibility from parent fields. Set this to affect the visibility of the field on the parent's value.
+* Required - Link visibility from parent fields. Set this to affect the visibility of the field on the parent's value. Fully nested with multiple required parents possible.
 * Output CSS Automatically - Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
+* Compiler integration! A custom hook runs when any fields with the argument `compile => true` are changed.
 * Oh, and did we mention a fully integrated Google Webfonts setup that will make you so happy you'll want to cry?
-
-
-= Redux Framework is the solution for theme and plugin developers alike. =
-At least we think so, we hope you feel the same.
 
   
 = Translators & Non-English Speakers =
-We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux-framework.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).
-
-= Current Translations =
-
-Special thanks to the following people for language translations:
-
-* German [de_DE] @Abu-Taymiyyah
-* Bahasa Indonesia [id_ID] @riesurya
-* Italian, Romanian [IT_it] [RO_ro] @tirnovanuaurel
-* Spanish [es_ES] [RO_ro] @vertigo7x
+We need your help to translate Redux into your language! Redux is part of the WP-Translations.org team. To help us translate Redux create a few account here: <a href="https://www.transifex.com/organization/wp-translations">https://www.transifex.com/organization/wp-translations</a>. Once you're in, you can head over to the <a href="https://www.transifex.com/projects/p/redux-framework/">Redux sub-project</a> and translate away. Thank you for your assistance.
 
 = Get Involved =
 Redux is an ever-changing, living system. Want to stay up to date or
@@ -138,13 +133,45 @@ Redux is an options framework... in other words, it's not designed to do anythin
 Visit our website at [http://reduxframework.com/](http://reduxframework.com/)
 
 = You don't have much content in this FAQ section =
-That's because the real FAQ section is on our site! Please visit [http://reduxframework.com/docs/faqs/](http://reduxframework.com/docs/faqs/
+That's because the real FAQ section is on our site! Please visit [http://docs.reduxframework.com/faq/](http://docs.reduxframework.com/faq/)
 
 == Screenshots ==
 
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.2.0 =
+* Added:      Save warning now is sticky to the top and responsive.
+* Fixed:      Mobile fixes for Redux. Looks great on small screens how.
+* Fixed:      Slight CSS fixes.
+* Fixed:      Compiler fixes and added notices.
+* Added:      Import/Export more reasonable text.
+* Added:      `force_output` on the field level to bypass the required check that removes the output if the field is hidden. Thanks @rffaguiar.
+* Fixed:      Fully compatible with WordPress 3.9. Now it just works.  ;)
+* Fixed:      Info and divide field now work with required.
+* Added:      Fallback. Now if the media, slides, or background URL doesn't match the site URL, but the attachment ID is present, the data is updated.
+* Fixed:      Last tab not properly set.  Slow rendering.
+* Modified:   Replaced transients with cookies. Less DB queries.
+* Fixed:      Undefined variable issues for new required methods.
+* Fixed:      Default_show display error with a non-array being steralized.
+* Added:      Multiple required parent value checking! Booya!
+* Fixed:      Sections now fold with required.
+* Fixed:      select2 not rendering properly when dev_mode = false, because of ace_editor fix.
+* Fixed:      Removed mistakenly compiled test code from redux.js.
+* Fixed:      ace_editor not rendering properly in certain instances.
+* Modified:   Small change to import_export field in checking for existing instance of itself.
+* Fixed:      import_export not rendering when the menutype argument was set to menu
+* Fixed:      Ace_editor not enqueued unless used. MEMORY HOG.
+* Fixed:      Color_Gradient transparency to was being auto-selected if from way transparent.
+* Fixed:	  Enqueue select with slider for local dev.
+* Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP approved API is used in it's place to being Redux up to wp.org theme check standards.
+* Fixed:      Massive speed issue with button_set. Resolved.
+* Fixed:      Issue where default values throws an error if ID is not set.
+* Fixed:      Continuing effort to ensure proper loading of config from child themes.
+* Fixed:      Import/Export array search bug if section['fields'] is not defined.
+* Fixed:      Inconsistencies in import/export across different versions of PHP.
+* Fixed:      Redux checks for child or parent theme exclusively before loading.
 
 = 3.1.9 =
 * Fixed:      Typography custom preview text/size not outputting.
@@ -184,7 +211,6 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 * Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
 * Modified:   RGBA Field stability.  Thank you, @SilverKenn.
 * Modified:   Separated Import/Export from the core.  It can now be used as a field.
-
               [family-font] [backup-font]
               [style] [script] [align] [transform]
               [size] [height] [word space] [letter space]

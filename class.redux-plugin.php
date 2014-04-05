@@ -409,15 +409,17 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
             if( strpos($file,'redux-framework.php') !== false ) {
 
                 $new_links = array(
-                    '<a href="https://github.com/ReduxFramework/ReduxFramework" target="_blank">' . __( 'Github Repo', 'redux-framework' ) . '</a>',
-                    '<a href="https://github.com/ReduxFramework/ReduxFramework/issues/" target="_blank">' . __( 'Issue Tracker', 'redux-framework' ) . '</a>'
+                    '<a href="https://github.com/ReduxFramework/redux-framework" target="_blank">' . __( 'Repo', 'redux-framework' ) . '</a>',
+                    '<a href="http://generate.reduxframework.com/" target="_blank">' . __( 'Generator', 'redux-framework' ) . '</a>',
+                    '<a href="https://github.com/ReduxFramework/redux-framework/issues/" target="_blank">' . __( 'Issues', 'redux-framework' ) . '</a>',
+                    '<a href="http://docs.reduxframework.com/" target="_blank">' . __( 'Documentation', 'redux-framework' ) . '</a>',
                 );
 
                 if( ( is_multisite() && $this->plugin_network_activated ) || !is_network_admin() || !is_multisite() ) {
                     if( $this->options['demo'] ) {
-                        $new_links[1] .= '<br /><span style="display: block; padding-top: 6px;"><a href="./plugins.php?ReduxFrameworkPlugin=demo" style="color: #bc0b0b;">' . __( 'Deactivate Demo Mode', 'redux-framework' ) . '</a></span>';
+                        $new_links[3] .= '<br /><span style="display: block; padding-top: 6px;"><a href="./plugins.php?ReduxFrameworkPlugin=demo" style="color: #bc0b0b;">' . __( 'Deactivate Demo Mode', 'redux-framework' ) . '</a></span>';
                     } else {
-                        $new_links[1] .= '<br /><span style="display: block; padding-top: 6px;"><a href="./plugins.php?ReduxFrameworkPlugin=demo" style="color: #bc0b0b;">' . __( 'Activate Demo Mode', 'redux-framework' ) . '</a></span>';
+                        $new_links[3] .= '<br /><span style="display: block; padding-top: 6px;"><a href="./plugins.php?ReduxFrameworkPlugin=demo" style="color: #bc0b0b;">' . __( 'Activate Demo Mode', 'redux-framework' ) . '</a></span>';
                     }
                 }
 
