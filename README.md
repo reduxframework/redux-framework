@@ -75,7 +75,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.1.9.24 =
-* Fixed       Single checkbox option not retaining checked value.
+* Fixed:      Single checkbox option not retaining checked value.
+* Fixed:      Border field returning bad CSS in CSS compiler.
 
 = 3.1.9.23 =
 * Fixed:      Import/Export fix.  Thanks, CGlingener!
