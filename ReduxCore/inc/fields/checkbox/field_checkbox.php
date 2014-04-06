@@ -96,7 +96,6 @@ if (!class_exists('ReduxFramework_checkbox')) {
                 echo (!empty($this->field['desc']) ) ? ' <label for="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '">' : '';
 
                 // Got the "Checked" status as "0" or "1" then insert it as the "value" option
-                echo 'val: ' . $this->value;
                 $ch_value = 1;// checked($this->value, '1', false) == "" ? "0" : "1";
                 echo '<input type="checkbox" id="' . strtr($this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array('[' => '_', ']' => '')) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked($this->value, '1', false) . '/>';
             }
