@@ -525,7 +525,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                             'google'        => true,
                             'font-size'     => '33px',
                             'line-height'   => '40px'),
-                        'preview' => array('text' => 'ooga booga'),
                     ),
                 ),
             );
