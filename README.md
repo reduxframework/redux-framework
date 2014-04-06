@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.24 =
+* Fixed       Single checkbox option not retaining checked value.
+
 = 3.1.9.23 =
 * Fixed:      Import/Export fix.  Thanks, CGlingener!
 
