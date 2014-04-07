@@ -14,6 +14,8 @@ When submitting a ticket, please make sure you include the following information
 
 6. Please indicate if you are using Redux as a plugin or embedded in your project.
 
+7. Please check your browser's output console.  If there are any javascript errors pertaining to redux, please list them, including the module/file they occurred in and the line number
+
 The follow only applies if Redux is not loading properly:
 
 7. If you are using Redux embedded, please specify the location in which Redux is installed, where you config is located, and the lines of code you are using to initialize Redux and your config.
