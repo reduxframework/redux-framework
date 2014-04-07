@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.24';
+        public static $_version = '3.1.9.25';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1123,7 +1123,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         private function add_submenu($page_parent, $page_title, $menu_title, $page_permissions, $page_slug) {
-
+            global $submenu;
+            
             // Just in case. One never knows.
             $page_parent = strtolower($page_parent);
 
@@ -1140,7 +1141,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'tools.php'                 => 'management',
                 'options-general.php'       => 'options',
             );
-
+            
             if (isset($test[$page_parent])) {
                 $function = 'add_' . $test[$page_parent] . '_page';
                 $this->page = $function(
@@ -1172,7 +1173,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if (post_type_exists($postType)) {
                             // Set flag to add the menu page
                             $addMenu = true;
-                        }
+                        } 
+                    
+                    // custom menu
+                    } elseif (isset($submenu[$this->args['page_parent']])) {
+                        $addMenu = true;
                     }
                 } else {
                     // The page_parent was settings.php, so set menu add
