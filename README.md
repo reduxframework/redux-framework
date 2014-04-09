@@ -74,6 +74,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.26 =
+* Added:      A few more hooks for defaults and options.
+* Fixed:      Small undefined index error.
+* Added:      Section key generation via title.
+* Modified:   File intending.
+
 = 3.1.9.25 =
 * Fixed:      Custom menus not displaying options panel.
 
