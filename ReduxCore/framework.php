@@ -2164,7 +2164,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // CORRECT URLS if media URLs are wrong, but attachment IDs are present.
                         if ( $field['type'] == "media" ) {
                             if (isset($this->options[$field['id']]['id']) && isset($this->options[$field['id']]['url']) && !empty($this->options[$field['id']]['url']) && strpos($this->options[$field['id']]['url'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
-                                $data = wp_get_attachment_image_src( $this->options[$field['id']]['id'], 'full' );
+                                $data = wp_get_attachment_url( $this->options[$field['id']]['id'], 'full' );
                                 if ( isset( $data[0] ) && !empty( $data[0] ) ) {
                                     $this->options[$field['id']]['url'] = $data[0];
                                     $data = wp_get_attachment_image_src( $this->options[$field['id']]['id'], array(150,150) );
