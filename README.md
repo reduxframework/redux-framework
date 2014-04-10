@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.27 =
+* Fixed:      Special enqueue case fix.
+
 = 3.1.9.26 =
 * Added:      A few more hooks for defaults and options.
 * Fixed:      Small undefined index error.

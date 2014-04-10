@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.26';
+        public static $_version = '3.1.9.27';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1385,7 +1385,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
                                 $enqueue = new $field_class( $field, $value, $this );
                                 /** @noinspection PhpUndefinedMethodInspection */
-                                if ( ( ( isset( $field['output'] ) && !empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && !empty( $field['compiler'] ) ) || $field['type'] == "typography" ) ) {
+
+                                if ( ( ( isset( $field['output'] ) && !empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && !empty( $field['compiler'] ) ) || $field['type'] == "typography" || $field['type'] == "icon_select" ) ) {
                                     $enqueue->output();
                                 }
                             }
