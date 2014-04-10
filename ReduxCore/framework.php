@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.29';
+        public static $_version = '3.1.9.30';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2459,14 +2459,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if ( empty( $this->options_defaults ) ) {
                     $this->options_defaults = $this->_default_values();
                 }
-                foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
-                    if ( isset( $this->options_defaults[$field['id']] ) ) {
-                        $plugin_options[$field['id']] = $this->options_defaults[$field['id']];
-                    } else {
-                        $plugin_options[$field['id']] = "";
-                    }
-                    if (isset($field['compiler'])) {
-                        $compiler = true;
+                if (isset($plugin_options['redux-section']) && isset($this->sections[$plugin_options['redux-section']]['fields'])) {
+                    foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
+                        if (isset($this->options_defaults[$field['id']])) {
+                            $plugin_options[$field['id']] = $this->options_defaults[$field['id']];
+                        } else {
+                            $plugin_options[$field['id']] = "";
+                        }
+                        if (isset($field['compiler'])) {
+                            $compiler = true;
+                        }
                     }
                 }
                 if ($compiler) {
@@ -2474,15 +2476,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                     $plugin_options['REDUX_COMPILER'] = time();
                 }
-                $plugin_options['defaults'] = true;
+                //$plugin_options['defaults'] = true;
                 unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
-                $this->set_options( $plugin_options );
+                //$this->set_options( $plugin_options );
 
                 /**
                  * action 'redux/options/{opt_name}/section/reset'
                  * @param object $this ReduxFramework
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+                //do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                 return $plugin_options;
             }

@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.30 =
+* Fixed:      Section defaults bug for certain field types.
+
 = 3.1.9.29 =
 * Fixed:      Dynamic URL if site URL changed now updates media properly if attachement exists.
 
