@@ -2470,7 +2470,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $compiler = true;
                         }
                     }
-                    do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
+                    do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
                 }
                 if ($compiler) {
                     setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
@@ -2485,7 +2485,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * action 'redux/options/{opt_name}/section/reset'
                  * @param object $this ReduxFramework
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+                //do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                 return $plugin_options;
             }
