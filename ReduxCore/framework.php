@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.28';
+        public static $_version = '3.1.9.29';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2175,9 +2175,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
                         if ( $field['type'] == "background" ) {
                             if (isset($this->options[$field['id']]['media']['id']) && isset($this->options[$field['id']]['background-image']) && !empty($this->options[$field['id']]['background-image']) && strpos($this->options[$field['id']]['background-image'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
-                                $data = wp_get_attachment_image_src( $this->options[$field['id']]['media']['id'], 'full' );
-                                if ( isset( $data[0] ) && !empty( $data[0] ) ) {
-                                    $this->options[$field['id']]['background-image'] = $data[0];
+                                $data = wp_get_attachment_url( $this->options[$field['id']]['media']['id'] );
+                                if ( isset( $data ) && !empty( $data ) ) {
+                                    $this->options[$field['id']]['background-image'] = $data;
                                     $data = wp_get_attachment_image_src( $this->options[$field['id']]['media']['id'], array(150,150) );
                                     $this->options[$field['id']]['media']['thumbnail'] = $data[0];
                                     $doUpdate = true;
@@ -2187,9 +2187,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if ( $field['type'] == "slides" ) {
                             if (isset($this->options[$field['id']][0]['attachment_id']) && isset($this->options[$field['id']][0]['url']) && !empty($this->options[$field['id']][0]['url']) && strpos($this->options[$field['id']][0]['url'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === FALSE) {
                                 foreach($this->options[$field['id']] as $k => $v) {
-                                    $data = wp_get_attachment_image_src( $v['attachment_id'], 'full' );
-                                    if ( isset( $data[0] ) && !empty( $data[0] ) ) {
-                                        $this->options[$field['id']][$k]['url'] = $data[0];
+                                    $data = wp_get_attachment_url( $v['attachment_id'] );
+                                    if ( isset( $data ) && !empty( $data ) ) {
+                                        $this->options[$field['id']][$k]['url'] = $data;
                                         $data = wp_get_attachment_image_src( $v['attachment_id'], array(150,150) );
                                         $this->options[$field['id']][$k]['thumb'] = $data[0];
                                         $doUpdate = true;
