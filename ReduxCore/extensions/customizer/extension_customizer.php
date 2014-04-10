@@ -90,21 +90,28 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
             //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
             //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
-            add_action( "load_textdomain", array( $this, '_override_values' ), 100 ); 
+            add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
+
+
             //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 ); 
             //$this->_enqueue_new();
         }
 
         public function _override_values( $data ) {
             if( isset( $_POST['customized'] ) ) {
+                echo "<h1>DOVY</h1>";
                 $options = json_decode(stripslashes_deep($_POST['customized']), true);
                 foreach( $options as $key => $value ) {
                     if (strpos($key, $this->parent->args['opt_name']) !== false) {
                         $key = str_replace($this->parent->args['opt_name'].'[', '', rtrim($key, "]"));
-                        $GLOBALS[$this->parent->args['global_variable']][$key] = $value;
+                        $data[$key] = $value;
+                        //$GLOBALS[$this->parent->args['global_variable']][$key] = $value;
                     }
                 }
-            } 
+            }
+
+            return $data;
+
         }
 
         public function _enqueue_new() {
