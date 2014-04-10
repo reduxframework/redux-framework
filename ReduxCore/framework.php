@@ -2485,7 +2485,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * action 'redux/options/{opt_name}/section/reset'
                  * @param object $this ReduxFramework
                  */
-                //do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+                do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                 return $plugin_options;
             }
