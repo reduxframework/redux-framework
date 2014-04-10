@@ -75,6 +75,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.1.9.31 =
+* Fixed:      When developer uses section field but does not specify an indent argument.
+
+= 3.1.9.31 =
 * Fixed:      Dynamic URL for slides
 * Fixed:      Accidently removed reset action on section reset. Restored.
 

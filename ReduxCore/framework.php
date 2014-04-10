@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.31';
+        public static $_version = '3.1.9.32';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -936,7 +936,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if (empty($field['id'])) {
                                 continue;
                             }
-                            if ($field['type'] == "section" && $field['indent'] == "true") {
+                            if ($field['type'] == "section" && isset( $field['indent'] ) && $field['indent'] == "true") {
                                 $field['class'] = isset($field['class']) ? $field['class'] : '';
                                 $field['class'] .= "redux-section-indent-start";
                                 $this->sections[$sk]['fields'][$k] = $field;
