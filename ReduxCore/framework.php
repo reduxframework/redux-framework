@@ -2380,7 +2380,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
 
-
+            // Import
             if( !empty( $plugin_options['import'] ) ) {
 
                 if( $plugin_options['import_code'] != '' ) {
@@ -2391,19 +2391,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if ( !empty( $import ) ) {
                     $imported_options = json_decode( $import, true );
-
-//                    if (version_compare(phpversion(), "5.3.0", ">=")) {
-//                        $imported_options = json_decode( $import, true );
-//                    } else {
-//                        if (function_exists('stripslashes')) {
-//                            $import = get_magic_quotes_gpc() ? stripslashes($import) : $import;
-//                        } else if (function_exists('strip_slashes')) {
-//                            $import = get_magic_quotes_gpc() ? strip_slashes($import) : $import;
-//                        }
-////                      $imported_options = json_decode( $import ) ;
-//    //                  $imported_options = (array) $imported_options;
-//                        $imported_options = json_decode( $import, true );
-//                    }
                 }
 
                 if( !empty( $imported_options ) && is_array( $imported_options ) && isset( $imported_options['redux-backup'] ) && $imported_options['redux-backup'] == '1' ) {
@@ -2436,31 +2423,31 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
             }
 
-
+            // Reset all
             if( !empty( $plugin_options['defaults'] ) ) {
-                //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
                 setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
+                
                 $plugin_options = $this->options_defaults;
                 $plugin_options['REDUX_COMPILER'] = time();
                 $this->set_options( $plugin_options );
-
-                /**
-                 * action 'redux/options/{opt_name}/reset'
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
 
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
 
                 return $plugin_options;
             }
+
+            // Sections reset
             if( isset( $plugin_options['defaults-section'] ) ) {
                 $compiler = false;
+
                 if ( empty( $this->options_defaults ) ) {
                     $this->options_defaults = $this->_default_values();
                 }
+                
                 if (isset($plugin_options['redux-section']) && isset($this->sections[$plugin_options['redux-section']]['fields'])) {
+                    logConsole('fields!');
                     foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
+
                         if (isset($this->options_defaults[$field['id']])) {
                             $plugin_options[$field['id']] = $this->options_defaults[$field['id']];
                         } else {
@@ -2470,23 +2457,18 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             $compiler = true;
                         }
                     }
-                    do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
                 }
                 if ($compiler) {
                     setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
-                    //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
+
                     $plugin_options['REDUX_COMPILER'] = time();
                 }
-                //$plugin_options['defaults'] = true;
-                unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
-                //$this->set_options( $plugin_options );
+                $plugin_options['defaults'] = true;
 
-                /**
-                 * action 'redux/options/{opt_name}/section/reset'
-                 * @param object $this ReduxFramework
-                 */
-                //do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+                unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
+
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
+                
                 return $plugin_options;
             }
 
@@ -2512,7 +2494,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( !empty( $plugin_options['compiler'] ) ) {
                 $plugin_options['REDUX_COMPILER'] = time();
-                //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 2000 );
                 setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
             }
 
@@ -2816,11 +2797,23 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     //exit();
                 } else if( $this->saved == "defaults" ) {
                     /**
+                     * action 'redux/options/{opt_name}/reset'
+                     * @param object $this ReduxFramework
+                     */
+                    do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
+                    
+                    /**
                      * filter 'redux-defaults-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
                     echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
                 } else if( $this->saved == "defaults_section" ) {
+                    /**
+                     * action 'redux/options/{opt_name}/section/reset'
+                     * @param object $this ReduxFramework
+                     */
+                    do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+                    
                     /**
                      * filter 'redux-defaults-section-text-{opt_name}'
                      * @param string  translated "settings imported" text
