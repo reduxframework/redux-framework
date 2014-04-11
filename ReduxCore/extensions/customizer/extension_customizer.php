@@ -99,7 +99,6 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         public function _override_values( $data ) {
             if( isset( $_POST['customized'] ) ) {
-                echo "<h1>DOVY</h1>";
                 $options = json_decode(stripslashes_deep($_POST['customized']), true);
                 foreach( $options as $key => $value ) {
                     if (strpos($key, $this->parent->args['opt_name']) !== false) {
