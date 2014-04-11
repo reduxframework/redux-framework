@@ -18,7 +18,7 @@ When submitting a ticket, please make sure you include the following information
 
 The follow only applies if Redux is not loading properly:
 
-7. If you are using Redux embedded, please specify the location in which Redux is installed, where you config is located, and the lines of code you are using to initialize Redux and your config.
+8. If you are using Redux embedded, please specify the location in which Redux is installed, where you config is located, and the lines of code you are using to initialize Redux and your config.
 
 The way in which we diagnose bugs or config difficulties is to attempt to recreate them on our end.  This is why we need the very specific information.  Once we are able to confirm the issue, we will either push an update, or assist you in correcting any mistakes in your config.
 
