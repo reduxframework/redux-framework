@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.34 =
+* Added:      New readonly argument for text field.
+
 = 3.1.9.33 =
 * Fixed:      Reset/Reset section actions hooks now fire properly.
 
