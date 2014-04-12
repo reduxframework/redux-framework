@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.35 =
+* Fixed:      Removed leftover debug code.
+
 = 3.1.9.34 =
 * Added:      New readonly argument for text field.
 

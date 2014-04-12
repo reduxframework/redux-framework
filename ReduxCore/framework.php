@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.34';
+        public static $_version = '3.1.9.35';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2375,7 +2375,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array|mixed|string|void
          */
         public function _validate_options( $plugin_options ) {
-            setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+            //setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
 
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
@@ -2445,7 +2445,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
                 
                 if (isset($plugin_options['redux-section']) && isset($this->sections[$plugin_options['redux-section']]['fields'])) {
-                    logConsole('fields!');
+
                     foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
 
                         if (isset($this->options_defaults[$field['id']])) {
