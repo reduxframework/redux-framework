@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.35';
+        public static $_version = '3.1.9.36';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -143,10 +143,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     'show' => array(
                         'effect'    => 'slide',
                         'duration'  => '500',
+                        'event'     => 'mouseover',
                     ),
                     'hide' => array(
                         'effect'    => 'fade',
                         'duration'  => '500',
+                        'event'     => 'click mouseleave',
                     ),
                 ),
             ),
