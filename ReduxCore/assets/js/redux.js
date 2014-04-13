@@ -201,9 +201,8 @@
             case '=':
             case 'equals':
                 //if value was array
-                if (checkValue.toString().indexOf('|') !== -1) {
-                    checkValue_array = checkValue.split('|');
-                    if ($.inArray(parentValue, checkValue_array) != -1) {
+                if ($.isArray(checkValue)) {
+                    if ($.inArray(parentValue, checkValue) != -1) {
                         show = true;
                     }
                 } else {
@@ -215,9 +214,10 @@
             case '!=':
             case 'not':
                 //if value was array
-                if (checkValue.toString().indexOf('|') !== -1) {
-                    checkValue_array = checkValue.split('|');
-                    if ($.inArray(parentValue, checkValue_array) == -1) {
+                if ($.isArray(checkValue)) {
+                //if (checkValue.toString().indexOf('|') !== -1) {
+                //    checkValue_array = checkValue.split('|');
+                    if ($.inArray(parentValue, checkValue) == -1) {
                         show = true;
                     }
                 } else {
