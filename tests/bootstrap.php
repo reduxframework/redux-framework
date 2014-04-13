@@ -15,7 +15,7 @@ require_once $_tests_dir . 'functions.php';
 
 // Activates this plugin in WordPress so it can be tested.
 function _manually_load_plugin() {
-	require dirname( __FILE__ ) . '/../tivwp-dm.php';
+	require dirname( __FILE__ ) . '/tivwp-dm.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
