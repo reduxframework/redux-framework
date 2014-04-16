@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.37';
+        public static $_version = '3.1.9.38';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -287,9 +287,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // TODO
 
 //                // Determine the currently selected tab
-//                if (!isset($_COOKIE) || isset($_COOKIE['redux_current_tab'])) {
-//                    $_COOKIE['redux_current_tab'] = "";
-//                }
+//                if (isset($_COOKIE['redux_current_tab'])) {
+//                    $this->current_tab = $_COOKIE['redux_current_tab'];
+//                } 
 //
 //                if (isset($_GET['tab'])) {
 //                    $this->current_tab = $_GET['tab'];    
@@ -610,6 +610,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( $opt_name != '' ) {
                 $this->options[$opt_name] = $value;
                 $this->set_options( $this->options );
+                //logConsole('set_options set');
             }
         } // set()
 
@@ -639,6 +640,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param mixed $value the value of the option being added
          */
         function set_options( $value = '' ) {
+            //logConsole('set options core');
+            //die;
             $value['REDUX_last_saved'] = time();
             if( !empty($value) ) {
                 $this->options = $value;
@@ -700,6 +703,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( empty( $result ) && !empty( $defaults ) ) {
                 $results = $defaults;
                 $this->set_options( $results );
+                //logConsole('set_options get_options');
             } else {
                 $this->options = $result;
             }
@@ -2067,8 +2071,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 include(ABSPATH . "wp-includes/pluggable.php");
             }
 
+            //logconsole('before validate');
             register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array( &$this,'_validate_options' ) );
-
+            //logconsole('after validate');
             if( is_null( $this->sections ) ) return;
 
             $this->options_defaults = $this->_default_values();
@@ -2249,6 +2254,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         /**
                          * action 'redux/options/{opt_name}/field/field.type}/register'
                          */
+                        
                         do_action( "redux/options/{$this->args['opt_name']}/field/{$field['type']}/register", $field );
                         $this->check_dependencies($field);
                         add_settings_field(
@@ -2277,6 +2283,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if ($runUpdate) { // Always update the DB with new fields
                 $this->set_options( $this->options );
+                //logConsole('register save');
             }
 
             if ( isset($_COOKIE['redux-compiler-' . $this->args['opt_name']]) ) {
@@ -2377,7 +2384,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array|mixed|string|void
          */
         public function _validate_options( $plugin_options ) {
-            //setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+            //logConsole('validate options');
+            setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
 
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
@@ -2419,6 +2427,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
                     if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
                         $this->set_options( $plugin_options );
+                        //logConsole('set_options transient');
                         return;
                     }
                     return $plugin_options;
@@ -2431,7 +2440,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 
                 $plugin_options = $this->options_defaults;
                 $plugin_options['REDUX_COMPILER'] = time();
-                $this->set_options( $plugin_options );
+                
+                if (false == $this->args['save_defaults']){
+                    $this->set_options( $plugin_options );
+                    //logConsole('set_options reset all');
+                }
 
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
 
@@ -2493,7 +2506,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * @param  &array [&$plugin_options, redux_options]
              */
             do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(&$plugin_options, $this->options));
-
+            //logConsole('validate');
             if( !empty( $plugin_options['compiler'] ) ) {
                 $plugin_options['REDUX_COMPILER'] = time();
                 setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
@@ -2502,6 +2515,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             unset( $plugin_options['defaults'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
             if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
                 $this->set_options( $plugin_options );
+                //logConsole('set_options validate');
                 return;
             }
             return $plugin_options;
@@ -2815,6 +2829,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * @param object $this ReduxFramework
                      */
                     do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
+                    //do_action( "redux/options/{$this->args['opt_name']}/section/reset/tab", $_COOKIE["redux-{$this->args['opt_name']}-section-reset"]);
                     
                     /**
                      * filter 'redux-defaults-section-text-{opt_name}'
@@ -2822,6 +2837,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      */
                     echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
                 } else {
+                    //do_action( "redux/options/{$this->args['opt_name']}/saved", $this );
                     /**
                      * filter 'redux-saved-text-{opt_name}'
                      * @param string translated "settings saved" text

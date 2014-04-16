@@ -605,7 +605,7 @@ jQuery(document).ready(function($) {
      Current tab checks, based on cookies
      **/
     jQuery('.redux-group-tab-link-a').click(function() {
-        relid = jQuery(this).data('rel'); // The group ID of interest
+        var relid = jQuery(this).data('rel'); // The group ID of interest
         jQuery('#currentSection').val(relid);
         // Set the proper page cookie
         $.cookie('redux_current_tab', relid, {
@@ -744,7 +744,7 @@ jQuery(document).ready(function($) {
 
     window.onresize = function(event) {
         if (jQuery('#redux-sticky').hasClass('sticky-save-warn')) {
-            console.log('resize');
+            //console.log('resize');
          //   jQuery('#redux-save-warn').css('left', jQuery('#redux-intro-text').width())
         }
     };
