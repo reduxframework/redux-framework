@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.39';
+        public static $_version = '3.1.9.40';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -168,6 +168,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $warnings            = array(); // Warnings
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
+	    public $compiler_fields     = array(); // Fields that trigger the compiler hook
         public $required            = array(); // Information that needs to be localized
         public $required_child      = array(); // Information that needs to be localized
         public $localize_data       = array(); // Information that needs to be localized
@@ -2240,6 +2241,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                         if ( !empty( $field['compiler'] ) ) {
                             $field['class'] .= " compiler";
+	                        $this->compiler_fields[$field['id']] = 1;
                         }
 
                         if ( isset( $field['unit'] ) && !isset( $field['units'] ) ) {

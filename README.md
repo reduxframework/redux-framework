@@ -74,6 +74,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.40 =
+* Fixed:      Image_select size override.
+* Fixed:      Customizer save not firing the compiler hook.
+* Fixed:      Customizer not outputting CSS if output_tag is set to false.
+* Fixed:      Small empty variable check. Undefined index in the defaults generating function.
+
 = 3.1.9.39 =
 * Fixed:      WP 3.9 update made editor field button look ugly.
 * Fixed:      Save hook not firing when save_default set to false.
