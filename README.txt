@@ -141,6 +141,11 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+= 3.2.0.1 =
+* Fixed:      Path to `ReduxFramework::$_url` fixed for symlinks
+* Fixed:      PHP notice when `$field['type']` isn't set
+* Added:      `REDUX_FRAMEWORK_FILE_PATH` constant to main Redux Framework file path
+
 = 3.2.0 =
 * Added:      Save warning now is sticky to the top and responsive.
 * Fixed:      Mobile fixes for Redux. Looks great on small screens how.
