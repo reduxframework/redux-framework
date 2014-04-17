@@ -639,7 +639,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param mixed $value the value of the option being added
          */
         function set_options( $value = '' ) {
-            logConsole('set options core');
+            //logConsole('set options core');
 
             $value['REDUX_last_saved'] = time();
             if( !empty($value) ) {
@@ -2383,6 +2383,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array|mixed|string|void
          */
         public function _validate_options( $plugin_options ) {
+            //logConsole('validate options');
             setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
 
             // Sets last saved time
@@ -2433,7 +2434,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             // Reset all
             if( !empty( $plugin_options['defaults'] ) ) {
-                logConsole('reset all');
+                //logConsole('reset all');
                 $plugin_options['defaults'] = false;
                 setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
                 
@@ -2478,7 +2479,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $plugin_options['REDUX_COMPILER'] = time();
                 }
                 $plugin_options['defaults'] = true;
-                logConsole('defaults=true');
+                //logConsole('defaults=true');
 
                 unset( $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['redux-section'] );
 
