@@ -32,9 +32,6 @@ if( !defined( 'ABSPATH' ) ) {
     die;
 }
 
-// Get core plugin file path for use in includes
-define('REDUX_FRAMEWORK_FILE_PATH', __FILE__);
-
 // Require the main plugin class
 require_once( plugin_dir_path( __FILE__ ) . 'class.redux-plugin.php' );
 
