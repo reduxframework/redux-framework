@@ -409,6 +409,9 @@ static_front_page - Static Front Page
 				      }
 			      }
 		      }
+		      if (!empty($changed)) {
+			      setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+		      }
 
 		      if ($compiler) {
 			      do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
