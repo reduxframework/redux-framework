@@ -78,24 +78,24 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
               customize_controls_print_scripts
               customize_controls_print_footer_scripts
             */
-           
 
+	        if( !isset( $_POST['customized'] ) ) {
+		        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
+		        add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
+		        add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
+		        add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+	        }
 
-            
-
-            add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
-
-            add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
 
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
-            add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
-            add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+
             add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
 
 
             //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 ); 
             //$this->_enqueue_new();
+
         }
 
         public function _override_values( $data ) {
@@ -231,6 +231,10 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                 $option['title'] = "";
               }
 
+	          // Wordpress doesn't support multi-select
+	          if ( $option['type'] == "select" && isset($option['multi']) && $option['multi'] == true ) {
+		          continue;
+	          }
 
               $customSetting = array(
                 'default'           =>  $option['default'],
