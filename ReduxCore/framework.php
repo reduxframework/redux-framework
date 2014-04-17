@@ -2098,7 +2098,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if (isset($section['id'])) {
                     $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
                 }
-
+				if (!isset($section['title'])) {
+					$section['title'] = "";
+				}
                 $heading = isset($section['heading']) ? $section['heading'] : $section['title'];
                 if (isset($section['permissions'])) {
                     if ( !current_user_can($section['permissions']) ) {
