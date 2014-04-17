@@ -88,6 +88,8 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                             $style .= 'px';
                     
                         $style .= ';';
+                    } else {
+	                    $style .= " width: 100%; ";
                     }
 
                     if( !empty( $this->field['height'] ) ) {
@@ -98,8 +100,6 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                         $style .= ';';
                     }
-                    //$style .= " max-width: 100%; ";
-                    $style .= " width: 100%; ";
 
                     $theValue = $k;
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {

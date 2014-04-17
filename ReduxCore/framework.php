@@ -937,7 +937,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                     if( isset( $section['fields'] ) ) {
                         foreach( $section['fields'] as $k => $field ) {
-                            if (empty($field['id'])) {
+                            if (empty($field['id']) && empty($field['type'])) {
                                 continue;
                             }
                             if ($field['type'] == "section" && isset( $field['indent'] ) && $field['indent'] == "true") {
