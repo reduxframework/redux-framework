@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.39 =
+* Fixed:      WP 3.9 update made editor field button look ugly.
+* Fixed:      Save hook not firing when save_default set to false.
+
 = 3.1.9.38 =
 * Fixed:      Reset section anomalies.  Maybe.
 
