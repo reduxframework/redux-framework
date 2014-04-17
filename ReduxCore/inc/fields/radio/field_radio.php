@@ -43,7 +43,7 @@ class ReduxFramework_radio {
 			foreach($this->field['options'] as $k => $v) {
 				
 				echo '<li>';
-				echo '<label for="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'">';
+				echo '<label>';
 				echo '<input type="radio" class="radio ' . $this->field['class'] . '" id="'.$this->field['id'].'_'.array_search($k,array_keys($this->field['options'])).'" name="'.$this->field['name'] . $this->field['name_suffix'] . '" value="'.$k.'" '.checked($this->value, $k, false).'/>';
 				echo ' <span>'.$v.'</span>';
 				echo '</label>';
