@@ -73,8 +73,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
             self::$_dir     = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
+            $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
+            $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
+            $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
             self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
-            self::$_url     = trailingslashit( plugins_url('', __FILE__ ) );
+            self::$_url     = self::$wp_content_url . $relative_url;
 
             // See if Redux is a plugin or not
             if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath(get_stylesheet_directory()) ) !== false) {
