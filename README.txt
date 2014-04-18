@@ -103,24 +103,8 @@ cool!
 
 == Installation ==
 
-= Install the Plugin =
-1. Upload the "redux-framework" directory to "~/wp-content/plugins/".
-2. Activate the plugin through the "Plugins" area in WordPress admin panel.
-
-= Activate "Demo Mode" =
-On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.
-
-= Start Building Your Own Panel =
-
-1. Copy the "~/redux-framework/sample/" directory from within the plugin to a directory within your own theme or plugin.
-2. Click on "Deactivate Demo Mode" in the "Plugins" area of the WordPress admin panel to turn off the Redux integrated demo.
-3. Edit the "~/sample/sample-config.php" file (now copied to your plugin or theme directory) and change the $args['opt_name'] value to anything custom you would like. Make sure this is truly unque so other plugins/themes can use Redux.
-4. Include the sample-config.php file: `require_once(dirname(__FILE__).'/sample/sample-config.php');` in your theme functions.php file or within your plugin's init file.
-5. Modify the sample file to your heart's content.
-
 = For Complete Documentation and Examples =
 Visit: [http://docs.reduxframework.com/](http://docs.reduxframework.com/)
-
 
 == Frequently Asked Questions ==
 
@@ -140,6 +124,36 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.2.1 =
+* Fixed:      Reset section, etc. Discovered an odd WordPress thing.
+* Fixed:      Image_select size override.
+* Fixed:      Customizer save not firing the compiler hook.
+* Fixed:      Customizer not outputting CSS if output_tag is set to false.
+* Fixed:      Small empty variable check. Undefined index in the defaults generating function.
+* Fixed:      WP 3.9 update made editor field button look ugly.
+* Fixed:      Save hook not firing when save_default set to false.
+* Fixed:      Reset section anomalies.  Maybe.
+* Fixed:      Array of values in required not recognized.
+* Fixed:      Updated hint defaults to prevent index warning.
+* Fixed:      Removed leftover debug code.
+* Added:      New readonly argument for text field.
+* Fixed:      Reset/Reset section actions hooks now fire properly.
+* Fixed:      When developer uses section field but does not specify an indent argument.
+* Fixed:      Dynamic URL for slides
+* Fixed:      Accidently removed reset action on section reset. Restored.
+* Fixed:      Section defaults bug for certain field types.
+* Fixed:      Dynamic URL if site URL changed now updates media properly if attachement exists.
+* Fixed:      Customizer now correctly does live preview.
+* Fixed:      Special enqueue case fix.
+* Added:      A few more hooks for defaults and options.
+* Fixed:      Small undefined index error.
+* Added:      Section key generation via title.
+* Modified:   File intending.
+* Fixed:      Custom menus not displaying options panel.
+* Fixed:      Single checkbox option not retaining checked value.
+* Fixed:      Border field returning bad CSS in CSS compiler.
+* Fixed:      Import/Export fix.  Thanks, @CGlingener!
 
 = 3.2.0 =
 * Added:      Save warning now is sticky to the top and responsive.
@@ -460,4 +474,4 @@ Redux is was originally based off the following frameworks:
 * [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) 
 * [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework")
 
-It has now branched and been improved in many ways. If you like what you see, realize this is a labor of love. Please [donate to the Redux Framework](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U) if you are able.
+It has now a completely different code base. If you like what you see, realize this is a labor of love. Please [donate to the Redux Framework](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U) if you are able.
