@@ -25,8 +25,8 @@
 }
 .redux-main .redux-typography-container .typography-family-backup,
 .redux-main .redux-typography-container .typography-family-backup select {
-  width: 340px !important;
-  margin-left: 0px !important;
+  width: 3 40px !important;
+  margin-left: 0 !important;
 }
 .redux-main .redux-typography-container .typography-script,
 .redux-main .redux-typography-container .typography-script select,
@@ -39,7 +39,7 @@
 .redux-main .redux-typography-container .typography-style select,
 .redux-main .redux-typography-container .typography-align,
 .redux-main .redux-typography-container .typography-align select {
-  width: 125px!important;
+  width: 125px !important;
 }
 .redux-main .redux-typography-container .select_wrapper {
   float: left;
@@ -64,7 +64,7 @@
   float: left;
   width: 70px;
   margin-left: 5px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 .redux-main .redux-typography-container .redux-typography,
 .redux-main .redux-typography-container .typography-color {
