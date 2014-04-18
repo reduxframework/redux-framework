@@ -62,7 +62,7 @@ if($is_shell) {
 		printf("   * Size: %s\n", $pot_file['file_exists'] ? number_format( $pot_file['filesize'], 0 ) : '--');
 		printf("   * Last updated: %s\n", $pot_file['filemtime'] ? @date( 'F jS Y H:i:s', $pot_file['filemtime'] ) : '--');
 	}
-	
+
 	printf("\nTo Generate POT-files now you must run:\n\n");
 	printf("\tphp %s generate\n\n", $argv[0]);
 } else {

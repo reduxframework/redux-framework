@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#&& "$TRAVIS_PHP_VERSION" >= 5.3 
+#&& "$TRAVIS_PHP_VERSION" >= 5.3
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
 	# Update the mirror repo for composer/packagist
@@ -36,7 +36,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 	grunt gh-pages:travis
 
 	# Clean out the docs directory
-	#git rm -fr $HOME/docs/  
+	#git rm -fr $HOME/docs/
 
 
 fi

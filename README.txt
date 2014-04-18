@@ -76,7 +76,7 @@ It is hard to continue development and support for this free plugin without cont
 * Switch
 * Text
 * Textarea
-* Typography 
+* Typography
  * The most advanced typography module complete with preview, Google fonts, and auto-css output!
 
 = Additional Features =
@@ -89,7 +89,7 @@ It is hard to continue development and support for this free plugin without cont
 * Compiler integration! A custom hook runs when any fields with the argument `compile => true` are changed.
 * Oh, and did we mention a fully integrated Google Webfonts setup that will make you so happy you'll want to cry?
 
-  
+
 = Translators & Non-English Speakers =
 We need your help to translate Redux into your language! Redux is part of the WP-Translations.org team. To help us translate Redux create a few account here: <a href="https://www.transifex.com/organization/wp-translations">https://www.transifex.com/organization/wp-translations</a>. Once you're in, you can head over to the <a href="https://www.transifex.com/projects/p/redux-framework/">Redux sub-project</a> and translate away. Thank you for your assistance.
 
@@ -126,7 +126,7 @@ Visit: [http://docs.reduxframework.com/](http://docs.reduxframework.com/)
 
 = Why doesn't this plugin do anything? =
 
-Redux is an options framework... in other words, it's not designed to do anything on its own! You can however activate a demo mode to see how it works. 
+Redux is an options framework... in other words, it's not designed to do anything on its own! You can however activate a demo mode to see how it works.
 
 = How can I learn more about Redux? =
 
@@ -314,7 +314,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed Sortable - Using native jQuery UI library same as within WordPress.
 * Fixed Slider and Spinner Input Field - Values now move to the closest valid value in regards to the step, automatically.
 * Fixed Ace Editor
-* FEATURE - All CSS/JS files are compiled into a single file now! Speed improvements for the backend. 
+* FEATURE - All CSS/JS files are compiled into a single file now! Speed improvements for the backend.
 * Fix in how WordPress data is received, improved some output.
 * Fix for various fields not triggering fold/compiler/save.
 * Fixed elusive icons to use the new version and classes.
@@ -457,7 +457,7 @@ Redux is now hosted on WordPress.org! Update in order to get proper, stable upda
 
 Redux is was originally based off the following frameworks:
 
-* [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) 
+* [NHP](https://github.com/leemason/NHP-Theme-Options-Framework)
 * [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework")
 
 It has now branched and been improved in many ways. If you like what you see, realize this is a labor of love. Please [donate to the Redux Framework](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U) if you are able.

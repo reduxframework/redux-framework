@@ -1,6 +1,6 @@
 # [docs.reduxframework.com](http://docs.reduxframework.com)
 Need a little help with Redux?  Come check out our brand new documentation site, chock full of tutorials and examples!
- 
+
 
 --------
 
@@ -28,7 +28,7 @@ You can also [download our sample theme available here](https://github.com/Redux
 
 ## Please Post Reviews and Spread the Word ##
 
-ReduxFramework has just released to the WordPress Plugins directory. Please spread the word, tweet, and (most importantly) post reviews on http://wordpress.org/plugins/redux-framework/. 
+ReduxFramework has just released to the WordPress Plugins directory. Please spread the word, tweet, and (most importantly) post reviews on http://wordpress.org/plugins/redux-framework/.
 
 
 ## Donate to the Framework ##
@@ -294,7 +294,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.8.3 =
 * Added:      Full asynchronous font loading.
-* 
+*
 = 3.1.8.2 =
 * Added:      email_not_empty validation field.
 * Reverted:   email validation field only checks for valid email.  not_empty check moved to new validation field.
@@ -343,7 +343,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Removed:  EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
 * Removed:  Group field, temporarily.
 * Removed:  wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
- 
+
 = 3.1.5 =
 * Typography font arrays may not contain comma spaces.
 * Merge in pull request - 542, code cleanup and better readability
@@ -390,7 +390,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed Sortable - Using native jQuery UI library same as within WordPress.
 * Fixed Slider and Spinner Input Field - Values now move to the closest valid value in regards to the step, automatically.
 * Fixed Ace Editor
-* FEATURE - All CSS/JS files are compiled into a single file now! Speed improvements for the backend. 
+* FEATURE - All CSS/JS files are compiled into a single file now! Speed improvements for the backend.
 * Fix in how WordPress data is received, improved some output.
 * Fix for various fields not triggering fold/compiler/save.
 * Fixed elusive icons to use the new version and classes.
@@ -571,7 +571,7 @@ Redux is now hosted on WordPress.org! Update in order to get proper, stable upda
 
 ### Version 2.0.0 (January 31, 2013) ###
 
-* Fixed SSL error which occurred occasionally with Google Webfonts 
+* Fixed SSL error which occurred occasionally with Google Webfonts
 * Added optional flag for ```wpautop``` on editors
 * Added password field type
 * Added ```checkbox_hide_all``` option

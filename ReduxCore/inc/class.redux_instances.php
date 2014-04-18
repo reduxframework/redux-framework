@@ -4,8 +4,8 @@
  * Redux Framework Instance Container Class
  *
  * Automatically captures and stores all instances
- * of ReduxFramework at instantiation. 
- * 
+ * of ReduxFramework at instantiation.
+ *
  * @package     Redux_Framework
  * @subpackage  Core
  */
@@ -24,10 +24,10 @@ class ReduxFrameworkInstances
 
 	/**
 	 * Get Instance
-	 * 
+	 *
 	 * Get ReduxFrameworkInstances instance
 	 * OR an instance of ReduxFramework by [opt_name]
-	 * 
+	 *
 	 * @param  string	$opt_name	the defined opt_name
 	 * @return object				class instance
 	 */
@@ -53,7 +53,7 @@ class ReduxFrameworkInstances
 
 	private function __construct() {
 		add_action( 'redux/construct', array( $this, 'capture' ), 5, 1 );
-	} 
+	}
 
 	function capture( $ReduxFramework ) {
 		$this->store( $ReduxFramework );
