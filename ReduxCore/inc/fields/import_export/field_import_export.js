@@ -7,6 +7,7 @@
                 e.preventDefault();
                 return false;
             }
+            window.onbeforeunload = null;
         });      
         
         $('#redux-import-code-button').click(function() {

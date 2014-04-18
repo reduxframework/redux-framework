@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.41 =
+* Fixed:      Reset section, etc. Discovered an odd WordPress thing.
+
 = 3.1.9.40 =
 * Fixed:      Image_select size override.
 * Fixed:      Customizer save not firing the compiler hook.
