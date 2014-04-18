@@ -1,6 +1,6 @@
 <?php
-class Redux_Validation_colorrgba extends ReduxFramework {	
-	
+class Redux_Validation_colorrgba extends ReduxFramework {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,14 +9,14 @@ class Redux_Validation_colorrgba extends ReduxFramework {
 	 * @since ReduxFramework 3.0.4
 	*/
 	function __construct($field, $value, $current) {
-		
+
 		parent::__construct();
 		$this->field = $field;
 		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid color value.', 'redux-framework');
 		$this->value = $value;
 		$this->current = $current;
 		//$this->validate();
-		
+
 	}//function
 
 	/**
@@ -25,7 +25,7 @@ class Redux_Validation_colorrgba extends ReduxFramework {
 	 * Takes the user's input color value and returns it only if it's a valid color.
 	 *
 	 * @since ReduxFramework 3.0.3
-	*/	
+	*/
 	function validate_colorrgba($color) {
 	return $color;
 		//$color = $value['color'];
@@ -43,14 +43,14 @@ class Redux_Validation_colorrgba extends ReduxFramework {
 		if (preg_match('/^[a-f0-9]{6}$/i', $color)) {
 			$color = '#' . $color;
 		}
-			
+
 	*/
 		return array('hex'=>$color, 'alpha'=>$alpha);
 
 	}//function
 
 
-	
+
 	/**
 	 * Field Render Function.
 	 *
@@ -70,5 +70,5 @@ class Redux_Validation_colorrgba extends ReduxFramework {
 		} // END array check
 		*/
 	}//function
-	
+
 }//class

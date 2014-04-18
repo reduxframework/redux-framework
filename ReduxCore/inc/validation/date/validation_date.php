@@ -1,6 +1,6 @@
 <?php
-class Redux_Validation_date extends ReduxFramework {	
-	
+class Redux_Validation_date extends ReduxFramework {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,18 +9,18 @@ class Redux_Validation_date extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field, $value, $current) {
-		
+
 		parent::__construct();
 		$this->field = $field;
 		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid date.', 'redux-framework');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();
-		
+
 	}//function
-	
-	
-	
+
+
+
 	/**
 	 * Field Render Function.
 	 *
@@ -29,27 +29,27 @@ class Redux_Validation_date extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function validate() {
-		
+
 		$string = str_replace('/', '', $this->value);
-		
+
 		if(!is_numeric($string)){
 			$this->value = (isset($this->current))?$this->current:'';
 			$this->error = $this->field;
 			return;
 		}
-		
+
 		if($this->value[2] != '/'){
 			$this->value = (isset($this->current))?$this->current:'';
 			$this->error = $this->field;
 			return;
 		}
-		
+
 		if($this->value[5] != '/'){
 			$this->value = (isset($this->current))?$this->current:'';
 			$this->error = $this->field;
 		}
-		
-		
+
+
 	}//function
-	
+
 }//class

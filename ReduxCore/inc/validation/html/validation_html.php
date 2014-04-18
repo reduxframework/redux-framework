@@ -1,6 +1,6 @@
 <?php
-class Redux_Validation_html extends ReduxFramework {	
-	
+class Redux_Validation_html extends ReduxFramework {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,17 +9,17 @@ class Redux_Validation_html extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field, $value, $current){
-		
+
 		parent::__construct();
 		$this->field = $field;
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();
-		
+
 	}//function
-	
-	
-	
+
+
+
 	/**
 	 * Field Render Function.
 	 *
@@ -28,9 +28,9 @@ class Redux_Validation_html extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function validate() {
-		
+
 		$this->value = wp_kses_post($this->value);
-				
+
 	}//function
-	
+
 }//class

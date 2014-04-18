@@ -1,6 +1,6 @@
 <?php
-class Redux_Validation_color_rgba extends ReduxFramework {	
-	
+class Redux_Validation_color_rgba extends ReduxFramework {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,14 +9,14 @@ class Redux_Validation_color_rgba extends ReduxFramework {
 	 * @since ReduxFramework 3.0.4
 	*/
 	function __construct($field, $value, $current) {
-		
+
 		parent::__construct();
 		$this->field = $field;
 		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid color value.', 'redux-framework');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();
-		
+
 	}//function
 
 	/**
@@ -25,7 +25,7 @@ class Redux_Validation_color_rgba extends ReduxFramework {
 	 * Takes the user's input color value and returns it only if it's a valid color.
 	 *
 	 * @since ReduxFramework 3.0.3
-	*/	
+	*/
 	function validate_color_rgba($color) {
 
 		if ($color == "transparent") {
@@ -39,7 +39,7 @@ class Redux_Validation_color_rgba extends ReduxFramework {
 		if (preg_match('/^[a-f0-9]{6}$/i', $color)) {
 			$color = '#' . $color;
 		}
-	  	
+
 	  	return array('hex'=>$color, 'rgba'=>Redux_Helpers::hex2rgba($color));
 
 	}//function
@@ -47,7 +47,7 @@ class Redux_Validation_color_rgba extends ReduxFramework {
 
 
 
-	
+
 	/**
 	 * Field Render Function.
 	 *
@@ -56,7 +56,7 @@ class Redux_Validation_color_rgba extends ReduxFramework {
 	 * @since ReduxFramework 3.0.0
 	*/
 	function validate() {
-		
+
 		if(is_array($this->value)) { // If array
 			foreach($this->value as $k => $value){
 				$this->value[$k] = $this->validate_color_rgba($value);
@@ -64,7 +64,7 @@ class Redux_Validation_color_rgba extends ReduxFramework {
 		} else { // not array
 			$this->value = $this->validate_color_rgba($this->value);
 		} // END array check
-		
+
 	}//function
-	
+
 }//class

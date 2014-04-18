@@ -1,6 +1,6 @@
 <?php
-class Redux_Validation_no_special_chars extends ReduxFramework {	
-	
+class Redux_Validation_no_special_chars extends ReduxFramework {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,18 +9,18 @@ class Redux_Validation_no_special_chars extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field, $value, $current) {
-		
+
 		parent::__construct();
 		$this->field = $field;
 		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('You must not enter any special characters in this field, all special characters have been removed.', 'redux-framework');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();
-		
+
 	}//function
-	
-	
-	
+
+
+
 	/**
 	 * Field Render Function.
 	 *
@@ -29,13 +29,13 @@ class Redux_Validation_no_special_chars extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function validate() {
-		
+
 		if(!preg_match('/[^a-zA-Z0-9_ -]/s', $this->value) == 0){
 			$this->warning = $this->field;
 		}
-		
+
 		$this->value = preg_replace('/[^a-zA-Z0-9_ -]/s', '', $this->value);
-				
+
 	}//function
-	
+
 }//class

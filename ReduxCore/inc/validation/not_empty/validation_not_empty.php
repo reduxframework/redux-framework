@@ -1,6 +1,6 @@
 <?php
-class Redux_Validation_not_empty extends ReduxFramework {	
-	
+class Redux_Validation_not_empty extends ReduxFramework {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,18 +9,18 @@ class Redux_Validation_not_empty extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function __construct($field, $value, $current) {
-		
+
 		//parent::__construct();
 		$this->field = $field;
 		$this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field cannot be empty. Please provide a value.', 'redux-framework');
 		$this->value = $value;
 		$this->current = $current;
 		$this->validate();
-		
+
 	}//function
-	
-	
-	
+
+
+
 	/**
 	 * Field Render Function.
 	 *
@@ -29,12 +29,12 @@ class Redux_Validation_not_empty extends ReduxFramework {
 	 * @since ReduxFramework 1.0.0
 	*/
 	function validate() {
-		
+
 		if( !isset( $this->value ) || empty( $this->value ) ){
 			$this->value = ( isset( $this->current ) ) ? $this->current : '';
 			$this->error = $this->field;
 		}
-		
+
 	}//function
-	
+
 }//class
