@@ -21,7 +21,8 @@
   display: inline-block;
   margin-right: 15px;
 }
-.redux-info-field .redux-info-icon i {
+.redux-info-field .redux-info-icon i,
+.redux-info-field .redux-info-icon em {
   font-size: 2em;
 }
 .redux-info-field .redux-info-desc {
@@ -29,11 +30,12 @@
   vertical-align: top;
 }
 .redux-info-field.redux-normal {
-  background-color: #eeeeee;
-  border-color: #cccccc;
-  color: #666666;
+  background-color: #eee;
+  border-color: #ccc;
+  color: #666;
 }
-.redux-info-field.redux-normal i {
+.redux-info-field.redux-normal i,
+.redux-info-field.redux-normal em {
   color: #c5c5c5;
 }
 .redux-info-field.redux-warning {
@@ -41,7 +43,8 @@
   border-color: #d7c281;
   color: #958234;
 }
-.redux-info-field.redux-warning i {
+.redux-info-field.redux-warning i,
+.redux-info-field.redux-warning em {
   color: #dcca81;
 }
 .redux-info-field.redux-success {
@@ -49,7 +52,8 @@
   border-color: #71af5d;
   color: #4d7615;
 }
-.redux-info-field.redux-success i {
+.redux-info-field.redux-success i,
+.redux-info-field.redux-success em {
   color: #a0ca6c;
 }
 .redux-info-field.redux-critical {
@@ -57,7 +61,8 @@
   border-color: #b84f5b;
   color: #981225;
 }
-.redux-info-field.redux-critical i {
+.redux-info-field.redux-critical i,
+.redux-info-field.redux-critical em {
   color: #dd767d;
 }
 .redux-info-field.redux-info {
@@ -65,7 +70,8 @@
   border-color: #a9b6c2;
   color: #5c80a1;
 }
-.redux-info-field.redux-info i {
+.redux-info-field.redux-info i,
+.redux-info-field.redux-info em {
   color: #afc6da;
 }
 .redux-notice-field {
@@ -78,7 +84,7 @@
   padding: 1px 12px;
 }
 .redux-notice-field p {
-  margin: .5em 0;
+  margin: 0.5em 0;
   padding: 2px;
 }
 .redux-notice-field .redux-info-icon {

@@ -4,13 +4,13 @@
   padding-top: 0;
 }
 .redux-container-group h4 {
-  margin: 5px 0px 0px 0px;
+  margin: 5px 0 0 0;
 }
 .redux-container-group h4:first-child {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .redux-container-group .description {
-  margin: 5px 0 5px 0px;
+  margin: 5px 0 5px 0;
 }
 .redux-container-group #redux-groups-accordion {
   width: 100%;
