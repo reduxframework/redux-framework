@@ -9,7 +9,7 @@
 
 	$.redux = $.redux || {};
 
-	var tcolour; 
+	var tcolour;
 
 	$(document).ready(function(){
 		$.redux.color();

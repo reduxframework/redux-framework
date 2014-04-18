@@ -3,7 +3,7 @@
     "use strict";
 
     $.redux = $.redux || {};
-	
+
     $(document).ready(function () {
         //multi text functionality
         $.redux.multi_text();
@@ -17,7 +17,7 @@
 				$(this).remove();
 			});
 		});
-		
+
 		$('.redux-multi-text-add').click(function(){
 			var number = parseInt($(this).attr('data-add_number'));
 			var id = $(this).attr('data-id');

@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_divide' ) ) {
      * @since       1.0.0
      */
 	class ReduxFramework_divide {
-	
+
 		/**
 		 * Field Constructor.
 		 *
@@ -43,14 +43,14 @@ if( !class_exists( 'ReduxFramework_divide' ) ) {
 		 * @return		void
 		 */
         function __construct( $field = array(), $value ='', $parent ) {
-        
+
 			//parent::__construct( $parent->sections, $parent->args );
 			$this->parent = $parent;
 			$this->field = $field;
 			$this->value = $value;
-        
+
         }
-	
+
 		/**
 		 * Field Render Function.
 		 *
@@ -67,5 +67,5 @@ if( !class_exists( 'ReduxFramework_divide' ) ) {
 			echo '<table class="form-table no-border"><tbody><tr><th></th><td>';
 
 		}
-	}	
+	}
 }

@@ -2,12 +2,12 @@
 
 (function($){
 	"use strict";
-    
-    $.reduxBackground = $.reduxBackground || {};
-	
-    $(document).ready(function () {
-         $.reduxBackground.init();
-    });
+
+	$.reduxBackground = $.reduxBackground || {};
+
+	$(document).ready(function () {
+		 $.reduxBackground.init();
+	});
 
 	/**
 	* Redux Background
@@ -15,7 +15,7 @@
 	* Feature added by	: Dovy Paukstys
 	* Date				: 07 Jan 2014
 	*/
-    $.reduxBackground.init = function(){
+	$.reduxBackground.init = function(){
 		// Remove the image button
 		$('.redux-container-background .remove-image, .redux-container-background .remove-file').unbind('click').on('click', function(e) {
 			$.reduxBackground.removeImage( $(this).parents('fieldset.redux-field:first') );
@@ -40,12 +40,12 @@
 				$.reduxBackground.preview($(this));
 			}
 		});
-		
 
-    };
 
-    // Update the background preview
-    $.reduxBackground.preview = function(selector) {
+	};
+
+	// Update the background preview
+	$.reduxBackground.preview = function(selector) {
 		var parent = selector.parents('.redux-container-background:first');
 		var preview = $(parent).find('.background-preview');
 
@@ -58,7 +58,7 @@
 		$(parent).find('.redux-background-input').each(function() {
 			var data = $(this).serializeArray();
 			data = data[0];
-			
+
 			if (data && data.name.indexOf('[background-') != -1) {
 				if (data.value !== "") {
 					data.name = data.name.split(split);
@@ -66,8 +66,8 @@
 					if (data.name == "background-image") {
 						css += data.name+':url("'+data.value+'");';
 					} else {
-						css += data.name+':'+data.value+';';	
-					}					
+						css += data.name+':'+data.value+';';
+					}
 				}
 			}
 		});
@@ -76,8 +76,8 @@
 
 	};
 
-    // Add a file via the wp.media function
-    $.reduxBackground.addImage = function (event, selector) {
+	// Add a file via the wp.media function
+	$.reduxBackground.addImage = function (event, selector) {
 
 		event.preventDefault();
 
@@ -155,8 +155,8 @@
 		frame.open();
 	};
 
-    // Update the background preview
-    $.reduxBackground.removeImage = function(selector) {
+	// Update the background preview
+	$.reduxBackground.removeImage = function(selector) {
 
 		// This shouldn't have been run...
 		if (!selector.find('.remove-image').addClass('hide')) {
@@ -170,7 +170,7 @@
 		redux_change( jQuery(selector).find( '.upload-id' ) );
 		selector.find('.redux-background-input-properties').hide();
 		var screenshot = selector.find('.screenshot');
-		
+
 		// Hide the screenshot
 		screenshot.slideUp();
 
@@ -183,6 +183,6 @@
 
 		//$.reduxBackground.preview(selector);
 
-    };    
+	};
 
 })(jQuery);

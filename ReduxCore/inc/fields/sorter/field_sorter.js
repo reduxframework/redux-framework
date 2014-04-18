@@ -7,14 +7,14 @@
  */
 
 jQuery(function() {
-    /**	Sorter (Layout Manager) */
-    jQuery('.redux-sorter').each(function() {
-        var id = jQuery(this).attr('id');
-        jQuery('#' + id).find('ul').sortable({
-            items: 'li',
-            placeholder: "placeholder",
-            connectWith: '.sortlist_' + id,
-            opacity: 0.8,
+	/**	Sorter (Layout Manager) */
+	jQuery('.redux-sorter').each(function() {
+		var id = jQuery(this).attr('id');
+		jQuery('#' + id).find('ul').sortable({
+			items: 'li',
+			placeholder: "placeholder",
+			connectWith: '.sortlist_' + id,
+			opacity: 0.8,
 			stop: function(event, ui) {
 				var sorter = redux.sorter[jQuery(this).attr('data-id')];
 				var id = jQuery(this).find('h3').text();
@@ -23,14 +23,14 @@ jQuery(function() {
 					if(jQuery(this).children('li').length >= sorter.limits[id]) {
 						jQuery(this).addClass('filled');
 						if (jQuery(this).children('li').length > sorter.limits[id]) {
-							jQuery(ui.sender).sortable('cancel');	
+							jQuery(ui.sender).sortable('cancel');
 						}
 					} else {
 						jQuery(this).removeClass('filled');
 					}
 				}
 			},
-            update: function(event, ui) {
+			update: function(event, ui) {
 
 				var sorter = redux.sorter[jQuery(this).attr('data-id')];
 				var id = jQuery(this).find('h3').text();
@@ -38,22 +38,22 @@ jQuery(function() {
 					if(jQuery(this).children('li').length >= sorter.limits[id]) {
 						jQuery(this).addClass('filled');
 						if (jQuery(this).children('li').length > sorter.limits[id]) {
-							jQuery(ui.sender).sortable('cancel');	
+							jQuery(ui.sender).sortable('cancel');
 						}
 					} else {
 						jQuery(this).removeClass('filled');
 					}
 				}
 
-                jQuery(this).find('.position').each(function() {
-                    var listID = jQuery(this).parent().attr('id');
-                    var parentID = jQuery(this).parent().parent().attr('data-group-id');
-                    redux_change(jQuery(this));
-                    var optionID = jQuery(this).parent().parent().parent().attr('id');
-                    jQuery(this).prop("name", redux.args.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']');
-                });
-            }
-        });
-    });
+				jQuery(this).find('.position').each(function() {
+					var listID = jQuery(this).parent().attr('id');
+					var parentID = jQuery(this).parent().parent().attr('data-group-id');
+					redux_change(jQuery(this));
+					var optionID = jQuery(this).parent().parent().parent().attr('id');
+					jQuery(this).prop("name", redux.args.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']');
+				});
+			}
+		});
+	});
 
 });

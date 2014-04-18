@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
      * @since       1.0.0
      */
 	class ReduxFramework_color {
-	
+
 		/**
 		 * Field Constructor.
 		 *
@@ -43,14 +43,14 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 	 	 * @return		void
 		 */
         function __construct( $field = array(), $value ='', $parent ) {
-        
+
 			//parent::__construct( $parent->sections, $parent->args );
 			$this->parent = $parent;
 			$this->field = $field;
 			$this->value = $value;
-        
+
         }
-	
+
 		/**
 		 * Field Render Function.
 		 *
@@ -69,11 +69,11 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 				if ( $this->value == "transparent" ) {
 					$tChecked = ' checked="checked"';
 				}
-				echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';				
+				echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';
 			}
 
 		}
-	
+
 		/**
 		 * Enqueue Function.
 		 *
@@ -88,43 +88,43 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 			wp_enqueue_style( 'wp-color-picker' );
 
 			wp_enqueue_script(
-				'redux-field-color-js', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.js', 
+				'redux-field-color-js',
+				ReduxFramework::$_url . 'inc/fields/color/field_color.js',
 				array( 'jquery', 'wp-color-picker' ),
 				time(),
 				true
 			);
 
 			wp_enqueue_style(
-				'redux-field-color-css', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.css', 
+				'redux-field-color-css',
+				ReduxFramework::$_url . 'inc/fields/color/field_color.css',
 				time(),
 				true
 			);
-		
+
 		}
 
 		public function output() {
 
 	        $style = '';
-	        if ( !empty( $this->value ) ) {	        	
+	        if ( !empty( $this->value ) ) {
     			$mode = ( isset( $this->field['mode'] ) && !empty( $this->field['mode'] ) ? $this->field['mode'] : 'color' );
 
 	        	$style .= $mode.':'.$this->value.';';
 
 				if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
 					$keys = implode(",", $this->field['output']);
-					$this->parent->outputCSS .= $keys . "{" . $style . '}';  
+					$this->parent->outputCSS .= $keys . "{" . $style . '}';
 				}
 
 				if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
 					$keys = implode(",", $this->field['compiler']);
-					$this->parent->compilerCSS .= $keys . "{" . $style . '}';  
-				}	
+					$this->parent->compilerCSS .= $keys . "{" . $style . '}';
+				}
 
 	        }
-		
+
 		}
-	
+
 	}
 }

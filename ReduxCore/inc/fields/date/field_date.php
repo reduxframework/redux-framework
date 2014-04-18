@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
      * @since       1.0.0
      */
 	class ReduxFramework_date {
-	
+
 		/**
 		 * Field Constructor.
 		 *
@@ -43,14 +43,14 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 		 * @return		void
 		 */
         function __construct( $field = array(), $value ='', $parent ) {
-        
+
 			//parent::__construct( $parent->sections, $parent->args );
 			$this->parent = $parent;
 			$this->field = $field;
 			$this->value = $value;
-        
+
         }
-	
+
 		/**
 		 * Field Render Function.
 		 *
@@ -62,10 +62,10 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 		 */
 		public function render() {
     			$placeholder = (isset($this->field['placeholder'])) ? ' placeholder="' . esc_attr($this->field['placeholder']) . '" ' : '';
-                                                
+
     			echo '<input data-id="'.$this->field['id'].'" type="text" id="'. $this->field['id'] .'-date" name="' . $this->field['name'] . $this->field['name_suffix'] . '"' . $placeholder . 'value="' . $this->value . '" class="redux-datepicker ' . $this->field['class'] . '" />';
 		}
-	
+
 		/**
 	 	 * Enqueue Function.
 		 *
@@ -77,7 +77,7 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 		 */
 		public function enqueue() {
 			wp_enqueue_script(
-				'redux-field-date-js', 
+				'redux-field-date-js',
 				ReduxFramework::$_url . 'inc/fields/date/field_date.js',
 				array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ),
 				time(),

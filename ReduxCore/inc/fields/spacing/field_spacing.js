@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	
+
 	jQuery(".redux-spacing-top, .redux-spacing-right, .redux-spacing-bottom, .redux-spacing-left, .redux-spacing-all").numeric({
 		//allowMinus   : false,
 	});

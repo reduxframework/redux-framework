@@ -21,94 +21,94 @@
  */
 // Exit if accessed directly
 if (!defined('ABSPATH'))
-    exit;
+	exit;
 
 // Don't duplicate me!
 if (!class_exists('ReduxFramework_section')) {
 
-    /**
-     * Main ReduxFramework_heading class
-     *
-     * @since       1.0.0
-     */
-    class ReduxFramework_section {
+	/**
+	 * Main ReduxFramework_heading class
+	 *
+	 * @since       1.0.0
+	 */
+	class ReduxFramework_section {
 
-        /**
-         * Field Constructor.
-         *
-         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-         *
-         * @since 		1.0.0
-         * @access		public
-         * @return		void
-         */
-        public function __construct($field = array(), $value = '', $parent) {
+		/**
+		 * Field Constructor.
+		 *
+		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+		 *
+		 * @since 		1.0.0
+		 * @access		public
+		 * @return		void
+		 */
+		public function __construct($field = array(), $value = '', $parent) {
 
-            //parent::__construct( $parent->sections, $parent->args );
-            $this->parent = $parent;
-            $this->field = $field;
-            $this->value = $value;
-        }
+			//parent::__construct( $parent->sections, $parent->args );
+			$this->parent = $parent;
+			$this->field = $field;
+			$this->value = $value;
+		}
 
-        /**
-         * Field Render Function.
-         *
-         * Takes the vars and outputs the HTML for the field in the settings
-         *
-         * @since 		1.0.0
-         * @access		public
-         * @return		void
-         */
-        public function render() {
+		/**
+		 * Field Render Function.
+		 *
+		 * Takes the vars and outputs the HTML for the field in the settings
+		 *
+		 * @since 		1.0.0
+		 * @access		public
+		 * @return		void
+		 */
+		public function render() {
 
-            // No errors please
-            $defaults = array(
-                'indent' => '',
-                'style' => '',
-                'class' => '',
-                'title' => '',
-                'subtitle' => '',
-            );
-            $this->field = wp_parse_args($this->field, $defaults);
-            
-            $guid = uniqid();
+			// No errors please
+			$defaults = array(
+				'indent' => '',
+				'style' => '',
+				'class' => '',
+				'title' => '',
+				'subtitle' => '',
+			);
+			$this->field = wp_parse_args($this->field, $defaults);
 
-            $add_class = '';
-            if (isset($this->field['indent']) && !empty($this->field['indent'])) {
-                $add_class = ' form-table-section-indented';
-            }
+			$guid = uniqid();
 
-            echo '<style>#' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . ' {padding: 10px 0;}</style>';
-            echo '</td></tr></table><div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . $this->field['class'] . '">';
-            if (!empty($this->field['title'])) {
-                echo '<h3>' . $this->field['title'] . '</h3>';
-            }
-            if (!empty($this->field['subtitle'])) {
-                echo '<div class="redux-section-desc">' . $this->field['subtitle'] . '</div>';
-            }
+			$add_class = '';
+			if (isset($this->field['indent']) && !empty($this->field['indent'])) {
+				$add_class = ' form-table-section-indented';
+			}
 
-            //echo '</div><table class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td>';
-            echo '</div><table id="section-table-' . $this->field['id'] . '" class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td id="'. $guid .'">';
-            
-            // delete the tr afterwards
+			echo '<style>#' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . ' {padding: 10px 0;}</style>';
+			echo '</td></tr></table><div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . $this->field['class'] . '">';
+			if (!empty($this->field['title'])) {
+				echo '<h3>' . $this->field['title'] . '</h3>';
+			}
+			if (!empty($this->field['subtitle'])) {
+				echo '<div class="redux-section-desc">' . $this->field['subtitle'] . '</div>';
+			}
+
+			//echo '</div><table class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td>';
+			echo '</div><table id="section-table-' . $this->field['id'] . '" class="form-table form-table-section no-border'.$add_class.'"><tbody><tr><th></th><td id="'. $guid .'">';
+
+			// delete the tr afterwards
 ?>
-            <script type="text/javascript">
-                jQuery(document).ready(function(){
-                    var elem = jQuery("#<?php echo $guid?>");
-                    var prevelem = elem.closest("table").prev("h3").prev("p").prev("table");
-                    prevelem.find("tr").last().remove();
-			        elem.parent().remove();
-			    });
-		    </script>
-<?php             
-        }
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var elem = jQuery("#<?php echo $guid?>");
+					var prevelem = elem.closest("table").prev("h3").prev("p").prev("table");
+					prevelem.find("tr").last().remove();
+					elem.parent().remove();
+				});
+			</script>
+<?php
+		}
 
-        public function enqueue() {
-            wp_enqueue_style(
-                    'redux-field-section-css', ReduxFramework::$_url . 'inc/fields/section/field_section.css', time(), true
-            );
-        }
+		public function enqueue() {
+			wp_enqueue_style(
+					'redux-field-section-css', ReduxFramework::$_url . 'inc/fields/section/field_section.css', time(), true
+			);
+		}
 
-    }
+	}
 
 }

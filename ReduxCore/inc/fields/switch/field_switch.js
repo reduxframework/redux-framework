@@ -1,20 +1,20 @@
 /* global redux_change */
 (function($){
 	"use strict";
-    
-    $.redux = $.redux || {};
-	
-    $(document).ready(function () {
-         $.redux.switch();
-    });
 
-    /**
+	$.redux = $.redux || {};
+
+	$(document).ready(function () {
+		 $.redux.switch();
+	});
+
+	/**
 	 * Switch
 	 * Dependencies		: jquery
 	 * Feature added by	: Smartik - http://smartik.ws/
 	 * Date				: 03.17.2013
 	 */
-    $.redux.switch = function(){
+	$.redux.switch = function(){
 		$(".cb-enable").click(function() {
 			if ($(this).hasClass('selected')) {
 				return;
@@ -44,8 +44,8 @@
 			$($fold).slideUp('normal', "swing");
 		});
 		//disable text select(for modern chrome, safari and firefox is done via CSS)
-		//if (($.browser.msie && $.browser.version < 10) || $.browser.opera) { 
+		//if (($.browser.msie && $.browser.version < 10) || $.browser.opera) {
 		$('.cb-enable span, .cb-disable span').find().attr('unselectable', 'on');
 		//}
-    };
+	};
 })(jQuery);

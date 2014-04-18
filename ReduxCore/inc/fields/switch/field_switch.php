@@ -1,6 +1,6 @@
 <?php
-class ReduxFramework_switch {	
-	
+class ReduxFramework_switch {
+
 	/**
 	 * Field Constructor.
 	 *
@@ -9,14 +9,14 @@ class ReduxFramework_switch {
 	 * @since ReduxFramework 0.0.4
 	*/
 	function __construct( $field = array(), $value ='', $parent ) {
-    
+
 		//parent::__construct( $parent->sections, $parent->args );
 		$this->parent = $parent;
 		$this->field = $field;
 		$this->value = $value;
-    
-    }
-	
+
+	}
+
 
 
 	/**
@@ -27,7 +27,7 @@ class ReduxFramework_switch {
 	 * @since ReduxFramework 0.0.4
 	*/
 	function render(){
-		
+
 		$cb_enabled = $cb_disabled = '';//no errors, please
 
 		//Get selected
@@ -36,20 +36,20 @@ class ReduxFramework_switch {
 		}else {
 			$cb_disabled = ' selected';
 		}
-		
-        //Label ON
-        if(!isset($this->field['on'])){
-            $on = __('On','redux-framework');
-        }else{
-            $on = $this->field['on'];
-        }
-        
-        //Label OFF
-        if(!isset($this->field['off'])){
-            $off = __('Off','redux-framework');
-        } else{
-            $off = $this->field['off'];
-        }
+
+		//Label ON
+		if(!isset($this->field['on'])){
+			$on = __('On','redux-framework');
+		}else{
+			$on = $this->field['on'];
+		}
+
+		//Label OFF
+		if(!isset($this->field['off'])){
+			$off = __('Off','redux-framework');
+		} else{
+			$off = $this->field['off'];
+		}
 
 		echo '<div class="switch-options">';
 			echo '<label class="cb-enable'. $cb_enabled .'" data-id="'.$this->field['id'].'"><span>'. $on .'</span></label>';
@@ -58,7 +58,7 @@ class ReduxFramework_switch {
 		echo '</div>';
 
 	}//function
-	
+
 	/**
 	 * Enqueue Function.
 	 *
@@ -67,21 +67,21 @@ class ReduxFramework_switch {
 	 * @since ReduxFramework 0.0.4
 	*/
 	function enqueue(){
-		
+
 		wp_enqueue_script(
-			'redux-field-switch-js', 
-			ReduxFramework::$_url.'inc/fields/switch/field_switch.js', 
+			'redux-field-switch-js',
+			ReduxFramework::$_url.'inc/fields/switch/field_switch.js',
 			array('jquery'),
 			time(),
 			true
-		);		
+		);
 
 		wp_enqueue_style(
-			'redux-field-switch-css', 
-			ReduxFramework::$_url.'inc/fields/switch/field_switch.css', 
+			'redux-field-switch-css',
+			ReduxFramework::$_url.'inc/fields/switch/field_switch.css',
 			time(),
 			true
-		);		
+		);
 
 	}//function
 

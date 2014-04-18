@@ -4,7 +4,7 @@
 
 	$.redux = $.redux || {};
 
-	var tcolour; 
+	var tcolour;
 
 	$(document).ready(function(){
 		$.redux.color_rgba();
@@ -24,7 +24,7 @@
 				//console.log(hex + ' - ' + opacity);
 				redux_change($(this));
 				//$('#' + this.id + '-transparency').removeAttr('checked');
-				//console.group("Trace"); 
+				//console.group("Trace");
 				//console.log( $('#' + this.id + '-transparency').prop('checked') );
 				//console.groupEnd();
 				$('#' +$(this).data('id')+ '-transparency').removeAttr('checked');
@@ -94,28 +94,28 @@
 
                     if ($(this).is(":checked")) {
 
-                        //Set data-opacity attribute to 0.00 when transparent checkbox is check 
+                        //Set data-opacity attribute to 0.00 when transparent checkbox is check
                         $('#' + $(this).data('id')).attr('data-opacity','0.00');
 
-                        //Set hidded input value alpha opacity to 0.00 when transparent checkbox is check 
+                        //Set hidded input value alpha opacity to 0.00 when transparent checkbox is check
                         $('#' + pfs + '-alpha').val('0.00');
 
-                        //Hide .minicolors-swatch-color SPAN when its check 
+                        //Hide .minicolors-swatch-color SPAN when its check
                         $('#' + $(this).data('id')).parent().parent().find('.minicolors-swatch-color').css('display','none');
                     } else {
 
                         //might need to restore data-opacity attribute and hidden input alpha value when uncheck
                         $('#' + $(this).data('id')).attr('data-opacity', op);
                         $('#' + pfs + '-alpha').val(op);
-                        //Unhide .minicolors-swatch-color SPAN when its check 
+                        //Unhide .minicolors-swatch-color SPAN when its check
                         $('#' + $(this).data('id')).parent().parent().find('.minicolors-swatch-color').css('display','');
                     }
                 });
-                
+
                 //Unhide .minicolors-swatch-color SPAN when its check on redux-color_rgba input focus
                 $('.redux-color_rgba').on('focus', function() {
 
-                    var op = $(this).parent().find('.minicolors-swatch-color').css('opacity').substring(0,4); 
+                    var op = $(this).parent().find('.minicolors-swatch-color').css('opacity').substring(0,4);
 
                     // re-store data-opacity value of the input field
                     $(this).attr('data-opacity', op);

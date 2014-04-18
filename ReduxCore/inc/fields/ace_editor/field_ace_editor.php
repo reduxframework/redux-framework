@@ -24,7 +24,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 // Don't duplicate me!
 if( class_exists( 'ReduxFramework_ace_editor' ) ) return;
 
-class ReduxFramework_ace_editor { 
+class ReduxFramework_ace_editor {
 
     /**
      * Field Constructor.
@@ -34,7 +34,7 @@ class ReduxFramework_ace_editor {
      * @since ReduxFramework 1.0.0
     */
     function __construct( $field = array(), $value ='', $parent ) {
-    
+
         //parent::__construct( $parent->sections, $parent->args );
         $this->parent = $parent;
         $this->field = $field;
@@ -66,9 +66,9 @@ class ReduxFramework_ace_editor {
             <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars( $this->value ); ?></pre>
         </div>
     <?php
-        
+
     }
-    
+
     /**
          * Enqueue Function.
          *
@@ -81,14 +81,14 @@ class ReduxFramework_ace_editor {
         public function enqueue() {
 
             wp_enqueue_style(
-                'redux-field-ace-editor-css', 
+                'redux-field-ace-editor-css',
                 ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.css',
                 time(),
                 true
             );
             wp_enqueue_script(
-                'redux-field-ace-editor-js', 
-                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js', 
+                'redux-field-ace-editor-js',
+                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js',
                 array( 'jquery', 'ace-editor-js' ),
                 time(),
                 true

@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	
+
 	jQuery(".redux-dimensions-height, .redux-dimensions-width").numeric({
 		//allowMinus   : false,
 	});

@@ -32,7 +32,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
      * @since       1.0.0
      */
     class ReduxFramework_media {
-    
+
         /**
          * Field Constructor.
          *
@@ -43,12 +43,12 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
          * @return      void
          */
         function __construct( $field = array(), $value ='', $parent ) {
-        
+
           //parent::__construct( $parent->sections, $parent->args );
           $this->parent = $parent;
           $this->field = $field;
           $this->value = $value;
-        
+
         }
 
         /**
@@ -85,13 +85,13 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
 
                     if( !empty( $this->field['default']['url'] ) ) {
                         $this->value['url'] = $this->field['default']['url'];
-                    }           
+                    }
                 } else {
                     if( is_numeric( $this->field['default'] ) ) { // Check if it's an attachment ID
                         $this->value['id'] = $this->field['default'];
                     } else { // Must be a URL
                         $this->value['url'] = $this->field['default'];
-                    }           
+                    }
                 }
             }
 
@@ -111,15 +111,15 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
 
             if( ( !empty( $this->field['url'] ) && $this->field['url'] === true ) || isset( $this->field['preview'] ) && $this->field['preview'] === false ) {
                 $hide = '';
-            }   
+            }
 
             $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected','redux-framework');
-            
+
             $readOnly = ' readonly="readonly"';
             if ( isset($this->field['readonly']) && $this->field['readonly'] === false ) {
                 $readOnly = '';
             }
-            
+
             echo '<input placeholder="' . $placeholder .'" type="text" class="' . $hide . 'upload ' . $this->field['class'] . '" name="' . $this->field['name'] . '[url]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '"' . $readOnly . '/>';
             echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->field['name'] . '[id]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
             echo '<input type="hidden" class="upload-height" name="' . $this->field['name'] . '[height]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][height]" value="' . $this->value['height'] . '" />';
@@ -138,7 +138,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
                     $image = wp_get_attachment_image_src( $this->value['id'], array(150, 150) );
                     $this->value['thumbnail'] = $image[0];
                 } else {
-                    $this->value['thumbnail'] = $this->value['url'];    
+                    $this->value['thumbnail'] = $this->value['url'];
                 }
             }
 
@@ -147,50 +147,50 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             echo '<img class="redux-option-image" id="image_' . $this->field['id'] . '" src="' . $this->value['thumbnail'] . '" alt="" target="_blank" rel="external" />';
             echo '</a>';
             echo '</div>';
-        
+
             //Upload controls DIV
             echo '<div class="upload_button_div">';
 
             //If the user has WP3.5+ show upload/remove button
             echo '<span class="button media_upload_button" id="' . $this->field['id'] . '-media">' . __( 'Upload', 'redux-framework' ) . '</span>';
-            
+
             $hide = '';
             if( empty( $this->value['url'] ) || $this->value['url'] == '' )
                 $hide =' hide';
 
             echo '<span class="button remove-image' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __( 'Remove', 'redux-framework' ) . '</span>';
 
-            echo '</div>';  
-                           
-            
+            echo '</div>';
+
+
         }
 
     		/**
-    		 * 
+    		 *
     		 * Functions to pass data from the PHP to the JS at render time.
-    		 * 
+    		 *
     		 * @return array Params to be saved as a javascript object accessable to the UI.
-    		 * 
+    		 *
     		 * @since  Redux_Framework 3.1.1
-    		 * 
+    		 *
     		 */
     		function localize($field, $value = "") {
-                
+
                 $params = array();
 
                 if ( !isset( $field['mode'] ) ) {
                     $field['mode'] = "image";
-                }          
+                }
                 $params['mode'] = $field['mode'];
 
                 if ( empty( $value ) && isset( $this->value ) ) {
                     $value = $this->value;
-                }   
+                }
                 $params['val'] = $value;
 
                 return $params;
-          
-    		}        
+
+    		}
 
         /**
          * Enqueue Function.

@@ -4,7 +4,7 @@
 
 
 jQuery(document).ready(function() {
-	
+
 	jQuery(".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all").numeric({
 		allowMinus   : false,
 	});
