@@ -6,9 +6,9 @@
 
 
 	$(document).ready(function() {
-		// Intense debug  ;)
-		//jQuery('input[type="hidden"]').attr("type","text");
-		//console.log(redux);
+		// Intense debug ;)
+		// jQuery('input[type="hidden"]').attr("type","text");
+		// console.log(redux);
 
 		jQuery.fn.isOnScreen = function() {
 			if (!window) {
@@ -27,7 +27,6 @@
 			return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 		};
 
-
 		$.redux.required();
 
 		$("body").on('change', '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]', function(e) {
@@ -37,8 +36,6 @@
 		$("body").on('check_dependencies', function(e, variable) {
 			$.redux.check_dependencies(variable);
 		});
-
-
 
 		$('td > fieldset:empty,td > div:empty').parent().parent().hide();
 
@@ -69,23 +66,20 @@
 				}
 			}
 		});
-
 	};
 
 	$.redux.get_container_value = function(id) {
-
 		var value = $('#'+redux.args.opt_name+'-'+id).serializeForm();
 		if (value !== null && typeof value === 'object' && value.hasOwnProperty(redux.args.opt_name)) {
-			//console.log('object');
-			//console.log(value);
+			// console.log('object');
+			// console.log(value);
 			value = value[redux.args.opt_name][id];
 		}
-		//console.log(value);
+		// console.log(value);
 		return value;
 	};
 
 	$.redux.check_dependencies = function(variable) {
-
 		if ( redux.required === null ) {
 			return;
 		}
@@ -142,14 +136,10 @@
 				}
 
 			current.find('select, radio, input[type=checkbox]').trigger('change');
-
 		});
-
 	};
 	$.redux.required_recursive_hide = function(id) {
-
 		var toFade = $('#'+redux.args.opt_name+'-'+id).parents('tr:first');
-
 		toFade.fadeOut(50, function() {
 			jQuery(this).addClass('hide');
 			if ($('#'+redux.args.opt_name+'-'+id).hasClass('redux-container-section')) {
@@ -269,9 +259,7 @@
 				break;
 		}
 		return show;
-
 	};
-
 })(jQuery);
 
 jQuery.noConflict();
@@ -291,7 +279,6 @@ var confirmOnPageExit = function(e) {
 };
 
 function verifyPos(s, b) {
-
 	// trim off spaces
 	s = s.replace(/^\s+|\s+$/gm,'');
 
