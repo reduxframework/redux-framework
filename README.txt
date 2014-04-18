@@ -126,6 +126,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 == Changelog ==
 
 = 3.2.1 =
+* Fixed:      Small bug in image_select javascript.
 * Added:      Import hook, just because we can.  :)
 * Fixed:      Customizer preview now TRULY outputs CSS even if output_tag is set to false;
 * Fixed:      Reset section, etc. Discovered an odd WordPress thing.

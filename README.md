@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.44 =
+* Fixed:      Small bug in image_select javascript.
+
 = 3.1.9.43 =
 * Added:      Import hook, just because we can.  :)
 
