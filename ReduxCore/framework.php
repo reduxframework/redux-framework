@@ -2811,7 +2811,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( $this->saved != false ) {
 
                 if( $this->saved == "imported" ) {
-
+	                /**
+	                 * action 'redux/options/{opt_name}/import'
+	                 * @param object $this ReduxFramework
+	                 */
+	                do_action( "redux/options/{$this->args['opt_name']}/import", $this );
                     /**
                      * filter 'redux-imported-text-{opt_name}'
                      * @param string  translated "settings imported" text
