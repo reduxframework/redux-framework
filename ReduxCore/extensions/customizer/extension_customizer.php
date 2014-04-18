@@ -58,7 +58,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
             if ( ( $pagenow !== "customize.php" && $pagenow !== "admin-ajax.php" && !isset( $GLOBALS['wp_customize'] ) ) ) {
               return;
             }
-	        $this->parent->args['output_tag'] = true;
+
 
             $this->parent = $parent;       
 
@@ -80,7 +80,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
             */
 
 	        if( !isset( $_POST['customized'] ) ) {
-		        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
+		        //add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
 		        add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
 		        add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
 		        add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
@@ -456,12 +456,12 @@ static_front_page - Static Front Page
       public function _enqueue() {
         global $wp_styles;
 
-        wp_enqueue_style( 'wp-pointer' );
-        wp_enqueue_script( 'wp-pointer' );
+        //wp_enqueue_style( 'wp-pointer' );
+        //wp_enqueue_script( 'wp-pointer' );
         // Remove when code is in place!
-        wp_enqueue_script('redux-extension-customizer-js', $this->_extension_url . 'assets/js/customizer.js');
+        //wp_enqueue_script('redux-extension-customizer-js', $this->_extension_url . 'assets/js/customizer.js');
         // Get styles
-        wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
+        //wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
 
 
 

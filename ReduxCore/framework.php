@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.9.41';
+        public static $_version = '3.1.9.42';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1405,7 +1405,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 }
             }
-            if ( !empty( $this->outputCSS ) && $this->args['output_tag'] == true ) {
+            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || isset( $_POST['customized'] ) ) ) {
                 echo '<style type="text/css" title="dynamic-css" class="options-output">'.$this->outputCSS.'</style>';
             }
 
