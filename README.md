@@ -74,6 +74,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.2 =
+* Fixed:      Info field didn't intend within section.
+
+= 3.2.2.1 =
+* Fixed:      Compiler hook wasn't running.
+
+
 = 3.1.9.44 =
 * Fixed:      Small bug in image_select javascript.
 
