@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
 	// On label click, change the input and class
 	jQuery('.redux-image-select label img, .redux-image-select label .tiles').click(function(e) {
 		var id = jQuery(this).closest('label').attr('for');
-		jQuery(this).parents("fieldset:first").find('.redux-image-select-selected').removeClass('redux-image-select-selected');
+		jQuery(this).parents("fieldset:first").find('.redux-image-select-selected').removeClass('redux-image-select-selected').find("input[type='radio']").attr("checked", false);
 		jQuery(this).closest('label').find('input[type="radio"]').prop('checked');
 		if (jQuery(this).closest('label').hasClass('redux-image-select-preset-' + id)) { // If they clicked on a preset, import!
 			e.preventDefault();
@@ -23,8 +23,8 @@ jQuery(document).ready(function() {
 			}
 			return false;
 		} else {
-			redux_change(jQuery(this).closest('label').find('input[type="radio"]'));
 			jQuery('label[for="' + id + '"]').addClass('redux-image-select-selected').find("input[type='radio']").attr("checked", true);
+			redux_change(jQuery(this).closest('label').find('input[type="radio"]'));
 		}
 	});
 

@@ -227,6 +227,7 @@ jQuery(document).ready(function($) {
 			jQuery(family).val(family.data('value'));
 		}
 		typographySelect(family);
+
 	});
 	//init when value is changed
 	jQuery('.redux-typography').on('change', function() {
@@ -273,4 +274,5 @@ jQuery(document).ready(function($) {
 
 		});
 	});
+
 });

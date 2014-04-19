@@ -1,8 +1,21 @@
 .redux-main {
 	.select_wrapper.typography-style span { display: none }
 	.redux-typography-container {
-		.typography-size-bar { clear: left; }
-		.typography-style-bar { clear: left; }
+		.typography-font-bar,
+		.typography-size-bar,
+		.typography-style-bar {
+			clear: left;
+			zoom: 1;
+			&:before,
+			&:after {
+				content: "\0020";
+				display: block;
+				height: 0;
+				overflow: hidden;
+			}
+			&:after { clear: both; }
+		}
+		.typography-font-bar { margin-bottom: 5px; }
 		.wp-picker-container {
 			float: left;
 			clear: left;
