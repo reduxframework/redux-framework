@@ -2479,8 +2479,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		        }
 
 		        if (isset($compiler)) {
-			        $this->run_compiler = true;
-			        //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
+			        //$this->run_compiler = true;
+			        setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
 			        $plugin_options['REDUX_COMPILER'] = time();
 		        }
 	            $this->saved = "defaults_section";
@@ -2514,8 +2514,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( !empty( $plugin_options['compiler'] ) ) {
                 $plugin_options['REDUX_COMPILER'] = time();
-                //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
-	            $this->run_compiler = true;
+                setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
+	            //$this->run_compiler = true;
             }
 
             unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
