@@ -1067,17 +1067,14 @@ pre {
             a {
                 background: @accentColor;
                 color: #fff;
-                margin-right: 0;
-                width: 184px;
+                width: auto;
                 border-bottom: 0;
-                
             }
             ul.subsection li {
                 border-top: 0 !important;
                 a {
                     background: @secondaryColor;
-                    margin-right: 0px;
-                    width: 185px;
+                    width: auto;
                     //border-top: 0 !important;
                     border-top-color: lighten(@secondaryColor, 15);
                     padding: 7px;
@@ -1088,28 +1085,6 @@ pre {
                     }
                 }
             }            
-        }
-    }
-    .redux-sidebar .redux-group-menu li.active:first-child {
-        &.hasSubSectionsf {
-            a {
-                &:after {
-                    right: 0;
-                    border: solid 8px transparent;
-                    content: " ";
-                    height: 0;
-                    width: 0;
-                    position: absolute;
-                    pointer-events: none;
-                    border-right-color: #fff;
-                    top: 50%;
-                    margin-top: -8px;
-                    a:after {
-                        border: 0 !important;
-                        content: "" !important;
-                    }
-                }
-            }
         }
     }
     
