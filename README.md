@@ -74,10 +74,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.2.2.2 =
+= 3.2.1.1 =
+* Added:	  SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't the first section in your panel.  ;)
+
+= 3.2.1.2 =
 * Fixed:      Info field didn't intend within section.
 
-= 3.2.2.1 =
+= 3.2.1.1 =
 * Fixed:      Compiler hook wasn't running.
 
 
