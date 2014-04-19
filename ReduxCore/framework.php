@@ -2714,12 +2714,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
             } else if (!isset($section['subsection']) || $section['subsection'] != true ) {
                 // DOVY! REPLACE $k with $section['ID'] when used properly.
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
-                $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
+                $subsections = ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) ? true : false;
+                $subsectionsClass = $subsections ? ' hasSubSections' : '';
+                $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li'.$subsectionsClass.'">';
                 $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
                 $nextK = $k;
                 // Make sure you can make this a subsection
 
-	            if ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) {
+	            if ( $subsections ) {
                     $string .= '<ul id="' . $nextK.$suffix . '_section_group_li_subsections" class="subsection">';                
 
                     $doLoop = true;

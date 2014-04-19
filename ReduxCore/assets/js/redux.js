@@ -662,7 +662,9 @@ jQuery(document).ready(function($) {
                 //console.log('child of oldid');
                 jQuery('#' + oldid + '_section_group_li').addClass('activeChild').removeClass('active');
             } else {
-                jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').removeClass('active').removeClass('activeChild');
+                //console.log('sibling');
+                jQuery('#' + relid + '_section_group_li').addClass('active');
+                jQuery('#' + oldid + '_section_group_li').removeClass('active');
             }
             jQuery('#' + relid + '_section_group_li').removeClass('activeChild').addClass('active');
         } else {
