@@ -1244,7 +1244,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     if( !isset( $section['type'] ) || $section['type'] != 'divide' ) {
 
                         foreach( $this->sections as $k => $section ) {
-                            if ( !isset( $section['title'] ) || ( isset( $section['subsection'] ) && $section['subsection'] == true ) ) {
+                            $canBeSubSection = ($k > 0 && (!isset($this->sections[($k)]['type']) || $this->sections[($k)]['type'] != "divide")) ? true : false;
+                            //if ($this->args['override_subsectiin'])
+                            if ( !isset( $section['title'] ) || ( $canBeSubSection && ( isset( $section['subsection'] ) && $section['subsection'] == true ) ) ) {
                                 continue;
                             }
 
@@ -2703,7 +2705,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
                 $icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
             }
-
+            $canBeSubSection = ($k > 0 && (!isset($this->sections[($k)]['type']) || $this->sections[($k)]['type'] != "divide")) ? true : false;
+            if (!$canBeSubSection && isset($section['subsection']) && $section['subsection'] == true) {
+                unset($section['subsection']);
+            }
             if (isset($section['type']) && $section['type'] == "divide") {
                 $string .= '<li class="divide">&nbsp;</li>';
             } else if (!isset($section['subsection']) || $section['subsection'] != true ) {
@@ -2712,23 +2717,23 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
                 $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
                 $nextK = $k;
+                // Make sure you can make this a subsection
+
 	            if ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) {
-                    $string .= '<ul id="' . $nextK.$suffix . '_section_group_li_subsections" class="subsection">';
-                }
+                    $string .= '<ul id="' . $nextK.$suffix . '_section_group_li_subsections" class="subsection">';                
 
-                $doLoop = true;
-                while ($doLoop) {
-                    $nextK += 1;
-                    if ( count($this->sections) < $nextK || !isset( $this->sections[$nextK] ) || !isset($this->sections[$nextK]['subsection']) || $this->sections[$nextK]['subsection'] != true ) {
-                        $doLoop = false;
-                    } else {  
-                        $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
-                        $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'"><span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
-                        $string .= '</li>';
+                    $doLoop = true;
+                    while ($doLoop) {
+                        $nextK += 1;
+                        if ( count($this->sections) < $nextK || !isset( $this->sections[$nextK] ) || !isset($this->sections[$nextK]['subsection']) || $this->sections[$nextK]['subsection'] != true ) {
+                            $doLoop = false;
+                        } else {  
+                            $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
+                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'"><span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
+                            $string .= '</li>';
+                        }
                     }
-                }
 
-                if ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) {
                     $string .= '</ul>';
                 }
 

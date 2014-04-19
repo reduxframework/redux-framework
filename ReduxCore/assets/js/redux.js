@@ -606,6 +606,7 @@ jQuery(document).ready(function($) {
      **/
     jQuery('.redux-group-tab-link-a').click(function() {
         var relid = jQuery(this).data('rel'); // The group ID of interest
+
         var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel'); 
         if (oldid === relid) {
             return;
@@ -616,13 +617,17 @@ jQuery(document).ready(function($) {
             expires: 7,
             path: '/'
         });
+        if (jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
+            var parentID = jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').attr('id').split('_');
+            parentID = parentID[0];
+        }
 
         $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a.current').removeClass('current');
         $('#toplevel_page_' + redux.args.slug + ' .wp-submenu li.current').removeClass('current');
 
         $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a').each(function() {
             var url = $(this).attr('href').split('&tab=');
-            if (url[1] == relid) {
+            if (url[1] == relid || url[1] == parentID) {
                 $(this).addClass('current');
                 $(this).parent().addClass('current');
             }
