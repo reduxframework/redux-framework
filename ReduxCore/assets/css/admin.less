@@ -817,6 +817,9 @@ pre { overflow: hidden; }
 	.redux-container-image_select .redux-image-select-selected img { border-color: @accentColor; }
 	#redux-footer #redux-share a {
 		color: @accentColor;
+		-webkit-transition: color 0.3s;
+		-moz-transition: color 0.3s;
+		transition: color 0.3s;
 		&:hover { color: darken(@accentColor, 20%); }
 	}
 	.select2-results .select2-highlighted { background: @accentColor; }
