@@ -224,6 +224,11 @@ module.exports = function(grunt) {
                 }
             }
         },
+        recess: {
+            dist: {
+                src: ['ReduxCore/assets/css/admin.less']
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -235,6 +240,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-phplint");
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-po2mo');
+    grunt.loadNpmTasks('grunt-recess');
 
     grunt.registerTask('langUpdate', "Update languages", function() {
         shell.exec('tx pull -a --minimum-perc=25');
@@ -254,6 +260,7 @@ module.exports = function(grunt) {
     grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
 
     grunt.registerTask("lintPHP", ["phplint:plugin", "phplint:core"]);
+    grunt.registerTask("lintLESS", ["recess:dist"]);
     grunt.registerTask("compileCSS", ["less:production", "less:development", "less:extensions"]);
     grunt.registerTask('compileJS', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor']);
     grunt.registerTask('compileTestJS', ['jshint', 'concat:core', 'concat:vendor']);
