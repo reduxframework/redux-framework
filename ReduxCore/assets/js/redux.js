@@ -606,6 +606,10 @@ jQuery(document).ready(function($) {
      **/
     jQuery('.redux-group-tab-link-a').click(function() {
         var relid = jQuery(this).data('rel'); // The group ID of interest
+        var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel'); 
+        if (oldid === relid) {
+            return;
+        }
         jQuery('#currentSection').val(relid);
         // Set the proper page cookie
         $.cookie('redux_current_tab', relid, {
@@ -624,9 +628,68 @@ jQuery(document).ready(function($) {
             }
         });
 
-        // Remove the old active tab
-        var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel');
-        jQuery('#' + oldid + '_section_group_li').removeClass('active');
+/**
+    if (RELID is child of oldid) {
+        oldid activeChild, relid active
+    } else if (RELID is sibling of OLDID) {
+        remove active of old id, add to relid
+    } else {
+        if relid is parent {
+            slidedown realid
+        }
+        if oldid is parent {
+            slideup oldid
+        } else if oldid is child {
+            slideup oldid parent and remove class
+        } else {
+            normal oldid remove active
+        }
+    }
+**/
+
+        if (jQuery('#' + oldid + '_section_group_li').find('#' + oldid + '_section_group_li').length ) {
+            //console.log('RELID is child of oldid');
+            jQuery('#' + oldid + '_section_group_li').addClass('activeChild');
+            jQuery('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild');
+        } else if (jQuery('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length || jQuery('#' + oldid + '_section_group_li').parents('ul.subsection').find('#' + relid + '_section_group_li').length) {
+            //console.log('RELID is sibling or child of OLDID');
+            if (jQuery('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length) {
+                //console.log('child of oldid');
+                jQuery('#' + oldid + '_section_group_li').addClass('activeChild').removeClass('active');
+            } else {
+                jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').removeClass('active').removeClass('activeChild');
+            }
+            jQuery('#' + relid + '_section_group_li').removeClass('activeChild').addClass('active');
+        } else {
+            jQuery('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild').find('ul.subsection').slideDown();
+            if (jQuery('#' + oldid + '_section_group_li').find('ul.subsection').length) {
+                //console.log('oldid is parent')
+                jQuery('#' + oldid + '_section_group_li').find('ul.subsection').slideUp('fast', function() {
+                    jQuery('#' + oldid + '_section_group_li').removeClass('active').removeClass('activeChild');
+                });     
+            } else if (jQuery('#' + oldid + '_section_group_li').parents('ul.subsection').length) {
+                //console.log('oldid is a child');
+                if (!jQuery('#' + oldid + '_section_group_li').parents('#' + relid + '_section_group_li').length) {
+                    //console.log('oldid is child, but not of relid');
+                    jQuery('#' + oldid + '_section_group_li').parents('ul.subsection').slideUp('fast', function() {
+                        jQuery('#' + oldid + '_section_group_li').removeClass('active');
+                        jQuery('#' + oldid + '_section_group_li').parents('.redux-group-tab-link-li').removeClass('active').removeClass('activeChild');
+                    });  
+                } else {
+                    jQuery('#' + oldid + '_section_group_li').removeClass('active');
+                }
+                
+            } else {
+                //console.log('Normal remove active from child');
+                jQuery('#' + oldid + '_section_group_li').removeClass('active');
+                if (jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
+                    //console.log('here');
+                    jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').addClass('activeChild').find('ul.subsection').slideDown();
+                    jQuery('#' + relid + '_section_group_li').addClass('active');
+                }
+            }
+        }
+
         // Show the group
         jQuery('#' + oldid + '_section_group').hide();
         jQuery('#' + relid + '_section_group').fadeIn(200, function() {
@@ -634,7 +697,7 @@ jQuery(document).ready(function($) {
                 stickyInfo(); // race condition fix
             }
         });
-        jQuery('#' + relid + '_section_group_li').addClass('active');
+        
     });
 
     // Get the URL parameter for tab

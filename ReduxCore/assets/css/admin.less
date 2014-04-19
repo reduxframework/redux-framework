@@ -291,12 +291,19 @@ a {
 
 
 
-.redux-sidebar .redux-group-menu li.active a{
+.redux-sidebar .redux-group-menu li.active a, .redux-sidebar .redux-group-menu li.activeChild a {
     background:#FCFCFC;
     color: #269ad6;
     width:184px;
     opacity: 1;
     margin-right:-2px;
+}
+.redux-sidebar .redux-group-menu li.active a li a {
+    background: #333;
+    padding-left: 5px;
+}
+ul.subsection {
+    display: none;
 }
 
 .redux-group-tab{
@@ -840,7 +847,9 @@ label.radio, label.multicheck {
     .redux-sidebar .redux-group-menu li a,
     .redux-sidebar .redux-group-menu li a:hover,
     .redux-sidebar .redux-group-menu li.active a,
-    .redux-sidebar .redux-group-menu li.active a:hover{
+    .redux-sidebar .redux-group-menu li.active a:hover,
+    .redux-sidebar .redux-group-menu li.activeChild a,
+    .redux-sidebar .redux-group-menu li.activeChild a:hover{
         width:auto;
     }
 
@@ -1008,10 +1017,21 @@ pre {
 
     #redux-header .display_header span { color: @darkColor; }
     #redux-header { background: @secondaryColor; border-color: @accentColor; }
-    .redux-sidebar .redux-group-menu li.active { 
+    .redux-sidebar .redux-group-menu li.active, .redux-sidebar .redux-group-menu li.activeChild { 
         border-left: 3px solid @accentColor;
+        .active {
+            border-left: 0;
+        }
         a {
             color: @secondaryColor;
+        }
+        li a {
+            background: @secondaryColor;
+            margin-right: 0px;
+            width: 165px;
+            margin-top: -1px;
+            padding-left: 30px;
+            color: #fff;
         }
     }
     .redux-container-image_select .redux-image-select-selected img { border-color: @accentColor; }
