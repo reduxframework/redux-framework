@@ -251,7 +251,7 @@ a {
 }
 .redux-sidebar .redux-group-menu li a{
     display:block;
-    padding: 12px 4px 12px 14px;
+    padding: 10px 4px 10px 14px;
     background: #e0e0e0;
     background: transparent;
     border-width: 1px 0px 1px 0px;
@@ -955,7 +955,7 @@ pre {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to', GradientType=0);
 }
 
-.adminThemeColorOverrides (@darkColor, @accentColor, @secondaryColor, @buttonPrimary, @mediumMenuBG) {
+.adminThemeColorOverrides (@darkColor, @accentColor, @secondaryColor, @buttonPrimary) {
     .button.ui-datepicker-current, button.ui-datepicker-close {
         background-color: lighten(@accentColor, 3%);
     }    
@@ -1018,24 +1018,9 @@ pre {
     #redux-header .display_header span { color: @darkColor; }
     #redux-header { background: @secondaryColor; border-color: @accentColor; }
 
-    
-    .redux-sidebar .redux-group-menu li.active, .redux-sidebar .redux-group-menu li.activeChild { 
-        border-left: 3px solid @accentColor;
-        .active {
-            border-left-color: 0;
-        }
-        a {
-            color: @secondaryColor;
-        }
+    .redux-sidebar .redux-group-menu li.active {
         &.hasSubSections {
-            border-left: 0;
-
             a {
-                background: @accentColor;
-                color: #fff;
-                margin-right: 0;
-                width: 184px;
-                border-bottom: 0;
                 &:after {
                     right: 0;
                     border: solid 8px transparent;
@@ -1047,36 +1032,84 @@ pre {
                     border-right-color: #fff;
                     top: 50%;
                     margin-top: -8px;
+                }    
+            }
+            ul.subsection li a:after {
+                border: 0 !important;
+                content: "" !important;
+            }
+        }
+    }
+
+    .redux-sidebar .redux-group-menu li.active, .redux-sidebar .redux-group-menu li.activeChild { 
+        border-left: 0;
+        
+        a {
+            color: @secondaryColor;
+        }
+        &.hasSubSections {
+            .active {
+                a {
+                    &:after {
+                        right: 0;
+                        border: solid 8px transparent;
+                        content: " ";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        border-right-color: #fff;
+                        top: 50%;
+                        margin-top: -8px;
+                    }
                 }
+            }
+            a {
+                background: @accentColor;
+                color: #fff;
+                margin-right: 0;
+                width: 184px;
+                border-bottom: 0;
+                
             }
             ul.subsection li {
                 border-top: 0 !important;
                 a {
-                    &:after {
-                        border: 0;
-                        content: "";
-                    }
-                    background: @mediumMenuBG;
+                    background: @secondaryColor;
                     margin-right: 0px;
                     width: 185px;
-                    border-top: 0 !important;
+                    //border-top: 0 !important;
+                    border-top-color: lighten(@secondaryColor, 15);
                     padding: 7px;
                     color: #fff;
                     padding-left: 10px;
                     span.group_title {
-                        padding-left: 20px !important;
-                    }
-                }
-                &.active  {
-                    border-left: 3px solid @accentColor;
-                    a {
-                        //background: @secondaryColor;
-                        color: @secondaryColor;
-                        background: #fff !important;
-                        padding-left: 7px;
+                        padding-left: 10px !important;
                     }
                 }
             }            
+        }
+    }
+    .redux-sidebar .redux-group-menu li.active:first-child {
+        &.hasSubSectionsf {
+            a {
+                &:after {
+                    right: 0;
+                    border: solid 8px transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-right-color: #fff;
+                    top: 50%;
+                    margin-top: -8px;
+                    a:after {
+                        border: 0 !important;
+                        content: "" !important;
+                    }
+                }
+            }
         }
     }
     
@@ -1110,36 +1143,36 @@ pre {
 
 /* Light fresh theme */
 .admin-color-fresh {
-    .adminThemeColorOverrides(#bbb, #0074a2, #222222, #1e8cbe, #333);
+    .adminThemeColorOverrides(#bbb, #0074a2, #222222, #1e8cbe);
 }
 
 /* Light admin theme */
 .admin-color-light {
-    .adminThemeColorOverrides(#e6e6e6, #04a4cc, #888888, #0384a4, #333);
+    .adminThemeColorOverrides(#e6e6e6, #04a4cc, #888888, #0384a4);
 }
 /* Blue admin theme */
 .admin-color-blue {
-    .adminThemeColorOverrides(#e2ecf1, #4796b3, #096484, #db9825, #333);
+    .adminThemeColorOverrides(#e2ecf1, #4796b3, #096484, #db9825);
 }
 /* Coffee admin theme */
 .admin-color-coffee {
-    .adminThemeColorOverrides(#cdcbc9, #c7a589, #46403c, #ba906d, #333);
+    .adminThemeColorOverrides(#cdcbc9, #c7a589, #46403c, #ba906d);
 }
 /* Ectoplasm admin theme */
 .admin-color-ectoplasm {
-    .adminThemeColorOverrides(#cbc5d3, #a3b745, #413256, #89993a, #333);
+    .adminThemeColorOverrides(#cbc5d3, #a3b745, #413256, #89993a);
 }
 /* Midnight admin theme */
 .admin-color-midnight {
-    .adminThemeColorOverrides(#c2c4c5, #e14d43, #363b3f, #d92c23, #333);
+    .adminThemeColorOverrides(#c2c4c5, #e14d43, #363b3f, #d92c23);
 }
 /* Ocean admin theme */
 .admin-color-ocean { 
-    .adminThemeColorOverrides(#d5dddf, #9ebaa0, #627c83, #86a988, #333);
+    .adminThemeColorOverrides(#d5dddf, #9ebaa0, #627c83, #86a988);
 }
 /* Sunrise admin theme */
 .admin-color-sunrise { 
-    .adminThemeColorOverrides(#f0c8c6, #dd823b, #b43c38, #cc6c23, #333);
+    .adminThemeColorOverrides(#f0c8c6, #dd823b, #b43c38, #cc6c23);
 }
 
 
