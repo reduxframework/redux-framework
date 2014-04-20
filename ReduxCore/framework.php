@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.1';
+        public static $_version = '3.2.2.2';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2092,6 +2092,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     continue;
                 }
 
+                $display = true;
+                if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                    if ( isset($section['panel']) && $section['panel'] == false ) {
+                        $display = false;
+                    }
+                }
+                if (!$display) {
+                    continue;
+                }
+
                 // DOVY! Replace $k with $section['id'] when ready
                 /**
                  * filter 'redux-section-{index}-modifier-{opt_name}'
@@ -2120,6 +2130,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
                         if ( !isset( $field['type'] ) ) {
                             continue; // You need a type!
+                        }                    
+
+                        $display = true;
+                        if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                            if ( isset($field['panel']) && $field['panel'] == false ) {
+                                $display = false;
+                            }
+                        }
+                        if (!$display) {
+                            continue;
                         }
 
                         // TODO AFTER GROUP WORKS - Remove IF statement
@@ -2691,6 +2711,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function section_menu($k, $section, $suffix = "") {
 
+            $display = true;
+            if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                if ( isset($section['panel']) && $section['panel'] == false ) {
+                    $display = false;
+                }
+            }
+            if (!$display) {
+                return "";
+            }
+
             $string = "";
             if( (isset($this->args['icon_type']) && $this->args['icon_type'] == 'image') || (isset($section['icon_type']) && $section['icon_type'] == 'image')) {
                 //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
@@ -2727,9 +2757,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $doLoop = true;
                     while ($doLoop) {
                         $nextK += 1;
+                        $display = true;
+                        if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                            if ( isset($this->sections[$nextK]['panel']) && $this->sections[$nextK]['panel'] == false ) {
+                                $display = false;
+                            }
+                        }
+                        
                         if ( count($this->sections) < $nextK || !isset( $this->sections[$nextK] ) || !isset($this->sections[$nextK]['subsection']) || $this->sections[$nextK]['subsection'] != true ) {
                             $doLoop = false;
                         } else {  
+                            if (!$display) {
+                                continue;
+                            }
                             $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
                             $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'"><span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
                             $string .= '</li>';
@@ -2951,7 +2991,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
                 echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
                 //echo '<div id="' . $k . '_nav-bar' . '"';
-
+                /*
                 if ( !empty( $section['tab'] ) ) {
 
                     echo '<div id="' . $k . '_section_tabs' . '" class="redux-section-tabs">';
@@ -2974,8 +3014,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                     echo "</div>";
                 } else {
-                    do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );
-                }
+                    */
+                    // Don't display in the
+                    $display = true;
+                    if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                        if ( isset($section['panel']) && $section['panel'] == "false") {
+                            $display = false;
+                        }
+                    }
+
+                    if ( $display ) {
+                        do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );    
+                    }
+                //}
                 echo "</div>";
                 //echo '</div>';
             }
@@ -3166,6 +3217,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             if( isset( $field['type'] ) ) {
+
+                // If the field is set not to display in the panel
+                $display = true;
+                if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                    if ( isset($field['panel']) && $field['panel'] == false ) {
+                        $display = false;
+                    }
+                }
+                if (!$display) {
+                    return;
+                }
                 $field_class = "ReduxFramework_{$field['type']}";
 
                 if( !class_exists( $field_class ) ) {
@@ -3266,6 +3328,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * @param string $value field id
                      */
                     do_action( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", $field, $value );
+
 
                     if (!isset($field['fields']) || empty($field['fields'])) {
                         echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field-container redux-field redux-container-'.$field['type'].' '.$class_string.'" data-id="'.$field['id'].'" '.$data_string.'>';

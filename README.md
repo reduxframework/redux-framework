@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.1.2 =
+* Added:	  Set a section or field argument of `'panel' => false` to skip over that field or panel and hide it. It will still be registered with defaults saved, but not display. This can be useful for things like the customizer.
+
 = 3.2.1.1 =
 * Added:	  SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't the first section in your panel.  ;)
 
