@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.2';
+        public static $_version = '3.2.2.3';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2733,7 +2733,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 } else {
                     $icon_class = '';
                 }
-                $icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
+                $icon = ( !isset( $section['icon'] ) ) ? '<i class="el-icon-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
             }
             $canBeSubSection = ($k > 0 && (!isset($this->sections[($k)]['type']) || $this->sections[($k)]['type'] != "divide")) ? true : false;
             if (!$canBeSubSection && isset($section['subsection']) && $section['subsection'] == true) {
@@ -2770,8 +2770,23 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if (!$display) {
                                 continue;
                             }
-                            $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
-                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'"><span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
+
+                            if( (isset($this->args['icon_type']) && $this->args['icon_type'] == 'image') || (isset($this->sections[$nextK]['icon_type']) && $this->sections[$nextK]['icon_type'] == 'image')) {
+                                //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
+                                $icon = ( !isset( $this->sections[$nextK]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $this->sections[$nextK]['icon'] . '" /> ';
+                            } else {
+                                if ( ! empty( $this->sections[$nextK]['icon_class'] ) ) {
+                                    $icon_class = ' ' . $this->sections[$nextK]['icon_class'];
+                                } elseif ( ! empty( $this->args['default_icon_class'] ) ) {
+                                    $icon_class = ' ' . $this->args['default_icon_class'];
+                                } else {
+                                    $icon_class = '';
+                                }
+                                $icon = ( !isset( $this->sections[$nextK]['icon'] ) ) ? '' : '<i class="' . $this->sections[$nextK]['icon'] . $icon_class . '"></i> ';
+                            }
+
+                            $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li' . ( $icon ? ' hasIcon' : '' ) . '">';
+                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'">' . $icon . '<span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
                             $string .= '</li>';
                         }
                     }
