@@ -6,8 +6,8 @@ echo -n "Enter the version for this release: "
 read ver
 
 if [ ! $ver ]; then 
-	echo "Invalid version."
-	exit
+    echo "Invalid version."
+    exit
 fi
 
 name="select2"
@@ -53,12 +53,12 @@ cat LICENSE | sed "$tokens" >> "$mini"
 echo "*/" >> "$mini"
 
 curl -s \
-	--data-urlencode "js_code@$js" \
-	http://marijnhaverbeke.nl/uglifyjs \
-	>> "$mini"
+    --data-urlencode "js_code@$js" \
+    http://marijnhaverbeke.nl/uglifyjs \
+    >> "$mini"
 
 git add "$mini"
-	
+    
 git commit -m "release $ver"
 
 echo "Tagging..."

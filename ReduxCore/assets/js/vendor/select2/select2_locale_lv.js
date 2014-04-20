@@ -12,5 +12,5 @@
         formatLoadMore: function (pageNumber) { return "Datu ielāde..."; },
         formatSearching: function () { return "Meklēšana..."; }
     });
-	
+    
 })(jQuery);

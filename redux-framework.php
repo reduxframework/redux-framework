@@ -29,7 +29,7 @@
 
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) {
-	die;
+    die;
 }
 
 

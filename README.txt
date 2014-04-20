@@ -164,7 +164,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:      import_export not rendering when the menutype argument was set to menu
 * Fixed:      Ace_editor not enqueued unless used. MEMORY HOG.
 * Fixed:      Color_Gradient transparency to was being auto-selected if from way transparent.
-* Fixed:	  Enqueue select with slider for local dev.
+* Fixed:      Enqueue select with slider for local dev.
 * Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP approved API is used in it's place to being Redux up to wp.org theme check standards.
 * Fixed:      Massive speed issue with button_set. Resolved.
 * Fixed:      Issue where default values throws an error if ID is not set.

@@ -698,5 +698,5 @@ Public License instead of this License.  But first, please read
 The source code for any program binaries or compressed scripts that are
 included with ReduxFramework can be freely obtained at the following URL:
 
-	https://github.com/ReduxFramework/ReduxFramework
+    https://github.com/ReduxFramework/ReduxFramework
 

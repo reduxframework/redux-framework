@@ -1,6 +1,6 @@
 
 /*
-	Field Button Set (button_set)
+    Field Button Set (button_set)
  */
 
 /*global jQuery, document*/

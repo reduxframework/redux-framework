@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 if (!defined('ABSPATH')) {
-	exit; // Exit if accessed directly
+    exit; // Exit if accessed directly
 }
 
 /**
@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
 * so we cut this off right away, even before loading our classes.
 */
 if (defined('DOING_AJAX') && DOING_AJAX) {
-	return;
+    return;
 }
 
 /**
@@ -45,12 +45,12 @@ if (defined('DOING_AJAX') && DOING_AJAX) {
 * @param bool $network_wide
 */
 function tivwp_dm_disable_network_activation($network_wide) {
-	if ($network_wide) {
-		$silent = true;
-		deactivate_plugins(plugin_basename(__FILE__), $silent, $network_wide);
-		wp_redirect(network_admin_url('plugins.php?deactivate=true'));
-		exit;
-	}
+    if ($network_wide) {
+        $silent = true;
+        deactivate_plugins(plugin_basename(__FILE__), $silent, $network_wide);
+        wp_redirect(network_admin_url('plugins.php?deactivate=true'));
+        exit;
+    }
 }
 
 /**
@@ -61,7 +61,7 @@ function tivwp_dm_disable_network_activation($network_wide) {
 * </code>
 */
 if (!( defined('TIVWP_DM_NETWORK_ACTIVATION_ALLOWED') && TIVWP_DM_NETWORK_ACTIVATION_ALLOWED )) {
-	register_activation_hook(__FILE__, 'tivwp_dm_disable_network_activation');
+    register_activation_hook(__FILE__, 'tivwp_dm_disable_network_activation');
 }
 
 
@@ -71,9 +71,9 @@ if (!( defined('TIVWP_DM_NETWORK_ACTIVATION_ALLOWED') && TIVWP_DM_NETWORK_ACTIVA
 */
 require_once dirname(__FILE__) . '/includes/class-tivwp-dm-controller.php';
 add_action('plugins_loaded', array(
-	'TIVWP_DM_Controller',
-	'construct'
-			)
+    'TIVWP_DM_Controller',
+    'construct'
+            )
 );
 
 # --- EOF

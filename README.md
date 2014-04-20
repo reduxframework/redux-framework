@@ -77,7 +77,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Updated:    Subsections have been updated to resemble the current active WordPress admin theme :)
 
 = 3.2.1.1 =
-* Added:	  SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't the first section in your panel.  ;)
+* Added:      SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't the first section in your panel.  ;)
 
 = 3.2.1.2 =
 * Fixed:      Info field didn't intend within section.
@@ -216,7 +216,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.9.7 =
 * Fixed:      Color_Gradient transparency to was being auto-selected if from way transparent.
-* Fixed:	  Enqueue select with slider for local dev.
+* Fixed:      Enqueue select with slider for local dev.
 
 = 3.1.9.6 =
 * Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP approved API is used in it's place to being Redux up to wp.org theme check standards.

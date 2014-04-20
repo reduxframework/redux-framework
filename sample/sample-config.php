@@ -68,7 +68,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
         /**
           * This is a test function that will let you see when the compiler hook occurs.
-          * It only runs if a field	set with compiler=>true is changed.
+          * It only runs if a field set with compiler=>true is changed.
           */
         function compiler_action($options, $css) {
             //echo '<h1>The compiler hook has run!</h1>';
