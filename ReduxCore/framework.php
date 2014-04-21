@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.4';
+        public static $_version = '3.2.2.5';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -197,8 +197,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return \ReduxFramework
          */
         public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
-
             global $wp_version;
+            
+            // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
+            if (isset($_POST) && isset($_POST['action']) && $_POST['action'] == 'heartbeat' ) {
+                
+                // Hook, for purists.
+                if ( !has_action('redux/ajax/heartbeat' ) ) {
+                    do_action( 'redux/ajax/heartbeat', $this );
+                }
+
+                // Buh bye!
+                return;
+            }
 
             // Set values
             $this->args = wp_parse_args( $args, $this->args );

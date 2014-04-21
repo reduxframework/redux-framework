@@ -391,7 +391,7 @@ class ReduxFramework_slider {
             // double slider hidden output
             if (true == $twoHandles) {
                 echo '<input type="hidden"
-                             class="redux-slider-value-two-' . $fieldID . ' ' . $this->field['class'] . '"s
+                             class="redux-slider-value-two-' . $fieldID . ' ' . $this->field['class'] . '"
                              name="' . $nameTwo . $this->field['name_suffix'] . '"
                              id="' . $idTwo . '"
                              value="' . $valTwo . '"/>';
