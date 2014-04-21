@@ -2268,7 +2268,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                          */
                         $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}", $field );
 
-                        if ( empty( $field ) ) {
+                        if ( empty( $field ) || !$field || $field == false ) {
                             unset( $this->sections[$k]['fields'][$fieldk] );
                             continue;
                         }
