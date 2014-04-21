@@ -166,6 +166,9 @@ a { outline: 0 !important; }
 .redux-sidebar {
 	width: 200px;
 	float: left;
+    li {
+        margin-bottom: 0;
+    }
 }
 .redux-menu-warning, .redux-menu-error {
 	display: inline-block;
@@ -920,6 +923,7 @@ pre {
 				border-bottom: 0;
 			}
 			ul.subsection li {
+                margin-bottom:0;
 				border-top: 0 none !important;
 				a {
 					background: @secondaryColor;
@@ -928,7 +932,7 @@ pre {
 					// border-top-color: lighten(@secondaryColor, 15);
 					padding: 7px;
 					color: #fff;
-					padding-left: 15px;
+					padding-left: 10px;
 					-webkit-transition: all 0.2s;
 					-moz-transition: all 0.2s;
 					trasnition: all 0.2s;
@@ -936,14 +940,15 @@ pre {
 						color: #2ea2cc;
 						background: #000;
 					}
-					span.group_title { padding-left: 5px !important; }
-					&.hasIcon {
-	 					a {
-							padding-left: 14px;
-	 						span.group_title { padding-left: 30px !important; }
-	 					}
- 					}
+					span.group_title { padding-left: 10px !important; }
+					
 				}
+                &.hasIcon {
+                    a {
+                        padding-left: 14px;
+                        span.group_title { padding-left: 30px !important; }
+                    }
+                }
 			}
 		}
 	}
