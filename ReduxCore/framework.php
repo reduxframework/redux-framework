@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.3';
+        public static $_version = '3.2.2.4';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2255,6 +2255,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if (!isset($field['class'])) { // No errors please
                             $field['class'] = "";
                         }
+                        $id = $field['id'];
                         /**
                          * filter 'redux-field-{field.id}modifier-{opt_name}'
                          * @deprecated
@@ -2266,6 +2267,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                          * @param array $field  field config
                          */
                         $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}", $field );
+
+                        if ( empty( $field ) ) {
+                            unset( $this->sections[$k]['fields'][$fieldk] );
+                            continue;
+                        }
 
                         if ( !empty( $this->folds[$field['id']]['parent'] ) ) { // This has some fold items, hide it by default
                             $field['class'] .= " fold";
@@ -2294,7 +2300,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         /**
                          * action 'redux/options/{opt_name}/field/field.type}/register'
                          */
-                        
                         do_action( "redux/options/{$this->args['opt_name']}/field/{$field['type']}/register", $field );
                         $this->check_dependencies($field);
                         add_settings_field(

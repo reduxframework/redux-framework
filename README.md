@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.4 =
+* Added:	  Check to make sure a field isn't empty after the filter. If it is empty, skip over it.
+
 = 3.2.2.3 =
 * Added:	  Subsections now show icon if they have it. Show text only (without indent) if they do not.
 
