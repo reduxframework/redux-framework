@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.8 =
+* Fixed:      Restoring lost formatting from multiple merges.
+
 = 3.2.2.7 =
 * Fixed:      New sorter default values get set properly now.  ;)
 
