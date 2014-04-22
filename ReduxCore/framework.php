@@ -90,7 +90,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $admin_notices       = array();
         public $page                = '';
         public $saved               = false;
-	    public $run_compiler        = false; // Boolean to run the compiler hook
+        public $run_compiler        = false; // Boolean to run the compiler hook
         public $fields              = array(); // Fields by type used in the panel
         public $current_tab         = ''; // Current section to display, cookies
         public $extensions          = array(); // Extensions by type used in the panel
@@ -169,7 +169,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $warnings            = array(); // Warnings
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
-	    public $compiler_fields     = array(); // Fields that trigger the compiler hook
+        public $compiler_fields     = array(); // Fields that trigger the compiler hook
         public $required            = array(); // Information that needs to be localized
         public $required_child      = array(); // Information that needs to be localized
         public $localize_data       = array(); // Information that needs to be localized
