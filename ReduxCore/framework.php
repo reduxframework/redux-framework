@@ -169,6 +169,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $warnings            = array(); // Warnings
         public $options             = array(); // Option values
         public $options_defaults    = null; // Option defaults
+        public $notices             = array(); // Option defaults
         public $compiler_fields     = array(); // Fields that trigger the compiler hook
         public $required            = array(); // Information that needs to be localized
         public $required_child      = array(); // Information that needs to be localized
