@@ -74,9 +74,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.6 =
+* Added:      `data` and `args` can now be set to sorter! Just make sure to have it be a key based on what you want it to display as. IE: `array('Main'=>'sidebars')`
+
+
 = 3.2.2.5 =
-* Added:          Prevent Redux from firing on AJAX heartbeat, but added hook for it 'redux/ajax/heartbeat'.
-* Fixed:          Removed erroneous 's' character from HTML.
+* Added:      Prevent Redux from firing on AJAX heartbeat, but added hook for it 'redux/ajax/heartbeat'.
+* Fixed:      Removed erroneous 's' character from HTML.
 
 = 3.2.2.4 =
 * Added:	  Check to make sure a field isn't empty after the filter. If it is empty, skip over it.
