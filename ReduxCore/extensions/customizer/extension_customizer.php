@@ -82,9 +82,13 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 	        if( !isset( $_POST['customized'] ) ) {
 		        //add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
 		        add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
-		        add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
-		        add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+
 	        }
+            if( isset( $_POST['customized'] ) ) {
+
+                add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
+                add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+            }
 
 
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
@@ -395,7 +399,6 @@ static_front_page - Static Front Page
       public function customizer_save_after($wp_customize) {
 	      if( isset( $_POST['customized'] ) ) {
 		      $options = json_decode(stripslashes_deep($_POST['customized']), true);
-
 		      $compiler = false;
 		      $changed = array();
 		      foreach( $options as $key => $value ) {
