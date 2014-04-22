@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.8';
+        public static $_version = '3.2.2.10';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -368,6 +368,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Enqueue the admin page CSS and JS
                 if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                    // Error with validation
+                    if (isset($_COOKIE['redux-notices-' . $this->args['opt_name']])) {
+                        $this->notices = get_transient( 'redux-notices-' . $this->args['opt_name'] );
+                        setcookie('redux-notices-' . $this->args['opt_name'], 1, time()-3600, "/");
+                    }
                     add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
                 }
 
@@ -1771,11 +1776,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'hints'                 => $this->args['hints'],
             );
 
-            $notices = array();
-            if (isset($_COOKIE['redux-notices-' . $this->args['opt_name']])) {
-                $notices = get_transient( 'redux-notices-' . $this->args['opt_name'] );
-                setcookie('redux-notices-' . $this->args['opt_name'], 1, time()-3600, "/");
-            }
+            $notices = $this->notices;
+
 
             // Construct the errors array.
             if( $this->saved && !empty( $notices['errors'] ) ) {

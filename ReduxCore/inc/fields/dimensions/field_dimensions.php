@@ -39,6 +39,10 @@ class ReduxFramework_dimensions {
         $defaults = array(
             'width'             => true,
             'height'            => true,
+            'mode'               => array(
+                'width'         => false,
+                'height'        => false,
+            ),
             'units_extended'    => false,
             'units'             => 'px',
         );
@@ -225,10 +229,12 @@ class ReduxFramework_dimensions {
 
         $units = isset($this->value['units']) ? $this->value['units'] : "";
 
+        $height = isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'height';
+        $width = isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'width';
 
         $cleanValue = array(
-            'height' => isset($this->value['height']) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
-            'width' => isset($this->value['width']) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
+            $height => isset($this->value['height']) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
+            $width => isset($this->value['width']) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
         );
 
         $style = "";
