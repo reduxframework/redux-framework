@@ -15,6 +15,21 @@ if( !class_exists( 'Redux_Helpers' ) ) {
      */
     class Redux_Helpers {
 
+        public static function tabFromField($parent, $field) {
+          foreach( $parent->sections as $k => $section ) {
+                if ( !isset( $section['title'] ) ){
+                    continue;
+                }    
+                
+                if ( isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
+                    if ( Redux_Helpers::recursive_array_search($field, $section['fields'])) {
+                        return $k;
+                        continue;
+                    }
+                }                
+            }            
+        }        
+        
         public static function isFieldInUse($parent, $field) {
           foreach( $parent->sections as $k => $section ) {
                 if ( !isset( $section['title'] ) ){
