@@ -42,7 +42,20 @@ class ReduxFramework_sorter {
 
         if (!is_array($this->value) && isset($this->field['options'])) {
             $this->value = $this->field['options'];
-        }    	
+        }
+
+        if (!isset($this->field['args'])) {
+            $this->field['args'] = array();
+        }
+
+        if (isset($this->field['data']) && !empty($this->field['data']) && is_array($this->field['data'])) {
+            foreach ($this->field['data'] as $key => $data) {
+                if (!isset($this->field['args'][$key])) {
+                    $this->field['args'][$key] = array();
+                }
+                $this->field['options'][$key] = $this->parent->get_wordpress_data($data, $this->field['args'][$key]);
+            }
+        }
 
 		// Make sure to get list of all the default blocks first
 	    $all_blocks = !empty( $this->field['options'] ) ? $this->field['options'] : array();
