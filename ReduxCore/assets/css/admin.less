@@ -164,7 +164,7 @@ a { outline: 0 !important; }
 .redux-sidebar,
 .redux-main { min-height: 300px; }
 .redux-sidebar {
-    width: 200px;
+    width: 202px;
     float: left;
 }
 .redux-menu-warning, .redux-menu-error {
@@ -238,9 +238,9 @@ a { outline: 0 !important; }
                 }
                 &:hover {
                     background: #e5e5e5;
-                    width: 184px;
+                    //width: 184px
                     color: #777;
-                    margin-right: -2px;
+                    //margin-right: -2px;
                     opacity: 1;
                 }
             }
@@ -253,7 +253,7 @@ a { outline: 0 !important; }
     color: #269ad6;
     width:184px;
     opacity: 1;
-    margin-right:-2px;
+    //margin-right:-2px;
 }
 .redux-sidebar .redux-group-menu li.active a li a {
     background: #333;
@@ -665,7 +665,7 @@ label.radio, label.multicheck { position: relative; }
 
 @media screen and (max-width : 1124px) {
     .redux-sidebar{
-        width:42px;
+        width:44px;
     }
 
     .redux-main{
@@ -696,6 +696,7 @@ label.radio, label.multicheck { position: relative; }
     }
     .redux-group-tab-link-a:hover > span{
         display: block;
+        margin-top: -1px;
     }
     .redux-sidebar .redux-group-menu li a,
     .redux-sidebar .redux-group-menu li a:hover,
@@ -906,7 +907,7 @@ pre {
                     top: 12px;
                 }
                 &:hover .extraIconSubsections {
-                    right: 2px;
+                    //right: 2px;
                 }
             }
         }
@@ -1034,14 +1035,17 @@ pre {
 @media screen and (max-width: 1124px) {
     // .redux-group-tab-link-a span { margin-top: -2px; }
     .redux-group-tab-link-a span {
-        background: #222;
-        color: white;
+        //background: #222;
+        //color: white;
+        padding: 11px 12px;
+        color: #555;
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
         transition: all 0.3s;
         &:hover {
-            color: #2ea2cc;
-            background: black;
+            //color: #2ea2cc;
+            //background: black;
+            background: #e5e5e5;
         }
     }
 }
