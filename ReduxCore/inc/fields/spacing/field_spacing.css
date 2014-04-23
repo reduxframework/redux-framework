@@ -1,15 +1,12 @@
-.redux-container-spacing .select_wrapper {
-  float: left;
-  width: inherit;
-}
-.redux-container-spacing .select_wrapper select {
-  width: 80px;
+.redux-main .redux-container-spacing select,
+.redux-main .redux-container-spacing .select_wrapper {
+  width: 80px !important;
   float: left;
 }
-.redux-container-spacing .field-spacing-input {
+.redux-main .redux-container-spacing .field-spacing-input {
   margin-right: 10px;
   margin-bottom: 7px;
 }
-.redux-container-spacing .dovy {
+.redux-main .redux-container-spacing .dovy {
   margin: 10px;
 }
