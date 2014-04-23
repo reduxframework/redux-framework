@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.12 =
+* Fixed:      Compiler hook in the customizer now passes the CSS.
+
 = 3.2.2.11 =
 * Fixed:      Compiler hook now properly fires in the customizer.
 

@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.11';
+        public static $_version = '3.2.2.12';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1436,7 +1436,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 }
             }
-            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || isset( $_POST['customized'] ) ) ) {
+            // For use like in the customizer. Stops the output, but passes the CSS in the variable for the compiler
+            if ( isset( $this->no_output ) ) {
+                return;
+            }
+            global $pagenow;
+            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset( $_POST['customized'] ) ) ) ) {
                 echo '<style type="text/css" title="dynamic-css" class="options-output">'.$this->outputCSS.'</style>';
             }
 
@@ -2775,8 +2780,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
                 $subsections = ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) ? true : false;
                 $subsectionsClass = $subsections ? ' hasSubSections' : '';
+                $extra_icon = $subsections ? '<i class="extraIconSubsections el el-icon-chevron-down">&nbsp;</i>' : '';
                 $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li'.$subsectionsClass.'">';
-                $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
+                $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span>'.$extra_icon.'</a>';
                 $nextK = $k;
                 // Make sure you can make this a subsection
 
@@ -2795,7 +2801,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         
                         if ( count($this->sections) < $nextK || !isset( $this->sections[$nextK] ) || !isset($this->sections[$nextK]['subsection']) || $this->sections[$nextK]['subsection'] != true ) {
                             $doLoop = false;
-                        } else {  
+                        } else {
                             if (!$display) {
                                 continue;
                             }

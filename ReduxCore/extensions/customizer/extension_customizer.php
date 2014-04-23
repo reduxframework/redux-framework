@@ -79,13 +79,15 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
               customize_controls_print_footer_scripts
             */
 
-	        if( !isset( $_POST['customized'] ) ) {
-		        //add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
-		        add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
+	        if( !isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
 
+                add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
 	        }
             if( isset( $_POST['customized'] ) ) {
-
+                if ($pagenow == "admin-ajax.php" && $_POST['action'] == 'customize_save') {
+                    //$this->parent->
+                }
+                add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
                 add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
                 add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
             }
@@ -94,7 +96,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
 
-            add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
+
 
 
             //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 ); 
@@ -152,6 +154,8 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         // All sections, settings, and controls will be added here
         public function _register_customizer_controls( $wp_customize ) {
+
+
           $order = array(
             'heading' => -500,
             'option'  => -500,
@@ -397,7 +401,7 @@ static_front_page - Static Front Page
       }    
 
       public function customizer_save_after($wp_customize) {
-	      if( isset( $_POST['customized'] ) ) {
+	      //if( isset( $_POST['customized'] ) ) {
 		      $options = json_decode(stripslashes_deep($_POST['customized']), true);
 		      $compiler = false;
 		      $changed = array();
@@ -417,9 +421,12 @@ static_front_page - Static Front Page
 		      }
 
 		      if ($compiler) {
+                  // Have to set this to stop the output of the CSS and typography stuff.
+                  $this->parent->no_output = true;
+                  $this->parent->_enqueue_output();
 			      do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
 		      }
-	      }
+	      //}
   //      print_r($wp_customize);
         //exit();
         //return $wp_customize;
