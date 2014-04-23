@@ -873,7 +873,9 @@ pre {
 
     .redux-sidebar .redux-group-menu li.active {
         &.hasSubSections {
+
             a {
+                position: relative;
                 &:after {
                     right: 0;
                     border: solid 8px transparent;
@@ -886,6 +888,7 @@ pre {
                     top: 50%;
                     margin-top: -8px;
                 }
+
             }
             ul.subsection li a:after {
                 border: 0 none !important;
@@ -893,7 +896,24 @@ pre {
             }
         }
     }
-
+    .redux-sidebar .redux-group-menu li {
+        &.hasSubSections {
+            a {
+                .extraIconSubsections {
+                    position: absolute;
+                    right: 0;
+                    font-size: 12px;
+                    top: 12px;
+                }
+                &:hover .extraIconSubsections {
+                    right: 2px;
+                }
+            }
+        }
+        &.active, &.activeChild {
+            a .extraIconSubsections { display: none; }
+        }
+    }
     .redux-sidebar .redux-group-menu li.active, .redux-sidebar .redux-group-menu li.activeChild {
         border-left: 0 none;
         a { color: @secondaryColor; }
@@ -938,12 +958,13 @@ pre {
                         background: #000;
                     }
                     span.group_title { padding-left: 5px !important; }
-                    &.hasIcon {
-                        a {
-                            padding-left: 14px;
-                            span.group_title { padding-left: 30px !important; }
-                        }
-                    }
+                }
+                &.hasIcon {
+                  a {
+                    padding-left: 14px;
+                    span.group_title { padding-left: 30px !important; }
+
+                  }
                 }
             }
         }
@@ -1070,4 +1091,7 @@ pre {
     background-image: inherit !important;
     width: inherit;
     height: inherit;
+}
+.redux-main dd, .redux-main li, .redux-sidebar li {
+  margin-bottom: 0 !important;
 }
