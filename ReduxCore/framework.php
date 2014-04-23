@@ -2829,7 +2829,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $string .= '</ul>';
                 }
 
-                $string .- '</li>';
+                $string .= '</li>';
             }
             return $string;
 
