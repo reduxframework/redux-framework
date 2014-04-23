@@ -612,11 +612,14 @@ jQuery(document).ready(function($) {
             return;
         }
         jQuery('#currentSection').val(relid);
-        // Set the proper page cookie
-        $.cookie('redux_current_tab', relid, {
-            expires: 7,
-            path: '/'
-        });
+        if (!$(this).parents('.postbox-container:first').length) {
+            // Set the proper page cookie
+            $.cookie('redux_current_tab', relid, {
+                expires: 7,
+                path: '/'
+            });
+        }
+
         if (jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
             var parentID = jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').attr('id').split('_');
             parentID = parentID[0];

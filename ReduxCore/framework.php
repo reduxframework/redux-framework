@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.14';
+        public static $_version = '3.2.2.15';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2275,7 +2275,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
                         // END -> CORRECT URLS if media URLs are wrong, but attachment IDs are present.
 
-                        if (true == $doUpdate) {
+                        if (true == $doUpdate && !isset($this->never_save_to_db)) {
                             if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
                                 $runUpdate = true;
                             }// elseif($this->saved != '' && $this->saved != false) {
@@ -2357,7 +2357,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             do_action( "redux/options/{$this->args['opt_name']}/register", $this->sections);
 
-            if ($runUpdate) { // Always update the DB with new fields
+            if ( $runUpdate && !isset( $this->parent->never_save_to_db ) ) { // Always update the DB with new fields
                 $this->set_options( $this->options );
             }
 

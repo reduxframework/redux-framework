@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.15 =
+* Fixed:      Metaboxes issues.
+
 = 3.2.2.14 =
 * Modified:   Some admin panel stylings. Now perfect with mobile hover. Also fixed an issue
               with the slidedown width for sections. No more 2 empty pixels.
