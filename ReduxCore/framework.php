@@ -2743,7 +2743,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @access      public
          * @return      void
          */
-        public function section_menu($k, $section, $suffix = "") {
+        public function section_menu($k, $section, $suffix = "", $sections = array()) {
 
             $display = true;
             if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
@@ -2753,6 +2753,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
             if (!$display) {
                 return "";
+            }
+
+            if (empty($sections)) {
+                $sections = $this->sections;
             }
 
             $string = "";
@@ -2769,7 +2773,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
                 $icon = ( !isset( $section['icon'] ) ) ? '<i class="el-icon-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
             }
-            $canBeSubSection = ($k > 0 && (!isset($this->sections[($k)]['type']) || $this->sections[($k)]['type'] != "divide")) ? true : false;
+            $canBeSubSection = ($k > 0 && (!isset($sections[($k)]['type']) || $sections[($k)]['type'] != "divide")) ? true : false;
             if (!$canBeSubSection && isset($section['subsection']) && $section['subsection'] == true) {
                 unset($section['subsection']);
             }
@@ -2778,7 +2782,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             } else if (!isset($section['subsection']) || $section['subsection'] != true ) {
                 // DOVY! REPLACE $k with $section['ID'] when used properly.
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
-                $subsections = ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) ? true : false;
+                $subsections = ( isset( $sections[($k+1)] ) && isset($sections[($k+1)]['subsection']) && $sections[($k+1)]['subsection'] == true ) ? true : false;
                 $subsectionsClass = $subsections ? ' hasSubSections' : '';
                 $extra_icon = $subsections ? '<i class="extraIconSubsections el el-icon-chevron-down">&nbsp;</i>' : '';
                 $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li'.$subsectionsClass.'">';
@@ -2794,34 +2798,34 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         $nextK += 1;
                         $display = true;
                         if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                            if ( isset($this->sections[$nextK]['panel']) && $this->sections[$nextK]['panel'] == false ) {
+                            if ( isset($sections[$nextK]['panel']) && $sections[$nextK]['panel'] == false ) {
                                 $display = false;
                             }
                         }
                         
-                        if ( count($this->sections) < $nextK || !isset( $this->sections[$nextK] ) || !isset($this->sections[$nextK]['subsection']) || $this->sections[$nextK]['subsection'] != true ) {
+                        if ( count($sections) < $nextK || !isset( $sections[$nextK] ) || !isset($sections[$nextK]['subsection']) || $sections[$nextK]['subsection'] != true ) {
                             $doLoop = false;
                         } else {
                             if (!$display) {
                                 continue;
                             }
 
-                            if( (isset($this->args['icon_type']) && $this->args['icon_type'] == 'image') || (isset($this->sections[$nextK]['icon_type']) && $this->sections[$nextK]['icon_type'] == 'image')) {
+                            if( (isset($this->args['icon_type']) && $this->args['icon_type'] == 'image') || (isset($sections[$nextK]['icon_type']) && $sections[$nextK]['icon_type'] == 'image')) {
                                 //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                                $icon = ( !isset( $this->sections[$nextK]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $this->sections[$nextK]['icon'] . '" /> ';
+                                $icon = ( !isset( $sections[$nextK]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $sections[$nextK]['icon'] . '" /> ';
                             } else {
-                                if ( ! empty( $this->sections[$nextK]['icon_class'] ) ) {
-                                    $icon_class = ' ' . $this->sections[$nextK]['icon_class'];
+                                if ( ! empty( $sections[$nextK]['icon_class'] ) ) {
+                                    $icon_class = ' ' . $sections[$nextK]['icon_class'];
                                 } elseif ( ! empty( $this->args['default_icon_class'] ) ) {
                                     $icon_class = ' ' . $this->args['default_icon_class'];
                                 } else {
                                     $icon_class = '';
                                 }
-                                $icon = ( !isset( $this->sections[$nextK]['icon'] ) ) ? '' : '<i class="' . $this->sections[$nextK]['icon'] . $icon_class . '"></i> ';
+                                $icon = ( !isset( $sections[$nextK]['icon'] ) ) ? '' : '<i class="' . $sections[$nextK]['icon'] . $icon_class . '"></i> ';
                             }
 
                             $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li' . ( $icon ? ' hasIcon' : '' ) . '">';
-                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'">' . $icon . '<span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
+                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'">' . $icon . '<span class="group_title">' . $sections[$nextK]['title'] . '</span></a>';
                             $string .= '</li>';
                         }
                     }
