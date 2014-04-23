@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.2.15';
+        public static $_version = '3.2.2.16';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2161,7 +2161,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
                         if ( !isset( $field['type'] ) ) {
                             continue; // You need a type!
-                        }                    
+                        }
+
+                        /**
+                         * filter 'redux/options/{opt_name}/field/{field.id}'
+                         * @param array $field  field config
+                         */
+                        $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}/register", $field );
 
                         $display = true;
                         if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {

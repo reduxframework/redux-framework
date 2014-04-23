@@ -201,7 +201,7 @@ a { outline: 0 !important; }
 }
 .redux-sidebar {
     .redux-group-menu {
-        marign-top: 0;
+        margin-top: 0 !important;
         li {
             margin-top: 0;
             &.divide {
@@ -211,6 +211,7 @@ a { outline: 0 !important; }
                 border-bottom-color: #E7E7E7;
                 border-top-color: #F9F9F9;
             }
+            a:first-child { border-top: none; }
             a {
                 display:block;
                 padding: 10px 4px 10px 14px;
