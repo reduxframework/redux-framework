@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.0
-Stable tag: 3.2.2
+Stable tag: 3.2.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,9 +125,27 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
-= 3.2.2 =
-* Fixed:      Info field didn't intend within section.
-* Fixed:      Compiler hook wasn't running.
+= 3.2.3 =
+* Fixed:        Responsive issues with spacing and dimension fields.
+* Fixed:        Style conflicts with WP 3.9. Added register filter to fields via id.
+* Fixed:        Metaboxes issues.
+* Fixed:        Compiler hook in the customizer now passes the CSS.
+* Fixed:        Compiler hook now properly fires in the customizer.
+* Fixed:        Validation error with headers already being set.
+* Fixed:        Added mode for width/height to override dimensions css output.
+* Fixed:        Restoring lost formatting from multiple merges.
+* Fixed:        New sorter default values get set properly now.  ;)
+* Fixed:        Removed erroneous 's' character from HTML.
+* Fixed:        Info field didn't intend within section.
+* Fixed:        Compiler hook wasn't running.
+* Modified:     Some admin panel stylings. Now perfect with mobile hover. Also fixed an issue with the slidedown width for sections. No more 2 empty pixels.
+* Added:        `data` and `args` can now be set to sorter! Just make sure to have it be a key based on what you want it to display as. IE: `array('Main'=>'sidebars')`
+* Added:        Prevent Redux from firing on AJAX heartbeat, but added hook for it 'redux/ajax/heartbeat'.
+* Added:        Tick mark if section has sub sections. Hidden when subsections expanded.
+* Added:        Check to make sure a field isn't empty after the filter. If it is empty, skip over it.
+* Added:        Subsections now show icon if they have it. Show text only (without indent) if they do not.
+* Added:        Set a section or field argument of `'panel' => false` to skip over that field or panel and hide it. It will still be registered with defaults saved, but not display. This can be useful for things like the customizer.
+* Added:        SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't the first section in your panel.  ;)
 
 = 3.2.1 =
 * Fixed:      Small bug in image_select javascript.

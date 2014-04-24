@@ -74,7 +74,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.2.2.17 =
+= 3.2.3 =
 * Fixed:      Responsive issues with spacing and dimension fields.
 
 = 3.2.2.16 =
