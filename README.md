@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.17 =
+* Fixed:      Responsive issues with spacing and dimension fields.
+
 = 3.2.2.16 =
 * Fixed:      Style conflicts with WP 3.9. Added register filter to fields via id.
 

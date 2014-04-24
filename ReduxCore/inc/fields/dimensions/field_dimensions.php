@@ -138,7 +138,7 @@ class ReduxFramework_dimensions {
             }
             echo '<div class="field-dimensions-input input-prepend">';
             echo '<span class="add-on"><i class="el-icon-resize-vertical icon-large"></i></span>';
-            echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __('height', 'redux-framework') . '" rel="' . $this->field['id'] . '-height" value="' . filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) . '">';
+            echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __('Height', 'redux-framework') . '" rel="' . $this->field['id'] . '-height" value="' . filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) . '">';
             echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . '[height]' . $this->field['name_suffix'] . '" value="' . $this->value['height'] . '"></div>';
         endif;
 

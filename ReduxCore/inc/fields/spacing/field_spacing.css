@@ -1,12 +1,26 @@
-.redux-main .redux-container-spacing select,
-.redux-main .redux-container-spacing .select_wrapper {
+.redux-container-spacing select,
+.redux-container-spacing .select_wrapper {
   width: 80px !important;
   float: left;
 }
-.redux-main .redux-container-spacing .field-spacing-input {
+.redux-container-spacing .field-spacing-input {
   margin-right: 10px;
   margin-bottom: 7px;
 }
-.redux-main .redux-container-spacing .dovy {
+.redux-container-spacing .dovy {
   margin: 10px;
+}
+@media screen and (max-width: 782px) {
+  .redux-container-spacing .field-spacing-input input {
+    display: inline-block !important;
+    width: 70px !important;
+  }
+  .redux-container-spacing .field-spacing-input .add-on {
+    padding: 7px 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .redux-container-spacing .select_wrapper {
+    margin-top: 6px;
+  }
 }
