@@ -875,7 +875,6 @@ pre {
 
     .redux-sidebar .redux-group-menu li.active {
         &.hasSubSections {
-
             a {
                 position: relative;
                 &:after {
@@ -938,6 +937,9 @@ pre {
             }
             a {
                 background: @accentColor;
+                -webkit-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                trasnition: all 0.2s;
                 color: #fff;
                 width: auto;
                 border-bottom: 0;
@@ -952,9 +954,11 @@ pre {
                     padding: 7px;
                     color: #fff;
                     padding-left: 15px;
-                    -webkit-transition: all 0.2s;
-                    -moz-transition: all 0.2s;
-                    trasnition: all 0.2s;
+                    -webkit-transition: all 0.2;
+                    -moz-transition: all 0.2;
+                    -ms-transition: all 0.2;
+                    -o-transition: all 0.2;
+                    transition: all 0.2;: all 0.2s;
                     &:hover {
                         color: #2ea2cc;
                         background: #000;
