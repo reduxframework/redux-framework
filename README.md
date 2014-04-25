@@ -74,6 +74,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.3.1 =
+* Fixed:      Sortable field not saving properly.
+* Fixed:      Erroneous data in admin.less
+* Updated:    sample-config.php.  Sortable checkbox field example now uses true/false instead of text meant for textbox example.
+
 = 3.2.3 =
 * Fixed:      Responsive issues with spacing and dimension fields.
 
