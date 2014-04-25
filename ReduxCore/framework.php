@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.3.1';
+        public static $_version = '3.2.3.2';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -267,14 +267,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
 
-	            if (isset($_COOKIE["redux-saved-{$this->args['opt_name']}"])) {
-		            $this->saved = $_COOKIE["redux-saved-{$this->args['opt_name']}"];
-		            setcookie("redux-saved-{$this->args['opt_name']}", 1, time()-3600, "/");
-	            }
-	            if ( isset( $_COOKIE['redux-compiler-' . $this->args['opt_name']] ) ) {
-		            setcookie( 'redux-compiler-' . $this->args['opt_name'], 1, time() - 3600, "/" );
-		            $this->run_compiler = true;
-	            }
+                if (isset($_COOKIE["redux-saved-{$this->args['opt_name']}"])) {
+                    $this->saved = $_COOKIE["redux-saved-{$this->args['opt_name']}"];
+                    setcookie("redux-saved-{$this->args['opt_name']}", 1, time()-3600, "/");
+                }
+                if ( isset( $_COOKIE['redux-compiler-' . $this->args['opt_name']] ) ) {
+                    setcookie( 'redux-compiler-' . $this->args['opt_name'], 1, time() - 3600, "/" );
+                    $this->run_compiler = true;
+                }
 
 	            // Move to the first loop area!
                 /**
@@ -1784,7 +1784,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             $notices = $this->notices;
 
-
             // Construct the errors array.
             if( $this->saved && !empty( $notices['errors'] ) ) {
                 $theTotal = 0;
@@ -2464,7 +2463,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _validate_options( $plugin_options ) {
             $this->saved = 1;
-
+            setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+            
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
 
@@ -2697,7 +2697,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                         if ( isset( $options[$field['id']][$key] ) && !empty( $options[$field['id']][$key] ) ) {
                                             $after = $options[$field['id']][$key];
                                         }
-                                        $validation = new $validate( $field, $before, $after );
+                                        $validation = new $validate($this, $field, $before, $after );
                                         if ( !empty( $validation->value ) ) {
                                             $plugin_options[$field['id']][$key] = $validation->value;
                                         } else {
@@ -2712,7 +2712,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                         }
                                     }
                                 } else {
-                                    $validation = new $validate( $field, $plugin_options[$field['id']], $options[$field['id']] );
+                                    $validation = new $validate( $this, $field, $plugin_options[$field['id']], $options[$field['id']] );
                                     $plugin_options[$field['id']] = $validation->value;
                                     if( isset( $validation->error ) ) {
                                         $this->errors[] = $validation->error;

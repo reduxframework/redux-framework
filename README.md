@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.3.2 =
+* Fixed:      Validation error messages not appearing on save.
+* Modified:   Speed boost on validation types.
+
 = 3.2.3.1 =
 * Fixed:      Sortable field not saving properly.
 * Fixed:      Erroneous data in admin.less
