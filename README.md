@@ -77,6 +77,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 = 3.2.3.2 =
 * Fixed:      Validation error messages not appearing on save.
 * Modified:   Speed boost on validation types.
+* Added:      Apache mod_rewrite check.  This should solve many issues we've been seeing regarding mod_rewrite noe being enabled.
 
 = 3.2.3.1 =
 * Fixed:      Sortable field not saving properly.
