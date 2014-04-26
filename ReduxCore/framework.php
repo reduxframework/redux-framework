@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.2
+ * @version     3.2.3
  */
 
 // Exit if accessed directly
@@ -50,6 +50,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
     // General helper functions
     include_once(dirname(__FILE__).'/inc/class.redux_helpers.php');
 
+    // General functions
+    include_once(dirname(__FILE__).'/inc/class.redux_functions.php');
+    
+    
     /**
      * Main ReduxFramework class
      *
@@ -60,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.3.4';
+        public static $_version = '3.2.3.5';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -90,38 +94,38 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $admin_notices       = array();
         public $page                = '';
         public $saved               = false;
-        public $fields              = array(); // Fields by type used in the panel
-        public $current_tab         = ''; // Current section to display, cookies
-        public $extensions          = array(); // Extensions by type used in the panel
+        public $fields              = array();      // Fields by type used in the panel
+        public $current_tab         = '';           // Current section to display, cookies
+        public $extensions          = array();      // Extensions by type used in the panel
         public $args                = array(
-            'opt_name'           => '', // Must be defined by theme/plugin
-            'google_api_key'     => '', // Must be defined to add google fonts to the typography module
-            'last_tab'           => '', // force a specific tab to always show on reload
-            'menu_icon'          => '', // menu icon
-            'menu_title'         => '', // menu title/text
+            'opt_name'           => '',             // Must be defined by theme/plugin
+            'google_api_key'     => '',             // Must be defined to add google fonts to the typography module
+            'last_tab'           => '',             // force a specific tab to always show on reload
+            'menu_icon'          => '',             // menu icon
+            'menu_title'         => '',             // menu title/text
             'page_icon'          => 'icon-themes',
-            'page_title'         => '', // option page title
+            'page_title'         => '',             // option page title
             'page_slug'          => '_options',
             'page_permissions'   => 'manage_options',
-            'menu_type'          => 'menu', // ('menu'|'submenu')
-            'page_parent'        => 'themes.php', // requires menu_type = 'submenu
+            'menu_type'          => 'menu',         // ('menu'|'submenu')
+            'page_parent'        => 'themes.php',   // requires menu_type = 'submenu
             'page_priority'      => null,
-            'allow_sub_menu'     => true, // allow submenus to be added if menu_type == menu
-            'save_defaults'      => true, // Save defaults to the DB on it if empty
+            'allow_sub_menu'     => true,           // allow submenus to be added if menu_type == menu
+            'save_defaults'      => true,           // Save defaults to the DB on it if empty
             'footer_credit'      => '',
             'async_typography'   => false,
-            'admin_bar'          => true, // Show the panel pages on the admin bar
+            'admin_bar'          => true,           // Show the panel pages on the admin bar
             'help_tabs'          => array(),
-            'help_sidebar'       => '', // __( '', 'redux-framework' );
-            'database'           => '', // possible: options, theme_mods, theme_mods_expanded, transient
-            'customizer'         => false, // setting to true forces get_theme_mod_expanded
-            'global_variable'    => '', // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
-            'output'             => true, // Dynamically generate CSS
-            'compiler'           => true, // Initiate the compiler hook
-            'output_tag'         => true, // Print Output Tag
+            'help_sidebar'       => '',             // __( '', 'redux-framework' );
+            'database'           => '',             // possible: options, theme_mods, theme_mods_expanded, transient
+            'customizer'         => false,          // setting to true forces get_theme_mod_expanded
+            'global_variable'    => '',             // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
+            'output'             => true,           // Dynamically generate CSS
+            'compiler'           => true,           // Initiate the compiler hook
+            'output_tag'         => true,           // Print Output Tag
             'transient_time'     => '',
-            'default_show'       => false, // If true, it shows the default value
-            'default_mark'       => '', // What to print by the field's title if the value shown is default
+            'default_show'       => false,          // If true, it shows the default value
+            'default_mark'       => '',             // What to print by the field's title if the value shown is default
             'update_notice'      => true,
             'hints' => array(
                 'icon'              => 'icon-question-sign',
@@ -163,28 +167,28 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'system_info'        => false, // REMOVE
         );
 
-        public $sections            = array(); // Sections and fields
-        public $errors              = array(); // Errors
-        public $warnings            = array(); // Warnings
-        public $options             = array(); // Option values
-        public $options_defaults    = null; // Option defaults
-        public $notices             = array(); // Option defaults
-        public $compiler_fields     = array(); // Fields that trigger the compiler hook
-        public $required            = array(); // Information that needs to be localized
-        public $required_child      = array(); // Information that needs to be localized
-        public $localize_data       = array(); // Information that needs to be localized
-        public $fonts               = array(); // Information that needs to be localized
-        public $folds               = array(); // The itms that need to fold.
+        public $sections            = array();  // Sections and fields
+        public $errors              = array();  // Errors
+        public $warnings            = array();  // Warnings
+        public $options             = array();  // Option values
+        public $options_defaults    = null;     // Option defaults
+        public $notices             = array();  // Option defaults
+        public $compiler_fields     = array();  // Fields that trigger the compiler hook
+        public $required            = array();  // Information that needs to be localized
+        public $required_child      = array();  // Information that needs to be localized
+        public $localize_data       = array();  // Information that needs to be localized
+        public $fonts               = array();  // Information that needs to be localized
+        public $folds               = array();  // The itms that need to fold.
         public $path                = '';
-        public $changed_values      = array(); // Values that have been changed on save. Orig values.
-        public $output              = array(); // Fields with CSS output selectors
-        public $outputCSS           = null; // CSS that get auto-appended to the header
-        public $compilerCSS         = null; // CSS that get sent to the compiler hook
-        public $customizerCSS       = null; // CSS that goes to the customizer
-        public $fieldsValues        = array(); //all fields values in an id=>value array so we can check dependencies
-        public $fieldsHidden        = array(); //all fields that didn't pass the dependency test and are hidden
-        public $toHide              = array(); // Values to hide on page load
-        public $typography          = null; //values to generate google font CSS
+        public $changed_values      = array();  // Values that have been changed on save. Orig values.
+        public $output              = array();  // Fields with CSS output selectors
+        public $outputCSS           = null;     // CSS that get auto-appended to the header
+        public $compilerCSS         = null;     // CSS that get sent to the compiler hook
+        public $customizerCSS       = null;     // CSS that goes to the customizer
+        public $fieldsValues        = array();  //all fields values in an id=>value array so we can check dependencies
+        public $fieldsHidden        = array();  //all fields that didn't pass the dependency test and are hidden
+        public $toHide              = array();  // Values to hide on page load
+        public $typography          = null;     //values to generate google font CSS
         public $import_export       = null;
         public $debug               = null;
         private $show_hints         = false;
@@ -212,6 +216,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 return;
             }
 
+            // Pass parent pointer to function helper.
+            Redux_Functions::$_parent = $this;
+            
             // Set values
             $this->args = wp_parse_args( $args, $this->args );
             if ( empty( $this->args['transient_time'] ) ) {
@@ -293,31 +300,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  */
                 do_action( 'redux/construct', $this );
 
-                // TODO
-
-//                // Determine the currently selected tab
-//                if (isset($_COOKIE['redux_current_tab'])) {
-//                    $this->current_tab = $_COOKIE['redux_current_tab'];
-//                } 
-//
-//                if (isset($_GET['tab'])) {
-//                    $this->current_tab = $_GET['tab'];    
-//                }
-//                if ($this->current_tab !== "") {
-//                    if (isset($_COOKIE['redux_current_tab_get']) && $_COOKIE['redux_current_tab_get'] != $this->current_tab) {
-//                        setcookie ("redux_current_tab", $this->current_tab, time() + ( 3600 * 7 ), "/");
-//                        setcookie ("redux_current_tab_get", $this->current_tab, time() + ( 3600 * 7 ), "/");
-//                    } else {
-//                        setcookie("redux_current_tab_get", 0, time()-3600, '/');
-//                    }
-//                }
-//                if ($this->current_tab == "") {
-//                    foreach($this->sections as $key => $val) {
-//                        $this->current_tab = $key;
-//                        break;
-//                    }
-//                }
-
                 // Set the default values
                 $this->_default_cleanup();
                 $this->_internationalization();
@@ -366,27 +348,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Any dynamic CSS output, let's run
                 add_action( 'wp_head', array( &$this, '_enqueue_output' ), 150 );
 
-                // Add tracking. PLEASE leave this in tact! It helps us gain needed statistics of uses. Opt-in of course.
-                //add_action( 'init', array( &$this, '_tracking' ), 200 );
-
-                // Start internationalization
-                //add_action( 'init', array( &$this, '_internationalization' ), 100 );
-
                 require_once(self::$_dir . 'inc/fields/import_export/import_export.php');
                 $this->import_export = new Redux_import_export($this);
 
-                if( function_exists('apache_get_modules') ){
-                    if (!in_array('mod_rewrite', apache_get_modules())){
-                        $this->admin_notices[] = array(
-                            'type'      => 'error',
-                            'msg'       => '<strong><center>The Apache mod_rewrite module is not enabled on your server.</center></strong>
-	                                    <br/>
-	                                    Both Wordpress and Redux require the enabling of the Apache mod_rewrite module to function properly.  Please contact whomever provides support for your server and ask them to enable the mod_rewrite module',
-                            'id'        => 'mod_rewrite_notice_',
-                            'dismiss'   => false
-                        );
-                    }
-                }
+                // mod_rewrite check
+                Redux_Functions::modRewriteCheck();
             }
 
             /**
@@ -399,154 +365,18 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         } // __construct()
 
-        private function verFromGit() {
-            // Get the raw framework.php from github
-            $gitpage = wp_remote_get(
-                'https://raw.github.com/ReduxFramework/redux-framework/master/ReduxCore/framework.php',
-                array(
-                    'headers'   => array(
-                        'Accept-Encoding' => ''
-                    ),
-                    'sslverify' => true,
-                    'timeout'   => 300
-                ));
-
-            // Is the response code the corect one?
-            if (!is_wp_error($gitpage)) {
-                if (isset($gitpage['body'])) {
-                    // Get the page text.
-                    $body = $gitpage['body'];
-
-                    // Find version line in framework.php
-                    $needle = 'public static $_version =';
-                    $pos = strpos($body, $needle);
-
-                    // If it's there, continue.  We don't want errors if $pos = 0.
-                    if ($pos > 0) {
-
-                        // Look for the semi-colon at the end of the version line
-                        $semi = strpos($body,";", $pos);
-
-                        // Error avoidance.  If the semi-colon is there, continue.
-                        if ($semi > 0 ) {
-
-                            // Extract the version line
-                            $text = substr($body, $pos, ($semi - $pos));
-
-                            // Find the first quote around the veersion number.
-                            $quote = strpos($body,"'", $pos);
-
-                            // Extract the version number
-                            $ver = substr($body, $quote, ($semi - $quote) );
-
-                            // Strip off quotes.
-                            $ver = str_replace("'",'',$ver);
-
-                            return $ver;
-                        }
-                    }
-                }
-            }
-        }
-
         public function _update_check() {
-
-            // If no cookie, check for new ver
-            if (!isset($_COOKIE['redux_update_check'])) { // || 1 == strcmp($_COOKIE['redux_update_check'], self::$_version)) {
-
-                // actual ver number from git repo
-                $ver = $this->verFromGit();
-
-                // hour long cookie.
-                setcookie("redux_update_check", $ver, time() + 3600, '/');
-            } else {
-
-                // saved value from cookie.  If it's different from current ver
-                // we can still show the update notice.
-                $ver = $_COOKIE['redux_update_check'];
-            }
-
-            // Set up admin notice on new version
-            if (1 == strcmp($ver, self::$_version)) {
-                $this->admin_notices[] = array(
-                    'type'      => 'updated',
-                    'msg'       => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . self::$_version . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
-                    'id'        => 'dev_notice_' . $ver,
-                    'dismiss'   => true,
-                );
-            }
+            Redux_Functions::updateCheck(self::$_version);
         }
 
         public function _admin_notices() {
-            global $current_user, $pagenow;
-
-            // Check for an active admin notice array
-            if (!empty($this->admin_notices)) {
-
-                // Enum admin notices
-                foreach( $this->admin_notices as $notice ) {
-                    if (true == $notice['dismiss']) {
-
-                        // Get user ID
-                        $userid = $current_user->ID;
-
-                        if ( !get_user_meta( $userid, 'ignore_' . $notice['id'] ) ) {
-
-                            // Check if we are on admin.php.  If we are, we have
-                            // to get the current page slug and tab, so we can
-                            // feed it back to Wordpress.  Why>  admin.php cannot
-                            // be accessed without the page parameter.  We add the
-                            // tab to return the user to the last panel they were
-                            // on.
-                            $pageName = '';
-                            $curTab = '';
-                            if ($pagenow == 'admin.php') {
-
-                                // Get the current page.  To avoid errors, we'll set
-                                // the redux page slug if the GET is empty.
-                                $pageName   = empty($_GET['page']) ? '&amp;page=' . $this->args['page_slug'] : '&amp;page=' . $_GET['page'];
-
-                                // Ditto for the current tab.
-                                $curTab     = empty($_GET['tab']) ? '&amp;tab=0' : '&amp;tab=' . $_GET['tab'];
-                            }
-
-                            // Print the notice with the dismiss link
-                            echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __('Dismiss', 'redux-framework') . '</a>.</p></div>';
-                        }
-                    } else {
-
-                        // Standard notice
-                        echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
-                    }
-
-                }
-
-                // Clear the admin notice array
-                $this->admin_notices = array();
-
-            }
+            Redux_Functions::adminNotices();
         }
 
         public function _dismiss_admin_notice() {
-            global $current_user;
-
-            // Verify the dismiss and id parameters are present.
-            if ( isset( $_GET['dismiss'] ) && isset( $_GET['id']  ) ) {
-                if ('true' == $_GET['dismiss'] || 'false' == $_GET['dismiss'] ) {
-
-                    // Get the user id
-                    $userid = $current_user->ID;
-
-                    // Get the notice id
-                    $id     = $_GET['id'];
-                    $val    = $_GET['dismiss'];
-
-                    // Add the dismiss request to the user meta.
-                    update_user_meta( $userid, 'ignore_' . $id, $val );
-                }
-            }
+            Redux_Functions::dismissAdminNotice();
         }
-
+        
         /**
          * Load the plugin text domain for translation.
          * @param string $opt_name
