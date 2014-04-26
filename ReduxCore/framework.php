@@ -488,7 +488,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     // Deprecated
                     $GLOBALS[ $this->args['global_variable'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
                     // Last compiler hook key
-                    $GLOBALS[ $this->args['REDUX_LAST_COMPILER'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
+                    $GLOBALS[ $this->args['global_variable'] ]['REDUX_LAST_COMPILER'] = $this->transients['last_compiler'];
                 }
                 return true;
             }
@@ -2825,8 +2825,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             settings_fields( "{$this->args['opt_name']}_group" );
 
             // Last tab?
-            if( empty( $this->options['last_tab'] ) )
+            if( isset( $this->options['last_tab'] ) && empty( $this->options['last_tab'] ) ) {
                 $this->options['last_tab'] = '';
+            }
 
             $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : $this->options['last_tab'];
 

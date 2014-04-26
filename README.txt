@@ -127,6 +127,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 
 = 3.2.4 =
+* Fixed:      Slight typography speed improvement. Less HTML hopefully faster page loads.
 * Fixed:        Unload error on first load if the typography defaults are not set.
 * Fixed:        Errors pertaining to mod_rewrite check.
 * Fixed:        All those headers already set errors.
