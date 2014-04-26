@@ -2590,6 +2590,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
 
                         if( isset( $field['validate'] ) ) {
+                            // Shim for deleted validation field
+                            if ($field['validate'] == "colorrgba") {
+                                $field['validate'] = "color_rgba";
+                            }
                             $validate = 'Redux_Validation_' . $field['validate'];
 
                             if( !class_exists( $validate ) ) {
