@@ -388,8 +388,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 require_once(self::$_dir . 'inc/fields/import_export/import_export.php');
                 $this->import_export = new Redux_import_export($this);
+                
+                // mod_rewrite check
+                if (!in_array('mod_rewrite', apache_get_modules())){
+                    $this->admin_notices[] = array(
+                        'type'      => 'error',
+                        'msg'       => '<strong><center>The Apache mod_rewrite module is not enabled on your server.</center></strong>
+                                        <br/>
+                                        Both Wordpress and Redux require the enabling of the Apache mod_rewrite module to function properly.  Please contact whomever provides support for your server and ask them to enable the mod_rewrite module',
+                        'id'        => 'mod_rewrite_notice_',
+                        'dismiss'   => false
+                    );
+                }
             }
-
 
             /**
              * Loaded hook
