@@ -2519,7 +2519,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             $this->transients['changed_values'] = array(); // Changed values since last save
             foreach($this->options as $key => $value) {
-                if ($value != $plugin_options[$key]) {
+                if (isset($plugin_options[$key]) && $value != $plugin_options[$key]) {
                     $this->transients['changed_values'][$key] = $value;
                 }
             }
