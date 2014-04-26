@@ -2463,7 +2463,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _validate_options( $plugin_options ) {
             $this->saved = 1;
-            setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+            if (!isset($_COOKIE['redux-saved-' . $this->args['opt_name']])) {
+                setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+            }
             
             // Sets last saved time
             $plugin_options['REDUX_last_saved'] = time();
