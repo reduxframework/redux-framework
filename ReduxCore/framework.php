@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.3.3';
+        public static $_version = '3.2.3.4';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -90,7 +90,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $admin_notices       = array();
         public $page                = '';
         public $saved               = false;
-        public $run_compiler        = false; // Boolean to run the compiler hook
         public $fields              = array(); // Fields by type used in the panel
         public $current_tab         = ''; // Current section to display, cookies
         public $extensions          = array(); // Extensions by type used in the panel
@@ -200,10 +199,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
             global $wp_version;
-            
+
             // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
             if (isset($_POST) && isset($_POST['action']) && $_POST['action'] == 'heartbeat' ) {
-                
+
                 // Hook, for purists.
                 if ( !has_action('redux/ajax/heartbeat' ) ) {
                     do_action( 'redux/ajax/heartbeat', $this );
@@ -268,16 +267,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
 
-                if (isset($_COOKIE["redux-saved-{$this->args['opt_name']}"])) {
-                    $this->saved = $_COOKIE["redux-saved-{$this->args['opt_name']}"];
-                    setcookie("redux-saved-{$this->args['opt_name']}", 1, time()-3600, "/");
-                }
-                if ( isset( $_COOKIE['redux-compiler-' . $this->args['opt_name']] ) ) {
-                    setcookie( 'redux-compiler-' . $this->args['opt_name'], 1, time() - 3600, "/" );
-                    $this->run_compiler = true;
-                }
-
-	            // Move to the first loop area!
+                // Move to the first loop area!
                 /**
                  * filter 'redux-sections'
                  * @deprecated
@@ -370,11 +360,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // Enqueue the admin page CSS and JS
                 if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                    // Error with validation
-                    if (isset($_COOKIE['redux-notices-' . $this->args['opt_name']])) {
-                        $this->notices = get_transient( 'redux-notices-' . $this->args['opt_name'] );
-                        setcookie('redux-notices-' . $this->args['opt_name'], 1, time()-3600, "/");
-                    }
                     add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
                 }
 
@@ -389,19 +374,18 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 require_once(self::$_dir . 'inc/fields/import_export/import_export.php');
                 $this->import_export = new Redux_import_export($this);
-                
-                // mod_rewrite check
+
                 if( function_exists('apache_get_modules') ){
-	            if (!in_array('mod_rewrite', apache_get_modules())){
-	                $this->admin_notices[] = array(
-	                    'type'      => 'error',
-	                    'msg'       => '<strong><center>The Apache mod_rewrite module is not enabled on your server.</center></strong>
+                    if (!in_array('mod_rewrite', apache_get_modules())){
+                        $this->admin_notices[] = array(
+                            'type'      => 'error',
+                            'msg'       => '<strong><center>The Apache mod_rewrite module is not enabled on your server.</center></strong>
 	                                    <br/>
 	                                    Both Wordpress and Redux require the enabling of the Apache mod_rewrite module to function properly.  Please contact whomever provides support for your server and ask them to enable the mod_rewrite module',
-	                    'id'        => 'mod_rewrite_notice_',
-	                    'dismiss'   => false
-	                );
-	            }
+                            'id'        => 'mod_rewrite_notice_',
+                            'dismiss'   => false
+                        );
+                    }
                 }
             }
 
@@ -662,7 +646,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * filter 'redux/options/{opt_name}/global_variable'
                  * @param array $value  option value to set global_variable with
                  */
+
                 $GLOBALS[ $this->args['global_variable'] ] = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $this->options );
+                if ( isset( $this->transients['last_save'] ) ) {
+                    // Deprecated
+                    $GLOBALS[ $this->args['global_variable'] ]['REDUX_last_saved'] = $this->transients['last_save'];
+                    // Last save key
+                    $GLOBALS[ $this->args['global_variable'] ]['REDUX_LAST_SAVE'] = $this->transients['last_save'];
+                }
+                if ( isset( $this->transients['last_compiler'] ) ) {
+                    // Deprecated
+                    $GLOBALS[ $this->args['global_variable'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
+                    // Last compiler hook key
+                    $GLOBALS[ $this->args['REDUX_LAST_COMPILER'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
+                }
                 return true;
             }
             return false;
@@ -677,8 +674,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         function set_options( $value = '' ) {
             //logConsole('set options core');
-
-            $value['REDUX_last_saved'] = time();
+            $this->transients['last_save'] = time();
+            //$value['REDUX_last_saved'] = time();
             if( !empty($value) ) {
                 $this->options = $value;
                 if ( $this->args['database'] === 'transient' ) {
@@ -693,10 +690,25 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     update_option( $this->args['opt_name'], $value );
                 }
 
+                // Store the changed values in the transient
+                if ( $value != $this->options ) {
+                    foreach ( $value as $k => $v ) {
+                        if ( !isset( $this->options[$k] ) ) {
+                            $this->options[$k] = "";
+                        } else if ( $v == $this->options[$k] ) {
+                            unset( $this->options[$k] );
+                        }
+                    }
+                    $this->transients['changed_values'] = $this->options;
+                }
+
                 $this->options = $value;
 
                 // Set a global variable by the global_variable argument.
                 $this->set_global_variable();
+
+                // Saving the transient values
+                $this->set_transients();
 
                 /**
                  * action 'redux-saved-{opt_name}'
@@ -704,11 +716,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @param mixed $value set/saved option value
                  */
                 do_action( "redux-saved-{$this->args['opt_name']}", $value ); // REMOVE
+
                 /**
                  * action 'redux/options/{opt_name}/saved'
                  * @param mixed $value set/saved option value
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/saved", $value, $this->changed_values );
+                do_action( "redux/options/{$this->args['opt_name']}/saved", $value, $this->transients['changed_values'] );
 
             }
         } // set_options()
@@ -747,6 +760,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * @param mixed $value option values
              */
             $this->options = apply_filters( "redux/options/{$this->args['opt_name']}/options", $this->options );
+            // Get transient values
+            $this->get_transients();
             // Set a global variable by the global_variable argument.
             $this->set_global_variable();
         } // get_options()
@@ -1014,7 +1029,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * filter 'redux/options/{opt_name}/defaults'
              * @param array $defaults  option default values
              */
-            $this->options_defaults = apply_filters( "redux/options/{$this->args['opt_name']}/defaults", $this->options_defaults, $this->changed_values );
+            $this->options_defaults = apply_filters( "redux/options/{$this->args['opt_name']}/defaults", $this->options_defaults, $this->transients['changed_values'] );
 
             return $this->options_defaults;
         }
@@ -1460,7 +1475,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             if ( !empty( $this->typography ) && !empty( $this->typography ) && filter_var( $this->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
-                $version = !empty( $this->options['REDUX_last_saved'] ) ? $this->options['REDUX_last_saved'] : '';
+                $version = !empty( $this->transients['last_save'] ) ? $this->transients['last_save'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
 
                 if ( $this->args['async_typography'] && !empty($this->typography)) {
@@ -1796,13 +1811,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'hints'                 => $this->args['hints'],
             );
 
-            $notices = $this->notices;
 
             // Construct the errors array.
-            if( $this->saved && !empty( $notices['errors'] ) ) {
+            if( isset( $this->transients['last_save_mode'] ) && !empty( $this->transients['notices']['errors'] ) ) {
                 $theTotal = 0;
                 $theErrors = array();
-                foreach( $notices['errors'] as $error ) {
+                foreach( $this->transients['notices']['errors'] as $error ) {
                     $theErrors[$error['section_id']]['errors'][] = $error;
                     if (!isset($theErrors[$error['section_id']]['total'])) {
                         $theErrors[$error['section_id']]['total'] = 0;
@@ -1811,13 +1825,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $theTotal++;
                 }
                 $this->localize_data['errors'] = array('total'=>$theTotal, 'errors'=>$theErrors);
+                unset( $this->transients['notices']['errors'] );
             }
 
             // Construct the warnings array.
-            if( $this->saved && !empty( $notices['warnings'] ) ) {
+            if( isset( $this->transients['last_save_mode'] ) && !empty( $this->transients['notices']['warnings'] ) ) {
                 $theTotal = 0;
                 $theWarnings = array();
-                foreach( $notices['warnings'] as $warning ) {
+                foreach( $this->transients['notices']['warnings'] as $warning ) {
                     $theWarnings[$warning['section_id']]['warnings'][] = $warning;
                     if (!isset($theWarnings[$warning['section_id']]['total'])) {
                         $theWarnings[$warning['section_id']]['total'] = 0;
@@ -1825,7 +1840,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $theWarnings[$warning['section_id']]['total']++;
                     $theTotal++;
                 }
+                unset( $this->transients['notices']['warnings'] );
                 $this->localize_data['warnings'] = array('total'=>$theTotal, 'warnings'=>$theWarnings);
+            }
+
+            if (empty($this->transients['notices'])) {
+                unset($this->transients['notices']);
             }
 
             // Values used by the javascript
@@ -2113,7 +2133,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _register_settings() {
 
-	        // TODO - REMOVE
+            // TODO - REMOVE
             // Not used by new sample-config, but in here for legacy builds
             // This is bad and can break things. Hehe.
             if( !function_exists( 'wp_get_current_user' ) ) {
@@ -2159,9 +2179,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 if (isset($section['id'])) {
                     $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
                 }
-				if (!isset($section['title'])) {
-					$section['title'] = "";
-				}
+                if (!isset($section['title'])) {
+                    $section['title'] = "";
+                }
                 $heading = isset($section['heading']) ? $section['heading'] : $section['title'];
                 if (isset($section['permissions'])) {
                     if ( !current_user_can($section['permissions']) ) {
@@ -2298,7 +2318,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
                                 $runUpdate = true;
                             }// elseif($this->saved != '' && $this->saved != false) {
-                               // $runUpdate = true;
+                            // $runUpdate = true;
                             //}
                         }
 
@@ -2333,7 +2353,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                         if ( !empty( $field['compiler'] ) ) {
                             $field['class'] .= " compiler";
-	                        $this->compiler_fields[$field['id']] = 1;
+                            $this->compiler_fields[$field['id']] = 1;
                         }
 
                         if ( isset( $field['unit'] ) && !isset( $field['units'] ) ) {
@@ -2380,9 +2400,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $this->set_options( $this->options );
             }
 
-            if ( $this->run_compiler ) {
+            if ( isset( $this->transients['run_compiler'] ) && $this->transients['run_compiler'] ) {
                 $this->args['output_tag'] = false;
                 $this->_enqueue_output();
+
 
                 /**
                  * action 'redux-compiler-{opt_name}'
@@ -2396,7 +2417,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @param array options
                  * @param string CSS that get sent to the compiler hook
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->changed_values );
+                do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
+
+                unset( $this->transients['run_compiler'] );
+                $this->set_transients();
 
             }
 
@@ -2468,6 +2492,20 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         }
 
+        public function get_transients() {
+            if (!isset($this->transients)) {
+                $this->transients = get_transient( $this->args['opt_name'] . '-transients', array() );
+                $this->transients_check = $this->transients;
+            }
+        }
+
+        public function set_transients() {
+            if ( !isset( $this->transients ) || !isset( $this->transients_check ) || $this->transients != $this->transients_check ) {
+                set_transient( $this->args['opt_name'] . '-transients', $this->transients );
+                $this->transients_check = $this->transients;
+            }
+        }
+
         /**
          * Validate the Options options before insertion
          * @since       3.0.0
@@ -2476,22 +2514,29 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array|mixed|string|void
          */
         public function _validate_options( $plugin_options ) {
-            $this->saved = 1;
-            $this->changed_values = array();
-            foreach($this->options as $key => $value) {
-                if ($value != $plugin_options[$key]) {
-                    $this->changed_values[$key] = $value;
-                }
+
+            if ( $plugin_options == $this->options ) {
+                return;
             }
-            if (!isset($_COOKIE['redux-saved-' . $this->args['opt_name']])) {
-                setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
-            }
-            
+
+            $time = time();
+
             // Sets last saved time
-            $plugin_options['REDUX_last_saved'] = time();
+            $this->transients['last_save'] = $time;
+
+
+            //$plugin_options['REDUX_last_saved'] = time();
 
             // Import
             if( !empty( $plugin_options['import'] ) ) {
+
+                $this->transients['last_save_mode'] = "import"; // Last save mode
+                $this->transients['last_compiler'] = $time;
+                $this->transients['last_import'] = $time;
+                $this->transients['run_compiler'] = 1;
+
+
+
                 if( $plugin_options['import_code'] != '' ) {
                     $import = $plugin_options['import_code'];
                 } elseif( $plugin_options['import_link'] != '' ) {
@@ -2502,37 +2547,42 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $imported_options = json_decode( $import, true );
                 }
 
+
+
                 if( !empty( $imported_options ) && is_array( $imported_options ) && isset( $imported_options['redux-backup'] ) && $imported_options['redux-backup'] == '1' ) {
-                    foreach($imported_options as $key => $value) {
-                        $plugin_options[$key] = $value;
+                    $this->transients['changed_values'] = array();
+                    foreach( $plugin_options as $key => $value) {
+                        if ( isset($imported_options[$key]) && $imported_options[$key] != $value ) {
+                            $this->transients['changed_values'][$key] = $value;
+                            $plugin_options[$key] = $value;
+                        }
                     }
 
                     /**
                      * action 'redux/options/{opt_name}/import'
                      * @param  &array [&$plugin_options, redux_options]
                      */
-                    do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(&$plugin_options, $imported_options, $this->changed_values));
+                    do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(&$plugin_options, $imported_options, $this->transients['changed_values']));
 
                     // Remove the import/export tab cookie.
                     if( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
                         setcookie( 'redux_current_tab', '', 1, '/' );
+                        $_COOKIE['redux_current_tab'] = 1;
                     }
-                    setcookie( 'redux_current_tab', '', 1, '/', time()+1000, "/" );
-                    setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 1000, "/");
-                    
-                    $this->run_compiler = 1;
-                    $this->saved = "import";
-                        
-                    setcookie("redux-saved-{$this->args['opt_name']}", 'imported', time() + 1000, "/");
+                    setcookie( 'redux_current_tab', '', 1, '/', $time+1000, "/" );
+                    $_COOKIE['redux_current_tab'] = 1;
 
-                    //set_transient( 'redux-compiler-' . $this->args['opt_name'], '1', 1000 );
-                    $plugin_options['REDUX_COMPILER'] = time();
+                    //$plugin_options['REDUX_COMPILER'] = time();
+
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
                     if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
                         $this->set_options( $plugin_options );
                         return;
                     }
+                    $this->set_transients(); // Update the transients
+
                     return $plugin_options;
+
                 }
             }
 
@@ -2548,26 +2598,30 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $plugin_options = $this->options_defaults;
 
 
-                $plugin_options['REDUX_COMPILER'] = time();
-                $plugin_options['REDUX_last_saved'] = time();
+                //$plugin_options['REDUX_COMPILER'] = time();
+                //$plugin_options['REDUX_last_saved'] = time();
 
-                $this->changed_values = array();
+                $this->transients['changed_values'] = array();
                 foreach($this->options as $key => $value) {
                     if ($value != $plugin_options[$key]) {
-                        $this->changed_values[$key] = $value;
+                        $this->transients['changed_values'][$key] = $value;
                     }
                 }
 
-                setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 1000, "/");
-                setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
+                $this->transients['run_compiler'] = 1;
+                $this->transients['last_save_mode'] = "defaults"; // Last save mode
+
+                //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 1000, "/");
+                //setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
+                $this->set_transients(); // Update the transients
 
                 return $plugin_options;
             }
-            
+
             // Section reset to defaults
             if ( !empty( $plugin_options['defaults-section'] ) ) {
                 if (isset($plugin_options['redux-section']) && isset($this->sections[$plugin_options['redux-section']]['fields'])) {
-                    foreach ($this->sections[$plugin_options['redux-section']]['fields'] as $field) {
+                    foreach ( $this->sections[$plugin_options['redux-section']]['fields'] as $field ) {
                         if (isset($this->options_defaults[$field['id']])) {
                             $plugin_options[$field['id']] = $this->options_defaults[$field['id']];
                         } else {
@@ -2580,34 +2634,35 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
 
-                $this->changed_values = array();
+                $this->transients['changed_values'] = array();
                 foreach($this->options as $key => $value) {
                     if ($value != $plugin_options[$key]) {
-                        $this->changed_values[$key] = $value;
+                        $this->transients['changed_values'][$key] = $value;
                     }
                 }
 
-                if (isset($compiler)) {
+                if ( isset( $compiler ) ) {
                     //$this->run_compiler = true;
-                    setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
-                    $plugin_options['REDUX_COMPILER'] = time();
+                    //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
+                    //$plugin_options['REDUX_COMPILER'] = time();
+                    $this->transients['last_compiler'] = $time;
+                    $this->transients['run_compiler'] = 1;
                 }
+                $this->transients['last_save_mode'] = "defaults_section"; // Last save mode
 
-                $this->saved = "defaults_section";
-                setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
+                //setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                 unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
-
+                $this->set_transients();
                 return $plugin_options;
             }
 
-
+            $this->transients['last_save_mode'] = "normal"; // Last save mode
 
             // Validate fields (if needed)
             $plugin_options = $this->_validate_values( $plugin_options, $this->options, $this->sections );
 
             if( !empty( $this->errors ) || !empty( $this->warnings ) ) {
-                set_transient( 'redux-notices-' . $this->args['opt_name'], array( 'errors' => $this->errors, 'warnings' => $this->warnings ), 1000 );
-                setcookie("redux-notices-{$this->args['opt_name']}", 1, time() + 1000, "/");
+                $this->transients['notices'] = array( 'errors' => $this->errors, 'warnings' => $this->warnings );
             }
 
             /**
@@ -2620,12 +2675,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * action 'redux/options/{opt_name}/validate'
              * @param  &array [&$plugin_options, redux_options]
              */
-            do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(&$plugin_options, $this->options, $this->changed_values));
+            do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(&$plugin_options, $this->options, $this->transients['changed_values']));
 
             if( !empty( $plugin_options['compiler'] ) ) {
-                $plugin_options['REDUX_COMPILER'] = time();
-                setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
-	            //$this->run_compiler = true;
+                //$plugin_options['REDUX_COMPILER'] = time();
+                unset($plugin_options['compiler']);
+                $this->transients['last_compiler'] = $time;
+                $this->transients['run_compiler'] = 1;
+                //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
+                //$this->run_compiler = true;
+            }
+
+            $this->transients['changed_values'] = array(); // Changed values since last save
+            foreach($this->options as $key => $value) {
+                if ($value != $plugin_options[$key]) {
+                    $this->transients['changed_values'][$key] = $value;
+                }
             }
 
             unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
@@ -2633,6 +2698,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $this->set_options( $plugin_options );
                 return;
             }
+            $this->set_transients();
             return $plugin_options;
         }
 
@@ -2834,8 +2900,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $nextK = $k;
                 // Make sure you can make this a subsection
 
-	            if ( $subsections ) {
-                    $string .= '<ul id="' . $nextK.$suffix . '_section_group_li_subsections" class="subsection">';                
+                if ( $subsections ) {
+                    $string .= '<ul id="' . $nextK.$suffix . '_section_group_li_subsections" class="subsection">';
 
                     $doLoop = true;
                     while ($doLoop) {
@@ -2846,7 +2912,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $display = false;
                             }
                         }
-                        
+
                         if ( count($sections) < $nextK || !isset( $sections[$nextK] ) || !isset($sections[$nextK]['subsection']) || $sections[$nextK]['subsection'] != true ) {
                             $doLoop = false;
                         } else {
@@ -2927,7 +2993,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if( empty( $this->options['last_tab'] ) )
                 $this->options['last_tab'] = '';
 
-            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset($this->saved) ) ? $_GET['tab'] : $this->options['last_tab'];
+            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : $this->options['last_tab'];
 
             echo '<input type="hidden" id="last_tab" name="' . $this->args['opt_name'] . '[last_tab]" value="' . $this->options['last_tab'] . '" />';
 
@@ -2975,40 +3041,40 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '</div>';
 
             // Warning bar
-            if( $this->saved != false ) {
+            if( isset( $this->transients['last_save_mode'] ) ) {
 
-                if( $this->saved == "imported" ) {
+                if( $this->transients['last_save_mode'] == "import" ) {
                     /**
                      * action 'redux/options/{opt_name}/import'
                      * @param object $this ReduxFramework
                      */
-                    do_action( "redux/options/{$this->args['opt_name']}/import", $this, $this->changed_values );
-                        
+                    do_action( "redux/options/{$this->args['opt_name']}/import", $this, $this->transients['changed_values'] );
+
                     /**
                      * filter 'redux-imported-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
                     echo '<div id="saved_notice" class="admin-notice notice-blue"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
                     //exit();
-                } else if( $this->saved == "defaults" ) {
+                } else if( $this->transients['last_save_mode'] == "defaults" ) {
                     /**
                      * action 'redux/options/{opt_name}/reset'
                      * @param object $this ReduxFramework
                      */
                     do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
-                    
+
                     /**
                      * filter 'redux-defaults-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
                     echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
-                } else if( $this->saved == "defaults_section" ) {
+                } else if( $this->transients['last_save_mode'] == "defaults_section" ) {
                     /**
                      * action 'redux/options/{opt_name}/section/reset'
                      * @param object $this ReduxFramework
                      */
                     do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
-                    
+
                     /**
                      * filter 'redux-defaults-section-text-{opt_name}'
                      * @param string  translated "settings imported" text
@@ -3022,6 +3088,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      */
                     echo '<div id="saved_notice" class="admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
                 }
+                unset( $this->transients['last_save_mode'] );
+
             }
             /**
              * filter 'redux-changed-text-{opt_name}'
@@ -3113,17 +3181,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     echo "</div>";
                 } else {
                     */
-                    // Don't display in the
-                    $display = true;
-                    if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                        if ( isset($section['panel']) && $section['panel'] == "false") {
-                            $display = false;
-                        }
+                // Don't display in the
+                $display = true;
+                if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
+                    if ( isset($section['panel']) && $section['panel'] == "false") {
+                        $display = false;
                     }
+                }
 
-                    if ( $display ) {
-                        do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );    
-                    }
+                if ( $display ) {
+                    do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );
+                }
                 //}
                 echo "</div>";
                 //echo '</div>';
@@ -3237,6 +3305,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds<br/>Redux is currently set to developer mode.</div>';
             }
+
+            $this->set_transients();
 
         }
 

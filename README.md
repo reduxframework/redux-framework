@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.3.4 =
+* Fixed:      All those headers already set errors.
+
 = 3.2.3.3 =
 * Added:      $changed_values variable to save hooks denoting the old values on a save.
 * Added:      Pointers to Extensions on load.

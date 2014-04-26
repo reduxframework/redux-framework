@@ -52,7 +52,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
             
             // Function to test the compiler hook and demo CSS output.
             // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
-            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
+            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 3);
             
             // Change the arguments after they've been declared, but before the panel is created
             //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
@@ -72,8 +72,11 @@ if (!class_exists('Redux_Framework_sample_config')) {
           It only runs if a field	set with compiler=>true is changed.
 
          * */
-        function compiler_action($options, $css) {
-            //echo '<h1>The compiler hook has run!</h1>';
+        function compiler_action($options, $css, $changed_values) {
+            echo '<h1>The compiler hook has run!</h1>';
+            echo "<pre>";
+            print_r($changed_values); // Values that have changed since the last save
+            echo "</pre>";
             //print_r($options); //Option values
             //print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
 
