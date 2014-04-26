@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.3.2';
+        public static $_version = '3.2.3.3';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -177,6 +177,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $fonts               = array(); // Information that needs to be localized
         public $folds               = array(); // The itms that need to fold.
         public $path                = '';
+        public $changed_values      = array(); // Values that have been changed on save. Orig values.
         public $output              = array(); // Fields with CSS output selectors
         public $outputCSS           = null; // CSS that get auto-appended to the header
         public $compilerCSS         = null; // CSS that get sent to the compiler hook
@@ -705,7 +706,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * action 'redux/options/{opt_name}/saved'
                  * @param mixed $value set/saved option value
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/saved", $value );
+                do_action( "redux/options/{$this->args['opt_name']}/saved", $value, $this->changed_values );
 
             }
         } // set_options()
@@ -1011,7 +1012,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * filter 'redux/options/{opt_name}/defaults'
              * @param array $defaults  option default values
              */
-            $this->options_defaults = apply_filters( "redux/options/{$this->args['opt_name']}/defaults", $this->options_defaults );
+            $this->options_defaults = apply_filters( "redux/options/{$this->args['opt_name']}/defaults", $this->options_defaults, $this->changed_values );
 
             return $this->options_defaults;
         }
@@ -2393,7 +2394,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @param array options
                  * @param string CSS that get sent to the compiler hook
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS );
+                do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->changed_values );
 
             }
 
@@ -2445,7 +2446,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             require_once( $class_file );
                         }
                         /** @noinspection PhpUnusedLocalVariableInspection */
-                        $extension = new $extension_class( $this );
+                        $this->extensions[$folder] = new $extension_class( $this );
                     }
                 }
 
@@ -2474,6 +2475,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function _validate_options( $plugin_options ) {
             $this->saved = 1;
+            $this->changed_values = array();
+            foreach($this->options as $key => $value) {
+                if ($value != $plugin_options[$key]) {
+                    $this->changed_values[$key] = $value;
+                }
+            }
             if (!isset($_COOKIE['redux-saved-' . $this->args['opt_name']])) {
                 setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
             }
@@ -2502,7 +2509,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * action 'redux/options/{opt_name}/import'
                      * @param  &array [&$plugin_options, redux_options]
                      */
-                    do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(&$plugin_options, $imported_options));
+                    do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(&$plugin_options, $imported_options, $this->changed_values));
 
                     // Remove the import/export tab cookie.
                     if( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
@@ -2537,8 +2544,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //logConsole('reset all');
                 //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
                 $plugin_options = $this->options_defaults;
+
+
                 $plugin_options['REDUX_COMPILER'] = time();
                 $plugin_options['REDUX_last_saved'] = time();
+
+                $this->changed_values = array();
+                foreach($this->options as $key => $value) {
+                    if ($value != $plugin_options[$key]) {
+                        $this->changed_values[$key] = $value;
+                    }
+                }
 
                 setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 1000, "/");
                 setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
@@ -2562,6 +2578,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
 
+                $this->changed_values = array();
+                foreach($this->options as $key => $value) {
+                    if ($value != $plugin_options[$key]) {
+                        $this->changed_values[$key] = $value;
+                    }
+                }
+
                 if (isset($compiler)) {
                     //$this->run_compiler = true;
                     setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
@@ -2569,7 +2592,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 $this->saved = "defaults_section";
-                @setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
+                setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                 unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
 
                 return $plugin_options;
@@ -2595,7 +2618,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * action 'redux/options/{opt_name}/validate'
              * @param  &array [&$plugin_options, redux_options]
              */
-            do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(&$plugin_options, $this->options));
+            do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(&$plugin_options, $this->options, $this->changed_values));
 
             if( !empty( $plugin_options['compiler'] ) ) {
                 $plugin_options['REDUX_COMPILER'] = time();
@@ -2957,7 +2980,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * action 'redux/options/{opt_name}/import'
                      * @param object $this ReduxFramework
                      */
-                    do_action( "redux/options/{$this->args['opt_name']}/import", $this );
+                    do_action( "redux/options/{$this->args['opt_name']}/import", $this, $this->changed_values );
                         
                     /**
                      * filter 'redux-imported-text-{opt_name}'

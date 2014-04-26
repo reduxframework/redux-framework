@@ -74,6 +74,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.3.3 =
+* Added:      $changed_values variable to save hooks denoting the old values on a save.
+* Added:      Pointers to Extensions on load.
+* Modified:   CSS Output for the background field.
+
 = 3.2.3.2 =
 * Fixed:      Validation error messages not appearing on save.
 * Modified:   Speed boost on validation types.
