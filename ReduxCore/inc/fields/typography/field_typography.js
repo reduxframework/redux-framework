@@ -227,7 +227,7 @@ jQuery(document).ready(function($) {
             jQuery(family).val(family.data('value'));
         }
         typographySelect(family);
-
+        window.onbeforeunload = null;
     });
     //init when value is changed
     jQuery('.redux-typography').on('change', function() {

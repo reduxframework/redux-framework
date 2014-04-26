@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.4 =
+* Fixed:      Unload error on first load if the typography defaults are not set.
+
 = 3.2.3.5 =
 * Modified:   Moved update check functions to class file and out of the core.
 * Fixed:      Errors pertaining to mod_rewrite check.

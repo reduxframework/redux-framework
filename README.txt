@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.0
-Stable tag: 3.2.3
+Stable tag: 3.2.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,21 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+
+= 3.2.4 =
+* Fixed:        Unload error on first load if the typography defaults are not set.
+* Fixed:        Errors pertaining to mod_rewrite check.
+* Fixed:        All those headers already set errors.
+* Added:        $changed_values variable to save hooks denoting the old values on a save.
+* Added:        Pointers to Extensions on load.
+* Modified:     CSS Output for the background field.
+* Fixed:        Validation error messages not appearing on save.
+* Modified:     Speed boost on validation types.
+* Added:        Apache mod_rewrite check.  This should solve many issues we've been seeing regarding mod_rewrite noe being enabled.
+* Fixed:        Sortable field not saving properly.
+* Fixed:        Erroneous data in admin.less
+* Updated:      sample-config.php.  Sortable checkbox field example now uses true/false instead of text meant for textbox example.
 
 = 3.2.3 =
 * Fixed:        Responsive issues with spacing and dimension fields.
