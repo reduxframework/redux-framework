@@ -49,6 +49,30 @@ class ReduxFramework_typography {
         $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
+
+        if ( !isset( $this->parent->fonts['google'] ) || empty( $this->parent->fonts['google'] ) ) {
+            if ( file_exists( ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json' ) ) {
+                global $wp_filesystem;
+                // Initialize the Wordpress filesystem, no more using file_put_contents function
+                if (empty($wp_filesystem)) {
+                    require_once (ABSPATH . '/wp-admin/includes/file.php');
+                    WP_Filesystem();
+                }
+                $this->parent->fonts['google'] = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json') , true);
+                $this->parent->font_groups['google'] = array(
+                    'id'      => 'google',
+                    'text'    => __('Google Webfonts', 'redux-framework'),
+                    'children'=> array(),
+                );
+                foreach( $this->parent->fonts['google'] as $font => $extra ) {
+                    $this->parent->font_groups['google']['children'][] = array(
+                        'id'    => $font,
+                        'text'  => $font
+                    );
+                }
+            }
+        }
+
     }
     /**
      * Field Render Function.
@@ -194,6 +218,7 @@ class ReduxFramework_typography {
             }
             if ($this->field['custom_fonts'] !== false) {
                 $this->field['custom_fonts'] = apply_filters("redux/{$this->parent->args['opt_name']}/field/typography/custom_fonts", array());
+
                 if (!empty($this->field['custom_fonts'])) {
                     foreach ($this->field['custom_fonts'] as $group => $fonts) {
                         echo '</optgroup><optgroup label="' . $group . '">';
@@ -253,7 +278,7 @@ class ReduxFramework_typography {
                 echo '<select data-placeholder="' . __('Backup Font Family', 'redux-framework') . '" name="' . $this->field['name'] . '[font-backup]' . $this->field['name_suffix'] . '" class="redux-typography redux-typography-family-backup ' . $this->field['class'] . '" id="' . $this->field['id'] . '-family-backup" data-id="' . $this->field['id'] . '" data-value="' . $this->value['font-backup'] . '">';
                 echo '<option data-google="false" data-details="" value=""></option>';
                 foreach ($this->field['fonts'] as $i => $family) {
-                    echo '<option data-google="true" data-details="' . $font_sizes . '" value="' . $i . '"' . selected($this->value['font-backup'], $i, false) . '>' . $family . '</option>';
+                    echo '<option data-google="true" value="' . $i . '"' . selected($this->value['font-backup'], $i, false) . '>' . $family . '</option>';
                 }
                 echo '</select></div>';
             }

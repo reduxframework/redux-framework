@@ -1612,6 +1612,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             $this->localize_data['required'] = $this->required;
+            $this->localize_data['fonts'] = $this->fonts;
             $this->localize_data['required_child'] = $this->required_child;
             $this->localize_data['fields'] = $this->fields;
             $this->localize_data['fonts'] = $this->fonts;

@@ -1332,7 +1332,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     array(
                         'id'        => 'opt-info-field',
                         'type'      => 'info',
-                        'required'  => array('18', 'equals', array('1', '2')),
                         'desc'      => __('This is the info field, if you want to break sections up.', 'redux-framework-demo')
                     ),
                     array(
