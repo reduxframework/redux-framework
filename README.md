@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.6.1 =
+* Fixed:      'undefined' error in typography.js.  Thanks @ksere.
+
 = 3.2.6 =
 * Fixed:      Another stray undefined index. Oy.
 
