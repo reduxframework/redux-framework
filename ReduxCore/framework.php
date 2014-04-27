@@ -2227,7 +2227,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             do_action( "redux/options/{$this->args['opt_name']}/register", $this->sections);
 
-            if ( $runUpdate && !isset( $this->parent->never_save_to_db ) ) { // Always update the DB with new fields
+            if ( $runUpdate && !isset( $this->never_save_to_db ) ) { // Always update the DB with new fields
                 $this->set_options( $this->options );
             }
 
