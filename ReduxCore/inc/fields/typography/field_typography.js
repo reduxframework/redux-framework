@@ -62,8 +62,9 @@ jQuery(document).ready(function($) {
         }
         // Get the styles and such from the font
         var details = "";
-        if (google && redux.google[family]) {
-            details = redux.google[family];
+
+        if (google && redux.fonts.google[family]) {
+            details = redux.fonts.google[family];
         } else if (option.data('details')) {
             details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
             $('#' + mainID + ' .redux-typography-font-options').val(decodeURIComponent(option.data('details')));
