@@ -8,6 +8,7 @@ class Redux_Validation_colorrgba extends ReduxFramework {
      *
      * @since ReduxFramework 3.0.4
      */
+    
     function __construct($field, $value, $current) {
 
         parent::__construct();
