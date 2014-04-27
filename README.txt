@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.0
-Stable tag: 3.2.4
+Stable tag: 3.2.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,9 +125,11 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+= 3.2.5 =
+* Fixed:        Various bad mistakes. Oy.
 
 = 3.2.4 =
-* Fixed:      Slight typography speed improvement. Less HTML hopefully faster page loads.
+* Fixed:        Slight typography speed improvement. Less HTML hopefully faster page loads.
 * Fixed:        Unload error on first load if the typography defaults are not set.
 * Fixed:        Errors pertaining to mod_rewrite check.
 * Fixed:        All those headers already set errors.

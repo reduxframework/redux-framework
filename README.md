@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.5 =
+* Fixed:      Various bad mistakes. Oy.
+
 = 3.2.4 =
 * Fixed:      Slight typography speed improvement. Less HTML hopefully faster page loads.
 * Fixed:      Unload error on first load if the typography defaults are not set.
