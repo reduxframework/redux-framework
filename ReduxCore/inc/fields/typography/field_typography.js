@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
                     link += '&subset=' + script;
                 }
 
-                if (WebFont) {
+                if (typeof (WebFont) !== "undefined" && WebFont) {
                     WebFont.load({google: {families: [link]}});
                 }
                 //link = 'http://fonts.googleapis.com/css?family=' + link;
