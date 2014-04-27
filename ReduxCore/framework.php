@@ -2825,11 +2825,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             settings_fields( "{$this->args['opt_name']}_group" );
 
             // Last tab?
-            if( isset( $this->options['last_tab'] ) && empty( $this->options['last_tab'] ) ) {
-                $this->options['last_tab'] = '';
-            }
-
-            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : $this->options['last_tab'];
+            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : '';
 
             echo '<input type="hidden" id="last_tab" name="' . $this->args['opt_name'] . '[last_tab]" value="' . $this->options['last_tab'] . '" />';
 
