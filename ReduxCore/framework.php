@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.5.1
+ * @version     3.2.6
  */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.5.1';
+        public static $_version = '3.2.6';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -860,6 +860,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * filter 'redux/options/{opt_name}/defaults'
              * @param array $defaults  option default values
              */
+            $this->transients['changed_values'] = isset($this->transients['changed_values']) ? $this->transients['changed_values'] : array();
             $this->options_defaults = apply_filters( "redux/options/{$this->args['opt_name']}/defaults", $this->options_defaults, $this->transients['changed_values'] );
 
             return $this->options_defaults;

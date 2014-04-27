@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.6 =
+* Fixed:      Another stray undefined index. Oy.
+
 = 3.2.5.1 =
 * Added:      `open_expanded` argument to start the panel completely expanded initially.
 
