@@ -1,5 +1,6 @@
 <?php
-class Redux_Validation_colorrgba extends ReduxFramework {
+
+class Redux_Validation_colorrgba {
 
     /**
      * Field Constructor.
@@ -8,17 +9,17 @@ class Redux_Validation_colorrgba extends ReduxFramework {
      *
      * @since ReduxFramework 3.0.4
      */
-    
-    function __construct($field, $value, $current) {
+    function __construct($parent, $field, $value, $current) {
 
-        parent::__construct();
+        $this->parent = $parent;
         $this->field = $field;
-        $this->field['msg'] = (isset($this->field['msg']))?$this->field['msg']:__('This field must be a valid color value.', 'redux-framework');
+        $this->field['msg'] = (isset($this->field['msg'])) ? $this->field['msg'] : __('This field must be a valid color value.', 'redux-framework');
         $this->value = $value;
         $this->current = $current;
         //$this->validate();
+    }
 
-    }//function
+//function
 
     /**
      * Validate Color to RGBA
@@ -37,20 +38,19 @@ class Redux_Validation_colorrgba extends ReduxFramework {
         }
 
         /*
-        $color = str_replace('#','', $color);
-        if (strlen($color) == 3) {
-            $color = $color.$color;
-        }
-        if (preg_match('/^[a-f0-9]{6}$/i', $color)) {
-            $color = '#' . $color;
-        }
+          $color = str_replace('#','', $color);
+          if (strlen($color) == 3) {
+          $color = $color.$color;
+          }
+          if (preg_match('/^[a-f0-9]{6}$/i', $color)) {
+          $color = '#' . $color;
+          }
 
-    */
-        return array('hex'=>$color, 'alpha'=>$alpha);
+         */
+        return array('hex' => $color, 'alpha' => $alpha);
+    }
 
-    }//function
-
-
+//function
 
     /**
      * Field Render Function.
@@ -62,14 +62,17 @@ class Redux_Validation_colorrgba extends ReduxFramework {
     function validate() {
         $this->value = $this->validate_colorrgba($this->value);
         /*
-        if(is_array($this->value)) { // If array
-            foreach($this->value as $k => $value){
-                $this->value[$k] = $this->validate_colorrgba($value);
-            }//foreach
-        } else { // not array
-            $this->value = $this->validate_colorrgba($this->value);
-        } // END array check
-        */
-    }//function
+          if(is_array($this->value)) { // If array
+          foreach($this->value as $k => $value){
+          $this->value[$k] = $this->validate_colorrgba($value);
+          }//foreach
+          } else { // not array
+          $this->value = $this->validate_colorrgba($this->value);
+          } // END array check
+         */
+    }
 
-}//class
+//function
+}
+
+//class
