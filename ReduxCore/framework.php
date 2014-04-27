@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.5
+ * @version     3.2.5.1
  */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.5';
+        public static $_version = '3.2.5.1';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -126,7 +126,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'transient_time'     => '',
             'default_show'       => false,          // If true, it shows the default value
             'default_mark'       => '',             // What to print by the field's title if the value shown is default
-            'update_notice'      => true,
+            'update_notice'      => true,           // Recieve an update notice of new commits when in dev mode
+            'open_expanded'      => false,          // Start the panel fully expanded to start with
             'hints' => array(
                 'icon'              => 'icon-question-sign',
                 'icon_position'     => 'right',
@@ -2817,7 +2818,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             do_action( "redux/page/{$this->args['opt_name']}/form/before", $this );
 
             // Main container
-            echo '<div class="redux-container">';
+            $expanded = ($this->args['open_expanded']) ? ' fully-expanded' : '';
+            echo '<div class="redux-container'.$expanded.'">';
 
             echo '<form method="post" action="' . './options.php" enctype="multipart/form-data" id="redux-form-wrapper">';
             echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
@@ -2859,7 +2861,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Stickybar
             echo '<div id="redux-sticky">';
             echo '<div id="info_bar">';
-            echo '<a href="javascript:void(0);" class="expand_options">' . __( 'Expand', 'redux-framework' ) . '</a>';
+            $expanded = ($this->args['open_expanded']) ? ' expanded' : '';
+            echo '<a href="javascript:void(0);" class="expand_options'.$expanded.'">' . __( 'Expand', 'redux-framework' ) . '</a>';
             echo '<div class="redux-action_bar">';
             submit_button( __( 'Save Changes', 'redux-framework'), 'primary', 'redux_save', false );
             echo '&nbsp;';

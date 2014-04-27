@@ -1506,7 +1506,9 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'global_variable'   => '',                      // Set a different name for your global variable other than the opt_name
                 'dev_mode'          => true,                    // Show the time the page took to load, etc
                 'customizer'        => true,                    // Enable basic customizer support
-                
+                //'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
+
+
                 // OPTIONAL -> Give you extra features
                 'page_priority'     => null,                    // Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
                 'page_parent'       => 'themes.php',            // For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
