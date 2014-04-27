@@ -52,7 +52,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
             
             // Function to test the compiler hook and demo CSS output.
             // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
-            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
+            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 3);
             
             // Change the arguments after they've been declared, but before the panel is created
             //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
@@ -72,8 +72,11 @@ if (!class_exists('Redux_Framework_sample_config')) {
           It only runs if a field	set with compiler=>true is changed.
 
          * */
-        function compiler_action($options, $css) {
-            //echo '<h1>The compiler hook has run!';
+        function compiler_action($options, $css, $changed_values) {
+            echo '<h1>The compiler hook has run!</h1>';
+            echo "<pre>";
+            print_r($changed_values); // Values that have changed since the last save
+            echo "</pre>";
             //print_r($options); //Option values
             //print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
 
@@ -1050,9 +1053,9 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'subtitle'  => __('Define and reorder these however you want.', 'redux-framework-demo'),
                         'desc'      => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
                         'options'   => array(
-                            'si1' => 'Item 1',
-                            'si2' => 'Item 2',
-                            'si3' => 'Item 3',
+                            'si1' => false,
+                            'si2' => true,
+                            'si3' => false,
                         )
                     ),
                 )
@@ -1329,7 +1332,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     array(
                         'id'        => 'opt-info-field',
                         'type'      => 'info',
-                        'required'  => array('18', 'equals', array('1', '2')),
                         'desc'      => __('This is the info field, if you want to break sections up.', 'redux-framework-demo')
                     ),
                     array(
@@ -1504,7 +1506,9 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'global_variable'   => '',                      // Set a different name for your global variable other than the opt_name
                 'dev_mode'          => true,                    // Show the time the page took to load, etc
                 'customizer'        => true,                    // Enable basic customizer support
-                
+                //'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
+
+
                 // OPTIONAL -> Give you extra features
                 'page_priority'     => null,                    // Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
                 'page_parent'       => 'themes.php',            // For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters

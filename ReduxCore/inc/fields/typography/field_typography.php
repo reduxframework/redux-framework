@@ -49,6 +49,10 @@ class ReduxFramework_typography {
         $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
+
+        // Get the google array
+        $this->getGoogleArray();
+
     }
     /**
      * Field Render Function.
@@ -163,18 +167,7 @@ class ReduxFramework_typography {
             echo '<select data-placeholder="' . __('Font family', 'redux-framework') . '" class="redux-typography redux-typography-family ' . $this->field['class'] . '" id="' . $this->field['id'] . '-family" data-id="' . $this->field['id'] . '" data-value="' . $fontFamily[0] . '">';
             echo '<option data-google="false" data-details="" value=""></option>';
             
-            if (isset($this->field['update_weekly']) && $this->field['update_weekly'] === true && $this->field['google'] === true && !empty($this->parent->args['google_api_key'])) {
-                
-                if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
-                    // Keep the fonts updated weekly
-                    $weekback = strtotime(date('jS F Y', time() + (60 * 60 * 24 * -7)));
-                    $last_updated = filemtime(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
-                    if ($last_updated < $weekback) {
-                        unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
-                        unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json');
-                    }
-                }
-            }
+
             if (empty($this->field['fonts'])) {
                 $this->field['fonts'] = $this->std_fonts;
             }
@@ -194,6 +187,7 @@ class ReduxFramework_typography {
             }
             if ($this->field['custom_fonts'] !== false) {
                 $this->field['custom_fonts'] = apply_filters("redux/{$this->parent->args['opt_name']}/field/typography/custom_fonts", array());
+
                 if (!empty($this->field['custom_fonts'])) {
                     foreach ($this->field['custom_fonts'] as $group => $fonts) {
                         echo '</optgroup><optgroup label="' . $group . '">';
@@ -253,7 +247,7 @@ class ReduxFramework_typography {
                 echo '<select data-placeholder="' . __('Backup Font Family', 'redux-framework') . '" name="' . $this->field['name'] . '[font-backup]' . $this->field['name_suffix'] . '" class="redux-typography redux-typography-family-backup ' . $this->field['class'] . '" id="' . $this->field['id'] . '-family-backup" data-id="' . $this->field['id'] . '" data-value="' . $this->value['font-backup'] . '">';
                 echo '<option data-google="false" data-details="" value=""></option>';
                 foreach ($this->field['fonts'] as $i => $family) {
-                    echo '<option data-google="true" data-details="' . $font_sizes . '" value="' . $i . '"' . selected($this->value['font-backup'], $i, false) . '>' . $family . '</option>';
+                    echo '<option data-google="true" value="' . $i . '"' . selected($this->value['font-backup'], $i, false) . '>' . $family . '</option>';
                 }
                 echo '</select></div>';
             }
@@ -703,16 +697,28 @@ class ReduxFramework_typography {
      *
      */
     function getGoogleArray() {
-        
+
+        if (isset($this->parent->fonts['google']) && !empty($this->parent->fonts['google'])) {
+            return;
+        }
+
+        if (isset($this->field['update_weekly']) && $this->field['update_weekly'] === true && $this->field['google'] === true && !empty($this->parent->args['google_api_key'])) {
+            if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
+                // Keep the fonts updated weekly
+                $weekback = strtotime(date('jS F Y', time() + (60 * 60 * 24 * -7)));
+                $last_updated = filemtime(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                if ($last_updated < $weekback) {
+                    unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                    unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json');
+                }
+            }
+        }
+
         global $wp_filesystem;
         // Initialize the Wordpress filesystem, no more using file_put_contents function
         if (empty($wp_filesystem)) {
             require_once (ABSPATH . '/wp-admin/includes/file.php');
             WP_Filesystem();
-        }
-        
-        if (isset($this->parent->googleArray) && !empty($this->parent->googleArray)) {
-            return;
         }
         
         if (!file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json')) {
@@ -738,8 +744,19 @@ class ReduxFramework_typography {
             
         } //if
         
-        if (!isset($this->parent->googleArray) || empty($this->parent->googleArray)) {
-            $this->parent->googleArray = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json') , true);
+        if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
+            $this->parent->fonts['google'] = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json') , true);
+            $this->parent->font_groups['google'] = array(
+                'id'      => 'google',
+                'text'    => __('Google Webfonts', 'redux-framework'),
+                'children'=> array(),
+            );
+            foreach( $this->parent->fonts['google'] as $font => $extra ) {
+                $this->parent->font_groups['google']['children'][] = array(
+                    'id'    => $font,
+                    'text'  => $font
+                );
+            }
         }
     }
     /**
@@ -754,18 +771,18 @@ class ReduxFramework_typography {
         global $wp_filesystem;
         
         $this->getGoogleArray();
-        
-        if (!isset($this->parent->googleArray) || empty($this->parent->googleArray)) {
+
+        if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
             return;
         }
         
         $gfonts = '<optgroup label="' . __('Google Webfonts', 'redux-framework') . '">';
-        foreach ($this->parent->googleArray as $i => $face) {
-            $gfonts.= '<option data-details="' . urlencode(json_encode($face)) . '" data-google="true" value="' . $i . '">' . $i . '</option>';
+        foreach ($this->parent->fonts['google'] as $i => $face) {
+            $gfonts.= '<option data-google="true" value="' . $i . '">' . $i . '</option>';
         }
         $gfonts.= '</optgroup>';
         //endif;
-        if (empty($this->parent->googleArray)) {
+        if (empty($this->parent->fonts['google'])) {
             $gfonts = "";
         }
         

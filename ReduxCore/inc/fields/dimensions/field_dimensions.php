@@ -39,6 +39,10 @@ class ReduxFramework_dimensions {
         $defaults = array(
             'width'             => true,
             'height'            => true,
+            'mode'               => array(
+                'width'         => false,
+                'height'        => false,
+            ),
             'units_extended'    => false,
             'units'             => 'px',
         );
@@ -134,7 +138,7 @@ class ReduxFramework_dimensions {
             }
             echo '<div class="field-dimensions-input input-prepend">';
             echo '<span class="add-on"><i class="el-icon-resize-vertical icon-large"></i></span>';
-            echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __('height', 'redux-framework') . '" rel="' . $this->field['id'] . '-height" value="' . filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) . '">';
+            echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __('Height', 'redux-framework') . '" rel="' . $this->field['id'] . '-height" value="' . filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) . '">';
             echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . '[height]' . $this->field['name_suffix'] . '" value="' . $this->value['height'] . '"></div>';
         endif;
 
@@ -225,10 +229,12 @@ class ReduxFramework_dimensions {
 
         $units = isset($this->value['units']) ? $this->value['units'] : "";
 
+        $height = isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'height';
+        $width = isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'width';
 
         $cleanValue = array(
-            'height' => isset($this->value['height']) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
-            'width' => isset($this->value['width']) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
+            $height => isset($this->value['height']) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
+            $width => isset($this->value['width']) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
         );
 
         $style = "";

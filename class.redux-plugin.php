@@ -26,7 +26,7 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
          * @const       string VERSION The plugin version, used for cache-busting and script file references
          * @since       3.0.0
          */
-        const VERSION = '3.0.0';
+        const VERSION = '3.2.6.1';
 
         /**
          * @access      protected
@@ -406,7 +406,7 @@ if( !class_exists( 'ReduxFrameworkPlugin' ) ) {
          * @return      array The modified array of links
          */
         public function plugin_metalinks( $links, $file ) {
-            if( strpos($file,'redux-framework.php') !== false ) {
+            if( strpos($file,'redux-framework.php') !== false && is_plugin_active( $file )) {
 
                 $new_links = array(
                     '<a href="https://github.com/ReduxFramework/redux-framework" target="_blank">' . __( 'Repo', 'redux-framework' ) . '</a>',

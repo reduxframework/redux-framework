@@ -15,6 +15,21 @@ if( !class_exists( 'Redux_Helpers' ) ) {
      */
     class Redux_Helpers {
 
+        public static function tabFromField($parent, $field) {
+          foreach( $parent->sections as $k => $section ) {
+                if ( !isset( $section['title'] ) ){
+                    continue;
+                }    
+                
+                if ( isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
+                    if ( Redux_Helpers::recursive_array_search($field, $section['fields'])) {
+                        return $k;
+                        continue;
+                    }
+                }                
+            }            
+        }        
+        
         public static function isFieldInUse($parent, $field) {
           foreach( $parent->sections as $k => $section ) {
                 if ( !isset( $section['title'] ) ){
@@ -99,7 +114,7 @@ if( !class_exists( 'Redux_Helpers' ) ) {
          *
          * @since ReduxFramework 3.0.4 
          */
-        public static function hex2rgba($hex) {
+        public static function hex2rgba($hex, $alpha = '') {
             $hex = str_replace("#", "", $hex);
             if(strlen($hex) == 3) {
                 $r = hexdec(substr($hex,0,1).substr($hex,0,1));
@@ -111,7 +126,13 @@ if( !class_exists( 'Redux_Helpers' ) ) {
                 $b = hexdec(substr($hex,4,2));
             }
             $rgb = $r.','.$g.','.$b; 
-            return $rgb;
+            
+            if ('' == $alpha) {
+                return $rgb;
+            } else {
+                $alpha = floatval($alpha);
+                return 'rgba(' . $rgb . ',' . $alpha . ')';
+            }
         }        
     }
 }

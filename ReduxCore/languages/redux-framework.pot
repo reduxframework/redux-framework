@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Redux Framework 3.2.0 Front-end\n"
+"Project-Id-Version: Redux Framework 3.2.5 Front-end\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-04-05 18:24:01+00:00\n"
+"POT-Creation-Date: 2014-04-27 04:43:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,121 +20,121 @@ msgstr ""
 "X-Poedit-SearchPath-1: ReduxCore/languages\n"
 "X-Poedit-SearchPath-2: .\n"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:402
-#: ReduxCore/framework.php:1717
+#: ReduxCore/extensions/customizer/extension_customizer.php:447
+#: ReduxCore/framework.php:1635
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:403
-#: ReduxCore/framework.php:1718
+#: ReduxCore/extensions/customizer/extension_customizer.php:448
+#: ReduxCore/framework.php:1636
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:404
-#: ReduxCore/framework.php:1720
+#: ReduxCore/extensions/customizer/extension_customizer.php:449
+#: ReduxCore/framework.php:1638
 msgid "Your current options will be replaced with the values of this preset. Would you like to proceed?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:435
+#: ReduxCore/extensions/customizer/extension_customizer.php:480
 msgid "You have changes that are not saved.  Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:436
+#: ReduxCore/extensions/customizer/extension_customizer.php:481
 msgid "Are you sure?  Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:437
+#: ReduxCore/extensions/customizer/extension_customizer.php:482
 msgid "Your current options will be replaced with the values of this preset.  Would you like to proceed?"
 msgstr ""
 
-#: ReduxCore/framework.php:205
+#: ReduxCore/framework.php:228
 msgid "Options panel created using %1$s"
 msgstr ""
 
-#: ReduxCore/framework.php:205
+#: ReduxCore/framework.php:228
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:208 ReduxCore/framework.php:211
-#: ReduxCore/framework.php:1315
+#: ReduxCore/framework.php:231 ReduxCore/framework.php:234
+#: ReduxCore/framework.php:1227
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/framework.php:491
-msgid "Dismiss"
-msgstr ""
-
-#: ReduxCore/framework.php:1259 ReduxCore/framework.php:1260
-#: ReduxCore/framework.php:2870 ReduxCore/framework.php:2930
+#: ReduxCore/framework.php:1171 ReduxCore/framework.php:1172
+#: ReduxCore/framework.php:2978 ReduxCore/framework.php:3049
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1719
+#: ReduxCore/framework.php:1637
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1721
+#: ReduxCore/framework.php:1639
 msgid "Please Wait"
 msgstr ""
 
-#: ReduxCore/framework.php:1857
+#: ReduxCore/framework.php:1776
 msgid "Hints"
 msgstr ""
 
-#: ReduxCore/framework.php:1966
+#: ReduxCore/framework.php:1885
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:2713
+#: ReduxCore/framework.php:2803
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:2775
+#: ReduxCore/framework.php:2862
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:2777 ReduxCore/framework.php:2980
+#: ReduxCore/framework.php:2864 ReduxCore/framework.php:3099
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:2779 ReduxCore/framework.php:2982
+#: ReduxCore/framework.php:2866 ReduxCore/framework.php:3101
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:2781 ReduxCore/framework.php:2984
+#: ReduxCore/framework.php:2868 ReduxCore/framework.php:3103
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:2784 ReduxCore/framework.php:2987
+#: ReduxCore/framework.php:2871 ReduxCore/framework.php:3106
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:2796
+#: ReduxCore/framework.php:2889
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:2803
+#: ReduxCore/framework.php:2902
 msgid "All Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:2809
+#: ReduxCore/framework.php:2914
 msgid "Section Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:2815
+#: ReduxCore/framework.php:2921
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:2822
+#: ReduxCore/framework.php:2930
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:2823
+#: ReduxCore/framework.php:2931
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:2824
+#: ReduxCore/framework.php:2932
 msgid "warning(s) were found!"
+msgstr ""
+
+#: ReduxCore/inc/class.redux_functions.php:182
+msgid "Dismiss"
 msgstr ""
 
 #: ReduxCore/inc/debug.php:41 ReduxCore/inc/debug.php:69
@@ -200,27 +200,27 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: ReduxCore/inc/fields/border/field_border.php:112
+#: ReduxCore/inc/fields/border/field_border.php:113
 #: ReduxCore/inc/fields/spacing/field_spacing.php:151
 msgid "All"
 msgstr ""
 
-#: ReduxCore/inc/fields/border/field_border.php:125
+#: ReduxCore/inc/fields/border/field_border.php:126
 #: ReduxCore/inc/fields/spacing/field_spacing.php:175
 msgid "Top"
 msgstr ""
 
-#: ReduxCore/inc/fields/border/field_border.php:132
+#: ReduxCore/inc/fields/border/field_border.php:133
 #: ReduxCore/inc/fields/spacing/field_spacing.php:182
 msgid "Right"
 msgstr ""
 
-#: ReduxCore/inc/fields/border/field_border.php:139
+#: ReduxCore/inc/fields/border/field_border.php:140
 #: ReduxCore/inc/fields/spacing/field_spacing.php:189
 msgid "Bottom"
 msgstr ""
 
-#: ReduxCore/inc/fields/border/field_border.php:146
+#: ReduxCore/inc/fields/border/field_border.php:147
 #: ReduxCore/inc/fields/spacing/field_spacing.php:196
 msgid "Left"
 msgstr ""
@@ -237,16 +237,17 @@ msgstr ""
 msgid "To "
 msgstr ""
 
-#: ReduxCore/inc/fields/dimensions/field_dimensions.php:121
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:125
 msgid "Width"
 msgstr ""
 
-#: ReduxCore/inc/fields/dimensions/field_dimensions.php:137
-msgid "height"
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:141
+#: ReduxCore/inc/fields/typography/field_typography.php:380
+msgid "Height"
 msgstr ""
 
-#: ReduxCore/inc/fields/dimensions/field_dimensions.php:149
-#: ReduxCore/inc/fields/dimensions/field_dimensions.php:150
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:153
+#: ReduxCore/inc/fields/dimensions/field_dimensions.php:154
 #: ReduxCore/inc/fields/spacing/field_spacing.php:206
 #: ReduxCore/inc/fields/spacing/field_spacing.php:207
 msgid "Units"
@@ -400,70 +401,67 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:163
+#: ReduxCore/inc/fields/typography/field_typography.php:167
 msgid "Font family"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:190
+#: ReduxCore/inc/fields/typography/field_typography.php:183
 msgid "Standard Fonts"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:253
+#: ReduxCore/inc/fields/typography/field_typography.php:247
 msgid "Backup Font Family"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:273
-#: ReduxCore/inc/fields/typography/field_typography.php:277
+#: ReduxCore/inc/fields/typography/field_typography.php:267
+#: ReduxCore/inc/fields/typography/field_typography.php:271
 msgid "Font style"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:277
+#: ReduxCore/inc/fields/typography/field_typography.php:271
 msgid "Style"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:306
+#: ReduxCore/inc/fields/typography/field_typography.php:300
 msgid "Font subsets"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:307
+#: ReduxCore/inc/fields/typography/field_typography.php:301
 msgid "Subsets"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:307
+#: ReduxCore/inc/fields/typography/field_typography.php:301
 msgid "Font script"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:324
-#: ReduxCore/inc/fields/typography/field_typography.php:325
+#: ReduxCore/inc/fields/typography/field_typography.php:318
+#: ReduxCore/inc/fields/typography/field_typography.php:319
 msgid "Text Align"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:348
-#: ReduxCore/inc/fields/typography/field_typography.php:349
+#: ReduxCore/inc/fields/typography/field_typography.php:342
+#: ReduxCore/inc/fields/typography/field_typography.php:343
 msgid "Text Transform"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:378
+#: ReduxCore/inc/fields/typography/field_typography.php:372
 msgid "Size"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:386
-msgid "Height"
-msgstr ""
-
-#: ReduxCore/inc/fields/typography/field_typography.php:394
+#: ReduxCore/inc/fields/typography/field_typography.php:388
 msgid "Word Spacing"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:403
+#: ReduxCore/inc/fields/typography/field_typography.php:397
 msgid "Letter Spacing"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:420
+#: ReduxCore/inc/fields/typography/field_typography.php:414
 msgid "Font color"
 msgstr ""
 
-#: ReduxCore/inc/fields/typography/field_typography.php:762
+#: ReduxCore/inc/fields/typography/field_typography.php:751
+#: ReduxCore/inc/fields/typography/field_typography.php:779
 msgid "Google Webfonts"
 msgstr ""
 
@@ -555,42 +553,42 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: ReduxCore/inc/validation/color/validation_color.php:15
+#: ReduxCore/inc/validation/color/validation_color.php:16
 #: ReduxCore/inc/validation/color_rgba/validation_color_rgba.php:15
-#: ReduxCore/inc/validation/colorrgba/validation_colorrgba.php:15
+#: ReduxCore/inc/validation/colorrgba/validation_colorrgba.php:17
 msgid "This field must be a valid color value."
 msgstr ""
 
-#: ReduxCore/inc/validation/comma_numeric/validation_comma_numeric.php:15
+#: ReduxCore/inc/validation/comma_numeric/validation_comma_numeric.php:17
 msgid "You must provide a comma separated list of numerical values for this option."
 msgstr ""
 
-#: ReduxCore/inc/validation/date/validation_date.php:15
+#: ReduxCore/inc/validation/date/validation_date.php:17
 msgid "This field must be a valid date."
 msgstr ""
 
-#: ReduxCore/inc/validation/email/validation_email.php:15
-#: ReduxCore/inc/validation/email_not_empty/validation_email_not_empty.php:15
+#: ReduxCore/inc/validation/email/validation_email.php:17
+#: ReduxCore/inc/validation/email_not_empty/validation_email_not_empty.php:17
 msgid "You must provide a valid email for this option."
 msgstr ""
 
-#: ReduxCore/inc/validation/no_html/validation_no_html.php:15
+#: ReduxCore/inc/validation/no_html/validation_no_html.php:16
 msgid "You must not enter any HTML in this field, all HTML tags have been removed."
 msgstr ""
 
-#: ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:15
+#: ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:17
 msgid "You must not enter any special characters in this field, all special characters have been removed."
 msgstr ""
 
-#: ReduxCore/inc/validation/not_empty/validation_not_empty.php:15
+#: ReduxCore/inc/validation/not_empty/validation_not_empty.php:17
 msgid "This field cannot be empty. Please provide a value."
 msgstr ""
 
-#: ReduxCore/inc/validation/numeric/validation_numeric.php:15
+#: ReduxCore/inc/validation/numeric/validation_numeric.php:17
 msgid "You must provide a numerical value for this option."
 msgstr ""
 
-#: ReduxCore/inc/validation/url/validation_url.php:15
+#: ReduxCore/inc/validation/url/validation_url.php:17
 msgid "You must provide a valid URL for this option."
 msgstr ""
 
@@ -624,4 +622,32 @@ msgstr ""
 
 #: class.redux-plugin.php:422
 msgid "Activate Demo Mode"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:28
+msgid "Must call in of after the \"plugins_loaded\" action."
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:138
+msgid "Unknown action \"%1$s\" specified for %2$s"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:143
+msgid "The unknown action has been replaced with \"%s\""
+msgstr ""
+
+#: tests/includes/class-tivwp-dm-controller.php:158
+msgid "Automatic action performed: \"%s\""
+msgstr ""
+
+#: tests/includes/class-tivwp-dm.php:112
+msgid "Activate Development Plugins"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm.php:119
+msgid "Deactivate Development Plugins"
+msgstr ""
+
+#: tests/includes/class-tivwp-dm.php:131
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""

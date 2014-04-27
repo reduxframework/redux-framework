@@ -377,10 +377,12 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
 
         }
 
-        public function getCSS() {
+        public function getCSS( $value = array() ) {
+
             $css = '';
-            if (!empty($this->value)) {
-                foreach($this->value as $key=>$value) {
+
+            if (!empty($value)) {
+                foreach($value as $key=>$value) {
                     if (!empty($value) && $key != "media") {
                         if ($key == "background-image") {
                             $css .= $key.":url('".$value."');";
@@ -396,7 +398,7 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
 
         public function output() {
 
-            $style = $this->getCSS();
+            $style = $this->getCSS( $this->value );
             if ( !empty( $style ) ) {             
                 
                 if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {

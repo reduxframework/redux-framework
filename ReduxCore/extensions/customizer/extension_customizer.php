@@ -59,6 +59,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
               return;
             }
 
+
             $this->parent = $parent;       
 
             if ( empty( $this->_extension_dir ) ) {
@@ -77,34 +78,48 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
               customize_controls_print_scripts
               customize_controls_print_footer_scripts
             */
-           
 
+	        if( !isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
 
-            
+                add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
+	        }
+            if( isset( $_POST['customized'] ) ) {
+                if ($pagenow == "admin-ajax.php" && $_POST['action'] == 'customize_save') {
+                    //$this->parent->
+                }
+                add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
+                add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
+                add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+            }
 
-            add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 30 ); // Customizer control scripts
-
-            add_action( 'customize_register', array( $this, '_register_customizer_controls' ) ); // Create controls
 
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
-            //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
-            //add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
-            add_action( "load_textdomain", array( $this, '_override_values' ), 100 ); 
+
+
+
+
             //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 ); 
             //$this->_enqueue_new();
+
         }
 
         public function _override_values( $data ) {
             if( isset( $_POST['customized'] ) ) {
+	            $this->orig_options = $this->parent->options;
                 $options = json_decode(stripslashes_deep($_POST['customized']), true);
                 foreach( $options as $key => $value ) {
                     if (strpos($key, $this->parent->args['opt_name']) !== false) {
                         $key = str_replace($this->parent->args['opt_name'].'[', '', rtrim($key, "]"));
+                        $data[$key] = $value;
                         $GLOBALS[$this->parent->args['global_variable']][$key] = $value;
+	                    $this->parent->options[$key] = $value;
                     }
                 }
-            } 
+            }
+
+            return $data;
+
         }
 
         public function _enqueue_new() {
@@ -139,6 +154,7 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         // All sections, settings, and controls will be added here
         public function _register_customizer_controls( $wp_customize ) {
+
 
           $order = array(
             'heading' => -500,
@@ -223,6 +239,10 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
                 $option['title'] = "";
               }
 
+	          // Wordpress doesn't support multi-select
+	          if ( $option['type'] == "select" && isset($option['multi']) && $option['multi'] == true ) {
+		          continue;
+	          }
 
               $customSetting = array(
                 'default'           =>  $option['default'],
@@ -375,13 +395,38 @@ static_front_page - Static Front Page
         }
 
       public function customizer_save_before( $plugin_options ) {
-
+		$this->before_save = $this->parent->options;
         //$parent->_field_input( $plugin_options );
 
       }    
 
       public function customizer_save_after($wp_customize) {
-//echo "there";
+	      //if( isset( $_POST['customized'] ) ) {
+		      $options = json_decode(stripslashes_deep($_POST['customized']), true);
+		      $compiler = false;
+		      $changed = array();
+		      foreach( $options as $key => $value ) {
+			      if (strpos($key, $this->parent->args['opt_name']) !== false) {
+				      $key = str_replace($this->parent->args['opt_name'].'[', '', rtrim($key, "]"));
+				      if (!isset($this->orig_options[$key]) || $this->orig_options[$key] != $value || (isset($this->orig_options[$key]) && !empty($this->orig_options[$key]) && empty($value))) {
+					      $changed[$key] = $value;
+					      if (isset($this->parent->compiler_fields[$key])) {
+						      $compiler = true;
+					      }
+				      }
+			      }
+		      }
+		      if (!empty($changed)) {
+			      setcookie("redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/");
+		      }
+
+		      if ($compiler) {
+                  // Have to set this to stop the output of the CSS and typography stuff.
+                  $this->parent->no_output = true;
+                  $this->parent->_enqueue_output();
+			      do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
+		      }
+	      //}
   //      print_r($wp_customize);
         //exit();
         //return $wp_customize;
@@ -421,12 +466,12 @@ static_front_page - Static Front Page
       public function _enqueue() {
         global $wp_styles;
 
-        wp_enqueue_style( 'wp-pointer' );
-        wp_enqueue_script( 'wp-pointer' );
+        //wp_enqueue_style( 'wp-pointer' );
+        //wp_enqueue_script( 'wp-pointer' );
         // Remove when code is in place!
-        wp_enqueue_script('redux-extension-customizer-js', $this->_extension_url . 'assets/js/customizer.js');
+        //wp_enqueue_script('redux-extension-customizer-js', $this->_extension_url . 'assets/js/customizer.js');
         // Get styles
-        wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
+        //wp_enqueue_style('redux-extension-customizer-css', $this->_extension_url . 'assets/css/customizer.css');
 
 
 

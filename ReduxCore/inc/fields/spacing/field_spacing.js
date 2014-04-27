@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery(".redux-spacing-units").select2({
-		width: 'resolve',
+		width: '80px',
 		triggerChange: true,
 		allowClear: true
 	});

@@ -45,6 +45,8 @@ class ReduxFramework_text {
             $qtip_text  = isset($this->field['text_hint']['content']) ? 'qtip-content="' . $this->field['text_hint']['content'] . '" ' : '';
         //}
 
+        $readonly = isset($this->field['readonly']) ? ' readonly="readonly"' : '';
+
     	if ( isset( $this->field['options'] ) && !empty( $this->field['options'] ) ) {
     		$placeholder = (isset($this->field['placeholder']) && !is_array($this->field['placeholder'])) ? ' placeholder="' . esc_attr($this->field['placeholder']) . '" ' : '';
 			foreach($this->field['options'] as $k => $v){
@@ -52,13 +54,13 @@ class ReduxFramework_text {
 					$placeholder = (is_array($this->field['placeholder']) && isset($this->field['placeholder'][$k])) ?	' placeholder="' . esc_attr($this->field['placeholder'][$k]) . '" ' : '';
 				}
 				echo '<label for="' . $this->field['id'] . '-text-'.$k.'"><strong>'.$v.'</strong></label> ';
-				echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . '['.$k.']' . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value[$k]) . '" class="regular-text ' . $this->field['class'] . '" /><br />';
+				echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . '['.$k.']' . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value[$k]) . '" class="regular-text ' . $this->field['class'] . '"'.$readonly.' /><br />';
 
 			}//foreach
 
     	} else {
 
-    		echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '" />';
+    		echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '"'.$readonly.' />';
     	}
     }
 }

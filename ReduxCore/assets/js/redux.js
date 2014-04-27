@@ -201,9 +201,8 @@
             case '=':
             case 'equals':
                 //if value was array
-                if (checkValue.toString().indexOf('|') !== -1) {
-                    checkValue_array = checkValue.split('|');
-                    if ($.inArray(parentValue, checkValue_array) != -1) {
+                if ($.isArray(checkValue)) {
+                    if ($.inArray(parentValue, checkValue) != -1) {
                         show = true;
                     }
                 } else {
@@ -215,9 +214,10 @@
             case '!=':
             case 'not':
                 //if value was array
-                if (checkValue.toString().indexOf('|') !== -1) {
-                    checkValue_array = checkValue.split('|');
-                    if ($.inArray(parentValue, checkValue_array) == -1) {
+                if ($.isArray(checkValue)) {
+                //if (checkValue.toString().indexOf('|') !== -1) {
+                //    checkValue_array = checkValue.split('|');
+                    if ($.inArray(parentValue, checkValue) == -1) {
                         show = true;
                     }
                 } else {
@@ -605,28 +605,101 @@ jQuery(document).ready(function($) {
      Current tab checks, based on cookies
      **/
     jQuery('.redux-group-tab-link-a').click(function() {
-        relid = jQuery(this).data('rel'); // The group ID of interest
+        var relid = jQuery(this).data('rel'); // The group ID of interest
+
+        var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel'); 
+        if (oldid === relid) {
+            return;
+        }
         jQuery('#currentSection').val(relid);
-        // Set the proper page cookie
-        $.cookie('redux_current_tab', relid, {
-            expires: 7,
-            path: '/'
-        });
+        if (!$(this).parents('.postbox-container:first').length) {
+            // Set the proper page cookie
+            $.cookie('redux_current_tab', relid, {
+                expires: 7,
+                path: '/'
+            });
+        }
+
+        if (jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
+            var parentID = jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').attr('id').split('_');
+            parentID = parentID[0];
+        }
 
         $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a.current').removeClass('current');
         $('#toplevel_page_' + redux.args.slug + ' .wp-submenu li.current').removeClass('current');
 
         $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a').each(function() {
             var url = $(this).attr('href').split('&tab=');
-            if (url[1] == relid) {
+            if (url[1] == relid || url[1] == parentID) {
                 $(this).addClass('current');
                 $(this).parent().addClass('current');
             }
         });
 
-        // Remove the old active tab
-        var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel');
-        jQuery('#' + oldid + '_section_group_li').removeClass('active');
+/**
+    if (RELID is child of oldid) {
+        oldid activeChild, relid active
+    } else if (RELID is sibling of OLDID) {
+        remove active of old id, add to relid
+    } else {
+        if relid is parent {
+            slidedown realid
+        }
+        if oldid is parent {
+            slideup oldid
+        } else if oldid is child {
+            slideup oldid parent and remove class
+        } else {
+            normal oldid remove active
+        }
+    }
+**/
+
+        if (jQuery('#' + oldid + '_section_group_li').find('#' + oldid + '_section_group_li').length ) {
+            //console.log('RELID is child of oldid');
+            jQuery('#' + oldid + '_section_group_li').addClass('activeChild');
+            jQuery('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild');
+        } else if (jQuery('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length || jQuery('#' + oldid + '_section_group_li').parents('ul.subsection').find('#' + relid + '_section_group_li').length) {
+            //console.log('RELID is sibling or child of OLDID');
+            if (jQuery('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length) {
+                //console.log('child of oldid');
+                jQuery('#' + oldid + '_section_group_li').addClass('activeChild').removeClass('active');
+            } else {
+                //console.log('sibling');
+                jQuery('#' + relid + '_section_group_li').addClass('active');
+                jQuery('#' + oldid + '_section_group_li').removeClass('active');
+            }
+            jQuery('#' + relid + '_section_group_li').removeClass('activeChild').addClass('active');
+        } else {
+            jQuery('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild').find('ul.subsection').slideDown();
+            if (jQuery('#' + oldid + '_section_group_li').find('ul.subsection').length) {
+                //console.log('oldid is parent')
+                jQuery('#' + oldid + '_section_group_li').find('ul.subsection').slideUp('fast', function() {
+                    jQuery('#' + oldid + '_section_group_li').removeClass('active').removeClass('activeChild');
+                });     
+            } else if (jQuery('#' + oldid + '_section_group_li').parents('ul.subsection').length) {
+                //console.log('oldid is a child');
+                if (!jQuery('#' + oldid + '_section_group_li').parents('#' + relid + '_section_group_li').length) {
+                    //console.log('oldid is child, but not of relid');
+                    jQuery('#' + oldid + '_section_group_li').parents('ul.subsection').slideUp('fast', function() {
+                        jQuery('#' + oldid + '_section_group_li').removeClass('active');
+                        jQuery('#' + oldid + '_section_group_li').parents('.redux-group-tab-link-li').removeClass('active').removeClass('activeChild');
+                    });  
+                } else {
+                    jQuery('#' + oldid + '_section_group_li').removeClass('active');
+                }
+                
+            } else {
+                //console.log('Normal remove active from child');
+                jQuery('#' + oldid + '_section_group_li').removeClass('active');
+                if (jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
+                    //console.log('here');
+                    jQuery('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').addClass('activeChild').find('ul.subsection').slideDown();
+                    jQuery('#' + relid + '_section_group_li').addClass('active');
+                }
+            }
+        }
+
         // Show the group
         jQuery('#' + oldid + '_section_group').hide();
         jQuery('#' + relid + '_section_group').fadeIn(200, function() {
@@ -634,7 +707,7 @@ jQuery(document).ready(function($) {
                 stickyInfo(); // race condition fix
             }
         });
-        jQuery('#' + relid + '_section_group_li').addClass('active');
+        
     });
 
     // Get the URL parameter for tab
@@ -744,7 +817,7 @@ jQuery(document).ready(function($) {
 
     window.onresize = function(event) {
         if (jQuery('#redux-sticky').hasClass('sticky-save-warn')) {
-            console.log('resize');
+            //console.log('resize');
          //   jQuery('#redux-save-warn').css('left', jQuery('#redux-intro-text').width())
         }
     };

@@ -62,7 +62,10 @@ jQuery(document).ready(function($) {
         }
         // Get the styles and such from the font
         var details = "";
-        if (option.data('details')) {
+
+        if (google && redux.fonts.google[family]) {
+            details = redux.fonts.google[family];
+        } else if (option.data('details')) {
             details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
             $('#' + mainID + ' .redux-typography-font-options').val(decodeURIComponent(option.data('details')));
         }
@@ -227,6 +230,7 @@ jQuery(document).ready(function($) {
             jQuery(family).val(family.data('value'));
         }
         typographySelect(family);
+        window.onbeforeunload = null;
     });
     //init when value is changed
     jQuery('.redux-typography').on('change', function() {
@@ -273,4 +277,5 @@ jQuery(document).ready(function($) {
 
         });
     });
+
 });
