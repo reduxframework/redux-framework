@@ -2347,7 +2347,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _validate_options( $plugin_options ) {
 
             if ( $plugin_options == $this->options ) {
-                return;
+                return $plugin_options;
             }
 
             $time = time();
