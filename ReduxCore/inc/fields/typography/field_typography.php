@@ -786,7 +786,7 @@ class ReduxFramework_typography {
         
         $gfonts = '<optgroup label="' . __('Google Webfonts', 'redux-framework') . '">';
         foreach ($this->parent->googleArray as $i => $face) {
-            $gfonts.= '<option data-details="' . urlencode(json_encode($face)) . '" data-google="true" value="' . $i . '">' . $i . '</option>';
+            $gfonts.= '<option data-google="true" value="' . $i . '">' . $i . '</option>';
         }
         $gfonts.= '</optgroup>';
         //endif;
