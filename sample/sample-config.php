@@ -388,7 +388,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     ),
                     array(
                         'id'        => 'switch-off',
-                        'type'      => 'checkbox',
+                        'type'      => 'switch',
                         'title'     => __('Switch Off', 'redux-framework-demo'),
                         'subtitle'  => __('Look, it\'s on!', 'redux-framework-demo'),
                         //'options' => array('on', 'off'),
@@ -397,7 +397,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     array(
                         'id'        => 'switch-parent',
                         'type'      => 'switch',
-                        'title'     => __('Switch - Custom Titles', 'redux-framework-demo'),
+                        'title'     => __('Switch - Nested Children, Enable to show', 'redux-framework-demo'),
                         'subtitle'  => __('Look, it\'s on! Also hidden child elements!', 'redux-framework-demo'),
                         'default'   => 0,
                         'on'        => 'Enabled',
@@ -407,7 +407,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'id'        => 'switch-child1',
                         'type'      => 'switch',
                         'required'  => array('switch-parent', '=', '1'),
-                        'title'     => __('Switch - With Hidden Items (NESTED!)', 'redux-framework-demo'),
+                        'title'     => __('Switch - This and the next switch required for patterns to show', 'redux-framework-demo'),
                         'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
                         'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
                         'default'   => false,
@@ -416,7 +416,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'id'        => 'switch-child2',
                         'type'      => 'switch',
                         'required'  => array('switch-parent', '=', '1'),
-                        'title'     => __('Switch2 - With Hidden Items (NESTED!)', 'redux-framework-demo'),
+                        'title'     => __('Switch2 - Enable the above switch and this one for patterns to show', 'redux-framework-demo'),
                         'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
                         'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
                         'default'   => false,
@@ -426,8 +426,8 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'type'      => 'image_select',
                         'tiles'     => true,
                         'required'  => array(
+                                            array('switch-child1', 'equals', 1),
                                             array('switch-child2', 'equals', 1),
-                                            array('switch-off', 'equals', 1),
                                        ),
                         'title'     => __('Images Option (with pattern=>true)', 'redux-framework-demo'),
                         'subtitle'  => __('Select a background pattern.', 'redux-framework-demo'),
@@ -497,8 +497,8 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'default'   => 0,
                         'desc'      => __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework-demo'),
                         'options'   => array(
-                            '1'         => array('alt' => 'Preset 1', 'img' => ReduxFramework::$_url . '../sample/presets/preset1.png', 'presets' => array('switch-on' => 1, 'switch-off' => 1, 'switch-custom' => 1)),
-                            '2'         => array('alt' => 'Preset 2', 'img' => ReduxFramework::$_url . '../sample/presets/preset2.png', 'presets' => '{"slider1":"1", "slider2":"0", "switch-on":"0"}'),
+                            '1'         => array('alt' => 'Preset 1', 'img' => ReduxFramework::$_url . '../sample/presets/preset1.png', 'presets' => array('switch-on' => 1, 'switch-off' => 1, 'switch-parent' => 1)),
+                            '2'         => array('alt' => 'Preset 2', 'img' => ReduxFramework::$_url . '../sample/presets/preset2.png', 'presets' => '{"opt-slider-label":"1", "opt-slider-text":"10"}'),
                         ),
                     ),
                     array(
@@ -615,6 +615,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
             $this->sections[] = array(
                 'icon'      => 'el-icon-website',
                 'title'     => __('Styling Options', 'redux-framework-demo'),
+                'subsection' => true,
                 'fields'    => array(
                     array(
                         'id'        => 'opt-select-stylesheet',

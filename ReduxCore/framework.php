@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.6
+ * @version     3.2.7
  */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.6.2';
+        public static $_version = '3.2.7';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2383,6 +2383,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
 
                 if( !empty( $imported_options ) && is_array( $imported_options ) && isset( $imported_options['redux-backup'] ) && $imported_options['redux-backup'] == '1' ) {
+
                     $this->transients['changed_values'] = array();
                     foreach( $plugin_options as $key => $value) {
                         if ( isset($imported_options[$key]) && $imported_options[$key] != $value ) {
@@ -2412,8 +2413,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         $this->set_options( $plugin_options );
                         return;
                     }
+                    $plugin_options = wp_parse_args( $imported_options, $plugin_options );
                     $this->set_transients(); // Update the transients
-
                     return $plugin_options;
 
                 }
