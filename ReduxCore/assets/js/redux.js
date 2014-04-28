@@ -73,19 +73,19 @@
     };
 
     $.redux.get_container_value = function(id) {
-        
+
         var value = $('#'+redux.args.opt_name+'-'+id).serializeForm();
         if (value !== null && typeof value === 'object' && value.hasOwnProperty(redux.args.opt_name)) {
             //console.log('object');
             //console.log(value);
-            value = value[redux.args.opt_name][id];    
+            value = value[redux.args.opt_name][id];
         }
         //console.log(value);
         return value;
     };
 
     $.redux.check_dependencies = function(variable) {
-        
+
         if ( redux.required === null ) {
             return;
         }
@@ -94,6 +94,7 @@
         if ( !redux.required.hasOwnProperty(id) ) {
             return;
         }
+
 
         var container = current.parents('.redux-field-container:first'),
             is_hidden = container.parents('tr:first').hasClass('.hide'),
@@ -175,6 +176,7 @@
 
     $.redux.check_parents_dependencies = function(id) {
         var show = "";
+
         if ( redux.required_child.hasOwnProperty(id) ) {
             $.each(redux.required_child[id], function(i, parentData) {
                 if ( $('#'+redux.args.opt_name+'-'+parentData.parent).parents('tr:first').hasClass('.hide') ) {
@@ -208,6 +210,10 @@
                 } else {
                     if (parentValue == checkValue) {
                         show = true;
+                    } else if ($.isArray(parentValue)) {
+                        if ($.inArray(checkValue, parentValue) != -1) {
+                            show = true;
+                        }
                     }
                 }
                 break;
@@ -223,6 +229,10 @@
                 } else {
                     if (parentValue != checkValue) {
                         show = true;
+                    } else if ($.isArray(parentValue)) {
+                        if ($.inArray(checkValue, parentValue) == -1) {
+                            show = true;
+                        }
                     }
                 }
                 break;

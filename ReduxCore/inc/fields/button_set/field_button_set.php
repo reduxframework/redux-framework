@@ -101,7 +101,7 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
                 $selected = '';
                 if ( isset( $this->field['multi'] ) && $this->field['multi'] == true ) {
                     $type = "checkbox";
-                    $this->field['name_suffix'] = "[".$i."]";
+                    $this->field['name_suffix'] = "[]";
                     $i++;
 
                     if (!empty($this->value) && !is_array($this->value)) {

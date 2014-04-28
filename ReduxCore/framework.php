@@ -64,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.7';
+        public static $_version = '3.2.7.1';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -3487,6 +3487,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }else{
                         if ($parentValue == $checkValue) {
                             $return = true;
+                        } else if (is_array($parentValue)) {
+                            if (in_array($checkValue, $parentValue)) {
+                                $return = true;
+                            }
                         }
                     }
                     break;
@@ -3497,8 +3501,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if(!in_array($parentValue, $checkValue))
                             $return = true;
                     }else{
-                        if ($parentValue != $checkValue)
+                        if ($parentValue != $checkValue) {
                             $return = true;
+                        } else if (is_array($parentValue)) {
+                            if (!in_array($checkValue, $parentValue)) {
+                                $return = true;
+                            }
+                        }
                     }
                     break;
                 case '>':
