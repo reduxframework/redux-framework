@@ -277,6 +277,18 @@
                 if (parentValue !== "" && parentValue != checkValue)
                     show = true;
                 break;
+            case 'is_empty':
+            case 'empty':
+            case '!isset':
+                if (!parentValue || parentValue === "" || parentValue === null)
+                    show = true;
+                break;
+            case 'not_empty':
+            case '!empty':
+            case 'isset':
+                if (parentValue && parentValue !== "" && parentValue !== null)
+                    show = true;
+                break;
         }
         return show;
 
