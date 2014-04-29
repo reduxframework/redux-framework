@@ -1,4 +1,5 @@
 /* global redux_change */
+
 (function($) {
     "use strict";
 
@@ -12,9 +13,9 @@
         $('select.redux-select-item').each(function() {
 
             var default_params = {
-                width: 'resolve',
-                triggerChange: true,
-                allowClear: true
+                width:          'resolve',
+                triggerChange:  true,
+                allowClear:     true
             };
 
             if ($(this).siblings('.select2_params').size() > 0) {
@@ -28,7 +29,9 @@
                         return m;
                     }}, default_params);
             }
+
             $(this).select2(default_params);
+
             if ($(this).hasClass('select2-sortable')) {
                 default_params = {};
                 default_params.bindOrder = 'sortableStop';
@@ -40,7 +43,6 @@
                 redux_change($($(this)));
                 $(this).select2SortableOrder();
             });
-
         });
     };
 

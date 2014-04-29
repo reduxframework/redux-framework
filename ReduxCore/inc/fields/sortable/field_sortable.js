@@ -1,6 +1,8 @@
 /*global jQuery, document, redux_change */
 
 (function($) {
+    "use strict";
+    
     $(document).ready(function() {
         $(".redux-sortable").sortable({
             handle: ".drag",
