@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.7.2 =
+* Fixed:      Reset defaults error.
+* Added:      `show` argument to turn on and off input boxes in slider.
+
 = 3.2.7.1 =
 * Fixed:      Required now works with muti-check fields and button set when set to multi.
 

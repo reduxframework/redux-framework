@@ -63,7 +63,14 @@ if (!class_exists('ReduxFramework_slides')) {
          */
         public function render() {
 
-            //print_r($this->value);
+            $defaults = array(
+                'show' => array(
+                    'title' => true,
+                    'description' => true,
+                    'url' => true,
+                )
+            );
+            //$this->field = wp_parse_args($this->field, $defaults);
 
             echo '<div class="redux-slides-accordion">';
 
@@ -130,12 +137,28 @@ if (!class_exists('ReduxFramework_slides')) {
                     echo '</div>' . "\n";
 
                     echo '<ul id="' . $this->field['id'] . '-ul" class="redux-slides-list">';
-                    $placeholder = (isset($this->field['placeholder']['title'])) ? esc_attr($this->field['placeholder']['title']) : __( 'Title', 'redux-framework' );
-                    echo '<li><input type="text" id="' . $this->field['id'] . '-title_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][title]" value="' . esc_attr($slide['title']) . '" placeholder="'.$placeholder.'" class="full-text slide-title" /></li>';
-                    $placeholder = (isset($this->field['placeholder']['description'])) ? esc_attr($this->field['placeholder']['description']) : __( 'Description', 'redux-framework' );
-                    echo '<li><textarea name="' . $this->field['name'] . '[' . $x . '][description]" id="' . $this->field['id'] . '-description_' . $x . '" placeholder="'.$placeholder.'" class="large-text" rows="6">' . esc_attr($slide['description']) . '</textarea></li>';
+
+                    if ( $this->field['show']['title'] ) {
+                        $title_type = "text";
+                    } else {
+                        $title_type = "hidden";
+                    }
+                    $placeholder = (isset($this->field['placeholder']['title'])) ? esc_attr($this->field['placeholder']['title']) : __('Title', 'redux-framework');
+                    echo '<li><input type="'.$title_type.'" id="' . $this->field['id'] . '-title_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][title]" value="' . esc_attr($slide['title']) . '" placeholder="' . $placeholder . '" class="full-text slide-title" /></li>';
+
+                    if ( $this->field['show']['description'] ) {
+                        $placeholder = (isset($this->field['placeholder']['description'])) ? esc_attr($this->field['placeholder']['description']) : __('Description', 'redux-framework');
+                        echo '<li><textarea name="' . $this->field['name'] . '[' . $x . '][description]" id="' . $this->field['id'] . '-description_' . $x . '" placeholder="' . $placeholder . '" class="large-text" rows="6">' . esc_attr($slide['description']) . '</textarea></li>';
+                    }
+
                     $placeholder = (isset($this->field['placeholder']['url'])) ? esc_attr($this->field['placeholder']['url']) : __( 'URL', 'redux-framework' );
-                    echo '<li><input type="text" id="' . $this->field['id'] . '-url_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][url]" value="' . esc_attr($slide['url']) . '" class="full-text" placeholder="'.$placeholder.'" /></li>';
+                    if ( $this->field['show']['url'] ) {
+                        $url_type = "text";
+                    } else {
+                        $url_type = "hidden";
+                    }
+
+                    echo '<li><input type="'.$url_type.'" id="' . $this->field['id'] . '-url_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][url]" value="' . esc_attr($slide['url']) . '" class="full-text" placeholder="'.$placeholder.'" /></li>';
                     echo '<li><input type="hidden" class="slide-sort" name="' . $this->field['name'] . '[' . $x . '][sort]" id="' . $this->field['id'] . '-sort_' . $x . '" value="' . $slide['sort'] . '" />';
                     echo '<li><input type="hidden" class="upload-id" name="' . $this->field['name'] . '[' . $x . '][attachment_id]" id="' . $this->field['id'] . '-image_id_' . $x . '" value="' . $slide['attachment_id'] . '" />';
                     echo '<input type="hidden" class="upload-thumbnail" name="' . $this->field['name'] . '[' . $x . '][thumb]" id="' . $this->field['id'] . '-thumb_url_' . $x . '" value="' . $slide['thumb'] . '" readonly="readonly" />';
@@ -194,12 +217,25 @@ if (!class_exists('ReduxFramework_slides')) {
                 echo '</div>' . "\n";
 
                 echo '<ul id="' . $this->field['id'] . '-ul" class="redux-slides-list">';
-                $placeholder = (isset($this->field['placeholder']['title'])) ? esc_attr($this->field['placeholder']['title']) : __( 'Title', 'redux-framework' );
-                echo '<li><input type="text" id="' . $this->field['id'] . '-title_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][title]" value="" placeholder="'.$placeholder.'" class="full-text slide-title" /></li>';
-                $placeholder = (isset($this->field['placeholder']['description'])) ? esc_attr($this->field['placeholder']['description']) : __( 'Description', 'redux-framework' );
-                echo '<li><textarea name="' . $this->field['name'] . '[' . $x . '][description]" id="' . $this->field['id'] . '-description_' . $x . '" placeholder="'.$placeholder.'" class="large-text" rows="6"></textarea></li>';
+                if ( $this->field['show']['title'] ) {
+                    $title_type = "text";
+                } else {
+                    $title_type = "hidden";
+                }
+                $placeholder = (isset($this->field['placeholder']['title'])) ? esc_attr($this->field['placeholder']['title']) : __('Title', 'redux-framework');
+                echo '<li><input type="'.$title_type.'" id="' . $this->field['id'] . '-title_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][title]" value="" placeholder="' . $placeholder . '" class="full-text slide-title" /></li>';
+
+                if ( $this->field['show']['description'] ) {
+                    $placeholder = (isset($this->field['placeholder']['description'])) ? esc_attr($this->field['placeholder']['description']) : __('Description', 'redux-framework');
+                    echo '<li><textarea name="' . $this->field['name'] . '[' . $x . '][description]" id="' . $this->field['id'] . '-description_' . $x . '" placeholder="' . $placeholder . '" class="large-text" rows="6"></textarea></li>';
+                }
                 $placeholder = (isset($this->field['placeholder']['url'])) ? esc_attr($this->field['placeholder']['url']) : __( 'URL', 'redux-framework' );
-                echo '<li><input type="text" id="' . $this->field['id'] . '-url_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][url]" value="" class="full-text" placeholder="'.$placeholder.'" /></li>';
+                if ( $this->field['show']['url'] ) {
+                    $url_type = "text";
+                } else {
+                    $url_type = "hidden";
+                }
+                echo '<li><input type="'.$url_type.'" id="' . $this->field['id'] . '-url_' . $x . '" name="' . $this->field['name'] . '[' . $x . '][url]" value="" class="full-text" placeholder="'.$placeholder.'" /></li>';
                 echo '<li><input type="hidden" class="slide-sort" name="' . $this->field['name'] . '[' . $x . '][sort]" id="' . $this->field['id'] . '-sort_' . $x . '" value="' . $x . '" />';
                 echo '<li><input type="hidden" class="upload-id" name="' . $this->field['name'] . '[' . $x . '][attachment_id]" id="' . $this->field['id'] . '-image_id_' . $x . '" value="" />';
                 echo '<input type="hidden" class="upload" name="' . $this->field['name'] . '[' . $x . '][image]" id="' . $this->field['id'] . '-image_url_' . $x . '" value="" readonly="readonly" />';

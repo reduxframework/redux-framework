@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.7
+ * @version     3.2.7.2
  */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.7.1';
+        public static $_version = '3.2.7.2';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -2437,7 +2437,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 $this->transients['changed_values'] = array();
                 foreach($this->options as $key => $value) {
-                    if ($value != $plugin_options[$key]) {
+                    if (isset($plugin_options[$key]) && $value != $plugin_options[$key]) {
                         $this->transients['changed_values'][$key] = $value;
                     }
                 }
