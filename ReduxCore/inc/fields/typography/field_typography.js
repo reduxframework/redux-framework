@@ -1,9 +1,9 @@
 /* global redux_change */
 /**
  * Typography
- * Dependencies		: google.com, jquery
- * Feature added by : Dovy Paukstys - http://simplerain.com/
- * Date				: 06.14.2013
+ * Dependencies:        google.com, jquery
+ * Feature added by:    Dovy Paukstys - http://simplerain.com/
+ * Date:                06.14.2013
  */
 jQuery.noConflict();
 /** Fire up jQuery - let's dance!
@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 
     Object.size = function(obj) {
         var size = 0,
-            key;
+                key;
         for (key in obj) {
             if (obj.hasOwnProperty(key)) {
                 size++;
