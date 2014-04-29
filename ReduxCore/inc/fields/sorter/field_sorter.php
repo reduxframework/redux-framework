@@ -64,14 +64,14 @@ class ReduxFramework_sorter {
 	    $temp2 = array(); // holds saved blocks
 
 		foreach($all_blocks as $blocks) {
-		    $temp = array_merge($temp, $blocks);
+		    $temp = $temp + $blocks;
 		}
 
 	    $sortlists = $this->value;
 
 	    if ( is_array( $sortlists ) ) {
 		    foreach( $sortlists as $sortlist ) {
-				$temp2 = array_merge($temp2, $sortlist);
+				$temp2 = $temp2 + $sortlist;
 		    }
 
 		    // now let's compare if we have anything missing
@@ -115,7 +115,7 @@ class ReduxFramework_sorter {
 					    echo '<h3>'.$group.'</h3>';
 
                         if (!isset($sortlist['placebo'])){
-                            array_unshift($sortlist, array( "placebo" => "placebo" ));
+                            $sortlist = array( "placebo" => "placebo" ) + $sortlist;
                         }
 
 					    foreach ($sortlist as $key => $list) {
