@@ -22,7 +22,9 @@
  */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 if( !class_exists( 'ReduxDebugObject' ) ) {
 
@@ -34,8 +36,8 @@ if( !class_exists( 'ReduxDebugObject' ) ) {
     class ReduxDebugObject {
         public function __construct($parent) {
             $this->parent = $parent;
-        }       
-        
+        }
+
         public function render() {
             echo '<div id="dev_mode_default_section_group' . '" class="redux-group-tab">';
             echo '<h3>' . __( 'Options Object', 'redux-framework' ) . '</h3>';
@@ -55,7 +57,7 @@ if( !class_exists( 'ReduxDebugObject' ) ) {
 
             echo '</div>';
         }
-        
+
         public function render_tab() {
             echo '<li id="dev_mode_default_section_group_li" class="redux-group-tab-link-li">';
 
@@ -69,7 +71,7 @@ if( !class_exists( 'ReduxDebugObject' ) ) {
             echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span class="group_title">' . __( 'Options Object', 'redux-framework' ) . '</span></a>';
             echo '</li>';
         }
-        
+
         public function add_submenu() {
             add_submenu_page(
                 $this->parent->args['page_slug'],
