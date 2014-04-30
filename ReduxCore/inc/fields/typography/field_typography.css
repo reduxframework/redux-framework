@@ -4,6 +4,10 @@
 .redux-main .redux-typography-container .typography-size-bar {
   clear: left;
 }
+.redux-main .redux-typography-container .typography-size-bar .input-append {
+  margin-bottom: 0;
+  float: none;
+}
 .redux-main .redux-typography-container .typography-style-bar {
   clear: left;
 }
