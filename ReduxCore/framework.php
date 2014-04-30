@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.7.2
+ * @version     3.2.8
  */
 
 // Exit if accessed directly
@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.7.3';
+        public static $_version = '3.2.8';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
