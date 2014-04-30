@@ -371,7 +371,7 @@ if (!class_exists('ReduxFramework_background')) {
             );
         }
 
-        public function getCSS($value = array()) {
+        public static function getCSS($value = array()) {
 
             $css = '';
 
