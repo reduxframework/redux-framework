@@ -500,6 +500,7 @@ function redux_change(variable) {
         if (hideError) {
             jQuery('#' + parentID + '_li .redux-menu-error').hide();
             jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
+            jQuery('#' + parentID + '_li').parents('.inside:first').find('.redux-field-errors').slideUp();
         }
     }
     // TODO Check

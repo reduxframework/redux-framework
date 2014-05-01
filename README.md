@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.4 =
+* Fixed:      One more slides field error check, and an extra JS goodie for an extension.
+
 = 3.2.8.3 =
 * Fixed:      Leftover debug code messing up slides field.
 

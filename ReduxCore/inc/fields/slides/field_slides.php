@@ -79,7 +79,7 @@ if (!class_exists('ReduxFramework_slides')) {
 
             $multi = (isset($this->field['multi']) && $this->field['multi']) ? ' multiple="multiple"' : "";
 
-            if (isset($this->value) && is_array($this->value)) {
+            if (isset($this->value) && is_array($this->value) && !empty($this->value)) {
 
                 $slides = $this->value;
 
