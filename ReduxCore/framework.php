@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.4';
+        public static $_version = '3.2.8.5';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1350,7 +1350,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     </script><style>.wf-loading{visibility:hidden;}</style>
                 <?php
                 } else {
-                    echo '<link rel="stylesheet" id="options-google-fonts"  href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    echo '<link rel="stylesheet" id="options-google-fonts" title="google-fonts" href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
                     //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
                     //wp_enqueue_style( 'redux-google-fonts' );
                 }

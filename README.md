@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.5 =
+* Fixed:      Added a title to the google fonts stylesheet to fix validation errors.
+
 = 3.2.8.4 =
 * Fixed:      One more slides field error check, and an extra JS goodie for an extension.
 
