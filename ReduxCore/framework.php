@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.1';
+        public static $_version = '3.2.8.2';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -552,17 +552,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Saving the transient values
                 $this->set_transients();
 
-                /**
-                 * action 'redux-saved-{opt_name}'
-                 * @deprecated
-                 * @param mixed $value set/saved option value
-                 */
                 //do_action( "redux-saved-{$this->args['opt_name']}", $value ); // REMOVE
-
-                /**
-                 * action 'redux/options/{opt_name}/saved'
-                 * @param mixed $value set/saved option value
-                 */
                 //do_action( "redux/options/{$this->args['opt_name']}/saved", $value, $this->transients['changed_values'] );
 
             }
