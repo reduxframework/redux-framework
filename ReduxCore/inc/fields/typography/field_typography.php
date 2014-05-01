@@ -761,19 +761,22 @@ class ReduxFramework_typography {
         } //if
 
         if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
-            $this->parent->fonts['google'] = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json'), true);
+            $fonts = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json'), true);
 
-            $this->parent->font_groups['google'] = array(
-                'id'        => 'google',
-                'text'      => __('Google Webfonts', 'redux-framework'),
-                'children'  => array(),
-            );
-            foreach ($this->parent->fonts['google'] as $font => $extra) {
-                $this->parent->font_groups['google']['children'][] = array(
-                    'id'    => $font,
-                    'text'  => $font
+            if ($fonts && !empty($fonts)) {
+                $this->parent->fonts['google'] = $fonts;
+                $this->parent->font_groups['google'] = array(
+                    'id'        => 'google',
+                    'text'      => __('Google Webfonts', 'redux-framework'),
+                    'children'  => array(),
                 );
-            }
+                foreach ($this->parent->fonts['google'] as $font => $extra) {
+                    $this->parent->font_groups['google']['children'][] = array(
+                        'id'    => $font,
+                        'text'  => $font
+                    );
+                }
+            } 
         }
     }
 
