@@ -516,7 +516,7 @@ class ReduxFramework_typography {
             $link.= "&amp;subset=" . implode(',', $subsets);
         }
 
-        return '//fonts.googleapis.com/css?family=' . $link;
+        return '//fonts.googleapis.com/css?family=' . str_replace( '|','%7C', $link );
     }
 
     /**
