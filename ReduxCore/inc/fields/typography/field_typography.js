@@ -63,7 +63,7 @@ jQuery(document).ready(function($) {
         // Get the styles and such from the font
         var details = "";
 
-        if (google && redux.fonts.google[family]) {
+        if (google && ( family in redux.fonts.google ) ) {
             details = redux.fonts.google[family];
         } else if (option.data('details')) {
             details = jQuery.parseJSON(decodeURIComponent(option.data('details')));
