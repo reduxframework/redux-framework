@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.6 =
+* Fixed:      javascript error in typography field.
+
 = 3.2.8.5 =
 * Fixed:      Added a title to the google fonts stylesheet to fix validation errors.
 
