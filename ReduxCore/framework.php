@@ -514,7 +514,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param mixed $value the value of the option being added
          */
         function set_options( $value = '' ) {
-            logConsole('set_options');
+
             $this->transients['last_save'] = time();
 
             if( !empty($value) ) {
