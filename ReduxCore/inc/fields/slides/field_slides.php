@@ -70,7 +70,9 @@ if (!class_exists('ReduxFramework_slides')) {
                     'url'           => true,
                 )
             );
-
+            
+            $this->field = wp_parse_args($this->field, $defaults);
+            
             echo '<div class="redux-slides-accordion">';
 
             $x = 0;

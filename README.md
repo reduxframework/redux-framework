@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.3 =
+* Fixed:      Leftover debug code messing up slides field.
+
 = 3.2.8.2 =
 * Fixed:      More reliable saved action hook.
 * Added:      Actions hooks for errors and warnings.
