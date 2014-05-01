@@ -514,6 +514,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param mixed $value the value of the option being added
          */
         function set_options( $value = '' ) {
+            logConsole('set_options');
             $this->transients['last_save'] = time();
 
             if( !empty($value) ) {
@@ -556,13 +557,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @deprecated
                  * @param mixed $value set/saved option value
                  */
-                do_action( "redux-saved-{$this->args['opt_name']}", $value ); // REMOVE
+                //do_action( "redux-saved-{$this->args['opt_name']}", $value ); // REMOVE
 
                 /**
                  * action 'redux/options/{opt_name}/saved'
                  * @param mixed $value set/saved option value
                  */
-                do_action( "redux/options/{$this->args['opt_name']}/saved", $value, $this->transients['changed_values'] );
+                //do_action( "redux/options/{$this->args['opt_name']}/saved", $value, $this->transients['changed_values'] );
 
             }
         } // set_options()
@@ -2971,7 +2972,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      */
                     echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
                 } else {
-
+                    /**
+                     * action 'redux/options/{opt_name}/saved'
+                     * @param mixed $value set/saved option value
+                     */
+                    do_action( "redux/options/{$this->args['opt_name']}/saved", $this->options, $this->transients['changed_values'] );
+                    
                     /**
                      * filter 'redux-saved-text-{opt_name}'
                      * @param string translated "settings saved" text
@@ -2981,12 +2987,31 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 unset( $this->transients['last_save_mode'] );
 
             }
+
+            /**
+             * action 'redux/options/{opt_name}/settings/changes'
+             * @param mixed $value set/saved option value
+             */
+            do_action( "redux/options/{$this->args['opt_name']}/settings/change", $this->options, $this->transients['changed_values'] );
+            
             /**
              * filter 'redux-changed-text-{opt_name}'
              * @param string translated "settings have changed" text
              */
             echo '<div id="redux-save-warn" class="notice-yellow"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
+            
+            /**
+             * action 'redux/options/{opt_name}/errors'
+             * @param array $this->errors error information
+             */
+            do_action( "redux/options/{$this->args['opt_name']}/errors", $this->errors );
             echo '<div id="redux-field-errors" class="notice-red"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
+            
+            /**
+             * action 'redux/options/{opt_name}/warnings'
+             * @param array $this->warnings warning information
+             */
+            do_action( "redux/options/{$this->args['opt_name']}/warnings", $this->warnings );
             echo '<div id="redux-field-warnings" class="notice-yellow"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
 
             echo '</div>';
