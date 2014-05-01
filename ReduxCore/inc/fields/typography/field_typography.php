@@ -763,7 +763,7 @@ class ReduxFramework_typography {
         if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
             $fonts = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json'), true);
 
-            if ($fonts && !empty($fonts)) {
+            if (isset($fonts) && !empty($fonts) && is_array($fonts)) {
                 $this->parent->fonts['google'] = $fonts;
                 $this->parent->font_groups['google'] = array(
                     'id'        => 'google',
@@ -776,7 +776,7 @@ class ReduxFramework_typography {
                         'text'  => $font
                     );
                 }
-            } 
+            }
         }
     }
 
