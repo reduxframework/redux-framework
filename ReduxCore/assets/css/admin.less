@@ -137,7 +137,7 @@ a { outline: 0 !important; }
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .notice-red,
-#redux-field-errors,
+.redux-field-errors,
 .no-js {
     margin: 0;
     border-bottom: 1px solid #E7E7E7;
@@ -146,12 +146,12 @@ a { outline: 0 !important; }
     padding: 8px 35px 8px 14px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-#redux-field-errors,
-#redux-field-warnings,
-#redux-save-warn { display: none; }
+.redux-field-errors,
+.redux-field-warnings,
+.redux-save-warn { display: none; }
 .sticky-save-warn {
     min-height: 76px;
-    #redux-save-warn {
+    .redux-save-warn {
         position: fixed;
         top: 32px;
         right: 21px;
@@ -875,6 +875,7 @@ pre {
 
     .redux-sidebar .redux-group-menu li.active {
         &.hasSubSections {
+
             a {
                 position: relative;
                 &:after {
@@ -890,6 +891,7 @@ pre {
                     margin-top: -8px;
                 }
 
+
             }
             ul.subsection li a:after {
                 border: 0 none !important;
@@ -899,6 +901,14 @@ pre {
     }
     .redux-sidebar .redux-group-menu li {
         &.hasSubSections {
+            a .redux-menu-error {
+                margin-right: 8px;
+            }
+            .subsection {
+              a .redux-menu-error {
+                margin-right: 5px;
+              }
+            }
             a {
                 .extraIconSubsections {
                     position: absolute;
@@ -1059,7 +1069,7 @@ pre {
         line-height: 38px;
         font-size: 18px;
     }
-    .sticky-save-warn #redux-save-warn {
+    .sticky-save-warn .redux-save-warn {
         right: 13px;
         top: 46px;
     }
@@ -1080,7 +1090,7 @@ pre {
     }
 }
 @media screen and (max-width: 600px) {
-    .sticky-save-warn #redux-save-warn {
+    .sticky-save-warn .redux-save-warn {
         top: 0;
     }
 }
