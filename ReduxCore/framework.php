@@ -1368,7 +1368,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     </script><style>.wf-loading{visibility:hidden;}</style>
                 <?php
                 } else {
-                    echo '<link rel="stylesheet" id="options-google-fonts" title="google-fonts" href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https:" : "http:";
+
+                    echo '<link rel="stylesheet" id="options-google-fonts" title="" href="'.$protocol.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
                     //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
                     //wp_enqueue_style( 'redux-google-fonts' );
                 }
