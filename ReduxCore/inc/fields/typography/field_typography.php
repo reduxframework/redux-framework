@@ -46,11 +46,39 @@ class ReduxFramework_typography {
      * @since ReduxFramework 1.0.0
      */
     function __construct($field = array(), $value = '', $parent) {
-
+        global $wp_filesystem;
+        
         $this->parent   = $parent;
         $this->field    = $field;
         $this->value    = $value;
+        
+        // Init wp_filesystem
+        Redux_Functions::initWpFilesystem();
+        
+        // Set upload dir path for google fonts
+        $this->font_dir =  ReduxFramework::$_upload_dir . 'google-fonts/';
 
+        // Check for redux_google_font dir
+        if (!is_dir($this->font_dir)) {
+            
+            // Create it, if not found
+            $wp_filesystem->mkdir($this->font_dir, FS_CHMOD_DIR);
+        }
+
+        // Set google font file variables
+        $this->google_html = $this->font_dir . 'googlefonts.html';
+        $this->google_json = $this->font_dir . 'googlefonts.json';
+        
+        // Move installed googlefonts.html to upload location, if not exists
+        if (!file_exists($this->google_html)) {
+            $wp_filesystem->copy(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html', $this->font_dir . 'googlefonts.html', false);
+        }
+
+        // Move installed googlefonts.json to upload location, if not exists
+        if (!file_exists($this->google_json)) {
+            $wp_filesystem->copy(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $this->font_dir . 'googlefonts.json', false);
+        }
+        
         // Get the google array
         $this->getGoogleArray();
     }
@@ -65,11 +93,6 @@ class ReduxFramework_typography {
     function render() {
         global $wp_filesystem;
 
-        // Initialize the Wordpress filesystem, no more using file_put_contents function
-        if (empty($wp_filesystem)) {
-            require_once (ABSPATH . '/wp-admin/includes/file.php');
-            WP_Filesystem();
-        }
         // No errors please
         $defaults = array(
             'font-family'       => true,
@@ -201,26 +224,23 @@ class ReduxFramework_typography {
             if ($this->field['google'] == true && !empty($this->parent->args['google_api_key'])) {
                 echo '</optgroup>';
 
-                if (!file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
+                //if (!file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
+                if (!file_exists($this->google_html)) {
                     $this->getGoogleFonts();
                 }
 
                 if (!isset($this->parent->googleFontHTML) && !empty($this->parent->googleFontHTML)) {
                     echo $this->parent->googleFontHTML;
-                } else if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
-                    $googleHTML = $wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                //} else if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
+                  } else if (file_exists($this->google_html)) {
+                    //$googleHTML = $wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                    $googleHTML = $wp_filesystem->get_contents($this->google_html);
+                    
                     // Fallback if file_get_contents won't work for wordpress. MEDIATEMPLE
                     if (empty($googleHTML)) {
-                        $url = ReduxFramework::$_url . 'inc/fields/typography/googlefonts.html';
-                        $ch = curl_init();
-                        curl_setopt($ch, CURLOPT_URL, $url);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                        $googleHTML = curl_exec($ch);
-                        curl_close($ch);
-                        if (empty($googleHTML)) {
-                            $googleHTML = false;
-                        }
+                        $googleHTML = Redux_Helpers::curlRead($this->google_html);
                     }
+                    
                     $this->parent->googleFontHTML = $googleHTML;
                     echo $googleHTML;
                 }
@@ -722,13 +742,17 @@ class ReduxFramework_typography {
         }
 
         if (isset($this->field['update_weekly']) && $this->field['update_weekly'] === true && $this->field['google'] === true && !empty($this->parent->args['google_api_key'])) {
-            if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
+            //if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
+            if (file_exists($this->google_html)) {
                 // Keep the fonts updated weekly
                 $weekback = strtotime(date('jS F Y', time() + (60 * 60 * 24 * -7)));
-                $last_updated = filemtime(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                //$last_updated = filemtime(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                $last_updated = filemtime($this->google_html);
                 if ($last_updated < $weekback) {
-                    unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
-                    unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json');
+                    //unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                    unlink($this->google_html);
+                    //unlink(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json');
+                    unlink($this->google_json);
                 }
             }
         }
@@ -739,8 +763,8 @@ class ReduxFramework_typography {
             WP_Filesystem();
         }
 
-        if (!file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json')) {
-
+        //if (!file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json')) {
+        if (!file_exists($this->google_json)) {
             $result = wp_remote_get(apply_filters('redux-google-fonts-api-url', 'https://www.googleapis.com/webfonts/v1/webfonts?key=') . $this->parent->args['google_api_key'], array('sslverify' => false));
 
             if (!is_wp_error($result) && $result['response']['code'] == 200) {
@@ -753,7 +777,8 @@ class ReduxFramework_typography {
                 }
 
                 if (!empty($this->parent->googleArray)) {
-                    $wp_filesystem->put_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', json_encode($this->parent->googleArray), FS_CHMOD_FILE
+                    //$wp_filesystem->put_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', json_encode($this->parent->googleArray), FS_CHMOD_FILE
+                    $wp_filesystem->put_contents($this->google_json, json_encode($this->parent->googleArray), FS_CHMOD_FILE
                             // predefined mode settings for WP files
                     );
                 }
@@ -761,9 +786,15 @@ class ReduxFramework_typography {
         } //if
 
         if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
-            $fonts = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json'), true);
+            //$fonts = json_decode($wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json'), true);
+            $fonts = json_decode($wp_filesystem->get_contents($this->google_json), true);
 
-            if (isset($fonts) && !empty($fonts) && is_array($fonts)) {
+            // Fallback if file_get_contents won't work for wordpress. MEDIATEMPLE
+            if (empty($fonts)) {
+                $fonts = Redux_Helpers::curlRead($this->google_json);
+            }
+            
+            if (isset($fonts) && !empty($fonts) && is_array($fonts) && $fonts != false) {
                 $this->parent->fonts['google'] = $fonts;
                 $this->parent->font_groups['google'] = array(
                     'id'        => 'google',
@@ -807,7 +838,8 @@ class ReduxFramework_typography {
             $gfonts = "";
         }
 
-        $wp_filesystem->put_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html', $gfonts, FS_CHMOD_FILE
+        //$wp_filesystem->put_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html', $gfonts, FS_CHMOD_FILE
+        $wp_filesystem->put_contents($this->google_html, $gfonts, FS_CHMOD_FILE
                 // predefined mode settings for WP files
         );
     }  //function

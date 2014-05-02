@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.7 =
+* Modified:   Moved google font files to proprietary folder in upload to help with permission issues.
+
 = 3.2.8.6 =
 * Fixed:      javascript error in typography field.
 

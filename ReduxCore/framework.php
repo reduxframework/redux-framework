@@ -66,9 +66,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.6';
+        public static $_version = '3.2.8.7';
         public static $_dir;
         public static $_url;
+        public static $_upload_dir;
         public static $wp_content_url;
         public static $base_wp_content_url;
         public static $_properties;
@@ -89,6 +90,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath(get_stylesheet_directory()) ) !== false) {
                 self::$_is_plugin = false;
             }
+            
+            // Create our private upload directory
+            $upload = wp_upload_dir();
+            self::$_upload_dir = Redux_Helpers::cleanFilePath($upload['basedir']) . '/redux/';
+            
+            // Ensure it exists
+            if (!is_dir(self::$_upload_dir)) {
+                global $wp_filesystem;
+                
+                // Init wp_filesystem
+                Redux_Functions::initWpFilesystem();
+                
+                // Create the directory
+                $wp_filesystem->mkdir(self::$_upload_dir);
+            }
+            
         }// ::init()
 
         public $framework_url       = 'http://www.reduxframework.com/';
