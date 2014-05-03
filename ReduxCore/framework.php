@@ -66,10 +66,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.7';
+        public static $_version = '3.2.8.8';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
+        public static $_upload_url;
         public static $wp_content_url;
         public static $base_wp_content_url;
         public static $_properties;
@@ -90,22 +91,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
             if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath(get_stylesheet_directory()) ) !== false) {
                 self::$_is_plugin = false;
             }
-            
+
             // Create our private upload directory
             $upload = wp_upload_dir();
             self::$_upload_dir = Redux_Helpers::cleanFilePath($upload['basedir']) . '/redux/';
-            
+            self::$_upload_url = Redux_Helpers::cleanFilePath($upload['baseurl']) . '/redux/';
+
             // Ensure it exists
             if (!is_dir(self::$_upload_dir)) {
                 global $wp_filesystem;
-                
+
                 // Init wp_filesystem
                 Redux_Functions::initWpFilesystem();
-                
+
                 // Create the directory
                 $wp_filesystem->mkdir(self::$_upload_dir);
             }
-            
         }// ::init()
 
         public $framework_url       = 'http://www.reduxframework.com/';
@@ -1367,7 +1368,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     </script><style>.wf-loading{visibility:hidden;}</style>
                 <?php
                 } else {
-                    echo '<link rel="stylesheet" id="options-google-fonts" title="google-fonts" href="'.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https:" : "http:";
+
+                    echo '<link rel="stylesheet" id="options-google-fonts" title="" href="'.$protocol.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
                     //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
                     //wp_enqueue_style( 'redux-google-fonts' );
                 }
@@ -1690,7 +1693,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $theErrors[$error['section_id']]['total']++;
                     $theTotal++;
                 }
-                
+
                 $this->localize_data['errors'] = array('total'=>$theTotal, 'errors'=>$theErrors);
                 unset( $this->transients['notices']['errors'] );
             }
@@ -2952,7 +2955,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * filter 'redux-imported-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
-                    echo '<div id="saved_notice" class="admin-notice notice-blue"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
+                    echo '<div class="admin-notice notice-blue saved_notice"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
                     //exit();
                 } else if( $this->transients['last_save_mode'] == "defaults" ) {
                     /**
@@ -2965,7 +2968,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * filter 'redux-defaults-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
-                    echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
+                    echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
                 } else if( $this->transients['last_save_mode'] == "defaults_section" ) {
                     /**
                      * action 'redux/options/{opt_name}/section/reset'
@@ -2977,7 +2980,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * filter 'redux-defaults-section-text-{opt_name}'
                      * @param string  translated "settings imported" text
                      */
-                    echo '<div id="saved_notice" class="admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
+                    echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
                 } else {
                     /**
                      * action 'redux/options/{opt_name}/saved'
@@ -2989,7 +2992,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                      * filter 'redux-saved-text-{opt_name}'
                      * @param string translated "settings saved" text
                      */
-                    echo '<div id="saved_notice" class="admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
+                    echo '<div class="saved_notice admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
                 }
                 unset( $this->transients['last_save_mode'] );
 
@@ -3005,21 +3008,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
              * filter 'redux-changed-text-{opt_name}'
              * @param string translated "settings have changed" text
              */
-            echo '<div id="redux-save-warn" class="notice-yellow"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
+            echo '<div class="redux-save-warn notice-yellow"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
             
             /**
              * action 'redux/options/{opt_name}/errors'
              * @param array $this->errors error information
              */
             do_action( "redux/options/{$this->args['opt_name']}/errors", $this->errors );
-            echo '<div id="redux-field-errors" class="notice-red"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
+            echo '<div class="redux-field-errors notice-red"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
             
             /**
              * action 'redux/options/{opt_name}/warnings'
              * @param array $this->warnings warning information
              */
             do_action( "redux/options/{$this->args['opt_name']}/warnings", $this->warnings );
-            echo '<div id="redux-field-warnings" class="notice-yellow"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
+            echo '<div class="redux-field-warnings notice-yellow"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
 
             echo '</div>';
 
