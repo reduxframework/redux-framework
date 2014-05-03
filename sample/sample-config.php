@@ -1500,7 +1500,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 
                 // You will need to generate a Google API key to use this feature.
                 // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
-                'google_api_key' => '', // Must be defined to add google fonts to the typography module
+                'google_api_key' => '1', // Must be defined to add google fonts to the typography module
                 
                 'async_typography'  => false,                    // Use a asynchronous font on the front end or font string
                 'admin_bar'         => true,                    // Show the panel pages on the admin bar

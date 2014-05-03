@@ -491,20 +491,43 @@ function redux_change(variable) {
         jQuery(variable).parent().find('.redux-th-error').slideUp();
 
         var parentID    = jQuery(variable).closest('.redux-group-tab').attr('id');
-        var hideError   = true;
+        var rContainer = jQuery(variable).parents('.redux-container:first');
 
-        jQuery('#' + parentID + ' .redux-field-error').each(function() {
-            hideError = false;
-        });
+        var errorCount = ( parseInt( rContainer.find( '.redux-field-errors span').text() ) - 1 );
+        var warningCount = ( parseInt( rContainer.find( '.redux-field-warnings span').text() ) - 1 );
 
-        if (hideError) {
-            jQuery('#' + parentID + '_li .redux-menu-error').hide();
+        if (errorCount <= 0) {
+            jQuery('#' + parentID + '_li .redux-menu-error').fadeOut('fast');
             jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
             jQuery('#' + parentID + '_li').parents('.inside:first').find('.redux-field-errors').slideUp();
+            jQuery(variable).parents('.redux-container:first').find('.redux-field-errors').slideUp();
+        } else {
+            // Let's count down the errors now. Fancy.  ;)
+            var id = parentID.split('_');
+            id = id[0];
+
+            var th = rContainer.find('.redux-group-tab-link-li:eq('+id+')');
+
+            var errorsLeft = ( parseInt( th.find('.redux-menu-error:first').text() ) - 1 );
+            if ( errorsLeft <= 0 ) {
+                th.find('.redux-menu-error:first').fadeOut().remove();
+            } else {
+                th.find('.redux-menu-error:first').text( errorsLeft );
+            }
+
+            var warningsLeft = ( parseInt( th.find('.redux-menu-warning:first').text() ) - 1 );
+            if ( warningsLeft <= 0 ) {
+                th.find('.redux-menu-warning:first').fadeOut().remove();
+            } else {
+                th.find('.redux-menu-warning:first').text( warningsLeft );
+            }
+
+            rContainer.find( '.redux-field-errors span').text( errorCount );
+            rContainer.find( '.redux-field-warning span').text( warningCount );
+
         }
     }
-    // TODO Check
-    jQuery('#redux-save-warn').slideDown();
+    jQuery('.redux-save-warn').slideDown();
 }
 
 jQuery(document).ready(function($) {
@@ -851,8 +874,8 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    if (jQuery('#saved_notice').is(':visible')) {
-        jQuery('#saved_notice').slideDown();
+    if (jQuery('.saved_notice').is(':visible')) {
+        jQuery('.saved_notice').slideDown();
     }
 
     jQuery(document.body).on('change', '.redux-field input, .redux-field textarea, .redux-field select', function() {
@@ -872,7 +895,7 @@ jQuery(document).ready(function($) {
     window.onresize = function(event) {
         if (jQuery('#redux-sticky').hasClass('sticky-save-warn')) {
             //console.log('resize');
-            //   jQuery('#redux-save-warn').css('left', jQuery('#redux-intro-text').width())
+            //   jQuery('.redux-save-warn').css('left', jQuery('#redux-intro-text').width())
         }
     };
 
@@ -889,7 +912,7 @@ jQuery(document).ready(function($) {
             });
 
             jQuery('#redux-footer').addClass('sticky-footer-fixed');
-            jQuery('#redux-save-warn').css('left', jQuery('#redux-sticky').offset().left);
+            jQuery('.redux-save-warn').css('left', jQuery('#redux-sticky').offset().left);
             jQuery('#redux-sticky-padder').show();
         } else {
             jQuery('#redux-sticky').removeClass('sticky-save-warn');
@@ -915,8 +938,8 @@ jQuery(document).ready(function($) {
             stickyInfo();
         });
     }
-    jQuery('#saved_notice').delay(4000).slideUp();
-    jQuery('#redux-field-errors').delay(8000).slideUp();
+    jQuery('.saved_notice').delay(4000).slideUp();
+    //jQuery('.redux-field-errors').delay(8000).slideUp();
     jQuery('.redux-save').click(function() {
         window.onbeforeunload = null;
     });
@@ -941,35 +964,50 @@ jQuery(document).ready(function($) {
     /**
      BEGIN error and warning notices
      **/
-    // Display errors on page load
     if (redux.errors !== undefined) {
-        jQuery("#redux-field-errors span").html(redux.errors.total);
-        // TODO Check
-        jQuery("#redux-field-errors").show();
         jQuery.each(redux.errors.errors, function(sectionID, sectionArray) {
-            jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
-            jQuery("#" + sectionID + "_section_group_li_a").addClass("hasError");
             jQuery.each(sectionArray.errors, function(key, value) {
-                //console.log(value);
                 jQuery("#" + redux.args.opt_name + '-' + value.id).addClass("redux-field-error");
-                jQuery("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
+                if (jQuery("#" + redux.args.opt_name + '-' + value.id).parent().find('.redux-th-error').length === 0) {
+                    jQuery("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
+                }
             });
+
+        });
+        $('.redux-container').each(function () {
+            var container = $(this);
+            var totalErrors = container.find('.redux-field-error').length;
+            if (totalErrors > 0) {
+                container.find(".redux-field-errors span").text(totalErrors);
+                container.find(".redux-field-errors").slideDown();
+                container.find('.redux-group-tab').each(function () {
+                    var total = $(this).find('.redux-field-error').length;
+                    if (total > 0 ) {
+                        var sectionID = $(this).attr('id').split('_');
+                        sectionID = sectionID[0];
+                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').prepend('<span class="redux-menu-error">' + total + '</span>');
+                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').addClass("hasError");
+                    }
+                });
+            }
+            var totalWarnings = container.find('.redux-field-warning').length;
+            if (totalWarnings > 0) {
+                container.find(".redux-field-warnings span").text(totalWarnings);
+                container.find(".redux-field-warnings").slideDown();
+                container.find('.redux-group-tab').each(function () {
+                    var warning = $(this).find('.redux-field-warning').length;
+                    if (warning > 0 ) {
+                        var sectionID = $(this).attr('id').split('_');
+                        sectionID = sectionID[0];
+                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').prepend('<span class="redux-menu-warning">' + total + '</span>');
+                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').addClass("hasWarning");
+                    }
+                });
+
+            }
         });
     }
-    // Display warnings on page load
-    if (redux.warnings !== undefined) {
-        // TODO check
-        jQuery("#redux-field-warnings span").html(redux.warnings.total);
-        jQuery("#redux-field-warnings").show();
-        jQuery.each(redux.warnings.warnings, function(sectionID, sectionArray) {
-            jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-warning">' + sectionArray.total + '</span>');
-            jQuery("#" + sectionID + "_section_group_li_a").addClass("hasWarning");
-            jQuery.each(sectionArray.warnings, function(key, value) {
-                jQuery("#" + redux.args.opt_name + '-' + value.id).addClass("redux-field-warning");
-                jQuery("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-warning">' + value.msg + '</div>');
-            });
-        });
-    }
+
     /**
      END error and warning notices
      **/

@@ -74,6 +74,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.8 =
+* Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
+* Fixed:      Extra check for typography bug.
+* Fixed:      Error css alignment issue with subsections.
+* Modified:   Error notice stays until all errors are gone. Also updates it's number as errors fixed!
+
 = 3.2.8.7 =
 * Modified:   Moved google font files to proprietary folder in upload to help with permission issues.
 
