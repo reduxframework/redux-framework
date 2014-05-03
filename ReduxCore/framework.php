@@ -70,7 +70,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
-        public static $_upload_url;
         public static $wp_content_url;
         public static $base_wp_content_url;
         public static $_properties;
@@ -95,7 +94,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Create our private upload directory
             $upload = wp_upload_dir();
             self::$_upload_dir = Redux_Helpers::cleanFilePath($upload['basedir']) . '/redux/';
-            self::$_upload_url = Redux_Helpers::cleanFilePath($upload['baseurl']) . '/redux/';
             
             // Ensure it exists
             if (!is_dir(self::$_upload_dir)) {
