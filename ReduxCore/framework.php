@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.8';
+        public static $_version = '3.2.8.9';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -382,7 +382,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $this->import_export = new Redux_import_export($this);
 
                 // mod_rewrite check
-                Redux_Functions::modRewriteCheck();
+                //Redux_Functions::modRewriteCheck();
             }
 
             /**

@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.9 =
+* Modified:   Turned of mod_rewrite check.
+
 = 3.2.8.8 =
 * Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
 * Fixed:      Extra check for typography bug.
