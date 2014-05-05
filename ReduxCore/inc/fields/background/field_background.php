@@ -375,7 +375,7 @@ if (!class_exists('ReduxFramework_background')) {
 
             $css = '';
 
-            if (!empty($value)) {
+            if (!empty($value) && is_array($value)) {
                 foreach ($value as $key => $value) {
                     if (!empty($value) && $key != "media") {
                         if ($key == "background-image") {
