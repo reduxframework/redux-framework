@@ -76,6 +76,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.2.8.10 =
 * Fixed:      PHP warnings in background field.  #1173.  Thanks, @abossola.
+* Fixed:      CSS validation not respecting child selector symbol. #1162
 
 = 3.2.8.9 =
 * Modified:   Turned of mod_rewrite check.
