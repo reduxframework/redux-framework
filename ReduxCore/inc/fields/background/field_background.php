@@ -303,13 +303,13 @@ if (!class_exists('ReduxFramework_background')) {
                 echo '<div class="upload_button_div">';
 
                 //If the user has WP3.5+ show upload/remove button
-                echo '<span class="button background_upload_button" id="' . $this->field['id'] . '-media">' . __('Upload', 'redux-framework') . '</span>';
+                echo '<span class="button redux-background-upload" id="' . $this->field['id'] . '-media">' . __('Upload', 'redux-framework') . '</span>';
 
                 $hide = '';
                 if (empty($this->value['background-image']) || $this->value['background-image'] == '')
                     $hide = ' hide';
 
-                echo '<span class="button remove-image' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __('Remove', 'redux-framework') . '</span>';
+                echo '<span class="button removeCSS redux-remove-background' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __('Remove', 'redux-framework') . '</span>';
 
                 echo '</div>';
             }

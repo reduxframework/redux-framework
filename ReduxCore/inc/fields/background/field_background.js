@@ -1,5 +1,11 @@
-/* global redux_change, wp */
+/**
+ * Redux Background
+ * Dependencies		: jquery, wp media uploader
+ * Feature added by	: Dovy Paukstys
+ * Date				: 07 Jan 2014
+ */
 
+/* global redux_change, wp */
 (function($) {
     "use strict";
 
@@ -9,50 +15,48 @@
         $.reduxBackground.init();
     });
 
-    /**
-     * Redux Background
-     * Dependencies		: jquery, wp media uploader
-     * Feature added by	: Dovy Paukstys
-     * Date				: 07 Jan 2014
-     */
-    $.reduxBackground.init = function() {
+    $.reduxBackground.init = function( selector ) {
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-background' );
+        }
+
         // Remove the image button
-        $('.redux-container-background .remove-image, .redux-container-background .remove-file').unbind('click').on('click', function(e) {
-            $.reduxBackground.removeImage($(this).parents('fieldset.redux-field:first'));
-            $.reduxBackground.preview($(this));
+        $( selector ).find('.redux-remove-background').unbind('click').on( 'click', function(e) {
+            e.preventDefault();
+            $.reduxBackground.removeImage( $(this).parents( '.redux-container-background:first' ) );
+            $.reduxBackground.preview( $(this) );
             return false;
         });
 
         // Upload media button
-        $('.redux-container-background .background_upload_button').unbind().on('click', function(event) {
-            $.reduxBackground.addImage(event, $(this).parents('fieldset.redux-field:first'));
+        $( selector ).find('.redux-background-upload').unbind().on('click', function(event) {
+            $.reduxBackground.addImage( event, $(this).parents( '.redux-container-background:first' ) );
         });
 
-        $('.redux-background-input').on('change', function() {
-            $.reduxBackground.preview($(this));
+        $( selector ).find('.redux-background-input').on('change', function() {
+            $.reduxBackground.preview( $(this) );
         });
 
-        $('.redux-container-background .redux-color').wpColorPicker({
+        $( selector ).find( '.redux-color' ).wpColorPicker({
             change: function(u, ui) {
                 redux_change($(this));
                 $('#' + u.target.id + '-transparency').removeAttr('checked');
                 $(this).val(ui.color.toString());
-                $.reduxBackground.preview($(this));
+                $.reduxBackground.preview( $(this) );
             }
         });
-
 
     };
 
     // Update the background preview
-    $.reduxBackground.preview = function(selector) {
-        var parent = selector.parents('.redux-container-background:first');
+    $.reduxBackground.preview = function( selector ) {
+        var parent = $( selector ).parents('.redux-container-background:first');
         var preview = $(parent).find('.background-preview');
 
         if (!preview) { // No preview present
             return;
         }
-
+        var hide = true;
         var split = parent.data('id') + '][';
         var css = 'height:' + preview.height() + 'px;';
         $(parent).find('.redux-background-input').each(function() {
@@ -60,7 +64,9 @@
             data = data[0];
 
             if (data && data.name.indexOf('[background-') != -1) {
+
                 if (data.value !== "") {
+                    hide = false;
                     data.name = data.name.split(split);
                     data.name = data.name[1].replace(']', '');
                     if (data.name == "background-image") {
@@ -71,14 +77,18 @@
                 }
             }
         });
+        if (!hide) {
+            preview.attr('style', css).fadeIn();
+        } else {
+            preview.slideUp();
+        }
 
-        preview.attr('style', css).fadeIn();
+
 
     };
 
     // Add a file via the wp.media function
     $.reduxBackground.addImage = function(event, selector) {
-
         event.preventDefault();
 
         var frame;
@@ -144,8 +154,8 @@
             if (!selector.find('.upload').hasClass('noPreview')) {
                 selector.find('.screenshot').empty().hide().append('<img class="redux-option-image" src="' + thumbSrc + '">').slideDown('fast');
             }
-            //selector.find('.media_upload_button').unbind();
-            selector.find('.remove-image').removeClass('hide');//show "Remove" button
+
+            selector.find('.redux-remove-background').removeClass('hide');//show "Remove" button
             selector.find('.redux-background-input-properties').slideDown();
             $.reduxBackground.preview(selector.find('.upload'));
         });
@@ -155,13 +165,14 @@
     };
 
     // Update the background preview
-    $.reduxBackground.removeImage = function(selector) {
+    $.reduxBackground.removeImage = function( selector ) {
 
         // This shouldn't have been run...
-        if (!selector.find('.remove-image').addClass('hide')) {
+        if (!selector.find('.redux-remove-background').addClass('hide')) {
             return;
         }
-        selector.find('.remove-image').addClass('hide');//hide "Remove" button
+        selector.find('.redux-remove-background').addClass('hide'); //hide "Remove" button
+
         selector.find('.upload').val('');
         selector.find('.upload-id').val('');
         selector.find('.upload-height').val('');
@@ -177,9 +188,7 @@
         // We don't display the upload button if .upload-notice is present
         // This means the user doesn't have the WordPress 3.5 Media Library Support
         if ($('.section-upload .upload-notice').length > 0) {
-            $('.background_upload_button').remove();
+            $('.redux-background-upload').remove();
         }
-
-        //$.reduxBackground.preview(selector);
     };
 })(jQuery);

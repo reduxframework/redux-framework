@@ -1,8 +1,10 @@
-.redux-main .button.remove-image {
+.redux-main .button.remove-image,
+.redux-main .removeCSS {
   margin-left: 10px;
   color: #ef521d;
 }
-.redux-main .button.remove-image:hover {
+.redux-main .button.remove-image:hover,
+.redux-main .removeCSS:hover {
   color: red;
 }
 .redux-main .upload_button_div {
