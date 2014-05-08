@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.13 =
+* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
+
 = 3.2.8.12 =
 * Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
 * Fixed:      Small CSS classes for flashing fonts where web-font-loader.

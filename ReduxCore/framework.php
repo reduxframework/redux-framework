@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.12';
+        public static $_version = '3.2.8.13';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -134,6 +134,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'save_defaults'      => true,           // Save defaults to the DB on it if empty
             'footer_credit'      => '',
             'async_typography'   => false,
+            'class'              => '',             // Class that gets appended to all redux-containers
             'admin_bar'          => true,           // Show the panel pages on the admin bar
             'help_tabs'          => array(),
             'help_sidebar'       => '',             // __( '', 'redux-framework' );
@@ -1677,6 +1678,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'slug'                  => $this->args['page_slug'],
                 'hints'                 => $this->args['hints'],
                 'disable_save_warn'     => $this->args['disable_save_warn'],
+                'class'                 => $this->args['class'],
             );
 
 
@@ -2749,7 +2751,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          */
         public function section_menu($k, $section, $suffix = "", $sections = array()) {
             $display = true;
-            
+
+            $section['class'] = isset( $section['class'] ) ? ' ' . $section['class'] : '';
+
             if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                 if ( isset($section['panel']) && $section['panel'] == false ) {
                     $display = false;
@@ -2786,7 +2790,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
             
             if (isset($section['type']) && $section['type'] == "divide") {
-                $string .= '<li class="divide">&nbsp;</li>';
+                $string .= '<li class="divide'.$section['class'].'">&nbsp;</li>';
             } else if (!isset($section['subsection']) || $section['subsection'] != true ) {
                 
                 // DOVY! REPLACE $k with $section['ID'] when used properly.
@@ -2794,7 +2798,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $subsections        = ( isset( $sections[($k+1)] ) && isset($sections[($k+1)]['subsection']) && $sections[($k+1)]['subsection'] == true ) ? true : false;
                 $subsectionsClass   = $subsections ? ' hasSubSections' : '';
                 $extra_icon         = $subsections ? '<span class="extraIconSubsections"><i class="el el-icon-chevron-down">&nbsp;</i></span>' : '';
-                $string             .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li'.$subsectionsClass.'">';
+                $string             .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li' . $section['class'] . $subsectionsClass.'">';
                 $string             .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $k . '" data-rel="' . $k . $suffix . '">' . $extra_icon . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
                 $nextK              = $k;
                 
@@ -2833,8 +2837,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 }
                                 $icon = ( !isset( $sections[$nextK]['icon'] ) ) ? '' : '<i class="' . $sections[$nextK]['icon'] . $icon_class . '"></i> ';
                             }
-
-                            $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li' . ( $icon ? ' hasIcon' : '' ) . '">';
+                            $section[$nextK]['class'] = isset( $section[$nextK]['class'] ) ? $section[$nextK]['class'] : '';
+                            $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li '.$section[$nextK]['class'] . ( $icon ? ' hasIcon' : '' ) . '">';
                             $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $nextK . '" data-rel="' . $nextK . $suffix . '">' . $icon . '<span class="group_title">' . $sections[$nextK]['title'] . '</span></a>';
                             $string .= '</li>';
                         }
@@ -2883,8 +2887,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             // Main container
             $expanded = ($this->args['open_expanded']) ? ' fully-expanded' : '';
-            
-            echo '<div class="redux-container'.$expanded.'">';
+
+            echo '<div class="redux-container' . $expanded . ( !empty( $this->args['class'] ) ? ' ' . $this->args['class'] : '' ) . '">';
             echo '<form method="post" action="' . './options.php" enctype="multipart/form-data" id="redux-form-wrapper">';
             echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
             echo '<input type="hidden" id="currentSection" name="' . $this->args['opt_name'] . '[redux-section]" value="" />';
@@ -3082,7 +3086,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             foreach( $this->sections as $k => $section ) {
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
-                echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab" data-rel="'.$k.'">';
+                $section['class'] = isset( $section['class'] ) ? ' ' . $section['class'] : '';
+                echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab' . $section['class'] . '" data-rel="'.$k.'">';
                 //echo '<div id="' . $k . '_nav-bar' . '"';
                 /*
                 if ( !empty( $section['tab'] ) ) {
