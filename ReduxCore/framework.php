@@ -1353,7 +1353,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     
                     ?>
                     <script>
-
                         /* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
                         if (typeof WebFontConfig === "undefined") { WebFontConfig = new Object(); }
                         WebFontConfig['google'] = { families: [<?php echo $typography->makeGoogleWebfontString( $this->typography )?>] };
@@ -1366,7 +1365,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             var s = document.getElementsByTagName('script')[0];
                             s.parentNode.insertBefore(wf, s);
                         })();
-                    </script><style>.wf-loading{visibility:hidden;}</style>
+                    </script><style>.wf-loading * { -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); -moz-opacity:0; -khtml-opacity: 0; opacity: 0; } .wf-active *, .wf-inactive * { -webkit-transition: opacity 1s ease-out; -moz-transition: opacity 1s ease-out; -o-transition: opacity 1s ease-out; transition: opacity 1s ease-out; }</style>
                 <?php
                 } else {
                     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https:" : "http:";
