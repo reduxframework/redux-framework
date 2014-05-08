@@ -106,31 +106,6 @@
 	width: 99%;
 	max-width: 99%;
 }
-.redux-main .redux-typography-container label {
-	display: block;
-	position: relative;
-	font-size: 12px !important;
-	text-align: left;
-	color: #999999;
-	margin: 4px 0 2px 0 !important;
-	cursor: default;
-}
-/*.wp-color-result {
-	white-space: nowrap;
-}*/
-.redux-main .redux-typography-container .typography-preview {
-	display: block;
-	width: 100%;
-	border: 1px dotted lightgray;
-	max-width: 850px;
-	padding: 10px;
-	font-size: 10pt;
-	height: auto;
-	margin: 5px 0 10px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	overflow: hidden;
 }
 .redux-main .redux-typography-container .input-append .add-on {
 	-webkit-box-sizing: border-box;
