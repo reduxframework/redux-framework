@@ -39,6 +39,8 @@ jQuery(document).ready(function($) {
         var letter = $('#' + mainID + ' .redux-typography-letter').val(); // New Letter-Spacing
         var align = $('#' + mainID + ' select.redux-typography-align').val(); // text-align
         var transform = $('#' + mainID + ' select.redux-typography-transform').val();
+		var fontVariant = $('#' + mainID + ' select.redux-typography-font-variant').val(); // New Font Variant
+		var decoration = $('#' + mainID + ' select.redux-typography-decoration').val(); // New Text Decoration
         var style = $('#' + mainID + ' select.redux-typography-style').val();
         var script = $('#' + mainID + ' select.redux-typography-subsets').val();
         var color = $('#' + mainID + ' .redux-typography-color').val();
@@ -226,6 +228,14 @@ jQuery(document).ready(function($) {
         if (transform) {
             $('#' + mainID + ' .typography-preview').css('text-transform', transform);
         }
+		
+        if (fontVariant) {
+            $('#' + mainID + ' .typography-preview').css('font-variant', fontVariant);
+        }
+		
+        if (decoration) {
+            $('#' + mainID + ' .typography-preview').css('text-decoration', decoration);
+        }
 
     }
     //init for each element
@@ -242,7 +252,7 @@ jQuery(document).ready(function($) {
         typographySelect(this);
     });
     //init when value is changed
-    jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-align, .redux-typography-transform').keyup(function() {
+    jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration').keyup(function() {
         typographySelect(this);
     });
     // Have to redeclare the wpColorPicker to get a callback function
@@ -262,25 +272,10 @@ jQuery(document).ready(function($) {
         allowMinus: true,
     });
     //jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
-    jQuery(".redux-typography-family, .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform").select2({
+    jQuery(".redux-typography-family, .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration").select2({
         width: 'resolve',
         triggerChange: true,
         allowClear: true
-    });
-
-    jQuery('.redux-typography-qtip').each(function() {
-        $(this).qtip({
-//            text: function(event, api) {
-//                return $(this).attr('qtip-content');
-//            },
-            //text: 'Me',
-            style: 'qtip-tipsy black',
-            position: {
-                my: 'bottom center', // Position my top left...
-                at: 'top center', // at the bottom right of...
-            }
-
-        });
     });
 
 });
