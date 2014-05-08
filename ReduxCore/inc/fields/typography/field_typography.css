@@ -167,10 +167,10 @@
 .redux-main .redux-typography-container .input-append {
   width: auto;
 }
-.wp-color-result {
+.redux-main .redux-typography-container .wp-color-result {
   white-space: nowrap;
 }
-.redux-container-spinner .ui-spinner-button .ui-icon {
+.redux-main .redux-typography-container .redux-container-spinner .ui-spinner-button .ui-icon {
   width: 26px !important;
 }
 @media all and (max-width: 631px) {
