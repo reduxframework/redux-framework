@@ -2682,7 +2682,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     foreach ( $plugin_options[$field['id']] as $key => $value ) {
                                         $before = $after = null;
                                         if ( isset( $plugin_options[$field['id']][$key] ) && !empty( $plugin_options[$field['id']][$key] ) ) {
-                                            $before = $plugin_options[$field['id']][$key];
+                                            $before = trim( $plugin_options[$field['id']][$key] );
                                         }
                                         
                                         if ( isset( $options[$field['id']][$key] ) && !empty( $options[$field['id']][$key] ) ) {
@@ -2705,7 +2705,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                         }
                                     }
                                 } else {
-                                    $validation = new $validate( $this, $field, $plugin_options[$field['id']], $options[$field['id']] );
+                                    $validation = new $validate( $this, $field, trim( $plugin_options[$field['id']] ), $options[$field['id']] );
                                     $plugin_options[$field['id']] = $validation->value;
                                     
                                     if( isset( $validation->error ) ) {

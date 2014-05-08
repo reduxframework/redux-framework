@@ -78,6 +78,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
 * Fixed:      Small CSS classes for flashing fonts where web-font-loader.
 * Fixed:      ASync Flash on fonts. FINALLY. What a pain.
+* Modified:   Now do a trim on all fields before validating. No need to alert because of a space...
 
 = 3.2.8.11 =
 * Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
