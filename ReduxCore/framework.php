@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.10';
+        public static $_version = '3.2.8.11';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -84,7 +84,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
             $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
             $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
-            
             self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
             self::$_url     = self::$wp_content_url . $relative_url;
 
@@ -148,6 +147,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'default_show'       => false,          // If true, it shows the default value
             'default_mark'       => '',             // What to print by the field's title if the value shown is default
             'update_notice'      => true,           // Recieve an update notice of new commits when in dev mode
+            'disable_save_warn'  => false,          // Disable the save warn
             'open_expanded'      => false,          // Start the panel fully expanded to start with
             'hints' => array(
                 'icon'              => 'icon-question-sign',
@@ -1676,6 +1676,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'opt_name'              => $this->args['opt_name'],
                 'slug'                  => $this->args['page_slug'],
                 'hints'                 => $this->args['hints'],
+                'disable_save_warn'     => $this->args['disable_save_warn'],
             );
 
 
@@ -2792,9 +2793,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
                 $subsections        = ( isset( $sections[($k+1)] ) && isset($sections[($k+1)]['subsection']) && $sections[($k+1)]['subsection'] == true ) ? true : false;
                 $subsectionsClass   = $subsections ? ' hasSubSections' : '';
-                $extra_icon         = $subsections ? '<i class="extraIconSubsections el el-icon-chevron-down">&nbsp;</i>' : '';
+                $extra_icon         = $subsections ? '<span class="extraIconSubsections"><i class="el el-icon-chevron-down">&nbsp;</i></span>' : '';
                 $string             .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li'.$subsectionsClass.'">';
-                $string             .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span>'.$extra_icon.'</a>';
+                $string             .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $k . '" data-rel="' . $k . $suffix . '">' . $extra_icon . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
                 $nextK              = $k;
                 
                 // Make sure you can make this a subsection
@@ -2834,7 +2835,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
 
                             $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li' . ( $icon ? ' hasIcon' : '' ) . '">';
-                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'">' . $icon . '<span class="group_title">' . $sections[$nextK]['title'] . '</span></a>';
+                            $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $nextK . '" data-rel="' . $nextK . $suffix . '">' . $icon . '<span class="group_title">' . $sections[$nextK]['title'] . '</span></a>';
                             $string .= '</li>';
                         }
                     }
@@ -3081,7 +3082,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             foreach( $this->sections as $k => $section ) {
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
-                echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab">';
+                echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab" data-rel="'.$k.'">';
                 //echo '<div id="' . $k . '_nav-bar' . '"';
                 /*
                 if ( !empty( $section['tab'] ) ) {

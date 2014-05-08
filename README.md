@@ -74,6 +74,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.11 =
+* Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
+* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for subsections is SO hot now.
+* Modified:   Various CSS fixes and improvements.
+* Fixed:      3+ JavaScript errors found in the background field. Now works flawlessly.
+* Added:      disable_save_warn flags to the arguments to disable the "you should save" slidedown.
+
 = 3.2.8.10 =
 * Fixed:      PHP warnings in background field.  #1173.  Thanks, @abossola.
 * Fixed:      CSS validation not respecting child selector symbol. #1162

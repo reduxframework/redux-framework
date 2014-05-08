@@ -486,27 +486,39 @@ function redux_change(variable) {
 
     window.onbeforeunload = confirmOnPageExit;
 
+    var rContainer = jQuery(variable).parents('.redux-container:first');
+
     if (jQuery(variable).parents('fieldset.redux-field:first').hasClass('redux-field-error')) {
         jQuery(variable).parents('fieldset.redux-field:first').removeClass('redux-field-error');
         jQuery(variable).parent().find('.redux-th-error').slideUp();
 
         var parentID    = jQuery(variable).closest('.redux-group-tab').attr('id');
-        var rContainer = jQuery(variable).parents('.redux-container:first');
+
 
         var errorCount = ( parseInt( rContainer.find( '.redux-field-errors span').text() ) - 1 );
         var warningCount = ( parseInt( rContainer.find( '.redux-field-warnings span').text() ) - 1 );
 
         if (errorCount <= 0) {
-            jQuery('#' + parentID + '_li .redux-menu-error').fadeOut('fast');
+            jQuery('#' + parentID + '_li .redux-menu-error').fadeOut('fast').remove();
             jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
+            var subParent = jQuery('#' + parentID + '_li').parents('.hasSubSections:first');
+            if ( subParent.length !== 0 ) {
+                if ( subParent.find('.redux-menu-error').length === 0 ) {
+                    subParent.find('.hasError').removeClass('hasError');
+                }
+            }
+
+            //
             jQuery('#' + parentID + '_li').parents('.inside:first').find('.redux-field-errors').slideUp();
             jQuery(variable).parents('.redux-container:first').find('.redux-field-errors').slideUp();
+            jQuery('#redux_metaboxes_errors').slideUp();
         } else {
             // Let's count down the errors now. Fancy.  ;)
             var id = parentID.split('_');
             id = id[0];
 
-            var th = rContainer.find('.redux-group-tab-link-li:eq('+id+')');
+
+            var th = rContainer.find('.redux-group-tab-link-a[data-key="'+id+'"]').parents('.redux-group-tab-link-li:first');
 
             var errorsLeft = ( parseInt( th.find('.redux-menu-error:first').text() ) - 1 );
             if ( errorsLeft <= 0 ) {
@@ -527,7 +539,9 @@ function redux_change(variable) {
 
         }
     }
-    jQuery('.redux-save-warn').slideDown();
+    if ( !redux.args.disable_save_warn ) {
+        rContainer.find('.redux-save-warn').slideDown();
+    }
 }
 
 jQuery(document).ready(function($) {
@@ -972,7 +986,6 @@ jQuery(document).ready(function($) {
                     jQuery("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
                 }
             });
-
         });
         $('.redux-container').each(function () {
             var container = $(this);
@@ -985,8 +998,12 @@ jQuery(document).ready(function($) {
                     if (total > 0 ) {
                         var sectionID = $(this).attr('id').split('_');
                         sectionID = sectionID[0];
-                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').prepend('<span class="redux-menu-error">' + total + '</span>');
-                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').addClass("hasError");
+                        container.find('.redux-group-tab-link-a[data-key="'+sectionID+'"]').prepend('<span class="redux-menu-error">' + total + '</span>');
+                        container.find('.redux-group-tab-link-a[data-key="'+sectionID+'"]').addClass("hasError");
+                        var subParent = container.find('.redux-group-tab-link-a[data-key="'+sectionID+'"]').parents('.hasSubSections:first');
+                        if ( subParent ) {
+                            subParent.find('.redux-group-tab-link-a:first').addClass('hasError');
+                        }
                     }
                 });
             }
@@ -999,8 +1016,12 @@ jQuery(document).ready(function($) {
                     if (warning > 0 ) {
                         var sectionID = $(this).attr('id').split('_');
                         sectionID = sectionID[0];
-                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').prepend('<span class="redux-menu-warning">' + total + '</span>');
-                        container.find('.redux-group-tab-link-a:eq('+sectionID+')').addClass("hasWarning");
+                        container.find('.redux-group-tab-link-a[data-key="'+sectionID+'"]').prepend('<span class="redux-menu-warning">' + total + '</span>');
+                        container.find('.redux-group-tab-link-a[data-key="'+sectionID+'"]').addClass("hasWarning");
+                        var subParent = container.find('.redux-group-tab-link-a[data-key="'+sectionID+'"]').parents('.hasSubSections:first');
+                        if ( subParent ) {
+                            subParent.find('.redux-group-tab-link-a:first').addClass('hasWarning');
+                        }
                     }
                 });
 

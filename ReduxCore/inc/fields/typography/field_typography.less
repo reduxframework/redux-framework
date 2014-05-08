@@ -1,82 +1,193 @@
 .redux-main {
-    .select_wrapper.typography-style span {
-        display:none
+  .redux-typography-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    margin: 0 auto;
+    text-align: left;
+    .typography-bar {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      width: auto;
+      float: none;
+      clear: both;
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+      max-width: 660px;
     }
-    .redux-typography-container {
-        .typography-size-bar {
-            clear: left;
-            .input-append {
-              margin-bottom: 0;
-              float: none;
-            }
-        }
-
-        .typography-style-bar {
-            clear: left;
-        }
-
-        .wp-picker-container {
-            float: left;
-            clear: left;
-        }
-        select,
-        .typography-style,
-        .typography-script {
-            float: left;
-            display: block;
-            width: 340px;
-        }
-        .typography-family,
-        .typography-family select {
-            width:340px !important;
-            margin-right: 5px;
-        }
-        .typography-family-backup,
-        .typography-family-backup select {
-            width:340px !important;
-            margin-left: 0px !important;
-        }
-
-        .typography-script,
-        .typography-script select,
-        .typography-transform,
-        .typography-transform select {
-            width:130px !important;
-            margin-right:0;
-        }
-        .typography-style,
-        .typography-style select,
-        .typography-align,
-        .typography-align select {
-            width:125px!important;
-        }
-        .select_wrapper {
-            float: left;
-            margin-right:10px;
-            display: block;
-        }
-        .typography-preview {
-            display: block;
-            width: 100%;
-            border:1px dotted lightgray;
-            max-width:850px;
-            padding:10px;
-            font-size:10pt;
-            height:auto;
-            margin: 5px 0 10px;
-            overflow:auto;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        input.redux-typography-color {
-            float: left;
-            width: 70px;
-            margin-left: 5px;
-            margin-top:0px;
-        }
-        .redux-typography, .typography-color {
-            margin-bottom:5px;
-        }
+    .select_wrapper {
+      display: inline-block;
+      position: relative !important;
+      overflow: hidden !important;
+      float: none !important;
+      clear: none !important;
+      margin: 0 2% 0 0 !important;
+      width: 48% !important;
+      min-width: 225px;
+      max-width: 324px;
+      .redux-typography {
+        margin-bottom: 0 !important;
+      }
+      select {
+        width: 99% !important;
+        font-size: 14px !important;
+        height: auto !important;
+        padding: 3px !important;
+        height: 28px !important;
+      }
     }
+    .input-append {
+      position: relative !important;
+      overflow: hidden;
+      display: block;
+      float: none;
+      margin: 0 auto;
+      padding: 0;
+      color: #808080;
+      min-width: 105px;
+      width: 99%;
+      max-width: 99%;
+      .add-on {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 0 none;
+        position: absolute;
+        top: 0;
+        right: 1px;
+        height: 27px !important;
+        padding: 0;
+        width:25%;
+        z-index: 1;
+        float: none;
+        line-height: none !important;
+        border: 1px solid #aaa;
+        -moz-border-radius-topright: 4px;
+        -webkit-border-top-right-radius: 4px;
+        border-top-right-radius: 4px;
+        -moz-border-radius-bottomright: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        background-clip: padding-box;
+        background: #ccc;
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(0.6, #eee));
+        background-image: -webkit-linear-gradient(center bottom, #ccc 0%, #eee 60%);
+        background-image: -moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#cccccc', GradientType = 0);
+        background-image: linear-gradient(top, #ccc 0%, #eee 60%);
+      }
+    }
+    label {
+      display: block;
+      position: relative;
+      font-size: 12px !important;
+      text-align: left;
+      color: #999999;
+      margin: 4px 0 2px 0 !important;
+      cursor: default;
+    }
+    .color-picker-container {
+      .wp-picker-container {
+        float: none;
+      }
+    }
+    .ui-spinner-buttons {
+      width: 100% !important;
+      z-index: 1;
+    }
+    .ui-spinner-button {
+      width: 28px !important;
+    }
+    .typography-preview {
+      display: block;
+      width: 100%;
+      border: 1px dotted lightgray;
+      max-width: 850px;
+      padding: 10px;
+      font-size: 10pt;
+      height: auto;
+      margin: 5px 0 10px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .input_wrapper {
+      input.mini {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        width: 76% !important;
+        text-align: center !important;
+        margin: 0 !important;
+        height: 27px;
+        overflow: hidden;
+        position: relative;
+        padding: 0 !important;
+        border: 1px solid #aaa;
+        white-space: nowrap;
+        line-height: 26px;
+        color: #444;
+        text-decoration: none;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+    }
+    .typography-color {
+      border: 0 none;
+      margin-bottom: 0 !important;
+    }
+    .redux-typography,
+    .wp-picker-container {
+      margin-bottom: 0;
+    }
+    .input_wrapper,
+    .color-picker-container {
+      display: inline-block;
+      position: relative !important;
+      overflow: hidden !important;
+      margin: 0 1% 0 0 !important;
+      padding: 0 !important;
+      width: 19%;
+      min-width: 112px;
+      float: none !important;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .input_wrapper input,
+    .color-picker-container input {
+      font-size: 12px !important;
+    }
+    .color-picker-container,
+    .input-append {
+      width: auto;
+    }
+  }
+}
+
+.wp-color-result {
+  white-space: nowrap;
+}
+.redux-container-spinner {
+  .ui-spinner-button {
+    .ui-icon {
+      width: 26px !important;
+    }
+  }
+}
+
+@media all and (max-width:631px) {
+  .redux-main .redux-typography-container .typography-bar {
+    max-width: 230px;
+    margin: 0 auto;
+  }
 }
