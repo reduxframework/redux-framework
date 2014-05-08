@@ -497,16 +497,11 @@ function redux_change(variable) {
 
         var errorCount = ( parseInt( rContainer.find( '.redux-field-errors span').text() ) - 1 );
         var warningCount = ( parseInt( rContainer.find( '.redux-field-warnings span').text() ) - 1 );
-
+        console.log(parentID + ' - ' + errorCount);
         if (errorCount <= 0) {
+            console.log('HERE');
             jQuery('#' + parentID + '_li .redux-menu-error').fadeOut('fast').remove();
             jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
-            var subParent = jQuery('#' + parentID + '_li').parents('.hasSubSections:first');
-            if ( subParent.length !== 0 ) {
-                if ( subParent.find('.redux-menu-error').length === 0 ) {
-                    subParent.find('.hasError').removeClass('hasError');
-                }
-            }
 
             //
             jQuery('#' + parentID + '_li').parents('.inside:first').find('.redux-field-errors').slideUp();
@@ -537,6 +532,12 @@ function redux_change(variable) {
             rContainer.find( '.redux-field-errors span').text( errorCount );
             rContainer.find( '.redux-field-warning span').text( warningCount );
 
+        }
+        var subParent = jQuery('#' + parentID + '_li').parents('.hasSubSections:first');
+        if ( subParent.length !== 0 ) {
+            if ( subParent.find('.redux-menu-error').length === 0 ) {
+                subParent.find('.hasError').removeClass('hasError');
+            }
         }
     }
     if ( !redux.args.disable_save_warn ) {

@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.11';
+        public static $_version = '3.2.8.12';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -1352,6 +1352,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                     
                     ?>
+                    <style>.wf-loading *, .wf-inactive * {visibility: hidden;}.wf-active *{visibility:visible;}</style>
                     <script>
                         /* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
                         if (typeof WebFontConfig === "undefined") { WebFontConfig = new Object(); }
@@ -1365,7 +1366,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             var s = document.getElementsByTagName('script')[0];
                             s.parentNode.insertBefore(wf, s);
                         })();
-                    </script><style>.wf-loading * { -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); -moz-opacity:0; -khtml-opacity: 0; opacity: 0; } .wf-active *, .wf-inactive * { -webkit-transition: opacity 1s ease-out; -moz-transition: opacity 1s ease-out; -o-transition: opacity 1s ease-out; transition: opacity 1s ease-out; }</style>
+                    </script>
                 <?php
                 } else {
                     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https:" : "http:";

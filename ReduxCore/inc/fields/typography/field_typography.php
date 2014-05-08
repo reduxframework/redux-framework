@@ -640,7 +640,12 @@ class ReduxFramework_typography {
                 }
                 $style.= $key . ':' . $value . ';';
             }
+            if ( isset( $this->parent->args['async_typography'] ) && $this->parent->args['async_typography'] ) {
+                $style .= 'visibility: hidden;';
+            }
         }
+
+
 
         if (!empty($style)) {
             if (!empty($this->field['output']) && is_array($this->field['output'])) {
