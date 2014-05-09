@@ -5,6 +5,17 @@
   padding:0;
   width:100%;
   max-width:660px;
+   .clearfix {
+    clear:both;
+  }
+  .clearfix:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+  }
   .input_wrapper input, .color-picker-container input {
     font-size:12px;
   }
@@ -19,17 +30,6 @@
     margin-bottom:0;
     margin-left:4px !important;
     font-size:12px !important;
-  }
-  .clearfix {
-    clear:both;
-  }
-  .clearfix:after {
-    visibility:hidden;
-    display:block;
-    font-size:0;
-    content:" ";
-    clear:both;
-    height:0;
   }
   .select_wrapper {
     display:block;
