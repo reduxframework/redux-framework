@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
                 }
 
                 $('#' + mainID + ' .redux-typography-subsets').html(html);
-                $('#' + mainID + ' .redux-typography-subsets').fadeIn('fast');
+                $('#' + mainID + ' .redux-typography-subsets').parent().fadeIn('fast');
                 $('#' + mainID + ' .typography-family-backup').fadeIn('fast');
             } else {
                 if (details) {
@@ -122,7 +122,7 @@ jQuery(document).ready(function($) {
                         html += '<option value="' + index + '"' + selected + '>' + value.replace('+', ' ') + '</option>';
                     });
                     $('#' + mainID + ' .redux-typography-style').html(html);
-                    $('#' + mainID + ' .redux-typography-subsets').fadeOut('fast');
+                    $('#' + mainID + ' .redux-typography-subsets').parent().fadeOut('fast');
                     $('#' + mainID + ' .typography-family-backup').fadeOut('fast');
                 }
             }
