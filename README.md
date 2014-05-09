@@ -74,6 +74,74 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.13 =
+* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
+
+= 3.2.8.12 =
+* Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
+* Fixed:      Small CSS classes for flashing fonts where web-font-loader.
+* Fixed:      ASync Flash on fonts. FINALLY. What a pain.
+* Modified:   Now do a trim on all fields before validating. No need to alert because of a space...
+
+= 3.2.8.11 =
+* Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
+* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for subsections is SO hot now.
+* Modified:   Various CSS fixes and improvements.
+* Fixed:      3+ JavaScript errors found in the background field. Now works flawlessly.
+* Added:      disable_save_warn flags to the arguments to disable the "you should save" slidedown.
+
+= 3.2.8.10 =
+* Fixed:      PHP warnings in background field.  #1173.  Thanks, @abossola.
+* Fixed:      CSS validation not respecting child selector symbol. #1162
+
+= 3.2.8.9 =
+* Modified:   Turned of mod_rewrite check.
+
+= 3.2.8.8 =
+* Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
+* Fixed:      Extra check for typography bug.
+* Fixed:      Error css alignment issue with subsections.
+* Modified:   Error notice stays until all errors are gone. Also updates it's number as errors fixed!
+
+= 3.2.8.7 =
+* Modified:   Moved google font files to proprietary folder in upload to help with permission issues.
+
+= 3.2.8.6 =
+* Fixed:      javascript error in typography field.
+
+= 3.2.8.5 =
+* Fixed:      Added a title to the google fonts stylesheet to fix validation errors.
+
+= 3.2.8.4 =
+* Fixed:      One more slides field error check, and an extra JS goodie for an extension.
+
+= 3.2.8.3 =
+* Fixed:      Leftover debug code messing up slides field.
+
+= 3.2.8.2 =
+* Fixed:      More reliable saved action hook.
+* Added:      Actions hooks for errors and warnings.
+
+= 3.2.8.1 =
+* Fixed:      Removed erroneous debug output in link_color field.
+
+= 3.2.7.3 =
+* Added:      is_empty / empty / !isset    AND    not_empty / !empty / isset as required operations
+
+= 3.2.7.2 =
+* Fixed:      Reset defaults error.
+* Added:      `show` argument to turn on and off input boxes in slider.
+
+= 3.2.7.1 =
+* Fixed:      Required now works with muti-check fields and button set when set to multi.
+
+= 3.2.7 =
+* Fixed:      Import works again. A single line was missed...
+
+= 3.2.6.2 =
+* Fixed:      link_color field not outputting CSS properly via compiler or output.  Thanks @vertigo7x 
+* Fixed:      Sorter field CSS.  Buttons were all smushed together.
+
 = 3.2.6.1 =
 * Fixed:      'undefined' error in typography.js.  Thanks @ksere.
 

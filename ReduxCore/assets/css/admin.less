@@ -137,7 +137,7 @@ a { outline: 0 !important; }
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .notice-red,
-#redux-field-errors,
+.redux-field-errors,
 .no-js {
     margin: 0;
     border-bottom: 1px solid #E7E7E7;
@@ -146,12 +146,12 @@ a { outline: 0 !important; }
     padding: 8px 35px 8px 14px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-#redux-field-errors,
-#redux-field-warnings,
-#redux-save-warn { display: none; }
+.redux-field-errors,
+.redux-field-warnings,
+.redux-save-warn { display: none; }
 .sticky-save-warn {
     min-height: 76px;
-    #redux-save-warn {
+    .redux-save-warn {
         position: fixed;
         top: 32px;
         right: 21px;
@@ -167,7 +167,7 @@ a { outline: 0 !important; }
     width: 202px;
     float: left;
 }
-.redux-menu-warning, .redux-menu-error {
+.redux-menu-warning, .redux-menu-error, .hasSubSections .extraIconSubsections {
     display: inline-block;
     float: right;
     padding: 6px 7px 4px 7px;
@@ -181,6 +181,10 @@ a { outline: 0 !important; }
     -webkit-border-radius: 10px;
     border: 0 solid transparent;
     margin-right: 5px;
+    i {
+      margin-left: -3px;
+      margin-top: -3px;
+    }
 }
 .redux-menu-warning {
     background-color: #C09853;
@@ -875,6 +879,7 @@ pre {
 
     .redux-sidebar .redux-group-menu li.active {
         &.hasSubSections {
+
             a {
                 position: relative;
                 &:after {
@@ -890,6 +895,7 @@ pre {
                     margin-top: -8px;
                 }
 
+
             }
             ul.subsection li a:after {
                 border: 0 none !important;
@@ -899,20 +905,52 @@ pre {
     }
     .redux-sidebar .redux-group-menu li {
         &.hasSubSections {
+            .redux-menu-error {
+              display: none;
+              margin-right: 5px;
+            }
+
+
+
             a {
-                .extraIconSubsections {
-                    position: absolute;
-                    right: 0;
-                    font-size: 12px;
-                    top: 12px;
+                &.hasError {
+                  .extraIconSubsections {
+                    background-color: rgb(185, 74, 72);
+                    color: rgb(242, 222, 222);
+                  }
                 }
+                .extraIconSubsections {
+                    border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    border: 0 solid transparent;
+                    float: right;
+                    font-size: 9px;
+                    height: 9px;
+                    line-height: 9px;
+                    margin-right: 5px;
+                    padding: 6px 7px 4px 7px;
+                    width: 5px;
+                }
+
                 &:hover .extraIconSubsections {
                     //right: 2px;
                 }
+
             }
         }
         &.active, &.activeChild {
             a .extraIconSubsections { display: none; }
+            &.hasSubSections {
+              .redux-menu-error {
+                display: block;
+              }
+              .subsection {
+                .redux-menu-error {
+                  margin-right: 2px;
+                }
+              }
+            }
         }
     }
     .redux-sidebar .redux-group-menu li.active, .redux-sidebar .redux-group-menu li.activeChild {
@@ -1059,7 +1097,7 @@ pre {
         line-height: 38px;
         font-size: 18px;
     }
-    .sticky-save-warn #redux-save-warn {
+    .sticky-save-warn .redux-save-warn {
         right: 13px;
         top: 46px;
     }
@@ -1080,7 +1118,7 @@ pre {
     }
 }
 @media screen and (max-width: 600px) {
-    .sticky-save-warn #redux-save-warn {
+    .sticky-save-warn .redux-save-warn {
         top: 0;
     }
 }

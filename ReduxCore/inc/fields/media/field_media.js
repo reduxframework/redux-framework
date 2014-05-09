@@ -3,13 +3,10 @@
 
 // Add a file via the wp.media function
 function redux_add_file(event, selector) {
-
     event.preventDefault();
 
     var frame;
     var jQueryel = jQuery(this);
-
-
 
     // If the media frame already exists, reopen it.
     if (frame) {
@@ -23,15 +20,16 @@ function redux_add_file(event, selector) {
         library: {
             //type: 'image' //Only allow images
         },
+
         // Set the title of the modal.
         title: jQueryel.data('choose'),
+
         // Customize the submit button.
         button: {
             // Set the text of the button.
             text: jQueryel.data('update')
-                    // Tell the button not to close the modal, since we're
-                    // going to refresh the page when the image is selected.
-
+            // Tell the button not to close the modal, since we're
+            // going to refresh the page when the image is selected.
         }
     });
 

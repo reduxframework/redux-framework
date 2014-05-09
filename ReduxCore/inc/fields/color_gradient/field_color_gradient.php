@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,12 +20,13 @@
  * @author      Dovy Paukstys
  * @version     3.0.0
  */
-
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
+if (!class_exists('ReduxFramework_color_gradient')) {
 
     /**
      * Main ReduxFramework_color_gradient class
@@ -32,7 +34,7 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
      * @since       1.0.0
      */
     class ReduxFramework_color_gradient {
-    
+
         /**
          * Field Constructor.
          *
@@ -42,13 +44,10 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
          * @access      public
          * @return      void
          */
-        function __construct( $field = array(), $value ='', $parent ) {
-        
-            //parent::__construct( $parent->sections, $parent->args );
-            $this->parent = $parent;
-            $this->field = $field;
-            $this->value = $value;
-        
+        function __construct($field = array(), $value = '', $parent) {
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
 
         /**
@@ -61,38 +60,41 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
          * @return      void
          */
         public function render() {
-        
+
             // No errors please
             $defaults = array(
-                'from' => '',
-                'to' => ''
+                'from'  => '',
+                'to'    => ''
             );
 
-            $this->value = wp_parse_args( $this->value, $defaults );
+            $this->value = wp_parse_args($this->value, $defaults);
 
-            echo '<strong>' . __( 'From ', 'redux-framework' ) . '</strong>&nbsp;';
-            echo '<input data-id="'.$this->field['id'].'" id="' . $this->field['id'] . '-from" name="' . $this->field['name'] . '[from]' . $this->field['name_suffix'] . '" value="'.$this->value['from'].'" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['from'] . '" />';
+            echo '<strong>' . __('From ', 'redux-framework') . '</strong>&nbsp;';
+            echo '<input data-id="' . $this->field['id'] . '" id="' . $this->field['id'] . '-from" name="' . $this->field['name'] . '[from]' . $this->field['name_suffix'] . '" value="' . $this->value['from'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['from'] . '" />';
 
-			if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
-				$tChecked = "";
-				if ( $this->value['from'] == "transparent" ) {
-					$tChecked = ' checked="checked"';
-				}
-	            echo '<label for="' . $this->field['id'] . '-from-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-from-transparency" data-id="' . $this->field['id'] . '-from" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';
-	        }
+            if (!isset($this->field['transparent']) || $this->field['transparent'] !== false) {
+                $tChecked = "";
 
-            echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . __( 'To ', 'redux-framework' ) . '</strong>&nbsp;<input data-id="'.$this->field['id'].'" id="' . $this->field['id'] . '-to" name="' . $this->field['name'] . '[to]' . $this->field['name_suffix'] . '" value="' . $this->value['to'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['to'] . '" />';
-        	
-        	if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
-				$tChecked = "";
-				if ( $this->value['to'] == "transparent" ) {
-					$tChecked = ' checked="checked"';
-				}
-				echo '<label for="' . $this->field['id'] . '-to-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . $this->field['id'] . '-to-transparency" data-id="' . $this->field['id'] . '-to" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';	
-			}
+                if ($this->value['from'] == "transparent") {
+                    $tChecked = ' checked="checked"';
+                }
 
+                echo '<label for="' . $this->field['id'] . '-from-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-from-transparency" data-id="' . $this->field['id'] . '-from" value="1"' . $tChecked . '> ' . __('Transparent', 'redux-framework') . '</label>';
+            }
+
+            echo '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . __('To ', 'redux-framework') . '</strong>&nbsp;<input data-id="' . $this->field['id'] . '" id="' . $this->field['id'] . '-to" name="' . $this->field['name'] . '[to]' . $this->field['name_suffix'] . '" value="' . $this->value['to'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['to'] . '" />';
+
+            if (!isset($this->field['transparent']) || $this->field['transparent'] !== false) {
+                $tChecked = "";
+
+                if ($this->value['to'] == "transparent") {
+                    $tChecked = ' checked="checked"';
+                }
+
+                echo '<label for="' . $this->field['id'] . '-to-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency" id="' . $this->field['id'] . '-to-transparency" data-id="' . $this->field['id'] . '-to" value="1"' . $tChecked . '> ' . __('Transparent', 'redux-framework') . '</label>';
+            }
         }
-    
+
         /**
          * Enqueue Function.
          *
@@ -103,29 +105,28 @@ if( !class_exists( 'ReduxFramework_color_gradient' ) ) {
          * @return      void
          */
         public function enqueue() {
-        
+
             wp_enqueue_script(
-                'redux-field-color-js', 
-                ReduxFramework::$_url . 'inc/fields/color/field_color.js', 
-                array( 'jquery', 'wp-color-picker' ),
+                'redux-field-color-js',
+                ReduxFramework::$_url . 'inc/fields/color/field_color.js',
+                array('jquery', 'wp-color-picker'),
                 time(),
                 true
             );
 
             wp_enqueue_style(
-                'redux-field-color-js', 
-                ReduxFramework::$_url . 'inc/fields/color/field_color.css', 
+                'redux-field-color-js',
+                ReduxFramework::$_url . 'inc/fields/color/field_color.css',
                 time(),
                 true
-            ); 
+            );
 
-			wp_enqueue_style(
-				'redux-field-color-css', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.css', 
-				time(),
-				true
-			);                 
-        
+            wp_enqueue_style(
+                'redux-field-color-css',
+                ReduxFramework::$_url . 'inc/fields/color/field_color.css',
+                time(),
+                true
+            );
         }
     }
 }

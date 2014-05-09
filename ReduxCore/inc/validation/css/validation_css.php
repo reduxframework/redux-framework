@@ -32,7 +32,13 @@ if (!class_exists('Redux_Validation_css')) {
         function validate() {
 
             // Strip all html
-            $this->value = wp_filter_nohtml_kses($this->value);
+            $data = $this->value;
+                    
+            $data = wp_filter_nohtml_kses($data);
+            $data = str_replace('&gt;', '>', $data);
+            
+            $this->value = $data;
+
         }  //function
     }  //class
 }

@@ -2,7 +2,7 @@
 /**
  * The Redux Framework Plugin
  *
- * A simple, truly extensible and fully responsive options framework 
+ * A simple, truly extensible and fully responsive options framework
  * for WordPress themes and plugins. Developed with WordPress coding
  * standards and PHP best practices in mind.
  *
@@ -12,7 +12,7 @@
  * Description:     Redux is a simple, truly extensible options framework for WordPress themes and plugins.
  * Author:          Team Redux
  * Author URI:      http://reduxframework.com
- * Version:         3.2.6.1
+ * Version:         3.2.8.13
  * Text Domain:     redux-framework
  * License:         GPL3+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
@@ -26,12 +26,10 @@
  * @copyright       2012-2014 Redux Framework
  */
 
-
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) {
     die;
 }
-
 
 // Require the main plugin class
 require_once( plugin_dir_path( __FILE__ ) . 'class.redux-plugin.php' );
@@ -45,7 +43,7 @@ register_deactivation_hook( __FILE__, array( 'ReduxFrameworkPlugin', 'deactivate
 
 // The above line prevents ReduxFramework from instancing until all plugins have loaded.
 // While this does not matter for themes, any plugin using Redux will not load properly.
-// Waiting until all plugsin have been loaded prevents the ReduxFramework class from 
-// being created, and fails the !class_exists('ReduxFramework') check in the sample_config.php, 
+// Waiting until all plugsin have been loaded prevents the ReduxFramework class from
+// being created, and fails the !class_exists('ReduxFramework') check in the sample_config.php,
 // and thus prevents any plugin using Redux from loading their config file.
 ReduxFrameworkPlugin::instance();

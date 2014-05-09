@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +19,13 @@
  * @author      Dovy Paukstys
  * @version     3.1.5
  */
-
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_background' ) ) {
+if (!class_exists('ReduxFramework_background')) {
 
     /**
      * Main ReduxFramework_background class
@@ -31,7 +33,7 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
      * @since       3.1.5
      */
     class ReduxFramework_background {
-    
+
         /**
          * Field Constructor.
          *
@@ -41,12 +43,11 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
          * @access      public
          * @return      void
          */
-        function __construct( $field = array(), $value ='', $parent ) {
-        
-          $this->parent = $parent;
-          $this->field = $field;
-          $this->value = $value;
-        
+        function __construct($field = array(), $value = '', $parent) {
+
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
 
         /**
@@ -76,7 +77,7 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
                 'transparent'           => true,
             );
 
-            $this->field = wp_parse_args( $this->field, $defaults );
+            $this->field = wp_parse_args($this->field, $defaults);
 
             // No errors please
             $defaults = array(
@@ -88,10 +89,10 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
                 'background-clip'       => '',
                 'background-origin'     => '',
                 'background-size'       => '',
-                'media' => array(),
-            );            
+                'media'                 => array(),
+            );
 
-            $this->value = wp_parse_args( $this->value, $defaults );          
+            $this->value = wp_parse_args($this->value, $defaults);
 
             $defaults = array(
                 'id'        => '',
@@ -100,178 +101,177 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
                 'thumbnail' => '',
             );
 
-            $this->value['media'] = wp_parse_args( $this->value['media'], $defaults );
+            $this->value['media'] = wp_parse_args($this->value['media'], $defaults);
 
             if ($this->field['background-color'] === true) {
 
                 if (isset($this->value['color']) && empty($this->value['background-color'])) {
-                  $this->value['background-color'] = $this->value['color'];
+                    $this->value['background-color'] = $this->value['color'];
                 }
 
-                echo '<input data-id="'.$this->field['id'].'" name="' . $this->field['name'] . '[background-color]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-background-input redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['background-color'] . '"  data-default-color="' . ( isset($this->field['default']['background-color']) ? $this->field['default']['background-color'] : "" ) . '" />';
+                echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . '[background-color]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-background-input redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['background-color'] . '"  data-default-color="' . ( isset($this->field['default']['background-color']) ? $this->field['default']['background-color'] : "" ) . '" />';
 
-                if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
+                if (!isset($this->field['transparent']) || $this->field['transparent'] !== false) {
                     $tChecked = "";
-                    if ( $this->value['background-color'] == "transparent" ) {
+                    if ($this->value['background-color'] == "transparent") {
                         $tChecked = ' checked="checked"';
                     }
-                    echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency redux-background-input ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';       
+                    echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency redux-background-input ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="' . $this->field['id'] . '-color" value="1"' . $tChecked . '> ' . __('Transparent', 'redux-framework') . '</label>';
                 }
 
-                if (  $this->field['background-repeat'] === true ||  $this->field['background-position'] === true  ||  $this->field['background-attachment'] === true  ) {
+                if ($this->field['background-repeat'] === true || $this->field['background-position'] === true || $this->field['background-attachment'] === true) {
                     echo '<br />';
-                }                
+                }
             }
 
 
-            if ( $this->field['background-repeat'] === true ) {
+            if ($this->field['background-repeat'] === true) {
                 $array = array(
                     'no-repeat' => 'No Repeat',
-                    'repeat' => 'Repeat All',
-                    'repeat-x' => 'Repeat Horizontally',
-                    'repeat-y' => 'Repeat Vertically',
-                    'inherit' => 'Inherit',
+                    'repeat'    => 'Repeat All',
+                    'repeat-x'  => 'Repeat Horizontally',
+                    'repeat-y'  => 'Repeat Vertically',
+                    'inherit'   => 'Inherit',
                 );
-                echo '<select id="'.$this->field['id'].'-repeat-select" data-placeholder="' . __( 'Background Repeat', 'redux-framework' ) . '" name="' . $this->field['name'] . '[background-repeat]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-repeat '.$this->field['class'].'">';
-                    echo '<option></option>';
+                echo '<select id="' . $this->field['id'] . '-repeat-select" data-placeholder="' . __('Background Repeat', 'redux-framework') . '" name="' . $this->field['name'] . '[background-repeat]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-repeat ' . $this->field['class'] . '">';
+                echo '<option></option>';
 
-                    foreach ($array as $k=>$v) {
-                        echo '<option value="'. $k .'"' . selected($this->value['background-repeat'], $k, false) . '>'. $v .'</option>';
-                    }
+                foreach ($array as $k => $v) {
+                    echo '<option value="' . $k . '"' . selected($this->value['background-repeat'], $k, false) . '>' . $v . '</option>';
+                }
                 echo '</select>';
             }
 
-            if ( $this->field['background-clip'] === true ) {
+            if ($this->field['background-clip'] === true) {
                 $array = array(
-                    'inherit' => 'Inherit',
-                    'border-box' => 'Border Box',
-                    'content-box' => 'Content Box',
-                    'padding-box' => 'Padding Box',
+                    'inherit'       => 'Inherit',
+                    'border-box'    => 'Border Box',
+                    'content-box'   => 'Content Box',
+                    'padding-box'   => 'Padding Box',
                 );
-                echo '<select id="'.$this->field['id'].'-repeat-select" data-placeholder="' . __( 'Background Clip', 'redux-framework' ) . '" name="' . $this->field['name'] . '[background-clip]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-clip '.$this->field['class'].'">';
-                    echo '<option></option>';
+                echo '<select id="' . $this->field['id'] . '-repeat-select" data-placeholder="' . __('Background Clip', 'redux-framework') . '" name="' . $this->field['name'] . '[background-clip]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-clip ' . $this->field['class'] . '">';
+                echo '<option></option>';
 
-                    foreach ($array as $k=>$v) {
-                        echo '<option value="'. $k .'"' . selected($this->value['background-clip'], $k, false) . '>'. $v .'</option>';
-                    }
-                echo '</select>';
-            }   
-
-            if ( $this->field['background-origin'] === true ) {
-                $array = array(
-                    'inherit' => 'Inherit',
-                    'border-box' => 'Border Box',
-                    'content-box' => 'Content Box',
-                    'padding-box' => 'Padding Box',
-                );
-                echo '<select id="'.$this->field['id'].'-repeat-select" data-placeholder="' . __( 'Background Origin', 'redux-framework' ) . '" name="' . $this->field['name'] . '[background-origin]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-origin '.$this->field['class'].'">';
-                    echo '<option></option>';
-
-                    foreach ($array as $k=>$v) {
-                        echo '<option value="'. $k .'"' . selected($this->value['background-origin'], $k, false) . '>'. $v .'</option>';
-                    }
-                echo '</select>';
-            }      
-
-            if ( $this->field['background-size'] === true ) {
-                $array = array(
-                    'inherit' => 'Inherit',
-                    'cover' => 'Cover',
-                    'contain' => 'Contain',
-                );
-                echo '<select id="'.$this->field['id'].'-repeat-select" data-placeholder="' . __( 'Background Size', 'redux-framework' ) . '" name="' . $this->field['name'] . '[background-size]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-size '.$this->field['class'].'">';
-                    echo '<option></option>';
-
-                    foreach ($array as $k=>$v) {
-                        echo '<option value="'. $k .'"' . selected($this->value['background-size'], $k, false) . '>'. $v .'</option>';
-                    }
-                echo '</select>';
-            }                                 
-
-            if ( $this->field['background-attachment'] === true ) {
-                $array = array(
-                    'fixed' => 'Fixed',
-                    'scroll' => 'Scroll',
-                    'inherit' => 'Inherit',
-                );
-                echo '<select id="'.$this->field['id'].'-attachment-select" data-placeholder="' . __( 'Background Attachment', 'redux-framework' ) . '" name="' . $this->field['name'] . '[background-attachment]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-attachment '.$this->field['class'].'">';
-                    echo '<option></option>';
-                    foreach ($array as $k=>$v) {
-                        echo '<option value="'. $k .'"' . selected($this->value['background-attachment'], $k, false) . '>'. $v .'</option>';
-                    }
+                foreach ($array as $k => $v) {
+                    echo '<option value="' . $k . '"' . selected($this->value['background-clip'], $k, false) . '>' . $v . '</option>';
+                }
                 echo '</select>';
             }
 
-            if ( $this->field['background-position'] === true ) {
+            if ($this->field['background-origin'] === true) {
                 $array = array(
-                    'left top' => 'Left Top',
-                    'left center' => 'Left center',
-                    'left bottom' => 'Left Bottom',
-                    'center top' => 'Center Top',
+                    'inherit'       => 'Inherit',
+                    'border-box'    => 'Border Box',
+                    'content-box'   => 'Content Box',
+                    'padding-box'   => 'Padding Box',
+                );
+                echo '<select id="' . $this->field['id'] . '-repeat-select" data-placeholder="' . __('Background Origin', 'redux-framework') . '" name="' . $this->field['name'] . '[background-origin]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-origin ' . $this->field['class'] . '">';
+                echo '<option></option>';
+
+                foreach ($array as $k => $v) {
+                    echo '<option value="' . $k . '"' . selected($this->value['background-origin'], $k, false) . '>' . $v . '</option>';
+                }
+                echo '</select>';
+            }
+
+            if ($this->field['background-size'] === true) {
+                $array = array(
+                    'inherit'   => 'Inherit',
+                    'cover'     => 'Cover',
+                    'contain'   => 'Contain',
+                );
+                echo '<select id="' . $this->field['id'] . '-repeat-select" data-placeholder="' . __('Background Size', 'redux-framework') . '" name="' . $this->field['name'] . '[background-size]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-size ' . $this->field['class'] . '">';
+                echo '<option></option>';
+
+                foreach ($array as $k => $v) {
+                    echo '<option value="' . $k . '"' . selected($this->value['background-size'], $k, false) . '>' . $v . '</option>';
+                }
+                echo '</select>';
+            }
+
+            if ($this->field['background-attachment'] === true) {
+                $array = array(
+                    'fixed'     => 'Fixed',
+                    'scroll'    => 'Scroll',
+                    'inherit'   => 'Inherit',
+                );
+                echo '<select id="' . $this->field['id'] . '-attachment-select" data-placeholder="' . __('Background Attachment', 'redux-framework') . '" name="' . $this->field['name'] . '[background-attachment]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-attachment ' . $this->field['class'] . '">';
+                echo '<option></option>';
+                foreach ($array as $k => $v) {
+                    echo '<option value="' . $k . '"' . selected($this->value['background-attachment'], $k, false) . '>' . $v . '</option>';
+                }
+                echo '</select>';
+            }
+
+            if ($this->field['background-position'] === true) {
+                $array = array(
+                    'left top'      => 'Left Top',
+                    'left center'   => 'Left center',
+                    'left bottom'   => 'Left Bottom',
+                    'center top'    => 'Center Top',
                     'center center' => 'Center Center',
                     'center bottom' => 'Center Bottom',
-                    'right top' => 'Right Top',
-                    'right center' => 'Right center',
-                    'right bottom' => 'Right Bottom',
+                    'right top'     => 'Right Top',
+                    'right center'  => 'Right center',
+                    'right bottom'  => 'Right Bottom',
                 );
-                echo '<select id="'.$this->field['id'].'-position-select" data-placeholder="' . __( 'Background Position', 'redux-framework' ) . '" name="' . $this->field['name'] . '[background-position]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-position '.$this->field['class'].'">';
-                    echo '<option></option>';
+                echo '<select id="' . $this->field['id'] . '-position-select" data-placeholder="' . __('Background Position', 'redux-framework') . '" name="' . $this->field['name'] . '[background-position]' . $this->field['name_suffix'] . '" class="redux-select-item redux-background-input background-position ' . $this->field['class'] . '">';
+                echo '<option></option>';
 
-                    foreach ($array as $k=>$v) {
-                        echo '<option value="'. $k .'"' . selected($this->value['background-position'], $k, false) . '>'. $v .'</option>';
-                    }
+                foreach ($array as $k => $v) {
+                    echo '<option value="' . $k . '"' . selected($this->value['background-position'], $k, false) . '>' . $v . '</option>';
+                }
                 echo '</select>';
-            }           
+            }
 
             if ($this->field['background-image'] === true) {
                 echo '<br />';
 
-                if( empty( $this->value ) && !empty( $this->field['default'] ) ) { // If there are standard values and value is empty
-                    if( is_array( $this->field['default'] ) ) {
-                        if( !empty( $this->field['default']['media']['id'] ) ) {
-                          $this->value['media']['id'] = $this->field['default']['media']['id'];
-                        } else if( !empty( $this->field['default']['id'] ) ) {
-                          $this->value['media']['id'] = $this->field['default']['id'];
+                if (empty($this->value) && !empty($this->field['default'])) { // If there are standard values and value is empty
+                    if (is_array($this->field['default'])) {
+                        if (!empty($this->field['default']['media']['id'])) {
+                            $this->value['media']['id'] = $this->field['default']['media']['id'];
+                        } else if (!empty($this->field['default']['id'])) {
+                            $this->value['media']['id'] = $this->field['default']['id'];
                         }
 
-                        if( !empty( $this->field['default']['url'] ) ) {
-                          $this->value['background-image'] = $this->field['default']['url'];
-                        } else if( !empty( $this->field['default']['media']['url'] ) ) {
-                          $this->value['background-image'] = $this->field['default']['media']['url'];
-                        } else if( !empty( $this->field['default']['background-image'] ) ) {
-                          $this->value['background-image'] = $this->field['default']['background-image'];
+                        if (!empty($this->field['default']['url'])) {
+                            $this->value['background-image'] = $this->field['default']['url'];
+                        } else if (!empty($this->field['default']['media']['url'])) {
+                            $this->value['background-image'] = $this->field['default']['media']['url'];
+                        } else if (!empty($this->field['default']['background-image'])) {
+                            $this->value['background-image'] = $this->field['default']['background-image'];
                         }
-          
                     } else {
-                        if( is_numeric( $this->field['default'] ) ) { // Check if it's an attachment ID
+                        if (is_numeric($this->field['default'])) { // Check if it's an attachment ID
                             $this->value['media']['id'] = $this->field['default'];
                         } else { // Must be a URL
                             $this->value['background-image'] = $this->field['default'];
-                        }           
+                        }
                     }
                 }
 
 
-                if( empty( $this->value['background-image'] ) && !empty( $this->value['media']['id'] ) ) {
-                    $img = wp_get_attachment_image_src( $this->value['media']['id'], 'full' );
-                    $this->value['background-image'] = $img[0];
-                    $this->value['media']['width'] = $img[1];
-                    $this->value['media']['height'] = $img[2];
+                if (empty($this->value['background-image']) && !empty($this->value['media']['id'])) {
+                    $img = wp_get_attachment_image_src($this->value['media']['id'], 'full');
+                    $this->value['background-image']    = $img[0];
+                    $this->value['media']['width']      = $img[1];
+                    $this->value['media']['height']     = $img[2];
                 }
 
                 $hide = 'hide ';
 
-                if( (isset( $this->field['preview_media'] ) && $this->field['preview_media'] === false) ) {
+                if ((isset($this->field['preview_media']) && $this->field['preview_media'] === false)) {
                     $this->field['class'] .= " noPreview";
                 }
 
-                if( ( !empty( $this->field['background-image'] ) && $this->field['background-image'] === true ) || isset( $this->field['preview'] ) && $this->field['preview'] === false ) {
+                if ((!empty($this->field['background-image']) && $this->field['background-image'] === true ) || isset($this->field['preview']) && $this->field['preview'] === false) {
                     $hide = '';
-                }   
+                }
 
-                $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected','redux-framework');
+                $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected', 'redux-framework');
 
-                echo '<input placeholder="' . $placeholder .'" type="text" class="redux-background-input ' . $hide . 'upload ' . $this->field['class'] . '" name="' . $this->field['name'] . '[background-image]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][background-image]" value="' . $this->value['background-image'] . '" />';
+                echo '<input placeholder="' . $placeholder . '" type="text" class="redux-background-input ' . $hide . 'upload ' . $this->field['class'] . '" name="' . $this->field['name'] . '[background-image]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][background-image]" value="' . $this->value['background-image'] . '" />';
                 echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->field['name'] . '[media][id]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][media][id]" value="' . $this->value['media']['id'] . '" />';
                 echo '<input type="hidden" class="upload-height" name="' . $this->field['name'] . '[media][height]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][media][height]" value="' . $this->value['media']['height'] . '" />';
                 echo '<input type="hidden" class="upload-width" name="' . $this->field['name'] . '[media][width]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][media][width]" value="' . $this->value['media']['width'] . '" />';
@@ -280,16 +280,16 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
                 //Preview
                 $hide = '';
 
-                if( (isset( $this->field['preview_media'] ) && $this->field['preview_media'] === false) || empty( $this->value['background-image'] ) ) {
+                if ((isset($this->field['preview_media']) && $this->field['preview_media'] === false) || empty($this->value['background-image'])) {
                     $hide = 'hide ';
                 }
 
-                if ( empty( $this->value['media']['thumbnail'] ) && !empty( $this->value['background-image'] ) ) { // Just in case
-                    if ( !empty( $this->value['media']['id'] ) ) {
-                        $image = wp_get_attachment_image_src( $this->value['media']['id'], array(150, 150) );
+                if (empty($this->value['media']['thumbnail']) && !empty($this->value['background-image'])) { // Just in case
+                    if (!empty($this->value['media']['id'])) {
+                        $image = wp_get_attachment_image_src($this->value['media']['id'], array(150, 150));
                         $this->value['media']['thumbnail'] = $image[0];
                     } else {
-                        $this->value['media']['thumbnail'] = $this->value['background-image'];    
+                        $this->value['media']['thumbnail'] = $this->value['background-image'];
                     }
                 }
 
@@ -298,42 +298,37 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
                 echo '<img class="redux-option-image" id="image_' . $this->value['media']['id'] . '" src="' . $this->value['media']['thumbnail'] . '" alt="" target="_blank" rel="external" />';
                 echo '</a>';
                 echo '</div>';
-            
+
                 //Upload controls DIV
                 echo '<div class="upload_button_div">';
 
                 //If the user has WP3.5+ show upload/remove button
-                echo '<span class="button background_upload_button" id="' . $this->field['id'] . '-media">' . __( 'Upload', 'redux-framework' ) . '</span>';
-                
+                echo '<span class="button redux-background-upload" id="' . $this->field['id'] . '-media">' . __('Upload', 'redux-framework') . '</span>';
+
                 $hide = '';
-                if( empty( $this->value['background-image'] ) || $this->value['background-image'] == '' )
-                    $hide =' hide';
+                if (empty($this->value['background-image']) || $this->value['background-image'] == '')
+                    $hide = ' hide';
 
-                echo '<span class="button remove-image' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __( 'Remove', 'redux-framework' ) . '</span>';
+                echo '<span class="button removeCSS redux-remove-background' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __('Remove', 'redux-framework') . '</span>';
 
-                echo '</div>';  
-
-
-            }  
+                echo '</div>';
+            }
 
 
             /**
-            Preview
-             **/
-            if (!isset( $this->field['preview'] ) || $this->field['preview'] !== false):
-                
+              Preview
+             * */
+            if (!isset($this->field['preview']) || $this->field['preview'] !== false):
+
                 $css = $this->getCSS();
                 if (empty($css)) {
                     $css = "display:none;";
                 }
-                $css .= "height: ".$this->field['preview_height'].";";
-                echo '<p class="clear '.$this->field['id'].'_previewer background-preview" style="'.$css.'">&nbsp;</p>';
+                $css .= "height: " . $this->field['preview_height'] . ";";
+                echo '<p class="clear ' . $this->field['id'] . '_previewer background-preview" style="' . $css . '">&nbsp;</p>';
 
-            endif;                        
-            
-    }
-
-    
+            endif;
+        }
 
         /**
          * Enqueue Function.
@@ -346,74 +341,69 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
          */
         public function enqueue() {
             wp_enqueue_script(
-                'redux-field-background-js',
-                ReduxFramework::$_url . 'inc/fields/background/field_background.js',
-                array( 'jquery', 'wp-color-picker', 'select2-js' ),
-                time(),
+                'redux-field-background-js', 
+                ReduxFramework::$_url . 'inc/fields/background/field_background.js', 
+                array('jquery', 'wp-color-picker', 'select2-js'), 
+                time(), 
                 true
             );
 
             wp_enqueue_script(
                 'field-select-js', 
-                ReduxFramework::$_url.'inc/fields/select/field_select.js',
-                array('jquery', 'select2-js'),
-                time(),
+                ReduxFramework::$_url . 'inc/fields/select/field_select.js', 
+                array('jquery', 'select2-js'), 
+                time(), 
                 true
             );
 
             wp_enqueue_style(
-                'redux-field-background-css',
-                ReduxFramework::$_url . 'inc/fields/background/field_background.css',
-                time(),
+                'redux-field-background-css', 
+                ReduxFramework::$_url . 'inc/fields/background/field_background.css', 
+                time(), 
                 true
             );
 
             wp_enqueue_style(
                 'redux-field-select-css', 
-                ReduxFramework::$_url.'inc/fields/select/field_select.css', 
-                time(),
+                ReduxFramework::$_url . 'inc/fields/select/field_select.css', 
+                time(), 
                 true
-            );  
-
+            );
         }
 
-        public function getCSS( $value = array() ) {
+        public static function getCSS($value = array()) {
 
             $css = '';
 
-            if (!empty($value)) {
-                foreach($value as $key=>$value) {
+            if (!empty($value) && is_array($value)) {
+                foreach ($value as $key => $value) {
                     if (!empty($value) && $key != "media") {
                         if ($key == "background-image") {
-                            $css .= $key.":url('".$value."');";
+                            $css .= $key . ":url('" . $value . "');";
                         } else {
-                            $css .= $key.":".$value.";";    
+                            $css .= $key . ":" . $value . ";";
                         }
-                        
                     }
-                }                
+                }
             }
             return $css;
         }
 
         public function output() {
+            $style = $this->getCSS($this->value);
+            
+            if (!empty($style)) {
 
-            $style = $this->getCSS( $this->value );
-            if ( !empty( $style ) ) {             
-                
-                if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+                if (!empty($this->field['output']) && is_array($this->field['output'])) {
                     $keys = implode(",", $this->field['output']);
-                    $this->parent->outputCSS .= $keys . "{" . $style . '}';  
+                    $this->parent->outputCSS .= $keys . "{" . $style . '}';
                 }
 
-                if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+                if (!empty($this->field['compiler']) && is_array($this->field['compiler'])) {
                     $keys = implode(",", $this->field['compiler']);
                     $this->parent->compilerCSS .= $keys . "{" . $style . '}';
-                }   
-
+                }
             }
-        
         }
-
     }
 }

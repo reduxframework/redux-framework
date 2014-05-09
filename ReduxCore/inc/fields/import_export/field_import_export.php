@@ -22,9 +22,12 @@
  */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-if( !class_exists( 'ReduxFramework_import_export' ) ) {
+if (!class_exists('ReduxFramework_import_export')) {
+
     /**
      * Main ReduxFramework_import_export class
      *
@@ -41,22 +44,21 @@ if( !class_exists( 'ReduxFramework_import_export' ) ) {
          * @access      public
          * @return      void
          */
-        public function __construct( $field = array(), $value ='', $parent ) {
-            $this->parent = $parent;
-            $this->field = $field;
-            $this->value = $value;
-            
+        public function __construct($field = array(), $value = '', $parent) {
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
+
             if (!isset($this->field['full_width'])) {
                 $this->field['full_width'] = true;
             }
-            
+
             $args = array(
                 'full_width' => $this->field['full_width']
             );
-            
+
             $this->parent->import_export->field_args = $args;
         }
-
 
         /**
          * Field Render Function.

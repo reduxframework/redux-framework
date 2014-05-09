@@ -1,10 +1,10 @@
 === Redux Framework ===
-Contributors: ghost1227, dovyp, kprovance
+Contributors: section214, dovyp, kprovance
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.0
-Stable tag: 3.2.6
+Stable tag: 3.2.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,10 +125,22 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+= 3.2.8 =
+* Fixed:        Formatting of field files. Normalizing headers.
+* Added:        is_empty / empty / !isset    AND    not_empty / !empty / isset as required operations
+* Fixed:        Reset defaults error.
+* Added:        `show` argument to turn on and off input boxes in slider.
+* Fixed:        Required now works with muti-check fields and button set when set to multi.
+
+= 3.2.7 =
+* Fixed:        Import works again. A single line was missed...
+* Fixed:        link_color field not outputting CSS properly via compiler or output.  Thanks @vertigo7x
+* Fixed:        Sorter field CSS.  Buttons were all smushed together.
+* Fixed:        'undefined' error in typography.js.  Thanks @ksere.
+
 = 3.2.6 =
 * Fixed:        Another stray undefined index. Oy.
 * Added:        `open_expanded` argument to start the panel completely expanded initially.
-
 
 = 3.2.5 =
 * Fixed:        Various bad mistakes. Oy.

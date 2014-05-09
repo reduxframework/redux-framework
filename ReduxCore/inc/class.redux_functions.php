@@ -26,6 +26,23 @@ if (!class_exists('Redux_Functions')) {
         static public $_parent;
 
         /**
+         * initWpFilesystem - Initialized the Wordpress filesystem, if it already isn't.
+         *
+         * @since       3.2.3
+         * @access      public
+         * @return      void
+         */
+        static public function initWpFilesystem() {
+            global $wp_filesystem;
+
+            // Initialize the Wordpress filesystem, no more using file_put_contents function
+            if (empty($wp_filesystem)) {
+                require_once (ABSPATH . '/wp-admin/includes/file.php');
+                WP_Filesystem();
+            }            
+        }
+        
+        /**
          * modRewriteCheck - Check for the installation of apache mod_rewrite
          *
          * @since       3.2.3

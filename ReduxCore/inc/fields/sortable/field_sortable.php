@@ -1,133 +1,145 @@
 <?php
 
-class ReduxFramework_sortable {
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-    /**
-     * Field Constructor.
-     *
-     * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-     *
-     * @since Redux_Options 2.0.1
-     */
-    function __construct($field = array(), $value = '', $parent) {
+if (!class_exists('ReduxFramework_sortable')) {
+    class ReduxFramework_sortable {
 
-        //parent::__construct( $parent->sections, $parent->args );
-        $this->parent = $parent;
-        $this->field = $field;
-        $this->value = $value;
-    }
-
-    /**
-     * Field Render Function.
-     *
-     * Takes the vars and outputs the HTML for the field in the settings
-     *
-     * @since Redux_Options 2.0.1
-     */
-    function render() {
-
-        if (empty($this->field['mode'])) {
-            $this->field['mode'] = "text";
+        /**
+         * Field Constructor.
+         *
+         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+         *
+         * @since Redux_Options 2.0.1
+         */
+        function __construct($field = array(), $value = '', $parent) {
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
 
-        if ($this->field['mode'] != "checkbox" && $this->field['mode'] != "text") {
-            $this->field['mode'] = "text";
-        }
+        /**
+         * Field Render Function.
+         *
+         * Takes the vars and outputs the HTML for the field in the settings
+         *
+         * @since Redux_Options 2.0.1
+         */
+        function render() {
 
-        $class = (isset($this->field['class'])) ? $this->field['class'] : '';
-        $options = $this->field['options'];
+            if (empty($this->field['mode'])) {
+                $this->field['mode'] = "text";
+            }
 
-        // This is to weed out missing options that might be in the default
-        // Why?  Who knows.  Call it a dummy check.
-        if (!empty($this->value)) {
-            foreach ($this->value as $k => $v) {
-                if (!isset($options[$k])) {
-                    unset($this->value[$k]);
+            if ($this->field['mode'] != "checkbox" && $this->field['mode'] != "text") {
+                $this->field['mode'] = "text";
+            }
+
+            $class = (isset($this->field['class'])) ? $this->field['class'] : '';
+            $options = $this->field['options'];
+
+            // This is to weed out missing options that might be in the default
+            // Why?  Who knows.  Call it a dummy check.
+            if (!empty($this->value)) {
+                foreach ($this->value as $k => $v) {
+                    if (!isset($options[$k])) {
+                        unset($this->value[$k]);
+                    }
                 }
             }
-        }
 
-        $noSort = false;
-        foreach ($options as $k => $v) {
-            if (!isset($this->value[$k])) {
-
-                // A save has previously been done.
-                if (array_key_exists($k, $this->value)) {
-                    $this->value[$k] = $v;
-
-                    // Missing database entry, meaning no save has yet been done.
-                } else {
-                    $noSort = true;
-                    $this->value[$k] = '';
-                }
-            }
-        }
-
-        // If missing database entries are found, it means no save has been done
-        // and therefore no sort should be done.  Set the default array in the same
-        // order as the options array.  Why?  The sort order is based on the
-        // saved default array.  If entries are missing, the sort is messed up. 
-        // - kp
-        if (true == $noSort) {
-            $dummyArr = array();
-
+            $noSort = false;
             foreach ($options as $k => $v) {
-                $dummyArr[$k] = $this->value[$k];
+                if (!isset($this->value[$k])) {
+
+                    // A save has previously been done.
+                    if (array_key_exists($k, $this->value)) {
+                        $this->value[$k] = $v;
+
+                        // Missing database entry, meaning no save has yet been done.
+                    } else {
+                        $noSort = true;
+                        $this->value[$k] = '';
+                    }
+                }
             }
-            unset($this->value);
-            $this->value = $dummyArr;
-            unset($dummytArr);
+
+            // If missing database entries are found, it means no save has been done
+            // and therefore no sort should be done.  Set the default array in the same
+            // order as the options array.  Why?  The sort order is based on the
+            // saved default array.  If entries are missing, the sort is messed up.
+            // - kp
+            if (true == $noSort) {
+                $dummyArr = array();
+
+                foreach ($options as $k => $v) {
+                    $dummyArr[$k] = $this->value[$k];
+                }
+                unset($this->value);
+                $this->value = $dummyArr;
+                unset($dummytArr);
+            }
+
+            echo '<ul id="' . $this->field['id'] . '-list" class="redux-sortable ' . $class . '">';
+
+
+            foreach ($this->value as $k => $nicename) {
+
+                echo '<li>';
+
+                $checked = "";
+                $name = 'name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" ';
+                if ($this->field['mode'] == "checkbox") {
+                    $value_display = $this->value[$k];
+
+                    if (!empty($this->value[$k])) {
+                        $checked = 'checked="checked" ';
+                    }
+                    $class .= " checkbox_sortable";
+                    $name = "";
+                    echo '<input type="hidden" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-' . $k . '-hidden" value="' . $value_display . '" />';
+
+                    echo '<div class="checkbox-container">';
+                } else {
+                    $value_display = isset($this->value[$k]) ? $this->value[$k] : '';
+
+                }
+                echo '<input rel="' . $this->field['id'] . '-' . $k . '-hidden" class="' . $class . '" ' . $checked . 'type="' . $this->field['mode'] . '" '.$name.'id="' . $this->field['id'] . '[' . $k . ']" value="' . esc_attr($value_display) . '" placeholder="' . $nicename . '" />';
+
+                echo '<span class="compact drag"><i class="el-icon-move icon-large"></i></span>';
+                if ($this->field['mode'] == "checkbox" || (isset($this->field['label']) && $this->field['label'] == true )) {
+                    if ($this->field['mode'] != "checkbox") {
+                        echo "<br />";
+                    }
+                    echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $options[$k] . '</strong></label>';
+                }
+                if ($this->field['mode'] == "checkbox") {
+                    echo '</div>';
+                }
+                echo '</li>';
+            }
+            echo '</ul>';
         }
 
-        echo '<ul id="' . $this->field['id'] . '-list" class="redux-sortable ' . $class . '">';
+        function enqueue() {
 
+            wp_enqueue_style(
+                'redux-field-sortable-css',
+                ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.css',
+                time(),
+                true
+            );
 
-        foreach ($this->value as $k => $nicename) {
-
-            echo '<li>';
-
-            $checked = "";
-
-            if ($this->field['mode'] == "checkbox") {
-                $value_display = $this->value[$k];
-
-                if (!empty($this->value[$k])) {
-                    $checked = 'checked="checked" ';
-                }
-                $class .= " checkbox_sortable";
-
-                echo '<input type="hidden" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-' . $k . '-hidden" value="' . $value_display . '" />';
-
-                echo '<div class="checkbox-container">';
-            } else {
-                $value_display = isset($this->value[$k]) ? $this->value[$k] : '';
-            }
-            echo '<input rel="' . $this->field['id'] . '-' . $k . '-hidden" class="' . $class . '" ' . $checked . 'type="' . $this->field['mode'] . '" id="' . $this->field['id'] . '[' . $k . ']" value="' . esc_attr($value_display) . '" placeholder="' . $nicename . '" />';
-
-            echo '<span class="compact drag"><i class="el-icon-move icon-large"></i></span>';
-            if ($this->field['mode'] == "checkbox" || (isset($this->field['label']) && $this->field['label'] == true )) {
-                if ($this->field['mode'] != "checkbox") {
-                    echo "<br />";
-                }
-                echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $options[$k] . '</strong></label>';
-            }
-            if ($this->field['mode'] == "checkbox") {
-                echo '</div>';
-            }
-            echo '</li>';
+            wp_enqueue_script(
+                'redux-field-sortable-js',
+                ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.js',
+                array('jquery'),
+                time(),
+                true
+            );
         }
-        echo '</ul>';
     }
-
-    function enqueue() {
-
-        wp_enqueue_style(
-                'redux-field-sortable-css', ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.css', time(), true
-        );
-
-        wp_enqueue_script(
-                'redux-field-sortable-js', ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.js', array('jquery'), time(), true
-        );
-    }
-
 }

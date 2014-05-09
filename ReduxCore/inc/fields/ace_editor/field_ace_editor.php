@@ -17,59 +17,54 @@
  * @subpackage  ACE_Editor
  * @version     3.0.0
  */
-
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')){
+    exit;
+}
 
 // Don't duplicate me!
-if( class_exists( 'ReduxFramework_ace_editor' ) ) return;
+if (!class_exists('ReduxFramework_ace_editor')){
+    class ReduxFramework_ace_editor {
 
-class ReduxFramework_ace_editor { 
-
-    /**
-     * Field Constructor.
-     *
-     * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-     *
-     * @since ReduxFramework 1.0.0
-    */
-    function __construct( $field = array(), $value ='', $parent ) {
-    
-        //parent::__construct( $parent->sections, $parent->args );
-        $this->parent = $parent;
-        $this->field = $field;
-        $this->value = trim($value);
-
-    }
-
-    /**
-     * Field Render Function.
-     *
-     * Takes the vars and outputs the HTML for the field in the settings
-     *
-     * @since ReduxFramework 1.0.0
-    */
-    function render() {
-
-        if( !isset($this->field['mode']) ){
-            $this->field['mode'] = 'javascript';
-        }
-        if( !isset($this->field['theme']) ){
-            $this->field['theme'] = 'monokai';
+        /**
+         * Field Constructor.
+         *
+         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+         *
+         * @since ReduxFramework 1.0.0
+         */
+        function __construct($field = array(), $value = '', $parent) {
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = trim($value);
         }
 
-        ?>
-        <div class="ace-wrapper">
-            <textarea name="<?php echo $this->field['name'].$this->field['name_suffix']; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor hide <?php echo $this->field['class']; ?>" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
-                <?php echo $this->value; ?>
-            </textarea>
-            <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars( $this->value ); ?></pre>
-        </div>
-    <?php
-        
-    }
-    
-    /**
+        /**
+         * Field Render Function.
+         *
+         * Takes the vars and outputs the HTML for the field in the settings
+         *
+         * @since ReduxFramework 1.0.0
+         */
+        function render() {
+
+            if (!isset($this->field['mode'])) {
+                $this->field['mode'] = 'javascript';
+            }
+            if (!isset($this->field['theme'])) {
+                $this->field['theme'] = 'monokai';
+            }
+            ?>
+            <div class="ace-wrapper">
+                <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>" id="<?php echo $this->field['id']; ?>-textarea" class="ace-editor hide <?php echo $this->field['class']; ?>" data-editor="<?php echo $this->field['id']; ?>-editor" data-mode="<?php echo $this->field['mode']; ?>" data-theme="<?php echo $this->field['theme']; ?>">
+                    <?php echo $this->value; ?>
+                </textarea>
+                <pre id="<?php echo $this->field['id']; ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars($this->value); ?></pre>
+            </div>
+            <?php
+        }
+
+        /**
          * Enqueue Function.
          *
          * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
@@ -81,17 +76,18 @@ class ReduxFramework_ace_editor {
         public function enqueue() {
 
             wp_enqueue_style(
-                'redux-field-ace-editor-css', 
+                'redux-field-ace-editor-css',
                 ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.css',
                 time(),
                 true
             );
             wp_enqueue_script(
-                'redux-field-ace-editor-js', 
-                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js', 
-                array( 'jquery', 'ace-editor-js' ),
+                'redux-field-ace-editor-js',
+                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.js',
+                array('jquery', 'ace-editor-js'),
                 time(),
                 true
             );
         }
+    }
 }
