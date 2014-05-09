@@ -17,6 +17,7 @@
     padding:0px 14px !important;
     margin-top:0;
     margin-bottom:0;
+    margin-left:4px !important;
     font-size:12px !important;
   }
   .clearfix {
@@ -35,7 +36,7 @@
     position:relative;
     float:left;
     clear:none;
-    margin:0 1% 0 0;
+    margin:0 10px 0 0;
     width:48% !important;
     min-width:210px !important;
     max-width:324px !important;
@@ -50,8 +51,8 @@
       float:left;
       height:28px !important;
       line-height:50px !important;
-      padding:3px !important;
-      width:99% !important;
+      padding:0px !important;
+      width:100% !important;
       -webkit-box-sizing:border-box;
       -moz-box-sizing:border-box;
       -o-box-sizing:border-box;
@@ -62,7 +63,7 @@
     margin-right:0 !important;
   }
   .select_wrapper:nth-child(odd) {
-    margin-right:5px !important;
+    margin-right:10px !important;
   }
   .wp-picker-container {
     float:left;
@@ -74,6 +75,9 @@
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+/*  .wp-color-result {
+     margin-right:3px;
+    }*/
   }
   .input_wrapper {
     display:block;
@@ -208,31 +212,31 @@
     line-height:19px;
   }
 }
- @media screen and (max-width:540px) {
-.redux-main .redux-typography-container {
-  max-width:230px;
-  margin:0 auto;
-  .select_wrapper {
-    max-width:210px;
-    min-width:210px;
-    width:210px;
-    margin-left:0 !important;
-    margin-right:0 !important;
+@media screen and (max-width:540px) {
+  .redux-main .redux-typography-container {
+    max-width:230px;
+    margin:0 auto;
+    .select_wrapper {
+      max-width:210px;
+      min-width:210px;
+      width:210px;
+      margin-left:0 !important;
+      margin-right:0 !important;
+    }
+    .input_wrapper {
+      max-width:101px;
+      min-width:101px;
+      width:101px;
+      margin-left:0 !important;
+      margin-right:5px !important;
+    }
   }
-  .input_wrapper {
-    max-width:101px;
-    min-width:101px;
-    width:101px;
-    margin-left:0 !important;
-    margin-right:5px !important;
+  .redux-main .wp-picker-container .wp-picker-input-wrap {
+    margin-top:7px;
   }
 }
-.redux-main .wp-picker-container .wp-picker-input-wrap {
-  margin-top:7px;
-}
-}
- @media screen and (max-width:360px) {
-.redux-main .redux-typography-container .iris-picker .iris-square {
-  margin-right: 3%;
-}
+@media screen and (max-width:360px) {
+  .redux-main .redux-typography-container .iris-picker .iris-square {
+    margin-right: 3%;
+  }
 }
