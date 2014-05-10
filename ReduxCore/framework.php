@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.13';
+        public static $_version = '3.2.8.14';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -376,8 +376,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
                 }
 
-                // Any dynamic CSS output, let's run
-                add_action( 'wp_head', array( &$this, '_enqueue_output' ), 150 );
+                // Output dynamic CSS
+                add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+                
+                // Enqueue dynamic CSS and Google fonts
+                add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
 
                 require_once(self::$_dir . 'inc/fields/import_export/import_export.php');
                 $this->import_export = new Redux_import_export($this);
@@ -1215,11 +1218,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
          *
          * @since       3.1.5.16
          * @access      public
-         * @global      $wp_styles
+         * @global      $menu, $submenu, $wp_admin_bar
          * @return      void
          */
         function _admin_bar_menu() {
-            global $menu, $submenu, $wp_admin_bar, $redux_demo;
+            global $menu, $submenu, $wp_admin_bar;
             
             $ct         = wp_get_theme();
             $theme_data = $ct;
@@ -1268,16 +1271,34 @@ if( !class_exists( 'ReduxFramework' ) ) {
         } // _admin_bar_menu()
 
         /**
-         * Enqueue CSS/JS for options page
+         * Output dynamic CSS at bottom of HEAD
+         *
+         * @since       3.2.8
+         * @access      public
+         * @return      void
+         */
+        public function _output_css() {
+            if( $this->args[ 'output' ] == false && $this->args[ 'compiler' ] == false ) {
+                return;
+            }
+
+            if ( isset( $this->no_output ) ) {
+                return;
+            }
+            
+            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset( $_POST['customized'] ) ) ) ) {
+                echo '<style type="text/css" title="dynamic-css" class="options-output">' . $this->outputCSS . '</style>';
+            }
+        }
+        
+        /**
+         * Enqueue CSS and Google fonts for front end
          *
          * @since       1.0.0
          * @access      public
-         * @global      $wp_styles
          * @return      void
          */
         public function _enqueue_output() {
-            global $pagenow;
-                        
             if( $this->args[ 'output' ] == false && $this->args[ 'compiler' ] == false ) {
                 return;
             }
@@ -1321,7 +1342,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     $field['output'] = array( $field['output'] );
                                 }
                                 
-                                $value      = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
+                                $value      = isset($this->options[$field['id']]) ? $this->options[$field['id']] : '';
                                 $enqueue    = new $field_class( $field, $value, $this );
 
                                 if ( ( ( isset( $field['output'] ) && !empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && !empty( $field['compiler'] ) ) || $field['type'] == "typography" || $field['type'] == "icon_select" ) ) {
@@ -1338,9 +1359,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 return;
             }
             
-            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset( $_POST['customized'] ) ) ) ) {
-                echo '<style type="text/css" title="dynamic-css" class="options-output">'.$this->outputCSS.'</style>';
-            }
+//            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset( $_POST['customized'] ) ) ) ) {
+//                echo '<style type="text/css" title="dynamic-css" class="options-output">' . $this->outputCSS . '</style>';
+//            }
 
             if ( !empty( $this->typography ) && !empty( $this->typography ) && filter_var( $this->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
                 $version = !empty( $this->transients['last_save'] ) ? $this->transients['last_save'] : '';
@@ -1372,9 +1393,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 } else {
                     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https:" : "http:";
 
-                    echo '<link rel="stylesheet" id="options-google-fonts" title="" href="'.$protocol.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
-                    //wp_register_style( 'redux-google-fonts', $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
-                    //wp_enqueue_style( 'redux-google-fonts' );
+                    //echo '<link rel="stylesheet" id="options-google-fonts" title="" href="'.$protocol.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
+                    wp_register_style( 'redux-google-fonts', $protocol . $typography->makeGoogleWebfontLink( $this->typography ), '', $version );
+                    wp_enqueue_style( 'redux-google-fonts' );
                 }
             }
 

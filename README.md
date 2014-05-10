@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.14 =
+* Fixed:      'Cannot send header' issues with typography.
+* Modified:   Google CSS moved into HEAD via WP enqueue.
+
 = 3.2.8.13 =
 * Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
 

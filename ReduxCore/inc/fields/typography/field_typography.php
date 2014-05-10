@@ -600,8 +600,6 @@ class ReduxFramework_typography {
     }
 
     function output() {
-        global $wp_styles;
-
         $font = $this->value;
         // Check for font-backup.  If it's set, stick it on a variabhle for
         // later use.
