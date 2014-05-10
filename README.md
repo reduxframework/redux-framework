@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.15 =
+* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
+
 = 3.2.8.14 =
 * Fixed:      'Cannot send header' issues with typography.
 * Modified:   Google CSS moved into HEAD via WP enqueue.

@@ -86,6 +86,7 @@ if (!class_exists('ReduxFramework_extension_customizer')) {
                 add_action("redux/options/{$this->parent->args['opt_name']}/options", array($this, '_override_values'), 100);
                 add_action('customize_save', array($this, 'customizer_save_before')); // Before save
                 add_action('customize_save_after', array(&$this, 'customizer_save_after')); // After save
+                add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
             }
 
 
@@ -93,6 +94,9 @@ if (!class_exists('ReduxFramework_extension_customizer')) {
             //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
             //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 );
             //$this->_enqueue_new();
+        }
+        function customize_preview_init() {
+            do_action('redux/customizer/live_preview');
         }
 
         public function _override_values($data) {
