@@ -5,6 +5,17 @@
   padding:0;
   width:100%;
   max-width:660px;
+   .clearfix {
+    clear:both;
+  }
+  .clearfix:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+  }
   .input_wrapper input, .color-picker-container input {
     font-size:12px;
   }
@@ -17,25 +28,15 @@
     padding:0px 14px !important;
     margin-top:0;
     margin-bottom:0;
+    margin-left:4px !important;
     font-size:12px !important;
-  }
-  .clearfix {
-    clear:both;
-  }
-  .clearfix:after {
-    visibility:hidden;
-    display:block;
-    font-size:0;
-    content:" ";
-    clear:both;
-    height:0;
   }
   .select_wrapper {
     display:block;
     position:relative;
     float:left;
     clear:none;
-    margin:0 1% 0 0;
+    margin:0 10px 0 0;
     width:48% !important;
     min-width:210px !important;
     max-width:324px !important;
@@ -50,8 +51,8 @@
       float:left;
       height:28px !important;
       line-height:50px !important;
-      padding:3px !important;
-      width:99% !important;
+      padding:0px !important;
+      width:100% !important;
       -webkit-box-sizing:border-box;
       -moz-box-sizing:border-box;
       -o-box-sizing:border-box;
@@ -62,7 +63,7 @@
     margin-right:0 !important;
   }
   .select_wrapper:nth-child(odd) {
-    margin-right:5px !important;
+    margin-right:10px !important;
   }
   .wp-picker-container {
     float:left;
@@ -74,6 +75,9 @@
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+/*  .wp-color-result {
+     margin-right:3px;
+    }*/
   }
   .input_wrapper {
     display:block;
