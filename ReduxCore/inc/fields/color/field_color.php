@@ -111,7 +111,16 @@ if (!class_exists('ReduxFramework_color')) {
             if (!empty($this->value)) {
                 $mode = ( isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'color' );
 
-                $style .= $mode . ':' . $this->value . ';';
+               if (strpos($mode, ',') !== false) { 
+					$mode = explode(",", $mode);
+						foreach ($mode as $modeval) { 
+							$style .= $modeval . ':' . $this->value . ';';
+						}
+				} else {
+					$style .= $mode . ':' . $this->value . ';';
+				}
+				
+				unset($modeval); // break the reference with the last element
 
                 if (!empty($this->field['output']) && is_array($this->field['output'])) {
                     $keys = implode(",", $this->field['output']);
