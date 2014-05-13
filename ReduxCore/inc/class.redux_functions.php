@@ -26,6 +26,51 @@ if (!class_exists('Redux_Functions')) {
         static public $_parent;
 
         /**
+         * Parse CSS from output/compiler array
+         *
+         * @since       3.2.8
+         * @access      private
+         * @return      $css CSS string
+         */        
+        public static function parseCSS($cssArray = array(), $style = '', $value = ''){
+            
+            // Something wrong happened
+            if (count($cssArray) == 0) {
+                return;
+                
+            // The old way
+            } elseif (count($cssArray) == 1) {
+                $css = self::theOldWay($cssArray, $style);
+                
+            // the new way (or multiple selectors from the old way)
+            } elseif (count($cssArray) > 1) {
+                $css = '';
+                foreach($cssArray as $element => $selector) {
+
+                    // The old way
+                    if ($element === 0) {
+                        $css = self::theOldWay($cssArray, $style);
+                        return $css;
+                    }
+                    
+                    // New way continued
+                    $cssStyle = $element . ':' . $value . ';';
+                    
+                    $css .= $selector . '{' . $cssStyle . '}';
+                }
+            }
+            
+            return $css;
+        }
+        
+        private static function theOldWay($cssArray, $style){
+            $keys = implode(",", $cssArray);
+            $css = $keys . "{" . $style . '}';
+            
+            return $css;
+        }
+        
+        /**
          * initWpFilesystem - Initialized the Wordpress filesystem, if it already isn't.
          *
          * @since       3.2.3

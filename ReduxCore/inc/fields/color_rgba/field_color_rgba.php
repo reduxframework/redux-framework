@@ -88,24 +88,23 @@ if (!class_exists('ReduxFramework_color_rgba')) {
                 return;
             }
 
-            $style = '';
             if (!empty($this->value)) {
                 $mode = ( isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'color' );
 
                 if ($this->value['alpha'] == "0.00" || empty($this->value['color'])) {
-                    $style .= $mode . ':transparent;';
+                    $style = $mode . ':transparent;';
                 } elseif (!empty($this->value['color'])) {
-                    $style .= $mode . ':rgba(' . Redux_Helpers::hex2rgba($this->value['color']) . ',' . $this->value['alpha'] . ');';
+                    $style = $mode . ':rgba(' . Redux_Helpers::hex2rgba($this->value['color']) . ',' . $this->value['alpha'] . ');';
                 }
 
                 if (!empty($this->field['output']) && is_array($this->field['output'])) {
-                    $keys = implode(",", $this->field['output']);
-                    $this->parent->outputCSS .= $keys . "{" . $style . '}';
+                    $css = Redux_Functions::parseCSS($this->field['output'], $style, $this->value);
+                    $this->parent->outputCSS .= $css;
                 }
 
                 if (!empty($this->field['compiler']) && is_array($this->field['compiler'])) {
-                    $keys = implode(",", $this->field['compiler']);
-                    $this->parent->compilerCSS .= $keys . "{" . $style . '}';
+                    $css = Redux_Functions::parseCSS($this->field['compiler'], $style, $this->value);
+                    $this->parent->compilerCSS .= $css;
                 }
             }
         }

@@ -74,6 +74,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.16 =
+* Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.  Example:
+```
+              'output' => array('color' => '.site-title, .site-header', 'background-color' => '.site-background')
+```
+
 = 3.2.8.15 =
 * Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
 

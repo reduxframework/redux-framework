@@ -114,13 +114,14 @@ if (!class_exists('ReduxFramework_color')) {
                 $style .= $mode . ':' . $this->value . ';';
 
                 if (!empty($this->field['output']) && is_array($this->field['output'])) {
-                    $keys = implode(",", $this->field['output']);
-                    $this->parent->outputCSS .= $keys . "{" . $style . '}';
+                    $css = Redux_Functions::parseCSS($this->field['output'], $style, $this->value);
+                    $this->parent->outputCSS .= $css;
                 }
 
                 if (!empty($this->field['compiler']) && is_array($this->field['compiler'])) {
-                    $keys = implode(",", $this->field['compiler']);
-                    $this->parent->compilerCSS .= $keys . "{" . $style . '}';
+                    $css = Redux_Functions::parseCSS($this->field['compiler'], $style, $this->value);
+                    $this->parent->compilerCSS .= $css;
+                    
                 }
             }
         }

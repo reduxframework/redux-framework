@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.15';
+        public static $_version = '3.2.8.16';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -1287,6 +1287,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
             
             if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset( $_POST['customized'] ) ) ) ) {
+                echo $this->outputCSS;
                 echo '<style type="text/css" title="dynamic-css" class="options-output">' . $this->outputCSS . '</style>';
             }
         }
@@ -1359,10 +1360,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 return;
             }
             
-//            if ( !empty( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset( $_POST['customized'] ) ) ) ) {
-//                echo '<style type="text/css" title="dynamic-css" class="options-output">' . $this->outputCSS . '</style>';
-//            }
-
             if ( !empty( $this->typography ) && !empty( $this->typography ) && filter_var( $this->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
                 $version = !empty( $this->transients['last_save'] ) ? $this->transients['last_save'] : '';
                 $typography = new ReduxFramework_typography( null, null, $this );
