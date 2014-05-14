@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.19 =
+* Fixed:      Redux not saving when validating uploads.
+* Modified:   Dimension field default now accepts either `units` or `unit`.
+
 = 3.2.8.18 =
 * Fixed:      Border field output/compiler formatting.  Removed 'inherit' in place of default values.  See #1208.
 * Fixed:      Trim() warning in framework.php when saving.  See #1209, #1201.

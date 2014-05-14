@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.18';
+        public static $_version = '3.2.8.19';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -2702,9 +2702,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                         $before = $after = null;
                                         if ( isset( $plugin_options[$field['id']][$key] ) && !empty( $plugin_options[$field['id']][$key] ) ) {
                                             if (is_array($plugin_options[$field['id']][$key])) {
-                                                return;
+                                                $before = $plugin_options[$field['id']][$key] ;
+                                            } else {
+                                                $before = trim( $plugin_options[$field['id']][$key] );
                                             }
-                                            $before = trim( $plugin_options[$field['id']][$key] );
                                         }
                                         
                                         if ( isset( $options[$field['id']][$key] ) && !empty( $options[$field['id']][$key] ) ) {

@@ -58,6 +58,11 @@ if (!class_exists('ReduxFramework_dimensions')) {
 
             $this->value = wp_parse_args($this->value, $defaults);
 
+            if (isset($this->value['unit'])) {
+                $this->value['units'] = $this->value['unit'];
+            }
+            
+            
             /*
              * Acceptable values checks.  If the passed variable doesn't pass muster, we unset them
              * and reset them with default values to avoid errors.
