@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.17 =
+* Fixed:      Typography not outputting all styles when `all_styles` set to true.
+
 = 3.2.8.16 =
 * Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.  Example:
 ```
