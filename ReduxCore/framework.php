@@ -2729,13 +2729,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     }
                                 } else {
                                     if (is_array($plugin_options[$field['id']])) {
-                                        //echo $field['name'];
-                                        //echo $validation->value;
-                                        //print_r($plugin_options[$field['id']]);
-                                        return;
+                                        $pofi = $plugin_options[$field['id']];
+                                    } else {
+                                        $pofi = trim($plugin_options[$field['id']]);
                                     }
                                     
-                                    $validation = new $validate( $this, $field, trim( $plugin_options[$field['id']] ), $options[$field['id']] );
+                                    $validation = new $validate( $this, $field, $pofi, $options[$field['id']] );
                                     $plugin_options[$field['id']] = $validation->value;
                                     
                                     if( isset( $validation->error ) ) {
