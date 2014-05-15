@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.19';
+        public static $_version = '3.2.8.20';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -2354,7 +2354,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _register_extensions() {
             $path       = dirname( __FILE__ ) . '/extensions/';
             $folders    = scandir( $path, 1 );
-
+            
             /**
              * action 'redux/extensions/{opt_name}/before'
              * @param object $this ReduxFramework
@@ -2362,7 +2362,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             do_action( "redux/extensions/{$this->args['opt_name']}/before", $this );
 
             foreach($folders as $folder){
-                if ($folder === '.' or $folder === '..' or !is_dir($path . $folder) ) {
+                if ($folder === '.' || $folder === '..' || !is_dir($path . $folder) || substr($folder, 0, 1) === '.' ) {
                     continue;
                 }
                 

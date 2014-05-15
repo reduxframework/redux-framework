@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.20 =
+* Fixed:      Redux now ignores any directories that begin with `.` in the extension folder.  See #1213.
+
 = 3.2.8.19 =
 * Fixed:      Redux not saving when validating uploads.
 * Modified:   Dimension field default now accepts either `units` or `unit`.
