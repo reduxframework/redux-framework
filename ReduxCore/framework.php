@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,7 +68,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.8.20';
+        public static $_version = '3.2.8.21';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -138,7 +140,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'admin_bar'          => true,           // Show the panel pages on the admin bar
             'help_tabs'          => array(),
             'help_sidebar'       => '',             // __( '', 'redux-framework' );
-            'database'           => '',             // possible: options, theme_mods, theme_mods_expanded, transient
+            'database'           => '',             // possible: options, theme_mods, theme_mods_expanded, transient, network
             'customizer'         => false,          // setting to true forces get_theme_mod_expanded
             'global_variable'    => '',             // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
             'output'             => true,           // Dynamically generate CSS
@@ -150,6 +152,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'update_notice'      => true,           // Recieve an update notice of new commits when in dev mode
             'disable_save_warn'  => false,          // Disable the save warn
             'open_expanded'      => false,          // Start the panel fully expanded to start with
+            'network_admin'      => false,          // Enable network admin when using network database mode
+            'network_sites'      => true,           // Enable sites as well as admin when using network database mode
             'hints' => array(
                 'icon'              => 'icon-question-sign',
                 'icon_position'     => 'right',
@@ -349,6 +353,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Options page
                 add_action( 'admin_menu', array( $this, '_options_page' ) );
 
+                // Add a network menu
+                if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
+                    add_action( 'network_admin_menu', array( $this, '_options_page' ) );
+                }
+
                 // Admin Bar menu
                 add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ) , 999 );
 
@@ -385,6 +394,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 require_once(self::$_dir . 'inc/fields/import_export/import_export.php');
                 $this->import_export = new Redux_import_export($this);
 
+                if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
+                    add_action('network_admin_edit_redux_' . $this->args['opt_name'], array( $this, 'save_network_page' ), 10, 0);
+                    add_action( 'admin_bar_menu', array( $this, 'network_admin_bar'), 999 );
+
+
+                }
+
                 // mod_rewrite check
                 //Redux_Functions::modRewriteCheck();
             }
@@ -399,8 +415,46 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         } // __construct()
 
+
+        public function network_admin_bar( $wp_admin_bar ) {
+
+            $args = array(
+                'id'    => $this->args['opt_name'].'_network_admin',
+                'title' => $this->args['menu_title'],
+                'parent'=> 'network-admin',
+                'href'  => network_admin_url('settings.php').'?page='.$this->args['page_slug'],
+                'meta'  => array( 'class' => 'redux-network-admin' )
+            );
+            $wp_admin_bar->add_node( $args );
+
+        }
+
+        public function stripslashes_deep( $value ) {
+            $value = is_array($value) ?
+                array_map('stripslashes_deep', $value) :
+                stripslashes($value);
+
+            return $value;
+        }
+
+        public function save_network_page() {
+
+            $data = $this->_validate_options( $_POST[$this->args['opt_name']] );
+
+            if (!empty($data)) {
+                $this->set_options( $data );
+            }
+
+            wp_redirect(add_query_arg(array('page' => $this->args['page_slug'], 'updated' => 'true'), network_admin_url('settings.php')));
+            exit();
+        }
+
         public function _update_check() {
-            Redux_Functions::updateCheck(self::$_version);
+            // Only one notice per instance please
+            if ( !isset( $this->update_checked ) ) {
+                Redux_Functions::updateCheck(self::$_version);
+                $this->update_checked = 1;
+            }
         }
 
         public function _admin_notices() {
@@ -551,6 +605,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     foreach ( $value as $k=>$v ) {
                         set_theme_mod( $k, $v );
                     }
+                } else if ( $this->args['database'] === 'network' ) {
+                    // Strip those slashes!
+                    $value = json_decode( stripslashes( json_encode( $value ) ), true);
+                    update_site_option( $this->args['opt_name'], $value );
                 } else {
                     update_option( $this->args['opt_name'], $value );
                 }
@@ -599,6 +657,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 $result = get_theme_mod( $this->args['opt_name'] . '-mods' );
             } else if ( $this->args['database'] === 'theme_mods_expanded' ) {
                 $result = get_theme_mods();
+            } else if ( $this->args['database'] === 'network' ) {
+                $result = get_site_option( $this->args['opt_name'], array() );
+                $result = json_decode(stripslashes(json_encode($result)), true);
             } else {
                 $result = get_option( $this->args['opt_name'], array() );
             }
@@ -2483,7 +2544,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $_COOKIE['redux_current_tab'] = 1;
 
                     unset( $plugin_options['defaults'], $plugin_options['compiler'], $plugin_options['import'], $plugin_options['import_code'] );
-                    if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
+                    if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' || $this->args['database'] == 'network' ) {
                         $this->set_options( $plugin_options );
                         return;
                     }
@@ -2916,7 +2977,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $expanded = ($this->args['open_expanded']) ? ' fully-expanded' : '';
 
             echo '<div class="redux-container' . $expanded . ( !empty( $this->args['class'] ) ? ' ' . $this->args['class'] : '' ) . '">';
-            echo '<form method="post" action="' . './options.php" enctype="multipart/form-data" id="redux-form-wrapper">';
+            $url = './options.php';
+            if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
+                if ( is_network_admin() ) {
+                    $url = './edit.php?action=redux_' . $this->args['opt_name'];
+                }
+            }
+            echo '<form method="post" action="' . $url . '" enctype="multipart/form-data" id="redux-form-wrapper">';
             echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
             echo '<input type="hidden" id="currentSection" name="' . $this->args['opt_name'] . '[redux-section]" value="" />';
             
