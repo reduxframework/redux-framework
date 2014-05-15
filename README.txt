@@ -3,8 +3,8 @@ Contributors: section214, dovyp, kprovance
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 3.9.0
-Stable tag: 3.2.8
+Tested up to: 3.9.1
+Stable tag: 3.2.9
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,44 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.2.9 =
+* Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
+* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
+* Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.
+* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
+* Added:      disable_save_warn flags to the arguments to disable the "you should save" slidedown.
+* Added:      Actions hooks for errors and warnings.
+* Fixed:      Redux now ignores any directories that begin with `.` in the extension folder.  See #1213.
+* Fixed:      Redux not saving when validating uploads.
+* Fixed:      Border field output/compiler formatting.  Removed 'inherit' in place of default values.  See #1208.
+* Fixed:      Trim() warning in framework.php when saving.  See #1209, #1201.
+* Fixed:      Typography not outputting all styles when `all_styles` set to true.
+* Fixed:      'Cannot send header' issues with typography.
+* Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
+* Fixed:      Small CSS classes for flashing fonts where web-font-loader.
+* Fixed:      ASync Flash on fonts. FINALLY. What a pain.
+* Fixed:      3+ JavaScript errors found in the background field. Now works flawlessly.
+* Fixed:      PHP warnings in background field.  #1173.  Thanks, @abossola.
+* Fixed:      CSS validation not respecting child selector symbol. #1162
+* Fixed:      Extra check for typography bug.
+* Fixed:      Error css alignment issue with subsections.
+* Fixed:      javascript error in typography field.
+* Fixed:      Added a title to the google fonts stylesheet to fix validation errors.
+* Fixed:      One more slides field error check, and an extra JS goodie for an extension.
+* Fixed:      Leftover debug code messing up slides field.
+* Fixed:      More reliable saved action hook.
+* Fixed:      Removed erroneous debug output in link_color field.
+* Modified:   Dimension field default now accepts either `units` or `unit`.
+* Modified:   Google CSS moved into HEAD via WP enqueue.
+* Modified:   Now do a trim on all fields before validating. No need to alert because of a space...
+* Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
+* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for subsections is SO hot now.
+* Modified:   Various CSS fixes and improvements.
+* Modified:   Turned of mod_rewrite check.
+* Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
+* Modified:   Error notice stays until all errors are gone. Also updates it's number as errors fixed!
+* Modified:   Moved google font files to proprietary folder in upload to help with permission issues.
 
 = 3.2.8 =
 * Fixed:        Formatting of field files. Normalizing headers.
