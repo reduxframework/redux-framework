@@ -49,16 +49,21 @@ if (!class_exists('Redux_Tracking')) {
 
         function __construct() {
 
+
+
         }
 
         public function load($parent) {
             $this->parent = $parent;
 
+
+
             $this->options = get_option('redux-framework-tracking');
             $this->options['dev_mode'] = $parent->args['dev_mode'];
 
+
             if (!isset($this->options['hash']) || !$this->options['hash'] || empty($this->options['hash'])) {
-                $this->options['hash'] = md5(site_url() . '-' . $_SERVER['REMOTE_ADDR']);
+                $this->options['hash'] = md5(network_site_url() . '-' . $_SERVER['REMOTE_ADDR']);
                 update_option('redux-framework-tracking', $this->options);
             }
 
@@ -79,6 +84,10 @@ if (!class_exists('Redux_Tracking')) {
                     add_action('admin_enqueue_scripts', array($this, '_enqueue_newsletter'));
                 }
             }
+
+            $hash = md5(trailingslashit(network_site_url()) . '-redux');
+            add_action('wp_ajax_nopriv_'.$hash, array( $this, 'tracking_args' ) );
+            add_action('wp_ajax_'.$hash, array( $this, 'tracking_args' ) );
 
             if (isset($this->options['allow_tracking']) && $this->options['allow_tracking'] == true) {
                 // The tracking checks daily, but only sends new data every 7 days.
@@ -232,39 +241,44 @@ if (!class_exists('Redux_Tracking')) {
             <?php
         }
 
-        /**
-         * Main tracking function.
-         */
-        function tracking() {
-            // Start of Metrics
+        function trackingObject() {
             global $blog_id, $wpdb;
+            $pts = array();
 
-            $data = get_transient('redux_tracking_cache');
-            if (!$data) {
-                $pts = array();
+            foreach (get_post_types(array('public' => true)) as $pt) {
+                $count = wp_count_posts($pt);
+                $pts[$pt] = $count->publish;
+            }
 
-                foreach (get_post_types(array('public' => true)) as $pt) {
-                    $count = wp_count_posts($pt);
-                    $pts[$pt] = $count->publish;
-                }
+            $comments_count = wp_count_comments();
+            $theme_data = wp_get_theme();
+            $theme = array(
+                'version'   => $theme_data->Version,
+                'name'      => $theme_data->Name,
+                'author'    => $theme_data->Author,
+                'template'  => $theme_data->Template,
+            );
 
-                $comments_count = wp_count_comments();
-                $theme_data = wp_get_theme();
-                $theme = array(
-                    'version'   => $theme_data->Version,
-                    'name'      => $theme_data->Name,
-                    'author'    => $theme_data->Author,
-                    'template'  => $theme_data->Template,
+            if (!function_exists('get_plugin_data')) {
+                require_once( ABSPATH . 'wp-admin/includes/admin.php' );
+            }
+
+            $plugins = array();
+            foreach (get_option('active_plugins', array()) as $plugin_path) {
+                $plugin_info = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_path);
+
+                $slug = str_replace('/' . basename($plugin_path), '', $plugin_path);
+                $plugins[$slug] = array(
+                    'version'       => $plugin_info['Version'],
+                    'name'          => $plugin_info['Name'],
+                    'plugin_uri'    => $plugin_info['PluginURI'],
+                    'author'        => $plugin_info['AuthorName'],
+                    'author_uri'    => $plugin_info['AuthorURI'],
                 );
-
-                if (!function_exists('get_plugin_data')) {
-                    require_once( ABSPATH . 'wp-admin/includes/admin.php' );
-                }
-
-                $plugins = array();
-                foreach (get_option('active_plugins', array()) as $plugin_path) {
+            }
+            if (is_multisite()) {
+                foreach (get_option('active_sitewide_plugins', array()) as $plugin_path) {
                     $plugin_info = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_path);
-
                     $slug = str_replace('/' . basename($plugin_path), '', $plugin_path);
                     $plugins[$slug] = array(
                         'version'       => $plugin_info['Version'],
@@ -274,76 +288,77 @@ if (!class_exists('Redux_Tracking')) {
                         'author_uri'    => $plugin_info['AuthorURI'],
                     );
                 }
-                if (is_multisite()) {
-                    foreach (get_option('active_sitewide_plugins', array()) as $plugin_path) {
-                        $plugin_info = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_path);
-                        $slug = str_replace('/' . basename($plugin_path), '', $plugin_path);
-                        $plugins[$slug] = array(
-                            'version'       => $plugin_info['Version'],
-                            'name'          => $plugin_info['Name'],
-                            'plugin_uri'    => $plugin_info['PluginURI'],
-                            'author'        => $plugin_info['AuthorName'],
-                            'author_uri'    => $plugin_info['AuthorURI'],
-                        );
-                    }
-                }
+            }
 
 
-                $version = explode('.', PHP_VERSION);
-                $version = array('major' => $version[0], 'minor' => $version[0] . '.' . $version[1], 'release' => PHP_VERSION);
+            $version = explode('.', PHP_VERSION);
+            $version = array('major' => $version[0], 'minor' => $version[0] . '.' . $version[1], 'release' => PHP_VERSION);
 
-                $data = array(
-                    '_id'       => $this->options['hash'],
-                    'localhost' => ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0,
-                    'php'       => $version,
-                    'site'      => array(
-                        'hash'      => $this->options['hash'],
-                        'version'   => get_bloginfo('version'),
-                        'multisite' => is_multisite(),
-                        'users'     => $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users INNER JOIN $wpdb->usermeta ON ({$wpdb->users}.ID = {$wpdb->usermeta}.user_id) WHERE 1 = 1 AND ( {$wpdb->usermeta}.meta_key = %s )", 'wp_' . $blog_id . '_capabilities')),
-                        'lang'      => get_locale(),
-                        'wp_debug'  => ( defined('WP_DEBUG') ? WP_DEBUG ? true : false : false ),
-                        'memory'    => WP_MEMORY_LIMIT,
-                    ),
-                    'pts'       => $pts,
-                    'comments'  => array(
-                        'total'     => $comments_count->total_comments,
-                        'approved'  => $comments_count->approved,
-                        'spam'      => $comments_count->spam,
-                        'pings'     => $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_type = 'pingback'"),
-                    ),
-                    'options'   => apply_filters('redux/tracking/options', array()),
-                    'theme'     => $theme,
-                    'redux'     => array(
-                        'mode'      => ReduxFramework::$_is_plugin ? 'plugin' : 'theme',
-                        'version'   => ReduxFramework::$_version,
-                        'demo_mode' => get_option('ReduxFrameworkPlugin'),
-                    ),
-                    'developer' => apply_filters('redux/tracking/developer', array()),
-                    'plugins'   => $plugins,
-                );
+            $data = array(
+                '_id'       => $this->options['hash'],
+                'localhost' => ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0,
+                'php'       => $version,
+                'site'      => array(
+                    'hash'      => $this->options['hash'],
+                    'version'   => get_bloginfo('version'),
+                    'multisite' => is_multisite(),
+                    'users'     => $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users INNER JOIN $wpdb->usermeta ON ({$wpdb->users}.ID = {$wpdb->usermeta}.user_id) WHERE 1 = 1 AND ( {$wpdb->usermeta}.meta_key = %s )", 'wp_' . $blog_id . '_capabilities')),
+                    'lang'      => get_locale(),
+                    'wp_debug'  => ( defined('WP_DEBUG') ? WP_DEBUG ? true : false : false ),
+                    'memory'    => WP_MEMORY_LIMIT,
+                ),
+                'pts'       => $pts,
+                'comments'  => array(
+                    'total'     => $comments_count->total_comments,
+                    'approved'  => $comments_count->approved,
+                    'spam'      => $comments_count->spam,
+                    'pings'     => $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_type = 'pingback'"),
+                ),
+                'options'   => apply_filters('redux/tracking/options', array()),
+                'theme'     => $theme,
+                'redux'     => array(
+                    'mode'      => ReduxFramework::$_is_plugin ? 'plugin' : 'theme',
+                    'version'   => ReduxFramework::$_version,
+                    'demo_mode' => get_option('ReduxFrameworkPlugin'),
+                ),
+                'developer' => apply_filters('redux/tracking/developer', array()),
+                'plugins'   => $plugins,
+            );
 
-                $parts = explode(' ', $_SERVER['SERVER_SOFTWARE']);
-                $software = array();
-                foreach ($parts as $part) {
-                    if ($part[0] == "(") {
-                        continue;
-                    }
-                    if (strpos($part, '/') !== false) {
-                        $chunk = explode("/", $part);
-                        $software[strtolower($chunk[0])] = $chunk[1];
-                    }
+            $parts = explode(' ', $_SERVER['SERVER_SOFTWARE']);
+            $software = array();
+            foreach ($parts as $part) {
+                if ($part[0] == "(") {
+                    continue;
                 }
-                $software['full'] = $_SERVER['SERVER_SOFTWARE'];
-                $data['environment'] = $software;
-                if (function_exists('mysql_get_server_info')) {
-                    $data['environment']['mysql'] = mysql_get_server_info();
+                if (strpos($part, '/') !== false) {
+                    $chunk = explode("/", $part);
+                    $software[strtolower($chunk[0])] = $chunk[1];
                 }
-                if (empty($data['developer'])) {
-                    unset($data['developer']);
-                }
+            }
+            $software['full'] = $_SERVER['SERVER_SOFTWARE'];
+            $data['environment'] = $software;
+            if (function_exists('mysql_get_server_info')) {
+                $data['environment']['mysql'] = mysql_get_server_info();
+            }
+            if (empty($data['developer'])) {
+                unset($data['developer']);
+            }
+            return $data;
+        }
+
+        /**
+         * Main tracking function.
+         */
+        function tracking() {
+            // Start of Metrics
+            global $blog_id, $wpdb;
+
+            $data = get_transient('redux_tracking_cache');
+            if (!$data) {
+
                 $args = array(
-                    'body' => $data
+                    'body' => $this->trackingObject()
                 );
 
                 $response = wp_remote_post('https://redux-tracking.herokuapp.com', $args);
@@ -352,6 +367,18 @@ if (!class_exists('Redux_Tracking')) {
                 set_transient('redux_tracking_cache', true, 7 * 60 * 60 * 24);
             }
         }
+
+        function tracking_args() {
+            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
+            header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+            header('Cache-Control: no-store, no-cache, must-revalidate');
+            header('Cache-Control: post-check=0, pre-check=0', false);
+            header('Pragma: no-cache');
+            echo json_encode($this->trackingObject(), true);
+            die();
+        }
+
     }
 
     Redux_Tracking::get_instance();
@@ -396,4 +423,5 @@ if (!class_exists('Redux_Tracking')) {
     }
 
     add_action('wp_ajax_redux_allow_tracking', 'redux_allow_tracking_callback');
+
 }
