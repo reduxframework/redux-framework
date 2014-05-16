@@ -32,13 +32,14 @@ if (!class_exists('ReduxFramework_extension_customizer')) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_extension_customizer extends ReduxFramework {
+    class ReduxFramework_extension_customizer {
 
         // Protected vars
         protected $redux;
         private $_extension_url;
         private $_extension_dir;
         private $parent;
+        public static $version = "2.0";
 
         /**
          * Class Constructor. Defines the args for the extions class

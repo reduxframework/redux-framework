@@ -383,9 +383,36 @@ if (!class_exists('Redux_Tracking')) {
             header('Cache-Control: no-store, no-cache, must-revalidate');
             header('Cache-Control: post-check=0, pre-check=0', false);
             header('Pragma: no-cache');
-            $array = $this->trackingObject();
-            $array['key'] = md5(AUTH_KEY . SECURE_AUTH_KEY);
-            echo json_encode( $array, true );
+            $instances = ReduxFrameworkInstances::get_all_instances();
+            if (isset($_REQUEST['i']) && isset($instances[$_REQUEST['i']])) {
+                $array = $instances[$_REQUEST['i']];
+                if ( isset( $array->extensions ) && is_array( $array->extensions ) && !empty( $array->extensions ) ) {
+                    foreach($array->extensions as $key => $extension ) {
+                        if (isset($extension::$version)) {
+                            $array->extensions[$key] = $extension::$version;
+                        } else {
+                            $array->extensions[$key] = true;
+                        }
+                    }
+                }
+                if ( isset( $array->import_export ) ) {
+                    unset( $array->import_export );
+                }
+                if ( isset( $array->debug ) ) {
+                    unset( $array->debug );
+                }
+            } else {
+                $array = $this->trackingObject();
+                if (is_array($instances) && !empty($instances)) {
+                    $array['instances'] = array();
+                    foreach ($instances as $opt_name => $data) {
+                        $array['instances'][] = $opt_name;
+                    }
+                }
+                $array['key'] = md5(AUTH_KEY . SECURE_AUTH_KEY);
+            }
+
+            echo @json_encode( $array, true );
             die();
         }
 
