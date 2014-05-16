@@ -58,7 +58,8 @@ if (!class_exists('Redux_import_export')) {
          * @return      void
          */
         public function render() {
-            $secret = md5(AUTH_KEY . SECURE_AUTH_KEY);
+            
+            $secret = md5( md5(AUTH_KEY . SECURE_AUTH_KEY) . '-' . $this->parent->args['opt_name'] );
 
             if (true == $this->is_field) {
                 $fullWidth = $this->field_args['full_width'];
@@ -174,7 +175,7 @@ if (!class_exists('Redux_import_export')) {
         }
 
         function link_options() {
-            if (!isset($_GET['secret']) || $_GET['secret'] != md5(AUTH_KEY . SECURE_AUTH_KEY)) {
+            if (!isset($_GET['secret']) || $_GET['secret'] != md5( md5(AUTH_KEY . SECURE_AUTH_KEY) . '-' . $this->parent->args['opt_name'] ) ) {
                 wp_die('Invalid Secret for options use');
                 exit;
             }
@@ -191,7 +192,7 @@ if (!class_exists('Redux_import_export')) {
         }
 
         public function download_options() {
-            if (!isset($_GET['secret']) || $_GET['secret'] != md5(AUTH_KEY . SECURE_AUTH_KEY)) {
+            if (!isset($_GET['secret']) || $_GET['secret'] != md5( md5(AUTH_KEY . SECURE_AUTH_KEY) . '-' . $this->parent->args['opt_name'] ) ) {
                 wp_die('Invalid Secret for options use');
                 exit;
             }
