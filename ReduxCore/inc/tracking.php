@@ -396,8 +396,8 @@ if (!class_exists('Redux_Tracking')) {
                 if ( isset( $array ) ) {
                     if ( isset( $array->extensions ) && is_array( $array->extensions ) && !empty( $array->extensions ) ) {
                         foreach($array->extensions as $key => $extension ) {
-                            if (isset($extension::$version)) {
-                                $array->extensions[$key] = $extension::$version;
+                            if (isset($extension->$version)) {
+                                $array->extensions[$key] = $extension->$version;
                             } else {
                                 $array->extensions[$key] = true;
                             }
