@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.1 =
+* Fixed:      Spacing field not outputting proper CSS when `mode` was set to absolute, and `all` was set to true.
+* Fixed:      CSS fix for typography.  Color picker would interfere with save/reset bar.
+
 = 3.2.8.21 =
 * Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
 
