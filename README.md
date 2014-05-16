@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.2 =
+* Fixed:      Tracking. It was... odd. Also started our support hooks, UI to come.
+* Fixed:      Now import/export supports multiple instances. I can't believe this has been this way for so long.
+
 = 3.2.9.1 =
 * Fixed:      Spacing field not outputting proper CSS when `mode` was set to absolute, and `all` was set to true.
 * Fixed:      CSS fix for typography.  Color picker would interfere with save/reset bar.
