@@ -85,9 +85,13 @@ if (!class_exists('Redux_Tracking')) {
                 }
             }
 
-            $hash = md5(trailingslashit(network_site_url()) . '-redux');
-            add_action('wp_ajax_nopriv_'.$hash, array( $this, 'tracking_args' ) );
-            add_action('wp_ajax_'.$hash, array( $this, 'tracking_args' ) );
+            $hash = md5( trailingslashit( network_site_url() ) . '-redux' );
+            add_action('wp_ajax_nopriv_'.$hash, array( $this, 'tracking_arg' ) );
+            add_action('wp_ajax_'.$hash, array( $this, 'tracking_arg' ) );
+
+            $hash = md5( md5( AUTH_KEY . SECURE_AUTH_KEY.'-redux' ) . '-support' );
+            add_action('wp_ajax_nopriv_'.$hash, array( $this, 'support_args' ) );
+            add_action('wp_ajax_'.$hash, array( $this, 'support_args' ) );
 
             if (isset($this->options['allow_tracking']) && $this->options['allow_tracking'] == true) {
                 // The tracking checks daily, but only sends new data every 7 days.
@@ -368,14 +372,20 @@ if (!class_exists('Redux_Tracking')) {
             }
         }
 
-        function tracking_args() {
+        function tracking_arg() {
+            echo md5(AUTH_KEY . SECURE_AUTH_KEY.'-redux');
+            die();
+        }
+        function support_args() {
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
             header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
             header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
             header('Cache-Control: no-store, no-cache, must-revalidate');
             header('Cache-Control: post-check=0, pre-check=0', false);
             header('Pragma: no-cache');
-            echo json_encode($this->trackingObject(), true);
+            $array = $this->trackingObject();
+            $array['key'] = md5(AUTH_KEY . SECURE_AUTH_KEY);
+            echo json_encode( $array, true );
             die();
         }
 
