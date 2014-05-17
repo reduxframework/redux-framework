@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.3 =
+* Fixed:      Typography color picker bleeding under other elements.  #1225
+* Fixed:      Hint icon_color index error from builder.  #1222
+
 = 3.2.9.2 =
 * Fixed:      Tracking. It was... odd. Also started our support hooks, UI to come.
 * Fixed:      Now import/export supports multiple instances. I can't believe this has been this way for so long.
