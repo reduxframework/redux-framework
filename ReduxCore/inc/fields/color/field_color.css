@@ -61,3 +61,6 @@
 .redux-main input.wp-color-picker {
   width: 80px;
 }
+.redux-main .color-transparency-check {
+  line-height: 1;
+}

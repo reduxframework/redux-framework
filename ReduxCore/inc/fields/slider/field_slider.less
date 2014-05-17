@@ -27,3 +27,26 @@
         margin-left: 245px;
     }
 }
+
+@media screen and (max-width:782px) {
+  .redux-container-slider {
+     input {
+       display: inline-block !important;
+     }
+  }
+}
+// Select Slider
+@media screen and (max-width:570px) {
+  .redux-container-slider {
+    text-align: center;
+    input, select, .redux-slider-label, .select2-container {
+      display: block !important;
+      position: inherit;
+      margin: 10px auto;
+    }
+    .redux-slider-container {
+      margin-top: 3px;
+      width: 80%;
+    }
+  }
+}

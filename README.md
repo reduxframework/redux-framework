@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.4 =
+* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
+* Fixed:      In dev_mode panel CSS was being loaded 2x.
+
 = 3.2.9.3 =
 * Fixed:      Typography color picker bleeding under other elements.  #1225
 * Fixed:      Hint icon_color index error from builder.  #1222

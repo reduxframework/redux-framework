@@ -68,7 +68,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.3';
+        public static $_version = '3.2.9.4';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -1477,6 +1477,13 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 filemtime( self::$_dir . 'assets/css/redux.css' ),
                 'all'
             );
+            wp_register_style(
+                'admin-css',
+                self::$_url . 'assets/css/admin.css',
+                array( 'farbtastic' ),
+                filemtime( self::$_dir . 'assets/css/admin.css' ),
+                'all'
+            );
 
             wp_register_style(
                 'redux-elusive-icon',
@@ -1536,7 +1543,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_style( 'jquery-ui-css' );
             wp_enqueue_style( 'redux-lte-ie8' );
-            wp_enqueue_style( 'redux-css' );
             wp_enqueue_style( 'select2-css' );
             wp_enqueue_style( 'nouislider-css' );
             wp_enqueue_style( 'qtip-css' );
@@ -1624,6 +1630,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Embed the compress version unless in dev mode
             // dev_mode = true
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
+                wp_enqueue_style( 'admin-css' );
                 wp_register_script(
                     'redux-vendor',
                     self::$_url . 'assets/js/vendor.min.js',
@@ -1651,7 +1658,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 // dev_mode - false
             } else {
-
+                wp_enqueue_style( 'redux-css' );
                 // If ACE loaded, push into the dep array
                 $arrProd = $arrEnq;
                 if ('' != $ace_prereq) {

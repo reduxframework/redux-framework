@@ -6,7 +6,7 @@
     $(document).ready(function() {
         $(".redux-sortable").sortable({
             handle: ".drag",
-            placeholder: "ui-state-highlight",
+            placeholder:    "placeholder",
             opacity: 0.7,
             update: function() {
                 redux_change($(this));

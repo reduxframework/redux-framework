@@ -17,3 +17,11 @@
   width: 364px;
   margin-bottom: 13px;
 }
+.redux-container-sortable li {
+  height: 30px;
+  line-height: 30px;
+}
+.redux-container-sortable li.placeholder {
+  height: 30px;
+  margin: 10px 0;
+}

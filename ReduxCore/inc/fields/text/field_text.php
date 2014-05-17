@@ -66,5 +66,23 @@ if (!class_exists('ReduxFramework_text')) {
                 echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' />';
             }
         }
+
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since ReduxFramework 3.0.0
+         */
+        function enqueue() {
+
+            wp_enqueue_style(
+                'redux-field-text-css',
+                ReduxFramework::$_url . 'inc/fields/text/field_text.css',
+                time(),
+                true
+            );
+        }
+
     }
 }

@@ -76,8 +76,7 @@ if (!class_exists('ReduxFramework_section')) {
                 $add_class = ' form-table-section-indented';
             }
 
-            echo '<style>#' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . ' {padding: 10px 0;}</style>';
-            echo '</td></tr></table><div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . $this->field['class'] . '">';
+            echo '<input type="hidden" id="'.$this->field['id'].'-marker"></td></tr></table><div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . $this->field['class'] . '">';
             
             if (!empty($this->field['title'])) {
                 echo '<h3>' . $this->field['title'] . '</h3>';
@@ -93,10 +92,7 @@ if (!class_exists('ReduxFramework_section')) {
             ?>
             <script type="text/javascript">
                 jQuery(document).ready(function() {
-                    var elem = jQuery("#<?php echo $guid ?>");
-                    var prevelem = elem.closest("table").prev("h3").prev("p").prev("table");
-                    prevelem.find("tr").last().remove();
-                    elem.parent().remove();
+                    jQuery('#<?php echo $this->field['id']; ?>-marker').parents('tr:first').remove()
                 });
             </script>
             <?php

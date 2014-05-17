@@ -77,10 +77,10 @@ if (!class_exists('ReduxFramework_password')) {
             }
 
             // Username field
-            echo '<input type="input" autocomplete="off" placeholder="' . $this->value['placeholder']['username'] . '" id="' . $this->field['id'] . '[username]" name="' . $this->field['name'] . '[username]' . $this->field['name_suffix'] . '" value="' . esc_attr($this->value['username']) . '" class="regular-text ' . $this->field['class'] . '" />&nbsp;';
+            echo '<input type="text" autocomplete="off" placeholder="' . $this->value['placeholder']['username'] . '" id="' . $this->field['id'] . '[username]" name="' . $this->field['name'] . '[username]' . $this->field['name_suffix'] . '" value="' . esc_attr($this->value['username']) . '" class="' . $this->field['class'] . '" />&nbsp;';
 
             // Password field
-            echo '<input type="password" autocomplete="off" placeholder="' . $this->value['placeholder']['password'] . '" id="' . $this->field['id'] . '[password]" name="' . $this->field['name'] . '[password]' . $this->field['name_suffix'] . '" value="' . esc_attr($this->value['password']) . '" class="regular-text ' . $this->field['class'] . '" />';
+            echo '<input type="password" autocomplete="off" placeholder="' . $this->value['placeholder']['password'] . '" id="' . $this->field['id'] . '[password]" name="' . $this->field['name'] . '[password]' . $this->field['name_suffix'] . '" value="' . esc_attr($this->value['password']) . '" class="' . $this->field['class'] . '" />';
         }
 
         /**
@@ -96,7 +96,7 @@ if (!class_exists('ReduxFramework_password')) {
          * </code>
          */
         private function _render_single_field() {
-            echo '<input type="password" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . esc_attr($this->value) . '" class="regular-text ' . $this->field['class'] . '" />';
+            echo '<input type="password" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . esc_attr($this->value) . '" class="' . $this->field['class'] . '" />';
         }
     }
 }

@@ -88,19 +88,19 @@ if (!class_exists('ReduxFramework_link_color')) {
         public function render() {
 
             if ($this->field['regular'] === true && $this->field['default']['regular'] !== false) {
-                echo '<strong>' . __('Regular', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-regular" name="' . $this->field['name'] . '[regular]' . $this->field['name_suffix'] . '" value="' . $this->value['regular'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['regular'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+                echo '<span class="linkColor"><strong>' . __('Regular', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-regular" name="' . $this->field['name'] . '[regular]' . $this->field['name_suffix'] . '" value="' . $this->value['regular'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['regular'] . '" /></span>';
             }
 
             if ($this->field['hover'] === true && $this->field['default']['hover'] !== false) {
-                echo '<strong>' . __('Hover', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->field['name'] . '[hover]' . $this->field['name_suffix'] . '" value="' . $this->value['hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['hover'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+                echo '<span class="linkColor"><strong>' . __('Hover', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->field['name'] . '[hover]' . $this->field['name_suffix'] . '" value="' . $this->value['hover'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['hover'] . '" /></span>';
             }
 
             if ($this->field['visited'] === true && $this->field['default']['visited'] !== false) {
-                echo '<strong>' . __('Visited', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->field['name'] . '[visited]' . $this->field['name_suffix'] . '" value="' . $this->value['visited'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['visited'] . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+                echo '<span class="linkColor"><strong>' . __('Visited', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->field['name'] . '[visited]' . $this->field['name_suffix'] . '" value="' . $this->value['visited'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['visited'] . '" /></span>';
             }
 
             if ($this->field['active'] === true && $this->field['default']['active'] !== false) {
-                echo '<strong>' . __('Active', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-active" name="' . $this->field['name'] . '[active]' . $this->field['name_suffix'] . '" value="' . $this->value['active'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['active'] . '" />';
+                echo '<span class="linkColor"><strong>' . __('Active', 'redux-framework') . '</strong>&nbsp;<input id="' . $this->field['id'] . '-active" name="' . $this->field['name'] . '[active]' . $this->field['name_suffix'] . '" value="' . $this->value['active'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['active'] . '" /></span>';
             }
         }
 
@@ -126,6 +126,13 @@ if (!class_exists('ReduxFramework_link_color')) {
             wp_enqueue_style(
                 'redux-field-color-js',
                 ReduxFramework::$_url . 'inc/fields/color/field_color.css',
+                time(),
+                true
+            );
+
+            wp_enqueue_style(
+                'redux-field-link_color-js',
+                ReduxFramework::$_url . 'inc/fields/link_color/field_link_color.css',
                 time(),
                 true
             );

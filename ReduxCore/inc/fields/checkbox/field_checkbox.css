@@ -1,9 +1,5 @@
-.redux-container-checkbox input {
-  float: left;
-}
 .redux-container-checkbox label {
   vertical-align: top;
-  line-height: 16px;
   width: 100%;
 }
 .redux-container-checkbox label .field-desc {
@@ -11,7 +7,4 @@
   float: left;
   width: 93%;
   clear: none;
-}
-.redux-container-checkbox label input {
-  margin-top: 1px;
 }

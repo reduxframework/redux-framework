@@ -13,5 +13,14 @@
   text-decoration: none;
 }
 .redux-container-multi_text .redux-multi-text-add {
-  margin-bottom: 5px;
+  margin: 5px 0;
+}
+@media screen and (max-width: 782px) {
+  .redux-container-multi_text input {
+    clear: both;
+  }
+  .redux-container-multi_text .redux-multi-text-remove {
+    margin: 0;
+    float: right;
+  }
 }
