@@ -154,7 +154,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             'open_expanded'      => false,          // Start the panel fully expanded to start with
             'network_admin'      => false,          // Enable network admin when using network database mode
             'network_sites'      => true,           // Enable sites as well as admin when using network database mode
-            'hints' => array(
+            'hints'              => array(
                 'icon'              => 'icon-question-sign',
                 'icon_position'     => 'right',
                 'icon_color'        => 'lightgray',
@@ -248,6 +248,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             
             // Set values
             $this->args = wp_parse_args( $args, $this->args );
+
             if ( empty( $this->args['transient_time'] ) ) {
                 $this->args['transient_time'] = 60 * MINUTE_IN_SECONDS;
             }
@@ -2055,9 +2056,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // In case docs are ignored.
                         $titleParam     = isset($field['hint']['title']) ? $field['hint']['title'] : '';
                         $contentParam   = isset($field['hint']['content']) ? $field['hint']['content'] : '';
-
+                        
+                        $hint_color     = isset($this->args['hints']['icon_color']) ? $this->args['hints']['icon_color'] : '#d3d3d3';
+                        
                         // Set hint html with appropriate position css
-                        $hint = '<div class="redux-qtip" style="float:' . $this->args['hints']['icon_position'] . '; font-size: ' . $size . '; color:' . $this->args['hints']['icon_color'] . '; cursor: ' . $pointer . ';" qtip-title="' . $titleParam . '" qtip-content="' . $contentParam . '"><i class="el-icon-question-sign"></i>&nbsp&nbsp</div>';
+                        $hint = '<div class="redux-qtip" style="float:' . $this->args['hints']['icon_position'] . '; font-size: ' . $size . '; color:' . $hint_color . '; cursor: ' . $pointer . ';" qtip-title="' . $titleParam . '" qtip-content="' . $contentParam . '"><i class="el-icon-question-sign"></i>&nbsp&nbsp</div>';
                     }
                 }
 
