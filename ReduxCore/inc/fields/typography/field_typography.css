@@ -73,8 +73,8 @@
   -moz-border-radius: 3px;
   border-radius: 3px;
   /*  .wp-color-result {
-         margin-right:3px;
-        }*/
+             margin-right:3px;
+            }*/
 }
 .redux-main .redux-typography-container .input_wrapper {
   display: block;
@@ -98,12 +98,12 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  display: block;
+  /*            display:block;*/
   width: 78%;
   text-align: center;
   margin: 0;
   height: 28px;
-  position: absolute;
+  /*            position:absolute;*/
   top: 3px;
   padding: 0 2px 0 5px;
   text-decoration: none;

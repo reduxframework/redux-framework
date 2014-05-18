@@ -10,6 +10,19 @@
     "use strict";
     
     $(function() {
+        
+        var scroll = '';
+        var $scrollable = $(".redux-sorter");
+        function scrolling(){
+            if (scroll == 'up') {
+                $scrollable.scrollTop($scrollable.scrollTop()-20);
+                setTimeout(scrolling,50);
+            } else if (scroll == 'down'){
+                $scrollable.scrollTop($scrollable.scrollTop()+20);
+                setTimeout(scrolling,50);
+            }
+        }        
+        
         /**	Sorter (Layout Manager) */
         $('.redux-sorter').each(function() {
             var id = $(this).attr('id');
@@ -19,6 +32,22 @@
                 placeholder:    "placeholder",
                 connectWith:    '.sortlist_' + id,
                 opacity:        0.8,
+                scroll: false,
+                out: function( event, ui ) {
+                    if (!ui.helper) return;
+                    if (ui.offset.top>0) {
+                        scroll='down';
+                    } else {
+                        scroll='up';
+                    }
+                    scrolling();
+                },
+                over: function( event, ui ) {
+                    scroll='';
+                },
+                deactivate:function( event, ui ) {
+                    scroll='';
+                },                
                 stop: function(event, ui) {
                     var sorter = redux.sorter[$(this).attr('data-id')];
                     var id = $(this).find('h3').text();
@@ -61,6 +90,7 @@
                     });
                 }
             });
+            $( ".redux-sorter").disableSelection(); 
         });
     });
 })(jQuery);
