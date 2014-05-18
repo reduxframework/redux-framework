@@ -824,1678 +824,261 @@ label.radio, label.multicheck {
 pre {
     overflow:hidden;
 }
+
+/* Default admin theme */
+#redux-header h2 { color: #fff; }
+
+
+.backgroundGradient(@to: darken(@to, 5%), @from: lighten(@to, 7%)) {
+    background-color: @to;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(@from), to(@to));
+    background-image: -moz-linear-gradient(top, @from, @to);
+    background-image: -ms-linear-gradient(top, @from, @to);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @from), color-stop(100%, @to));
+    background-image: -webkit-linear-gradient(top, @from, @to);
+    background-image: -o-linear-gradient(top, @from, @to);
+    background-image: linear-gradient(top, @from, @to);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to', GradientType=0);
+}
+
+.adminThemeColorOverrides (@darkColor, @accentColor, @secondaryColor, @buttonPrimary) {
+    .button.ui-datepicker-current, button.ui-datepicker-close {
+        background-color: lighten(@accentColor, 3%);
+    }
+
+    .ui-datepicker-buttonpane button.ui-datepicker-current {
+        background: @buttonPrimary;
+        color: white;
+        border: 1px solid darken(@buttonPrimary, 20%)
+
+    }
+
+    .ui-datepicker-header .ui-icon {
+        background-image: url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
+    }
+
+    .ui-datepicker-header {
+        background-color: @secondaryColor;
+        color: white;
+    }
+
+    .ui-datepicker td .ui-state-active  {
+        background-color: lighten(@accentColor, 3%);
+        color: white;
+    }
+
+    .ui-datepicker td .ui-state-hover {
+        color: lighten(@accentColor, 3%);
+    }
+
+    .ui-datepicker td .ui-state-highlight {
+        background: @accentColor;
+        border: 1px solid @secondaryColor;
+        color: white;
+    }
+
+    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+        .backgroundGradient(#f5f5f5, #f8f8f8);
+        border-color: #ccc;
+    }
+
+    .ui-datepicker td .ui-state-active {
+        color: black;
+        font-weight: 700;
+        background: white;
+    }
+
+    .redux-container-switch .cb-disable.selected {
+        .backgroundGradient(#646464, #929292);
+        border-color: #767676;
+    }
+    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
+        .backgroundGradient(@accentColor);
+        border-color: darken( @accentColor, 15% );
+        border-color: darken( @accentColor, 10% );
+        -webkit-box-shadow: inset 0 1px 0 lighten( @accentColor, 15% ), 0 1px 0 rgba(0,0,0,.15);
+        box-shadow: inset 0 1px 0 lighten( @accentColor, 15% ), 0 1px 0 rgba(0,0,0,.15);
+
+    }
+
+    #redux-header .display_header span { color: @darkColor; }
+    #redux-header { background: @secondaryColor; border-color: @accentColor; }
+
+    .redux-sidebar .redux-group-menu li.active {
+        &.hasSubSections {
+
+            a {
+                position: relative;
+                &:after {
+                    right: 0;
+                    border: solid 8px transparent;
+                    content: "\0020";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-right-color: #fff;
+                    top: 50%;
+                    margin-top: -8px;
+                }
+
+
+            }
+            ul.subsection li a:after {
+                border: 0 none !important;
+                content: "\0020" !important;
+            }
+        }
+    }
+    .redux-sidebar .redux-group-menu li {
+        &.hasSubSections {
+            a .redux-menu-error {
+                margin-right: 8px;
+            }
+            .subsection {
+              a .redux-menu-error {
+                margin-right: 5px;
+              }
+            }
+            a {
+                .extraIconSubsections {
+                    position: absolute;
+                    right: 0;
+                    font-size: 12px;
+                    top: 12px;
+                }
+                &:hover .extraIconSubsections {
+                    //right: 2px;
+                }
+            }
+        }
+        &.active, &.activeChild {
+            a .extraIconSubsections { display: none; }
+        }
+    }
+    .redux-sidebar .redux-group-menu li.active, .redux-sidebar .redux-group-menu li.activeChild {
+        border-left: 0 none;
+        a { color: @secondaryColor; }
+        &.hasSubSections {
+            .active {
+                a {
+                    &:after {
+                        right: 0;
+                        border: solid 8px transparent;
+                        content: "\0020";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        border-right-color: #fff;
+                        top: 50%;
+                        margin-top: -8px;
+                    }
+                }
+            }
+            a {
+                background: @accentColor;
+                -webkit-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                trasnition: all 0.2s;
+                color: #fff;
+                width: auto;
+                border-bottom: 0;
+            }
+            ul.subsection li {
+                border-top: 0 none !important;
+                a {
+                    background: @secondaryColor;
+                    width: auto;
+                    border-top: 0 !important;
+                    // border-top-color: lighten(@secondaryColor, 15);
+                    padding: 7px;
+                    color: #fff;
+                    padding-left: 15px;
+                    -webkit-transition: all 0.2;
+                    -moz-transition: all 0.2;
+                    -ms-transition: all 0.2;
+                    -o-transition: all 0.2;
+                    transition: all 0.2;
+                    &:hover {
+                        color: #2ea2cc;
+                        background: #000;
+                    }
+                    span.group_title { padding-left: 5px !important; }
+                }
+                &.hasIcon {
+                  a {
+                    padding-left: 14px;
+                    span.group_title { padding-left: 30px !important; }
+
+                  }
+                }
+            }
+        }
+    }
+
+    .redux-container-image_select .redux-image-select-selected img { border-color: @accentColor; }
+    #redux-footer #redux-share a {
+        color: @accentColor;
+        &:hover {
+            color: darken(@accentColor, 20%);
+        }
+    }
+    .select2-results .select2-highlighted {
+        background: @accentColor;
+    }
+    .select2-drop-active,
+    .select2-container-multi.select2-container-active .select2-choices,
+    .select2-drop.select2-drop-above.select2-drop-active,
+    .select2-container-active .select2-choice,
+    .select2-container-active .select2-choices,
+    .select2-dropdown-open.select2-drop-above .select2-choice,
+    .select2-dropdown-open.select2-drop-above .select2-choices {
+        border-color: @accentColor;
+    }
+    .select2-dropdown-open.select2-drop-above .select2-choice,
+    .select2-dropdown-open.select2-drop-above .select2-choices {
+        border-top: inherit;
+    }
+    .noUi-connect {
+        .backgroundGradient(lighten(@accentColor, 3%));
+    }
+}
+
+/* Light fresh theme */
 .admin-color-fresh {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#007fb1;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#0074a2;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#008ec6),to(#0074a2));
-        background-image:-moz-linear-gradient(top,#008ec6,#0074a2);
-        background-image:-ms-linear-gradient(top,#008ec6,#0074a2);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#008ec6),color-stop(100%,#0074a2));
-        background-image:-webkit-linear-gradient(top,#008ec6,#0074a2);
-        background-image:-o-linear-gradient(top,#008ec6,#0074a2);
-        background-image:linear-gradient(top,#008ec6,#0074a2);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#003d56;
-        border-color:#004f6f;
-        -webkit-box-shadow:inset 0 1px 0 #00abef, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #00abef, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#0074a2;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#1e8cbe;
-        color:#ffffff;
-        border:1px solid #104b66;
-    }
-    .ui-datepicker-header {
-        background-color:#222222;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#007fb1;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#007fb1;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#0074a2;
-        border:1px solid #222222;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#222222;
-        border-color:#0074a2;
-        .display_header span {
-            color:#bbbbbb;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#222222;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#222222;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#0074a2;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#0074a2;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#0074a2;
-    }
-    #redux-footer #redux-share a {
-        color:#0074a2;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#002b3c;
-    }
-    .select2-results .select2-highlighted {
-        background:#0074a2;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#0074a2;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#007fb1;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#0099d5),to(#007fb1));
-        background-image:-moz-linear-gradient(top,#0099d5,#007fb1);
-        background-image:-ms-linear-gradient(top,#0099d5,#007fb1);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#0099d5),color-stop(100%,#007fb1));
-        background-image:-webkit-linear-gradient(top,#0099d5,#007fb1);
-        background-image:-o-linear-gradient(top,#0099d5,#007fb1);
-        background-image:linear-gradient(top,#0099d5,#007fb1);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#bbb, #0074a2, #222222, #1e8cbe);
 }
+
+/* Light admin theme */
 .admin-color-light {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#04b0db;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#04a4cc;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#05c0ef),to(#04a4cc));
-        background-image:-moz-linear-gradient(top,#05c0ef,#04a4cc);
-        background-image:-ms-linear-gradient(top,#05c0ef,#04a4cc);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#05c0ef),color-stop(100%,#04a4cc));
-        background-image:-webkit-linear-gradient(top,#05c0ef,#04a4cc);
-        background-image:-o-linear-gradient(top,#05c0ef,#04a4cc);
-        background-image:linear-gradient(top,#05c0ef,#04a4cc);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#036881;
-        border-color:#037c9a;
-        -webkit-box-shadow:inset 0 1px 0 #22cffb, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #22cffb, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#04a4cc;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#0384a4;
-        color:#ffffff;
-        border:1px solid #013340;
-    }
-    .ui-datepicker-header {
-        background-color:#888888;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#04b0db;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#04b0db;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#04a4cc;
-        border:1px solid #888888;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#888888;
-        border-color:#04a4cc;
-        .display_header span {
-            color:#e6e6e6;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#888888;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#888888;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#04a4cc;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#04a4cc;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#04a4cc;
-    }
-    #redux-footer #redux-share a {
-        color:#04a4cc;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#025468;
-    }
-    .select2-results .select2-highlighted {
-        background:#04a4cc;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#04a4cc;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#04b0db;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#09cafa),to(#04b0db));
-        background-image:-moz-linear-gradient(top,#09cafa,#04b0db);
-        background-image:-ms-linear-gradient(top,#09cafa,#04b0db);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#09cafa),color-stop(100%,#04b0db));
-        background-image:-webkit-linear-gradient(top,#09cafa,#04b0db);
-        background-image:-o-linear-gradient(top,#09cafa,#04b0db);
-        background-image:linear-gradient(top,#09cafa,#04b0db);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#e6e6e6, #04a4cc, #888888, #0384a4);
 }
+/* Blue admin theme */
 .admin-color-blue {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#509dba;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#4796b3;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#5ea5bf),to(#4796b3));
-        background-image:-moz-linear-gradient(top,#5ea5bf,#4796b3);
-        background-image:-ms-linear-gradient(top,#5ea5bf,#4796b3);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#5ea5bf),color-stop(100%,#4796b3));
-        background-image:-webkit-linear-gradient(top,#5ea5bf,#4796b3);
-        background-image:-o-linear-gradient(top,#5ea5bf,#4796b3);
-        background-image:linear-gradient(top,#5ea5bf,#4796b3);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#31687c;
-        border-color:#39778e;
-        -webkit-box-shadow:inset 0 1px 0 #7cb6cb, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #7cb6cb, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#4796b3;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#db9825;
-        color:#ffffff;
-        border:1px solid #845c16;
-    }
-    .ui-datepicker-header {
-        background-color:#096484;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#509dba;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#509dba;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#4796b3;
-        border:1px solid #096484;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#096484;
-        border-color:#4796b3;
-        .display_header span {
-            color:#e2ecf1;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#096484;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#096484;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#4796b3;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#4796b3;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#4796b3;
-    }
-    #redux-footer #redux-share a {
-        color:#4796b3;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#2a596a;
-    }
-    .select2-results .select2-highlighted {
-        background:#4796b3;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#4796b3;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#509dba;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#69abc4),to(#509dba));
-        background-image:-moz-linear-gradient(top,#69abc4,#509dba);
-        background-image:-ms-linear-gradient(top,#69abc4,#509dba);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#69abc4),color-stop(100%,#509dba));
-        background-image:-webkit-linear-gradient(top,#69abc4,#509dba);
-        background-image:-o-linear-gradient(top,#69abc4,#509dba);
-        background-image:linear-gradient(top,#69abc4,#509dba);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#e2ecf1, #4796b3, #096484, #db9825);
 }
+/* Coffee admin theme */
 .admin-color-coffee {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#ccad93;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#c7a589;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#d2b7a1),to(#c7a589));
-        background-image:-moz-linear-gradient(top,#d2b7a1,#c7a589);
-        background-image:-ms-linear-gradient(top,#d2b7a1,#c7a589);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#d2b7a1),color-stop(100%,#c7a589));
-        background-image:-webkit-linear-gradient(top,#d2b7a1,#c7a589);
-        background-image:-o-linear-gradient(top,#d2b7a1,#c7a589);
-        background-image:linear-gradient(top,#d2b7a1,#c7a589);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#ae7d55;
-        border-color:#b78b66;
-        -webkit-box-shadow:inset 0 1px 0 #e0cdbd, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #e0cdbd, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#c7a589;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#ba906d;
-        color:#ffffff;
-        border:1px solid #835d3e;
-    }
-    .ui-datepicker-header {
-        background-color:#46403c;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#ccad93;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#ccad93;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#c7a589;
-        border:1px solid #46403c;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#46403c;
-        border-color:#c7a589;
-        .display_header span {
-            color:#cdcbc9;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#46403c;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#46403c;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#c7a589;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#c7a589;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#c7a589;
-    }
-    #redux-footer #redux-share a {
-        color:#c7a589;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#9f714b;
-    }
-    .select2-results .select2-highlighted {
-        background:#c7a589;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#c7a589;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#ccad93;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#d7bfac),to(#ccad93));
-        background-image:-moz-linear-gradient(top,#d7bfac,#ccad93);
-        background-image:-ms-linear-gradient(top,#d7bfac,#ccad93);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#d7bfac),color-stop(100%,#ccad93));
-        background-image:-webkit-linear-gradient(top,#d7bfac,#ccad93);
-        background-image:-o-linear-gradient(top,#d7bfac,#ccad93);
-        background-image:linear-gradient(top,#d7bfac,#ccad93);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#cdcbc9, #c7a589, #46403c, #ba906d);
 }
+/* Ectoplasm admin theme */
 .admin-color-ectoplasm {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#a9bd4f;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#a3b745;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#b0c25e),to(#a3b745));
-        background-image:-moz-linear-gradient(top,#b0c25e,#a3b745);
-        background-image:-ms-linear-gradient(top,#b0c25e,#a3b745);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#b0c25e),color-stop(100%,#a3b745));
-        background-image:-webkit-linear-gradient(top,#b0c25e,#a3b745);
-        background-image:-o-linear-gradient(top,#b0c25e,#a3b745);
-        background-image:linear-gradient(top,#b0c25e,#a3b745);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#727f30;
-        border-color:#829237;
-        -webkit-box-shadow:inset 0 1px 0 #bfcd7b, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #bfcd7b, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#a3b745;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#89993a;
-        color:#ffffff;
-        border:1px solid #474f1e;
-    }
-    .ui-datepicker-header {
-        background-color:#413256;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#a9bd4f;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#a9bd4f;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#a3b745;
-        border:1px solid #413256;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#413256;
-        border-color:#a3b745;
-        .display_header span {
-            color:#cbc5d3;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#413256;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#413256;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#a3b745;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#a3b745;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#a3b745;
-    }
-    #redux-footer #redux-share a {
-        color:#a3b745;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#616d29;
-    }
-    .select2-results .select2-highlighted {
-        background:#a3b745;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#a3b745;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#a9bd4f;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#b6c669),to(#a9bd4f));
-        background-image:-moz-linear-gradient(top,#b6c669,#a9bd4f);
-        background-image:-ms-linear-gradient(top,#b6c669,#a9bd4f);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#b6c669),color-stop(100%,#a9bd4f));
-        background-image:-webkit-linear-gradient(top,#b6c669,#a9bd4f);
-        background-image:-o-linear-gradient(top,#b6c669,#a9bd4f);
-        background-image:linear-gradient(top,#b6c669,#a9bd4f);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#cbc5d3, #a3b745, #413256, #89993a);
 }
+/* Midnight admin theme */
 .admin-color-midnight {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#e35950;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#e14d43;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#e66a62),to(#e14d43));
-        background-image:-moz-linear-gradient(top,#e66a62,#e14d43);
-        background-image:-ms-linear-gradient(top,#e66a62,#e14d43);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#e66a62),color-stop(100%,#e14d43));
-        background-image:-webkit-linear-gradient(top,#e66a62,#e14d43);
-        background-image:-o-linear-gradient(top,#e66a62,#e14d43);
-        background-image:linear-gradient(top,#e66a62,#e14d43);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#ba281e;
-        border-color:#d02c21;
-        -webkit-box-shadow:inset 0 1px 0 #ec8b85, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #ec8b85, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#e14d43;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#d92c23;
-        color:#ffffff;
-        border:1px solid #811a15;
-    }
-    .ui-datepicker-header {
-        background-color:#363b3f;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#e35950;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#e35950;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#e14d43;
-        border:1px solid #363b3f;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#363b3f;
-        border-color:#e14d43;
-        .display_header span {
-            color:#c2c4c5;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#363b3f;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#363b3f;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#e14d43;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#e14d43;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#e14d43;
-    }
-    #redux-footer #redux-share a {
-        color:#e14d43;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#a4231a;
-    }
-    .select2-results .select2-highlighted {
-        background:#e14d43;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#e14d43;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#e35950;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#e8776f),to(#e35950));
-        background-image:-moz-linear-gradient(top,#e8776f,#e35950);
-        background-image:-ms-linear-gradient(top,#e8776f,#e35950);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#e8776f),color-stop(100%,#e35950));
-        background-image:-webkit-linear-gradient(top,#e8776f,#e35950);
-        background-image:-o-linear-gradient(top,#e8776f,#e35950);
-        background-image:linear-gradient(top,#e8776f,#e35950);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#c2c4c5, #e14d43, #363b3f, #d92c23);
 }
+/* Ocean admin theme */
 .admin-color-ocean {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#a7c0a9;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#9ebaa0;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#b3c9b4),to(#9ebaa0));
-        background-image:-moz-linear-gradient(top,#b3c9b4,#9ebaa0);
-        background-image:-ms-linear-gradient(top,#b3c9b4,#9ebaa0);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#b3c9b4),color-stop(100%,#9ebaa0));
-        background-image:-webkit-linear-gradient(top,#b3c9b4,#9ebaa0);
-        background-image:-o-linear-gradient(top,#b3c9b4,#9ebaa0);
-        background-image:linear-gradient(top,#b3c9b4,#9ebaa0);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#719a74;
-        border-color:#80a583;
-        -webkit-box-shadow:inset 0 1px 0 #cbdacc, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #cbdacc, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#9ebaa0;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#86a988;
-        color:#ffffff;
-        border:1px solid #547555;
-    }
-    .ui-datepicker-header {
-        background-color:#627c83;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#a7c0a9;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#a7c0a9;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#9ebaa0;
-        border:1px solid #627c83;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#627c83;
-        border-color:#9ebaa0;
-        .display_header span {
-            color:#d5dddf;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#627c83;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#627c83;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#9ebaa0;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#9ebaa0;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#9ebaa0;
-    }
-    #redux-footer #redux-share a {
-        color:#9ebaa0;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#658d68;
-    }
-    .select2-results .select2-highlighted {
-        background:#9ebaa0;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#9ebaa0;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#a7c0a9;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#bccfbd),to(#a7c0a9));
-        background-image:-moz-linear-gradient(top,#bccfbd,#a7c0a9);
-        background-image:-ms-linear-gradient(top,#bccfbd,#a7c0a9);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#bccfbd),color-stop(100%,#a7c0a9));
-        background-image:-webkit-linear-gradient(top,#bccfbd,#a7c0a9);
-        background-image:-o-linear-gradient(top,#bccfbd,#a7c0a9);
-        background-image:linear-gradient(top,#bccfbd,#a7c0a9);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#d5dddf, #9ebaa0, #627c83, #86a988);
 }
+/* Sunrise admin theme */
 .admin-color-sunrise {
-    .button.ui-datepicker-current, button.ui-datepicker-close {
-        background-color:#df8a48;
-    }
-    .redux-container-switch .cb-disable, .redux-container-switch .cb-enable, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background-color:#f5f5f5;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f5f5f5));
-        background-image:-moz-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-ms-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(100%,#f5f5f5));
-        background-image:-webkit-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:-o-linear-gradient(top,#f8f8f8,#f5f5f5);
-        background-image:linear-gradient(top,#f8f8f8,#f5f5f5);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#cccccc;
-    }
-    .redux-container-switch .cb-enable.selected, .ui-buttonset .ui-state-active {
-        background-color:#dd823b;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#e29559),to(#dd823b));
-        background-image:-moz-linear-gradient(top,#e29559,#dd823b);
-        background-image:-ms-linear-gradient(top,#e29559,#dd823b);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#e29559),color-stop(100%,#dd823b));
-        background-image:-webkit-linear-gradient(top,#e29559,#dd823b);
-        background-image:-o-linear-gradient(top,#e29559,#dd823b);
-        background-image:linear-gradient(top,#e29559,#dd823b);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#ad5d1e;
-        border-color:#c36922;
-        -webkit-box-shadow:inset 0 1px 0 #e8ac7c, 0 1px 0 rgba(0,0,0,0.15);
-        box-shadow:inset 0 1px 0 #e8ac7c, 0 1px 0 rgba(0,0,0,0.15);
-    }
-    .select2-drop-active, .select2-container-multi.select2-container-active .select2-choices, .select2-drop.select2-drop-above.select2-drop-active, .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-        border-color:#dd823b;
-    }
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
-        background:#cc6c23;
-        color:#ffffff;
-        border:1px solid #753e14;
-    }
-    .ui-datepicker-header {
-        background-color:#b43c38;
-        color:#ffffff;
-        .ui-icon {
-            background-image:url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png);
-        }
-    }
-    .ui-datepicker td .ui-state-active {
-        background-color:#df8a48;
-        color:#ffffff;
-        color:#000000;
-        font-weight:700;
-        background:#ffffff;
-    }
-    .ui-datepicker td .ui-state-hover {
-        color:#df8a48;
-    }
-    .ui-datepicker td .ui-state-highlight {
-        background:#dd823b;
-        border:1px solid #b43c38;
-        color:#ffffff;
-    }
-    .redux-container-switch .cb-disable.selected {
-        background-color:#646464;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#929292),to(#646464));
-        background-image:-moz-linear-gradient(top,#929292,#646464);
-        background-image:-ms-linear-gradient(top,#929292,#646464);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#929292),color-stop(100%,#646464));
-        background-image:-webkit-linear-gradient(top,#929292,#646464);
-        background-image:-o-linear-gradient(top,#929292,#646464);
-        background-image:linear-gradient(top,#929292,#646464);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-        border-color:#767676;
-    }
-    #redux-header {
-        background:#b43c38;
-        border-color:#dd823b;
-        .display_header span {
-            color:#f0c8c6;
-        }
-    }
-    .redux-sidebar .redux-group-menu {
-        li.active a .extraIconSubsections, li.activeChild a .extraIconSubsections {
-            display:none;
-        }
-        li.active, li.activeChild {
-            border-left:0 none;
-        }
-        li.active a, li.activeChild a {
-            color:#b43c38;
-        }
-        li.active.hasSubSections .active a:after, li.activeChild.hasSubSections .active a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li, li.activeChild.hasSubSections ul.subsection li {
-            border-top:0 none !important;
-        }
-        li.active.hasSubSections ul.subsection li a, li.activeChild.hasSubSections ul.subsection li a {
-            background:#b43c38;
-            width:auto;
-            border-top:0 !important;
-            padding:7px;
-            color:#ffffff;
-            padding-left:15px;
-            -webkit-transition:all .2;
-            -moz-transition:all .2;
-            -ms-transition:all .2;
-            -o-transition:all .2;
-            transition:all .2;
-        }
-        li.active.hasSubSections ul.subsection li a:hover, li.activeChild.hasSubSections ul.subsection li a:hover {
-            color:#2ea2cc;
-            background:#000000;
-        }
-        li.active.hasSubSections ul.subsection li a span.group_title, li.activeChild.hasSubSections ul.subsection li a span.group_title {
-            padding-left:5px !important;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a, li.activeChild.hasSubSections ul.subsection li.hasIcon a {
-            padding-left:14px;
-        }
-        li.active.hasSubSections ul.subsection li.hasIcon a span.group_title, li.activeChild.hasSubSections ul.subsection li.hasIcon a span.group_title {
-            padding-left:30px !important;
-        }
-        li.active.hasSubSections a {
-            position:relative;
-            background:#dd823b;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-        li.active.hasSubSections a:after {
-            right:0;
-            border:solid 8px transparent;
-            content:"\0020";
-            height:0;
-            width:0;
-            position:absolute;
-            pointer-events:none;
-            border-right-color:#ffffff;
-            top:50%;
-            margin-top:-8px;
-        }
-        li.active.hasSubSections ul.subsection li a:after {
-            border:0 none !important;
-            content:"\0020" !important;
-        }
-        li.hasSubSections a .redux-menu-error {
-            margin-right:8px;
-        }
-        li.hasSubSections a .extraIconSubsections {
-            position:absolute;
-            right:0;
-            font-size:12px;
-            top:12px;
-        }
-        li.hasSubSections .subsection a .redux-menu-error {
-            margin-right:5px;
-        }
-        li.activeChild.hasSubSections a {
-            background:#dd823b;
-            -webkit-transition:all .2s;
-            -moz-transition:all .2s;
-            trasnition:all .2s;
-            color:#ffffff;
-            width:auto;
-            border-bottom:0;
-        }
-    }
-    .redux-container-image_select .redux-image-select-selected img {
-        border-color:#dd823b;
-    }
-    #redux-footer #redux-share a {
-        color:#dd823b;
-    }
-    #redux-footer #redux-share a:hover {
-        color:#98511a;
-    }
-    .select2-results .select2-highlighted {
-        background:#dd823b;
-    }
-    .select2-dropdown-open.select2-drop-above {
-        .select2-choice, .select2-choices {
-            border-color:#dd823b;
-            border-top:inherit;
-        }
-    }
-    .noUi-connect {
-        background-color:#df8a48;
-        background-image:-khtml-gradient(linear,left top,left bottom,from(#e59e66),to(#df8a48));
-        background-image:-moz-linear-gradient(top,#e59e66,#df8a48);
-        background-image:-ms-linear-gradient(top,#e59e66,#df8a48);
-        background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#e59e66),color-stop(100%,#df8a48));
-        background-image:-webkit-linear-gradient(top,#e59e66,#df8a48);
-        background-image:-o-linear-gradient(top,#e59e66,#df8a48);
-        background-image:linear-gradient(top,#e59e66,#df8a48);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@from',endColorstr='@to',GradientType=0);
-    }
+    .adminThemeColorOverrides(#f0c8c6, #dd823b, #b43c38, #cc6c23);
 }
+
 .redux-sidebar .icon-large, .redux-main .icon-large {
     background-image:inherit !important;
     width:inherit;
@@ -2512,4 +1095,84 @@ pre {
 }
 .fully-expanded .redux-group-tab {
     display:block;
+}
+
+@media screen and (max-width: 1124px) {
+    // .redux-group-tab-link-a span { margin-top: -2px; }
+    .redux-group-tab-link-a span {
+        //background: #222;
+        //color: white;
+        padding: 11px 12px;
+        color: #555;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        &:hover {
+            //color: #2ea2cc;
+            //background: black;
+            background: #e5e5e5;
+        }
+    }
+}
+@media screen and (max-width: 782px) {
+    #redux-footer #redux-share {
+        line-height: 38px;
+        font-size: 18px;
+    }
+    .sticky-save-warn .redux-save-warn {
+        right: 13px;
+        top: 46px;
+    }
+    .redux-container .expand_options {
+        margin-top: 5px;
+    }
+    .redux-action_bar input {
+        margin-bottom: 0 !important;
+    }
+
+}
+@media screen and (max-width: 650px) {
+    #redux-footer #redux-share, .redux-qtip {
+        display: none;
+    }
+    .redux-container .redux-action_bar {
+        float: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .sticky-save-warn .redux-save-warn {
+        top: 0;
+    }
+}
+
+@media screen and (max-width: 476px) {
+    .redux-container .expand_options {
+        display: none;
+    }
+    #redux-footer, .redux-container #info_bar {
+        text-align: center;
+    }
+}
+
+// WP Engine CSS fix
+.redux-sidebar .icon-large,
+.redux-main .icon-large {
+    background-image: inherit !important;
+    width: inherit;
+    height: inherit;
+}
+.redux-main dd, .redux-main li, .redux-sidebar li {
+  margin-bottom: 0 !important;
+}
+
+.fully-expanded {
+  .redux-sidebar {
+    margin-left: -500px;
+  }
+  .redux-main {
+    margin-left: 0;
+  }
+  .redux-group-tab {
+    display: block;
+  }
 }
