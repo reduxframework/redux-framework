@@ -105,7 +105,7 @@ if (!class_exists('ReduxFramework_spinner')){
             );
 
             wp_enqueue_style(
-                'redux-field-spacing-css',
+                'redux-field-spinner-css',
                 ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.css',
                 time(),
                 true

@@ -13,3 +13,17 @@
   margin-right: 10px;
   margin-bottom: 7px;
 }
+@media screen and (max-width: 782px) {
+  .redux-container-border .field-border-input input {
+    display: inline-block !important;
+    width: 100px !important;
+  }
+  .redux-container-border .field-border-input .add-on {
+    padding: 7px 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .redux-container-border .select_wrapper {
+    margin-top: 6px;
+  }
+}
