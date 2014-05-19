@@ -284,7 +284,6 @@ if (!class_exists('ReduxFramework_spacing')) {
                     $style .= $key . ':' . $value . ';';
                 }
             } else {
-                print_r($this->value);
                 $this->value['top'] = isset($this->value['top']) ? $this->value['top'] : 0;
                 $this->value['bottom'] = isset($this->value['bottom']) ? $this->value['bottom'] : 0;
                 $this->value['left'] = isset($this->value['left']) ? $this->value['left'] : 0;
