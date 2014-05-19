@@ -68,7 +68,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.4';
+        public static $_version = '3.2.9.5';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -111,15 +111,42 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
         }// ::init()
 
-        public $framework_url       = 'http://www.reduxframework.com/';
-        public $instance            = null;
-        public $admin_notices       = array();
-        public $page                = '';
-        public $saved               = false;
-        public $fields              = array();      // Fields by type used in the panel
-        public $current_tab         = '';           // Current section to display, cookies
-        public $extensions          = array();      // Extensions by type used in the panel
-        public $args                = array(
+        public $framework_url           = 'http://www.reduxframework.com/';
+        public $instance                = null;
+        public $admin_notices           = array();
+        public $page                    = '';
+        public $saved                   = false;
+        public $fields                  = array();      // Fields by type used in the panel
+        public $current_tab             = '';           // Current section to display, cookies
+        public $extensions              = array();      // Extensions by type used in the panel
+        public $sections                = array();  // Sections and fields
+        public $errors                  = array();  // Errors
+        public $warnings                = array();  // Warnings
+        public $options                 = array();  // Option values
+        public $options_defaults        = null;     // Option defaults
+        public $notices                 = array();  // Option defaults
+        public $compiler_fields         = array();  // Fields that trigger the compiler hook
+        public $required                = array();  // Information that needs to be localized
+        public $required_child          = array();  // Information that needs to be localized
+        public $localize_data           = array();  // Information that needs to be localized
+        public $fonts                   = array();  // Information that needs to be localized
+        public $folds                   = array();  // The itms that need to fold.
+        public $path                    = '';
+        public $changed_values          = array();  // Values that have been changed on save. Orig values.
+        public $output                  = array();  // Fields with CSS output selectors
+        public $outputCSS               = null;     // CSS that get auto-appended to the header
+        public $compilerCSS             = null;     // CSS that get sent to the compiler hook
+        public $customizerCSS           = null;     // CSS that goes to the customizer
+        public $fieldsValues            = array();  //all fields values in an id=>value array so we can check dependencies
+        public $fieldsHidden            = array();  //all fields that didn't pass the dependency test and are hidden
+        public $toHide                  = array();  // Values to hide on page load
+        public $typography              = null;     //values to generate google font CSS
+        public $import_export           = null;
+        public $debug                   = null;
+        private $show_hints             = false;
+        private $hidden_perm_fields     = array();  //  Hidden fields specified by 'permissions' arg.
+        private $hidden_perm_sections   = array();  //  Hidden sections specified by 'permissions' arg.
+        public $args                    = array(
             'opt_name'           => '',             // Must be defined by theme/plugin
             'google_api_key'     => '',             // Must be defined to add google fonts to the typography module
             'last_tab'           => '',             // force a specific tab to always show on reload
@@ -193,32 +220,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             'system_info'        => false, // REMOVE
         );
-
-        public $sections            = array();  // Sections and fields
-        public $errors              = array();  // Errors
-        public $warnings            = array();  // Warnings
-        public $options             = array();  // Option values
-        public $options_defaults    = null;     // Option defaults
-        public $notices             = array();  // Option defaults
-        public $compiler_fields     = array();  // Fields that trigger the compiler hook
-        public $required            = array();  // Information that needs to be localized
-        public $required_child      = array();  // Information that needs to be localized
-        public $localize_data       = array();  // Information that needs to be localized
-        public $fonts               = array();  // Information that needs to be localized
-        public $folds               = array();  // The itms that need to fold.
-        public $path                = '';
-        public $changed_values      = array();  // Values that have been changed on save. Orig values.
-        public $output              = array();  // Fields with CSS output selectors
-        public $outputCSS           = null;     // CSS that get auto-appended to the header
-        public $compilerCSS         = null;     // CSS that get sent to the compiler hook
-        public $customizerCSS       = null;     // CSS that goes to the customizer
-        public $fieldsValues        = array();  //all fields values in an id=>value array so we can check dependencies
-        public $fieldsHidden        = array();  //all fields that didn't pass the dependency test and are hidden
-        public $toHide              = array();  // Values to hide on page load
-        public $typography          = null;     //values to generate google font CSS
-        public $import_export       = null;
-        public $debug               = null;
-        private $show_hints         = false;
+        
 
         /**
          * Class Constructor. Defines the args for the theme options class
@@ -2159,8 +2161,23 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
                 
                 $heading = isset($section['heading']) ? $section['heading'] : $section['title'];
+                
                 if (isset($section['permissions'])) {
                     if ( !current_user_can($section['permissions']) ) {
+                        $this->hidden_perm_sections[] = $section['title'];
+
+                        foreach($section['fields'] as $num => $field_data) {
+                            $field_type = $field_data['type'];
+
+                            if ($field_type != 'section' || $field_type != 'divide' || $field_type != 'info' ) {
+                                $field_id = $field_data['id'];
+                                $default = isset($this->options_defaults[$field_id]) ? $this->options_defaults[$field_id] : '';
+                                $data = isset($this->options[$field_id]) ? $this->options[$field_id] : $default;
+
+                                $this->hidden_perm_fields[$field_id] = $data;
+                            }
+                        }
+                        
                         continue;
                     }
                 }
@@ -2192,7 +2209,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         }
 
                         // TODO AFTER GROUP WORKS - Remove IF statement
-
                         if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                             if ( $this->args['dev_mode'] ) {
                                 $this->admin_notices[] = array(
@@ -2204,9 +2220,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                             continue; // Disabled for now
                         }
-
+                        
+                        
                         if (isset($field['permissions'])) {
+
                             if ( !current_user_can($field['permissions']) ) {
+                                $data = isset($this->options[$field['id']]) ? $this->options[$field['id']] : $this->options_defaults[$field['id']];
+                                
+                                $this->hidden_perm_fields[$field['id']] = $data;
+                                
                                 continue;
                             }
                         }
@@ -2502,6 +2524,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return array|mixed|string|void
          */
         public function _validate_options( $plugin_options ) {
+            if (!empty($this->hidden_perm_fields) && is_array($this->hidden_perm_fields)) {
+                foreach($this->hidden_perm_fields as $id => $data) {
+                    $plugin_options[$id] = $data;
+                }
+            }
+            
             if ( $plugin_options == $this->options ) {
                 return $plugin_options;
             }
@@ -3141,8 +3169,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Sidebar
             echo '<div class="redux-sidebar">';
             echo '<ul class="redux-group-menu">';
+            
             foreach( $this->sections as $k => $section ) {
-                echo $this->section_menu($k, $section);
+                $title = isset($section['title']) ? $section['title'] : '';
+                
+                $skip_sec = false;
+                foreach($this->hidden_perm_sections as $num => $section_title) {
+                    if ($section_title == $title) {
+                        $skip_sec = true;
+                    }
+                }
+                
+                if (false == $skip_sec) {
+                    echo $this->section_menu($k, $section);
+                    $skip_sec = false;
+                }
             }
 
             echo '<li class="divide">&nbsp;</li>';
