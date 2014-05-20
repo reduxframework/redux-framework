@@ -60,6 +60,7 @@
             }
 
             $("#" + spinner.id).val(value);
+            redux_change("#" + spinner.id);
 
         }
 
