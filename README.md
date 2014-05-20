@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.8 =
+* Modified:   More code to load JS on demand for fields require it.
+
 = 3.2.9.7 =
 * Modified:   Field specific JS only loads with active field.
 * Fixed:      Hints stopped working due to classname change.

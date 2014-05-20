@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -68,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.7';
+        public static $_version = '3.2.9.8';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -1556,15 +1554,32 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_script('jquery');
             wp_enqueue_script('jquery-ui-core');
-            wp_enqueue_script('jquery-ui-sortable');
-            wp_enqueue_style('jquery-ui-sortable');
-            wp_enqueue_script('jquery-ui-datepicker');
             wp_enqueue_script('jquery-ui-dialog');
-            //wp_enqueue_script('jquery-ui-slider');
-            wp_enqueue_script('wp-color-picker');
-            wp_enqueue_script('jquery-ui-accordion');
-            wp_enqueue_style( 'wp-color-picker' );
 
+            $fieldArray =  $this->fields;
+            
+            // Load jQuery sortable for slides, sorter, sortable and group
+            if ( array_key_exists('slides', $fieldArray) || array_key_exists('sorter', $fieldArray) || array_key_exists('sortable', $fieldArray) || array_key_exists('group', $fieldArray)) {
+                wp_enqueue_script('jquery-ui-sortable');
+                wp_enqueue_style('jquery-ui-sortable');
+            }
+            
+            // Load jQuery UI Datepicker for date
+            if (array_key_exists('date', $fieldArray)) {
+                wp_enqueue_script('jquery-ui-datepicker');
+            }
+            
+            // Load jQuery UI Accordion for slides and group
+            if (array_key_exists('slides', $fieldArray) || array_key_exists('group', $fieldArray)) {
+                wp_enqueue_script('jquery-ui-accordion');
+            }
+            
+            // Load wp-color-picker for color, color_gradient, link_color, border, and typography
+            if ( array_key_exists('color', $fieldArray) || array_key_exists('color_gradient', $fieldArray) || array_key_exists('link_color', $fieldArray) || array_key_exists('border', $fieldArray) || array_key_exists('typography', $fieldArray) ) {
+                wp_enqueue_script('wp-color-picker');
+                wp_enqueue_style( 'wp-color-picker' );
+            }
+            
             if ( function_exists( 'wp_enqueue_media' ) ) {
                 wp_enqueue_media();
             } else {

@@ -504,8 +504,9 @@ class ReduxFramework_typography {
     function enqueue() {
 
         wp_enqueue_script(
-            'redux-field-color-js', ReduxFramework::$_url . 'inc/fields/color/field_color' . Redux_Functions::isMin() . '.js',
-            array( 'jquery', 'wp-color-picker' ),
+            'redux-field-color-js',
+            ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
+            array('jquery', 'wp-color-picker'),
             time(),
             true
         );
