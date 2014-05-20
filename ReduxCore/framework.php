@@ -68,7 +68,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.6';
+        public static $_version = '3.2.9.7';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
