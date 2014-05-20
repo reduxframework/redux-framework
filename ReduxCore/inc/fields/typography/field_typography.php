@@ -504,7 +504,7 @@ class ReduxFramework_typography {
     function enqueue() {
 
         wp_enqueue_script(
-            'redux-field-color-js', ReduxFramework::$_url . 'inc/fields/color/field_color.js',
+            'redux-field-color-js', ReduxFramework::$_url . 'inc/fields/color/field_color' . Redux_Functions::isMin() . '.js',
             array( 'jquery', 'wp-color-picker' ),
             time(),
             true
@@ -518,7 +518,7 @@ class ReduxFramework_typography {
         );
 
         wp_enqueue_script(
-            'redux-field-typography-js', ReduxFramework::$_url . 'inc/fields/typography/field_typography.js',
+            'redux-field-typography-js', ReduxFramework::$_url . 'inc/fields/typography/field_typography' . Redux_Functions::isMin() . '.js',
             array( 'jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js' ),
             time(),
             true

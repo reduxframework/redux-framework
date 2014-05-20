@@ -155,7 +155,7 @@ if (!class_exists('ReduxFramework_sorter')){
 
             wp_enqueue_script(
                 'redux-field-sorter-js',
-                ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.js',
+                ReduxFramework::$_url . 'inc/fields/sorter/field_sorter' . Redux_Functions::isMin() . '.js',
                 array('jquery'),
                 time(),
                 true

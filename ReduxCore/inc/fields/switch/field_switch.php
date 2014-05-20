@@ -71,7 +71,7 @@ if (!class_exists('ReduxFramework_switch')) {
 
             wp_enqueue_script(
                 'redux-field-switch-js',
-                ReduxFramework::$_url . 'inc/fields/switch/field_switch.js',
+                ReduxFramework::$_url . 'inc/fields/switch/field_switch' . Redux_Functions::isMin() . '.js',
                 array('jquery'),
                 time(),
                 true

@@ -240,7 +240,7 @@ if (!class_exists('ReduxFramework_slides')) {
 
             wp_enqueue_script(
                 'redux-field-media-js',
-                ReduxFramework::$_url . 'inc/fields/media/field_media.js',
+                ReduxFramework::$_url . 'inc/fields/media/field_media' . Redux_Functions::isMin() . '.js',
                 array('jquery'),
                 time(),
                 true
@@ -255,7 +255,7 @@ if (!class_exists('ReduxFramework_slides')) {
 
             wp_enqueue_script(
                 'redux-field-slides-js',
-                ReduxFramework::$_url . 'inc/fields/slides/field_slides.js',
+                ReduxFramework::$_url . 'inc/fields/slides/field_slides' . Redux_Functions::isMin() . '.js',
                 array('jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker'),
                 time(),
                 true

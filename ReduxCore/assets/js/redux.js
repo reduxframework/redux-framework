@@ -606,7 +606,7 @@ jQuery(document).ready(function($) {
         var tipHideEffect   = redux.args.hints.tip_effect.hide.effect;
         var tipHideDuration = redux.args.hints.tip_effect.hide.duration;
 
-        $('div.redux-qtip').each(function() {
+        $('div.redux-hint-qtip').each(function() {
             $(this).qtip({
                 content: {
                     text:   $(this).attr('qtip-content'),

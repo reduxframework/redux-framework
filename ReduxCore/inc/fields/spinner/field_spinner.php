@@ -97,9 +97,25 @@ if (!class_exists('ReduxFramework_spinner')){
         function enqueue() {
 
             wp_enqueue_script(
+                'redux-field-spinner-custom-js',
+                ReduxFramework::$_url . 'inc/fields/spinner/vendor/spinner_custom.js',
+                array('jquery'),
+                time(),
+                true
+            );            
+
+            wp_enqueue_script(
+                'redux-field-spinner-typewatch-js',
+                ReduxFramework::$_url . 'inc/fields/spinner/vendor/jquery.typewatch.js',
+                array('jquery'),
+                time(),
+                true
+            );             
+            
+            wp_enqueue_script(
                 'redux-field-spinner-js',
-                ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.js',
-                array('jquery', 'redux-vendor', 'jquery-ui-core', 'jquery-ui-dialog'),
+                ReduxFramework::$_url . 'inc/fields/spinner/field_spinner' . Redux_Functions::isMin() . '.js',
+                array('jquery', 'redux-field-spinner-custom-js', 'redux-field-spinner-typewatch-js', 'jquery-ui-core', 'jquery-ui-dialog'),
                 time(),
                 true
             );

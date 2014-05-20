@@ -136,7 +136,7 @@ if (!class_exists('ReduxFramework_select')) {
 
             wp_enqueue_script(
                 'field-select-js',
-                ReduxFramework::$_url . 'inc/fields/select/field_select.js',
+                ReduxFramework::$_url . 'inc/fields/select/field_select' . Redux_Functions::isMin() . '.js',
                 array('jquery', 'select2-js'),
                 time(),
                 true

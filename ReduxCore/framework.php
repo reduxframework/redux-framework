@@ -1472,6 +1472,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue() {
             global $wp_styles;
 
+            //print_r($this->fields);
+            
             wp_register_style(
                 'redux-css',
                 self::$_url . 'assets/css/redux.css',
@@ -1519,15 +1521,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 'all'
             );
 
-
-            wp_register_style(
-                'nouislider-css',
-                self::$_url . 'assets/css/vendor/nouislider/jquery.nouislider.css',
-                array(),
-                filemtime( self::$_dir . 'assets/css/vendor/nouislider/jquery.nouislider.css' ),
-                'all'
-            );
-
             $wp_styles->add_data( 'redux-elusive-icon-ie7', 'conditional', 'lte IE 7' );
 
             /**
@@ -1546,7 +1539,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_style( 'jquery-ui-css' );
             wp_enqueue_style( 'redux-lte-ie8' );
             wp_enqueue_style( 'select2-css' );
-            wp_enqueue_style( 'nouislider-css' );
             wp_enqueue_style( 'qtip-css' );
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
@@ -1568,7 +1560,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_style('jquery-ui-sortable');
             wp_enqueue_script('jquery-ui-datepicker');
             wp_enqueue_script('jquery-ui-dialog');
-            wp_enqueue_script('jquery-ui-slider');
+            //wp_enqueue_script('jquery-ui-slider');
             wp_enqueue_script('wp-color-picker');
             wp_enqueue_script('jquery-ui-accordion');
             wp_enqueue_style( 'wp-color-picker' );
@@ -1598,13 +1590,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             );
 
             wp_register_script(
-                'nouislider-js',
-                self::$_url . 'assets/js/vendor/nouislider/jquery.nouislider.min.js',
-                array( 'jquery' ),
-                '5.0.0',
-                true
-            );
-            wp_register_script(
                 'serializeForm-js',
                 self::$_url . 'assets/js/vendor/jquery.serializeForm.js',
                 array( 'jquery' ),
@@ -1612,22 +1597,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
-            // Register ACE if it's being used
-            $ace_prereq = null;
-            if (Redux_Helpers::isFieldInUse($this, 'ace_editor')){
-                $ace_prereq = 'ace-editor-js';
-
-                wp_enqueue_script(
-                    $ace_prereq,
-                    self::$_url . 'assets/js/vendor/ace_editor/ace.js',
-                    array( 'jquery' ),
-                    filemtime( self::$_dir . 'assets/js/vendor/ace_editor/ace.js' ),
-                    true
-                );
-            }
-
-            // default JS dependency aarray
-            $arrEnq = array( 'jquery', 'select2-js', 'qtip-js', 'nouislider-js', 'serializeForm-js' );
+            // default JS dependency array
+            $arrEnq = array( 'jquery', 'select2-js', 'qtip-js', 'serializeForm-js' );
 
             // Embed the compress version unless in dev mode
             // dev_mode = true
@@ -1641,19 +1612,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     true
                 );
 
-                // push redux-cendor into dep array
-                $arrDev = $arrEnq;
-                array_push($arrDev, 'redux-vendor');
-
-                // If ACE is loaded, push in into the dep array
-                if ('' != $ace_prereq) {
-                    array_push($arrDev, $ace_prereq);
-                }
-
                 wp_register_script(
                     'redux-js',
                     self::$_url . 'assets/js/redux.js',
-                    $arrDev,
+                    $arrEnq,
                     filemtime( self::$_dir . 'assets/js/redux.js' ),
                     true
                 );
@@ -1661,17 +1623,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // dev_mode - false
             } else {
                 wp_enqueue_style( 'redux-css' );
-                // If ACE loaded, push into the dep array
-                $arrProd = $arrEnq;
-                if ('' != $ace_prereq) {
-                    array_push($arrProd, $ace_prereq);
-                }
 
                 if ( file_exists( self::$_dir . 'assets/js/redux.min.js' ) ) {
                     wp_register_script(
                         'redux-js',
                         self::$_url . 'assets/js/redux.min.js',
-                        $arrProd,
+                        $arrEnq,
                         filemtime( self::$_dir . 'assets/js/redux.min.js' ),
                         true
                     );
@@ -1714,9 +1671,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                         // Checking for extension field AND dev_mode = false OR dev_mode = true
                                         // Since extension fields use 'extension_dir' exclusively, we can detect them here.
                                         // Also checking for dev_mode = true doesn't mess up the JS combinine.
-                                        if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
-                                            $theField->enqueue();
-                                        }
+                                        //if ( /*$this->args['dev_mode'] === false && */ isset($theField->extension_dir) && (!'' == $theField->extension_dir) /* || ($this->args['dev_mode'] === true) */) {
+                                        $theField->enqueue();
+                                        //}
                                     }
                                     
                                     if ( method_exists( $field_class, 'localize' ) ) {

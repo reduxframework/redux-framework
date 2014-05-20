@@ -218,11 +218,28 @@ if(!class_exists('ReduxFramework_slider')) {
          * @since ReduxFramework 3.1.8
          */
         function enqueue() {
-            wp_enqueue_style('nouislider-css');
+            
+            $min = Redux_Functions::isMin();
 
+            wp_enqueue_style(
+                'nouislider-css',
+                ReduxFramework::$_url . 'inc/fields/slider/vendor/nouislider/jquery.nouislider.css',
+                array(),
+                filemtime( ReduxFramework::$_dir . 'inc/fields/slider/vendor/nouislider/jquery.nouislider.css' ),
+                'all'
+            );
+
+            wp_register_script(
+                'nouislider-js',
+                ReduxFramework::$_url . 'inc/fields/slider/vendor/nouislider/jquery.nouislider' . $min . '.js',
+                array( 'jquery' ),
+                '5.0.0',
+                true
+            );
+            
             wp_enqueue_script(
                 'redux-field-slider-js',
-                ReduxFramework::$_url . 'inc/fields/slider/field_slider.js',
+                ReduxFramework::$_url . 'inc/fields/slider/field_slider' . $min . '.js',
                 array('jquery', 'nouislider-js'),
                 time(),
                 true
@@ -237,7 +254,7 @@ if(!class_exists('ReduxFramework_slider')) {
 
             wp_enqueue_script(
                 'redux-field-select-js',
-                ReduxFramework::$_url.'inc/fields/select/field_select.js',
+                ReduxFramework::$_url.'inc/fields/select/field_select' . $min . '.js',
                 array('jquery', 'select2-js'),
                 time(),
                 true

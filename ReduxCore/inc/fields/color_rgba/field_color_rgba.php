@@ -120,9 +120,11 @@ if (!class_exists('ReduxFramework_color_rgba')) {
          */
         public function enqueue() {
 
+            $min = Redux_Functions::isMin();
+            
             wp_enqueue_script(
                 'redux-field-color_rgba-minicolors-js', 
-                ReduxFramework::$_url . 'assets/js/vendor/minicolors/jquery.minicolors.js', 
+                ReduxFramework::$_url . 'inc/fields/color_rgba/vendor/minicolors/jquery.minicolors' . $min . '.js', 
                 array('jquery'), 
                 time(), 
                 true
@@ -130,7 +132,7 @@ if (!class_exists('ReduxFramework_color_rgba')) {
             
             wp_enqueue_script(
                 'redux-field-color_rgba-js', 
-                ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba.js', 
+                ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba' . $min . '.js', 
                 array('jquery'), 
                 time(), 
                 true

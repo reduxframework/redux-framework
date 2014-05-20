@@ -100,7 +100,7 @@ if (!class_exists('ReduxFramework_gallery')) {
 
             wp_enqueue_script(
                 'redux-field-gallery-js', 
-                ReduxFramework::$_url . 'inc/fields/gallery/field_gallery.js', 
+                ReduxFramework::$_url . 'inc/fields/gallery/field_gallery' . Redux_Functions::isMin() . '.js', 
                 array('jquery'), 
                 time(), 
                 true

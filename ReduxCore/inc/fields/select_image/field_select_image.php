@@ -149,7 +149,7 @@ if (!class_exists('ReduxFramework_select_image')) {
         function enqueue() {
             wp_enqueue_script(
                 'field-select-image-js',
-                ReduxFramework::$_url . 'inc/fields/select_image/field_select_image.js',
+                ReduxFramework::$_url . 'inc/fields/select_image/field_select_image' . Redux_Functions::isMin() . '.js',
                 array(),
                 time(),
                 true

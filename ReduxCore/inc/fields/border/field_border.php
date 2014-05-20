@@ -191,12 +191,14 @@ if (!class_exists('ReduxFramework_border')) {
          * @since ReduxFramework 1.0.0
          */
         function enqueue() {
+            $min = Redux_Functions::isMin();
+            
             wp_enqueue_script('select2-js');
             wp_enqueue_style('select2-css');
 
             wp_enqueue_script(
                 'redux-field-border-js', 
-                ReduxFramework::$_url . 'inc/fields/border/field_border.js', 
+                ReduxFramework::$_url . 'inc/fields/border/field_border' . $min . '.js', 
                 array('jquery', 'select2-js', 'redux-vendor'), 
                 time(), 
                 true
