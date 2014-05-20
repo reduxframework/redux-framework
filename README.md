@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.9 =
+* Modified:   select2 loads only when a field requires it.
+
 = 3.2.9.8 =
 * Modified:   More code to load JS on demand for fields require it.
 

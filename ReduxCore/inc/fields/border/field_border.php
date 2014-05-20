@@ -193,12 +193,9 @@ if (!class_exists('ReduxFramework_border')) {
         function enqueue() {
             $min = Redux_Functions::isMin();
             
-            wp_enqueue_script('select2-js');
-            wp_enqueue_style('select2-css');
-
             wp_enqueue_script(
                 'redux-field-color-js',
-                ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
+                ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . $min . '.js',
                 array('jquery', 'wp-color-picker'),
                 time(),
                 true
@@ -207,7 +204,7 @@ if (!class_exists('ReduxFramework_border')) {
             wp_enqueue_script(
                 'redux-field-border-js', 
                 ReduxFramework::$_url . 'inc/fields/border/field_border' . $min . '.js', 
-                array('jquery', 'select2-js', 'redux-vendor'), 
+                array('jquery', 'select2-js'), 
                 time(), 
                 true
             );

@@ -189,9 +189,6 @@ if (!class_exists('ReduxFramework_dimensions')) {
          * @since ReduxFramework 1.0.0
          */
         function enqueue() {
-            wp_enqueue_script('select2-js');
-            wp_enqueue_style('select2-css');
-
             wp_enqueue_script(
                 'redux-field-dimensions-js',
                 ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions' . Redux_Functions::isMin() . '.js',

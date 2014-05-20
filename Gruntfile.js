@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     //'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    'ReduxCore/assets/js/vendor/select2.sortable.js',
+                    //'ReduxCore/assets/js/vendor/select2.sortable.js',
 //                    'ReduxCore/assets/js/vendor/minicolors/jquery.minicolors.js',
 //                    'ReduxCore/inc/fields/*/*.js',
 //                    'ReduxCore/extensions/**/*.js',
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
                     //'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    'ReduxCore/assets/js/vendor/select2.sortable.js',
+                    //'ReduxCore/assets/js/vendor/select2.sortable.js',
                 ],
                 dest: 'ReduxCore/assets/js/vendor.min.js'
             }
@@ -74,6 +74,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js'],
+                    'ReduxCore/assets/js/vendor/select2.sortable.min.js' : ['ReduxCore/assets/js/vendor/select2.sortable.js'],
                     'ReduxCore/assets/js/color-picker/color-picker.min.js': ['ReduxCore/assets/js/color-picker/color-picker.js'],
                     'ReduxCore/inc/fields/ace_editor/field_ace_editor.min.js': ['ReduxCore/inc/fields/ace_editor/field_ace_editor.js'],
                     'ReduxCore/inc/fields/background/field_background.min.js': ['ReduxCore/inc/fields/background/field_background.js'],

@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.8';
+        public static $_version = '3.2.9.9';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -1470,7 +1470,41 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue() {
             global $wp_styles;
 
-            //print_r($this->fields);
+            $min = Redux_Functions::isMin();
+            
+            // Select2 business.  Fields:  Background, Border, Dimensions, Select, Slider, Typography
+            if (Redux_Helpers::isFieldInUseByType($this->fields, array('background', 'border', 'dimensions', 'select', 'slider', 'typography'))) {
+                
+                // select2 CSS
+                wp_register_style(
+                    'select2-css',
+                    self::$_url . 'assets/js/vendor/select2/select2.css',
+                    array(),
+                    filemtime( self::$_dir . 'assets/js/vendor/select2/select2.css' ),
+                    'all'
+                );  
+                
+                wp_enqueue_style( 'select2-css' );
+
+                // JS
+                wp_register_script(
+                    'select2-sortable-js',
+                    self::$_url . 'assets/js/vendor/select2.sortable.min.js',
+                    array( 'jquery' ),
+                    filemtime( self::$_dir . 'assets/js/vendor/select2.sortable.min.js' ),
+                    true
+                );
+                
+                wp_register_script(
+                    'select2-js',
+                    self::$_url . 'assets/js/vendor/select2/select2.min.js',
+                    array( 'jquery', 'select2-sortable-js' ),
+                    filemtime( self::$_dir . 'assets/js/vendor/select2/select2.min.js' ),
+                    true
+                );
+                
+                wp_enqueue_script('select2-js');
+            }
             
             wp_register_style(
                 'redux-css',
@@ -1479,6 +1513,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 filemtime( self::$_dir . 'assets/css/redux.css' ),
                 'all'
             );
+            
             wp_register_style(
                 'admin-css',
                 self::$_url . 'assets/css/admin.css',
@@ -1500,14 +1535,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
                 array(),
                 filemtime( self::$_dir . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css' ),
-                'all'
-            );
-
-            wp_register_style(
-                'select2-css',
-                self::$_url . 'assets/js/vendor/select2/select2.css',
-                array(),
-                filemtime( self::$_dir . 'assets/js/vendor/select2/select2.css' ),
                 'all'
             );
 
@@ -1536,7 +1563,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             wp_enqueue_style( 'jquery-ui-css' );
             wp_enqueue_style( 'redux-lte-ie8' );
-            wp_enqueue_style( 'select2-css' );
             wp_enqueue_style( 'qtip-css' );
             wp_enqueue_style( 'redux-elusive-icon' );
             wp_enqueue_style( 'redux-elusive-icon-ie7' );
@@ -1556,26 +1582,24 @@ if( !class_exists( 'ReduxFramework' ) ) {
             wp_enqueue_script('jquery-ui-core');
             wp_enqueue_script('jquery-ui-dialog');
 
-            $fieldArray =  $this->fields;
-            
             // Load jQuery sortable for slides, sorter, sortable and group
-            if ( array_key_exists('slides', $fieldArray) || array_key_exists('sorter', $fieldArray) || array_key_exists('sortable', $fieldArray) || array_key_exists('group', $fieldArray)) {
+            if (Redux_Helpers::isFieldInUseByType($this->fields, array('slides', 'sorter', 'sortable', 'group'))) {
                 wp_enqueue_script('jquery-ui-sortable');
                 wp_enqueue_style('jquery-ui-sortable');
             }
             
             // Load jQuery UI Datepicker for date
-            if (array_key_exists('date', $fieldArray)) {
+            if (Redux_Helpers::isFieldInUseByType($this->fields, array('date'))) {
                 wp_enqueue_script('jquery-ui-datepicker');
             }
             
             // Load jQuery UI Accordion for slides and group
-            if (array_key_exists('slides', $fieldArray) || array_key_exists('group', $fieldArray)) {
+            if (Redux_Helpers::isFieldInUseByType($this->fields, array('slides', 'group'))) {
                 wp_enqueue_script('jquery-ui-accordion');
             }
             
             // Load wp-color-picker for color, color_gradient, link_color, border, and typography
-            if ( array_key_exists('color', $fieldArray) || array_key_exists('color_gradient', $fieldArray) || array_key_exists('link_color', $fieldArray) || array_key_exists('border', $fieldArray) || array_key_exists('typography', $fieldArray) ) {
+            if (Redux_Helpers::isFieldInUseByType($this->fields, array('color', 'color_gradient', 'link_color', 'border', 'typography'))) {
                 wp_enqueue_script('wp-color-picker');
                 wp_enqueue_style( 'wp-color-picker' );
             }
@@ -1587,14 +1611,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             add_thickbox();
-
-            wp_register_script(
-                'select2-js',
-                self::$_url . 'assets/js/vendor/select2/select2.min.js',
-                array( 'jquery' ),
-                filemtime( self::$_dir . 'assets/js/vendor/select2/select2.min.js' ),
-                true
-            );
 
             wp_register_script(
                 'qtip-js',
@@ -1612,9 +1628,15 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 true
             );
 
-            // default JS dependency array
-            $arrEnq = array( 'jquery', 'select2-js', 'qtip-js', 'serializeForm-js' );
-
+            wp_register_script(
+                'redux-js',
+                self::$_url . 'assets/js/redux' . $min . '.js',
+                array( 'jquery', 'qtip-js', 'serializeForm-js' ),
+                filemtime( self::$_dir . 'assets/js/redux' . $min . '.js' ),
+                true
+            );
+            
+            
             // Embed the compress version unless in dev mode
             // dev_mode = true
             if ( isset($this->args['dev_mode'] ) && $this->args['dev_mode'] === true) {
@@ -1626,28 +1648,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     filemtime( self::$_dir . 'assets/js/vendor.min.js' ),
                     true
                 );
-
-                wp_register_script(
-                    'redux-js',
-                    self::$_url . 'assets/js/redux.js',
-                    $arrEnq,
-                    filemtime( self::$_dir . 'assets/js/redux.js' ),
-                    true
-                );
+                wp_enqueue_script('redux-vendor');
 
                 // dev_mode - false
             } else {
                 wp_enqueue_style( 'redux-css' );
-
-                if ( file_exists( self::$_dir . 'assets/js/redux.min.js' ) ) {
-                    wp_register_script(
-                        'redux-js',
-                        self::$_url . 'assets/js/redux.min.js',
-                        $arrEnq,
-                        filemtime( self::$_dir . 'assets/js/redux.min.js' ),
-                        true
-                    );
-                }
             }
 
             foreach( $this->sections as $section ) {
