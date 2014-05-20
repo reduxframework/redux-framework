@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.6 =
+* Fixed:      Permissions argument on section array not filtering out raw field.
+
 = 3.2.9.5 =
 * Fixed:      Too many CSS tweaks to list, due to last build.
 * Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
