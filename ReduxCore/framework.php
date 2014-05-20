@@ -2169,7 +2169,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         foreach($section['fields'] as $num => $field_data) {
                             $field_type = $field_data['type'];
 
-                            if ($field_type != 'section' || $field_type != 'divide' || $field_type != 'info' ) {
+                            if ($field_type != 'section' || $field_type != 'divide' || $field_type != 'info' || $field_type != 'raw' ) {
                                 $field_id = $field_data['id'];
                                 $default = isset($this->options_defaults[$field_id]) ? $this->options_defaults[$field_id] : '';
                                 $data = isset($this->options[$field_id]) ? $this->options[$field_id] : $default;
@@ -2423,7 +2423,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                  * @param array options
                  * @param string CSS that get sent to the compiler hook
                  */
-                do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS ); // REMOVE
+                do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS, $this->transients['changed_values'] ); // REMOVE
                 
                 /**
                  * action 'redux/options/{opt_name}/compiler'
