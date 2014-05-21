@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.10 =
+* Modified:   Centralized import/export code in anticipation of new builder features.
+
 = 3.2.9.9 =
 * Modified:   select2 loads only when a field requires it.
 
