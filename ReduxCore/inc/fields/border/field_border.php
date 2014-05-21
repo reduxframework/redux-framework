@@ -226,18 +226,7 @@ if (!class_exists('ReduxFramework_border')) {
                 $this->value['border-bottom'] = $val;
                 $this->value['border-left'] = $val;
                 $this->value['border-right'] = $val;
-            } else {
-//                if (isset($this->value['border-width'])) {
-//                    $val = $this->value['border-width'];
-//                    
-//                    
-//                    $this->value['border-top'] = $val;
-//                    $this->value['border-bottom'] = $val;
-//                    $this->value['border-left'] = $val;
-//                    $this->value['border-right'] = $val;
-//                    
-//                }
-            }
+            } 
 
             $cleanValue = array(
                 'color'     => !empty($this->value['border-color']) ? $this->value['border-color'] : 'inherit',
