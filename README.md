@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.11 =
+* Fixed:      Vendor js not loading properly when dev_mode = true
+* Fixed:      Border field not outputting properly.
+
 = 3.2.9.10 =
 * Modified:   Centralized import/export code in anticipation of new builder features.
 * Fixed:      Removed rogue echo statement.
