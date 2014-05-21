@@ -51,7 +51,6 @@ if( !class_exists( 'Redux_Helpers' ) ) {
 
         public static function isFieldInUseByType($fields, $field =  array()) {
             foreach($field as $name) {
-                echo $name;
                 if (array_key_exists($name, $fields)) {
                     return true;
                 }
