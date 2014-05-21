@@ -1470,6 +1470,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _enqueue() {
             global $wp_styles;
 
+            Redux_Functions::$_parent = $this;
             $min = Redux_Functions::isMin();
             
             // Select2 business.  Fields:  Background, Border, Dimensions, Select, Slider, Typography
@@ -1627,15 +1628,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 '1.0.0',
                 true
             );
-
-            wp_register_script(
-                'redux-js',
-                self::$_url . 'assets/js/redux' . $min . '.js',
-                array( 'jquery', 'qtip-js', 'serializeForm-js' ),
-                filemtime( self::$_dir . 'assets/js/redux' . $min . '.js' ),
-                true
-            );
-            
             
             // Embed the compress version unless in dev mode
             // dev_mode = true
@@ -1648,13 +1640,26 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     filemtime( self::$_dir . 'assets/js/vendor.min.js' ),
                     true
                 );
-                wp_enqueue_script('redux-vendor');
 
                 // dev_mode - false
             } else {
                 wp_enqueue_style( 'redux-css' );
             }
 
+            $depArray = array( 'jquery', 'qtip-js', 'serializeForm-js',  );
+            
+            if (true === $this->args['dev_mode']) {
+                array_push($depArray, 'redux-vendor');
+            }
+
+            wp_register_script(
+                'redux-js',
+                self::$_url . 'assets/js/redux' . $min . '.js',
+                $depArray,
+                filemtime( self::$_dir . 'assets/js/redux' . $min . '.js' ),
+                true
+            );
+            
             foreach( $this->sections as $section ) {
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $field ) {

@@ -27,10 +27,11 @@ if (!class_exists('Redux_Functions')) {
 
         public static function isMin(){
             $min = '';
+            
             if (false == self::$_parent->args['dev_mode']) {
                 $min = '.min';
             }
-            
+
             return $min;
         }
         
