@@ -78,10 +78,10 @@ if (!class_exists('ReduxFramework_spacing')) {
                 unset($this->value['units']);
             }
 
-            if ($this->field['mode'] == "absolute") {
-                $this->field['units'] = "";
-                $this->value['units'] = "";
-            }
+//            if ($this->field['mode'] == "absolute") {
+//                $this->field['units'] = "";
+//                $this->value['units'] = "";
+//            }
 
             if ($this->field['units'] == false) {
                 $this->value == "";
@@ -204,7 +204,7 @@ if (!class_exists('ReduxFramework_spacing')) {
             /**
               Units
              * */
-            if ($this->field['units'] !== false && is_array($this->field['units']) && !isset($absolute) && $this->field['display_units'] == true){
+            if ($this->field['units'] !== false && is_array($this->field['units']) /* && !isset($absolute) */ && $this->field['display_units'] == true){
 
                 echo '<div class="select_wrapper spacing-units" original-title="' . __('Units', 'redux-framework') . '">';
                 echo '<select data-placeholder="' . __('Units', 'redux-framework') . '" class="redux-spacing redux-spacing-units select' . $this->field['class'] . '" original-title="' . __('Units', 'redux-framework') . '" name="' . $this->field['name'] . '[units]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '_units">';
@@ -270,7 +270,7 @@ if (!class_exists('ReduxFramework_spacing')) {
 
             $mode = ( $this->field['mode'] != "absolute" ) ? $this->field['mode'] : "";
             $units = isset($this->value['units']) ? $this->value['units'] : "";
-
+            echo 'units: ' . $units;
             $style = '';
 
             if (!empty($mode)) {
@@ -279,7 +279,7 @@ if (!class_exists('ReduxFramework_spacing')) {
                         continue;
                     }
                     if (empty($value)) {
-                        $value = 0;
+                        $value = '0' ;
                     }
                     $style .= $key . ':' . $value . ';';
                 }
