@@ -198,8 +198,12 @@ jQuery(document).ready(function($) {
         $('#' + mainID + ' .typography-letter-spacing').val(letter + units);
 
         if ($('#' + mainID).hasClass('typography-initialized')) {
-
-            $('#' + mainID + ' .typography-preview').css('font-size', size + units);
+            var isPreviewSize = $('#' + mainID + ' .typography-preview').data('preview-size');
+            
+            if (isPreviewSize == '0') {
+                $('#' + mainID + ' .typography-preview').css('font-size', size + units);
+            }
+            
             $('#' + mainID + ' .typography-preview').css('font-style', "normal");
             $('#' + mainID + ' .typography-preview').css('font-weight', style);
             //show in the preview box the font

@@ -485,11 +485,13 @@ class ReduxFramework_typography {
             
             if (isset($this->field['preview']['font-size'])) {
                 $g_size = 'style="font-size: ' . $this->field['preview']['font-size'] . ';"';
+                $inUse = '1';
             } else {
                 $g_size = '';
+                $inUse = '0';
             }
 
-            echo '<p class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
+            echo '<p data-preview-size="' . $inUse . '" class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
             echo '</div>'; // end typography container
         }
     }  //function
