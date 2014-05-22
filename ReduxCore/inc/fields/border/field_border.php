@@ -219,7 +219,7 @@ if (!class_exists('ReduxFramework_border')) {
 
         public function output() {
             if ( isset($this->field['all']) &&  true == $this->field['all']) {
-                $borderWidth = isset($this->value['border-width']) ? $this->value['border-width'] : 0;
+                $borderWidth = isset($this->value['border-width']) ? $this->value['border-width'] : '0px';
                 $val = isset($this->value['border-top']) ? $this->value['border-top'] : $borderWidth;
                 
                 $this->value['border-top'] = $val;
@@ -233,6 +233,7 @@ if (!class_exists('ReduxFramework_border')) {
                 'style'     => !empty($this->value['border-style']) ? $this->value['border-style'] : 'inherit'
             );
 
+            $borderWidth = '0px';
             if (isset($this->value['border-width'])) {
                 $borderWidth = $this->value['border-width'];
             }
