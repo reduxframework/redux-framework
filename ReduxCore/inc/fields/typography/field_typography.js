@@ -169,9 +169,6 @@ jQuery(document).ready(function($) {
             }
         }
 
-        $('#' + mainID + ' .typography-preview').css('font-size', size + units);
-        $('#' + mainID + ' .typography-preview').css('font-style', "normal");
-
         // Weight and italic
         if (style.indexOf("italic") !== -1) {
             $('#' + mainID + ' .typography-preview').css('font-style', 'italic');
@@ -181,22 +178,11 @@ jQuery(document).ready(function($) {
             $('#' + mainID + ' .typography-font-style').val('');
         }
         $('#' + mainID + ' .typography-font-weight').val(style);
-        $('#' + mainID + ' .typography-preview').css('font-weight', style);
 
-        //show in the preview box the font
-        $('#' + mainID + ' .typography-preview').css('font-family', family + ', sans-serif');
-
-        if (family === 'none' && family === '') {
-            //if selected is not a font remove style "font-family" at preview box
-            $('#' + mainID + ' .typography-preview').css('font-family', 'inherit');
-        }
         if (!height) {
             height = size;
         }
 
-        $('#' + mainID + ' .typography-preview').css('line-height', height + units);
-        $('#' + mainID + ' .typography-preview').css('word-spacing', word + units);
-        $('#' + mainID + ' .typography-preview').css('letter-spacing', letter + units);
         if (size === '') {
             $('#' + mainID + ' .typography-font-size').val('');
         } else {
@@ -212,6 +198,19 @@ jQuery(document).ready(function($) {
         $('#' + mainID + ' .typography-letter-spacing').val(letter + units);
 
         if ($('#' + mainID).hasClass('typography-initialized')) {
+
+            $('#' + mainID + ' .typography-preview').css('font-size', size + units);
+            $('#' + mainID + ' .typography-preview').css('font-style', "normal");
+            $('#' + mainID + ' .typography-preview').css('font-weight', style);
+            //show in the preview box the font
+            $('#' + mainID + ' .typography-preview').css('font-family', family + ', sans-serif');
+            if (family === 'none' && family === '') {
+                //if selected is not a font remove style "font-family" at preview box
+                $('#' + mainID + ' .typography-preview').css('font-family', 'inherit');
+            }
+            $('#' + mainID + ' .typography-preview').css('line-height', height + units);
+            $('#' + mainID + ' .typography-preview').css('word-spacing', word + units);
+            $('#' + mainID + ' .typography-preview').css('letter-spacing', letter + units);
 
             if (color) {
                 $('#' + mainID + ' .typography-preview').css('color', color);
