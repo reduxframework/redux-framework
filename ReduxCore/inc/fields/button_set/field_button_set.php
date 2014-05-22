@@ -92,14 +92,14 @@ if (!class_exists('ReduxFramework_button_set')) {
             // multi => true renders the field multi-selectable (checkbox vs radio)
             echo '<div class="buttonset ui-buttonset">';
 
-            $i = 0;
+            //$i = 0;
             foreach ($this->field['options'] as $k => $v) {
 
                 $selected = '';
                 if (isset($this->field['multi']) && $this->field['multi'] == true) {
                     $type = "checkbox";
                     $this->field['name_suffix'] = "[]";
-                    $i++;
+//                    $i++;
 
                     if (!empty($this->value) && !is_array($this->value)) {
                         $this->value = array($this->value);

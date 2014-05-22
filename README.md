@@ -74,6 +74,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.12 =
+* Fixed:      #1254 - Border field with 0px not outputting properly.
+* Fixed:      #1250 - Typography preview font-size not set in preview.
+* Fixed:      #1247 - Spacing field not outputting properly in `absolute` mode.
+* Modified:   Typography previewing hidden until font inputs are changed.
+
 = 3.2.9.11 =
 * Fixed:      Vendor js not loading properly when dev_mode = true
 * Fixed:      Border field not outputting properly.
