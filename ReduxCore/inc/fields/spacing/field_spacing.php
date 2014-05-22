@@ -270,7 +270,6 @@ if (!class_exists('ReduxFramework_spacing')) {
 
             $mode = ( $this->field['mode'] != "absolute" ) ? $this->field['mode'] : "";
             $units = isset($this->value['units']) ? $this->value['units'] : "";
-            echo 'units: ' . $units;
             $style = '';
 
             if (!empty($mode)) {
