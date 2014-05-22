@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.13 =
+* Fixed:      #1255 - button_set multi field not saving when all buttons not selected.
+
 = 3.2.9.12 =
 * Fixed:      #1254 - Border field with 0px not outputting properly.
 * Fixed:      #1250 - Typography preview font-size not set in preview.
