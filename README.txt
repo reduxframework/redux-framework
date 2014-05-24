@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.1
-Stable tag: 3.2.9.2
+Stable tag: 3.2.9.13
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,31 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.2.9.13 =
+* Modified    data => taxonomies now has a little more power behind it.
+* Fixed:      #1255 - button_set multi field not saving when all buttons not selected.
+* Fixed:      #1254 - Border field with 0px not outputting properly.
+* Fixed:      #1250 - Typography preview font-size not set in preview.
+* Fixed:      #1247 - Spacing field not outputting properly in `absolute` mode.
+* Modified:   Typography previewing hidden until font inputs are changed.
+* Fixed:      Vendor js not loading properly when dev_mode = true
+* Fixed:      Border field not outputting properly.
+* Modified:   Centralized import/export code in anticipation of new builder features.
+* Fixed:      Removed rogue echo statement.
+* Modified:   select2 loads only when a field requires it.
+* Modified:   More code to load JS on demand for fields require it.
+* Modified:   Field specific JS only loads with active field.
+* Fixed:      Hints stopped working due to classname change.
+* Fixed:      Permissions argument on section array not filtering out raw field.
+* Fixed:      Too many CSS tweaks to list, due to last build.
+* Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
+* Fixed:      Hint icon defaults to left position when screen size is under 782px.
+* Fixed:      `permissions` argument for fields and sections erasing saved field data.  See #1231
+* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
+* Fixed:      In dev_mode panel CSS was being loaded 2x.
+* Fixed:      Typography color picker bleeding under other elements.  #1225
+* Fixed:      Hint icon_color index error from builder.  #1222
 
 = 3.2.9 =
 * Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
