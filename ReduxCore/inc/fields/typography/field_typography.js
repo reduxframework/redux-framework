@@ -259,10 +259,12 @@ jQuery(document).ready(function($) {
 
         window.onbeforeunload = null;
     });
+
     //init when value is changed
     jQuery('.redux-typography').on('change', function() {
         typographySelect(this);
     });
+    
     //init when value is changed
     jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration').keyup(function() {
         typographySelect(this);
@@ -283,7 +285,56 @@ jQuery(document).ready(function($) {
     jQuery(".redux-typography-height, .redux-typography-word, .redux-typography-letter").numeric({
         allowMinus: true,
     });
-    //jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
+
+//    jQuery(".redux-typography-family").select2({
+//        
+//    }).on("select2-opening", function(e) {
+//        console.log('opening');
+//        
+//        var data = {
+//             action:     'redux_font_load',
+//         };
+//         
+//         $.post(redux_ajax_script.ajaxurl, data, function(response) {
+//             
+//             
+//        });
+//    });    
+    
+//    var aj_data = {
+//        action:         'redux_font_load',
+//    };
+//    
+//    $.post(redux_ajax_script.ajaxurl, aj_data, function(response) {
+//        console.log(response);
+//    });
+    
+//    var data = [{id:'none', text: 'none'}];
+//    $("#s2test").select2({
+//        query: function(query) {
+//          query.callback({results: data});
+//        },
+//          
+//         //data: [{id:'enh',text:'enhancement'},{id:'buggy',text:'bug'},{id:'dupe',text:'duplicate'},{id:'no',text:'invalid'},{id:'nono',text:'wontfix'}]
+//         
+//        }).on("select2-opening", function(e) {
+//            
+//             data = [{id:'enh',text:'enhancement','data-google': true},{id:'buggy',text:'bug'},{id:'dupe',text:'duplicate'},{id:'no',text:'invalid'},{id:'nono',text:'wontfix'}, {id:'biggus',text:'diccus'}];
+//            //.data('data',[{id:'enh',text:'enhancement'},{id:'buggy',text:'bug'},{id:'dupe',text:'duplicate'},{id:'no',text:'invalid'},{id:'nono',text:'wontfix'}]
+//            //);             
+////            
+////         });
+//         //}, 30); 
+//
+////             
+//        }).on('select2-selecting', function(val, object) {
+//            console.log(val.object['data-google'])
+////            //console.log(object)
+////            
+//        });
+//    //});    
+
+    
     jQuery(".redux-typography-family, .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration").select2({
         width: 'resolve',
         triggerChange: true,

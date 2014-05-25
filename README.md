@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.14 =
+* Fixed:      #1228
+
 = 3.2.9.13 =
 * Fixed:      #1255 - button_set multi field not saving when all buttons not selected.
 
