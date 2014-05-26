@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.9.13
+ * @version     3.2.9.16
  */
 
 // Exit if accessed directly
@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.15';
+        public static $_version = '3.2.9.16';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -93,20 +93,21 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             // Create our private upload directory
-            $upload = wp_upload_dir();
-            self::$_upload_dir = Redux_Helpers::cleanFilePath($upload['basedir']) . '/redux/';
-            self::$_upload_url = Redux_Helpers::cleanFilePath($upload['baseurl']) . '/redux/';
+	        global $wp_filesystem;
+	        if ( empty( $wp_filesystem ) ) {
+		        // Init wp_filesystem
+		        Redux_Functions::initWpFilesystem();
+	        }
+
+            self::$_upload_dir = trailingslashit( $wp_filesystem->wp_content_dir() ) . '/redux/';
+            self::$_upload_url = trailingslashit( content_url() ) . '/redux/';
 
             // Ensure it exists
             if (!is_dir(self::$_upload_dir)) {
-                global $wp_filesystem;
-
-                // Init wp_filesystem
-                Redux_Functions::initWpFilesystem();
-
                 // Create the directory
-                $wp_filesystem->mkdir(self::$_upload_dir);
+                $wp_filesystem->mkdir( self::$_upload_dir );
             }
+
         }// ::init()
 
         public $framework_url           = 'http://www.reduxframework.com/';
