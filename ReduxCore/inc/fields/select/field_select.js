@@ -15,7 +15,8 @@
             var default_params = {
                 width:          'resolve',
                 triggerChange:  true,
-                allowClear:     true
+                allowClear:     true,
+                minimumResultsForSearch: 10
             };
 
             if ($(this).siblings('.select2_params').size() > 0) {
