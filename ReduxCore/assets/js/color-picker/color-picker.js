@@ -70,7 +70,7 @@
         $('.color-transparency').on('click', function() {
             if ($(this).is(":checked")) {
                 
-                $('.redux-saved-color').val($('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color'));
+                $('.redux-saved-color').val($('#' + $(this).data('id').val());
                 $('#' + $(this).data('id')).val('transparent');
                 $('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color', 'transparent');
             } else {
@@ -83,7 +83,7 @@
                     }
                     
                     $('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color', prevColor);
-                    $('#' + $(this).data('id')).val('');
+                    $('#' + $(this).data('id')).val( prevColor );
                 }
             }
         });
