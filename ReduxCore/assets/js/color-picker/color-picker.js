@@ -69,21 +69,21 @@
         // When transparency checkbox is clicked
         $('.color-transparency').on('click', function() {
             if ($(this).is(":checked")) {
-                
-                $('.redux-saved-color').val($('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color'));
+
+                $('.redux-saved-color').val( $( '#' + $(this).data('id') ).val() );
                 $('#' + $(this).data('id')).val('transparent');
                 $('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color', 'transparent');
             } else {
                 if ($('#' + $(this).data('id')).val() === 'transparent') {
-                    
+
                     var prevColor = $('.redux-saved-color').val();
 
-                    if (prevColor == '') {
+                    if (prevColor === '') {
                         prevColor = $('#' + $(this).data('id')).data('default-color');
                     }
-                    
+
                     $('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color', prevColor);
-                    $('#' + $(this).data('id')).val('');
+                    $('#' + $(this).data('id')).val( prevColor );
                 }
             }
         });
