@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.17 =
+* Fixed:      Switching between transparency on and off now restores the last chosen color in all color fields. 
+
 = 3.2.9.16 =
 * Fixed:      Redux uploads dir should NOT be ~/wp-content/uploads, but just wp-content. As per Otto.
 * Fixed:      Navigation no longer has that annoying outline around the links. Yuk.
