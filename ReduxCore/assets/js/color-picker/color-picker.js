@@ -18,7 +18,7 @@
         $('.redux-color-init').wpColorPicker({
             change: function(u) {
                 redux_change($(this));
-                $('#' + u.target.id + '-transparency').removeAttr('checked');
+                $('#' + u.target.getAttribute('data-id') + '-transparency').removeAttr('checked');
             },
             clear: function() {
                 redux_change($(this).parent().find('.redux-color-init'));
