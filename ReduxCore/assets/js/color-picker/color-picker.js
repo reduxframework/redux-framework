@@ -70,7 +70,7 @@
         $('.color-transparency').on('click', function() {
             if ($(this).is(":checked")) {
 
-                $('.redux-saved-color').val( $('#' + $(this).data('id').val()) );
+                $('.redux-saved-color').val( $( '#' + $(this).data('id') ).val() );
                 $('#' + $(this).data('id')).val('transparent');
                 $('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color', 'transparent');
             } else {
@@ -78,7 +78,7 @@
 
                     var prevColor = $('.redux-saved-color').val();
 
-                    if (prevColor == '') {
+                    if (prevColor === '') {
                         prevColor = $('#' + $(this).data('id')).data('default-color');
                     }
 
