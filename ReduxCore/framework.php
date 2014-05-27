@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.9.17
+ * @version     3.2.9.18
  */
 
 // Exit if accessed directly
@@ -66,7 +66,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.9.17';
+        public static $_version = '3.2.9.18';
         public static $_dir;
         public static $_url;
         public static $_upload_dir;
@@ -1722,7 +1722,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $this->localize_data['fonts']           = $this->fonts;
             $this->localize_data['required_child']  = $this->required_child;
             $this->localize_data['fields']          = $this->fields;
-            $this->localize_data['fonts']           = $this->fonts;
+            $this->localize_data['googlefonts']     = $this->font_groups['google'];
+            
+            if (isset($this->font_groups['std'])) {
+                $this->localize_data['stdfonts']        = $this->font_groups['std'];
+            }
+            
+            if (isset($this->font_groups['customfonts'])) {
+                $this->localize_data['customfonts'] = $this->font_groups['customfonts'];
+            }
+
             $this->localize_data['folds']           = $this->folds;
             
             // Make sure the children are all hidden properly.

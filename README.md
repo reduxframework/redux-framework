@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.18 =
+* Modified:   Typography field rewritten to fill out font-family field dynamically, versus on page load.
+* Fixed:      All typography select fields render as select2.
+
 = 3.2.9.17 =
 * Fixed:      Switching between transparency on and off now restores the last chosen color in all color fields. 
 
