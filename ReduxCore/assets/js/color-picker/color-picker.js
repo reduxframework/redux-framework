@@ -77,6 +77,11 @@
                 if ($('#' + $(this).data('id')).val() === 'transparent') {
                     
                     var prevColor = $('.redux-saved-color').val();
+
+                    if (prevColor == '') {
+                        prevColor = $('#' + $(this).data('id')).data('default-color');
+                    }
+                    
                     $('#' + $(this).data('id')).parent().parent().find('.wp-color-result').css('background-color', prevColor);
                     $('#' + $(this).data('id')).val('');
                 }

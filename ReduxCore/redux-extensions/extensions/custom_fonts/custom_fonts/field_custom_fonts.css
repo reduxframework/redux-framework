@@ -1,0 +1,31 @@
+.font-pieces {
+    background: red;
+    margin: 0 10px;
+    padding: 5px;
+    color: #fff;
+    cursor: default !important;
+}
+.redux-container-custom_font table tr:first-child td {
+    padding: 10px 9px !important;
+}
+
+.redux-container-custom_font .upload_button_div {
+    margin: 10px 0;
+    float: right;
+}
+.fontActionWorking {
+    background: green !important;
+}
+
+.redux-container-custom_font .spinner {
+    margin-top:0;
+}
+.action-row {
+    text-align: right;
+    padding-right: 5px;
+    line-height: 20px;
+}
+.fontDelete {
+    float: right;
+
+}
