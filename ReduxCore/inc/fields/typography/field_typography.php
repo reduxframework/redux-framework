@@ -213,7 +213,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 echo '<input type="hidden" class="redux-typography-font-family ' . $this->field['class'] . '" data-user-fonts="' . $userFonts . '" name="' . $this->field['name'] . '[font-family]' . $this->field['name_suffix'] . '" value="' . $this->value['font-family'] . '" data-id="' . $this->field['id'] . '"  />';
                 echo '<input type="hidden" class="redux-typography-font-options ' . $this->field['class'] . '" name="' . $this->field['name'] . '[font-options]' . $this->field['name_suffix'] . '" value="' . $this->value['font-options'] . '" data-id="' . $this->field['id'] . '"  />';
 
-                echo '<input type="hidden" class="redux-typography-google-font" value="' . $isGoogleFont . '" id="' . $this->field['id'] . '">';
+                echo '<input type="hidden" class="redux-typography-google-font" value="' . $isGoogleFont . '" id="' . $this->field['id'] . '-google-font">';
                 
                 echo '<div class="select_wrapper typography-family" style="width: 220px; margin-right: 5px;">';
                 echo '<label>' . __('Font Family', 'redux-framework') . '</label>';
