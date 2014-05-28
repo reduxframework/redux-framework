@@ -3383,8 +3383,6 @@
                     }
                 }
 
-                echo '<li class="divide">&nbsp;</li>';
-
                 /**
                  * action 'redux-page-after-sections-menu-{opt_name}'
                  *
