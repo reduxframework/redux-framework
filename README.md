@@ -74,6 +74,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.22 =
+* Fixed:      Typography font backup not in sync with font-family.
+* Fixed:      Typography not saving font-family after switching back and forth between standard and google fonts.
+* Fixed:      Background field selects not properly aligned.
+
 = 3.2.9.21 =
 * Added:      select2 args for spacing field.
 * Modified:   All field javascript rewritten using jQuery objects (versus standard function).  Prepping for another crack at group field.

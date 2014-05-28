@@ -1,15 +1,15 @@
-.redux-main .redux-container-background .background-position,
-.redux-main .redux-container-background .background-position select,
-.redux-main .redux-container-background .background-attachment,
-.redux-main .redux-container-background .background-attachment select,
-.redux-main .redux-container-background .background-clip,
-.redux-main .redux-container-background .background-clip select,
-.redux-main .redux-container-background .background-origin,
-.redux-main .redux-container-background .background-origin select,
-.redux-main .redux-container-background .background-size,
-.redux-main .redux-container-background .background-size select,
-.redux-main .redux-container-background .background-repeat,
-.redux-main .redux-container-background .background-repeat select {
+.redux-main .redux-container-background .redux-background-position,
+.redux-main .redux-container-background .redux-background-position select,
+.redux-main .redux-container-background .redux-background-attachment,
+.redux-main .redux-container-background .redux-background-attachment select,
+.redux-main .redux-container-background .redux-background-clip,
+.redux-main .redux-container-background .redux-background-clip select,
+.redux-main .redux-container-background .redux-background-origin,
+.redux-main .redux-container-background .redux-background-origin select,
+.redux-main .redux-container-background .redux-background-size,
+.redux-main .redux-container-background .redux-background-size select,
+.redux-main .redux-container-background .redux-background-repeat,
+.redux-main .redux-container-background .redux-background-repeat select {
   width: 200px !important;
   margin-right: 10px;
   margin-bottom: 7px;
