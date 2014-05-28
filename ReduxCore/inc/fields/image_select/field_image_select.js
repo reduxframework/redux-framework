@@ -3,8 +3,14 @@
 (function($) {
     "use strict";
 
-    $(document).ready(function() {
+    $.reduxImageSelect = $.reduxImageSelect || {};
 
+    $(document).ready(function() {
+        $.reduxImageSelect.init();
+    });
+
+    $.reduxImageSelect.init = function(){
+        
         // On label click, change the input and class
         $('.redux-image-select label img, .redux-image-select label .tiles').click(function(e) {
             var id = $(this).closest('label').attr('for');
@@ -51,5 +57,5 @@
                 at: 'bottom center', // at the bottom right of...
             }
         });
-    });
+    };
 })(jQuery);

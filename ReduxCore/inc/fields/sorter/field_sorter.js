@@ -9,20 +9,28 @@
 (function($) {
     "use strict";
     
-    $(function() {
+    $.reduxSorter = $.reduxSorter || {};
+    
+    var scroll = '';
         
-        var scroll = '';
-        var $scrollable = $(".redux-sorter");
-        function scrolling(){
-            if (scroll == 'up') {
-                $scrollable.scrollTop($scrollable.scrollTop()-20);
-                setTimeout(scrolling,50);
-            } else if (scroll == 'down'){
-                $scrollable.scrollTop($scrollable.scrollTop()+20);
-                setTimeout(scrolling,50);
-            }
-        }        
+    $(document).ready(function() {
+        $.reduxSorter.init();
+    });
+    
+    $.reduxSorter.scrolling = function() {
+        var scrollable = $(".redux-sorter");
         
+        if (scroll == 'up') {
+            scrollable.scrollTop(scrollable.scrollTop() - 20);
+            setTimeout(scrolling, 50);
+        } else if (scroll == 'down'){
+            scrollable.scrollTop(scrollable.scrollTop() + 20);
+            setTimeout(scrolling, 50);
+        }
+    };
+        
+    $.reduxSorter.init = function() {
+            
         /**	Sorter (Layout Manager) */
         $('.redux-sorter').each(function() {
             var id = $(this).attr('id');
@@ -36,18 +44,21 @@
                 out: function( event, ui ) {
                     if (!ui.helper) return;
                     if (ui.offset.top>0) {
-                        scroll='down';
+                        scroll = 'down';
                     } else {
-                        scroll='up';
+                        scroll = 'up';
                     }
-                    scrolling();
+                    $.reduxSorter.scrolling();
+  
                 },
                 over: function( event, ui ) {
                     scroll='';
                 },
+                
                 deactivate:function( event, ui ) {
                     scroll='';
-                },                
+                },
+                
                 stop: function(event, ui) {
                     var sorter = redux.sorter[$(this).attr('data-id')];
                     var id = $(this).find('h3').text();
@@ -63,6 +74,7 @@
                         }
                     }
                 },
+                
                 update: function(event, ui) {
                     var sorter  = redux.sorter[$(this).attr('data-id')];
                     var id      = $(this).find('h3').text();
@@ -92,5 +104,5 @@
             });
             $( ".redux-sorter").disableSelection(); 
         });
-    });
+    };
 })(jQuery);

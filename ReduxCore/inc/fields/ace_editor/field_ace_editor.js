@@ -2,7 +2,15 @@
 
 (function($) {
     "use strict";
+    
+    $.reduxAceEditor = $.reduxAceEditor || {};
+    
     $(document).ready(function() {
+        $.reduxAceEditor.init();
+    });
+    
+    //$(document).ready(function() {
+    $.reduxAceEditor.init = function(){
         $('.ace-editor').each(function(index, element) {
             var area = element;
             var editor = $(element).attr('data-editor');
@@ -16,5 +24,5 @@
                 redux_change($(element));
             });
         });
-    });
+    };
 })(jQuery);

@@ -1,20 +1,22 @@
 /* global redux_change */
+
+/**
+ * Switch
+ * Dependencies		: jquery
+ * Feature added by	: Smartik - http://smartik.ws/
+ * Date			: 03.17.2013
+ */
+
 (function($) {
     "use strict";
 
-    $.redux = $.redux || {};
+    $.reduxSwitch = $.reduxSwitch || {};
 
     $(document).ready(function() {
-        $.redux.switch();
+        $.reduxSwitch.init();
     });
 
-    /**
-     * Switch
-     * Dependencies		: jquery
-     * Feature added by	: Smartik - http://smartik.ws/
-     * Date				: 03.17.2013
-     */
-    $.redux.switch = function() {
+    $.reduxSwitch.init = function() {
         $(".cb-enable").click(function() {
             if ($(this).hasClass('selected')) {
                 return;
@@ -34,8 +36,8 @@
 
             $($fold).slideDown('normal', "swing");
         });
+        
         $(".cb-disable").click(function() {
-
             if ($(this).hasClass('selected')) {
                 return;
             }

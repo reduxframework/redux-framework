@@ -3,14 +3,13 @@
 (function($) {
     "use strict";
 
-    $.gallery = $.gallery || {};
+    $.reduxGallery = $.reduxGallery || {};
 
     $(document).ready(function() {
-        //gallery insert functionality
-        $.gallery();
+        $.reduxGallery.init();
     });
 
-    $.gallery = function() {
+    $.reduxGallery.init = function() {
 
         // When the user clicks on the Add/Edit gallery button, we need to display the gallery editing
         $('body').on({

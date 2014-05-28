@@ -1,7 +1,13 @@
 (function($) {
     "use strict";
     
+    $.reduxImportExport = $.reduxImportExport || {};
+    
     $(document).ready(function() {
+        $.reduxImportExport.init();
+    });
+    
+    $.reduxImportExport.init = function() {
         $('#redux-import').click(function(e) {
             if ($('#import-code-value').val() === "" && $('#import-link-value').val() === "") {
                 e.preventDefault();
@@ -39,6 +45,5 @@
             }
             $('#redux-export-link-value').fadeIn('fast');
         }); 
-        
-    });
+    };
 })(jQuery);

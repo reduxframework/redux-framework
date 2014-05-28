@@ -3,8 +3,13 @@
 (function($) {
     "use strict";
 
+    $.reduxSpinner = $.reduxSpinner || {};
+    
     $(document).ready(function() {
+        $.reduxSpinner.init();
+    });
 
+    $.reduxSpinner.init = function() {
         $('.redux_spinner').each(function() {
             //slider init
             var spinner = redux.spinner[$(this).attr('rel')];
@@ -42,43 +47,37 @@
             $(this).addClass('spinnerInputChange');
         });
 
-        function cleanSpinnerValue(value, selector, spinner) {
-
-            if (!selector.hasClass('spinnerInputChange')) {
-                return;
-            }
-            selector.removeClass('spinnerInputChange');
-
-            if (value === "" || value === null) {
-                value = spinner.min;
-            } else if (value >= parseInt(spinner.max)) {
-                value = spinner.max;
-            } else if (value <= parseInt(spinner.min)) {
-                value = spinner.min;
-            } else {
-                value = Math.round(value / spinner.step) * spinner.step;
-            }
-
-            $("#" + spinner.id).val(value);
-       }
-
-        // Update the spinner from the input and vice versa
-        $(".spinner-input").blur(function() {
-            //        cleanSpinnerValue(jQuery(this).val(), jQuery(this), redux.spinner[jQuery(this).attr('id')]);
-        });
-
         $(".spinner-input").focus(function() {
-            cleanSpinnerValue($(this).val(), $(this), redux.spinner[$(this).attr('id')]);
+            $.reduxSpinner.clean($(this).val(), $(this), redux.spinner[$(this).attr('id')]);
         });
 
         $('.spinner-input').typeWatch({
             callback: function(value) {
-                cleanSpinnerValue(value, $(this), redux.spinner[$(this).attr('id')]);
+                $.reduxSpinner.clean(value, $(this), redux.spinner[$(this).attr('id')]);
             },
 
             wait:           500,
             highlight:      false,
             captureLength:  1
         });
-    });
+    };
+    
+    $.reduxSpinner.clean = function(value, selector, spinner) {
+        if (!selector.hasClass('spinnerInputChange')) {
+            return;
+        }
+        selector.removeClass('spinnerInputChange');
+
+        if (value === "" || value === null) {
+            value = spinner.min;
+        } else if (value >= parseInt(spinner.max)) {
+            value = spinner.max;
+        } else if (value <= parseInt(spinner.min)) {
+            value = spinner.min;
+        } else {
+            value = Math.round(value / spinner.step) * spinner.step;
+        }
+
+        $("#" + spinner.id).val(value);
+    };
 })(jQuery);

@@ -3,13 +3,13 @@
 (function($) {
     'use strict';
 
-    $.redux = $.redux || {};
+    $.reduxColorRGBA = $.reduxColorRGBA || {};
 
     $(document).ready(function() {
-        $.redux.color_rgba();
+        $.reduxColorRGBA.color_rgba();
     });
 
-    $.redux.color_rgba = function() {
+    $.reduxColorRGBA.color_rgba = function() {
         $('.redux-color_rgba-init').minicolors({
             animationSpeed:     50,
             animationEasing:    'swing',
@@ -33,7 +33,7 @@
 
         $('.redux-color_rgba').on('keyup', function() {
             var value = $(this).val();
-            var color = redux_color_rgba_validate(this);
+            var color = $.reduxColorRGBA.validate(this);
             var id = '#' + $(this).attr('id');
 
             if (value === "transparent") {
@@ -56,7 +56,7 @@
                 $('#' + $(this).data('id')).parent().parent().find('.minicolors-swatch-color').attr('style', '');
                 $(id + '-transparency').attr('checked', 'checked');
             } else {
-                if (redux_color_validate(this) === value) {
+                if ( $.reduxColorRGBA.validate(this) === value) {
                     if (value.indexOf("#") !== 0) {
                         $(this).val($(this).data('oldcolor'));
                     }
@@ -111,15 +111,10 @@
             $(this).parent().find('.minicolors-swatch-color').css('display', '');
         });
     };
+    
+    $.reduxColorRGBA.validate = function(field) {
+        var value = jQuery(field).val();
+        
+        return value;
+    };
 })(jQuery);
-
-// Run the validation
-function redux_color_rgba_validate(field) {
-    var value = jQuery(field).val();
-    /*
-     if (colourNameToHex(value) !== value.replace('#', '')) {
-     return colourNameToHex(value);
-     }
-     */
-    return value;
-}

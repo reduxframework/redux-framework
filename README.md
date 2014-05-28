@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.21 =
+* Added:      select2 args for spacing field.
+* Modified:   All field javascript rewritten using jQuery objects (versus standard function).  Prepping for another crack at group field.
+
 = 3.2.9.20 =
 * Added:      select2 args for the following fields: typography, background, border, dimensions and slider.
 * Fixed:      Removed select field dependency from background field.

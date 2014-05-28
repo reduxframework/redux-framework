@@ -3,13 +3,13 @@
 (function($) {
     "use strict";
 
-    $.redux = $.redux || {};
+    $.reduxSelect = $.reduxSelect || {};
 
     $(document).ready(function() {
-        $.redux.select();
+        $.reduxSelect.init();
     });
 
-    $.redux.select = function() {
+    $.reduxSelect.init = function() {
         $('select.redux-select-item').each(function() {
 
             var default_params = {
@@ -25,9 +25,13 @@
             }
 
             if ($(this).hasClass('font-icons')) {
-                default_params = $.extend({}, {formatResult: addIconToSelect, formatSelection: addIconToSelect, escapeMarkup: function(m) {
+                default_params = $.extend({}, {
+                    formatResult:       $.reduxSelect.addIcon, 
+                    formatSelection:    $.reduxSelect.addIcon, 
+                    escapeMarkup:       function(m) {
                         return m;
-                    }}, default_params);
+                    }
+                }, default_params);
             }
 
             $(this).select2(default_params);
@@ -46,9 +50,9 @@
         });
     };
 
-    function addIconToSelect(icon) {
+    $.reduxSelect.addIcon = function(icon) {
         if (icon.hasOwnProperty('id')) {
             return "<span class='elusive'><i class='" + icon.id + "'></i>" + "&nbsp;&nbsp;" + icon.id.toUpperCase() + "</span>";
         }
-    }
+    };
 })(jQuery);
