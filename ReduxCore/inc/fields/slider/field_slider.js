@@ -1,18 +1,24 @@
 (function($) {
     "use strict";
 
+    $.reduxSlider = $.reduxSlider || {};
+    
+    $(document).ready(function() {
+        $.reduxSlider.init();
+    });
+    
     // Return true for float value, false otherwise
-    function is_float(mixed_var) {
+    $.reduxSlider.isFloat = function(mixed_var) {
         return +mixed_var === mixed_var && (!(isFinite(mixed_var))) || Boolean((mixed_var % 1));
-    }
+    };
 
     // Return number of integers after the decimal point.
-    function decimalCount(res) {
+    $.reduxSlider.decimalCount = function(res) {
         var q = res.toString().split('.');
         return q[1].length;
-    }
+    };
 
-    function loadSelect(myClass, min, max, res, step) {
+    $.reduxSlider.loadSelect = function(myClass, min, max, res, step){
 
         //var j = step + ((decCount ) - (step )); //  18;
 
@@ -21,8 +27,8 @@
 
             //if (j === (step + ((decCount ) - (step )))) {
             var n = i;
-            if (is_float(res)) {
-                var decCount = decimalCount(res);
+            if ($.reduxSlider.isFloat(res)) {
+                var decCount = $.reduxSlider.decimalCount(res);
                 n = i.toFixed(decCount);
             }
 
@@ -33,9 +39,9 @@
             //}
             //j++;
         }
-    }
+    };
 
-    $(document).ready(function() {
+    $.reduxSlider.init = function() {
         $('div.redux-slider-container').each(function() {
 
             var start, toClass, defClassOne, defClassTwo, connectVal;
@@ -84,10 +90,10 @@
                 defClassOne = $('.redux-slider-select-one-' + mainID);
                 defClassTwo = $('.redux-slider-select-two-' + mainID);
 
-                loadSelect(defClassOne, minVal, maxVal, resVal, stepVal);
+                $.reduxSlider.loadSelect(defClassOne, minVal, maxVal, resVal, stepVal);
 
                 if (handles === 2) {
-                    loadSelect(defClassTwo, minVal, maxVal, resVal, stepVal);
+                    $.reduxSlider.loadSelect(defClassTwo, minVal, maxVal, resVal, stepVal);
                 }
 
             } else if (displayValue == DISPLAY_LABEL) {
@@ -195,10 +201,21 @@
                 }
             }
         });
-        $('select.redux-slider-select-one, select.redux-slider-select-two').select2({
+
+        var default_params = {
             width:          'resolve',
             triggerChange:  true,
             allowClear:     true
-        });
-    });
+        };        
+
+        var select2_handle = $('.redux-container-slider').find('.select2_params');
+        if (select2_handle.size() > 0) {
+            var select2_params = select2_handle.val();
+
+            select2_params = JSON.parse(select2_params);
+            default_params = $.extend({}, default_params, select2_params);
+        }
+
+        $('select.redux-slider-select-one, select.redux-slider-select-two').select2(default_params);
+    };
 })(jQuery);

@@ -18,7 +18,14 @@
     var selVals     = [];
     var isSelecting = false;
 
+    var default_params = {
+        width:          'resolve',
+        triggerChange:  true,
+        allowClear:     true        
+    };
+
     $(document).ready(function() {
+        
         $.reduxTypography.init();
     });
     
@@ -31,7 +38,15 @@
             if (family.data('value') !== "") {
                 $(family).val(family.data('value'));
             }
-
+            
+            var select2_handle = $(this).find('.select2_params');
+            if (select2_handle.size() > 0) {
+                var select2_params = select2_handle.val();
+                
+                select2_params = JSON.parse(select2_params);
+                default_params = $.extend({}, default_params, select2_params);
+            }
+            
             $.reduxTypography.select(family);
 
             window.onbeforeunload = null;
@@ -168,11 +183,7 @@
         });
 
         // Init select2 for indicated fields
-        $(" .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration").select2({
-            width:          'resolve',
-            triggerChange:  true,
-            allowClear:     true
-        });
+        $(" .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration").select2(default_params);
         
     };
     
@@ -295,11 +306,7 @@
                 $('#' + mainID + ' .redux-typography-style').html(html);
                 
                 // Init select2
-                $('#' + mainID +  ' .redux-typography-style').select2({
-                    width:          'resolve',
-                    triggerChange:  true,
-                    allowClear:     true
-                });
+                $('#' + mainID +  ' .redux-typography-style').select2(default_params);
                 
                 
                 // SUBSETS
@@ -328,11 +335,7 @@
                 $('#' + mainID + ' .redux-typography-subsets').html(html);
                 
                 // Init select2
-                $('#' + mainID +  ' .redux-typography-subsets').select2({
-                    width: 'resolve',
-                    triggerChange: true,
-                    allowClear: true
-                });
+                $('#' + mainID +  ' .redux-typography-subsets').select2(default_params);
                 
                 $('#' + mainID + ' .redux-typography-subsets').parent().fadeIn('fast');
                 $('#' + mainID + ' .typography-family-backup').fadeIn('fast');
@@ -356,11 +359,7 @@
                     $('#' + mainID + ' .redux-typography-style').html(html);
                     
                     // Init select2
-                    $('#' + mainID + ' .redux-typography-style').select2({
-                        width: 'resolve',
-                        triggerChange: true,
-                        allowClear: true
-                    });
+                    $('#' + mainID + ' .redux-typography-style').select2(default_params);
                     
                     // Prettify things
                     $('#' + mainID + ' .redux-typography-subsets').parent().fadeOut('fast');

@@ -74,6 +74,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.20 =
+* Added:      select2 args for the following fields: typography, background, border, dimensions and slider.
+* Fixed:      Removed select field dependency from background field.
+
 = 3.2.9.19 =
 * Fixed:      #1264 - Color-picker/transparent checkbox functionality.
 * Fixed:      Typography fine-tuning.

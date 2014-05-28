@@ -1,17 +1,28 @@
 (function($) {
     "use strict";
 
+    $.reduxDimensions = $.reduxDimensions || {};
+    
     $(document).ready(function() {
+        $.reduxDimensions.init();
+    });
 
-        $(".redux-dimensions-height, .redux-dimensions-width").numeric({
-            //allowMinus   : false,
-        });
+    $.reduxDimensions.init = function() {
+        var default_params = {
+            width:          'resolve',
+            triggerChange:  true,
+            allowClear:     true
+        };
 
-        $(".redux-dimensions-units").select2({
-            width: 'resolve',
-            triggerChange: true,
-            allowClear: true
-        });
+        var select2_handle = $('.redux-dimensions-container').find('.select2_params');
+        if (select2_handle.size() > 0) {
+            var select2_params = select2_handle.val();
+
+            select2_params = JSON.parse(select2_params);
+            default_params = $.extend({}, default_params, select2_params);
+        }
+
+        $(".redux-dimensions-units").select2(default_params);
 
         $('.redux-dimensions-input').on('change', function() {
             var units = $(this).parents('.redux-field:first').find('.field-units').val();
@@ -28,5 +39,5 @@
         $('.redux-dimensions-units').on('change', function() {
             $(this).parents('.redux-field:first').find('.redux-dimensions-input').change();
         });
-    });
+    };
 })(jQuery);

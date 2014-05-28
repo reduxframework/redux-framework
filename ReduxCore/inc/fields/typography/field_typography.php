@@ -184,6 +184,14 @@ if (!class_exists('ReduxFramework_typography')) {
 
             echo '<div id="' . $this->field['id'] . '" class="redux-typography-container" data-id="' . $this->field['id'] . '" data-units="' . $unit . '">';
 
+            if (isset($this->field['select2'])) { // if there are any let's pass them to js
+                $select2_params = json_encode($this->field['select2']);
+                $select2_params = htmlspecialchars($select2_params, ENT_QUOTES);
+
+                echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
+            }
+            
+            
             if ($this->field['font-family'] === true) {
                 /* Font Family */
                 if (filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN)) {

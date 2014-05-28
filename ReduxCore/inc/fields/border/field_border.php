@@ -104,6 +104,14 @@ if (!class_exists('ReduxFramework_border')) {
 
             $this->value = wp_parse_args($this->value, $defaults);
 
+            if (isset($this->field['select2'])) { // if there are any let's pass them to js
+                $select2_params = json_encode($this->field['select2']);
+                $select2_params = htmlspecialchars($select2_params, ENT_QUOTES);
+
+                echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
+            }
+            
+            
             echo '<input type="hidden" class="field-units" value="px">';
 
             if (isset($this->field['all']) && $this->field['all'] == true) {

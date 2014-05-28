@@ -251,21 +251,21 @@ if(!class_exists('ReduxFramework_slider')) {
                 time(),
                 true
             );
-
-            wp_enqueue_script(
-                'redux-field-select-js',
-                ReduxFramework::$_url.'inc/fields/select/field_select' . $min . '.js',
-                array('jquery', 'select2-js'),
-                time(),
-                true
-            );
-
-            wp_enqueue_style(
-                'redux-redux-field-select-css',
-                ReduxFramework::$_url.'inc/fields/select/field_select.css',
-                time(),
-                true
-            );
+//
+//            wp_enqueue_script(
+//                'redux-field-select-js',
+//                ReduxFramework::$_url.'inc/fields/select/field_select' . $min . '.js',
+//                array('jquery', 'select2-js'),
+//                time(),
+//                true
+//            );
+//
+//            wp_enqueue_style(
+//                'redux-redux-field-select-css',
+//                ReduxFramework::$_url.'inc/fields/select/field_select.css',
+//                time(),
+//                true
+//            );
         }
 
     //function
@@ -344,6 +344,14 @@ if(!class_exists('ReduxFramework_slider')) {
             }  elseif ($this->display_select == $this->field['display_value']) {
                 $showSelect = true;
 
+                if (isset($this->field['select2'])) { // if there are any let's pass them to js
+                    $select2_params = json_encode($this->field['select2']);
+                    $select2_params = htmlspecialchars($select2_params, ENT_QUOTES);
+
+                    echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
+                }
+                
+                
                 echo '<select class="redux-slider-select-one redux-slider-select-one-' . $fieldID . ' ' . $this->field['class'] . '"
                               name="'   . $nameOne . $this->field['name_suffix'] . '"
                               id="'     . $idOne . '">

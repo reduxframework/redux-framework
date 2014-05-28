@@ -4,16 +4,34 @@
 
 (function($) {
     "use strict";
+    
+    $.reduxBorder = $.reduxBorder || {};
+    
     $(document).ready(function() {
-
+        $.reduxBorder.init();
+    });
+    
+    $.reduxBorder.init = function() {
         $(".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all").numeric({
             allowMinus: false,
         });
 
-        $(".redux-border-style").select2({
-            triggerChange: true,
-            allowClear: true
-        });
+        var default_params = {
+            triggerChange:  true,
+            allowClear:     true
+        };
+
+
+        var select2_handle = $('.redux-container-border').find('.select2_params');
+
+        if (select2_handle.size() > 0) {
+            var select2_params = select2_handle.val();
+
+            select2_params = JSON.parse(select2_params);
+            default_params = $.extend({}, default_params, select2_params);
+        }
+
+        $(".redux-border-style").select2(default_params);
 
         $('.redux-border-input').on('change', function() {
             var units = $(this).parents('.redux-field:first').find('.field-units').val();
@@ -35,6 +53,5 @@
         $('.redux-border-units').on('change', function() {
             $(this).parents('.redux-field:first').find('.redux-border-input').change();
         });
-
-    });
+    };
 })(jQuery);

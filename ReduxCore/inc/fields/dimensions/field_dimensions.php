@@ -62,7 +62,6 @@ if (!class_exists('ReduxFramework_dimensions')) {
                 $this->value['units'] = $this->value['unit'];
             }
             
-            
             /*
              * Acceptable values checks.  If the passed variable doesn't pass muster, we unset them
              * and reset them with default values to avoid errors.
@@ -112,6 +111,14 @@ if (!class_exists('ReduxFramework_dimensions')) {
 
             echo '<fieldset id="' . $this->field['id'] . '" class="redux-dimensions-container" data-id="' . $this->field['id'] . '">';
 
+            if (isset($this->field['select2'])) { // if there are any let's pass them to js
+                $select2_params = json_encode($this->field['select2']);
+                $select2_params = htmlspecialchars($select2_params, ENT_QUOTES);
+
+                echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
+            }
+            
+            
             // This used to be unit field, but was giving the PHP index error when it was an array,
             // so I changed it.
             echo '<input type="hidden" class="field-units" value="' . $this->value['units'] . '">';
