@@ -575,6 +575,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'desc'      => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
                         'default'   => "#header{\nmargin: 0 auto;\n}"
                     ),
+                    /*
                     array(
                         'id'        => 'opt-ace-editor-js',
                         'type'      => 'ace_editor',
@@ -595,6 +596,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'desc'      => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
                         'default'   => '<?php\nisset ( $redux ) ? true : false;\n?>'
                     ),
+                    */
                     array(
                         'id'        => 'opt-editor',
                         'type'      => 'editor',

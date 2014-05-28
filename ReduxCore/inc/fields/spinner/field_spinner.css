@@ -9,17 +9,17 @@
   display: inline;
 }
 .redux-container-spinner .spinner-wrpr .spinner-input {
-  position: relative!important;
+  position: relative !important;
   z-index: 1;
-  width: 45px!important;
-  height: 30px!important;
-  background: #e7e7e7!important;
-  border: 1px solid #bfbfbf!important;
-  border-right: 0!important;
-  border-left: 0!important;
-  -webkit-border-radius: 0!important;
-  -moz-border-radius: 0!important;
-  border-radius: 0!important;
+  width: 45px !important;
+  height: 30px !important;
+  background: #e7e7e7 !important;
+  border: 1px solid #bfbfbf !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 .redux-container-spinner .ui-spinner-buttons {
   position: absolute;

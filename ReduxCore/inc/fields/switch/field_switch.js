@@ -2,61 +2,67 @@
 
 /**
  * Switch
- * Dependencies		: jquery
- * Feature added by	: Smartik - http://smartik.ws/
- * Date			: 03.17.2013
+ * Dependencies        : jquery
+ * Feature added by    : Smartik - http://smartik.ws/
+ * Date            : 03.17.2013
  */
 
-(function($) {
+(function( $ ) {
     "use strict";
 
     $.reduxSwitch = $.reduxSwitch || {};
 
-    $(document).ready(function() {
-        $.reduxSwitch.init();
-    });
+    $( document ).ready(
+        function() {
+            $.reduxSwitch.init();
+        }
+    );
 
     $.reduxSwitch.init = function() {
-        $(".cb-enable").click(function() {
-            if ($(this).hasClass('selected')) {
-                return;
+        $( ".cb-enable" ).click(
+            function() {
+                if ( $( this ).hasClass( 'selected' ) ) {
+                    return;
+                }
+
+                var parent = $( this ).parents( '.switch-options' );
+
+                $( '.cb-disable', parent ).removeClass( 'selected' );
+                $( this ).addClass( 'selected' );
+                $( '.checkbox-input', parent ).val( 1 );
+
+                redux_change( $( '.checkbox-input', parent ) );
+
+                //fold/unfold related options
+                var obj = $( this );
+                var $fold = '.f_' + obj.data( 'id' );
+
+                $( $fold ).slideDown( 'normal', "swing" );
             }
+        );
 
-            var parent = $(this).parents('.switch-options');
+        $( ".cb-disable" ).click(
+            function() {
+                if ( $( this ).hasClass( 'selected' ) ) {
+                    return;
+                }
 
-            $('.cb-disable', parent).removeClass('selected');
-            $(this).addClass('selected');
-            $('.checkbox-input', parent).val(1);
+                var parent = $( this ).parents( '.switch-options' );
 
-            redux_change($('.checkbox-input', parent));
+                $( '.cb-enable', parent ).removeClass( 'selected' );
+                $( this ).addClass( 'selected' );
+                $( '.checkbox-input', parent ).val( 0 );
 
-            //fold/unfold related options
-            var obj     = $(this);
-            var $fold   = '.f_' + obj.data('id');
+                redux_change( $( '.checkbox-input', parent ) );
 
-            $($fold).slideDown('normal', "swing");
-        });
-        
-        $(".cb-disable").click(function() {
-            if ($(this).hasClass('selected')) {
-                return;
+                //fold/unfold related options
+                var obj = $( this );
+                var $fold = '.f_' + obj.data( 'id' );
+
+                $( $fold ).slideUp( 'normal', "swing" );
             }
+        );
 
-            var parent = $(this).parents('.switch-options');
-
-            $('.cb-enable', parent).removeClass('selected');
-            $(this).addClass('selected');
-            $('.checkbox-input', parent).val(0);
-
-            redux_change($('.checkbox-input', parent));
-
-            //fold/unfold related options
-            var obj     = $(this);
-            var $fold   = '.f_' + obj.data('id');
-
-            $($fold).slideUp('normal', "swing");
-        });
-
-        $('.cb-enable span, .cb-disable span').find().attr('unselectable', 'on');
+        $( '.cb-enable span, .cb-disable span' ).find().attr( 'unselectable', 'on' );
     };
-})(jQuery);
+})( jQuery );
