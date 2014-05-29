@@ -1344,15 +1344,15 @@
                             remove_submenu_page( $this->args['page_slug'], $this->args['page_slug'] );
                         }
 
-                        if ( true === $this->args['show_import_export'] && false == $this->import_export->is_field ) {
+                        if ( true == $this->args['show_import_export'] && false == $this->import_export->is_field ) {
                             $this->import_export->add_submenu();
                         }
 
-                        if ( true === $this->args['dev_mode'] ) {
+                        if ( true == $this->args['dev_mode'] ) {
                             $this->debug->add_submenu();
                         }
 
-                        if ( true === $this->args['system_info'] ) {
+                        if ( true == $this->args['system_info'] ) {
                             add_submenu_page(
                                 $this->args['page_slug'],
                                 __( 'System Info', 'redux-framework' ),
@@ -1754,7 +1754,7 @@
 
                 // Embed the compress version unless in dev mode
                 // dev_mode = true
-                if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] === true ) {
+                if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] == true ) {
                     wp_enqueue_style( 'admin-css' );
                     wp_register_script(
                         'redux-vendor',
@@ -1771,7 +1771,7 @@
 
                 $depArray = array( 'jquery', 'qtip-js', 'serializeForm-js', );
 
-                if ( true === $this->args['dev_mode'] ) {
+                if ( true == $this->args['dev_mode'] ) {
                     array_push( $depArray, 'redux-vendor' );
                 }
 
@@ -3415,7 +3415,7 @@
                 }
 
                 // Debug tab
-                if ( $this->args['dev_mode'] === true ) {
+                if ( $this->args['dev_mode'] == true ) {
                     $this->debug->render_tab();
                 }
 
@@ -3496,7 +3496,7 @@
                 }
 
                 // Debug object output
-                if ( $this->args['dev_mode'] === true ) {
+                if ( $this->args['dev_mode'] == true ) {
                     $this->debug->render();
                 }
 
@@ -3595,7 +3595,7 @@
                 echo '<div class="clear"></div>';
                 echo '</div><!--wrap-->';
 
-                if ( $this->args['dev_mode'] === true ) {
+                if ( $this->args['dev_mode'] == true ) {
                     if ( current_user_can( 'administrator' ) ) {
                         global $wpdb;
                         echo "<br /><pre>";
