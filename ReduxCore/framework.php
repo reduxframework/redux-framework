@@ -1844,7 +1844,10 @@
                 $this->localize_data['fonts']          = $this->fonts;
                 $this->localize_data['required_child'] = $this->required_child;
                 $this->localize_data['fields']         = $this->fields;
-                $this->localize_data['googlefonts']    = (isset($this->font_groups['google']))? isset($this->font_groups['google']) : '';
+                
+                if ( isset( $this->font_groups['google'] ) ) {
+                    $this->localize_data['googlefonts'] = $this->font_groups['google'];
+                }
 
                 if ( isset( $this->font_groups['std'] ) ) {
                     $this->localize_data['stdfonts'] = $this->font_groups['std'];

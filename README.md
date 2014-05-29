@@ -77,6 +77,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 = 3.2.9.24 =
 * Fixed:      Changing font-family in typography didn't trigger 'save changes' notification.
 * Fixed:      More typography: Back up font appearing in font-family when opening selector.
+* Fixed:      Typography: undefined message when NOT using google fonts.  Thanks @farhanwazir
 
 = 3.2.9.23 =
 * Added:      `customizer_only` argument for fields & sections, contributed by @andreilupu.
