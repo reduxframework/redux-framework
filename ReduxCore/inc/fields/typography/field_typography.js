@@ -180,6 +180,8 @@
             // option values
             selVals     = val;
             isSelecting = true;
+            
+            redux_change($(this));
         });
 
         // Init select2 for indicated fields

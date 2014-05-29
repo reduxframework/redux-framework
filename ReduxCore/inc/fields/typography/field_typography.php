@@ -225,7 +225,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 
                 echo '<div class="select_wrapper typography-family" style="width: 220px; margin-right: 5px;">';
                 echo '<label>' . __('Font Family', 'redux-framework') . '</label>';
-                $placeholder = $this->value['font-family'] ? $this->value['font-family'] : __('Font family', 'redux-framework');
+                $placeholder = $fontFamily[0] ? $fontFamily[0] : __('Font family', 'redux-framework');
 
                 echo '<div class=" redux-typography redux-typography-family select2-container ' . $this->field['class'] . '" id="' . $this->field['id'] . '-family" placeholder="' . $placeholder . '" data-id="' . $this->field['id'] . '" data-value="' . $fontFamily[0] . '">';
 
