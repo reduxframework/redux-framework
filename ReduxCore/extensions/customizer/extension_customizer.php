@@ -418,7 +418,7 @@
                 }
 
                 if ( ! empty( $changed ) ) {
-                    setcookie( "redux-saved-{$this->args['opt_name']}", 1, time() + 1000, "/" );
+                    setcookie( "redux-saved-{$this->parent->args['opt_name']}", 1, time() + 1000, "/" );
                 }
 
                 if ( $compiler ) {
