@@ -1417,9 +1417,51 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'desc'      => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework-demo'),
                         'callback'  => 'redux_my_custom_field'
                     ),
+                    
+                    array(
+                        'id'        => 'opt-customizer-only-in-section',
+                        'type'      => 'select',
+                        'title'     => __('Customizer Only Option', 'redux-framework-demo'),
+                        'subtitle'  => __('The subtitle is NOT visible in customizer', 'redux-framework-demo'),
+                        'desc'      => __('The field desc is NOT visible in customizer.', 'redux-framework-demo'),
+                        'customizer_only'   => true,
+
+                        //Must provide key => value pairs for select options
+                        'options'   => array(
+                            '1' => 'Opt 1',
+                            '2' => 'Opt 2',
+                            '3' => 'Opt 3'
+                        ),
+                        'default'   => '2'
+                    ),                    
                 )
             );
 
+            $this->sections[] = array(
+                'icon'              => 'el-icon-list-alt',
+                'title'             => __('Customizer Only', 'redux-framework-demo'),
+                'desc'              => __('<p class="description">This Section should be visible only in Customizer</p>', 'redux-framework-demo'),
+                'customizer_only'   => true,
+                'fields'    => array(
+                    array(
+                        'id'        => 'opt-customizer-only',
+                        'type'      => 'select',
+                        'title'     => __('Customizer Only Option', 'redux-framework-demo'),
+                        'subtitle'  => __('The subtitle is NOT visible in customizer', 'redux-framework-demo'),
+                        'desc'      => __('The field desc is NOT visible in customizer.', 'redux-framework-demo'),
+                        'customizer_only'   => true,
+
+                        //Must provide key => value pairs for select options
+                        'options'   => array(
+                            '1' => 'Opt 1',
+                            '2' => 'Opt 2',
+                            '3' => 'Opt 3'
+                        ),
+                        'default'   => '2'
+                    ),
+                )
+            );            
+            
             $this->sections[] = array(
                 'title'     => __('Import / Export', 'redux-framework-demo'),
                 'desc'      => __('Import and Export your Redux Framework settings from file, text or URL.', 'redux-framework-demo'),

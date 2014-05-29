@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.23 =
+* Added:      `customizer_only` argument for fields & sections, contributed by @andreilupu.
+
 = 3.2.9.22 =
 * Fixed:      Typography font backup not in sync with font-family.
 * Fixed:      Typography not saving font-family after switching back and forth between standard and google fonts.

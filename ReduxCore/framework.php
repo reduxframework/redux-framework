@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.2.9.22
+     * @version     3.2.9.23
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.2.9.22';
+            public static $_version = '3.2.9.23';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -76,7 +76,8 @@
             public static $_as_plugin = false;
 
             static function init() {
-
+                global $wp_filesystem;
+                
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
                 self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
                 $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
@@ -91,11 +92,7 @@
                 }
 
                 // Create our private upload directory
-                global $wp_filesystem;
-                if ( empty( $wp_filesystem ) ) {
-                    // Init wp_filesystem
-                    Redux_Functions::initWpFilesystem();
-                }
+                Redux_Functions::initWpFilesystem();
 
                 self::$_upload_dir = trailingslashit( $wp_filesystem->wp_content_dir() ) . '/redux/';
                 self::$_upload_url = trailingslashit( content_url() ) . '/redux/';
@@ -1328,6 +1325,10 @@
                                     continue;
                                 }
 
+                                if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ){
+                                    continue;
+                                }                                
+                                
                                 add_submenu_page(
                                     $this->args['page_slug'],
                                     $section['title'],
@@ -2320,6 +2321,10 @@
                                 continue; // You need a type!
                             }
 
+                            if ( isset( $field['customizer_only'] ) && $field['customizer_only'] == true ) {
+                                continue; // ok
+                            }                            
+                            
                             /**
                              * filter 'redux/options/{opt_name}/field/{field.id}'
                              *
@@ -3377,6 +3382,10 @@
                         }
                     }
 
+                    if ( isset($section['customizer_only']) && $section['customizer_only'] == true ) {
+                        continue;
+                    }                    
+                    
                     if ( false == $skip_sec ) {
                         echo $this->section_menu( $k, $section );
                         $skip_sec = false;
@@ -3427,6 +3436,10 @@
                 echo '<div class="redux-main">';
 
                 foreach ( $this->sections as $k => $section ) {
+                    if ( isset($section['customizer_only']) && $section['customizer_only'] == true ) {
+                        continue;
+                    }                    
+                    
                     //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
                     $section['class'] = isset( $section['class'] ) ? ' ' . $section['class'] : '';
                     echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab' . $section['class'] . '" data-rel="' . $k . '">';
