@@ -46,14 +46,9 @@
                 // Something wrong happened
                 if ( count( $cssArray ) == 0 ) {
                     return;
-
-                    // The old way
-                } elseif ( count( $cssArray ) == 1 ) {
-                    $css = self::theOldWay( $cssArray, $style );
-
-                    // the new way (or multiple selectors from the old way)
-                } elseif ( count( $cssArray ) > 1 ) {
+                } else { //if ( count( $cssArray ) >= 1 ) {
                     $css = '';
+                    
                     foreach ( $cssArray as $element => $selector ) {
 
                         // The old way

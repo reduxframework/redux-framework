@@ -74,9 +74,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.26 =
+* Fixed:      #1281 - color field output/compiler outputting incorrect selector when only one array present.
+
 = 3.2.9.25 =
-* Fixed:      Update check only appears once if multiple instances of Redux are loaded in
-              the same wordpress instance.
+* Fixed:      Update check only appears once if multiple instances of Redux are loaded in the same wordpress instance.
 
 = 3.2.9.24 =
 * Fixed:      Changing font-family in typography didn't trigger 'save changes' notification.
