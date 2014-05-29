@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.2.9.24';
+            public static $_version = '3.2.9.25';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -490,9 +490,9 @@
 
             public function _update_check() {
                 // Only one notice per instance please
-                if ( ! isset( $this->update_checked ) ) {
+                if ( ! isset( $GLOBALS['redux_update_check'] ) ) {
                     Redux_Functions::updateCheck( self::$_version );
-                    $this->update_checked = 1;
+                    $GLOBALS['redux_update_check'] = 1;
                 }
             }
 
