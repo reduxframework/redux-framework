@@ -348,13 +348,24 @@
              * @return      void
              */
             public function enqueue() {
+                
                 wp_enqueue_script(
-                    'redux-field-background-js',
-                    ReduxFramework::$_url . 'inc/fields/background/field_background.js',
-                    array( 'jquery', 'wp-color-picker', 'select2-js' ),
+                    'redux-field-color-js',
+                    ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
+                    array( 'jquery', 'wp-color-picker' ),
                     time(),
                     true
                 );
+                
+                wp_enqueue_script(
+                    'redux-field-background-js',
+                    ReduxFramework::$_url . 'inc/fields/background/field_background.js',
+                    array( 'jquery', 'select2-js' ),
+                    time(),
+                    true
+                );
+                
+                wp_enqueue_style( 'wp-color-picker' );
 
                 wp_enqueue_style(
                     'redux-field-background-css',
