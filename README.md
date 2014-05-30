@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.29 =  
+Fixed:        #1289 - Typography not retaining size/height/spacing/word/letter spacing settings.
+
 = 3.2.9.28 =
 * Fixed:      #1288 - Background color-picker dependency missing.  Thanks @farhanwazir.
 

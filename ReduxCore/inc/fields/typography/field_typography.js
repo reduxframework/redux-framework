@@ -54,12 +54,12 @@
 
         //init when value is changed
         $('.redux-typography').on('change', function() {
-            $.reduxTypography.select($(this));
+            $.reduxTypography.select($(this).parents('.redux-container-typography:first'));
         });
 
         //init when value is changed
         $('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration').keyup(function() {
-            $.reduxTypography.select ($(this));
+            $.reduxTypography.select ($(this).parents('.redux-container-typography:first'));
         });
 
         // Have to redeclare the wpColorPicker to get a callback function
@@ -214,7 +214,7 @@
     
     //  Sync up font options
     $.reduxTypography.select = function(selector) {
-        
+
         // Main id for selected field
         var mainID          = $(selector).parents('.redux-container-typography:first').attr('data-id');
         
