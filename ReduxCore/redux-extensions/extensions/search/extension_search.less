@@ -1,0 +1,37 @@
+.redux_field_search {
+    position: absolute;
+    width: 250px !important;
+    right: 30px;
+    padding: 4px 7px;
+}
+.redux-has-sections {
+    .redux_field_search {
+        right: 10px;
+    }    
+}
+.redux-main.redux-search {
+
+    .redux-section-field, .redux-info-field, .redux-notice-field, .redux-container-group, 
+    .redux-container-raw, .redux-section-desc, .redux-group-tab h3, .hr, .redux-field-info, tr {
+        display: none;
+    }
+    #import_export_default_section_group, #dev_mode_default_section_group {
+        display:none !important;
+    }
+    
+    .redux-group-tab {
+        margin-bottom: 0;
+    }
+    .redux-group-tab .form-table-section-indented {
+        margin-left: 0 !important;
+        width: 100%;
+
+        .redux-group-tab .form-table-section tr:first-of-type th:first-of-type {
+          padding: inherit !important;
+        }
+        .redux-group-tab h3 {
+          margin-top: inherit !important;
+        }
+
+    }
+}

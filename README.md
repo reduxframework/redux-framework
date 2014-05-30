@@ -74,6 +74,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.27 =
+* Fixed:      Search extension failed do to dependency issue from the core.
+
 = 3.2.9.26 =
 * Fixed:      #1281 - color field output/compiler outputting incorrect selector when only one array present.
 

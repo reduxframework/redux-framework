@@ -100,14 +100,6 @@
                 );
 
                 wp_enqueue_script(
-                    'redux-field-spinner-typewatch-js',
-                    ReduxFramework::$_url . 'inc/fields/spinner/vendor/jquery.typewatch.js',
-                    array( 'jquery' ),
-                    time(),
-                    true
-                );
-
-                wp_enqueue_script(
                     'redux-field-spinner-js',
                     ReduxFramework::$_url . 'inc/fields/spinner/field_spinner' . Redux_Functions::isMin() . '.js',
                     array(
