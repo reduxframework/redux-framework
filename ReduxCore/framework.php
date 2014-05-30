@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.2.9.27
+     * @version     3.2.9.28
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.2.9.27';
+            public static $_version = '3.2.9.28';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -523,11 +523,11 @@
                 $locale = apply_filters( "redux/textdomain/{$this->args['opt_name']}", get_locale(), 'redux-framework' );
 
                 if ( strpos( $locale, '_' ) === false ) {
-                    if ( file_exists( dirname( __FILE__ ) . '/languages/' . strtolower( $locale ) . '_' . strtoupper( $locale ) . '.mo' ) ) {
+                    if ( file_exists( self::$_dir . 'languages/' . strtolower( $locale ) . '_' . strtoupper( $locale ) . '.mo' ) ) {
                         $locale = strtolower( $locale ) . '_' . strtoupper( $locale );
                     }
                 }
-                load_textdomain( 'redux-framework', dirname( __FILE__ ) . '/languages/' . $locale . '.mo' );
+                $v = load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
             } // _internationalization()
 
             /**
@@ -1715,8 +1715,9 @@
                     wp_enqueue_script( 'jquery-ui-accordion' );
                 }
 
-                // Load wp-color-picker for color, color_gradient, link_color, border, and typography
+                // Load wp-color-picker for color, color_gradient, link_color, border, background and typography
                 if ( Redux_Helpers::isFieldInUseByType( $this->fields, array(
+                        'background',    
                         'color',
                         'color_gradient',
                         'link_color',
