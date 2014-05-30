@@ -105,7 +105,6 @@
                     array(
                         'jquery',
                         'redux-field-spinner-custom-js',
-                        'redux-field-spinner-typewatch-js',
                         'jquery-ui-core',
                         'jquery-ui-dialog'
                     ),
