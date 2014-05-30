@@ -13,10 +13,10 @@
      * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
      *
      * @package     ReduxFramework
-     * @subpackage  Field_Separator
-     * @author      Fahan Wazir (farhanwazir)
-     * @author      Farhan Wazir
-     * @version     3.2.0
+     * @subpackage  Field_Divide
+     * @author      Daniel J Griffiths (Ghost1227)
+     * @author      Dovy Paukstys
+     * @version     3.0.0
      */
 
 // Exit if accessed directly
@@ -28,11 +28,11 @@
     if ( ! class_exists( 'ReduxFramework_Separator ' ) ) {
 
         /**
-         * Main ReduxFramework_Separator class
+         * Main ReduxFramework_divide class
          *
          * @since       1.0.0
          */
-        class ReduxFramework_Separator {
+        class ReduxFramework_separator {
 
             /**
              * Field Constructor.
