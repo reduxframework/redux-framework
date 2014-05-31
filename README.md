@@ -78,8 +78,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.30 =  
+* Fixed:      #1291 - Change of font-family would not trigger preview, or show in open preview.  
+
 = 3.2.9.29 =  
-Fixed:        #1289 - Typography not retaining size/height/spacing/word/letter spacing settings.
+* Fixed:      #1289 - Typography not retaining size/height/spacing/word/letter spacing settings.
 
 = 3.2.9.28 =
 * Fixed:      #1288 - Background color-picker dependency missing.  Thanks @farhanwazir.

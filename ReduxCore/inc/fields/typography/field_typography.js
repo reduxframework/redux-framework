@@ -54,7 +54,7 @@
 
         //init when value is changed
         $('.redux-typography').on('change', function() {
-            $.reduxTypography.select($(this).parents('.redux-container-typography:first'));
+            $.reduxTypography.select($(this)); //.parents('.redux-container-typography:first'));
         });
 
         //init when value is changed
