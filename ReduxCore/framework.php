@@ -2164,7 +2164,7 @@
                 $hint = '';
                 $th   = "";
 
-                if ( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" ) {
+                if ( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info"  && $field['type'] !== "separator" && $field['type'] !== "group" && $field['type'] !== "section" ) {
                     $default_mark = ( ! empty( $field['default'] ) && isset( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] == $field['default'] && ! empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
 
                     // If a hint is specified in the field, process it.
@@ -2216,7 +2216,7 @@
                     $th = '<div class="redux_field_th">' . $th . '</div>';
                 }
 
-                if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" && $field['type'] !== "editor" && $field['type'] !== "ace_editor" ) {
+                if ( $this->args['default_show'] === true && isset( $field['default'] ) && isset( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && $field['type'] !== "info" && $field['type'] !== "group" && $field['type'] !== "section" && $field['type'] !== "editor" && $field['type'] !== "ace_editor"  && $field['type'] !== "separator" ) {
                     $th .= $this->get_default_output_string( $field );
                 }
 
@@ -2300,7 +2300,7 @@
                             foreach ( $section['fields'] as $num => $field_data ) {
                                 $field_type = $field_data['type'];
 
-                                if ( $field_type != 'section' || $field_type != 'divide' || $field_type != 'info' || $field_type != 'raw' ) {
+                                if ( $field_type != 'section' || $field_type != 'divide' || $field_type != 'info' || $field_type != 'raw' || $field_type != 'separator' ) {
                                     $field_id = $field_data['id'];
                                     $default  = isset( $this->options_defaults[ $field_id ] ) ? $this->options_defaults[ $field_id ] : '';
                                     $data     = isset( $this->options[ $field_id ] ) ? $this->options[ $field_id ] : $default;
@@ -2387,7 +2387,7 @@
                                 }
                             }
 
-                            if ( isset( $field['type'] ) && $field['type'] == "info" && $sectionIndent ) {
+                            if ( isset( $field['type'] ) && $field['type'] == "info" && $field['type'] == "separator" && $sectionIndent ) {
                                 $field['sectionIndent'] = $sectionIndent;
                             }
 
@@ -3848,7 +3848,7 @@
                             $field['description'] = $field['desc'];
                         }
 
-                        echo ( isset( $field['description'] ) && $field['type'] != "info" && $field['type'] !== "section" && $field['type'] != "group" && ! empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
+                        echo ( isset( $field['description'] ) && $field['type'] != "info" && $field['type'] != "separator" && $field['type'] !== "section" && $field['type'] != "group" && ! empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
 
                         if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
                             echo '</fieldset>';
