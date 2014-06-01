@@ -155,7 +155,7 @@
                         $is_preset_class = $is_preset ? '-preset-' : '';
 
                         echo '<li class="redux-image-select">';
-                        echo '<label class="' . $selected . ' redux-image-select' . $is_preset_class . $this->field['id'] . '_' . $x . '" for="' . $this->field['id'] . '_' . ( array_search( $k, array_keys( $this->field['options'] ) ) + 1 ) . '">';
+                        echo '<label class="' . $selected . ' redux-image-select' . $is_preset_class . ' ' .  $this->field['id'] . '_' . $x . '" for="' . $this->field['id'] . '_' . ( array_search( $k, array_keys( $this->field['options'] ) ) + 1 ) . '">';
 
                         echo '<input type="radio" class="' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . ( array_search( $k, array_keys( $this->field['options'] ) ) + 1 ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . '/>';
                         if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
