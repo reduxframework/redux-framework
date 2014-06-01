@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.2.9.30
+     * @version     3.2.9.31
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.2.9.30';
+            public static $_version = '3.2.9.31';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -72,10 +72,12 @@
             public static $wp_content_url;
             public static $base_wp_content_url;
             public static $_properties;
-            public static $_is_plugin = true;
-            public static $_as_plugin = false;
+            public static $_is_plugin   = true;
+            public static $_as_plugin   = false;
+            public static $_instance    = null;
 
             static function init() {
+
                 global $wp_filesystem;
                 
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
@@ -102,7 +104,7 @@
                     // Create the directory
                     $wp_filesystem->mkdir( self::$_upload_dir );
                 }
-
+                
             }
 
             // ::init()
@@ -534,9 +536,15 @@
              * @return ReduxFramework
              */
             public function get_instance() {
+                //self::$_instance = $this;
                 return self::$instance;
             } // get_instance()
 
+            public static function _instance() {
+                self::$_instance = $this;
+                return self::$_instance;
+            }
+            
             public function _tracking() {
                 include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
                 $tracking = Redux_Tracking::get_instance();
@@ -2937,7 +2945,7 @@
                                 // then we need to keep processing.
                                 if ( ! $isNotEmpty ) {
 
-                                    // Empoty id and not checking for 'not_empty.  Bail out...
+                                    // Empty id and not checking for 'not_empty.  Bail out...
                                     continue;
                                 }
                             }
@@ -3739,6 +3747,7 @@
 
                     if ( class_exists( $field_class ) ) {
                         $value = isset( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : '';
+
                         if ( $v !== null ) {
                             $value = $v;
                         }
