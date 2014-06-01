@@ -194,12 +194,14 @@
                 }
 
                 // More dummy checks
-                if ( ! is_array( $this->field['default'] ) && 2 == $this->field['handles'] ) {
+                //if ( ! is_array( $this->field['default'] ) && 2 == $this->field['handles'] ) {
+                if ( ! is_array( $this->value ) && 2 == $this->field['handles'] ) {
                     $this->value[0] = $this->field['min'];
                     $this->value[1] = $this->field['min'] + 1;
                 }
 
-                if ( is_array( $this->field['default'] ) && 1 == $this->field['handles'] ) {
+                //if ( is_array( $this->field['default'] ) && 1 == $this->field['handles'] ) {
+                if ( is_array( $this->value ) && 1 == $this->field['handles'] ) {
                     $this->value = $this->field['min'];
                 }
 
