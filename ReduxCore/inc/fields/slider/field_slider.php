@@ -247,21 +247,6 @@
                     time(),
                     true
                 );
-//
-//            wp_enqueue_script(
-//                'redux-field-select-js',
-//                ReduxFramework::$_url.'inc/fields/select/field_select' . $min . '.js',
-//                array('jquery', 'select2-js'),
-//                time(),
-//                true
-//            );
-//
-//            wp_enqueue_style(
-//                'redux-redux-field-select-css',
-//                ReduxFramework::$_url.'inc/fields/select/field_select.css',
-//                time(),
-//                true
-//            );
             }
 
             //function
