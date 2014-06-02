@@ -529,7 +529,7 @@
                         $locale = strtolower( $locale ) . '_' . strtoupper( $locale );
                     }
                 }
-                $v = load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
+                load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
             } // _internationalization()
 
             /**
