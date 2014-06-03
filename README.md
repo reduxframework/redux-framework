@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.32 =
+* Fixed:      Minor tweaks for metabox update.
+
 = 3.2.9.31 =
 * Fixed:      #1297 - Missing space in image_select class.
 * Fixed:      Slider field tweaked for metaboxes.
