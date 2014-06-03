@@ -45,7 +45,7 @@
                 if ( preg_match( '/^[a-f0-9]{6}$/i', $color ) ) {
                     return '#' . $color;
                 }
-
+                $this->error = $this->field;
                 return false;
             } //function
 
