@@ -12,7 +12,6 @@
     );
 
     $.reduxImageSelect.init = function() {
-
         // On label click, change the input and class
         $( '.redux-image-select label img, .redux-image-select label .tiles' ).click(
             function( e ) {
@@ -37,8 +36,16 @@
                                 "checked", true
                             );
                             window.onbeforeunload = null;
-                            $( '#import-code-value' ).val( JSON.stringify( data ) );
-                            $( '#redux-import' ).click();
+                            if ( jQuery('#import-code-value' ).length === 0 ) {
+                                $( this ).append( '<textarea id="import-code-value" style="display:none;" name="' + redux.args.opt_name + '[import_code]">' + JSON.stringify( data ) + '</textarea>' );
+                            } else {
+                                $( '#import-code-value' ).val( JSON.stringify( data ) );
+                            }
+                            if ( jQuery( '#publishing-action #publish' ).length !== 0 ) {
+                                jQuery( '#publish' ).click();
+                            } else {
+                                $( '#redux-import' ).click();
+                            }
                         }
                     } else {
                     }

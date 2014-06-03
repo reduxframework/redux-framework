@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.33 =
+* Fixed:      Fixed the image_select presets to work again. Also now will function even if import/export is disabled.
+
 = 3.2.9.32 =
 * Fixed:      Minor tweaks for metabox update.
 
