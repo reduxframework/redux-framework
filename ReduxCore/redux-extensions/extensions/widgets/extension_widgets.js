@@ -20,7 +20,7 @@ jQuery(function($){
         $.reduxMetaBoxes.notLoaded = true;
         $.reduxMetaBoxes.checkBoxVisibility();
         $('.redux-container').each(function() {
-            $(this).parents('.postbox:first').find('h3.hndle').attr('class', 'redux-hndle');
+            //$(this).parents('.postbox:first').find('h3.hndle').attr('class', 'redux-hndle');
             $(this).parents('.postbox:first').addClass('redux-metabox');
             $(this).parents('.postbox:first').addClass( 'redux-' + redux.args.opt_name );
             if ( redux.args.container_class != "" ) {

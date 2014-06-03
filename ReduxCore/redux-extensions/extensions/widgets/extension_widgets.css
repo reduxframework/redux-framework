@@ -1,5 +1,9 @@
 .redux_field_th {
   padding-bottom: 0px !important;
+  padding-top: 10px;
+}
+.redux-main span.description {
+  padding-bottom: 10px;
 }
 .postbox .redux-container {
   filter: none;
@@ -13,8 +17,79 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.redux-group-tab {
-  margin-bottom: 0 !important;
+.postbox .redux-container.redux-box-side .redux-main .redux-container-slider .redux-slider-input {
+  width: 95% !important;
+  margin-bottom: 10px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-slider .redux-slider-container {
+  width: 180px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-slider .redux-slider-select-one {
+  margin-bottom: 10px;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-slider .redux-slider-select-two {
+  margin-top: 7px;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-sorter ul {
+  width: 80% !important;
+  margin-bottom: 10px;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-background .wp-picker-container {
+  margin-bottom: 10px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-date .redux-datepicker {
+  width: 95%;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-spacing .field-spacing-input .mini {
+  width: 80px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-text .regular-text {
+  width: 17em;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-multi_text .regular-text {
+  width: 12em;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-select_image img {
+  max-width: 90%;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-sortable .checkbox-container {
+  width: 220px;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-sortable .checkbox-container label {
+  display: initial;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-typography .mini {
+  width: 70px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-typography .input_wrapper.line-height {
+  margin: 0 47px 0;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-typography .input_wrapper.font-size {
+  margin: 0 0;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-typography .typography-family .select2-container,
+.postbox .redux-container.redux-box-side .redux-main .redux-container-typography .typography-align .select2-container {
+  width: 210px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-dimensions .field-dimensions-input .mini {
+  width: 40px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-border .select2-container {
+  padding-bottom: 7px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-border .field-border-input .mini {
+  width: 81px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-color .color-transparency-check {
+  margin-left: 0px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-color_gradient .color-transparency-check {
+  margin-left: 34px !important;
+  margin-top: 10px !important;
+  margin-bottom: 20px !important;
+}
+.postbox .redux-container.redux-box-side .redux-main .redux-container-color_gradient .toLabel .color-transparency-check .color-transparency {
+  margin-left: -6px !important;
 }
 .postbox .redux-container .redux-group-menu .active a {
   background: #FFF;
@@ -32,6 +107,13 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.postbox .redux-container .redux_main h3 {
+  cursor: text !important;
+  -webkit-user-select: inherit !important;
+  -moz-user-select: inherit !important;
+  user-select: inherit !important;
+  padding-left: 0 !important;
+}
 .postbox .redux-container .redux_main input[type=text] {
   width: 95%;
 }
@@ -47,14 +129,15 @@
   min-height: 0 !important;
 }
 .postbox .redux-container.redux-no-sections .redux-main tr td {
-  padding-top: 20px !important;
+  padding-top: 10px !important;
+  /* padding-top: 20px !important; */
   width: 100%;
 }
-.postbox .redux-container.redux-no-sections .redux-main tr:last-child {
+.postbox .redux-container.redux-no-sections .redux-main tr tr:last-child {
   border-bottom: none;
 }
-.postbox .redux-container.redux-no-sections .redux-main tr:last-child th,
-.postbox .redux-container.redux-no-sections .redux-main tr:last-child td {
+.postbox .redux-container.redux-no-sections .redux-main tr tr:last-child th,
+.postbox .redux-container.redux-no-sections .redux-main tr tr:last-child td {
   padding-bottom: 0;
 }
 .postbox .redux-container.redux-no-sections .redux-main .form-table:first-child tr:first-child td {
@@ -66,8 +149,11 @@
 .postbox .redux-container.redux-no-sections .redux-main .redux-field:last-child {
   margin-bottom: 0 !important;
 }
-.postbox .redux-container.redux-has-sections .redux-main {
+.postbox .redux-container.redux-no-sections.redux-has-sections .redux-main {
   background: #fff;
+}
+.redux-group-tab {
+  margin-bottom: 0 !important;
 }
 .redux-box-side .redux-main .redux-field-container {
   padding: 0;
@@ -76,6 +162,12 @@
 .redux-box-side .redux-main .redux-field-container .select2-container,
 .redux-box-side .redux-main .redux-field-container select {
   width: 100% !important;
+}
+.redux-box-side .redux-main .form-table-section-indented .redux-field-container input[type=text] {
+  width: 90% !important;
+}
+.redux-box-side .redux-main .form-table-section .redux-field-container input.regular-text {
+  width: 17em;
 }
 .redux-box-side .form-table tr td {
   padding: 15px 0 !important;
@@ -86,16 +178,6 @@
 .redux-box-side .form-table tr:first-child td {
   padding-top: 5px !important;
 }
-.redux-box-side .form-table tr:first-child td {
-  padding-top: 5px !important;
-}
-.postbox .redux-main h3 {
-  cursor: text !important;
-  -webkit-user-select: inherit !important;
-  -moz-user-select: inherit !important;
-  user-select: inherit !important;
-  padding-left: 0 !important;
-}
 #poststuff h3.redux-hndle,
 .metabox-holder h3.redux-hndle {
   cursor: pointer;
@@ -103,9 +185,6 @@
 }
 .display-group {
   display: inherit !important;
-}
-.postbox .redux-container.redux-no-sections .redux-main tr td {
-  padding-top: 10px !important;
 }
 /* Metaboxes CSS overrides */
 @media (min-width: 1125px) and (max-width: 1405px) {
@@ -162,15 +241,13 @@
   }
   .redux-main .redux-field-container {
     padding: 0 0 20px 0 !important;
+    padding-bottom: 10px !important;
   }
   .postbox .form-table > tbody > tr > th {
     padding-bottom: 0 !important;
   }
   .redux_field_th {
     padding-top: 0 !important;
-    padding-bottom: 10px !important;
-  }
-  .redux-main .redux-field-container {
     padding-bottom: 10px !important;
   }
 }
@@ -238,10 +315,4 @@
 }
 .redux-metabox .redux-no-sections .redux-main {
   padding: 6px 15px 15px 15px !important;
-}
-.redux-metabox .redux-no-sections.redux-box-side .redux-main {
-  padding: 6px 8px 8px 8px !important;
-}
-.redux-metabox .redux-no-sections.redux-box-side .redux-main input[type=text] {
-  width: 100% !important;
 }
