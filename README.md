@@ -80,6 +80,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.2.9.34 =
 * Fixed:      Filter out `@eaDir` directories in extensions folder.
+* Added:      `content_title` argument to slides field.  Thanks @psaikali!
 
 = 3.2.9.33 =
 * Fixed:      Fixed the image_select presets to work again. Also now will function even if import/export is disabled.
