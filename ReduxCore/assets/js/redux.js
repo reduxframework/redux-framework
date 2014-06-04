@@ -383,7 +383,7 @@ function verifyPos( s, b ) {
 
 function getContrastColour( hexcolour ) {
     // default value is black.
-    retVal = '#444444';
+    var retVal = '#444444';
 
     // In case - for some reason - a blank value is passed.
     // This should *not* happen.  If a function passing a value
@@ -737,7 +737,7 @@ jQuery( document ).ready(
             function() {
                 var relid = jQuery( this ).data( 'rel' ); // The group ID of interest
                 var oldid = jQuery( '.redux-group-tab-link-li.active .redux-group-tab-link-a' ).data( 'rel' );
-
+                
                 if ( oldid === relid ) {
                     return;
                 }
