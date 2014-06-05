@@ -280,7 +280,7 @@
                 wp_enqueue_script(
                     'redux-field-spacing-js',
                     ReduxFramework::$_url . 'inc/fields/spacing/field_spacing' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'select2-js' ),
                     time(),
                     true
                 );

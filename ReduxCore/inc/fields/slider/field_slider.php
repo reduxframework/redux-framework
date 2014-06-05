@@ -228,7 +228,7 @@
                 wp_register_script(
                     'nouislider-js',
                     ReduxFramework::$_url . 'inc/fields/slider/vendor/nouislider/jquery.nouislider' . $min . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'select2-js' ),
                     '5.0.0',
                     true
                 );

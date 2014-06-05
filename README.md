@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.35 =
+* Fixed:      select2 dependency in select_image, and other fields.
+
 = 3.2.9.34 =
 * Fixed:      Filter out `@eaDir` directories in extensions folder.
 * Added:      `content_title` argument to slides field.  Thanks @psaikali!

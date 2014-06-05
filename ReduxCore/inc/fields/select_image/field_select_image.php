@@ -61,8 +61,15 @@
                     // Process placeholder
                     $placeholder = ( isset( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : __( 'Select an item', 'redux-framework' );
 
+                    if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
+                        $select2_params = json_encode( $this->field['select2'] );
+                        $select2_params = htmlspecialchars( $select2_params, ENT_QUOTES );
+
+                        echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
+                    }                    
+                    
                     // Begin the <select> tag
-                    echo '<select id="' . $this->field['id'] . '-select_image" data-placeholder="' . $placeholder . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="redux-select-item redux-select-image-item ' . $this->field['class'] . '"' . $width . ' rows="6"' . '>';
+                    echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . $placeholder . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="redux-select-item redux-select-images ' . $this->field['class'] . '"' . $width . ' rows="6">';
                     echo '<option></option>';
 
 
@@ -97,7 +104,7 @@
                         }
 
                         // Add the option tag, with values.
-                        echo '<option value="' . $v['img'] . '"' . $selected . '>' . $v['alt'] . '</option>';
+                        echo '<option value="' . $v['img'] . '" ' . $selected . '>' . $v['alt'] . '</option>';
 
                         // Add a bean
                         $x ++;
@@ -147,7 +154,7 @@
                 wp_enqueue_script(
                     'field-select-image-js',
                     ReduxFramework::$_url . 'inc/fields/select_image/field_select_image' . Redux_Functions::isMin() . '.js',
-                    array(),
+                    array('jquery', 'select2-js'),
                     time(),
                     true
                 );

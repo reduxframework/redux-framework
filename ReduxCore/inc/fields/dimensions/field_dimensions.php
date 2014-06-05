@@ -221,7 +221,7 @@
                 wp_enqueue_script(
                     'redux-field-dimensions-js',
                     ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'select2-js' ),
                     time(),
                     true
                 );
