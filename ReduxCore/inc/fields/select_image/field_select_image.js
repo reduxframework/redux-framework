@@ -25,7 +25,6 @@
             select2_params = JSON.parse( select2_params );
             default_params = $.extend( {}, default_params, select2_params );
         }        
-        console.log(default_params);
         
         $( 'select.redux-select-images' ).select2( default_params );
         

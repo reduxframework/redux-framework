@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.36 =
+* Added:      `hide_reset` argument, to hide the Reset All and Reset Section buttons.        
+
 = 3.2.9.35 =
 * Fixed:      select2 dependency in select_image, and other fields.
 

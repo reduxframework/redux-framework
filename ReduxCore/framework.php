@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.2.9.35
+     * @version     3.2.9.36
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.2.9.35';
+            public static $_version = '3.2.9.36';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -205,6 +205,8 @@
                 // Enable network admin when using network database mode
                 'network_sites'      => true,
                 // Enable sites as well as admin when using network database mode
+                
+                'hide_reset'         => false,
                 'hints'              => array(
                     'icon'          => 'icon-question-sign',
                     'icon_position' => 'right',
@@ -2399,7 +2401,7 @@
                             }
 
                             if ( isset( $field['type'] ) && $field['type'] == "info" && $sectionIndent ) {
-                                $field['sectionIndent'] = $sectionIndent;
+                                $field['indent'] = $sectionIndent;
                             }
 
                             $th = $this->get_header_html( $field );
@@ -3274,10 +3276,14 @@
                 echo '<a href="javascript:void(0);" class="expand_options' . $expanded . '">' . __( 'Expand', 'redux-framework' ) . '</a>';
                 echo '<div class="redux-action_bar">';
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
-                echo '&nbsp;';
-                submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
-                echo '&nbsp;';
-                submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
+                
+                if (false === $this->args['hide_reset']) {
+                    echo '&nbsp;';
+                    submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
+                    echo '&nbsp;';
+                    submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
+                }
+                
                 echo '</div>';
 
                 echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
@@ -3575,10 +3581,14 @@
 
                 echo '<div class="redux-action_bar">';
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
-                echo '&nbsp;';
-                submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
-                echo '&nbsp;';
-                submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
+                
+                if (false === $this->args['hide_reset']) {
+                    echo '&nbsp;';
+                    submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
+                    echo '&nbsp;';
+                    submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
+                }
+                
                 echo '</div>';
 
                 echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
