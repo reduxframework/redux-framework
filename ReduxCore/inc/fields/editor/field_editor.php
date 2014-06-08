@@ -63,6 +63,8 @@
                     $this->field['args'] = array();
                 }
 
+                $this->field['args']['onchange_callback'] = "alert('here')";
+
                 // Setup up default args
                 $defaults = array(
                     'textarea_name' => $this->field['name'],
@@ -81,6 +83,7 @@
                 wp_editor( $this->value, $this->field['id'], $this->field['args'] );
             }
 
+
             /**
              * Enqueue Function.
              * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
@@ -97,6 +100,21 @@
                     time(),
                     true
                 );
+
+                wp_enqueue_script(
+                    'redux-field-editor2-js',
+                    ReduxFramework::$_url . 'inc/fields/editor/field_editor' . Redux_Functions::isMin() . '.js',
+                    array( ),
+                    time(),
+                    true
+                );
             }
+
+
+
+
+
         }
     }
+
+
