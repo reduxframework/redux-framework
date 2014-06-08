@@ -23,12 +23,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
                     'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
-                    //'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    //'ReduxCore/assets/js/vendor/select2.sortable.js',
-//                    'ReduxCore/assets/js/vendor/minicolors/jquery.minicolors.js',
-//                    'ReduxCore/inc/fields/*/*.js',
-//                    'ReduxCore/extensions/**/*.js',
                     'ReduxCore/assets/js/redux.js',
                 ],
                 dest: 'ReduxCore/assets/js/redux.min.js'
@@ -39,9 +34,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
                     'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
-                    //'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    //'ReduxCore/assets/js/vendor/select2.sortable.js',
                 ],
                 dest: 'ReduxCore/assets/js/vendor.min.js'
             }
@@ -83,6 +76,7 @@ module.exports = function(grunt) {
                     'ReduxCore/inc/fields/color_rgba/field_color_rgba.min.js': ['ReduxCore/inc/fields/color_rgba/field_color_rgba.js'],
                     'ReduxCore/inc/fields/date/field_date.min.js': ['ReduxCore/inc/fields/date/field_date.js'],
                     'ReduxCore/inc/fields/dimensions/field_dimensions.min.js': ['ReduxCore/inc/fields/dimensions/field_dimensions.js'],
+                    'ReduxCore/inc/fields/editor/field_editor.min.js': ['ReduxCore/inc/fields/editor/field_editor.js'],
                     'ReduxCore/inc/fields/gallery/field_gallery.min.js': ['ReduxCore/inc/fields/gallery/field_gallery.js'],
                     'ReduxCore/inc/fields/image_select/field_image_select.min.js': ['ReduxCore/inc/fields/image_select/field_image_select.js'],
                     'ReduxCore/inc/fields/import_export/field_import_export.min.js': ['ReduxCore/inc/fields/import_export/field_import_export.js'],
@@ -120,6 +114,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             files: [
+                 'ReduxCore/assets/js/color-picker/color-picker.js',
                  'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
                  'ReduxCore/inc/fields/background/field_background.js',
                  'ReduxCore/inc/fields/border/field_border.js',
@@ -128,6 +123,7 @@ module.exports = function(grunt) {
                  'ReduxCore/inc/fields/color_rgba/field_color_rgba.js',
                  'ReduxCore/inc/fields/date/field_date.js',
                  'ReduxCore/inc/fields/dimensions/field_dimensions.js',
+                 'ReduxCore/inc/fields/editor/field_editor.js',
                  'ReduxCore/inc/fields/gallery/field_gallery.js',
                  'ReduxCore/inc/fields/image_select/field_image_select.js',
                  'ReduxCore/inc/fields/import_export/field_import_export.js',

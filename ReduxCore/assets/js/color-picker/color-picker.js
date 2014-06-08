@@ -256,5 +256,5 @@
         }
         
         return colour;
-    }
+    };
 })(jQuery);
