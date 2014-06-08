@@ -73,7 +73,9 @@
                     $add_class = ' form-table-section-indented';
                 }
 
-                echo '<input type="hidden" id="' . $this->field['id'] . '-marker"></td></tr></table><div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . $this->field['class'] . '">';
+                echo '<input type="hidden" id="' . $this->field['id'] . '-marker"></td></tr></table>';
+                
+                echo '<div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . $this->field['class'] . '">';
 
                 if ( ! empty( $this->field['title'] ) ) {
                     echo '<h3>' . $this->field['title'] . '</h3>';
@@ -90,11 +92,12 @@
                 <script type="text/javascript">
                     jQuery( document ).ready(
                         function() {
-                            jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( 'tr:first' ).remove()
+                            jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( 'tr:first' ).css({display: 'none'});
                         }
                     );
                 </script>
             <?php
+
             }
 
             public function enqueue() {

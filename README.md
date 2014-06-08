@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.38 =
+* Fixed:      #1322 - Sections not folding with required argument.
+* Modified:   Portions of core javascript rewritten into object code.
+
 = 3.2.9.37 =
 * Fixed:      #1270 - Editor field compiler hook not firing in visual mode.
 
