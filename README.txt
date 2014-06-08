@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.1
-Stable tag: 3.2.9.13
+Stable tag: 3.3.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,45 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+= 3.3.0 =
+* Fixed:      #1322 - Sections not folding with required argument.
+* Fixed:      #1270 - Editor field compiler hook not firing in visual mode.
+* Fixed:      select2 dependency in select_image, and other fields.
+* Fixed:      Filter out `@eaDir` directories in extensions folder.
+* Fixed:      Fixed the image_select presets to work again. Also now will function even if import/export is disabled.
+* Fixed:      Minor tweaks for metabox update.
+* Fixed:      #1297 - Missing space in image_select class.
+* Fixed:      Slider field tweaked for metaboxes.
+* Fixed:      #1291 - Change of font-family would not trigger preview, or show in open preview.  
+* Fixed:      #1289 - Typography not retaining size/height/spacing/word/letter spacing settings.
+* Fixed:      #1288 - Background color-picker dependency missing.  Thanks @farhanwazir.
+* Fixed:      Search extension failed do to dependency issue from the core.
+* Fixed:      #1281 - color field output/compiler outputting incorrect selector when only one array present.
+* Fixed:      Update check only appears once if multiple instances of Redux are loaded in the same wordpress instance.
+* Fixed:      Changing font-family in typography didn't trigger 'save changes' notification.
+* Fixed:      More typography: Back up font appearing in font-family when opening selector.
+* Fixed:      Typography: undefined message when NOT using google fonts.  Thanks @farhanwazir
+* Fixed:      Typography font backup not in sync with font-family.
+* Fixed:      Typography not saving font-family after switching back and forth between standard and google fonts.
+* Fixed:      Background field selects not properly aligned.
+* Fixed:      Removed select field dependency from background field.
+* Fixed:      #1264 - Color-picker/transparent checkbox functionality.
+* Fixed:      Typography fine-tuning.
+* Fixed:      All typography select fields render as select2.
+* Fixed:      Switching between transparency on and off now restores the last chosen color in all color fields. 
+* Fixed:      Redux uploads dir should NOT be ~/wp-content/uploads, but just wp-content. As per Otto.
+* Fixed:      Navigation no longer has that annoying outline around the links. Yuk.
+* Fixed:      #1218 - Select2 multi select not accepting any keyboard input.
+* Fixed:      #1228 - CSS fixes
+* Added:      `hide_reset` argument, to hide the Reset All and Reset Section buttons.        
+* Added:      `content_title` argument to slides field.  Thanks @psaikali!
+* Added:      `customizer_only` argument for fields & sections, contributed by @andreilupu.
+* Added:      select2 args for spacing field.
+* Added:      select2 args for the following fields: typography, background, border, dimensions and slider.
+* Added:      #1329 - `'preview' = array('always_display' => true)` argument to typography, to determine if preview field show always be shown.
+* Modified:   Portions of core javascript rewritten into object code.
+* Modified:   All field javascript rewritten using jQuery objects (versus standard function).
+* Modified:   Typography field rewritten to fill out font-family field dynamically, versus on page load.
 
 = 3.2.9.13 =
 * Modified    data => taxonomies now has a little more power behind it.

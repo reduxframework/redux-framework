@@ -190,10 +190,9 @@ if (!class_exists('ReduxFramework_typography')) {
 
                 echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
             }
-            
-            
+
+            /* Font Family */
             if ($this->field['font-family'] === true) {
-                /* Font Family */
                 if (filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN)) {
                     $fontFamily = explode(', ', $this->value['font-family'], 2);
                     if (empty($fontFamily[0]) && !empty($fontFamily[1])) {
@@ -417,7 +416,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 echo '</div>';
             }
 
-                    /* Line Height */
+            /* Line Height */
             if ($this->field['line-height'] === true){
                 echo '<div class="input_wrapper line-height redux-container-typography">';
                 echo '<label>' . __('Line Height', 'redux-framework') . '</label>';
@@ -446,7 +445,7 @@ if (!class_exists('ReduxFramework_typography')) {
 
             echo '<div class="clearfix"></div>';
 
-                /* Font Color */
+            /* Font Color */
             if ($this->field['color'] === true){
                 $default = "";
 
@@ -462,8 +461,8 @@ if (!class_exists('ReduxFramework_typography')) {
                 echo '<input data-default-color="' . $default . '" class="redux-color redux-typography-color' . $this->field['class'] . '" original-title="' . __('Font color', 'redux-framework') . '" id="' . $this->field['id'] . '-color" name="' . $this->field['name'] . '[color]' . $this->field['name_suffix'] . '" type="text" value="' . $this->value['color'] . '" data-id="' . $this->field['id'] . '" />';
                 echo '</div>';
             }
+            
             echo '<div class="clearfix"></div>';
-
             
             /* Font Preview */
             if (!isset($this->field['preview']) || $this->field['preview'] !== false){
@@ -473,15 +472,22 @@ if (!class_exists('ReduxFramework_typography')) {
                     $g_text = '1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z';
                 }
 
+                $style = '';
+                if (isset($this->field['preview']['always_display'])) {
+                    if (true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN )) {
+                        $style = 'display: block;';
+                    }
+                }
+                
                 if (isset($this->field['preview']['font-size'])) {
-                    $g_size = 'style="font-size: ' . $this->field['preview']['font-size'] . ';"';
+                    $style .= 'font-size: ' . $this->field['preview']['font-size'] . ';';
                     $inUse = '1';
                 } else {
-                    $g_size = '';
+                    //$g_size = '';
                     $inUse = '0';
                 }
 
-                echo '<p data-preview-size="' . $inUse . '" class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
+                echo '<p data-preview-size="' . $inUse . '" class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . 'style="' . $style . '">' . $g_text . '</p>';
                 echo '</div>'; // end typography container
             }
         }  //function

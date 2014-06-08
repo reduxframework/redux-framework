@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.0 =
+* Added:      #1329 - `'preview' = array('always_display' => true)` argument to typography, to determine if preview field show always be shown.
+
 = 3.2.9.38 =
 * Fixed:      #1322 - Sections not folding with required argument.
 * Modified:   Portions of core javascript rewritten into object code.
