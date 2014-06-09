@@ -475,7 +475,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 $style = '';
                 if (isset($this->field['preview']['always_display'])) {
                     if (true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN )) {
-                        $style = 'display: block;';
+                        $style = 'display: block; font-family: ' . $this->value['font-family'] . ';';
                     }
                 }
                 
@@ -487,6 +487,8 @@ if (!class_exists('ReduxFramework_typography')) {
                     $inUse = '0';
                 }
 
+                logconsole('data', $this->value['font-family']);
+                
                 echo '<p data-preview-size="' . $inUse . '" class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . 'style="' . $style . '">' . $g_text . '</p>';
                 echo '</div>'; // end typography container
             }
