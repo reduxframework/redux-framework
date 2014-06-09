@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.3.0.1
+     * @version     3.3.0.2
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.0.1';
+            public static $_version = '3.3.0.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2936,7 +2936,7 @@
                             if ( isset( $field['validate'] ) ) {
 
                                 // Make sure 'validate field' is set to 'not_empty' or 'email_not_empty'
-                                if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' ) {
+                                if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' || $field['validate'] == 'numeric_not_empty' ) {
 
                                     // Set the flag.
                                     $isNotEmpty = true;

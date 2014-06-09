@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.0.2 =
+* Added:      #1332 - New validation: numeric_not_empty.
+
 = 3.3.0.1 =
 * Fixed:      #1330 - Required not working on all fields.
 
