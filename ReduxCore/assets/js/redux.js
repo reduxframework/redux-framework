@@ -416,16 +416,16 @@
     $.redux.notices = function() {
         if (redux.errors !== undefined) {
             $.each(
-                    redux.errors.errors, function(sectionID, sectionArray) {
-                        $.each(
-                                sectionArray.errors, function(key, value) {
-                                    $("#" + redux.args.opt_name + '-' + value.id).addClass("redux-field-error");
-                                    if ($("#" + redux.args.opt_name + '-' + value.id).parent().find('.redux-th-error').length === 0) {
-                                        $("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
-                                    }
-                                }
-                        );
-                    }
+                redux.errors.errors, function(sectionID, sectionArray) {
+                    $.each(
+                        sectionArray.errors, function(key, value) {
+                            $("#" + redux.args.opt_name + '-' + value.id).addClass("redux-field-error");
+                            if ($("#" + redux.args.opt_name + '-' + value.id).parent().find('.redux-th-error').length === 0) {
+                                $("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
+                            }
+                        }
+                    );
+                }
             );
 
             $('.redux-container').each(
@@ -560,7 +560,7 @@
             return;
         }
         var current = $(variable),
-                id = current.parents('.redux-field:first').data('id');
+            id = current.parents('.redux-field:first').data('id');
 
         if (!redux.required.hasOwnProperty(id)) {
             return;
@@ -609,7 +609,9 @@
                         }
                     }
                 );
-                tr.css({display: 'none'});
+                if (childFieldset.hasClass('redux-container-section') || childFieldset.hasClass('redux-container-info')) {
+                    tr.css({display: 'none'});
+                }
             } else if (show === false) {
                 tr.fadeOut(
                     100, function() {
