@@ -448,12 +448,14 @@
         }
 
         // Weight and italic
+        console.log('io italic: ' + style.indexOf("italic"));
         if (style.indexOf("italic") !== -1) {
             $('#' + mainID + ' .typography-preview').css('font-style', 'italic');
             $('#' + mainID + ' .typography-font-style').val('italic');
             style = style.replace('italic', '');
         } else {
             $('#' + mainID + ' .typography-preview').css('font-style', "normal");
+            $('#' + mainID + ' .typography-font-style').val('');
         }
 
         $('#' + mainID + ' .typography-font-weight').val(style);
