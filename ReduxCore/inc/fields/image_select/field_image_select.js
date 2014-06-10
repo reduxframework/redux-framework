@@ -23,6 +23,15 @@
         $( selector ).each(
             function() {
                 var el = $( this );
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' )
+                } else {
+                    return;
+                }
                 // On label click, change the input and class
                 el.find( '.redux-image-select label img, .redux-image-select label .tiles' ).click(
                     function( e ) {

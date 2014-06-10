@@ -15,7 +15,7 @@
     );
 
     redux.field_objects.gallery.init = function( selector ) {
-
+//TODO - Make this loop!
         // When the user clicks on the Add/Edit gallery button, we need to display the gallery editing
         $( 'body' ).on(
             {

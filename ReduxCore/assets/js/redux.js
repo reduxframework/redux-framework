@@ -423,14 +423,12 @@
     };
 
     $.redux.initFields = function() {
-
         $(".redux-field-init:visible" ).each(function() {
             var type = $(this).attr( 'data-type' );
             //console.log(type);
             if ( redux.field_objects[type]) {
                 redux.field_objects[type].init();
             }
-            $( this ).removeClass( 'redux-field-init' );
         });
     };
 

@@ -39,7 +39,16 @@
         $( selector ).each(
             function() {
                 var el = $( this );
-                selector.each(
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' )
+                } else {
+                    return;
+                }
+                el.each(
                     function() {
                         // init each typography field
                         $( this ).find( '.redux-typography-container' ).each(
@@ -217,7 +226,7 @@
                         );
 
                         // Init select2 for indicated fields
-                        $( this ).find( " .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration" ).select2( default_params );
+                        el.find( " .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration" ).select2( default_params );
 
                     }
                 );
