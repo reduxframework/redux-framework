@@ -35,7 +35,7 @@
                 }
                 el.find( ".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all" ).numeric(
                     {
-                        allowMinus: false,
+                        allowMinus: false
                     }
                 );
 
@@ -81,6 +81,7 @@
                         $( this ).parents( '.redux-field:first' ).find( '.redux-border-input' ).change();
                     }
                 );
+                redux.field_objects.color.init(el);
             }
         );
     };

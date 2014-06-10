@@ -2,7 +2,7 @@
  Field Color (color)
  */
 
-/*global jQuery, document, redux_change */
+/*global jQuery, document, redux_change, redux*/
 
 (function( $ ) {
     'use strict';
