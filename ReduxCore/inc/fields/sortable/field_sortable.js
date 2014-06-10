@@ -80,10 +80,10 @@
 
         if ( scroll == 'up' ) {
             $scrollable.scrollTop( $scrollable.scrollTop() - 20 );
-            setTimeout( scrolling, 50 );
+            setTimeout( redux.field_objects.sortable.scrolling, 50 );
         } else if ( scroll == 'down' ) {
             $scrollable.scrollTop( $scrollable.scrollTop() + 20 );
-            setTimeout( scrolling, 50 );
+            setTimeout( redux.field_objects.sortable.scrolling, 50 );
         }
     };
 
