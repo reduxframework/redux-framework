@@ -1,4 +1,7 @@
 /* global redux_change */
+
+/*global redux_change, redux*/
+
 (function( $ ) {
     "use strict";
 
@@ -7,7 +10,7 @@
     $( document ).ready(
         function() {
             //Group functionality
-            $.redux.group();
+            //$.redux.group();
         }
     );
 

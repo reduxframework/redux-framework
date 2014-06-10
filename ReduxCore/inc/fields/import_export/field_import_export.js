@@ -1,15 +1,24 @@
+/*global redux_change, redux*/
+
 (function( $ ) {
     "use strict";
 
-    $.reduxImportExport = $.reduxImportExport || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.import_export = redux.field_objects.import_export || {};
+    
 
     $( document ).ready(
         function() {
-            $.reduxImportExport.init();
+//            redux.field_objects.import_export.init();
         }
     );
 
-    $.reduxImportExport.init = function() {
+    redux.field_objects.import_export.init = function( selector ) {
+
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-image_select' );
+        }
+
         $( '#redux-import' ).click(
             function( e ) {
                 if ( $( '#import-code-value' ).val() === "" && $( '#import-link-value' ).val() === "" ) {

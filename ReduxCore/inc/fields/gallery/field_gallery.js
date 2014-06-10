@@ -1,17 +1,20 @@
 /* global redux_change, wp */
 
+/*global redux_change, redux*/
+
 (function( $ ) {
     "use strict";
 
-    $.reduxGallery = $.reduxGallery || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.gallery = redux.field_objects.gallery || {};
 
     $( document ).ready(
         function() {
-            $.reduxGallery.init();
+            //redux.field_objects.gallery.init();
         }
     );
 
-    $.reduxGallery.init = function() {
+    redux.field_objects.gallery.init = function( selector ) {
 
         // When the user clicks on the Add/Edit gallery button, we need to display the gallery editing
         $( 'body' ).on(

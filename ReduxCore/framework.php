@@ -3861,7 +3861,7 @@
                         do_action( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", $field, $value );
 
                         if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
-                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . '>';
+                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="'.$field['type'].'">';
                         }
 
                         echo $_render;

@@ -1,4 +1,4 @@
-/* global redux, redux_opts */
+/*global redux, redux_opts*/
 /*
  * Field Sorter jquery function
  * Based on
@@ -9,18 +9,115 @@
 (function( $ ) {
     "use strict";
 
-    $.reduxSorter = $.reduxSorter || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.sorter = redux.field_objects.sorter || {};
 
     var scroll = '';
 
     $( document ).ready(
         function() {
-            $.reduxSorter.init();
+            //redux.field_objects.sorter.init();
         }
     );
 
-    $.reduxSorter.scrolling = function() {
-        var scrollable = $( ".redux-sorter" );
+    redux.field_objects.sorter.init = function( selector ) {
+
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-sorter' );
+        }
+
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                /**    Sorter (Layout Manager) */
+                el.find( '.redux-sorter' ).each(
+                    function() {
+                        var id = $( this ).attr( 'id' );
+
+                        el.find( '#' + id ).find( 'ul' ).sortable(
+                            {
+                                items: 'li',
+                                placeholder: "placeholder",
+                                connectWith: '.sortlist_' + id,
+                                opacity: 0.8,
+                                scroll: false,
+                                out: function( event, ui ) {
+                                    if ( !ui.helper ) return;
+                                    if ( ui.offset.top > 0 ) {
+                                        scroll = 'down';
+                                    } else {
+                                        scroll = 'up';
+                                    }
+                                    redux.field_objects.sorter.scrolling( $( this ).parents( '.redux-field-container:first' ) );
+
+                                },
+                                over: function( event, ui ) {
+                                    scroll = '';
+                                },
+
+                                deactivate: function( event, ui ) {
+                                    scroll = '';
+                                },
+
+                                stop: function( event, ui ) {
+                                    var sorter = redux.sorter[$( this ).attr( 'data-id' )];
+                                    var id = $( this ).find( 'h3' ).text();
+
+                                    if ( sorter.limits && id && sorter.limits[id] ) {
+                                        if ( $( this ).children( 'li' ).length >= sorter.limits[id] ) {
+                                            $( this ).addClass( 'filled' );
+                                            if ( $( this ).children( 'li' ).length > sorter.limits[id] ) {
+                                                $( ui.sender ).sortable( 'cancel' );
+                                            }
+                                        } else {
+                                            $( this ).removeClass( 'filled' );
+                                        }
+                                    }
+                                },
+
+                                update: function( event, ui ) {
+                                    var sorter = redux.sorter[$( this ).attr( 'data-id' )];
+                                    var id = $( this ).find( 'h3' ).text();
+
+                                    if ( sorter.limits && id && sorter.limits[id] ) {
+                                        if ( $( this ).children( 'li' ).length >= sorter.limits[id] ) {
+                                            $( this ).addClass( 'filled' );
+                                            if ( $( this ).children( 'li' ).length > sorter.limits[id] ) {
+                                                $( ui.sender ).sortable( 'cancel' );
+                                            }
+                                        } else {
+                                            $( this ).removeClass( 'filled' );
+                                        }
+                                    }
+
+                                    $( this ).find( '.position' ).each(
+                                        function() {
+                                            var listID = $( this ).parent().attr( 'id' );
+                                            var parentID = $( this ).parent().parent().attr( 'data-group-id' );
+
+                                            redux_change( $( this ) );
+
+                                            var optionID = $( this ).parent().parent().parent().attr( 'id' );
+
+                                            $( this ).prop(
+                                                "name",
+                                                redux.args.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']'
+                                            );
+                                        }
+                                    );
+                                }
+                            }
+                        );
+                        el.find( ".redux-sorter" ).disableSelection();
+                    }
+                );
+            }
+        );
+    };
+
+    redux.field_objects.sorter.scrolling = function( selector ) {
+
+        var scrollable = selector.find( ".redux-sorter" );
 
         if ( scroll == 'up' ) {
             scrollable.scrollTop( scrollable.scrollTop() - 20 );
@@ -31,89 +128,4 @@
         }
     };
 
-    $.reduxSorter.init = function() {
-
-        /**    Sorter (Layout Manager) */
-        $( '.redux-sorter' ).each(
-            function() {
-                var id = $( this ).attr( 'id' );
-
-                $( '#' + id ).find( 'ul' ).sortable(
-                    {
-                        items: 'li',
-                        placeholder: "placeholder",
-                        connectWith: '.sortlist_' + id,
-                        opacity: 0.8,
-                        scroll: false,
-                        out: function( event, ui ) {
-                            if ( !ui.helper ) return;
-                            if ( ui.offset.top > 0 ) {
-                                scroll = 'down';
-                            } else {
-                                scroll = 'up';
-                            }
-                            $.reduxSorter.scrolling();
-
-                        },
-                        over: function( event, ui ) {
-                            scroll = '';
-                        },
-
-                        deactivate: function( event, ui ) {
-                            scroll = '';
-                        },
-
-                        stop: function( event, ui ) {
-                            var sorter = redux.sorter[$( this ).attr( 'data-id' )];
-                            var id = $( this ).find( 'h3' ).text();
-
-                            if ( sorter.limits && id && sorter.limits[id] ) {
-                                if ( $( this ).children( 'li' ).length >= sorter.limits[id] ) {
-                                    $( this ).addClass( 'filled' );
-                                    if ( $( this ).children( 'li' ).length > sorter.limits[id] ) {
-                                        $( ui.sender ).sortable( 'cancel' );
-                                    }
-                                } else {
-                                    $( this ).removeClass( 'filled' );
-                                }
-                            }
-                        },
-
-                        update: function( event, ui ) {
-                            var sorter = redux.sorter[$( this ).attr( 'data-id' )];
-                            var id = $( this ).find( 'h3' ).text();
-
-                            if ( sorter.limits && id && sorter.limits[id] ) {
-                                if ( $( this ).children( 'li' ).length >= sorter.limits[id] ) {
-                                    $( this ).addClass( 'filled' );
-                                    if ( $( this ).children( 'li' ).length > sorter.limits[id] ) {
-                                        $( ui.sender ).sortable( 'cancel' );
-                                    }
-                                } else {
-                                    $( this ).removeClass( 'filled' );
-                                }
-                            }
-
-                            $( this ).find( '.position' ).each(
-                                function() {
-                                    var listID = $( this ).parent().attr( 'id' );
-                                    var parentID = $( this ).parent().parent().attr( 'data-group-id' );
-
-                                    redux_change( $( this ) );
-
-                                    var optionID = $( this ).parent().parent().parent().attr( 'id' );
-
-                                    $( this ).prop(
-                                        "name",
-                                        redux.args.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']'
-                                    );
-                                }
-                            );
-                        }
-                    }
-                );
-                $( ".redux-sorter" ).disableSelection();
-            }
-        );
-    };
 })( jQuery );

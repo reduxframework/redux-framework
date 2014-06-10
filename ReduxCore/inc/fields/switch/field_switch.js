@@ -1,4 +1,4 @@
-/* global redux_change */
+/*global redux_change, redux*/
 
 /**
  * Switch
@@ -10,59 +10,70 @@
 (function( $ ) {
     "use strict";
 
-    $.reduxSwitch = $.reduxSwitch || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.switch = redux.field_objects.switch || {};
 
     $( document ).ready(
         function() {
-            $.reduxSwitch.init();
+            //redux.field_objects.switch.init();
         }
     );
 
-    $.reduxSwitch.init = function() {
-        $( ".cb-enable" ).click(
+    redux.field_objects.switch.init = function( selector ) {
+
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-switch' );
+        }
+
+        $( selector ).each(
             function() {
-                if ( $( this ).hasClass( 'selected' ) ) {
-                    return;
-                }
+                var el = $( this );
+                el.find( ".cb-enable" ).click(
+                    function() {
+                        if ( $( this ).hasClass( 'selected' ) ) {
+                            return;
+                        }
 
-                var parent = $( this ).parents( '.switch-options' );
+                        var parent = $( this ).parents( '.switch-options' );
 
-                $( '.cb-disable', parent ).removeClass( 'selected' );
-                $( this ).addClass( 'selected' );
-                $( '.checkbox-input', parent ).val( 1 );
+                        $( '.cb-disable', parent ).removeClass( 'selected' );
+                        $( this ).addClass( 'selected' );
+                        $( '.checkbox-input', parent ).val( 1 );
 
-                redux_change( $( '.checkbox-input', parent ) );
+                        redux_change( $( '.checkbox-input', parent ) );
 
-                //fold/unfold related options
-                var obj = $( this );
-                var $fold = '.f_' + obj.data( 'id' );
+                        //fold/unfold related options
+                        var obj = $( this );
+                        var $fold = '.f_' + obj.data( 'id' );
 
-                $( $fold ).slideDown( 'normal', "swing" );
+                        el.find( $fold ).slideDown( 'normal', "swing" );
+                    }
+                );
+
+                el.find( ".cb-disable" ).click(
+                    function() {
+                        if ( $( this ).hasClass( 'selected' ) ) {
+                            return;
+                        }
+
+                        var parent = $( this ).parents( '.switch-options' );
+
+                        $( '.cb-enable', parent ).removeClass( 'selected' );
+                        $( this ).addClass( 'selected' );
+                        $( '.checkbox-input', parent ).val( 0 );
+
+                        redux_change( $( '.checkbox-input', parent ) );
+
+                        //fold/unfold related options
+                        var obj = $( this );
+                        var $fold = '.f_' + obj.data( 'id' );
+
+                        el.find( $fold ).slideUp( 'normal', "swing" );
+                    }
+                );
+
+                el.find( '.cb-enable span, .cb-disable span' ).find().attr( 'unselectable', 'on' );
             }
         );
-
-        $( ".cb-disable" ).click(
-            function() {
-                if ( $( this ).hasClass( 'selected' ) ) {
-                    return;
-                }
-
-                var parent = $( this ).parents( '.switch-options' );
-
-                $( '.cb-enable', parent ).removeClass( 'selected' );
-                $( this ).addClass( 'selected' );
-                $( '.checkbox-input', parent ).val( 0 );
-
-                redux_change( $( '.checkbox-input', parent ) );
-
-                //fold/unfold related options
-                var obj = $( this );
-                var $fold = '.f_' + obj.data( 'id' );
-
-                $( $fold ).slideUp( 'normal', "swing" );
-            }
-        );
-
-        $( '.cb-enable span, .cb-disable span' ).find().attr( 'unselectable', 'on' );
     };
 })( jQuery );

@@ -1,4 +1,4 @@
-/* global redux_change, wp */
+/*global redux_change, wp, redux*/
 
 /**
  * Media Uploader
@@ -10,32 +10,40 @@
 (function( $ ) {
     "use strict";
 
-    $.reduxMedia = $.reduxMedia || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.media = redux.field_objects.media || {};
 
     $( document ).ready(
         function() {
-            $.reduxMedia.init();
+            //redux.field_objects.media.init();
         }
     );
 
-    $.reduxMedia.init = function() {
-        // Remove the image button
-        $( '.remove-image, .remove-file' ).unbind( 'click' ).on(
-            'click', function() {
-                $.reduxMedia.removeFile( $( this ).parents( 'fieldset.redux-field:first' ) );
-            }
-        );
-
-        // Upload media button
-        $( '.media_upload_button' ).unbind().on(
-            'click', function( event ) {
-                $.reduxMedia.addFile( event, $( this ).parents( 'fieldset.redux-field:first' ) );
+    redux.field_objects.media.init = function( selector ) {
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-media' );
+        }
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                // Remove the image button
+                el.find( '.remove-image, .remove-file' ).unbind( 'click' ).on(
+                    'click', function() {
+                        redux.field_objects.media.removeFile( $( this ).parents( 'fieldset.redux-field:first' ) );
+                    }
+                );
+                // Upload media button
+                el.find( '.media_upload_button' ).unbind().on(
+                    'click', function( event ) {
+                        redux.field_objects.media.addFile( event, $( this ).parents( 'fieldset.redux-field:first' ) );
+                    }
+                );
             }
         );
     };
 
     // Add a file via the wp.media function
-    $.reduxMedia.addFile = function( event, selector ) {
+    redux.field_objects.media.addFile = function( event, selector ) {
         event.preventDefault();
 
         var frame;
@@ -128,7 +136,7 @@
     };
 
     // Function to remove the image on click. Still requires a save
-    $.reduxMedia.removeFile = function( selector ) {
+    redux.field_objects.media.removeFile = function( selector ) {
 
         // This shouldn't have been run...
         if ( !selector.find( '.remove-image' ).addClass( 'hide' ) ) {
@@ -153,8 +161,8 @@
 
         // We don't display the upload button if .upload-notice is present
         // This means the user doesn't have the WordPress 3.5 Media Library Support
-        if ( $( '.section-upload .upload-notice' ).length > 0 ) {
-            $( '.media_upload_button' ).remove();
+        if ( selector.find( '.section-upload .upload-notice' ).length > 0 ) {
+            selector.find( '.media_upload_button' ).remove();
         }
     };
 })( jQuery );
