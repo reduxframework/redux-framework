@@ -22,7 +22,7 @@
                 parent = selector.parents( '.redux-field-container:first' );
             }
             if ( parent.hasClass( 'redux-field-init' ) ) {
-                parent.removeClass( 'redux-field-init' )
+                parent.removeClass( 'redux-field-init' );
             } else {
                 return;
             }
