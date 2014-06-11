@@ -78,6 +78,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.0.5 =
+* Modified:   Drastically changed the way JavaScript is used in the panel. Forced as-needed
+              initialization of fields. Thus reducing dramatically the overall load time of
+              the panel. The effects have been seen up to 300% speed improvement. The only
+              time a field will be initialized is if it's visible, thus reducing the processing
+              needed in DOM overall.
+
 = 3.3.0.4 =
 * Fixed:      #1336 - fixed default font in preview.
 
