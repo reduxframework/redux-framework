@@ -628,6 +628,7 @@
                         if (redux.required.hasOwnProperty(child)) {
                             $.redux.check_dependencies($('#' + redux.args.opt_name + '-' + child).children().first());
                         }
+                        $.redux.initFields();
                     }
                 );
                 if (childFieldset.hasClass('redux-container-section') || childFieldset.hasClass('redux-container-info')) {
