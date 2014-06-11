@@ -1,1 +1,43 @@
-!function(a){"use strict";redux.field_objects=redux.field_objects||{},redux.field_objects.link_color=redux.field_objects.link_color||{},a(document).ready(function(){}),redux.field_objects.link_color.init=function(b){b||(b=a(document).find(".redux-container-link_color")),a(b).each(function(){var b=a(this),c=b;b.hasClass("redux-field-container")||(c=b.parents(".redux-field-container:first")),c.hasClass("redux-field-init")&&(c.removeClass("redux-field-init"),redux.field_objects.color.init(b))})}}(jQuery);
+/*
+ Field Link Color
+ */
+
+/*global jQuery, document, redux_change, redux*/
+
+(function( $ ) {
+    'use strict';
+
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.link_color = redux.field_objects.link_color || {};
+
+    $( document ).ready(
+        function() {
+            //        setTimeout(function () {
+            //            redux.field_objects.color.init();
+            //        }, 1000);
+        }
+    );
+
+    redux.field_objects.link_color.init = function( selector ) {
+
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-link_color' );
+        }
+
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' );
+                } else {
+                    return;
+                }
+                redux.field_objects.color.init(el);
+            }
+        );
+    };
+})( jQuery );
