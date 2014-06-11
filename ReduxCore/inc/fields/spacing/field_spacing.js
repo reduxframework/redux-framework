@@ -1,60 +1,82 @@
+/*global redux*/
+
 (function( $ ) {
     "use strict";
 
-    $.reduxSpacing = $.reduxSpacing || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.spacing = redux.field_objects.spacing || {};
 
     $( document ).ready(
         function() {
-            $.reduxSpacing.init();
+            //redux.field_objects.spacing.init();
         }
     );
 
-    $.reduxSpacing.init = function() {
-        var default_params = {
-            width: 'resolve',
-            triggerChange: true,
-            allowClear: true
-        };
+    redux.field_objects.spacing.init = function( selector ) {
 
-        var select2_handle = $( '.redux-container-spacing' ).find( '.select2_params' );
-        if ( select2_handle.size() > 0 ) {
-            var select2_params = select2_handle.val();
-
-            select2_params = JSON.parse( select2_params );
-            default_params = $.extend( {}, default_params, select2_params );
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-spacing' );
         }
 
-        $( ".redux-spacing-units" ).select2( default_params );
-
-        $( '.redux-spacing-input' ).on(
-            'change', function() {
-                var units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
-
-                if ( $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-units' ).length !== 0 ) {
-                    units = $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-units option:selected' ).val();
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
                 }
-
-                var value = $( this ).val();
-
-                if ( typeof units !== 'undefined' && value ) {
-                    value += units;
-                }
-
-                if ( $( this ).hasClass( 'redux-spacing-all' ) ) {
-                    $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-value' ).each(
-                        function() {
-                            $( this ).val( value );
-                        }
-                    );
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' );
                 } else {
-                    $( '#' + $( this ).attr( 'rel' ) ).val( value );
+                    return;
                 }
-            }
-        );
+                var default_params = {
+                    width: 'resolve',
+                    triggerChange: true,
+                    allowClear: true
+                };
 
-        $( '.redux-spacing-units' ).on(
-            'change', function() {
-                $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-input' ).change();
+                var select2_handle = el.find( '.select2_params' );
+                if ( select2_handle.size() > 0 ) {
+                    var select2_params = select2_handle.val();
+
+                    select2_params = JSON.parse( select2_params );
+                    default_params = $.extend( {}, default_params, select2_params );
+                }
+
+                el.find( ".redux-spacing-units" ).select2( default_params );
+
+                el.find( '.redux-spacing-input' ).on(
+                    'change', function() {
+                        var units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
+
+                        if ( $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-units' ).length !== 0 ) {
+                            units = $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-units option:selected' ).val();
+                        }
+
+                        var value = $( this ).val();
+
+                        if ( typeof units !== 'undefined' && value ) {
+                            value += units;
+                        }
+
+                        if ( $( this ).hasClass( 'redux-spacing-all' ) ) {
+                            $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-value' ).each(
+                                function() {
+                                    $( this ).val( value );
+                                }
+                            );
+                        } else {
+                            $( '#' + $( this ).attr( 'rel' ) ).val( value );
+                        }
+                    }
+                );
+
+                el.find( '.redux-spacing-units' ).on(
+                    'change', function() {
+                        $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-input' ).change();
+                    }
+                );
             }
         );
     };

@@ -118,6 +118,14 @@
                     true
                 );
 
+                wp_enqueue_script(
+                    'redux-field-link-color-js',
+                    ReduxFramework::$_url . 'inc/fields/link_color/field_link_color' . Redux_Functions::isMin() . '.js',
+                    array( 'jquery' ),
+                    time(),
+                    true
+                );
+
                 wp_enqueue_style(
                     'redux-field-link_color-js',
                     ReduxFramework::$_url . 'inc/fields/link_color/field_link_color.css',

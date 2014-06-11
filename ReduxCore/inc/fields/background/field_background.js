@@ -5,76 +5,96 @@
  * Date                : 07 Jan 2014
  */
 
-/* global redux_change, wp */
+/*global redux_change, wp, redux*/
+
 (function( $ ) {
     "use strict";
 
-    $.reduxBackground = $.reduxBackground || {};
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.background = redux.field_objects.background || {};
 
     $( document ).ready(
         function() {
-            $.reduxBackground.init();
+            //redux.field_objects.background.init();
         }
     );
 
-    $.reduxBackground.init = function( selector ) {
+    redux.field_objects.background.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( '.redux-container-background' );
         }
 
-        // Remove the image button
-        $( selector ).find( '.redux-remove-background' ).unbind( 'click' ).on(
-            'click', function( e ) {
-                e.preventDefault();
-                $.reduxBackground.removeImage( $( this ).parents( '.redux-container-background:first' ) );
-                $.reduxBackground.preview( $( this ) );
-                return false;
-            }
-        );
-
-        // Upload media button
-        $( selector ).find( '.redux-background-upload' ).unbind().on(
-            'click', function( event ) {
-                $.reduxBackground.addImage( event, $( this ).parents( '.redux-container-background:first' ) );
-            }
-        );
-
-        $( selector ).find( '.redux-background-input' ).on(
-            'change', function() {
-                $.reduxBackground.preview( $( this ) );
-            }
-        );
-
-        $( selector ).find( '.redux-color' ).wpColorPicker(
-            {
-                change: function( u, ui ) {
-                    redux_change( $( this ) );
-                    $( '#' + u.target.id + '-transparency' ).removeAttr( 'checked' );
-                    $( this ).val( ui.color.toString() );
-                    $.reduxBackground.preview( $( this ) );
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
                 }
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' );
+                } else {
+                    return;
+                }
+
+                // Remove the image button
+                el.find( '.redux-remove-background' ).unbind( 'click' ).on(
+                    'click', function( e ) {
+                        e.preventDefault();
+                        redux.field_objects.background.removeImage( $( this ).parents( '.redux-container-background:first' ) );
+                        redux.field_objects.background.preview( $( this ) );
+                        return false;
+                    }
+                );
+
+                // Upload media button
+                el.find( '.redux-background-upload' ).unbind().on(
+                    'click', function( event ) {
+                        redux.field_objects.background.addImage(
+                            event, $( this ).parents( '.redux-container-background:first' )
+                        );
+                    }
+                );
+
+                el.find( '.redux-background-input' ).on(
+                    'change', function() {
+                        redux.field_objects.background.preview( $( this ) );
+                    }
+                );
+
+                el.find( '.redux-color' ).wpColorPicker(
+                    {
+                        change: function( u, ui ) {
+                            redux_change( $( this ) );
+                            $( '#' + u.target.id + '-transparency' ).removeAttr( 'checked' );
+                            $( this ).val( ui.color.toString() );
+                            redux.field_objects.background.preview( $( this ) );
+                        }
+                    }
+                );
+
+                var default_params = {
+                    width: 'resolve',
+                    triggerChange: true,
+                    allowClear: true
+                };
+
+                var select2_handle = el.find( '.select2_params' );
+                if ( select2_handle.size() > 0 ) {
+                    var select2_params = select2_handle.val();
+
+                    select2_params = JSON.parse( select2_params );
+                    default_params = $.extend( {}, default_params, select2_params );
+                }
+
+                el.find( " .redux-background-repeat, .redux-background-clip, .redux-background-origin, .redux-background-size, .redux-background-attachment, .redux-background-position" ).select2( default_params );
+
             }
         );
-
-        var default_params = {
-            width: 'resolve',
-            triggerChange: true,
-            allowClear: true
-        };
-
-        var select2_handle = $( selector ).find( '.select2_params' );
-        if ( select2_handle.size() > 0 ) {
-            var select2_params = select2_handle.val();
-
-            select2_params = JSON.parse( select2_params );
-            default_params = $.extend( {}, default_params, select2_params );
-        }
-
-        $( this ).find( " .redux-background-repeat, .redux-background-clip, .redux-background-origin, .redux-background-size, .redux-background-attachment, .redux-background-position" ).select2( default_params );
     };
 
     // Update the background preview
-    $.reduxBackground.preview = function( selector ) {
+    redux.field_objects.background.preview = function( selector ) {
         var parent = $( selector ).parents( '.redux-container-background:first' );
         var preview = $( parent ).find( '.background-preview' );
 
@@ -114,7 +134,7 @@
     };
 
     // Add a file via the wp.media function
-    $.reduxBackground.addImage = function( event, selector ) {
+    redux.field_objects.background.addImage = function( event, selector ) {
         event.preventDefault();
 
         var frame;
@@ -186,7 +206,7 @@
 
                 selector.find( '.redux-remove-background' ).removeClass( 'hide' );//show "Remove" button
                 selector.find( '.redux-background-input-properties' ).slideDown();
-                $.reduxBackground.preview( selector.find( '.upload' ) );
+                redux.field_objects.background.preview( selector.find( '.upload' ) );
             }
         );
 
@@ -195,7 +215,7 @@
     };
 
     // Update the background preview
-    $.reduxBackground.removeImage = function( selector ) {
+    redux.field_objects.background.removeImage = function( selector ) {
 
         // This shouldn't have been run...
         if ( !selector.find( '.redux-remove-background' ).addClass( 'hide' ) ) {

@@ -1,24 +1,27 @@
 /*
- Field Button Set (button_set)
+ Field Color Gradient
  */
 
-/*global jQuery, document, redux*/
+/*global jQuery, document, redux_change, redux*/
 
 (function( $ ) {
-    "use strict";
+    'use strict';
 
     redux.field_objects = redux.field_objects || {};
-    redux.field_objects.button_set = redux.field_objects.button_set || {};
+    redux.field_objects.color_gradient = redux.field_objects.color_gradient || {};
 
     $( document ).ready(
         function() {
-            //redux.field_objects.button_set.init();
+            //        setTimeout(function () {
+            //            redux.field_objects.color.init();
+            //        }, 1000);
         }
     );
 
-    redux.field_objects.button_set.init = function( selector ) {
+    redux.field_objects.color_gradient.init = function( selector ) {
+
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-button_set' );
+            selector = $( document ).find( '.redux-container-color_gradient' );
         }
 
         $( selector ).each(
@@ -33,18 +36,8 @@
                 } else {
                     return;
                 }
-                el.find( '.buttonset' ).each(
-                    function() {
-                        if ( $( this ).is( ':checkbox' ) ) {
-                            $( this ).find( '.buttonset-item' ).button();
-                        }
-
-                        $( this ).buttonset();
-                    }
-                );
+                redux.field_objects.color.init(el);
             }
         );
-
-
     };
 })( jQuery );

@@ -98,7 +98,7 @@
                     echo '</ul>';
                 } else if ( empty( $this->field['data'] ) ) {
 
-                    echo ( ! empty( $this->field['desc'] ) ) ? ' <label for="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array(
+                    echo ( ! empty( $this->field['desc'] ) ) ? ' <ul class="data-full"><li><label for="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array(
                                 '[' => '_',
                                 ']' => ''
                             ) ) . '">' : '';
@@ -108,7 +108,7 @@
                     echo '<input type="checkbox" id="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array(
                                 '[' => '_',
                                 ']' => ''
-                            ) ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/>';
+                            ) ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/></li></ul>';
                 }
             }
 

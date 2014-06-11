@@ -205,7 +205,7 @@
                                             button.bind(
                                                 'click.pointer', function() {
                                                     t.element.pointer( 'close' );
-                                                    console.log( 'close button' );
+                                                    //console.log( 'close button' );
                                                 }
                                             );
                                             return button;

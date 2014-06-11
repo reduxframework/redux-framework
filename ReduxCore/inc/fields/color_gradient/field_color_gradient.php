@@ -110,6 +110,14 @@
                     true
                 );
 
+                wp_enqueue_script(
+                    'redux-field-color-gradient-js',
+                    ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient' . Redux_Functions::isMin() . '.js',
+                    array( 'redux-field-color-js' ),
+                    time(),
+                    true
+                );
+
                 wp_enqueue_style(
                     'redux-field-color-css',
                     ReduxFramework::$_url . 'inc/fields/color/field_color.css',
