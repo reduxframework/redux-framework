@@ -8,6 +8,14 @@
 .redux-container-slides .ui-accordion-header {
   margin-bottom: 0;
 }
+.redux-container-slides .full-text, .redux-container-slides .large-text {
+    width: 100%;
+}
+
+.redux-container-slides .redux-slides-remove {
+    margin-top: 5px;
+}
+
 .redux-container-slides .redux-slides-accordion-group {
   border: 1px solid #dfdfdf !important;
   border-radius: 3px !important;
