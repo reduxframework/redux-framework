@@ -128,7 +128,7 @@
                 wp_enqueue_script(
                     'redux-field-color_rgba-js',
                     ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba' . $min . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

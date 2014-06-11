@@ -351,7 +351,7 @@
                 wp_enqueue_script(
                     'redux-field-background-js',
                     ReduxFramework::$_url . 'inc/fields/background/field_background.js',
-                    array( 'jquery', 'wp-color-picker', 'select2-js' ),
+                    array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' ),
                     time(),
                     true
                 );

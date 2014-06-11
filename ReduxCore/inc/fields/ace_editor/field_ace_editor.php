@@ -94,7 +94,7 @@
                 wp_enqueue_script(
                     'redux-field-ace-editor-js',
                     ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'ace-editor-js' ),
+                    array( 'jquery', 'ace-editor-js', 'redux-js' ),
                     time(),
                     true
                 );

@@ -134,7 +134,7 @@
                 wp_enqueue_script(
                     'redux-field-sortable-js',
                     ReduxFramework::$_url . 'inc/fields/sortable/field_sortable' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

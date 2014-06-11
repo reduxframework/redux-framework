@@ -69,7 +69,7 @@
                 wp_enqueue_script(
                     'redux-field-switch-js',
                     ReduxFramework::$_url . 'inc/fields/switch/field_switch' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

@@ -106,7 +106,8 @@
                         'jquery',
                         'redux-field-spinner-custom-js',
                         'jquery-ui-core',
-                        'jquery-ui-dialog'
+                        'jquery-ui-dialog',
+                        'redux-js'
                     ),
                     time(),
                     true

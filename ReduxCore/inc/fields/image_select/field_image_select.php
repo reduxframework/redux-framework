@@ -193,7 +193,7 @@
                 wp_enqueue_script(
                     'redux-field-image-select-js',
                     ReduxFramework::$_url . 'inc/fields/image_select/field_image_select' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

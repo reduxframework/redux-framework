@@ -207,7 +207,7 @@
                 wp_enqueue_script(
                     'redux-field-border-js',
                     ReduxFramework::$_url . 'inc/fields/border/field_border' . $min . '.js',
-                    array( 'jquery', 'select2-js' ),
+                    array( 'jquery', 'select2-js', 'redux-js' ),
                     time(),
                     true
                 );

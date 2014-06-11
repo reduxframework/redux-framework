@@ -200,7 +200,7 @@
                 wp_enqueue_script(
                     'redux-field-media-js',
                     ReduxFramework::$_url . 'inc/fields/media/field_media' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'wp-color-picker' ),
+                    array( 'jquery', 'wp-color-picker', 'redux-js' ),
                     time(),
                     true
                 );

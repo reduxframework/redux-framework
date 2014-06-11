@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.0.6 =
+* Fixed:      #1337 - `redux` JS dependency loading issue.  Many thanks @tpaksu
+
 = 3.3.0.5 =
 * Modified:   Drastically changed the way JavaScript is used in the panel. Forced as-needed
               initialization of fields. Thus reducing dramatically the overall load time of

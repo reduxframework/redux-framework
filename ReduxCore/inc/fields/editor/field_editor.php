@@ -104,7 +104,7 @@
                 wp_enqueue_script(
                     'redux-field-editor2-js',
                     ReduxFramework::$_url . 'inc/fields/editor/field_editor' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

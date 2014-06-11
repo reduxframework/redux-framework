@@ -7,11 +7,6 @@
 
     $(document).ready(
         function() {
-
-
-
-
-
             $.fn.isOnScreen = function() {
                 if (!window) {
                     return;

@@ -155,7 +155,7 @@
                 wp_enqueue_script(
                     'redux-field-sorter-js',
                     ReduxFramework::$_url . 'inc/fields/sorter/field_sorter' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

@@ -158,7 +158,7 @@
                 wp_enqueue_script(
                     'redux-field-import-export-js',
                     ReduxFramework::$_url . 'inc/fields/import_export/field_import_export' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

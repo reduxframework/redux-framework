@@ -228,7 +228,7 @@
                 wp_register_script(
                     'nouislider-js',
                     ReduxFramework::$_url . 'inc/fields/slider/vendor/nouislider/jquery.nouislider' . $min . '.js',
-                    array( 'jquery', 'select2-js' ),
+                    array( 'jquery' ),
                     '5.0.0',
                     true
                 );
@@ -236,7 +236,7 @@
                 wp_enqueue_script(
                     'redux-field-slider-js',
                     ReduxFramework::$_url . 'inc/fields/slider/field_slider' . $min . '.js',
-                    array( 'jquery', 'nouislider-js' ),
+                    array( 'jquery', 'nouislider-js', 'redux-js', 'select2-js' ),
                     time(),
                     true
                 );

@@ -138,7 +138,7 @@
                 wp_enqueue_script(
                     'field-select-js',
                     ReduxFramework::$_url . 'inc/fields/select/field_select' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'select2-js' ),
+                    array( 'jquery', 'select2-js', 'redux-js' ),
                     time(),
                     true
                 );

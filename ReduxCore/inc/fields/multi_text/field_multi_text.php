@@ -92,7 +92,7 @@
                 wp_enqueue_script(
                     'redux-field-multi-text-js',
                     ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );

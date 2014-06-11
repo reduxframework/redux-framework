@@ -74,7 +74,7 @@
                 wp_enqueue_script(
                     'redux-field-date-js',
                     ReduxFramework::$_url . 'inc/fields/date/field_date' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ),
+                    array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'redux-js' ),
                     time(),
                     true
                 );

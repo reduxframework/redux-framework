@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.3.0.5
+     * @version     3.3.0.6
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.0.5';
+            public static $_version = '3.3.0.6';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -419,7 +419,7 @@
 
                     // Enqueue the admin page CSS and JS
                     if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
+                        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 1 );
                     }
 
                     // Output dynamic CSS
@@ -1594,6 +1594,7 @@
                         'slider',
                         'spacing',
                         'typography',
+                        'color_scheme'
                         
                     ) )
                 ) {

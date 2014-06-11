@@ -504,7 +504,7 @@ if (!class_exists('ReduxFramework_typography')) {
             wp_enqueue_script(
                 'redux-field-color-js',
                 ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
-                array('jquery', 'select2-js', 'wp-color-picker'),
+                array('jquery', 'select2-js', 'wp-color-picker', 'redux-js'),
                 time(),
                 true
             );
