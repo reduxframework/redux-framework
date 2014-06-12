@@ -2144,7 +2144,11 @@
                     } else if ( ! empty( $field['options'][ $field['default'] ] ) ) {
                         $default_output .= $field['options'][ $field['default'] ] . ", ";
                     } else if ( ! empty( $field['default'] ) ) {
-                        $default_output .= $field['default'] . ', ';
+                        if( $field['type'] == 'switch' ) {
+                            $default_output .= $field['default'] == 1 ? $field['on'] : $field['off'];
+                        } else {
+                            $default_output .= $field['default'] . ', ';
+                        }
                     }
                 } else {
                     foreach ( $field['default'] as $defaultk => $defaultv ) {
@@ -2160,8 +2164,10 @@
                     }
                 }
 
-                if ( ! empty( $default_output ) ) {
+                if ( ! empty( $default_output ) && $field['type'] != 'switch' ) {
                     $default_output = __( 'Default', 'redux-framework' ) . ": " . substr( $default_output, 0, - 2 );
+                } elseif( $field['type'] == 'switch' ) {
+                    $default_output = __( 'Default', 'redux-framework' ) . ": " . $default_output;
                 }
 
                 if ( ! empty( $default_output ) ) {
