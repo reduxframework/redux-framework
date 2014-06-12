@@ -2164,7 +2164,7 @@
                     }
                 }
 
-                if ( ! empty( $default_output  ) {
+                if ( ! empty( $default_output  ) ) {
                     $default_output = __( 'Default', 'redux-framework' ) . ": " . substr( $default_output, 0, - 2 );
                 }
 
