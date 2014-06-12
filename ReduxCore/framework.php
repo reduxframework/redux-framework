@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.3.1.1
+     * @version     3.3.1.2
      */
 
 // Exit if accessed directly

@@ -21,16 +21,22 @@
         $( selector ).each(
             function() {
                 var el = $( this );
+
                 redux.field_objects.media.init(el);
+
                 var parent = el;
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.hasClass( 'redux-container-slides' ) ) {
+                    parent.addClass( 'redux-field-init' );    
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
+
                 el.find( '.redux-slides-remove' ).live(
                     'click', function() {
                         redux_change( $( this ) );
