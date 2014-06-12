@@ -21,6 +21,9 @@
         $( selector ).each(
             function() {
                 var el = $( this );
+
+                redux.field_objects.media.init(el);
+
                 var parent = el;
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
