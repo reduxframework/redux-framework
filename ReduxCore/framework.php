@@ -1802,8 +1802,8 @@
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $field ) {
                             // TODO AFTER GROUP WORKS - Revert IF below
-                            // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
-                            if ( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
+                             if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+                            //if ( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
 
                                 $field_class = 'ReduxFramework_' . $field['type'];
 
@@ -2371,7 +2371,7 @@
                                         'dismiss' => true,
                                     );
                                 }
-                                continue; // Disabled for now
+                                //continue; // Disabled for now
                             }
 
 
@@ -3862,7 +3862,11 @@
                         do_action( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", $field, $value );
 
                         if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
-                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="'.$field['type'].'">';
+                            $field_init = " redux-field-init";
+                            if ($field['type'] == "group") {
+                                $field_init = "";
+                            }
+                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field'.$field_init.' redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="'.$field['type'].'">';
                         }
 
                         echo $_render;

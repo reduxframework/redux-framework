@@ -246,289 +246,299 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'fields'    => array(
 
                     array(
-                        'id'        => 'opt-web-fonts',
-                        'type'      => 'media',
-                        'title'     => __('Web Fonts', 'redux-framework-demo'),
-                        'compiler'  => 'true',
-                        'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-                        'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
-                        'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-                        'hint'      => array(
-                            //'title'     => '',
-                            'content'   => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
+                        'id'        => 'group',
+                        'type'      => 'group',
+                        'title'     => __('Group', 'redux-framework-demo'),
+                        'subfields' => array(
+                            array(
+                                'id'        => 'opt-web-fonts',
+                                'type'      => 'media',
+                                'title'     => __('Web Fonts', 'redux-framework-demo'),
+                                'compiler'  => 'true',
+                                'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+                                'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
+                                'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                                'hint'      => array(
+                                    //'title'     => '',
+                                    'content'   => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
+                                )
+                            ),
+                            array(
+                                'id'        => 'section-media-checkbox',
+                                'type'      => 'switch',
+                                'title'     => __('Section Show', 'redux-framework-demo'),
+                                'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
+
+                            ),
+                            array(
+                                'id'        => 'section-media-start',
+                                'type'      => 'section',
+                                'title'     => __('Media Options', 'redux-framework-demo'),
+                                'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
+                                'indent'    => true, // Indent all options below until the next 'section' option is set.
+                                'required'  => array('section-media-checkbox', "=", 1),
+                            ),
+                            array(
+                                'id'        => 'opt-media',
+                                'type'      => 'media',
+                                'url'       => true,
+                                'title'     => __('Media w/ URL', 'redux-framework-demo'),
+                                'compiler'  => 'true',
+                                //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
+                                'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
+                                'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                                'default'   => array('url' => 'http://s.wordpress.org/style/images/codeispoetry.png'),
+                                //'hint'      => array(
+                                //    'title'     => 'Hint Title',
+                                //    'content'   => 'This is a <b>hint</b> for the media field with a Title.',
+                                //)
+                            ),
+                            array(
+                                'id'        => 'section-media-end',
+                                'type'      => 'section',
+                                'indent'    => false, // Indent all options below until the next 'section' option is set.
+                                'required'  => array('section-media-checkbox', "=", 1),
+                            ),
+                            array(
+                                'id'        => 'media-no-url',
+                                'type'      => 'media',
+                                'title'     => __('Media w/o URL', 'redux-framework-demo'),
+                                'desc'      => __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework-demo'),
+                                'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                            ),
+                            array(
+                                'id'        => 'media-no-preview',
+                                'type'      => 'media',
+                                'preview'   => false,
+                                'title'     => __('Media No Preview', 'redux-framework-demo'),
+                                'desc'      => __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework-demo'),
+                                'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
+                            ),
+                            array(
+                                'id'        => 'opt-gallery',
+                                'type'      => 'gallery',
+                                'title'     => __('Add/Edit Gallery', 'so-panels'),
+                                'subtitle'  => __('Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'so-panels'),
+                                'desc'      => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
+                            ),
+                            array(
+                                'id'            => 'opt-slider-label',
+                                'type'          => 'slider',
+                                'title'         => __('Slider Example 1', 'redux-framework-demo'),
+                                'subtitle'      => __('This slider displays the value as a label.', 'redux-framework-demo'),
+                                'desc'          => __('Slider description. Min: 1, max: 500, step: 1, default value: 250', 'redux-framework-demo'),
+                                'default'       => 250,
+                                'min'           => 1,
+                                'step'          => 1,
+                                'max'           => 500,
+                                'display_value' => 'label'
+                            ),
+                            array(
+                                'id'            => 'opt-slider-text',
+                                'type'          => 'slider',
+                                'title'         => __('Slider Example 2 with Steps (5)', 'redux-framework-demo'),
+                                'subtitle'      => __('This example displays the value in a text box', 'redux-framework-demo'),
+                                'desc'          => __('Slider description. Min: 0, max: 300, step: 5, default value: 75', 'redux-framework-demo'),
+                                'default'       => 75,
+                                'min'           => 0,
+                                'step'          => 5,
+                                'max'           => 300,
+                                'display_value' => 'text'
+                            ),
+                            array(
+                                'id'            => 'opt-slider-select',
+                                'type'          => 'slider',
+                                'title'         => __('Slider Example 3 with two sliders', 'redux-framework-demo'),
+                                'subtitle'      => __('This example displays the values in select boxes', 'redux-framework-demo'),
+                                'desc'          => __('Slider description. Min: 0, max: 500, step: 5, slider 1 default value: 100, slider 2 default value: 300', 'redux-framework-demo'),
+                                'default'       => array(
+                                    1 => 100,
+                                    2 => 300,
+                                ),
+                                'min'           => 0,
+                                'step'          => 5,
+                                'max'           => '500',
+                                'display_value' => 'select',
+                                'handles'       => 2,
+                            ),
+                            array(
+                                'id'            => 'opt-slider-float',
+                                'type'          => 'slider',
+                                'title'         => __('Slider Example 4 with float values', 'redux-framework-demo'),
+                                'subtitle'      => __('This example displays float values', 'redux-framework-demo'),
+                                'desc'          => __('Slider description. Min: 0, max: 1, step: .1, default value: .5', 'redux-framework-demo'),
+                                'default'       => .5,
+                                'min'           => 0,
+                                'step'          => .1,
+                                'max'           => 1,
+                                'resolution'    => 0.1,
+                                'display_value' => 'text'
+                            ),
+                            /*
+                            array(
+                                'id'        => 'opt-spinner',
+                                'type'      => 'spinner',
+                                'title'     => __('JQuery UI Spinner Example 1', 'redux-framework-demo'),
+                                'desc'      => __('JQuery UI spinner description. Min:20, max: 100, step:20, default value: 40', 'redux-framework-demo'),
+                                'default'   => '40',
+                                'min'       => '20',
+                                'step'      => '20',
+                                'max'       => '100',
+                            ),
+                            */
+                            array(
+                                'id'        => 'switch-on',
+                                'type'      => 'switch',
+                                'title'     => __('Switch On', 'redux-framework-demo'),
+                                'subtitle'  => __('Look, it\'s on!', 'redux-framework-demo'),
+                                'default'   => true,
+                            ),
+                            array(
+                                'id'        => 'switch-off',
+                                'type'      => 'switch',
+                                'title'     => __('Switch Off', 'redux-framework-demo'),
+                                'subtitle'  => __('Look, it\'s on!', 'redux-framework-demo'),
+                                //'options' => array('on', 'off'),
+                                'default'   => false,
+                            ),
+                            array(
+                                'id'        => 'switch-parent',
+                                'type'      => 'switch',
+                                'title'     => __('Switch - Nested Children, Enable to show', 'redux-framework-demo'),
+                                'subtitle'  => __('Look, it\'s on! Also hidden child elements!', 'redux-framework-demo'),
+                                'default'   => 0,
+                                'on'        => 'Enabled',
+                                'off'       => 'Disabled',
+                            ),
+                            array(
+                                'id'        => 'switch-child1',
+                                'type'      => 'switch',
+                                'required'  => array('switch-parent', '=', '1'),
+                                'title'     => __('Switch - This and the next switch required for patterns to show', 'redux-framework-demo'),
+                                'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
+                                'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
+                                'default'   => false,
+                            ),
+                            array(
+                                'id'        => 'switch-child2',
+                                'type'      => 'switch',
+                                'required'  => array('switch-parent', '=', '1'),
+                                'title'     => __('Switch2 - Enable the above switch and this one for patterns to show', 'redux-framework-demo'),
+                                'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
+                                'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
+                                'default'   => false,
+                            ),
+                            array(
+                                'id'        => 'opt-patterns',
+                                'type'      => 'image_select',
+                                'tiles'     => true,
+                                'required'  => array(
+                                    array('switch-child1', 'equals', 1),
+                                    array('switch-child2', 'equals', 1),
+                                ),
+                                'title'     => __('Images Option (with pattern=>true)', 'redux-framework-demo'),
+                                'subtitle'  => __('Select a background pattern.', 'redux-framework-demo'),
+                                'default'   => 0,
+                                'options'   => $sample_patterns
+                                ,
+                            ),
+                            array(
+                                'id'        => 'opt-homepage-layout',
+                                'type'      => 'sorter',
+                                'title'     => 'Layout Manager Advanced',
+                                'subtitle'  => 'You can add multiple drop areas or columns.',
+                                'compiler'  => 'true',
+                                'options'   => array(
+                                    'enabled'   => array(
+                                        'highlights'    => 'Highlights',
+                                        'slider'        => 'Slider',
+                                        'staticpage'    => 'Static Page',
+                                        'services'      => 'Services'
+                                    ),
+                                    'disabled'  => array(
+                                    ),
+                                    'backup'    => array(
+                                    ),
+                                ),
+                                'limits' => array(
+                                    'disabled'  => 1,
+                                    'backup'    => 2,
+                                ),
+                            ),
+
+                            array(
+                                'id'        => 'opt-homepage-layout-2',
+                                'type'      => 'sorter',
+                                'title'     => 'Homepage Layout Manager',
+                                'desc'      => 'Organize how you want the layout to appear on the homepage',
+                                'compiler'  => 'true',
+                                'options'   => array(
+                                    'disabled'  => array(
+                                        'highlights'    => 'Highlights',
+                                        'slider'        => 'Slider',
+                                    ),
+                                    'enabled'   => array(
+                                        'staticpage'    => 'Static Page',
+                                        'services'      => 'Services'
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'id'        => 'opt-slides',
+                                'type'      => 'slides',
+                                'title'     => __('Slides Options', 'redux-framework-demo'),
+                                'subtitle'  => __('Unlimited slides with drag and drop sortings.', 'redux-framework-demo'),
+                                'desc'      => __('This field will store all slides values into a multidimensional array to use into a foreach loop.', 'redux-framework-demo'),
+                                'placeholder'   => array(
+                                    'title'         => __('This is a title', 'redux-framework-demo'),
+                                    'description'   => __('Description Here', 'redux-framework-demo'),
+                                    'url'           => __('Give us a link!', 'redux-framework-demo'),
+                                ),
+                            ),
+                            array(
+                                'id'        => 'opt-presets',
+                                'type'      => 'image_select',
+                                'presets'   => true,
+                                'title'     => __('Preset', 'redux-framework-demo'),
+                                'subtitle'  => __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework-demo'),
+                                'default'   => 0,
+                                'desc'      => __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework-demo'),
+                                'options'   => array(
+                                    '1'         => array('alt' => 'Preset 1', 'img' => ReduxFramework::$_url . '../sample/presets/preset1.png', 'presets' => array('switch-on' => 1, 'switch-off' => 1, 'switch-parent' => 1)),
+                                    '2'         => array('alt' => 'Preset 2', 'img' => ReduxFramework::$_url . '../sample/presets/preset2.png', 'presets' => '{"opt-slider-label":"1", "opt-slider-text":"10"}'),
+                                ),
+                            ),
+                            array(
+                                'id'            => 'opt-typography',
+                                'type'          => 'typography',
+                                'title'         => __('Typography', 'redux-framework-demo'),
+                                //'compiler'      => true,  // Use if you want to hook in your own CSS compiler
+                                'google'        => true,    // Disable google fonts. Won't work if you haven't defined your google api key
+                                'font-backup'   => true,    // Select a backup non-google font in addition to a google font
+                                //'font-style'    => false, // Includes font-style and weight. Can use font-style or font-weight to declare
+                                //'subsets'       => false, // Only appears if google is true and subsets not set to false
+                                //'font-size'     => false,
+                                //'line-height'   => false,
+                                //'word-spacing'  => true,  // Defaults to false
+                                //'letter-spacing'=> true,  // Defaults to false
+                                //'color'         => false,
+                                //'preview'       => false, // Disable the previewer
+                                'all_styles'    => true,    // Enable all Google Font style/weight variations to be added to the page
+                                'output'        => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
+                                'compiler'      => array('h2.site-description-compiler'), // An array of CSS selectors to apply this font style to dynamically
+                                'units'         => 'px', // Defaults to px
+                                'subtitle'      => __('Typography option with each property can be called individually.', 'redux-framework-demo'),
+                                'default'       => array(
+                                    'color'         => '#333',
+                                    'font-style'    => '700',
+                                    'font-family'   => 'Abel',
+                                    'google'        => true,
+                                    'font-size'     => '33px',
+                                    'line-height'   => '40px'),
+                            ),
                         )
                     ),
-                    array(
-                        'id'        => 'section-media-checkbox',
-                        'type'      => 'switch',
-                        'title'     => __('Section Show', 'redux-framework-demo'),
-                        'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
 
-                    ),
-                    array(
-                        'id'        => 'section-media-start',
-                        'type'      => 'section',
-                        'title'     => __('Media Options', 'redux-framework-demo'),
-                        'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
-                        'indent'    => true, // Indent all options below until the next 'section' option is set.
-                        'required'  => array('section-media-checkbox', "=", 1),
-                    ),
-                    array(
-                        'id'        => 'opt-media',
-                        'type'      => 'media',
-                        'url'       => true,
-                        'title'     => __('Media w/ URL', 'redux-framework-demo'),
-                        'compiler'  => 'true',
-                        //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-                        'desc'      => __('Basic media uploader with disabled URL input field.', 'redux-framework-demo'),
-                        'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-                        'default'   => array('url' => 'http://s.wordpress.org/style/images/codeispoetry.png'),
-                        //'hint'      => array(
-                        //    'title'     => 'Hint Title',
-                        //    'content'   => 'This is a <b>hint</b> for the media field with a Title.',
-                        //)
-                    ),
-                    array(
-                        'id'        => 'section-media-end',
-                        'type'      => 'section',
-                        'indent'    => false, // Indent all options below until the next 'section' option is set.
-                        'required'  => array('section-media-checkbox', "=", 1),
-                    ),
-                    array(
-                        'id'        => 'media-no-url',
-                        'type'      => 'media',
-                        'title'     => __('Media w/o URL', 'redux-framework-demo'),
-                        'desc'      => __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework-demo'),
-                        'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-                    ),
-                    array(
-                        'id'        => 'media-no-preview',
-                        'type'      => 'media',
-                        'preview'   => false,
-                        'title'     => __('Media No Preview', 'redux-framework-demo'),
-                        'desc'      => __('This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'redux-framework-demo'),
-                        'subtitle'  => __('Upload any media using the WordPress native uploader', 'redux-framework-demo'),
-                    ),
-                    array(
-                        'id'        => 'opt-gallery',
-                        'type'      => 'gallery',
-                        'title'     => __('Add/Edit Gallery', 'so-panels'),
-                        'subtitle'  => __('Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'so-panels'),
-                        'desc'      => __('This is the description field, again good for additional info.', 'redux-framework-demo'),
-                    ),
-                    array(
-                        'id'            => 'opt-slider-label',
-                        'type'          => 'slider',
-                        'title'         => __('Slider Example 1', 'redux-framework-demo'),
-                        'subtitle'      => __('This slider displays the value as a label.', 'redux-framework-demo'),
-                        'desc'          => __('Slider description. Min: 1, max: 500, step: 1, default value: 250', 'redux-framework-demo'),
-                        'default'       => 250,
-                        'min'           => 1,
-                        'step'          => 1,
-                        'max'           => 500,
-                        'display_value' => 'label'
-                    ),
-                    array(
-                        'id'            => 'opt-slider-text',
-                        'type'          => 'slider',
-                        'title'         => __('Slider Example 2 with Steps (5)', 'redux-framework-demo'),
-                        'subtitle'      => __('This example displays the value in a text box', 'redux-framework-demo'),
-                        'desc'          => __('Slider description. Min: 0, max: 300, step: 5, default value: 75', 'redux-framework-demo'),
-                        'default'       => 75,
-                        'min'           => 0,
-                        'step'          => 5,
-                        'max'           => 300,
-                        'display_value' => 'text'
-                    ),
-                    array(
-                        'id'            => 'opt-slider-select',
-                        'type'          => 'slider',
-                        'title'         => __('Slider Example 3 with two sliders', 'redux-framework-demo'),
-                        'subtitle'      => __('This example displays the values in select boxes', 'redux-framework-demo'),
-                        'desc'          => __('Slider description. Min: 0, max: 500, step: 5, slider 1 default value: 100, slider 2 default value: 300', 'redux-framework-demo'),
-                        'default'       => array(
-                            1 => 100,
-                            2 => 300,
-                        ),
-                        'min'           => 0,
-                        'step'          => 5,
-                        'max'           => '500',
-                        'display_value' => 'select',
-                        'handles'       => 2,
-                    ),
-                    array(
-                        'id'            => 'opt-slider-float',
-                        'type'          => 'slider',
-                        'title'         => __('Slider Example 4 with float values', 'redux-framework-demo'),
-                        'subtitle'      => __('This example displays float values', 'redux-framework-demo'),
-                        'desc'          => __('Slider description. Min: 0, max: 1, step: .1, default value: .5', 'redux-framework-demo'),
-                        'default'       => .5,
-                        'min'           => 0,
-                        'step'          => .1,
-                        'max'           => 1,
-                        'resolution'    => 0.1,
-                        'display_value' => 'text'
-                    ),
-                    array(
-                        'id'        => 'opt-spinner',
-                        'type'      => 'spinner',
-                        'title'     => __('JQuery UI Spinner Example 1', 'redux-framework-demo'),
-                        'desc'      => __('JQuery UI spinner description. Min:20, max: 100, step:20, default value: 40', 'redux-framework-demo'),
-                        'default'   => '40',
-                        'min'       => '20',
-                        'step'      => '20',
-                        'max'       => '100',
-                    ),
-                    array(
-                        'id'        => 'switch-on',
-                        'type'      => 'switch',
-                        'title'     => __('Switch On', 'redux-framework-demo'),
-                        'subtitle'  => __('Look, it\'s on!', 'redux-framework-demo'),
-                        'default'   => true,
-                    ),
-                    array(
-                        'id'        => 'switch-off',
-                        'type'      => 'switch',
-                        'title'     => __('Switch Off', 'redux-framework-demo'),
-                        'subtitle'  => __('Look, it\'s on!', 'redux-framework-demo'),
-                        //'options' => array('on', 'off'),
-                        'default'   => false,
-                    ),
-                    array(
-                        'id'        => 'switch-parent',
-                        'type'      => 'switch',
-                        'title'     => __('Switch - Nested Children, Enable to show', 'redux-framework-demo'),
-                        'subtitle'  => __('Look, it\'s on! Also hidden child elements!', 'redux-framework-demo'),
-                        'default'   => 0,
-                        'on'        => 'Enabled',
-                        'off'       => 'Disabled',
-                    ),
-                    array(
-                        'id'        => 'switch-child1',
-                        'type'      => 'switch',
-                        'required'  => array('switch-parent', '=', '1'),
-                        'title'     => __('Switch - This and the next switch required for patterns to show', 'redux-framework-demo'),
-                        'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
-                        'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
-                        'default'   => false,
-                    ),
-                    array(
-                        'id'        => 'switch-child2',
-                        'type'      => 'switch',
-                        'required'  => array('switch-parent', '=', '1'),
-                        'title'     => __('Switch2 - Enable the above switch and this one for patterns to show', 'redux-framework-demo'),
-                        'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
-                        'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
-                        'default'   => false,
-                    ),                    
-                    array(
-                        'id'        => 'opt-patterns',
-                        'type'      => 'image_select',
-                        'tiles'     => true,
-                        'required'  => array(
-                                            array('switch-child1', 'equals', 1),
-                                            array('switch-child2', 'equals', 1),
-                                       ),
-                        'title'     => __('Images Option (with pattern=>true)', 'redux-framework-demo'),
-                        'subtitle'  => __('Select a background pattern.', 'redux-framework-demo'),
-                        'default'   => 0,
-                        'options'   => $sample_patterns
-                    ,
-                    ),
-                    array(
-                        'id'        => 'opt-homepage-layout',
-                        'type'      => 'sorter',
-                        'title'     => 'Layout Manager Advanced',
-                        'subtitle'  => 'You can add multiple drop areas or columns.',
-                        'compiler'  => 'true',
-                        'options'   => array(
-                            'enabled'   => array(
-                                'highlights'    => 'Highlights',
-                                'slider'        => 'Slider',
-                                'staticpage'    => 'Static Page',
-                                'services'      => 'Services'
-                            ),
-                            'disabled'  => array(
-                            ),
-                            'backup'    => array(
-                            ),
-                        ),
-                        'limits' => array(
-                            'disabled'  => 1,
-                            'backup'    => 2,
-                        ),
-                    ),
-                    
-                    array(
-                        'id'        => 'opt-homepage-layout-2',
-                        'type'      => 'sorter',
-                        'title'     => 'Homepage Layout Manager',
-                        'desc'      => 'Organize how you want the layout to appear on the homepage',
-                        'compiler'  => 'true',
-                        'options'   => array(
-                            'disabled'  => array(
-                                'highlights'    => 'Highlights',
-                                'slider'        => 'Slider',
-                            ),
-                            'enabled'   => array(
-                                'staticpage'    => 'Static Page',
-                                'services'      => 'Services'
-                            ),
-                        ),
-                    ),
-                    array(
-                        'id'        => 'opt-slides',
-                        'type'      => 'slides',
-                        'title'     => __('Slides Options', 'redux-framework-demo'),
-                        'subtitle'  => __('Unlimited slides with drag and drop sortings.', 'redux-framework-demo'),
-                        'desc'      => __('This field will store all slides values into a multidimensional array to use into a foreach loop.', 'redux-framework-demo'),
-                        'placeholder'   => array(
-                            'title'         => __('This is a title', 'redux-framework-demo'),
-                            'description'   => __('Description Here', 'redux-framework-demo'),
-                            'url'           => __('Give us a link!', 'redux-framework-demo'),
-                        ),
-                    ),
-                    array(
-                        'id'        => 'opt-presets',
-                        'type'      => 'image_select',
-                        'presets'   => true,
-                        'title'     => __('Preset', 'redux-framework-demo'),
-                        'subtitle'  => __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework-demo'),
-                        'default'   => 0,
-                        'desc'      => __('This allows you to set a json string or array to override multiple preferences in your theme.', 'redux-framework-demo'),
-                        'options'   => array(
-                            '1'         => array('alt' => 'Preset 1', 'img' => ReduxFramework::$_url . '../sample/presets/preset1.png', 'presets' => array('switch-on' => 1, 'switch-off' => 1, 'switch-parent' => 1)),
-                            '2'         => array('alt' => 'Preset 2', 'img' => ReduxFramework::$_url . '../sample/presets/preset2.png', 'presets' => '{"opt-slider-label":"1", "opt-slider-text":"10"}'),
-                        ),
-                    ),
-                    array(
-                        'id'            => 'opt-typography',
-                        'type'          => 'typography',
-                        'title'         => __('Typography', 'redux-framework-demo'),
-                        //'compiler'      => true,  // Use if you want to hook in your own CSS compiler
-                        'google'        => true,    // Disable google fonts. Won't work if you haven't defined your google api key
-                        'font-backup'   => true,    // Select a backup non-google font in addition to a google font
-                        //'font-style'    => false, // Includes font-style and weight. Can use font-style or font-weight to declare
-                        //'subsets'       => false, // Only appears if google is true and subsets not set to false
-                        //'font-size'     => false,
-                        //'line-height'   => false,
-                        //'word-spacing'  => true,  // Defaults to false
-                        //'letter-spacing'=> true,  // Defaults to false
-                        //'color'         => false,
-                        //'preview'       => false, // Disable the previewer
-                        'all_styles'    => true,    // Enable all Google Font style/weight variations to be added to the page
-                        'output'        => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
-                        'compiler'      => array('h2.site-description-compiler'), // An array of CSS selectors to apply this font style to dynamically
-                        'units'         => 'px', // Defaults to px
-                        'subtitle'      => __('Typography option with each property can be called individually.', 'redux-framework-demo'),
-                        'default'       => array(
-                            'color'         => '#333',
-                            'font-style'    => '700',
-                            'font-family'   => 'Abel',
-                            'google'        => true,
-                            'font-size'     => '33px',
-                            'line-height'   => '40px'),
-                    ),
                 ),
             );
 
