@@ -186,7 +186,7 @@
                 wp_enqueue_script(
                     'redux-field-group-js',
                     ReduxFramework::$_url . 'inc/fields/group/field_group.js',
-                    array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker' ),
+                    array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker', 'redux-js' ),
                     time(),
                     true
                 );
