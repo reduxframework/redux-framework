@@ -2,6 +2,19 @@
 
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
 
+  # update the mirror repo for composer/packagist
+  echo -e "Pushing to composer mirror\n"
+  git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
+
+  # Re-Deploy the heroku demo app and pull the newest code
+  echo -e "Starting dev demo push to Heroku\n"
+  git clone git@heroku.com:redux-premium.git redux-premium
+  cd redux-premium
+  git remote add heroku git@heroku.com:redux-premium.git 
+  git reset HEAD~; git push -f heroku master;
+  cd ..
+  rm -fr redux-premium
+
   echo -e "Starting to update documentation\n"
   
   # Make sure we don't have any old files
@@ -22,13 +35,6 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
   # Publish the docs to gh-pages
   grunt gh-pages:travis
 
-  # Re-Deploy the heroku demo app and pull the newest code
-  #gem install heroku
-  #git clone git@heroku.com:redux-premium.git
-  #cd redux-premium
-  #git reset HEAD~; git push -f heroku master;
   
-  # update the mirror repo for composer/packagist
-  git push --mirror https://github.com/redux-framework/redux-framework.git
 
 fi

@@ -1,74 +1,107 @@
 /* global redux_change, wp */
-(function($){
+
+/*global redux_change, redux*/
+
+(function( $ ) {
     "use strict";
-    
-    $.gallery = $.gallery || {};
-	
-    $(document).ready(function () {
-        //gallery insert functionality
-        $.gallery();
-    });
 
-    $.gallery = function(){
-        // When the user clicks on the Add/Edit gallery button, we need to display the gallery editing
-        $('body').on({
-            click: function(event){
-                var current_gallery = $(this).closest('fieldset');
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.gallery = redux.field_objects.gallery || {};
 
-                if (event.currentTarget.id === 'clear-gallery') {
-                    //remove value from input 
-                    
-                    var rmVal = current_gallery.find('.gallery_values').val('');
+    $( document ).ready(
+        function() {
+            //redux.field_objects.gallery.init();
+        }
+    );
 
-                    //remove preview images
-                    current_gallery.find(".screenshot").html("");
+    redux.field_objects.gallery.init = function( selector ) {
 
-                    return;
 
+        if ( !selector ) {
+            selector = $( document ).find( '.redux-container-gallery' );
+        }
+
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
                 }
-
-                // Make sure the media gallery API exists
-                if ( typeof wp === 'undefined' || ! wp.media || ! wp.media.gallery ) {
-                    return;
-                }
-                event.preventDefault();
-
-                // Activate the media editor
-                var $$ = $(this);
-
-                var val = current_gallery.find('.gallery_values').val();
-                var final;
-                if (!val) {
-                    final = '[gallery ids="0"]';
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' );
                 } else {
-                    final = '[gallery ids="' + val + '"]';
+                    return;
                 }
+                // When the user clicks on the Add/Edit gallery button, we need to display the gallery editing
+                el.on(
+                    {
+                        click: function( event ) {
+                            var current_gallery = $( this ).closest( 'fieldset' );
 
-                var frame = wp.media.gallery.edit(final);
+                            if ( event.currentTarget.id === 'clear-gallery' ) {
+                                //remove value from input
 
-                    
-                // When the gallery-edit state is updated, copy the attachment ids across
-                frame.state('gallery-edit').on( 'update', function( selection ) {
+                                var rmVal = current_gallery.find( '.gallery_values' ).val( '' );
 
-                    //clear screenshot div so we can append new selected images
-                    current_gallery.find(".screenshot").html("");
-                    
-                    var element, preview_html= "", preview_img;
-                    var ids = selection.models.map(function(e){
-                        element = e.toJSON();
-                        preview_img = typeof element.sizes.thumbnail !== 'undefined'  ? element.sizes.thumbnail.url : element.url ;
-                        preview_html = "<a class='of-uploaded-image' href='"+preview_img+"'><img class='redux-option-image' src='"+preview_img+"' alt='' /></a>";
-                        current_gallery.find(".screenshot").append(preview_html);
-                        return e.id;
-                    });
-                    current_gallery.find('.gallery_values').val(ids.join(','));
-                    redux_change( current_gallery.find( '.gallery_values' ) );
-    
-                });
+                                //remove preview images
+                                current_gallery.find( ".screenshot" ).html( "" );
 
+                                return;
 
-                return false;
+                            }
+
+                            // Make sure the media gallery API exists
+                            if ( typeof wp === 'undefined' || !wp.media || !wp.media.gallery ) {
+                                return;
+                            }
+                            event.preventDefault();
+
+                            // Activate the media editor
+                            var $$ = $( this );
+
+                            var val = current_gallery.find( '.gallery_values' ).val();
+                            var final;
+
+                            if ( !val ) {
+                                final = '[gallery ids="0"]';
+                            } else {
+                                final = '[gallery ids="' + val + '"]';
+                            }
+
+                            var frame = wp.media.gallery.edit( final );
+
+                            // When the gallery-edit state is updated, copy the attachment ids across
+                            frame.state( 'gallery-edit' ).on(
+                                'update', function( selection ) {
+
+                                    //clear screenshot div so we can append new selected images
+                                    current_gallery.find( ".screenshot" ).html( "" );
+
+                                    var element, preview_html = "", preview_img;
+                                    var ids = selection.models.map(
+                                        function( e ) {
+                                            element = e.toJSON();
+                                            preview_img = typeof element.sizes.thumbnail !== 'undefined' ? element.sizes.thumbnail.url : element.url;
+                                            preview_html = "<a class='of-uploaded-image' href='" + preview_img + "'><img class='redux-option-image' src='" + preview_img + "' alt='' /></a>";
+                                            current_gallery.find( ".screenshot" ).append( preview_html );
+
+                                            return e.id;
+                                        }
+                                    );
+
+                                    current_gallery.find( '.gallery_values' ).val( ids.join( ',' ) );
+                                    redux_change( current_gallery.find( '.gallery_values' ) );
+
+                                }
+                            );
+
+                            return false;
+                        }
+                    }, '.gallery-attachments'
+                );
             }
-        }, '.gallery-attachments');
+        );
+
     };
-})(jQuery);
+})( jQuery );

@@ -5,6 +5,13 @@
 .redux-container-slides .redux-slides-accordion-group {
   margin-bottom: 10px;
 }
+.redux-container-slides .ui-accordion-header {
+  margin-bottom: 0;
+}
+.redux-container-slides .full-text,
+.redux-container-slides .large-text {
+  width: 100%;
+}
 .redux-container-slides .redux-slides-accordion-group {
   border: 1px solid #dfdfdf !important;
   border-radius: 3px !important;
@@ -14,11 +21,11 @@
 }
 .redux-container-slides .redux-slides-accordion-group h3 {
   border: 1px solid #dfdfdf;
-  cursor: move;
+  cursor: move !important;
   font-weight: bold;
   padding: 0 10px !important;
   height: 40px;
-  line-height: 40px;
+  line-height: 40px !important;
   background-color: #f1f1f1;
   background-image: -ms-linear-gradient(top, #f9f9f9, #ececec);
   background-image: -moz-linear-gradient(top, #f9f9f9, #ececec);
@@ -56,10 +63,14 @@
 .redux-container-slides .redux-slides-remove {
   color: #ef521d !important;
   float: right;
+  margin-top: 5px;
 }
 .redux-container-slides .redux-slides-header {
   font-weight: bold;
 }
 .redux-container-slides .redux_slides_add_remove {
   margin-bottom: 10px;
+}
+.redux-container-slides .ui-state-hover {
+  background-color: #ececec !important;
 }

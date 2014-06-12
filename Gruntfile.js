@@ -22,12 +22,8 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/cookie.js',
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
-                    'ReduxCore/assets/js/vendor/spinner_custom.js',
+                    'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    'ReduxCore/assets/js/vendor/select2.sortable.js',
-                    'ReduxCore/assets/js/vendor/minicolors/jquery.minicolors.js',
-                    'ReduxCore/inc/fields/**/*.js',
-                    'ReduxCore/extensions/**/*.js',
                     'ReduxCore/assets/js/redux.js',
                 ],
                 dest: 'ReduxCore/assets/js/redux.min.js'
@@ -36,10 +32,9 @@ module.exports = function(grunt) {
                 src: [
                     'ReduxCore/assets/js/vendor/cookie.js',
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
+                    'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
-                    'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    'ReduxCore/assets/js/vendor/select2.sortable.js',
                 ],
                 dest: 'ReduxCore/assets/js/vendor.min.js'
             }
@@ -71,7 +66,34 @@ module.exports = function(grunt) {
                     //'<%= grunt.template.today("yyyy-mm-dd") %> */\n',
                 },
                 files: {
-                    'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js']
+                    'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js'],
+                    'ReduxCore/assets/js/vendor/select2.sortable.min.js' : ['ReduxCore/assets/js/vendor/select2.sortable.js'],
+                    'ReduxCore/assets/js/color-picker/color-picker.min.js': ['ReduxCore/assets/js/color-picker/color-picker.js'],
+                    'ReduxCore/inc/fields/ace_editor/field_ace_editor.min.js': ['ReduxCore/inc/fields/ace_editor/field_ace_editor.js'],
+                    'ReduxCore/inc/fields/background/field_background.min.js': ['ReduxCore/inc/fields/background/field_background.js'],
+                    'ReduxCore/inc/fields/border/field_border.min.js': ['ReduxCore/inc/fields/border/field_border.js'],
+                    'ReduxCore/inc/fields/button_set/field_button_set.min.js': ['ReduxCore/inc/fields/button_set/field_button_set.js'],
+                    'ReduxCore/inc/fields/color_rgba/field_color_rgba.min.js': ['ReduxCore/inc/fields/color_rgba/field_color_rgba.js'],
+                    'ReduxCore/inc/fields/color_gradient/field_color_gradient.min.js': ['ReduxCore/inc/fields/color_gradient/field_color_gradient.js'],
+                    'ReduxCore/inc/fields/date/field_date.min.js': ['ReduxCore/inc/fields/date/field_date.js'],
+                    'ReduxCore/inc/fields/dimensions/field_dimensions.min.js': ['ReduxCore/inc/fields/dimensions/field_dimensions.js'],
+                    'ReduxCore/inc/fields/editor/field_editor.min.js': ['ReduxCore/inc/fields/editor/field_editor.js'],
+                    'ReduxCore/inc/fields/gallery/field_gallery.min.js': ['ReduxCore/inc/fields/gallery/field_gallery.js'],
+                    'ReduxCore/inc/fields/image_select/field_image_select.min.js': ['ReduxCore/inc/fields/image_select/field_image_select.js'],
+                    'ReduxCore/inc/fields/import_export/field_import_export.min.js': ['ReduxCore/inc/fields/import_export/field_import_export.js'],
+                    'ReduxCore/inc/fields/link_color/field_link_color.min.js': ['ReduxCore/inc/fields/link_color/field_link_color.js'],
+                    'ReduxCore/inc/fields/media/field_media.min.js': ['ReduxCore/inc/fields/media/field_media.js'],
+                    'ReduxCore/inc/fields/multi_text/field_multi_text.min.js': ['ReduxCore/inc/fields/multi_text/field_multi_text.js'],
+                    'ReduxCore/inc/fields/select/field_select.min.js': ['ReduxCore/inc/fields/select/field_select.js'],
+                    'ReduxCore/inc/fields/select_image/field_select_image.min.js': ['ReduxCore/inc/fields/select_image/field_select_image.js'],
+                    'ReduxCore/inc/fields/slider/field_slider.min.js': ['ReduxCore/inc/fields/slider/field_slider.js'],
+                    'ReduxCore/inc/fields/slides/field_slides.min.js': ['ReduxCore/inc/fields/slides/field_slides.js'],
+                    'ReduxCore/inc/fields/sortable/field_sortable.min.js': ['ReduxCore/inc/fields/sortable/field_sortable.js'],
+                    'ReduxCore/inc/fields/sorter/field_sorter.min.js': ['ReduxCore/inc/fields/sorter/field_sorter.js'],
+                    'ReduxCore/inc/fields/spacing/field_spacing.min.js': ['ReduxCore/inc/fields/spacing/field_spacing.js'],
+                    'ReduxCore/inc/fields/spinner/field_spinner.min.js': ['ReduxCore/inc/fields/spinner/field_spinner.js'],
+                    'ReduxCore/inc/fields/switch/field_switch.min.js': ['ReduxCore/inc/fields/switch/field_switch.js'],
+                    'ReduxCore/inc/fields/typography/field_typography.min.js': ['ReduxCore/inc/fields/typography/field_typography.js'],
                 }
             },
             extensions: {
@@ -94,42 +116,34 @@ module.exports = function(grunt) {
         },
         jshint: {
             files: [
-                /* // for testing individually
-                 'ReduxCore/inc/fields/ace_editor/*.js',
-                 'ReduxCore/inc/fields/border/*.js',
-                 'ReduxCore/inc/fields/button_set/*.js',
-                 'ReduxCore/inc/fields/checkbox/*.js',
-                 'ReduxCore/inc/fields/color/*.js',
-                 'ReduxCore/inc/fields/color_gradient/*.js',
-                 'ReduxCore/inc/fields/date/*.js',
-                 'ReduxCore/inc/fields/dimensions/*.js',
-                 'ReduxCore/inc/fields/divide/*.js',
-                 'ReduxCore/inc/fields/editor/*.js',
-                 'ReduxCore/inc/fields/gallery/*.js',
-                 'ReduxCore/inc/fields/group/*.js',
-                 'ReduxCore/inc/fields/image_select/*.js',
-                 'ReduxCore/inc/fields/info/*.js',
-                 'ReduxCore/inc/fields/link_color/*.js',
-                 'ReduxCore/inc/fields/media/*.js',
-                 'ReduxCore/inc/fields/multi_text/*.js',
-                 'ReduxCore/inc/fields/password/*.js',
-                 'ReduxCore/inc/fields/radio/*.js',
-                 'ReduxCore/inc/fields/raw/*.js',
-                 'ReduxCore/inc/fields/raw_align/*.js',
-                 'ReduxCore/inc/fields/select/*.js',
-                 'ReduxCore/inc/fields/slider/*.js',
-                 'ReduxCore/inc/fields/slides/*.js',
-                 'ReduxCore/inc/fields/sortable/*.js',
-                 'ReduxCore/inc/fields/sorter/*.js',
-                 'ReduxCore/inc/fields/spacing/*.js',
-                 'ReduxCore/inc/fields/spinner/*.js',
-                 'ReduxCore/inc/fields/switch/*.js',
-                 'ReduxCore/inc/fields/text/*.js',
-                 'ReduxCore/inc/fields/textarea/*.js',
-                 'ReduxCore/inc/fields/typography/*.js',
-                 */
-                'ReduxCore/inc/fields/**/*.js',
-                'ReduxCore/extensions/**/*.js',
+                 'ReduxCore/assets/js/color-picker/color-picker.js',
+                 'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
+                 'ReduxCore/inc/fields/background/field_background.js',
+                 'ReduxCore/inc/fields/border/field_border.js',
+                 'ReduxCore/inc/fields/button_set/field_button_Set.js',
+                 'ReduxCore/inc/fields/color/field_color.js',
+                 'ReduxCore/inc/fields/color_rgba/field_color_rgba.js',
+                 'ReduxCore/inc/fields/date/field_date.js',
+                 'ReduxCore/inc/fields/dimensions/field_dimensions.js',
+                 'ReduxCore/inc/fields/editor/field_editor.js',
+                 'ReduxCore/inc/fields/gallery/field_gallery.js',
+                 'ReduxCore/inc/fields/image_select/field_image_select.js',
+                 'ReduxCore/inc/fields/import_export/field_import_export.js',
+                 'ReduxCore/inc/fields/media/field_media.js',
+                 'ReduxCore/inc/fields/multi_text/field_multitext.js',
+                 'ReduxCore/inc/fields/select/field_select.js',
+                 'ReduxCore/inc/fields/select_image/field_select_image.js',
+                 'ReduxCore/inc/fields/slider/field_slider.js',
+                 'ReduxCore/inc/fields/slides/field_slides.js',
+                 'ReduxCore/inc/fields/sortable/field_sortable.js',
+                 'ReduxCore/inc/fields/sorter/field_sorter.js',
+                 'ReduxCore/inc/fields/spacing/field_spacing.js',
+                 'ReduxCore/inc/fields/spinner/field_spinner.js',
+                 'ReduxCore/inc/fields/switch/field_switch.js',
+                 'ReduxCore/inc/fields/typography/field_typography.js',
+                 
+//                'ReduxCore/inc/fields/**/*.js',
+//                'ReduxCore/extensions/**/*.js',
                 'ReduxCore/assets/js/redux.js'
             ],
             options: {
@@ -222,11 +236,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        recess: {
+            dist: {
+                src: ['ReduxCore/assets/css/admin.less']
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-phpdocumentor');
@@ -234,6 +252,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-phplint");
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-po2mo');
+    grunt.loadNpmTasks('grunt-recess');
 
     grunt.registerTask('langUpdate', "Update languages", function() {
         shell.exec('tx pull -a --minimum-perc=25');
@@ -253,6 +272,7 @@ module.exports = function(grunt) {
     grunt.registerTask('watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin']);
 
     grunt.registerTask("lintPHP", ["phplint:plugin", "phplint:core"]);
+    grunt.registerTask("lintLESS", ["recess:dist"]);
     grunt.registerTask("compileCSS", ["less:production", "less:development", "less:extensions"]);
     grunt.registerTask('compileJS', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor']);
     grunt.registerTask('compileTestJS', ['jshint', 'concat:core', 'concat:vendor']);
