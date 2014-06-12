@@ -78,6 +78,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.1.2 =
+* Fixed:      Slides not initializing with the last fix.
+
+= 3.3.1.1 =
+* Fixed:      Slides field was not properly initialized for the media elements. Fixed.
+
 = 3.3.0.6 =
 * Fixed:      #1337 - `redux` JS dependency loading issue.  Many thanks @tpaksu
 
