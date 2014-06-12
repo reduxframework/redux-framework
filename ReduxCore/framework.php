@@ -72,14 +72,14 @@
             public static $wp_content_url;
             public static $base_wp_content_url;
             public static $_properties;
-            public static $_is_plugin   = true;
-            public static $_as_plugin   = false;
-            public static $_instance    = null;
+            public static $_is_plugin = true;
+            public static $_as_plugin = false;
+            public static $_instance = null;
 
             static function init() {
 
                 global $wp_filesystem;
-                
+
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
                 self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
                 $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
@@ -104,7 +104,7 @@
                     // Create the directory
                     $wp_filesystem->mkdir( self::$_upload_dir );
                 }
-                
+
             }
 
             // ::init()
@@ -205,7 +205,7 @@
                 // Enable network admin when using network database mode
                 'network_sites'      => true,
                 // Enable sites as well as admin when using network database mode
-                
+
                 'hide_reset'         => false,
                 'hints'              => array(
                     'icon'          => 'icon-question-sign',
@@ -433,9 +433,9 @@
 
                     if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
                         add_action( 'network_admin_edit_redux_' . $this->args['opt_name'], array(
-                                $this,
-                                'save_network_page'
-                            ), 10, 0 );
+                            $this,
+                            'save_network_page'
+                        ), 10, 0 );
                         add_action( 'admin_bar_menu', array( $this, 'network_admin_bar' ), 999 );
 
 
@@ -486,9 +486,9 @@
                 }
 
                 wp_redirect( add_query_arg( array(
-                            'page'    => $this->args['page_slug'],
-                            'updated' => 'true'
-                        ), network_admin_url( 'settings.php' ) ) );
+                    'page'    => $this->args['page_slug'],
+                    'updated' => 'true'
+                ), network_admin_url( 'settings.php' ) ) );
                 exit();
             }
 
@@ -544,9 +544,10 @@
 
             public static function _instance() {
                 self::$_instance = $this;
+
                 return self::$_instance;
             }
-            
+
             public function _tracking() {
                 include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
                 $tracking = Redux_Tracking::get_instance();
@@ -1037,6 +1038,24 @@
                                     }
                                     $this->options_defaults[ $field['id'] ] = $field['options'];
                                 }
+                                if ( $field["type"] == "group" && isset( $field["subfields"] ) ) {
+                                    if ( ! isset( $this->options_defaults[ $field['id'] ] ) ) {
+                                        $this->options_defaults[ $field['id'] ] = array();
+                                    }
+                                    foreach ( $field['subfields'] as $subfield ) {
+                                        if ( isset( $subfield['default'] ) ) {
+                                            $this->options_defaults[ $field['id'] ][ $subfield['id'] ] = $subfield['default'];
+                                        } elseif ( isset( $field['options'] ) ) {
+                                            $this->options_defaults[ $field['id'] ][ $subfield['id'] ] = $subfield['options'];
+                                        }
+                                        // Detect what field types are being used
+                                        if ( ! isset( $this->fields[ $subfield['type'] ][ $subfield['id'] ] ) ) {
+                                            $this->fields[ $subfield['type'] ][ $subfield['id'] ] = 1;
+                                        } else {
+                                            $this->fields[ $subfield['type'] ] = array( $subfield['id'] => 1 );
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -1335,10 +1354,10 @@
                                     continue;
                                 }
 
-                                if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ){
+                                if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
                                     continue;
-                                }                                
-                                
+                                }
+
                                 add_submenu_page(
                                     $this->args['page_slug'],
                                     $section['title'],
@@ -1586,17 +1605,17 @@
 
                 // Select2 business.  Fields:  Background, Border, Dimensions, Select, Slider, Typography
                 if ( Redux_Helpers::isFieldInUseByType( $this->fields, array(
-                        'background',
-                        'border',
-                        'dimensions',
-                        'select',
-                        'select_image',
-                        'slider',
-                        'spacing',
-                        'typography',
-                        'color_scheme'
-                        
-                    ) )
+                    'background',
+                    'border',
+                    'dimensions',
+                    'select',
+                    'select_image',
+                    'slider',
+                    'spacing',
+                    'typography',
+                    'color_scheme'
+
+                ) )
                 ) {
 
                     // select2 CSS
@@ -1709,11 +1728,11 @@
 
                 // Load jQuery sortable for slides, sorter, sortable and group
                 if ( Redux_Helpers::isFieldInUseByType( $this->fields, array(
-                        'slides',
-                        'sorter',
-                        'sortable',
-                        'group'
-                    ) )
+                    'slides',
+                    'sorter',
+                    'sortable',
+                    'group'
+                ) )
                 ) {
                     wp_enqueue_script( 'jquery-ui-sortable' );
                     wp_enqueue_style( 'jquery-ui-sortable' );
@@ -1731,13 +1750,13 @@
 
                 // Load wp-color-picker for color, color_gradient, link_color, border, background and typography
                 if ( Redux_Helpers::isFieldInUseByType( $this->fields, array(
-                        'background',    
-                        'color',
-                        'color_gradient',
-                        'link_color',
-                        'border',
-                        'typography'
-                    ) )
+                    'background',
+                    'color',
+                    'color_gradient',
+                    'link_color',
+                    'border',
+                    'typography'
+                ) )
                 ) {
                     wp_enqueue_script( 'wp-color-picker' );
                     wp_enqueue_style( 'wp-color-picker' );
@@ -1802,8 +1821,8 @@
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $field ) {
                             // TODO AFTER GROUP WORKS - Revert IF below
-                             if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
-                            //if ( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
+                            if ( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+                                //if ( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
 
                                 $field_class = 'ReduxFramework_' . $field['type'];
 
@@ -1859,7 +1878,7 @@
                 $this->localize_data['fonts']          = $this->fonts;
                 $this->localize_data['required_child'] = $this->required_child;
                 $this->localize_data['fields']         = $this->fields;
-                
+
                 if ( isset( $this->font_groups['google'] ) ) {
                     $this->localize_data['googlefonts'] = $this->font_groups['google'];
                 }
@@ -1977,6 +1996,86 @@
                  */
                 do_action( "redux/page/{$this->args['opt_name']}/enqueue" );
             } // _enqueue()
+
+            public function localize_fields( $fields_list, $parent_id = null, $group_field_index = -1, $is_group_subfield = false ) {
+                foreach ( $fields_list as $field ) {
+                    if ( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+                        //if( isset( $field['type'] ) && $field['type'] != 'callback' && $field['type'] != 'group' ) {
+                        $field_class = 'ReduxFramework_' . $field['type'];
+                        /**
+                         * Field class file
+                         * filter 'redux/{opt_name}/field/class/{field.type}
+                         *
+                         * @param       string        field class file path
+                         * @param array $field        field config data
+                         */
+                        $class_file = apply_filters( "redux/{$this->args['opt_name']}/field/class/{$field['type']}", self::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
+                        if ( $class_file ) {
+                            if ( ! class_exists( $field_class ) ) {
+                                /** @noinspection PhpIncludeInspection */
+                                if ( file_exists( $class_file ) ) {
+                                    require_once( $class_file );
+                                }
+                            }
+
+                            if ( ( method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) {
+                                if ( ! $is_group_subfield ) {
+                                    if ( ! isset( $this->options[ $field['id'] ] ) ) {
+                                        $this->options[ $field['id'] ] = "";
+                                    }
+                                    $theField = new $field_class( $field, $this->options[ $field['id'] ], $this );
+                                } else {
+                                    if ( ! isset( $this->options[ $parent_id ][ $group_field_index ][ $field["id"] ] ) ) {
+                                        $this->options[ $parent_id ][ $group_field_index ][ $field["id"] ] = "";
+                                    }
+                                    $theField = new $field_class( $field, $this->options[ $parent_id ][ $group_field_index ][ $field["id"] ], $this );
+                                }
+
+                                // Move dev_mode check to a new if/then block
+                                if ( ! wp_script_is( 'redux-field-' . $field['type'] . '-js', 'enqueued' ) && class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
+
+                                    // Checking for extension field AND dev_mode = false OR dev_mode = true
+                                    // Since extension fields use 'extension_dir' exclusively, we can detect them here.
+                                    // Also checking for dev_mode = true doesn't mess up the JS combinine.
+                                    if ( $this->args['dev_mode'] === false && isset( $theField->extension_dir ) && ( ! '' == $theField->extension_dir ) || ( $this->args['dev_mode'] === true ) ) {
+                                        /** @noinspection PhpUndefinedMethodInspection */
+                                        $theField->enqueue();
+                                    }
+                                }
+                                if ( method_exists( $field_class, 'localize' ) ) {
+                                    /** @noinspection PhpUndefinedMethodInspection */
+                                    $params = $theField->localize( $field );
+
+                                    if ( ! isset( $this->localize_data[ $field['type'] ] ) ) {
+                                        $this->localize_data[ $field['type'] ] = array();
+                                    }
+
+                                    if ( $is_group_subfield ) {
+                                        $field['id'] = $field['id'] . "-" . $group_field_index;
+                                    }
+
+                                    $this->localize_data[ $field['type'] ][ $field['id'] ] = $theField->localize( $field );
+                                }
+                                unset( $theField );
+                            }
+
+                            if ( $field['type'] == "group" && isset( $field["subfields"] ) ) {
+                                if ( ! isset( $this->options[ $field["id"] ]["group-field-count"] ) ) {
+                                    $this->options[ $field["id"] ]["group-field-count"] = 0;
+                                }
+                                $group_field_count = $this->options[ $field["id"] ]["group-field-count"];
+                                // localize dummy data
+                                $this->localize_fields( $field["subfields"], $field["id"], "dummy-field-id", true );
+                                // localize real data
+                                for ( $group_field_index = 0; $group_field_index < $group_field_count; $group_field_index ++ ) {
+                                    $this->localize_fields( $field["subfields"], $field["id"], $group_field_index, true );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
 
             /**
              * Show page help
@@ -2255,9 +2354,9 @@
                 }
 
                 register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array(
-                        $this,
-                        '_validate_options'
-                    ) );
+                    $this,
+                    '_validate_options'
+                ) );
 
                 if ( is_null( $this->sections ) ) {
                     return;
@@ -2328,9 +2427,9 @@
                     }
 
                     add_settings_section( $this->args['opt_name'] . $k . '_section', $heading, array(
-                            &$this,
-                            '_section_desc'
-                        ), $this->args['opt_name'] . $k . '_section_group' );
+                        &$this,
+                        '_section_desc'
+                    ), $this->args['opt_name'] . $k . '_section_group' );
 
                     $sectionIndent = false;
                     if ( isset( $section['fields'] ) ) {
@@ -2341,8 +2440,8 @@
 
                             if ( isset( $field['customizer_only'] ) && $field['customizer_only'] == true ) {
                                 continue; // ok
-                            }                            
-                            
+                            }
+
                             /**
                              * filter 'redux/options/{opt_name}/field/{field.id}'
                              *
@@ -2439,9 +2538,9 @@
                                     if ( isset( $data ) && ! empty( $data ) ) {
                                         $this->options[ $field['id'] ]['url']       = $data;
                                         $data                                       = wp_get_attachment_image_src( $this->options[ $field['id'] ]['id'], array(
-                                                150,
-                                                150
-                                            ) );
+                                            150,
+                                            150
+                                        ) );
                                         $this->options[ $field['id'] ]['thumbnail'] = $data[0];
                                         $doUpdate                                   = true;
                                     }
@@ -2455,9 +2554,9 @@
                                     if ( isset( $data ) && ! empty( $data ) ) {
                                         $this->options[ $field['id'] ]['background-image']   = $data;
                                         $data                                                = wp_get_attachment_image_src( $this->options[ $field['id'] ]['media']['id'], array(
-                                                150,
-                                                150
-                                            ) );
+                                            150,
+                                            150
+                                        ) );
                                         $this->options[ $field['id'] ]['media']['thumbnail'] = $data[0];
                                         $doUpdate                                            = true;
                                     }
@@ -2472,9 +2571,9 @@
                                         if ( isset( $data ) && ! empty( $data ) ) {
                                             $this->options[ $field['id'] ][ $k ]['image'] = $data;
                                             $data                                         = wp_get_attachment_image_src( $v['attachment_id'], array(
-                                                    150,
-                                                    150
-                                                ) );
+                                                150,
+                                                150
+                                            ) );
                                             $this->options[ $field['id'] ][ $k ]['thumb'] = $data[0];
                                             $doUpdate                                     = true;
                                         }
@@ -2753,10 +2852,10 @@
                          * @param  &array [&$plugin_options, redux_options]
                          */
                         do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(
-                                &$plugin_options,
-                                $imported_options,
-                                $this->transients['changed_values']
-                            ) );
+                            &$plugin_options,
+                            $imported_options,
+                            $this->transients['changed_values']
+                        ) );
 
                         // Remove the import/export tab cookie.
                         if ( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
@@ -2865,9 +2964,9 @@
                  * @param  &array [&$plugin_options, redux_options]
                  */
                 do_action_ref_array( "redux-validate-{$this->args['opt_name']}", array(
-                        &$plugin_options,
-                        $this->options
-                    ) ); // REMOVE
+                    &$plugin_options,
+                    $this->options
+                ) ); // REMOVE
 
                 /**
                  * action 'redux/options/{opt_name}/validate'
@@ -2875,10 +2974,10 @@
                  * @param  &array [&$plugin_options, redux_options]
                  */
                 do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(
-                        &$plugin_options,
-                        $this->options,
-                        $this->transients['changed_values']
-                    ) );
+                    &$plugin_options,
+                    $this->options,
+                    $this->transients['changed_values']
+                ) );
 
                 if ( ! empty( $plugin_options['compiler'] ) ) {
                     unset( $plugin_options['compiler'] );
@@ -2918,7 +3017,7 @@
              *
              * @return      array $plugin_options
              */
-            public function _validate_values( $plugin_options, $options, $sections ) {
+            public function _validate_values( $plugin_options, $options, $sections, $sections_key = "", $fields_key = 'fields', $group_index = -1 ) {
                 foreach ( $sections as $k => $section ) {
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $fkey => $field ) {
@@ -2942,6 +3041,10 @@
                                     // Set the flag.
                                     $isNotEmpty = true;
                                 }
+                            }
+
+                            if ( $field["type"] == "group" ) {
+                                $isNotEmpty = true;
                             }
 
                             // Check for empty id value
@@ -3042,10 +3145,16 @@
                                         $plugin_options[ $field['id'] ] = $validation->value;
 
                                         if ( isset( $validation->error ) ) {
+                                            if ( $group_index != - 1 ) {
+                                                $validation->error["id"] .= "-" . $group_index;
+                                            }
                                             $this->errors[] = $validation->error;
                                         }
 
                                         if ( isset( $validation->warning ) ) {
+                                            if ( $group_index != - 1 ) {
+                                                $validation->warning["id"] .= "-" . $group_index;
+                                            }
                                             $this->warnings[] = $validation->warning;
                                         }
                                     }
@@ -3066,6 +3175,18 @@
                                     $this->warnings[] = $callbackvalues['warning'];
                                 }
                             }
+
+                            // validate group subfields
+                            if ( isset( $field['type'] ) && $field['type'] == 'group' ) {
+                                if ( isset( $options[ $field['id'] ] ) && isset( $options[ $field['id'] ]['group-field-count'] ) ) {
+                                    if ( isset( $plugin_options_var[ $field['id'] ] ) && $plugin_options_var[ $field['id'] ] != '' ) {
+                                        for ( $group_index = 0; $group_index < $options[ $field['id'] ]['group-field-count']; $group_index ++ ) {
+                                            $plugin_options_var[ $field['id'] ][ $group_index ] = $this->_validate_values( $plugin_options_var[ $field['id'] ][ $group_index ], $options[ $field["id"] ][ $group_index ], $field, $sections_key, 'subfields', $group_index );
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }
@@ -3277,14 +3398,14 @@
                 echo '<a href="javascript:void(0);" class="expand_options' . $expanded . '">' . __( 'Expand', 'redux-framework' ) . '</a>';
                 echo '<div class="redux-action_bar">';
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
-                
-                if (false === $this->args['hide_reset']) {
+
+                if ( false === $this->args['hide_reset'] ) {
                     echo '&nbsp;';
                     submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
                     echo '&nbsp;';
                     submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
                 }
-                
+
                 echo '</div>';
 
                 echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
@@ -3404,10 +3525,10 @@
                         }
                     }
 
-                    if ( isset($section['customizer_only']) && $section['customizer_only'] == true ) {
+                    if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
                         continue;
-                    }                    
-                    
+                    }
+
                     if ( false == $skip_sec ) {
                         echo $this->section_menu( $k, $section );
                         $skip_sec = false;
@@ -3458,10 +3579,10 @@
                 echo '<div class="redux-main">';
 
                 foreach ( $this->sections as $k => $section ) {
-                    if ( isset($section['customizer_only']) && $section['customizer_only'] == true ) {
+                    if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
                         continue;
-                    }                    
-                    
+                    }
+
                     //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
                     $section['class'] = isset( $section['class'] ) ? ' ' . $section['class'] : '';
                     echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab' . $section['class'] . '" data-rel="' . $k . '">';
@@ -3582,14 +3703,14 @@
 
                 echo '<div class="redux-action_bar">';
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
-                
-                if (false === $this->args['hide_reset']) {
+
+                if ( false === $this->args['hide_reset'] ) {
                     echo '&nbsp;';
                     submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
                     echo '&nbsp;';
                     submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
                 }
-                
+
                 echo '</div>';
 
                 echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
@@ -3863,10 +3984,10 @@
 
                         if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
                             $field_init = " redux-field-init";
-                            if ($field['type'] == "group") {
+                            if ( $field['type'] == "group" ) {
                                 $field_init = "";
                             }
-                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field'.$field_init.' redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="'.$field['type'].'">';
+                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field' . $field_init . ' redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="' . $field['type'] . '">';
                         }
 
                         echo $_render;
@@ -4058,33 +4179,33 @@
                     case 'greater':
                     case 'is_larger':
                         $data['operation'] = ">";
-                    if ( $parentValue > $checkValue ) {
-                        $return = true;
-                    }
+                        if ( $parentValue > $checkValue ) {
+                            $return = true;
+                        }
                         break;
                     case '>=':
                     case 'greater_equal':
                     case 'is_larger_equal':
                         $data['operation'] = ">=";
-                    if ( $parentValue >= $checkValue ) {
-                        $return = true;
-                    }
+                        if ( $parentValue >= $checkValue ) {
+                            $return = true;
+                        }
                         break;
                     case '<':
                     case 'less':
                     case 'is_smaller':
                         $data['operation'] = "<";
-                    if ( $parentValue < $checkValue ) {
-                        $return = true;
-                    }
+                        if ( $parentValue < $checkValue ) {
+                            $return = true;
+                        }
                         break;
                     case '<=':
                     case 'less_equal':
                     case 'is_smaller_equal':
                         $data['operation'] = "<=";
-                    if ( $parentValue <= $checkValue ) {
-                        $return = true;
-                    }
+                        if ( $parentValue <= $checkValue ) {
+                            $return = true;
+                        }
                         break;
                     case 'contains':
                         if ( strpos( $parentValue, $checkValue ) !== false ) {
@@ -4093,9 +4214,9 @@
                         break;
                     case 'doesnt_contain':
                     case 'not_contain':
-                    if ( strpos( $parentValue, $checkValue ) === false ) {
-                        $return = true;
-                    }
+                        if ( strpos( $parentValue, $checkValue ) === false ) {
+                            $return = true;
+                        }
                         break;
                     case 'is_empty_or':
                         if ( empty( $parentValue ) || $parentValue == $checkValue ) {
@@ -4110,16 +4231,16 @@
                     case 'is_empty':
                     case 'empty':
                     case '!isset':
-                    if ( empty( $parentValue ) || $parentValue == "" || $parentValue == null ) {
-                        $return = true;
-                    }
+                        if ( empty( $parentValue ) || $parentValue == "" || $parentValue == null ) {
+                            $return = true;
+                        }
                         break;
                     case 'not_empty':
                     case '!empty':
                     case 'isset':
-                    if ( ! empty( $parentValue ) && $parentValue != "" && $parentValue != null ) {
-                        $return = true;
-                    }
+                        if ( ! empty( $parentValue ) && $parentValue != "" && $parentValue != null ) {
+                            $return = true;
+                        }
                         break;
                 }
 

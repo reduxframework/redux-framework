@@ -111,12 +111,12 @@
                         $subfield["class"] = "";
                     }
 
-                    //if(isset($subfield["required"])){
-                    //    if(!isset($subfield["required"]["reindexed"])){
-                    //        $subfield["required"][0] .= "-" . $index;
-                    //        $subfield["required"]["reindexed"]=true;
-                    //    }
-                    //}
+                    if ( isset( $subfield["required"] ) ) {
+                        if ( ! isset( $subfield["required"]["reindexed"] ) ) {
+                            $subfield["required"][0] .= "-" . $index;
+                            $subfield["required"]["reindexed"] = true;
+                        }
+                    }
                     if ( isset( $subfield["presets"] ) && isset( $subfield["options"] ) ) {
                         foreach ( $subfield["options"] as $option_key => $options ) {
                             // check if the presets are defined as json string
