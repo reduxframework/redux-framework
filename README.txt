@@ -125,6 +125,18 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+= 3.3.1 =
+* Fixed:      #1337 - `redux` JS dependency loading issue.  Many thanks @tpaksu
+* Modified:   Drastically changed the way JavaScript is used in the panel. Forced as-needed
+              initialization of fields. Thus reducing dramatically the overall load time of
+              the panel. The effects have been seen up to 300% speed improvement. The only
+              time a field will be initialized is if it's visible, thus reducing the processing
+              needed in DOM overall.
+* Fixed:      #1336 - fixed default font in preview.
+* Fixed:      #1334 - Typography not un-saving italics.
+* Added:      #1332 - New validation: numeric_not_empty.
+* Fixed:      #1330 - Required not working on all fields.
+
 = 3.3.0 =
 * Fixed:      #1322 - Sections not folding with required argument.
 * Fixed:      #1270 - Editor field compiler hook not firing in visual mode.
