@@ -79,7 +79,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.3.1.3 =
-* Fixed:      #1341 - Import/Export buttons not functioning.
+* Fixed:      #1341 - Import/Export buttons not functioning. Also fixed sortable somehow.
 
 = 3.3.1.2 =
 * Fixed:      Slides not initializing with the last fix.
