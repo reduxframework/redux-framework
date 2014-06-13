@@ -952,7 +952,7 @@ function redux_change(variable) {
         var warningCount = (parseInt(rContainer.find('.redux-field-warnings span').text()) - 1);
         
         if (errorCount <= 0) {
-            console.log('HERE');
+            //console.log('HERE');
             jQuery('#' + parentID + '_li .redux-menu-error').fadeOut('fast').remove();
             jQuery('#' + parentID + '_li .redux-group-tab-link-a').removeClass('hasError');
 

@@ -157,7 +157,7 @@
             public function enqueue() {
                 wp_enqueue_script(
                     'redux-field-import-export-js',
-                    ReduxFramework::$_url . 'inc/fields/import_export/field_import_export' . Redux_Functions::isMin() . '.js',
+                    ReduxFramework::$_url . 'assets/js/import_export/import_export' . Redux_Functions::isMin() . '.js',
                     array( 'jquery', 'redux-js' ),
                     time(),
                     true
@@ -165,7 +165,7 @@
 
                 wp_enqueue_style(
                     'redux-field-import-export-css',
-                    ReduxFramework::$_url . 'inc/fields/import_export/field_import_export.css',
+                    ReduxFramework::$_url . 'assets/css/import_export/import_export.css',
                     time(),
                     true
                 );

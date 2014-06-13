@@ -69,6 +69,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js'],
                     'ReduxCore/assets/js/vendor/select2.sortable.min.js' : ['ReduxCore/assets/js/vendor/select2.sortable.js'],
                     'ReduxCore/assets/js/color-picker/color-picker.min.js': ['ReduxCore/assets/js/color-picker/color-picker.js'],
+                    'ReduxCore/assets/js/import_export/import_export.min.js': ['ReduxCore/assets/js/import_export/import_export.js'],
                     'ReduxCore/assets/js/media/media.min.js': ['ReduxCore/assets/js/media/media.js'],
                     'ReduxCore/inc/fields/ace_editor/field_ace_editor.min.js': ['ReduxCore/inc/fields/ace_editor/field_ace_editor.js'],
                     'ReduxCore/inc/fields/background/field_background.min.js': ['ReduxCore/inc/fields/background/field_background.js'],
@@ -81,7 +82,6 @@ module.exports = function(grunt) {
                     'ReduxCore/inc/fields/editor/field_editor.min.js': ['ReduxCore/inc/fields/editor/field_editor.js'],
                     'ReduxCore/inc/fields/gallery/field_gallery.min.js': ['ReduxCore/inc/fields/gallery/field_gallery.js'],
                     'ReduxCore/inc/fields/image_select/field_image_select.min.js': ['ReduxCore/inc/fields/image_select/field_image_select.js'],
-                    'ReduxCore/inc/fields/import_export/field_import_export.min.js': ['ReduxCore/inc/fields/import_export/field_import_export.js'],
                     'ReduxCore/inc/fields/link_color/field_link_color.min.js': ['ReduxCore/inc/fields/link_color/field_link_color.js'],
                     'ReduxCore/inc/fields/multi_text/field_multi_text.min.js': ['ReduxCore/inc/fields/multi_text/field_multi_text.js'],
                     'ReduxCore/inc/fields/select/field_select.min.js': ['ReduxCore/inc/fields/select/field_select.js'],
@@ -117,6 +117,7 @@ module.exports = function(grunt) {
         jshint: {
             files: [
                  'ReduxCore/assets/js/color-picker/color-picker.js',
+                 'ReduxCore/assets/js/import_export/import_export.js',
                  'ReduxCore/assets/js/media/media.js',
                  'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
                  'ReduxCore/inc/fields/background/field_background.js',
@@ -129,7 +130,6 @@ module.exports = function(grunt) {
                  'ReduxCore/inc/fields/editor/field_editor.js',
                  'ReduxCore/inc/fields/gallery/field_gallery.js',
                  'ReduxCore/inc/fields/image_select/field_image_select.js',
-                 'ReduxCore/inc/fields/import_export/field_import_export.js',
                  'ReduxCore/inc/fields/multi_text/field_multitext.js',
                  'ReduxCore/inc/fields/select/field_select.js',
                  'ReduxCore/inc/fields/select_image/field_select_image.js',
@@ -217,7 +217,7 @@ module.exports = function(grunt) {
                     paths: 'ReduxCore/',
                 },
                 files: {
-                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less"],
+                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less"],
                     "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
                     "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.less"]
 
@@ -233,7 +233,7 @@ module.exports = function(grunt) {
                     paths: 'ReduxCore/',
                 },
                 files: {
-                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less"],
+                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", , "ReduxCore/assets/css/import_export/*.less"],
                     "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
                 }
             }
