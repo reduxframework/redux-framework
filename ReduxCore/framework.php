@@ -15,7 +15,6 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.3.1.3
      */
 
 // Exit if accessed directly
@@ -64,7 +63,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.1.3';
+            public static $_version = '3.3.1.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2686,14 +2685,14 @@
 
             public function get_transients() {
                 if ( ! isset( $this->transients ) ) {
-                    $this->transients       = get_transient( $this->args['opt_name'] . '-transients', array() );
+                    $this->transients       = get_option( $this->args['opt_name'] . '-transients', array() );
                     $this->transients_check = $this->transients;
                 }
             }
 
             public function set_transients() {
                 if ( ! isset( $this->transients ) || ! isset( $this->transients_check ) || $this->transients != $this->transients_check ) {
-                    set_transient( $this->args['opt_name'] . '-transients', $this->transients );
+                    update_option( $this->args['opt_name'] . '-transients', $this->transients );
                     $this->transients_check = $this->transients;
                 }
             }
@@ -2709,6 +2708,7 @@
              * @return array|mixed|string|void
              */
             public function _validate_options( $plugin_options ) {
+
                 if ( ! empty( $this->hidden_perm_fields ) && is_array( $this->hidden_perm_fields ) ) {
                     foreach ( $this->hidden_perm_fields as $id => $data ) {
                         $plugin_options[ $id ] = $data;
@@ -2905,7 +2905,19 @@
                     return;
                 }
 
-                $this->set_transients();
+                if ( defined( 'WP_CACHE' ) && WP_CACHE ) {
+                    //echo "here";
+                    $w3 = W3_ObjectCache::instance();
+                    $key = $w3->_get_cache_key( $this->args['opt_name'].'-transients', 'transient' );
+                    //echo $key;
+                    $w3->delete($key, 'transient', true);
+                    //set_transient($this->args['opt_name'].'-transients', $this->transients);
+                    //exit();
+                }
+
+                $this->set_transients($this->transients);
+
+
 
                 return $plugin_options;
             }
