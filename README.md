@@ -78,6 +78,16 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.1.3 =
+* Fixed:      #1226 - W3 Total Cache was affecting validation and compiler hooks.
+* Fixed:      Menu errors weren't showing properly for non-subsectioned items.
+
+= 3.3.1.3 =
+* Fixed:      #1341 - Import/Export buttons not functioning. Also fixed sortable somehow.
+
+= 3.3.1.2 =
+* Fixed:      Slides not initializing with the last fix.
+
 = 3.3.1.1 =
 * Fixed:      Slides field was not properly initialized for the media elements. Fixed.
 

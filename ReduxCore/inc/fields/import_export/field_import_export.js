@@ -15,7 +15,7 @@
         redux.field_objects.import_export.init = function( selector ) {
 
             if ( !selector ) {
-                selector = $( document ).find( '.redux-container-sortable' );
+                selector = $( document ).find( '.redux-container-import_export' );
             }
             var parent = selector;
             if ( !selector.hasClass( 'redux-field-container' ) ) {

@@ -208,7 +208,10 @@
                 // Server configuration (really just versioning)
                 $return .= "\n" . '-- Webserver Configuration' . "\n\n";
                 $return .= 'PHP Version:              ' . PHP_VERSION . "\n";
-                $return .= 'MySQL Version:            ' . mysqli_get_client_version() . "\n";
+                if ( function_exists( 'mysqli_get_client_version' ) ) {
+                    $return .= 'MySQL Version:            ' . mysqli_get_client_version() . "\n";    
+                }
+                
                 $return .= 'Webserver Info:           ' . $_SERVER['SERVER_SOFTWARE'] . "\n";
 
                 if ( has_filter( 'ssi_after_webserver_config' ) ) {

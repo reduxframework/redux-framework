@@ -234,11 +234,11 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
         public function enqueue () {
 
 
-            wp_enqueue_script (
-                'redux-field-media-js', 
-                ReduxFramework::$_url . 'inc/fields/media/field_media' . Redux_Functions::isMin () . '.js', 
-                array( 'jquery', 'redux-js' ), 
-                time (), 
+            wp_enqueue_script(
+                'redux-field-media-js',
+                ReduxFramework::$_url . 'assets/js/media/media' . Redux_Functions::isMin() . '.js',
+                array( 'jquery', 'redux-js' ),
+                time(),
                 true
             );
 
