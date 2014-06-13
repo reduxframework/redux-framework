@@ -78,7 +78,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
-= 3.3.1.3 =
+= 3.3.1.5 =
+* Fixed:     #1339 - Typography would lose Font Weight and Style. value was named val in the HTML, so it would be
+             destroyed on the next save if not initialized.
+
+= 3.3.1.4 =
 * Fixed:      #1226 - W3 Total Cache was affecting validation and compiler hooks.
 * Fixed:      Menu errors weren't showing properly for non-subsectioned items.
 
