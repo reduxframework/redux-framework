@@ -78,8 +78,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.1.7 =
+* Fixed:      #1354 - Add class check for W3_ObjectCache.
+
 = 3.3.1.6 =
-* Fixed:      #1341 - JS not initializing properly.
+* Fixed:      #1341 - JS not initializing properly in import_export.
 
 = 3.3.1.5 =
 * Fixed:      #1339 - Typography would lose Font Weight and Style. value was named val in the HTML, so it would be destroyed on the next save if not initialized.
