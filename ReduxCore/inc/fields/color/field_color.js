@@ -1,5 +1,5 @@
 /*
- Field Color Gradient
+ Field Color (color)
  */
 
 /*global jQuery, document, redux_change, redux*/
@@ -8,31 +8,31 @@
     'use strict';
 
     redux.field_objects = redux.field_objects || {};
-    redux.field_objects.color_gradient = redux.field_objects.color_gradient || {};
+    redux.field_objects.color = redux.field_objects.color || {};
 
     $( document ).ready(
         function() {
-            //        setTimeout(function () {
-            //            redux.field_objects.color.init();
-            //        }, 1000);
+
         }
     );
 
-    redux.field_objects.color_gradient.init = function( selector ) {
-
+    redux.field_objects.color.init = function( selector ) {
+        
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-color_gradient' );
+            selector = $( document ).find( '.redux-container-color' );
         }
 
         $( selector ).each(
             function() {
+
                 var el = $( this );
                 var parent = el;
                 
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                
+
+                console.log(parent);
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
@@ -48,6 +48,12 @@
                         redux_change( $( this ).parent().find( '.redux-color-init' ) );
                     }
                 });
+
+                el.find( '.redux-color' ).on(
+                    'focus', function() {
+                        $( this ).data( 'oldcolor', $( this ).val() );
+                    }
+                );
 
                 el.find( '.redux-color' ).on(
                     'keyup', function() {
@@ -106,6 +112,9 @@
                 el.find( '.color-transparency' ).on(
                     'click', function() {
                         if ( $( this ).is( ":checked" ) ) {
+                            //console.log($(this));
+                            console.log('checked');
+                            console.log($( '#' + $( this ).data( 'id' ) ).val());
                             
                             el.find( '.redux-saved-color' ).val( $( '#' + $( this ).data( 'id' ) ).val() );
                             el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
@@ -113,6 +122,7 @@
                                 'background-color', 'transparent'
                             );
                         } else {
+                            console.log('not checked');
                             if ( el.find( '#' + $( this ).data( 'id' ) ).val() === 'transparent' ) {
                                 var prevColor = $( '.redux-saved-color' ).val();
 

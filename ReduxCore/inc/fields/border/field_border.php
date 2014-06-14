@@ -197,17 +197,9 @@
                 $min = Redux_Functions::isMin();
 
                 wp_enqueue_script(
-                    'redux-field-color-js',
-                    ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . $min . '.js',
-                    array( 'jquery', 'wp-color-picker' ),
-                    time(),
-                    true
-                );
-
-                wp_enqueue_script(
                     'redux-field-border-js',
                     ReduxFramework::$_url . 'inc/fields/border/field_border' . $min . '.js',
-                    array( 'jquery', 'select2-js', 'redux-js' ),
+                    array( 'jquery', 'select2-js', 'wp-color-picker', 'redux-js' ),
                     time(),
                     true
                 );

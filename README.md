@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.1.8 =
+* Fixed:      #1356 - Color fields and transparency not syncing due to new JS.
+
 = 3.3.1.7 =
 * Fixed:      #1354 - Add class check for W3_ObjectCache.
 

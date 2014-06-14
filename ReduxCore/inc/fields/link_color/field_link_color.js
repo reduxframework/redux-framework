@@ -12,9 +12,7 @@
 
     $( document ).ready(
         function() {
-            //        setTimeout(function () {
-            //            redux.field_objects.color.init();
-            //        }, 1000);
+
         }
     );
 
@@ -28,15 +26,79 @@
             function() {
                 var el = $( this );
                 var parent = el;
+                
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
-                redux.field_objects.color.init(el);
+                
+                el.find( '.redux-color-init' ).wpColorPicker({
+                    change: function( u ) {
+                        redux_change( $( this ) );
+                        el.find( '#' + u.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                    },
+                    clear: function() {
+                        redux_change( $( this ).parent().find( '.redux-color-init' ) );
+                    }
+                });
+
+                el.find( '.redux-color' ).on(
+                    'keyup', function() {
+                        var value = $( this ).val();
+                        var color = colorValidate( this );
+                        var id = '#' + $( this ).attr( 'id' );
+
+                        if ( value === "transparent" ) {
+                            $( this ).parent().parent().find( '.wp-color-result' ).css(
+                                'background-color', 'transparent'
+                            );
+                    
+                            el.find( id + '-transparency' ).attr( 'checked', 'checked' );
+                        } else {
+                            el.find( id + '-transparency' ).removeAttr( 'checked' );
+
+                            if ( color && color !== $( this ).val() ) {
+                                $( this ).val( color );
+                            }
+                        }
+                    }
+                );
+
+                // Replace and validate field on blur
+                el.find( '.redux-color' ).on(
+                    'blur', function() {
+                        var value = $( this ).val();
+                        var id = '#' + $( this ).attr( 'id' );
+
+                        if ( value === "transparent" ) {
+                            $( this ).parent().parent().find( '.wp-color-result' ).css(
+                                'background-color', 'transparent'
+                            );
+                    
+                            el.find( id + '-transparency' ).attr( 'checked', 'checked' );
+                        } else {
+                            if ( colorValidate( this ) === value ) {
+                                if ( value.indexOf( "#" ) !== 0 ) {
+                                    $( this ).val( $( this ).data( 'oldcolor' ) );
+                                }
+                            }
+
+                            el.find( id + '-transparency' ).removeAttr( 'checked' );
+                        }
+                    }
+                );
+
+                // Store the old valid color on keydown
+                el.find( '.redux-color' ).on(
+                    'keydown', function() {
+                        $( this ).data( 'oldkeypress', $( this ).val() );
+                    }
+                );
             }
         );
     };

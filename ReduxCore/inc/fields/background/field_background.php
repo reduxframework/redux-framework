@@ -115,7 +115,8 @@
                     }
 
                     echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . '[background-color]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-background-input redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['background-color'] . '"  data-default-color="' . ( isset( $this->field['default']['background-color'] ) ? $this->field['default']['background-color'] : "" ) . '" />';
-
+                    echo '<input type="hidden" class="redux-saved-color" id="' . $this->field['id'] . '-saved-color' . '" value="">';
+                    
                     if ( ! isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
                         $tChecked = "";
                         if ( $this->value['background-color'] == "transparent" ) {

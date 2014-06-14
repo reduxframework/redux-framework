@@ -68,13 +68,13 @@ module.exports = function(grunt) {
                 files: {
                     'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js'],
                     'ReduxCore/assets/js/vendor/select2.sortable.min.js' : ['ReduxCore/assets/js/vendor/select2.sortable.js'],
-                    'ReduxCore/assets/js/color-picker/color-picker.min.js': ['ReduxCore/assets/js/color-picker/color-picker.js'],
                     'ReduxCore/assets/js/import_export/import_export.min.js': ['ReduxCore/assets/js/import_export/import_export.js'],
                     'ReduxCore/assets/js/media/media.min.js': ['ReduxCore/assets/js/media/media.js'],
                     'ReduxCore/inc/fields/ace_editor/field_ace_editor.min.js': ['ReduxCore/inc/fields/ace_editor/field_ace_editor.js'],
                     'ReduxCore/inc/fields/background/field_background.min.js': ['ReduxCore/inc/fields/background/field_background.js'],
                     'ReduxCore/inc/fields/border/field_border.min.js': ['ReduxCore/inc/fields/border/field_border.js'],
                     'ReduxCore/inc/fields/button_set/field_button_set.min.js': ['ReduxCore/inc/fields/button_set/field_button_set.js'],
+                    'ReduxCore/inc/fields/color/field_color.min.js': ['ReduxCore/inc/fields/color/field_color.js'],
                     'ReduxCore/inc/fields/color_rgba/field_color_rgba.min.js': ['ReduxCore/inc/fields/color_rgba/field_color_rgba.js'],
                     'ReduxCore/inc/fields/color_gradient/field_color_gradient.min.js': ['ReduxCore/inc/fields/color_gradient/field_color_gradient.js'],
                     'ReduxCore/inc/fields/date/field_date.min.js': ['ReduxCore/inc/fields/date/field_date.js'],
@@ -116,7 +116,6 @@ module.exports = function(grunt) {
         },
         jshint: {
             files: [
-                 'ReduxCore/assets/js/color-picker/color-picker.js',
                  'ReduxCore/assets/js/import_export/import_export.js',
                  'ReduxCore/assets/js/media/media.js',
                  'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
@@ -217,7 +216,7 @@ module.exports = function(grunt) {
                     paths: 'ReduxCore/',
                 },
                 files: {
-                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less"],
+                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
                     "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
                     "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.less"]
 
@@ -233,7 +232,7 @@ module.exports = function(grunt) {
                     paths: 'ReduxCore/',
                 },
                 files: {
-                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", , "ReduxCore/assets/css/import_export/*.less"],
+                    "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
                     "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
                 }
             }

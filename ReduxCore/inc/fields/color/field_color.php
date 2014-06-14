@@ -58,7 +58,7 @@
              */
             public function render() {
 
-                echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . ( isset( $this->field['default'] ) ? $this->field['default'] : "" ) . '" />';
+                echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '" data-oldcolor=""  data-default-color="' . ( isset( $this->field['default'] ) ? $this->field['default'] : "" ) . '" />';
                 echo '<input type="hidden" class="redux-saved-color" id="' . $this->field['id'] . '-saved-color' . '" value="">';
 
                 if ( ! isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
@@ -82,20 +82,10 @@
              * @return        void
              */
             public function enqueue() {
-
-                //wp_enqueue_style('wp-color-picker');
-
                 wp_enqueue_script(
                     'redux-field-color-js',
-                    ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
+                    ReduxFramework::$_url . 'inc/fields/color/field_color' . Redux_Functions::isMin() . '.js',
                     array( 'jquery', 'wp-color-picker', 'redux-js' ),
-                    time(),
-                    true
-                );
-
-                wp_enqueue_style(
-                    'redux-field-color-css',
-                    ReduxFramework::$_url . 'inc/fields/color/field_color.css',
                     time(),
                     true
                 );

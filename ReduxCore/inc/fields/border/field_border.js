@@ -12,7 +12,7 @@
 
     $( document ).ready(
         function() {
-            //redux.field_objects.border.init();
+            
         }
     );
 
@@ -25,19 +25,20 @@
             function() {
                 var el = $( this );
                 var parent = el;
+                
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
-                el.find( ".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all" ).numeric(
-                    {
-                        allowMinus: false
-                    }
-                );
+                
+                el.find( ".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all" ).numeric({
+                    allowMinus: false
+                });
 
                 var default_params = {
                     triggerChange: true,
@@ -76,12 +77,53 @@
                         }
                     }
                 );
+        
                 el.find( '.redux-border-units' ).on(
                     'change', function() {
                         $( this ).parents( '.redux-field:first' ).find( '.redux-border-input' ).change();
                     }
                 );
-                redux.field_objects.color.init(el);
+
+                el.find( '.redux-color-init' ).wpColorPicker({
+                    change: function( u ) {
+                        redux_change( $( this ) );
+                        el.find( '#' + u.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                    },
+                    
+                    clear: function() {
+                        redux_change( $( this ).parent().find( '.redux-color-init' ) );
+                    }
+                });
+
+                el.find( '.redux-color' ).on(
+                    'keyup', function() {
+                        var color = colorValidate( this );
+
+                        if ( color && color !== $( this ).val() ) {
+                            $( this ).val( color );
+                        }
+                    }
+                );
+
+                // Replace and validate field on blur
+                el.find( '.redux-color' ).on(
+                    'blur', function() {
+                        var value = $( this ).val();
+
+                        if ( colorValidate( this ) === value ) {
+                            if ( value.indexOf( "#" ) !== 0 ) {
+                                $( this ).val( $( this ).data( 'oldcolor' ) );
+                            }
+                        }
+                    }
+                );
+
+                // Store the old valid color on keydown
+                el.find( '.redux-color' ).on(
+                    'keydown', function() {
+                        $( this ).data( 'oldkeypress', $( this ).val() );
+                    }
+                );
             }
         );
     };

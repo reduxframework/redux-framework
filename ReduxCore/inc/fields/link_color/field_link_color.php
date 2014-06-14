@@ -111,17 +111,9 @@
             public function enqueue() {
 
                 wp_enqueue_script(
-                    'redux-field-color-js',
-                    ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'wp-color-picker', 'redux-js' ),
-                    time(),
-                    true
-                );
-
-                wp_enqueue_script(
                     'redux-field-link-color-js',
                     ReduxFramework::$_url . 'inc/fields/link_color/field_link_color' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'redux-js' ),
+                    array( 'jquery', 'wp-color-picker', 'redux-js' ),
                     time(),
                     true
                 );
