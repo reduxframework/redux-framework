@@ -489,7 +489,7 @@ if (!class_exists('ReduxFramework_typography')) {
                         wp_register_style( 'redux-typography-preview', $protocol . $this->makeGoogleWebfontLink( $this->parent->typography_preview ), '', time() );
                         wp_enqueue_style( 'redux-typography-preview' );
                         
-                        $style = 'display: block; font-family: ' . $this->value['font-family'] . ';';
+                        $style = 'display: block; font-family: ' . $this->value['font-family'] . '; font-weight: ' . $this->value['font-weight'] . ';' ;
                     }
                 }
                 
@@ -516,7 +516,8 @@ if (!class_exists('ReduxFramework_typography')) {
         function enqueue() {
 
             wp_enqueue_script(
-                'redux-field-typography-js', ReduxFramework::$_url . 'inc/fields/typography/field_typography' . Redux_Functions::isMin() . '.js',
+                'redux-field-typography-js', 
+                ReduxFramework::$_url . 'inc/fields/typography/field_typography' . Redux_Functions::isMin() . '.js',
                 array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' ),
                 time(),
                 true
