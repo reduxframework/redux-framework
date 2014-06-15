@@ -32,7 +32,6 @@
                     parent = el.parents( '.redux-field-container:first' );
                 }
 
-                console.log(parent);
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
@@ -112,9 +111,6 @@
                 el.find( '.color-transparency' ).on(
                     'click', function() {
                         if ( $( this ).is( ":checked" ) ) {
-                            //console.log($(this));
-                            console.log('checked');
-                            console.log($( '#' + $( this ).data( 'id' ) ).val());
                             
                             el.find( '.redux-saved-color' ).val( $( '#' + $( this ).data( 'id' ) ).val() );
                             el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
@@ -122,7 +118,6 @@
                                 'background-color', 'transparent'
                             );
                         } else {
-                            console.log('not checked');
                             if ( el.find( '#' + $( this ).data( 'id' ) ).val() === 'transparent' ) {
                                 var prevColor = $( '.redux-saved-color' ).val();
 

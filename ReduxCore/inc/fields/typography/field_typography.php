@@ -475,6 +475,20 @@ if (!class_exists('ReduxFramework_typography')) {
                 $style = '';
                 if (isset($this->field['preview']['always_display'])) {
                     if (true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN )) {
+                        
+                        $this->parent->typography_preview[$fontFamily[0]] = array(
+                            'font-style'    => array($this->value['font-style']),
+                            'subset'        => array($this->value['subset'])
+                        );
+
+                        $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
+                        
+                        wp_deregister_style('redux-typography-preview');
+                        wp_dequeue_style('redux-typography-preview');
+                        
+                        wp_register_style( 'redux-typography-preview', $protocol . $this->makeGoogleWebfontLink( $this->parent->typography_preview ), '', time() );
+                        wp_enqueue_style( 'redux-typography-preview' );
+                        
                         $style = 'display: block; font-family: ' . $this->value['font-family'] . ';';
                     }
                 }

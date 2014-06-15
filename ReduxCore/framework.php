@@ -63,7 +63,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.1.8';
+            public static $_version = '3.3.1.9';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -143,6 +143,7 @@
             private $show_hints = false;
             private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
+            public $typography_preview = array();
             public $args = array(
                 'opt_name'           => '',
                 // Must be defined by theme/plugin
