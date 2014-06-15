@@ -477,7 +477,7 @@ if (!class_exists('ReduxFramework_typography')) {
                     if (true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN )) {
                         
                         $this->parent->typography_preview[$fontFamily[0]] = array(
-                            'font-style'    => array($this->value['font-style']),
+                            'font-style'    => array($this->value['font-weight'] . $this->value['font-style']),
                             'subset'        => array($this->value['subset'])
                         );
 
