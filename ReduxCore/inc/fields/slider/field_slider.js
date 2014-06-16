@@ -8,7 +8,7 @@
 
     $( document ).ready(
         function() {
-            //redux.field_objects.slider.init();
+            
         }
     );
 
@@ -22,14 +22,17 @@
             function() {
                 var el = $( this );
                 var parent = el;
+                
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
+
                 el.find( 'div.redux-slider-container' ).each(
                     function() {
 
@@ -40,7 +43,6 @@
                         var DISPLAY_SELECT = 3;
 
                         var mainID = $( this ).data( 'id' );
-
                         var minVal = $( this ).data( 'min' );
                         var maxVal = $( this ).data( 'max' );
                         var stepVal = $( this ).data( 'step' );
@@ -147,14 +149,15 @@
                                     }
 
                                     if ( displayValue == DISPLAY_SELECT ) {
-                                        $( '.redux-slider-select-one' ).select2( 'val', slider.val()[0] );
-
                                         if ( handles === 2 ) {
+                                            $( '.redux-slider-select-one' ).select2( 'val', slider.val()[0] );
                                             $( '.redux-slider-select-two' ).select2( 'val', slider.val()[1] );
+                                        } else {
+                                            $( '.redux-slider-select-one' ).select2( 'val', slider.val() );
                                         }
                                     }
 
-                                    redux_change( jQuery( this ).parents( '.redux-field-container:first' ).find( 'input' ) );
+                                    redux_change( $( this ).parents( '.redux-field-container:first' ).find( 'input' ) );
                                 }
                             }
                         );
@@ -218,7 +221,8 @@
                     default_params = $.extend( {}, default_params, select2_params );
                 }
 
-                $( 'select.redux-slider-select-one, select.redux-slider-select-two' ).select2( default_params );
+                el.find( 'select.redux-slider-select-one, select.redux-slider-select-two' ).select2( default_params );
+                
             }
         );
 

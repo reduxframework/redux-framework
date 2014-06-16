@@ -1103,7 +1103,7 @@
 					base = $('<div/>').appendTo(target);
 
 				// Throw an error if the slider was already initialized.
-				if ( target.data('base') ) {
+                                if ( target.data('base') ) {
 					throw new Error('Slider was already initialized.');
 				}
 

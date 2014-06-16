@@ -28,9 +28,11 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                
                 if ( parent.hasClass( 'redux-container-slides' ) ) {
                     parent.addClass( 'redux-field-init' );    
                 }
+                
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
@@ -65,6 +67,7 @@
                 el.find( '.redux-slides-add' ).click(
                     function() {
                         var newSlide = $( this ).prev().find( '.redux-slides-accordion-group:last' ).clone( true );
+
                         var slideCount = $( newSlide ).find( '.slide-title' ).attr( "name" ).match( /[0-9]+(?!.*[0-9])/ );
                         var slideCount1 = slideCount * 1 + 1;
 

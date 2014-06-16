@@ -263,6 +263,7 @@
 
                 $fieldID   = $this->field['id'];
                 $fieldName = $this->field['name'];
+                //$fieldName = $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']';
 
                 // Set handle number variable.
                 $twoHandles = false;
