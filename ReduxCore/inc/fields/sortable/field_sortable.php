@@ -111,8 +111,10 @@
                     if ( $this->field['mode'] == "checkbox" || ( isset( $this->field['label'] ) && $this->field['label'] == true ) ) {
                         if ( $this->field['mode'] != "checkbox" ) {
                             echo "<br />";
+                            echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
+                        } else {
+                            echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $options[ $k ] . '</strong></label>';
                         }
-                        echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
                     }
                     if ( $this->field['mode'] == "checkbox" ) {
                         echo '</div>';
