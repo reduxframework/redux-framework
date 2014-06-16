@@ -71,6 +71,13 @@
              * @return        void
              */
             public function enqueue() {
+                wp_enqueue_style(
+                    'redux-field-date-css',
+                    ReduxFramework::$_url . 'inc/fields/date/field_date.css',
+                    time(),
+                    true
+                );
+                
                 wp_enqueue_script(
                     'redux-field-date-js',
                     ReduxFramework::$_url . 'inc/fields/date/field_date' . Redux_Functions::isMin() . '.js',

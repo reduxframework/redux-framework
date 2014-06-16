@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.1 =
+* Fixed:      #1361 - Raw field not hiding with required.
+* Fixed:      Datepicker not formatting properly.  Still needs some work.
+
 = 3.3.1.9 =
 * Fixed:      #1357 - Preview not rendering font on page load.
 

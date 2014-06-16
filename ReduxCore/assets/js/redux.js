@@ -554,6 +554,11 @@
                     if (fieldset.hasClass('redux-container-divide')) {
                         $('#divide-' + i).hide().addClass('hide');
                     }
+                    
+                    if (fieldset.hasClass('redux-container-raw')) {
+                        var rawTable = fieldset.parents().find('.redux-raw-table');
+                        rawTable.hide().addClass('hide');
+                    }                    
                 }
             }
         );
@@ -617,6 +622,11 @@
                     $('#divide-' + child).fadeIn(300).removeClass('hide');
                 }
 
+                if (childFieldset.hasClass('redux-container-raw')) {
+                    var rawTable = childFieldset.parents().find('.redux-raw-table');
+                    rawTable.fadeIn(300).removeClass('hide');
+                }                    
+
                 tr.fadeIn(
                     300, function() {
                         $(this).removeClass('hide');
@@ -668,6 +678,12 @@
                 if ($('#' + redux.args.opt_name + '-' + id).hasClass('redux-container-divide')) {
                     $('#divide-' + id).fadeOut(50).addClass('hide');
                 }
+
+                if ($('#' + redux.args.opt_name + '-' + id).hasClass('redux-container-raw')) {
+                    var rawTable = $('#' + redux.args.opt_name + '-' + id).parents().find('.redux-raw-table');
+                    
+                    rawTable.fadeOut(50).addClass('hide');
+                }                    
 
                 if (redux.required.hasOwnProperty(id)) {
                     $.each(
