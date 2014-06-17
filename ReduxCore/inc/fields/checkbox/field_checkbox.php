@@ -87,7 +87,7 @@
                                 '[' => '_',
                                 ']' => ''
                             ) ) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
-                        echo '<input type="hidden" class="checkbox-check" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" value="' . $this->value[ $k ] . '" ' . '/>';
+                        echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" value="' . $this->value[ $k ] . '" ' . '/>';
                         echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
                                 '[' => '_',
                                 ']' => ''
