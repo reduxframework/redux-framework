@@ -84,13 +84,14 @@
 
                         echo '<li>';
                         echo '<label for="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
-                                    '[' => '_',
-                                    ']' => ''
-                                ) ) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
+                                '[' => '_',
+                                ']' => ''
+                            ) ) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '">';
+                        echo '<input type="hidden" class="checkbox-check" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" value="' . $this->value[ $k ] . '" ' . '/>';
                         echo '<input type="checkbox" class="checkbox ' . $this->field['class'] . '" id="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][' . $k . ']', array(
-                                    '[' => '_',
-                                    ']' => ''
-                                ) ) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" value="1" ' . checked( $this->value[ $k ], '1', false ) . '/>';
+                                '[' => '_',
+                                ']' => ''
+                            ) ) . '_' . array_search( $k, array_keys( $this->field['options'] ) ) . '" value="1" ' . checked( $this->value[ $k ], '1', false ) . '/>';
                         echo ' ' . $v . '</label>';
                         echo '</li>';
                     }
@@ -99,16 +100,18 @@
                 } else if ( empty( $this->field['data'] ) ) {
 
                     echo ( ! empty( $this->field['desc'] ) ) ? ' <ul class="data-full"><li><label for="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array(
-                                '[' => '_',
-                                ']' => ''
-                            ) ) . '">' : '';
+                            '[' => '_',
+                            ']' => ''
+                        ) ) . '">' : '';
 
                     // Got the "Checked" status as "0" or "1" then insert it as the "value" option
                     $ch_value = 1; // checked($this->value, '1', false) == "" ? "0" : "1";
+                    echo '<input type="hidden" class="checkbox-check" data-val="' . $ch_value . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $this->value . '" ' . '/>';
                     echo '<input type="checkbox" id="' . strtr( $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']', array(
-                                '[' => '_',
-                                ']' => ''
-                            ) ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/></li></ul>';
+                            '[' => '_',
+                            ']' => ''
+                        ) ) . '" value="' . $ch_value . '" class="checkbox ' . $this->field['class'] . '" ' . checked( $this->value, '1', false ) . '/></li></ul>';
+
                 }
             }
 
@@ -125,6 +128,14 @@
                 wp_enqueue_style(
                     'redux-field-checkbox-css',
                     ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css',
+                    time(),
+                    true
+                );
+
+                wp_enqueue_script(
+                    'redux-field-checkbox-js',
+                    ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox' . Redux_Functions::isMin() . '.js',
+                    array( 'jquery', 'redux-js' ),
                     time(),
                     true
                 );
