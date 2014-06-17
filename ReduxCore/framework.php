@@ -542,11 +542,6 @@
                 return self::$instance;
             } // get_instance()
 
-            public static function _instance() {
-                self::$_instance = $this;
-                return self::$_instance;
-            }
-            
             public function _tracking() {
                 include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
                 $tracking = Redux_Tracking::get_instance();
