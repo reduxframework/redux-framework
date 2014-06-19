@@ -73,7 +73,7 @@
             public static $_properties;
             public static $_is_plugin   = true;
             public static $_as_plugin   = false;
-            public static $_instance    = null;
+            // public static $_instance    = null;
 
             static function init() {
 
@@ -109,7 +109,7 @@
             // ::init()
 
             public $framework_url = 'http://www.reduxframework.com/';
-            public $instance = null;
+            public static $instance = null;
             public $admin_notices = array();
             public $page = '';
             public $saved = false;
@@ -510,8 +510,6 @@
 
             /**
              * Load the plugin text domain for translation.
-             *
-             * @param string $opt_name
              *
              * @since    3.0.5
              */
