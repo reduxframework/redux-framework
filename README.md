@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.2 =
+* Fixed:      Static variable changes for instances and basic comment cleanup
+
 = 3.3.2.1 =
 * Fixed:      #1361 - Raw field not hiding with required.
 * Fixed:      Datepicker not formatting properly.  Still needs some work.
