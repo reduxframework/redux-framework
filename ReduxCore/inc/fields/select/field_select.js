@@ -78,7 +78,7 @@
 
     redux.field_objects.select.addIcon = function( icon ) {
         if ( icon.hasOwnProperty( 'id' ) ) {
-            return "<span class='elusive'><i class='" + icon.id + "'></i>" + "&nbsp;&nbsp;" + icon.id.toUpperCase() + "</span>";
+            return "<span class='elusive'><i class='" + icon.id + "'></i>" + "&nbsp;&nbsp;" + icon.text + "</span>";
         }
     };
 })( jQuery );
