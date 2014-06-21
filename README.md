@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.3 =
+* Fixed:      #1376 - checkbox.min.js missing.
+
 = 3.3.2.2 =
 * Fixed:      Static variable changes for instances and basic comment cleanup
 
