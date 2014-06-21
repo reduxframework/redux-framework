@@ -54,7 +54,7 @@
                     if ( ! isset( $this->value[ $k ] ) ) {
 
                         // A save has previously been done.
-                        if ( array_key_exists( $k, $this->value ) ) {
+                        if ( is_array( $this->value ) && array_key_exists( $k, $this->value ) ) {
                             $this->value[ $k ] = $v;
 
                             // Missing database entry, meaning no save has yet been done.
