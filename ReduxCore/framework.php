@@ -2169,7 +2169,7 @@
                 }
 
                 if ( ! empty( $default_output ) ) {
-                    $default_output = '<span class="showDefaults">' . $default_output . '</span><br />';
+                    $default_output = '<span class="showDefaults">' . $default_output . '</span><br class="default_br" />';
                 }
 
                 return $default_output;

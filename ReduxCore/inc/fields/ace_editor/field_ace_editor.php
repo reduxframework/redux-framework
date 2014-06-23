@@ -99,5 +99,23 @@
                     true
                 );
             }
+
+            /**
+             * Functions to pass data from the PHP to the JS at render time.
+             *
+             * @return array Params to be saved as a javascript object accessable to the UI.
+             * @since  Redux_Framework 3.1.1
+             */
+            function localize( $field, $value = "" ) {
+
+                $params = array(
+                    'minLines'      => 10,
+                    'maxLines'     => 30,
+                );
+
+                $params = wp_parse_args( $field['options'], $params );
+
+                return $params;
+            }
         }
     }
