@@ -109,12 +109,14 @@
             function localize( $field, $value = "" ) {
 
                 $params = array(
-                    'minLines'      => 10,
-                    'maxLines'     => 30,
+                    'minLines' => 10,
+                    'maxLines' => 30,
                 );
 
-                $params = wp_parse_args( $field['options'], $params );
-
+                if ( isset( $field['options'] ) && ! empty( $field['options'] ) && is_array( $field['options'] ) ) {
+                    $params = wp_parse_args( $field['options'], $params );
+                }
+                
                 return $params;
             }
         }
