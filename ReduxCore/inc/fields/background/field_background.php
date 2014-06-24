@@ -107,7 +107,6 @@
                     echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
                 }
 
-
                 if ( $this->field['background-color'] === true ) {
 
                     if ( isset( $this->value['color'] ) && empty( $this->value['background-color'] ) ) {

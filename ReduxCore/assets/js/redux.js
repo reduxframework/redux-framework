@@ -514,7 +514,8 @@
 
     $.redux.devFunctions = function() {
         $('#consolePrintObject').on(
-                'click', function() {
+                'click', function(e) {
+                    e.preventDefault();
                     console.log($.parseJSON($("#redux-object-json").html()));
                 }
         );

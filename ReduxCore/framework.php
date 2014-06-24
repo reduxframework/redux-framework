@@ -63,7 +63,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.2.3';
+            public static $_version = '3.3.2.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -107,7 +107,7 @@
             }
 
             // ::init()
-
+            
             public $framework_url = 'http://www.reduxframework.com/';
             public static $instance = null;
             public $admin_notices = array();
@@ -1885,14 +1885,48 @@
                         }
                     }
                 }
+
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
                 $this->localize_data['defaults']     = $this->options_defaults;
+                
+                /**
+                 * Save pending string
+                 * filter 'redux/{opt_name}/localize/save_pending
+                 *
+                 * @param       string        save_pending string
+                 */                
+                $save_pending   = apply_filters("redux/{$this->args['opt_name']}/localize/save_pending", __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ));
+                
+                /**
+                 * Reset all string
+                 * filter 'redux/{opt_name}/localize/reset
+                 *
+                 * @param       string        reset all string
+                 */                
+                $reset_all      = apply_filters("redux/{$this->args['opt_name']}/localize/reset", __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ));
+                
+                /**
+                 * Reset section string
+                 * filter 'redux/{opt_name}/localize/reset_section
+                 *
+                 * @param       string        reset section string
+                 */                
+                $reset_section  = apply_filters("redux/{$this->args['opt_name']}/localize/reset_section", __( 'Are you sure? Resetting will lose all custom values in this section.', 'redux-framework' ));
+                
+                /**
+                 * Preset confirm string
+                 * filter 'redux/{opt_name}/localize/preset
+                 *
+                 * @param       string        preset confirm string
+                 */                
+                $preset_confirm = apply_filters("redux/{$this->args['opt_name']}/localize/preset", __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ));
+                
                 $this->localize_data['args']         = array(
-                    'save_pending'          => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ),
-                    'reset_confirm'         => __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ),
-                    'reset_section_confirm' => __( 'Are you sure? Resetting will lose all custom values in this section.', 'redux-framework' ),
-                    'preset_confirm'        => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ),
+                    'save_pending'          => $save_pending,
+                    'reset_confirm'         => $reset_all,
+                    'reset_section_confirm' => $reset_section,
+                    'preset_confirm'        => $preset_confirm,
                     'please_wait'           => __( 'Please Wait', 'redux-framework' ),
                     'opt_name'              => $this->args['opt_name'],
                     'slug'                  => $this->args['page_slug'],
@@ -1900,7 +1934,6 @@
                     'disable_save_warn'     => $this->args['disable_save_warn'],
                     'class'                 => $this->args['class'],
                 );
-
 
                 // Construct the errors array.
                 if ( isset( $this->transients['last_save_mode'] ) && ! empty( $this->transients['notices']['errors'] ) ) {

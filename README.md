@@ -78,6 +78,14 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.4 =
+* Fixed:      #1387 - Page jump when clicking "Options Object".  Thanks @rrikesh.
+* Added:      #1392 - Filters to change the following localized strings:
+              redux/{opt_name}/localize/reset
+              redux/{opt_name}/localize/reset_all
+              redux/{opt_name}/localize/save_pending
+              redux/{opt_name}/localize/preset
+
 = 3.3.2.3 =
 * Fixed:      #1376 - checkbox.min.js missing.
 
