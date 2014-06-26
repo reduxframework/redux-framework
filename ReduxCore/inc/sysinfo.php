@@ -57,8 +57,9 @@
                 $browser = new Browser();
 
                 // Get theme info for this WordPress version
-                $theme_data = wp_get_theme();
-                $theme      = $theme_data->Name . ' ' . $theme_data->Version;
+                $theme_data     = wp_get_theme();
+                $theme          = $theme_data->Name . ' ' . $theme_data->Version;
+                $is_child       = is_child_theme() ? ' (child theme)' : '';
 
                 $return = '<textarea readonly="readonly" onclick="this.focus(); this.select()" id="' . $id . '"' . ( $class != null ? ' class="' . $class . '"' : '' ) . ' title="To copy the system info, click below and press Ctrl+C (PC) or Cmd+C (Mac).">';
 
@@ -88,7 +89,13 @@
                 $return .= "\n" . '-- WordPress Configuration' . "\n\n";
                 $return .= 'Version:                  ' . get_bloginfo( 'version' ) . "\n";
                 $return .= 'Permalink Structure:      ' . ( get_option( 'permalink_structure' ) ? get_option( 'permalink_structure' ) : 'Default' ) . "\n";
-                $return .= 'Active Theme:             ' . $theme . "\n";
+                $return .= 'Active Theme:             ' . $theme . $is_child . "\n";
+
+                if( !empty( $is_child ) ) {
+                    $parent_theme = wp_get_theme( $theme_data->Template );
+                    $return .= 'Parent Theme:             ' . $parent_theme->Name . ' ' . $parent_theme->Version . "\n";
+                }
+
                 $return .= 'Show On Front:            ' . get_option( 'show_on_front' ) . "\n";
 
                 // Only show page specs if frontpage is set to 'page'
