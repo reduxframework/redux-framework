@@ -193,28 +193,46 @@ if (!class_exists('ReduxFramework_typography')) {
 
             /* Font Family */
             if ($this->field['font-family'] === true) {
+                
+                //if (filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN)) {
                 if (filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN)) {
+                    
+                    // Divide and conquer
                     $fontFamily = explode(', ', $this->value['font-family'], 2);
+                    
+                    // If array 0 is empty and array 1 is not
                     if (empty($fontFamily[0]) && !empty($fontFamily[1])) {
+                        
+                        // Make array 0 = array 1
                         $fontFamily[0] = $fontFamily[1];
+                        
+                        // Clear array 1
                         $fontFamily[1] = "";
                     }
                 }
 
+                // If no fontFamily array exists, create one and set array 0
+                // with font value
                 if (!isset($fontFamily)) {
                     $fontFamily = array();
                     $fontFamily[0] = $this->value['font-family'];
                     $fontFamily[1] = "";
                 }
+
+                // Is selected font a Google font
+                $isGoogleFont = '0';
+                if (isset($this->parent->fonts['google'][$fontFamily[0]])) {
+                    $isGoogleFont = '1';
+                }
+
+                // If not a Google font, show all font families
+                if ($isGoogleFont != '1') {
+                    $fontFamily[0] = $this->value['font-family'];
+                }
                 
                 $userFonts = '0';
                 if (true == $this->user_fonts) {
                     $userFonts = '1';
-                }
-                
-                $isGoogleFont = '0';
-                if (isset($this->parent->fonts['google'][$fontFamily[0]])) {
-                    $isGoogleFont = '1';
                 }
                 
                 echo '<input type="hidden" class="redux-typography-font-family ' . $this->field['class'] . '" data-user-fonts="' . $userFonts . '" name="' . $this->field['name'] . '[font-family]' . $this->field['name_suffix'] . '" value="' . $this->value['font-family'] . '" data-id="' . $this->field['id'] . '"  />';
@@ -233,6 +251,7 @@ if (!class_exists('ReduxFramework_typography')) {
 
                 $googleSet = false;
                 if ($this->field['google'] === true) {
+
                     // Set a flag so we know to set a header style or not
                     echo '<input type="hidden" class="redux-typography-google' . $this->field['class'] . '" id="' . $this->field['id'] . '-google" name="' . $this->field['name'] . '[google]' . $this->field['name_suffix'] . '" type="text" value="' . $this->field['google'] . '" data-id="' . $this->field['id'] . '" />';
                     $googleSet = true;
@@ -475,19 +494,20 @@ if (!class_exists('ReduxFramework_typography')) {
                 $style = '';
                 if (isset($this->field['preview']['always_display'])) {
                     if (true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN )) {
-                        
-                        $this->parent->typography_preview[$fontFamily[0]] = array(
-                            'font-style'    => array($this->value['font-weight'] . $this->value['font-style']),
-                            'subset'        => array($this->value['subset'])
-                        );
+                        if ($isGoogleFont == true) {
+                            $this->parent->typography_preview[$fontFamily[0]] = array(
+                                'font-style'    => array($this->value['font-weight'] . $this->value['font-style']),
+                                'subset'        => array($this->value['subset'])
+                            );
 
-                        $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
-                        
-                        wp_deregister_style('redux-typography-preview');
-                        wp_dequeue_style('redux-typography-preview');
-                        
-                        wp_register_style( 'redux-typography-preview', $protocol . $this->makeGoogleWebfontLink( $this->parent->typography_preview ), '', time() );
-                        wp_enqueue_style( 'redux-typography-preview' );
+                            $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
+
+                            wp_deregister_style('redux-typography-preview');
+                            wp_dequeue_style('redux-typography-preview');
+
+                            wp_register_style( 'redux-typography-preview', $protocol . $this->makeGoogleWebfontLink( $this->parent->typography_preview ), '', time() );
+                            wp_enqueue_style( 'redux-typography-preview' );
+                        }
                         
                         $style = 'display: block; font-family: ' . $this->value['font-family'] . '; font-weight: ' . $this->value['font-weight'] . ';' ;
                     }

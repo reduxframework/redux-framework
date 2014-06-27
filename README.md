@@ -78,6 +78,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.5 =
+* Fixed:      #1396 - Custom fonts cutting off multiple families in selector, after save.
+* Fixed:      Typography attempting to queue up non google fonts on backend.
+* Added:      #1395 - Display of child theme status in sysinfo, thanks @SiR-DanieL.
+
 = 3.3.2.4 =
 * Fixed:      #1387 - Page jump when clicking "Options Object".  Thanks @rrikesh.
 * Added:      #1392 - Filters to change the following localized strings:
