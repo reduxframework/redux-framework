@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.6 =
+* Fixed:      #1400 - output/compiler string incomplete using multiple selectors.
+
 = 3.3.2.5 =
 * Fixed:      #1396 - Custom fonts cutting off multiple families in selector, after save.
 * Fixed:      Typography attempting to queue up non google fonts on backend.

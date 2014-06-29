@@ -157,7 +157,14 @@
                                 if ( count( $this->field['output'] ) == 1 ) {
                                     $styleString .= $this->field['output'][0] . ":" . $key . "{" . $value . '}';
                                 } else {
-                                    $styleString .= implode( ":" . $key . ",", $this->field['output'] ) . "{" . $value . '}';
+                                    $blah = '';
+                                    foreach($this->field['output'] as $k => $sel) {
+                                        $blah .= $sel . ':' . $key . ',';
+                                    }
+                                    
+                                    $blah = substr($blah, 0, strlen($blah) - 1);
+                                    $styleString .= $blah . '{' . $value . '}';
+
                                 }
                             }
                         }
@@ -171,11 +178,18 @@
                         foreach ( $style as $key => $value ) {
                             if ( is_numeric( $key ) ) {
                                 $styleString .= implode( ",", $this->field['compiler'] ) . "{" . $value . '}';
+                                
                             } else {
                                 if ( count( $this->field['compiler'] ) == 1 ) {
                                     $styleString .= $this->field['compiler'][0] . ":" . $key . "{" . $value . '}';
                                 } else {
-                                    $styleString .= implode( ":" . $key . ",", $this->field['compiler'] ) . "{" . $value . '}';
+                                    $blah = '';
+                                    foreach($this->field['compiler'] as $k => $sel) {
+                                        $blah .= $sel . ':' . $key . ',';
+                                    }
+                                    
+                                    $blah = substr($blah, 0, strlen($blah) - 1);
+                                    $styleString .= $blah . '{' . $value . '}';
                                 }
                             }
                         }
