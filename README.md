@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.7 =
+* Modified:   Customizer now supports section and field `permissions` argument.
+* Fixed:      #1399 - Customizer respects `page_permissions` argument.
+
 = 3.3.2.6 =
 * Fixed:      #1400 - output/compiler string incomplete using multiple selectors.
 

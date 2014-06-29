@@ -77,20 +77,16 @@
                  */
 
                 if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
-                    add_action( 'customize_register', array(
-                            $this,
-                            '_register_customizer_controls'
-                        ) ); // Create controls
+                    if (  current_user_can ( $this->parent->args['page_permissions'])) {
+                        add_action( 'customize_register', array($this, '_register_customizer_controls' ) ); // Create controls
+                    }
                 }
 
                 if ( isset( $_POST['customized'] ) ) {
                     if ( $pagenow == "admin-ajax.php" && $_POST['action'] == 'customize_save' ) {
                         //$this->parent->
                     }
-                    add_action( "redux/options/{$this->parent->args['opt_name']}/options", array(
-                            $this,
-                            '_override_values'
-                        ), 100 );
+                    add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
                     add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
                     add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
                     add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
@@ -181,6 +177,13 @@
                         continue;
                     }
 
+                    // Evaluate section permissions
+                    if ( isset( $section['permissions'] ) ) {
+                        if ( ! current_user_can( $section['permissions'] ) ) {
+                            continue;
+                        }
+                    }
+                    
                     // No errors please
                     if ( ! isset( $section['desc'] ) ) {
                         $section['desc'] = "";
@@ -195,10 +198,12 @@
                     if ( empty( $section['id'] ) ) {
                         $section['id'] = strtolower( str_replace( " ", "", $section['title'] ) );
                     }
+                    
                     // No title is present, let's show what section is missing a title
                     if ( ! isset( $section['title'] ) ) {
                         print_r( $section );
                     }
+                    
                     // Let's set a default priority
                     if ( empty( $section['priority'] ) ) {
                         $section['priority'] = $order['heading'];
@@ -213,6 +218,14 @@
 
 
                     foreach ( $section['fields'] as $skey => $option ) {
+                        
+                        // Evaluate section permissions
+                        if ( isset( $option['permissions'] ) ) {
+                            if ( ! current_user_can( $option['permissions'] ) ) {
+                                continue;
+                            }
+                        }
+                        
                         if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
                             continue;
                         }
@@ -248,7 +261,8 @@
                         $customSetting = array(
                             'default'        => $option['default'],
                             'type'           => 'option',
-                            'capabilities'   => 'manage_theme_options',
+                            'capabilities'   => 'edit_theme_options',
+                            //'capabilities'   => $this->parent->args['page_permissions'],
                             'transport'      => 'refresh',
                             'theme_supports' => '',
                             //'sanitize_callback' => array( $this, '_field_validation' ),
