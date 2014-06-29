@@ -1210,7 +1210,6 @@
                     // as default, we need to validate it, so anything that
                     // isn't post_type=<post_type> doesn't get through and mess
                     // things up.
-
                     $addMenu = false;
                     if ( 'settings.php' != $page_parent ) {
                         // Establish the needle
