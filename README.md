@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.8 =
+* Fixed:      #1403 - Backup font not appearing in font-family variable.
+
 = 3.3.2.7 =
 * Modified:   Customizer now supports section and field `permissions` argument.
 * Fixed:      #1399 - Customizer respects `page_permissions` argument.

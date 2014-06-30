@@ -354,7 +354,7 @@
         }
 
         // If we changed the font
-        if ($(selector).hasClass('redux-typography-family')) {
+        if ($(selector).hasClass('redux-typography-family') || $(selector).hasClass('redux-typography-family-backup')) {
             var html = '<option value=""></option>';
 
             // Google specific stuff
