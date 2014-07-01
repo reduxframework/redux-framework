@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.2.10 =
+* Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves on other panels.
+
 = 3.3.2.9 =
 * Fixed:      #1403 - unit value no longer prints after empty typography values
 * Modified:   Typography: Backup font no longer appends to `font-family` variable.  Please use the `backup-font` variable to specify backup fonts.  This does not apply to output/compiler strings.

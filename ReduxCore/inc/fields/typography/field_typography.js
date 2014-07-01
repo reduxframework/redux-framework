@@ -40,14 +40,17 @@
             function() {
                 var el = $( this );
                 var parent = el;
+                
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
+                
                 el.each(
                     function() {
                         // init each typography field
@@ -113,9 +116,7 @@
                         );
 
                         // select2 magic, to load font-family dynamically
-                        var data = [
-                            {id: 'none', text: 'none'}
-                        ];
+                        var data = [ {id: 'none', text: 'none'} ];
                         $( this ).find( ".redux-typography-family" ).select2(
                             {
                                 matcher: function( term, text ) {
@@ -353,6 +354,10 @@
             };
         }
 
+        if ($(selector).hasClass('redux-typography-subsets')){
+            $('#' + mainID + ' input.typography-subsets').val(script);
+        }
+
         // If we changed the font
         if ($(selector).hasClass('redux-typography-family')) {
             var html = '<option value=""></option>';
@@ -391,13 +396,14 @@
                     if (subset.id === script || redux.field_objects.typography.size(details.subsets) === 1) {
                         selected = ' selected="selected"';
                         script = subset.id;
+                        $('#' + mainID + ' input.typography-subsets').val(script);                        
                     } else {
                         selected = "";
                     }
 
                     html += '<option value="' + subset.id + '"' + selected + '>' + subset.name.replace(/\+/g, " ") + '</option>';
                 });
-
+                
                 //if (typeof (familyBackup) !== "undefined" && familyBackup !== "") {
                 //    output += ', ' + familyBackup;
                 //}
@@ -458,6 +464,7 @@
         if ($('#' + mainID + " select.redux-typography-subsets option[value='" + script + "']").length === 0) {
             script = "";
             $('#' + mainID + ' select.redux-typography-subsets').select2('val', '');
+            $('#' + mainID + ' input.typography-subsets').val(script);
         }
 
         var _linkclass = 'style_link_' + mainID;
