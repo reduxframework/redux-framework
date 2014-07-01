@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.1
-Stable tag: 3.3.2
+Stable tag: 3.3.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,12 +124,38 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.3.3 =
+* Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves on other panels.
+* Fixed:      #1403 - unit value no longer prints after empty typography values
+* Modified:   Typography: Backup font no longer appends to `font-family` variable.  Please use the
+              `backup-font` variable to specify backup fonts.  This does not apply to output/compiler strings.
+* Fixed:      #1403 - Backup font not appearing in font-family variable.
+* Modified:   Customizer now supports section and field `permissions` argument.
+* Fixed:      #1399 - Customizer respects `page_permissions` argument.
+* Fixed:      #1400 - output/compiler string incomplete using multiple selectors.
+* Fixed:      #1396 - Custom fonts cutting off multiple families in selector, after save.
+* Fixed:      Typography attempting to queue up non google fonts on backend.
+* Added:      #1395 - Display of child theme status in sysinfo, thanks @SiR-DanieL.
+* Fixed:      #1387 - Page jump when clicking "Options Object".  Thanks @rrikesh.
+* Added:      #1392 - Filters to change the following localized strings:
+              redux/{opt_name}/localize/reset
+              redux/{opt_name}/localize/reset_all
+              redux/{opt_name}/localize/save_pending
+              redux/{opt_name}/localize/preset
+* Fixed:      #1376 - checkbox.min.js missing.
+* Fixed:      Static variable changes for instances and basic comment cleanup
+* Fixed:      #1361 - Raw field not hiding with required.
+* Fixed:      Datepicker not formatting properly.  Still needs some work.
+
+
 = 3.3.2 =
 * Fixed:      #1357 - Preview not rendering font on page load.
 * Fixed:      #1356 - Color fields and transparency not syncing due to new JS.
 * Fixed:      #1354 - Add class check for W3_ObjectCache.
 * Fixed:      #1341 - JS not initializing properly in import_export.
-* Fixed:     #1339 - Typography would lose Font Weight and Style. value was named val in the HTML, so it would be destroyed on the next save if not initialized.
+* Fixed:      #1339 - Typography would lose Font Weight and Style. value was named val in the
+              HTML, so it would be destroyed on the next save if not initialized.
 * Fixed:      #1226 - W3 Total Cache was affecting validation and compiler hooks.
 * Fixed:      Menu errors weren't showing properly for non-subsectioned items.
 * Fixed:      #1341 - Import/Export buttons not functioning. Also fixed sortable somehow.
@@ -183,7 +209,8 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Added:      `customizer_only` argument for fields & sections, contributed by @andreilupu.
 * Added:      select2 args for spacing field.
 * Added:      select2 args for the following fields: typography, background, border, dimensions and slider.
-* Added:      #1329 - `'preview' = array('always_display' => true)` argument to typography, to determine if preview field show always be shown.
+* Added:      #1329 - `'preview' = array('always_display' => true)` argument to typography, to determine if
+              preview field show always be shown.
 * Modified:   Portions of core javascript rewritten into object code.
 * Modified:   All field javascript rewritten using jQuery objects (versus standard function).
 * Modified:   Typography field rewritten to fill out font-family field dynamically, versus on page load.
@@ -208,16 +235,20 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
 * Fixed:      Hint icon defaults to left position when screen size is under 782px.
 * Fixed:      `permissions` argument for fields and sections erasing saved field data.  See #1231
-* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
+* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little
+              fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
 * Fixed:      In dev_mode panel CSS was being loaded 2x.
 * Fixed:      Typography color picker bleeding under other elements.  #1225
 * Fixed:      Hint icon_color index error from builder.  #1222
 
 = 3.2.9 =
-* Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
-* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
+* Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also
+              two new arguments: network_admin & network_sites for where to show the panel.
+* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer.
+              `redux/customizer/live_preview`
 * Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.
-* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
+* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will
+              be appended to whichever level is used. This allows further customization for our users.
 * Added:      disable_save_warn flags to the arguments to disable the "you should save" slidedown.
 * Added:      Actions hooks for errors and warnings.
 * Fixed:      Redux now ignores any directories that begin with `.` in the extension folder.  See #1213.
@@ -226,7 +257,8 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:      Trim() warning in framework.php when saving.  See #1209, #1201.
 * Fixed:      Typography not outputting all styles when `all_styles` set to true.
 * Fixed:      'Cannot send header' issues with typography.
-* Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
+* Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not
+              expanded.
 * Fixed:      Small CSS classes for flashing fonts where web-font-loader.
 * Fixed:      ASync Flash on fonts. FINALLY. What a pain.
 * Fixed:      3+ JavaScript errors found in the background field. Now works flawlessly.
@@ -244,7 +276,8 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Modified:   Google CSS moved into HEAD via WP enqueue.
 * Modified:   Now do a trim on all fields before validating. No need to alert because of a space...
 * Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
-* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for subsections is SO hot now.
+* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for
+              subsections is SO hot now.
 * Modified:   Various CSS fixes and improvements.
 * Modified:   Turned of mod_rewrite check.
 * Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
@@ -281,10 +314,12 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Modified:     CSS Output for the background field.
 * Fixed:        Validation error messages not appearing on save.
 * Modified:     Speed boost on validation types.
-* Added:        Apache mod_rewrite check.  This should solve many issues we've been seeing regarding mod_rewrite noe being enabled.
+* Added:        Apache mod_rewrite check.  This should solve many issues we've been seeing regarding mod_rewrite
+                not being enabled.
 * Fixed:        Sortable field not saving properly.
 * Fixed:        Erroneous data in admin.less
-* Updated:      sample-config.php.  Sortable checkbox field example now uses true/false instead of text meant for textbox example.
+* Updated:      sample-config.php.  Sortable checkbox field example now uses true/false instead of text meant for
+                textbox example.
 
 = 3.2.3 =
 * Fixed:        Responsive issues with spacing and dimension fields.
@@ -299,14 +334,19 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:        Removed erroneous 's' character from HTML.
 * Fixed:        Info field didn't intend within section.
 * Fixed:        Compiler hook wasn't running.
-* Modified:     Some admin panel stylings. Now perfect with mobile hover. Also fixed an issue with the slidedown width for sections. No more 2 empty pixels.
-* Added:        `data` and `args` can now be set to sorter! Just make sure to have it be a key based on what you want it to display as. IE: `array('Main'=>'sidebars')`
+* Modified:     Some admin panel stylings. Now perfect with mobile hover. Also fixed an issue with the slidedown
+                width for sections. No more 2 empty pixels.
+* Added:        `data` and `args` can now be set to sorter! Just make sure to have it be a key based on what you
+                want it to display as. IE: `array('Main'=>'sidebars')`
 * Added:        Prevent Redux from firing on AJAX heartbeat, but added hook for it 'redux/ajax/heartbeat'.
 * Added:        Tick mark if section has sub sections. Hidden when subsections expanded.
 * Added:        Check to make sure a field isn't empty after the filter. If it is empty, skip over it.
 * Added:        Subsections now show icon if they have it. Show text only (without indent) if they do not.
-* Added:        Set a section or field argument of `'panel' => false` to skip over that field or panel and hide it. It will still be registered with defaults saved, but not display. This can be useful for things like the customizer.
-* Added:        SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't the first section in your panel.  ;)
+* Added:        Set a section or field argument of `'panel' => false` to skip over that field or panel and hide it.
+                It will still be registered with defaults saved, but not display. This can be useful for things
+                like the customizer.
+* Added:        SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and isn't
+                the first section in your panel.  ;)
 
 = 3.2.1 =
 * Fixed:      Small bug in image_select javascript.
