@@ -95,7 +95,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 'word-spacing'      => false,
                 'letter-spacing'    => false,
                 'google'            => true,
-                'update_weekly'     => false    // Enable to force updates of Google Fonts to be weekly
+                'update_weekly'     => false,    // Enable to force updates of Google Fonts to be weekly
             );
             $this->field = wp_parse_args($this->field, $defaults);
 
