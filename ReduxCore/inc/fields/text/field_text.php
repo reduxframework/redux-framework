@@ -27,7 +27,6 @@
              * @since ReduxFramework 1.0.0
              */
             function render() {
-
                 if ( ! empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
                     if ( empty( $this->field['args'] ) ) {
                         $this->field['args'] = array();
@@ -41,8 +40,6 @@
                     $this->value = $this->field['options'];
                 }
 
-                $placeholder = ( isset( $this->field['placeholder'] ) && ! is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
-
                 //if (isset($this->field['text_hint']) && is_array($this->field['text_hint'])) {
                 $qtip_title = isset( $this->field['text_hint']['title'] ) ? 'qtip-title="' . $this->field['text_hint']['title'] . '" ' : '';
                 $qtip_text  = isset( $this->field['text_hint']['content'] ) ? 'qtip-content="' . $this->field['text_hint']['content'] . '" ' : '';
@@ -51,17 +48,21 @@
                 $readonly = isset( $this->field['readonly'] ) ? ' readonly="readonly"' : '';
 
                 if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
-                    $placeholder = ( isset( $this->field['placeholder'] ) && ! is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
+                    //$placeholder = ( isset( $this->field['placeholder'] ) &&  is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
+                    $placeholder = $this->field['placeholder'];
                     foreach ( $this->field['options'] as $k => $v ) {
                         if ( ! empty( $placeholder ) ) {
                             $placeholder = ( is_array( $this->field['placeholder'] ) && isset( $this->field['placeholder'][ $k ] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'][ $k ] ) . '" ' : '';
                         }
-
-                        echo '<label for="' . $this->field['id'] . '-text-' . $k . '"><strong>' . $v . '</strong></label> ';
+                        
+                        echo '<div class="input_wrapper">';
+                        echo '<label for="' . $this->field['id'] . '-text-' . $k . '">' . $v . '</label> ';
                         echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr( $this->value[ $k ] ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' /><br />';
+                        echo '</div>';
                     }
                     //foreach
                 } else {
+                    $placeholder = ( isset( $this->field['placeholder'] ) && ! is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
                     echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr( $this->value ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' />';
                 }
             }

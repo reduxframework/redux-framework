@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.1 =
+* Modified:   #1412 - Redesigned text label, placeholder fix.
+
 = 3.3.2.10 =
 * Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves on other panels.
 
