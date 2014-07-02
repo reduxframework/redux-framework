@@ -52,7 +52,6 @@
                     e.preventDefault();
 
                     var url = $(this).attr('href').split('&tab=');
-
                     $('#' + url[1] + '_section_group_li_a').click();
                     return false;
                 }
@@ -283,9 +282,9 @@
     $.redux.tabCheck = function() {
         $('.redux-group-tab-link-a').click(
             function() {
-
+                var el = $(this ).parents('.redux-container:first');
                 var relid = $(this).data('rel'); // The group ID of interest
-                var oldid = $('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel');
+                var oldid = el.find('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel');
 
                 if (oldid === relid) {
                     return;
@@ -302,15 +301,15 @@
                     );
                 }
 
-                if ($('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
-                    var parentID = $('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').attr('id').split('_');
+                if (el.find('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
+                    var parentID = el.find('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').attr('id').split('_');
                     parentID = parentID[0];
                 }
 
-                $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a.current').removeClass('current');
-                $('#toplevel_page_' + redux.args.slug + ' .wp-submenu li.current').removeClass('current');
+                el.find('#toplevel_page_' + redux.args.slug + ' .wp-submenu a.current').removeClass('current');
+                el.find('#toplevel_page_' + redux.args.slug + ' .wp-submenu li.current').removeClass('current');
 
-                $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a').each(
+                el.find('#toplevel_page_' + redux.args.slug + ' .wp-submenu a').each(
                     function() {
                         var url = $(this).attr('href').split('&tab=');
                         if (url[1] == relid || url[1] == parentID) {
@@ -320,61 +319,61 @@
                     }
                 );
 
-                if ($('#' + oldid + '_section_group_li').find('#' + oldid + '_section_group_li').length) {
+                if (el.find('#' + oldid + '_section_group_li').find('#' + oldid + '_section_group_li').length) {
                     //console.log('RELID is child of oldid');
-                    $('#' + oldid + '_section_group_li').addClass('activeChild');
-                    $('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild');
-                } else if ($('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length || $('#' + oldid + '_section_group_li').parents('ul.subsection').find('#' + relid + '_section_group_li').length) {
+                    el.find('#' + oldid + '_section_group_li').addClass('activeChild');
+                    el.find('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild');
+                } else if (el.find('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length || el.find('#' + oldid + '_section_group_li').parents('ul.subsection').find('#' + relid + '_section_group_li').length) {
                     //console.log('RELID is sibling or child of OLDID');
-                    if ($('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length) {
+                    if (el.find('#' + relid + '_section_group_li').parents('#' + oldid + '_section_group_li').length) {
                         //console.log('child of oldid');
-                        $('#' + oldid + '_section_group_li').addClass('activeChild').removeClass('active');
+                        el.find('#' + oldid + '_section_group_li').addClass('activeChild').removeClass('active');
                     } else {
                         //console.log('sibling');
-                        $('#' + relid + '_section_group_li').addClass('active');
-                        $('#' + oldid + '_section_group_li').removeClass('active');
+                        el.find('#' + relid + '_section_group_li').addClass('active');
+                        el.find('#' + oldid + '_section_group_li').removeClass('active');
                     }
-                    $('#' + relid + '_section_group_li').removeClass('activeChild').addClass('active');
+                    el.find('#' + relid + '_section_group_li').removeClass('activeChild').addClass('active');
                 } else {
-                    $('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild').find('ul.subsection').slideDown();
+                    el.find('#' + relid + '_section_group_li').addClass('active').removeClass('activeChild').find('ul.subsection').slideDown();
 
-                    if ($('#' + oldid + '_section_group_li').find('ul.subsection').length) {
+                    if (el.find('#' + oldid + '_section_group_li').find('ul.subsection').length) {
                         //console.log('oldid is parent')
-                        $('#' + oldid + '_section_group_li').find('ul.subsection').slideUp(
+                        el.find('#' + oldid + '_section_group_li').find('ul.subsection').slideUp(
                             'fast', function() {
-                                $('#' + oldid + '_section_group_li').removeClass('active').removeClass('activeChild');
+                                el.find('#' + oldid + '_section_group_li').removeClass('active').removeClass('activeChild');
                             }
                         );
-                    } else if ($('#' + oldid + '_section_group_li').parents('ul.subsection').length) {
+                    } else if (el.find('#' + oldid + '_section_group_li').parents('ul.subsection').length) {
                         //console.log('oldid is a child');
-                        if (!$('#' + oldid + '_section_group_li').parents('#' + relid + '_section_group_li').length) {
+                        if (!el.find('#' + oldid + '_section_group_li').parents('#' + relid + '_section_group_li').length) {
                             //console.log('oldid is child, but not of relid');
-                            $('#' + oldid + '_section_group_li').parents('ul.subsection').slideUp(
+                            el.find('#' + oldid + '_section_group_li').parents('ul.subsection').slideUp(
                                 'fast', function() {
-                                    $('#' + oldid + '_section_group_li').removeClass('active');
-                                    $('#' + oldid + '_section_group_li').parents('.redux-group-tab-link-li').removeClass('active').removeClass('activeChild');
+                                    el.find('#' + oldid + '_section_group_li').removeClass('active');
+                                    el.find('#' + oldid + '_section_group_li').parents('.redux-group-tab-link-li').removeClass('active').removeClass('activeChild');
                                 }
                             );
                         } else {
-                            $('#' + oldid + '_section_group_li').removeClass('active');
+                            el.find('#' + oldid + '_section_group_li').removeClass('active');
                         }
                     } else {
                         //console.log('Normal remove active from child');
-                        $('#' + oldid + '_section_group_li').removeClass('active');
-                        if ($('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
+                        el.find('#' + oldid + '_section_group_li').removeClass('active');
+                        if (el.find('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').length) {
                             //console.log('here');
-                            $('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').addClass('activeChild').find('ul.subsection').slideDown();
-                            $('#' + relid + '_section_group_li').addClass('active');
+                            el.find('#' + relid + '_section_group_li').parents('.redux-group-tab-link-li').addClass('activeChild').find('ul.subsection').slideDown();
+                            el.find('#' + relid + '_section_group_li').addClass('active');
                         }
                     }
                 }
 
                 // Show the group
-                $('#' + oldid + '_section_group').hide();
+                el.find('#' + oldid + '_section_group').hide();
 
-                $('#' + relid + '_section_group').fadeIn(
+                el.find('#' + relid + '_section_group').fadeIn(
                     200, function() {
-                        if ($('#redux-footer').length !== 0) {
+                        if (el.find('#redux-footer').length !== 0) {
                             $.redux.stickyInfo(); // race condition fix
                         }
                         $.redux.initFields();
@@ -410,7 +409,7 @@
 
         // Tab the first item or the saved one
         if ($.cookie("redux_current_tab") === null || typeof ($.cookie("redux_current_tab")) === "undefined" || sTab.length === 0) {
-            $('.redux-group-tab-link-a:first').click();
+            $('.redux-container').find('.redux-group-tab-link-a:first').click();
         } else {
             sTab.click();
         }
