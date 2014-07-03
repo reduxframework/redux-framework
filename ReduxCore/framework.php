@@ -391,7 +391,13 @@
                     //add_action( 'init', array( &$this, '_set_default_options' ), 101 );
 
                     // Options page
-                    add_action( 'admin_menu', array( $this, '_options_page' ) );
+                    if ( 'submenu' == $this->args['menu_type'] && $this->args['page_priority'] ) {
+                        $priority = $this->args['page_priority'];
+                        add_action( 'admin_menu', array( $this, '_options_page' ), $priority );
+                    }
+                    else {
+                        add_action( 'admin_menu', array( $this, '_options_page' ) );
+                    }
 
                     // Add a network menu
                     if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
