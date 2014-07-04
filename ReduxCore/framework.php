@@ -22,25 +22,10 @@
         exit;
     }
 
-    // Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
-    /** @global string $pagenow */
-    if ( has_action( 'ecpt_field_options_' ) ) {
-        global $pagenow;
-        if ( $pagenow === 'admin.php' ) {
-            /** @noinspection PhpUndefinedCallbackInspection */
-            remove_action( 'admin_init', 'pb_admin_init' );
-        }
-    }
-
     if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
         // Instance Container
         include_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
         include_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
-
-    }
-
-    if ( class_exists( 'ReduxFrameworkInstances' ) ) {
-        add_action( 'redux/init', 'ReduxFrameworkInstances::get_instance' );
     }
 
     // Don't duplicate me!
@@ -66,7 +51,8 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.3.2';
+            const VERSION = '3.3.3.2';
+
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -111,108 +97,24 @@
             public $typography = null; //values to generate google font CSS
             public $import_export = null;
             public $debug = null;
+            public $typography_preview = array();
+            public $args = array();
+
             private $show_hints = false;
             private $transients = array();
             private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
-            public $typography_preview = array();
-            public $args = array(
-                'opt_name'           => '',
-                // Must be defined by theme/plugin
-                'google_api_key'     => '',
-                // Must be defined to add google fonts to the typography module
-                'last_tab'           => '',
-                // force a specific tab to always show on reload
-                'menu_icon'          => '',
-                // menu icon
-                'menu_title'         => '',
-                // menu title/text
-                'page_icon'          => 'icon-themes',
-                'page_title'         => '',
-                // option page title
-                'page_slug'          => '_options',
-                'page_permissions'   => 'manage_options',
-                'menu_type'          => 'menu',
-                // ('menu'|'submenu')
-                'page_parent'        => 'themes.php',
-                // requires menu_type = 'submenu
-                'page_priority'      => null,
-                'allow_sub_menu'     => true,
-                // allow submenus to be added if menu_type == menu
-                'save_defaults'      => true,
-                // Save defaults to the DB on it if empty
-                'footer_credit'      => '',
-                'async_typography'   => false,
-                'class'              => '',
-                // Class that gets appended to all redux-containers
-                'admin_bar'          => true,
-                // Show the panel pages on the admin bar
-                'help_tabs'          => array(),
-                'help_sidebar'       => '',
-                'database'           => '',
-                // possible: options, theme_mods, theme_mods_expanded, transient, network
-                'customizer'         => false,
-                // setting to true forces get_theme_mod_expanded
-                'global_variable'    => '',
-                // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
-                'output'             => true,
-                // Dynamically generate CSS
-                'compiler'           => true,
-                // Initiate the compiler hook
-                'output_tag'         => true,
-                // Print Output Tag
-                'transient_time'     => '',
-                'default_show'       => false,
-                // If true, it shows the default value
-                'default_mark'       => '',
-                // What to print by the field's title if the value shown is default
-                'update_notice'      => true,
-                // Recieve an update notice of new commits when in dev mode
-                'disable_save_warn'  => false,
-                // Disable the save warn
-                'open_expanded'      => false,
-                // Start the panel fully expanded to start with
-                'network_admin'      => false,
-                // Enable network admin when using network database mode
-                'network_sites'      => true,
-                // Enable sites as well as admin when using network database mode
-
-                'hide_reset'         => false,
-                'hints'              => array(
-                    'icon'          => 'icon-question-sign',
-                    'icon_position' => 'right',
-                    'icon_color'    => 'lightgray',
-                    'icon_size'     => 'normal',
-                    'tip_style'     => array(
-                        'color'   => 'light',
-                        'shadow'  => true,
-                        'rounded' => false,
-                        'style'   => '',
-                    ),
-                    'tip_position'  => array(
-                        'my' => 'top_left',
-                        'at' => 'bottom_right',
-                    ),
-                    'tip_effect'    => array(
-                        'show' => array(
-                            'effect'   => 'slide',
-                            'duration' => '500',
-                            'event'    => 'mouseover',
-                        ),
-                        'hide' => array(
-                            'effect'   => 'fade',
-                            'duration' => '500',
-                            'event'    => 'click mouseleave',
-                        ),
-                    ),
-                ),
-                'show_import_export' => true,
-                'dev_mode'           => false,
-                'system_info'        => false,
-            );
-
 
             public static function init() {
+                // Fix for the GT3 page builder: http://www.gt3themes.com/wordpress-gt3-page-builder-plugin/
+                /** @global string $pagenow */
+                if ( has_action( 'ecpt_field_options_' ) ) {
+                    global $pagenow;
+                    if ( $pagenow === 'admin.php' ) {
+                        /** @noinspection PhpUndefinedCallbackInspection */
+                        remove_action( 'admin_init', 'pb_admin_init' );
+                    }
+                }
 
                 global $wp_filesystem;
 
@@ -252,6 +154,10 @@
                     $wp_filesystem->mkdir( self::$_upload_dir );
                 }
 
+                if ( class_exists( 'ReduxFrameworkInstances' ) ) {
+                    ReduxFrameworkInstances::get_instance();
+                }
+
                 do_action( 'redux/init' );
             }
 
@@ -267,6 +173,8 @@
              * @return \ReduxFramework
              */
             public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
+                $this->args = $this->getDefaultArgs();
+
                 // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
                 if ( isset( $_POST ) && isset( $_POST['action'] ) && $_POST['action'] == 'heartbeat' ) {
 
@@ -290,7 +198,7 @@
                 }
 
                 if ( empty( $this->args['footer_credit'] ) ) {
-                    $this->args['footer_credit'] = '<span id="footer-thankyou">' . sprintf( __( 'Options panel created using %1$s', 'redux-framework' ), '<a href="' . esc_url( $this->framework_url ) . '" target="_blank">' . __( 'Redux Framework', 'redux-framework' ) . '</a> v' . self::$_version ) . '</span>';
+                    $this->args['footer_credit'] = '<span id="footer-thankyou">' . sprintf( __( 'Options panel created using %1$s', 'redux-framework' ), '<a href="' . esc_url( $this->framework_url ) . '" target="_blank">' . __( 'Redux Framework', 'redux-framework' ) . '</a> v' . self::VERSION ) . '</span>';
                 }
 
                 if ( empty( $this->args['menu_title'] ) ) {
@@ -461,6 +369,102 @@
 
             } // __construct()
 
+            protected function getDefaultArgs() {
+                return array(
+                    'opt_name'           => '',
+                    // Must be defined by theme/plugin
+                    'google_api_key'     => '',
+                    // Must be defined to add google fonts to the typography module
+                    'last_tab'           => '',
+                    // force a specific tab to always show on reload
+                    'menu_icon'          => '',
+                    // menu icon
+                    'menu_title'         => '',
+                    // menu title/text
+                    'page_icon'          => 'icon-themes',
+                    'page_title'         => '',
+                    // option page title
+                    'page_slug'          => '_options',
+                    'page_permissions'   => 'manage_options',
+                    'menu_type'          => 'menu',
+                    // ('menu'|'submenu')
+                    'page_parent'        => 'themes.php',
+                    // requires menu_type = 'submenu
+                    'page_priority'      => null,
+                    'allow_sub_menu'     => true,
+                    // allow submenus to be added if menu_type == menu
+                    'save_defaults'      => true,
+                    // Save defaults to the DB on it if empty
+                    'footer_credit'      => '',
+                    'async_typography'   => false,
+                    'class'              => '',
+                    // Class that gets appended to all redux-containers
+                    'admin_bar'          => true,
+                    // Show the panel pages on the admin bar
+                    'help_tabs'          => array(),
+                    'help_sidebar'       => '',
+                    'database'           => '',
+                    // possible: options, theme_mods, theme_mods_expanded, transient, network
+                    'customizer'         => false,
+                    // setting to true forces get_theme_mod_expanded
+                    'global_variable'    => '',
+                    // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
+                    'output'             => true,
+                    // Dynamically generate CSS
+                    'compiler'           => true,
+                    // Initiate the compiler hook
+                    'output_tag'         => true,
+                    // Print Output Tag
+                    'transient_time'     => '',
+                    'default_show'       => false,
+                    // If true, it shows the default value
+                    'default_mark'       => '',
+                    // What to print by the field's title if the value shown is default
+                    'update_notice'      => true,
+                    // Recieve an update notice of new commits when in dev mode
+                    'disable_save_warn'  => false,
+                    // Disable the save warn
+                    'open_expanded'      => false,
+                    // Start the panel fully expanded to start with
+                    'network_admin'      => false,
+                    // Enable network admin when using network database mode
+                    'network_sites'      => true,
+                    // Enable sites as well as admin when using network database mode
+
+                    'hide_reset'         => false,
+                    'hints'              => array(
+                        'icon'          => 'icon-question-sign',
+                        'icon_position' => 'right',
+                        'icon_color'    => 'lightgray',
+                        'icon_size'     => 'normal',
+                        'tip_style'     => array(
+                            'color'   => 'light',
+                            'shadow'  => true,
+                            'rounded' => false,
+                            'style'   => '',
+                        ),
+                        'tip_position'  => array(
+                            'my' => 'top_left',
+                            'at' => 'bottom_right',
+                        ),
+                        'tip_effect'    => array(
+                            'show' => array(
+                                'effect'   => 'slide',
+                                'duration' => '500',
+                                'event'    => 'mouseover',
+                            ),
+                            'hide' => array(
+                                'effect'   => 'fade',
+                                'duration' => '500',
+                                'event'    => 'click mouseleave',
+                            ),
+                        ),
+                    ),
+                    'show_import_export' => true,
+                    'dev_mode'           => false,
+                    'system_info'        => false
+                );
+            }
 
             /**
              * @param WP_Admin_Bar $wp_admin_bar
@@ -509,7 +513,7 @@
             public function _update_check() {
                 // Only one notice per instance please
                 if ( ! isset( $GLOBALS['redux_update_check'] ) ) {
-                    Redux_Functions::updateCheck( self::$_version );
+                    Redux_Functions::updateCheck( self::VERSION );
                     $GLOBALS['redux_update_check'] = 1;
                 }
             }
