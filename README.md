@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.3 =
+* Modified:   Code purification.
+
 = 3.3.3.2 =
 * Modified:   How section tabs work. Isolated within the redux-container class.
 

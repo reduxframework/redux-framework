@@ -63,7 +63,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.3.2';
+            public static $_version = '3.3.3.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -74,7 +74,7 @@
             public static $_is_plugin = true;
             public static $_as_plugin = false;
 
-            static function init() {
+            public static function init() {
 
                 global $wp_filesystem;
 
@@ -154,101 +154,7 @@
             private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
             public $typography_preview = array();
-            public $args = array(
-                'opt_name'           => '',
-                // Must be defined by theme/plugin
-                'google_api_key'     => '',
-                // Must be defined to add google fonts to the typography module
-                'last_tab'           => '',
-                // force a specific tab to always show on reload
-                'menu_icon'          => '',
-                // menu icon
-                'menu_title'         => '',
-                // menu title/text
-                'page_icon'          => 'icon-themes',
-                'page_title'         => '',
-                // option page title
-                'page_slug'          => '_options',
-                'page_permissions'   => 'manage_options',
-                'menu_type'          => 'menu',
-                // ('menu'|'submenu')
-                'page_parent'        => 'themes.php',
-                // requires menu_type = 'submenu
-                'page_priority'      => null,
-                'allow_sub_menu'     => true,
-                // allow submenus to be added if menu_type == menu
-                'save_defaults'      => true,
-                // Save defaults to the DB on it if empty
-                'footer_credit'      => '',
-                'async_typography'   => false,
-                'class'              => '',
-                // Class that gets appended to all redux-containers
-                'admin_bar'          => true,
-                // Show the panel pages on the admin bar
-                'help_tabs'          => array(),
-                'help_sidebar'       => '',
-                'database'           => '',
-                // possible: options, theme_mods, theme_mods_expanded, transient, network
-                'customizer'         => false,
-                // setting to true forces get_theme_mod_expanded
-                'global_variable'    => '',
-                // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
-                'output'             => true,
-                // Dynamically generate CSS
-                'compiler'           => true,
-                // Initiate the compiler hook
-                'output_tag'         => true,
-                // Print Output Tag
-                'transient_time'     => '',
-                'default_show'       => false,
-                // If true, it shows the default value
-                'default_mark'       => '',
-                // What to print by the field's title if the value shown is default
-                'update_notice'      => true,
-                // Recieve an update notice of new commits when in dev mode
-                'disable_save_warn'  => false,
-                // Disable the save warn
-                'open_expanded'      => false,
-                // Start the panel fully expanded to start with
-                'network_admin'      => false,
-                // Enable network admin when using network database mode
-                'network_sites'      => true,
-                // Enable sites as well as admin when using network database mode
-
-                'hide_reset'         => false,
-                'hints'              => array(
-                    'icon'          => 'icon-question-sign',
-                    'icon_position' => 'right',
-                    'icon_color'    => 'lightgray',
-                    'icon_size'     => 'normal',
-                    'tip_style'     => array(
-                        'color'   => 'light',
-                        'shadow'  => true,
-                        'rounded' => false,
-                        'style'   => '',
-                    ),
-                    'tip_position'  => array(
-                        'my' => 'top_left',
-                        'at' => 'bottom_right',
-                    ),
-                    'tip_effect'    => array(
-                        'show' => array(
-                            'effect'   => 'slide',
-                            'duration' => '500',
-                            'event'    => 'mouseover',
-                        ),
-                        'hide' => array(
-                            'effect'   => 'fade',
-                            'duration' => '500',
-                            'event'    => 'click mouseleave',
-                        ),
-                    ),
-                ),
-                'show_import_export' => true,
-                'dev_mode'           => false,
-                'system_info'        => false,
-            );
-
+            public $args                = array();
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -262,7 +168,6 @@
              * @return \ReduxFramework
              */
             public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
-                global $wp_version;
 
                 // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
                 if ( isset( $_POST ) && isset( $_POST['action'] ) && $_POST['action'] == 'heartbeat' ) {
@@ -280,6 +185,7 @@
                 Redux_Functions::$_parent = $this;
 
                 // Set values
+                $this->set_default_args();
                 $this->args = wp_parse_args( $args, $this->args );
 
                 if ( empty( $this->args['transient_time'] ) ) {
@@ -459,6 +365,77 @@
             } // __construct()
 
 
+            private function set_default_args() {
+                $this->args = array(
+                    'opt_name'           => '',                    // Must be defined by theme/plugin
+                    'google_api_key'     => '',                    // Must be defined to add google fonts to the typography module
+                    'last_tab'           => '',                    // force a specific tab to always show on reload
+                    'menu_icon'          => '',                    // menu icon
+                    'menu_title'         => '',                    // menu title/text
+                    'page_icon'          => 'icon-themes',
+                    'page_title'         => '',                    // option page title
+                    'page_slug'          => '_options',
+                    'page_permissions'   => 'manage_options',
+                    'menu_type'          => 'menu',                // ('menu'|'submenu')
+                    'page_parent'        => 'themes.php',          // requires menu_type = 'submenu
+                    'page_priority'      => null,
+                    'allow_sub_menu'     => true,                  // allow submenus to be added if menu_type == menu
+                    'save_defaults'      => true,                  // Save defaults to the DB on it if empty
+                    'footer_credit'      => '',
+                    'async_typography'   => false,
+                    'class'              => '',                    // Class that gets appended to all redux-containers
+                    'admin_bar'          => true,                  // Show the panel pages on the admin bar
+                    'help_tabs'          => array(),
+                    'help_sidebar'       => '',
+                    'database'           => '',                    // possible: options, theme_mods, theme_mods_expanded, transient, network
+                    'customizer'         => false,                 // setting to true forces get_theme_mod_expanded
+                    'global_variable'    => '',                    // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
+                    'output'             => true,                  // Dynamically generate CSS
+                    'compiler'           => true,                  // Initiate the compiler hook
+                    'output_tag'         => true,                  // Print Output Tag
+                    'transient_time'     => '',
+                    'default_show'       => false,                 // If true, it shows the default value
+                    'default_mark'       => '',                    // What to print by the field's title if the value shown is default
+                    'update_notice'      => true,                  // Recieve an update notice of new commits when in dev mode
+                    'disable_save_warn'  => false,                 // Disable the save warn
+                    'open_expanded'      => false,                 // Start the panel fully expanded to start with
+                    'network_admin'      => false,                 // Enable network admin when using network database mode
+                    'network_sites'      => true,                  // Enable sites as well as admin when using network database mode
+                    'hide_reset'         => false,
+                    'hints'              => array(
+                        'icon'          => 'icon-question-sign',
+                        'icon_position' => 'right',
+                        'icon_color'    => 'lightgray',
+                        'icon_size'     => 'normal',
+                        'tip_style'     => array(
+                            'color'   => 'light',
+                            'shadow'  => true,
+                            'rounded' => false,
+                            'style'   => '',
+                        ),
+                        'tip_position'  => array(
+                            'my' => 'top_left',
+                            'at' => 'bottom_right',
+                        ),
+                        'tip_effect'    => array(
+                            'show' => array(
+                                'effect'   => 'slide',
+                                'duration' => '500',
+                                'event'    => 'mouseover',
+                            ),
+                            'hide' => array(
+                                'effect'   => 'fade',
+                                'duration' => '500',
+                                'event'    => 'click mouseleave',
+                            ),
+                        ),
+                    ),
+                    'show_import_export' => true,
+                    'dev_mode'           => false,
+                    'system_info'        => false,
+                );
+            }
+            
             public function network_admin_bar( $wp_admin_bar ) {
 
                 $args = array(
@@ -472,7 +449,7 @@
 
             }
 
-            public function stripslashes_deep( $value ) {
+            private function stripslashes_deep( $value ) {
                 $value = is_array( $value ) ?
                     array_map( 'stripslashes_deep', $value ) :
                     stripslashes( $value );
@@ -516,7 +493,7 @@
              *
              * @since    3.0.5
              */
-            public function _internationalization() {
+            private function _internationalization() {
 
                 /**
                  * Locale for text domain
@@ -543,7 +520,7 @@
                 return self::$instance;
             } // get_instance()
 
-            public function _tracking() {
+            private function _tracking() {
                 include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
                 $tracking = Redux_Tracking::get_instance();
                 $tracking->load( $this );
@@ -612,7 +589,7 @@
              * @since   3.1.5
              * @return  bool          (global was set)
              */
-            function set_global_variable() {
+            private function set_global_variable() {
                 if ( $this->args['global_variable'] ) {
                     $option_global = $this->args['global_variable'];
                     /**
@@ -649,7 +626,7 @@
              *
              * @param mixed $value the value of the option being added
              */
-            function set_options( $value = '' ) {
+            private function set_options( $value = '' ) {
 
                 $this->transients['last_save'] = time();
 
@@ -703,7 +680,7 @@
              *
              * @since ReduxFramework 3.0.0
              */
-            function get_options() {
+            public function get_options() {
                 $defaults = false;
 
                 if ( ! empty( $this->defaults ) ) {
@@ -749,7 +726,7 @@
              *
              * @since ReduxFramework 3.0.0
              */
-            function get_wordpress_data( $type = false, $args = array() ) {
+            public function get_wordpress_data( $type = false, $args = array() ) {
                 $data = "";
 
                 /**
@@ -1049,149 +1026,6 @@
                 return $this->options_defaults;
             }
 
-
-            /**
-             * Get fold values into an array suitable for setting folds
-             *
-             * @since ReduxFramework 1.0.0
-             */
-            function _fold_values() {
-
-                /*
-             Folds work by setting the folds value like so
-             $this->folds['parentID']['parentValue'][] = 'childId'
-            */
-//          $folds = array();
-                if ( ! is_null( $this->sections ) ) {
-
-                    foreach ( $this->sections as $section ) {
-                        if ( isset( $section['fields'] ) ) {
-                            foreach ( $section['fields'] as $field ) {
-                                //if we have required option in group field
-                                if ( isset( $field['fields'] ) && is_array( $field['fields'] ) ) {
-                                    foreach ( $field['fields'] as $subfield ) {
-                                        if ( isset( $subfield['required'] ) ) {
-                                            $this->get_fold( $subfield );
-                                        }
-                                    }
-                                }
-                                if ( isset( $field['required'] ) ) {
-                                    $this->get_fold( $field );
-                                }
-                            }
-                        }
-                    }
-                }
-
-                $parents = array();
-
-                foreach ( $this->folds as $k => $fold ) { // ParentFolds WITHOUT parents
-                    if ( empty( $fold['children'] ) || ! empty( $fold['children']['parents'] ) ) {
-                        continue;
-                    }
-
-                    $fold['value'] = $this->options[ $k ];
-
-                    foreach ( $fold['children'] as $key => $value ) {
-                        if ( $key == $fold['value'] ) {
-                            unset( $fold['children'][ $key ] );
-                        }
-                    }
-
-                    if ( empty( $fold['children'] ) ) {
-                        continue;
-                    }
-
-                    foreach ( $fold['children'] as $key => $value ) {
-                        foreach ( $value as $k => $hidden ) {
-                            if ( ! in_array( $hidden, $this->toHide ) ) {
-                                $this->toHide[] = $hidden;
-                            }
-                        }
-                    }
-
-                    $parents[] = $fold;
-                }
-
-                return $this->folds;
-            } // _fold_values()
-
-            /**
-             * get_fold() - Get the fold values
-             *
-             * @param array $field
-             *
-             * @return array
-             */
-            function get_fold( $field ) {
-                if ( ! is_array( $field['required'] ) ) {
-
-                    /*
-                Example variable:
-                    $var = array(
-                    'fold' => 'id'
-                    );
-                */
-
-                    $this->folds[ $field['required'] ]['children'][1][] = $field['id'];
-                    $this->folds[ $field['id'] ]['parent']              = $field['required'];
-                } else {
-//                $parent = $foldk = $field['required'][0];
-                    $foldk = $field['required'][0];
-//                $comparison = $field['required'][1];
-                    $value = $foldv = $field['required'][2];
-                    //foreach( $field['required'] as $foldk=>$foldv ) {
-
-
-                    if ( is_array( $value ) ) {
-                        /*
-                    Example variable:
-                        $var = array(
-                        'fold' => array( 'id' , '=', array(1, 5) )
-                        );
-                    */
-
-                        foreach ( $value as $foldvValue ) {
-                            //echo 'id: '.$field['id']." key: ".$foldk.' f-val-'.print_r($foldv)." foldvValue".$foldvValue;
-                            $this->folds[ $foldk ]['children'][ $foldvValue ][] = $field['id'];
-                            $this->folds[ $field['id'] ]['parent']              = $foldk;
-                        }
-                    } else {
-
-                        //!DOVY If there's a problem, this is where it's at. These two cases.
-                        //This may be able to solve this issue if these don't work
-                        //if (count($field['fold']) == count($field['fold'], COUNT_RECURSIVE)) {
-                        //}
-                        if ( count( $field['required'] ) === 1 && is_numeric( $foldk ) ) {
-                            /*
-                        Example variable:
-                            $var = array(
-                            'fold' => array( 'id' )
-                            );
-                        */
-                            $this->folds[ $field['id'] ]['parent']  = $foldk;
-                            $this->folds[ $foldk ]['children'][1][] = $field['id'];
-                        } else {
-                            /*
-                        Example variable:
-                            $var = array(
-                            'fold' => array( 'id' => 1 )
-                            );
-                        */
-                            if ( empty( $foldv ) ) {
-                                $foldv = 0;
-                            }
-
-                            $this->folds[ $field['id'] ]['parent']         = $foldk;
-                            $this->folds[ $foldk ]['children'][ $foldv ][] = $field['id'];
-                        }
-                    }
-                    //}
-                }
-
-                return $this->folds;
-            } // get_fold()
-
             /**
              * Set default options on admin_init if option doesn't exist
              *
@@ -1199,7 +1033,7 @@
              * @access      public
              * @return      void
              */
-            public function _default_cleanup() {
+            private function _default_cleanup() {
 
                 // Fix the global variable name
                 if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
@@ -1294,7 +1128,7 @@
              * @access      public
              * @return void
              */
-            function _options_page() {
+            public function _options_page() {
                 $this->import_export->in_field();
 
                 if ( $this->args['menu_type'] == 'submenu' ) {
@@ -1381,7 +1215,7 @@
              * @global      $menu , $submenu, $wp_admin_bar
              * @return      void
              */
-            function _admin_bar_menu() {
+            public function _admin_bar_menu() {
                 global $menu, $submenu, $wp_admin_bar;
 
                 $ct         = wp_get_theme();
@@ -1890,6 +1724,8 @@
                     }
                 }
 
+                //$this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "http" + ("https:"==document.location.protocol?"s":"") + "://ads.reduxframework.com/api/index.php?js&g&1&v=2"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';               
+                
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
                 $this->localize_data['defaults']     = $this->options_defaults;
@@ -2159,7 +1995,7 @@
              * @access      public
              * @return      string default_output
              */
-            public function get_default_output_string( $field ) {
+            private function get_default_output_string( $field ) {
                 $default_output = "";
 
                 if ( ! isset( $field['default'] ) ) {
@@ -2656,7 +2492,7 @@
              * @access      public
              * @return      void
              */
-            public function _register_extensions() {
+            private function _register_extensions() {
                 $path    = dirname( __FILE__ ) . '/extensions/';
                 $folders = scandir( $path, 1 );
 
@@ -2721,14 +2557,14 @@
                 do_action( "redux/extensions/{$this->args['opt_name']}", $this );
             }
 
-            public function get_transients() {
+            private function get_transients() {
                 if ( ! isset( $this->transients ) ) {
                     $this->transients       = get_option( $this->args['opt_name'] . '-transients', array() );
                     $this->transients_check = $this->transients;
                 }
             }
 
-            public function set_transients() {
+            private function set_transients() {
                 if ( ! isset( $this->transients ) || ! isset( $this->transients_check ) || $this->transients != $this->transients_check ) {
                     update_option( $this->args['opt_name'] . '-transients', $this->transients );
                     $this->transients_check = $this->transients;
@@ -4017,7 +3853,7 @@
              *
              * @return array $params
              */
-            public function check_dependencies( $field ) {
+            private function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
 
                 if ( ! empty( $field['required'] ) ) {
@@ -4068,7 +3904,7 @@
             }
 
             // Compare data for required field
-            function compareValueDependencies( $parentValue, $checkValue, $operation ) {
+            private function compareValueDependencies( $parentValue, $checkValue, $operation ) {
                 $return = false;
 
                 switch ( $operation ) {
@@ -4178,7 +4014,7 @@
                 return $return;
             }
 
-            function checkRequiredDependencies( $field, $data ) {
+            private function checkRequiredDependencies( $field, $data ) {
                 //required field must not be hidden. otherwise hide this one by default
 
                 if ( ! in_array( $data['parent'], $this->fieldsHidden ) && ( ! isset( $this->folds[ $field['id'] ] ) || $this->folds[ $field['id'] ] != "hide" ) ) {

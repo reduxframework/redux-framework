@@ -48,8 +48,12 @@
                 $readonly = isset( $this->field['readonly'] ) ? ' readonly="readonly"' : '';
 
                 if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
-                    //$placeholder = ( isset( $this->field['placeholder'] ) &&  is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
-                    $placeholder = $this->field['placeholder'];
+                    
+                    $placeholder = '';
+                    if ( isset( $this->field['placeholder'] ) ) {
+                        $placeholder = $this->field['placeholder'];
+                    }                    
+                    
                     foreach ( $this->field['options'] as $k => $v ) {
                         if ( ! empty( $placeholder ) ) {
                             $placeholder = ( is_array( $this->field['placeholder'] ) && isset( $this->field['placeholder'][ $k ] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'][ $k ] ) . '" ' : '';
