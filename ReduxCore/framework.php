@@ -623,7 +623,7 @@
              * @since   3.1.5
              * @return  bool          (global was set)
              */
-            function set_global_variable() {
+            public function set_global_variable() {
                 if ( $this->args['global_variable'] ) {
                     $option_global = $this->args['global_variable'];
                     /**
@@ -660,7 +660,7 @@
              *
              * @param mixed $value the value of the option being added
              */
-            function set_options( $value = '' ) {
+            public function set_options( $value = '' ) {
 
                 $this->transients['last_save'] = time();
 
@@ -714,7 +714,7 @@
              *
              * @since ReduxFramework 3.0.0
              */
-            function get_options() {
+            public function get_options() {
                 $defaults = false;
 
                 if ( ! empty( $this->defaults ) ) {
@@ -760,7 +760,7 @@
              *
              * @since ReduxFramework 3.0.0
              */
-            function get_wordpress_data( $type = false, $args = array() ) {
+            public function get_wordpress_data( $type = false, $args = array() ) {
                 $data = "";
 
                 /**
@@ -1066,7 +1066,7 @@
              *
              * @since ReduxFramework 1.0.0
              */
-            function _fold_values() {
+            public function _fold_values() {
 
                 /*
              Folds work by setting the folds value like so
@@ -1134,7 +1134,7 @@
              *
              * @return array
              */
-            function get_fold( $field ) {
+            public function get_fold( $field ) {
                 if ( ! is_array( $field['required'] ) ) {
 
                     /*
@@ -1305,7 +1305,7 @@
              * @access      public
              * @return void
              */
-            function _options_page() {
+            public function _options_page() {
                 $this->import_export->in_field();
 
                 if ( $this->args['menu_type'] == 'submenu' ) {
@@ -1392,7 +1392,7 @@
              * @global      $menu , $submenu, $wp_admin_bar
              * @return      void
              */
-            function _admin_bar_menu() {
+            public function _admin_bar_menu() {
                 global $menu, $submenu, $wp_admin_bar;
 
                 $ct         = wp_get_theme();
@@ -4083,7 +4083,7 @@
              *
              * @return bool
              */
-            function compareValueDependencies( $parentValue, $checkValue, $operation ) {
+            public function compareValueDependencies( $parentValue, $checkValue, $operation ) {
                 $return = false;
 
                 switch ( $operation ) {
@@ -4197,7 +4197,7 @@
              * @param $field
              * @param $data
              */
-            function checkRequiredDependencies( $field, $data ) {
+            public function checkRequiredDependencies( $field, $data ) {
                 //required field must not be hidden. otherwise hide this one by default
 
                 if ( ! in_array( $data['parent'], $this->fieldsHidden ) && ( ! isset( $this->folds[ $field['id'] ] ) || $this->folds[ $field['id'] ] != "hide" ) ) {
@@ -4235,7 +4235,7 @@
 
                 return $data_string;
             }
-        } // ReduxFramework
+        }
 
         ReduxFramework::init();
     }
