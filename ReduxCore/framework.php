@@ -24,8 +24,8 @@
 
     if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
         // Instance Container
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
-        include_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
+        include dirname( __FILE__ ) . '/inc/class.redux_instances.php';
+        include dirname( __FILE__ ) . '/inc/lib.redux_instances.php';
     }
 
     // Don't duplicate me!
