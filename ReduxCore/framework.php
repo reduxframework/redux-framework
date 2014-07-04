@@ -46,12 +46,15 @@
     // Don't duplicate me!
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
-        // General helper functions
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
+        if ( ! class_exists( 'Redux_Helpers' ) ) {
+            // General helper functions
+            include dirname( __FILE__ ) . '/inc/class.redux_helpers.php';
+        }
 
-        // General functions
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
-
+        if ( ! class_exists( 'Redux_Functions' ) ) {
+            // General functions
+            include dirname( __FILE__ ) . '/inc/class.redux_functions.php';
+        }
 
         /**
          * Main ReduxFramework class
@@ -73,53 +76,11 @@
             public static $_properties;
             public static $_is_plugin = true;
             public static $_as_plugin = false;
-
-            static function init() {
-
-                global $wp_filesystem;
-
-                // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-                self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
-                $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
-                $wp_content_dir       = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
-                $relative_url         = str_replace( $wp_content_dir, '', self::$_dir );
-                self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
-                self::$_url           = self::$wp_content_url . $relative_url;
-
-                // See if Redux is a plugin or not
-                if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
-                    self::$_is_plugin = false;
-                }
-
-                // Create our private upload directory
-                Redux_Functions::initWpFilesystem();
-
-                self::$_upload_dir = trailingslashit( $wp_filesystem->wp_content_dir() ) . '/redux/';
-                self::$_upload_url = trailingslashit( content_url() ) . '/redux/';
-
-                if ( function_exists( 'sys_get_temp_dir' ) ) {
-                    $tmp = sys_get_temp_dir();
-                    if ( empty( $tmp ) ) {
-                        $tmpDir = self::$_upload_url . 'tmp';
-                        if ( file_exists( $tmpDir ) ) {
-                            Redux_Helpers::rmdir( $tmpDir );
-                        }
-                        putenv( 'TMPDIR=' . self::$_upload_dir . 'tmp' );
-                    }
-                }
-
-                // Ensure it exists
-                if ( ! is_dir( self::$_upload_dir ) ) {
-                    // Create the directory
-                    $wp_filesystem->mkdir( self::$_upload_dir );
-                }
-
-            }
-
-            // ::init()
+            public static $instance = null;
 
             public $framework_url = 'http://www.reduxframework.com/';
-            public static $instance = null;
+            public $wp_data = array();
+            public $font_groups = array();
             public $admin_notices = array();
             public $page = '';
             public $saved = false;
@@ -151,6 +112,7 @@
             public $import_export = null;
             public $debug = null;
             private $show_hints = false;
+            private $transients = array();
             private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
             public $typography_preview = array();
@@ -250,6 +212,49 @@
             );
 
 
+            public static function init() {
+
+                global $wp_filesystem;
+
+                // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
+                self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
+                $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
+                $wp_content_dir       = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
+                $relative_url         = str_replace( $wp_content_dir, '', self::$_dir );
+                self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
+                self::$_url           = self::$wp_content_url . $relative_url;
+
+                // See if Redux is a plugin or not
+                if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
+                    self::$_is_plugin = false;
+                }
+
+                // Create our private upload directory
+                Redux_Functions::initWpFilesystem();
+
+                self::$_upload_dir = trailingslashit( $wp_filesystem->wp_content_dir() ) . '/redux/';
+                self::$_upload_url = trailingslashit( content_url() ) . '/redux/';
+
+                if ( function_exists( 'sys_get_temp_dir' ) ) {
+                    $tmp = sys_get_temp_dir();
+                    if ( empty( $tmp ) ) {
+                        $tmpDir = self::$_upload_url . 'tmp';
+                        if ( file_exists( $tmpDir ) ) {
+                            Redux_Helpers::rmdir( $tmpDir );
+                        }
+                        putenv( 'TMPDIR=' . self::$_upload_dir . 'tmp' );
+                    }
+                }
+
+                // Ensure it exists
+                if ( ! is_dir( self::$_upload_dir ) ) {
+                    // Create the directory
+                    $wp_filesystem->mkdir( self::$_upload_dir );
+                }
+
+                do_action( 'redux/init' );
+            }
+
             /**
              * Class Constructor. Defines the args for the theme options class
              *
@@ -262,8 +267,6 @@
              * @return \ReduxFramework
              */
             public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
-                global $wp_version;
-
                 // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
                 if ( isset( $_POST ) && isset( $_POST['action'] ) && $_POST['action'] == 'heartbeat' ) {
 
@@ -459,7 +462,10 @@
             } // __construct()
 
 
-            public function network_admin_bar( $wp_admin_bar ) {
+            /**
+             * @param WP_Admin_Bar $wp_admin_bar
+             */
+            public function network_admin_bar( WP_Admin_Bar $wp_admin_bar ) {
 
                 $args = array(
                     'id'     => $this->args['opt_name'] . '_network_admin',
@@ -472,6 +478,11 @@
 
             }
 
+            /**
+             * @param $value
+             *
+             * @return array|string
+             */
             public function stripslashes_deep( $value ) {
                 $value = is_array( $value ) ?
                     array_map( 'stripslashes_deep', $value ) :
@@ -621,18 +632,18 @@
                      * @param array $value option value to set global_variable with
                      */
 
-                    $GLOBALS[ $this->args['global_variable'] ] = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $this->options );
+                    $GLOBALS[ $option_global ] = apply_filters( "redux/options/{$this->args['opt_name']}/global_variable", $this->options );
                     if ( isset( $this->transients['last_save'] ) ) {
                         // Deprecated
-                        $GLOBALS[ $this->args['global_variable'] ]['REDUX_last_saved'] = $this->transients['last_save'];
+                        $GLOBALS[ $option_global ]['REDUX_last_saved'] = $this->transients['last_save'];
                         // Last save key
-                        $GLOBALS[ $this->args['global_variable'] ]['REDUX_LAST_SAVE'] = $this->transients['last_save'];
+                        $GLOBALS[ $option_global ]['REDUX_LAST_SAVE'] = $this->transients['last_save'];
                     }
                     if ( isset( $this->transients['last_compiler'] ) ) {
                         // Deprecated
-                        $GLOBALS[ $this->args['global_variable'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
+                        $GLOBALS[ $option_global ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
                         // Last compiler hook key
-                        $GLOBALS[ $this->args['global_variable'] ]['REDUX_LAST_COMPILER'] = $this->transients['last_compiler'];
+                        $GLOBALS[ $option_global ]['REDUX_LAST_COMPILER'] = $this->transients['last_compiler'];
                     }
 
                     return true;
@@ -794,164 +805,164 @@
                         $data = array();
                         $args = wp_parse_args( $args, array() );
 
-                        if ( $type == "categories" || $type == "category" ) {
-                            $cats = get_categories( $args );
-                            if ( ! empty( $cats ) ) {
-                                foreach ( $cats as $cat ) {
+                        switch( $type ) {
+                            case "categories":
+                            case "category":
+                                $cats = get_categories( $args );
+                                foreach ( (array) $cats as $cat ) {
                                     $data[ $cat->term_id ] = $cat->name;
                                 }
-                                //foreach
-                            } // If
-                        } else if ( $type == "menus" || $type == "menu" ) {
-                            $menus = wp_get_nav_menus( $args );
-                            if ( ! empty( $menus ) ) {
-                                foreach ( $menus as $item ) {
+                                break;
+                            case "menus":
+                            case "menu":
+                                $menus = wp_get_nav_menus( $args );
+                                foreach ( (array) $menus as $item ) {
                                     $data[ $item->term_id ] = $item->name;
                                 }
-                                //foreach
-                            }
-                            //if
-                        } else if ( $type == "pages" || $type == "page" ) {
-                            if ( ! isset( $args['posts_per_page'] ) ) {
-                                $args['posts_per_page'] = 20;
-                            }
-                            $pages = get_pages( $args );
-                            if ( ! empty( $pages ) ) {
-                                foreach ( $pages as $page ) {
+                                break;
+                            case "pages":
+                            case "page":
+                                if ( ! isset( $args['posts_per_page'] ) ) {
+                                    $args['posts_per_page'] = 20;
+                                }
+                                $pages = get_pages( $args );
+                                foreach ( (array) $pages as $page ) {
                                     $data[ $page->ID ] = $page->post_title;
                                 }
-                                //foreach
-                            }
-                            //if
-                        } else if ( $type == "terms" || $type == "term" ) {
-                            $taxonomies = $args['taxonomies'];
-                            unset( $args['taxonomies'] );
-                            $terms = get_terms( $taxonomies, $args ); // this will get nothing
-                            if ( ! empty( $terms ) ) {
-                                foreach ( $terms as $term ) {
+                                break;
+                            case "terms":
+                            case "term":
+                                $taxonomies = $args['taxonomies'];
+                                unset( $args['taxonomies'] );
+
+                                $terms = get_terms( $taxonomies, $args ); // this will get nothing
+                                foreach ( (array)$terms as $term ) {
                                     $data[ $term->term_id ] = $term->name;
                                 }
-                                //foreach
-                            } // If
-                        } else if ( $type == "taxonomy" || $type == "taxonomies" ) {
-                            $taxonomies = get_taxonomies( $args );
-                            if ( ! empty( $taxonomies ) ) {
-                                foreach ( $taxonomies as $key => $taxonomy ) {
+                                break;
+                            case "taxonomy":
+                            case "taxonomies":
+                                $taxonomies = get_taxonomies( $args );
+                                foreach ( (array)$taxonomies as $key => $taxonomy ) {
                                     $data[ $key ] = $taxonomy;
                                 }
-                                //foreach
-                            } // If
-                        } else if ( $type == "posts" || $type == "post" ) {
-                            $posts = get_posts( $args );
-                            if ( ! empty( $posts ) ) {
-                                foreach ( $posts as $post ) {
+                                break;
+                            case "posts":
+                            case "post":
+                                $posts = get_posts( $args );
+                                foreach ( (array)$posts as $post ) {
                                     $data[ $post->ID ] = $post->post_title;
                                 }
-                                //foreach
-                            }
-                            //if
-                        } else if ( $type == "post_type" || $type == "post_types" ) {
-                            global $wp_post_types;
+                                break;
+                            case "post_type":
+                            case "post_types":
+                                global $wp_post_types;
 
-                            $defaults   = array(
-                                'public'              => true,
-                                'exclude_from_search' => false,
-                            );
-                            $args       = wp_parse_args( $args, $defaults );
-                            $output     = 'names';
-                            $operator   = 'and';
-                            $post_types = get_post_types( $args, $output, $operator );
+                                $defaults   = array(
+                                    'public'              => true,
+                                    'exclude_from_search' => false,
+                                );
+                                $args       = wp_parse_args( $args, $defaults );
+                                $output     = 'names';
+                                $operator   = 'and';
+                                $post_types = get_post_types( $args, $output, $operator );
 
-                            ksort( $post_types );
+                                ksort( $post_types );
 
-                            foreach ( $post_types as $name => $title ) {
-                                if ( isset( $wp_post_types[ $name ]->labels->menu_name ) ) {
-                                    $data[ $name ] = $wp_post_types[ $name ]->labels->menu_name;
-                                } else {
-                                    $data[ $name ] = ucfirst( $name );
+                                foreach ( $post_types as $name => $title ) {
+                                    if ( isset( $wp_post_types[ $name ]->labels->menu_name ) ) {
+                                        $data[ $name ] = $wp_post_types[ $name ]->labels->menu_name;
+                                    } else {
+                                        $data[ $name ] = ucfirst( $name );
+                                    }
                                 }
-                            }
-                        } else if ( $type == "tags" || $type == "tag" ) { // NOT WORKING!
-                            $tags = get_tags( $args );
-                            if ( ! empty( $tags ) ) {
-                                foreach ( $tags as $tag ) {
+                                break;
+                            case "tags":
+                            case "tag": // NOT WORKING!
+                                $tags = get_tags( $args );
+                                foreach ( (array)$tags as $tag ) {
                                     $data[ $tag->term_id ] = $tag->name;
                                 }
-                                //foreach
-                            }
-                            //if
-                        } else if ( $type == "menu_location" || $type == "menu_locations" ) {
-                            global $_wp_registered_nav_menus;
+                                break;
+                            case "menu_location":
+                            case "menu_locations":
+                                global $_wp_registered_nav_menus;
 
-                            foreach ( $_wp_registered_nav_menus as $k => $v ) {
-                                $data[ $k ] = $v;
-                            }
-                        } //if
-                        else if ( $type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" ||
-                                  $type == "font-icon" || $type == "font-icons" || $type == "icons"
-                        ) {
-
-                            /**
-                             * filter 'redux-font-icons'
-                             *
-                             * @deprecated
-                             *
-                             * @param array $font_icons array of elusive icon classes
-                             */
-                            $font_icons = apply_filters( 'redux-font-icons', array() ); // REMOVE LATER
-
-                            /**
-                             * filter 'redux/font-icons'
-                             *
-                             * @deprecated
-                             *
-                             * @param array $font_icons array of elusive icon classes
-                             */
-                            $font_icons = apply_filters( 'redux/font-icons', $font_icons );
-
-                            /**
-                             * filter 'redux/{opt_name}/field/font/icons'
-                             *
-                             * @deprecated
-                             *
-                             * @param array $font_icons array of elusive icon classes
-                             */
-                            $font_icons = apply_filters( "redux/{$this->args['opt_name']}/field/font/icons", $font_icons );
-
-                            foreach ( $font_icons as $k ) {
-                                $data[ $k ] = $k;
-                            }
-                        } else if ( $type == "roles" ) {
-                            /** @global WP_Roles $wp_roles */
-                            global $wp_roles;
-
-                            $data = $wp_roles->get_names();
-                        } else if ( $type == "sidebars" || $type == "sidebar" ) {
-                            /** @global array $wp_registered_sidebars */
-                            global $wp_registered_sidebars;
-
-                            foreach ( $wp_registered_sidebars as $key => $value ) {
-                                $data[ $key ] = $value['name'];
-                            }
-                        } else if ( $type == "capabilities" ) {
-                            /** @global WP_Roles $wp_roles */
-                            global $wp_roles;
-
-                            foreach ( $wp_roles->roles as $role ) {
-                                foreach ( $role['capabilities'] as $key => $cap ) {
-                                    $data[ $key ] = ucwords( str_replace( '_', ' ', $key ) );
+                                foreach ( $_wp_registered_nav_menus as $k => $v ) {
+                                    $data[ $k ] = $v;
                                 }
-                            }
-                        } else if ( $type == "callback" ) {
-                            if ( ! is_array( $args ) ) {
-                                $args = array( $args );
-                            }
-                            $data = call_user_func( $args[0] );
-                        }
-                        //if
-                    }
-                    //if
+                                break;
+                            case "elusive-icons":
+                            case "elusive-icon":
+                            case "elusive":
+                            case "font-icon":
+                            case "font-icons":
+                            case "icons":
 
+                                /**
+                                 * filter 'redux-font-icons'
+                                 *
+                                 * @deprecated
+                                 *
+                                 * @param array $font_icons array of elusive icon classes
+                                 */
+                                $font_icons = apply_filters( 'redux-font-icons', array() ); // REMOVE LATER
+
+                                /**
+                                 * filter 'redux/font-icons'
+                                 *
+                                 * @deprecated
+                                 *
+                                 * @param array $font_icons array of elusive icon classes
+                                 */
+                                $font_icons = apply_filters( 'redux/font-icons', $font_icons );
+
+                                /**
+                                 * filter 'redux/{opt_name}/field/font/icons'
+                                 *
+                                 * @deprecated
+                                 *
+                                 * @param array $font_icons array of elusive icon classes
+                                 */
+                                $font_icons = apply_filters( "redux/{$this->args['opt_name']}/field/font/icons", $font_icons );
+
+                                foreach ( $font_icons as $k ) {
+                                    $data[ $k ] = $k;
+                                }
+                                break;
+                            case "roles":
+                                /** @global WP_Roles $wp_roles */
+                                global $wp_roles;
+
+                                $data = $wp_roles->get_names();
+                                break;
+                            case "sidebars":
+                            case "sidebar":
+                                /** @global array $wp_registered_sidebars */
+                                global $wp_registered_sidebars;
+
+                                foreach ( $wp_registered_sidebars as $key => $value ) {
+                                    $data[ $key ] = $value['name'];
+                                }
+                                break;
+                            case "capabilities":
+                                /** @global WP_Roles $wp_roles */
+                                global $wp_roles;
+
+                                foreach ( $wp_roles->roles as $role ) {
+                                    foreach ( $role['capabilities'] as $key => $cap ) {
+                                        $data[ $key ] = ucwords( str_replace( '_', ' ', $key ) );
+                                    }
+                                }
+                                break;
+                            case "callback":
+                                if ( ! is_array( $args ) ) {
+                                    $args = array( $args );
+                                }
+                                $data = call_user_func( $args[0] );
+                                break;
+                        }
+                    }
                     $this->wp_data[ $type . $argsKey ] = $data;
                 }
 
@@ -2944,13 +2955,9 @@
                 }
 
                 if ( defined( 'WP_CACHE' ) && WP_CACHE && class_exists( 'W3_ObjectCache' ) ) {
-                    //echo "here";
                     $w3  = W3_ObjectCache::instance();
                     $key = $w3->_get_cache_key( $this->args['opt_name'] . '-transients', 'transient' );
-                    //echo $key;
                     $w3->delete( $key, 'transient', true );
-                    //set_transient($this->args['opt_name'].'-transients', $this->transients);
-                    //exit();
                 }
 
                 $this->set_transients( $this->transients );
@@ -3877,16 +3884,16 @@
                         /**
                          * filter 'redux/field/{opt_name}/{field.type}/render/after'
                          *
-                         * @param       string        rendered field markup
-                         * @param array $field        field data
+                         * @param string $_render      rendered field markup
+                         * @param array  $field        field data
                          */
                         $_render = apply_filters( "redux/field/{$this->args['opt_name']}/{$field['type']}/render/after", $_render, $field );
 
                         /**
                          * filter 'redux/field/{opt_name}/render/after'
                          *
-                         * @param       string        rendered field markup
-                         * @param array $field        field data
+                         * @param string $_render      rendered field markup
+                         * @param array  $field        field data
                          */
                         $_render = apply_filters( "redux/field/{$this->args['opt_name']}/render/after", $_render, $field );
 
@@ -4067,7 +4074,15 @@
                 //return $params;
             }
 
-            // Compare data for required field
+            /**
+             * Compare data for required field
+             *
+             * @param $parentValue
+             * @param $checkValue
+             * @param $operation
+             *
+             * @return bool
+             */
             function compareValueDependencies( $parentValue, $checkValue, $operation ) {
                 $return = false;
 
@@ -4178,6 +4193,10 @@
                 return $return;
             }
 
+            /**
+             * @param $field
+             * @param $data
+             */
             function checkRequiredDependencies( $field, $data ) {
                 //required field must not be hidden. otherwise hide this one by default
 
@@ -4218,11 +4237,5 @@
             }
         } // ReduxFramework
 
-        /**
-         * action 'redux/init'
-         *
-         * @param null
-         */
-        do_action( 'redux/init', ReduxFramework::init() );
-
-    } // class_exists('ReduxFramework')
+        ReduxFramework::init();
+    }
