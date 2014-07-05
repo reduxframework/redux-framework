@@ -307,6 +307,7 @@
                                 break;
 
                             case 'select':
+                            case 'button_set':
                                 if ( ( isset( $option['sortable'] ) && $option['sortable'] ) ) {
                                     continue;
                                 }
