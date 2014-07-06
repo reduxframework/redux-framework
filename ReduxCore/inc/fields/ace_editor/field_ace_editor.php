@@ -33,7 +33,13 @@
             function __construct( $field = array(), $value = '', $parent ) {
                 $this->parent = $parent;
                 $this->field  = $field;
-                $this->value  = trim( $value );
+                $this->value  = $value;
+                
+                if ( is_array($this->value)) {
+                    $this->value = '';
+                } else {
+                    $this->value = trim($this->value);
+                }
             }
 
             /**
