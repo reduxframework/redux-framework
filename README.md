@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.5 =
+* Fixed:      #1426 - menu_name not appearing on front end admin bar.
+* Added:      #1427 - button_set added to customizer UI.  Thanks @wpexplorer.
+
 = 3.3.3.4 =
 * Fixed:      #1429 - ACE Editor erroring with no default value set.
 * Fixed:      wp_filesystem now initialized with credentials in an effort to combat the tmp file issue.
