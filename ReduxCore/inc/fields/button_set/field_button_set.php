@@ -84,7 +84,7 @@
              * @return      void
              */
             public function render() {
-
+                    
                 // multi => true renders the field multi-selectable (checkbox vs radio)
                 echo '<div class="buttonset ui-buttonset">';
 

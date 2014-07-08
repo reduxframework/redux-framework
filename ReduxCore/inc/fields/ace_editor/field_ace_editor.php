@@ -34,12 +34,18 @@
                 $this->parent = $parent;
                 $this->field  = $field;
                 $this->value  = $value;
-                
+
                 if ( is_array($this->value)) {
                     $this->value = '';
                 } else {
                     $this->value = trim($this->value);
                 }
+                
+                if ( ! empty( $this->field['options'] ) ) {
+                    $this->field['args'] = $this->field['options'];
+                    unset( $this->field['options'] );
+                }                
+                
             }
 
             /**
@@ -119,8 +125,8 @@
                     'maxLines' => 30,
                 );
 
-                if ( isset( $field['options'] ) && ! empty( $field['options'] ) && is_array( $field['options'] ) ) {
-                    $params = wp_parse_args( $field['options'], $params );
+                if ( isset( $field['args'] ) && ! empty( $field['args'] ) && is_array( $field['args'] ) ) {
+                    $params = wp_parse_args( $field['args'], $params );
                 }
                 
                 return $params;

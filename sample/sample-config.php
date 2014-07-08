@@ -228,12 +228,10 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
             $sampleHTML = '';
             if (file_exists(dirname(__FILE__) . '/info-html.html')) {
-                /** @global WP_Filesystem_Direct $wp_filesystem  */
+                Redux_Functions::initWpFilesystem();
+                
                 global $wp_filesystem;
-                if (empty($wp_filesystem)) {
-                    require_once(ABSPATH . '/wp-admin/includes/file.php');
-                    WP_Filesystem();
-                }
+
                 $sampleHTML = $wp_filesystem->get_contents(dirname(__FILE__) . '/info-html.html');
             }
 

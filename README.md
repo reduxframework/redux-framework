@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.4 =
+* Fixed:      #1429 - ACE Editor erroring with no default value set.
+* Fixed:      wp_filesystem now initialized with credentials in an effort to combat the tmp file issue.
+
 = 3.3.3.3 =
 * Modified:   Code purification.
 

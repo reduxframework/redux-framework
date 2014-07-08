@@ -49,15 +49,15 @@ if (!class_exists('ReduxFramework_typography')) {
          * @since ReduxFramework 1.0.0
          */
         function __construct($field = array(), $value = '', $parent) {
-            global $wp_filesystem;
-
             $this->parent   = $parent;
             $this->field    = $field;
             $this->value    = $value;
 
             // Init wp_filesystem
-            Redux_Functions::initWpFilesystem();
-
+            //Redux_Functions::initWpFilesystem();
+            
+            //global $wp_filesystem;
+            
             // Set upload dir path for google fonts
             $this->font_dir =  ReduxFramework::$_upload_dir . 'google-fonts/';
 
@@ -65,7 +65,10 @@ if (!class_exists('ReduxFramework_typography')) {
             if (!is_dir($this->font_dir)) {
 
                 // Create it, if not found
-                $wp_filesystem->mkdir($this->font_dir, FS_CHMOD_DIR);
+                //$wp_filesystem->mkdir($this->font_dir, FS_CHMOD_DIR);
+                if ($this->parent->filesystem->execute('mkdir', $this->font_dir)) {
+                    return;
+                }
             }
 
             // Set google font file variables
@@ -73,7 +76,12 @@ if (!class_exists('ReduxFramework_typography')) {
 
             // Move installed googlefonts.json to upload location, if not exists
             if (!file_exists($this->google_json)) {
-                $wp_filesystem->copy(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $this->font_dir . 'googlefonts.json', false);
+                //(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $this->font_dir . 'googlefonts.json', false);
+                $param_array = array(
+                    'destination'   => $this->google_json,
+                    'overwrite'     => false
+                );
+                $this->parent->filesystem->execute('copy', ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $param_array );
             }
 
             // Set field array defaults.  No errors please
@@ -138,7 +146,7 @@ if (!class_exists('ReduxFramework_typography')) {
         function localize($field, $value = "") {
             $params = array();
 
-            if (true == $this->user_fonts) {
+            if (true == $this->user_fonts && !empty($this->field['fonts'])) {
                 $params['std_font'] = $this->field['fonts'];
             }
 
@@ -154,8 +162,6 @@ if (!class_exists('ReduxFramework_typography')) {
          * @since ReduxFramework 1.0.0
          */
         function render() {
-            global $wp_filesystem;
-
             // Since fonts declared is CSS (@font-face) are not rendered in the preview,
             // they can be declared in a CSS file and passed here so they DO display in
             // font preview.  Do NOT pass style.css in your theme, as that will mess up
@@ -842,10 +848,8 @@ if (!class_exists('ReduxFramework_typography')) {
          *
          */
         function getGoogleArray() {
-            global $wp_filesystem;
-
             // Is already present?
-            if (isset($this->parent->fonts['google']) && !empty($this->parent->fonts['google'])) {
+            if ((isset($this->parent->fonts['google']) && !empty($this->parent->fonts['google'])) || isset($this->parent->fonts['google']) && $this->parent->fonts['google'] == false) {
                 return;
             }
 
@@ -863,7 +867,9 @@ if (!class_exists('ReduxFramework_typography')) {
             }
 
             // Initialize the Wordpress filesystem, no more using file_put_contents function
-            Redux_Functions::initWpFilesystem();
+            //Redux_Functions::initWpFilesystem();
+            
+            //global $wp_filesystem;
 
             if (!file_exists($this->google_json)) {
                 $result = wp_remote_get(apply_filters('redux-google-fonts-api-url', 'https://www.googleapis.com/webfonts/v1/webfonts?key=') . $this->parent->args['google_api_key'], array('sslverify' => false));
@@ -878,15 +884,28 @@ if (!class_exists('ReduxFramework_typography')) {
                     }
 
                     if (!empty($this->parent->googleArray)) {
-                        $wp_filesystem->put_contents($this->google_json, json_encode($this->parent->googleArray), FS_CHMOD_FILE
-                                // predefined mode settings for WP files
+                        $param_array = array(
+                            'content'   => json_encode($this->parent->googleArray)
                         );
+                        
+                        if ($this->parent->filesystem->execute('put_contents', $this->google_json, $param_array )) {
+                            return;
+                        }
+                        //$wp_filesystem->put_contents($this->google_json, json_encode($this->parent->googleArray), FS_CHMOD_FILE );
                     }
                 } //if
             }
 
             if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
-                $fonts = json_decode($wp_filesystem->get_contents($this->google_json), true);
+                //$fonts = json_decode($wp_filesystem->get_contents($this->google_json), true);
+                $fonts = $this->parent->filesystem->execute('get_contents', $this->google_json );
+                
+                if ($fonts === true) {
+                    $this->parent->fonts['google'] = false;
+                    return;
+                } else {
+                    $fonts = json_decode($fonts, true);
+                }
 
                 // Fallback if file_get_contents won't work for wordpress. MEDIATEMPLE
                 if (empty($fonts)) {

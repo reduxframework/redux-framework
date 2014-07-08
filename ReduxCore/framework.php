@@ -51,6 +51,8 @@
 
         // General functions
         include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
+        
+        include_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
 
         /**
@@ -63,20 +65,17 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.3.3';
+            public static $_version = '3.3.3.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
             public static $_upload_url;
             public static $wp_content_url;
             public static $base_wp_content_url;
-            public static $_properties;
             public static $_is_plugin = true;
             public static $_as_plugin = false;
 
             public static function init() {
-
-                global $wp_filesystem;
 
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
                 self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
@@ -90,30 +89,6 @@
                 if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
                     self::$_is_plugin = false;
                 }
-
-                // Create our private upload directory
-                Redux_Functions::initWpFilesystem();
-
-                self::$_upload_dir = trailingslashit( $wp_filesystem->wp_content_dir() ) . '/redux/';
-                self::$_upload_url = trailingslashit( content_url() ) . '/redux/';
-
-                if ( function_exists( 'sys_get_temp_dir' ) ) {
-                    $tmp = sys_get_temp_dir();
-                    if ( empty( $tmp ) ) {
-                        $tmpDir = self::$_upload_url . 'tmp';
-                        if ( file_exists( $tmpDir ) ) {
-                            Redux_Helpers::rmdir( $tmpDir );
-                        }
-                        putenv( 'TMPDIR=' . self::$_upload_dir . 'tmp' );
-                    }
-                }
-
-                // Ensure it exists
-                if ( ! is_dir( self::$_upload_dir ) ) {
-                    // Create the directory
-                    $wp_filesystem->mkdir( self::$_upload_dir );
-                }
-
             }
 
             // ::init()
@@ -155,6 +130,7 @@
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
             public $typography_preview = array();
             public $args                = array();
+            public $filesystem          = null;
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -278,6 +254,11 @@
                      */
                     do_action( 'redux/construct', $this );
 
+                    $this->filesystem = new Redux_Filesystem($this);
+                    
+                    //set redux upload folder
+                    $this->set_redux_content();
+                    
                     // Set the default values
                     $this->_default_cleanup();
 
@@ -364,7 +345,19 @@
 
             } // __construct()
 
+            private function set_redux_content() {
+                self::$_upload_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/redux/';
+                self::$_upload_url = Redux_Helpers::cleanFilePath(trailingslashit( content_url() )) . '/redux/';
 
+                if ( ! is_dir( self::$_upload_dir ) ) {
+                    // Create the directory
+
+                    if ($this->filesystem->execute('mkdir', self::$_upload_dir)) {
+                        return;
+                    }
+                }
+            }
+            
             private function set_default_args() {
                 $this->args = array(
                     'opt_name'           => '',                    // Must be defined by theme/plugin
@@ -982,6 +975,12 @@
                                 if ( empty( $field['id'] ) && empty( $field['type'] ) ) {
                                     continue;
                                 }
+                                
+                                if ( in_array($field['type'], array('ace_editor', 'text')) && isset($field['options']) ) {
+                                    $this->sections[$sk]['fields'][$k]['args'] = $field['options'];
+                                    unset($this->sections[$sk]['fields'][$k]['options']);
+                                }                                
+                                
                                 if ( $field['type'] == "section" && isset( $field['indent'] ) && $field['indent'] == "true" ) {
                                     $field['class'] = isset( $field['class'] ) ? $field['class'] : '';
                                     $field['class'] .= "redux-section-indent-start";
@@ -995,7 +994,7 @@
                                 }
                                 if ( isset( $field['default'] ) ) {
                                     $this->options_defaults[ $field['id'] ] = $field['default'];
-                                } elseif ( isset( $field['options'] ) ) {
+                                } elseif ( isset( $field['options'] ) && ($field['type'] != "ace_editor") ) {
                                     // Sorter data filter
                                     if ( $field['type'] == "sorter" && isset( $field['data'] ) && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
                                         if ( ! isset( $field['args'] ) ) {
