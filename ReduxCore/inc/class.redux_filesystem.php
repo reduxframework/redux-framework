@@ -55,7 +55,6 @@ if (!class_exists('Redux_Filesystem')){
             
             // Do unique stuff
             if ($action == 'mkdir') {
-                echo $file;
                 $res = $wp_filesystem->$action($file, 0755 );
             } elseif ($action == 'copy') {
                 echo $wp_filesystem->copy($file, $destination, $overwrite, 0644 );
