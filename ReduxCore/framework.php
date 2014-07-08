@@ -1254,7 +1254,7 @@
                 } else {
                     $nodeargs = array(
                         'id'    => $this->args["page_slug"],
-                        'title' => "<span class='ab-icon dashicons-admin-generic'></span>" . $theme_data->get( 'Name' ) . " " . __( 'Options', 'redux-framework-demo' ),
+                        'title' => "<span class='ab-icon dashicons-admin-generic'></span>" . $this->args['menu_title'], // $theme_data->get( 'Name' ) . " " . __( 'Options', 'redux-framework-demo' ),
                         'href'  => admin_url( 'admin.php?page=' . $this->args["page_slug"] ),
                         'meta'  => array()
                     );
