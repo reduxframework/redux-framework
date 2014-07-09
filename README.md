@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.6 =
+* Fixed:      #1432 - Theme check failing when double-slashes existed in get_template_directory() return.
+* Removed:    curlRead from helper class.
+
 = 3.3.3.5 =
 * Fixed:      #1426 - menu_name not appearing on front end admin bar.
 * Added:      #1427 - button_set added to customizer UI.  Thanks @wpexplorer.

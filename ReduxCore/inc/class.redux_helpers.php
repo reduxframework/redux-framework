@@ -16,23 +16,6 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
      */
     class Redux_Helpers {
 
-        public static function curlRead( $filename ) {
-            $ch = curl_init();
-
-            curl_setopt( $ch, CURLOPT_URL, $filename );
-            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-
-            $data = curl_exec( $ch );
-
-            curl_close( $ch );
-
-            if ( empty( $data ) ) {
-                $data = false;
-            }
-
-            return $data;
-        }
-
         public static function tabFromField( $parent, $field ) {
             foreach ( $parent->sections as $k => $section ) {
                 if ( ! isset( $section['title'] ) ) {
@@ -137,6 +120,8 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
          */
         public static function cleanFilePath( $path ) {
             $path = str_replace( '', '', str_replace( array( "\\", "\\\\" ), '/', $path ) );
+            $path = str_replace('//', '/', $path);
+            
             if ( $path[ strlen( $path ) - 1 ] === '/' ) {
                 $path = rtrim( $path, '/' );
             }
