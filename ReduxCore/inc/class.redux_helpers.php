@@ -57,7 +57,13 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
         }
 
         public static function isParentTheme( $file ) {
-            if ( strpos( self::cleanFilePath( $file ), self::cleanFilePath( get_template_directory() ) ) !== false ) {
+            $file   = self::cleanFilePath( $file );
+            $dir    = self::cleanFilePath( get_template_directory() );
+            
+            $file   = str_replace('//', '/', $file);
+            $dir    = str_replace('//', '/', $dir);
+            
+            if ( strpos( $file, $dir ) !== false ) {
                 return true;
             }
 
@@ -65,7 +71,13 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
         }
 
         public static function isChildTheme( $file ) {
-            if ( strpos( self::cleanFilePath( $file ), self::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
+            $file   = self::cleanFilePath( $file );
+            $dir    = self::cleanFilePath( get_stylesheet_directory() );
+            
+            $file   = str_replace('//', '/', $file);
+            $dir    = str_replace('//', '/', $dir);
+            
+            if ( strpos( $file, $dir ) !== false ) {
                 return true;
             }
 
@@ -120,7 +132,6 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
          */
         public static function cleanFilePath( $path ) {
             $path = str_replace( '', '', str_replace( array( "\\", "\\\\" ), '/', $path ) );
-            $path = str_replace('//', '/', $path);
             
             if ( $path[ strlen( $path ) - 1 ] === '/' ) {
                 $path = rtrim( $path, '/' );
