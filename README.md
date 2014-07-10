@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.8 =
+* Fixed:      Issues with file writing. Basically many users don't install WordPress with all the permissions
+              correct. So... Had to move it back to /uploads/. Sorry Otto, that's just how it is.
+
 = 3.3.3.7 =
 * Fixed:      #1440 - flaw in new cleanFilePath logic.
 
