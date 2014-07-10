@@ -346,8 +346,8 @@
             } // __construct()
 
             private function set_redux_content() {
-                self::$_upload_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/redux/';
-                self::$_upload_url = Redux_Helpers::cleanFilePath(trailingslashit( content_url() )) . '/redux/';
+                self::$_upload_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/uploads/redux/';
+                self::$_upload_url = Redux_Helpers::cleanFilePath(trailingslashit( content_url() )) . '/uploads/redux/';
 
                 if ( ! is_dir( self::$_upload_dir ) ) {
                     // Create the directory
