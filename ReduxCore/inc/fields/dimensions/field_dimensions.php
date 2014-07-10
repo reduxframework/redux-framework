@@ -38,6 +38,7 @@
                 $defaults = array(
                     'width'          => true,
                     'height'         => true,
+                    'border-radius'  => true,
                     'units_extended' => false,
                     'units'          => 'px',
                     'mode'           => array(
@@ -51,6 +52,7 @@
                 $defaults = array(
                     'width'  => '',
                     'height' => '',
+                    'border-radius' => '',
                     'units'  => 'px'
                 );
 
@@ -179,6 +181,22 @@
                 }
 
                 /**
+                 * border-radius
+                 * */
+                if ( $this->field['border-radius'] === true ) {
+                    if ( isset( $this->value['border-radius'] ) && strpos( $this->value['border-radius'], $this->value['units'] ) === false ) {
+                        $this->value['border-radius'] = filter_var( $this->value['border-radius'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
+                        if ( $this->field['units'] !== false ) {
+                            $this->value['border-radius'] .= $this->value['units'];
+                        }
+                    }
+                    echo '<div class="field-dimensions-input input-prepend">';
+                    echo '<span class="add-on"><i class="el-icon-fullscreen icon-large"></i></span>';
+                    echo '<input type="text" class="redux-dimensions-input redux-dimensions-border-radius mini' . $this->field['class'] . '" placeholder="' . __( 'Border-Radius', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-border-radius" value="' . filter_var( $this->value['border-radius'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
+                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-border-radius" name="' . $this->field['name'] . '[border-radius]' . $this->field['name_suffix'] . '" value="' . $this->value['border-radius'] . '"></div>';
+                }
+
+                /**
                  * Units
                  * */
                 // If units field is set and units field NOT false then
@@ -267,10 +285,12 @@
 
                 $height = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'height';
                 $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';
+                $border_radius  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'border-radius';
 
                 $cleanValue = array(
                     $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_INT ) : '',
                     $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_INT ) : '',
+                    $border_radius  => isset( $this->value['border-radius'] ) ? filter_var( $this->value['border-radius'], FILTER_SANITIZE_NUMBER_INT ) : '',
                 );
 
                 $style = "";
