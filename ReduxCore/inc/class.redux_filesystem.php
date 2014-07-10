@@ -46,8 +46,12 @@ if (!class_exists('Redux_Filesystem')){
                 if (!is_admin()) {
                     return;
                 }
-                
-                request_filesystem_credentials($url, '', true, false);
+                // Never load this unless we're on the panel page.
+                if ( is_admin() && isset( $_GET['page'] ) && $_GET['page'] == $this->parent->args['page_slug'] ) {
+                    $creds = request_filesystem_credentials($url, '', false, false);    
+                } else {
+                    return;
+                }
                 return true;
             }   
             
