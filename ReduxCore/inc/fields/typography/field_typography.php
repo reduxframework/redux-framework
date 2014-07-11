@@ -583,9 +583,7 @@ if (!class_exists('ReduxFramework_typography')) {
 
                 if (!empty($font['font-style']) || !empty($font['all-styles'])) {
                     $link.= ':';
-                    print_r($font['all-styles']);
                     if (!empty($font['all-styles'])) {
-                        
                         $link .= implode(',', $font['all-styles']);
                     } else if (!empty($font['font-style'])) {
                         $link .= implode(',', $font['font-style']);
