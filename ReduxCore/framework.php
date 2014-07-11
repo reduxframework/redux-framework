@@ -361,7 +361,7 @@
                         function no_writing_permissions_admin_notice() {
                             ?>
                             <div class="error">
-                                <p><?php _e( 'Unable to create a required directory. Please ensure that <code>'. Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '</code> has the proper read/write permissions.', 'redux-framework' ); ?></p>
+                                <p><?php _e( 'Unable to create a required directory. Please ensure that <code>'. Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/uploads/</code> has the proper read/write permissions.', 'redux-framework' ); ?></p>
                             </div>
                         <?php
                         }
