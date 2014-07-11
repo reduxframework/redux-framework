@@ -17,17 +17,10 @@
 
             public function execute( $action, $file, $params = '' ) {
 
-                if ( isset( $this->filesystem->killswitch ) ) {
-                    return false;
-                }
                 global $wp_filesystem;
 
                 if ( ! empty ( $params ) ) {
                     extract( $params );
-                }
-
-                if ( ! is_admin() ) {
-                    return;
                 }
 
                 // Setup the filesystem with creds
@@ -42,9 +35,9 @@
                 }
 
                 $url = wp_nonce_url( $base );
-                if ( ! isset( $this->creds ) && is_admin() ) {
+                if ( ! isset( $this->creds ) ) {
                     $this->creds = request_filesystem_credentials( $url, 'direct', false, false );
-                    if ( ! $this->creds ) {
+                    if ( ! $this->creds && is_admin() && !isset( $this->filesystem->killswitch ) ) {
                         $this->creds = request_filesystem_credentials( $url, '', false, false );
                     }
                 }
@@ -60,11 +53,11 @@
                 $wp_filesystem =& $wp_filesystem;
 
                 // Do unique stuff
-                if ( $action == 'mkdir' ) {
+                if ( $action == 'mkdir' && !isset( $this->filesystem->killswitch ) ) {
                     $res = $wp_filesystem->$action( $file, 0755 );
-                } elseif ( $action == 'copy' ) {
+                } elseif ( $action == 'copy' && !isset( $this->filesystem->killswitch ) ) {
                     $res = false;
-                } elseif ( $action == 'put_contents' ) {
+                } elseif ( $action == 'put_contents' && !isset( $this->filesystem->killswitch ) ) {
                     $wp_filesystem->put_contents( $file, $content, 0644 );
                     $res = false;
                 } elseif ( $action == 'get_contents' ) {
