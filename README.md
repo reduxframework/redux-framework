@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.4.1 =
+* Fixed:      Font debug was left from last commit. Sorry all.
+
 = 3.3.3.8 =
 * Fixed:      Issues with file writing. Basically many users don't install WordPress with all the permissions correct. So... Had to move it back to /uploads/. Sorry Otto, that's just how it is.
 * Fixed:      #1444 - output of typography all_styles when font_style UI was hidden.              
