@@ -32,7 +32,11 @@ if (!class_exists('Redux_Filesystem')){
             }
             
             $url = wp_nonce_url($base);
-            $creds = request_filesystem_credentials($url, '', false, false);
+            if ( is_admin() && isset( $_GET['page'] ) && $_GET['page'] == $this->parent->args['page_slug'] ) {
+                $creds = request_filesystem_credentials($url, '', false, false);    
+            } else {
+                return;
+            }
 
             if (false === $creds) {
                 if (!is_admin()) {
