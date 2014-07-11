@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.1
-Stable tag: 3.3.3
+Stable tag: 3.3.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,20 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.3.4 =
+* Fixed:      Issues with file writing. Basically many users don't install WordPress with all the permissions correct. So... Had to move it back to /uploads/. Sorry Otto, that's just how it is.
+* Fixed:      #1444 - output of typography all_styles when font_style UI was hidden.              
+* Fixed:      #1440 - flaw in new cleanFilePath logic.
+* Fixed:      #1432 - Theme check failing when double-slashes existed in get_template_directory() return.
+* Removed:    curlRead from helper class.
+* Fixed:      #1426 - menu_name not appearing on front end admin bar.
+* Added:      #1427 - button_set added to customizer UI.  Thanks @wpexplorer.
+* Fixed:      #1429 - ACE Editor erroring with no default value set.
+* Fixed:      wp_filesystem now initialized with credentials in an effort to combat the tmp file issue.
+* Modified:   Code purification.
+* Modified:   How section tabs work. Isolated within the redux-container class.
+* Modified:   #1412 - Redesigned text label, placeholder fix.
 
 = 3.3.3 =
 * Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves on other panels.
