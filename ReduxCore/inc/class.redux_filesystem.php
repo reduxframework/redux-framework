@@ -22,7 +22,6 @@
                 }
                 global $wp_filesystem;
 
-
                 if ( ! empty ( $params ) ) {
                     extract( $params );
                 }
@@ -32,6 +31,7 @@
                 }
 
                 // Setup the filesystem with creds
+                require_once( ABSPATH . '/wp-admin/includes/file.php' );
                 require_once( ABSPATH . '/wp-admin/includes/file.php' );
 
                 if ( $this->parent->args['menu_type'] == 'submenu' ) {
@@ -43,7 +43,10 @@
 
                 $url = wp_nonce_url( $base );
                 if ( ! isset( $this->creds ) && is_admin() ) {
-                    $this->creds = request_filesystem_credentials( $url, '', false, false );
+                    $this->creds = request_filesystem_credentials( $url, 'direct', false, false );
+                    if ( ! $this->creds ) {
+                        $this->creds = request_filesystem_credentials( $url, '', false, false );
+                    }
                 }
 
                 if ( false === $this->creds ) {

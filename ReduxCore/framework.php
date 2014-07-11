@@ -346,11 +346,15 @@
             } // __construct()
 
             private function set_redux_content() {
-                self::$_upload_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/uploads/redux/';
+                $wp_content_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR ));
+                self::$_upload_dir = $wp_content_dir . '/uploads/redux/';
                 self::$_upload_url = Redux_Helpers::cleanFilePath(trailingslashit( content_url() )) . '/uploads/redux/';
 
                 if ( ! is_dir( self::$_upload_dir ) ) {
                     // Create the directory
+
+                    $dir_writable = substr(sprintf('%o', fileperms($wp_content_dir)), -4) == "0774" ? "true" : "false";
+
                     if ($this->filesystem->execute('mkdir', self::$_upload_dir)) {
                         return;
                     } else {
