@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.4.4 =
+* Fixed:      #1450 - Saves witch values with no `on` or `off` args make the core unhappy.
+
 = 3.3.4.3 =
 * Fixed:      #1444, again, due to filesystem growing pains.
 * Fixed:      #1449 - Restoring `options` argument over a lousy attempt to fix placeholder.

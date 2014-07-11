@@ -38,22 +38,14 @@
                 }
 
                 //Label ON
-                if ( ! isset( $this->field['on'] ) ) {
-                    $on = __( 'On', 'redux-framework' );
-                } else {
-                    $on = $this->field['on'];
-                }
-
+                $this->field['on'] = isset($this->field['on']) ? $this->field['on'] : __( 'On', 'redux-framework' );
+                
                 //Label OFF
-                if ( ! isset( $this->field['off'] ) ) {
-                    $off = __( 'Off', 'redux-framework' );
-                } else {
-                    $off = $this->field['off'];
-                }
+                $this->field['off'] = isset($this->field['off']) ? $this->field['off'] : __( 'Off', 'redux-framework' );
 
                 echo '<div class="switch-options">';
-                echo '<label class="cb-enable' . $cb_enabled . '" data-id="' . $this->field['id'] . '"><span>' . $on . '</span></label>';
-                echo '<label class="cb-disable' . $cb_disabled . '" data-id="' . $this->field['id'] . '"><span>' . $off . '</span></label>';
+                echo '<label class="cb-enable' . $cb_enabled . '" data-id="' . $this->field['id'] . '"><span>' . $this->field['on'] . '</span></label>';
+                echo '<label class="cb-disable' . $cb_disabled . '" data-id="' . $this->field['id'] . '"><span>' . $this->field['off'] . '</span></label>';
                 //echo '<input type="hidden" class="checkbox checkbox-input' . $this->field['class'] . '" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $this->value . '" />';
                 echo '<input type="hidden" class="checkbox checkbox-input' . $this->field['class'] . '" id="' . $this->field['id'] . '" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']' . $this->field['name_suffix'] . '" value="' . $this->value . '" />';
                 echo '</div>';
