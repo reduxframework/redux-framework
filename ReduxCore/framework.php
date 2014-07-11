@@ -65,7 +65,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.4.2';
+            public static $_version = '3.3.4.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -989,7 +989,7 @@
                                     continue;
                                 }
                                 
-                                if ( in_array($field['type'], array('ace_editor', 'text')) && isset($field['options']) ) {
+                                if ( in_array($field['type'], array('ace_editor')) && isset($field['options']) ) {
                                     $this->sections[$sk]['fields'][$k]['args'] = $field['options'];
                                     unset($this->sections[$sk]['fields'][$k]['options']);
                                 }                                

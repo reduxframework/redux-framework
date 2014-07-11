@@ -71,6 +71,12 @@ if (!class_exists('ReduxFramework_typography')) {
                 }
             }
 
+            // Shim out old arg to new
+            if (isset($this->field['all_styles']) && !empty($this->field['all_styles'])) {
+                $this->field['all-styles'] = $this->field['all_styles'];
+                unset ($this->field['all_styles']);
+            }
+            
             // Set google font file variables
             $this->google_json = $this->font_dir . 'googlefonts.json';
 
@@ -128,7 +134,6 @@ if (!class_exists('ReduxFramework_typography')) {
                 'font-size'         => '',
             );
             $this->value = wp_parse_args($this->value, $defaults);
-            
             
             // Get the google array
             $this->getGoogleArray();
@@ -651,6 +656,12 @@ if (!class_exists('ReduxFramework_typography')) {
         function output() {
             $font = $this->value;
 
+            // Shim out old arg to new
+            if (isset($this->field['all_styles']) && !empty($this->field['all_styles'])) {
+                $this->field['all-styles'] = $this->field['all_styles'];
+                unset ($this->field['all_styles']);
+            }            
+            
             // Check for font-backup.  If it's set, stick it on a variabhle for
             // later use.
             if (!empty($font['font-family']) && !empty($font['font-backup'])) {
@@ -753,7 +764,7 @@ if (!class_exists('ReduxFramework_typography')) {
                             $this->parent->typography[$font['font-family']] = array();
                         }
 
-                        if (isset($this->field['all_styles'])) {
+                        if (isset($this->field['all-styles'])) {
                             if (!isset($font['font-options']) || empty($font['font-options'])) {
                                 $this->getGoogleArray();
 
@@ -765,7 +776,7 @@ if (!class_exists('ReduxFramework_typography')) {
                             }
                         }
 
-                        if (isset($font['font-options']) && !empty($font['font-options']) && isset($this->field['all_styles']) && filter_var($this->field['all_styles'], FILTER_VALIDATE_BOOLEAN)) {
+                        if (isset($font['font-options']) && !empty($font['font-options']) && isset($this->field['all-styles']) && filter_var($this->field['all-styles'], FILTER_VALIDATE_BOOLEAN)) {
                             if (isset($font['font-options']) && !empty($font['font-options']['variants'])) {
                                 if (!isset($this->parent->typography[$font['font-family']]['all-styles']) || empty($this->parent->typography[$font['font-family']]['all-styles'])) {
                                     $this->parent->typography[$font['font-family']]['all-styles'] = array();
@@ -899,7 +910,7 @@ if (!class_exists('ReduxFramework_typography')) {
             if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
                 //$fonts = json_decode($wp_filesystem->get_contents($this->google_json), true);
                 $fonts = $this->parent->filesystem->execute('get_contents', $this->google_json );
-                
+
                 if ($fonts === true) {
                     $this->parent->fonts['google'] = false;
                     return;
@@ -907,15 +918,10 @@ if (!class_exists('ReduxFramework_typography')) {
                     $fonts = json_decode($fonts, true);
                 }
 
-                // Fallback if file_get_contents won't work for wordpress. MEDIATEMPLE
-//                if (empty($fonts)) {
-//                    $fonts = Redux_Helpers::curlRead($this->google_json);
-//                }
-
                 if (isset($fonts) && !empty($fonts) && is_array($fonts) && $fonts != false) {
                     $this->parent->fonts['google'] = $fonts;
                     $this->parent->googleArray = $fonts;
-                    
+
                     // optgroup
                     $this->parent->font_groups['google'] = array(
                         'text'      => __('Google Webfonts', 'redux-framework'),
