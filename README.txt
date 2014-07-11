@@ -126,7 +126,8 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 == Changelog ==
 
 = 3.3.4 =
-* Fixed:      Issues with file writing. Basically many users don't install WordPress with all the permissions correct. So... Had to move it back to /uploads/. Sorry Otto, that's just how it is.
+* Fixed:      Issues with file writing. Basically many users don't install WordPress with all the permissions
+              correct. So... Had to move it back to ~/uploads/. Sorry Otto, that's just how it is.
 * Fixed:      #1444 - output of typography all_styles when font_style UI was hidden.              
 * Fixed:      #1440 - flaw in new cleanFilePath logic.
 * Fixed:      #1432 - Theme check failing when double-slashes existed in get_template_directory() return.
