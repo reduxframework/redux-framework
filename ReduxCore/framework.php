@@ -351,9 +351,18 @@
 
                 if ( ! is_dir( self::$_upload_dir ) ) {
                     // Create the directory
-
                     if ($this->filesystem->execute('mkdir', self::$_upload_dir)) {
                         return;
+                    } else {
+                        function no_writing_permissions_admin_notice() {
+                            ?>
+                            <div class="error">
+                                <p><?php _e( 'Unable to create a directory. Please ensure that <code>'. Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '</code> has the proper read/write permissions.', 'redux-framework' ); ?></p>
+                            </div>
+                        <?php
+                        }
+                        add_action( 'admin_notices', 'no_writing_permissions_admin_notice' );
+                        $this->filesystem->killswitch = true;
                     }
                 }
             }
