@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.4.2 =
+* Fixed:      More file permission issues.
+
 = 3.3.4.1 =
 * Fixed:      Font debug was left from last commit. Sorry all.
 
