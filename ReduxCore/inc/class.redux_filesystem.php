@@ -56,6 +56,7 @@
                 if ( $action == 'mkdir' && !isset( $this->filesystem->killswitch ) ) {
                     $res = $wp_filesystem->$action( $file, 0755 );
                 } elseif ( $action == 'copy' && !isset( $this->filesystem->killswitch ) ) {
+                    $wp_filesystem->copy( $file, $destination, $overwrite, $chmod );
                     $res = false;
                 } elseif ( $action == 'put_contents' && !isset( $this->filesystem->killswitch ) ) {
                     $wp_filesystem->put_contents( $file, $content, 0644 );

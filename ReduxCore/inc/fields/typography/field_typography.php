@@ -85,7 +85,8 @@ if (!class_exists('ReduxFramework_typography')) {
                 //(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $this->font_dir . 'googlefonts.json', false);
                 $param_array = array(
                     'destination'   => $this->google_json,
-                    'overwrite'     => false
+                    'overwrite'     => false,
+                    'chmod'         => 0644
                 );
                 $this->parent->filesystem->execute('copy', ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $param_array );
             }
