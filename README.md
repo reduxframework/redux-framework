@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.4.6 =
+* Fixed:      #1454 - Chmod permissions for redux folder.
+
 = 3.3.4.5 =
 * Fixed:      #1451 - Googlefonts not loading due to failing copy function.
 

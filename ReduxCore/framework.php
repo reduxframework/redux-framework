@@ -65,7 +65,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.4.5';
+            public static $_version = '3.3.4.6';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -353,7 +353,7 @@
                 if ( ! is_dir( self::$_upload_dir ) ) {
                     // Create the directory
 
-                    $dir_writable = substr(sprintf('%o', fileperms($wp_content_dir)), -4) == "0774" ? "true" : "false";
+                    $dir_writable = substr(sprintf('%o', fileperms($wp_content_dir)), -4) == "0777" ? "true" : "false";
 
                     if ($this->filesystem->execute('mkdir', self::$_upload_dir)) {
                         return;
