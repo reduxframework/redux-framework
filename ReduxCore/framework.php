@@ -51,7 +51,7 @@
 
         // General functions
         include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
-        
+
         include_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
 
@@ -65,7 +65,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.4.7';
+            public static $_version = '3.3.4.8';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -129,8 +129,8 @@
             private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
             public $typography_preview = array();
-            public $args                = array();
-            public $filesystem          = null;
+            public $args = array();
+            public $filesystem = null;
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -254,11 +254,11 @@
                      */
                     do_action( 'redux/construct', $this );
 
-                    $this->filesystem = new Redux_Filesystem($this);
-                    
+                    $this->filesystem = new Redux_Filesystem( $this );
+
                     //set redux upload folder
                     $this->set_redux_content();
-                    
+
                     // Set the default values
                     $this->_default_cleanup();
 
@@ -346,67 +346,76 @@
             } // __construct()
 
             private function set_redux_content() {
-                $wp_content_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR ));
+                $wp_content_dir    = Redux_Helpers::cleanFilePath( trailingslashit( WP_CONTENT_DIR ) );
                 self::$_upload_dir = $wp_content_dir . '/uploads/redux/';
-                self::$_upload_url = Redux_Helpers::cleanFilePath(trailingslashit( content_url() )) . '/uploads/redux/';
+                self::$_upload_url = Redux_Helpers::cleanFilePath( trailingslashit( content_url() ) ) . '/uploads/redux/';
 
                 if ( ! is_dir( self::$_upload_dir ) ) {
-                    // Create the directory
-
-                    $dir_writable = substr(sprintf('%o', fileperms($wp_content_dir)), -4) == "0777" ? "true" : "false";
-
-                    if ($this->filesystem->execute('mkdir', self::$_upload_dir)) {
-                        return;
-                    } else {
-                        function no_writing_permissions_admin_notice() {
-                            ?>
-                            <div class="error">
-                                <p><?php _e( 'Unable to create a required directory. Please ensure that <code>'. Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/uploads/</code> has the proper read/write permissions.', 'redux-framework' ); ?></p>
-                            </div>
-                        <?php
-                        }
-                        add_action( 'admin_notices', 'no_writing_permissions_admin_notice' );
-                        $this->filesystem->killswitch = true;
-                    }
+                    $this->filesystem->execute( 'mkdir', self::$_upload_dir );
                 }
             }
-            
+
             private function set_default_args() {
                 $this->args = array(
-                    'opt_name'           => '',                    // Must be defined by theme/plugin
-                    'google_api_key'     => '',                    // Must be defined to add google fonts to the typography module
-                    'last_tab'           => '',                    // force a specific tab to always show on reload
-                    'menu_icon'          => '',                    // menu icon
-                    'menu_title'         => '',                    // menu title/text
+                    'opt_name'           => '',
+                    // Must be defined by theme/plugin
+                    'google_api_key'     => '',
+                    // Must be defined to add google fonts to the typography module
+                    'last_tab'           => '',
+                    // force a specific tab to always show on reload
+                    'menu_icon'          => '',
+                    // menu icon
+                    'menu_title'         => '',
+                    // menu title/text
                     'page_icon'          => 'icon-themes',
-                    'page_title'         => '',                    // option page title
+                    'page_title'         => '',
+                    // option page title
                     'page_slug'          => '_options',
                     'page_permissions'   => 'manage_options',
-                    'menu_type'          => 'menu',                // ('menu'|'submenu')
-                    'page_parent'        => 'themes.php',          // requires menu_type = 'submenu
+                    'menu_type'          => 'menu',
+                    // ('menu'|'submenu')
+                    'page_parent'        => 'themes.php',
+                    // requires menu_type = 'submenu
                     'page_priority'      => null,
-                    'allow_sub_menu'     => true,                  // allow submenus to be added if menu_type == menu
-                    'save_defaults'      => true,                  // Save defaults to the DB on it if empty
+                    'allow_sub_menu'     => true,
+                    // allow submenus to be added if menu_type == menu
+                    'save_defaults'      => true,
+                    // Save defaults to the DB on it if empty
                     'footer_credit'      => '',
                     'async_typography'   => false,
-                    'class'              => '',                    // Class that gets appended to all redux-containers
-                    'admin_bar'          => true,                  // Show the panel pages on the admin bar
+                    'class'              => '',
+                    // Class that gets appended to all redux-containers
+                    'admin_bar'          => true,
+                    // Show the panel pages on the admin bar
                     'help_tabs'          => array(),
                     'help_sidebar'       => '',
-                    'database'           => '',                    // possible: options, theme_mods, theme_mods_expanded, transient, network
-                    'customizer'         => false,                 // setting to true forces get_theme_mod_expanded
-                    'global_variable'    => '',                    // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
-                    'output'             => true,                  // Dynamically generate CSS
-                    'compiler'           => true,                  // Initiate the compiler hook
-                    'output_tag'         => true,                  // Print Output Tag
+                    'database'           => '',
+                    // possible: options, theme_mods, theme_mods_expanded, transient, network
+                    'customizer'         => false,
+                    // setting to true forces get_theme_mod_expanded
+                    'global_variable'    => '',
+                    // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
+                    'output'             => true,
+                    // Dynamically generate CSS
+                    'compiler'           => true,
+                    // Initiate the compiler hook
+                    'output_tag'         => true,
+                    // Print Output Tag
                     'transient_time'     => '',
-                    'default_show'       => false,                 // If true, it shows the default value
-                    'default_mark'       => '',                    // What to print by the field's title if the value shown is default
-                    'update_notice'      => true,                  // Recieve an update notice of new commits when in dev mode
-                    'disable_save_warn'  => false,                 // Disable the save warn
-                    'open_expanded'      => false,                 // Start the panel fully expanded to start with
-                    'network_admin'      => false,                 // Enable network admin when using network database mode
-                    'network_sites'      => true,                  // Enable sites as well as admin when using network database mode
+                    'default_show'       => false,
+                    // If true, it shows the default value
+                    'default_mark'       => '',
+                    // What to print by the field's title if the value shown is default
+                    'update_notice'      => true,
+                    // Recieve an update notice of new commits when in dev mode
+                    'disable_save_warn'  => false,
+                    // Disable the save warn
+                    'open_expanded'      => false,
+                    // Start the panel fully expanded to start with
+                    'network_admin'      => false,
+                    // Enable network admin when using network database mode
+                    'network_sites'      => true,
+                    // Enable sites as well as admin when using network database mode
                     'hide_reset'         => false,
                     'hints'              => array(
                         'icon'          => 'icon-question-sign',
@@ -441,7 +450,7 @@
                     'system_info'        => false,
                 );
             }
-            
+
             public function network_admin_bar( $wp_admin_bar ) {
 
                 $args = array(
@@ -988,12 +997,12 @@
                                 if ( empty( $field['id'] ) && empty( $field['type'] ) ) {
                                     continue;
                                 }
-                                
-                                if ( in_array($field['type'], array('ace_editor')) && isset($field['options']) ) {
-                                    $this->sections[$sk]['fields'][$k]['args'] = $field['options'];
-                                    unset($this->sections[$sk]['fields'][$k]['options']);
-                                }                                
-                                
+
+                                if ( in_array( $field['type'], array( 'ace_editor' ) ) && isset( $field['options'] ) ) {
+                                    $this->sections[ $sk ]['fields'][ $k ]['args'] = $field['options'];
+                                    unset( $this->sections[ $sk ]['fields'][ $k ]['options'] );
+                                }
+
                                 if ( $field['type'] == "section" && isset( $field['indent'] ) && $field['indent'] == "true" ) {
                                     $field['class'] = isset( $field['class'] ) ? $field['class'] : '';
                                     $field['class'] .= "redux-section-indent-start";
@@ -1007,7 +1016,7 @@
                                 }
                                 if ( isset( $field['default'] ) ) {
                                     $this->options_defaults[ $field['id'] ] = $field['default'];
-                                } elseif ( isset( $field['options'] ) && ($field['type'] != "ace_editor") ) {
+                                } elseif ( isset( $field['options'] ) && ( $field['type'] != "ace_editor" ) ) {
                                     // Sorter data filter
                                     if ( $field['type'] == "sorter" && isset( $field['data'] ) && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
                                         if ( ! isset( $field['args'] ) ) {
@@ -1267,7 +1276,8 @@
                 } else {
                     $nodeargs = array(
                         'id'    => $this->args["page_slug"],
-                        'title' => "<span class='ab-icon dashicons-admin-generic'></span>" . $this->args['menu_title'], // $theme_data->get( 'Name' ) . " " . __( 'Options', 'redux-framework-demo' ),
+                        'title' => "<span class='ab-icon dashicons-admin-generic'></span>" . $this->args['menu_title'],
+                        // $theme_data->get( 'Name' ) . " " . __( 'Options', 'redux-framework-demo' ),
                         'href'  => admin_url( 'admin.php?page=' . $this->args["page_slug"] ),
                         'meta'  => array()
                     );
@@ -1737,7 +1747,7 @@
                 }
 
                 //$this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "http" + ("https:"==document.location.protocol?"s":"") + "://ads.reduxframework.com/api/index.php?js&g&1&v=2"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';               
-                
+
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
                 $this->localize_data['defaults']     = $this->options_defaults;
@@ -2029,7 +2039,7 @@
                     } else if ( ! empty( $field['options'][ $field['default'] ] ) ) {
                         $default_output .= $field['options'][ $field['default'] ] . ", ";
                     } else if ( ! empty( $field['default'] ) ) {
-                        if ( $field['type'] == 'switch' && isset($field['on']) && isset($field['off']) ) {
+                        if ( $field['type'] == 'switch' && isset( $field['on'] ) && isset( $field['off'] ) ) {
                             $default_output .= ( $field['default'] == 1 ? $field['on'] : $field['off'] ) . ', ';
                         } else {
                             $default_output .= $field['default'] . ', ';
@@ -2846,7 +2856,7 @@
                             }
 
                             // Check for empty id value
-                            
+
                             if ( ! isset( $plugin_options[ $field['id'] ] ) || $plugin_options[ $field['id'] ] == '' ) {
 
                                 // If we are looking for an empty value, in the case of 'not_empty'
