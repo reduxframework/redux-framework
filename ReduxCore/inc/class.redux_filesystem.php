@@ -54,7 +54,8 @@
 
                 // Do unique stuff
                 if ( $action == 'mkdir' && !isset( $this->filesystem->killswitch ) ) {
-                    $res = $wp_filesystem->$action( $file, 0777 );
+                    //$res = $wp_filesystem->$action( $file, 0777 );
+                    $res = mkdir( $file, 0777, true );
                 } elseif ( $action == 'copy' && !isset( $this->filesystem->killswitch ) ) {
                     $wp_filesystem->copy( $file, $destination, $overwrite, $chmod );
                     $res = false;
