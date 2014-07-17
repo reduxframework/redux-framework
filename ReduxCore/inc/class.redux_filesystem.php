@@ -75,7 +75,7 @@
 
                 }
 
-                $this->do_action( $action, $file, $params );
+                return $this->do_action( $action, $file, $params );
             }
 
             public function do_action( $action, $file, $params = '' ) {
@@ -120,7 +120,7 @@
                         }
                     }
                 } elseif ( $action == 'get_contents' ) {
-                    $res = $wp_filesystem->$action( $file );
+                    $res = $wp_filesystem->get_contents( $file );
                     if ( ! $res ) {
                         $res = file_get_contents( $file );
                     }

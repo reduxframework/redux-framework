@@ -909,9 +909,10 @@ if (!class_exists('ReduxFramework_typography')) {
             }
 
             if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
+               
                 //$fonts = json_decode($wp_filesystem->get_contents($this->google_json), true);
                 $fonts = $this->parent->filesystem->execute('get_contents', $this->google_json );
-
+                
                 if ($fonts === true) {
                     $this->parent->fonts['google'] = false;
                     return;

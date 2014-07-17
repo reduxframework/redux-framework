@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.4.9 =
+* Fixed:      #1462 - Google fonts not loading in font drop down.
+
 = 3.3.4.8 =
 * Fixed:      More WP FileSystem tanking. Did PHP fallback before FTP. Works 99.9% of the time without credentials.
 
