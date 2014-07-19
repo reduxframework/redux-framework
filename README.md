@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5 =
+* Added:      An annoying notice at the top so our devs don't ship with dev_mode on.  ;)
+
 = 3.3.4.9 =
 * Fixed:      #1462 - Google fonts not loading in font drop down.
 

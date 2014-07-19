@@ -65,7 +65,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.4.9';
+            public static $_version = '3.3.5';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1746,7 +1746,7 @@
                     }
                 }
 
-                //$this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "http" + ("https:"==document.location.protocol?"s":"") + "://ads.reduxframework.com/api/index.php?js&g&1&v=2"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';               
+                //$this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "http" + ("https:"==document.location.protocol?"s":"") + "://ads.reduxframework.com/api/index.php?js&g&1&v=2"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
 
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
@@ -3157,6 +3157,11 @@
 
                 if ( ! empty( $this->args['display_name'] ) ) {
                     echo '<div class="display_header">';
+
+                    if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] ) {
+                        echo '<span class="redux-dev-mode-notice">' . __( 'Developer Mode Enabled', 'redux-framework' ) . '</span>';
+                    }
+
                     echo '<h2>' . $this->args['display_name'] . '</h2>';
 
                     if ( ! empty( $this->args['display_version'] ) ) {
