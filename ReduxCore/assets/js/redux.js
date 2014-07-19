@@ -37,105 +37,10 @@
             $.redux.tabControl();
             $.redux.devFunctions();
 
-            if ( redux.rAds ) {
-                $( '#redux-header' ).append( '<div class="rAds"></div>' );
-                var el = $( '#redux-header' );
-                el.css( 'position', 'relative' );
 
-                el.find( '.rAds' ).attr(
-                    'style', 'position:absolute; top: 6px; right: 6px; display:block !important;overflow:hidden;'
-                ).css( 'left', '-99999px' );
-        
-                el.find( '.rAds' ).html( redux.rAds.replace( /<br\s?\/?>/, '' ) );
-                var rAds = el.find( '.rAds' );
-
-                var maxHeight = el.height();
-                var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
-
-                $( rAds ).css( 'height', maxHeight ).css( 'max-width', maxWidth ).css( 'width', maxWidth );
-
-                rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
-                    'margin-left', '5px'
-                );
-        
-                $( window ).load(
-                    function() {
-                        $.redux.resizeAds();
-                    }
-                );
-                
-                $( window ).resize(
-                    function() {
-                        $.redux.resizeAds();
-                    }
-                );
-            }            
             
         }
     );
-    
-    $.redux.scaleToRatio = function( el, maxHeight, maxWidth ) {
-        var ratio   = 0;  // Used for aspect ratio
-        var width   = el.width();    // Current image width
-        var height  = el.height();  // Current image height
-
-        // Check if current height is larger than max
-        if ( height > maxHeight ) {
-            ratio = maxHeight / height; // get ratio for scaling image
-            
-            el.css( "height", maxHeight );   // Set new height
-            el.css( "width", width * ratio );    // Scale width based on ratio
-            
-            width   = width * ratio;    // Reset width to match scaled image
-            height  = height * ratio;    // Reset height to match scaled image
-        } else {
-            el.css( "height", height );   // Set new height
-        }
-
-        // Check if the current width is larger than the max
-        if ( width > maxWidth ) {
-            ratio = maxWidth / width;   // get ratio for scaling image
-            
-            el.css( "width", maxWidth ); // Set new width
-            el.css( "height", height * ratio );  // Scale height based on ratio
-            
-            height  = height * ratio;    // Reset height to match scaled image
-            width   = width * ratio;    // Reset width to match scaled image
-        } else {
-            el.css( "width", width );   // Set new height
-        }
-    };
-    
-    $.redux.resizeAds = function() {
-        var el          = $( '#redux-header' );
-        var rAds        = el.find( '.rAds' );
-        var maxHeight   = el.height();
-        var maxWidth    = el.width() - el.find( '.display_header' ).width() - 30;
-        
-        $( rAds ).find( 'video' ).each(
-            function() {
-                $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
-            }
-        );
-
-        $( rAds ).find( 'img' ).each(
-            function() {
-                $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
-            }
-        );
-
-        $( rAds ).find( 'div' ).each(
-            function() {
-                $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
-            }
-        );
-
-        if ( rAds.css( 'left' ) == "-99999px" ) {
-            rAds.css( 'display', 'none' ).css( 'left', 'auto' );
-        }
-        
-        rAds.fadeIn( 'slow' );
-    };
     
     $.redux.initEvents = function() {
         $('.redux-action_bar, .redux-presets-bar').on(
@@ -1022,6 +927,108 @@
         }
         return false;
     };
+
+
+    $.redux.scaleToRatio = function( el, maxHeight, maxWidth ) {
+        var ratio = 0;  // Used for aspect ratio
+
+        var width = el.attr('data-width');
+        if (!width) {
+            width = el.width();
+            el.attr('data-width', width);
+        }
+        var height = el.attr('data-height');
+        if (!height) {
+            height = el.height();
+            el.attr('data-height', height);
+        }
+
+        // Check if the current width is larger than the max
+        if ( width > maxWidth ) {
+            ratio = maxWidth / width;   // get ratio for scaling image
+            el.css( "width", maxWidth ); // Set new width
+            el.css( "height", height * ratio );  // Scale height based on ratio
+            height = height * ratio;    // Reset height to match scaled image
+            width = width * ratio;    // Reset width to match scaled image
+        } else {
+            el.css( "width", 'auto' );   // Set new height
+        }
+
+        // Check if current height is larger than max
+        if ( height > maxHeight ) {
+            ratio = maxHeight / height; // get ratio for scaling image
+            el.css( "height", maxHeight );   // Set new height
+            el.css( "width", width * ratio );    // Scale width based on ratio
+            width = width * ratio;    // Reset width to match scaled image
+            height = height * ratio;    // Reset height to match scaled image
+        } else {
+            el.css( "height", 'auto' );   // Set new height
+        }
+
+
+
+
+    };
+    $.redux.resizeAds = function() {
+        var el = $( '#redux-header' );
+        var rAds = el.find( '.rAds' );
+        var maxHeight = el.height();
+        var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        $( rAds ).find( 'video' ).each(
+            function() {
+                $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
+            }
+        );
+        $( rAds ).find( 'img' ).each(
+            function() {
+                $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
+            }
+        );
+        $( rAds ).find( 'div' ).each(
+            function() {
+                $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
+            }
+        );
+
+        if ( rAds.css( 'left' ) == "-99999px" ) {
+            rAds.css( 'display', 'none' ).css( 'left', 'auto' );
+        }
+        rAds.fadeIn( 'slow' );
+    };
+    $( document ).ready(
+        function() {
+            if ( redux.rAds ) {
+                $( '#redux-header' ).append( '<div class="rAds"></div>' );
+                var el = $( '#redux-header' );
+                el.css( 'position', 'relative' );
+
+                el.find( '.rAds' ).attr(
+                    'style', 'position:absolute; top: 6px; right: 6px; display:block !important;overflow:hidden;'
+                ).css( 'left', '-99999px' );
+                el.find( '.rAds' ).html( redux.rAds.replace( /<br\s?\/?>/, '' ) );
+                var rAds = el.find( '.rAds' );
+
+                var maxHeight = el.height();
+                var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+
+                $( rAds ).css( 'height', maxHeight ).css( 'max-width', maxWidth ).css( 'width', maxWidth );
+
+                rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
+                    'margin-left', '5px'
+                );
+                $( window ).load(
+                    function() {
+                        $.redux.resizeAds();
+                    }
+                );
+                $( window ).resize(
+                    function() {
+                        $.redux.resizeAds();
+                    }
+                );
+            }
+        }
+    );
 })(jQuery);
 
 jQuery.noConflict();
@@ -1274,3 +1281,4 @@ function colorNameToHex(colour) {
 
     return colour;
 }
+
