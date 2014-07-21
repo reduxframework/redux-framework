@@ -559,7 +559,7 @@
                     }
                     
                     if (fieldset.hasClass('redux-container-raw')) {
-                        var rawTable = fieldset.parents().find('.redux-raw-table');
+                        var rawTable = fieldset.parents().find('table#' + redux.args.opt_name + '-' + i);
                         rawTable.hide().addClass('hide');
                     }                    
                 }
@@ -626,7 +626,7 @@
                 }
 
                 if (childFieldset.hasClass('redux-container-raw')) {
-                    var rawTable = childFieldset.parents().find('.redux-raw-table');
+                    var rawTable = childFieldset.parents().find('table#' + redux.args.opt_name + '-' + child);
                     rawTable.fadeIn(300).removeClass('hide');
                 }                    
 
@@ -683,8 +683,7 @@
                 }
 
                 if ($('#' + redux.args.opt_name + '-' + id).hasClass('redux-container-raw')) {
-                    var rawTable = $('#' + redux.args.opt_name + '-' + id).parents().find('.redux-raw-table');
-                    
+                    var rawTable = $('#' + redux.args.opt_name + '-' + id).parents().find('table#' + redux.args.opt_name + '-' + id);
                     rawTable.fadeOut(50).addClass('hide');
                 }                    
 

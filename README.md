@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.1 =
+* Fixed:      #1472 - font style not displaying saved valie with no font-family argument set.
+* Fixed:      #1471 - raw field and required not playing nice together.
+
 = 3.3.5 =
 * Added:      An annoying notice at the top so our devs don't ship with dev_mode on.  ;)
 

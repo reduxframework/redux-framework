@@ -12,6 +12,7 @@
 
 (function( $ ) {
     "use strict";
+    
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.typography = redux.field_objects.typography || {};
 
@@ -58,7 +59,9 @@
                             function() {
                                 var family = $( this ).find( '.redux-typography-family' );
 
-                                if ( family.data( 'value' ) !== "" ) {
+                                if ( family.data( 'value' ) === undefined ) {
+                                    family = $(this);
+                                } else if ( family.data( 'value' ) !== "" ) {
                                     $( family ).val( family.data( 'value' ) );
                                 }
 
@@ -226,6 +229,11 @@
                             }
                         );
 
+                        var xx = el.find( ".redux-typography-family");
+                        if (!xx.hasClass('redux-typography-family')) {
+                            el.find( ".redux-typography-style").select2( default_params );
+                        }
+                        
                         // Init select2 for indicated fields
                         el.find( ".redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration" ).select2( default_params );
 

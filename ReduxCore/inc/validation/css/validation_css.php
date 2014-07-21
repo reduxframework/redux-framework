@@ -31,7 +31,7 @@
 
                 // Strip all html
                 $data = $this->value;
-
+                
                 $data = wp_filter_nohtml_kses( $data );
                 $data = str_replace( '&gt;', '>', $data );
 

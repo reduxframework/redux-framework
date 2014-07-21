@@ -304,7 +304,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 echo '<input type="hidden" class="typography-font-style" name="' . $this->field['name'] . '[font-style]' . $this->field['name_suffix'] . '" value="' . $this->value['font-style'] . '" data-id="' . $this->field['id'] . '"  /> ';
                 echo '<select data-placeholder="' . __('Style', 'redux-framework') . '" class="redux-typography redux-typography-style select' . $this->field['class'] . '" original-title="' . __('Font style', 'redux-framework') . '" id="' . $this->field['id'] . '_style" data-id="' . $this->field['id'] . '" data-value="' . $style . '">';
 
-                if (empty($this->value['subset'])) {
+                if (empty($this->value['subset']) || empty($this->value['font-weight'])) {
                     echo '<option value=""></option>';
                 }
 
@@ -320,10 +320,20 @@ if (!class_exists('ReduxFramework_typography')) {
                         echo '<option value="' . $v['id'] . '" ' . selected($this->value['subset'], $v['id'], false) . '>' . $v['name'] . '</option>';
                     }
                 } else {
+                    if (!isset($this->value['font-weight']) && isset($this->value['subset'])) {
+                        $this->value['font-weight'] = $this->value['subset'];
+                    }
+                    
                     foreach ($nonGStyles as $i => $style) {
-                        if (!isset($this->value['subset']))
+                        if (!isset($this->value['font-weight'])) {
+                            $this->value['font-weight'] = false;
+                        }
+                        
+                        if (!isset($this->value['subset'])) {
                             $this->value['subset'] = false;
-                        echo '<option value="' . $i . '" ' . selected($this->value['subset'], $i, false) . '>' . $style . '</option>';
+                        }
+                        
+                        echo '<option value="' . $i . '" ' . selected($this->value['font-weight'], $i, false) . '>' . $style . '</option>';
                     }
                 }
 

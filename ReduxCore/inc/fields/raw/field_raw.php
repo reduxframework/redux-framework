@@ -40,7 +40,10 @@
                 // Only print it if allign is false.
                 if ( false == $doAlign ) {
                     echo '<style>#' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . ' {padding: 0;}</style>';
-                    echo '</td></tr></table><table class="form-table no-border redux-group-table redux-raw-table" style="margin-top: -20px; overflow: auto;"><tbody><tr><td>';
+                    echo '</td></tr>';
+                    echo '</table>';
+                    echo '<table id="' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . '" class="form-table no-border redux-group-table redux-raw-table" style="margin-top: -20px; overflow: auto;">';
+                    echo '<tbody><tr><td>';
                 }
 
                 echo '<fieldset id="' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . '" class="redux-field redux-container-' . $this->field['type'] . ' ' . $this->field['class'] . '" data-id="' . $this->field['id'] . '">';
