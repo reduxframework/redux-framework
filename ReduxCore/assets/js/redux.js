@@ -1016,8 +1016,8 @@
                     'margin-left', '5px'
                 );
 
-                $( document ).ajaxComplete(function() {
-                    $.redux.resizeAds();
+                $( document ).ajaxComplete( function() {
+                    setTimeout( function(){ $.redux.resizeAds(); }, 1500 );
                     $( document ).unbind('ajaxComplete');
                 });
 
