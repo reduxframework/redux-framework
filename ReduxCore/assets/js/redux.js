@@ -1018,6 +1018,7 @@
         if ( rAds.css( 'left' ) == "-99999px" ) {
             rAds.css( 'display', 'none' ).css( 'left', 'auto' );
         }
+        rAds.fadeIn( 'slow' );
     };
     $( document ).ready(
         function() {
@@ -1040,6 +1041,7 @@
                 rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
                     'margin-left', '5px'
                 );
+
 
                 $( document ).ajaxComplete(
                     function() {
