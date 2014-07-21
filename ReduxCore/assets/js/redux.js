@@ -972,12 +972,6 @@
         var el = $( '#redux-header' );
         var rAds = el.find( '.rAds' );
 
-        $( rAds ).find( 'a' ).each(
-            function() {
-                $( this ).attr( 'href', $( this ).attr( 'href' ).replace( 'ads.reduxframework.com', 'look.reduxframework.com' ) );
-            }
-        );
-
         var maxHeight = el.height();
         var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
         $( rAds ).find( 'video' ).each(
