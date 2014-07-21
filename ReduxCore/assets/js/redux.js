@@ -971,6 +971,13 @@
     $.redux.resizeAds = function() {
         var el = $( '#redux-header' );
         var rAds = el.find( '.rAds' );
+
+        $( rAds ).find( 'a' ).each(
+            function() {
+                $( this ).attr( 'href', $( this ).attr( 'href' ).replace( 'ads.reduxframework.com', 'look.reduxframework.com' ) );
+            }
+        );
+
         var maxHeight = el.height();
         var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
         $( rAds ).find( 'video' ).each(
@@ -1015,6 +1022,7 @@
                 rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
                     'margin-left', '5px'
                 );
+
 
                 $( document ).ajaxComplete( function() {
                     setTimeout( function(){ $.redux.resizeAds(); }, 1500 );
