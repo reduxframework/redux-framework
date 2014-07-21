@@ -1747,7 +1747,9 @@
                 }
 
                 if (isset($_REQUEST['rAds'])) {
-                    $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "http" + ("https:"==document.location.protocol?"s":"") + "://ads.reduxframework.com/api/index.php?js&g&1&v=2"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
+                    $base = ReduxFramework::$_url.'inc/p.php?url=';
+                    $url = $base.urlencode('http://ads.reduxframework.com/api/index.php?js&g&1&v=2').'&proxy='.urlencode($base);
+                    $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "'.$url.'"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
                 }
                 
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
