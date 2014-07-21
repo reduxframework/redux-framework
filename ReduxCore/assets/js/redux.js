@@ -1015,11 +1015,12 @@
                 rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
                     'margin-left', '5px'
                 );
-                $( window ).load(
-                    function() {
-                        $.redux.resizeAds();
-                    }
-                );
+
+                $( document ).ajaxComplete(function() {
+                    $.redux.resizeAds();
+                    $( document ).unbind('ajaxComplete');
+                });
+
                 $( window ).resize(
                     function() {
                         $.redux.resizeAds();
