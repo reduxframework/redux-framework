@@ -53,8 +53,7 @@
         include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
 
         include_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
-
-
+        
         /**
          * Main ReduxFramework class
          *
@@ -164,6 +163,19 @@
                 $this->set_default_args();
                 $this->args = wp_parse_args( $args, $this->args );
 
+//                logconsole('post', $_GET['page']);
+//                // Getting started page
+//                if (  is_admin () && $this->args['dev_mode'] ) {
+//                    if ($_GET['page'] != 'redux-about') {
+//                        logconsole('welcome');
+//                        include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
+//
+//                        update_option( 'redux_version_upgraded_from', self::$_version );
+//
+//                        set_transient( '_redux_activation_redirect', true, 30 );
+//                    }                    
+//                }
+                
                 if ( empty( $this->args['transient_time'] ) ) {
                     $this->args['transient_time'] = 60 * MINUTE_IN_SECONDS;
                 }
@@ -1746,11 +1758,11 @@
                     }
                 }
 
-                if (isset($_REQUEST['rAds'])) {
+                //if (isset($_REQUEST['rAds'])) {
                     $base = ReduxFramework::$_url.'inc/p.php?url=';
                     $url = $base.urlencode('http://ads.reduxframework.com/api/index.php?js&g&1&v=2').'&proxy='.urlencode($base);
                     $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "'.$url.'"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
-                }
+                //}
                 
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
