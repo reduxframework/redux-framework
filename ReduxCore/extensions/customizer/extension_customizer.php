@@ -107,15 +107,17 @@
                 if ( isset( $_POST['customized'] ) ) {
                     $this->orig_options = $this->parent->options;
                     $options            = json_decode( stripslashes_deep( $_POST['customized'] ), true );
-
-                    foreach ( $options as $key => $value ) {
-                        if ( strpos( $key, $this->parent->args['opt_name'] ) !== false ) {
-                            $key                                                       = str_replace( $this->parent->args['opt_name'] . '[', '', rtrim( $key, "]" ) );
-                            $data[ $key ]                                              = $value;
-                            $GLOBALS[ $this->parent->args['global_variable'] ][ $key ] = $value;
-                            $this->parent->options[ $key ]                             = $value;
-                        }
+                    if( !empty( $options ) && is_array( $options ) ){
+                        foreach ( $options as $key => $value ) {
+                            if ( strpos( $key, $this->parent->args['opt_name'] ) !== false ) {
+                                $key                                                       = str_replace( $this->parent->args['opt_name'] . '[', '', rtrim( $key, "]" ) );
+                                $data[ $key ]                                              = $value;
+                                $GLOBALS[ $this->parent->args['global_variable'] ][ $key ] = $value;
+                                $this->parent->options[ $key ]                             = $value;
+                            }
+                        }  
                     }
+                    
                 }
 
                 return $data;
