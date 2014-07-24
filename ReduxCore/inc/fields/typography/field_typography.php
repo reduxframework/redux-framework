@@ -750,7 +750,16 @@ if (!class_exists('ReduxFramework_typography')) {
                         $key = str_replace(', ', ',', $key);
                         $arr[$key] = $value;
                     }
+                    
+                    $lcFonts = array_change_key_case($this->field['custom_fonts']);
+                    foreach ($lcFonts as $group => $fontArr) {
+                        foreach($fontArr as $key => $value) {
+                            $arr[  strtolower($key)] = $key;
+                        }
+                    }
+                    
                     $lcFonts = $arr;
+
                     unset($arr);
 
                     // lowercase chosen font for matching purposes
