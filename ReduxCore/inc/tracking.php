@@ -128,7 +128,7 @@
                 $nonce = wp_create_nonce( 'redux_activate_tracking' );
 
                 $content = '<h3>' . __( 'Help improve Our Panel', 'redux-framework' ) . '</h3>';
-                $content .= '<p>' . __( 'Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatability.', 'redux-framework' ) . '</p>';
+                $content .= '<p>' . __( 'Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatibility.', 'redux-framework' ) . '</p>';
                 $opt_arr = array(
                     'content'  => $content,
                     'position' => array( 'edge' => 'top', 'align' => 'center' )
