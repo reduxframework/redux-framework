@@ -262,7 +262,7 @@
                 $this->clean();
 
                 $fieldID   = $this->field['id'];
-                $fieldName = $this->field['name'];
+                $fieldName = $this->field['name'] . $this->field['name_suffix'];
                 //$fieldName = $this->parent->args['opt_name'] . '[' . $this->field['id'] . ']';
 
                 // Set handle number variable.
@@ -305,7 +305,7 @@
                 if ( $this->display_text == $this->field['display_value'] ) {
                     $showInput = true;
                     echo '<input type="text"
-                             name="' . $nameOne . $this->field['name_suffix'] . '"
+                             name="' . $nameOne . '"
                              id="' . $idOne . '"
                              value="' . $valOne . '"
                              class="redux-slider-input redux-slider-input-one-' . $fieldID . ' ' . $this->field['class'] . '"/>';
@@ -318,7 +318,7 @@
 
                     echo '<div class="redux-slider-label' . $labelNum . '"
                            id="redux-slider-label-one-' . $fieldID . '"
-                           name="' . $nameOne . $this->field['name_suffix'] . '">
+                           name="' . $nameOne . '">
                       </div>';
 
                     // SELECT output
@@ -334,7 +334,7 @@
 
 
                     echo '<select class="redux-slider-select-one redux-slider-select-one-' . $fieldID . ' ' . $this->field['class'] . '"
-                              name="' . $nameOne . $this->field['name_suffix'] . '"
+                              name="' . $nameOne . '"
                               id="' . $idOne . '">
                      </select>';
                 }
@@ -360,7 +360,7 @@
                     // TEXT
                     if ( true == $showInput ) {
                         echo '<input type="text"
-                                 name="' . $nameTwo . $this->field['name_suffix'] . '"
+                                 name="' . $nameTwo . '"
                                  id="' . $idTwo . '"
                                  value="' . $valTwo . '"
                                  class="redux-slider-input redux-slider-input-two-' . $fieldID . ' ' . $this->field['class'] . '"/>';
@@ -370,14 +370,14 @@
                     if ( true == $showLabel ) {
                         echo '<div class="redux-slider-label-two"
                                id="redux-slider-label-two-' . $fieldID . '"
-                               name="' . $nameTwo . $this->field['name_suffix'] . '">
+                               name="' . $nameTwo . '">
                           </div>';
                     }
 
                     // SELECT
                     if ( true == $showSelect ) {
                         echo '<select class="redux-slider-select-two redux-slider-select-two-' . $fieldID . ' ' . $this->field['class'] . '"
-                                  name="' . $nameTwo . $this->field['name_suffix'] . '"
+                                  name="' . $nameTwo . '"
                                   id="' . $idTwo . '">
                          </select>';
 
@@ -388,7 +388,7 @@
                 if ( $this->display_none == $this->field['display_value'] || $this->display_label == $this->field['display_value'] ) {
                     echo '<input type="hidden"
                              class="redux-slider-value-one-' . $fieldID . ' ' . $this->field['class'] . '"
-                             name="' . $nameOne . $this->field['name_suffix'] . '"
+                             name="' . $nameOne . '"
                              id="' . $idOne . '"
                              value="' . $valOne . '"/>';
 
@@ -396,7 +396,7 @@
                     if ( true == $twoHandles ) {
                         echo '<input type="hidden"
                                  class="redux-slider-value-two-' . $fieldID . ' ' . $this->field['class'] . '"
-                                 name="' . $nameTwo . $this->field['name_suffix'] . '"
+                                 name="' . $nameTwo . '"
                                  id="' . $idTwo . '"
                                  value="' . $valTwo . '"/>';
                     }

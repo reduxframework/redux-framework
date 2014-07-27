@@ -34,3 +34,7 @@
   width: 64px;
   margin-bottom: 0;
 }
+.redux-main .redux-container-background .upload {
+    width: 100%;
+    margin-bottom: 8px;
+}

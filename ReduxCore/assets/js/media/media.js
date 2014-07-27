@@ -92,15 +92,18 @@
                 // Grab the selected attachment.
                 var attachment = frame.state().get( 'selection' ).first();
                 frame.close();
+
+                var data = $( selector ).find('.data').data();
                 if ( typeof redux.media === 'undefined' ) {
                     redux.media = {};
                 }
-                if ( typeof redux.media[$( selector ).attr( 'data-id' )] === 'undefined' ) {
-                    redux.media[$( selector ).attr( 'data-id' )] = {};
-                    redux.media[$( selector ).attr( 'data-id' )].mode = "image";
+
+                if ( data === 'undefined' || data.mode === 'undefined' ) {
+                    data = {};
+                    data.mode = "image";
                 }
 
-                if ( redux.media[$( selector ).attr( 'data-id' )].mode !== false && attachment.attributes.type !== redux.media[jQuery( selector ).attr( 'data-id' )].mode ) {
+                if ( data.mode !== false && attachment.attributes.type !== data.mode ) {
                     return;
                 }
 

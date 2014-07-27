@@ -33,7 +33,8 @@
                 el.find( '.redux_spinner' ).each(
                     function() {
                         //slider init
-                        var spinner = redux.spinner[$( this ).attr( 'rel' )];
+                        var spinner = $( this ).find('.spinner-input' ).data();
+                        spinner.id = $( this ).find('.spinner-input' ).attr('id');
 
                         el.find( "#" + spinner.id ).spinner(
                             {
@@ -78,7 +79,7 @@
                 el.find( ".spinner-input" ).focus(
                     function() {
                         redux.field_objects.spinner.clean(
-                            $( this ).val(), $( this ), redux.spinner[$( this ).attr( 'id' )]
+                            $( this ).val(), $( this )
                         );
                     }
                 );
@@ -87,7 +88,7 @@
                     {
                         callback: function( value ) {
                             redux.field_objects.spinner.clean(
-                                value, $( this ), redux.spinner[$( this ).attr( 'id' )]
+                                value, $( this )
                             );
                         },
 
@@ -100,11 +101,14 @@
         );
     };
 
-    redux.field_objects.spinner.clean = function( value, selector, spinner ) {
+    redux.field_objects.spinner.clean = function( value, selector ) {
+
         if ( !selector.hasClass( 'spinnerInputChange' ) ) {
             return;
         }
         selector.removeClass( 'spinnerInputChange' );
+
+        var spinner = selector.data();
 
         if ( value === "" || value === null ) {
             value = spinner.min;
@@ -116,7 +120,7 @@
             value = Math.round( value / spinner.step ) * spinner.step;
         }
 
-        $( "#" + spinner.id ).val( value );
+        selector.val( value );
     };
 
 })( jQuery );

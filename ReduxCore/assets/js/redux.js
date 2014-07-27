@@ -987,8 +987,8 @@
             el.css( "height", 'auto' );   // Set new height
         }
 
-        if ( $( '.redux_field_search' ) ) {
-            $( '.redux_field_search' ).css( 'right', ($( el ).width() + 20) );
+        if ( $( '#redux-header .redux_field_search' ) ) {
+            $( '#redux-header .redux_field_search' ).css( 'right', ($( el ).width() + 20) );
         }
 
 

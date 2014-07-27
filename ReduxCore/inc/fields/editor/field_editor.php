@@ -67,7 +67,7 @@
 
                 // Setup up default args
                 $defaults = array(
-                    'textarea_name' => $this->field['name'],
+                    'textarea_name' => $this->field['name'] . $this->field['name_suffix'],
                     'editor_class'  => $this->field['class'],
                     'textarea_rows' => 10, //Wordpress default
                     'teeny'         => true,

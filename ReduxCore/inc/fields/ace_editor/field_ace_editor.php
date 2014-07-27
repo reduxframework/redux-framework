@@ -35,17 +35,17 @@
                 $this->field  = $field;
                 $this->value  = $value;
 
-                if ( is_array($this->value)) {
+                if ( is_array( $this->value ) ) {
                     $this->value = '';
                 } else {
-                    $this->value = trim($this->value);
+                    $this->value = trim( $this->value );
                 }
-                
+
                 if ( ! empty( $this->field['options'] ) ) {
                     $this->field['args'] = $this->field['options'];
                     unset( $this->field['options'] );
-                }                
-                
+                }
+
             }
 
             /**
@@ -62,8 +62,20 @@
                 if ( ! isset( $this->field['theme'] ) ) {
                     $this->field['theme'] = 'monokai';
                 }
+
+                $params = array(
+                    'minLines' => 10,
+                    'maxLines' => 30,
+                );
+
+                if ( isset( $this->field['args'] ) && ! empty( $this->field['args'] ) && is_array( $this->field['args'] ) ) {
+                    $params = wp_parse_args( $this->field['args'], $params );
+                }
+
                 ?>
                 <div class="ace-wrapper">
+                    <input type="hidden" class="localize_data"
+                           value="<?php echo htmlspecialchars( json_encode( $params, true ) ); ?>"/>
                     <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>"
                               id="<?php echo $this->field['id']; ?>-textarea"
                               class="ace-editor hide <?php echo $this->field['class']; ?>"
@@ -110,26 +122,6 @@
                     time(),
                     true
                 );
-            }
-
-            /**
-             * Functions to pass data from the PHP to the JS at render time.
-             *
-             * @return array Params to be saved as a javascript object accessable to the UI.
-             * @since  Redux_Framework 3.1.1
-             */
-            function localize( $field, $value = "" ) {
-
-                $params = array(
-                    'minLines' => 10,
-                    'maxLines' => 30,
-                );
-
-                if ( isset( $field['args'] ) && ! empty( $field['args'] ) && is_array( $field['args'] ) ) {
-                    $params = wp_parse_args( $field['args'], $params );
-                }
-                
-                return $params;
             }
         }
     }

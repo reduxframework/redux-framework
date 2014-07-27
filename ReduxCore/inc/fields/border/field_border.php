@@ -114,10 +114,10 @@
                     echo '<div class="field-border-input input-prepend"><span class="add-on"><i class="el-icon-fullscreen icon-large"></i></span><input type="text" class="redux-border-all redux-border-input mini' . $this->field['class'] . '" placeholder="' . __( 'All', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-all" value="' . $this->value['top'] . '"></div>';
                 }
 
-                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-top" name="' . $this->field['name'] . '[border-top]' . $this->field['name_suffix'] . '" value="' . ( $this->value['top'] ? $this->value['top'] . 'px' : 0 ) . '">';
-                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-right" name="' . $this->field['name'] . '[border-right]' . $this->field['name_suffix'] . '" value="' . ( $this->value['right'] ? $this->value['right'] . 'px' : 0 ) . '">';
-                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-bottom" name="' . $this->field['name'] . '[border-bottom]' . $this->field['name_suffix'] . '" value="' . ( $this->value['bottom'] ? $this->value['bottom'] . 'px' : 0 ) . '">';
-                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-left" name="' . $this->field['name'] . '[border-left]' . $this->field['name_suffix'] . '" value="' . ( $this->value['left'] ? $this->value['left'] . 'px' : 0 ) . '">';
+                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-top" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-top]" value="' . ( $this->value['top'] ? $this->value['top'] . 'px' : 0 ) . '">';
+                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-right" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-right]" value="' . ( $this->value['right'] ? $this->value['right'] . 'px' : 0 ) . '">';
+                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-bottom" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-bottom]" value="' . ( $this->value['bottom'] ? $this->value['bottom'] . 'px' : 0 ) . '">';
+                echo '<input type="hidden" class="redux-border-value" id="' . $this->field['id'] . '-left" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-left]" value="' . ( $this->value['left'] ? $this->value['left'] . 'px' : 0 ) . '">';
 
                 if ( ! isset( $this->field['all'] ) || $this->field['all'] !== true ) {
                     /**
@@ -159,13 +159,13 @@
                         'dotted' => 'Dotted',
                         'none'   => 'None'
                     );
-                    echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][border-style]' . $this->field['name_suffix'] . '" class="tips redux-border-style ' . $this->field['class'] . '" rows="6" data-id="' . $this->field['id'] . '">';
+                    echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-style]" class="tips redux-border-style ' . $this->field['class'] . '" rows="6" data-id="' . $this->field['id'] . '">';
                     foreach ( $options as $k => $v ) {
                         echo '<option value="' . $k . '"' . selected( $value['style'], $k, false ) . '>' . $v . '</option>';
                     }
                     echo '</select>';
                 } else {
-                    echo '<input type="hidden" id="' . $this->field['id'] . '[border-style]" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][border-style]' . $this->field['name_suffix'] . '" value="' . $this->value['style'] . '" data-id="' . $this->field['id'] . '">';
+                    echo '<input type="hidden" id="' . $this->field['id'] . '[border-style]" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-style]" value="' . $this->value['style'] . '" data-id="' . $this->field['id'] . '">';
                 }
 
                 /**
@@ -179,9 +179,9 @@
                         $default = ( isset( $this->field['default']['color'] ) ) ? $this->field['default']['color'] : '#ffffff';
                     }
 
-                    echo '<input name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][border-color]' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $default . '" data-id="' . $this->field['id'] . '" />';
+                    echo '<input name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-color]" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $default . '" data-id="' . $this->field['id'] . '" />';
                 } else {
-                    echo '<input type="hidden" id="' . $this->field['id'] . '[border-color]" name="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][border-color]' . $this->field['name_suffix'] . '" value="' . $this->value['style'] . '" data-id="' . $this->field['id'] . '">';
+                    echo '<input type="hidden" id="' . $this->field['id'] . '[border-color]" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-color]" value="' . $this->value['style'] . '" data-id="' . $this->field['id'] . '">';
                 }
             }
 

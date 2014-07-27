@@ -84,18 +84,16 @@
              * @return      void
              */
             public function render() {
-                    
+
                 // multi => true renders the field multi-selectable (checkbox vs radio)
                 echo '<div class="buttonset ui-buttonset">';
-
-                //$i = 0;
+                $i = 0;
                 foreach ( $this->field['options'] as $k => $v ) {
 
                     $selected = '';
                     if ( isset( $this->field['multi'] ) && $this->field['multi'] == true ) {
-                        $type                       = "checkbox";
-                        $this->field['name_suffix'] = "[]";
-//                    $i++;
+                        $type         = "checkbox";
+                        $multi_suffix = '[]';
 
                         if ( ! empty( $this->value ) && ! is_array( $this->value ) ) {
                             $this->value = array( $this->value );
@@ -104,17 +102,15 @@
                         if ( in_array( $k, $this->value ) ) {
                             $selected = 'checked="checked"';
                         }
+
                     } else {
-                        $type     = "radio";
-                        $selected = checked( $this->value, $k, false );
+                        $multi_suffix = "";
+                        $type         = "radio";
+                        $selected     = checked( $this->value, $k, false );
                     }
 
-                    echo '<input data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="buttonset-item ' . $this->field['class'] . '" value="' . $k . '" ' . $selected . '/>';
+                    echo '<input data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . $multi_suffix . '" class="buttonset-item ' . $this->field['class'] . '" value="' . $k . '" ' . $selected . '/>';
                     echo '<label for="' . $this->field['id'] . '-buttonset' . $k . '">' . $v . '</label>';
-
-                    if ( isset( $this->field['multi'] ) && $this->field['multi'] == true ) {
-                        echo '<input type="hidden" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="">';
-                    }
                 }
 
                 echo '</div>';

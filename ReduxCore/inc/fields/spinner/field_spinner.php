@@ -28,14 +28,33 @@
              */
             function render() {
 
+                $params = array(
+                    'min'     => '',
+                    'max'     => '',
+                    'step'    => '',
+                    'default' => '',
+                );
+
+                $this->field = wp_parse_args( $this->field, $params );
+                $data_string = "";
+                foreach($this->field as $key => $val) {
+                    if (in_array($key, array('min', 'max', 'step', 'default'))) {
+                        $data_string.= " data-".$key.'="'.$val.'"';
+                    }
+                }
+                $data_string .= ' data-val="'.$val.'"';
+
+
                 // Don't allow input edit if there's a step
                 $readonly = "";
                 if ( isset( $this->field['edit'] ) && $this->field['edit'] == false ) {
                     $readonly = ' readonly="readonly"';
                 }
 
-                echo '<input type="text" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '" value="' . $this->value . '" class="mini spinner-input' . $this->field['class'] . '"' . $readonly . '/>';
-                echo '<div id="' . $this->field['id'] . '-spinner" class="redux_spinner" rel="' . $this->field['id'] . '"></div>';
+
+                echo '<div id="' . $this->field['id'] . '-spinner" class="redux_spinner" rel="' . $this->field['id'] . '">';
+                echo '<input type="text" '.$data_string.' name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '" value="' . $this->value . '" class="mini spinner-input' . $this->field['class'] . '"' . $readonly . '/>';
+                echo '</div>';
             } //function
 
             /**
@@ -121,32 +140,5 @@
                 );
             }
 
-            /**
-             * Functions to pass data from the PHP to the JS at render time.
-             *
-             * @return array Params to be saved as a javascript object accessable to the UI.
-             * @since  Redux_Framework 3.1.1
-             */
-            function localize( $field, $value = "" ) {
-
-                $params = array(
-                    'id'      => '',
-                    'min'     => '',
-                    'max'     => '',
-                    'step'    => '',
-                    'val'     => '',
-                    'default' => '',
-                );
-
-                $params = wp_parse_args( $field, $params );
-
-                if ( empty( $value ) ) {
-                    $value = $this->value;
-                }
-
-                $params['val'] = $value;
-
-                return $params;
-            }
         }
     }

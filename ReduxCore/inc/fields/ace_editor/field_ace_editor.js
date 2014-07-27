@@ -33,6 +33,7 @@
                 el.find( '.ace-editor' ).each(
                     function( index, element ) {
                         var area = element;
+                        var params = JSON.parse( $( this ).parent().find( '.localize_data' ).val() );
                         var editor = $( element ).attr( 'data-editor' );
 
                         var aceeditor = ace.edit( editor );
@@ -45,7 +46,7 @@
                             parent = el.parents( '.redux-field-container:first' ).attr( 'data-id' );
                         }
 
-                        aceeditor.setOptions( redux.ace_editor[parent] );
+                        aceeditor.setOptions( params );
                         aceeditor.on(
                             'change', function( e ) {
                                 $( '#' + area.id ).val( aceeditor.getSession().getValue() );

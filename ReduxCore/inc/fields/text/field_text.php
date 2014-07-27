@@ -61,7 +61,7 @@
                         
                         echo '<div class="input_wrapper">';
                         echo '<label for="' . $this->field['id'] . '-text-' . $k . '">' . $v . '</label> ';
-                        echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr( $this->value[ $k ] ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' /><br />';
+                        echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' . '" ' . $placeholder . 'value="' . esc_attr( $this->value[ $k ] ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' /><br />';
                         echo '</div>';
                     }
                     //foreach
