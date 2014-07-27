@@ -89,7 +89,7 @@
                     echo '<li>';
 
                     $checked = "";
-                    $name    = 'name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" ';
+                    $name    = 'name="' . $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' . '" ';
                     if ( $this->field['mode'] == "checkbox" ) {
                         $value_display = $this->value[ $k ];
 
@@ -98,7 +98,7 @@
                         }
                         $class .= " checkbox_sortable";
                         $name = "";
-                        echo '<input type="hidden" name="' . $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-' . $k . '-hidden" value="' . $value_display . '" />';
+                        echo '<input type="hidden" name="' . $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' . '" id="' . $this->field['id'] . '-' . $k . '-hidden" value="' . $value_display . '" />';
 
                         echo '<div class="checkbox-container">';
                     } else {
