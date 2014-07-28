@@ -1603,15 +1603,16 @@
                 ) )
                 ) {
 
-                    wp_register_style(
-                        'color-picker-css',
+                    wp_enqueue_style(
+                        'redux-color-picker-css',
                         self::$_url . 'assets/css/color-picker/color-picker.css',
-                        array(),
+                        array( 'wp-color-picker' ),
                         filemtime( self::$_dir . 'assets/css/color-picker/color-picker.css' ),
                         'all'
                     );
                     
                     wp_enqueue_style( 'color-picker-css' );
+
 
                     wp_enqueue_script( 'wp-color-picker' );
                     wp_enqueue_style( 'wp-color-picker' );
