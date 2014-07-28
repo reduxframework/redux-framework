@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.4 =
+* Fixed:      #1489 - Color picker UI lining up improperly.
+* Fixed:      #1497 - dev_mode spinner issue.
+
 = 3.3.5.3 =
 * Fixed:      Spelling error in tracking dialog.
 * Modified:   Updated ace_editor.

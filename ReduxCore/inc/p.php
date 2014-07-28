@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 // Script: Simple PHP Proxy: Get external HTML, JSON and more!
 //

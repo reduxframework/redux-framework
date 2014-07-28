@@ -220,6 +220,8 @@ module.exports = function(grunt) {
                 files: {
                     "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
                     "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
+                    "ReduxCore/assets/css/color-picker/color-picker.css": ["ReduxCore/assets/css/color-picker/*.less"],
+                    "ReduxCore/assets/css/import_export/import_export.css": ["ReduxCore/assets/css/import_export/*.less"],
                     "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.less"]
 
                 }
