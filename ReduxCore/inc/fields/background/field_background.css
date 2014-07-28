@@ -27,14 +27,14 @@
 .redux-main .redux-container-background .wp-picker-container {
   margin-bottom: 10px;
 }
+.redux-main .redux-container-background .upload {
+  width: 100%;
+  margin-bottom: 8px;
+}
 .redux-main .redux-container-select li.ui-state-highlight {
   height: 20px;
   margin-top: 2px;
   margin-left: 5px;
   width: 64px;
   margin-bottom: 0;
-}
-.redux-main .redux-container-background .upload {
-    width: 100%;
-    margin-bottom: 8px;
 }

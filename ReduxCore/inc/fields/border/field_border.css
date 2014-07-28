@@ -14,14 +14,12 @@
   margin-bottom: 7px;
 }
 .redux-container-border .select2-container {
-    float: left;
-    display: block;
+  float: left;
+  display: block;
 }
 .redux-container-border .wp-picker-container {
-    margin-top: 2px;
+  margin-top: 2px;
 }
-
-
 @media screen and (max-width: 782px) {
   .redux-container-border .field-border-input input {
     display: inline-block !important;
