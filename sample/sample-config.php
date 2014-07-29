@@ -515,7 +515,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         //'color'         => false,
                         //'preview'       => false, // Disable the previewer
                         'all_styles'    => true,    // Enable all Google Font style/weight variations to be added to the page
-                        'output'        => array('h2.site-description'), // An array of CSS selectors to apply this font style to dynamically
+                        'output'        => array('h2.site-description, .entry-title'), // An array of CSS selectors to apply this font style to dynamically
                         'compiler'      => array('h2.site-description-compiler'), // An array of CSS selectors to apply this font style to dynamically
                         'units'         => 'px', // Defaults to px
                         'subtitle'      => __('Typography option with each property can be called individually.', 'redux-framework-demo'),
@@ -1544,7 +1544,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
                 'google_api_key' => '', // Must be defined to add google fonts to the typography module
                 
-                'async_typography'  => false,                    // Use a asynchronous font on the front end or font string
+                'async_typography'  => true,                    // Use a asynchronous font on the front end or font string
                 'admin_bar'         => true,                    // Show the panel pages on the admin bar
                 'global_variable'   => '',                      // Set a different name for your global variable other than the opt_name
                 'dev_mode'          => true,                    // Show the time the page took to load, etc

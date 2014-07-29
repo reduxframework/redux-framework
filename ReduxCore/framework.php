@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.5.4';
+            public static $_version = '3.3.5.5';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1398,13 +1398,6 @@
                         }
 
                         ?>
-                        <style>.wf-loading *, .wf-inactive * {
-                                visibility: hidden;
-                            }
-
-                            .wf-active * {
-                                visibility: visible;
-                            }</style>
                         <script>
                             /* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
                             if ( typeof WebFontConfig === "undefined" ) {
