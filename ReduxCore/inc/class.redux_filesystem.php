@@ -26,7 +26,7 @@
                 }
             }
 
-            public function execute( $action, $file, $params = '' ) {
+            public function execute( $action, $file = '', $params = '' ) {
 
                 if ( ! empty ( $params ) ) {
                     extract( $params );
@@ -78,7 +78,7 @@
                 return $this->do_action( $action, $file, $params );
             }
 
-            public function do_action( $action, $file, $params = '' ) {
+            public function do_action( $action, $file = '', $params = '' ) {
 
                 if ( ! empty ( $params ) ) {
                     extract( $params );
@@ -93,6 +93,7 @@
                 // Do unique stuff
                 if ( $action == 'mkdir' && ! isset( $this->filesystem->killswitch ) ) {
                     wp_mkdir_p( $file );
+                   
                     $res = file_exists( $file );
                     if ( defined( 'FS_CHMOD_DIR' ) ) {
                         $chmod = FS_CHMOD_DIR;
