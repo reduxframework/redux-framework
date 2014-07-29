@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.6 =
+* Fixed:      Checkboxes with required were working in reverse.
+
 = 3.3.5.5 =
 * Fixed:      ASync Typography now works! No more flashing fonts.
 

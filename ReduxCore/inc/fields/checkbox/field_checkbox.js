@@ -37,14 +37,14 @@
                     return;
                 }
 
-                // Remove the image button
-                el.find( '.checkbox' ).bind( 'click' ).on(
+                el.find( '.checkbox' ).on(
                     'click', function( e ) {
                         var val = 0;
                         if ($(this).is(':checked')) {
                             val = $(this).parent().find('.checkbox-check' ).attr('data-val');
                         }
                         $(this).parent().find('.checkbox-check').val(val);
+                        redux_change( $( this ) );
                     }
                 );
             }
