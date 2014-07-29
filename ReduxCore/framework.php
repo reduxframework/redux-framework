@@ -1045,21 +1045,27 @@
             
             /**
              * Get the default value for an option
-             * @param  string  $key       The option's ID
-             * @param  string  $array_key The key of the default's array
-             * @return mixed              The default value.
+             *
+             * @since       3.3.5
+             * @access      public
+             *
+             * @param       string $key       The option's ID
+             * @param       string $array_key The key of the default's array
+             *
+             * @return      mixed
              */
             public function get_default_value( $key, $array_key = false ) {
+                if ( empty( $this->options_defaults ) ) {
+                    $this->options_defaults = $this->_default_values();
+                }
 
                 $value    = NULL;
-                $defaults = $this->_default_values();
+                $defaults = $this->options_defaults;
 
-                if( isset( $defaults[ $key ] ) ){
-
-                    if( $array_key !== false && isset( $defaults[ $key ][ $array_key ] ) ){
+                if( isset( $defaults[ $key ] ) ) {
+                    if( $array_key !== false && isset( $defaults[ $key ][ $array_key ] ) ) {
                         $value = $defaults[ $key ][ $array_key ];
-                    }
-                    else{
+                    } else{
                         $value = $defaults[ $key ];
                     }
                 }
