@@ -1545,7 +1545,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'google_api_key' => '', // Must be defined to add google fonts to the typography module
                 
                 'async_typography'  => true,                    // Use a asynchronous font on the front end or font string
-                'google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
+                //'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
                 'admin_bar'         => true,                    // Show the panel pages on the admin bar
                 'global_variable'   => '',                      // Set a different name for your global variable other than the opt_name
                 'dev_mode'          => true,                    // Show the time the page took to load, etc

@@ -395,7 +395,7 @@
                     // Save defaults to the DB on it if empty
                     'footer_credit'      => '',
                     'async_typography'   => false,
-                    'google_fonts_link'  => true,
+                    'disable_google_fonts_link'  => false,
                     'class'              => '',
                     // Class that gets appended to all redux-containers
                     'admin_bar'          => true,
@@ -1416,7 +1416,7 @@
                             })();
                         </script>
                     <?php
-                    } elseif ( $this->args['google_fonts_link'] ) {
+                    } elseif ( !$this->args['disable_google_fonts_link'] ) {
                         $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
 
                         //echo '<link rel="stylesheet" id="options-google-fonts" title="" href="'.$protocol.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
