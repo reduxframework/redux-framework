@@ -1042,7 +1042,30 @@
 
                 return $this->options_defaults;
             }
+            
+            /**
+             * Get the default value for an option
+             * @param  string  $key       The option's ID
+             * @param  string  $array_key The key of the default's array
+             * @return mixed              The default value.
+             */
+            public function get_default_value( $key, $array_key = false ) {
 
+                $value    = NULL;
+                $defaults = $this->_default_values();
+
+                if( isset( $defaults[ $key ] ) ){
+
+                    if( $array_key !== false && isset( $defaults[ $key ][ $array_key ] ) ){
+                        $value = $defaults[ $key ][ $array_key ];
+                    }
+                    else{
+                        $value = $defaults[ $key ];
+                    }
+                }
+
+                return $value;
+            }
 
             /**
              * Get fold values into an array suitable for setting folds
