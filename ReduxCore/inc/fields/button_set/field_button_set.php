@@ -99,7 +99,7 @@
                             $this->value = array( $this->value );
                         }
 
-                        if ( in_array( $k, $this->value ) ) {
+                        if ( is_array( $this->value ) && in_array( $k, $this->value ) ) {
                             $selected = 'checked="checked"';
                         }
 
