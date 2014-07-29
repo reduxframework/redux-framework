@@ -57,8 +57,7 @@
              * @return      void
              */
             public function render() {
-
-                print_r($this->value);
+                
                 $this->add_text   = ( isset( $this->field['add_text'] ) ) ? $this->field['add_text'] : __( 'Add More', 'redux-framework' );
                 $this->show_empty = ( isset( $this->field['show_empty'] ) ) ? $this->field['show_empty'] : true;
 
