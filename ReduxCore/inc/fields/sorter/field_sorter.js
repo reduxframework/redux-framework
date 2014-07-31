@@ -96,7 +96,7 @@
 
                             $( this ).find( '.position' ).each(
                                 function() {
-                                    var listID = $( this ).parent().attr( 'id' );
+                                    var listID = $( this ).parent().attr( 'data-id' );
                                     var parentID = $( this ).parent().parent().attr( 'data-group-id' );
 
                                     redux_change( $( this ) );
