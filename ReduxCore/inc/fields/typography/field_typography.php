@@ -739,7 +739,7 @@ if (!class_exists('ReduxFramework_typography')) {
                     if ( isset( $this->parent->args['async_typography'] ) && $this->parent->args['async_typography'] ) {
                         $key_string    = "";
                         $key_string_ie = "";
-                        foreach ( $this->field['output'] as $value ) {
+                        foreach ( $this->field['compiler'] as $value ) {
                             $key_string .= ".wf-loading " . $value . ',';
                             $key_string_ie .= ".ie.wf-loading " . $value . ',';
                         }
