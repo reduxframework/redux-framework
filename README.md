@@ -78,6 +78,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.7 =
+* Fixed:      #1509 - Sorter adding unnecessary bits on some items.
+* Fixed:      #1514 - Customizer and multisite not getting on properly.
+* Fixed:      #1512 - Slides 'Upload' button not showing or saving selected image.
+
 = 3.3.5.6 =
 * Fixed:      Checkboxes with required were working in reverse.
 

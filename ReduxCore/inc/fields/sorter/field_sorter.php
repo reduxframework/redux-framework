@@ -129,7 +129,8 @@
 
                                 if ( $key != "placebo" ) {
 
-                                    echo '<li id="' . $key . '" class="sortee">';
+                                    //echo '<li id="' . $key . '" class="sortee">';
+                                    echo '<li id="sortee-' . $key . '" class="sortee" data-id="'. $key .'">';
                                     echo '<input class="position ' . $this->field['class'] . '" type="hidden" name="' . $this->field['name'] . '[' . $group . '][' . $key . ']' . $this->field['name_suffix'] . '" value="' . $list . '">';
                                     echo $list;
                                     echo '</li>';

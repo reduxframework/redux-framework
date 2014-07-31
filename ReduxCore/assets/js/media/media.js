@@ -98,7 +98,7 @@
                     redux.media = {};
                 }
 
-                if ( data === 'undefined' || data.mode === 'undefined' ) {
+                if ( data === undefined || data.mode === 'undefined' ) {
                     data = {};
                     data.mode = "image";
                 }

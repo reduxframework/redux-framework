@@ -252,7 +252,7 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             wp_enqueue_script (
                 'redux-field-slides-js', 
                 ReduxFramework::$_url . 'inc/fields/slides/field_slides' . Redux_Functions::isMin () . '.js', 
-                array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker' ), 
+                array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker', 'redux-field-media-js' ), 
                 time (), 
                 true
             );
