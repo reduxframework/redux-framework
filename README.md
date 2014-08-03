@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.9 =
+* Fixed:      #1520 - Checkbox field not displaying Wordpress data when using data argument.
+
 = 3.3.5.8 =
 * Fixed:      #1516 - Invalid index and foreach when using compiler and async_typography.
 
