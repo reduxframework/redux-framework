@@ -13,6 +13,10 @@
     $( document ).ready(
         function() {
             //redux.field_objects.button_set.init();
+            if ( $.fn.button.noConflict !== undefined ) {
+                var btn = $.fn.button.noConflict();
+                $.fn.btn = btn;
+            }
         }
     );
 
