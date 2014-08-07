@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.5.11';
+            public static $_version = '3.3.5.10';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -280,26 +280,26 @@
 
                     //DOVY!!  HERE!!!
                     // Getting started page
-//                    if (  is_admin () && $this->args['dev_mode'] ) {
-//                        
-//                        if ( isset($_GET['page']) && $_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' ) {
-//                            //logconsole('inc');
-//                            include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
-//                        } else {
-//                            //logconsole('compare');
-//                            $saveVer = get_option('redux_version_upgraded_from');
-//                            $curVer = self::$_version;
-//
-//                            if (empty($saveVer)) {
-//                                //logconsole('redir');
-//                                wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
-//                                exit;                            
-//                            } else if (version_compare($curVer, $saveVer, '>')) {
-//                                wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
-//                                exit;
-//                            }
-//                        }
-//                    }
+                    if (  is_admin () && $this->args['dev_mode'] ) {
+                        
+                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
+                            //logconsole('inc');
+                            include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
+                        } else {
+                            //logconsole('compare');
+                            $saveVer = get_option('redux_version_upgraded_from');
+                            $curVer = self::$_version;
+
+                            if (empty($saveVer)) {
+                                //logconsole('redir');
+                                wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
+                                exit;                            
+                            } else if (version_compare($curVer, $saveVer, '>')) {
+                                wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
+                                exit;
+                            }
+                        }
+                    }
                     
                     // Options page
                     add_action( 'admin_menu', array( $this, '_options_page' ) );
