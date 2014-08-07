@@ -379,7 +379,6 @@
                     // menu icon
                     'menu_title'         => '',
                     // menu title/text
-                    'page_icon'          => 'icon-themes',
                     'page_title'         => '',
                     // option page title
                     'page_slug'          => '_options',
@@ -400,6 +399,8 @@
                     // Class that gets appended to all redux-containers
                     'admin_bar'          => true,
                     // Show the panel pages on the admin bar
+                    'admin_bar_icon'     => 'dashicons-admin-generic',
+					// admin bar icon
                     'help_tabs'          => array(),
                     'help_sidebar'       => '',
                     'database'           => '',
@@ -1264,7 +1265,7 @@
                         if ( isset( $menu_item[2] ) && $menu_item[2] === $this->args["page_slug"] ) {
                             $nodeargs = array(
                                 'id'    => $menu_item[2],
-                                'title' => "<span class='ab-icon dashicons-admin-generic'></span>" . $menu_item[0],
+                                'title' => '<span class="ab-icon ' . $this->args['admin_bar_icon'] . '"></span>' . $menu_item[0],
                                 'href'  => admin_url( 'admin.php?page=' . $menu_item[2] ),
                                 'meta'  => array()
                             );
@@ -3182,10 +3183,6 @@
 
                     echo '</div>';
                 }
-
-                // Page icon
-                // DOVY!
-                echo '<div id="' . $this->args['page_icon'] . '" class="icon32"></div>';
 
                 echo '<div class="clear"></div>';
                 echo '</div>';
