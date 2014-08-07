@@ -379,7 +379,6 @@
                     // menu icon
                     'menu_title'         => '',
                     // menu title/text
-                    'page_icon'          => 'icon-themes',
                     'page_title'         => '',
                     // option page title
                     'page_slug'          => '_options',
@@ -3184,10 +3183,6 @@
 
                     echo '</div>';
                 }
-
-                // Page icon
-                // DOVY!
-                echo '<div id="' . $this->args['page_icon'] . '" class="icon32"></div>';
 
                 echo '<div class="clear"></div>';
                 echo '</div>';
