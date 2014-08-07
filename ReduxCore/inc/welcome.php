@@ -238,7 +238,7 @@ class Redux_Welcome {
             </div>
 
             <div class="return-to-dashboard">
-                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'edd-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Easy Digital Downloads Settings', 'edd' ); ?></a> &middot;
+                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'edd-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a> &middot;
                 <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'page' => 'edd-changelog' ), 'index.php' ) ) ); ?>"><?php _e ( 'View the Full Changelog', 'edd' ); ?></a>
             </div>
         </div>
@@ -271,7 +271,7 @@ class Redux_Welcome {
             </div>
 
             <div class="return-to-dashboard">
-                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'edd-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Easy Digital Downloads Settings', 'redux-framework' ); ?></a>
+                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'edd-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a>
             </div>
         </div>
         <?php
@@ -288,7 +288,7 @@ class Redux_Welcome {
         list( $display_version ) = explode ( '-', ReduxFramework::$_version );
         ?>
         <div class="wrap about-wrap">
-            <h1><?php printf ( __ ( 'Welcome to Easy Digital Downloads %s', 'edd' ), $display_version ); ?></h1>
+            <h1><?php printf ( __ ( 'Welcome to Redux Framework %s', 'redux-framework' ), $display_version ); ?></h1>
             <div class="about-text"><?php printf ( __ ( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $display_version ); ?></div>
             <div class="redux-badge"><?php printf ( __ ( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
 
