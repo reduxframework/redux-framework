@@ -19,6 +19,10 @@ class Redux_Welcome {
         add_action ( 'admin_menu', array( $this, 'admin_menus' ) );
         add_action ( 'admin_head', array( $this, 'admin_head' ) );
         add_action ( 'admin_init', array( $this, 'welcome' ) );
+        
+        update_option( 'redux_version_upgraded_from', ReduxFramework::$_version );
+        set_transient( '_redux_activation_redirect', true, 30 );
+        
     }
 
     /**
@@ -30,6 +34,7 @@ class Redux_Welcome {
      * @return void
      */
     public function admin_menus () {
+
         // About Page
         add_dashboard_page (
                 __ ( 'Welcome to Redux Framework', 'redux-framework' ), __ ( 'Welcome to Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-about', array( $this, 'about_screen' )
@@ -528,14 +533,14 @@ class Redux_Welcome {
             return;
 
         $upgrade = get_option ( 'redux_version_upgraded_from' );
-
-        if ( !$upgrade ) { // First time install
-            wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
-            exit;
-        } else { // Update
-            wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
-            exit;
-        }
+//
+//        if ( !$upgrade ) { // First time install
+//            wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
+//            exit;
+//        } else { // Update
+//            wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
+//            exit;
+//        }
     }
 }
 

@@ -198,7 +198,8 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
             }
 
             // Set up admin notice on new version
-            if ( 1 == strcmp( $ver, $curVer ) ) {
+            //if ( 1 == strcmp( $ver, $curVer ) ) {
+            if (version_compare($ver, $curVer, '>')) {
                 self::$_parent->admin_notices[] = array(
                     'type'    => 'updated',
                     'msg'     => '<strong>A new build of Redux is now available!</strong><br/><br/>Your version:  <strong>' . $curVer . '</strong><br/>New version:  <strong><span style="color: red;">' . $ver . '</span></strong><br/><br/><a href="https://github.com/ReduxFramework/redux-framework">Get it now</a>&nbsp;&nbsp;|',
