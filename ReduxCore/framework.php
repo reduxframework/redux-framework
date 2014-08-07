@@ -287,16 +287,18 @@
                             include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
                         } else {
                             //logconsole('compare');
-                            $saveVer = get_option('redux_version_upgraded_from');
-                            $curVer = self::$_version;
+                            if (isset($_GET['page']) && $_GET['page'] == $this->args['page_slug']) {
+                                $saveVer = get_option('redux_version_upgraded_from');
+                                $curVer = self::$_version;
 
-                            if (empty($saveVer)) {
-                                //logconsole('redir');
-                                wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
-                                exit;                            
-                            } else if (version_compare($curVer, $saveVer, '>')) {
-                                wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
-                                exit;
+                                if (empty($saveVer)) {
+                                    //logconsole('redir');
+                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
+                                    exit;                            
+                                } else if (version_compare($curVer, $saveVer, '>')) {
+                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
+                                    exit;
+                                }
                             }
                         }
                     }
