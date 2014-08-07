@@ -78,6 +78,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.10 =
+* Fixed:      #1529 - ACE Editor conflict with Visual Composer.
+* Added:      #1530 - Added argument to specify admin bar icon, `admin_bar_icon`.  Thanks Ninos!
+* Fixed:      #1532 - Media field not accepting any mime type when `'mode' => false`.
+
 = 3.3.5.9 =
 * Fixed:      #1520 - Checkbox field not displaying Wordpress data when using data argument.
 

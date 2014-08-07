@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.5.9';
+            public static $_version = '3.3.5.10';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -330,6 +330,9 @@
                     // Enqueue dynamic CSS and Google fonts
                     add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
 
+                    add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
+                    add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
+                
                     require_once( self::$_dir . 'inc/import_export.php' );
                     $this->import_export = new Redux_import_export( $this );
 
@@ -465,6 +468,12 @@
                 );
             }
 
+            // Fix conflicts with Visual Composer.
+            public function vc_fixes() {
+                wp_dequeue_script( 'wpb_ace' );
+                wp_deregister_script( 'wpb_ace' );                
+            }
+            
             public function network_admin_bar( $wp_admin_bar ) {
 
                 $args = array(

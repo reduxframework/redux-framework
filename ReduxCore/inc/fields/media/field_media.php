@@ -69,6 +69,10 @@
 
                 $this->value = wp_parse_args( $this->value, $defaults );
 
+                if (isset($this->field['mode']) && $this->field['mode'] == false) {
+                    $this->field['mode'] = 0;
+                }
+                
                 if ( ! isset( $this->field['mode'] ) ) {
                     $this->field['mode'] = "image";
                 }

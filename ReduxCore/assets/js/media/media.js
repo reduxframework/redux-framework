@@ -94,8 +94,9 @@
                 frame.close();
 
                 var data = $( selector ).find('.data').data();
-                if ( typeof redux.media === 'undefined' ) {
-                    redux.media = {};
+
+                if ( typeof redux.field_objects.media === 'undefined' || typeof redux.field_objects.media === undefined ) {
+                    redux.field_objects.media = {};
                 }
 
                 if ( data === undefined || data.mode === 'undefined' ) {
@@ -103,8 +104,12 @@
                     data.mode = "image";
                 }
 
-                if ( data.mode !== false && attachment.attributes.type !== data.mode ) {
-                    return;
+                if (data.mode === 0) {
+                    
+                } else {
+                    if ( data.mode !== false && attachment.attributes.type !== data.mode || data.mode !== 0 ) {
+                        return;
+                    }
                 }
 
                 selector.find( '.upload' ).val( attachment.attributes.url );
