@@ -107,7 +107,7 @@
                 if (data.mode === 0) {
                     
                 } else {
-                    if ( data.mode !== false && attachment.attributes.type !== data.mode || data.mode !== 0 ) {
+                    if ( data.mode !== false && attachment.attributes.type !== data.mode ) {
                         return;
                     }
                 }
