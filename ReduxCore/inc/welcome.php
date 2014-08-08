@@ -404,7 +404,7 @@ class Redux_Welcome {
      * @return void
      */
     public function credits_screen () {
-        list( $display_version ) = explode ( '-', EDD_VERSION );
+        list( $display_version ) = explode ( '-', ReduxFramework::$_version );
         ?>
         <div class="wrap about-wrap">
             <h1><?php printf ( __ ( 'Welcome to Redux Framework %s', 'redux-framework' ), $display_version ); ?></h1>
@@ -430,7 +430,7 @@ class Redux_Welcome {
         $url = ReduxFramework::$_dir;
         $url = str_replace('ReduxCore', '', $url);
         
-        $file = file_exists ( $url . 'readme.txt' ) ? $url . 'readme.txt' : null;
+        $file = file_exists ( $url . 'README.txt' ) ? $url . 'README.txt' : null;
 
         if ( !$file ) {
             $readme = '<p>' . __ ( 'No valid changlog was found.', 'edd' ) . '</p>';
@@ -438,7 +438,11 @@ class Redux_Welcome {
             $readme = file_get_contents ( $file );
             $readme = nl2br ( esc_html ( $readme ) );
 
-            $readme = end ( explode ( '== Changelog ==', $readme ) );
+            $readme = explode ( '== Changelog ==', $readme );
+            $readme = end ( $readme );
+
+            $remove = explode( '== Attribution ==', $readme );
+            $readme = str_replace( '== Attribution ==' . end( $remove ), '', $readme );
 
             $readme = preg_replace ( '/`(.*?)`/', '<code>\\1</code>', $readme );
             $readme = preg_replace ( '/[\040]\*\*(.*?)\*\*/', ' <strong>\\1</strong>', $readme );

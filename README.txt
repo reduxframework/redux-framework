@@ -734,16 +734,15 @@ Feature: Code at bottom of sample-config.php to hide plugin activation text abou
 = 3.0.0 =
 * Initial WordPress.org plugin release.
 
-== Upgrade Notice ==
-
 = 3.0 =
 Redux is now hosted on WordPress.org! Update in order to get proper, stable updates.
+
 
 == Attribution ==
 
 Redux is was originally based off the following frameworks:
 
-* [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) 
+* [NHP](https://github.com/leemason/NHP-Theme-Options-Framework)
 * [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework")
 
 It has now a completely different code base. If you like what you see, realize this is a labor of love. Please [donate to the Redux Framework](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U) if you are able.
