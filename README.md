@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.5.12 =
+* Fixed:      #1543 - Hint icon not changing when set in args.
+
 = 3.3.5.11 =
 * Fixed:      #1537 - Media field not accepting images with mode set to false.
 
