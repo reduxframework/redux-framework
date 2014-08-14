@@ -70,7 +70,7 @@ class Redux_Welcome {
         remove_submenu_page ( 'index.php', 'redux-credits' );
 
         // Badge for welcome page
-        $badge_url = ReduxFramework::$_url . 'assets/images/edd-badge.png';
+        $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
         ?>
         <style type="text/css" media="screen">
             /*<![CDATA[*/
@@ -238,8 +238,8 @@ class Redux_Welcome {
             </div>
 
             <div class="return-to-dashboard">
-                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'edd-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a> &middot;
-                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'page' => 'edd-changelog' ), 'index.php' ) ) ); ?>"><?php _e ( 'View the Full Changelog', 'edd' ); ?></a>
+                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'redux-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a> &middot;
+                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'page' => 'redux-changelog' ), 'index.php' ) ) ); ?>"><?php _e ( 'View the Full Changelog', 'redux' ); ?></a>
             </div>
         </div>
         <?php
@@ -271,7 +271,7 @@ class Redux_Welcome {
             </div>
 
             <div class="return-to-dashboard">
-                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'edd-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a>
+                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'redux-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a>
             </div>
         </div>
         <?php
@@ -303,14 +303,14 @@ class Redux_Welcome {
 
 
 
-                    <h4><?php printf ( __ ( '<a href="%s">%s &rarr; Add New</a>', 'edd' ), admin_url ( 'post-new.php?post_type=download' ), edd_get_label_plural () ); ?></h4>
-                    <p><?php printf ( __ ( 'The %s menu is your access point for all aspects of your Easy Digital Downloads product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'edd' ), edd_get_label_plural () ); ?></p>
+                    <h4><?php printf ( __ ( '<a href="%s">%s &rarr; Add New</a>', 'redux' ), admin_url ( 'post-new.php?post_type=download' ), redux_get_label_plural () ); ?></h4>
+                    <p><?php printf ( __ ( 'The %s menu is your access point for all aspects of your Easy Digital Downloads product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'redux' ), redux_get_label_plural () ); ?></p>
 
-                    <h4><?php _e ( 'Product Price', 'edd' ); ?></h4>
-                    <p><?php _e ( 'Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options.', 'edd' ); ?></p>
+                    <h4><?php _e ( 'Product Price', 'redux' ); ?></h4>
+                    <p><?php _e ( 'Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options.', 'redux' ); ?></p>
 
-                    <h4><?php _e ( 'Download Files', 'edd' ); ?></h4>
-                    <p><?php _e ( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'edd' ); ?></p>
+                    <h4><?php _e ( 'Download Files', 'redux' ); ?></h4>
+                    <p><?php _e ( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'redux' ); ?></p>
 
                 </div>
             </div>
@@ -320,7 +320,7 @@ class Redux_Welcome {
 
                 <div class="feature-section">
 
-                    <img src="<?php echo EDD_PLUGIN_URL . 'assets/images/screenshots/grid.png'; ?>" class="edd-welcome-screenshots"/>
+                    <img src="<?php echo Redux_PLUGIN_URL . 'assets/images/screenshots/grid.png'; ?>" class="redux-welcome-screenshots"/>
 
                     <h4><?php _e ( 'Flexible Product Grids', 'redux-framework' ); ?></h4>
                     <p><?php _e ( 'The [downloads] shortcode will display a product grid that works with any theme, no matter the size. It is even responsive!', 'redux-framework' ); ?></p>
@@ -358,7 +358,7 @@ class Redux_Welcome {
                     <h4><?php _e ( 'Phenomenal Support', 'redux-framework' ); ?></h4>
                     <p><?php _e ( 'We do our best to provide the best support we can. If you encounter a problem or have a question, post a question in the <a href="https://easydigitaldownloads.com/support">support forums</a>.', 'redux-framework' ); ?></p>
 
-                    <h4><?php _e ( 'Need Even Faster Support?', 'edd' ); ?></h4>
+                    <h4><?php _e ( 'Need Even Faster Support?', 'redux' ); ?></h4>
                     <p><?php _e ( 'Our <a href="https://easydigitaldownloads.com/support/pricing/">Priority Support forums</a> are there for customers that need faster and/or more in-depth assistance.', 'redux-framework' ); ?></p>
 
                 </div>
@@ -409,7 +409,7 @@ class Redux_Welcome {
         <div class="wrap about-wrap">
             <h1><?php printf ( __ ( 'Welcome to Redux Framework %s', 'redux-framework' ), $display_version ); ?></h1>
             <div class="about-text"><?php printf ( __ ( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $display_version ); ?></div>
-            <div class="edd-badge"><?php printf ( __ ( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
+            <div class="redux-badge"><?php printf ( __ ( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
 
         <?php $this->tabs (); ?>
 
@@ -421,7 +421,7 @@ class Redux_Welcome {
     }
 
     /**
-     * Parse the EDD readme.txt file
+     * Parse the Redux readme.txt file
      *
      * @since 2.0.3
      * @return string $readme HTML formatted readme file
@@ -433,7 +433,7 @@ class Redux_Welcome {
         $file = file_exists ( $url . 'README.txt' ) ? $url . 'README.txt' : null;
 
         if ( !$file ) {
-            $readme = '<p>' . __ ( 'No valid changlog was found.', 'edd' ) . '</p>';
+            $readme = '<p>' . __ ( 'No valid changlog was found.', 'redux' ) . '</p>';
         } else {
             $readme = file_get_contents ( $file );
             $readme = nl2br ( esc_html ( $readme ) );
@@ -458,8 +458,8 @@ class Redux_Welcome {
      * Render Contributors List
      *
      * @since 1.4
-     * @uses EDD_Welcome::get_contributors()
-     * @return string $contributor_list HTML formatted list of all the contributors for EDD
+     * @uses Redux_Welcome::get_contributors()
+     * @return string $contributor_list HTML formatted list of all the contributors for Redux
      */
     public function contributors () {
         $contributors = $this->get_contributors ();
@@ -514,12 +514,12 @@ class Redux_Welcome {
     }
 
     /**
-     * Sends user to the Welcome page on first activation of EDD as well as each
-     * time EDD is upgraded to a new version
+     * Sends user to the Welcome page on first activation of Redux as well as each
+     * time Redux is upgraded to a new version
      *
      * @access public
      * @since 1.4
-     * @global $edd_options Array of all the EDD Options
+     * @global $redux_options Array of all the Redux Options
      * @return void
      */
     public function welcome () {

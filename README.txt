@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.0
-Stable tag: 3.3.5
+Stable tag: 3.3.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,31 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.3.6 =
+* Modified:   Language files.
+* Fixed:      #1543 - Hint icon not changing when set in args.
+* Fixed:      #1537 - Media field not accepting images with mode set to false.
+* Fixed:      #1529 - ACE Editor conflict with Visual Composer.
+* Added:      #1530 - Added argument to specify admin bar icon, `admin_bar_icon`.  Thanks Ninos!
+* Fixed:      #1532 - Media field not accepting any mime type when `'mode' => false`.
+* Fixed:      #1520 - Checkbox field not displaying Wordpress data when using data argument.
+* Fixed:      #1516 - Invalid index and foreach when using compiler and async_typography.
+* Fixed:      #1509 - Sorter adding unnecessary bits on some items.
+* Fixed:      #1514 - Customizer and multisite not getting on properly.
+* Fixed:      #1512 - Slides 'Upload' button not showing or saving selected image.
+* Fixed:      Checkboxes with required were working in reverse.
+* Fixed:      ASync Typography now works! No more flashing fonts.
+* Fixed:      #1489 - Color picker UI lining up improperly.
+* Fixed:      #1497 - dev_mode spinner issue.
+* Fixed:      Spelling error in tracking dialog.
+* Modified:   Updated ace_editor.
+* Modified:   Many MANY fields for the group field.
+* Fixed:      Some CSS bugs.
+* Fixed:      #1481 - Custom fonts loading in google font CSS.
+* Fixed:      #1485 - Customizer 'invalid argument' error.  Thanks @rnlmedia.
+* Fixed:      #1472 - font style not displaying saved valie with no font-family argument set.
+* Fixed:      #1471 - raw field and required not playing nice together.
 
 = 3.3.5 =
 * Added:      An annoying notice at the top so our devs don't ship with dev_mode on.  ;)
