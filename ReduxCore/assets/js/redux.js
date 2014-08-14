@@ -290,8 +290,15 @@
     $.redux.tabCheck = function() {
         $( '.redux-group-tab-link-a' ).click(
             function() {
-                var el = $( this ).parents( '.redux-container:first' );
-                var relid = $( this ).data( 'rel' ); // The group ID of interest
+                var link = $( this );
+                if ( link.parent().hasClass( 'empty_section' ) && link.parent().hasClass( 'hasSubSections' ) ) {
+                    var elements = $( this ).closest( 'ul' ).find( '.redux-group-tab-link-a' );
+                    var index = elements.index( this );
+                    link = elements.slice( index + 1, index + 2 );
+
+                }
+                var el = link.parents( '.redux-container:first' );
+                var relid = link.data( 'rel' ); // The group ID of interest
                 var oldid = el.find( '.redux-group-tab-link-li.active .redux-group-tab-link-a' ).data( 'rel' );
 
                 if ( oldid === relid ) {
@@ -299,7 +306,7 @@
                 }
 
                 $( '#currentSection' ).val( relid );
-                if ( !$( this ).parents( '.postbox-container:first' ).length ) {
+                if ( !link.parents( '.postbox-container:first' ).length ) {
                     // Set the proper page cookie
                     $.cookie(
                         'redux_current_tab', relid, {
@@ -360,6 +367,8 @@
                                 'fast', function() {
                                     el.find( '#' + oldid + '_section_group_li' ).removeClass( 'active' );
                                     el.find( '#' + oldid + '_section_group_li' ).parents( '.redux-group-tab-link-li' ).removeClass( 'active' ).removeClass( 'activeChild' );
+                                    el.find( '#' + relid + '_section_group_li' ).parents( '.redux-group-tab-link-li' ).addClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                                    el.find( '#' + relid + '_section_group_li' ).addClass( 'active' );
                                 }
                             );
                         } else {

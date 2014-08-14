@@ -53,7 +53,7 @@
         include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
 
         include_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
-        
+
         /**
          * Main ReduxFramework class
          *
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6';
+            public static $_version = '3.3.6.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -302,7 +302,7 @@
 //                            }
 //                        }
 //                    }
-                    
+
                     // Options page
                     add_action( 'admin_menu', array( $this, '_options_page' ) );
 
@@ -346,7 +346,7 @@
 
                     add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
                     add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
-                
+
                     require_once( self::$_dir . 'inc/import_export.php' );
                     $this->import_export = new Redux_import_export( $this );
 
@@ -386,69 +386,69 @@
 
             private function set_default_args() {
                 $this->args = array(
-                    'opt_name'           => '',
+                    'opt_name'                  => '',
                     // Must be defined by theme/plugin
-                    'google_api_key'     => '',
+                    'google_api_key'            => '',
                     // Must be defined to add google fonts to the typography module
-                    'last_tab'           => '',
+                    'last_tab'                  => '',
                     // force a specific tab to always show on reload
-                    'menu_icon'          => '',
+                    'menu_icon'                 => '',
                     // menu icon
-                    'menu_title'         => '',
+                    'menu_title'                => '',
                     // menu title/text
-                    'page_title'         => '',
+                    'page_title'                => '',
                     // option page title
-                    'page_slug'          => '_options',
-                    'page_permissions'   => 'manage_options',
-                    'menu_type'          => 'menu',
+                    'page_slug'                 => '_options',
+                    'page_permissions'          => 'manage_options',
+                    'menu_type'                 => 'menu',
                     // ('menu'|'submenu')
-                    'page_parent'        => 'themes.php',
+                    'page_parent'               => 'themes.php',
                     // requires menu_type = 'submenu
-                    'page_priority'      => null,
-                    'allow_sub_menu'     => true,
+                    'page_priority'             => null,
+                    'allow_sub_menu'            => true,
                     // allow submenus to be added if menu_type == menu
-                    'save_defaults'      => true,
+                    'save_defaults'             => true,
                     // Save defaults to the DB on it if empty
-                    'footer_credit'      => '',
-                    'async_typography'   => false,
-                    'disable_google_fonts_link'  => false,
-                    'class'              => '',
+                    'footer_credit'             => '',
+                    'async_typography'          => false,
+                    'disable_google_fonts_link' => false,
+                    'class'                     => '',
                     // Class that gets appended to all redux-containers
-                    'admin_bar'          => true,
+                    'admin_bar'                 => true,
                     // Show the panel pages on the admin bar
-                    'admin_bar_icon'     => 'dashicons-admin-generic',
-					// admin bar icon
-                    'help_tabs'          => array(),
-                    'help_sidebar'       => '',
-                    'database'           => '',
+                    'admin_bar_icon'            => 'dashicons-admin-generic',
+                    // admin bar icon
+                    'help_tabs'                 => array(),
+                    'help_sidebar'              => '',
+                    'database'                  => '',
                     // possible: options, theme_mods, theme_mods_expanded, transient, network
-                    'customizer'         => false,
+                    'customizer'                => false,
                     // setting to true forces get_theme_mod_expanded
-                    'global_variable'    => '',
+                    'global_variable'           => '',
                     // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
-                    'output'             => true,
+                    'output'                    => true,
                     // Dynamically generate CSS
-                    'compiler'           => true,
+                    'compiler'                  => true,
                     // Initiate the compiler hook
-                    'output_tag'         => true,
+                    'output_tag'                => true,
                     // Print Output Tag
-                    'transient_time'     => '',
-                    'default_show'       => false,
+                    'transient_time'            => '',
+                    'default_show'              => false,
                     // If true, it shows the default value
-                    'default_mark'       => '',
+                    'default_mark'              => '',
                     // What to print by the field's title if the value shown is default
-                    'update_notice'      => true,
+                    'update_notice'             => true,
                     // Recieve an update notice of new commits when in dev mode
-                    'disable_save_warn'  => false,
+                    'disable_save_warn'         => false,
                     // Disable the save warn
-                    'open_expanded'      => false,
+                    'open_expanded'             => false,
                     // Start the panel fully expanded to start with
-                    'network_admin'      => false,
+                    'network_admin'             => false,
                     // Enable network admin when using network database mode
-                    'network_sites'      => true,
+                    'network_sites'             => true,
                     // Enable sites as well as admin when using network database mode
-                    'hide_reset'         => false,
-                    'hints'              => array(
+                    'hide_reset'                => false,
+                    'hints'                     => array(
                         'icon'          => 'icon-question-sign',
                         'icon_position' => 'right',
                         'icon_color'    => 'lightgray',
@@ -476,20 +476,25 @@
                             ),
                         ),
                     ),
-                    'show_import_export' => true,
-                    'dev_mode'           => false,
-                    'system_info'        => false,
+                    'show_import_export'        => true,
+                    'dev_mode'                  => false,
+                    'system_info'               => false,
                 );
             }
 
             // Fix conflicts with Visual Composer.
             public function vc_fixes() {
+
                 if (redux_helpers::isFieldInUse ( $this, 'ace_editor' )) {
                     wp_dequeue_script( 'wpb_ace' );
                     wp_deregister_script( 'wpb_ace' );                
                 }
+
+                wp_dequeue_script( 'wpb_ace' );
+                wp_deregister_script( 'wpb_ace' );
+
             }
-            
+
             public function network_admin_bar( $wp_admin_bar ) {
 
                 $args = array(
@@ -1442,7 +1447,7 @@
                             })();
                         </script>
                     <?php
-                    } elseif ( !$this->args['disable_google_fonts_link'] ) {
+                    } elseif ( ! $this->args['disable_google_fonts_link'] ) {
                         $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
 
                         //echo '<link rel="stylesheet" id="options-google-fonts" title="" href="'.$protocol.$typography->makeGoogleWebfontLink( $this->typography ).'&amp;v='.$version.'" type="text/css" media="all" />';
@@ -1630,7 +1635,7 @@
                         filemtime( self::$_dir . 'assets/css/color-picker/color-picker.css' ),
                         'all'
                     );
-                    
+
                     wp_enqueue_style( 'color-picker-css' );
 
 
@@ -1783,11 +1788,11 @@
 
                 if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] == true ) {
 
-                    $base = ReduxFramework::$_url.'inc/p.php?url=';
-                    $url = $base.urlencode('http://ads.reduxframework.com/api/index.php?js&g&1&v=2').'&proxy='.urlencode($base);
-                    $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "'.$url.'"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
+                    $base                        = ReduxFramework::$_url . 'inc/p.php?url=';
+                    $url                         = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base );
+                    $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $url . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
                 }
-                
+
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
                 $this->localize_data['defaults']     = $this->options_defaults;
@@ -3078,7 +3083,8 @@
                     //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
                     $subsections      = ( isset( $sections[ ( $k + 1 ) ] ) && isset( $sections[ ( $k + 1 ) ]['subsection'] ) && $sections[ ( $k + 1 ) ]['subsection'] == true ) ? true : false;
                     $subsectionsClass = $subsections ? ' hasSubSections' : '';
-                    $extra_icon       = $subsections ? '<span class="extraIconSubsections"><i class="el el-icon-chevron-down">&nbsp;</i></span>' : '';
+                    $subsectionsClass .= ( ! isset( $section['fields'] ) || empty( $section['fields'] ) ) ? ' empty_section' : '';
+                    $extra_icon = $subsections ? '<span class="extraIconSubsections"><i class="el el-icon-chevron-down">&nbsp;</i></span>' : '';
                     $string .= '<li id="' . $k . $suffix . '_section_group_li" class="redux-group-tab-link-li' . $section['class'] . $subsectionsClass . '">';
                     $string .= '<a href="javascript:void(0);" id="' . $k . $suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $k . '" data-rel="' . $k . $suffix . '">' . $extra_icon . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
                     $nextK = $k;
