@@ -126,6 +126,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 == Changelog ==
 
 = 3.3.6 =
+* Fixed:      #1560 - IE8 RGBA fallack
 * Modified:   Language files.
 * Fixed:      #1543 - Hint icon not changing when set in args.
 * Fixed:      #1537 - Media field not accepting images with mode set to false.

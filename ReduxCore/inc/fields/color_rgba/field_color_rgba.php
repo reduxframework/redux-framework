@@ -90,7 +90,8 @@
                     if ( $this->value['alpha'] == "0.00" || empty( $this->value['color'] ) ) {
                         $style = $mode . ':transparent;';
                     } elseif ( ! empty( $this->value['color'] ) ) {
-                        $style = $mode . ':rgba(' . Redux_Helpers::hex2rgba( $this->value['color'] ) . ',' . $this->value['alpha'] . ');';
+                        $style = $mode . ':rgba(' . Redux_Helpers::hex2rgba( $this->value['color'] ) . ');';
+                        $style .= $mode . ':rgba(' . Redux_Helpers::hex2rgba( $this->value['color'] ) . ',' . $this->value['alpha'] . ');';
                     }
 
                     if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
