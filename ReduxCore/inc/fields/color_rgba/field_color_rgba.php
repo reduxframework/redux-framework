@@ -90,7 +90,7 @@
                     if ( $this->value['alpha'] == "0.00" || empty( $this->value['color'] ) ) {
                         $style = $mode . ':transparent;';
                     } elseif ( ! empty( $this->value['color'] ) ) {
-                        $style = $mode . ':rgba(' . Redux_Helpers::hex2rgba( $this->value['color'] ) . ');';
+                        $style = $mode . ':rgb(' . Redux_Helpers::hex2rgba( $this->value['color'] ) . ');';
                         $style .= $mode . ':rgba(' . Redux_Helpers::hex2rgba( $this->value['color'] ) . ',' . $this->value['alpha'] . ');';
                     }
 
