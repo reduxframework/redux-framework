@@ -12,6 +12,10 @@
  */
 /*global window: false, jQuery: false, console: false, define: false */
 
+if ( typeof jQuery.qtip !== 'undefined' ) {
+    return;
+}
+
 /* Cache window, document, undefined */
 (function( window, document, undefined ) {
 
