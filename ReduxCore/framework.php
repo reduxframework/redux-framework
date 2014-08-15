@@ -105,15 +105,15 @@
                 } else {
                     if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory_uri() ) ) !== false ) {
                         $relative_url = str_replace( get_template_directory_uri(), '', self::$_dir );
-                        self::$_url   = get_stylesheet_directory_uri() . $relative_url;
+                        self::$_url   = trailingslashit( get_stylesheet_directory_uri() . $relative_url );
                     } else if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
                         $relative_url = str_replace( get_stylesheet_directory(), '', self::$_dir );
-                        self::$_url   = get_stylesheet_directory_uri() . $relative_url;
+                        self::$_url   = trailingslashit( get_stylesheet_directory_uri() . $relative_url );
                     } else {
                         $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
                         $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
                         $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
-                        self::$_url     = self::$wp_content_url . $relative_url;
+                        self::$_url     = trailingslashit( self::$wp_content_url . $relative_url );
                     }
                 }
             }
