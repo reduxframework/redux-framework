@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6.2 =
+* Modified:   How we declare the uploads directory and URL. Using core WP functions now.
+
 = 3.3.6.1 =
 * Modified:   Now if a section is empty, but has subsections, that section will be "skipped" when 
               clicked and the first subsection will then be shown.
