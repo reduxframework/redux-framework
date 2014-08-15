@@ -77,7 +77,19 @@
             public static function init() {
 
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-                self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
+                self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
+                // Check if plugin is a symbolic link, see if it's a plugin. If embedded, we can't do a thing.
+                if ( strpos( self::$_dir, ABSPATH ) === false ) {
+                    if ( ! function_exists( 'get_plugins' ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                    }
+                    foreach ( get_plugins() as $key => $value ) {
+                        if ( strpos( $key, 'redux-framework.php' ) !== false ) {
+                            self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR . '/plugins/' . plugin_dir_path( $key ) . 'ReduxCore/' ) );
+                        }
+                    }
+                }
+
                 $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
                 $wp_content_dir       = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
                 $relative_url         = str_replace( $wp_content_dir, '', self::$_dir );
@@ -89,6 +101,7 @@
                     self::$_is_plugin = false;
                 }
             }
+
             // ::init()
 
             public $framework_url = 'http://www.reduxframework.com/';
@@ -374,7 +387,7 @@
             } // __construct()
 
             private function set_redux_content() {
-                $upload_dir = wp_upload_dir();
+                $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
                 self::$_upload_url = $upload_dir['baseurl'] . '/redux/';
 
@@ -483,9 +496,9 @@
 
             // Fix conflicts with Visual Composer.
             public function vc_fixes() {
-                if (redux_helpers::isFieldInUse ( $this, 'ace_editor' )) {
+                if ( redux_helpers::isFieldInUse( $this, 'ace_editor' ) ) {
                     wp_dequeue_script( 'wpb_ace' );
-                    wp_deregister_script( 'wpb_ace' );                
+                    wp_deregister_script( 'wpb_ace' );
                 }
             }
 
