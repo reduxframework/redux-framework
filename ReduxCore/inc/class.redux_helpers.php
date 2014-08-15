@@ -56,6 +56,10 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
             }
         }
 
+        public static function getRealPath($path) {
+            return is_link($path) ? readlink($path) : $path;
+        }
+
         public static function isParentTheme( $file ) {
             $file   = self::cleanFilePath( $file );
             $dir    = self::cleanFilePath( get_template_directory() );

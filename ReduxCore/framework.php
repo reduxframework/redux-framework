@@ -77,7 +77,7 @@
             public static function init() {
 
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-                self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
+                self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( Redux_Helpers::getRealPath ( dirname( __FILE__ ) ) ) );
                 $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
                 $wp_content_dir       = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
                 $relative_url         = str_replace( $wp_content_dir, '', self::$_dir );
@@ -89,7 +89,6 @@
                     self::$_is_plugin = false;
                 }
             }
-
             // ::init()
 
             public $framework_url = 'http://www.reduxframework.com/';
