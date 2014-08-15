@@ -79,7 +79,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ### Master ###
 
 = 3.3.6.3 =
-* Modified:   How Redux paths are run. Should cover all use cases now. Child themes can also embed Redux properly now.
+* Modified:   How Redux paths are run. Should cover all use cases now. Child themes can also embed 
+              Redux properly now. Thanks @cfoellmann for the suggestions. Fix for issue #1566.
 
 = 3.3.6.2 =
 * Modified:   How we declare the uploads directory and URL. Using core WP functions now.
