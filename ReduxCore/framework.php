@@ -77,17 +77,19 @@
             public static function init() {
 
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-                self::$_dir           = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
-                $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
-                $wp_content_dir       = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
-                $relative_url         = str_replace( $wp_content_dir, '', self::$_dir );
-                self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
-                self::$_url           = self::$wp_content_url . $relative_url;
+                self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
 
                 // See if Redux is a plugin or not
                 if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
                     self::$_is_plugin = false;
                 }
+
+				if ( self::$_is_plugin == true || self::$_as_plugin == true ) {
+					self::$_url = plugin_dir_url( __FILE__ );
+				} else {
+					self::$_url = get_stylesheet_directory_uri() . '/redux-folder/'; // @todo detect the folder of this file relative to stylesheet url
+				}
+
             }
 
             // ::init()
