@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6.1';
+            public static $_version = '3.3.6.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -375,9 +375,9 @@
             } // __construct()
 
             private function set_redux_content() {
-                $wp_content_dir    = Redux_Helpers::cleanFilePath( trailingslashit( WP_CONTENT_DIR ) );
-                self::$_upload_dir = $wp_content_dir . '/uploads/redux/';
-                self::$_upload_url = Redux_Helpers::cleanFilePath( trailingslashit( content_url() ) ) . '/uploads/redux/';
+                $upload_dir = wp_upload_dir();
+                self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
+                self::$_upload_url = $upload_dir['baseurl'] . '/redux/';
 
                 if ( ! is_dir( self::$_upload_dir ) ) {
                     $this->filesystem->execute( 'mkdir', self::$_upload_dir );
