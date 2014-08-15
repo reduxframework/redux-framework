@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6.2';
+            public static $_version = '3.3.6.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -75,33 +75,48 @@
             public static $_as_plugin = false;
 
             public static function init() {
-
+                $dir = Redux_Helpers::cleanFilePath( dirname( __FILE__ ) );
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-                self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
-                // Check if plugin is a symbolic link, see if it's a plugin. If embedded, we can't do a thing.
-                if ( strpos( self::$_dir, ABSPATH ) === false ) {
-                    if ( ! function_exists( 'get_plugins' ) ) {
-                        require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                    }
-                    foreach ( get_plugins() as $key => $value ) {
-                        if ( strpos( $key, 'redux-framework.php' ) !== false ) {
-                            self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR . '/plugins/' . plugin_dir_path( $key ) . 'ReduxCore/' ) );
+                self::$_dir           = trailingslashit( $dir );
+                self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
+                // See if Redux is a plugin or not
+                if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false || strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory_uri() ) ) !== false ) {
+                    self::$_is_plugin = false;
+                } else {
+                    // Check if plugin is a symbolic link, see if it's a plugin. If embedded, we can't do a thing.
+                    if ( strpos( self::$_dir, ABSPATH ) === false ) {
+                        if ( ! function_exists( 'get_plugins' ) ) {
+                            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                        }
+                        $is_plugin = false;
+                        foreach ( get_plugins() as $key => $value ) {
+                            if ( strpos( $key, 'redux-framework.php' ) !== false ) {
+                                self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR . '/plugins/' . plugin_dir_path( $key ) . 'ReduxCore/' ) );
+                                $is_plugin  = true;
+                            }
+                        }
+                        if ( ! $is_plugin ) {
+                            self::$_is_plugin = false;
                         }
                     }
                 }
-
-                $wp_content_dir       = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
-                $wp_content_dir       = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
-                $relative_url         = str_replace( $wp_content_dir, '', self::$_dir );
-                self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
-                self::$_url           = self::$wp_content_url . $relative_url;
-
-                // See if Redux is a plugin or not
-                if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
-                    self::$_is_plugin = false;
+                if ( self::$_is_plugin == true || self::$_as_plugin == true ) {
+                    self::$_url = plugin_dir_url( __FILE__ );
+                } else {
+                    if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory_uri() ) ) !== false ) {
+                        $relative_url = str_replace( get_template_directory_uri(), '', self::$_dir );
+                        self::$_url   = get_stylesheet_directory_uri() . $relative_url;
+                    } else if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
+                        $relative_url = str_replace( get_stylesheet_directory(), '', self::$_dir );
+                        self::$_url   = get_stylesheet_directory_uri() . $relative_url;
+                    } else {
+                        $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
+                        $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
+                        $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
+                        self::$_url     = self::$wp_content_url . $relative_url;
+                    }
                 }
             }
-
             // ::init()
 
             public $framework_url = 'http://www.reduxframework.com/';
