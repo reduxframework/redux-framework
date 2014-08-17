@@ -1504,7 +1504,8 @@
                     'slider',
                     'spacing',
                     'typography',
-                    'color_scheme'
+                    'color_scheme',
+                    'css_layout'
 
                 ) )
                 ) {
@@ -1630,7 +1631,7 @@
                 }
 
                 // Load jQuery UI Datepicker for date
-                if ( Redux_Helpers::isFieldInUseByType( $this->fields, array( 'date' ) ) ) {
+                if ( Redux_Helpers::isFieldInUseByType( $this->fields, array( 'date', 'datetime' ) ) ) {
                     wp_enqueue_script( 'jquery-ui-datepicker' );
                 }
 
@@ -1646,7 +1647,8 @@
                     'color_gradient',
                     'link_color',
                     'border',
-                    'typography'
+                    'typography',
+                    'css_layout'
                 ) )
                 ) {
 
