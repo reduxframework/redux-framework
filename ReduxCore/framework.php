@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6.4';
+            public static $_version = '3.3.6.5';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -103,11 +103,11 @@
                 if ( self::$_is_plugin == true || self::$_as_plugin == true ) {
                     self::$_url = plugin_dir_url( __FILE__ );
                 } else {
-                    if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory_uri() ) ) !== false ) {
-                        $relative_url = str_replace( get_template_directory_uri(), '', self::$_dir );
+                    if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory() ) ) !== false ) {
+                        $relative_url = str_replace( Redux_Helpers::cleanFilePath( get_template_directory() ), '', self::$_dir );
                         self::$_url   = trailingslashit( get_stylesheet_directory_uri() . $relative_url );
                     } else if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false ) {
-                        $relative_url = str_replace( get_stylesheet_directory(), '', self::$_dir );
+                        $relative_url = str_replace( Redux_Helpers::cleanFilePath( get_stylesheet_directory() ), '', self::$_dir );
                         self::$_url   = trailingslashit( get_stylesheet_directory_uri() . $relative_url );
                     } else {
                         $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
