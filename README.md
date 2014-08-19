@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6.4 =
+* Added:      image_size as an option for the data argument. Thanks @Gyroscopic!
+
 = 3.3.6.3 =
 * Modified:   How Redux paths are run. Should cover all use cases now. Child themes can also embed 
               Redux properly now. Thanks @cfoellmann for the suggestions. Fix for issue #1566.

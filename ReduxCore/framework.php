@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6.3';
+            public static $_version = '3.3.6.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -944,8 +944,13 @@
                             foreach ( $_wp_registered_nav_menus as $k => $v ) {
                                 $data[ $k ] = $v;
                             }
-                        } //if
-                        else if ( $type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" ||
+                        }  else if ( $type == "image_size" || $type == "image_sizes" ) {
+                            global $_wp_additional_image_sizes;
+
+                            foreach ($_wp_additional_image_sizes as $size_name => $size_attrs) {
+                                $data[ $size_name ] = $size_name.' - '.$size_attrs['width'].' x '.$size_attrs['height'];
+                            }
+                        }  else if ( $type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" ||
                                   $type == "font-icon" || $type == "font-icons" || $type == "icons"
                         ) {
 
