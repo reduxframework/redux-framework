@@ -39,11 +39,10 @@
 
                 return self::$instance;
             }
-// end get_instance;
+            // end get_instance;
 
             /**
              * Class constructor
-             *
              */
 
             function __construct() {
@@ -310,14 +309,15 @@
 
 
                 $version = explode( '.', PHP_VERSION );
-                $version = array( 'major'   => $version[0],
-                                  'minor'   => $version[0] . '.' . $version[1],
-                                  'release' => PHP_VERSION
+                $version = array(
+                    'major'   => $version[0],
+                    'minor'   => $version[0] . '.' . $version[1],
+                    'release' => PHP_VERSION
                 );
 
-                $user_query = new WP_User_Query( array( 'blog_id' => $blog_id, 'count_total' => true, ) );
-                $comments_query = new WP_Comment_Query(); 
-                $data = array(
+                $user_query     = new WP_User_Query( array( 'blog_id' => $blog_id, 'count_total' => true, ) );
+                $comments_query = new WP_Comment_Query();
+                $data           = array(
                     '_id'       => $this->options['hash'],
                     'localhost' => ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0,
                     'php'       => $version,
@@ -405,7 +405,7 @@
                 header( 'Cache-Control: post-check=0, pre-check=0', false );
                 header( 'Pragma: no-cache' );
                 $instances = ReduxFrameworkInstances::get_all_instances();
-
+                
                 if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) {
                     if ( is_array( $instances ) && ! empty( $instances ) ) {
                         foreach ( $instances as $opt_name => $data ) {

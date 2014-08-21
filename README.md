@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6.6 =
+* Fixed:      Framework URI errors when using child themes. Some restructuring.
+
 = 3.3.6.5 =
 * Fixed:      Framework URI errors when embedded in theme with Windows.
 
