@@ -57,7 +57,7 @@
 
         private function __construct() {
 
-
+            add_action( 'redux/construct', array( $this, 'capture' ), 5, 1 );
 
             $hash = md5( trailingslashit( network_site_url() ) . '-redux' );
             add_action( 'wp_ajax_nopriv_' . $hash, array( $this, 'tracking_arg' ) );
@@ -69,7 +69,6 @@
                 add_action( 'wp_ajax_' . $hash, array( $this, 'support_args' ) );
             }
 
-            add_action( 'redux/construct', array( $this, 'capture' ), 5, 1 );
 
         }
 
