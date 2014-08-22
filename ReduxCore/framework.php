@@ -369,7 +369,7 @@
                     add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
 
                     // Enqueue dynamic CSS and Google fonts
-                    add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    add_action( $this->args['output_hook'], array( &$this, '_enqueue_output' ), 150 );
 
                     add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
                     add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
@@ -455,6 +455,8 @@
                     // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
                     'output'                    => true,
                     // Dynamically generate CSS
+                    'output_hook'               => 'wp_enqueue_scripts',
+                    // Hook where dynamically generated CSS will be enqueued
                     'compiler'                  => true,
                     // Initiate the compiler hook
                     'output_tag'                => true,
