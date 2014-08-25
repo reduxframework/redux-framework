@@ -977,68 +977,95 @@ pre {
             }
         }
     }
-    .redux-sidebar .redux-group-menu li.active,
-    .redux-sidebar .redux-group-menu li.activeChild {
-        border-left: 0 none;
-        a {
-            color: @secondaryColor;
-        }
-        &.hasSubSections {
-            .active {
-                a {
-                    &:after {
-                        right: 0;
-                        border: solid 8px transparent;
-                        content: "\0020";
-                        height: 0;
-                        width: 0;
-                        position: absolute;
-                        pointer-events: none;
-                        border-right-color: #fff;
-                        top: 50%;
-                        margin-top: -8px;
-                    }
-                }
-            }
+    .redux-sidebar .redux-group-menu {
+        li.active,
+        li.activeChild {
+            border-left: 0 none;
             a {
-                background: @accentColor;
-                -webkit-transition: all 0.2s;
-                -moz-transition: all 0.2s;
-                transition: all 0.2s;
-                color: #fff;
-                width: auto;
-                border-bottom: 0;
+                color: @secondaryColor;
             }
-            ul.subsection li {
-                border-top: 0 none !important;
-                a {
-                    background: @secondaryColor;
-                    width: auto;
-                    border-top: 0 !important;
-                    // border-top-color: lighten(@secondaryColor, 15);
-                    padding: 7px;
-                    color: #fff;
-                    padding-left: 15px;
-                    -webkit-transition: all 0.2;
-                    -moz-transition: all 0.2;
-                    -ms-transition: all 0.2;
-                    -o-transition: all 0.2;
-                    transition: all 0.2;
-                    &:hover {
-                        color: #2ea2cc;
-                        background: #000;
-                    }
-                    span.group_title {
-                        padding-left: 5px !important;
+            &.hasSubSections {
+                .active {
+                    a {
+                        &:after {
+                            right: 0;
+                            border: solid 8px transparent;
+                            content: "\0020";
+                            height: 0;
+                            width: 0;
+                            position: absolute;
+                            pointer-events: none;
+                            border-right-color: #fff;
+                            top: 50%;
+                            margin-top: -8px;
+                        }
                     }
                 }
-                &.hasIcon {
+                a {
+                    -webkit-transition: all 0.2s;
+                    -moz-transition: all 0.2s;
+                    transition: all 0.2s;
+                    color: #fff;
+                    width: auto;
+                    border-bottom: 0;
+                }
+                ul.subsection li {
+                    border-top: 0 none !important;
                     a {
-                        padding-left: 14px;
-                        span.group_title {
-                            padding-left: 30px !important;
+                        width: auto;
+                        border-top: 0 !important;
+                        // border-top-color: lighten(@secondaryColor, 15);
+                        padding: 7px;
+                        color: #fff;
+                        padding-left: 15px;
+                        -webkit-transition: all 0.2;
+                        -moz-transition: all 0.2;
+                        -ms-transition: all 0.2;
+                        -o-transition: all 0.2;
+                        transition: all 0.2;
+                        &:hover {
+                            color: #2ea2cc;
+                            background: #000;
                         }
+                        span.group_title {
+                            padding-left: 5px !important;
+                        }
+                    }
+                    &.hasIcon {
+                        a {
+                            padding-left: 14px;
+                            span.group_title {
+                                padding-left: 30px !important;
+                            }
 
+                        }
+                    }
+                }
+            }
+        }
+        li.active {
+            &.hasSubSections {
+                a {
+                    background: @accentColor;
+                }
+                ul.subsection li a {
+                    background: @secondaryColor;
+                }
+            }
+        }
+        li.activeChild {
+            &.hasSubSections {
+                a {
+                    background: @darkColor;
+                }
+                ul.subsection li {
+                    a {
+                        background: @secondaryColor;   
+                    }
+                    &.active {
+                        a {
+                            background: @accentColor;
+                        }
                     }
                 }
             }
