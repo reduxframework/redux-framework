@@ -112,17 +112,17 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'allow_sub_menu'    => true,                    // Show the sections below the admin menu item or not
                 'menu_title'        => __('Sample Options', 'redux-framework-demo'),
                 'page_title'        => __('Sample Options', 'redux-framework-demo'),
-                
+
                 // You will need to generate a Google API key to use this feature.
                 // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
                 'google_api_key' => '', // Must be defined to add google fonts to the typography module
-                
+
                 'async_typography'  => false,                    // Use a asynchronous font on the front end or font string
                 'admin_bar'         => true,                    // Show the panel pages on the admin bar
                 'global_variable'   => '',                      // Set a different name for your global variable other than the opt_name
                 'dev_mode'          => true,                    // Show the time the page took to load, etc
                 'customizer'        => true,                    // Enable basic customizer support
-                
+
                 // OPTIONAL -> Give you extra features
                 'page_priority'     => null,                    // Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
                 'page_parent'       => 'themes.php',            // For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
@@ -135,13 +135,14 @@ if (!class_exists('Redux_Framework_sample_config')) {
                 'default_show'      => false,                   // If true, shows the default value next to each field that is not the default value.
                 'default_mark'      => '',                      // What to print by the field's title if the value shown is default. Suggested: *
                 'show_import_export' => true,                   // Shows the Import/Export panel when not used as a field.
-                
+
                 // CAREFUL -> These options are for advanced use only
                 'transient_time'    => 60 * MINUTE_IN_SECONDS,
                 'output'            => true,                    // Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
                 'output_tag'        => true,                    // Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
+                'output_location'   => array( 'frontend' ),     // Gives you the option to choose where the dynamic CSS and google fonts will be displayed. Choose any combination of 'frontend', 'login' & 'admin'
                 // 'footer_credit'     => '',                   // Disable the footer credit of Redux. Please leave if you can help it.
-                
+
                 // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
                 'database'              => '', // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
                 'system_info'           => false, // REMOVE
@@ -218,7 +219,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
         }
 
     }
-    
+
     global $reduxConfig;
     $reduxConfig = new Redux_Framework_sample_config();
 }

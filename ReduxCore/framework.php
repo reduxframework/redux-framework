@@ -288,7 +288,7 @@
                     // Set the default values
                     $this->_default_cleanup();
 
-                    // Internataionalization 
+                    // Internataionalization
                     $this->_internationalization();
 
                     // Register extra extensions
@@ -308,7 +308,7 @@
                     //DOVY!!  HERE!!!
                     // Getting started page
 //                    if (  is_admin () && $this->args['dev_mode'] ) {
-//                        
+//
 //                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
 //                            //logconsole('inc');
 //                            include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
@@ -321,7 +321,7 @@
 //                                if (empty($saveVer)) {
 //                                    //logconsole('redir');
 //                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
-//                                    exit;                            
+//                                    exit;
 //                                } else if (version_compare($curVer, $saveVer, '>')) {
 //                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
 //                                    exit;
@@ -365,11 +365,23 @@
                         add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 1 );
                     }
 
-                    // Output dynamic CSS
-                    add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+                    // Frontend: Maybe enqueue dynamic CSS and Google fonts
+                    if( in_array( 'frontend', $this->args['output_location'] ) ) {
+                        add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+                        add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    }
 
-                    // Enqueue dynamic CSS and Google fonts
-                    add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    // Login page: Maybe enqueue dynamic CSS and Google fonts
+                    if( in_array( 'login', $this->args['output_location'] ) ) {
+                        add_action( 'login_head', array( &$this, '_output_css' ), 150 );
+                        add_action( 'login_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    }
+
+                    // Admin area: Maybe enqueue dynamic CSS and Google fonts
+                    if( in_array( 'admin', $this->args['output_location'] ) ) {
+                        add_action( 'admin_head', array( &$this, '_output_css' ), 150 );
+                        add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    }
 
                     add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
                     add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
@@ -459,6 +471,9 @@
                     // Initiate the compiler hook
                     'output_tag'                => true,
                     // Print Output Tag
+                    'output_location'           => array( 'frontend' ),
+                    // Where shall the output be printed
+                    // Choose any combination from: 'frontend', 'login', 'admin'
                     'transient_time'            => '',
                     'default_show'              => false,
                     // If true, it shows the default value
