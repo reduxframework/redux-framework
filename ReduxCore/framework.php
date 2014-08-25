@@ -1056,7 +1056,7 @@
             * @param string $key The option's ID
             * @param string $array_key The key of the default's array
             *
-            * @return mixed            
+            * @return mixed             
             */
             public function get_default_value( $key, $array_key = false ) {
                 if ( empty( $this->options_defaults ) ) {
