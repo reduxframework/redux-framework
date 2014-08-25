@@ -1048,6 +1048,37 @@
             } // show()
 
             /**
+            * Get the default value for an option
+            *
+            * @since 3.3.6
+            * @access public
+            *
+            * @param string $key The option's ID
+            * @param string $array_key The key of the default's array
+            *
+            * @return mixed            
+            */
+            public function get_default_value( $key, $array_key = false ) {
+                if ( empty( $this->options_defaults ) ) {
+                    $this->options_defaults = $this->_default_values();
+                }
+                
+                $defaults = $this->options_defaults;
+                $value = '';
+                
+                if( isset( $defaults[ $key ] ) ) {
+                    if( $array_key !== false && isset( $defaults[ $key ][ $array_key ] ) ) {
+                        $value = $defaults[ $key ][ $array_key ];
+                    } else{
+                        $value = $defaults[ $key ];
+                    }
+                }
+                
+                return $value;
+            }            
+            
+            
+            /**
              * Get default options into an array suitable for the settings API
              *
              * @since       1.0.0
