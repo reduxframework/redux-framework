@@ -57,7 +57,7 @@
 //        if (file_exists(dirname( __FILE__ ) . '/inc/class.redux_api.php')) {
 //            include_once(dirname( __FILE__ ) . '/inc/class.redux_api.php');
 //        }
-        
+
         /**
          * Main ReduxFramework class
          *
@@ -292,7 +292,7 @@
                     // Set the default values
                     $this->_default_cleanup();
 
-                    // Internataionalization 
+                    // Internataionalization
                     $this->_internationalization();
 
                     // Register extra extensions
@@ -312,7 +312,7 @@
                     //DOVY!!  HERE!!!
                     // Getting started page
 //                    if (  is_admin () && $this->args['dev_mode'] ) {
-//                        
+//
 //                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
 //                            //logconsole('inc');
 //                            include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
@@ -325,7 +325,7 @@
 //                                if (empty($saveVer)) {
 //                                    //logconsole('redir');
 //                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
-//                                    exit;                            
+//                                    exit;
 //                                } else if (version_compare($curVer, $saveVer, '>')) {
 //                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
 //                                    exit;
@@ -1056,16 +1056,16 @@
             * @param string $key The option's ID
             * @param string $array_key The key of the default's array
             *
-            * @return mixed             
+            * @return mixed
             */
             public function get_default_value( $key, $array_key = false ) {
                 if ( empty( $this->options_defaults ) ) {
                     $this->options_defaults = $this->_default_values();
                 }
-                
+
                 $defaults = $this->options_defaults;
                 $value = '';
-                
+
                 if( isset( $defaults[ $key ] ) ) {
                     if( $array_key !== false && isset( $defaults[ $key ][ $array_key ] ) ) {
                         $value = $defaults[ $key ][ $array_key ];
@@ -1073,11 +1073,11 @@
                         $value = $defaults[ $key ];
                     }
                 }
-                
+
                 return $value;
-            }            
-            
-            
+            }
+
+
             /**
              * Get default options into an array suitable for the settings API
              *
