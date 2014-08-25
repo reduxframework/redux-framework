@@ -75,7 +75,7 @@
                 ?>
                 <div class="ace-wrapper">
                     <input type="hidden" class="localize_data"
-                           value="<?php echo htmlspecialchars( json_encode( $params, true ) ); ?>"/>
+                           value="<?php echo htmlspecialchars( json_encode( $params ) ); ?>"/>
                     <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>"
                               id="<?php echo $this->field['id']; ?>-textarea"
                               class="ace-editor hide <?php echo $this->field['class']; ?>"
