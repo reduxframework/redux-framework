@@ -80,6 +80,7 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.3.6.7 =
 * Fixed:      #1591 - erroneous outputting of font-weight and font-style when no font-family selected.
+* Updated:    #1569 - improved submenu highlighting.
 
 = 3.3.6.6 =
 * Fixed:      Framework URI errors when using child themes. Some restructuring.
