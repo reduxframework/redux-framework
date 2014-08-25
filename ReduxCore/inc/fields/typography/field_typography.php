@@ -681,6 +681,17 @@ if (!class_exists('ReduxFramework_typography')) {
             }
 
             $style = '';
+            
+            $fontValueSet = false;
+
+            if (!empty($font)) {
+                foreach ($font as $key => $value) {
+                    if(!empty($value) && in_array($key, array('font-family','font-weight'))){
+                        $fontValueSet = true;
+                    }
+                }
+           }            
+            
             if (!empty($font)) {
                 foreach ($font as $key => $value) {
                     if ($key == 'font-options') {
@@ -703,7 +714,7 @@ if (!class_exists('ReduxFramework_typography')) {
                     if (empty($value) && in_array($key, array(
                                 'font-weight',
                                 'font-style'
-                            ))) {
+                            )) && $fontValueSet == true) {
                         $value = "normal";
                     }
 
