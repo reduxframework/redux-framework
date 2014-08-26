@@ -206,6 +206,10 @@
                     $this->args['page_title'] = __( 'Options', 'redux-framework' );
                 }
 
+                if ( ! is_array( $this->args['output_location'] ) or empty( $this->args['output_location'] ) ) {
+                    $this->args['output_location'] = array( 'frontend' );
+                }
+
                 /**
                  * filter 'redux/args/{opt_name}'
                  *
