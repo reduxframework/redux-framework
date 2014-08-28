@@ -5,14 +5,23 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        po2mo: {
-            options: {
-            },
-            files: {
-                src: 'ReduxCore/languages/*.po',
-                expand: true,
-            },
-        },
+
+        potomo: {
+            dist: {
+                options: {
+                    poDel: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'ReduxCore/languages/',
+                    src: ['*.po'],
+                    dest: 'ReduxCore/languages/',
+                    ext: '.mo',
+                    nonull: true
+                }]
+            }
+        }
+
         concat: {
             options: {
                 separator: ';'
@@ -256,13 +265,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks("grunt-phplint");
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-po2mo');
+    grunt.loadNpmTasks('grunt-potomo');
     grunt.loadNpmTasks('grunt-recess');
 
     grunt.registerTask('langUpdate', "Update languages", function() {
         shell.exec('tx pull -a --minimum-perc=25');
-        shell.exec('grunt po2mo');
-        shell.exec('rm -f ReduxCore/languages/*.po');
+        shell.exec('grunt potomo');
         shell.exec('php bin/makepot/gen.php');
     });
 

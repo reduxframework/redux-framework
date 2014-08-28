@@ -23,7 +23,7 @@
     "grunt-phplint": "0.0.5",
     "grunt-contrib-less": "~0.8.2",
     "recess": "~1.1.9",
-    "grunt-po2mo": "~0.1.0",
+    "grunt-potomo": "^2.1.0",
     "shelljs": "~0.2.6",
     "grunt-recess": "^0.6.1"
   },
