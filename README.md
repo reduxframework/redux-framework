@@ -78,6 +78,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6.8 =
+* Fixed:      #1600 - ACE Editor bombing in PHP 5.2 environments.
+
 = 3.3.6.7 =
 * Fixed:      #1591 - Erroneous outputting of font-weight and font-style when no font-family selected.
 * Updated:    #1569 - Improved submenu highlighting.
