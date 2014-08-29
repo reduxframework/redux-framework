@@ -5,7 +5,6 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
         potomo: {
             dist: {
                 options: {
@@ -20,8 +19,7 @@ module.exports = function(grunt) {
                     nonull: true
                 }]
             }
-        }
-
+        },
         concat: {
             options: {
                 separator: ';'
