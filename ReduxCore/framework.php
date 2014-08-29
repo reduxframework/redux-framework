@@ -210,6 +210,10 @@
                     $this->args['page_title'] = __( 'Options', 'redux-framework' );
                 }
 
+                if ( ! is_array( $this->args['output_location'] ) or empty( $this->args['output_location'] ) ) {
+                    $this->args['output_location'] = array( 'frontend' );
+                }
+
                 /**
                  * filter 'redux/args/{opt_name}'
                  *
@@ -369,11 +373,23 @@
                         add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 1 );
                     }
 
-                    // Output dynamic CSS
-                    add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+                    // Frontend: Maybe enqueue dynamic CSS and Google fonts
+                    if( in_array( 'frontend', $this->args['output_location'] ) ) {
+                        add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+                        add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    }
 
-                    // Enqueue dynamic CSS and Google fonts
-                    add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    // Login page: Maybe enqueue dynamic CSS and Google fonts
+                    if( in_array( 'login', $this->args['output_location'] ) ) {
+                        add_action( 'login_head', array( &$this, '_output_css' ), 150 );
+                        add_action( 'login_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    }
+
+                    // Admin area: Maybe enqueue dynamic CSS and Google fonts
+                    if( in_array( 'admin', $this->args['output_location'] ) ) {
+                        add_action( 'admin_head', array( &$this, '_output_css' ), 150 );
+                        add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+                    }
 
                     add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
                     add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
@@ -463,6 +479,9 @@
                     // Initiate the compiler hook
                     'output_tag'                => true,
                     // Print Output Tag
+                    'output_location'           => array( 'frontend' ),
+                    // Where shall the output be printed
+                    // Choose any combination from: 'frontend', 'login', 'admin'
                     'transient_time'            => '',
                     'default_show'              => false,
                     // If true, it shows the default value
