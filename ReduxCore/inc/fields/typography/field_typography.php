@@ -59,17 +59,17 @@ if (!class_exists('ReduxFramework_typography')) {
             //global $wp_filesystem;
             
             // Set upload dir path for google fonts
-            $this->font_dir =  ReduxFramework::$_upload_dir . 'google-fonts/';
+            //$this->font_dir =  ReduxFramework::$_upload_dir . 'google-fonts/';
 
             // Check for redux_google_font dir
-            if (!is_dir($this->font_dir)) {
-
-                // Create it, if not found
-                //$wp_filesystem->mkdir($this->font_dir, FS_CHMOD_DIR);
-                if ($this->parent->filesystem->execute('mkdir', $this->font_dir)) {
-                    return;
-                }
-            }
+//            if (!is_dir($this->font_dir)) {
+//
+//                // Create it, if not found
+//                //$wp_filesystem->mkdir($this->font_dir, FS_CHMOD_DIR);
+//                if ($this->parent->filesystem->execute('mkdir', $this->font_dir)) {
+//                    return;
+//                }
+//            }
 
             // Shim out old arg to new
             if (isset($this->field['all_styles']) && !empty($this->field['all_styles'])) {
@@ -78,18 +78,18 @@ if (!class_exists('ReduxFramework_typography')) {
             }
             
             // Set google font file variables
-            $this->google_json = $this->font_dir . 'googlefonts.json';
+//            $this->google_json = $this->font_dir . 'googlefonts.json';
 
             // Move installed googlefonts.json to upload location, if not exists
-            if (!file_exists($this->google_json)) {
-                //(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $this->font_dir . 'googlefonts.json', false);
-                $param_array = array(
-                    'destination'   => $this->google_json,
-                    'overwrite'     => false,
-                    'chmod'         => 0644
-                );
-                $this->parent->filesystem->execute('copy', ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $param_array );
-            }
+//            if (!file_exists($this->google_json)) {
+//                //(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $this->font_dir . 'googlefonts.json', false);
+//                $param_array = array(
+//                    'destination'   => $this->google_json,
+//                    'overwrite'     => false,
+//                    'chmod'         => 0644
+//                );
+//                $this->parent->filesystem->execute('copy', ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.json', $param_array );
+//            }
 
             // Set field array defaults.  No errors please
             $defaults = array(
@@ -916,60 +916,73 @@ if (!class_exists('ReduxFramework_typography')) {
             }
 
             // Weekly update
-            if (isset($this->field['update_weekly']) && $this->field['update_weekly'] === true && $this->field['google'] === true && !empty($this->parent->args['google_api_key'])) {
-                if (file_exists($this->google_json)) {
-
-                    // Keep the fonts updated weekly
-                    $weekback = strtotime(date('jS F Y', time() + (60 * 60 * 24 * -7)));
-                    $last_updated = filemtime($this->google_json);
-                    if ($last_updated < $weekback) {
-                        unlink($this->google_json);
-                    }
-                }
-            }
+//            if (isset($this->field['update_weekly']) && $this->field['update_weekly'] === true && $this->field['google'] === true && !empty($this->parent->args['google_api_key'])) {
+//                if (file_exists($this->google_json)) {
+//
+//                    // Keep the fonts updated weekly
+//                    $weekback = strtotime(date('jS F Y', time() + (60 * 60 * 24 * -7)));
+//                    $last_updated = filemtime($this->google_json);
+//                    if ($last_updated < $weekback) {
+//                        unlink($this->google_json);
+//                    }
+//                }
+//            }
 
             // Initialize the Wordpress filesystem, no more using file_put_contents function
             //Redux_Functions::initWpFilesystem();
             
             //global $wp_filesystem;
 
-            if (!file_exists($this->google_json)) {
-                $result = wp_remote_get(apply_filters('redux-google-fonts-api-url', 'https://www.googleapis.com/webfonts/v1/webfonts?key=') . $this->parent->args['google_api_key'], array('sslverify' => false));
-
-                if (!is_wp_error($result) && $result['response']['code'] == 200) {
-                    $result = json_decode($result['body']);
-                    foreach ($result->items as $font) {
-                        $this->parent->googleArray[$font->family] = array(
-                            'variants' => $this->getVariants($font->variants),
-                            'subsets' => $this->getSubsets($font->subsets)
-                        );
-                    }
-
-                    if (!empty($this->parent->googleArray)) {
-                        $param_array = array(
-                            'content'   => json_encode($this->parent->googleArray)
-                        );
-                        
-                        if ($this->parent->filesystem->execute('put_contents', $this->google_json, $param_array )) {
-                            return;
-                        }
-                        //$wp_filesystem->put_contents($this->google_json, json_encode($this->parent->googleArray), FS_CHMOD_FILE );
-                    }
-                } //if
-            }
+//            if (!file_exists($this->google_json)) {
+//                $result = wp_remote_get(apply_filters('redux-google-fonts-api-url', 'https://www.googleapis.com/webfonts/v1/webfonts?key=') . $this->parent->args['google_api_key'], array('sslverify' => false));
+//
+//                if (!is_wp_error($result) && $result['response']['code'] == 200) {
+//                    $result = json_decode($result['body']);
+//                    foreach ($result->items as $font) {
+//                        $this->parent->googleArray[$font->family] = array(
+//                            'variants' => $this->getVariants($font->variants),
+//                            'subsets' => $this->getSubsets($font->subsets)
+//                        );
+//                    }
+//
+//                    if (!empty($this->parent->googleArray)) {
+//                        $param_array = array(
+//                            'content'   => json_encode($this->parent->googleArray)
+//                        );
+//                        
+//                        if ($this->parent->filesystem->execute('put_contents', $this->google_json, $param_array )) {
+//                            return;
+//                        }
+//                        //$wp_filesystem->put_contents($this->google_json, json_encode($this->parent->googleArray), FS_CHMOD_FILE );
+//                    }
+//                } //if
+//            }
 
             if (!isset($this->parent->fonts['google']) || empty($this->parent->fonts['google'])) {
-               
+
+                include_once(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.php');
+                
+                $obj = new ReduxGoogleFonts();
+                $fonts = $obj->getFonts();
+                unset ($obj);
+                
+                //print_r($a);
+
                 //$fonts = json_decode($wp_filesystem->get_contents($this->google_json), true);
-                $fonts = $this->parent->filesystem->execute('get_contents', $this->google_json );
+                //$fonts = $this->parent->filesystem->execute('get_contents', $this->google_json );
+                
+                //$fonts = (array)$a;
+                
+                //echo($fonts);
                 
                 if ($fonts === true) {
                     $this->parent->fonts['google'] = false;
                     return;
-                } else {
-                    $fonts = json_decode($fonts, true);
+                //} else {
+                    //$fonts = json_decode($fonts, true);
                 }
-
+                //print_r($fonts);
+                
                 if (isset($fonts) && !empty($fonts) && is_array($fonts) && $fonts != false) {
                     $this->parent->fonts['google'] = $fonts;
                     $this->parent->googleArray = $fonts;

@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6.9 =
+* Fixed:      #1623 - Registered older noUISlider JS under a new name to avoid conflicts.
+* Modified:   #1622 - Removed googlefonts.js dependency.
+
 = 3.3.6.8 =
 * Fixed:      #1600 - ACE Editor bombing in PHP 5.2 environments.
 

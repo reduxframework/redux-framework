@@ -68,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6.8';
+            public static $_version = '3.3.6.9';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -371,9 +371,25 @@
 
                     // Output dynamic CSS
                     add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+ // Frontend: Maybe enqueue dynamic CSS and Google fonts
+// if( in_array( 'frontend', $this->args['output_location'] ) ) {
+// add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
+// add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+// }
+
+ // Login page: Maybe enqueue dynamic CSS and Google fonts
+// if( in_array( 'login', $this->args['output_location'] ) ) {
+// add_action( 'login_head', array( &$this, '_output_css' ), 150 );
+// add_action( 'login_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+// }                    
 
                     // Enqueue dynamic CSS and Google fonts
                     add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+// if( in_array( 'admin', $this->args['output_location'] ) ) {
+// add_action( 'admin_head', array( &$this, '_output_css' ), 150 );
+// add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
+//}
+ 
 
                     add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
                     add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
