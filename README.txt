@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.0
-Stable tag: 3.3.6
+Stable tag: 3.3.6.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,20 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.3.6.8 =
+* Fixed:      #1600 - ACE Editor bombing in PHP 5.2 environments.
+* Fixed:      #1591 - Erroneous outputting of font-weight and font-style when no font-family selected.
+* Updated:    #1569 - Improved submenu highlighting.
+* Added:      #1487 - Added `get_default_value` function into the framework.php
+* Fixed:      Framework URI errors when using child themes. Some restructuring.
+* Fixed:      Framework URI errors when embedded in theme with Windows.
+* Added:      image_size as an option for the data argument. Thanks @Gyroscopic!
+* Modified:   How Redux paths are run. Should cover all use cases now. Child themes can also embed
+              Redux properly now. Thanks @cfoellmann for the suggestions. Fix for issue #1566.
+* Modified:   How we declare the uploads directory and URL. Using core WP functions now.
+* Modified:   Now if a section is empty, but has subsections, that section will be "skipped" when
+              clicked and the first subsection will then be shown.
 
 = 3.3.6 =
 * Fixed:      #1560 - IE8 RGBA fallack
