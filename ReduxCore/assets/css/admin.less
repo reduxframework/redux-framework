@@ -528,7 +528,10 @@
             margin-top: 0;
 
             &.active a,
-            &.activeChild a {
+            &.active a:hover,
+            &.activeChild a,
+            &.activeChild a:hover
+            {
                 background: #FCFCFC;
                 color: #269ad6;
                 width: 184px;
@@ -1011,6 +1014,9 @@ pre {
                 }
                 ul.subsection li {
                     border-top: 0 none !important;
+                    &.active a:hover {
+                        color: #fff;
+                    }
                     a {
                         width: auto;
                         border-top: 0 !important;

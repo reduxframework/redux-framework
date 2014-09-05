@@ -52,9 +52,11 @@
             function( e ) {
                 if ( $( '#toplevel_page_' + redux.args.slug ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) {
                     e.preventDefault();
-
                     var url = $( this ).attr( 'href' ).split( '&tab=' );
                     $( '#' + url[1] + '_section_group_li_a' ).click();
+                    $( this ).parents( 'ul:first' ).find('.current' ).removeClass( 'current' );
+                    $( this ).addClass( 'current' );
+                    $( this ).parent().addClass( 'current' );
                     return false;
                 }
             }
@@ -295,11 +297,11 @@
                     var elements = $( this ).closest( 'ul' ).find( '.redux-group-tab-link-a' );
                     var index = elements.index( this );
                     link = elements.slice( index + 1, index + 2 );
-
                 }
                 var el = link.parents( '.redux-container:first' );
                 var relid = link.data( 'rel' ); // The group ID of interest
                 var oldid = el.find( '.redux-group-tab-link-li.active .redux-group-tab-link-a' ).data( 'rel' );
+
 
                 if ( oldid === relid ) {
                     return;
@@ -396,6 +398,8 @@
                         $.redux.initFields();
                     }
                 );
+                $('#toplevel_page_'+redux.args.slug ).find('.current' ).removeClass('current');
+
             }
         );
 

@@ -1906,7 +1906,7 @@
                  * @param       string        preset confirm string
                  */
                 $preset_confirm = apply_filters( "redux/{$this->args['opt_name']}/localize/preset", __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ) );
-
+                global $pagenow;
                 $this->localize_data['args'] = array(
                     'save_pending'          => $save_pending,
                     'reset_confirm'         => $reset_all,
@@ -1918,6 +1918,7 @@
                     'hints'                 => $this->args['hints'],
                     'disable_save_warn'     => $this->args['disable_save_warn'],
                     'class'                 => $this->args['class'],
+                    'menu_search'           => $pagenow.'?page='.$this->args['page_slug']."&tab="
                 );
 
                 // Construct the errors array.

@@ -134,6 +134,8 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Modified:   #1622 - Removed googlefonts.js dependency.
 * Modified:   #1628 - Spacing and dimensions now only output 0 if the entry is a 0, not empty.
               Thanks @Webcreations907
+* Modified:   CSS for menu items when active (no hover).
+* Added:      Visual feedback to left menu if active.
 
 = 3.3.6.8 =
 * Fixed:      #1600 - ACE Editor bombing in PHP 5.2 environments.

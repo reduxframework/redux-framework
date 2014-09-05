@@ -85,6 +85,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed:      FTP credentials screen giving a "undefined submit_button function". Resolved.
 * Modified:   #1628 - Spacing and dimensions now only output 0 if the entry is a 0, not empty.
               Thanks @Webcreations907
+* Modified:   CSS for menu items when active (no hover).
+* Added:      Visual feedback to left menu if active.
 
 = 3.3.6.9 =
 * Fixed:      #1623 - Registered older noUISlider JS under a new name to avoid conflicts.
