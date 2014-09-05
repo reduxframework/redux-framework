@@ -33,8 +33,8 @@
                 }
 
                 // Setup the filesystem with creds
-                require_once( ABSPATH . '/wp-admin/includes/file.php' );
                 require_once( ABSPATH . '/wp-admin/includes/template.php' );
+                require_once( ABSPATH . '/wp-admin/includes/file.php' );
 
                 if ( $this->parent->args['menu_type'] == 'submenu' ) {
                     $page_parent = $this->parent->args['page_parent'];

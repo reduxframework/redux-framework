@@ -317,10 +317,12 @@
                         if ( $key == "units" ) {
                             continue;
                         }
-                        if ( empty( $value ) ) {
-                            $value = '0';
+
+                        // Output if it's a numeric entry
+                        if ( isset( $value ) && is_numeric( $value ) ) {
+                            $style .= $key . ':' . $value . ';';
                         }
-                        $style .= $key . ':' . $value . ';';
+
                     }
                 } else {
                     $this->value['top']    = isset( $this->value['top'] ) ? $this->value['top'] : 0;

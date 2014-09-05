@@ -78,6 +78,14 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.7 =
+* Added:      #1586 - Class-level declaration for callbacks and validation. Thanks @echo1consulting.
+* Modified:   Typography field now fully dynamic.
+* Modified:   No longer require a google_api_key for the typography module.  :)
+* Fixed:      FTP credentials screen giving a "undefined submit_button function". Resolved.
+* Modified:   #1628 - Spacing and dimensions now only output 0 if the entry is a 0, not empty.
+              Thanks @Webcreations907
+
 = 3.3.6.9 =
 * Fixed:      #1623 - Registered older noUISlider JS under a new name to avoid conflicts.
 * Modified:   #1622 - Removed googlefonts.js dependency.

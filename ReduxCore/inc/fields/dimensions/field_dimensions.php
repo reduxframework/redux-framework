@@ -276,7 +276,8 @@
                 $style = "";
 
                 foreach ( $cleanValue as $key => $value ) {
-                    if ( $value ) {
+                    // Output if it's a numeric entry
+                    if ( isset( $value ) && is_numeric( $value ) ) {
                         $style .= $key . ':' . $value . $units . ';';
                     }
                 }

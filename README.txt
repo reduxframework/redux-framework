@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.0
-Stable tag: 3.3.6.8
+Stable tag: 3.3.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,16 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.3.7 =
+* Added:      #1586 - Class-level declaration for callbacks and validation. Thanks @echo1consulting.
+* Modified:   Typography field now fully dynamic.
+* Modified:   No longer require a google_api_key for the typography module.  :)
+* Fixed:      FTP credentials screen giving a "undefined submit_button function". Resolved.
+* Fixed:      #1623 - Registered older noUISlider JS under a new name to avoid conflicts.
+* Modified:   #1622 - Removed googlefonts.js dependency.
+* Modified:   #1628 - Spacing and dimensions now only output 0 if the entry is a 0, not empty.
+              Thanks @Webcreations907
 
 = 3.3.6.8 =
 * Fixed:      #1600 - ACE Editor bombing in PHP 5.2 environments.

@@ -54,10 +54,6 @@
 
         include_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
-//        if (file_exists(dirname( __FILE__ ) . '/inc/class.redux_api.php')) {
-//            include_once(dirname( __FILE__ ) . '/inc/class.redux_api.php');
-//        }
-
         /**
          * Main ReduxFramework class
          *
@@ -68,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.6.9';
+            public static $_version = '3.3.7';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -381,7 +377,7 @@
 // if( in_array( 'login', $this->args['output_location'] ) ) {
 // add_action( 'login_head', array( &$this, '_output_css' ), 150 );
 // add_action( 'login_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
-// }                    
+// }
 
                     // Enqueue dynamic CSS and Google fonts
                     add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
@@ -389,7 +385,7 @@
 // add_action( 'admin_head', array( &$this, '_output_css' ), 150 );
 // add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
 //}
- 
+
 
                     add_action( 'wp_print_scripts', array( $this, 'vc_fixes' ), 100 );
                     add_action( 'admin_enqueue_scripts', array( $this, 'vc_fixes' ), 100 );
@@ -436,7 +432,9 @@
                     'opt_name'                  => '',
                     // Must be defined by theme/plugin
                     'google_api_key'            => '',
-                    // Must be defined to add google fonts to the typography module
+                    // Must be defined to update the google fonts cache for the typography module
+                    'google_update_weekly'      => false,
+                    // Set to keep your google fonts updated weekly
                     'last_tab'                  => '',
                     // force a specific tab to always show on reload
                     'menu_icon'                 => '',
@@ -3088,15 +3086,15 @@
                                     continue;
                                 }
                             }
+                            if ( isset( $field['validate_callback'] ) && ( is_callable( $field['validate_callback'] ) || ( is_string( $field['validate_callback'] ) && function_exists( $field['validate_callback'] ) ) ) )     {
 
-                            if ( isset( $field['validate_callback'] ) && function_exists( $field['validate_callback'] ) ) {
                                 $callbackvalues                 = call_user_func( $field['validate_callback'], $field, $plugin_options[ $field['id'] ], $options[ $field['id'] ] );
                                 $plugin_options[ $field['id'] ] = $callbackvalues['value'];
 
                                 if ( isset( $callbackvalues['error'] ) ) {
                                     $this->errors[] = $callbackvalues['error'];
                                 }
-
+                                // TODO - This warning message is failing. Hmm.
                                 if ( isset( $callbackvalues['warning'] ) ) {
                                     $this->warnings[] = $callbackvalues['warning'];
                                 }
@@ -3703,8 +3701,9 @@
              * @return      void
              */
             public function _field_input( $field, $v = null ) {
-
-                if ( isset( $field['callback'] ) && function_exists( $field['callback'] ) ) {
+                
+                if ( isset( $field['callback'] ) && ( is_callable( $field['callback'] ) || ( is_string( $field['callback'] ) && function_exists( $field['callback'] ) ) ) ) {
+                    
                     $value = ( isset( $this->options[ $field['id'] ] ) ) ? $this->options[ $field['id'] ] : '';
 
                     /**
