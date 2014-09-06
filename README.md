@@ -78,6 +78,10 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.7.1 =
+* Fixed:      #1632 - Sortable with no defaults set revert to false (instead of options values).
+* Fixed:      Labels for sortable in text mode updated to match framework.
+
 = 3.3.7 =
 * Added:      #1586 - Class-level declaration for callbacks and validation. Thanks @echo1consulting.
 * Modified:   Typography field now fully dynamic.

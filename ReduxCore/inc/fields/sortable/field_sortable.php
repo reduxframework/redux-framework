@@ -105,13 +105,19 @@
                         $value_display = isset( $this->value[ $k ] ) ? $this->value[ $k ] : '';
 
                     }
+                    
+                    if ($this->field['mode'] != "checkbox") {
+                        echo '<label class="bugger" for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
+                        echo "<br />";                     
+                    }
+                    
                     echo '<input rel="' . $this->field['id'] . '-' . $k . '-hidden" class="' . $class . '" ' . $checked . 'type="' . $this->field['mode'] . '" ' . $name . 'id="' . $this->field['id'] . '[' . $k . ']" value="' . esc_attr( $value_display ) . '" placeholder="' . $nicename . '" />';
 
                     echo '<span class="compact drag"><i class="el-icon-move icon-large"></i></span>';
                     if ( $this->field['mode'] == "checkbox" || ( isset( $this->field['label'] ) && $this->field['label'] == true ) ) {
                         if ( $this->field['mode'] != "checkbox" ) {
-                            echo "<br />";
-                            echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
+                            //echo "<br />";
+                            //echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
                         } else {
                             echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $options[ $k ] . '</strong></label>';
                         }

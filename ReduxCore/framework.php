@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.7';
+            public static $_version = '3.3.7.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1136,8 +1136,9 @@
                                 }
                                 if ( isset( $field['default'] ) ) {
                                     $this->options_defaults[ $field['id'] ] = $field['default'];
-                                } elseif ( isset( $field['options'] ) && ( $field['type'] != "ace_editor" ) ) {
+                                } elseif ( isset( $field['options'] ) && ( $field['type'] != "ace_editor" )) {
                                     // Sorter data filter
+                                    
                                     if ( $field['type'] == "sorter" && isset( $field['data'] ) && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
                                         if ( ! isset( $field['args'] ) ) {
                                             $field['args'] = array();
@@ -1149,7 +1150,12 @@
                                             $field['options'][ $key ] = $this->get_wordpress_data( $data, $field['args'][ $key ] );
                                         }
                                     }
-                                    $this->options_defaults[ $field['id'] ] = $field['options'];
+                                    
+                                    if ($field['type'] == "sortable" ) {                                    
+                                        $this->options_defaults[ $field['id'] ] = array();
+                                    } else {
+                                        $this->options_defaults[ $field['id'] ] = $field['options'];
+                                    }
                                 }
                             }
                         }
