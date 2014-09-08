@@ -1,5 +1,6 @@
 # Redux Framework Changelog
 
+
 ## 3.3.7.2 
 * Fixed:      #1634 - Double border for sections field. Thanks @AlexandruDoda
 * Modified:   Changelog location to now Changelog.md.
