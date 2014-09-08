@@ -161,11 +161,14 @@
 * Modified:   #1412 - Redesigned text label, placeholder fix.
 
 ## 3.3.2.10 
-* Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves on other panels.
+* Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves 
+              on other panels.
 
 ## 3.3.2.9 
 * Fixed:      #1403 - unit value no longer prints after empty typography values
-* Modified:   Typography: Backup font no longer appends to `font-family` variable.  Please use the `backup-font` variable to specify backup fonts.  This does not apply to output/compiler strings.
+* Modified:   Typography: Backup font no longer appends to `font-family` variable.  
+              Please use the `backup-font` variable to specify backup fonts.  This 
+              does not apply to output/compiler strings.
 
 ## 3.3.2.8 
 * Fixed:      #1403 - Backup font not appearing in font-family variable.
@@ -213,7 +216,9 @@
 * Fixed:      #1341 - JS not initializing properly in import_export.
 
 ## 3.3.1.5 
-* Fixed:      #1339 - Typography would lose Font Weight and Style. value was named val in the HTML, so it would be destroyed on the next save if not initialized.
+* Fixed:      #1339 - Typography would lose Font Weight and Style. value was 
+              named val in the HTML, so it would be destroyed on the next save 
+              if not initialized.
 
 ## 3.3.1.4 
 * Fixed:      #1226 - W3 Total Cache was affecting validation and compiler hooks.
@@ -330,10 +335,12 @@
 * Fixed:      All typography select fields render as select2.
 
 ## 3.2.9.17 
-* Fixed:      Switching between transparency on and off now restores the last chosen color in all color fields. 
+* Fixed:      Switching between transparency on and off now restores the last chosen color in 
+              all color fields. 
 
 ## 3.2.9.16 
-* Fixed:      Redux uploads dir should NOT be ~/wp-content/uploads, but just wp-content. As per Otto.
+* Fixed:      Redux uploads dir should NOT be ~/wp-content/uploads, but just wp-content. 
+              As per Otto.
 * Fixed:      Navigation no longer has that annoying outline around the links. Yuk.
 
 ## 3.2.9.15 
@@ -374,7 +381,8 @@
 
 ## 3.2.9.5 
 * Fixed:      Too many CSS tweaks to list, due to last build.
-* Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
+* Fixed:      Sortable and Sorter fields now sort without page scroll when page size is 
+              under 782px.
 * Fixed:      Hint icon defaults to left position when screen size is under 782px.
 * Fixed:      `permissions` argument for fields and sections erasing saved field data.  See #1231
 
