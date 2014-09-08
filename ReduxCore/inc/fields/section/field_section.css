@@ -8,3 +8,9 @@
 .redux-main h3 {
   margin-top: 10px;
 }
+.redux-main .form-table-section-indented > tbody > tr:first-child {
+  display: none;
+}
+.redux-main .form-table-section-indented > tbody > tr:nth-last-child(2) {
+  border-bottom: 0;
+}
