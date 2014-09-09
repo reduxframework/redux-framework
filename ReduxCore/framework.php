@@ -339,7 +339,7 @@
                     }
 
                     // Admin Bar menu
-                    add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ), 999 );
+                    add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ), $this->args['admin_bar_priority'] );
 
                     // Register setting
                     add_action( 'admin_init', array( $this, '_register_settings' ) );
@@ -460,8 +460,9 @@
                     'class'                     => '',
                     // Class that gets appended to all redux-containers
                     'admin_bar'                 => true,
+                    'admin_bar_priority'        => 999,
                     // Show the panel pages on the admin bar
-                    'admin_bar_icon'            => 'dashicons-admin-generic',
+                    'admin_bar_icon'            => '',
                     // admin bar icon
                     'help_tabs'                 => array(),
                     'help_sidebar'              => '',
@@ -1375,9 +1376,12 @@
                 if ( $menu ) {
                     foreach ( $menu as $menu_item ) {
                         if ( isset( $menu_item[2] ) && $menu_item[2] === $this->args["page_slug"] ) {
+                            
+                            $title = empty( $this->args['admin_bar_icon'] ) ? $menu_item[0] : '<span class="ab-icon ' . $this->args['admin_bar_icon'] . '"></span>' . $menu_item[0];
+
                             $nodeargs = array(
                                 'id'    => $menu_item[2],
-                                'title' => '<span class="ab-icon ' . $this->args['admin_bar_icon'] . '"></span>' . $menu_item[0],
+                                'title' => $title,
                                 'href'  => admin_url( 'admin.php?page=' . $menu_item[2] ),
                                 'meta'  => array()
                             );
@@ -1397,6 +1401,26 @@
                             );
 
                             $wp_admin_bar->add_node( $subnodeargs );
+                        }
+                    }
+
+                    // Let's deal with external links
+                    if ( isset( $this->args['admin_bar_links'] ) ) {
+
+                        // Group for Main Root Menu (External Group)
+                        $wp_admin_bar->add_node( array( 'id' => $this->args["page_slug"] . '-external', 'parent' => $this->args["page_slug"], 'group' => true, 'meta' => array( 'class' => 'ab-sub-secondary' ) ) );
+
+                        // Add Child Menus to External Group Menu
+                        foreach ( $this->args['admin_bar_links'] as $link ) {
+                            $externalnodeargs = array(
+                                'id'     => $link['id'],
+                                'title'  => $link['title'],
+                                'parent' => $this->args["page_slug"] . '-external',
+                                'href'   => $link['href'],
+                                'meta'   => array( 'target' => '_blank' )
+                            );
+
+                            $wp_admin_bar->add_node( $externalnodeargs );
                         }
                     }
                 } else {
