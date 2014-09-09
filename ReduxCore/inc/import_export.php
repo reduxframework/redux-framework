@@ -140,7 +140,9 @@
                 echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="redux-group-tab-link-a" data-rel="import_export_default">' . $icon . ' <span class="group_title">' . __( 'Import / Export', 'redux-framework' ) . '</span></a>';
                 echo '</li>';
 
-                echo '<li class="divide">&nbsp;</li>';
+                if ( $this->parent->args['dev_mode'] == true ) {
+                	echo '<li class="divide">&nbsp;</li>';
+                }
             }
 
             public function add_submenu() {
