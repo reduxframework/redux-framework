@@ -16,6 +16,7 @@
      * @subpackage  Field_Media
      * @author      Daniel J Griffiths (Ghost1227)
      * @author      Dovy Paukstys
+     * @author      Kevin Provance (kprovance)
      * @version     3.0.0
      */
 
@@ -77,6 +78,38 @@
                     $this->field['mode'] = "image";
                 }
 
+                if (!isset($this->field['library_filter'])) {
+                    $libFilter = '';
+                } else {
+                    if (!is_array($this->field['library_filter'])) {
+                        $this->field['library_filter'] = array($this->field['library_filter']);
+                    }
+                    
+                    $mimeTypes = get_allowed_mime_types();
+
+                    $libArray = $this->field['library_filter'];
+                    
+                    $jsonArr = array();
+                    
+                    // Enum mime types
+                    foreach ($mimeTypes as $ext => $type) {
+                        if (strpos($ext,'|')) {
+                            $expArr = explode('|', $ext);
+                            
+                            foreach($expArr as $ext){
+                                if (in_array($ext, $libArray )) {
+                                    $jsonArr[$ext] = $type;
+                                }
+                            }
+                        } elseif (in_array($ext, $libArray )) {
+                            $jsonArr[$ext] = $type;
+                        }
+                                
+                    }
+                    
+                    $libFilter = urlencode(json_encode($jsonArr));
+                }
+                
                 if ( empty( $this->value ) && ! empty( $this->field['default'] ) ) { // If there are standard values and value is empty
                     if ( is_array( $this->field['default'] ) ) {
                         if ( ! empty( $this->field['default']['id'] ) ) {
@@ -122,6 +155,7 @@
 
                 echo '<input placeholder="' . $placeholder . '" type="text" class="' . $hide . 'upload regular-text ' . $this->field['class'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[url]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '"' . $readOnly . '/>';
                 echo '<input type="hidden" class="data" data-mode="' . $this->field['mode'] . '" />';
+                echo '<input type="hidden" class="library-filter" data-lib-filter="' . $libFilter . '" />';
                 echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[id]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
                 echo '<input type="hidden" class="upload-height" name="' . $this->field['name'] . $this->field['name_suffix'] . '[height]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][height]" value="' . $this->value['height'] . '" />';
                 echo '<input type="hidden" class="upload-width" name="' . $this->field['name'] . $this->field['name_suffix'] . '[width]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][width]" value="' . $this->value['width'] . '" />';

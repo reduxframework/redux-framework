@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.7.6
+* Added:      #1651 - `library_filter` argument.  Allows specification of what files to display in the media library.
+* Modified:   #1651 - `mode` argument accepts either file type or mime type (but not both).
+
 ## 3.3.7.5
 * Fixed:      #1650 - Toogle error with responsive CSS.
 
