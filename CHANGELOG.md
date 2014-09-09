@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.7.5
+* Fixed:      #1650 - Toogle error with responsive CSS.
+
 ## 3.3.7.4
 * Fixed:      #1643 - Slight border issue (2px) on sticky footer.
 

@@ -911,7 +911,7 @@
 
     $.redux.expandOptions = function( parent ) {
         var trigger = parent.find( '.expand_options' );
-        var width = parent.find( '.redux-sidebar' ).width();
+        var width = parent.find( '.redux-sidebar' ).width()-1;
         var id = $( '.redux-group-menu .active a' ).data( 'rel' ) + '_section_group';
 
         if ( trigger.hasClass( 'expanded' ) ) {
@@ -927,7 +927,9 @@
             parent.find( '.redux-main' ).stop().animate(
                 {
                     'margin-left': width
-                }, 500
+                }, 500, function() {
+                    parent.find( '.redux-main' ).attr('style', '');
+                }
             );
 
             parent.find( '.redux-group-tab' ).each(
@@ -944,13 +946,13 @@
 
             parent.find( '.redux-sidebar' ).stop().animate(
                 {
-                    'margin-left': -width - 102
+                    'margin-left': -width - 113
                 }, 500
             );
 
             parent.find( '.redux-main' ).stop().animate(
                 {
-                    'margin-left': '0px'
+                    'margin-left': '-1px'
                 }, 500
             );
 
