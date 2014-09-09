@@ -339,7 +339,7 @@
                     }
 
                     // Admin Bar menu
-                    add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ), 999 );
+                    add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ), $this->args['admin_bar_priority'] );
 
                     // Register setting
                     add_action( 'admin_init', array( $this, '_register_settings' ) );
@@ -460,6 +460,7 @@
                     'class'                     => '',
                     // Class that gets appended to all redux-containers
                     'admin_bar'                 => true,
+                    'admin_bar_priority'        => 999,
                     // Show the panel pages on the admin bar
                     'admin_bar_icon'            => 'dashicons-admin-generic',
                     // admin bar icon
