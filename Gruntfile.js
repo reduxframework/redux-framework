@@ -1,3 +1,4 @@
+/* jshint node:true */
 var shell = require('shelljs');
 
 module.exports = function(grunt) {
@@ -122,49 +123,41 @@ module.exports = function(grunt) {
         qunit: {
             files: ['test/qunit/**/*.html']
         },
-        jshint: {
-            files: [
-                 'ReduxCore/assets/js/import_export/import_export.js',
-                 'ReduxCore/assets/js/media/media.js',
-                 'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
-                 'ReduxCore/inc/fields/background/field_background.js',
-                 'ReduxCore/inc/fields/border/field_border.js',
-                 'ReduxCore/inc/fields/button_set/field_button_Set.js',
-                 'ReduxCore/inc/fields/checkbox/field_checkbox.js',
-                 'ReduxCore/inc/fields/color/field_color.js',
-                 'ReduxCore/inc/fields/color_rgba/field_color_rgba.js',
-                 'ReduxCore/inc/fields/date/field_date.js',
-                 'ReduxCore/inc/fields/dimensions/field_dimensions.js',
-                 'ReduxCore/inc/fields/editor/field_editor.js',
-                 'ReduxCore/inc/fields/gallery/field_gallery.js',
-                 'ReduxCore/inc/fields/image_select/field_image_select.js',
-                 'ReduxCore/inc/fields/multi_text/field_multitext.js',
-                 'ReduxCore/inc/fields/select/field_select.js',
-                 'ReduxCore/inc/fields/select_image/field_select_image.js',
-                 'ReduxCore/inc/fields/slider/field_slider.js',
-                 'ReduxCore/inc/fields/slides/field_slides.js',
-                 'ReduxCore/inc/fields/sortable/field_sortable.js',
-                 'ReduxCore/inc/fields/sorter/field_sorter.js',
-                 'ReduxCore/inc/fields/spacing/field_spacing.js',
-                 'ReduxCore/inc/fields/spinner/field_spinner.js',
-                 'ReduxCore/inc/fields/switch/field_switch.js',
-                 'ReduxCore/inc/fields/typography/field_typography.js',
-                 
-//                'ReduxCore/inc/fields/**/*.js',
-//                'ReduxCore/extensions/**/*.js',
-                'ReduxCore/assets/js/redux.js'
-            ],
-            options: {
-                expr: true,
-                // options here to override JSHint defaults
-                globals: {
-                    jQuery: true,
-                    console: true,
-                    redux_change: true,
-                    module: true,
-                    document: true,
-                }
-            }
+		jshint: {
+			options: {
+				jshintrc: '.jshintrc'
+			},
+			all: [
+				'ReduxCore/assets/js/import_export/import_export.js',
+				'ReduxCore/assets/js/media/media.js',
+				'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
+				'ReduxCore/inc/fields/background/field_background.js',
+				'ReduxCore/inc/fields/border/field_border.js',
+				'ReduxCore/inc/fields/button_set/field_button_Set.js',
+				'ReduxCore/inc/fields/checkbox/field_checkbox.js',
+				'ReduxCore/inc/fields/color/field_color.js',
+				'ReduxCore/inc/fields/color_rgba/field_color_rgba.js',
+				'ReduxCore/inc/fields/date/field_date.js',
+				'ReduxCore/inc/fields/dimensions/field_dimensions.js',
+				'ReduxCore/inc/fields/editor/field_editor.js',
+				'ReduxCore/inc/fields/gallery/field_gallery.js',
+				'ReduxCore/inc/fields/image_select/field_image_select.js',
+				'ReduxCore/inc/fields/multi_text/field_multitext.js',
+				'ReduxCore/inc/fields/select/field_select.js',
+				'ReduxCore/inc/fields/select_image/field_select_image.js',
+				'ReduxCore/inc/fields/slider/field_slider.js',
+				'ReduxCore/inc/fields/slides/field_slides.js',
+				'ReduxCore/inc/fields/sortable/field_sortable.js',
+				'ReduxCore/inc/fields/sorter/field_sorter.js',
+				'ReduxCore/inc/fields/spacing/field_spacing.js',
+				'ReduxCore/inc/fields/spinner/field_spinner.js',
+				'ReduxCore/inc/fields/switch/field_switch.js',
+				'ReduxCore/inc/fields/typography/field_typography.js',
+
+				// 'ReduxCore/inc/fields/**/*.js',
+				// 'ReduxCore/extensions/**/*.js',
+				'ReduxCore/assets/js/redux.js'
+			]
         },
         watch: {
             ui: {
