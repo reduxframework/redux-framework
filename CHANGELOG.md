@@ -1,5 +1,7 @@
 # Redux Framework Changelog
 
+## 3.3.7.7    #1653 - Better admin bar with external links: Admin bar menu priority, icon, and exteral links. Thanks @shivapoudel!
+
 ## 3.3.7.6
 * Added:      #1651 - `library_filter` argument.  Allows specification of what files to display in the media library.
 * Modified:   #1651 - `mode` argument accepts either file type or mime type (but not both).

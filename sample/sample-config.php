@@ -1623,6 +1623,10 @@
                     //'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
                     'admin_bar'            => true,
                     // Show the panel pages on the admin bar
+                    'admin_bar_icon'     => 'dashicons-portfolio',
+                    // Choose an icon for the admin bar menu
+                    'admin_bar_priority' => 50,
+                    // Choose an priority for the admin bar menu
                     'global_variable'      => '',
                     // Set a different name for your global variable other than the opt_name
                     'dev_mode'             => true,
@@ -1703,6 +1707,24 @@
                     )
                 );
 
+                // ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
+                $this->args['admin_bar_links'][] = array(
+                    'id'    => 'redux-docs',
+                    'href'   => 'http://docs.reduxframework.com/',
+                    'title' => __( 'Documentation', 'redux-framework-demo' ),
+                );
+
+                $this->args['admin_bar_links'][] = array(
+                    //'id'    => 'redux-support',
+                    'href'   => 'https://github.com/ReduxFramework/redux-framework/issues',
+                    'title' => __( 'Support', 'redux-framework-demo' ),
+                );
+
+                $this->args['admin_bar_links'][] = array(
+                    'id'    => 'redux-extensions',
+                    'href'   => 'reduxframework.com/extensions',
+                    'title' => __( 'Extensions', 'redux-framework-demo' ),
+                );
 
                 // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
                 $this->args['share_icons'][] = array(
