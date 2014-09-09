@@ -123,11 +123,14 @@ module.exports = function(grunt) {
         qunit: {
             files: ['test/qunit/**/*.html']
         },
+
+        // JavaScript linting with JSHint.
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
 			},
 			all: [
+				'Gruntfile.js',
 				'ReduxCore/assets/js/import_export/import_export.js',
 				'ReduxCore/assets/js/media/media.js',
 				'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
