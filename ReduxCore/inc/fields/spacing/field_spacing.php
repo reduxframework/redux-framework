@@ -318,8 +318,11 @@
                             continue;
                         }
 
+                        // Strip off any alpha for is_numeric test - kp
+                        $num_no_alpha = preg_replace('/[^\d.-]/', '', $value);
+                        
                         // Output if it's a numeric entry
-                        if ( isset( $value ) && is_numeric( $value ) ) {
+                        if ( isset( $value ) && is_numeric( $num_no_alpha ) ) {
                             $style .= $key . ':' . $value . ';';
                         }
 

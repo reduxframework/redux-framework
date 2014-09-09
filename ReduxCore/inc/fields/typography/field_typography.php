@@ -78,6 +78,7 @@
                     'letter-spacing'  => false,
                     'google'          => true,
                     'update_weekly'   => false,    // Enable to force updates of Google Fonts to be weekly
+                    'font_family_clear' => false
                 );
                 $this->field = wp_parse_args( $this->field, $defaults );
 
@@ -172,7 +173,10 @@
 
                 /* Font Family */
                 if ( $this->field['font-family'] === true ) {
-
+                    
+                    // font family clear
+                    echo '<input type="hidden" class="redux-font-clear" value="' . $this->field['font_family_clear'] . '">';
+                    
                     //if (filter_var($this->value['google'], FILTER_VALIDATE_BOOLEAN)) {
                     if ( filter_var( $this->value['google'], FILTER_VALIDATE_BOOLEAN ) ) {
 

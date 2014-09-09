@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.7.3
+* Fixed:      #1642 - Added `font_family_clear` arg, enabling the clear option for font-family.
+* Fixed:      #1638 - Spacing field not outputting when units values attached to default values.
 
 ## 3.3.7.2 
 * Fixed:      #1634 - Double border for sections field. Thanks @AlexandruDoda

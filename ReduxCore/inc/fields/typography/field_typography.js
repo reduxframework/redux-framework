@@ -51,6 +51,8 @@
                 } else {
                     return;
                 }
+
+                var fontClear;
                 
                 el.each(
                     function() {
@@ -72,6 +74,8 @@
                                     select2_params = JSON.parse( select2_params );
                                     default_params = $.extend( {}, default_params, select2_params );
                                 }
+
+                                fontClear = Boolean($(this).find('.redux-font-clear').val());
 
                                 redux.field_objects.typography.select( family );
 
@@ -120,6 +124,7 @@
 
                         // select2 magic, to load font-family dynamically
                         var data = [ {id: 'none', text: 'none'} ];
+
                         $( this ).find( ".redux-typography-family" ).select2(
                             {
                                 matcher: function( term, text ) {
@@ -133,10 +138,10 @@
                                 initSelection: function( element, callback ) {
                                     var data = {id: element.val(), text: element.val()};
                                     callback( data );
-                                }
-
+                                },
+                                allowClear: fontClear,
                                 // when one clicks on the font-family select box
-                            }
+                            } 
                         ).on(
                             "select2-opening", function( e ) {
 
@@ -225,6 +230,17 @@
                                 selVals = val;
                                 isSelecting = true;
 
+                                redux_change( $( this ) );
+                            }
+                        ).on (
+                            'select2-clearing', function(val, choice) {
+                                var thisID = $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
+                                
+                                $( '#' + thisID + ' #' + thisID + '-family' ).attr( 'data-value', '' );
+                                $( '#' + thisID + ' #' + thisID + '-family' ).attr( 'placeholder', 'Font Family' );
+                                
+                                $( '#' + thisID + ' #' + thisID + '-google-font' ).val('false');
+                                
                                 redux_change( $( this ) );
                             }
                         );
