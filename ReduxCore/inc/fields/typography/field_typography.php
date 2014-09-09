@@ -78,7 +78,7 @@
                     'letter-spacing'  => false,
                     'google'          => true,
                     'update_weekly'   => false,    // Enable to force updates of Google Fonts to be weekly
-                    'font_family_clear' => false
+                    'font_family_clear' => true
                 );
                 $this->field = wp_parse_args( $this->field, $defaults );
 
