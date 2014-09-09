@@ -1403,6 +1403,26 @@
                             $wp_admin_bar->add_node( $subnodeargs );
                         }
                     }
+
+                    // Let's deal with external links
+                    if ( isset( $this->args['admin_bar_links'] ) ) {
+
+                        // Group for Main Root Menu (External Group)
+                        $wp_admin_bar->add_node( array( 'id' => $this->args["page_slug"] . '-external', 'parent' => $this->args["page_slug"], 'group' => true, 'meta' => array( 'class' => 'ab-sub-secondary' ) ) );
+
+                        // Add Child Menus to External Group Menu
+                        foreach ( $this->args['admin_bar_links'] as $link ) {
+                            $externalnodeargs = array(
+                                'id'     => $link['id'],
+                                'title'  => $link['title'],
+                                'parent' => $this->args["page_slug"] . '-external',
+                                'href'   => $link['href'],
+                                'meta'   => array( 'target' => '_blank' )
+                            );
+
+                            $wp_admin_bar->add_node( $externalnodeargs );
+                        }
+                    }
                 } else {
                     $nodeargs = array(
                         'id'    => $this->args["page_slug"],
