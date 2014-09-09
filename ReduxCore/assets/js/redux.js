@@ -876,7 +876,7 @@
     };
 
     $.redux.stickyInfo = function() {
-        var stickyWidth = $( '#info_bar' ).width() - 2;
+        var stickyWidth = $( '#info_bar' ).width() - 4;
 
         if ( !$( '#info_bar' ).isOnScreen() && !$( '#redux-footer-sticky' ).isOnScreen() ) {
             $( '#redux-sticky' ).addClass( 'sticky-save-warn' );
