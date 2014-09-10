@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 			options: {
 				jshintrc: '.jshintrc'
 			},
-			all: [
+			files: [
 				'Gruntfile.js',
 				'ReduxCore/assets/js/import_export/import_export.js',
 				'ReduxCore/assets/js/media/media.js',
@@ -162,20 +162,22 @@ module.exports = function(grunt) {
 				'ReduxCore/assets/js/redux.js'
 			]
         },
-        watch: {
-            ui: {
-                files: ['<%= jshint.files %>'],
-                tasks: ['jshint']
-            },
-            php: {
-                files: ['ReduxCore/**/*.php'],
-                tasks: ['phplint:core']
-            },
-            css: {
-                files: ['ReduxCore/**/*.less'],
-                tasks: ['less:development']
-            }
-        },
+
+        // Watch changes for files.
+		watch: {
+			ui: {
+				files: ['<%= jshint.files %>'],
+				tasks: ['jshint']
+			},
+			php: {
+				files: ['ReduxCore/**/*.php'],
+				tasks: ['phplint:core']
+			},
+			css: {
+				files: ['ReduxCore/**/*.less'],
+				tasks: ['less:development']
+			}
+		},
         phpdocumentor: {
             options: {
                 directory: 'ReduxCore/',
