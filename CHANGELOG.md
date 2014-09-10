@@ -1,5 +1,18 @@
 # Redux Framework Changelog
 
+
+
+
+## 3.3.7.8    #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
+              #1658 - Improvements from @shivapoudel, including:
+                * Removed makepot and used grunt-wp-i18n instead.
+                * Added a jshintrc file
+                * Added a `grunt addtextdomain` to correct any bad textdomains in the core.
+                * Updated .gitignore for better readability
+                * Updates to a few other files including package.json.
+                * Updated language files.
+                * Update codestyles/.editorconfig to reflect the project's standards.
+
 ## 3.3.7.7    #1653 - Better admin bar with external links: Admin bar menu priority, icon, and external links. Thanks @shivapoudel!
 
 ## 3.3.7.6

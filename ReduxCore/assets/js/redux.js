@@ -1,4 +1,4 @@
-/* global jQuery, document, redux, redux.args, confirm, relid:true, console, jsonView */
+/* global confirm, relid:true, jsonView */
 
 (function( $ ) {
     'use strict';

@@ -239,7 +239,7 @@ class Redux_Welcome {
 
             <div class="return-to-dashboard">
                 <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'post_type' => 'download', 'page' => 'redux-settings' ), 'edit.php' ) ) ); ?>"><?php _e ( 'Go to Redux Framework', 'redux-framework' ); ?></a> &middot;
-                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'page' => 'redux-changelog' ), 'index.php' ) ) ); ?>"><?php _e ( 'View the Full Changelog', 'redux' ); ?></a>
+                <a href="<?php echo esc_url ( admin_url ( add_query_arg ( array( 'page' => 'redux-changelog' ), 'index.php' ) ) ); ?>"><?php _e ( 'View the Full Changelog', 'redux-framework' ); ?></a>
             </div>
         </div>
         <?php
@@ -303,14 +303,14 @@ class Redux_Welcome {
 
 
 
-                    <h4><?php printf ( __ ( '<a href="%s">%s &rarr; Add New</a>', 'redux' ), admin_url ( 'post-new.php?post_type=download' ), redux_get_label_plural () ); ?></h4>
-                    <p><?php printf ( __ ( 'The %s menu is your access point for all aspects of your Easy Digital Downloads product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'redux' ), redux_get_label_plural () ); ?></p>
+                    <h4><?php printf ( __ ( '<a href="%s">%s &rarr; Add New</a>', 'redux-framework' ), admin_url ( 'post-new.php?post_type=download' ), redux_get_label_plural () ); ?></h4>
+                    <p><?php printf ( __ ( 'The %s menu is your access point for all aspects of your Easy Digital Downloads product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'redux-framework' ), redux_get_label_plural () ); ?></p>
 
-                    <h4><?php _e ( 'Product Price', 'redux' ); ?></h4>
-                    <p><?php _e ( 'Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options.', 'redux' ); ?></p>
+                    <h4><?php _e ( 'Product Price', 'redux-framework' ); ?></h4>
+                    <p><?php _e ( 'Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options.', 'redux-framework' ); ?></p>
 
-                    <h4><?php _e ( 'Download Files', 'redux' ); ?></h4>
-                    <p><?php _e ( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'redux' ); ?></p>
+                    <h4><?php _e ( 'Download Files', 'redux-framework' ); ?></h4>
+                    <p><?php _e ( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'redux-framework' ); ?></p>
 
                 </div>
             </div>
@@ -358,7 +358,7 @@ class Redux_Welcome {
                     <h4><?php _e ( 'Phenomenal Support', 'redux-framework' ); ?></h4>
                     <p><?php _e ( 'We do our best to provide the best support we can. If you encounter a problem or have a question, post a question in the <a href="https://easydigitaldownloads.com/support">support forums</a>.', 'redux-framework' ); ?></p>
 
-                    <h4><?php _e ( 'Need Even Faster Support?', 'redux' ); ?></h4>
+                    <h4><?php _e ( 'Need Even Faster Support?', 'redux-framework' ); ?></h4>
                     <p><?php _e ( 'Our <a href="https://easydigitaldownloads.com/support/pricing/">Priority Support forums</a> are there for customers that need faster and/or more in-depth assistance.', 'redux-framework' ); ?></p>
 
                 </div>
@@ -369,7 +369,7 @@ class Redux_Welcome {
 
                 <div class="feature-section">
 
-                    <h4><?php _e ( 'Get Notified of Extension Releases', 'v' ); ?></h4>
+                    <h4><?php _e ( 'Get Notified of Extension Releases', 'redux-framework' ); ?></h4>
                     <p><?php _e ( 'New extensions that make Easy Digital Downloads even more powerful are released nearly every single week. Subscribe to the newsletter to stay up to date with our latest releases. <a href="http://eepurl.com/kaerz" target="_blank">Signup now</a> to ensure you do not miss a release!', 'redux-framework' ); ?></p>
 
                     <h4><?php _e ( 'Get Alerted About New Tutorials', 'redux-framework' ); ?></h4>
@@ -433,7 +433,7 @@ class Redux_Welcome {
         $file = file_exists ( $url . 'README.txt' ) ? $url . 'README.txt' : null;
 
         if ( !$file ) {
-            $readme = '<p>' . __ ( 'No valid changlog was found.', 'redux' ) . '</p>';
+            $readme = '<p>' . __ ( 'No valid changlog was found.', 'redux-framework' ) . '</p>';
         } else {
             $readme = file_get_contents ( $file );
             $readme = nl2br ( esc_html ( $readme ) );

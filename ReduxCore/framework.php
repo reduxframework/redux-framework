@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.7.7';
+            public static $_version = '3.3.7.8';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2101,8 +2101,8 @@
                     // Construct hint tab
                     $tab = array(
                         'id'      => 'redux-hint-tab',
-                        'title'   => __( 'Hints', 'redux-framework-demo' ),
-                        'content' => __( '<p>' . $msg . '</p>', 'redux-framework-demo' )
+                        'title'   => __( 'Hints', 'redux-framework' ),
+                        'content' => __( '<p>' . $msg . '</p>', 'redux-framework' )
                     );
 
                     $screen->add_help_tab( $tab );
@@ -3021,7 +3021,7 @@
 
                             // Check for empty id value
 
-                            if ( ! isset( $plugin_options[ $field['id'] ] ) || $plugin_options[ $field['id'] ] == '' ) {
+                            if ( ! isset( $plugin_options[ $field['id'] ] ) || ( isset( $plugin_options[ $field['id'] ] ) && $plugin_options[ $field['id'] ] == '' ) )
 
                                 // If we are looking for an empty value, in the case of 'not_empty'
                                 // then we need to keep processing.
