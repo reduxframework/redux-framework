@@ -167,7 +167,7 @@ module.exports = function(grunt) {
 
 		// Generate POT files.
 		makepot: {
-			themes: {
+			redux: {
 				options: {
 					type: 'wp-plugin',
 					domainPath: 'ReduxCore/languages',
@@ -190,11 +190,12 @@ module.exports = function(grunt) {
 				stdout: true,
 				stderr: true
 			},
-			txpush: {
-				command: 'tx push -s' // push the resources
-			},
+			// Limited to Maintainers so
+			// txpush: {
+			// 	command: 'tx push -s' // push the resources
+			// },
 			txpull: {
-				command: 'tx pull -a -f' // pull the .po files
+				command: 'tx pull -a --minimum-perc=25' // pull the .po files
 			}
 		},
 
@@ -306,7 +307,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('langUpdate', [
     	'makepot',
-		'shell:txpush',
 		'shell:txpull',
 		'potomo'
     ]);
