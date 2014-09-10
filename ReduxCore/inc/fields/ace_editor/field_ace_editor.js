@@ -38,7 +38,7 @@
 
                         var aceeditor = ace.edit( editor );
                         aceeditor.setShowPrintMargin( $( element ).attr( 'data-margin' ) );
-                        aceeditor.setTheme( "ace/theme/" + jQuery( element ).attr( 'data-theme' ) );
+                        aceeditor.setTheme( "ace/theme/" + $( element ).attr( 'data-theme' ) );
                         aceeditor.getSession().setMode( "ace/mode/" + $( element ).attr( 'data-mode' ) );
                         var parent = '';
                         if ( el.hasClass( 'redux-field-container' ) ) {
