@@ -4,18 +4,18 @@ php:
 - 5.3
 #- 5.4
 env:
-  global:
-    #secure: "HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo="
-    #secure: "vLqv9UpmPontcizx0ncbiaV0CJ6C54sFcJw1g4Csnwz7q3DJyHtGtjZLysKzyUzbXLzcSGWZfkeqbYXIuI7fdtIfBTSb9Zw39tPDItVzq9T+wyzkCv98F+LI4Py2UJR+dQNOzB+2s0IrAQZt3vsKnJbELKwQ1LWVkNXOu7eCIOo="
-    #secure: "N1TGV9fQSoXhWD0AUMLF4PEWE99ZHA3ypjARJZX3fsycRD4YUbCcIdnKld5rM/4meeVN4kULDci5bcwAv3GrZY0l4lYNFpnInoyOU6B8PFG0795feacUtj8T8GBs9C4P/9ikLkK9BBXEacQ+i/E2Lvv50QJ17RDAbmvXB3gWDvc="
-    #secure: "qZjPMjuQN2a4H2fQ9SSSfgAYRIoRmSTOxMF06CjeTQfIgimwmCayQYVVSKrXQorxpzHPjjg4vEs92oFuBE2nXDN0J4fA8u/E3Qvm4Mr9qWFn/JoOX+/xsYurPw9+rIjr75lT/b8cK38tdgqm7TmMIfsNY4RxHtOhXjt6hWGhUlY="
-    secure: "aDIYEmgxoF/+2vwPdvmbxFKMoz8pA9vtvemehyLNvH3LF05RgFiwNNv+7Lvy127p4Fxp3VBK+ZLKUEEL1gdpevzgni9EigpK8YZbIVHXRL3U+1eP9rcnjuGF9pKuB4kB2ivzoprcalg1ZDI9PnRYRDE4YUTHJiEN2MmLys1QWdc="
-  cache:
-    directories:
-    - node_modules
-  matrix:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=1
+	global:
+		#secure: "HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo="
+		#secure: "vLqv9UpmPontcizx0ncbiaV0CJ6C54sFcJw1g4Csnwz7q3DJyHtGtjZLysKzyUzbXLzcSGWZfkeqbYXIuI7fdtIfBTSb9Zw39tPDItVzq9T+wyzkCv98F+LI4Py2UJR+dQNOzB+2s0IrAQZt3vsKnJbELKwQ1LWVkNXOu7eCIOo="
+		#secure: "N1TGV9fQSoXhWD0AUMLF4PEWE99ZHA3ypjARJZX3fsycRD4YUbCcIdnKld5rM/4meeVN4kULDci5bcwAv3GrZY0l4lYNFpnInoyOU6B8PFG0795feacUtj8T8GBs9C4P/9ikLkK9BBXEacQ+i/E2Lvv50QJ17RDAbmvXB3gWDvc="
+		#secure: "qZjPMjuQN2a4H2fQ9SSSfgAYRIoRmSTOxMF06CjeTQfIgimwmCayQYVVSKrXQorxpzHPjjg4vEs92oFuBE2nXDN0J4fA8u/E3Qvm4Mr9qWFn/JoOX+/xsYurPw9+rIjr75lT/b8cK38tdgqm7TmMIfsNY4RxHtOhXjt6hWGhUlY="
+		secure: "aDIYEmgxoF/+2vwPdvmbxFKMoz8pA9vtvemehyLNvH3LF05RgFiwNNv+7Lvy127p4Fxp3VBK+ZLKUEEL1gdpevzgni9EigpK8YZbIVHXRL3U+1eP9rcnjuGF9pKuB4kB2ivzoprcalg1ZDI9PnRYRDE4YUTHJiEN2MmLys1QWdc="
+	cache:
+		directories:
+		- node_modules
+	matrix:
+	- WP_VERSION=latest WP_MULTISITE=0
+	- WP_VERSION=latest WP_MULTISITE=1
 install:
 - npm install -g grunt-cli
 - npm install
@@ -26,29 +26,29 @@ script:
 - grunt jshint
 - grunt lintPHP
 after_success:
-  # Install the Heroku gem (or the Heroku toolbelt)
-  - gem install heroku
-  # Add your Heroku git repo:
-  - git remote add heroku git@heroku.com:redux-premium.git
-  # Turn off warnings about SSH keys:
-  - echo "Host heroku.com" >> ~/.ssh/config
-  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
-  - echo "   CheckHostIP no" >> ~/.ssh/config
-  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-  # Clear your current Heroku SSH keys:
-  - heroku keys:clear
-  # Add a new SSH key to Heroku
-  - yes | heroku keys:add
+	# Install the Heroku gem (or the Heroku toolbelt)
+	- gem install heroku
+	# Add your Heroku git repo:
+	- git remote add heroku git@heroku.com:redux-premium.git
+	# Turn off warnings about SSH keys:
+	- echo "Host heroku.com" >> ~/.ssh/config
+	- echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+	- echo "   CheckHostIP no" >> ~/.ssh/config
+	- echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+	# Clear your current Heroku SSH keys:
+	- heroku keys:clear
+	# Add a new SSH key to Heroku
+	- yes | heroku keys:add
 after_script:
-  #- ./bin/commit-uncompressed-files.sh
-  - ./bin/update-mirrors-docs.sh
+	#- ./bin/commit-uncompressed-files.sh
+	- ./bin/update-mirrors-docs.sh
 notifications:
-  email:
-    recipients:
-    - dovy@reduxframework.com
-    - kevin.provance@gmail.com
-    on_failure: always
+	email:
+		recipients:
+		- dovy@reduxframework.com
+		- kevin.provance@gmail.com
+		on_failure: always
 branches:
-  except:
-  - gh-pages
-  - setup
+	except:
+	- gh-pages
+	- setup
