@@ -3130,8 +3130,10 @@
                                 }
                             }
                             if ( isset( $field['validate_callback'] ) && ( is_callable( $field['validate_callback'] ) || ( is_string( $field['validate_callback'] ) && function_exists( $field['validate_callback'] ) ) ) ) {
+                                $callback = $field['validate_callback'];
+                                unset($field['validate_callback']);
 
-                                $callbackvalues                 = call_user_func( $field['validate_callback'], $field, $plugin_options[ $field['id'] ], $options[ $field['id'] ] );
+                                $callbackvalues                 = call_user_func( $callback, $field, $plugin_options[ $field['id'] ], $options[ $field['id'] ] );
                                 $plugin_options[ $field['id'] ] = $callbackvalues['value'];
 
                                 if ( isset( $callbackvalues['error'] ) ) {
