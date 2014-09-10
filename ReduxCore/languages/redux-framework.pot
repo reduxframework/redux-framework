@@ -1,38 +1,45 @@
+# Copyright (C) 2014 Team Redux
+# This file is distributed under the GPL3+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Redux Framework 3.3.7.4 Front-end\n"
-"Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-09-09 04:53:41+00:00\n"
+"Project-Id-Version: Redux Framework 3.3.7.7\n"
+"Report-Msgid-Bugs-To: "
+"https://github.com/ReduxFramework/ReduxFramework/issues\n"
+"POT-Creation-Date: 2014-09-10 01:05:00+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Dovy Paukstys <dovy@reduxframework.com>\n"
-"Language-Team: ReduxFramework <language@reduxframework.com>\n"
-"Language: en_US\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"esc_html_x;_c;_nc: \n"
-"_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;: \n"
-"X-Poedit-KeywordsList: __;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Poedit-Country: United States\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: ReduxCore\n"
-"X-Poedit-SearchPath-1: ReduxCore/languages\n"
-"X-Poedit-SearchPath-2: .\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:469
-#: ReduxCore/framework.php:1890
+#: ReduxCore/framework.php:1926
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:470
-#: ReduxCore/framework.php:1898
+#: ReduxCore/framework.php:1934
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:471
-#: ReduxCore/framework.php:1914
-msgid "Your current options will be replaced with the values of this preset. Would you like to proceed?"
+#: ReduxCore/framework.php:1950
+msgid ""
+"Your current options will be replaced with the values of this preset. Would "
+"you like to proceed?"
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:504
@@ -44,95 +51,97 @@ msgid "Are you sure?  Resetting will lose all custom values."
 msgstr ""
 
 #: ReduxCore/extensions/customizer/extension_customizer.php:506
-msgid "Your current options will be replaced with the values of this preset.  Would you like to proceed?"
+msgid ""
+"Your current options will be replaced with the values of this preset.  "
+"Would you like to proceed?"
 msgstr ""
 
-#: ReduxCore/framework.php:198
+#: ReduxCore/framework.php:199
 msgid "Options panel created using %1$s"
 msgstr ""
 
-#: ReduxCore/framework.php:198
+#. Plugin Name of the plugin/theme
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:202 ReduxCore/framework.php:206
+#: ReduxCore/framework.php:203 ReduxCore/framework.php:207
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/framework.php:1344 ReduxCore/framework.php:1345
-#: ReduxCore/framework.php:3493 ReduxCore/framework.php:3572
+#: ReduxCore/framework.php:1349 ReduxCore/framework.php:1350
+#: ReduxCore/framework.php:3529 ReduxCore/framework.php:3608
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1906
+#: ReduxCore/framework.php:1942
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1921
+#: ReduxCore/framework.php:1957
 msgid "Please Wait"
 msgstr ""
 
-#: ReduxCore/framework.php:2068
+#: ReduxCore/framework.php:2104
 msgid "Hints"
 msgstr ""
 
-#: ReduxCore/framework.php:2193
+#: ReduxCore/framework.php:2229
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:3244
+#: ReduxCore/framework.php:3280
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:3291
+#: ReduxCore/framework.php:3327
 msgid "Developer Mode Enabled"
 msgstr ""
 
-#: ReduxCore/framework.php:3319
+#: ReduxCore/framework.php:3355
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:3321 ReduxCore/framework.php:3629
+#: ReduxCore/framework.php:3357 ReduxCore/framework.php:3665
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:3325 ReduxCore/framework.php:3633
+#: ReduxCore/framework.php:3361 ReduxCore/framework.php:3669
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:3327 ReduxCore/framework.php:3635
+#: ReduxCore/framework.php:3363 ReduxCore/framework.php:3671
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:3332 ReduxCore/framework.php:3640
+#: ReduxCore/framework.php:3368 ReduxCore/framework.php:3676
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:3352
+#: ReduxCore/framework.php:3388
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:3367
+#: ReduxCore/framework.php:3403
 msgid "All Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:3381
+#: ReduxCore/framework.php:3417
 msgid "Section Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:3395
+#: ReduxCore/framework.php:3431
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:3413
+#: ReduxCore/framework.php:3449
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:3421
+#: ReduxCore/framework.php:3457
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:3429
+#: ReduxCore/framework.php:3465
 msgid "warning(s) were found!"
 msgstr ""
 
@@ -190,19 +199,19 @@ msgid "Background Position"
 msgstr ""
 
 #: ReduxCore/inc/fields/background/field_background.php:277
-#: ReduxCore/inc/fields/media/field_media.php:116
+#: ReduxCore/inc/fields/media/field_media.php:149
 msgid "No media selected"
 msgstr ""
 
 #: ReduxCore/inc/fields/background/field_background.php:314
-#: ReduxCore/inc/fields/media/field_media.php:159
+#: ReduxCore/inc/fields/media/field_media.php:193
 #: ReduxCore/inc/fields/slides/field_slides.php:126
 #: ReduxCore/inc/fields/slides/field_slides.php:188
 msgid "Upload"
 msgstr ""
 
 #: ReduxCore/inc/fields/background/field_background.php:321
-#: ReduxCore/inc/fields/media/field_media.php:166
+#: ReduxCore/inc/fields/media/field_media.php:200
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:69
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:73
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:76
@@ -473,11 +482,15 @@ msgid "Import from URL"
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:85
-msgid "Input your backup file below and hit Import to restore your sites options from a backup."
+msgid ""
+"Input your backup file below and hit Import to restore your sites options "
+"from a backup."
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:90
-msgid "Input the URL to another sites options set and hit Import to load the options from that site."
+msgid ""
+"Input the URL to another sites options set and hit Import to load the "
+"options from that site."
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:94
@@ -485,7 +498,9 @@ msgid "Import"
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:94
-msgid "WARNING! This will overwrite all existing option values, please proceed with caution!"
+msgid ""
+"WARNING! This will overwrite all existing option values, please proceed "
+"with caution!"
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:97
@@ -493,7 +508,10 @@ msgid "Export Options"
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:100
-msgid "Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site)."
+msgid ""
+"Here you can copy/download your current option settings. Keep this safe as "
+"you can use it as a backup should anything go wrong, or you can use it to "
+"restore your settings on this site (or any other site)."
 msgstr ""
 
 #: ReduxCore/inc/import_export.php:104
@@ -518,7 +536,10 @@ msgid "Help improve Our Panel"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:130
-msgid "Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatibility."
+msgid ""
+"Please helps us improve our panel by allowing us to gather anonymous usage "
+"stats so we know which configurations, plugins and themes to test to ensure "
+"compatibility."
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:135
@@ -538,7 +559,9 @@ msgid "Getting Started"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:152
-msgid "This panel demonstrates the many features of Redux.  Before digging in, we suggest you get up to speed by reviewing %1$s."
+msgid ""
+"This panel demonstrates the many features of Redux.  Before digging in, we "
+"suggest you get up to speed by reviewing %1$s."
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:152
@@ -550,7 +573,11 @@ msgid "Redux Generator"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:153
-msgid "Want to get a head start? Use the %1$s. It will create a customized boilerplate theme or a standalone admin folder complete with all things Redux (with the help of Underscores and TGM). Save yourself a headache and try it today."
+msgid ""
+"Want to get a head start? Use the %1$s. It will create a customized "
+"boilerplate theme or a standalone admin folder complete with all things "
+"Redux (with the help of Underscores and TGM). Save yourself a headache and "
+"try it today."
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:154
@@ -558,7 +585,9 @@ msgid "Redux Extensions"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:154
-msgid "Did you know we have extensions, which greatly enhance the features of Redux?  Visit our %1$s to learn more!"
+msgid ""
+"Did you know we have extensions, which greatly enhance the features of "
+"Redux?  Visit our %1$s to learn more!"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:154
@@ -570,7 +599,9 @@ msgid "Like Redux?"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:155
-msgid "If so, please %1$s and consider making a %2$s to keep development of Redux moving forward."
+msgid ""
+"If so, please %1$s and consider making a %2$s to keep development of Redux "
+"moving forward."
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:155
@@ -586,7 +617,9 @@ msgid "Newsletter"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:156
-msgid "If you'd like to keep up to with all things Redux, please subscribe to our newsletter"
+msgid ""
+"If you'd like to keep up to with all things Redux, please subscribe to our "
+"newsletter"
 msgstr ""
 
 #: ReduxCore/inc/tracking.php:157
@@ -625,7 +658,9 @@ msgid "You must not enter any HTML in this field, all HTML tags have been remove
 msgstr ""
 
 #: ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:16
-msgid "You must not enter any special characters in this field, all special characters have been removed."
+msgid ""
+"You must not enter any special characters in this field, all special "
+"characters have been removed."
 msgstr ""
 
 #: ReduxCore/inc/validation/not_empty/validation_not_empty.php:16
@@ -675,7 +710,9 @@ msgid "Welcome to Redux Framework %s"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:149
-msgid "Thank you for updating to the latest version! Redux Framework %s is ready to <add description>"
+msgid ""
+"Thank you for updating to the latest version! Redux Framework %s is ready "
+"to <add description>"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:150 ReduxCore/inc/welcome.php:261
@@ -734,7 +771,9 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:260 ReduxCore/inc/welcome.php:292
 #: ReduxCore/inc/welcome.php:411
-msgid "Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>"
+msgid ""
+"Thank you for updating to the latest version! Redux Framework %s is ready "
+"to make your <description>"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:266
@@ -742,7 +781,9 @@ msgid "Full Changelog"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:297
-msgid "Use the tips below to get started using Redux Framework. You'll be up and running in no time!"
+msgid ""
+"Use the tips below to get started using Redux Framework. You'll be up and "
+"running in no time!"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:300
@@ -754,7 +795,10 @@ msgid "<a href=\"%s\">%s &rarr; Add New</a>"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:307
-msgid "The %s menu is your access point for all aspects of your Easy Digital Downloads product creation and setup. To create your first product, simply click Add New and then fill out the product details."
+msgid ""
+"The %s menu is your access point for all aspects of your Easy Digital "
+"Downloads product creation and setup. To create your first product, simply "
+"click Add New and then fill out the product details."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:309
@@ -762,7 +806,11 @@ msgid "Product Price"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:310
-msgid "Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options."
+msgid ""
+"Products can have simple prices or variable prices if you wish to have more "
+"than one price point for a product. For a single price, simply enter the "
+"price. For multiple price points, click <em>Enable variable pricing</em> "
+"and enter the options."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:312
@@ -770,7 +818,10 @@ msgid "Download Files"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:313
-msgid "Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button."
+msgid ""
+"Uploading the downloadable files is simple. Click <em>Upload File</em> in "
+"the Download Files section and choose your download file. To add more than "
+"one file, simply click the <em>Add New</em> button."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:319
@@ -782,7 +833,9 @@ msgid "Flexible Product Grids"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:326
-msgid "The [downloads] shortcode will display a product grid that works with any theme, no matter the size. It is even responsive!"
+msgid ""
+"The [downloads] shortcode will display a product grid that works with any "
+"theme, no matter the size. It is even responsive!"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:328
@@ -790,7 +843,9 @@ msgid "Change the Number of Columns"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:329
-msgid "You can easily change the number of columns by adding the columns=\"x\" parameter:"
+msgid ""
+"You can easily change the number of columns by adding the columns=\"x\" "
+"parameter:"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:332
@@ -798,7 +853,9 @@ msgid "Additional Display Options"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:333
-msgid "The product grids can be customized in any way you wish and there is <a href=\"%s\">extensive documentation</a> to assist you."
+msgid ""
+"The product grids can be customized in any way you wish and there is <a "
+"href=\"%s\">extensive documentation</a> to assist you."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:338
@@ -810,7 +867,10 @@ msgid "The <em>[purchase_link]</em> Shortcode"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:345
-msgid "With easily accessible shortcodes to display purchase buttons, you can add a Buy Now or Add to Cart button for any product anywhere on your site in seconds."
+msgid ""
+"With easily accessible shortcodes to display purchase buttons, you can add "
+"a Buy Now or Add to Cart button for any product anywhere on your site in "
+"seconds."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:347
@@ -818,7 +878,10 @@ msgid "Buy Now Buttons"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:348
-msgid "Purchase buttons can behave as either Add to Cart or Buy Now buttons. With Buy Now buttons customers are taken straight to PayPal, giving them the most frictionless purchasing experience possible."
+msgid ""
+"Purchase buttons can behave as either Add to Cart or Buy Now buttons. With "
+"Buy Now buttons customers are taken straight to PayPal, giving them the "
+"most frictionless purchasing experience possible."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:354
@@ -830,7 +893,10 @@ msgid "Phenomenal Support"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:359
-msgid "We do our best to provide the best support we can. If you encounter a problem or have a question, post a question in the <a href=\"https://easydigitaldownloads.com/support\">support forums</a>."
+msgid ""
+"We do our best to provide the best support we can. If you encounter a "
+"problem or have a question, post a question in the <a "
+"href=\"https://easydigitaldownloads.com/support\">support forums</a>."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:361
@@ -838,7 +904,10 @@ msgid "Need Even Faster Support?"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:362
-msgid "Our <a href=\"https://easydigitaldownloads.com/support/pricing/\">Priority Support forums</a> are there for customers that need faster and/or more in-depth assistance."
+msgid ""
+"Our <a href=\"https://easydigitaldownloads.com/support/pricing/\">Priority "
+"Support forums</a> are there for customers that need faster and/or more "
+"in-depth assistance."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:368
@@ -850,7 +919,11 @@ msgid "Get Notified of Extension Releases"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:373
-msgid "New extensions that make Easy Digital Downloads even more powerful are released nearly every single week. Subscribe to the newsletter to stay up to date with our latest releases. <a href=\"http://eepurl.com/kaerz\" target=\"_blank\">Signup now</a> to ensure you do not miss a release!"
+msgid ""
+"New extensions that make Easy Digital Downloads even more powerful are "
+"released nearly every single week. Subscribe to the newsletter to stay up "
+"to date with our latest releases. <a href=\"http://eepurl.com/kaerz\" "
+"target=\"_blank\">Signup now</a> to ensure you do not miss a release!"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:375
@@ -858,7 +931,10 @@ msgid "Get Alerted About New Tutorials"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:376
-msgid "<a href=\"http://eepurl.com/kaerz\" target=\"_blank\">Signup now</a> to hear about the latest tutorial releases that explain how to take Easy Digital Downloads further."
+msgid ""
+"<a href=\"http://eepurl.com/kaerz\" target=\"_blank\">Signup now</a> to "
+"hear about the latest tutorial releases that explain how to take Easy "
+"Digital Downloads further."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:382
@@ -870,7 +946,11 @@ msgid "Over 250 Extensions"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:387
-msgid "Add-on plugins are available that greatly extend the default functionality of Easy Digital Downloads. There are extensions for payment processors, such as Stripe and PayPal, extensions for newsletter integrations, and many, many more."
+msgid ""
+"Add-on plugins are available that greatly extend the default functionality "
+"of Easy Digital Downloads. There are extensions for payment processors, "
+"such as Stripe and PayPal, extensions for newsletter integrations, and "
+"many, many more."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:389
@@ -878,11 +958,17 @@ msgid "Visit the Extension Store"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:390
-msgid "<a href=\"https://easydigitaldownloads.com/extensions\" target=\"_blank\">The Extensions store</a> has a list of all available extensions, including convenient category filters so you can find exactly what you are looking for."
+msgid ""
+"<a href=\"https://easydigitaldownloads.com/extensions\" "
+"target=\"_blank\">The Extensions store</a> has a list of all available "
+"extensions, including convenient category filters so you can find exactly "
+"what you are looking for."
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:416
-msgid "Redux Framework is created by a worldwide team of developers who <something witty here>"
+msgid ""
+"Redux Framework is created by a worldwide team of developers who <something "
+"witty here>"
 msgstr ""
 
 #: ReduxCore/inc/welcome.php:436
@@ -893,62 +979,20 @@ msgstr ""
 msgid "View %s"
 msgstr ""
 
-#: class.redux-plugin.php:306
-msgid "Redux Framework has an embedded demo."
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/redux-framework"
 msgstr ""
 
-#: class.redux-plugin.php:306
-msgid "Click here to activate the sample config file."
+#. Description of the plugin/theme
+msgid ""
+"Redux is a simple, truly extensible options framework for WordPress themes "
+"and plugins."
 msgstr ""
 
-#: class.redux-plugin.php:407
-msgid "Repo"
+#. Author of the plugin/theme
+msgid "Team Redux"
 msgstr ""
 
-#: class.redux-plugin.php:408
-msgid "Generator"
-msgstr ""
-
-#: class.redux-plugin.php:409
-msgid "Issues"
-msgstr ""
-
-#: class.redux-plugin.php:410
-msgid "Documentation"
-msgstr ""
-
-#: class.redux-plugin.php:415
-msgid "Deactivate Demo Mode"
-msgstr ""
-
-#: class.redux-plugin.php:417
-msgid "Activate Demo Mode"
-msgstr ""
-
-#: tests/includes/class-tivwp-dm-controller.php:28
-msgid "Must call in of after the \"plugins_loaded\" action."
-msgstr ""
-
-#: tests/includes/class-tivwp-dm-controller.php:138
-msgid "Unknown action \"%1$s\" specified for %2$s"
-msgstr ""
-
-#: tests/includes/class-tivwp-dm-controller.php:143
-msgid "The unknown action has been replaced with \"%s\""
-msgstr ""
-
-#: tests/includes/class-tivwp-dm-controller.php:158
-msgid "Automatic action performed: \"%s\""
-msgstr ""
-
-#: tests/includes/class-tivwp-dm.php:112
-msgid "Activate Development Plugins"
-msgstr ""
-
-#: tests/includes/class-tivwp-dm.php:119
-msgid "Deactivate Development Plugins"
-msgstr ""
-
-#: tests/includes/class-tivwp-dm.php:131
-msgid "You do not have sufficient permissions to access this page."
+#. Author URI of the plugin/theme
+msgid "http://reduxframework.com"
 msgstr ""
