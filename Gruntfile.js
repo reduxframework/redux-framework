@@ -6,21 +6,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        potomo: {
-            dist: {
-                options: {
-                    poDel: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'ReduxCore/languages/',
-                    src: ['*.po'],
-                    dest: 'ReduxCore/languages/',
-                    ext: '.mo',
-                    nonull: true
-                }]
-            }
-        },
+
         concat: {
             options: {
                 separator: ';'
@@ -178,6 +164,57 @@ module.exports = function(grunt) {
 				tasks: ['less:development']
 			}
 		},
+
+		// Generate POT files.
+		makepot: {
+			themes: {
+				options: {
+					type: 'wp-plugin',
+					domainPath: 'ReduxCore/languages',
+					potFilename: 'redux-framework.pot',
+					include: [
+						'ReduxCore/.*'
+					],
+					potHeaders: {
+						poedit: true,
+						'report-msgid-bugs-to': 'https://github.com/ReduxFramework/ReduxFramework/issues',
+						'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
+					}
+				}
+			}
+		},
+
+		// Exec shell commands.
+		shell: {
+			options: {
+				stdout: true,
+				stderr: true
+			},
+			txpush: {
+				command: 'tx push -s' // push the resources
+			},
+			txpull: {
+				command: 'tx pull -a -f' // pull the .po files
+			}
+		},
+
+		// Generate MO files.
+		potomo: {
+			dist: {
+				options: {
+					poDel: true
+				},
+				files: [{
+					expand: true,
+					cwd: 'ReduxCore/languages/',
+					src: ['*.po'],
+					dest: 'ReduxCore/languages/',
+					ext: '.mo',
+					nonull: true
+				}]
+			}
+		},
+
         phpdocumentor: {
             options: {
                 directory: 'ReduxCore/',
@@ -253,22 +290,26 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+	// Load NPM tasks to be used here
+	grunt.loadNpmTasks( 'grunt-shell' );
+	grunt.loadNpmTasks( 'grunt-potomo' );
+	grunt.loadNpmTasks( 'grunt-wp-i18n' );
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-phpdocumentor');
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks("grunt-phplint");
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-potomo');
     grunt.loadNpmTasks('grunt-recess');
 
-    grunt.registerTask('langUpdate', "Update languages", function() {
-        shell.exec('tx pull -a --minimum-perc=25');
-        shell.exec('grunt potomo');
-        shell.exec('php bin/makepot/gen.php');
-    });
+    grunt.registerTask('langUpdate', [
+    	'makepot',
+		'shell:txpush',
+		'shell:txpull',
+		'potomo'
+    ]);
 
     // Default task(s).
     grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', "less:production", "less:development", "less:extensions"]);
