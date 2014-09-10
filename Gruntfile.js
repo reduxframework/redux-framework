@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
                     'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
-                    'ReduxCore/assets/js/redux.js',
+                    'ReduxCore/assets/js/redux.js'
                 ],
                 dest: 'ReduxCore/assets/js/redux.min.js'
             },
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
                     'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
-                    'ReduxCore/assets/js/vendor/jquery.alphanum.js',
+                    'ReduxCore/assets/js/vendor/jquery.alphanum.js'
                 ],
                 dest: 'ReduxCore/assets/js/vendor.min.js'
             }
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
                     'ReduxCore/inc/fields/spacing/field_spacing.min.js': ['ReduxCore/inc/fields/spacing/field_spacing.js'],
                     'ReduxCore/inc/fields/spinner/field_spinner.min.js': ['ReduxCore/inc/fields/spinner/field_spinner.js'],
                     'ReduxCore/inc/fields/switch/field_switch.min.js': ['ReduxCore/inc/fields/switch/field_switch.js'],
-                    'ReduxCore/inc/fields/typography/field_typography.min.js': ['ReduxCore/inc/fields/typography/field_typography.js'],
+                    'ReduxCore/inc/fields/typography/field_typography.min.js': ['ReduxCore/inc/fields/typography/field_typography.js']
                 }
             },
             extensions: {
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
                 files: {
                     'ReduxCore/assets/js/vendor.min.js': ['ReduxCore/assets/js/vendor.min.js']
                 }
-            },
+            }
         },
         qunit: {
             files: ['test/qunit/**/*.html']
@@ -185,22 +185,22 @@ module.exports = function(grunt) {
         },
         phplint: {
             options: {
-                swapPath: "./"
+                swapPath: './'
             },
             core: ["ReduxCore/**/*.php"],
-            plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"],
+            plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"]
         },
         less: {
             development: {
                 options: {
-                    paths: 'ReduxCore/',
+                    paths: 'ReduxCore/'
                 },
                 files: [{
                         expand: true, // Enable dynamic expansion.
                         cwd: 'ReduxCore/inc/fields', // Src matches are relative to this path.
                         src: ['**/*.less'], // Actual pattern(s) to match.
                         dest: 'ReduxCore/inc/fields', // Destination path prefix.
-                        ext: '.css', // Dest filepaths will have this extension.
+                        ext: '.css' // Dest filepaths will have this extension.
                     }]
             },
             extensions: {
@@ -209,7 +209,7 @@ module.exports = function(grunt) {
                         cwd: 'ReduxCore/extensions/', // Src matches are relative to this path.
                         src: ['**/*.less'], // Actual pattern(s) to match.
                         dest: 'ReduxCore/extensions/', // Destination path prefix.
-                        ext: '.css', // Dest filepaths will have this extension.
+                        ext: '.css' // Dest filepaths will have this extension.
                     }]
             },
             production: {
@@ -218,7 +218,7 @@ module.exports = function(grunt) {
                     cleancss: true,
                     ieCompat: true,
                     relativeUrls: true,
-                    paths: 'ReduxCore/',
+                    paths: 'ReduxCore/'
                 },
                 files: {
                     "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
@@ -236,11 +236,11 @@ module.exports = function(grunt) {
                     ieCompat: true,
                     relativeUrls: true,
                     report: 'gzip',
-                    paths: 'ReduxCore/',
+                    paths: 'ReduxCore/'
                 },
                 files: {
                     "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
-                    "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
+                    "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"]
                 }
             }
         },
