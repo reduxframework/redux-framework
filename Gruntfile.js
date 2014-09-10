@@ -295,15 +295,15 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-shell' );
 	grunt.loadNpmTasks( 'grunt-potomo' );
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-phpdocumentor');
-    grunt.loadNpmTasks('grunt-gh-pages');
-    grunt.loadNpmTasks("grunt-phplint");
-    grunt.loadNpmTasks('grunt-recess');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-phpdocumentor');
+	grunt.loadNpmTasks('grunt-gh-pages');
+	grunt.loadNpmTasks("grunt-phplint");
+	grunt.loadNpmTasks('grunt-recess');
 
     grunt.registerTask('langUpdate', [
     	'makepot',
