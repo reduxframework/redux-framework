@@ -267,6 +267,7 @@
                             //'capabilities'   => $this->parent->args['page_permissions'],
                             'transport'      => 'refresh',
                             'theme_supports' => '',
+                            'sanitize_callback' => '__return_false',
                             //'sanitize_callback' => array( $this, '_field_validation' ),
                             //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
                         );

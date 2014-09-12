@@ -1,7 +1,7 @@
 # Redux Framework Changelog
 
 
-
+## 3.3.7.9    #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`
 
 ## 3.3.7.8    #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
               #1658 - Improvements from @shivapoudel, including:
