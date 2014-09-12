@@ -2,10 +2,10 @@
 # This file is distributed under the GPL3+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Redux Framework 3.3.7.7\n"
+"Project-Id-Version: Redux Framework 3.3.7.8\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-09-10 13:02:16+00:00\n"
+"POT-Creation-Date: 2014-09-12 14:25:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,7 +69,7 @@ msgid "Options"
 msgstr ""
 
 #: ReduxCore/framework.php:1349 ReduxCore/framework.php:1350
-#: ReduxCore/framework.php:3529 ReduxCore/framework.php:3608
+#: ReduxCore/framework.php:3531 ReduxCore/framework.php:3610
 msgid "System Info"
 msgstr ""
 
@@ -89,59 +89,59 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:3280
+#: ReduxCore/framework.php:3282
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:3327
+#: ReduxCore/framework.php:3329
 msgid "Developer Mode Enabled"
 msgstr ""
 
-#: ReduxCore/framework.php:3355
+#: ReduxCore/framework.php:3357
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:3357 ReduxCore/framework.php:3665
+#: ReduxCore/framework.php:3359 ReduxCore/framework.php:3667
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:3361 ReduxCore/framework.php:3669
+#: ReduxCore/framework.php:3363 ReduxCore/framework.php:3671
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:3363 ReduxCore/framework.php:3671
+#: ReduxCore/framework.php:3365 ReduxCore/framework.php:3673
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:3368 ReduxCore/framework.php:3676
+#: ReduxCore/framework.php:3370 ReduxCore/framework.php:3678
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:3388
+#: ReduxCore/framework.php:3390
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:3403
+#: ReduxCore/framework.php:3405
 msgid "All Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:3417
+#: ReduxCore/framework.php:3419
 msgid "Section Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:3431
+#: ReduxCore/framework.php:3433
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:3449
+#: ReduxCore/framework.php:3451
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:3457
+#: ReduxCore/framework.php:3459
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:3465
+#: ReduxCore/framework.php:3467
 msgid "warning(s) were found!"
 msgstr ""
 
@@ -344,7 +344,7 @@ msgstr ""
 
 #: ReduxCore/inc/fields/slides/field_slides.php:167
 #: ReduxCore/inc/fields/slides/field_slides.php:220
-msgid "Delete %s"
+msgid "Delete"
 msgstr ""
 
 #: ReduxCore/inc/fields/slides/field_slides.php:223
