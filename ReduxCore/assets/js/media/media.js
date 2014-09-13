@@ -76,15 +76,17 @@
         var libFilter = [];        
         
         // Must exist to do decoding
-        if (filter !== '') {
-            isFiltered = true;
-            
-            filter = decodeURIComponent(filter);
-            filter = JSON.parse(filter);
+        if (filter !== undefined) {
+            if (filter !== ''){
+                isFiltered = true;
 
-            $.each(filter, function(index, value) {
-                libFilter.push(value);
-            });
+                filter = decodeURIComponent(filter);
+                filter = JSON.parse(filter);
+
+                $.each(filter, function(index, value) {
+                    libFilter.push(value);
+                });
+            }
         }        
         
         // Create the media frame.

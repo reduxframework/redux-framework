@@ -1,5 +1,6 @@
 # Redux Framework Changelog
 
+## 3.3.7.10   #1667 - Slides Upload button causing JS error.
 
 ## 3.3.7.9    #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`
 
