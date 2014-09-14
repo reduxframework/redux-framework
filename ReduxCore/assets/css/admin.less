@@ -831,37 +831,38 @@ pre {
 }
 
 .adminThemeColorOverrides (@darkColor, @accentColor, @secondaryColor, @buttonPrimary) {
-    .button.ui-datepicker-current,
-    button.ui-datepicker-close {
+
+    .redux-container .button.ui-datepicker-current,
+    .redux-container button.ui-datepicker-close {
         background-color: lighten(@accentColor, 3%)!important;
     }
 
-    .ui-datepicker-buttonpane button.ui-datepicker-current {
+    .redux-container .ui-datepicker-buttonpane button.ui-datepicker-current {
         background: @buttonPrimary!important;
         color: white!important;
         border: 1px solid darken(@buttonPrimary, 20%)!important;
 
     }
 
-    .ui-datepicker-header .ui-icon {
+    .redux-container .ui-datepicker-header .ui-icon {
         background-image: url(vendor/jquery-ui-bootstrap/images/ui-icons_ffffff_256x240.png)!important;
     }
 
-    .ui-datepicker-header {
+    .redux-container .ui-datepicker-header {
         background-color: @secondaryColor!important;
         color: white!important;
     }
 
-    .ui-datepicker td .ui-state-active {
+    .redux-container .ui-datepicker td .ui-state-active {
         background-color: lighten(@accentColor, 3%)!important;
         color: white!important;
     }
 
-    .ui-datepicker td .ui-state-hover {
+    .redux-container .ui-datepicker td .ui-state-hover {
         color: lighten(@accentColor, 3%)!important;
     }
 
-    .ui-datepicker td .ui-state-highlight {
+    .redux-container .ui-datepicker td .ui-state-highlight {
         background: @accentColor!important;
         border: 1px solid @secondaryColor!important;
         color: white!important;
@@ -869,14 +870,14 @@ pre {
 
     .redux-container-switch .cb-disable,
     .redux-container-switch .cb-enable, 
-    .ui-state-default,
-    .ui-widget-content .ui-state-default,
-    .ui-widget-header .ui-state-default {
+    .redux-container .ui-state-default,
+    .redux-container .ui-widget-content .ui-state-default,
+    .redux-container .ui-widget-header .ui-state-default {
         .backgroundGradient(#f5f5f5, #f8f8f8)!important;
         border-color: #ccc!important;
     }
 
-    .ui-datepicker td .ui-state-active {
+    .redux-container .ui-datepicker td .ui-state-active {
         color: black!important;
         font-weight: 700!important;
         background: white!important;
@@ -887,7 +888,7 @@ pre {
         border-color: #767676!important;
     }
     .redux-container-switch .cb-enable.selected,
-    .ui-buttonset .ui-state-active {
+    .redux-container .ui-buttonset .ui-state-active {
         .backgroundGradient(@accentColor)!important;
         border-color: darken(@accentColor, 15%)!important;
         border-color: darken(@accentColor, 10%)!important;
