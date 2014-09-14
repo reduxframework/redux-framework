@@ -56,6 +56,9 @@
              */
             function render() {
 
+                if ( ! isset( $this->field['margin'] ) ) {
+                    $this->field['margin'] = false;
+                }
                 if ( ! isset( $this->field['mode'] ) ) {
                     $this->field['mode'] = 'javascript';
                 }
@@ -80,6 +83,7 @@
                               id="<?php echo $this->field['id']; ?>-textarea"
                               class="ace-editor hide <?php echo $this->field['class']; ?>"
                               data-editor="<?php echo $this->field['id']; ?>-editor"
+                              data-margin="<?php echo $this->field['margin']; ?>"
                               data-mode="<?php echo $this->field['mode']; ?>"
                               data-theme="<?php echo $this->field['theme']; ?>">
                         <?php echo $this->value; ?>
