@@ -1,5 +1,7 @@
 # Redux Framework Changelog
 
+## 3.3.7.11   #1685 - Specifying no default argument for image_select caused errors on reset.
+
 ## 3.3.7.10   #1667 - Slides Upload button causing JS error.
 
 ## 3.3.7.9    #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`

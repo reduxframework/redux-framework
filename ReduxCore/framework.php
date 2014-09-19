@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.7.10';
+            public static $_version = '3.3.7.11';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -76,9 +76,11 @@
 
             public static function init() {
                 $dir = Redux_Helpers::cleanFilePath( dirname( __FILE__ ) );
+                
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
                 self::$_dir           = trailingslashit( $dir );
                 self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
+                
                 // See if Redux is a plugin or not
                 if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false || strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory_uri() ) ) !== false || strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( WP_CONTENT_DIR . '/themes/' ) ) !== false ) {
                     self::$_is_plugin = false;
@@ -88,6 +90,7 @@
                         if ( ! function_exists( 'get_plugins' ) ) {
                             require_once ABSPATH . 'wp-admin/includes/plugin.php';
                         }
+                        
                         $is_plugin = false;
                         foreach ( get_plugins() as $key => $value ) {
                             if ( strpos( $key, 'redux-framework.php' ) !== false ) {
@@ -100,6 +103,7 @@
                         }
                     }
                 }
+                
                 if ( self::$_is_plugin == true || self::$_as_plugin == true ) {
                     self::$_url = plugin_dir_url( __FILE__ );
                 } else {
@@ -1156,8 +1160,10 @@
                                         }
                                     }
 
-                                    if ( $field['type'] == "sortable" ) {
+                                    if ( $field['type'] == "sortable"  ) {
                                         $this->options_defaults[ $field['id'] ] = array();
+                                    } elseif ($field['type'] == "image_select") {
+                                        $this->options_defaults[ $field['id'] ] = '';
                                     } else {
                                         $this->options_defaults[ $field['id'] ] = $field['options'];
                                     }
