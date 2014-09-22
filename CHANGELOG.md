@@ -1,22 +1,26 @@
 # Redux Framework Changelog
 
-## 3.3.7.11   #1685 - Specifying no default argument for image_select caused errors on reset.
+## 3.3.7.11   
+* Modified:   #1685 - Specifying no default argument for image_select caused errors on reset.
 
-## 3.3.7.10   #1667 - Slides Upload button causing JS error.
+## 3.3.7.10   
+* Fixed:      #1667 - Slides Upload button causing JS error.
 
 ## 3.3.7.9    #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`
 
-## 3.3.7.8    #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
-              #1658 - Improvements from @shivapoudel, including:
-                * Removed makepot and used grunt-wp-i18n instead.
-                * Added a jshintrc file
-                * Added a `grunt addtextdomain` to correct any bad textdomains in the core.
-                * Updated .gitignore for better readability
-                * Updates to a few other files including package.json.
-                * Updated language files.
-                * Update codestyles/.editorconfig to reflect the project's standards.
+## 3.3.7.8    
+*Fixed:  #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
+* Modified: #1658 - Improvements from @shivapoudel, including:
+  * Removed makepot and used grunt-wp-i18n instead.
+  * Added a jshintrc file
+  * Added a `grunt addtextdomain` to correct any bad textdomains in the core.
+  * Updated .gitignore for better readability
+  * Updates to a few other files including package.json.
+  * Updated language files.
+  * Update codestyles/.editorconfig to reflect the project's standards.
 
-## 3.3.7.7    #1653 - Better admin bar with external links: Admin bar menu priority, icon, and external links. Thanks @shivapoudel!
+## 3.3.7.7    
+* Modified:  #1653 - Better admin bar with external links: Admin bar menu priority, icon, and external links. Thanks @shivapoudel!
 
 ## 3.3.7.6
 * Added:      #1651 - `library_filter` argument.  Allows specification of what files to display in the media library.
