@@ -6,7 +6,8 @@
 ## 3.3.7.10   
 * Fixed:      #1667 - Slides Upload button causing JS error.
 
-## 3.3.7.9    #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`
+## 3.3.7.9    
+* Fixed: #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`
 
 ## 3.3.7.8    
 *Fixed:  #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
