@@ -10,7 +10,7 @@
 * Fixed: #1670 - Fix for Theme Check -> `add_setting() method needs to have a sanitization callback function passed.`
 
 ## 3.3.7.8    
-*Fixed:  #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
+* Fixed:  #1661 - Fix for undefined index in some versions of PHP. Thanks @gianbalex!
 * Modified: #1658 - Improvements from @shivapoudel, including:
   * Removed makepot and used grunt-wp-i18n instead.
   * Added a jshintrc file
