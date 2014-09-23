@@ -28,7 +28,7 @@
 
             public function __construct() {
 
-                if ( $_GET['page'] == "themecheck" ) {
+                if ( isset( $_GET['page'] ) && $_GET['page'] == "themecheck" ) {
                     add_action( 'admin_notices', array( $this, 'themeCheckExits' ) );
                 }
 
