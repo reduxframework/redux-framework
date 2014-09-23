@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.8
+* Modified:   Updated potomo, thanks @shivapoudel.
+* Added: Grunt checktextdomain and made improvements. Thanks @shivapoudel.
+
 ## 3.3.7.11   
 * Modified:   #1685 - Specifying no default argument for image_select caused errors on reset.
 

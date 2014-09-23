@@ -196,11 +196,11 @@
                             <a href="<?php echo wp_customize_url(); ?>" class="load-customize hide-if-no-customize"
                                title="<?php echo esc_attr( $customize_title ); ?>">
                                 <img src="<?php echo esc_url( $screenshot ); ?>"
-                                     alt="<?php esc_attr_e( 'Current theme preview' ); ?>"/>
+                                     alt="<?php esc_attr_e( 'Current theme preview', 'redux-framework-demo' ); ?>"/>
                             </a>
                         <?php endif; ?>
                         <img class="hide-if-customize" src="<?php echo esc_url( $screenshot ); ?>"
-                             alt="<?php esc_attr_e( 'Current theme preview' ); ?>"/>
+                             alt="<?php esc_attr_e( 'Current theme preview', 'redux-framework-demo' ); ?>"/>
                     <?php endif; ?>
 
                     <h4><?php echo $this->theme->display( 'Name' ); ?></h4>
@@ -214,7 +214,7 @@
                         <p class="theme-description"><?php echo $this->theme->display( 'Description' ); ?></p>
                         <?php
                             if ( $this->theme->parent() ) {
-                                printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'redux-framework-demo' ), $this->theme->parent()->display( 'Name' ) );
+                                printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'redux-framework-demo' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'redux-framework-demo' ), $this->theme->parent()->display( 'Name' ) );
                             }
                         ?>
 
@@ -311,8 +311,8 @@
                         array(
                             'id'       => 'opt-gallery',
                             'type'     => 'gallery',
-                            'title'    => __( 'Add/Edit Gallery', 'so-panels' ),
-                            'subtitle' => __( 'Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'so-panels' ),
+                            'title'    => __( 'Add/Edit Gallery', 'redux-framework-demo' ),
+                            'subtitle' => __( 'Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'redux-framework-demo' ),
                             'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
                         ),
                         array(
