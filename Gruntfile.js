@@ -166,6 +166,7 @@ module.exports = function( grunt ) {
                 }
             },
 
+            // Add textdomain.
             addtextdomain: {
                 options: {
                     textdomain: 'redux-framework',    // Project text domain.
@@ -196,6 +197,44 @@ module.exports = function( grunt ) {
                             'language-team': 'LANGUAGE <support@reduxframework.com>'
                         }
                     }
+                }
+            },
+
+            // Check textdomain errors.
+            checktextdomain: {
+                options:{
+                    keywords: [
+                        '__:1,2d',
+                        '_e:1,2d',
+                        '_x:1,2c,3d',
+                        'esc_html__:1,2d',
+                        'esc_html_e:1,2d',
+                        'esc_html_x:1,2c,3d',
+                        'esc_attr__:1,2d',
+                        'esc_attr_e:1,2d',
+                        'esc_attr_x:1,2c,3d',
+                        '_ex:1,2c,3d',
+                        '_n:1,2,4d',
+                        '_nx:1,2,4c,5d',
+                        '_n_noop:1,2,3d',
+                        '_nx_noop:1,2,3c,4d'
+                    ]
+                },
+                redux: {
+                    cwd: 'ReduxCore',
+                    options: {
+                        text_domain: 'redux-framework',
+                    },
+                    src: ['**/*.php'],
+                    expand: true
+                },
+                sample: {
+                    cwd: 'sample',
+                    options: {
+                        text_domain: 'redux-framework-demo',
+                    },
+                    src: ['**/*.php'],
+                    expand: true
                 }
             },
 
@@ -311,6 +350,7 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-shell' );
     grunt.loadNpmTasks( 'grunt-potomo' );
     grunt.loadNpmTasks( 'grunt-wp-i18n' );
+    grunt.loadNpmTasks( 'grunt-checktextdomain' );
     grunt.loadNpmTasks( 'grunt-contrib-jshint' );
     grunt.loadNpmTasks( 'grunt-contrib-less' );
     grunt.loadNpmTasks( 'grunt-contrib-uglify' );
