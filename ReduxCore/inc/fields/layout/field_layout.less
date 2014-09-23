@@ -1,0 +1,179 @@
+@redux-layout-width:                360px;
+@redux-layout-height:               240px;
+@redux-layout-margin-width:         355px;
+@redux-layout-margin-height:        235px;
+@redux-layout-border-width:         255px;
+@redux-layout-border-height:        170px;
+@redux-layout-padding-width:        155px;
+@redux-layout-padding-height:       105px;
+@redux-layout-inner-width:          60px;
+@redux-layout-inner-height:         40px;
+
+.redux-container-layout {
+    .field-layout {
+      span {
+      float: left;
+      font-size: 10px;
+      margin: 3px 0 0 3px;
+    }
+    select {
+      height: 25px;
+      margin: 0;
+      padding: 1px 0;
+    }
+    input.mini[type="text"] {
+      width: 40px;
+      padding: 2px;
+    }
+
+    position: relative;
+    float: left;
+    width: @redux-layout-width;
+    height: @redux-layout-height;
+  }
+  .field-margin-input,
+  .field-border-input,
+  .field-padding-input {
+    position: absolute;
+    display: block;
+    float: none;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    margin: -12px auto 0;
+
+    input {
+      float: none;
+      margin: auto;
+    }
+  }
+  .field-margin-position,
+  .field-border-position,
+  .field-padding-position {
+    position: absolute;
+  }
+  .field-margin {
+    float: left;
+    position: absolute;
+    background: #ededed;
+    border: 1px dashed #a9a9a9;
+    width: @redux-layout-margin-width;
+    height: @redux-layout-margin-height;
+    top: ( @redux-layout-height - @redux-layout-margin-height ) / 2;
+    left: ( @redux-layout-width - @redux-layout-margin-width ) / 2;
+  }
+  .field-margin-vertical {
+    left: ( @redux-layout-margin-width - @redux-layout-border-width ) / 2;
+    width: @redux-layout-border-width;
+    height: ( @redux-layout-margin-height - @redux-layout-border-height ) / 2;
+  }
+  .field-margin-horizontal {
+    top: ( @redux-layout-margin-height - @redux-layout-border-height ) / 2;
+    width: ( @redux-layout-margin-width - @redux-layout-border-width ) / 2;
+    height: @redux-layout-border-height;
+  }
+  .field-margin-top {
+    top: 0;
+  }
+  .field-margin-right {
+    right: 0;
+  }
+  .field-margin-bottom {
+    bottom: 0;
+  }
+  .field-margin-left {
+    left: 0;
+  }
+  .field-border {
+    float: left;
+    position: absolute;
+    background: #d3d3d3;
+    border: 1px solid #000;
+    width: @redux-layout-border-width;
+    height: @redux-layout-border-height;
+    top: ( @redux-layout-height - @redux-layout-border-height ) / 2;
+    left: ( @redux-layout-width - @redux-layout-border-width ) / 2;
+  }
+  .field-border-vertical {
+    left: ( @redux-layout-border-width - @redux-layout-padding-width ) / 2;
+    width: @redux-layout-padding-width;
+    height: ( @redux-layout-border-height - @redux-layout-padding-height ) / 2;
+  }
+  .field-border-horizontal {
+    top: ( @redux-layout-border-height - @redux-layout-padding-height ) / 2;
+    width: ( @redux-layout-border-width - @redux-layout-padding-width ) / 2;
+    height: @redux-layout-padding-height;
+  }
+  .field-border-top {
+    top: 0;
+  }
+  .field-border-right {
+    right: 0;
+  }
+  .field-border-bottom {
+    bottom: 0;
+  }
+  .field-border-left {
+    left: 0;
+  }
+  .field-padding {
+    float: left;
+    position: absolute;
+    background: #a9a9a9;
+    border: 1px dashed #000;
+    width: @redux-layout-padding-width;
+    height: @redux-layout-padding-height;
+    top: ( @redux-layout-height - @redux-layout-padding-height ) / 2;
+    left: ( @redux-layout-width - @redux-layout-padding-width ) / 2;
+  }
+  .field-padding-vertical {
+    left: ( @redux-layout-padding-width - @redux-layout-inner-width ) / 2;
+    width: @redux-layout-inner-width;
+    height: ( @redux-layout-padding-height - @redux-layout-inner-height ) / 2;
+  }
+  .field-padding-horizontal {
+    top: ( @redux-layout-padding-height - @redux-layout-inner-height ) / 2;
+    width: ( @redux-layout-padding-width - @redux-layout-inner-width ) / 2;
+    height: @redux-layout-inner-height;
+  }
+  .field-padding-top {
+    top: 0;
+  }
+  .field-padding-right {
+    right: 0;
+  }
+  .field-padding-bottom {
+    bottom: 0;
+  }
+  .field-padding-left {
+    left: 0;
+  }
+  .field-inner {
+    float: left;
+    position: absolute;
+    width: @redux-layout-inner-width;
+    height: @redux-layout-inner-height;
+    top: ( @redux-layout-height - @redux-layout-inner-height ) / 2;
+    left: ( @redux-layout-width - @redux-layout-inner-width ) / 2;
+  }
+  .field-properties {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #e7e7e7;
+
+    > div {
+      float: left;
+      margin-right: 25px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      color: #999;
+    }
+    .wp-picker-container {
+      margin-top: 2px;
+    }
+  }
+}

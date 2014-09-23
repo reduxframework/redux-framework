@@ -1,0 +1,165 @@
+.redux-container-layout .field-layout {
+  position: relative;
+  float: left;
+  width: 360px;
+  height: 240px;
+}
+.redux-container-layout .field-layout span {
+  float: left;
+  font-size: 10px;
+  margin: 3px 0 0 3px;
+}
+.redux-container-layout .field-layout select {
+  height: 25px;
+  margin: 0;
+  padding: 1px 0;
+}
+.redux-container-layout .field-layout input.mini[type="text"] {
+  width: 40px;
+  padding: 2px;
+}
+.redux-container-layout .field-margin-input,
+.redux-container-layout .field-border-input,
+.redux-container-layout .field-padding-input {
+  position: absolute;
+  display: block;
+  float: none;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  margin: -12px auto 0;
+}
+.redux-container-layout .field-margin-input input,
+.redux-container-layout .field-border-input input,
+.redux-container-layout .field-padding-input input {
+  float: none;
+  margin: auto;
+}
+.redux-container-layout .field-margin-position,
+.redux-container-layout .field-border-position,
+.redux-container-layout .field-padding-position {
+  position: absolute;
+}
+.redux-container-layout .field-margin {
+  float: left;
+  position: absolute;
+  background: #ededed;
+  border: 1px dashed #a9a9a9;
+  width: 355px;
+  height: 235px;
+  top: 2.5px;
+  left: 2.5px;
+}
+.redux-container-layout .field-margin-vertical {
+  left: 50px;
+  width: 255px;
+  height: 32.5px;
+}
+.redux-container-layout .field-margin-horizontal {
+  top: 32.5px;
+  width: 50px;
+  height: 170px;
+}
+.redux-container-layout .field-margin-top {
+  top: 0;
+}
+.redux-container-layout .field-margin-right {
+  right: 0;
+}
+.redux-container-layout .field-margin-bottom {
+  bottom: 0;
+}
+.redux-container-layout .field-margin-left {
+  left: 0;
+}
+.redux-container-layout .field-border {
+  float: left;
+  position: absolute;
+  background: #d3d3d3;
+  border: 1px solid #000;
+  width: 255px;
+  height: 170px;
+  top: 35px;
+  left: 52.5px;
+}
+.redux-container-layout .field-border-vertical {
+  left: 50px;
+  width: 155px;
+  height: 32.5px;
+}
+.redux-container-layout .field-border-horizontal {
+  top: 32.5px;
+  width: 50px;
+  height: 105px;
+}
+.redux-container-layout .field-border-top {
+  top: 0;
+}
+.redux-container-layout .field-border-right {
+  right: 0;
+}
+.redux-container-layout .field-border-bottom {
+  bottom: 0;
+}
+.redux-container-layout .field-border-left {
+  left: 0;
+}
+.redux-container-layout .field-padding {
+  float: left;
+  position: absolute;
+  background: #a9a9a9;
+  border: 1px dashed #000;
+  width: 155px;
+  height: 105px;
+  top: 67.5px;
+  left: 102.5px;
+}
+.redux-container-layout .field-padding-vertical {
+  left: 47.5px;
+  width: 60px;
+  height: 32.5px;
+}
+.redux-container-layout .field-padding-horizontal {
+  top: 32.5px;
+  width: 47.5px;
+  height: 40px;
+}
+.redux-container-layout .field-padding-top {
+  top: 0;
+}
+.redux-container-layout .field-padding-right {
+  right: 0;
+}
+.redux-container-layout .field-padding-bottom {
+  bottom: 0;
+}
+.redux-container-layout .field-padding-left {
+  left: 0;
+}
+.redux-container-layout .field-inner {
+  float: left;
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 100px;
+  left: 150px;
+}
+.redux-container-layout .field-properties {
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #e7e7e7;
+}
+.redux-container-layout .field-properties > div {
+  float: left;
+  margin-right: 25px;
+}
+.redux-container-layout .field-properties label {
+  display: block;
+  font-size: 12px;
+  color: #999;
+}
+.redux-container-layout .field-properties .wp-picker-container {
+  margin-top: 2px;
+}
