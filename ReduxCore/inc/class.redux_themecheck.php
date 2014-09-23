@@ -103,7 +103,7 @@
                             ?>
                             <div class="error">
                             <p><?php
-                                    _e( 'The following directories & files are still located in your <strong>Redux</strong>  directory. They may cause errors in ThemeCheck.', 'redux-framework' );
+                                    _e( 'The following directories & files are still located in your <strong>Redux</strong>  directory. They may cause errors in Theme-Check.', 'redux-framework' );
                                     echo '<br /><ul style="margin-left:15px;">';
                                     foreach ( $errors as $error ) {
                                         echo '<li><strong>~/' . $error . '</strong></li>';
