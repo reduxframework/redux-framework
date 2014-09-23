@@ -34,8 +34,8 @@
 
     if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
         // Instance Container
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
-        include_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
+        require_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
 
     }
 
@@ -47,12 +47,15 @@
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
         // General helper functions
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
 
         // General functions
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
 
-        include_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
+
+        // ThemeCheck checks
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_themecheck.php' );
 
         /**
          * Main ReduxFramework class
@@ -64,7 +67,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.8';
+            public static $_version = '3.3.8.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -76,11 +79,11 @@
 
             public static function init() {
                 $dir = Redux_Helpers::cleanFilePath( dirname( __FILE__ ) );
-                
+
                 // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
                 self::$_dir           = trailingslashit( $dir );
                 self::$wp_content_url = trailingslashit( Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) ) );
-                
+
                 // See if Redux is a plugin or not
                 if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_stylesheet_directory() ) ) !== false || strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory_uri() ) ) !== false || strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( WP_CONTENT_DIR . '/themes/' ) ) !== false ) {
                     self::$_is_plugin = false;
@@ -90,7 +93,7 @@
                         if ( ! function_exists( 'get_plugins' ) ) {
                             require_once ABSPATH . 'wp-admin/includes/plugin.php';
                         }
-                        
+
                         $is_plugin = false;
                         foreach ( get_plugins() as $key => $value ) {
                             if ( strpos( $key, 'redux-framework.php' ) !== false ) {
@@ -103,7 +106,7 @@
                         }
                     }
                 }
-                
+
                 if ( self::$_is_plugin == true || self::$_as_plugin == true ) {
                     self::$_url = plugin_dir_url( __FILE__ );
                 } else {
@@ -316,7 +319,7 @@
 //
 //                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
 //                            //logconsole('inc');
-//                            include_once( dirname( __FILE__ ) . '/inc/welcome.php' );
+//                            require_once( dirname( __FILE__ ) . '/inc/welcome.php' );
 //                        } else {
 //                            //logconsole('compare');
 //                            if (isset($_GET['page']) && $_GET['page'] == $this->args['page_slug']) {
@@ -354,7 +357,7 @@
 
                     // Display admin notices in dev_mode
                     if ( true == $this->args['dev_mode'] ) {
-                        include_once( self::$_dir . 'inc/debug.php' );
+                        require_once( self::$_dir . 'inc/debug.php' );
                         $this->debug = new ReduxDebugObject( $this );
 
                         if ( true == $this->args['update_notice'] ) {
@@ -629,7 +632,7 @@
             } // get_instance()
 
             private function _tracking() {
-                include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
+                require_once( dirname( __FILE__ ) . '/inc/tracking.php' );
                 $tracking = Redux_Tracking::get_instance();
                 $tracking->load( $this );
             } // _tracking()
@@ -2089,30 +2092,30 @@
 
                     // Default url values for enabling hints.
                     $dismiss = 'true';
-                    $s       = 'Enable';
+                    $s       = __('Enable','redux-framework');
 
                     // Values for disabling hints.
                     if ( 'true' == $hint_status ) {
                         $dismiss = 'false';
-                        $s       = 'Disable';
+                        $s       = __('Disable', 'redux-framework');
                     }
 
                     // Make URL
                     $url = '<a class="redux_hint_status" href="?dismiss=' . $dismiss . '&amp;id=hints&amp;page=' . $curPage . '&amp;tab=' . $curTab . '">' . $s . ' hints</a>';
 
-                    $event = 'moving the mouse over';
+                    $event = __('moving the mouse over', 'redux-framework');
                     if ( 'click' == $this->args['hints']['tip_effect']['show']['event'] ) {
-                        $event = 'clicking';
+                        $event = __('clicking', 'redux-framework');
                     }
 
                     // Construct message
-                    $msg = 'Hints are tooltips that popup when ' . $event . ' the hint icon, offering addition information about the field in which they appear.  They can be ' . strtolower( $s ) . 'd by using the link below.<br/><br/>' . $url;
+                    $msg = sprintf( __('Hints are tooltips that popup when %d the hint icon, offering addition information about the field in which they appear.  They can be %d d by using the link below.', 'redux-framework'), $event, strtolower( $s ) ).'<br/><br/>' . $url;
 
                     // Construct hint tab
                     $tab = array(
                         'id'      => 'redux-hint-tab',
                         'title'   => __( 'Hints', 'redux-framework' ),
-                        'content' => __( '<p>' . $msg . '</p>', 'redux-framework' )
+                        'content' => '<p>' . $msg . '</p>'
                     );
 
                     $screen->add_help_tab( $tab );

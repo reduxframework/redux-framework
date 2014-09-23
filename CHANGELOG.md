@@ -1,5 +1,12 @@
 # Redux Framework Changelog
 
+## 3.3.8.1
+* Fixed:   Various Theme-Check errors with languages.
+* Added: Theme-Check class to help devs know what is what.
+* Fixed: The way we include files from include_once to require_once everywhere.
+* Modified: Language files to reflect new strings.
+* Modified: Formatted a bunch of old class files.
+
 ## 3.3.8
 * Modified:   Updated potomo, thanks @shivapoudel.
 * Added: Grunt checktextdomain and made improvements. Thanks @shivapoudel.

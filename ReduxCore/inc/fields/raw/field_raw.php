@@ -49,7 +49,7 @@
                 echo '<fieldset id="' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . '" class="redux-field redux-container-' . $this->field['type'] . ' ' . $this->field['class'] . '" data-id="' . $this->field['id'] . '">';
 
                 if ( ! empty( $this->field['include'] ) && file_exists( $this->field['include'] ) ) {
-                    include( $this->field['include'] );
+                    require_once( $this->field['include'] );
                 }
 
                 if ( ! empty( $this->field['content'] ) && isset( $this->field['content'] ) ) {

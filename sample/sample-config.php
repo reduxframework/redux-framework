@@ -1,5 +1,4 @@
 <?php
-
     /**
      * ReduxFramework Sample Config File
      * For full documentation, please visit: https://docs.reduxframework.com
