@@ -6,6 +6,7 @@
 * Fixed: The way we include files from include_once to require_once everywhere.
 * Modified: Language files to reflect new strings.
 * Modified: Formatted a bunch of old class files.
+* Added: Notice on the updates for non-devs to use the new dev_mode disabler plugin and notify their developer.  ;)
 
 ## 3.3.8
 * Modified:   Updated potomo, thanks @shivapoudel.
