@@ -2,10 +2,10 @@
 # This file is distributed under the GPL3+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Redux Framework 3.3.8.1\n"
+"Project-Id-Version: Redux Framework 3.3.8.3\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-09-23 21:11:43+00:00\n"
+"POT-Creation-Date: 2014-09-24 17:38:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,38 +25,38 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:470
-#: ReduxCore/framework.php:1939
+#: ReduxCore/extensions/customizer/extension_customizer.php:472
+#: ReduxCore/framework.php:1940
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:471
-#: ReduxCore/framework.php:1947
+#: ReduxCore/extensions/customizer/extension_customizer.php:473
+#: ReduxCore/framework.php:1948
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:472
-#: ReduxCore/framework.php:1963
+#: ReduxCore/extensions/customizer/extension_customizer.php:474
+#: ReduxCore/framework.php:1964
 msgid ""
 "Your current options will be replaced with the values of this preset. Would "
 "you like to proceed?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:505
+#: ReduxCore/extensions/customizer/extension_customizer.php:507
 msgid "You have changes that are not saved.  Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:506
+#: ReduxCore/extensions/customizer/extension_customizer.php:508
 msgid "Are you sure?  Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:507
+#: ReduxCore/extensions/customizer/extension_customizer.php:509
 msgid ""
 "Your current options will be replaced with the values of this preset.  "
 "Would you like to proceed?"
 msgstr ""
 
-#: ReduxCore/framework.php:206
+#: ReduxCore/framework.php:207
 msgid "Options panel created using %1$s"
 msgstr ""
 
@@ -64,107 +64,107 @@ msgstr ""
 msgid "Redux Framework"
 msgstr ""
 
-#: ReduxCore/framework.php:210 ReduxCore/framework.php:214
+#: ReduxCore/framework.php:211 ReduxCore/framework.php:215
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/framework.php:1358 ReduxCore/framework.php:1359
-#: ReduxCore/framework.php:3544 ReduxCore/framework.php:3623
+#: ReduxCore/framework.php:1359 ReduxCore/framework.php:1360
+#: ReduxCore/framework.php:3561 ReduxCore/framework.php:3640
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1955
+#: ReduxCore/framework.php:1956
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
-#: ReduxCore/framework.php:1970
+#: ReduxCore/framework.php:1971
 msgid "Please Wait"
 msgstr ""
 
-#: ReduxCore/framework.php:2095
+#: ReduxCore/framework.php:2096
 msgid "Enable"
 msgstr ""
 
-#: ReduxCore/framework.php:2100
+#: ReduxCore/framework.php:2101
 msgid "Disable"
 msgstr ""
 
-#: ReduxCore/framework.php:2106
+#: ReduxCore/framework.php:2107
 msgid "moving the mouse over"
 msgstr ""
 
-#: ReduxCore/framework.php:2108
+#: ReduxCore/framework.php:2109
 msgid "clicking"
 msgstr ""
 
-#: ReduxCore/framework.php:2112
+#: ReduxCore/framework.php:2113
 msgid ""
 "Hints are tooltips that popup when %d the hint icon, offering addition "
 "information about the field in which they appear.  They can be %d d by "
 "using the link below."
 msgstr ""
 
-#: ReduxCore/framework.php:2117
+#: ReduxCore/framework.php:2118
 msgid "Hints"
 msgstr ""
 
-#: ReduxCore/framework.php:2242
+#: ReduxCore/framework.php:2243
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:3295
+#: ReduxCore/framework.php:3308
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr ""
 
-#: ReduxCore/framework.php:3342
+#: ReduxCore/framework.php:3359
 msgid "Developer Mode Enabled"
 msgstr ""
 
-#: ReduxCore/framework.php:3370
+#: ReduxCore/framework.php:3387
 msgid "Expand"
 msgstr ""
 
-#: ReduxCore/framework.php:3372 ReduxCore/framework.php:3680
+#: ReduxCore/framework.php:3389 ReduxCore/framework.php:3697
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/framework.php:3376 ReduxCore/framework.php:3684
+#: ReduxCore/framework.php:3393 ReduxCore/framework.php:3701
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/framework.php:3378 ReduxCore/framework.php:3686
+#: ReduxCore/framework.php:3395 ReduxCore/framework.php:3703
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/framework.php:3383 ReduxCore/framework.php:3691
+#: ReduxCore/framework.php:3400 ReduxCore/framework.php:3708
 msgid "Working..."
 msgstr ""
 
-#: ReduxCore/framework.php:3403
+#: ReduxCore/framework.php:3420
 msgid "Settings Imported!"
 msgstr ""
 
-#: ReduxCore/framework.php:3418
+#: ReduxCore/framework.php:3435
 msgid "All Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:3432
+#: ReduxCore/framework.php:3449
 msgid "Section Defaults Restored!"
 msgstr ""
 
-#: ReduxCore/framework.php:3446
+#: ReduxCore/framework.php:3463
 msgid "Settings Saved!"
 msgstr ""
 
-#: ReduxCore/framework.php:3464
+#: ReduxCore/framework.php:3481
 msgid "Settings have changed, you should save them!"
 msgstr ""
 
-#: ReduxCore/framework.php:3472
+#: ReduxCore/framework.php:3489
 msgid "error(s) were found!"
 msgstr ""
 
-#: ReduxCore/framework.php:3480
+#: ReduxCore/framework.php:3497
 msgid "warning(s) were found!"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 #: ReduxCore/inc/class.redux_themecheck.php:106
 msgid ""
 "The following directories & files are still located in your "
-"<strong>Redux</strong>  directory. They may cause errors in ThemeCheck."
+"<strong>Redux</strong>  directory. They may cause errors in Theme-Check."
 msgstr ""
 
 #: ReduxCore/inc/debug.php:41 ReduxCore/inc/debug.php:69
