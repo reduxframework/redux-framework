@@ -124,7 +124,6 @@
                         self::$_url     = trailingslashit( self::$wp_content_url . $relative_url );
                     }
                 }
-
             }
 
             // ::init()
