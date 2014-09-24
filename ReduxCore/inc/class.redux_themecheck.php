@@ -61,7 +61,7 @@
                         }
                     }
 
-                    if ( ! $redux::$_is_plugin ) {
+                    if ( ! $redux->$_is_plugin ) {
                         $errors = array();
 
                         if ( file_exists( $dir . '.tx' ) ) {
