@@ -43,12 +43,15 @@
 
             public function load() {
 
-                $redux = ReduxFrameworkInstances::get_all_instances();
+                $redux = new ReduxFramework();
+                $redux->init();
 
-                if ( ! empty( $redux ) ) {
 
-                    $redux = min( $redux );
-                    $dir   = $redux->$_dir . '../';
+
+                //if ( ! empty( $redux ) ) {
+
+
+                    $dir   = ReduxFramework::$_dir . '../';
 
                     if ( isset( $_POST['themename'] ) && ! empty( $_POST['themename'] ) ) {
                         if ( strpos( $dir, $_POST['themename'] ) !== false ) {
@@ -61,7 +64,7 @@
                         }
                     }
 
-                    if ( ! $redux->$_is_plugin ) {
+                    if ( ! ReduxFramework::$_is_plugin ) {
                         $errors = array();
 
                         if ( file_exists( $dir . '.tx' ) ) {
@@ -112,7 +115,7 @@
                                 </ul></div><?php
                         }
                     }
-                }
+
             }
         }
 
