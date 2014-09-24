@@ -48,7 +48,7 @@
                 if ( ! empty( $redux ) ) {
 
                     $redux = min( $redux );
-                    $dir   = $redux::$_dir . '../';
+                    $dir   = $redux->$_dir . '../';
 
                     if ( isset( $_POST['themename'] ) && ! empty( $_POST['themename'] ) ) {
                         if ( strpos( $dir, $_POST['themename'] ) !== false ) {
