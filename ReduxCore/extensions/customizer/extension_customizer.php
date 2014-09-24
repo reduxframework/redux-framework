@@ -77,8 +77,11 @@
                  */
 
                 if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
-                    if (  current_user_can ( $this->parent->args['page_permissions'])) {
-                        add_action( 'customize_register', array($this, '_register_customizer_controls' ) ); // Create controls
+                    if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
+                        add_action( 'customize_register', array(
+                                $this,
+                                '_register_customizer_controls'
+                            ) ); // Create controls
                     }
                 }
 
@@ -86,7 +89,10 @@
                     if ( $pagenow == "admin-ajax.php" && $_POST['action'] == 'customize_save' ) {
                         //$this->parent->
                     }
-                    add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, '_override_values' ), 100 );
+                    add_action( "redux/options/{$this->parent->args['opt_name']}/options", array(
+                            $this,
+                            '_override_values'
+                        ), 100 );
                     add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
                     add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
                     add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
@@ -107,7 +113,7 @@
                 if ( isset( $_POST['customized'] ) ) {
                     $this->orig_options = $this->parent->options;
                     $options            = json_decode( stripslashes_deep( $_POST['customized'] ), true );
-                    if( !empty( $options ) && is_array( $options ) ){
+                    if ( ! empty( $options ) && is_array( $options ) ) {
                         foreach ( $options as $key => $value ) {
                             if ( strpos( $key, $this->parent->args['opt_name'] ) !== false ) {
                                 $key                                                       = str_replace( $this->parent->args['opt_name'] . '[', '', rtrim( $key, "]" ) );
@@ -115,9 +121,9 @@
                                 $GLOBALS[ $this->parent->args['global_variable'] ][ $key ] = $value;
                                 $this->parent->options[ $key ]                             = $value;
                             }
-                        }  
+                        }
                     }
-                    
+
                 }
 
                 return $data;
@@ -185,7 +191,7 @@
                             continue;
                         }
                     }
-                    
+
                     // No errors please
                     if ( ! isset( $section['desc'] ) ) {
                         $section['desc'] = "";
@@ -200,12 +206,12 @@
                     if ( empty( $section['id'] ) ) {
                         $section['id'] = strtolower( str_replace( " ", "", $section['title'] ) );
                     }
-                    
+
                     // No title is present, let's show what section is missing a title
                     if ( ! isset( $section['title'] ) ) {
                         print_r( $section );
                     }
-                    
+
                     // Let's set a default priority
                     if ( empty( $section['priority'] ) ) {
                         $section['priority'] = $order['heading'];
@@ -220,14 +226,14 @@
 
 
                     foreach ( $section['fields'] as $skey => $option ) {
-                        
+
                         // Evaluate section permissions
                         if ( isset( $option['permissions'] ) ) {
                             if ( ! current_user_can( $option['permissions'] ) ) {
                                 continue;
                             }
                         }
-                        
+
                         if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
                             continue;
                         }
@@ -261,12 +267,12 @@
                         }
 
                         $customSetting = array(
-                            'default'        => $option['default'],
-                            'type'           => 'option',
-                            'capabilities'   => 'edit_theme_options',
+                            'default'           => $option['default'],
+                            'type'              => 'option',
+                            'capabilities'      => 'edit_theme_options',
                             //'capabilities'   => $this->parent->args['page_permissions'],
-                            'transport'      => 'refresh',
-                            'theme_supports' => '',
+                            'transport'         => 'refresh',
+                            'theme_supports'    => '',
                             'sanitize_callback' => '__return_false',
                             //'sanitize_callback' => array( $this, '_field_validation' ),
                             //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
@@ -420,14 +426,15 @@
                 //if( isset( $_POST['customized'] ) ) {
                 $options  = json_decode( stripslashes_deep( $_POST['customized'] ), true );
                 $compiler = false;
-                $changed  = array();
+                $changed  = false;
 
                 foreach ( $options as $key => $value ) {
                     if ( strpos( $key, $this->parent->args['opt_name'] ) !== false ) {
                         $key = str_replace( $this->parent->args['opt_name'] . '[', '', rtrim( $key, "]" ) );
 
                         if ( ! isset( $this->orig_options[ $key ] ) || $this->orig_options[ $key ] != $value || ( isset( $this->orig_options[ $key ] ) && ! empty( $this->orig_options[ $key ] ) && empty( $value ) ) ) {
-                            $changed[ $key ] = $value;
+                            $this->parent->options[ $key ] = $value;
+                            $changed                       = true;
                             if ( isset( $this->parent->compiler_fields[ $key ] ) ) {
                                 $compiler = true;
                             }
@@ -435,21 +442,16 @@
                     }
                 }
 
-                if ( ! empty( $changed ) ) {
-                    setcookie( "redux-saved-{$this->parent->args['opt_name']}", 1, time() + 1000, "/" );
+                if ( $changed ) {
+                    $this->parent->set_options( $this->parent->options );
+                    if ( $compiler ) {
+                        // Have to set this to stop the output of the CSS and typography stuff.
+                        $this->parent->no_output = true;
+                        $this->parent->_enqueue_output();
+                        do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
+                    }
                 }
 
-                if ( $compiler ) {
-                    // Have to set this to stop the output of the CSS and typography stuff.
-                    $this->parent->no_output = true;
-                    $this->parent->_enqueue_output();
-                    do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
-                }
-
-                //}
-                //      print_r($wp_customize);
-                //exit();
-                //return $wp_customize;
             }
 
             /**

@@ -1,6 +1,10 @@
 # Redux Framework Changelog
 
 ## 3.3.8.1
+* Fixed:   Customizer wasn't saving at all! That's been like 4 months. No one's reported it. Hmm.
+* Fixed: #1702 - Customizer only fields were being erased on panel save.
+
+## 3.3.8.1
 * Fixed:   Various Theme-Check errors with languages.
 * Added: Theme-Check class to help devs know what is what.
 * Fixed: The way we include files from include_once to require_once everywhere.

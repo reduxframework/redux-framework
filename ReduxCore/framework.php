@@ -67,7 +67,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.8.1';
+            public static $_version = '3.3.8.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -159,6 +159,7 @@
             public $typography = null; //values to generate google font CSS
             public $import_export = null;
             public $debug = null;
+            public $no_panel = array(); // Fields that are not visible in the panel
             private $show_hints = false;
             private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
             private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
@@ -737,7 +738,7 @@
              *
              * @param mixed $value the value of the option being added
              */
-            private function set_options( $value = '' ) {
+            public function set_options( $value = '' ) {
 
                 $this->transients['last_save'] = time();
 
@@ -1163,9 +1164,9 @@
                                         }
                                     }
 
-                                    if ( $field['type'] == "sortable"  ) {
+                                    if ( $field['type'] == "sortable" ) {
                                         $this->options_defaults[ $field['id'] ] = array();
-                                    } elseif ($field['type'] == "image_select") {
+                                    } elseif ( $field['type'] == "image_select" ) {
                                         $this->options_defaults[ $field['id'] ] = '';
                                     } else {
                                         $this->options_defaults[ $field['id'] ] = $field['options'];
@@ -2092,24 +2093,24 @@
 
                     // Default url values for enabling hints.
                     $dismiss = 'true';
-                    $s       = __('Enable','redux-framework');
+                    $s       = __( 'Enable', 'redux-framework' );
 
                     // Values for disabling hints.
                     if ( 'true' == $hint_status ) {
                         $dismiss = 'false';
-                        $s       = __('Disable', 'redux-framework');
+                        $s       = __( 'Disable', 'redux-framework' );
                     }
 
                     // Make URL
                     $url = '<a class="redux_hint_status" href="?dismiss=' . $dismiss . '&amp;id=hints&amp;page=' . $curPage . '&amp;tab=' . $curTab . '">' . $s . ' hints</a>';
 
-                    $event = __('moving the mouse over', 'redux-framework');
+                    $event = __( 'moving the mouse over', 'redux-framework' );
                     if ( 'click' == $this->args['hints']['tip_effect']['show']['event'] ) {
-                        $event = __('clicking', 'redux-framework');
+                        $event = __( 'clicking', 'redux-framework' );
                     }
 
                     // Construct message
-                    $msg = sprintf( __('Hints are tooltips that popup when %d the hint icon, offering addition information about the field in which they appear.  They can be %d d by using the link below.', 'redux-framework'), $event, strtolower( $s ) ).'<br/><br/>' . $url;
+                    $msg = sprintf( __( 'Hints are tooltips that popup when %d the hint icon, offering addition information about the field in which they appear.  They can be %d d by using the link below.', 'redux-framework' ), $event, strtolower( $s ) ) . '<br/><br/>' . $url;
 
                     // Construct hint tab
                     $tab = array(
@@ -2358,9 +2359,6 @@
                         }
                     }
 
-                    if ( ! $display ) {
-                        continue;
-                    }
 
                     // DOVY! Replace $k with $section['id'] when ready
                     /**
@@ -2405,20 +2403,20 @@
                         }
                     }
 
-                    add_settings_section( $this->args['opt_name'] . $k . '_section', $heading, array(
-                        &$this,
-                        '_section_desc'
-                    ), $this->args['opt_name'] . $k . '_section_group' );
+                    if ( ! $display ) {
+                        $this->no_panel_section[ $k ] = $section;
+                    } else {
+                        add_settings_section( $this->args['opt_name'] . $k . '_section', $heading, array(
+                            &$this,
+                            '_section_desc'
+                        ), $this->args['opt_name'] . $k . '_section_group' );
+                    }
 
                     $sectionIndent = false;
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $fieldk => $field ) {
                             if ( ! isset( $field['type'] ) ) {
                                 continue; // You need a type!
-                            }
-
-                            if ( isset( $field['customizer_only'] ) && $field['customizer_only'] == true ) {
-                                continue; // ok
                             }
 
                             /**
@@ -2429,15 +2427,16 @@
                             $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}/register", $field );
 
                             $display = true;
+
                             if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                                 if ( isset( $field['panel'] ) && $field['panel'] == false ) {
                                     $display = false;
                                 }
                             }
-
-                            if ( ! $display ) {
-                                continue;
+                            if ( isset( $field['customizer_only'] ) && $field['customizer_only'] == true ) {
+                                //$display = false;
                             }
+
 
                             // TODO AFTER GROUP WORKS - Remove IF statement
 //                            if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
@@ -2628,14 +2627,18 @@
 
                             $this->check_dependencies( $field );
 
-                            add_settings_field(
-                                "{$fieldk}_field",
-                                $th,
-                                array( &$this, '_field_input' ),
-                                "{$this->args['opt_name']}{$k}_section_group",
-                                "{$this->args['opt_name']}{$k}_section",
-                                $field
-                            ); // checkbox
+                            if ( ! $display || isset( $this->no_panel_section[ $k ] ) ) {
+                                $this->no_panel[] = $field['id'];
+                            } else {
+                                add_settings_field(
+                                    "{$fieldk}_field",
+                                    $th,
+                                    array( &$this, '_field_input' ),
+                                    "{$this->args['opt_name']}{$k}_section_group",
+                                    "{$this->args['opt_name']}{$k}_section",
+                                    $field
+                                ); // checkbox
+                            }
                         }
                     }
                 }
@@ -2782,6 +2785,15 @@
              */
             public function _validate_options( $plugin_options ) {
 
+                // Save the values not in the panel
+                if ( isset( $plugin_options['redux-no_panel'] ) ) {
+                    $keys = explode( '|', $plugin_options['redux-no_panel'] );
+                    foreach ( $keys as $key ) {
+                        $plugin_options[ $key ] = $this->options[ $key ];
+                    }
+                    unset( $plugin_options['redux-no_panel'] );
+                }
+
                 if ( ! empty( $this->hidden_perm_fields ) && is_array( $this->hidden_perm_fields ) ) {
                     foreach ( $this->hidden_perm_fields as $id => $data ) {
                         $plugin_options[ $id ] = $data;
@@ -2926,6 +2938,7 @@
                 }
 
                 $this->transients['last_save_mode'] = "normal"; // Last save mode
+
 
                 // Validate fields (if needed)
                 $plugin_options = $this->_validate_values( $plugin_options, $this->options, $this->sections );
@@ -3144,7 +3157,7 @@
                             }
                             if ( isset( $field['validate_callback'] ) && ( is_callable( $field['validate_callback'] ) || ( is_string( $field['validate_callback'] ) && function_exists( $field['validate_callback'] ) ) ) ) {
                                 $callback = $field['validate_callback'];
-                                unset($field['validate_callback']);
+                                unset( $field['validate_callback'] );
 
                                 $callbackvalues                 = call_user_func( $callback, $field, $plugin_options[ $field['id'] ], $options[ $field['id'] ] );
                                 $plugin_options[ $field['id'] ] = $callbackvalues['value'];
@@ -3324,6 +3337,10 @@
                 echo '<form method="post" action="' . $url . '" enctype="multipart/form-data" id="redux-form-wrapper">';
                 echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
                 echo '<input type="hidden" id="currentSection" name="' . $this->args['opt_name'] . '[redux-section]" value="" />';
+                if ( ! empty( $this->no_panel ) ) {
+                    echo '<input type="hidden" name="' . $this->args['opt_name'] . '[redux-no_panel]" value="' . implode( '|', $this->no_panel ) . '" />';
+                }
+
 
                 settings_fields( "{$this->args['opt_name']}_group" );
 
