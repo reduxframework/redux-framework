@@ -51,6 +51,7 @@
 
         // General functions
         require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
+        require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
 
         require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
@@ -67,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.8.3';
+            public static $_version = '3.3.8.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1922,7 +1923,7 @@
 
                 if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] == true ) {
 
-                    $base                        = ReduxFramework::$_url . 'inc/p.php?url=';
+                    $base                        = admin_url('admin-ajax.php') . '?action=redux_p&url=';
                     $url                         = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base );
                     $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $url . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
                 }

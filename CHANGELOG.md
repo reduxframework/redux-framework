@@ -1,6 +1,8 @@
 # Redux Framework Changelog
 
-JonasDoebertin
+## 3.3.8.4
+* Modified: Removed a cURL instance from the core and fixed the developer ad resizing.
+
 ## 3.3.8.3
 * Added:   #1593 - Great pull request by @JonasDoebertin. Now you can enqueue dynamic output to the login screen or admin backend.
 

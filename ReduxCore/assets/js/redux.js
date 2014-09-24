@@ -51,11 +51,11 @@
         $( '#toplevel_page_' + redux.args.slug + ' .wp-submenu a, #wp-admin-bar-' + redux.args.slug + ' a.ab-item' ).click(
             function( e ) {
 
-                if ( ( $( '#toplevel_page_' + redux.args.slug ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) && !$(this ).parents('ul.ab-submenu:first' ).hasClass('ab-sub-secondary') ) {
+                if ( ( $( '#toplevel_page_' + redux.args.slug ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) && !$( this ).parents( 'ul.ab-submenu:first' ).hasClass( 'ab-sub-secondary' ) ) {
                     e.preventDefault();
                     var url = $( this ).attr( 'href' ).split( '&tab=' );
                     $( '#' + url[1] + '_section_group_li_a' ).click();
-                    $( this ).parents( 'ul:first' ).find('.current' ).removeClass( 'current' );
+                    $( this ).parents( 'ul:first' ).find( '.current' ).removeClass( 'current' );
                     $( this ).addClass( 'current' );
                     $( this ).parent().addClass( 'current' );
                     return false;
@@ -399,7 +399,7 @@
                         $.redux.initFields();
                     }
                 );
-                $('#toplevel_page_'+redux.args.slug ).find('.current' ).removeClass('current');
+                $( '#toplevel_page_' + redux.args.slug ).find( '.current' ).removeClass( 'current' );
 
             }
         );
@@ -912,7 +912,7 @@
 
     $.redux.expandOptions = function( parent ) {
         var trigger = parent.find( '.expand_options' );
-        var width = parent.find( '.redux-sidebar' ).width()-1;
+        var width = parent.find( '.redux-sidebar' ).width() - 1;
         var id = $( '.redux-group-menu .active a' ).data( 'rel' ) + '_section_group';
 
         if ( trigger.hasClass( 'expanded' ) ) {
@@ -929,7 +929,7 @@
                 {
                     'margin-left': width
                 }, 500, function() {
-                    parent.find( '.redux-main' ).attr('style', '');
+                    parent.find( '.redux-main' ).attr( 'style', '' );
                 }
             );
 
@@ -976,10 +976,15 @@
             el.attr( 'data-width', width );
         }
         var height = el.attr( 'data-height' );
-        if ( !height ) {
-            height = el.height();
+        var eHeight = el.height();
+        if ( !height || eHeight > height ) {
+            height = eHeight;
             el.attr( 'data-height', height );
+            el.css( "width", 'auto' );
+            el.attr( 'data-width', el.width() );
+            width = el.width();
         }
+
 
         // Check if the current width is larger than the max
         if ( width > maxWidth ) {
@@ -988,8 +993,10 @@
             el.css( "height", height * ratio );  // Scale height based on ratio
             height = height * ratio;    // Reset height to match scaled image
             width = width * ratio;    // Reset width to match scaled image
+
         } else {
             el.css( "width", 'auto' );   // Set new height
+
         }
 
         // Check if current height is larger than max
@@ -999,8 +1006,18 @@
             el.css( "width", width * ratio );    // Scale width based on ratio
             width = width * ratio;    // Reset width to match scaled image
             height = height * ratio;    // Reset height to match scaled image
+
+
         } else {
             el.css( "height", 'auto' );   // Set new height
+
+        }
+
+        var test = ($( document.getElementById( 'redux-header' ) ).height() - el.height()) / 2;
+        if ( test > 0 ) {
+            el.css( "margin-top", test );
+        } else {
+            el.css( "margin-top", 0 );
         }
 
         if ( $( '#redux-header .redux_field_search' ) ) {
@@ -1039,42 +1056,53 @@
     $( document ).ready(
         function() {
             if ( redux.rAds ) {
-                $( '#redux-header' ).append( '<div class="rAds"></div>' );
-                var el = $( '#redux-header' );
-                el.css( 'position', 'relative' );
-
-                el.find( '.rAds' ).attr(
-                    'style', 'position:absolute; top: 6px; right: 6px; display:block !important;overflow:hidden;'
-                ).css( 'left', '-99999px' );
-                el.find( '.rAds' ).html( redux.rAds.replace( /<br\s?\/?>/, '' ) );
-                var rAds = el.find( '.rAds' );
-
-                var maxHeight = el.height();
-                var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
-
-                $( rAds ).css( 'height', maxHeight ).css( 'max-width', maxWidth ).css( 'width', maxWidth );
-
-                rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
-                    'margin-left', '5px'
-                );
-
-
-                $( document ).ajaxComplete(
+                setTimeout(
                     function() {
-                        setTimeout(
+                        $( '#redux-header' ).append( '<div class="rAds"></div>' );
+                        var el = $( '#redux-header' );
+                        el.css( 'position', 'relative' );
+
+                        el.find( '.rAds' ).attr(
+                            'style',
+                            'position:absolute; top: 6px; right: 6px; display:block !important;overflow:hidden;'
+                        ).css( 'left', '-99999px' );
+                        el.find( '.rAds' ).html( redux.rAds.replace( /<br\s?\/?>/, '' ) );
+                        var rAds = el.find( '.rAds' );
+
+                        var maxHeight = el.height();
+                        var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+
+                        rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
+                            'margin-left', '5px'
+                        );
+
+                        $( document ).ajaxComplete(
+                            function() {
+                                rAds.find( 'a' ).hide();
+                                setTimeout(
+                                    function() {
+                                        $.redux.resizeAds();
+                                        rAds.find( 'a' ).fadeIn();
+                                    }, 1400
+                                );
+                                setTimeout(
+                                    function() {
+                                        $.redux.resizeAds();
+
+                                    }, 1500
+                                );
+                                $( document ).unbind( 'ajaxComplete' );
+                            }
+                        );
+
+                        $( window ).resize(
                             function() {
                                 $.redux.resizeAds();
-                            }, 1500
+                            }
                         );
-                        $( document ).unbind( 'ajaxComplete' );
-                    }
+                    }, 400
                 );
 
-                $( window ).resize(
-                    function() {
-                        $.redux.resizeAds();
-                    }
-                );
             }
         }
     );
