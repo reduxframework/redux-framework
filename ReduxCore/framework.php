@@ -125,9 +125,9 @@
                     }
                 }
                 
-                self::$_url = apply_filters( "redux/_url/{$this->args['opt_name']}", self::$_url );
-                self::$_dir = apply_filters( "redux/_dir/{$this->args['opt_name']}", self::$_dir );
-                self::$_is_plugin = apply_filters( "redux/_is_plugin/{$this->args['opt_name']}", self::$_is_plugin );
+                self::$_url = apply_filters( "redux/_url", self::$_url );
+                self::$_dir = apply_filters( "redux/_dir", self::$_dir );
+                self::$_is_plugin = apply_filters( "redux/_is_plugin", self::$_is_plugin );
                 
             }
 
