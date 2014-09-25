@@ -449,6 +449,7 @@
                         $this->parent->no_output = true;
                         $this->parent->_enqueue_output();
                         do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
+                        do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $parent );
                     }
                 }
 

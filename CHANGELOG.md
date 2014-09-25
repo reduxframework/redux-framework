@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.8.5
+* Modified: Added the "redux/options/{$this->args['opt_name']}/compiler/advanced" hook for more advanced compiling.
+* Added:    Suggestions as per #1709. Thanks @echo1consulting.
+
 ## 3.3.8.4
 * Modified: Removed a cURL instance from the core and fixed the developer ad resizing.
 * Fixed: PHP 5.2 issues. *sigh*
