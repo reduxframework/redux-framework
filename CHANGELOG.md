@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.8.6
+* Fixed:    #1749 - Remove font-wight and font-style from css output when not in use.
+
 ## 3.3.8.5
 * Modified: Added the "redux/options/{$this->args['opt_name']}/compiler/advanced" hook for more advanced compiling.
 * Added:    Suggestions as per #1709. Thanks @echo1consulting.

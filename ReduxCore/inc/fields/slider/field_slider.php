@@ -310,7 +310,7 @@
                              value="' . $valOne . '"
                              class="redux-slider-input redux-slider-input-one-' . $fieldID . ' ' . $this->field['class'] . '"/>';
 
-                    // LABEL output
+                // LABEL output
                 } elseif ( $this->display_label == $this->field['display_value'] ) {
                     $showLabel = true;
 
@@ -321,7 +321,7 @@
                            name="' . $nameOne . '">
                       </div>';
 
-                    // SELECT output
+                // SELECT output
                 } elseif ( $this->display_select == $this->field['display_value'] ) {
                     $showSelect = true;
 

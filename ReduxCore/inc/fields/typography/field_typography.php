@@ -687,6 +687,15 @@
                             $value = "normal";
                         }
 
+                        if ($key == 'font-weight' && $this->field['font-weight'] == false) {
+                            continue;
+                        }
+
+                        if ($key == 'font-style' && $this->field['font-style'] == false) {
+                            continue;
+                        }
+                        
+                        
                         if ( $key == "google" || $key == "subsets" || $key == "font-backup" || empty( $value ) ) {
                             continue;
                         }
@@ -728,6 +737,7 @@
                         }
                     }
                 }
+
                 // Google only stuff!
                 if ( ! empty( $font['font-family'] ) && ! empty( $this->field['google'] ) && filter_var( $this->field['google'], FILTER_VALIDATE_BOOLEAN ) ) {
 
