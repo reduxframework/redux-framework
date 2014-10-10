@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.8.8
+* Fixed:    #1742 - Sidebar subsections don't always expand.
+
 ## 3.3.8.7
 * Fixed:    #1758 - Thanks @echo1consulting!
 * Added:    'hidden' to menu_type argument to allow for hidden menus until available.
