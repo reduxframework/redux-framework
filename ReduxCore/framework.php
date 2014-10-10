@@ -68,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.8.6';
+            public static $_version = '3.3.8.7';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1299,7 +1299,11 @@
             public function _options_page() {
                 $this->import_export->in_field();
 
-                if ( $this->args['menu_type'] == 'submenu' ) {
+                if ( $this->args['menu_type'] == 'hidden' ) {
+
+                    // No menu to add!
+
+                } else if ( $this->args['menu_type'] == 'submenu' ) {
                     $this->add_submenu(
                         $this->args['page_parent'],
                         $this->args['page_title'],
@@ -1389,7 +1393,7 @@
                 $ct         = wp_get_theme();
                 $theme_data = $ct;
 
-                if ( ! is_super_admin() || ! is_admin_bar_showing() || ! $this->args['admin_bar'] ) {
+                if ( ! is_super_admin() || ! is_admin_bar_showing() || ! $this->args['admin_bar'] || $this->args['menu_type'] == 'hidden' ) {
                     return;
                 }
 

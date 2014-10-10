@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.8.7
+* Fixed:    #1758 - Thanks @echo1consulting!
+* Added:    'hidden' to menu_type argument to allow for hidden menus until available.
+
 ## 3.3.8.6
 * Fixed:    #1749 - Remove font-wight and font-style from css output when not in use.
 

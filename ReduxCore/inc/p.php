@@ -208,7 +208,7 @@
 
         curl_setopt( $ch, CURLOPT_USERAGENT, isset($_GET['user_agent']) ? $_GET['user_agent'] : $_SERVER['HTTP_USER_AGENT'] );
 
-        list( $header, $contents ) = preg_split( '/([\r\n][\r\n])\\1/', curl_exec( $ch ), 2 );
+        list( $header, $contents ) = array_merge( array( '', '' ), preg_split( '/([\r\n][\r\n])\1/', curl_exec( $ch ), 2 ) );
 
         $status = curl_getinfo( $ch );
 
