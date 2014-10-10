@@ -76,7 +76,7 @@
                   customize_controls_print_footer_scripts
                  */
 
-                if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
+                if ( ! is_customize_preview() || $pagenow == "admin-ajax.php" ) {
                     if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
                         add_action( 'customize_register', array(
                                 $this,
@@ -85,8 +85,8 @@
                     }
                 }
 
-                if ( isset( $_POST['customized'] ) ) {
-                    if ( $pagenow == "admin-ajax.php" && $_POST['action'] == 'customize_save' ) {
+                if ( is_customize_preview() ) {
+                    if ( $pagenow == "admin-ajax.php" && isset( $_POST['action'] ) && $_POST['action'] == 'customize_save' ) {
                         //$this->parent->
                     }
                     add_action( "redux/options/{$this->parent->args['opt_name']}/options", array(
@@ -110,7 +110,7 @@
             }
 
             public function _override_values( $data ) {
-                if ( isset( $_POST['customized'] ) ) {
+                if ( is_customize_preview() && isset( $_POST['customized'] ) ) {
                     $this->orig_options = $this->parent->options;
                     $options            = json_decode( stripslashes_deep( $_POST['customized'] ), true );
                     if ( ! empty( $options ) && is_array( $options ) ) {
@@ -449,7 +449,7 @@
                         $this->parent->no_output = true;
                         $this->parent->_enqueue_output();
                         do_action( "redux/options/{$this->parent->args['opt_name']}/compiler", $this->parent->options, $this->parent->compilerCSS );
-                        do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $parent );
+                        do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $this->parent );
                     }
                 }
 
