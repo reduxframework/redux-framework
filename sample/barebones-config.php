@@ -2,8 +2,8 @@
 
     /**
      * ReduxFramework Sample Config File
-     * For full documentation, please visit: https://docs.reduxframework.com
-     * */
+     * For full documentation, please visit: http://docs.reduxframework.com/
+     */
 
     if ( ! class_exists( 'Redux_Framework_sample_config' ) ) {
 
