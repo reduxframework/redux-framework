@@ -76,7 +76,7 @@
                   customize_controls_print_footer_scripts
                  */
 
-                if ( ! is_customize_preview() || $pagenow == "admin-ajax.php" ) {
+                if ( ! Redux_Helpers::is_customize_preview() || $pagenow == "admin-ajax.php" ) {
                     if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
                         add_action( 'customize_register', array(
                                 $this,
@@ -85,7 +85,7 @@
                     }
                 }
 
-                if ( is_customize_preview() ) {
+                if ( Redux_Helpers::is_customize_preview() ) {
                     if ( $pagenow == "admin-ajax.php" && isset( $_POST['action'] ) && $_POST['action'] == 'customize_save' ) {
                         //$this->parent->
                     }
@@ -110,7 +110,7 @@
             }
 
             public function _override_values( $data ) {
-                if ( is_customize_preview() && isset( $_POST['customized'] ) ) {
+                if ( Redux_Helpers::is_customize_preview() && isset( $_POST['customized'] ) ) {
                     $this->orig_options = $this->parent->options;
                     $options            = json_decode( stripslashes_deep( $_POST['customized'] ), true );
                     if ( ! empty( $options ) && is_array( $options ) ) {
