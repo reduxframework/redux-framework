@@ -67,12 +67,12 @@
                 }
 
                 if ( isset( $_GET['redux_framework_disable_tracking'] ) && ! empty( $_GET['redux_framework_disable_tracking'] ) ) {
-                    $this->options['allow_tracking'] = false;
+                    $this->options['allow_tracking'] = 'no';
                     update_option( 'redux-framework-tracking', $this->options );
                 }
 
                 if ( isset( $_GET['redux_framework_enable_tracking'] ) && ! empty( $_GET['redux_framework_enable_tracking'] ) ) {
-                    $this->options['allow_tracking'] = true;
+                    $this->options['allow_tracking'] = 'yes';
                     update_option( 'redux-framework-tracking', $this->options );
                 }
 
@@ -92,7 +92,7 @@
                 add_action( 'wp_ajax_nopriv_' . $hash, array( $this, 'support_args' ) );
                 add_action( 'wp_ajax_' . $hash, array( $this, 'support_args' ) );
 
-                if ( isset( $this->options['allow_tracking'] ) && $this->options['allow_tracking'] == true ) {
+                if ( isset( $this->options['allow_tracking'] ) && $this->options['allow_tracking'] == 'yes' ) {
                     // The tracking checks daily, but only sends new data every 7 days.
                     if ( ! wp_next_scheduled( 'redux_tracking' ) ) {
                         wp_schedule_event( time(), 'daily', 'redux_tracking' );
