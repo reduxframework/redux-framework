@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.3.9
+* Fixed:    #1775 - Call to undefined function is_customize_preview() in pre WP 4.0.
+* Fixed:    Issue where in some cases tracking still occuring after opt-out.
+* Modified: Documentation URL.
+
 ## 3.3.8.8
 * Fixed:    #1742 - Sidebar subsections don't always expand.
 
