@@ -73,11 +73,11 @@
 
         // Get library filter data
         var filter = $( selector ).find('.library-filter').data('lib-filter');
-        var libFilter = [];        
         
         // Must exist to do decoding
         if (filter !== undefined) {
             if (filter !== ''){
+                var libFilter = [];
                 isFiltered = true;
 
                 filter = decodeURIComponent(filter);

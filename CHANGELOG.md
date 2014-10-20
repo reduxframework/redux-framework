@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.1
+* Fixed:    #1782 - Media field not showing files after upload?  Hopefully this fixes it.
+
 ## 3.3.9
 * Fixed:    #1775 - Call to undefined function is_customize_preview() in pre WP 4.0.
 * Fixed:    Issue where in some cases tracking still occuring after opt-out.
