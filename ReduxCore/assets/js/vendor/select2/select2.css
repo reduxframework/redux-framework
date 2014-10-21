@@ -330,6 +330,8 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     list-style: none;
     display: list-item;
     background-image: none;
+    margin: 0;
+    padding: 5px 0;
 }
 
 .select2-results li.select2-result-with-children > .select2-result-label {
