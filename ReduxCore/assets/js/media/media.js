@@ -73,11 +73,12 @@
 
         // Get library filter data
         var filter = $( selector ).find('.library-filter').data('lib-filter');
+        var libFilter = null;
         
         // Must exist to do decoding
         if (filter !== undefined) {
             if (filter !== ''){
-                var libFilter = [];
+                libFilter = [];
                 isFiltered = true;
 
                 filter = decodeURIComponent(filter);
@@ -87,8 +88,8 @@
                     libFilter.push(value);
                 });
             }
-        }        
-        
+        }
+        console.log(libFilter);
         // Create the media frame.
         frame = wp.media(
             {
