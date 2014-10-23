@@ -110,7 +110,7 @@
             }
 
             public function _override_values( $data ) {
-                if ( isset( $_POST['customized'] ) {
+                if ( isset( $_POST['customized'] ) ) {
                     $this->orig_options = $this->parent->options;
                     $options            = json_decode( stripslashes_deep( $_POST['customized'] ), true );
                     if ( ! empty( $options ) && is_array( $options ) ) {
