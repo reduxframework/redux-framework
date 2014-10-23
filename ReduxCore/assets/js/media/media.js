@@ -64,7 +64,7 @@
 
         var frame;
         var jQueryel = $( this );
-        var libFilter = [];
+        var libFilter;
 
         // If the media frame already exists, reopen it.
         if ( frame ) {
@@ -74,7 +74,6 @@
 
         // Get library filter data
         var filter = $( selector ).find('.library-filter').data('lib-filter');
-        var libFilter = null;
         
         // Must exist to do decoding
         if (filter !== undefined) {
