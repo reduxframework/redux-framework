@@ -88,7 +88,7 @@
                 });
             }
         }
-        console.log(libFilter);
+
         // Create the media frame.
         frame = wp.media(
             {
