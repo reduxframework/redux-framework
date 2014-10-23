@@ -76,7 +76,7 @@
                   customize_controls_print_footer_scripts
                  */
 
-                if ( ! Redux_Helpers::is_customize_preview() || $pagenow == "admin-ajax.php" ) {
+                if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
                     if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
                         add_action( 'customize_register', array(
                                 $this,
@@ -85,7 +85,7 @@
                     }
                 }
 
-                if ( Redux_Helpers::is_customize_preview() ) {
+                if ( ! isset( $_POST['customized'] ) ) {
                     if ( $pagenow == "admin-ajax.php" && isset( $_POST['action'] ) && $_POST['action'] == 'customize_save' ) {
                         //$this->parent->
                     }
@@ -110,7 +110,7 @@
             }
 
             public function _override_values( $data ) {
-                if ( Redux_Helpers::is_customize_preview() && isset( $_POST['customized'] ) ) {
+                if ( isset( $_POST['customized'] ) ) {
                     $this->orig_options = $this->parent->options;
                     $options            = json_decode( stripslashes_deep( $_POST['customized'] ), true );
                     if ( ! empty( $options ) && is_array( $options ) ) {
@@ -266,23 +266,22 @@
                             continue;
                         }
 
-                        $customSetting = array(
-                            'default'           => $option['default'],
-                            'type'              => 'option',
-                            'capabilities'      => 'edit_theme_options',
-                            //'capabilities'   => $this->parent->args['page_permissions'],
-                            'transport'         => 'refresh',
-                            'theme_supports'    => '',
-                            'sanitize_callback' => '__return_false',
-                            //'sanitize_callback' => array( $this, '_field_validation' ),
-                            //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
-                        );
-
-
                         $option['id'] = $this->parent->args['opt_name'] . '[' . $option['id'] . ']';
 
                         if ( $option['type'] != "heading" || ! empty( $option['type'] ) ) {
-                            $wp_customize->add_setting( $option['id'], $customSetting );
+                            $wp_customize->add_setting( $option['id'], 
+                                array(
+                                    'default'           => $option['default'],
+                                    'type'              => 'option',
+                                    'capabilities'      => 'edit_theme_options',
+                                    //'capabilities'   => $this->parent->args['page_permissions'],
+                                    'transport'         => 'refresh',
+                                    'theme_supports'    => '',
+                                    'sanitize_callback' => '__return_false',
+                                    //'sanitize_callback' => array( $this, '_field_validation' ),
+                                    //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
+                                )
+                            );
                         }
 
                         if ( ! empty( $option['data'] ) && empty( $option['options'] ) ) {
