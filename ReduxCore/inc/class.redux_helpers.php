@@ -16,12 +16,6 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
      */
     class Redux_Helpers {
 
-        public static function is_customize_preview() {
-            global $wp_customize;
-
-            return is_a( $wp_customize, 'WP_Customize_Manager' ) && $wp_customize->is_preview();
-        }
-
         public static function tabFromField( $parent, $field ) {
             foreach ( $parent->sections as $k => $section ) {
                 if ( ! isset( $section['title'] ) ) {
