@@ -62,6 +62,12 @@ If you can, please donate to help support the ongoing development of Redux Frame
 
 [![Follow us on Twitter](http://iod.unh.edu/Images/Twitter_follow_us.png "Follow us on Twitter")](https://www.twitter.com/ReduxFramework)
 
+## Posting Guidelines for issues and questions ##
+
+When using the Issues Tracker, you are very welcome to alert us to issues or ask questions when you have got to a point where you are stuck or simply a bit lost on where to find the right document to read. In which case we will still need to have some details of what version of Redux you are using and what version of WordPress you are using. There are a couple of more bit of information that we will need. Prior to asking your question or posting an issue, then make sure you provide [these thing that you will find in this page](https://github.com/ReduxFramework/redux-framework/blob/master/CONTRIBUTING.md). It will save frustration on both sides and get the issue resolved faster.
+
+In the case that you are personally stuck due to lack of developmnet knowledge, then we are more than happy to assist at our standard hourly rate as this falls outside the framework issues tracking.
+
 ## FAQs ##
 
 1. Why should we use ```require_once``` instead of ```get_template_part```?
@@ -72,8 +78,8 @@ If you can, please donate to help support the ongoing development of Redux Frame
 
 ## Are you using Redux? ##
 
-Send me an email at ghost1227@reduxframework.com so I can add you to our user spotlight!
+Send me an email at ghost1227@reduxframework.com so I can add you theme/plugin to our user spotlight!
 
 ## Changelog ##
 
-See Changelog.md
+See [Changelog.md](https://github.com/ReduxFramework/redux-framework/blob/master/CHANGELOG.md)
