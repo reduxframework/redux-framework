@@ -2810,7 +2810,9 @@
                     foreach ( $keys as $key ) {
                         $plugin_options[ $key ] = $this->options[ $key ];
                     }
-                    unset( $plugin_options['redux-no_panel'] );
+                    if ( isset( $plugin_options['redux-no_panel'] ) ) {
+                        unset( $plugin_options['redux-no_panel'] );
+                    }
                 }
 
                 if ( ! empty( $this->hidden_perm_fields ) && is_array( $this->hidden_perm_fields ) ) {
