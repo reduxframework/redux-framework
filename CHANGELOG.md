@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.4
+* Added:    Customizer now supports PANEL! Yay 4.0.
+
 ## 3.3.9.3
 * Fixed:    #1789 - Customizer now properly working again with WP 4.0. Odd bug.
 * Modified: README.md updates as per @cmwwebfx suggestions.

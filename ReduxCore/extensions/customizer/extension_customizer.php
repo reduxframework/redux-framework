@@ -192,6 +192,7 @@
                     'admin-head-callback'    => '',
                     'admin-preview-callback' => ''
                 );
+                $panel    = "";
 
                 foreach ( $this->parent->sections as $key => $section ) {
 
@@ -238,11 +239,28 @@
                         $order['heading'] ++;
                     }
 
-                    $wp_customize->add_section( $section['id'], array(
-                        'title'       => $section['title'],
-                        'priority'    => $section['priority'],
-                        'description' => $section['desc']
-                    ) );
+                    if ( method_exists( $wp_customize, 'add_panel' ) && ( ! isset( $section['subsection'] ) || ( isset( $section['subsection'] ) && $section['subsection'] != true ) ) && isset( $this->parent->sections[ ( $key + 1 ) ]['subsection'] ) && $this->parent->sections[ ( $key + 1 ) ]['subsection'] ) {
+
+                        $wp_customize->add_panel( $section['id'], array(
+                            'priority'       => $section['priority'],
+                            'capability'     => 'customize',
+                            'theme_supports' => '',
+                            'title'          => $section['title'],
+                            'description'    => $section['desc'],
+                        ) );
+                        $panel = $section['id'];
+
+                    } else {
+                        if ( ! isset( $section['subsection'] ) || ( isset( $section['subsection'] ) && $section['subsection'] != true ) ) {
+                            $panel = "";
+                        }
+                        $wp_customize->add_section( $section['id'], array(
+                            'title'       => $section['title'],
+                            'priority'    => $section['priority'],
+                            'description' => $section['desc'],
+                            'panel'       => $panel
+                        ) );
+                    }
 
 
                     foreach ( $section['fields'] as $skey => $option ) {
