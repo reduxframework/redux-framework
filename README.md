@@ -2,6 +2,11 @@
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
 
+## Posting Guidelines for issues and questions ##
+When using our Issue Tracker, you may ask questions where you may be a bit lost or need help understanding the documentation. If, however, you find a bug we require you to read and provide the information contained in our [Contributing Guidelines](https://github.com/ReduxFramework/redux-framework/blob/master/CONTRIBUTING.md). If you do not provide this information, we will request it before we can support you.
+
+If you are stuck in some of your own code, or need help with PHP and anything else not Redux specific, we request you purchase some [Premium Support](http://reduxframework.com/extension/premium-support/) and we will be happy to assist you. If we feel the issue is outside of our scope we will suggest you to purchase some [Premium Support](http://reduxframework.com/extension/premium-support/) in order for us to serve you.
+
 ## Kickstart Your Development ##
 
 Are you authoring a theme, or plugin?  Visit the  [Redux Builder](http://build.reduxframework.com) site and get started!
@@ -12,7 +17,7 @@ We help you create a seamless user experience for your users to demo your WordPr
 ## Documentation ##
 
 Need a little help with Redux?  Come check out our brand new documentation site at  [docs.reduxframework.com](http://docs.reduxframework.com), chock full of tutorials and examples!
- 
+
 
 ## SMOF (Simple Modified Option Users) Converter! ##
 
@@ -72,8 +77,8 @@ If you can, please donate to help support the ongoing development of Redux Frame
 
 ## Are you using Redux? ##
 
-Send me an email at ghost1227@reduxframework.com so I can add you to our user spotlight!
+Send us an email at info@reduxframework.com so we can add you to our showcase!
 
 ## Changelog ##
 
-See Changelog.md
+See [Changelog.md](https://github.com/ReduxFramework/redux-framework/blob/master/CHANGELOG.md)

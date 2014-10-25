@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.9.3
+* Fixed:    #1789 - Customizer now properly working again with WP 4.0. Odd bug.
+* Modified: README.md updates as per @cmwwebfx suggestions.
+
 ## 3.3.9.2
 * Fixed:    #1782 - Fixed some extra themecheck and customizer issues.
 
