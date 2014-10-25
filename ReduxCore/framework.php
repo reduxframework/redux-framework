@@ -124,11 +124,11 @@
                         self::$_url     = trailingslashit( self::$wp_content_url . $relative_url );
                     }
                 }
-                
-                self::$_url = apply_filters( "redux/_url", self::$_url );
-                self::$_dir = apply_filters( "redux/_dir", self::$_dir );
+
+                self::$_url       = apply_filters( "redux/_url", self::$_url );
+                self::$_dir       = apply_filters( "redux/_dir", self::$_dir );
                 self::$_is_plugin = apply_filters( "redux/_is_plugin", self::$_is_plugin );
-                
+
             }
 
             // ::init()
@@ -385,19 +385,19 @@
 
                     // Output dynamic CSS
                     // Frontend: Maybe enqueue dynamic CSS and Google fonts
-                    if( empty( $this->args['output_location'] ) || in_array( 'frontend', $this->args['output_location'] ) ) {
+                    if ( empty( $this->args['output_location'] ) || in_array( 'frontend', $this->args['output_location'] ) ) {
                         add_action( 'wp_head', array( &$this, '_output_css' ), 150 );
                         add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
                     }
 
                     // Login page: Maybe enqueue dynamic CSS and Google fonts
-                    if( in_array( 'login', $this->args['output_location'] ) ) {
+                    if ( in_array( 'login', $this->args['output_location'] ) ) {
                         add_action( 'login_head', array( &$this, '_output_css' ), 150 );
                         add_action( 'login_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
                     }
 
                     // Admin area: Maybe enqueue dynamic CSS and Google fonts
-                    if( in_array( 'admin', $this->args['output_location'] ) ) {
+                    if ( in_array( 'admin', $this->args['output_location'] ) ) {
                         add_action( 'admin_head', array( &$this, '_output_css' ), 150 );
                         add_action( 'admin_enqueue_scripts', array( &$this, '_enqueue_output' ), 150 );
                     }
@@ -1932,7 +1932,7 @@
 
                 if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] == true ) {
 
-                    $base                        = admin_url('admin-ajax.php') . '?action=redux_p&url=';
+                    $base                        = admin_url( 'admin-ajax.php' ) . '?action=redux_p&url=';
                     $url                         = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base );
                     $this->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $url . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
                 }
@@ -2694,7 +2694,7 @@
                      * @param string CSS that get sent to the compiler hook
                      */
                     do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
-                    
+
                     /**
                      * action 'redux/options/{opt_name}/compiler/advanced'
                      *
@@ -2900,6 +2900,11 @@
                     $plugin_options = $this->options_defaults;
 
                     $this->transients['changed_values'] = array();
+
+                    if ( empty( $this->options ) ) {
+                        $this->options = $this->options_defaults;
+                    }
+
                     foreach ( $this->options as $key => $value ) {
                         if ( isset( $plugin_options[ $key ] ) && $value != $plugin_options[ $key ] ) {
                             $this->transients['changed_values'][ $key ] = $value;
