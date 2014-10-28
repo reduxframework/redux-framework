@@ -38,10 +38,10 @@
 
                         el.find( "#" + spinner.id ).spinner(
                             {
-                                value: parseInt( spinner.val, null ),
-                                min: parseInt( spinner.min, null ),
-                                max: parseInt( spinner.max, null ),
-                                step: parseInt( spinner.step, null ),
+                                value: parseFloat( spinner.val, null ),
+                                min: parseFloat( spinner.min, null ),
+                                max: parseFloat( spinner.max, null ),
+                                step: parseFloat( spinner.step, null ),
                                 range: "min",
 
                                 slide: function( event, ui ) {

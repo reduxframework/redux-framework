@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.5
+* Added:    Decimal increments to spinner.
+
 ## 3.3.9.4
 * Added:    Customizer now supports PANEL! Yay 4.0.
 
