@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.6
+* Added:    #1803 - Optgroup support for select field.
+
 ## 3.3.9.5
 * Added:    Decimal increments to spinner.
 

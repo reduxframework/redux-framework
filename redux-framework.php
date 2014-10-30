@@ -12,7 +12,7 @@
  * Description:     Redux is a simple, truly extensible options framework for WordPress themes and plugins.
  * Author:          Team Redux
  * Author URI:      http://reduxframework.com
- * Version:         3.3.9.5
+ * Version:         3.3.9.6
  * Text Domain:     redux-framework
  * License:         GPL3+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
