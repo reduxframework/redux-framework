@@ -14,7 +14,7 @@
              *
              * @since ReduxFramework 1.0.0
              */
-            function __construct( $field = array(), $value = '', $parent ) {
+            public function __construct( $field = array(), $value = '', $parent ) {
                 $this->parent = $parent;
                 $this->field  = $field;
                 $this->value  = $value;
@@ -26,7 +26,7 @@
              *
              * @since ReduxFramework 1.0.0
              */
-            function render() {
+            public function render() {
                 $sortable = ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) ? ' select2-sortable"' : "";
 
                 if ( ! empty( $sortable ) ) { // Dummy proofing  :P
@@ -46,6 +46,7 @@
                          * @param  array $icon_file File for the icons
                          */
                         $icons_file = apply_filters( 'redux-font-icons-file', $icons_file );
+                        
                         /**
                          * filter 'redux/{opt_name}/field/font/icons/file'
                          *
@@ -111,13 +112,20 @@
                     echo '<option></option>';
 
                     foreach ( $this->field['options'] as $k => $v ) {
-                        if ( is_array( $this->value ) ) {
-                            $selected = ( is_array( $this->value ) && in_array( $k, $this->value ) ) ? ' selected="selected"' : '';
-                        } else {
-                            $selected = selected( $this->value, $k, false );
+                        
+                        if (is_array($v)) {
+                            echo '<optgroup label="' . $k . '">';
+                            
+                            foreach($v as $opt => $val) {
+                                $this->make_option($opt, $val);
+                            }
+                            
+                            echo '</optgroup>';
+                            
+                            continue;
                         }
-
-                        echo '<option value="' . $k . '"' . $selected . '>' . $v . '</option>';
+                        
+                        $this->make_option($k, $v);
                     }
                     //foreach
 
@@ -127,16 +135,26 @@
                 }
             } //function
 
+            private function make_option($id, $value) {
+                if ( is_array( $this->value ) ) {
+                    $selected = ( is_array( $this->value ) && in_array( $id, $this->value ) ) ? ' selected="selected"' : '';
+                } else {
+                    $selected = selected( $this->value, $id, false );
+                }
+
+                echo '<option value="' . $id . '"' . $selected . '>' . $value . '</option>';                
+            }
+            
             /**
              * Enqueue Function.
              * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
              *
              * @since ReduxFramework 1.0.0
              */
-            function enqueue() {
+            public function enqueue() {
 
                 wp_enqueue_script(
-                    'field-select-js',
+                    'redux-field-select-js',
                     ReduxFramework::$_url . 'inc/fields/select/field_select' . Redux_Functions::isMin() . '.js',
                     array( 'jquery', 'select2-js', 'redux-js' ),
                     time(),
