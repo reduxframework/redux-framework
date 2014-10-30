@@ -1643,17 +1643,17 @@
 
                     // JS
                     wp_register_script(
-                        'select2-sortable-js',
-                        self::$_url . 'assets/js/vendor/select2.sortable.min.js',
+                        'redux-select2-sortable-js',
+                        self::$_url . 'assets/js/vendor/redux.select2.sortable' . $min . '.js',
                         array( 'jquery' ),
-                        filemtime( self::$_dir . 'assets/js/vendor/select2.sortable.min.js' ),
+                        filemtime( self::$_dir . 'assets/js/vendor/redux.select2.sortable' . $min . '.js' ),
                         true
                     );
 
                     wp_register_script(
                         'select2-js',
                         self::$_url . 'assets/js/vendor/select2/select2.min.js',
-                        array( 'jquery', 'select2-sortable-js' ),
+                        array( 'jquery', 'redux-select2-sortable-js' ),
                         filemtime( self::$_dir . 'assets/js/vendor/select2/select2.min.js' ),
                         true
                     );
