@@ -1143,10 +1143,37 @@
                             'options'  => array(
                                 '1' => 'Opt 1',
                                 '2' => 'Opt 2',
-                                '3' => 'Opt 3'
+                                '3' => 'Opt 3',
                             ),
                             'default'  => '2'
                         ),
+                        array(
+                            'id'       => 'opt-select-optgroup',
+                            'type'     => 'select',
+                            'title'    => __( 'Select Option with optgroup', 'redux-framework-demo' ),
+                            'subtitle' => __( 'No validation can be done on this field type', 'redux-framework-demo' ),
+                            'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
+                            //Must provide key => value pairs for select options
+                            'options'  => array(
+                                'Group 1' => array(
+                                    '1' => 'Opt 1',
+                                    '2' => 'Opt 2',
+                                    '3' => 'Opt 3',
+                                ),
+
+                                'Group 2' => array(
+                                    '4' => 'Opt 4',
+                                    '5' => 'Opt 5',
+                                    '6' => 'Opt 6',
+                                ),
+                                
+                                '7' => 'Opt 7',
+                                '8' => 'Opt 8',
+                                '9' => 'Opt 9',
+                            ),
+                            'default'  => '2'
+                        ),
+                        
                         array(
                             'id'       => 'opt-multi-select',
                             'type'     => 'select',
@@ -1160,7 +1187,7 @@
                                 '2' => 'Opt 2',
                                 '3' => 'Opt 3'
                             ),
-                            'required' => array( 'select', 'equals', array( '1', '3' ) ),
+                            //'required' => array( 'opt-select', 'equals', array( '1', '3' ) ),
                             'default'  => array( '2', '3' )
                         ),
                         array(
