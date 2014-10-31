@@ -2918,6 +2918,7 @@
 
                     //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 1000, "/");
                     //setcookie("redux-saved-{$this->args['opt_name']}", 'defaults', time() + 1000, "/");
+
                     $this->set_transients(); // Update the transients
 
                     return $plugin_options;
@@ -2958,12 +2959,17 @@
 
                     //setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                     unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
+                    
                     $this->set_transients();
 
                     return $plugin_options;
                 }
 
-                $this->transients['last_save_mode'] = "normal"; // Last save mode
+                if ($this->transients['last_save_mode'] != 'remove') {
+                    $this->transients['last_save_mode'] = "normal"; // Last save mode
+                } else {
+                    $this->transients['last_save_mode'] = '';
+                }
 
 
                 // Validate fields (if needed)
@@ -3026,9 +3032,8 @@
                     //set_transient($this->args['opt_name'].'-transients', $this->transients);
                     //exit();
                 }
-
+                
                 $this->set_transients( $this->transients );
-
 
                 return $plugin_options;
             }
@@ -3473,7 +3478,7 @@
                          * @param string  translated "settings imported" text
                          */
                         echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
-                    } else {
+                    } else if ( $this->transients['last_save_mode'] == "normal") {
                         /**
                          * action 'redux/options/{opt_name}/saved'
                          *
@@ -3488,8 +3493,10 @@
                          */
                         echo '<div class="saved_notice admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
                     }
+                    
                     unset( $this->transients['last_save_mode'] );
-
+                    $this->transients['last_save_mode'] = 'remove';
+                    $this->set_transients();
                 }
 
                 /**
@@ -3769,7 +3776,6 @@
                 }
 
                 $this->set_transients();
-
             }
 
             /**
