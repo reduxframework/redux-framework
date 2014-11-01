@@ -2965,11 +2965,11 @@
                     return $plugin_options;
                 }
 
-                if ($this->transients['last_save_mode'] != 'remove') {
+//                if ($this->transients['last_save_mode'] != 'remove') {
                     $this->transients['last_save_mode'] = "normal"; // Last save mode
-                } else {
-                    $this->transients['last_save_mode'] = '';
-                }
+//               } else {
+//                    $this->transients['last_save_mode'] = '';
+//                }
 
 
                 // Validate fields (if needed)
@@ -3495,7 +3495,7 @@
                     }
                     
                     unset( $this->transients['last_save_mode'] );
-                    $this->transients['last_save_mode'] = 'remove';
+                    //$this->transients['last_save_mode'] = 'remove';
                     $this->set_transients();
                 }
 
