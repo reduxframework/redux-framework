@@ -1,0 +1,55 @@
+.redux-container-multi_media .redux_media_status {
+  margin: 10px 0 0 0;
+}
+.redux-container-multi_media .redux_media_status .redux-file-exists,
+.redux-container-multi_media .redux_media_status .redux-max-limit {
+  color: red;
+}
+.redux-container-multi_media .redux_media_status .img_status img {
+  width: 50px!important;
+  height: 50px!important;
+}
+.redux-container-multi_media .redux_media_status .img_status img,
+.redux-container-multi_media .redux_media_status .embed_status {
+  border: 1px solid #DFDFDF;
+  background: #FAFAFA;
+  max-width: 350px;
+  padding: 5px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.redux-container-multi_media .redux_media_status .img_status {
+  clear: none;
+  float: left;
+  display: inline-block;
+  margin-right: 10px;
+  width: auto;
+}
+.redux-container-multi_media .redux_media_status .embed_status {
+  float: left;
+  max-width: 800px;
+}
+.redux-container-multi_media .redux_media_status .img_status,
+.redux-container-multi_media .redux_media_status .embed_status {
+  position: relative;
+}
+.redux-container-multi_media .redux_media_status .img_status .redux_remove_file_button,
+.redux-container-multi_media .redux_media_status .embed_status .redux_remove_file_button {
+  text-indent: -9999px;
+  background: url(img/ico-delete.png);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+}
+.redux-container-multi_media .attach_list li {
+  clear: both;
+  display: inline-block;
+  margin-bottom: 25px;
+  width: 100%;
+}
+.redux-container-multi_media .attach_list li img {
+  float: left;
+  margin-right: 10px;
+}
