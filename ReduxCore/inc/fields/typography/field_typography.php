@@ -677,7 +677,7 @@
                             // name.  This is necessary because if there are numerics
                             // in the font name, they will not render properly.
                             // Google should know better.
-                            if (strpos($value, ' ')){
+                            if (strpos($value, ' ') && !strpos($value, ',')){
                                 $value = '"' . $value . '"';
                             }
                             
