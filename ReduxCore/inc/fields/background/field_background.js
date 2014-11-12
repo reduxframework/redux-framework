@@ -21,7 +21,7 @@
 
     redux.field_objects.background.init = function( selector ) {
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-background' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-background:visible' );
         }
 
         $( selector ).each(
@@ -31,12 +31,14 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
-
                 // Remove the image button
                 el.find( '.redux-remove-background' ).unbind( 'click' ).on(
                     'click', function( e ) {

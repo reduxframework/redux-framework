@@ -15,7 +15,7 @@
 
     redux.field_objects.ace_editor.init = function( selector ) {
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-ace_editor' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-ace_editor:visible' );
         }
 
         $( selector ).each(
@@ -24,6 +24,9 @@
                 var parent = el;
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );

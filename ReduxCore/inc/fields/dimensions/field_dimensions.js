@@ -16,7 +16,7 @@
     redux.field_objects.dimensions.init = function( selector ) {
 
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-dimensions' );
+            selector = $( document ).find( '.redux-container-dimensions:visible' );
         }
         $( selector ).each(
             function() {
@@ -24,6 +24,9 @@
                 var parent = el;
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );

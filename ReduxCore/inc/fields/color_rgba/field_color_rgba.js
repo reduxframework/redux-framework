@@ -12,6 +12,7 @@
     );
 
     $.reduxColorRGBA.color_rgba = function() {
+
         $( '.redux-color_rgba-init' ).minicolors(
             {
                 animationSpeed: 50,

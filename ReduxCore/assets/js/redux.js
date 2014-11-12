@@ -448,7 +448,7 @@
     };
 
     $.redux.initFields = function() {
-        $( ".redux-field-init:visible" ).each(
+        $( ".redux-group-tab:visible" ).find( ".redux-field-init:visible" ).each(
             function() {
                 var type = $( this ).attr( 'data-type' );
                 //console.log(type);

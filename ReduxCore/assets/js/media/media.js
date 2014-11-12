@@ -23,7 +23,7 @@
 
     redux.field_objects.media.init = function( selector ) {
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-media' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-media:visible' );
         }
         $( selector ).each(
             function() {
@@ -33,7 +33,9 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {

@@ -19,7 +19,7 @@
     redux.field_objects.color.init = function( selector ) {
         
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-color' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-color:visible' );
         }
 
         $( selector ).each(
@@ -31,7 +31,9 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {

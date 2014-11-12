@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.3.9.8
+* Fixed:    #1798 - Fixed lazy load JS to only load visible sections. Much more optimized.
+
+## 3.3.9.7
+* Fixed:    #1821 -  Exo 2 font not working, issue with typography and escaping.
+
 ## 3.3.9.6
 * Added:    #1803 - Optgroup support for select field.
 

@@ -14,7 +14,7 @@
 
     redux.field_objects.select.init = function( selector ) {
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-select' );
+            selector = $( document ).find( '.redux-container-select:visible' );
         }
         
         $( selector ).each(
@@ -25,7 +25,9 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {

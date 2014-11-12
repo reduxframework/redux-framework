@@ -15,14 +15,16 @@
     redux.field_objects.import_export.init = function( selector ) {
 
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-import_export' );
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-import_export:visible' );
         }
         
         var parent = selector;
         if ( !selector.hasClass( 'redux-field-container' ) ) {
             parent = selector.parents( '.redux-field-container:first' );
         }
-        
+        if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+            return;
+        }
         if ( parent.hasClass( 'redux-field-init' ) ) {
             parent.removeClass( 'redux-field-init' );
         } else {
