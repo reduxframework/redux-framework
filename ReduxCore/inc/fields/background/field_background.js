@@ -13,12 +13,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.background = redux.field_objects.background || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.background.init();
-        }
-    );
-
     redux.field_objects.background.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-background:visible' );
@@ -31,9 +25,11 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
+                
                 if ( parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
+                
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
