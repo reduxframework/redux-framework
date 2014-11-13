@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.9.9
+* Fixed:    #1834 - Wordpress data dealing with IDs as array keys not rendering properly.
+* Fixed:    #1830 - Font lists were added in quotes.  Thanks @karimhossenbux.
+
 ## 3.3.9.8
 * Fixed:    #1798 - Fixed lazy load JS to only load visible sections. Much more optimized.
 
