@@ -39,6 +39,34 @@
                 $this->value  = $value;
             }
 
+            private function replace_id_with_slug($arr){
+                $new_arr = array();
+                
+                foreach($arr as $id => $name) {
+
+                    if ( is_numeric ( $id ) ) {
+                        $slug = strtolower($name);
+                        $slug = str_replace(' ', '-', $slug);
+
+                        $new_arr[$slug] = $name;
+                    } else {
+                        $new_arr[$id] = $name;
+                    }
+                }
+
+                return $new_arr;
+            }
+            
+            private function is_value_empty($val){
+                foreach($val as $section => $arr) {
+                    if (!empty($arr)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
             /**
              * Field Render Function.
              * Takes the vars and outputs the HTML for the field in the settings
@@ -60,8 +88,13 @@
                         if ( ! isset( $this->field['args'][ $key ] ) ) {
                             $this->field['args'][ $key ] = array();
                         }
+                        
                         $this->field['options'][ $key ] = $this->parent->get_wordpress_data( $data, $this->field['args'][ $key ] );
                     }
+                    
+                    // id numbers as array keys won't work in the checks below
+                    // so, replace them with slugs of the value.
+                    $this->field['options'][ $key ] = $this->replace_id_with_slug($this->field['options'][ $key ]);
                 }
 
                 // Make sure to get list of all the default blocks first
@@ -73,8 +106,16 @@
                     $temp = array_merge( $temp, $blocks );
                 }
 
+                if ($this->is_value_empty ( $this->value)) {
+                    $this->value = $this->field['options'];
+                }
+                
                 $sortlists = $this->value;
-
+                
+                foreach($sortlists as $section => $arr) {
+                    $sortlists[$section] = $this->replace_id_with_slug($arr);
+                }
+                
                 if ( is_array( $sortlists ) ) {
                     foreach ( $sortlists as $sortlist ) {
                         $temp2 = array_merge( $temp2, $sortlist );
@@ -82,14 +123,24 @@
 
                     // now let's compare if we have anything missing
                     foreach ( $temp as $k => $v ) {
-                        if ( ! array_key_exists( $k, $temp2 ) ) {
-                            $sortlists['disabled'][ $k ] = $v;
+                        // k = id/slug
+                        // v = name
+
+                        if (!empty($temp2)) {
+                            if ( ! array_key_exists( $k, $temp2 ) ) {
+                                $sortlists['disabled'][ $k ] = $v;
+                            }
                         }
                     }
 
                     // now check if saved blocks has blocks not registered under default blocks
                     foreach ( $sortlists as $key => $sortlist ) {
+                        // key = enabled, disabled, backup
+                        // sortlist = id => name
+                        
                         foreach ( $sortlist as $k => $v ) {
+                            // k = id
+                            // v = name
                             if ( ! array_key_exists( $k, $temp ) ) {
                                 unset( $sortlist[ $k ] );
                             }
@@ -104,7 +155,6 @@
                         }
                         $sortlists[ $key ] = $sortlist;
                     }
-
 
                     if ( $sortlists ) {
                         echo '<fieldset id="' . $this->field['id'] . '" class="redux-sorter-container redux-sorter">';
@@ -124,7 +174,7 @@
                             }
 
                             foreach ( $sortlist as $key => $list ) {
-
+                                
                                 echo '<input class="sorter-placebo" type="hidden" name="' . $this->field['name'] . '[' . $group . '][placebo]' . $this->field['name_suffix'] . '" value="placebo">';
 
                                 if ( $key != "placebo" ) {
