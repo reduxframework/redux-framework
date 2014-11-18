@@ -15,16 +15,18 @@
     redux.field_objects.import_export.init = function( selector ) {
 
         if ( !selector ) {
-            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-import_export:visible' );
+            //selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-import_export:visible' );
+            selector = $( document ).find( '.redux-container-import_export' );
+            console.log(selector);
         }
         
         var parent = selector;
         if ( !selector.hasClass( 'redux-field-container' ) ) {
             parent = selector.parents( '.redux-field-container:first' );
         }
-        if ( parent.is( ":hidden" ) ) { // Skip hidden fields
-            return;
-        }
+//        if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+//            return;
+//        }
         if ( parent.hasClass( 'redux-field-init' ) ) {
             parent.removeClass( 'redux-field-init' );
         } else {
