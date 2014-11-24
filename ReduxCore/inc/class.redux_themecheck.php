@@ -58,7 +58,7 @@
                             ?>
                             <div class="updated">
                             <p><?php
-                                    echo sprintf( __( 'The theme you are testing has %s embedded. We invite you to read the %sTheme-Check Documentation%s to understand some warnings you will see because of Redux.', 'redux-framework' ), '<a href="' . esc_url( 'http://reduxframework.com' ) . '" target="_blank">Redux Framework</a>', '<a href="' . esc_url( 'http://docs.reduxframework.com/core/theme-check/' ) . '">', '</a>' );
+                                    echo sprintf( __( 'The theme you are testing has %s embedded. We invite you to read the %sTheme-Check Documentation%s to understand some warnings you will see because of Redux.', 'redux-framework' ), '<a href="' . 'http://reduxframework.com' . '" target="_blank">Redux Framework</a>', '<a href="' . 'http://docs.reduxframework.com/core/theme-check/' . '">', '</a>' );
                                 ?>
                             </div><?php
                         }
