@@ -2,6 +2,7 @@
 
 ## 3.3.9.11
 * Fixed:    #1865 - Sortable select not saving proper order.
+* Fixed:    #1864 - Footer z-index CSS adjusted.
 
 ## 3.3.9.10
 * Fixed:    #1848 - Import-export filed buttons not functioning properly.
