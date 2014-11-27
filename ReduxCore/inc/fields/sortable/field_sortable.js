@@ -8,12 +8,6 @@
 
     var scroll = '';
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.sortable.init();
-        }
-    );
-
     redux.field_objects.sortable.init = function( selector ) {
 
         if ( !selector ) {

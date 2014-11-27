@@ -68,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.10';
+            public static $_version = '3.3.9.11';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -541,7 +541,7 @@
                         ),
                     ),
                     'show_import_export'        => true,
-                    'dev_mode'                  => false,
+                    'dev_mode'                  => true,
                     'system_info'               => false,
                 );
             }

@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
+## 3.3.9.11
+* Fixed:    #1865 - Sortable select not saving proper order.
+
 ## 3.3.9.10
-* Fixed:    #1848 - IMport-export filed buttons not functioning properly.
+* Fixed:    #1848 - Import-export filed buttons not functioning properly.
 
 ## 3.3.9.9
 * Fixed:    #1834 - Wordpress data dealing with IDs as array keys not rendering properly.
