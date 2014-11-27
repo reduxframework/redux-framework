@@ -87,9 +87,27 @@
 
         $( '.expand_options' ).click(
             function( e ) {
+                
                 e.preventDefault();
 
+                var container = $('.redux-container');
+                if ($(container).hasClass('fully-expanded')) {
+                    $(container).removeClass('fully-expanded');
+
+                    var tab = $.cookie( "redux_current_tab" );
+
+                    $('.redux-container:first').find( '#' + tab + '_section_group' ).fadeIn(
+                        200, function() {
+                            if ( $('.redux-container:first').find( '#redux-footer' ).length !== 0 ) {
+                                $.redux.stickyInfo(); // race condition fix
+                            }
+                            $.redux.initFields();
+                        }
+                    );                
+                }
+
                 $.redux.expandOptions( $( this ).parents( '.redux-container:first' ) );
+
                 return false;
             }
         );

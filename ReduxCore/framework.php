@@ -68,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.11';
+            public static $_version = '3.3.9.12';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -506,6 +506,7 @@
                     'disable_save_warn'         => false,
                     // Disable the save warn
                     'open_expanded'             => false,
+                    'hide_expand'               => false,
                     // Start the panel fully expanded to start with
                     'network_admin'             => false,
                     // Enable network admin when using network database mode
@@ -3424,8 +3425,9 @@
                 echo '<div id="info_bar">';
 
                 $expanded = ( $this->args['open_expanded'] ) ? ' expanded' : '';
-
-                echo '<a href="javascript:void(0);" class="expand_options' . $expanded . '">' . __( 'Expand', 'redux-framework' ) . '</a>';
+                $hide_expand = $this->args['hide_expand'] ? ' style="display: none;"' : '';
+                
+                echo '<a href="javascript:void(0);" class="expand_options' . $expanded . '"' . $hide_expand . '>' . __( 'Expand', 'redux-framework' ) . '</a>';
                 echo '<div class="redux-action_bar">';
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
 

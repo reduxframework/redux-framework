@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.9.12
+* Fixed:    #1868 - Improper panel render when opening expanded, when `open_expanded` set to true.
+* Added:    `hide_expand` argument, to hide the expand options button.
+
 ## 3.3.9.11
 * Fixed:    #1865 - Sortable select not saving proper order.
 * Fixed:    #1864 - Footer z-index CSS adjusted.
