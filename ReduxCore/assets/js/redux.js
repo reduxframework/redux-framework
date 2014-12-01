@@ -29,6 +29,7 @@
                 return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
             };
 
+            $.redux.hideFields();
             $.redux.checkRequired();
             $.redux.initEvents();
             $.redux.initQtip();
@@ -36,8 +37,6 @@
             $.redux.notices();
             $.redux.tabControl();
             $.redux.devFunctions();
-
-
         }
     );
 
@@ -153,7 +152,13 @@
                 window.onbeforeunload = null;
             }
         );
+    };
 
+    $.redux.hideFields = function() {
+        $("label[for='redux_hide_field']").each(function(idx,val){
+            var tr = $(this).parent().parent();
+            $(tr).addClass('hidden');
+        });
     };
 
     $.redux.checkRequired = function() {

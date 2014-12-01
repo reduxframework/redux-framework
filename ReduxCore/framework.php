@@ -418,9 +418,6 @@
 
 
                     }
-
-                    // mod_rewrite check
-                    //Redux_Functions::modRewriteCheck();
                 }
 
                 /**
@@ -2641,6 +2638,10 @@
                             if ( ! $display || isset( $this->no_panel_section[ $k ] ) ) {
                                 $this->no_panel[] = $field['id'];
                             } else {
+                                if (isset($field['hidden'])) {
+                                    $field['label_for'] = 'redux_hide_field';
+                                }
+                                
                                 add_settings_field(
                                     "{$fieldk}_field",
                                     $th,
