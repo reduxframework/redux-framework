@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.3.9.14
+* Fixed:    #1870 - Border field doubling up on px in output/compiler.
+* Added:    `hidden` argument for fields.
+* Added:    `hidden` argument for sections.
+
 ## 3.3.9.12
 * Fixed:    #1868 - Improper panel render when opening expanded, when `open_expanded` set to true.
 * Added:    `hide_expand` argument, to hide the expand options button.

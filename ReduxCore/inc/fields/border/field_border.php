@@ -38,6 +38,12 @@
                 $this->value  = $value;
             } //function
 
+            private function stripAlphas($s) {
+
+                // Regex is our friend.  THERE ARE FOUR LIGHTS!!
+                return preg_replace('/[^\d.-]/', '', $s);
+            }             
+            
             /**
              * Field Render Function.
              * Takes the vars and outputs the HTML for the field in the settings
@@ -83,6 +89,9 @@
                     if ( isset( $this->value['border-width'] ) && ! empty( $this->value['border-width'] ) ) {
                         $this->value['width'] = $this->value['border-width'];
                     }
+                    
+                    $this->value['width'] = $this->stripAlphas($this->value['width']);
+
                     $value['top']    = $this->value['width'];
                     $value['right']  = $this->value['width'];
                     $value['bottom'] = $this->value['width'];
