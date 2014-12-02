@@ -3056,7 +3056,11 @@
                 foreach ( $sections as $k => $section ) {
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $fkey => $field ) {
-                            $field['section_id'] = $k;
+
+                            if( is_array( $field ) ) {
+                               $field['section_id'] = $k; 
+                            }
+                            
 
                             if ( isset( $field['type'] ) && ( $field['type'] == 'checkbox' || $field['type'] == 'checkbox_hide_below' || $field['type'] == 'checkbox_hide_all' ) ) {
                                 if ( ! isset( $plugin_options[ $field['id'] ] ) ) {
@@ -3080,7 +3084,7 @@
 
                             // Check for empty id value
 
-                            if ( ! isset( $plugin_options[ $field['id'] ] ) || ( isset( $plugin_options[ $field['id'] ] ) && $plugin_options[ $field['id'] ] == '' ) ) {
+                            if ( ! isset( $field['id'] ) || ! isset( $plugin_options[ $field['id'] ] ) || ( isset( $plugin_options[ $field['id'] ] ) && $plugin_options[ $field['id'] ] == '' ) ) {
 
                                 // If we are looking for an empty value, in the case of 'not_empty'
                                 // then we need to keep processing.
