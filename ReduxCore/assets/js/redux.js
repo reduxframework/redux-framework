@@ -798,7 +798,8 @@
                         }
                     }
                 }
-                break;
+            break;
+            
             case '!=':
             case 'not':
                 //if value was array
@@ -815,60 +816,96 @@
                         }
                     }
                 }
-                break;
+            break;
+            
             case '>':
             case 'greater':
             case 'is_larger':
-                if ( parseFloat( parentValue ) > parseFloat( checkValue ) )
+                if ( parseFloat( parentValue ) > parseFloat( checkValue ) ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case '>=':
             case 'greater_equal':
             case 'is_larger_equal':
-                if ( parseFloat( parentValue ) >= parseFloat( checkValue ) )
+                if ( parseFloat( parentValue ) >= parseFloat( checkValue ) ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case '<':
             case 'less':
             case 'is_smaller':
-                if ( parseFloat( parentValue ) < parseFloat( checkValue ) )
+                if ( parseFloat( parentValue ) < parseFloat( checkValue ) ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case '<=':
             case 'less_equal':
             case 'is_smaller_equal':
-                if ( parseFloat( parentValue ) <= parseFloat( checkValue ) )
+                if ( parseFloat( parentValue ) <= parseFloat( checkValue ) ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case 'contains':
-                if ( parentValue.toString().indexOf( checkValue ) != -1 )
-                    show = true;
-                break;
+                if ( $.isArray( checkValue ) ) {
+                    $(checkValue).each (function(idx, val) {
+                        if ( parentValue.toString().indexOf( val ) !== -1 ) {
+                            show = true;
+                        }
+                    });
+                } else {
+                    if ( parentValue.toString().indexOf( checkValue ) !== -1 ) {
+                        show = true;
+                    }
+                }
+            break;
+            
             case 'doesnt_contain':
             case 'not_contain':
-                if ( parentValue.toString().indexOf( checkValue ) == -1 )
-                    show = true;
-                break;
+                if ( $.isArray( checkValue ) ) {
+                    $(checkValue).each (function(idx, val) {
+                        if ( parentValue.toString().indexOf( val ) === -1 ) {
+                            show = true;
+                        }
+                    });
+                } else {
+                    if ( parentValue.toString().indexOf( checkValue ) === -1 ) {
+                        show = true;
+                    }
+                }
+            break;
+            
             case 'is_empty_or':
-                if ( parentValue === "" || parentValue == checkValue )
+                if ( parentValue === "" || parentValue == checkValue ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case 'not_empty_and':
-                if ( parentValue !== "" && parentValue != checkValue )
+                if ( parentValue !== "" && parentValue != checkValue ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case 'is_empty':
             case 'empty':
             case '!isset':
-                if ( !parentValue || parentValue === "" || parentValue === null )
+                if ( !parentValue || parentValue === "" || parentValue === null ) {
                     show = true;
-                break;
+                }
+            break;
+            
             case 'not_empty':
             case '!empty':
             case 'isset':
-                if ( parentValue && parentValue !== "" && parentValue !== null )
+                if ( parentValue && parentValue !== "" && parentValue !== null ) {
                     show = true;
-                break;
+                }
+            break;
         }
         return show;
 

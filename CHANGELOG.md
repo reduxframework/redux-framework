@@ -1,6 +1,10 @@
 # Redux Framework Changelog
 
-## 3.3.9.14
+## 3.3.9.15
+* Fixed:    #1856 - Illegal offset string warnings in framework.php.  Thanks @CGlingener.
+* Fixed:    #1874 - Required operator 'contains' and 'not_contains' not working with select set to multi.
+
+## 3.3.9.14  
 * Fixed:    #1870 - Border field doubling up on px in output/compiler.
 * Added:    `hidden` argument for fields.
 * Added:    `hidden` argument for sections.

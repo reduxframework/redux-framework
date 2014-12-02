@@ -68,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.14';
+            public static $_version = '3.3.9.15';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -1171,6 +1171,8 @@
                                     if ( $field['type'] == "sortable" ) {
                                         $this->options_defaults[ $field['id'] ] = array();
                                     } elseif ( $field['type'] == "image_select" ) {
+                                        $this->options_defaults[ $field['id'] ] = '';
+                                    } elseif ( $field['type'] == "select" ) {
                                         $this->options_defaults[ $field['id'] ] = '';
                                     } else {
                                         $this->options_defaults[ $field['id'] ] = $field['options'];
@@ -3056,7 +3058,10 @@
                 foreach ( $sections as $k => $section ) {
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $fkey => $field ) {
-                            $field['section_id'] = $k;
+                            
+                            if( is_array( $field ) ) {
+                                $field['section_id'] = $k;
+                            }
 
                             if ( isset( $field['type'] ) && ( $field['type'] == 'checkbox' || $field['type'] == 'checkbox_hide_below' || $field['type'] == 'checkbox_hide_all' ) ) {
                                 if ( ! isset( $plugin_options[ $field['id'] ] ) ) {
@@ -3080,7 +3085,7 @@
 
                             // Check for empty id value
 
-                            if ( ! isset( $plugin_options[ $field['id'] ] ) || ( isset( $plugin_options[ $field['id'] ] ) && $plugin_options[ $field['id'] ] == '' ) ) {
+                            if ( ! isset( $field['id'] ) || ! isset( $plugin_options[ $field['id'] ] ) || ( isset( $plugin_options[ $field['id'] ] ) && $plugin_options[ $field['id'] ] == '' ) ) {
 
                                 // If we are looking for an empty value, in the case of 'not_empty'
                                 // then we need to keep processing.
@@ -4173,10 +4178,12 @@
             // Compare data for required field
             private function compareValueDependencies( $parentValue, $checkValue, $operation ) {
                 $return = false;
-
                 switch ( $operation ) {
                     case '=':
                     case 'equals':
+//print_r($parentValue);
+//echo ' ';
+                        
                         $data['operation'] = "=";
                         if ( is_array( $checkValue ) ) {
                             if ( in_array( $parentValue, $checkValue ) ) {
@@ -4242,15 +4249,41 @@
                         }
                         break;
                     case 'contains':
-                        if ( strpos( $parentValue, $checkValue ) !== false ) {
-                            $return = true;
+                        if (is_array($parentValue)) {
+                            $parentValue = implode(',', $parentValue);
                         }
+                        
+                        if (is_array($checkValue)) {
+                            foreach($checkValue as $idx => $opt) {
+                                if ( strpos( $parentValue, $opt ) !== false ) {
+                                    $return = true;
+                                }
+                            }
+                        } else {
+                            if ( strpos( $parentValue, $checkValue ) !== false ) {
+                                $return = true;
+                            }
+                        }
+                        
                         break;
                     case 'doesnt_contain':
                     case 'not_contain':
-                        if ( strpos( $parentValue, $checkValue ) === false ) {
-                            $return = true;
+                        if (is_array($parentValue)) {
+                            $parentValue = implode(',', $parentValue);
                         }
+
+                        if (is_array($checkValue)) {
+                            foreach($checkValue as $idx => $opt) {
+                                if ( strpos( $parentValue, $opt ) === false ) {
+                                    $return = true;
+                                }
+                            }
+                        } else {
+                            if ( strpos( $parentValue, $checkValue ) === false ) {
+                                $return = true;
+                            }
+                        }
+                        
                         break;
                     case 'is_empty_or':
                         if ( empty( $parentValue ) || $parentValue == $checkValue ) {
@@ -4286,7 +4319,9 @@
 
                 if ( ! in_array( $data['parent'], $this->fieldsHidden ) && ( ! isset( $this->folds[ $field['id'] ] ) || $this->folds[ $field['id'] ] != "hide" ) ) {
                     if ( isset( $this->options[ $data['parent'] ] ) ) {
+                        //echo $data['parent'];
                         $return = $this->compareValueDependencies( $this->options[ $data['parent'] ], $data['checkValue'], $data['operation'] );
+                        //$return = $this->compareValueDependencies( $data['parent'], $data['checkValue'], $data['operation'] );
                     }
                 }
 
