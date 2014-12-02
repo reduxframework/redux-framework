@@ -2638,7 +2638,7 @@
                             if ( ! $display || isset( $this->no_panel_section[ $k ] ) ) {
                                 $this->no_panel[] = $field['id'];
                             } else {
-                                if (isset($field['hidden'])) {
+                                if (isset($field['hidden']) && $field['hidden']) {
                                     $field['label_for'] = 'redux_hide_field';
                                 }
                                 
