@@ -4181,41 +4181,82 @@
                 switch ( $operation ) {
                     case '=':
                     case 'equals':
-//print_r($parentValue);
-//echo ' ';
-                        
                         $data['operation'] = "=";
-                        if ( is_array( $checkValue ) ) {
-                            if ( in_array( $parentValue, $checkValue ) ) {
-                                $return = true;
+                        
+                        if (is_array($parentValue)) {
+                            foreach($parentValue as $idx => $val) {
+                                if (is_array($checkValue)) {
+                                    foreach($checkValue as $i => $v) {
+                                        if ($val == $v) {
+                                            $return = true;
+                                        }
+                                    }
+                                } else {
+                                    if ($val == $checkValue) {
+                                        $return = true;
+                                    }
+                                }
                             }
                         } else {
-                            if ( $parentValue == $checkValue ) {
-                                $return = true;
-                            } else if ( is_array( $parentValue ) ) {
-                                if ( in_array( $checkValue, $parentValue ) ) {
+                            if (is_array($checkValue)) {
+                                foreach($checkValue as $i => $v) {
+                                    if ($parentValue == $v) {
+                                        $return = true;
+                                    }
+                                }
+                            } else {
+                                if ($parentValue == $checkValue) {
                                     $return = true;
                                 }
                             }
                         }
-                        break;
+                    break;
+                    
                     case '!=':
                     case 'not':
                         $data['operation'] = "!==";
-                        if ( is_array( $checkValue ) ) {
-                            if ( ! in_array( $parentValue, $checkValue ) ) {
-                                $return = true;
+                        if (is_array($parentValue)) {
+                            foreach($parentValue as $idx => $val) {
+                                if (is_array($checkValue)) {
+                                    foreach($checkValue as $i => $v) {
+                                        if ($val != $v) {
+                                            $return = true;
+                                        }
+                                    }
+                                } else {
+                                    if ($val != $checkValue) {
+                                        $return = true;
+                                    }
+                                }
                             }
                         } else {
-                            if ( $parentValue != $checkValue ) {
-                                $return = true;
-                            } else if ( is_array( $parentValue ) ) {
-                                if ( ! in_array( $checkValue, $parentValue ) ) {
+                            if (is_array($checkValue)) {
+                                foreach($checkValue as $i => $v) {
+                                    if ($parentValue != $v) {
+                                        $return = true;
+                                    }
+                                }
+                            } else {
+                                if ($parentValue != $checkValue) {
                                     $return = true;
                                 }
                             }
                         }
-                        break;
+                        
+//                        if ( is_array( $checkValue ) ) {
+//                            if ( ! in_array( $parentValue, $checkValue ) ) {
+//                                $return = true;
+//                            }
+//                        } else {
+//                            if ( $parentValue != $checkValue ) {
+//                                $return = true;
+//                            } else if ( is_array( $parentValue ) ) {
+//                                if ( ! in_array( $checkValue, $parentValue ) ) {
+//                                    $return = true;
+//                                }
+//                            }
+//                        }
+                    break;
                     case '>':
                     case 'greater':
                     case 'is_larger':

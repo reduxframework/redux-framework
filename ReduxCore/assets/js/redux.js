@@ -784,16 +784,31 @@
         switch ( operation ) {
             case '=':
             case 'equals':
-                //if value was array
-                if ( $.isArray( checkValue ) ) {
-                    if ( $.inArray( parentValue, checkValue ) != -1 ) {
-                        show = true;
-                    }
+                if ( $.isArray( parentValue ) ) {
+                    $(parentValue[0]).each(function(idx, val){
+                        if ($.isArray(checkValue)) {
+                            $(checkValue).each (function(i, v){
+                                if (val == v) {
+                                    show = true;
+                                    return true;
+                                }
+                            });
+                        } else {
+                            if (val == checkValue) {
+                                show = true;
+                                return true;
+                            }
+                        }
+                    });
                 } else {
-                    if ( parentValue == checkValue ) {
-                        show = true;
-                    } else if ( $.isArray( parentValue ) ) {
-                        if ( $.inArray( checkValue, parentValue ) != -1 ) {
+                    if ($.isArray(checkValue)) {
+                        $(checkValue).each (function(i, v){
+                            if (parentValue == v) {
+                                show = true;
+                            }
+                        });
+                    } else {
+                        if (parentValue == checkValue) {
                             show = true;
                         }
                     }
@@ -802,20 +817,50 @@
             
             case '!=':
             case 'not':
-                //if value was array
-                if ( $.isArray( checkValue ) ) {
-                    if ( $.inArray( parentValue, checkValue ) == -1 ) {
-                        show = true;
-                    }
+                if ( $.isArray( parentValue ) ) {
+                    $(parentValue[0]).each(function(idx, val){
+                        if ($.isArray(checkValue)) {
+                            $(checkValue).each (function(i, v){
+                                if (val != v) {
+                                    show = true;
+                                    return true;
+                                }
+                            });
+                        } else {
+                            if (val != checkValue) {
+                                show = true;
+                                return true;
+                            }
+                        }
+                    });
                 } else {
-                    if ( parentValue != checkValue ) {
-                        show = true;
-                    } else if ( $.isArray( parentValue ) ) {
-                        if ( $.inArray( checkValue, parentValue ) == -1 ) {
+                    if ($.isArray(checkValue)) {
+                        $(checkValue).each (function(i, v){
+                            if (parentValue != v) {
+                                show = true;
+                            }
+                        });
+                    } else {
+                        if (parentValue != checkValue) {
                             show = true;
                         }
                     }
                 }
+                
+//                //if value was array
+//                if ( $.isArray( checkValue ) ) {
+//                    if ( $.inArray( parentValue, checkValue ) == -1 ) {
+//                        show = true;
+//                    }
+//                } else {
+//                    if ( parentValue != checkValue ) {
+//                        show = true;
+//                    } else if ( $.isArray( parentValue ) ) {
+//                        if ( $.inArray( checkValue, parentValue ) == -1 ) {
+//                            show = true;
+//                        }
+//                    }
+//                }
             break;
             
             case '>':
