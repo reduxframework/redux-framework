@@ -4125,7 +4125,7 @@
              *
              * @return array $params
              */
-            private function check_dependencies( $field ) {
+            public function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
 
                 if ( ! empty( $field['required'] ) ) {
