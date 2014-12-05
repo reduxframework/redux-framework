@@ -313,7 +313,9 @@
                     $this->get_options();
 
                     // Tracking
-                    $this->_tracking();
+                    if ( true != Redux_Helpers::isTheme( __FILE__ ) || ( true == Redux_Helpers::isTheme( __FILE__ ) && !$this->args['disable_tracking'] ) ) {
+                        $this->_tracking();
+                    }
 
                     // Set option with defaults
                     //add_action( 'init', array( &$this, '_set_default_options' ), 101 );
@@ -541,6 +543,7 @@
                     'show_import_export'        => true,
                     'dev_mode'                  => true,
                     'system_info'               => false,
+                    'disable_tracking'          => false,
                 );
             }
 
