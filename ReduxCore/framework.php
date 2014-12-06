@@ -1730,7 +1730,7 @@
                     wp_register_style(
                         'redux-rtl-css',
                         self::$_url . 'assets/css/rtl.css',
-                        '',
+                        array('redux-css'),
                         filemtime( self::$_dir . 'assets/css/rtl.css' ),
                         'all'
                     );
