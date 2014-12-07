@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.16
+* Updated:  select2 3.5.2
+
 ## 3.3.9.15
 * Fixed:    #1856 - Illegal offset string warnings in framework.php.  Thanks @CGlingener.
 * Fixed:    #1874 - Required operator 'contains' and 'not_contains' not working with select set to multi.
