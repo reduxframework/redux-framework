@@ -1,10 +1,5 @@
 .redux-container-text {
     label {
-/*        float: left;
-        clear: left;
-        display: block;
-        line-height: 28px;
-        min-width: 7em !important;*/
         display: block;
         position: relative;
         font-size: 12px !important;
@@ -15,14 +10,14 @@
         top: 5px;
         width: 100px;
     }
+
     input {
         clear: left;
     }
-    
+
     .input_wrapper {
       display: block;
       position: relative;
-      /*margin: 0 4px 0 5px;*/
       padding: 0;
       width: 23%;
       max-width: 23%;
@@ -35,5 +30,5 @@
       -o-box-sizing: border-box;
       box-sizing: border-box;
       vertical-align: baseline;
-    }    
+    }
 }

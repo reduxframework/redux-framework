@@ -1,5 +1,6 @@
 .redux-dimensions-container {
-    select, .select_wrapper {
+    select,
+    .select_wrapper {
         width: 80px !important;
         float: left;
     }
@@ -17,12 +18,14 @@
                 display: inline-block !important;
                 width: 100px !important;
             }
+
             .add-on {
                 padding: 7px 4px;
                 font-size: 16px;
                 line-height: 1.5;
             }
         }
+
         .select_wrapper {
             margin-top: 6px;
         }

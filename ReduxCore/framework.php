@@ -1883,6 +1883,7 @@
                                             // Also checking for dev_mode = true doesn't mess up the JS combinine.
                                             //if ( /*$this->args['dev_mode'] === false && */ isset($theField->extension_dir) && (!'' == $theField->extension_dir) /* || ($this->args['dev_mode'] === true) */) {
                                             $theField->enqueue();
+                                            //print_r($field['type']);
                                             //}
                                         }
 

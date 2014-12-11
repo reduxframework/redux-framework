@@ -6,7 +6,9 @@
         display: inline-block;
     }
 
-    .redux-slider-input, .redux-slider-select-one, .redux-slider-select-two {
+    .redux-slider-input,
+    .redux-slider-select-one,
+    .redux-slider-select-two {
         width: 100px !important;
         text-align: center;
     }
@@ -40,11 +42,16 @@
 @media screen and (max-width: 570px) {
     .redux-container-slider {
         text-align: center;
-        input, select, .redux-slider-label, .select2-container {
+
+        input,
+        select,
+        .redux-slider-label,
+        .select2-container {
             display: block !important;
             position: inherit;
             margin: 10px auto;
         }
+
         .redux-slider-container {
             margin-top: 3px;
             width: 80%;

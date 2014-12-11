@@ -1,9 +1,10 @@
 .redux-container-spacing {
-
-    select, .select_wrapper {
+    select,
+    .select_wrapper {
         width: 80px !important;
         float: left;
     }
+
     .field-spacing-input {
         margin-right: 10px;
         margin-bottom: 7px;
@@ -21,12 +22,14 @@
                 display: inline-block !important;
                 width: 70px !important;
             }
+
             .add-on {
                 padding: 7px 4px;
                 font-size: 16px;
                 line-height: 1.5;
             }
         }
+
         .select_wrapper {
             margin-top: 6px;
         }

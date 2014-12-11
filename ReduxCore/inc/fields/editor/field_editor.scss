@@ -4,18 +4,23 @@
         margin: 0;
         padding: 1px;
     }
-    input, textarea {
+
+    input,
+    textarea {
         margin: inherit;
     }
+
     textarea {
         border-style: none;
         border: 0;
         border-width: 0;
     }
+
     .wp-editor-container {
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
+
         textarea {
             -webkit-border-radius: 0;
             -moz-border-radius: 0;
@@ -23,6 +28,7 @@
             border-style: inherit;
         }
     }
+
     .quicktags-toolbar input {
         margin: 2px 1px 4px;
         line-height: 18px;
