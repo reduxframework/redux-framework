@@ -1,4 +1,4 @@
-.redux-group-tab {
+.redux-main {
     .form-table-section-indented {
         width: 95%;
         margin-left: 5%;
@@ -9,4 +9,11 @@
     h3 {
         margin-top: 10px;
     }
+    .form-table-section-indented > tbody > tr:first-child { 
+        display: none; 
+    }
+    .form-table-section-indented > tbody > tr:nth-last-child(2) { 
+        border-bottom: 0;
+    }
 }
+
