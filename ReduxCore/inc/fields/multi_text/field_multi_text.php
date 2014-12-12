@@ -98,12 +98,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-multi-text-css',
                     ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text.css',
+                    ReduxFramework::$_dir . 'inc/fields/multi_text',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                 
+                
+//                wp_enqueue_style(
+//                    'redux-field-multi-text-css',
+//                    ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text.css',
+//                    time(),
+//                    true
+//                );
             }
         }
     }

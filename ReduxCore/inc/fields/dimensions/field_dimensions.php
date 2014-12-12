@@ -226,12 +226,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-dimensions-css',
                     ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
+                    ReduxFramework::$_dir . 'inc/fields/dimensions',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                
+                
+//                wp_enqueue_style(
+//                    'redux-field-dimensions-css',
+//                    ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
+//                    time(),
+//                    true
+//                );
             }
 
             public function output() {

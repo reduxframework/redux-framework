@@ -118,12 +118,21 @@
                     true
                 );
 
-                wp_enqueue_style(
-                    'redux-field-link_color-js',
+                redux_enqueue_style(
+                    'redux-field-link_color-css',
                     ReduxFramework::$_url . 'inc/fields/link_color/field_link_color.css',
+                    ReduxFramework::$_dir . 'inc/fields/link_color',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                
+                
+//                wp_enqueue_style(
+//                    'redux-field-link_color-js',
+//                    ReduxFramework::$_url . 'inc/fields/link_color/field_link_color.css',
+//                    time(),
+//                    true
+//                );
             }
 
             public function output() {

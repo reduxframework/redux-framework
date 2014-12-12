@@ -220,12 +220,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-media-css',
                     ReduxFramework::$_url . 'inc/fields/media/field_media.css',
+                    ReduxFramework::$_dir . 'inc/fields/media',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                ); 
+                
+//                wp_enqueue_style(
+//                    'redux-field-media-css',
+//                    ReduxFramework::$_url . 'inc/fields/media/field_media.css',
+//                    time(),
+//                    true
+//                );
             }
         }
     }

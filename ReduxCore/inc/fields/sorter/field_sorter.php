@@ -195,13 +195,21 @@
             }
 
             function enqueue() {
-
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-sorder-css',
                     ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.css',
+                    ReduxFramework::$_dir . 'inc/fields/sorter',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                ); 
+                
+//                wp_enqueue_style(
+//                    'redux-field-sorder-css',
+//                    ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.css',
+//                    time(),
+//                    true
+//                );
 
                 wp_enqueue_script(
                     'redux-field-sorter-js',

@@ -110,12 +110,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-color_gradient-css',
                     ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient.css',
+                    ReduxFramework::$_dir . 'inc/fields/color_gradient',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                 
+                
+//                wp_enqueue_style(
+//                    'redux-field-color_gradient-css',
+//                    ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient.css',
+//                    time(),
+//                    true
+//                );
             }
         }
     }

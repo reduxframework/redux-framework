@@ -1,6 +1,9 @@
 # Redux Framework Changelog
 
 ## 3.3.9.16
+* Added     SASS compiler for fields.
+
+## 3.3.9.16
 * Updated:  select2 3.5.2
 
 ## 3.3.9.15

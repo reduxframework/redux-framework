@@ -213,12 +213,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-border-css',
                     ReduxFramework::$_url . 'inc/fields/border/field_border.css',
+                    ReduxFramework::$_dir . 'inc/fields/border',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                
+                
+//                wp_enqueue_style(
+//                    'redux-field-border-css',
+//                    ReduxFramework::$_url . 'inc/fields/border/field_border.css',
+//                    time(),
+//                    true
+//                );
             } //function
 
             public function output() {

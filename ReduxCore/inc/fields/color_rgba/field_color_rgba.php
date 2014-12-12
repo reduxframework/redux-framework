@@ -134,12 +134,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-color_rgba-css',
                     ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba.css',
+                    ReduxFramework::$_dir . 'inc/fields/color_rgba',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                 
+                
+//                wp_enqueue_style(
+//                    'redux-field-color_rgba-css',
+//                    ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba.css',
+//                    time(),
+//                    true
+//                );
             }
         }
     }

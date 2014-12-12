@@ -66,12 +66,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-switch-css',
                     ReduxFramework::$_url . 'inc/fields/switch/field_switch.css',
+                    ReduxFramework::$_dir . 'inc/fields/switch',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                
+                
+//                wp_enqueue_style(
+//                    'redux-field-switch-css',
+//                    ReduxFramework::$_url . 'inc/fields/switch/field_switch.css',
+//                    time(),
+//                    true
+//                );
             }
         }
     }

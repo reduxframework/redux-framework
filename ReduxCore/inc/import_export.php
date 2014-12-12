@@ -163,12 +163,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-import-export-css',
                     ReduxFramework::$_url . 'assets/css/import_export/import_export.css',
+                    ReduxFramework::$_dir . 'assets/css/import_export',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                  
+                
+//                wp_enqueue_style(
+//                    'redux-field-import-export-css',
+//                    ReduxFramework::$_url . 'assets/css/import_export/import_export.css',
+//                    time(),
+//                    true
+//                );
             }
 
             function link_options() {

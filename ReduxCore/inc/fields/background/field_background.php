@@ -115,7 +115,7 @@
 
                     echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[background-color]" id="' . $this->field['id'] . '-color" class="redux-color redux-background-input redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['background-color'] . '"  data-default-color="' . ( isset( $this->field['default']['background-color'] ) ? $this->field['default']['background-color'] : "" ) . '" />';
                     echo '<input type="hidden" class="redux-saved-color" id="' . $this->field['id'] . '-saved-color' . '" value="">';
-                    
+
                     if ( ! isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
                         $tChecked = "";
                         if ( $this->value['background-color'] == "transparent" ) {
@@ -356,12 +356,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-background-css',
                     ReduxFramework::$_url . 'inc/fields/background/field_background.css',
+                    ReduxFramework::$_dir . 'inc/fields/background',
+                    array(),
                     time(),
-                    true
+                    false
                 );
+
+//                wp_enqueue_style(
+//                    'redux-field-background-css',
+//                    ReduxFramework::$_url . 'inc/fields/background/field_background.css',
+//                    time(),
+//                    true
+//                );
             }
 
             public static function getCSS( $value = array() ) {

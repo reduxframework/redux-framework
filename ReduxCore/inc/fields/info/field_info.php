@@ -130,13 +130,21 @@
              * @return      void
              */
             public function enqueue() {
-
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-info-css',
                     ReduxFramework::$_url . 'inc/fields/info/field_info.css',
+                    ReduxFramework::$_dir . 'inc/fields/info',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                ); 
+                
+//                wp_enqueue_style(
+//                    'redux-field-info-css',
+//                    ReduxFramework::$_url . 'inc/fields/info/field_info.css',
+//                    time(),
+//                    true
+//                );
             }
         }
     }

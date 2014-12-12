@@ -241,12 +241,21 @@
                     true
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-slider-css',
                     ReduxFramework::$_url . 'inc/fields/slider/field_slider.css',
+                    ReduxFramework::$_dir . 'inc/fields/slider',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                  
+                
+//                wp_enqueue_style(
+//                    'redux-field-slider-css',
+//                    ReduxFramework::$_url . 'inc/fields/slider/field_slider.css',
+//                    time(),
+//                    true
+//                );
             }
 
             //function

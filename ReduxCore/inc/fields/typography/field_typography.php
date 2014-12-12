@@ -542,12 +542,21 @@
                     array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) )
                 );
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-typography-css',
                     ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
+                    ReduxFramework::$_dir . 'inc/fields/typography',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                 
+                
+//                wp_enqueue_style(
+//                    'redux-field-typography-css',
+//                    ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
+//                    time(),
+//                    true
+//                );
             }  //function
 
             /**

@@ -78,14 +78,21 @@
              * @since ReduxFramework 3.0.0
              */
             function enqueue() {
-
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-text-css',
                     ReduxFramework::$_url . 'inc/fields/text/field_text.css',
+                    ReduxFramework::$_dir . 'inc/fields/text',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                ); 
+                
+//                wp_enqueue_style(
+//                    'redux-field-text-css',
+//                    ReduxFramework::$_url . 'inc/fields/text/field_text.css',
+//                    time(),
+//                    true
+//                );
             }
-
         }
     }

@@ -94,12 +94,21 @@
              */
             public function enqueue() {
 
-                wp_enqueue_style(
+                redux_enqueue_style(
                     'redux-field-editor-css',
                     ReduxFramework::$_url . 'inc/fields/editor/field_editor.css',
+                    ReduxFramework::$_dir . 'inc/fields/editor',
+                    array(),
                     time(),
-                    true
-                );
+                    false
+                );                   
+                
+//                wp_enqueue_style(
+//                    'redux-field-editor-css',
+//                    ReduxFramework::$_url . 'inc/fields/editor/field_editor.css',
+//                    time(),
+//                    true
+//                );
 
                 wp_enqueue_script(
                     'redux-field-editor2-js',

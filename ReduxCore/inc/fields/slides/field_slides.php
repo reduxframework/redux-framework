@@ -242,12 +242,21 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
                 true
             );
 
-            wp_enqueue_style (
-                'redux-field-media-css', 
-                ReduxFramework::$_url . 'inc/fields/media/field_media.css', 
-                time (), 
-                true
-            );
+            redux_enqueue_style(
+                'redux-field-media-css',
+                ReduxFramework::$_url . 'inc/fields/media/field_media.css',
+                ReduxFramework::$_dir . 'inc/fields/media',
+                array(),
+                time(),
+                false
+            );             
+            
+//            wp_enqueue_style (
+//                'redux-field-media-css', 
+//                ReduxFramework::$_url . 'inc/fields/media/field_media.css', 
+//                time (), 
+//                true
+//            );
 
             wp_enqueue_script (
                 'redux-field-slides-js', 
@@ -257,12 +266,21 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
                 true
             );
 
-            wp_enqueue_style (
-                'redux-field-slides-css', 
-                ReduxFramework::$_url . 'inc/fields/slides/field_slides.css', 
-                time (), 
-                true
-            );
+            redux_enqueue_style(
+                'redux-field-slides-css',
+                ReduxFramework::$_url . 'inc/fields/slides/field_slides.css',
+                ReduxFramework::$_dir . 'inc/fields/slides',
+                array(),
+                time(),
+                false
+            );               
+            
+//            wp_enqueue_style (
+//                'redux-field-slides-css', 
+//                ReduxFramework::$_url . 'inc/fields/slides/field_slides.css', 
+//                time (), 
+//                true
+//            );
         }
     }
 
