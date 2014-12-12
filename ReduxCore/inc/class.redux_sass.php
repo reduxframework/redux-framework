@@ -35,7 +35,7 @@ if (!class_exists('reduxSassCompiler')) {
                 $scss->setImportPaths( self::$path );
 
                 if (self::$parent->args['dev_mode']) {
-                    //$scss->setFormatter ( "scss_formatter_compressed" );
+                    $scss->setFormatter ( "scss_formatter_compressed" );
                 }
 
                 $new_css = '';
