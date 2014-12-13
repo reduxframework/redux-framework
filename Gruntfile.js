@@ -284,63 +284,113 @@ module.exports = function( grunt ) {
                 core: ["ReduxCore/**/*.php"],
                 plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"]
             },
-            less: {
+            
+            sass: {
                 development: {
                     options: {
-                        paths: 'ReduxCore/'
+                        sourcemap: 'none',
+                        style: 'compressed',
+                        noCache: true
                     },
+                    
                     files: [{
-                        expand: true, // Enable dynamic expansion.
-                        cwd: 'ReduxCore/inc/fields', // Src matches are relative to this path.
-                        src: ['**/*.less'], // Actual pattern(s) to match.
-                        dest: 'ReduxCore/inc/fields', // Destination path prefix.
-                        ext: '.css' // Dest filepaths will have this extension.
-                    }]
+                        expand: true,                   // Enable dynamic expansion.
+                        cwd: 'ReduxCore/inc/fields',    // Src matches are relative to this path.
+                        src: ['**/*.scss'],             // Actual pattern(s) to match.
+                        dest: 'ReduxCore/inc/fields',   // Destination path prefix.
+                        ext: '.css'                     // Dest filepaths will have this extension.
+                    }]                    
                 },
-                extensions: {
-                    files: [{
-                        expand: true, // Enable dynamic expansion.
-                        cwd: 'ReduxCore/extensions/', // Src matches are relative to this path.
-                        src: ['**/*.less'], // Actual pattern(s) to match.
-                        dest: 'ReduxCore/extensions/', // Destination path prefix.
-                        ext: '.css' // Dest filepaths will have this extension.
-                    }]
-                },
+                
                 production: {
                     options: {
-                        compress: true,
-                        cleancss: true,
-                        ieCompat: true,
-                        relativeUrls: true,
-                        paths: 'ReduxCore/'
+                        sourcemap: 'none',
+                        style: 'compressed',
+                        noCache: true
                     },
+
                     files: {
-                        "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
-                        "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
-                        "ReduxCore/assets/css/color-picker/color-picker.css": ["ReduxCore/assets/css/color-picker/*.less"],
-                        "ReduxCore/assets/css/import_export/import_export.css": ["ReduxCore/assets/css/import_export/*.less"],
-                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.less"]
+                        //"ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
+                        "ReduxCore/assets/css/redux-admin.css": ["ReduxCore/assets/css/redux-admin.scss"],
+                        "ReduxCore/assets/css/color-picker/color-picker.css": ["ReduxCore/assets/css/color-picker/*.scss"],
+                        "ReduxCore/assets/css/import_export/import_export.css": ["ReduxCore/assets/css/import_export/*.scss"],
+                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.scss"]
 
                     }
                 },
+                
                 dist: {
                     options: {
-                        compress: true,
-                        cleancss: true,
-                        ieCompat: true,
-                        relativeUrls: true,
-                        report: 'gzip',
-                        paths: 'ReduxCore/'
+                        sourcemap: 'none',
+                        style: 'compressed',
+                        noCache: true
                     },
+                    
                     files: {
-                        "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
-                        "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"]
+                        //"ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
+                        "ReduxCore/assets/css/redux-admin.css": ["ReduxCore/assets/css/redux-admin.scss"]
                     }
+                    
                 }
             },
-            recess: {
+            
+            less: {
+//                development: {
+//                    options: {
+//                        paths: 'ReduxCore/'
+//                    },
+//                    files: [{
+//                        expand: true, // Enable dynamic expansion.
+//                        cwd: 'ReduxCore/inc/fields', // Src matches are relative to this path.
+//                        src: ['**/*.less'], // Actual pattern(s) to match.
+//                        dest: 'ReduxCore/inc/fields', // Destination path prefix.
+//                        ext: '.css' // Dest filepaths will have this extension.
+//                    }]
+//                },
+//                extensions: {
+//                    files: [{
+//                        expand: true, // Enable dynamic expansion.
+//                        cwd: 'ReduxCore/extensions/', // Src matches are relative to this path.
+//                        src: ['**/*.less'], // Actual pattern(s) to match.
+//                        dest: 'ReduxCore/extensions/', // Destination path prefix.
+//                        ext: '.css' // Dest filepaths will have this extension.
+//                    }]
+//                },
+//                production: {
+//                    options: {
+//                        compress: true,
+//                        cleancss: true,
+//                        ieCompat: true,
+//                        relativeUrls: true,
+//                        paths: 'ReduxCore/'
+//                    },
+//                    files: {
+//                        "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
+//                        "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"],
+//                        "ReduxCore/assets/css/color-picker/color-picker.css": ["ReduxCore/assets/css/color-picker/*.less"],
+//                        "ReduxCore/assets/css/import_export/import_export.css": ["ReduxCore/assets/css/import_export/*.less"],
+//                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.less"]
+//
+//                    }
+                //},
+//                dist: {
+//                    options: {
+//                        compress: true,
+//                        cleancss: true,
+//                        ieCompat: true,
+//                        relativeUrls: true,
+//                        report: 'gzip',
+//                        paths: 'ReduxCore/'
+//                    },
+//                    files: {
+//                        "ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
+//                        "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"]
+//                    }
+//                }
+            },
+            scsslint: {
                 dist: {
-                    src: ['ReduxCore/assets/css/admin.less']
+                    allFiles: ['ReduxCore/assets/css/redux-admin.scss']
                 }
             }
         }
@@ -353,13 +403,15 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-checktextdomain' );
     grunt.loadNpmTasks( 'grunt-contrib-jshint' );
     grunt.loadNpmTasks( 'grunt-contrib-less' );
+    grunt.loadNpmTasks( 'grunt-contrib-sass' );
     grunt.loadNpmTasks( 'grunt-contrib-uglify' );
     grunt.loadNpmTasks( 'grunt-contrib-watch' );
     grunt.loadNpmTasks( 'grunt-contrib-concat' );
     grunt.loadNpmTasks( 'grunt-phpdocumentor' );
     grunt.loadNpmTasks( 'grunt-gh-pages' );
     grunt.loadNpmTasks( "grunt-phplint" );
-    grunt.loadNpmTasks( 'grunt-recess' );
+    //grunt.loadNpmTasks( 'grunt-recess' );
+    grunt.loadNpmTasks('grunt-scss-lint');
 
     grunt.registerTask(
         'langUpdate', [
@@ -373,7 +425,7 @@ module.exports = function( grunt ) {
     // Default task(s).
     grunt.registerTask(
         'default',
-        ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', "less:production", "less:development", "less:extensions"]
+        ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', "sass:production", "sass:development"]
     );
     grunt.registerTask( 'travis', ['jshint', 'lintPHP'] );
 
@@ -384,9 +436,11 @@ module.exports = function( grunt ) {
     grunt.registerTask( 'watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin'] );
 
     grunt.registerTask( "lintPHP", ["phplint:plugin", "phplint:core"] );
-    grunt.registerTask( "lintLESS", ["recess:dist"] );
-    grunt.registerTask( "compileCSS", ["less:production", "less:development", "less:extensions"] );
+    //grunt.registerTask( "lintLESS", ["recess:dist"] );
+    grunt.registerTask( "compileCSS", ["sass:production", "sass:development"] );
     grunt.registerTask( 'compileJS', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor'] );
     grunt.registerTask( 'compileTestJS', ['jshint', 'concat:core', 'concat:vendor'] );
+    
+    grunt.registerTask('lintSCSS', ['scsslint']);
 
 };

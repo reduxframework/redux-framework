@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.17';
+            public static $_version = '3.3.9.18';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -1670,21 +1670,30 @@
                     wp_enqueue_script( 'select2-js' );
                 }
 
-                wp_register_style(
-                    'redux-css',
-                    self::$_url . 'assets/css/redux.css',
+                redux_enqueue_style(
+                    'redux-admin-css',
+                    self::$_url . 'assets/css/redux-admin.css',
+                    self::$_dir . 'assets/css/',
                     array( 'farbtastic' ),
-                    filemtime( self::$_dir . 'assets/css/redux.css' ),
+                    time(),
                     'all'
-                );
-
-                wp_register_style(
-                    'admin-css',
-                    self::$_url . 'assets/css/admin.css',
-                    array( 'farbtastic' ),
-                    filemtime( self::$_dir . 'assets/css/admin.css' ),
-                    'all'
-                );
+                );                  
+                
+//                wp_register_style(
+//                    'redux-css',
+//                    self::$_url . 'assets/css/redux.css',
+//                    array( 'farbtastic' ),
+//                    filemtime( self::$_dir . 'assets/css/redux.css' ),
+//                    'all'
+//                );
+//
+//                wp_register_style(
+//                    'admin-css',
+//                    self::$_url . 'assets/css/admin.css',
+//                    array( 'farbtastic' ),
+//                    filemtime( self::$_dir . 'assets/css/admin.css' ),
+//                    'all'
+//                );
 
                 wp_register_style(
                     'redux-elusive-icon',
@@ -1832,7 +1841,7 @@
                 // Embed the compress version unless in dev mode
                 // dev_mode = true
                 if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] == true ) {
-                    wp_enqueue_style( 'admin-css' );
+                    //wp_enqueue_style( 'admin-css' );
                     wp_register_script(
                         'redux-vendor',
                         self::$_url . 'assets/js/vendor.min.js',
@@ -1843,7 +1852,7 @@
 
                     // dev_mode - false
                 } else {
-                    wp_enqueue_style( 'redux-css' );
+                    //wp_enqueue_style( 'redux-css' );
                 }
 
                 $depArray = array( 'jquery', 'qtip-js', 'serializeForm-js', );

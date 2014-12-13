@@ -6,12 +6,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.select = redux.field_objects.select || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.select.init();
-        }
-    );
-
     redux.field_objects.select.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( '.redux-container-select:visible' );
