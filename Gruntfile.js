@@ -277,6 +277,7 @@ module.exports = function( grunt ) {
                 },
                 generate: {}
             },
+            
             phplint: {
                 options: {
                     swapPath: './'
@@ -284,7 +285,7 @@ module.exports = function( grunt ) {
                 core: ["ReduxCore/**/*.php"],
                 plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"]
             },
-            
+       
             sass: {
                 development: {
                     options: {
@@ -310,11 +311,10 @@ module.exports = function( grunt ) {
                     },
 
                     files: {
-                        //"ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
-                        "ReduxCore/assets/css/redux-admin.css": ["ReduxCore/assets/css/redux-admin.scss"],
-                        "ReduxCore/assets/css/color-picker/color-picker.css": ["ReduxCore/assets/css/color-picker/*.scss"],
-                        "ReduxCore/assets/css/import_export/import_export.css": ["ReduxCore/assets/css/import_export/*.scss"],
-                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.scss"]
+                        "ReduxCore/assets/css/redux-admin.css":                                         ["ReduxCore/assets/css/redux-admin.scss"],
+                        "ReduxCore/assets/css/color-picker/color-picker.css":                           ["ReduxCore/assets/css/color-picker/*.scss"],
+                        "ReduxCore/assets/css/import_export/import_export.css":                         ["ReduxCore/assets/css/import_export/*.scss"],
+                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css":  ["ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.scss"]
 
                     }
                 },
@@ -327,14 +327,13 @@ module.exports = function( grunt ) {
                     },
                     
                     files: {
-                        //"ReduxCore/assets/css/redux.css": ["ReduxCore/inc/fields/**/*.less", "ReduxCore/extensions/**/*.less", "ReduxCore/assets/css/admin.less", "ReduxCore/assets/css/import_export/*.less", "ReduxCore/assets/css/color-picker/*.less"],
                         "ReduxCore/assets/css/redux-admin.css": ["ReduxCore/assets/css/redux-admin.scss"]
                     }
                     
                 }
             },
             
-            less: {
+//            less: {
 //                development: {
 //                    options: {
 //                        paths: 'ReduxCore/'
@@ -387,7 +386,7 @@ module.exports = function( grunt ) {
 //                        "ReduxCore/assets/css/admin.css": ["ReduxCore/assets/css/admin.less"]
 //                    }
 //                }
-            },
+//            },
             scsslint: {
                 dist: {
                     allFiles: ['ReduxCore/assets/css/redux-admin.scss']
@@ -402,7 +401,6 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-wp-i18n' );
     grunt.loadNpmTasks( 'grunt-checktextdomain' );
     grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-    grunt.loadNpmTasks( 'grunt-contrib-less' );
     grunt.loadNpmTasks( 'grunt-contrib-sass' );
     grunt.loadNpmTasks( 'grunt-contrib-uglify' );
     grunt.loadNpmTasks( 'grunt-contrib-watch' );
@@ -410,8 +408,8 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-phpdocumentor' );
     grunt.loadNpmTasks( 'grunt-gh-pages' );
     grunt.loadNpmTasks( "grunt-phplint" );
+    //grunt.loadNpmTasks( 'grunt-contrib-less' );    
     //grunt.loadNpmTasks( 'grunt-recess' );
-    grunt.loadNpmTasks('grunt-scss-lint');
 
     grunt.registerTask(
         'langUpdate', [

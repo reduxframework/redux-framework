@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.19';
+            public static $_version = '3.3.9.20';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -1670,22 +1670,22 @@
                     wp_enqueue_script( 'select2-js' );
                 }
 
-//                redux_enqueue_style(
-//                    'redux-admin-css',
-//                    self::$_url . 'assets/css/redux-admin.css',
-//                    self::$_dir . 'assets/css/',
-//                    array( 'farbtastic' ),
-//                    time(),
-//                    'all'
-//                );                  
-                
-                wp_enqueue_style(
-                    'redux-css',
-                    self::$_url . 'assets/css/redux.css',
+                redux_enqueue_style(
+                    'redux-admin-css',
+                    self::$_url . 'assets/css/redux-admin.css',
+                    self::$_dir . 'assets/css/',
                     array( 'farbtastic' ),
-                    filemtime( self::$_dir . 'assets/css/redux.css' ),
+                    time(),
                     'all'
-                );
+                );                  
+                
+//                wp_enqueue_style(
+//                    'redux-css',
+//                    self::$_url . 'assets/css/redux.css',
+//                    array( 'farbtastic' ),
+//                    filemtime( self::$_dir . 'assets/css/redux.css' ),
+//                    'all'
+//                );
 //
 //                wp_register_style(
 //                    'admin-css',

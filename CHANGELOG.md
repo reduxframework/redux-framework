@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.20
+* Fixed:    redux-admin scss images converted to base64     
+
 ## 3.3.9.17
 * Added     SASS compiler for admin CSS.
 * Added     SASS to CSS for grunt compiler.
