@@ -45,7 +45,7 @@ if (!class_exists('reduxSassCompiler')) {
 
                 if ($new_css != '') {
                     if (self::$parent->args['output_sass']) {
-                        echo '<style type="text/css" id="redux_framework">' . $new_css . '</style>';
+                        echo '<style type="text/css" id="redux-' . self::$parent->args['opt_name'] . '">' . $new_css . '</style>';
                     } else {
                         Redux_Functions::initWpFilesystem();
 
