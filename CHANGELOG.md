@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.21
+* Fixed:    SASS compile under multi-instance outputting incorrect CSS file
+
 ## 3.3.9.20
 * Fixed:    redux-admin scss images converted to base64     
 
