@@ -164,6 +164,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-import-export-css',
                     ReduxFramework::$_url . 'assets/css/import_export/import_export.css',
                     ReduxFramework::$_dir . 'assets/css/import_export',

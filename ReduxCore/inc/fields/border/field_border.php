@@ -214,6 +214,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-border-css',
                     ReduxFramework::$_url . 'inc/fields/border/field_border.css',
                     ReduxFramework::$_dir . 'inc/fields/border',

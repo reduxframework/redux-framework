@@ -196,6 +196,7 @@
 
             function enqueue() {
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-sorder-css',
                     ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.css',
                     ReduxFramework::$_dir . 'inc/fields/sorter',

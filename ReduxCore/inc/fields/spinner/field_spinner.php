@@ -133,6 +133,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-spinner-css',
                     ReduxFramework::$_url . 'inc/fields/spinner/field_spinner.css',
                     ReduxFramework::$_dir . 'inc/fields/spinner',

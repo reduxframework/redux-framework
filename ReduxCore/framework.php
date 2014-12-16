@@ -424,8 +424,6 @@
                     }
                 }
 
-                reduxSassCompiler::init($this);
-                
                 /**
                  * Loaded hook
                  * action 'redux/loaded'
@@ -1671,6 +1669,7 @@
                 }
 
                 redux_enqueue_style(
+                    $this,
                     'redux-admin-css',
                     self::$_url . 'assets/css/redux-admin.css',
                     self::$_dir . 'assets/css/',
@@ -1791,6 +1790,7 @@
                 ) {
 
                     redux_enqueue_style(
+                        $this,
                         'redux-color-picker-css',
                         ReduxFramework::$_url . 'assets/css/color-picker/color-picker.css',
                         ReduxFramework::$_dir . 'assets/css/color-picker',
@@ -1928,7 +1928,7 @@
                 }
 
                 if ($this->args['use_sass']) {
-                    reduxSassCompiler::compile_sass();
+                    reduxSassCompiler::compile_sass($this);
 
                     wp_enqueue_style(
                         'redux-sass-compile-css', 

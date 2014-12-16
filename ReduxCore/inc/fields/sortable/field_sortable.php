@@ -132,6 +132,7 @@
 
             function enqueue() {
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-sortable-css',
                     ReduxFramework::$_url . 'inc/fields/sortable/field_sortable.css',
                     ReduxFramework::$_dir . 'inc/fields/sortable',

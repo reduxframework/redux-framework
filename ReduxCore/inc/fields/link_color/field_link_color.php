@@ -119,6 +119,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-link_color-css',
                     ReduxFramework::$_url . 'inc/fields/link_color/field_link_color.css',
                     ReduxFramework::$_dir . 'inc/fields/link_color',

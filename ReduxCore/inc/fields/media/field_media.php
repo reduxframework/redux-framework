@@ -221,6 +221,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-media-css',
                     ReduxFramework::$_url . 'inc/fields/media/field_media.css',
                     ReduxFramework::$_dir . 'inc/fields/media',

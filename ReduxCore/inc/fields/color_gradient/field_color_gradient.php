@@ -111,6 +111,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-color_gradient-css',
                     ReduxFramework::$_url . 'inc/fields/color_gradient/field_color_gradient.css',
                     ReduxFramework::$_dir . 'inc/fields/color_gradient',

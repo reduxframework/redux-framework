@@ -543,6 +543,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-typography-css',
                     ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
                     ReduxFramework::$_dir . 'inc/fields/typography',

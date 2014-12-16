@@ -79,6 +79,7 @@
 //                );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-date-css',
                     ReduxFramework::$_url . 'inc/fields/date/field_date.css',
                     ReduxFramework::$_dir . 'inc/fields/date',

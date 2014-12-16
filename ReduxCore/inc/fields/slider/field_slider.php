@@ -242,6 +242,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-slider-css',
                     ReduxFramework::$_url . 'inc/fields/slider/field_slider.css',
                     ReduxFramework::$_dir . 'inc/fields/slider',

@@ -227,6 +227,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-dimensions-css',
                     ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
                     ReduxFramework::$_dir . 'inc/fields/dimensions',

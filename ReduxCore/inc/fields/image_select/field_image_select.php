@@ -199,6 +199,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-image-select-css',
                     ReduxFramework::$_url . 'inc/fields/image_select/field_image_select.css',
                     ReduxFramework::$_dir . 'inc/fields/image_select',

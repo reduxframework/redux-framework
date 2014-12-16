@@ -135,6 +135,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-color_rgba-css',
                     ReduxFramework::$_url . 'inc/fields/color_rgba/field_color_rgba.css',
                     ReduxFramework::$_dir . 'inc/fields/color_rgba',

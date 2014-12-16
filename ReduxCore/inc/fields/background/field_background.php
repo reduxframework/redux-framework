@@ -357,6 +357,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-background-css',
                     ReduxFramework::$_url . 'inc/fields/background/field_background.css',
                     ReduxFramework::$_dir . 'inc/fields/background',

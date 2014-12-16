@@ -243,6 +243,7 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             );
 
             redux_enqueue_style(
+                $this->parent,
                 'redux-field-media-css',
                 ReduxFramework::$_url . 'inc/fields/media/field_media.css',
                 ReduxFramework::$_dir . 'inc/fields/media',
@@ -267,6 +268,7 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             );
 
             redux_enqueue_style(
+                $this->parent,
                 'redux-field-slides-css',
                 ReduxFramework::$_url . 'inc/fields/slides/field_slides.css',
                 ReduxFramework::$_dir . 'inc/fields/slides',

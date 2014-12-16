@@ -103,6 +103,7 @@ if ( ! class_exists( 'ReduxFramework_ace_editor' ) ) {
         public function enqueue() {
 
             redux_enqueue_style(
+                $this->parent,
                 'redux-field-ace-editor-css',
                 ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.css',
                 ReduxFramework::$_dir . 'inc/fields/ace_editor',

@@ -79,6 +79,7 @@
              */
             function enqueue() {
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-text-css',
                     ReduxFramework::$_url . 'inc/fields/text/field_text.css',
                     ReduxFramework::$_dir . 'inc/fields/text',

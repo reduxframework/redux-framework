@@ -135,6 +135,7 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
         public function enqueue () {
 
             redux_enqueue_style(
+                $this->parent,
                 'redux-field-checkbox-css',
                 ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css',
                 ReduxFramework::$_dir . 'inc/fields/checkbox',

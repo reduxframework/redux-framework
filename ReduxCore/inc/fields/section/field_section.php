@@ -102,6 +102,7 @@
 
             public function enqueue() {
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-section-css',
                     ReduxFramework::$_url . 'inc/fields/section/field_section.css',
                     ReduxFramework::$_dir . 'inc/fields/section',

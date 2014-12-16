@@ -286,6 +286,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-spacing-css',
                     ReduxFramework::$_url . 'inc/fields/spacing/field_spacing.css',
                     ReduxFramework::$_dir . 'inc/fields/spacing',

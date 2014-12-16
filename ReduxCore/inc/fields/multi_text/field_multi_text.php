@@ -99,6 +99,7 @@
                 );
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-multi-text-css',
                     ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text.css',
                     ReduxFramework::$_dir . 'inc/fields/multi_text',

@@ -95,6 +95,7 @@
             public function enqueue() {
 
                 redux_enqueue_style(
+                    $this->parent,
                     'redux-field-editor-css',
                     ReduxFramework::$_url . 'inc/fields/editor/field_editor.css',
                     ReduxFramework::$_dir . 'inc/fields/editor',
