@@ -203,6 +203,9 @@
                 // Pass parent pointer to function helper.
                 Redux_Functions::$_parent = $this;
 
+                //set redux upload folder
+                $this->set_redux_content();
+                
                 // Set values
                 $this->set_default_args();
                 $this->args = wp_parse_args( $args, $this->args );
@@ -300,7 +303,7 @@
                     $this->filesystem = new Redux_Filesystem( $this );
 
                     //set redux upload folder
-                    $this->set_redux_content();
+                    //$this->set_redux_content();
 
                     // Set the default values
                     $this->_default_cleanup();
@@ -546,8 +549,15 @@
                     'dev_mode'                  => true,
                     'system_info'               => false,
                     'disable_tracking'          => false,
-                    'use_sass'                  => true,
-                    'output_sass'               => false,
+                    'sass' => array(
+                        'enabled'       => true,
+                        'page_output'   => false,
+                        'output_url'   => self::$_upload_url // ReduxFramework::$_upload_url
+                    )
+                    
+//                    'use_sass'                  => true,
+//                    'output_sass'               => false,
+//                    'output_file'   
                 );
             }
 
@@ -1927,12 +1937,12 @@
                     }
                 }
 
-                if ($this->args['use_sass']) {
+                if ($this->args['sass']['enabled']) {
                     reduxSassCompiler::compile_sass($this);
 
                     wp_enqueue_style(
                         'redux-sass-compile-css', 
-                        ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css', 
+                        $this->args['sass']['output_url'] . $this->args['opt_name'] .  '-redux.css', 
                         array(), 
                         time(), 
                         'all'
