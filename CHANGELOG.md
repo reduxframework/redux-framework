@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.22
+* Fixed:    #1904 - select_image field not displaying saved value on page reload.
+
 ## 3.3.9.21
 * Fixed:    SASS compile under multi-instance outputting incorrect CSS file
 

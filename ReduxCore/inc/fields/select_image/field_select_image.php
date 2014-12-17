@@ -45,7 +45,8 @@
                         $name        = explode( ".", $this->value );
                         $name        = str_replace( '.' . end( $name ), '', $this->value );
                         $name        = basename( $name );
-                        $this->value = trim( $name );
+                        //$this->value = trim( $name );
+                        $filename = trim($name);
                     }
 
                     // beancounter
@@ -93,7 +94,7 @@
                         }
 
                         // Set the selected entry
-                        $selected = selected( $this->value, $v['alt'], false );
+                        $selected = selected( $this->value, $v['img'], false );
 
                         // If selected returns something other than a blank space, we
                         // found our default/saved name.  Save the array number in a
