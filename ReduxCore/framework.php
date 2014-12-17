@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.22';
+            public static $_version = '3.3.9.23';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -203,6 +203,8 @@
                 // Pass parent pointer to function helper.
                 Redux_Functions::$_parent = $this;
 
+                $this->filesystem = new Redux_Filesystem( $this );
+                
                 //set redux upload folder
                 $this->set_redux_content();
                 
@@ -300,7 +302,7 @@
                      */
                     do_action( 'redux/construct', $this );
 
-                    $this->filesystem = new Redux_Filesystem( $this );
+                    //$this->filesystem = new Redux_Filesystem( $this );
 
                     //set redux upload folder
                     //$this->set_redux_content();
@@ -552,7 +554,7 @@
                     'sass' => array(
                         'enabled'       => true,
                         'page_output'   => false,
-                        'output_url'   => self::$_upload_url // ReduxFramework::$_upload_url
+//                        'output_url'   => self::$_upload_dir // ReduxFramework::$_upload_url
                     )
                     
 //                    'use_sass'                  => true,
@@ -1942,7 +1944,7 @@
 
                     wp_enqueue_style(
                         'redux-sass-compile-css', 
-                        $this->args['sass']['output_url'] . $this->args['opt_name'] .  '-redux.css', 
+                        ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css', 
                         array(), 
                         time(), 
                         'all'

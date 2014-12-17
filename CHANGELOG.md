@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.23
+* Removed   Argument for SASS compile file output location removed.  Didn't work, too much trouble.
+
 ## 3.3.9.22
 * Fixed:    #1904 - select_image field not displaying saved value on page reload.
 
