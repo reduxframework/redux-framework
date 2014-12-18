@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.24
+* Fixed     #1909 - malformed DIV class HTML in slider field.
+
 ## 3.3.9.23
 * Removed   Argument for SASS compile file output location removed.  Didn't work, too much trouble.
 
