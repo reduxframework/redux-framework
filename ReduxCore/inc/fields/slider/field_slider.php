@@ -350,19 +350,20 @@
                 }
 
                 // DIV output
-                echo '<div ' . '
-                    class="redux-slider-container"' . ' ' . $this->field['class'] . '
-                    id="' . $fieldID . '" ' . '
-                    data-id="' . $fieldID . '" ' . '
-                    data-min="' . $this->field['min'] . '" ' . '
-                    data-max="' . $this->field['max'] . '" ' . '
-                    data-step="' . $this->field['step'] . '" ' . '
-                    data-handles="' . $this->field['handles'] . '" ' . '
-                    data-display="' . $this->field['display_value'] . '" ' . '
-                    data-rtl="' . is_rtl() . '" ' . '
-                    data-float-mark="' . $this->field['float_mark'] . '" ' . '
-                    data-resolution="' . $this->field['resolution'] . '" ' . $html . '>' . '
-                    </div>';
+                echo 
+                '<div
+                    class="redux-slider-container ' . $this->field['class'] . '"
+                    id="' . $fieldID . '"
+                    data-id="' . $fieldID . '"
+                    data-min="' . $this->field['min'] . '"
+                    data-max="' . $this->field['max'] . '"
+                    data-step="' . $this->field['step'] . '"
+                    data-handles="' . $this->field['handles'] . '"
+                    data-display="' . $this->field['display_value'] . '"
+                    data-rtl="' . is_rtl() . '"
+                    data-float-mark="' . $this->field['float_mark'] . '"
+                    data-resolution="' . $this->field['resolution'] . '" ' . $html . '>
+                </div>';
 
                 // Double slider output
                 if ( true == $twoHandles ) {
