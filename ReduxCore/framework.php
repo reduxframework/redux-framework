@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.24';
+            public static $_version = '3.3.9.25';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -552,7 +552,7 @@
                     'system_info'               => false,
                     'disable_tracking'          => false,
                     'sass' => array(
-                        'enabled'       => true,
+                        'enabled'       => false,
                         'page_output'   => false,
 //                        'output_url'   => self::$_upload_dir // ReduxFramework::$_upload_url
                     )

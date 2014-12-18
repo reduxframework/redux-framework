@@ -82,7 +82,7 @@ if (!function_exists ( 'redux_enqueue_style')) {
         } else {
             wp_enqueue_style(
                 $handle,
-                $src,
+                $css_src,
                 $deps,
                 $ver,
                 $media

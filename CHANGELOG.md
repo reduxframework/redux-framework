@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.25
+* Fixed:    PHP errors when disabling SASS.
+
 ## 3.3.9.24
 * Fixed     #1909 - malformed DIV class HTML in slider field.
 
