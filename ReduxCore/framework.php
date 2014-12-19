@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.25';
+            public static $_version = '3.3.9.26';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -1942,13 +1942,15 @@
                 if ($this->args['sass']['enabled']) {
                     reduxSassCompiler::compile_sass($this);
 
-                    wp_enqueue_style(
-                        'redux-sass-compile-css', 
-                        ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css', 
-                        array(), 
-                        time(), 
-                        'all'
-                    );
+                    if (!$this->args['sass']['page_output']) {
+                        wp_enqueue_style(
+                            'redux-css', 
+                            ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css', 
+                            array(), 
+                            time(), 
+                            'all'
+                        );
+                    }
                 }
                 
                 $this->localize_data['required']       = $this->required;
