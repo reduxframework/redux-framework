@@ -92,14 +92,14 @@
                         '_override_values'
                     ), 100 );
 
-                    if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
+                    //if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
                         if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
                             add_action( 'customize_register', array(
                                 $this,
                                 '_register_customizer_controls'
                             ) ); // Create controls
                         }
-                    }
+                    //}
 
                     add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
                 }
