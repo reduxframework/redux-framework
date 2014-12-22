@@ -1634,7 +1634,7 @@
                 $min                      = Redux_Functions::isMin();
 
                 // Select2 business.  Fields:  Background, Border, Dimensions, Select, Slider, Typography
-                if ( Redux_Helpers::isFieldInUseByType( $this->fields, array(
+                $field_arr = array(
                     'background',
                     'border',
                     'dimensions',
@@ -1645,9 +1645,9 @@
                     'typography',
                     'color_scheme',
                     'css_layout'
-
-                ) )
-                ) {
+                );
+                
+                if ( Redux_Helpers::isFieldInUseByType( $this->fields, $field_arr ) ) {
 
                     // select2 CSS
                     wp_register_style(

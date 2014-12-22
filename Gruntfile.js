@@ -62,6 +62,7 @@ module.exports = function( grunt ) {
                     },
                     files: {
                         'ReduxCore/assets/js/redux.min.js': ['ReduxCore/assets/js/redux.min.js'],
+                        'ReduxCore/assets/js/vendor/spectrum/redux-spectrum.min.js': ['ReduxCore/assets/js/vendor/spectrum/redux-spectrum.js'],
                         'ReduxCore/assets/js/vendor/redux.select2.sortable.min.js': ['ReduxCore/assets/js/vendor/redux.select2.sortable.js'],
                         'ReduxCore/assets/js/import_export/import_export.min.js': ['ReduxCore/assets/js/import_export/import_export.js'],
                         'ReduxCore/assets/js/media/media.min.js': ['ReduxCore/assets/js/media/media.js'],
