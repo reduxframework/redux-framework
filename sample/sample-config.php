@@ -687,9 +687,12 @@
                         array(
                             'id'       => 'opt-color-rgba',
                             'type'     => 'color_rgba',
-                            'title'    => __( 'Color RGBA - BETA', 'redux-framework-demo' ),
-                            'subtitle' => __( 'Gives you the RGBA color. Still quite experimental. Use at your own risk.', 'redux-framework-demo' ),
-                            'default'  => array( 'color' => '#dd9933', 'alpha' => '1.0' ),
+                            'title'    => __( 'Color RGBA', 'redux-framework-demo' ),
+                            'subtitle' => __( 'Gives you the RGBA color.', 'redux-framework-demo' ),
+                            'default'  => array( 
+                                'color' => '#7e33dd', 
+                                'alpha' => '.8' 
+                            ),
                             'output'   => array( 'body' ),
                             'mode'     => 'background',
                             'validate' => 'colorrgba',
