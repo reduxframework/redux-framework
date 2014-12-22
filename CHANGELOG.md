@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.28
+* Modified: #1922 - Filesystem output function.
+
 ## 3.3.9.27
 * Fixed:    Added PHP 5.2 support (ugh!) for SASS compiler.
 
