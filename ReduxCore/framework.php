@@ -553,7 +553,7 @@
                     'disable_tracking'          => false,
                     'sass' => array(
                         'enabled'       => true,
-                        'page_output'   => false,
+                        'page_output'   => true,
 //                        'output_url'   => self::$_upload_dir // ReduxFramework::$_upload_url
                     )
                     
