@@ -44,12 +44,15 @@ if (!class_exists('reduxSassCompiler')) {
                     if ($parent->args['sass']['page_output']) {
                         echo '<style type="text/css" id="redux-' . $parent->args['opt_name'] . '">' . $new_css . '</style>';
                     } else {
-                        Redux_Functions::initWpFilesystem();
+                        //Redux_Functions::initWpFilesystem();
 
-                        global $wp_filesystem;
+                        //global $wp_filesystem;
+                        $filesystem = $parent->filesystem;
 
                         $css_file   = Redux_Helpers::cleanFilePath( ReduxFramework::$_upload_dir . $parent->args['opt_name'] .  '-redux.css');
-                        $ret_val    = $wp_filesystem->put_contents($css_file, $new_css, FS_CHMOD_FILE);
+                        
+                        //$ret_val    = $wp_filesystem->put_contents($css_file, $new_css, FS_CHMOD_FILE);
+                        $ret_val    = $filesystem->execute('put_contents', $css_file, array('content' => $new_css));
                     }
                 }
             }
