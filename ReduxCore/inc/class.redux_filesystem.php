@@ -45,7 +45,7 @@
 
                 $url = wp_nonce_url( $base );
 
-                if ( ! isset( $this->creds ) ) {
+                if ( ! isset( $this->creds ) || empty( $this->creds ) ) {
                     if ( false === ( $this->creds = request_filesystem_credentials( $url, 'direct', false, false ) ) ) {
                         $res = $this->do_action( $action, $file, $params );
                         if ( $res ) {
