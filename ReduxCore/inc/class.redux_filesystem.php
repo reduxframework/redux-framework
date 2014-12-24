@@ -99,6 +99,8 @@
 
                 if ( defined( 'FS_CHMOD_FILE' ) ) {
                     $chmod = FS_CHMOD_FILE;
+                } else {
+                    $chmod = 0644;
                 }
 
                 //$target_dir = $wp_filesystem->find_folder( dirname( $file ) );
