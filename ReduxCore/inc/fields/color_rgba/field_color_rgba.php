@@ -181,7 +181,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             // Spectrum colour picker
             wp_enqueue_script(
                 'redux-spectrum-js', 
-                ReduxFramework::$_url . 'assets/js/vendor/redux-spectrum' . $min . '.js', 
+                ReduxFramework::$_url . 'assets/js/vendor/spectrum/redux-spectrum' . $min . '.js', 
                 array('jquery'), 
                 time(), 
                 true
@@ -190,7 +190,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             // Spectrum CSS
             wp_enqueue_style(
                 'redux-spectrum-css', 
-                ReduxFramework::$_url . 'assets/css/vendor/redux-spectrum.css',
+                ReduxFramework::$_url . 'assets/css/vendor/spectrum/redux-spectrum.css',
                 array(),
                 time(), 
                 'all'
