@@ -7,7 +7,7 @@ module.exports = function( grunt ) {
     grunt.initConfig(
         {
             pkg: grunt.file.readJSON( 'package.json' ),
-
+    
             concat: {
                 options: {
                     separator: ';'
@@ -292,7 +292,7 @@ module.exports = function( grunt ) {
                     options: {
                         sourcemap: 'none',
                         style: 'compressed',
-                        noCache: true
+                        noCache: true,
                     },
                     
                     files: [{
@@ -392,7 +392,7 @@ module.exports = function( grunt ) {
                 dist: {
                     allFiles: ['ReduxCore/assets/css/redux-admin.scss']
                 }
-            }
+            },
         }
     );
 

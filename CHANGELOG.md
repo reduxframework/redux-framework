@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.3.9.30
+* Modified: #1930 - reorder 'psedo-class of link_color field.  Thanks @freddessaint
+* Modified: SASS compiler outputs to page by default.  Faster.
+* Fixed:    #1927 - Incorrect dir path to spectrum library in color_rgba field corrected.
+
 ## 3.3.9.29
 * Modified: color_rgba field now usees spectrum color picker.  minicolors removed.  Just...too buggy.
 
