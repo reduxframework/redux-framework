@@ -144,16 +144,16 @@
                     $style[] = 'color:' . $this->value['regular'] . ';';
                 }
 
+                if ( ! empty( $this->value['visited'] ) && $this->field['visited'] === true && $this->field['default']['visited'] !== false ) {
+                    $style['visited'] = 'color:' . $this->value['visited'] . ';';
+                }
+
                 if ( ! empty( $this->value['hover'] ) && $this->field['hover'] === true && $this->field['default']['hover'] !== false ) {
                     $style['hover'] = 'color:' . $this->value['hover'] . ';';
                 }
 
                 if ( ! empty( $this->value['active'] ) && $this->field['active'] === true && $this->field['default']['active'] !== false ) {
                     $style['active'] = 'color:' . $this->value['active'] . ';';
-                }
-
-                if ( ! empty( $this->value['visited'] ) && $this->field['visited'] === true && $this->field['default']['visited'] !== false ) {
-                    $style['visited'] = 'color:' . $this->value['visited'] . ';';
                 }
 
                 if ( ! empty( $style ) ) {
