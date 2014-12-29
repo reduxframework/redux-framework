@@ -3044,6 +3044,10 @@
                     $this->options
                 ) ); // REMOVE
 
+                if ( !isset( $this->transients['changed_values'] ) ) {
+                    $this->transients[ 'changed_values' ] = array();
+                }
+
                 /**
                  * action 'redux/options/{opt_name}/validate'
                  *
