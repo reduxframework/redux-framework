@@ -58,7 +58,7 @@
              */
             public function render() {
                 echo '</td></tr></table>';
-                echo '<div data-id="' . $this->field['id'] . '" id="divide-' . $this->field['id'] . '" class="hr ' . $this->field['class'] . '"/><div class="inner"><span>&nbsp;</span></div></div>';
+                echo '<div data-id="' . $this->field['id'] . '" id="divide-' . $this->field['id'] . '" class="hr ' . $this->field['class'] . '"><div class="inner"><span>&nbsp;</span></div></div>';
                 echo '<table class="form-table no-border"><tbody><tr><th></th><td>';
             }
         }
