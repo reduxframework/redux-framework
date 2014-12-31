@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.3.9.31
+* Fixed:    #1943 - Removed premature DIV close.
+* Fixed:    #1945 - Media preview not rendering when default ID specified.
+
 ## 3.3.9.30
 * Modified: #1930 - reorder 'psedo-class of link_color field.  Thanks @freddessaint
 * Modified: SASS compiler outputs to page by default.  Faster.
