@@ -174,7 +174,12 @@
                                 150,
                                 150
                             ) );
-                        $this->value['thumbnail'] = $image[0];
+                        
+                        if (empty($image[0]) || $image[0] == '') {
+                            $this->value['thumbnail'] = $this->value['url'];
+                        } else {
+                            $this->value['thumbnail'] = $image[0];
+                        }
                     } else {
                         $this->value['thumbnail'] = $this->value['url'];
                     }
