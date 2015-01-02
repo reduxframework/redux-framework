@@ -49,6 +49,8 @@ use Leafo\ScssPhp\Parser;
  */
 class Compiler
 {
+    static public $VERSION = 'v0.1.1';
+
     static protected $operatorNames = array(
         '+' => 'add',
         '-' => 'sub',
@@ -410,7 +412,7 @@ class Compiler
         return $scope;
     }
 
-    // TODO: refactor compileNestedBlock and compileMedia into same thing?
+    // TODO refactor compileNestedBlock and compileMedia into same thing
     protected function compileNestedBlock($block, $selectors)
     {
         $this->pushEnv($block);
@@ -843,7 +845,7 @@ class Compiler
                 foreach ($list[2] as $item) {
                     $this->pushEnv();
                     $this->set($each->var, $item);
-                    // TODO: allow return from here?
+                    // TODO: allow return from here
                     $this->compileChildren($each->children, $out);
                     $this->popEnv();
                 }
@@ -1360,7 +1362,7 @@ class Compiler
                     if ($rval == 0) {
                         $this->throwError("color: Can't divide by zero");
                     }
-                    $out[] = (int) ($lval / $rval);
+                    $out[] = $lval / $rval;
                     break;
                 case '==':
                     return $this->opEq($left, $right);
@@ -1921,9 +1923,7 @@ class Compiler
 
     public function addImportPath($path)
     {
-        if (!in_array($path, $this->importPaths)) {
-            $this->importPaths[] = $path;
-        }
+        $this->importPaths[] = $path;
     }
 
     public function setImportPaths($path)
@@ -1978,7 +1978,7 @@ class Compiler
         $urls = array();
 
         // for "normal" scss imports (ignore vanilla css and external requests)
-        if (!preg_match('/\.css$|^http:\/\//', $url)) {
+        if (!preg_match('/\.css|^http:\/\/$/', $url)) {
             // try both normal and the _partial filename
             $urls = array($url, preg_replace('/[^\/]+$/', '_\0', $url));
         }
@@ -2066,7 +2066,7 @@ class Compiler
     }
 
     // sorts any keyword arguments
-    // TODO: merge with apply arguments?
+    // TODO: merge with apply arguments
     protected function sortArgs($prototype, $args)
     {
         $keyArgs = array();

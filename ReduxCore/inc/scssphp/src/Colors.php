@@ -12,6 +12,8 @@
 
 namespace Leafo\ScssPhp;
 
+use Leafo\ScssPhp\Parser;
+
 /**
  * CSS Colors
  *

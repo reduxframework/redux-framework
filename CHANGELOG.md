@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.9.32
+* Replaced: #1951 - Replaced develop branch of scssphp to master branch due to PHP 5.2 incompatibililty.
+
 ## 3.3.9.31
 * Fixed:    #1943 - Removed premature DIV close.
 * Fixed:    #1945 - Media preview not rendering when default ID specified.

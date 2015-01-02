@@ -13,7 +13,6 @@
 namespace Leafo\ScssPhp;
 
 use Leafo\ScssPhp\Compiler;
-use Leafo\ScssPhp\Version;
 
 /**
  * SCSS server
@@ -187,7 +186,7 @@ class Server
         $css     = $this->scss->compile(file_get_contents($in), $in);
         $elapsed = round((microtime(true) - $start), 4);
 
-        $v    = Version::VERSION;
+        $v    = Compiler::$VERSION;
         $t    = @date('r');
         $css  = "/* compiled by scssphp $v on $t (${elapsed}s) */\n\n" . $css;
         $etag = md5($css);
@@ -202,50 +201,6 @@ class Server
         );
 
         return array($css, $etag);
-    }
-
-    /**
-     * Compile .scss file
-     *
-     * @param string $in  Input file (.scss)
-     * @param string $out Output file (.css) optional
-     *
-     * @return string|bool
-     */
-    public function compileFile($in, $out = null)
-    {
-        if (!is_readable($in)) {
-            throw new \Exception('load error: failed to find '.$in);
-        }
-
-        $pi = pathinfo($in);
-
-        $this->scss->addImportPath($pi['dirname'].'/');
-
-        $compiled = $this->scss->compile(file_get_contents($in), $in);
-
-        if ($out !== null) {
-            return file_put_contents($out, $compiled);
-        }
-
-        return $compiled;
-    }
-
-    /**
-     * Check if file need compiling
-     *
-     * @param string $in  Input file (.scss)
-     * @param string $out Output file (.css)
-     *
-     * @return bool
-     */
-    public function checkedCompile($in, $out)
-    {
-        if (!is_file($out) || filemtime($in) > filemtime($out)) {
-            $this->compileFile($in, $out);
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -314,7 +269,7 @@ class Server
         header($protocol . ' 404 Not Found');
         header('Content-type: text/plain');
 
-        $v = Version::VERSION;
+        $v = Compiler::$VERSION;
         echo "/* INPUT NOT FOUND scss $v */\n";
     }
 
