@@ -36,10 +36,6 @@
  * The `scss_formatter` takes a CSS tree, and dumps it to a formatted string,
  * handling things like indentation.
  */
- 
- if ( class_exists( 'scssc' ) ) {
-    return;
- }
 
 /**
  * SCSS compiler

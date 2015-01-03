@@ -38,9 +38,12 @@ if (!class_exists('reduxSassCompiler')) {
         public static function compile_sass($parent) {
             
             if (!empty(self::$path)) {
-                
-                require( "scssphp/scss.inc.php" );
 
+                if ( !class_exists( 'scssc' ) && !isset( $GLOBALS['redux_scss_compiler'] ) ) {
+                    $GLOBALS['redux_scss_compiler'] = true;
+                    require( "scssphp/scss.inc.php" );
+                }
+                
                 $scss = new scssc();
 
                 $scss->setImportPaths( self::$path );
