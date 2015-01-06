@@ -2877,11 +2877,7 @@
                 if ( $plugin_options == $this->options ) {
                     return $plugin_options;
                 }
-
-                if (is_array($options['key']) || empty($options['key'])) {
-
-                }
-
+                
                 /**
                  * apply_filters 'redux/validate/{opt_name}/before_validation'
                  *
