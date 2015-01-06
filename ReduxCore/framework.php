@@ -858,7 +858,7 @@
              */
             public function get_wordpress_data( $type = false, $args = array() ) {
                 $data = "";
-
+//return $data;
                 /**
                  * filter 'redux/options/{opt_name}/wordpress_data/{type}/'
                  *
@@ -2877,6 +2877,13 @@
                 if ( $plugin_options == $this->options ) {
                     return $plugin_options;
                 }
+                
+                /**
+                 * apply_filters 'redux/validate/{opt_name}/before_validation'
+                 *
+                 * @param  &array [&$plugin_options, redux_options]
+                 */
+                $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/before_validation", $plugin_options, $this->options );
 
                 $time = time();
 
