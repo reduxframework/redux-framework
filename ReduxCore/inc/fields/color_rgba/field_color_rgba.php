@@ -228,7 +228,9 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
         private function getColorVal(){
             
             // No notices
-            $color = '';
+            $color  = '';
+            $alpha  = 1;
+            $rgba   = '';
 
             // Must be an array
             if (is_array($this->value)) {

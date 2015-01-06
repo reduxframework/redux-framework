@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.3.9.34
+* Fixed:    #1955 - Undefined index rgba in output routine.
+
+## 3.3.9.33
+* Modified: #1947 - Added display:none to TR tag under info field.
+
 ## 3.3.9.32
 * Replaced: #1951 - Replaced develop branch of scssphp to master branch due to PHP 5.2 incompatibililty.
 
