@@ -2747,7 +2747,7 @@
                      * @param string CSS that get sent to the compiler hook
                      */
                     do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
-
+                    
                     /**
                      * action 'redux/options/{opt_name}/compiler/advanced'
                      *
@@ -3053,6 +3053,7 @@
                  *
                  * @param  &array [&$plugin_options, redux_options]
                  */
+
                 do_action_ref_array( "redux/options/{$this->args['opt_name']}/validate", array(
                     &$plugin_options,
                     $this->options,
