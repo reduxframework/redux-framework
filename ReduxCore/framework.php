@@ -2602,16 +2602,16 @@
 
                             if ( $field['type'] == "slides" ) {
                                 if ( isset( $this->options[ $field['id'] ][0]['attachment_id'] ) && isset( $this->options[ $field['id'] ][0]['image'] ) && ! empty( $this->options[ $field['id'] ][0]['image'] ) && strpos( $this->options[ $field['id'] ][0]['image'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === false ) {
-                                    foreach ( $this->options[ $field['id'] ] as $k => $v ) {
+                                    foreach ( $this->options[ $field['id'] ] as $l => $v ) {
                                         $data = wp_get_attachment_url( $v['attachment_id'] );
 
                                         if ( isset( $data ) && ! empty( $data ) ) {
-                                            $this->options[ $field['id'] ][ $k ]['image'] = $data;
+                                            $this->options[ $field['id'] ][ $l ]['image'] = $data;
                                             $data                                         = wp_get_attachment_image_src( $v['attachment_id'], array(
                                                 150,
                                                 150
                                             ) );
-                                            $this->options[ $field['id'] ][ $k ]['thumb'] = $data[0];
+                                            $this->options[ $field['id'] ][ $l ]['thumb'] = $data[0];
                                             $doUpdate                                     = true;
                                         }
                                     }
