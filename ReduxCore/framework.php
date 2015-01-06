@@ -2721,7 +2721,15 @@
                 do_action( "redux/options/{$this->args['opt_name']}/register", $this->sections );
 
                 if ( $runUpdate && ! isset( $this->never_save_to_db ) ) { // Always update the DB with new fields
+                    /**
+                     * apply_filters 'redux/validate/{opt_name}/before_validation'
+                     *
+                     * @param  &array [&$plugin_options, redux_options]
+                     */
+                    $this->options = apply_filters( "redux/options/{$this->args['opt_name']}/before_defaults", $this->options );
+
                     $this->set_options( $this->options );
+
                 }
 
                 if ( isset( $this->transients['run_compiler'] ) && $this->transients['run_compiler'] ) {
@@ -2877,7 +2885,7 @@
                 if ( $plugin_options == $this->options ) {
                     return $plugin_options;
                 }
-                
+
                 /**
                  * apply_filters 'redux/validate/{opt_name}/before_validation'
                  *
