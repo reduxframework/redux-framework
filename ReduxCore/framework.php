@@ -1284,6 +1284,21 @@
                             // custom menu
                         } elseif ( isset( $submenu[ $this->args['page_parent'] ] ) ) {
                             $addMenu = true;
+                        } else {
+                            global $menu;
+                            
+                            foreach( $menu as $menupriority => $menuitem ) {
+                                $needle_menu_slug = isset($menuitem) ? $menuitem[2] : false;
+                                if( $needle_menu_slug != false ) {
+                                    
+                                    // check if the current needle menu equals page_parent
+                                    if (strcasecmp($needle_menu_slug, $page_parent) == 0) {
+                                        
+                                        // found an empty parent menu
+                                        $addMenu = true;
+                                    }
+                                }
+                            }                            
                         }
 
                     } else {
