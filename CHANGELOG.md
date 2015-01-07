@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.3.9.35
+* Fixed:    #1941 - Datepicker opened off screen.
+* Fixed:    #1756, #1957 - Slider issues.  Thanks @FFIN!
+* Fixed:    #1960 - Duplicate slide when clicking Add.  Again, thanks to @FFIN for the fix.
+* Added:    New filter: apply_filters 'redux/validate/{opt_name}/before_validation'
+
 ## 3.3.9.34
 * Fixed:    #1955 - Undefined index rgba in output routine.
 
