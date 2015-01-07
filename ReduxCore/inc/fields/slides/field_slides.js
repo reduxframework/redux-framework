@@ -67,7 +67,8 @@
                     }
                 );
 
-                el.find( '.redux-slides-add' ).click(
+                //el.find( '.redux-slides-add' ).click(
+                el.find( '.redux-slides-add' ).off('click').click(
                     function() {
                         var newSlide = $( this ).prev().find( '.redux-slides-accordion-group:last' ).clone( true );
 
