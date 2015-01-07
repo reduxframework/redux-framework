@@ -36,9 +36,9 @@
                     $( this ).datepicker({
                         beforeShow: function(textbox, instance){
                             var el = $('#ui-datepicker-div');
-                            $('#ui-datepicker-div').remove();
-                            $('.redux-main:first').append(el);
-                            instance.dpDiv.css({marginTop: -31 + 'px', marginLeft: -200 + 'px'});
+                            //$('#ui-datepicker-div').remove();
+                            //$('.redux-main:first').append(el);
+                            //instance.dpDiv.css({marginTop: -31 + 'px', marginLeft: -200 + 'px'});
                         } 
                     });
                 });
