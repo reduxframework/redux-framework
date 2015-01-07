@@ -5,6 +5,7 @@
 * Fixed:    #1756, #1957 - Slider issues.  Thanks @FFIN!
 * Fixed:    #1960 - Duplicate slide when clicking Add.  Again, thanks to @FFIN for the fix.
 * Added:    New filter: apply_filters 'redux/validate/{opt_name}/before_validation'
+* Fixed:    #1745 - Adding settings submenu to empty submenu now works.  Many, many thanks to @No3x for cracking this one!
 
 ## 3.3.9.34
 * Fixed:    #1955 - Undefined index rgba in output routine.
