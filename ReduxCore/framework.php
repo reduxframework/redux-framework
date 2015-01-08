@@ -2508,9 +2508,11 @@
                              */
                             $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}/register", $field );
 
+
                             $this->field_types[$field['type']] = isset($this->field_types[$field['type']]) ? $this->field_types[$field['type']] : array();
+
                             $this->field_sections[$field['type']][$field['id']] = $k;
-                            
+
                             $display = true;
 
                             if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
