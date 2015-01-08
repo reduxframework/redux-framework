@@ -83,7 +83,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
          */
         public function render() {
             $defaults = array(
-                'color'     => '#000000',
+                'color'     => '',
                 'alpha'     => 1,
                 'rgba'      => ''
             );

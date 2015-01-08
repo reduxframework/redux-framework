@@ -1642,7 +1642,12 @@
 
                 Redux_Functions::$_parent = $this;
                 $min                      = Redux_Functions::isMin();
-
+                
+                $timestamp = ReduxFramework::$_version;
+                if ($this->args['dev_mode']) {
+                    $timestamp .= '.' . time();
+                }
+                
                 // Select2 business.  Fields:  Background, Border, Dimensions, Select, Slider, Typography
                 $field_arr = array(
                     'background',
@@ -1664,7 +1669,7 @@
                         'select2-css',
                         self::$_url . 'assets/js/vendor/select2/select2.css',
                         array(),
-                        filemtime( self::$_dir . 'assets/js/vendor/select2/select2.css' ),
+                        $timestamp,
                         'all'
                     );
 
@@ -1675,7 +1680,7 @@
                         'redux-select2-sortable-js',
                         self::$_url . 'assets/js/vendor/redux.select2.sortable' . $min . '.js',
                         array( 'jquery' ),
-                        filemtime( self::$_dir . 'assets/js/vendor/redux.select2.sortable' . $min . '.js' ),
+                        $timestamp,
                         true
                     );
 
@@ -1683,30 +1688,30 @@
                         'select2-js',
                         self::$_url . 'assets/js/vendor/select2/select2.min.js',
                         array( 'jquery', 'redux-select2-sortable-js' ),
-                        filemtime( self::$_dir . 'assets/js/vendor/select2/select2.min.js' ),
+                        $timestamp,
                         true
                     );
 
                     wp_enqueue_script( 'select2-js' );
                 }
 
-                redux_enqueue_style(
-                    $this,
+//                redux_enqueue_style(
+//                    $this,
+//                    'redux-admin-css',
+//                    self::$_url . 'assets/css/redux-admin.css',
+//                    self::$_dir . 'assets/css/',
+//                    array( 'farbtastic' ),
+//                    time(),
+//                    'all'
+//                );                  
+                
+                wp_enqueue_style(
                     'redux-admin-css',
                     self::$_url . 'assets/css/redux-admin.css',
-                    self::$_dir . 'assets/css/',
                     array( 'farbtastic' ),
-                    time(),
+                    $timestamp,
                     'all'
-                );                  
-                
-//                wp_enqueue_style(
-//                    'redux-css',
-//                    self::$_url . 'assets/css/redux.css',
-//                    array( 'farbtastic' ),
-//                    filemtime( self::$_dir . 'assets/css/redux.css' ),
-//                    'all'
-//                );
+                );
 //
 //                wp_register_style(
 //                    'admin-css',
@@ -1720,7 +1725,7 @@
                     'redux-elusive-icon',
                     self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
                     array(),
-                    filemtime( self::$_dir . 'assets/css/vendor/elusive-icons/elusive-webfont.css' ),
+                    $timestamp,
                     'all'
                 );
 
@@ -1728,7 +1733,7 @@
                     'redux-elusive-icon-ie7',
                     self::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css',
                     array(),
-                    filemtime( self::$_dir . 'assets/css/vendor/elusive-icons/elusive-webfont-ie7.css' ),
+                    $timestamp,
                     'all'
                 );
 
@@ -1736,7 +1741,7 @@
                     'qtip-css',
                     self::$_url . 'assets/css/vendor/qtip/jquery.qtip.css',
                     array(),
-                    filemtime( self::$_dir . 'assets/css/vendor/qtip/jquery.qtip.css' ),
+                    $timestamp,
                     'all'
                 );
 
@@ -1751,8 +1756,8 @@
                 wp_register_style(
                     'jquery-ui-css',
                     apply_filters( "redux/page/{$this->args['opt_name']}/enqueue/jquery-ui-css", self::$_url . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ),
-                    '',
-                    filemtime( self::$_dir . 'assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css' ), // todo - version should be based on above post-filter src
+                    array(),
+                    $timestamp,
                     'all'
                 );
 
@@ -1766,8 +1771,8 @@
                     wp_register_style(
                         'redux-rtl-css',
                         self::$_url . 'assets/css/rtl.css',
-                        array('redux-css'),
-                        filemtime( self::$_dir . 'assets/css/rtl.css' ),
+                        array('redux-admin-css'),
+                        $timestamp,
                         'all'
                     );
                     wp_enqueue_style( 'redux-rtl-css' );
@@ -1817,7 +1822,7 @@
                         ReduxFramework::$_url . 'assets/css/color-picker/color-picker.css',
                         ReduxFramework::$_dir . 'assets/css/color-picker',
                         array(),
-                        time(),
+                        $timestamp,
                         false
                     );                    
                     
@@ -1848,7 +1853,7 @@
                     'qtip-js',
                     self::$_url . 'assets/js/vendor/qtip/jquery.qtip.js',
                     array( 'jquery' ),
-                    '2.2.0',
+                    $timestamp,
                     true
                 );
 
@@ -1856,7 +1861,7 @@
                     'serializeForm-js',
                     self::$_url . 'assets/js/vendor/jquery.serializeForm.js',
                     array( 'jquery' ),
-                    '1.0.0',
+                    $timestamp,
                     true
                 );
 
@@ -1868,7 +1873,7 @@
                         'redux-vendor',
                         self::$_url . 'assets/js/vendor.min.js',
                         array( 'jquery' ),
-                        filemtime( self::$_dir . 'assets/js/vendor.min.js' ),
+                        $timestamp,
                         true
                     );
 
@@ -1887,7 +1892,7 @@
                     'redux-js',
                     self::$_url . 'assets/js/redux' . $min . '.js',
                     $depArray,
-                    filemtime( self::$_dir . 'assets/js/redux' . $min . '.js' ),
+                    $timestamp,
                     true
                 );
 
@@ -1950,19 +1955,21 @@
                 }
 
                 if ($this->args['sass']['enabled']) {
-                    reduxSassCompiler::compile_sass($this);
-
-                    if (!$this->args['sass']['page_output']) {
-                        wp_enqueue_style(
-                            'redux-css', 
-                            ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css', 
-                            array(), 
-                            time(), 
-                            'all'
-                        );
+                    $ret = reduxSassCompiler::compile_sass($this);
+                    
+                    if ($ret == reduxSassCompiler::SASS_FILE_COMPILE || $ret == reduxSassCompiler::SASS_NO_COMPILE) {
+                        if (file_exists(ReduxFramework::$_upload_dir . $this->args['opt_name'] .  '-redux.css')) {
+                            wp_enqueue_style(
+                                'redux-fields-css', 
+                                ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css', 
+                                array(), 
+                                $timestamp, 
+                                'all'
+                            );
+                        }
                     }
                 }
-                
+
                 $this->localize_data['required']       = $this->required;
                 $this->localize_data['fonts']          = $this->fonts;
                 $this->localize_data['required_child'] = $this->required_child;
@@ -2500,6 +2507,9 @@
                              */
                             $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}/register", $field );
 
+                            $this->field_types[$field['type']] = isset($this->field_types[$field['type']]) ? $this->field_types[$field['type']] : array();
+                            $this->field_sections[$field['type']][$field['id']] = $k;
+                            
                             $display = true;
 
                             if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
