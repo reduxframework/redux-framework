@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.9.35';
+            public static $_version = '3.3.9.36';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -141,6 +141,7 @@
             public $page = '';
             public $saved = false;
             public $fields = array(); // Fields by type used in the panel
+            public $field_sections = array(); // Section id's by field type, then field ID
             public $current_tab = ''; // Current section to display, cookies
             public $extensions = array(); // Extensions by type used in the panel
             public $sections = array(); // Sections and fields
@@ -2746,15 +2747,7 @@
                 do_action( "redux/options/{$this->args['opt_name']}/register", $this->sections );
 
                 if ( $runUpdate && ! isset( $this->never_save_to_db ) ) { // Always update the DB with new fields
-                    /**
-                     * apply_filters 'redux/validate/{opt_name}/before_validation'
-                     *
-                     * @param  &array [&$plugin_options, redux_options]
-                     */
-                    $this->options = apply_filters( "redux/options/{$this->args['opt_name']}/before_defaults", $this->options );
-
                     $this->set_options( $this->options );
-
                 }
 
                 if ( isset( $this->transients['run_compiler'] ) && $this->transients['run_compiler'] ) {
@@ -2890,6 +2883,11 @@
              */
             public function _validate_options( $plugin_options ) {
 
+                if (isset($this->validation_ran)) {
+                    return $plugin_options;
+                }
+                $this->validation_ran = 1;
+
                 // Save the values not in the panel
                 if ( isset( $plugin_options['redux-no_panel'] ) ) {
                     $keys = explode( '|', $plugin_options['redux-no_panel'] );
@@ -2910,13 +2908,6 @@
                 if ( $plugin_options == $this->options ) {
                     return $plugin_options;
                 }
-
-                /**
-                 * apply_filters 'redux/validate/{opt_name}/before_validation'
-                 *
-                 * @param  &array [&$plugin_options, redux_options]
-                 */
-                $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/before_validation", $plugin_options, $this->options );
 
                 $time = time();
 
@@ -2978,6 +2969,7 @@
                         }
 
                         $plugin_options = wp_parse_args( $imported_options, $plugin_options );
+
                         $this->set_transients(); // Update the transients
 
                         return $plugin_options;
@@ -2990,10 +2982,17 @@
                         $this->options_defaults = $this->_default_values();
                     }
 
+                    /**
+                     * apply_filters 'redux/validate/{opt_name}/options_defaults'
+                     *
+                     * @param  &array [ $this->options_defaults, $plugin_options]
+                     */
+                    $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/options_defaults", $this->options_defaults, $plugin_options );
+
                     // Section reset
                     //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
-                    $plugin_options = $this->options_defaults;
 
+                    
                     $this->transients['changed_values'] = array();
 
                     if ( empty( $this->options ) ) {
@@ -3020,6 +3019,12 @@
                 // Section reset to defaults
                 if ( ! empty( $plugin_options['defaults-section'] ) ) {
                     if ( isset( $plugin_options['redux-section'] ) && isset( $this->sections[ $plugin_options['redux-section'] ]['fields'] ) ) {
+                        /**
+                         * apply_filters 'redux/validate/{opt_name}/options_defaults'
+                         *
+                         * @param  &array [ $this->options_defaults, $plugin_options]
+                         */
+                        $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/options_defaults", $this->options_defaults, $plugin_options );
                         foreach ( $this->sections[ $plugin_options['redux-section'] ]['fields'] as $field ) {
                             if ( isset( $this->options_defaults[ $field['id'] ] ) ) {
                                 $plugin_options[ $field['id'] ] = $this->options_defaults[ $field['id'] ];
@@ -3052,7 +3057,7 @@
 
                     //setcookie("redux-saved-{$this->args['opt_name']}", 'defaults_section', time() + 1000, "/");
                     unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
-                    
+
                     $this->set_transients();
 
                     return $plugin_options;
@@ -3064,6 +3069,12 @@
 //                    $this->transients['last_save_mode'] = '';
 //                }
 
+                /**
+                 * apply_filters 'redux/validate/{opt_name}/before_validation'
+                 *
+                 * @param  &array [&$plugin_options, redux_options]
+                 */
+                $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/before_validation", $plugin_options, $this->options );
 
                 // Validate fields (if needed)
                 $plugin_options = $this->_validate_values( $plugin_options, $this->options, $this->sections );
