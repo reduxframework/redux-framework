@@ -1955,6 +1955,9 @@
                     }
                 }
 
+                //print_r($this->extensions['metaboxes']->post_type);
+                print_r($this->field_types);
+                
                 if ($this->args['sass']['enabled']) {
                     $ret = reduxSassCompiler::compile_sass($this);
                     

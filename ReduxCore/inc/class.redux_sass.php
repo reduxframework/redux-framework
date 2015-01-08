@@ -134,6 +134,7 @@ if (!class_exists('reduxSassCompiler')) {
                 }
                 
                 if ($do_compile || self::$_do_compile) {
+                    logconsole('compiler run');
                     if ( !class_exists( 'scssc' ) && !isset( $GLOBALS['redux_scss_compiler'] ) ) {
                         $GLOBALS['redux_scss_compiler'] = true;
                         require( "scssphp/scss.inc.php" );
