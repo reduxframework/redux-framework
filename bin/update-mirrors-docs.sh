@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #&& "$TRAVIS_PHP_VERSION" >= 5.3 
-if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
+if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 && -z "${GH_TOKEN}" ]]; then
 
 	# Update the mirror repo for composer/packagist
 	git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
