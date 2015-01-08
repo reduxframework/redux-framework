@@ -52,6 +52,14 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             $this->field    = $field;
             $this->value    = $value;
 
+            $defaults = array(
+                'color'     => '',
+                'alpha'     => 1,
+                'rgba'      => ''
+            );
+
+            $this->value = wp_parse_args( $this->value, $defaults );
+
             $this->field['options']['show_input']              = isset($this->field['options']['show_input']) ? $this->field['options']['show_input'] : true;
             $this->field['options']['show_initial']            = isset($this->field['options']['show_initial']) ? $this->field['options']['show_initial'] : false;
             $this->field['options']['show_alpha']              = isset($this->field['options']['show_alpha']) ? $this->field['options']['show_alpha'] : true;
@@ -82,13 +90,6 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
          * @return      void
          */
         public function render() {
-            $defaults = array(
-                'color'     => '#000000',
-                'alpha'     => 1,
-                'rgba'      => ''
-            );
-            
-            $this->value = wp_parse_args($this->value, $defaults);
             
             $field_id = $this->field['id'];
             
