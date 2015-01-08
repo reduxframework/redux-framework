@@ -1,42 +1,54 @@
-#!/usr/bin/env bash
-#&& "$TRAVIS_PHP_VERSION" >= 5.3 
-if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 && -z "${GH_TOKEN}" ]]; then
-
-	# Update the mirror repo for composer/packagist
-	git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
-
-	# Re-Deploy the heroku demo app and pull the newest code
-	git clone git@heroku.com:redux-premium.git
-	cd redux-premium
-	git reset HEAD~; git push -f heroku master;
-
-	cd ..
-
-#	cd ..
-#	rm -fr $HOME/redux-premium
-
-	echo -e "Starting to update documentation\n"
-
-	# Make sure we don't have any old files
-	rm -fr $HOME/docs
-
-	# Install phpDocumentor
-	pear channel-discover pear.phpdoc.org
-	pear install phpdoc/phpDocumentor
-	pear install Image_GraphViz
-	phpenv rehash #Have to run this for travis
-
-	# Generate the docs
-	grunt phpdocumentor
-
-	# Copy the github CNAME file to the docs
-	cp bin/CNAME docs/
-
-	# Publish the docs to gh-pages
-	grunt gh-pages:travis
-
-	# Clean out the docs directory
-	#git rm -fr $HOME/docs/  
-
-
-fi
+language: php
+php:
+- 5.2
+#- 5.3
+- 5.4
+env:
+  global:
+    #secure: "HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo="
+    #secure: "vLqv9UpmPontcizx0ncbiaV0CJ6C54sFcJw1g4Csnwz7q3DJyHtGtjZLysKzyUzbXLzcSGWZfkeqbYXIuI7fdtIfBTSb9Zw39tPDItVzq9T+wyzkCv98F+LI4Py2UJR+dQNOzB+2s0IrAQZt3vsKnJbELKwQ1LWVkNXOu7eCIOo="
+    #secure: "N1TGV9fQSoXhWD0AUMLF4PEWE99ZHA3ypjARJZX3fsycRD4YUbCcIdnKld5rM/4meeVN4kULDci5bcwAv3GrZY0l4lYNFpnInoyOU6B8PFG0795feacUtj8T8GBs9C4P/9ikLkK9BBXEacQ+i/E2Lvv50QJ17RDAbmvXB3gWDvc="
+    #secure: "qZjPMjuQN2a4H2fQ9SSSfgAYRIoRmSTOxMF06CjeTQfIgimwmCayQYVVSKrXQorxpzHPjjg4vEs92oFuBE2nXDN0J4fA8u/E3Qvm4Mr9qWFn/JoOX+/xsYurPw9+rIjr75lT/b8cK38tdgqm7TmMIfsNY4RxHtOhXjt6hWGhUlY="
+    secure: "aDIYEmgxoF/+2vwPdvmbxFKMoz8pA9vtvemehyLNvH3LF05RgFiwNNv+7Lvy127p4Fxp3VBK+ZLKUEEL1gdpevzgni9EigpK8YZbIVHXRL3U+1eP9rcnjuGF9pKuB4kB2ivzoprcalg1ZDI9PnRYRDE4YUTHJiEN2MmLys1QWdc="
+  cache:
+    directories:
+    - node_modules
+  matrix:
+  - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=latest WP_MULTISITE=1
+install:
+- npm install -g grunt-cli
+- npm install
+- find ReduxCore -type f | sort -u | xargs cat | md5sum > md5
+before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+script:
+- phpunit
+- grunt jshint
+- grunt lintPHP
+after_success:
+  # Install the Heroku gem (or the Heroku toolbelt)
+  #- gem install heroku
+  # Add your Heroku git repo:
+  #- git remote add heroku git@heroku.com:redux-premium.git
+  # Turn off warnings about SSH keys:
+  #- echo "Host heroku.com" >> ~/.ssh/config
+  #- echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  #- echo "   CheckHostIP no" >> ~/.ssh/config
+  #- echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # Clear your current Heroku SSH keys:
+  #- heroku keys:clear
+  # Add a new SSH key to Heroku
+  #- yes | heroku keys:add
+after_script:
+  #- ./bin/commit-uncompressed-files.sh
+  #- ./bin/update-mirrors-docs.sh
+notifications:
+  email:
+    recipients:
+    - dovy@reduxframework.com
+    - kevin@reduxframework.com
+    on_failure: always
+branches:
+  except:
+  - gh-pages
+  - setup
