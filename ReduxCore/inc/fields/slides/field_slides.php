@@ -171,7 +171,7 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             }
 
             if ( $x == 0 ) {
-                echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="' . $this->field[ 'id' ] . '"><h3><span class="redux-slides-header">New ' . $this->field[ 'content_title' ] . '</span></h3><div>';
+                echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="' . $this->field[ 'id' ] . '"><h3><span class="redux-slides-header">' . esc_attr ( sprintf ( __ ( 'New %s', 'redux-framework' ), $this->field[ 'content_title' ] ) ) . '</span></h3><div>';
 
                 $hide = ' hide';
 
