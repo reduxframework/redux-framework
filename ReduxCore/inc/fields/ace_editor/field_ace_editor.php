@@ -102,21 +102,21 @@ if ( ! class_exists( 'ReduxFramework_ace_editor' ) ) {
          */
         public function enqueue() {
 
-            redux_enqueue_style(
-                $this->parent,
-                'redux-field-ace-editor-css',
-                ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.css',
-                ReduxFramework::$_dir . 'inc/fields/ace_editor',
-                array(),
-                time(),
-                false
-            );
-
+            if ($this->parent->args['dev_mode']) {
+                wp_enqueue_style(
+                    'redux-field-ace-editor-css',
+                    ReduxFramework::$_url . 'inc/fields/ace_editor/field_ace_editor.css',
+                    array(),
+                    time(),
+                    'all'
+                );
+            }
+            
             wp_enqueue_script(
                 'ace-editor-js',
                 ReduxFramework::$_url . 'inc/fields/ace_editor/vendor/ace.js',
                 array( 'jquery' ),
-                filemtime( ReduxFramework::$_dir . 'inc/fields/ace_editor/vendor/ace.js' ),
+                time(),
                 true
             );
 

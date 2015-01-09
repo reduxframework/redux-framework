@@ -130,22 +130,15 @@
              * @return      void
              */
             public function enqueue() {
-                redux_enqueue_style(
-                    $this->parent,
-                    'redux-field-info-css',
-                    ReduxFramework::$_url . 'inc/fields/info/field_info.css',
-                    ReduxFramework::$_dir . 'inc/fields/info',
-                    array(),
-                    time(),
-                    false
-                ); 
-                
-//                wp_enqueue_style(
-//                    'redux-field-info-css',
-//                    ReduxFramework::$_url . 'inc/fields/info/field_info.css',
-//                    time(),
-//                    true
-//                );
+                if ($this->parent->args['dev_mode']) {
+                    wp_enqueue_style(
+                        'redux-field-info-css',
+                        ReduxFramework::$_url . 'inc/fields/info/field_info.css',
+                        array(),
+                        time(),
+                        'all'
+                    );
+                }
             }
         }
     }

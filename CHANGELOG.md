@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.3.10
+* Removed:  SASS compile of field CSS, for the time being.  Compiler remains in core.
+* Improved: Panel load time, most notable when not in dev_mode.  Better for your clients.  :)
+* Updated:  Elusive Font library.
+* Fixed:    #1961 - color_rgba field defaulting to black on reset.
+
 ## 3.3.9.35
 * Fixed:    #1941 - Datepicker opened off screen.
 * Fixed:    #1756, #1957 - Slider issues.  Thanks @FFIN!
