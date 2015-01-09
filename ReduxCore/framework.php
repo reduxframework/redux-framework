@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.10';
+            public static $_version = '3.3.11';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -2506,11 +2506,11 @@
                     }
 
                     /**
-                     * apply_filters 'redux/validate/{opt_name}/options_defaults'
+                     * apply_filters 'redux/validate/{opt_name}/defaults'
                      *
                      * @param  &array [ $this->options_defaults, $plugin_options]
                      */
-                    $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/options_defaults", $this->options_defaults, $plugin_options );
+                    $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/defaults", $this->options_defaults );
 
                     // Section reset
                     //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
@@ -2543,11 +2543,11 @@
                 if ( ! empty( $plugin_options['defaults-section'] ) ) {
                     if ( isset( $plugin_options['redux-section'] ) && isset( $this->sections[ $plugin_options['redux-section'] ]['fields'] ) ) {
                         /**
-                         * apply_filters 'redux/validate/{opt_name}/options_defaults'
+                         * apply_filters 'redux/validate/{opt_name}/defaults_section'
                          *
                          * @param  &array [ $this->options_defaults, $plugin_options]
                          */
-                        $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/options_defaults", $this->options_defaults, $plugin_options );
+                        $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/defaults_section", $plugin_options );
                         foreach ( $this->sections[ $plugin_options['redux-section'] ]['fields'] as $field ) {
                             if ( isset( $this->options_defaults[ $field['id'] ] ) ) {
                                 $plugin_options[ $field['id'] ] = $this->options_defaults[ $field['id'] ];
