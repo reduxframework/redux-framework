@@ -67,6 +67,10 @@
 
             public function execute( $action, $file = '', $params = '' ) {
 
+                if ( empty( $this->parent->args ) ) {
+                    return;
+                }
+
                 if ( ! empty ( $params ) ) {
                     extract( $params );
                 }
