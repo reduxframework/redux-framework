@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.10.1';
+            public static $_version = '3.3.10.2';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -175,7 +175,8 @@
             public $typography_preview = array();
             public $args = array();
             public $filesystem  = null;
-
+            public $font_groups = array();
+            
             /**
              * Class Constructor. Defines the args for the theme options class
              *
@@ -303,11 +304,6 @@
                      */
                     do_action( 'redux/construct', $this );
 
-                    //$this->filesystem = new Redux_Filesystem( $this );
-
-                    //set redux upload folder
-                    //$this->set_redux_content();
-
                     // Set the default values
                     $this->_default_cleanup();
 
@@ -324,11 +320,6 @@
                     if ( true != Redux_Helpers::isTheme( __FILE__ ) || ( true == Redux_Helpers::isTheme( __FILE__ ) && !$this->args['disable_tracking'] ) ) {
                         $this->_tracking();
                     }
-
-                    // Set option with defaults
-                    //add_action( 'init', array( &$this, '_set_default_options' ), 101 );
-
-                    //logconsole('post', $_GET['page']);
 
                     //DOVY!!  HERE!!!
                     // Getting started page
@@ -364,10 +355,7 @@
                     }
 
                     // Admin Bar menu
-                    add_action( 'admin_bar_menu', array(
-                        $this,
-                        '_admin_bar_menu'
-                    ), $this->args['admin_bar_priority'] );
+                    add_action( 'admin_bar_menu', array( $this, '_admin_bar_menu' ), $this->args['admin_bar_priority'] );
 
                     // Register setting
                     add_action( 'admin_init', array( $this, '_register_settings' ) );

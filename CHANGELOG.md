@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.3.10.2
+* Fixed:    #1979 - Goole fonts not properly loading in typography dropdown.
+
+## 3.3.10.1
+* Fixed:    Undefined index error on MU installs.
+
 ## 3.3.10
 * Removed:  SASS compile of field CSS, for the time being.  Compiler remains in core.
 * Improved: Panel load time, most notable when not in dev_mode.  Better for your clients.  :)

@@ -29,6 +29,8 @@ if (!class_exists('reduxCoreEnqueue')){
             
             $this->enqueue_fields();
             
+            $this->set_localized_data();
+            
             /**
              * action 'redux-enqueue-{opt_name}'
              *
@@ -195,7 +197,7 @@ if (!class_exists('reduxCoreEnqueue')){
             //*****************************************************************
             wp_register_script(
                 'select2-js',
-                ReduxFramework::$_url . 'assets/js/vendor/select2/select2.min.js',
+                ReduxFramework::$_url . 'assets/js/vendor/select2/select2.js',
                 array( 'jquery', 'redux-select2-sortable-js' ),
                 $this->timestamp,
                 true
@@ -229,16 +231,6 @@ if (!class_exists('reduxCoreEnqueue')){
                 true
             );
             
-            $this->set_localized_data();
-            
-            wp_localize_script(
-                'redux-js',
-                'redux',
-                $this->parent->localize_data
-            );
-
-            wp_enqueue_script( 'redux-js' ); // Enque the JS now
-
             wp_enqueue_script(
                 'webfontloader',
                 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.0/webfont.js',
@@ -434,6 +426,14 @@ if (!class_exists('reduxCoreEnqueue')){
             if ( empty( $this->parent->transients['notices'] ) ) {
                 unset( $this->parent->transients['notices'] );
             }
+
+            wp_localize_script(
+                'redux-js',
+                'redux',
+                $this->parent->localize_data
+            );
+
+            wp_enqueue_script( 'redux-js' ); // Enque the JS now
             
         }
     }
