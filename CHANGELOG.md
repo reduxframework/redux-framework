@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.10.4
+* Fixed:    Google font enqueues with opt_name to avoid collision with multiple Redux instances.
+
 ## 3.3.10.3
 * Fixed:    #1980 - JS errors with sorter & sortable.
 * Fixed:    color_rgba field outputting incorrect information via output/compiler.
