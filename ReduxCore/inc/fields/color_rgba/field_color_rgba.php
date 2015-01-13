@@ -240,6 +240,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                         $color = !empty($val) ? $val : '';
                     } elseif ($id == 'rgba') {
                         $rgba = !empty($val) ? $val : '';
+                        $rgba = Redux_Helpers::hex2rgba($color, $alpha);
                     }
                 }
                 

@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.10.5
+* Fixed:    #1983 - color_rgba not outputting default values on first load (before save).
+
 ## 3.3.10.4
 * Fixed:    Google font enqueues with opt_name to avoid collision with multiple Redux instances.
 
