@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.10.5';
+            public static $_version = '3.3.10.6';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -3641,9 +3641,9 @@
                          */
                         do_action( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", $field, $value );
 
-                        if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
+                        //if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
                             echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="' . $field['type'] . '">';
-                        }
+                        //}
 
                         echo $_render;
 
@@ -3653,9 +3653,9 @@
 
                         echo ( isset( $field['description'] ) && $field['type'] != "info" && $field['type'] !== "section" && ! empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
 
-                        if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
+                        //if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
                             echo '</fieldset>';
-                        }
+                        //}
 
                         /**
                          * action 'redux-after-field-{opt_name}'

@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.10.6
+* Modified: The Redux Repeater field has landed!
+
 ## 3.3.10.5
 * Fixed:    #1983 - color_rgba not outputting default values on first load (before save).
 
