@@ -2,6 +2,7 @@
 
 ## 3.3.10.3
 * Fixed:    #1980 - JS errors with sorter & sortable.
+* Fixed:    color_rgba field outputting incorrect information via output/compiler.
 
 ## 3.3.10.2
 * Fixed:    #1979 - Goole fonts not properly loading in typography dropdown.
