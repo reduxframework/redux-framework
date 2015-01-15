@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.3.10.7
+* Fixed:    Reset section hook firing too early.
+
 ## 3.3.10.6
 * Modified: The Redux Repeater field has landed!
 
