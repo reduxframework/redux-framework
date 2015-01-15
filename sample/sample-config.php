@@ -1560,6 +1560,33 @@
                 );
 
                 $this->sections[] = array(
+                    'title'  => __( 'WPML Example', 'redux-framework-demo' ),
+                    'desc'   => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement. For extra details look at our <a href="http://docs.reduxframework.com/core/advanced/wpml-integration/" target="_blank">WPML Implementation</a> documentation.', 'redux-framework-demo' ),
+                    'icon'   => 'el-icon-home',
+                    // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
+                    'fields' => array(
+                        array(
+                            'id'       => 'wpml-text',
+                            'type'     => 'textarea',
+                            'title'    => __( 'WPML Text', 'redux-framework-demo' ),
+                            'desc'     => __( 'This string can be translated via WPML.', 'redux-framework-demo' ),
+                        ),
+                        array(
+                            'id'       => 'wpml-multicheck',
+                            'type'     => 'checkbox',
+                            'title'    => __( 'WPML Multi Checkbox', 'redux-framework-demo' ),
+                            'desc'     => __( 'You can literally translate the values via key.', 'redux-framework-demo' ),
+                            //Must provide key => value pairs for multi checkbox options
+                            'options'  => array(
+                                '1' => 'Option 1',
+                                '2' => 'Option 2',
+                                '3' => 'Option 3'
+                            ),
+                        ),
+                    )
+                );
+
+                $this->sections[] = array(
                     'title'  => __( 'Import / Export', 'redux-framework-demo' ),
                     'desc'   => __( 'Import and Export your Redux Framework settings from file, text or URL.', 'redux-framework-demo' ),
                     'icon'   => 'el-icon-refresh',
