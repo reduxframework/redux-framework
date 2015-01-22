@@ -1,10 +1,10 @@
 === Redux Framework ===
-Contributors: section214, dovyp, kprovance
+Contributors: dovyp, kprovance, section214
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 4.0
-Stable tag: 3.3.9.4
+Tested up to: 4.2
+Stable tag: 3.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,64 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+# 3.4.0
+* Fixed:    Reset section hook firing too early.
+* Modified: The Redux Repeater field has landed!
+* Fixed:    #1983 - color_rgba not outputting default values on first load (before save).
+* Fixed:    Google font enqueues with opt_name to avoid collision with multiple Redux instances.
+* Fixed:    #1980 - JS errors with sorter & sortable.
+* Fixed:    color_rgba field outputting incorrect information via output/compiler.
+* Fixed:    #1979 - Goole fonts not properly loading in typography dropdown.
+* Fixed:    Undefined index error on MU installs.
+* Removed:  SASS compile of field CSS, for the time being.  Compiler remains in core.
+* Improved: Panel load time, most notable when not in dev_mode.  Better for your clients.  :)
+* Updated:  Elusive Font library.
+* Fixed:    #1961 - color_rgba field defaulting to black on reset.
+* Fixed:    #1941 - Datepicker opened off screen.
+* Fixed:    #1756, #1957 - Slider issues.  Thanks @FFIN!
+* Fixed:    #1960 - Duplicate slide when clicking Add.  Again, thanks to @FFIN for the fix.
+* Added:    New filter: apply_filters 'redux/validate/{opt_name}/before_validation'
+* Fixed:    #1745 - Adding settings submenu to empty submenu now works.  Many, many thanks to @No3x for cracking this one!
+* Fixed:    #1955 - Undefined index rgba in output routine.
+* Modified: #1947 - Added display:none to TR tag under info field.
+* Replaced: #1951 - Replaced develop branch of scssphp to master branch due to PHP 5.2 incompatibililty.
+* Fixed:    #1943 - Removed premature DIV close.
+* Fixed:    #1945 - Media preview not rendering when default ID specified.
+* Modified: #1930 - reorder 'psedo-class of link_color field.  Thanks @freddessaint
+* Modified: SASS compiler outputs to page by default.  Faster.
+* Fixed:    #1927 - Incorrect dir path to spectrum library in color_rgba field corrected.
+* Modified: color_rgba field now usees spectrum color picker.  minicolors removed.  Just...too buggy.
+* Modified: #1922 - Filesystem output function.
+* Fixed:    Added PHP 5.2 support (ugh!) for SASS compiler.
+* Fixed:    More SASS compiler tweaking.
+* Fixed:    PHP errors when disabling SASS.
+* Fixed     #1909 - malformed DIV class HTML in slider field.
+* Removed   Argument for SASS compile file output location removed.  Didn't work, too much trouble.
+* Fixed:    #1904 - select_image field not displaying saved value on page reload.
+* Fixed:    SASS compile under multi-instance outputting incorrect CSS file
+* Fixed:    redux-admin scss images converted to base64
+* Added     SASS compiler for admin CSS.
+* Added     SASS to CSS for grunt compiler.
+* Added     SASS compiler for fields.
+* Updated:  select2 3.5.2
+* Fixed:    #1856 - Illegal offset string warnings in framework.php.  Thanks @CGlingener.
+* Fixed:    #1874 - Required operator 'contains' and 'not_contains' not working with select set to multi.
+* Fixed:    #1829 - Required operator '=' and '!=' not working with select set to multi.
+* Fixed:    #1870 - Border field doubling up on px in output/compiler.
+* Added:    `hidden` argument for fields.
+* Added:    `hidden` argument for sections.
+* Fixed:    #1868 - Improper panel render when opening expanded, when `open_expanded` set to true.
+* Added:    `hide_expand` argument, to hide the expand options button.
+* Fixed:    #1865 - Sortable select not saving proper order.
+* Fixed:    #1864 - Footer z-index CSS adjusted.
+* Fixed:    #1848 - Import-export filed buttons not functioning properly.
+* Fixed:    #1834 - Wordpress data dealing with IDs as array keys not rendering properly.
+* Fixed:    #1830 - Font lists were added in quotes.  Thanks @karimhossenbux.
+* Fixed:    #1798 - Fixed lazy load JS to only load visible sections. Much more optimized.
+* Fixed:    #1821 -  Exo 2 font not working, issue with typography and escaping.
+* Added:    #1803 - Optgroup support for select field.
+* Added:    Decimal increments to spinner.
 
 ## 3.3.9.4
 * Added:    Customizer now supports PANEL! Yay 4.0.

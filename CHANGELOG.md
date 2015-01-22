@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.0
+* WP.org Release
+
 ## 3.3.10.7
 * Fixed:    Reset section hook firing too early.
 
