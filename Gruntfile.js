@@ -283,7 +283,7 @@ module.exports = function( grunt ) {
             sass: {
                 fields: {
                     options: {
-                        sourcemap: 'none',
+                        //sourcemap: 'none',
                         style: 'compressed',
                         noCache: true,
                     },
@@ -299,7 +299,7 @@ module.exports = function( grunt ) {
 
                 vendor: {
                     options: {
-                        sourcemap: 'none',
+                        //sourcemap: 'none',
                         style: 'compressed',
                         noCache: true
                     },
@@ -316,7 +316,7 @@ module.exports = function( grunt ) {
 
                 admin: {
                     options: {
-                        sourcemap: 'none',
+                        //sourcemap: 'none',
                         style: 'compressed',
                         noCache: true
                     },
