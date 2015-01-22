@@ -2,14 +2,15 @@
 # This file is distributed under the GPL3+.
 # Translators:
 # Wei He <iheywin@163.com>, 2014
+# Jack Lee <suifengtec@qq.com>, 2014
 # moyu <mr.moyus@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-09-23 21:11:43+00:00\n"
-"PO-Revision-Date: 2014-09-24 10:34+0000\n"
-"Last-Translator: Dionizio Bonfim Bach <translations@djio.com.br>\n"
+"POT-Creation-Date: 2014-09-24 17:38:11+00:00\n"
+"PO-Revision-Date: 2015-01-16 13:42+0000\n"
+"Last-Translator: Jack Lee <suifengtec@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/redux-framework/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,38 +26,38 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:470
-#: ReduxCore/framework.php:1939
+#: ReduxCore/extensions/customizer/extension_customizer.php:472
+#: ReduxCore/framework.php:1940
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr "你修改了某些设置项. 需要立即保存吗?"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:471
-#: ReduxCore/framework.php:1947
+#: ReduxCore/extensions/customizer/extension_customizer.php:473
+#: ReduxCore/framework.php:1948
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr "你确定要这样做? 重置将会抹掉当前所有设置数据值."
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:472
-#: ReduxCore/framework.php:1963
+#: ReduxCore/extensions/customizer/extension_customizer.php:474
+#: ReduxCore/framework.php:1964
 msgid ""
 "Your current options will be replaced with the values of this preset. Would "
 "you like to proceed?"
 msgstr "你当前的设置将会被现在的更改所覆盖. 确定继续?"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:505
+#: ReduxCore/extensions/customizer/extension_customizer.php:507
 msgid "You have changes that are not saved.  Would you like to save them now?"
 msgstr "你还未保存更改. 需要立即保存吗?"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:506
+#: ReduxCore/extensions/customizer/extension_customizer.php:508
 msgid "Are you sure?  Resetting will lose all custom values."
 msgstr "你确定要这样做? 重置将会抹掉当前所有设置数据值."
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:507
+#: ReduxCore/extensions/customizer/extension_customizer.php:509
 msgid ""
 "Your current options will be replaced with the values of this preset.  Would"
 " you like to proceed?"
 msgstr "你当前的设置将会被现在的更改所覆盖. 确定继续?"
 
-#: ReduxCore/framework.php:206
+#: ReduxCore/framework.php:207
 msgid "Options panel created using %1$s"
 msgstr "设置面板由 %1$s 提供开发"
 
@@ -64,118 +65,118 @@ msgstr "设置面板由 %1$s 提供开发"
 msgid "Redux Framework"
 msgstr "Redux 开发框架"
 
-#: ReduxCore/framework.php:210 ReduxCore/framework.php:214
+#: ReduxCore/framework.php:211 ReduxCore/framework.php:215
 msgid "Options"
 msgstr "选项"
 
-#: ReduxCore/framework.php:1358 ReduxCore/framework.php:1359
-#: ReduxCore/framework.php:3544 ReduxCore/framework.php:3623
+#: ReduxCore/framework.php:1359 ReduxCore/framework.php:1360
+#: ReduxCore/framework.php:3561 ReduxCore/framework.php:3640
 msgid "System Info"
 msgstr "系统信息"
 
-#: ReduxCore/framework.php:1955
+#: ReduxCore/framework.php:1956
 msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr "你确定要这样做? 重置将会抹掉当前选区的所有设置数据值."
 
-#: ReduxCore/framework.php:1970
+#: ReduxCore/framework.php:1971
 msgid "Please Wait"
 msgstr "请稍等"
 
-#: ReduxCore/framework.php:2095
+#: ReduxCore/framework.php:2096
 msgid "Enable"
 msgstr "启用"
 
-#: ReduxCore/framework.php:2100
+#: ReduxCore/framework.php:2101
 msgid "Disable"
 msgstr "停用"
 
-#: ReduxCore/framework.php:2106
+#: ReduxCore/framework.php:2107
 msgid "moving the mouse over"
-msgstr ""
+msgstr "将鼠标移动到上面"
 
-#: ReduxCore/framework.php:2108
+#: ReduxCore/framework.php:2109
 msgid "clicking"
-msgstr ""
+msgstr "点击"
 
-#: ReduxCore/framework.php:2112
+#: ReduxCore/framework.php:2113
 msgid ""
 "Hints are tooltips that popup when %d the hint icon, offering addition "
 "information about the field in which they appear.  They can be %d d by using"
 " the link below."
 msgstr ""
 
-#: ReduxCore/framework.php:2117
+#: ReduxCore/framework.php:2118
 msgid "Hints"
 msgstr "提示"
 
-#: ReduxCore/framework.php:2242
+#: ReduxCore/framework.php:2243
 msgid "Default"
 msgstr "默认"
 
-#: ReduxCore/framework.php:3295
+#: ReduxCore/framework.php:3308
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr "警告! 若没有javascript, 这个设置区域将不能正常工作."
 
-#: ReduxCore/framework.php:3342
+#: ReduxCore/framework.php:3359
 msgid "Developer Mode Enabled"
-msgstr ""
+msgstr "已启用开发模式"
 
-#: ReduxCore/framework.php:3370
+#: ReduxCore/framework.php:3387
 msgid "Expand"
 msgstr "展开"
 
-#: ReduxCore/framework.php:3372 ReduxCore/framework.php:3680
+#: ReduxCore/framework.php:3389 ReduxCore/framework.php:3697
 msgid "Save Changes"
 msgstr "保存更改"
 
-#: ReduxCore/framework.php:3376 ReduxCore/framework.php:3684
+#: ReduxCore/framework.php:3393 ReduxCore/framework.php:3701
 msgid "Reset Section"
 msgstr "重置选区"
 
-#: ReduxCore/framework.php:3378 ReduxCore/framework.php:3686
+#: ReduxCore/framework.php:3395 ReduxCore/framework.php:3703
 msgid "Reset All"
 msgstr "全部重置"
 
-#: ReduxCore/framework.php:3383 ReduxCore/framework.php:3691
+#: ReduxCore/framework.php:3400 ReduxCore/framework.php:3708
 msgid "Working..."
 msgstr "处理中..."
 
-#: ReduxCore/framework.php:3403
+#: ReduxCore/framework.php:3420
 msgid "Settings Imported!"
 msgstr "设置数据已成功导入!"
 
-#: ReduxCore/framework.php:3418
+#: ReduxCore/framework.php:3435
 msgid "All Defaults Restored!"
 msgstr "所有默认设置已恢复!"
 
-#: ReduxCore/framework.php:3432
+#: ReduxCore/framework.php:3449
 msgid "Section Defaults Restored!"
 msgstr "选区的默认设置已恢复!"
 
-#: ReduxCore/framework.php:3446
+#: ReduxCore/framework.php:3463
 msgid "Settings Saved!"
 msgstr "成功保存设置!"
 
-#: ReduxCore/framework.php:3464
+#: ReduxCore/framework.php:3481
 msgid "Settings have changed, you should save them!"
 msgstr "设置项已改变, 你应该立即保存!"
 
-#: ReduxCore/framework.php:3472
+#: ReduxCore/framework.php:3489
 msgid "error(s) were found!"
 msgstr "找到错误信息!"
 
-#: ReduxCore/framework.php:3480
+#: ReduxCore/framework.php:3497
 msgid "warning(s) were found!"
 msgstr "找到警告信息!"
 
 #: ReduxCore/inc/class.redux_filesystem.php:22
 msgid "Unable to create a required directory. Please ensure that"
-msgstr ""
+msgstr "未能创建必需的目录.请确保"
 
 #: ReduxCore/inc/class.redux_filesystem.php:24
 msgid ""
 "has the proper read/write permissions or enter your FTP information below."
-msgstr ""
+msgstr "有合适的读/写权限或者在下面输入您的FTP信息."
 
 #: ReduxCore/inc/class.redux_functions.php:253
 msgid "Dismiss"
@@ -191,7 +192,7 @@ msgstr ""
 #: ReduxCore/inc/class.redux_themecheck.php:106
 msgid ""
 "The following directories & files are still located in your "
-"<strong>Redux</strong>  directory. They may cause errors in ThemeCheck."
+"<strong>Redux</strong>  directory. They may cause errors in Theme-Check."
 msgstr ""
 
 #: ReduxCore/inc/debug.php:41 ReduxCore/inc/debug.php:69
@@ -362,7 +363,7 @@ msgstr ""
 
 #: ReduxCore/inc/fields/slides/field_slides.php:73
 msgid "New %s"
-msgstr ""
+msgstr "新%s"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:145
 #: ReduxCore/inc/fields/slides/field_slides.php:200
@@ -386,7 +387,7 @@ msgstr "删除"
 
 #: ReduxCore/inc/fields/slides/field_slides.php:223
 msgid "Add %s"
-msgstr ""
+msgstr "添加%s"
 
 #: ReduxCore/inc/fields/switch/field_switch.php:41
 msgid "On"
@@ -717,23 +718,23 @@ msgstr "你必须填写一个有效的URL地址."
 
 #: ReduxCore/inc/welcome.php:40
 msgid "Welcome to Redux Framework"
-msgstr ""
+msgstr "欢迎使用Redux Framework"
 
 #: ReduxCore/inc/welcome.php:48 ReduxCore/inc/welcome.php:295
 msgid "Redux Framework Changelog"
-msgstr ""
+msgstr "Redux Framework 更新日志"
 
 #: ReduxCore/inc/welcome.php:56
 msgid "Getting started with Redux Framework"
-msgstr ""
+msgstr "开始使用Redux Framework"
 
 #: ReduxCore/inc/welcome.php:64
 msgid "The people that develop Redux Framework"
-msgstr ""
+msgstr "开发了Redux Framework的人"
 
 #: ReduxCore/inc/welcome.php:135
 msgid "What's New"
-msgstr ""
+msgstr "有什么新的"
 
 #: ReduxCore/inc/welcome.php:143
 msgid "Changelog"
@@ -746,7 +747,7 @@ msgstr "鸣谢"
 #: ReduxCore/inc/welcome.php:164 ReduxCore/inc/welcome.php:333
 #: ReduxCore/inc/welcome.php:471
 msgid "Welcome to Redux Framework %s"
-msgstr ""
+msgstr "欢迎使用Redux Framework %s"
 
 #: ReduxCore/inc/welcome.php:167
 msgid ""
@@ -761,7 +762,7 @@ msgstr "%s版本"
 
 #: ReduxCore/inc/welcome.php:174
 msgid "Some Feature"
-msgstr ""
+msgstr "一些特性"
 
 #: ReduxCore/inc/welcome.php:178 ReduxCore/inc/welcome.php:182
 #: ReduxCore/inc/welcome.php:195 ReduxCore/inc/welcome.php:199
@@ -769,69 +770,69 @@ msgstr ""
 #: ReduxCore/inc/welcome.php:221 ReduxCore/inc/welcome.php:225
 #: ReduxCore/inc/welcome.php:230
 msgid "Feature"
-msgstr ""
+msgstr "特性"
 
 #: ReduxCore/inc/welcome.php:190
 msgid "Some feature"
-msgstr ""
+msgstr "一些特性"
 
 #: ReduxCore/inc/welcome.php:217
 msgid "More Features"
-msgstr ""
+msgstr "更多特性"
 
 #: ReduxCore/inc/welcome.php:223 ReduxCore/inc/welcome.php:227
 #: ReduxCore/inc/welcome.php:232
 msgid "description"
-msgstr ""
+msgstr "描述"
 
 #: ReduxCore/inc/welcome.php:238
 msgid "Additional Updates"
-msgstr ""
+msgstr "附加的更新"
 
 #: ReduxCore/inc/welcome.php:242 ReduxCore/inc/welcome.php:246
 #: ReduxCore/inc/welcome.php:252 ReduxCore/inc/welcome.php:256
 #: ReduxCore/inc/welcome.php:262 ReduxCore/inc/welcome.php:266
 msgid "Cool thing"
-msgstr ""
+msgstr "很酷的东西"
 
 #: ReduxCore/inc/welcome.php:244 ReduxCore/inc/welcome.php:248
 #: ReduxCore/inc/welcome.php:254 ReduxCore/inc/welcome.php:258
 #: ReduxCore/inc/welcome.php:264 ReduxCore/inc/welcome.php:268
 msgid "cool thing description."
-msgstr ""
+msgstr "很酷的东西的描述."
 
 #: ReduxCore/inc/welcome.php:277 ReduxCore/inc/welcome.php:316
 msgid "Go to Redux Framework"
-msgstr ""
+msgstr "去Redux Framework"
 
 #: ReduxCore/inc/welcome.php:278
 msgid "View the Full Changelog"
-msgstr ""
+msgstr "查看全部更新日志"
 
 #: ReduxCore/inc/welcome.php:298 ReduxCore/inc/welcome.php:336
 #: ReduxCore/inc/welcome.php:474
 msgid ""
 "Thank you for updating to the latest version! Redux Framework %s is ready to"
 " make your <description>"
-msgstr ""
+msgstr "感谢更新至最新版本!Redux Framework %s已经准备做您的<description>"
 
 #: ReduxCore/inc/welcome.php:305
 msgid "Full Changelog"
-msgstr ""
+msgstr "全部更新日志"
 
 #: ReduxCore/inc/welcome.php:342
 msgid ""
 "Use the tips below to get started using Redux Framework. You'll be up and "
 "running in no time!"
-msgstr ""
+msgstr "使用下面的提示开始使用Redux Framework. 将会节省您的大量时间!"
 
 #: ReduxCore/inc/welcome.php:345
 msgid "Creating Your First Panel"
-msgstr ""
+msgstr "创建您的第一个面板"
 
 #: ReduxCore/inc/welcome.php:350
 msgid "<a href=\"%s\">%s &rarr; Add New</a>"
-msgstr ""
+msgstr "<a href=\"%s\">%s &rarr;添加新的</a>"
 
 #: ReduxCore/inc/welcome.php:352
 msgid ""
@@ -854,7 +855,7 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:358
 msgid "Download Files"
-msgstr ""
+msgstr "下载文件"
 
 #: ReduxCore/inc/welcome.php:360
 msgid ""
@@ -865,11 +866,11 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:366
 msgid "Display a Product Grid"
-msgstr ""
+msgstr "显示一个产品网格"
 
 #: ReduxCore/inc/welcome.php:373
 msgid "Flexible Product Grids"
-msgstr ""
+msgstr "弹性产品网格"
 
 #: ReduxCore/inc/welcome.php:375
 msgid ""
@@ -879,7 +880,7 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:377
 msgid "Change the Number of Columns"
-msgstr ""
+msgstr "改变分栏数量"
 
 #: ReduxCore/inc/welcome.php:379
 msgid ""
@@ -889,7 +890,7 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:385
 msgid "Additional Display Options"
-msgstr ""
+msgstr "附加显示选项"
 
 #: ReduxCore/inc/welcome.php:387
 msgid ""
@@ -899,11 +900,11 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:392
 msgid "Purchase Buttons Anywhere"
-msgstr ""
+msgstr "在任何地方使用购买按钮"
 
 #: ReduxCore/inc/welcome.php:397
 msgid "The <em>[purchase_link]</em> Shortcode"
-msgstr ""
+msgstr "<em>[purchase_link]</em> 短代码"
 
 #: ReduxCore/inc/welcome.php:399
 msgid ""
@@ -914,7 +915,7 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:401
 msgid "Buy Now Buttons"
-msgstr ""
+msgstr "现在购买按钮"
 
 #: ReduxCore/inc/welcome.php:403
 msgid ""
@@ -925,27 +926,27 @@ msgstr ""
 
 #: ReduxCore/inc/welcome.php:409
 msgid "Need Help?"
-msgstr ""
+msgstr "需要帮助?"
 
 #: ReduxCore/inc/welcome.php:413
 msgid "Phenomenal Support"
-msgstr ""
+msgstr "惊人的支持"
 
 #: ReduxCore/inc/welcome.php:417
 msgid "Need Even Faster Support?"
-msgstr ""
+msgstr "需要更快的支持?"
 
 #: ReduxCore/inc/welcome.php:425
 msgid "Stay Up to Date"
-msgstr ""
+msgstr "保持最新"
 
 #: ReduxCore/inc/welcome.php:429
 msgid "Get Notified of Extension Releases"
-msgstr ""
+msgstr "获取扩展发行的通知"
 
 #: ReduxCore/inc/welcome.php:433
 msgid "Get Alerted About New Tutorials"
-msgstr ""
+msgstr "获取有关新教程"
 
 #: ReduxCore/inc/welcome.php:441
 msgid "Extensions for Everything"
@@ -961,25 +962,25 @@ msgid ""
 "of Easy Digital Downloads. There are extensions for payment processors, such"
 " as Stripe and PayPal, extensions for newsletter integrations, and many, "
 "many more."
-msgstr ""
+msgstr "扩展插件极大的增强了Easy Digital Downloads的功能.那里有用于支付处理的扩展,例如Stripe和 PayPal, 用于订阅的扩展插件等等."
 
 #: ReduxCore/inc/welcome.php:449
 msgid "Visit the Extension Store"
-msgstr ""
+msgstr "查看扩展商店"
 
 #: ReduxCore/inc/welcome.php:480
 msgid ""
 "Redux Framework is created by a worldwide team of developers who <something "
 "witty here>"
-msgstr ""
+msgstr "Redux Framework被一组世界范围内的开发者所创建 <something witty here>"
 
 #: ReduxCore/inc/welcome.php:500
 msgid "No valid changlog was found."
-msgstr ""
+msgstr "没有找到更新日志."
 
 #: ReduxCore/inc/welcome.php:539
 msgid "View %s"
-msgstr ""
+msgstr "查看%s"
 
 #: class.redux-plugin.php:306
 msgid "Redux Framework has an embedded demo."
@@ -1043,18 +1044,18 @@ msgstr "您没有足够的权限访问该页面。"
 
 #. Plugin URI of the plugin/theme
 msgid "http://wordpress.org/plugins/redux-framework"
-msgstr ""
+msgstr "http://wordpress.org/plugins/redux-framework"
 
 #. Description of the plugin/theme
 msgid ""
 "Redux is a simple, truly extensible options framework for WordPress themes "
 "and plugins."
-msgstr ""
+msgstr "Redux是一个简洁,可扩展的Wordpress主题和插件的设置框架."
 
 #. Author of the plugin/theme
 msgid "Team Redux"
-msgstr ""
+msgstr "Team Redux"
 
 #. Author URI of the plugin/theme
 msgid "http://reduxframework.com"
-msgstr ""
+msgstr "http://reduxframework.com"
