@@ -176,6 +176,7 @@
             public $args = array();
             public $filesystem  = null;
             public $font_groups = array();
+            public $wpml = array();
             
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -2059,6 +2060,24 @@
                                 }
                             }
 
+
+                            if (isset($field['wpml']) && function_exists('icl_register_string') && !empty($field['wpml'])) {
+
+                                $data = isset( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : '';
+                                $context = "";
+
+                                if (is_string($field['wpml'])) {
+                                    $context = $field['wpml'];
+                                } else if (isset($this->args['display_name']) && !empty($this->args['display_name'])) {
+                                    $context = $this->args['display_name'];
+                                } else if (isset($this->args['menu_name']) && !empty($this->args['menu_name'])) {
+                                    $context = $this->args['menu_name'];
+                                }
+
+                                icl_register_string($context, $field['title'], $data);
+                            }
+
+
                             if ( ! isset( $field['id'] ) ) {
                                 echo '<br /><h3>No field ID is set.</h3><pre>';
                                 print_r( $field );
@@ -2296,6 +2315,7 @@
                     unset( $this->transients['run_compiler'] );
                     $this->set_transients();
                 }
+
             } // _register_settings()
 
             /**
