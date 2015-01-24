@@ -155,7 +155,7 @@
                 }
 
                 if ( ! $res ) {
-                    add_action( "redux/page/{$parent->args['opt_name']}/form/before", array( $this, 'ftp_form' ) );
+                    add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array( $this, 'ftp_form' ) );
                 }
 
                 return $res;

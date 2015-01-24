@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.0';
+            public static $_version = '3.4.1';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -1968,6 +1968,11 @@
                     if ( isset( $section['id'] ) ) {
                         $section = apply_filters( "redux/options/{$this->args['opt_name']}/section/{$section['id']}", $section );
                     }
+
+	                if ( empty( $section ) ) {
+		                unset($this->sections[$k]);
+		                continue;
+	                }
 
                     if ( ! isset( $section['title'] ) ) {
                         $section['title'] = "";
