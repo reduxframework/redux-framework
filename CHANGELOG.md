@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.2
+* Update:  ACE Editor.  Thanks @corradomatt.
+
 ## 3.4.1
 * Fixed:   Small filesystem option with bad filter key reference.
 * Added:   Small return if $section filter returned the section empty.
