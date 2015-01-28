@@ -8,7 +8,7 @@
 
     $( document ).ready(
         function() {
-            //redux.field_objects.ace_editor.init();
+            redux.field_objects.ace_editor.init();
         }
     );
 
