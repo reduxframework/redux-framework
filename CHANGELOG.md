@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.2.1
+* Fixed:   #2025: Issue with select sorting.
+
 ## 3.4.2
 * Update:  ACE Editor.  Thanks @corradomatt.
 

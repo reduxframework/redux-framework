@@ -142,7 +142,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                 $selected = selected( $this->value, $id, false );
             }
 
-            echo '<option data-group="' . $group_name . '" value="' . $id . '"' . $selected . '>' . $value . '</option>';                
+            echo '<option value="' . $id . '"' . $selected . '>' . $value . '</option>';                
         }
 
         /**
