@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Team Redux
+# Copyright (C) 2015 Team Redux
 # This file is distributed under the GPL3+.
 # Translators:
 # Wei He <iheywin@163.com>, 2014
@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework\n"
 "Report-Msgid-Bugs-To: https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2014-09-24 17:38:11+00:00\n"
-"PO-Revision-Date: 2015-01-16 13:42+0000\n"
-"Last-Translator: Jack Lee <suifengtec@qq.com>\n"
+"POT-Creation-Date: 2015-01-22 18:37:41+00:00\n"
+"PO-Revision-Date: 2015-01-23 10:05+0000\n"
+"Last-Translator: Dionizio Bonfim Bach <translations@djio.com.br>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/redux-framework/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
@@ -26,38 +26,46 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Textdomain-Support: yes\n"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:472
-#: ReduxCore/framework.php:1940
+#: ReduxCore/core/enqueue.php:346
+#: ReduxCore/extensions/customizer/extension_customizer.php:530
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr "你修改了某些设置项. 需要立即保存吗?"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:473
-#: ReduxCore/framework.php:1948
+#: ReduxCore/core/enqueue.php:354
+#: ReduxCore/extensions/customizer/extension_customizer.php:531
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr "你确定要这样做? 重置将会抹掉当前所有设置数据值."
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:474
-#: ReduxCore/framework.php:1964
+#: ReduxCore/core/enqueue.php:362
+msgid "Are you sure? Resetting will lose all custom values in this section."
+msgstr "你确定要这样做? 重置将会抹掉当前选区的所有设置数据值."
+
+#: ReduxCore/core/enqueue.php:370
+#: ReduxCore/extensions/customizer/extension_customizer.php:532
 msgid ""
 "Your current options will be replaced with the values of this preset. Would "
 "you like to proceed?"
 msgstr "你当前的设置将会被现在的更改所覆盖. 确定继续?"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:507
+#: ReduxCore/core/enqueue.php:377
+msgid "Please Wait"
+msgstr "请稍等"
+
+#: ReduxCore/extensions/customizer/extension_customizer.php:565
 msgid "You have changes that are not saved.  Would you like to save them now?"
 msgstr "你还未保存更改. 需要立即保存吗?"
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:508
+#: ReduxCore/extensions/customizer/extension_customizer.php:566
 msgid "Are you sure?  Resetting will lose all custom values."
 msgstr "你确定要这样做? 重置将会抹掉当前所有设置数据值."
 
-#: ReduxCore/extensions/customizer/extension_customizer.php:509
+#: ReduxCore/extensions/customizer/extension_customizer.php:567
 msgid ""
 "Your current options will be replaced with the values of this preset.  Would"
 " you like to proceed?"
 msgstr "你当前的设置将会被现在的更改所覆盖. 确定继续?"
 
-#: ReduxCore/framework.php:207
+#: ReduxCore/framework.php:223
 msgid "Options panel created using %1$s"
 msgstr "设置面板由 %1$s 提供开发"
 
@@ -65,131 +73,123 @@ msgstr "设置面板由 %1$s 提供开发"
 msgid "Redux Framework"
 msgstr "Redux 开发框架"
 
-#: ReduxCore/framework.php:211 ReduxCore/framework.php:215
+#: ReduxCore/framework.php:227 ReduxCore/framework.php:231
 msgid "Options"
 msgstr "选项"
 
-#: ReduxCore/framework.php:1359 ReduxCore/framework.php:1360
-#: ReduxCore/framework.php:3561 ReduxCore/framework.php:3640
+#: ReduxCore/framework.php:1384 ReduxCore/framework.php:1385
+#: ReduxCore/framework.php:3250 ReduxCore/framework.php:3329
 msgid "System Info"
 msgstr "系统信息"
 
-#: ReduxCore/framework.php:1956
-msgid "Are you sure? Resetting will lose all custom values in this section."
-msgstr "你确定要这样做? 重置将会抹掉当前选区的所有设置数据值."
-
-#: ReduxCore/framework.php:1971
-msgid "Please Wait"
-msgstr "请稍等"
-
-#: ReduxCore/framework.php:2096
+#: ReduxCore/framework.php:1688
 msgid "Enable"
 msgstr "启用"
 
-#: ReduxCore/framework.php:2101
+#: ReduxCore/framework.php:1693
 msgid "Disable"
 msgstr "停用"
 
-#: ReduxCore/framework.php:2107
+#: ReduxCore/framework.php:1699
 msgid "moving the mouse over"
 msgstr "将鼠标移动到上面"
 
-#: ReduxCore/framework.php:2109
+#: ReduxCore/framework.php:1701
 msgid "clicking"
 msgstr "点击"
 
-#: ReduxCore/framework.php:2113
+#: ReduxCore/framework.php:1705
 msgid ""
 "Hints are tooltips that popup when %d the hint icon, offering addition "
 "information about the field in which they appear.  They can be %d d by using"
 " the link below."
 msgstr ""
 
-#: ReduxCore/framework.php:2118
+#: ReduxCore/framework.php:1710
 msgid "Hints"
 msgstr "提示"
 
-#: ReduxCore/framework.php:2243
+#: ReduxCore/framework.php:1835
 msgid "Default"
 msgstr "默认"
 
-#: ReduxCore/framework.php:3308
+#: ReduxCore/framework.php:2994
 msgid "Warning- This options panel will not work properly without javascript!"
 msgstr "警告! 若没有javascript, 这个设置区域将不能正常工作."
 
-#: ReduxCore/framework.php:3359
+#: ReduxCore/framework.php:3045
 msgid "Developer Mode Enabled"
 msgstr "已启用开发模式"
 
-#: ReduxCore/framework.php:3387
+#: ReduxCore/framework.php:3074
 msgid "Expand"
 msgstr "展开"
 
-#: ReduxCore/framework.php:3389 ReduxCore/framework.php:3697
+#: ReduxCore/framework.php:3076 ReduxCore/framework.php:3386
 msgid "Save Changes"
 msgstr "保存更改"
 
-#: ReduxCore/framework.php:3393 ReduxCore/framework.php:3701
+#: ReduxCore/framework.php:3080 ReduxCore/framework.php:3390
 msgid "Reset Section"
 msgstr "重置选区"
 
-#: ReduxCore/framework.php:3395 ReduxCore/framework.php:3703
+#: ReduxCore/framework.php:3082 ReduxCore/framework.php:3392
 msgid "Reset All"
 msgstr "全部重置"
 
-#: ReduxCore/framework.php:3400 ReduxCore/framework.php:3708
+#: ReduxCore/framework.php:3087 ReduxCore/framework.php:3397
 msgid "Working..."
 msgstr "处理中..."
 
-#: ReduxCore/framework.php:3420
+#: ReduxCore/framework.php:3107
 msgid "Settings Imported!"
 msgstr "设置数据已成功导入!"
 
-#: ReduxCore/framework.php:3435
+#: ReduxCore/framework.php:3122
 msgid "All Defaults Restored!"
 msgstr "所有默认设置已恢复!"
 
-#: ReduxCore/framework.php:3449
+#: ReduxCore/framework.php:3136
 msgid "Section Defaults Restored!"
 msgstr "选区的默认设置已恢复!"
 
-#: ReduxCore/framework.php:3463
+#: ReduxCore/framework.php:3150
 msgid "Settings Saved!"
 msgstr "成功保存设置!"
 
-#: ReduxCore/framework.php:3481
+#: ReduxCore/framework.php:3170
 msgid "Settings have changed, you should save them!"
 msgstr "设置项已改变, 你应该立即保存!"
 
-#: ReduxCore/framework.php:3489
+#: ReduxCore/framework.php:3178
 msgid "error(s) were found!"
 msgstr "找到错误信息!"
 
-#: ReduxCore/framework.php:3497
+#: ReduxCore/framework.php:3186
 msgid "warning(s) were found!"
 msgstr "找到警告信息!"
 
-#: ReduxCore/inc/class.redux_filesystem.php:22
-msgid "Unable to create a required directory. Please ensure that"
-msgstr "未能创建必需的目录.请确保"
+#: ReduxCore/inc/class.redux_filesystem.php:23
+msgid "Unable to modify required files. Please ensure that"
+msgstr ""
 
-#: ReduxCore/inc/class.redux_filesystem.php:24
+#: ReduxCore/inc/class.redux_filesystem.php:25
 msgid ""
 "has the proper read/write permissions or enter your FTP information below."
 msgstr "有合适的读/写权限或者在下面输入您的FTP信息."
 
-#: ReduxCore/inc/class.redux_functions.php:253
+#: ReduxCore/inc/class.redux_functions.php:231
 msgid "Dismiss"
 msgstr "不再显示"
 
-#: ReduxCore/inc/class.redux_themecheck.php:58
+#: ReduxCore/inc/class.redux_themecheck.php:61
 msgid ""
 "The theme you are testing has %s embedded. We invite you to read the "
 "%sTheme-Check Documentation%s to understand some warnings you will see "
 "because of Redux."
 msgstr ""
 
-#: ReduxCore/inc/class.redux_themecheck.php:106
+#: ReduxCore/inc/class.redux_themecheck.php:109
 msgid ""
 "The following directories & files are still located in your "
 "<strong>Redux</strong>  directory. They may cause errors in Theme-Check."
@@ -205,10 +205,9 @@ msgid "Show Object in Javascript Console Object"
 msgstr "在Javsscript控制台显示对象"
 
 #: ReduxCore/inc/fields/background/field_background.php:124
-#: ReduxCore/inc/fields/color/field_color.php:72
+#: ReduxCore/inc/fields/color/field_color.php:73
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:79
 #: ReduxCore/inc/fields/color_gradient/field_color_gradient.php:91
-#: ReduxCore/inc/fields/color_rgba/field_color_rgba.php:77
 msgid "Transparent"
 msgstr "透明"
 
@@ -242,14 +241,14 @@ msgid "No media selected"
 msgstr "没有选择媒体"
 
 #: ReduxCore/inc/fields/background/field_background.php:314
-#: ReduxCore/inc/fields/media/field_media.php:193
+#: ReduxCore/inc/fields/media/field_media.php:198
 #: ReduxCore/inc/fields/slides/field_slides.php:126
 #: ReduxCore/inc/fields/slides/field_slides.php:188
 msgid "Upload"
 msgstr "上传"
 
 #: ReduxCore/inc/fields/background/field_background.php:321
-#: ReduxCore/inc/fields/media/field_media.php:200
+#: ReduxCore/inc/fields/media/field_media.php:205
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:69
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:73
 #: ReduxCore/inc/fields/multi_text/field_multi_text.php:76
@@ -258,32 +257,32 @@ msgstr "上传"
 msgid "Remove"
 msgstr "移除"
 
-#: ReduxCore/inc/fields/border/field_border.php:114
+#: ReduxCore/inc/fields/border/field_border.php:125
 #: ReduxCore/inc/fields/spacing/field_spacing.php:191
 msgid "All"
 msgstr "全部"
 
-#: ReduxCore/inc/fields/border/field_border.php:127
+#: ReduxCore/inc/fields/border/field_border.php:138
 #: ReduxCore/inc/fields/spacing/field_spacing.php:215
 msgid "Top"
 msgstr "上"
 
-#: ReduxCore/inc/fields/border/field_border.php:134
+#: ReduxCore/inc/fields/border/field_border.php:145
 #: ReduxCore/inc/fields/spacing/field_spacing.php:222
 msgid "Right"
 msgstr "右"
 
-#: ReduxCore/inc/fields/border/field_border.php:141
+#: ReduxCore/inc/fields/border/field_border.php:152
 #: ReduxCore/inc/fields/spacing/field_spacing.php:229
 msgid "Bottom"
 msgstr "下"
 
-#: ReduxCore/inc/fields/border/field_border.php:148
+#: ReduxCore/inc/fields/border/field_border.php:159
 #: ReduxCore/inc/fields/spacing/field_spacing.php:236
 msgid "Left"
 msgstr "左"
 
-#: ReduxCore/inc/fields/border/field_border.php:162
+#: ReduxCore/inc/fields/border/field_border.php:173
 msgid "Border style"
 msgstr "描边样式"
 
@@ -347,13 +346,13 @@ msgstr "密码"
 msgid "Username"
 msgstr "用户名"
 
-#: ReduxCore/inc/fields/select/field_select.php:82
-#: ReduxCore/inc/fields/select_image/field_select_image.php:62
+#: ReduxCore/inc/fields/select/field_select.php:83
+#: ReduxCore/inc/fields/select_image/field_select_image.php:63
 msgid "Select an item"
 msgstr "选择一个项目"
 
-#: ReduxCore/inc/fields/select/field_select.php:126
-#: ReduxCore/inc/fields/select_image/field_select_image.php:143
+#: ReduxCore/inc/fields/select/field_select.php:134
+#: ReduxCore/inc/fields/select_image/field_select_image.php:144
 msgid "No items of this type were found."
 msgstr "没有找到符合条件的此类别项目."
 
@@ -362,6 +361,7 @@ msgid "Slide"
 msgstr ""
 
 #: ReduxCore/inc/fields/slides/field_slides.php:73
+#: ReduxCore/inc/fields/slides/field_slides.php:174
 msgid "New %s"
 msgstr "新%s"
 
@@ -495,11 +495,11 @@ msgstr "字体颜色"
 msgid "Font color"
 msgstr "字体颜色"
 
-#: ReduxCore/inc/fields/typography/field_typography.php:841
+#: ReduxCore/inc/fields/typography/field_typography.php:871
 msgid "Standard Fonts"
 msgstr "标准字体"
 
-#: ReduxCore/inc/fields/typography/field_typography.php:942
+#: ReduxCore/inc/fields/typography/field_typography.php:972
 msgid "Google Webfonts"
 msgstr "Google字体"
 

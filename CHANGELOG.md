@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.2.2
+* Fixed:   #2023: Issue with custom submenus in menu.
+
 ## 3.4.2.1
 * Fixed:   #2025: Issue with select sorting.
 

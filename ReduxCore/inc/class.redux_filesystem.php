@@ -149,6 +149,11 @@
                     }
                 } elseif ( $action == 'object' ) {
                     $res = $wp_filesystem;
+                } elseif ( $action == 'unzip' ) {
+	                $unzipfile = unzip_file( $file, $destination );
+	                if ( $unzipfile ) {
+		                $res = true;
+	                }
                 }
                 if ( isset( $res ) && ! $res ) {
                     $this->killswitch = true;
