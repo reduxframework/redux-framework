@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.2.3
+* Fixed:   #2019 - Reset issues with PHP 5.2.  Thanks a bunch, @Webcreations907!
+
 ## 3.4.2.2
 * Fixed:   #2023: Issue with custom submenus in menu.
 
