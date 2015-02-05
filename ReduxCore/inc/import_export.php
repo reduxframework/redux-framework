@@ -39,11 +39,11 @@
             public function __construct( $parent ) {
                 $this->parent = $parent;
 
-                add_action( "wp_ajax_redux_link_options", array( $this, "link_options" ) );
-                add_action( "wp_ajax_nopriv_redux_link_options", array( $this, "link_options" ) );
+                add_action( "wp_ajax_redux_link_options-".$this->parent->args['opt_name'], array( $this, "link_options" ) );
+                add_action( "wp_ajax_nopriv_redux_link_options-".$this->parent->args['opt_name'], array( $this, "link_options" ) );
 
-                add_action( "wp_ajax_redux_download_options", array( $this, "download_options" ) );
-                add_action( "wp_ajax_nopriv_redux_download_options", array( $this, "download_options" ) );
+                add_action( "wp_ajax_redux_download_options-".$this->parent->args['opt_name'], array( $this, "download_options" ) );
+                add_action( "wp_ajax_nopriv_redux_download_options-".$this->parent->args['opt_name'], array( $this, "download_options" ) );
             }
 
             /**
@@ -100,7 +100,7 @@
                 echo '<p class="description">' . apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'redux-framework' ) ) . '</p>';
                 echo '</div>';
 
-                $link = admin_url( 'admin-ajax.php?action=redux_download_options&secret=' . $secret );
+                $link = admin_url( 'admin-ajax.php?action=redux_download_options-'.$this->parent->args['opt_name'].'&secret=' . $secret );
                 echo '<p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary">' . __( 'Copy', 'redux-framework' ) . '</a> <a href="' . $link . '" id="redux-export-code-dl" class="button-primary">' . __( 'Download', 'redux-framework' ) . '</a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary">' . __( 'Copy Link', 'redux-framework' ) . '</a></p>';
 
                 $backup_options                 = $this->parent->options;
@@ -112,7 +112,7 @@
 
                 echo '</textarea>';
 
-                $link = admin_url( 'admin-ajax.php?action=redux_link_options&secret=' . $secret );
+                $link = admin_url( 'admin-ajax.php?action=redux_link_options-'.$this->parent->args['opt_name'].'&secret=' . $secret );
 
                 echo '<input type="text" class="large-text noUpdate" id="redux-export-link-value" value="' . $link . '" />';
                 echo "</p>";
@@ -206,7 +206,7 @@
 
                 $content = json_encode( $backup_options );
 
-                if ( isset( $_GET['action'] ) && $_GET['action'] == 'redux_download_options' ) {
+                if ( isset( $_GET['action'] ) && $_GET['action'] == 'redux_download_options-'.$this->parent->args['opt_name'] ) {
                     header( 'Content-Description: File Transfer' );
                     header( 'Content-type: application/txt' );
                     header( 'Content-Disposition: attachment; filename="redux_options_' . $this->parent->args['opt_name'] . '_backup_' . date( 'd-m-Y' ) . '.json"' );
