@@ -107,7 +107,7 @@ if ( ! class_exists( 'ReduxFramework_section' ) ) {
                     ReduxFramework::$_url . 'inc/fields/section/field_section.css',
                     array(),
                     time(),
-                    true
+                    'all'
                 );
             }
         }

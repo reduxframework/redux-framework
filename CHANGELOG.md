@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.4.2.6
+* Fixed:   #1478 - Import/export failing when two instances if Redux in use.  Thanks, @desaiuditd!
+* Fixed:   Section field not indenting properly, if at all.
+
 ## 3.4.2.5
 * Added:   #2031 - Proper CSS sanitization for compliancy with WP.org. 
 
