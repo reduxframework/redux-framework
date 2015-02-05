@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.2.3';
+            public static $_version = '3.4.2.4';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -2162,7 +2162,7 @@
                             }
 
                             if ( $field['type'] == "slides" ) {
-                                if ( is_array( $this->options[ $field['id'] ] ) && isset( $this->options[ $field['id'] ][0]['attachment_id'] ) && isset( $this->options[ $field['id'] ][0]['image'] ) && ! empty( $this->options[ $field['id'] ][0]['image'] ) && strpos( $this->options[ $field['id'] ][0]['image'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === false ) {
+                                if ( isset($this->options[ $field['id']]) && is_array( $this->options[ $field['id'] ])  && isset( $this->options[ $field['id'] ][0]['attachment_id'] ) && isset( $this->options[ $field['id'] ][0]['image'] ) && ! empty( $this->options[ $field['id'] ][0]['image'] ) && strpos( $this->options[ $field['id'] ][0]['image'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === false ) {
                                     foreach ( $this->options[ $field['id'] ] as $key => $val ) {
                                         $data = wp_get_attachment_url( $val['attachment_id'] );
 

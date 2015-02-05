@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.2.4
+* Fixed:   #2027 - added isset()
+
 ## 3.4.2.3
 * Fixed:   #2019 - Reset issues with PHP 5.2.  Thanks a bunch, @Webcreations907!
 
