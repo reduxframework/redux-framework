@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.2.5
+* Added:   #2031 - Proper CSS sanitization for compliancy with WP.org. 
+
 ## 3.4.2.4
 * Fixed:   #2027 - added isset()
 
