@@ -12,7 +12,7 @@
         }
 
         &.wp-color-picker {
-            width: 80px;
+            width: 80px !important;
         }
     }
 
@@ -59,7 +59,7 @@
         input {
             margin-bottom: inherit;
             margin-top: inherit;
-            padding: 2px;
+            padding: 3px 5px;
         }
 
         .wp-color-result {
