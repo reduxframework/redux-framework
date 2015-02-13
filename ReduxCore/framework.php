@@ -2787,7 +2787,7 @@
                                     if ( isset( $plugin_options[ $field['id'] ] ) && is_array( $plugin_options[ $field['id'] ] ) && ! empty( $plugin_options[ $field['id'] ] ) ) {
                                         foreach ( $plugin_options[ $field['id'] ] as $key => $value ) {
                                             $before = $after = null;
-                                            if ( isset( $plugin_options[ $field['id'] ][ $key ] ) && ! empty( $plugin_options[ $field['id'] ][ $key ] ) ) {
+                                            if ( isset( $plugin_options[ $field['id'] ][ $key ] ) && ( ! empty( $plugin_options[ $field['id'] ][ $key ] ) || $plugin_options[ $field['id'] ][ $key ] == '0' ) ) {
                                                 if ( is_array( $plugin_options[ $field['id'] ][ $key ] ) ) {
                                                     $before = $plugin_options[ $field['id'] ][ $key ];
                                                 } else {
@@ -2795,12 +2795,12 @@
                                                 }
                                             }
 
-                                            if ( isset( $options[ $field['id'] ][ $key ] ) && ! empty( $options[ $field['id'] ][ $key ] ) ) {
+                                            if ( isset( $options[ $field['id'] ][ $key ] ) && ( ! empty( $options[ $field['id'] ][ $key ] ) || $options[ $field['id'] ][ $key ] == '0' ) ) {
                                                 $after = $options[ $field['id'] ][ $key ];
                                             }
 
                                             $validation = new $validate( $this, $field, $before, $after );
-                                            if ( ! empty( $validation->value ) ) {
+                                            if ( ! empty( $validation->value ) || $validation->value == '0' ) {
                                                 $plugin_options[ $field['id'] ][ $key ] = $validation->value;
                                             } else {
                                                 unset( $plugin_options[ $field['id'] ][ $key ] );
