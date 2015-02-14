@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.2.6';
+            public static $_version = '3.4.2.7';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -170,8 +170,8 @@
             public $debug = null;
             public $no_panel = array(); // Fields that are not visible in the panel
             private $show_hints = false;
-            private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
-            private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
+            public $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
+            public $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
             public $typography_preview = array();
             public $args = array();
             public $filesystem  = null;
@@ -1239,7 +1239,7 @@
                 if ( isset( $test[ $page_parent ] ) ) {
                     $function   = 'add_' . $test[ $page_parent ] . '_page';
                     $this->page = $function(
-                        $page_title, $menu_title, $page_permissions, $page_slug, array( $this, '_options_page_html' )
+                        $page_title, $menu_title, $page_permissions, $page_slug, array( $this, 'generate_panel' )
                     );
                 } else {
                     // Network settings and Post type menus. These do not have
@@ -1297,7 +1297,7 @@
                         $this->page = add_submenu_page(
                             $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(
                                 &$this,
-                                '_options_page_html'
+                                'generate_panel'
                             )
                         );
                     }
@@ -1333,7 +1333,7 @@
                         $this->args['menu_title'],
                         $this->args['page_permissions'],
                         $this->args['page_slug'],
-                        array( &$this, '_options_page_html' ),
+                        array( &$this, 'generate_panel' ),
                         $this->args['menu_icon'],
                         $this->args['page_priority']
                     );
@@ -2989,453 +2989,9 @@
              * @access      public
              * @return      void
              */
-            public function _options_page_html() {
-                echo '<div class="wrap"><h2></h2></div>'; // Stupid hack for Wordpress alerts and warnings
-
-                echo '<div class="clear"></div>';
-                echo '<div class="wrap">';
-
-                // Do we support JS?
-                echo '<noscript><div class="no-js">' . __( 'Warning- This options panel will not work properly without javascript!', 'redux-framework' ) . '</div></noscript>';
-
-                // Security is vital!
-                echo '<input type="hidden" id="ajaxsecurity" name="security" value="' . wp_create_nonce( 'redux_ajax_nonce' ) . '" />';
-
-                /**
-                 * action 'redux-page-before-form-{opt_name}'
-                 *
-                 * @deprecated
-                 */
-                do_action( "redux-page-before-form-{$this->args['opt_name']}" ); // Remove
-
-                /**
-                 * action 'redux/page/{opt_name}/form/before'
-                 *
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux/page/{$this->args['opt_name']}/form/before", $this );
-
-                // Main container
-                $expanded = ( $this->args['open_expanded'] ) ? ' fully-expanded' : '';
-
-                echo '<div class="redux-container' . $expanded . ( ! empty( $this->args['class'] ) ? ' ' . $this->args['class'] : '' ) . '">';
-                $url = './options.php';
-                if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
-                    if ( is_network_admin() ) {
-                        $url = './edit.php?action=redux_' . $this->args['opt_name'];
-                    }
-                }
-                echo '<form method="post" action="' . $url . '" enctype="multipart/form-data" id="redux-form-wrapper">';
-                echo '<input type="hidden" id="redux-compiler-hook" name="' . $this->args['opt_name'] . '[compiler]" value="" />';
-                echo '<input type="hidden" id="currentSection" name="' . $this->args['opt_name'] . '[redux-section]" value="" />';
-                if ( ! empty( $this->no_panel ) ) {
-                    echo '<input type="hidden" name="' . $this->args['opt_name'] . '[redux-no_panel]" value="' . implode( '|', $this->no_panel ) . '" />';
-                }
-
-
-                settings_fields( "{$this->args['opt_name']}_group" );
-
-                // Last tab?
-                $this->options['last_tab'] = ( isset( $_GET['tab'] ) && ! isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : '';
-
-                echo '<input type="hidden" id="last_tab" name="' . $this->args['opt_name'] . '[last_tab]" value="' . $this->options['last_tab'] . '" />';
-
-                // Header area
-                echo '<div id="redux-header">';
-
-                if ( ! empty( $this->args['display_name'] ) ) {
-                    echo '<div class="display_header">';
-
-                    if ( isset( $this->args['dev_mode'] ) && $this->args['dev_mode'] ) {
-                        echo '<span class="redux-dev-mode-notice">' . __( 'Developer Mode Enabled', 'redux-framework' ) . '</span>';
-                    }
-
-                    echo '<h2>' . $this->args['display_name'] . '</h2>';
-
-                    if ( ! empty( $this->args['display_version'] ) ) {
-                        echo '<span>' . $this->args['display_version'] . '</span>';
-                    }
-
-                    echo '</div>';
-                }
-
-                echo '<div class="clear"></div>';
-                echo '</div>';
-
-                // Intro text
-                if ( isset( $this->args['intro_text'] ) ) {
-                    echo '<div id="redux-intro-text">';
-                    echo $this->args['intro_text'];
-                    echo '</div>';
-                }
-
-                // Stickybar
-                echo '<div id="redux-sticky">';
-                echo '<div id="info_bar">';
-
-                $expanded = ( $this->args['open_expanded'] ) ? ' expanded' : '';
-                $hide_expand = $this->args['hide_expand'] ? ' style="display: none;"' : '';
-                
-                echo '<a href="javascript:void(0);" class="expand_options' . $expanded . '"' . $hide_expand . '>' . __( 'Expand', 'redux-framework' ) . '</a>';
-                echo '<div class="redux-action_bar">';
-                submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
-
-                if ( false === $this->args['hide_reset'] ) {
-                    echo '&nbsp;';
-                    submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
-                    echo '&nbsp;';
-                    submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
-                }
-
-                echo '</div>';
-
-                echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
-                echo '<div class="clear"></div>';
-                echo '</div>';
-
-                // Warning bar
-                if ( isset( $this->transients['last_save_mode'] ) ) {
-
-                    if ( $this->transients['last_save_mode'] == "import" ) {
-                        /**
-                         * action 'redux/options/{opt_name}/import'
-                         *
-                         * @param object $this ReduxFramework
-                         */
-                        do_action( "redux/options/{$this->args['opt_name']}/import", $this, $this->transients['changed_values'] );
-
-                        /**
-                         * filter 'redux-imported-text-{opt_name}'
-                         *
-                         * @param string  translated "settings imported" text
-                         */
-                        echo '<div class="admin-notice notice-blue saved_notice"><strong>' . apply_filters( "redux-imported-text-{$this->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
-                        //exit();
-                    } else if ( $this->transients['last_save_mode'] == "defaults" ) {
-                        /**
-                         * action 'redux/options/{opt_name}/reset'
-                         *
-                         * @param object $this ReduxFramework
-                         */
-                        do_action( "redux/options/{$this->args['opt_name']}/reset", $this );
-
-                        /**
-                         * filter 'redux-defaults-text-{opt_name}'
-                         *
-                         * @param string  translated "settings imported" text
-                         */
-                        echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
-                    } else if ( $this->transients['last_save_mode'] == "defaults_section" ) {
-                        /**
-                         * action 'redux/options/{opt_name}/section/reset'
-                         *
-                         * @param object $this ReduxFramework
-                         */
-                        do_action( "redux/options/{$this->args['opt_name']}/section/reset", $this );
-
-                        /**
-                         * filter 'redux-defaults-section-text-{opt_name}'
-                         *
-                         * @param string  translated "settings imported" text
-                         */
-                        echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
-                    } else if ( $this->transients['last_save_mode'] == "normal") {
-                        /**
-                         * action 'redux/options/{opt_name}/saved'
-                         *
-                         * @param mixed $value set/saved option value
-                         */
-                        do_action( "redux/options/{$this->args['opt_name']}/saved", $this->options, $this->transients['changed_values'] );
-
-                        /**
-                         * filter 'redux-saved-text-{opt_name}'
-                         *
-                         * @param string translated "settings saved" text
-                         */
-                        echo '<div class="saved_notice admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
-                    }
-                    
-                    unset( $this->transients['last_save_mode'] );
-                    //$this->transients['last_save_mode'] = 'remove';
-                    $this->set_transients();
-                }
-
-                /**
-                 * action 'redux/options/{opt_name}/settings/changes'
-                 *
-                 * @param mixed $value set/saved option value
-                 */
-                do_action( "redux/options/{$this->args['opt_name']}/settings/change", $this->options, $this->transients['changed_values'] );
-
-                /**
-                 * filter 'redux-changed-text-{opt_name}'
-                 *
-                 * @param string translated "settings have changed" text
-                 */
-                echo '<div class="redux-save-warn notice-yellow"><strong>' . apply_filters( "redux-changed-text-{$this->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
-
-                /**
-                 * action 'redux/options/{opt_name}/errors'
-                 *
-                 * @param array $this ->errors error information
-                 */
-                do_action( "redux/options/{$this->args['opt_name']}/errors", $this->errors );
-                echo '<div class="redux-field-errors notice-red"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
-
-                /**
-                 * action 'redux/options/{opt_name}/warnings'
-                 *
-                 * @param array $this ->warnings warning information
-                 */
-                do_action( "redux/options/{$this->args['opt_name']}/warnings", $this->warnings );
-                echo '<div class="redux-field-warnings notice-yellow"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
-
-                echo '</div>';
-
-                echo '<div class="clear"></div>';
-
-                // Sidebar
-                echo '<div class="redux-sidebar">';
-                echo '<ul class="redux-group-menu">';
-
-                foreach ( $this->sections as $k => $section ) {
-                    $title = isset( $section['title'] ) ? $section['title'] : '';
-
-                    $skip_sec = false;
-                    foreach ( $this->hidden_perm_sections as $num => $section_title ) {
-                        if ( $section_title == $title ) {
-                            $skip_sec = true;
-                        }
-                    }
-
-                    if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
-                        continue;
-                    }
-
-                    if ( false == $skip_sec ) {
-                        echo $this->section_menu( $k, $section );
-                        $skip_sec = false;
-                    }
-                }
-
-                /**
-                 * action 'redux-page-after-sections-menu-{opt_name}'
-                 *
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux-page-after-sections-menu-{$this->args['opt_name']}", $this );
-
-                /**
-                 * action 'redux/page/{opt_name}/menu/after'
-                 *
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux/page/{$this->args['opt_name']}/menu/after", $this );
-
-                // Import / Export tab
-                if ( true == $this->args['show_import_export'] && false == $this->import_export->is_field ) {
-                    $this->import_export->render_tab();
-                }
-
-                // Debug tab
-                if ( $this->args['dev_mode'] == true ) {
-                    $this->debug->render_tab();
-                }
-
-                if ( $this->args['system_info'] === true ) {
-                    echo '<li id="system_info_default_section_group_li" class="redux-group-tab-link-li">';
-
-                    if ( ! empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                        $icon = ( ! isset( $this->args['system_info_icon'] ) ) ? '' : '<img src="' . $this->args['system_info_icon'] . '" /> ';
-                    } else {
-                        $icon_class = ( ! isset( $this->args['system_info_icon_class'] ) ) ? '' : ' ' . $this->args['system_info_icon_class'];
-                        $icon       = ( ! isset( $this->args['system_info_icon'] ) ) ? '<i class="el-icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->args['system_info_icon'] . $icon_class . '"></i> ';
-                    }
-
-                    echo '<a href="javascript:void(0);" id="system_info_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="system_info_default">' . $icon . ' <span class="group_title">' . __( 'System Info', 'redux-framework' ) . '</span></a>';
-                    echo '</li>';
-                }
-
-                echo '</ul>';
-                echo '</div>';
-
-                echo '<div class="redux-main">';
-
-                foreach ( $this->sections as $k => $section ) {
-                    if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
-                        continue;
-                    }
-
-                    //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' style="display: block;"' : '';
-                    $section['class'] = isset( $section['class'] ) ? ' ' . $section['class'] : '';
-                    echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab' . $section['class'] . '" data-rel="' . $k . '">';
-                    //echo '<div id="' . $k . '_nav-bar' . '"';
-                    /*
-                if ( !empty( $section['tab'] ) ) {
-
-                    echo '<div id="' . $k . '_section_tabs' . '" class="redux-section-tabs">';
-
-                    echo '<ul>';
-
-                    foreach ($section['tab'] as $subkey => $subsection) {
-                        //echo '-=' . $subkey . '=-';
-                        echo '<li style="display:inline;"><a href="#' . $k . '_section-tab-' . $subkey . '">' . $subsection['title'] . '</a></li>';
-                    }
-
-                    echo '</ul>';
-                    foreach ($section['tab'] as $subkey => $subsection) {
-                        echo '<div id="' . $k .'sub-'.$subkey. '_section_group' . '" class="redux-group-tab" style="display:block;">';
-                        echo '<div id="' . $k . '_section-tab-' . $subkey . '">';
-                        echo "hello ".$subkey;
-                        do_settings_sections( $this->args['opt_name'] . $k . '_tab_' . $subkey . '_section_group' );
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                    echo "</div>";
-                } else {
-                    */
-
-                    // Don't display in the
-                    $display = true;
-                    if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                        if ( isset( $section['panel'] ) && $section['panel'] == "false" ) {
-                            $display = false;
-                        }
-                    }
-
-                    if ( $display ) {
-                        do_settings_sections( $this->args['opt_name'] . $k . '_section_group' );
-                    }
-                    //}
-                    echo "</div>";
-                    //echo '</div>';
-                }
-
-                // Import / Export output
-                if ( true == $this->args['show_import_export'] && false == $this->import_export->is_field ) {
-                    $this->import_export->enqueue();
-
-                    echo '<fieldset id="' . $this->args['opt_name'] . '-import_export_core" class="redux-field-container redux-field redux-field-init redux-container-import_export" data-id="import_export_core" data-type="import_export">';
-                    $this->import_export->render();
-                    echo '</fieldset>';
-
-                }
-
-                // Debug object output
-                if ( $this->args['dev_mode'] == true ) {
-                    $this->debug->render();
-                }
-
-                if ( $this->args['system_info'] === true ) {
-                    require_once 'inc/sysinfo.php';
-                    $system_info = new Simple_System_Info();
-
-                    echo '<div id="system_info_default_section_group' . '" class="redux-group-tab">';
-                    echo '<h3>' . __( 'System Info', 'redux-framework' ) . '</h3>';
-
-                    echo '<div id="redux-system-info">';
-                    echo $system_info->get( true );
-                    echo '</div>';
-
-                    echo '</div>';
-                }
-
-                /**
-                 * action 'redux/page-after-sections-{opt_name}'
-                 *
-                 * @deprecated
-                 *
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux/page-after-sections-{$this->args['opt_name']}", $this ); // REMOVE LATER
-
-                /**
-                 * action 'redux/page/{opt_name}/sections/after'
-                 *
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux/page/{$this->args['opt_name']}/sections/after", $this );
-
-                echo '<div class="clear"></div>';
-                echo '</div>';
-                echo '<div class="clear"></div>';
-
-                echo '<div id="redux-sticky-padder" style="display: none;">&nbsp;</div>';
-                echo '<div id="redux-footer-sticky"><div id="redux-footer">';
-
-                if ( isset( $this->args['share_icons'] ) ) {
-                    echo '<div id="redux-share">';
-
-                    foreach ( $this->args['share_icons'] as $link ) {
-                        // SHIM, use URL now
-                        if ( isset( $link['link'] ) && ! empty( $link['link'] ) ) {
-                            $link['url'] = $link['link'];
-                            unset( $link['link'] );
-                        }
-
-                        echo '<a href="' . $link['url'] . '" title="' . $link['title'] . '" target="_blank">';
-
-                        if ( isset( $link['icon'] ) && ! empty( $link['icon'] ) ) {
-                            echo '<i class="' . $link['icon'] . '"></i>';
-                        } else {
-                            echo '<img src="' . $link['img'] . '"/>';
-                        }
-
-                        echo '</a>';
-                    }
-
-                    echo '</div>';
-                }
-
-                echo '<div class="redux-action_bar">';
-                submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
-
-                if ( false === $this->args['hide_reset'] ) {
-                    echo '&nbsp;';
-                    submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults-section]', false );
-                    echo '&nbsp;';
-                    submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->args['opt_name'] . '[defaults]', false );
-                }
-
-                echo '</div>';
-
-                echo '<div class="redux-ajax-loading" alt="' . __( 'Working...', 'redux-framework' ) . '">&nbsp;</div>';
-                echo '<div class="clear"></div>';
-
-                echo '</div>';
-                echo '</form>';
-                echo '</div></div>';
-
-                echo ( isset( $this->args['footer_text'] ) ) ? '<div id="redux-sub-footer">' . $this->args['footer_text'] . '</div>' : '';
-
-                /**
-                 * action 'redux-page-after-form-{opt_name}'
-                 *
-                 * @deprecated
-                 */
-                do_action( "redux-page-after-form-{$this->args['opt_name']}" ); // REMOVE
-
-                /**
-                 * action 'redux/page/{opt_name}/form/after'
-                 *
-                 * @param object $this ReduxFramework
-                 */
-                do_action( "redux/page/{$this->args['opt_name']}/form/after", $this );
-
-                echo '<div class="clear"></div>';
-                echo '</div><!--wrap-->';
-
-                if ( $this->args['dev_mode'] == true ) {
-                    if ( current_user_can( 'administrator' ) ) {
-                        global $wpdb;
-                        echo "<br /><pre>";
-                        print_r( $wpdb->queries );
-                        echo "</pre>";
-                    }
-
-                    echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop( 0 ) . ' seconds<br/>Redux is currently set to developer mode.</div>';
-                }
-
+            public function generate_panel() {
+                include_once('core/panel.php');
+                new reduxCorePanel( $this );
                 $this->set_transients();
             }
 
