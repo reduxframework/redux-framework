@@ -25,7 +25,7 @@
              * @const       string VERSION The plugin version, used for cache-busting and script file references
              * @since       3.0.0
              */
-            const VERSION = '3.4.2.6';
+            const VERSION = '3.4.2.8';
 
             /**
              * @access      protected

@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.2.7';
+            public static $_version = '3.4.2.8';
             public static $_dir; 
             public static $_url;
             public static $_upload_dir;
@@ -2400,7 +2400,7 @@
                 }
             }
 
-            private function set_transients() {
+            public function set_transients() {
                 if ( ! isset( $this->transients ) || ! isset( $this->transients_check ) || $this->transients != $this->transients_check ) {
                     update_option( $this->args['opt_name'] . '-transients', $this->transients );
                     $this->transients_check = $this->transients;

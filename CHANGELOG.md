@@ -1,8 +1,10 @@
 # Redux Framework Changelog
 
-## 3.4.2.7
-* Modified:   Entire panel template is now decoupled from the theme and implemented with many filters for easy customization.
+## 3.4.2.8
+* Fixed:    Changed set_transient function to public to avoid errors in new templating code.
 
+## 3.4.2.7
+* Modified: Entire panel template is now decoupled from the theme and implemented with many filters for easy customization.
 
 ## 3.4.2.6
 * Fixed:   #1478 - Import/export failing when two instances if Redux in use.  Thanks, @desaiuditd!
