@@ -1897,6 +1897,8 @@
                 $return['error'] = $field;
             }
 
+            $return['warning'] = $field;
+
             return $return;
         }
     endif;

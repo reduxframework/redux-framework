@@ -29,7 +29,7 @@
             box-shadow: none;
         }
     }
-    
+
     .hr {
         height: 20px;
         line-height: 20px;
@@ -224,6 +224,9 @@
 
     .redux-action_bar {
         float: right;
+        .spinner {
+	        float:left;margin-top: 4px;
+        }
     }
 
     .redux-ajax-loading {
@@ -370,7 +373,7 @@
         width: 50px;
         text-align: center;
     }
-    
+
     input {
         line-height: 19px;
     }
@@ -614,7 +617,7 @@
         -moz-border-radius: 10px;
         -webkit-border-radius: 10px;
         border: 0 solid transparent;
-        margin-right: 5px;
+        //margin-right: 5px;
 
         i {
             margin-left: -3px;
@@ -834,7 +837,7 @@ pre {
     background-image: -webkit-linear-gradient(top, $from, $to)!important;
     background-image: -o-linear-gradient(top, $from, $to)!important;
     background-image: linear-gradient(top, $from, $to)!important;
-    
+
     c: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=0)!important;
 }
 
@@ -877,7 +880,7 @@ pre {
     }
 
     .redux-container-switch .cb-disable,
-    .redux-container-switch .cb-enable, 
+    .redux-container-switch .cb-enable,
     .ui-state-default,
     .ui-widget-content .ui-state-default,
     .ui-widget-header .ui-state-default {
@@ -908,7 +911,7 @@ pre {
     #redux-header {
         background: $secondaryColor;
         border-color: $accentColor;
-        
+
         .display_header span {
             color: $darkColor;
         }
@@ -990,7 +993,7 @@ pre {
             }
         }
     }
-    
+
     .redux-sidebar .redux-group-menu {
         li.active,
         li.activeChild {
@@ -1077,7 +1080,7 @@ pre {
                 }
                 ul.subsection li {
                     a {
-                        background: $secondaryColor;   
+                        background: $secondaryColor;
                     }
                     &.active {
                         a {

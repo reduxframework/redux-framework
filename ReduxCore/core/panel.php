@@ -5,20 +5,47 @@
 	}
 
 	if ( ! class_exists( 'reduxCorePanel' ) ) {
+		/**
+		 * Class reduxCorePanel
+		 */
 		class reduxCorePanel {
+			/**
+			 * @var null
+			 */
 			public $parent = null;
+			/**
+			 * @var null|string
+			 */
 			public $template_path = null;
+			/**
+			 * @var null
+			 */
 			public $original_path = null;
 
+			/**
+			 * Sets the path from the arg or via filter. Also calls the panel template function.
+			 *
+			 * @param $parent
+			 */
 			public function __construct( $parent ) {
 				$this->parent             = $parent;
 				Redux_Functions::$_parent = $parent;
 				$this->template_path      = $this->original_path = ReduxFramework::$_dir . 'templates/panel/';
-				$this->template_path      = trailingslashit( apply_filters( "redux/{$this->parent->args['opt_name']}/panel/templates_path", $this->template_path ) );
-				$this->panel_template();
+				if ( ! empty( $this->parent->args['templates_path'] ) ) {
+					$this->template_path = trailingslashit( $this->parent->args['templates_path'] );
+				}
+				$this->template_path = trailingslashit( apply_filters( "redux/{$this->parent->args['opt_name']}/panel/templates_path", $this->template_path ) );
 
 			}
 
+			public function init() {
+				$this->panel_template();
+			}
+
+
+			/**
+			 * Loads the panel templates where needed and provides the container for Redux
+			 */
 			private function panel_template() {
 				/**
 				 * action 'redux/{opt_name}/panel/before'
@@ -50,7 +77,7 @@
 				 */
 				do_action( "redux/page/{$this->parent->args['opt_name']}/form/before", $this );
 
-				$this->get_template( 'layout.tpl.php' );
+				$this->get_template( 'container.tpl.php' );
 
 				/**
 				 * action 'redux-page-after-form-{opt_name}'
@@ -65,9 +92,8 @@
 				 * @param object $this ReduxFramework
 				 */
 				do_action( "redux/page/{$this->parent->args['opt_name']}/form/after", $this );
-
 				echo '<div class="clear"></div>';
-				echo '</div><!--wrap-->';
+				echo '</div>';
 
 				if ( $this->parent->args['dev_mode'] == true ) {
 					if ( current_user_can( 'administrator' ) ) {
@@ -87,6 +113,124 @@
 
 			}
 
+
+			/**
+			 * Calls the various notification bars and sets the appropriate templates.
+			 */
+			function notification_bar() {
+
+				if ( isset( $this->parent->transients['last_save_mode'] ) ) {
+
+					if ( $this->parent->transients['last_save_mode'] == "import" ) {
+						/**
+						 * action 'redux/options/{opt_name}/import'
+						 *
+						 * @param object $this ReduxFramework
+						 */
+						do_action( "redux/options/{$this->parent->args['opt_name']}/import", $this, $this->parent->transients['changed_values'] );
+
+						/**
+						 * filter 'redux-imported-text-{opt_name}'
+						 *
+						 * @param string  translated "settings imported" text
+						 */
+						echo '<div class="admin-notice notice-blue saved_notice"><strong>' . apply_filters( "redux-imported-text-{$this->parent->args['opt_name']}", __( 'Settings Imported!', 'redux-framework' ) ) . '</strong></div>';
+						//exit();
+					} else if ( $this->parent->transients['last_save_mode'] == "defaults" ) {
+						/**
+						 * action 'redux/options/{opt_name}/reset'
+						 *
+						 * @param object $this ReduxFramework
+						 */
+						do_action( "redux/options/{$this->parent->args['opt_name']}/reset", $this );
+
+						/**
+						 * filter 'redux-defaults-text-{opt_name}'
+						 *
+						 * @param string  translated "settings imported" text
+						 */
+						echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-text-{$this->parent->args['opt_name']}", __( 'All Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
+					} else if ( $this->parent->transients['last_save_mode'] == "defaults_section" ) {
+						/**
+						 * action 'redux/options/{opt_name}/section/reset'
+						 *
+						 * @param object $this ReduxFramework
+						 */
+						do_action( "redux/options/{$this->parent->args['opt_name']}/section/reset", $this );
+
+						/**
+						 * filter 'redux-defaults-section-text-{opt_name}'
+						 *
+						 * @param string  translated "settings imported" text
+						 */
+						echo '<div class="saved_notice admin-notice notice-yellow"><strong>' . apply_filters( "redux-defaults-section-text-{$this->parent->args['opt_name']}", __( 'Section Defaults Restored!', 'redux-framework' ) ) . '</strong></div>';
+					} else if ( $this->parent->transients['last_save_mode'] == "normal" ) {
+						/**
+						 * action 'redux/options/{opt_name}/saved'
+						 *
+						 * @param mixed $value set/saved option value
+						 */
+						do_action( "redux/options/{$this->parent->args['opt_name']}/saved", $this->parent->options, $this->parent->transients['changed_values'] );
+
+						/**
+						 * filter 'redux-saved-text-{opt_name}'
+						 *
+						 * @param string translated "settings saved" text
+						 */
+						echo '<div class="saved_notice admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->parent->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
+					}
+
+					unset( $this->parent->transients['last_save_mode'] );
+					//$this->parent->transients['last_save_mode'] = 'remove';
+					$this->parent->set_transients();
+				}
+
+				/**
+				 * action 'redux/options/{opt_name}/settings/changes'
+				 *
+				 * @param mixed $value set/saved option value
+				 */
+				do_action( "redux/options/{$this->parent->args['opt_name']}/settings/change", $this->parent->options, $this->parent->transients['changed_values'] );
+
+				/**
+				 * filter 'redux-changed-text-{opt_name}'
+				 *
+				 * @param string translated "settings have changed" text
+				 */
+				echo '<div class="redux-save-warn notice-yellow"><strong>' . apply_filters( "redux-changed-text-{$this->parent->args['opt_name']}", __( 'Settings have changed, you should save them!', 'redux-framework' ) ) . '</strong></div>';
+
+				/**
+				 * action 'redux/options/{opt_name}/errors'
+				 *
+				 * @param array $this ->errors error information
+				 */
+				do_action( "redux/options/{$this->parent->args['opt_name']}/errors", $this->parent->errors );
+				echo '<div class="redux-field-errors notice-red"><strong><span></span> ' . __( 'error(s) were found!', 'redux-framework' ) . '</strong></div>';
+
+				/**
+				 * action 'redux/options/{opt_name}/warnings'
+				 *
+				 * @param array $this ->warnings warning information
+				 */
+				do_action( "redux/options/{$this->parent->args['opt_name']}/warnings", $this->parent->warnings );
+				echo '<div class="redux-field-warnings notice-yellow"><strong><span></span> ' . __( 'warning(s) were found!', 'redux-framework' ) . '</strong></div>';
+
+			}
+
+			/**
+			 * Used to intitialize the settings fields for this panel. Required for saving and redirect.
+			 */
+			function init_settings_fields() {
+				// Must run or the page won't redirect properly
+				settings_fields( "{$this->parent->args['opt_name']}_group" );
+			}
+
+
+			/**
+			 * Used to select the proper template. If it doesn't exist in the path, then the original template file is used.
+			 *
+			 * @param $file
+			 */
 			function get_template( $file ) {
 
 				if ( empty( $file ) ) {
@@ -105,6 +249,14 @@
 
 			}
 
+			/**
+			 * Outputs the HTML for a given section using the WordPress settings API.
+			 *
+			 * @param $k - Section number of settings panel to display
+			 */
+			function output_section( $k ) {
+				do_settings_sections( $this->parent->args['opt_name'] . $k . '_section_group' );
+			}
 
 		}
 	}
