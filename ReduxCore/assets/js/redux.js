@@ -131,12 +131,12 @@
         // Save button clicked
         $( '.redux-action_bar input' ).on(
             'click', function( e ) {
-                if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults]"]' ) {
+                if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults]' ) {
                     // Defaults button clicked
                     if ( !confirm( redux.args.reset_confirm ) ) {
                         return false;
                     }
-                } else if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults-section]"]' ) {
+                } else if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults-section]' ) {
                     // Default section clicked
                     if ( !confirm( redux.args.reset_section_confirm ) ) {
                         return false;
