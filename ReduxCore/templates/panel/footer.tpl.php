@@ -32,9 +32,7 @@
 			<?php submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false ); ?>
 
 			<?php if ( false === $this->parent->args['hide_reset'] ) : ?>
-				&nbsp;
 				<?php submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false ); ?>
-				&nbsp;
 				<?php submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false ); ?>
 			<?php endif; ?>
 
