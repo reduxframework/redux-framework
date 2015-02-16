@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.4.2.9
+* Modified: Template files even more for simplicity and ease.
+* Modified: Saving. Redux now has the ajax_save argument if you want it!
+* Modified: Validation warnings now work.
+
 ## 3.4.2.8
 * Fixed:    Changed set_transient function to public to avoid errors in new templating code.
 

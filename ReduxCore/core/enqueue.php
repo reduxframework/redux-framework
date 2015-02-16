@@ -15,22 +15,25 @@ if (!class_exists('reduxCoreEnqueue')){
             $this->parent = $parent;
 
             Redux_Functions::$_parent = $parent;
+        }
+
+        public function init() {
             $this->min                = Redux_Functions::isMin();
 
             $this->timestamp = ReduxFramework::$_version;
-            if ($parent->args['dev_mode']) {
+            if ($this->parent->args['dev_mode']) {
                 $this->timestamp .= '.' . time();
             }
 
             $this->register_styles();
             $this->register_scripts();
-            
+
             add_thickbox();
-            
+
             $this->enqueue_fields();
-            
+
             $this->set_localized_data();
-            
+
             /**
              * action 'redux-enqueue-{opt_name}'
              *
@@ -38,13 +41,12 @@ if (!class_exists('reduxCoreEnqueue')){
              *
              * @param  object $this ReduxFramework
              */
-            do_action( "redux-enqueue-{$parent->args['opt_name']}", $parent ); // REMOVE
+            do_action( "redux-enqueue-{$this->parent->args['opt_name']}", $this->parent ); // REMOVE
 
             /**
              * action 'redux/page/{opt_name}/enqueue'
              */
-            do_action( "redux/page/{$parent->args['opt_name']}/enqueue" );
-            
+            do_action( "redux/page/{$this->parent->args['opt_name']}/enqueue" );
         }
 
         private function register_styles(){
@@ -293,6 +295,52 @@ if (!class_exists('reduxCoreEnqueue')){
                 }
             }
         }
+
+        public function get_warnings_and_errors_array() {
+            // Construct the errors array.
+            if ( isset( $this->parent->transients['last_save_mode'] ) && ! empty( $this->parent->transients['notices']['errors'] ) ) {
+                $theTotal  = 0;
+                $theErrors = array();
+
+                foreach ( $this->parent->transients['notices']['errors'] as $error ) {
+                    $theErrors[ $error['section_id'] ]['errors'][] = $error;
+
+                    if ( ! isset( $theErrors[ $error['section_id'] ]['total'] ) ) {
+                        $theErrors[ $error['section_id'] ]['total'] = 0;
+                    }
+
+                    $theErrors[ $error['section_id'] ]['total'] ++;
+                    $theTotal ++;
+                }
+
+                $this->parent->localize_data['errors'] = array( 'total' => $theTotal, 'errors' => $theErrors );
+                unset( $this->parent->transients['notices']['errors'] );
+            }
+
+            // Construct the warnings array.
+            if ( isset( $this->parent->transients['last_save_mode'] ) && ! empty( $this->parent->transients['notices']['warnings'] ) ) {
+                $theTotal    = 0;
+                $theWarnings = array();
+
+                foreach ( $this->parent->transients['notices']['warnings'] as $warning ) {
+                    $theWarnings[ $warning['section_id'] ]['warnings'][] = $warning;
+
+                    if ( ! isset( $theWarnings[ $warning['section_id'] ]['total'] ) ) {
+                        $theWarnings[ $warning['section_id'] ]['total'] = 0;
+                    }
+
+                    $theWarnings[ $warning['section_id'] ]['total'] ++;
+                    $theTotal ++;
+                }
+
+                unset( $this->parent->transients['notices']['warnings'] );
+                $this->parent->localize_data['warnings'] = array( 'total' => $theTotal, 'warnings' => $theWarnings );
+            }
+
+            if ( empty( $this->parent->transients['notices'] ) ) {
+                unset( $this->parent->transients['notices'] );
+            }
+        }
         
         private function set_localized_data(){
             $this->parent->localize_data['required']       = $this->parent->required;
@@ -327,7 +375,6 @@ if (!class_exists('reduxCoreEnqueue')){
             }
 
             if ( isset( $this->parent->args['dev_mode'] ) && $this->parent->args['dev_mode'] == true ) {
-
                 $base                        = admin_url( 'admin-ajax.php' ) . '?action=redux_p&url=';
                 $url                         = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base );
                 $this->parent->localize_data['rAds'] = '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $url . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>';
@@ -380,52 +427,11 @@ if (!class_exists('reduxCoreEnqueue')){
                 'hints'                 => $this->parent->args['hints'],
                 'disable_save_warn'     => $this->parent->args['disable_save_warn'],
                 'class'                 => $this->parent->args['class'],
+                'ajax_save'             => $this->parent->args['ajax_save'],
                 'menu_search'           => $pagenow . '?page=' . $this->parent->args['page_slug'] . "&tab="
             );
 
-            // Construct the errors array.
-            if ( isset( $this->parent->transients['last_save_mode'] ) && ! empty( $this->parent->transients['notices']['errors'] ) ) {
-                $theTotal  = 0;
-                $theErrors = array();
-
-                foreach ( $this->parent->transients['notices']['errors'] as $error ) {
-                    $theErrors[ $error['section_id'] ]['errors'][] = $error;
-
-                    if ( ! isset( $theErrors[ $error['section_id'] ]['total'] ) ) {
-                        $theErrors[ $error['section_id'] ]['total'] = 0;
-                    }
-
-                    $theErrors[ $error['section_id'] ]['total'] ++;
-                    $theTotal ++;
-                }
-
-                $this->parent->localize_data['errors'] = array( 'total' => $theTotal, 'errors' => $theErrors );
-                unset( $this->parent->transients['notices']['errors'] );
-            }
-
-            // Construct the warnings array.
-            if ( isset( $this->parent->transients['last_save_mode'] ) && ! empty( $this->parent->transients['notices']['warnings'] ) ) {
-                $theTotal    = 0;
-                $theWarnings = array();
-
-                foreach ( $this->parent->transients['notices']['warnings'] as $warning ) {
-                    $theWarnings[ $warning['section_id'] ]['warnings'][] = $warning;
-
-                    if ( ! isset( $theWarnings[ $warning['section_id'] ]['total'] ) ) {
-                        $theWarnings[ $warning['section_id'] ]['total'] = 0;
-                    }
-
-                    $theWarnings[ $warning['section_id'] ]['total'] ++;
-                    $theTotal ++;
-                }
-
-                unset( $this->parent->transients['notices']['warnings'] );
-                $this->parent->localize_data['warnings'] = array( 'total' => $theTotal, 'warnings' => $theWarnings );
-            }
-
-            if ( empty( $this->parent->transients['notices'] ) ) {
-                unset( $this->parent->transients['notices'] );
-            }
+            $this->get_warnings_and_errors_array();
 
             wp_localize_script(
                 'redux-js',
