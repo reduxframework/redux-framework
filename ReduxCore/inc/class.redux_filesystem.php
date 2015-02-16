@@ -101,10 +101,12 @@
 
                 global $wp_filesystem;
 
-                if ( defined( 'FS_CHMOD_FILE' ) ) {
-                    $chmod = FS_CHMOD_FILE;
-                } else {
-                    $chmod = 0644;
+                if ( ! isset( $params['chmod'] ) || ( isset( $params['chmod'] ) && empty( $params['chmod'] ) ) ) {
+                    if ( defined( 'FS_CHMOD_FILE' ) ) {
+                        $chmod = FS_CHMOD_FILE;
+                    } else {
+                        $chmod = 0644;
+                    }
                 }
 
                 //$target_dir = $wp_filesystem->find_folder( dirname( $file ) );
@@ -114,11 +116,14 @@
                     wp_mkdir_p( $file );
 
                     $res = file_exists( $file );
-                    if ( defined( 'FS_CHMOD_DIR' ) ) {
-                        $chmod = FS_CHMOD_DIR;
-                    } else {
-                        $chmod = 0755;
+                    if ( ! isset( $params['chmod'] ) || ( isset( $params['chmod'] ) && empty( $params['chmod'] ) ) ) {
+                        if ( defined( 'FS_CHMOD_DIR' ) ) {
+                            $chmod = FS_CHMOD_DIR;
+                        } else {
+                            $chmod = 0755;
+                        }
                     }
+
                     if ( ! $res ) {
                         mkdir( $file, $chmod, true );
                         $res = file_exists( $file );
@@ -150,17 +155,20 @@
                 } elseif ( $action == 'object' ) {
                     $res = $wp_filesystem;
                 } elseif ( $action == 'unzip' ) {
-	                $unzipfile = unzip_file( $file, $destination );
-	                if ( $unzipfile ) {
-		                $res = true;
-	                }
+                    $unzipfile = unzip_file( $file, $destination );
+                    if ( $unzipfile ) {
+                        $res = true;
+                    }
                 }
                 if ( isset( $res ) && ! $res ) {
                     $this->killswitch = true;
                 }
 
                 if ( ! $res ) {
-                    add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array( $this, 'ftp_form' ) );
+                    add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array(
+                        $this,
+                        'ftp_form'
+                    ) );
                 }
 
                 return $res;
