@@ -94,7 +94,6 @@
                         if ( response.errors !== null || response.warnings !== null ) {
                             $.redux.notices();
                         }
-
                         var $save_notice = $( document.getElementById( 'redux_notification_bar' ) ).find( '.saved_notice' );
                         $save_notice.slideDown();
                         $save_notice.delay( 4000 ).slideUp();
