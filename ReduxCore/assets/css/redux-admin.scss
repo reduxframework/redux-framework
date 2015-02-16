@@ -837,7 +837,7 @@ pre {
     background-image: -webkit-linear-gradient(top, $from, $to)!important;
     background-image: -o-linear-gradient(top, $from, $to)!important;
     background-image: -linear-gradient(top, $from, $to)!important;
-    
+
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=0)!important;
 }
 
@@ -1365,7 +1365,7 @@ pre {
 
 /*.shadow1 {
     position: relative;
-    
+
     &:before,
     &:after {
         z-index: -1;
@@ -1386,7 +1386,7 @@ pre {
         -ms-transform: rotate(-3deg);
         transform: rotate(-3deg);
     }
-    
+
     &:after {
         -webkit-transform: rotate(3deg);
         -moz-transform: rotate(3deg);
@@ -1394,7 +1394,7 @@ pre {
         -ms-transform: rotate(3deg);
         transform: rotate(3deg);
         right: 10px;
-        left: auto;        
+        left: auto;
     }
 }*/
 
@@ -1417,12 +1417,12 @@ pre {
         margin: 5px 4px 0;
         float: left;
     }
-    
+
     .ajax-loading {
         margin: 3px 4px 0;
         float: right;
     }
-    
+
     .ajax-reset-loading-img {
         display: block;
         margin-left: 100px;
