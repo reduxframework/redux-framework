@@ -835,7 +835,7 @@ pre {
     background-image: -o-linear-gradient(top, $from, $to)!important;
     background-image: linear-gradient(top, $from, $to)!important;
     
-    c: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=0)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=0)!important;
 }
 
 @mixin adminThemeColorOverrides ($darkColor, $accentColor, $secondaryColor, $buttonPrimary) {
