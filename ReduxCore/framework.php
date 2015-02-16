@@ -2737,8 +2737,8 @@
 							$success = array(
 								'status'           => 'success',
 								'options'          => $redux->options,
-								'errors'           => isset($redux->localize_data['errors']) ? $redux->localize_data['errors'] : array(),
-								'warnings'         => isset($redux->localize_data['warnings']) ? $redux->localize_data['warnings'] : array(),
+								'errors'           => isset($redux->localize_data['errors']) ? $redux->localize_data['errors'] : null,
+								'warnings'         => isset($redux->localize_data['warnings']) ? $redux->localize_data['warnings'] : null,
 								'notification_bar' => $notification_bar
 							);
 

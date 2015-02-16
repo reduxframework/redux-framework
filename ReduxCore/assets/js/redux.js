@@ -45,18 +45,21 @@
 
         // Add the loading mechanism
         jQuery( '.redux-action_bar .spinner' ).show();
+        jQuery( '.redux-action_bar input' ).attr('disabled', 'disabled');
         var $notification_bar = jQuery( document.getElementById( 'redux_notification_bar' ) );
         $notification_bar.slideUp();
         jQuery( '.redux-save-warn' ).slideUp();
 
         var $parent = jQuery( document.getElementById( "redux-form-wrapper" ) );
 
-        var $data = $parent.add( $parent.find( 'input' ) ).serialize();
+        var $data = $parent.serialize();
         // add values for checked and unchecked checkboxes fields
         $parent.find( 'input[type=checkbox]' ).each(
             function() {
-                var chkVal = $( this ).is( ':checked' ) ? $( this ).val() : "0";
-                $data += "&" + $( this ).attr( 'name' ) + "=" + chkVal;
+                if ( typeof $( this ).attr( 'name' ) !== "undefined" ) {
+                    var chkVal = $( this ).is( ':checked' ) ? $( this ).val() : "0";
+                    $data += "&" + $( this ).attr( 'name' ) + "=" + chkVal;
+                }
             }
         );
 
@@ -81,24 +84,29 @@
                     if ( response.action && response.action == "reload" ) {
                         location.reload();
                     } else if ( response.status == "success" ) {
-                        redux.options = response.options;
-                        redux.defaults = response.defaults;
+                        jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                        //redux.options = response.options;
+                        //redux.defaults = response.defaults;
+                        redux.errors = response.errors;
+                        redux.warnings = response.warnings;
+
+                        $notification_bar.html( response.notification_bar ).slideDown('fast');
                         if ( response.errors !== null || response.warnings !== null ) {
-                            redux.errors = response.errors;
-                            redux.warnings = response.warnings;
+                            $.redux.notices();
                         }
-                        $notification_bar.html( response.notification_bar ).slideDown();
-                        $.redux.notices();
+
                         var $save_notice = $( document.getElementById( 'redux_notification_bar' ) ).find( '.saved_notice' );
                         $save_notice.slideDown();
                         $save_notice.delay( 4000 ).slideUp();
                     } else {
+                        jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
                         jQuery( '.redux_ajax_save_error' ).slideUp();
                         jQuery( '.wrap h2:first-child' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
                         jQuery( '.redux_ajax_save_error' ).slideDown();
-                        $( "html, body" ).animate( {scrollTop: 0}, "slow" );
+                        jQuery( "html, body" ).animate( {scrollTop: 0}, "slow" );
                     }
-                    jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                    jQuery( '.redux-action_bar input' ).removeAttr('disabled');
+
                 }
             }
         );
