@@ -206,11 +206,6 @@
 				// Pass parent pointer to function helper.
 				Redux_Functions::$_parent = $this;
 
-				$this->filesystem = new Redux_Filesystem( $this );
-
-				//set redux upload folder
-				$this->set_redux_content();
-
 				// Set values
 				$this->set_default_args();
 				$this->args = wp_parse_args( $args, $this->args );
@@ -310,6 +305,11 @@
 
 					// Internataionalization
 					$this->_internationalization();
+
+					$this->filesystem = new Redux_Filesystem( $this );
+
+					//set redux upload folder
+					$this->set_redux_content();
 
 					// Register extra extensions
 					$this->_register_extensions();
@@ -438,7 +438,6 @@
 				$upload_dir        = wp_upload_dir();
 				self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
 				self::$_upload_url = $upload_dir['baseurl'] . '/redux/';
-
 				if ( ! is_dir( self::$_upload_dir ) ) {
 					$this->filesystem->execute( 'mkdir', self::$_upload_dir );
 				}
@@ -2711,7 +2710,7 @@
 					parse_str( $_POST['data'], $values );
 
 					$values = $values[ $redux->args['opt_name'] ];
-					array_unique( $values );
+
 					if ( ! empty( $values ) ) {
 						try {
 							if ( isset( $redux->validation_ran ) ) {
@@ -2723,7 +2722,6 @@
 								echo json_encode( array( 'status' => 'success', 'action' => 'reload' ) );
 								die();
 							}
-
 
 							include_once( 'core/enqueue.php' );
 							$enqueue = new reduxCoreEnqueue( $redux );
@@ -2739,11 +2737,11 @@
 							$success = array(
 								'status'           => 'success',
 								'options'          => $redux->options,
-								'defaults'         => $redux->options_defaults,
-								'errors'           => $redux->localize_data['errors'],
-								'warnings'         => $redux->localize_data['warnings'],
+								'errors'           => isset($redux->localize_data['errors']) ? $redux->localize_data['errors'] : array(),
+								'warnings'         => isset($redux->localize_data['warnings']) ? $redux->localize_data['warnings'] : array(),
 								'notification_bar' => $notification_bar
 							);
+
 
 							echo json_encode( $success );
 						} catch ( Exception $e ) {
