@@ -1,3 +1,14 @@
+<?php
+	/**
+	 * The template for the panel header area.
+	 *
+	 * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
+	 *
+	 * @author 		Redux Framework
+	 * @package 	ReduxFramework/Templates
+	 * @version     3.4.3
+	 */
+?>
 <div id="redux-header">
 	<?php if ( ! empty( $this->parent->args['display_name'] ) ) : ?>
 		<div class="display_header">
