@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.4.3.1
+* Modified: Templates now have versioning with a warning (dev_mode only) if they are outdated from the core templates.
+
+## 3.4.3
+* Modified: Ajax saving now has overlay during save to avoid confusion for users.
+
 ## 3.4.2.9
 * Modified: Template files even more for simplicity and ease.
 * Modified: Saving. Redux now has the ajax_save argument if you want it!

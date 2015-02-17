@@ -43,6 +43,9 @@
 
     $.redux.ajax_save = function( button ) {
 
+        var overlay = $(document.getElementById('redux_ajax_overlay'));
+        overlay.fadeIn();
+
         // Add the loading mechanism
         jQuery( '.redux-action_bar .spinner' ).show();
         jQuery( '.redux-action_bar input' ).attr('disabled', 'disabled');
@@ -84,6 +87,7 @@
                     if ( response.action && response.action == "reload" ) {
                         location.reload();
                     } else if ( response.status == "success" ) {
+                        overlay.fadeOut( 'fast' );
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
                         //redux.options = response.options;
                         //redux.defaults = response.defaults;
@@ -99,6 +103,7 @@
                         $save_notice.delay( 4000 ).slideUp();
                     } else {
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                        overlay.fadeOut( 'fast' );
                         jQuery( '.redux_ajax_save_error' ).slideUp();
                         jQuery( '.wrap h2:first-child' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
                         jQuery( '.redux_ajax_save_error' ).slideDown();

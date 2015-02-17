@@ -1,4 +1,15 @@
 <?php
+	/**
+	 * The template for the main panel container.
+	 *
+	 * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
+	 *
+	 * @author 		Redux Framework
+	 * @package 	ReduxFramework/Templates
+	 * @version     3.4.3
+	 */
+
+
 	$expanded = ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : '' . ( ! empty( $this->parent->args['class'] ) ? ' ' . $this->parent->args['class'] : '' );
 	$nonce = wp_create_nonce("redux_ajax_nonce");
 ?>
