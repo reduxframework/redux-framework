@@ -35,9 +35,6 @@
                     $this->template_path = trailingslashit( $this->parent->args['templates_path'] );
                 }
                 $this->template_path = trailingslashit( apply_filters( "redux/{$this->parent->args['opt_name']}/panel/templates_path", $this->template_path ) );
-                if ( $this->parent->args['dev_mode'] ) {
-                    $this->template_file_check_notice();
-                }
             }
 
             public function init() {
@@ -49,6 +46,11 @@
              * Loads the panel templates where needed and provides the container for Redux
              */
             private function panel_template() {
+
+                if ( $this->parent->args['dev_mode'] ) {
+                    $this->template_file_check_notice();
+                }
+                
                 /**
                  * action 'redux/{opt_name}/panel/before'
                  */
