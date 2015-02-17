@@ -33,6 +33,10 @@
                     $this->field['align'] = false;
                 }
 
+                if (!isset($this->field['overflow'])) {
+                    $this->field['overflow'] = 'auto';
+                }
+                
                 // Set align flag.
                 $doAlign = $this->field['align'];
 
@@ -42,7 +46,7 @@
                     echo '<style>#' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . ' {padding: 0;}</style>';
                     echo '</td></tr>';
                     echo '</table>';
-                    echo '<table id="' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . '" class="form-table no-border redux-group-table redux-raw-table" style="margin-top: -20px; overflow: auto;">';
+                    echo '<table id="' . $this->parent->args['opt_name'] . '-' . $this->field['id'] . '" class="form-table no-border redux-group-table redux-raw-table" style="margin-top: -20px!important; overflow: ' . $this->field['overflow'] . ';">';
                     echo '<tbody><tr><td>';
                 }
 
