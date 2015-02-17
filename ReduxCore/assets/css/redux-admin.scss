@@ -315,6 +315,21 @@
     box-shadow: inset 0 1px 0 #FFF;
     position: relative;
 
+    #redux_ajax_overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -moz-opacity: 0.10;
+        -khtml-opacity: 0.10;
+        opacity: 0.10;
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
+        filter:alpha(opacity=10);
+        background: #000;
+        z-index: 200;
+        display: none;
+    }
     .form-table.no-border {
         border-top: none;
     }

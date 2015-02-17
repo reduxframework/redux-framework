@@ -13,6 +13,7 @@
 <?php $this->get_template( 'menu_container.tpl.php' ); ?>
 
 <div class="redux-main">
+	<div id="redux_ajax_overlay">&nbsp;</div>
 	<?php
 		foreach ( $this->parent->sections as $k => $section ) {
 			if ( isset( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
