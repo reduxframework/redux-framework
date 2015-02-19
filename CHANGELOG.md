@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.3.2
+* Fixed:    #2058 - Incorrect path in include statement for sysinfo.php
+
 ## 3.4.3.1
 * Modified: Templates now have versioning with a warning (dev_mode only) if they are outdated from the core templates.
 
