@@ -90,7 +90,7 @@
 		}
 	?>
 	<?php if ( $this->parent->args['system_info'] === true ) :
-		require_once 'inc/sysinfo.php';
+		require_once ReduxFramework::$_dir . 'inc/sysinfo.php';
 		$system_info = new Simple_System_Info();
 		?>
 		<div id="system_info_default_section_group" class="redux-group-tab">
