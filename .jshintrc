@@ -1,0 +1,19 @@
+{
+	"boss": true,
+	"immed": true,
+	"noarg": true,
+	"onevar": true,
+	
+	"browser": true,
+	
+	"globals": {
+		"_": false,
+		"jQuery": true,
+		"module": true,
+		"console": true,
+		"document": true,
+                "window": true,
+		"redux_change": true,
+                "redux": true
+	}
+}

@@ -12,7 +12,7 @@
  * Description:     Redux is a simple, truly extensible options framework for WordPress themes and plugins.
  * Author:          Team Redux
  * Author URI:      http://reduxframework.com
- * Version:         3.2.8.13
+ * Version:         3.4.3.2
  * Text Domain:     redux-framework
  * License:         GPL3+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
@@ -43,7 +43,7 @@ register_deactivation_hook( __FILE__, array( 'ReduxFrameworkPlugin', 'deactivate
 
 // The above line prevents ReduxFramework from instancing until all plugins have loaded.
 // While this does not matter for themes, any plugin using Redux will not load properly.
-// Waiting until all plugsin have been loaded prevents the ReduxFramework class from
+// Waiting until all plugins have been loaded prevents the ReduxFramework class from
 // being created, and fails the !class_exists('ReduxFramework') check in the sample_config.php,
 // and thus prevents any plugin using Redux from loading their config file.
 ReduxFrameworkPlugin::instance();

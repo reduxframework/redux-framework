@@ -1,85 +1,129 @@
-/* global redux_change */
+/*global redux_change, redux*/
 
-(function($) {
+(function( $ ) {
     "use strict";
 
-    $(document).ready(function() {
+    redux.field_objects = redux.field_objects || {};
+    redux.field_objects.spinner = redux.field_objects.spinner || {};
 
-        $('.redux_spinner').each(function() {
-            //slider init
-            var spinner = redux.spinner[$(this).attr('rel')];
+    $( document ).ready(
+        function() {
+            //redux.field_objects.spinner.init();
+        }
+    );
 
-            $("#" + spinner.id).spinner({
-                value:  parseInt(spinner.val, null),
-                min:    parseInt(spinner.min, null),
-                max:    parseInt(spinner.max, null),
-                step:   parseInt(spinner.step, null),
-                range:  "min",
+    redux.field_objects.spinner.init = function( selector ) {
 
-                slide: function(event, ui) {
-                    var input = $("#" + spinner.id);
-                    input.val(ui.value);
-                    redux_change(input);
-                }
-            });
-
-            // Limit input for negative
-            var neg = false;
-            if (parseInt(spinner.min, null) < 0) {
-                neg = true;
-            }
-
-            $("#" + spinner.id).numeric({
-                allowMinus: neg,
-                min:        spinner.min,
-                max:        spinner.max
-            });
-
-        });
-
-        // Update the slider from the input and vice versa
-        $(".spinner-input").keyup(function() {
-            $(this).addClass('spinnerInputChange');
-        });
-
-        function cleanSpinnerValue(value, selector, spinner) {
-
-            if (!selector.hasClass('spinnerInputChange')) {
-                return;
-            }
-            selector.removeClass('spinnerInputChange');
-
-            if (value === "" || value === null) {
-                value = spinner.min;
-            } else if (value >= parseInt(spinner.max)) {
-                value = spinner.max;
-            } else if (value <= parseInt(spinner.min)) {
-                value = spinner.min;
-            } else {
-                value = Math.round(value / spinner.step) * spinner.step;
-            }
-
-            $("#" + spinner.id).val(value);
-
+        if ( !selector ) {
+            selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-spinner:visible' );
         }
 
-        // Update the spinner from the input and vice versa
-        $(".spinner-input").blur(function() {
-            //        cleanSpinnerValue(jQuery(this).val(), jQuery(this), redux.spinner[jQuery(this).attr('id')]);
-        });
+        $( selector ).each(
+            function() {
+                var el = $( this );
+                var parent = el;
+                if ( !el.hasClass( 'redux-field-container' ) ) {
+                    parent = el.parents( '.redux-field-container:first' );
+                }
+                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                    return;
+                }
+                if ( parent.hasClass( 'redux-field-init' ) ) {
+                    parent.removeClass( 'redux-field-init' );
+                } else {
+                    return;
+                }
+                el.find( '.redux_spinner' ).each(
+                    function() {
+                        //slider init
+                        var spinner = $( this ).find('.spinner-input' ).data();
+                        spinner.id = $( this ).find('.spinner-input' ).attr('id');
 
-        $(".spinner-input").focus(function() {
-            cleanSpinnerValue($(this).val(), $(this), redux.spinner[$(this).attr('id')]);
-        });
+                        el.find( "#" + spinner.id ).spinner(
+                            {
+                                value: parseFloat( spinner.val, null ),
+                                min: parseFloat( spinner.min, null ),
+                                max: parseFloat( spinner.max, null ),
+                                step: parseFloat( spinner.step, null ),
+                                range: "min",
 
-        $('.spinner-input').typeWatch({
-            callback: function(value) {
-                cleanSpinnerValue(value, $(this), redux.spinner[$(this).attr('id')]);
-            },
+                                slide: function( event, ui ) {
+                                    var input = $( "#" + spinner.id );
+                                    input.val( ui.value );
+                                    redux_change( input );
+                                }
+                            }
+                        );
 
-            wait:           500,
-            highlight:      false,
-            captureLength:  1
-        });
-    });
-})(jQuery);
+                        // Limit input for negative
+                        var neg = false;
+                        if ( parseInt( spinner.min, null ) < 0 ) {
+                            neg = true;
+                        }
+
+                        el.find( "#" + spinner.id ).numeric(
+                            {
+                                allowMinus: neg,
+                                min: spinner.min,
+                                max: spinner.max
+                            }
+                        );
+
+                    }
+                );
+
+                // Update the slider from the input and vice versa
+                el.find( ".spinner-input" ).keyup(
+                    function() {
+                        $( this ).addClass( 'spinnerInputChange' );
+                    }
+                );
+
+                el.find( ".spinner-input" ).focus(
+                    function() {
+                        redux.field_objects.spinner.clean(
+                            $( this ).val(), $( this )
+                        );
+                    }
+                );
+
+                el.find( '.spinner-input' ).typeWatch(
+                    {
+                        callback: function( value ) {
+                            redux.field_objects.spinner.clean(
+                                value, $( this )
+                            );
+                        },
+
+                        wait: 500,
+                        highlight: false,
+                        captureLength: 1
+                    }
+                );
+            }
+        );
+    };
+
+    redux.field_objects.spinner.clean = function( value, selector ) {
+
+        if ( !selector.hasClass( 'spinnerInputChange' ) ) {
+            return;
+        }
+        selector.removeClass( 'spinnerInputChange' );
+
+        var spinner = selector.data();
+
+        if ( value === "" || value === null ) {
+            value = spinner.min;
+        } else if ( value >= parseInt( spinner.max ) ) {
+            value = spinner.max;
+        } else if ( value <= parseInt( spinner.min ) ) {
+            value = spinner.min;
+        } else {
+            value = Math.round( value / spinner.step ) * spinner.step;
+        }
+
+        selector.val( value );
+    };
+
+})( jQuery );

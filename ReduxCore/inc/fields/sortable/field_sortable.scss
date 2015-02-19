@@ -1,21 +1,40 @@
 .redux-container-sortable {
-  label {
-    margin-right: 10px;
-    width: 300px;
-  }
-  input {
-    margin-right: 10px;
-  }
-  .checkbox-container {
-    width: 364px;
-    .drag {
-      float: right;
-      margin-left: 10px;
+    label {
+        margin-right: 10px;
+        width: 300px;
+
+        &.bugger {
+            margin-bottom: 0px!important;
+            font-size: 12px !important;
+            color: #999999;
+        }
     }
-  }
-  li.ui-state-highlight {
-    height: 30px;
-    width: 364px;
-    margin-bottom: 13px;
-  }
+
+    input {
+        margin-right: 10px;
+    }
+
+    .checkbox-container {
+        width: 364px;
+
+        .drag {
+            float: right;
+            margin-left: 10px;
+        }
+    }
+
+    li {
+        line-height: 30px;
+
+        &.ui-state-highlight {
+            height: 30px;
+            width: 364px;
+            margin-bottom: 13px;
+        }
+
+        &.placeholder {
+            height: 30px;
+            margin: 10px 0;
+        }
+    }
 }

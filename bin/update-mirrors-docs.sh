@@ -1,42 +1,49 @@
-#!/usr/bin/env bash
-#&& "$TRAVIS_PHP_VERSION" >= 5.3 
-if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_JOB_NUMBER" == *.1 ]]; then
-
-	# Update the mirror repo for composer/packagist
-	git push --mirror https://${GH_TOKEN}@github.com/redux-framework/redux-framework.git
-
-	# Re-Deploy the heroku demo app and pull the newest code
-	git clone git@heroku.com:redux-premium.git
-	cd redux-premium
-	git reset HEAD~; git push -f heroku master;
-
-	cd ..
-
-#	cd ..
-#	rm -fr $HOME/redux-premium
-
-	echo -e "Starting to update documentation\n"
-
-	# Make sure we don't have any old files
-	rm -fr $HOME/docs
-
-	# Install phpDocumentor
-	pear channel-discover pear.phpdoc.org
-	pear install phpdoc/phpDocumentor
-	pear install Image_GraphViz
-	phpenv rehash #Have to run this for travis
-
-	# Generate the docs
-	grunt phpdocumentor
-
-	# Copy the github CNAME file to the docs
-	cp bin/CNAME docs/
-
-	# Publish the docs to gh-pages
-	grunt gh-pages:travis
-
-	# Clean out the docs directory
-	#git rm -fr $HOME/docs/  
-
-
-fi
+language: php
+php:
+  - "5.2"
+  - "5.4"
+env:
+  global:
+    secure: "aDIYEmgxoF/+2vwPdvmbxFKMoz8pA9vtvemehyLNvH3LF05RgFiwNNv+7Lvy127p4Fxp3VBK+ZLKUEEL1gdpevzgni9EigpK8YZbIVHXRL3U+1eP9rcnjuGF9pKuB4kB2ivzoprcalg1ZDI9PnRYRDE4YUTHJiEN2MmLys1QWdc="
+  cache:
+    directories:
+    - node_modules
+  matrix:
+  - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=latest WP_MULTISITE=1
+install:
+- npm install -g grunt-cli
+- npm install
+- find ReduxCore -type f | sort -u | xargs cat | md5sum > md5
+before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+script:
+- phpunit
+- grunt jshint
+- grunt lintPHP
+after_success:
+  # Install the Heroku gem (or the Heroku toolbelt)
+  #- gem install heroku
+  # Add your Heroku git repo:
+  #- git remote add heroku git@heroku.com:redux-premium.git
+  # Turn off warnings about SSH keys:
+  #- echo "Host heroku.com" >> ~/.ssh/config
+  #- echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  #- echo "   CheckHostIP no" >> ~/.ssh/config
+  #- echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # Clear your current Heroku SSH keys:
+  #- heroku keys:clear
+  # Add a new SSH key to Heroku
+  #- yes | heroku keys:add
+  - ./bin/update-mirrors-docs.sh
+after_script:
+  #- ./bin/commit-uncompressed-files.sh
+notifications:
+  email:
+    recipients:
+    - dovy@reduxframework.com
+    - kevin@reduxframework.com
+    on_failure: always
+branches:
+  except:
+  - gh-pages
+  - setup
