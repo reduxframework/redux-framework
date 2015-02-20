@@ -230,7 +230,7 @@
 
                     // No title is present, let's show what section is missing a title
                     if ( ! isset( $section['title'] ) ) {
-                        print_r( $section );
+                        //print_r( $section );
                     }
 
                     // Let's set a default priority
@@ -626,8 +626,8 @@
              * @return
              */
             public function _field_validation( $value ) {
-                print_r( $value );
-                print_r( $_POST );
+                //print_r( $value );
+                //print_r( $_POST );
 
                 return $value;
 
