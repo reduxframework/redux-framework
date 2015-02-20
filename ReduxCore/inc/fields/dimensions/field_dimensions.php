@@ -67,35 +67,35 @@
 
                 // If units field has a value but is not an acceptable value, unset the variable
                 if ( isset( $this->field['units'] ) && ! Redux_Helpers::array_in_array( $this->field['units'], array(
-                            '',
-                            false,
-                            '%',
-                            'in',
-                            'cm',
-                            'mm',
-                            'em',
-                            'ex',
-                            'pt',
-                            'pc',
-                            'px'
-                        ) )
+                        '',
+                        false,
+                        '%',
+                        'in',
+                        'cm',
+                        'mm',
+                        'em',
+                        'ex',
+                        'pt',
+                        'pc',
+                        'px'
+                    ) )
                 ) {
                     unset( $this->field['units'] );
                 }
 
                 //if there is a default unit value  but is not an accepted value, unset the variable
                 if ( isset( $this->value['units'] ) && ! Redux_Helpers::array_in_array( $this->value['units'], array(
-                            '',
-                            '%',
-                            'in',
-                            'cm',
-                            'mm',
-                            'em',
-                            'ex',
-                            'pt',
-                            'pc',
-                            'px'
-                        ) )
+                        '',
+                        '%',
+                        'in',
+                        'cm',
+                        'mm',
+                        'em',
+                        'ex',
+                        'pt',
+                        'pc',
+                        'px'
+                    ) )
                 ) {
                     unset( $this->value['units'] );
                 }
@@ -159,7 +159,7 @@
                     echo '<div class="field-dimensions-input input-prepend">';
                     echo '<span class="add-on"><i class="el-icon-resize-horizontal icon-large"></i></span>';
                     echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini' . $this->field['class'] . '" placeholder="' . __( 'Width', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-width" value="' . filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
-                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-width" name="' . $this->field['name'] . $this->field['name_suffix']. '[width]' . '" value="' . $this->value['width'] . '"></div>';
+                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-width" name="' . $this->field['name'] . $this->field['name_suffix'] . '[width]' . '" value="' . $this->value['width'] . '"></div>';
                 }
 
                 /**
@@ -175,7 +175,7 @@
                     echo '<div class="field-dimensions-input input-prepend">';
                     echo '<span class="add-on"><i class="el-icon-resize-vertical icon-large"></i></span>';
                     echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __( 'Height', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-height" value="' . filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
-                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . $this->field['name_suffix']. '[height]' . '" value="' . $this->value['height'] . '"></div>';
+                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . $this->field['name_suffix'] . '[height]' . '" value="' . $this->value['height'] . '"></div>';
                 }
 
                 /**
@@ -186,7 +186,7 @@
                 // and the default units value will apply.
                 if ( isset( $this->field['units'] ) && $this->field['units'] !== false ) {
                     echo '<div class="select_wrapper dimensions-units" original-title="' . __( 'Units', 'redux-framework' ) . '">';
-                    echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . __( 'Units', 'redux-framework' ) . '" class="redux-dimensions redux-dimensions-units select' . $this->field['class'] . '" original-title="' . __( 'Units', 'redux-framework' ) . '" name="' . $this->field['name'] . $this->field['name_suffix']. '[units]' . '">';
+                    echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . __( 'Units', 'redux-framework' ) . '" class="redux-dimensions redux-dimensions-units select' . $this->field['class'] . '" original-title="' . __( 'Units', 'redux-framework' ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[units]' . '">';
 
                     //  Extended units, show 'em all
                     if ( $this->field['units_extended'] ) {
@@ -219,7 +219,7 @@
              */
             function enqueue() {
                 wp_enqueue_style( 'select2-css' );
-                
+
                 wp_enqueue_script(
                     'redux-field-dimensions-js',
                     ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions' . Redux_Functions::isMin() . '.js',
@@ -228,7 +228,7 @@
                     true
                 );
 
-                if ($this->parent->args['dev_mode']) {
+                if ( $this->parent->args['dev_mode'] ) {
                     wp_enqueue_style(
                         'redux-field-dimensions-css',
                         ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
@@ -301,3 +301,5 @@
             } //function
         } //class
     }
+
+

@@ -43,17 +43,26 @@
 
     $.redux.ajax_save = function( button ) {
 
-        var overlay = $(document.getElementById('redux_ajax_overlay'));
+        var overlay = $( document.getElementById( 'redux_ajax_overlay' ) );
         overlay.fadeIn();
 
         // Add the loading mechanism
         jQuery( '.redux-action_bar .spinner' ).show();
-        jQuery( '.redux-action_bar input' ).attr('disabled', 'disabled');
+        jQuery( '.redux-action_bar input' ).attr( 'disabled', 'disabled' );
         var $notification_bar = jQuery( document.getElementById( 'redux_notification_bar' ) );
         $notification_bar.slideUp();
         jQuery( '.redux-save-warn' ).slideUp();
 
         var $parent = jQuery( document.getElementById( "redux-form-wrapper" ) );
+
+        // Editor field doesn't auto save. Have to call it. Boo.
+        if ( redux.fields.hasOwnProperty( "editor" ) ) {
+            $.each(
+                redux.fields.editor, function( $key, $index ) {
+                    tinyMCE.get( $key ).save();
+                }
+            );
+        }
 
         var $data = $parent.serialize();
         // add values for checked and unchecked checkboxes fields
@@ -65,6 +74,7 @@
                 }
             }
         );
+
 
         if ( button.attr( 'name' ) != "redux_save" ) {
             $data += "&" + button.attr( 'name' ) + "=" + button.val();
@@ -87,7 +97,7 @@
                     if ( response.action && response.action == "reload" ) {
                         location.reload();
                     } else if ( response.status == "success" ) {
-                        jQuery( '.redux-action_bar input' ).removeAttr('disabled');
+                        jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                         overlay.fadeOut( 'fast' );
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
                         redux.options = response.options;
@@ -95,7 +105,7 @@
                         redux.errors = response.errors;
                         redux.warnings = response.warnings;
 
-                        $notification_bar.html( response.notification_bar ).slideDown('fast');
+                        $notification_bar.html( response.notification_bar ).slideDown( 'fast' );
                         if ( response.errors !== null || response.warnings !== null ) {
                             $.redux.notices();
                         }
@@ -103,7 +113,7 @@
                         $save_notice.slideDown();
                         $save_notice.delay( 4000 ).slideUp();
                     } else {
-                        jQuery( '.redux-action_bar input' ).removeAttr('disabled');
+                        jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
                         overlay.fadeOut( 'fast' );
                         jQuery( '.redux_ajax_save_error' ).slideUp();
@@ -493,10 +503,20 @@
                             }
                         );
                         var newParent = el.find( '#' + relid + '_section_group_li' ).parents( '.hasSubSections:first' );
+
                         if ( newParent.length > 0 ) {
                             el.find( '#' + relid + '_section_group_li' ).removeClass( 'active' );
                             relid = newParent.find( '.redux-group-tab-link-a:first' ).data( 'rel' );
-                            el.find( '#' + relid + '_section_group_li' ).addClass( 'active' ).removeClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                            //console.log(relid);
+                            if ( newParent.hasClass( 'empty_section' ) ) {
+                                newParent.find( '.subsection li:first' ).addClass( 'active' );
+                                el.find( '#' + relid + '_section_group_li' ).removeClass( 'active' ).addClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                                newParent = newParent.find( '.subsection li:first' );
+                                relid = newParent.find( '.redux-group-tab-link-a:first' ).data( 'rel' );
+                                //console.log('Empty section, do the next one?');
+                            } else {
+                                el.find( '#' + relid + '_section_group_li' ).addClass( 'active' ).removeClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                            }
                         }
                     } else if ( el.find( '#' + oldid + '_section_group_li' ).parents( 'ul.subsection' ).length ) {
                         //console.log('oldid is a child');
@@ -511,6 +531,7 @@
                                 }
                             );
                         } else {
+                            //console.log('oldid is child, but not of relid2');
                             el.find( '#' + oldid + '_section_group_li' ).removeClass( 'active' );
                         }
                     } else {
@@ -752,11 +773,11 @@
         var value = $( '#' + redux.args.opt_name + '-' + id ).serializeForm();
 
         if ( value !== null && typeof value === 'object' && value.hasOwnProperty( redux.args.opt_name ) ) {
-            //console.log('object');
-            //console.log(value);
             value = value[redux.args.opt_name][id];
         }
-        //console.log(value);
+        if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-media' ) ) {
+            value = value.url;
+        }
         return value;
     };
 
@@ -766,7 +787,6 @@
         }
         var current = $( variable ),
             id = current.parents( '.redux-field:first' ).data( 'id' );
-
         if ( !redux.required.hasOwnProperty( id ) ) {
             return;
         }
@@ -774,7 +794,6 @@
         var container = current.parents( '.redux-field-container:first' ),
             is_hidden = container.parents( 'tr:first' ).hasClass( '.hide' ),
             hadSections = false;
-
         $.each(
             redux.required[id], function( child, dependents ) {
 
@@ -1465,7 +1484,7 @@ function redux_change( variable ) {
         }
     }
     // Don't show the changed value notice while save_notice is visible.
-    if ( rContainer.find('.saved_notice:visible' ).length > 0 ) {
+    if ( rContainer.find( '.saved_notice:visible' ).length > 0 ) {
         return;
     }
     if ( !redux.args.disable_save_warn ) {
