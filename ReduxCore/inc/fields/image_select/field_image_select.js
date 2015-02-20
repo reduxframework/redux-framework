@@ -50,6 +50,18 @@
 
                             var presets = $( this ).closest( 'label' ).find( 'input' );
                             var data = presets.data( 'presets' );
+							var merge = presets.data( 'merge' );
+
+							if( merge !== undefined && merge !== null ) {
+								var mergeAll = ( merge === true ) ? true : false;
+								if( jQuery.type( merge ) === 'string' )
+									merge = merge.split('|');
+
+								$.each(data, function( index, value ) {
+									if( ( mergeAll || $.inArray( index, merge ) != -1 ) && jQuery.type( redux.options[index] ) === 'object' )
+										data[index] = $.extend(redux.options[index], data[index]);
+								});
+							}
 
                             if ( presets !== undefined && presets !== null ) {
                                 var answer = confirm( redux.args.preset_confirm );
