@@ -87,9 +87,10 @@
                     if ( response.action && response.action == "reload" ) {
                         location.reload();
                     } else if ( response.status == "success" ) {
+                        jQuery( '.redux-action_bar input' ).removeAttr('disabled');
                         overlay.fadeOut( 'fast' );
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
-                        //redux.options = response.options;
+                        redux.options = response.options;
                         //redux.defaults = response.defaults;
                         redux.errors = response.errors;
                         redux.warnings = response.warnings;
@@ -102,6 +103,7 @@
                         $save_notice.slideDown();
                         $save_notice.delay( 4000 ).slideUp();
                     } else {
+                        jQuery( '.redux-action_bar input' ).removeAttr('disabled');
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
                         overlay.fadeOut( 'fast' );
                         jQuery( '.redux_ajax_save_error' ).slideUp();
@@ -109,8 +111,6 @@
                         jQuery( '.redux_ajax_save_error' ).slideDown();
                         jQuery( "html, body" ).animate( {scrollTop: 0}, "slow" );
                     }
-                    jQuery( '.redux-action_bar input' ).removeAttr('disabled');
-
                 }
             }
         );

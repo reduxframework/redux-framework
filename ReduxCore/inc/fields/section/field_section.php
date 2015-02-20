@@ -99,17 +99,13 @@
                             if ( !group.hasClass( 'sectionsChecked' ) ) {
                                 group.addClass( 'sectionsChecked' );
                                 var test = group.find( '.redux-section-indent-start h3' );
-                                if ( test.length > 1 ) {
-                                    console.log( 'here' );
-                                    jQuery.each(
-                                        test, function( key, value ) {
-                                            if ( key == 0 ) {
-                                                return;
-                                            }
-                                            console.log( key );
-                                            jQuery( value ).css( 'margin-top', '10px' )
-                                        }
-                                    );
+                                jQuery.each(
+                                    test, function( key, value ) {
+                                        jQuery( value ).css( 'margin-top', '20px' )
+                                    }
+                                );
+                                if ( group.find( 'h3:first' ).css( 'margin-top' ) == "20px" ) {
+                                    group.find( 'h3:first' ).css( 'margin-top', '0' );
                                 }
                             }
                         }
