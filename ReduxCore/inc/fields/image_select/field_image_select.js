@@ -53,12 +53,11 @@
 							var merge = presets.data( 'merge' );
 
 							if( merge !== undefined && merge !== null ) {
-								var mergeAll = ( merge === true ) ? true : false;
 								if( jQuery.type( merge ) === 'string' )
 									merge = merge.split('|');
 
 								$.each(data, function( index, value ) {
-									if( ( mergeAll || $.inArray( index, merge ) != -1 ) && jQuery.type( redux.options[index] ) === 'object' )
+									if( ( merge === true || $.inArray( index, merge ) != -1 ) && jQuery.type( redux.options[index] ) === 'object' )
 										data[index] = $.extend(redux.options[index], data[index]);
 								});
 							}
