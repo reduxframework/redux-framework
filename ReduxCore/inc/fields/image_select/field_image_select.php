@@ -129,6 +129,12 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                                 $selected = false;
                             } else {
                                 foreach ( $v['presets'] as $pk => $pv ) {
+                                    if ( isset( $v['merge'] ) && $v['merge'] !== false ) {
+                                        if( ( $v['merge'] === true || in_array( $pk, $v['merge'] ) ) && is_array( $this->parent->options[ $pk ] ) ) {
+                                            $pv = array_merge( $this->parent->options[ $pk ], $pv );
+                                        }
+                                    }
+
                                     if ( empty( $pv ) && isset( $this->parent->options[ $pk ] ) && ! empty( $this->parent->options[ $pk ] ) ) {
                                         $selected = false;
                                     } else if ( ! empty( $pv ) && ! isset( $this->parent->options[ $pk ] ) ) {
