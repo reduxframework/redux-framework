@@ -30,12 +30,13 @@
                 return;
             }
             $this->redux_loaded = true;
+            add_action( 'admin_menu', array( $this, 'admin_menus' ) );
+
             if ( isset( $_GET['page'] ) ) {
                 if ( substr( $_GET['page'], 0, 6 ) == "redux-" ) {
                     $version               = explode( '.', ReduxFramework::$_version );
                     $this->display_version = $version[0] . '.' . $version[1];
                     add_filter( 'admin_footer_text', array( $this, 'change_wp_footer' ) );
-                    add_action( 'admin_menu', array( $this, 'admin_menus' ) );
                     add_action( 'admin_head', array( $this, 'admin_head' ) );
                     add_action( 'admin_init', array( $this, 'welcome' ) );
                 }
@@ -60,15 +61,15 @@
         public function admin_menus() {
 
             // About Page
-            add_dashboard_page(
-                __( 'Welcome to Redux Framework', 'redux-framework' ), __( 'Welcome to Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-about', array(
+            add_management_page(
+                __( 'Welcome to Redux Framework', 'redux-framework' ), __( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-about', array(
                     $this,
                     'about_screen'
                 )
             );
 
             // Changelog Page
-            add_dashboard_page(
+            add_management_page(
                 __( 'Redux Framework Changelog', 'redux-framework' ), __( 'Redux Framework Changelog', 'redux-framework' ), $this->minimum_capability, 'redux-changelog', array(
                     $this,
                     'changelog_screen'
@@ -76,7 +77,7 @@
             );
 
             // Support Page
-            add_dashboard_page(
+            add_management_page(
                 __( 'Get Support', 'redux-framework' ), __( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array(
                     $this,
                     'get_support'
@@ -84,20 +85,28 @@
             );
 
             // Support Page
-            add_dashboard_page(
+            add_management_page(
                 __( 'Redux Extensions', 'redux-framework' ), __( 'Redux Extensions', 'redux-framework' ), $this->minimum_capability, 'redux-extensions', array(
                     $this,
                     'redux_extensions'
                 )
             );
 
+
             // Credits Page
-            add_dashboard_page(
+            add_management_page(
                 __( 'The people that develop Redux Framework', 'redux-framework' ), __( 'The people that develop Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-credits', array(
                     $this,
                     'credits_screen'
                 )
             );
+            remove_submenu_page( 'tools.php', 'redux-credits' );
+            remove_submenu_page( 'tools.php', 'redux-changelog' );
+            remove_submenu_page( 'tools.php', 'redux-getting-started' );
+            remove_submenu_page( 'tools.php', 'redux-credits' );
+            remove_submenu_page( 'tools.php', 'redux-support' );
+            remove_submenu_page( 'tools.php', 'redux-extensions' );
+
         }
 
         /**
@@ -108,12 +117,12 @@
          * @return void
          */
         public function admin_head() {
-            remove_submenu_page( 'admin.php', 'redux-about' );
-            remove_submenu_page( 'admin.php', 'redux-changelog' );
-            remove_submenu_page( 'admin.php', 'redux-getting-started' );
-            remove_submenu_page( 'admin.php', 'redux-credits' );
-            remove_submenu_page( 'admin.php', 'redux-support' );
-            remove_submenu_page( 'admin.php', 'redux-extensions' );
+            //remove_submenu_page( 'index.php', 'redux-about' );
+            //remove_submenu_page( 'index.php', 'redux-changelog' );
+            //remove_submenu_page( 'index.php', 'redux-getting-started' );
+            //remove_submenu_page( 'index.php', 'redux-credits' );
+            //remove_submenu_page( 'index.php', 'redux-support' );
+            //remove_submenu_page( 'index.php', 'redux-extensions' );
 
             // Badge for welcome page
             $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
@@ -162,23 +171,23 @@
             ?>
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab <?php echo $selected == 'redux-about' ? 'nav-tab-active' : ''; ?>"
-                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'index.php' ) ) ); ?>">
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'tools.php' ) ) ); ?>">
                     <?php _e( "About Redux", 'redux-framework' ); ?>
                 </a>
                 <a class="nav-tab <?php echo $selected == 'redux-support' ? 'nav-tab-active' : ''; ?>"
-                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-support' ), 'index.php' ) ) ); ?>">
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-support' ), 'tools.php' ) ) ); ?>">
                     <?php _e( 'Support', 'redux-framework' ); ?>
                 </a>
                 <a class="nav-tab <?php echo $selected == 'redux-extensions' ? 'nav-tab-active' : ''; ?>"
-                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-extensions' ), 'index.php' ) ) ); ?>">
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-extensions' ), 'tools.php' ) ) ); ?>">
                     <?php _e( 'Extensions', 'redux-framework' ); ?>
                 </a>
                 <a class="nav-tab <?php echo $selected == 'redux-changelog' ? 'nav-tab-active' : ''; ?>"
-                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-changelog' ), 'index.php' ) ) ); ?>">
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-changelog' ), 'tools.php' ) ) ); ?>">
                     <?php _e( 'Changelog', 'redux-framework' ); ?>
                 </a>
                 <a class="nav-tab <?php echo $selected == 'redux-credits' ? 'nav-tab-active' : ''; ?>"
-                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-credits' ), 'index.php' ) ) ); ?>">
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-credits' ), 'tools.php' ) ) ); ?>">
                     <?php _e( 'Credits', 'redux-framework' ); ?>
                 </a>
             </h2>
@@ -200,7 +209,7 @@
                 <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $this->display_version ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to <add description>', 'redux-framework' ), $this->display_version ); ?></div>
+                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is a huge step forward in Redux Development. Look at all that\'s new.', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
                     class="redux-badge"><i
                         class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
