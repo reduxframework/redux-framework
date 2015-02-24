@@ -55,6 +55,9 @@
         // ThemeCheck checks
         require_once( dirname( __FILE__ ) . '/inc/class.redux_themecheck.php' );
 
+        // Welcome
+        require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
+
         //require_once( dirname( __FILE__ ) . '/inc/class.redux_sass.php' );
 
         /**
@@ -318,30 +321,6 @@
                         $this->_tracking();
                     }
 
-                    //DOVY!!  HERE!!!
-                    // Getting started page
-//                    if (  is_admin () && $this->args['dev_mode'] ) {
-//
-//                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
-//                            //logconsole('inc');
-                            require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
-//                        } else {
-//                            //logconsole('compare');
-//                            if (isset($_GET['page']) && $_GET['page'] == $this->args['page_slug']) {
-//                                $saveVer = get_option('redux_version_upgraded_from');
-//                                $curVer = self::$_version;
-//
-//                                if (empty($saveVer)) {
-//                                    //logconsole('redir');
-//                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
-//                                    exit;
-//                                } else if (version_compare($curVer, $saveVer, '>')) {
-//                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
-//                                    exit;
-//                                }
-//                            }
-//                        }
-//                    }
                     // Options page
                     add_action( 'admin_menu', array( $this, '_options_page' ) );
 

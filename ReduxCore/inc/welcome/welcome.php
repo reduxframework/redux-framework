@@ -3,6 +3,7 @@
         exit;
     }
 
+
     class Redux_Welcome {
 
         /**
@@ -10,6 +11,7 @@
          */
         public $minimum_capability = 'manage_options';
         public $display_version = "";
+        public $redux_loaded = false;
 
         /**
          * Get things started
@@ -18,14 +20,26 @@
          */
         public function __construct() {
 
-            add_action( 'admin_menu', array( $this, 'admin_menus' ) );
-            add_action( 'admin_head', array( $this, 'admin_head' ) );
-            add_action( 'admin_init', array( $this, 'welcome' ) );
-            add_filter( 'admin_footer_text', array( $this, 'change_wp_footer' ) );
+            add_action( 'redux/loaded', array( $this, 'init' ) );
 
-            $version               = explode( '.', ReduxFramework::$_version );
-            $this->display_version = $version[0] . '.' . $version[1];
+        }
 
+        public function init() {
+
+            if ( $this->redux_loaded ) {
+                return;
+            }
+            $this->redux_loaded = true;
+            if ( isset( $_GET['page'] ) ) {
+                if ( substr( $_GET['page'], 0, 6 ) == "redux-" ) {
+                    $version               = explode( '.', ReduxFramework::$_version );
+                    $this->display_version = $version[0] . '.' . $version[1];
+                    add_filter( 'admin_footer_text', array( $this, 'change_wp_footer' ) );
+                    add_action( 'admin_menu', array( $this, 'admin_menus' ) );
+                    add_action( 'admin_head', array( $this, 'admin_head' ) );
+                    add_action( 'admin_init', array( $this, 'welcome' ) );
+                }
+            }
             update_option( 'redux_version_upgraded_from', ReduxFramework::$_version );
             set_transient( '_redux_activation_redirect', true, 30 );
 
@@ -94,18 +108,18 @@
          * @return void
          */
         public function admin_head() {
-            remove_submenu_page( 'index.php', 'redux-about' );
-            remove_submenu_page( 'index.php', 'redux-changelog' );
-            remove_submenu_page( 'index.php', 'redux-getting-started' );
-            remove_submenu_page( 'index.php', 'redux-credits' );
-            remove_submenu_page( 'index.php', 'redux-support' );
-            remove_submenu_page( 'index.php', 'redux-extensions' );
+            remove_submenu_page( 'admin.php', 'redux-about' );
+            remove_submenu_page( 'admin.php', 'redux-changelog' );
+            remove_submenu_page( 'admin.php', 'redux-getting-started' );
+            remove_submenu_page( 'admin.php', 'redux-credits' );
+            remove_submenu_page( 'admin.php', 'redux-support' );
+            remove_submenu_page( 'admin.php', 'redux-extensions' );
 
             // Badge for welcome page
             $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
             ?>
             <link rel='stylesheet' id='elusive-icons'
-                  href='<?php echo ReduxFramework::$_url ?>/assets/css/vendor/elusive-icons/elusive-webfont.css'
+                  href='/elusive/css/elusive-icons.css'
                   type='text/css' media='all'/>
 
             <link rel='stylesheet' id='elusive-icons'
@@ -115,16 +129,20 @@
                 .redux-badge:before {
                 <?php echo is_rtl() ? 'right' : 'left'; ?> : 0;
                 }
+
                 .about-wrap .redux-badge {
                 <?php echo is_rtl() ? 'left' : 'right'; ?> : 0;
                 }
+
                 .about-wrap .feature-rest div {
                     padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 100px;
                 }
+
                 .about-wrap .feature-rest div.last-feature {
                     padding- <?php echo is_rtl() ? 'right' : 'left'; ?>: 100px;
                     padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 0;
                 }
+
                 .about-wrap .feature-rest div.icon:before {
                     margin: <?php echo is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'; ?>;
                 }
@@ -184,7 +202,9 @@
                 <div
                     class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to <add description>', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge"><i
+                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
+                </div>
 
                 <?php $this->tabs(); ?>
 
@@ -308,7 +328,9 @@
                 <div
                     class="about-text"><?php _e( 'Our core mantra at Redux is backwards compatibility. With hundreds of thousands of instances worldwide, you can be assured that we will take care of you and your clients.', 'redux-framework' ); ?></div>
                 <div
-                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge"><i
+                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
+                </div>
 
                 <?php $this->tabs(); ?>
 
@@ -330,6 +352,71 @@
          * @return void
          */
         public function redux_extensions() {
+            /*
+            repeater =>
+            social profiles =>
+            js button =>
+            multi media =>
+            css layout =>
+            color schemes => adjust-alt
+            custom fonts => fontsize
+            code mirror => view-mode
+            live search => search
+            support faq's => question
+            date time picker =>
+            premium support =>
+            metaboxes =>
+            widget areas =>
+            shortcodes =>
+            icon select => gallery
+            tracking =>
+             * */
+            $iconMap = array(
+                'repeater'        => 'asl',
+                'social-profiles' => 'group',
+                'js-button'       => 'hand-down',
+                'multi-media'     => 'picture',
+                'css-layout'      => 'fullscreen',
+                'color-schemes'   => 'adjust-alt',
+                'custom-fonts'    => 'fontsize',
+                'codemirror'      => 'view-mode',
+                'live-search'     => 'search',
+                'support-faqs'    => 'question',
+                'date-time'       => 'calendar',
+                'premium-support' => 'fire',
+                'metaboxes'       => 'magic',
+                'widget-areas'    => 'inbox-box',
+                'shortcodes'      => 'shortcode',
+                'icon-select'     => 'gallery',
+            );
+            $colors  = array(
+                '8CC63F',
+                '8CC63F',
+                '0A803B',
+                '25AAE1',
+                '0F75BC',
+                'F7941E',
+                'F1592A',
+                'ED217C',
+                'BF1E2D',
+                '8569CF',
+                '0D9FD8',
+                '8AD749',
+                'EECE00',
+                'F8981F',
+                'F80E27',
+                'F640AE'
+            );
+            shuffle($colors);
+            echo '<style type="text/css">';
+            foreach ($colors as $key => $color) {
+                echo '.theme-browser .theme.color'.$key.' .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .45).';}';
+                echo '.theme-browser .theme.color'.$key.':hover .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .75).';}';
+
+            }
+            echo '</style>';
+            $color = 1;
+
 
             ?>
             <div class="wrap about-wrap">
@@ -338,55 +425,75 @@
                 <div
                     class="about-text"><?php printf( __( 'Supercharge your Redux experience. Our extensions provide you with features that will take your products to the next level.', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge"><i
+                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
+                </div>
 
                 <?php $this->tabs(); ?>
 
-                <p class="about-description"><?php _e( 'Wait, isn', 'redux-framework' ); ?></p>
+                <p class="about-description"><?php _e( "While some are built specificially for developers, extensions such as Custom Fonts are sure to make any user happy.", 'redux-framework' ); ?></p>
 
-                <div class="changelog">
-                    <div class="feature-section">
-                        <div class="feature-section theme-browser rendered">
+                <div class="extensions">
+                    <div class="feature-section theme-browser rendered">
                         <?php
 
                             $data = get_transient( 'redux-extensions-fetch' );
 
-                            if (empty($data)) {
-                                $data = json_decode(wp_remote_retrieve_body( wp_remote_get('http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' ) ), true);
-                                if (!empty($data)) {
+                            if ( empty( $data ) ) {
+                                $data = json_decode( wp_remote_retrieve_body( wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' ) ), true );
+                                if ( ! empty( $data ) ) {
                                     set_transient( 'redux-extensions-fetch', $data, 24 * HOUR_IN_SECONDS );
                                 }
                             }
-                            shuffle($data);
-                            foreach ($data as $key => $extension) : ?>
+                            function shuffle_assoc( $list ) {
+                                if ( ! is_array( $list ) ) {
+                                    return $list;
+                                }
 
-                                    <!-- Classic -->
-                                    <div class="theme">
-                                        <div class="theme-screenshot">
-                                            <img src="<?php echo $extension['thumb'];?>">
-                                        </div>
-                                        <h3 class="theme-name" id="classic"><?php echo $extension['title'];?></h3>
-                                        <div class="theme-actions">
-                                            <a class="button button-primary button-install-demo" data-demo-id="<?php echo $key; ?>" href="http://reduxframework.com/extensions/<?php echo $key;?>/">Learn More</a> </div>
-                                        <div id="demo-preview-classic" class="screenshot-hover fusion-animated fadeInUp">
-                                            <?php echo $extension['excerpt'];?>
-                                        </div>
+                                $keys = array_keys( $list );
+                                shuffle( $keys );
+                                $random = array();
+                                foreach ( $keys as $key ) {
+                                    $random[ $key ] = $list[ $key ];
+                                }
+
+                                return $random;
+                            }
+
+                            $data = shuffle_assoc( $data );
+
+                            foreach ( $data as $key => $extension ) :
+
+                                ?>
+
+                                <!-- Classic -->
+                                <div class="theme color<?php echo $color; $color++;?>">
+                                    <div class="theme-screenshot">
+                                        <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . $iconMap[ $key ] : 'el-redux'; ?>"></i>
                                     </div>
+                                    <h3 class="theme-name" id="classic"><?php echo $extension['title']; ?></h3>
+
+                                    <div class="theme-actions">
+                                        <a class="button button-primary button-install-demo"
+                                           data-demo-id="<?php echo $key; ?>"
+                                           href="<?php echo $extension['url']; ?>" target="_blank">Learn
+                                            More</a></div>
+                                    <div id="demo-preview-classic"
+                                         class="screenshot-hover fusion-animated fadeInUp">
+                                        <?php echo $extension['excerpt']; ?>
+                                    </div>
+                                </div>
 
                             <?php
                             endforeach;
 
                         ?>
-                            </div>
-
-
                     </div>
                 </div>
 
             </div>
         <?php
         }
-
 
 
         /**
@@ -400,12 +507,14 @@
 
             ?>
             <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework - Getting Support', 'redux-framework' ); ?></h1>
+                <h1><?php _e( 'Redux Framework - Support', 'redux-framework' ); ?></h1>
 
                 <div
                     class="about-text"><?php printf( __( 'We are an open source project used by developers to make powerful control panels.', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge"><i
+                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
+                </div>
 
                 <?php $this->tabs(); ?>
 
@@ -423,11 +532,8 @@
                     <div class="feature-section">
 
 
-
-
                     </div>
                 </div>
-
 
 
             </div>
@@ -450,7 +556,9 @@
                 <div
                     class="about-text"><?php _e( 'We recognize we are nothing without our community. We would like to thank all of those who help Redux to be what it is. Thank you for your involvement.', 'redux-framework' ); ?></div>
                 <div
-                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge"><i
+                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
+                </div>
 
                 <?php $this->tabs(); ?>
 
@@ -581,3 +689,31 @@
     }
 
     new Redux_Welcome();
+
+
+
+
+//DOVY!!  HERE!!!
+// Getting started page
+//                    if (  is_admin () && $this->args['dev_mode'] ) {
+//
+//                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
+//                            //logconsole('inc');
+
+//                        } else {
+//                            //logconsole('compare');
+//                            if (isset($_GET['page']) && $_GET['page'] == $this->args['page_slug']) {
+//                                $saveVer = get_option('redux_version_upgraded_from');
+//                                $curVer = self::$_version;
+//
+//                                if (empty($saveVer)) {
+//                                    //logconsole('redir');
+//                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-getting-started' ) );
+//                                    exit;
+//                                } else if (version_compare($curVer, $saveVer, '>')) {
+//                                    wp_safe_redirect ( admin_url ( 'index.php?page=redux-about' ) );
+//                                    exit;
+//                                }
+//                            }
+//                        }
+//                    }
