@@ -1846,7 +1846,7 @@
                 return $return;
             }
 
-            public function class_field_callback( $field, $value ) {
+            public static function class_field_callback( $field, $value ) {
                 print_r( $field );
                 echo '<br/>CLASS CALLBACK';
                 print_r( $value );

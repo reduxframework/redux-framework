@@ -128,7 +128,7 @@
             $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
             ?>
             <link rel='stylesheet' id='elusive-icons'
-                  href='/elusive/css/elusive-icons.css'
+                  href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/elusive-icons/elusive-icons.css'
                   type='text/css' media='all'/>
 
             <link rel='stylesheet' id='elusive-icons'
