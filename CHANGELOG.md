@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.3.5
+* Fixed     #2081 - Section field hiding any field after.  Weird.
+
 ## 3.4.3.4
 * Added     #2047 - `output_transparent` argument to output the blank color feature as 'transparent'.
 * Fixed     #2080 - missing 'rem' unit and inability to process float values.  Thanks to @HELWATANY for the fixes!
