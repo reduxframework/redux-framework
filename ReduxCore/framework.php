@@ -2911,8 +2911,8 @@
                     }
                     $icon = ( ! isset ( $section['icon'] ) ) ? '<i class="el el-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
                 }
-                if (strpos($icon,'el-icon-') !== false) {
-                    $icon = str_replace('el-icon-', 'el el-', $icon);
+                if ( strpos( $icon, 'el-icon-' ) !== false ) {
+                    $icon = str_replace( 'el-icon-', 'el el-', $icon );
                 }
 
                 $hide_section = '';
@@ -2980,6 +2980,9 @@
                                         $icon_class = '';
                                     }
                                     $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<i class="' . $sections[ $nextK ]['icon'] . $icon_class . '"></i> ';
+                                }
+                                if ( strpos( $icon, 'el-icon-' ) !== false ) {
+                                    $icon = str_replace( 'el-icon-', 'el el-', $icon );
                                 }
                                 $section[ $nextK ]['class'] = isset ( $section[ $nextK ]['class'] ) ? $section[ $nextK ]['class'] : '';
                                 $string .= '<li id="' . $nextK . $suffix . '_section_group_li" class="redux-group-tab-link-li ' . $hide_sub . $section[ $nextK ]['class'] . ( $icon ? ' hasIcon' : '' ) . '">';
