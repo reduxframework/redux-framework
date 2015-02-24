@@ -45,6 +45,7 @@
                 $this->parent = $parent;
                 $this->field  = $field;
                 $this->value  = $value;
+                $this->is_field = $this->parent->extensions['import_export']->is_field;
 
                 if ( empty( $this->extension_dir ) ) {
                     $this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
@@ -75,7 +76,7 @@
 
                 $secret = md5( md5( AUTH_KEY . SECURE_AUTH_KEY ) . '-' . $this->parent->args['opt_name'] );
 
-                if ( true == $this->parent->is_field ) {
+                if ( true == $this->is_field ) {
                     $fullWidth = $this->field_args['full_width'];
                 }
 
