@@ -102,7 +102,7 @@ if (!class_exists('reduxCoreEnqueue')){
             //*****************************************************************
             wp_enqueue_style(
                 'redux-elusive-icon',
-                ReduxFramework::$_url . 'assets/css/vendor/elusive-icons/elusive-webfont.css',
+                ReduxFramework::$_url . 'assets/css/vendor/elusive-icons/elusive-icons.css',
                 array(),
                 $this->timestamp,
                 'all'

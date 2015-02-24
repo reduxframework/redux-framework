@@ -308,8 +308,8 @@ module.exports = function( grunt ) {
                         "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css":[
                             "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.scss"
                         ],
-                        "ReduxCore/assets/css/vendor/elusive-icons/elusive-webfont.css":[
-                            "ReduxCore/assets/css/vendor/elusive-icons/sass/elusive-webfont.scss"
+                        "ReduxCore/assets/css/vendor/elusive-icons/elusive-icons.css":[
+                            "ReduxCore/assets/css/vendor/elusive-icons/scss/elusive-icons.scss"
                         ],                        
                     }
                 },
