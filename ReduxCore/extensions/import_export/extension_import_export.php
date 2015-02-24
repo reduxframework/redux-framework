@@ -55,6 +55,8 @@
              */
             public function __construct( $parent ) {
 
+
+
                 $this->parent = $parent;
                 if ( empty( $this->extension_dir ) ) {
                     $this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
@@ -96,6 +98,23 @@
                     'overload_field_path'
                 ) ); // Adds the local field
 
+                //add_filter( 'upload_mimes', array(
+                //    $this,
+                //    'custom_upload_mimes'
+                //) );
+
+            }
+
+            /**
+             * Adds the appropriate mime types to WordPress
+             *
+             * @param array $existing_mimes
+             *
+             * @return array
+             */
+            function custom_upload_mimes( $existing_mimes = array() ) {
+                $existing_mimes['redux']  = 'application/json';
+                return $existing_mimes;
             }
 
             public function add_section() {

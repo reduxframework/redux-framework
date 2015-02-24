@@ -95,7 +95,7 @@
                 <fieldset id="<?php echo $id; ?>" class="redux-field redux-container-<?php echo $this->field['type'] . ' ' . $this->field['class']; ?>" data-id="<?php echo $this->field['id']; ?>">
 
                 <h4><? _e( 'Import Options', 'redux-framework' ); ?></h4>
-                <p><a href="javascript:void(0);" id="redux-import-code-button" class="button-secondary"><?php _e( 'Import from file', 'redux-framework' ); ?></a> <a href="javascript:void(0);" id="redux-import-link-button" class="button-secondary"><? _e( 'Import from URL', 'redux-framework' ) ?></a></p>
+                <p><a href="javascript:void(0);" id="redux-import-code-button" class="button-secondary"><?php _e( 'Import from File', 'redux-framework' ); ?></a> <a href="javascript:void(0);" id="redux-import-link-button" class="button-secondary"><? _e( 'Import from URL', 'redux-framework' ) ?></a></p>
 
                 <div id="redux-import-code-wrapper">
                 <p class="description" id="import-code-description"><?php echo apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', 'redux-framework' ) ); ?></p>
@@ -114,10 +114,13 @@
                 <div class="redux-section-desc">
                 <p class="description"><?php echo apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'redux-framework' ) ) ?></p>
                 </div>
-                <p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary"><?php _e( 'Copy', 'redux-framework' ) ?></a> <a href="' . $link . '" id="redux-export-code-dl" class="button-primary"><?php _e( 'Download', 'redux-framework' ) ?></a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary"><?php _e( 'Copy URL', 'redux-framework' ) ?></a></p>
+                <?php
+                    $link = admin_url( 'admin-ajax.php?action=redux_download_options-' . $this->parent->args['opt_name'] . '&secret=' . $secret );
+                ?>
+                <p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary"><?php _e( 'Copy Data', 'redux-framework' ) ?></a> <a href="<?php echo $link; ?>" id="redux-export-code-dl" class="button-primary"><?php _e( 'Download Data File', 'redux-framework' ) ?></a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary"><?php _e( 'Copy Export URL', 'redux-framework' ) ?></a></p>
                 <p></p>
                 <textarea class="large-text noUpdate" id="redux-export-code" rows="2"></textarea>
-                <textarea class="large-text noUpdate" id="redux-export-link-value" data-url="<?php echo admin_url( 'admin-ajax.php?action=redux_download_options-' . $this->parent->args['opt_name'] . '&secret=' . $secret ); ?>" rows="2"><?php echo admin_url( 'admin-ajax.php?action=redux_download_options-' . $this->parent->args['opt_name'] . '&secret=' . $secret ); ?></textarea>
+                <textarea class="large-text noUpdate" id="redux-export-link-value" data-url="<?php echo $link; ?>" rows="2"><?php echo $link; ?></textarea>
 
                 </div>
 
