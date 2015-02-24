@@ -42,9 +42,9 @@
             function __construct( $field = array(), $value = '', $parent ) {
 
 
-                $this->parent = $parent;
-                $this->field  = $field;
-                $this->value  = $value;
+                $this->parent   = $parent;
+                $this->field    = $field;
+                $this->value    = $value;
                 $this->is_field = $this->parent->extensions['import_export']->is_field;
 
                 if ( empty( $this->extension_dir ) ) {
@@ -76,7 +76,15 @@
 
                 $secret = md5( md5( AUTH_KEY . SECURE_AUTH_KEY ) . '-' . $this->parent->args['opt_name'] );
 
-                if ( true == $this->is_field ) {
+                // No errors please
+                $defaults = array(
+                    'full_width' => true,
+                    'overflow'   => 'inherit',
+                );
+
+                $this->field = wp_parse_args( $this->field, $defaults );
+
+                if ( $this->is_field ) {
                     $fullWidth = $this->field['full_width'];
                 }
 
@@ -84,7 +92,7 @@
 
                 $id = $this->parent->args['opt_name'] . '-' . $this->field['id'];
 
-                if ( false == $this->is_field || ( true == $this->is_field && false == $fullWidth ) ) : ?>
+                if ( ! $this->is_field || ( $this->is_field && false == $fullWidth ) ) : ?>
                     <style>#<?php echo $id; ?> {padding: 0;}</style>
                     </td></tr></table>
                     <table id="<?php echo $id; ?>" class="form-table no-border redux-group-table redux-raw-table" style=" overflow: <?php $this->field['overflow']; ?>;">
@@ -116,7 +124,7 @@
                 <p class="description"><?php echo apply_filters( 'redux-backup-description', __( 'Here you can copy/download your current option settings. Keep this safe as you can use it as a backup should anything go wrong, or you can use it to restore your settings on this site (or any other site).', 'redux-framework' ) ) ?></p>
                 </div>
                 <?php
-                    $link = admin_url( 'admin-ajax.php?action=redux_download_options-' . $this->parent->args['opt_name'] . '&secret=' . $secret );
+                $link = admin_url( 'admin-ajax.php?action=redux_download_options-' . $this->parent->args['opt_name'] . '&secret=' . $secret );
                 ?>
                 <p><a href="javascript:void(0);" id="redux-export-code-copy" class="button-secondary"><?php _e( 'Copy Data', 'redux-framework' ) ?></a> <a href="<?php echo $link; ?>" id="redux-export-code-dl" class="button-primary"><?php _e( 'Download Data File', 'redux-framework' ) ?></a> <a href="javascript:void(0);" id="redux-export-link" class="button-secondary"><?php _e( 'Copy Export URL', 'redux-framework' ) ?></a></p>
                 <p></p>
