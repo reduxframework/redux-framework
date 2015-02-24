@@ -158,7 +158,7 @@
                         }
                     }
                     echo '<div class="field-dimensions-input input-prepend">';
-                    echo '<span class="add-on"><i class="el-icon-resize-horizontal icon-large"></i></span>';
+                    echo '<span class="add-on"><i class="el el-resize-horizontal icon-large"></i></span>';
                     echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini' . $this->field['class'] . '" placeholder="' . __( 'Width', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-width" value="' . filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
                     echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-width" name="' . $this->field['name'] . $this->field['name_suffix'] . '[width]' . '" value="' . $this->value['width'] . '"></div>';
                 }
@@ -174,7 +174,7 @@
                         }
                     }
                     echo '<div class="field-dimensions-input input-prepend">';
-                    echo '<span class="add-on"><i class="el-icon-resize-vertical icon-large"></i></span>';
+                    echo '<span class="add-on"><i class="el el-resize-vertical icon-large"></i></span>';
                     echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __( 'Height', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-height" value="' . filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
                     echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . $this->field['name_suffix'] . '[height]' . '" value="' . $this->value['height'] . '"></div>';
                 }
