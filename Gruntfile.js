@@ -75,9 +75,9 @@ module.exports = function( grunt ) {
                         'ReduxCore/assets/js/vendor/redux.select2.sortable.min.js': [
                             'ReduxCore/assets/js/vendor/redux.select2.sortable.js'
                         ],
-                        'ReduxCore/assets/js/import_export/import_export.min.js': [
-                            'ReduxCore/assets/js/import_export/import_export.js'
-                        ],
+                        //'ReduxCore/assets/js/import_export/import_export.min.js': [
+                        //    'ReduxCore/extensions/import_export/import_export/field_import_export.js'
+                        //],
                         'ReduxCore/assets/js/media/media.min.js': [
                             'ReduxCore/assets/js/media/media.js'
                         ],
@@ -329,7 +329,7 @@ module.exports = function( grunt ) {
                             "ReduxCore/assets/css/media/media.scss"
                         ],
                         "ReduxCore/assets/css/import_export/import_export.css":[
-                            "ReduxCore/assets/css/import_export/import_export.scss"
+                            "ReduxCore/extensions/import_export/import_export/field_import_export.scss"
                         ],
                         "ReduxCore/assets/css/redux-admin.css":  [
                             "ReduxCore/assets/css/redux-admin.scss"
@@ -347,8 +347,7 @@ module.exports = function( grunt ) {
                         'ReduxCore/assets/css/redux-fields.css': [
                             'ReduxCore/inc/fields/**/*.css',
                             "ReduxCore/assets/css/color-picker/color-picker.css",
-                            "ReduxCore/assets/css/media/media.css",
-                            "ReduxCore/assets/css/import_export/import_export.css"
+                            "ReduxCore/assets/css/media/media.css"
                         ]
                     }
                 },

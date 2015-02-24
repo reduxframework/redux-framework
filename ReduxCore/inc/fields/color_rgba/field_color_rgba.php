@@ -76,7 +76,9 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             $this->field['options']['input_text']              = isset($this->field['options']['input_text']) ? $this->field['options']['input_text'] : 'Select Color';
             
             // Convert empty array to null, if there.
-            $this->field['options']['palette'] = empty($this->field['options']['palette']) ? null : $this->field['options']['palette'];
+            $this->field['options']['palette']                 = empty($this->field['options']['palette']) ? null : $this->field['options']['palette'];
+            
+            $this->field['output_transparent']                 = isset($this->field['output_transparent']) ? $this->field['output_transparent'] : false;
         }
 
         
@@ -116,10 +118,10 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             // Colour picker layout
             $opt_name = $this->parent->args['opt_name'];
 
-            if ('' == $this->value['color']) {
+            if ('' == $this->value['color'] || 'transparent' == $this->value['color']) {
                 $color = '';
             } else {
-                $color = 'rgba(' . Redux_Helpers::hex2rgba($this->value['color']) . ',' . $this->value['alpha'] . ')';
+                $color = 'rgba(' . Redux_Helpers::hex2rgba($this->value['color'], $this->value['alpha']);
             }            
             
             echo '<input
@@ -132,6 +134,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                         data-id="' . $field_id . '"
                         data-current-color="' . $this->value['color'] . '"
                         data-block-id="' . $field_id . '"
+                        data-output-transparent="' . $this->field['output_transparent'] . '"
                       />';            
 
             echo '<input
