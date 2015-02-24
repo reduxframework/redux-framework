@@ -303,7 +303,7 @@
             
             ?>
             <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Changelog', 'redux-framework' ); ?></h1>
+                <h1><?php _e( 'Redux Framework - Changelog', 'redux-framework' ); ?></h1>
 
                 <div
                     class="about-text"><?php printf( __( 'Our core mantra at Redux is backwards compatibility. With hundreds of thousands of instances worldwide, you can be assured that we will take care of you and your clients.', 'redux-framework' ), $this->display_version ); ?></div>
@@ -478,7 +478,7 @@
             
             ?>
             <div class="wrap about-wrap">
-                <h1><?php printf( __( 'Redux Framework %s - A community Effort', 'redux-framework' ), $this->display_version ); ?></h1>
+                <h1><?php _e( 'Redux Framework %s - A community Effort', 'redux-framework' ); ?></h1>
 
                 <div
                     class="about-text"><?php _e( 'We recognize we are nothing without our community. We would like to thank all of those who help Redux to be what it is. Thank you for your involvement.', 'redux-framework' ); ?></div>
