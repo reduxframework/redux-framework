@@ -17,14 +17,14 @@
          * @since 1.4
          */
         public function __construct() {
+
             add_action( 'admin_menu', array( $this, 'admin_menus' ) );
             add_action( 'admin_head', array( $this, 'admin_head' ) );
             add_action( 'admin_init', array( $this, 'welcome' ) );
-            add_filter('admin_footer_text', array( $this, 'change_wp_footer' ));
+            add_filter( 'admin_footer_text', array( $this, 'change_wp_footer' ) );
 
-            $version = explode( '.', ReduxFramework::$_version );
-            $this->display_version = $version[0].'.'.$version[1];
-            
+            $version               = explode( '.', ReduxFramework::$_version );
+            $this->display_version = $version[0] . '.' . $version[1];
 
             update_option( 'redux_version_upgraded_from', ReduxFramework::$_version );
             set_transient( '_redux_activation_redirect', true, 30 );
@@ -61,11 +61,19 @@
                 )
             );
 
-            // Getting Started Page
+            // Support Page
             add_dashboard_page(
-                __( 'Getting started with Redux Framework', 'redux-framework' ), __( 'Getting started with Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-getting-started', array(
+                __( 'Get Support', 'redux-framework' ), __( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array(
                     $this,
-                    'getting_started_screen'
+                    'get_support'
+                )
+            );
+
+            // Support Page
+            add_dashboard_page(
+                __( 'Redux Extensions', 'redux-framework' ), __( 'Redux Extensions', 'redux-framework' ), $this->minimum_capability, 'redux-extensions', array(
+                    $this,
+                    'redux_extensions'
                 )
             );
 
@@ -90,41 +98,36 @@
             remove_submenu_page( 'index.php', 'redux-changelog' );
             remove_submenu_page( 'index.php', 'redux-getting-started' );
             remove_submenu_page( 'index.php', 'redux-credits' );
+            remove_submenu_page( 'index.php', 'redux-support' );
+            remove_submenu_page( 'index.php', 'redux-extensions' );
 
             // Badge for welcome page
             $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
             ?>
-            <style type="text/css" media="screen">
-                /*<![CDATA[*/
-                .redux-badge {
-                    padding-top: 150px;
-                    height: 52px;
-                    width: 185px;
-                    color: #666;
-                    font-weight: bold;
-                    font-size: 14px;
-                    text-align: center;
-                    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-                    margin: 0 -5px;
-                    background: url('<?php echo $badge_url; ?>') no-repeat;
-                }
+            <link rel='stylesheet' id='elusive-icons'
+                  href='<?php echo ReduxFramework::$_url ?>/assets/css/vendor/elusive-icons/elusive-webfont.css'
+                  type='text/css' media='all'/>
 
+            <link rel='stylesheet' id='elusive-icons'
+                  href='<?php echo ReduxFramework::$_url ?>/inc/welcome/welcome.css'
+                  type='text/css' media='all'/>
+            <style type="text/css">
+                .redux-badge:before {
+                <?php echo is_rtl() ? 'right' : 'left'; ?> : 0;
+                }
                 .about-wrap .redux-badge {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
+                <?php echo is_rtl() ? 'left' : 'right'; ?> : 0;
                 }
-
-                .redux-welcome-screenshots {
-                    float: right;
-                    margin-left: 10px !important;
+                .about-wrap .feature-rest div {
+                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 100px;
                 }
-
-                .about-wrap .feature-section {
-                    margin-top: 20px;
+                .about-wrap .feature-rest div.last-feature {
+                    padding- <?php echo is_rtl() ? 'right' : 'left'; ?>: 100px;
+                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 0;
                 }
-
-                /*]]>*/
+                .about-wrap .feature-rest div.icon:before {
+                    margin: <?php echo is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'; ?>;
+                }
             </style>
         <?php
         }
@@ -142,11 +145,15 @@
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab <?php echo $selected == 'redux-about' ? 'nav-tab-active' : ''; ?>"
                    href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'index.php' ) ) ); ?>">
-                    <?php _e( "What's New", 'redux-framework' ); ?>
+                    <?php _e( "About Redux", 'redux-framework' ); ?>
                 </a>
-                <a class="nav-tab <?php echo $selected == 'redux-getting-started' ? 'nav-tab-active' : ''; ?>"
-                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-getting-started' ), 'index.php' ) ) ); ?>">
-                    <?php _e( 'Getting Started', 'redux-framework' ); ?>
+                <a class="nav-tab <?php echo $selected == 'redux-support' ? 'nav-tab-active' : ''; ?>"
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-support' ), 'index.php' ) ) ); ?>">
+                    <?php _e( 'Support', 'redux-framework' ); ?>
+                </a>
+                <a class="nav-tab <?php echo $selected == 'redux-extensions' ? 'nav-tab-active' : ''; ?>"
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-extensions' ), 'index.php' ) ) ); ?>">
+                    <?php _e( 'Extensions', 'redux-framework' ); ?>
                 </a>
                 <a class="nav-tab <?php echo $selected == 'redux-changelog' ? 'nav-tab-active' : ''; ?>"
                    href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-changelog' ), 'index.php' ) ) ); ?>">
@@ -168,7 +175,7 @@
          * @return void
          */
         public function about_screen() {
-            
+
 
             ?>
             <div class="wrap about-wrap">
@@ -177,7 +184,7 @@
                 <div
                     class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to <add description>', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
@@ -281,13 +288,6 @@
                     </div>
                 </div>
 
-                <div class="return-to-dashboard">
-                    <a href="<?php echo esc_url( admin_url( add_query_arg( array(
-                        'post_type' => 'download',
-                        'page'      => 'redux-settings'
-                    ), 'edit.php' ) ) ); ?>"><?php _e( 'Go to Redux Framework', 'redux-framework' ); ?></a> &middot;
-                    <a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-changelog' ), 'index.php' ) ) ); ?>"><?php _e( 'View the Full Changelog', 'redux-framework' ); ?></a>
-                </div>
             </div>
         <?php
         }
@@ -300,15 +300,15 @@
          * @return void
          */
         public function changelog_screen() {
-            
+
             ?>
             <div class="wrap about-wrap">
                 <h1><?php _e( 'Redux Framework - Changelog', 'redux-framework' ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Our core mantra at Redux is backwards compatibility. With hundreds of thousands of instances worldwide, you can be assured that we will take care of you and your clients.', 'redux-framework' ), $this->display_version ); ?></div>
+                    class="about-text"><?php _e( 'Our core mantra at Redux is backwards compatibility. With hundreds of thousands of instances worldwide, you can be assured that we will take care of you and your clients.', 'redux-framework' ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
@@ -318,150 +318,117 @@
                     </div>
                 </div>
 
-                <div class="return-to-dashboard">
-                    <a href="<?php echo esc_url( admin_url( add_query_arg( array(
-                        'post_type' => 'download',
-                        'page'      => 'redux-settings'
-                    ), 'edit.php' ) ) ); ?>"><?php _e( 'Go to Redux Framework', 'redux-framework' ); ?></a>
-                </div>
             </div>
         <?php
         }
 
         /**
-         * Render Getting Started Screen
+         * Render Changelog Screen
+         *
+         * @access public
+         * @since  2.0.3
+         * @return void
+         */
+        public function redux_extensions() {
+
+            ?>
+            <div class="wrap about-wrap">
+                <h1><?php _e( 'Redux Framework - Extensions', 'redux-framework' ); ?></h1>
+
+                <div
+                    class="about-text"><?php printf( __( 'Supercharge your Redux experience. Our extensions provide you with features that will take your products to the next level.', 'redux-framework' ), $this->display_version ); ?></div>
+                <div
+                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+
+                <?php $this->tabs(); ?>
+
+                <p class="about-description"><?php _e( 'Wait, isn', 'redux-framework' ); ?></p>
+
+                <div class="changelog">
+                    <div class="feature-section">
+                        <div class="feature-section theme-browser rendered">
+                        <?php
+
+                            $data = get_transient( 'redux-extensions-fetch' );
+
+                            if (empty($data)) {
+                                $data = json_decode(wp_remote_retrieve_body( wp_remote_get('http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' ) ), true);
+                                if (!empty($data)) {
+                                    set_transient( 'redux-extensions-fetch', $data, 24 * HOUR_IN_SECONDS );
+                                }
+                            }
+                            shuffle($data);
+                            foreach ($data as $key => $extension) : ?>
+
+                                    <!-- Classic -->
+                                    <div class="theme">
+                                        <div class="theme-screenshot">
+                                            <img src="<?php echo $extension['thumb'];?>">
+                                        </div>
+                                        <h3 class="theme-name" id="classic"><?php echo $extension['title'];?></h3>
+                                        <div class="theme-actions">
+                                            <a class="button button-primary button-install-demo" data-demo-id="<?php echo $key; ?>" href="http://reduxframework.com/extensions/<?php echo $key;?>/">Learn More</a> </div>
+                                        <div id="demo-preview-classic" class="screenshot-hover fusion-animated fadeInUp">
+                                            <?php echo $extension['excerpt'];?>
+                                        </div>
+                                    </div>
+
+                            <?php
+                            endforeach;
+
+                        ?>
+                            </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        <?php
+        }
+
+
+
+        /**
+         * Render Get Support Screen
          *
          * @access public
          * @since  1.9
          * @return void
          */
-        public function getting_started_screen() {
-            
+        public function get_support() {
+
             ?>
             <div class="wrap about-wrap">
-                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $this->display_version ); ?></h1>
+                <h1><?php _e( 'Redux Framework - Getting Support', 'redux-framework' ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $this->display_version ); ?></div>
+                    class="about-text"><?php printf( __( 'We are an open source project used by developers to make powerful control panels.', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
-                <p class="about-description"><?php _e( 'Use the tips below to get started using Redux Framework. You\'ll be up and running in no time!', 'redux-framework' ); ?></p>
+                <p class="about-description"><?php _e( 'To get support the proper, we need to send you to the correct place. Please select the type of user you are.', 'redux-framework' ); ?></p>
 
-                <div class="changelog">
-                    <h3><?php _e( 'Creating Your First Panel', 'redux-framework' ); ?></h3>
-
-                    <div class="feature-section">
-
-
-                        <h4><?php printf( __( '<a href="%s">%s &rarr; Add New</a>', 'redux-framework' ), admin_url( 'post-new.php?post_type=download' ), redux_get_label_plural() ); ?></h4>
-
-                        <p><?php printf( __( 'The %s menu is your access point for all aspects of your Easy Digital Downloads product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'redux-framework' ), redux_get_label_plural() ); ?></p>
-
-                        <h4><?php _e( 'Product Price', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options.', 'redux-framework' ); ?></p>
-
-                        <h4><?php _e( 'Download Files', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'redux-framework' ); ?></p>
-
-                    </div>
-                </div>
-
-                <div class="changelog">
-                    <h3><?php _e( 'Display a Product Grid', 'redux-framework' ); ?></h3>
+                <div class="support">
+                    <ul>
+                        <li><a href="">User</a></li>
+                        <li><a href="">Developer</a></li>
+                    </ul>
 
 
-                    <div class="feature-section">
-
-                        <img src="<?php echo Redux_PLUGIN_URL . 'assets/images/screenshots/grid.png'; ?>"
-                             class="redux-welcome-screenshots"/>
-
-                        <h4><?php _e( 'Flexible Product Grids', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'The [downloads] shortcode will display a product grid that works with any theme, no matter the size. It is even responsive!', 'redux-framework' ); ?></p>
-
-                        <h4><?php _e( 'Change the Number of Columns', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'You can easily change the number of columns by adding the columns="x" parameter:', 'redux-framework' ); ?></p>
-
-                        <p>
-                        <pre>[downloads columns="4"]</pre>
-                        </p>
-
-                        <h4><?php _e( 'Additional Display Options', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'The product grids can be customized in any way you wish and there is <a href="%s">extensive documentation</a> to assist you.', 'redux-framework' ); ?></p>
-                    </div>
-                </div>
-
-                <div class="changelog">
-                    <h3><?php _e( 'Purchase Buttons Anywhere', 'redux-framework' ); ?></h3>
+                    <h3><?php _e( 'Hello there WordPress User!', 'redux-framework' ); ?></h3>
 
                     <div class="feature-section">
 
 
-                        <h4><?php _e( 'The <em>[purchase_link]</em> Shortcode', 'redux-framework' ); ?></h4>
 
-                        <p><?php _e( 'With easily accessible shortcodes to display purchase buttons, you can add a Buy Now or Add to Cart button for any product anywhere on your site in seconds.', 'redux-framework' ); ?></p>
-
-                        <h4><?php _e( 'Buy Now Buttons', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'Purchase buttons can behave as either Add to Cart or Buy Now buttons. With Buy Now buttons customers are taken straight to PayPal, giving them the most frictionless purchasing experience possible.', 'redux-framework' ); ?></p>
 
                     </div>
                 </div>
 
-                <div class="changelog">
-                    <h3><?php _e( 'Need Help?', 'redux-framework' ); ?></h3>
 
-                    <div class="feature-section">
-
-                        <h4><?php _e( 'Phenomenal Support', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'We do our best to provide the best support we can. If you encounter a problem or have a question, post a question in the <a href="' . 'https://' . 'easydigitaldownloads.com/support">support forums</a>.', 'redux-framework' ); ?></p>
-
-                        <h4><?php _e( 'Need Even Faster Support?', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'Our <a href="' . 'https://' . 'easydigitaldownloads.com/support/pricing/">Priority Support forums</a> are there for customers that need faster and/or more in-depth assistance.', 'redux-framework' ); ?></p>
-
-                    </div>
-                </div>
-
-                <div class="changelog">
-                    <h3><?php _e( 'Stay Up to Date', 'redux-framework' ); ?></h3>
-
-                    <div class="feature-section">
-
-                        <h4><?php _e( 'Get Notified of Extension Releases', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'New extensions that make Easy Digital Downloads even more powerful are released nearly every single week. Subscribe to the newsletter to stay up to date with our latest releases. <a href="' . 'http://' . 'eepurl.com/kaerz" target="_blank">Signup now</a> to ensure you do not miss a release!', 'redux-framework' ); ?></p>
-
-                        <h4><?php _e( 'Get Alerted About New Tutorials', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( '<a href="' . 'http://' . 'eepurl.com/kaerz" target="_blank">Signup now</a> to hear about the latest tutorial releases that explain how to take Easy Digital Downloads further.', 'redux-framework' ); ?></p>
-
-                    </div>
-                </div>
-
-                <div class="changelog">
-                    <h3><?php _e( 'Extensions for Everything', 'redux-framework' ); ?></h3>
-
-                    <div class="feature-section">
-
-                        <h4><?php _e( 'Over 250 Extensions', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( 'Add-on plugins are available that greatly extend the default functionality of Easy Digital Downloads. There are extensions for payment processors, such as Stripe and PayPal, extensions for newsletter integrations, and many, many more.', 'redux-framework' ); ?></p>
-
-                        <h4><?php _e( 'Visit the Extension Store', 'redux-framework' ); ?></h4>
-
-                        <p><?php _e( '<a href="' . 'https://' . 'asydigitaldownloads.com/extensions" target="_blank">The Extensions store</a> has a list of all available extensions, including convenient category filters so you can find exactly what you are looking for.', 'redux-framework' ); ?></p>
-
-                    </div>
-                </div>
 
             </div>
         <?php
@@ -475,7 +442,7 @@
          * @return void
          */
         public function credits_screen() {
-            
+
             ?>
             <div class="wrap about-wrap">
                 <h1><?php _e( 'Redux Framework - A Community Effort', 'redux-framework' ); ?></h1>
@@ -483,7 +450,7 @@
                 <div
                     class="about-text"><?php _e( 'We recognize we are nothing without our community. We would like to thank all of those who help Redux to be what it is. Thank you for your involvement.', 'redux-framework' ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
+                    class="redux-badge el el-icon-address-book"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
@@ -505,7 +472,8 @@
             if ( file_exists( dirname( __FILE__ ) . '/fields/raw/' . "/parsedown.php" ) ) {
                 require_once dirname( __FILE__ ) . '/fields/raw/' . "/parsedown.php";
                 $Parsedown = new Parsedown();
-                return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url.'../CHANGELOG.md' ) ) ) ) );
+
+                return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url . '../../CHANGELOG.md' ) ) ) ) );
             }
 
             return '<script src="http://gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
@@ -530,11 +498,11 @@
 
             foreach ( $contributors as $contributor ) {
                 $contributor_list .= '<li class="wp-person">';
-                $contributor_list .= sprintf( '<a href="%s" title="%s">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'redux-framework' ), $contributor->login ) )
+                $contributor_list .= sprintf( '<a href="%s" title="%s" target="_blank">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'redux-framework' ), $contributor->login ) )
                 );
                 $contributor_list .= sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) );
                 $contributor_list .= '</a>';
-                $contributor_list .= sprintf( '<a class="web" href="%s">%s</a>', esc_url( 'https://github.com/' . $contributor->login ), esc_html( $contributor->login ) );
+                $contributor_list .= sprintf( '<a class="web" href="%s" target="_blank">%s</a>', esc_url( 'https://github.com/' . $contributor->login ), esc_html( $contributor->login ) );
                 $contributor_list .= '</a>';
                 $contributor_list .= '</li>';
             }

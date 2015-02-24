@@ -1,0 +1,298 @@
+
+
+#footer-upgrade {
+    display: none;;
+}
+
+.redux-badge:before {
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 80px;
+    font-weight: normal;
+    width: 165px;
+    height: 165px;
+    line-height: 165px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.redux-badge {
+    position: relative;
+    background: #00A2E3;
+    text-rendering: optimizeLegibility;
+    padding-top: 150px;
+    height: 52px;
+    width: 165px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color: #efefef;
+    margin: 5px 0 0 0;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.about-wrap .redux-badge {
+    position: absolute;
+    top: 0;
+}
+
+.about-wrap .redux-feature {
+    overflow: visible !important;
+    *zoom: 1;
+}
+
+.about-wrap h3 + .redux-feature {
+    margin-top: 0;
+}
+
+.about-wrap .redux-feature:before,
+.about-wrap .redux-feature:after {
+    content: " ";
+    display: table;
+}
+
+.about-wrap .redux-feature:after {
+    clear: both;
+}
+
+.about-wrap .feature-rest div {
+    width: 50% !important;
+
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 !important;
+}
+.about-wrap div.icon {
+    width: 0 !important;
+    padding: 0;
+    margin: 20px 0 !important;
+}
+
+.about-wrap .feature-rest div.icon:before {
+    font-weight: normal;
+    width: 100%;
+    font-size: 170px;
+    line-height: 125px;
+    color: #9c5d90;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.about-integrations {
+    background: #fff;
+    margin: 20px 0;
+    padding: 1px 20px 10px;
+}
+
+.changelog h2 {
+    line-height: 1.4;
+    padding-bottom: 0;;
+}
+
+.changelog .feature-section {
+    padding-top: 1.4em;
+}
+.changelog .prettyprint {
+    overflow-wrap: break-word;
+}
+.changelog .gist-it-gist .gist-file,
+.changelog .gist-it-gist .gist-file .gist-data{
+    border: 0 !important;
+    background: 0 !important;
+}
+.changelog .gist-it-gist .gist-file .gist-data pre {
+    padding-top: 10px !important;
+    word-break: break-word;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+img {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.theme-browser .theme .theme-screenshot:after {
+    padding-top: 200px;
+}
+
+.screenshot-hover{
+    position: absolute;
+    border: 1px solid #E4E4E4;
+    display: none;
+    color: #fff;
+    top: -240px;
+    left: 175px;
+    width: 460px;
+    z-index: 999;
+    border: 10px solid #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    box-shadow: -2px 1px 54px rgba(23,24,25,.14);
+    -moz-box-shadow: -2px 1px 54px rgba(23,24,25,.14);
+    -webkit-box-shadow: -2px 1px 54px rgba(23,24,25,.14);
+}
+.avada-demo-themes .theme:nth-child(3n) .screenshot-hover {
+    left: -380px;
+}
+.avada-demo-themes .theme:hover .screenshot-hover {
+    display: block;
+}
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    -moz-animation-name: fadeInUp;
+    -o-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+.fusion-animated {
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -ms-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.theme:hover .fusion-animated {
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -ms-animation-play-state: running;
+    -o-animation-play-state: running;
+    animation-play-state: running;
+}
+.fusion-animated {
+    visibility: hidden;
+}
+.demo-import-loader {
+    background: rgba(255,255,255,0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    text-align: center;
+    display:none;
+}
+.demo-import-loader i {
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    height: 32px;
+    width: 32px;
+    top: 110px;
+    position: relative;
+    font-size: 32px;
+    line-height: 32px;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+
+@media only screen and (min-width: 2000px) {
+    #wpwrap .avada-demo-themes .theme {
+        width: 31%;
+        margin: 0 3% 3% 0;
+    }
+    #wpwrap .avada-demo-themes .theme:nth-child(3n) {
+        margin-right: 0;
+    }
+
+    #wpwrap .theme-browser .theme:nth-child(4n),
+    #wpwrap .theme-browser .theme:nth-child(5n) {
+        margin-right: 3%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .avada-wrap .avada-logo {
+        display: block;
+        position:relative;
+        margin:0 auto 50px auto;
+    }
+    .about-wrap h2 .nav-tab {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .about-wrap h2.nav-tab-wrapper {
+        padding: 0;
+        width: 100%;
+    }
+    .avada-demo-themes .theme:hover .theme-actions {
+        display: block !important;
+        opacity: 1 !important;
+    }
+    .avada-demo-themes .theme:hover .screenshot-hover {
+        display: none !important;
+    }
+}
+@media only screen and (max-width: 1120px) {
+    .theme-browser .theme:nth-child(odd) {
+        margin-right: 5% !important;
+    }
+
+    .theme-browser .theme {
+        width: 47.5% !important;
+        margin-right: auto !important;
+    }
+}
+@media screen and (max-width: 620px){
+    .theme-browser .theme {
+        width: 100% !important;
+        margin-right: 0;
+    }
+    .avada-demo-themes .theme:hover .theme-actions {
+        display: block !important;
+        opacity: 1 !important;
+    }
+    .avada-demo-themes .theme:hover .screenshot-hover {
+        display: none !important;
+    }
+}
