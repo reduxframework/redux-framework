@@ -46,15 +46,6 @@
          */
         do_action ( "redux/page/{$this->parent->args[ 'opt_name' ]}/menu/after", $this );
 
-        // Import / Export tab
-        if ( true == $this->parent->args[ 'show_import_export' ] && false == $this->parent->import_export->is_field ) {
-            $this->parent->import_export->render_tab ();
-        }
-
-        // Debug tab
-        if ( $this->parent->args[ 'dev_mode' ] == true ) {
-            $this->parent->debug->render_tab ();
-        }
         ?>
 
         <?php if ( $this->parent->args[ 'system_info' ] === true ) : ?>

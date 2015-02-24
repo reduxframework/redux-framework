@@ -76,32 +76,25 @@
 			//echo '</div>';
 		}
 
-		// Import / Export output
-		if ( true == $this->parent->args['show_import_export'] && false == $this->parent->import_export->is_field ) {
-			$this->parent->import_export->enqueue();
-			echo '<fieldset id="' . $this->parent->args['opt_name'] . '-import_export_core" class="redux-field-container redux-field redux-field-init redux-container-import_export" data-id="import_export_core" data-type="import_export">';
-			$this->parent->import_export->render();
-			echo '</fieldset>';
-		}
-
-		// Debug object output
-		if ( $this->parent->args['dev_mode'] == true ) {
-			$this->parent->debug->render();
-		}
-	?>
-	<?php if ( $this->parent->args['system_info'] === true ) :
-		require_once ReduxFramework::$_dir . 'inc/sysinfo.php';
-		$system_info = new Simple_System_Info();
-		?>
-		<div id="system_info_default_section_group" class="redux-group-tab">
-			<h3><?php _e( 'System Info', 'redux-framework' );?></h3>
-
-			<div id="redux-system-info">
-				<?php echo $system_info->get( true );?>
-			</div>
-
-		</div>
-	<?php endif; ?>
+    //
+	//	// Debug object output
+	//	if ( $this->parent->args['dev_mode'] == true ) {
+	//		$this->parent->debug->render();
+	//	}
+	//?>
+	<?php //if ( $this->parent->args['system_info'] === true ) :
+	//	require_once ReduxFramework::$_dir . 'inc/sysinfo.php';
+	//	$system_info = new Simple_System_Info();
+	//	?>
+	<!--	<div id="system_info_default_section_group" class="redux-group-tab">-->
+	<!--		<h3>--><?php //_e( 'System Info', 'redux-framework' );?><!--</h3>-->
+    <!---->
+	<!--		<div id="redux-system-info">-->
+	<!--			--><?php //echo $system_info->get( true );?>
+	<!--		</div>-->
+    <!---->
+	<!--	</div>-->
+	<?php //endif; ?>
 	<?php
 		/**
 		 * action 'redux/page-after-sections-{opt_name}'

@@ -1,5 +1,12 @@
 # Redux Framework Changelog
 
+## 3.4.3.3
+* Added:    #2064 - Merge argument for image_select. Thanks @Ninos
+* Modified: Import/Export is now an extensiona and decoupled from the core.
+* Fixed: Spinner had a nasty number bug, now resolved.
+* Fixed: #2076 - RTL bug with old ID's. Thanks @mahfoozroy.
+* Fixed: #2072 - Ajax_save editor type bug fix.
+
 ## 3.4.3.2
 * Fixed:    #2058 - Incorrect path in include statement for sysinfo.php
 
