@@ -103,8 +103,8 @@
                 ?>
                 <fieldset id="<?php echo $id; ?>" class="redux-field redux-container-<?php echo $this->field['type'] . ' ' . $this->field['class']; ?>" data-id="<?php echo $this->field['id']; ?>">
 
-                <h4><? _e( 'Import Options', 'redux-framework' ); ?></h4>
-                <p><a href="javascript:void(0);" id="redux-import-code-button" class="button-secondary"><?php _e( 'Import from File', 'redux-framework' ); ?></a> <a href="javascript:void(0);" id="redux-import-link-button" class="button-secondary"><? _e( 'Import from URL', 'redux-framework' ) ?></a></p>
+                <h4><?php _e( 'Import Options', 'redux-framework' ); ?></h4>
+                <p><a href="javascript:void(0);" id="redux-import-code-button" class="button-secondary"><?php _e( 'Import from File', 'redux-framework' ); ?></a> <a href="javascript:void(0);" id="redux-import-link-button" class="button-secondary"><?php _e( 'Import from URL', 'redux-framework' ) ?></a></p>
 
                 <div id="redux-import-code-wrapper">
                 <p class="description" id="import-code-description"><?php echo apply_filters( 'redux-import-file-description', __( 'Input your backup file below and hit Import to restore your sites options from a backup.', 'redux-framework' ) ); ?></p>
