@@ -77,7 +77,8 @@
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'rem'
                     ) )
                 ) {
                     unset( $this->field['units'] );
@@ -274,8 +275,8 @@
                 $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';
 
                 $cleanValue = array(
-                    $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_INT ) : '',
-                    $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_INT ) : '',
+                    $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
+                    $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
                 );
 
                 $style = "";
