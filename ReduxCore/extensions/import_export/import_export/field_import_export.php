@@ -77,7 +77,7 @@
                 $secret = md5( md5( AUTH_KEY . SECURE_AUTH_KEY ) . '-' . $this->parent->args['opt_name'] );
 
                 if ( true == $this->is_field ) {
-                    $fullWidth = $this->field_args['full_width'];
+                    $fullWidth = $this->field['full_width'];
                 }
 
                 $bDoClose = false;
