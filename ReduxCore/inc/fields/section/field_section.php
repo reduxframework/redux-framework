@@ -69,9 +69,9 @@
                 $guid = uniqid();
 
                 $add_class = '';
-                if ( isset( $this->field['indent'] ) && ! empty( $this->field['indent'] ) ) {
+                if ( isset( $this->field['indent'] ) &&  true === $this->field['indent'] ) {
                     $add_class = ' form-table-section-indented';
-                } else {
+                } elseif( !isset( $this->field['indent'] ) || ( isset( $this->field['indent'] ) && false !== $this->field['indent'] ) ) {
                     $add_class = " hide";
                 }
 
