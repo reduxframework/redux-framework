@@ -9,6 +9,7 @@
          * @var string The capability users should have to view the page
          */
         public $minimum_capability = 'manage_options';
+        public $display_version = "";
 
         /**
          * Get things started
@@ -19,10 +20,19 @@
             add_action( 'admin_menu', array( $this, 'admin_menus' ) );
             add_action( 'admin_head', array( $this, 'admin_head' ) );
             add_action( 'admin_init', array( $this, 'welcome' ) );
+            add_filter('admin_footer_text', array( $this, 'change_wp_footer' ));
+
+            $version = explode( '.', ReduxFramework::$_version );
+            $this->display_version = $version[0].'.'.$version[1];
+            
 
             update_option( 'redux_version_upgraded_from', ReduxFramework::$_version );
             set_transient( '_redux_activation_redirect', true, 30 );
 
+        }
+
+        public function change_wp_footer() {
+            echo 'If you like <strong>Redux</strong> please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">★★★★★</a> rating. A huge thank you from Redux in advance!';
         }
 
         /**
@@ -158,15 +168,16 @@
          * @return void
          */
         public function about_screen() {
-            list( $display_version ) = explode( '-', ReduxFramework::$_version );
+            
+
             ?>
             <div class="wrap about-wrap">
-                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $display_version ); ?></h1>
+                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $this->display_version ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to <add description>', 'redux-framework' ), $display_version ); ?></div>
+                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to <add description>', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
+                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
@@ -289,21 +300,19 @@
          * @return void
          */
         public function changelog_screen() {
-            list( $display_version ) = explode( '-', ReduxFramework::$_version );
+            
             ?>
             <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework Changelog', 'redux-framework' ); ?></h1>
+                <h1><?php _e( 'Redux Changelog', 'redux-framework' ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $display_version ); ?></div>
+                    class="about-text"><?php printf( __( 'Our core mantra at Redux is backwards compatibility. With hundreds of thousands of instances worldwide, you can be assured that we will take care of you and your clients.', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
+                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
                 <div class="changelog">
-                    <h3><?php _e( 'Full Changelog', 'redux-framework' ); ?></h3>
-
                     <div class="feature-section">
                         <?php echo $this->parse_readme(); ?>
                     </div>
@@ -327,15 +336,15 @@
          * @return void
          */
         public function getting_started_screen() {
-            list( $display_version ) = explode( '-', ReduxFramework::$_version );
+            
             ?>
             <div class="wrap about-wrap">
-                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $display_version ); ?></h1>
+                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $this->display_version ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $display_version ); ?></div>
+                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $this->display_version ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
+                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
@@ -364,6 +373,7 @@
 
                 <div class="changelog">
                     <h3><?php _e( 'Display a Product Grid', 'redux-framework' ); ?></h3>
+
 
                     <div class="feature-section">
 
@@ -465,19 +475,19 @@
          * @return void
          */
         public function credits_screen() {
-            list( $display_version ) = explode( '-', ReduxFramework::$_version );
+            
             ?>
             <div class="wrap about-wrap">
-                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $display_version ); ?></h1>
+                <h1><?php printf( __( 'Redux Framework %s - A community Effort', 'redux-framework' ), $this->display_version ); ?></h1>
 
                 <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>', 'redux-framework' ), $display_version ); ?></div>
+                    class="about-text"><?php _e( 'We recognize we are nothing without our community. We would like to thank all of those who help Redux to be what it is. Thank you for your involvement.', 'redux-framework' ); ?></div>
                 <div
-                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), $display_version ); ?></div>
+                    class="redux-badge"><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></div>
 
                 <?php $this->tabs(); ?>
 
-                <p class="about-description"><?php _e( 'Redux Framework is created by a worldwide team of developers who <something witty here>', 'redux-framework' ); ?></p>
+                <p class="about-description"><?php _e( 'Redux is created by a community of developers world wide. Want to have your name listed too? <a href="https://github.com/reduxframework/redux-framework/blob/master/CONTRIBUTING.md" target="_blank">Contribute to Redux</a>.', 'redux-framework' ); ?></p>
 
                 <?php echo $this->contributors(); ?>
             </div>
@@ -491,31 +501,15 @@
          * @return string $readme HTML formatted readme file
          */
         public function parse_readme() {
-            $url = ReduxFramework::$_dir;
-            $url = str_replace( 'ReduxCore', '', $url );
 
-            $file = file_exists( $url . 'README.txt' ) ? $url . 'README.txt' : null;
-
-            if ( ! $file ) {
-                $readme = '<p>' . __( 'No valid changlog was found.', 'redux-framework' ) . '</p>';
-            } else {
-                $readme = wp_remote_retrieve_body( wp_remote_get( $file ) );
-                $readme = nl2br( esc_html( $readme ) );
-
-                $readme = explode( '== Changelog ==', $readme );
-                $readme = end( $readme );
-
-                $remove = explode( '== Attribution ==', $readme );
-                $readme = str_replace( '== Attribution ==' . end( $remove ), '', $readme );
-
-                $readme = preg_replace( '/`(.*?)`/', '<code>\\1</code>', $readme );
-                $readme = preg_replace( '/[\040]\*\*(.*?)\*\*/', ' <strong>\\1</strong>', $readme );
-                $readme = preg_replace( '/[\040]\*(.*?)\*/', ' <em>\\1</em>', $readme );
-                $readme = preg_replace( '/= (.*?) =/', '<h4>\\1</h4>', $readme );
-                $readme = preg_replace( '/\[(.*?)\]\((.*?)\)/', '<a href="\\2">\\1</a>', $readme );
+            if ( file_exists( dirname( __FILE__ ) . '/fields/raw/' . "/parsedown.php" ) ) {
+                require_once dirname( __FILE__ ) . '/fields/raw/' . "/parsedown.php";
+                $Parsedown = new Parsedown();
+                return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url.'../CHANGELOG.md' ) ) ) ) );
             }
 
-            return $readme;
+            return '<script src="http://gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
+
         }
 
         /**
@@ -591,7 +585,7 @@
          * @return void
          */
         public function welcome() {
-            logconsole( 'welcome.php' );
+            //logconsole( 'welcome.php' );
             //return;
             // Bail if no activation redirect
             if ( ! get_transient( '_redux_activation_redirect' ) ) {

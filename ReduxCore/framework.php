@@ -324,7 +324,7 @@
 //
 //                        if ( isset($_GET['page']) && ($_GET['page'] == 'redux-about' || $_GET['page'] == 'redux-getting-started' || $_GET['page'] == 'redux-credits' || $_GET['page'] == 'redux-changelog' )) {
 //                            //logconsole('inc');
-//                            require_once( dirname( __FILE__ ) . '/inc/welcome.php' );
+                            require_once( dirname( __FILE__ ) . '/inc/welcome.php' );
 //                        } else {
 //                            //logconsole('compare');
 //                            if (isset($_GET['page']) && $_GET['page'] == $this->args['page_slug']) {
