@@ -478,7 +478,7 @@
             
             ?>
             <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework %s - A community Effort', 'redux-framework' ); ?></h1>
+                <h1><?php _e( 'Redux Framework - A community Effort', 'redux-framework' ); ?></h1>
 
                 <div
                     class="about-text"><?php _e( 'We recognize we are nothing without our community. We would like to thank all of those who help Redux to be what it is. Thank you for your involvement.', 'redux-framework' ); ?></div>
