@@ -96,6 +96,16 @@
                     'opt_name': redux.args.opt_name,
                     data: $data
                 },
+                error: function( response ) {
+                    if ( !window.console ) console = {};
+                    console.log = console.log || function( name, data ) {};
+                    console.log( redux.ajax.console );
+                    console.log( response.responseText );
+                    jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
+                    overlay.fadeOut( 'fast' );
+                    jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                    alert( redux.ajax.alert );
+                },
                 success: function( response ) {
                     if ( response.action && response.action == "reload" ) {
                         location.reload();

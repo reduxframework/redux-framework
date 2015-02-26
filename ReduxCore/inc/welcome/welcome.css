@@ -355,3 +355,25 @@ figure p {
     transform: translate3d(0, 0, 0);
     text-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
 }
+.support ul {
+    clear:both;
+}
+.support li {
+    width: 50%;
+    display:block;
+    text-align: center;
+    float:left;
+}
+.userType {
+    margin-top: 40px;
+}
+.userType a {
+    border: 5px transparent dashed;
+    padding: 20px;
+
+    font-size: 200px;
+
+}
+.userType a:hover {
+    border: #aaa 5px dashed;
+}

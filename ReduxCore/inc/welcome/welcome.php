@@ -532,13 +532,18 @@
 
                 <?php $this->tabs(); ?>
 
-                <p class="about-description"><?php _e( 'To get support the proper, we need to send you to the correct place. Please select the type of user you are.', 'redux-framework' ); ?></p>
+                <p class="about-description"><?php _e( 'To get the proper support, we need to send you to the correct place. Please choose the type of user you are.', 'redux-framework' ); ?></p>
 
                 <div class="support">
                     <ul>
-                        <li><a href="">User</a></li>
-                        <li><a href="">Developer</a></li>
+                        <li class="userType">
+                            <a href=""><i class="el el-child"></i></a><h2>User</h2>
+                        </li>
+                        <li class="userType">
+                            <a href=""><i class="el el-idea"></i></a><h2>Developer</h2>
+                        </li>
                     </ul>
+
 
 
                     <h3><?php _e( 'Hello there WordPress User!', 'redux-framework' ); ?></h3>
