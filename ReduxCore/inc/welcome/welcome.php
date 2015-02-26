@@ -418,6 +418,9 @@
             );
             shuffle($colors);
             echo '<style type="text/css">';
+            ?>
+
+            <?php
             foreach ($colors as $key => $color) {
                 echo '.theme-browser .theme.color'.$key.' .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .45).';}';
                 echo '.theme-browser .theme.color'.$key.':hover .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .75).';}';
@@ -428,6 +431,8 @@
 
 
             ?>
+
+
             <div class="wrap about-wrap">
                 <h1><?php _e( 'Redux Framework - Extensions', 'redux-framework' ); ?></h1>
 
@@ -443,7 +448,7 @@
                 <p class="about-description"><?php _e( "While some are built specificially for developers, extensions such as Custom Fonts are sure to make any user happy.", 'redux-framework' ); ?></p>
 
                 <div class="extensions">
-                    <div class="feature-section theme-browser rendered">
+                    <div class="feature-section theme-browser rendered" style="clear:both;">
                         <?php
 
                             $data = get_transient( 'redux-extensions-fetch' );
@@ -474,11 +479,15 @@
                             foreach ( $data as $key => $extension ) :
 
                                 ?>
-
-                                <!-- Classic -->
                                 <div class="theme color<?php echo $color; $color++;?>">
                                     <div class="theme-screenshot">
-                                        <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . $iconMap[ $key ] : 'el-redux'; ?>"></i>
+                                        <figure>
+                                            <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . $iconMap[ $key ] : 'el-redux'; ?>"></i>
+                                            <figcaption>
+                                                <p><?php echo $extension['excerpt'];?></p>
+                                                <a href="<?php echo $extension['url']; ?>" target="_blank">Learn more</a>
+                                            </figcaption>
+                                        </figure>
                                     </div>
                                     <h3 class="theme-name" id="classic"><?php echo $extension['title']; ?></h3>
 
@@ -487,10 +496,6 @@
                                            data-demo-id="<?php echo $key; ?>"
                                            href="<?php echo $extension['url']; ?>" target="_blank">Learn
                                             More</a></div>
-                                    <div id="demo-preview-classic"
-                                         class="screenshot-hover fusion-animated fadeInUp">
-                                        <?php echo $extension['excerpt']; ?>
-                                    </div>
                                 </div>
 
                             <?php
