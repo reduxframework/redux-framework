@@ -333,6 +333,7 @@ figure figcaption::after {
 
 figure p {
     padding: 10px;
+    text-transform: none;
     opacity: 0;
     margin-top: 0 !important;
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
