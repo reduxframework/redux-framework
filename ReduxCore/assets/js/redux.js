@@ -59,7 +59,9 @@
         if ( redux.fields.hasOwnProperty( "editor" ) ) {
             $.each(
                 redux.fields.editor, function( $key, $index ) {
-                    tinyMCE.get( $key ).save();
+                    if ( !$( document.getElementById( redux.args.opt_name + '-' + $key ) ).hasClass( 'redux-field-init' ) ) {
+                        tinyMCE.get( $key ).save();
+                    }
                 }
             );
         }
