@@ -486,7 +486,7 @@
                     // Enable sites as well as admin when using network database mode
                     'hide_reset'                => false,
                     'hints'                     => array(
-                        'icon'          => 'el el-icon-question-sign',
+                        'icon'          => 'el el-question-sign',
                         'icon_position' => 'right',
                         'icon_color'    => 'lightgray',
                         'icon_size'     => 'normal',
@@ -2912,9 +2912,6 @@
                     }
                     $icon = ( ! isset ( $section['icon'] ) ) ? '<i class="el el-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
                 }
-                if ( strpos( $icon, 'el-icon-' ) !== false ) {
-                    $icon = str_replace( 'el-icon-', 'el el-', $icon );
-                }
 
                 $hide_section = '';
                 if ( isset ( $section['hidden'] ) ) {
@@ -2982,9 +2979,7 @@
                                     }
                                     $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<i class="' . $sections[ $nextK ]['icon'] . $icon_class . '"></i> ';
                                 }
-                                if ( strpos( $icon, 'el-icon-' ) !== false ) {
-                                    $icon = str_replace( 'el-icon-', 'el el-', $icon );
-                                }
+
                                 $section[ $nextK ]['class'] = isset ( $section[ $nextK ]['class'] ) ? $section[ $nextK ]['class'] : '';
                                 $string .= '<li id="' . $nextK . $suffix . '_section_group_li" class="redux-group-tab-link-li ' . $hide_sub . $section[ $nextK ]['class'] . ( $icon ? ' hasIcon' : '' ) . '">';
                                 $string .= '<a href="javascript:void(0);" id="' . $nextK . $suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $nextK . '" data-rel="' . $nextK . $suffix . '">' . $icon . '<span class="group_title">' . $sections[ $nextK ]['title'] . '</span></a>';
