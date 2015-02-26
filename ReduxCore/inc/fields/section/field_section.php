@@ -94,7 +94,7 @@
                 <script type="text/javascript">
                     jQuery( document ).ready(
                         function() {
-                            jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( 'tr:first' ).css( {display: 'none'} );
+                            jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( 'tr:first' ).css( {display: 'none'} ).prev('tr' ).css('border-bottom','none');;
                             var group = jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( '.redux-group-tab:first' );
                             if ( !group.hasClass( 'sectionsChecked' ) ) {
                                 group.addClass( 'sectionsChecked' );

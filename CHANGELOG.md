@@ -1,5 +1,13 @@
 # Redux Framework Changelog
 
+## 3.4.3.6
+* Fixed     #2047 - Validation will now accept 0 as a value to be tested. Thanks @Ninos!
+* Added     url_slug validation with option flush_permalinks!
+* Fixed     Issue where the remove of background field was always showing an empty preview box. 
+* Modified  Turned ajax_save on by default for additional bug reports.  ;)
+* Modified  Added some margin above validation errors/warnings so they look better.
+* Modified  Removed previous element border for any section so it looks better.
+
 ## 3.4.3.5
 * Fixed     #2081 - Section field hiding any field after.  Weird.
 

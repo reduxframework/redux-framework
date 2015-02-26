@@ -70,7 +70,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.3.4';
+            public static $_version = '3.4.3.6';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -392,6 +392,7 @@
                     }
                     // Ajax saving!!!
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
+
                 }
 
                 /**
@@ -518,7 +519,7 @@
                     'disable_tracking'          => false,
                     'templates_path'            => '',
                     // Path to the templates file for various Redux elements
-                    'ajax_save'                 => false,
+                    'ajax_save'                 => true,
                     // Disable the use of ajax saving for the panel
                 );
             }
@@ -2800,7 +2801,7 @@
                                     if ( isset ( $plugin_options[ $field['id'] ] ) && is_array( $plugin_options[ $field['id'] ] ) && ! empty ( $plugin_options[ $field['id'] ] ) ) {
                                         foreach ( $plugin_options[ $field['id'] ] as $key => $value ) {
                                             $before = $after = null;
-                                            if ( isset ( $plugin_options[ $field['id'] ][ $key ] ) && ! empty ( $plugin_options[ $field['id'] ][ $key ] ) ) {
+                                            if ( isset ( $plugin_options[ $field['id'] ][ $key ] ) && ( !empty ( $plugin_options[ $field[ 'id' ] ][ $key ] ) ||  $plugin_options[ $field[ 'id' ] ][ $key ] == '0' ) ) {
                                                 if ( is_array( $plugin_options[ $field['id'] ][ $key ] ) ) {
                                                     $before = $plugin_options[ $field['id'] ][ $key ];
                                                 } else {
@@ -2808,12 +2809,12 @@
                                                 }
                                             }
 
-                                            if ( isset ( $options[ $field['id'] ][ $key ] ) && ! empty ( $options[ $field['id'] ][ $key ] ) ) {
+                                            if ( isset ( $options[ $field['id'] ][ $key ] ) && ( !empty ( $plugin_options[ $field[ 'id' ] ][ $key ] ) ||  $plugin_options[ $field[ 'id' ] ][ $key ] == '0' ) ) {
                                                 $after = $options[ $field['id'] ][ $key ];
                                             }
 
                                             $validation = new $validate ( $this, $field, $before, $after );
-                                            if ( ! empty ( $validation->value ) ) {
+                                            if ( ! empty ( $validation->value ) || $validation->value == '0' ) {
                                                 $plugin_options[ $field['id'] ][ $key ] = $validation->value;
                                             } else {
                                                 unset ( $plugin_options[ $field['id'] ][ $key ] );
