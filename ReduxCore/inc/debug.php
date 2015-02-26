@@ -63,7 +63,7 @@
                     $icon = ( ! isset( $this->parent->args['dev_mode_icon'] ) ) ? '' : '<img src="' . $this->parent->args['dev_mode_icon'] . '" /> ';
                 } else {
                     $icon_class = ( ! isset( $this->parent->args['dev_mode_icon_class'] ) ) ? '' : ' ' . $this->parent->args['dev_mode_icon_class'];
-                    $icon       = ( ! isset( $this->parent->args['dev_mode_icon'] ) ) ? '<i class="el-icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->parent->args['dev_mode_icon'] . $icon_class . '"></i> ';
+                    $icon       = ( ! isset( $this->parent->args['dev_mode_icon'] ) ) ? '<i class="el el-info-circle' . $icon_class . '"></i>' : '<i class="icon-' . $this->parent->args['dev_mode_icon'] . $icon_class . '"></i> ';
                 }
 
                 echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="redux-group-tab-link-a custom-tab" data-rel="dev_mode_default">' . $icon . ' <span class="group_title">' . __( 'Options Object', 'redux-framework' ) . '</span></a>';
