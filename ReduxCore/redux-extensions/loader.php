@@ -21,8 +21,16 @@ if(!function_exists('redux_register_custom_extension_loader')) :
                     $extension = new $extension_class( $ReduxFramework );
                 }
             }
+            
+            if ( ! isset( $ReduxFramework->extensions[ $folder ] ) ) {
+                //echo $folder;
+                $ReduxFramework->extensions[ $folder ] = new $extension_class( $ReduxFramework );
+            }
+            
         }
     }
+    
+    //echo 'on=' . $redux_opt_name;
     // Modify {$redux_opt_name} to match your opt_name
     add_action("redux/extensions/{$redux_opt_name}/before", 'redux_register_custom_extension_loader', 0);
 endif;
