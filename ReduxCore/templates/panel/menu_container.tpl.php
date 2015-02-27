@@ -55,7 +55,7 @@
                     $icon = (!isset ( $this->parent->args[ 'system_info_icon' ] ) ) ? '' : '<img src="' . $this->parent->args[ 'system_info_icon' ] . '" /> ';
                 } else {
                     $icon_class = (!isset ( $this->parent->args[ 'system_info_icon_class' ] ) ) ? '' : ' ' . $this->parent->args[ 'system_info_icon_class' ];
-                    $icon = (!isset ( $this->parent->args[ 'system_info_icon' ] ) ) ? '<i class="el-icon-info-sign' . $icon_class . '"></i>' : '<i class="icon-' . $this->parent->args[ 'system_info_icon' ] . $icon_class . '"></i> ';
+                    $icon = (!isset ( $this->parent->args[ 'system_info_icon' ] ) ) ? '<i class="el el-info-circle' . $icon_class . '"></i>' : '<i class="icon-' . $this->parent->args[ 'system_info_icon' ] . $icon_class . '"></i> ';
                 }
                 ?>
                 <a href="javascript:void(0);" id="system_info_default_section_group_li_a"

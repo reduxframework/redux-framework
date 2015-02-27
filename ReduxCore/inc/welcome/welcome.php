@@ -418,6 +418,9 @@
             );
             shuffle($colors);
             echo '<style type="text/css">';
+            ?>
+
+            <?php
             foreach ($colors as $key => $color) {
                 echo '.theme-browser .theme.color'.$key.' .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .45).';}';
                 echo '.theme-browser .theme.color'.$key.':hover .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .75).';}';
@@ -428,6 +431,8 @@
 
 
             ?>
+
+
             <div class="wrap about-wrap">
                 <h1><?php _e( 'Redux Framework - Extensions', 'redux-framework' ); ?></h1>
 
@@ -443,7 +448,7 @@
                 <p class="about-description"><?php _e( "While some are built specificially for developers, extensions such as Custom Fonts are sure to make any user happy.", 'redux-framework' ); ?></p>
 
                 <div class="extensions">
-                    <div class="feature-section theme-browser rendered">
+                    <div class="feature-section theme-browser rendered" style="clear:both;">
                         <?php
 
                             $data = get_transient( 'redux-extensions-fetch' );
@@ -474,11 +479,15 @@
                             foreach ( $data as $key => $extension ) :
 
                                 ?>
-
-                                <!-- Classic -->
                                 <div class="theme color<?php echo $color; $color++;?>">
                                     <div class="theme-screenshot">
-                                        <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . $iconMap[ $key ] : 'el-redux'; ?>"></i>
+                                        <figure>
+                                            <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . $iconMap[ $key ] : 'el-redux'; ?>"></i>
+                                            <figcaption>
+                                                <p><?php echo $extension['excerpt'];?></p>
+                                                <a href="<?php echo $extension['url']; ?>" target="_blank">Learn more</a>
+                                            </figcaption>
+                                        </figure>
                                     </div>
                                     <h3 class="theme-name" id="classic"><?php echo $extension['title']; ?></h3>
 
@@ -487,10 +496,6 @@
                                            data-demo-id="<?php echo $key; ?>"
                                            href="<?php echo $extension['url']; ?>" target="_blank">Learn
                                             More</a></div>
-                                    <div id="demo-preview-classic"
-                                         class="screenshot-hover fusion-animated fadeInUp">
-                                        <?php echo $extension['excerpt']; ?>
-                                    </div>
                                 </div>
 
                             <?php
@@ -527,13 +532,18 @@
 
                 <?php $this->tabs(); ?>
 
-                <p class="about-description"><?php _e( 'To get support the proper, we need to send you to the correct place. Please select the type of user you are.', 'redux-framework' ); ?></p>
+                <p class="about-description"><?php _e( 'To get the proper support, we need to send you to the correct place. Please choose the type of user you are.', 'redux-framework' ); ?></p>
 
                 <div class="support">
                     <ul>
-                        <li><a href="">User</a></li>
-                        <li><a href="">Developer</a></li>
+                        <li class="userType">
+                            <a href=""><i class="el el-child"></i></a><h2>User</h2>
+                        </li>
+                        <li class="userType">
+                            <a href=""><i class="el el-idea"></i></a><h2>Developer</h2>
+                        </li>
                     </ul>
+
 
 
                     <h3><?php _e( 'Hello there WordPress User!', 'redux-framework' ); ?></h3>

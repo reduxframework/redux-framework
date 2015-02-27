@@ -30,6 +30,7 @@
             return;
         }
 
+
         $( '#redux-import' ).click(
             function( e ) {
                 if ( $( '#import-code-value' ).val() === "" && $( '#import-link-value' ).val() === "" ) {
@@ -37,6 +38,11 @@
                     return false;
                 }
                 window.onbeforeunload = null;
+
+                if ( redux.args.ajax_save === true ) {
+                    $.redux.ajax_save( $( this ) );
+                    e.preventDefault();
+                }
             }
         );
 
@@ -47,9 +53,11 @@
                     $( '#import-link-value' ).text( '' );
                     $( '#redux-import-link-wrapper' ).slideUp(
                         'fast', function() {
-                            $el.slideDown( 'fast', function() {
-                                $( '#import-code-value' ).focus();
-                            } );
+                            $el.slideDown(
+                                'fast', function() {
+                                    $( '#import-code-value' ).focus();
+                                }
+                            );
                         }
                     );
                 } else {
@@ -73,9 +81,11 @@
                     $( '#import-code-value' ).text( '' );
                     $( '#redux-import-code-wrapper' ).slideUp(
                         'fast', function() {
-                            $el.slideDown( 'fast', function() {
-                                $( '#import-link-value' ).focus();
-                            } );
+                            $el.slideDown(
+                                'fast', function() {
+                                    $( '#import-link-value' ).focus();
+                                }
+                            );
                         }
                     );
                 } else {
@@ -123,19 +133,23 @@
             }
         );
 
-        $( '.redux-container-import_export textarea' ).focusout(function() {
-            var $id = $( this ).attr('id');
-            var $el  = $(this);
-            var $container = $el;
-            if ($id == "import-link-value" || $id == "import-code-value") {
-                $container = $(this ).parent();
-            }
-            $container.slideUp('medium', function () {
-                if ($id != "redux-export-link-value") {
-                    $el.text('');
+        $( '.redux-container-import_export textarea' ).focusout(
+            function() {
+                var $id = $( this ).attr( 'id' );
+                var $el = $( this );
+                var $container = $el;
+                if ( $id == "import-link-value" || $id == "import-code-value" ) {
+                    $container = $( this ).parent();
                 }
-            } );
-        });
+                $container.slideUp(
+                    'medium', function() {
+                        if ( $id != "redux-export-link-value" ) {
+                            $el.text( '' );
+                        }
+                    }
+                );
+            }
+        );
 
 
         $( '#redux-export-link' ).click(

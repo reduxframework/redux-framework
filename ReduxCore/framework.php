@@ -43,6 +43,9 @@
 // Don't duplicate me!
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
+        // Redux API class  :)
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
+
         // General helper functions
         require_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
 
@@ -70,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.3.6';
+            public static $_version = '3.4.3.7';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -486,7 +489,7 @@
                     // Enable sites as well as admin when using network database mode
                     'hide_reset'                => false,
                     'hints'                     => array(
-                        'icon'          => 'el el-icon-question-sign',
+                        'icon'          => 'el el-question-sign',
                         'icon_position' => 'right',
                         'icon_color'    => 'lightgray',
                         'icon_size'     => 'normal',
@@ -2288,7 +2291,7 @@
              * @return      void
              */
             private function _register_extensions() {
-                $path    = dirname( __FILE__ ) . '/extensions/';
+                $path    = dirname( __FILE__ ) . '/inc/extensions/';
                 $folders = scandir( $path, 1 );
 
                 /**
@@ -2408,7 +2411,7 @@
                 $this->transients['last_save'] = $time;
 
                 // Import
-                if ( ! empty ( $plugin_options['import'] ) ) {
+                if ( ( isset( $plugin_options['import_code'] ) && ! empty( $plugin_options['import_code'] ) ) || ( isset( $plugin_options['import_link'] ) && ! empty( $plugin_options['import_link'] ) ) ) {
                     $this->transients['last_save_mode'] = "import"; // Last save mode
                     $this->transients['last_compiler']  = $time;
                     $this->transients['last_import']    = $time;
@@ -2801,7 +2804,7 @@
                                     if ( isset ( $plugin_options[ $field['id'] ] ) && is_array( $plugin_options[ $field['id'] ] ) && ! empty ( $plugin_options[ $field['id'] ] ) ) {
                                         foreach ( $plugin_options[ $field['id'] ] as $key => $value ) {
                                             $before = $after = null;
-                                            if ( isset ( $plugin_options[ $field['id'] ][ $key ] ) && ( !empty ( $plugin_options[ $field[ 'id' ] ][ $key ] ) ||  $plugin_options[ $field[ 'id' ] ][ $key ] == '0' ) ) {
+                                            if ( isset ( $plugin_options[ $field['id'] ][ $key ] ) && ( ! empty ( $plugin_options[ $field['id'] ][ $key ] ) || $plugin_options[ $field['id'] ][ $key ] == '0' ) ) {
                                                 if ( is_array( $plugin_options[ $field['id'] ][ $key ] ) ) {
                                                     $before = $plugin_options[ $field['id'] ][ $key ];
                                                 } else {
@@ -2809,7 +2812,7 @@
                                                 }
                                             }
 
-                                            if ( isset ( $options[ $field['id'] ][ $key ] ) && ( !empty ( $plugin_options[ $field[ 'id' ] ][ $key ] ) ||  $plugin_options[ $field[ 'id' ] ][ $key ] == '0' ) ) {
+                                            if ( isset ( $options[ $field['id'] ][ $key ] ) && ( ! empty ( $plugin_options[ $field['id'] ][ $key ] ) || $plugin_options[ $field['id'] ][ $key ] == '0' ) ) {
                                                 $after = $options[ $field['id'] ][ $key ];
                                             }
 
@@ -2985,6 +2988,7 @@
                                 if ( strpos( $icon, 'el-icon-' ) !== false ) {
                                     $icon = str_replace( 'el-icon-', 'el el-', $icon );
                                 }
+
                                 $section[ $nextK ]['class'] = isset ( $section[ $nextK ]['class'] ) ? $section[ $nextK ]['class'] : '';
                                 $string .= '<li id="' . $nextK . $suffix . '_section_group_li" class="redux-group-tab-link-li ' . $hide_sub . $section[ $nextK ]['class'] . ( $icon ? ' hasIcon' : '' ) . '">';
                                 $string .= '<a href="javascript:void(0);" id="' . $nextK . $suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $nextK . '" data-rel="' . $nextK . $suffix . '">' . $icon . '<span class="group_title">' . $sections[ $nextK ]['title'] . '</span></a>';

@@ -1,5 +1,4 @@
 
-
 #footer-upgrade {
     display: none;;
 }
@@ -29,6 +28,7 @@
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
     box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
 }
+
 .redux-badge .el {
     background: #00A2E3;
     display: block !important;
@@ -80,6 +80,7 @@
     box-sizing: border-box;
     margin: 0 !important;
 }
+
 .about-wrap div.icon {
     width: 0 !important;
     padding: 0;
@@ -114,43 +115,32 @@
 .changelog .feature-section {
     padding-top: 1.4em;
 }
+
 .changelog .prettyprint {
     overflow-wrap: break-word;
 }
+
 .changelog .gist-it-gist .gist-file,
-.changelog .gist-it-gist .gist-file .gist-data{
+.changelog .gist-it-gist .gist-file .gist-data {
     border: 0 !important;
     background: 0 !important;
 }
+
 .changelog .gist-it-gist .gist-file .gist-data pre {
     padding-top: 10px !important;
     word-break: break-word;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .theme-screenshot {
     color: #eee;
 }
+
 .theme-screenshot:hover {
     color: #fff;
 }
 
 .theme-browser .theme:hover .theme-screenshot i {
-    font-size:120px;
+    font-size: 120px;
 }
 
 .theme-screenshot i {
@@ -158,75 +148,16 @@
     display: block;
     margin: 10px;
     font-size: 90px;
-    line-height: 160px;
+    line-height: 200px;
     transition: all 0.5s ease;
 }
 
 .theme-browser .theme .theme-screenshot:after {
-    content:inherit;
-    display:inherit;
-    padding-top:inherit;
+    content: inherit;
+    display: inherit;
+    padding-top: inherit;
 }
 
-.screenshot-hover{
-    position: absolute;
-    border: 1px solid #E4E4E4;
-    display: none;
-    color: #fff;
-    top: -240px;
-    left: 175px;
-    width: 460px;
-    z-index: 999;
-    border: 10px solid #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    box-shadow: -2px 1px 54px rgba(23,24,25,.14);
-    -moz-box-shadow: -2px 1px 54px rgba(23,24,25,.14);
-    -webkit-box-shadow: -2px 1px 54px rgba(23,24,25,.14);
-}
-.avada-demo-themes .theme:nth-child(3n) .screenshot-hover {
-    left: -380px;
-}
-.avada-demo-themes .theme:hover .screenshot-hover {
-    display: block;
-}
-.fadeInUp {
-    -webkit-animation-name: fadeInUp;
-    -moz-animation-name: fadeInUp;
-    -o-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-}
-.fusion-animated {
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
-
-    -webkit-animation-play-state: paused;
-    -moz-animation-play-state: paused;
-    -ms-animation-play-state: paused;
-    -o-animation-play-state: paused;
-    animation-play-state: paused;
-}
-
-.theme:hover .fusion-animated {
-    -webkit-animation-play-state: running;
-    -moz-animation-play-state: running;
-    -ms-animation-play-state: running;
-    -o-animation-play-state: running;
-    animation-play-state: running;
-}
-.fusion-animated {
-    visibility: hidden;
-}
 
 
 @media only screen and (min-width: 2000px) {
@@ -234,6 +165,7 @@
         width: 31%;
         margin: 0 3% 3% 0;
     }
+
     #wpwrap .avada-demo-themes .theme:nth-child(3n) {
         margin-right: 0;
     }
@@ -244,12 +176,13 @@
     }
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
     .avada-wrap .avada-logo {
         display: block;
-        position:relative;
-        margin:0 auto 50px auto;
+        position: relative;
+        margin: 0 auto 50px auto;
     }
+
     .about-wrap h2 .nav-tab {
         width: 100%;
         margin: 0;
@@ -260,18 +193,22 @@
         margin-bottom: 10px;
         margin-top: 10px;
     }
+
     .about-wrap h2.nav-tab-wrapper {
         padding: 0;
         width: 100%;
     }
+
     .avada-demo-themes .theme:hover .theme-actions {
         display: block !important;
         opacity: 1 !important;
     }
+
     .avada-demo-themes .theme:hover .screenshot-hover {
         display: none !important;
     }
 }
+
 @media only screen and (max-width: 1120px) {
     .theme-browser .theme:nth-child(odd) {
         margin-right: 5% !important;
@@ -282,16 +219,161 @@
         margin-right: auto !important;
     }
 }
-@media screen and (max-width: 620px){
+
+@media screen and (max-width: 620px) {
     .theme-browser .theme {
         width: 100% !important;
         margin-right: 0;
     }
+
     .avada-demo-themes .theme:hover .theme-actions {
         display: block !important;
         opacity: 1 !important;
     }
+
     .avada-demo-themes .theme:hover .screenshot-hover {
         display: none !important;
     }
+}
+
+
+/* Common style */
+.theme-screenshot figure {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 0;
+}
+
+.theme-screenshot figure i {
+    position: relative;
+    display: block;
+    font-size: 11em;
+    opacity: 0.8;
+}
+
+.theme-screenshot figure figcaption {
+    padding: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.theme-screenshot figure figcaption::before,
+.theme-screenshot figure figcaption::after {
+    pointer-events: none;
+}
+
+.theme-screenshot figure figcaption,
+.theme-screenshot figure figcaption > a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Anchor will cover the whole item by default */
+/* For some effects it will show as a button */
+.theme-screenshot figure figcaption > a {
+    z-index: 1000;
+    text-indent: 200%;
+    white-space: nowrap;
+    font-size: 0;
+    opacity: 0;
+}
+
+.theme-screenshot figure p {
+    margin: 0;
+}
+
+.theme-screenshot figure p {
+    letter-spacing: 1px;
+    font-size: 68.5%;
+}
+
+figure i {
+    opacity: 0.7;
+    -webkit-transition: opacity 0.35s;
+    transition: opacity 0.35s;
+}
+
+.theme:hover i {
+    opacity: 0.3;
+}
+
+figure figcaption::before,
+figure figcaption::after {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+}
+
+figure figcaption::before {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    -webkit-transform: scale(0, 1);
+    transform: scale(0, 1);
+}
+
+figure figcaption::after {
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+    -webkit-transform: scale(1, 0);
+    transform: scale(1, 0);
+}
+
+figure p {
+    padding: 10px;
+    text-transform: none;
+    opacity: 0;
+    margin-top: 0 !important;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 20px, 0);
+}
+
+.theme:hover figcaption::before,
+.theme:hover figcaption::after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.theme:hover p {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+}
+.support ul {
+    clear:both;
+}
+.support li {
+    width: 50%;
+    display:block;
+    text-align: center;
+    float:left;
+}
+.userType {
+    margin-top: 40px;
+}
+.userType a {
+    border: 5px transparent dashed;
+    padding: 20px;
+
+    font-size: 200px;
+
+}
+.userType a:hover {
+    border: #aaa 5px dashed;
 }

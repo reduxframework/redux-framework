@@ -54,7 +54,7 @@
                 $this->sections[] = array(
                     'title'  => __( 'Home Settings', 'redux-framework-demo' ),
                     'desc'   => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement. For extra details look at our <a href="http://docs.reduxframework.com/core/advanced/wpml-integration/" target="_blank">WPML Implementation</a> documentation.', 'redux-framework-demo' ),
-                    'icon'   => 'el-icon-home',
+                    'icon'   => 'el el-home',
                     // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                     'fields' => array(
 
@@ -77,7 +77,7 @@
                 $this->sections[] = array(
                     'title'  => __( 'WPML Example', 'redux-framework-demo' ),
                     'desc'   => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement.', 'redux-framework-demo' ),
-                    'icon'   => 'el-icon-home',
+                    'icon'   => 'el el-home',
                     // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
                     'fields' => array(
                         array(
@@ -233,23 +233,23 @@
                 $this->args['share_icons'][] = array(
                     'url'   => 'https://github.com/ReduxFramework/ReduxFramework',
                     'title' => 'Visit us on GitHub',
-                    'icon'  => 'el-icon-github'
+                    'icon'  => 'el el-github'
                     //'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
                 );
                 $this->args['share_icons'][] = array(
                     'url'   => 'https://www.facebook.com/pages/Redux-Framework/243141545850368',
                     'title' => 'Like us on Facebook',
-                    'icon'  => 'el-icon-facebook'
+                    'icon'  => 'el el-facebook'
                 );
                 $this->args['share_icons'][] = array(
                     'url'   => 'http://twitter.com/reduxframework',
                     'title' => 'Follow us on Twitter',
-                    'icon'  => 'el-icon-twitter'
+                    'icon'  => 'el el-twitter'
                 );
                 $this->args['share_icons'][] = array(
                     'url'   => 'http://www.linkedin.com/company/redux-framework',
                     'title' => 'Find us on LinkedIn',
-                    'icon'  => 'el-icon-linkedin'
+                    'icon'  => 'el el-linkedin'
                 );
 
                 // Panel Intro text -> before the form

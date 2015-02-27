@@ -431,6 +431,13 @@ if (!class_exists('reduxCoreEnqueue')){
                 'menu_search'           => $pagenow . '?page=' . $this->parent->args['page_slug'] . "&tab="
             );
 
+            $this->parent->localize_data['ajax'] = array(
+                'console'   => __( 'There was an error saving. Here is the result of your action:', 'redux-framework' ),
+                'alert'     => __( 'There was a problem with your action. Please try again or reload the page.', 'redux-framework' ),
+            );
+
+
+
             $this->get_warnings_and_errors_array();
 
             wp_localize_script(

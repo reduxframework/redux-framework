@@ -1,12 +1,22 @@
 <?php
 
-// Exit if accessed directly
+    /**
+     * Redux Framework API Class
+     *
+     * Makes instantiating a Redux object an absolute piece of cake.
+     *
+     * @package     Redux_Framework
+     * @author      Dovy Paukstys
+     * @subpackage  Core
+     */
+
+    // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-// Don't duplicate me!
-    if ( ! class_exists( 'ReduxAPI' ) ) {
+    // Don't duplicate me!
+    if ( ! class_exists( 'Redux' ) ) {
 
         /**
          * Redux API Class
@@ -14,7 +24,7 @@
          *
          * @since       1.0.0
          */
-        class ReduxAPI {
+        class Redux {
 
             public static $fields = array();
             public static $sections = array();
@@ -23,21 +33,70 @@
             public static $priority = array();
             public static $errors = array();
             public static $init = array();
+            public static $extensions = array();
+            public static $uses_extensions = array();
+
+            public function __call( $closure, $args ) {
+                return call_user_func_array( $this->{$closure}->bindTo( $this ), $args );
+            }
+
+            public function __toString() {
+                return call_user_func( $this->{"__toString"}->bindTo( $this ) );
+            }
 
             public static function load() {
-                add_action( 'init', array( 'ReduxAPI', 'createRedux' ) );
+                add_action( 'after_setup_theme', array( 'Redux', 'createRedux' ) );
+                add_action( 'init', array( 'Redux', 'createRedux' ) );
             }
 
             public static function init( $opt_name = "" ) {
                 if ( ! empty( $opt_name ) ) {
                     self::loadRedux( $opt_name );
+                    remove_action( 'setup_theme', array( 'Redux', 'createRedux' ) );
+                }
+            }
+
+            public static function loadExtensions( $ReduxFramework ) {
+                if ( $instanceExtensions = self::getExtensions( '', $ReduxFramework->args['opt_name'] ) ) {
+                    foreach ( $instanceExtensions as $name => $extension ) {
+                        if ( ! class_exists( $extension['class'] ) ) {
+                            // In case you wanted override your override, hah.
+                            $extension['path'] = apply_filters( 'redux/extension/' . $ReduxFramework->args['opt_name'] . '/' . $name, $extension['path'] );
+                            if ( file_exists( $extension['path'] ) ) {
+                                require_once( $extension['path'] );
+                            }
+                        }
+                        if ( ! isset( $ReduxFramework->extensions[ $name ] ) ) {
+                            if ( class_exists( $extension['class'] ) ) {
+                                $ReduxFramework->extensions[ $name ] = new $extension['class']( $ReduxFramework );
+                            } else {
+                                echo '<div id="message" class="error"><p>No class named <strong>' . $extension['class'] . '</strong> exists. Please verify your extension path.</p></div>';
+                            }
+
+                        }
+                    }
                 }
             }
 
             public static function loadRedux( $opt_name = "" ) {
+                $check = ReduxFrameworkInstances::get_instance($opt_name);
+                if (isset($check->apiHasRun)) {
+                    return;
+                }
+
                 $args     = self::constructArgs( $opt_name );
                 $sections = self::constructSections( $opt_name );
-                new ReduxFramework( $sections, $args );
+                if ( ! class_exists( 'ReduxFramework' ) ) {
+                    echo '<div id="message" class="error"><p>Redux Framework is <strong>not installed</strong>. Please install it.</p></div>';
+
+                    return;
+                }
+                if ( isset( self::$uses_extensions[ $opt_name ] ) && ! empty( self::$uses_extensions[ $opt_name ] ) ) {
+                    add_action( "redux/extensions/{$opt_name}/before", array( 'Redux', 'loadExtensions' ), 0 );
+                }
+
+                $redux = new ReduxFramework( $sections, $args );
+                $redux->apiHasRun = 1;
             }
 
             public static function createRedux() {
@@ -115,6 +174,7 @@
                 if ( ! isset( $section['id'] ) ) {
                     $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
                 }
+
                 if ( ! empty( $opt_name ) && is_array( $section ) && ! empty( $section ) ) {
                     if ( ! isset( $section['id'] ) && ! isset( $section['title'] ) ) {
                         self::$errors[ $opt_name ]['section']['missing_title'] = "Unable to create a section due to missing id and title.";
@@ -168,17 +228,17 @@
                 }
             }
 
-            public static function setHelpTab( $opt_name = "", $content = "" ) {
+            public static function setHelpTab( $opt_name = "", $tab = array() ) {
                 self::check_opt_name( $opt_name );
-                if ( ! empty( $opt_name ) && ! empty( $content ) ) {
+                if ( ! empty( $opt_name ) && ! empty( $tab ) ) {
                     if ( ! isset( self::$args[ $opt_name ]['help_tabs'] ) ) {
                         self::$args[ $opt_name ]['help_tabs'] = array();
                     }
-                    if ( isset( $content['id'] ) ) {
-                        self::$args[ $opt_name ]['help_tabs'][] = $content;
-                    } else if ( is_array( end( $content ) ) ) {
-                        foreach ( $content as $tab ) {
-                            self::$args[ $opt_name ]['help_tabs'][] = $tab;
+                    if ( isset( $tab['id'] ) ) {
+                        self::$args[ $opt_name ]['help_tabs'][] = $tab;
+                    } else if ( is_array( end( $tab ) ) ) {
+                        foreach ( $tab as $tab_item ) {
+                            self::$args[ $opt_name ]['help_tabs'][] = $tab_item;
                         }
                     }
                 }
@@ -200,7 +260,7 @@
 
             public static function getPriority( $opt_name, $type ) {
                 $priority = self::$priority[ $opt_name ][ $type ];
-                self::$priority[ $opt_name ][ $type ] += 10;
+                self::$priority[ $opt_name ][ $type ] += 1;
 
                 return $priority;
             }
@@ -211,19 +271,19 @@
                 }
                 if ( ! isset( self::$args[ $opt_name ] ) ) {
                     self::$args[ $opt_name ]             = array();
-                    self::$priority[ $opt_name ]['args'] = 10;
+                    self::$priority[ $opt_name ]['args'] = 1;
                 }
                 if ( ! isset( self::$sections[ $opt_name ] ) ) {
                     self::$sections[ $opt_name ]             = array();
-                    self::$priority[ $opt_name ]['sections'] = 10;
+                    self::$priority[ $opt_name ]['sections'] = 1;
                 }
                 if ( ! isset( self::$fields[ $opt_name ] ) ) {
                     self::$fields[ $opt_name ]             = array();
-                    self::$priority[ $opt_name ]['fields'] = 10;
+                    self::$priority[ $opt_name ]['fields'] = 1;
                 }
                 if ( ! isset( self::$help[ $opt_name ] ) ) {
                     self::$help[ $opt_name ]             = array();
-                    self::$priority[ $opt_name ]['help'] = 10;
+                    self::$priority[ $opt_name ]['help'] = 1;
                 }
                 if ( ! isset( self::$errors[ $opt_name ] ) ) {
                     self::$errors[ $opt_name ] = array();
@@ -232,7 +292,109 @@
                     self::$init[ $opt_name ] = false;
                 }
             }
+
+            /**
+             * Retrieve metadata from a file. Based on WP Core's get_file_data function
+             *
+             * @since 2.1.1
+             *
+             * @param string $file Path to the file
+             *
+             * @return string
+             */
+            public static function getFileVersion( $file, $size = 8192 ) {
+                // We don't need to write to the file, so just open for reading.
+                $fp = fopen( $file, 'r' );
+
+                // Pull only the first 8kiB of the file in.
+                $file_data = fread( $fp, $size );
+
+                // PHP will close file handle, but we are good citizens.
+                fclose( $fp );
+
+                // Make sure we catch CR-only line endings.
+                $file_data = str_replace( "\r", "\n", $file_data );
+                $version   = '';
+
+                if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( '@version', '/' ) . '(.*)$/mi', $file_data, $match ) && $match[1] ) {
+                    $version = _cleanup_header_comment( $match[1] );
+                }
+
+                return $version;
+            }
+
+            public static function checkExtensionClassFile( $opt_name, $name = "", $class_file = "" ) {
+                if ( file_exists( $class_file ) ) {
+                    self::$uses_extensions[ $opt_name ] = isset( self::$uses_extensions[ $opt_name ] ) ? self::$uses_extensions[ $opt_name ] : array();
+                    if ( ! in_array( $name, self::$uses_extensions[ $opt_name ] ) ) {
+                        self::$uses_extensions[ $opt_name ][] = $name;
+                    }
+
+                    self::$extensions[ $name ]             = isset( self::$extensions[ $name ] ) ? self::$extensions[ $name ] : array();
+                    $version                               = self::getFileVersion( $class_file );
+                    self::$extensions[ $name ][ $version ] = isset( self::$extensions[ $name ][ $version ] ) ? self::$extensions[ $name ][ $version ] : $class_file;
+                }
+            }
+
+            public static function setExtensions( $opt_name, $path ) {
+                if ( is_dir( $path ) ) {
+                    $path   = trailingslashit( $path );
+                    $folder = str_replace( '.php', '', basename( $path ) );
+                    if ( file_exists( $path . 'extension_' . $folder . '.php' ) ) {
+                        self::checkExtensionClassFile( $opt_name, $folder, $path . 'extension_' . $folder . '.php' );
+                    } else {
+                        $folders = scandir( $path, 1 );
+                        foreach ( $folders as $folder ) {
+                            if ( $folder === '.' or $folder === '..' ) {
+                                continue;
+                            }
+                            if ( file_exists( $path . $folder . '/extension_' . $folder . '.php' ) ) {
+                                self::checkExtensionClassFile( $opt_name, $folder, $path . $folder . '/extension_' . $folder . '.php' );
+                            } else if ( is_dir( $path . $folder ) ) {
+                                self::setExtensions( $opt_name, $path . $folder );
+                                continue;
+                            }
+                        }
+                    }
+                } else if ( file_exists( $path ) ) {
+                    $name = explode( 'extension_', basename( $path ) );
+                    if ( isset( $name[1] ) && ! empty( $name[1] ) ) {
+                        $name = str_replace( '.php', '', $name[1] );
+                        self::checkExtensionClassFile( $opt_name, $name, $path );
+                    }
+                }
+            }
+
+            public static function getExtensions( $key = "", $opt_name = "" ) {
+                if ( empty( $opt_name ) ) {
+                    if ( empty( $key ) ) {
+                        return self::$extension_paths[ $key ];
+                    } else {
+                        if ( isset( self::$extension_paths[ $key ] ) ) {
+                            return self::$extension_paths[ $key ];
+                        }
+                    }
+                } else {
+                    if ( empty( self::$uses_extensions[ $opt_name ] ) ) {
+                        return false;
+                    }
+                    $instanceExtensions = array();
+                    foreach ( self::$uses_extensions[ $opt_name ] as $extension ) {
+                        $class_file                       = end( self::$extensions[ $extension ] );
+                        $name                             = str_replace( '.php', '', basename( $extension ) );
+                        $extension_class                  = 'ReduxFramework_Extension_' . $name;
+                        $instanceExtensions[ $extension ] = array(
+                            'path'  => $class_file,
+                            'class' => $extension_class
+                        );
+                    }
+
+                    return $instanceExtensions;
+                }
+
+                return false;
+            }
         }
 
-        ReduxAPI::load();
+        Redux::load();
     }

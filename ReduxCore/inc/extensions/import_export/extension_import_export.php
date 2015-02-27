@@ -88,8 +88,7 @@
 
                 $this->is_field = Redux_Helpers::isFieldInUse($parent, 'import_export');
 
-
-                if ( !$this->is_field ) {
+                if ( !$this->is_field && $this->parent->args['show_import_export'] ) {
                     $this->add_section();
                 }
 
@@ -122,7 +121,7 @@
                     'id' => 'import/export',
                     'title' => __( 'Import / Export', 'redux-framework' ),
                     'heading' => '',
-                    'icon' => 'el-icon-refresh',
+                    'icon' => 'el el-refresh',
                     'fields' => array(
                         array(
                             'id' => 'redux_import_export',

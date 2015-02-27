@@ -53,12 +53,12 @@
                             var merge = presets.data( 'merge' );
 
                             if( merge !== undefined && merge !== null ) {
-                                if( jQuery.type( merge ) === 'string' ) {
+                                if( $.type( merge ) === 'string' ) {
                                     merge = merge.split('|');
                                 }
 
                                 $.each(data, function( index, value ) {
-                                    if( ( merge === true || $.inArray( index, merge ) != -1 ) && jQuery.type( redux.options[index] ) === 'object' ) {
+                                    if( ( merge === true || $.inArray( index, merge ) != -1 ) && $.type( redux.options[index] ) === 'object' ) {
                                         data[index] = $.extend(redux.options[index], data[index]);
                                     }
                                 });
@@ -72,13 +72,13 @@
                                         "checked", true
                                     );
                                     window.onbeforeunload = null;
-                                    if ( jQuery( '#import-code-value' ).length === 0 ) {
+                                    if ( $( '#import-code-value' ).length === 0 ) {
                                         $( this ).append( '<textarea id="import-code-value" style="display:none;" name="' + redux.args.opt_name + '[import_code]">' + JSON.stringify( data ) + '</textarea>' );
                                     } else {
                                         $( '#import-code-value' ).val( JSON.stringify( data ) );
                                     }
-                                    if ( jQuery( '#publishing-action #publish' ).length !== 0 ) {
-                                        jQuery( '#publish' ).click();
+                                    if ( $( '#publishing-action #publish' ).length !== 0 ) {
+                                        $( '#publish' ).click();
                                     } else {
                                         $( '#redux-import' ).click();
                                     }
