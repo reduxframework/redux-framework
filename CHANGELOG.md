@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.4.3.7
+* Fixed     Import/Export bug where it wasn't running.
+* Modified  Locations of the core extensions directory as well as grunt configuration.
+
 ## 3.4.3.6
 * Fixed     #2047 - Validation will now accept 0 as a value to be tested. Thanks @Ninos!
 * Added     url_slug validation with option flush_permalinks!

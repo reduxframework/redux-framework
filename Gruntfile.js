@@ -56,15 +56,28 @@ module.exports = function( grunt ) {
             },
             uglify: {
                 fields: {
-                    files: [{
-                        expand: true,
-                        cwd: 'ReduxCore/inc/fields',
-                        src: ['**/*.js', '!**/*.min.js', '!ace_editor/vendor/*.js', '!ace_editor/vendor/snippets/*.js', '!slider/vendor/nouislider/*.*', '!spinner/vendor/*.*'],
-                        ext: '.min.js',
-                        dest: 'ReduxCore/inc/fields'
-                    }]                    
+                    files: [
+                        {
+                            expand: true,
+                            cwd: 'ReduxCore/inc/fields',
+                            src: ['**/*.js', '!**/*.min.js', '!ace_editor/vendor/*.js', '!ace_editor/vendor/snippets/*.js', '!slider/vendor/nouislider/*.*', '!spinner/vendor/*.*'],
+                            ext: '.min.js',
+                            dest: 'ReduxCore/inc/fields'
+                        }
+                    ]
                 },
-                core:{
+                extensions: {
+                    files: [
+                        {
+                            expand: true,
+                            cwd: 'ReduxCore/inc/extensions',
+                            src: ['**/*.js', '!**/*.min.js'],
+                            ext: '.min.js',
+                            dest: 'ReduxCore/inc/extensions'
+                        }
+                    ]
+                },
+                core: {
                     files: {
                         'ReduxCore/assets/js/redux.min.js': [
                             'ReduxCore/assets/js/redux.min.js'
@@ -75,23 +88,11 @@ module.exports = function( grunt ) {
                         'ReduxCore/assets/js/vendor/redux.select2.sortable.min.js': [
                             'ReduxCore/assets/js/vendor/redux.select2.sortable.js'
                         ],
-                        //'ReduxCore/assets/js/import_export/import_export.min.js': [
-                        //    'ReduxCore/extensions/import_export/import_export/field_import_export.js'
-                        //],
                         'ReduxCore/assets/js/media/media.min.js': [
                             'ReduxCore/assets/js/media/media.js'
-                        ],
+                        ]
                     }
-                    
-                },
-                extensions: {
-                    files: [{
-                        expand: true,
-                        cwd: 'ReduxCore/extensions',
-                        src: '**/*.js',
-                        ext: '.min.js',
-                        dest: 'ReduxCore/extensions'
-                    }]
+
                 },
                 vendor: {
                     files: {
@@ -137,9 +138,9 @@ module.exports = function( grunt ) {
                     'ReduxCore/inc/fields/spinner/field_spinner.js',
                     'ReduxCore/inc/fields/switch/field_switch.js',
                     'ReduxCore/inc/fields/typography/field_typography.js',
-
                     // 'ReduxCore/inc/fields/**/*.js',
-                    // 'ReduxCore/extensions/**/*.js',
+                    'ReduxCore/extensions/**/*.js',
+                    'ReduxCore/extensions/**/**/*.js',
                     'ReduxCore/assets/js/redux.js'
                 ]
             },
@@ -180,8 +181,7 @@ module.exports = function( grunt ) {
                         type: 'wp-plugin',
                         domainPath: 'ReduxCore/languages',
                         potFilename: 'redux-framework.pot',
-                        include: [
-                        ],
+                        include: [],
                         exclude: [
                             'sample/.*'
                         ],
@@ -196,7 +196,7 @@ module.exports = function( grunt ) {
 
             // Check textdomain errors.
             checktextdomain: {
-                options:{
+                options: {
                     keywords: [
                         '__:1,2d',
                         '_e:1,2d',
@@ -296,7 +296,21 @@ module.exports = function( grunt ) {
                         ext: '.css'                     // Dest filepaths will have this extension.
                     }]
                 },
+                extensions: {
+                    options: {
+                        sourcemap: 'none',
+                        style: 'compressed',
+                        noCache: true,
+                    },
 
+                    files: [{
+                        expand: true,                   // Enable dynamic expansion.
+                        cwd: 'ReduxCore/inc/extensions',    // Src matches are relative to this path.
+                        src: ['**/*.scss'],             // Actual pattern(s) to match.
+                        dest: 'ReduxCore/inc/extensions',   // Destination path prefix.
+                        ext: '.css'                     // Dest filepaths will have this extension.
+                    }]
+                },
                 vendor: {
                     options: {
                         sourcemap: 'none',
@@ -305,12 +319,12 @@ module.exports = function( grunt ) {
                     },
 
                     files: {
-                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css":[
+                        "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css": [
                             "ReduxCore/assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.scss"
                         ],
-                        "ReduxCore/assets/css/vendor/elusive-icons/elusive-icons.css":[
+                        "ReduxCore/assets/css/vendor/elusive-icons/elusive-icons.css": [
                             "ReduxCore/assets/css/vendor/elusive-icons/scss/elusive-icons.scss"
-                        ],                        
+                        ],
                     }
                 },
 
@@ -322,19 +336,16 @@ module.exports = function( grunt ) {
                     },
 
                     files: {
-                        "ReduxCore/assets/css/color-picker/color-picker.css":[
+                        "ReduxCore/assets/css/color-picker/color-picker.css": [
                             "ReduxCore/assets/css/color-picker/color-picker.scss"
                         ],
-                        "ReduxCore/assets/css/media/media.css":[
+                        "ReduxCore/assets/css/media/media.css": [
                             "ReduxCore/assets/css/media/media.scss"
                         ],
-                        "ReduxCore/assets/css/import_export/import_export.css":[
-                            "ReduxCore/extensions/import_export/import_export/field_import_export.scss"
-                        ],
-                        "ReduxCore/assets/css/redux-admin.css":  [
+                        "ReduxCore/assets/css/redux-admin.css": [
                             "ReduxCore/assets/css/redux-admin.scss"
                         ],
-                        "ReduxCore/assets/css/rtl.css":[
+                        "ReduxCore/assets/css/rtl.css": [
                             "ReduxCore/assets/css/rtl.scss"
                         ]
                     }
@@ -361,10 +372,10 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-wp-i18n' );
     grunt.loadNpmTasks( 'grunt-checktextdomain' );
     grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks( 'grunt-contrib-sass' );
     grunt.loadNpmTasks( 'grunt-contrib-uglify' );
     grunt.loadNpmTasks( 'grunt-contrib-watch' );
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
     grunt.loadNpmTasks( 'grunt-contrib-concat' );
     grunt.loadNpmTasks( 'grunt-phpdocumentor' );
     grunt.loadNpmTasks( 'grunt-gh-pages' );
@@ -383,14 +394,16 @@ module.exports = function( grunt ) {
     // Default task(s).
     grunt.registerTask(
         'default', [
-            'jshint', 
-            'concat:core', 
-            'uglify:core', 
-            'concat:vendor', 
-            'uglify:vendor', 
+            'jshint',
+            'concat:core',
+            'uglify:core',
+            'concat:vendor',
+            'uglify:vendor',
             'uglify:fields',
-            "sass:admin", 
+            'uglify:extensions',
+            "sass:admin",
             "sass:fields",
+            "sass:extensions",
             "sass:vendor",
             'cssmin'
         ]
@@ -404,8 +417,11 @@ module.exports = function( grunt ) {
     grunt.registerTask( 'watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin'] );
 
     grunt.registerTask( "lintPHP", ["phplint:plugin", "phplint:core"] );
-    grunt.registerTask( "compileSCSS", ["sass:admin", "sass:fields", "sass:vendor"] );
-    grunt.registerTask( 'compileJS', ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', 'uglify:fields'] );
+    grunt.registerTask( "compileSCSS", ["sass:admin", "sass:fields", "sass:extensions", "sass:vendor"] );
+    grunt.registerTask(
+        'compileJS',
+        ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', 'uglify:fields', 'uglify:extensions']
+    );
     grunt.registerTask( 'compileTestJS', ['jshint', 'concat:core', 'concat:vendor'] );
     grunt.registerTask( 'compileCSS', ['cssmin'] );
 };
