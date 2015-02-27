@@ -16,7 +16,7 @@
     }
 
     // Don't duplicate me!
-    if ( ! class_exists( 'ReduxAPI' ) ) {
+    if ( ! class_exists( 'Redux' ) ) {
 
         /**
          * Redux API Class
@@ -24,7 +24,7 @@
          *
          * @since       1.0.0
          */
-        class ReduxAPI {
+        class Redux {
 
             public static $fields = array();
             public static $sections = array();
@@ -45,14 +45,14 @@
             }
 
             public static function load() {
-                add_action( 'after_setup_theme', array( 'ReduxAPI', 'createRedux' ) );
-                add_action( 'init', array( 'ReduxAPI', 'createRedux' ) );
+                add_action( 'after_setup_theme', array( 'Redux', 'createRedux' ) );
+                add_action( 'init', array( 'Redux', 'createRedux' ) );
             }
 
             public static function init( $opt_name = "" ) {
                 if ( ! empty( $opt_name ) ) {
                     self::loadRedux( $opt_name );
-                    remove_action( 'setup_theme', array( 'ReduxAPI', 'createRedux' ) );
+                    remove_action( 'setup_theme', array( 'Redux', 'createRedux' ) );
                 }
             }
 
@@ -79,6 +79,11 @@
             }
 
             public static function loadRedux( $opt_name = "" ) {
+                $check = ReduxFrameworkInstances::get_instance($opt_name);
+                if (isset($check->apiHasRun)) {
+                    return;
+                }
+
                 $args     = self::constructArgs( $opt_name );
                 $sections = self::constructSections( $opt_name );
                 if ( ! class_exists( 'ReduxFramework' ) ) {
@@ -87,10 +92,11 @@
                     return;
                 }
                 if ( isset( self::$uses_extensions[ $opt_name ] ) && ! empty( self::$uses_extensions[ $opt_name ] ) ) {
-                    add_action( "redux/extensions/{$opt_name}/before", array( 'ReduxAPI', 'loadExtensions' ), 0 );
+                    add_action( "redux/extensions/{$opt_name}/before", array( 'Redux', 'loadExtensions' ), 0 );
                 }
 
-                new ReduxFramework( $sections, $args );
+                $redux = new ReduxFramework( $sections, $args );
+                $redux->apiHasRun = 1;
             }
 
             public static function createRedux() {
@@ -390,5 +396,5 @@
             }
         }
 
-        ReduxAPI::load();
+        Redux::load();
     }

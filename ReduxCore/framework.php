@@ -43,6 +43,9 @@
 // Don't duplicate me!
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
+        // Redux API class  :)
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
+
         // General helper functions
         require_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
 
