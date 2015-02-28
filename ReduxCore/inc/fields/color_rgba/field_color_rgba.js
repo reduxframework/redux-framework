@@ -194,7 +194,7 @@
                 }
 
                 if (colorVal != 'transparent') {
-                    rgbaVal     = redux.field_objects.color_scheme.hexToRGBA(colorVal, alphaVal);
+                    rgbaVal     = redux.field_objects.color_rgba.hexToRGBA(colorVal, alphaVal);
                 } else {
                     rgbaVal     = 'transparent';
                 }

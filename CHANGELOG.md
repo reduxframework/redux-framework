@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.3.8
+* Fixed:    #2086 - color_rgba improperly functioning when transparent mode set to false.
+
 ## 3.4.3.7
 * Fixed     Import/Export bug where it wasn't running.
 * Modified  Locations of the core extensions directory as well as grunt configuration.
