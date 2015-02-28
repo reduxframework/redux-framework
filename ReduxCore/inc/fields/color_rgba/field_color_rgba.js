@@ -38,7 +38,7 @@
                     $(this).find('.redux-hidden-color').val(color);
                     $(this).find('.redux-hidden-alpha').val(alpha);
                     $(this).find('.redux-hidden-rgba').val(rgba);
-                    $(this).find('.redux-color-rgba').val(color).data('color', 'rgba(' + rgba).data('current-color', rgba);
+                    $(this).find('.redux-color-rgba').val(color).data('color', rgba).data('current-color', rgba);
 
                     try {
                         $(this).find('.redux-color-rgba').spectrum('set', rgba);
