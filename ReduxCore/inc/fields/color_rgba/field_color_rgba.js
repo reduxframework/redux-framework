@@ -22,6 +22,30 @@
         return result;        
     };
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-color_rgba' ).each(
+        function() {
+            $(this).on(
+                'redux/linked', function( event, index, value, colorNew ) {
+                    var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
+                    var alpha = ( value.alpha !== undefined && value.alpha !== true ) ? value.alpha : $(this).find('.redux-hidden-alpha').val();
+                    var rgba = ( color != 'transparent' ) ? redux.field_objects.color_rgba.hexToRGBA(color, alpha) : 'transparent';
+
+                    redux.options[index]['alpha'] = alpha;
+                    redux.options[index]['color'] = color;
+                    redux.options[index]['rgba'] = rgba;
+
+                    $(this).find('.redux-hidden-color').val(color);
+                    $(this).find('.redux-hidden-alpha').val(alpha);
+                    $(this).find('.redux-hidden-rgba').val(rgba);
+                    $(this).find('.redux-color-rgba').val(rgba).data('color', rgba).data('current-color', rgba);
+
+                    $(this).find('.redux-color-rgba').spectrum('set', rgba);
+                }
+            );
+        }
+    );
+
     redux.field_objects.color_rgba.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-color_rgba:visible' );
