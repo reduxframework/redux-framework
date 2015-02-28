@@ -40,7 +40,10 @@
                     $(this).find('.redux-hidden-rgba').val(rgba);
                     $(this).find('.redux-color-rgba').val(rgba).data('color', rgba).data('current-color', rgba);
 
-                    $(this).find('.redux-color-rgba').spectrum('set', rgba);
+                    try {
+                        $(this).find('.redux-color-rgba').spectrum('set', rgba);
+                    }
+                    catch(e) {}
                 }
             );
         }

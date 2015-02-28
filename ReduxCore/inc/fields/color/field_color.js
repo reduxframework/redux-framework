@@ -25,7 +25,12 @@
 
                     redux.options[index] = color;
 
-                    $(this).find( '.redux-color-init' ).wpColorPicker('color', color);
+                    $(this).find('.redux-color').val(color);
+
+                    try {
+                        $(this).find( '.redux-color-init' ).wpColorPicker('color', color);
+                    }
+                    catch(e) {}
                 }
             );
         }
