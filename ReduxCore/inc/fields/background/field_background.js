@@ -13,6 +13,24 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.background = redux.field_objects.background || {};
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-background' ).each(
+        function() {
+            $(this).on(
+                'redux/linked/color', function( event, index, value, colorNew ) {
+                    var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
+
+                    try {
+                        $(this).find( '.redux-color' ).wpColorPicker('color', color);
+                    }
+                    catch(e) {
+                        $(this).find('.redux-color').val(color);
+                    }
+                }
+            );
+        }
+    );
+
     redux.field_objects.background.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-background:visible' );
