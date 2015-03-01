@@ -42,7 +42,7 @@
                         $(this).find( '.redux-typography-color' ).wpColorPicker('color', color);
                     }
                     catch(e) {
-                        $(this).find('.redux-typography-color').val(color);
+                        $(this).find( '.redux-typography-color' ).val(color);
                     }
                 }
             );

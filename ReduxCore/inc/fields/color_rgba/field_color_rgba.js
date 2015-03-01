@@ -31,14 +31,14 @@
                     var alpha = ( value.alpha !== undefined && value.alpha !== true ) ? value.alpha : $(this).find('.redux-hidden-alpha').val();
                     var rgba = ( color != 'transparent' ) ? redux.field_objects.color_rgba.hexToRGBA(color, alpha) : 'transparent';
 
-                    if( $(this).find('.sp-replacer').length !== 0 ) {
-                        $(this).find('.redux-color-rgba').spectrum('set', rgba);
+                    if( $(this).find( '.sp-replacer' ).length !== 0 ) {
+                        $(this).find( '.redux-color-rgba' ).spectrum('set', rgba);
                     }
                     else {
-                        $(this).find('.redux-hidden-color').val(color);
-                        $(this).find('.redux-hidden-alpha').val(alpha);
-                        $(this).find('.redux-hidden-rgba').val(rgba);
-                        $(this).find('.redux-color-rgba').val(color).data('color', rgba).data('current-color', rgba);
+                        $(this).find( '.redux-hidden-color' ).val(color);
+                        $(this).find( '.redux-hidden-alpha' ).val(alpha);
+                        $(this).find( '.redux-hidden-rgba' ).val(rgba);
+                        $(this).find( '.redux-color-rgba' ).val(color).data('color', rgba).data('current-color', rgba);
                     }
                 }
             );

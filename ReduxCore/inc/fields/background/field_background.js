@@ -24,7 +24,7 @@
                         $(this).find( '.redux-color' ).wpColorPicker('color', color);
                     }
                     catch(e) {
-                        $(this).find('.redux-color').val(color);
+                        $(this).find( '.redux-color' ).val(color);
                     }
                 }
             );
