@@ -23,14 +23,12 @@
                 'redux/linked', function( event, index, value, colorNew ) {
                     var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
 
-                    redux.options[index] = color;
-
-                    $(this).find('.redux-color').val(color);
-
                     try {
                         $(this).find( '.redux-color-init' ).wpColorPicker('color', color);
                     }
-                    catch(e) {}
+                    catch(e) {
+                        $(this).find('.redux-color').val(color);
+                    }
                 }
             );
         }
