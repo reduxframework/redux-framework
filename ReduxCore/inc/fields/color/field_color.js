@@ -20,11 +20,11 @@
     $( document ).find( '.redux-group-tab' ).find( '.redux-container-color' ).each(
         function() {
             $(this).on(
-                'redux/linked', function( event, index, value, colorNew ) {
+                'redux/linked/color', function( event, index, value, colorNew ) {
                     var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
 
                     try {
-                        $(this).find( '.redux-color-init' ).wpColorPicker('color', color);
+                        $(this).find( '.redux-color' ).wpColorPicker('color', color);
                     }
                     catch(e) {
                         $(this).find('.redux-color').val(color);
@@ -66,7 +66,7 @@
                         var linked = $( this ).data( 'linked' );
                         if( linked !== undefined && linked !== null ) {
                             $.each(linked, function( index, value ) {
-                                $('#' + redux.args.opt_name + '-' + index).trigger( 'redux/linked', [ index, value, ui.color.toString() ] );
+                                $('#' + redux.args.opt_name + '-' + index).trigger( 'redux/linked/color', [ index, value, ui.color.toString() ] );
                             });
                         }
                     },

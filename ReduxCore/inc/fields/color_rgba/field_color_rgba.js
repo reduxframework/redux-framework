@@ -26,7 +26,7 @@
     $( document ).find( '.redux-group-tab' ).find( '.redux-container-color_rgba' ).each(
         function() {
             $(this).on(
-                'redux/linked', function( event, index, value, colorNew ) {
+                'redux/linked/color', function( event, index, value, colorNew ) {
                     var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
                     var alpha = ( value.alpha !== undefined && value.alpha !== true ) ? value.alpha : $(this).find('.redux-hidden-alpha').val();
                     var rgba = ( color != 'transparent' ) ? redux.field_objects.color_rgba.hexToRGBA(color, alpha) : 'transparent';
