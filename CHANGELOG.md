@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.3.8
+* Fixed     #2097 - Slash fix for ajax_save that was previously believed to be an isolated issue. Now applied on all ajax saves.
+
 ## 3.4.3.7
 * Fixed     Import/Export bug where it wasn't running.
 * Modified  Locations of the core extensions directory as well as grunt configuration.

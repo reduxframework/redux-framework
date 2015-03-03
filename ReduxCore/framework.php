@@ -73,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.3.7';
+            public static $_version = '3.4.3.8';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2648,9 +2648,8 @@
 
                     $values = array();
                     // Fix for apache magic quotes issues
-                    if ( get_magic_quotes_gpc() ) {
-                        $_POST['data'] = stripslashes_deep( $_POST['data'] );
-                    }
+                    $_POST['data'] = stripslashes_deep( $_POST['data'] );
+
                     parse_str( $_POST['data'], $values );
                     $values = $values[ $redux->args['opt_name'] ];
 
