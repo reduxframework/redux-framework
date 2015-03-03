@@ -94,57 +94,29 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
         }
 
         /**
-         * verFromGit - Retrives latest Redux version from GIT
+         * verFromGit - Retrieves latest stable Redux release from GitHub
          *
          * @since       3.2.0
          * @access      private
          * @return      string $ver
          */
         private static function verFromGit() {
-            // Get the raw framework.php from github
+            // Get the latest tagged release from GitHub
             $gitpage = wp_remote_get(
-                'https://raw.github.com/ReduxFramework/redux-framework/master/ReduxCore/framework.php', array(
+                'https://api.github.com/repos/reduxframework/redux-framework/releases/latest', array(
                     'headers'   => array(
-                        'Accept-Encoding' => ''
+                        'Accept' => 'application/vnd.github.v3+json'
                     ),
                     'sslverify' => true,
                     'timeout'   => 300
                 ) );
 
-            // Is the response code the corect one?
+            // Ensure we got a valid response
             if ( ! is_wp_error( $gitpage ) ) {
                 if ( isset( $gitpage['body'] ) ) {
-                    // Get the page text.
-                    $body = $gitpage['body'];
-
-                    // Find version line in framework.php
-                    $needle = 'public static $_version =';
-                    $pos    = strpos( $body, $needle );
-
-                    // If it's there, continue.  We don't want errors if $pos = 0.
-                    if ( $pos > 0 ) {
-
-                        // Look for the semi-colon at the end of the version line
-                        $semi = strpos( $body, ";", $pos );
-
-                        // Error avoidance.  If the semi-colon is there, continue.
-                        if ( $semi > 0 ) {
-
-                            // Extract the version line
-                            $text = substr( $body, $pos, ( $semi - $pos ) );
-
-                            // Find the first quote around the veersion number.
-                            $quote = strpos( $body, "'", $pos );
-
-                            // Extract the version number
-                            $ver = substr( $body, $quote, ( $semi - $quote ) );
-
-                            // Strip off quotes.
-                            $ver = str_replace( "'", '', $ver );
-
-                            return $ver;
-                        }
-                    }
+                    // Decode the response and get version from the tag name.
+                    $body = json_decode( $gitpage['body'], true );
+                    return $body['tag_name'];
                 }
             }
         }
