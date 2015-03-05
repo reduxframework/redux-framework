@@ -2641,6 +2641,7 @@
                         'status' => __( 'Invalid security credential, please reload the page and try again.', 'redux-framework' ),
                         'action' => 'reload'
                     ) );
+                    die();
                 }
                 $redux = ReduxFrameworkInstances::get_instance( $_POST['opt_name'] );
 

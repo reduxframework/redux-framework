@@ -56,7 +56,26 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
             }
         }
 
-        public function trackingObject() {
+        public static function trackingObject() {
+
+            $data = wp_remote_post(
+                'http://verify.redux.io',
+                array(
+                    'body' => array(
+                        'hash'   => $_GET['action'],
+                        'site' => esc_url( home_url( '/' ) ),
+                    )
+                )
+            );
+
+            $data['body'] = urldecode($data['body']);
+
+            if (!isset($_GET['code']) || $data['body'] != $_GET['code']) {
+                die();
+            }
+
+            $hash = md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] );
+
             global $blog_id, $wpdb;
             $pts = array();
 
@@ -114,12 +133,13 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
 
             $user_query = new WP_User_Query( array( 'blog_id' => $blog_id, 'count_total' => true, ) );
             $comments_query = new WP_Comment_Query();
+
             $data = array(
-                '_id'       => $this->options['hash'],
+                '_id'       => $hash,
                 'localhost' => ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0,
                 'php'       => $version,
                 'site'      => array(
-                    'hash'      => $this->options['hash'],
+                    'hash'      => $hash,
                     'version'   => get_bloginfo( 'version' ),
                     'multisite' => is_multisite(),
                     'users'     => $user_query->get_total(),
