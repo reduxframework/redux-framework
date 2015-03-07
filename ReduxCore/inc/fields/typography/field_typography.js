@@ -31,6 +31,24 @@
         }
     );
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-typography' ).each(
+        function() {
+            $(this).on(
+                'redux/linked/color', function( event, index, value, colorNew ) {
+                    var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
+
+                    try {
+                        $(this).find( '.redux-typography-color' ).wpColorPicker('color', color);
+                    }
+                    catch(e) {
+                        $(this).find( '.redux-typography-color' ).val(color);
+                    }
+                }
+            );
+        }
+    );
+
     redux.field_objects.typography.init = function( selector ) {
 
         if ( !selector ) {

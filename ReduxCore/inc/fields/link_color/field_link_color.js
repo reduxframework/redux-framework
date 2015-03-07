@@ -16,6 +16,33 @@
         }
     );
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-link_color' ).each(
+        function() {
+            $(this).on(
+                'redux/linked/color', function( event, index, value, colorNew ) {
+                    var regular = ( value.regular !== undefined && value.regular !== true ) ? value.regular : colorNew;
+                    var hover = ( value.hover !== undefined && value.hover !== true ) ? value.hover : colorNew;
+                    var visited = ( value.visited !== undefined && value.visited !== true ) ? value.visited : colorNew;
+                    var active = ( value.active !== undefined && value.active !== true ) ? value.active : colorNew;
+
+                    try {
+                        $(this).find( '.redux-color-regular' ).wpColorPicker('color', regular);
+                        $(this).find( '.redux-color-hover' ).wpColorPicker('color', hover);
+                        $(this).find( '.redux-color-visited' ).wpColorPicker('color', visited);
+                        $(this).find( '.redux-color-active' ).wpColorPicker('color', active);
+                    }
+                    catch(e) {
+                        $(this).find( '.redux-color-regular' ).val(regular);
+                        $(this).find( '.redux-color-hover' ).val(hover);
+                        $(this).find( '.redux-color-visited' ).val(visited);
+                        $(this).find( '.redux-color-active' ).val(active);
+                    }
+                }
+            );
+        }
+    );
+
     redux.field_objects.link_color.init = function( selector ) {
 
         if ( !selector ) {

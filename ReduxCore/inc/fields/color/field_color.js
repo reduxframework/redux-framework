@@ -16,6 +16,24 @@
         }
     );
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-color' ).each(
+        function() {
+            $(this).on(
+                'redux/linked/color', function( event, index, value, colorNew ) {
+                    var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
+
+                    try {
+                        $(this).find( '.redux-color' ).wpColorPicker('color', color);
+                    }
+                    catch(e) {
+                        $(this).find( '.redux-color' ).val(color);
+                    }
+                }
+            );
+        }
+    );
+
     redux.field_objects.color.init = function( selector ) {
         
         if ( !selector ) {
@@ -41,9 +59,16 @@
                 }
                 
                 el.find( '.redux-color-init' ).wpColorPicker({
-                    change: function( u ) {
+                    change: function( event, ui ) {
                         redux_change( $( this ) );
-                        el.find( '#' + u.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                        el.find( '#' + event.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+
+                        var linked = $( this ).data( 'linked' );
+                        if( linked !== undefined && linked !== null ) {
+                            $.each(linked, function( index, value ) {
+                                $('#' + redux.args.opt_name + '-' + index).trigger( 'redux/linked/color', [ index, value, ui.color.toString() ] );
+                            });
+                        }
                     },
                     clear: function() {
                         redux_change( $( this ).parent().find( '.redux-color-init' ) );

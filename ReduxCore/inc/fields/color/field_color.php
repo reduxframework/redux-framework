@@ -59,7 +59,12 @@ if ( ! class_exists( 'ReduxFramework_color' ) ) {
          */
         public function render() {
 
-            echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '" data-oldcolor=""  data-default-color="' . ( isset( $this->field['default'] ) ? $this->field['default'] : "" ) . '" />';
+            $linked   = '';
+            if ( isset( $this->field['linked'] ) && $this->field['linked'] !== false ) {
+                $linked = ' data-linked="' . htmlspecialchars( json_encode( $this->field['linked'] ), ENT_QUOTES, 'UTF-8' ) . '"';
+            }
+
+            echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '" data-oldcolor=""  data-default-color="' . ( isset( $this->field['default'] ) ? $this->field['default'] : "" ) . '" ' . $linked . ' />';
             echo '<input type="hidden" class="redux-saved-color" id="' . $this->field['id'] . '-saved-color' . '" value="">';
 
             if ( ! isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {

@@ -16,6 +16,24 @@
         }
     );
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-border' ).each(
+        function() {
+            $(this).on(
+                'redux/linked/color', function( event, index, value, colorNew ) {
+                    var color = ( value.color !== undefined && value.color !== true ) ? value.color : colorNew;
+
+                    try {
+                        $(this).find( '.redux-border-color' ).wpColorPicker('color', color);
+                    }
+                    catch(e) {
+                        $(this).find( '.redux-border-color' ).val(color);
+                    }
+                }
+            );
+        }
+    );
+
     redux.field_objects.border.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-border:visible' );

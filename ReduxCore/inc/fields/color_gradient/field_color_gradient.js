@@ -18,6 +18,27 @@
         }
     );
 
+    // Set the color to the linked one
+    $( document ).find( '.redux-group-tab' ).find( '.redux-container-color_gradient' ).each(
+        function() {
+            $(this).on(
+                'redux/linked/color', function( event, index, value, colorNew ) {
+                    var from = ( value.from !== undefined && value.from !== true ) ? value.from : colorNew;
+                    var to = ( value.to !== undefined && value.to !== true ) ? value.to : colorNew;
+
+                    try {
+                        $(this).find( '.redux-color-from' ).wpColorPicker('color', from);
+                        $(this).find( '.redux-color-to' ).wpColorPicker('color', to);
+                    }
+                    catch(e) {
+                        $(this).find( '.redux-color-from' ).val(from);
+                        $(this).find( '.redux-color-to' ).val(to);
+                    }
+                }
+            );
+        }
+    );
+
     redux.field_objects.color_gradient.init = function( selector ) {
 
         if ( !selector ) {

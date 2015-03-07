@@ -66,7 +66,7 @@ if ( ! class_exists( 'ReduxFramework_color_gradient' ) ) {
             $this->value = wp_parse_args( $this->value, $defaults );
 
             echo '<div class="colorGradient"><strong>' . __( 'From ', 'redux-framework' ) . '</strong>&nbsp;';
-            echo '<input data-id="' . $this->field['id'] . '" id="' . $this->field['id'] . '-from" name="' . $this->field['name'] . $this->field['name_suffix'] . '[from]' . '" value="' . $this->value['from'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['from'] . '" />';
+            echo '<input data-id="' . $this->field['id'] . '" id="' . $this->field['id'] . '-from" name="' . $this->field['name'] . $this->field['name_suffix'] . '[from]' . '" value="' . $this->value['from'] . '" class="redux-color redux-color-from redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['from'] . '" />';
             echo '<input type="hidden" class="redux-saved-color" id="' . $this->field['id'] . '-saved-color' . '" value="">';
 
             if ( ! isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
@@ -79,7 +79,7 @@ if ( ! class_exists( 'ReduxFramework_color_gradient' ) ) {
                 echo '<label for="' . $this->field['id'] . '-from-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-from-transparency" data-id="' . $this->field['id'] . '-from" value="1"' . $tChecked . '> ' . __( 'Transparent', 'redux-framework' ) . '</label>';
             }
             echo "</div>";
-            echo '<div class="colorGradient toLabel"><strong>' . __( 'To ', 'redux-framework' ) . '</strong>&nbsp;<input data-id="' . $this->field['id'] . '" id="' . $this->field['id'] . '-to" name="' . $this->field['name'] . $this->field['name_suffix'] . '[to]' . '" value="' . $this->value['to'] . '" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['to'] . '" />';
+            echo '<div class="colorGradient toLabel"><strong>' . __( 'To ', 'redux-framework' ) . '</strong>&nbsp;<input data-id="' . $this->field['id'] . '" id="' . $this->field['id'] . '-to" name="' . $this->field['name'] . $this->field['name_suffix'] . '[to]' . '" value="' . $this->value['to'] . '" class="redux-color redux-color-to redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['to'] . '" />';
 
             if ( ! isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
                 $tChecked = "";
