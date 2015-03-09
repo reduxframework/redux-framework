@@ -74,6 +74,10 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 'color'           => true,
                 'preview'         => true,
                 'line-height'     => true,
+                'multi' => array(
+                    'subset' => true,
+                    'weight' => true,
+                ),
                 'word-spacing'    => false,
                 'letter-spacing'  => false,
                 'google'          => true,
@@ -273,7 +277,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
                 echo '<input type="hidden" class="typography-font-weight" name="' . $this->field['name'] . $this->field['name_suffix'] . '[font-weight]' . '" value="' . $this->value['font-weight'] . '" data-id="' . $this->field['id'] . '"  /> ';
                 echo '<input type="hidden" class="typography-font-style" name="' . $this->field['name'] . $this->field['name_suffix'] . '[font-style]' . '" value="' . $this->value['font-style'] . '" data-id="' . $this->field['id'] . '"  /> ';
-                echo '<select data-placeholder="' . __( 'Style', 'redux-framework' ) . '" class="redux-typography redux-typography-style select' . $this->field['class'] . '" original-title="' . __( 'Font style', 'redux-framework' ) . '" id="' . $this->field['id'] . '_style" data-id="' . $this->field['id'] . '" data-value="' . $style . '">';
+                $multi = ( isset( $this->field['multi']['weight'] ) && $this->field['multi']['weight'] ) ? ' multiple="multiple"' : "";
+                echo '<select' . $multi . ' data-placeholder="' . __( 'Style', 'redux-framework' ) . '" class="redux-typography redux-typography-style select' . $this->field['class'] . '" original-title="' . __( 'Font style', 'redux-framework' ) . '" id="' . $this->field['id'] . '_style" data-id="' . $this->field['id'] . '" data-value="' . $style . '">';
 
                 if ( empty( $this->value['subset'] ) || empty( $this->value['font-weight'] ) ) {
                     echo '<option value=""></option>';
@@ -316,7 +321,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 echo '<div class="select_wrapper typography-script tooltip" original-title="' . __( 'Font subsets', 'redux-framework' ) . '">';
                 echo '<input type="hidden" class="typography-subsets" name="' . $this->field['name'] . $this->field['name_suffix'] . '[subsets]' . '" value="' . $this->value['subsets'] . '" data-id="' . $this->field['id'] . '"  /> ';
                 echo '<label>' . __( 'Font Subsets', 'redux-framework' ) . '</label>';
-                echo '<select data-placeholder="' . __( 'Subsets', 'redux-framework' ) . '" class="redux-typography redux-typography-subsets' . $this->field['class'] . '" original-title="' . __( 'Font script', 'redux-framework' ) . '"  id="' . $this->field['id'] . '-subsets" data-value="' . $this->value['subsets'] . '" data-id="' . $this->field['id'] . '" >';
+                $multi = ( isset( $this->field['multi']['subset'] ) && $this->field['multi']['subset'] ) ? ' multiple="multiple"' : "";
+                echo '<select'.$multi.' data-placeholder="' . __( 'Subsets', 'redux-framework' ) . '" class="redux-typography redux-typography-subsets' . $this->field['class'] . '" original-title="' . __( 'Font script', 'redux-framework' ) . '"  id="' . $this->field['id'] . '-subsets" data-value="' . $this->value['subsets'] . '" data-id="' . $this->field['id'] . '" >';
 
                 if ( empty( $this->value['subsets'] ) ) {
                     echo '<option value=""></option>';
@@ -824,6 +830,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                             } else {
                                 $font['font-options'] = json_decode( $font['font-options'], true );
                             }
+                            //print_r($font['font-options']);
+                            //exit();
                         }
 
                         if ( isset( $font['font-options'] ) && ! empty( $font['font-options'] ) && isset( $this->field['all-styles'] ) && filter_var( $this->field['all-styles'], FILTER_VALIDATE_BOOLEAN ) ) {

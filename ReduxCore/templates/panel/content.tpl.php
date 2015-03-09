@@ -17,13 +17,14 @@
 	<div id="redux-intro-text"><?php echo $this->parent->args['intro_text']; ?></div>
 <?php endif; ?>
 
-<!-- Stickybar -->
-<?php $this->get_template( 'header_stickybar.tpl.php' ); ?>
+
 
 
 <?php $this->get_template( 'menu_container.tpl.php' ); ?>
 
 <div class="redux-main">
+	<!-- Stickybar -->
+	<?php $this->get_template( 'header_stickybar.tpl.php' ); ?>
 	<div id="redux_ajax_overlay">&nbsp;</div>
 	<?php
 		foreach ( $this->parent->sections as $k => $section ) {
@@ -113,8 +114,8 @@
 		do_action( "redux/page/{$this->parent->args['opt_name']}/sections/after", $this );
 	?>
 	<div class="clear"></div>
+	<!-- Footer Block -->
+	<?php $this->get_template( 'footer.tpl.php' ); ?>
+	<div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
 </div>
 <div class="clear"></div>
-
-<!-- Footer Block -->
-<?php $this->get_template( 'footer.tpl.php' ); ?>

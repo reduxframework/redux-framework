@@ -15,7 +15,6 @@
                 var win = $( window );
                 var viewport = {
                     top: win.scrollTop(),
-                    left: win.scrollLeft()
                 };
 
                 viewport.right = viewport.left + win.width();
@@ -259,6 +258,7 @@
                 height: stickyHeight
             }
         );
+        $('#redux-footer-sticky' ).removeClass('hide');
 
         if ( $( '#redux-footer' ).length !== 0 ) {
             $( window ).scroll(
@@ -1163,25 +1163,21 @@
     };
 
     $.redux.stickyInfo = function() {
-        var stickyWidth = $( '#info_bar' ).width() - 4;
+        var stickyWidth = $( '.redux-main' ).innerWidth() - 20;
 
         if ( !$( '#info_bar' ).isOnScreen() && !$( '#redux-footer-sticky' ).isOnScreen() ) {
-            $( '#redux-sticky' ).addClass( 'sticky-save-warn' );
-
             $( '#redux-footer' ).css(
                 {
                     position: 'fixed',
                     bottom: '0',
-                    width: stickyWidth
+                    width: stickyWidth,
+                    right: 21
                 }
             );
-
             $( '#redux-footer' ).addClass( 'sticky-footer-fixed' );
             $( '.redux-save-warn' ).css( 'left', $( '#redux-sticky' ).offset().left );
             $( '#redux-sticky-padder' ).show();
         } else {
-            $( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
-
             $( '#redux-footer' ).css(
                 {
                     background: '#eee',
@@ -1190,9 +1186,13 @@
                     width: 'inherit'
                 }
             );
-
             $( '#redux-sticky-padder' ).hide();
             $( '#redux-footer' ).removeClass( 'sticky-footer-fixed' );
+        }
+        if (!$( '#info_bar' ).isOnScreen()) {
+            $( '#redux-sticky' ).addClass( 'sticky-save-warn' );
+        } else {
+            $( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
         }
     };
 

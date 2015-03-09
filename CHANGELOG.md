@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.4.4
+* Fixed:    Odd typography bug no one has reported.
+* Modified: Sticky header and footer to remain within the redux-main container.
+
 ## 3.4.3.9
 * Fixed     #2097 - Slash fix for ajax_save that was previously believed to be an isolated issue. Now applied on all ajax saves.
 
