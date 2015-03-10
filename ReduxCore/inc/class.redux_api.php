@@ -2,7 +2,6 @@
 
     /**
      * Redux Framework API Class
-     *
      * Makes instantiating a Redux object an absolute piece of cake.
      *
      * @package     Redux_Framework
@@ -79,8 +78,8 @@
             }
 
             public static function loadRedux( $opt_name = "" ) {
-                $check = ReduxFrameworkInstances::get_instance($opt_name);
-                if (isset($check->apiHasRun)) {
+                $check = ReduxFrameworkInstances::get_instance( $opt_name );
+                if ( isset( $check->apiHasRun ) ) {
                     return;
                 }
 
@@ -95,7 +94,7 @@
                     add_action( "redux/extensions/{$opt_name}/before", array( 'Redux', 'loadExtensions' ), 0 );
                 }
 
-                $redux = new ReduxFramework( $sections, $args );
+                $redux            = new ReduxFramework( $sections, $args );
                 $redux->apiHasRun = 1;
             }
 
@@ -255,6 +254,22 @@
                 self::check_opt_name( $opt_name );
                 if ( ! empty( $opt_name ) && ! empty( $args ) && is_array( $args ) ) {
                     self::$args[ $opt_name ] = wp_parse_args( $args, self::$args[ $opt_name ] );
+                }
+            }
+
+            public static function getArgs( $opt_name = "" ) {
+                self::check_opt_name( $opt_name );
+                if ( ! empty( $opt_name ) && ! empty( self::$args[ $opt_name ] ) ) {
+                    return self::$args[ $opt_name ];
+                }
+            }
+
+            public static function getArg( $opt_name = "", $key = "" ) {
+                self::check_opt_name( $opt_name );
+                if ( ! empty( $opt_name ) && ! empty( $key ) && ! empty( self::$args[ $opt_name ] ) ) {
+                    return self::$args[ $opt_name ][ $key ];
+                } else {
+                    return;
                 }
             }
 
