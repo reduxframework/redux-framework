@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.4.1
+* Fixed:    #2118 - Typography JS error.
+
 ## 3.4.4
 * Fixed:    Odd typography bug no one has reported.
 * Modified: Sticky header and footer to remain within the redux-main container.
