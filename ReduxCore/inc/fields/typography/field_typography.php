@@ -75,8 +75,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 'preview'         => true,
                 'line-height'     => true,
                 'multi' => array(
-                    'subset' => true,
-                    'weight' => true,
+                    'subset' => false,
+                    'weight' => false,
                 ),
                 'word-spacing'    => false,
                 'letter-spacing'  => false,

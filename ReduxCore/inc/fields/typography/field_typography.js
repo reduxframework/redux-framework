@@ -518,11 +518,11 @@
                 //add reference to google font family
                 var link = the_font;
 
-                if ( style !== "" ) {
+                if ( style && style !== "" ) {
                     link += ':' + style.replace( /\-/g, " " );
                 }
 
-                if ( script !== "" ) {
+                if ( script && script !== "" ) {
                     link += '&subset=' + script;
                 }
 
