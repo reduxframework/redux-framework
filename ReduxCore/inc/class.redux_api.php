@@ -172,6 +172,13 @@
                 self::check_opt_name( $opt_name );
                 if ( ! isset( $section['id'] ) ) {
                     $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
+                    if ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
+                        $orig = $section['id'];
+                        $i    = 0;
+                        while ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
+                            $section['id'] = $orig . '_' . $i;
+                        }
+                    }
                 }
 
                 if ( ! empty( $opt_name ) && is_array( $section ) && ! empty( $section ) ) {
