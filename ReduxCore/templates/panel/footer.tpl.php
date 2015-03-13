@@ -27,7 +27,7 @@
 					<a href="<?php echo $link['url'] ?>" title="<?php echo $link['title']; ?>" target="_blank">
 
 						<?php if ( isset( $link['icon'] ) && ! empty( $link['icon'] ) ) : ?>
-							<i class="<?php echo $link['icon'] ?>"></i>
+							<i class="el <?php echo $link['icon'] ?>"></i>
 						<?php else : ?>
 							<img src="<?php echo $link['img'] ?>"/>
 						<?php endif; ?>
