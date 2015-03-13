@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.4.2
+* Fixed:    #2125 - Compiler not firing on first save, when using ajax_save.
+
 ## 3.4.4.1
 * Fixed:    #2118 - Typography JS error.
 
