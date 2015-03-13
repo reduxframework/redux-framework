@@ -29,7 +29,7 @@
 						<?php if ( isset( $link['icon'] ) && ! empty( $link['icon'] ) ) : ?>
 							<i class="<?php echo $link['icon'] ?>"></i>
 						<?php else : ?>
-							<img src="<?php $link['img'] ?>"/>
+							<img src="<?php echo $link['img'] ?>"/>
 						<?php endif; ?>
 
 					</a>

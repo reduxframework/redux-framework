@@ -2262,7 +2262,7 @@
                     do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS, $this->transients['changed_values'] ); // REMOVE
 
                     /**
-                     * action 'redux/options/{opt_name}/compiler'
+                     * action 'redux/options/{opt_name}a'
                      *
                      * @param array  options
                      * @param string CSS that get sent to the compiler hook
@@ -2693,11 +2693,42 @@
                     } else {
                         echo json_encode( array( 'status' => __( 'Your panel has no fields. Nothing to save.', 'redux-framework' ) ) );
                     }
-
-
-                    die ();
                 }
+                if ( isset ( $this->transients['run_compiler'] ) && $this->transients['run_compiler'] ) {
 
+                    $this->no_output = true;
+                    $this->_enqueue_output();
+
+
+                    /**
+                     * action 'redux-compiler-{opt_name}'
+                     *
+                     * @deprecated
+                     *
+                     * @param array  options
+                     * @param string CSS that get sent to the compiler hook
+                     */
+                    do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS, $this->transients['changed_values'] ); // REMOVE
+
+                    /**
+                     * action 'redux/options/{opt_name}/compiler'
+                     *
+                     * @param array  options
+                     * @param string CSS that get sent to the compiler hook
+                     */
+                    do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
+
+                    /**
+                     * action 'redux/options/{opt_name}/compiler/advanced'
+                     *
+                     * @param array  options
+                     * @param string CSS that get sent to the compiler hook, which sends the full Redux object
+                     */
+                    do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $this );
+
+                    unset ( $this->transients['run_compiler'] );
+                    $this->set_transients();
+                }
 
                 die ();
             }
