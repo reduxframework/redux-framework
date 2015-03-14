@@ -250,6 +250,14 @@
                         ) );
                         $panel = $section['id'];
 
+                        $wp_customize->add_section( $section['id'], array(
+                            'title'       => $section['title'],
+                            'priority'    => $section['priority'],
+                            'description' => $section['desc'],
+                            'panel'       => $panel
+                        ) );
+
+
                     } else {
                         if ( ! isset( $section['subsection'] ) || ( isset( $section['subsection'] ) && $section['subsection'] != true ) ) {
                             $panel = "";
