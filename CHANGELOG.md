@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.4.4.3
+* Fixed:    #2133 - Ajax save adding extra backspashes in PHP 5.2 only (They didn't use array map properly).
+* Fixed:    Customizer wasn't working. Thanks @sgssandhu!
+
 ## 3.4.4.2
 * Fixed:    #2125 - Compiler not firing on first save, when using ajax_save.
 

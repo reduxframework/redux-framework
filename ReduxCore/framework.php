@@ -73,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.4.2';
+            public static $_version = '3.4.4.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2636,6 +2636,7 @@
             }
 
             public function ajax_save() {
+
                 if ( ! wp_verify_nonce( $_REQUEST['nonce'], "redux_ajax_nonce" ) ) {
                     json_encode( array(
                         'status' => __( 'Invalid security credential, please reload the page and try again.', 'redux-framework' ),
@@ -2648,11 +2649,9 @@
                 if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
 
                     $values = array();
-                    // Fix for apache magic quotes issues
-                    $_POST['data'] = stripslashes_deep( $_POST['data'] );
-
                     parse_str( $_POST['data'], $values );
                     $values = $values[ $redux->args['opt_name'] ];
+                    $values = array_map( 'stripslashes_deep', $values );
 
                     if ( ! empty ( $values ) ) {
                         try {
