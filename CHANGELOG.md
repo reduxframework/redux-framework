@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.4.4
+* Added:    `full_width` arg now makes ANY field full-width.  :)
+
 ## 3.4.4.3
 * Fixed:    #2133 - Ajax save adding extra backspashes in PHP 5.2 only (They didn't use array map properly).
 * Fixed:    Customizer wasn't working. Thanks @sgssandhu!

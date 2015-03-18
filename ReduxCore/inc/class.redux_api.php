@@ -207,6 +207,9 @@
             public static function processFieldsArray( $opt_name = "", $section_id = "", $fields = array() ) {
                 if ( ! empty( $opt_name ) && ! empty( $section_id ) && is_array( $fields ) && ! empty( $fields ) ) {
                     foreach ( $fields as $field ) {
+                        if ( ! is_array( $field ) ) {
+                            continue;
+                        }
                         $field['section_id'] = $section_id;
                         self::setField( $opt_name, $field );
                     }

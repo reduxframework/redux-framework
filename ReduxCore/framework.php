@@ -73,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.4.3';
+            public static $_version = '3.4.4.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -3282,6 +3282,10 @@
                         $hidden = '';
                         if ( isset ( $field['hidden'] ) && $field['hidden'] ) {
                             $hidden = 'hidden ';
+                        }
+
+                        if ( isset( $field['full_width'] ) && $field['full_width'] == true ) {
+                            $class_string .= "redux_remove_th";
                         }
 
                         echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="' . $hidden . 'redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="' . $field['type'] . '">';

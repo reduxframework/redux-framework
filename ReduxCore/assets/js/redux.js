@@ -97,7 +97,8 @@
                 },
                 error: function( response ) {
                     if ( !window.console ) console = {};
-                    console.log = console.log || function( name, data ) {};
+                    console.log = console.log || function( name, data ) {
+                    };
                     console.log( redux.ajax.console );
                     console.log( response.responseText );
                     jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
@@ -258,7 +259,7 @@
                 height: stickyHeight
             }
         );
-        $('#redux-footer-sticky' ).removeClass('hide');
+        $( '#redux-footer-sticky' ).removeClass( 'hide' );
 
         if ( $( '#redux-footer' ).length !== 0 ) {
             $( window ).scroll(
@@ -615,6 +616,14 @@
                 //console.log(type);
                 if ( redux.field_objects[type] ) {
                     redux.field_objects[type].init();
+                }
+                if ( $( this ).hasClass( 'redux_remove_th' ) ) {
+                    var tr = $( this ).parents( 'tr:first' );
+                    var th = tr.find( 'th:first' );
+                    $( this ).prepend( th.html() );
+                    $( this ).find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
+                    $( this ).parent().attr( 'colspan', '2' );
+                    th.remove();
                 }
             }
         );
@@ -1189,7 +1198,7 @@
             $( '#redux-sticky-padder' ).hide();
             $( '#redux-footer' ).removeClass( 'sticky-footer-fixed' );
         }
-        if (!$( '#info_bar' ).isOnScreen()) {
+        if ( !$( '#info_bar' ).isOnScreen() ) {
             $( '#redux-sticky' ).addClass( 'sticky-save-warn' );
         } else {
             $( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
