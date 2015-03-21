@@ -106,6 +106,7 @@
             remove_submenu_page( 'tools.php', 'redux-credits' );
             remove_submenu_page( 'tools.php', 'redux-support' );
             remove_submenu_page( 'tools.php', 'redux-extensions' );
+            remove_submenu_page( 'tools.php', 'redux-status' );
 
         }
 
@@ -172,7 +173,7 @@
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab <?php echo $selected == 'redux-about' ? 'nav-tab-active' : ''; ?>"
                    href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'tools.php' ) ) ); ?>">
-                    <?php _e( "About Redux", 'redux-framework' ); ?>
+                    <?php _e( "What's New", 'redux-framework' ); ?>
                 </a>
                 <a class="nav-tab <?php echo $selected == 'redux-support' ? 'nav-tab-active' : ''; ?>"
                    href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-support' ), 'tools.php' ) ) ); ?>">
@@ -189,6 +190,10 @@
                 <a class="nav-tab <?php echo $selected == 'redux-credits' ? 'nav-tab-active' : ''; ?>"
                    href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-credits' ), 'tools.php' ) ) ); ?>">
                     <?php _e( 'Credits', 'redux-framework' ); ?>
+                </a>
+                <a class="nav-tab <?php echo $selected == 'redux-status' ? 'nav-tab-active' : ''; ?>"
+                   href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-status' ), 'tools.php' ) ) ); ?>">
+                    <?php _e( 'Status', 'redux-framework' ); ?>
                 </a>
             </h2>
         <?php
@@ -239,12 +244,12 @@
                     <div class="changelog about-integrations">
                         <div class="wc-feature feature-section col three-col">
                             <div>
-                                <h4>Ajax Saving & Improvements</h4>
+                                <h4>Ajax Saving & More Speed!</h4>
                                 <p>This version the fastest Redux ever released. We've integrated ajax_saving as well as many other speed improvments to make Redux even surpass the load time of <a href="https://github.com/syamilmj/Options-Framework" target="_blank">SMOF</a> even with large panels.</p>
                             </div>
                             <div>
-                                <h4>Full Width for ANY Field</h4>
-                                <p>Any field can now be set to full width! Just set the <code>full_width</code> argument and your field will expand to the full width of your panel or metabox.</p>
+                                <h4>The New Redux API</h4>
+                                <p>We've gone back to the drawing boards and made Redux the <strong>simplist</strong> framework to use. Introducing the Redux API. Easily add fields, extensions, templates, and more without every having to define a class! <a href="" target="_blank">Learn More</a></p>
                             </div>
                             <div class="last-feature">
                                 <h4>Security Improvments</h4>
@@ -259,8 +264,8 @@
                                 <p>Now developers can easily customize the Redux panel by declaring a templates location path. We've also made use of template versioning so if we change anything, you will know.</p>
                             </div>
                             <div>
-                                <h4>General Bug Fixes</h4>
-                                <p>This release features over 26+ minor versions and a myriad of bug fixes. We're going far beyond stability here to nitpicky fixes.  ;)</p>
+                                <h4>Full Width for ANY Field</h4>
+                                <p>Any field can now be set to full width! Just set the <code>full_width</code> argument and your field will expand to the full width of your panel or metabox.</p>
                             </div>
                             <div class="last-feature">
                                 <h4>Elusive Icons Update</h4>
