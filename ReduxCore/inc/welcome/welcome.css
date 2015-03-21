@@ -377,3 +377,27 @@ figure p {
 .userType a:hover {
     border: #aaa 5px dashed;
 }
+
+.redux-message .twitter-share-button, p.redux-actions .twitter-share-button {
+    margin-top: -3px;
+    margin-left: 3px;
+    vertical-align: middle;
+}
+.redux-message a.donate, .redux-message a.review-us, p.redux-actions a.donate, p.redux-actions a.review-us {
+    opacity: .5;
+    text-decoration: none!important;
+}
+#redux-message {
+    margin-top: 15px;
+    display:block !important;
+    margin: 5px 0 15px;
+    border-color: #00A2E3;
+}
+
+#redux-message h4 {
+    margin-top: .5em;
+}
+
+#redux-message {
+    margin-top: 15px;
+}
