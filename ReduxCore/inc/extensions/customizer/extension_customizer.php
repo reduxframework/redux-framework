@@ -93,12 +93,12 @@
                     ), 100 );
 
                     //if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
-                        if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
-                            add_action( 'customize_register', array(
-                                $this,
-                                '_register_customizer_controls'
-                            ) ); // Create controls
-                        }
+                    if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
+                        add_action( 'customize_register', array(
+                            $this,
+                            '_register_customizer_controls'
+                        ) ); // Create controls
+                    }
                     //}
 
                     add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
@@ -388,7 +388,25 @@
                                     continue;
                                 }
 
+                                $newOptions = array();
+                                foreach ( $option['options'] as $key => $value ) {
+                                    if ( is_array( $value ) ) {
+                                        foreach ( $value as $key => $v ) {
+                                            $newOptions[] = $v;
+                                        }
+
+                                    }
+                                }
+
+                                if ( ! empty( $newOptions ) ) {
+                                    $option['options'] = $newOptions;
+                                }
+
                                 if ( ( isset( $option['sortable'] ) && $option['sortable'] ) ) {
+                                    continue;
+                                }
+
+                                if ( ( isset( $option['multi'] ) && $option['multi'] ) ) {
                                     continue;
                                 }
 

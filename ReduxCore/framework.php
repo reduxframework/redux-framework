@@ -73,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.4.4';
+            public static $_version = '3.4.4.5';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2648,7 +2648,8 @@
 
                 if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
 
-                    $values = array();
+                    $values        = array();
+                    $_POST['data'] = stripslashes( $_POST['data'] );
                     parse_str( $_POST['data'], $values );
                     $values = $values[ $redux->args['opt_name'] ];
                     $values = array_map( 'stripslashes_deep', $values );
