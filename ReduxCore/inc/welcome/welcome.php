@@ -68,6 +68,14 @@
                 )
             );
 
+            // About Page
+            add_management_page(
+                __( 'Redux Framework Status', 'redux-framework' ), __( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-status', array(
+                    $this,
+                    'status_screen'
+                )
+            );
+
             // Changelog Page
             add_management_page(
                 __( 'Redux Framework Changelog', 'redux-framework' ), __( 'Redux Framework Changelog', 'redux-framework' ), $this->minimum_capability, 'redux-changelog', array(
@@ -236,77 +244,8 @@
          */
         public function about_screen() {
 
+            include_once('views/about.php');
 
-            ?>
-            <div class="wrap about-wrap">
-                <h1><?php printf( __( 'Welcome to Redux Framework %s', 'redux-framework' ), $this->display_version ); ?></h1>
-
-                <div
-                    class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Redux Framework %s is a huge step forward in Redux Development. Look at all that\'s new.', 'redux-framework' ), $this->display_version ); ?></div>
-                <div
-                    class="redux-badge"><i
-                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
-                </div>
-                <p class="redux-actions">
-                    <a href="http://docs.reduxframework.com/" class="docs button button-primary">Docs</a>
-                    <a href="https://wordpress.org/plugins/redux-framework/" class="review-us button button-primary" target="_blank">Review Us</a>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW" class="review-us button button-primary" target="_blank">Donate</a>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://reduxframework.com" data-text="Reduce your dev time! Redux is the most powerful option framework for WordPress on the web" data-via="ReduxFramework" data-size="large" data-hashtags="Redux">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </p>
-
-                <?php $this->tabs(); ?>
-
-                <div id="redux-message" class="updated">
-                    <h4>What is Redux Framework?</h4>
-                    <p>Redux Framework is the core of many products on the web. It is an option framework which developers use to enhance their products..</p>
-                    <p class="submit">
-                        <a class="button-primary" href="http://reduxframework.com" target="_blank">Learn More</a>
-                    </p>
-                </div>
-
-                <div class="changelog">
-
-                    <h2>New in this Release</h2>
-
-                    <div class="changelog about-integrations">
-                        <div class="wc-feature feature-section col three-col">
-                            <div>
-                                <h4>Ajax Saving & More Speed!</h4>
-                                <p>This version the fastest Redux ever released. We've integrated ajax_saving as well as many other speed improvments to make Redux even surpass the load time of <a href="https://github.com/syamilmj/Options-Framework" target="_blank">SMOF</a> even with large panels.</p>
-                            </div>
-                            <div>
-                                <h4>The New Redux API</h4>
-                                <p>We've gone back to the drawing boards and made Redux the <strong>simplist</strong> framework to use. Introducing the Redux API. Easily add fields, extensions, templates, and more without every having to define a class! <a href="" target="_blank">Learn More</a></p>
-                            </div>
-                            <div class="last-feature">
-                                <h4>Security Improvments</h4>
-                                <p>Thanks to the help of <a href="http://www.pritect.net/" target="_blank">James Golovich (Pritect)</a>, we have patched varying security flaws in Redux. This is the most secure version of Redux yet!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="changelog">
-                        <div class="feature-section col three-col">
-                            <div>
-                                <h4>Panel Templates</h4>
-                                <p>Now developers can easily customize the Redux panel by declaring a templates location path. We've also made use of template versioning so if we change anything, you will know.</p>
-                            </div>
-                            <div>
-                                <h4>Full Width for ANY Field</h4>
-                                <p>Any field can now be set to full width! Just set the <code>full_width</code> argument and your field will expand to the full width of your panel or metabox.</p>
-                            </div>
-                            <div class="last-feature">
-                                <h4>Elusive Icons Update</h4>
-                                <p>Redux is now taking over development of Elusive Icons. As a result, we've refreshed our copy of Elusive to the newest version.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        <?php
         }
 
         /**
@@ -318,35 +257,8 @@
          */
         public function changelog_screen() {
 
-            ?>
-            <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework - Changelog', 'redux-framework' ); ?></h1>
+            include_once('views/changelog.php');
 
-                <div
-                    class="about-text"><?php _e( 'Our core mantra at Redux is backwards compatibility. With hundreds of thousands of instances worldwide, you can be assured that we will take care of you and your clients.', 'redux-framework' ); ?></div>
-                <div
-                    class="redux-badge"><i
-                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
-                </div>
-
-                <p class="redux-actions">
-                    <a href="http://docs.reduxframework.com/" class="docs button button-primary">Docs</a>
-                    <a href="https://wordpress.org/plugins/redux-framework/" class="review-us button button-primary" target="_blank">Review Us</a>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW" class="review-us button button-primary" target="_blank">Donate</a>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://reduxframework.com" data-text="Reduce your dev time! Redux is the most powerful option framework for WordPress on the web" data-via="ReduxFramework" data-size="large" data-hashtags="Redux">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </p>
-
-                <?php $this->tabs(); ?>
-
-                <div class="changelog">
-                    <div class="feature-section">
-                        <?php echo $this->parse_readme(); ?>
-                    </div>
-                </div>
-
-            </div>
-        <?php
         }
 
         /**
@@ -357,160 +269,9 @@
          * @return void
          */
         public function redux_extensions() {
-            /*
-            repeater =>
-            social profiles =>
-            js button =>
-            multi media =>
-            css layout =>
-            color schemes => adjust-alt
-            custom fonts => fontsize
-            code mirror => view-mode
-            live search => search
-            support faq's => question
-            date time picker =>
-            premium support =>
-            metaboxes =>
-            widget areas =>
-            shortcodes =>
-            icon select => gallery
-            tracking =>
-             * */
-            $iconMap = array(
-                'repeater'        => 'asl',
-                'social-profiles' => 'group',
-                'js-button'       => 'hand-down',
-                'multi-media'     => 'picture',
-                'css-layout'      => 'fullscreen',
-                'color-schemes'   => 'adjust-alt',
-                'custom-fonts'    => 'fontsize',
-                'codemirror'      => 'view-mode',
-                'live-search'     => 'search',
-                'support-faqs'    => 'question',
-                'date-time'       => 'calendar',
-                'premium-support' => 'fire',
-                'metaboxes'       => 'magic',
-                'widget-areas'    => 'inbox-box',
-                'shortcodes'      => 'shortcode',
-                'icon-select'     => 'gallery',
-            );
-            $colors  = array(
-                '8CC63F',
-                '8CC63F',
-                '0A803B',
-                '25AAE1',
-                '0F75BC',
-                'F7941E',
-                'F1592A',
-                'ED217C',
-                'BF1E2D',
-                '8569CF',
-                '0D9FD8',
-                '8AD749',
-                'EECE00',
-                'F8981F',
-                'F80E27',
-                'F640AE'
-            );
-            shuffle($colors);
-            echo '<style type="text/css">';
-            ?>
 
-            <?php
-            foreach ($colors as $key => $color) {
-                echo '.theme-browser .theme.color'.$key.' .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .45).';}';
-                echo '.theme-browser .theme.color'.$key.':hover .theme-screenshot{background-color:'.Redux_Helpers::hex2rgba($color, .75).';}';
+            include_once('views/extensions.php');
 
-            }
-            echo '</style>';
-            $color = 1;
-
-
-            ?>
-
-
-            <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework - Extensions', 'redux-framework' ); ?></h1>
-
-                <div
-                    class="about-text"><?php printf( __( 'Supercharge your Redux experience. Our extensions provide you with features that will take your products to the next level.', 'redux-framework' ), $this->display_version ); ?></div>
-                <div
-                    class="redux-badge"><i
-                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
-                </div>
-
-                <p class="redux-actions">
-                    <a href="http://docs.reduxframework.com/" class="docs button button-primary">Docs</a>
-                    <a href="https://wordpress.org/plugins/redux-framework/" class="review-us button button-primary" target="_blank">Review Us</a>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW" class="review-us button button-primary" target="_blank">Donate</a>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://reduxframework.com" data-text="Reduce your dev time! Redux is the most powerful option framework for WordPress on the web" data-via="ReduxFramework" data-size="large" data-hashtags="Redux">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </p>
-
-                <?php $this->tabs(); ?>
-
-                <p class="about-description"><?php _e( "While some are built specificially for developers, extensions such as Custom Fonts are sure to make any user happy.", 'redux-framework' ); ?></p>
-
-                <div class="extensions">
-                    <div class="feature-section theme-browser rendered" style="clear:both;">
-                        <?php
-
-                            $data = get_transient( 'redux-extensions-fetch' );
-
-                            if ( empty( $data ) ) {
-                                $data = json_decode( wp_remote_retrieve_body( wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' ) ), true );
-                                if ( ! empty( $data ) ) {
-                                    set_transient( 'redux-extensions-fetch', $data, 24 * HOUR_IN_SECONDS );
-                                }
-                            }
-                            function shuffle_assoc( $list ) {
-                                if ( ! is_array( $list ) ) {
-                                    return $list;
-                                }
-
-                                $keys = array_keys( $list );
-                                shuffle( $keys );
-                                $random = array();
-                                foreach ( $keys as $key ) {
-                                    $random[ $key ] = $list[ $key ];
-                                }
-
-                                return $random;
-                            }
-
-                            $data = shuffle_assoc( $data );
-
-                            foreach ( $data as $key => $extension ) :
-
-                                ?>
-                                <div class="theme color<?php echo $color; $color++;?>">
-                                    <div class="theme-screenshot">
-                                        <figure>
-                                            <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . $iconMap[ $key ] : 'el-redux'; ?>"></i>
-                                            <figcaption>
-                                                <p><?php echo $extension['excerpt'];?></p>
-                                                <a href="<?php echo $extension['url']; ?>" target="_blank">Learn more</a>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-                                    <h3 class="theme-name" id="classic"><?php echo $extension['title']; ?></h3>
-
-                                    <div class="theme-actions">
-                                        <a class="button button-primary button-install-demo"
-                                           data-demo-id="<?php echo $key; ?>"
-                                           href="<?php echo $extension['url']; ?>" target="_blank">Learn
-                                            More</a></div>
-                                </div>
-
-                            <?php
-                            endforeach;
-
-                        ?>
-                    </div>
-                </div>
-
-            </div>
-        <?php
         }
 
 
@@ -523,52 +284,8 @@
          */
         public function get_support() {
 
-            ?>
-            <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework - Support', 'redux-framework' ); ?></h1>
+            include_once('views/support.php');
 
-                <div
-                    class="about-text"><?php printf( __( 'We are an open source project used by developers to make powerful control panels.', 'redux-framework' ), $this->display_version ); ?></div>
-                <div
-                    class="redux-badge"><i
-                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
-                </div>
-
-                <p class="redux-actions">
-                    <a href="http://docs.reduxframework.com/" class="docs button button-primary">Docs</a>
-                    <a href="https://wordpress.org/plugins/redux-framework/" class="review-us button button-primary" target="_blank">Review Us</a>
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW" class="review-us button button-primary" target="_blank">Donate</a>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://reduxframework.com" data-text="Reduce your dev time! Redux is the most powerful option framework for WordPress on the web" data-via="ReduxFramework" data-size="large" data-hashtags="Redux">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </p>
-
-                <?php $this->tabs(); ?>
-
-                <p class="about-description"><?php _e( 'To get the proper support, we need to send you to the correct place. Please choose the type of user you are.', 'redux-framework' ); ?></p>
-
-                <div class="support">
-                    <ul>
-                        <li class="userType">
-                            <a href=""><i class="el el-child"></i></a><h2>User</h2>
-                        </li>
-                        <li class="userType">
-                            <a href=""><i class="el el-idea"></i></a><h2>Developer</h2>
-                        </li>
-                    </ul>
-
-
-
-                    <h3><?php _e( 'Hello there WordPress User!', 'redux-framework' ); ?></h3>
-
-                    <div class="feature-section">
-
-
-                    </div>
-                </div>
-
-
-            </div>
-        <?php
         }
 
         /**
@@ -580,24 +297,21 @@
          */
         public function credits_screen() {
 
-            ?>
-            <div class="wrap about-wrap">
-                <h1><?php _e( 'Redux Framework - A Community Effort', 'redux-framework' ); ?></h1>
+            include_once('views/credits.php');
 
-                <div
-                    class="about-text"><?php _e( 'We recognize we are nothing without our community. We would like to thank all of those who help Redux to be what it is. Thank you for your involvement.', 'redux-framework' ); ?></div>
-                <div
-                    class="redux-badge"><i
-                        class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
-                </div>
+        }
 
-                <?php $this->tabs(); ?>
+        /**
+         * Render Status Report Screen
+         *
+         * @access public
+         * @since  1.4
+         * @return void
+         */
+        public function status_screen() {
 
-                <p class="about-description"><?php _e( 'Redux is created by a community of developers world wide. Want to have your name listed too? <a href="https://github.com/reduxframework/redux-framework/blob/master/CONTRIBUTING.md" target="_blank">Contribute to Redux</a>.', 'redux-framework' ); ?></p>
+            include_once('views/status_report.php');
 
-                <?php echo $this->contributors(); ?>
-            </div>
-        <?php
         }
 
         /**
