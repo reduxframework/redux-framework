@@ -100,6 +100,15 @@
                     'credits_screen'
                 )
             );
+
+            // Status Page
+            add_management_page(
+                __( 'Redux Framework Status', 'redux-framework' ), __( 'Redux Framework Status', 'redux-framework' ), $this->minimum_capability, 'redux-status', array(
+                    $this,
+                    'status_screen'
+                )
+            );
+            
             remove_submenu_page( 'tools.php', 'redux-credits' );
             remove_submenu_page( 'tools.php', 'redux-changelog' );
             remove_submenu_page( 'tools.php', 'redux-getting-started' );
@@ -128,12 +137,27 @@
             // Badge for welcome page
             $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
             ?>
+
+            <script 
+                id="redux-qtip-js" 
+                src='<?php echo ReduxFramework::$_url ?>assets/js/vendor/qtip/jquery.qtip.js'>
+            </script>
+            
+            <script 
+                id="redux-welcome-admin-js" 
+                src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/redux-welcome-admin.js'>
+            </script>            
+
+            <link rel='stylesheet' id='redux-qtip-css'
+                  href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/qtip/jquery.qtip.css'
+                  type='text/css' media='all'/>
+            
             <link rel='stylesheet' id='elusive-icons'
                   href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/elusive-icons/elusive-icons.css'
                   type='text/css' media='all'/>
 
-            <link rel='stylesheet' id='elusive-icons'
-                  href='<?php echo ReduxFramework::$_url ?>/inc/welcome/welcome.css'
+            <link rel='stylesheet' id='redux-welcome-css'
+                  href='<?php echo ReduxFramework::$_url ?>inc/welcome/css/redux-welcome.css'
                   type='text/css' media='all'/>
             <style type="text/css">
                 .redux-badge:before {
@@ -199,6 +223,10 @@
         <?php
         }
 
+        public function status_screen() {
+            include_once 'status.php';
+        }
+        
         /**
          * Render About Screen
          *
