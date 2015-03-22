@@ -232,7 +232,7 @@
         }
 
         public function status_screen() {
-            include_once 'status.php';
+            //include_once 'status.php';
         }
         
         /**
