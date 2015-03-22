@@ -306,7 +306,7 @@
          */
         public function status_screen() {
 
-            include_once('views/status_report.php');
+            //include_once('views/status_report.php');
 
         }
 
