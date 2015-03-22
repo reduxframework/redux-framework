@@ -3,8 +3,6 @@
      * Admin View: Page - Status Report
      */
 
-<?php
-
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
