@@ -302,7 +302,7 @@ If enabled on your server, Suhosin may need to be configured to increase its dat
             $response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', array(
                 'sslverify'  => false,
                 'timeout'    => 60,
-                'user-agent' => 'WooCommerce/' . WC()->version,
+                'user-agent' => 'ReduxFramework/' . ReduxFramework::$_version,
                 'body'       => array(
                     'cmd'    => '_notify-validate'
                 )
@@ -322,14 +322,14 @@ If enabled on your server, Suhosin may need to be configured to increase its dat
 
             // WP Remote Get Check
             $posting['wp_remote_get']['name'] = __( 'Remote Get', 'redux-framework');
-            $posting['wp_remote_get']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'WooCommerce plugins may use this method of communication when checking for plugin updates.', 'redux-framework'  ) . '">[?]</a>';
+            $posting['wp_remote_get']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Redux Framework plugins may use this method of communication when checking for plugin updates.', 'redux-framework'  ) . '">[?]</a>';
 
             $response = wp_remote_get( 'http://www.woothemes.com/wc-api/product-key-api?request=ping&network=' . ( is_multisite() ? '1' : '0' ) );
 
             if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
                 $posting['wp_remote_get']['success'] = true;
             } else {
-                $posting['wp_remote_get']['note']    = __( 'wp_remote_get() failed. The WooCommerce plugin updater won\'t work with your server. Contact your hosting provider.', 'redux-framework' );
+                $posting['wp_remote_get']['note']    = __( 'wp_remote_get() failed. The Redux Framework plugin updater won\'t work with your server. Contact your hosting provider.', 'redux-framework' );
                 if ( $response->get_error_message() ) {
                         $posting['wp_remote_get']['note'] .= ' ' . sprintf( __( 'Error: %s', 'redux-framework' ), redux_clean( $response->get_error_message() ) );
                 }
@@ -337,7 +337,7 @@ If enabled on your server, Suhosin may need to be configured to increase its dat
                 $posting['wp_remote_get']['success'] = false;
             }
 
-            $posting = apply_filters( 'woocommerce_debug_posting', $posting );
+            $posting = apply_filters( 'redux_debug_posting', $posting );
 
             foreach ( $posting as $post ) {
                 $mark = ! empty( $post['success'] ) ? 'yes' : 'error';
@@ -409,32 +409,32 @@ If enabled on your server, Suhosin may need to be configured to increase its dat
                         $plugin_name = '<a href="' . esc_url( $plugin_data['PluginURI'] ) . '" title="' . __( 'Visit plugin homepage' , 'redux-framework' ) . '">' . $plugin_name . '</a>';
                     }
 
-                    if ( strstr( $dirname, 'woocommerce-' ) ) {
-                        if ( false === ( $version_data = get_transient( md5( $plugin ) . '_version_data' ) ) ) {
-                            $changelog = wp_remote_get( 'http://dzv365zjfbd8v.cloudfront.net/changelogs/' . $dirname . '/changelog.txt' );
-                            $cl_lines  = explode( "\n", wp_remote_retrieve_body( $changelog ) );
-                            if ( ! empty( $cl_lines ) ) {
-                                foreach ( $cl_lines as $line_num => $cl_line ) {
-                                    if ( preg_match( '/^[0-9]/', $cl_line ) ) {
-                                        $date         = str_replace( '.' , '-' , trim( substr( $cl_line , 0 , strpos( $cl_line , '-' ) ) ) );
-                                        $version      = preg_replace( '~[^0-9,.]~' , '' ,stristr( $cl_line , "version" ) );
-                                        $update       = trim( str_replace( "*" , "" , $cl_lines[ $line_num + 1 ] ) );
-                                        $version_data = array( 'date' => $date , 'version' => $version , 'update' => $update , 'changelog' => $changelog );
-                                        set_transient( md5( $plugin ) . '_version_data', $version_data, DAY_IN_SECONDS );
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        if ( ! empty( $version_data['version'] ) && version_compare( $version_data['version'], $plugin_data['Version'], '>' ) ) {
-                            $version_string = ' &ndash; <strong style="color:red;">' . esc_html( sprintf( _x( '%s is available', 'Version info', 'redux-framework' ), $version_data['version'] ) ) . '</strong>';
-                        }
-
-                        if ( $plugin_data['Network'] != false ) {
-                            $network_string = ' &ndash; <strong style="color:black;">' . __( 'Network enabled', 'redux-framework' ) . '</strong>';
-                        }
-                    }
+//                    if ( strstr( $dirname, 'woocommerce-' ) ) {
+//                        if ( false === ( $version_data = get_transient( md5( $plugin ) . '_version_data' ) ) ) {
+//                            $changelog = wp_remote_get( 'http://dzv365zjfbd8v.cloudfront.net/changelogs/' . $dirname . '/changelog.txt' );
+//                            $cl_lines  = explode( "\n", wp_remote_retrieve_body( $changelog ) );
+//                            if ( ! empty( $cl_lines ) ) {
+//                                foreach ( $cl_lines as $line_num => $cl_line ) {
+//                                    if ( preg_match( '/^[0-9]/', $cl_line ) ) {
+//                                        $date         = str_replace( '.' , '-' , trim( substr( $cl_line , 0 , strpos( $cl_line , '-' ) ) ) );
+//                                        $version      = preg_replace( '~[^0-9,.]~' , '' ,stristr( $cl_line , "version" ) );
+//                                        $update       = trim( str_replace( "*" , "" , $cl_lines[ $line_num + 1 ] ) );
+//                                        $version_data = array( 'date' => $date , 'version' => $version , 'update' => $update , 'changelog' => $changelog );
+//                                        set_transient( md5( $plugin ) . '_version_data', $version_data, DAY_IN_SECONDS );
+//                                        break;
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//                        if ( ! empty( $version_data['version'] ) && version_compare( $version_data['version'], $plugin_data['Version'], '>' ) ) {
+//                            $version_string = ' &ndash; <strong style="color:red;">' . esc_html( sprintf( _x( '%s is available', 'Version info', 'redux-framework' ), $version_data['version'] ) ) . '</strong>';
+//                        }
+//
+//                        if ( $plugin_data['Network'] != false ) {
+//                            $network_string = ' &ndash; <strong style="color:black;">' . __( 'Network enabled', 'redux-framework' ) . '</strong>';
+//                        }
+//                    }
 
                     ?>
                     <tr>

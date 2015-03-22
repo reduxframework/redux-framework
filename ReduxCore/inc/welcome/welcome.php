@@ -231,10 +231,6 @@
         <?php
         }
 
-        public function status_screen() {
-            //include_once 'status.php';
-        }
-        
         /**
          * Render About Screen
          *
