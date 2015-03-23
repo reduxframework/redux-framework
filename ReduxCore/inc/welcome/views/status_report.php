@@ -507,16 +507,64 @@ function redux_let_to_num( $size ) {
                     <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The opt_name argument for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                     <td><?php echo $data->args['opt_name']; ?></td>
                 </tr>
+<?php
+                if (isset($data->args['global_variable']) && $data->args['global_variable'] != '') {
+?>
+                    <tr>
+                        <td data-export-label="global_variable">global_variable:</td>
+                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The global_variable argument for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                        <td><?php echo $data->args['global_variable']; ?></td>
+                    </tr>
+<?php
+                }
+?>
                 <tr>
                     <td data-export-label="dev_mode">dev_mode:</td>
-                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates if dev_mode is enabled for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates if developer mode is enabled for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                     <td><?php echo true == $data->args['dev_mode'] ? '<mark class="yes">'.'&#10004;'.'</mark>' : '<mark class="no">'.'&ndash;'.'</mark>'; ?></td>
                 </tr>            
                 <tr>
                     <td data-export-label="ajax_save">ajax_save:</td>
-                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates if ajax_save is enabled for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates if ajax based saving is enabled for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                     <td><?php echo true == $data->args['ajax_save'] ? '<mark class="yes">'.'&#10004;'.'</mark>' : '<mark class="no">'.'&ndash;'.'</mark>'; ?></td>
                 </tr>
+                <tr>
+                    <td data-export-label="page_slug">page_slug:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The page slug denotes the string used for the options panel page for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo $data->args['page_slug']; ?></td>
+                </tr>
+                <tr>
+                    <td data-export-label="page_permissions">page_permissions:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The page permissions variable sets the permission level required to access the options panel for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo $data->args['page_permissions']; ?></td>
+                </tr>
+                <tr>
+                    <td data-export-label="menu_type">menu_type:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'This variable set whether or not the menu is disaplyed as an admin menu item for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo $data->args['menu_type']; ?></td>
+                </tr>
+                <tr>
+                    <td data-export-label="page_parent">page_parent:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The page parent variable sets where the options menu will be places on the WordPress admin sidebar for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo $data->args['page_parent']; ?></td>
+                </tr>
+                
+                <tr>
+                    <td data-export-label="compiler">compiler:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates if the compiler flag is enabled for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo true == $data->args['compiler'] ? '<mark class="yes">'.'&#10004;'.'</mark>' : '<mark class="no">'.'&ndash;'.'</mark>'; ?></td>
+                </tr>
+                <tr>
+                    <td data-export-label="output">output:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates if output flag for globally shutting off all CSS output is enabled for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo true == $data->args['output'] ? '<mark class="yes">'.'&#10004;'.'</mark>' : '<mark class="no">'.'&ndash;'.'</mark>'; ?></td>
+                </tr>
+                <tr>
+                    <td data-export-label="output_tag">output_tag:</td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The output_tag variable sets whether or not dynamic CSS will be generated for the customizer and Google fonts for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td><?php echo true == $data->args['output_tag'] ? '<mark class="yes">'.'&#10004;'.'</mark>' : '<mark class="no">'.'&ndash;'.'</mark>'; ?></td>
+                </tr>
+                
 <?php
                 if (isset($data->args['templates_path']) && $data->args['templates_path'] != '') {
 ?>
