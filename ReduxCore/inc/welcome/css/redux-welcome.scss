@@ -402,36 +402,6 @@ $blue:          	#2ea2cc;
             transform: translate3d(0, 20px, 0);
         }
     }
-
-    .support {
-        ul {
-            clear:both;
-        }
-
-        li {
-            width: 50%;
-            display:block;
-            text-align: center;
-            float:left;
-        }
-
-        .userType {
-            margin-top: 40px;
-
-            a {
-                border: 5px transparent dashed;
-                padding: 20px;
-                font-size: 200px;
-
-                &:hover {
-                    border: #aaa 5px dashed;
-                }
-            }
-        }
-
-    }
-
-
 }
 
 .redux-message,
@@ -452,7 +422,7 @@ p.redux-actions {
 }
 
 #redux-message {
-    margin-top: 15px;
+    margin-top: 15px !important;
     display:block !important;
     margin: 5px 0 15px;
     border-color: #00A2E3;
@@ -535,5 +505,11 @@ p.redux-actions {
 
     .avada-demo-themes .theme:hover .screenshot-hover {
         display: none !important;
+    }
+}
+
+#support_div {
+    input.hash {
+        text-align: center;
     }
 }

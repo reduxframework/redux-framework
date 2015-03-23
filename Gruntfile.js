@@ -349,6 +349,19 @@ module.exports = function( grunt ) {
                             "ReduxCore/assets/css/rtl.scss"
                         ]
                     }
+                },
+                welcome: {
+                    options: {
+                        sourcemap: 'none',
+                        style: 'compressed',
+                        noCache: true
+                    },
+
+                    files: {
+                        "ReduxCore/inc/welcome/css/redux-welcome.css": [
+                            "ReduxCore/inc/welcome/css/redux-welcome.scss"
+                        ]
+                    }
                 }
             },
 

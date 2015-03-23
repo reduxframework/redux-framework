@@ -34,6 +34,11 @@ function redux_get_file_version ( $file ) {
 
     return $version;
 }
+
+function redux_get_support_object() {
+    $obj = array();
+
+}
     
 function redux_scan_template_files ( $template_path ) {
     $files = scandir ( $template_path );
@@ -97,14 +102,7 @@ function redux_let_to_num( $size ) {
             class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
     </div>
 
-    <p class="redux-actions">
-        <a href="http://docs.reduxframework.com/" class="docs button button-primary">Docs</a>
-        <a href="https://wordpress.org/plugins/redux-framework/" class="review-us button button-primary" target="_blank">Review Us</a>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW" class="review-us button button-primary" target="_blank">Donate</a>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://reduxframework.com" data-text="Reduce your dev time! Redux is the most powerful option framework for WordPress on the web" data-via="ReduxFramework" data-size="large" data-hashtags="Redux">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </p>
-
+    <?php $this->actions(); ?>
     <?php $this->tabs(); ?>
                 
     <div class="updated redux-message">
@@ -675,7 +673,7 @@ function redux_let_to_num( $size ) {
                 <td data-export-label="Child Theme"><?php _e( 'Child Theme', 'redux-framework' ); ?>:</td>
                 <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Displays whether or not the current theme is a child theme.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                 <td><?php
-                    echo is_child_theme() ? '<mark class="yes">' . '&#10004;' . '</mark>' : '&#10005; &ndash; ' . sprintf( __( 'If you\'re modifying Redux Framework or a parent theme you didn\'t build personally we recommend using a child theme. See: <a href="%s" target="_blank">How to create a child theme</a>', 'redux-framework' ), 'http://codex.wordpress.org/Child_Themes' );
+                    echo is_child_theme() ? '<mark class="yes">' . '&#10004;' . '</mark>' : '&#10005; &ndash; ' . sprintf( __( 'If you\'re modifying Redux Framework or a parent theme you didn\'t build, personally we recommend using a child theme. See: <a href="%s" target="_blank">How to create a child theme</a>', 'redux-framework' ), 'http://codex.wordpress.org/Child_Themes' );
                 ?></td>
             </tr>
 <?php

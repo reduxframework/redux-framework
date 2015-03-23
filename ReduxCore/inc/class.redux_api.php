@@ -124,6 +124,10 @@
 
             public static function constructSections( $opt_name ) {
                 $sections = array();
+                if ( ! isset( self::$sections[ $opt_name ] ) ) {
+                    return $sections;
+
+                }
                 foreach ( self::$sections[ $opt_name ] as $section_id => $section ) {
                     $section['fields'] = self::constructFields( $opt_name, $section_id );
                     $p                 = $section['priority'];

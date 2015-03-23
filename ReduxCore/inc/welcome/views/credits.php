@@ -8,6 +8,7 @@
             class="el el-redux"></i><span><?php printf( __( 'Version %s', 'redux-framework' ), ReduxFramework::$_version ); ?></span>
     </div>
 
+    <?php $this->actions(); ?>
     <?php $this->tabs(); ?>
 
     <p class="about-description"><?php _e( 'Redux is created by a community of developers world wide. Want to have your name listed too? <a href="https://github.com/reduxframework/redux-framework/blob/master/CONTRIBUTING.md" target="_blank">Contribute to Redux</a>.', 'redux-framework' ); ?></p>
