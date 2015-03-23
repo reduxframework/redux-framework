@@ -110,7 +110,7 @@ function redux_let_to_num( $size ) {
     <div class="updated redux-message">
             <p><?php _e( 'Please copy and paste this information in your ticket when contacting support:', 'redux-framework' ); ?> </p>
             <p class="submit"><a href="#" class="button-primary debug-report"><?php _e( 'Get System Report', 'redux-framework' ); ?></a>
-            <a class="skip button-primary" href="http://docs.reduxframework.com/understanding-the-redux-framework-system-status-report/" target="_blank"><?php _e( 'Understanding the Status Report', 'redux-framework' ); ?></a></p>
+            <a class="skip button-primary" href="http://docs.reduxframework.com/core/support/understanding-the-redux-framework-system-status-report/" target="_blank"><?php _e( 'Understanding the Status Report', 'redux-framework' ); ?></a></p>
             <div id="debug-report">
                     <textarea readonly="readonly"></textarea>
                     <p class="submit">
@@ -263,18 +263,6 @@ function redux_let_to_num( $size ) {
                 <td><?php if ( function_exists( 'phpversion' ) ) echo esc_html( phpversion() ); ?></td>
             </tr>
             <?php if ( function_exists( 'ini_get' ) ) { ?>
-                    <tr>
-                        <td data-export-label="PHP Safe Mode"><?php _e( 'PHP Safe Mode', 'redux-framework' ); ?>:</td>
-                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Is PHP running in Safe Mode.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
-                        <td><?php 
-                            if ( true == ini_get('safe_mode') ) {
-                                echo '<mark class="yes">' . '&#10004;' . '</mark>';
-                            } else {
-                                echo '<mark class="no">' . '&ndash;' . '</mark>';
-                            }                         
-                        
-                        echo size_format( ini_get('safe_mode') ); ?></td>
-                    </tr>
                     <tr>
                         <td data-export-label="PHP Memory Limit"><?php _e( 'PHP Memory Limit', 'redux-framework' ); ?>:</td>
                         <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The largest filesize that can be contained in one post.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
@@ -541,12 +529,12 @@ function redux_let_to_num( $size ) {
                 </tr>
                 <tr>
                     <td data-export-label="menu_type">menu_type:</td>
-                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'This variable set whether or not the menu is disaplyed as an admin menu item for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'This variable set whether or not the menu is displayed as an admin menu item for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                     <td><?php echo $data->args['menu_type']; ?></td>
                 </tr>
                 <tr>
                     <td data-export-label="page_parent">page_parent:</td>
-                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The page parent variable sets where the options menu will be places on the WordPress admin sidebar for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                    <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The page parent variable sets where the options menu will be placed on the WordPress admin sidebar for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                     <td><?php echo $data->args['page_parent']; ?></td>
                 </tr>
                 
