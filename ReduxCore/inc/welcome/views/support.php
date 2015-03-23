@@ -29,13 +29,13 @@
         <form id="msform">
 
             <ul id="progressbar" class=" breadcrumb">
-                <li>Create Support Hash</li>
-                <li class="active" href="#">Choose Support Type</li>
+                <li class="active">Create Support Hash</li>
+                <li href="#">Choose Support Type</li>
                 <li href="#">Finalize Support</li>
             </ul>
 
             <!-- fieldsets -->
-            <fieldset style="display:none;">
+            <fieldset>
                 <h2 class="fs-title">Submit a Support Request</h2>
 
                 <h3 class="fs-subtitle<?php echo isset( $generate_hash ) ? '' : ' hide'; ?>">To get started, we will
@@ -57,7 +57,7 @@
                 <input type="button" name="next" class="next action-button"
                        value="Next"<?php echo ! isset( $generate_hash ) ? '' : ' disabled="disabled"'; ?>/>
             </fieldset>
-            <fieldset style="display:block;">
+            <fieldset>
                 <h2 class="fs-title">Support Type</h2>
 
                 <h3 class="fs-subtitle" style="text-align: center;">
