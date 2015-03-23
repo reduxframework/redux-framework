@@ -494,11 +494,12 @@ function redux_let_to_num( $size ) {
     if (!empty($redux) && is_array($redux)) {
         foreach($redux as $inst => $data) {
             Redux::init ( $inst );
+            $inst_name = ucwords(str_replace(array('_','-'), ' ', $inst)) ;
 ?>
             <table class="redux_status_table widefat" cellspacing="0" id="status">
                 <thead>
                     <tr>
-                        <th colspan="3" data-export-label="Redux Instance: <?php echo $inst; ?>"><?php _e( 'Redux Instance: ', 'redux-framework' ); echo $inst; ?></th>
+                        <th colspan="3" data-export-label="Redux Instance: <?php echo $inst_name; ?>"><?php _e( 'Redux Instance: ', 'redux-framework' ); echo $inst_name; ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -570,12 +571,12 @@ function redux_let_to_num( $size ) {
 ?>
                     <tr>
                         <td data-export-label="template_path">template_path:</td>
-                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The specified template path for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The specified template path containing custom template files for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                         <td><?php echo '<code>' . $data->args['templates_path'] . '</code>'; ?></td>
                     </tr>
                     <tr>
                         <td data-export-label="Templates">Templates:</td>
-                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The specified template path for this instance of Redux.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'List of template files overriding the default Redux template files.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
 <?php                        
                         $template_paths     = array( 'ReduxFramework' => ReduxFramework::$_dir . 'templates/panel' );
                         $scanned_files      = array();
@@ -632,13 +633,13 @@ function redux_let_to_num( $size ) {
 ?>
                     <tr>
                         <td data-export-label="Extensions">Extensions</td>
-                        <td></td>
+                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Indicates the installed Redux extensions and their version numbers.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
                         <td>
 <?php
                             foreach($ext as $name => $arr) {
                                 $ver = Redux::getFileVersion ( $arr['path'] );
 ?>
-                                <?php echo ucwords(str_replace('_', ' ', $name)) . ' - ' . $ver;  ?><br/>
+                                <?php echo ucwords(str_replace(array('_','-'), ' ', $name)) . ' - ' . $ver;  ?><br/>
 <?php              
                             }
 ?>
