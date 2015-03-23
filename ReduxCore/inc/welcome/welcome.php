@@ -68,14 +68,6 @@
                 )
             );
 
-            // About Page
-            add_management_page(
-                __( 'Redux Framework Status', 'redux-framework' ), __( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-status', array(
-                    $this,
-                    'status_screen'
-                )
-            );
-
             // Changelog Page
             add_management_page(
                 __( 'Redux Framework Changelog', 'redux-framework' ), __( 'Redux Framework Changelog', 'redux-framework' ), $this->minimum_capability, 'redux-changelog', array(
@@ -117,13 +109,14 @@
                 )
             );
             
-            remove_submenu_page( 'tools.php', 'redux-credits' );
+            //remove_submenu_page( 'tools.php', 'redux-about' );
+            remove_submenu_page( 'tools.php', 'redux-status' );
             remove_submenu_page( 'tools.php', 'redux-changelog' );
             remove_submenu_page( 'tools.php', 'redux-getting-started' );
             remove_submenu_page( 'tools.php', 'redux-credits' );
             remove_submenu_page( 'tools.php', 'redux-support' );
             remove_submenu_page( 'tools.php', 'redux-extensions' );
-            remove_submenu_page( 'tools.php', 'redux-status' );
+            
 
         }
 
@@ -156,6 +149,11 @@
                 src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/redux-welcome-admin.js'>
             </script>            
 
+            <script 
+                id="redux-zero-clipboard-js" 
+                src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/zeroclipboard/jquery.zeroclipboard.min.js'>
+            </script>            
+            
             <link rel='stylesheet' id='redux-qtip-css'
                   href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/qtip/jquery.qtip.css'
                   type='text/css' media='all'/>
@@ -306,7 +304,7 @@
          */
         public function status_screen() {
 
-            //include_once('views/status_report.php');
+            include_once('views/status_report.php');
 
         }
 

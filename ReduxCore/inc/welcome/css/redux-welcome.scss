@@ -19,7 +19,13 @@ $blue:          	#2ea2cc;
         .redux-message {
             position: relative;
             border-left-color: #00A2E3 !important;
-            overflow: hidden;        
+            overflow: hidden; 
+            
+            a.skip,
+            a.docs {
+                    opacity: 0.5;
+                    text-decoration: none !important;
+            }            
         }
 
         #debug-report {
