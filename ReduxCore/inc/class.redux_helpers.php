@@ -324,5 +324,151 @@ if ( ! class_exists( 'Redux_Helpers' ) ) {
                 return 'rgba(' . $rgb . ',' . $alpha . ')';
             }
         }
+        
+        public static function makeBoolStr($var){
+            if ($var == false || $var == 'false' || $var == 0 || $var == '0' || $var == '' || empty($var)) {
+                return 'false';
+            } else {
+                return 'true';
+            }
+        }
+        
+        public static function compileSystemStatus($json_output = false){
+            global $wpdb;
+            
+            $sysinfo = array();
+            
+            $sysinfo['home_url']                = home_url();
+            $sysinfo['site_url']                = site_url();
+            $sysinfo['redux_ver']               = esc_html(ReduxFramework::$_version);
+            $sysinfo['redux_data_dir']          = ReduxFramework::$_upload_dir;
+            $sysinfo['redux_data_writeable']    = self::makeBoolStr(@fopen( ReduxFramework::$_upload_dir . 'test-log.log', 'a' ));
+            $sysinfo['wp_ver']                  = bloginfo('version');
+            $sysinfo['wp_multisite']            = is_multisite();
+            $sysinfo['permalink_structure']     = get_option('permalink_structure') ? get_option('permalink_structure') : 'Default';
+            $sysinfo['front_page_display']      = get_option('show_on_front');
+            if ($sysinfo['front_page_display'] == 'page') {
+                $front_page_id  = get_option('page_on_front');
+                $blog_page_id   = get_option('page_for_posts');
+                
+                $sysinfo['front_page'] = $front_page_id != 0 ? get_the_title( $front_page_id ) . ' (#' . $front_page_id . ')' : 'Unset';
+                $sysinfo['posts_page'] = $blog_page_id != 0 ? get_the_title( $blog_page_id ) . ' (#' . $blog_page_id . ')' : 'Unset';
+            }
+            
+            $sysinfo['wp_mem_limit']['raw']     = self::let_to_num ( WP_MEMORY_LIMIT );
+            $sysinfo['wp_mem_limit']['size']    = size_format($sysinfo['wp_mem_limit']['raw']);
+            
+            $sysinfo['db_table_prefix']         = 'Length: ' . strlen( $wpdb->prefix ) . ' - Status: ' . ( strlen( $wpdb->prefix ) > 16 ? 'ERROR: Too long' : 'Acceptable' );
+
+            $sysinfo['wp_debug'] = 'false';
+            if ( defined('WP_DEBUG') && WP_DEBUG ) {
+                $sysinfo['wp_debug'] = 'true';
+            }
+
+            $sysinfo['wp_lang']                 = get_locale ();
+            
+            if ( ! class_exists( 'Browser' ) ) {
+                require_once ReduxFramework::$_dir . 'inc/browser.php';
+            }
+
+            $browser = new Browser();
+            
+            $sysinfo['browser'] = $browser;
+            
+            $sysinfo['server_info']             = $_SERVER['SERVER_SOFTWARE'];
+            $sysinfo['php_ver']                 = function_exists( 'phpversion' ) ? esc_html( phpversion()) : 'phpversion() function does not exist.';
+            
+            if (function_exists( 'ini_get' )) {
+                $sysinfo['php_mem_limit']       = size_format( redux_let_to_num( ini_get('memory_limit') ) );
+                $sysinfo['php_post_max_size']   = size_format( redux_let_to_num( ini_get('post_max_size') ) );
+                $sysinfo['php_time_limit']      = ini_get('max_execution_time');
+                $sysinfo['php_max_input_var']   = ini_get('max_input_vars');
+                $sysinfo['php_display_errors']  = self::makeBoolStr( ini_get('display_errors') );
+            }
+
+            $sysinfo['suhosin_installed']       = extension_loaded( 'suhosin' );
+            $sysinfo['mysql_ver']               = $wpdb->db_version();
+            $sysinfo['max_upload_size']         = size_format( wp_max_upload_size() );
+            
+            $sysinfo['def_tz_is_utc']           = 'true';
+            if(date_default_timezone_get() !== 'UTC') {
+                $sysinfo['def_tz_is_utc']       = 'false';
+            }
+            
+            $sysinfo['fsockopen_curl']          = 'false';
+            if ( function_exists( 'fsockopen' ) || function_exists( 'curl_init' ) ) {
+                $sysinfo['fsockopen_curl']      = 'true';
+            }
+            
+            $sysinfo['soap_client']             = 'false';
+            if ( class_exists( 'SoapClient' ) ) {
+                $sysinfo['soap_client']         = 'true';
+            }
+            
+            $sysinfo['dom_document']            = 'false';
+            if ( class_exists( 'DOMDocument' ) ) {
+                $sysinfo['dom_document']        = 'true';
+            }
+            
+            $sysinfo['gzip']                    = 'false';
+            if ( is_callable( 'gzopen' ) ) {
+                $sysinfo['gzip']                = 'true';
+            }
+            
+            $response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', array(
+                'sslverify'  => false,
+                'timeout'    => 60,
+                'user-agent' => 'ReduxFramework/' . ReduxFramework::$_version,
+                'body'       => array(
+                    'cmd'    => '_notify-validate'
+                )
+            ) );
+            
+            $sysinfo['wp_remote_post']          = 'false';
+            if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+                $sysinfo['wp_remote_post']      = 'true';
+            }
+            
+            $response = wp_remote_get( 'http://www.woothemes.com/wc-api/product-key-api?request=ping&network=' . ( is_multisite() ? '1' : '0' ) );
+            
+            $sysinfo['wp_remote_get']           = 'false';
+            if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+                $sysinfo['wp_remote_get']       = 'true';
+            }
+            
+            $active_plugins = (array) get_option( 'active_plugins', array() );
+
+            if ( is_multisite() ) {
+                $active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', array() ) );
+            }
+            
+            
+            
+            
+            
+            $sysinfo[''];
+            return $sysinfo;
+        }
+        
+        private static function let_to_num( $size ) {
+            $l   = substr( $size, -1 );
+            $ret = substr( $size, 0, -1 );
+
+            switch ( strtoupper( $l ) ) {
+                case 'P':
+                    $ret *= 1024;
+                case 'T':
+                    $ret *= 1024;
+                case 'G':
+                    $ret *= 1024;
+                case 'M':
+                    $ret *= 1024;
+                case 'K':
+                    $ret *= 1024;
+            }
+
+            return $ret;
+        }
+        
     }
 }
