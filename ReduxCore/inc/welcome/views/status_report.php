@@ -292,12 +292,13 @@ function redux_let_to_num( $size ) {
                             }                         
                         ?></td>
                     </tr>
-                    <tr>
-                        <td data-export-label="SUHOSIN Installed"><?php _e( 'SUHOSIN Installed', 'redux-framework' ); ?>:</td>
-                        <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Suhosin is an advanced protection system for PHP installations. It was designed to protect your servers on the one hand against a number of well known problems in PHP applications and on the other hand against potential unknown vulnerabilities within these applications or the PHP core itself.  If enabled on your server, Suhosin may need to be configured to increase its data submission limits.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
-                        <td><?php echo extension_loaded( 'suhosin' ) ? '&#10004;' : '&ndash;'; ?></td>
-                    </tr>
             <?php } ?>
+            <tr>
+                <td data-export-label="SUHOSIN Installed"><?php _e( 'SUHOSIN Installed', 'redux-framework' ); ?>:</td>
+                <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Suhosin is an advanced protection system for PHP installations. It was designed to protect your servers on the one hand against a number of well known problems in PHP applications and on the other hand against potential unknown vulnerabilities within these applications or the PHP core itself.  If enabled on your server, Suhosin may need to be configured to increase its data submission limits.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
+                <td><?php echo extension_loaded( 'suhosin' ) ? '&#10004;' : '&ndash;'; ?></td>
+            </tr>
+                    
             <tr>
                 <td data-export-label="MySQL Version"><?php _e( 'MySQL Version', 'redux-framework' ); ?>:</td>
                 <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The version of MySQL installed on your hosting server.', 'redux-framework'  ) . '">[?]</a>'; ?></td>
