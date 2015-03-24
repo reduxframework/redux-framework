@@ -18,6 +18,44 @@
         var left, opacity, scale; //fieldset properties which we will animate
         var animating; //flag to prevent quick multi-click glitches
 
+        $.fn.actualHeight = function() {
+            // find the closest visible parent and get it's hidden children
+            var visibleParent = this.closest( ':visible' ).children(),
+                thisHeight;
+
+            // set a temporary class on the hidden parent of the element
+            visibleParent.addClass( 'temp-show' );
+
+            // get the height
+            thisHeight = this.height();
+
+            // remove the temporary class
+            visibleParent.removeClass( 'temp-show' );
+
+            return thisHeight;
+        };
+
+        function setHeight() {
+            var $height = 0;
+            jQuery(document).find( '#support_div fieldset' ).each(
+                function() {
+                    var $actual = $( this ).actualHeight();
+                    if ( $height < $actual ) {
+                        $height = $actual;
+                    }
+                }
+            );
+            jQuery( '#support_div' ).height( $height + 10 );
+        }
+
+        setHeight();
+        $( window ).on(
+            'resize', function() {
+                console.log('here');
+                setHeight();
+            }
+        );
+
         jQuery( '#support_div input.checkbox' ).change(
             function() {
                 if ( jQuery( "#support_div input.checkbox:checked" ).length > 0 ) {

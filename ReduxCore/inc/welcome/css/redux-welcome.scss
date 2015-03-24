@@ -608,7 +608,7 @@ p.redux-actions {
     .breadcrumb {
         /*centering*/
         display: inline-block;
-        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
         overflow: hidden;
         border-radius: 5px;
         /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
@@ -627,7 +627,7 @@ p.redux-actions {
             /*need more margin on the left of links to accomodate the numbers*/
             padding: 0 10px 0 60px;
             background: #666;
-            background: linear-gradient(#666, #333);
+            //background: linear-gradient(#666, #333);
             position: relative;
             /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
             &:first-child {
@@ -647,10 +647,13 @@ p.redux-actions {
             }
             &.active {
                 background: #333;
-                background: linear-gradient(#333, #000);
+                //background: linear-gradient(#333, #000);
                 &:after {
                     background: #333;
-                    background: linear-gradient(135deg, #333, #000);
+                    //background: linear-gradient(135deg, #333, #000);
+                }
+                &:before {
+                    background: #555;
                 }
             }
             /*adding the arrows for the breadcrumbs using rotated pseudo elements*/
@@ -670,7 +673,7 @@ p.redux-actions {
                 z-index: 1;
                 /*background same as links but the gradient will be rotated to compensate with the transform applied*/
                 background: #666;
-                background: linear-gradient(135deg, #666, #333);
+                //background: linear-gradient(135deg, #666, #333);
                 /*stylish arrow design using box shadow*/
                 box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4),
                 3px -3px 0 2px rgba(255, 255, 255, 0.1);
@@ -678,9 +681,11 @@ p.redux-actions {
                     5px - for rounded arrows and
                     50px - to prevent hover glitches on the border created using shadows*/
                 border-radius: 0 5px 0 50px;
+                transition: all 0.5s;
             }
             /*we will use the :before element to show numbers*/
             &:before {
+                transition: all 0.5s;
                 content: counter(flag);
                 counter-increment: flag;
                 /*some styles now*/
@@ -693,26 +698,10 @@ p.redux-actions {
                 top: 0;
                 left: 30px;
                 background: #444;
-                background: linear-gradient(#444, #222);
+                //background: linear-gradient(#444, #222);
                 font-weight: bold;
             }
 
         }
-    }
-
-    .flat li, .flat li:after {
-        background: white;
-        color: black;
-        transition: all 0.5s;
-    }
-
-    .flat li:before {
-        background: white;
-        box-shadow: 0 0 0 1px #ccc;
-    }
-
-    .flat li:hover, .flat li.active,
-    .flat li:hover:after, .flat li.active:after {
-        background: #9EEB62;
     }
 }

@@ -31,7 +31,7 @@
             <ul id="progressbar" class=" breadcrumb">
                 <li class="active">Create Support Hash</li>
                 <li href="#">Choose Support Type</li>
-                <li href="#">Finalize Support</li>
+                <li href="#">Get Support</li>
             </ul>
 
             <!-- fieldsets -->
@@ -117,7 +117,7 @@
                 <input type="button" name="next" class="next action-button" value="Next" disabled="disabled"/>
             </fieldset>
             <fieldset id="final_support">
-                <h2 class="fs-title">Finalize Support</h2>
+                <h2 class="fs-title">Get Support</h2>
 
                 <div class="is_developer">
                     <h3 class="fs-subtitle" style="text-align: center;">
