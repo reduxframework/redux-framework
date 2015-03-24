@@ -314,7 +314,8 @@
     -moz-box-shadow: inset 0 1px 0 #fff;
     -webkit-box-shadow: inset 0 1px 0 #FFF;
     box-shadow: inset 0 1px 0 #FFF;
-    position: relative #redux_ajax_overlay {
+    position: relative;
+    #redux_ajax_overlay {
         position: absolute;
         top: 0;
         left: 0;
