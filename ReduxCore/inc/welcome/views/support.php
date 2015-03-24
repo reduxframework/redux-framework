@@ -15,18 +15,26 @@
 
         <?php
             $hash          = get_option( 'redux_support_hash' );
-            $newHash       = 'testing';
             $generate_hash = true;
-            if ( $newHash == $hash ) {
-                unset( $generate_hash );
+            if ( ! empty( $hash ) ) {
+                $sysinfo = Redux_Helpers::compileSystemStatus();
+                $newHash = md5( json_encode( $sysinfo ) );
+                if ( $newHash == $hash ) {
+                    unset( $generate_hash );
+                }
             }
-            unset( $generate_hash );
 
 
         ?>
 
         <!-- multistep form -->
         <form id="supportform">
+            <?php
+                if ( $newHash ) {
+                    $nonce = wp_create_nonce( 'redux_support_hash' );
+                    echo '<input type="hidden" id="nonce" value="' . $nonce . '"';
+                }
+            ?>
 
             <ul id="progressbar" class=" breadcrumb">
                 <li class="active">Create Support Hash</li>
@@ -52,7 +60,7 @@
                        value="http://support.redux.io/"/>
 
                 <p<?php echo isset( $generate_hash ) ? '' : ' class="hide"'; ?>><a href="#"
-                                                                                   class="docs button button-primary button-large">Generate
+                                                                                   class="docs button button-primary button-large redux_support_hash">Generate
                         Support Hash</a></p>
                 <input type="button" name="next" class="next action-button"
                        value="Next"<?php echo ! isset( $generate_hash ) ? '' : ' disabled="disabled"'; ?>/>
