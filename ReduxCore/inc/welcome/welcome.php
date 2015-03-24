@@ -108,7 +108,7 @@
                     'status_screen'
                 )
             );
-            
+
             //remove_submenu_page( 'tools.php', 'redux-about' );
             remove_submenu_page( 'tools.php', 'redux-status' );
             remove_submenu_page( 'tools.php', 'redux-changelog' );
@@ -116,7 +116,7 @@
             remove_submenu_page( 'tools.php', 'redux-credits' );
             remove_submenu_page( 'tools.php', 'redux-support' );
             remove_submenu_page( 'tools.php', 'redux-extensions' );
-            
+
 
         }
 
@@ -139,25 +139,34 @@
             $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
             ?>
 
-            <script 
-                id="redux-qtip-js" 
+            <script
+                id="redux-qtip-js"
                 src='<?php echo ReduxFramework::$_url ?>assets/js/vendor/qtip/jquery.qtip.js'>
             </script>
-            
-            <script 
-                id="redux-welcome-admin-js" 
-                src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/redux-welcome-admin.js'>
-            </script>            
 
-            <script 
-                id="redux-zero-clipboard-js" 
+            <script
+                id="redux-welcome-admin-js"
+                src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/redux-welcome-admin.js'>
+            </script>
+
+            <?php
+            if ( isset ( $_GET['page'] ) && $_GET['page'] == "redux-support" ) :
+                ?>
+                <script
+                    id="jquery-easing"
+                    src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/jquery.easing.min.js'>
+                </script>
+            <?php endif; ?>
+
+            <script
+                id="redux-zero-clipboard-js"
                 src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/zeroclipboard/jquery.zeroclipboard.min.js'>
-            </script>            
-            
+            </script>
+
             <link rel='stylesheet' id='redux-qtip-css'
                   href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/qtip/jquery.qtip.css'
                   type='text/css' media='all'/>
-            
+
             <link rel='stylesheet' id='elusive-icons'
                   href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/elusive-icons/elusive-icons.css'
                   type='text/css' media='all'/>
@@ -238,7 +247,7 @@
          */
         public function about_screen() {
 
-            include_once('views/about.php');
+            include_once( 'views/about.php' );
 
         }
 
@@ -251,7 +260,7 @@
          */
         public function changelog_screen() {
 
-            include_once('views/changelog.php');
+            include_once( 'views/changelog.php' );
 
         }
 
@@ -264,7 +273,7 @@
          */
         public function redux_extensions() {
 
-            include_once('views/extensions.php');
+            include_once( 'views/extensions.php' );
 
         }
 
@@ -278,7 +287,7 @@
          */
         public function get_support() {
 
-            include_once('views/support.php');
+            include_once( 'views/support.php' );
 
         }
 
@@ -291,7 +300,7 @@
          */
         public function credits_screen() {
 
-            include_once('views/credits.php');
+            include_once( 'views/credits.php' );
 
         }
 
@@ -304,7 +313,7 @@
          */
         public function status_screen() {
 
-            include_once('views/status_report.php');
+            include_once( 'views/status_report.php' );
 
         }
 
@@ -348,7 +357,7 @@
                         }
                     }( document, 'script', 'twitter-wjs' );</script>
             </p>
-            <?php
+        <?php
         }
 
         /**
