@@ -430,7 +430,7 @@ module.exports = function( grunt ) {
     grunt.registerTask( 'watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin'] );
 
     grunt.registerTask( "lintPHP", ["phplint:plugin", "phplint:core"] );
-    grunt.registerTask( "compileSCSS", ["sass:admin", "sass:fields", "sass:extensions", "sass:vendor"] );
+    grunt.registerTask( "compileSCSS", ["sass:admin", "sass:fields", "sass:extensions", "sass:vendor", "sass:welcome"] );
     grunt.registerTask(
         'compileJS',
         ['jshint', 'concat:core', 'uglify:core', 'concat:vendor', 'uglify:vendor', 'uglify:fields', 'uglify:extensions']

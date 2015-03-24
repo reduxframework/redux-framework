@@ -250,7 +250,7 @@ $blue: #2ea2cc;
 
     .theme-screenshot {
         color: #eee;
-
+        transition: all 0.5s;
         &:hover {
             color: #fff;
         }
@@ -267,7 +267,9 @@ $blue: #2ea2cc;
 
     .theme-browser {
         .theme {
+            transition: all 0.5s;
             &:hover .theme-screenshot i {
+                transition: all 0.5s;
                 font-size: 120px;
             }
 
@@ -523,7 +525,7 @@ p.redux-actions {
     /*form styles*/
     #supportform {
         /*width: 500px;*/
-        margin: 10px auto;
+        margin-top: 10px;
         text-align: center;
         position: relative;
         fieldset {
