@@ -9,8 +9,15 @@
             if ( jQuery( document.getElementById( "support_div" ) ).is( ":visible" ) ) {
                 $.redux_welcome.initSupportPage();
             }
+            $.redux_welcome.supportHash();
         }
     );
+
+    $.redux_welcome.supportHash = function() {
+        jQuery('.redux_support_hash' ).click(function() {
+            console.log('here');
+        });
+    };
 
     $.redux_welcome.initSupportPage = function() {
         //jQuery time
@@ -37,7 +44,7 @@
 
         function setHeight() {
             var $height = 0;
-            jQuery(document).find( '#support_div fieldset' ).each(
+            jQuery( document ).find( '#support_div fieldset' ).each(
                 function() {
                     var $actual = $( this ).actualHeight();
                     if ( $height < $actual ) {
@@ -51,7 +58,6 @@
         setHeight();
         $( window ).on(
             'resize', function() {
-                console.log('here');
                 setHeight();
             }
         );

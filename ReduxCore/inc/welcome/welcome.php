@@ -50,6 +50,23 @@
             echo 'If you like <strong>Redux</strong> please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">★★★★★</a> rating. A huge thank you from Redux in advance!';
         }
 
+        public function support_hash() {
+
+            $hash          = get_option( 'redux_support_hash' );
+            $generate_hash = true;
+            if ( ! empty( $hash ) ) {
+                $GLOBALS['redux_system_info'] = Redux_Helpers::compileSystemStatus();
+                $newHash = md5( json_encode( $GLOBALS['redux_system_info'] ) );
+                if ( $newHash == $hash ) {
+                    unset( $generate_hash );
+                }
+            }
+            if ( $generate_hash ) {
+                $nonce = wp_create_nonce( 'redux_support_hash' );
+                echo '<input type="hidden" id="nonce" value="' . $nonce . '"';
+            }
+        }
+
         /**
          * Register the Dashboard Pages which are later hidden but these pages
          * are used to render the Welcome and Credits pages.
