@@ -83,7 +83,21 @@
                     return;
                 }
 
-                $args     = self::constructArgs( $opt_name );
+                $args = self::constructArgs( $opt_name );
+                /**
+                 * filter 'redux/args/{opt_name}'
+                 *
+                 * @param  array $args ReduxFramework configuration
+                 */
+                $args = apply_filters( "redux/args/{$args['opt_name']}", $args );
+
+                /**
+                 * filter 'redux/options/{opt_name}/args'
+                 *
+                 * @param  array $args ReduxFramework configuration
+                 */
+                $args     = apply_filters( "redux/options/{$args['opt_name']}/args", $args );
+                
                 $sections = self::constructSections( $opt_name );
                 if ( ! class_exists( 'ReduxFramework' ) ) {
                     echo '<div id="message" class="error"><p>Redux Framework is <strong>not installed</strong>. Please install it.</p></div>';
