@@ -81,7 +81,16 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
                 unset( $dummytArr );
             }
 
-            echo '<ul id="' . $this->field['id'] . '-list" class="redux-sortable ' . $class . '">';
+            $use_labels = false;
+            $label_class = '';
+            if ( $this->field['mode'] != "checkbox" ) {
+                if ( ( isset( $this->field['label'] ) && $this->field['label'] == true ) ) {
+                    $use_labels = true;
+                    $label_class = ' labeled';
+                }
+            }
+            
+            echo '<ul id="' . $this->field['id'] . '-list" class="redux-sortable ' . $class . ' ' . $label_class . '">';
 
 
             foreach ( $this->value as $k => $nicename ) {
@@ -107,19 +116,22 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
                 }
 
                 if ($this->field['mode'] != "checkbox") {
-                    echo '<label class="bugger" for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
-                    echo "<br />";                     
+                    if ($use_labels) {
+                        echo '<label class="bugger" for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
+                        echo "<br />";
+                    }
                 }
 
                 echo '<input rel="' . $this->field['id'] . '-' . $k . '-hidden" class="' . $class . '" ' . $checked . 'type="' . $this->field['mode'] . '" ' . $name . 'id="' . $this->field['id'] . '[' . $k . ']" value="' . esc_attr( $value_display ) . '" placeholder="' . $nicename . '" />';
 
                 echo '<span class="compact drag"><i class="el el-move icon-large"></i></span>';
-                if ( $this->field['mode'] == "checkbox" || ( isset( $this->field['label'] ) && $this->field['label'] == true ) ) {
+                //if ( ( isset( $this->field['label'] ) && $this->field['label'] == true ) ) {
+                if ($this->field['mode'] == "checkbox") {
                     if ( $this->field['mode'] != "checkbox" ) {
                         //echo "<br />";
                         //echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
                     } else {
-                        echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $options[ $k ] . '</strong></label>';
+                        echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' .  $k . '</strong></label>';
                     }
                 }
                 if ( $this->field['mode'] == "checkbox" ) {

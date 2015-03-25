@@ -1,4 +1,10 @@
 .redux-container-sortable {
+    i {
+        &.el {
+            cursor: move;            
+        }
+    }
+    
     label {
         margin-right: 10px;
         width: 300px;
@@ -23,9 +29,17 @@
         }
     }
 
+    ul {
+        &.labeled {
+            li {
+                line-height: 1.4em!important;
+            }
+        }
+    }
+    
     li {
-        line-height: 30px;
-
+        line-height: 30px!important;
+        
         &.ui-state-highlight {
             height: 30px;
             width: 364px;

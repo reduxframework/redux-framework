@@ -1109,6 +1109,7 @@
                             'title'    => __( 'Sortable Text Option', 'redux-framework-demo' ),
                             'subtitle' => __( 'Define and reorder these however you want.', 'redux-framework-demo' ),
                             'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
+                            'label'     => true,
                             'options'  => array(
                                 'si1' => 'Item 1',
                                 'si2' => 'Item 2',

@@ -1,8 +1,11 @@
 # Redux Framework Changelog
 
+## 3.4.4.6
+* Fixed:    #2156: `label` argument not recognized when using sortable as textbox.
+
 ## 3.4.4.5
 * Fixed:    #2140 Another PHP 5.2 issue with ajax_save.
-* Modified:    Opt groups for select field now working in customizer even if not supported.
+* Modified: Opt groups for select field now working in customizer even if not supported.
 
 ## 3.4.4.4
 * Added:    `full_width` arg now makes ANY field full-width.  :)
