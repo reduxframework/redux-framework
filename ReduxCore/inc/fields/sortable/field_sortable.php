@@ -117,7 +117,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
 
                 if ($this->field['mode'] != "checkbox") {
                     if ($use_labels) {
-                        echo '<label class="bugger" for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
+                        echo '<label class="bugger" for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $nicename . '</strong></label>';
                         echo "<br />";
                     }
                 }
@@ -131,7 +131,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
                         //echo "<br />";
                         //echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
                     } else {
-                        echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' .  $k . '</strong></label>';
+                        echo '<label for="' . $this->field['id'] . '[' . $k . ']"><strong>' .  $nicename . '</strong></label>';
                     }
                 }
                 if ( $this->field['mode'] == "checkbox" ) {
