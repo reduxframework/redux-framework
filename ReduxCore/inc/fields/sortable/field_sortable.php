@@ -106,7 +106,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
 
                 }
 
-                if ($this->field['mode'] != "checkbox") {
+                if ($this->field['mode'] != "checkbox" && $this->field['value'] == true) {
                     echo '<label class="bugger" for="' . $this->field['id'] . '[' . $k . ']"><strong>' . $k . '</strong></label>';
                     echo "<br />";                     
                 }
