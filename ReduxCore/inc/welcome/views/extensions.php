@@ -26,7 +26,7 @@
         'css-layout'      => 'fullscreen',
         'color-schemes'   => 'adjust-alt',
         'custom-fonts'    => 'fontsize',
-        'codemirror'      => 'view-mode',
+        //'codemirror'      => 'view-mode',
         'live-search'     => 'search',
         'support-faqs'    => 'question',
         'date-time'       => 'calendar',
