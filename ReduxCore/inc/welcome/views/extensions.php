@@ -35,6 +35,7 @@
         'widget-areas'    => 'inbox-box',
         'shortcodes'      => 'shortcode',
         'icon-select'     => 'gallery',
+        'accordion'       => 'lines'
     );
     $colors  = array(
         '8CC63F',
