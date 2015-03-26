@@ -77,6 +77,19 @@
                 }
             }
 
+            public static function extensionPath( $extension, $folder = true ) {
+                if ( ! isset( Redux::$extensions[ $extension ] ) ) {
+                    return;
+                }
+                $path = end( Redux::$extensions[ $extension ] );
+                if ( ! $folder ) {
+                    return $path;
+                }
+
+                return str_replace( 'extension_' . $extension . '.php', '', $path );
+            }
+
+
             public static function loadRedux( $opt_name = "" ) {
                 $check = ReduxFrameworkInstances::get_instance( $opt_name );
                 if ( isset( $check->apiHasRun ) ) {
