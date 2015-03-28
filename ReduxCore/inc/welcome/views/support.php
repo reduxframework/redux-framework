@@ -16,10 +16,10 @@
         <!-- multistep form -->
         <form id="supportform">
             <?php
-                if ( $newHash ) {
-                    $nonce = wp_create_nonce( 'redux_support_hash' );
-                    echo '<input type="hidden" id="nonce" value="' . $nonce . '"';
-                }
+
+                $nonce = wp_create_nonce( 'redux_support_hash' );
+                echo '<input type="hidden" id="nonce" value="' . $nonce . '"';
+
             ?>
 
             <ul id="progressbar" class=" breadcrumb">
