@@ -59,7 +59,6 @@
             }
 
             $data          = get_option( 'redux_support_hash' );
-            $data          = array();
             $data          = wp_parse_args( $data, array( 'check' => '', 'identifier' => '' ) );
             $generate_hash = true;
             $system_info   = Redux_Helpers::compileSystemStatus();
@@ -79,7 +78,7 @@
             if ( $generate_hash ) {
                 $data['check']      = $newHash;
                 $data['identifier'] = "";
-                $response           = wp_remote_post( 'http://support.redux.io/v1', array(
+                $response           = wp_remote_post( 'http://support.redux.io/v1/', array(
                         'method'      => 'POST',
                         'timeout'     => 65,
                         'redirection' => 5,
@@ -108,6 +107,12 @@
                             $data['identifier'] = $return['identifier'];
                             update_option( 'redux_support_hash', $data );
                         }
+                    } else {
+                        $response = wp_remote_retrieve_body( $response );
+                        echo json_encode( array(
+                            'status'  => 'error',
+                            'message' => $response
+                        ) );
                     }
                 }
             }
