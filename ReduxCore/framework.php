@@ -935,7 +935,7 @@
                             //if
                         } else if ( $type == "post_type" || $type == "post_types" ) {
                             global $wp_post_types;
-
+                            
                             $defaults   = array(
                                 'public'              => true,
                                 'exclude_from_search' => false,
