@@ -16,17 +16,21 @@
 
     $.redux_welcome.supportHash = function() {
 
-        jQuery("#support_hash").focus(function() {
-            var $this = jQuery(this);
-            $this.select();
+        jQuery( "#support_hash" ).focus(
+            function() {
+                var $this = jQuery( this );
+                $this.select();
 
-            // Work around Chrome's little problem
-            $this.mouseup(function() {
-                // Prevent further mouseup intervention
-                $this.unbind("mouseup");
-                return false;
-            });
-        });
+                // Work around Chrome's little problem
+                $this.mouseup(
+                    function() {
+                        // Prevent further mouseup intervention
+                        $this.unbind( "mouseup" );
+                        return false;
+                    }
+                );
+            }
+        );
 
         jQuery( '.redux_support_hash' ).click(
             function( e ) {
@@ -55,7 +59,7 @@
                         },
                         success: function( response ) {
                             if ( response.status == "success" ) {
-                                jQuery( '#support_hash' ).val( 'http://support.redux.io/' + response.identifier );
+                                jQuery( '#support_hash' ).val( 'http://support.redux.io/?id=' + response.identifier );
                                 $button.parents( 'fieldset:first' ).find( '.next' ).removeAttr( 'disabled' ).click();
                             } else {
                                 alert( 'There was an error. Please try again later.' );
