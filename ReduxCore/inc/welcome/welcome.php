@@ -58,7 +58,8 @@
                 die();
             }
 
-            $data          = get_option( 'redux_support_hash' );
+            $data = get_option( 'redux_support_hash' );
+            $data          = array();
             $data          = wp_parse_args( $data, array( 'check' => '', 'identifier' => '' ) );
             $generate_hash = true;
             $system_info   = Redux_Helpers::compileSystemStatus();

@@ -13,20 +13,6 @@
 
     <div id="support_div" class="support">
 
-        <?php
-            $hash          = get_option( 'redux_support_hash' );
-            $generate_hash = true;
-            if ( ! empty( $hash ) ) {
-                //$sysinfo = Redux_Helpers::compileSystemStatus();
-                //$newHash = md5( json_encode( $sysinfo ) );
-                //if ( $newHash == $hash ) {
-                //    unset( $generate_hash );
-                //}
-            }
-
-
-        ?>
-
         <!-- multistep form -->
         <form id="supportform">
             <?php
@@ -127,9 +113,6 @@
                         hash URL: <br/>
                         <a href="https://github.com/reduxframework/redux-framework/issues">https://github.com/reduxframework/redux-framework/issues</a><br/>
                         Provide us with details about your issue as well as the following support hash code:
-                        <input type="text" name="hash" placeholder="Support Hash" disabled="disabled"
-                               class="hash<?php echo ! isset( $generate_hash ) ? '' : ' hide'; ?>"
-                               value="http://support.redux.io/sdfjDSKF"/>
                     </h3>
 
                 </div>
@@ -139,9 +122,6 @@
                     <p>
                         <a href="https://github.com/reduxframework/redux-framework/issues">https://github.com/reduxframework/redux-framework/issues</a><br/>
                         Provide us with details about your issue as well as the following support hash code:
-                        <input type="text" name="hash" placeholder="Support Hash" disabled="disabled"
-                               class="hash<?php echo ! isset( $generate_hash ) ? '' : ' hide'; ?>"
-                               value="http://support.redux.io/sdfjDSKF"/>
                     </p>
 
 

@@ -59,7 +59,7 @@
                         },
                         success: function( response ) {
                             if ( response.status == "success" ) {
-                                jQuery( '#support_hash' ).val( 'http://support.redux.io/' + response.identifier );
+                                jQuery( '#support_hash' ).val( 'http://support.redux.io/?id=' + response.identifier );
                                 $button.parents( 'fieldset:first' ).find( '.next' ).removeAttr( 'disabled' ).click();
                             } else {
                                 alert( 'There was an error. Please try again later.' );
