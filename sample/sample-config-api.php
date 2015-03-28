@@ -4,48 +4,26 @@
      * For full documentation, please visit: http://docs.reduxframework.com/
      */
 
+    if ( ! class_exists( "ReduxFramework" ) ) {
+        return;
+    }
+
+    if ( ! class_exists( 'Redux' ) ) {
+        return;
+    }
+
     if ( ! class_exists( 'Redux_Framework_sample_config' ) ) {
 
         class Redux_Framework_sample_config {
-
-            public $args = array();
-            public $sections = array();
-            public $theme;
-            public $ReduxFramework;
+            public $opt_name;
 
             public function __construct() {
+                $this->opt_name = 'redux_demo';
 
-                if ( ! class_exists( 'ReduxFramework' ) ) {
-                    return;
-                }
-
-                // This is needed. Bah WordPress bugs.  ;)
-                if ( true == Redux_Helpers::isTheme( __FILE__ ) ) {
-                    $this->initSettings();
-                } else {
-                    add_action( 'plugins_loaded', array( $this, 'initSettings' ), 10 );
-                }
-
-            }
-
-            public function initSettings() {
-
-                // Just for demo purposes. Not needed per say.
-                $this->theme = wp_get_theme();
-
-                // Set the default arguments
                 $this->setArguments();
-
-                // Set a few help tabs so you can see how it's done
                 $this->setHelpTabs();
-
-                // Create the sections and fields
                 $this->setSections();
-
-                if ( ! isset( $this->args['opt_name'] ) ) { // No errors please
-                    return;
-                }
-
+                
                 // If Redux is running as a plugin, this will remove the demo notice and links
                 //add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
 
@@ -61,8 +39,7 @@
 
                 // Dynamically add a section. Can be also used to modify sections/fields
                 //add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
-
-                $this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
+                
             }
 
             /**
@@ -76,24 +53,6 @@
                 echo "</pre>";
                 //print_r($options); //Option values
                 //print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
-
-                /*
-              // Demo of how to use the dynamic CSS and write your own static CSS file
-              $filename = dirname(__FILE__) . '/style' . '.css';
-              global $wp_filesystem;
-              if( empty( $wp_filesystem ) ) {
-                require_once( ABSPATH .'/wp-admin/includes/file.php' );
-              WP_Filesystem();
-              }
-
-              if( $wp_filesystem ) {
-                $wp_filesystem->put_contents(
-                    $filename,
-                    $css,
-                    FS_CHMOD_FILE // predefined mode settings for WP files
-                );
-              }
-             */
             }
 
             /**
@@ -177,54 +136,6 @@
                     endif;
                 endif;
 
-                ob_start();
-
-                $ct          = wp_get_theme();
-                $this->theme = $ct;
-                $item_name   = $this->theme->get( 'Name' );
-                $tags        = $this->theme->Tags;
-                $screenshot  = $this->theme->get_screenshot();
-                $class       = $screenshot ? 'has-screenshot' : '';
-
-                $customize_title = sprintf( __( 'Customize &#8220;%s&#8221;', 'redux-framework-demo' ), $this->theme->display( 'Name' ) );
-
-                ?>
-                <div id="current-theme" class="<?php echo esc_attr( $class ); ?>">
-                    <?php if ( $screenshot ) : ?>
-                        <?php if ( current_user_can( 'edit_theme_options' ) ) : ?>
-                            <a href="<?php echo wp_customize_url(); ?>" class="load-customize hide-if-no-customize"
-                               title="<?php echo esc_attr( $customize_title ); ?>">
-                                <img src="<?php echo esc_url( $screenshot ); ?>"
-                                     alt="<?php esc_attr_e( 'Current theme preview', 'redux-framework-demo' ); ?>"/>
-                            </a>
-                        <?php endif; ?>
-                        <img class="hide-if-customize" src="<?php echo esc_url( $screenshot ); ?>"
-                             alt="<?php esc_attr_e( 'Current theme preview', 'redux-framework-demo' ); ?>"/>
-                    <?php endif; ?>
-
-                    <h4><?php echo $this->theme->display( 'Name' ); ?></h4>
-
-                    <div>
-                        <ul class="theme-info">
-                            <li><?php printf( __( 'By %s', 'redux-framework-demo' ), $this->theme->display( 'Author' ) ); ?></li>
-                            <li><?php printf( __( 'Version %s', 'redux-framework-demo' ), $this->theme->display( 'Version' ) ); ?></li>
-                            <li><?php echo '<strong>' . __( 'Tags', 'redux-framework-demo' ) . ':</strong> '; ?><?php printf( $this->theme->display( 'Tags' ) ); ?></li>
-                        </ul>
-                        <p class="theme-description"><?php echo $this->theme->display( 'Description' ); ?></p>
-                        <?php
-                            if ( $this->theme->parent() ) {
-                                printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'redux-framework-demo' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'redux-framework-demo' ), $this->theme->parent()->display( 'Name' ) );
-                            }
-                        ?>
-
-                    </div>
-                </div>
-
-                <?php
-                $item_info = ob_get_contents();
-
-                ob_end_clean();
-
                 $sampleHTML = '';
                 if ( file_exists( dirname( __FILE__ ) . '/info-html.html' ) ) {
                     Redux_Functions::initWpFilesystem();
@@ -235,7 +146,7 @@
                 }
 
                 // ACTUAL DECLARATION OF SECTIONS
-                $this->sections[] = array(
+                $section = array(
                     'title'  => __( 'Home Settings', 'redux-framework-demo' ),
                     'desc'   => __( 'Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'redux-framework-demo' ),
                     'icon'   => 'el el-home',
@@ -545,12 +456,15 @@
                         ),
                     ),
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'type' => 'divide',
+                    'id'   => 'opt-divide-1',
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'icon'   => 'el el-cogs',
                     'title'  => __( 'General Settings', 'redux-framework-demo' ),
                     'fields' => array(
@@ -645,8 +559,9 @@
                         )
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'icon'       => 'el el-website',
                     'title'      => __( 'Styling Options', 'redux-framework-demo' ),
                     'subsection' => true,
@@ -811,6 +726,7 @@
                         ),
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
                 /**
                  *  Note here I used a 'heading' in the sections array construct
@@ -818,7 +734,7 @@
                  * instead of reusing the 'title' value.  This can be done on any
                  * section - kp
                  */
-                $this->sections[] = array(
+                $section = array(
                     'icon'    => 'el el-bullhorn',
                     'title'   => __( 'Field Validation', 'redux-framework-demo' ),
                     'heading' => __( 'Validate ALL fields within Redux.', 'redux-framework-demo' ),
@@ -982,8 +898,9 @@
                         ),
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'icon'   => 'el el-check',
                     'title'  => __( 'Radio/Checkbox Fields', 'redux-framework-demo' ),
                     'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'redux-framework-demo' ),
@@ -1131,8 +1048,9 @@
                         ),
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'icon'   => 'el el-list-alt',
                     'title'  => __( 'Select Fields', 'redux-framework-demo' ),
                     'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'redux-framework-demo' ),
@@ -1350,20 +1268,10 @@
                         ),
                     )
                 );
-
-                $theme_info = '<div class="redux-framework-section-desc">';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-uri">' . __( '<strong>Theme URL:</strong> ', 'redux-framework-demo' ) . '<a href="' . $this->theme->get( 'ThemeURI' ) . '" target="_blank">' . $this->theme->get( 'ThemeURI' ) . '</a></p>';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-author">' . __( '<strong>Author:</strong> ', 'redux-framework-demo' ) . $this->theme->get( 'Author' ) . '</p>';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-version">' . __( '<strong>Version:</strong> ', 'redux-framework-demo' ) . $this->theme->get( 'Version' ) . '</p>';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-description">' . $this->theme->get( 'Description' ) . '</p>';
-                $tabs = $this->theme->get( 'Tags' );
-                if ( ! empty( $tabs ) ) {
-                    $theme_info .= '<p class="redux-framework-theme-data description theme-tags">' . __( '<strong>Tags:</strong> ', 'redux-framework-demo' ) . implode( ', ', $tabs ) . '</p>';
-                }
-                $theme_info .= '</div>';
+                Redux::setSection($this->opt_name, $section);
 
                 if ( file_exists( dirname( __FILE__ ) . '/../README.md' ) ) {
-                    $this->sections['theme_docs'] = array(
+                    $section = array(
                         'icon'   => 'el el-list-alt',
                         'title'  => __( 'Documentation', 'redux-framework-demo' ),
                         'fields' => array(
@@ -1375,10 +1283,11 @@
                             ),
                         ),
                     );
+                    Redux::setSection($this->opt_name, $section);
                 }
 
                 // You can append a new section at any time.
-                $this->sections[] = array(
+                $section = array(
                     'icon'   => 'el el-eye-open',
                     'title'  => __( 'Additional Fields', 'redux-framework-demo' ),
                     'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'redux-framework-demo' ),
@@ -1535,8 +1444,9 @@
                         ),
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'icon'            => 'el el-list-alt',
                     'title'           => __( 'Customizer Only', 'redux-framework-demo' ),
                     'desc'            => __( '<p class="description">This Section should be visible only in Customizer</p>', 'redux-framework-demo' ),
@@ -1559,8 +1469,9 @@
                         ),
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'title'  => __( 'WPML Example', 'redux-framework-demo' ),
                     'desc'   => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement. For extra details look at our <a href="http://docs.reduxframework.com/core/advanced/wpml-integration/" target="_blank">WPML Implementation</a> documentation.', 'redux-framework-demo' ),
                     'icon'   => 'el el-home',
@@ -1586,8 +1497,9 @@
                         ),
                     )
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
                     'title'  => __( 'Import / Export', 'redux-framework-demo' ),
                     'desc'   => __( 'Import and Export your Redux Framework settings from file, text or URL.', 'redux-framework-demo' ),
                     'icon'   => 'el el-refresh',
@@ -1601,23 +1513,13 @@
                         ),
                     ),
                 );
+                Redux::setSection($this->opt_name, $section);
 
-                $this->sections[] = array(
+                $section = array(
+                    'id'   => 'opt-divide-3',
                     'type' => 'divide',
                 );
-
-                $this->sections[] = array(
-                    'icon'   => 'el el-info-circle',
-                    'title'  => __( 'Theme Information', 'redux-framework-demo' ),
-                    'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'redux-framework-demo' ),
-                    'fields' => array(
-                        array(
-                            'id'      => 'opt-raw-info',
-                            'type'    => 'raw',
-                            'content' => $item_info,
-                        )
-                    ),
-                );
+                Redux::setSection($this->opt_name, $section);
 
                 if ( file_exists( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) ) {
                     $tabs['docs'] = array(
@@ -1629,22 +1531,23 @@
             }
 
             public function setHelpTabs() {
-
-                // Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
-                $this->args['help_tabs'][] = array(
-                    'id'      => 'redux-help-tab-1',
-                    'title'   => __( 'Theme Information 1', 'redux-framework-demo' ),
-                    'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
+                $tabs = array(
+                    array(
+                        'id'      => 'redux-help-tab-1',
+                        'title'   => __( 'Theme Information 1', 'redux-framework-demo' ),
+                        'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
+                    ),
+                    array(
+                        'id'      => 'redux-help-tab-2',
+                        'title'   => __( 'Theme Information 2', 'redux-framework-demo' ),
+                        'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
+                    )                    
                 );
-
-                $this->args['help_tabs'][] = array(
-                    'id'      => 'redux-help-tab-2',
-                    'title'   => __( 'Theme Information 2', 'redux-framework-demo' ),
-                    'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'redux-framework-demo' )
-                );
-
+                Redux::setHelpTab($this->opt_name, $tabs);
+                
                 // Set the help sidebar
-                $this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'redux-framework-demo' );
+                $content = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'redux-framework-demo' );
+                Redux::setHelpSidebar($this->opt_name, $content);
             }
 
             /**
@@ -1655,9 +1558,9 @@
 
                 $theme = wp_get_theme(); // For use with some settings. Not necessary.
 
-                $this->args = array(
+                $args = array(
                     // TYPICAL -> Change these values as you need/desire
-                    'opt_name'             => 'redux_demo',
+                    'opt_name'             => $this->opt_name,
                     // This is where your data is stored in the database and also becomes your global variable name.
                     'display_name'         => $theme->get( 'Name' ),
                     // Name that appears at the top of your panel
@@ -1765,61 +1668,63 @@
                 );
 
                 // ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
-                $this->args['admin_bar_links'][] = array(
+                $args['admin_bar_links'][] = array(
                     'id'    => 'redux-docs',
                     'href'   => 'http://docs.reduxframework.com/',
                     'title' => __( 'Documentation', 'redux-framework-demo' ),
                 );
 
-                $this->args['admin_bar_links'][] = array(
+                $args['admin_bar_links'][] = array(
                     //'id'    => 'redux-support',
                     'href'   => 'https://github.com/ReduxFramework/redux-framework/issues',
                     'title' => __( 'Support', 'redux-framework-demo' ),
                 );
 
-                $this->args['admin_bar_links'][] = array(
+                $args['admin_bar_links'][] = array(
                     'id'    => 'redux-extensions',
                     'href'   => 'reduxframework.com/extensions',
                     'title' => __( 'Extensions', 'redux-framework-demo' ),
                 );
 
                 // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
-                $this->args['share_icons'][] = array(
+                $args['share_icons'][] = array(
                     'url'   => 'https://github.com/ReduxFramework/ReduxFramework',
                     'title' => 'Visit us on GitHub',
                     'icon'  => 'el el-github'
                     //'img'   => '', // You can use icon OR img. IMG needs to be a full URL.
                 );
-                $this->args['share_icons'][] = array(
+                $args['share_icons'][] = array(
                     'url'   => 'https://www.facebook.com/pages/Redux-Framework/243141545850368',
                     'title' => 'Like us on Facebook',
                     'icon'  => 'el el-facebook'
                 );
-                $this->args['share_icons'][] = array(
+                $args['share_icons'][] = array(
                     'url'   => 'http://twitter.com/reduxframework',
                     'title' => 'Follow us on Twitter',
                     'icon'  => 'el el-twitter'
                 );
-                $this->args['share_icons'][] = array(
+                $args['share_icons'][] = array(
                     'url'   => 'http://www.linkedin.com/company/redux-framework',
                     'title' => 'Find us on LinkedIn',
                     'icon'  => 'el el-linkedin'
                 );
 
                 // Panel Intro text -> before the form
-                if ( ! isset( $this->args['global_variable'] ) || $this->args['global_variable'] !== false ) {
-                    if ( ! empty( $this->args['global_variable'] ) ) {
-                        $v = $this->args['global_variable'];
+                if ( ! isset( $args['global_variable'] ) || $args['global_variable'] !== false ) {
+                    if ( ! empty( $args['global_variable'] ) ) {
+                        $v = $args['global_variable'];
                     } else {
-                        $v = str_replace( '-', '_', $this->args['opt_name'] );
+                        $v = str_replace( '-', '_', $args['opt_name'] );
                     }
-                    $this->args['intro_text'] = sprintf( __( '<p>Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: <strong>$%1$s</strong></p>', 'redux-framework-demo' ), $v );
+                    $args['intro_text'] = sprintf( __( '<p>Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: <strong>$%1$s</strong></p>', 'redux-framework-demo' ), $v );
                 } else {
-                    $this->args['intro_text'] = __( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework-demo' );
+                    $args['intro_text'] = __( '<p>This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.</p>', 'redux-framework-demo' );
                 }
 
                 // Add content after the form.
-                $this->args['footer_text'] = __( '<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework-demo' );
+                $args['footer_text'] = __( '<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework-demo' );
+                
+                Redux::setArgs($this->opt_name, $args);
             }
 
             public function validate_callback_function( $field, $value, $existing_value ) {
