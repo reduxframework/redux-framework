@@ -13,22 +13,8 @@
 
     <div id="support_div" class="support">
 
-        <?php
-            $hash          = get_option( 'redux_support_hash' );
-            $generate_hash = true;
-            if ( ! empty( $hash ) ) {
-                //$sysinfo = Redux_Helpers::compileSystemStatus();
-                //$newHash = md5( json_encode( $sysinfo ) );
-                //if ( $newHash == $hash ) {
-                //    unset( $generate_hash );
-                //}
-            }
-
-        ?>
-
         <!-- multistep form -->
         <form id="supportform">
-
 
             <ul id="progressbar" class=" breadcrumb">
                 <li class="active">Create Support Hash</li>
@@ -41,9 +27,9 @@
                 <h2>Submit a Support Request</h2>
 
                 <h3>To get started, we will need to generate a support hash.</h3>
-                <h4> This will provide to
+                <h4 style="text-align: left; "> This will provide to
                     your developer all the information they may need to remedy your issue. This action WILL send
-                    information securely to a remote server. To learn what type of information is sent, you may inspect the <a
+                    information securely to a remote server. To learn the information sent, you may inspect the <a
                         href="<?php echo admin_url( 'tools.php?page=redux-status' ); ?>">Status tab</a>.</h4>
                 <p><a href="#" class="docs button button-primary button-large redux_support_hash">Generate
                         a Support Hash</a></p>
