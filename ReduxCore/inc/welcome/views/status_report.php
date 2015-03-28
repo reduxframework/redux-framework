@@ -18,7 +18,7 @@
         return sanitize_text_field( $var );
     }
 
-    $sysinfo = Redux_Helpers::compileSystemStatus();
+    $sysinfo = Redux_Helpers::compileSystemStatus( false, true );
 
 ?>
 <div class="wrap about-wrap redux-status">
@@ -176,7 +176,12 @@
         <tr>
             <td data-export-label="Browser Info"><?php _e( 'Browser Info', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Information about web browser current in use.', 'redux-framework' ) . '">[?]</a>'; ?></td>
-            <td><?php echo $sysinfo['browser']; ?></td>
+            <td><?php
+                    foreach ( $sysinfo['browser'] as $key => $value ) {
+                        echo '<strong>' . ucfirst( $key ) . '</strong>: ' . $value . '<br/>';
+                    }
+                ?>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -270,15 +275,16 @@
 
             // fsockopen/cURL
             $posting['fsockopen_curl']['name'] = 'fsockopen/cURL';
-            $posting['fsockopen_curl']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Payment gateways can use cURL to communicate with remote servers to authorize payments, other plugins may also use it when communicating with remote services.', 'redux-framework' ) . '">[?]</a>';
+            $posting['fsockopen_curl']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Used when communicating with remote services with PHP.', 'redux-framework' ) . '">[?]</a>';
 
             if ( $sysinfo['fsockopen_curl'] == true ) {
                 $posting['fsockopen_curl']['success'] = true;
             } else {
                 $posting['fsockopen_curl']['success'] = false;
-                $posting['fsockopen_curl']['note']    = __( 'Your server does not have fsockopen or cURL enabled - PayPal IPN and other scripts which communicate with other servers will not work. Contact your hosting provider.', 'redux-framework' ) . '</mark>';
+                $posting['fsockopen_curl']['note']    = __( 'Your server does not have fsockopen or cURL enabled - cURL is used to communicate with other servers. Please contact your hosting provider.', 'redux-framework' ) . '</mark>';
             }
 
+            /*
             // SOAP
             $posting['soap_client']['name'] = 'SoapClient';
             $posting['soap_client']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Some webservices like shipping use SOAP to get information from remote servers, for example, live shipping quotes from FedEx require SOAP to be installed.', 'redux-framework' ) . '">[?]</a>';
@@ -300,26 +306,27 @@
                 $posting['dom_document']['success'] = false;
                 $posting['dom_document']['note']    = sprintf( __( 'Your server does not have the <a href="%s">DOMDocument</a> class enabled - HTML/Multipart emails, and also some extensions, will not work without DOMDocument.', 'redux-framework' ), 'http://php.net/manual/en/class.domdocument.php' ) . '</mark>';
             }
+            */
 
-            // GZIP
-            $posting['gzip']['name'] = 'GZip';
-            $posting['gzip']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'GZip (gzopen) is used to open the GEOIP database from MaxMind.', 'redux-framework' ) . '">[?]</a>';
-
-            if ( $sysinfo['gzip'] == true ) {
-                $posting['gzip']['success'] = true;
-            } else {
-                $posting['gzip']['success'] = false;
-                $posting['gzip']['note']    = sprintf( __( 'Your server does not support the <a href="%s">gzopen</a> function - this is required to use the GeoIP database from MaxMind. The API fallback will be used instead for geolocation.', 'redux-framework' ), 'http://php.net/manual/en/zlib.installation.php' ) . '</mark>';
-            }
+            //// GZIP
+            //$posting['gzip']['name'] = 'GZip';
+            //$posting['gzip']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'GZip (gzopen) is used to open the GEOIP database from MaxMind.', 'redux-framework' ) . '">[?]</a>';
+            //
+            //if ( $sysinfo['gzip'] == true ) {
+            //    $posting['gzip']['success'] = true;
+            //} else {
+            //    $posting['gzip']['success'] = false;
+            //    $posting['gzip']['note']    = sprintf( __( 'Your server does not support the <a href="%s">gzopen</a> function - this is required to use the GeoIP database from MaxMind. The API fallback will be used instead for geolocation.', 'redux-framework' ), 'http://php.net/manual/en/zlib.installation.php' ) . '</mark>';
+            //}
 
             // WP Remote Post Check
             $posting['wp_remote_post']['name'] = __( 'Remote Post', 'redux-framework' );
-            $posting['wp_remote_post']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'PayPal uses this method of communicating when sending back transaction information.', 'redux-framework' ) . '">[?]</a>';
+            $posting['wp_remote_post']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Used to send data to remote servers.', 'redux-framework' ) . '">[?]</a>';
 
             if ( $sysinfo['wp_remote_post'] == true ) {
                 $posting['wp_remote_post']['success'] = true;
             } else {
-                $posting['wp_remote_post']['note'] = __( 'wp_remote_post() failed. PayPal IPN won\'t work with your server. Contact your hosting provider.', 'redux-framework' );
+                $posting['wp_remote_post']['note'] = __( 'wp_remote_post() failed. Many advanced features may not function. Contact your hosting provider.', 'redux-framework' );
 
                 if ( $sysinfo['wp_remote_post_error'] ) {
                     $posting['wp_remote_post']['note'] .= ' ' . sprintf( __( 'Error: %s', 'redux-framework' ), rexux_clean( $sysinfo['wp_remote_post_error'] ) );
@@ -330,12 +337,12 @@
 
             // WP Remote Get Check
             $posting['wp_remote_get']['name'] = __( 'Remote Get', 'redux-framework' );
-            $posting['wp_remote_get']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Redux Framework plugins may use this method of communication when checking for plugin updates.', 'redux-framework' ) . '">[?]</a>';
+            $posting['wp_remote_get']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Used to grab information from remote servers for updates updates.', 'redux-framework' ) . '">[?]</a>';
 
             if ( $sysinfo['wp_remote_get'] == true ) {
                 $posting['wp_remote_get']['success'] = true;
             } else {
-                $posting['wp_remote_get']['note'] = __( 'wp_remote_get() failed. The Redux Framework plugin updater won\'t work with your server. Contact your hosting provider.', 'redux-framework' );
+                $posting['wp_remote_get']['note'] = __( 'wp_remote_get() failed. This is needed to get information from remote servers. Contact your hosting provider.', 'redux-framework' );
                 if ( $sysinfo['wp_remote_get_error'] ) {
                     $posting['wp_remote_get']['note'] .= ' ' . sprintf( __( 'Error: %s', 'redux-framework' ), redux_clean( $sysinfo['wp_remote_get_error'] ) );
                 }
@@ -516,10 +523,14 @@
                                         foreach ( $ext as $name => $arr ) {
                                             $ver = Redux::getFileVersion( $arr['path'] );
                                             ?>
-                                            <?php echo ucwords( str_replace( array(
+                                            <?php
+
+                                            echo '<a href="http://reduxframework.com/extensions/' . str_replace( array(
+                                                    '_',
+                                                ), '-', $name ) . '" target="blank">' . ucwords( str_replace( array(
                                                     '_',
                                                     '-'
-                                                ), ' ', $name ) ) . ' - ' . $ver; ?><br/>
+                                                ), ' ', $name ) ) . '</a> - ' . $ver; ?><br/>
                                         <?php
                                         }
                                     ?>
@@ -566,7 +577,7 @@
             <td data-export-label="Child Theme"><?php _e( 'Child Theme', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Displays whether or not the current theme is a child theme.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php
-                    echo is_child_theme() ? '<mark class="yes">' . '&#10004;' . '</mark>' : '&#10005; &ndash; ' . sprintf( __( 'If you\'re modifying Redux Framework or a parent theme you didn\'t build, personally we recommend using a child theme. See: <a href="%s" target="_blank">How to create a child theme</a>', 'redux-framework' ), 'http://codex.wordpress.org/Child_Themes' );
+                    echo is_child_theme() ? '<mark class="yes">' . '&#10004;' . '</mark>' : '&#10005; <br /><em>' . sprintf( __( 'If you\'re modifying Redux Framework or a parent theme you didn\'t build personally, we recommend using a child theme. See: <a href="%s" target="_blank">How to create a child theme</a>', 'redux-framework' ), 'http://codex.wordpress.org/Child_Themes' ) . '</em>';
                 ?></td>
         </tr>
         <?php

@@ -120,7 +120,8 @@
             }
 
             public static function constructArgs( $opt_name ) {
-                $args             = self::$args[ $opt_name ];
+                $args             = isset( self::$args[ $opt_name ] ) ? self::$args[ $opt_name ] : array();
+
                 $args['opt_name'] = $opt_name;
                 if ( ! isset( $args['menu_title'] ) ) {
                     $args['menu_title'] = ucfirst( $opt_name ) . ' Options';

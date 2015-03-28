@@ -22,6 +22,8 @@
 
             add_action( 'redux/loaded', array( $this, 'init' ) );
 
+            add_action( 'wp_ajax_redux_support_hash', array( $this, 'support_hash' ) );
+
         }
 
         public function init() {
@@ -52,19 +54,75 @@
 
         public function support_hash() {
 
-            $hash          = get_option( 'redux_support_hash' );
+            if ( ! wp_verify_nonce( $_POST['nonce'], 'redux-support-hash' ) ) {
+                die();
+            }
+
+            $data          = get_option( 'redux_support_hash' );
+            $data          = array();
+            $data          = wp_parse_args( $data, array( 'check' => '', 'identifier' => '' ) );
             $generate_hash = true;
-            if ( ! empty( $hash ) ) {
-                $GLOBALS['redux_system_info'] = Redux_Helpers::compileSystemStatus();
-                $newHash = md5( json_encode( $GLOBALS['redux_system_info'] ) );
-                if ( $newHash == $hash ) {
-                    unset( $generate_hash );
+            $system_info   = Redux_Helpers::compileSystemStatus();
+            $newHash       = md5( json_encode( $system_info ) );
+            $return        = array();
+            if ( $newHash == $data['check'] ) {
+                unset( $generate_hash );
+            }
+            $post_data = array(
+                'hash'          => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] ),
+                'site'          => esc_url( home_url( '/' ) ),
+                'tracking'      => Redux_Helpers::getTrackingObject(),
+                'system_status' => $system_info,
+            );
+            $post_data = json_encode( $post_data );
+
+            if ( $generate_hash ) {
+                $data['check']      = $newHash;
+                $data['identifier'] = "";
+                $response           = wp_remote_post( 'http://support.redux.io/v1', array(
+                        'method'      => 'POST',
+                        'timeout'     => 65,
+                        'redirection' => 5,
+                        'httpversion' => '1.0',
+                        'blocking'    => true,
+                        'compress'    => true,
+                        'headers'     => array(),
+                        'body'        => array(
+                            'data' => $post_data
+                        )
+                    )
+                );
+
+                if ( is_wp_error( $response ) ) {
+                    echo json_encode( array(
+                        'status'  => 'error',
+                        'message' => $response->get_error_message()
+                    ) );
+                    die( 1 );
+                } else {
+                    $response_code = wp_remote_retrieve_response_code( $response );
+                    if ( $response_code == 200 ) {
+                        $response = wp_remote_retrieve_body( $response );
+                        $return   = json_decode( $response, true );
+                        if ( isset( $return['identifier'] ) ) {
+                            $data['identifier'] = $return['identifier'];
+                            update_option( 'redux_support_hash', $data );
+                        }
+                    }
                 }
             }
-            if ( $generate_hash ) {
-                $nonce = wp_create_nonce( 'redux_support_hash' );
-                echo '<input type="hidden" id="nonce" value="' . $nonce . '"';
+
+            if ( ! empty( $data['identifier'] ) ) {
+                $return['status']     = "success";
+                $return['identifier'] = $data['identifier'];
+            } else {
+                $return['status']  = "error";
+                $return['message'] = __( "Support hash could not be generated. Please try again later.", 'redux-framework' );
             }
+
+            echo json_encode( $return );
+
+            die( 1 );
         }
 
         /**
@@ -225,7 +283,9 @@
          */
         public function tabs() {
             $selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'redux-about';
+            $nonce    = wp_create_nonce( 'redux-support-hash' );
             ?>
+            <input type="hidden" id="redux_support_nonce" value="<?php echo $nonce; ?>"/>
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab <?php echo $selected == 'redux-about' ? 'nav-tab-active' : ''; ?>"
                    href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'tools.php' ) ) ); ?>">

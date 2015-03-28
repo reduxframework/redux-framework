@@ -13,10 +13,59 @@
         }
     );
 
+
     $.redux_welcome.supportHash = function() {
-        jQuery('.redux_support_hash' ).click(function() {
-            console.log('here');
+
+        jQuery("#support_hash").focus(function() {
+            var $this = jQuery(this);
+            $this.select();
+
+            // Work around Chrome's little problem
+            $this.mouseup(function() {
+                // Prevent further mouseup intervention
+                $this.unbind("mouseup");
+                return false;
+            });
         });
+
+        jQuery( '.redux_support_hash' ).click(
+            function( e ) {
+
+                var $button = jQuery( this );
+                if ( $button.hasClass( 'disabled' ) ) {
+                    return;
+                }
+                var $nonce = jQuery( '#redux_support_nonce' ).val();
+                $button.addClass( 'disabled' );
+                $button.parent().append( '<span class="spinner" style="display:block;float: none;margin: 10px auto;"></span>' );
+                $button.closest( '.spinner' ).fadeIn();
+                jQuery.ajax(
+                    {
+                        type: "post",
+                        dataType: "json",
+                        url: ajaxurl,
+                        data: {
+                            action: "redux_support_hash",
+                            nonce: $nonce
+                        },
+                        error: function( response ) {
+                            $button.removeClass( 'disabled' );
+                            $button.parent().find( '.spinner' ).remove();
+                            alert( 'There was an error. Please try again later.' );
+                        },
+                        success: function( response ) {
+                            if ( response.status == "success" ) {
+                                jQuery( '#support_hash' ).val( 'http://support.redux.io/' + response.identifier );
+                                $button.parents( 'fieldset:first' ).find( '.next' ).removeAttr( 'disabled' ).click();
+                            } else {
+                                alert( 'There was an error. Please try again later.' );
+                            }
+                        }
+                    }
+                );
+                e.preventDefault();
+            }
+        );
     };
 
     $.redux_welcome.initSupportPage = function() {
@@ -52,7 +101,7 @@
                     }
                 }
             );
-            jQuery( '#support_div' ).height( $height + 10 );
+            jQuery( '#support_div' ).height( $height + 20 );
         }
 
         setHeight();
