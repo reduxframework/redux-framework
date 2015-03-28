@@ -13,14 +13,22 @@
 
     <div id="support_div" class="support">
 
+        <?php
+            $hash          = get_option( 'redux_support_hash' );
+            $generate_hash = true;
+            if ( ! empty( $hash ) ) {
+                //$sysinfo = Redux_Helpers::compileSystemStatus();
+                //$newHash = md5( json_encode( $sysinfo ) );
+                //if ( $newHash == $hash ) {
+                //    unset( $generate_hash );
+                //}
+            }
+
+        ?>
+
         <!-- multistep form -->
         <form id="supportform">
-            <?php
 
-                $nonce = wp_create_nonce( 'redux_support_hash' );
-                echo '<input type="hidden" id="nonce" value="' . $nonce . '"';
-
-            ?>
 
             <ul id="progressbar" class=" breadcrumb">
                 <li class="active">Create Support Hash</li>
