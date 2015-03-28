@@ -71,7 +71,7 @@
                 }
 
                 if ( ! empty ( $params ) ) {
-                    extract( $params );
+                    extract( $params, EXTR_SKIP );
                 }
 
                 // Setup the filesystem with creds
@@ -95,7 +95,7 @@
             public function do_action( $action, $file = '', $params = '' ) {
 
                 if ( ! empty ( $params ) ) {
-                    extract( $params );
+                    extract( $params, EXTR_SKIP );
                 }
 
                 global $wp_filesystem;
