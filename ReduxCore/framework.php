@@ -395,7 +395,8 @@
                     }
                     // Ajax saving!!!
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
-
+                    
+                    include_once 'core/dashboard.php';
                 }
 
                 /**
