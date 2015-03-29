@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.4.7
+* Added:    Redux Framework News Widget on the WP Dashboard.
+
 ## 3.4.4.6
 * Fixed:    #2156: `label` argument not recognized when using sortable as textbox.
 
