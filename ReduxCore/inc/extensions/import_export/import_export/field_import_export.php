@@ -116,7 +116,7 @@
                 <textarea class="large-text noUpdate" id="import-link-value" name="<?php echo $this->parent->args['opt_name'] ?>[import_link]" rows="2"></textarea>
                 </div>
 
-                <p id="redux-import-action"><input type="submit" id="redux-import" name="' . $this->parent->args['opt_name'] . '[import]" class="button-primary" value="<?php _e( 'Import', 'redux-framework' ) ?>">&nbsp;&nbsp;<span><?php echo apply_filters( 'redux-import-warning', __( 'WARNING! This will overwrite all existing option values, please proceed with caution!', 'redux-framework' ) ) ?></span></p>
+                <p id="redux-import-action"><input type="submit" id="redux-import" name="import" class="button-primary" value="<?php _e( 'Import', 'redux-framework' ) ?>">&nbsp;&nbsp;<span><?php echo apply_filters( 'redux-import-warning', __( 'WARNING! This will overwrite all existing option values, please proceed with caution!', 'redux-framework' ) ) ?></span></p>
 
                 <div class="hr"/><div class="inner"><span>&nbsp;</span></div></div>
                 <h4><?php _e( 'Export Options', 'redux-framework' ) ?></h4>
