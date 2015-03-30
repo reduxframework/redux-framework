@@ -2,6 +2,7 @@
 
 ## 3.4.4.8
 * Fixed:    #2155 - Fixed import with ajax_save.
+* Fixed:    Changelog now uses raw field parsedown if present.
 
 ## 3.4.4.7
 * Added:    Redux Framework News Widget on the WP Dashboard.
