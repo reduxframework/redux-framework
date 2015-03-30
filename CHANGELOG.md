@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.4.4.8
+* Fixed:    #2155 - Fixed import with ajax_save.
+
 ## 3.4.4.7
 * Added:    Redux Framework News Widget on the WP Dashboard.
 
