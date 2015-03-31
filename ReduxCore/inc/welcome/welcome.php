@@ -61,7 +61,6 @@
 
             $saveVer  = Redux_Helpers::major_version( get_option( 'redux_version_upgraded_from' ) );
             $curVer   = Redux_Helpers::major_version( ReduxFramework::$_version );
-            $redirect = false;
             $compare  = false;
 
             if ( Redux_Helpers::isLocalHost() ) {
@@ -79,18 +78,17 @@
             }
 
             if ( $compare ) {
+                $redirect = false;
                 if ( empty( $saveVer ) ) {
                     $redirect = true; // First time
                 } else if ( version_compare( $curVer, $saveVer, '>' ) ) {
                     $redirect = true; // Previous version
                 }
+                if ( $redirect ) {
+                    wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
+                    exit();
+                }
             }
-
-            if ( $redirect ) {
-                wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
-                exit();
-            }
-
         }
 
         public function change_wp_footer() {
@@ -120,7 +118,7 @@
             );
             $post_data = json_encode( $post_data );
 
-            if ( $generate_hash ) {
+            if ( isset( $generate_hash ) ) {
                 $data['check']      = $newHash;
                 $data['identifier'] = "";
                 $response           = wp_remote_post( 'http://support.redux.io/v1/', array(
