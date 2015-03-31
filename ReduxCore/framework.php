@@ -399,8 +399,11 @@
                     include_once 'core/dashboard.php';
                     
                     if ($this->args['dev_mode'] == true || Redux_Helpers::isLocalHost () === true) {
-                        //include_once 'core/newsflash.php';
-                        //new reduxNewsflash($this);
+                        if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
+                            include_once 'core/newsflash.php';
+                            new reduxNewsflash($this);
+                            $GLOBALS['redux_notice_check'] = 1;
+                        }
                     }
                 }
 

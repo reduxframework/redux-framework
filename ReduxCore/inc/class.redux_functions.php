@@ -202,6 +202,12 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
 
                 // Enum admin notices
                 foreach ( $notices as $notice ) {
+                    
+                    $add_style = '';
+                    if (strpos($notice['type'], 'redux-message') != false) {
+                        $add_style = 'style="border-left: 4px solid #00A2E3!important;"';
+                    }
+                    
                     if ( true == $notice['dismiss'] ) {
 
                         // Get user ID
@@ -228,12 +234,12 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
                             }
 
                             // Print the notice with the dismiss link
-                            echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
+                            echo '<div ' . $add_style . ' class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
                         }
                     } else {
 
                         // Standard notice
-                        echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
+                        echo '<div ' . $add_style . ' class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
                     }
                 }
 
