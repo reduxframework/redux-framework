@@ -352,7 +352,7 @@
                     }
 
                     // Display admin notices
-                    add_action( 'admin_notices', array( $this, '_admin_notices' ) );
+                    add_action( 'admin_notices', array( $this, '_admin_notices' ), 99 );
 
                     // Check for dismissed admin notices.
                     add_action( 'admin_init', array( $this, '_dismiss_admin_notice' ), 9 );
@@ -397,6 +397,11 @@
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
                     
                     include_once 'core/dashboard.php';
+                    
+                    if ($this->args['dev_mode'] == true || Redux_Helpers::isLocalHost () === true) {
+                        //include_once 'core/newsflash.php';
+                        //new reduxNewsflash($this);
+                    }
                 }
 
                 /**
@@ -580,7 +585,7 @@
             }
 
             public function _admin_notices() {
-                Redux_Functions::adminNotices();
+                Redux_Functions::adminNotices($this->admin_notices);
             }
 
             public function _dismiss_admin_notice() {

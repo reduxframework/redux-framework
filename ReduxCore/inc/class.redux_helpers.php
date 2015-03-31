@@ -56,6 +56,10 @@
                 }
             }
 
+            public static function isLocalHost(){
+                return ($_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0;
+            }
+            
             public static function getTrackingObject() {
                 $hash = md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] );
 

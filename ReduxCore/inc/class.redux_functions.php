@@ -194,14 +194,14 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
          * @access      public
          * @return      void
          */
-        public static function adminNotices() {
+        public static function adminNotices($notices = array()) {
             global $current_user, $pagenow;
 
             // Check for an active admin notice array
-            if ( ! empty( self::$_parent->admin_notices ) ) {
+            if ( ! empty( $notices ) ) {
 
                 // Enum admin notices
-                foreach ( self::$_parent->admin_notices as $notice ) {
+                foreach ( $notices as $notice ) {
                     if ( true == $notice['dismiss'] ) {
 
                         // Get user ID
