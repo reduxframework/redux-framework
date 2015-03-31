@@ -17,7 +17,7 @@
         <form id="supportform">
 
             <ul id="progressbar" class=" breadcrumb">
-                <li class="active"><?php _e( 'Create Support Hash', 'redux-framework' ); ?></li>
+                <li class="active"><?php _e( 'Generate a Support Hash', 'redux-framework' ); ?></li>
                 <li href="#"><?php _e( 'Select Support Type', 'redux-framework' ); ?></li>
                 <li href="#"><?php _e( 'How to Get Support', 'redux-framework' ); ?></li>
             </ul>
