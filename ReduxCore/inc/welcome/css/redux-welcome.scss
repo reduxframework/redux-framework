@@ -602,7 +602,27 @@ p.redux-actions {
             width: 45%;
             float: left;
         }
-
+        #user_type {
+            width: 100%;
+            td {
+                cursor: pointer;
+                width: 50%;
+                i {
+                    font-size: 130px;
+                    margin-bottom: 10px;
+                }
+                &:hover i {
+                    color: #176C8E;
+                }
+                small {
+                    line-height: 2.5em;
+                }
+            }
+        }
+        #support_hash {
+            text-align: center;
+            word-break: break-all;
+        }
     }
 
     .breadcrumb {

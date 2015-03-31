@@ -56,8 +56,17 @@
                 }
             }
 
+            public static function major_version( $v ) {
+                $version = explode( '.', $v );
+                if ( count( $version ) > 1 ) {
+                    return $version[0] . '.' . $version[1];
+                } else {
+                    return $v;
+                }
+            }
+
             public static function isLocalHost(){
-                return ($_SERVER['REMOTE_ADDR'] === '127.0.0.1' ) ? 1 : 0;
+                return ($_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' ) ? 1 : 0;
             }
             
             public static function getTrackingObject() {
@@ -166,7 +175,12 @@
                 }
                 $software['full']    = $_SERVER['SERVER_SOFTWARE'];
                 $data['environment'] = $software;
-                if ( function_exists( 'mysql_get_server_info' ) ) {
+                if ( function_exists( 'mysqli_get_server_info' ) ) {
+                    $link = mysqli_connect() or die( "Error " . mysqli_error( $link ) );
+                    $data['environment']['mysql'] = mysqli_get_server_info( $link );
+                } else if ( class_exists( 'PDO' ) && method_exists( 'PDO', 'getAttribute' ) ) {
+                    $data['environment']['mysql'] = PDO::getAttribute( PDO::ATTR_SERVER_VERSION );
+                } else {
                     $data['environment']['mysql'] = mysql_get_server_info();
                 }
                 if ( empty( $data['developer'] ) ) {
