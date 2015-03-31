@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.4.4.9
+* Added:    Dynamic admin messages (aka Newsflash).  Dismissable admin messages announcing breaking Redux news.
+            Messages will not appear for users when dev_mode is set to `false`.  However, messages remain active
+            on localhosts, so devs may benefit.
+
 ## 3.4.4.8
 * Fixed:    #2155 - Fixed import with ajax_save.
 * Fixed:    Changelog now uses raw field parsedown if present.
