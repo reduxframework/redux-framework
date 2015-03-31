@@ -18,8 +18,9 @@
             function set_json_file($options, $css, $changed){
                 $arr = array(
                     'type'      => !empty($options['opt-message-type']) ? $options['opt-message-type'] : 'updated' ,
-                    'title'     => !empty ($options['opt-message-title']) ? $options['opt-message-title']: 'NewsFlash From Redux!',
-                    'message'   => $options['opt-message']
+                    'title'     => $options['opt-message-title'],
+                    'message'   => $options['opt-message'],
+                    'color'     => !empty($options['opt-message-color']['rgba']) ? $options['opt-message-color']['rgba'] : '#00A2E3'
                 );
                 
                 $json = json_encode($arr);
@@ -188,9 +189,18 @@
                                 'error'     => 'Error (Red)',
                                 'update-nag' => 'Nag (Orange)',
                                 'notice'    => 'Notice (No Color)',
-                                'redux-message'     => 'Redux Blue',
+                                'redux-message'     => 'Custom Color',
                             ),
                             'default'   => 'updated',
+                            'compiler'  => true
+                        ),
+                        array(
+                            'id'        => 'opt-message-color',
+                            'type'      => 'color_rgba',
+                            'title'     => 'Custom Message Tag Color',
+                            'subtitle'  => 'Sets the left border color of the admin notice.',
+                            'default'   => array('color' => '#00A2E3', 'alpha' => 1),
+                            'required'  => array('opt-message-type', '=', 'redux-message'),
                             'compiler'  => true
                         ),
                         array(
