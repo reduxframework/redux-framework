@@ -10,13 +10,21 @@
         class reduxNewsflash {
             private $parent         = null;
             private $notice_json    = '';
+            private $server_file    = '';
+            private $interval       = 3;
+            private $cookie_id      = '';
 
-            public function __construct ($parent) {
+            public function __construct ($parent, $params) {
                 // set parent object
                 $this->parent = $parent;
 
+                extract($params);
+                $this->server_file  = $server_file;
+                $this->interval     = isset($interval) ? $interval: 3;
+                $this->cookie_id    = isset($cookie_id) ? $cookie_id : $parent->args['opt_name'] . '_blast';
+                
                 // set notice file location
-                $notice_dir         = ReduxFramework::$_upload_dir . 'notice';
+                $notice_dir         = ReduxFramework::$_upload_dir . $dir_name;// 'notice';
                 $this->notice_json  = $notice_dir . '/notice.json';
 
                 // verify notice dir exists
@@ -34,7 +42,7 @@
                 } else {
                     
                     // check expiry time
-                    if ( ! isset( $_COOKIE['redux_notice_check'] ) ) {
+                    if ( ! isset( $_COOKIE[$this->cookie_id] ) ) {
                         
                         // expired!  get notice data from server
                         $this->get_notice_json();
@@ -51,7 +59,7 @@
                 $filesystem = $this->parent->filesystem;
                 
                 // get notice data from server
-                $data = $filesystem->execute('get_contents', 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json');
+                $data = $filesystem->execute('get_contents', $this->server_file);// 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json');
 
                 // if some data exists
                 if ($data != '' || !empty($data)) {
@@ -77,7 +85,7 @@
                     $filesystem->execute('put_contents', $this->notice_json, $params);
                     
                     // set cookie for three day expiry
-                    setcookie( "redux_notice_check", 1, time() + (86400 * 3), '/' );
+                    setcookie( $this->cookie_id, 1, time() + (86400 * $this->interval), '/' );
                 }
             }
 
@@ -101,17 +109,20 @@
                         // validate data
                         $data['type']   = isset($data['type']) && $data['type'] != '' ? $data['type'] : 'updated';
                         $data['title']  = isset($data['title']) && $data['title'] != '' ? $data['title'] : '';
-
+                        
                         if ($data['type'] == 'redux-message') {
                             $data['type'] = 'updated redux-message';
                         }
                         
+                        $data['color']  = isset($data['color']) ? $data['color'] : '#00A2E3';
+                        
                         // set admin notice array
                         $this->parent->admin_notices[] = array(
-                            'type'    => $data['type'],
-                            'msg'     => $data['title'] . $data['message'],
-                            'id'      => 'dev_notice_' . filemtime($this->notice_json),
-                            'dismiss' => true,
+                            'type'      => $data['type'],
+                            'msg'       => $data['title'] . $data['message'],
+                            'id'        => $this->cookie_id . '_' . filemtime($this->notice_json),
+                            'dismiss'   => true,
+                            'color'     => $data['color']
                         );
                     }
                 }
