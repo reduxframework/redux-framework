@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+#3.4.4.9.1
+* Fixed:    Support page now works.
+* Fixed:    Fix for MySQL deprecated functions in php 5.5+.
+
 ## 3.4.4.9
 * Added:    Dynamic admin messages (aka Newsflash).  Dismissable admin messages announcing breaking Redux news.
             Messages will not appear for users when dev_mode is set to `false`.  However, messages remain active
