@@ -118,7 +118,7 @@
             );
             $post_data = json_encode( $post_data );
 
-            if ( isset( $generate_hash ) ) {
+            if ( isset( $generate_hash ) && $generate_hash ) {
                 $data['check']      = $newHash;
                 $data['identifier'] = "";
                 $response           = wp_remote_post( 'http://support.redux.io/v1/', array(
