@@ -459,7 +459,7 @@
                 require_once ReduxFramework::$_dir . 'inc/fields/raw/parsedown.php';
                 $Parsedown = new Parsedown();
 
-                return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url . '/../CHANGELOG.md' ) ) ) ) );
+                return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url . '../CHANGELOG.md' ) ) ) ) );
             }
 
             return '<script src="http://gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
