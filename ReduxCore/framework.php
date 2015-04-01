@@ -73,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.4.9.3';
+            public static $_version = '3.4.4.9.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2674,9 +2674,23 @@
                     $_POST['data'] = stripslashes( $_POST['data'] );
                     parse_str( $_POST['data'], $values );
                     $values = $values[ $redux->args['opt_name'] ];
-                    $values = array_map( 'stripslashes_deep', $values );
+
+                    $beforeDeep = $values;
+                    $values     = array_map( 'stripslashes_deep', $values );
+
+                    // Ace editor hack for < PHP 5.4. Oy
+                    if ( isset( $this->fields['ace_editor'] ) ) {
+                        foreach ( $this->fields['ace_editor'] as $id => $v ) {
+                            if (version_compare(phpversion(), '5.4', '<')) {
+                                $values[ $id ] = stripslashes( $beforeDeep[ $id ] );
+                            } else {
+                                $values[ $id ] = $beforeDeep[ $id ];
+                            }
+                        }
+                    }
 
                     if ( ! empty ( $values ) ) {
+
                         try {
                             if ( isset ( $redux->validation_ran ) ) {
                                 unset ( $redux->validation_ran );
