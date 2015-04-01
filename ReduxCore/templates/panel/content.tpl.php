@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * The template for the main content of the panel..
+	 * The template for the main content of the panel.
 	 *
 	 * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
 	 *
