@@ -78,7 +78,7 @@
 
                         $redux        = ReduxFrameworkInstances::get_all_instances();
                         if (!empty($redux)) {
-                            echo '<code>';
+                            echo '<code style="line-height: 30px;">';
                             foreach ( $redux as $panel ) {
                                 echo '<strong>'.$panel->args['display_name'].'</strong>';
                                 if (!empty($panel->args['display_version'])) {
