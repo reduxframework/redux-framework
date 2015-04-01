@@ -72,7 +72,7 @@
                     <?php
 
                         $redux = ReduxFrameworkInstances::get_all_instances();
-                        print_r($redux);
+
 
                         foreach($redux as $panel) {
                             echo "Name: ".$panel->args['display_name'].' v.'.$panel->args['display_version'], PHP_EOL;
