@@ -50,11 +50,11 @@
                 <table id="user_type">
                     <tr>
                         <td id="is_user"><i class="el el-user"></i><br/><?php _e( 'User', 'redux-framework' ); ?><br/>
-                            <small><?php _e( 'I am a user using a pre-built product.', 'redux-framework' ); ?></small>
+                            <small><?php _e( 'I am a user, using a pre-built product.', 'redux-framework' ); ?></small>
                         </td>
                         <td id="is_developer"><i
                                 class="el el-github"></i><br/><?php _e( 'Developer', 'redux-framework' ); ?><br/>
-                            <small><?php _e( 'I am a developer building a product using Redux.', 'redux-framework' ); ?></small>
+                            <small><?php _e( 'I am a developer, building a product using Redux.', 'redux-framework' ); ?></small>
                         </td>
                     </tr>
                 </table>
