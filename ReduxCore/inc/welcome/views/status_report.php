@@ -200,6 +200,17 @@
             <td><?php echo $sysinfo['server_info']; ?></td>
         </tr>
         <tr>
+            <td data-export-label="Localhost Environment"><?php _e( 'Localhost Environment', 'redux-framework' ); ?>:</td>
+            <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Is the server running in a localhost environment.', 'redux-framework' ) . '">[?]</a>'; ?></td>
+            <td><?php
+                if ( true == $sysinfo['localhost'] ) {
+                    echo '<mark class="yes">' . '&#10004;' . '</mark>';
+                } else {
+                    echo '<mark class="no">' . '&ndash;' . '</mark>';
+                }?>            
+            </td>
+        </tr>
+        <tr>
             <td data-export-label="PHP Version"><?php _e( 'PHP Version', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The version of PHP installed on your hosting server.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php echo $sysinfo['php_ver']; ?></td>

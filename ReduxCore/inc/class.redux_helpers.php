@@ -405,6 +405,7 @@
                 );
 
                 $sysinfo['server_info'] = esc_html( $_SERVER['SERVER_SOFTWARE'] );
+                $sysinfo['localhost']   = self::makeBoolStr( self::isLocalHost());
                 $sysinfo['php_ver']     = function_exists( 'phpversion' ) ? esc_html( phpversion() ) : 'phpversion() function does not exist.';
 
                 if ( function_exists( 'ini_get' ) ) {
