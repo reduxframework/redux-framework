@@ -69,11 +69,11 @@
 
                 </div>
                 <div class="is_user">
-                    <p align="left">Listed below are the Wordpress panels installed on your site that utilize Redux
-                        Framework. You will need to direct your support query to the author of the listed products directly as Redux
-                        Framework does not directly support products created with our framework. It is the
-                        responsibility of the plugin or theme developer to support their work. Should the problem be
-                        with our framework, the developer needs to contact us directly. Thank you.</p>
+                    <p align="left">Listed below are the Wordpress plugins and/or theme installed on your site that utilize Redux
+                        Framework. Redux Framework does not support products created with our framework.  It is the responsibility 
+                        of the plugin or theme developer to support their work. You will 
+                        need to contact the author(s) of the products listed below with your support questions.  Please be sure 
+                        to include for them - via cut and paste - the URL indicated below, should they need to contact us for support. Thank you.</p>
                     <?php
 
                         $redux        = ReduxFrameworkInstances::get_all_instances();
