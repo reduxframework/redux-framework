@@ -12,19 +12,20 @@
     <?php $this->tabs(); ?>
 
     <div id="redux-message" class="updated">
-        <h4>What is Redux Framework?</h4>
+        <h4><?php _e( 'What is Redux Framework?', 'redux-framework' ); ?></h4>
 
-        <p>Redux Framework is the core of many products on the web. It is an option framework which developers use to
-            enhance their products..</p>
+        <p><?php _e( 'Redux Framework is the core of many products on the web. It is an option framework which developers use to
+            enhance their products.', 'redux-framework' ); ?></p>
 
         <p class="submit">
-            <a class="button-primary" href="http://reduxframework.com" target="_blank">Learn More</a>
+            <a class="button-primary" href="http://reduxframework.com"
+               target="_blank"><?php _e( 'Learn More', 'redux-framework' ); ?></a>
         </p>
     </div>
 
     <div class="changelog">
 
-        <h2>New in this Release</h2>
+        <h2><?php _e( 'New in this Release', 'redux-framework' ); ?></h2>
 
         <div class="changelog about-integrations">
             <div class="wc-feature feature-section col three-col">
