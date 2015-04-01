@@ -632,6 +632,7 @@ p.redux-actions {
         box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
         overflow: hidden;
         border-radius: 5px;
+        margin: 15px 0;
         /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
         counter-reset: flag;
         li {
