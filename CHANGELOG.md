@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+#3.4.4.9.3
+* Fixed:    #2163 - Undefined error in JS.
+
 #3.4.4.9.2
 * Fixed:    #2176 - Infinite loop in the customizer for live preview of themes.
 

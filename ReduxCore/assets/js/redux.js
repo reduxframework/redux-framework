@@ -1,4 +1,4 @@
-/* global confirm, relid:true, jsonView */
+/* global redux, confirm, relid:true, jsonView */
 
 (function( $ ) {
     'use strict';
@@ -614,7 +614,7 @@
             function() {
                 var type = $( this ).attr( 'data-type' );
                 //console.log(type);
-                if ( redux.field_objects[type] ) {
+                if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] && redux.field_objects[type] ) {
                     redux.field_objects[type].init();
                 }
                 if ( $( this ).hasClass( 'redux_remove_th' ) ) {
