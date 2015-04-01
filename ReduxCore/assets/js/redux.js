@@ -630,7 +630,7 @@
     };
 
     $.redux.notices = function() {
-        if ( redux.errors !== undefined ) {
+        if ( redux.errors && redux.errors.errors ) {
             $.each(
                 redux.errors.errors, function( sectionID, sectionArray ) {
                     $.each(
@@ -671,7 +671,7 @@
                 }
             );
         }
-        if ( redux.warnings !== undefined ) {
+        if ( redux.warnings && redux.warnings.warnings ) {
             $.each(
                 redux.warnings.warnings, function( sectionID, sectionArray ) {
                     $.each(
