@@ -48,27 +48,40 @@
 
                 <table id="user_type">
                     <tr>
-                        <td id="is_user"><i class="el el-user"></i><br/>User<br /><small>I am a user using a pre-built product.</small></td>
-                        <td id="is_developer"><i class="el el-github"></i><br/>Developer<br /><small>I am a developer building a product using Redux.</small></td>
+                        <td id="is_user"><i class="el el-user"></i><br/>User<br/>
+                            <small>I am a user using a pre-built product.</small>
+                        </td>
+                        <td id="is_developer"><i class="el el-github"></i><br/>Developer<br/>
+                            <small>I am a developer building a product using Redux.</small>
+                        </td>
                     </tr>
                 </table>
 
-                <input type="button" name="next" class="next action-button hide" value="Next" />
+                <input type="button" name="next" class="next action-button hide" value="Next"/>
             </fieldset>
             <fieldset id="final_support">
-                <h2>How to Get Support</h2>
+                <h2><?php _e( 'How to Get Support', 'redux-framework' ); ?></h2>
 
                 <div class="is_developer">
-                    <p>Please proceed to the Redux Framework issue tracker and supply us with your the support URL
-                        below. Please also provide any information that will help us to reproduce your issue.</p>
+                    <p><?php _e( 'Please proceed to the Redux Framework issue tracker and supply us with your support URL below. Please also provide any information that will help us to reproduce your issue.', 'redux-framework' ); ?></p>
                     <a href="https://github.com/reduxframework/redux-framework/issues" target="_blank"><h4>
                             https://github.com/reduxframework/redux-framework/issues</h4></a>
 
                 </div>
                 <div class="is_user">
+                    <?php
+
+                        $redux = ReduxFrameworkInstances::get_all_instances();
+                        print_r($redux);
+
+                        foreach($redux as $panel) {
+                            echo "Name: ".$panel->args['display_name'].' v.'.$panel->args['display_version'], PHP_EOL;
+                        }
+                    ?>
 
                     <ul id="toDebug">
                         <?php
+
                             $active_plugins = (array) get_option( 'active_plugins', array() );
 
                             if ( is_multisite() ) {

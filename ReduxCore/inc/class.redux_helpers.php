@@ -513,7 +513,7 @@
                                 }
                             }
                         }
-                        $sysinfo['redux_instances'][ $inst ]['extensions'] = Redux::getExtensions( '', $inst );
+                        $sysinfo['redux_instances'][ $inst ]['extensions'] = Redux::getExtensions( $inst );
 
                         if ( isset( $data->args['templates_path'] ) && $data->args['templates_path'] != '' ) {
                             $sysinfo['redux_instances'][ $inst ]['templates'] = self::getReduxTemplates( $data->args['templates_path'] );
