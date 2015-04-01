@@ -101,6 +101,7 @@
                     }
                     //}
 
+
                     add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
                 }
 
@@ -126,9 +127,7 @@
             }
 
             public function _override_values( $data ) {
-                if ( empty( $this->parent->options ) ) {
-                    $this->parent->get_options();
-                }
+
                 self::get_post_values();
 
                 if ( isset( $_POST['customized'] ) && ! empty( self::$post_values ) ) {

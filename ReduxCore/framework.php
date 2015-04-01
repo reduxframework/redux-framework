@@ -73,7 +73,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.4.4.9.1';
+            public static $_version = '3.4.4.9.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -242,6 +242,11 @@
                  */
                 $this->args = apply_filters( "redux/options/{$this->args['opt_name']}/args", $this->args );
 
+                // Do not save the defaults if we're on a live preview!
+                if ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) {
+                    $this->args['save_defaults'] = false;
+                }
+
                 if ( ! empty ( $this->args['opt_name'] ) ) {
                     /**
                      * SHIM SECTION
@@ -395,21 +400,21 @@
                     }
                     // Ajax saving!!!
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
-                    
+
                     include_once 'core/dashboard.php';
-                    
-                    if ($this->args['dev_mode'] == true || Redux_Helpers::isLocalHost () === true) {
+
+                    if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() === true ) {
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
                             include_once 'core/newsflash.php';
-                            
+
                             $params = array(
-                                'dir_name'       => 'notice',
-                                'server_file'    => 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json',
-                                'interval'       => 3,
-                                'cookie_id'      => 'redux_blast',
+                                'dir_name'    => 'notice',
+                                'server_file' => 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json',
+                                'interval'    => 3,
+                                'cookie_id'   => 'redux_blast',
                             );
-                            
-                            new reduxNewsflash($this, $params);
+
+                            new reduxNewsflash( $this, $params );
                             $GLOBALS['redux_notice_check'] = 1;
                         }
                     }
@@ -596,7 +601,7 @@
             }
 
             public function _admin_notices() {
-                Redux_Functions::adminNotices($this->admin_notices);
+                Redux_Functions::adminNotices( $this->admin_notices );
             }
 
             public function _dismiss_admin_notice() {
@@ -952,7 +957,7 @@
                             //if
                         } else if ( $type == "post_type" || $type == "post_types" ) {
                             global $wp_post_types;
-                            
+
                             $defaults   = array(
                                 'public'              => true,
                                 'exclude_from_search' => false,

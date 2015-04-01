@@ -55,7 +55,7 @@
         public function check_version() {
             global $pagenow;
 
-            if ($pagenow == "admin-ajax.php") {
+            if ($pagenow == "admin-ajax.php" || ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) ) {
                 return;
             }
 
@@ -85,8 +85,8 @@
                     $redirect = true; // Previous version
                 }
                 if ( $redirect ) {
-                    wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
-                    exit();
+                    //wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
+                    //exit();
                 }
             }
         }

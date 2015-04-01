@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+#3.4.4.9.2
+* Fixed:    #2176 - Infinite loop in the customizer for live preview of themes.
+
 #3.4.4.9.1
 * Fixed:    Support page now works.
 * Fixed:    Fix for MySQL deprecated functions in php 5.5+.
