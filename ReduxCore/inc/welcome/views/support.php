@@ -84,7 +84,7 @@
                                 if (!empty($panel->args['display_version'])) {
                                     echo ' v'.$panel->args['display_version'];
                                 }
-
+                                echo '<br />';
                             }
                             echo '</code>';
                         }
