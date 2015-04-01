@@ -160,6 +160,20 @@
         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     }
 
+    .redux-field-error {
+        input, textarea, checkbox {
+            background-color: #FFF6F6;
+            color: #A00;
+        }
+
+    }
+    .redux-field-warning {
+        input, textarea, checkbox {
+            background-color: #fcf8e3;
+            color: #444;
+        }
+    }
+
     .redux-field-errors,
     .redux-field-warnings,
     .redux-save-warn {

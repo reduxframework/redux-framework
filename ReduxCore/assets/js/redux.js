@@ -638,6 +638,8 @@
                             $( "#" + redux.args.opt_name + '-' + value.id ).addClass( "redux-field-error" );
                             if ( $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).length === 0 ) {
                                 $( "#" + redux.args.opt_name + '-' + value.id ).append( '<div class="redux-th-error">' + value.msg + '</div>' );
+                            } else {
+                                $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).html(value.msg).css('display', 'block');
                             }
                         }
                     );
@@ -679,6 +681,8 @@
                             $( "#" + redux.args.opt_name + '-' + value.id ).addClass( "redux-field-warning" );
                             if ( $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).length === 0 ) {
                                 $( "#" + redux.args.opt_name + '-' + value.id ).append( '<div class="redux-th-warning">' + value.msg + '</div>' );
+                            } else {
+                                $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).html(value.msg ).css('display', 'block');
                             }
                         }
                     );
