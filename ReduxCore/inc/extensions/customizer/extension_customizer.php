@@ -278,6 +278,13 @@
                                 continue;
                             }
                         }
+                        if ( isset( $option['validate'] ) && $option['validate'] != false ) {
+                            continue;
+                        }
+
+                        if ( isset( $option['validate_callback'] ) && !empty( $option['validate_callback'] ) ) {
+                            continue;
+                        }
 
                         if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
                             continue;
