@@ -401,7 +401,15 @@
                     if ($this->args['dev_mode'] == true || Redux_Helpers::isLocalHost () === true) {
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
                             include_once 'core/newsflash.php';
-                            new reduxNewsflash($this);
+                            
+                            $params = array(
+                                'dir_name'       => 'notice',
+                                'server_file'    => 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json',
+                                'interval'       => 3,
+                                'cookie_id'      => 'redux_blast',
+                            );
+                            
+                            new reduxNewsflash($this, $params);
                             $GLOBALS['redux_notice_check'] = 1;
                         }
                     }

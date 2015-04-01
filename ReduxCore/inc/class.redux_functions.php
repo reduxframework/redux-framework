@@ -205,7 +205,7 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
                     
                     $add_style = '';
                     if (strpos($notice['type'], 'redux-message') != false) {
-                        $add_style = 'style="border-left: 4px solid #00A2E3!important;"';
+                        $add_style = 'style="border-left: 4px solid ' . $notice['color'] . '!important;"';
                     }
                     
                     if ( true == $notice['dismiss'] ) {

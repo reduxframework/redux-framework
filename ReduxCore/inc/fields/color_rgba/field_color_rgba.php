@@ -121,8 +121,12 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             if ('' == $this->value['color'] || 'transparent' == $this->value['color']) {
                 $color = '';
             } else {
-                $color = 'rgba(' . Redux_Helpers::hex2rgba($this->value['color'], $this->value['alpha']);
+                $color = Redux_Helpers::hex2rgba($this->value['color'], $this->value['alpha']);
             }            
+
+            if ($this->value['rgba'] == ''){
+                $this->value['rgba'] = Redux_Helpers::hex2rgba($this->value['color'], $this->value['alpha']);
+            }
             
             echo '<input
                         name="' . $opt_name . '[' . $field_id . '][color]"
