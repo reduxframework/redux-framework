@@ -63,7 +63,7 @@
 
     // Function to test the compiler hook and demo CSS output.
     // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
-    add_filter('redux/options/' . $opt_name . '/compiler', 'compiler_action', 10, 3);
+    //add_filter('redux/options/' . $opt_name . '/compiler', 'compiler_action', 10, 3);
 
     // Change the arguments after they've been declared, but before the panel is created
     //add_filter('redux/options/' . $opt_name . '/args', 'change_arguments' );
@@ -1840,16 +1840,6 @@
                 'desc'     => __( 'This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework-demo' ),
                 'callback' => 'redux_my_custom_field'
             ),
-            array(
-                'id'       => 'opt-custom-callback-class',
-                'type'     => 'callback',
-                'title'    => __( 'Custom Field Callback - Class', 'redux-framework-demo' ),
-                'subtitle' => __( 'This is a completely unique field type', 'redux-framework-demo' ),
-                'desc'     => __( 'This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'redux-framework-demo' ),
-                //'callback'  => array( $this, 'class_field_callback' ) // Can use the current class object
-                'callback' => array( 'Redux_Framework_sample_config', 'class_field_callback' )
-                // Can use just class name
-            ),
         )
     ) );
 
@@ -2214,10 +2204,8 @@
         function redux_validate_callback_function( $field, $value, $existing_value ) {
             $error      = false;
             $warning    = false;
-            //$value = 'just testing';
 
             //do your validation
-
             if ($value == 1) {
                 $error = true;
                 $value = $existing_value;
@@ -2227,14 +2215,15 @@
             }
 
             $return['value'] = $value;
-            $field['msg']    = 'your custom error message';
             
             if ( $error == true ) {
                 $return['error'] = $field;
+                $field['msg']    = 'your custom error message';
             }
             
             if ($warning == true) {
                 $return['warning'] = $field;
+                $field['msg']    = 'your custom warning message';
             }
 
             return $return;
@@ -2302,10 +2291,4 @@
             // Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
             remove_action( 'admin_notices', array( ReduxFrameworkPlugin::instance(), 'admin_notices' ) );
         }
-    }
-
-    function class_field_callback( $field, $value ) {
-        print_r( $field );
-        echo '<br/>CLASS CALLBACK';
-        print_r( $value );
     }
