@@ -42,7 +42,7 @@
 
                     <p>We've gone back to the drawing boards and made Redux the <strong>simplist</strong> framework to
                         use. Introducing the Redux API. Easily add fields, extensions, templates, and more without every
-                        having to define a class! <a href="" target="_blank">Learn More</a></p>
+                        having to define a class! <a href=" http://docs.reduxframework.com/core/redux-api/" target="_blank">Learn More</a></p>
                 </div>
                 <div class="last-feature">
                     <h4>Security Improvments</h4>
@@ -59,7 +59,7 @@
                     <h4>Panel Templates</h4>
 
                     <p>Now developers can easily customize the Redux panel by declaring a templates location path. We've
-                        also made use of template versioning so if we change anything, you will know.</p>
+                        also made use of template versioning so if we change anything, you will know. <br /><a href=" http://docs.reduxframework.com/core/templates/" target="_blank">Learn More</a></p>
                 </div>
                 <div>
                     <h4>Full Width for ANY Field</h4>
