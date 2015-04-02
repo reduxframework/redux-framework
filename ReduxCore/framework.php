@@ -331,11 +331,14 @@
                     }
 
                     // Options page
-                    add_action( 'admin_menu', array( $this, '_options_page' ) );
-
                     // Add a network menu
                     if ( $this->args['database'] == "network" && $this->args['network_admin'] ) {
                         add_action( 'network_admin_menu', array( $this, '_options_page' ) );
+                        if( $this->args['network_sites'] ){
+                            add_action( 'admin_menu', array( $this, '_options_page' ) );
+                        }
+                    }else{
+                        add_action( 'admin_menu', array( $this, '_options_page' ) );
                     }
 
                     // Admin Bar menu
@@ -772,7 +775,12 @@
                     } else if ( $this->args['database'] === 'network' ) {
                         // Strip those slashes!
                         $value = json_decode( stripslashes( json_encode( $value ) ), true );
-                        update_site_option( $this->args['opt_name'], $value );
+                        if( is_network_admin() ){
+                            update_site_option( $this->args['opt_name'], $value );
+                        }
+                        else{
+                            update_option( $this->args['opt_name'], $value );
+                        }
                     } else {
                         update_option( $this->args['opt_name'], $value );
                     }
@@ -822,7 +830,11 @@
                 } else if ( $this->args['database'] === 'theme_mods_expanded' ) {
                     $result = get_theme_mods();
                 } else if ( $this->args['database'] === 'network' ) {
-                    $result = get_site_option( $this->args['opt_name'], array() );
+                    if( is_network_admin() ){
+                        $result = get_site_option( $this->args['opt_name'], array() );
+                    }else{
+                        $result = get_option( $this->args['opt_name'], array() );
+                    }
                     $result = json_decode( stripslashes( json_encode( $result ) ), true );
                 } else {
                     $result = get_option( $this->args['opt_name'], array() );
