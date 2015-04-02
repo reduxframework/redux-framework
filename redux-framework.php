@@ -23,7 +23,7 @@
  * @author          Kevin Provance <kevin@reduxframework.com>
  * @author          Daniel J Griffiths <ghost1227@reduxframework.com>
  * @license         GNU General Public License, version 3
- * @copyright       2012-2014 Redux Framework
+ * @copyright       2012-2015 Redux Framework
  */
 
 // Exit if accessed directly
