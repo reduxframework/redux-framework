@@ -1,18 +1,18 @@
 # Redux Framework Changelog
 
-##3.5.0     OFFICIAL RELEASE
+## 3.5.0     OFFICIAL RELEASE
             Various fixes and improvements for release.
 
-##3.4.4.9.4
+## 3.4.4.9.4
 * Fixed:    #2181 - Issue with PHP < 5.4 and the Ace Editor field. Oy.
 
-##3.4.4.9.3
+## 3.4.4.9.3
 * Fixed:    #2163 - Undefined error in JS.
 
-##3.4.4.9.2
+## 3.4.4.9.2
 * Fixed:    #2176 - Infinite loop in the customizer for live preview of themes.
 
-##3.4.4.9.1
+## 3.4.4.9.1
 * Fixed:    Support page now works.
 * Fixed:    Fix for MySQL deprecated functions in php 5.5+.
 
