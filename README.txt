@@ -125,6 +125,64 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+# 3.5.0
+* Fixed:    #2181 - Issue with PHP < 5.4 and the Ace Editor field. Oy.
+* Fixed:    #2163 - Undefined error in JS.
+* Fixed:    #2176 - Infinite loop in the customizer for live preview of themes.
+* Fixed:    Support page now works.
+* Fixed:    Fix for MySQL deprecated functions in php 5.5+.
+* Added:    Dynamic admin messages (aka Newsflash).  Dismissable admin messages announcing breaking Redux news.
+            Messages will not appear for users when dev_mode is set to `false`.  However, messages remain active
+            on localhosts, so devs may benefit.
+* Fixed:    #2155 - Fixed import with ajax_save.
+* Fixed:    Changelog now uses raw field parsedown if present.
+* Added:    Redux Framework News Widget on the WP Dashboard.
+* Fixed:    #2156: `label` argument not recognized when using sortable as textbox.
+* Fixed:    #2140 Another PHP 5.2 issue with ajax_save.
+* Modified: Opt groups for select field now working in customizer even if not supported.
+* Added:    `full_width` arg now makes ANY field full-width.  :)
+* Fixed:    #2133 - Ajax save adding extra backspashes in PHP 5.2 only (They didn't use array map properly).
+* Fixed:    Customizer wasn't working. Thanks @sgssandhu!
+* Fixed:    #2125 - Compiler not firing on first save, when using ajax_save.
+* Fixed:    #2118 - Typography JS error.
+* Fixed:    Odd typography bug no one has reported.
+* Modified: Sticky header and footer to remain within the redux-main container.
+* Fixed     #2097 - Slash fix for ajax_save that was previously believed to be an isolated issue. Now applied on all ajax saves.
+* Fixed:    #2086 - color_rgba improperly functioning when transparent mode set to false.
+* Fixed     Import/Export bug where it wasn't running.
+* Modified  Locations of the core extensions directory as well as grunt configuration.
+* Fixed     #2047 - Validation will now accept 0 as a value to be tested. Thanks @Ninos!
+* Added     url_slug validation with option flush_permalinks!
+* Fixed     Issue where the remove of background field was always showing an empty preview box. 
+* Modified  Turned ajax_save on by default for additional bug reports.  ;)
+* Modified  Added some margin above validation errors/warnings so they look better.
+* Modified  Removed previous element border for any section so it looks better.
+* Fixed     #2081 - Section field hiding any field after.  Weird.
+* Added     #2047 - `output_transparent` argument to output the blank color feature as 'transparent'.
+* Fixed     #2080 - missing 'rem' unit and inability to process float values.  Thanks to @HELWATANY for the fixes!
+* Fixed     #2043 - misaligned images in image_select field.
+* Added:    #2064 - Merge argument for image_select. Thanks @Ninos
+* Modified: Import/Export is now an extensiona and decoupled from the core.
+* Fixed:    Spinner had a nasty number bug, now resolved.
+* Fixed:    #2076 - RTL bug with old ID's. Thanks @mahfoozroy.
+* Fixed:    #2072 - Ajax_save editor type bug fix.
+* Fixed:    #2058 - Incorrect path in include statement for sysinfo.php
+* Modified: Templates now have versioning with a warning (dev_mode only) if they are outdated from the core templates.
+* Modified: Ajax saving now has overlay during save to avoid confusion for users.
+* Modified: Template files even more for simplicity and ease.
+* Modified: Saving. Redux now has the ajax_save argument if you want it!
+* Modified: Validation warnings now work.
+* Fixed:    Changed set_transient function to public to avoid errors in new templating code.
+* Modified: Entire panel template is now decoupled from the theme and implemented with many filters for easy customization.
+* Fixed:   #1478 - Import/export failing when two instances if Redux in use.  Thanks, @desaiuditd!
+* Fixed:   Section field not indenting properly, if at all.
+* Added:   #2031 - Proper CSS sanitization for compliancy with WP.org. 
+* Fixed:   #2027 - added isset()
+* Fixed:   #2019 - Reset issues with PHP 5.2.  Thanks a bunch, @Webcreations907!
+* Fixed:   #2023: Issue with custom submenus in menu.
+* Fixed:   #2025: Issue with select sorting.
+* Update:  ACE Editor.  Thanks @corradomatt.
+
 # 3.4.1
 * Fixed:   Small filesystem option with bad filter key reference..
 * Added:   Small return if $section filter returned the section empty.

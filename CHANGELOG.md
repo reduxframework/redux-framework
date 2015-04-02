@@ -1,6 +1,6 @@
 # Redux Framework Changelog
 
-##
+##3.4.4.9.4
 * Fixed:    #2181 - Issue with PHP < 5.4 and the Ace Editor field. Oy.
 
 ##3.4.4.9.3
