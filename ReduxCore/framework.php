@@ -2017,6 +2017,29 @@
                                 continue; // You need a type!
                             }
 
+                            if ($field['type'] == "info" && isset($field['raw_html']) && $field['raw_html'] == true) {
+                                $field['type'] = "raw";
+                                $field['content'] = $field['desc'];
+                                $field['desc'] = "";
+                                $this->sections[$k]['fields'][$fieldk] = $field;
+                            } else if ($field['type'] == "info") {
+                                if (!isset($field['full_width'])) {
+                                    $field['full_width'] = true;
+                                    $this->sections[$k]['fields'][$fieldk] = $field;
+                                }
+                            }
+
+                            if ($field['type'] == "raw") {
+                                if (isset($field['align'])) {
+                                    $field['full_width'] = $field['align'] ? false : true;
+                                    unset($field['align']);
+                                } else if (!isset($field['full_width'])) {
+                                    $field['full_width'] = true;
+                                }
+                                $this->sections[$k]['fields'][$fieldk] = $field;
+                            }
+
+
                             /**
                              * filter 'redux/options/{opt_name}/field/{field.id}'
                              *
