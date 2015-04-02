@@ -160,7 +160,7 @@
         // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
         'system_info'          => false,
         // REMOVE
-        
+
         //'compiler'             => true,
 
         // HINTS
@@ -768,7 +768,7 @@
                 'title'    => __( 'Header Border Option', 'redux-framework-demo' ),
                 'subtitle' => __( 'Only color validation can be done on this field type', 'redux-framework-demo' ),
                 'output'   => array( '.site-header' ),
-                'all' => false,
+                'all'      => false,
                 // An array of CSS selectors to apply this font style to
                 'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
                 'default'  => array(
@@ -792,7 +792,7 @@
             array(
                 'id'             => 'opt-dimensions',
                 'type'           => 'dimensions',
-                'units'          => array( 'em', 'px', '%'),    // You can specify a unit value. Possible: px, em, %
+                'units'          => array( 'em', 'px', '%' ),    // You can specify a unit value. Possible: px, em, %
                 'units_extended' => 'true',  // Allow users to select any type of unit
                 'title'          => __( 'Dimensions (Width/Height) Option', 'redux-framework-demo' ),
                 'subtitle'       => __( 'Allow your users to choose width, height, and/or unit.', 'redux-framework-demo' ),
@@ -805,12 +805,12 @@
             array(
                 'id'             => 'opt-dimensions-width',
                 'type'           => 'dimensions',
-                'units'          => array( 'em', 'px', '%'),    // You can specify a unit value. Possible: px, em, %
+                'units'          => array( 'em', 'px', '%' ),    // You can specify a unit value. Possible: px, em, %
                 'units_extended' => 'true',  // Allow users to select any type of unit
                 'title'          => __( 'Dimensions (Width) Option', 'redux-framework-demo' ),
                 'subtitle'       => __( 'Allow your users to choose width, height, and/or unit.', 'redux-framework-demo' ),
                 'desc'           => __( 'You can enable or disable any piece of this field. Width, Height, or Units.', 'redux-framework-demo' ),
-                'height' => false,
+                'height'         => false,
                 'default'        => array(
                     'width'  => 200,
                     'height' => 100,
@@ -853,24 +853,24 @@
                 )
             ),
             array(
-                'id'       => 'opt-spacing-expanded',
-                'type'     => 'spacing',
+                'id'             => 'opt-spacing-expanded',
+                'type'           => 'spacing',
                 // An array of CSS selectors to apply this font style to
-                'mode'     => 'margin',
+                'mode'           => 'margin',
                 // absolute, padding, margin, defaults to padding
-                'all'      => false,
+                'all'            => false,
                 // Have one field that applies to all
                 //'top'           => false,     // Disable the top
                 //'right'         => false,     // Disable the right
                 //'bottom'        => false,     // Disable the bottom
                 //'left'          => false,     // Disable the left
-                'units'         => array('em', 'px', '%'),      // You can specify a unit value. Possible: px, em, %
-                'units_extended'=> 'true',    // Allow users to select any type of unit
+                'units'          => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'units_extended' => 'true',    // Allow users to select any type of unit
                 //'display_units' => 'false',   // Set to false to hide the units if the units are specified
-                'title'    => __( 'Padding/Margin Option', 'redux-framework-demo' ),
-                'subtitle' => __( 'Allow your users to choose the spacing or margin they want.', 'redux-framework-demo' ),
-                'desc'     => __( 'You can enable or disable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework-demo' ),
-                'default'  => array(
+                'title'          => __( 'Padding/Margin Option', 'redux-framework-demo' ),
+                'subtitle'       => __( 'Allow your users to choose the spacing or margin they want.', 'redux-framework-demo' ),
+                'desc'           => __( 'You can enable or disable any piece of this field. Top, Right, Bottom, Left, or Units.', 'redux-framework-demo' ),
+                'default'        => array(
                     'margin-top'    => '1px',
                     'margin-right'  => '2px',
                     'margin-bottom' => '3px',
@@ -1012,11 +1012,18 @@
                 'desc' => __( 'This is the info field, if you want to break sections up.', 'redux-framework-demo' )
             ),
             array(
+                'id'    => 'opt-notice-info1',
+                'type'  => 'info',
+                'style' => 'info',
+                'title' => __( 'This is a title.', 'redux-framework-demo' ),
+                'desc'  => __( 'This is an info field with the <strong>info</strong> style applied. By default the <strong>normal</strong> style is applied.', 'redux-framework-demo' )
+            ),
+            array(
                 'id'    => 'opt-info-warning',
                 'type'  => 'info',
                 'style' => 'warning',
                 'title' => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'  => __( 'This is an info field with the warning style applied and a header.', 'redux-framework-demo' )
+                'desc'  => __( 'This is an info field with the <strong>warning</strong> style applied.', 'redux-framework-demo' )
             ),
             array(
                 'id'    => 'opt-info-success',
@@ -1024,7 +1031,7 @@
                 'style' => 'success',
                 'icon'  => 'el el-info-circle',
                 'title' => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'  => __( 'This is an info field with the success style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'  => __( 'This is an info field with the <strong>success</strong> style applied and an icon.', 'redux-framework-demo' )
             ),
             array(
                 'id'    => 'opt-info-critical',
@@ -1032,58 +1039,79 @@
                 'style' => 'critical',
                 'icon'  => 'el el-info-circle',
                 'title' => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'  => __( 'This is an info field with the critical style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'  => __( 'This is an info field with the <strong>critical</strong> style applied and an icon.', 'redux-framework-demo' )
             ),
             array(
-                'id'       => 'opt-raw_info',
-                'type'     => 'info',
-                'required' => array( '18', 'equals', array( '1', '2' ) ),
-                'raw_html' => true,
-                'desc'     => $sampleHTML,
+                'id'    => 'opt-info-custom',
+                'type'  => 'info',
+                'style' => 'custom',
+                'color' => 'purple',
+                'icon'  => 'el el-info-circle',
+                'title' => __( 'This is a title.', 'redux-framework-demo' ),
+                'desc'  => __( 'This is an info field with the <strong>custom</strong> style applied, color arg passed, and an icon.', 'redux-framework-demo' )
             ),
             array(
                 'id'     => 'opt-info-normal',
                 'type'   => 'info',
-                'notice' => true,
+                'notice' => false,
                 'title'  => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'   => __( 'This is an info notice field with the normal style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'   => __( 'This is an info non-notice field with the <strong>normal</strong> style applied.', 'redux-framework-demo' )
             ),
             array(
                 'id'     => 'opt-notice-info',
                 'type'   => 'info',
-                'notice' => true,
+                'notice' => false,
                 'style'  => 'info',
                 'title'  => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'   => __( 'This is an info notice field with the info style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'   => __( 'This is an info non-notice field with the <strong>info</strong> style applied.', 'redux-framework-demo' )
             ),
             array(
                 'id'     => 'opt-notice-warning',
                 'type'   => 'info',
-                'notice' => true,
+                'notice' => false,
                 'style'  => 'warning',
                 'icon'   => 'el el-info-circle',
                 'title'  => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'   => __( 'This is an info notice field with the warning style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'   => __( 'This is an info non-notice field with the <strong>warning</strong> style applied and an icon.', 'redux-framework-demo' )
             ),
             array(
                 'id'     => 'opt-notice-success',
                 'type'   => 'info',
-                'notice' => true,
+                'notice' => false,
                 'style'  => 'success',
                 'icon'   => 'el el-info-circle',
                 'title'  => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'   => __( 'This is an info notice field with the success style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'   => __( 'This is an info non-notice field with the <strong>success</strong> style applied and an icon.', 'redux-framework-demo' )
             ),
             array(
                 'id'     => 'opt-notice-critical',
                 'type'   => 'info',
-                'notice' => true,
+                'notice' => false,
                 'style'  => 'critical',
                 'icon'   => 'el el-info-circle',
                 'title'  => __( 'This is a title.', 'redux-framework-demo' ),
-                'desc'   => __( 'This is an notice field with the critical style applied, a header and an icon.', 'redux-framework-demo' )
+                'desc'   => __( 'This is an non-notice field with the <strong>critical</strong> style applied and an icon.', 'redux-framework-demo' )
             ),
-
+            array(
+                'id'       => 'opt-raw_info_3',
+                'type'     => 'info',
+                'raw_html' => true,
+                'desc'     => $sampleHTML,
+            ),
+            array(
+                'id'    => 'opt-raw_info_4',
+                'type'  => 'raw',
+                'title' => __( 'Raw Field', 'redux-framework-demo' ),
+                'subtitle' => __( 'Subtitle Field', 'redux-framework-demo' ),
+                'desc'  => $sampleHTML,
+            ),
+            array(
+                'id'         => 'opt-raw_info_5',
+                'type'       => 'raw',
+                'full_width' => true,
+                //'title'      => __( 'Raw Field', 'redux-framework-demo' ),
+                'desc'       => $sampleHTML,
+            ),
         )
     ) );
 
@@ -1732,10 +1760,10 @@
 
     // -> START Additional Types
     Redux::setSection( $opt_name, array(
-        'title'  => __( 'Additional Types', 'redux-framework-demo' ),
-        'id'     => 'additional',
-        'desc'   => __( '', 'redux-framework-demo' ),
-        'icon'   => 'el el-magic',
+        'title' => __( 'Additional Types', 'redux-framework-demo' ),
+        'id'    => 'additional',
+        'desc'  => __( '', 'redux-framework-demo' ),
+        'icon'  => 'el el-magic',
         //'fields' => array(
         //    array(
         //        'id'              => 'opt-customizer-only-in-section',
@@ -2009,101 +2037,101 @@
         'icon'   => 'el el-chevron-down',
         'fields' => array(
             array(
-                'id'        => 'opt-required-basic',
-                'type'      => 'switch',
-                'title'     => 'Basic Required Example',
-                'subtitle'  => 'Click <code>On</code> to see the text field appear.',
-                'default'   => false
+                'id'       => 'opt-required-basic',
+                'type'     => 'switch',
+                'title'    => 'Basic Required Example',
+                'subtitle' => 'Click <code>On</code> to see the text field appear.',
+                'default'  => false
             ),
             array(
-                'id'        => 'opt-required-basic-text',
-                'type'      => 'text',
-                'title'     => 'Basic Text Field',
-                'subtitle'  => 'This text field is only show when the above switch is set to <code>On</code>, using the <code>required</code> argument.',
-                'required'  => array('opt-required-basic', '=', true)
+                'id'       => 'opt-required-basic-text',
+                'type'     => 'text',
+                'title'    => 'Basic Text Field',
+                'subtitle' => 'This text field is only show when the above switch is set to <code>On</code>, using the <code>required</code> argument.',
+                'required' => array( 'opt-required-basic', '=', true )
             ),
             array(
-                'id'        => 'opt-required-divide-1',
-                'type'      => 'divide'
+                'id'   => 'opt-required-divide-1',
+                'type' => 'divide'
             ),
             array(
-                'id'        => 'opt-required-nested',
-                'type'      => 'switch',
-                'title'     => 'Nested Required Example',
-                'subtitle'  => 'Click <code>On</code> to see another set of options appear.',
-                'default'   => false
+                'id'       => 'opt-required-nested',
+                'type'     => 'switch',
+                'title'    => 'Nested Required Example',
+                'subtitle' => 'Click <code>On</code> to see another set of options appear.',
+                'default'  => false
             ),
-            array (
-                'id'        => 'opt-required-nested-buttonset',
-                'type'      => 'button_set',
-                'title'     => 'Multiple Nested Required Examples',
-                'subtitle'  => 'Click any buton to show different fields based on their <code>required</code> statements.',
-                'options'   => array(
-                    'button-text'       => 'Show Text Field',
-                    'button-textarea'   => 'Show Textarea Field',
-                    'button-editor'     => 'Show WP Editor',
-                    'button-ace'        => 'Show ACE Editor'
+            array(
+                'id'       => 'opt-required-nested-buttonset',
+                'type'     => 'button_set',
+                'title'    => 'Multiple Nested Required Examples',
+                'subtitle' => 'Click any buton to show different fields based on their <code>required</code> statements.',
+                'options'  => array(
+                    'button-text'     => 'Show Text Field',
+                    'button-textarea' => 'Show Textarea Field',
+                    'button-editor'   => 'Show WP Editor',
+                    'button-ace'      => 'Show ACE Editor'
                 ),
-                'required'  => array('opt-required-nested', '=', true),
-                'default'   => 'button-text'
+                'required' => array( 'opt-required-nested', '=', true ),
+                'default'  => 'button-text'
             ),
             array(
-                'id'        => 'opt-required-nested-text',
-                'type'      => 'text',
-                'title'     => 'Nested Text Field',
-                'required'  => array('opt-required-nested-buttonset','=', 'button-text')
+                'id'       => 'opt-required-nested-text',
+                'type'     => 'text',
+                'title'    => 'Nested Text Field',
+                'required' => array( 'opt-required-nested-buttonset', '=', 'button-text' )
             ),
             array(
-                'id'        => 'opt-required-nested-textarea',
-                'type'      => 'textarea',
-                'title'     => 'Nested Textarea Field',
-                'required'  => array('opt-required-nested-buttonset','=', 'button-textarea')
+                'id'       => 'opt-required-nested-textarea',
+                'type'     => 'textarea',
+                'title'    => 'Nested Textarea Field',
+                'required' => array( 'opt-required-nested-buttonset', '=', 'button-textarea' )
             ),
             array(
-                'id'        => 'opt-required-nested-editor',
-                'type'      => 'editor',
-                'title'     => 'Nested Editor Field',
-                'required'  => array('opt-required-nested-buttonset','=', 'button-editor')
+                'id'       => 'opt-required-nested-editor',
+                'type'     => 'editor',
+                'title'    => 'Nested Editor Field',
+                'required' => array( 'opt-required-nested-buttonset', '=', 'button-editor' )
             ),
             array(
-                'id'        => 'opt-required-nested-ace',
-                'type'      => 'ace_editor',
-                'title'     => 'Nested ACE Editor Field',
-                'required'  => array('opt-required-nested-buttonset','=', 'button-ace')
+                'id'       => 'opt-required-nested-ace',
+                'type'     => 'ace_editor',
+                'title'    => 'Nested ACE Editor Field',
+                'required' => array( 'opt-required-nested-buttonset', '=', 'button-ace' )
             ),
             array(
-                'id'        => 'opt-required-divide-2',
-                'type'      => 'divide'
+                'id'   => 'opt-required-divide-2',
+                'type' => 'divide'
             ),
             array(
-                'id'        => 'opt-required-select',
-                'type'      => 'select',
-                'title'     => 'Select Required Example',
-                'subtitle'  => 'Select a different option to display its value.  Required may be used to display multiple & reusable fields',
-                'options'   => array(
+                'id'       => 'opt-required-select',
+                'type'     => 'select',
+                'title'    => 'Select Required Example',
+                'subtitle' => 'Select a different option to display its value.  Required may be used to display multiple & reusable fields',
+                'options'  => array(
                     'no-sidebar'    => 'No Sidebars',
                     'left-sidebar'  => 'Left Sidebar',
                     'right-sidebar' => 'Right Sidebar',
                     'both-sidebars' => 'Both Sidebars'
                 ),
-                'default'   =>  'no-sidebar',
-                'select2'   => array('allowClear' => false)
+                'default'  => 'no-sidebar',
+                'select2'  => array( 'allowClear' => false )
             ),
             array(
-                'id'        => 'opt-required-select-left-sidebar',
-                'type'      => 'select',
-                'title'     => 'Select Left Sidebar',
-                'data'      => 'sidebars',
-                'default'   => '',
-                'required'  => array('opt-required-select','=', array('left-sidebar', 'both-sidebars'))
+                'id'       => 'opt-required-select-left-sidebar',
+                'type'     => 'select',
+                'title'    => 'Select Left Sidebar',
+                'data'     => 'sidebars',
+                'default'  => '',
+                'required' => array( 'opt-required-select', '=', array( 'left-sidebar', 'both-sidebars' ) )
             ),
             array(
-                'id'        => 'opt-required-select-right-sidebar',
-                'type'      => 'select',
-                'title'     => 'Select Right Sidebar',
-                'data'      => 'sidebars',
-                'default'   => '',
-                'required'  => array('opt-required-select','=', array('right-sidebar', 'both-sidebars'))
+                'id'       => 'opt-required-select-right-sidebar',
+                'type'     => 'select',
+                'title'    => 'Select Right Sidebar',
+                'data'     => 'sidebars',
+                'default'  => '',
+                'required' => array( 'opt-required-select', '=', array( 'right-sidebar', 'both-sidebars' ) )
             ),
         )
     ) );
@@ -2194,30 +2222,30 @@
     /**
      * Custom function for the callback validation referenced above
      * */
-    if ( ! function_exists( 'redux_validate_callback_function' ) ){
+    if ( ! function_exists( 'redux_validate_callback_function' ) ) {
         function redux_validate_callback_function( $field, $value, $existing_value ) {
-            $error      = false;
-            $warning    = false;
+            $error   = false;
+            $warning = false;
 
             //do your validation
-            if ($value == 1) {
+            if ( $value == 1 ) {
                 $error = true;
                 $value = $existing_value;
-            } elseif ($value == 2) {
-                $warning =  true;
-                $value = $existing_value;
+            } elseif ( $value == 2 ) {
+                $warning = true;
+                $value   = $existing_value;
             }
 
             $return['value'] = $value;
-            
+
             if ( $error == true ) {
                 $return['error'] = $field;
                 $field['msg']    = 'your custom error message';
             }
-            
-            if ($warning == true) {
+
+            if ( $warning == true ) {
                 $return['warning'] = $field;
-                $field['msg']    = 'your custom warning message';
+                $field['msg']      = 'your custom warning message';
             }
 
             return $return;
@@ -2227,7 +2255,7 @@
     /**
      * Custom function for the callback referenced above
      */
-    if ( ! function_exists( 'redux_my_custom_field' ) ){
+    if ( ! function_exists( 'redux_my_custom_field' ) ) {
         function redux_my_custom_field( $field, $value ) {
             print_r( $field );
             echo '<br/>';
