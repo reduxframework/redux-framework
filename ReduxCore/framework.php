@@ -2017,26 +2017,26 @@
                                 continue; // You need a type!
                             }
 
-                            if ($field['type'] == "info" && isset($field['raw_html']) && $field['raw_html'] == true) {
-                                $field['type'] = "raw";
-                                $field['content'] = $field['desc'];
-                                $field['desc'] = "";
-                                $this->sections[$k]['fields'][$fieldk] = $field;
-                            } else if ($field['type'] == "info") {
-                                if (!isset($field['full_width'])) {
-                                    $field['full_width'] = true;
-                                    $this->sections[$k]['fields'][$fieldk] = $field;
+                            if ( $field['type'] == "info" && isset( $field['raw_html'] ) && $field['raw_html'] == true ) {
+                                $field['type']                             = "raw";
+                                $field['content']                          = $field['desc'];
+                                $field['desc']                             = "";
+                                $this->sections[ $k ]['fields'][ $fieldk ] = $field;
+                            } else if ( $field['type'] == "info" ) {
+                                if ( ! isset( $field['full_width'] ) ) {
+                                    $field['full_width']                       = true;
+                                    $this->sections[ $k ]['fields'][ $fieldk ] = $field;
                                 }
                             }
 
-                            if ($field['type'] == "raw") {
-                                if (isset($field['align'])) {
+                            if ( $field['type'] == "raw" ) {
+                                if ( isset( $field['align'] ) ) {
                                     $field['full_width'] = $field['align'] ? false : true;
-                                    unset($field['align']);
-                                } else if (!isset($field['full_width'])) {
+                                    unset( $field['align'] );
+                                } else if ( ! isset( $field['full_width'] ) ) {
                                     $field['full_width'] = true;
                                 }
-                                $this->sections[$k]['fields'][$fieldk] = $field;
+                                $this->sections[ $k ]['fields'][ $fieldk ] = $field;
                             }
 
 
@@ -2704,7 +2704,7 @@
                     // Ace editor hack for < PHP 5.4. Oy
                     if ( isset( $this->fields['ace_editor'] ) ) {
                         foreach ( $this->fields['ace_editor'] as $id => $v ) {
-                            if (version_compare(phpversion(), '5.4', '<')) {
+                            if ( version_compare( phpversion(), '5.4', '<' ) ) {
                                 $values[ $id ] = stripslashes( $beforeDeep[ $id ] );
                             } else {
                                 $values[ $id ] = $beforeDeep[ $id ];

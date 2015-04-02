@@ -91,6 +91,11 @@
 
 
             public static function loadRedux( $opt_name = "" ) {
+
+                if ( empty( $opt_name ) ) {
+                    return;
+                }
+
                 $check = ReduxFrameworkInstances::get_instance( $opt_name );
                 if ( isset( $check->apiHasRun ) ) {
                     return;
@@ -110,7 +115,7 @@
                 $redux                   = new ReduxFramework( $sections, $args );
                 $redux->apiHasRun        = 1;
                 self::$init[ $opt_name ] = 1;
-                if ( $redux->args['opt_name'] != $opt_name ) {
+                if ( isset( $redux->args['opt_name'] ) && $redux->args['opt_name'] != $opt_name ) {
                     self::$init[ $redux->args['opt_name'] ] = 1;
                 }
 
