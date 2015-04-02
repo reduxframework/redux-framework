@@ -2174,15 +2174,9 @@
         );
         Redux::setSection( $opt_name, $section );
     }
-
-    //return;
-
-
     /*
      * <--- END SECTIONS
      */
-
-    //exit();
 
     /**
      * This is a test function that will let you see when the compiler hook occurs.
