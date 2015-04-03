@@ -403,9 +403,9 @@
                 'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
                 'label'    => true,
                 'options'  => array(
-                    'si1' => 'Item 1',
-                    'si2' => 'Item 2',
-                    'si3' => 'Item 3',
+                    'Text One' => 'Item 1',
+                    'Text Two' => 'Item 2',
+                    'Text Three' => 'Item 3',
                 )
             ),
             array(
@@ -416,9 +416,14 @@
                 'subtitle' => __( 'Define and reorder these however you want.', 'redux-framework-demo' ),
                 'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
                 'options'  => array(
-                    'si1' => false,
-                    'si2' => true,
-                    'si3' => false,
+                    'cb1' => 'Checkbox One',
+                    'cb2' => 'Checkbox Two',
+                    'cb3' => 'Checkbox Three',
+                ),
+                'default'  => array(
+                    'cb1' => false,
+                    'cb2' => true,
+                    'cb3' => false,
                 )
             ),
         )

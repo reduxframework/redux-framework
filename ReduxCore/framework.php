@@ -193,7 +193,6 @@
              * @return \ReduxFramework
              */
             public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
-
                 // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
                 if ( isset ( $_POST ) && isset ( $_POST['action'] ) && $_POST['action'] == 'heartbeat' ) {
 
@@ -2064,21 +2063,6 @@
                                 //$display = false;
                             }
 
-
-                            // TODO AFTER GROUP WORKS - Remove IF statement
-//                            if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-//                                if ( $this->args['dev_mode'] ) {
-//                                    $this->admin_notices[] = array(
-//                                        'type'    => 'error',
-//                                        'msg'     => 'The <strong>group field</strong> has been <strong>removed</strong> while we retool it for improved performance.',
-//                                        'id'      => 'group_err',
-//                                        'dismiss' => true,
-//                                    );
-//                                }
-//                                continue; // Disabled for now
-//                            }
-
-
                             if ( isset ( $field['permissions'] ) ) {
 
                                 if ( ! current_user_can( $field['permissions'] ) ) {
@@ -2118,7 +2102,7 @@
 
                             // Set the defaults to the value if not present
                             $doUpdate = false;
-
+                            
                             // Check fields for values in the default parameter
                             if ( ! isset ( $this->options[ $field['id'] ] ) && isset ( $field['default'] ) ) {
                                 $this->options_defaults[ $field['id'] ] = $this->options[ $field['id'] ] = $field['default'];
