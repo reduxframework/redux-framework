@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.0.1
+* Fixed     #2181 - Fixed issue with Ajax Save when PHP 5.3 Magic Quotes were disabled.
+
 ## 3.5.0     OFFICIAL RELEASE
             Various fixes and improvements for release.
 

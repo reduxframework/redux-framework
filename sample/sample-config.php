@@ -509,22 +509,12 @@
         'subsection' => true,
         'fields'     => array(
             array(
-                'id'           => 'opt-textarea',
-                'type'         => 'textarea',
-                'title'        => __( 'Textarea Option - HTML Validated Custom', 'redux-framework-demo' ),
-                'subtitle'     => __( 'Custom HTML Allowed (wp_kses)', 'redux-framework-demo' ),
-                'desc'         => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
-                'validate'     => 'html_custom',
-                'default'      => '<br />Some HTML is allowed in here.<br />',
-                'allowed_html' => array(
-                    'a'      => array(
-                        'href'  => array(),
-                        'title' => array()
-                    ),
-                    'br'     => array(),
-                    'em'     => array(),
-                    'strong' => array()
-                )
+                'id'       => 'opt-textarea',
+                'type'     => 'textarea',
+                'title'    => __( 'Textarea Option - HTML Validated Custom', 'redux-framework-demo' ),
+                'subtitle' => __( 'Subtitle', 'redux-framework-demo' ),
+                'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
+                'default'  => 'Default Text',
             )
         )
     ) );
@@ -1837,28 +1827,30 @@
         'id'         => 'additional-raw',
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/raw/" target="_blank">http://docs.reduxframework.com/core/fields/raw/</a>',
         'subsection' => true,
-        'fields' => array(array(
-                              'id'    => 'opt-raw_info_4',
-                              'type'  => 'raw',
-                              'title' => __( 'Standard Raw Field', 'redux-framework-demo' ),
-                              'subtitle' => __( 'Subtitle', 'redux-framework-demo' ),
-                              'desc' => __( 'Description', 'redux-framework-demo' ),
-                              'content'  => $sampleHTML,
-                          ),
-                          array(
-                              'id'         => 'opt-raw_info_5',
-                              'type'       => 'raw',
-                              'full_width' => false,
-                              'title'      => __( 'Raw Field <code>full_width</code> False', 'redux-framework-demo' ),
-                              'subtitle' => __( 'Subtitle', 'redux-framework-demo' ),
-                              'desc' => __( 'Description', 'redux-framework-demo' ),
-                              'content'       => $sampleHTML,
-                          ),)
+        'fields'     => array(
+            array(
+                'id'       => 'opt-raw_info_4',
+                'type'     => 'raw',
+                'title'    => __( 'Standard Raw Field', 'redux-framework-demo' ),
+                'subtitle' => __( 'Subtitle', 'redux-framework-demo' ),
+                'desc'     => __( 'Description', 'redux-framework-demo' ),
+                'content'  => $sampleHTML,
+            ),
+            array(
+                'id'         => 'opt-raw_info_5',
+                'type'       => 'raw',
+                'full_width' => false,
+                'title'      => __( 'Raw Field <code>full_width</code> False', 'redux-framework-demo' ),
+                'subtitle'   => __( 'Subtitle', 'redux-framework-demo' ),
+                'desc'       => __( 'Description', 'redux-framework-demo' ),
+                'content'    => $sampleHTML,
+            ),
+        )
     ) );
 
     Redux::setSection( $opt_name, array(
-        'title'  => __( 'Advanced Features', 'redux-framework-demo' ),
-        'icon'   => 'el el-thumbs-up',
+        'title' => __( 'Advanced Features', 'redux-framework-demo' ),
+        'icon'  => 'el el-thumbs-up',
         // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
     ) );
 
@@ -1881,11 +1873,11 @@
 
     // -> START Validation
     Redux::setSection( $opt_name, array(
-        'title'  => __( 'Field Validation', 'redux-framework-demo' ),
-        'id'     => 'validation',
-        'desc'   => __( 'For full documentation on validation, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/the-basics/validation/" target="_blank">http://docs.reduxframework.com/core/the-basics/validation/</a>',
+        'title'      => __( 'Field Validation', 'redux-framework-demo' ),
+        'id'         => 'validation',
+        'desc'       => __( 'For full documentation on validation, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/the-basics/validation/" target="_blank">http://docs.reduxframework.com/core/the-basics/validation/</a>',
         'subsection' => true,
-        'fields' => array(
+        'fields'     => array(
             array(
                 'id'       => 'opt-text-email',
                 'type'     => 'text',
@@ -2024,7 +2016,15 @@
                 'desc'         => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
                 'validate'     => 'html_custom',
                 'default'      => '<p>Some HTML is allowed in here.</p>',
-                'allowed_html' => array( '' ) //see http://codex.wordpress.org/Function_Reference/wp_kses
+                'allowed_html' => array(
+                    'a'      => array(
+                        'href'  => array(),
+                        'title' => array()
+                    ),
+                    'br'     => array(),
+                    'em'     => array(),
+                    'strong' => array()
+                ) //see http://codex.wordpress.org/Function_Reference/wp_kses
             ),
             array(
                 'id'       => 'opt-textarea-js',
@@ -2039,11 +2039,11 @@
 
     // -> START Required
     Redux::setSection( $opt_name, array(
-        'title'  => __( 'Field Required / Linking', 'redux-framework-demo' ),
-        'id'     => 'required',
-        'desc'   => __( 'For full documentation on validation, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/the-basics/required/" target="_blank">http://docs.reduxframework.com/core/the-basics/required/</a>',
+        'title'      => __( 'Field Required / Linking', 'redux-framework-demo' ),
+        'id'         => 'required',
+        'desc'       => __( 'For full documentation on validation, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/the-basics/required/" target="_blank">http://docs.reduxframework.com/core/the-basics/required/</a>',
         'subsection' => true,
-        'fields' => array(
+        'fields'     => array(
             array(
                 'id'       => 'opt-required-basic',
                 'type'     => 'switch',
@@ -2145,11 +2145,11 @@
     ) );
 
     Redux::setSection( $opt_name, array(
-        'title'  => __( 'WPML Imtegration', 'redux-framework-demo' ),
-        'desc'   => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement. For extra details look at our <a href="http://docs.reduxframework.com/core/advanced/wpml-integration/" target="_blank">WPML Implementation</a> documentation.', 'redux-framework-demo' ),
+        'title'      => __( 'WPML Imtegration', 'redux-framework-demo' ),
+        'desc'       => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement. For extra details look at our <a href="http://docs.reduxframework.com/core/advanced/wpml-integration/" target="_blank">WPML Implementation</a> documentation.', 'redux-framework-demo' ),
         'subsection' => true,
         // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
-        'fields' => array(
+        'fields'     => array(
             array(
                 'id'    => 'wpml-text',
                 'type'  => 'textarea',
