@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.0.2
+* Fixed     Sortable checkbox labels not displaying properly.
+* Fixed     Sortable textbox not displaying default value as placeholder.
+* Updated:  sample-config with accurate example for both sortable modes.
+
 ## 3.5.0.1
 * Fixed     #2181 - Fixed issue with Ajax Save when PHP 5.3 Magic Quotes were disabled.
 
