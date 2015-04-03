@@ -125,10 +125,10 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
-# 3.5.0.1
+= 3.5.0.1 =
 * Fixed:    #2181 - Lingering issue with Ajax Save and PHP Magic Quotes.
 
-# 3.5.0
+= 3.5.0 =
 * Fixed:    #2181 - Issue with PHP < 5.4 and the Ace Editor field. Oy.
 * Fixed:    #2163 - Undefined error in JS.
 * Fixed:    #2176 - Infinite loop in the customizer for live preview of themes.
@@ -186,11 +186,11 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:   #2025: Issue with select sorting.
 * Update:  ACE Editor.  Thanks @corradomatt.
 
-# 3.4.1
+= 3.4.1 =
 * Fixed:   Small filesystem option with bad filter key reference..
 * Added:   Small return if $section filter returned the section empty.
 
-# 3.4.0
+= 3.4.0 =
 * Fixed:    Reset section hook firing too early.
 * Modified: The Redux Repeater field has landed!
 * Fixed:    #1983 - color_rgba not outputting default values on first load (before save).
@@ -248,7 +248,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Added:    #1803 - Optgroup support for select field.
 * Added:    Decimal increments to spinner.
 
-## 3.3.9.4
+= 3.3.9.4 =
 * Added:    Customizer now supports PANEL! Yay 4.0.
 * Fixed:    #1789 - Customizer now properly working again with WP 4.0. Odd bug.
 
