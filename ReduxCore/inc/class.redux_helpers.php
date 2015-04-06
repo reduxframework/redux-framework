@@ -70,6 +70,8 @@
             }
             
             public static function getTrackingObject() {
+                global $wpdb;
+                
                 $hash = md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] );
 
                 global $blog_id, $wpdb;
@@ -175,14 +177,16 @@
                 }
                 $software['full']    = $_SERVER['SERVER_SOFTWARE'];
                 $data['environment'] = $software;
-                if ( function_exists( 'mysqli_get_server_info' ) ) {
-                    $link = mysqli_connect() or die( "Error " . mysqli_error( $link ) );
-                    $data['environment']['mysql'] = mysqli_get_server_info( $link );
-                } else if ( class_exists( 'PDO' ) && method_exists( 'PDO', 'getAttribute' ) ) {
-                    $data['environment']['mysql'] = PDO::getAttribute( PDO::ATTR_SERVER_VERSION );
-                } else {
-                    $data['environment']['mysql'] = mysql_get_server_info();
-                }
+                $data['environment']['mysql'] = $wpdb->db_version();
+//                if ( function_exists( 'mysqli_get_server_info' ) ) {
+//                    $link = mysqli_connect() or die( "Error " . mysqli_error( $link ) );
+//                    $data['environment']['mysql'] = mysqli_get_server_info( $link );
+//                } else if ( class_exists( 'PDO' ) && method_exists( 'PDO', 'getAttribute' ) ) {
+//                    $data['environment']['mysql'] = PDO::getAttribute( PDO::ATTR_SERVER_VERSION );
+//                } else {
+//                    $data['environment']['mysql'] = mysql_get_server_info();
+//                }
+                
                 if ( empty( $data['developer'] ) ) {
                     unset( $data['developer'] );
                 }
