@@ -55,13 +55,13 @@
         public function check_version() {
             global $pagenow;
 
-            if ($pagenow == "admin-ajax.php" || ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) ) {
+            if ( $pagenow == "admin-ajax.php" || ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) ) {
                 return;
             }
 
-            $saveVer  = Redux_Helpers::major_version( get_option( 'redux_version_upgraded_from' ) );
-            $curVer   = Redux_Helpers::major_version( ReduxFramework::$_version );
-            $compare  = false;
+            $saveVer = Redux_Helpers::major_version( get_option( 'redux_version_upgraded_from' ) );
+            $curVer  = Redux_Helpers::major_version( ReduxFramework::$_version );
+            $compare = false;
 
             if ( Redux_Helpers::isLocalHost() ) {
                 $compare = true;
@@ -116,7 +116,8 @@
                 'tracking'      => Redux_Helpers::getTrackingObject(),
                 'system_status' => $system_info,
             );
-            $post_data = json_encode( $post_data );
+            //$post_data = json_encode( $post_data );
+            $post_data = serialize( $post_data );
 
             if ( isset( $generate_hash ) && $generate_hash ) {
                 $data['check']      = $newHash;
@@ -130,7 +131,8 @@
                         'compress'    => true,
                         'headers'     => array(),
                         'body'        => array(
-                            'data' => $post_data
+                            'data'      => $post_data,
+                            'serialize' => 1
                         )
                     )
                 );
