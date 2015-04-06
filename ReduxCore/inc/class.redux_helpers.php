@@ -370,6 +370,7 @@
                 $sysinfo['redux_ver']            = esc_html( ReduxFramework::$_version );
                 $sysinfo['redux_data_dir']       = ReduxFramework::$_upload_dir;
                 $sysinfo['redux_data_writeable'] = self::makeBoolStr( @fopen( ReduxFramework::$_upload_dir . 'test-log.log', 'a' ) );
+                $sysinfo['wp_content_url']       = WP_CONTENT_URL;   
                 $sysinfo['wp_ver']               = get_bloginfo( 'version' );
                 $sysinfo['wp_multisite']         = is_multisite();
                 $sysinfo['permalink_structure']  = get_option( 'permalink_structure' ) ? get_option( 'permalink_structure' ) : 'Default';
@@ -411,7 +412,8 @@
                 $sysinfo['server_info'] = esc_html( $_SERVER['SERVER_SOFTWARE'] );
                 $sysinfo['localhost']   = self::makeBoolStr( self::isLocalHost());
                 $sysinfo['php_ver']     = function_exists( 'phpversion' ) ? esc_html( phpversion() ) : 'phpversion() function does not exist.';
-
+                $sysinfo['abspath']     = ABSPATH;
+                
                 if ( function_exists( 'ini_get' ) ) {
                     $sysinfo['php_mem_limit']      = size_format( self::let_to_num( ini_get( 'memory_limit' ) ) );
                     $sysinfo['php_post_max_size']  = size_format( self::let_to_num( ini_get( 'post_max_size' ) ) );

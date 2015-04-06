@@ -90,6 +90,15 @@
                 ?></td>
         </tr>
         <tr>
+            <td data-export-label="WP Content URL"><?php _e( 'WP Content URL', 'redux-framework' ); ?>
+                :
+            </td>
+            <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The location of Wordpress\'s content URL.', 'redux-framework' ) . '">[?]</a>'; ?></td>
+            <td><?php
+                echo '<code>' . $sysinfo['wp_content_url'] . '</code> ';
+                ?></td>
+        </tr>        
+        <tr>
             <td data-export-label="WP Version"><?php _e( 'WP Version', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The version of WordPress installed on your site.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php bloginfo( 'version' ); ?></td>
@@ -215,6 +224,12 @@
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The version of PHP installed on your hosting server.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php echo $sysinfo['php_ver']; ?></td>
         </tr>
+        <tr>
+            <td data-export-label="ABSPATH"><?php _e( 'ABSPATH', 'redux-framework' ); ?>:</td>
+            <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The ABSPATH variable on the server.', 'redux-framework' ) . '">[?]</a>'; ?></td>
+            <td><?php echo '<code>' . $sysinfo['abspath'] . '</code>'; ?></td>
+        </tr>
+        
         <?php if ( function_exists( 'ini_get' ) ) { ?>
             <tr>
                 <td data-export-label="PHP Memory Limit"><?php _e( 'PHP Memory Limit', 'redux-framework' ); ?>:</td>
