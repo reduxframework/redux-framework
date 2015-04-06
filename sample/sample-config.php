@@ -2145,7 +2145,7 @@
     ) );
 
     Redux::setSection( $opt_name, array(
-        'title'      => __( 'WPML Imtegration', 'redux-framework-demo' ),
+        'title'      => __( 'WPML Integration', 'redux-framework-demo' ),
         'desc'       => __( 'These fields can be fully translated by WPML (WordPress Multi-Language). This serves as an example for you to implement. For extra details look at our <a href="http://docs.reduxframework.com/core/advanced/wpml-integration/" target="_blank">WPML Implementation</a> documentation.', 'redux-framework-demo' ),
         'subsection' => true,
         // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
