@@ -43,6 +43,8 @@
                 $button.addClass( 'disabled' );
                 $button.parent().append( '<span class="spinner" style="display:block;float: none;margin: 10px auto;"></span>' );
                 $button.closest( '.spinner' ).fadeIn();
+                if ( !window.console ) console = {};
+                console.log = console.log || function( name, data ) {};
                 jQuery.ajax(
                     {
                         type: "post",
@@ -53,6 +55,7 @@
                             nonce: $nonce
                         },
                         error: function( response ) {
+                            console.log( response );
                             $button.removeClass( 'disabled' );
                             $button.parent().find( '.spinner' ).remove();
                             alert( 'There was an error. Please try again later.' );
@@ -62,6 +65,7 @@
                                 jQuery( '#support_hash' ).val( 'http://support.redux.io/?id=' + response.identifier );
                                 $button.parents( 'fieldset:first' ).find( '.next' ).removeAttr( 'disabled' ).click();
                             } else {
+                                console.log( response );
                                 alert( 'There was an error. Please try again later.' );
                             }
                         }
