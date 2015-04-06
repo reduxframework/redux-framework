@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.0.3
+* Fixed:    'Generate Support URL' feature kicking back error. 
+
 ## 3.5.0.2
 * Fixed     Sortable checkbox labels not displaying properly.
 * Fixed     Sortable textbox not displaying default value as placeholder.
