@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.0.5
+* Fixed     Support URLs now work even if max_input_vars is way low in PHP 5.3+
+
 ## 3.5.0.4
 * Fixed     #2197 - Import/export not loading proper for those who have opted to install Wordpress in ways it was never intended.
 
