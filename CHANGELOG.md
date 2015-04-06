@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.0.4
+* Fixed     #2197 - Import/export not loading proper for those who have opted to install Wordpress in ways it was never intended.
+
 ## 3.5.0.3
 * Fixed:    'Generate Support URL' feature kicking back error. 
 
