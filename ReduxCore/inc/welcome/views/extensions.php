@@ -19,7 +19,7 @@
     tracking =>
     * */
     $iconMap = array(
-        'repeater'        => 'asl',
+        'repeater'        => 'tags',
         'social-profiles' => 'group',
         'js-button'       => 'hand-down',
         'multi-media'     => 'picture',
