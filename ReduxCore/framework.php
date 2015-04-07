@@ -204,7 +204,18 @@
                     // Buh bye!
                     return;
                 }
-
+//echo count($_POST);
+                
+                global $pagenow;
+                if (($pagenow == 'admin.php' || $pagenow == 'admin-ajax.php' ) && function_exists('ini_get')) {
+                    if (!empty($_POST)) {
+                        $input_var_limit = ini_get( 'max_input_vars' );
+                        $input_var_count = count($_POST);
+                        //echo $input_var_count;
+                        print_r($_POST);
+                    }
+                }
+                
                 // Pass parent pointer to function helper.
                 Redux_Functions::$_parent = $this;
 
