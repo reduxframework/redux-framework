@@ -51,6 +51,9 @@
         var $notification_bar = jQuery( document.getElementById( 'redux_notification_bar' ) );
         $notification_bar.slideUp();
         jQuery( '.redux-save-warn' ).slideUp();
+        jQuery( '.redux_ajax_save_error' ).slideUp('medium', function(){
+            jQuery( this ).remove();
+        });
 
         var $parent = jQuery( document.getElementById( "redux-form-wrapper" ) );
 
@@ -129,8 +132,7 @@
                         jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                         jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
                         overlay.fadeOut( 'fast' );
-                        jQuery( '.redux_ajax_save_error' ).slideUp();
-                        jQuery( '.wrap h2:first-child' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
+                        jQuery( '.wrap h2:first' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
                         jQuery( '.redux_ajax_save_error' ).slideDown();
                         jQuery( "html, body" ).animate( {scrollTop: 0}, "slow" );
                     }
