@@ -74,7 +74,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.0.5';
+            public static $_version = '3.5.0.6';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -401,9 +401,9 @@
                     // Ajax saving!!!
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
 
-                    include_once 'core/dashboard.php';
-
-                    if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() === true ) {
+                    if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true ) {
+                        include_once 'core/dashboard.php';
+                        
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
                             include_once 'core/newsflash.php';
 
