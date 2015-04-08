@@ -1,7 +1,12 @@
 # Redux Framework Changelog
 
-## 3.5.0.6
+## 3.5.0.7
 * Modified: Redux News dashboard widget appears only when dev_mode is true or in a local host environment.
+
+## 3.5.0.6
+* Fixed     #2127 - Elusive icons not working in footer as before.
+* Fixed     Issue where Status tab not showing extension versions properly.
+* Fixed     Issue in support URL not passing data correctly.
 
 ## 3.5.0.5
 * Fixed     Support URLs now work even if max_input_vars is way low in PHP 5.3+
