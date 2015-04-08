@@ -435,7 +435,11 @@
             public static function getAllExtensions() {
                 $redux = ReduxFrameworkInstances::get_all_instances();
                 foreach ( $redux as $instance ) {
+                    if ( ! empty( self::$uses_extensions[ $instance['args']['opt_name'] ] ) ) {
+                        continue;
+                    }
                     if ( ! empty( $instance['extensions'] ) ) {
+
                         Redux::getInstanceExtensions( $instance['args']['opt_name'], $instance );
                     }
                 }
@@ -479,7 +483,9 @@
                         }
                     }
                 } else {
-                    Redux::getInstanceExtensions( $opt_name );
+                    if ( empty( self::$uses_extensions[ $opt_name ] ) ) {
+                        Redux::getInstanceExtensions( $opt_name );
+                    }
 
                     if ( empty( self::$uses_extensions[ $opt_name ] ) ) {
                         return false;
@@ -490,8 +496,8 @@
                         $name                             = str_replace( '.php', '', basename( $extension ) );
                         $extension_class                  = 'ReduxFramework_Extension_' . $name;
                         $instanceExtensions[ $extension ] = array(
-                            'path'  => $class_file,
-                            'class' => $extension_class,
+                            'path'    => $class_file,
+                            'class'   => $extension_class,
                             'version' => Redux::getFileVersion( $class_file )
                         );
                     }
