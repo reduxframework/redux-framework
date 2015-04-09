@@ -85,8 +85,8 @@
                     $redirect = true; // Previous version
                 }
                 if ( $redirect ) {
-                    //wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
-                    //exit();
+                    wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
+                    exit();
                 }
             }
         }

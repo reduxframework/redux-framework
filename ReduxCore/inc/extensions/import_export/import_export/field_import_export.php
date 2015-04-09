@@ -46,8 +46,8 @@
                 $this->value    = $value;
                 $this->is_field = $this->parent->extensions['import_export']->is_field;
 
-                $this->extension_dir = ReduxFramework::$_dir . 'inc/extensions/import_export/import_export/';
-                $this->extension_url = ReduxFramework::$_url . 'inc/extensions/import_export/import_export/';
+                $this->extension_dir = ReduxFramework::$_dir . 'inc/extensions/import_export/';
+                $this->extension_url = ReduxFramework::$_url . 'inc/extensions/import_export/';
 
                 // Set default args for this field to avoid bad indexes. Change this to anything you use.
                 $defaults    = array(

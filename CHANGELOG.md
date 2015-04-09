@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.2
+* Fixed:   #2214: Bad path for import/export enqueue.
+* Release: Wp.org release.
+
 ## 3.5.1
 * Release: Wp.org release.
 
