@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.1
+* Release: Wp.org release.
+
 ## 3.5.0.7
 * Modified: Redux News dashboard widget appears only when dev_mode is true or in a local host environment.
 
