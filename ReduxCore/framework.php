@@ -103,7 +103,7 @@
 
                         $is_plugin = false;
                         foreach ( get_plugins() as $key => $value ) {
-                            if ( strpos( $key, 'redux-framework.php' ) !== false ) {
+                            if ( is_plugin_active( $key ) && strpos( $key, 'redux-framework.php' ) !== false ) {
                                 self::$_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR . '/plugins/' . plugin_dir_path( $key ) . 'ReduxCore/' ) );
                                 $is_plugin  = true;
                             }
