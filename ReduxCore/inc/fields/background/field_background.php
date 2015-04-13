@@ -348,6 +348,12 @@
              * @return      void
              */
             public function enqueue() {
+                if ( function_exists( 'wp_enqueue_media' ) ) {
+                    wp_enqueue_media();
+                } else {
+                    wp_enqueue_script( 'media-upload' );
+                }
+                
                 wp_enqueue_style( 'select2-css' );
                 wp_enqueue_style( 'wp-color-picker' );
                 
