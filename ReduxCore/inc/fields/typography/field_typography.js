@@ -431,10 +431,7 @@
                         } else {
                             selected = "";
                         }
-
-                        html += '<option value="' + subset.id + '"' + selected + '>' + subset.name.replace(
-                            /\+/g, " "
-                        ) + '</option>';
+                        html += '<option value="' + subset.id + '"' + selected + '>' + subset.name.replace(/\+/g, " ") + '</option>';
                     }
                 );
 

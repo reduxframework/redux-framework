@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.2.1
+* Fixed:   #2221 - Background field media not enqueueing when used with no other media based fields.
+
 ## 3.5.2
 * Fixed:   #2214: Bad path for import/export enqueue.
 * Release: Wp.org release.
