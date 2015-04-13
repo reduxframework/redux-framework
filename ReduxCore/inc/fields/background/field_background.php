@@ -348,6 +348,9 @@
              * @return      void
              */
             public function enqueue() {
+
+                wp_enqueue_media();
+                
                 wp_enqueue_style( 'select2-css' );
                 wp_enqueue_style( 'wp-color-picker' );
                 
