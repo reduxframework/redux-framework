@@ -1075,8 +1075,8 @@ pre {
                         -o-transition: all 0.2;
                         transition: all 0.2;
                         &:hover {
-                            color: #2ea2cc;
-                            background: #000;
+                            color: $buttonPrimary;
+                            background: darken($secondaryColor, 10%);
                         }
                         span.group_title {
                             padding-left: 5px !important;
@@ -1155,7 +1155,7 @@ pre {
 
 /* Light fresh theme */
 .admin-color-fresh {
-    @include adminThemeColorOverrides(#bbb, #0074a2, #222222, #1e8cbe);
+    @include adminThemeColorOverrides(#a0a5aa, #0073aa, #23282d, #1e8cbe);
 }
 
 /* Light admin theme */

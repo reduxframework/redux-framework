@@ -120,6 +120,7 @@
                     'title' => __( 'Import / Export', 'redux-framework' ),
                     'heading' => '',
                     'icon' => 'el el-refresh',
+                    'customizer' => false,
                     'fields' => array(
                         array(
                             'id' => 'redux_import_export',
