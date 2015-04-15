@@ -242,7 +242,7 @@
                  */
                 $this->args = apply_filters( "redux/options/{$this->args['opt_name']}/args", $this->args );
 
-                if ( ReduxHelpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
+                if ( Redux_Helpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
                     $this->args['dev_mode'] = true;
                 }
 
