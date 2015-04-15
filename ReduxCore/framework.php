@@ -1361,6 +1361,10 @@
                                     continue;
                                 }
 
+                                if ( isset( $section['permissions'] ) && ! current_user_can( $section['permissions'] ) ) {
+                                    continue;
+                                }
+
                                 add_submenu_page(
                                     $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
                                     //create_function( '$a', "return null;" )

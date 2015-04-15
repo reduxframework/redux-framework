@@ -1108,14 +1108,17 @@ pre {
             &.hasSubSections {
                 a {
                     background: $darkColor;
+                    text-shadow: 1px 1px darken($darkColor, 30%);
                 }
                 ul.subsection li {
                     a {
                         background: $secondaryColor;
+                        text-shadow: none;
                     }
                     &.active {
                         a {
                             background: $accentColor;
+                            text-shadow: 1px 1px darken($accentColor, 20%);
                         }
                     }
                 }
