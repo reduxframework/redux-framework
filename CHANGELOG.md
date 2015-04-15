@@ -1,5 +1,12 @@
 # Redux Framework Changelog
 
+## 3.5.3
+* Fixed:   #2228 - Submenu items still visible if permissions not allowed.
+* Fixed:   Import/Export showing up in customizer.
+* Modified: Admin-fresh theme to match new WordPress 4.2
+* Modified: Redux widget now has a proper ID. Thanks @corradomatt!
+* Modified: Added text-shadow to submenu items to give a stronger "pop"
+
 ## 3.5.2.2
 * Modified: Admin blast message pinging server on each load after three day expiration.  Possible slow down of the overall panel loading time.
 

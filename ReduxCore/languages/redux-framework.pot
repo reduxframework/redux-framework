@@ -2,10 +2,10 @@
 # This file is distributed under the GPL3+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Redux Framework 3.4.4.9.4\n"
+"Project-Id-Version: Redux Framework 3.5.3\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/ReduxFramework/ReduxFramework/issues\n"
-"POT-Creation-Date: 2015-04-02 04:45:17+00:00\n"
+"POT-Creation-Date: 2015-04-15 23:15:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,12 +26,12 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 #: ReduxCore/core/enqueue.php:397
-#: ReduxCore/inc/extensions/customizer/extension_customizer.php:562
+#: ReduxCore/inc/extensions/customizer/extension_customizer.php:566
 msgid "You have changes that are not saved. Would you like to save them now?"
 msgstr ""
 
 #: ReduxCore/core/enqueue.php:405
-#: ReduxCore/inc/extensions/customizer/extension_customizer.php:563
+#: ReduxCore/inc/extensions/customizer/extension_customizer.php:567
 msgid "Are you sure? Resetting will lose all custom values."
 msgstr ""
 
@@ -40,7 +40,7 @@ msgid "Are you sure? Resetting will lose all custom values in this section."
 msgstr ""
 
 #: ReduxCore/core/enqueue.php:421
-#: ReduxCore/inc/extensions/customizer/extension_customizer.php:564
+#: ReduxCore/inc/extensions/customizer/extension_customizer.php:568
 msgid ""
 "Your current options will be replaced with the values of this preset. Would "
 "you like to proceed?"
@@ -109,47 +109,47 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: ReduxCore/framework.php:1381
+#: ReduxCore/framework.php:1389
 #: ReduxCore/templates/panel/menu_container.tpl.php:63
 msgid "System Info"
 msgstr ""
 
-#: ReduxCore/framework.php:1684
+#: ReduxCore/framework.php:1692
 msgid "Enable"
 msgstr ""
 
-#: ReduxCore/framework.php:1689
+#: ReduxCore/framework.php:1697
 msgid "Disable"
 msgstr ""
 
-#: ReduxCore/framework.php:1695
+#: ReduxCore/framework.php:1703
 msgid "moving the mouse over"
 msgstr ""
 
-#: ReduxCore/framework.php:1697
+#: ReduxCore/framework.php:1705
 msgid "clicking"
 msgstr ""
 
-#: ReduxCore/framework.php:1701
+#: ReduxCore/framework.php:1709
 msgid ""
 "Hints are tooltips that popup when %d the hint icon, offering addition "
 "information about the field in which they appear.  They can be %d d by "
 "using the link below."
 msgstr ""
 
-#: ReduxCore/framework.php:1706
+#: ReduxCore/framework.php:1714
 msgid "Hints"
 msgstr ""
 
-#: ReduxCore/framework.php:1833
+#: ReduxCore/framework.php:1841
 msgid "Default"
 msgstr ""
 
-#: ReduxCore/framework.php:2687
+#: ReduxCore/framework.php:2680
 msgid "Invalid security credential, please reload the page and try again."
 msgstr ""
 
-#: ReduxCore/framework.php:2753
+#: ReduxCore/framework.php:2766
 msgid "Your panel has no fields. Nothing to save."
 msgstr ""
 
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: ReduxCore/inc/class.redux_helpers.php:577
+#: ReduxCore/inc/class.redux_helpers.php:589
 msgid ""
 "<code>%s</code> version <strong style=\"color:red\">%s</strong> is out of "
 "date. The core version is %s"
@@ -193,15 +193,15 @@ msgstr ""
 msgid "Show Object in Javascript Console Object"
 msgstr ""
 
-#: ReduxCore/inc/extensions/customizer/extension_customizer.php:597
+#: ReduxCore/inc/extensions/customizer/extension_customizer.php:601
 msgid "You have changes that are not saved.  Would you like to save them now?"
 msgstr ""
 
-#: ReduxCore/inc/extensions/customizer/extension_customizer.php:598
+#: ReduxCore/inc/extensions/customizer/extension_customizer.php:602
 msgid "Are you sure?  Resetting will lose all custom values."
 msgstr ""
 
-#: ReduxCore/inc/extensions/customizer/extension_customizer.php:599
+#: ReduxCore/inc/extensions/customizer/extension_customizer.php:603
 msgid ""
 "Your current options will be replaced with the values of this preset.  "
 "Would you like to proceed?"
@@ -211,60 +211,60 @@ msgstr ""
 msgid "Import / Export"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:106
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:103
 msgid "Import Options"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:107
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:104
 msgid "Import from File"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:107
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:104
 msgid "Import from URL"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:110
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:107
 msgid ""
 "Input your backup file below and hit Import to restore your sites options "
 "from a backup."
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:115
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:112
 msgid ""
 "Input the URL to another sites options set and hit Import to load the "
 "options from that site."
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:119
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:116
 msgid "Import"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:119
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:116
 msgid ""
 "WARNING! This will overwrite all existing option values, please proceed "
 "with caution!"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:122
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:119
 msgid "Export Options"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:124
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:121
 msgid ""
 "Here you can copy/download your current option settings. Keep this safe as "
 "you can use it as a backup should anything go wrong, or you can use it to "
 "restore your settings on this site (or any other site)."
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:129
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:126
 msgid "Copy Data"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:129
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:126
 msgid "Download Data File"
 msgstr ""
 
-#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:129
+#: ReduxCore/inc/extensions/import_export/import_export/field_import_export.php:126
 msgid "Copy Export URL"
 msgstr ""
 
@@ -616,7 +616,7 @@ msgid ""
 "try it today."
 msgstr ""
 
-#: ReduxCore/inc/tracking.php:154 ReduxCore/inc/welcome/welcome.php:212
+#: ReduxCore/inc/tracking.php:154 ReduxCore/inc/welcome/welcome.php:214
 msgid "Redux Extensions"
 msgstr ""
 
@@ -876,179 +876,195 @@ msgid "To allow data saving, make <code>%s</code> writable."
 msgstr ""
 
 #: ReduxCore/inc/welcome/views/status_report.php:93
+msgid "WP Content URL"
+msgstr ""
+
+#: ReduxCore/inc/welcome/views/status_report.php:96
+msgid "The location of Wordpress's content URL."
+msgstr ""
+
+#: ReduxCore/inc/welcome/views/status_report.php:102
 msgid "WP Version"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:94
+#: ReduxCore/inc/welcome/views/status_report.php:103
 msgid "The version of WordPress installed on your site."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:98
+#: ReduxCore/inc/welcome/views/status_report.php:107
 msgid "WP Multisite"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:99
+#: ReduxCore/inc/welcome/views/status_report.php:108
 msgid "Whether or not you have WordPress Multisite enabled."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:107
+#: ReduxCore/inc/welcome/views/status_report.php:116
 msgid "Permalink Structure"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:108
+#: ReduxCore/inc/welcome/views/status_report.php:117
 msgid ""
 "The current permalink structure as defined in Wordpress "
 "Settings->Permalinks."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:113
+#: ReduxCore/inc/welcome/views/status_report.php:122
 msgid "Front Page Display"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:114
+#: ReduxCore/inc/welcome/views/status_report.php:123
 msgid "The current Reading mode of Wordpress."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:122
+#: ReduxCore/inc/welcome/views/status_report.php:131
 msgid "Front Page"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:123
+#: ReduxCore/inc/welcome/views/status_report.php:132
 msgid "The currently selected page which acts as the site's Front Page."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:127
+#: ReduxCore/inc/welcome/views/status_report.php:136
 msgid "Posts Page"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:128
+#: ReduxCore/inc/welcome/views/status_report.php:137
 msgid "The currently selected page in where blog posts are displayed."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:135
+#: ReduxCore/inc/welcome/views/status_report.php:144
 msgid "WP Memory Limit"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:136
+#: ReduxCore/inc/welcome/views/status_report.php:145
 msgid "The maximum amount of memory (RAM) that your site can use at one time."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:141
+#: ReduxCore/inc/welcome/views/status_report.php:150
 msgid ""
 "%s - We recommend setting memory to at least 40MB. See: <a href=\"%s\" "
 "target=\"_blank\">Increasing memory allocated to PHP</a>"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:148
+#: ReduxCore/inc/welcome/views/status_report.php:157
 msgid "Database Table Prefix"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:150
+#: ReduxCore/inc/welcome/views/status_report.php:159
 msgid "The prefix structure of the current Wordpress database."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:154
+#: ReduxCore/inc/welcome/views/status_report.php:163
 msgid "WP Debug Mode"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:155
+#: ReduxCore/inc/welcome/views/status_report.php:164
 msgid "Displays whether or not WordPress is in Debug Mode."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:163
+#: ReduxCore/inc/welcome/views/status_report.php:172
 msgid "Language"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:164
+#: ReduxCore/inc/welcome/views/status_report.php:173
 msgid "The current language used by WordPress. Default = English"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:172
+#: ReduxCore/inc/welcome/views/status_report.php:181
 msgid "Browser"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:177
+#: ReduxCore/inc/welcome/views/status_report.php:186
 msgid "Browser Info"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:178
+#: ReduxCore/inc/welcome/views/status_report.php:187
 msgid "Information about web browser current in use."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:193
+#: ReduxCore/inc/welcome/views/status_report.php:202
 msgid "Server Environment"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:198
+#: ReduxCore/inc/welcome/views/status_report.php:207
 msgid "Server Info"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:199
+#: ReduxCore/inc/welcome/views/status_report.php:208
 msgid "Information about the web server that is currently hosting your site."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:203
+#: ReduxCore/inc/welcome/views/status_report.php:212
 msgid "Localhost Environment"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:204
+#: ReduxCore/inc/welcome/views/status_report.php:213
 msgid "Is the server running in a localhost environment."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:214
+#: ReduxCore/inc/welcome/views/status_report.php:223
 msgid "PHP Version"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:215
+#: ReduxCore/inc/welcome/views/status_report.php:224
 msgid "The version of PHP installed on your hosting server."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:220
+#: ReduxCore/inc/welcome/views/status_report.php:228
+msgid "ABSPATH"
+msgstr ""
+
+#: ReduxCore/inc/welcome/views/status_report.php:229
+msgid "The ABSPATH variable on the server."
+msgstr ""
+
+#: ReduxCore/inc/welcome/views/status_report.php:235
 msgid "PHP Memory Limit"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:221
-#: ReduxCore/inc/welcome/views/status_report.php:226
+#: ReduxCore/inc/welcome/views/status_report.php:236
+#: ReduxCore/inc/welcome/views/status_report.php:241
 msgid "The largest filesize that can be contained in one post."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:225
+#: ReduxCore/inc/welcome/views/status_report.php:240
 msgid "PHP Post Max Size"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:230
+#: ReduxCore/inc/welcome/views/status_report.php:245
 msgid "PHP Time Limit"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:231
+#: ReduxCore/inc/welcome/views/status_report.php:246
 msgid ""
 "The amount of time (in seconds) that your site will spend on a single "
 "operation before timing out (to avoid server lockups)"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:235
+#: ReduxCore/inc/welcome/views/status_report.php:250
 msgid "PHP Max Input Vars"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:236
+#: ReduxCore/inc/welcome/views/status_report.php:251
 msgid ""
 "The maximum number of variables your server can use for a single function "
 "to avoid overloads."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:240
+#: ReduxCore/inc/welcome/views/status_report.php:255
 msgid "PHP Display Errors"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:241
+#: ReduxCore/inc/welcome/views/status_report.php:256
 msgid "Determines if PHP will display errors within the browser."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:252
+#: ReduxCore/inc/welcome/views/status_report.php:267
 msgid "SUHOSIN Installed"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:253
+#: ReduxCore/inc/welcome/views/status_report.php:268
 msgid ""
 "Suhosin is an advanced protection system for PHP installations. It was "
 "designed to protect your servers on the one hand against a number of well "
@@ -1058,227 +1074,227 @@ msgid ""
 "its data submission limits."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:262
+#: ReduxCore/inc/welcome/views/status_report.php:277
 msgid "MySQL Version"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:263
+#: ReduxCore/inc/welcome/views/status_report.php:278
 msgid "The version of MySQL installed on your hosting server."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:267
+#: ReduxCore/inc/welcome/views/status_report.php:282
 msgid "Max Upload Size"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:268
+#: ReduxCore/inc/welcome/views/status_report.php:283
 msgid "The largest filesize that can be uploaded to your WordPress installation."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:272
+#: ReduxCore/inc/welcome/views/status_report.php:287
 msgid "Default Timezone is UTC"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:275
+#: ReduxCore/inc/welcome/views/status_report.php:290
 msgid "The default timezone for your server."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:278
+#: ReduxCore/inc/welcome/views/status_report.php:293
 msgid "Default timezone is %s - it should be UTC"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:289
+#: ReduxCore/inc/welcome/views/status_report.php:304
 msgid "Used when communicating with remote services with PHP."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:295
+#: ReduxCore/inc/welcome/views/status_report.php:310
 msgid ""
 "Your server does not have fsockopen or cURL enabled - cURL is used to "
 "communicate with other servers. Please contact your hosting provider."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:334
+#: ReduxCore/inc/welcome/views/status_report.php:349
 msgid "Remote Post"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:335
+#: ReduxCore/inc/welcome/views/status_report.php:350
 msgid "Used to send data to remote servers."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:340
+#: ReduxCore/inc/welcome/views/status_report.php:355
 msgid ""
 "wp_remote_post() failed. Many advanced features may not function. Contact "
 "your hosting provider."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:343
 #: ReduxCore/inc/welcome/views/status_report.php:358
+#: ReduxCore/inc/welcome/views/status_report.php:373
 msgid "Error: %s"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:350
+#: ReduxCore/inc/welcome/views/status_report.php:365
 msgid "Remote Get"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:351
+#: ReduxCore/inc/welcome/views/status_report.php:366
 msgid "Used to grab information from remote servers for updates updates."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:356
+#: ReduxCore/inc/welcome/views/status_report.php:371
 msgid ""
 "wp_remote_get() failed. This is needed to get information from remote "
 "servers. Contact your hosting provider."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:390
+#: ReduxCore/inc/welcome/views/status_report.php:405
 msgid "Active Plugins"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:406
+#: ReduxCore/inc/welcome/views/status_report.php:421
 msgid "Visit plugin homepage"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:430
+#: ReduxCore/inc/welcome/views/status_report.php:445
 msgid "Redux Instance: "
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:437
+#: ReduxCore/inc/welcome/views/status_report.php:452
 msgid "The opt_name argument for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:445
+#: ReduxCore/inc/welcome/views/status_report.php:460
 msgid "The global_variable argument for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:453
+#: ReduxCore/inc/welcome/views/status_report.php:468
 msgid "Indicates if developer mode is enabled for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:458
+#: ReduxCore/inc/welcome/views/status_report.php:473
 msgid "Indicates if ajax based saving is enabled for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:463
+#: ReduxCore/inc/welcome/views/status_report.php:478
 msgid ""
 "The page slug denotes the string used for the options panel page for this "
 "instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:468
+#: ReduxCore/inc/welcome/views/status_report.php:483
 msgid ""
 "The page permissions variable sets the permission level required to access "
 "the options panel for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:473
+#: ReduxCore/inc/welcome/views/status_report.php:488
 msgid ""
 "This variable set whether or not the menu is displayed as an admin menu "
 "item for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:478
+#: ReduxCore/inc/welcome/views/status_report.php:493
 msgid ""
 "The page parent variable sets where the options menu will be placed on the "
 "WordPress admin sidebar for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:484
+#: ReduxCore/inc/welcome/views/status_report.php:499
 msgid "Indicates if the compiler flag is enabled for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:489
+#: ReduxCore/inc/welcome/views/status_report.php:504
 msgid ""
 "Indicates if output flag for globally shutting off all CSS output is "
 "enabled for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:494
+#: ReduxCore/inc/welcome/views/status_report.php:509
 msgid ""
 "The output_tag variable sets whether or not dynamic CSS will be generated "
 "for the customizer and Google fonts for this instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:503
+#: ReduxCore/inc/welcome/views/status_report.php:518
 msgid ""
 "The specified template path containing custom template files for this "
 "instance of Redux."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:508
+#: ReduxCore/inc/welcome/views/status_report.php:523
 msgid "List of template files overriding the default Redux template files."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:531
+#: ReduxCore/inc/welcome/views/status_report.php:546
 msgid "Indicates the installed Redux extensions and their version numbers."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:562
+#: ReduxCore/inc/welcome/views/status_report.php:577
 msgid "Theme"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:567
+#: ReduxCore/inc/welcome/views/status_report.php:582
 msgid "Name"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:568
+#: ReduxCore/inc/welcome/views/status_report.php:583
 msgid "The name of the current active theme."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:572
+#: ReduxCore/inc/welcome/views/status_report.php:587
 msgid "Version"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:573
+#: ReduxCore/inc/welcome/views/status_report.php:588
 msgid "The installed version of the current active theme."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:578
+#: ReduxCore/inc/welcome/views/status_report.php:593
 msgid "is available"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:583
+#: ReduxCore/inc/welcome/views/status_report.php:598
 msgid "Author URL"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:584
+#: ReduxCore/inc/welcome/views/status_report.php:599
 msgid "The theme developers URL."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:588
+#: ReduxCore/inc/welcome/views/status_report.php:603
 msgid "Child Theme"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:589
+#: ReduxCore/inc/welcome/views/status_report.php:604
 msgid "Displays whether or not the current theme is a child theme."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:591
+#: ReduxCore/inc/welcome/views/status_report.php:606
 msgid ""
 "If you're modifying Redux Framework or a parent theme you didn't build "
 "personally, we recommend using a child theme. See: <a href=\"%s\" "
 "target=\"_blank\">How to create a child theme</a>"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:599
+#: ReduxCore/inc/welcome/views/status_report.php:614
 msgid "Parent Theme Name"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:601
+#: ReduxCore/inc/welcome/views/status_report.php:616
 msgid "The name of the parent theme."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:605
+#: ReduxCore/inc/welcome/views/status_report.php:620
 msgid "Parent Theme Version"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:608
+#: ReduxCore/inc/welcome/views/status_report.php:623
 msgid "The installed version of the parent theme."
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:612
+#: ReduxCore/inc/welcome/views/status_report.php:627
 msgid "Parent Theme Author URL"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:615
+#: ReduxCore/inc/welcome/views/status_report.php:630
 msgid "The parent theme developers URL."
 msgstr ""
 
@@ -1380,74 +1396,74 @@ msgid ""
 "directly."
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:168
+#: ReduxCore/inc/welcome/welcome.php:170
 msgid "Support hash could not be generated. Please try again later."
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:188
+#: ReduxCore/inc/welcome/welcome.php:190
 msgid "Welcome to Redux Framework"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:196
+#: ReduxCore/inc/welcome/welcome.php:198
 msgid "Redux Framework Changelog"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:204 class.redux-plugin.php:410
+#: ReduxCore/inc/welcome/welcome.php:206 class.redux-plugin.php:411
 msgid "Get Support"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:221
+#: ReduxCore/inc/welcome/welcome.php:223
 msgid "The people that develop Redux Framework"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:229
+#: ReduxCore/inc/welcome/welcome.php:231
 msgid "Redux Framework Status"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:334
+#: ReduxCore/inc/welcome/welcome.php:336
 msgid "What's New"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:338
+#: ReduxCore/inc/welcome/welcome.php:340
 msgid "Extensions"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:342
+#: ReduxCore/inc/welcome/welcome.php:344
 msgid "Changelog"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:346
+#: ReduxCore/inc/welcome/welcome.php:348
 msgid "Credits"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:350
+#: ReduxCore/inc/welcome/welcome.php:352
 msgid "Support"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:354
+#: ReduxCore/inc/welcome/welcome.php:356
 msgid "Status"
 msgstr ""
 
-#: ReduxCore/inc/welcome/welcome.php:511
+#: ReduxCore/inc/welcome/welcome.php:513
 msgid "View %s"
 msgstr ""
 
-#: ReduxCore/templates/panel/footer.tpl.php:43
+#: ReduxCore/templates/panel/footer.tpl.php:47
 #: ReduxCore/templates/panel/header_stickybar.tpl.php:20
 msgid "Save Changes"
 msgstr ""
 
-#: ReduxCore/templates/panel/footer.tpl.php:46
+#: ReduxCore/templates/panel/footer.tpl.php:50
 #: ReduxCore/templates/panel/header_stickybar.tpl.php:22
 msgid "Reset Section"
 msgstr ""
 
-#: ReduxCore/templates/panel/footer.tpl.php:47
+#: ReduxCore/templates/panel/footer.tpl.php:51
 #: ReduxCore/templates/panel/header_stickybar.tpl.php:23
 msgid "Reset All"
 msgstr ""
 
-#: ReduxCore/templates/panel/footer.tpl.php:52
+#: ReduxCore/templates/panel/footer.tpl.php:56
 #: ReduxCore/templates/panel/header_stickybar.tpl.php:26
 msgid "Working..."
 msgstr ""
@@ -1460,31 +1476,31 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: class.redux-plugin.php:306
+#: class.redux-plugin.php:307
 msgid "Redux Framework has an embedded demo."
 msgstr ""
 
-#: class.redux-plugin.php:306
+#: class.redux-plugin.php:307
 msgid "Click here to activate the sample config file."
 msgstr ""
 
-#: class.redux-plugin.php:407
+#: class.redux-plugin.php:408
 msgid "Docs"
 msgstr ""
 
-#: class.redux-plugin.php:408
+#: class.redux-plugin.php:409
 msgid "Repo"
 msgstr ""
 
-#: class.redux-plugin.php:409
+#: class.redux-plugin.php:410
 msgid "Builder"
 msgstr ""
 
-#: class.redux-plugin.php:415
+#: class.redux-plugin.php:416
 msgid "Deactivate Demo Mode"
 msgstr ""
 
-#: class.redux-plugin.php:417
+#: class.redux-plugin.php:418
 msgid "Activate Demo Mode"
 msgstr ""
 
@@ -1534,7 +1550,7 @@ msgstr ""
 msgid "http://reduxframework.com"
 msgstr ""
 
-#: ReduxCore/inc/welcome/views/status_report.php:412
+#: ReduxCore/inc/welcome/views/status_report.php:427
 msgctxt "by author"
 msgid "by %s"
 msgstr ""

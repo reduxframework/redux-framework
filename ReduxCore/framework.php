@@ -74,7 +74,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.2.2';
+            public static $_version = '3.5.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -242,6 +242,10 @@
                  */
                 $this->args = apply_filters( "redux/options/{$this->args['opt_name']}/args", $this->args );
 
+                if ( ReduxHelpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
+                    $this->args['dev_mode'] = true;
+                }
+
                 // Do not save the defaults if we're on a live preview!
                 if ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) {
                     $this->args['save_defaults'] = false;
@@ -403,7 +407,7 @@
 
                     if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true ) {
                         include_once 'core/dashboard.php';
-                        
+
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
                             include_once 'core/newsflash.php';
 
@@ -2106,7 +2110,7 @@
 
                             // Set the defaults to the value if not present
                             $doUpdate = false;
-                            
+
                             // Check fields for values in the default parameter
                             if ( ! isset ( $this->options[ $field['id'] ] ) && isset ( $field['default'] ) ) {
                                 $this->options_defaults[ $field['id'] ] = $this->options[ $field['id'] ] = $field['default'];
@@ -2682,7 +2686,7 @@
 
                 if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
 
-                    $values        = array();
+                    $values = array();
                     //if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
                     //    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
                     //    while (list($key, $val) = each($process)) {
@@ -2703,7 +2707,7 @@
                     $values = $values[ $redux->args['opt_name'] ];
 
 
-                    if ( function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() ) {
+                    if ( function_exists( 'get_magic_quotes_gpc' ) && get_magic_quotes_gpc() ) {
                         $values = array_map( 'stripslashes_deep', $values );
                     }
 
