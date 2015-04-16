@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.3.1
+* Fixed: WP.org ONLY SVN mixup.
+
 ## 3.5.3
 * Fixed:   #2228 - Submenu items still visible if permissions not allowed.
 * Fixed:   Import/Export showing up in customizer.
