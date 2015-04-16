@@ -131,12 +131,14 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Modified: Admin-fresh theme to match new WordPress 4.2
 * Modified: Redux widget now has a proper ID. Thanks @corradomatt!
 * Modified: Added text-shadow to submenu items to give a stronger "pop"
+* Modified: Page_slug now dynamically generated if not specified.
 * Modified: Admin blast message pinging server on each load after three day expiration.  Possible slow down of the overall panel loading time.
 * Fixed:   #2221 - Background field media not enqueueing when used with no other media based fields.
 * Fixed:   #2214: Bad path for import/export enqueue.
 * Release: Wp.org release.
 * Fixed:    #2214 - Import/export field contained bad enqueue path.
 * Modified: If running localhost or WP_DEBUG is set to true, Redux dev_mode is forced to true.
+* Modified: Page_slug now dynamically generated if not specified.
 
 = 3.5.1 =
 * Modified: Redux News dashboard widget appears only when dev_mode is true or in a local host environment.

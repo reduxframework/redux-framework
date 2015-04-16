@@ -242,10 +242,6 @@
                  */
                 $this->args = apply_filters( "redux/options/{$this->args['opt_name']}/args", $this->args );
 
-                if ( Redux_Helpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
-                    $this->args['dev_mode'] = true;
-                }
-
                 // Do not save the defaults if we're on a live preview!
                 if ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) {
                     $this->args['save_defaults'] = false;
@@ -460,7 +456,7 @@
                     // menu title/text
                     'page_title'                => '',
                     // option page title
-                    'page_slug'                 => '_options',
+                    'page_slug'                 => '',
                     'page_permissions'          => 'manage_options',
                     'menu_type'                 => 'menu',
                     // ('menu'|'submenu')
@@ -1224,6 +1220,25 @@
                 if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
                     $this->args['global_variable'] = str_replace( '-', '_', $this->args['opt_name'] );
                 }
+
+                // Force dev_mode on WP_DEBUG = true and if it's a local server
+                if ( Redux_Helpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
+                    $this->args['dev_mode'] = true;
+                }
+
+                // Auto create the page_slug appropriately
+                if ( empty( $this->args['page_slug'] ) ) {
+                    if ( ! empty( $this->args['display_name'] ) ) {
+                        $this->args['page_slug'] = sanitize_html_class( $this->args['display_name'] );
+                    } else if ( ! empty( $this->args['page_title'] ) ) {
+                        $this->args['page_slug'] = sanitize_html_class( $this->args['page_title'] );
+                    } else if ( ! empty( $this->args['menu_title'] ) ) {
+                        $this->args['page_slug'] = sanitize_html_class( $this->args['menu_title'] );
+                    } else {
+                        $this->args['page_slug'] = str_replace( '-', '_', $this->args['opt_name'] );
+                    }
+                }
+
             }
 
             /**
