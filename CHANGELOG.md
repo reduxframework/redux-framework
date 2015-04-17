@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.3.2
+* Fixed: #2239 - Various extensions didn't support default values for default arg.  Filtered out offending extensions.
+
 ## 3.5.3.1
 * Fixed: WP.org ONLY SVN mixup.
 
