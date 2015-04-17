@@ -1708,8 +1708,8 @@
                     // Force your panel to always open to a specific tab (by id)
                     'page_icon'            => 'icon-themes',
                     // Icon displayed in the admin panel next to your menu_title
-                    'page_slug'            => '_options',
-                    // Page slug used to denote the panel
+                    'page_slug'            => '',
+                    // Page slug used to denote the panel, will be based off page title then menu title then opt_name if not provided
                     'save_defaults'        => true,
                     // On load save the defaults to DB before user clicks save or not
                     'default_show'         => false,

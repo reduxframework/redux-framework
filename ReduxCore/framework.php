@@ -74,7 +74,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.3';
+            public static $_version = '3.5.3.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -241,10 +241,6 @@
                  * @param  array $args ReduxFramework configuration
                  */
                 $this->args = apply_filters( "redux/options/{$this->args['opt_name']}/args", $this->args );
-
-                if ( Redux_Helpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
-                    $this->args['dev_mode'] = true;
-                }
 
                 // Do not save the defaults if we're on a live preview!
                 if ( $GLOBALS['pagenow'] == "customize" && isset( $_GET['theme'] ) && ! empty( $_GET['theme'] ) ) {
@@ -460,7 +456,7 @@
                     // menu title/text
                     'page_title'                => '',
                     // option page title
-                    'page_slug'                 => '_options',
+                    'page_slug'                 => '',
                     'page_permissions'          => 'manage_options',
                     'menu_type'                 => 'menu',
                     // ('menu'|'submenu')
@@ -1224,6 +1220,25 @@
                 if ( $this->args['global_variable'] == "" && $this->args['global_variable'] !== false ) {
                     $this->args['global_variable'] = str_replace( '-', '_', $this->args['opt_name'] );
                 }
+
+                // Force dev_mode on WP_DEBUG = true and if it's a local server
+                if ( Redux_Helpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
+                    $this->args['dev_mode'] = true;
+                }
+
+                // Auto create the page_slug appropriately
+                if ( empty( $this->args['page_slug'] ) ) {
+                    if ( ! empty( $this->args['display_name'] ) ) {
+                        $this->args['page_slug'] = sanitize_html_class( $this->args['display_name'] );
+                    } else if ( ! empty( $this->args['page_title'] ) ) {
+                        $this->args['page_slug'] = sanitize_html_class( $this->args['page_title'] );
+                    } else if ( ! empty( $this->args['menu_title'] ) ) {
+                        $this->args['page_slug'] = sanitize_html_class( $this->args['menu_title'] );
+                    } else {
+                        $this->args['page_slug'] = str_replace( '-', '_', $this->args['opt_name'] );
+                    }
+                }
+
             }
 
             /**
