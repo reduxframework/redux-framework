@@ -44,18 +44,19 @@
                         var DISPLAY_TEXT = 2;
                         var DISPLAY_SELECT = 3;
 
-                        var mainID = $( this ).data( 'id' );
-                        var minVal = $( this ).data( 'min' );
-                        var maxVal = $( this ).data( 'max' );
-                        var stepVal = $( this ).data( 'step' );
-                        var handles = $( this ).data( 'handles' );
-                        var defValOne = $( this ).data( 'default-one' );
-                        var defValTwo = $( this ).data( 'default-two' );
-                        var resVal = $( this ).data( 'resolution' );
-                        var displayValue = parseInt( ($( this ).data( 'display' )) );
-                        var rtlVal = Boolean( $( this ).data( 'rtl' ) );
-                        var floatMark = ($( this ).data( 'float-mark' ));
-
+                        var mainID          = $( this ).data( 'id' );
+                        var minVal          = $( this ).data( 'min' );
+                        var maxVal          = $( this ).data( 'max' );
+                        var stepVal         = $( this ).data( 'step' );
+                        var handles         = $( this ).data( 'handles' );
+                        var defValOne       = $( this ).data( 'default-one' );
+                        var defValTwo       = $( this ).data( 'default-two' );
+                        var resVal          = $( this ).data( 'resolution' );
+                        var displayValue    = parseInt( ($( this ).data( 'display' )) );
+                        var rtlVal          = Boolean( $( this ).data( 'rtl' ) );
+                        var floatMark       = ($( this ).data( 'float-mark' ));
+                        var forced          = Boolean($( this ).data( 'forced' ));
+                        console.log(forced);
                         var rtl;
                         if ( rtlVal === true ) {
                             rtl = 'rtl';
