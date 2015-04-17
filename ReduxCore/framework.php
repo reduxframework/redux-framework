@@ -74,7 +74,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.3.2';
+            public static $_version = '3.5.3.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -180,6 +180,7 @@
             public $filesystem = null;
             public $font_groups = array();
             public $lang = "";
+            public $dev_mode_forced = false;
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -1222,7 +1223,8 @@
                 }
 
                 // Force dev_mode on WP_DEBUG = true and if it's a local server
-                if ( Redux_Helpers::isLocalHost() || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
+                if ( Redux_Helpers::isLocalHost() || ( Redux_Helpers::isWpDebug() ) ) {
+                    $this->dev_mode_forced = true;
                     $this->args['dev_mode'] = true;
                 }
 
@@ -1931,7 +1933,8 @@
                     'section',
                     'repeater',
                     'color_scheme',
-                    'social_profiles'
+                    'social_profiles',
+                    'css_layout'
                 );
                 
                 if ( $this->args['default_show'] == true && isset ( $field['default'] ) && isset ( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && !in_array($field['type'], $filter_arr) ) {

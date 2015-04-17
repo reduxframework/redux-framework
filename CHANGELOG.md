@@ -1,14 +1,18 @@
-# Redux Framework Changelog
+    # Redux Framework Changelog
+
+## 3.5.3.3
+* Added:    Tooltip to developer mode badge, for informational purposes.
+* Modified: Added css_layout ext to default value filter, to avoid errors.
 
 ## 3.5.3.2
-* Fixed: #2239 - Various extensions didn't support default values for default arg.  Filtered out offending extensions.
+* Fixed:    #2239 - Various extensions didn't support default values for default arg.  Filtered out offending extensions.
 
 ## 3.5.3.1
-* Fixed: WP.org ONLY SVN mixup.
+* Fixed:    WP.org ONLY SVN mixup.
 
 ## 3.5.3
-* Fixed:   #2228 - Submenu items still visible if permissions not allowed.
-* Fixed:   Import/Export showing up in customizer.
+* Fixed:    #2228 - Submenu items still visible if permissions not allowed.
+* Fixed:    Import/Export showing up in customizer.
 * Modified: Admin-fresh theme to match new WordPress 4.2
 * Modified: Redux widget now has a proper ID. Thanks @corradomatt!
 * Modified: Added text-shadow to submenu items to give a stronger "pop"

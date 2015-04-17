@@ -69,6 +69,10 @@
                 return ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' ) ? 1 : 0;
             }
 
+            public static function isWpDebug() {
+                return (defined( 'WP_DEBUG' ) && WP_DEBUG == true);
+            }
+            
             public static function getTrackingObject() {
                 global $wpdb;
 

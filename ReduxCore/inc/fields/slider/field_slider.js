@@ -56,7 +56,7 @@
                         var rtlVal          = Boolean( $( this ).data( 'rtl' ) );
                         var floatMark       = ($( this ).data( 'float-mark' ));
                         var forced          = Boolean($( this ).data( 'forced' ));
-                        //console.log(forced);
+                        
                         var rtl;
                         if ( rtlVal === true ) {
                             rtl = 'rtl';
