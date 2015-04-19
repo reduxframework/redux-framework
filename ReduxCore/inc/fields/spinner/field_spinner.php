@@ -47,7 +47,7 @@ if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
 
             // Don't allow input edit if there's a step
             $readonly = "";
-            if ( isset( $this->field['edit'] ) && $this->field['edit'] == false ) {
+            if ( isset( $this->field['edit'] ) && $this->field['edit'] === false ) {
                 $readonly = ' readonly="readonly"';
             }
 

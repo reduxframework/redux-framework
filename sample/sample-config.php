@@ -2246,12 +2246,12 @@
 
             $return['value'] = $value;
 
-            if ( $error == true ) {
+            if ( $error === true ) {
                 $return['error'] = $field;
                 $field['msg']    = 'your custom error message';
             }
 
-            if ( $warning == true ) {
+            if ( $warning === true ) {
                 $return['warning'] = $field;
                 $field['msg']      = 'your custom warning message';
             }

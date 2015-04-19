@@ -91,7 +91,7 @@
                 foreach ( $this->field['options'] as $k => $v ) {
 
                     $selected = '';
-                    if ( isset( $this->field['multi'] ) && $this->field['multi'] == true ) {
+                    if ( isset( $this->field['multi'] ) && $this->field['multi'] === true ) {
                         $type         = "checkbox";
                         $multi_suffix = '[]';
 

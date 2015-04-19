@@ -278,7 +278,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
             }
 
             // Set default values(s)
-            if ( true == $twoHandles ) {
+            if ( true === $twoHandles ) {
                 $valOne = $this->value[0];
                 $valTwo = $this->value[1];
 
@@ -363,10 +363,10 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
             </div>';
 
             // Double slider output
-            if ( true == $twoHandles ) {
+            if ( true === $twoHandles ) {
 
                 // TEXT
-                if ( true == $showInput ) {
+                if ( true === $showInput ) {
                     echo '<input type="text"
                              name="' . $nameTwo . '"
                              id="' . $idTwo . '"
@@ -375,7 +375,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
                 }
 
                 // LABEL
-                if ( true == $showLabel ) {
+                if ( true === $showLabel ) {
                     echo '<div class="redux-slider-label-two"
                            id="redux-slider-label-two-' . $fieldID . '"
                            name="' . $nameTwo . '">
@@ -383,7 +383,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
                 }
 
                 // SELECT
-                if ( true == $showSelect ) {
+                if ( true === $showSelect ) {
                     echo '<select class="redux-slider-select-two redux-slider-select-two-' . $fieldID . ' ' . $this->field['class'] . '"
                               name="' . $nameTwo . '"
                               id="' . $idTwo . '">
@@ -401,7 +401,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
                          value="' . $valOne . '"/>';
 
                 // double slider hidden output
-                if ( true == $twoHandles ) {
+                if ( true === $twoHandles ) {
                     echo '<input type="hidden"
                              class="redux-slider-value-two-' . $fieldID . ' ' . $this->field['class'] . '"
                              name="' . $nameTwo . '"

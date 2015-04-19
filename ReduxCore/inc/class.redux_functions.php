@@ -28,7 +28,7 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
         public static function isMin() {
             $min = '';
 
-            if ( false == self::$_parent->args['dev_mode'] ) {
+            if ( false === self::$_parent->args['dev_mode'] ) {
                 $min = '.min';
             }
 
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
                         $add_style = 'style="border-left: 4px solid ' . $notice['color'] . '!important;"';
                     }
                     
-                    if ( true == $notice['dismiss'] ) {
+                    if ( true === $notice['dismiss'] ) {
 
                         // Get user ID
                         $userid = $current_user->ID;

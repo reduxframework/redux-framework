@@ -103,7 +103,7 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     }
 
                     $theValue = $k;
-                    if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
+                    if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] === true ) {
                         $theValue = $v['img'];
                     }
 
@@ -171,7 +171,7 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     echo '<label class="' . $selected . ' redux-image-select' . $is_preset_class . $this->field['id'] . '_' . $x . '" for="' . $this->field['id'] . '_' . ( array_search( $k, array_keys( $this->field['options'] ) ) + 1 ) . '">';
 
                     echo '<input type="radio" class="' . $this->field['class'] . '" id="' . $this->field['id'] . '_' . ( array_search( $k, array_keys( $this->field['options'] ) ) + 1 ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" value="' . $theValue . '" ' . checked( $this->value, $theValue, false ) . $presets . $merge . '/>';
-                    if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
+                    if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] === true ) {
                         echo '<span class="tiles" style="background-image: url(' . $v['img'] . ');" rel="' . $v['img'] . '"">&nbsp;</span>';
                     } else {
                         echo '<img src="' . $v['img'] . '" alt="' . $v['alt'] . '" style="' . $style . '"' . $presets . $merge . ' />';

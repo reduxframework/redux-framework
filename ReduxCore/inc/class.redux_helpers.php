@@ -70,7 +70,7 @@
             }
 
             public static function isWpDebug() {
-                return (defined( 'WP_DEBUG' ) && WP_DEBUG == true);
+                return (defined( 'WP_DEBUG' ) && WP_DEBUG === true);
             }
             
             public static function getTrackingObject() {
@@ -253,7 +253,7 @@
 
             public static function isTheme( $file ) {
 
-                if ( true == self::isChildTheme( $file ) || true == self::isParentTheme( $file ) ) {
+                if ( true === self::isChildTheme( $file ) || true === self::isParentTheme( $file ) ) {
                     return true;
                 }
 
@@ -357,7 +357,7 @@
             }
 
             public static function makeBoolStr( $var ) {
-                if ( $var == false || $var == 'false' || $var == 0 || $var == '0' || $var == '' || empty( $var ) ) {
+                if ( $var === false || $var == 'false' || $var == 0 || $var == '0' || $var == '' || empty( $var ) ) {
                     return 'false';
                 } else {
                     return 'true';
@@ -455,7 +455,7 @@
                 //    $sysinfo['gzip'] = 'true';
                 //}
 
-                if ( $remote_checks == true ) {
+                if ( $remote_checks === true ) {
                     $response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', array(
                         'sslverify'  => false,
                         'timeout'    => 60,

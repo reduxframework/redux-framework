@@ -70,7 +70,7 @@ if ( ! class_exists( 'ReduxFramework_media' ) ) {
 
             $this->value = wp_parse_args( $this->value, $defaults );
 
-            if (isset($this->field['mode']) && $this->field['mode'] == false) {
+            if (isset($this->field['mode']) && $this->field['mode'] === false) {
                 $this->field['mode'] = 0;
             }
 

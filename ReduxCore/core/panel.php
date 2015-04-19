@@ -99,7 +99,7 @@
                 echo '<div class="clear"></div>';
                 echo '</div>';
 
-                if ( $this->parent->args['dev_mode'] == true ) {
+                if ( $this->parent->args['dev_mode'] === true ) {
                     if ( current_user_can( 'administrator' ) ) {
                         global $wpdb;
                         echo "<br /><pre>";

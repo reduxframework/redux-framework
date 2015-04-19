@@ -56,7 +56,7 @@
                     $this->value        = ( isset( $this->current ) ) ? $this->current : '';
                     $this->field['msg'] = sprintf( $this->field['msg'], $slug );
                     $this->error        = $this->field;
-                } else if ( isset( $this->field['flush_permalinks'] ) && $this->field['flush_permalinks'] == true ) {
+                } else if ( isset( $this->field['flush_permalinks'] ) && $this->field['flush_permalinks'] === true ) {
                     add_action( 'init', array( $this, 'flush_permalinks' ), 99 );
                 }
                 

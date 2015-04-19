@@ -1460,7 +1460,7 @@ class scssc {
 				}
 			} elseif (count($keywordArgs)) {
 				$this->throwError('Positional arguments must come before keyword arguments.');
-			} elseif ($arg[2] == true) {
+			} elseif ($arg[2] === true) {
 				$val = $this->reduce($arg[1], true);
 				if ($val[0] == "list") {
 					foreach ($val[2] as $name => $item) {
