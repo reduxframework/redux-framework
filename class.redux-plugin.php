@@ -354,7 +354,7 @@
                     $url = './plugins.php';
 
                     if ( $_GET['ReduxFrameworkPlugin'] == 'demo' ) {
-                        if ( $this->options['demo'] == false ) {
+                        if ( $this->options['demo'] === false ) {
                             $this->options['demo'] = true;
                         } else {
                             $this->options['demo'] = false;

@@ -106,7 +106,7 @@
                 }
 
                 if ( empty( $this->field['raw_html'] ) ) {
-                    if ( $this->field['notice'] == true ) {
+                    if ( $this->field['notice'] === true ) {
                         $this->field['class'] .= ' redux-notice-field';
                     } else {
                         $this->field['class'] .= ' redux-info-field';

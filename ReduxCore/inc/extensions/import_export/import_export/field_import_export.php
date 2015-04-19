@@ -89,7 +89,7 @@
 
                 $id = $this->parent->args['opt_name'] . '-' . $this->field['id'];
 
-                if ( ! $this->is_field || ( $this->is_field && false == $fullWidth ) ) : ?>
+                if ( ! $this->is_field || ( $this->is_field && false === $fullWidth ) ) : ?>
                     <style>#<?php echo $id; ?> {padding: 0;}</style>
                     </td></tr></table>
                     <table id="<?php echo $id; ?>" class="form-table no-border redux-group-table redux-raw-table" style=" overflow: <?php $this->field['overflow']; ?>;">
@@ -132,7 +132,7 @@
 
                 </fieldset>
                 <?php
-                if ( true == $bDoClose ) : ?>
+                if ( true === $bDoClose ) : ?>
                     </td></tr></table>
                     <table class="form-table no-border" style="margin-top: 0;">
                         <tbody>

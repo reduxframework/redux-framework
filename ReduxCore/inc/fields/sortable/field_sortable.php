@@ -69,7 +69,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
             // order as the options array.  Why?  The sort order is based on the
             // saved default array.  If entries are missing, the sort is messed up.
             // - kp
-            if ( true == $noSort ) {
+            if ( true === $noSort ) {
                 $dummyArr = array();
 
                 foreach ( $options as $k => $v ) {
@@ -83,7 +83,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
             $use_labels = false;
             $label_class = '';
             if ( $this->field['mode'] != "checkbox" ) {
-                if ( ( isset( $this->field['label'] ) && $this->field['label'] == true ) ) {
+                if ( ( isset( $this->field['label'] ) && $this->field['label'] === true ) ) {
                     $use_labels = true;
                     $label_class = ' labeled';
                 }

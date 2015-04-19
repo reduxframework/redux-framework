@@ -58,7 +58,7 @@ if (!class_exists('reduxSassCompiler')) {
         public static function set_id_matrix($ids) {
             $ret = @file_put_contents(self::$matrix_file, $ids);
             
-            if ($ret == false) {
+            if ($ret === false) {
                 return update_option(self::$matrix_key, $ids);
             }
         }
@@ -165,7 +165,7 @@ if (!class_exists('reduxSassCompiler')) {
                             
                             $ret = @file_put_contents($css_file, $new_css);
                             
-                            if ($ret == false) {
+                            if ($ret === false) {
                                 self::css_to_page($opt_name, $new_css);
                                 return self::SASS_PAGE_OUTPUT;
                             }

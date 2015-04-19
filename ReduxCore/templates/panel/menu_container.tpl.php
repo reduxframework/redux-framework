@@ -22,11 +22,11 @@
                 }
             }
 
-            if ( isset ( $section[ 'customizer_only' ] ) && $section[ 'customizer_only' ] == true ) {
+            if ( isset ( $section[ 'customizer_only' ] ) && $section[ 'customizer_only' ] === true ) {
                 continue;
             }
 
-            if ( false == $skip_sec ) {
+            if ( false === $skip_sec ) {
                 echo $this->parent->section_menu ( $k, $section );
                 $skip_sec = false;
             }

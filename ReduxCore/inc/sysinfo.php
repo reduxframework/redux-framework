@@ -155,7 +155,7 @@
                 }
 
                 // WordPress inactive plugins
-                if ( $show_inactive == true ) {
+                if ( $show_inactive === true ) {
                     $return .= "\n" . '-- WordPress Inactive Plugins' . "\n\n";
 
                     foreach ( $plugins as $plugin_path => $plugin ) {
@@ -193,7 +193,7 @@
                     }
 
                     // WordPress Multisite inactive plugins
-                    if ( $show_inactive == true ) {
+                    if ( $show_inactive === true ) {
                         $return .= "\n" . '-- Network Inactive Plugins' . "\n\n";
 
                         foreach ( $plugins as $plugin_path ) {

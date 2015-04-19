@@ -110,7 +110,7 @@
                 if ( isset( $this->field['units'] ) && ! is_array( $this->field['units'] ) ) {
 
                     //if units fields has a value but units value does not then make units value the field value
-                    if ( isset( $this->field['units'] ) && ! isset( $this->value['units'] ) || $this->field['units'] == false ) {
+                    if ( isset( $this->field['units'] ) && ! isset( $this->value['units'] ) || $this->field['units'] === false ) {
                         $this->value['units'] = $this->field['units'];
 
                         // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
@@ -246,7 +246,7 @@
                 if ( isset( $this->field['units'] ) && ! is_array( $this->field['units'] ) ) {
 
                     //if units fields has a value but units value does not then make units value the field value
-                    if ( isset( $this->field['units'] ) && ! isset( $this->value['units'] ) || $this->field['units'] == false ) {
+                    if ( isset( $this->field['units'] ) && ! isset( $this->value['units'] ) || $this->field['units'] === false ) {
                         $this->value['units'] = $this->field['units'];
 
                         // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)

@@ -318,7 +318,7 @@
                         }
 
                         // Wordpress doesn't support multi-select
-                        if ( $option['type'] == "select" && isset( $option['multi'] ) && $option['multi'] == true ) {
+                        if ( $option['type'] == "select" && isset( $option['multi'] ) && $option['multi'] === true ) {
                             continue;
                         }
 

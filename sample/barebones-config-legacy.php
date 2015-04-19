@@ -21,7 +21,7 @@
                 }
 
                 // This is needed. Bah WordPress bugs.  ;)
-                if ( true == Redux_Helpers::isTheme( __FILE__ ) ) {
+                if ( true === Redux_Helpers::isTheme( __FILE__ ) ) {
                     $this->initSettings();
                 } else {
                     add_action( 'plugins_loaded', array( $this, 'initSettings' ), 10 );

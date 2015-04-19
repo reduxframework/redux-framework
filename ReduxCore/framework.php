@@ -114,7 +114,7 @@
                     }
                 }
 
-                if ( self::$_is_plugin == true || self::$_as_plugin == true ) {
+                if ( self::$_is_plugin === true || self::$_as_plugin === true ) {
                     self::$_url = plugin_dir_url( __FILE__ );
                 } else {
                     if ( strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( get_template_directory() ) ) !== false ) {
@@ -326,7 +326,7 @@
                     $this->get_options();
 
                     // Tracking
-                    if ( true != Redux_Helpers::isTheme( __FILE__ ) || ( true == Redux_Helpers::isTheme( __FILE__ ) && ! $this->args['disable_tracking'] ) ) {
+                    if ( true !== Redux_Helpers::isTheme( __FILE__ ) || ( true === Redux_Helpers::isTheme( __FILE__ ) && ! $this->args['disable_tracking'] ) ) {
                         $this->_tracking();
                     }
 
@@ -348,11 +348,11 @@
                     add_action( 'admin_init', array( $this, '_register_settings' ) );
 
                     // Display admin notices in dev_mode
-                    if ( true == $this->args['dev_mode'] ) {
+                    if ( true === $this->args['dev_mode'] ) {
                         require_once( self::$_dir . 'inc/debug.php' );
                         $this->debug = new ReduxDebugObject ( $this );
 
-                        if ( true == $this->args['update_notice'] ) {
+                        if ( true === $this->args['update_notice'] ) {
                             add_action( 'admin_init', array( $this, '_update_check' ) );
                         }
                     }
@@ -402,7 +402,7 @@
                     // Ajax saving!!!
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
 
-                    if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true ) {
+                    if ( $this->args['dev_mode'] === true || Redux_Helpers::isLocalHost() === true ) {
                         include_once 'core/dashboard.php';
 
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
@@ -663,7 +663,7 @@
              * @return      mixed $default
              */
             public function _get_default( $opt_name, $default = null ) {
-                if ( $this->args['default_show'] == true ) {
+                if ( $this->args['default_show'] === true ) {
 
                     if ( empty ( $this->options_defaults ) ) {
                         $this->_default_values(); // fill cache
@@ -1326,7 +1326,7 @@
                         $addMenu = true;
                     }
                     // Add the submenu if it's permitted.
-                    if ( true == $addMenu ) {
+                    if ( true === $addMenu ) {
                         $this->page = add_submenu_page(
                             $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(
                                 &$this,
@@ -1366,19 +1366,19 @@
                             foreach ( $this->sections as $k => $section ) {
                                 $canBeSubSection = ( $k > 0 && ( ! isset ( $this->sections[ ( $k ) ]['type'] ) || $this->sections[ ( $k ) ]['type'] != "divide" ) ) ? true : false;
 
-                                if ( ! isset ( $section['title'] ) || ( $canBeSubSection && ( isset ( $section['subsection'] ) && $section['subsection'] == true ) ) ) {
+                                if ( ! isset ( $section['title'] ) || ( $canBeSubSection && ( isset ( $section['subsection'] ) && $section['subsection'] === true ) ) ) {
                                     continue;
                                 }
 
-                                if ( isset ( $section['submenu'] ) && $section['submenu'] == false ) {
+                                if ( isset ( $section['submenu'] ) && $section['submenu'] === false ) {
                                     continue;
                                 }
 
-                                if ( isset ( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
+                                if ( isset ( $section['customizer_only'] ) && $section['customizer_only'] === true ) {
                                     continue;
                                 }
 
-                                if ( isset ( $section['hidden'] ) && $section['hidden'] == true ) {
+                                if ( isset ( $section['hidden'] ) && $section['hidden'] === true ) {
                                     continue;
                                 }
 
@@ -1397,11 +1397,11 @@
                             remove_submenu_page( $this->args['page_slug'], $this->args['page_slug'] );
                         }
 
-                        if ( true == $this->args['dev_mode'] ) {
+                        if ( true === $this->args['dev_mode'] ) {
                             $this->debug->add_submenu();
                         }
 
-                        if ( true == $this->args['system_info'] ) {
+                        if ( true === $this->args['system_info'] ) {
                             add_submenu_page(
                                 $this->args['page_slug'], __( 'System Info', 'redux-framework' ), __( 'System Info', 'redux-framework' ), $this->args['page_permissions'], $this->args['page_slug'] . '&tab=system_info_default', '__return_null'
                             );
@@ -1515,7 +1515,7 @@
              * @return      void
              */
             public function _output_css() {
-                if ( $this->args['output'] == false && $this->args['compiler'] == false ) {
+                if ( $this->args['output'] === false && $this->args['compiler'] === false ) {
                     return;
                 }
 
@@ -1523,7 +1523,7 @@
                     return;
                 }
 
-                if ( ! empty ( $this->outputCSS ) && ( $this->args['output_tag'] == true || ( isset ( $_POST['customized'] ) ) ) ) {
+                if ( ! empty ( $this->outputCSS ) && ( $this->args['output_tag'] === true || ( isset ( $_POST['customized'] ) ) ) ) {
                     echo '<style type="text/css" title="dynamic-css" class="options-output">' . $this->outputCSS . '</style>';
                 }
             }
@@ -1536,7 +1536,7 @@
              * @return      void
              */
             public function _enqueue_output() {
-                if ( $this->args['output'] == false && $this->args['compiler'] == false ) {
+                if ( $this->args['output'] === false && $this->args['compiler'] === false ) {
                     return;
                 }
 
@@ -1690,7 +1690,7 @@
                 }
 
                 // If hint argument is set, display hint tab
-                if ( true == $this->show_hints ) {
+                if ( true === $this->show_hints ) {
                     global $current_user;
 
                     // Users enable/disable hint choice
@@ -1744,7 +1744,7 @@
 
                     // If sidebar text is empty and hints are active, display text
                     // about hints.
-                    if ( true == $this->show_hints ) {
+                    if ( true === $this->show_hints ) {
                         $screen->set_help_sidebar( '<p><strong>Redux Framework</strong><br/><br/>Hint Tooltip Preferences</p>' );
                     }
                 }
@@ -1937,7 +1937,7 @@
                     'css_layout'
                 );
                 
-                if ( $this->args['default_show'] == true && isset ( $field['default'] ) && isset ( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && !in_array($field['type'], $filter_arr) ) {
+                if ( $this->args['default_show'] === true && isset ( $field['default'] ) && isset ( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && !in_array($field['type'], $filter_arr) ) {
                     $th .= $this->get_default_output_string( $field );
                 }
 
@@ -1983,7 +1983,7 @@
                     $display = true;
 
                     if ( isset ( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                        if ( isset ( $section['panel'] ) && $section['panel'] == false ) {
+                        if ( isset ( $section['panel'] ) && $section['panel'] === false ) {
                             $display = false;
                         }
                     }
@@ -2053,7 +2053,7 @@
                                 continue; // You need a type!
                             }
 
-                            if ( $field['type'] == "info" && isset( $field['raw_html'] ) && $field['raw_html'] == true ) {
+                            if ( $field['type'] == "info" && isset( $field['raw_html'] ) && $field['raw_html'] === true ) {
                                 $field['type']                             = "raw";
                                 $field['content']                          = $field['desc'];
                                 $field['desc']                             = "";
@@ -2091,11 +2091,11 @@
                             $display = true;
 
                             if ( isset ( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                                if ( isset ( $field['panel'] ) && $field['panel'] == false ) {
+                                if ( isset ( $field['panel'] ) && $field['panel'] === false ) {
                                     $display = false;
                                 }
                             }
-                            if ( isset ( $field['customizer_only'] ) && $field['customizer_only'] == true ) {
+                            if ( isset ( $field['customizer_only'] ) && $field['customizer_only'] === true ) {
                                 //$display = false;
                             }
 
@@ -2118,7 +2118,7 @@
                             }
 
                             if ( isset ( $field['type'] ) && $field['type'] == "section" ) {
-                                if ( isset ( $field['indent'] ) && $field['indent'] == true ) {
+                                if ( isset ( $field['indent'] ) && $field['indent'] === true ) {
                                     $sectionIndent = true;
                                 } else {
                                     $sectionIndent = false;
@@ -2207,7 +2207,7 @@
                             }
                             // END -> CORRECT URLS if media URLs are wrong, but attachment IDs are present.
 
-                            if ( true == $doUpdate && ! isset ( $this->never_save_to_db ) ) {
+                            if ( true === $doUpdate && ! isset ( $this->never_save_to_db ) ) {
                                 if ( $this->args['save_defaults'] ) { // Only save that to the DB if allowed to
                                     $runUpdate = true;
                                 }
@@ -2237,7 +2237,7 @@
                              */
                             $field = apply_filters( "redux/options/{$this->args['opt_name']}/field/{$field['id']}", $field );
 
-                            if ( empty ( $field ) || ! $field || $field == false ) {
+                            if ( empty ( $field ) || ! $field || $field === false ) {
                                 unset ( $this->sections[ $k ]['fields'][ $fieldk ] );
                                 continue;
                             }
@@ -3019,7 +3019,7 @@
                 $section['class'] = isset ( $section['class'] ) ? ' ' . $section['class'] : '';
 
                 if ( isset ( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                    if ( isset ( $section['panel'] ) && $section['panel'] == false ) {
+                    if ( isset ( $section['panel'] ) && $section['panel'] === false ) {
                         $display = false;
                     }
                 }
@@ -3052,12 +3052,12 @@
 
                 $hide_section = '';
                 if ( isset ( $section['hidden'] ) ) {
-                    $hide_section = ( $section['hidden'] == true ) ? ' hidden ' : '';
+                    $hide_section = ( $section['hidden'] === true ) ? ' hidden ' : '';
                 }
 
                 $canBeSubSection = ( $k > 0 && ( ! isset ( $sections[ ( $k ) ]['type'] ) || $sections[ ( $k ) ]['type'] != "divide" ) ) ? true : false;
 
-                if ( ! $canBeSubSection && isset ( $section['subsection'] ) && $section['subsection'] == true ) {
+                if ( ! $canBeSubSection && isset ( $section['subsection'] ) && $section['subsection'] === true ) {
                     unset ( $section['subsection'] );
                 }
 
@@ -3067,7 +3067,7 @@
 
                     // DOVY! REPLACE $k with $section['ID'] when used properly.
                     //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
-                    $subsections      = ( isset ( $sections[ ( $k + 1 ) ] ) && isset ( $sections[ ( $k + 1 ) ]['subsection'] ) && $sections[ ( $k + 1 ) ]['subsection'] == true ) ? true : false;
+                    $subsections      = ( isset ( $sections[ ( $k + 1 ) ] ) && isset ( $sections[ ( $k + 1 ) ]['subsection'] ) && $sections[ ( $k + 1 ) ]['subsection'] === true ) ? true : false;
                     $subsectionsClass = $subsections ? ' hasSubSections' : '';
                     $subsectionsClass .= ( ! isset ( $section['fields'] ) || empty ( $section['fields'] ) ) ? ' empty_section' : '';
                     $extra_icon = $subsections ? '<span class="extraIconSubsections"><i class="el el-chevron-down">&nbsp;</i></span>' : '';
@@ -3086,7 +3086,7 @@
                             $display = true;
 
                             if ( isset ( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                                if ( isset ( $sections[ $nextK ]['panel'] ) && $sections[ $nextK ]['panel'] == false ) {
+                                if ( isset ( $sections[ $nextK ]['panel'] ) && $sections[ $nextK ]['panel'] === false ) {
                                     $display = false;
                                 }
                             }
@@ -3100,7 +3100,7 @@
 
                                 $hide_sub = '';
                                 if ( isset ( $sections[ $nextK ]['hidden'] ) ) {
-                                    $hide_sub = ( $sections[ $nextK ]['hidden'] == true ) ? ' hidden ' : '';
+                                    $hide_sub = ( $sections[ $nextK ]['hidden'] === true ) ? ' hidden ' : '';
                                 }
 
                                 if ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $sections[ $nextK ]['icon_type'] ) && $sections[ $nextK ]['icon_type'] == 'image' ) ) {
@@ -3249,7 +3249,7 @@
                     // If the field is set not to display in the panel
                     $display = true;
                     if ( isset ( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                        if ( isset ( $field['panel'] ) && $field['panel'] == false ) {
+                        if ( isset ( $field['panel'] ) && $field['panel'] === false ) {
                             $display = false;
                         }
                     }
@@ -3385,7 +3385,7 @@
                             $hidden = 'hidden ';
                         }
 
-                        if ( isset( $field['full_width'] ) && $field['full_width'] == true ) {
+                        if ( isset( $field['full_width'] ) && $field['full_width'] === true ) {
                             $class_string .= "redux_remove_th";
                         }
 
@@ -3446,7 +3446,7 @@
                 $return = true;
 
                 $field = apply_filters( "redux/field/{$this->args['opt_name']}/_can_output_css", $field );
-                if ( isset ( $field['force_output'] ) && $field['force_output'] == true ) {
+                if ( isset ( $field['force_output'] ) && $field['force_output'] === true ) {
                     return $return;
                 }
 

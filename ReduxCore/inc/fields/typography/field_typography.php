@@ -124,7 +124,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
         function localize( $field, $value = "" ) {
             $params = array();
 
-            if ( true == $this->user_fonts && ! empty( $this->field['fonts'] ) ) {
+            if ( true === $this->user_fonts && ! empty( $this->field['fonts'] ) ) {
                 $params['std_font'] = $this->field['fonts'];
             }
 
@@ -218,7 +218,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 }
 
                 $userFonts = '0';
-                if ( true == $this->user_fonts ) {
+                if ( true === $this->user_fonts ) {
                     $userFonts = '1';
                 }
 
@@ -248,7 +248,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             /* Backup Font */
             if ( $this->field['font-family'] === true && $this->field['google'] === true ) {
 
-                if ( false == $googleSet ) {
+                if ( false === $googleSet ) {
                     // Set a flag so we know to set a header style or not
                     echo '<input type="hidden" class="redux-typography-google' . $this->field['class'] . '" id="' . $this->field['id'] . '-google" name="' . $this->field['name'] . $this->field['name_suffix'] . '[google]' . '" type="text" value="' . $this->field['google'] . '" data-id="' . $this->field['id'] . '"  />';
                 }
@@ -317,7 +317,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             }
 
             /* Font Script */
-            if ( $this->field['font-family'] == true && $this->field['subsets'] == true && $this->field['google'] == true ) {
+            if ( $this->field['font-family'] === true && $this->field['subsets'] === true && $this->field['google'] === true ) {
                 echo '<div class="select_wrapper typography-script tooltip" original-title="' . __( 'Font subsets', 'redux-framework' ) . '">';
                 echo '<input type="hidden" class="typography-subsets" name="' . $this->field['name'] . $this->field['name_suffix'] . '[subsets]' . '" value="' . $this->value['subsets'] . '" data-id="' . $this->field['id'] . '"  /> ';
                 echo '<label>' . __( 'Font Subsets', 'redux-framework' ) . '</label>';
@@ -494,7 +494,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 $style = '';
                 if ( isset( $this->field['preview']['always_display'] ) ) {
                     if ( true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN ) ) {
-                        if ( $isGoogleFont == true ) {
+                        if ( $isGoogleFont === true ) {
                             $this->parent->typography_preview[ $fontFamily[0] ] = array(
                                 'font-style' => array( $this->value['font-weight'] . $this->value['font-style'] ),
                                 'subset'     => array( $this->value['subset'] )
@@ -708,16 +708,16 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                     if ( empty( $value ) && in_array( $key, array(
                             'font-weight',
                             'font-style'
-                        ) ) && $fontValueSet == true
+                        ) ) && $fontValueSet === true
                     ) {
                         $value = "normal";
                     }
 
-                    if ($key == 'font-weight' && $this->field['font-weight'] == false) {
+                    if ($key == 'font-weight' && $this->field['font-weight'] === false) {
                         continue;
                     }
 
-                    if ($key == 'font-style' && $this->field['font-style'] == false) {
+                    if ($key == 'font-style' && $this->field['font-style'] === false) {
                         continue;
                     }
 
@@ -870,7 +870,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
         }
 
         private function localizeStdFonts() {
-            if ( false == $this->user_fonts ) {
+            if ( false === $this->user_fonts ) {
                 if ( isset( $this->parent->fonts['std'] ) && ! empty( $this->parent->fonts['std'] ) ) {
                     return;
                 }
@@ -917,7 +917,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
          */
         function getGoogleArray() {
 
-            if ( ( isset( $this->parent->fonts['google'] ) && ! empty( $this->parent->fonts['google'] ) ) || isset( $this->parent->fonts['google'] ) && $this->parent->fonts['google'] == false ) {
+            if ( ( isset( $this->parent->fonts['google'] ) && ! empty( $this->parent->fonts['google'] ) ) || isset( $this->parent->fonts['google'] ) && $this->parent->fonts['google'] === false ) {
                 return;
             }
 

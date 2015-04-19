@@ -20,7 +20,7 @@
                 }
 
                 // This is needed. Bah WordPress bugs.  ;)
-                if ( true == Redux_Helpers::isTheme( __FILE__ ) ) {
+                if ( true === Redux_Helpers::isTheme( __FILE__ ) ) {
                     $this->initSettings();
                 } else {
                     add_action( 'plugins_loaded', array( $this, 'initSettings' ), 10 );
@@ -1840,7 +1840,7 @@
 
                 $return['value'] = $value;
                 $field['msg']    = 'your custom error message';
-                if ( $error == true ) {
+                if ( $error === true ) {
                     $return['error'] = $field;
                 }
 
@@ -1894,7 +1894,7 @@
 
             $return['value'] = $value;
             $field['msg']    = 'your custom error message';
-            if ( $error == true ) {
+            if ( $error === true ) {
                 $return['error'] = $field;
             }
 

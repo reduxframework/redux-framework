@@ -108,7 +108,7 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
 //                $this->value['units'] = "";
 //            }
 
-            if ( $this->field['units'] == false ) {
+            if ( $this->field['units'] === false ) {
                 $this->value == "";
             }
 
@@ -134,7 +134,7 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
             if ( isset( $this->field['units'] ) && ! is_array( $this->field['units'] ) ) {
 
                 //if units fields has a value and is not empty but units value does not then make units value the field value
-                if ( isset( $this->field['units'] ) && $this->field['units'] != "" && ! isset( $this->value['units'] ) || $this->field['units'] == false ) {
+                if ( isset( $this->field['units'] ) && $this->field['units'] != "" && ! isset( $this->value['units'] ) || $this->field['units'] === false ) {
                     $this->value['units'] = $this->field['units'];
 
                     // If units field does NOT have a value and units value does NOT have a value, set both to blank (default?)
@@ -187,7 +187,7 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
 
             echo '<input type="hidden" class="field-units" value="' . $this->value['units'] . '">';
 
-            if ( isset( $this->field['all'] ) && $this->field['all'] == true ) {
+            if ( isset( $this->field['all'] ) && $this->field['all'] === true ) {
                 echo '<div class="field-spacing-input input-prepend"><span class="add-on"><i class="el el-fullscreen icon-large"></i></span><input type="text" class="redux-spacing-all redux-spacing-input mini' . $this->field['class'] . '" placeholder="' . __( 'All', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-all" value="' . $this->value['top'] . '"></div>';
             }
 
@@ -240,7 +240,7 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
             /**
              * Units
              * */
-            if ( $this->field['units'] !== false && is_array( $this->field['units'] ) /* && !isset($absolute) */ && $this->field['display_units'] == true ) {
+            if ( $this->field['units'] !== false && is_array( $this->field['units'] ) /* && !isset($absolute) */ && $this->field['display_units'] === true ) {
 
                 echo '<div class="select_wrapper spacing-units" original-title="' . __( 'Units', 'redux-framework' ) . '">';
                 echo '<select data-placeholder="' . __( 'Units', 'redux-framework' ) . '" class="redux-spacing redux-spacing-units select' . $this->field['class'] . '" original-title="' . __( 'Units', 'redux-framework' ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[units]' . '" id="' . $this->field['id'] . '_units">';
@@ -344,25 +344,25 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
                     'left'   => isset( $this->value[ $mode . '-left' ] ) ? filter_var( $this->value[ $mode . '-left' ], FILTER_SANITIZE_NUMBER_INT ) : filter_var( $this->value['left'], FILTER_SANITIZE_NUMBER_INT )
                 );
 
-                if ( isset( $this->field['all'] ) && true == $this->field['all'] ) {
+                if ( isset( $this->field['all'] ) && true === $this->field['all'] ) {
                     $style .= $mode . 'top:' . $cleanValue['top'] . $units . ';';
                     $style .= $mode . 'bottom:' . $cleanValue['top'] . $units . ';';
                     $style .= $mode . 'right:' . $cleanValue['top'] . $units . ';';
                     $style .= $mode . 'left:' . $cleanValue['top'] . $units . ';';
                 } else {
-                    if ( true == $this->field['top'] ) {
+                    if ( true === $this->field['top'] ) {
                         $style .= $mode . 'top:' . $cleanValue['top'] . $units . ';';
                     }
 
-                    if ( true == $this->field['bottom'] ) {
+                    if ( true === $this->field['bottom'] ) {
                         $style .= $mode . 'bottom:' . $cleanValue['bottom'] . $units . ';';
                     }
 
-                    if ( true == $this->field['left'] ) {
+                    if ( true === $this->field['left'] ) {
                         $style .= $mode . 'left:' . $cleanValue['left'] . $units . ';';
                     }
 
-                    if ( true == $this->field['right'] ) {
+                    if ( true === $this->field['right'] ) {
                         $style .= $mode . 'right:' . $cleanValue['right'] . $units . ';';
                     }
                 }

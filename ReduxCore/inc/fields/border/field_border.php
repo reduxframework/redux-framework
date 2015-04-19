@@ -121,7 +121,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
 
             echo '<input type="hidden" class="field-units" value="px">';
 
-            if ( isset( $this->field['all'] ) && $this->field['all'] == true ) {
+            if ( isset( $this->field['all'] ) && $this->field['all'] === true ) {
                 echo '<div class="field-border-input input-prepend"><span class="add-on"><i class="el el-fullscreen icon-large"></i></span><input type="text" class="redux-border-all redux-border-input mini' . $this->field['class'] . '" placeholder="' . __( 'All', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-all" value="' . $this->value['top'] . '"></div>';
             }
 
@@ -231,7 +231,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
         } //function
 
         public function output() {
-            if ( isset( $this->field['all'] ) && true == $this->field['all'] ) {
+            if ( isset( $this->field['all'] ) && true === $this->field['all'] ) {
                 $borderWidth = isset( $this->value['border-width'] ) ? $this->value['border-width'] : '0px';
                 $val         = isset( $this->value['border-top'] ) ? $this->value['border-top'] : $borderWidth;
 
@@ -260,7 +260,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
                 $cleanValue['top'] = ! empty( $this->value['border-top'] ) ? $this->value['border-top'] : $borderWidth;
             }
 
-            if ( $this->field['bottom'] == true ) {
+            if ( $this->field['bottom'] === true ) {
                 $cleanValue['bottom'] = ! empty( $this->value['border-bottom'] ) ? $this->value['border-bottom'] : $borderWidth;
             }
 

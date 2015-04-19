@@ -28,7 +28,7 @@
              */
             function validate() {
 
-                if ( filter_var( $this->value, FILTER_VALIDATE_URL ) == false ) {
+                if ( filter_var( $this->value, FILTER_VALIDATE_URL ) === false ) {
                     $this->value = ( isset( $this->current ) ) ? $this->current : '';
                     $this->error = $this->field;
                 } else {
