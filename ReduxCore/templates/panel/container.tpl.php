@@ -41,4 +41,5 @@
 
 <?php if ( isset( $this->parent->args['footer_text'] ) ) : ?>
 	<div id="redux-sub-footer"><?php echo $this->parent->args['footer_text']; ?></div>
-<?php endif; ?>
+<?php
+	endif;
