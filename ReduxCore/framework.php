@@ -74,7 +74,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.3.3';
+            public static $_version = '3.5.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1224,7 +1224,10 @@
 
                 // Force dev_mode on WP_DEBUG = true and if it's a local server
                 if ( Redux_Helpers::isLocalHost() || ( Redux_Helpers::isWpDebug() ) ) {
-                    $this->dev_mode_forced = true;
+                    if ( $this->args['dev_mode'] != true ) {
+                        $this->args['update_notice'] = false;
+                    }
+                    $this->dev_mode_forced  = true;
                     $this->args['dev_mode'] = true;
                 }
 
@@ -1936,8 +1939,8 @@
                     'social_profiles',
                     'css_layout'
                 );
-                
-                if ( $this->args['default_show'] == true && isset ( $field['default'] ) && isset ( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && !in_array($field['type'], $filter_arr) ) {
+
+                if ( $this->args['default_show'] == true && isset ( $field['default'] ) && isset ( $this->options[ $field['id'] ] ) && $this->options[ $field['id'] ] != $field['default'] && ! in_array( $field['type'], $filter_arr ) ) {
                     $th .= $this->get_default_output_string( $field );
                 }
 

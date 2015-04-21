@@ -1,5 +1,8 @@
     # Redux Framework Changelog
 
+## 3.5.4
+* Modified: update_notice arg only truly shows up if dev_mode is on.
+
 ## 3.5.3.3
 * Added:    Tooltip to developer mode badge, for informational purposes.
 * Modified: Added css_layout ext to default value filter, to avoid errors.
