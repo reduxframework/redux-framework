@@ -111,7 +111,7 @@
                 },
                 success: function( response ) {
                     if ( response.action && response.action == "reload" ) {
-                        location.reload();
+                        location.reload(true);
                     } else if ( response.status == "success" ) {
                         jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                         overlay.fadeOut( 'fast' );
