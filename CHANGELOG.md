@@ -1,5 +1,8 @@
     # Redux Framework Changelog
 
+## 3.5.4.1
+* Fixed:    #2216 - Reset section not always working within FF.
+    
 ## 3.5.4
 * Modified: update_notice arg only truly shows up if dev_mode is on.
 
