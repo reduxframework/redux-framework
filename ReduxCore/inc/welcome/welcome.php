@@ -84,7 +84,7 @@
                 } else if ( version_compare( $curVer, $saveVer, '>' ) ) {
                     $redirect = true; // Previous version
                 }
-                if ( $redirect ) {
+                if ( $redirect && ! defined( 'WP_TESTS_DOMAIN' ) ) {
                     wp_safe_redirect( admin_url( 'tools.php?page=redux-about' ) );
                     exit();
                 }
