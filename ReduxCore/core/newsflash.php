@@ -69,7 +69,7 @@
                         // if local and server data are same, then return
                         if (  strcmp ( $data, $cache_data ) == 0) {
                             // set new cookie for interval value
-                            setcookie( $this->cookie_id, time(), time() + (86400 * $this->interval), '/' );
+                            reduxCookie::setcookie( $this->cookie_id, time(), time() + (86400 * $this->interval), '/' );
                             
                             // bail out
                             return;
@@ -85,7 +85,7 @@
                     $filesystem->execute('put_contents', $this->notice_json, $params);
                     
                     // set cookie for three day expiry
-                    setcookie( $this->cookie_id, time(), time() + (86400 * $this->interval), '/' );
+                    reduxCookie::setCookie( $this->cookie_id, time(), time() + (86400 * $this->interval), '/' );
                     
                     // set unique key for dismiss meta key
                     update_option($this->cookie_id, time());
