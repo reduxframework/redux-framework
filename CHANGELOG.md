@@ -1,5 +1,8 @@
     # Redux Framework Changelog
 
+## 3.5.4.2
+* Fixed:    #2271 - stuck redirect on godaddy (seriously, get a real host, people) servers.
+
 ## 3.5.4.1
 * Fixed:    #2216 - Reset section not always working within FF.
     

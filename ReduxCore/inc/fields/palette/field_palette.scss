@@ -1,0 +1,46 @@
+.redux-container-palette {
+    label {
+        &.ui-button.ui-widget {
+            width: 95%;
+            background: none;
+            padding: 0;
+            
+            .ui-button-text {
+/*                border-top: 3px solid transparent;
+                border-bottom: 3px solid transparent;
+                margin-bottom: 5px;*/
+                display: flex;
+                
+                span {
+                    padding: 10px 0;
+                    flex-grow: 1;
+                    font-size: 0;
+                    line-height: 10px;
+                    color: rgba(0,0,0,0);
+                    -webkit-transition: all 200ms ease-in-out;
+                    -moz-transition: all 200ms ease-in-out;
+                    -ms-transition: all 200ms ease-in-out;
+                    -o-transition: all 200ms ease-in-out;
+                    transition: all 200ms ease-in-out;
+                    
+                    &:hover {
+                        padding: 10px;
+                        flex-grow: 3;
+                        min-width: 60px;
+                        font-size: 10px;
+                        line-height: 10px;
+                        color: #000;
+                    }
+                }
+            }
+        }
+        
+        &.ui-state-active {
+            &.ui-button.ui-widget {
+                span.ui-button-text {
+                    border: 3px solid #333;
+                }
+            }
+        }
+    }
+}

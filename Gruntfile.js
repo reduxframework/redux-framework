@@ -128,6 +128,7 @@ module.exports = function( grunt ) {
                     'ReduxCore/inc/fields/gallery/field_gallery.js',
                     'ReduxCore/inc/fields/image_select/field_image_select.js',
                     'ReduxCore/inc/fields/multi_text/field_multitext.js',
+                    'ReduxCore/inc/fields/palette/field_palette.js',
                     'ReduxCore/inc/fields/select/field_select.js',
                     'ReduxCore/inc/fields/select_image/field_select_image.js',
                     'ReduxCore/inc/fields/slider/field_slider.js',
