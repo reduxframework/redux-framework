@@ -26,7 +26,7 @@
              * @since       3.0.0
              */
 
-            const VERSION = '3.5.4.3';
+            const VERSION = '3.5.4.4';
 
             /**
              * @access      protected
@@ -326,7 +326,7 @@
 
                 if ( $notices = get_option( 'ReduxFrameworkPlugin_ACTIVATED_NOTICES' ) ) {
                     foreach ( $notices as $notice ) {
-                        echo '<div class="updated"><p>' . $notice . '</p></div>';
+                        echo '<div class="updated notice is-dismissible"><p>' . $notice . '</p></div>';
                     }
 
                     delete_option( 'ReduxFrameworkPlugin_ACTIVATED_NOTICES' );

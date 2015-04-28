@@ -112,7 +112,7 @@
                                         echo '<li><strong>~/' . $error . '</strong></li>';
                                     }
                                 ?>
-                                </ul></div><?php
+                                </ul></p></div><?php
                         }
                     }
 

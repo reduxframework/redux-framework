@@ -281,11 +281,6 @@
                 </script>
             <?php endif; ?>
 
-            <script
-                id="redux-zero-clipboard-js"
-                src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/zeroclipboard/jquery.zeroclipboard.min.js'>
-            </script>
-
             <link rel='stylesheet' id='redux-qtip-css'
                   href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/qtip/jquery.qtip.css'
                   type='text/css' media='all'/>
