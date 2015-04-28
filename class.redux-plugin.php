@@ -184,7 +184,12 @@
             }
 
             public function load_first() {
-                $path = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
+                $plugin_dir = Redux_Helpers::cleanFilePath(WP_PLUGIN_DIR) . '/';
+                $self_file  = Redux_Helpers::cleanFilePath( __FILE__ );
+                
+                $path       = str_replace( $plugin_dir , '', $self_file );
+                $path       = str_replace('class.redux-plugin.php', 'redux-framework.php', $path);
+                
                 if ( $plugins = get_option( 'active_plugins' ) ) {
                     if ( $key = array_search( $path, $plugins ) ) {
                         array_splice( $plugins, $key, 1 );
