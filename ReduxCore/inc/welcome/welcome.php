@@ -84,7 +84,7 @@
                 } else if ( version_compare( $curVer, $saveVer, '>' ) ) {
                     $redirect = true; // Previous version
                 }
-                if ( $redirect ) {
+                if ( $redirect && ! defined( 'WP_TESTS_DOMAIN' ) ) {
                     add_action('init', array($this, 'do_redirect'));
                 }
             }
@@ -92,9 +92,9 @@
 
         public function do_redirect() {
             wp_redirect( admin_url( 'tools.php?page=redux-about' ) );
-            exit();            
+            exit();
         }
-        
+
         public function change_wp_footer() {
             echo 'If you like <strong>Redux</strong> please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">★★★★★</a> rating. A huge thank you from Redux in advance!';
         }
@@ -561,4 +561,3 @@
     }
 
     new Redux_Welcome();
-
