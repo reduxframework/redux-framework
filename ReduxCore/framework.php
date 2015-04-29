@@ -52,6 +52,7 @@
         // General functions
         require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
         require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_cookies.php' );
 
         require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
