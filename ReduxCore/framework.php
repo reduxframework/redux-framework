@@ -349,8 +349,8 @@
 
                     // Display admin notices in dev_mode
                     if ( true == $this->args['dev_mode'] ) {
-                        require_once( self::$_dir . 'inc/debug.php' );
-                        $this->debug = new ReduxDebugObject ( $this );
+                        //require_once( self::$_dir . 'inc/debug.php' );
+                        //$this->debug = new ReduxDebugObject ( $this );
 
                         if ( true == $this->args['update_notice'] ) {
                             add_action( 'admin_init', array( $this, '_update_check' ) );
@@ -540,8 +540,9 @@
                         ),
                     ),
                     'show_import_export'        => true,
+                    'show_options_object'       => false,
                     'dev_mode'                  => true,
-                    'system_info'               => false,
+                    
                     'disable_tracking'          => false,
                     'templates_path'            => '',
                     // Path to the templates file for various Redux elements
@@ -568,14 +569,6 @@
                     'meta'   => array( 'class' => 'redux-network-admin' )
                 );
                 $wp_admin_bar->add_node( $args );
-            }
-
-            private function stripslashes_deep( $value ) {
-                $value = is_array( $value ) ?
-                    array_map( 'stripslashes_deep', $value ) :
-                    stripslashes( $value );
-
-                return $value;
             }
 
             public function save_network_page() {
@@ -1230,7 +1223,11 @@
                     $this->dev_mode_forced  = true;
                     $this->args['dev_mode'] = true;
                 }
-
+                
+                if ($this->args['dev_mode']) {
+                    $this->args['show_options_object'] = true;
+                }
+                
                 // Auto create the page_slug appropriately
                 if ( empty( $this->args['page_slug'] ) ) {
                     if ( ! empty( $this->args['display_name'] ) ) {
@@ -1398,16 +1395,6 @@
 
                             // Remove parent submenu item instead of adding null item.
                             remove_submenu_page( $this->args['page_slug'], $this->args['page_slug'] );
-                        }
-
-                        if ( true == $this->args['dev_mode'] ) {
-                            $this->debug->add_submenu();
-                        }
-
-                        if ( true == $this->args['system_info'] ) {
-                            add_submenu_page(
-                                $this->args['page_slug'], __( 'System Info', 'redux-framework' ), __( 'System Info', 'redux-framework' ), $this->args['page_permissions'], $this->args['page_slug'] . '&tab=system_info_default', '__return_null'
-                            );
                         }
                     }
                 }
@@ -2689,10 +2676,11 @@
                     return;
                 }
 
-                if ( defined( 'WP_CACHE' ) && WP_CACHE && class_exists( 'W3_ObjectCache' ) ) {
+                if ( defined( 'WP_CACHE' ) && WP_CACHE && class_exists( 'W3_ObjectCache' ) && function_exists ( 'w3_instance' ) ) {
                     //echo "here";
-                    $w3  = W3_ObjectCache::instance();
-                    $key = $w3->_get_cache_key( $this->args['opt_name'] . '-transients', 'transient' );
+                    $w3_inst    = w3_instance('W3_ObjectCache');
+                    $w3         = $w3_inst->instance();
+                    $key        = $w3->_get_cache_key( $this->args['opt_name'] . '-transients', 'transient' );
                     //echo $key;
                     $w3->delete( $key, 'transient', true );
                     //set_transient($this->args['opt_name'].'-transients', $this->transients);
