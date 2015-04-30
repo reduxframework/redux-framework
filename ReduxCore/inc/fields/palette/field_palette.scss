@@ -1,10 +1,11 @@
 .redux-container-palette {
     label {
+        border: 3px solid transparent;
         &.ui-button.ui-widget {
             width: 95%;
             background: none;
             padding: 0;
-            
+
             .ui-button-text {
 /*                border-top: 3px solid transparent;
                 border-bottom: 3px solid transparent;
@@ -12,7 +13,7 @@
                 display: flex;
                 
                 span {
-                    padding: 10px 0;
+                    padding: 10px;
                     flex-grow: 1;
                     font-size: 0;
                     line-height: 10px;
@@ -22,14 +23,15 @@
                     -ms-transition: all 200ms ease-in-out;
                     -o-transition: all 200ms ease-in-out;
                     transition: all 200ms ease-in-out;
-                    
+                    text-shadow: 0;
                     &:hover {
-                        padding: 10px;
                         flex-grow: 3;
+                        font-weight: bold;
                         min-width: 60px;
-                        font-size: 10px;
+                        font-size: 12px;
                         line-height: 10px;
-                        color: #000;
+                        color: #333;
+                        text-shadow: 0 0 8px #fff, 0 0 8px #fff;
                     }
                 }
             }
