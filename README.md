@@ -83,7 +83,7 @@ Send us an email at info@reduxframework.com so we can add you to our showcase!
 
 See [Changelog.md](https://github.com/ReduxFramework/redux-framework/blob/master/CHANGELOG.md)
 
-## Running the tests
+## Running PHP Unit tests ##
 
 The tests are built using [wordpress's make subversion repository](https://make.wordpress.org/core/handbook/automated-testing/)
 
