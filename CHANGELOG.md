@@ -1,5 +1,12 @@
     # Redux Framework Changelog
 
+## 3.5.4.4
+* Removed:  sysinfo.php.  No longer needed in lieu of our support URL feature.
+* Removed:  debug.php.  Moved to options_object extension.
+* Modified: #2274 - PHP Unit test compatibility.  Thanks @daithi-coombes.
+* Modified: #2144 - Optional class argument per image.  Thanks @paulthecoder.
+* Fixed:    #2278 - More W3 Total Cache hacks.
+    
 ## 3.5.4.3
 * Fixed:    #2258 - welcome redirect error with embedding plugin scenarios.
 * Fixed:    Redux plugin load order when activating plugins.

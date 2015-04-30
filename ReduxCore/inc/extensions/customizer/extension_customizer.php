@@ -324,7 +324,7 @@
 
                         $option['id'] = $this->parent->args['opt_name'] . '[' . $option['id'] . ']';
 
-                        if ( $option['type'] != "heading" && $option['type'] != "import_export" && ! empty( $option['type'] ) ) {
+                        if ( $option['type'] != "heading" && $option['type'] != "import_export" && $option['type'] != "options_object" && ! empty( $option['type'] ) ) {
                             $wp_customize->add_setting( $option['id'],
                                 array(
                                     'default'           => $option['default'],

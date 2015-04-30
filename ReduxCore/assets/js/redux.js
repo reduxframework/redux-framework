@@ -35,8 +35,6 @@
             $.redux.tabCheck();
             $.redux.notices();
             $.redux.tabControl();
-            $.redux.devFunctions();
-
         }
     );
 
@@ -772,19 +770,6 @@
                 return false;
             }
         );
-    };
-
-    $.redux.devFunctions = function() {
-        $( '#consolePrintObject' ).on(
-            'click', function( e ) {
-                e.preventDefault();
-                console.log( $.parseJSON( $( "#redux-object-json" ).html() ) );
-            }
-        );
-
-        if ( typeof jsonView === 'function' ) {
-            jsonView( '#redux-object-json', '#redux-object-browser' );
-        }
     };
 
     $.redux.required = function() {
