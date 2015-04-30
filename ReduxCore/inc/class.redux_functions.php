@@ -35,7 +35,21 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
             return $min;
         }
 
-
+        /**
+         * Sets a cookie.
+         * Do nothing if unit testing.
+         * 
+         * @since   3.5.4
+         * @access  public
+         * @return  void
+         * @param   string $name The cookie name.
+         * @param   string $value The cookie value.
+         * @param   integer $expire Expiry time.
+         * @param   string $path The cookie path.
+         * @param   string $domain The cookie domain.
+         * @param   boolean $secure HTTPS only.
+         * @param   boolean $httponly Only set cookie on HTTP calls.
+         */
         public static function setCookie( $name, $value, $expire = 0, $path, $domain = null, $secure = false, $httponly = false ){
             if ( ! defined( 'WP_TESTS_DOMAIN' ) ) {
                 setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
