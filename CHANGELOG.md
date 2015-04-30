@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.5
+* Fixed:    How sorter works with data
+* Modified: How the data arg is stored in Redux.
+
 ## 3.5.4.4
 * Removed:  sysinfo.php.  No longer needed in lieu of our support URL feature.
 * Removed:  debug.php.  Moved to options_object extension.

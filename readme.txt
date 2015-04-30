@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 3.5.4.4
+Stable tag: 3.5.4.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -126,10 +126,10 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 == Changelog ==
 
 = 3.5.4.3 =
-Fixed: #2258 - welcome redirect error with embedding plugin scenarios.
-Fixed: Redux plugin load order when activating plugins.
-Fixed: #2271 - stuck redirect on godaddy (seriously, get a real host, people) servers.
-Fixed: #2216 - Reset section not always working within FF.
+* Fixed: #2258 - welcome redirect error with embedding plugin scenarios.
+* Fixed: Redux plugin load order when activating plugins.
+* Fixed: #2271 - stuck redirect on godaddy (seriously, get a real host, people) servers.
+* Fixed: #2216 - Reset section not always working within FF.
 
 = 3.5.4 =
 * Modified: update_notice arg only truly shows up if dev_mode is on.

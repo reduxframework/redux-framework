@@ -74,7 +74,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.4';
+            public static $_version = '3.5.4.5';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1112,6 +1112,62 @@
                 return $value;
             }
 
+            public function field_default_values($field) {
+                // Detect what field types are being used
+                if ( ! isset ( $this->fields[ $field['type'] ][ $field['id'] ] ) ) {
+                    $this->fields[ $field['type'] ][ $field['id'] ] = 1;
+                } else {
+                    $this->fields[ $field['type'] ] = array( $field['id'] => 1 );
+                }
+                if ( isset ( $field['default'] ) ) {
+                    $this->options_defaults[ $field['id'] ] = $field['default'];
+                } elseif ( ( $field['type'] != "ace_editor" ) ) {
+                    // Sorter data filter
+
+                    if ( isset( $field['data'] ) && !empty( $field['data'] ) ) {
+                        if (!isset($field['args'])) {
+                            $field['args'] = array();
+                        }
+                        if ( is_array( $field['data'] ) && !empty( $field['data'] ) ) {
+                            foreach ( $field['data'] as $key => $data ) {
+                                if (!empty($data)) {
+                                    if ( ! isset ( $this->field['args'][ $key ] ) ) {
+                                        $field['args'][ $key ] = array();
+                                    }
+                                    $field['options'][ $key ] = $this->get_wordpress_data( $data, $field['args'][ $key ] );
+                                }
+                            }
+                        } else {
+                            $field['options'] = $this->get_wordpress_data( $field['data'], $field['args'] );
+                        }
+                    }
+
+                    if ( $field['type'] == "sorter" && isset ( $field['data'] ) && ! empty ( $field['data'] ) && is_array( $field['data'] ) ) {
+                        if ( ! isset ( $field['args'] ) ) {
+                            $field['args'] = array();
+                        }
+                        foreach ( $field['data'] as $key => $data ) {
+                            if ( ! isset ( $field['args'][ $key ] ) ) {
+                                $field['args'][ $key ] = array();
+                            }
+                            $field['options'][ $key ] = $this->get_wordpress_data( $data, $field['args'][ $key ] );
+                        }
+                    }
+
+                    if (isset ( $field['options'] )) {
+                        if ( $field['type'] == "sortable" ) {
+                            $this->options_defaults[ $field['id'] ] = array();
+                        } elseif ( $field['type'] == "image_select" ) {
+                            $this->options_defaults[ $field['id'] ] = '';
+                        } elseif ( $field['type'] == "select" ) {
+                            $this->options_defaults[ $field['id'] ] = '';
+                        } else {
+                            $this->options_defaults[ $field['id'] ] = $field['options'];
+                        }
+                    }
+                }
+            }
+
             /**
              * Get default options into an array suitable for the settings API
              *
@@ -1148,39 +1204,7 @@
                                     $field['class'] .= "redux-section-indent-start";
                                     $this->sections[ $sk ]['fields'][ $k ] = $field;
                                 }
-                                // Detect what field types are being used
-                                if ( ! isset ( $this->fields[ $field['type'] ][ $field['id'] ] ) ) {
-                                    $this->fields[ $field['type'] ][ $field['id'] ] = 1;
-                                } else {
-                                    $this->fields[ $field['type'] ] = array( $field['id'] => 1 );
-                                }
-                                if ( isset ( $field['default'] ) ) {
-                                    $this->options_defaults[ $field['id'] ] = $field['default'];
-                                } elseif ( isset ( $field['options'] ) && ( $field['type'] != "ace_editor" ) ) {
-                                    // Sorter data filter
-
-                                    if ( $field['type'] == "sorter" && isset ( $field['data'] ) && ! empty ( $field['data'] ) && is_array( $field['data'] ) ) {
-                                        if ( ! isset ( $field['args'] ) ) {
-                                            $field['args'] = array();
-                                        }
-                                        foreach ( $field['data'] as $key => $data ) {
-                                            if ( ! isset ( $field['args'][ $key ] ) ) {
-                                                $field['args'][ $key ] = array();
-                                            }
-                                            $field['options'][ $key ] = $this->get_wordpress_data( $data, $field['args'][ $key ] );
-                                        }
-                                    }
-
-                                    if ( $field['type'] == "sortable" ) {
-                                        $this->options_defaults[ $field['id'] ] = array();
-                                    } elseif ( $field['type'] == "image_select" ) {
-                                        $this->options_defaults[ $field['id'] ] = '';
-                                    } elseif ( $field['type'] == "select" ) {
-                                        $this->options_defaults[ $field['id'] ] = '';
-                                    } else {
-                                        $this->options_defaults[ $field['id'] ] = $field['options'];
-                                    }
-                                }
+                                $this->field_default_values($field);
                             }
                         }
                     }
