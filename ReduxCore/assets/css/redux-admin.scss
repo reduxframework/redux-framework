@@ -1,3 +1,7 @@
+.spinner.is-active {
+    display: inline-block;
+}
+
 .redux-main .description {
     margin-top: 7px;
 }
@@ -99,10 +103,10 @@
                 bottom: auto;
                 width: auto;
             }
-            
+
             span {
                 color: #888;
-                
+
                 &.redux-dev-mode-notice {
                     //position: absolute;
                     background-color: #f0ad4e;
@@ -707,7 +711,7 @@
 
     #redux-header {
         text-align: center;
-        
+
         .display_header {
             float: none;
         }
