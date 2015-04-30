@@ -1,4 +1,4 @@
-    # Redux Framework Changelog
+# Redux Framework Changelog
 
 ## 3.5.4.4
 * Removed:  sysinfo.php.  No longer needed in lieu of our support URL feature.
