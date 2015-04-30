@@ -82,3 +82,53 @@ Send us an email at info@reduxframework.com so we can add you to our showcase!
 ## Changelog ##
 
 See [Changelog.md](https://github.com/ReduxFramework/redux-framework/blob/master/CHANGELOG.md)
+
+## Running the tests
+
+The tests are built using [wordpress's make subversion repository](https://make.wordpress.org/core/handbook/automated-testing/)
+
+`/var/www/wordpress-develop` as the destination for the core test files.
+First download the wordress core tests repository, for these files.
+
+```bash
+cd /var/www
+svn co http://develop.svn.wordpress.org/trunk/ wordpress-develop
+```
+
+In the newly created `/var/www/wordpress-develop` directory rename
+`wp-tests-config-sample.php` to `wp-tests-config.php`. Now add your database
+details to the new file:
+```php
+// WARNING WARNING WARNING!
+// These tests will DROP ALL TABLES in the database with the prefix named below.
+// DO NOT use a production database or one that is shared with something else.
+
+define( 'DB_NAME', 'wordpress-tests' );
+define( 'DB_USER', 'root' );
+define( 'DB_PASSWORD', 'passowrd' );
+define( 'DB_HOST', 'localhost' );
+define( 'DB_CHARSET', 'utf8' );
+define( 'DB_COLLATE', '' );
+```
+ - <b>n.b.</b> you may need to create the database first.
+ - <b>n.b. n.b.</b> also note that the database used will be emptied on each run.
+
+Set the `WP_TESTS_DIR` environment variable so that the `redux-framework` test bootstrap file can find the wordpress core tests:
+```bash
+export WP_TESTS_DIR='/var/www/wordpress-develop/tests/phpunit/includes/'
+```
+
+You should now be able to run the `redux-framework` unit tests:
+```bash
+redux-framework$ phpunit
+Welcome to the TIVWP Test Suite
+Version: 1.0
+
+Tests folder: /var/www/wordpress-develop/tests/phpunit/includes/
+
+Installing...
+...
+Configuration read from
+redux-framework/phpunit.xml
+...
+```
