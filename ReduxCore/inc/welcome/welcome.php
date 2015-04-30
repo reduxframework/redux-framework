@@ -84,7 +84,7 @@
                 } else if ( version_compare( $curVer, $saveVer, '>' ) ) {
                     $redirect = true; // Previous version
                 }
-                if ( $redirect ) {
+                if ( $redirect && ! defined( 'WP_TESTS_DOMAIN' ) ) {
                     add_action('init', array($this, 'do_redirect'));
                 }
             }
