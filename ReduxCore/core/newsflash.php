@@ -69,7 +69,7 @@
                         // if local and server data are same, then return
                         if (  strcmp ( $data, $cache_data ) == 0) {
                             // set new cookie for interval value
-                            setcookie( $this->cookie_id, time(), time() + (86400 * $this->interval), '/' );
+                            Redux_Functions::setCookie( $this->cookie_id, time(), time() + (86400 * $this->interval), '/' );
                             
                             // bail out
                             return;
