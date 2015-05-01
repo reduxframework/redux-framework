@@ -45,7 +45,7 @@
                 $.redux.initFields();
             }
         });
-    }
+    };
 
     $.redux.ajax_save = function( button ) {
 
