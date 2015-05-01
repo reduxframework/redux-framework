@@ -1961,7 +1961,7 @@
              * @access      public
              * @return      void
              */
-            public function _register_settings() {
+            public function _register_settings($setOption = true) {
 
                 // TODO - REMOVE
                 // Not used by new sample-config, but in here for legacy builds
@@ -1970,10 +1970,13 @@
                     include( ABSPATH . "wp-includes/pluggable.php" );
                 }
 
-                register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array(
-                    $this,
-                    '_validate_options'
-                ) );
+                if ($setOption) {
+                    register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array(
+                        $this,
+                        '_validate_options'
+                    ) );
+                }
+
 
                 if ( is_null( $this->sections ) ) {
                     return;
@@ -2106,8 +2109,10 @@
                                 }
                             }
                             if ( isset ( $field['customizer_only'] ) && $field['customizer_only'] == true ) {
-                                //$display = false;
+                                $display = false;
                             }
+
+
 
                             if ( isset ( $field['permissions'] ) ) {
 
@@ -2290,13 +2295,17 @@
                                 if ( isset ( $field['hidden'] ) && $field['hidden'] ) {
                                     $field['label_for'] = 'redux_hide_field';
                                 }
+                                if ( $setOption ) {
+                                    add_settings_field(
+                                        "{$fieldk}_field", $th, array(
+                                        &$this,
+                                        '_field_input'
+                                    ), "{$this->args['opt_name']}{$k}_section_group", "{$this->args['opt_name']}{$k}_section", $field
+                                    );
+                                } else {
+                                    $this->field_head[$field['id']] = $th;
+                                }
 
-                                add_settings_field(
-                                    "{$fieldk}_field", $th, array(
-                                    &$this,
-                                    '_field_input'
-                                ), "{$this->args['opt_name']}{$k}_section_group", "{$this->args['opt_name']}{$k}_section", $field
-                                );
 
                             }
                         }
