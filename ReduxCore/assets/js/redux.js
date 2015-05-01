@@ -35,8 +35,17 @@
             $.redux.tabCheck();
             $.redux.notices();
             $.redux.tabControl();
+            $.redux.customizer();
         }
     );
+
+    $.redux.customizer = function() {
+        jQuery('.accordion-section.redux-section' ).click(function() {
+            if ( jQuery( this ).hasClass( 'open' ) ) {
+                $.redux.initFields();
+            }
+        });
+    }
 
     $.redux.ajax_save = function( button ) {
 
