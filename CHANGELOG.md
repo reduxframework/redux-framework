@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.6
+* Fixed:    Option panel not rendering due to experimental code.
+
 ## 3.5.4.5
 * Fixed:    How sorter works with data
 * Modified: How the data arg is stored in Redux.
