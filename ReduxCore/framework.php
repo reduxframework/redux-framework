@@ -549,6 +549,7 @@
                     'ajax_save'                 => true,
                     // Disable the use of ajax saving for the panel
                     'cdn_check_time'            => 1440,
+                    'options_api'            => true,
                 );
             }
 
@@ -1966,7 +1967,7 @@
              * @access      public
              * @return      void
              */
-            public function _register_settings($setOption = true) {
+            public function _register_settings() {
 
                 // TODO - REMOVE
                 // Not used by new sample-config, but in here for legacy builds
@@ -1975,7 +1976,7 @@
                     include( ABSPATH . "wp-includes/pluggable.php" );
                 }
 
-                if ($setOption) {
+                if ($this->args['options_api'] == true) {
                     register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array(
                         $this,
                         '_validate_options'
@@ -2300,7 +2301,7 @@
                                 if ( isset ( $field['hidden'] ) && $field['hidden'] ) {
                                     $field['label_for'] = 'redux_hide_field';
                                 }
-                                if ( $setOption ) {
+                                if ($this->args['options_api'] == true) {
                                     add_settings_field(
                                         "{$fieldk}_field", $th, array(
                                         &$this,
