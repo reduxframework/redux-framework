@@ -43,6 +43,9 @@
 // Don't duplicate me!
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
+        // Redux CDN class
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_cdn.php' );
+        
         // Redux API class  :)
         require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
 
@@ -206,7 +209,8 @@
                 }
 
                 // Pass parent pointer to function helper.
-                Redux_Functions::$_parent = $this;
+                Redux_Functions::$_parent   = $this;
+                Redux_CDN::$_parent         = $this;
 
                 // Set values
                 $this->set_default_args();

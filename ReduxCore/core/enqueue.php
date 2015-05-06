@@ -78,22 +78,32 @@
                 //*****************************************************************
                 // Select2 CSS
                 //*****************************************************************
-                wp_register_style(
+                $css_file = 'select2.min.css';
+                if ($this->parent->args['dev_mode']) {
+                    $css_file = 'select2.css';
+                }
+                
+                Redux_CDN::register_style(
                     'select2-css',
-                    ReduxFramework::$_url . 'assets/js/vendor/select2/select2.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/' . $css_file,
                     array(),
-                    $this->timestamp,
+                    '3.5.2',//$this->timestamp,
                     'all'
                 );
 
                 //*****************************************************************
                 // Spectrum CSS
                 //*****************************************************************
-                wp_register_style(
+                $css_file = 'spectrum.min.css';
+                if ($this->parent->args['dev_mode']) {
+                    $css_file = 'spectrum.css';
+                }                
+                
+                Redux_CDN::register_style(
                     'redux-spectrum-css',
-                    ReduxFramework::$_url . 'assets/css/vendor/spectrum/redux-spectrum.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.3.3/' . $css_file,
                     array(),
-                    $this->timestamp,
+                    '1.3.3',
                     'all'
                 );
 
@@ -111,11 +121,16 @@
                 //*****************************************************************
                 // QTip CSS
                 //*****************************************************************
-                wp_enqueue_style(
+                $css_file = 'jquery.qtip.min.css';
+                if ($this->parent->args['dev_mode']) {
+                    $css_file = 'jquery.qtip.css';
+                }
+
+                Redux_CDN::enqueue_style(
                     'qtip-css',
-                    ReduxFramework::$_url . 'assets/css/vendor/qtip/jquery.qtip.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/' . $css_file,
                     array(),
-                    $this->timestamp,
+                    '2.2.0',
                     'all'
                 );
 
@@ -197,14 +212,51 @@
                 //*****************************************************************
                 // Select2 JS
                 //*****************************************************************
-                wp_register_script(
+                $js_file = 'select2.min.js';
+                if ($this->parent->args['dev_mode']) {
+                    $js_file = 'select2.js';
+                }
+                
+                Redux_CDN::register_script(
                     'select2-js',
-                    ReduxFramework::$_url . 'assets/js/vendor/select2/select2.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/' . $js_file,
                     array( 'jquery', 'redux-select2-sortable-js' ),
-                    $this->timestamp,
+                    '3.5.2',
                     true
                 );
 
+                //*****************************************************************
+                // QTip JS
+                //*****************************************************************
+                $js_file = 'jquery.qtip.min.js';
+                if ($this->parent->args['dev_mode']) {
+                    $js_file = 'jquery.qtip.js';
+                }
+                
+                Redux_CDN::enqueue_script(
+                    'qtip-js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/' . $js_file,
+                    array( 'jquery' ),
+                    '2.2.0',
+                    true
+                );
+
+                //*****************************************************************
+                // Spectrum JS
+                //*****************************************************************
+                $js_file = 'spectrum.min.js';
+                if ($this->parent->args['dev_mode']) {
+                    $js_file = 'spectrum.js';
+                }
+                
+                Redux_CDN::register_script(
+                    'redux-spectrum-js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.3.3/' . $js_file,
+                    array( 'jquery' ),
+                    '1.3.3',
+                    true
+                );                
+                
                 $depArray = array( 'jquery' );
 
                 //*****************************************************************
