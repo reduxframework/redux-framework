@@ -83,7 +83,7 @@ if ( ! class_exists( 'Redux_CDN' ) ) {
                         }                        
                     }
                 } else {
-                    $cdn_is_up = set_transient( $handle . $tran_key, true, MINUTE_IN_SECONDS * 20 );
+                    $cdn_is_up = set_transient( $handle . $tran_key, true, MINUTE_IN_SECONDS * self::$_parent->args['cdn_check_time'] );
                     
                     if ($register) {
                         self::_register($handle, $src_cdn, $deps, $ver, $footer_or_media, $is_script);

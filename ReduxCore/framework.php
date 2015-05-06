@@ -548,6 +548,7 @@
                     // Path to the templates file for various Redux elements
                     'ajax_save'                 => true,
                     // Disable the use of ajax saving for the panel
+                    'cdn_check_time'            => 1440,
                 );
             }
 
