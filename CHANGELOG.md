@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.7
+* Modified: Moved vendor libraries ACE, select2, qtip, and spectrum to CDN.
+* Removed:  Local installs of above libraries.
+
 ## 3.5.4.6
 * Fixed:    Option panel not rendering due to experimental code.
 
