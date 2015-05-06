@@ -1975,12 +1975,12 @@
                     include( ABSPATH . "wp-includes/pluggable.php" );
                 }
 
-                if ($setOption) {
+                //if ($setOption) {
                     register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array(
                         $this,
                         '_validate_options'
                     ) );
-                }
+                //}
 
 
                 if ( is_null( $this->sections ) ) {
@@ -2300,16 +2300,17 @@
                                 if ( isset ( $field['hidden'] ) && $field['hidden'] ) {
                                     $field['label_for'] = 'redux_hide_field';
                                 }
-                                if ( $setOption ) {
+                                //if ( $setOption ) {
                                     add_settings_field(
                                         "{$fieldk}_field", $th, array(
                                         &$this,
                                         '_field_input'
                                     ), "{$this->args['opt_name']}{$k}_section_group", "{$this->args['opt_name']}{$k}_section", $field
                                     );
-                                } else {
-                                    $this->field_head[$field['id']] = $th;
-                                }
+                                //} else {
+                                //    $this->field_head[$field['id']] = $th;
+                                //}
+
 
                             }
                         }

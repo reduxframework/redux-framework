@@ -71,7 +71,7 @@ if ( ! class_exists( 'Redux_CDN' ) ) {
                         if ( ! self::is_enqueued($handle, 'enqueued', $is_script)) {
                             $msg = 'Please wait a few minutes, then try refreshing the page.';
                             if (self::$_parent->args['dev_mode']) {
-                                $msg = 'If developing offline, please download and install the Redux Vendor Support plugin to bypass the vendor CDN and avoid this warning.';
+                                $msg = 'If developing offline, please download and install the <a href="http://reduxframework.com/wp-content/uploads/2015/05/redux-vendor-support.zip">Redux Vendor Support plugin</a> to bypass the vendor CDN and avoid this warning.';
                             }
                             
                             self::$_parent->admin_notices[] = array(
