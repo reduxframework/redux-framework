@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.8
+* Fixed:    Panels not rendering, again
+* Added:    Vendor support plugin link to CDN fallback message.
+
 ## 3.5.4.7
 * Modified: Moved vendor libraries ACE, select2, qtip, and spectrum to CDN.
 * Removed:  Local installs of above libraries.
