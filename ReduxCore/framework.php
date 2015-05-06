@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.8';
+            public static $_version = '3.5.4.7';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -549,6 +549,7 @@
                     'ajax_save'                 => true,
                     // Disable the use of ajax saving for the panel
                     'cdn_check_time'            => 1440,
+                    'options_api'            => true,
                 );
             }
 
@@ -1966,7 +1967,7 @@
              * @access      public
              * @return      void
              */
-            public function _register_settings($setOption = true) {
+            public function _register_settings() {
 
                 // TODO - REMOVE
                 // Not used by new sample-config, but in here for legacy builds
@@ -1975,12 +1976,12 @@
                     include( ABSPATH . "wp-includes/pluggable.php" );
                 }
 
-                //if ($setOption) {
+                if ($this->args['options_api'] == true) {
                     register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array(
                         $this,
                         '_validate_options'
                     ) );
-                //}
+                }
 
 
                 if ( is_null( $this->sections ) ) {
@@ -2300,17 +2301,16 @@
                                 if ( isset ( $field['hidden'] ) && $field['hidden'] ) {
                                     $field['label_for'] = 'redux_hide_field';
                                 }
-                                //if ( $setOption ) {
+                                if ($this->args['options_api'] == true) {
                                     add_settings_field(
                                         "{$fieldk}_field", $th, array(
                                         &$this,
                                         '_field_input'
                                     ), "{$this->args['opt_name']}{$k}_section_group", "{$this->args['opt_name']}{$k}_section", $field
                                     );
-                                //} else {
-                                //    $this->field_head[$field['id']] = $th;
-                                //}
-
+                                } else {
+                                    $this->field_head[$field['id']] = $th;
+                                }
 
                             }
                         }
