@@ -1183,7 +1183,7 @@ pre {
 }
 
 /* Light fresh theme */
-.admin-color-fresh {
+.admin-color-fresh, .wp-customizer {
     @include adminThemeColorOverrides(#a0a5aa, #0073aa, #23282d, #1e8cbe);
 }
 

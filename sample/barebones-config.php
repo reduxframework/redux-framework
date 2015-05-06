@@ -282,7 +282,7 @@
         'subsection' => true,
         'fields'     => array(
             array(
-                'id'       => 'text-example',
+                'id'       => 'textarea-example',
                 'type'     => 'textarea',
                 'title'    => __( 'Text Area Field', 'redux-framework-demo' ),
                 'subtitle' => __( 'Subtitle', 'redux-framework-demo' ),
