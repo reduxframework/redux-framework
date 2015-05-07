@@ -247,6 +247,9 @@
     // Add content after the form.
     $args['footer_text'] = __( '<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>', 'redux-framework-demo' );
 
+    // This line is only for altering the demo. Can be easily removed.
+    $args = apply_filters( 'redux_demo/args', $args );
+
     Redux::setArgs( $opt_name, $args );
 
     /*
