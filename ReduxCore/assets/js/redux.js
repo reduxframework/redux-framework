@@ -35,17 +35,8 @@
             $.redux.tabCheck();
             $.redux.notices();
             $.redux.tabControl();
-            $.redux.customizer();
         }
     );
-
-    $.redux.customizer = function() {
-        jQuery('.accordion-section.redux-section' ).click(function() {
-            if ( jQuery( this ).hasClass( 'open' ) ) {
-                $.redux.initFields();
-            }
-        });
-    };
 
     $.redux.ajax_save = function( button ) {
 
@@ -1539,6 +1530,13 @@ function redux_change( variable ) {
     if ( rContainer.find( '.saved_notice:visible' ).length > 0 ) {
         return;
     }
+
+
+    if (redux.customizer) {
+        redux.customizer.save(variable, rContainer, parentID);
+        return;
+    }
+
     if ( !redux.args.disable_save_warn ) {
         rContainer.find( '.redux-save-warn' ).slideDown();
         window.onbeforeunload = confirmOnPageExit;
