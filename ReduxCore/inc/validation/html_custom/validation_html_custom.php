@@ -1,33 +1,34 @@
 <?php
 
-    if ( ! class_exists( 'Redux_Validation_html_custom' ) ) {
-        class Redux_Validation_html_custom {
+if ( ! class_exists( 'Redux_Validation_html_custom' ) ) {
 
-            /**
-             * Field Constructor.
-             * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-             *
-             * @since ReduxFramework 1.0.0
-             */
-            function __construct( $parent, $field, $value, $current ) {
+class Redux_Validation_html_custom {
 
-                $this->parent  = $parent;
-                $this->field   = $field;
-                $this->value   = $value;
-                $this->current = $current;
+    /**
+     * Field Constructor.
+     * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+     *
+     * @since ReduxFramework 1.0.0
+     */
+    function __construct( $parent, $field, $value, $current ) {
 
-                $this->validate();
-            } //function
+        $this->parent  = $parent;
+        $this->field   = $field;
+        $this->value   = $value;
+        $this->current = $current;
 
-            /**
-             * Field Render Function.
-             * Takes the vars and validates them
-             *
-             * @since ReduxFramework 1.0.0
-             */
-            function validate() {
+        $this->validate();
+    } //function
 
-                $this->value = wp_kses( $this->value, $this->field['allowed_html'] );
-            } //function
-        } //class
-    }
+    /**
+     * Field Render Function.
+     * Takes the vars and validates them
+     *
+     * @since ReduxFramework 1.0.0
+     */
+    function validate() {
+
+        $this->value = wp_kses( $this->value, $this->field['allowed_html'] );
+    } //function
+} //class
+endif;

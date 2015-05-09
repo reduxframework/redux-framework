@@ -1,53 +1,55 @@
 <?php
 
-    if ( ! class_exists( 'Redux_Validation_date' ) ) {
-        class Redux_Validation_date {
+if ( ! class_exists( 'Redux_Validation_date' ) ) :
 
-            /**
-             * Field Constructor.
-             * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-             *
-             * @since ReduxFramework 1.0.0
-             */
-            function __construct( $parent, $field, $value, $current ) {
+class Redux_Validation_date {
 
-                $this->parent       = $parent;
-                $this->field        = $field;
-                $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'This field must be a valid date.', 'redux-framework' );
-                $this->value        = $value;
-                $this->current      = $current;
+    /**
+     * Field Constructor.
+     * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+     *
+     * @since ReduxFramework 1.0.0
+     */
+    function __construct( $parent, $field, $value, $current ) {
 
-                $this->validate();
-            } //function
+        $this->parent       = $parent;
+        $this->field        = $field;
+        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'This field must be a valid date.', 'redux-framework' );
+        $this->value        = $value;
+        $this->current      = $current;
 
-            /**
-             * Field Render Function.
-             * Takes the vars and outputs the HTML for the field in the settings
-             *
-             * @since ReduxFramework 1.0.0
-             */
-            function validate() {
+        $this->validate();
+    } //function
 
-                $string = str_replace( '/', '', $this->value );
+    /**
+     * Field Render Function.
+     * Takes the vars and outputs the HTML for the field in the settings
+     *
+     * @since ReduxFramework 1.0.0
+     */
+    function validate() {
 
-                if ( ! is_numeric( $string ) ) {
-                    $this->value = ( isset( $this->current ) ) ? $this->current : '';
-                    $this->error = $this->field;
+        $string = str_replace( '/', '', $this->value );
 
-                    return;
-                }
+        if ( ! is_numeric( $string ) ) {
+            $this->value = ( isset( $this->current ) ) ? $this->current : '';
+            $this->error = $this->field;
 
-                if ( $this->value[2] != '/' ) {
-                    $this->value = ( isset( $this->current ) ) ? $this->current : '';
-                    $this->error = $this->field;
+            return;
+        }
 
-                    return;
-                }
+        if ( $this->value[2] != '/' ) {
+            $this->value = ( isset( $this->current ) ) ? $this->current : '';
+            $this->error = $this->field;
 
-                if ( $this->value[5] != '/' ) {
-                    $this->value = ( isset( $this->current ) ) ? $this->current : '';
-                    $this->error = $this->field;
-                }
-            } //function
-        } //class
-    }
+            return;
+        }
+
+        if ( $this->value[5] != '/' ) {
+            $this->value = ( isset( $this->current ) ) ? $this->current : '';
+            $this->error = $this->field;
+        }
+    } //function
+} //class
+
+endif;
