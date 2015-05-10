@@ -5,9 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// Don't duplicate me!
-if ( ! class_exists( 'Redux_Helpers' ) ) :
-
 /**
  * Redux Helpers Class
  * Class of useful functions that can/should be shared among all Redux files.
@@ -17,6 +14,7 @@ if ( ! class_exists( 'Redux_Helpers' ) ) :
 class Redux_Helpers {
 
     public static function tabFromField( $parent, $field ) {
+
         foreach ( $parent->sections as $k => $section ) {
             if ( ! isset( $section['title'] ) ) {
                 continue;
@@ -29,9 +27,11 @@ class Redux_Helpers {
                 }
             }
         }
+
     }
 
     public static function isFieldInUseByType( $fields, $field = array() ) {
+
         foreach ( $field as $name ) {
             if ( array_key_exists( $name, $fields ) ) {
                 return true;
@@ -39,9 +39,11 @@ class Redux_Helpers {
         }
 
         return false;
+
     }
 
     public static function isFieldInUse( $parent, $field ) {
+
         foreach ( $parent->sections as $k => $section ) {
             if ( ! isset( $section['title'] ) ) {
                 continue;
@@ -54,19 +56,16 @@ class Redux_Helpers {
                 }
             }
         }
+
     }
 
     public static function major_version( $v ) {
         $version = explode( '.', $v );
-        if ( count( $version ) > 1 ) {
-            return $version[0] . '.' . $version[1];
-        } else {
-            return $v;
-        }
+        return ( count( $version ) > 1 ) ? $version[0] . '.' . $version[1] : $v;
     }
 
     public static function isLocalHost() {
-        return ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' ) ? 1 : 0;
+        return ( '127.0.0.1' === $_SERVER['REMOTE_ADDR'] || 'localhost' === $_SERVER['REMOTE_ADDR'] ) ? 1 : 0;
     }
 
     public static function isWpDebug() {
@@ -74,16 +73,15 @@ class Redux_Helpers {
     }
 
     public static function getTrackingObject() {
-        global $wpdb;
-
-        $hash = md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] );
 
         global $blog_id, $wpdb;
-        $pts = array();
+
+        $hash = md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] );
+        $pts  = array();
 
         foreach ( get_post_types( array( 'public' => true ) ) as $pt ) {
             $count      = wp_count_posts( $pt );
-            $pts[ $pt ] = $count->publish;
+            $pts[$pt] = $count->publish;
         }
 
         $comments_count = wp_count_comments();
@@ -104,7 +102,7 @@ class Redux_Helpers {
             $plugin_info = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
 
             $slug             = str_replace( '/' . basename( $plugin_path ), '', $plugin_path );
-            $plugins[ $slug ] = array(
+            $plugins[$slug] = array(
                 'version'    => $plugin_info['Version'],
                 'name'       => $plugin_info['Name'],
                 'plugin_uri' => $plugin_info['PluginURI'],
@@ -116,7 +114,7 @@ class Redux_Helpers {
             foreach ( get_option( 'active_sitewide_plugins', array() ) as $plugin_path ) {
                 $plugin_info      = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
                 $slug             = str_replace( '/' . basename( $plugin_path ), '', $plugin_path );
-                $plugins[ $slug ] = array(
+                $plugins[$slug] = array(
                     'version'    => $plugin_info['Version'],
                     'name'       => $plugin_info['Name'],
                     'plugin_uri' => $plugin_info['PluginURI'],
@@ -125,7 +123,6 @@ class Redux_Helpers {
                 );
             }
         }
-
 
         $version = explode( '.', PHP_VERSION );
         $version = array(
@@ -171,31 +168,33 @@ class Redux_Helpers {
         $parts    = explode( ' ', $_SERVER['SERVER_SOFTWARE'] );
         $software = array();
         foreach ( $parts as $part ) {
-            if ( $part[0] == "(" ) {
+            if ( $part[0] == '(' ) {
                 continue;
             }
             if ( strpos( $part, '/' ) !== false ) {
-                $chunk                               = explode( "/", $part );
-                $software[ strtolower( $chunk[0] ) ] = $chunk[1];
+                $chunk                               = explode( '/', $part );
+                $software[strtolower( $chunk[0] )] = $chunk[1];
             }
         }
         $software['full']             = $_SERVER['SERVER_SOFTWARE'];
         $data['environment']          = $software;
         $data['environment']['mysql'] = $wpdb->db_version();
-//                if ( function_exists( 'mysqli_get_server_info' ) ) {
-//                    $link = mysqli_connect() or die( "Error " . mysqli_error( $link ) );
-//                    $data['environment']['mysql'] = mysqli_get_server_info( $link );
-//                } else if ( class_exists( 'PDO' ) && method_exists( 'PDO', 'getAttribute' ) ) {
-//                    $data['environment']['mysql'] = PDO::getAttribute( PDO::ATTR_SERVER_VERSION );
-//                } else {
-//                    $data['environment']['mysql'] = mysql_get_server_info();
-//                }
+
+    //    if ( function_exists( 'mysqli_get_server_info' ) ) {
+    //        $link = mysqli_connect() or die( 'Error ' . mysqli_error( $link ) );
+    //        $data['environment']['mysql'] = mysqli_get_server_info( $link );
+    //    } else if ( class_exists( 'PDO' ) && method_exists( 'PDO', 'getAttribute' ) ) {
+    //        $data['environment']['mysql'] = PDO::getAttribute( PDO::ATTR_SERVER_VERSION );
+    //    } else {
+    //        $data['environment']['mysql'] = mysql_get_server_info();
+    //    }
 
         if ( empty( $data['developer'] ) ) {
             unset( $data['developer'] );
         }
 
         return $data;
+
     }
 
     public static function trackingObject() {
@@ -217,30 +216,34 @@ class Redux_Helpers {
         }
 
         return Redux_Helpers::getTrackingObject();
+
     }
 
     public static function isParentTheme( $file ) {
+
         $file = self::cleanFilePath( $file );
         $dir  = self::cleanFilePath( get_template_directory() );
 
         $file = str_replace( '//', '/', $file );
         $dir  = str_replace( '//', '/', $dir );
 
-        if ( strpos( $file, $dir ) !== false ) {
+        if ( false !== strpos( $file, $dir ) ) {
             return true;
         }
 
         return false;
+
     }
 
     public static function isChildTheme( $file ) {
+
         $file = self::cleanFilePath( $file );
         $dir  = self::cleanFilePath( get_stylesheet_directory() );
 
         $file = str_replace( '//', '/', $file );
         $dir  = str_replace( '//', '/', $dir );
 
-        if ( strpos( $file, $dir ) !== false ) {
+        if ( false !== strpos( $file, $dir ) ) {
             return true;
         }
 
@@ -261,13 +264,13 @@ class Redux_Helpers {
     }
 
     public static function array_in_array( $needle, $haystack ) {
+
         //Make sure $needle is an array for foreach
         if ( ! is_array( $needle ) ) {
             $needle = array( $needle );
         }
         //For each value in $needle, return TRUE if in $haystack
-        foreach ( $needle as $pin ) //echo 'needle' . $pin;
-        {
+        foreach ( $needle as $pin ) { //echo 'needle' . $pin;
             if ( in_array( $pin, $haystack ) ) {
                 return true;
             }
@@ -275,9 +278,11 @@ class Redux_Helpers {
 
         //Return FALSE if none of the values from $needle are found in $haystack
         return false;
+
     }
 
     public static function recursive_array_search( $needle, $haystack ) {
+
         foreach ( $haystack as $key => $value ) {
             if ( $needle === $value || ( is_array( $value ) && self::recursive_array_search( $needle, $value ) !== false ) ) {
                 return true;
@@ -285,6 +290,7 @@ class Redux_Helpers {
         }
 
         return false;
+
     }
 
     /**
@@ -295,13 +301,15 @@ class Redux_Helpers {
      * @since    3.1.7
      */
     public static function cleanFilePath( $path ) {
-        $path = str_replace( '', '', str_replace( array( "\\", "\\\\" ), '/', $path ) );
 
-        if ( $path[ strlen( $path ) - 1 ] === '/' ) {
+        $path = str_replace( '', '', str_replace( array( '\\', '\\\\' ), '/', $path ) );
+
+        if ( $path[strlen( $path ) - 1] === '/' ) {
             $path = rtrim( $path, '/' );
         }
 
         return $path;
+
     }
 
     /**
@@ -312,20 +320,22 @@ class Redux_Helpers {
      * @since    3.3.3
      */
     public static function rmdir( $dir ) {
+
         if ( is_dir( $dir ) ) {
             $objects = scandir( $dir );
             foreach ( $objects as $object ) {
-                if ( $object != "." && $object != ".." ) {
-                    if ( filetype( $dir . "/" . $object ) == "dir" ) {
-                        rrmdir( $dir . "/" . $object );
+                if ( $object != '.' && '..' != $object ) {
+                    if ( 'dir' == filetype( $dir . '/' . $object ) ) {
+                        rrmdir( $dir . '/' . $object );
                     } else {
-                        unlink( $dir . "/" . $object );
+                        unlink( $dir . '/' . $object );
                     }
                 }
             }
             reset( $objects );
             rmdir( $dir );
         }
+
     }
 
     /**
@@ -335,8 +345,9 @@ class Redux_Helpers {
      * @since ReduxFramework 3.0.4
      */
     public static function hex2rgba( $hex, $alpha = '' ) {
-        $hex = str_replace( "#", "", $hex );
-        if ( strlen( $hex ) == 3 ) {
+
+        $hex = str_replace( '#', '', $hex );
+        if ( 3 == strlen( $hex ) ) {
             $r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
             $g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
             $b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
@@ -351,20 +362,17 @@ class Redux_Helpers {
             return $rgb;
         } else {
             $alpha = floatval( $alpha );
-
             return 'rgba(' . $rgb . ',' . $alpha . ')';
         }
+
     }
 
     public static function makeBoolStr( $var ) {
-        if ( $var == false || $var == 'false' || $var == 0 || $var == '0' || $var == '' || empty( $var ) ) {
-            return 'false';
-        } else {
-            return 'true';
-        }
+        return ( false == $var || 'false' == $var || 0 == $var || '0' == $var || '' == $var || empty( $var ) ) ? 'false' : 'true';
     }
 
     public static function compileSystemStatus( $json_output = false, $remote_checks = false ) {
+
         global $wpdb;
 
         $sysinfo = array();
@@ -379,18 +387,21 @@ class Redux_Helpers {
         $sysinfo['wp_multisite']         = is_multisite();
         $sysinfo['permalink_structure']  = get_option( 'permalink_structure' ) ? get_option( 'permalink_structure' ) : 'Default';
         $sysinfo['front_page_display']   = get_option( 'show_on_front' );
-        if ( $sysinfo['front_page_display'] == 'page' ) {
+
+        if ( 'page' == $sysinfo['front_page_display'] ) {
+
             $front_page_id = get_option( 'page_on_front' );
             $blog_page_id  = get_option( 'page_for_posts' );
 
-            $sysinfo['front_page'] = $front_page_id != 0 ? get_the_title( $front_page_id ) . ' (#' . $front_page_id . ')' : 'Unset';
-            $sysinfo['posts_page'] = $blog_page_id != 0 ? get_the_title( $blog_page_id ) . ' (#' . $blog_page_id . ')' : 'Unset';
+            $sysinfo['front_page'] = ( 0 != $front_page_id ) ? get_the_title( $front_page_id ) . ' (#' . $front_page_id . ')' : 'Unset';
+            $sysinfo['posts_page'] = ( 0 != $blog_page_id )  ? get_the_title( $blog_page_id ) . ' (#' . $blog_page_id . ')'   : 'Unset';
+
         }
 
         $sysinfo['wp_mem_limit']['raw']  = self::let_to_num( WP_MEMORY_LIMIT );
         $sysinfo['wp_mem_limit']['size'] = size_format( $sysinfo['wp_mem_limit']['raw'] );
 
-        $sysinfo['db_table_prefix'] = 'Length: ' . strlen( $wpdb->prefix ) . ' - Status: ' . ( strlen( $wpdb->prefix ) > 16 ? 'ERROR: Too long' : 'Acceptable' );
+        $sysinfo['db_table_prefix'] = 'Length: ' . strlen( $wpdb->prefix ) . ' - Status: ' . ( ( 16 < strlen( $wpdb->prefix ) ) ? 'ERROR: Too long' : 'Acceptable' );
 
         $sysinfo['wp_debug'] = 'false';
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
@@ -398,10 +409,6 @@ class Redux_Helpers {
         }
 
         $sysinfo['wp_lang'] = get_locale();
-
-        if ( ! class_exists( 'Browser' ) ) {
-            require_once ReduxFramework::$_dir . 'inc/browser.php';
-        }
 
         $browser = new Browser();
 
@@ -431,7 +438,7 @@ class Redux_Helpers {
         $sysinfo['max_upload_size']   = size_format( wp_max_upload_size() );
 
         $sysinfo['def_tz_is_utc'] = 'true';
-        if ( date_default_timezone_get() !== 'UTC' ) {
+        if ( 'UTC' !== date_default_timezone_get() ) {
             $sysinfo['def_tz_is_utc'] = 'false';
         }
 
@@ -465,7 +472,7 @@ class Redux_Helpers {
                 )
             ) );
 
-            if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+            if ( ! is_wp_error( $response ) && 200 <= $response['response']['code'] && 300 > $response['response']['code'] ) {
                 $sysinfo['wp_remote_post']       = 'true';
                 $sysinfo['wp_remote_post_error'] = '';
             } else {
@@ -475,7 +482,7 @@ class Redux_Helpers {
 
             $response = wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' );
 
-            if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+            if ( ! is_wp_error( $response ) && 200 <= $response['response']['code'] && 300 > $response['response']['code'] ) {
                 $sysinfo['wp_remote_get']       = 'true';
                 $sysinfo['wp_remote_get_error'] = '';
             } else {
@@ -496,7 +503,7 @@ class Redux_Helpers {
             $plugin_data = @get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin );
             $plugin_name = esc_html( $plugin_data['Name'] );
 
-            $sysinfo['plugins'][ $plugin_name ] = $plugin_data;
+            $sysinfo['plugins'][$plugin_name] = $plugin_data;
         }
 
         $redux = Redux_Framework_Instances::get_all_instances();
@@ -507,17 +514,17 @@ class Redux_Helpers {
             foreach ( $redux as $inst => $data ) {
                 Redux::init( $inst );
 
-                $sysinfo['redux_instances'][ $inst ]['args']     = $data->args;
-                $sysinfo['redux_instances'][ $inst ]['sections'] = $data->sections;
-                foreach ( $sysinfo['redux_instances'][ $inst ]['sections'] as $sKey => $section ) {
+                $sysinfo['redux_instances'][$inst]['args']     = $data->args;
+                $sysinfo['redux_instances'][$inst]['sections'] = $data->sections;
+                foreach ( $sysinfo['redux_instances'][$inst]['sections'] as $sKey => $section ) {
                     if ( isset( $section['fields'] ) && is_array( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $fKey => $field ) {
                             if ( isset( $field['validate_callback'] ) ) {
-                                unset( $sysinfo['redux_instances'][ $inst ]['sections'][ $sKey ]['fields'][ $fKey ]['validate_callback'] );
+                                unset( $sysinfo['redux_instances'][$inst]['sections'][$sKey]['fields'][$fKey]['validate_callback'] );
                             }
-                            if ( $field['type'] == "js_button" ) {
+                            if ( 'js_button' == $field['type'] ) {
                                 if ( isset( $field['script'] ) && isset( $field['script']['ver'] ) ) {
-                                    unset( $sysinfo['redux_instances'][ $inst ]['sections'][ $sKey ]['fields'][ $fKey ]['script']['ver'] );
+                                    unset( $sysinfo['redux_instances'][$inst]['sections'][$sKey]['fields'][$fKey]['script']['ver'] );
                                 }
                             }
 
@@ -525,15 +532,15 @@ class Redux_Helpers {
                     }
                 }
 
-                $sysinfo['redux_instances'][ $inst ]['extensions'] = Redux::getExtensions( $inst );
+                $sysinfo['redux_instances'][$inst]['extensions'] = Redux::getExtensions( $inst );
 
                 if ( isset( $data->extensions['metaboxes'] ) ) {
                     $data->extensions['metaboxes']->init();
-                    $sysinfo['redux_instances'][ $inst ]['metaboxes'] = $data->extensions['metaboxes']->boxes;
+                    $sysinfo['redux_instances'][$inst]['metaboxes'] = $data->extensions['metaboxes']->boxes;
                 }
 
                 if ( isset( $data->args['templates_path'] ) && $data->args['templates_path'] != '' ) {
-                    $sysinfo['redux_instances'][ $inst ]['templates'] = self::getReduxTemplates( $data->args['templates_path'] );
+                    $sysinfo['redux_instances'][$inst]['templates'] = self::getReduxTemplates( $data->args['templates_path'] );
                 }
             }
         }
@@ -561,25 +568,23 @@ class Redux_Helpers {
         //exit();
 
         return $sysinfo;
+
     }
 
     private static function getReduxTemplates( $custom_template_path ) {
+
         $template_paths     = array( 'ReduxFramework' => ReduxFramework::$_dir . 'templates/panel' );
         $scanned_files      = array();
         $found_files        = array();
         $outdated_templates = false;
 
         foreach ( $template_paths as $plugin_name => $template_path ) {
-            $scanned_files[ $plugin_name ] = self::scan_template_files( $template_path );
+            $scanned_files[$plugin_name] = self::scan_template_files( $template_path );
         }
 
         foreach ( $scanned_files as $plugin_name => $files ) {
             foreach ( $files as $file ) {
-                if ( file_exists( $custom_template_path . '/' . $file ) ) {
-                    $theme_file = $custom_template_path . '/' . $file;
-                } else {
-                    $theme_file = false;
-                }
+                $theme_file = ( file_exists( $custom_template_path . '/' . $file ) ) ? $custom_template_path . '/' . $file : false;
 
                 if ( $theme_file ) {
                     $core_version  = self::get_template_version( ReduxFramework::$_dir . 'templates/panel/' . $file );
@@ -590,9 +595,9 @@ class Redux_Helpers {
                             $outdated_templates = true;
                         }
 
-                        $found_files[ $plugin_name ][] = sprintf( __( '<code>%s</code> version <strong style="color:red">%s</strong> is out of date. The core version is %s', 'redux-framework' ), str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? $theme_version : '-', $core_version );
+                        $found_files[$plugin_name][] = sprintf( __( '<code>%s</code> version <strong style="color:red">%s</strong> is out of date. The core version is %s', 'redux-framework' ), str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? $theme_version : '-', $core_version );
                     } else {
-                        $found_files[ $plugin_name ][] = sprintf( '<code>%s</code>', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ) );
+                        $found_files[$plugin_name][] = sprintf( '<code>%s</code>', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ) );
                     }
                 }
             }
@@ -602,17 +607,18 @@ class Redux_Helpers {
     }
 
     public static function rURL_fix( $base, $opt_name ) {
-        $url                          = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base ) . '';
+        $url = $base . urlencode( 'http://ads.reduxframework.com/api/index.php?js&g&1&v=2' ) . '&proxy=' . urlencode( $base ) . '';
         return Redux_Functions::tru( $url, $opt_name );
     }
 
     private static function scan_template_files( $template_path ) {
+
         $files  = scandir( $template_path );
         $result = array();
 
         if ( $files ) {
             foreach ( $files as $key => $value ) {
-                if ( ! in_array( $value, array( ".", ".." ) ) ) {
+                if ( ! in_array( $value, array( '.', '..' ) ) ) {
                     if ( is_dir( $template_path . DIRECTORY_SEPARATOR . $value ) ) {
                         $sub_files = redux_scan_template_files( $template_path . DIRECTORY_SEPARATOR . $value );
                         foreach ( $sub_files as $sub_file ) {
@@ -626,6 +632,7 @@ class Redux_Helpers {
         }
 
         return $result;
+
     }
 
     private static function get_template_version( $file ) {
@@ -645,7 +652,7 @@ class Redux_Helpers {
         fclose( $fp );
 
         // Make sure we catch CR-only line endings.
-        $file_data = str_replace( "\r", "\n", $file_data );
+        $file_data = str_replace( '\r', '\n', $file_data );
         $version   = '';
 
         if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( '@version', '/' ) . '(.*)$/mi', $file_data, $match ) && $match[1] ) {
@@ -656,6 +663,7 @@ class Redux_Helpers {
     }
 
     private static function let_to_num( $size ) {
+
         $l   = substr( $size, - 1 );
         $ret = substr( $size, 0, - 1 );
 
@@ -673,7 +681,7 @@ class Redux_Helpers {
         }
 
         return $ret;
+
     }
 
 }
-endif;

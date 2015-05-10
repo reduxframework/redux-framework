@@ -46,9 +46,6 @@ require_once( dirname( __FILE__ ) . '/inc/class.redux_cdn.php' );
 // Redux API class  :)
 require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
 
-// General helper functions
-require_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
-
 // General functions
 require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
 require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
