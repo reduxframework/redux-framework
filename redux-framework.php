@@ -31,6 +31,35 @@ if ( ! defined( 'ABSPATH' ) ) {
     die;
 }
 
+/**
+ * The Redux framework class autoloader.
+ * Finds the path to a class that we're requiring and includes the file.
+ */
+function redux_autoload_classes( $class_name ) {
+
+    // No need to procedd if the class already exists
+    if ( class_exists( $class_name ) ) {
+        return;
+    }
+
+	if ( 0 === stripos( $class_name, 'Redux' ) ) {
+
+        $foldername = ( 0 === stripos( $class_name, 'Redux_Field_' ) )      ? 'fields' : '';
+		$foldername = ( 0 === stripos( $class_name, 'Redux_Validation_' ) ) ? 'validation'  : $foldername;
+
+		$foldername = ( '' != $foldername ) ? $foldername . DIRECTORY_SEPARATOR : '';
+
+		$class_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . $foldername . 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
+		if ( file_exists( $class_path ) ) {
+			include $class_path;
+		}
+
+	}
+
+}
+// Run the autoloader
+spl_autoload_register( 'redux_autoload_classes' );
+
 // Require the main plugin class
 require_once( plugin_dir_path( __FILE__ ) . 'class.redux-plugin.php' );
 
