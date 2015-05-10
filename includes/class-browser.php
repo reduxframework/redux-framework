@@ -108,8 +108,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'Browser' ) ) :
-
 /**
  * Browser detection class
  *
@@ -1191,4 +1189,3 @@ class Browser {
         }
     }
 }
-endif;
