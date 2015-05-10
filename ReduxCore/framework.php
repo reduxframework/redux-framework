@@ -632,7 +632,6 @@ class ReduxFramework {
 // get_instance()
 
     private function _tracking() {
-        require_once( dirname( __FILE__ ) . '/inc/tracking.php' );
         $tracking = Redux_Tracking::get_instance();
         $tracking->load( $this );
     }

@@ -13,7 +13,6 @@ if ( ! class_exists( 'ReduxFramework' ) ) {
  * NOTE: this functionality is opt-in. Disabling the tracking in the settings or saying no when asked will cause
  * this file to not even be loaded.
  */
-if ( ! class_exists( 'Redux_Tracking' ) ) :
 
 /**
  * Class Redux_Tracking
@@ -451,8 +450,6 @@ class Redux_Tracking {
 
 }
 
-Redux_Tracking::get_instance();
-
 /**
  * Adds tracking parameters for Redux settings. Outside of the main class as the class could also be in use in other ways.
  *
@@ -495,5 +492,3 @@ function redux_allow_tracking_callback() {
 }
 
 add_action( 'wp_ajax_redux_allow_tracking', 'redux_allow_tracking_callback' );
-
-endif;
