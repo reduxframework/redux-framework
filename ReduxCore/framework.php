@@ -47,6 +47,8 @@ require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
 require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
 require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
 
+require_once( REDUX_PATH . '/includes/functions.php' );
+
 // ThemeCheck checks
 new Redux_ThemeCheck();
 
