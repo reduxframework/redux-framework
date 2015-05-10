@@ -38,7 +38,7 @@ if ( class_exists( 'Redux_Framework_Instances' ) ) {
 }
 
 // Don't duplicate me!
-if ( ! class_exists( 'ReduxFramework' ) ) :
+if ( ! class_exists( 'ReduxFramework' ) ) {
 
 // Redux API class  :)
 Redux::load();
@@ -3796,4 +3796,4 @@ class ReduxFramework {
  * @param null
  */
 do_action( 'redux/init', ReduxFramework::init() );
-endif; // class_exists('ReduxFramework')
+} // class_exists('ReduxFramework')
