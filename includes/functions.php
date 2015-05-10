@@ -70,7 +70,7 @@ function redux_allow_tracking_callback() {
     if ( wp_verify_nonce( $_REQUEST['nonce'], 'redux_activate_tracking' ) ) {
         $options = get_option( 'redux-framework-tracking' );
 
-        if ( $_REQUEST['allow_tracking'] == "tour" ) {
+        if ( 'tour' == $_REQUEST['allow_tracking'] ) {
             $options['tour'] = 1;
         } else {
             $options['allow_tracking'] = $_REQUEST['allow_tracking'];
