@@ -45,7 +45,8 @@ Redux::load();
 
 // General functions
 require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
-require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
+
+new Redux_P();
 
 require_once( REDUX_PATH . '/includes/functions.php' );
 
