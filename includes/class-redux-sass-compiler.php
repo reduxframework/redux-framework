@@ -159,7 +159,6 @@ class Redux_Sass_Compiler {
 
                 if ( ! class_exists( 'scssc' ) && ! isset( $GLOBALS['redux_scss_compiler'] ) ) {
                     $GLOBALS['redux_scss_compiler'] = true;
-                    require( 'scssphp/scss.inc.php' );
                 }
 
                 $scss = new scssc();
@@ -224,7 +223,6 @@ class Redux_Sass_Compiler {
         if ( ! class_exists( 'scssc' ) && ! isset( $GLOBALS['redux_scss_compiler'] ) ) {
 
             $GLOBALS['redux_scss_compiler'] = true;
-            require( 'scssphp/scss.inc.php' );
 
         }
 
