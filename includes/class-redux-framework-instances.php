@@ -38,12 +38,11 @@ class Redux_Framework_Instances {
         if ( is_null( self::$instance ) ) {
             self::$instance = new self();
         }
-
-        if ( $opt_name && ! empty( self::$instances[ $opt_name ] ) ) {
-            return self::$instances[ $opt_name ];
+        if ( $opt_name && ! empty( self::$instances[$opt_name] ) ) {
+            return self::$instances[$opt_name];
         }
-
         return self::$instance;
+
     }
 
     /**
@@ -63,12 +62,11 @@ class Redux_Framework_Instances {
         add_action( 'wp_ajax_nopriv_' . $hash, array( $this, 'tracking_arg' ) );
         add_action( 'wp_ajax_' . $hash, array( $this, 'tracking_arg' ) );
 
-        if (!class_exists('Redux_Tracking') || !method_exists('Redux_Tracking', 'trackingObject')) {
+        if ( ! class_exists( 'Redux_Tracking' ) || ! method_exists( 'Redux_Tracking', 'trackingObject' ) ) {
             $hash = md5( md5( AUTH_KEY . SECURE_AUTH_KEY . '-redux' ) . '-support' );
             add_action( 'wp_ajax_nopriv_' . $hash, array( $this, 'support_args' ) );
             add_action( 'wp_ajax_' . $hash, array( $this, 'support_args' ) );
         }
-
 
     }
 
@@ -103,34 +101,31 @@ class Redux_Framework_Instances {
         header( 'Cache-Control: no-store, no-cache, must-revalidate' );
         header( 'Cache-Control: post-check=0, pre-check=0', false );
         header( 'Pragma: no-cache' );
+
         $instances = Redux_Framework_Instances::get_all_instances();
 
         if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) {
+
             if ( is_array( $instances ) && ! empty( $instances ) ) {
                 foreach ( $instances as $opt_name => $data ) {
                     if ( md5( $opt_name . '-debug' ) == $_REQUEST['i'] ) {
-                        $array = $instances[ $opt_name ];
+                        $array = $instances[$opt_name];
                     }
-                    if ($data->args['dev_mode']) {
+                    if ( $data->args['dev_mode'] ) {
                         $this->options['dev_mode'] = $data->args['dev_mode'];
                     }
                 }
             }
+
             if ( isset( $array ) ) {
                 if ( isset( $array->extensions ) && is_array( $array->extensions ) && ! empty( $array->extensions ) ) {
                     foreach ( $array->extensions as $key => $extension ) {
-                        if ( isset( $extension->$version ) ) {
-                            $array->extensions[ $key ] = $extension->$version;
-                        } else {
-                            $array->extensions[ $key ] = true;
-                        }
+                        $array->extensions[$key] = ( isset( $extension->$version ) ) ? $extension->$version : true;
                     }
                 }
-
                 if ( isset( $array->import_export ) ) {
                     unset( $array->import_export );
                 }
-
                 if ( isset( $array->debug ) ) {
                     unset( $array->debug );
                 }
@@ -139,6 +134,7 @@ class Redux_Framework_Instances {
             }
 
         } else {
+
             $array = Redux_Helpers::trackingObject();
             if ( is_array( $instances ) && ! empty( $instances ) ) {
                 $array['instances'] = array();
@@ -147,10 +143,12 @@ class Redux_Framework_Instances {
                 }
             }
             $array['key'] = md5( AUTH_KEY . SECURE_AUTH_KEY );
+
         }
 
         echo @json_encode( $array, true );
         die();
+
     }
 
     function capture( $ReduxFramework ) {
@@ -158,9 +156,12 @@ class Redux_Framework_Instances {
     }
 
     private function store( $ReduxFramework ) {
+
         if ( $ReduxFramework instanceof ReduxFramework ) {
             $key                     = $ReduxFramework->args['opt_name'];
-            self::$instances[ $key ] = $ReduxFramework;
+            self::$instances[$key] = $ReduxFramework;
         }
+
     }
+
 }
