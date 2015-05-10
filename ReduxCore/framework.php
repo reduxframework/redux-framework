@@ -43,9 +43,6 @@ if ( ! class_exists( 'ReduxFramework' ) ) :
 // Redux API class  :)
 Redux::load();
 
-// General functions
-require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
-
 new Redux_P();
 
 require_once( REDUX_PATH . '/includes/functions.php' );
