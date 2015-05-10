@@ -31,7 +31,7 @@ if ( has_action( 'ecpt_field_options_' ) ) {
     }
 }
 
-require_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
+require_once( REDUX_PATH . '/includes/lib-redux-instances.php' );
 
 if ( class_exists( 'Redux_Framework_Instances' ) ) {
     add_action( 'redux/init', 'Redux_Framework_Instances::get_instance' );
