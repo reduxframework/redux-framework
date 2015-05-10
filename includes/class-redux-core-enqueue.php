@@ -4,24 +4,26 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'reduxCoreEnqueue' ) ) :
+class Redux_Core_Enqueue {
 
-class reduxCoreEnqueue {
     public $parent = null;
 
     private $min = '';
     private $timestamp = '';
 
     public function __construct( $parent ) {
-        $this->parent = $parent;
 
+        $this->parent = $parent;
         Redux_Functions::$_parent = $parent;
+
     }
 
     public function init() {
+
         $this->min = Redux_Functions::isMin();
 
         $this->timestamp = ReduxFramework::$_version;
+
         if ( $this->parent->args['dev_mode'] ) {
             $this->timestamp .= '.' . time();
         }
@@ -48,6 +50,7 @@ class reduxCoreEnqueue {
          * action 'redux/page/{opt_name}/enqueue'
          */
         do_action( "redux/page/{$this->parent->args['opt_name']}/enqueue" );
+
     }
 
     private function register_styles() {
@@ -79,10 +82,7 @@ class reduxCoreEnqueue {
         //*****************************************************************
         // Select2 CSS
         //*****************************************************************
-        $css_file = 'select2.min.css';
-        if ($this->parent->args['dev_mode']) {
-            $css_file = 'select2.css';
-        }
+        $css_file = ( $this->parent->args['dev_mode'] ) ? 'select2.css' : 'select2.min.css';
 
         Redux_CDN::register_style(
             'select2-css',
@@ -95,10 +95,7 @@ class reduxCoreEnqueue {
         //*****************************************************************
         // Spectrum CSS
         //*****************************************************************
-        $css_file = 'spectrum.min.css';
-        if ($this->parent->args['dev_mode']) {
-            $css_file = 'spectrum.css';
-        }
+        $css_file = ( $this->parent->args['dev_mode'] ) ? 'spectrum.css' : 'spectrum.min.css';
 
         Redux_CDN::register_style(
             'redux-spectrum-css',
@@ -122,10 +119,7 @@ class reduxCoreEnqueue {
         //*****************************************************************
         // QTip CSS
         //*****************************************************************
-        $css_file = 'jquery.qtip.min.css';
-        if ($this->parent->args['dev_mode']) {
-            $css_file = 'jquery.qtip.css';
-        }
+        $css_file = ( $this->parent->args['dev_mode'] ) ? 'jquery.qtip.css' : 'jquery.qtip.min.css';
 
         Redux_CDN::enqueue_style(
             'qtip-css',
@@ -174,6 +168,7 @@ class reduxCoreEnqueue {
                 time(),
                 'all'
             );
+
         }
 
         //*****************************************************************
@@ -213,10 +208,7 @@ class reduxCoreEnqueue {
         //*****************************************************************
         // Select2 JS
         //*****************************************************************
-        $js_file = 'select2.min.js';
-        if ($this->parent->args['dev_mode']) {
-            $js_file = 'select2.js';
-        }
+        $js_file = ( $this->parent->args['dev_mode'] ) ? 'select2.js' : 'select2.min.js';
 
         Redux_CDN::register_script(
             'select2-js',
@@ -229,10 +221,7 @@ class reduxCoreEnqueue {
         //*****************************************************************
         // QTip JS
         //*****************************************************************
-        $js_file = 'jquery.qtip.min.js';
-        if ($this->parent->args['dev_mode']) {
-            $js_file = 'jquery.qtip.js';
-        }
+        $js_file = ( $this->parent->args['dev_mode'] ) ? 'jquery.qtip.js' : 'jquery.qtip.min.js';
 
         Redux_CDN::enqueue_script(
             'qtip-js',
@@ -245,10 +234,7 @@ class reduxCoreEnqueue {
         //*****************************************************************
         // Spectrum JS
         //*****************************************************************
-        $js_file = 'spectrum.min.js';
-        if ($this->parent->args['dev_mode']) {
-            $js_file = 'spectrum.js';
-        }
+        $js_file = ( $this->parent->args['dev_mode'] ) ? 'spectrum.js' : 'spectrum.min.js';
 
         Redux_CDN::register_script(
             'redux-spectrum-js',
@@ -296,9 +282,13 @@ class reduxCoreEnqueue {
     }
 
     private function enqueue_fields() {
+
         foreach ( $this->parent->sections as $section ) {
+
             if ( isset( $section['fields'] ) ) {
+
                 foreach ( $section['fields'] as $field ) {
+
                     // TODO AFTER GROUP WORKS - Revert IF below
                     // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
                     if ( isset( $field['type'] ) && $field['type'] != 'callback' ) {
@@ -313,6 +303,7 @@ class reduxCoreEnqueue {
                          * @param array $field        field config data
                          */
                         $class_file = apply_filters( "redux/{$this->parent->args['opt_name']}/field/class/{$field['type']}", ReduxFramework::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
+
                         if ( $class_file ) {
                             if ( ! class_exists( $field_class ) ) {
                                 if ( file_exists( $class_file ) ) {
@@ -341,21 +332,30 @@ class reduxCoreEnqueue {
                                 }
 
                                 unset( $theField );
+
                             }
+
                         }
+
                     }
+
                 }
+
             }
+
         }
+
     }
 
     public function get_warnings_and_errors_array() {
+
         // Construct the errors array.
         if ( isset( $this->parent->transients['last_save_mode'] ) && ! empty( $this->parent->transients['notices']['errors'] ) ) {
             $theTotal  = 0;
             $theErrors = array();
 
             foreach ( $this->parent->transients['notices']['errors'] as $error ) {
+
                 $theErrors[ $error['section_id'] ]['errors'][] = $error;
 
                 if ( ! isset( $theErrors[ $error['section_id'] ]['total'] ) ) {
@@ -364,18 +364,22 @@ class reduxCoreEnqueue {
 
                 $theErrors[ $error['section_id'] ]['total'] ++;
                 $theTotal ++;
+
             }
 
             $this->parent->localize_data['errors'] = array( 'total' => $theTotal, 'errors' => $theErrors );
             unset( $this->parent->transients['notices']['errors'] );
+
         }
 
         // Construct the warnings array.
         if ( isset( $this->parent->transients['last_save_mode'] ) && ! empty( $this->parent->transients['notices']['warnings'] ) ) {
+
             $theTotal    = 0;
             $theWarnings = array();
 
             foreach ( $this->parent->transients['notices']['warnings'] as $warning ) {
+
                 $theWarnings[ $warning['section_id'] ]['warnings'][] = $warning;
 
                 if ( ! isset( $theWarnings[ $warning['section_id'] ]['total'] ) ) {
@@ -384,6 +388,7 @@ class reduxCoreEnqueue {
 
                 $theWarnings[ $warning['section_id'] ]['total'] ++;
                 $theTotal ++;
+
             }
 
             unset( $this->parent->transients['notices']['warnings'] );
@@ -391,14 +396,19 @@ class reduxCoreEnqueue {
                 'total'    => $theTotal,
                 'warnings' => $theWarnings
             );
+
         }
 
         if ( empty( $this->parent->transients['notices'] ) ) {
             unset( $this->parent->transients['notices'] );
         }
+
     }
 
     private function set_localized_data() {
+
+        global $pagenow;
+
         $this->parent->localize_data['required']       = $this->parent->required;
         $this->parent->localize_data['fonts']          = $this->parent->fonts;
         $this->parent->localize_data['required_child'] = $this->parent->required_child;
@@ -420,17 +430,21 @@ class reduxCoreEnqueue {
 
         // Make sure the children are all hidden properly.
         foreach ( $this->parent->fields as $key => $value ) {
+
             if ( in_array( $key, $this->parent->fieldsHidden ) ) {
+
                 foreach ( $value as $k => $v ) {
                     if ( ! in_array( $k, $this->parent->fieldsHidden ) ) {
                         $this->parent->fieldsHidden[] = $k;
                         $this->parent->folds[ $k ]    = "hide";
                     }
                 }
+
             }
+
         }
 
-        if ( isset( $this->parent->args['dev_mode'] ) && $this->parent->args['dev_mode'] == true ) {
+        if ( isset( $this->parent->args['dev_mode'] ) && true == $this->parent->args['dev_mode'] ) {
             $nonce                               = wp_create_nonce( 'redux-ads-nonce' );
             $base                                = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
             $this->parent->localize_data['rAds'] = Redux_Helpers::rURL_fix( $base, $this->parent->args['opt_name'] );
@@ -471,7 +485,7 @@ class reduxCoreEnqueue {
          * @param       string        preset confirm string
          */
         $preset_confirm = apply_filters( "redux/{$this->parent->args['opt_name']}/localize/preset", __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ) );
-        global $pagenow;
+
         $this->parent->localize_data['args'] = array(
             'save_pending'          => $save_pending,
             'reset_confirm'         => $reset_all,
@@ -504,5 +518,5 @@ class reduxCoreEnqueue {
         wp_enqueue_script( 'redux-js' ); // Enque the JS now
 
     }
+
 }
-endif;

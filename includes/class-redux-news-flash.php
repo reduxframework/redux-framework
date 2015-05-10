@@ -6,9 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'reduxNewsflash' ) ) :
-
-class reduxNewsflash {
+class Redux_News_Flash {
     private $parent         = null;
     private $notice_json    = '';
     private $server_file    = '';
@@ -135,5 +133,3 @@ class reduxNewsflash {
         }
     }
 }
-
-endif;

@@ -4,14 +4,12 @@ if ( !defined ( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'reduxCoreRequired' ) ) :
-class reduxCoreRequired {
+class Redux_Core_Required {
 	public $parent      = null;
 
 	public function __construct ($parent) {
 		$this->parent = $parent;
 		Redux_Functions::$_parent = $parent;
-
 
 		/**
 		 * action 'redux/page/{opt_name}/'
@@ -21,4 +19,3 @@ class reduxCoreRequired {
 	}
 
 }
-endif;

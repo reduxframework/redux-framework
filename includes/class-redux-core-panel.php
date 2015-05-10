@@ -4,11 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'reduxCorePanel' ) ) :
 /**
- * Class reduxCorePanel
+ * Class Redux_Core_Panel
  */
-class reduxCorePanel {
+class Redux_Core_Panel {
     /**
      * @var null
      */
@@ -357,4 +356,3 @@ class reduxCorePanel {
     }
 
 }
-endif;
