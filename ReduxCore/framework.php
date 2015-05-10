@@ -51,7 +51,7 @@ require_once( REDUX_PATH . '/includes/functions.php' );
 new Redux_ThemeCheck();
 
 // Welcome
-require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
+new Redux_Welcome();
 
 /**
  * Main ReduxFramework class

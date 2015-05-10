@@ -554,5 +554,3 @@ class Redux_Welcome {
         return $contributors;
     }
 }
-
-new Redux_Welcome();
