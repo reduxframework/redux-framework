@@ -499,7 +499,7 @@ class Redux_Helpers {
             $sysinfo['plugins'][ $plugin_name ] = $plugin_data;
         }
 
-        $redux = ReduxFrameworkInstances::get_all_instances();
+        $redux = Redux_Framework_Instances::get_all_instances();
 
         $sysinfo['redux_instances'] = array();
 

@@ -404,7 +404,7 @@ class Redux_Tracking {
         header( 'Cache-Control: no-store, no-cache, must-revalidate' );
         header( 'Cache-Control: post-check=0, pre-check=0', false );
         header( 'Pragma: no-cache' );
-        $instances = ReduxFrameworkInstances::get_all_instances();
+        $instances = Redux_Framework_Instances::get_all_instances();
 
         if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) {
             if ( is_array( $instances ) && ! empty( $instances ) ) {

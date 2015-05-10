@@ -8,10 +8,10 @@
  * @package     Redux_Framework
  * @subpackage  Core
  */
-class ReduxFrameworkInstances {
+class Redux_Framework_Instances {
 
     /**
-     * ReduxFrameworkInstances
+     * Redux_Framework_Instances
      *
      * @var object
      */
@@ -26,7 +26,7 @@ class ReduxFrameworkInstances {
 
     /**
      * Get Instance
-     * Get ReduxFrameworkInstances instance
+     * Get Redux_Framework_Instances instance
      * OR an instance of ReduxFramework by [opt_name]
      *
      * @param  string $opt_name the defined opt_name
@@ -103,7 +103,7 @@ class ReduxFrameworkInstances {
         header( 'Cache-Control: no-store, no-cache, must-revalidate' );
         header( 'Cache-Control: post-check=0, pre-check=0', false );
         header( 'Pragma: no-cache' );
-        $instances = ReduxFrameworkInstances::get_all_instances();
+        $instances = Redux_Framework_Instances::get_all_instances();
 
         if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) {
             if ( is_array( $instances ) && ! empty( $instances ) ) {

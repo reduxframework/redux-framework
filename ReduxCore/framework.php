@@ -31,14 +31,14 @@ if ( has_action( 'ecpt_field_options_' ) ) {
     }
 }
 
-if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
+if ( ! class_exists( 'Redux_Framework_Instances' ) ) {
     // Instance Container
     require_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
     require_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
 }
 
-if ( class_exists( 'ReduxFrameworkInstances' ) ) {
-    add_action( 'redux/init', 'ReduxFrameworkInstances::get_instance' );
+if ( class_exists( 'Redux_Framework_Instances' ) ) {
+    add_action( 'redux/init', 'Redux_Framework_Instances::get_instance' );
 }
 
 // Don't duplicate me!
@@ -2753,7 +2753,7 @@ class ReduxFramework {
             ) );
             die();
         }
-        $redux = ReduxFrameworkInstances::get_instance( $_POST['opt_name'] );
+        $redux = Redux_Framework_Instances::get_instance( $_POST['opt_name'] );
 
         if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
 

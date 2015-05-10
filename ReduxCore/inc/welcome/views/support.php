@@ -78,7 +78,7 @@
                     </p>
                     <?php
 
-                        $redux = ReduxFrameworkInstances::get_all_instances();
+                        $redux = Redux_Framework_Instances::get_all_instances();
                         if ( ! empty( $redux ) ) {
                             echo '<code style="line-height: 30px;">';
                             foreach ( $redux as $panel ) {

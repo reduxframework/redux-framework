@@ -96,7 +96,7 @@ class Redux {
             return;
         }
 
-        $check = ReduxFrameworkInstances::get_instance( $opt_name );
+        $check = Redux_Framework_Instances::get_instance( $opt_name );
         if ( isset( $check->apiHasRun ) ) {
             return;
         }
@@ -433,7 +433,7 @@ class Redux {
     }
 
     public static function getAllExtensions() {
-        $redux = ReduxFrameworkInstances::get_all_instances();
+        $redux = Redux_Framework_Instances::get_all_instances();
         foreach ( $redux as $instance ) {
             if ( ! empty( self::$uses_extensions[ $instance['args']['opt_name'] ] ) ) {
                 continue;
@@ -450,7 +450,7 @@ class Redux {
             return;
         }
         if ( empty( $instance ) ) {
-            $instance = ReduxFrameworkInstances::get_instance( $opt_name );
+            $instance = Redux_Framework_Instances::get_instance( $opt_name );
         }
         if ( empty( $instance ) || empty( $instance->extensions ) ) {
             return;
