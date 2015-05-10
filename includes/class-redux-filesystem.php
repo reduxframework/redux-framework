@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'Redux_Filesystem' ) ) :
 class Redux_Filesystem {
+
     private $parent = null;
 
     private $creds = array();
@@ -18,6 +18,7 @@ class Redux_Filesystem {
     }
 
     public function ftp_form() {
+
         if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
             echo '<div class="wrap"><div class="error"><p>';
             echo __( 'Unable to modify required files. Please ensure that', 'redux-framework' );
@@ -25,9 +26,11 @@ class Redux_Filesystem {
             echo __( 'has the proper read/write permissions or enter your FTP information below.', 'redux-framework' );
             echo '</p></div><h2></h2>' . $this->parent->ftp_form . '</div>';
         }
+
     }
 
     function filesystem_init( $form_url, $method = '', $context = false, $fields = null ) {
+
         global $wp_filesystem;
         if ( ! empty( $this->creds ) ) {
             return true;
@@ -62,6 +65,7 @@ class Redux_Filesystem {
         }
 
         return true;
+
     }
 
     public function execute( $action, $file = '', $params = '' ) {
@@ -90,6 +94,7 @@ class Redux_Filesystem {
         $this->filesystem_init( $url, 'direct', dirname( $file ) );
 
         return $this->do_action( $action, $file, $params );
+
     }
 
     public function do_action( $action, $file = '', $params = '' ) {
@@ -101,13 +106,10 @@ class Redux_Filesystem {
         global $wp_filesystem;
 
         if ( ! isset( $params['chmod'] ) || ( isset( $params['chmod'] ) && empty( $params['chmod'] ) ) ) {
-            if ( defined( 'FS_CHMOD_FILE' ) ) {
-                $chmod = FS_CHMOD_FILE;
-            } else {
-                $chmod = 0644;
-            }
+            $chmod = ( defined( 'FS_CHMOD_FILE' ) ) ? FS_CHMOD_FILE : 0644;
         }
         $res = false;
+
         if ( ! isset( $recursive ) ) {
             $recursive = false;
         }
@@ -115,14 +117,10 @@ class Redux_Filesystem {
         //$target_dir = $wp_filesystem->find_folder( dirname( $file ) );
 
         // Do unique stuff
-        if ( $action == 'mkdir' ) {
+        if ( 'mkdir' == $action ) {
 
-            if ( defined( 'FS_CHMOD_DIR' ) ) {
-                $chmod = FS_CHMOD_DIR;
-            } else {
-                $chmod = 0755;
-            }
-            $res = $wp_filesystem->mkdir( $file );
+            $chmod = ( defined( 'FS_CHMOD_DIR' ) ) ? FS_CHMOD_DIR : 0755;
+            $res   = $wp_filesystem->mkdir( $file );
             if ( ! $res ) {
                 wp_mkdir_p( $file );
 
@@ -132,9 +130,13 @@ class Redux_Filesystem {
                     $res = file_exists( $file );
                 }
             }
-        } elseif ( $action == 'rmdir' ) {
+
+        } elseif ( 'rmdir' == $action ) {
+
             $res = $wp_filesystem->rmdir( $file, $recursive );
-        } elseif ( $action == 'copy' && ! isset( $this->filesystem->killswitch ) ) {
+
+        } elseif ( 'copy' == $action && ! isset( $this->filesystem->killswitch ) ) {
+
             if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
                 $res = copy( $file, $destination );
                 if ( $res ) {
@@ -143,18 +145,24 @@ class Redux_Filesystem {
             } else {
                 $res = $wp_filesystem->copy( $file, $destination, $overwrite, $chmod );
             }
-        } elseif ( $action == 'move' && ! isset( $this->filesystem->killswitch ) ) {
+
+        } elseif ( 'move' == $action && ! isset( $this->filesystem->killswitch ) ) {
+
             $res = $wp_filesystem->copy( $file, $destination, $overwrite );
-        } elseif ( $action == 'delete' ) {
+
+        } elseif ( 'delete' == $action ) {
+
             $res = $wp_filesystem->delete( $file, $recursive );
-        } elseif ( $action == 'rmdir' ) {
-            $res = $wp_filesystem->rmdir( $file, $recursive );
-        } elseif ( $action == 'dirlist' ) {
+
+        } elseif ( 'dirlist' == $action ) {
+
             if ( ! isset( $include_hidden ) ) {
                 $include_hidden = true;
             }
             $res = $wp_filesystem->dirlist( $file, $include_hidden, $recursive );
-        } elseif ( $action == 'put_contents' && ! isset( $this->filesystem->killswitch ) ) {
+
+        } elseif ( 'put_contents' == $action && ! isset( $this->filesystem->killswitch ) ) {
+
             // Write a string to a file
             if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
                 $res = file_put_contents( $file, $content, $chmod );
@@ -164,15 +172,20 @@ class Redux_Filesystem {
             } else {
                 $res = $wp_filesystem->put_contents( $file, $content, $chmod );
             }
-        } elseif ( $action == 'chown' ) {
+
+        } elseif ( 'chown' == $action ) {
+
             // Changes file owner
             if ( isset( $owner ) && ! empty( $owner ) ) {
                 $res = $wp_filesystem->chmod( $file, $chmod, $recursive );
             }
-        } elseif ( $action == 'owner' ) {
+
+        } elseif ( 'owner' == $action ) {
+
             // Gets file owner
             $res = $wp_filesystem->owner( $file );
-        } elseif ( $action == 'chmod' ) {
+
+        } elseif ( 'chmod' == $action ) {
 
             if ( ! isset( $params['chmod'] ) || ( isset( $params['chmod'] ) && empty( $params['chmod'] ) ) ) {
                 $chmod = false;
@@ -180,36 +193,43 @@ class Redux_Filesystem {
 
             $res = $wp_filesystem->chmod( $file, $chmod, $recursive );
 
-        } elseif ( $action == 'get_contents' ) {
+        } elseif ( 'get_contents' == $action ) {
+
             // Reads entire file into a string
             if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
                 $res = file_get_contents( $file );
             } else {
                 $res = $wp_filesystem->get_contents( $file );
             }
-        } elseif ( $action == 'get_contents_array' ) {
+
+        } elseif ( 'get_contents_array' == $action ) {
+
             // Reads entire file into an array
             $res = $wp_filesystem->get_contents_array( $file );
-        } elseif ( $action == 'object' ) {
+
+        } elseif ( 'object' == $action ) {
+
             $res = $wp_filesystem;
-        } elseif ( $action == 'unzip' ) {
+
+        } elseif ( 'unzip' == $action ) {
+
             $unzipfile = unzip_file( $file, $destination );
             if ( $unzipfile ) {
                 $res = true;
             }
+
         }
+
         if ( isset( $res ) && ! $res ) {
             $this->killswitch = true;
         }
 
         if ( ! $res ) {
-            add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array(
-                $this,
-                'ftp_form'
-            ) );
+            add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array( $this, 'ftp_form' ) );
         }
 
         return $res;
+
     }
+
 }
-endif;
