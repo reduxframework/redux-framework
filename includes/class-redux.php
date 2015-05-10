@@ -22,14 +22,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Redux {
 
-    public static $fields = array();
-    public static $sections = array();
-    public static $help = array();
-    public static $args = array();
-    public static $priority = array();
-    public static $errors = array();
-    public static $init = array();
-    public static $extensions = array();
+    public static $fields          = array();
+    public static $sections        = array();
+    public static $help            = array();
+    public static $args            = array();
+    public static $priority        = array();
+    public static $errors          = array();
+    public static $init            = array();
+    public static $extensions      = array();
     public static $uses_extensions = array();
 
     public function __call( $closure, $args ) {
@@ -45,16 +45,21 @@ class Redux {
         add_action( 'init', array( 'Redux', 'createRedux' ) );
     }
 
-    public static function init( $opt_name = "" ) {
+    public static function init( $opt_name = '' ) {
+
         if ( ! empty( $opt_name ) ) {
             self::loadRedux( $opt_name );
             remove_action( 'setup_theme', array( 'Redux', 'createRedux' ) );
         }
+
     }
 
     public static function loadExtensions( $ReduxFramework ) {
-        if ( $instanceExtensions = self::getExtensions( $ReduxFramework->args['opt_name'], "" ) ) {
+
+        if ( $instanceExtensions = self::getExtensions( $ReduxFramework->args['opt_name'], '' ) ) {
+
             foreach ( $instanceExtensions as $name => $extension ) {
+
                 if ( ! class_exists( $extension['class'] ) ) {
                     // In case you wanted override your override, hah.
                     $extension['path'] = apply_filters( 'redux/extension/' . $ReduxFramework->args['opt_name'] . '/' . $name, $extension['path'] );
@@ -62,72 +67,80 @@ class Redux {
                         require_once( $extension['path'] );
                     }
                 }
-                if ( ! isset( $ReduxFramework->extensions[ $name ] ) ) {
+                if ( ! isset( $ReduxFramework->extensions[$name] ) ) {
                     if ( class_exists( $extension['class'] ) ) {
-                        $ReduxFramework->extensions[ $name ] = new $extension['class']( $ReduxFramework );
+                        $ReduxFramework->extensions[$name] = new $extension['class']( $ReduxFramework );
                     } else {
                         echo '<div id="message" class="error"><p>No class named <strong>' . $extension['class'] . '</strong> exists. Please verify your extension path.</p></div>';
                     }
 
                 }
+
             }
+
         }
+
     }
 
     public static function extensionPath( $extension, $folder = true ) {
-        if ( ! isset( Redux::$extensions[ $extension ] ) ) {
+
+        if ( ! isset( Redux::$extensions[$extension] ) ) {
             return;
         }
-        $path = end( Redux::$extensions[ $extension ] );
+        $path = end( Redux::$extensions[$extension] );
         if ( ! $folder ) {
             return $path;
         }
 
         return str_replace( 'extension_' . $extension . '.php', '', $path );
+
     }
 
 
-    public static function loadRedux( $opt_name = "" ) {
+    public static function loadRedux( $opt_name = '' ) {
 
         if ( empty( $opt_name ) ) {
             return;
         }
-
         $check = Redux_Framework_Instances::get_instance( $opt_name );
         if ( isset( $check->apiHasRun ) ) {
             return;
         }
-
         $args     = self::constructArgs( $opt_name );
         $sections = self::constructSections( $opt_name );
+
         if ( ! class_exists( 'ReduxFramework' ) ) {
             echo '<div id="message" class="error"><p>Redux Framework is <strong>not installed</strong>. Please install it.</p></div>';
-
             return;
         }
-        if ( isset( self::$uses_extensions[ $opt_name ] ) && ! empty( self::$uses_extensions[ $opt_name ] ) ) {
+
+        if ( isset( self::$uses_extensions[$opt_name] ) && ! empty( self::$uses_extensions[$opt_name] ) ) {
             add_action( "redux/extensions/{$opt_name}/before", array( 'Redux', 'loadExtensions' ), 0 );
         }
 
-        $redux                   = new ReduxFramework( $sections, $args );
-        $redux->apiHasRun        = 1;
-        self::$init[ $opt_name ] = 1;
+        $redux                 = new ReduxFramework( $sections, $args );
+        $redux->apiHasRun      = 1;
+        self::$init[$opt_name] = 1;
+
         if ( isset( $redux->args['opt_name'] ) && $redux->args['opt_name'] != $opt_name ) {
-            self::$init[ $redux->args['opt_name'] ] = 1;
+            self::$init[$redux->args['opt_name']] = 1;
         }
 
     }
 
     public static function createRedux() {
+
         foreach ( self::$sections as $opt_name => $theSections ) {
-            if ( ! self::$init[ $opt_name ] ) {
+            if ( ! self::$init[$opt_name] ) {
                 self::loadRedux( $opt_name );
             }
         }
+
     }
 
     public static function constructArgs( $opt_name ) {
-        $args = isset( self::$args[ $opt_name ] ) ? self::$args[ $opt_name ] : array();
+
+        $args = isset( self::$args[$opt_name] ) ? self::$args[$opt_name] : array();
 
         $args['opt_name'] = $opt_name;
         if ( ! isset( $args['menu_title'] ) ) {
@@ -141,84 +154,102 @@ class Redux {
         }
 
         return $args;
+
     }
 
     public static function constructSections( $opt_name ) {
-        $sections = array();
-        if ( ! isset( self::$sections[ $opt_name ] ) ) {
-            return $sections;
 
+        $sections = array();
+        if ( ! isset( self::$sections[$opt_name] ) ) {
+            return $sections;
         }
-        foreach ( self::$sections[ $opt_name ] as $section_id => $section ) {
+
+        foreach ( self::$sections[$opt_name] as $section_id => $section ) {
             $section['fields'] = self::constructFields( $opt_name, $section_id );
             $p                 = $section['priority'];
-            while ( isset( $sections[ $p ] ) ) {
+            while ( isset( $sections[$p] ) ) {
                 echo $p ++;
             }
-            $sections[ $p ] = $section;
+            $sections[$p] = $section;
         }
-        ksort( $sections );
 
+        ksort( $sections );
         return $sections;
+
     }
 
-    public static function constructFields( $opt_name = "", $section_id = "" ) {
+    public static function constructFields( $opt_name = '', $section_id = '' ) {
+
         $fields = array();
-        if ( ! empty( self::$fields[ $opt_name ] ) ) {
-            foreach ( self::$fields[ $opt_name ] as $key => $field ) {
-                if ( $field['section_id'] == $section_id ) {
+
+        if ( ! empty( self::$fields[$opt_name] ) ) {
+
+            foreach ( self::$fields[$opt_name] as $key => $field ) {
+                if ( $section_id == $field['section_id'] ) {
                     $p = $field['priority'];
-                    while ( isset( $fields[ $p ] ) ) {
+                    while ( isset( $fields[$p] ) ) {
                         echo $p ++;
                     }
-                    $fields[ $p ] = $field;
+                    $fields[$p] = $field;
                 }
             }
-        }
-        ksort( $fields );
 
+        }
+
+        ksort( $fields );
         return $fields;
+
     }
 
     public static function getSection( $opt_name = '', $id = '' ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! empty( $opt_name ) && ! empty( $id ) ) {
-            if ( ! isset( self::$sections[ $opt_name ][ $id ] ) ) {
+            if ( ! isset( self::$sections[$opt_name][$id] ) ) {
                 $id = strtolower( sanitize_html_class( $id ) );
             }
 
-            return isset( self::$sections[ $opt_name ][ $id ] ) ? self::$sections[ $opt_name ][ $id ] : false;
+            return isset( self::$sections[$opt_name][$id] ) ? self::$sections[$opt_name][$id] : false;
         }
 
         return false;
+
     }
 
     public static function setSections( $opt_name = '', $sections = array() ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! empty( $sections ) ) {
             foreach ( $sections as $section ) {
                 Redux::setSection( $opt_name, $section );
             }
         }
+
     }
 
     public static function setSection( $opt_name = '', $section = array() ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! isset( $section['id'] ) ) {
+
             $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
-            if ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
+            if ( isset( self::$sections[$opt_name][$section['id']] ) ) {
                 $orig = $section['id'];
                 $i    = 0;
-                while ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
+                while ( isset( self::$sections[$opt_name][$section['id']] ) ) {
                     $section['id'] = $orig . '_' . $i;
                 }
             }
+
         }
 
         if ( ! empty( $opt_name ) && is_array( $section ) && ! empty( $section ) ) {
-            if ( ! isset( $section['id'] ) && ! isset( $section['title'] ) ) {
-                self::$errors[ $opt_name ]['section']['missing_title'] = "Unable to create a section due to missing id and title.";
 
+            if ( ! isset( $section['id'] ) && ! isset( $section['title'] ) ) {
+                self::$errors[$opt_name]['section']['missing_title'] = __( 'Unable to create a section due to missing id and title.', 'redux-framework' );
                 return;
             }
             if ( ! isset( $section['priority'] ) ) {
@@ -230,16 +261,21 @@ class Redux {
                 }
                 unset( $section['fields'] );
             }
-            self::$sections[ $opt_name ][ $section['id'] ] = $section;
-        } else {
-            self::$errors[ $opt_name ]['section']['empty'] = "Unable to create a section due an empty section array or the section variable passed was not an array.";
+            self::$sections[$opt_name][$section['id']] = $section;
 
+        } else {
+
+            self::$errors[$opt_name]['section']['empty'] = __( 'Unable to create a section due an empty section array or the section variable passed was not an array.', 'redux-framework' );
             return;
+
         }
+
     }
 
-    public static function processFieldsArray( $opt_name = "", $section_id = "", $fields = array() ) {
+    public static function processFieldsArray( $opt_name = '', $section_id = '', $fields = array() ) {
+
         if ( ! empty( $opt_name ) && ! empty( $section_id ) && is_array( $fields ) && ! empty( $fields ) ) {
+
             foreach ( $fields as $field ) {
                 if ( ! is_array( $field ) ) {
                     continue;
@@ -247,19 +283,25 @@ class Redux {
                 $field['section_id'] = $section_id;
                 self::setField( $opt_name, $field );
             }
+
         }
+
     }
 
     public static function getField( $opt_name = '', $id = '' ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! empty( $opt_name ) && ! empty( $id ) ) {
-            return isset( self::$fields[ $opt_name ][ $id ] ) ? self::$fields[ $opt_name ][ $id ] : false;
+            return isset( self::$fields[$opt_name][$id] ) ? self::$fields[$opt_name][$id] : false;
         }
 
         return false;
+
     }
 
     public static function setField( $opt_name = '', $field = array() ) {
+
         self::check_opt_name( $opt_name );
 
         if ( ! empty( $opt_name ) && is_array( $field ) && ! empty( $field ) ) {
@@ -267,89 +309,106 @@ class Redux {
             if ( ! isset( $field['priority'] ) ) {
                 $field['priority'] = self::getPriority( $opt_name, 'fields' );
             }
-            self::$fields[ $opt_name ][ $field['id'] ] = $field;
+            self::$fields[$opt_name][$field['id']] = $field;
+
         }
+
     }
 
-    public static function setHelpTab( $opt_name = "", $tab = array() ) {
+    public static function setHelpTab( $opt_name = '', $tab = array() ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! empty( $opt_name ) && ! empty( $tab ) ) {
-            if ( ! isset( self::$args[ $opt_name ]['help_tabs'] ) ) {
-                self::$args[ $opt_name ]['help_tabs'] = array();
+
+            if ( ! isset( self::$args[$opt_name]['help_tabs'] ) ) {
+                self::$args[$opt_name]['help_tabs'] = array();
             }
             if ( isset( $tab['id'] ) ) {
-                self::$args[ $opt_name ]['help_tabs'][] = $tab;
+                self::$args[$opt_name]['help_tabs'][] = $tab;
             } else if ( is_array( end( $tab ) ) ) {
                 foreach ( $tab as $tab_item ) {
-                    self::$args[ $opt_name ]['help_tabs'][] = $tab_item;
+                    self::$args[$opt_name]['help_tabs'][] = $tab_item;
                 }
             }
+
         }
+
     }
 
-    public static function setHelpSidebar( $opt_name = "", $content = "" ) {
+    public static function setHelpSidebar( $opt_name = '', $content = '' ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! empty( $opt_name ) && ! empty( $content ) ) {
-            self::$args[ $opt_name ]['help_sidebar'] = $content;
+            self::$args[$opt_name]['help_sidebar'] = $content;
         }
+
     }
 
-    public static function setArgs( $opt_name = "", $args = array() ) {
+    public static function setArgs( $opt_name = '', $args = array() ) {
+
         self::check_opt_name( $opt_name );
+
         if ( ! empty( $opt_name ) && ! empty( $args ) && is_array( $args ) ) {
-            self::$args[ $opt_name ] = wp_parse_args( $args, self::$args[ $opt_name ] );
+            self::$args[$opt_name] = wp_parse_args( $args, self::$args[$opt_name] );
         }
+
     }
 
-    public static function getArgs( $opt_name = "" ) {
+    public static function getArgs( $opt_name = '' ) {
+
         self::check_opt_name( $opt_name );
-        if ( ! empty( $opt_name ) && ! empty( self::$args[ $opt_name ] ) ) {
-            return self::$args[ $opt_name ];
+
+        if ( ! empty( $opt_name ) && ! empty( self::$args[$opt_name] ) ) {
+            return self::$args[$opt_name];
         }
+
     }
 
-    public static function getArg( $opt_name = "", $key = "" ) {
+    public static function getArg( $opt_name = '', $key = '' ) {
+
         self::check_opt_name( $opt_name );
-        if ( ! empty( $opt_name ) && ! empty( $key ) && ! empty( self::$args[ $opt_name ] ) ) {
-            return self::$args[ $opt_name ][ $key ];
-        } else {
-            return;
-        }
+        return ( ! empty( $opt_name ) && ! empty( $key ) && ! empty( self::$args[$opt_name] ) ) ? self::$args[$opt_name][$key] : null;
+
     }
 
     public static function getPriority( $opt_name, $type ) {
-        $priority = self::$priority[ $opt_name ][ $type ];
-        self::$priority[ $opt_name ][ $type ] += 1;
 
+        $priority = self::$priority[$opt_name][$type];
+        self::$priority[$opt_name][$type] += 1;
         return $priority;
+
     }
 
-    public static function check_opt_name( $opt_name = "" ) {
+    public static function check_opt_name( $opt_name = '' ) {
+
         if ( empty( $opt_name ) || is_array( $opt_name ) ) {
             return;
         }
-        if ( ! isset( self::$args[ $opt_name ] ) ) {
-            self::$args[ $opt_name ]             = array();
-            self::$priority[ $opt_name ]['args'] = 1;
+        if ( ! isset( self::$args[$opt_name] ) ) {
+            self::$args[$opt_name]             = array();
+            self::$priority[$opt_name]['args'] = 1;
         }
-        if ( ! isset( self::$sections[ $opt_name ] ) ) {
-            self::$sections[ $opt_name ]             = array();
-            self::$priority[ $opt_name ]['sections'] = 1;
+        if ( ! isset( self::$sections[$opt_name] ) ) {
+            self::$sections[$opt_name]             = array();
+            self::$priority[$opt_name]['sections'] = 1;
         }
-        if ( ! isset( self::$fields[ $opt_name ] ) ) {
-            self::$fields[ $opt_name ]             = array();
-            self::$priority[ $opt_name ]['fields'] = 1;
+        if ( ! isset( self::$fields[$opt_name] ) ) {
+            self::$fields[$opt_name]             = array();
+            self::$priority[$opt_name]['fields'] = 1;
         }
-        if ( ! isset( self::$help[ $opt_name ] ) ) {
-            self::$help[ $opt_name ]             = array();
-            self::$priority[ $opt_name ]['help'] = 1;
+        if ( ! isset( self::$help[$opt_name] ) ) {
+            self::$help[$opt_name]             = array();
+            self::$priority[$opt_name]['help'] = 1;
         }
-        if ( ! isset( self::$errors[ $opt_name ] ) ) {
-            self::$errors[ $opt_name ] = array();
+        if ( ! isset( self::$errors[$opt_name] ) ) {
+            self::$errors[$opt_name] = array();
         }
-        if ( ! isset( self::$init[ $opt_name ] ) ) {
-            self::$init[ $opt_name ] = false;
+        if ( ! isset( self::$init[$opt_name] ) ) {
+            self::$init[$opt_name] = false;
         }
+
     }
 
     /**
@@ -362,6 +421,7 @@ class Redux {
      * @return string
      */
     public static function getFileVersion( $file, $size = 8192 ) {
+
         // We don't need to write to the file, so just open for reading.
         $fp = fopen( $file, 'r' );
 
@@ -372,7 +432,7 @@ class Redux {
         fclose( $fp );
 
         // Make sure we catch CR-only line endings.
-        $file_data = str_replace( "\r", "\n", $file_data );
+        $file_data = str_replace( '\r', '\n', $file_data );
         $version   = '';
 
         if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( '@version', '/' ) . '(.*)$/mi', $file_data, $match ) && $match[1] ) {
@@ -380,28 +440,35 @@ class Redux {
         }
 
         return $version;
+
     }
 
-    public static function checkExtensionClassFile( $opt_name, $name = "", $class_file = "", $instance = "" ) {
+    public static function checkExtensionClassFile( $opt_name, $name = '', $class_file = '', $instance = '' ) {
+
         if ( file_exists( $class_file ) ) {
-            self::$uses_extensions[ $opt_name ] = isset( self::$uses_extensions[ $opt_name ] ) ? self::$uses_extensions[ $opt_name ] : array();
-            if ( ! in_array( $name, self::$uses_extensions[ $opt_name ] ) ) {
-                self::$uses_extensions[ $opt_name ][] = $name;
+
+            self::$uses_extensions[$opt_name] = isset( self::$uses_extensions[$opt_name] ) ? self::$uses_extensions[$opt_name] : array();
+            if ( ! in_array( $name, self::$uses_extensions[$opt_name] ) ) {
+                self::$uses_extensions[$opt_name][] = $name;
             }
 
-            self::$extensions[ $name ] = isset( self::$extensions[ $name ] ) ? self::$extensions[ $name ] : array();
+            self::$extensions[$name] = isset( self::$extensions[$name] ) ? self::$extensions[$name] : array();
             $version                   = self::getFileVersion( $class_file );
             if ( empty( $version ) && ! empty( $instance ) ) {
                 if ( isset( $instance->version ) ) {
                     $version = $instance->version;
                 }
             }
-            self::$extensions[ $name ][ $version ] = isset( self::$extensions[ $name ][ $version ] ) ? self::$extensions[ $name ][ $version ] : $class_file;
+
+            self::$extensions[$name][$version] = isset( self::$extensions[$name][$version] ) ? self::$extensions[$name][$version] : $class_file;
         }
+
     }
 
     public static function setExtensions( $opt_name, $path ) {
+
         if ( is_dir( $path ) ) {
+
             $path   = trailingslashit( $path );
             $folder = str_replace( '.php', '', basename( $path ) );
             if ( file_exists( $path . 'extension_' . $folder . '.php' ) ) {
@@ -409,7 +476,7 @@ class Redux {
             } else {
                 $folders = scandir( $path, 1 );
                 foreach ( $folders as $folder ) {
-                    if ( $folder === '.' or $folder === '..' ) {
+                    if ( '.' === $folder or '..' === $folder ) {
                         continue;
                     }
                     if ( file_exists( $path . $folder . '/extension_' . $folder . '.php' ) ) {
@@ -420,30 +487,39 @@ class Redux {
                     }
                 }
             }
+
         } else if ( file_exists( $path ) ) {
+
             $name = explode( 'extension_', basename( $path ) );
             if ( isset( $name[1] ) && ! empty( $name[1] ) ) {
                 $name = str_replace( '.php', '', $name[1] );
                 self::checkExtensionClassFile( $opt_name, $name, $path );
             }
+
         }
+
     }
 
     public static function getAllExtensions() {
+
         $redux = Redux_Framework_Instances::get_all_instances();
+
         foreach ( $redux as $instance ) {
-            if ( ! empty( self::$uses_extensions[ $instance['args']['opt_name'] ] ) ) {
+
+            if ( ! empty( self::$uses_extensions[$instance['args']['opt_name']] ) ) {
                 continue;
             }
             if ( ! empty( $instance['extensions'] ) ) {
-
                 Redux::getInstanceExtensions( $instance['args']['opt_name'], $instance );
             }
+
         }
+
     }
 
     public static function getInstanceExtensions( $opt_name, $instance = array() ) {
-        if ( ! empty( self::$uses_extensions[ $opt_name ] ) ) {
+
+        if ( ! empty( self::$uses_extensions[$opt_name] ) ) {
             return;
         }
         if ( empty( $instance ) ) {
@@ -452,47 +528,53 @@ class Redux {
         if ( empty( $instance ) || empty( $instance->extensions ) ) {
             return;
         }
+
         foreach ( $instance->extensions as $name => $extension ) {
-            if ( $name == "widget_areas" ) {
+
+            if ( 'widget_areas' == $name ) {
                 $new = new Redux_Widget_Areas( $instance );
             }
-            if ( isset( self::$uses_extensions[ $opt_name ][ $name ] ) ) {
+            if ( isset( self::$uses_extensions[$opt_name][$name] ) ) {
                 continue;
             }
             if ( isset( $extension->extension_dir ) ) {
                 Redux::setExtensions( $opt_name, str_replace( $name, '', $extension->extension_dir ) );
-
             } else if ( isset( $extension->_extension_dir ) ) {
                 Redux::setExtensions( $opt_name, str_replace( $name, '', $extension->_extension_dir ) );
             }
+
         }
+
     }
 
-    public static function getExtensions( $opt_name = "", $key = "" ) {
+    public static function getExtensions( $opt_name = '', $key = '' ) {
 
         if ( empty( $opt_name ) ) {
+
             Redux::getAllExtensions();
             if ( empty( $key ) ) {
                 return self::$extension_paths;
             } else {
-                if ( isset( self::$extension_paths[ $key ] ) ) {
-                    return self::$extension_paths[ $key ];
+                if ( isset( self::$extension_paths[$key] ) ) {
+                    return self::$extension_paths[$key];
                 }
             }
+
         } else {
-            if ( empty( self::$uses_extensions[ $opt_name ] ) ) {
+
+            if ( empty( self::$uses_extensions[$opt_name] ) ) {
                 Redux::getInstanceExtensions( $opt_name );
             }
-
-            if ( empty( self::$uses_extensions[ $opt_name ] ) ) {
+            if ( empty( self::$uses_extensions[$opt_name] ) ) {
                 return false;
             }
             $instanceExtensions = array();
-            foreach ( self::$uses_extensions[ $opt_name ] as $extension ) {
-                $class_file                       = end( self::$extensions[ $extension ] );
+
+            foreach ( self::$uses_extensions[$opt_name] as $extension ) {
+                $class_file                       = end( self::$extensions[$extension] );
                 $name                             = str_replace( '.php', '', basename( $extension ) );
                 $extension_class                  = 'ReduxFramework_Extension_' . $name;
-                $instanceExtensions[ $extension ] = array(
+                $instanceExtensions[$extension] = array(
                     'path'    => $class_file,
                     'class'   => $extension_class,
                     'version' => Redux::getFileVersion( $class_file )
@@ -500,8 +582,11 @@ class Redux {
             }
 
             return $instanceExtensions;
+
         }
 
         return false;
+
     }
+
 }
