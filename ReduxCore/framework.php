@@ -40,9 +40,6 @@ if ( class_exists( 'Redux_Framework_Instances' ) ) {
 // Don't duplicate me!
 if ( ! class_exists( 'ReduxFramework' ) ) :
 
-// Redux CDN class
-require_once( dirname( __FILE__ ) . '/inc/class.redux_cdn.php' );
-
 // Redux API class  :)
 require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
 
