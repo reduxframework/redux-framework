@@ -60,7 +60,7 @@ require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
 require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
 // ThemeCheck checks
-require_once( dirname( __FILE__ ) . '/inc/class.redux_themecheck.php' );
+new Redux_ThemeCheck();
 
 // Welcome
 require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
