@@ -31,6 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     die;
 }
 
+if ( ! defined( 'REDUX_PATH' ) ) {
+    define( 'REDUX_PATH', dirname( __FILE__ ) );
+}
 /**
  * The Redux framework class autoloader.
  * Finds the path to a class that we're requiring and includes the file.
@@ -49,7 +52,7 @@ function redux_autoload_classes( $class_name ) {
 
 		$foldername = ( '' != $foldername ) ? $foldername . DIRECTORY_SEPARATOR : '';
 
-		$class_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . $foldername . 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
+		$class_path = REDUX_PATH . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . $foldername . 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
 		if ( file_exists( $class_path ) ) {
 			include $class_path;
 		}
@@ -59,9 +62,6 @@ function redux_autoload_classes( $class_name ) {
 }
 // Run the autoloader
 spl_autoload_register( 'redux_autoload_classes' );
-
-// Require the main plugin class
-require_once( plugin_dir_path( __FILE__ ) . 'class.redux-plugin.php' );
 
 // Register hooks that are fired when the plugin is activated and deactivated, respectively.
 register_activation_hook( __FILE__, array( 'Redux_Framework_Plugin', 'activate' ) );

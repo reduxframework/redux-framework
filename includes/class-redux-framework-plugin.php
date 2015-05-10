@@ -12,8 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'Redux_Framework_Plugin' ) ) :
-
 /**
  * Main Redux_Framework_Plugin class
  *
@@ -141,21 +139,21 @@ class Redux_Framework_Plugin {
      */
     public function includes() {
         // Include ReduxCore
-        if ( file_exists( dirname( __FILE__ ) . '/ReduxCore/framework.php' ) ) {
-            require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
+        if ( file_exists( REDUX_PATH . '/ReduxCore/framework.php' ) ) {
+            require_once( REDUX_PATH . '/ReduxCore/framework.php' );
         }
 
         if ( isset( ReduxFramework::$_as_plugin ) ) {
             ReduxFramework::$_as_plugin = true;
         }
 
-        if ( file_exists( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' ) ) {
-            require_once( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' );
+        if ( file_exists( REDUX_PATH . '/ReduxCore/redux-extensions/config.php' ) ) {
+            require_once( REDUX_PATH . '/ReduxCore/redux-extensions/config.php' );
         }
 
         // Include demo config, if demo mode is active
-        if ( $this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
-            require_once( dirname( __FILE__ ) . '/sample/sample-config.php' );
+        if ( $this->options['demo'] && file_exists( REDUX_PATH . '/sample/sample-config.php' ) ) {
+            require_once( REDUX_PATH . '/sample/sample-config.php' );
         }
     }
 
@@ -184,7 +182,7 @@ class Redux_Framework_Plugin {
     }
 
     public function load_first() {
-        $plugin_dir = Redux_Helpers::cleanFilePath(WP_PLUGIN_DIR) . '/';
+        $plugin_dir = Redux_Helpers::cleanFilePath( WP_PLUGIN_DIR ) . '/';
         $self_file  = Redux_Helpers::cleanFilePath( __FILE__ );
 
         $path       = str_replace( $plugin_dir , '', $self_file );
@@ -430,4 +428,3 @@ class Redux_Framework_Plugin {
         return $links;
     }
 }
-endif;
