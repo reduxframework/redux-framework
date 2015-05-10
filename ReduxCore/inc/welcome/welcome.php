@@ -65,7 +65,7 @@
 
             if ( Redux_Helpers::isLocalHost() ) {
                 $compare = true;
-            } else if ( class_exists( 'ReduxFrameworkPlugin' ) ) {
+            } else if ( class_exists( 'Redux_Framework_Plugin' ) ) {
                 $compare = true;
             } else {
                 $redux = ReduxFrameworkInstances::get_all_instances();

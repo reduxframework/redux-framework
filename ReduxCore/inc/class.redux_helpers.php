@@ -162,7 +162,7 @@ class Redux_Helpers {
             'redux'     => array(
                 'mode'      => ReduxFramework::$_is_plugin ? 'plugin' : 'theme',
                 'version'   => ReduxFramework::$_version,
-                'demo_mode' => get_option( 'ReduxFrameworkPlugin' ),
+                'demo_mode' => get_option( 'Redux_Framework_Plugin' ),
             ),
             'developer' => apply_filters( 'redux/tracking/developer', array() ),
             'plugins'   => $plugins,

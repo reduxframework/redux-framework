@@ -342,7 +342,7 @@ class Redux_Tracking {
             'redux'     => array(
                 'mode'      => ReduxFramework::$_is_plugin ? 'plugin' : 'theme',
                 'version'   => ReduxFramework::$_version,
-                'demo_mode' => get_option( 'ReduxFrameworkPlugin' ),
+                'demo_mode' => get_option( 'Redux_Framework_Plugin' ),
             ),
             'developer' => apply_filters( 'redux/tracking/developer', array() ),
             'plugins'   => $plugins,
@@ -464,7 +464,7 @@ function redux_tracking_additions( $options ) {
     $opt = array();
 
     $options['redux'] = array(
-        'demo_mode' => get_option( 'ReduxFrameworkPlugin' ),
+        'demo_mode' => get_option( 'Redux_Framework_Plugin' ),
     );
 
     return $options;
