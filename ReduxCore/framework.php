@@ -65,8 +65,6 @@ new Redux_ThemeCheck();
 // Welcome
 require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
 
-//require_once( dirname( __FILE__ ) . '/inc/class.redux_sass.php' );
-
 /**
  * Main ReduxFramework class
  *
@@ -1671,9 +1669,9 @@ class ReduxFramework {
 
 
 //                if ($this->args['sass']['enabled']) {
-//                    $ret = reduxSassCompiler::compile_sass($this);
+//                    $ret = Redux_Sass_Compiler::compile_sass($this);
 //
-//                    if ($ret == reduxSassCompiler::SASS_FILE_COMPILE || $ret == reduxSassCompiler::SASS_NO_COMPILE) {
+//                    if ($ret == Redux_Sass_Compiler::SASS_FILE_COMPILE || $ret == Redux_Sass_Compiler::SASS_NO_COMPILE) {
 //                        if (file_exists(ReduxFramework::$_upload_dir . $this->args['opt_name'] .  '-redux.css')) {
 //                            wp_enqueue_style(
 //                                'redux-fields-css',
