@@ -1,7 +1,5 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_colorrgba' ) ) :
-
 class Redux_Validation_colorrgba {
 
     /**
@@ -74,6 +72,3 @@ class Redux_Validation_colorrgba {
 
     //function
 }
-
-//class
-endif;

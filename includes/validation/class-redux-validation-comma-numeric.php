@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_not_empty' ) ) :
-
-class Redux_Validation_not_empty {
+class Redux_Validation_comma_numeric {
 
     /**
      * Field Constructor.
@@ -14,7 +12,7 @@ class Redux_Validation_not_empty {
 
         $this->parent       = $parent;
         $this->field        = $field;
-        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'This field cannot be empty. Please provide a value.', 'redux-framework' );
+        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a comma separated list of numerical values for this option.', 'redux-framework' );
         $this->value        = $value;
         $this->current      = $current;
 
@@ -29,10 +27,11 @@ class Redux_Validation_not_empty {
      */
     function validate() {
 
-        if ( ! isset( $this->value ) || empty( $this->value ) ) {
+        $this->value = str_replace( ' ', '', $this->value );
+
+        if ( ! is_numeric( str_replace( ',', '', $this->value ) ) ) {
             $this->value = ( isset( $this->current ) ) ? $this->current : '';
             $this->error = $this->field;
         }
     } //function
 } //class
-endif;

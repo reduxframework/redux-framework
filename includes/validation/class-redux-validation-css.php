@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_str_replace' ) ) :
-
-class Redux_Validation_str_replace {
+class Redux_Validation_css {
 
     /**
      * Field Constructor.
@@ -18,18 +16,28 @@ class Redux_Validation_str_replace {
         $this->current = $current;
 
         $this->validate();
-    } //function
+    }
+
+    //function
 
     /**
      * Field Render Function.
      * Takes the vars and validates them
      *
-     * @since ReduxFramework 1.0.0
+     * @since ReduxFramework 3.0.0
      */
     function validate() {
 
-        $this->value = str_replace( $this->field['str']['search'], $this->field['str']['replacement'], $this->value );
+        $data = $this->value;
+
+        $data = wp_filter_nohtml_kses( $data );
+        $data = str_replace( '&gt;', '>', $data );
+
+        if ($data != $this->value) {
+            $this->warning = __( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
+        }
+
+        $this->value = $data;
+
     } //function
 } //class
-
-endif;

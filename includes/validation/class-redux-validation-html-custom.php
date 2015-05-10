@@ -1,7 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_css' ) ) :
-class Redux_Validation_css {
+class Redux_Validation_html_custom {
 
     /**
      * Field Constructor.
@@ -17,29 +16,16 @@ class Redux_Validation_css {
         $this->current = $current;
 
         $this->validate();
-    }
-
-    //function
+    } //function
 
     /**
      * Field Render Function.
      * Takes the vars and validates them
      *
-     * @since ReduxFramework 3.0.0
+     * @since ReduxFramework 1.0.0
      */
     function validate() {
 
-        $data = $this->value;
-
-        $data = wp_filter_nohtml_kses( $data );
-        $data = str_replace( '&gt;', '>', $data );
-
-        if ($data != $this->value) {
-            $this->warning = __( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
-        }
-
-        $this->value = $data;
-
+        $this->value = wp_kses( $this->value, $this->field['allowed_html'] );
     } //function
 } //class
-endif;

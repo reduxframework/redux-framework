@@ -1,7 +1,5 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_unique_slug' ) ) :
-
 class Redux_Validation_unique_slug {
 
     /**
@@ -67,4 +65,3 @@ class Redux_Validation_unique_slug {
         flush_rewrite_rules();
     }
 } //class
-endif;

@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_html' ) ) :
-
-class Redux_Validation_html {
+class Redux_Validation_preg_replace {
 
     /**
      * Field Constructor.
@@ -28,7 +26,6 @@ class Redux_Validation_html {
      */
     function validate() {
 
-        $this->value = wp_kses_post( $this->value );
+        $this->value = preg_replace( $this->field['preg']['pattern'], $this->field['preg']['replacement'], $this->value );
     } //function
 } //class
-endif;

@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_no_html' ) ) :
-
-class Redux_Validation_no_html {
+class Redux_Validation_email {
 
     /**
      * Field Constructor.
@@ -11,9 +9,10 @@ class Redux_Validation_no_html {
      * @since ReduxFramework 1.0.0
      */
     function __construct( $parent, $field, $value, $current ) {
+
         $this->parent       = $parent;
         $this->field        = $field;
-        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must not enter any HTML in this field, all HTML tags have been removed.', 'redux-framework' );
+        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a valid email for this option.', 'redux-framework' );
         $this->value        = $value;
         $this->current      = $current;
 
@@ -22,19 +21,15 @@ class Redux_Validation_no_html {
 
     /**
      * Field Render Function.
-     * Takes the vars and validates them
+     * Takes the vars and outputs the HTML for the field in the settings
      *
      * @since ReduxFramework 1.0.0
      */
     function validate() {
 
-        $newvalue = strip_tags( $this->value );
-
-        if ( $this->value != $newvalue ) {
-            $this->warning = $this->field;
+        if ( ! is_email( $this->value ) ) {
+            $this->value = ( isset( $this->current ) ) ? $this->current : '';
+            $this->error = $this->field;
         }
-
-        $this->value = $newvalue;
     } //function
 } //class
-endif;

@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_numeric_not_empty' ) ) :
-
-class Redux_Validation_numeric_not_empty {
+class Redux_Validation_date {
 
     /**
      * Field Constructor.
@@ -14,7 +12,7 @@ class Redux_Validation_numeric_not_empty {
 
         $this->parent       = $parent;
         $this->field        = $field;
-        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a numerical value for this option.', 'redux-framework' );
+        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'This field must be a valid date.', 'redux-framework' );
         $this->value        = $value;
         $this->current      = $current;
 
@@ -28,11 +26,26 @@ class Redux_Validation_numeric_not_empty {
      * @since ReduxFramework 1.0.0
      */
     function validate() {
-        if ( ! is_numeric( $this->value ) || ! isset( $this->value ) || empty( $this->value ) ) {
+
+        $string = str_replace( '/', '', $this->value );
+
+        if ( ! is_numeric( $string ) ) {
+            $this->value = ( isset( $this->current ) ) ? $this->current : '';
+            $this->error = $this->field;
+
+            return;
+        }
+
+        if ( $this->value[2] != '/' ) {
+            $this->value = ( isset( $this->current ) ) ? $this->current : '';
+            $this->error = $this->field;
+
+            return;
+        }
+
+        if ( $this->value[5] != '/' ) {
             $this->value = ( isset( $this->current ) ) ? $this->current : '';
             $this->error = $this->field;
         }
     } //function
 } //class
-
-endif;

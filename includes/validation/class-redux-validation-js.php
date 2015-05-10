@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_html_custom' ) ) :
-
-class Redux_Validation_html_custom {
+class Redux_Validation_js {
 
     /**
      * Field Constructor.
@@ -28,7 +26,6 @@ class Redux_Validation_html_custom {
      */
     function validate() {
 
-        $this->value = wp_kses( $this->value, $this->field['allowed_html'] );
+        $this->value = esc_js( $this->value );
     } //function
 } //class
-endif;

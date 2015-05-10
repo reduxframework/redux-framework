@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_url' ) ) :
-
-class Redux_Validation_url {
+class Redux_Validation_numeric_not_empty {
 
     /**
      * Field Constructor.
@@ -14,7 +12,7 @@ class Redux_Validation_url {
 
         $this->parent       = $parent;
         $this->field        = $field;
-        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a valid URL for this option.', 'redux-framework' );
+        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a numerical value for this option.', 'redux-framework' );
         $this->value        = $value;
         $this->current      = $current;
 
@@ -23,19 +21,14 @@ class Redux_Validation_url {
 
     /**
      * Field Render Function.
-     * Takes the vars and validates them
+     * Takes the vars and outputs the HTML for the field in the settings
      *
      * @since ReduxFramework 1.0.0
      */
     function validate() {
-
-        if ( filter_var( $this->value, FILTER_VALIDATE_URL ) == false ) {
+        if ( ! is_numeric( $this->value ) || ! isset( $this->value ) || empty( $this->value ) ) {
             $this->value = ( isset( $this->current ) ) ? $this->current : '';
             $this->error = $this->field;
-        } else {
-            $this->value = esc_url_raw( $this->value );
         }
     } //function
 } //class
-
-endif;

@@ -1,8 +1,6 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_email' ) ) :
-
-class Redux_Validation_email {
+class Redux_Validation_url {
 
     /**
      * Field Constructor.
@@ -14,7 +12,7 @@ class Redux_Validation_email {
 
         $this->parent       = $parent;
         $this->field        = $field;
-        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a valid email for this option.', 'redux-framework' );
+        $this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : __( 'You must provide a valid URL for this option.', 'redux-framework' );
         $this->value        = $value;
         $this->current      = $current;
 
@@ -23,17 +21,17 @@ class Redux_Validation_email {
 
     /**
      * Field Render Function.
-     * Takes the vars and outputs the HTML for the field in the settings
+     * Takes the vars and validates them
      *
      * @since ReduxFramework 1.0.0
      */
     function validate() {
 
-        if ( ! is_email( $this->value ) ) {
+        if ( filter_var( $this->value, FILTER_VALIDATE_URL ) == false ) {
             $this->value = ( isset( $this->current ) ) ? $this->current : '';
             $this->error = $this->field;
+        } else {
+            $this->value = esc_url_raw( $this->value );
         }
     } //function
 } //class
-
-endif;

@@ -1,7 +1,5 @@
 <?php
 
-if ( ! class_exists( 'Redux_Validation_color' ) ) :
-
 class Redux_Validation_color {
 
     /**
@@ -68,4 +66,3 @@ class Redux_Validation_color {
         } // END array check
     } //function
 } //class
-endif;
