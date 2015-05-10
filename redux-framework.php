@@ -47,12 +47,15 @@ function redux_autoload_classes( $class_name ) {
 
 	if ( 0 === stripos( $class_name, 'Redux' ) ) {
 
-        $foldername = ( 0 === stripos( $class_name, 'Redux_Field_' ) )      ? 'fields' : '';
-		$foldername = ( 0 === stripos( $class_name, 'Redux_Validation_' ) ) ? 'validation'  : $foldername;
-
+		$foldername = ( 0 === stripos( $class_name, 'Redux_Validation_' ) ) ? 'validation'  : '';
 		$foldername = ( '' != $foldername ) ? $foldername . DIRECTORY_SEPARATOR : '';
 
-		$class_path = REDUX_PATH . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . $foldername . 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
+        if ( 'Redux' == $class_name ) {
+            $class_path = REDUX_PATH . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-redux.php';
+        } else {
+            $class_path = REDUX_PATH . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . $foldername . 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
+        }
+
 		if ( file_exists( $class_path ) ) {
 			include $class_path;
 		}

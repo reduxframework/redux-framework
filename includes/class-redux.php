@@ -14,9 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// Don't duplicate me!
-if ( ! class_exists( 'Redux' ) ) :
-
 /**
  * Redux API Class
  * Simple API for Redux Framework
@@ -508,6 +505,3 @@ class Redux {
         return false;
     }
 }
-
-Redux::load();
-endif;
