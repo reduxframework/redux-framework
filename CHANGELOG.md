@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.9
+* Added:    Error suppressing to filesystem class to avoid notice errors when site goes down.
+
 ## 3.5.4.8
 * Fixed:    Panels not rendering, again
 * Added:    Vendor support plugin link to CDN fallback message.
