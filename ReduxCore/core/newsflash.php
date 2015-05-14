@@ -17,6 +17,10 @@
             public function __construct ($parent, $params) {
                 // set parent object
                 $this->parent = $parent;
+                
+                if ( !is_admin() ) {
+                    return;
+                }
 
                 extract($params);
                 $this->server_file  = $server_file;
