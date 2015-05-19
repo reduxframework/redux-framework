@@ -94,14 +94,14 @@
                 //*****************************************************************
                 // Spectrum CSS
                 //*****************************************************************
-                $css_file = 'spectrum.min.css';
+                $css_file = 'redux-spectrum.min.css';
                 if ($this->parent->args['dev_mode']) {
-                    $css_file = 'spectrum.css';
+                    $css_file = 'redux-spectrum.css';
                 }                
                 
-                Redux_CDN::register_style(
+                wp_register_style(
                     'redux-spectrum-css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.3.3/' . $css_file,
+                    ReduxFramework::$_url . 'assets/css/vendor/spectrum/' . $css_file,
                     array(),
                     '1.3.3',
                     'all'
@@ -126,9 +126,9 @@
                     $css_file = 'jquery.qtip.css';
                 }
 
-                Redux_CDN::enqueue_style(
+                wp_enqueue_style(
                     'qtip-css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/' . $css_file,
+                    ReduxFramework::$_url . 'assets/css/vendor/qtip/' . $css_file,
                     array(),
                     '2.2.0',
                     'all'
@@ -233,9 +233,9 @@
                     $js_file = 'jquery.qtip.js';
                 }
                 
-                Redux_CDN::enqueue_script(
+                wp_enqueue_script(
                     'qtip-js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/' . $js_file,
+                    ReduxFramework::$_url . 'assets/js/vendor/qtip/' . $js_file,
                     array( 'jquery' ),
                     '2.2.0',
                     true
@@ -244,14 +244,14 @@
                 //*****************************************************************
                 // Spectrum JS
                 //*****************************************************************
-                $js_file = 'spectrum.min.js';
+                $js_file = 'redux-spectrum.min.js';
                 if ($this->parent->args['dev_mode']) {
-                    $js_file = 'spectrum.js';
+                    $js_file = 'redux-spectrum.js';
                 }
                 
-                Redux_CDN::register_script(
+                wp_register_script(
                     'redux-spectrum-js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.3.3/' . $js_file,
+                    ReduxFramework::$_url . 'assets/js/vendor/spectrum/' . $js_file,
                     array( 'jquery' ),
                     '1.3.3',
                     true
