@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.5.4.10
+* Modified: Qtip and Spectrum vendor libraries restored to local.
+* Fixed:    Admin notice loading on front end.
+* Modified: Callback actions run with do_action_ref_array now.
+* Added:    show_options_object argument to enable or disable option object.
+
 ## 3.5.4.9
 * Added:    Error suppressing to filesystem class to avoid notice errors when site goes down.
 

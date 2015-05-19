@@ -66,7 +66,7 @@
                 
                 $this->is_field = Redux_Helpers::isFieldInUse($parent, 'options_object');
 
-                if ( !$this->is_field && $this->parent->args['show_options_object'] ) {
+                if ( !$this->is_field && $this->parent->args['dev_mode'] && $this->parent->args['show_options_object'] ) {
                     $this->add_section();
                 }
              

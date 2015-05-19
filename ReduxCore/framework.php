@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.9';
+            public static $_version = '3.5.4.10';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -546,7 +546,7 @@
                         ),
                     ),
                     'show_import_export'        => true,
-                    'show_options_object'       => false,
+                    'show_options_object'       => true,
                     'dev_mode'                  => true,
                     'disable_tracking'          => false,
                     'templates_path'            => '',
@@ -1253,10 +1253,6 @@
                     }
                     $this->dev_mode_forced  = true;
                     $this->args['dev_mode'] = true;
-                }
-
-                if ( $this->args['dev_mode'] ) {
-                    $this->args['show_options_object'] = true;
                 }
 
                 // Auto create the page_slug appropriately
