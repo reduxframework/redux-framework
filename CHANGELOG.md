@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.4.11
+* Modified: Ajax save animation. Added fallback for pre 4.2 CSS.
+* Fixed:    Small issue with Redux info boxes and spacing.
+* Fixed:    Small bug with the Redux API where divide sections were causing errors.
+
 ## 3.5.4.10
 * Modified: Qtip and Spectrum vendor libraries restored to local.
 * Fixed:    Admin notice loading on front end.
