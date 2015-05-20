@@ -29,6 +29,7 @@
 
             function filesystem_init( $form_url, $method = '', $context = false, $fields = null ) {
                 global $wp_filesystem;
+
                 if ( ! empty( $this->creds ) ) {
                     return true;
                 }

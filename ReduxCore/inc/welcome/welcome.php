@@ -69,10 +69,13 @@
                 $compare = true;
             } else {
                 $redux = ReduxFrameworkInstances::get_all_instances();
-                foreach ( $redux as $panel ) {
-                    if ( $panel->args['dev_mode'] == 1 ) {
-                        $compare = true;
-                        break;
+                
+                if (is_array($redux)) {
+                    foreach ( $redux as $panel ) {
+                        if ( $panel->args['dev_mode'] == 1 ) {
+                            $compare = true;
+                            break;
+                        }
                     }
                 }
             }
