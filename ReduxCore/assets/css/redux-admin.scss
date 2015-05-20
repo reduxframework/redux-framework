@@ -1,5 +1,9 @@
-.spinner.is-active {
-    display: inline-block;
+.spinner {
+    visibility: hidden;
+    display: block;
+}
+.spinner.is-active{
+    visibility: visible;
 }
 
 .redux-main .description {

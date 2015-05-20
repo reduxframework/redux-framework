@@ -44,7 +44,8 @@
         overlay.fadeIn();
 
         // Add the loading mechanism
-        jQuery( '.redux-action_bar .spinner' ).show();
+        jQuery( '.redux-action_bar .spinner' ).addClass('is-active');
+
         jQuery( '.redux-action_bar input' ).attr( 'disabled', 'disabled' );
         var $notification_bar = jQuery( document.getElementById( 'redux_notification_bar' ) );
         $notification_bar.slideUp();
@@ -104,7 +105,7 @@
                     console.log( response.responseText );
                     jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                     overlay.fadeOut( 'fast' );
-                    jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                    jQuery( '.redux-action_bar .spinner' ).removeClass('is-active');
                     alert( redux.ajax.alert );
                 },
                 success: function( response ) {
@@ -113,7 +114,7 @@
                     } else if ( response.status == "success" ) {
                         jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                         overlay.fadeOut( 'fast' );
-                        jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                        jQuery( '.redux-action_bar .spinner' ).removeClass('is-active');
                         redux.options = response.options;
                         //redux.defaults = response.defaults;
                         redux.errors = response.errors;
@@ -128,7 +129,7 @@
                         $save_notice.delay( 4000 ).slideUp();
                     } else {
                         jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
-                        jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                        jQuery( '.redux-action_bar .spinner' ).removeClass('is-active');
                         overlay.fadeOut( 'fast' );
                         jQuery( '.wrap h2:first' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
                         jQuery( '.redux_ajax_save_error' ).slideDown();
