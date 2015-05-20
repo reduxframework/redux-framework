@@ -208,7 +208,12 @@
             public static function setSection( $opt_name = '', $section = array() ) {
                 self::check_opt_name( $opt_name );
                 if ( ! isset( $section['id'] ) ) {
-                    $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
+                    if ( $section['type'] == "divide" ) {
+                        $section['id'] = time();
+                    } else {
+                        $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
+                    }
+
                     if ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
                         $orig = $section['id'];
                         $i    = 0;
