@@ -59,8 +59,7 @@
 
                 // get notice data from server
                 //$data = $filesystem->execute('get_contents', $this->server_file);// 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json');
-		add_filter( 'https_ssl_verify', '__return_false' );
-                $data = wp_remote_get($this->server_file);
+                $data = wp_remote_get($this->server_file, array('sslverify'=>false));
 	        $data = $data['body'];
                 // if some data exists
                 if ($data != '' || !empty($data)) {
