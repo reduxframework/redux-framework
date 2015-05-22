@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.11';
+            public static $_version = '3.5.4.12';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2294,6 +2294,7 @@
                             do_action( "redux/options/{$this->args['opt_name']}/field/{$field['type']}/register", $field );
 
                             $this->check_dependencies( $field );
+                            $this->field_head[ $field['id'] ] = $th;
 
                             if ( ! $display || isset ( $this->no_panel_section[ $k ] ) ) {
                                 $this->no_panel[] = $field['id'];
@@ -2308,10 +2309,7 @@
                                         '_field_input'
                                     ), "{$this->args['opt_name']}{$k}_section_group", "{$this->args['opt_name']}{$k}_section", $field
                                     );
-                                } else {
-                                    $this->field_head[ $field['id'] ] = $th;
                                 }
-
                             }
                         }
                     }

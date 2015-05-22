@@ -344,7 +344,7 @@
                 style = 'qtip-' + tip_style;
             }
 
-            var classes = shadow + ',' + color + ',' + rounded + ',' + style;
+            var classes = shadow + ',' + color + ',' + rounded + ',' + style+',redux-qtip';
             classes = classes.replace( /,/g, ' ' );
 
             // Get position data

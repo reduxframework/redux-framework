@@ -792,7 +792,7 @@
     margin-top: 0;
 }
 
-@media screen and (max-width: 1124px) {
+@media screen and (max-width: 600px) {
     .redux-sidebar {
         width: 44px;
 
@@ -865,7 +865,13 @@
 }
 
 //mp6 fixes
-@media screen and (max-width: 783px) {
+@media screen and (max-width: 782px) {
+    .form-table>tbody>tr>th {
+        width: 100%;
+    }
+    .redux_field_th {
+        padding-bottom:0;
+    }
     .mp6 {
         .redux-container {
             #info_bar {
@@ -878,6 +884,17 @@
             }
         }
     }
+    .redux-container-switch label {
+        padding: 5px 10px !important;
+
+    }
+    .redux-container-button_set label {
+        padding: 12px 10px;
+    }
+    .redux-container #redux-footer #redux-share {
+        line-height: 34px;
+    }
+
 }
 
 pre {
@@ -960,7 +977,7 @@ pre {
         border-color: #767676 !important;
     }
     .redux-container-switch .cb-enable.selected,
-    .redux-container .ui-buttonset .ui-state-active {
+    .redux-field-container .ui-buttonset .ui-state-active {
         @include backgroundGradient($accentColor);
         border-color: darken($accentColor, 15%) !important;
         border-color: darken($accentColor, 10%) !important;
@@ -1221,26 +1238,37 @@ pre {
     @include adminThemeColorOverrides(#d5dddf, #9ebaa0, #627c83, #86a988);
 }
 
+ssl_ciphers "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-
+                                                                                                                                                                                                                        E-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";
+
 /* Sunrise admin theme */
 .admin-color-sunrise {
     @include adminThemeColorOverrides(#f0c8c6, #dd823b, #b43c38, #cc6c23);
 }
 
-@media screen and (max-width: 1124px) {
+@media screen and (max-width: 600px) {
     // .redux-group-tab-link-a span { margin-top: -2px; }
-    .redux-group-tab-link-a span {
-        //background: #222;
-        //color: white;
-        padding: 11px 12px;
-        color: #555;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        &:hover {
-            //color: #2ea2cc;
-            //background: black;
-            background: #e5e5e5;
+    .redux-group-tab-link-a {
+        min-height: 15px;
+        span {
+            //background: #222;
+            //color: white;
+            padding: 11px 12px;
+            color: #555;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+            &:hover {
+                //color: #2ea2cc;
+                //background: black;
+                background: #e5e5e5;
+            }
+            text-shadow: none !important;
         }
+    }
+
+    .redux-sidebar a {
+
     }
 }
 
@@ -1265,7 +1293,7 @@ pre {
 
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 600px) {
     #redux-footer #redux-share,
     .redux-hint-qtip {
         display: none;
@@ -1273,16 +1301,6 @@ pre {
 
     .redux-container .redux-action_bar {
         float: none;
-    }
-}
-
-@media screen and (max-width: 476px) {
-    .redux-container .expand_options {
-        display: none;
-    }
-
-    #redux-footer, .redux-container #info_bar {
-        text-align: center;
     }
 }
 
@@ -1309,8 +1327,26 @@ pre {
         display: block;
     }
 }
+@media screen and (max-width: 640px) {
+    #redux-defaults-section {
+        display: none;
+    }
+}
+@media screen and (max-width: 730px) {
+    #redux-share {
+        display:none;
+    }
+}
+@media screen and (max-width: 730px) {
+    #redux-defaults-section2 {
+        display: none;
+    }
+    #redux-share {
+        display:none;
+    }
+}
 
-@media screen and (max-width: 1124px) {
+@media screen and (max-width: 600px) {
     .form-table > tbody > tr > th {
         padding-bottom: 0 !important;
     }
@@ -1324,6 +1360,9 @@ pre {
         .redux-field-container {
             padding-top: 0;
             padding-bottom: 0;
+        }
+        .subsection a {
+            min-height: 15px;
         }
     }
 }
@@ -1380,6 +1419,9 @@ pre {
 
         .redux-hint-qtip {
             float: left !important;
+        }
+        .redux-action_bar .button {
+            margin-top: -1px;
         }
     }
 }
@@ -1504,4 +1546,8 @@ pre {
         margin-right: -20px;
         margin-bottom: -10px;
     }
+}
+.redux-qtip {
+    z-index: 999999 !important;
+
 }

@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.4.12
+* Modified: Panel is MUCH more responsive now.
+* Fixed:    Small stylings for a few fields.
+* Fixed:    Added extra qTip class.
+
 ## 3.5.4.11
 * Modified: Ajax save animation. Added fallback for pre 4.2 CSS.
 * Fixed:    Small issue with Redux info boxes and spacing.
