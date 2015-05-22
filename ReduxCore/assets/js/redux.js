@@ -1345,10 +1345,17 @@
     };
     $.redux.resizeAds = function() {
         var el = $( '#redux-header' );
-        var rAds = el.find( '.rAds' );
+        var maxWidth;
+        if (el.length) {
+            maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        } else {
+            el = $('#customize-info');
+            maxWidth = el.width();
+        }
 
         var maxHeight = el.height();
-        var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        var rAds = el.find( '.rAds' );
+
         $( rAds ).find( 'video' ).each(
             function() {
                 $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
@@ -1375,8 +1382,15 @@
             if ( redux.rAds ) {
                 setTimeout(
                     function() {
-                        $( '#redux-header' ).append( '<div class="rAds"></div>' );
-                        var el = $( '#redux-header' );
+                        var el;
+                        if ($( '#redux-header' ).length > 0) {
+                            $( '#redux-header' ).append( '<div class="rAds"></div>' );
+                            el = $( '#redux-header' );
+                        } else {
+                            $( '#customize-info' ).append( '<div class="rAds"></div>' );
+                            el = $( '#customize-info' );
+                        }
+
                         el.css( 'position', 'relative' );
 
                         el.find( '.rAds' ).attr(

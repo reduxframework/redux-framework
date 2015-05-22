@@ -303,6 +303,7 @@
         'title' => __( 'Basic Fields', 'redux-framework-demo' ),
         'id'    => 'basic',
         'desc'  => __( '', 'redux-framework-demo' ),
+        'customizer_width' => '400px',
         'icon'  => 'el el-home'
     ) );
 
@@ -310,6 +311,7 @@
         'title'      => __( 'Checkbox', 'redux-framework-demo' ),
         'id'         => 'basic-checkbox',
         'subsection' => true,
+        'customizer_width' => '450px',
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/checkbox/" target="_blank">http://docs.reduxframework.com/core/fields/checkbox/</a>',
         'fields'     => array(
             array(
@@ -361,6 +363,7 @@
         'title'      => __( 'Radio', 'redux-framework-demo' ),
         'id'         => 'basic-Radio',
         'subsection' => true,
+        'customizer_width' => '500px',
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/radio/" target="_blank">http://docs.reduxframework.com/core/fields/radio/</a>',
         'fields'     => array(
             array(
@@ -433,6 +436,7 @@
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/text/" target="_blank">http://docs.reduxframework.com/core/fields/text/</a>',
         'id'         => 'basic-Text',
         'subsection' => true,
+        'customizer_width' => '700px',
         'fields'     => array(
             array(
                 'id'       => 'text-example',
@@ -521,6 +525,7 @@
     Redux::setSection( $opt_name, array(
         'title' => __( 'Editors', 'redux-framework-demo' ),
         'id'    => 'editor',
+        'customizer_width' => '500px',
         'icon'  => 'el el-edit',
     ) );
 
