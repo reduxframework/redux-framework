@@ -142,3 +142,18 @@
 .redux-main .redux-field-container.redux-container-info {
     padding: 0;
 }
+
+.wp-customizer {
+    .hasIcon.redux-notice-field, .hasIcon.redux-info-field {
+        .redux-info-desc {
+            display: block;
+            margin-left: 43px;
+        }
+        .redux-info-icon {
+            float: left;
+        }
+    }
+    .redux-main .customize-control.customize-control-redux-info {
+        border-bottom: 0;
+    }
+}

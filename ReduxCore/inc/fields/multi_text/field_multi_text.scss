@@ -5,7 +5,7 @@
     }
 
     .redux-multi-text-add {
-        clear:both;
+        clear: both;
         margin: 5px 0;
     }
 
@@ -33,5 +33,20 @@
         background: red;
         color: #fff;
         text-decoration: none;
+    }
+}
+
+.wp-customizer {
+    .redux-container-multi_text {
+        .button {
+            float: right;
+        }
+        .redux-multi-text-remove {
+            float: right;
+            margin-bottom: 5px;
+        }
+        ul.redux-multi-text input {
+            width: 100% !important;
+        }
     }
 }

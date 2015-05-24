@@ -85,3 +85,13 @@
         margin-top: 0 !important;
     }
 }
+
+.wp-customizer {
+    .redux-main input.wp-picker-default, .redux-main .redux-typography-container input.wp-picker-default, .redux-main .redux-typography-container .redux-typography-color {
+        padding: 0px 4px !important;
+    }
+    .redux-main input.wp-color-picker {
+        width: 65px !important;
+        margin-left: 5px !important;
+    }
+}

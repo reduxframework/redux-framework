@@ -791,3 +791,9 @@
     }
 
 //}
+
+.wp-customizer {
+    #ui-datepicker-div {
+        z-index: 999999 !important;
+    }
+}
