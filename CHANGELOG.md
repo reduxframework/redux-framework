@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.13
+* Modified: Moved styling for the divide field into it's own CSS file.
+* Modified: All WP Color Pickers to properly save the value before save.
+
 ## 3.5.4.12
 * Modified: Panel is MUCH more responsive now.
 * Fixed:    Small stylings for a few fields.

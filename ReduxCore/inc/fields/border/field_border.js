@@ -12,7 +12,7 @@
 
     $( document ).ready(
         function() {
-            
+
         }
     );
 
@@ -25,7 +25,7 @@
             function() {
                 var el = $( this );
                 var parent = el;
-                
+
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
@@ -37,9 +37,11 @@
                 } else {
                     return;
                 }
-                el.find( ".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all" ).numeric({
-                    allowMinus: false
-                });
+                el.find( ".redux-border-top, .redux-border-right, .redux-border-bottom, .redux-border-left, .redux-border-all" ).numeric(
+                    {
+                        allowMinus: false
+                    }
+                );
 
                 var default_params = {
                     triggerChange: true,
@@ -78,23 +80,27 @@
                         }
                     }
                 );
-        
+
                 el.find( '.redux-border-units' ).on(
                     'change', function() {
                         $( this ).parents( '.redux-field:first' ).find( '.redux-border-input' ).change();
                     }
                 );
 
-                el.find( '.redux-color-init' ).wpColorPicker({
-                    change: function( u ) {
-                        redux_change( $( this ) );
-                        el.find( '#' + u.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
-                    },
-                    
-                    clear: function() {
-                        redux_change( $( this ).parent().find( '.redux-color-init' ) );
+                el.find( '.redux-color-init' ).wpColorPicker(
+                    {
+                        change: function( e, ui ) {
+                            $( this ).val( ui.color.toString() );
+                            redux_change( $( this ) );
+                            el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                        },
+
+                        clear: function( e, ui ) {
+                            $( this ).val( ui.color.toString() );
+                            redux_change( $( this ).parent().find( '.redux-color-init' ) );
+                        }
                     }
-                });
+                );
 
                 el.find( '.redux-color' ).on(
                     'keyup', function() {
