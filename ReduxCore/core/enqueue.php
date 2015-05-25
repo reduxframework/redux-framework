@@ -226,6 +226,22 @@
                 );
 
                 //*****************************************************************
+                // Sticky Kit JS
+                //*****************************************************************
+                $js_file = 'jquery.sticky-kit.min.js';
+                if ($this->parent->args['dev_mode']) {
+                    $js_file = 'jquery.sticky-kit.js';
+                }
+                
+                wp_enqueue_script(
+                    'sticky-kit-js',
+                    ReduxFramework::$_url . 'assets/js/vendor/' . $js_file,
+                    array( 'jquery' ),
+                    '1.1.2',
+                    true
+                );
+
+                //*****************************************************************
                 // QTip JS
                 //*****************************************************************
                 $js_file = 'jquery.qtip.min.js';
