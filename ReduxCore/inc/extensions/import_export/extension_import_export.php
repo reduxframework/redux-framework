@@ -31,7 +31,7 @@
          *
          * @since       3.1.6
          */
-        class ReduxFramework_extension_import_export extends ReduxFramework {
+        class ReduxFramework_extension_import_export {
 
             // Protected vars
             protected $parent;
@@ -55,11 +55,9 @@
              */
             public function __construct( $parent ) {
 
-
-
                 $this->parent = $parent;
                 if ( empty( $this->extension_dir ) ) {
-                    $this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+                    //$this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
                 }
                 $this->field_name = 'import_export';
 
@@ -122,6 +120,7 @@
                     'title' => __( 'Import / Export', 'redux-framework' ),
                     'heading' => '',
                     'icon' => 'el el-refresh',
+                    'customizer' => false,
                     'fields' => array(
                         array(
                             'id' => 'redux_import_export',

@@ -58,8 +58,28 @@ if ( !class_exists ( 'ReduxFramework_divide' ) ) {
          */
         public function render () {
             echo '</td></tr></table>';
-            echo '<div data-id="' . $this->field[ 'id' ] . '" id="divide-' . $this->field[ 'id' ] . '" class="hr ' . $this->field[ 'class' ] . '"><div class="inner"><span>&nbsp;</span></div></div>';
+            echo '<div data-id="' . $this->field[ 'id' ] . '" id="divide-' . $this->field[ 'id' ] . '" class="divide ' . $this->field[ 'class' ] . '"><div class="inner"><span>&nbsp;</span></div></div>';
             echo '<table class="form-table no-border"><tbody><tr><th></th><td>';
+        }
+
+        /**
+         * Enqueue Function.
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since       1.0.0
+         * @access      public
+         * @return      void
+         */
+        public function enqueue() {
+            if ($this->parent->args['dev_mode']) {
+                wp_enqueue_style(
+                    'redux-field-divide',
+                    ReduxFramework::$_url . 'inc/fields/divide/field_divide.css',
+                    array(),
+                    time(),
+                    'all'
+                );
+            }
         }
     }
 }

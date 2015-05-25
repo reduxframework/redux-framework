@@ -229,3 +229,19 @@
         }
     }
 }
+
+.wp-customizer {
+    .redux-typography-container {
+        .input_wrapper {
+            width: 40%;
+            max-width: 40%;
+            min-width: 20%;
+            input.mini {
+                width: 70%;
+            }
+        }
+        .select_wrapper {
+            width: 100% !important;
+        }
+    }
+}

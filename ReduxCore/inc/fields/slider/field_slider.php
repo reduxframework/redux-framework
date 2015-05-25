@@ -50,6 +50,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
                 'resolution'    => 1,
                 'display_value' => 'text',
                 'float_mark'    => '.',
+                'forced'        => true
             );
 
             $this->field = wp_parse_args( $this->field, $defaults );
@@ -356,6 +357,7 @@ if ( ! class_exists( 'ReduxFramework_slider' ) ) {
                 data-handles="' . $this->field['handles'] . '"
                 data-display="' . $this->field['display_value'] . '"
                 data-rtl="' . is_rtl() . '"
+                data-forced="' . $this->field['forced'] . '"
                 data-float-mark="' . $this->field['float_mark'] . '"
                 data-resolution="' . $this->field['resolution'] . '" ' . $html . '>
             </div>';

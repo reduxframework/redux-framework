@@ -1,10 +1,10 @@
 <?php
 	/**
-	 * The template for the main content of the panel..
+	 * The template for the main content of the panel.
 	 *
 	 * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
 	 *
-	 * @author 		Redux Framework
+	 * @author 	Redux Framework
 	 * @package 	ReduxFramework/Templates
 	 * @version     3.4.3
 	 */
@@ -13,12 +13,9 @@
 <?php $this->get_template( 'header.tpl.php' ); ?>
 
 <!-- Intro Text -->
-<?php if ( isset( $this->parent->args['intro_text'] ) ) : ?>
+<?php if ( isset( $this->parent->args['intro_text'] ) ) { ?>
 	<div id="redux-intro-text"><?php echo $this->parent->args['intro_text']; ?></div>
-<?php endif; ?>
-
-
-
+<?php } ?>
 
 <?php $this->get_template( 'menu_container.tpl.php' ); ?>
 
@@ -77,26 +74,6 @@
 			//echo '</div>';
 		}
 
-    //
-	//	// Debug object output
-	//	if ( $this->parent->args['dev_mode'] == true ) {
-	//		$this->parent->debug->render();
-	//	}
-	//?>
-	<?php //if ( $this->parent->args['system_info'] === true ) :
-	//	require_once ReduxFramework::$_dir . 'inc/sysinfo.php';
-	//	$system_info = new Simple_System_Info();
-	//	?>
-	<!--	<div id="system_info_default_section_group" class="redux-group-tab">-->
-	<!--		<h3>--><?php //_e( 'System Info', 'redux-framework' );?><!--</h3>-->
-    <!---->
-	<!--		<div id="redux-system-info">-->
-	<!--			--><?php //echo $system_info->get( true );?>
-	<!--		</div>-->
-    <!---->
-	<!--	</div>-->
-	<?php //endif; ?>
-	<?php
 		/**
 		 * action 'redux/page-after-sections-{opt_name}'
 		 *

@@ -1,5 +1,156 @@
 # Redux Framework Changelog
 
+## 3.5.4.13
+* Modified: Moved styling for the divide field into it's own CSS file.
+* Modified: All WP Color Pickers to properly save the value before save.
+* Added:    CSS Styles for the customizer.  ;)
+
+## 3.5.4.12
+* Modified: Panel is MUCH more responsive now.
+* Fixed:    Small stylings for a few fields.
+* Fixed:    Added extra qTip class.
+
+## 3.5.4.11
+* Modified: Ajax save animation. Added fallback for pre 4.2 CSS.
+* Fixed:    Small issue with Redux info boxes and spacing.
+* Fixed:    Small bug with the Redux API where divide sections were causing errors.
+* Fixed:    Small admin blast fix.
+
+## 3.5.4.10
+* Modified: Qtip and Spectrum vendor libraries restored to local.
+* Fixed:    Admin notice loading on front end.
+* Modified: Callback actions run with do_action_ref_array now.
+* Added:    show_options_object argument to enable or disable option object.
+
+## 3.5.4.9
+* Added:    Error suppressing to filesystem class to avoid notice errors when site goes down.
+
+## 3.5.4.8
+* Fixed:    Panels not rendering, again
+* Added:    Vendor support plugin link to CDN fallback message.
+
+## 3.5.4.7
+* Modified: Moved vendor libraries ACE, select2, qtip, and spectrum to CDN.
+* Removed:  Local installs of above libraries.
+
+## 3.5.4.6
+* Fixed:    Option panel not rendering due to experimental code.
+
+## 3.5.4.5
+* Fixed:    How sorter works with data
+* Modified: How the data arg is stored in Redux.
+
+## 3.5.4.4
+* Removed:  sysinfo.php.  No longer needed in lieu of our support URL feature.
+* Removed:  debug.php.  Moved to options_object extension.
+* Modified: #2274 - PHP Unit test compatibility.  Thanks @daithi-coombes.
+* Modified: #2144 - Optional class argument per image.  Thanks @paulthecoder.
+* Fixed:    #2278 - More W3 Total Cache hacks.
+    
+## 3.5.4.3
+* Fixed:    #2258 - welcome redirect error with embedding plugin scenarios.
+* Fixed:    Redux plugin load order when activating plugins.
+
+## 3.5.4.2
+* Fixed:    #2271 - stuck redirect on godaddy (seriously, get a real host, people) servers.
+
+## 3.5.4.1
+* Fixed:    #2216 - Reset section not always working within FF.
+    
+## 3.5.4
+* Modified: update_notice arg only truly shows up if dev_mode is on.
+
+## 3.5.3.3
+* Added:    Tooltip to developer mode badge, for informational purposes.
+* Modified: Added css_layout ext to default value filter, to avoid errors.
+
+## 3.5.3.2
+* Fixed:    #2239 - Various extensions didn't support default values for default arg.  Filtered out offending extensions.
+
+## 3.5.3.1
+* Fixed:    WP.org ONLY SVN mixup.
+
+## 3.5.3
+* Fixed:    #2228 - Submenu items still visible if permissions not allowed.
+* Fixed:    Import/Export showing up in customizer.
+* Modified: Admin-fresh theme to match new WordPress 4.2
+* Modified: Redux widget now has a proper ID. Thanks @corradomatt!
+* Modified: Added text-shadow to submenu items to give a stronger "pop"
+* Modified: Page_slug now dynamically generated if not specified.
+
+## 3.5.2.2
+* Modified: Admin blast message pinging server on each load after three day expiration.  Possible slow down of the overall panel loading time.
+
+## 3.5.2.1
+* Fixed:   #2221 - Background field media not enqueueing when used with no other media based fields.
+
+## 3.5.2
+* Fixed:   #2214: Bad path for import/export enqueue.
+* Release: Wp.org release.
+
+## 3.5.1
+* Release: Wp.org release.
+
+## 3.5.0.7
+* Modified: Redux News dashboard widget appears only when dev_mode is true or in a local host environment.
+
+## 3.5.0.6
+* Fixed     #2127 - Elusive icons not working in footer as before.
+* Fixed     Issue where Status tab not showing extension versions properly.
+* Fixed     Issue in support URL not passing data correctly.
+
+## 3.5.0.5
+* Fixed     Support URLs now work even if max_input_vars is way low in PHP 5.3+
+
+## 3.5.0.4
+* Fixed     #2197 - Import/export not loading proper for those who have opted to install Wordpress in ways it was never intended.
+
+## 3.5.0.3
+* Fixed:    'Generate Support URL' feature kicking back error. 
+
+## 3.5.0.2
+* Fixed     Sortable checkbox labels not displaying properly.
+* Fixed     Sortable textbox not displaying default value as placeholder.
+* Updated:  sample-config with accurate example for both sortable modes.
+
+## 3.5.0.1
+* Fixed     #2181 - Fixed issue with Ajax Save when PHP 5.3 Magic Quotes were disabled.
+
+## 3.5.0     OFFICIAL RELEASE
+            Various fixes and improvements for release.
+
+## 3.4.4.9.4
+* Fixed:    #2181 - Issue with PHP < 5.4 and the Ace Editor field. Oy.
+
+## 3.4.4.9.3
+* Fixed:    #2163 - Undefined error in JS.
+
+## 3.4.4.9.2
+* Fixed:    #2176 - Infinite loop in the customizer for live preview of themes.
+
+## 3.4.4.9.1
+* Fixed:    Support page now works.
+* Fixed:    Fix for MySQL deprecated functions in php 5.5+.
+
+## 3.4.4.9
+* Added:    Dynamic admin messages (aka Newsflash).  Dismissable admin messages announcing breaking Redux news.
+            Messages will not appear for users when dev_mode is set to `false`.  However, messages remain active
+            on localhosts, so devs may benefit.
+
+## 3.4.4.8
+* Fixed:    #2155 - Fixed import with ajax_save.
+* Fixed:    Changelog now uses raw field parsedown if present.
+
+## 3.4.4.7
+* Added:    Redux Framework News Widget on the WP Dashboard.
+
+## 3.4.4.6
+* Fixed:    #2156: `label` argument not recognized when using sortable as textbox.
+
+## 3.4.4.5
+* Fixed:    #2140 Another PHP 5.2 issue with ajax_save.
+* Modified: Opt groups for select field now working in customizer even if not supported.
+
 ## 3.4.4.4
 * Added:    `full_width` arg now makes ANY field full-width.  :)
 

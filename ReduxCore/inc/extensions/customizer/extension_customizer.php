@@ -93,13 +93,14 @@
                     ), 100 );
 
                     //if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
-                        if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
-                            add_action( 'customize_register', array(
-                                $this,
-                                '_register_customizer_controls'
-                            ) ); // Create controls
-                        }
+                    if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
+                        add_action( 'customize_register', array(
+                            $this,
+                            '_register_customizer_controls'
+                        ) ); // Create controls
+                    }
                     //}
+
 
                     add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
                 }
@@ -126,9 +127,7 @@
             }
 
             public function _override_values( $data ) {
-                if ( empty( $this->parent->options ) ) {
-                    $this->parent->get_options();
-                }
+
                 self::get_post_values();
 
                 if ( isset( $_POST['customized'] ) && ! empty( self::$post_values ) ) {
@@ -195,6 +194,10 @@
                 $panel    = "";
 
                 foreach ( $this->parent->sections as $key => $section ) {
+
+                    if ( isset( $section['id'] ) && $section['id'] == "import/export" ) {
+                        continue;
+                    }
 
                     // Not a type that should go on the customizer
                     if ( empty( $section['fields'] ) || ( isset( $section['type'] ) && $section['type'] == "divide" ) ) {
@@ -279,6 +282,13 @@
                                 continue;
                             }
                         }
+                        if ( isset( $option['validate'] ) && $option['validate'] != false ) {
+                            continue;
+                        }
+
+                        if ( isset( $option['validate_callback'] ) && !empty( $option['validate_callback'] ) ) {
+                            continue;
+                        }
 
                         if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
                             continue;
@@ -314,7 +324,7 @@
 
                         $option['id'] = $this->parent->args['opt_name'] . '[' . $option['id'] . ']';
 
-                        if ( $option['type'] != "heading" || ! empty( $option['type'] ) ) {
+                        if ( $option['type'] != "heading" && $option['type'] != "import_export" && $option['type'] != "options_object" && ! empty( $option['type'] ) ) {
                             $wp_customize->add_setting( $option['id'],
                                 array(
                                     'default'           => $option['default'],
@@ -388,7 +398,25 @@
                                     continue;
                                 }
 
+                                $newOptions = array();
+                                foreach ( $option['options'] as $key => $value ) {
+                                    if ( is_array( $value ) ) {
+                                        foreach ( $value as $key => $v ) {
+                                            $newOptions[] = $v;
+                                        }
+
+                                    }
+                                }
+
+                                if ( ! empty( $newOptions ) ) {
+                                    $option['options'] = $newOptions;
+                                }
+
                                 if ( ( isset( $option['sortable'] ) && $option['sortable'] ) ) {
+                                    continue;
+                                }
+
+                                if ( ( isset( $option['multi'] ) && $option['multi'] ) ) {
                                     continue;
                                 }
 

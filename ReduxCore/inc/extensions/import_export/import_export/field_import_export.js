@@ -30,7 +30,6 @@
             return;
         }
 
-
         $( '#redux-import' ).click(
             function( e ) {
                 if ( $( '#import-code-value' ).val() === "" && $( '#import-link-value' ).val() === "" ) {
@@ -38,11 +37,7 @@
                     return false;
                 }
                 window.onbeforeunload = null;
-
-                if ( redux.args.ajax_save === true ) {
-                    $.redux.ajax_save( $( this ) );
-                    e.preventDefault();
-                }
+                redux.args.ajax_save = false;
             }
         );
 
