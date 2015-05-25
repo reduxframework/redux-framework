@@ -81,10 +81,6 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     if ( ! isset( $v['class'] ) ) {
                         $v['class'] = '';
                     }
-
-                    if ( ! isset( $v['class'] ) ) {
-                        $v['class'] = '';
-                    }                    
                     
                     $style = '';
 
