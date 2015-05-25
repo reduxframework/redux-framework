@@ -17,6 +17,8 @@
 	<div id="redux-intro-text"><?php echo $this->parent->args['intro_text']; ?></div>
 <?php } ?>
 
+<div class = "redux-content-wrapper">
+
 <?php $this->get_template( 'menu_container.tpl.php' ); ?>
 
 <div class="redux-main">
@@ -96,3 +98,4 @@
 	<div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
 </div>
 <div class="clear"></div>
+</div>
