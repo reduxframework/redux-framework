@@ -84,6 +84,17 @@
              * @return      void
              */
             public function render() {
+                if ( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
+                    if ( empty( $this->field['args'] ) ) {
+                        $this->field['args'] = array();
+                    }
+
+                    $this->field['options'] = $this->parent->get_wordpress_data( $this->field['data'], $this->field['args'] );
+
+                    if ( empty( $this->field['options'] ) ) {
+                        return;
+                    }
+                }
 
                 // multi => true renders the field multi-selectable (checkbox vs radio)
                 echo '<div class="buttonset ui-buttonset">';
