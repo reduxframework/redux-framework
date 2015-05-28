@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.14
+* Fixed:    #2351 - WP_Error check added to admin blast remote get.
+
 ## 3.5.4.13
 * Modified: Moved styling for the divide field into it's own CSS file.
 * Modified: All WP Color Pickers to properly save the value before save.
