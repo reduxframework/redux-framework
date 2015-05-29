@@ -214,16 +214,35 @@
                 return array();
             }
 
-            public static function removeSection( $opt_name = '', $id = "" ) {
+            public static function removeSection( $opt_name = '', $id = "", $fields = false ) {
                 if ( ! empty( $opt_name ) && ! empty( $id ) ) {
                     if ( isset( self::$sections[ $opt_name ][ $id ] ) ) {
-                        unset( self::$sections[ $opt_name ][ $id ] );
+                        $priority = '';
 
-                        return true;
+                        foreach ( self::$sections[ $opt_name ] as $key => $section ) {
+                            if ( $key == $id ) {
+                                $priority = $section['priority'];
+                                self::$priority[ $opt_name ]['sections'] --;
+                                unset( self::$sections[ $opt_name ][ $id ] );
+                                continue;
+                            }
+                            if ( $priority != "" ) {
+                                $newPriority                         = $section['priority'];
+                                $section['priority']                 = $priority;
+                                self::$sections[ $opt_name ][ $key ] = $section;
+                                $priority                            = $newPriority;
+                            }
+                        }
+
+                        if ( isset( self::$fields[ $opt_name ] ) && ! empty( self::$fields[ $opt_name ] ) && $fields == true ) {
+                            foreach ( self::$fields[ $opt_name ] as $key => $field ) {
+                                if ( $field['section_id'] == $id ) {
+                                    unset( self::$fields[ $opt_name ][ $key ] );
+                                }
+                            }
+                        }
                     }
                 }
-
-                return false;
             }
 
             public static function setSection( $opt_name = '', $section = array() ) {
@@ -305,7 +324,20 @@
 
                 if ( ! empty( $opt_name ) && ! empty( $id ) ) {
                     if ( isset( self::$fields[ $opt_name ][ $id ] ) ) {
-                        unset( self::$fields[ $opt_name ][ $id ] );
+                        foreach ( self::$fields[ $opt_name ] as $key => $field ) {
+                            if ( $key == $id ) {
+                                $priority = $field['priority'];
+                                self::$priority[ $opt_name ]['fields'] --;
+                                unset( self::$fields[ $opt_name ][ $id ] );
+                                continue;
+                            }
+                            if ( $priority != "" ) {
+                                $newPriority                       = $field['priority'];
+                                $field['priority']                 = $priority;
+                                self::$fields[ $opt_name ][ $key ] = $field;
+                                $priority                          = $newPriority;
+                            }
+                        }
                     }
                 }
 
