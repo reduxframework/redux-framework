@@ -683,9 +683,7 @@
 /* sidebar */
 
 .redux-container .form-table th,
-.redux-container .form-table td
-.redux-metabox .form-table th,
-.redux-metabox .form-table td {
+.redux-container .form-table td {
     margin: 0;
     padding: 0;
     width: auto;
@@ -1508,4 +1506,12 @@ pre {
 .redux-qtip {
     z-index: 999999 !important;
 
+}
+
+.redux-main pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
