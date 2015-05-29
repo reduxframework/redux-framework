@@ -1387,8 +1387,8 @@
                             $( '#redux-header' ).append( '<div class="rAds"></div>' );
                             el = $( '#redux-header' );
                         } else {
-                            $( '#customize-info' ).append( '<div class="rAds"></div>' );
-                            el = $( '#customize-info' );
+                            $( '#customize-info .accordion-section-title' ).append( '<div class="rAds"></div>' );
+                            el = $( '#customize-info .accordion-section-title' );
                         }
 
                         el.css( 'position', 'relative' );

@@ -104,8 +104,8 @@
                             {
                                 change: function( e, ui ) {
                                     $( this ).val( ui.color.toString() );
-                                    redux_change( $( this ) );
                                     redux.field_objects.typography.select( $( this ) );
+
                                 }
                             }
                         );
@@ -232,7 +232,9 @@
                                 selVals = val;
                                 isSelecting = true;
 
-                                redux_change( $( this ) );
+                                redux.field_objects.typography.select( $( this ) );
+
+
                             }
                         ).on(
                             'select2-clearing', function( val, choice ) {
@@ -243,7 +245,8 @@
 
                                 $( '#' + thisID + ' #' + thisID + '-google-font' ).val( 'false' );
 
-                                redux_change( $( this ) );
+                                redux.field_objects.typography.select( $( this ) );
+
                             }
                         );
 
@@ -632,6 +635,7 @@
         }
 
         isSelecting = false;
+        redux_change( $( this ) );
 
     };
 })( jQuery );
