@@ -50,7 +50,7 @@
                 if ( $this->parent->args['dev_mode'] ) {
                     $this->template_file_check_notice();
                 }
-                
+
                 /**
                  * action 'redux/{opt_name}/panel/before'
                  */
@@ -247,7 +247,9 @@
                     $path = $this->original_path . $file;
                 }
 
+                do_action( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file . '/before' );
                 $path = apply_filters( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file, $path );
+                do_action( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file . '/after' );
 
                 include( $path );
 

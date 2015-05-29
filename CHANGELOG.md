@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.5.4.15
+* Modified: Restrict table modification to redux-container.
+* Fixed:    Container overflow for pre's.
+* Modified: Redux API to include removeSection and removeField.
+* Added:    Added before and after hooks to any panel template file.
+
 ## 3.5.4.14
 * Fixed:    #2351 - WP_Error check added to admin blast remote get.
 

@@ -205,6 +205,27 @@
                 }
             }
 
+            public static function getSections( $opt_name = '' ) {
+                self::check_opt_name( $opt_name );
+                if ( ! empty( self::$sections[ $opt_name ] ) ) {
+                    return self::$sections[ $opt_name ];
+                }
+
+                return array();
+            }
+
+            public static function removeSection( $opt_name = '', $id = "" ) {
+                if ( ! empty( $opt_name ) && ! empty( $id ) ) {
+                    if ( isset( self::$sections[ $opt_name ][ $id ] ) ) {
+                        unset( self::$sections[ $opt_name ][ $id ] );
+
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
             public static function setSection( $opt_name = '', $section = array() ) {
                 self::check_opt_name( $opt_name );
                 if ( ! isset( $section['id'] ) ) {
@@ -277,6 +298,18 @@
                     }
                     self::$fields[ $opt_name ][ $field['id'] ] = $field;
                 }
+            }
+
+            public static function removeField( $opt_name = '', $id = '' ) {
+                self::check_opt_name( $opt_name );
+
+                if ( ! empty( $opt_name ) && ! empty( $id ) ) {
+                    if ( isset( self::$fields[ $opt_name ][ $id ] ) ) {
+                        unset( self::$fields[ $opt_name ][ $id ] );
+                    }
+                }
+
+                return false;
             }
 
             public static function setHelpTab( $opt_name = "", $tab = array() ) {
