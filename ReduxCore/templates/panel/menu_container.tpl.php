@@ -4,14 +4,15 @@
  *
  * Override this template by specifying the path where it is stored (templates_path) in your Redux config.
  *
- * @author 		Redux Framework
+ * @author 	Redux Framework
  * @package 	ReduxFramework/Templates
- * @version     3.4.3
+ * @version     3.5.4
  */
+
 ?>
 <div class="redux-sidebar">
     <ul class="redux-group-menu">
-        <?php
+<?php
         foreach ( $this->parent->sections as $k => $section ) {
             $title = isset ( $section[ 'title' ] ) ? $section[ 'title' ] : '';
 
@@ -45,23 +46,6 @@
          * @param object $this ReduxFramework
          */
         do_action ( "redux/page/{$this->parent->args[ 'opt_name' ]}/menu/after", $this );
-
-        ?>
-
-        <?php if ( $this->parent->args[ 'system_info' ] === true ) : ?>
-            <li id="system_info_default_section_group_li" class="redux-group-tab-link-li">
-                <?php
-                if ( !empty ( $this->parent->args[ 'icon_type' ] ) && $this->parent->args[ 'icon_type' ] == 'image' ) {
-                    $icon = (!isset ( $this->parent->args[ 'system_info_icon' ] ) ) ? '' : '<img src="' . $this->parent->args[ 'system_info_icon' ] . '" /> ';
-                } else {
-                    $icon_class = (!isset ( $this->parent->args[ 'system_info_icon_class' ] ) ) ? '' : ' ' . $this->parent->args[ 'system_info_icon_class' ];
-                    $icon = (!isset ( $this->parent->args[ 'system_info_icon' ] ) ) ? '<i class="el el-info-circle' . $icon_class . '"></i>' : '<i class="icon-' . $this->parent->args[ 'system_info_icon' ] . $icon_class . '"></i> ';
-                }
-                ?>
-                <a href="javascript:void(0);" id="system_info_default_section_group_li_a"
-                   class="redux-group-tab-link-a custom-tab" data-rel="system_info_default"><?php echo $icon; ?><span
-                        class="group_title"><?php _e ( 'System Info', 'redux-framework' ); ?></span></a>
-            </li>
-        <?php endif; ?>
+?>
     </ul>
 </div>

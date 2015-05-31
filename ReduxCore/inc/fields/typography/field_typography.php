@@ -533,17 +533,24 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
          * @since ReduxFramework 1.0.0
          */
         function enqueue() {
-            wp_enqueue_style( 'select2-css' );
-            wp_enqueue_style( 'wp-color-picker' );
-            
-            wp_enqueue_script(
-                'redux-field-typography-js',
-                ReduxFramework::$_url . 'inc/fields/typography/field_typography' . Redux_Functions::isMin() . '.js',
-                array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' ),
-                time(),
-                true
-            );
+            if (!wp_style_is('select2-css')) {
+                wp_enqueue_style( 'select2-css' );
+            }
 
+            if (!wp_style_is('wp-color-picker')) {
+                wp_enqueue_style( 'wp-color-picker' );
+            }
+
+            if (!wp_script_is ( 'redux-field-typography-js' )) {
+                wp_enqueue_script(
+                    'redux-field-typography-js',
+                    ReduxFramework::$_url . 'inc/fields/typography/field_typography' . Redux_Functions::isMin() . '.js',
+                    array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' ),
+                    time(),
+                    true
+                );
+            }
+            
             wp_localize_script(
                 'redux-field-typography-js',
                 'redux_ajax_script',
@@ -551,15 +558,19 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             );
 
             if ($this->parent->args['dev_mode']) {
-                wp_enqueue_style( 'redux-color-picker-css' );
-                
-                wp_enqueue_style(
-                    'redux-field-typography-css',
-                    ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
-                    array(),
-                    time(),
-                    'all'
-                );
+                if (!wp_style_is('redux-color-picker-css')) {
+                    wp_enqueue_style( 'redux-color-picker-css' );
+                }
+
+                if (!wp_style_is('redux-field-typography-css')) {
+                    wp_enqueue_style(
+                        'redux-field-typography-css',
+                        ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
+                        array(),
+                        time(),
+                        'all'
+                    );
+                }
             }
         }  //function
 

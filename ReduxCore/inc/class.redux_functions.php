@@ -36,6 +36,27 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
         }
 
         /**
+         * Sets a cookie.
+         * Do nothing if unit testing.
+         * 
+         * @since   3.5.4
+         * @access  public
+         * @return  void
+         * @param   string $name The cookie name.
+         * @param   string $value The cookie value.
+         * @param   integer $expire Expiry time.
+         * @param   string $path The cookie path.
+         * @param   string $domain The cookie domain.
+         * @param   boolean $secure HTTPS only.
+         * @param   boolean $httponly Only set cookie on HTTP calls.
+         */
+        public static function setCookie( $name, $value, $expire = 0, $path, $domain = null, $secure = false, $httponly = false ){
+            if ( ! defined( 'WP_TESTS_DOMAIN' ) ) {
+                setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
+            }
+        }        
+        
+        /**
          * Parse CSS from output/compiler array
          *
          * @since       3.2.8
@@ -234,18 +255,22 @@ if ( ! class_exists( 'Redux_Functions' ) ) {
                             }
 
                             // Print the notice with the dismiss link
-                            echo '<div ' . $add_style . ' class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
+                            echo '<div ' . $add_style . ' class="' . $notice['type'] . ' notice is-dismissable"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
                         }
                     } else {
 
                         // Standard notice
-                        echo '<div ' . $add_style . ' class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
+                        echo '<div ' . $add_style . ' class="' . $notice['type'] . ' notice is-dismissable"><p>' . $notice['msg'] . '</a>.</p></div>';
                     }
                 }
 
                 // Clear the admin notice array
                 self::$_parent->admin_notices = array();
             }
+        }
+
+        public static function tru( $string, $opt_name) {
+            return apply_filters( 'redux/' . $opt_name . '/aURL_filter', '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $string . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>' );
         }
 
         /**

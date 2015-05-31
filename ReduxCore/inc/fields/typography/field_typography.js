@@ -102,10 +102,10 @@
                         // Have to redeclare the wpColorPicker to get a callback function
                         $( this ).find( '.redux-typography-color' ).wpColorPicker(
                             {
-                                change: function( event, ui ) {
-                                    redux_change( $( this ) );
+                                change: function( e, ui ) {
                                     $( this ).val( ui.color.toString() );
                                     redux.field_objects.typography.select( $( this ) );
+
                                 }
                             }
                         );
@@ -232,7 +232,9 @@
                                 selVals = val;
                                 isSelecting = true;
 
-                                redux_change( $( this ) );
+                                redux.field_objects.typography.select( $( this ) );
+
+
                             }
                         ).on(
                             'select2-clearing', function( val, choice ) {
@@ -243,7 +245,8 @@
 
                                 $( '#' + thisID + ' #' + thisID + '-google-font' ).val( 'false' );
 
-                                redux_change( $( this ) );
+                                redux.field_objects.typography.select( $( this ) );
+
                             }
                         );
 
@@ -431,7 +434,6 @@
                         } else {
                             selected = "";
                         }
-
                         html += '<option value="' + subset.id + '"' + selected + '>' + subset.name.replace(
                             /\+/g, " "
                         ) + '</option>';
@@ -633,6 +635,7 @@
         }
 
         isSelecting = false;
+        redux_change( $( this ) );
 
     };
 })( jQuery );

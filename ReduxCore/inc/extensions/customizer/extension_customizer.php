@@ -195,6 +195,10 @@
 
                 foreach ( $this->parent->sections as $key => $section ) {
 
+                    if ( isset( $section['id'] ) && $section['id'] == "import/export" ) {
+                        continue;
+                    }
+
                     // Not a type that should go on the customizer
                     if ( empty( $section['fields'] ) || ( isset( $section['type'] ) && $section['type'] == "divide" ) ) {
                         continue;
@@ -320,7 +324,7 @@
 
                         $option['id'] = $this->parent->args['opt_name'] . '[' . $option['id'] . ']';
 
-                        if ( $option['type'] != "heading" || ! empty( $option['type'] ) ) {
+                        if ( $option['type'] != "heading" && $option['type'] != "import_export" && $option['type'] != "options_object" && ! empty( $option['type'] ) ) {
                             $wp_customize->add_setting( $option['id'],
                                 array(
                                     'default'           => $option['default'],

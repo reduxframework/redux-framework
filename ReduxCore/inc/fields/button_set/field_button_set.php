@@ -84,6 +84,17 @@
              * @return      void
              */
             public function render() {
+                if ( !empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
+                    if ( empty( $this->field['args'] ) ) {
+                        $this->field['args'] = array();
+                    }
+
+                    $this->field['options'] = $this->parent->get_wordpress_data( $this->field['data'], $this->field['args'] );
+
+                    if ( empty( $this->field['options'] ) ) {
+                        return;
+                    }
+                }
 
                 // multi => true renders the field multi-selectable (checkbox vs radio)
                 echo '<div class="buttonset ui-buttonset">';
@@ -126,13 +137,15 @@
              */
             public function enqueue() {
 
-                wp_enqueue_script(
-                    'redux-field-button-set-js',
-                    ReduxFramework::$_url . 'inc/fields/button_set/field_button_set' . Redux_Functions::isMin() . '.js',
-                    array( 'jquery', 'jquery-ui-core', 'redux-js' ),
-                    time(),
-                    true
-                );
+                if (!wp_script_is ( 'redux-field-button-set-js' )) {
+                    wp_enqueue_script(
+                        'redux-field-button-set-js',
+                        ReduxFramework::$_url . 'inc/fields/button_set/field_button_set' . Redux_Functions::isMin() . '.js',
+                        array( 'jquery', 'jquery-ui-core', 'redux-js' ),
+                        time(),
+                        true
+                    );
+                }
             }
         }
     }

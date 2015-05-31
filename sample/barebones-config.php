@@ -95,8 +95,6 @@
         // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
         'database'             => '',
         // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-        'system_info'          => false,
-        // REMOVE
         
         //'compiler'             => true,
 
@@ -284,7 +282,7 @@
         'subsection' => true,
         'fields'     => array(
             array(
-                'id'       => 'text-example',
+                'id'       => 'textarea-example',
                 'type'     => 'textarea',
                 'title'    => __( 'Text Area Field', 'redux-framework-demo' ),
                 'subtitle' => __( 'Subtitle', 'redux-framework-demo' ),

@@ -35,8 +35,6 @@
             $.redux.tabCheck();
             $.redux.notices();
             $.redux.tabControl();
-            $.redux.devFunctions();
-
         }
     );
 
@@ -46,7 +44,8 @@
         overlay.fadeIn();
 
         // Add the loading mechanism
-        jQuery( '.redux-action_bar .spinner' ).show();
+        jQuery( '.redux-action_bar .spinner' ).addClass('is-active');
+
         jQuery( '.redux-action_bar input' ).attr( 'disabled', 'disabled' );
         var $notification_bar = jQuery( document.getElementById( 'redux_notification_bar' ) );
         $notification_bar.slideUp();
@@ -106,16 +105,16 @@
                     console.log( response.responseText );
                     jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                     overlay.fadeOut( 'fast' );
-                    jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                    jQuery( '.redux-action_bar .spinner' ).removeClass('is-active');
                     alert( redux.ajax.alert );
                 },
                 success: function( response ) {
                     if ( response.action && response.action == "reload" ) {
-                        location.reload();
+                        location.reload(true);
                     } else if ( response.status == "success" ) {
                         jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
                         overlay.fadeOut( 'fast' );
-                        jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                        jQuery( '.redux-action_bar .spinner' ).removeClass('is-active');
                         redux.options = response.options;
                         //redux.defaults = response.defaults;
                         redux.errors = response.errors;
@@ -130,7 +129,7 @@
                         $save_notice.delay( 4000 ).slideUp();
                     } else {
                         jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
-                        jQuery( '.redux-action_bar .spinner' ).fadeOut( 'fast' );
+                        jQuery( '.redux-action_bar .spinner' ).removeClass('is-active');
                         overlay.fadeOut( 'fast' );
                         jQuery( '.wrap h2:first' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
                         jQuery( '.redux_ajax_save_error' ).slideDown();
@@ -345,7 +344,7 @@
                 style = 'qtip-' + tip_style;
             }
 
-            var classes = shadow + ',' + color + ',' + rounded + ',' + style;
+            var classes = shadow + ',' + color + ',' + rounded + ',' + style+',redux-qtip';
             classes = classes.replace( /,/g, ' ' );
 
             // Get position data
@@ -367,6 +366,36 @@
             // Tip hide effect
             var tipHideEffect = redux.args.hints.tip_effect.hide.effect;
             var tipHideDuration = redux.args.hints.tip_effect.hide.duration;
+
+            $( 'div.redux-dev-qtip' ).each(function(){
+                $( this ).qtip(
+                    {
+                        content: {
+                            text: $( this ).attr( 'qtip-content' ),
+                            title: $( this ).attr( 'qtip-title' )
+                        },
+                        show: {
+                            effect: function() {
+                                $( this ).slideDown( 500 );
+                            },
+                            event: 'mouseover',
+                        },
+                        hide: {
+                            effect: function() {
+                                $( this ).slideUp( 500 );
+                            },
+                            event: 'mouseleave',
+                        },
+                        style: {
+                            classes: 'qtip-shadow qtip-light',
+                        },
+                        position: {
+                            my: 'top center',
+                            at: 'bottom center',
+                        },
+                    }
+                );
+            });
 
             $( 'div.redux-hint-qtip' ).each(
                 function() {
@@ -742,19 +771,6 @@
                 return false;
             }
         );
-    };
-
-    $.redux.devFunctions = function() {
-        $( '#consolePrintObject' ).on(
-            'click', function( e ) {
-                e.preventDefault();
-                console.log( $.parseJSON( $( "#redux-object-json" ).html() ) );
-            }
-        );
-
-        if ( typeof jsonView === 'function' ) {
-            jsonView( '#redux-object-json', '#redux-object-browser' );
-        }
     };
 
     $.redux.required = function() {
@@ -1329,10 +1345,17 @@
     };
     $.redux.resizeAds = function() {
         var el = $( '#redux-header' );
-        var rAds = el.find( '.rAds' );
+        var maxWidth;
+        if (el.length) {
+            maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        } else {
+            el = $('#customize-info');
+            maxWidth = el.width();
+        }
 
         var maxHeight = el.height();
-        var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        var rAds = el.find( '.rAds' );
+
         $( rAds ).find( 'video' ).each(
             function() {
                 $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
@@ -1359,8 +1382,15 @@
             if ( redux.rAds ) {
                 setTimeout(
                     function() {
-                        $( '#redux-header' ).append( '<div class="rAds"></div>' );
-                        var el = $( '#redux-header' );
+                        var el;
+                        if ($( '#redux-header' ).length > 0) {
+                            $( '#redux-header' ).append( '<div class="rAds"></div>' );
+                            el = $( '#redux-header' );
+                        } else {
+                            $( '#customize-info .accordion-section-title' ).append( '<div class="rAds"></div>' );
+                            el = $( '#customize-info .accordion-section-title' );
+                        }
+
                         el.css( 'position', 'relative' );
 
                         el.find( '.rAds' ).attr(
@@ -1515,6 +1545,13 @@ function redux_change( variable ) {
     if ( rContainer.find( '.saved_notice:visible' ).length > 0 ) {
         return;
     }
+
+
+    if (redux.customizer) {
+        redux.customizer.save(variable, rContainer, parentID);
+        return;
+    }
+
     if ( !redux.args.disable_save_warn ) {
         rContainer.find( '.redux-save-warn' ).slideDown();
         window.onbeforeunload = confirmOnPageExit;

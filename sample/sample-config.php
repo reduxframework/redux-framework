@@ -12,6 +12,8 @@
     // This is your option name where all the Redux data is stored.
     $opt_name = "redux_demo";
 
+    // This line is only for altering the demo. Can be easily removed.
+    $opt_name = apply_filters( 'redux_demo/opt_name', $opt_name );
 
     /*
      *
@@ -136,8 +138,8 @@
         // Force your panel to always open to a specific tab (by id)
         'page_icon'            => 'icon-themes',
         // Icon displayed in the admin panel next to your menu_title
-        'page_slug'            => '_options',
-        // Page slug used to denote the panel
+        'page_slug'            => '',
+        // Page slug used to denote the panel, will be based off page title then menu title then opt_name if not provided
         'save_defaults'        => true,
         // On load save the defaults to DB before user clicks save or not
         'default_show'         => false,
@@ -158,10 +160,6 @@
         // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
         'database'             => '',
         // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-        'system_info'          => false,
-        // REMOVE
-
-        //'compiler'             => true,
 
         // HINTS
         'hints'                => array(
@@ -170,7 +168,7 @@
             'icon_color'    => 'lightgray',
             'icon_size'     => 'normal',
             'tip_style'     => array(
-                'color'   => 'light',
+                'color'   => 'red',
                 'shadow'  => true,
                 'rounded' => false,
                 'style'   => '',
@@ -305,6 +303,7 @@
         'title' => __( 'Basic Fields', 'redux-framework-demo' ),
         'id'    => 'basic',
         'desc'  => __( '', 'redux-framework-demo' ),
+        'customizer_width' => '400px',
         'icon'  => 'el el-home'
     ) );
 
@@ -312,6 +311,7 @@
         'title'      => __( 'Checkbox', 'redux-framework-demo' ),
         'id'         => 'basic-checkbox',
         'subsection' => true,
+        'customizer_width' => '450px',
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/checkbox/" target="_blank">http://docs.reduxframework.com/core/fields/checkbox/</a>',
         'fields'     => array(
             array(
@@ -363,6 +363,7 @@
         'title'      => __( 'Radio', 'redux-framework-demo' ),
         'id'         => 'basic-Radio',
         'subsection' => true,
+        'customizer_width' => '500px',
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/radio/" target="_blank">http://docs.reduxframework.com/core/fields/radio/</a>',
         'fields'     => array(
             array(
@@ -435,6 +436,7 @@
         'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/text/" target="_blank">http://docs.reduxframework.com/core/fields/text/</a>',
         'id'         => 'basic-Text',
         'subsection' => true,
+        'customizer_width' => '700px',
         'fields'     => array(
             array(
                 'id'       => 'text-example',
@@ -523,6 +525,7 @@
     Redux::setSection( $opt_name, array(
         'title' => __( 'Editors', 'redux-framework-demo' ),
         'id'    => 'editor',
+        'customizer_width' => '500px',
         'icon'  => 'el el-edit',
     ) );
 
@@ -707,6 +710,44 @@
         )
     ) );
 
+    Redux::setSection( $opt_name, array(
+        'title'      => __( 'Palette Colors', 'redux-framework-demo' ),
+        'desc'       => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="http://docs.reduxframework.com/core/fields/palette-color/" target="_blank">http://docs.reduxframework.com/core/fields/palette-color/</a>',
+        'id'         => 'color-palette',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'opt-palette-color',
+                'type'     => 'palette',
+                'title'    => __( 'Palette Color Option', 'redux-framework-demo' ),
+                'subtitle' => __( 'Only color validation can be done on this field type', 'redux-framework-demo' ),
+                'desc'     => __( 'This is the description field, again good for additional info.', 'redux-framework-demo' ),
+                'default'   => 'red',
+                'palettes'  => array(
+                    'red' => array(
+                        '#ef9a9a',
+                        '#f44336',
+                        '#ff1744',
+                    ),
+                    'pink' => array(
+                        '#fce4ec',
+                        '#f06292',
+                        '#e91e63',
+                        '#ad1457',
+                        '#f50057',
+                    ),
+                    'cyan' => array(
+                        '#e0f7fa',
+                        '#80deea',
+                        '#26c6da',
+                        '#0097a7',
+                        '#00e5ff',
+                    ),
+                )
+            ),
+        )
+    ) );
+    
 
     // -> START Design Fields
     Redux::setSection( $opt_name, array(

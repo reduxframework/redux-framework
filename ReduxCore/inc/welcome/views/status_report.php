@@ -547,7 +547,7 @@
                                 <td>
                                     <?php
                                         foreach ( $ext as $name => $arr ) {
-                                            $ver = Redux::getFileVersion( $arr['path'] );
+                                            $ver = $arr['version'];
                                             ?>
                                             <?php
 

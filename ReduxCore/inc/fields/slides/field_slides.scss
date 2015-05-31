@@ -79,8 +79,14 @@
     .redux_slides_add_remove {
         margin-bottom: 10px;
     }
+    input {
+        width: 100% !important;
+    }
 
-    .ui-state-hover {
-        background-color: #ececec !important;
+}
+
+.wp-customizer {
+    .redux-container-slides .ui-accordion .ui-accordion-content {
+        padding: 10px;
     }
 }

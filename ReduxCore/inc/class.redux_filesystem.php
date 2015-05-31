@@ -29,6 +29,7 @@
 
             function filesystem_init( $form_url, $method = '', $context = false, $fields = null ) {
                 global $wp_filesystem;
+
                 if ( ! empty( $this->creds ) ) {
                     return true;
                 }
@@ -183,7 +184,7 @@
                 } elseif ( $action == 'get_contents' ) {
                     // Reads entire file into a string
                     if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
-                        $res = file_get_contents( $file );
+                        $res = @file_get_contents( $file );
                     } else {
                         $res = $wp_filesystem->get_contents( $file );
                     }

@@ -1,10 +1,10 @@
 === Redux Framework ===
-Contributors: dovyp, kprovance, section214
+Contributors: dovyp, kprovance
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 4.2
-Stable tag: 3.5.0.1
+Tested up to: 4.3
+Stable tag: 3.5.4.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,7 +12,7 @@ Redux is a simple, truly extensible and fully responsive options framework for W
 
 == Description ==
 
-Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. Built on the WordPress Settings API, Redux supports a multitude of field types as well as custom error handling, custom field & validation types, and import/export functionality.
+Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. Built on the WordPress Settings API, Redux supports a multitude of field types as well as: custom error handling, custom fields & validation types, and import/export functionality.
 
 But what does Redux actually DO? We don't believe that theme and plugin
 developers should have to reinvent the wheel every time they start work on a
@@ -24,22 +24,22 @@ it would take to build from the ground up!
 
 = Online Demo =
 Don't take our word for it, check out our online demo and try Redux without installing a thing!
-[**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
+[**http://demo.redux.io/**](http://demo.redux.io/)
 
-= Use Our Custom Generator to Get Started =
-Want to use Redux, but not sure what to do? Use our [generator](http://generate.reduxframework.com/)! It will allow you to make
+= Use the Redux Builder to Get Started =
+Want to use Redux, but not sure what to do? Use our [builder](http://build.reduxframework.com/)! It will allow you to make
 a custom theme based on [_s](http://underscores.me), [TGM](http://tgmpluginactivation.com), and [Redux](http://reduxframework.com), and any Redux arguments you want to set.
 Don't want to make your own theme? Then output a custom admin folder that you can place
 in a theme or plugin. Oh and did we mention it's free? Try it today at:
-[**http://generate.reduxframework.com/**](http://generate.reduxframework.com/)
+[**http://build.reduxframework.com/**](http://build.reduxframework.com/)
 
 
 = Docs & Support =
-We have extremely extensive docs. Please visit [http://docs.reduxframework.com/](http://docs.reduxframework.com/) If that doesn’t solve your concern, you should search [the issue tracker on Github](https://github.com/ReduxFramework/ReduxFramework/issues). If you can't locate any topics that pertain to your particular issue, [post a new issue](https://github.com/ReduxFramework/ReduxFramework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build off of the dev version and push to WordPress.org when all is confirmed stable and ready for release.
+We have extremely extensive docs. Please visit [http://docs.reduxframework.com/](http://docs.reduxframework.com/) If that doesn’t solve your concern, you should search [the issue tracker on Github](https://github.com/reduxframework/redux-framework/issues). If you can't locate any topics that pertain to your particular issue, [post a new issue](https://github.com/reduxframework/redux-framework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build off of the dev version and push to WordPress.org when all is confirmed stable and ready for release.
 
 
 = Redux Framework Needs Your Support =
-It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Redux Framework, and find it useful, please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U). Your donation will help encourage and support the plugin's continued development and better user support.
+It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Redux Framework, and find it useful, please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW). Your donation will help encourage and support the plugin's continued development and better user support.
 
 = Fields Types =
 
@@ -83,7 +83,7 @@ It is hard to continue development and support for this free plugin without cont
 
 * Field Validation
 * MANY translations. (See below)
-* Full value escaping
+* Full value escaping.
 * Required - Link visibility from parent fields. Set this to affect the visibility of the field on the parent's value. Fully nested with multiple required parents possible.
 * Output CSS Automatically - Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
 * Compiler integration! A custom hook runs when any fields with the argument `compile => true` are changed.
@@ -95,7 +95,7 @@ We need your help to translate Redux into your language! Redux is part of the WP
 
 = Get Involved =
 Redux is an ever-changing, living system. Want to stay up to date or
-contribute? Subscribe to one of our mailing lists or join us on [Twitter](https://twitter.com/reduxframework) or [Github](https://github.com/ReduxFramework/ReduxFramework)!
+contribute? Subscribe to one of our mailing lists or join us on [Facebook](https://facebook.com/reduxframework) or [Twitter](https://twitter.com/reduxframework) or [Github](https://github.com/ReduxFramework/ReduxFramework)!
 
 NOTE: Redux is not intended to be used on its own. It requires a config file
 provided by a third-party theme or plugin developer to actual do anything
@@ -125,7 +125,48 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
-= 3.5.0.1 =
+= 3.5.4.3 =
+* Fixed: #2258 - welcome redirect error with embedding plugin scenarios.
+* Fixed: Redux plugin load order when activating plugins.
+* Fixed: #2271 - stuck redirect on godaddy (seriously, get a real host, people) servers.
+* Fixed: #2216 - Reset section not always working within FF.
+
+= 3.5.4 =
+* Modified: update_notice arg only truly shows up if dev_mode is on.
+* Added:    Tooltip to developer mode badge, for informational purposes.
+* Modified: Added css_layout ext to default value filter, to avoid errors.
+* Fixed:    #2239 - Various extensions didn't support default values for default arg.  Filtered out offending extensions.
+
+= 3.5.3.1 =
+* Fixed: WP.org ONLY SVN mixup.
+
+= 3.5.3 =
+* Fixed:   #2228 - Submenu items still visible if permissions not allowed.
+* Fixed:   Import/Export showing up in customizer.
+* Modified: Admin-fresh theme to match new WordPress 4.2
+* Modified: Redux widget now has a proper ID. Thanks @corradomatt!
+* Modified: Added text-shadow to submenu items to give a stronger "pop"
+* Modified: Page_slug now dynamically generated if not specified.
+* Modified: Admin blast message pinging server on each load after three day expiration.  Possible slow down of the overall panel loading time.
+* Fixed:   #2221 - Background field media not enqueueing when used with no other media based fields.
+* Fixed:   #2214: Bad path for import/export enqueue.
+* Release: Wp.org release.
+* Fixed:    #2214 - Import/export field contained bad enqueue path.
+* Modified: If running localhost or WP_DEBUG is set to true, Redux dev_mode is forced to true.
+* Modified: Page_slug now dynamically generated if not specified.
+
+= 3.5.1 =
+* Modified: Redux News dashboard widget appears only when dev_mode is true or in a local host environment.
+* Fixed     #2127 - Elusive icons not working in footer as before.
+* Fixed     Issue where Status tab not showing extension versions properly.
+* Fixed     Issue in support URL not passing data correctly.
+* Fixed     Support URLs now work even if max_input_vars is way low in PHP 5.3+
+* Fixed     #2197 - Import/export not loading proper for those who have opted to install Wordpress in ways it was never intended.
+* Fixed:    'Generate Support URL' feature kicking back error.
+* Fixed     Sortable checkbox labels not displaying properly.
+* Fixed     Sortable textbox not displaying default value as placeholder.
+* Updated:  sample-config with accurate example for both sortable modes.
+* Fixed     #2181 - Fixed issue with Ajax Save when PHP 5.3 Magic Quotes were disabled.
 * Fixed:    #2181 - Lingering issue with Ajax Save and PHP Magic Quotes.
 
 = 3.5.0 =
