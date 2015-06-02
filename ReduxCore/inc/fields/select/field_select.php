@@ -62,7 +62,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
             }
 
             if ( ! empty( $this->field['data'] ) && ( $this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) ) {
-                $this->field['class'] = " font-icons";
+                $this->field['class'] .= " font-icons";
             }
             //if
 

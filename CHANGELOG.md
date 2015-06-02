@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.16
+* Fixed:    #2355 - Space missing in switch class arg.
+* Fixed:    Fixed all fields without leading space in class arg.
+
 ## 3.5.4.15
 * Modified: Restrict table modification to redux-container.
 * Fixed:    Container overflow for pre's.
