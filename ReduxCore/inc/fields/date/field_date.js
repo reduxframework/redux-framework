@@ -31,6 +31,29 @@
                 } else {
                     return;
                 }
+//                        var someArr = []
+//                        someArr = i;
+//                        console.log(someArr);
+                
+//                var str = JSON.parse('{"redux_demo[opt-multi-check]":{"redux_demo[opt-multi-check][1]":"1","redux_demo[opt-multi-check][2]":"","redux_demo[opt-multi-check][3]":""}}');
+//                console.log (str);
+//                
+//                $.each(str, function(idx, val){
+//                    var tmpArr = new Object();
+//                    var count = 1;
+//                    
+//                    $.each(val, function (i, v){
+//                        
+//                        tmpArr[count] = v;
+//                        count++;
+//                    });
+//
+//                    var newArr = {};
+//                    newArr[idx] = tmpArr;
+//                    var newJSON = JSON.stringify(newArr)
+//                    //console.log(newJSON);
+//                });
+                
                 el.find( '.redux-datepicker' ).each( function() {
                     
                     $( this ).datepicker({
