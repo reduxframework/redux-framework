@@ -2926,7 +2926,7 @@
                             }
 
                             // Force validate of custom field types
-                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) ) {
+                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) && ! isset($field['validate_callback']) ) {
                                 if ( $field['type'] == 'color' || $field['type'] == 'color_gradient' ) {
                                     $field['validate'] = 'color';
                                 } elseif ( $field['type'] == 'date' ) {
