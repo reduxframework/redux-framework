@@ -66,7 +66,6 @@
             }
 
             public static function isLocalHost() {
-                echo $_SERVER['REMOTE_ADDR'];
                 return ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' ) ? 1 : 0;
             }
 
