@@ -162,7 +162,7 @@
         <tr>
             <td data-export-label="WP Debug Mode"><?php _e( 'WP Debug Mode', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Displays whether or not WordPress is in Debug Mode.', 'redux-framework' ) . '">[?]</a>'; ?></td>
-            <td><?php if ( $sysinfo['wp_debug'] == true ) {
+            <td><?php if ( $sysinfo['wp_debug'] === true ) {
                     echo '<mark class="yes">' . '&#10004;' . '</mark>';
                 } else {
                     echo '<mark class="no">' . '&ndash;' . '</mark>';
@@ -212,7 +212,7 @@
             <td data-export-label="Localhost Environment"><?php _e( 'Localhost Environment', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Is the server running in a localhost environment.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php
-                if ( true == $sysinfo['localhost'] ) {
+                if ( $sysinfo['localhost'] === true ) {
                     echo '<mark class="yes">' . '&#10004;' . '</mark>';
                 } else {
                     echo '<mark class="no">' . '&ndash;' . '</mark>';
