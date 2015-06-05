@@ -33,14 +33,14 @@
                     <h4>Ajax Saving & More Speed!</h4>
 
                     <p>This version the fastest Redux ever released. We've integrated ajax_saving as well as many other
-                        speed improvments to make Redux even surpass the load time of <a
+                        speed improvements to make Redux even surpass the load time of <a
                             href="https://github.com/syamilmj/Options-Framework" target="_blank">SMOF</a> even with
                         large panels.</p>
                 </div>
                 <div>
                     <h4>The New Redux API</h4>
 
-                    <p>We've gone back to the drawing boards and made Redux the <strong>simplist</strong> framework to
+                    <p>We've gone back to the drawing boards and made Redux the <strong>simplest</strong> framework to
                         use. Introducing the Redux API. Easily add fields, extensions, templates, and more without every
                         having to define a class! <a href=" http://docs.reduxframework.com/core/redux-api/" target="_blank">Learn More</a></p>
                 </div>
