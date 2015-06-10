@@ -97,7 +97,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             
             // Color picker container
             echo '<div 
-                      class="redux-color-rgba-container' . $this->field['class'] . '" 
+                      class="redux-color-rgba-container ' . $this->field['class'] . '" 
                       data-id="'                        . $field_id . '"
                       data-show-input="'                . $this->field['options']['show_input'] . '"
                       data-show-initial="'              . $this->field['options']['show_initial'] . '"

@@ -81,8 +81,8 @@
                 :
             </td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Redux and its extensions write data to the <code>uploads</code> directory. This directory must be writable.', 'redux-framework' ) . '">[?]</a>'; ?></td>
-            <td><?php
-                    if ( $sysinfo['redux_data_writeable'] == true ) {
+            <td><?php 
+                    if ( $sysinfo['redux_data_writeable'] == 'true' ) {
                         echo '<mark class="yes">' . '&#10004; <code>' . $sysinfo['redux_data_dir'] . '</code></mark> ';
                     } else {
                         printf( '<mark class="error">' . '&#10005; ' . __( 'To allow data saving, make <code>%s</code> writable.', 'redux-framework' ) . '</mark>', $sysinfo['redux_data_dir'] );
@@ -162,7 +162,7 @@
         <tr>
             <td data-export-label="WP Debug Mode"><?php _e( 'WP Debug Mode', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Displays whether or not WordPress is in Debug Mode.', 'redux-framework' ) . '">[?]</a>'; ?></td>
-            <td><?php if ( $sysinfo['wp_debug'] == true ) {
+            <td><?php if ( $sysinfo['wp_debug'] === 'true' ) {
                     echo '<mark class="yes">' . '&#10004;' . '</mark>';
                 } else {
                     echo '<mark class="no">' . '&ndash;' . '</mark>';
@@ -212,7 +212,7 @@
             <td data-export-label="Localhost Environment"><?php _e( 'Localhost Environment', 'redux-framework' ); ?>:</td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Is the server running in a localhost environment.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php
-                if ( true == $sysinfo['localhost'] ) {
+                if ( $sysinfo['localhost'] === 'true' ) {
                     echo '<mark class="yes">' . '&#10004;' . '</mark>';
                 } else {
                     echo '<mark class="no">' . '&ndash;' . '</mark>';
@@ -255,7 +255,7 @@
                 <td data-export-label="PHP Display Errors"><?php _e( 'PHP Display Errors', 'redux-framework' ); ?>:</td>
                 <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Determines if PHP will display errors within the browser.', 'redux-framework' ) . '">[?]</a>'; ?></td>
                 <td><?php
-                        if ( true == $sysinfo['php_display_errors'] ) {
+                        if ( 'true' === $sysinfo['php_display_errors'] ) {
                             echo '<mark class="yes">' . '&#10004;' . '</mark>';
                         } else {
                             echo '<mark class="no">' . '&ndash;' . '</mark>';
@@ -289,7 +289,7 @@
             </td>
             <td class="help"><?php echo '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'The default timezone for your server.', 'redux-framework' ) . '">[?]</a>'; ?></td>
             <td><?php
-                    if ( $sysinfo['def_tz_is_utc'] == false ) {
+                    if ( $sysinfo['def_tz_is_utc'] === 'false' ) {
                         echo '<mark class="error">' . '&#10005; ' . sprintf( __( 'Default timezone is %s - it should be UTC', 'redux-framework' ), date_default_timezone_get() ) . '</mark>';
                     } else {
                         echo '<mark class="yes">' . '&#10004;' . '</mark>';
@@ -303,7 +303,7 @@
             $posting['fsockopen_curl']['name'] = 'fsockopen/cURL';
             $posting['fsockopen_curl']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Used when communicating with remote services with PHP.', 'redux-framework' ) . '">[?]</a>';
 
-            if ( $sysinfo['fsockopen_curl'] == true ) {
+            if ( $sysinfo['fsockopen_curl'] === 'true' ) {
                 $posting['fsockopen_curl']['success'] = true;
             } else {
                 $posting['fsockopen_curl']['success'] = false;
@@ -349,7 +349,7 @@
             $posting['wp_remote_post']['name'] = __( 'Remote Post', 'redux-framework' );
             $posting['wp_remote_post']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Used to send data to remote servers.', 'redux-framework' ) . '">[?]</a>';
 
-            if ( $sysinfo['wp_remote_post'] == true ) {
+            if ( $sysinfo['wp_remote_post'] === 'true' ) {
                 $posting['wp_remote_post']['success'] = true;
             } else {
                 $posting['wp_remote_post']['note'] = __( 'wp_remote_post() failed. Many advanced features may not function. Contact your hosting provider.', 'redux-framework' );
@@ -365,7 +365,7 @@
             $posting['wp_remote_get']['name'] = __( 'Remote Get', 'redux-framework' );
             $posting['wp_remote_get']['help'] = '<a href="#" class="redux-hint-qtip" qtip-content="' . esc_attr__( 'Used to grab information from remote servers for updates updates.', 'redux-framework' ) . '">[?]</a>';
 
-            if ( $sysinfo['wp_remote_get'] == true ) {
+            if ( $sysinfo['wp_remote_get'] === 'true' ) {
                 $posting['wp_remote_get']['success'] = true;
             } else {
                 $posting['wp_remote_get']['note'] = __( 'wp_remote_get() failed. This is needed to get information from remote servers. Contact your hosting provider.', 'redux-framework' );

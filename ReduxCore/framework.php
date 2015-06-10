@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.15';
+            public static $_version = '3.5.4.17';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2926,7 +2926,7 @@
                             }
 
                             // Force validate of custom field types
-                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) ) {
+                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) && ! isset($field['validate_callback']) ) {
                                 if ( $field['type'] == 'color' || $field['type'] == 'color_gradient' ) {
                                     $field['validate'] = 'color';
                                 } elseif ( $field['type'] == 'date' ) {

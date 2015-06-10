@@ -1,6 +1,6 @@
 {
   "name": "redux-framework/redux-framework",
-  "version": "3.5.4.14",
+  "version": "3.5.4.17",
   "authors": [
     {
       "name": "Team Redux"
@@ -11,6 +11,9 @@
   "homepage": "http://reduxframework.com",
   "license": "GPL-3.0+",
   "keywords": ["settings", "wordpress", "options", "framework", "redux", "customizer", "plugin"],
+  "support": {
+   	"issues": "https://github.com/reduxframework/redux-framework/issues"
+  },
   "require" : {
     "php" : ">=5.2.0",
     "composer/installers": "~1.0"

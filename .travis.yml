@@ -45,8 +45,7 @@ after_script:
 notifications:
   email:
     recipients:
-    - dovy@reduxframework.com
-    - kevin.provance@gmail.com
+    - support@redux.io
     on_failure: always
   slack: redux:79L14EG4ktCO8P24yKa8le4s    
 branches:
