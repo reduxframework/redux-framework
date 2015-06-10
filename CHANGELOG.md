@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.4.18
+* Modified: Templates to properly excape values.
+* Fixed:    Import/Export to properly be full-width and use lazy-load JS.
+* Modified: CSS for sections to bound to the section, not all of Redux.
+
 ## 3.5.4.17
 * Fixed:    #2368 - Options panel layout offset.
 * Fixed:    #2369 - validate_callback not working for color, color_gradient, and date.

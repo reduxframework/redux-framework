@@ -5,7 +5,7 @@
      *
      * @author        Redux Framework
      * @package       ReduxFramework/Templates
-     * @version       3.5.0.6
+     * @version       3.5.4.18
      */
 ?>
 <div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
@@ -23,17 +23,18 @@
                     }
                     ?>
 
-                    <a href="<?php echo $link['url'] ?>" title="<?php echo $link['title']; ?>" target="_blank">
+                    <a href="<?php echo esc_url( $link['url'] ) ?>" title="<?php echo esc_attr( $link['title'] ); ?>"
+                       target="_blank">
 
                         <?php if ( isset( $link['icon'] ) && ! empty( $link['icon'] ) ) : ?>
                             <i class="<?php
                                 if ( strpos( $link['icon'], 'el-icon' ) !== false && strpos( $link['icon'], 'el ' ) === false ) {
                                     $link['icon'] = 'el ' . $link['icon'];
                                 }
-                                echo $link['icon'];
+                                echo esc_attr( $link['icon'] );
                             ?>"></i>
                         <?php else : ?>
-                            <img src="<?php echo $link['img'] ?>"/>
+                            <img src="<?php echo esc_url( $link['img'] ); ?>"/>
                         <?php endif; ?>
 
                     </a>

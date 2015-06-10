@@ -47,8 +47,8 @@
              * @since       1.0.0
              * @access      public
              *
-             * @param       array $sections Panel sections.
-             * @param       array $args Class constructor arguments.
+             * @param       array $sections   Panel sections.
+             * @param       array $args       Class constructor arguments.
              * @param       array $extra_tabs Extra panel tabs.
              *
              * @return      void
@@ -60,7 +60,6 @@
                     //$this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
                 }
                 $this->field_name = 'import_export';
-
 
                 self::$theInstance = $this;
 
@@ -82,11 +81,11 @@
                     "download_options"
                 ) );
 
-                do_action("redux/options/{$this->parent->args['opt_name']}/import", array($this, 'remove_cookie'));
+                do_action( "redux/options/{$this->parent->args['opt_name']}/import", array( $this, 'remove_cookie' ) );
 
-                $this->is_field = Redux_Helpers::isFieldInUse($parent, 'import_export');
+                $this->is_field = Redux_Helpers::isFieldInUse( $parent, 'import_export' );
 
-                if ( !$this->is_field && $this->parent->args['show_import_export'] ) {
+                if ( ! $this->is_field && $this->parent->args['show_import_export'] ) {
                     $this->add_section();
                 }
 
@@ -95,10 +94,10 @@
                     'overload_field_path'
                 ) ); // Adds the local field
 
-                //add_filter( 'upload_mimes', array(
-                //    $this,
-                //    'custom_upload_mimes'
-                //) );
+                add_filter( 'upload_mimes', array(
+                    $this,
+                    'custom_upload_mimes'
+                ) );
 
             }
 
@@ -110,22 +109,25 @@
              * @return array
              */
             function custom_upload_mimes( $existing_mimes = array() ) {
-                $existing_mimes['redux']  = 'application/json';
+                $existing_mimes['redux'] = 'application/redux';
+
                 return $existing_mimes;
             }
 
             public function add_section() {
                 $this->parent->sections[] = array(
-                    'id' => 'import/export',
-                    'title' => __( 'Import / Export', 'redux-framework' ),
-                    'heading' => '',
-                    'icon' => 'el el-refresh',
+                    'id'         => 'import/export',
+                    'title'      => __( 'Import / Export', 'redux-framework' ),
+                    'heading'    => '',
+                    'icon'       => 'el el-refresh',
                     'customizer' => false,
-                    'fields' => array(
+                    'fields'     => array(
                         array(
-                            'id' => 'redux_import_export',
-                            'type'=> 'import_export',
-                            'title' => '',
+                            'id'         => 'redux_import_export',
+                            'type'       => 'import_export',
+                            //'class'      => 'redux-field-init redux_remove_th',
+                            //'title'      => '',
+                            'full_width' => true,
                         )
                     ),
                 );
@@ -161,9 +163,10 @@
                     unset( $var['REDUX_imported'] );
                 }
 
+                // No need to escape this, as it's been properly escaped previously and through json_encode
                 $content = json_encode( $backup_options );
 
-                if ( isset( $_GET['action'] ) && $_GET['action'] == 'redux_download_options-'.$this->parent->args['opt_name'] ) {
+                if ( isset( $_GET['action'] ) && $_GET['action'] == 'redux_download_options-' . $this->parent->args['opt_name'] ) {
                     header( 'Content-Description: File Transfer' );
                     header( 'Content-type: application/txt' );
                     header( 'Content-Disposition: attachment; filename="redux_options_' . $this->parent->args['opt_name'] . '_backup_' . date( 'd-m-Y' ) . '.json"' );
@@ -173,7 +176,6 @@
                     header( 'Pragma: public' );
 
                     echo $content;
-
                     exit;
                 } else {
                     header( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -196,7 +198,6 @@
             }
 
             public function remove_cookie() {
-
                 // Remove the import/export tab cookie.
                 if ( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
                     setcookie( 'redux_current_tab', '', 1, '/' );
@@ -204,5 +205,5 @@
                 }
             }
 
-        } // class
-    } // if
+        }
+    }

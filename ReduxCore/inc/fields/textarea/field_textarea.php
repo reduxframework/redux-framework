@@ -60,13 +60,20 @@
                 $this->field['placeholder'] = isset( $this->field['placeholder'] ) ? $this->field['placeholder'] : "";
                 $this->field['rows']        = isset( $this->field['rows'] ) ? $this->field['rows'] : 6;
 
+                // The $this->field variables are already escaped in the ReduxFramework Class.
                 ?>
-                <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>"
-                          id="<?php echo $this->field['id']; ?>-textarea"
-                          placeholder="<?php echo esc_attr( $this->field['placeholder'] ); ?>"
-                          class="large-text <?php echo $this->field['class']; ?>"
-                          rows="<?php echo $this->field['rows']; ?>"><?php echo $this->value; ?></textarea>
+                <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>" id="<?php echo $this->field['id']; ?>-textarea" placeholder="<?php echo esc_attr( $this->field['placeholder'] ); ?>" class="large-text <?php echo $this->field['class']; ?>" rows="<?php echo $this->field['rows']; ?>"><?php echo esc_textarea( $this->value ); ?></textarea>
             <?php
+            }
+
+            function sanitize( $field, $value ) {
+                if ( ! isset( $value ) || empty( $value ) ) {
+                    $value = "";
+                } else {
+                    $value = esc_textarea( $value );
+                }
+
+                return $value;
             }
         }
     }
