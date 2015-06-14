@@ -39,7 +39,15 @@
                 } else {
                     return;
                 }
-
+//				var $control = el.find( '.redux-color-init' ),
+//                                        
+//					value = $control.val().replace( /\s+/g, '' ),
+//					alpha_val = 100,
+//					$alpha, $alpha_output;
+//                                //console.log($control);
+//				if ( value.match( /rgba\(\d+\,\d+\,\d+\,([^\)]+)\)/ ) ) {
+//					alpha_val = parseFloat( value.match( /rgba\(\d+\,\d+\,\d+\,([^\)]+)\)/ )[ 1 ] ) * 100;
+//				}
                 el.find( '.redux-color-init' ).wpColorPicker(
                     {
                         change: function( e, ui ) {
@@ -53,6 +61,27 @@
                         }
                     }
                 );
+//				$( '<div class="redux-alpha-container">'
+//				+ '<label>Alpha: <output class="rangevalue">' + alpha_val + '%</output></label>'
+//				+ '<input type="range" min="1" max="100" value="' + alpha_val + '" name="alpha" class="vc_alpha-field">'
+//				+ '</div>' ).appendTo( $control.parents( '.wp-picker-container:first' ).addClass( 'vc_color-picker' ).find( '.iris-picker' ) );
+//				$alpha = $control.parents( '.wp-picker-container:first' ).find( '.vc_alpha-field' );
+//                                //console.log($alpha);
+//				$alpha_output = $control.parents( '.wp-picker-container:first' ).find( '.redux-alpha-container output' );
+//				$alpha.bind( 'change keyup', function () {
+//					var alpha_val = parseFloat( $alpha.val() ),
+//						iris = $control.data( 'a8cIris' ),
+//						color_picker = $control.data( 'wp-wpColorPicker' );
+//                                                //console.log(alpha_val);
+//					$alpha_output.val( $alpha.val() + '%' );
+//                                        console.log(alpha_val / 100.0);
+//					iris._color._alpha = parseFloat(alpha_val / 100.0);
+//                                        console.log(iris._color);
+//					//$control.val( iris._color.toString() );
+//                                        el.find( '.redux-color-init' ).wpColorPicker( 'color', iris._color.toString() );
+//                                        //console.log($control.val());
+//					//color_picker.toggler.css( { backgroundColor: $control.val() } );
+//				} ).val( alpha_val ).trigger( 'change' );                                
 
                 el.find( '.redux-color' ).on(
                     'focus', function() {

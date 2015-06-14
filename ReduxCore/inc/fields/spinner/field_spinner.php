@@ -142,5 +142,42 @@ if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
                 );
             }
         }
+        
+        public function output() {
+            $style = '';
+
+            if ( ! empty( $this->value ) ) {
+                if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+                    $css = $this->parseCSS($this->value, $this->field['output']);
+                    $this->parent->outputCSS .= $css;
+                }
+
+                if ( ! empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+                    $css = $this->parseCSS($this->value, $this->field['output']);
+                    $this->parent->compilerCSS .= $css;
+
+                }
+            }            
+        }
+        
+        private function parseCSS($value, $output){
+            // No notices
+            $css = '';
+            
+            $unit = isset($this->field['output_unit']) ? $this->field['output_unit'] : 'px';
+            
+            // Must be an array
+            if (is_numeric($value)) {
+                if (is_array($output)) {
+                    foreach($output as $mode => $selector) {
+                        if (!empty($mode) && !empty($selector)) {
+                            $css .= $selector . '{' . $mode . ': ' . $value . $unit . ';}';
+                        }
+                    }
+                }
+            }
+
+            return $css;
+        }
     }
 }
