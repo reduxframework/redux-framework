@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.19
+* Fixed:    #2377 - Replaced mysql_gets_server_info with $wpdb.
+
 ## 3.5.4.18
 * Modified: Templates to properly excape values.
 * Fixed:    Import/Export to properly be full-width and use lazy-load JS.
