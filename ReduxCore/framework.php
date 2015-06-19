@@ -25,7 +25,7 @@
     if ( has_action( 'ecpt_field_options_' ) ) {
         global $pagenow;
         if ( $pagenow === 'admin.php' ) {
-            /** @noinspection PhpUndefinedCallbackInspection */
+
             remove_action( 'admin_init', 'pb_admin_init' );
         }
     }
@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.9';
+            public static $_version = '3.5.4.19';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -546,7 +546,7 @@
                         ),
                     ),
                     'show_import_export'        => true,
-                    'show_options_object'       => false,
+                    'show_options_object'       => true,
                     'dev_mode'                  => true,
                     'disable_tracking'          => false,
                     'templates_path'            => '',
@@ -1253,10 +1253,6 @@
                     }
                     $this->dev_mode_forced  = true;
                     $this->args['dev_mode'] = true;
-                }
-
-                if ( $this->args['dev_mode'] ) {
-                    $this->args['show_options_object'] = true;
                 }
 
                 // Auto create the page_slug appropriately
@@ -2061,7 +2057,7 @@
                         }
                     }
 
-                    if ( ! $display ) {
+                    if ( ! $display || ! function_exists( 'add_settings_section' ) ) {
                         $this->no_panel_section[ $k ] = $section;
                     } else {
                         add_settings_section( $this->args['opt_name'] . $k . '_section', $heading, array(
@@ -2298,6 +2294,7 @@
                             do_action( "redux/options/{$this->args['opt_name']}/field/{$field['type']}/register", $field );
 
                             $this->check_dependencies( $field );
+                            $this->field_head[ $field['id'] ] = $th;
 
                             if ( ! $display || isset ( $this->no_panel_section[ $k ] ) ) {
                                 $this->no_panel[] = $field['id'];
@@ -2312,10 +2309,7 @@
                                         '_field_input'
                                     ), "{$this->args['opt_name']}{$k}_section_group", "{$this->args['opt_name']}{$k}_section", $field
                                     );
-                                } else {
-                                    $this->field_head[ $field['id'] ] = $th;
                                 }
-
                             }
                         }
                     }
@@ -2932,7 +2926,7 @@
                             }
 
                             // Force validate of custom field types
-                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) ) {
+                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) && ! isset($field['validate_callback']) ) {
                                 if ( $field['type'] == 'color' || $field['type'] == 'color_gradient' ) {
                                     $field['validate'] = 'color';
                                 } elseif ( $field['type'] == 'date' ) {
@@ -3246,7 +3240,10 @@
                      * @param array  $field field data
                      * @param string $value field.id
                      */
-                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/callback/before", array( &$field, &$value ) );
+                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/callback/before", array(
+                        &$field,
+                        &$value
+                    ) );
 
                     /**
                      * action 'redux/field/{opt_name}/callback/before'
@@ -3254,7 +3251,10 @@
                      * @param array  $field field data
                      * @param string $value field.id
                      */
-                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/callback/before", array( &$field, &$value ) );
+                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/callback/before", array(
+                        &$field,
+                        &$value
+                    ) );
 
                     call_user_func( $field['callback'], $field, $value );
 
@@ -3275,7 +3275,10 @@
                      * @param array  $field field data
                      * @param string $value field.id
                      */
-                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/callback/after", array( &$field, &$value ) );
+                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/callback/after", array(
+                        &$field,
+                        &$value
+                    ) );
 
                     /**
                      * action 'redux/field/{opt_name}/callback/after'
@@ -3283,7 +3286,10 @@
                      * @param array  $field field data
                      * @param string $value field.id
                      */
-                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/callback/after", array( &$field, &$value ) );
+                    do_action_ref_array( "redux/field/{$this->args['opt_name']}/callback/after", array(
+                        &$field,
+                        &$value
+                    ) );
 
 
                     return;
@@ -3345,7 +3351,10 @@
                          * @param array  $field field data
                          * @param string $value field id
                          */
-                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/render/before", array( &$field, &$value ) );
+                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/render/before", array(
+                            &$field,
+                            &$value
+                        ) );
 
                         /**
                          * action 'redux/field/{$this->args['opt_name']}/render/before'
@@ -3353,7 +3362,10 @@
                          * @param array  $field field data
                          * @param string $value field id
                          */
-                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/render/before", array( &$field, &$value ) );
+                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/render/before", array(
+                            &$field,
+                            &$value
+                        ) );
 
                         if ( ! isset ( $field['name_suffix'] ) ) {
                             $field['name_suffix'] = "";
@@ -3414,7 +3426,10 @@
                          * @param array  $field field data
                          * @param string $value field id
                          */
-                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/fieldset/before/{$this->args['opt_name']}", array( &$field, &$value ) );
+                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/fieldset/before/{$this->args['opt_name']}", array(
+                            &$field,
+                            &$value
+                        ) );
 
                         /**
                          * action 'redux/field/{opt_name}/fieldset/before/{opt_name}'
@@ -3422,7 +3437,10 @@
                          * @param array  $field field data
                          * @param string $value field id
                          */
-                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", array( &$field, &$value ) );
+                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", array(
+                            &$field,
+                            &$value
+                        ) );
 
                         //if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
                         $hidden = '';
@@ -3469,7 +3487,10 @@
                          * @param array  $field field data
                          * @param string $value field id
                          */
-                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/fieldset/after/{$this->args['opt_name']}", array( &$field, &$value ) );
+                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/{$field['type']}/fieldset/after/{$this->args['opt_name']}", array(
+                            &$field,
+                            &$value
+                        ) );
 
                         /**
                          * action 'redux/field/{opt_name}/fieldset/after/{opt_name}'
@@ -3477,7 +3498,10 @@
                          * @param array  $field field data
                          * @param string $value field id
                          */
-                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/fieldset/after/{$this->args['opt_name']}", array( &$field, &$value ) );
+                        do_action_ref_array( "redux/field/{$this->args['opt_name']}/fieldset/after/{$this->args['opt_name']}", array(
+                            &$field,
+                            &$value
+                        ) );
                     }
                 }
             }
