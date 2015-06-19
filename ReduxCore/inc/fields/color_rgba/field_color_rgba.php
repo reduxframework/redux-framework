@@ -94,25 +94,26 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
         public function render() {
 
             $field_id = $this->field['id'];
+            $name = $this->field['name'] . $this->field['name_suffix'];
 
             // Color picker container
             echo '<div
-                      class="redux-color-rgba-container' . $this->field['class'] . '"
-                      data-id="'                        . $field_id . '"
-                      data-show-input="'                . $this->field['options']['show_input'] . '"
-                      data-show-initial="'              . $this->field['options']['show_initial'] . '"
-                      data-show-alpha="'                . $this->field['options']['show_alpha'] . '"
-                      data-show-palette="'              . $this->field['options']['show_palette'] . '"
-                      data-show-palette-only="'         . $this->field['options']['show_palette_only'] . '"
-                      data-show-selection-palette="'    . $this->field['options']['show_selection_palette'] . '"
-                      data-max-palette-size="'          . $this->field['options']['max_palette_size'] . '"
-                      data-allow-empty="'               . $this->field['options']['allow_empty'] . '"
-                      data-clickout-fires-change="'     . $this->field['options']['clickout_fires_change'] . '"
-                      data-choose-text="'               . $this->field['options']['choose_text'] . '"
-                      data-cancel-text="'               . $this->field['options']['cancel_text'] . '"
-                      data-input-text="'                . $this->field['options']['input_text'] . '"
-                      data-show-buttons="'              . $this->field['options']['show_buttons'] . '"
-                      data-palette="'                   . urlencode(json_encode($this->field['options']['palette'])) . '"
+                      class="redux-color-rgba-container ' . $this->field['class'] . '"
+                      data-id="'                          . $field_id . '"
+                      data-show-input="'                  . $this->field['options']['show_input'] . '"
+                      data-show-initial="'                . $this->field['options']['show_initial'] . '"
+                      data-show-alpha="'                  . $this->field['options']['show_alpha'] . '"
+                      data-show-palette="'                . $this->field['options']['show_palette'] . '"
+                      data-show-palette-only="'           . $this->field['options']['show_palette_only'] . '"
+                      data-show-selection-palette="'      . $this->field['options']['show_selection_palette'] . '"
+                      data-max-palette-size="'            . $this->field['options']['max_palette_size'] . '"
+                      data-allow-empty="'                 . $this->field['options']['allow_empty'] . '"
+                      data-clickout-fires-change="'       . $this->field['options']['clickout_fires_change'] . '"
+                      data-choose-text="'                 . $this->field['options']['choose_text'] . '"
+                      data-cancel-text="'                 . $this->field['options']['cancel_text'] . '"
+                      data-input-text="'                  . $this->field['options']['input_text'] . '"
+                      data-show-buttons="'                . $this->field['options']['show_buttons'] . '"
+                      data-palette="'                     . urlencode(json_encode($this->field['options']['palette'])) . '"
                   >';
 
             // Colour picker layout
@@ -129,7 +130,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
             }
 
             echo '<input
-                        name="' . $opt_name . '[' . $field_id . '][color]"
+                        name="' . $name . '[color]"
                         id="' . $field_id . '-color"
                         class="redux-color-rgba"
                         type="text"
@@ -154,7 +155,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                         type="hidden"
                         class="redux-hidden-alpha"
                         data-id="' . $field_id . '-alpha"
-                        name="' . $opt_name . '[' . $field_id . '][alpha]' .  '"
+                        name="' . $name . '[alpha]' .  '"
                         id="' . $field_id . '-alpha"
                         value="' . $this->value['alpha'] . '"
                       />';
@@ -164,7 +165,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                         type="hidden"
                         class="redux-hidden-rgba"
                         data-id="' . $field_id . '-rgba"
-                        name="' . $opt_name . '[' . $field_id . '][rgba]' .  '"
+                        name="' . $name . '[rgba]' .  '"
                         id="' . $field_id . '-rgba"
                         value="' . $this->value['rgba'] . '"
                       />';
