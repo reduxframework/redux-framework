@@ -61,13 +61,13 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
                 if (empty($this->field['args'])) {
                     $this->field['args'] = array();
                 }
-
+                
                 $this->field['options'] = $this->parent->get_wordpress_data($this->field['data'], $this->field['args']);
                 if (empty($this->field['options'])) {
                     return;
                 }
             }
-
+            
             $this->field[ 'data_class' ] = ( isset ( $this->field[ 'multi_layout' ] ) ) ? 'data-' . $this->field[ 'multi_layout' ] : 'data-full';
 
             if ( !empty ( $this->field[ 'options' ] ) && ( is_array ( $this->field[ 'options' ] ) || is_array ( $this->field[ 'default' ] ) ) ) {
@@ -120,9 +120,7 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
                 echo '<input type="checkbox" id="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . ']', array(
                     '[' => '_',
                     ']' => ''
-                ) ) . '" value="1" class="checkbox ' . $this->field[ 'class' ] . '" ' . checked ( $this->value, '1', false ) . '/>';
-                echo isset( $this->field[ 'label' ] ) ? ' ' . $this->field[ 'label' ] : '';
-                echo '</label></li></ul>';
+                ) ) . '" value="1" class="checkbox ' . $this->field[ 'class' ] . '" ' . checked ( $this->value, '1', false ) . '/></li></ul>';
             }
         }
 
@@ -138,19 +136,19 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
 
             if ($this->parent->args['dev_mode']) {
                 wp_enqueue_style (
-                    'redux-field-checkbox-css',
-                    ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css',
+                    'redux-field-checkbox-css', 
+                    ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox.css', 
                     array(),
-                    time (),
+                    time (), 
                     'all'
                 );
             }
-
+            
             wp_enqueue_script (
-                'redux-field-checkbox-js',
-                ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox' . Redux_Functions::isMin () . '.js',
-                array( 'jquery', 'redux-js' ),
-                time (),
+                'redux-field-checkbox-js', 
+                ReduxFramework::$_url . 'inc/fields/checkbox/field_checkbox' . Redux_Functions::isMin () . '.js', 
+                array( 'jquery', 'redux-js' ), 
+                time (), 
                 true
             );
         }
