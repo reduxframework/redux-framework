@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.19';
+            public static $_version = '3.5.4.20';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -183,6 +183,7 @@
             public $font_groups = array();
             public $lang = "";
             public $dev_mode_forced = false;
+            public $reload_fields = null;
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -437,7 +438,7 @@
             }
 
 // __construct()
-
+          
             private function set_redux_content() {
                 $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
@@ -2814,7 +2815,7 @@
                             $panel->notification_bar();
                             $notification_bar = ob_get_contents();
                             ob_end_clean();
-
+                            
                             $success = array(
                                 'status'           => 'success',
                                 'options'          => $redux->options,
@@ -2823,6 +2824,12 @@
                                 'notification_bar' => $notification_bar
                             );
 
+                            // Check for fields with reload arg
+                            foreach($this->reload_fields as $idx => $id) {
+                                if (  array_key_exists($id, $this->transients['changed_values'])) {
+                                    $success['action'] = 'reload';
+                                }
+                            }
 
                             echo json_encode( $success );
                         } catch ( Exception $e ) {
@@ -3561,10 +3568,12 @@
              */
             public function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
-
+                
+                if (isset($field['reload_on_change']) && $field['reload_on_change']) {
+                    $this->reload_fields[] = $field['id'];
+                }
+                
                 if ( ! empty ( $field['required'] ) ) {
-
-                    //$this->folds[$field['id']] = $this->folds[$field['id']] ? $this->folds[$field['id']] : array();
                     if ( ! isset ( $this->required_child[ $field['id'] ] ) ) {
                         $this->required_child[ $field['id'] ] = array();
                     }
@@ -3574,6 +3583,7 @@
                     }
 
                     if ( is_array( $field['required'][0] ) ) {
+                        
                         foreach ( $field['required'] as $value ) {
                             if ( is_array( $value ) && count( $value ) == 3 ) {
                                 $data               = array();
@@ -3793,7 +3803,6 @@
 
                 if ( ! in_array( $data['parent'], $this->fieldsHidden ) && ( ! isset ( $this->folds[ $field['id'] ] ) || $this->folds[ $field['id'] ] != "hide" ) ) {
                     if ( isset ( $this->options[ $data['parent'] ] ) ) {
-                        //echo $data['parent'];
                         $return = $this->compareValueDependencies( $this->options[ $data['parent'] ], $data['checkValue'], $data['operation'] );
                         //$return = $this->compareValueDependencies( $data['parent'], $data['checkValue'], $data['operation'] );
                     }

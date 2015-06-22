@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.20
+* Fixed:    CSS in metabox fields all wanky.
+* Added:    'reload_on_change' arg for fields, to force page reload after setting change.
+
 ## 3.5.4.19
 * Fixed:    #2377 - Replaced mysql_gets_server_info with $wpdb.
 
