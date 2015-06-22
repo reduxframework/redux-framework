@@ -16,7 +16,10 @@
         }
     );
 
-    redux.field_objects.link_color.init = function( selector ) {
+    redux.field_objects.link_color.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
 
         if ( !selector ) {
             selector = $( document ).find( '.redux-container-link_color:visible' );

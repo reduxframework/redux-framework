@@ -7,7 +7,7 @@
 
     redux.field_objects.color_rgba.hexToRGBA = function( hex, alpha ) {
         var result;
-        
+
         if (hex === null) {
             result = '';
         } else {
@@ -18,11 +18,15 @@
 
             result = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
         }
-        
-        return result;        
+
+        return result;
     };
 
-    redux.field_objects.color_rgba.init = function( selector ) {
+    redux.field_objects.color_rgba.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
+
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-color_rgba:visible' );
         }
@@ -36,7 +40,7 @@
                     parent = el.parents( '.redux-field-container:first' );
                 }
 
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
 
@@ -198,9 +202,9 @@
                 } else {
                     rgbaVal     = 'transparent';
                 }
-                
+
                 var blockID = $(this).data('block-id');
-                
+
                 // Update HTML color value
                 el.find('input#' + blockID + '-color').val(colorVal);
 

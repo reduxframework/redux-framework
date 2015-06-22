@@ -14,7 +14,10 @@
         }
     );
 
-    redux.field_objects.image_select.init = function( selector ) {
+    redux.field_objects.image_select.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-image_select:visible' );
@@ -27,7 +30,7 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
@@ -90,7 +93,7 @@
                         } else {
                             el.find( 'label[for="' + id + '"]' ).addClass( 'redux-image-select-selected' ).find( "input[type='radio']" ).attr(
                                 "checked", true
-                            );
+                            ).trigger('change');
 
                             redux_change( $( this ).closest( 'label' ).find( 'input[type="radio"]' ) );
                         }

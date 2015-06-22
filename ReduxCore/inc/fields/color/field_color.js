@@ -16,7 +16,10 @@
         }
     );
 
-    redux.field_objects.color.init = function( selector ) {
+    redux.field_objects.color.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-color:visible' );
@@ -31,7 +34,7 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
@@ -40,7 +43,7 @@
                     return;
                 }
 //				var $control = el.find( '.redux-color-init' ),
-//                                        
+//
 //					value = $control.val().replace( /\s+/g, '' ),
 //					alpha_val = 100,
 //					$alpha, $alpha_output;
@@ -81,7 +84,7 @@
 //                                        el.find( '.redux-color-init' ).wpColorPicker( 'color', iris._color.toString() );
 //                                        //console.log($control.val());
 //					//color_picker.toggler.css( { backgroundColor: $control.val() } );
-//				} ).val( alpha_val ).trigger( 'change' );                                
+//				} ).val( alpha_val ).trigger( 'change' );
 
                 el.find( '.redux-color' ).on(
                     'focus', function() {

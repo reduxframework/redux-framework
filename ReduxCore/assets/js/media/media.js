@@ -21,10 +21,15 @@
         }
     );
 
-    redux.field_objects.media.init = function( selector ) {
+    redux.field_objects.media.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
+
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-media:visible' );
         }
+
         $( selector ).each(
             function() {
                 var el = $( this );
@@ -33,7 +38,7 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
