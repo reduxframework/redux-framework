@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.21
+* Fixed:    #2414 - Bad ajax save due to mis-initialized variable.
+
 ## 3.5.4.20
 * Fixed:    CSS in metabox fields all wanky.
 * Added:    'reload_on_change' arg for fields, to force page reload after setting change.

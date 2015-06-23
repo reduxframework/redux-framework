@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.20';
+            public static $_version = '3.5.4.21';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -183,7 +183,7 @@
             public $font_groups = array();
             public $lang = "";
             public $dev_mode_forced = false;
-            public $reload_fields = null;
+            public $reload_fields = array();
 
             /**
              * Class Constructor. Defines the args for the theme options class

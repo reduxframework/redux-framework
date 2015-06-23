@@ -681,7 +681,7 @@
                 ),
                 //'output'   => array( 'body' ),
                 'mode'     => 'background',
-                'validate' => 'colorrgba',
+                //'validate' => 'colorrgba',
             ),
         )
     ) );
