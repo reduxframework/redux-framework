@@ -25,7 +25,7 @@
     if ( has_action( 'ecpt_field_options_' ) ) {
         global $pagenow;
         if ( $pagenow === 'admin.php' ) {
-            
+
             remove_action( 'admin_init', 'pb_admin_init' );
         }
     }
@@ -438,7 +438,7 @@
             }
 
 // __construct()
-          
+
             private function set_redux_content() {
                 $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
@@ -2815,7 +2815,7 @@
                             $panel->notification_bar();
                             $notification_bar = ob_get_contents();
                             ob_end_clean();
-                            
+
                             $success = array(
                                 'status'           => 'success',
                                 'options'          => $redux->options,
@@ -3459,6 +3459,10 @@
                             $class_string .= "redux_remove_th";
                         }
 
+                        if ( isset ( $field['fieldset_class'] ) && !empty( $field['fieldset_class'] ) ) {
+                            $class_string .= ' ' . $field['fieldset_class'];
+                        }
+
                         echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="' . $hidden . 'redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="' . $field['type'] . '">';
                         //}
 
@@ -3568,11 +3572,11 @@
              */
             public function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
-                
+
                 if (isset($field['reload_on_change']) && $field['reload_on_change']) {
                     $this->reload_fields[] = $field['id'];
                 }
-                
+
                 if ( ! empty ( $field['required'] ) ) {
                     if ( ! isset ( $this->required_child[ $field['id'] ] ) ) {
                         $this->required_child[ $field['id'] ] = array();
@@ -3583,7 +3587,7 @@
                     }
 
                     if ( is_array( $field['required'][0] ) ) {
-                        
+
                         foreach ( $field['required'] as $value ) {
                             if ( is_array( $value ) && count( $value ) == 3 ) {
                                 $data               = array();
