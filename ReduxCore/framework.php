@@ -25,7 +25,7 @@
     if ( has_action( 'ecpt_field_options_' ) ) {
         global $pagenow;
         if ( $pagenow === 'admin.php' ) {
-            
+
             remove_action( 'admin_init', 'pb_admin_init' );
         }
     }
@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.21';
+            public static $_version = '3.5.4.22';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -438,7 +438,7 @@
             }
 
 // __construct()
-          
+
             private function set_redux_content() {
                 $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
@@ -2742,6 +2742,7 @@
 
             public function ajax_save() {
 
+
                 if ( ! wp_verify_nonce( $_REQUEST['nonce'], "redux_ajax_nonce" ) ) {
                     json_encode( array(
                         'status' => __( 'Invalid security credential, please reload the page and try again.', 'redux-framework' ),
@@ -2809,31 +2810,15 @@
                             $enqueue = new reduxCoreEnqueue ( $redux );
                             $enqueue->get_warnings_and_errors_array();
 
-                            include_once( 'core/panel.php' );
-                            $panel = new reduxCorePanel ( $redux );
-                            ob_start();
-                            $panel->notification_bar();
-                            $notification_bar = ob_get_contents();
-                            ob_end_clean();
-                            
-                            $success = array(
+                            $return_array = array(
                                 'status'           => 'success',
                                 'options'          => $redux->options,
                                 'errors'           => isset ( $redux->localize_data['errors'] ) ? $redux->localize_data['errors'] : null,
                                 'warnings'         => isset ( $redux->localize_data['warnings'] ) ? $redux->localize_data['warnings'] : null,
-                                'notification_bar' => $notification_bar
                             );
 
-                            // Check for fields with reload arg
-                            foreach($this->reload_fields as $idx => $id) {
-                                if (  array_key_exists($id, $this->transients['changed_values'])) {
-                                    $success['action'] = 'reload';
-                                }
-                            }
-
-                            echo json_encode( $success );
                         } catch ( Exception $e ) {
-                            echo json_encode( array( 'status' => $e->getMessage() ) );
+                            $return_array = array( 'status' => $e->getMessage() );
                         }
                     } else {
                         echo json_encode( array( 'status' => __( 'Your panel has no fields. Nothing to save.', 'redux-framework' ) ) );
@@ -2844,38 +2829,55 @@
                     $this->no_output = true;
                     $this->_enqueue_output();
 
+                    try {
+                        /**
+                         * action 'redux-compiler-{opt_name}'
+                         *
+                         * @deprecated
+                         *
+                         * @param array  options
+                         * @param string CSS that get sent to the compiler hook
+                         */
+                        do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS, $this->transients['changed_values'] ); // REMOVE
 
-                    /**
-                     * action 'redux-compiler-{opt_name}'
-                     *
-                     * @deprecated
-                     *
-                     * @param array  options
-                     * @param string CSS that get sent to the compiler hook
-                     */
-                    do_action( "redux-compiler-{$this->args['opt_name']}", $this->options, $this->compilerCSS, $this->transients['changed_values'] ); // REMOVE
+                        /**
+                         * action 'redux/options/{opt_name}/compiler'
+                         *
+                         * @param array  options
+                         * @param string CSS that get sent to the compiler hook
+                         */
+                        do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
 
-                    /**
-                     * action 'redux/options/{opt_name}/compiler'
-                     *
-                     * @param array  options
-                     * @param string CSS that get sent to the compiler hook
-                     */
-                    do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
-
-                    /**
-                     * action 'redux/options/{opt_name}/compiler/advanced'
-                     *
-                     * @param array  options
-                     * @param string CSS that get sent to the compiler hook, which sends the full Redux object
-                     */
-                    do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $this );
+                        /**
+                         * action 'redux/options/{opt_name}/compiler/advanced'
+                         *
+                         * @param array  options
+                         * @param string CSS that get sent to the compiler hook, which sends the full Redux object
+                         */
+                        do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $this );
+                    } catch ( Exception $e ) {
+                        $return_array = array( 'status' => $e->getMessage() );
+                    }
 
                     unset ( $this->transients['run_compiler'] );
                     $this->set_transients();
                 }
+                if ( isset( $return_array ) ) {
+                    if ($return_array['status'] == "success") {
+                        include_once( 'core/panel.php' );
+                        $panel = new reduxCorePanel ( $redux );
+                        ob_start();
+                        $panel->notification_bar();
+                        $notification_bar = ob_get_contents();
+                        ob_end_clean();
+                        $return_array['notification_bar'] = $notification_bar;
+                    }
+                    
+                    echo json_encode( apply_filters( "redux/options/{$this->args['opt_name']}/ajax_save/response", $return_array ) );
+                }
 
                 die ();
+
             }
 
             /**
@@ -2933,7 +2935,7 @@
                             }
 
                             // Force validate of custom field types
-                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) && ! isset($field['validate_callback']) ) {
+                            if ( isset ( $field['type'] ) && ! isset ( $field['validate'] ) && ! isset( $field['validate_callback'] ) ) {
                                 if ( $field['type'] == 'color' || $field['type'] == 'color_gradient' ) {
                                     $field['validate'] = 'color';
                                 } elseif ( $field['type'] == 'date' ) {
@@ -3568,11 +3570,11 @@
              */
             public function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
-                
-                if (isset($field['reload_on_change']) && $field['reload_on_change']) {
+
+                if ( isset( $field['reload_on_change'] ) && $field['reload_on_change'] ) {
                     $this->reload_fields[] = $field['id'];
                 }
-                
+
                 if ( ! empty ( $field['required'] ) ) {
                     if ( ! isset ( $this->required_child[ $field['id'] ] ) ) {
                         $this->required_child[ $field['id'] ] = array();
@@ -3583,7 +3585,7 @@
                     }
 
                     if ( is_array( $field['required'][0] ) ) {
-                        
+
                         foreach ( $field['required'] as $value ) {
                             if ( is_array( $value ) && count( $value ) == 3 ) {
                                 $data               = array();

@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.22
+* Modified: Ajax change output of error and notice via hooks.
+
 ## 3.5.4.21
 * Fixed:    #2414 - Bad ajax save due to mis-initialized variable.
 

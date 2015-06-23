@@ -181,7 +181,7 @@
                          *
                          * @param string translated "settings saved" text
                          */
-                        echo '<div class="saved_notice admin-notice notice-green"><strong>' . apply_filters( "redux-saved-text-{$this->parent->args['opt_name']}", __( 'Settings Saved!', 'redux-framework' ) ) . '</strong></div>';
+                        echo '<div class="saved_notice admin-notice notice-green">' . apply_filters( "redux-saved-text-{$this->parent->args['opt_name']}", '<strong>'.__( 'Settings Saved!', 'redux-framework' ) ).'</strong>' . '</div>';
                     }
 
                     unset( $this->parent->transients['last_save_mode'] );
