@@ -90,7 +90,7 @@
                         } else {
                             el.find( 'label[for="' + id + '"]' ).addClass( 'redux-image-select-selected' ).find( "input[type='radio']" ).attr(
                                 "checked", true
-                            );
+                            ).trigger('change');
 
                             redux_change( $( this ).closest( 'label' ).find( 'input[type="radio"]' ) );
                         }
