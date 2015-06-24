@@ -3461,6 +3461,10 @@
                             $class_string .= "redux_remove_th";
                         }
 
+                        if ( isset ( $field['fieldset_class'] ) && !empty( $field['fieldset_class'] ) ) {
+                            $class_string .= ' ' . $field['fieldset_class'];
+                        }                        
+                        
                         echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="' . $hidden . 'redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="' . $field['type'] . '">';
                         //}
 
