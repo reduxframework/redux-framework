@@ -657,11 +657,9 @@
 
         //console.log(type);
 
-        if ( !initHidden ) {
-          initHidden = false;
-        }
+        initHidden = initHidden ? true : false;
 
-        if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] && redux.field_objects[type] ) {
+        if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] ) {
             redux.field_objects[type].init( $fieldContainer, initHidden );
         }
 
