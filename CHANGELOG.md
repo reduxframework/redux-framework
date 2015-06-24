@@ -1,5 +1,17 @@
 # Redux Framework Changelog
 
+## 3.5.4.23
+* Fixed:    Divider field not rendering properly.
+* Added:    `fieldset_class` argument for fields.  Thanks @Enchiridion.
+* Added:    Option to set checkbox label.  Thanks @Enchiridion.
+* Added:    javascript .trigger('change') to switch, spinner, and image_select.  Thanks @Enchiridion.
+
+## 3.5.4.22
+* Modified: Ajax change output of error and notice via hooks.
+
+## 3.5.4.21
+* Fixed:    #2414 - Bad ajax save due to mis-initialized variable.
+
 ## 3.5.4.20
 * Fixed:    CSS in metabox fields all wanky.
 * Added:    'reload_on_change' arg for fields, to force page reload after setting change.
