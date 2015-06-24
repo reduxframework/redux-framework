@@ -50,7 +50,7 @@
 
                         $( '.cb-disable', parent ).removeClass( 'selected' );
                         $( this ).addClass( 'selected' );
-                        $( '.checkbox-input', parent ).val( 1 );
+                        $( '.checkbox-input', parent ).val( 1 ).trigger('change');
 
                         redux_change( $( '.checkbox-input', parent ) );
 
@@ -72,7 +72,7 @@
 
                         $( '.cb-enable', parent ).removeClass( 'selected' );
                         $( this ).addClass( 'selected' );
-                        $( '.checkbox-input', parent ).val( 0 );
+                        $( '.checkbox-input', parent ).val( 0 ).trigger('change');
 
                         redux_change( $( '.checkbox-input', parent ) );
 
