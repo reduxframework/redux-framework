@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.24
+* Fixed:    #2426 - Section field not indenting.
+
 ## 3.5.4.23
 * Fixed:    Divider field not rendering properly.
 * Added:    `fieldset_class` argument for fields.  Thanks @Enchiridion.
