@@ -123,7 +123,7 @@
         } else {
             value = Math.round( value / spinner.step ) * spinner.step;
         }
-        selector.val( value );
+        selector.val( value ).trigger( 'change' );
     };
 
 })( jQuery );
