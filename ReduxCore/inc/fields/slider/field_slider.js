@@ -8,11 +8,14 @@
 
     $( document ).ready(
         function() {
-            
+
         }
     );
 
-    redux.field_objects.slider.init = function( selector ) {
+    redux.field_objects.slider.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-slider:visible' );
@@ -22,11 +25,11 @@
             function() {
                 var el = $( this );
                 var parent = el;
-                
+
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
@@ -56,7 +59,7 @@
                         var rtlVal          = Boolean( $( this ).data( 'rtl' ) );
                         var floatMark       = ($( this ).data( 'float-mark' ));
                         var forced          = Boolean($( this ).data( 'forced' ));
-                        
+
                         var rtl;
                         if ( rtlVal === true ) {
                             rtl = 'rtl';
@@ -225,7 +228,7 @@
                 }
 
                 el.find( 'select.redux-slider-select-one, select.redux-slider-select-two' ).select2( default_params );
-                
+
             }
         );
 

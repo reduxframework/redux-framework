@@ -19,7 +19,7 @@
         }
     );
 
-    redux.field_objects.editor.init = function( selector ) {
+    redux.field_objects.editor.init = function( selector, initHidden ) {
         setTimeout(
             function() {
                 for ( var i = 0; i < tinymce.editors.length; i++ ) {

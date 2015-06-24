@@ -20,7 +20,10 @@
         }
     );
 
-    redux.field_objects.sorter.init = function( selector ) {
+    redux.field_objects.sorter.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-sorter:visible' );
@@ -30,21 +33,21 @@
             function() {
                 var el = $( this );
                 var parent = el;
-                
+
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
-                
+
                 if ( parent.hasClass( 'redux-field-init' ) ) {
                     parent.removeClass( 'redux-field-init' );
                 } else {
                     return;
                 }
-                
+
                 /**    Sorter (Layout Manager) */
                 el.find( '.redux-sorter' ).each(
                     function() {
@@ -136,7 +139,7 @@
         if (selector === undefined) {
             return;
         }
-        
+
         var scrollable = selector.find( ".redux-sorter" );
 
         if ( scroll == 'up' ) {

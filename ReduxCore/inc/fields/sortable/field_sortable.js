@@ -8,7 +8,10 @@
 
     var scroll = '';
 
-    redux.field_objects.sortable.init = function( selector ) {
+    redux.field_objects.sortable.init = function( selector, initHidden ) {
+        if ( !initHidden ) {
+            initHidden = false;
+        }
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-sortable:visible' );
@@ -21,7 +24,7 @@
                 if ( !el.hasClass( 'redux-field-container' ) ) {
                     parent = el.parents( '.redux-field-container:first' );
                 }
-                if ( parent.is( ":hidden" ) ) { // Skip hidden fields
+                if ( !initHidden && parent.is( ":hidden" ) ) { // Skip hidden fields
                     return;
                 }
                 if ( parent.hasClass( 'redux-field-init' ) ) {
@@ -76,7 +79,7 @@
         if (selector === undefined) {
             return;
         }
-        
+
         var $scrollable = selector.find( ".redux-sorter" );
 
         if ( scroll == 'up' ) {

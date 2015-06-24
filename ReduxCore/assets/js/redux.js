@@ -647,25 +647,37 @@
     $.redux.initFields = function() {
         $( ".redux-group-tab:visible" ).find( ".redux-field-init:visible" ).each(
             function() {
-
-                var type = $( this ).attr( 'data-type' );
-                //console.log(type);
-                if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] && redux.field_objects[type] ) {
-                    redux.field_objects[type].init();
-                }
-                if ( $( this ).hasClass( 'redux_remove_th' ) ) {
-
-                    var tr = $( this ).parents( 'tr:first' );
-                    var th = tr.find( 'th:first' );
-                    if ( th.html().length > 0 ) {
-                        $( this ).prepend( th.html() );
-                        $( this ).find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
-                    }
-                    $( this ).parent().attr( 'colspan', '2' );
-                    th.remove();
-                }
+                $.redux.initField( $( this, false ) );
             }
         );
+    };
+
+    $.redux.initField = function( $fieldContainer, initHidden ) {
+        var type = $fieldContainer.attr( 'data-type' );
+
+        //console.log(type);
+
+        if ( !initHidden ) {
+          initHidden = false;
+        }
+
+        if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] ) {
+            redux.field_objects[type].init( $fieldContainer, initHidden );
+        }
+
+        if ( $fieldContainer.hasClass( 'redux_remove_th' ) ) {
+
+            var tr = $fieldContainer.parents( 'tr:first' );
+            var th = tr.find( 'th:first' );
+
+            if ( th.html().length > 0 ) {
+                $fieldContainer.prepend( th.html() );
+                $fieldContainer.find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
+            }
+
+            $fieldContainer.parent().attr( 'colspan', '2' );
+            th.remove();
+        }
     };
 
     $.redux.notices = function() {
