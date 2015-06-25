@@ -884,6 +884,11 @@
                     }
                 }
 
+                $keyPrefix = "";
+                if (!empty($args['key_prefix'])) {
+                    $keyPrefix = $args['key_prefix'];
+                }
+
                 if ( empty ( $data ) && isset ( $this->wp_data[ $type . $argsKey ] ) ) {
                     $data = $this->wp_data[ $type . $argsKey ];
                 }
@@ -905,7 +910,7 @@
                             $cats = get_categories( $args );
                             if ( ! empty ( $cats ) ) {
                                 foreach ( $cats as $cat ) {
-                                    $data[ $cat->term_id ] = $cat->name;
+                                    $data[ $keyPrefix . $cat->term_id ] = $cat->name;
                                 }
                                 //foreach
                             } // If
@@ -913,7 +918,7 @@
                             $menus = wp_get_nav_menus( $args );
                             if ( ! empty ( $menus ) ) {
                                 foreach ( $menus as $item ) {
-                                    $data[ $item->term_id ] = $item->name;
+                                    $data[ $keyPrefix . $item->term_id ] = $item->name;
                                 }
                                 //foreach
                             }
@@ -925,7 +930,7 @@
                             $pages = get_pages( $args );
                             if ( ! empty ( $pages ) ) {
                                 foreach ( $pages as $page ) {
-                                    $data[ $page->ID ] = $page->post_title;
+                                    $data[ $keyPrefix . $page->ID ] = $page->post_title;
                                 }
                                 //foreach
                             }
@@ -936,7 +941,7 @@
                             $terms = get_terms( $taxonomies, $args ); // this will get nothing
                             if ( ! empty ( $terms ) ) {
                                 foreach ( $terms as $term ) {
-                                    $data[ $term->term_id ] = $term->name;
+                                    $data[ $keyPrefix . $term->term_id ] = $term->name;
                                 }
                                 //foreach
                             } // If
@@ -944,7 +949,7 @@
                             $taxonomies = get_taxonomies( $args );
                             if ( ! empty ( $taxonomies ) ) {
                                 foreach ( $taxonomies as $key => $taxonomy ) {
-                                    $data[ $key ] = $taxonomy;
+                                    $data[ $keyPrefix . $key ] = $taxonomy;
                                 }
                                 //foreach
                             } // If
@@ -952,7 +957,7 @@
                             $posts = get_posts( $args );
                             if ( ! empty ( $posts ) ) {
                                 foreach ( $posts as $post ) {
-                                    $data[ $post->ID ] = $post->post_title;
+                                    $data[ $keyPrefix . $post->ID ] = $post->post_title;
                                 }
                                 //foreach
                             }
@@ -973,16 +978,16 @@
 
                             foreach ( $post_types as $name => $title ) {
                                 if ( isset ( $wp_post_types[ $name ]->labels->menu_name ) ) {
-                                    $data[ $name ] = $wp_post_types[ $name ]->labels->menu_name;
+                                    $data[ $keyPrefix . $name ] = $wp_post_types[ $name ]->labels->menu_name;
                                 } else {
-                                    $data[ $name ] = ucfirst( $name );
+                                    $data[ $keyPrefix . $name ] = ucfirst( $name );
                                 }
                             }
                         } else if ( $type == "tags" || $type == "tag" ) { // NOT WORKING!
                             $tags = get_tags( $args );
                             if ( ! empty ( $tags ) ) {
                                 foreach ( $tags as $tag ) {
-                                    $data[ $tag->term_id ] = $tag->name;
+                                    $data[ $keyPrefix . $tag->term_id ] = $tag->name;
                                 }
                                 //foreach
                             }
@@ -991,13 +996,13 @@
                             global $_wp_registered_nav_menus;
 
                             foreach ( $_wp_registered_nav_menus as $k => $v ) {
-                                $data[ $k ] = $v;
+                                $data[ $keyPrefix . $k ] = $v;
                             }
                         } else if ( $type == "image_size" || $type == "image_sizes" ) {
                             global $_wp_additional_image_sizes;
 
                             foreach ( $_wp_additional_image_sizes as $size_name => $size_attrs ) {
-                                $data[ $size_name ] = $size_name . ' - ' . $size_attrs['width'] . ' x ' . $size_attrs['height'];
+                                $data[ $keyPrefix . $size_name ] = $size_name . ' - ' . $size_attrs['width'] . ' x ' . $size_attrs['height'];
                             }
                         } else if ( $type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" ||
                                     $type == "font-icon" || $type == "font-icons" || $type == "icons"
@@ -1031,7 +1036,7 @@
                             $font_icons = apply_filters( "redux/{$this->args['opt_name']}/field/font/icons", $font_icons );
 
                             foreach ( $font_icons as $k ) {
-                                $data[ $k ] = $k;
+                                $data[ $keyPrefix . $k ] = $k;
                             }
                         } else if ( $type == "roles" ) {
                             /** @global WP_Roles $wp_roles */
@@ -1043,7 +1048,7 @@
                             global $wp_registered_sidebars;
 
                             foreach ( $wp_registered_sidebars as $key => $value ) {
-                                $data[ $key ] = $value['name'];
+                                $data[ $keyPrefix . $key ] = $value['name'];
                             }
                         } else if ( $type == "capabilities" ) {
                             /** @global WP_Roles $wp_roles */
@@ -1051,7 +1056,7 @@
 
                             foreach ( $wp_roles->roles as $role ) {
                                 foreach ( $role['capabilities'] as $key => $cap ) {
-                                    $data[ $key ] = ucwords( str_replace( '_', ' ', $key ) );
+                                    $data[ $keyPrefix . $key ] = ucwords( str_replace( '_', ' ', $key ) );
                                 }
                             }
                         } else if ( $type == "callback" ) {
