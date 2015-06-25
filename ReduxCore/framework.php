@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.24';
+            public static $_version = '3.5.4.25';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -3642,6 +3642,8 @@
                                     }
                                 } else {
                                     if ( $val == $checkValue ) {
+                                        echo $val . '<br>';
+                                        echo $checkValue;
                                         $return = true;
                                     }
                                 }
@@ -3745,12 +3747,12 @@
 
                         if ( is_array( $checkValue ) ) {
                             foreach ( $checkValue as $idx => $opt ) {
-                                if ( strpos( $parentValue, $opt ) !== false ) {
+                                if ( strpos( $parentValue, (string)$opt ) !== false ) {
                                     $return = true;
                                 }
                             }
                         } else {
-                            if ( strpos( $parentValue, $checkValue ) !== false ) {
+                            if ( strpos( $parentValue, (string)$checkValue ) !== false ) {
                                 $return = true;
                             }
                         }
@@ -3764,12 +3766,12 @@
 
                         if ( is_array( $checkValue ) ) {
                             foreach ( $checkValue as $idx => $opt ) {
-                                if ( strpos( $parentValue, $opt ) === false ) {
+                                if ( strpos( $parentValue, (string)$opt ) === false ) {
                                     $return = true;
                                 }
                             }
                         } else {
-                            if ( strpos( $parentValue, $checkValue ) === false ) {
+                            if ( strpos( $parentValue, (string)$checkValue ) === false ) {
                                 $return = true;
                             }
                         }

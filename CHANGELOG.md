@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.25
+* Fixed:    #2429 - Required evaluator 'contains' not working properly with multi_check
+
 ## 3.5.4.24
 * Fixed:    #2426 - Section field not indenting.
 

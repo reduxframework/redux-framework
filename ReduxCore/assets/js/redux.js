@@ -977,15 +977,21 @@
     };
 
     $.redux.check_dependencies_visibility = function( parentValue, data ) {
-        var show = false,
-            checkValue_array,
-            checkValue = data.checkValue,
-            operation = data.operation;
+        var show = false;
+        var checkValue_array;
+        var checkValue = data.checkValue;
+        var operation = data.operation;
+        var arr;
 
         switch ( operation ) {
             case '=':
             case 'equals':
-                if ( $.isArray( parentValue ) ) {
+//                if ($.isPlainObject(parentValue)) {
+//                    var arr = Object.keys(parentValue).map(function (key) {return parentValue[key]});
+//                    parentValue = arr;
+//                }
+                
+                if ( $.isArray( parentValue) ) {
                     $( parentValue[0] ).each(
                         function( idx, val ) {
                             if ( $.isArray( checkValue ) ) {
@@ -1025,7 +1031,7 @@
             case '!=':
             case 'not':
                 if ( $.isArray( parentValue ) ) {
-                    $( parentValue[0] ).each(
+                    $( parentValue ).each(
                         function( idx, val ) {
                             if ( $.isArray( checkValue ) ) {
                                 $( checkValue ).each(
@@ -1109,9 +1115,24 @@
                 break;
 
             case 'contains':
+                if ($.isPlainObject(parentValue)) {
+                    arr = Object.keys(parentValue).map(function (key) {
+                        return parentValue[key];
+                    });
+                    parentValue = arr;
+                }
+                
+                if ($.isPlainObject(checkValue)) {
+                    arr = Object.keys(checkValue).map(function (key) {
+                        return checkValue[key];
+                    });
+                    checkValue = arr;
+                }      
+                
                 if ( $.isArray( checkValue ) ) {
                     $( checkValue ).each(
                         function( idx, val ) {
+                            console.log (val);
                             if ( parentValue.toString().indexOf( val ) !== -1 ) {
                                 show = true;
                             }
@@ -1126,6 +1147,20 @@
 
             case 'doesnt_contain':
             case 'not_contain':
+                if ($.isPlainObject(parentValue)) {
+                    arr = Object.keys(parentValue).map(function (key) {
+                        return parentValue[key];
+                    });
+                    parentValue = arr;
+                }
+                
+                if ($.isPlainObject(checkValue)) {
+                    arr = Object.keys(checkValue).map(function (key) {
+                        return checkValue[key];
+                    });
+                    checkValue = arr;
+                }      
+                
                 if ( $.isArray( checkValue ) ) {
                     $( checkValue ).each(
                         function( idx, val ) {
