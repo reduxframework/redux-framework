@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.26
+* Fixed     #2437 - undefined value set to blank line height.
+
 ## 3.5.4.25
 * Fixed:    #2429 - Required evaluator 'contains' not working properly with multi_check
 

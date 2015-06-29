@@ -557,25 +557,25 @@
             height = size;
         }
 
-        if ( size === '' ) {
+        if ( size === '' || size === undefined ) {
             $( '#' + mainID + ' .typography-font-size' ).val( '' );
         } else {
             $( '#' + mainID + ' .typography-font-size' ).val( size + units );
         }
 
-        if ( height === '' ) {
+        if ( height === '' || height === undefined ) {
             $( '#' + mainID + ' .typography-line-height' ).val( '' );
         } else {
             $( '#' + mainID + ' .typography-line-height' ).val( height + units );
         }
 
-        if ( word === '' ) {
+        if ( word === '' || word === undefined ) {
             $( '#' + mainID + ' .typography-word-spacing' ).val( '' );
         } else {
             $( '#' + mainID + ' .typography-word-spacing' ).val( word + units );
         }
 
-        if ( letter === '' ) {
+        if ( letter === '' || letter === undefined ) {
             $( '#' + mainID + ' .typography-letter-spacing' ).val( '' );
         } else {
             $( '#' + mainID + ' .typography-letter-spacing' ).val( letter + units );
