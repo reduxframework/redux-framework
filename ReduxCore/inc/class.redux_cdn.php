@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Redux_CDN' ) ) {
     class Redux_CDN {
         static public $_parent;
+        static private $_set;
         
         private static function is_enqueued($handle, $list = 'enqueued', $is_script){
             if ($is_script) {
@@ -94,20 +95,58 @@ if ( ! class_exists( 'Redux_CDN' ) ) {
             }
         }
         
+        private static function _vendor_plugin($register = true, $handle, $src_cdn, $deps, $ver, $footer_or_media, $is_script = true) {
+            if (class_exists('Redux_VendorSupport')) {
+                $src = Redux_VendorURL::get_url($handle);
+
+                if ($register) {
+                    self::_register($handle, $src, $deps, $ver, $footer_or_media, $is_script);
+                } else {
+                    self::_enqueue($handle, $src, $deps, $ver, $footer_or_media, $is_script);
+                }
+            } else {
+                if (!self::$_set) {
+                    self::$_parent->admin_notices[] = array(
+                         'type'    => 'error',
+                         'msg'     => '<strong>Redux Framework Warning</strong><br/>' .' The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="' . admin_url ( 'plugins.php' ) . '">activated</a>',
+                         'id'      => $handle . '23',
+                         'dismiss' => false,
+                     ); 
+                    self::$_set = true;
+                }
+            }
+        }
+        
         public static function register_style($handle, $src_cdn = false, $deps = array(), $ver = false, $media = 'all') {
-            self::_cdn(true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false);
+            if (self::$_parent->args['use_cdn']) {
+                self::_cdn(true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false);
+            } else {
+                self::_vendor_plugin(true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false);
+            }
         }
         
         public static function register_script($handle, $src_cdn = false, $deps = array(), $ver = false, $in_footer = false) {
-            self::_cdn(true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true);
+            if (self::$_parent->args['use_cdn']) {
+                self::_cdn(true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true);
+            } else {
+                self::_vendor_plugin(true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true);
+            }
         }
         
         public static function enqueue_style( $handle, $src_cdn = false, $deps = array(), $ver = false, $media = 'all' ) {
-            self::_cdn(false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false);
+            if (self::$_parent->args['use_cdn']) {
+                self::_cdn(false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false);
+            } else {
+                self::_vendor_plugin(false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false);
+            }
         }
         
         public static function enqueue_script( $handle, $src_cdn = false, $deps = array(), $ver = false, $in_footer = false ) {
-            self::_cdn(false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true);
+            if (self::$_parent->args['use_cdn']) {
+                self::_cdn(false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true);
+            } else {
+                self::_vendor_plugin(false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true);
+            }
         }
     }
 }
