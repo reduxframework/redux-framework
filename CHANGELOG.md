@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.27
+* Fixed:    Set use_cdn argument to true, by default.
+
 ## 3.5.4.26
 * Fixed     #2437 - undefined value set to blank line height.
 

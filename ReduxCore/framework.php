@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.26';
+            public static $_version = '3.5.4.27';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -554,7 +554,7 @@
                     // Path to the templates file for various Redux elements
                     'ajax_save'                 => true,
                     // Disable the use of ajax saving for the panel
-                    'use_cdn'                   => false,
+                    'use_cdn'                   => true,
                     'cdn_check_time'            => 1440,
                     'options_api'               => true,
                 );
