@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.4.28
+* Fixed:    Added additional check in redux.js to stop errors with panels containing multiple raw fields.
+* Fixed:    Hopefully, the issue of settings not saving on first install when using the Redux API.
+
 ## 3.5.4.27
 * Fixed:    Set use_cdn argument to true, by default.
 
