@@ -657,7 +657,7 @@
 
                     var tr = $( this ).parents( 'tr:first' );
                     var th = tr.find( 'th:first' );
-                    if ( th.html().length > 0 ) {
+                    if ( th.html() !== undefined && th.html().length > 0 ) {
                         $( this ).prepend( th.html() );
                         $( this ).find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
                     }
