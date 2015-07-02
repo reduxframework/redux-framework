@@ -6,6 +6,7 @@
 * Modified: Use DB for admin notice, not flat-files. Boo.
 * Modified: Sample configs not to cause errors if multiple users use the same function name.
 * Fixed:    CDN internationalization class.
+* Modified: Parsedown so as not to throw a shortcode error that didn't actually exist.
 
 ## 3.5.4.29
 * Fixed:    #2446 - Non google font choice not saving in certain instances.
