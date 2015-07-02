@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.29
+* Fixed:    #2446 - Non google font choice not saving in certain instances.
+
 ## 3.5.4.28
 * Fixed:    Added additional check in redux.js to stop errors with panels containing multiple raw fields.
 * Fixed:    Hopefully, the issue of settings not saving on first install when using the Redux API.
