@@ -1,5 +1,12 @@
 # Redux Framework Changelog
 
+## 3.5.4.30
+* Modified: Dissmissable Redux Admin notices now use the WP 4.2 dismiss JS and Ajax. Pretty.
+* Modified: Admin notice code is now it's own isolated class inside core.
+* Modified: Use DB for admin notice, not flat-files. Boo.
+* Modified: Sample configs not to cause errors if multiple users use the same function name.
+* Fixed:    CDN internationalization class.
+
 ## 3.5.4.29
 * Fixed:    #2446 - Non google font choice not saving in certain instances.
 

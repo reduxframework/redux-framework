@@ -58,6 +58,8 @@
 
         require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
 
+        require_once( dirname( __FILE__ ) . '/inc/class.redux_admin_notices.php' );
+
         // ThemeCheck checks
         require_once( dirname( __FILE__ ) . '/inc/class.redux_themecheck.php' );
 
@@ -77,7 +79,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.29';
+            public static $_version = '3.5.4.30';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -212,6 +214,7 @@
                 // Pass parent pointer to function helper.
                 Redux_Functions::$_parent = $this;
                 Redux_CDN::$_parent       = $this;
+                Redux_Admin_Notices::$_parent = $this;
 
                 // Set values
                 $this->set_default_args();
@@ -604,11 +607,11 @@
             }
 
             public function _admin_notices() {
-                Redux_Functions::adminNotices( $this->admin_notices );
+                Redux_Admin_Notices::adminNotices( $this->admin_notices );
             }
 
             public function _dismiss_admin_notice() {
-                Redux_Functions::dismissAdminNotice();
+                Redux_Admin_Notices::dismissAdminNotice();
             }
 
             /**

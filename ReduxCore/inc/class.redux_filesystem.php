@@ -158,6 +158,12 @@
                 } elseif ( $action == 'put_contents' && ! isset( $this->filesystem->killswitch ) ) {
                     // Write a string to a file
                     if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
+                        $this->parent->admin_notices[] = array(
+                            'type'    => 'error',
+                            'msg'     => '<strong>' . __( 'File Permissions Error', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>', 'redux-framework' ), admin_url( 'plugins.php' ) ),
+                            'id'      =>  'redux-fs-api-put_contents',
+                            'dismiss' => true,
+                        );
                         $res = file_put_contents( $file, $content, $chmod );
                         if ( $res ) {
                             chmod( $file, $chmod );
