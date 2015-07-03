@@ -251,38 +251,8 @@
                 $path = apply_filters( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file, $path );
                 do_action( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file . '/after' );
 
-                include( $path );
+                require( $path );
 
-            }
-
-            /**
-             * Retrieve metadata from a file. Based on WP Core's get_file_data function
-             *
-             * @since 2.1.1
-             *
-             * @param string $file Path to the file
-             *
-             * @return string
-             */
-            public function get_file_version( $file ) {
-                // We don't need to write to the file, so just open for reading.
-                $fp = fopen( $file, 'r' );
-
-                // Pull only the first 8kiB of the file in.
-                $file_data = fread( $fp, 8192 );
-
-                // PHP will close file handle, but we are good citizens.
-                fclose( $fp );
-
-                // Make sure we catch CR-only line endings.
-                $file_data = str_replace( "\r", "\n", $file_data );
-                $version   = '';
-
-                if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( '@version', '/' ) . '(.*)$/mi', $file_data, $match ) && $match[1] ) {
-                    $version = _cleanup_header_comment( $match[1] );
-                }
-
-                return $version;
             }
 
             /**
@@ -333,8 +303,8 @@
                     }
 
                     if ( $developer_theme_file ) {
-                        $core_version      = $this->get_file_version( $this->original_path . $file );
-                        $developer_version = $this->get_file_version( $developer_theme_file );
+                        $core_version      = Redux_Helpers::get_template_version( $this->original_path . $file );
+                        $developer_version = Redux_Helpers::get_template_version( $developer_theme_file );
 
                         if ( $core_version && $developer_version && version_compare( $developer_version, $core_version, '<' ) ) {
                             ?>

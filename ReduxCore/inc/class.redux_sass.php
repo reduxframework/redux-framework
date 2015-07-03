@@ -9,6 +9,7 @@
             public static $path = array();
             public static $import = array();
             public static $_do_compile = false;
+            public static $parent;
 
             private static $matrix_file = '';
             private static $matrix_key = '';
@@ -32,6 +33,7 @@
             }
 
             public static function get_current_id_matrix( $parent ) {
+                self::$parent = $parent;
                 if ( $parent->args['sass']['enabled'] && ! $parent->args['sass']['page_output'] ) {
                     $ids = '';
 
@@ -49,14 +51,14 @@
                 if ( ! file_exists( self::$matrix_file ) ) {
                     $ids = get_option( self::$matrix_key );
                 } else {
-                    $ids = file_get_contents( self::$matrix_file );
+                    $ids = self::$parent->filesystem->execute( 'get_contents', self::$matrix_file );
                 }
 
                 return $ids;
             }
 
             public static function set_id_matrix( $ids ) {
-                $ret = @file_put_contents( self::$matrix_file, $ids );
+                $ret = self::$parent->filesystem->execute( 'put_contents', self::$matrix_file, array( 'content' => $ids ) );
 
                 if ( $ret == false ) {
                     return update_option( self::$matrix_key, $ids );
@@ -91,7 +93,7 @@
 
             public static function compile_sass( $parent ) {
                 if ( ! empty( self::$path ) ) {
-
+                    self::$parent = $parent;
                     $do_compile = false;
                     $as_output  = false;
 
@@ -137,10 +139,11 @@
                         logconsole( 'compiler run' );
                         if ( ! class_exists( 'scssc' ) && ! isset( $GLOBALS['redux_scss_compiler'] ) ) {
                             $GLOBALS['redux_scss_compiler'] = true;
-                            require( "scssphp/scss.inc.php" );
+                            require_once( "scssphp/scss.inc.php" );
                         }
 
                         $scss = new scssc();
+                        $scss::parent = self::$parent;
 
                         $scss->setImportPaths( self::$path );
 
@@ -164,7 +167,8 @@
                             } else {
                                 $css_file = Redux_Helpers::cleanFilePath( ReduxFramework::$_upload_dir . $parent->args['opt_name'] . '-redux.css' );
 
-                                $ret = @file_put_contents( $css_file, $new_css );
+
+                                $ret = self::$parent->filesystem->execute( 'put_contents', $css_file, array( 'content' => $new_css ) );
 
                                 if ( $ret == false ) {
                                     self::css_to_page( $opt_name, $new_css );
@@ -186,11 +190,12 @@
             }
 
             public static function compile_single_field( $parent, $scss_path, $filename ) {
+                self::$parent = $parent;
                 echo 'single field compile: ' . $scss_path . ' ' . $filename;
 
                 if ( ! class_exists( 'scssc' ) && ! isset( $GLOBALS['redux_scss_compiler'] ) ) {
                     $GLOBALS['redux_scss_compiler'] = true;
-                    require( "scssphp/scss.inc.php" );
+                    require_once( "scssphp/scss.inc.php" );
                 }
 
                 $scss = new scssc();
@@ -205,7 +210,7 @@
 
                 unset ( $scss );
 
-                $ret = @file_put_contents( $scss_path . '/' . $filename . '.css', $new_css );
+                self::$parent->filesystem->execute( 'put_contents', $scss_path . '/' . $filename . '.css', array( 'content' => $new_css ) );
             }
         }
     }
@@ -228,6 +233,7 @@
          */
         function redux_enqueue_style( $parent, $handle, $css_src, $scss_dir, $deps = array(), $ver = '', $media = false ) {
             if ( $parent->args['sass']['enabled'] ) {
+                self::$parent = $parent;
                 //if ($parent->args['dev_mode'] || $parent->args['sass']['page_output']) {
                 $path_parts = pathinfo( $css_src );
 

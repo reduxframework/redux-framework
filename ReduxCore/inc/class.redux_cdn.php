@@ -73,7 +73,7 @@
                                 $msg = __( 'Please wait a few minutes, then try refreshing the page.', 'redux-framework' );
                                 if ( self::$_parent->args['dev_mode'] ) {
 
-                                    $msg = sprintf( __( 'If you are developing offline, please download and install the <a href="%d">Redux Vendor Support plugin</a> to bypass the vendor CDN and avoid this warning.', 'redux-framework' ), 'http://reduxframework.com/wp-content/uploads/2015/05/redux-vendor-support.zip' );
+                                    $msg = sprintf( __( 'If you are developing offline, please download and install the <a href="%d">Redux Vendor Support plugin</a> to bypass the vendor CDN and avoid this warning.', 'redux-framework' ), 'http://reduxframework.com/wp-content/uploads/2015/06/redux-vendor-support.zip' );
                                 }
 
                                 self::$_parent->admin_notices[] = array(

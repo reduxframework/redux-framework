@@ -6,15 +6,37 @@
 
     if ( ! class_exists( 'Redux_Filesystem' ) ) {
         class Redux_Filesystem {
-            private $parent = null;
+
+            /**
+             * Instance of this class.
+             *
+             * @since    1.0.0
+             * @var      object
+             */
+            protected static $instance = null;
 
             private $creds = array();
 
             public $fs_object = null;
 
-            public function __construct( $parent ) {
-                $parent->filesystem = $this;
-                $this->parent       = $parent;
+            public function __construct() {
+
+            }
+
+            /**
+             * Return an instance of this class.
+             *
+             * @since     1.0.0
+             * @return    object    A single instance of this class.
+             */
+            public static function get_instance() {
+
+                // If the single instance hasn't been set, set it now.
+                if ( null == self::$instance ) {
+                    self::$instance = new self;
+                }
+
+                return self::$instance;
             }
 
             public function ftp_form() {
@@ -66,7 +88,7 @@
             }
 
             public function execute( $action, $file = '', $params = '' ) {
-                
+
                 if ( empty( $this->parent->args ) ) {
                     return;
                 }
@@ -161,13 +183,11 @@
                         $this->parent->admin_notices[] = array(
                             'type'    => 'error',
                             'msg'     => '<strong>' . __( 'File Permissions Error', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>', 'redux-framework' ), admin_url( 'plugins.php' ) ),
-                            'id'      =>  'redux-fs-api-put_contents',
+                            'id'      => 'redux-fs-api-put_contents',
                             'dismiss' => true,
                         );
-                        $res = file_put_contents( $file, $content, $chmod );
-                        if ( $res ) {
-                            chmod( $file, $chmod );
-                        }
+                        $direct                        = new WP_Filesystem_Direct( array() );
+                        $res                           = $direct->put_contents( $file, $content, $chmod );
                     } else {
                         $res = $wp_filesystem->put_contents( $file, $content, $chmod );
                     }
@@ -190,7 +210,8 @@
                 } elseif ( $action == 'get_contents' ) {
                     // Reads entire file into a string
                     if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
-                        $res = @file_get_contents( $file );
+                        $direct = new WP_Filesystem_Direct( array() );
+                        $res    = $direct->get_contents( $file );
                     } else {
                         $res = $wp_filesystem->get_contents( $file );
                     }
@@ -205,8 +226,15 @@
                         $res = true;
                     }
                 }
+
                 if ( isset( $res ) && ! $res ) {
-                    $this->killswitch = true;
+                    $this->parent->admin_notices[] = array(
+                        'type'    => 'error',
+                        'msg'     => '<strong>' . __( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'We were unable to modify required files. Please check your permissions, or modify your wp-config.php file to contain your FTP login credentials as <a href="%s" target="_blank">outlined here</a>.', 'redux-framework' ), 'https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants' ),
+                        'id'      => 'redux-wp-login',
+                        'dismiss' => false,
+                    );
+                    $this->killswitch              = true;
                 }
 
                 if ( ! $res ) {
@@ -219,4 +247,6 @@
                 return $res;
             }
         }
+
+        Redux_Filesystem::get_instance();
     }
