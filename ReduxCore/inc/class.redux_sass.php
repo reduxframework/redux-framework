@@ -143,7 +143,7 @@
                         }
 
                         $scss = new scssc();
-                        $scss::parent = self::$parent;
+                        $scss::$parent = self::$parent;
 
                         $scss->setImportPaths( self::$path );
 
