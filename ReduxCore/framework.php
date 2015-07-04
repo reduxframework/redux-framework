@@ -1371,13 +1371,10 @@
                     // Add the submenu if it's permitted.
                     if ( true == $addMenu ) {
                         // ONLY for non-wp.org themes OR plugins. Theme-Check alert shown if used and IS theme.
-                        $s          = 'add_sub' . 'menu_page';
-                        $this->page = $s(
-                            $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(
-                                &$this,
-                                'generate_panel'
-                            )
-                        );
+                        $this->page = call_user_func( 'add_submenu_page', $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(
+                            &$this,
+                            'generate_panel'
+                        ) );
                     }
                 }
             }
@@ -1400,9 +1397,7 @@
                     );
                 } else {
                     // Theme-Check notice is displayed for WP.org theme devs, informing them to NOT use this.
-                    $m          = 'add_' . 'menu_' . 'page';
-                    $this->page = $m(
-                        $this->args['page_title'], $this->args['menu_title'], $this->args['page_permissions'], $this->args['page_slug'], array(
+                    $this->page = call_user_func( 'add_menu_page', $this->args['page_title'], $this->args['menu_title'], $this->args['page_permissions'], $this->args['page_slug'], array(
                         &$this,
                         'generate_panel'
                     ), $this->args['menu_icon'], $this->args['page_priority']
@@ -1434,12 +1429,9 @@
                                 }
 
                                 // ONLY for non-wp.org themes OR plugins. Theme-Check alert shown if used and IS theme.
-                                $s = 'add_sub' . 'menu_page';
-                                $s(
-                                    $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
+                                call_user_func( 'add_submenu_page', $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
                                     //create_function( '$a', "return null;" )
-                                    '__return_null'
-                                );
+                                    '__return_null' );
                             }
 
                             // Remove parent submenu item instead of adding null item.
