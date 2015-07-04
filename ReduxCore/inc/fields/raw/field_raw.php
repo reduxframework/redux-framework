@@ -29,7 +29,7 @@
             function render() {
 
                 if ( ! empty( $this->field['include'] ) && file_exists( $this->field['include'] ) ) {
-                    require_once( $this->field['include'] );
+                    require_once $this->field['include'];
                 }
 
                 if ( isset( $this->field['content_path'] ) && ! empty( $this->field['content_path'] ) && file_exists( $this->field['content_path'] ) ) {

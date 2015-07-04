@@ -54,7 +54,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                      */
                     $icons_file = apply_filters( "redux/{$this->parent->args['opt_name']}/field/font/icons/file", $icons_file );
                     if ( file_exists( $icons_file ) ) {
-                        require_once( $icons_file );
+                        require_once $icons_file;
                     }
                 }
 

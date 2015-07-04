@@ -251,7 +251,7 @@
                 $path = apply_filters( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file, $path );
                 do_action( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file . '/after' );
 
-                require( $path );
+                require $path;
 
             }
 

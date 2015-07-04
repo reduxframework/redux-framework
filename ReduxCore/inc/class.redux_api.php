@@ -63,7 +63,7 @@
                             // In case you wanted override your override, hah.
                             $extension['path'] = apply_filters( 'redux/extension/' . $ReduxFramework->args['opt_name'] . '/' . $name, $extension['path'] );
                             if ( file_exists( $extension['path'] ) ) {
-                                require_once( $extension['path'] );
+                                require_once $extension['path'];
                             }
                         }
                         if ( ! isset( $ReduxFramework->extensions[ $name ] ) ) {

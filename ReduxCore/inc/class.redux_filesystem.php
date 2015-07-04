@@ -1,5 +1,7 @@
 <?php
 
+
+
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
@@ -101,8 +103,8 @@
 
             public static function load_direct() {
                 if ( self::$direct === null ) {
-                    require_once( ABSPATH . '/wp-admin/includes/class-wp-filesystem-base.php' );
-                    require_once( ABSPATH . '/wp-admin/includes/class-wp-filesystem-direct.php' );
+                    require_once ABSPATH . '/wp-admin/includes/class-wp-filesystem-base.php';
+                    require_once ABSPATH . '/wp-admin/includes/class-wp-filesystem-direct.php';
                     self::$direct = new WP_Filesystem_Direct( array() );
                 }
             }
@@ -118,8 +120,8 @@
                 }
 
                 // Setup the filesystem with creds
-                require_once( ABSPATH . '/wp-admin/includes/template.php' );
-                require_once( ABSPATH . '/wp-admin/includes/file.php' );
+                require_once ABSPATH . '/wp-admin/includes/template.php';
+                require_once ABSPATH . '/wp-admin/includes/file.php';
 
                 if ( $this->parent->args['menu_type'] == 'submenu' ) {
                     $page_parent = $this->parent->args['page_parent'];

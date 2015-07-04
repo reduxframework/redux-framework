@@ -139,7 +139,7 @@
                         logconsole( 'compiler run' );
                         if ( ! class_exists( 'scssc' ) && ! isset( $GLOBALS['redux_scss_compiler'] ) ) {
                             $GLOBALS['redux_scss_compiler'] = true;
-                            require_once( "scssphp/scss.inc.php" );
+                            require_once "scssphp/scss.inc.php";
                         }
 
                         $scss = new scssc();
@@ -195,7 +195,7 @@
 
                 if ( ! class_exists( 'scssc' ) && ! isset( $GLOBALS['redux_scss_compiler'] ) ) {
                     $GLOBALS['redux_scss_compiler'] = true;
-                    require_once( "scssphp/scss.inc.php" );
+                    require_once "scssphp/scss.inc.php";
                 }
 
                 $scss = new scssc();

@@ -175,9 +175,7 @@
                 // load all the checks in the checks directory
                 $dir = 'checks';
                 foreach ( glob( dirname( __FILE__ ) . '/' . $dir . '/*.php' ) as $file ) {
-
-                    include( $file );
-
+                    require_once $file;
                 }
             }
 

@@ -32,8 +32,8 @@
 
     if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
         // Instance Container
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
-        require_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_instances.php';
+        require_once dirname( __FILE__ ) . '/inc/lib.redux_instances.php';
     }
 
     if ( class_exists( 'ReduxFrameworkInstances' ) ) {
@@ -44,29 +44,29 @@
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
         // Redux CDN class
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_cdn.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_cdn.php';
 
         // Redux API class  :)
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_api.php';
 
         // General helper functions
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_helpers.php';
 
         // General functions
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
-        require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_functions.php';
+        require_once dirname( __FILE__ ) . '/inc/class.p.php';
 
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_filesystem.php';
 
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_admin_notices.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_admin_notices.php';
 
         // ThemeCheck checks
-        require_once( dirname( __FILE__ ) . '/inc/themecheck/class.redux_themecheck.php' );
+        require_once dirname( __FILE__ ) . '/inc/themecheck/class.redux_themecheck.php';
 
         // Welcome
-        require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
+        require_once dirname( __FILE__ ) . '/inc/welcome/welcome.php';
 
-        //require_once( dirname( __FILE__ ) . '/inc/class.redux_sass.php' );
+        //require_once dirname( __FILE__ ) . '/inc/class.redux_sass.php';
 
         /**
          * Main ReduxFramework class
@@ -650,7 +650,7 @@
 
             private function _tracking() {
                 if ( file_exists( dirname( __FILE__ ) . '/inc/tracking.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/inc/tracking.php' );
+                    require_once dirname( __FILE__ ) . '/inc/tracking.php';
                     $tracking = Redux_Tracking::get_instance();
                     $tracking->load( $this );
                 }
@@ -1607,7 +1607,7 @@
 
                                     if ( $class_file && file_exists( $class_file ) && ! class_exists( $field_class ) ) {
                                         /** @noinspection PhpIncludeInspection */
-                                        require_once( $class_file );
+                                        require_once $class_file;
                                     }
                                 }
 
@@ -1682,7 +1682,7 @@
              * @return      void
              */
             public function _enqueue() {
-                require_once( 'core/enqueue.php' );
+                require_once 'core/enqueue.php';
                 $enqueue = new reduxCoreEnqueue ( $this );
                 $enqueue->init();
 
@@ -1996,7 +1996,7 @@
                 // Not used by new sample-config, but in here for legacy builds
                 // This is bad and can break things. Hehe.
                 if ( ! function_exists( 'wp_get_current_user' ) ) {
-                    require_once( ABSPATH . "wp-includes/pluggable.php" );
+                    require_once ABSPATH . "wp-includes/pluggable.php";
                 }
 
                 if ( $this->args['options_api'] == true ) {
@@ -2449,7 +2449,7 @@
 
                     if ( $class_file ) {
                         if ( file_exists( $class_file ) ) {
-                            require_once( $class_file );
+                            require_once $class_file;
                         }
 
                         $this->extensions[ $folder ] = new $extension_class ( $this );
@@ -2827,7 +2827,7 @@
                                 die ();
                             }
 
-                            require_once( 'core/enqueue.php' );
+                            require_once 'core/enqueue.php';
                             $enqueue = new reduxCoreEnqueue ( $redux );
                             $enqueue->get_warnings_and_errors_array();
 
@@ -2885,7 +2885,7 @@
                 }
                 if ( isset( $return_array ) ) {
                     if ( $return_array['status'] == "success" ) {
-                        require_once( 'core/panel.php' );
+                        require_once 'core/panel.php';
                         $panel = new reduxCorePanel ( $redux );
                         ob_start();
                         $panel->notification_bar();
@@ -2988,7 +2988,7 @@
 
                                     if ( $class_file ) {
                                         if ( file_exists( $class_file ) ) {
-                                            require_once( $class_file );
+                                            require_once $class_file;
                                         }
                                     }
                                 }
@@ -3213,7 +3213,7 @@
              * @return      void
              */
             public function generate_panel() {
-                require_once( 'core/panel.php' );
+                require_once 'core/panel.php';
                 $panel = new reduxCorePanel ( $this );
                 $panel->init();
                 $this->set_transients();
@@ -3353,7 +3353,7 @@
 
                         if ( $class_file ) {
                             if ( file_exists( $class_file ) ) {
-                                require_once( $class_file );
+                                require_once $class_file;
                             }
                         }
                     }

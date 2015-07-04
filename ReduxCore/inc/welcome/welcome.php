@@ -369,7 +369,7 @@
             // Stupid hack for Wordpress alerts and warnings
             echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
-            require_once( 'views/about.php' );
+            require_once 'views/about.php';
 
         }
 
@@ -384,7 +384,7 @@
             // Stupid hack for Wordpress alerts and warnings
             echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
-            require_once( 'views/changelog.php' );
+            require_once 'views/changelog.php';
 
         }
 
@@ -399,7 +399,7 @@
             // Stupid hack for Wordpress alerts and warnings
             echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
-            require_once( 'views/extensions.php' );
+            require_once 'views/extensions.php';
 
         }
 
@@ -415,7 +415,7 @@
             // Stupid hack for Wordpress alerts and warnings
             echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
-            require_once( 'views/support.php' );
+            require_once 'views/support.php';
 
         }
 
@@ -430,7 +430,7 @@
             // Stupid hack for Wordpress alerts and warnings
             echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
-            require_once( 'views/credits.php' );
+            require_once 'views/credits.php';
 
         }
 
@@ -445,7 +445,7 @@
             // Stupid hack for Wordpress alerts and warnings
             echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
-            require_once( 'views/status_report.php' );
+            require_once 'views/status_report.php';
 
         }
 

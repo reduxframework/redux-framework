@@ -626,7 +626,7 @@
                                     $class_file = apply_filters( 'redux-typeclass-load', $this->path . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
                                     if ( $class_file ) {
                                         /** @noinspection PhpIncludeInspection */
-                                        require_once( $class_file );
+                                        require_once $class_file;
                                     }
                                 }
 

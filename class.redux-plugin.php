@@ -142,7 +142,7 @@
             public function includes() {
                 // Include ReduxCore
                 if ( file_exists( dirname( __FILE__ ) . '/ReduxCore/framework.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
+                    require_once dirname( __FILE__ ) . '/ReduxCore/framework.php';
                 }
 
                 if ( isset( ReduxFramework::$_as_plugin ) ) {
@@ -150,12 +150,12 @@
                 }
 
                 if ( file_exists( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' );
+                    require_once dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php';
                 }
 
                 // Include demo config, if demo mode is active
                 if ( $this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/sample/sample-config.php' );
+                    require_once dirname( __FILE__ ) . '/sample/sample-config.php';
                 }
             }
 
