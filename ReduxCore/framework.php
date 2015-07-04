@@ -327,7 +327,7 @@
                     // Internataionalization
                     $this->_internationalization();
 
-                    $this->filesystem = Redux_Filesystem::get_instance();
+                    $this->filesystem = Redux_Filesystem::get_instance( $this );
 
                     //set redux upload folder
                     $this->set_redux_content();
@@ -446,7 +446,7 @@
                 $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
                 self::$_upload_url = $upload_dir['baseurl'] . '/redux/';
-                if ( ! is_dir( self::$_upload_dir ) ) {
+                if ( ! is_dir( self::$_upload_dir ) && $this->args['save_defaults'] === true ) {
                     $this->filesystem->execute( 'mkdir', self::$_upload_dir );
                 }
             }

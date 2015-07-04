@@ -15,12 +15,21 @@
              */
             protected static $instance = null;
 
+            protected static $direct = null;
+
             private $creds = array();
 
             public $fs_object = null;
 
-            public function __construct() {
+            public $parent = null;
 
+            public function __construct() {
+                $this->parent->admin_notices[] = array(
+                    'type'    => 'error',
+                    'msg'     => '<strong>' . __( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'We were unable to modify required files. Please check your permissions, or modify your wp-config.php file to contain your FTP login credentials as <a href="%s" target="_blank">outlined here</a>.', 'redux-framework' ), 'https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants' ),
+                    'id'      => 'redux-wp-login',
+                    'dismiss' => false,
+                );
             }
 
             /**
@@ -29,11 +38,15 @@
              * @since     1.0.0
              * @return    object    A single instance of this class.
              */
-            public static function get_instance() {
+            public static function get_instance( $parent = null ) {
 
                 // If the single instance hasn't been set, set it now.
                 if ( null == self::$instance ) {
                     self::$instance = new self;
+                }
+
+                if ( $parent !== null ) {
+                    self::$instance->parent = $parent;
                 }
 
                 return self::$instance;
@@ -42,10 +55,8 @@
             public function ftp_form() {
                 if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
                     echo '<div class="wrap"><div class="error"><p>';
-                    echo __( 'Unable to modify required files. Please ensure that', 'redux-framework' );
-                    echo ' <code>' . Redux_Helpers::cleanFilePath( trailingslashit( WP_CONTENT_DIR ) ) . '/uploads/</code> ';
-                    echo __( 'has the proper read/write permissions or enter your FTP information below.', 'redux-framework' );
-                    echo '</p></div><h2></h2>' . $this->parent->ftp_form . '</div>';
+                    echo '<strong>' . __( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'We were unable to modify required files. Please ensure that <code>%1s</code> has the proper read-write permissions, or modify your wp-config.php file to contain your FTP login credentials as <a href="%2s" target="_blank">outlined here</a>.', 'redux-framework' ), Redux_Helpers::cleanFilePath( trailingslashit( WP_CONTENT_DIR ) ) . '/uploads/', 'https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants' );
+                    echo '</p></div><h2></h2>' . '</div>';
                 }
             }
 
@@ -85,6 +96,15 @@
                 }
 
                 return true;
+            }
+
+
+            public static function load_direct() {
+                if ( self::$direct === null ) {
+                    require_once( ABSPATH . '/wp-admin/includes/class-wp-filesystem-base.php' );
+                    require_once( ABSPATH . '/wp-admin/includes/class-wp-filesystem-direct.php' );
+                    self::$direct = new WP_Filesystem_Direct( array() );
+                }
             }
 
             public function execute( $action, $file = '', $params = '' ) {
@@ -180,14 +200,8 @@
                 } elseif ( $action == 'put_contents' && ! isset( $this->filesystem->killswitch ) ) {
                     // Write a string to a file
                     if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
-                        $this->parent->admin_notices[] = array(
-                            'type'    => 'error',
-                            'msg'     => '<strong>' . __( 'File Permissions Error', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>', 'redux-framework' ), admin_url( 'plugins.php' ) ),
-                            'id'      => 'redux-fs-api-put_contents',
-                            'dismiss' => true,
-                        );
-                        $direct                        = new WP_Filesystem_Direct( array() );
-                        $res                           = $direct->put_contents( $file, $content, $chmod );
+                        self::load_direct();
+                        $res = self::$direct->put_contents( $file, $content, $chmod );
                     } else {
                         $res = $wp_filesystem->put_contents( $file, $content, $chmod );
                     }
@@ -210,8 +224,8 @@
                 } elseif ( $action == 'get_contents' ) {
                     // Reads entire file into a string
                     if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
-                        $direct = new WP_Filesystem_Direct( array() );
-                        $res    = $direct->get_contents( $file );
+                        self::load_direct();
+                        $res = self::$direct->get_contents( $file );
                     } else {
                         $res = $wp_filesystem->get_contents( $file );
                     }
@@ -227,21 +241,18 @@
                     }
                 }
 
-                if ( isset( $res ) && ! $res ) {
+                if ( ! $res ) {
+                    $this->killswitch              = true;
                     $this->parent->admin_notices[] = array(
                         'type'    => 'error',
-                        'msg'     => '<strong>' . __( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'We were unable to modify required files. Please check your permissions, or modify your wp-config.php file to contain your FTP login credentials as <a href="%s" target="_blank">outlined here</a>.', 'redux-framework' ), 'https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants' ),
+                        'msg'     => '<strong>' . __( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'We were unable to modify required files. Please ensure that <code>%1s</code> has the proper read-write permissions, or modify your wp-config.php file to contain your FTP login credentials as <a href="%2s" target="_blank">outlined here</a>.', 'redux-framework' ), Redux_Helpers::cleanFilePath( trailingslashit( WP_CONTENT_DIR ) ) . '/uploads/', 'https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants' ),
                         'id'      => 'redux-wp-login',
                         'dismiss' => false,
                     );
-                    $this->killswitch              = true;
-                }
-
-                if ( ! $res ) {
-                    add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array(
-                        $this,
-                        'ftp_form'
-                    ) );
+                    //add_action( "redux/page/{$this->parent->args['opt_name']}/form/before", array(
+                    //    $this,
+                    //    'ftp_form'
+                    //) );
                 }
 
                 return $res;

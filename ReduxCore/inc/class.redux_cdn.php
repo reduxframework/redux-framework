@@ -109,7 +109,7 @@
                     if ( ! self::$_set ) {
                         self::$_parent->admin_notices[] = array(
                             'type'    => 'error',
-                            'msg'     => '<strong>' . __( 'Redux Framework Warning', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>', 'redux-framework' ), admin_url( 'plugins.php' ) ),
+                            'msg'     => '<strong>' . __( 'Redux Framework Warning', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>.', 'redux-framework' ), admin_url( 'plugins.php' ) ),
                             'id'      => $handle . '23',
                             'dismiss' => false,
                         );
