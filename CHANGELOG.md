@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.4.32
+* Fixed:    Undefined index for undeclared variable in Theme-Check checks.
+* Fixed:    Annoying Redux Theme-Check notices.
+* Fixed:    How some functions were called.
+
 ## 3.5.4.31
 * Fixed:    Theme-Check baby! Everything working as it should with extra theme-check hints to prepare
             your theme for submission!
