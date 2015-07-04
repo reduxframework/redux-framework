@@ -5,6 +5,8 @@
 
         function check( $php_files, $css_files, $other_files ) {
 
+            $ret = true;
+
             $check = Redux_ThemeCheck::get_instance();
             $redux = $check::get_redux_details( $php_files );
 
@@ -22,8 +24,6 @@
                 );
 
                 $errors = array();
-
-
 
                 foreach ( $blacklist as $file => $reason ) {
                     checkcount();
