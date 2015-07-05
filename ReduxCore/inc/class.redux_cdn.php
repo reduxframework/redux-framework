@@ -60,7 +60,7 @@
                     $cdn_response = wp_remote_get( $src_cdn );
 
                     if ( is_wp_error( $cdn_response ) || wp_remote_retrieve_response_code( $cdn_response ) != '200' ) {
-                        if ( class_exists( 'Redux_VendorSupport' ) ) {
+                        if ( class_exists( 'ReduxFramework_extension_vendor_support' ) ) {
                             $src = Redux_VendorURL::get_url( $handle );
 
                             if ( $register ) {
@@ -97,7 +97,7 @@
             }
 
             private static function _vendor_plugin( $register = true, $handle, $src_cdn, $deps, $ver, $footer_or_media, $is_script = true ) {
-                if ( class_exists( 'Redux_VendorSupport' ) ) {
+                if ( class_exists( 'ReduxFramework_extension_vendor_support' ) ) {
                     $src = Redux_VendorURL::get_url( $handle );
 
                     if ( $register ) {
