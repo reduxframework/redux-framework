@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.33
+* Modified: #2436 - Validation check for any validation type ending in 'not_empty' now recognized.
+
 ## 3.5.4.32
 * Fixed:    Undefined index for undeclared variable in Theme-Check checks.
 * Fixed:    Annoying Redux Theme-Check notices.
