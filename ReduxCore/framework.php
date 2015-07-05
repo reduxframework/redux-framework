@@ -2918,7 +2918,8 @@
                             if ( isset ( $field['validate'] ) ) {
 
                                 // Make sure 'validate field' is set to 'not_empty' or 'email_not_empty'
-                                if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' || $field['validate'] == 'numeric_not_empty' ) {
+                                //if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' || $field['validate'] == 'numeric_not_empty' ) {
+                                if (strtolower (substr( $field['validate'], -9) ) == 'not_empty'){
 
                                     // Set the flag.
                                     $isNotEmpty = true;
