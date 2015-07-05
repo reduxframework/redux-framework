@@ -26,7 +26,7 @@
              * @since       3.0.0
              */
 
-            const VERSION = '3.5.4.30';
+            const VERSION = '3.5.4.32';
 
             /**
              * @access      protected
@@ -142,7 +142,7 @@
             public function includes() {
                 // Include ReduxCore
                 if ( file_exists( dirname( __FILE__ ) . '/ReduxCore/framework.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/ReduxCore/framework.php' );
+                    require_once dirname( __FILE__ ) . '/ReduxCore/framework.php';
                 }
 
                 if ( isset( ReduxFramework::$_as_plugin ) ) {
@@ -150,12 +150,12 @@
                 }
 
                 if ( file_exists( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php' );
+                    require_once dirname( __FILE__ ) . '/ReduxCore/redux-extensions/config.php';
                 }
 
                 // Include demo config, if demo mode is active
                 if ( $this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
-                    require_once( dirname( __FILE__ ) . '/sample/sample-config.php' );
+                    require_once dirname( __FILE__ ) . '/sample/sample-config.php';
                 }
             }
 
@@ -184,12 +184,12 @@
             }
 
             public function load_first() {
-                $plugin_dir = Redux_Helpers::cleanFilePath(WP_PLUGIN_DIR) . '/';
+                $plugin_dir = Redux_Helpers::cleanFilePath( WP_PLUGIN_DIR ) . '/';
                 $self_file  = Redux_Helpers::cleanFilePath( __FILE__ );
-                
-                $path       = str_replace( $plugin_dir , '', $self_file );
-                $path       = str_replace('class.redux-plugin.php', 'redux-framework.php', $path);
-                
+
+                $path = str_replace( $plugin_dir, '', $self_file );
+                $path = str_replace( 'class.redux-plugin.php', 'redux-framework.php', $path );
+
                 if ( $plugins = get_option( 'active_plugins' ) ) {
                     if ( $key = array_search( $path, $plugins ) ) {
                         array_splice( $plugins, $key, 1 );
@@ -410,9 +410,9 @@
                 if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
 
                     $new_links = array(
-                        '<a href="http://docs.reduxframework.com/" target="_blank">' . __( 'Docs', 'redux-framework' ) . '</a>',
-                        '<a href="https://github.com/ReduxFramework/redux-framework" target="_blank">' . __( 'Repo', 'redux-framework' ) . '</a>',
-                        '<a href="http://build.reduxframework.com/" target="_blank">' . __( 'Builder', 'redux-framework' ) . '</a>',
+                        '<a href="' . 'http://' . 'docs.reduxframework.com/" target="_blank">' . __( 'Docs', 'redux-framework' ) . '</a>',
+                        '<a href="' . 'https://' . 'github.com/ReduxFramework/redux-framework" target="_blank">' . __( 'Repo', 'redux-framework' ) . '</a>',
+                        '<a href="' . 'http://' . 'build.reduxframework.com/" target="_blank">' . __( 'Builder', 'redux-framework' ) . '</a>',
                         '<a href="' . admin_url( 'tools.php?page=redux-support' ) . '">' . __( 'Get Support', 'redux-framework' ) . '</a>',
                     );
 

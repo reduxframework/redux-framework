@@ -11,7 +11,9 @@
     <?php $this->actions(); ?>
     <?php $this->tabs(); ?>
 
-    <p class="about-description"><?php _e( 'Redux is created by a community of developers world wide. Want to have your name listed too? <a href="https://github.com/reduxframework/redux-framework/blob/master/CONTRIBUTING.md" target="_blank">Contribute to Redux</a>.', 'redux-framework' ); ?></p>
+    <p class="about-description"><?php
+            echo sprintf( __( 'Redux is created by a community of developers world wide. Want to have your name listed too? <a href="%d" target="_blank">Contribute to Redux</a>.', 'redux-framework' ), 'https://github.com/reduxframework/redux-framework/blob/master/CONTRIBUTING.md' );
+        ?></p>
 
     <?php echo $this->contributors(); ?>
 </div>

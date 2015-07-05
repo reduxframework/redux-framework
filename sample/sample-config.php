@@ -2223,7 +2223,8 @@
                     'id'       => '17',
                     'type'     => 'raw',
                     'markdown' => true,
-                    'content'  => file_get_contents( dirname( __FILE__ ) . '/../README.md' )
+                    'content_path' => dirname( __FILE__ ) . '/../README.md', // FULL PATH, not relative please
+                    //'content' => 'Raw content here',
                 ),
             ),
         );

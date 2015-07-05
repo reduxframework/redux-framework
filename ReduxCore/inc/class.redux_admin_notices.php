@@ -88,8 +88,8 @@
                                     $css_id    = $notice['id'] . $pageName . $curTab;
                                     $css_class = $notice['type'] . 'redux-notice notice is-dismissible redux-notice';
                                     $output .= "<div {$add_style} id='$css_id' class='$css_class'> \n";
-                                    $nonce = wp_create_nonce( $notice['id'] . 'nonce' );
-                                    $output .= "<input type='hidden' class='dismiss_data' id='" . $notice['id'] . "' value='{$nonce}'> \n";
+                                    $nonce = wp_create_nonce( $notice['id'] . $pageName . $curTab . 'nonce' );
+                                    $output .= "<input type='hidden' class='dismiss_data' id='" . $notice['id'] . $pageName . $curTab . "' value='{$nonce}'> \n";
                                     $output .= "<p>{$notice['msg']}</p>";
                                     $output .= "</div> \n";
                                     echo $output;
@@ -170,7 +170,7 @@
             public static function dismissAdminNoticeAJAX() {
                 global $current_user;
                 if ( ! wp_verify_nonce( $_POST['nonce'], $_POST['id'] . 'nonce' ) ) {
-                    die( 0 );
+                    die(0);
                 } else {
                     // Get the user id
                     $userid = $current_user->ID;

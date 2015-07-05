@@ -5,7 +5,7 @@
      *
      * @author        Redux Framework
      * @package       ReduxFramework/Templates
-     * @version       3.5.4.18
+     * @version: 3.5.4.18
      */
 
 
@@ -15,19 +15,19 @@
 <div class="redux-container<?php echo esc_attr( $expanded ); ?>">
     <?php $action = ( $this->parent->args['database'] == "network" && $this->parent->args['network_admin'] && is_network_admin() ? './edit.php?action=redux_' . $this->parent->args['opt_name'] : './options.php' ) ?>
     <form method="post" action="<?php echo $action; ?>" data-nonce="<?php echo $nonce; ?>" enctype="multipart/form-data"
-          id="redux-form-wrapper">
+        id="redux-form-wrapper">
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
         <input type="hidden" id="redux-compiler-hook"
-               name="<?php echo $this->parent->args['opt_name']; ?>[compiler]"
-               value=""/>
+            name="<?php echo $this->parent->args['opt_name']; ?>[compiler]"
+            value=""/>
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
         <input type="hidden" id="currentSection"
-               name="<?php echo $this->parent->args['opt_name']; ?>[redux-section]"
-               value=""/>
+            name="<?php echo $this->parent->args['opt_name']; ?>[redux-section]"
+            value=""/>
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
         <?php if ( ! empty( $this->parent->no_panel ) ) : ?>
             <input type="hidden" name="<?php echo $this->parent->args['opt_name']; ?>[redux-no_panel]"
-                   value="<?php echo implode( '|', $this->parent->no_panel ); ?>"/>
+                value="<?php echo implode( '|', $this->parent->no_panel ); ?>"/>
         <?php endif; ?>
         <?php
             // Must run or the page won't redirect properly
@@ -38,7 +38,7 @@
         ?>
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
         <input type="hidden" id="last_tab" name="<?php echo $this->parent->args['opt_name']; ?>[last_tab]"
-               value="<?php echo esc_attr( $this->parent->options['last_tab'] ); ?>"/>
+            value="<?php echo esc_attr( $this->parent->options['last_tab'] ); ?>"/>
 
         <?php $this->get_template( 'content.tpl.php' ); ?>
 

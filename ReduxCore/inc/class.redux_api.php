@@ -44,9 +44,9 @@
             }
 
             public static function load() {
-                add_action( 'after_setup_theme',    array( 'Redux', 'createRedux' ) );
-                add_action( 'init',                 array( 'Redux', 'createRedux' ) );
-                add_action( 'switch_theme',         array( 'Redux', 'createRedux' ) );
+                add_action( 'after_setup_theme', array( 'Redux', 'createRedux' ) );
+                add_action( 'init', array( 'Redux', 'createRedux' ) );
+                add_action( 'switch_theme', array( 'Redux', 'createRedux' ) );
             }
 
             public static function init( $opt_name = "" ) {
@@ -63,7 +63,7 @@
                             // In case you wanted override your override, hah.
                             $extension['path'] = apply_filters( 'redux/extension/' . $ReduxFramework->args['opt_name'] . '/' . $name, $extension['path'] );
                             if ( file_exists( $extension['path'] ) ) {
-                                require_once( $extension['path'] );
+                                require_once $extension['path'];
                             }
                         }
                         if ( ! isset( $ReduxFramework->extensions[ $name ] ) ) {
@@ -340,7 +340,9 @@
                     if ( ! isset( $field['priority'] ) ) {
                         $field['priority'] = self::getPriority( $opt_name, 'fields' );
                     }
-                    self::$fields[ $opt_name ][ $field['id'] ] = $field;
+                    if ( isset( $field['id'] ) ) {
+                        self::$fields[ $opt_name ][ $field['id'] ] = $field;
+                    }
                 }
             }
 
@@ -459,25 +461,10 @@
              *
              * @return string
              */
-            public static function getFileVersion( $file, $size = 8192 ) {
-                // We don't need to write to the file, so just open for reading.
-                $fp = fopen( $file, 'r' );
+            public static function getFileVersion( $file ) {
+                $data = get_file_data( $file, array( 'version' ), 'plugin' );
 
-                // Pull only the first 8kiB of the file in.
-                $file_data = fread( $fp, $size );
-
-                // PHP will close file handle, but we are good citizens.
-                fclose( $fp );
-
-                // Make sure we catch CR-only line endings.
-                $file_data = str_replace( "\r", "\n", $file_data );
-                $version   = '';
-
-                if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( '@version', '/' ) . '(.*)$/mi', $file_data, $match ) && $match[1] ) {
-                    $version = _cleanup_header_comment( $match[1] );
-                }
-
-                return $version;
+                return $data[0];
             }
 
             public static function checkExtensionClassFile( $opt_name, $name = "", $class_file = "", $instance = "" ) {
@@ -488,7 +475,7 @@
                     }
 
                     self::$extensions[ $name ] = isset( self::$extensions[ $name ] ) ? self::$extensions[ $name ] : array();
-                    $version                   = self::getFileVersion( $class_file );
+                    $version                   = Redux_Helpers::get_template_version( $class_file );
                     if ( empty( $version ) && ! empty( $instance ) ) {
                         if ( isset( $instance->version ) ) {
                             $version = $instance->version;
@@ -593,7 +580,7 @@
                         $instanceExtensions[ $extension ] = array(
                             'path'    => $class_file,
                             'class'   => $extension_class,
-                            'version' => Redux::getFileVersion( $class_file )
+                            'version' => Redux_Helpers::get_template_version( $class_file )
                         );
                     }
 

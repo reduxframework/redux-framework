@@ -32,8 +32,8 @@
 
     if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
         // Instance Container
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_instances.php' );
-        require_once( dirname( __FILE__ ) . '/inc/lib.redux_instances.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_instances.php';
+        require_once dirname( __FILE__ ) . '/inc/lib.redux_instances.php';
     }
 
     if ( class_exists( 'ReduxFrameworkInstances' ) ) {
@@ -44,29 +44,29 @@
     if ( ! class_exists( 'ReduxFramework' ) ) {
 
         // Redux CDN class
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_cdn.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_cdn.php';
 
         // Redux API class  :)
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_api.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_api.php';
 
         // General helper functions
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_helpers.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_helpers.php';
 
         // General functions
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_functions.php' );
-        require_once( dirname( __FILE__ ) . '/inc/class.p.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_functions.php';
+        require_once dirname( __FILE__ ) . '/inc/class.p.php';
 
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_filesystem.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_filesystem.php';
 
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_admin_notices.php' );
+        require_once dirname( __FILE__ ) . '/inc/class.redux_admin_notices.php';
 
         // ThemeCheck checks
-        require_once( dirname( __FILE__ ) . '/inc/class.redux_themecheck.php' );
+        require_once dirname( __FILE__ ) . '/inc/themecheck/class.redux_themecheck.php';
 
         // Welcome
-        require_once( dirname( __FILE__ ) . '/inc/welcome/welcome.php' );
+        require_once dirname( __FILE__ ) . '/inc/welcome/welcome.php';
 
-        //require_once( dirname( __FILE__ ) . '/inc/class.redux_sass.php' );
+        //require_once dirname( __FILE__ ) . '/inc/class.redux_sass.php';
 
         /**
          * Main ReduxFramework class
@@ -79,7 +79,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.4.30';
+            public static $_version = '3.5.4.32';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -212,8 +212,8 @@
                 }
 
                 // Pass parent pointer to function helper.
-                Redux_Functions::$_parent = $this;
-                Redux_CDN::$_parent       = $this;
+                Redux_Functions::$_parent     = $this;
+                Redux_CDN::$_parent           = $this;
                 Redux_Admin_Notices::$_parent = $this;
 
                 // Set values
@@ -327,7 +327,7 @@
                     // Internataionalization
                     $this->_internationalization();
 
-                    $this->filesystem = new Redux_Filesystem ( $this );
+                    $this->filesystem = Redux_Filesystem::get_instance( $this );
 
                     //set redux upload folder
                     $this->set_redux_content();
@@ -339,7 +339,7 @@
                     $this->get_options();
 
                     // Tracking
-                    if ( true != Redux_Helpers::isTheme( __FILE__ ) || ( true == Redux_Helpers::isTheme( __FILE__ ) && ! $this->args['disable_tracking'] ) ) {
+                    if ( true != Redux_Helpers::isTheme( __FILE__ ) || true == Redux_Helpers::isTheme( __FILE__ ) ) {
                         $this->_tracking();
                     }
 
@@ -413,10 +413,10 @@
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
 
                     if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true ) {
-                        include_once 'core/dashboard.php';
+                        require_once 'core/dashboard.php';
 
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
-                            include_once 'core/newsflash.php';
+                            require_once 'core/newsflash.php';
 
                             $params = array(
                                 'dir_name'    => 'notice',
@@ -446,7 +446,7 @@
                 $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
                 self::$_upload_url = $upload_dir['baseurl'] . '/redux/';
-                if ( ! is_dir( self::$_upload_dir ) ) {
+                if ( ! is_dir( self::$_upload_dir ) && $this->args['save_defaults'] === true ) {
                     $this->filesystem->execute( 'mkdir', self::$_upload_dir );
                 }
             }
@@ -552,7 +552,6 @@
                     'show_import_export'        => true,
                     'show_options_object'       => true,
                     'dev_mode'                  => true,
-                    'disable_tracking'          => false,
                     'templates_path'            => '',
                     // Path to the templates file for various Redux elements
                     'ajax_save'                 => true,
@@ -650,9 +649,11 @@
 // get_instance()
 
             private function _tracking() {
-                require_once( dirname( __FILE__ ) . '/inc/tracking.php' );
-                $tracking = Redux_Tracking::get_instance();
-                $tracking->load( $this );
+                if ( file_exists( dirname( __FILE__ ) . '/inc/tracking.php' ) ) {
+                    require_once dirname( __FILE__ ) . '/inc/tracking.php';
+                    $tracking = Redux_Tracking::get_instance();
+                    $tracking->load( $this );
+                }
             }
 // _tracking()
 
@@ -1258,6 +1259,10 @@
                     }
                     $this->dev_mode_forced  = true;
                     $this->args['dev_mode'] = true;
+                    if ( isset( $this->args['forced_dev_mode_off'] ) && $this->args['forced_dev_mode_off'] == true ) {
+                        $this->dev_mode_forced  = false;
+                        $this->args['dev_mode'] = false;
+                    }
                 }
 
                 // Auto create the page_slug appropriately
@@ -1273,6 +1278,12 @@
                     }
                 }
 
+                if ( isset( $this->args['customizer_only'] ) && $this->args['customizer_only'] == true ) {
+                    $this->args['menu_type']      = 'hidden';
+                    $this->args['customizer']     = true;
+                    $this->args['admin_bar']      = false;
+                    $this->args['allow_sub_menu'] = false;
+                }
             }
 
             /**
@@ -1359,12 +1370,11 @@
                     }
                     // Add the submenu if it's permitted.
                     if ( true == $addMenu ) {
-                        $this->page = add_submenu_page(
-                            $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(
-                                &$this,
-                                'generate_panel'
-                            )
-                        );
+                        // ONLY for non-wp.org themes OR plugins. Theme-Check alert shown if used and IS theme.
+                        $this->page = call_user_func( 'add_submenu_page', $page_parent, $page_title, $menu_title, $page_permissions, $page_slug, array(
+                            &$this,
+                            'generate_panel'
+                        ) );
                     }
                 }
             }
@@ -1386,8 +1396,8 @@
                         $this->args['page_parent'], $this->args['page_title'], $this->args['menu_title'], $this->args['page_permissions'], $this->args['page_slug']
                     );
                 } else {
-                    $this->page = add_menu_page(
-                        $this->args['page_title'], $this->args['menu_title'], $this->args['page_permissions'], $this->args['page_slug'], array(
+                    // Theme-Check notice is displayed for WP.org theme devs, informing them to NOT use this.
+                    $this->page = call_user_func( 'add_menu_page', $this->args['page_title'], $this->args['menu_title'], $this->args['page_permissions'], $this->args['page_slug'], array(
                         &$this,
                         'generate_panel'
                     ), $this->args['menu_icon'], $this->args['page_priority']
@@ -1418,11 +1428,10 @@
                                     continue;
                                 }
 
-                                add_submenu_page(
-                                    $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
+                                // ONLY for non-wp.org themes OR plugins. Theme-Check alert shown if used and IS theme.
+                                call_user_func( 'add_submenu_page', $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
                                     //create_function( '$a', "return null;" )
-                                    '__return_null'
-                                );
+                                    '__return_null' );
                             }
 
                             // Remove parent submenu item instead of adding null item.
@@ -1590,7 +1599,7 @@
 
                                     if ( $class_file && file_exists( $class_file ) && ! class_exists( $field_class ) ) {
                                         /** @noinspection PhpIncludeInspection */
-                                        require_once( $class_file );
+                                        require_once $class_file;
                                     }
                                 }
 
@@ -1665,7 +1674,7 @@
              * @return      void
              */
             public function _enqueue() {
-                include_once( 'core/enqueue.php' );
+                require_once 'core/enqueue.php';
                 $enqueue = new reduxCoreEnqueue ( $this );
                 $enqueue->init();
 
@@ -1979,7 +1988,7 @@
                 // Not used by new sample-config, but in here for legacy builds
                 // This is bad and can break things. Hehe.
                 if ( ! function_exists( 'wp_get_current_user' ) ) {
-                    include( ABSPATH . "wp-includes/pluggable.php" );
+                    require_once ABSPATH . "wp-includes/pluggable.php";
                 }
 
                 if ( $this->args['options_api'] == true ) {
@@ -2432,7 +2441,7 @@
 
                     if ( $class_file ) {
                         if ( file_exists( $class_file ) ) {
-                            require_once( $class_file );
+                            require_once $class_file;
                         }
 
                         $this->extensions[ $folder ] = new $extension_class ( $this );
@@ -2810,15 +2819,15 @@
                                 die ();
                             }
 
-                            include_once( 'core/enqueue.php' );
+                            require_once 'core/enqueue.php';
                             $enqueue = new reduxCoreEnqueue ( $redux );
                             $enqueue->get_warnings_and_errors_array();
 
                             $return_array = array(
-                                'status'           => 'success',
-                                'options'          => $redux->options,
-                                'errors'           => isset ( $redux->localize_data['errors'] ) ? $redux->localize_data['errors'] : null,
-                                'warnings'         => isset ( $redux->localize_data['warnings'] ) ? $redux->localize_data['warnings'] : null,
+                                'status'   => 'success',
+                                'options'  => $redux->options,
+                                'errors'   => isset ( $redux->localize_data['errors'] ) ? $redux->localize_data['errors'] : null,
+                                'warnings' => isset ( $redux->localize_data['warnings'] ) ? $redux->localize_data['warnings'] : null,
                             );
 
                         } catch ( Exception $e ) {
@@ -2867,8 +2876,8 @@
                     $this->set_transients();
                 }
                 if ( isset( $return_array ) ) {
-                    if ($return_array['status'] == "success") {
-                        include_once( 'core/panel.php' );
+                    if ( $return_array['status'] == "success" ) {
+                        require_once 'core/panel.php';
                         $panel = new reduxCorePanel ( $redux );
                         ob_start();
                         $panel->notification_bar();
@@ -2876,7 +2885,7 @@
                         ob_end_clean();
                         $return_array['notification_bar'] = $notification_bar;
                     }
-                    
+
                     echo json_encode( apply_filters( "redux/options/{$this->args['opt_name']}/ajax_save/response", $return_array ) );
                 }
 
@@ -2972,7 +2981,7 @@
 
                                     if ( $class_file ) {
                                         if ( file_exists( $class_file ) ) {
-                                            require_once( $class_file );
+                                            require_once $class_file;
                                         }
                                     }
                                 }
@@ -3197,7 +3206,7 @@
              * @return      void
              */
             public function generate_panel() {
-                include_once( 'core/panel.php' );
+                require_once 'core/panel.php';
                 $panel = new reduxCorePanel ( $this );
                 $panel->init();
                 $this->set_transients();
@@ -3337,7 +3346,7 @@
 
                         if ( $class_file ) {
                             if ( file_exists( $class_file ) ) {
-                                require_once( $class_file );
+                                require_once $class_file;
                             }
                         }
                     }
@@ -3466,10 +3475,10 @@
                             $class_string .= "redux_remove_th";
                         }
 
-                        if ( isset ( $field['fieldset_class'] ) && !empty( $field['fieldset_class'] ) ) {
+                        if ( isset ( $field['fieldset_class'] ) && ! empty( $field['fieldset_class'] ) ) {
                             $class_string .= ' ' . $field['fieldset_class'];
-                        }                        
-                        
+                        }
+
                         echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="' . $hidden . 'redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="' . $field['type'] . '">';
                         //}
 
@@ -3752,12 +3761,12 @@
 
                         if ( is_array( $checkValue ) ) {
                             foreach ( $checkValue as $idx => $opt ) {
-                                if ( strpos( $parentValue, (string)$opt ) !== false ) {
+                                if ( strpos( $parentValue, (string) $opt ) !== false ) {
                                     $return = true;
                                 }
                             }
                         } else {
-                            if ( strpos( $parentValue, (string)$checkValue ) !== false ) {
+                            if ( strpos( $parentValue, (string) $checkValue ) !== false ) {
                                 $return = true;
                             }
                         }
@@ -3771,12 +3780,12 @@
 
                         if ( is_array( $checkValue ) ) {
                             foreach ( $checkValue as $idx => $opt ) {
-                                if ( strpos( $parentValue, (string)$opt ) === false ) {
+                                if ( strpos( $parentValue, (string) $opt ) === false ) {
                                     $return = true;
                                 }
                             }
                         } else {
-                            if ( strpos( $parentValue, (string)$checkValue ) === false ) {
+                            if ( strpos( $parentValue, (string) $checkValue ) === false ) {
                                 $return = true;
                             }
                         }

@@ -1,5 +1,20 @@
 # Redux Framework Changelog
 
+## 3.5.4.32
+* Fixed:    Undefined index for undeclared variable in Theme-Check checks.
+* Fixed:    Annoying Redux Theme-Check notices.
+* Fixed:    How some functions were called.
+
+## 3.5.4.31
+* Fixed:    Theme-Check baby! Everything working as it should with extra theme-check hints to prepare
+            your theme for submission!
+* Fixed:    Better .org hinting for theme submission.
+* Modified: `forced_dev_mode_off` argument that will ensure dev_mode is ALWAYS off. 
+            PLEASE do not ship with this enabled. We will NOT provide any support for any instance that 
+            has this argument enabled. Disable and test prior to posting on our issue tracker.
+* Added:    `customizer_only` as a global arg that disables all of Redux except for the customizer, in 
+            preparation for our customizer integration.
+
 ## 3.5.4.30
 * Modified: Dissmissable Redux Admin notices now use the WP 4.2 dismiss JS and Ajax. Pretty.
 * Modified: Admin notice code is now it's own isolated class inside core.

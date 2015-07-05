@@ -81,6 +81,7 @@ class scssc {
 	static public $true = array("keyword", "true");
 	static public $false = array("keyword", "false");
 	static public $null = array("null");
+    static public $parent = null;
 
 	static public $defaultValue = array("keyword", "");
 	static public $selfSelector = array("self");
@@ -827,7 +828,7 @@ class scssc {
 			list(,$value, $pos) = $child;
 			$line = $this->parser->getLineNo($pos);
 			$value = $this->compileValue($this->reduce($value, true));
-			fwrite(STDERR, "Line $line DEBUG: $value\n");
+			//fwrite(STDERR, "Line $line DEBUG: $value\n");
 			break;
 		default:
 			$this->throwError("unknown child type: $child[0]");
@@ -1649,7 +1650,8 @@ class scssc {
 		if (isset($this->importCache[$realPath])) {
 			$tree = $this->importCache[$realPath];
 		} else {
-			$code = file_get_contents($path);
+            $code = self::$parent->filesystem->execute( 'get_contents', $path );
+			//$code = file_get_contents($path);
 			$parser = new scss_parser($path, false);
 			$tree = $parser->parse($code);
 			$this->parsedFiles[] = $path;
@@ -4427,7 +4429,8 @@ class scss_server {
 		// look for modified imports
 		$icache = $this->importsCacheName($out);
 		if (is_readable($icache)) {
-			$imports = unserialize(file_get_contents($icache));
+            $imports = unserialize( self::$parent->filesystem->execute( 'get_contents', $icache ));
+			//$imports = unserialize(file_get_contents($icache));
 			foreach ($imports as $import) {
 				if (filemtime($import) > $mtime) return true;
 			}
@@ -4465,16 +4468,20 @@ class scss_server {
 	 */
 	protected function compile($in, $out) {
 		$start = microtime(true);
-		$css = $this->scss->compile(file_get_contents($in), $in);
+
+        $css = $this->scss->compile(self::$parent->filesystem->execute( 'get_contents', $in ), $in);
+		//$css = $this->scss->compile(file_get_contents($in), $in);
 		$elapsed = round((microtime(true) - $start), 4);
 
 		$v = scssc::$VERSION;
 		$t = @date('r');
 		$css = "/* compiled by scssphp $v on $t (${elapsed}s) */\n\n" . $css;
 
-		file_put_contents($out, $css);
-		file_put_contents($this->importsCacheName($out),
-			serialize($this->scss->getParsedFiles()));
+        self::$parent->filesystem->execute( 'put_contents', $out, array('content'=>$css) );
+        self::$parent->filesystem->execute( 'put_contents', $this->importsCacheName($out), array('content'=>serialize($this->scss->getParsedFiles())) );
+		//file_put_contents($out, $css);
+		//file_put_contents($this->importsCacheName($out),
+		//	serialize($this->scss->getParsedFiles()));
 		return $css;
 	}
 
@@ -4526,7 +4533,8 @@ class scss_server {
 			$lastModified  = gmdate('D, d M Y H:i:s', $mtime) . ' GMT';
 			header('Last-Modified: ' . $lastModified);
 
-			echo file_get_contents($output);
+            echo self::$parent->filesystem->execute( 'get_contents', $output );
+			//echo file_get_contents($output);
 
 			return;
 		}

@@ -73,7 +73,7 @@
                                 $msg = __( 'Please wait a few minutes, then try refreshing the page.', 'redux-framework' );
                                 if ( self::$_parent->args['dev_mode'] ) {
 
-                                    $msg = sprintf( __( 'If you are developing offline, please download and install the <a href="%d">Redux Vendor Support plugin</a> to bypass the vendor CDN and avoid this warning.', 'redux-framework' ), 'http://reduxframework.com/wp-content/uploads/2015/05/redux-vendor-support.zip' );
+                                    $msg = sprintf( __( 'If you are developing offline, please download and install the <a href="%d">Redux Vendor Support plugin</a> to bypass the vendor CDN and avoid this warning.', 'redux-framework' ), 'http://reduxframework.com/wp-content/uploads/2015/06/redux-vendor-support.zip' );
                                 }
 
                                 self::$_parent->admin_notices[] = array(
@@ -109,7 +109,7 @@
                     if ( ! self::$_set ) {
                         self::$_parent->admin_notices[] = array(
                             'type'    => 'error',
-                            'msg'     => '<strong>' . __( 'Redux Framework Warning', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>', 'redux-framework' ), admin_url( 'plugins.php' ) ),
+                            'msg'     => '<strong>' . __( 'Redux Framework Warning', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'The Redux Vendor Support plugin is either not installed or not activated and thus, some controls may not render properly.  Please ensure the Redux Vendor Plugin is installed and <a href="%d">activated</a>.', 'redux-framework' ), admin_url( 'plugins.php' ) ),
                             'id'      => $handle . '23',
                             'dismiss' => false,
                         );

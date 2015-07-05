@@ -315,7 +315,7 @@
                                 if ( $class_file ) {
                                     if ( ! class_exists( $field_class ) ) {
                                         if ( file_exists( $class_file ) ) {
-                                            require_once( $class_file );
+                                            require_once $class_file;
                                         }
                                     }
 
