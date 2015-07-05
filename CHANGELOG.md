@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.4.34
+* Fixed:    Bad code in raw field hosing up the entire panel.
+
 ## 3.5.4.33
 * Modified: #2436 - Validation check for any validation type ending in 'not_empty' now recognized.
 
