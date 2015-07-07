@@ -447,15 +447,6 @@
                 if ( empty( $opt_name ) || is_array( $opt_name ) ) {
                     return;
                 }
-                if ( ! isset( self::$args[ $opt_name ] ) ) {
-                    self::$args[ $opt_name ]             = array(
-                        'settings_api'    => false,
-                        'customizer_only' => true,
-                        'customizer'      => false,
-                        'clearArgs'       => true,
-                    );
-                    self::$priority[ $opt_name ]['args'] = 1;
-                }
                 if ( ! isset( self::$sections[ $opt_name ] ) ) {
                     self::$sections[ $opt_name ]             = array();
                     self::$priority[ $opt_name ]['sections'] = 1;
