@@ -22,10 +22,9 @@
                     return;
                 }
 
-                extract( $params );
-                $this->server_file = $server_file;
-                $this->interval    = isset( $interval ) ? $interval : 3;
-                $this->cookie_id   = isset( $cookie_id ) ? $cookie_id : $parent->args['opt_name'] . '_blast';
+                $this->server_file = $params['server_file'];
+                $this->interval    = isset( $params['interval'] ) ? $params['interval'] : 3;
+                $this->cookie_id   = isset( $params['cookie_id'] ) ? $params['cookie_id'] : $parent->args['opt_name'] . '_blast';
 
                 $this->notice_data = get_option( 'r_notice_data', '' );
 

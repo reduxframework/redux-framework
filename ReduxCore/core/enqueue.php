@@ -78,14 +78,9 @@
                 //*****************************************************************
                 // Select2 CSS
                 //*****************************************************************
-                $css_file = 'select2.min.css';
-                if ($this->parent->args['dev_mode']) {
-                    $css_file = 'select2.css';
-                }
-                
                 Redux_CDN::register_style(
                     'select2-css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/' . $css_file,
+                    '//cdn.jsdelivr.net/select2/3.5.2/select2.css',
                     array(),
                     '3.5.2',//$this->timestamp,
                     'all'
@@ -212,14 +207,9 @@
                 //*****************************************************************
                 // Select2 JS
                 //*****************************************************************
-                $js_file = 'select2.min.js';
-                if ($this->parent->args['dev_mode']) {
-                    $js_file = 'select2.js';
-                }
-                
                 Redux_CDN::register_script(
                     'select2-js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/' . $js_file,
+                    '//cdn.jsdelivr.net/select2/3.5.2/select2' . $this->min . '.js',
                     array( 'jquery', 'redux-select2-sortable-js' ),
                     '3.5.2',
                     true
