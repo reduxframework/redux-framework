@@ -248,11 +248,22 @@
 
             public static function setSection( $opt_name = '', $section = array() ) {
                 self::check_opt_name( $opt_name );
+                if ( empty( $section ) ) {
+                    return;
+                }
                 if ( ! isset( $section['id'] ) ) {
                     if ( isset( $section['type'] ) && $section['type'] == "divide" ) {
                         $section['id'] = time();
                     } else {
-                        $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
+                        if ( isset( $section['title'] ) ) {
+                            $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
+                        } else {
+                            $section['id'] = time();
+                        }
+                    }
+                    if ( ! isset( $section['id'] ) ) {
+                        print_r( $section );
+                        echo "DOVY";
                     }
 
                     if ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
@@ -397,6 +408,14 @@
             public static function setArgs( $opt_name = "", $args = array() ) {
                 self::check_opt_name( $opt_name );
                 if ( ! empty( $opt_name ) && ! empty( $args ) && is_array( $args ) ) {
+                    if ( isset( self::$args['clearArgs'] ) ) {
+                        $unset = array( 'clearArgs', 'settings_api', 'customizer_only', 'customizer' );
+                        foreach ( $unset as $arg ) {
+                            if ( isset( self::$args[ $opt_name ][ $arg ] ) ) {
+                                unset( self::$args[ $opt_name ][ $arg ] );
+                            }
+                        }
+                    }
                     self::$args[ $opt_name ] = wp_parse_args( $args, self::$args[ $opt_name ] );
                 }
             }
@@ -429,7 +448,12 @@
                     return;
                 }
                 if ( ! isset( self::$args[ $opt_name ] ) ) {
-                    self::$args[ $opt_name ]             = array();
+                    self::$args[ $opt_name ]             = array(
+                        'settings_api'    => false,
+                        'customizer_only' => true,
+                        'customizer'      => false,
+                        'clearArgs'       => true,
+                    );
                     self::$priority[ $opt_name ]['args'] = 1;
                 }
                 if ( ! isset( self::$sections[ $opt_name ] ) ) {
