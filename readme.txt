@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 3.5.4.5
+Stable tag: 3.5.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,86 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.5.5 =
+* Fixed:    Date-time fixes with CSS overloading and positioning.
+* Added:    Lite support for https://wordpress.org/plugins/plugin-dependencies/
+* Modified: CDN to be a more bulletproof solution (http://jsdelivr.net).
+* Modified: CDN alerts to be more clear, and have proper links.
+* Fixed:    Bad code in raw field hosing up the entire panel.
+* Modified: #2436 - Validation check for any validation type ending in 'not_empty' now recognized.
+* Fixed:    Undefined index for undeclared variable in Theme-Check checks.
+* Fixed:    Annoying Redux Theme-Check notices.
+* Fixed:    How some functions were called.
+* Fixed:    Theme-Check baby! Everything working as it should with extra theme-check hints to prepare
+            your theme for submission!
+* Fixed:    Better .org hinting for theme submission.
+* Modified: `forced_dev_mode_off` argument that will ensure dev_mode is ALWAYS off.
+            PLEASE do not ship with this enabled. We will NOT provide any support for any instance that
+            has this argument enabled. Disable and test prior to posting on our issue tracker.
+* Added:    `customizer_only` as a global arg that disables all of Redux except for the customizer, in
+            preparation for our customizer integration.
+* Modified: Dissmissable Redux Admin notices now use the WP 4.2 dismiss JS and Ajax. Pretty.
+* Modified: Admin notice code is now it's own isolated class inside core.
+* Modified: Use DB for admin notice, not flat-files. Boo.
+* Modified: Sample configs not to cause errors if multiple users use the same function name.
+* Fixed:    CDN internationalization class.
+* Modified: Parsedown so as not to throw a shortcode error that didn't actually exist.
+* Fixed:    #2446 - Non google font choice not saving in certain instances.
+* Fixed:    Added additional check in redux.js to stop errors with panels containing multiple raw fields.
+* Fixed:    Hopefully, the issue of settings not saving on first install when using the Redux API.
+* Fixed:    Set use_cdn argument to true, by default.
+* Fixed     #2437 - undefined value set to blank line height.
+* Fixed:    #2429 - Required evaluator 'contains' not working properly with multi_check
+* Fixed:    #2426 - Section field not indenting.
+* Fixed:    Divider field not rendering properly.
+* Added:    `fieldset_class` argument for fields.  Thanks @Enchiridion.
+* Added:    Option to set checkbox label.  Thanks @Enchiridion.
+* Added:    javascript .trigger('change') to switch, spinner, and image_select.  Thanks @Enchiridion.
+* Modified: Ajax change output of error and notice via hooks.
+* Fixed:    #2414 - Bad ajax save due to mis-initialized variable.
+* Fixed:    CSS in metabox fields all wanky.
+* Added:    'reload_on_change' arg for fields, to force page reload after setting change.
+* Fixed:    #2377 - Replaced mysql_gets_server_info with $wpdb.
+* Modified: Templates to properly excape values.
+* Fixed:    Import/Export to properly be full-width and use lazy-load JS.
+* Modified: CSS for sections to bound to the section, not all of Redux.
+* Fixed:    #2368 - Options panel layout offset.
+* Fixed:    #2369 - validate_callback not working for color, color_gradient, and date.
+* Fixed:    #2355 - Space missing in switch class arg.
+* Fixed:    Fixed all fields without leading space in class arg.
+* Modified: Restrict table modification to redux-container.
+* Fixed:    Container overflow for pre's.
+* Modified: Redux API to include removeSection and removeField.
+* Added:    Added before and after hooks to any panel template file.
+* Fixed:    #2351 - WP_Error check added to admin blast remote get.
+* Modified: Moved styling for the divide field into it's own CSS file.
+* Modified: All WP Color Pickers to properly save the value before save.
+* Added:    CSS Styles for the customizer.  ;)
+* Modified: Panel is MUCH more responsive now.
+* Fixed:    Small stylings for a few fields.
+* Fixed:    Added extra qTip class.
+* Modified: Ajax save animation. Added fallback for pre 4.2 CSS.
+* Fixed:    Small issue with Redux info boxes and spacing.
+* Fixed:    Small bug with the Redux API where divide sections were causing errors.
+* Fixed:    Small admin blast fix.
+* Modified: Qtip and Spectrum vendor libraries restored to local.
+* Fixed:    Admin notice loading on front end.
+* Modified: Callback actions run with do_action_ref_array now.
+* Added:    show_options_object argument to enable or disable option object.
+* Added:    Error suppressing to filesystem class to avoid notice errors when site goes down.
+* Fixed:    Panels not rendering, again
+* Added:    Vendor support plugin link to CDN fallback message.
+* Modified: Moved vendor libraries ACE, select2, qtip, and spectrum to CDN.
+* Removed:  Local installs of above libraries.
+* Fixed:    Option panel not rendering due to experimental code.
+* Fixed:    How sorter works with data
+* Modified: How the data arg is stored in Redux.
+* Removed:  sysinfo.php.  No longer needed in lieu of our support URL feature.
+* Removed:  debug.php.  Moved to options_object extension.
+* Modified: #2274 - PHP Unit test compatibility.  Thanks @daithi-coombes.
+* Modified: #2144 - Optional class argument per image.  Thanks @paulthecoder.
+* Fixed:    #2278 - More W3 Total Cache hacks.
 
 = 3.5.4.3 =
 * Fixed: #2258 - welcome redirect error with embedding plugin scenarios.

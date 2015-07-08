@@ -1,4 +1,6 @@
 # Redux Framework Changelog
+## 3.5.5
+* Fixed:    Date-time fixes with CSS overloading and positioning.
 
 ## 3.5.4.35
 * Added:    Lite support for https://wordpress.org/plugins/plugin-dependencies/
