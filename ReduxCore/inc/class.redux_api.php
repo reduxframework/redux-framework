@@ -408,7 +408,7 @@
             public static function setArgs( $opt_name = "", $args = array() ) {
                 self::check_opt_name( $opt_name );
                 if ( ! empty( $opt_name ) && ! empty( $args ) && is_array( $args ) ) {
-                    if ( isset( self::$args[ $opt_name ]['clearArgs'] ) ) {
+                    if ( isset( self::$args[ $opt_name ] ) && isset( self::$args[ $opt_name ]['clearArgs'] ) ) {
                         self::$args[ $opt_name ] = array();
                     }
                     self::$args[ $opt_name ] = wp_parse_args( $args, self::$args[ $opt_name ] );
