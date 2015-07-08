@@ -446,6 +446,10 @@
                     self::$sections[ $opt_name ]             = array();
                     self::$priority[ $opt_name ]['sections'] = 1;
                 }
+                if ( ! isset( self::$args[ $opt_name ] ) ) {
+                    self::$args[ $opt_name ]             = array();
+                    self::$priority[ $opt_name ]['args'] = 1;
+                }
                 if ( ! isset( self::$fields[ $opt_name ] ) ) {
                     self::$fields[ $opt_name ]             = array();
                     self::$priority[ $opt_name ]['fields'] = 1;
