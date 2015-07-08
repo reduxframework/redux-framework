@@ -57,11 +57,20 @@
                 el.find( '.redux-datepicker' ).each( function() {
                     
                     $( this ).datepicker({
-                        beforeShow: function(textbox, instance){
+                        beforeShow: function(input, instance){
                             var el = $('#ui-datepicker-div');
-                            //$('#ui-datepicker-div').remove();
-                            //$('.redux-main:first').append(el);
-                            //instance.dpDiv.css({marginTop: -31 + 'px', marginLeft: -200 + 'px'});
+                            //$.datepicker._pos = $.datepicker._findPos(input); //this is the default position
+                            var popover = instance.dpDiv;
+                            $('.redux-container:first').append(el);
+                            $('#ui-datepicker-div').hide();
+                            setTimeout(function() {
+                                popover.position({
+                                    my: 'left top',
+                                    at: 'left bottom',
+                                    collision: 'none',
+                                    of: input
+                                });
+                            }, 1);
                         } 
                     });
                 });
