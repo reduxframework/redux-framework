@@ -17,6 +17,7 @@
  * License:         GPL3+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path:     /ReduxFramework/ReduxCore/languages
+ * Provides:        ReduxFramework
  *
  * @package         ReduxFramework
  * @author          Dovy Paukstys <dovy@reduxframework.com>

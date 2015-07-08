@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.4.35
+* Added:    Lite support for https://wordpress.org/plugins/plugin-dependencies/
+* Modified: CDN to be a more bulletproof solution (http://jsdelivr.net).
+* Modified: CDN alerts to be more clear, and have proper links.
+
 ## 3.5.4.34
 * Fixed:    Bad code in raw field hosing up the entire panel.
 
