@@ -66,6 +66,10 @@
              */
             private function __construct() {
 
+                if ( ! class_exists( 'ThemeCheckMain' ) ) {
+                    return;
+                }
+
                 // Load admin style sheet and JavaScript.
                 add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
                 add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
@@ -118,11 +122,11 @@
                 if ( self::$redux_details === null ) {
                     foreach ( $php_files as $php_key => $phpfile ) {
                         if ( strpos( $phpfile, 'class' . ' ReduxFramework {' ) !== false ) {
-                            self::$redux_details        = array(
+                            self::$redux_details               = array(
                                 'filename' => strtolower( basename( $php_key ) ),
                                 'path'     => $php_key,
                             );
-                            self::$redux_details['dir'] = str_replace( basename( $php_key ), '', $php_key );
+                            self::$redux_details['dir']        = str_replace( basename( $php_key ), '', $php_key );
                             self::$redux_details['parent_dir'] = str_replace( basename( self::$redux_details['dir'] ) . '/', '', self::$redux_details['dir'] );
                         }
                     }
@@ -190,7 +194,7 @@
                     //if ( ! isset( $_POST['themename'] ) ) {
                     $redux = self::get_redux_instance();
 
-                    wp_enqueue_style( $this->slug . '-admin-styles', $redux::$_url . 'inc/themecheck/css/admin.css', array(), $this->version );
+                    wp_enqueue_style( $this->slug . '-admin-styles', $redux->$_url . 'inc/themecheck/css/admin.css', array(), $this->version );
                     //}
                 }
             }
@@ -206,7 +210,7 @@
 
                 if ( 'appearance_page_themecheck' == $screen->id ) {
                     $redux = self::get_redux_instance();
-                    wp_enqueue_script( $this->slug . '-admin-script', $redux::$_url . 'inc/themecheck/js/admin.js', array( 'jquery' ), $this->version );
+                    wp_enqueue_script( $this->slug . '-admin-script', $redux->$_url . 'inc/themecheck/js/admin.js', array( 'jquery' ), $this->version );
 
                     if ( ! isset( $_POST['themename'] ) ) {
 

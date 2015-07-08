@@ -1,4 +1,8 @@
 # Redux Framework Changelog
+
+## 3.5.5.1
+* Fixed:    PHP 5.2 Theme-Check error.
+
 ## 3.5.5
 * Fixed:    Date-time fixes with CSS overloading and positioning.
 

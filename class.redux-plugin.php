@@ -26,7 +26,7 @@
              * @since       3.0.0
              */
 
-            const VERSION = '3.5.5';
+            const VERSION = '3.5.5.1';
 
             /**
              * @access      protected
@@ -323,8 +323,8 @@
              */
             public function admin_notices() {
                 do_action( 'ReduxFrameworkPlugin_admin_notice' );
-
-                if ( $notices = get_option( 'ReduxFrameworkPlugin_ACTIVATED_NOTICES' ) ) {
+                $notices = get_option( 'ReduxFrameworkPlugin_ACTIVATED_NOTICES', '' );
+                if ( !empty( $notices ) ) {
                     foreach ( $notices as $notice ) {
                         echo '<div class="updated notice is-dismissible"><p>' . $notice . '</p></div>';
                     }
