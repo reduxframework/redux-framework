@@ -330,6 +330,13 @@
     );
     $.redux.customizer.init = function() {
         $('body').addClass(redux_customizer.body_class);
+        $( '.accordion-section.redux-section' ).click(
+            function() {
+                if ( $( this ).hasClass( 'open' ) ) {
+                    $.redux.initFields();
+                }
+            }
+        );
     };
     redux.customizer.save = function( $obj, $container ) {
         var $parent = $obj.hasClass( 'redux-field' ) ? $obj : $obj.parents( '.redux-field:first' );
@@ -342,9 +349,10 @@
                 $nData = $v;
             }
         );
+        //console.log( $nData );
 
         var $control = wp.customize.control( $id );
-
+        //console.log($control);
         $control.setting.set( $nData );
     };
 })( jQuery );
