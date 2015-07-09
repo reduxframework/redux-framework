@@ -129,7 +129,7 @@
             background: $highlight-color;
             &:after {
                 color: $text-color;
-                background: transparent;
+                background: transparent !important;
                 border-left: none;
             }
         }
