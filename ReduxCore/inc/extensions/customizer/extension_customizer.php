@@ -85,10 +85,6 @@
                     $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
                 }
 
-                //if ( $pagenow == "customize.php" ) {
-                    add_action( 'customize_controls_init', array( $this, 'add_admin_body_class' ) );
-                //}
-
                 self::get_post_values();
 
                 // Create defaults array
