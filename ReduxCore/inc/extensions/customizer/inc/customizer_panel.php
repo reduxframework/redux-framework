@@ -94,7 +94,7 @@
          */
         protected function render_content() {
             ?>
-            <li class="panel-meta accordion-section redux-panel-meta control-section<?php if ( empty( $this->description ) ) {
+            <li class="panel-meta accordion-section redux-panel redux-panel-meta control-section<?php if ( empty( $this->description ) ) {
                 echo ' cannot-expand';
             } ?>">
                 <div class="accordion-section-title" tabindex="0">
@@ -124,7 +124,7 @@
          */
         protected function content_template() {
             ?>
-            <li class="panel-meta customize-info accordion-section <# if ( ! data.description ) { #> cannot-expand<# } #>">
+            <li class="panel-meta customize-info redux-panel accordion-section <# if ( ! data.description ) { #> cannot-expand<# } #>">
                 <button class="customize-panel-back" tabindex="-1"><span class="screen-reader-text"><?php _e( 'Back', 'redux-framework' ); ?></span></button>
                 <div class="accordion-section-title">
 				<span class="preview-notice"><?php

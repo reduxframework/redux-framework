@@ -1,4 +1,4 @@
-/* global redux, setting, redux_customizer */
+/* global redux, setting */
 
 /*!
  SerializeJSON jQuery plugin.
@@ -320,18 +320,19 @@
 
 (function( $ ) {  //This functions first parameter is named $
     'use strict';
-    $.redux.customizer = $.redux.customizer || {};
+
     redux.customizer = redux.customizer || {};
 
     $( document ).ready(
         function() {
-            $.redux.customizer.init();
+            redux.customizer.init();
         }
     );
-    $.redux.customizer.init = function() {
-        $('body').addClass(redux_customizer.body_class);
-        $( '.accordion-section.redux-section' ).click(
+    redux.customizer.init = function() {
+        $( 'body' ).addClass( redux_customizer.body_class );
+        $( '.accordion-section.redux-section h3, .accordion-section.redux-panel h3' ).click(
             function() {
+                console.log('non-advanced');
                 if ( $( this ).hasClass( 'open' ) ) {
                     $.redux.initFields();
                 }

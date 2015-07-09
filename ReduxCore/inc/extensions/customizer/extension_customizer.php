@@ -146,16 +146,11 @@
                 wp_enqueue_script(
                     'redux-extension-customizer',
                     $this->_extension_url . 'extension_customizer.js',
-                    array( 'jquery' ),
-                    time(),
+                    array( 'jquery', 'redux-js' ),
                     ReduxFramework_extension_customizer::$version,
                     true
                 );
-                wp_localize_script( 'redux-extension-customizer', 'redux_customizer', array('body_class'=> sanitize_html_class( 'admin-color-'.get_user_option( 'admin_color' ), 'fresh' )) );
-                //require_once( ABSPATH . '/wp-includes/class-wp-editor.php' );
-                //_WP_Editors::enqueue_scripts();
-                //_WP_Editors::editor_js();
-
+                wp_localize_script( 'redux-extension-customizer', 'redux_customizer', array( 'body_class' => sanitize_html_class( 'admin-color-' . get_user_option( 'admin_color' ), 'fresh' ) ) );
             }
 
             function enqueue_panel_css() {
@@ -537,7 +532,7 @@
 
                         $class_name = 'Redux_Customizer_Control_' . $option['type'];
 
-                        do_action( 'redux/extension/customizer/control_init', $option['type'], $this->parent );
+                        do_action( 'redux/extension/customizer/control_init', $option );
 
                         if ( ! class_exists( $class_name ) ) {
                             continue;
@@ -576,7 +571,9 @@
                 if ( is_a( $id, 'WP_Customize_Section' ) ) {
                     $section = $id;
                 } else {
-                    $section = new Redux_Customizer_Section( $wp_customize, $id, $args );
+
+                    $section_class = apply_filters( 'redux/customizer/section/class_name', "Redux_Customizer_Section" );
+                    $section       = new $section_class( $wp_customize, $id, $args );
                 }
 
                 $wp_customize->add_section( $section, $args );
@@ -596,7 +593,8 @@
                 if ( is_a( $id, 'WP_Customize_Panel' ) ) {
                     $panel = $id;
                 } else {
-                    $panel = new Redux_Customizer_Panel( $wp_customize, $id, $args );
+                    $panel_class = apply_filters( 'redux/customizer/panel/class_name', "Redux_Customizer_Panel" );
+                    $panel       = new $panel_class( $wp_customize, $id, $args );
                 }
 
                 $wp_customize->add_panel( $panel, $args );

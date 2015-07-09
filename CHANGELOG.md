@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.5.5.3
+* Fixed:    Redux CUSTOMIZER! YEA!
+
+## 3.5.5.2
+* Fixed:    Small echo in Redux API
+
 ## 3.5.5.1
 * Fixed:    PHP 5.2 Theme-Check error.
 
