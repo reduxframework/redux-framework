@@ -129,9 +129,11 @@
             background: $highlight-color;
             &:after {
                 color: $text-color;
-                background: transparent !important;
-                border-left: none;
             }
+        }
+        .control-section.control-panel.control-panel-redux>.accordion-section-title:after {
+            background: transparent;
+            border-left: none;
         }
         .control-panel-redux .customize-panel-back, .redux-section .customize-section-back {
             &:hover {
