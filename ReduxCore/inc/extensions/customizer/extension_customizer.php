@@ -139,17 +139,6 @@
 
             }
 
-            function add_admin_body_class() {
-
-
-            }
-
-            function add_admin_body_class2( $classes = "" ) {
-
-
-                return "$classes admin-color-" . sanitize_html_class( get_user_option( 'admin_color' ), 'fresh' ) . ' ';
-            }
-
             function enqueue_controls_css() {
 
                 include_once( ReduxFramework::$_dir . 'core/enqueue.php' );
@@ -163,14 +152,13 @@
                     $this->_extension_url . 'extension_customizer.js',
                     array( 'jquery' ),
                     time(),
-                    //ReduxFramework_extension_customizer::$version,
+                    ReduxFramework_extension_customizer::$version,
                     true
                 );
                 wp_localize_script( 'redux-extension-customizer', 'redux_customizer', array('body_class'=> sanitize_html_class( 'admin-color-'.get_user_option( 'admin_color' ), 'fresh' )) );
-                require_once( ABSPATH . '/wp-includes/class-wp-editor.php' );
-                _WP_Editors::enqueue_scripts();
-                _WP_Editors::editor_js();
-
+                //require_once( ABSPATH . '/wp-includes/class-wp-editor.php' );
+                //_WP_Editors::enqueue_scripts();
+                //_WP_Editors::editor_js();
 
             }
 
