@@ -1,5 +1,6 @@
 <?php
-
+    // <input type="radio" value="1" name="_customize-radio-redux_demo[opt-radio]" data-customize-setting-link="redux_demo[opt-color-title]">
+//return;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -14,7 +15,7 @@
      *
      * @package     ReduxFramework
      * @author      Dovy Paukstys (dovy)
-     * @version     3.0.0
+     * @version     0.1.0
      */
 
 // Exit if accessed directly
@@ -39,7 +40,8 @@
             private $parent;
             private $orig_options = array();
             private static $post_values = array();
-            public static $version = "2.0";
+            public static $version = "2.0.0";
+            private $options = array();
 
             /**
              * Class Constructor. Defines the args for the extions class
@@ -54,7 +56,20 @@
              * @return      void
              */
             public function __construct( $parent ) {
+
+                $this->parent = $parent;
+
+                $this->upload_dir = ReduxFramework::$_upload_dir . 'advanced-customizer/';
+                $this->upload_url = ReduxFramework::$_upload_url . 'advanced-customizer/';
+
                 //add_action('wp_head', array( $this, '_enqueue_new' ));
+
+
+                // Override the ReduxCore class
+                add_filter( "redux/extension/{$this->parent->args['opt_name']}/customizer", array(
+                    $this,
+                    'remove_core_customizer_class'
+                ) );
 
                 global $pagenow, $wp_customize;
                 if ( ! isset( $wp_customize ) && $pagenow !== "customize.php" && $pagenow !== "admin-ajax.php" ) {
@@ -64,15 +79,17 @@
                     //return;
                 }
 
-                $this->parent = $parent;
 
                 if ( empty( $this->_extension_dir ) ) {
                     $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
                     $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
                 }
 
-                self::get_post_values();
+                //if ( $pagenow == "customize.php" ) {
+                    add_action( 'customize_controls_init', array( $this, 'add_admin_body_class' ) );
+                //}
 
+                self::get_post_values();
 
                 // Create defaults array
                 $defaults = array();
@@ -84,36 +101,73 @@
                   customize_controls_print_footer_scripts
                  */
 
+                //add_action('customize_save', );
 
-                if ( ! ( isset( $_POST['action'] ) || ( isset( $_POST['action'] ) && $_POST['action'] != "customize_save" ) ) ) {
+                if ( isset( $_POST['wp_customize'] ) && $_POST['wp_customize'] == "on" ) {
+                    $this->parent->args['customizer_only'] = true;
+                }
 
+                if ( isset( $_POST['wp_customize'] ) && $_POST['wp_customize'] == "on" && isset( $_POST['customized'] ) && ! empty( $_POST['customized'] ) && ! isset( $_POST['action'] ) ) {
                     add_action( "redux/options/{$this->parent->args['opt_name']}/options", array(
                         $this,
                         '_override_values'
                     ), 100 );
-
-                    //if ( ! isset( $_POST['customized'] ) || $pagenow == "admin-ajax.php" ) {
-                    if ( current_user_can( $this->parent->args['page_permissions'] ) ) {
-                        add_action( 'customize_register', array(
-                            $this,
-                            '_register_customizer_controls'
-                        ) ); // Create controls
-                    }
-                    //}
-
-
-                    add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
                 }
+
+                add_action( 'customize_register', array(
+                    $this,
+                    '_register_customizer_controls'
+                ) ); // Create controls
+
+                add_action( 'wp_head', array( $this, 'customize_preview_init' ) );
 
 
                 //add_action( 'customize_save', array( $this, 'customizer_save_before' ) ); // Before save
                 add_action( 'customize_save_after', array( &$this, 'customizer_save_after' ) ); // After save
+
+                // Add global controls CSS file
+                add_action( 'customize_controls_print_scripts', array( $this, 'enqueue_controls_css' ) );
+
+                add_action( 'customize_controls_init', array( $this, 'enqueue_panel_css' ) );
 
 
                 //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_css' ) ); // Enqueue previewer css
                 //add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_previewer_js' ) ); // Enqueue previewer javascript
                 //add_action( "wp_footer", array( $this, '_enqueue_new' ), 100 );
                 //$this->_enqueue_new();
+
+
+            }
+
+            function enqueue_controls_css() {
+
+                include_once( ReduxFramework::$_dir . 'core/enqueue.php' );
+                $enqueue = new reduxCoreEnqueue ( $this->parent );
+                $enqueue->get_warnings_and_errors_array();
+                $enqueue->init();
+                wp_enqueue_style( 'redux-extension-advanced-customizer', $this->_extension_url . 'extension_customizer.css', '', time() );
+
+                wp_enqueue_script(
+                    'redux-extension-customizer',
+                    $this->_extension_url . 'extension_customizer.js',
+                    array( 'jquery' ),
+                    time(),
+                    ReduxFramework_extension_customizer::$version,
+                    true
+                );
+                wp_localize_script( 'redux-extension-customizer', 'redux_customizer', array('body_class'=> sanitize_html_class( 'admin-color-'.get_user_option( 'admin_color' ), 'fresh' )) );
+                //require_once( ABSPATH . '/wp-includes/class-wp-editor.php' );
+                //_WP_Editors::enqueue_scripts();
+                //_WP_Editors::editor_js();
+
+            }
+
+            function enqueue_panel_css() {
+
+            }
+
+            function remove_core_customizer_class( $path ) {
+                return "";
             }
 
             function customize_preview_init() {
@@ -130,11 +184,22 @@
 
                 self::get_post_values();
 
+
                 if ( isset( $_POST['customized'] ) && ! empty( self::$post_values ) ) {
 
                     if ( is_array( self::$post_values ) ) {
                         foreach ( self::$post_values as $key => $value ) {
                             if ( strpos( $key, $this->parent->args['opt_name'] ) !== false ) {
+
+                                //if (is_array($value)) {
+                                //    $value = @stripslashes( $value );
+                                //    if ( function_exists( 'get_magic_quotes_gpc' ) && get_magic_quotes_gpc() ) {
+                                //        $value = @array_map( 'stripslashes_deep', $value );
+                                //        $value = @array_map( 'urldecode', $value );
+                                //    }
+                                //} else {
+                                //    $value = @urldecode($value);
+                                //}
                                 $key                                                       = str_replace( $this->parent->args['opt_name'] . '[', '', rtrim( $key, "]" ) );
                                 $data[ $key ]                                              = $value;
                                 $GLOBALS[ $this->parent->args['global_variable'] ][ $key ] = $value;
@@ -178,8 +243,118 @@
                  */
             }
 
+            public function render( $control ) {
+                $fieldID = str_replace( $this->parent->args['opt_name'] . '-', '', $control->redux_id );
+                $field   = $this->options[ $fieldID ];
+
+                if ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) {
+                    echo '<tr class="compiler">';
+                } else {
+                    echo '<tr>';
+                }
+                echo '<th scope="row">' . $this->parent->field_head[ $field['id'] ] . '</th>';
+                echo '<td>';
+                //$field['data-customize-setting-link'] = array(
+                //    'name' => $field['name'],
+                //    'suffix' => isset($field['name_suffix']) ? $field['name_suffix'] : ''
+                //);
+                //
+                $field['name'] = $field['id'];
+                $this->parent->_field_input( $field );
+                echo '</td>';
+                echo '</tr>';
+            }
+
             // All sections, settings, and controls will be added here
             public function _register_customizer_controls( $wp_customize ) {
+
+                if ( ! class_exists( 'Redux_Customizer_Section' ) ) {
+                    include_once dirname( __FILE__ ) . '/inc/customizer_section.php';
+                    if ( method_exists( $wp_customize, 'register_section_type' ) ) {
+                        $wp_customize->register_section_type( 'Redux_Customizer_Section' );
+                    }
+                }
+                if ( ! class_exists( 'Redux_Customizer_Panel' ) ) {
+                    include_once dirname( __FILE__ ) . '/inc/customizer_panel.php';
+                    if ( method_exists( $wp_customize, 'register_panel_type' ) ) {
+                        $wp_customize->register_panel_type( 'Redux_Customizer_Panel' );
+                    }
+                }
+                if ( ! class_exists( 'Redux_Customizer_Control' ) ) {
+                    include_once dirname( __FILE__ ) . '/inc/customizer_control.php';
+                }
+
+                include_once dirname( __FILE__ ) . '/inc/customizer_fields.php';
+                include_once dirname( __FILE__ ) . '/inc/customizer_devs.php';
+
+                //if ($this->parent->args['dev_mode']) {
+                //    $section = new Redux_Customizer_rAds( $wp_customize, 'redux_rAds', array(
+                //        'priority'    => 0,
+                //    ) );
+                //    $wp_customize->add_section( $section, array(
+                //        'priority'    => 0,
+                //    ) );
+                //
+                //    //$wp_customize->add_control( new Redux_Customizer_Control_rAds( $wp_customize, 'reduxAdsDisplay', array(
+                //    //    'section'        => 'redux_rAds',
+                //    //    'settings'       => 'redux_rAds_field',
+                //    //    'type'           => 'redux-rAds',
+                //    //) ) );
+                //
+                //
+                //
+                //
+                //}
+                if ( $this->parent->args['dev_mode'] ) {
+                    //$args = array(
+                    //    'priority'    => 0,
+                    //);
+                    ////$section = new Redux_Customizer_Section( $wp_customize, 'redux_rAds', $args );
+                    ////$wp_customize->add_section( $section, $args );
+                    //$this->add_section( 'redux_rAds', array(
+                    //    'title'       => '',
+                    //    'priority'    => 1,
+                    //    'description' => '',
+                    //    'capability'  => 'edit_theme_options',
+                    //), $wp_customize );
+                    //
+                    //$wp_customize->add_control( new WP_Customize_Color_Control(
+                    //    $wp_customize,
+                    //    'redux_rAds_display',
+                    //    array(
+                    //        'section'    => 'redux_rAds',
+                    //        'settings'   => 'redux_rAds_display',
+                    //    )
+                    //));
+                    ////$wp_customize->add_control( new Redux_Customizer_Control_rAds( $wp_customize, 'reduxAdsDisplay', array(
+                    ////    'section'        => 'redux_rAds',
+                    ////    'settings'       => 'redux_rAds_field',
+                    ////    'type'           => 'redux-rAds',
+                    ////) ) );
+                    //start copyright settings
+
+                    //$section = new Redux_Customizer_section_rAds( $wp_customize, 'redux_rAds', array(
+                    //    'priority'    => -999,
+                    //) );
+                    //$wp_customize->add_section( $section, array(
+                    //    'priority'    => -999,
+                    //) );
+                    //$wp_customize->add_setting(
+                    //    'redux_rAds_empty'
+                    //);
+                    //$wp_customize->add_control(
+                    //    new Redux_Customizer_Control_rAds(
+                    //        $wp_customize,
+                    //        'redux_rAds_empty',
+                    //        array(
+                    //            'section'    => 'redux_rAds',
+                    //            'settings'   => 'redux_rAds_empty'
+                    //        )
+                    //    )
+                    //);
+                }
+
+
                 $order    = array(
                     'heading' => - 500,
                     'option'  => - 500,
@@ -193,14 +368,17 @@
                 );
                 $panel    = "";
 
+                $this->parent->args['options_api'] = false;
+                $this->parent->_register_settings();
+
                 foreach ( $this->parent->sections as $key => $section ) {
 
-                    if ( isset( $section['id'] ) && $section['id'] == "import/export" ) {
+                    // Not a type that should go on the customizer
+                    if ( isset( $section['type'] ) && ( $section['type'] == "divide" ) ) {
                         continue;
                     }
 
-                    // Not a type that should go on the customizer
-                    if ( empty( $section['fields'] ) || ( isset( $section['type'] ) && $section['type'] == "divide" ) ) {
+                    if ( isset( $section['id'] ) && $section['id'] == "import/export" ) {
                         continue;
                     }
 
@@ -209,12 +387,7 @@
                         continue;
                     }
 
-                    // Evaluate section permissions
-                    if ( isset( $section['permissions'] ) ) {
-                        if ( ! current_user_can( $section['permissions'] ) ) {
-                            continue;
-                        }
-                    }
+                    $section['permissions'] = isset( $section['permissions'] ) ? $section['permissions'] : 'edit_theme_options';
 
                     // No errors please
                     if ( ! isset( $section['desc'] ) ) {
@@ -233,7 +406,7 @@
 
                     // No title is present, let's show what section is missing a title
                     if ( ! isset( $section['title'] ) ) {
-                        //print_r( $section );
+                        $section['title'] = "";
                     }
 
                     // Let's set a default priority
@@ -242,60 +415,71 @@
                         $order['heading'] ++;
                     }
 
+                    //print_r($section);
+                    //print_r($this->parent->sections[$key+1]);
+                    //echo $key;
+                    //exit();
+
+
                     if ( method_exists( $wp_customize, 'add_panel' ) && ( ! isset( $section['subsection'] ) || ( isset( $section['subsection'] ) && $section['subsection'] != true ) ) && isset( $this->parent->sections[ ( $key + 1 ) ]['subsection'] ) && $this->parent->sections[ ( $key + 1 ) ]['subsection'] ) {
 
-                        $wp_customize->add_panel( $section['id'], array(
-                            'priority'       => $section['priority'],
-                            'capability'     => 'customize',
-                            'theme_supports' => '',
-                            'title'          => $section['title'],
-                            'description'    => $section['desc'],
-                        ) );
+                        $this->add_panel( $section['id'], array(
+                            'priority'    => $section['priority'],
+                            'capability'  => $section['permissions'],
+                            //'theme_supports' => '',
+                            'title'       => $section['title'],
+                            'section'     => $section,
+                            'description' => '',
+                        ), $wp_customize );
                         $panel = $section['id'];
 
-                        $wp_customize->add_section( $section['id'], array(
+                        $this->add_section( $section['id'], array(
                             'title'       => $section['title'],
                             'priority'    => $section['priority'],
                             'description' => $section['desc'],
+                            'section'     => $section,
+                            'capability'  => $section['permissions'],
                             'panel'       => $panel
-                        ) );
+                        ), $wp_customize );
 
 
                     } else {
                         if ( ! isset( $section['subsection'] ) || ( isset( $section['subsection'] ) && $section['subsection'] != true ) ) {
                             $panel = "";
                         }
-                        $wp_customize->add_section( $section['id'], array(
+                        $this->add_section( $section['id'], array(
                             'title'       => $section['title'],
                             'priority'    => $section['priority'],
                             'description' => $section['desc'],
+                            'section'     => $section,
+                            'capability'  => $section['permissions'],
                             'panel'       => $panel
-                        ) );
+                        ), $wp_customize );
                     }
 
-
                     foreach ( $section['fields'] as $skey => $option ) {
-
-                        // Evaluate section permissions
-                        if ( isset( $option['permissions'] ) ) {
-                            if ( ! current_user_can( $option['permissions'] ) ) {
-                                continue;
-                            }
-                        }
-                        if ( isset( $option['validate'] ) && $option['validate'] != false ) {
-                            continue;
-                        }
-
-                        if ( isset( $option['validate_callback'] ) && !empty( $option['validate_callback'] ) ) {
-                            continue;
-                        }
 
                         if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
                             continue;
                         }
+
                         if ( $this->parent->args['customizer'] === false && ( ! isset( $option['customizer'] ) || $option['customizer'] !== true ) ) {
                             continue;
                         }
+
+                        $this->options[ $option['id'] ] = $option;
+                        add_action( 'redux/advanced_customizer/control/render/' . $this->parent->args['opt_name'] . '-' . $option['id'], array(
+                            $this,
+                            'render'
+                        ) );
+
+                        $option['permissions'] = isset( $option['permissions'] ) ? $option['permissions'] : 'edit_theme_options';
+
+                        //
+                        //if ( isset( $option['validate_callback'] ) && ! empty( $option['validate_callback'] ) ) {
+                        //    continue;
+                        //}
+
 
                         //Change the item priority if not set
                         if ( $option['type'] != 'heading' && ! isset( $option['priority'] ) ) {
@@ -317,27 +501,26 @@
                             $option['title'] = "";
                         }
 
-                        // Wordpress doesn't support multi-select
-                        if ( $option['type'] == "select" && isset( $option['multi'] ) && $option['multi'] == true ) {
-                            continue;
-                        }
 
                         $option['id'] = $this->parent->args['opt_name'] . '[' . $option['id'] . ']';
 
-                        if ( $option['type'] != "heading" && $option['type'] != "import_export" && $option['type'] != "options_object" && ! empty( $option['type'] ) ) {
+                        if ( $option['type'] != "heading" && $option['type'] != "import_export" && ! empty( $option['type'] ) ) {
+
                             $wp_customize->add_setting( $option['id'],
                                 array(
                                     'default'           => $option['default'],
-                                    'type'              => 'option',
-                                    'capabilities'      => 'edit_theme_options',
+                                    //'type'              => 'option',
+                                    //'capabilities'     => $option['permissions'],
+                                    //'capabilities'      => 'edit_theme_options',
                                     //'capabilities'   => $this->parent->args['page_permissions'],
                                     'transport'         => 'refresh',
-                                    'theme_supports'    => '',
+                                    //'theme_supports'    => '',
                                     //'sanitize_callback' => '__return_false',
                                     'sanitize_callback' => array( $this, '_field_validation' ),
                                     //'sanitize_js_callback' =>array( &$parent, '_field_input' ),
                                 )
                             );
+
                         }
 
                         if ( ! empty( $option['data'] ) && empty( $option['options'] ) ) {
@@ -356,151 +539,83 @@
                             $option['options'] = $this->parent->get_wordpress_data( $option['data'], $option['args'] );
                         }
 
-                        switch ( $option['type'] ) {
-                            case 'heading':
-                                // We don't want to put up the section unless it's used by something visible in the customizer
-                                $section          = $option;
-                                $section['id']    = strtolower( str_replace( " ", "", $option['title'] ) );
-                                $order['heading'] = - 500;
+                        $class_name = 'Redux_Customizer_Control_' . $option['type'];
 
-                                if ( ! empty( $option['priority'] ) ) {
-                                    $section['priority'] = $option['priority'];
-                                } else {
-                                    $section['priority'] = $order['heading'];
-                                    $order['heading'] ++;
-                                }
-                                break;
+                        do_action( 'redux/extension/customizer/control_init', $option['type'], $this->parent );
 
-                            case 'text':
-                                if ( isset( $option['data'] ) && $option['data'] ) {
-                                    continue;
-                                }
-                                //if ($option['title'] == "Twitter Publisher Username") {
-                                //    print_r($option);
-                                //    $trueID = str_replace(array(']', 'redux_demo['),'',$option['id']);
-                                //    $data = get_option($this->parent->args['opt_name']);
-                                //    print_r($data[$trueID]);
-                                //    print_r($this->parent->options[$trueID]);
-                                //    exit();
-                                //}
-                                $wp_customize->add_control( $option['id'], array(
-                                    'label'    => $option['title'],
-                                    'section'  => $section['id'],
-                                    'settings' => $option['id'],
-                                    'priority' => $option['priority'],
-                                    'type'     => 'text',
-                                ) );
-                                break;
-
-                            case 'select':
-                            case 'button_set':
-                                if ( ! isset( $option['options'] ) ) {
-                                    continue;
-                                }
-
-                                $newOptions = array();
-                                foreach ( $option['options'] as $key => $value ) {
-                                    if ( is_array( $value ) ) {
-                                        foreach ( $value as $key => $v ) {
-                                            $newOptions[] = $v;
-                                        }
-
-                                    }
-                                }
-
-                                if ( ! empty( $newOptions ) ) {
-                                    $option['options'] = $newOptions;
-                                }
-
-                                if ( ( isset( $option['sortable'] ) && $option['sortable'] ) ) {
-                                    continue;
-                                }
-
-                                if ( ( isset( $option['multi'] ) && $option['multi'] ) ) {
-                                    continue;
-                                }
-
-                                $wp_customize->add_control( $option['id'], array(
-                                    'label'    => $option['title'],
-                                    'section'  => $section['id'],
-                                    'settings' => $option['id'],
-                                    'priority' => $option['priority'],
-                                    'type'     => 'select',
-                                    'choices'  => $option['options']
-                                ) );
-                                break;
-
-                            case 'radio':
-                                //continue;
-                                $wp_customize->add_control( $option['id'], array(
-                                    'label'    => $option['title'],
-                                    'section'  => $section['id'],
-                                    'settings' => $option['id'],
-                                    'priority' => $option['priority'],
-                                    'type'     => 'radio',
-                                    'choices'  => $option['options']
-                                ) );
-                                break;
-
-                            case 'checkbox':
-                                if ( ( isset( $option['data'] ) && $option['data'] ) || ( ( isset( $option['multi'] ) && $option['multi'] ) ) || ( ( isset( $option['options'] ) && ! empty( $option['options'] ) ) ) ) {
-                                    continue;
-                                }
-                                $wp_customize->add_control( $option['id'], array(
-                                    'label'    => $option['title'],
-                                    'section'  => $section['id'],
-                                    'settings' => $option['id'],
-                                    'priority' => $option['priority'],
-                                    'type'     => 'checkbox',
-                                ) );
-                                break;
-
-                            case 'media':
-                                continue;
-                                $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $option['id'], array(
-                                    'label'    => $option['title'],
-                                    'section'  => $section['id'],
-                                    'settings' => $option['id'],
-                                    'priority' => $option['priority']
-                                ) ) );
-                                break;
-
-                            case 'color':
-                                $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $option['id'], array(
-                                    'label'    => $option['title'],
-                                    'section'  => $section['id'],
-                                    'settings' => $option['id'],
-                                    'priority' => $option['priority']
-                                ) ) );
-                                break;
-
-                            case 'switch':
-                                continue;
-                                $wp_customize->add_control( new Redux_customizer_switch( $wp_customize, $option['id'], array(
-                                    'label'          => $option['title'],
-                                    'section'        => $section['id'],
-                                    'settings'       => $option['id'],
-                                    'field'          => $option,
-                                    'ReduxFramework' => $this->parent,
-                                    'priority'       => $option['priority'],
-                                ) ) );
-
-                                break;
-
-                            default:
-                                break;
+                        if ( ! class_exists( $class_name ) ) {
+                            continue;
                         }
+
+                        $wp_customize->add_control( new $class_name( $wp_customize, $option['id'], array(
+                            'label'          => $option['title'],
+                            'section'        => $section['id'],
+                            'settings'       => $option['id'],
+                            'type'           => 'redux-' . $option['type'],
+                            'field'          => $option,
+                            'ReduxFramework' => $this->parent,
+                            'priority'       => $option['priority'],
+                        ) ) );
+
+                        $section['fields'][ $skey ]['name'] = $option['id'];
+                        if ( ! isset ( $section['fields'][ $skey ]['class'] ) ) { // No errors please
+                            $section['fields'][ $skey ]['class'] = "";
+                        }
+
+                        $this->controls[ $section['fields'][ $skey ]['id'] ] = $section['fields'][ $skey ];
+
+                        add_action( 'redux/advanced_customizer/render/' . $option['id'], array(
+                            $this,
+                            'field_render'
+                        ), $option['priority'] );
+
+
                     }
                 }
 
-                /*
-                  title_tagline - Site Title & Tagline
-                  colors - Colors
-                  header_image - Header Image
-                  background_image - Background Image
-                  nav - Navigation
-                  static_front_page - Static Front Page
-                 */
+            }
+
+            public function add_section( $id, $args = array(), $wp_customize ) {
+
+                if ( is_a( $id, 'WP_Customize_Section' ) ) {
+                    $section = $id;
+                } else {
+                    $section = new Redux_Customizer_Section( $wp_customize, $id, $args );
+                }
+
+                $wp_customize->add_section( $section, $args );
+
+            }
+
+            /**
+             * Add a customize panel.
+             *
+             * @since  4.0.0
+             * @access public
+             *
+             * @param WP_Customize_Panel|string $id   Customize Panel object, or Panel ID.
+             * @param array                     $args Optional. Panel arguments. Default empty array.
+             */
+            public function add_panel( $id, $args = array(), $wp_customize ) {
+                if ( is_a( $id, 'WP_Customize_Panel' ) ) {
+                    $panel = $id;
+                } else {
+                    $panel = new Redux_Customizer_Panel( $wp_customize, $id, $args );
+                }
+
+                $wp_customize->add_panel( $panel, $args );
+            }
+
+            public function field_render( $option ) {
+
+                preg_match_all( "/\[([^\]]*)\]/", $option->id, $matches );
+                $id = $matches[1][0];
+                echo $option->link();
+                //$link = $option->link();
+                //echo $link;
+
+                $this->parent->_field_input( $this->controls[ $id ] );
+
             }
 
             public function customizer_save_before( $plugin_options ) {
@@ -616,6 +731,7 @@
 
                 do_action( 'redux-enqueue-' . $this->args['opt_name'] );
 
+
                 foreach ( $this->sections as $section ) {
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $field ) {
@@ -626,7 +742,7 @@
                                     $class_file = apply_filters( 'redux-typeclass-load', $this->path . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
                                     if ( $class_file ) {
                                         /** @noinspection PhpIncludeInspection */
-                                        require_once $class_file;
+                                        require_once( $class_file );
                                     }
                                 }
 

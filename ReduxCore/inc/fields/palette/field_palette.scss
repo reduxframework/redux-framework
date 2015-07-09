@@ -1,9 +1,11 @@
 .redux-container-palette {
     label {
-        border-width: 3px;
+        border: 3px solid transparent;
+        border-color: transparent !important;
         border-radius: 0;
         //border: 0;
         width: 100% !important;
+        display: block;
         &.ui-button.ui-widget {
             width: 95%;
             background: none;

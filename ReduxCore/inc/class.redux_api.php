@@ -157,7 +157,7 @@
                     $section['fields'] = self::constructFields( $opt_name, $section_id );
                     $p                 = $section['priority'];
                     while ( isset( $sections[ $p ] ) ) {
-                        echo $p ++;
+                        $p++;
                     }
                     $sections[ $p ] = $section;
                 }
