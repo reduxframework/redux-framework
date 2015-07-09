@@ -129,6 +129,8 @@
             background: $highlight-color;
             &:after {
                 color: $text-color;
+                background: transparent;
+                border-left: none;
             }
         }
         .control-panel-redux .customize-panel-back, .redux-section .customize-section-back {
