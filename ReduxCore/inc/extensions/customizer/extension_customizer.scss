@@ -2,6 +2,9 @@
     p.customize-section-description {
         margin-top: 22px;
         word-break: break-word;
+        &.legacy {
+            margin-top: 7px;
+        }
     }
 }
 

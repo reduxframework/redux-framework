@@ -104,7 +104,7 @@
                     ?></span>
                 </div>
                 <?php if ( ! empty( $this->description ) ) : ?>
-                    <div class="accordion-section-content description">
+                    <div class="accordion-section-content description legacy">
                         <?php echo $this->description; ?>
                     </div>
                 <?php endif; ?>

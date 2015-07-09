@@ -107,7 +107,7 @@
                 <ul class="accordion-section-content redux-main">
                     <?php if ( ! empty( $this->description ) ) : ?>
                         <li class="customize-section-description-container">
-                            <p class="description customize-section-description"><?php echo $this->description; ?></p>
+                            <p class="description customize-section-description legacy"><?php echo $this->description; ?></p>
                         </li>
                     <?php endif; ?>
                 </ul>
