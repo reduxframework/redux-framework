@@ -653,11 +653,11 @@
                 if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] && redux.field_objects[type] ) {
                     redux.field_objects[type].init();
                 }
-                if ( $( this ).hasClass( 'redux_remove_th' ) ) {
+                if ( !redux.customizer && $( this ).hasClass( 'redux_remove_th' )  ) {
 
                     var tr = $( this ).parents( 'tr:first' );
                     var th = tr.find( 'th:first' );
-                    if ( th.html() !== undefined && th.html().length > 0 ) {
+                    if ( th.html() && th.html().length > 0 ) {
                         $( this ).prepend( th.html() );
                         $( this ).find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
                     }
@@ -977,11 +977,11 @@
     };
 
     $.redux.check_dependencies_visibility = function( parentValue, data ) {
-        var show = false;
-        var checkValue_array;
-        var checkValue = data.checkValue;
-        var operation = data.operation;
-        var arr;
+        var show = false,
+            checkValue_array,
+            checkValue = data.checkValue,
+            operation = data.operation,
+            arr;
 
         switch ( operation ) {
             case '=':
@@ -990,8 +990,8 @@
 //                    var arr = Object.keys(parentValue).map(function (key) {return parentValue[key]});
 //                    parentValue = arr;
 //                }
-                
-                if ( $.isArray( parentValue) ) {
+
+                if ( $.isArray( parentValue ) ) {
                     $( parentValue[0] ).each(
                         function( idx, val ) {
                             if ( $.isArray( checkValue ) ) {
@@ -1121,18 +1121,18 @@
                     });
                     parentValue = arr;
                 }
-                
+
                 if ($.isPlainObject(checkValue)) {
                     arr = Object.keys(checkValue).map(function (key) {
                         return checkValue[key];
                     });
                     checkValue = arr;
-                }      
-                
+                }
+
                 if ( $.isArray( checkValue ) ) {
                     $( checkValue ).each(
                         function( idx, val ) {
-                            console.log (val);
+                            //console.log (val);
                             if ( parentValue.toString().indexOf( val ) !== -1 ) {
                                 show = true;
                             }
@@ -1153,14 +1153,14 @@
                     });
                     parentValue = arr;
                 }
-                
+
                 if ($.isPlainObject(checkValue)) {
                     arr = Object.keys(checkValue).map(function (key) {
                         return checkValue[key];
                     });
                     checkValue = arr;
-                }      
-                
+                }
+
                 if ( $.isArray( checkValue ) ) {
                     $( checkValue ).each(
                         function( idx, val ) {
@@ -1434,8 +1434,8 @@
                             $( '#redux-header' ).append( '<div class="rAds"></div>' );
                             el = $( '#redux-header' );
                         } else {
-                            $( '#customize-info .accordion-section-title' ).append( '<div class="rAds"></div>' );
-                            el = $( '#customize-info .accordion-section-title' );
+                            $('#customize-theme-controls ul').prepend('<li id="redux_rAds" class="accordion-section rAdsContainer" style="position: relative;"><div class="rAds"></div></li>');
+                            el = $( '#redux_rAds' );
                         }
 
                         el.css( 'position', 'relative' );
