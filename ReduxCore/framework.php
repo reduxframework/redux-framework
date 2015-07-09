@@ -339,7 +339,7 @@
                     $this->get_options();
 
                     // Tracking
-                    if ( true != Redux_Helpers::isTheme( __FILE__ ) || true == Redux_Helpers::isTheme( __FILE__ ) ) {
+                    if ( isset( $this->args[ 'allow_tracking' ] ) && $this->args[ 'allow_tracking' ] && Redux_Helpers::isTheme( __FILE__ ) ) {
                         $this->_tracking();
                     }
 
