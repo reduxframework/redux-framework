@@ -145,7 +145,7 @@
 
                 wp_enqueue_script(
                     'redux-extension-customizer',
-                    $this->_extension_url . 'extension_customizer.js',
+                    $this->_extension_url . 'extension_customizer' . Redux_Functions::isMin() . '.js',
                     array( 'jquery', 'redux-js' ),
                     ReduxFramework_extension_customizer::$version,
                     true

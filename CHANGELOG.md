@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.5.4
+* Fixed:    Typography bug onload always saying settings have changed.
+* Modified: Added minified customizer JS.
+
 ## 3.5.5.3
 * Fixed:    Redux CUSTOMIZER! YEA!
 

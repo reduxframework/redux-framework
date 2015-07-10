@@ -31,7 +31,7 @@
         }
     );
 
-    redux.field_objects.typography.init = function( selector ) {
+    redux.field_objects.typography.init = function( selector, skipCheck) {
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-typography:visible' );
@@ -79,7 +79,7 @@
 
                                 fontClear = Boolean( $( this ).find( '.redux-font-clear' ).val() );
 
-                                redux.field_objects.typography.select( family );
+                                redux.field_objects.typography.select( family, true );
 
                                 window.onbeforeunload = null;
                             }
@@ -310,7 +310,7 @@
 
 
     //  Sync up font options
-    redux.field_objects.typography.select = function( selector ) {
+    redux.field_objects.typography.select = function( selector, skipCheck ) {
         var mainID;
         
         // Main id for selected field
@@ -646,7 +646,10 @@
 
         isSelecting = false;
 
-        redux_change( selector );
+        if ( ! skipCheck ) {
+            redux_change( selector );
+        }
+
 
     };
 })( jQuery );
