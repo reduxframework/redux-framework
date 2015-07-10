@@ -119,6 +119,10 @@
                     extract( $params );
                 }
 
+                if ( ! is_dir( ReduxFramework::$_upload_dir ) && $this->parent->args['save_defaults'] === true ) {
+                    $this->parent->filesystem->execute( 'mkdir', ReduxFramework::$_upload_dir );
+                }
+
                 // Setup the filesystem with creds
                 require_once ABSPATH . '/wp-admin/includes/template.php';
                 require_once ABSPATH . '/wp-admin/includes/file.php';
