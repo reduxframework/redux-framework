@@ -412,7 +412,7 @@
                     // Ajax saving!!!
                     add_action( "wp_ajax_" . $this->args['opt_name'] . '_ajax_save', array( $this, "ajax_save" ) );
 
-                    if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true ) {
+                    if ( $this->args['dev_mode'] == true ) {
                         require_once 'core/dashboard.php';
 
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
