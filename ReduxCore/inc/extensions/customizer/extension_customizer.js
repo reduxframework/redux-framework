@@ -330,11 +330,9 @@
     );
     redux.customizer.init = function() {
         $( 'body' ).addClass( redux_customizer.body_class );
-        $( '.accordion-section.redux-section h3, .accordion-section.redux-panel h3' ).click(
+        $( '.accordion-section.redux-section, .accordion-section.redux-panel, .accordion-section-title' ).click(
             function() {
-                if ( $( this ).hasClass( 'open' ) ) {
-                    $.redux.initFields();
-                }
+                $.redux.initFields();
             }
         );
     };
