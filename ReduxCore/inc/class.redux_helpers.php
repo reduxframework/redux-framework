@@ -66,7 +66,8 @@
             }
 
             public static function isLocalHost() {
-                return ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' ) ? 1 : 0;
+                $is_localhost = ( $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === 'localhost' ) ? 1 : 0;
+                return apply_filters( 'redux_is_localhost', $is_localhost );
             }
 
             public static function isWpDebug() {
