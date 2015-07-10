@@ -332,7 +332,6 @@
         $( 'body' ).addClass( redux_customizer.body_class );
         $( '.accordion-section.redux-section h3, .accordion-section.redux-panel h3' ).click(
             function() {
-                console.log('non-advanced');
                 if ( $( this ).hasClass( 'open' ) ) {
                     $.redux.initFields();
                 }
