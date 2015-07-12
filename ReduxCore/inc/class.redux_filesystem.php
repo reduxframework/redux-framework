@@ -120,7 +120,7 @@
                 }
 
                 if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
-                    $this->parent->filesystem->execute( 'mkdir', ReduxFramework::$_upload_dir );
+                    wp_mkdir_p( ReduxFramework::$_upload_dir );
                 }
 
                 // Setup the filesystem with creds
