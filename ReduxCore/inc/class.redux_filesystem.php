@@ -119,7 +119,7 @@
                     extract( $params );
                 }
 
-                if ( ! is_dir( ReduxFramework::$_upload_dir ) && $this->parent->args['save_defaults'] === true ) {
+                if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
                     $this->parent->filesystem->execute( 'mkdir', ReduxFramework::$_upload_dir );
                 }
 
