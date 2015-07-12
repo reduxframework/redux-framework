@@ -133,6 +133,7 @@
                                 el.find( '#' + $( this ).data( 'id' ) ).val( prevColor );
                             }
                         }
+                        redux_change( $( this ) );
                     }
                 );
             }

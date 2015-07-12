@@ -151,6 +151,7 @@
                             }
                         }
                         redux.field_objects.background.preview( $( this ) );
+                        redux_change( $( this ) );
                     }
                 );
 
