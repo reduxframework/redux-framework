@@ -3,6 +3,7 @@
 
 ## 3.5.5.6
 * Fixed:    Undefined index in theme-check enhancements. Thanks @winwinwebdesign!
+* Removed:  SASS compiler & code. Note needed.
 
 ## 3.5.5.5
 * Fixed:    Undefined index when removing a section.

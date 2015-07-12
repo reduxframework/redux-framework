@@ -210,7 +210,7 @@
 
                 if ( 'appearance_page_themecheck' == $screen->id ) {
                     $redux = self::get_redux_instance();
-                    wp_enqueue_script( $this->slug . '-admin-script', $redux->$_url . 'inc/themecheck/js/admin.js', array( 'jquery' ), $this->version );
+                    wp_enqueue_script( $this->slug . '-admin-script', $redux::$_url . 'inc/themecheck/js/admin.js', array( 'jquery' ), $this->version );
 
                     if ( ! isset( $_POST['themename'] ) ) {
 

@@ -66,8 +66,6 @@
         // Welcome
         require_once dirname( __FILE__ ) . '/inc/welcome/welcome.php';
 
-        //require_once dirname( __FILE__ ) . '/inc/class.redux_sass.php';
-
         /**
          * Main ReduxFramework class
          *
@@ -1674,23 +1672,6 @@
                 require_once 'core/enqueue.php';
                 $enqueue = new reduxCoreEnqueue ( $this );
                 $enqueue->init();
-
-
-//                if ($this->args['sass']['enabled']) {
-//                    $ret = reduxSassCompiler::compile_sass($this);
-//
-//                    if ($ret == reduxSassCompiler::SASS_FILE_COMPILE || $ret == reduxSassCompiler::SASS_NO_COMPILE) {
-//                        if (file_exists(ReduxFramework::$_upload_dir . $this->args['opt_name'] .  '-redux.css')) {
-//                            wp_enqueue_style(
-//                                'redux-fields-css',
-//                                ReduxFramework::$_upload_url . $this->args['opt_name'] .  '-redux.css',
-//                                array(),
-//                                $timestamp,
-//                                'all'
-//                            );
-//                        }
-//                    }
-//                }
             }
 // _enqueue()
 
