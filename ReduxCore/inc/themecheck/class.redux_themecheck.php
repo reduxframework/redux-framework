@@ -194,7 +194,7 @@
                     //if ( ! isset( $_POST['themename'] ) ) {
                     $redux = self::get_redux_instance();
 
-                    wp_enqueue_style( $this->slug . '-admin-styles', $redux->$_url . 'inc/themecheck/css/admin.css', array(), $this->version );
+                    wp_enqueue_style( $this->slug . '-admin-styles', $redux::$_url . 'inc/themecheck/css/admin.css', array(), $this->version );
                     //}
                 }
             }
