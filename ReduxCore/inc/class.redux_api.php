@@ -369,7 +369,7 @@
                                 unset( self::$fields[ $opt_name ][ $id ] );
                                 continue;
                             }
-                            if ( $priority != "" ) {
+                            if ( isset( $priority ) && $priority != "" ) {
                                 $newPriority                       = $field['priority'];
                                 $field['priority']                 = $priority;
                                 self::$fields[ $opt_name ][ $key ] = $field;

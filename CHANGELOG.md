@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.5.5
+* Fixed:    Undefined index when removing a section.
+
 ## 3.5.5.4
 * Fixed:    Typography bug onload always saying settings have changed.
 * Modified: Added minified customizer JS.
