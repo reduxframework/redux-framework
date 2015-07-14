@@ -1,5 +1,7 @@
 # Redux Framework Changelog
 
+## 3.5.5.7
+* Modified: Field enqueue method to allow for more flexibility.
 
 ## 3.5.5.6
 * Fixed:    Undefined index in theme-check enhancements. Thanks @winwinwebdesign!

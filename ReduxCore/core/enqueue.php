@@ -284,55 +284,59 @@
                 );
             }
 
+            public function _enqueue_field($field) {
+                // TODO AFTER GROUP WORKS - Revert IF below
+                // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+                if ( isset( $field['type'] ) && $field['type'] != 'callback' ) {
+
+                    $field_class = 'ReduxFramework_' . $field['type'];
+
+                    /**
+                     * Field class file
+                     * filter 'redux/{opt_name}/field/class/{field.type}
+                     *
+                     * @param       string        field class file path
+                     * @param array $field        field config data
+                     */
+                    $class_file = apply_filters( "redux/{$this->parent->args['opt_name']}/field/class/{$field['type']}", ReduxFramework::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
+                    if ( $class_file ) {
+                        if ( ! class_exists( $field_class ) ) {
+                            if ( file_exists( $class_file ) ) {
+                                require_once $class_file;
+                            }
+                        }
+
+                        if ( ( method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) {
+
+                            if ( ! isset( $this->parent->options[ $field['id'] ] ) ) {
+                                $this->parent->options[ $field['id'] ] = "";
+                            }
+                            $theField = new $field_class( $field, $this->parent->options[ $field['id'] ], $this->parent );
+
+                            // Move dev_mode check to a new if/then block
+                            if ( ! wp_script_is( 'redux-field-' . $field['type'] . '-js', 'enqueued' ) && class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
+                                $theField->enqueue();
+                            }
+
+                            if ( method_exists( $field_class, 'localize' ) ) {
+                                $params = $theField->localize( $field );
+                                if ( ! isset( $this->parent->localize_data[ $field['type'] ] ) ) {
+                                    $this->parent->localize_data[ $field['type'] ] = array();
+                                }
+                                $this->parent->localize_data[ $field['type'] ][ $field['id'] ] = $theField->localize( $field );
+                            }
+
+                            unset( $theField );
+                        }
+                    }
+                }
+            }
+
             private function enqueue_fields() {
                 foreach ( $this->parent->sections as $section ) {
                     if ( isset( $section['fields'] ) ) {
                         foreach ( $section['fields'] as $field ) {
-                            // TODO AFTER GROUP WORKS - Revert IF below
-                            // if( isset( $field['type'] ) && $field['type'] != 'callback' ) {
-                            if ( isset( $field['type'] ) && $field['type'] != 'callback' ) {
-
-                                $field_class = 'ReduxFramework_' . $field['type'];
-
-                                /**
-                                 * Field class file
-                                 * filter 'redux/{opt_name}/field/class/{field.type}
-                                 *
-                                 * @param       string        field class file path
-                                 * @param array $field        field config data
-                                 */
-                                $class_file = apply_filters( "redux/{$this->parent->args['opt_name']}/field/class/{$field['type']}", ReduxFramework::$_dir . "inc/fields/{$field['type']}/field_{$field['type']}.php", $field );
-                                if ( $class_file ) {
-                                    if ( ! class_exists( $field_class ) ) {
-                                        if ( file_exists( $class_file ) ) {
-                                            require_once $class_file;
-                                        }
-                                    }
-
-                                    if ( ( method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) {
-
-                                        if ( ! isset( $this->parent->options[ $field['id'] ] ) ) {
-                                            $this->parent->options[ $field['id'] ] = "";
-                                        }
-                                        $theField = new $field_class( $field, $this->parent->options[ $field['id'] ], $this->parent );
-
-                                        // Move dev_mode check to a new if/then block
-                                        if ( ! wp_script_is( 'redux-field-' . $field['type'] . '-js', 'enqueued' ) && class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
-                                            $theField->enqueue();
-                                        }
-
-                                        if ( method_exists( $field_class, 'localize' ) ) {
-                                            $params = $theField->localize( $field );
-                                            if ( ! isset( $this->parent->localize_data[ $field['type'] ] ) ) {
-                                                $this->parent->localize_data[ $field['type'] ] = array();
-                                            }
-                                            $this->parent->localize_data[ $field['type'] ][ $field['id'] ] = $theField->localize( $field );
-                                        }
-
-                                        unset( $theField );
-                                    }
-                                }
-                            }
+                            $this->_enqueue_field( $field );
                         }
                     }
                 }
