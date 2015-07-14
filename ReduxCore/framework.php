@@ -1279,6 +1279,18 @@
                     $this->args['admin_bar']      = false;
                     $this->args['allow_sub_menu'] = false;
                 }
+
+                // Check if the Airplane Mode plugin is installed
+                if ( class_exists( 'Airplane_Mode_Core' ) ) {
+                    $airplane = Airplane_Mode_Core::getInstance();
+                    if ( method_exists( $airplane, 'enabled' ) ) {
+                        if ( $airplane->enabled() ) {
+                            $this->args['use_cdn'] = false;
+                        }
+                    } else if ( $airplane->check_status() == 'on' ) {
+                        $this->args['use_cdn'] = false;
+                    }
+                }
             }
 
             /**

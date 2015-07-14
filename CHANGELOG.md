@@ -2,6 +2,7 @@
 
 ## 3.5.5.7
 * Modified: Field enqueue method to allow for more flexibility.
+* Added:    Support for Airplane Mode plugin (https://github.com/norcross/airplane-mode) by @norcross. Thanks @chriscct7  #2463
 
 ## 3.5.5.6
 * Fixed:    Undefined index in theme-check enhancements. Thanks @winwinwebdesign!
