@@ -168,6 +168,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
                     'solid'  => 'Solid',
                     'dashed' => 'Dashed',
                     'dotted' => 'Dotted',
+                    'double' => "Double",
                     'none'   => 'None'
                 );
                 echo '<select original-title="' . __( 'Border style', 'redux-framework' ) . '" id="' . $this->field['id'] . '[border-style]" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-style]" class="tips redux-border-style ' . $this->field['class'] . '" rows="6" data-id="' . $this->field['id'] . '">';
