@@ -435,15 +435,6 @@ p.redux-actions {
 }
 
 @media only screen and (min-width: 2000px) {
-    #wpwrap .avada-demo-themes .theme {
-        width: 31%;
-        margin: 0 3% 3% 0;
-    }
-
-    #wpwrap .avada-demo-themes .theme:nth-child(3n) {
-        margin-right: 0;
-    }
-
     #wpwrap .theme-browser .theme:nth-child(4n),
     #wpwrap .theme-browser .theme:nth-child(5n) {
         margin-right: 3%;
@@ -451,12 +442,6 @@ p.redux-actions {
 }
 
 @media screen and (max-width: 500px) {
-    .avada-wrap .avada-logo {
-        display: block;
-        position: relative;
-        margin: 0 auto 50px auto;
-    }
-
     .about-wrap h2 .nav-tab {
         width: 100%;
         margin: 0;
@@ -471,15 +456,6 @@ p.redux-actions {
     .about-wrap h2.nav-tab-wrapper {
         padding: 0;
         width: 100%;
-    }
-
-    .avada-demo-themes .theme:hover .theme-actions {
-        display: block !important;
-        opacity: 1 !important;
-    }
-
-    .avada-demo-themes .theme:hover .screenshot-hover {
-        display: none !important;
     }
 }
 
@@ -498,15 +474,6 @@ p.redux-actions {
     .theme-browser .theme {
         width: 100% !important;
         margin-right: 0;
-    }
-
-    .avada-demo-themes .theme:hover .theme-actions {
-        display: block !important;
-        opacity: 1 !important;
-    }
-
-    .avada-demo-themes .theme:hover .screenshot-hover {
-        display: none !important;
     }
 }
 
