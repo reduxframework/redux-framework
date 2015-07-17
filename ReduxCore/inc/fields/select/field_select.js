@@ -32,7 +32,7 @@
                     function() {
 
                         var default_params = {
-                            width: 'resolve',
+                            width: '100%',
                             triggerChange: true,
                             allowClear: true
                         };

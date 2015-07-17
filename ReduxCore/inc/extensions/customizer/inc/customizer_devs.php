@@ -1,6 +1,5 @@
 <?php
 
-
     if ( ! class_exists( 'Redux_Customizer_Control_rAds' ) && ! class_exists( 'Redux_Customizer_section_rAds' ) ) {
         /**
          * Customizer section representing widget area (sidebar).
@@ -23,7 +22,8 @@
 
             protected function render() {
                 ?>
-                <li id="accordion-section-<?php echo esc_attr( $this->id ); ?>" class="accordion-section rAdsContainer"></li><?php
+                    <li id="accordion-section-<?php echo esc_attr( $this->id ); ?>" class="accordion-section rAdsContainer"></li>
+                <?php
             }
         }
 

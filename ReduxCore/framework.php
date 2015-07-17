@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.5.7';
+            public static $_version = '3.5.5.8';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -337,7 +337,7 @@
                     $this->get_options();
 
                     // Tracking
-                    if ( isset( $this->args[ 'allow_tracking' ] ) && $this->args[ 'allow_tracking' ] && Redux_Helpers::isTheme( __FILE__ ) ) {
+                    if ( isset( $this->args['allow_tracking'] ) && $this->args['allow_tracking'] && Redux_Helpers::isTheme( __FILE__ ) ) {
                         $this->_tracking();
                     }
 
@@ -1660,7 +1660,7 @@
                                 s.parentNode.insertBefore( wf, s );
                             })();
                         </script>
-                    <?php
+                        <?php
                     } elseif ( ! $this->args['disable_google_fonts_link'] ) {
                         $protocol = ( ! empty ( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
 
@@ -2918,7 +2918,7 @@
 
                                 // Make sure 'validate field' is set to 'not_empty' or 'email_not_empty'
                                 //if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' || $field['validate'] == 'numeric_not_empty' ) {
-                                if (strtolower (substr( $field['validate'], -9) ) == 'not_empty'){
+                                if ( strtolower( substr( $field['validate'], - 9 ) ) == 'not_empty' ) {
 
                                     // Set the flag.
                                     $isNotEmpty = true;
@@ -3084,7 +3084,7 @@
                 }
 
                 $string = "";
-                if ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) {
+                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( strpos( $section['icon'], '/' ) !== false ) ) {
                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
                     $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $section['icon'] . '" /> ';
                 } else {

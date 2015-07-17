@@ -1434,7 +1434,7 @@
                             $( '#redux-header' ).append( '<div class="rAds"></div>' );
                             el = $( '#redux-header' );
                         } else {
-                            $('#customize-theme-controls ul').prepend('<li id="redux_rAds" class="accordion-section rAdsContainer" style="position: relative;"><div class="rAds"></div></li>');
+                            $('#customize-theme-controls ul').first().prepend('<li id="redux_rAds" class="accordion-section rAdsContainer" style="position: relative;"><div class="rAds"></div></li>');
                             el = $( '#redux_rAds' );
                         }
 

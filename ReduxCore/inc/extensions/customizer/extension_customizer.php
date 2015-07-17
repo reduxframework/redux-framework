@@ -278,6 +278,8 @@
                 include_once dirname( __FILE__ ) . '/inc/customizer_fields.php';
                 include_once dirname( __FILE__ ) . '/inc/customizer_devs.php';
 
+                do_action( "redux/extension/customizer/control/includes" );
+
                 //if ($this->parent->args['dev_mode']) {
                 //    $section = new Redux_Customizer_rAds( $wp_customize, 'redux_rAds', array(
                 //        'priority'    => 0,

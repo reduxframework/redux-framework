@@ -1,5 +1,11 @@
 # Redux Framework Changelog
 
+## 3.5.5.8
+* Modified: icon_type no longer needed for section icons. Now detects if URLs are provided for images.
+* Fixed:    Various customizer fixes. HTML in the customizer title.
+* Modified: Media URL now is 95% wide.
+* Modified: Select2 now 100% width instead of just resolve (that doesn't always work).
+
 ## 3.5.5.7
 * Modified: Field enqueue method to allow for more flexibility.
 * Added:    Support for Airplane Mode plugin (https://github.com/norcross/airplane-mode) by @norcross. Thanks @chriscct7  #2463

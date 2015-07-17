@@ -1,7 +1,6 @@
 <?php
 
 
-
     /**
      * Customizer section representing widget area (sidebar).
      *
@@ -52,6 +51,7 @@
             // TODO Redux addition
             if ( isset( $args['section'] ) ) {
                 $this->section = $args['section'];
+                $this->title   = $this->section['title'];
             }
         }
 
@@ -101,7 +101,15 @@
             ?>
             <li id="accordion-section-<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( $classes ); ?>">
                 <h3 class="accordion-section-title" tabindex="0">
-                    <?php echo esc_html( $this->title ); ?>
+                    <?php echo wp_kses( $this->title, array(
+                        'em' => array(),
+                        'i' => array(),
+                        'strong' => array(),
+                        'span' => array(
+                            'class' => array(),
+                            'style' => array(),
+                        ),
+                    ) ); ?>
                     <span class="screen-reader-text"><?php _e( 'Press return or enter to expand', 'redux-framework' ); ?></span>
                 </h3>
                 <ul class="accordion-section-content redux-main">

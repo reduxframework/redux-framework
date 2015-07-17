@@ -1,6 +1,5 @@
 <?php
 
-
     if ( ! class_exists( 'Redux_Customizer_Control' ) ) {
         class Redux_Customizer_Control extends WP_Customize_Control {
 
@@ -10,11 +9,11 @@
                 ?>
                 <li id="<?php echo esc_attr( $this->redux_id ); ?>" class="<?php echo esc_attr( $class ); ?>">
                     <input type="hidden" data-id="<?php echo $this->id; ?>" class="redux-customizer-input"
-                           id="customizer_control_id_<?php echo $this->redux_id; ?>" <?php echo $this->link() ?>
-                           value=""/>
+                        id="customizer_control_id_<?php echo $this->redux_id; ?>" <?php echo $this->link() ?>
+                        value=""/>
                     <?php $this->render_content(); ?>
                 </li>
-            <?php
+                <?php
 
             }
 
@@ -22,11 +21,9 @@
                 do_action( 'redux/advanced_customizer/control/render/' . $this->redux_id, $this );
             }
 
-
             public function label() {
                 // The label has already been sanitized in the Fields class, no need to re-sanitize it.
                 echo $this->label;
-
             }
 
             public function description() {
@@ -44,9 +41,3 @@
             }
         }
     }
-
-
-
-
-
-

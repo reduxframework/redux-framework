@@ -153,7 +153,7 @@ if ( ! class_exists( 'ReduxFramework_media' ) ) {
                 $readOnly = '';
             }
 
-            echo '<input placeholder="' . $placeholder . '" type="text" class="' . $hide . 'upload regular-text ' . $this->field['class'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[url]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '"' . $readOnly . '/>';
+            echo '<input placeholder="' . $placeholder . '" type="text" class="' . $hide . 'upload large-text ' . $this->field['class'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[url]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '"' . $readOnly . '/>';
             echo '<input type="hidden" class="data" data-mode="' . $this->field['mode'] . '" />';
             echo '<input type="hidden" class="library-filter" data-lib-filter="' . $libFilter . '" />';
             echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[id]" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
