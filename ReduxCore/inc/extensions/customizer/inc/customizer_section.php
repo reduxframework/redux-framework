@@ -1,7 +1,6 @@
 <?php
 
 
-
     /**
      * Customizer section representing widget area (sidebar).
      *
@@ -52,6 +51,7 @@
             // TODO Redux addition
             if ( isset( $args['section'] ) ) {
                 $this->section = $args['section'];
+
                 $this->opt_name = $args['opt_name'];
             }
         }
@@ -86,10 +86,12 @@
                         </div>
                         <# if ( data.description ) { #>
                             <p class="description customize-section-description">{{{ data.description }}}</p>
-                        <# } #>
-                        <?php
-                            do_action( "redux/page/{$this->opt_name}/section/before", $this->section );
-                        ?>
+                            <# } #>
+                                <?php
+                                    if ( isset( $this->opt_name ) && isset( $this->section ) ) {
+                                        do_action( "redux/page/{$this->opt_name}/section/before", $this->section );
+                                    }
+                                ?>
                     </li>
                 </ul>
             </li>
@@ -108,20 +110,22 @@
                 <h3 class="accordion-section-title" tabindex="0">
                     <?php
                         echo wp_kses( $this->title, array(
-                                'em'     => array(),
-                                'i'      => array(),
-                                'strong' => array(),
-                                'span'   => array(
-                                    'class' => array(),
-                                    'style' => array(),
-                                ),
-                            ) );
+                            'em'     => array(),
+                            'i'      => array(),
+                            'strong' => array(),
+                            'span'   => array(
+                                'class' => array(),
+                                'style' => array(),
+                            ),
+                        ) );
                     ?>
                     <span class="screen-reader-text"><?php _e( 'Press return or enter to expand', 'redux-framework' ); ?></span>
                 </h3>
                 <ul class="accordion-section-content redux-main">
                     <?php
-                        do_action( "redux/page/{$this->opt_name}/section/before", $this->section );
+                        if ( isset( $this->opt_name ) && isset( $this->section ) ) {
+                            do_action( "redux/page/{$this->opt_name}/section/before", $this->section );
+                        }
                     ?>
                     <?php if ( ! empty( $this->description ) ) : ?>
                         <li class="customize-section-description-container">
