@@ -56,7 +56,7 @@
 		'forced_dev_mode_off' => false,
         // Show the time the page took to load, etc
         'update_notice'        => true,
-		//Show the options panel only in customzier not in wordpress dashboard
+		//Show the options panel only in customizer not in wordpress dashboard
 		'customizer_only' => false,
         // If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
         'customizer'           => true,
