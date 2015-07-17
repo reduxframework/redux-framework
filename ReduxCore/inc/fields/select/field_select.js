@@ -32,10 +32,13 @@
                     function() {
 
                         var default_params = {
-                            width: '100%',
+                            width: 'resolve',
                             triggerChange: true,
                             allowClear: true
                         };
+                        if ( $(this).attr('multiple') == "multiple" ) {
+                            default_params.width = "100%";
+                        }
 
                         if ( $( this ).siblings( '.select2_params' ).size() > 0 ) {
                             var select2_params = $( this ).siblings( '.select2_params' ).val();
