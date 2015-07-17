@@ -13,7 +13,7 @@
         /**
          * Type of this panel.
          *
-         * @since  4.1.0
+         * @since 4.1.0
          * @access public
          * @var string
          */
@@ -48,8 +48,9 @@
 
             // TODO Redux addition
             if ( isset( $args['section'] ) ) {
-                $this->section     = $args['section'];
+                $this->section = $args['section'];
                 $this->description = isset( $this->section['desc'] ) ? $this->section['desc'] : '';
+                $this->opt_name = $args['opt_name'];
             }
             // TODO END Redux Addition
         }
@@ -74,7 +75,17 @@
             ?>
             <li id="accordion-panel-<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( $classes ); ?>">
                 <h3 class="accordion-section-title" tabindex="0">
-                    <?php echo esc_html( $this->title ); ?>
+                    <?php
+                        echo sprintf( __( 'You are customizing %s', 'redux-framework' ), '<strong class="panel-title">' . wp_kses( $this->title, array(
+                                'em'     => array(),
+                                'i'      => array(),
+                                'strong' => array(),
+                                'span'   => array(
+                                    'class' => array(),
+                                    'style' => array(),
+                                ),
+                            ) ) . '</strong>' );
+                    ?>
                     <span class="screen-reader-text"><?php _e( 'Press return or enter to open this panel', 'redux-framework' ); ?></span>
                 </h3>
                 <ul class="accordion-sub-container control-panel-content">
@@ -100,15 +111,7 @@
                 <div class="accordion-section-title" tabindex="0">
 				<span class="preview-notice"><?php
                         /* translators: %s is the site/panel title in the Customizer */
-                        echo sprintf( __( 'You are customizing %s', 'redux-framework' ), '<strong class="panel-title">' . wp_kses( $this->title, array(
-                                'em'     => array(),
-                                'i'      => array(),
-                                'strong' => array(),
-                                'span'   => array(
-                                    'class' => array(),
-                                    'style' => array(),
-                                ),
-                            ) ) . '</strong>' );
+                        echo sprintf( __( 'You are customizing %s', 'redux-framework' ), '<strong class="panel-title">' . esc_html( $this->title ) . '</strong>' );
                     ?></span>
                 </div>
                 <?php if ( ! empty( $this->description ) ) : ?>
@@ -117,37 +120,35 @@
                     </div>
                 <?php endif; ?>
             </li>
-            <?php
+        <?php
         }
 
         /**
          * An Underscore (JS) template for this panel's content (but not its container).
+         *
          * Class variables for this panel class are available in the `data` JS object;
          * export custom variables by overriding {@see WP_Customize_Panel::json()}.
          *
-         * @see   WP_Customize_Panel::print_template()
+         * @see WP_Customize_Panel::print_template()
+         *
          * @since 4.3.0
          */
         protected function content_template() {
             ?>
             <li class="panel-meta customize-info redux-panel accordion-section <# if ( ! data.description ) { #> cannot-expand<# } #>">
-                <button class="customize-panel-back" tabindex="-1">
-                    <span class="screen-reader-text"><?php _e( 'Back', 'redux-framework' ); ?></span></button>
+                <button class="customize-panel-back" tabindex="-1"><span class="screen-reader-text"><?php _e( 'Back', 'redux-framework' ); ?></span></button>
                 <div class="accordion-section-title">
 				<span class="preview-notice"><?php
                         /* translators: %s is the site/panel title in the Customizer */
                         echo sprintf( __( 'You are customizing %s', 'redux-framework' ), '<strong class="panel-title">{{ data.title }}</strong>' );
                     ?></span>
-                    <# if ( data.description ) { #>
-                        <button class="customize-help-toggle dashicons dashicons-editor-help" tabindex="0" aria-expanded="false">
-                            <span class="screen-reader-text"><?php _e( 'Help', 'redux-framework' ); ?></span></button>
-                        <# } #>
+                    <# if ( data.description ) { #><button class="customize-help-toggle dashicons dashicons-editor-help" tabindex="0" aria-expanded="false"><span class="screen-reader-text"><?php _e( 'Help', 'redux-framework' ); ?></span></button><# } #>
                 </div>
                 <# if ( data.description ) { #>
                     <div class="description customize-panel-description">
                         {{{ data.description }}}
                     </div>
-                    <# } #>
+                <# } #>
             </li>
             <?php
         }
