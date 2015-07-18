@@ -3084,7 +3084,7 @@
                 }
 
                 $string = "";
-                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( strpos( $section['icon'], '/' ) !== false ) ) {
+                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( isset ( $section['icon'] ) && strpos( $section['icon'], '/' ) !== false ) ) {
                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
                     $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $section['icon'] . '" /> ';
                 } else {
