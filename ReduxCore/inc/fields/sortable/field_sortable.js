@@ -66,6 +66,7 @@
                         } else {
                             el.find( '#' + $( this ).attr( 'rel' ) ).val( '' );
                         }
+                        el.find( '#' + $( this ).attr( 'rel' ) ).trigger('change');
                     }
                 );
             }

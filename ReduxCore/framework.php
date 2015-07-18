@@ -3632,6 +3632,36 @@
             private function compareValueDependencies( $parentValue, $checkValue, $operation ) {
                 $return = false;
                 switch ( $operation ) {
+                    case 'has':                        
+                        if ( is_array( $parentValue ) ) {
+                            if ( is_array( $checkValue ) ) {
+                                foreach ( $checkValue as $key => $value ) {
+                                    if( isset( $parentValue[$key] ) && $parentValue[$key] == $value ){
+                                        $return = true;
+                                    }
+                                }
+                            }
+                            else{
+                                foreach ( $parentValue as $idx => $val ) {
+                                    if ( $val == $checkValue ) {
+                                        $return = true;
+                                    }
+                                }    
+                            }                            
+                        } else {
+                            if ( is_array( $checkValue ) ) {
+                                foreach ( $checkValue as $i => $v ) {
+                                    if ( $parentValue == $v ) {
+                                        $return = true;
+                                    }
+                                }
+                            } else {
+                                if ( $parentValue == $checkValue ) {
+                                    $return = true;
+                                }
+                            }
+                        }                        
+                        break;
                     case '=':
                     case 'equals':
                         $data['operation'] = "=";
