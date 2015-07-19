@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.5.9
+* Fixed     #2500 - Conflict with outdated select2 in JW Player plugin.
+
 ## 3.5.5.8
 * Modified: icon_type no longer needed for section icons. Now detects if URLs are provided for images.
 * Fixed:    Various customizer fixes. HTML in the customizer title.
