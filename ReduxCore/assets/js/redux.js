@@ -435,7 +435,7 @@
                                             $( this ).fadeOut( tipHideDuration );
                                             break;
                                         default:
-                                            $( this ).show( tipHideDuration );
+                                            $( this ).hide( tipHideDuration );
                                             break;
                                     }
                                 },

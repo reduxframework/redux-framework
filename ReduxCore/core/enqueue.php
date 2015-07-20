@@ -207,6 +207,15 @@
                 //*****************************************************************
                 // Select2 JS
                 //*****************************************************************
+                
+                // JWp6 plugin giving us problems.  They need to update.
+                if (  wp_script_is ( 'jquerySelect2' )) {
+                    wp_deregister_script( 'jquerySelect2' );
+                    wp_dequeue_script('jquerySelect2');
+                    wp_dequeue_style('jquerySelect2Style');
+                }
+                
+                
                 Redux_CDN::register_script(
                     'select2-js',
                     '//cdn.jsdelivr.net/select2/3.5.2/select2' . $this->min . '.js',
