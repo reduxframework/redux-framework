@@ -984,6 +984,41 @@
             arr;
 
         switch ( operation ) {
+            case 'has':                
+                if ( $.isPlainObject( parentValue) ) {                    
+                    if ( $.isPlainObject( checkValue ) ) {                             
+                        $.each( checkValue, function( key, value ) {
+                            if( parentValue[key]  && parentValue[key] == value ){
+                                show = true;
+                                return true;
+                            }
+                        });                                    
+                    } 
+                    else{
+                        $.each( parentValue, function( key, value ) {                        
+                            if ( value == checkValue ) {
+                                show = true;
+                                return true;
+                            }
+                        });    
+                    }                     
+                }
+                else {
+                    if ( $.isPlainObject( checkValue ) ) {
+                        $.each( checkValue, function( key, value ) {                        
+                            if ( parentValue == value ) {
+                                show = true;
+                                return true;
+                            }
+                        } );
+                    } else {
+                        if ( parentValue == checkValue ) {
+                            show = true;
+                            return true;
+                        }
+                    }
+                }                
+                break;
             case '=':
             case 'equals':
 //                if ($.isPlainObject(parentValue)) {
