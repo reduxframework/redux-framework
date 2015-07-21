@@ -51,8 +51,8 @@
             // TODO Redux addition
             if ( isset( $args['section'] ) ) {
                 $this->section = $args['section'];
-
-                $this->opt_name = $args['opt_name'];
+                $this->description = isset( $this->section['desc'] ) ? $this->section['desc'] : '';
+                $this->opt_name    = isset( $args['opt_name'] ) ? $args['opt_name'] : '';
             }
         }
 
