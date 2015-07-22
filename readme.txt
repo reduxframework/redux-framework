@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 3.5.5.1
+Stable tag: 3.5.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,25 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+## 3.5.6
+* Fixed     Customizer WP 4.3 final fixes.
+* Fixed     #2500 - Conflict with outdated select2 in JW Player plugin.
+* Modified: icon_type no longer needed for section icons. Now detects if URLs are provided for images.
+* Fixed:    Various customizer fixes. HTML in the customizer title.
+* Modified: Media URL now is 95% wide.
+* Modified: Select2 now 100% width instead of just resolve (that doesn't always work).
+* Modified: Field enqueue method to allow for more flexibility.
+* Added:    Support for Airplane Mode plugin (https://github.com/norcross/airplane-mode) by @norcross. Thanks @chriscct7  #2463
+* Fixed:    Undefined index in theme-check enhancements. Thanks @winwinwebdesign!
+* Removed:  SASS compiler & code. Note needed.
+* Fixed:    Color transparency live-update for Customizer for color, background,
+            and color gradient fields.
+* Fixed:    Undefined index when removing a section.
+* Fixed:    Typography bug onload always saying settings have changed.
+* Modified: Added minified customizer JS.
+* Fixed:    Redux CUSTOMIZER! YEA!
+* Fixed:    Small echo in Redux API
 
 = 3.5.5.1 =
 * Fixed:    Sigh, PHP 5.2 issues.

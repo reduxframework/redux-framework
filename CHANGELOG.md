@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.6
+* Fixed     Customizer WP 4.3 final fixes.
+
 ## 3.5.5.9
 * Fixed     #2500 - Conflict with outdated select2 in JW Player plugin.
 
