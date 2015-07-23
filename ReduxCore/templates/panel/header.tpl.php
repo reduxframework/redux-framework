@@ -48,6 +48,16 @@
                     <span
                         class="redux-dev-mode-notice"><?php _e( 'Developer Mode Enabled', 'redux-framework' ); ?></span>
                 </div>
+            <?php } elseif (isset($this->parent->args['forced_dev_mode_off']) && $this->parent->args['forced_dev_mode_off'] == true ) { ?>
+                <?php $tip_title    = 'The "forced_dev_mode_off" argument has been set to true.'; ?>
+                <?php $tip_msg      = 'Support options are not available while this argument is enabled.  You will also need to switch this argument to false before deploying your project.  If you are a user of this product and you are seeing this message, please contact the author of this theme/plugin.'; ?>
+                <div class="redux-dev-mode-notice-container redux-dev-qtip" 
+                     qtip-title="<?php echo esc_attr( $tip_title ); ?>"
+                     qtip-content="<?php echo esc_attr( $tip_msg ); ?>">
+                    <span
+                        class="redux-dev-mode-notice" style="background-color: #FF001D;"><?php _e( 'FORCED DEV MODE OFF ENABLED', 'redux-framework' ); ?></span>
+                </div>
+            
             <?php } ?>
 
             <h2><?php echo wp_kses_post( $this->parent->args['display_name'] ); ?></h2>

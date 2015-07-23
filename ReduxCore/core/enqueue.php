@@ -432,7 +432,7 @@
                     }
                 }
 
-                if ( isset( $this->parent->args['dev_mode'] ) && $this->parent->args['dev_mode'] == true ) {
+                if ( isset( $this->parent->args['dev_mode'] ) && $this->parent->args['dev_mode'] == true || $this->parent->args['dev_mode'] == false && isset($this->parent->args['forced_dev_mode_off']) && $this->parent->args['forced_dev_mode_off'] == true ) {
                     $nonce                               = wp_create_nonce( 'redux-ads-nonce' );
                     $base                                = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
                     $this->parent->localize_data['rAds'] = Redux_Helpers::rURL_fix( $base, $this->parent->args['opt_name'] );
