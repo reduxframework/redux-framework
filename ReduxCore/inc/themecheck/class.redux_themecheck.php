@@ -191,11 +191,7 @@
             public function enqueue_admin_styles() {
                 $screen = get_current_screen();
                 if ( 'appearance_page_themecheck' == $screen->id ) {
-                    //if ( ! isset( $_POST['themename'] ) ) {
-                    $redux = self::get_redux_instance();
-
-                    wp_enqueue_style( $this->slug . '-admin-styles', $redux::$_url . 'inc/themecheck/css/admin.css', array(), $this->version );
-                    //}
+                    wp_enqueue_style( $this->slug . '-admin-styles', ReduxFramework::$_url . 'inc/themecheck/css/admin.css', array(), $this->version );
                 }
             }
 
@@ -209,8 +205,7 @@
                 $screen = get_current_screen();
 
                 if ( 'appearance_page_themecheck' == $screen->id ) {
-                    $redux = self::get_redux_instance();
-                    wp_enqueue_script( $this->slug . '-admin-script', $redux::$_url . 'inc/themecheck/js/admin.js', array( 'jquery' ), $this->version );
+                    wp_enqueue_script( $this->slug . '-admin-script', ReduxFramework::$_url . 'inc/themecheck/js/admin.js', array( 'jquery' ), $this->version );
 
                     if ( ! isset( $_POST['themename'] ) ) {
 
