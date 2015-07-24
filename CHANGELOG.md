@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.6.1
+*Fixed:     Index error regarding icon argument.
+
 ## 3.5.6
 * Fixed     Customizer WP 4.3 final fixes.
 
