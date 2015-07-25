@@ -125,6 +125,9 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+## 3.5.7
+* Fixed:     Index error regarding icon argument.
+
 ## 3.5.6
 * Fixed     Customizer WP 4.3 final fixes.
 * Fixed     #2500 - Conflict with outdated select2 in JW Player plugin.
