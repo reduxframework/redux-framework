@@ -1,6 +1,6 @@
 # Redux Framework Changelog
 
-## 3.5.7
+## 3.5.6.1
 * Fixed:     Index error regarding icon argument.
 
 ## 3.5.6

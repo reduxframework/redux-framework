@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 3.5.7
+Stable tag: 3.5.6.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,7 +125,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
-## 3.5.7
+## 3.5.6.1
 * Fixed:     Index error regarding icon argument.
 
 ## 3.5.6
