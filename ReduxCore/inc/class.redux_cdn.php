@@ -58,7 +58,7 @@
                 } else {
 
                     $prefix       = $src_cdn[1] == "/" ? 'http:' : '';
-                    $cdn_response = wp_remote_get( $prefix . $src_cdn );
+                    $cdn_response = @wp_remote_get( $prefix . $src_cdn );
 
                     if ( is_wp_error( $cdn_response ) || wp_remote_retrieve_response_code( $cdn_response ) != '200' ) {
                         if ( class_exists( 'Redux_VendorURL' ) ) {
