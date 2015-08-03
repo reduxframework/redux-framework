@@ -254,7 +254,9 @@
                     header( 'Set-Cookie: ' . $response['headers']['set-cookie'] );
                 }
 
-                print str_replace( 'ads.reduxframework.com', 'look.reduxframework.com', $contents );
+                if ( isset( $contents ) ) {
+                    print str_replace( 'ads.reduxframework.com', 'look.reduxframework.com', $contents );
+                }
 
             } else {
 

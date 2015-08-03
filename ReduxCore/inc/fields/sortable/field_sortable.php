@@ -77,7 +77,7 @@ if ( ! class_exists( 'ReduxFramework_sortable' ) ) {
                 }
                 unset( $this->value );
                 $this->value = $dummyArr;
-                unset( $dummytArr );
+                unset( $dummyArr );
             }
 
             $use_labels = false;
