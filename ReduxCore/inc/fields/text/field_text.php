@@ -45,7 +45,8 @@ if ( ! class_exists( 'ReduxFramework_text' ) ) {
             $qtip_text  = isset( $this->field['text_hint']['content'] ) ? 'qtip-content="' . $this->field['text_hint']['content'] . '" ' : '';
             //}
 
-            $readonly = isset( $this->field['readonly'] ) ? ' readonly="readonly"' : '';
+            $readonly       = ( isset( $this->field['readonly'] ) && $this->field['readonly']) ? ' readonly="readonly"' : '';
+            $autocomplete   = ( isset($this->field['autocomplete']) && $this->field['autocomplete'] == false) ? ' autocomplete="off"' : ''; 
 
             if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
 
@@ -61,13 +62,13 @@ if ( ! class_exists( 'ReduxFramework_text' ) ) {
 
                     echo '<div class="input_wrapper">';
                     echo '<label for="' . $this->field['id'] . '-text-' . $k . '">' . $v . '</label> ';
-                    echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' . '" ' . $placeholder . 'value="' . esc_attr( $this->value[ $k ] ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' /><br />';
+                    echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '-text-' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' . '" ' . $placeholder . 'value="' . esc_attr( $this->value[ $k ] ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . $autocomplete . ' /><br />';
                     echo '</div>';
                 }
                 //foreach
             } else {
                 $placeholder = ( isset( $this->field['placeholder'] ) && ! is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
-                echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr( $this->value ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . ' />';
+                echo '<input ' . $qtip_title . $qtip_text . 'type="text" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" ' . $placeholder . 'value="' . esc_attr( $this->value ) . '" class="regular-text ' . $this->field['class'] . '"' . $readonly . $autocomplete . ' />';
             }
         }
 

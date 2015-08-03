@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.6.3
+* Added:    `autocomplete` arg to text field.  This is FALSE by default.
+
 ## 3.5.6.2
 * Fixed:    Color RGBA field missing name_suffix.  Will now work in repeater extension.
 
