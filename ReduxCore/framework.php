@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.6.3';
+            public static $_version = '3.5.6.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2804,7 +2804,18 @@
                             }
                             $redux->set_options( $redux->_validate_options( $values ) );
 
-                            if ( ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) ) ) {
+                            $do_reload = false;
+                            if (isset($this->reload_fields) && !empty($this->reload_fields)) {
+                                if (!empty($this->transients['changed_values'])) {
+                                    foreach ($this->reload_fields as $idx => $val) {
+                                        if (  array_key_exists ( $val, $this->transients['changed_values'] )) {
+                                            $do_reload = true;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if ( $do_reload || ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) )) {
                                 echo json_encode( array( 'status' => 'success', 'action' => 'reload' ) );
                                 die ();
                             }
@@ -3578,8 +3589,7 @@
              */
             public function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
-
-                if ( isset( $field['reload_on_change'] ) && $field['reload_on_change'] ) {
+                if ( isset( $field['ajax_save'] ) && $field['ajax_save'] == false ) {
                     $this->reload_fields[] = $field['id'];
                 }
 

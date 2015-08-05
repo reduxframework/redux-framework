@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.6.4
+* Added:    `ajax_save` arg for fields.  Setting to false will reload the options panel when the set option has changed.
+
 ## 3.5.6.3
 * Added:    `autocomplete` arg to text field.  This is FALSE by default.
 
