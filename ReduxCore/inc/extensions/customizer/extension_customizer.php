@@ -453,6 +453,10 @@
                         ), $wp_customize );
                     }
 
+                    if ( ! isset( $section['fields'] ) || ( isset( $section['fields'] ) && empty( $section['fields'] ) ) ) {
+                        continue;
+                    }
+
                     foreach ( $section['fields'] as $skey => $option ) {
 
                         if ( isset( $option['customizer'] ) && $option['customizer'] === false ) {
@@ -510,7 +514,7 @@
                                     //'capabilities'      => 'edit_theme_options',
                                     //'capabilities'   => $this->parent->args['page_permissions'],
                                     'transport'         => 'refresh',
-                                    'opt_name'    => $this->parent->args['opt_name'],
+                                    'opt_name'          => $this->parent->args['opt_name'],
                                     //'theme_supports'    => '',
                                     //'sanitize_callback' => '__return_false',
                                     'sanitize_callback' => array( $this, '_field_validation' ),
@@ -607,7 +611,7 @@
             }
 
             public function field_render( $option ) {
-echo '1';
+                echo '1';
                 preg_match_all( "/\[([^\]]*)\]/", $option->id, $matches );
                 $id = $matches[1][0];
                 echo $option->link();
