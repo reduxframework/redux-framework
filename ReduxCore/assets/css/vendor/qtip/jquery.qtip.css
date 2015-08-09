@@ -105,7 +105,8 @@
 .qtip-default{
 	border-width: 1px;
 	border-style: solid;
-	border-color: black; //#F1D031;
+	border-color: black; 
+/*        #F1D031;*/
 
 	background-color: #FFFFA3;
 	color: #555;
