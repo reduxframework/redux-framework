@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.6.5
+* Fixed:    #2545 - CSS validator error output misconfigured.
+* Fixed:    ACE adding escape slashes to quotes via CSS validation, causing improper error message.
+
 ## 3.5.6.4
 * Added:    `ajax_save` arg for fields.  Setting to false will reload the options panel when the set option has changed.
 * Fixed:    #2532 - Spinner field arrow spacing off when dev_mode set to false due to missing `!important` CSS suffix.

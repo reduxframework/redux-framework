@@ -33,9 +33,11 @@
 
                 $data = wp_filter_nohtml_kses( $data );
                 $data = str_replace( '&gt;', '>', $data );
+                $data = stripslashes($data);
 
                 if ($data != $this->value) {
-                    $this->warning = __( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
+                    $this->field['msg'] = __( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
+                    $this->warning = $this->field;
                 }
 
                 $this->value = $data;
