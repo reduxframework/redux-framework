@@ -109,7 +109,7 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
                 echo '</ul>';
             } else if ( empty ( $this->field[ 'data' ] ) ) {
 
-                echo (!empty ( $this->field[ 'desc' ] ) ) ? ' <ul class="data-full"><li><label for="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . ']', array(
+                echo (!empty ( $this->field[ 'label' ] ) ) ? ' <ul class="data-full"><li><label for="' . strtr ( $this->parent->args[ 'opt_name' ] . '[' . $this->field[ 'id' ] . ']', array(
                             '[' => '_',
                             ']' => ''
                         ) ) . '">' : '';
