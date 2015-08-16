@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.6.6
+* Added:    'readonly' argument for textarea.
+
 ## 3.5.6.5
 * Fixed:    #2545 - CSS validator error output misconfigured.
 * Fixed:    ACE adding escape slashes to quotes via CSS validation, causing improper error message.
