@@ -516,6 +516,7 @@
                     'network_sites'             => true,
                     // Enable sites as well as admin when using network database mode
                     'hide_reset'                => false,
+                    'hide_save'                 => false,
                     'hints'                     => array(
                         'icon'          => 'el el-question-sign',
                         'icon_position' => 'right',

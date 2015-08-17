@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.6.7
+* Added     setOption and getOption to Redux API.
+* Added     'hide_save' argument.
+
 ## 3.5.6.6
 * Added:    'readonly' argument for textarea.
 
