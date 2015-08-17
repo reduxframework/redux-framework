@@ -179,7 +179,7 @@
                     $id = $_POST['id'];
 
                     // Add the dismiss request to the user meta.
-                    update_user_meta( $userid, 'ignore_' . $id, trie );
+                    update_user_meta( $userid, 'ignore_' . $id, true );
                 }
             }
         }
