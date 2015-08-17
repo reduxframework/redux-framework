@@ -431,6 +431,35 @@
                 }
             }
 
+            public static function getOption ($opt_name = "", $key = "") {
+                self::check_opt_name( $opt_name );
+                
+                if (!empty($opt_name) && !empty($key)) {
+                    $redux = get_option($opt_name);
+                    
+                    if (isset($redux[$key])) {
+                        return $redux[$key];
+                    } else {
+                        return;
+                    }
+                } else {
+                    return;
+                }
+            }
+            
+            public static function setOption ($opt_name = "", $key = "", $option = "") {
+                self::check_opt_name( $opt_name );
+
+                if (!empty($opt_name) && !empty($key)) {
+                    $redux          = get_option($opt_name);
+                    $redux[$key]    = $option;
+                    
+                    return update_option($opt_name, $redux);
+                } else {
+                    return false;
+                }
+            }
+            
             public static function getPriority( $opt_name, $type ) {
                 $priority = self::$priority[ $opt_name ][ $type ];
                 self::$priority[ $opt_name ][ $type ] += 1;
