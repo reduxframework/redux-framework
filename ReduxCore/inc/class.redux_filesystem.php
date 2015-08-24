@@ -248,6 +248,12 @@
                 }
 
                 if ( ! $res ) {
+                    if ($action == 'dirlist') {
+                        if (count(glob("$file*")) == 0) {
+                            return;
+                        }
+                    }
+                    
                     $this->killswitch              = true;
                     $this->parent->admin_notices[] = array(
                         'type'    => 'error',
