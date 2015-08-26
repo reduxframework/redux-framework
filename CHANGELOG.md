@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.6.9
+* Added     Security suggestions posed in #2543.
+
 ## 3.5.6.8
 * Fixed:    'dirlist' in filesystem proxy returning permission error on empty dirs.
 
