@@ -127,7 +127,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 ## 3.5.7
 * Fixed     Customizer customizer_only and customizer section overrides. Also global customizer => false was not working.
-* Added     Security suggestions posed in #2543.
+* Added     Security suggestions posed in #2543 by Julio Potier from SecuPress.
 * Fixed:    'dirlist' in filesystem proxy returning permission error on empty dirs.
 * Added     setOption and getOption to Redux API.
 * Added     'hide_save' argument.

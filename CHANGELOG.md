@@ -4,7 +4,7 @@
 * Fixed     Customizer customizer_only and customizer section overrides. Also global customizer => false was not working.
 
 ## 3.5.6.9
-* Added     Security suggestions posed in #2543.
+* Added     Security suggestions posed in #2543 by Julio Potier from SecuPress.
 
 ## 3.5.6.8
 * Fixed:    'dirlist' in filesystem proxy returning permission error on empty dirs.
