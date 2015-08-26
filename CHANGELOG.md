@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7
+* Fixed     Customizer customizer_only and customizer section overrides. Also global customizer => false was not working.
+
 ## 3.5.6.9
 * Added     Security suggestions posed in #2543.
 

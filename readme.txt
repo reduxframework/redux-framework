@@ -3,8 +3,8 @@ Contributors: dovyp, kprovance
 Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 4.3
-Stable tag: 3.5.6.1
+Tested up to: 4.4
+Stable tag: 3.5.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,20 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+## 3.5.7
+* Fixed     Customizer customizer_only and customizer section overrides. Also global customizer => false was not working.
+* Added     Security suggestions posed in #2543.
+* Fixed:    'dirlist' in filesystem proxy returning permission error on empty dirs.
+* Added     setOption and getOption to Redux API.
+* Added     'hide_save' argument.
+* Added:    'readonly' argument for textarea.
+* Fixed:    #2545 - CSS validator error output misconfigured.
+* Fixed:    ACE adding escape slashes to quotes via CSS validation, causing improper error message.
+* Added:    `ajax_save` arg for fields.  Setting to false will reload the options panel when the set option has changed.
+* Fixed:    #2532 - Spinner field arrow spacing off when dev_mode set to false due to missing `!important` CSS suffix.
+* Added:    `autocomplete` arg to text field.  This is FALSE by default.
+* Fixed:    Color RGBA field missing name_suffix.  Will now work in repeater extension.
 
 ## 3.5.6.1
 * Fixed:     Index error regarding icon argument.
