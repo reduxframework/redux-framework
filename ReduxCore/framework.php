@@ -2745,15 +2745,24 @@
             }
 
             public function ajax_save() {
-
-
-                if ( ! wp_verify_nonce( $_REQUEST['nonce'], "redux_ajax_nonce" ) ) {
-                    json_encode( array(
-                        'status' => __( 'Invalid security credential, please reload the page and try again.', 'redux-framework' ),
-                        'action' => 'reload'
+                if ( ! wp_verify_nonce( $_REQUEST['nonce'], "redux_ajax_nonce" . $this->args['opt_name'] ) ) {
+                    echo json_encode( array(
+                        'status' => __( 'Invalid security credential.  Please reload the page and try again.', 'redux-framework' ),
+                        'action' => ''
                     ) );
+                    
                     die();
                 }
+                
+                if (!current_user_can ( $this->args['page_permissions'] )) {
+                    echo json_encode( array(
+                        'status' => __( 'Invalid user capability.  Please reload the page and try again.', 'redux-framework' ),
+                        'action' => ''
+                    ) );
+                    
+                    die();
+                }
+                
                 $redux = ReduxFrameworkInstances::get_instance( $_POST['opt_name'] );
 
                 if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
