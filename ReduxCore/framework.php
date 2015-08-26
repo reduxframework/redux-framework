@@ -2040,6 +2040,11 @@
                         $section['title'] = "";
                     }
 
+                    if ( isset ( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
+                        $section['panel'] = false;
+                        $this->sections[ $k ] = $section;
+                    }
+
                     $heading = isset ( $section['heading'] ) ? $section['heading'] : $section['title'];
 
                     if ( isset ( $section['permissions'] ) ) {
@@ -2124,6 +2129,10 @@
                                 $display = false;
                             }
 
+                            if ( isset ( $section['customizer'] ) ) {
+                                $field['customizer']                       = $section['customizer'];
+                                $this->sections[ $k ]['fields'][ $fieldk ] = $field;
+                            }
 
                             if ( isset ( $field['permissions'] ) ) {
 
