@@ -2,6 +2,7 @@
 
 ## 3.5.7.2
 * Fixed:    #2571 - Sorter adding extra disable column on new entries if 'disabled' is lowercase.
+* Updated   Fields css for dev_mode off.
 
 ## 3.5.7.1
 * Updated:  Updated container.tpl version.
