@@ -1,24 +1,5 @@
 <?php
 
-    /**
-     * Options Sorter Field for Redux Options
-     *
-     * @author                      Yannis - Pastis Glaros <mrpc@pramnoshosting.gr>
-     * @url                         http://www.pramhost.com
-     * @license                     [http://www.gnu.org/copyleft/gpl.html GPLv3
-     *                              This is actually based on:   [SMOF - Slightly Modded Options Framework](http://aquagraphite.com/2011/09/slightly-modded-options-framework/)
-     *                              Original Credits:
-     *                              Author:                      Syamil MJ
-     *                              Author URI:                  http://aquagraphite.com
-     *                              License:                     GPLv3 - http://www.gnu.org/copyleft/gpl.html
-     *                              Credits:                     Thematic Options Panel - http://wptheming.com/2010/11/thematic-options-panel-v2/
-     *                              KIA Thematic Options Panel:   https://github.com/helgatheviking/thematic-options-KIA
-     *                              Woo Themes:                   http://woothemes.com/
-     *                              Option Tree:                  http://wordpress.org/extend/plugins/option-tree/
-     *                              Twitter:                     http://twitter.com/syamilmj
-     *                              Website:                     http://aquagraphite.com
-     */
-
 // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
@@ -125,7 +106,11 @@
 
                         if ( ! empty( $temp2 ) ) {
                             if ( ! array_key_exists( $k, $temp2 ) ) {
-                                $sortlists['Disabled'][ $k ] = $v;
+                                if (isset($sortlists['Disabled'])) {
+                                    $sortlists['Disabled'][ $k ] = $v;
+                                } else {
+                                    $sortlists['disabled'][ $k ] = $v;
+                                }
                             }
                         }
                     }

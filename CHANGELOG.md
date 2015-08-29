@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7.2
+* Fixed:    #2571 - Sorter adding extra disable column on new entries if 'disabled' is lowercase.
+
 ## 3.5.7.1
 * Updated:  Updated container.tpl version.
 * Fixed:    #2570 - multi-text field CSS bleeding over into WP.
