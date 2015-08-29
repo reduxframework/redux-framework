@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.7.1
+* Updated:  Updated container.tpl version.
+* Fixed:    #2570 - multi-text field CSS bleeding over into WP.
+
 ## 3.5.7
 * Fixed     Customizer customizer_only and customizer section overrides. Also global customizer => false was not working.
 

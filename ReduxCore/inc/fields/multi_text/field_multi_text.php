@@ -105,7 +105,7 @@ if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
                     ReduxFramework::$_url . 'inc/fields/multi_text/field_multi_text.css',
                     array(),
                     time(),
-                    true
+                    'all'
                 );
             }
         }
