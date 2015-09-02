@@ -249,8 +249,14 @@
 
                 if ( ! $res ) {
                     if ($action == 'dirlist') {
-                        if (count(glob("$file*")) == 0) {
+                        if (is_array($res) && empty($res)) {
                             return;
+                        }
+                        
+                        if (!is_array($res)) {
+                            if (count(glob("$file*")) == 0) {
+                                return;
+                            }
                         }
                     }
                     

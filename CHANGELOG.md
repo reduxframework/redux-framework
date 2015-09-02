@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7.3
+* Fixed     Filesystem proxy dirlist triggering file permission errors on empty array.
+
 ## 3.5.7.2
 * Fixed:    #2571 - Sorter adding extra disable column on new entries if 'disabled' is lowercase.
 * Updated   Fields css for dev_mode off.
