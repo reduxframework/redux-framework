@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7.4
+* Fixed:    #2582: Added extra check for get_terms to avoid error.
+
 ## 3.5.7.3
 * Fixed     Filesystem proxy dirlist triggering file permission errors on empty array.
 
