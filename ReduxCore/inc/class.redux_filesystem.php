@@ -249,6 +249,10 @@
 
                 if ( ! $res ) {
                     if ($action == 'dirlist') {
+			if (empty($res) || $res == false || $res == '' ) {
+                            return;
+			}
+                        
                         if (is_array($res) && empty($res)) {
                             return;
                         }
