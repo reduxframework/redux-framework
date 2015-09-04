@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7.5
+* Fixed:    Fixing more inconsistencies with wp_filesystem dirlist.  How about some proper documentation, Otto?
+
 ## 3.5.7.4
 * Fixed:    #2582: Added extra check for get_terms to avoid error.
 
