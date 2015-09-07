@@ -76,6 +76,10 @@
                 }
 
                 echo '<input type="hidden" id="' . $this->field['id'] . '-marker"></td></tr></table>';
+                
+                if ( isset( $this->field['indent'] ) &&  true === $this->field['indent'] ) {
+                    echo '<div class="indent-section-container">';
+                }
 
                 echo '<div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . ' ' . $this->field['class'] . '">';
 
@@ -86,8 +90,14 @@
                 if ( ! empty( $this->field['subtitle'] ) ) {
                     echo '<div class="redux-section-desc">' . $this->field['subtitle'] . '</div>';
                 }
+                
+                echo '</div>';
+                
+                if ( isset( $this->field['indent'] ) &&  false === $this->field['indent'] ) {
+                    echo '</div>';
+                }
 
-                echo '</div><table id="section-table-' . $this->field['id'] . '" data-id="' . $this->field['id'] . '" class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td id="' . $guid . '">';
+                echo '<table id="section-table-' . $this->field['id'] . '" data-id="' . $this->field['id'] . '" class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td id="' . $guid . '">';
 
                 // delete the tr afterwards
                 ?>
