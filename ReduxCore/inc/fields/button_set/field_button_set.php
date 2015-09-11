@@ -117,7 +117,12 @@
                     } else {
                         $multi_suffix = "";
                         $type         = "radio";
-                        $selected     = checked( $this->value, $k, false );
+
+                        if ( is_array( $this->value ) ) {
+                            $selected = false;
+                        } else {
+                            $selected = checked( $this->value, $k, false );
+                        }
                     }
 
                     echo '<input data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . $multi_suffix . '" class="buttonset-item ' . $this->field['class'] . '" value="' . $k . '" ' . $selected . '/>';
