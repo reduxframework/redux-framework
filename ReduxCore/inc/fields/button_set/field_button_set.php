@@ -120,8 +120,6 @@
 
                         if ( is_scalar( $this->value ) ) {
                             $selected = checked( $this->value, $k, false );
-                        } else {
-                            $selected = false;
                         }
                     }
 
