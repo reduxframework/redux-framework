@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7.7
+* Fixed:    #2609 - Section not folding correctly with class argument specified.
+
 ## 3.5.7.6
 * Fixed:    #2607 - button_set required scalar check for array returned by terms in the data arg.  Thanks @Enchiridion.
 
