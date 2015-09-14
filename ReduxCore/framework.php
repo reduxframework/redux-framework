@@ -3675,8 +3675,6 @@
                                     }
                                 } else {
                                     if ( $val == $checkValue ) {
-                                        echo $val . '<br>';
-                                        echo $checkValue;
                                         $return = true;
                                     }
                                 }
