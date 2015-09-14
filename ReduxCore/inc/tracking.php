@@ -126,18 +126,18 @@
                 $id    = '#wpadminbar';
                 $nonce = wp_create_nonce( 'redux_activate_tracking' );
 
-                $content = '<h3>' . __( 'Help improve Our Panel', 'redux-framework' ) . '</h3>';
-                $content .= '<p>' . __( 'Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatibility.', 'redux-framework' ) . '</p>';
+                $content = '<h3>' . esc_html__( 'Help improve Our Panel', 'redux-framework' ) . '</h3>';
+                $content .= '<p>' . esc_html__( 'Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test to ensure compatibility.', 'redux-framework' ) . '</p>';
                 $opt_arr = array(
                     'content'  => $content,
                     'position' => array( 'edge' => 'top', 'align' => 'center' )
                 );
-                $button2 = __( 'Allow tracking', 'redux-framework' );
+                $button2 = esc_html__( 'Allow tracking', 'redux-framework' );
 
                 $function2 = 'redux_store_answer("yes","' . $nonce . '")';
                 $function1 = 'redux_store_answer("no","' . $nonce . '")';
 
-                $this->print_scripts( $id, $opt_arr, __( 'Do not allow tracking', 'redux-framework' ), $button2, $function2, $function1 );
+                $this->print_scripts( $id, $opt_arr, esc_html__( 'Do not allow tracking', 'redux-framework' ), $button2, $function2, $function1 );
             }
 
             /**
@@ -148,13 +148,13 @@
                 $nonce = wp_create_nonce( 'redux_activate_tracking' );
 
 
-                $content = '<h3>' . __( 'Welcome to the Redux Demo Panel', 'redux-framework' ) . '</h3>';
-                $content .= '<p><strong>' . __( 'Getting Started', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'This panel demonstrates the many features of Redux.  Before digging in, we suggest you get up to speed by reviewing %1$s.', 'redux-framework' ), '<a href="' . 'http://' . 'docs.reduxframework.com/redux-framework/getting-started/" target="_blank">' . __( 'our documentation', 'redux-framework' ) . '</a>' );
-                $content .= '<p><strong>' . __( 'Redux Generator', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'Want to get a head start? Use the %1$s. It will create a customized boilerplate theme or a standalone admin folder complete with all things Redux (with the help of Underscores and TGM). Save yourself a headache and try it today.', 'redux-framework' ), '<a href="' . 'http://' . 'generate.reduxframework.com/" target="_blank">' . __( 'Redux Generator', 'redux-framework' ) . '</a>' );
-                $content .= '<p><strong>' . __( 'Redux Extensions', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'Did you know we have extensions, which greatly enhance the features of Redux?  Visit our %1$s to learn more!', 'redux-framework' ), '<a href="' . 'http://' . 'reduxframework.com/extensions/" target="_blank">' . __( 'extensions directory', 'redux-framework' ) . '</a>' );
-                $content .= '<p><strong>' . __( 'Like Redux?', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'If so, please %1$s and consider making a %2$s to keep development of Redux moving forward.', 'redux-framework' ), '<a target="_blank" href="' . 'http://' . 'wordpress.org/support/view/plugin-reviews/redux-framework">' . __( 'leave us a favorable review on WordPress.org', 'redux-framework' ) . '</a>', '<a href="' . 'https://' . 'www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U" target="_blank">' . __( 'donation', 'redux-framework' ) . '</a>' );
-                $content .= '<p><strong>' . __( 'Newsletter', 'redux-framework' ) . '</strong><br>' . __( 'If you\'d like to keep up to with all things Redux, please subscribe to our newsletter', 'redux-framework' ) . ':</p>';
-                $content .= '<form action="' . 'http://' . 'reduxframework.us7.list-manage2.com/subscribe/post?u=564f5178f6cc288064f332efd&amp;id=ace5bbc1f9&SOURCE=panel" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate><p style="text-align: center;"><label for="mce-EMAIL">' . __( 'Email address', 'redux-framework' ) . ' </label><input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"><input type="hidden" value="panel" name="SOURCE">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="' . __( 'Subscribe', 'redux-framework' ) . '" name="subscribe" id="mc-embedded-subscribe" class="button button-primary"></p></form>';
+                $content = '<h3>' . esc_html__( 'Welcome to the Redux Demo Panel', 'redux-framework' ) . '</h3>';
+                $content .= '<p><strong>' . esc_html__( 'Getting Started', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'This panel demonstrates the many features of Redux.  Before digging in, we suggest you get up to speed by reviewing %1$s.', 'redux-framework' ), '<a href="' . 'http://' . 'docs.reduxframework.com/redux-framework/getting-started/" target="_blank">' . esc_html__( 'our documentation', 'redux-framework' ) . '</a>' );
+                $content .= '<p><strong>' . esc_html__( 'Redux Generator', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'Want to get a head start? Use the %1$s. It will create a customized boilerplate theme or a standalone admin folder complete with all things Redux (with the help of Underscores and TGM). Save yourself a headache and try it today.', 'redux-framework' ), '<a href="' . 'http://' . 'generate.reduxframework.com/" target="_blank">' . esc_html__( 'Redux Generator', 'redux-framework' ) . '</a>' );
+                $content .= '<p><strong>' . esc_html__( 'Redux Extensions', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'Did you know we have extensions, which greatly enhance the features of Redux?  Visit our %1$s to learn more!', 'redux-framework' ), '<a href="' . 'http://' . 'reduxframework.com/extensions/" target="_blank">' . esc_html__( 'extensions directory', 'redux-framework' ) . '</a>' );
+                $content .= '<p><strong>' . esc_html__( 'Like Redux?', 'redux-framework' ) . '</strong><br>' . sprintf( __( 'If so, please %1$s and consider making a %2$s to keep development of Redux moving forward.', 'redux-framework' ), '<a target="_blank" href="' . 'http://' . 'wordpress.org/support/view/plugin-reviews/redux-framework">' . esc_html__( 'leave us a favorable review on WordPress.org', 'redux-framework' ) . '</a>', '<a href="' . 'https://' . 'www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U" target="_blank">' . esc_html__( 'donation', 'redux-framework' ) . '</a>' );
+                $content .= '<p><strong>' . esc_html__( 'Newsletter', 'redux-framework' ) . '</strong><br>' . esc_html__( 'If you\'d like to keep up to with all things Redux, please subscribe to our newsletter', 'redux-framework' ) . ':</p>';
+                $content .= '<form action="' . 'http://' . 'reduxframework.us7.list-manage2.com/subscribe/post?u=564f5178f6cc288064f332efd&amp;id=ace5bbc1f9&SOURCE=panel" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate><p style="text-align: center;"><label for="mce-EMAIL">' . esc_html__( 'Email address', 'redux-framework' ) . ' </label><input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"><input type="hidden" value="panel" name="SOURCE">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="' . esc_html__( 'Subscribe', 'redux-framework' ) . '" name="subscribe" id="mc-embedded-subscribe" class="button button-primary"></p></form>';
                 $opt_arr = array(
                     'content'      => $content,
                     'position'     => array( 'edge' => 'top', 'align' => 'center' ),
@@ -163,7 +163,7 @@
 
                 $function1 = 'redux_store_answer("tour","' . $nonce . '")';
 
-                $this->print_scripts( $id, $opt_arr, __( 'Close', 'redux-framework' ), false, '', $function1 );
+                $this->print_scripts( $id, $opt_arr, esc_html__( 'Close', 'redux-framework' ), false, '', $function1 );
             }
 
             /**
@@ -202,7 +202,7 @@
                                 redux_pointer_options = $.extend(
                                     redux_pointer_options, {
                                         buttons: function( event, t ) {
-                                            button = jQuery( '<a id="pointer-close" style="margin-left:5px" class="button-secondary">' + '<?php echo $button1; ?>' + '</a>' );
+                                            button = jQuery( '<a id="pointer-close" style="margin-left:5px" class="button-secondary">' + '<?php echo esc_js($button1); ?>' + '</a>' );
                                             button.bind(
                                                 'click.pointer', function() {
                                                     t.element.pointer( 'close' );
@@ -217,21 +217,21 @@
                                 );
 
                                 setup = function() {
-                                    $( '<?php echo $selector; ?>' ).pointer( redux_pointer_options ).pointer( 'open' );
+                                    $( '<?php echo esc_js($selector); ?>' ).pointer( redux_pointer_options ).pointer( 'open' );
                                     <?php if ($button2) { ?>
-                                    jQuery( '#pointer-close' ).after( '<a id="pointer-primary" class="button-primary">' + '<?php echo $button2; ?>' + '</a>' );
+                                    jQuery( '#pointer-close' ).after( '<a id="pointer-primary" class="button-primary">' + '<?php echo esc_js($button2); ?>' + '</a>' );
                                     jQuery( '#pointer-primary' ).click(
                                         function() {
-                                            <?php echo $button2_function; ?>
+                                            <?php echo esc_js($button2_function); ?>
                                         }
                                     );
                                     jQuery( '#pointer-close' ).click(
                                         function() {
                                             <?php if ($button1_function == '') { ?>
                                             redux_store_answer( input, nonce )
-                                            //redux_setIgnore("tour", "wp-pointer-0", "<?php echo wp_create_nonce('redux-ignore'); ?>");
+                                            //redux_setIgnore("tour", "wp-pointer-0", "<?php echo esc_js(wp_create_nonce('redux-ignore')); ?>");
                                             <?php } else { ?>
-                                            <?php echo $button1_function; ?>
+                                            <?php echo esc_js($button1_function); ?>
                                             <?php } ?>
                                         }
                                     );
@@ -239,7 +239,7 @@
                                     jQuery( '#pointer-close' ).click(
                                         function() {
                                             <?php if ($button1_function != '') { ?>
-                                            <?php echo $button1_function; ?>
+                                            <?php echo esc_js($button1_function); ?>
                                             <?php } ?>
                                         }
                                     );
