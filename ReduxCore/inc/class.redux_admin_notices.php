@@ -53,7 +53,7 @@
 
                         $add_style = '';
                         if ( strpos( $notice['type'], 'redux-message' ) != false ) {
-                            $add_style = 'style="border-left: 4px solid ' . $notice['color'] . '!important;"';
+                            $add_style = 'style="border-left: 4px solid ' . esc_attr($notice['color']) . '!important;"';
                         }
 
                         if ( true == $notice['dismiss'] ) {
@@ -85,21 +85,21 @@
                                 // Print the notice with the dismiss link
                                 if ( version_compare( $wp_version, '4.2', '>' ) ) {
                                     $output    = "";
-                                    $css_id    = $notice['id'] . $pageName . $curTab;
-                                    $css_class = $notice['type'] . 'redux-notice notice is-dismissible redux-notice';
+                                    $css_id    = esc_attr($notice['id']) . $pageName . $curTab;
+                                    $css_class = esc_attr($notice['type']) . 'redux-notice notice is-dismissible redux-notice';
                                     $output .= "<div {$add_style} id='$css_id' class='$css_class'> \n";
                                     $nonce = wp_create_nonce( $notice['id'] . $pageName . $curTab . 'nonce' );
-                                    $output .= "<input type='hidden' class='dismiss_data' id='" . $notice['id'] . $pageName . $curTab . "' value='{$nonce}'> \n";
-                                    $output .= "<p>{$notice['msg']}</p>";
+                                    $output .= "<input type='hidden' class='dismiss_data' id='" . esc_attr($notice['id']) . $pageName . $curTab . "' value='{$nonce}'> \n";
+                                    $output .= '<p>' . wp_kses_post($notice['msg']) . '</p>';
                                     $output .= "</div> \n";
                                     echo $output;
                                 } else {
-                                    echo '<div ' . $add_style . ' class="' . $notice['type'] . ' notice is-dismissable"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
+                                    echo '<div ' . $add_style . ' class="' . esc_attr($notice['type']) . ' notice is-dismissable"><p>' . wp_kses_post($notice['msg']) . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . esc_attr($notice['id']) . $pageName . $curTab . '">' . esc_html__( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
                                 }
                             }
                         } else {
                             // Standard notice
-                            echo '<div ' . $add_style . ' class="' . $notice['type'] . ' notice"><p>' . $notice['msg'] . '</a>.</p></div>';
+                            echo '<div ' . $add_style . ' class="' . esc_attr($notice['type']) . ' notice"><p>' . wp_kses_post($notice['msg']) . '</a>.</p></div>';
                         }
                         ?>
                         <script>
