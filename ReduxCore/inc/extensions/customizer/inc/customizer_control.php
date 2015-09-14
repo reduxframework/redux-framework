@@ -8,9 +8,11 @@
                 $class          = 'customize-control redux-group-tab redux-field customize-control-' . $this->type;
                 ?>
                 <li id="<?php echo esc_attr( $this->redux_id ); ?>" class="<?php echo esc_attr( $class ); ?>">
-                    <input type="hidden" data-id="<?php echo $this->id; ?>" class="redux-customizer-input"
-                        id="customizer_control_id_<?php echo $this->redux_id; ?>" <?php echo $this->link() ?>
-                        value=""/>
+                    <input type="hidden" 
+                           data-id="<?php echo esc_attr($this->id); ?>" 
+                           class="redux-customizer-input"
+                           id="customizer_control_id_<?php echo esc_attr($this->redux_id); ?>" <?php echo esc_url($this->link()) ?>
+                           value=""/>
                     <?php $this->render_content(); ?>
                 </li>
                 <?php

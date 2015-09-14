@@ -513,7 +513,7 @@
                         <?php echo isset( $post['help'] ) ? $post['help'] : ''; ?>
                     </td>
                     <td class="help">
-                        <mark class="<?php echo $mark; ?>">
+                        <mark class="<?php echo esc_attr($mark); ?>">
                             <?php echo ! empty( $post['success'] ) ? '&#10004' : '&#10005'; ?>
                             <?php echo ! empty( $post['note'] ) ? wp_kses_data( $post['note'] ) : ''; ?>
                         </mark>

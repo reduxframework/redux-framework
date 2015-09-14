@@ -3116,7 +3116,7 @@
                 $string = "";
                 if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( isset($section['icon'])  && strpos( $section['icon'], '/' ) !== false ) ) {
                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                    $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $section['icon'] . '" /> ';
+                    $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url($section['icon']) . '" /> ';
                 } else {
                     if ( ! empty ( $section['icon_class'] ) ) {
                         $icon_class = ' ' . $section['icon_class'];
@@ -3125,7 +3125,7 @@
                     } else {
                         $icon_class = '';
                     }
-                    $icon = ( ! isset ( $section['icon'] ) ) ? '<i class="el el-cog' . $icon_class . '"></i> ' : '<i class="' . $section['icon'] . $icon_class . '"></i> ';
+                    $icon = ( ! isset ( $section['icon'] ) ) ? '<i class="el el-cog' . esc_attr($icon_class) . '"></i> ' : '<i class="' . esc_attr($section['icon']) . esc_attr($icon_class) . '"></i> ';
                 }
                 if ( strpos( $icon, 'el-icon-' ) !== false ) {
                     $icon = str_replace( 'el-icon-', 'el el-', $icon );
@@ -3143,7 +3143,7 @@
                 }
 
                 if ( isset ( $section['type'] ) && $section['type'] == "divide" ) {
-                    $string .= '<li class="divide' . $section['class'] . '">&nbsp;</li>';
+                    $string .= '<li class="divide' . esc_attr($section['class']) . '">&nbsp;</li>';
                 } else if ( ! isset ( $section['subsection'] ) || $section['subsection'] != true ) {
 
                     // DOVY! REPLACE $k with $section['ID'] when used properly.
@@ -3152,14 +3152,14 @@
                     $subsectionsClass = $subsections ? ' hasSubSections' : '';
                     $subsectionsClass .= ( ! isset ( $section['fields'] ) || empty ( $section['fields'] ) ) ? ' empty_section' : '';
                     $extra_icon = $subsections ? '<span class="extraIconSubsections"><i class="el el-chevron-down">&nbsp;</i></span>' : '';
-                    $string .= '<li id="' . $k . $suffix . '_section_group_li" class="redux-group-tab-link-li' . $hide_section . $section['class'] . $subsectionsClass . '">';
-                    $string .= '<a href="javascript:void(0);" id="' . $k . $suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $k . '" data-rel="' . $k . $suffix . '">' . $extra_icon . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
+                    $string .= '<li id="' . esc_attr($k . $suffix) . '_section_group_li" class="redux-group-tab-link-li' . esc_attr($hide_section) . esc_attr($section['class']) . esc_attr($subsectionsClass) . '">';
+                    $string .= '<a href="javascript:void(0);" id="' . esc_attr($k . $suffix) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr($k) . '" data-rel="' . esc_attr($k . $suffix) . '">' . $extra_icon . $icon . '<span class="group_title">' . wp_kses_post($section['title']) . '</span></a>';
 
                     $nextK = $k;
 
                     // Make sure you can make this a subsection
                     if ( $subsections ) {
-                        $string .= '<ul id="' . $nextK . $suffix . '_section_group_li_subsections" class="subsection">';
+                        $string .= '<ul id="' . esc_attr($nextK . $suffix) . '_section_group_li_subsections" class="subsection">';
                         $doLoop = true;
 
                         while ( $doLoop ) {
@@ -3186,7 +3186,7 @@
 
                                 if ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $sections[ $nextK ]['icon_type'] ) && $sections[ $nextK ]['icon_type'] == 'image' ) ) {
                                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $sections[ $nextK ]['icon'] . '" /> ';
+                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url($sections[ $nextK ]['icon']) . '" /> ';
                                 } else {
                                     if ( ! empty ( $sections[ $nextK ]['icon_class'] ) ) {
                                         $icon_class = ' ' . $sections[ $nextK ]['icon_class'];
@@ -3195,15 +3195,15 @@
                                     } else {
                                         $icon_class = '';
                                     }
-                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<i class="' . $sections[ $nextK ]['icon'] . $icon_class . '"></i> ';
+                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<i class="' . esc_attr($sections[ $nextK ]['icon']) . esc_attr($icon_class) . '"></i> ';
                                 }
                                 if ( strpos( $icon, 'el-icon-' ) !== false ) {
                                     $icon = str_replace( 'el-icon-', 'el el-', $icon );
                                 }
 
                                 $section[ $nextK ]['class'] = isset ( $section[ $nextK ]['class'] ) ? $section[ $nextK ]['class'] : '';
-                                $string .= '<li id="' . $nextK . $suffix . '_section_group_li" class="redux-group-tab-link-li ' . $hide_sub . $section[ $nextK ]['class'] . ( $icon ? ' hasIcon' : '' ) . '">';
-                                $string .= '<a href="javascript:void(0);" id="' . $nextK . $suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . $nextK . '" data-rel="' . $nextK . $suffix . '">' . $icon . '<span class="group_title">' . $sections[ $nextK ]['title'] . '</span></a>';
+                                $string .= '<li id="' . esc_attr($nextK . $suffix) . '_section_group_li" class="redux-group-tab-link-li ' . esc_attr($hide_sub) . esc_attr($section[ $nextK ]['class']) . ( $icon ? ' hasIcon' : '' ) . '">';
+                                $string .= '<a href="javascript:void(0);" id="' . esc_attr($nextK . $suffix) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr($nextK) . '" data-rel="' . esc_attr($nextK . $suffix) . '">' . $icon . '<span class="group_title">' . wp_kses_post($sections[ $nextK ]['title']) . '</span></a>';
                                 $string .= '</li>';
                             }
                         }

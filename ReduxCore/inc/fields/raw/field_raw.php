@@ -40,9 +40,9 @@
                     if ( isset( $this->field['markdown'] ) && $this->field['markdown'] == true ) {
                         require_once dirname( __FILE__ ) . "/parsedown.php";
                         $Parsedown = new Parsedown();
-                        echo $Parsedown->text( $this->field['content'] );
+                        echo $Parsedown->text( wp_kses_post($this->field['content']) );
                     } else {
-                        echo $this->field['content'];
+                        echo wp_kses_post($this->field['content']);
                     }
                 }
 
