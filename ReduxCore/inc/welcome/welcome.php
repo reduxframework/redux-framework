@@ -99,7 +99,7 @@
         }
 
         public function change_wp_footer() {
-            echo 'If you like <strong>Redux</strong> please leave us a <a href="' . 'https://' . 'wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. A huge thank you from Redux in advance!';
+            echo __('If you like <strong>Redux</strong> please leave us a <a href="' . 'https://' . 'wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. A huge thank you from Redux in advance!','redux-framework');
         }
 
         public function support_hash() {
@@ -174,7 +174,7 @@
                 $return['identifier'] = $data['identifier'];
             } else {
                 $return['status']  = "error";
-                $return['message'] = __( "Support hash could not be generated. Please try again later.", 'redux-framework' );
+                $return['message'] = esc_html__( "Support hash could not be generated. Please try again later.", 'redux-framework' );
             }
 
             echo json_encode( $return );
@@ -196,7 +196,7 @@
 
             // About Page
             $page(
-                __( 'Welcome to Redux Framework', 'redux-framework' ), __( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-about', array(
+                esc_html__( 'Welcome to Redux Framework', 'redux-framework' ), esc_html__( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-about', array(
                     $this,
                     'about_screen'
                 )
@@ -204,7 +204,7 @@
 
             // Changelog Page
             $page(
-                __( 'Redux Framework Changelog', 'redux-framework' ), __( 'Redux Framework Changelog', 'redux-framework' ), $this->minimum_capability, 'redux-changelog', array(
+                esc_html__( 'Redux Framework Changelog', 'redux-framework' ), esc_html__( 'Redux Framework Changelog', 'redux-framework' ), $this->minimum_capability, 'redux-changelog', array(
                     $this,
                     'changelog_screen'
                 )
@@ -212,7 +212,7 @@
 
             // Support Page
             $page(
-                __( 'Get Support', 'redux-framework' ), __( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array(
+                esc_html__( 'Get Support', 'redux-framework' ), esc_html__( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array(
                     $this,
                     'get_support'
                 )
@@ -220,7 +220,7 @@
 
             // Support Page
             $page(
-                __( 'Redux Extensions', 'redux-framework' ), __( 'Redux Extensions', 'redux-framework' ), $this->minimum_capability, 'redux-extensions', array(
+                esc_html__( 'Redux Extensions', 'redux-framework' ), esc_html__( 'Redux Extensions', 'redux-framework' ), $this->minimum_capability, 'redux-extensions', array(
                     $this,
                     'redux_extensions'
                 )
@@ -229,7 +229,7 @@
 
             // Credits Page
             $page(
-                __( 'The people that develop Redux Framework', 'redux-framework' ), __( 'The people that develop Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-credits', array(
+                esc_html__( 'The people that develop Redux Framework', 'redux-framework' ), esc_html__( 'The people that develop Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-credits', array(
                     $this,
                     'credits_screen'
                 )
@@ -237,7 +237,7 @@
 
             // Status Page
             $page(
-                __( 'Redux Framework Status', 'redux-framework' ), __( 'Redux Framework Status', 'redux-framework' ), $this->minimum_capability, 'redux-status', array(
+                esc_html__( 'Redux Framework Status', 'redux-framework' ), esc_html__( 'Redux Framework Status', 'redux-framework' ), $this->minimum_capability, 'redux-status', array(
                     $this,
                     'status_screen'
                 )
@@ -264,17 +264,17 @@
         public function admin_head() {
 
             // Badge for welcome page
-            $badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
+            //$badge_url = ReduxFramework::$_url . 'assets/images/redux-badge.png';
             ?>
 
             <script
                 id="redux-qtip-js"
-                src='<?php echo ReduxFramework::$_url ?>assets/js/vendor/qtip/jquery.qtip.js'>
+                src='<?php echo esc_url(ReduxFramework::$_url); ?>assets/js/vendor/qtip/jquery.qtip.js'>
             </script>
 
             <script
                 id="redux-welcome-admin-js"
-                src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/redux-welcome-admin.js'>
+                src='<?php echo esc_url(ReduxFramework::$_url) ?>inc/welcome/js/redux-welcome-admin.js'>
             </script>
 
             <?php
@@ -282,41 +282,41 @@
                 ?>
                 <script
                     id="jquery-easing"
-                    src='<?php echo ReduxFramework::$_url ?>inc/welcome/js/jquery.easing.min.js'>
+                    src='<?php echo esc_url(ReduxFramework::$_url); ?>inc/welcome/js/jquery.easing.min.js'>
                 </script>
             <?php endif; ?>
 
             <link rel='stylesheet' id='redux-qtip-css'
-                href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/qtip/jquery.qtip.css'
+                href='<?php echo esc_url(ReduxFramework::$_url); ?>assets/css/vendor/qtip/jquery.qtip.css'
                 type='text/css' media='all'/>
 
             <link rel='stylesheet' id='elusive-icons'
-                href='<?php echo ReduxFramework::$_url ?>assets/css/vendor/elusive-icons/elusive-icons.css'
+                href='<?php echo esc_url(ReduxFramework::$_url); ?>assets/css/vendor/elusive-icons/elusive-icons.css'
                 type='text/css' media='all'/>
 
             <link rel='stylesheet' id='redux-welcome-css'
-                href='<?php echo ReduxFramework::$_url ?>inc/welcome/css/redux-welcome.css'
+                href='<?php echo esc_url(ReduxFramework::$_url); ?>inc/welcome/css/redux-welcome.css'
                 type='text/css' media='all'/>
             <style type="text/css">
                 .redux-badge:before {
-                <?php echo is_rtl() ? 'right' : 'left'; ?> : 0;
+                <?php echo esc_js(is_rtl() ? 'right' : 'left'); ?> : 0;
                 }
 
                 .about-wrap .redux-badge {
-                <?php echo is_rtl() ? 'left' : 'right'; ?> : 0;
+                <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?> : 0;
                 }
 
                 .about-wrap .feature-rest div {
-                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 100px;
+                    padding- <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?>: 100px;
                 }
 
                 .about-wrap .feature-rest div.last-feature {
-                    padding- <?php echo is_rtl() ? 'right' : 'left'; ?>: 100px;
-                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 0;
+                    padding- <?php echo esc_js(is_rtl() ? 'right' : 'left'); ?>: 100px;
+                    padding- <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?>: 0;
                 }
 
                 .about-wrap .feature-rest div.icon:before {
-                    margin: <?php echo is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'; ?>;
+                    margin: <?php echo esc_js(is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'); ?>;
                 }
             </style>
         <?php
@@ -333,26 +333,26 @@
             $selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'redux-about';
             $nonce    = wp_create_nonce( 'redux-support-hash' );
             ?>
-            <input type="hidden" id="redux_support_nonce" value="<?php echo $nonce; ?>"/>
+            <input type="hidden" id="redux_support_nonce" value="<?php echo esc_attr($nonce); ?>"/>
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab <?php echo $selected == 'redux-about' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'tools.php' ) ) ); ?>">
-                    <?php _e( "What's New", 'redux-framework' ); ?>
+                    <?php esc_attr_e( "What's New", 'redux-framework' ); ?>
                 </a> <a class="nav-tab <?php echo $selected == 'redux-extensions' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-extensions' ), 'tools.php' ) ) ); ?>">
-                    <?php _e( 'Extensions', 'redux-framework' ); ?>
+                    <?php esc_attr_e( 'Extensions', 'redux-framework' ); ?>
                 </a> <a class="nav-tab <?php echo $selected == 'redux-changelog' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-changelog' ), 'tools.php' ) ) ); ?>">
-                    <?php _e( 'Changelog', 'redux-framework' ); ?>
+                    <?php esc_attr_e( 'Changelog', 'redux-framework' ); ?>
                 </a> <a class="nav-tab <?php echo $selected == 'redux-credits' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-credits' ), 'tools.php' ) ) ); ?>">
                     <?php _e( 'Credits', 'redux-framework' ); ?>
                 </a> <a class="nav-tab <?php echo $selected == 'redux-support' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-support' ), 'tools.php' ) ) ); ?>">
-                    <?php _e( 'Support', 'redux-framework' ); ?>
+                    <?php esc_attr_e( 'Support', 'redux-framework' ); ?>
                 </a> <a class="nav-tab <?php echo $selected == 'redux-status' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-status' ), 'tools.php' ) ) ); ?>">
-                    <?php _e( 'Status', 'redux-framework' ); ?>
+                    <?php esc_attr_e( 'Status', 'redux-framework' ); ?>
                 </a>
             </h2>
         <?php
@@ -509,7 +509,7 @@
 
             foreach ( $contributors as $contributor ) {
                 $contributor_list .= '<li class="wp-person">';
-                $contributor_list .= sprintf( '<a href="%s" title="%s" target="_blank">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'redux-framework' ), $contributor->login ) )
+                $contributor_list .= sprintf( '<a href="%s" title="%s" target="_blank">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'redux-framework' ), esc_html($contributor->login) ) )
                 );
                 $contributor_list .= sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) );
                 $contributor_list .= '</a>';
