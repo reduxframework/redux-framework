@@ -17,6 +17,7 @@
  * @author      Luciano "WebCaos" Ubertini
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
+ * @author      Kevin Provance (kprovance) - fixing everyone else's bugs.
  * @version     3.0.0
  */
 
