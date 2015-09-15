@@ -1,6 +1,10 @@
 # Redux Framework Changelog
 
-## 3.5.7.8  Modified - The mass data escaping of Redux Core output.  Part I.
+## 3.5.7.9
+* Fixed:    #2612: pseudo classes not appending to multiple selectors in link_color output.
+
+## 3.5.7.8  
+* Modified: The mass data escaping of Redux Core output.  Part I.
 
 ## 3.5.7.7
 * Fixed:    #2609 - Section not folding correctly with class argument specified.
