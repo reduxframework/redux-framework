@@ -94,7 +94,9 @@
         }
 
         public function do_redirect() {
-            wp_redirect( admin_url( 'tools.php?page=redux-about' ) );
+			  // Let people to overwrite default redirection
+			  // This will let people introduce theme features
+            wp_redirect( admin_url( apply_filters( 'redux-activation-location', 'tools.php?page=redux-about' ) ) );
             exit();
         }
 
