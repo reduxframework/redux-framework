@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.7.10
+* Fixed:    #2624 - Border field saving/output 0px when no default set.  Now accepts no default and outputs no CSS for blank values.
+
 ## 3.5.7.9
-* Fixed:    #2612: pseudo classes not appending to multiple selectors in link_color output.
+* Fixed:    #2612 - pseudo classes not appending to multiple selectors in link_color output.
 
 ## 3.5.7.8  
 * Modified: The mass data escaping of Redux Core output.  Part I.
