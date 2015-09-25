@@ -2,6 +2,7 @@
 
 ## 3.5.7.10
 * Fixed:    #2624 - Border field saving/output 0px when no default set.  Now accepts no default and outputs no CSS for blank values.
+* Fixed:    color_rgba no long outputs CSS with empty color values.
 
 ## 3.5.7.9
 * Fixed:    #2612 - pseudo classes not appending to multiple selectors in link_color output.
