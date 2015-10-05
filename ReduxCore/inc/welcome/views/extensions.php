@@ -117,30 +117,32 @@
 
             $data = rdx_shuffle_assoc( $data );
 
-            foreach ( $data as $key => $extension ) {
+            if (!empty($data)) {
+                foreach ( $data as $key => $extension ) {
 ?>
-                <div class="theme color<?php echo esc_html($color);?>">
-                    <?php $color ++;?>
-                    <div class="theme-screenshot">
-                        <figure>
-                            <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . esc_attr($iconMap[ $key ]) : 'el-redux'; ?>"></i>
-                            <figcaption>
-                                <p><?php echo esc_html($extension['excerpt']);?></p>
-                                <a href="<?php echo esc_url($extension['url']); ?>" target="_blank">Learn more</a>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <h3 class="theme-name" id="classic"><?php echo esc_html($extension['title']); ?></h3>
+                    <div class="theme color<?php echo esc_html($color);?>">
+                        <?php $color ++;?>
+                        <div class="theme-screenshot">
+                            <figure>
+                                <i class="el <?php echo isset( $iconMap[ $key ] ) && ! empty( $iconMap[ $key ] ) ? 'el-' . esc_attr($iconMap[ $key ]) : 'el-redux'; ?>"></i>
+                                <figcaption>
+                                    <p><?php echo esc_html($extension['excerpt']);?></p>
+                                    <a href="<?php echo esc_url($extension['url']); ?>" target="_blank">Learn more</a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <h3 class="theme-name" id="classic"><?php echo esc_html($extension['title']); ?></h3>
 
-                    <div class="theme-actions">
-                        <a class="button button-primary button-install-demo"
-                           data-demo-id="<?php echo esc_attr($key); ?>"
-                           href="<?php echo esc_url($extension['url']); ?>" 
-                           target="_blank">Learn More
-                        </a>
+                        <div class="theme-actions">
+                            <a class="button button-primary button-install-demo"
+                               data-demo-id="<?php echo esc_attr($key); ?>"
+                               href="<?php echo esc_url($extension['url']); ?>" 
+                               target="_blank">Learn More
+                            </a>
+                        </div>
                     </div>
-                </div>
 <?php
+                }
             }
 ?>
         </div>
