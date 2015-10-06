@@ -84,7 +84,7 @@
 
                 if ( empty( $this->_extension_dir ) ) {
                     $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-                    $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
+                    $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '/', $this->_extension_dir ) );
                 }
 
                 self::get_post_values();
