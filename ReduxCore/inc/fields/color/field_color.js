@@ -56,7 +56,7 @@
                             el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
                         },
                         clear: function( e, ui ) {
-                            $( this ).val( ui.color.toString() );
+                            $( this ).val( '' );
                             redux_change( $( this ).parent().find( '.redux-color-init' ) );
                         }
                     }
