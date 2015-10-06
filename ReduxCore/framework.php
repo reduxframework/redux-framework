@@ -2794,6 +2794,7 @@
                     //}
                     $_POST['data'] = stripslashes( $_POST['data'] );
                     parse_str( $_POST['data'], $values );
+                    //$values = $this->redux_parse_str( $_POST['data'] );
                     $values = $values[ $redux->args['opt_name'] ];
 
 
@@ -3876,6 +3877,66 @@
 
                 return $data_string;
             }
+            
+            /**
+             * Parses the string into variables without the max_input_vars limitation.
+             *
+             * @since   3.5.7.11
+             * @author  harunbasic
+             * @access  public
+             * @param   string $string
+             * @return  array $result
+             */            
+            function redux_parse_str( $string ) {
+                if ( '' == $string ) {
+                    return false;
+                }
+
+                $result = array();
+                $pairs = explode( '&', $string );
+
+                foreach ( $pairs as $key => $pair ) {
+                    // use the original parse_str() on each element
+                    parse_str( $pair, $params );
+
+                    $k = key( $params );
+
+                    if( ! isset( $result[$k] ) ) {
+                        $result += $params;
+                    } else {
+                        $result[$k] = $this->redux_array_merge_recursive_distinct( $result[$k], $params[$k] );
+                    }
+                }
+
+                return $result;
+            }  
+            
+
+            /**
+             * Merge arrays without converting values with duplicate keys to arrays as array_merge_recursive does.
+             *
+             * As seen here http://php.net/manual/en/function.array-merge-recursive.php#92195
+             *
+             * @since   3.5.7.11
+             * @author  harunbasic
+             * @access  public
+             * @param   array $array1
+             * @param   array $array2
+             * @return  array $merged
+             */
+            function redux_array_merge_recursive_distinct( array $array1, array $array2 ) {
+                $merged = $array1;
+                
+                foreach ( $array2 as $key => $value ) {
+                    if ( is_array( $value ) && isset( $merged[$key] ) && is_array( $merged[$key] ) ) {
+                        $merged[$key] = $this->redux_array_merge_recursive_distinct ( $merged[$key], $value );
+                    } else {
+                        $merged[$key] = $value;
+                    }
+                }
+
+                return $merged;
+            }            
         }
 
         // ReduxFramework
