@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.7.12
+* Fixed:    last_tab argument not working.
+
 ## 3.5.7.11
 * Fixed:    #2637 - color picker clear.
 * Fixed:    #2633.

@@ -610,6 +610,11 @@
             }
         );
 
+        if (redux.last_tab !== undefined) {
+            $( '#' + redux.last_tab + '_section_group_li_a' ).click();
+            return;
+        }
+
         var tab = decodeURI( (new RegExp( 'tab' + '=' + '(.+?)(&|$)' ).exec( location.search ) || [, ''])[1] );
 
         if ( tab !== "" ) {
