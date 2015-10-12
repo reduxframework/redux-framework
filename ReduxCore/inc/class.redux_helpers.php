@@ -364,6 +364,14 @@
                 }
             }
 
+            public static function localize($localize) {
+                $redux = ReduxFrameworkInstances::get_instance($localize['args']['opt_name']);
+                $nonce                               = wp_create_nonce( 'redux-ads-nonce' );
+                $base                                = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
+                $localize['rAds'] = Redux_Helpers::rURL_fix( $base, $redux->args['opt_name'] );
+                return $localize;
+            }
+
             public static function compileSystemStatus( $json_output = false, $remote_checks = false ) {
                 global $wpdb;
 
