@@ -337,7 +337,7 @@
         );
     };
     redux.customizer.save = function( $obj, $container ) {
-        var $parent = $obj.hasClass( 'redux-field' ) ? $obj : $obj.parents( '.redux-field:first' );
+        var $parent = $obj.hasClass( 'redux-field' ) ? $obj : $obj.parents( '.redux-field-container:first' );
         var $id = $parent.parent().find( '.redux-customizer-input' ).data( 'id' );
 
         var $nData = $parent.serializeJSON();
