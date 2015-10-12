@@ -418,7 +418,7 @@
 
                             $params = array(
                                 'dir_name'    => 'notice',
-                                'server_file' => 'http://www.reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json',
+                                'server_file' => 'http://reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json',
                                 'interval'    => 3,
                                 'cookie_id'   => 'redux_blast',
                             );
@@ -630,7 +630,12 @@
                         $locale = strtolower( $locale ) . '_' . strtoupper( $locale );
                     }
                 }
-                load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
+                if ( ReduxFramework::$_is_plugin ) {
+                    load_plugin_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
+                } else {
+                    load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
+                }
+
             }
 // _internationalization()
 
@@ -935,7 +940,7 @@
                             $taxonomies = $args['taxonomies'];
                             unset ( $args['taxonomies'] );
                             $terms = get_terms( $taxonomies, $args ); // this will get nothing
-                            if ( ! empty ( $terms ) && !is_a($terms, 'WP_Error') ) {
+                            if ( ! empty ( $terms ) && ! is_a( $terms, 'WP_Error' ) ) {
                                 foreach ( $terms as $term ) {
                                     $data[ $term->term_id ] = $term->name;
                                 }
@@ -2041,7 +2046,7 @@
                     }
 
                     if ( isset ( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
-                        $section['panel'] = false;
+                        $section['panel']     = false;
                         $this->sections[ $k ] = $section;
                     }
 
@@ -2759,19 +2764,19 @@
                         'status' => __( 'Invalid security credential.  Please reload the page and try again.', 'redux-framework' ),
                         'action' => ''
                     ) );
-                    
+
                     die();
                 }
-                
-                if (!current_user_can ( $this->args['page_permissions'] )) {
+
+                if ( ! current_user_can( $this->args['page_permissions'] ) ) {
                     echo json_encode( array(
                         'status' => __( 'Invalid user capability.  Please reload the page and try again.', 'redux-framework' ),
                         'action' => ''
                     ) );
-                    
+
                     die();
                 }
-                
+
                 $redux = ReduxFrameworkInstances::get_instance( $_POST['opt_name'] );
 
                 if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
@@ -2811,17 +2816,17 @@
                             $redux->set_options( $redux->_validate_options( $values ) );
 
                             $do_reload = false;
-                            if (isset($this->reload_fields) && !empty($this->reload_fields)) {
-                                if (!empty($this->transients['changed_values'])) {
-                                    foreach ($this->reload_fields as $idx => $val) {
-                                        if (  array_key_exists ( $val, $this->transients['changed_values'] )) {
+                            if ( isset( $this->reload_fields ) && ! empty( $this->reload_fields ) ) {
+                                if ( ! empty( $this->transients['changed_values'] ) ) {
+                                    foreach ( $this->reload_fields as $idx => $val ) {
+                                        if ( array_key_exists( $val, $this->transients['changed_values'] ) ) {
                                             $do_reload = true;
                                         }
                                     }
                                 }
                             }
-                            
-                            if ( $do_reload || ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) )) {
+
+                            if ( $do_reload || ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) ) ) {
                                 echo json_encode( array( 'status' => 'success', 'action' => 'reload' ) );
                                 die ();
                             }
@@ -3101,9 +3106,9 @@
                 }
 
                 $string = "";
-                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( isset($section['icon'])  && strpos( $section['icon'], '/' ) !== false ) ) {
+                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( isset( $section['icon'] ) && strpos( $section['icon'], '/' ) !== false ) ) {
                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                    $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url($section['icon']) . '" /> ';
+                    $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url( $section['icon'] ) . '" /> ';
                 } else {
                     if ( ! empty ( $section['icon_class'] ) ) {
                         $icon_class = ' ' . $section['icon_class'];
@@ -3112,7 +3117,7 @@
                     } else {
                         $icon_class = '';
                     }
-                    $icon = ( ! isset ( $section['icon'] ) ) ? '<i class="el el-cog' . esc_attr($icon_class) . '"></i> ' : '<i class="' . esc_attr($section['icon']) . esc_attr($icon_class) . '"></i> ';
+                    $icon = ( ! isset ( $section['icon'] ) ) ? '<i class="el el-cog' . esc_attr( $icon_class ) . '"></i> ' : '<i class="' . esc_attr( $section['icon'] ) . esc_attr( $icon_class ) . '"></i> ';
                 }
                 if ( strpos( $icon, 'el-icon-' ) !== false ) {
                     $icon = str_replace( 'el-icon-', 'el el-', $icon );
@@ -3130,7 +3135,7 @@
                 }
 
                 if ( isset ( $section['type'] ) && $section['type'] == "divide" ) {
-                    $string .= '<li class="divide' . esc_attr($section['class']) . '">&nbsp;</li>';
+                    $string .= '<li class="divide' . esc_attr( $section['class'] ) . '">&nbsp;</li>';
                 } else if ( ! isset ( $section['subsection'] ) || $section['subsection'] != true ) {
 
                     // DOVY! REPLACE $k with $section['ID'] when used properly.
@@ -3139,14 +3144,14 @@
                     $subsectionsClass = $subsections ? ' hasSubSections' : '';
                     $subsectionsClass .= ( ! isset ( $section['fields'] ) || empty ( $section['fields'] ) ) ? ' empty_section' : '';
                     $extra_icon = $subsections ? '<span class="extraIconSubsections"><i class="el el-chevron-down">&nbsp;</i></span>' : '';
-                    $string .= '<li id="' . esc_attr($k . $suffix) . '_section_group_li" class="redux-group-tab-link-li' . esc_attr($hide_section) . esc_attr($section['class']) . esc_attr($subsectionsClass) . '">';
-                    $string .= '<a href="javascript:void(0);" id="' . esc_attr($k . $suffix) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr($k) . '" data-rel="' . esc_attr($k . $suffix) . '">' . $extra_icon . $icon . '<span class="group_title">' . wp_kses_post($section['title']) . '</span></a>';
+                    $string .= '<li id="' . esc_attr( $k . $suffix ) . '_section_group_li" class="redux-group-tab-link-li' . esc_attr( $hide_section ) . esc_attr( $section['class'] ) . esc_attr( $subsectionsClass ) . '">';
+                    $string .= '<a href="javascript:void(0);" id="' . esc_attr( $k . $suffix ) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr( $k ) . '" data-rel="' . esc_attr( $k . $suffix ) . '">' . $extra_icon . $icon . '<span class="group_title">' . wp_kses_post( $section['title'] ) . '</span></a>';
 
                     $nextK = $k;
 
                     // Make sure you can make this a subsection
                     if ( $subsections ) {
-                        $string .= '<ul id="' . esc_attr($nextK . $suffix) . '_section_group_li_subsections" class="subsection">';
+                        $string .= '<ul id="' . esc_attr( $nextK . $suffix ) . '_section_group_li_subsections" class="subsection">';
                         $doLoop = true;
 
                         while ( $doLoop ) {
@@ -3173,7 +3178,7 @@
 
                                 if ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $sections[ $nextK ]['icon_type'] ) && $sections[ $nextK ]['icon_type'] == 'image' ) ) {
                                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url($sections[ $nextK ]['icon']) . '" /> ';
+                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url( $sections[ $nextK ]['icon'] ) . '" /> ';
                                 } else {
                                     if ( ! empty ( $sections[ $nextK ]['icon_class'] ) ) {
                                         $icon_class = ' ' . $sections[ $nextK ]['icon_class'];
@@ -3182,15 +3187,15 @@
                                     } else {
                                         $icon_class = '';
                                     }
-                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<i class="' . esc_attr($sections[ $nextK ]['icon']) . esc_attr($icon_class) . '"></i> ';
+                                    $icon = ( ! isset ( $sections[ $nextK ]['icon'] ) ) ? '' : '<i class="' . esc_attr( $sections[ $nextK ]['icon'] ) . esc_attr( $icon_class ) . '"></i> ';
                                 }
                                 if ( strpos( $icon, 'el-icon-' ) !== false ) {
                                     $icon = str_replace( 'el-icon-', 'el el-', $icon );
                                 }
 
                                 $section[ $nextK ]['class'] = isset ( $section[ $nextK ]['class'] ) ? $section[ $nextK ]['class'] : '';
-                                $string .= '<li id="' . esc_attr($nextK . $suffix) . '_section_group_li" class="redux-group-tab-link-li ' . esc_attr($hide_sub) . esc_attr($section[ $nextK ]['class']) . ( $icon ? ' hasIcon' : '' ) . '">';
-                                $string .= '<a href="javascript:void(0);" id="' . esc_attr($nextK . $suffix) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr($nextK) . '" data-rel="' . esc_attr($nextK . $suffix) . '">' . $icon . '<span class="group_title">' . wp_kses_post($sections[ $nextK ]['title']) . '</span></a>';
+                                $string .= '<li id="' . esc_attr( $nextK . $suffix ) . '_section_group_li" class="redux-group-tab-link-li ' . esc_attr( $hide_sub ) . esc_attr( $section[ $nextK ]['class'] ) . ( $icon ? ' hasIcon' : '' ) . '">';
+                                $string .= '<a href="javascript:void(0);" id="' . esc_attr( $nextK . $suffix ) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr( $nextK ) . '" data-rel="' . esc_attr( $nextK . $suffix ) . '">' . $icon . '<span class="group_title">' . wp_kses_post( $sections[ $nextK ]['title'] ) . '</span></a>';
                                 $string .= '</li>';
                             }
                         }
@@ -3863,23 +3868,25 @@
 
                 return $data_string;
             }
-            
+
             /**
              * Parses the string into variables without the max_input_vars limitation.
              *
              * @since   3.5.7.11
              * @author  harunbasic
              * @access  public
+             *
              * @param   string $string
+             *
              * @return  array $result
-             */            
+             */
             function redux_parse_str( $string ) {
                 if ( '' == $string ) {
                     return false;
                 }
 
                 $result = array();
-                $pairs = explode( '&', $string );
+                $pairs  = explode( '&', $string );
 
                 foreach ( $pairs as $key => $pair ) {
                     // use the original parse_str() on each element
@@ -3887,42 +3894,43 @@
 
                     $k = key( $params );
 
-                    if( ! isset( $result[$k] ) ) {
+                    if ( ! isset( $result[ $k ] ) ) {
                         $result += $params;
                     } else {
-                        $result[$k] = $this->redux_array_merge_recursive_distinct( $result[$k], $params[$k] );
+                        $result[ $k ] = $this->redux_array_merge_recursive_distinct( $result[ $k ], $params[ $k ] );
                     }
                 }
 
                 return $result;
-            }  
-            
+            }
+
 
             /**
              * Merge arrays without converting values with duplicate keys to arrays as array_merge_recursive does.
-             *
              * As seen here http://php.net/manual/en/function.array-merge-recursive.php#92195
              *
              * @since   3.5.7.11
              * @author  harunbasic
              * @access  public
+             *
              * @param   array $array1
              * @param   array $array2
+             *
              * @return  array $merged
              */
             function redux_array_merge_recursive_distinct( array $array1, array $array2 ) {
                 $merged = $array1;
-                
+
                 foreach ( $array2 as $key => $value ) {
-                    if ( is_array( $value ) && isset( $merged[$key] ) && is_array( $merged[$key] ) ) {
-                        $merged[$key] = $this->redux_array_merge_recursive_distinct ( $merged[$key], $value );
+                    if ( is_array( $value ) && isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) ) {
+                        $merged[ $key ] = $this->redux_array_merge_recursive_distinct( $merged[ $key ], $value );
                     } else {
-                        $merged[$key] = $value;
+                        $merged[ $key ] = $value;
                     }
                 }
 
                 return $merged;
-            }            
+            }
         }
 
         // ReduxFramework
