@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.7.12';
+            public static $_version = '3.5.8';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2801,20 +2801,6 @@
                     if ( function_exists( 'get_magic_quotes_gpc' ) && get_magic_quotes_gpc() ) {
                         $values = array_map( 'stripslashes_deep', $values );
                     }
-
-                    //$beforeDeep = $values;
-                    //// Ace editor hack for < PHP 5.4. Oy
-                    //if ( isset( $this->fields['ace_editor'] ) ) {
-                    //    if ( function_exists( 'get_magic_quotes_gpc' ) && get_magic_quotes_gpc() ) {
-                    //        foreach ( $this->fields['ace_editor'] as $id => $v ) {
-                    //            if ( version_compare( phpversion(), '5.4', '<' ) ) {
-                    //                $values[ $id ] = stripslashes( $beforeDeep[ $id ] );
-                    //            } else {
-                    //                $values[ $id ] = $beforeDeep[ $id ];
-                    //            }
-                    //        }
-                    //    }
-                    //}
 
                     if ( ! empty ( $values ) ) {
 

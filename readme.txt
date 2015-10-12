@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.4
-Stable tag: 3.5.7
+Stable tag: 3.5.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,25 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+## 3.5.8
+* Fixed:    Customizer preview callback working again.
+* Fixed:    last_tab argument not working.
+* Fixed:    #2637 - color picker clear.
+* Fixed:    #2633.
+* Fixed:    #2624 - Border field saving/output 0px when no default set.  Now accepts no default and outputs no CSS for blank values.
+* Fixed:    color_rgba no long outputs CSS with empty color values.
+* Fixed:    #2612 - pseudo classes not appending to multiple selectors in link_color output.
+* Modified: The mass data escaping of Redux Core output.  Part I.
+* Fixed:    #2609 - Section not folding correctly with class argument specified.
+* Fixed:    #2607 - button_set required scalar check for array returned by terms in the data arg.  Thanks @Enchiridion.
+* Fixed:    Fixing more inconsistencies with wp_filesystem dirlist.  How about some proper documentation, Otto?
+* Fixed:    #2582: Added extra check for get_terms to avoid error.
+* Fixed     Filesystem proxy dirlist triggering file permission errors on empty array.
+* Fixed:    #2571 - Sorter adding extra disable column on new entries if 'disabled' is lowercase.
+* Updated   Fields css for dev_mode off.
+* Updated:  Updated container.tpl version.
+* Fixed:    #2570 - multi-text field CSS bleeding over into WP.
 
 ## 3.5.7
 * Fixed     Customizer customizer_only and customizer section overrides. Also global customizer => false was not working.

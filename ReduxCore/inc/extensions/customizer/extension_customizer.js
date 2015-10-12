@@ -350,12 +350,10 @@
         //console.log( $nData );
 
         var $control = wp.customize.control( $id );
+
+        $control.active.sync();
         //console.log($control);
+
         $control.setting.set( $nData );
     };
 })( jQuery );
-
-
-
-
-

@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8
+* Fixed:    Customizer preview callback working again.
+
 ## 3.5.7.12
 * Fixed:    last_tab argument not working.
 
