@@ -631,7 +631,7 @@
                     }
                 }
                 if ( ReduxFramework::$_is_plugin ) {
-                    load_plugin_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
+                    load_plugin_textdomain( 'redux-framework', '', self::$_dir . 'languages/' . $locale . '.mo' );
                 } else {
                     load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
                 }
