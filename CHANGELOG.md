@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.1
+* Fixed:    #2652 - load_plugin_textdomain using depreciated argument.
+
 ## 3.5.8
 * Fixed:    Customizer preview callback working again.
 
