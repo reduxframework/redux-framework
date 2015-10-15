@@ -1065,7 +1065,16 @@
                                 $args = array( $args );
                             }
                             $data = call_user_func( $args[0] );
-                        }
+                        } else if ( $type == "users" || $type == "users" ) {
+                            $users = get_users( $args );
+                            if ( ! empty ( $users ) ) {
+                                foreach ( $users as $user ) {
+                                    $data[ $user->id ] = $user->display_name;
+                                }
+                                //foreach
+                            }
+                            //if
+                        } 
                         //if
                     }
                     //if
