@@ -429,6 +429,9 @@
                     }
                 }
 
+                // Do admin footer text hook
+                add_filter( 'admin_footer_text', array( &$this, 'admin_footer_text' ) );
+
                 /**
                  * Loaded hook
                  * action 'redux/loaded'
@@ -1713,9 +1716,6 @@
 
                 // Do admin head action for this page
                 add_action( 'admin_head', array( &$this, 'admin_head' ) );
-
-                // Do admin footer text hook
-                add_filter( 'admin_footer_text', array( &$this, 'admin_footer_text' ) );
 
                 $screen = get_current_screen();
 
