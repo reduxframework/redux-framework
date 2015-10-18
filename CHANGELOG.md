@@ -2,6 +2,7 @@
 
 ## 3.5.8.2  
 * Fixed:    #2665 - For those who must have empty dirs in the extensions dir.  No more errors.
+* Added     #2660 - Added 'user'/'users' data type to wordpress data arg.  Thanks @golchha21.
 
 ## 3.5.8.1
 * Fixed:    #2652 - load_plugin_textdomain using depreciated argument.
