@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.8.1';
+            public static $_version = '3.5.8.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2454,11 +2454,12 @@
                     $class_file = apply_filters( "redux/extension/{$this->args['opt_name']}/$folder", "$path/$folder/extension_{$folder}.php", $class_file );
 
                     if ( $class_file ) {
+                        
                         if ( file_exists( $class_file ) ) {
                             require_once $class_file;
+                            
+                            $this->extensions[ $folder ] = new $extension_class ( $this );
                         }
-
-                        $this->extensions[ $folder ] = new $extension_class ( $this );
                     }
                 }
 
