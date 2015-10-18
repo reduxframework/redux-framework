@@ -2445,11 +2445,12 @@
                     $class_file = apply_filters( "redux/extension/{$this->args['opt_name']}/$folder", "$path/$folder/extension_{$folder}.php", $class_file );
 
                     if ( $class_file ) {
+                        
                         if ( file_exists( $class_file ) ) {
                             require_once $class_file;
+                            
+                            $this->extensions[ $folder ] = new $extension_class ( $this );
                         }
-
-                        $this->extensions[ $folder ] = new $extension_class ( $this );
                     }
                 }
 
