@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.2  
+* Fixed:    #2665 - For those who must have empty dirs in the extensions dir.  No more errors.
+
 ## 3.5.8.1
 * Fixed:    #2652 - load_plugin_textdomain using depreciated argument.
 
