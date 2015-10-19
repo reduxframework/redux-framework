@@ -443,7 +443,7 @@
             private function set_redux_content() {
                 $upload_dir        = wp_upload_dir();
                 self::$_upload_dir = $upload_dir['basedir'] . '/redux/';
-                self::$_upload_url = $upload_dir['baseurl'] . '/redux/';
+                self::$_upload_url = str_replace( array( 'https://', 'http://' ), '//', $upload_dir['baseurl'] . '/redux/' );
             }
 
             private function set_default_args() {
