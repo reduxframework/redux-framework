@@ -428,10 +428,11 @@
                         }
                     }
                 }
-
-                // Do admin footer text hook
-                add_filter( 'admin_footer_text', array( &$this, 'admin_footer_text' ) );
-
+                
+				if ( $this->args['global_footer_credit'] == true ) {
+                    // Do admin footer text hook
+                    add_filter( 'admin_footer_text', array( &$this, 'admin_footer_text' ) );
+                }
                 /**
                  * Loaded hook
                  * action 'redux/loaded'
@@ -477,6 +478,7 @@
                     'save_defaults'             => true,
                     // Save defaults to the DB on it if empty
                     'footer_credit'             => '',
+                    'global_footer_credit'      => false,
                     'async_typography'          => false,
                     'disable_google_fonts_link' => false,
                     'class'                     => '',
@@ -1717,6 +1719,11 @@
                 // Do admin head action for this page
                 add_action( 'admin_head', array( &$this, 'admin_head' ) );
 
+				if ( $this->args['global_footer_credit'] == false ) {
+                    // Do admin footer text hook
+                    add_filter( 'admin_footer_text', array( &$this, 'admin_footer_text' ) );
+                }
+                
                 $screen = get_current_screen();
 
                 if ( is_array( $this->args['help_tabs'] ) ) {
