@@ -12,7 +12,7 @@ We handle all support for Redux Framework via our issue tracker.  Email support 
 
 For Redux Extensions:  All pre-sale and support for premium extensions need to be posted to the [Redux Extensions Issue Tracker] (https://github.com/reduxframework/redux-extensions).  Please do not post them to this issue tracker.
 
-You MUST be using Redux is dev mode when submitting an issue to us.  If you are not, or have circumvented our dev mode protocol, you are on your own.  There could be information in your issue that requires dev move active. (Compressed Javascript, for example.  We are unable to diagnose issues with compressed Javascript and why dev mode needs to be enabled.)
+You MUST be using Redux in dev mode when submitting an issue to us.  If you are not, or have circumvented our dev mode protocol, you are on your own.  There could be information in your issue that requires dev move active. (Compressed Javascript, for example.  We are unable to diagnose issues with compressed Javascript and why dev mode needs to be enabled.)
 
 Because it is sometimes difficult to get all the necessary information for a support issue,we have designed the Support URL protocol, in which we are able to gather all the required data via one URL.  It will be necessary for you to post one in your issue.  Please refer to this article for instructions on generating a support URL: [Generating a Support URL] (https://docs.reduxframework.com/core/generating-a-support-hash/).  This is *required*.  We will not be able to offer support without one.  We appreciate the understanding.
 
