@@ -1,8 +1,12 @@
 # Redux Framework Changelog
 
+## 3.5.8.3
+* Modified: While in dev_mode, noticies will appear if Redux sample data in share_icons and admin_bar_links arguments is not changed.
+            This became necessary because devs are not changing this data and theme ends users are coming to us for theme support.
+
 ## 3.5.8.2  
 * Fixed:    #2665 - For those who must have empty dirs in the extensions dir.  No more errors.
-* Added     #2660 - Added 'user'/'users' data type to wordpress data arg.  Thanks @golchha21.
+* Added:    #2660 - Added 'user'/'users' data type to wordpress data arg.  Thanks @golchha21.
 
 ## 3.5.8.1
 * Fixed:    #2652 - load_plugin_textdomain using depreciated argument.

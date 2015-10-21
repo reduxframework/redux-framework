@@ -86,7 +86,7 @@
                                 if ( version_compare( $wp_version, '4.2', '>' ) ) {
                                     $output    = "";
                                     $css_id    = esc_attr($notice['id']) . $pageName . $curTab;
-                                    $css_class = esc_attr($notice['type']) . 'redux-notice notice is-dismissible redux-notice';
+                                    $css_class = esc_attr($notice['type']) . ' redux-notice notice is-dismissible redux-notice';
                                     $output .= "<div {$add_style} id='$css_id' class='$css_class'> \n";
                                     $nonce = wp_create_nonce( $notice['id'] . $pageName . $curTab . 'nonce' );
                                     $output .= "<input type='hidden' class='dismiss_data' id='" . esc_attr($notice['id']) . $pageName . $curTab . "' value='{$nonce}'> \n";

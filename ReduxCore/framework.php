@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.8.2';
+            public static $_version = '3.5.8.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -184,6 +184,8 @@
             public $lang = "";
             public $dev_mode_forced = false;
             public $reload_fields = array();
+            public $omit_share_icons = false;
+            public $omit_admin_items = false;
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -259,6 +261,8 @@
                     $this->args['save_defaults'] = false;
                 }
 
+                $this->change_demo_defaults();
+                
                 if ( ! empty ( $this->args['opt_name'] ) ) {
                     /**
                      * SHIM SECTION
@@ -1519,6 +1523,10 @@
                     // Let's deal with external links
                     if ( isset ( $this->args['admin_bar_links'] ) ) {
 
+                        if (!$this->args['dev_mode'] && $this->omit_admin_items) {
+                            return;
+                        }
+                        
                         // Group for Main Root Menu (External Group)
                         $wp_admin_bar->add_node( array(
                             'id'     => $this->args["page_slug"] . '-external',
@@ -3940,6 +3948,64 @@
                 }
 
                 return $merged;
+            }
+            
+            private function change_demo_defaults() {
+                if ($this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true) {
+                    if (!empty($this->args['admin_bar_links'])) {
+                        foreach($this->args['admin_bar_links'] as $idx => $arr) {
+                            if (is_array($arr) && !empty($arr)) {
+                                foreach($arr as $x => $y) {
+                                    if (strpos(strtolower($y), 'redux') >= 0) {
+                                        $msg = __('<strong>Redux Framework Notice: </strong>There are references to the Redux Framework support site in your config\'s <code>admin_bar_links</code> argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework');
+                                        $this->display_arg_change_notice('admin', $msg);
+                                        $this->omit_admin_items = true;
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (!empty($this->args['share_icons'])) {
+                        foreach($this->args['share_icons'] as $idx => $arr) {
+                            if (is_array($arr) && !empty($arr)) {
+                                foreach($arr as $x => $y) {
+                                    if (strpos(strtolower($y), 'redux') >= 0) {
+                                        $msg = __('<strong>Redux Framework Notice: </strong>There are references to the Redux Framework support site in your config\'s <code>share_icons</code> argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework');
+                                        $this->display_arg_change_notice('share', $msg);
+                                        $this->omit_share_icons = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+            private function display_arg_change_notice($mode, $msg = '') {
+                if ($mode == 'admin') {
+                    if (!$this->omit_admin_items) {
+                        $this->admin_notices[] = array(
+                            'type'    => 'error',
+                            'msg'     => $msg,
+                            'id'      => 'admin_config',
+                            'dismiss' => true,
+                        );                    
+                    }
+                }
+                
+                if ($mode == 'share') {
+                    if (!$this->omit_share_icons) {
+                        $this->admin_notices[] = array(
+                            'type'    => 'error',
+                            'msg'     => $msg,
+                            'id'      => 'share_config',
+                            'dismiss' => true,
+                        );                    
+                    }
+                }
             }
         }
 
