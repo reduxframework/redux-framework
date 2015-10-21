@@ -3,6 +3,7 @@
 ## 3.5.8.3
 * Modified: While in dev_mode, noticies will appear if Redux sample data in share_icons and admin_bar_links arguments is not changed.
             This became necessary because devs are not changing this data and theme ends users are coming to us for theme support.
+* Modified: Redux links to be // instead of http:// or https:// to ensure portability for secure sites.
 
 ## 3.5.8.2  
 * Fixed:    #2665 - For those who must have empty dirs in the extensions dir.  No more errors.
