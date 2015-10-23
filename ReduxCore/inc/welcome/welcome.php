@@ -94,8 +94,10 @@
         }
 
         public function do_redirect() {
-            wp_redirect( admin_url( 'tools.php?page=redux-about' ) );
-            exit();
+            if ( !defined('WP_CLI')) {
+                wp_redirect( admin_url( 'tools.php?page=redux-about' ) );
+                exit();
+            }
         }
 
         public function change_wp_footer() {
