@@ -62,9 +62,11 @@
         if ( redux.fields.hasOwnProperty( "editor" ) ) {
             $.each(
                 redux.fields.editor, function( $key, $index ) {
-                    var editor = tinyMCE.get( $key );
-                    if ( editor ) {
-                        editor.save();
+                    if (typeof(tinyMCE) !== 'undefined') {
+                        var editor = tinyMCE.get( $key );
+                        if ( editor ) {
+                            editor.save();
+                        }
                     }
                 }
             );
