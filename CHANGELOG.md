@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.8.4
+* Added:    #2673 - WP_CLI check before welcome page redirect.
+* Fixed:    #2677 - tinymce javascript errors when wp editor is disabled.
+
 ## 3.5.8.3
 * Modified: While in dev_mode, noticies will appear if Redux sample data in share_icons and admin_bar_links arguments is not changed.
             This became necessary because devs are not changing this data and theme ends users are coming to us for theme support.
