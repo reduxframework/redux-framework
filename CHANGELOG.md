@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.6
+* Modified: #2685 - Rejoined http strings to prevent errors in theme check.  Trade off, INFO notices will appear.  @Otto says this is ok.
+
 ## 3.5.8.5
 * Fixed:    #2684 - Sorter not displaying (or saving) WordPress data when using the data argument.
 
