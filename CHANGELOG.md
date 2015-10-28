@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.5
+* Fixed:    #2684 - Sorter not displaying (or saving) WordPress data when using the data argument.
+
 ## 3.5.8.4
 * Added:    #2673 - WP_CLI check before welcome page redirect.
 * Fixed:    #2677 - tinymce javascript errors when wp editor is disabled.

@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.8.4';
+            public static $_version = '3.5.8.5';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1162,7 +1162,7 @@
                         if ( is_array( $field['data'] ) && ! empty( $field['data'] ) ) {
                             foreach ( $field['data'] as $key => $data ) {
                                 if ( ! empty( $data ) ) {
-                                    if ( ! isset ( $this->field['args'][ $key ] ) ) {
+                                    if ( ! isset ( $field['args'][ $key ] ) ) {
                                         $field['args'][ $key ] = array();
                                     }
                                     $field['options'][ $key ] = $this->get_wordpress_data( $data, $field['args'][ $key ] );

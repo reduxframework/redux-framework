@@ -81,6 +81,8 @@
                     $temp = array_merge( $temp, $blocks );
                 }
 
+                $temp = $this->replace_id_with_slug( $temp );
+                
                 if ( $this->is_value_empty( $this->value ) ) {
                     if ( ! empty( $this->field['options'] ) ) {
                         $this->value = $this->field['options'];
