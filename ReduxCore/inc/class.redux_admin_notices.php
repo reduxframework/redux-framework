@@ -78,7 +78,7 @@
                                     $pageName = empty( $_GET['page'] ) ? '&amp;page=' . self::$_parent->args['page_slug'] : '&amp;page=' . $_GET['page'];
 
                                     // Ditto for the current tab.
-                                    $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . $_GET['tab'];
+                                    $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . esc_attr($_GET['tab']);
                                 }
 
                                 global $wp_version;
