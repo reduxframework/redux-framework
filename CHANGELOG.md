@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.7
+* Fixed:    Reflective XSS security fix.  Thanks to Kacper Szurek for the information.
+
 ## 3.5.8.6
 * Modified: #2685 - Rejoined http strings to prevent errors in theme check.  Trade off, INFO notices will appear.  @Otto says this is ok.
 

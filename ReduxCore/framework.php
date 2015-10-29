@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.8.6';
+            public static $_version = '3.5.8.7';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -1745,7 +1745,7 @@
 
                     $curTab = '0';
                     if ( isset ( $_GET['tab'] ) ) {
-                        $curTab = $_GET['tab'];
+                        $curTab = esc_attr($_GET['tab']);
                     }
 
                     // Default url values for enabling hints.
