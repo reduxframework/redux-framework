@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.8
+* Fixed:    Specifying 'user' in a field's data argument would produce WordPress depreciation errors.
+
 ## 3.5.8.7
 * Fixed:    Reflective XSS security fix.  Thanks to Kacper Szurek for the information.
 
