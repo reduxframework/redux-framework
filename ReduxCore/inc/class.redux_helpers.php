@@ -96,7 +96,12 @@
                 );
 
                 if ( ! function_exists( 'get_plugin_data' ) ) {
-                    require_once ABSPATH . 'wp-admin/includes/admin.php';
+                    if ( file_exists( ABSPATH . 'wp-admin/includes/plugin.php' ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                    }
+                    if ( file_exists( ABSPATH . 'wp-admin/includes/admin.php' ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/admin.php';
+                    }
                 }
 
                 $plugins = array();
@@ -364,11 +369,12 @@
                 }
             }
 
-            public static function localize($localize) {
-                $redux = ReduxFrameworkInstances::get_instance($localize['args']['opt_name']);
-                $nonce                               = wp_create_nonce( 'redux-ads-nonce' );
-                $base                                = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
+            public static function localize( $localize ) {
+                $redux            = ReduxFrameworkInstances::get_instance( $localize['args']['opt_name'] );
+                $nonce            = wp_create_nonce( 'redux-ads-nonce' );
+                $base             = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
                 $localize['rAds'] = Redux_Helpers::rURL_fix( $base, $redux->args['opt_name'] );
+
                 return $localize;
             }
 
@@ -574,7 +580,7 @@
             }
 
             private static function getReduxTemplates( $custom_template_path ) {
-                $filesystem = Redux_Filesystem::get_instance();
+                $filesystem         = Redux_Filesystem::get_instance();
                 $template_paths     = array( 'ReduxFramework' => ReduxFramework::$_dir . 'templates/panel' );
                 $scanned_files      = array();
                 $found_files        = array();
@@ -640,7 +646,7 @@
                 return $result;
             }
 
-            public static function get_template_version( $file  ) {
+            public static function get_template_version( $file ) {
                 $filesystem = Redux_Filesystem::get_instance();
                 // Avoid notices if file does not exist
                 if ( ! file_exists( $file ) ) {
@@ -694,9 +700,5 @@
 
                 return $ret;
             }
-
         }
     }
-
-
-

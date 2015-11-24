@@ -91,7 +91,7 @@
                     <p>
                         <?php esc_html_e( 'Please proceed to the Redux Framework issue tracker and supply us with your support URL below. Please also provide any information that will help us to reproduce your issue.', 'redux-framework' ); ?>
                     </p>
-                    <a href="https://github.com/reduxframework/redux-framework/issues" target="_blank">
+                    <a href="<?php echo esc_url('https://github.com/reduxframework/redux-framework/issues') ?>" target="_blank">
                         <h4>https://github.com/reduxframework/redux-framework/issues</h4>
                     </a>
                 </div>

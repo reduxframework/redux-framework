@@ -139,7 +139,7 @@
 
             function enqueue_controls_css() {
 
-                include_once( ReduxFramework::$_dir . 'core/enqueue.php' );
+                require_once ReduxFramework::$_dir . 'core/enqueue.php';
                 $enqueue = new reduxCoreEnqueue ( $this->parent );
                 $enqueue->get_warnings_and_errors_array();
                 $enqueue->init();
@@ -262,23 +262,23 @@
             public function _register_customizer_controls( $wp_customize ) {
 
                 if ( ! class_exists( 'Redux_Customizer_Section' ) ) {
-                    include_once dirname( __FILE__ ) . '/inc/customizer_section.php';
+                    require_once dirname( __FILE__ ) . '/inc/customizer_section.php';
                     if ( method_exists( $wp_customize, 'register_section_type' ) ) {
                         $wp_customize->register_section_type( 'Redux_Customizer_Section' );
                     }
                 }
                 if ( ! class_exists( 'Redux_Customizer_Panel' ) ) {
-                    include_once dirname( __FILE__ ) . '/inc/customizer_panel.php';
+                    require_once dirname( __FILE__ ) . '/inc/customizer_panel.php';
                     if ( method_exists( $wp_customize, 'register_panel_type' ) ) {
                         $wp_customize->register_panel_type( 'Redux_Customizer_Panel' );
                     }
                 }
                 if ( ! class_exists( 'Redux_Customizer_Control' ) ) {
-                    include_once dirname( __FILE__ ) . '/inc/customizer_control.php';
+                    require_once dirname( __FILE__ ) . '/inc/customizer_control.php';
                 }
 
-                include_once dirname( __FILE__ ) . '/inc/customizer_fields.php';
-                include_once dirname( __FILE__ ) . '/inc/customizer_devs.php';
+                require_once dirname( __FILE__ ) . '/inc/customizer_fields.php';
+                require_once dirname( __FILE__ ) . '/inc/customizer_devs.php';
 
                 do_action( "redux/extension/customizer/control/includes" );
 

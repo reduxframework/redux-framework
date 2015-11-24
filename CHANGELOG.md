@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.8.10
+* Fixed:    #2726 - Redux fixes for WordPress 4.4.
+* Fixed:    #2713 - Alerts wouldn't disappear.
+
 ## 3.5.8.9
 * Fixed:    #2726 - WP 4.4 breaking template.php include, because the core WP guys thought it would be hilarious to break everyone else's stuff.
 
