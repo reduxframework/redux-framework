@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.9
+* Fixed:    #2726 - WP 4.4 breaking template.php include, because the core WP guys thought it would be hilarious to break everyone else's stuff.
+
 ## 3.5.8.8
 * Fixed:    Specifying 'user' in a field's data argument would produce WordPress depreciation errors.
 
