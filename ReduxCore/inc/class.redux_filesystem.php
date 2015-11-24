@@ -124,7 +124,12 @@
                 }
 
                 // Setup the filesystem with creds
-                require_once ABSPATH . '/wp-admin/includes/template.php';
+                if (file_exists(ABSPATH . '/wp-admin/includes/template.php')) {
+                    require_once ABSPATH . '/wp-admin/template.php';
+                } else {
+                    require_once ABSPATH . '/wp-admin/includes/template.php';
+                }
+                
                 require_once ABSPATH . '/wp-admin/includes/file.php';
 
                 if ( $this->parent->args['menu_type'] == 'submenu' ) {
