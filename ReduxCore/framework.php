@@ -1927,9 +1927,11 @@
                         // Set show_hints flag to true, so helptab will be displayed.
                         $this->show_hints = true;
 
+                        $hint = apply_filters( 'redux-hint-html', $hint, $field, $this->args );
+
                         // Get user pref for displaying hints.
                         $metaVal = get_user_meta( $current_user->ID, 'ignore_hints', true );
-                        if ( 'true' == $metaVal || empty ( $metaVal ) ) {
+                        if ( ( 'true' == $metaVal || empty ( $metaVal ) ) && empty( $hint ) ) {
 
                             // Set hand cursor for clickable hints
                             $pointer = '';
