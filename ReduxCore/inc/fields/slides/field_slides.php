@@ -171,7 +171,7 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
             }
 
             if ( $x == 0 ) {
-                echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="' . $this->field[ 'id' ] . '"><h3><span class="redux-slides-header">New ' . $this->field[ 'content_title' ] . '</span></h3><div>';
+                echo '<div class="redux-slides-accordion-group"><fieldset class="redux-field" data-id="' . $this->field[ 'id' ] . '"><h3><span class="redux-slides-header">' . esc_attr ( sprintf ( __ ( 'New %s', 'redux-framework' ), $this->field[ 'content_title' ] ) ) . '</span></h3><div>';
 
                 $hide = ' hide';
 
@@ -232,8 +232,24 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
          * @return      void
          */
         public function enqueue () {
-
-
+            if ( function_exists( 'wp_enqueue_media' ) ) {
+                wp_enqueue_media();
+            } else {
+                wp_enqueue_script( 'media-upload' );
+            }
+                
+            if ($this->parent->args['dev_mode']){
+                wp_enqueue_style ('redux-field-media-css');
+                
+                wp_enqueue_style (
+                    'redux-field-slides-css', 
+                    ReduxFramework::$_url . 'inc/fields/slides/field_slides.css', 
+                    array(),
+                    time (), 
+                    'all'
+                );
+            }
+            
             wp_enqueue_script(
                 'redux-field-media-js',
                 ReduxFramework::$_url . 'assets/js/media/media' . Redux_Functions::isMin() . '.js',
@@ -242,48 +258,13 @@ if ( !class_exists ( 'ReduxFramework_slides' ) ) {
                 true
             );
 
-            redux_enqueue_style(
-                $this->parent,
-                'redux-field-media-css',
-                ReduxFramework::$_url . 'inc/fields/media/field_media.css',
-                ReduxFramework::$_dir . 'inc/fields/media',
-                array(),
-                time(),
-                false
-            );             
-            
-//            wp_enqueue_style (
-//                'redux-field-media-css', 
-//                ReduxFramework::$_url . 'inc/fields/media/field_media.css', 
-//                time (), 
-//                true
-//            );
-
             wp_enqueue_script (
                 'redux-field-slides-js', 
                 ReduxFramework::$_url . 'inc/fields/slides/field_slides' . Redux_Functions::isMin () . '.js', 
-                array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-color-picker', 'redux-field-media-js' ), 
+                array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'jquery-ui-sortable', 'redux-field-media-js' ),
                 time (), 
                 true
             );
-
-            redux_enqueue_style(
-                $this->parent,
-                'redux-field-slides-css',
-                ReduxFramework::$_url . 'inc/fields/slides/field_slides.css',
-                ReduxFramework::$_dir . 'inc/fields/slides',
-                array(),
-                time(),
-                false
-            );               
-            
-//            wp_enqueue_style (
-//                'redux-field-slides-css', 
-//                ReduxFramework::$_url . 'inc/fields/slides/field_slides.css', 
-//                time (), 
-//                true
-//            );
         }
     }
-
 }

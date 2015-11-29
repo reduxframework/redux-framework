@@ -10,6 +10,10 @@
 
         public function proxy() {
 
+            if ( ! isset( $_GET['nonce'] ) || ( isset( $_GET['nonce'] ) && ! wp_verify_nonce( $_GET['nonce'], "redux-ads-nonce" ) ) ) {
+                die();
+            }
+
 // Script: Simple PHP Proxy: Get external HTML, JSON and more!
 //
 // *Version: 1.6, Last updated: 1/24/2009*
@@ -160,6 +164,11 @@
 // ############################################################################
             $url = $_GET['url'];
 
+            if ( isset( $_GET['nonce'] ) ) {
+                $url = str_replace( 'nonce=' . $_GET['nonce'] . '&', '', $url );
+            }
+
+
             if ( ! $url ) {
 
                 // Passed url not specified.
@@ -222,7 +231,7 @@
                 );
 
                 if ( ! is_wp_error( $response ) ) {
-                    $status = $response['response']['code'];
+                    $status   = $response['response']['code'];
                     $contents = $response['body'];
                 }
 
@@ -235,17 +244,19 @@
                     $status   = array( 'http_code' => 'ERROR' );
                 }
 
-                if ( isset( $response['headers']['content-type'] ) ) {
-                    header('Content-Type: '.$response['headers']['content-type']);
+                if ( ! is_wp_error( $response ) && isset( $response['headers']['content-type'] ) ) {
+                    header( 'Content-Type: ' . $response['headers']['content-type'] );
                 }
-                if ( isset( $response['headers']['content-language'] ) ) {
-                    header('Content-Language: '.$response['headers']['content-language']);
+                if ( ! is_wp_error( $response ) && isset( $response['headers']['content-language'] ) ) {
+                    header( 'Content-Language: ' . $response['headers']['content-language'] );
                 }
-                if ( isset( $response['headers']['set-cookie'] ) ) {
-                    header('Set-Cookie: '.$response['headers']['set-cookie']);
+                if ( ! is_wp_error( $response ) && isset( $response['headers']['set-cookie'] ) ) {
+                    header( 'Set-Cookie: ' . $response['headers']['set-cookie'] );
                 }
 
-                print str_replace( 'ads.reduxframework.com', 'look.reduxframework.com', $contents );
+                if ( isset( $contents ) ) {
+                    print str_replace( 'ads.reduxframework.com', 'look.reduxframework.com', $contents );
+                }
 
             } else {
 
@@ -268,7 +279,7 @@
 
                 // Set the JSON data object contents, decoding it from JSON if possible.
                 $decoded_json     = json_decode( $contents );
-                $data['contents'] = str_replace('e(window).width()', 'window.innerWidth||e(window).width()',  $decoded_json ? $decoded_json : $contents);
+                $data['contents'] = str_replace( 'e(window).width()', 'window.innerWidth||e(window).width()', $decoded_json ? $decoded_json : $contents );
 
                 // Generate appropriate content-type header.
 

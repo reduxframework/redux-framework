@@ -1,4 +1,4 @@
-/* global confirm, relid:true, jsonView */
+/* global redux, confirm, relid:true, jsonView */
 
 (function( $ ) {
     'use strict';
@@ -15,7 +15,6 @@
                 var win = $( window );
                 var viewport = {
                     top: win.scrollTop(),
-                    left: win.scrollLeft()
                 };
 
                 viewport.right = viewport.left + win.width();
@@ -36,21 +35,128 @@
             $.redux.tabCheck();
             $.redux.notices();
             $.redux.tabControl();
-            $.redux.devFunctions();
         }
     );
 
+    $.redux.ajax_save = function( button ) {
+
+        var overlay = $( document.getElementById( 'redux_ajax_overlay' ) );
+        overlay.fadeIn();
+
+        // Add the loading mechanism
+        jQuery( '.redux-action_bar .spinner' ).addClass( 'is-active' );
+
+        jQuery( '.redux-action_bar input' ).attr( 'disabled', 'disabled' );
+        var $notification_bar = jQuery( document.getElementById( 'redux_notification_bar' ) );
+        $notification_bar.slideUp();
+        jQuery( '.redux-save-warn' ).slideUp();
+        jQuery( '.redux_ajax_save_error' ).slideUp(
+            'medium', function() {
+                jQuery( this ).remove();
+            }
+        );
+
+        var $parent = jQuery( document.getElementById( "redux-form-wrapper" ) );
+
+        // Editor field doesn't auto save. Have to call it. Boo.
+        if ( redux.fields.hasOwnProperty( "editor" ) ) {
+            $.each(
+                redux.fields.editor, function( $key, $index ) {
+                    if (typeof(tinyMCE) !== 'undefined') {
+                        var editor = tinyMCE.get( $key );
+                        if ( editor ) {
+                            editor.save();
+                        }
+                    }
+                }
+            );
+        }
+
+        var $data = $parent.serialize();
+        // add values for checked and unchecked checkboxes fields
+        $parent.find( 'input[type=checkbox]' ).each(
+            function() {
+                if ( typeof $( this ).attr( 'name' ) !== "undefined" ) {
+                    var chkVal = $( this ).is( ':checked' ) ? $( this ).val() : "0";
+                    $data += "&" + $( this ).attr( 'name' ) + "=" + chkVal;
+                }
+            }
+        );
+
+
+        if ( button.attr( 'name' ) != "redux_save" ) {
+            $data += "&" + button.attr( 'name' ) + "=" + button.val();
+        }
+
+        var $nonce = $parent.attr( "data-nonce" );
+
+        jQuery.ajax(
+            {
+                type: "post",
+                dataType: "json",
+                url: ajaxurl,
+                data: {
+                    action: redux.args.opt_name + "_ajax_save",
+                    nonce: $nonce,
+                    'opt_name': redux.args.opt_name,
+                    data: $data
+                },
+                error: function( response ) {
+                    if ( !window.console ) console = {};
+                    console.log = console.log || function( name, data ) {
+                    };
+                    console.log( redux.ajax.console );
+                    console.log( response.responseText );
+                    jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
+                    overlay.fadeOut( 'fast' );
+                    jQuery( '.redux-action_bar .spinner' ).removeClass( 'is-active' );
+                    alert( redux.ajax.alert );
+                },
+                success: function( response ) {
+                    if ( response.action && response.action == "reload" ) {
+                        location.reload( true );
+                    } else if ( response.status == "success" ) {
+                        jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
+                        overlay.fadeOut( 'fast' );
+                        jQuery( '.redux-action_bar .spinner' ).removeClass( 'is-active' );
+                        redux.options = response.options;
+                        //redux.defaults = response.defaults;
+                        redux.errors = response.errors;
+                        redux.warnings = response.warnings;
+
+                        $notification_bar.html( response.notification_bar ).slideDown( 'fast' );
+                        if ( response.errors !== null || response.warnings !== null ) {
+                            $.redux.notices();
+                        }
+                        var $save_notice = $( document.getElementById( 'redux_notification_bar' ) ).find( '.saved_notice' );
+                        $save_notice.slideDown();
+                        $save_notice.delay( 4000 ).slideUp();
+                    } else {
+                        jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );
+                        jQuery( '.redux-action_bar .spinner' ).removeClass( 'is-active' );
+                        overlay.fadeOut( 'fast' );
+                        jQuery( '.wrap h2:first' ).parent().append( '<div class="error redux_ajax_save_error" style="display:none;"><p>' + response.status + '</p></div>' );
+                        jQuery( '.redux_ajax_save_error' ).slideDown();
+                        jQuery( "html, body" ).animate( {scrollTop: 0}, "slow" );
+                    }
+                }
+            }
+        );
+        return false;
+    };
+
     $.redux.initEvents = function() {
-        $( '.redux-action_bar, .redux-presets-bar' ).on(
+        $( '.redux-presets-bar' ).on(
             'click', function() {
                 window.onbeforeunload = null;
             }
         );
 
+
         $( '#toplevel_page_' + redux.args.slug + ' .wp-submenu a, #wp-admin-bar-' + redux.args.slug + ' a.ab-item' ).click(
             function( e ) {
 
-                if ( ( $( '#toplevel_page_' + redux.args.slug ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) && !$( this ).parents( 'ul.ab-submenu:first' ).hasClass( 'ab-sub-secondary' ) ) {
+                if ( ( $( '#toplevel_page_' + redux.args.slug ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) && !$( this ).parents( 'ul.ab-submenu:first' ).hasClass( 'ab-sub-secondary' ) && $( this ).attr( 'href' ).toLowerCase().indexOf( redux.args.slug + "&tab=" ) >= 0 ) {
                     e.preventDefault();
                     var url = $( this ).attr( 'href' ).split( '&tab=' );
                     $( '#' + url[1] + '_section_group_li_a' ).click();
@@ -62,47 +168,75 @@
             }
         );
 
-
-        // Default button clicked
-        $( 'input[name="' + redux.args.opt_name + '[defaults]"]' ).click(
-            function() {
-                if ( !confirm( redux.args.reset_confirm ) ) {
-                    return false;
-                }
-                window.onbeforeunload = null;
-            }
-        );
-
-        // Default button clicked
-        $( 'input[name="' + redux.args.opt_name + '[defaults-section]"]' ).click(
-            function() {
-                if ( !confirm( redux.args.reset_section_confirm ) ) {
-                    return false;
+        // Save button clicked
+        $( '.redux-action_bar input' ).on(
+            'click', function( e ) {
+                if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults]' ) {
+                    // Defaults button clicked
+                    if ( !confirm( redux.args.reset_confirm ) ) {
+                        return false;
+                    }
+                } else if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults-section]' ) {
+                    // Default section clicked
+                    if ( !confirm( redux.args.reset_section_confirm ) ) {
+                        return false;
+                    }
                 }
 
                 window.onbeforeunload = null;
+
+                if ( redux.args.ajax_save === true ) {
+                    $.redux.ajax_save( $( this ) );
+                    e.preventDefault();
+                }
             }
         );
+        //
+        //// Default button clicked
+        //$( 'input[name="' + redux.args.opt_name + '[defaults]"]' ).click(
+        //    function() {
+        //        if ( !confirm( redux.args.reset_confirm ) ) {
+        //            return false;
+        //        }
+        //        window.onbeforeunload = null;
+        //    }
+        //);
+
+
+        //$( 'input[name="' + redux.args.opt_name + '[defaults-section]"]' ).click(
+        //    function() {
+        //        if ( !confirm( redux.args.reset_section_confirm ) ) {
+        //            return false;
+        //        }
+        //
+        //        window.onbeforeunload = null;
+        //    }
+        //);
+        //$( '.redux-save' ).click(
+        //    function() {
+        //        window.onbeforeunload = null;
+        //    }
+        //);
 
         $( '.expand_options' ).click(
             function( e ) {
-                
+
                 e.preventDefault();
 
-                var container = $('.redux-container');
-                if ($(container).hasClass('fully-expanded')) {
-                    $(container).removeClass('fully-expanded');
+                var container = $( '.redux-container' );
+                if ( $( container ).hasClass( 'fully-expanded' ) ) {
+                    $( container ).removeClass( 'fully-expanded' );
 
                     var tab = $.cookie( "redux_current_tab" );
 
-                    $('.redux-container:first').find( '#' + tab + '_section_group' ).fadeIn(
+                    $( '.redux-container:first' ).find( '#' + tab + '_section_group' ).fadeIn(
                         200, function() {
-                            if ( $('.redux-container:first').find( '#redux-footer' ).length !== 0 ) {
+                            if ( $( '.redux-container:first' ).find( '#redux-footer' ).length !== 0 ) {
                                 $.redux.stickyInfo(); // race condition fix
                             }
                             $.redux.initFields();
                         }
-                    );                
+                    );
                 }
 
                 $.redux.expandOptions( $( this ).parents( '.redux-container:first' ) );
@@ -130,6 +264,7 @@
                 height: stickyHeight
             }
         );
+        $( '#redux-footer-sticky' ).removeClass( 'hide' );
 
         if ( $( '#redux-footer' ).length !== 0 ) {
             $( window ).scroll(
@@ -147,18 +282,16 @@
 
         $( '.saved_notice' ).delay( 4000 ).slideUp();
 
-        $( '.redux-save' ).click(
-            function() {
-                window.onbeforeunload = null;
-            }
-        );
+
     };
 
     $.redux.hideFields = function() {
-        $("label[for='redux_hide_field']").each(function(idx,val){
-            var tr = $(this).parent().parent();
-            $(tr).addClass('hidden');
-        });
+        $( "label[for='redux_hide_field']" ).each(
+            function( idx, val ) {
+                var tr = $( this ).parent().parent();
+                $( tr ).addClass( 'hidden' );
+            }
+        );
     };
 
     $.redux.checkRequired = function() {
@@ -215,7 +348,7 @@
                 style = 'qtip-' + tip_style;
             }
 
-            var classes = shadow + ',' + color + ',' + rounded + ',' + style;
+            var classes = shadow + ',' + color + ',' + rounded + ',' + style + ',redux-qtip';
             classes = classes.replace( /,/g, ' ' );
 
             // Get position data
@@ -237,6 +370,38 @@
             // Tip hide effect
             var tipHideEffect = redux.args.hints.tip_effect.hide.effect;
             var tipHideDuration = redux.args.hints.tip_effect.hide.duration;
+
+            $( 'div.redux-dev-qtip' ).each(
+                function() {
+                    $( this ).qtip(
+                        {
+                            content: {
+                                text: $( this ).attr( 'qtip-content' ),
+                                title: $( this ).attr( 'qtip-title' )
+                            },
+                            show: {
+                                effect: function() {
+                                    $( this ).slideDown( 500 );
+                                },
+                                event: 'mouseover',
+                            },
+                            hide: {
+                                effect: function() {
+                                    $( this ).slideUp( 500 );
+                                },
+                                event: 'mouseleave',
+                            },
+                            style: {
+                                classes: 'qtip-shadow qtip-light',
+                            },
+                            position: {
+                                my: 'top center',
+                                at: 'bottom center',
+                            },
+                        }
+                    );
+                }
+            );
 
             $( 'div.redux-hint-qtip' ).each(
                 function() {
@@ -272,7 +437,7 @@
                                             $( this ).fadeOut( tipHideDuration );
                                             break;
                                         default:
-                                            $( this ).show( tipHideDuration );
+                                            $( this ).hide( tipHideDuration );
                                             break;
                                     }
                                 },
@@ -389,10 +554,20 @@
                             }
                         );
                         var newParent = el.find( '#' + relid + '_section_group_li' ).parents( '.hasSubSections:first' );
+
                         if ( newParent.length > 0 ) {
                             el.find( '#' + relid + '_section_group_li' ).removeClass( 'active' );
                             relid = newParent.find( '.redux-group-tab-link-a:first' ).data( 'rel' );
-                            el.find( '#' + relid + '_section_group_li' ).addClass( 'active' ).removeClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                            //console.log(relid);
+                            if ( newParent.hasClass( 'empty_section' ) ) {
+                                newParent.find( '.subsection li:first' ).addClass( 'active' );
+                                el.find( '#' + relid + '_section_group_li' ).removeClass( 'active' ).addClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                                newParent = newParent.find( '.subsection li:first' );
+                                relid = newParent.find( '.redux-group-tab-link-a:first' ).data( 'rel' );
+                                //console.log('Empty section, do the next one?');
+                            } else {
+                                el.find( '#' + relid + '_section_group_li' ).addClass( 'active' ).removeClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
+                            }
                         }
                     } else if ( el.find( '#' + oldid + '_section_group_li' ).parents( 'ul.subsection' ).length ) {
                         //console.log('oldid is a child');
@@ -407,6 +582,7 @@
                                 }
                             );
                         } else {
+                            //console.log('oldid is child, but not of relid2');
                             el.find( '#' + oldid + '_section_group_li' ).removeClass( 'active' );
                         }
                     } else {
@@ -435,6 +611,11 @@
 
             }
         );
+
+        if (redux.last_tab !== undefined) {
+            $( '#' + redux.last_tab + '_section_group_li_a' ).click();
+            return;
+        }
 
         var tab = decodeURI( (new RegExp( 'tab' + '=' + '(.+?)(&|$)' ).exec( location.search ) || [, ''])[1] );
 
@@ -473,17 +654,29 @@
     $.redux.initFields = function() {
         $( ".redux-group-tab:visible" ).find( ".redux-field-init:visible" ).each(
             function() {
+
                 var type = $( this ).attr( 'data-type' );
                 //console.log(type);
-                if ( redux.field_objects[type] ) {
+                if ( typeof redux.field_objects != 'undefined' && redux.field_objects[type] && redux.field_objects[type] ) {
                     redux.field_objects[type].init();
+                }
+                if ( !redux.customizer && $( this ).hasClass( 'redux_remove_th' )  ) {
+
+                    var tr = $( this ).parents( 'tr:first' );
+                    var th = tr.find( 'th:first' );
+                    if ( th.html() && th.html().length > 0 ) {
+                        $( this ).prepend( th.html() );
+                        $( this ).find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
+                    }
+                    $( this ).parent().attr( 'colspan', '2' );
+                    th.remove();
                 }
             }
         );
     };
 
     $.redux.notices = function() {
-        if ( redux.errors !== undefined ) {
+        if ( redux.errors && redux.errors.errors ) {
             $.each(
                 redux.errors.errors, function( sectionID, sectionArray ) {
                     $.each(
@@ -491,15 +684,20 @@
                             $( "#" + redux.args.opt_name + '-' + value.id ).addClass( "redux-field-error" );
                             if ( $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).length === 0 ) {
                                 $( "#" + redux.args.opt_name + '-' + value.id ).append( '<div class="redux-th-error">' + value.msg + '</div>' );
+                            } else {
+                                $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).html( value.msg ).css(
+                                    'display', 'block'
+                                );
                             }
                         }
                     );
                 }
             );
-
             $( '.redux-container' ).each(
                 function() {
                     var container = $( this );
+                    // Ajax cleanup
+                    container.find( '.redux-menu-error' ).remove();
                     var totalErrors = container.find( '.redux-field-error' ).length;
                     if ( totalErrors > 0 ) {
                         container.find( ".redux-field-errors span" ).text( totalErrors );
@@ -520,14 +718,39 @@
                             }
                         );
                     }
+                }
+            );
+        }
+        if ( redux.warnings && redux.warnings.warnings ) {
+            $.each(
+                redux.warnings.warnings, function( sectionID, sectionArray ) {
+                    $.each(
+                        sectionArray.warnings, function( key, value ) {
+                            $( "#" + redux.args.opt_name + '-' + value.id ).addClass( "redux-field-warning" );
+                            if ( $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).length === 0 ) {
+                                $( "#" + redux.args.opt_name + '-' + value.id ).append( '<div class="redux-th-warning">' + value.msg + '</div>' );
+                            } else {
+                                $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).html( value.msg ).css(
+                                    'display', 'block'
+                                );
+                            }
+                        }
+                    );
+                }
+            );
+            $( '.redux-container' ).each(
+                function() {
+                    var container = $( this );
+                    // Ajax cleanup
+                    container.find( '.redux-menu-warning' ).remove();
                     var totalWarnings = container.find( '.redux-field-warning' ).length;
                     if ( totalWarnings > 0 ) {
                         container.find( ".redux-field-warnings span" ).text( totalWarnings );
                         container.find( ".redux-field-warnings" ).slideDown();
                         container.find( '.redux-group-tab' ).each(
                             function() {
-                                var warning = $( this ).find( '.redux-field-warning' ).length;
-                                if ( warning > 0 ) {
+                                var total = $( this ).find( '.redux-field-warning' ).length;
+                                if ( total > 0 ) {
                                     var sectionID = $( this ).attr( 'id' ).split( '_' );
                                     sectionID = sectionID[0];
                                     container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).prepend( '<span class="redux-menu-warning">' + total + '</span>' );
@@ -567,19 +790,6 @@
                 return false;
             }
         );
-    };
-
-    $.redux.devFunctions = function() {
-        $( '#consolePrintObject' ).on(
-            'click', function( e ) {
-                e.preventDefault();
-                console.log( $.parseJSON( $( "#redux-object-json" ).html() ) );
-            }
-        );
-
-        if ( typeof jsonView === 'function' ) {
-            jsonView( '#redux-object-json', '#redux-object-browser' );
-        }
     };
 
     $.redux.required = function() {
@@ -626,11 +836,11 @@
         var value = $( '#' + redux.args.opt_name + '-' + id ).serializeForm();
 
         if ( value !== null && typeof value === 'object' && value.hasOwnProperty( redux.args.opt_name ) ) {
-            //console.log('object');
-            //console.log(value);
             value = value[redux.args.opt_name][id];
         }
-        //console.log(value);
+        if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-media' ) ) {
+            value = value.url;
+        }
         return value;
     };
 
@@ -640,7 +850,6 @@
         }
         var current = $( variable ),
             id = current.parents( '.redux-field:first' ).data( 'id' );
-
         if ( !redux.required.hasOwnProperty( id ) ) {
             return;
         }
@@ -648,7 +857,6 @@
         var container = current.parents( '.redux-field-container:first' ),
             is_hidden = container.parents( 'tr:first' ).hasClass( '.hide' ),
             hadSections = false;
-
         $.each(
             redux.required[id], function( child, dependents ) {
 
@@ -779,178 +987,229 @@
         var show = false,
             checkValue_array,
             checkValue = data.checkValue,
-            operation = data.operation;
+            operation = data.operation,
+            arr;
 
         switch ( operation ) {
             case '=':
             case 'equals':
+//                if ($.isPlainObject(parentValue)) {
+//                    var arr = Object.keys(parentValue).map(function (key) {return parentValue[key]});
+//                    parentValue = arr;
+//                }
+
                 if ( $.isArray( parentValue ) ) {
-                    $(parentValue[0]).each(function(idx, val){
-                        if ($.isArray(checkValue)) {
-                            $(checkValue).each (function(i, v){
-                                if (val == v) {
+                    $( parentValue[0] ).each(
+                        function( idx, val ) {
+                            if ( $.isArray( checkValue ) ) {
+                                $( checkValue ).each(
+                                    function( i, v ) {
+                                        if ( val == v ) {
+                                            show = true;
+                                            return true;
+                                        }
+                                    }
+                                );
+                            } else {
+                                if ( val == checkValue ) {
                                     show = true;
                                     return true;
                                 }
-                            });
-                        } else {
-                            if (val == checkValue) {
-                                show = true;
-                                return true;
                             }
                         }
-                    });
+                    );
                 } else {
-                    if ($.isArray(checkValue)) {
-                        $(checkValue).each (function(i, v){
-                            if (parentValue == v) {
-                                show = true;
+                    if ( $.isArray( checkValue ) ) {
+                        $( checkValue ).each(
+                            function( i, v ) {
+                                if ( parentValue == v ) {
+                                    show = true;
+                                }
                             }
-                        });
+                        );
                     } else {
-                        if (parentValue == checkValue) {
+                        if ( parentValue == checkValue ) {
                             show = true;
                         }
                     }
                 }
-            break;
-            
+                break;
+
             case '!=':
             case 'not':
                 if ( $.isArray( parentValue ) ) {
-                    $(parentValue[0]).each(function(idx, val){
-                        if ($.isArray(checkValue)) {
-                            $(checkValue).each (function(i, v){
-                                if (val != v) {
+                    $( parentValue ).each(
+                        function( idx, val ) {
+                            if ( $.isArray( checkValue ) ) {
+                                $( checkValue ).each(
+                                    function( i, v ) {
+                                        if ( val != v ) {
+                                            show = true;
+                                            return true;
+                                        }
+                                    }
+                                );
+                            } else {
+                                if ( val != checkValue ) {
                                     show = true;
                                     return true;
                                 }
-                            });
-                        } else {
-                            if (val != checkValue) {
-                                show = true;
-                                return true;
                             }
                         }
-                    });
+                    );
                 } else {
-                    if ($.isArray(checkValue)) {
-                        $(checkValue).each (function(i, v){
-                            if (parentValue != v) {
-                                show = true;
+                    if ( $.isArray( checkValue ) ) {
+                        $( checkValue ).each(
+                            function( i, v ) {
+                                if ( parentValue != v ) {
+                                    show = true;
+                                }
                             }
-                        });
+                        );
                     } else {
-                        if (parentValue != checkValue) {
+                        if ( parentValue != checkValue ) {
                             show = true;
                         }
                     }
                 }
-                
-//                //if value was array
-//                if ( $.isArray( checkValue ) ) {
-//                    if ( $.inArray( parentValue, checkValue ) == -1 ) {
-//                        show = true;
-//                    }
-//                } else {
-//                    if ( parentValue != checkValue ) {
-//                        show = true;
-//                    } else if ( $.isArray( parentValue ) ) {
-//                        if ( $.inArray( checkValue, parentValue ) == -1 ) {
-//                            show = true;
-//                        }
-//                    }
-//                }
-            break;
-            
+
+                //                //if value was array
+                //                if ( $.isArray( checkValue ) ) {
+                //                    if ( $.inArray( parentValue, checkValue ) == -1 ) {
+                //                        show = true;
+                //                    }
+                //                } else {
+                //                    if ( parentValue != checkValue ) {
+                //                        show = true;
+                //                    } else if ( $.isArray( parentValue ) ) {
+                //                        if ( $.inArray( checkValue, parentValue ) == -1 ) {
+                //                            show = true;
+                //                        }
+                //                    }
+                //                }
+                break;
+
             case '>':
             case 'greater':
             case 'is_larger':
                 if ( parseFloat( parentValue ) > parseFloat( checkValue ) ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case '>=':
             case 'greater_equal':
             case 'is_larger_equal':
                 if ( parseFloat( parentValue ) >= parseFloat( checkValue ) ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case '<':
             case 'less':
             case 'is_smaller':
                 if ( parseFloat( parentValue ) < parseFloat( checkValue ) ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case '<=':
             case 'less_equal':
             case 'is_smaller_equal':
                 if ( parseFloat( parentValue ) <= parseFloat( checkValue ) ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case 'contains':
-                if ( $.isArray( checkValue ) ) {
-                    $(checkValue).each (function(idx, val) {
-                        if ( parentValue.toString().indexOf( val ) !== -1 ) {
-                            show = true;
-                        }
+                if ($.isPlainObject(parentValue)) {
+                    arr = Object.keys(parentValue).map(function (key) {
+                        return parentValue[key];
                     });
+                    parentValue = arr;
+                }
+
+                if ($.isPlainObject(checkValue)) {
+                    arr = Object.keys(checkValue).map(function (key) {
+                        return checkValue[key];
+                    });
+                    checkValue = arr;
+                }
+
+                if ( $.isArray( checkValue ) ) {
+                    $( checkValue ).each(
+                        function( idx, val ) {
+                            //console.log (val);
+                            if ( parentValue.toString().indexOf( val ) !== -1 ) {
+                                show = true;
+                            }
+                        }
+                    );
                 } else {
                     if ( parentValue.toString().indexOf( checkValue ) !== -1 ) {
                         show = true;
                     }
                 }
-            break;
-            
+                break;
+
             case 'doesnt_contain':
             case 'not_contain':
-                if ( $.isArray( checkValue ) ) {
-                    $(checkValue).each (function(idx, val) {
-                        if ( parentValue.toString().indexOf( val ) === -1 ) {
-                            show = true;
-                        }
+                if ($.isPlainObject(parentValue)) {
+                    arr = Object.keys(parentValue).map(function (key) {
+                        return parentValue[key];
                     });
+                    parentValue = arr;
+                }
+
+                if ($.isPlainObject(checkValue)) {
+                    arr = Object.keys(checkValue).map(function (key) {
+                        return checkValue[key];
+                    });
+                    checkValue = arr;
+                }
+
+                if ( $.isArray( checkValue ) ) {
+                    $( checkValue ).each(
+                        function( idx, val ) {
+                            if ( parentValue.toString().indexOf( val ) === -1 ) {
+                                show = true;
+                            }
+                        }
+                    );
                 } else {
                     if ( parentValue.toString().indexOf( checkValue ) === -1 ) {
                         show = true;
                     }
                 }
-            break;
-            
+                break;
+
             case 'is_empty_or':
                 if ( parentValue === "" || parentValue == checkValue ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case 'not_empty_and':
                 if ( parentValue !== "" && parentValue != checkValue ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case 'is_empty':
             case 'empty':
             case '!isset':
                 if ( !parentValue || parentValue === "" || parentValue === null ) {
                     show = true;
                 }
-            break;
-            
+                break;
+
             case 'not_empty':
             case '!empty':
             case 'isset':
                 if ( parentValue && parentValue !== "" && parentValue !== null ) {
                     show = true;
                 }
-            break;
+                break;
         }
         return show;
 
@@ -989,25 +1248,21 @@
     };
 
     $.redux.stickyInfo = function() {
-        var stickyWidth = $( '#info_bar' ).width() - 4;
+        var stickyWidth = $( '.redux-main' ).innerWidth() - 20;
 
         if ( !$( '#info_bar' ).isOnScreen() && !$( '#redux-footer-sticky' ).isOnScreen() ) {
-            $( '#redux-sticky' ).addClass( 'sticky-save-warn' );
-
             $( '#redux-footer' ).css(
                 {
                     position: 'fixed',
                     bottom: '0',
-                    width: stickyWidth
+                    width: stickyWidth,
+                    right: 21
                 }
             );
-
             $( '#redux-footer' ).addClass( 'sticky-footer-fixed' );
             $( '.redux-save-warn' ).css( 'left', $( '#redux-sticky' ).offset().left );
             $( '#redux-sticky-padder' ).show();
         } else {
-            $( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
-
             $( '#redux-footer' ).css(
                 {
                     background: '#eee',
@@ -1016,9 +1271,13 @@
                     width: 'inherit'
                 }
             );
-
             $( '#redux-sticky-padder' ).hide();
             $( '#redux-footer' ).removeClass( 'sticky-footer-fixed' );
+        }
+        if ( !$( '#info_bar' ).isOnScreen() ) {
+            $( '#redux-sticky' ).addClass( 'sticky-save-warn' );
+        } else {
+            $( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
         }
     };
 
@@ -1140,10 +1399,17 @@
     };
     $.redux.resizeAds = function() {
         var el = $( '#redux-header' );
-        var rAds = el.find( '.rAds' );
+        var maxWidth;
+        if ( el.length ) {
+            maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        } else {
+            el = $( '#customize-info' );
+            maxWidth = el.width();
+        }
 
         var maxHeight = el.height();
-        var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
+        var rAds = el.find( '.rAds' );
+
         $( rAds ).find( 'video' ).each(
             function() {
                 $.redux.scaleToRatio( $( this ), maxHeight, maxWidth );
@@ -1170,8 +1436,15 @@
             if ( redux.rAds ) {
                 setTimeout(
                     function() {
-                        $( '#redux-header' ).append( '<div class="rAds"></div>' );
-                        var el = $( '#redux-header' );
+                        var el;
+                        if ( $( '#redux-header' ).length > 0 ) {
+                            $( '#redux-header' ).append( '<div class="rAds"></div>' );
+                            el = $( '#redux-header' );
+                        } else {
+                            $('#customize-theme-controls ul').first().prepend('<li id="redux_rAds" class="accordion-section rAdsContainer" style="position: relative;"><div class="rAds"></div></li>');
+                            el = $( '#redux_rAds' );
+                        }
+
                         el.css( 'position', 'relative' );
 
                         el.find( '.rAds' ).attr(
@@ -1241,25 +1514,27 @@ var confirmOnPageExit = function( e ) {
 };
 
 function redux_change( variable ) {
+
     jQuery( 'body' ).trigger( 'check_dependencies', variable );
 
     if ( variable.hasClass( 'compiler' ) ) {
         jQuery( '#redux-compiler-hook' ).val( 1 );
     }
 
-    window.onbeforeunload = confirmOnPageExit;
-
     var rContainer = jQuery( variable ).parents( '.redux-container:first' );
+    var parentID = jQuery( variable ).closest( '.redux-group-tab' ).attr( 'id' );
+    // Let's count down the errors now. Fancy.  ;)
+    var id = parentID.split( '_' );
+    id = id[0];
+
+    var th = rContainer.find( '.redux-group-tab-link-a[data-key="' + id + '"]' ).parents( '.redux-group-tab-link-li:first' );
+    var subParent = jQuery( '#' + parentID + '_li' ).parents( '.hasSubSections:first' );
 
     if ( jQuery( variable ).parents( 'fieldset.redux-field:first' ).hasClass( 'redux-field-error' ) ) {
         jQuery( variable ).parents( 'fieldset.redux-field:first' ).removeClass( 'redux-field-error' );
         jQuery( variable ).parent().find( '.redux-th-error' ).slideUp();
 
-        var parentID = jQuery( variable ).closest( '.redux-group-tab' ).attr( 'id' );
-
-
         var errorCount = (parseInt( rContainer.find( '.redux-field-errors span' ).text() ) - 1);
-        var warningCount = (parseInt( rContainer.find( '.redux-field-warnings span' ).text() ) - 1);
 
         if ( errorCount <= 0 ) {
             //console.log('HERE');
@@ -1270,11 +1545,6 @@ function redux_change( variable ) {
             jQuery( variable ).parents( '.redux-container:first' ).find( '.redux-field-errors' ).slideUp();
             jQuery( '#redux_metaboxes_errors' ).slideUp();
         } else {
-            // Let's count down the errors now. Fancy.  ;)
-            var id = parentID.split( '_' );
-            id = id[0];
-
-            var th = rContainer.find( '.redux-group-tab-link-a[data-key="' + id + '"]' ).parents( '.redux-group-tab-link-li:first' );
 
             var errorsLeft = (parseInt( th.find( '.redux-menu-error:first' ).text() ) - 1);
             if ( errorsLeft <= 0 ) {
@@ -1283,6 +1553,32 @@ function redux_change( variable ) {
                 th.find( '.redux-menu-error:first' ).text( errorsLeft );
             }
 
+            rContainer.find( '.redux-field-errors span' ).text( errorCount );
+        }
+
+        if ( subParent.length !== 0 ) {
+            if ( subParent.find( '.redux-menu-error' ).length === 0 ) {
+                subParent.find( '.hasError' ).removeClass( 'hasError' );
+            }
+        }
+    }
+    if ( jQuery( variable ).parents( 'fieldset.redux-field:first' ).hasClass( 'redux-field-warning' ) ) {
+        jQuery( variable ).parents( 'fieldset.redux-field:first' ).removeClass( 'redux-field-warning' );
+        jQuery( variable ).parent().find( '.redux-th-warning' ).slideUp();
+
+        var warningCount = (parseInt( rContainer.find( '.redux-field-warnings span' ).text() ) - 1);
+
+        if ( warningCount <= 0 ) {
+            //console.log('HERE');
+            jQuery( '#' + parentID + '_li .redux-menu-warning' ).fadeOut( 'fast' ).remove();
+            jQuery( '#' + parentID + '_li .redux-group-tab-link-a' ).removeClass( 'hasWarning' );
+
+            jQuery( '#' + parentID + '_li' ).parents( '.inside:first' ).find( '.redux-field-warnings' ).slideUp();
+            jQuery( variable ).parents( '.redux-container:first' ).find( '.redux-field-warnings' ).slideUp();
+            jQuery( '#redux_metaboxes_warnings' ).slideUp();
+        } else {
+            // Let's count down the warnings now. Fancy.  ;)
+
             var warningsLeft = (parseInt( th.find( '.redux-menu-warning:first' ).text() ) - 1);
             if ( warningsLeft <= 0 ) {
                 th.find( '.redux-menu-warning:first' ).fadeOut().remove();
@@ -1290,19 +1586,29 @@ function redux_change( variable ) {
                 th.find( '.redux-menu-warning:first' ).text( warningsLeft );
             }
 
-            rContainer.find( '.redux-field-errors span' ).text( errorCount );
             rContainer.find( '.redux-field-warning span' ).text( warningCount );
 
         }
-        var subParent = jQuery( '#' + parentID + '_li' ).parents( '.hasSubSections:first' );
         if ( subParent.length !== 0 ) {
-            if ( subParent.find( '.redux-menu-error' ).length === 0 ) {
-                subParent.find( '.hasError' ).removeClass( 'hasError' );
+            if ( subParent.find( '.redux-menu-warning' ).length === 0 ) {
+                subParent.find( '.hasWarning' ).removeClass( 'hasWarning' );
             }
         }
     }
+    // Don't show the changed value notice while save_notice is visible.
+    if ( rContainer.find( '.saved_notice:visible' ).length > 0 ) {
+        return;
+    }
+
+
+    if ( redux.customizer ) {
+        redux.customizer.save( variable, rContainer, parentID );
+        return;
+    }
+
     if ( !redux.args.disable_save_warn ) {
         rContainer.find( '.redux-save-warn' ).slideDown();
+        window.onbeforeunload = confirmOnPageExit;
     }
 }
 

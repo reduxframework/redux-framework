@@ -4,6 +4,7 @@
         margin-right: 25px;
         width: 200px;
         display: inline-block;
+        vertical-align: middle;
     }
 
     .redux-slider-input,
@@ -55,6 +56,26 @@
         .redux-slider-container {
             margin-top: 3px;
             width: 80%;
+        }
+    }
+}
+
+.wp-customizer {
+    .redux-container-slider {
+        .redux-slider-label {
+            float: left;
+            position: inherit;
+            width: 25%;
+            text-align: center;
+            margin-left:0;
+        }
+        .redux-slider-input, .redux-slider-select-one, .redux-slider-select-two {
+            width: 25% !important;
+        }
+        .redux-slider-container {
+            width: 70%;
+            margin-right: 0;
+            margin-left: 5%;
         }
     }
 }

@@ -36,6 +36,28 @@
             }
 
             /**
+             * Sets a cookie.
+             * Do nothing if unit testing.
+             *
+             * @since   3.5.4
+             * @access  public
+             * @return  void
+             *
+             * @param   string  $name     The cookie name.
+             * @param   string  $value    The cookie value.
+             * @param   integer $expire   Expiry time.
+             * @param   string  $path     The cookie path.
+             * @param   string  $domain   The cookie domain.
+             * @param   boolean $secure   HTTPS only.
+             * @param   boolean $httponly Only set cookie on HTTP calls.
+             */
+            public static function setCookie( $name, $value, $expire = 0, $path, $domain = null, $secure = false, $httponly = false ) {
+                if ( ! defined( 'WP_TESTS_DOMAIN' ) ) {
+                    setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
+                }
+            }
+
+            /**
              * Parse CSS from output/compiler array
              *
              * @since       3.2.8
@@ -88,30 +110,8 @@
 
                 // Initialize the Wordpress filesystem, no more using file_put_contents function
                 if ( empty( $wp_filesystem ) ) {
-                    require_once( ABSPATH . '/wp-admin/includes/file.php' );
+                    require_once ABSPATH . '/wp-admin/includes/file.php';
                     WP_Filesystem();
-                }
-            }
-
-            /**
-             * modRewriteCheck - Check for the installation of apache mod_rewrite
-             *
-             * @since       3.2.3
-             * @access      public
-             * @return      void
-             */
-            public static function modRewriteCheck() {
-                if ( function_exists( 'apache_get_modules' ) ) {
-                    if ( ! in_array( 'mod_rewrite', apache_get_modules() ) ) {
-                        self::$_parent->admin_notices[] = array(
-                            'type'    => 'error',
-                            'msg'     => '<strong><center>The Apache mod_rewrite module is not enabled on your server.</center></strong>
-                              <br/>
-                              Both Wordpress and Redux require the enabling of the Apache mod_rewrite module to function properly.  Please contact whomever provides support for your server and ask them to enable the mod_rewrite module',
-                            'id'      => 'mod_rewrite_notice_',
-                            'dismiss' => false
-                        );
-                    }
                 }
             }
 
@@ -126,12 +126,12 @@
                 // Get the raw framework.php from github
                 $gitpage = wp_remote_get(
                     'https://raw.github.com/ReduxFramework/redux-framework/master/ReduxCore/framework.php', array(
-                        'headers'   => array(
-                            'Accept-Encoding' => ''
-                        ),
-                        'sslverify' => true,
-                        'timeout'   => 300
-                    ) );
+                    'headers'   => array(
+                        'Accept-Encoding' => ''
+                    ),
+                    'sslverify' => true,
+                    'timeout'   => 300
+                ) );
 
                 // Is the response code the corect one?
                 if ( ! is_wp_error( $gitpage ) ) {
@@ -209,86 +209,39 @@
                 }
             }
 
-            /**
-             * adminNotices - Evaluates user dismiss option for displaying admin notices
-             *
-             * @since       3.2.0
-             * @access      public
-             * @return      void
-             */
-            public static function adminNotices() {
-                global $current_user, $pagenow;
+            public static function tru( $string, $opt_name ) {
+                $redux = ReduxFrameworkInstances::get_instance( $opt_name );
+                $check = get_user_option( 'r_tru_u_x', array() );
+                if ( ! empty( $check ) && ( isset( $check['expires'] ) < time() ) ) {
+                    $check = array();
+                }
 
-                // Check for an active admin notice array
-                if ( ! empty( self::$_parent->admin_notices ) ) {
+                if ( isset( $redux->args['dev_mode'] ) && $redux->args['dev_mode'] == true && ! ( isset( $redux->args['forced_dev_mode_off'] ) && $redux->args['forced_dev_mode_off'] == true ) ) {
+                        update_user_option( get_current_user_id(), 'r_tru_u_x', array(
+                            'id'      => '',
+                            'expires' => 60 * 60 * 24
+                        ) );
+                    return apply_filters( 'redux/' . $opt_name . '/aURL_filter', '<span data-id="1" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $string . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>' );
+                } else {
 
-                    // Enum admin notices
-                    foreach ( self::$_parent->admin_notices as $notice ) {
-                        if ( true == $notice['dismiss'] ) {
+                    if ( empty( $check ) ) {
+                        $check = wp_remote_get( 'http://look.reduxframework.com/status.php?p=' . ReduxFramework::$_is_plugin );
+                        $check = json_decode( wp_remote_retrieve_body( $check ), true );
 
-                            // Get user ID
-                            $userid = $current_user->ID;
-
-                            if ( ! get_user_meta( $userid, 'ignore_' . $notice['id'] ) ) {
-
-                                // Check if we are on admin.php.  If we are, we have
-                                // to get the current page slug and tab, so we can
-                                // feed it back to Wordpress.  Why>  admin.php cannot
-                                // be accessed without the page parameter.  We add the
-                                // tab to return the user to the last panel they were
-                                // on.
-                                $pageName = '';
-                                $curTab   = '';
-                                if ( $pagenow == 'admin.php' || $pagenow == 'themes.php' ) {
-
-                                    // Get the current page.  To avoid errors, we'll set
-                                    // the redux page slug if the GET is empty.
-                                    $pageName = empty( $_GET['page'] ) ? '&amp;page=' . self::$_parent->args['page_slug'] : '&amp;page=' . $_GET['page'];
-
-                                    // Ditto for the current tab.
-                                    $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . $_GET['tab'];
-                                }
-
-                                // Print the notice with the dismiss link
-                                echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
-                            }
-                        } else {
-
-                            // Standard notice
-                            echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
+                        if ( ! empty( $check ) && isset( $check['id'] ) ) {
+                            update_user_option( get_current_user_id(), 'r_tru_u_x', $check );
                         }
                     }
-
-                    // Clear the admin notice array
-                    self::$_parent->admin_notices = array();
-                }
-            }
-
-            /**
-             * dismissAdminNotice - Updates user meta to store dismiss notice preference
-             *
-             * @since       3.2.0
-             * @access      public
-             * @return      void
-             */
-            public static function dismissAdminNotice() {
-                global $current_user;
-
-                // Verify the dismiss and id parameters are present.
-                if ( isset( $_GET['dismiss'] ) && isset( $_GET['id'] ) ) {
-                    if ( 'true' == $_GET['dismiss'] || 'false' == $_GET['dismiss'] ) {
-
-                        // Get the user id
-                        $userid = $current_user->ID;
-
-                        // Get the notice id
-                        $id  = $_GET['id'];
-                        $val = $_GET['dismiss'];
-
-                        // Add the dismiss request to the user meta.
-                        update_user_meta( $userid, 'ignore_' . $id, $val );
+                    $check = isset( $check['id'] ) ? $check['id'] : $check;
+                    if ( ! empty( $check ) ) {
+                        return apply_filters( 'redux/' . $opt_name . '/aURL_filter', '<span data-id="' . $check . '" class="mgv1_1"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $string . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>' );
+                    } else {
+                        return "";
                     }
                 }
+
+
             }
+
         }
     }

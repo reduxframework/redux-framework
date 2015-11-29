@@ -133,7 +133,10 @@
     };
 
     redux.field_objects.sorter.scrolling = function( selector ) {
-
+        if (selector === undefined) {
+            return;
+        }
+        
         var scrollable = selector.find( ".redux-sorter" );
 
         if ( scroll == 'up' ) {

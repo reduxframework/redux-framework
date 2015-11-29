@@ -36,8 +36,8 @@
                 el.find( '.redux_spinner' ).each(
                     function() {
                         //slider init
-                        var spinner = $( this ).find('.spinner-input' ).data();
-                        spinner.id = $( this ).find('.spinner-input' ).attr('id');
+                        var spinner = $( this ).find( '.spinner-input' ).data();
+                        spinner.id = $( this ).find( '.spinner-input' ).attr( 'id' );
 
                         el.find( "#" + spinner.id ).spinner(
                             {
@@ -61,13 +61,13 @@
                             neg = true;
                         }
 
-                        el.find( "#" + spinner.id ).numeric(
-                            {
-                                allowMinus: neg,
-                                min: spinner.min,
-                                max: spinner.max
-                            }
-                        );
+                        //el.find( "#" + spinner.id ).numeric(
+                        //    {
+                        //        allowMinus: neg,
+                        //        min: spinner.min,
+                        //        max: spinner.max
+                        //    }
+                        //);
 
                     }
                 );
@@ -112,6 +112,7 @@
         selector.removeClass( 'spinnerInputChange' );
 
         var spinner = selector.data();
+        value = parseFloat( value );
 
         if ( value === "" || value === null ) {
             value = spinner.min;
@@ -122,8 +123,7 @@
         } else {
             value = Math.round( value / spinner.step ) * spinner.step;
         }
-
-        selector.val( value );
+        selector.val( value ).trigger( 'change' );
     };
 
 })( jQuery );

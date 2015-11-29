@@ -1,27 +1,25 @@
-First and foremost, PLEASE check to see if you are using the latest version of Redux by checking the repository.  If you plan on reporting an issue with any version BUT the latest version, we are going to ask you to upgrade to the latest code base anyway to see if your issue persists.  Please save us and yourself some time by taking this simple step first.  Thanks!
+Hello, and welcome to Redux Framework!
 
-When submitting a ticket, please make sure you include the following information,  It is critical, and required.  As Team Redux has not yet earned their certificates in mind reading, we need you to provide for us the following information.  :)
+These are our new guidelines for support.  Please read them thoroughly before submitting an issue on our issue tracker (or if you were directed her, modify your ticket with the required information).
 
-1. The version of Redux you are using.  Please do not say 'the latest version' as what you perceive as the latest and what might be the latest could easily be two different things.  At the bottom of the Redux options panel is a four digit version number.  Please include it.
+First, and most importantly, we need to know if you are a developer using Redux in their project, or if you are using a theme/plugin that uses Redux.  Redux is a tool for developers to include an options panel in their project.  Consequently, we do not offer support for folks who have purchased a theme or plugin that uses Redux.  The responsibility of support for themes and plugins falls upon it's author.  We realize that some authors have included support links for Redux in their projects, when they should not have.  We do apologize for that confusion and are taking steps to remedy this confusion.  If you have purchased a theme or plugin that utilizes Redux, please contact the author for support.  If the author is unavailable for support or has discontinued support, please refer to this article: [Support Defined](https://docs.reduxframework.com/core/support-defined/).
 
-2. The version of Wordpress you are running.
+If you are a developer, using Redux Framework in your project, PLEASE check to see if you are using the latest version of Redux by checking this repository.  If you plan to reporting an issue with any version BUT the latest version, we are going to ask you to upgrade to the latest code base anyway to see if your issue persists.  Please save yourself and us some time by taking this simple step first.  Thanks!
 
-3. Please indicate if you are using Redux in dev_mode.
+We designed our issue tracker to help identify and correct issues within Redux Framework.  If you believe you have discovered an issue, or something is not working as it should, then submitting an issue is appropriate.  However, if you are looking for a custom solution involving Redux, or require assistance with original code unrelated to the Redux core itself, then this type of support falls under Premium support.  We are not PHP/JavaScript tutors, or a version of Stack Overflow, or have the time and resources to debug your code.  For Premium support options, please visit this page: [Premium Support](https://reduxframework.com/extension/premium-support/).  Our cost is $100.00 per hour.  If you require a more tailored quote, please contact support@reduxframework.com.
 
-4. If you are having difficultly with a particular field, please include the config code for that entire field.  If the field is dependent on other fields in the section (for example, required arguments are used), then please include the entire section.
+We handle all support for Redux Framework via our issue tracker.  Email support is available only for those who have purchased Premium Support, or in instances where we have requested contact via EMail.
 
-5. If you are having difficulty with configuration, please specify if you are using a standalone theme, a child theme, a plugin, etc.
+For Redux Extensions:  All pre-sale and support for premium extensions need to be posted to the [Redux Extensions Issue Tracker] (https://github.com/reduxframework/redux-extensions).  Please do not post them to this issue tracker.
 
-6. Please indicate if you are using Redux as a plugin or embedded in your project.
+You MUST be using Redux in dev mode when submitting an issue to us.  If you are not, or have circumvented our dev mode protocol, you are on your own.  There could be information in your issue that requires dev move active. (Compressed Javascript, for example.  We are unable to diagnose issues with compressed Javascript and why dev mode needs to be enabled.)
 
-7. Please check your browser's output console.  If there are any javascript errors pertaining to redux, please list them, including the module/file they occurred in and the line number
+Because it is sometimes difficult to get all the necessary information for a support issue,we have designed the Support URL protocol, in which we are able to gather all the required data via one URL.  It will be necessary for you to post one in your issue.  Please refer to this article for instructions on generating a support URL: [Generating a Support URL] (https://docs.reduxframework.com/core/generating-a-support-hash/).  This is *required*.  We will not be able to offer support without one.  We appreciate the understanding.
 
-The follow only applies if Redux is not loading properly:
+If an error or notice appears on your screen, please cut and paste it into your issue.  PLEASE, do not say you 'got an error' without telling us what the error or notice is.
 
-8. If you are using Redux embedded, please specify the location in which Redux is installed, where you config is located, and the lines of code you are using to initialize Redux and your config.
+Sometimes, an issue may be tied to JavaScript.  To make this determination, you will need to check the JavaScript console.  To do this, ensure your web browser is the topmost window.  On your keyboard, press CTRL+SHIFT+I.  The JavaScript console will open.  If there are notices or errors there, please cut and paste them into your issue.  We would prefer a cut and paste, since it will include all pertinent information.  Also, Redux dev mode must be enabled so an accurate line number may be reported.
 
-The way in which we diagnose bugs or config difficulties is to attempt to recreate them on our end.  This is why we need the very specific information.  Once we are able to confirm the issue, we will either push an update, or assist you in correcting any mistakes in your config.
-
-What we do NOT do is debug your code.  We support the Redux code and the way in which the config is put together.  Any other issue pertaining to your project is your own, or we might be able to assist with premium support.
+It would also be hugely helpful to us if you are able to indicate any steps taken up until the issue occurred.  We may need to be able to recreate your issue on our end, and having this information would help with that.  Simply stating something 'doesn't work' isn't helpful, and tells us nothing.  PLEASE, be as specific as possible.
 
 - Team Redux

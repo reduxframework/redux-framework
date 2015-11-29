@@ -6,13 +6,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.ace_editor = redux.field_objects.ace_editor || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.ace_editor.init();
-        }
-    );
-
-
     redux.field_objects.ace_editor.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-ace_editor:visible' );

@@ -1,11 +1,11 @@
-#redux-container {
+.redux-container {
     .redux-action_bar {
         float: left;
     }
 }
 
-#redux-container #expand_options,
-#redux-sidebar,
+.redux-container #expand_options,
+.redux-sidebar,
 .cb-enable,
 .cb-disable,
 .cb-enable span,
@@ -14,7 +14,7 @@
     float: right;
 }
 
-#redux-main {
+.redux-main {
     border-left: 0px;
     margin-left: 0px;
     border-right: 1px solid #d8d8d8;

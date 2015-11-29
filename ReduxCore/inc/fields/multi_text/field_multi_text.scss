@@ -4,21 +4,24 @@
         padding: 0;
     }
 
-    .redux-multi-text-remove {
-        color: #F00;
-        padding: 2px 4px;
-        margin-left: 5px;
-        &:hover {
-            background: red;
-            color: #fff;
-            text-decoration: none;
-        }
-    }
-
     .redux-multi-text-add {
+        clear: both;
         margin: 5px 0;
     }
 
+    a.redux-multi-text-remove {
+        &.deletion {
+            color: #F00;
+            padding: 2px 4px;
+            margin-left: 5px;
+
+            &:hover {
+                background: red;
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    } 
 }
 
 @media screen and (max-width: 782px) {
@@ -30,6 +33,21 @@
         .redux-multi-text-remove {
             margin: 0;
             float: right;
+        }
+    }
+}
+
+.wp-customizer {
+    .redux-container-multi_text {
+        .button {
+            float: right;
+        }
+        .redux-multi-text-remove {
+            float: right;
+            margin-bottom: 5px;
+        }
+        ul.redux-multi-text input {
+            width: 100% !important;
         }
     }
 }

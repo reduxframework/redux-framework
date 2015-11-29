@@ -67,35 +67,36 @@
 
                 // If units field has a value but is not an acceptable value, unset the variable
                 if ( isset( $this->field['units'] ) && ! Redux_Helpers::array_in_array( $this->field['units'], array(
-                            '',
-                            false,
-                            '%',
-                            'in',
-                            'cm',
-                            'mm',
-                            'em',
-                            'ex',
-                            'pt',
-                            'pc',
-                            'px'
-                        ) )
+                        '',
+                        false,
+                        '%',
+                        'in',
+                        'cm',
+                        'mm',
+                        'em',
+                        'ex',
+                        'pt',
+                        'pc',
+                        'px',
+                        'rem'
+                    ) )
                 ) {
                     unset( $this->field['units'] );
                 }
 
                 //if there is a default unit value  but is not an accepted value, unset the variable
                 if ( isset( $this->value['units'] ) && ! Redux_Helpers::array_in_array( $this->value['units'], array(
-                            '',
-                            '%',
-                            'in',
-                            'cm',
-                            'mm',
-                            'em',
-                            'ex',
-                            'pt',
-                            'pc',
-                            'px'
-                        ) )
+                        '',
+                        '%',
+                        'in',
+                        'cm',
+                        'mm',
+                        'em',
+                        'ex',
+                        'pt',
+                        'pc',
+                        'px'
+                    ) )
                 ) {
                     unset( $this->value['units'] );
                 }
@@ -157,9 +158,9 @@
                         }
                     }
                     echo '<div class="field-dimensions-input input-prepend">';
-                    echo '<span class="add-on"><i class="el-icon-resize-horizontal icon-large"></i></span>';
-                    echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini' . $this->field['class'] . '" placeholder="' . __( 'Width', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-width" value="' . filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
-                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-width" name="' . $this->field['name'] . $this->field['name_suffix']. '[width]' . '" value="' . $this->value['width'] . '"></div>';
+                    echo '<span class="add-on"><i class="el el-resize-horizontal icon-large"></i></span>';
+                    echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini ' . $this->field['class'] . '" placeholder="' . __( 'Width', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-width" value="' . filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
+                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-width" name="' . $this->field['name'] . $this->field['name_suffix'] . '[width]' . '" value="' . $this->value['width'] . '"></div>';
                 }
 
                 /**
@@ -173,9 +174,9 @@
                         }
                     }
                     echo '<div class="field-dimensions-input input-prepend">';
-                    echo '<span class="add-on"><i class="el-icon-resize-vertical icon-large"></i></span>';
-                    echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini' . $this->field['class'] . '" placeholder="' . __( 'Height', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-height" value="' . filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
-                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . $this->field['name_suffix']. '[height]' . '" value="' . $this->value['height'] . '"></div>';
+                    echo '<span class="add-on"><i class="el el-resize-vertical icon-large"></i></span>';
+                    echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini ' . $this->field['class'] . '" placeholder="' . __( 'Height', 'redux-framework' ) . '" rel="' . $this->field['id'] . '-height" value="' . filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) . '">';
+                    echo '<input data-id="' . $this->field['id'] . '" type="hidden" id="' . $this->field['id'] . '-height" name="' . $this->field['name'] . $this->field['name_suffix'] . '[height]' . '" value="' . $this->value['height'] . '"></div>';
                 }
 
                 /**
@@ -186,7 +187,7 @@
                 // and the default units value will apply.
                 if ( isset( $this->field['units'] ) && $this->field['units'] !== false ) {
                     echo '<div class="select_wrapper dimensions-units" original-title="' . __( 'Units', 'redux-framework' ) . '">';
-                    echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . __( 'Units', 'redux-framework' ) . '" class="redux-dimensions redux-dimensions-units select' . $this->field['class'] . '" original-title="' . __( 'Units', 'redux-framework' ) . '" name="' . $this->field['name'] . $this->field['name_suffix']. '[units]' . '">';
+                    echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . __( 'Units', 'redux-framework' ) . '" class="redux-dimensions redux-dimensions-units select ' . $this->field['class'] . '" original-title="' . __( 'Units', 'redux-framework' ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[units]' . '">';
 
                     //  Extended units, show 'em all
                     if ( $this->field['units_extended'] ) {
@@ -218,6 +219,8 @@
              * @since ReduxFramework 1.0.0
              */
             function enqueue() {
+                wp_enqueue_style( 'select2-css' );
+
                 wp_enqueue_script(
                     'redux-field-dimensions-js',
                     ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions' . Redux_Functions::isMin() . '.js',
@@ -226,22 +229,15 @@
                     true
                 );
 
-                redux_enqueue_style(
-                    $this->parent,
-                    'redux-field-dimensions-css',
-                    ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
-                    ReduxFramework::$_dir . 'inc/fields/dimensions',
-                    array(),
-                    time(),
-                    false
-                );                
-                
-//                wp_enqueue_style(
-//                    'redux-field-dimensions-css',
-//                    ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
-//                    time(),
-//                    true
-//                );
+                if ( $this->parent->args['dev_mode'] ) {
+                    wp_enqueue_style(
+                        'redux-field-dimensions-css',
+                        ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css',
+                        array(),
+                        time(),
+                        'all'
+                    );
+                }
             }
 
             public function output() {
@@ -279,8 +275,8 @@
                 $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';
 
                 $cleanValue = array(
-                    $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_INT ) : '',
-                    $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_INT ) : '',
+                    $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
+                    $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
                 );
 
                 $style = "";
@@ -306,3 +302,5 @@
             } //function
         } //class
     }
+
+
