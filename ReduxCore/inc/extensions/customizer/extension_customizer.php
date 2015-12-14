@@ -85,6 +85,12 @@
                 if ( empty( $this->_extension_dir ) ) {
                     $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
                     $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '/', $this->_extension_dir ) );
+
+                    // Easier to read and less buggy way to find out correct url, but applicable
+                    // only if wp-content found. Othewise fall back to old URL detection code.
+                    if (preg_match("/wp-content\/(.*)/", $this->_extension_dir, $match)) {
+                        $this->_extension_url = site_url('/wp-content/'.$match[1]);
+                    }
                 }
 
                 self::get_post_values();
