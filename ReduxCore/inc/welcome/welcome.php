@@ -131,7 +131,7 @@
             if ( isset( $generate_hash ) && $generate_hash ) {
                 $data['check']      = $newHash;
                 $data['identifier'] = "";
-                $response           = wp_remote_post( 'http://' . 'support.redux.io/v1/', array(
+                $response           = wp_remote_post( 'http://support.redux.io/v1/', array(
                         'method'      => 'POST',
                         'timeout'     => 65,
                         'redirection' => 5,
@@ -465,7 +465,7 @@
                 return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url . '../CHANGELOG.md' ) ) ) ) );
             }
 
-            return '<script src="'.'http://'.'gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
+            return '<script src="'.'http://gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
 
         }
 
