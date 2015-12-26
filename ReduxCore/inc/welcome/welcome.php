@@ -101,7 +101,7 @@
         }
 
         public function change_wp_footer() {
-            echo __('If you like <strong>Redux</strong> please leave us a <a href="' . 'https://' . 'wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. A huge thank you from Redux in advance!','redux-framework');
+            echo __('If you like <strong>Redux</strong> please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. A huge thank you from Redux in advance!','redux-framework');
         }
 
         public function support_hash() {
