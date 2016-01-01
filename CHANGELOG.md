@@ -4,6 +4,7 @@
 * Fixed:    #2774 - border fields set to 0 would disappear after saving.
 * Modified: Post/page settings on the media gallery window hidden for gallery field, since they are not applicable to Redux.
 * Added:    #2728 - Filter for hints HTML.  'redux/hints/html'.  Thanks, @nyordanov.
+* Fixed:    #2716 - Enqueue jquery sortable when select field is set to sortable.  Thanks, @josh-rathke.
 
 ## 3.5.8.10
 * Fixed:    #2726 - Redux fixes for WordPress 4.4.
