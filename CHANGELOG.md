@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.8.12
+* Updated:  parsedown.php vendor code, to deal. with PHP 7.0 errors.
+
 ## 3.5.8.11
 * Fixed:    #2774 - border fields set to 0 would disappear after saving.
 * Modified: Post/page settings on the media gallery window hidden for gallery field, since they are not applicable to Redux.
