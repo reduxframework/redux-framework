@@ -37,7 +37,7 @@
                 }
 
                 if ( ! empty( $this->field['content'] ) && isset( $this->field['content'] ) ) {
-                    if ( isset( $this->field['markdown'] ) && $this->field['markdown'] == true ) {
+                    if ( isset( $this->field['markdown'] ) && $this->field['markdown'] == true && ! empty( $this->field['content'] ) ) {
                         require_once dirname( __FILE__ ) . "/parsedown.php";
                         $Parsedown = new Parsedown();
                         echo $Parsedown->text( $this->field['content'] );
