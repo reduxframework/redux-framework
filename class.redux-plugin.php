@@ -26,7 +26,7 @@
              * @since       3.0.0
              */
 
-            const VERSION = '3.5.8.12';
+            const VERSION = '3.5.8.13';
 
             /**
              * @access      protected
