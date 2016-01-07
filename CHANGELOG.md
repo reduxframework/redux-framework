@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.8.13
+* Modified:  Added tons of wp_remote_get handlings to stop bringing down site if Redux is down.
+* Modified:  When some items appear or not. Making devs lives easier.  ;)
+
 ## 3.5.8.12
 * Updated:  parsedown.php vendor code, to deal. with PHP 7.0 errors.
 

@@ -48,8 +48,8 @@
 
                 // get notice data from server
 
-                $data = wp_remote_get( $this->server_file, array( 'sslverify' => false ) );
-                if ( ! is_wp_error( $data ) && $data['response']['code'] == 200 ) {
+                $data = @wp_remote_get( $this->server_file, array( 'sslverify' => false ) );
+                if ( isset( $data ) && ! empty( $data ) && ! is_wp_error( $data ) && $data['response']['code'] == 200 ) {
                     $data = $data['body'];
                     // if some data exists
                     if ( $data != '' || ! empty( $data ) ) {

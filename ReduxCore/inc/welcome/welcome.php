@@ -87,21 +87,21 @@
                 } else if ( version_compare( $curVer, $saveVer, '>' ) ) {
                     $redirect = true; // Previous version
                 }
-                if ( $redirect && ! defined( 'WP_TESTS_DOMAIN' ) ) {
+                if ( $redirect && ! defined( 'WP_TESTS_DOMAIN' ) && ReduxFramework::$_as_plugin ) {
                     add_action( 'init', array( $this, 'do_redirect' ) );
                 }
             }
         }
 
         public function do_redirect() {
-            if ( !defined('WP_CLI')) {
+            if ( ! defined( 'WP_CLI' ) ) {
                 wp_redirect( admin_url( 'tools.php?page=redux-about' ) );
                 exit();
             }
         }
 
         public function change_wp_footer() {
-            echo __('If you like <strong>Redux</strong> please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. A huge thank you from Redux in advance!','redux-framework');
+            echo __( 'If you like <strong>Redux</strong> please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/redux-framework?filter=5#postform" target="_blank" class="redux-rating-link" data-rated="Thanks :)">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. A huge thank you from Redux in advance!', 'redux-framework' );
         }
 
         public function support_hash() {
@@ -271,12 +271,12 @@
 
             <script
                 id="redux-qtip-js"
-                src='<?php echo esc_url(ReduxFramework::$_url); ?>assets/js/vendor/qtip/jquery.qtip.js'>
+                src='<?php echo esc_url( ReduxFramework::$_url ); ?>assets/js/vendor/qtip/jquery.qtip.js'>
             </script>
 
             <script
                 id="redux-welcome-admin-js"
-                src='<?php echo esc_url(ReduxFramework::$_url) ?>inc/welcome/js/redux-welcome-admin.js'>
+                src='<?php echo esc_url( ReduxFramework::$_url ) ?>inc/welcome/js/redux-welcome-admin.js'>
             </script>
 
             <?php
@@ -284,20 +284,20 @@
                 ?>
                 <script
                     id="jquery-easing"
-                    src='<?php echo esc_url(ReduxFramework::$_url); ?>inc/welcome/js/jquery.easing.min.js'>
+                    src='<?php echo esc_url( ReduxFramework::$_url ); ?>inc/welcome/js/jquery.easing.min.js'>
                 </script>
             <?php endif; ?>
 
             <link rel='stylesheet' id='redux-qtip-css'
-                href='<?php echo esc_url(ReduxFramework::$_url); ?>assets/css/vendor/qtip/jquery.qtip.css'
+                href='<?php echo esc_url( ReduxFramework::$_url ); ?>assets/css/vendor/qtip/jquery.qtip.css'
                 type='text/css' media='all'/>
 
             <link rel='stylesheet' id='elusive-icons'
-                href='<?php echo esc_url(ReduxFramework::$_url); ?>assets/css/vendor/elusive-icons/elusive-icons.css'
+                href='<?php echo esc_url( ReduxFramework::$_url ); ?>assets/css/vendor/elusive-icons/elusive-icons.css'
                 type='text/css' media='all'/>
 
             <link rel='stylesheet' id='redux-welcome-css'
-                href='<?php echo esc_url(ReduxFramework::$_url); ?>inc/welcome/css/redux-welcome.css'
+                href='<?php echo esc_url( ReduxFramework::$_url ); ?>inc/welcome/css/redux-welcome.css'
                 type='text/css' media='all'/>
             <style type="text/css">
                 .redux-badge:before {
@@ -321,7 +321,7 @@
                     margin: <?php echo esc_js(is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'); ?>;
                 }
             </style>
-        <?php
+            <?php
         }
 
         /**
@@ -335,7 +335,7 @@
             $selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'redux-about';
             $nonce    = wp_create_nonce( 'redux-support-hash' );
             ?>
-            <input type="hidden" id="redux_support_nonce" value="<?php echo esc_attr($nonce); ?>"/>
+            <input type="hidden" id="redux_support_nonce" value="<?php echo esc_attr( $nonce ); ?>"/>
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab <?php echo $selected == 'redux-about' ? 'nav-tab-active' : ''; ?>"
                     href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-about' ), 'tools.php' ) ) ); ?>">
@@ -357,7 +357,7 @@
                     <?php esc_attr_e( 'Status', 'redux-framework' ); ?>
                 </a>
             </h2>
-        <?php
+            <?php
         }
 
         /**
@@ -461,11 +461,14 @@
             if ( file_exists( ReduxFramework::$_dir . 'inc/fields/raw/parsedown.php' ) ) {
                 require_once ReduxFramework::$_dir . 'inc/fields/raw/parsedown.php';
                 $Parsedown = new Parsedown();
-
-                return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', wp_remote_retrieve_body( wp_remote_get( ReduxFramework::$_url . '../CHANGELOG.md' ) ) ) ) );
+                $data = @wp_remote_get( ReduxFramework::$_url . '../CHANGELOG.md' );
+                if ( isset( $data ) && ! empty( $data ) ) {
+                    $data = @wp_remote_retrieve_body( $data );
+                    return $Parsedown->text( trim( str_replace( '# Redux Framework Changelog', '', $data ) ) );
+                }
             }
 
-            return '<script src="'.'http://gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
+            return '<script src="' . 'http://gist-it.appspot.com/https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md?slice=2:0&footer=0">// <![CDATA[// ]]></script>';
 
         }
 
@@ -490,7 +493,7 @@
                         }
                     }( document, 'script', 'twitter-wjs' );</script>
             </p>
-        <?php
+            <?php
         }
 
         /**
@@ -511,7 +514,7 @@
 
             foreach ( $contributors as $contributor ) {
                 $contributor_list .= '<li class="wp-person">';
-                $contributor_list .= sprintf( '<a href="%s" title="%s" target="_blank">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'redux-framework' ), esc_html($contributor->login) ) )
+                $contributor_list .= sprintf( '<a href="%s" title="%s" target="_blank">', esc_url( 'https://github.com/' . $contributor->login ), esc_html( sprintf( __( 'View %s', 'redux-framework' ), esc_html( $contributor->login ) ) )
                 );
                 $contributor_list .= sprintf( '<img src="%s" width="64" height="64" class="gravatar" alt="%s" />', esc_url( $contributor->avatar_url ), esc_html( $contributor->login ) );
                 $contributor_list .= '</a>';
