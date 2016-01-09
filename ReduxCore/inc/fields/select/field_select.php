@@ -154,7 +154,7 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
         public function enqueue() {
             wp_enqueue_style( 'select2-css' );
 
-            if ($this->field['sortable']) {
+            if (isset($this->field['sortable']) && $this->field['sortable']) {
                 wp_enqueue_script('jquery-ui-sortable');
             }
             
