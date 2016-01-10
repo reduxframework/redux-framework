@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.8.14';
+            public static $_version = '3.5.8.15';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -133,6 +133,10 @@
 
             // ::init()
 
+            public static function christine() {
+                return;
+            }
+            
             public $framework_url = 'http://www.reduxframework.com/';
             public static $instance = null;
             public $admin_notices = array();
@@ -408,13 +412,14 @@
 
                     if ( $this->args['dev_mode'] == true || Redux_Helpers::isLocalHost() == true ) {
                         require_once 'core/dashboard.php';
+                        new reduxDashboardWidget($this);
 
                         if ( ! isset ( $GLOBALS['redux_notice_check'] ) ) {
                             require_once 'core/newsflash.php';
 
                             $params = array(
                                 'dir_name'    => 'notice',
-                                'server_file' => 'http://reduxframework.com/' . 'wp-content/uploads/redux/redux_notice.json',
+                                'server_file' => 'http://reduxframework.com/wp-content/uploads/redux/redux_notice.json',
                                 'interval'    => 3,
                                 'cookie_id'   => 'redux_blast',
                             );

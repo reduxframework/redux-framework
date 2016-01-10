@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
+## 3.5.8.15
+* Fixed:    Wordpress 4.4.1 related issues.
+
 ## 3.5.8.14
-* Fixed     #2794 - User contributed code from #2716 did not contain isset and caused an index error.
+* Fixed:    #2794 - User contributed code from #2716 did not contain isset and caused an index error.
 
 ## 3.5.8.13
 * Modified:  Added tons of wp_remote_get handlings to stop bringing down site if Redux is down.

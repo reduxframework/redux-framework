@@ -239,9 +239,24 @@
                         return "";
                     }
                 }
-
-
             }
 
+            public static function dat($fname, $opt_name){
+                $name = apply_filters('redux/' . $opt_name . '/aDBW_filter', $fname);
+
+                return $name;
+            }
+            
+            public static function bub($fname, $opt_name){
+                $name = apply_filters('redux/' . $opt_name . '/aNF_filter', $fname);
+
+                return $name;
+            }
+            
+            public static function yo($fname, $opt_name){
+                $name = apply_filters('redux/' . $opt_name . '/aNFM_filter', $fname);
+
+                return $name;
+            }            
         }
     }
