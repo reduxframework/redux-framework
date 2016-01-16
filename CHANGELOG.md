@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.9
+* Notice:   New wp.org release
+
 ## 3.5.8.15
 * Fixed:    Wordpress 4.4.1 related issues.
 
