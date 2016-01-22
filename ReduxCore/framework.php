@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.9';
+            public static $_version = '3.5.9.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -133,10 +133,6 @@
 
             // ::init()
 
-            public static function christine() {
-                return;
-            }
-            
             public $framework_url = 'http://www.reduxframework.com/';
             public static $instance = null;
             public $admin_notices = array();
@@ -2815,10 +2811,14 @@
                     //    unset($process);
                     //}
                     $_POST['data'] = stripslashes( $_POST['data'] );
-                    parse_str( $_POST['data'], $values );
-                    //$values = $this->redux_parse_str( $_POST['data'] );
+                    
+                    // Old method of saving, in case we need to go back! - kp
+                    //parse_str( $_POST['data'], $values );
+                    
+                    // New method to avoid input_var nonesense.  Thanks @harunbasic
+                    $values = $this->redux_parse_str( $_POST['data'] );
+                    
                     $values = $values[ $redux->args['opt_name'] ];
-
 
                     if ( function_exists( 'get_magic_quotes_gpc' ) && get_magic_quotes_gpc() ) {
                         $values = array_map( 'stripslashes_deep', $values );
@@ -3937,12 +3937,14 @@
              */
             function redux_array_merge_recursive_distinct( array $array1, array $array2 ) {
                 $merged = $array1;
-
+                
                 foreach ( $array2 as $key => $value ) {
-                    if ( is_array( $value ) && isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) ) {
-                        $merged[ $key ] = $this->redux_array_merge_recursive_distinct( $merged[ $key ], $value );
+                    if ( is_array( $value ) && isset( $merged[$key] ) && is_array( $merged[$key] ) ) {
+                        $merged[$key] = $this->redux_array_merge_recursive_distinct( $merged[$key], $value );
+                    } else if ( is_numeric( $key ) && isset( $merged[$key] ) ) {
+                        $merged[] = $value;  
                     } else {
-                        $merged[ $key ] = $value;
+                        $merged[$key] = $value;
                     }
                 }
 
