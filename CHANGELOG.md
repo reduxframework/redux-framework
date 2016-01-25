@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.9.2
+* Fixed:    Leftover debug echo line in basic customizer extension.
+
 ## 3.5.9.1
 * Added:    EXPERIMENTAL:  New parsing code in an effort to break the 1000 max_input_var issue that crops up from time to time. Thanks, @harunbasic
 * Added:    EXPERIMENTAL:  "Bugfix" for extension_url in an effort to make it correct.  Thanks, @ottok
