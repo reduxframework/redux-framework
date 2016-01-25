@@ -88,8 +88,6 @@
                     
                     if (preg_match("/wp-content\/(.*)/", $this->_extension_dir, $match)) {
                         $this->_extension_url = site_url('/wp-content/'.$match[1]);
-                        
-                        echo $this->_extension_url;
                     }                    
                 }
 
