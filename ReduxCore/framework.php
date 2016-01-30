@@ -620,19 +620,21 @@
                  * @param string     The locale of the blog or from the 'locale' hook
                  * @param string     'redux-framework'  text domain
                  */
-                $locale = apply_filters( "redux/textdomain/{$this->args['opt_name']}", get_locale(), 'redux-framework' );
-
-                if ( strpos( $locale, '_' ) === false ) {
-                    if ( file_exists( self::$_dir . 'languages/' . strtolower( $locale ) . '_' . strtoupper( $locale ) . '.mo' ) ) {
-                        $locale = strtolower( $locale ) . '_' . strtoupper( $locale );
-                    }
-                }
-                if ( ReduxFramework::$_is_plugin ) {
-                    load_plugin_textdomain( 'redux-framework', '', self::$_dir . 'languages/' . $locale . '.mo' );
-                } else {
-                    load_textdomain( 'redux-framework', self::$_dir . 'languages/' . $locale . '.mo' );
-                }
-
+//                $locale = apply_filters( "redux/textdomain/{$this->args['opt_name']}", get_locale(), 'redux-framework' );
+//
+//                if ( strpos( $locale, '_' ) === false ) {
+//                    if ( file_exists( self::$_dir . 'languages/' . strtolower( $locale ) . '_' . strtoupper( $locale ) . '.mo' ) ) {
+//                        $locale = strtolower( $locale ) . '_' . strtoupper( $locale );
+//                    }
+//                }
+                
+                $basename = basename(__FILE__);
+                $basepath = plugin_basename(__FILE__);
+                $basepath = str_replace($basename, '', $basepath);
+                
+                $basepath = apply_filters( "redux/textdomain/basepath/{$this->args['opt_name']}", $basepath );
+                
+                load_plugin_textdomain( 'redux-framework', false, $basepath . 'languages');
             }
 // _internationalization()
 
