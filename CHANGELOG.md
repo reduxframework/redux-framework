@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.5.9.3
+* Fixed:    #2831 - Localization was complete broken.
+* Fixed:    #2832 - CSS conflicts with Rev Slider (Hey, Rev Slider guys, you don't have to load your CSS on every admin page.  Really?)
+
 ## 3.5.9.2
 * Fixed:    Leftover debug echo line in basic customizer extension.
 
