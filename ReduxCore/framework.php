@@ -3959,7 +3959,7 @@
                         foreach($this->args['admin_bar_links'] as $idx => $arr) {
                             if (is_array($arr) && !empty($arr)) {
                                 foreach($arr as $x => $y) {
-                                    if (strpos(strtolower($y), 'redux') >= 0) {
+                                    if (strpos(strtolower($y), 'redux') !== false) {
                                         $msg = __('<strong>Redux Framework Notice: </strong>There are references to the Redux Framework support site in your config\'s <code>admin_bar_links</code> argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework');
                                         $this->display_arg_change_notice('admin', $msg);
                                         $this->omit_admin_items = true;
@@ -3973,8 +3973,8 @@
                     if (!empty($this->args['share_icons'])) {
                         foreach($this->args['share_icons'] as $idx => $arr) {
                             if (is_array($arr) && !empty($arr)) {
-                                foreach($arr as $x => $y) {
-                                    if (strpos(strtolower($y), 'redux') >= 0) {
+                                foreach($arr as $x => $y) {                                      
+                                    if (strpos(strtolower($y), 'redux') !== false) {                                        
                                         $msg = __('<strong>Redux Framework Notice: </strong>There are references to the Redux Framework support site in your config\'s <code>share_icons</code> argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework');
                                         $this->display_arg_change_notice('share', $msg);
                                         $this->omit_share_icons = true;
