@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.9.4
+* Fixed:    #2857 - Required 'contains' not properly evaluating with checkboxes.
+
 ## 3.5.9.3
 * Fixed:    #2831 - Localization was complete broken.
 * Fixed:    #2832 - CSS conflicts with Rev Slider (Hey, Rev Slider guys, you don't have to load your CSS on every admin page.  Really?)
