@@ -88,7 +88,11 @@
                     
                     if (preg_match("/wp-content\/(.*)/", $this->_extension_dir, $match)) {
                         $this->_extension_url = site_url('/wp-content/'.$match[1]);
-                    }                    
+                    }
+                    
+                    if ( defined('WP_CONTENT_DIR') && defined('WP_CONTENT_URL') ) {
+                        $this->_extension_url = WP_CONTENT_URL .  str_replace( trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) ), '/', $this->_extension_dir );
+                    }
                 }
 
                 self::get_post_values();
