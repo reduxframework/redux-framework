@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.5.9.5
+* Modified:    #2855 - Extensions now have a helper class to help composer-based installs. Thanks @2ndkauboy!
+
 ## 3.5.9.4
 * Fixed:    #2857 - Required 'contains' not properly evaluating with checkboxes.
 
