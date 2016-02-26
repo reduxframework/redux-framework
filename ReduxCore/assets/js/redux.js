@@ -1072,22 +1072,7 @@
                         }
                     }
                 }
-
-                //                //if value was array
-                //                if ( $.isArray( checkValue ) ) {
-                //                    if ( $.inArray( parentValue, checkValue ) == -1 ) {
-                //                        show = true;
-                //                    }
-                //                } else {
-                //                    if ( parentValue != checkValue ) {
-                //                        show = true;
-                //                    } else if ( $.isArray( parentValue ) ) {
-                //                        if ( $.inArray( checkValue, parentValue ) == -1 ) {
-                //                            show = true;
-                //                        }
-                //                    }
-                //                }
-                break;
+            break;
 
             case '>':
             case 'greater':
@@ -1095,7 +1080,7 @@
                 if ( parseFloat( parentValue ) > parseFloat( checkValue ) ) {
                     show = true;
                 }
-                break;
+            break;
 
             case '>=':
             case 'greater_equal':
@@ -1103,7 +1088,7 @@
                 if ( parseFloat( parentValue ) >= parseFloat( checkValue ) ) {
                     show = true;
                 }
-                break;
+            break;
 
             case '<':
             case 'less':
@@ -1111,7 +1096,7 @@
                 if ( parseFloat( parentValue ) < parseFloat( checkValue ) ) {
                     show = true;
                 }
-                break;
+            break;
 
             case '<=':
             case 'less_equal':
@@ -1119,29 +1104,46 @@
                 if ( parseFloat( parentValue ) <= parseFloat( checkValue ) ) {
                     show = true;
                 }
-                break;
+            break;
 
             case 'contains':
                 if ($.isPlainObject(parentValue)) {
-                    arr = Object.keys(parentValue).map(function (key) {
-                        return parentValue[key];
+                    parentValue = Object.keys(parentValue).map(function (key) {
+                        return [key, parentValue[key]];
                     });
-                    parentValue = arr;
                 }
 
                 if ($.isPlainObject(checkValue)) {
-                    arr = Object.keys(checkValue).map(function (key) {
-                        return checkValue[key];
+                    checkValue = Object.keys(checkValue).map(function (key) {
+                        return [key, checkValue[key]];
                     });
-                    checkValue = arr;
                 }
 
                 if ( $.isArray( checkValue ) ) {
                     $( checkValue ).each(
                         function( idx, val ) {
-                            //console.log (val);
-                            if ( parentValue.toString().indexOf( val ) !== -1 ) {
-                                show = true;
+                            var breakMe = false;
+                            var toFind  = val[0];
+                            var findVal = val[1];
+                            
+                            $(parentValue).each(
+                                function (i, v) {
+                                    var toMatch = v[0];
+                                    var matchVal = v[1];
+                                    
+                                    if (toFind === toMatch) {
+                                        if (findVal == matchVal) {
+                                            show = true;
+                                            breakMe = true;
+                                            
+                                            return false;
+                                        }
+                                    }
+                                }
+                            );
+                    
+                            if (breakMe === true) {
+                                return false;
                             }
                         }
                     );
