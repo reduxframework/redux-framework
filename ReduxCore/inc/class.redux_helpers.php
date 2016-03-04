@@ -707,7 +707,7 @@
 
             public static function get_extension_url( $dir ) {
                 $ext_dir = Redux_Helpers::get_extension_dir( $dir );
-                $ext_dir = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $this->_extension_dir )
+                $ext_dir = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $this->_extension_dir );
                 if ( preg_match( "/wp-content\/(.*)/", $ext_dir, $match ) ) {
                     $ext_url = site_url( '/wp-content/' . $match[1] );
                 }
