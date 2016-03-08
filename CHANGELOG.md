@@ -1,5 +1,7 @@
 # Redux Framework Changelog
 
+## 3.5.9.7  #2880 - More issues with the extensions_url routine.
+
 ## 3.5.9.6  #2876 - Fixing more unvetted user contributions.
 
 ## 3.5.9.5
