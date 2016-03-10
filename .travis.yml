@@ -27,18 +27,18 @@ script:
 - grunt lintPHP
 after_success:
   # Install the Heroku gem (or the Heroku toolbelt)
-  - gem install heroku
+  # - gem install heroku
   # Add your Heroku git repo:
-  - git remote add heroku git@heroku.com:redux-premium.git
+  # - git remote add heroku git@heroku.com:redux-premium.git
   # Turn off warnings about SSH keys:
-  - echo "Host heroku.com" >> ~/.ssh/config
-  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
-  - echo "   CheckHostIP no" >> ~/.ssh/config
-  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # - echo "Host heroku.com" >> ~/.ssh/config
+  # - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  # - echo "   CheckHostIP no" >> ~/.ssh/config
+  # - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
   # Clear your current Heroku SSH keys:
-  - heroku keys:clear
+  # - heroku keys:clear
   # Add a new SSH key to Heroku
-  - yes | heroku keys:add
+  # - yes | heroku keys:add
 after_script:
   #- ./bin/commit-uncompressed-files.sh
   - ./bin/update-mirrors-docs.sh
