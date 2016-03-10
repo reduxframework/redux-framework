@@ -25,6 +25,9 @@
                     $this->timestamp .= '.' . time();
                 }
 
+                //Fix Metabox/Repater Editor functionality
+                add_filter ( 'print_styles', reduxCoreEnqueue::preserve_editorstyle());
+
                 $this->register_styles();
                 $this->register_scripts();
 
@@ -49,6 +52,19 @@
                  * action 'redux/page/{opt_name}/enqueue'
                  */
                 do_action( "redux/page/{$this->parent->args['opt_name']}/enqueue" );
+            }
+
+            //*****************************************************************
+            // Fix Metabox/Repater Editor functionality 
+            // https://github.com/reduxframework/redux-extensions/issues/240
+            //*****************************************************************
+            public function preserve_editorstyle(){
+                global $wp_styles;
+                if ( ! ( $wp_styles instanceof WP_Styles ) ) {
+                    $wp_styles = new WP_Styles();
+                }
+                $wp_styles->concat = 'dashicons,editor-buttons,';
+                return $wp_styles;
             }
 
             private function register_styles() {
