@@ -77,6 +77,10 @@
                 box-sizing: border-box;
             }
         }
+        
+        .select2-container--classic .select2-selection--single .select2-selection__clear {
+            font-size: 1.2em;
+        }
 
         .wp-picker-container {
             float: left;

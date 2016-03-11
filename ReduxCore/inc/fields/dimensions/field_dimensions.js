@@ -34,8 +34,9 @@
                     return;
                 }
                 var default_params = {
-                    width: 'resolve',
-                    triggerChange: true,
+                    width: '80px',
+                    //triggerChange: true,
+                    theme: 'classic',
                     allowClear: true
                 };
 

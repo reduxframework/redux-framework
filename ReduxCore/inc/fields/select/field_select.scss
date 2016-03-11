@@ -6,4 +6,14 @@
         width: 64px;
         margin-bottom: 0;
     }
+    .select2-search__field {
+        width: none !important;
+    }
+    
+    .select2-container--classic {
+        .select2-selection--multiple .select2-selection__choice__remove, 
+        .select2-selection--single .select2-selection__clear {
+        font-size: 1.2em;
+    }
+ 
 }

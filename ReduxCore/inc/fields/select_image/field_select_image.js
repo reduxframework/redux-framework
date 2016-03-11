@@ -35,8 +35,9 @@
                 }
                 var default_params = {
                     width: 'resolve',
-                    triggerChange: true,
-                    allowClear: true
+                    //triggerChange: true,
+                    allowClear: true,
+                    theme: "classic"
                 };
 
                 var select2_handle = el.find( '.redux-container-select_image' ).find( '.select2_params' );
@@ -49,6 +50,11 @@
                 }
 
                 el.find( 'select.redux-select-images' ).select2( default_params );
+                
+                var value = el.find( 'select.redux-select-images' ).val();
+                var preview = el.find( 'select.redux-select-images' ).parents( '.redux-field:first' ).find( '.redux-preview-image' );
+                
+                preview.attr( 'src', value );
 
                 el.find( '.redux-select-images' ).on(
                     'change', function() {

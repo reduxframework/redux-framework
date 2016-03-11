@@ -157,8 +157,9 @@
 
                 var default_params = {
                     width: 'resolve',
-                    triggerChange: true,
-                    allowClear: true
+                    //triggerChange: true,
+                    allowClear: true,
+                    theme: 'classic'
                 };
 
                 var select2_handle = el.find( '.select2_params' );
