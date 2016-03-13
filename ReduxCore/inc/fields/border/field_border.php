@@ -193,7 +193,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
 
                 echo '<input name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-color]" id="' . $this->field['id'] . '-border" class="redux-border-color redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value['color'] . '"  data-default-color="' . $default . '" data-id="' . $this->field['id'] . '" />';
             } else {
-                echo '<input type="hidden" id="' . $this->field['id'] . '[border-color]" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-color]" value="' . $this->value['style'] . '" data-id="' . $this->field['id'] . '">';
+                echo '<input type="hidden" id="' . $this->field['id'] . '[border-color]" name="' . $this->field['name'] . $this->field['name_suffix'] . '[border-color]" value="' . $this->value['color'] . '" data-id="' . $this->field['id'] . '">';
             }
         }
 
@@ -255,8 +255,8 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
             }
 
             $cleanValue = array(
-                'color' => ! empty( $this->value['border-color'] ) ? $this->value['border-color'] : 'inherit',
-                'style' => ! empty( $this->value['border-style'] ) ? $this->value['border-style'] : 'inherit'
+                'color' => ! empty( $this->value['border-color'] ) ? $this->value['border-color'] : '',
+                'style' => ! empty( $this->value['border-style'] ) ? $this->value['border-style'] : ''
             );
 
             $borderWidth = '';
@@ -300,6 +300,7 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
             } else {
                 if (!empty($cleanValue['top'])) {
                     $style .= 'border:' . $cleanValue['top'] . ' ' . $cleanValue['style'] . ' ' . $cleanValue['color'] . ';';
+                    echo $cleanValue['color'];
                 }
             }
 
