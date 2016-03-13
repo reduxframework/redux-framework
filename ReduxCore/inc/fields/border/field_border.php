@@ -300,7 +300,6 @@ if ( ! class_exists( 'ReduxFramework_border' ) ) {
             } else {
                 if (!empty($cleanValue['top'])) {
                     $style .= 'border:' . $cleanValue['top'] . ' ' . $cleanValue['style'] . ' ' . $cleanValue['color'] . ';';
-                    echo $cleanValue['color'];
                 }
             }
 
