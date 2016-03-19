@@ -10,12 +10,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.border = redux.field_objects.border || {};
 
-    $( document ).ready(
-        function() {
-
-        }
-    );
-
     redux.field_objects.border.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-border:visible' );
