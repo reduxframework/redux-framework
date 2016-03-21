@@ -159,8 +159,8 @@
                 $this->parent->get_options();
                 $backup_options                 = $this->parent->options;
                 $backup_options['redux-backup'] = '1';
-                if ( isset( $var['REDUX_imported'] ) ) {
-                    unset( $var['REDUX_imported'] );
+                if ( isset( $backup_options['REDUX_imported'] ) ) {
+                    unset( $backup_options['REDUX_imported'] );
                 }
 
                 // No need to escape this, as it's been properly escaped previously and through json_encode
