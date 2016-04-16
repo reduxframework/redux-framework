@@ -338,7 +338,20 @@
     };
     redux.customizer.save = function( $obj, $container ) {
         var $parent = $obj.hasClass( 'redux-field' ) ? $obj : $obj.parents( '.redux-field-container:first' );
+        redux.customizer.inputSave( $parent );
+    };
+    redux.customizer.inputSave = function( $parent ) {
+
+        if ( !$parent.hasClass( 'redux-field-container' ) ) {
+            $parent = $parent.parents( '[class^="redux-field-container"]' );
+        }
+
         var $id = $parent.parent().find( '.redux-customizer-input' ).data( 'id' );
+
+        if ( !$id ) {
+            $parent = $parent.parents( '.redux-container-repeater:first' );
+            var $id = $parent.parent().find( '.redux-customizer-input' ).data( 'id' );
+        }
 
         var $nData = $parent.serializeJSON();
 
@@ -347,13 +360,15 @@
                 $nData = $v;
             }
         );
-        //console.log( $nData );
+
+        var $key = $parent.parent().find( '.redux-customizer-input' ).data( 'key' );
+        if ( $nData[$key] ) {
+            $nData = $nData[$key];
+        }
 
         var $control = wp.customize.control( $id );
 
-        $control.active.sync();
-        //console.log($control);
-
         $control.setting.set( $nData );
-    };
+
+    }
 })( jQuery );

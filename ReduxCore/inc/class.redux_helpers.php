@@ -702,17 +702,12 @@
             }
 
             public static function get_extension_dir( $dir ) {
-                return trailingslashit( wp_normalize_path( dirname( __FILE__ ) ) );
+                return trailingslashit( wp_normalize_path( dirname( $dir ) ) );
             }
 
             public static function get_extension_url( $dir ) {
                 $ext_dir = Redux_Helpers::get_extension_dir( $dir );
-                $ext_dir = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $dir );
-                
-                $ext_url = '';
-                if ( preg_match( "/wp-content\/(.*)/", $ext_dir, $match ) ) {
-                    $ext_url = site_url( '/wp-content/' . $match[1] );
-                }
+                $ext_url = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $ext_dir );
 
                 return $ext_url;
             }

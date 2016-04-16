@@ -1,10 +1,18 @@
 # Redux Framework Changelog
 
-## 3.5.9.8  #2903 - False positive flag in border field JS.  Avast doesn't like empty document ready statements.
+## 3.6.0    
+* Fixed:     Fixed Customizer path issues
+* Added:     Added new default arguments filter by opt_name and type.  :)
+* Notice:    WP.org release
 
-## 3.5.9.7  #2880 - More issues with the extensions_url routine.
+## 3.5.9.8  
+* Fixed:    #2903 - False positive flag in border field JS.  Avast doesn't like empty document ready statements.
 
-## 3.5.9.6  #2876 - Fixing more unvetted user contributions.
+## 3.5.9.7  
+* Fixed:    #2880 - More issues with the extensions_url routine.
+
+## 3.5.9.6  
+* Fixed:    #2876 - Fixing more unvetted user contributions.
 
 ## 3.5.9.5
 * Modified: #2855 - Extensions now have a helper class to help composer-based installs. Thanks @2ndkauboy!

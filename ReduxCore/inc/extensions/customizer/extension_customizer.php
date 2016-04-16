@@ -1,6 +1,6 @@
 <?php
     // <input type="radio" value="1" name="_customize-radio-redux_demo[opt-radio]" data-customize-setting-link="redux_demo[opt-color-title]">
-//return;
+    //return;
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
      * @version     0.1.0
      */
 
-// Exit if accessed directly
+    // Exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
 
-// Don't duplicate me!
+    // Don't duplicate me!
     if ( ! class_exists( 'ReduxFramework_extension_customizer' ) ) {
 
         /**
@@ -60,7 +60,6 @@
                 $this->parent = $parent;
 
                 $this->upload_dir = ReduxFramework::$_upload_dir . 'advanced-customizer/';
-                $this->upload_url = ReduxFramework::$_upload_url . 'advanced-customizer/';
 
                 //add_action('wp_head', array( $this, '_enqueue_new' ));
                 if ( $parent->args['customizer'] == false ) {
@@ -82,8 +81,8 @@
                 }
 
                 if ( empty( $this->_extension_dir ) ) {
-                    $this->_extension_dir = Redux_Helpers::get_extension_dir( dirname( __FILE__ ) );
-                    $this->_extension_url = Redux_Helpers::get_extension_url( dirname( __FILE__ ) );
+                    $this->_extension_dir = Redux_Helpers::get_extension_dir( __FILE__ );
+                    $this->_extension_url = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $this->_extension_dir );
                 }
 
                 self::get_post_values();
