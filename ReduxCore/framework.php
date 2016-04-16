@@ -2619,10 +2619,6 @@
                      */
                     $plugin_options = apply_filters( "redux/validate/{$this->args['opt_name']}/defaults", $this->options_defaults );
 
-                    // Section reset
-                    //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time() + 3000, '/');
-
-
                     $this->transients['changed_values'] = array();
 
                     if ( empty ( $this->options ) ) {
