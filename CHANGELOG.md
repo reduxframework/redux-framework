@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.1
+* Fixed     Outdated redux.min.js on wp.org causing option panel failure.
+* Fixed:    #2936 - Border field outputting px with blank value.
+
 ## 3.6.0    
 * Fixed:     Fixed Customizer path issues
 * Added:     Added new default arguments filter by opt_name and type.  :)
