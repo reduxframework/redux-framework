@@ -353,7 +353,8 @@
             var $id = $parent.parent().find( '.redux-customizer-input' ).data( 'id' );
         }
 
-        var $nData = $parent.serializeJSON();
+        //var $nData = $parent.serializeJSON();
+        var $nData = $parent.find(':input').serializeJSON();
 
         $.each(
             $nData, function( $k, $v ) {

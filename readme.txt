@@ -126,9 +126,11 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 == Changelog ==
 
 ## 3.6.0.1
-* Fixed:    Minor bugs causing some users issues.
-
-## 3.6.0
+* Fixed     Outdated redux.min.js on wp.org causing option panel failure.
+* Fixed:    #2936 - Border field outputting px with blank value.
+* Fixed:    Resolved Theme-Check php shortcode false notice.
+* Modified: No more major redirect for the Redux page, only on first install with the plugin.
+* Fixed:    IE11 bug in the customizer. Thanks @anikitas!
 * Fixed:    Customizer path issues
 * Added:    New default arguments filter by opt_name and type.  :)
 * Fixed:    #2903 - False positive flag in border field JS.  Avast doesn't like empty document ready statements.

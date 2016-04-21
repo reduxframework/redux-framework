@@ -5,6 +5,7 @@
 * Fixed:    #2936 - Border field outputting px with blank value.
 * Fixed:    Resolved Theme-Check php shortcode false notice.
 * Modified: No more major redirect for the Redux page, only on first install with the plugin.
+* Fixed:    IE11 bug in the customizer. Thanks @anikitas!
 
 ## 3.6.0    
 * Fixed:     Fixed Customizer path issues
