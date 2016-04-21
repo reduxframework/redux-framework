@@ -125,6 +125,9 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
+## 3.6.0.1
+* Fixed:    Minor bugs causing some users issues.
+
 ## 3.6.0
 * Fixed:    Customizer path issues
 * Added:    New default arguments filter by opt_name and type.  :)
