@@ -3,6 +3,8 @@
 ## 3.6.0.1
 * Fixed     Outdated redux.min.js on wp.org causing option panel failure.
 * Fixed:    #2936 - Border field outputting px with blank value.
+* Fixed:    Resolved Theme-Check php shortcode false notice.
+* Modified: No more major redirect for the Redux page, only on first install with the plugin.
 
 ## 3.6.0    
 * Fixed:     Fixed Customizer path issues
