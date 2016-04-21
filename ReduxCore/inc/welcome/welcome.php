@@ -84,9 +84,11 @@
                 $redirect = false;
                 if ( empty( $saveVer ) ) {
                     $redirect = true; // First time
-                } else if ( version_compare( $curVer, $saveVer, '>' ) ) {
-                    $redirect = true; // Previous version
                 }
+                // Removing redirect except for the first time with the plugin installed. :)  Less annoying until we actually use this page.
+                //else if ( version_compare( $curVer, $saveVer, '>' ) ) {
+                //    $redirect = true; // Previous version
+                //}
                 if ( $redirect && ! defined( 'WP_TESTS_DOMAIN' ) && ReduxFramework::$_as_plugin ) {
                     add_action( 'init', array( $this, 'do_redirect' ) );
                 }
