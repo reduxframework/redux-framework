@@ -323,7 +323,7 @@
                     'php'       => $version,
                     'site'      => array(
                         'hash'      => $this->options['hash'],
-                        'version'   => get_bloginfo( 'version' ),
+                        'version'   => bloginfo( 'version' ),
                         'multisite' => is_multisite(),
                         'users'     => $user_query->get_total(),
                         'lang'      => get_locale(),
