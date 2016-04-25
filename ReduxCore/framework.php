@@ -2759,19 +2759,19 @@
                         'status' => __( 'Invalid security credential.  Please reload the page and try again.', 'redux-framework' ),
                         'action' => ''
                     ) );
-                    
+
                     die();
                 }
-                
+
                 if (!current_user_can ( $this->args['page_permissions'] )) {
                     echo json_encode( array(
                         'status' => __( 'Invalid user capability.  Please reload the page and try again.', 'redux-framework' ),
                         'action' => ''
                     ) );
-                    
+
                     die();
                 }
-                
+
                 $redux = ReduxFrameworkInstances::get_instance( $_POST['opt_name'] );
 
                 if ( ! empty ( $_POST['data'] ) && ! empty ( $redux->args['opt_name'] ) ) {
@@ -2833,7 +2833,7 @@
                                     }
                                 }
                             }
-                            
+
                             if ( $do_reload || ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) )) {
                                 echo json_encode( array( 'status' => 'success', 'action' => 'reload' ) );
                                 die ();
@@ -3044,10 +3044,14 @@
                                             }
                                         }
                                     } else {
-                                        if ( is_array( $plugin_options[ $field['id'] ] ) ) {
-                                            $pofi = $plugin_options[ $field['id'] ];
+                                        if ( isset( $plugin_options[ $field['id'] ] ) ) {
+                                            if ( is_array( $plugin_options[ $field['id'] ] ) ) {
+                                                $pofi = $plugin_options[ $field['id'] ];
+                                            } else {
+                                                $pofi = trim( $plugin_options[ $field['id'] ] );
+                                            }
                                         } else {
-                                            $pofi = trim( $plugin_options[ $field['id'] ] );
+                                            $pofi = null;
                                         }
 
                                         $validation                     = new $validate ( $this, $field, $pofi, $options[ $field['id'] ] );
