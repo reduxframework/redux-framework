@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.0.2
+* Fixed:    Customizer.min.js compression issue. Deploy.
+
 ## 3.6.0.1
 * Fixed     Outdated redux.min.js on wp.org causing option panel failure.
 * Fixed:    #2936 - Border field outputting px with blank value.
