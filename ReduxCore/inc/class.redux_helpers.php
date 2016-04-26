@@ -96,7 +96,12 @@
                 );
 
                 if ( ! function_exists( 'get_plugin_data' ) ) {
-                    require_once ABSPATH . 'wp-admin/includes/admin.php';
+                    if ( file_exists( ABSPATH . 'wp-admin/includes/plugin.php' ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                    }
+                    if ( file_exists( ABSPATH . 'wp-admin/includes/admin.php' ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/admin.php';
+                    }
                 }
 
                 $plugins = array();
@@ -143,7 +148,7 @@
                     'php'       => $version,
                     'site'      => array(
                         'hash'      => $hash,
-                        'version'   => get_bloginfo( 'version' ),
+                        'version'   => bloginfo( 'version' ),
                         'multisite' => is_multisite(),
                         'users'     => $user_query->get_total(),
                         'lang'      => get_locale(),
@@ -364,6 +369,15 @@
                 }
             }
 
+            public static function localize( $localize ) {
+                $redux            = ReduxFrameworkInstances::get_instance( $localize['args']['opt_name'] );
+                $nonce            = wp_create_nonce( 'redux-ads-nonce' );
+                $base             = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
+                $localize['rAds'] = Redux_Helpers::rURL_fix( $base, $redux->args['opt_name'] );
+
+                return $localize;
+            }
+
             public static function compileSystemStatus( $json_output = false, $remote_checks = false ) {
                 global $wpdb;
 
@@ -377,7 +391,7 @@
                 // Only is a file-write check
                 $sysinfo['redux_data_writeable'] = self::makeBoolStr( @$f( ReduxFramework::$_upload_dir . 'test-log.log', 'a' ) );
                 $sysinfo['wp_content_url']       = WP_CONTENT_URL;
-                $sysinfo['wp_ver']               = get_bloginfo( 'version' );
+                $sysinfo['wp_ver']               = bloginfo( 'version' );
                 $sysinfo['wp_multisite']         = is_multisite();
                 $sysinfo['permalink_structure']  = get_option( 'permalink_structure' ) ? get_option( 'permalink_structure' ) : 'Default';
                 $sysinfo['front_page_display']   = get_option( 'show_on_front' );
@@ -475,7 +489,7 @@
                         $sysinfo['wp_remote_post_error'] = $response->get_error_message();
                     }
 
-                    $response = wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' );
+                    $response = @wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' );
 
                     if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
                         $sysinfo['wp_remote_get']       = 'true';
@@ -566,7 +580,7 @@
             }
 
             private static function getReduxTemplates( $custom_template_path ) {
-                $filesystem = Redux_Filesystem::get_instance();
+                $filesystem         = Redux_Filesystem::get_instance();
                 $template_paths     = array( 'ReduxFramework' => ReduxFramework::$_dir . 'templates/panel' );
                 $scanned_files      = array();
                 $found_files        = array();
@@ -632,7 +646,7 @@
                 return $result;
             }
 
-            public static function get_template_version( $file  ) {
+            public static function get_template_version( $file ) {
                 $filesystem = Redux_Filesystem::get_instance();
                 // Avoid notices if file does not exist
                 if ( ! file_exists( $file ) ) {
@@ -687,8 +701,15 @@
                 return $ret;
             }
 
+            public static function get_extension_dir( $dir ) {
+                return trailingslashit( wp_normalize_path( dirname( $dir ) ) );
+            }
+
+            public static function get_extension_url( $dir ) {
+                $ext_dir = Redux_Helpers::get_extension_dir( $dir );
+                $ext_url = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $ext_dir );
+
+                return $ext_url;
+            }
         }
     }
-
-
-

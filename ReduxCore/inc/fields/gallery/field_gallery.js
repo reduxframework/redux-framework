@@ -40,6 +40,13 @@
                 el.on(
                     {
                         click: function( event ) {
+                            // hide gallery settings used for posts/pages
+                            wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend({
+                                template: function(view){
+                                  return;
+                                }
+                            });       
+                            
                             var current_gallery = $( this ).closest( 'fieldset' );
 
                             if ( event.currentTarget.id === 'clear-gallery' ) {

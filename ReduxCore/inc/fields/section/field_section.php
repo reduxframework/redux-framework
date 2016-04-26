@@ -75,27 +75,27 @@
                     $add_class = " hide";
                 }
 
-                echo '<input type="hidden" id="' . $this->field['id'] . '-marker"></td></tr></table>';
+                echo '<input type="hidden" id="' . esc_attr($this->field['id']) . '-marker"></td></tr></table>';
 
-                echo '<div id="section-' . $this->field['id'] . '" class="redux-section-field redux-field ' . $this->field['style'] . ' ' . $this->field['class'] . '">';
+                echo '<div id="section-' . esc_attr($this->field['id']) . '" class="redux-section-field redux-field ' . esc_attr($this->field['style']) . ' ' . esc_attr($this->field['class']) . ' ">';
 
                 if ( ! empty( $this->field['title'] ) ) {
-                    echo '<h3>' . $this->field['title'] . '</h3>';
+                    echo '<h3>' . esc_html($this->field['title']) . '</h3>';
                 }
 
                 if ( ! empty( $this->field['subtitle'] ) ) {
-                    echo '<div class="redux-section-desc">' . $this->field['subtitle'] . '</div>';
+                    echo '<div class="redux-section-desc">' . esc_html($this->field['subtitle']) . '</div>';
                 }
 
-                echo '</div><table id="section-table-' . $this->field['id'] . '" data-id="' . $this->field['id'] . '" class="form-table form-table-section no-border' . $add_class . '"><tbody><tr><th></th><td id="' . $guid . '">';
+                echo '</div><table id="section-table-' . esc_attr($this->field['id']) . '" data-id="' . esc_attr($this->field['id']) . '" class="form-table form-table-section no-border' . esc_attr($add_class) . '"><tbody><tr><th></th><td id="' . esc_attr($guid) . '">';
 
                 // delete the tr afterwards
                 ?>
                 <script type="text/javascript">
                     jQuery( document ).ready(
                         function() {
-                            jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( 'tr:first' ).css( {display: 'none'} ).prev('tr' ).css('border-bottom','none');;
-                            var group = jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( '.redux-group-tab:first' );
+                            jQuery( '#<?php echo esc_js($this->field['id']); ?>-marker' ).parents( 'tr:first' ).css( {display: 'none'} ).prev('tr' ).css('border-bottom','none');;
+                            var group = jQuery( '#<?php echo esc_js($this->field['id']); ?>-marker' ).parents( '.redux-group-tab:first' );
                             if ( !group.hasClass( 'sectionsChecked' ) ) {
                                 group.addClass( 'sectionsChecked' );
                                 var test = group.find( '.redux-section-indent-start h3' );

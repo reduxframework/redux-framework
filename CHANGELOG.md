@@ -1,5 +1,126 @@
 # Redux Framework Changelog
 
+## 3.6.0.1
+* Fixed     Outdated redux.min.js on wp.org causing option panel failure.
+* Fixed:    #2936 - Border field outputting px with blank value.
+* Fixed:    Resolved Theme-Check php shortcode false notice.
+* Modified: No more major redirect for the Redux page, only on first install with the plugin.
+* Fixed:    IE11 bug in the customizer. Thanks @anikitas!
+
+## 3.6.0    
+* Fixed:     Fixed Customizer path issues
+* Added:     Added new default arguments filter by opt_name and type.  :)
+* Notice:    WP.org release
+
+## 3.5.9.8  
+* Fixed:    #2903 - False positive flag in border field JS.  Avast doesn't like empty document ready statements.
+
+## 3.5.9.7  
+* Fixed:    #2880 - More issues with the extensions_url routine.
+
+## 3.5.9.6  
+* Fixed:    #2876 - Fixing more unvetted user contributions.
+
+## 3.5.9.5
+* Modified: #2855 - Extensions now have a helper class to help composer-based installs. Thanks @2ndkauboy!
+
+## 3.5.9.4
+* Fixed:    #2857 - Required 'contains' not properly evaluating with checkboxes.
+
+## 3.5.9.3
+* Fixed:    #2831 - Localization was complete broken.
+* Fixed:    #2832 - CSS conflicts with Rev Slider (Hey, Rev Slider guys, you don't have to load your CSS on every admin page.  Really?)
+
+## 3.5.9.2
+* Fixed:    Leftover debug echo line in basic customizer extension.
+
+## 3.5.9.1
+* Added:    EXPERIMENTAL:  New parsing code in an effort to break the 1000 max_input_var issue that crops up from time to time. Thanks, @harunbasic
+* Added:    EXPERIMENTAL:  "Bugfix" for extension_url in an effort to make it correct.  Thanks, @ottok
+
+## 3.5.9
+* Notice:   New wp.org release
+
+## 3.5.8.15
+* Fixed:    Wordpress 4.4.1 related issues.
+
+## 3.5.8.14
+* Fixed:    #2794 - User contributed code from #2716 did not contain isset and caused an index error.
+
+## 3.5.8.13
+* Modified:  Added tons of wp_remote_get handlings to stop bringing down site if Redux is down.
+* Modified:  When some items appear or not. Making devs lives easier.  ;)
+
+## 3.5.8.12
+* Updated:  parsedown.php vendor code, to deal. with PHP 7.0 errors.
+
+## 3.5.8.11
+* Fixed:    #2774 - border fields set to 0 would disappear after saving.
+* Modified: Post/page settings on the media gallery window hidden for gallery field, since they are not applicable to Redux.
+* Added:    #2728 - Filter for hints HTML.  'redux/hints/html'.  Thanks, @nyordanov.
+* Fixed:    #2716 - Enqueue jquery sortable when select field is set to sortable.  Thanks, @josh-rathke.
+
+## 3.5.8.10
+* Fixed:    #2726 - Redux fixes for WordPress 4.4.
+* Fixed:    #2713 - Alerts wouldn't disappear.
+
+## 3.5.8.9
+* Fixed:    #2726 - WP 4.4 breaking template.php include, because the core WP guys thought it would be hilarious to break everyone else's stuff.
+
+## 3.5.8.8
+* Fixed:    Specifying 'user' in a field's data argument would produce WordPress depreciation errors.
+
+## 3.5.8.7
+* Fixed:    Reflective XSS security fix.  Thanks to Kacper Szurek for the information.
+
+## 3.5.8.6
+* Modified: #2685 - Rejoined http strings to prevent errors in theme check.  Trade off, INFO notices will appear.  @Otto says this is ok.
+
+## 3.5.8.5
+* Fixed:    #2684 - Sorter not displaying (or saving) WordPress data when using the data argument.
+
+## 3.5.8.4
+* Added:    #2673 - WP_CLI check before welcome page redirect.
+* Fixed:    #2677 - tinymce javascript errors when wp editor is disabled.
+
+## 3.5.8.3
+* Modified: While in dev_mode, notices will appear if Redux sample data in share_icons and admin_bar_links arguments is not changed.
+            This became necessary because devs are not changing this data and theme ends users are coming to us for theme support.
+* Modified: Redux links to be // instead of http:// or https:// to ensure portability for secure sites.
+
+## 3.5.8.2  
+* Fixed:    #2665 - For those who must have empty dirs in the extensions dir.  No more errors.
+* Added:    #2660 - Added 'user'/'users' data type to wordpress data arg.  Thanks @golchha21.
+
+## 3.5.8.1
+* Fixed:    #2652 - load_plugin_textdomain using depreciated argument.
+
+## 3.5.8
+* Fixed:    Customizer preview callback working again.
+
+## 3.5.7.12
+* Fixed:    last_tab argument not working.
+
+## 3.5.7.11
+* Fixed:    #2637 - color picker clear.
+* Fixed:    #2633.
+
+## 3.5.7.10
+* Fixed:    #2624 - Border field saving/output 0px when no default set.  Now accepts no default and outputs no CSS for blank values.
+* Fixed:    color_rgba no long outputs CSS with empty color values.
+
+## 3.5.7.9
+* Fixed:    #2612 - pseudo classes not appending to multiple selectors in link_color output.
+
+## 3.5.7.8  
+* Modified: The mass data escaping of Redux Core output.  Part I.
+
+## 3.5.7.7
+* Fixed:    #2609 - Section not folding correctly with class argument specified.
+
+## 3.5.7.6
+* Fixed:    #2607 - button_set required scalar check for array returned by terms in the data arg.  Thanks @Enchiridion.
+
 ## 3.5.7.5
 * Fixed:    Fixing more inconsistencies with wp_filesystem dirlist.  How about some proper documentation, Otto?
 

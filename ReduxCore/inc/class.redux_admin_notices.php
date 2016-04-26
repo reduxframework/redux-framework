@@ -53,7 +53,7 @@
 
                         $add_style = '';
                         if ( strpos( $notice['type'], 'redux-message' ) != false ) {
-                            $add_style = 'style="border-left: 4px solid ' . $notice['color'] . '!important;"';
+                            $add_style = 'style="border-left: 4px solid ' . esc_attr( $notice['color'] ) . '!important;"';
                         }
 
                         if ( true == $notice['dismiss'] ) {
@@ -78,36 +78,36 @@
                                     $pageName = empty( $_GET['page'] ) ? '&amp;page=' . self::$_parent->args['page_slug'] : '&amp;page=' . $_GET['page'];
 
                                     // Ditto for the current tab.
-                                    $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . $_GET['tab'];
+                                    $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . esc_attr( $_GET['tab'] );
                                 }
 
                                 global $wp_version;
                                 // Print the notice with the dismiss link
                                 if ( version_compare( $wp_version, '4.2', '>' ) ) {
                                     $output    = "";
-                                    $css_id    = $notice['id'] . $pageName . $curTab;
-                                    $css_class = $notice['type'] . 'redux-notice notice is-dismissible redux-notice';
+                                    $css_id    = esc_attr( $notice['id'] ) . $pageName . $curTab;
+                                    $css_class = esc_attr( $notice['type'] ) . ' redux-notice notice is-dismissible redux-notice';
                                     $output .= "<div {$add_style} id='$css_id' class='$css_class'> \n";
-                                    $nonce = wp_create_nonce( $notice['id'] . $pageName . $curTab . 'nonce' );
-                                    $output .= "<input type='hidden' class='dismiss_data' id='" . $notice['id'] . $pageName . $curTab . "' value='{$nonce}'> \n";
-                                    $output .= "<p>{$notice['msg']}</p>";
+                                    $nonce = wp_create_nonce( $notice['id'] . $userid . 'nonce' );
+                                    $output .= "<input type='hidden' class='dismiss_data' id='" . esc_attr( $notice['id'] ) . $pageName . $curTab . "' value='{$nonce}'> \n";
+                                    $output .= '<p>' . wp_kses_post( $notice['msg'] ) . '</p>';
                                     $output .= "</div> \n";
                                     echo $output;
                                 } else {
-                                    echo '<div ' . $add_style . ' class="' . $notice['type'] . ' notice is-dismissable"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
+                                    echo '<div ' . $add_style . ' class="' . esc_attr( $notice['type'] ) . ' notice is-dismissable"><p>' . wp_kses_post( $notice['msg'] ) . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . esc_attr( $notice['id'] ) . $pageName . $curTab . '">' . esc_html__( 'Dismiss', 'redux-framework' ) . '</a>.</p></div>';
                                 }
                             }
                         } else {
                             // Standard notice
-                            echo '<div ' . $add_style . ' class="' . $notice['type'] . ' notice"><p>' . $notice['msg'] . '</a>.</p></div>';
+                            echo '<div ' . $add_style . ' class="' . esc_attr( $notice['type'] ) . ' notice"><p>' . wp_kses_post( $notice['msg'] ) . '</a>.</p></div>';
                         }
                         ?>
                         <script>
                             jQuery( document ).ready(
                                 function( $ ) {
-                                    $( '.redux-notice.is-dismissible' ).on(
-                                        'click', '.notice-dismiss', function( event ) {
-                                            var $data = $( this ).parent( '.redux-notice:first' ).find( '.dismiss_data' );
+                                    $( 'body' ).on(
+                                        'click', '.redux-notice.is-dismissible .notice-dismiss', function( event ) {
+                                            var $data = $( this ).parent().find( '.dismiss_data' );
                                             $.post(
                                                 ajaxurl, {
                                                     action: 'redux_hide_admin_notice',
@@ -169,15 +169,16 @@
              */
             public static function dismissAdminNoticeAJAX() {
                 global $current_user;
-                if ( ! wp_verify_nonce( $_POST['nonce'], $_POST['id'] . 'nonce' ) ) {
-                    die(0);
+
+                // Get the notice id
+                $id = explode( '&', $_POST['id'] );
+                $id = $id[0];
+                // Get the user id
+                $userid = $current_user->ID;
+
+                if ( ! wp_verify_nonce( $_POST['nonce'], $id . $userid . 'nonce' ) ) {
+                    die( 0 );
                 } else {
-                    // Get the user id
-                    $userid = $current_user->ID;
-
-                    // Get the notice id
-                    $id = $_POST['id'];
-
                     // Add the dismiss request to the user meta.
                     update_user_meta( $userid, 'ignore_' . $id, true );
                 }

@@ -256,7 +256,7 @@
                         $section['id'] = time();
                     } else {
                         if ( isset( $section['title'] ) ) {
-                            $section['id'] = strtolower( sanitize_html_class( $section['title'] ) );
+                            $section['id'] = strtolower( sanitize_title( $section['title'] ) );
                         } else {
                             $section['id'] = time();
                         }

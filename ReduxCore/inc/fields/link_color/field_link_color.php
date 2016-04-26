@@ -17,6 +17,7 @@
  * @author      Luciano "WebCaos" Ubertini
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
+ * @author      Kevin Provance (kprovance) - fixing everyone else's bugs.
  * @version     3.0.0
  */
 
@@ -161,7 +162,19 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
                             $styleString .= implode( ",", $this->field['output'] ) . "{" . $value . '}';
                         } else {
                             if ( count( $this->field['output'] ) == 1 ) {
-                                $styleString .= $this->field['output'][0] . ":" . $key . "{" . $value . '}';
+                                if (strpos($this->field['output'][0], ',') != false) {
+                                    $selector_arr = explode(',',$this->field['output'][0]);
+                                    $sel_list = '';
+                                    
+                                    foreach($selector_arr as $idx => $selector) {
+                                        $sel_list .= $selector . ":" . $key . ",";
+                                    }
+                                    
+                                    $sel_list = rtrim($sel_list,',');
+                                    $styleString .= $sel_list . "{" . $value . '}';
+                                } else {
+                                    $styleString .= $this->field['output'][0] . ":" . $key . "{" . $value . '}';
+                                }
                             } else {
                                 $blah = '';
                                 foreach($this->field['output'] as $k => $sel) {

@@ -9,9 +9,9 @@
     class Redux_Customizer_Control_color extends Redux_Customizer_Control {
         public $type = "redux-color";
     }
-    class Redux_Customizer_Control_raw extends Redux_Customizer_Control {
-        public $type = "redux-raw";
-    }
+    //class Redux_Customizer_Control_raw extends Redux_Customizer_Control {
+    //    public $type = "redux-raw";
+    //}
     class Redux_Customizer_Control_media extends Redux_Customizer_Control {
         public $type = "redux-media";
     }

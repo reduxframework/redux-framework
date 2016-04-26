@@ -154,6 +154,10 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
         public function enqueue() {
             wp_enqueue_style( 'select2-css' );
 
+            if (isset($this->field['sortable']) && $this->field['sortable']) {
+                wp_enqueue_script('jquery-ui-sortable');
+            }
+            
             wp_enqueue_script(
                 'redux-field-select-js',
                 ReduxFramework::$_url . 'inc/fields/select/field_select' . Redux_Functions::isMin() . '.js',

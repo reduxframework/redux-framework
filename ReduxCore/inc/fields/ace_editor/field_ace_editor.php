@@ -76,18 +76,12 @@
 
                 ?>
                 <div class="ace-wrapper">
-                    <input type="hidden" class="localize_data"
-                        value="<?php echo htmlspecialchars( json_encode( $params ) ); ?>"/>
-                <textarea name="<?php echo $this->field['name'] . $this->field['name_suffix']; ?>"
-                    id="<?php echo $this->field['id']; ?>-textarea"
-                    class="ace-editor hide <?php echo $this->field['class']; ?>"
-                    data-editor="<?php echo $this->field['id']; ?>-editor"
-                    data-mode="<?php echo $this->field['mode']; ?>"
-                    data-theme="<?php echo $this->field['theme']; ?>">
-                    <?php echo $this->value; ?>
-                </textarea>
-                <pre id="<?php echo $this->field['id']; ?>-editor"
-                    class="ace-editor-area"><?php echo htmlspecialchars( $this->value ); ?></pre>
+                    <input type="hidden" 
+                        class="localize_data"
+                        value="<?php echo htmlspecialchars( json_encode( $params ) ); ?>"
+                    />
+                    <textarea name="<?php echo esc_attr($this->field['name'] . $this->field['name_suffix']); ?>" id="<?php echo esc_attr($this->field['id']); ?>-textarea" class="ace-editor hide <?php echo esc_attr($this->field['class']); ?>" data-editor="<?php echo esc_attr($this->field['id']); ?>-editor" data-mode="<?php echo esc_attr($this->field['mode']); ?>" data-theme="<?php echo esc_attr($this->field['theme']); ?>"><?php echo esc_textarea($this->value); ?></textarea>
+                    <pre id="<?php echo esc_attr($this->field['id']); ?>-editor" class="ace-editor-area"><?php echo htmlspecialchars( $this->value ); ?></pre>
                 </div>
             <?php
             }
@@ -101,7 +95,6 @@
              * @return      void
              */
             public function enqueue() {
-
                 if ( $this->parent->args['dev_mode'] ) {
                     if ( ! wp_style_is( 'redux-field-ace-editor-css' ) ) {
                         wp_enqueue_style(

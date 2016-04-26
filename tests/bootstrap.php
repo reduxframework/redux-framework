@@ -1,5 +1,7 @@
 <?php
 
+return;
+
 echo "Welcome to the TIVWP Test Suite" . PHP_EOL;
 echo "Version: 1.0" . PHP_EOL . PHP_EOL;
 

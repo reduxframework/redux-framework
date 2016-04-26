@@ -32,6 +32,8 @@
 
                 $this->enqueue_fields();
 
+                add_filter("redux/{$this->parent->args['opt_name']}/localize", array('Redux_Helpers', 'localize'));
+
                 $this->set_localized_data();
 
                 /**
@@ -401,6 +403,10 @@
             }
 
             private function set_localized_data() {
+                if (!empty($this->parent->args['last_tab'])) {
+                    $this->parent->localize_data['last_tab']       = $this->parent->args['last_tab'];
+                }
+                
                 $this->parent->localize_data['required']       = $this->parent->required;
                 $this->parent->localize_data['fonts']          = $this->parent->fonts;
                 $this->parent->localize_data['required_child'] = $this->parent->required_child;
@@ -432,11 +438,7 @@
                     }
                 }
 
-                if ( isset( $this->parent->args['dev_mode'] ) && $this->parent->args['dev_mode'] == true || $this->parent->args['dev_mode'] == false && isset($this->parent->args['forced_dev_mode_off']) && $this->parent->args['forced_dev_mode_off'] == true ) {
-                    $nonce                               = wp_create_nonce( 'redux-ads-nonce' );
-                    $base                                = admin_url( 'admin-ajax.php' ) . '?action=redux_p&nonce=' . $nonce . '&url=';
-                    $this->parent->localize_data['rAds'] = Redux_Helpers::rURL_fix( $base, $this->parent->args['opt_name'] );
-                }
+
 
                 $this->parent->localize_data['fieldsHidden'] = $this->parent->fieldsHidden;
                 $this->parent->localize_data['options']      = $this->parent->options;
@@ -494,6 +496,7 @@
                     'alert'   => __( 'There was a problem with your action. Please try again or reload the page.', 'redux-framework' ),
                 );
 
+                $this->parent->localize_data = apply_filters( "redux/{$this->parent->args['opt_name']}/localize", $this->parent->localize_data );
 
                 $this->get_warnings_and_errors_array();
 
