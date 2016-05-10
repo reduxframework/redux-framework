@@ -75,7 +75,7 @@
 
                                     // Get the current page.  To avoid errors, we'll set
                                     // the redux page slug if the GET is empty.
-                                    $pageName = empty( $_GET['page'] ) ? '&amp;page=' . self::$_parent->args['page_slug'] : '&amp;page=' . $_GET['page'];
+                                    $pageName = empty( $_GET['page'] ) ? '&amp;page=' . self::$_parent->args['page_slug'] : '&amp;page=' . esc_attr( $_GET['page'] );
 
                                     // Ditto for the current tab.
                                     $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . esc_attr( $_GET['tab'] );
@@ -151,8 +151,8 @@
                         $userid = $current_user->ID;
 
                         // Get the notice id
-                        $id  = $_GET['id'];
-                        $val = $_GET['dismiss'];
+                        $id  = esc_attr( $_GET['id'] );
+                        $val = esc_attr( $_GET['dismiss'] );
 
                         // Add the dismiss request to the user meta.
                         update_user_meta( $userid, 'ignore_' . $id, $val );

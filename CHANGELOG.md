@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.0.3
+* Fixed:    Some XSS vulnerabilities only available in the backend when authenticated as a user.
+
 ## 3.6.0.2
 * Fixed:    Customizer.min.js compression issue. Deploy.
 

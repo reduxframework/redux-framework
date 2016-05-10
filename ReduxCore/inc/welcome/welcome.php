@@ -334,7 +334,7 @@
          * @return void
          */
         public function tabs() {
-            $selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'redux-about';
+            $selected = isset ( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'redux-about';
             $nonce    = wp_create_nonce( 'redux-support-hash' );
             ?>
             <input type="hidden" id="redux_support_nonce" value="<?php echo esc_attr( $nonce ); ?>"/>

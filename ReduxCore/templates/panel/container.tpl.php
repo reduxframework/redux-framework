@@ -39,7 +39,7 @@
             $this->init_settings_fields();
 
             // Last tab?
-            $this->parent->options['last_tab'] = ( isset( $_GET['tab'] ) && ! isset( $this->parent->transients['last_save_mode'] ) ) ? $_GET['tab'] : '';
+            $this->parent->options['last_tab'] = ( isset( $_GET['tab'] ) && ! isset( $this->parent->transients['last_save_mode'] ) ) ? esc_attr( $_GET['tab'] ) : '';
         ?>
         <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
         <input type="hidden" 
