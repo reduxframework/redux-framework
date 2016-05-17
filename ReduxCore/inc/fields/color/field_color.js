@@ -146,7 +146,6 @@
                 el.find( '.color-transparency' ).on(
                     'click', function() {
                         if ( $( this ).is( ":checked" ) ) {
-
                             el.find( '.redux-saved-color' ).val( $( '#' + $( this ).data( 'id' ) ).val() );
                             el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
                             el.find( '#' + $( this ).data( 'id' ) ).parent().parent().find( '.wp-color-result' ).css(

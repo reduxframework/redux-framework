@@ -31,7 +31,7 @@
         }
     );
 
-    redux.field_objects.typography.init = function( selector, skipCheck) {
+    redux.field_objects.typography.init = function( selector, skipCheck ) {
 
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-typography:visible' );
@@ -283,6 +283,20 @@
         }
     };
 
+    redux.field_objects.typography.change = function( container ) {
+        var $data = {};
+        jQuery( container ).find( '.redux-typography-input' ).each(
+            function() {
+                if ( jQuery( this ).data( 'name' ) === undefined ) {
+                    return;
+                }
+                $data[jQuery( this ).data( 'name' )] = jQuery( this ).val();
+            }
+        );
+        var $input = jQuery( container ).find( '.typography-data-input:first-child' );
+        $input.val( JSON.stringify( $data ) );
+    };
+
     redux.field_objects.typography.contrastColour = function( hexcolour ) {
         // default value is black.
         var retVal = '#444444';
@@ -312,13 +326,13 @@
     //  Sync up font options
     redux.field_objects.typography.select = function( selector, skipCheck ) {
         var mainID;
-        
+
         // Main id for selected field
         mainID = $( selector ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
-        if (mainID === undefined) {
-            mainID = $(selector).attr( 'data-id' );
+        if ( mainID === undefined ) {
+            mainID = $( selector ).attr( 'data-id' );
         }
-        
+
         var parent = $( selector ).parents( '.redux-container-typography:first' );
         var data = [];
         //$.each(parent.find('.redux-typography-field'), function() {
@@ -414,8 +428,8 @@
                         }
 
                         html += '<option value="' + variant.id + '"' + selected + '>' + variant.name.replace(
-                            /\+/g, " "
-                        ) + '</option>';
+                                /\+/g, " "
+                            ) + '</option>';
                     }
                 );
 
@@ -443,8 +457,8 @@
                             selected = "";
                         }
                         html += '<option value="' + subset.id + '"' + selected + '>' + subset.name.replace(
-                            /\+/g, " "
-                        ) + '</option>';
+                                /\+/g, " "
+                            ) + '</option>';
                     }
                 );
 
@@ -475,8 +489,8 @@
                             }
 
                             html += '<option value="' + index + '"' + selected + '>' + value.replace(
-                                '+', ' '
-                            ) + '</option>';
+                                    '+', ' '
+                                ) + '</option>';
                         }
                     );
 
@@ -536,7 +550,7 @@
                     link += '&subset=' + script;
                 }
 
-                if (isSelecting === false) { 
+                if ( isSelecting === false ) {
                     if ( typeof (WebFont) !== "undefined" && WebFont ) {
                         WebFont.load( {google: {families: [link]}} );
                     }
@@ -646,7 +660,7 @@
 
         isSelecting = false;
 
-        if ( ! skipCheck ) {
+        if ( !skipCheck ) {
             redux_change( selector );
         }
 

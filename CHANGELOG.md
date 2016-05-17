@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.4
+* Changed:  Typography field is now only ONE input variable. Should reduce our 
+            max_input_vars errors dramatically.
+
 ## 3.6.0.3
 * Fixed:    Some XSS vulnerabilities only available in the backend when authenticated as a user.
 
