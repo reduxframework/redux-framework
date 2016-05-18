@@ -2950,10 +2950,14 @@
                                 }
                             }
 
-                            if ( isset ( $field['type'] ) && $field['type'] == 'typography') {
+                            if ( isset ( $field['type'] ) && $field['type'] == 'typography' ) {
                                 if ( ! is_array( $plugin_options[ $field['id'] ] ) && ! empty( $plugin_options[ $field['id'] ] ) ) {
                                     $plugin_options[ $field['id'] ] = json_decode( $plugin_options[ $field['id'] ], true );
                                 }
+                            }
+
+                            if ( isset( $this->extensions[ $field['type'] ] ) && method_exists( $this->extensions[ $field['type'] ], '_validate_values' ) ) {
+                                $plugin_options = $this->extensions[ $field['type'] ]->_validate_values( $plugin_options, $field );
                             }
 
                             // Default 'not_empty 'flag to false.
