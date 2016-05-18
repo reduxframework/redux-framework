@@ -1804,11 +1804,11 @@ function redux_hook( object, functionName, callback, before ) {
     (function( originalFunction ) {
         object[functionName] = function() {
 
-            if ( before == true ) {
+            if ( before === true ) {
                 callback.apply( this, [returnValue, originalFunction, arguments] );
             }
             var returnValue = originalFunction.apply( this, arguments );
-            if ( before != true ) {
+            if ( before !== true ) {
                 callback.apply( this, [returnValue, originalFunction, arguments] );
             }
 

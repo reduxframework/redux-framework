@@ -51,27 +51,27 @@
             customTypes: {}, // override defaultTypes
             defaultTypes: {
                 string: function( str ) {
-                    return String( str )
+                    return String( str );
                 },
                 number: function( str ) {
-                    return Number( str )
+                    return Number( str );
                 },
                 boolean: function( str ) {
-                    return (["false", "null", "undefined", "", "0"].indexOf( str ) === -1)
+                    return (["false", "null", "undefined", "", "0"].indexOf( str ) === -1);
                 },
                 null: function( str ) {
-                    return (["false", "null", "undefined", "", "0"].indexOf( str ) !== -1) ? null : str
+                    return (["false", "null", "undefined", "", "0"].indexOf( str ) !== -1) ? null : str;
                 },
                 array: function( str ) {
-                    return JSON.parse( str )
+                    return JSON.parse( str );
                 },
                 object: function( str ) {
-                    return JSON.parse( str )
+                    return JSON.parse( str );
                 },
                 auto: function( str ) {
                     return $.serializeJSON.parseValue(
                         str, null, {parseNumbers: true, parseBooleans: true, parseNulls: true}
-                    )
+                    );
                 } // try again with something like "parseAll"
             },
 
@@ -83,7 +83,7 @@
             var opt, validOpts, defaultOptions, optWithDefault, parseAll, f;
             f = $.serializeJSON;
 
-            if ( options == null ) options = {};       // options ||= {}
+            if ( options === null ) options = {};       // options ||= {}
             defaultOptions = f.defaultOptions || {}; // defaultOptions
 
             // Make sure that the user didn't misspell an option
@@ -97,7 +97,7 @@
             // Helper to get the default value for this option if none is specified by the user
             optWithDefault = function( key ) {
                 return (options[key] !== false) && (options[key] !== '') && (options[key] || defaultOptions[key]);
-            }
+            };
 
             // Return computed options (opts to be used in the rest of the script)
             parseAll = optWithDefault( 'parseAll' );
@@ -112,7 +112,7 @@
                 typeFunctions: $.extend( {}, optWithDefault( 'defaultTypes' ), optWithDefault( 'customTypes' ) ),
 
                 useIntKeysAsArrayIndex: optWithDefault( 'useIntKeysAsArrayIndex' ),
-            }
+            };
         },
 
         // Given a string, apply the type or the relevant "parse" options, to return the parsed value
@@ -152,9 +152,9 @@
             } else {
                 var keys = [];
                 for ( var key in obj ) {
-                    keys.push( key )
+                    keys.push( key );
                 }
-                ;
+
                 return keys;
             }
         }, // polyfill Object.keys to get option keys in IE<9

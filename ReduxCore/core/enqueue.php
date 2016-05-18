@@ -35,7 +35,7 @@
                 add_filter("redux/{$this->parent->args['opt_name']}/localize", array('Redux_Helpers', 'localize'));
 
                 $this->set_localized_data();
-
+                
                 /**
                  * action 'redux-enqueue-{opt_name}'
                  *
@@ -406,7 +406,7 @@
                 if (!empty($this->parent->args['last_tab'])) {
                     $this->parent->localize_data['last_tab']       = $this->parent->args['last_tab'];
                 }
-                
+
                 $this->parent->localize_data['required']       = $this->parent->required;
                 $this->parent->localize_data['fonts']          = $this->parent->fonts;
                 $this->parent->localize_data['required_child'] = $this->parent->required_child;
@@ -437,7 +437,6 @@
                         }
                     }
                 }
-
 
 
                 $this->parent->localize_data['fieldsHidden'] = $this->parent->fieldsHidden;
