@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.5
+* Reverted: Changes to typography.  The on input variable solution was not working.
+* Fixed:    Support URL has generator was failing with an error.
+
 ## 3.6.0.4
 * Changed:  Typography field is now only ONE input variable. Should reduce our 
             max_input_vars errors dramatically.

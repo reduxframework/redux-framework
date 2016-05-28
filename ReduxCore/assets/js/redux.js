@@ -1537,10 +1537,10 @@ function redux_change( variable ) {
         jQuery( '#redux-compiler-hook' ).val( 1 );
     }
 
-    var test = jQuery( variable ).parents( '.redux-field-container:first' );
-    if ( test.hasClass( 'redux-container-typography' ) && redux.field_objects.typography ) {
-        redux.field_objects.typography.change( test );
-    }
+//    var test = jQuery( variable ).parents( '.redux-field-container:first' );
+//    if ( test.hasClass( 'redux-container-typography' ) && redux.field_objects.typography ) {
+//        redux.field_objects.typography.change( test );
+//    }
 
     var rContainer = jQuery( variable ).parents( '.redux-container:first' );
 

@@ -121,6 +121,7 @@
             if ( $newHash == $data['check'] ) {
                 unset( $generate_hash );
             }
+
             $post_data = array(
                 'hash'          => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] ),
                 'site'          => esc_url( home_url( '/' ) ),
@@ -131,6 +132,7 @@
             $post_data = serialize( $post_data );
 
             if ( isset( $generate_hash ) && $generate_hash ) {
+                
                 $data['check']      = $newHash;
                 $data['identifier'] = "";
                 $response           = wp_remote_post( 'http://support.redux.io/v1/', array(
