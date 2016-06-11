@@ -3263,7 +3263,8 @@
              * @return      void
              */
             public function _section_desc( $section ) {
-                $id = trim( rtrim( $section['id'], '_section' ), $this->args['opt_name'] );
+                $id = rtrim( $section['id'], '_section' );
+                $id = str_replace($this->args['opt_name'], '', $id);
 
                 if ( isset ( $this->sections[ $id ]['desc'] ) && ! empty ( $this->sections[ $id ]['desc'] ) ) {
                     echo '<div class="redux-section-desc">' . $this->sections[ $id ]['desc'] . '</div>';
