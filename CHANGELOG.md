@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.6
+* Fixed:    Jacascript error in customizer javascript, preventing save of changed options.
+* Fixed:    #3019 - Section descriptions incorrect when opt_name contains digits.
+
 ## 3.6.0.5
 * Reverted: Changes to typography.  The on input variable solution was not working.
 * Fixed:    Support URL has generator was failing with an error.

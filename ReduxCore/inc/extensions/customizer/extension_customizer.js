@@ -83,7 +83,7 @@
             var opt, validOpts, defaultOptions, optWithDefault, parseAll, f;
             f = $.serializeJSON;
 
-            if ( options === null ) options = {};       // options ||= {}
+            if ( options === null || options === undefined ) options = {};       // options ||= {}
             defaultOptions = f.defaultOptions || {}; // defaultOptions
 
             // Make sure that the user didn't misspell an option
