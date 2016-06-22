@@ -2306,13 +2306,13 @@
             $return['value'] = $value;
 
             if ( $error == true ) {
-                $return['error'] = $field;
                 $field['msg']    = 'your custom error message';
+                $return['error'] = $field;
             }
 
             if ( $warning == true ) {
-                $return['warning'] = $field;
                 $field['msg']      = 'your custom warning message';
+                $return['warning'] = $field;
             }
 
             return $return;
