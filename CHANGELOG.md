@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.7
+* Fixed:    Empty values not passing to validation_callback.
+
+
 ## 3.6.0.6
 * Fixed:    Jacascript error in customizer javascript, preventing save of changed options.
 * Fixed:    #3019 - Section descriptions incorrect when opt_name contains digits.
