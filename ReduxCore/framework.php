@@ -3067,10 +3067,14 @@
                                             }
                                         }
                                     } else {
-                                        if ( is_array( $plugin_options[ $field['id'] ] ) ) {
-                                            $pofi = $plugin_options[ $field['id'] ];
+                                        if ( isset( $plugin_options[ $field['id'] ] ) ) {
+                                            if ( is_array( $plugin_options[ $field['id'] ] ) ) {
+                                                $pofi = $plugin_options[ $field['id'] ];
+                                            } else {
+                                                $pofi = trim( $plugin_options[ $field['id'] ] );
+                                            }
                                         } else {
-                                            $pofi = trim( $plugin_options[ $field['id'] ] );
+                                            $pofi = null;
                                         }
 
                                         $validation                     = new $validate ( $this, $field, $pofi, $options[ $field['id'] ] );
