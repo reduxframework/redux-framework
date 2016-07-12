@@ -2,6 +2,7 @@
 
 ## 3.6.0.8
 * Fixed:    Incorrect string comparison result in admin link check.  Thanks @ksere.
+* Fixed:    Check value exists before validating when used with Metabox extension.  Thanks @Enchiridion
 
 
 ## 3.6.0.7
