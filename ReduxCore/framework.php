@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.0.7';
+            public static $_version = '3.6.0.8';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -3973,7 +3973,7 @@
                         foreach ( $this->args['admin_bar_links'] as $idx => $arr ) {
                             if ( is_array( $arr ) && ! empty( $arr ) ) {
                                 foreach ( $arr as $x => $y ) {
-                                    if ( strpos( strtolower( $y ), 'redux' ) !== 0 ) {
+                                    if ( strpos( strtolower( $y ), 'redux' ) !== false ) {
                                         $msg = __( '<strong>Redux Framework Notice: </strong>There are references to the Redux Framework support site in your config\'s <code>admin_bar_links</code> argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework' );
                                         $this->display_arg_change_notice( 'admin', $msg );
                                         $this->omit_admin_items = true;
@@ -3988,7 +3988,7 @@
                         foreach ( $this->args['share_icons'] as $idx => $arr ) {
                             if ( is_array( $arr ) && ! empty( $arr ) ) {
                                 foreach ( $arr as $x => $y ) {
-                                    if ( strpos( strtolower( $y ), 'redux' ) >= 0 ) {
+                                    if ( strpos( strtolower( $y ), 'redux' ) !== false ) {
                                         $msg = __( '<strong>Redux Framework Notice: </strong>There are references to the Redux Framework support site in your config\'s <code>share_icons</code> argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework' );
                                         $this->display_arg_change_notice( 'share', $msg );
                                         $this->omit_share_icons = true;

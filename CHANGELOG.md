@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.8
+* Fixed:    Incorrect string comparison result in admin link check.  Thanks @ksere.
+
+
 ## 3.6.0.7
 * Fixed:    Empty values not passing to validation_callback.
 
