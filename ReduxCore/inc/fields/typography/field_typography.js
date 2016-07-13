@@ -590,7 +590,7 @@
         // if not preview showing, then set preview to show
         if ( !$( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
             $( '#' + mainID ).addClass( 'typography-initialized' );
-        });
+        }
 
         // Show more preview stuff
         if ( $( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
