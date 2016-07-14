@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.0.10
+* Fixed:    #3051 - Color_RBGA field RGBA value outputting zeros when color is left blank.
+
 ## 3.6.0.9
 * Fixed:    #3048 - Subsection tabs not including specified section class name.
 
@@ -13,7 +16,7 @@
 
 
 ## 3.6.0.6
-* Fixed:    Jacascript error in customizer javascript, preventing save of changed options.
+* Fixed:    Javascript error in customizer javascript, preventing save of changed options.
 * Fixed:    #3019 - Section descriptions incorrect when opt_name contains digits.
 
 ## 3.6.0.5
