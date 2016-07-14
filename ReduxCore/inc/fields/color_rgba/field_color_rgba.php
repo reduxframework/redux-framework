@@ -124,7 +124,7 @@ if( !class_exists( 'ReduxFramework_color_rgba' ) ) {
                 $color = Redux_Helpers::hex2rgba($this->value['color'], $this->value['alpha']);
             }            
 
-            if ($this->value['rgba'] == ''){
+            if ($this->value['rgba'] == '' && $this->value['color'] != '' ){
                 $this->value['rgba'] = Redux_Helpers::hex2rgba($this->value['color'], $this->value['alpha']);
             }
             
