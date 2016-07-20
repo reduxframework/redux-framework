@@ -517,6 +517,11 @@
 
         var _linkclass = 'style_link_' + mainID;
 
+        // if not preview showing, then set preview to show
+        // if ( !$( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
+        //     $( '#' + mainID ).addClass( 'typography-initialized' );
+        // }
+
         //remove other elements crested in <head>
         $( '.' + _linkclass ).remove();
         if ( family !== null && family !== "inherit" && $( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
@@ -635,13 +640,15 @@
             if ( decoration ) {
                 $( '#' + mainID + ' .typography-preview' ).css( 'text-decoration', decoration );
             }
-            $( '#' + mainID + ' .typography-preview' ).slideDown();
+            if ( $( '#' + mainID ).hasClass( 'typography-always-display' ) ) {
+                $( '#' + mainID + ' .typography-preview' ).slideDown();
+            }
         }
         // end preview stuff
 
         // if not preview showing, then set preview to show
-        if ( !$( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
-            $( '#' + mainID ).addClass( 'typography-initialized' );
+        if ( !$( '#' + mainID ).hasClass( 'typography-always-display' ) ) {
+            $( '#' + mainID ).addClass( 'typography-always-display' );
         }
 
         isSelecting = false;
@@ -649,7 +656,6 @@
         if ( ! skipCheck ) {
             redux_change( selector );
         }
-
 
     };
 })( jQuery );
