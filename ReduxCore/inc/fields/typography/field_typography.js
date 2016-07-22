@@ -517,11 +517,6 @@
 
         var _linkclass = 'style_link_' + mainID;
 
-        // if not preview showing, then set preview to show
-        // if ( !$( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
-        //     $( '#' + mainID ).addClass( 'typography-initialized' );
-        // }
-
         //remove other elements crested in <head>
         $( '.' + _linkclass ).remove();
         if ( family !== null && family !== "inherit" && $( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
