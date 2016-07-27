@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.0.11
+* Removed   Empty PHP file from editor field.
+* Modified: Replaced class primary function name in browser.php to __construct for PHP7 compatibility.
+
 ## 3.6.0.10
 * Fixed:    #3051 - Color_RBGA field RGBA value outputting zeros when color is left blank.
 
