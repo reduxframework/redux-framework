@@ -280,7 +280,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                 $multi = ( isset( $this->field['multi']['weight'] ) && $this->field['multi']['weight'] ) ? ' multiple="multiple"' : "";
                 echo '<select' . $multi . ' data-placeholder="' . __( 'Style', 'redux-framework' ) . '" class="redux-typography redux-typography-style select ' . $this->field['class'] . '" original-title="' . __( 'Font style', 'redux-framework' ) . '" id="' . $this->field['id'] . '_style" data-id="' . $this->field['id'] . '" data-value="' . $style . '">';
 
-                if ( empty( $this->value['subset'] ) || empty( $this->value['font-weight'] ) ) {
+                if ( empty( $this->value['subsets'] ) || empty( $this->value['font-weight'] ) ) {
                     echo '<option value=""></option>';
                 }
 
@@ -293,11 +293,11 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
                 if ( isset( $gfonts[ $this->value['font-family'] ] ) ) {
                     foreach ( $gfonts[ $this->value['font-family'] ]['variants'] as $v ) {
-                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subset'], $v['id'], false ) . '>' . $v['name'] . '</option>';
+                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subsets'], $v['id'], false ) . '>' . $v['name'] . '</option>';
                     }
                 } else {
-                    if ( ! isset( $this->value['font-weight'] ) && isset( $this->value['subset'] ) ) {
-                        $this->value['font-weight'] = $this->value['subset'];
+                    if ( ! isset( $this->value['font-weight'] ) && isset( $this->value['subsets'] ) ) {
+                        $this->value['font-weight'] = $this->value['subsets'];
                     }
 
                     foreach ( $nonGStyles as $i => $style ) {
@@ -305,8 +305,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                             $this->value['font-weight'] = false;
                         }
 
-                        if ( ! isset( $this->value['subset'] ) ) {
-                            $this->value['subset'] = false;
+                        if ( ! isset( $this->value['subsets'] ) ) {
+                            $this->value['subsets'] = false;
                         }
 
                         echo '<option value="' . $i . '" ' . selected( $this->value['font-weight'], $i, false ) . '>' . $style . '</option>';
@@ -330,7 +330,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
                 if ( isset( $gfonts[ $this->value['font-family'] ] ) ) {
                     foreach ( $gfonts[ $this->value['font-family'] ]['subsets'] as $v ) {
-                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subset'], $v['id'], false ) . '>' . $v['name'] . '</option>';
+                        echo '<option value="' . $v['id'] . '" ' . selected( $this->value['subsets'], $v['id'], false ) . '>' . $v['name'] . '</option>';
                     }
                 }
 
@@ -497,7 +497,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                         if ( $isGoogleFont == true ) {
                             $this->parent->typography_preview[ $fontFamily[0] ] = array(
                                 'font-style' => array( $this->value['font-weight'] . $this->value['font-style'] ),
-                                'subset'     => array( $this->value['subset'] )
+                                'subset'     => array( $this->value['subsets'] )
                             );
 
                             $protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
