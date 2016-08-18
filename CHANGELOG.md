@@ -1,9 +1,12 @@
 # Redux Framework Changelog
 
+## 3.6.1.1
+* Fixed:   Typography subsets error due to typo.
+
 ## 3.6.1 - WP.org release
 
 ## 3.6.0.11
-* Removed   Empty PHP file from editor field.
+* Removed:  Empty PHP file from editor field.
 * Modified: Replaced class primary function name in browser.php to __construct for PHP7 compatibility.
 
 ## 3.6.0.10
