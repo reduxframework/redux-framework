@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.1.2
+* Fixed:   #3103 - WP 4.6 forces new default date format, breaking date validation.
+
 ## 3.6.1.1
 * Fixed:   Typography subsets error due to typo.
 

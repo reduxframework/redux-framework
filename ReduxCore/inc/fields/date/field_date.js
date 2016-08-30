@@ -55,8 +55,8 @@
 //                });
                 
                 el.find( '.redux-datepicker' ).each( function() {
-                    
                     $( this ).datepicker({
+                        "dateFormat":"mm/dd/yy",
                         beforeShow: function(input, instance){
                             var el = $('#ui-datepicker-div');
                             //$.datepicker._pos = $.datepicker._findPos(input); //this is the default position
