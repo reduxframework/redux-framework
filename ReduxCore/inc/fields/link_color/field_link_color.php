@@ -162,8 +162,12 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
                             $styleString .= implode( ",", $this->field['output'] ) . "{" . $value . '}';
                         } else {
                             if ( count( $this->field['output'] ) == 1 ) {
-                                if (strpos($this->field['output'][0], ',') != false) {
-                                    $selector_arr = explode(',',$this->field['output'][0]);
+                                foreach($this->field['output'] as $sel => $elem) {
+                                    continue;
+                                }
+                                
+                                if (strpos($elem, ',') != false) {
+                                    $selector_arr = explode(',',$elem);
                                     $sel_list = '';
                                     
                                     foreach($selector_arr as $idx => $selector) {
@@ -173,7 +177,7 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
                                     $sel_list = rtrim($sel_list,',');
                                     $styleString .= $sel_list . "{" . $value . '}';
                                 } else {
-                                    $styleString .= $this->field['output'][0] . ":" . $key . "{" . $value . '}';
+                                    $styleString .= $elem . ":" . $key . "{" . $value . '}';
                                 }
                             } else {
                                 $blah = '';
