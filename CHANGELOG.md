@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.1.3
+* Fixed:   #3105 - link_color output failing due to PHP error.
+
 ## 3.6.1.2
 * Fixed:   #3103 - WP 4.6 forces new default date format, breaking date validation.
 
