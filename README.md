@@ -2,7 +2,7 @@
 
 [Get it in the WordPress plugin repo](https://wordpress.org/plugins/redux-framework/)
 
-[Generate your own Underscores + Redux Framework based WordPress theme](http://builder.reduxframework.com)
+[Generate your own Underscores + Redux Framework based WordPress theme](http://build.reduxframework.com)
 
 [Join the Community in Slack](https://redux-slackin.herokuapp.com/)
 
