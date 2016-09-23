@@ -3,8 +3,8 @@ Contributors: dovyp, kprovance
 Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 4.7
-Stable tag: 3.6.1.3
+Tested up to: 4.8
+Stable tag: 3.6.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,7 +125,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
-## 3.6.1.3
+## 3.6.2
 * Fixed:   #3105 - link_color output failing due to PHP error.
 * Fixed:   #3103 - WP 4.6 forces new default date format, breaking date validation.
 * Fixed:   Typography subsets error due to typo.

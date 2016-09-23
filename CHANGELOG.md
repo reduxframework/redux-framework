@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.2
+* WP.org release and cleanup
+
 ## 3.6.1.3
 * Fixed:   #3105 - link_color output failing due to PHP error.
 
