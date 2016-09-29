@@ -1,4 +1,10 @@
-## Redux Options Framework [![Build Status](https://travis-ci.org/reduxframework/redux-framework.png?branch=master)](https://travis-ci.org/reduxframework/redux-framework) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Slack](http://slack.redux.io/badge.svg)](http://slack.redux.io)
+## Redux Options Framework [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=2592000)]() [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=2592000)]() [![Build Status](https://travis-ci.org/reduxframework/redux-framework.png?branch=master)](https://travis-ci.org/reduxframework/redux-framework) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Slack](https://redux-slackin.herokuapp.com/badge.svg)](https://redux-slackin.herokuapp.com)
+
+[Get it in the WordPress plugin repo](https://wordpress.org/plugins/redux-framework/)
+
+[Generate your own Underscores + Redux Framework based WordPress theme](http://build.reduxframework.com)
+
+[Join the Community in Slack](https://redux-slackin.herokuapp.com/)
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
 
