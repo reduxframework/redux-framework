@@ -3096,7 +3096,9 @@
                                 $callback = $field['validate_callback'];
                                 unset ( $field['validate_callback'] );
 
-                                $callbackvalues                 = call_user_func( $callback, $field, $plugin_options[ $field['id'] ], $options[ $field['id'] ] );
+                                $plugin_option                  = isset( $plugin_options[ $field['id'] ] ) ? $plugin_options[ $field['id'] ] : null;
+                                $option                         = isset( $options[ $field['id'] ] )        ? $options[ $field['id'] ]        : null;
+                                $callbackvalues                 = call_user_func( $callback, $field, $plugin_option, $option );
                                 $plugin_options[ $field['id'] ] = $callbackvalues['value'];
 
                                 if ( isset ( $callbackvalues['error'] ) ) {
