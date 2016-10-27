@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Team Redux
-# This file is distributed under the GPL3+.
+# This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
 "Project-Id-Version: Redux Framework 3.5.3\n"
