@@ -92,7 +92,9 @@
                                     var ids = selection.models.map(
                                         function( e ) {
                                             element = e.toJSON();
-                                            preview_img = typeof element.sizes.thumbnail !== 'undefined' ? element.sizes.thumbnail.url : element.url;
+                                            //preview_img = typeof element.sizes.thumbnail !== 'undefined' ? element.sizes.thumbnail.url : element.url;
+                                            preview_img = (typeof element.sizes !== "undefined" && typeof element.sizes.thumbnail !== 'undefined') ? element.sizes.thumbnail.url : element.url;
+
                                             preview_html = "<a class='of-uploaded-image' href='" + preview_img + "'><img class='redux-option-image' src='" + preview_img + "' alt='' /></a>";
                                             current_gallery.find( ".screenshot" ).append( preview_html );
 

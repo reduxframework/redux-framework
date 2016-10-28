@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.2.1
+* Fixed: #3159 - Support for SVG in gallery media selection.
+* Fixed: #3158 - PHP warning for _validate_values function when extensions installed on PHP7.
+
 ## 3.6.2
 * WP.org release and cleanup
 
