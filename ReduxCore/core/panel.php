@@ -100,12 +100,12 @@
                 echo '</div>';
 
                 if ( $this->parent->args['dev_mode'] == true ) {
-                    if ( current_user_can( 'administrator' ) ) {
-                        global $wpdb;
-                        echo "<br /><pre>";
-                        print_r( $wpdb->queries );
-                        echo "</pre>";
-                    }
+//                    if ( current_user_can( 'administrator' ) ) {
+//                        global $wpdb;
+//                        echo "<br /><pre>";
+//                        print_r( $wpdb->queries );
+//                        echo "</pre>";
+//                    }
 
                     echo '<br /><div class="redux-timer">' . get_num_queries() . ' queries in ' . timer_stop( 0 ) . ' seconds<br/>Redux is currently set to developer mode.</div>';
                 }

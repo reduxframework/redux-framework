@@ -16,7 +16,7 @@
     "url": "https://github.com/ReduxFramework/ReduxFramework/issues"
   },
   "author": "Redux Framework Team",
-  "license": "GPLv3+",
+  "license": "GPLv2+",
   "homepage": "http://reduxframework.com",
   "devDependencies": {
     "compass-options": "^0.1.1",
