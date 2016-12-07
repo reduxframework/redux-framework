@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.7
+* WP.org release
+
 ## 3.6.2.3
 * Modified: Change customizer hover styles to match WP 4.7.
 
