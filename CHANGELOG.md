@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.2.3
+* Modified: Change customizer hover styles to match WP 4.7.
+
 ## 3.6.2.2
 * Modified: #3169 - print_r of wpdb queries in dev_mode removed.
 
