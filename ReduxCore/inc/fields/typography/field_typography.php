@@ -166,7 +166,19 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
             $unit = $this->field['units'];
 
-            echo '<div id="' . $this->field['id'] . '" class="redux-typography-container" data-id="' . $this->field['id'] . '" data-units="' . $unit . '">';
+            //  Added initialize class
+            if ( isset( $this->field['preview'] ) ) {
+                $this->field['class'] = $this->field['class'] . ' typography-initialized';
+            }
+
+            //  Added always display class
+            if ( isset( $this->field['preview']['always_display'] ) ) {
+                if ( true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN ) ) {
+                    $this->field['class'] = $this->field['class'] . ' typography-always-display';
+                }
+            }
+
+            echo '<div id="' . $this->field['id'] . '" class="redux-typography-container ' . $this->field['class'] . '" data-id="' . $this->field['id'] . '" data-units="' . $unit . '">';
 
             if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
                 $select2_params = json_encode( $this->field['select2'] );
@@ -493,6 +505,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
 
                 $style = '';
                 if ( isset( $this->field['preview']['always_display'] ) ) {
+
                     if ( true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN ) ) {
                         if ( $isGoogleFont == true ) {
                             $this->parent->typography_preview[ $fontFamily[0] ] = array(
