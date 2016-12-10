@@ -587,6 +587,11 @@
             $( '#' + mainID + ' .typography-letter-spacing' ).val( letter + units );
         }
 
+        // if not preview showing, then set preview to show
+        if ( !$( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
+            $( '#' + mainID ).addClass( 'typography-initialized' );
+        }
+
         // Show more preview stuff
         if ( $( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
             //console.log('here2');
@@ -638,11 +643,6 @@
             $( '#' + mainID + ' .typography-preview' ).slideDown();
         }
         // end preview stuff
-
-        // if not preview showing, then set preview to show
-        if ( !$( '#' + mainID ).hasClass( 'typography-initialized' ) ) {
-            $( '#' + mainID ).addClass( 'typography-initialized' );
-        }
 
         isSelecting = false;
 
