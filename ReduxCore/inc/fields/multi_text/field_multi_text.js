@@ -36,12 +36,24 @@
                 el.find( '.redux-multi-text-remove' ).live(
                     'click', function() {
                         redux_change( $( this ) );
+                        
                         $( this ).prev( 'input[type="text"]' ).val( '' );
+                        var id = $( this ).attr( 'data-id' );
+                        
                         $( this ).parent().slideUp(
                             'medium', function() {
                                 $( this ).remove();
+                                
+                                var lis = el.find( '#' + id + ' li').length;
+                                if (lis == 1) {
+                                    var add = el.find( '.redux-multi-text-add' );
+                                    var name = add.attr( 'data-name' );
+                                    
+                                    el.find( '#' + id + ' li:last-child input[type="text"]' ).attr( 'name', name );
+                                }
                             }
                         );
+                
                     }
                 );
 
@@ -50,12 +62,25 @@
                         var number = parseInt( $( this ).attr( 'data-add_number' ) );
                         var id = $( this ).attr( 'data-id' );
                         var name = $( this ).attr( 'data-name' );
+                        
                         for ( var i = 0; i < number; i++ ) {
                             var new_input = $( '#' + id + ' li:last-child' ).clone();
                             el.find( '#' + id ).append( new_input );
                             el.find( '#' + id + ' li:last-child' ).removeAttr( 'style' );
                             el.find( '#' + id + ' li:last-child input[type="text"]' ).val( '' );
                             el.find( '#' + id + ' li:last-child input[type="text"]' ).attr( 'name', name );
+                        }
+                        
+                        var lis = el.find( '#' + id + ' li').length;
+                        if (lis > 1) {
+                            var css, input;
+                            el.find('#' + id + ' li').each(function(idx, val){
+                                css = $(this).css('display');
+                                if (css === 'none') {
+                                    input = $(this).find('input[type="text"]');
+                                    input.attr('name', '');
+                                }
+                            })
                         }
                     }
                 );
