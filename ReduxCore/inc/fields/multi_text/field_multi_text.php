@@ -16,6 +16,7 @@
  * @subpackage  Field_Multi_Text
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
+ * @author      Kevin Provance (kprovance)
  * @version     3.0.0
  */
 
@@ -65,7 +66,7 @@ if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
 
             if ( isset( $this->value ) && is_array( $this->value ) ) {
                 foreach ( $this->value as $k => $value ) {
-                    if ( $value != '' ) {
+                    if ( $value != '' || ($value == '' && $this->show_empty == true) ) {
                         echo '<li>';
                         echo     '<input type="text" id="' . $this->field['id'] . '-' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[]' . '" value="' . esc_attr( $value ) . '" class="regular-text ' . $this->field['class'] . '" /> ';
                         echo     '<a' . ' data-id="' . $this->field['id'] . '-ul" href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
@@ -78,7 +79,7 @@ if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
                 echo     '<a' . ' data-id="' . $this->field['id'] . '-ul"  href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
                 echo '</li>';
             }
-
+var_dump($this->value);
             $the_name = '';
             if (isset($this->value) && empty($this->value) && $this->show_empty == false) {
                 $the_name = $this->field['name'] . $this->field['name_suffix'];
@@ -91,7 +92,7 @@ if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
             
             echo '<span style="clear:both;display:block;height:0;" /></span>';
             $this->field['add_number'] = ( isset( $this->field['add_number'] ) && is_numeric( $this->field['add_number'] ) ) ? $this->field['add_number'] : 1;
-            echo '<a href="javascript:void(0);" class="button button-primary redux-multi-text-add" data-add_number="' . $this->field['add_number'] . '" data-id="' . $this->field['id'] . '-ul" data-name="' . $this->field['name'] . $this->field['name_suffix'] . '[]">' . $this->add_text . '</a><br/>';
+            echo '<a href="javascript:void(0);" class="button button-primary redux-multi-text-add" data-add_number="' . $this->field['add_number'] . '" data-id="' . $this->field['id'] . '-ul" data-name="' . $this->field['name'] . $this->field['name_suffix'] . '">' . $this->add_text . '</a><br/>';
         }
 
         /**

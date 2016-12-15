@@ -6,12 +6,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.multi_text = redux.field_objects.multi_text || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.multi_text.init();
-        }
-    );
-
     redux.field_objects.multi_text.init = function( selector ) {
 
         if ( !selector ) {
@@ -53,7 +47,6 @@
                                 }
                             }
                         );
-                
                     }
                 );
 
@@ -61,7 +54,7 @@
                     function() {
                         var number = parseInt( $( this ).attr( 'data-add_number' ) );
                         var id = $( this ).attr( 'data-id' );
-                        var name = $( this ).attr( 'data-name' );
+                        var name = $( this ).attr( 'data-name' ) + '[]';
                         
                         for ( var i = 0; i < number; i++ ) {
                             var new_input = $( '#' + id + ' li:last-child' ).clone();

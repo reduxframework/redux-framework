@@ -292,17 +292,6 @@
         'customizer_width' => '450px',
         'desc'             => __( 'For full documentation on this field, visit: ', 'redux-framework-demo' ) . '<a href="//docs.reduxframework.com/core/fields/checkbox/" target="_blank">docs.reduxframework.com/core/fields/checkbox/</a>',
         'fields'           => array(
-		array(
-			'id'=>'staticblock-right-logo',
-			'type' => 'multi_text',
-			'title' => __('Primary navigation: near logo', 'textdomain'),
-			'validate' => 'html',
-			'subtitle' => __('Static blocks in the primary navigation, on the right of the logo', 'textdomain'),
-			'desc' => __('You can use html tags and shortcodes here', 'textdomain'),
-			'default' => array(
-				'<i class="fa fa-phone"></i> +1 (555) 333 22 11'
-			),
-		),            
             array(
                 'id'       => 'opt-checkbox',
                 'type'     => 'checkbox',
@@ -470,7 +459,7 @@
                 'type'     => 'multi_text',
                 'title'    => __( 'Multi Text Option', 'redux-framework-demo' ),
                 'subtitle' => __( 'Field subtitle', 'redux-framework-demo' ),
-                'desc'     => __( 'Field Decription', 'redux-framework-demo' )
+                'desc'     => __( 'Field Decription', 'redux-framework-demo' ),
             ),
         )
     ) );

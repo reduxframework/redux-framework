@@ -16,6 +16,7 @@
      * @subpackage  Button_Set
      * @author      Daniel J Griffiths (Ghost1227)
      * @author      Dovy Paukstys
+     * @author      Kevin Provance (kprovance)
      * @version     3.0.0
      */
 
@@ -37,21 +38,6 @@
             /**
              * Holds configuration settings for each field in a model.
              * Defining the field options
-             * array['fields']              array Defines the fields to be shown by scaffolding.
-             *          [fieldName]         array Defines the options for a field, or just enables the field if array is not applied.
-             *              ['name']        string Overrides the field name (default is the array key)
-             *              ['model']       string (optional) Overrides the model if the field is a belongsTo associated value.
-             *              ['width']       string Defines the width of the field for paginate views. Examples are "100px" or "auto"
-             *              ['align']       string Alignment types for paginate views (left, right, center)
-             *              ['format']      string Formatting options for paginate fields. Options include ('currency','nice','niceShort','timeAgoInWords' or a valid Date() format)
-             *              ['title']       string Changes the field name shown in views.
-             *              ['desc']        string The description shown in edit/create views.
-             *              ['readonly']    boolean True prevents users from changing the value in edit/create forms.
-             *              ['type']        string Defines the input type used by the Form helper (example 'password')
-             *              ['options']     array Defines a list of string options for drop down lists.
-             *              ['editor']      boolean If set to True will show a WYSIWYG editor for this field.
-             *              ['default']     string The default value for create forms.
-             *
              * @param array $arr (See above)
              *
              * @return Object A new editor object.
@@ -96,26 +82,41 @@
                     }
                 }
 
+                $is_multi = (isset( $this->field['multi'] ) && $this->field['multi'] == true) ? true: false;
+                        
+                $name = $this->field['name'] . $this->field['name_suffix'];
+                
                 // multi => true renders the field multi-selectable (checkbox vs radio)
                 echo '<div class="buttonset ui-buttonset">';
-                $i = 0;
-                foreach ( $this->field['options'] as $k => $v ) {
+                
+                if ($is_multi) {
+                    $s      = '';
+                    
+                    if (empty($this->value)) {
+                        $s = $name;
+                    }
 
+                    echo '<input type="hidden" data-name="' . $name . '" class="buttonset-empty" name="' . $s . '" value=""/>';
+                    
+                    $name   = $name . '[]';
+                }
+                
+                foreach ( $this->field['options'] as $k => $v ) {
                     $selected = '';
-                    if ( isset( $this->field['multi'] ) && $this->field['multi'] == true ) {
-                        $type         = "checkbox";
-                        $multi_suffix = '[]';
+
+                    if ( $is_multi ) {
+                        $post_value     = '';
+                        $type           = "checkbox";
 
                         if ( ! empty( $this->value ) && ! is_array( $this->value ) ) {
                             $this->value = array( $this->value );
-                        }
+                        } 
 
                         if ( is_array( $this->value ) && in_array( $k, $this->value ) ) {
                             $selected = 'checked="checked"';
+                            $post_value = $k;
                         }
-
                     } else {
-                        $multi_suffix = "";
                         $type         = "radio";
 
                         if ( is_scalar( $this->value ) ) {
@@ -123,7 +124,26 @@
                         }
                     }
 
-                    echo '<input data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . $multi_suffix . '" class="buttonset-item ' . $this->field['class'] . '" value="' . $k . '" ' . $selected . '/>';
+                    $the_val    = $k;
+                    $the_name   = $name;
+                    $data_val   = '';
+                    $multi_class = '';
+                    
+                    if ($is_multi) {
+                        $the_val    = '';
+                        $the_name   = '';
+                        $data_val   = ' data-val="' . $k . '"';
+                        $hidden_name = $name;
+                        $multi_class = 'multi ';
+                        
+                        if ($post_value == '') {
+                            $hidden_name = '';
+                        }
+                        
+                        echo '<input type="hidden" class="buttonset-check" id="' . $this->field['id'] . '-buttonset' . $k . '-hidden" name="' .$hidden_name . '" value="' . $post_value . '"/>';
+                    }
+                    
+                    echo '<input' . $data_val . ' data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $the_name . '" class="buttonset-item ' . $multi_class . $this->field['class'] . '" value="' . $the_val . '" ' . $selected . '/>';
                     echo '<label for="' . $this->field['id'] . '-buttonset' . $k . '">' . $v . '</label>';
                 }
 
