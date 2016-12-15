@@ -79,7 +79,7 @@ if ( ! class_exists( 'ReduxFramework_multi_text' ) ) {
                 echo     '<a' . ' data-id="' . $this->field['id'] . '-ul"  href="javascript:void(0);" class="deletion redux-multi-text-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
                 echo '</li>';
             }
-var_dump($this->value);
+
             $the_name = '';
             if (isset($this->value) && empty($this->value) && $this->show_empty == false) {
                 $the_name = $this->field['name'] . $this->field['name_suffix'];
