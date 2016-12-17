@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.3.2
+^ Updated:  #3189 - PHP7 compatibility for preg_replace validation.
+
 ## 3.6.3.1
 * Fixed:    #3186 - Multi text field not removing single field when clicking "Remove".
 * Fixed:    #3180, #2641 - Button set multi mode saving incorrectly.  Please check your code for a possible backward compatibility issue when using this mode.  The foreach() function with an empty() check must now be used, versus individual array keys as only selected options are saved to the database.
