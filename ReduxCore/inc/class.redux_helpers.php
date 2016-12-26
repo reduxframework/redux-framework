@@ -25,10 +25,10 @@
                     if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
                         if ( Redux_Helpers::recursive_array_search( $field, $section['fields'] ) ) {
                             return $k;
-                            continue;
                         }
                     }
                 }
+                return null;
             }
 
             public static function isFieldInUseByType( $fields, $field = array() ) {
@@ -48,12 +48,12 @@
                     }
 
                     if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
-                        if ( Redux_Helpers::recursive_array_search( $field, $section['fields'] ) ) {
+                        if ( self::recursive_array_search( $field, $section['fields'] ) ) {
                             return true;
-                            continue;
                         }
                     }
                 }
+                return false;
             }
 
             public static function major_version( $v ) {
@@ -284,7 +284,7 @@
 
             public static function recursive_array_search( $needle, $haystack ) {
                 foreach ( $haystack as $key => $value ) {
-                    if ( $needle === $value || ( is_array( $value ) && self::recursive_array_search( $needle, $value ) !== false ) ) {
+                    if ( $needle === $value || ( (array)$value === $value && self::recursive_array_search( $needle, $value ) !== false ) ) {
                         return true;
                     }
                 }
