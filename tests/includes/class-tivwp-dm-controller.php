@@ -25,7 +25,7 @@ class TIVWP_DM_Controller {
          * The rest relies on user privileges, and therefore must wait until necessary WP functions are loaded
          */
         if (!did_action('plugins_loaded')) {
-            _doing_it_wrong(__METHOD__, __('Must call in of after the "plugins_loaded" action.'), '14.03.19');
+            _doing_it_wrong(__METHOD__, __('Must call in of after the "plugins_loaded" action.', 'tivwp-dm'), '14.03.19');
             return;
         }
 
