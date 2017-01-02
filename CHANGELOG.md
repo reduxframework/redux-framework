@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
+## 3.6.3.3
+* Fixed:    #3201 - Index error when using compiler argument with spinner field.
+
 ## 3.6.3.2
-^ Updated:  #3189 - PHP7 compatibility for preg_replace validation.
+* Updated:  #3189 - PHP7 compatibility for preg_replace validation.
 
 ## 3.6.3.1
 * Fixed:    #3186 - Multi text field not removing single field when clicking "Remove".
