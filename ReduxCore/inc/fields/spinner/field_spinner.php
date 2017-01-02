@@ -153,7 +153,7 @@ if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
                 }
 
                 if ( ! empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
-                    $css = $this->parseCSS($this->value, $this->field['output']);
+                    $css = $this->parseCSS($this->value, $this->field['compiler']);
                     $this->parent->compilerCSS .= $css;
 
                 }
