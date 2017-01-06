@@ -312,13 +312,13 @@
     //  Sync up font options
     redux.field_objects.typography.select = function( selector, skipCheck ) {
         var mainID;
-        
+
         // Main id for selected field
         mainID = $( selector ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
         if (mainID === undefined) {
             mainID = $(selector).attr( 'data-id' );
         }
-        
+
         var parent = $( selector ).parents( '.redux-container-typography:first' );
         var data = [];
         //$.each(parent.find('.redux-typography-field'), function() {
@@ -536,7 +536,7 @@
                     link += '&subset=' + script;
                 }
 
-                if (isSelecting === false) { 
+                if (isSelecting === false) {
                     if ( typeof (WebFont) !== "undefined" && WebFont ) {
                         WebFont.load( {google: {families: [link]}} );
                     }
@@ -558,10 +558,6 @@
         }
 
         $( '#' + mainID + ' .typography-font-weight' ).val( style );
-
-        if ( !height ) {
-            height = size;
-        }
 
         if ( size === '' || size === undefined ) {
             $( '#' + mainID + ' .typography-font-size' ).val( '' );
