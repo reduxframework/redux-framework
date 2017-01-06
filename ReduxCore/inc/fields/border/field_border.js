@@ -38,7 +38,9 @@
                 );
 
                 var default_params = {
-                    triggerChange: true,
+                    //triggerChange: true,
+                    width: 'auto',
+                    theme: 'classic',
                     allowClear: true
                 };
 

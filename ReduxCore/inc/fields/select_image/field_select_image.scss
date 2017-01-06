@@ -5,6 +5,10 @@
     margin-bottom: 0;
 }
 
+.select2-container--classic .select2-selection--single .select2-selection__clear {
+    font-size: 1.2em;
+}
+
 .redux-preview-image {
     max-height: 250px;
     max-width: 250px;

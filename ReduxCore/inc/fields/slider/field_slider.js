@@ -1,6 +1,6 @@
 /*global redux_change, redux*/
 
-(function( $ ) {
+(function ($) {
     "use strict";
 
     redux.field_objects = redux.field_objects || {};
@@ -153,14 +153,15 @@
 
                                     if ( displayValue == DISPLAY_SELECT ) {
                                         if ( handles === 2 ) {
-                                            el.find( '.redux-slider-select-one' ).select2( 'val', slider.val()[0] );
-                                            el.find( '.redux-slider-select-two' ).select2( 'val', slider.val()[1] );
+                                            el.find( '.redux-slider-select-one' ).val( slider.val()[0] ).trigger('change');
+                                            el.find( '.redux-slider-select-two' ).val( slider.val()[1] ).trigger('change');
                                         } else {
-                                            el.find( '.redux-slider-select-one' ).select2( 'val', slider.val() );
+                                            el.find( '.redux-slider-select-one' ).val( slider.val() );
                                         }
                                     }
 
-                                    redux_change( $( this ).parents( '.redux-field-container:first' ).find( 'input' ) );
+                                    //redux_change( $( this ).parents( '.redux-field-container:first' ).find( 'input' ) );
+                                    redux_change($(this));
                                 }
                             }
                         );
@@ -212,8 +213,9 @@
 
                 var default_params = {
                     width: 'resolve',
-                    triggerChange: true,
-                    allowClear: true
+                    //triggerChange: true,
+                    allowClear: true,
+                    theme: 'classic'
                 };
 
                 var select2_handle = el.find( '.select2_params' );

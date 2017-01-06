@@ -82,9 +82,9 @@
                 //*****************************************************************
                 Redux_CDN::register_style(
                     'select2-css',
-                    '//cdn.jsdelivr.net/select2/3.5.2/select2.css',
+                    '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2' . $this->min . '.css',
                     array(),
-                    '3.5.2',//$this->timestamp,
+                    $this->timestamp,
                     'all'
                 );
 
@@ -220,9 +220,9 @@
                 
                 Redux_CDN::register_script(
                     'select2-js',
-                    '//cdn.jsdelivr.net/select2/3.5.2/select2' . $this->min . '.js',
+                    '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2' . $this->min . '.js',
                     array( 'jquery', 'redux-select2-sortable-js' ),
-                    '3.5.2',
+                    '4.0.2',
                     true
                 );
 

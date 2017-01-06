@@ -35,7 +35,8 @@
                 }
                 var default_params = {
                     width: 'resolve',
-                    triggerChange: true,
+                    //triggerChange: true,
+                    theme: 'classic',
                     allowClear: true
                 };
 

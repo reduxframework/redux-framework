@@ -4,6 +4,10 @@
         width: 65px !important;
         float: left;
     }
+    
+    .select2-container--classic .select2-selection--single .select2-selection__clear {
+        font-size: 1.2em;
+    }
 
     .field-dimensions-input {
         margin-right: 10px;

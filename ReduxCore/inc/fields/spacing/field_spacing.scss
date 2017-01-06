@@ -4,7 +4,11 @@
         width: 80px !important;
         float: left;
     }
-
+    
+    .select2-container--classic .select2-selection--single .select2-selection__clear {
+        font-size: 1.2em;
+    }
+    
     .field-spacing-input {
         margin-right: 10px;
         margin-bottom: 7px;
