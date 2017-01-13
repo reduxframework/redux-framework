@@ -25,12 +25,6 @@
         allowClear: true
     };
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.typography.init();
-        }
-    );
-
     redux.field_objects.typography.init = function( selector, skipCheck) {
 
         if ( !selector ) {
@@ -104,7 +98,7 @@
                             {
                                 change: function( e, ui ) {
                                     $( this ).val( ui.color.toString() );
-                                    redux.field_objects.typography.select( $( this ).parents( '.redux-container-typography:first' ) );
+                                    redux.field_objects.typography.select( $( this ) );
                                 }
                             }
                         );
@@ -649,7 +643,5 @@
         if ( ! skipCheck ) {
             redux_change( selector );
         }
-
-
     };
 })( jQuery );

@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.3.4
+* Fixed     #3214 - Typography color field not triggering compiler hook.
+
 ## 3.6.3.3
 * Fixed:    #3201 - Index error when using compiler argument with spinner field.
 
