@@ -27,7 +27,7 @@
              */
             function validate() {
 
-                $this->value = esc_js( $this->value );
+                $this->value = $this->value;
             } //function
         } //class
     }
