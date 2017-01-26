@@ -113,7 +113,7 @@ if ( ! class_exists( 'ReduxFramework_spinner' ) ) {
             wp_enqueue_script(
                 'redux-field-spinner-custom-js',
                 ReduxFramework::$_url . 'inc/fields/spinner/vendor/spinner_custom.js',
-                array( 'jquery' ),
+                array( 'jquery','redux-js' ),
                 time(),
                 true
             );

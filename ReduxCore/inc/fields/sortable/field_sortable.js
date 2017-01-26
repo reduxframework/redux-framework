@@ -53,7 +53,8 @@
                             scroll = '';
                         },
 
-                        update: function() {
+                        update: function(event, ui) {
+                            // console.log('here');
                             redux_change( $( this ) );
                         }
                     }
