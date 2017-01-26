@@ -637,7 +637,21 @@
 
                 $basepath = apply_filters( "redux/textdomain/basepath/{$this->args['opt_name']}", $basepath );
 
-                load_plugin_textdomain( 'redux-framework', false, $basepath . 'languages' );
+                $loaded = load_plugin_textdomain( 'redux-framework', false, $basepath . 'languages');
+
+                if ( !$loaded ){
+                    $loaded = load_muplugin_textdomain( 'redux-framework', $basepath . 'languages' );
+                }
+
+                if ( !$loaded ){
+                    $loaded = load_theme_textdomain( 'redux-framework', $basepath . 'languages' );
+                }
+
+                if ( ! $loaded ) {
+                    $locale = apply_filters( 'plugin_locale', get_locale(), 'redux-framework' );
+                    $mofile = dirname( __FILE__ ) . '/languages/redux-framework-' . $locale . '.mo';
+                    load_textdomain( 'redux-framework', $mofile );
+                }
             }
             // _internationalization()
 
