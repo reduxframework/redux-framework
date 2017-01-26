@@ -8,6 +8,8 @@ project.properties
 sftp-config.json
 codekit-config.json
 .idea
+*.sublime-project
+*.sublime-workspace
 
 # Grunt
 md5
