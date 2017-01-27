@@ -10,11 +10,33 @@
     margin-top: 7px;
 }
 
-.form-table > tbody > tr > th {
-    width: 30%
-}
+
 
 .redux-container {
+    .form-table > tbody > tr > th {
+        width: 30%
+    }
+    .form-table th,
+    .form-table td {
+        margin: 0;
+        padding: 0;
+        width: auto;
+    }
+
+    .redux_field_th {
+        font-weight: 600;
+        // width: 30%;
+        padding: 20px 10px 20px 0px;
+        display: block;
+        span:first-child {
+            font-weight: normal;
+            display: block;
+            color: #666;
+        }
+    }
+    #ui-datepicker-div {
+        display: none;
+    }
     //font-family: "Open Sans","Lucida Grande", Sans-serif;
     background-color: #f5f5f5; /* Old browsers */
     background-repeat: repeat-x; /* Repeat the gradient */
@@ -294,7 +316,245 @@
         min-height: 300px;
 
     }
+    .redux-main {
+        background: #FCFCFC;
+        margin-left: 201px;
+        border-left: 1px solid #D8D8D8;
+        padding: 10px 20px;
+        -moz-box-shadow: inset 0 1px 0 #fff;
+        -webkit-box-shadow: inset 0 1px 0 #FFF;
+        box-shadow: inset 0 1px 0 #FFF;
+        position: relative;
+        #redux_ajax_overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            -moz-opacity: 0.10;
+            -khtml-opacity: 0.10;
+            opacity: 0.10;
+            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
+            filter: alpha(opacity=10);
+            background: #000;
+            z-index: 200;
+            display: none;
+        }
+        .form-table.no-border {
+            border-top: none;
+        }
+        .form-table tr {
+            border-bottom: 1px solid #E7E7E7;
+            &:last-child {
+                border-bottom: none !important;
+            }
+            th,
+            td {
+                color: #333;
+            }
+        }
+
+        .form-table tr td {
+            table.mceLayout,
+            table.mceLayout tr,
+            table.mceLayout tr td {
+                padding: 0;
+                border-width: 0;
+            }
+
+            .redux-th-warning {
+                font-size: 1em;
+                color: #C09853;
+                font-weight: normal;
+                display: block;
+                margin-top: 10px;
+            }
+
+            .redux-field-warning {
+                border-color: #C09853;
+                margin-top: 10px;
+            }
+
+            .redux-th-error {
+                font-size: 1em;
+                color: #B94A48;
+                font-weight: normal;
+                display: block;
+                margin-top: 10px;
+            }
+        }
+
+        input.large-text {
+            width: 100%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .redux-field-container {
+            padding: 20px 0;
+        }
+
+        .mini,
+        input[type=text].mini {
+            width: 60px;
+            text-align: center;
+        }
+
+        input {
+            line-height: 19px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            width: auto !important;
+        }
+
+        .select2-default {
+            width: auto !important;
+        }
+
+        .showDefaults {
+            display: block;
+            font-weight: normal;
+            font-size: .8em;
+            color: #888;
+        }
+
+        span.description {
+            display: block;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        #redux-system-info textarea {
+            min-height: 730px;
+            width: 100%;
+        }
+
+        .field-desc {
+            clear: both;
+            font-size: 13px;
+        }
+
+        .data-full li {
+            width: 100%;
+        }
+
+        .data-half li {
+            width: 50%;
+            float: left;
+        }
+
+        .data-third li {
+            width: 33.3%;
+            float: left;
+        }
+
+        .data-quarter li {
+            width: 25%;
+            float: left;
+        }
+
+        .ui-helper-hidden-accessible {
+            top: inherit;
+        }
+
+        .form-table:first-child > tr th, .redux-main .form-table:first-child > tr td {
+            //padding-top: 0 !important;
+        }
+
+        .form-table {
+            clear: none;
+            margin-top: 0px !important;
+
+            &:first-child tr th,
+            &:first-child tr td {
+                //            padding-top: 0 !important;
+            }
+
+            tr:first-child th,
+            tr:first-child td {
+                padding-top: 0;
+            }
+        }
+
+        .input-append input {
+            border-right: 0;
+            margin-bottom: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            margin-right: 0;
+            float: left;
+            margin-top: 0;
+            display: block;
+        }
+        .input-append .add-on {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            margin-left: -2px;
+            padding-top: 4px !important;
+            padding-bottom: 2px !important;
+            //float: left;
+        }
+        .input-prepend input {
+            border-left: 0;
+            margin-bottom: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            margin-left: 0;
+            padding-top: 2px;
+            padding-bottom: 5px;
+            float: left;
+            margin-top: 0;
+            display: block;
+        }
+        .input-prepend .add-on {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            float: left;
+        }
+
+        .input-append {
+            margin-right: 10px;
+            font-size: 0;
+            white-space: nowrap;
+            float: left;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .input-append .add-on, .input-prepend .add-on {
+            width: auto;
+            display: inline-block;
+            min-width: 16px;
+            padding: 3px 4px;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: center;
+            text-shadow: 0 1px 0 #ffffff;
+            background-color: #eeeeee;
+            border: 1px solid #cccccc;
+        }
+        .input-prepend {
+            font-size: 0;
+            white-space: nowrap;
+            float: left;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        pre {
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+        }
+    }
 }
+
 
 /* redux-container */
 
@@ -308,236 +568,7 @@
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.redux-main {
-    background: #FCFCFC;
-    margin-left: 201px;
-    border-left: 1px solid #D8D8D8;
-    padding: 10px 20px;
-    -moz-box-shadow: inset 0 1px 0 #fff;
-    -webkit-box-shadow: inset 0 1px 0 #FFF;
-    box-shadow: inset 0 1px 0 #FFF;
-    position: relative;
-    #redux_ajax_overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        -moz-opacity: 0.10;
-        -khtml-opacity: 0.10;
-        opacity: 0.10;
-        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
-        filter: alpha(opacity=10);
-        background: #000;
-        z-index: 200;
-        display: none;
-    }
-    .form-table.no-border {
-        border-top: none;
-    }
-    .form-table tr {
-        border-bottom: 1px solid #E7E7E7;
-        &:last-child {
-            border-bottom: none !important;
-        }
-        th,
-        td {
-            color: #333;
-        }
-    }
 
-    .form-table tr td {
-        table.mceLayout,
-        table.mceLayout tr,
-        table.mceLayout tr td {
-            padding: 0;
-            border-width: 0;
-        }
-
-        .redux-th-warning {
-            font-size: 1em;
-            color: #C09853;
-            font-weight: normal;
-            display: block;
-            margin-top: 10px;
-        }
-
-        .redux-field-warning {
-            border-color: #C09853;
-            margin-top: 10px;
-        }
-
-        .redux-th-error {
-            font-size: 1em;
-            color: #B94A48;
-            font-weight: normal;
-            display: block;
-            margin-top: 10px;
-        }
-    }
-
-    input.large-text {
-        width: 100%;
-    }
-
-    .hide {
-        display: none;
-    }
-
-    .redux-field-container {
-        padding: 20px 0;
-    }
-
-    .mini,
-    input[type=text].mini {
-        width: 60px;
-        text-align: center;
-    }
-
-    input {
-        line-height: 19px;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        width: auto !important;
-    }
-
-    .select2-default {
-        width: auto !important;
-    }
-
-    .showDefaults {
-        display: block;
-        font-weight: normal;
-        font-size: .8em;
-        color: #888;
-    }
-
-    span.description {
-        display: block;
-        font-style: normal;
-        font-weight: 400;
-    }
-
-    #redux-system-info textarea {
-        min-height: 730px;
-        width: 100%;
-    }
-
-    .field-desc {
-        clear: both;
-        font-size: 13px;
-    }
-
-    .data-full li {
-        width: 100%;
-    }
-
-    .data-half li {
-        width: 50%;
-        float: left;
-    }
-
-    .data-third li {
-        width: 33.3%;
-        float: left;
-    }
-
-    .data-quarter li {
-        width: 25%;
-        float: left;
-    }
-
-    .ui-helper-hidden-accessible {
-        top: inherit;
-    }
-
-    .form-table:first-child > tr th, .redux-main .form-table:first-child > tr td {
-        //padding-top: 0 !important;
-    }
-
-    .form-table {
-        clear: none;
-        margin-top: 0px !important;
-
-        &:first-child tr th,
-        &:first-child tr td {
-            //            padding-top: 0 !important;
-        }
-
-        tr:first-child th,
-        tr:first-child td {
-            padding-top: 0;
-        }
-    }
-
-    .input-append input {
-        border-right: 0;
-        margin-bottom: 0;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        margin-right: 0;
-        float: left;
-        margin-top: 0;
-        display: block;
-    }
-    .input-append .add-on {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-        margin-left: -2px;
-        padding-top: 4px !important;
-        padding-bottom: 2px !important;
-        //float: left;
-    }
-    .input-prepend input {
-        border-left: 0;
-        margin-bottom: 0;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        margin-left: 0;
-        padding-top: 2px;
-        padding-bottom: 5px;
-        float: left;
-        margin-top: 0;
-        display: block;
-    }
-    .input-prepend .add-on {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-        float: left;
-    }
-
-    .input-append {
-        margin-right: 10px;
-        font-size: 0;
-        white-space: nowrap;
-        float: left;
-        display: inline-block;
-        margin-bottom: 6px;
-    }
-    .input-append .add-on, .input-prepend .add-on {
-        width: auto;
-        display: inline-block;
-        min-width: 16px;
-        padding: 3px 4px;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 20px;
-        text-align: center;
-        text-shadow: 0 1px 0 #ffffff;
-        background-color: #eeeeee;
-        border: 1px solid #cccccc;
-    }
-    .input-prepend {
-        font-size: 0;
-        white-space: nowrap;
-        float: left;
-        display: inline-block;
-        margin-bottom: 6px;
-    }
-}
 
 /* main */
 
@@ -682,24 +713,7 @@
 
 /* sidebar */
 
-.form-table th,
-.form-table td {
-    margin: 0;
-    padding: 0;
-    width: auto;
-}
 
-.redux_field_th {
-    font-weight: 600;
-    // width: 30%;
-    padding: 20px 10px 20px 0px;
-    display: block;
-    span:first-child {
-        font-weight: normal;
-        display: block;
-        color: #666;
-    }
-}
 
 /*
  *
@@ -721,9 +735,7 @@
     z-index: 100;
 }
 
-#ui-datepicker-div {
-    display: none;
-}
+
 
 .mp6 {
     .icon-themes {
@@ -1507,10 +1519,3 @@ pre {
 
 }
 
-.redux-main pre {
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-}
