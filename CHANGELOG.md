@@ -1,7 +1,18 @@
 # Redux Framework Changelog
 
+## 3.6.3.5
+* Modified: Changed gitignore file to exclude sublime text files.
+* Fixed:    #2966 - Translation bug. Identified and fixed by @iiandrade. Thanks!
+* Modified: Generated all CSS map files to get rid of Chrome warnings.
+* Added:    Required for the Advanced Customizer thanks to @britner!
+* Modified: Various customizer fixes and changes to match new styles.
+* Modified: Customizer only code in Redux.js, moved to the customizer.js file.
+* Modified: Isolated Redux CSS to be nested and not affect other products or WP UI.
+* Added:    #3222 - HUGE update by @enchiridion to allow for advanced and complicated permissions. WTG!
+* Added:    New hooks for how Extension APIs are called. Much cleaner. 
+
 ## 3.6.3.4
-* Fixed     #3214 - Typography color field not triggering compiler hook.
+* Fixed:    #3214 - Typography color field not triggering compiler hook.
 
 ## 3.6.3.3
 * Fixed:    #3201 - Index error when using compiler argument with spinner field.
