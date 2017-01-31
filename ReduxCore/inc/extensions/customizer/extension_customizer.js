@@ -107,14 +107,11 @@
             parseAll = optWithDefault( 'parseAll' );
             return {
                 checkboxUncheckedValue: optWithDefault( 'checkboxUncheckedValue' ),
-
                 parseNumbers: parseAll || optWithDefault( 'parseNumbers' ),
                 parseBooleans: parseAll || optWithDefault( 'parseBooleans' ),
                 parseNulls: parseAll || optWithDefault( 'parseNulls' ),
                 parseWithFunction: optWithDefault( 'parseWithFunction' ),
-
                 typeFunctions: $.extend( {}, optWithDefault( 'defaultTypes' ), optWithDefault( 'customTypes' ) ),
-
                 useIntKeysAsArrayIndex: optWithDefault( 'useIntKeysAsArrayIndex' ),
             };
         },
@@ -325,7 +322,6 @@
 
 }( window.jQuery || window.$ ));
 
-
 (function( $ ) {  //This functions first parameter is named $
     'use strict';
 
@@ -355,17 +351,7 @@
         var redux_initFields = $.redux.initFields;
         $.redux.initFiles = function() {
             redux_initFields();
-            if ( !redux.customizer && $( this ).hasClass( 'redux_remove_th' ) ) {
 
-                var tr = $( this ).parents( 'tr:first' );
-                var th = tr.find( 'th:first' );
-                if ( th.html() && th.html().length > 0 ) {
-                    $( this ).prepend( th.html() );
-                    $( this ).find( '.redux_field_th' ).css( 'padding', '0 0 10px 0' );
-                }
-                $( this ).parent().attr( 'colspan', '2' );
-                th.remove();
-            }
         }
     };
 
