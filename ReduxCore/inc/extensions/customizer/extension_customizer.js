@@ -351,7 +351,6 @@
         var redux_initFields = $.redux.initFields;
         $.redux.initFiles = function() {
             redux_initFields();
-
         }
     };
 
