@@ -91,10 +91,10 @@
                 //*****************************************************************
                 // Spectrum CSS
                 //*****************************************************************
-                $css_file = 'redux-spectrum.min.css';
-                if ($this->parent->args['dev_mode']) {
+                //$css_file = 'redux-spectrum.min.css';
+                //if ($this->parent->args['dev_mode']) {
                     $css_file = 'redux-spectrum.css';
-                }                
+                //}
                 
                 wp_register_style(
                     'redux-spectrum-css',
@@ -263,17 +263,16 @@
                 //*****************************************************************
                 // Vendor JS
                 //*****************************************************************
-                if ( $this->parent->args['dev_mode'] ) {
-                    wp_register_script(
-                        'redux-vendor',
-                        ReduxFramework::$_url . 'assets/js/vendor.min.js',
-                        array( 'jquery' ),
-                        $this->timestamp,
-                        true
-                    );
+                wp_register_script(
+                    'redux-vendor',
+                    ReduxFramework::$_url . 'assets/js/vendor.min.js',
+                    array( 'jquery' ),
+                    $this->timestamp,
+                    true
+                );
 
-                    array_push( $depArray, 'redux-vendor' );
-                }
+                array_push( $depArray, 'redux-vendor' );
+
 
                 //*****************************************************************
                 // Redux JS
