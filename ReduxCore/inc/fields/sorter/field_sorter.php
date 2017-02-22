@@ -82,7 +82,7 @@
                 }
 
                 $temp = $this->replace_id_with_slug( $temp );
-                
+
                 if ( $this->is_value_empty( $this->value ) ) {
                     if ( ! empty( $this->field['options'] ) ) {
                         $this->value = $this->field['options'];
@@ -92,7 +92,9 @@
                 $sortlists = $this->value;
                 if ( ! empty( $sortlists ) ) {
                     foreach ( $sortlists as $section => $arr ) {
-                        $sortlists[ $section ] = $this->replace_id_with_slug( $arr );
+                        $arr = $this->replace_id_with_slug( $arr );
+                        $sortlists[ $section ] = $arr;
+                        $this->value[$section] = $arr;
                     }
                 }
 
