@@ -178,7 +178,7 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         echo '<span class="tiles ' . $v['class'] . '" style="background-image: url(' . $v['img'] . ');" rel="' . $v['img'] . '"">&nbsp;</span>';
                     } else {
-                        echo '<img src="' . $v['img'] . '" alt="' . $v['alt'] . '" class="' . $v['class'] . '" style="' . $style . '"' . $presets . $merge . ' />';
+                        echo '<img src="' . $v['img'] . '" title="'. $v['alt'] . '" alt="' . $v['alt'] . '" class="' . $v['class'] . '" style="' . $style . '"' . $presets . $merge . ' />';
                     }
 
                     if ( $v['title'] != '' ) {
