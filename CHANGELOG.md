@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.4
+* WP.org release
+
 ## 3.6.3.5
 * Modified: Changed gitignore file to exclude sublime text files.
 * Fixed:    #2966 - Translation bug. Identified and fixed by @iiandrade. Thanks!

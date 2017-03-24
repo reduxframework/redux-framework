@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.8
-Stable tag: 3.6.3
+Stable tag: 3.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,22 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+## 3.6.4
+* Modified: Changed gitignore file to exclude sublime text files.
+* Fixed:    #2966 - Translation bug. Identified and fixed by @iiandrade. Thanks!
+* Modified: Generated all CSS map files to get rid of Chrome warnings.
+* Added:    Required for the Advanced Customizer thanks to @britner!
+* Modified: Various customizer fixes and changes to match new styles.
+* Modified: Customizer only code in Redux.js, moved to the customizer.js file.
+* Modified: Isolated Redux CSS to be nested and not affect other products or WP UI.
+* Added:    #3222 - HUGE update by @enchiridion to allow for advanced and complicated permissions. WTG!
+* Added:    New hooks for how Extension APIs are called. Much cleaner.
+* Fixed:    #3214 - Typography color field not triggering compiler hook.
+* Fixed:    #3201 - Index error when using compiler argument with spinner field.
+* Updated:  #3189 - PHP7 compatibility for preg_replace validation.
+* Fixed:    #3186 - Multi text field not removing single field when clicking "Remove".
+* Fixed:    #3180, #2641 - Button set multi mode saving incorrectly.  Please check your code for a possible backward compatibility issue when using this mode.  The foreach() function with an empty() check must now be used, versus individual array keys as only selected options are saved to the database.
 
 ## 3.6.3
 * Modified: Change customizer hover styles to match WP 4.7.
