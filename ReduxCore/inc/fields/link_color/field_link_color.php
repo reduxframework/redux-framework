@@ -13,11 +13,11 @@
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package     ReduxFramework
- * @subpackage  Field_Color_Gradient
+ * @subpackage  Field_Link_Color
  * @author      Luciano "WebCaos" Ubertini
  * @author      Daniel J Griffiths (Ghost1227)
  * @author      Dovy Paukstys
- * @author      Kevin Provance (kprovance) - fixing everyone else's bugs.
+ * @author      Kevin Provance (kprovance)
  * @version     3.0.0
  */
 
@@ -53,7 +53,8 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
                 'regular' => true,
                 'hover'   => true,
                 'visited' => false,
-                'active'  => true
+                'active'  => true,
+                'focus'   => false
             );
             $this->field = wp_parse_args( $this->field, $defaults );
 
@@ -61,7 +62,8 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
                 'regular' => '',
                 'hover'   => '',
                 'visited' => '',
-                'active'  => ''
+                'active'  => '',
+                'focus'  => ''
             );
 
             $this->value = wp_parse_args( $this->value, $defaults );
@@ -93,12 +95,17 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
             }
 
             if ( $this->field['visited'] === true && $this->field['default']['visited'] !== false ) {
-                echo '<span class="linkColor"><strong>' . __( 'Visited', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-hover" name="' . $this->field['name'] . $this->field['name_suffix'] . '[visited]' . '" value="' . $this->value['visited'] . '" class="redux-color redux-color-visited redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['visited'] . '" /></span>';
+                echo '<span class="linkColor"><strong>' . __( 'Visited', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-visited" name="' . $this->field['name'] . $this->field['name_suffix'] . '[visited]' . '" value="' . $this->value['visited'] . '" class="redux-color redux-color-visited redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['visited'] . '" /></span>';
             }
 
             if ( $this->field['active'] === true && $this->field['default']['active'] !== false ) {
                 echo '<span class="linkColor"><strong>' . __( 'Active', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-active" name="' . $this->field['name'] . $this->field['name_suffix'] . '[active]' . '" value="' . $this->value['active'] . '" class="redux-color redux-color-active redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['active'] . '" /></span>';
             }
+            
+            if ( $this->field['focus'] === true && $this->field['default']['focus'] !== false ) {
+                echo '<span class="linkColor"><strong>' . __( 'Focus', 'redux-framework' ) . '</strong>&nbsp;<input id="' . $this->field['id'] . '-focus" name="' . $this->field['name'] . $this->field['name_suffix'] . '[focus]' . '" value="' . $this->value['focus'] . '" class="redux-color redux-color-focus redux-color-init ' . $this->field['class'] . '"  type="text" data-default-color="' . $this->field['default']['focus'] . '" /></span>';
+            }
+            
         }
 
         /**
@@ -153,6 +160,10 @@ if ( ! class_exists( 'ReduxFramework_link_color' ) ) {
                 $style['active'] = 'color:' . $this->value['active'] . ';';
             }
 
+            if ( ! empty( $this->value['focus'] ) && $this->field['focus'] === true && $this->field['default']['focus'] !== false ) {
+                $style['focus'] = 'color:' . $this->value['focus'] . ';';
+            }
+            
             if ( ! empty( $style ) ) {
                 if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
                     $styleString = "";

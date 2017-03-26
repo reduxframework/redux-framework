@@ -159,7 +159,7 @@
              * @return      void
              */
             public function enqueue() {
-
+                
                 if (!wp_script_is ( 'redux-field-button-set-js' )) {
                     wp_enqueue_script(
                         'redux-field-button-set-js',

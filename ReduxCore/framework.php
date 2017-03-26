@@ -3421,7 +3421,7 @@
                     if ( class_exists( $field_class ) ) {
                         $value = isset ( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : '';
 
-                        if ( $v !== null ) {
+                        if ( $v != null ) {
                             $value = $v;
                         }
 
@@ -3716,25 +3716,26 @@
                             foreach ( $parentValue as $idx => $val ) {
                                 if ( is_array( $checkValue ) ) {
                                     foreach ( $checkValue as $i => $v ) {
-                                        if ( $val == $v ) {
+                                        if ( $val === $v ) {
                                             $return = true;
                                         }
                                     }
                                 } else {
-                                    if ( $val == $checkValue ) {
+                                    if ( $val === $checkValue ) {
                                         $return = true;
                                     }
                                 }
                             }
                         } else {
+                            //var_dump($checkValue);
                             if ( is_array( $checkValue ) ) {
                                 foreach ( $checkValue as $i => $v ) {
-                                    if ( $parentValue == $v ) {
+                                    if ( $parentValue === $v ) {
                                         $return = true;
                                     }
                                 }
                             } else {
-                                if ( $parentValue == $checkValue ) {
+                                if ( $parentValue === $checkValue ) {
                                     $return = true;
                                 }
                             }
@@ -3748,12 +3749,12 @@
                             foreach ( $parentValue as $idx => $val ) {
                                 if ( is_array( $checkValue ) ) {
                                     foreach ( $checkValue as $i => $v ) {
-                                        if ( $val != $v ) {
+                                        if ( $val !== $v ) {
                                             $return = true;
                                         }
                                     }
                                 } else {
-                                    if ( $val != $checkValue ) {
+                                    if ( $val !== $checkValue ) {
                                         $return = true;
                                     }
                                 }
@@ -3761,12 +3762,12 @@
                         } else {
                             if ( is_array( $checkValue ) ) {
                                 foreach ( $checkValue as $i => $v ) {
-                                    if ( $parentValue != $v ) {
+                                    if ( $parentValue !== $v ) {
                                         $return = true;
                                     }
                                 }
                             } else {
-                                if ( $parentValue != $checkValue ) {
+                                if ( $parentValue !== $checkValue ) {
                                     $return = true;
                                 }
                             }

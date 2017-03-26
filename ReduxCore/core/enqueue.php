@@ -321,6 +321,7 @@
                             if ( ! isset( $this->parent->options[ $field['id'] ] ) ) {
                                 $this->parent->options[ $field['id'] ] = "";
                             }
+
                             $theField = new $field_class( $field, $this->parent->options[ $field['id'] ], $this->parent );
 
                             // Move dev_mode check to a new if/then block
