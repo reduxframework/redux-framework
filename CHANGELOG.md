@@ -1,5 +1,14 @@
 # Redux Framework Changelog
 
+## 3.6.4.1
+* Updated:  googlegonts.php file.
+* Modified: = and != required statements now use typesafe comparisons.
+* Fixed:    link_color field now properly displays all color fields.
+* Added:    link_color field now included 'focus' color block.
+* Modified: Re-styled link_color field to be more inline with other fields of it's type, that is, it looks better.
+* Added:    'title' attribute to image_select field, since 'alt' was no longer working to display hover tooltip.
+* Fixed:    Default data not saving correctly in sorter field.
+
 ## 3.6.4
 * WP.org release
 
