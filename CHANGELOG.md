@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.6.4.2
+* Fixed:    Tracking and newsletter popups were failing due to broken javascript.
+* Fixed:    #3291: Required with parent as an array not checking properly.  Someone took out my object check!! - kp
+* Modified: Date field calander now renders on .redux-container div.
+
 ## 3.6.4.1
 * Updated:  googlegonts.php file.
 * Modified: = and != required statements now use typesafe comparisons.

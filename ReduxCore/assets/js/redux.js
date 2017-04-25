@@ -996,14 +996,17 @@
             operation = data.operation,
             arr;
 
+        if ($.isPlainObject( parentValue )) {
+            parentValue = Object.keys( parentValue ).map(
+                function( key ) {
+                    return [key, parentValue[key]];
+                }
+            );            
+        }
+
         switch ( operation ) {
             case '=':
             case 'equals':
-                //                if ($.isPlainObject(parentValue)) {
-                //                    var arr = Object.keys(parentValue).map(function (key) {return parentValue[key]});
-                //                    parentValue = arr;
-                //                }
-
                 if ( $.isArray( parentValue ) ) {
                     $( parentValue[0] ).each(
                         function( idx, val ) {
@@ -1044,7 +1047,7 @@
             case '!=':
             case 'not':
                 if ( $.isArray( parentValue ) ) {
-                    $( parentValue ).each(
+                    $( parentValue[0] ).each(
                         function( idx, val ) {
                             if ( $.isArray( checkValue ) ) {
                                 $( checkValue ).each(

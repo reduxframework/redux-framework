@@ -94,8 +94,8 @@
                 <script type="text/javascript">
                     jQuery( document ).ready(
                         function() {
-                            jQuery( '#<?php echo esc_js($this->field['id']); ?>-marker' ).parents( 'tr:first' ).css( {display: 'none'} ).prev('tr' ).css('border-bottom','none');;
-                            var group = jQuery( '#<?php echo esc_js($this->field['id']); ?>-marker' ).parents( '.redux-group-tab:first' );
+                            jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( 'tr:first' ).css( {display: 'none'} ).prev('tr' ).css('border-bottom','none');;
+                            var group = jQuery( '#<?php echo $this->field['id']; ?>-marker' ).parents( '.redux-group-tab:first' );
                             if ( !group.hasClass( 'sectionsChecked' ) ) {
                                 group.addClass( 'sectionsChecked' );
                                 var test = group.find( '.redux-section-indent-start h3' );

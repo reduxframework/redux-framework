@@ -202,7 +202,7 @@
                                 redux_pointer_options = $.extend(
                                     redux_pointer_options, {
                                         buttons: function( event, t ) {
-                                            button = jQuery( '<a id="pointer-close" style="margin-left:5px" class="button-secondary">' + '<?php echo esc_js($button1); ?>' + '</a>' );
+                                            button = jQuery( '<a id="pointer-close" style="margin-left:5px" class="button-secondary">' + '<?php echo $button1; ?>' + '</a>' );
                                             button.bind(
                                                 'click.pointer', function() {
                                                     t.element.pointer( 'close' );
@@ -217,21 +217,21 @@
                                 );
 
                                 setup = function() {
-                                    $( '<?php echo esc_js($selector); ?>' ).pointer( redux_pointer_options ).pointer( 'open' );
+                                    $( '<?php echo $selector; ?>' ).pointer( redux_pointer_options ).pointer( 'open' );
                                     <?php if ($button2) { ?>
-                                    jQuery( '#pointer-close' ).after( '<a id="pointer-primary" class="button-primary">' + '<?php echo esc_js($button2); ?>' + '</a>' );
+                                    jQuery( '#pointer-close' ).after( '<a id="pointer-primary" class="button-primary">' + '<?php echo $button2; ?>' + '</a>' );
                                     jQuery( '#pointer-primary' ).click(
                                         function() {
-                                            <?php echo esc_js($button2_function); ?>
+                                            <?php echo $button2_function; ?>
                                         }
                                     );
                                     jQuery( '#pointer-close' ).click(
                                         function() {
                                             <?php if ($button1_function == '') { ?>
                                             redux_store_answer( input, nonce )
-                                            //redux_setIgnore("tour", "wp-pointer-0", "<?php echo esc_js(wp_create_nonce('redux-ignore')); ?>");
+                                            //redux_setIgnore("tour", "wp-pointer-0", "<?php echo wp_create_nonce('redux-ignore'); ?>");
                                             <?php } else { ?>
-                                            <?php echo esc_js($button1_function); ?>
+                                            <?php echo $button1_function; ?>
                                             <?php } ?>
                                         }
                                     );
@@ -239,7 +239,7 @@
                                     jQuery( '#pointer-close' ).click(
                                         function() {
                                             <?php if ($button1_function != '') { ?>
-                                            <?php echo esc_js($button1_function); ?>
+                                            <?php echo $button1_function; ?>
                                             <?php } ?>
                                         }
                                     );

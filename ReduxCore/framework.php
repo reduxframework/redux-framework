@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.4.1';
+            public static $_version = '3.6.4.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -832,6 +832,7 @@
              * @since ReduxFramework 3.0.0
              */
             public function get_options() {
+                var_dump('get options');
                 $defaults = false;
 
                 if ( ! empty ( $this->defaults ) ) {
@@ -864,7 +865,7 @@
                  * @param mixed $value option values
                  */
                 $this->options = apply_filters( "redux/options/{$this->args['opt_name']}/options", $this->options );
-
+var_dump("redux/options/{$this->args['opt_name']}/options");
                 // Get transient values
                 $this->get_transients();
 
@@ -3197,6 +3198,7 @@
                     $subsectionsClass = $subsections ? ' hasSubSections' : '';
                     $subsectionsClass .= ( ! isset ( $section['fields'] ) || empty ( $section['fields'] ) ) ? ' empty_section' : '';
                     $extra_icon = $subsections ? '<span class="extraIconSubsections"><i class="el el-chevron-down">&nbsp;</i></span>' : '';
+                    //var_dump($section);
                     $string .= '<li id="' . esc_attr( $k . $suffix ) . '_section_group_li" class="redux-group-tab-link-li' . esc_attr( $hide_section ) . esc_attr( $section['class'] ) . esc_attr( $subsectionsClass ) . '">';
                     $string .= '<a href="javascript:void(0);" id="' . esc_attr( $k . $suffix ) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr( $k ) . '" data-rel="' . esc_attr( $k . $suffix ) . '">' . $extra_icon . $icon . '<span class="group_title">' . wp_kses_post( $section['title'] ) . '</span></a>';
 

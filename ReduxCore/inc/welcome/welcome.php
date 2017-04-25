@@ -305,24 +305,24 @@
                 type='text/css' media='all'/>
             <style type="text/css">
                 .redux-badge:before {
-                <?php echo esc_js(is_rtl() ? 'right' : 'left'); ?> : 0;
+                <?php echo is_rtl() ? 'right' : 'left'; ?> : 0;
                 }
 
                 .about-wrap .redux-badge {
-                <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?> : 0;
+                <?php echo is_rtl() ? 'left' : 'right'; ?> : 0;
                 }
 
                 .about-wrap .feature-rest div {
-                    padding- <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?>: 100px;
+                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 100px;
                 }
 
                 .about-wrap .feature-rest div.last-feature {
-                    padding- <?php echo esc_js(is_rtl() ? 'right' : 'left'); ?>: 100px;
-                    padding- <?php echo esc_js(is_rtl() ? 'left' : 'right'); ?>: 0;
+                    padding- <?php echo is_rtl() ? 'right' : 'left'; ?>: 100px;
+                    padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 0;
                 }
 
                 .about-wrap .feature-rest div.icon:before {
-                    margin: <?php echo esc_js(is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'); ?>;
+                    margin: <?php echo is_rtl() ? '0 -100px 0 0' : '0 0 0 -100px'; ?>;
                 }
             </style>
             <?php
