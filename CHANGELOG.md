@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.4.3
+* Fixed:    Remove leftover var_dump from the core.
+
 ## 3.6.4.2
 * Fixed:    Tracking and newsletter popups were failing due to broken javascript.
 * Fixed:    #3291: Required with parent as an array not checking properly.  Someone took out my object check!! - kp
