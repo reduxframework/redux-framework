@@ -116,7 +116,7 @@
                 }
 
                 if ( ! empty ( $params ) ) {
-                    extract( $params );
+                    extract( $params, EXTR_SKIP );
                 }
 
                 if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
@@ -146,7 +146,7 @@
             public function do_action( $action, $file = '', $params = '' ) {
 
                 if ( ! empty ( $params ) ) {
-                    extract( $params );
+                    extract( $params, EXTR_SKIP );
                 }
 
                 global $wp_filesystem;
