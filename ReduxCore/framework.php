@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.4.2';
+            public static $_version = '3.6.4.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -832,7 +832,6 @@
              * @since ReduxFramework 3.0.0
              */
             public function get_options() {
-                var_dump('get options');
                 $defaults = false;
 
                 if ( ! empty ( $this->defaults ) ) {
@@ -865,7 +864,7 @@
                  * @param mixed $value option values
                  */
                 $this->options = apply_filters( "redux/options/{$this->args['opt_name']}/options", $this->options );
-var_dump("redux/options/{$this->args['opt_name']}/options");
+
                 // Get transient values
                 $this->get_transients();
 
