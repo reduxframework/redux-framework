@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.4.3';
+            public static $_version = '3.6.4.4';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -3717,12 +3717,12 @@
                             foreach ( $parentValue as $idx => $val ) {
                                 if ( is_array( $checkValue ) ) {
                                     foreach ( $checkValue as $i => $v ) {
-                                        if ( $val === $v ) {
+                                        if ( Redux_Helpers::makeBoolStr($val) === Redux_Helpers::makeBoolStr($v) ) {
                                             $return = true;
                                         }
                                     }
                                 } else {
-                                    if ( $val === $checkValue ) {
+                                    if ( Redux_Helpers::makeBoolStr($val) === Redux_Helpers::makeBoolStr($checkValue) ) {
                                         $return = true;
                                     }
                                 }
@@ -3731,12 +3731,12 @@
                             //var_dump($checkValue);
                             if ( is_array( $checkValue ) ) {
                                 foreach ( $checkValue as $i => $v ) {
-                                    if ( $parentValue === $v ) {
+                                    if ( Redux_Helpers::makeBoolStr($parentValue) === Redux_Helpers::makeBoolStr($v) ) {
                                         $return = true;
                                     }
                                 }
                             } else {
-                                if ( $parentValue === $checkValue ) {
+                                if ( Redux_Helpers::makeBoolStr($parentValue) === Redux_Helpers::makeBoolStr($checkValue) ) {
                                     $return = true;
                                 }
                             }
@@ -3750,12 +3750,12 @@
                             foreach ( $parentValue as $idx => $val ) {
                                 if ( is_array( $checkValue ) ) {
                                     foreach ( $checkValue as $i => $v ) {
-                                        if ( $val !== $v ) {
+                                        if ( Redux_Helpers::makeBoolStr($val) !== Redux_Helpers::makeBoolStr($v) ) {
                                             $return = true;
                                         }
                                     }
                                 } else {
-                                    if ( $val !== $checkValue ) {
+                                    if ( Redux_Helpers::makeBoolStr($val) !== Redux_Helpers::makeBoolStr($checkValue) ) {
                                         $return = true;
                                     }
                                 }
@@ -3763,12 +3763,12 @@
                         } else {
                             if ( is_array( $checkValue ) ) {
                                 foreach ( $checkValue as $i => $v ) {
-                                    if ( $parentValue !== $v ) {
+                                    if ( Redux_Helpers::makeBoolStr($parentValue) !== Redux_Helpers::makeBoolStr($v) ) {
                                         $return = true;
                                     }
                                 }
                             } else {
-                                if ( $parentValue !== $checkValue ) {
+                                if ( Redux_Helpers::makeBoolStr($parentValue) !== Redux_Helpers::makeBoolStr($checkValue) ) {
                                     $return = true;
                                 }
                             }

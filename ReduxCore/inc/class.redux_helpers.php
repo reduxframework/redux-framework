@@ -362,10 +362,12 @@
             }
 
             public static function makeBoolStr( $var ) {
-                if ( $var == false || $var == 'false' || $var == 0 || $var == '0' || $var == '' || empty( $var ) ) {
+                if ( $var === false || $var === 'false' || $var === 0 || $var === '0' || $var === '' || empty( $var ) ) {
                     return 'false';
-                } else {
+                } elseif ($var === true || $var === 'true' || $var === 1 || $var === '1') {
                     return 'true';
+                } else {
+                    return $var;
                 }
             }
 

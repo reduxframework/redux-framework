@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.4.4
+* Fixed:    #3293 - Required not liking/hiding fields with switch default of 'false'.
+
 ## 3.6.4.3
 * Fixed:    Remove leftover var_dump from the core.
 
