@@ -34,9 +34,16 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
             }
 
             if ( ! empty( $this->field['data'] ) && empty( $this->field['options'] ) ) {
-                if ( empty( $this->field['args'] ) ) {
-                    $this->field['args'] = array();
-                }
+                if ( $this->field['data'] == "roles" ) {
+	            	if ( empty( $this->field['args'] ) ) {
+	                    $this->field['args'] = array();
+	                }
+            	} else {
+            		if ( empty( $this->field['args'] ) ) {
+	                    $this->field['args'] = array();
+						echo $this->field['args'];
+	                }
+            	}     
 
                 if ( $this->field['data'] == "elusive-icons" || $this->field['data'] == "elusive-icon" || $this->field['data'] == "elusive" ) {
                     $icons_file = ReduxFramework::$_dir . 'inc/fields/select/elusive-icons.php';
