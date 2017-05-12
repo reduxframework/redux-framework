@@ -2757,12 +2757,14 @@
                 }
 
                 $this->transients['changed_values'] = array(); // Changed values since last save
-                foreach ( $this->options as $key => $value ) {
-                    if ( isset ( $plugin_options[ $key ] ) && $value != $plugin_options[ $key ] ) {
-                        $this->transients['changed_values'][ $key ] = $value;
+                if ( !empty( $this->options ) ) {
+                    foreach ( $this->options as $key => $value ) {
+                        if ( isset ( $plugin_options[ $key ] ) && $value != $plugin_options[ $key ] ) {
+                            $this->transients['changed_values'][ $key ] = $value;
+                        }
                     }
                 }
-
+                
                 unset ( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
                 if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
                     $this->set_options( $plugin_options );
