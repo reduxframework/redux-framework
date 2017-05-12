@@ -609,7 +609,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             }
 
             if ( ! empty( $subsets ) ) {
-                $link .= "&amp;subset=" . implode( ',', $subsets );
+                $link .= "&subset=" . implode( ',', $subsets );
             }
 
 
@@ -651,7 +651,7 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
             }
 
             if ( ! empty( $subsets ) ) {
-                $link .= "&amp;subset=" . implode( ',', $subsets );
+                $link .= "&subset=" . implode( ',', $subsets );
             }
 
             return "'" . $link . "'";
