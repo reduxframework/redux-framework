@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.5
+* Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
+
 ## 3.6.4.4
 * Fixed:    #3293 - Required not liking/hiding fields with switch default of 'false'.
 

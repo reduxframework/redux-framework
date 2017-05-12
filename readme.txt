@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.8
-Stable tag: 3.6.4
+Stable tag: 3.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,21 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+## 3.6.5
+* Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
+* Fixed:    #3293 - Required not liking/hiding fields with switch default of 'false'.
+* Fixed:    Remove leftover var_dump from the core.
+* Fixed:    Tracking and newsletter popups were failing due to broken javascript.
+* Fixed:    #3291: Required with parent as an array not checking properly.  Someone took out my object check!! - kp
+* Modified: Date field calander now renders on .redux-container div.
+* Updated:  googlegonts.php file.
+* Modified: = and != required statements now use typesafe comparisons.
+* Fixed:    link_color field now properly displays all color fields.
+* Added:    link_color field now included 'focus' color block.
+* Modified: Re-styled link_color field to be more inline with other fields of it's type, that is, it looks better.
+* Added:    'title' attribute to image_select field, since 'alt' was no longer working to display hover tooltip.
+* Fixed:    Default data not saving correctly in sorter field.
+
 
 ## 3.6.4
 * Modified: Changed gitignore file to exclude sublime text files.
