@@ -79,7 +79,12 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'vh',
+                        'vw',
+                        'vmin',
+                        'vmax',
+                        'ch'
                     ) )
             ) {
                 unset( $this->field['units'] );
@@ -97,7 +102,12 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'vh',
+                        'vw',
+                        'vmin',
+                        'vmax',
+                        'ch'
                     ) )
             ) {
                 unset( $this->value['units'] );
