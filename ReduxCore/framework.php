@@ -2764,7 +2764,7 @@
                         }
                     }
                 }
-                
+
                 unset ( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
                 if ( $this->args['database'] == 'transient' || $this->args['database'] == 'theme_mods' || $this->args['database'] == 'theme_mods_expanded' ) {
                     $this->set_options( $plugin_options );
@@ -4070,7 +4070,8 @@
                     return false;
                 }
 
-                $args = array_merge( array( $current_user ), func_get_args() );
+                $name_arr=func_get_args();
+                $args = array_merge( array( $current_user ),$name_arr );
 
                 return call_user_func_array( array( 'self', 'user_can' ), $args );
             }
