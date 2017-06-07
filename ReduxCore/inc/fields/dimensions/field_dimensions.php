@@ -271,8 +271,8 @@
 
                 $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
 
-                $height = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'height';
-                $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';
+                $height = $this->field['mode']['height'] != false ? $this->field['mode']['height'] : 'height';
+                $width  = $this->field['mode']['width'] != false ? $this->field['mode']['width'] : 'width';
 
                 $cleanValue = array(
                     $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
