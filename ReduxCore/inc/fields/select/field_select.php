@@ -165,6 +165,16 @@ if ( ! class_exists( 'ReduxFramework_select' ) ) {
                 time(),
                 true
             );
+            
+            if ($this->field['sortable']) {
+                wp_enqueue_script(
+                    'redux-field-sortable-js',
+                    ReduxFramework::$_url . 'inc/fields/sortable/field_sortable' . Redux_Functions::isMin() . '.js',
+                    array( 'jquery', 'redux-js', 'jquery-ui-sortable' ),
+                    time(),
+                    true
+                );
+            } 
 
             if ($this->parent->args['dev_mode']) {
                 wp_enqueue_style(
