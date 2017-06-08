@@ -133,6 +133,9 @@
         'output_tag'           => true,
         // Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
         // 'footer_credit'     => '',                   // Disable the footer credit of Redux. Please leave if you can help it.
+        
+        // Enables the footer credit on the entire admin section.
+        'global_footer_credit'  => true,
 
         // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
         'database'             => '',
