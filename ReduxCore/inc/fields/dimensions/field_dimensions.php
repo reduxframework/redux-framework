@@ -78,7 +78,12 @@
                         'pt',
                         'pc',
                         'px',
-                        'rem'
+                        'rem',
+                        'vh',
+                        'vw',
+                        'vmin',
+                        'vmax',
+                        'ch'
                     ) )
                 ) {
                     unset( $this->field['units'] );
@@ -95,7 +100,13 @@
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'rem',
+                        'vh',
+                        'vw',
+                        'vmin',
+                        'vmax',
+                        'ch'
                     ) )
                 ) {
                     unset( $this->value['units'] );
