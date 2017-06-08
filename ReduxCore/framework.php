@@ -1686,14 +1686,11 @@
                             }
                             WebFontConfig['google'] = {families: [<?php echo $typography->makeGoogleWebfontString ( $this->typography ) ?>]};
 
-                            (function() {
-                                var wf = document.createElement( 'script' );
-                                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js';
-                                wf.type = 'text/javascript';
-                                wf.async = 'true';
-                                var s = document.getElementsByTagName( 'script' )[0];
-                                s.parentNode.insertBefore( wf, s );
-                            })();
+                            (function(d) {
+                                var wf = d.createElement('script'), s = d.scripts[0];
+                                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+                                s.parentNode.insertBefore(wf, s);
+                            })(document);
                         </script>
                         <?php
                     } elseif ( ! $this->args['disable_google_fonts_link'] ) {
