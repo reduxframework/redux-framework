@@ -98,6 +98,8 @@
         'update_notice'        => true,
         // If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
         'customizer'           => true,
+		//Show the options panel only in customizer not in wordpress dashboard
+		'customizer_only' => false,
         // Enable basic customizer support
         //'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
         //'disable_save_warn' => true,                    // Disable the save warning when a user changes a field
