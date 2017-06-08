@@ -32,6 +32,7 @@
             $.redux.checkRequired();
             $.redux.initEvents();
             $.redux.initQtip();
+            $.redux.stickySidebar();
             $.redux.tabCheck();
             $.redux.notices();
             $.redux.tabControl();
@@ -476,6 +477,20 @@
                 }
             );
         }
+    };
+    
+    $.redux.stickySidebar = function(){
+        var sidebar = $('.redux-sidebar'),
+            offset  = $('#wpadminbar').outerHeight();
+            
+        if( sidebar.length > 0 ){
+            
+            sidebar.stick_in_parent({
+                offset_top: offset
+            });
+        }
+        
+        
     };
 
     $.redux.tabCheck = function() {
