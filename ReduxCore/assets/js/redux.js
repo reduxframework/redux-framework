@@ -311,7 +311,7 @@
             }
         );
 
-        $( 'td > fieldset:empty,td > div:empty' ).parent().parent().hide();
+        $( '.redux-container' ).find( 'td > fieldset:empty,td > div:empty' ).parent().parent().hide();
     };
 
     $.redux.initQtip = function() {
