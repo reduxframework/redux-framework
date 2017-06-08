@@ -52,8 +52,12 @@
         'global_variable'      => '',
         // Set a different name for your global variable other than the opt_name
         'dev_mode'             => true,
+		// If you are on localhost dev_mode will be set to true even if you set it to false set  forced_dev_mode_off to true to disable the dev mode
+		'forced_dev_mode_off' => false,
         // Show the time the page took to load, etc
         'update_notice'        => true,
+		//Show the options panel only in customzier not in wordpress dashboard
+		'customizer_only' => false,
         // If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
         'customizer'           => true,
         // Enable basic customizer support
