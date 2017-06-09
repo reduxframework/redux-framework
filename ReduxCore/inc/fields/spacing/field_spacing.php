@@ -79,7 +79,9 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'vw',
+                        'vh'
                     ) )
             ) {
                 unset( $this->field['units'] );
@@ -97,7 +99,9 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'vw',
+                        'vh'
                     ) )
             ) {
                 unset( $this->value['units'] );
@@ -246,7 +250,7 @@ if ( ! class_exists( 'ReduxFramework_spacing' ) ) {
                 echo '<select data-placeholder="' . __( 'Units', 'redux-framework' ) . '" class="redux-spacing redux-spacing-units select ' . $this->field['class'] . '" original-title="' . __( 'Units', 'redux-framework' ) . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[units]' . '" id="' . $this->field['id'] . '_units">';
 
                 if ( $this->field['units_extended'] ) {
-                    $testUnits = array( 'px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc' );
+                    $testUnits = array( 'px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc', 'vw', 'vh' );
                 } else {
                     $testUnits = array( 'px', 'em', 'pt', 'rem', '%' );
                 }

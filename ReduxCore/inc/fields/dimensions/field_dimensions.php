@@ -74,11 +74,13 @@
                         'cm',
                         'mm',
                         'em',
+                        'rem',
                         'ex',
                         'pt',
                         'pc',
                         'px',
-                        'rem'
+                        'vw',
+                        'vh'
                     ) )
                 ) {
                     unset( $this->field['units'] );
@@ -87,15 +89,19 @@
                 //if there is a default unit value  but is not an accepted value, unset the variable
                 if ( isset( $this->value['units'] ) && ! Redux_Helpers::array_in_array( $this->value['units'], array(
                         '',
+                        false,
                         '%',
                         'in',
                         'cm',
                         'mm',
                         'em',
+                        'rem',
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'vw',
+                        'vh'
                     ) )
                 ) {
                     unset( $this->value['units'] );
@@ -191,7 +197,7 @@
 
                     //  Extended units, show 'em all
                     if ( $this->field['units_extended'] ) {
-                        $testUnits = array( 'px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc' );
+                        $testUnits = array( 'px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc', 'vw', 'vh' );
                     } else {
                         $testUnits = array( 'px', 'em', 'rem', '%' );
                     }
