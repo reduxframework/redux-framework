@@ -278,9 +278,6 @@ class Parsedown
         return $markup;
     }
 
-    #
-    # Allow for plugin extensibility
-    #
     protected function isBlockContinuable($Type)
     {
         return method_exists($this, 'block'.$Type.'Continue');
@@ -451,7 +448,7 @@ class Parsedown
             return $Block;
         }
 
-        $Block['element']['text']['text'] .= "\n".$Line['body'];;
+        $Block['element']['text']['text'] .= "\n".$Line['body'];
 
         return $Block;
     }
@@ -517,6 +514,16 @@ class Parsedown
                     'handler' => 'elements',
                 ),
             );
+
+            if($name === 'ol') 
+            {
+                $listStart = stristr($matches[0], '.', true);
+                
+                if($listStart !== '1')
+                {
+                    $Block['element']['attributes'] = array('start' => $listStart);
+                }
+            }
 
             $Block['li'] = array(
                 'name' => 'li',
@@ -762,8 +769,7 @@ class Parsedown
 
     protected function blockReference($Line)
     {
-        # ReduxFramework added string alerting to remove themecheck error.
-        if (preg_match('/^\[(.+?)\]:[ ]*<'.'?'.'(\S+?)>?(?:[ ]+["\'(](.+)["\')])?[ ]*$/', $Line['text'], $matches))
+        if (preg_match('/^\[(.+?)\]:[ ]*<?(\S+?)>?(?:[ ]+["\'(](.+)["\')])?[ ]*$/', $Line['text'], $matches))
         {
             $id = strtolower($matches[1]);
 
@@ -1198,7 +1204,7 @@ class Parsedown
 
         $remainder = $Excerpt['text'];
 
-        if (preg_match('/\[((?:[^][]|(?R))*)\]/', $remainder, $matches))
+        if (preg_match('/\[((?:[^][]++|(?R))*+)\]/', $remainder, $matches))
         {
             $Element['text'] = $matches[1];
 
@@ -1211,7 +1217,7 @@ class Parsedown
             return;
         }
 
-        if (preg_match('/^[(]((?:[^ ()]|[(][^ )]+[)])+)(?:[ ]+("[^"]*"|\'[^\']*\'))?[)]/', $remainder, $matches))
+        if (preg_match('/^[(]\s*+((?:[^ ()]++|[(][^ )]+[)])++)(?:[ ]+("[^"]*"|\'[^\']*\'))?\s*[)]/', $remainder, $matches))
         {
             $Element['attributes']['href'] = $matches[1];
 
@@ -1533,10 +1539,10 @@ class Parsedown
         'b', 'em', 'big', 'cite', 'small', 'spacer', 'listing',
         'i', 'rp', 'del', 'code',          'strike', 'marquee',
         'q', 'rt', 'ins', 'font',          'strong',
-        's', 'tt', 'sub', 'mark',
-        'u', 'xm', 'sup', 'nobr',
-                   'var', 'ruby',
-                   'wbr', 'span',
-                          'time',
+        's', 'tt', 'kbd', 'mark',
+        'u', 'xm', 'sub', 'nobr',
+                   'sup', 'ruby',
+                   'var', 'span',
+                   'wbr', 'time',
     );
 }

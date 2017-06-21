@@ -1,5 +1,12 @@
 # Redux Framework Changelog
 
+## 3.6.5.2
+* Update:   Parsedown.php for PHP 7.x
+* Fixed:    System status improperly reporting writable status on upload folder.
+
+## 3.6.5.1
+* Fixed:    #3124 - User submitted 'current_user_can' failing on PHP version <= 3.5.13.  Thanks for the assist, @sourabgupta88
+
 ## 3.6.5
 * Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
 * Modified: PHP7 compatibility.
