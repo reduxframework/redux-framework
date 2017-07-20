@@ -392,7 +392,7 @@
                 $f                         = 'fo' . 'pen';
                 
                 $res = true;
-                if ($f( ReduxCore::$_upload_dir . 'test-log.log', 'a' ) === false) {
+                if ($f( ReduxFramework::$_upload_dir . 'test-log.log', 'a' ) === false) {
                     $res = false;
                 }
                 
