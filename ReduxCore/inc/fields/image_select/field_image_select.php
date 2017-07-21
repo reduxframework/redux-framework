@@ -143,8 +143,8 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                                         $selected = false;
                                     } else if ( ! empty( $pv ) && ! isset( $this->parent->options[ $pk ] ) ) {
                                         $selected = false;
-                                    } else if ( isset( $this->parent->options[ $pk ] ) && $this->parent->options[ $pk ] != $pv ) {
-                                        $selected = false;
+                                    //} else if ( isset( $this->parent->options[ $pk ] ) && $this->parent->options[ $pk ] != $pv ) {
+                                    //    $selected = false;
                                     }
 
                                     if ( ! $selected ) { // We're still not using the same preset. Let's unset that shall we?
