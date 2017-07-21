@@ -1,5 +1,10 @@
 # Redux Framework Changelog
 
+## 3.6.5.3
+* Misspelled class name is system info compiler causing System Status to fail.
+* #3359 - Responsive issue on option panel.  Too much blank space on panel in smartphone mode.
+* #2914, #3356 - Default image_select preset image not selected.  This was originally by design.  Now it's a thing.
+
 ## 3.6.5.2
 * Update:   Parsedown.php for PHP 7.x
 * Fixed:    System status improperly reporting writable status on upload folder.
