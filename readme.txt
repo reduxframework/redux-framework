@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.8
-Stable tag: 3.6.5
+Stable tag: 3.6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,16 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+## 3.6.6
+* Misspelled class name is system info compiler causing System Status to fail.
+* #3359 - Responsive issue on option panel.  Too much blank space on panel in smartphone mode.
+* #2914, #3356 - Default image_select preset image not selected.  This was originally by design.  Now it's a thing.
+* Update:   Parsedown.php for PHP 7.x
+* Fixed:    System status improperly reporting writable status on upload folder.
+* Fixed:    #3124 - User submitted 'current_user_can' failing on PHP version <= 3.5.13.  Thanks for the assist, @sourabgupta88
+* Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
+* Modified: PHP7 compatibility.
+
 ## 3.6.5
 * Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
 * Fixed:    #3293 - Required not liking/hiding fields with switch default of 'false'.

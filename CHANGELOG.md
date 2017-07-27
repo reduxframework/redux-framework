@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+##3.6.6
+wp.org release.
+
 ## 3.6.5.3
 * Misspelled class name is system info compiler causing System Status to fail.
 * #3359 - Responsive issue on option panel.  Too much blank space on panel in smartphone mode.
