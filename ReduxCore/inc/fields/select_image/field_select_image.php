@@ -40,15 +40,6 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
             // If options is NOT empty, the process
             if ( ! empty( $this->field['options'] ) ) {
 
-                // Strip off the file ext
-                if ( isset( $this->value ) ) {
-                    $name        = explode( ".", $this->value );
-                    $name        = str_replace( '.' . end( $name ), '', $this->value );
-                    $name        = basename( $name );
-                    //$this->value = trim( $name );
-                    $filename = trim($name);
-                }
-
                 // beancounter
                 $x = 1;
 
@@ -73,7 +64,6 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
                 echo '<select data-id="' . $this->field['id'] . '" data-placeholder="' . $placeholder . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="redux-select-item redux-select-images ' . $this->field['class'] . '"' . $width . ' rows="6">';
                 echo '<option></option>';
 
-
                 // Enum through the options array
                 foreach ( $this->field['options'] as $k => $v ) {
 
@@ -92,7 +82,7 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
                     if ( ! isset( $v['alt'] ) ) {
                         $v['alt'] = $v['title'];
                     }
-
+                    
                     // Set the selected entry
                     $selected = selected( $this->value, $v['img'], false );
 
@@ -133,7 +123,7 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
                 if ( '' == $this->value ) {
                     echo '<img src="#" class="redux-preview-image" style="visibility:hidden;" id="image_' . $this->field['id'] . '">';
                 } else {
-                    echo '<img src=' . $this->field['options'][ $arrNum - 1 ]['img'] . ' class="redux-preview-image" id="image_' . $this->field['id'] . '">';
+                    echo '<img src=' . $this->value . ' class="redux-preview-image" id="image_' . $this->field['id'] . '">';
                 }
 
                 // Close the <div> tag.
