@@ -1327,18 +1327,6 @@
                 'default'  => array( '2', '3' )
             ),
             array(
-                'id'       => 'opt-select-image',
-                'type'     => 'select_image',
-                'title'    => __( 'Select Image', 'redux-framework-demo' ),
-                'subtitle' => __( 'A preview of the selected image will appear underneath the select box.', 'redux-framework-demo' ),
-                'options'  => $sample_patterns,
-                // Alternatively
-                //'options'   => Array(
-                //                'img_name' => 'img_path'
-                //             )
-                'default'  => 'tree_bark.png',
-            ),
-            array(
                 'id'   => 'opt-info',
                 'type' => 'info',
                 'desc' => __( 'You can easily add a variety of data from WordPress.', 'redux-framework-demo' ),
@@ -1585,6 +1573,7 @@
             ),
         )
     ) );
+    
     Redux::setSection( $opt_name, array(
         'title'      => __( 'Select Image', 'redux-framework-demo' ),
         'id'         => 'select-select_image',
@@ -1592,21 +1581,30 @@
         'subsection' => true,
         'fields'     => array(
             array(
-                'id'      => 'opt-select_image',
+                'id'      => 'opt-select_image-field',
                 'type'    => 'select_image',
-                'presets' => true,
                 'title'   => __( 'Select Image', 'redux-framework-demo' ),
-                'default' => 0,
+                'subtitle' => __( 'A preview of the selected image will appear underneath the select box.', 'redux-framework-demo' ),
                 'options' => array(
-                    '1' => array(
+                    array(
                         'alt' => 'Preset 1',
                         'img' => ReduxFramework::$_url . '../sample/presets/preset1.png',
                     ),
-                    '2' => array(
+                    array(
                         'alt' => 'Preset 2',
                         'img' => ReduxFramework::$_url . '../sample/presets/preset2.png',
                     ),
                 ),
+                'default' => ReduxFramework::$_url . '../sample/presets/preset2.png',
+            ),
+            
+            array(
+                'id'       => 'opt-select-image',
+                'type'     => 'select_image',
+                'title'    => __( 'Select Image', 'redux-framework-demo' ),
+                'subtitle' => __( 'A preview of the selected image will appear underneath the select box.', 'redux-framework-demo' ),
+                'options'  => $sample_patterns,
+                'default'  => ReduxFramework::$_url . '../sample/patterns/triangular.png',
             ),
         )
     ) );

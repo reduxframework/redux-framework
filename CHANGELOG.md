@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
-##3.6.6
-wp.org release.
+## 3.6.6.1
+* #3379 - select-image field not properly displaying default.  'default' arg must now be the full path to default image.
+
+## 3.6.6
+* wp.org release.
 
 ## 3.6.5.3
 * Misspelled class name is system info compiler causing System Status to fail.
