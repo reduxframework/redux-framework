@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.6.2
+* Updated newsletter subscribe submit to support our newer newsletter server.
+
 ## 3.6.6.1
 * #3379 - select-image field not properly displaying default.  'default' arg must now be the full path to default image.
 
