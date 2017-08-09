@@ -1,10 +1,13 @@
 # Redux Framework Changelog
 
+## 3.6.6.3
+* Fixed:    Array declarations PHP 7.1 now requires.
+
 ## 3.6.6.2
-* Updated newsletter subscribe submit to support our newer newsletter server.
+* Updated:  Updated newsletter subscribe submit to support our newer newsletter server.
 
 ## 3.6.6.1
-* #3379 - select-image field not properly displaying default.  'default' arg must now be the full path to default image.
+* Fixed:    #3379 - select_image field not properly displaying default.  'default' arg must now be the full path to default image.
 
 ## 3.6.6
 * wp.org release.

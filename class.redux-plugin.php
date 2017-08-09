@@ -26,7 +26,7 @@
              * @since       3.0.0
              */
 
-            const VERSION = '3.6.6.2';
+            const VERSION = '3.6.6.3';
 
             /**
              * @access      protected
@@ -308,6 +308,8 @@
              * @return      void
              */
             private static function single_activate() {
+                $notices = array();
+                
                 $notices   = get_option( 'ReduxFrameworkPlugin_ACTIVATED_NOTICES', array() );
                 $notices[] = __( 'Redux Framework has an embedded demo.', 'redux-framework' ) . ' <a href="./plugins.php?ReduxFrameworkPlugin=demo">' . __( 'Click here to activate the sample config file.', 'redux-framework' ) . '</a>';
 

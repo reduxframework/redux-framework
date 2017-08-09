@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.6.2';
+            public static $_version = '3.6.6.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -3978,6 +3978,8 @@
              * @return  array $merged
              */
             function redux_array_merge_recursive_distinct( array $array1, array $array2 ) {
+                $merged = array();
+                
                 $merged = $array1;
 
                 foreach ( $array2 as $key => $value ) {
@@ -4124,7 +4126,8 @@
              */
             public static function user_can( $user, $capabilities, $object_id = null ) {
                 static $depth = 0;
-
+                $args = array();
+                
                 if ( $depth >= 30 ) {
                     return false;
                 }

@@ -417,6 +417,8 @@
                 header( 'Pragma: no-cache' );
                 $instances = ReduxFrameworkInstances::get_all_instances();
 
+                $array = array();
+                
                 if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) {
                     if ( is_array( $instances ) && ! empty( $instances ) ) {
                         foreach ( $instances as $opt_name => $data ) {
