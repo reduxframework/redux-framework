@@ -216,6 +216,10 @@
                     $this->args['transient_time'] = 60 * MINUTE_IN_SECONDS;
                 }
 
+                if ( empty ( $this->args['wp_data_transient_time'] ) ) {
+                    $this->args['wp_data_transient_time'] = 60;
+                }
+
                 if ( empty ( $this->args['footer_credit'] ) ) {
                     $this->args['footer_credit'] = '<span id="footer-thankyou">' . sprintf( __( 'Options panel created using %1$s', 'redux-framework' ), '<a href="' . esc_url( $this->framework_url ) . '" target="_blank">' . __( 'Redux Framework', 'redux-framework' ) . '</a> v' . self::$_version ) . '</span>';
                 }
@@ -910,6 +914,12 @@
                     $data = $this->wp_data[ $type . $argsKey ];
                 }
 
+                $dataTransientName = $this->args['opt_name'] . $type . $argsKey . 'wp_data';
+                $dataTransient = get_transient( $dataTransientName );
+                if( false !== $dataTransient ) {
+                    return $dataTransient;
+                }
+
                 if ( empty ( $data ) && ! empty ( $type ) ) {
 
                     /**
@@ -1097,8 +1107,10 @@
 
                     $this->wp_data[ $type . $argsKey ] = $data;
                 }
-
                 //if
+               
+                // Set WP Data Transient
+                set_transient( $dataTransientName, $data , $this->args['wp_data_transient_time'] );
 
                 return $data;
             }
