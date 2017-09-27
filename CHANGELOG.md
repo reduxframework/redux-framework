@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.7
+* Fixed:    #3406 - javascript hasClass improperly used, affected customizer.
+* Updated:  Google Fonts.
+
 ## 3.6.6.3
 * Fixed:    Array declarations PHP 7.1 now requires.
 
@@ -13,9 +17,9 @@
 * wp.org release.
 
 ## 3.6.5.3
-* Misspelled class name is system info compiler causing System Status to fail.
-* #3359 - Responsive issue on option panel.  Too much blank space on panel in smartphone mode.
-* #2914, #3356 - Default image_select preset image not selected.  This was originally by design.  Now it's a thing.
+* Fixed:    Misspelled class name is system info compiler causing System Status to fail.
+* Fixed:    #3359 - Responsive issue on option panel.  Too much blank space on panel in smartphone mode.
+* Fixed:    #2914, #3356 - Default image_select preset image not selected.  This was originally by design.  Now it's a thing.
 
 ## 3.6.5.2
 * Update:   Parsedown.php for PHP 7.x

@@ -857,10 +857,10 @@
         }
 
         var container = current.parents( '.redux-field-container:first' ),
-            is_hidden = container.parents( 'tr:first' ).hasClass( '.hide' );
+            is_hidden = container.parents( 'tr:first' ).hasClass( 'hide' );
 
         if ( !container.parents( 'tr:first' ).length ) {
-            is_hidden = container.parents( '.customize-control:first' ).hasClass( '.hide' );
+            is_hidden = container.parents( '.customize-control:first' ).hasClass( 'hide' );
         }
 
         $.each(
@@ -973,7 +973,7 @@
         if ( redux.required_child.hasOwnProperty( id ) ) {
             $.each(
                 redux.required_child[id], function( i, parentData ) {
-                    if ( $( '#' + redux.args.opt_name + '-' + parentData.parent ).parents( 'tr:first' ).hasClass( '.hide' ) ) {
+                    if ( $( '#' + redux.args.opt_name + '-' + parentData.parent ).parents( 'tr:first' ).hasClass( 'hide' ) ) {
                         show = false;
                     } else {
                         if ( show !== false ) {
