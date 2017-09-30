@@ -1453,58 +1453,41 @@
     $( document ).ready(
         function() {
             if ( redux.rAds ) {
-                setTimeout(
+                var el;
+                if ( $( '#redux-header' ).length > 0 ) {
+                    $( '#redux-header' ).append( '<div class="rAds"></div>' );
+                    el = $( '#redux-header' );
+                } else {
+                    $( '#customize-theme-controls ul' ).first().prepend(
+                        '<li id="redux_rAds" class="accordion-section rAdsContainer" style="position: relative;"><div class="rAds"></div></li>' );
+                    el = $( '#redux_rAds' );
+                }
+
+                el.css( 'position', 'relative' );
+                el.find( '.rAds' ).attr(
+                    'style',
+                    'position:absolute; top: 6px; right: 9px; display:block !important;overflow:hidden;'
+                ).css( 'left', '-99999px' );
+                el.find( '.rAds' ).html( redux.rAds.replace( /<br\s?\/?>/, '' ) );
+                var rAds = el.find( '.rAds' );
+
+                $( rAds ).hide();
+                rAds.bind( "DOMSubtreeModified", function() {
+                    if ( $( this ).html().indexOf( "<a href" ) >= 0 ) {
+                        rAds.find( 'img' ).css( 'visibility', 'hidden' );
+                        setTimeout( function() {
+                            rAds.show();
+                            $.redux.resizeAds();
+                        }, 400 );
+                        rAds.find( 'img' ).css( 'visibility', 'inherit' );
+                        rAds.unbind( "DOMSubtreeModified" );
+                    }
+
+                } );
+                $( window ).resize(
                     function() {
-                        var el;
-                        if ( $( '#redux-header' ).length > 0 ) {
-                            $( '#redux-header' ).append( '<div class="rAds"></div>' );
-                            el = $( '#redux-header' );
-                        } else {
-                            $( '#customize-theme-controls ul' ).first().prepend( '<li id="redux_rAds" class="accordion-section rAdsContainer" style="position: relative;"><div class="rAds"></div></li>' );
-                            el = $( '#redux_rAds' );
-                        }
-
-                        el.css( 'position', 'relative' );
-
-                        el.find( '.rAds' ).attr(
-                            'style',
-                            'position:absolute; top: 6px; right: 6px; display:block !important;overflow:hidden;'
-                        ).css( 'left', '-99999px' );
-                        el.find( '.rAds' ).html( redux.rAds.replace( /<br\s?\/?>/, '' ) );
-                        var rAds = el.find( '.rAds' );
-
-                        var maxHeight = el.height();
-                        var maxWidth = el.width() - el.find( '.display_header' ).width() - 30;
-
-                        rAds.find( 'a' ).css( 'float', 'right' ).css( 'line-height', el.height() + 'px' ).css(
-                            'margin-left', '5px'
-                        );
-
-                        $( document ).ajaxComplete(
-                            function() {
-                                rAds.find( 'a' ).hide();
-                                setTimeout(
-                                    function() {
-                                        $.redux.resizeAds();
-                                        rAds.find( 'a' ).fadeIn();
-                                    }, 1400
-                                );
-                                setTimeout(
-                                    function() {
-                                        $.redux.resizeAds();
-
-                                    }, 1500
-                                );
-                                $( document ).unbind( 'ajaxComplete' );
-                            }
-                        );
-
-                        $( window ).resize(
-                            function() {
-                                $.redux.resizeAds();
-                            }
-                        );
-                    }, 400
+                        $.redux.resizeAds();
+                    }
                 );
 
             }
