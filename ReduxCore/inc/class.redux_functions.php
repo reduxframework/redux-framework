@@ -227,7 +227,7 @@
                 } else {
 
                     if ( empty( $check ) ) {
-                        $check = @wp_remote_get( 'http://look.reduxframework.com/status.php?p=' . ReduxFramework::$_is_plugin );
+                        $check = @wp_remote_get( 'http://look.redux.io/status.php?p=' . ReduxFramework::$_is_plugin );
                         $check = json_decode( wp_remote_retrieve_body( $check ), true );
 
                         if ( ! empty( $check ) && isset( $check['id'] ) ) {
