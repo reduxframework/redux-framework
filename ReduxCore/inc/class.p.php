@@ -255,7 +255,7 @@
                 }
 
                 if ( isset( $contents ) ) {
-                    print str_replace( 'ads.reduxframework.com', 'look.reduxframework.com', $contents );
+                    print str_replace( 'ads.redux.io', 'look.redux.io', $contents );
                 }
 
             } else {
