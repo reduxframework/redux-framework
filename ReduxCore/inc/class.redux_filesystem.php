@@ -120,7 +120,7 @@
                 }
 
                 if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
-                    wp_mkdir_p( ReduxFramework::$_upload_dir );
+                    $this->do_action( 'mkdir', ReduxCore::$_upload_dir );
                 }
 
                 // Setup the filesystem with creds
@@ -182,6 +182,14 @@
                             mkdir( $file, $chmod, true );
                             $res = file_exists( $file );
                         }
+                    }
+		    $index_path = trailingslashit( $file ) . 'index.php';
+                    if ( ! file_exists( $index_path ) ) {
+                        $wp_filesystem->put_contents(
+                            $index_path,
+                            '<?php' . PHP_EOL . '// Silence is golden.',
+                            FS_CHMOD_FILE // predefined mode settings for WP files
+                        );
                     }
                 } elseif ( $action == 'rmdir' ) {
                     $res = $wp_filesystem->rmdir( $file, $recursive );
