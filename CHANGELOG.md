@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.1
+* Fixed:    #3410, #3409 - Dimensions field output causing index errors when mode not set in option array.
+
 ## 3.6.7
 * Fixed:    #3406 - javascript hasClass improperly used, affected customizer.
 * Updated:  Google Fonts.
