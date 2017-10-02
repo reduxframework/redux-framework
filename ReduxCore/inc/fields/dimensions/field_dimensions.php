@@ -265,9 +265,14 @@
 
                 $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
 
-                $height = $this->field['mode']['height'] != false ? $this->field['mode']['height'] : 'height';
-                $width  = $this->field['mode']['width'] != false ? $this->field['mode']['width'] : 'width';
-
+                if (!is_array($this->field['mode'])) {
+                    $height = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'height';
+                    $width  = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'width';                   
+                } else {
+                    $height = $this->field['mode']['height'] != false ? $this->field['mode']['height'] : 'height';
+                    $width  = $this->field['mode']['width'] != false ? $this->field['mode']['width'] : 'width';
+                }
+                
                 $cleanValue = array(
                     $height => isset( $this->value['height'] ) ? filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
                     $width  => isset( $this->value['width'] ) ? filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) : '',
