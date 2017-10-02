@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.2
+* Fixed:    #3413 - Restored old code allowing non array value for mode.  This is for backward compatibility only and is unsupported.
+
 ## 3.6.7.1
 * Fixed:    #3410, #3409 - Dimensions field output causing index errors when mode not set in option array.
 
