@@ -117,8 +117,12 @@
                 if ( ! empty ( $params ) ) {
                     extract( $params );
                 }
+                
+                if ( empty( ReduxFramework::$_upload_dir ) ) {
+                    return;
+                }
 
-                if ( ! empty( ReduxFramework::$_upload_dir ) && ! is_dir( ReduxFramework::$_upload_dir ) ) {
+                if ( is_dir( ReduxFramework::$_upload_dir ) ) {
                     $this->do_action( 'mkdir', ReduxFramework::$_upload_dir );
                 }
 
