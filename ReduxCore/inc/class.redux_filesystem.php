@@ -120,7 +120,7 @@
                 }
 
                 if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
-                    $this->do_action( 'mkdir', ReduxCore::$_upload_dir );
+                    $this->do_action( 'mkdir', ReduxFramework::$_upload_dir );
                 }
 
                 // Setup the filesystem with creds
