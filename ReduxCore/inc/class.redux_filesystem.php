@@ -118,10 +118,6 @@
                     extract( $params );
                 }
 
-                if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
-                    wp_mkdir_p( ReduxFramework::$_upload_dir );
-                }
-
                 // Setup the filesystem with creds
                 require_once ABSPATH . '/wp-admin/includes/template.php';
                 require_once ABSPATH . '/wp-includes/pluggable.php';
@@ -137,6 +133,23 @@
                 $url = wp_nonce_url( $base, 'redux-options' );
 
                 $this->filesystem_init( $url, 'direct', dirname( $file ) );
+
+                if ( is_dir( ReduxFramework::$_upload_dir ) ) {
+                    $this->do_action( 'mkdir', ReduxFramework::$_upload_dir );
+                }
+
+                $hash_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'hash';
+                if ( ! file_exists( $hash_path ) ) {
+                    $this->do_action( 'put_contents', $hash_path, array(
+                            'content' => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] ) )
+                    );
+                }
+                $version_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'version';
+                if ( ! file_exists( $version_path ) ) {
+                    $this->do_action( 'put_contents', $version_path, array(
+                            'content' => ReduxFramework::$_version )
+                    );
+                }
 
                 return $this->do_action( $action, $file, $params );
             }
