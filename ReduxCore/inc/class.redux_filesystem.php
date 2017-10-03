@@ -134,7 +134,7 @@
 
                 $this->filesystem_init( $url, 'direct', dirname( $file ) );
 
-                if ( is_dir( ReduxFramework::$_upload_dir ) ) {
+                if ( ! file_exists( ReduxFramework::$_upload_dir ) ) {
                     $this->do_action( 'mkdir', ReduxFramework::$_upload_dir );
                 }
 
