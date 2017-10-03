@@ -1,6 +1,6 @@
 # Redux Framework Changelog
 
-## 3.6.7.4
+## 3.6.7.6
 * Fixed:    Path doesn't exist on first activation, via the filesystem API.
 
 ## 3.6.7.3

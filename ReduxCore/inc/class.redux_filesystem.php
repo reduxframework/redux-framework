@@ -118,26 +118,8 @@
                     extract( $params );
                 }
 
-                if ( empty( ReduxFramework::$_upload_dir ) ) {
-                    $upload_dir                  = wp_upload_dir();
-                    ReduxFramework::$_upload_dir = $upload_dir['basedir'] . '/redux/';
-                    ReduxFramework::$_upload_url = str_replace( array(
-                        'https://',
-                        'http://'
-                    ), '//', $upload_dir['baseurl'] . '/redux/' );
-                }
-
                 if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
-                    $this->do_action( 'mkdir', ReduxFramework::$_upload_dir );
-                }
-
-                $hash_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'hash';
-                if ( ! file_exists( $hash_path ) ) {
-                    $this->do_action( 'put_contents', $hash_path, array( 'content' => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] ) ) );
-                }
-                $version_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'version';
-                if ( ! file_exists( $version_path ) ) {
-                    $this->do_action( 'put_contents', $version_path, array( 'content' => ReduxFramework::$_version ) );
+                    wp_mkdir_p( ReduxFramework::$_upload_dir );
                 }
 
                 // Setup the filesystem with creds
