@@ -141,14 +141,23 @@
                 $hash_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'hash';
                 if ( ! file_exists( $hash_path ) ) {
                     $this->do_action( 'put_contents', $hash_path, array(
-                            'content' => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] ) )
+                            'content' => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] )
+                        )
                     );
                 }
                 $version_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'version';
                 if ( ! file_exists( $version_path ) ) {
                     $this->do_action( 'put_contents', $version_path, array(
-                            'content' => ReduxFramework::$_version )
+                            'content' => ReduxFramework::$_version
+                        )
                     );
+                }
+
+                $index_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'index.php';
+                if ( ! file_exists( $index_path ) ) {
+                    $this->do_action( 'put_contents', $index_path, array(
+                        'content' => '<?php' . PHP_EOL . '// Silence is golden.'
+                    ) );
                 }
 
                 return $this->do_action( $action, $file, $params );
