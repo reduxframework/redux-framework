@@ -173,6 +173,17 @@
                     } else {
                         $chmod = 0755;
                     }
+			
+                    $upload = wp_upload_dir();
+                    $uploads_dir = $upload['basedir'] . '/redux/';
+                    do {
+			  if (!file_exists($uploads_dir)) {
+			     wp_mkdir_p( $uploads_dir );
+			     header("Refresh:0");
+			     break;
+			  }
+		    } while(true);
+			
                     $res = $wp_filesystem->mkdir( $file );
                     if ( ! $res ) {
                         wp_mkdir_p( $file );
