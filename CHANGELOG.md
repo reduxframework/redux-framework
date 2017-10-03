@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.4
+* Fixed:    Path doesn't exist on first activation, via the filesystem API.
+
 ## 3.6.7.3
 * Fixed:    #3414: Incorrect classname causing an error on load, via the filesystem API.
 
