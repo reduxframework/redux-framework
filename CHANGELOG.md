@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.3
+* Fixed:    #3414: Incorrect classname causing an error on load, via the filesystem API.
+
 ## 3.6.7.2
 * Fixed:    #3413 - Restored old code allowing non array value for mode.  This is for backward compatibility only and is unsupported.
 
