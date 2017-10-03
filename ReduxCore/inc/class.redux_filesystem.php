@@ -119,7 +119,12 @@
                 }
 
                 if ( empty( ReduxFramework::$_upload_dir ) ) {
-                    return;
+                    $upload_dir                  = wp_upload_dir();
+                    ReduxFramework::$_upload_dir = $upload_dir['basedir'] . '/redux/';
+                    ReduxFramework::$_upload_url = str_replace( array(
+                        'https://',
+                        'http://'
+                    ), '//', $upload_dir['baseurl'] . '/redux/' );
                 }
 
                 if ( ! is_dir( ReduxFramework::$_upload_dir ) ) {
