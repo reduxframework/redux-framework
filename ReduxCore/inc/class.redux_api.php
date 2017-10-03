@@ -545,7 +545,7 @@
                     } else {
                         $folders = scandir( $path, 1 );
                         foreach ( $folders as $folder ) {
-                            if ( $folder === '.' or $folder === '..' ) {
+                            if ( $folder === '.' or $folder === '..' or $folder[0] ) {
                                 continue;
                             }
                             if ( file_exists( $path . $folder . '/extension_' . $folder . '.php' ) ) {
