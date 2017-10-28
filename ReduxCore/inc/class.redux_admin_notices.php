@@ -127,7 +127,6 @@
 
                     }
 
-
                     // Clear the admin notice array
                     self::$_parent->admin_notices = array();
                 }
