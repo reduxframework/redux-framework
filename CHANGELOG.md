@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.8
+* Fixed:    Admin noticies when multiple instances of Redux running not displaying per panel.
+
 ## 3.6.7.7
 * Fixed:    Path doesn't exist on first activation, via the filesystem API.
 
