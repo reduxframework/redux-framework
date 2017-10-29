@@ -588,7 +588,6 @@
             }
 
             private static function getReduxTemplates( $custom_template_path ) {
-                $filesystem         = Redux_Filesystem::get_instance();
                 $template_paths     = array( 'ReduxFramework' => ReduxFramework::$_dir . 'templates/panel' );
                 $scanned_files      = array();
                 $found_files        = array();
@@ -656,6 +655,7 @@
 
             public static function get_template_version( $file ) {
                 $filesystem = Redux_Filesystem::get_instance();
+
                 // Avoid notices if file does not exist
                 if ( ! file_exists( $file ) ) {
                     return '';

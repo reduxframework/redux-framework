@@ -35,6 +35,18 @@
                 ) );
             }
 
+            public static function set_notice($data) {
+                extract($data);
+                
+                $parent->admin_notices[$parent->args['page_slug']][] = array(
+                    'type'      => $type,
+                    'msg'       => $msg,
+                    'id'        => $id . '_' . $parent->args['opt_name'],
+                    'dismiss'   => $dismiss,
+                    'color'     => isset($color) ? $color : '#00A2E3'
+                );
+            }
+            
             /**
              * adminNotices - Evaluates user dismiss option for displaying admin notices
              *
@@ -42,14 +54,16 @@
              * @access      public
              * @return      void
              */
-            public static function adminNotices( $notices = array() ) {
-                global $current_user, $pagenow;
-
+            public static function adminNotices($parent, $notices = array() ) {
+                global $current_user, $pagenow, $wp_version;;
+                
                 // Check for an active admin notice array
                 if ( ! empty( $notices ) ) {
-
+                    
+                    if (isset($_GET) && isset($_GET['page']) && $_GET['page'] == $parent->args['page_slug']) {
+                        
                     // Enum admin notices
-                    foreach ( $notices as $notice ) {
+                    foreach ( $notices[$parent->args['page_slug']] as $notice ) {
 
                         $add_style = '';
                         if ( strpos( $notice['type'], 'redux-message' ) != false ) {
@@ -71,17 +85,17 @@
                                 // on.
                                 $pageName = '';
                                 $curTab   = '';
+                                
                                 if ( $pagenow == 'admin.php' || $pagenow == 'themes.php' ) {
 
                                     // Get the current page.  To avoid errors, we'll set
                                     // the redux page slug if the GET is empty.
-                                    $pageName = empty( $_GET['page'] ) ? '&amp;page=' . self::$_parent->args['page_slug'] : '&amp;page=' . esc_attr( $_GET['page'] );
+                                    $pageName = empty( $_GET['page'] ) ? '&amp;page=' . $parent->args['page_slug'] : '&amp;page=' . esc_attr( $_GET['page'] );
 
                                     // Ditto for the current tab.
                                     $curTab = empty( $_GET['tab'] ) ? '&amp;tab=0' : '&amp;tab=' . esc_attr( $_GET['tab'] );
                                 }
 
-                                global $wp_version;
                                 // Print the notice with the dismiss link
                                 if ( version_compare( $wp_version, '4.2', '>' ) ) {
                                     $output    = "";
@@ -101,7 +115,7 @@
                             // Standard notice
                             echo '<div ' . $add_style . ' class="' . esc_attr( $notice['type'] ) . ' notice"><p>' . wp_kses_post( $notice['msg'] ) . '</a>.</p></div>';
                         }
-                        ?>
+?>
                         <script>
                             jQuery( document ).ready(
                                 function( $ ) {
@@ -120,15 +134,12 @@
                                 }
                             );
                         </script>
-                        <?php
-                        /*
-
-                         */
-
+<?php
+                        }
                     }
 
                     // Clear the admin notice array
-                    self::$_parent->admin_notices = array();
+                    $parent->admin_notices[$parent->args['opt_name']] = array();
                 }
             }
 
