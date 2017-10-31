@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.9
+* Fixed:    #3429 - Select2 Sortable needed jQuery Sortable dependency.
+
 ## 3.6.7.8
 * Fixed:    Admin noticies when multiple instances of Redux running not displaying per panel.
 

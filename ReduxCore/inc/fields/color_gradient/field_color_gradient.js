@@ -10,14 +10,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.color_gradient = redux.field_objects.color_gradient || {};
 
-    $( document ).ready(
-        function() {
-            //        setTimeout(function () {
-            //            redux.field_objects.color.init();
-            //        }, 1000);
-        }
-    );
-
     redux.field_objects.color_gradient.init = function( selector ) {
 
         if ( !selector ) {
