@@ -201,7 +201,7 @@
                 wp_register_script(
                     'redux-select2-sortable-js',
                     ReduxFramework::$_url . 'assets/js/vendor/redux.select2.sortable' . $this->min . '.js',
-                    array( 'jquery' ),
+                    array( 'jquery', 'jquery-ui-sortable' ),
                     $this->timestamp,
                     true
                 );
