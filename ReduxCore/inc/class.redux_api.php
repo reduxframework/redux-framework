@@ -44,9 +44,9 @@
             }
 
             public static function load() {
-                add_action( 'after_setup_theme', array( 'Redux', 'createRedux' ) );
-                add_action( 'init', array( 'Redux', 'createRedux' ) );
-                add_action( 'switch_theme', array( 'Redux', 'createRedux' ) );
+                add_action( 'after_setup_theme', array( 'Redux', 'createRedux' ));
+                add_action( 'init', array( 'Redux', 'createRedux' ));
+                add_action( 'switch_theme', array( 'Redux', 'createRedux' ));
             }
 
             public static function init( $opt_name = "" ) {
@@ -102,6 +102,7 @@
                 }
 
                 $check = ReduxFrameworkInstances::get_instance( $opt_name );
+
                 if ( isset( $check->apiHasRun ) ) {
                     return;
                 }

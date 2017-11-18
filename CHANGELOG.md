@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.10
+* Fixed:    Color picker CSS issues as a result of WP 4.9.
+
 ## 3.6.7.9
 * Fixed:    #3429 - Select2 Sortable needed jQuery Sortable dependency.
 
