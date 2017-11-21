@@ -22,7 +22,7 @@
 
             public $fs_object = null;
 
-            public static $parent = null;
+            public $parent = null;
 
             /**
              * Return an instance of this class.
@@ -38,7 +38,7 @@
                 }
 
                 if ( $parent !== null ) {
-                    self::$parent = $parent;
+                    self::$instance->parent = $parent;
                 }
 
                 return self::$instance;
@@ -289,7 +289,7 @@
                     $msg = '<strong>' . __( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( __( 'We were unable to modify required files. Please ensure that <code>%1s</code> has the proper read-write permissions, or modify your wp-config.php file to contain your FTP login credentials as <a href="%2s" target="_blank">outlined here</a>.', 'redux-framework' ), Redux_Helpers::cleanFilePath( trailingslashit( WP_CONTENT_DIR ) ) . '/uploads/', 'https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants' );
 
                     $data = array(
-                        'parent'    => self::$parent,
+                        'parent'    => self::$instance->parent,
                         'type'      => 'error',
                         'msg'       => $msg,
                         'id'        => 'redux-wp-login',
