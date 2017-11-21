@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.11
+* Fixed:    #3440: Parent object not being properly set in the Redux filesystem.
+
 ## 3.6.7.10
 * Fixed:    Color picker CSS issues as a result of WP 4.9.
 
