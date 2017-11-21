@@ -2,7 +2,6 @@ language: php
 dist: precise
 php:
 #- 5.2
-- 5.3
 - 7.0
 - 7.1
 #- 5.4
