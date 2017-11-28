@@ -47,8 +47,6 @@
                 $this->check_version();
             }
             update_option( 'redux_version_upgraded_from', ReduxFramework::$_version );
-            set_transient( '_redux_activation_redirect', true, 30 );
-
         }
 
 
