@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.7.13
+* Fixed:  Removed unused set_transient in welcome routine.  It was causing slow queries.
+
 ## 3.6.7.12
 * Updated:  Google Font update.
 
