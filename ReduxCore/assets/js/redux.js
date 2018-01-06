@@ -185,7 +185,7 @@
 
                 window.onbeforeunload = null;
 
-                if ( redux.optName.args.ajax_save === true ) {
+                if ( redux.args.ajax_save === true ) {
                     $.redux.ajax_save( $( this ) );
                     e.preventDefault();
                 } else {
