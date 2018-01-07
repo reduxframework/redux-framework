@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
+## 3.6.7.14
+* Fixed:    Error in AJAX save due to incorrect object reference in redux.js.
+
 ## 3.6.7.13
-* Fixed:  Removed unused set_transient in welcome routine.  It was causing slow queries.
+* Fixed:    Removed unused set_transient in welcome routine.  It was causing slow queries.
 
 ## 3.6.7.12
 * Updated:  Google Font update.

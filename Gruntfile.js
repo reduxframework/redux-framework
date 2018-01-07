@@ -284,7 +284,7 @@ module.exports = function( grunt ) {
                     options: {
                         sourcemap: 'none',
                         style: 'compressed',
-                        noCache: true,
+                        noCache: true
                     },
 
                     files: [{
