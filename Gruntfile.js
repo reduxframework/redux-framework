@@ -111,7 +111,8 @@ module.exports = function( grunt ) {
                 },
                 files: [
                     //'Gruntfile.js',
-                    //'ReduxCore/assets/js/import_export/import_export.js',
+                    //'ReduxCore/assecd ..
+                    //ts/js/import_export/import_export.js',
                     'ReduxCore/assets/js/media/media.js',
                     'ReduxCore/inc/fields/ace_editor/field_ace_editor.js',
                     'ReduxCore/inc/fields/background/field_background.js',
