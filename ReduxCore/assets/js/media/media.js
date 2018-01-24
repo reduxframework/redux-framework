@@ -15,12 +15,6 @@
 
     var isFiltered;
 
-    $( document ).ready(
-        function() {
-
-        }
-    );
-
     redux.field_objects.media.init = function( selector ) {
         if ( !selector ) {
             selector = $( document ).find( ".redux-group-tab:visible" ).find( '.redux-container-media:visible' );
@@ -146,11 +140,16 @@
                         }
                     }
                 }
+console.log(attachment);
 
                 selector.find( '.upload' ).val( attachment.attributes.url );
                 selector.find( '.upload-id' ).val( attachment.attributes.id );
                 selector.find( '.upload-height' ).val( attachment.attributes.height );
                 selector.find( '.upload-width' ).val( attachment.attributes.width );
+                selector.find( '.upload-title' ).val( attachment.attributes.title );
+                selector.find( '.upload-caption' ).val( attachment.attributes.caption );
+                selector.find( '.upload-alt' ).val( attachment.attributes.alt );
+                selector.find( '.upload-description' ).val( attachment.attributes.description );
 
                 redux_change( $( selector ).find( '.upload-id' ) );
 
@@ -200,6 +199,10 @@
         selector.find( '.upload-id' ).val( '' );
         selector.find( '.upload-height' ).val( '' );
         selector.find( '.upload-width' ).val( '' );
+        selector.find( '.upload-title' ).val( '' );
+        selector.find( '.upload-caption' ).val( '' );
+        selector.find( '.upload-alt' ).val( '' );
+        selector.find( '.upload-description' ).val( '' );
         selector.find( '.upload-thumbnail' ).val( '' );
         redux_change( $( selector ).find( '.upload-id' ) );
         selector.find( '.redux-background-properties' ).hide();
