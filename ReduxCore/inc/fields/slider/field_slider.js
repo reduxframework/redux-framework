@@ -44,7 +44,7 @@
                         var DISPLAY_TEXT = 2;
                         var DISPLAY_SELECT = 3;
 
-                        var mainID          = $( this ).data( 'id' );
+                        var mainID          = CSS.escape( $( this ).data( 'id' ) );
                         var minVal          = $( this ).data( 'min' );
                         var maxVal          = $( this ).data( 'max' );
                         var stepVal         = $( this ).data( 'step' );

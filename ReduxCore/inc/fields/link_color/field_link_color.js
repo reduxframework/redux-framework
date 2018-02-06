@@ -44,7 +44,7 @@
                         change: function( e, ui ) {
                             $( this ).val( ui.color.toString() );
                             redux_change( $( this ) );
-                            el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                            el.find( '#' + CSS.escape( e.target.getAttribute( 'data-id' ) ) + '-transparency' ).removeAttr( 'checked' );
                         },
                         clear: function( e, ui ) {
                             $( this ).val( ui.color.toString() );
@@ -57,7 +57,7 @@
                     'keyup', function() {
                         var value = $( this ).val();
                         var color = colorValidate( this );
-                        var id = '#' + $( this ).attr( 'id' );
+                        var id = '#' + CSS.escape( $( this ).attr( 'id' ) );
 
                         if ( value === "transparent" ) {
                             $( this ).parent().parent().find( '.wp-color-result' ).css(
@@ -79,7 +79,7 @@
                 el.find( '.redux-color' ).on(
                     'blur', function() {
                         var value = $( this ).val();
-                        var id = '#' + $( this ).attr( 'id' );
+                        var id = '#' + CSS.escape( $( this ).attr( 'id' ) );
 
                         if ( value === "transparent" ) {
                             $( this ).parent().parent().find( '.wp-color-result' ).css(

@@ -147,7 +147,7 @@
                             "select2-opening", function( e ) {
 
                                 // Get field ID
-                                var thisID = $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
+                                var thisID = CSS.escape( $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' ) );
 
                                 // User included fonts?
                                 var isUserFonts = $( '#' + thisID + ' .redux-typography-font-family' ).data(
@@ -326,6 +326,7 @@
         if ( mainID === undefined ) {
             mainID = $( selector ).attr( 'data-id' );
         }
+        mainID = CSS.escape( mainID );
 
         var parent = $( selector ).parents( '.redux-container-typography:first' );
         var data = [];

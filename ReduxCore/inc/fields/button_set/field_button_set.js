@@ -58,7 +58,7 @@
                         var val     = '';
                         var name    = '';
                         
-                        var id          = $(this).attr('id');
+                        var id          = CSS.escape( $(this).attr('id') );
                         var empty       = $( this ).parent().find( '.buttonset-empty' );
                         var idName      = empty.attr( 'data-name' );
                         var isChecked   = false;

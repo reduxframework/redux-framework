@@ -63,9 +63,9 @@
                 el.find( '.checkbox_sortable' ).on(
                     'click', function() {
                         if ( $( this ).is( ":checked" ) ) {
-                            el.find( '#' + $( this ).attr( 'rel' ) ).val( 1 );
+                            el.find( '#' + CSS.escape( $( this ).attr( 'rel' ) ) ).val( 1 );
                         } else {
-                            el.find( '#' + $( this ).attr( 'rel' ) ).val( '' );
+                            el.find( '#' + CSS.escape( $( this ).attr( 'rel' ) ) ).val( '' );
                         }
                     }
                 );

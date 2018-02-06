@@ -147,7 +147,7 @@
                             "select2-opening", function( e ) {
 
                                 // Get field ID
-                                var thisID = $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
+                                var thisID = CSS.escape( $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' ) );
 
                                 // User included fonts?
                                 var isUserFonts = $( '#' + thisID + ' .redux-typography-font-family' ).data( 'user-fonts' );
@@ -222,7 +222,7 @@
                         ).on(
                             'select2-selecting', function( val, object ) {
                                 var fontName = val.object.text;
-                                var thisID = $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
+                                var thisID = CSS.escape( $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' ) );
 
                                 $( '#' + thisID + ' #' + thisID + '-family' ).data( 'value', fontName );
                                 $( '#' + thisID + ' #' + thisID + '-family' ).attr( 'placeholder', fontName );
@@ -235,7 +235,7 @@
                             }
                         ).on(
                             'select2-clearing', function( val, choice ) {
-                                var thisID = $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' );
+                                var thisID = CSS.escape( $( this ).parents( '.redux-container-typography:first' ).attr( 'data-id' ) );
 
                                 $( '#' + thisID + ' #' + thisID + '-family' ).attr( 'data-value', '' );
                                 $( '#' + thisID + ' #' + thisID + '-family' ).attr( 'placeholder', 'Font Family' );
@@ -332,6 +332,7 @@
         if ( mainID === undefined ) {
             mainID = $( selector ).attr( 'data-id' );
         }
+        mainID = CSS.escape( mainID );
 
         var parent = $( selector ).parents( '.redux-container-typography:first' );
         var data = [];

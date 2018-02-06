@@ -38,7 +38,7 @@
                         change: function( e, ui ) {
                             $( this ).val( ui.color.toString() );
                             redux_change( $( this ) );
-                            el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                            el.find( '#' + CSS.escape( e.target.getAttribute( 'data-id' ) ) + '-transparency' ).removeAttr( 'checked' );
                         },
                         clear: function( e, ui ) {
                             $( this ).val( ui.color.toString() );
@@ -51,7 +51,7 @@
                     'keyup', function() {
                         var value = $( this ).val();
                         var color = colorValidate( this );
-                        var id = '#' + $( this ).attr( 'id' );
+                        var id = '#' + CSS.escape( $( this ).attr( 'id' ) );
 
                         if ( value === "transparent" ) {
                             $( this ).parent().parent().find( '.wp-color-result' ).css(
@@ -73,7 +73,7 @@
                 el.find( '.redux-color' ).on(
                     'blur', function() {
                         var value = $( this ).val();
-                        var id = '#' + $( this ).attr( 'id' );
+                        var id = '#' + CSS.escape( $( this ).attr( 'id' ) );
 
                         if ( value === "transparent" ) {
                             $( this ).parent().parent().find( '.wp-color-result' ).css(
@@ -105,24 +105,24 @@
                     'click', function() {
                         if ( $( this ).is( ":checked" ) ) {
 
-                            el.find( '.redux-saved-color' ).val( $( '#' + $( this ).data( 'id' ) ).val() );
-                            el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
-                            el.find( '#' + $( this ).data( 'id' ) ).parent().parent().find( '.wp-color-result' ).css(
+                            el.find( '.redux-saved-color' ).val( $( '#' + CSS.escape( $( this ).data( 'id' ) ) ).val() );
+                            el.find( '#' + CSS.escape( $( this ).data( 'id' ) ) ).val( 'transparent' );
+                            el.find( '#' + CSS.escape( $( this ).data( 'id' ) ) ).parent().parent().find( '.wp-color-result' ).css(
                                 'background-color', 'transparent'
                             );
                         } else {
-                            if ( el.find( '#' + $( this ).data( 'id' ) ).val() === 'transparent' ) {
+                            if ( el.find( '#' + CSS.escape( $( this ).data( 'id' ) ) ).val() === 'transparent' ) {
                                 var prevColor = $( '.redux-saved-color' ).val();
 
                                 if ( prevColor === '' ) {
-                                    prevColor = $( '#' + $( this ).data( 'id' ) ).data( 'default-color' );
+                                    prevColor = $( '#' + CSS.escape( $( this ).data( 'id' ) ) ).data( 'default-color' );
                                 }
 
-                                el.find( '#' + $( this ).data( 'id' ) ).parent().parent().find( '.wp-color-result' ).css(
+                                el.find( '#' + CSS.escape( $( this ).data( 'id' ) ) ).parent().parent().find( '.wp-color-result' ).css(
                                     'background-color', prevColor
                                 );
 
-                                el.find( '#' + $( this ).data( 'id' ) ).val( prevColor );
+                                el.find( '#' + CSS.escape( $( this ).data( 'id' ) ) ).val( prevColor );
                             }
                         }
                         redux_change( $( this ) );
