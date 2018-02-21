@@ -502,9 +502,12 @@
                     if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
                         $sysinfo['wp_remote_get']       = 'true';
                         $sysinfo['wp_remote_get_error'] = '';
-                    } else {
+                    } elseif( is_wp_error( $response ) ) {
                         $sysinfo['wp_remote_get']       = 'false';
                         $sysinfo['wp_remote_get_error'] = $response->get_error_message();
+                    } else {
+                        $sysinfo['wp_remote_get']       = 'false';
+                        $sysinfo['wp_remote_get_error'] = $response['response']['code'] . (isset($response['response']['message']) ? $response['response']['message'] : '');
                     }
                 }
 
