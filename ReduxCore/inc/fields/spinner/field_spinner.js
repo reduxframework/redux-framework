@@ -37,7 +37,7 @@
                     function() {
                         //slider init
                         var spinner = $( this ).find( '.spinner-input' ).data();
-                        spinner.id = $( this ).find( '.spinner-input' ).attr( 'id' );
+                        spinner.id = CSS.escape( $( this ).find( '.spinner-input' ).attr( 'id' ) );
 
                         el.find( "#" + spinner.id ).spinner(
                             {

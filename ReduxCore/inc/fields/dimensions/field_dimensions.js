@@ -7,11 +7,11 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.dimensions = redux.field_objects.dimensions || {};
 
-    $( document ).ready(
+    /*$( document ).ready(
         function() {
-            //redux.field_objects.dimensions.init();
+            redux.field_objects.dimensions.init();
         }
-    );
+    );*/
 
     redux.field_objects.dimensions.init = function( selector ) {
 
@@ -56,9 +56,9 @@
                             units = $( this ).parents( '.redux-field:first' ).find( '.redux-dimensions-units option:selected' ).val();
                         }
                         if ( typeof units !== 'undefined' ) {
-                            el.find( '#' + $( this ).attr( 'rel' ) ).val( $( this ).val() + units );
+                            el.find( '#' + CSS.escape( $( this ).attr( 'rel' ) ) ).val( $( this ).val() + units );
                         } else {
-                            el.find( '#' + $( this ).attr( 'rel' ) ).val( $( this ).val() );
+                            el.find( '#' + CSS.escape( $( this ).attr( 'rel' ) ) ).val( $( this ).val() );
                         }
                     }
                 );

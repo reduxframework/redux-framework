@@ -1,6 +1,6 @@
 Hello, and welcome to Redux Framework!
 
-These are our new guidelines for support.  Please read them thoroughly before submitting an issue on our issue tracker (or if you were directed her, modify your ticket with the required information).
+These are our new guidelines for support.  Please read them thoroughly before submitting an issue on our issue tracker (or if you were directed here, modify your ticket with the required information).
 
 First, and most importantly, we need to know if you are a developer using Redux in their project, or if you are using a theme/plugin that uses Redux.  Redux is a tool for developers to include an options panel in their project.  Consequently, we do not offer support for folks who have purchased a theme or plugin that uses Redux.  The responsibility of support for themes and plugins falls upon it's author.  We realize that some authors have included support links for Redux in their projects, when they should not have.  We do apologize for that confusion and are taking steps to remedy this confusion.  If you have purchased a theme or plugin that utilizes Redux, please contact the author for support.  If the author is unavailable for support or has discontinued support, please refer to this article: [Support Defined](https://docs.reduxframework.com/core/support-defined/).
 

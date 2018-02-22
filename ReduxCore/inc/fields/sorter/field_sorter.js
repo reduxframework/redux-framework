@@ -50,7 +50,7 @@
                     function() {
                         var id = $( this ).attr( 'id' );
 
-                        el.find( '#' + id ).find( 'ul' ).sortable(
+                        el.find( '#' + CSS.escape( id ) ).find( 'ul' ).sortable(
                             {
                                 items: 'li',
                                 placeholder: "placeholder",

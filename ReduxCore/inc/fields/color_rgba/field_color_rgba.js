@@ -199,7 +199,7 @@
                     rgbaVal     = 'transparent';
                 }
                 
-                var blockID = $(this).data('block-id');
+                var blockID = CSS.escape( $(this).data('block-id') );
                 
                 // Update HTML color value
                 el.find('input#' + blockID + '-color').val(colorVal);

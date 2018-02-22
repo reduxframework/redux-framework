@@ -70,7 +70,7 @@
                                 }
                             );
                         } else {
-                            $( '#' + $( this ).attr( 'rel' ) ).val( value );
+                            $( '#' + CSS.escape( $( this ).attr( 'rel' ) ) ).val( value );
                         }
                     }
                 );

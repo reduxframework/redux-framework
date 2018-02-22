@@ -153,13 +153,14 @@
         );
 
 
-        $( '#toplevel_page_' + redux.args.slug + ' .wp-submenu a, #wp-admin-bar-' + redux.args.slug + ' a.ab-item' ).click(
+        var slugSelector = CSS.escape( redux.args.slug );
+        $( '#toplevel_page_' + slugSelector + ' .wp-submenu a, #wp-admin-bar-' + slugSelector + ' a.ab-item' ).click(
             function( e ) {
 
-                if ( ( $( '#toplevel_page_' + redux.args.slug ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) && !$( this ).parents( 'ul.ab-submenu:first' ).hasClass( 'ab-sub-secondary' ) && $( this ).attr( 'href' ).toLowerCase().indexOf( redux.args.slug + "&tab=" ) >= 0 ) {
+                if ( ( $( '#toplevel_page_' + slugSelector ).hasClass( 'wp-menu-open' ) || $( this ).hasClass( 'ab-item' ) ) && !$( this ).parents( 'ul.ab-submenu:first' ).hasClass( 'ab-sub-secondary' ) && $( this ).attr( 'href' ).toLowerCase().indexOf( redux.args.slug + "&tab=" ) >= 0 ) {
                     e.preventDefault();
                     var url = $( this ).attr( 'href' ).split( '&tab=' );
-                    $( '#' + url[1] + '_section_group_li_a' ).click();
+                    $( '#' + CSS.escape(url[1]) + '_section_group_li_a' ).click();
                     $( this ).parents( 'ul:first' ).find( '.current' ).removeClass( 'current' );
                     $( this ).addClass( 'current' );
                     $( this ).parent().addClass( 'current' );
@@ -231,7 +232,7 @@
 
                     var tab = $.cookie( "redux_current_tab" );
 
-                    $( '.redux-container:first' ).find( '#' + tab + '_section_group' ).fadeIn(
+                    $( '.redux-container:first' ).find( '#' + CSS.escape( tab ) + '_section_group' ).fadeIn(
                         200, function() {
                             if ( $( '.redux-container:first' ).find( '#redux-footer' ).length !== 0 ) {
                                 $.redux.stickyInfo(); // race condition fix
@@ -484,14 +485,15 @@
         $( '.redux-group-tab-link-a' ).click(
             function() {
                 var link = $( this );
+                var slugSelector = CSS.escape( redux.args.slug );
                 if ( link.parent().hasClass( 'empty_section' ) && link.parent().hasClass( 'hasSubSections' ) ) {
                     var elements = $( this ).closest( 'ul' ).find( '.redux-group-tab-link-a' );
                     var index = elements.index( this );
                     link = elements.slice( index + 1, index + 2 );
                 }
                 var el = link.parents( '.redux-container:first' );
-                var relid = link.data( 'rel' ); // The group ID of interest
-                var oldid = el.find( '.redux-group-tab-link-li.active:first .redux-group-tab-link-a' ).data( 'rel' );
+                var relid = CSS.escape( link.data( 'rel' ) ); // The group ID of interest
+                var oldid = CSS.escape( el.find( '.redux-group-tab-link-li.active:first .redux-group-tab-link-a' ).data( 'rel' ) );
 
                 //console.log('id: '+relid+' oldid: '+oldid);
 
@@ -515,10 +517,10 @@
                     parentID = parentID[0];
                 }
 
-                el.find( '#toplevel_page_' + redux.args.slug + ' .wp-submenu a.current' ).removeClass( 'current' );
-                el.find( '#toplevel_page_' + redux.args.slug + ' .wp-submenu li.current' ).removeClass( 'current' );
+                el.find( '#toplevel_page_' + slugSelector + ' .wp-submenu a.current' ).removeClass( 'current' );
+                el.find( '#toplevel_page_' + slugSelector + ' .wp-submenu li.current' ).removeClass( 'current' );
 
-                el.find( '#toplevel_page_' + redux.args.slug + ' .wp-submenu a' ).each(
+                el.find( '#toplevel_page_' + slugSelector + ' .wp-submenu a' ).each(
                     function() {
                         var url = $( this ).attr( 'href' ).split( '&tab=' );
                         if ( url[1] == relid || url[1] == parentID ) {
@@ -609,13 +611,13 @@
                         $.redux.initFields();
                     }
                 );
-                $( '#toplevel_page_' + redux.args.slug ).find( '.current' ).removeClass( 'current' );
+                $( '#toplevel_page_' + slugSelector ).find( '.current' ).removeClass( 'current' );
 
             }
         );
 
         if ( redux.last_tab !== undefined ) {
-            $( '#' + redux.last_tab + '_section_group_li_a' ).click();
+            $( '#' + CSS.escape( redux.last_tab ) + '_section_group_li_a' ).click();
             return;
         }
 
@@ -636,13 +638,13 @@
                     }
                 );
 
-                $( '#' + tab + '_section_group_li' ).click();
+                $( '#' + CSS.escape( tab ) + '_section_group_li' ).click();
             }
         } else if ( $.cookie( 'redux_current_tab_get' ) !== "" ) {
             $.removeCookie( 'redux_current_tab_get' );
         }
 
-        var sTab = $( '#' + $.cookie( "redux_current_tab" ) + '_section_group_li_a' );
+        var sTab = $( '#' + CSS.escape( $.cookie( "redux_current_tab" ) ) + '_section_group_li_a' );
 
         // Tab the first item or the saved one
         if ( $.cookie( "redux_current_tab" ) === null || typeof ($.cookie( "redux_current_tab" )) === "undefined" || sTab.length === 0 ) {
@@ -683,11 +685,12 @@
                 redux.errors.errors, function( sectionID, sectionArray ) {
                     $.each(
                         sectionArray.errors, function( key, value ) {
-                            $( "#" + redux.args.opt_name + '-' + value.id ).addClass( "redux-field-error" );
-                            if ( $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).length === 0 ) {
-                                $( "#" + redux.args.opt_name + '-' + value.id ).append( '<div class="redux-th-error">' + value.msg + '</div>' );
+                            var selector = "#" + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( value.id );
+                            $( selector ).addClass( "redux-field-error" );
+                            if ( $( selector ).parent().find( '.redux-th-error' ).length === 0 ) {
+                                $( selector ).append( '<div class="redux-th-error">' + value.msg + '</div>' );
                             } else {
-                                $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).html( value.msg ).css(
+                                $( selector ).parent().find( '.redux-th-error' ).html( value.msg ).css(
                                     'display', 'block'
                                 );
                             }
@@ -709,7 +712,7 @@
                                 var total = $( this ).find( '.redux-field-error' ).length;
                                 if ( total > 0 ) {
                                     var sectionID = $( this ).attr( 'id' ).split( '_' );
-                                    sectionID = sectionID[0];
+                                    sectionID = CSS.escape( sectionID[0] );
                                     container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).prepend( '<span class="redux-menu-error">' + total + '</span>' );
                                     container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).addClass( "hasError" );
                                     var subParent = container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).parents( '.hasSubSections:first' );
@@ -728,11 +731,12 @@
                 redux.warnings.warnings, function( sectionID, sectionArray ) {
                     $.each(
                         sectionArray.warnings, function( key, value ) {
-                            $( "#" + redux.args.opt_name + '-' + value.id ).addClass( "redux-field-warning" );
-                            if ( $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).length === 0 ) {
-                                $( "#" + redux.args.opt_name + '-' + value.id ).append( '<div class="redux-th-warning">' + value.msg + '</div>' );
+                            var selector = "#" + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( value.id );
+                            $( selector ).addClass( "redux-field-warning" );
+                            if ( $( selector ).parent().find( '.redux-th-warning' ).length === 0 ) {
+                                $( selector ).append( '<div class="redux-th-warning">' + value.msg + '</div>' );
                             } else {
-                                $( "#" + redux.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).html( value.msg ).css(
+                                $( selector ).parent().find( '.redux-th-warning' ).html( value.msg ).css(
                                     'display', 'block'
                                 );
                             }
@@ -754,7 +758,7 @@
                                 var total = $( this ).find( '.redux-field-warning' ).length;
                                 if ( total > 0 ) {
                                     var sectionID = $( this ).attr( 'id' ).split( '_' );
-                                    sectionID = sectionID[0];
+                                    sectionID = CSS.escape( sectionID[0] );
                                     container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).prepend( '<span class="redux-menu-warning">' + total + '</span>' );
                                     container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).addClass( "hasWarning" );
                                     var subParent = container.find( '.redux-group-tab-link-a[data-key="' + sectionID + '"]' ).parents( '.hasSubSections:first' );
@@ -801,7 +805,7 @@
         // we going to move each attributes we may need for folding to tr tag
         $.each(
             redux.folds, function( i, v ) {
-                var fieldset = $( '#' + redux.args.opt_name + '-' + i );
+                var fieldset = $( CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( i ) );
 
                 fieldset.parents( 'tr:first' ).addClass( 'fold' );
 
@@ -809,24 +813,24 @@
                     fieldset.parents( 'tr:first' ).addClass( 'hide' );
 
                     if ( fieldset.hasClass( 'redux-container-section' ) ) {
-                        var div = $( '#section-' + i );
+                        var div = $( '#section-' + CSS.escape( i ) );
 
                         if ( div.hasClass( 'redux-section-indent-start' ) ) {
-                            $( '#section-table-' + i ).hide().addClass( 'hide' );
+                            $( '#section-table-' + CSS.escape( i ) ).hide().addClass( 'hide' );
                             div.hide().addClass( 'hide' );
                         }
                     }
 
                     if ( fieldset.hasClass( 'redux-container-info' ) ) {
-                        $( '#info-' + i ).hide().addClass( 'hide' );
+                        $( '#info-' + CSS.escape( i ) ).hide().addClass( 'hide' );
                     }
 
                     if ( fieldset.hasClass( 'redux-container-divide' ) ) {
-                        $( '#divide-' + i ).hide().addClass( 'hide' );
+                        $( '#divide-' + CSS.escape( i ) ).hide().addClass( 'hide' );
                     }
 
                     if ( fieldset.hasClass( 'redux-container-raw' ) ) {
-                        var rawTable = fieldset.parents().find( 'table#' + redux.args.opt_name + '-' + i );
+                        var rawTable = fieldset.parents().find( 'table#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( i ) );
                         rawTable.hide().addClass( 'hide' );
                     }
                 }
@@ -835,12 +839,13 @@
     };
 
     $.redux.get_container_value = function( id ) {
-        var value = $( '#' + redux.args.opt_name + '-' + id ).serializeForm();
+        var selector = '#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( id );
+        var value = $( selector ).serializeForm();
 
         if ( value !== null && typeof value === 'object' && value.hasOwnProperty( redux.args.opt_name ) ) {
             value = value[redux.args.opt_name][id];
         }
-        if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-media' ) ) {
+        if ( $( selector ).hasClass( 'redux-container-media' ) ) {
             value = value.url;
         }
         return value;
@@ -870,7 +875,7 @@
 
                 var current = $( this ),
                     show = false,
-                    childFieldset = $( '#' + redux.args.opt_name + '-' + child ),
+                    childFieldset = $( '#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( child ) ),
                     tr = childFieldset.parents( 'tr:first' );
 
                 if ( !is_hidden ) {
@@ -880,24 +885,24 @@
                 if ( show === true ) {
                     // Shim for sections
                     if ( childFieldset.hasClass( 'redux-container-section' ) ) {
-                        var div = $( '#section-' + child );
+                        var div = $( '#section-' + CSS.escape( child ) );
 
                         if ( div.hasClass( 'redux-section-indent-start' ) && div.hasClass( 'hide' ) ) {
-                            $( '#section-table-' + child ).fadeIn( 300 ).removeClass( 'hide' );
+                            $( '#section-table-' + CSS.escape( child ) ).fadeIn( 300 ).removeClass( 'hide' );
                             div.fadeIn( 300 ).removeClass( 'hide' );
                         }
                     }
 
                     if ( childFieldset.hasClass( 'redux-container-info' ) ) {
-                        $( '#info-' + child ).fadeIn( 300 ).removeClass( 'hide' );
+                        $( '#info-' + CSS.escape( child ) ).fadeIn( 300 ).removeClass( 'hide' );
                     }
 
                     if ( childFieldset.hasClass( 'redux-container-divide' ) ) {
-                        $( '#divide-' + child ).fadeIn( 300 ).removeClass( 'hide' );
+                        $( '#divide-' + CSS.escape( child ) ).fadeIn( 300 ).removeClass( 'hide' );
                     }
 
                     if ( childFieldset.hasClass( 'redux-container-raw' ) ) {
-                        var rawTable = childFieldset.parents().find( 'table#' + redux.args.opt_name + '-' + child );
+                        var rawTable = childFieldset.parents().find( 'table#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( child ) );
                         rawTable.fadeIn( 300 ).removeClass( 'hide' );
                     }
 
@@ -905,7 +910,7 @@
                         300, function() {
                             $( this ).removeClass( 'hide' );
                             if ( redux.required.hasOwnProperty( child ) ) {
-                                $.redux.check_dependencies( $( '#' + redux.args.opt_name + '-' + child ).children().first() );
+                                $.redux.check_dependencies( $( '#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( child ) ).children().first() );
                             }
                             $.redux.initFields();
                         }
@@ -931,30 +936,31 @@
     };
 
     $.redux.required_recursive_hide = function( id ) {
-        var toFade = $( '#' + redux.args.opt_name + '-' + id ).parents( 'tr:first' );
+        var selector = '#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( id );
+        var toFade = $( selector ).parents( 'tr:first' );
 
         toFade.fadeOut(
             50, function() {
                 $( this ).addClass( 'hide' );
 
-                if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-section' ) ) {
-                    var div = $( '#section-' + id );
+                if ( $( selector ).hasClass( 'redux-container-section' ) ) {
+                    var div = $( '#section-' + CSS.escape( id ) );
                     if ( div.hasClass( 'redux-section-indent-start' ) ) {
-                        $( '#section-table-' + id ).fadeOut( 50 ).addClass( 'hide' );
+                        $( '#section-table-' + CSS.escape( id ) ).fadeOut( 50 ).addClass( 'hide' );
                         div.fadeOut( 50 ).addClass( 'hide' );
                     }
                 }
 
-                if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-info' ) ) {
-                    $( '#info-' + id ).fadeOut( 50 ).addClass( 'hide' );
+                if ( $( selector ).hasClass( 'redux-container-info' ) ) {
+                    $( '#info-' + CSS.escape( id ) ).fadeOut( 50 ).addClass( 'hide' );
                 }
 
-                if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-divide' ) ) {
-                    $( '#divide-' + id ).fadeOut( 50 ).addClass( 'hide' );
+                if ( $( selector ).hasClass( 'redux-container-divide' ) ) {
+                    $( '#divide-' + CSS.escape( id ) ).fadeOut( 50 ).addClass( 'hide' );
                 }
 
-                if ( $( '#' + redux.args.opt_name + '-' + id ).hasClass( 'redux-container-raw' ) ) {
-                    var rawTable = $( '#' + redux.args.opt_name + '-' + id ).parents().find( 'table#' + redux.args.opt_name + '-' + id );
+                if ( $( selector ).hasClass( 'redux-container-raw' ) ) {
+                    var rawTable = $( selector ).parents().find( 'table' + selector );
                     rawTable.fadeOut( 50 ).addClass( 'hide' );
                 }
 
@@ -975,7 +981,7 @@
         if ( redux.required_child.hasOwnProperty( id ) ) {
             $.each(
                 redux.required_child[id], function( i, parentData ) {
-                    if ( $( '#' + redux.args.opt_name + '-' + parentData.parent ).parents( 'tr:first' ).hasClass( 'hide' ) ) {
+                    if ( $( '#' + CSS.escape( redux.args.opt_name ) + '-' + CSS.escape( parentData.parent ) ).parents( 'tr:first' ).hasClass( 'hide' ) ) {
                         show = false;
                     } else {
                         if ( show !== false ) {
@@ -1533,13 +1539,13 @@ function redux_change( variable ) {
 
     var rContainer = jQuery( variable ).parents( '.redux-container:first' );
 
-    var parentID = jQuery( variable ).closest( '.redux-group-tab' ).attr( 'id' );
+    var parentID = CSS.escape( jQuery( variable ).closest( '.redux-group-tab' ).attr( 'id' ) );
 
     // Let's count down the errors now. Fancy.  ;)
     var id = parentID.split( '_' );
     id = id[0];
 
-    var th = rContainer.find( '.redux-group-tab-link-a[data-key="' + id + '"]' ).parents( '.redux-group-tab-link-li:first' );
+    var th = rContainer.find( '.redux-group-tab-link-a[data-key="' + CSS.escape( id ) + '"]' ).parents( '.redux-group-tab-link-li:first' );
     var subParent = jQuery( '#' + parentID + '_li' ).parents( '.hasSubSections:first' );
 
     if ( jQuery( variable ).parents( 'fieldset.redux-field:first' ).hasClass( 'redux-field-error' ) ) {

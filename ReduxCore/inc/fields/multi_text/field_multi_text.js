@@ -33,7 +33,7 @@
                         redux_change( $( this ) );
                         
                         $( this ).prev( 'input[type="text"]' ).val( '' );
-                        var id = $( this ).attr( 'data-id' );
+                        var id = CSS.escape( $( this ).attr( 'data-id' ) );
                         
                         $( this ).parent().slideUp(
                             'medium', function() {
@@ -54,7 +54,7 @@
                 el.find( '.redux-multi-text-add' ).click(
                     function() {
                         var number = parseInt( $( this ).attr( 'data-add_number' ) );
-                        var id = $( this ).attr( 'data-id' );
+                        var id = CSS.escape( $( this ).attr( 'data-id' ) );
                         var name = $( this ).attr( 'data-name' ) + '[]';
                         
                         for ( var i = 0; i < number; i++ ) {

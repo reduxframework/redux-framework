@@ -70,7 +70,7 @@
                                 }
                             );
                         } else {
-                            $( '#' + $( this ).attr( 'rel' ) ).val( value );
+                            $( '#' + CSS.escape( $( this ).attr( 'rel' ) ) ).val( value );
                         }
                     }
                 );
@@ -86,7 +86,7 @@
                         change: function( e, ui ) {
                             $( this ).val( ui.color.toString() );
                             redux_change( $( this ) );
-                            el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+                            el.find( '#' + CSS.escape( e.target.getAttribute( 'data-id' ) ) + '-transparency' ).removeAttr( 'checked' );
                         },
 
                         clear: function( e, ui ) {

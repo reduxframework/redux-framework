@@ -56,7 +56,7 @@
 
                         //fold/unfold related options
                         var obj = $( this );
-                        var $fold = '.f_' + obj.data( 'id' );
+                        var $fold = '.f_' + CSS.escape( obj.data( 'id' ) );
 
                         el.find( $fold ).slideDown( 'normal', "swing" );
                     }
@@ -78,7 +78,7 @@
 
                         //fold/unfold related options
                         var obj = $( this );
-                        var $fold = '.f_' + obj.data( 'id' );
+                        var $fold = '.f_' + CSS.escape( obj.data( 'id' ) );
 
                         el.find( $fold ).slideUp( 'normal', "swing" );
                     }

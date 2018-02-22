@@ -45,7 +45,7 @@
                         aceeditor.setOptions( params );
                         aceeditor.on(
                             'change', function( e ) {
-                                $( '#' + area.id ).val( aceeditor.getSession().getValue() );
+                                $( '#' + CSS.escape( area.id ) ).val( aceeditor.getSession().getValue() );
                                 redux_change( $( element ) );
                                 aceeditor.resize();
                             }
