@@ -72,7 +72,9 @@
                         'pt',
                         'pc',
                         'px',
-                        'rem'
+                        'rem',
+                        'vw',
+                        'vh'
                     ) )
                 ) {
                     unset( $this->field['units'] );
@@ -89,7 +91,10 @@
                         'ex',
                         'pt',
                         'pc',
-                        'px'
+                        'px',
+                        'rem',
+                        'vw',
+                        'vh'
                     ) )
                 ) {
                     unset( $this->value['units'] );
@@ -185,9 +190,9 @@
 
                     //  Extended units, show 'em all
                     if ( $this->field['units_extended'] ) {
-                        $testUnits = array( 'px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc' );
+                        $testUnits = array( 'px', 'em', 'rem', 'vw', 'vh', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc' );
                     } else {
-                        $testUnits = array( 'px', 'em', 'rem', '%' );
+                        $testUnits = array( 'px', 'em', 'rem', 'vw', 'vh', '%' );
                     }
 
                     if ( $this->field['units'] != "" && is_array( $this->field['units'] ) ) {
