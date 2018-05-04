@@ -3,8 +3,8 @@ Contributors: dovyp, kprovance
 Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 4.9.2
-Stable tag: 3.6.8
+Tested up to: 4.9.5
+Stable tag: 3.6.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,10 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+## 3.6.9
+* Fixed:    Bypassing a WP bug where the gallery field would show a spinner on first open with no selected images.
+* Fixed:    #3512 - Image select in tile mode not highlighting default.
+
 ## 3.6.8
 * Fixed:    Error in AJAX save due to incorrect object reference in redux.js.
 * Fixed:    Removed unused set_transient in welcome routine.  It was causing slow queries.

@@ -1146,6 +1146,11 @@ pre {
     .redux-container-image_select .redux-image-select-selected img {
         border-color: $accentColor;
     }
+    
+    .redux-container-image_select .redux-image-select-selected .tiles {
+        border-color: $accentColor;
+    }
+    
     #redux-footer #redux-share a {
         color: $accentColor;
         &:hover {

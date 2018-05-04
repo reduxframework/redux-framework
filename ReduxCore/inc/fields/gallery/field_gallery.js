@@ -8,12 +8,6 @@
     redux.field_objects = redux.field_objects || {};
     redux.field_objects.gallery = redux.field_objects.gallery || {};
 
-    $( document ).ready(
-        function() {
-            //redux.field_objects.gallery.init();
-        }
-    );
-
     redux.field_objects.gallery.init = function( selector ) {
 
 
@@ -40,10 +34,18 @@
                 el.on(
                     {
                         click: function( event ) {
+                            //console.log(event);
                             // hide gallery settings used for posts/pages
                             wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend({
+//                                render: function(){
+//                                    console.log(wp.media.view);
+//                                    this.update.apply( this, ['size'] );
+//                                    return this;
+//                                },
                                 template: function(view){
-                                  return;
+                                    //console.log(view);
+                                    
+                                  return;// wp.media.template('gallery-settings')(view);
                                 }
                             });       
                             
@@ -79,7 +81,23 @@
                                 final = '[gallery ids="' + val + '"]';
                             }
 
+
                             var frame = wp.media.gallery.edit( final );
+                            
+                            if (!val) {
+                                var uploader = $('body').find('#' + frame.el.id);
+                                var inline = uploader.find('.uploader-inline');
+                                var spinner = uploader.find('.media-toolbar .spinner');
+                                
+                                setTimeout(
+                                    function(){ 
+                                        if (inline.hasClass('hidden')) {
+                                            inline.removeClass('hidden');
+                                            spinner.removeClass('is-active');
+                                        }
+                                    }, 400
+                                );
+                            }
 
                             // When the gallery-edit state is updated, copy the attachment ids across
                             frame.state( 'gallery-edit' ).on(
@@ -104,7 +122,7 @@
 
                                     current_gallery.find( '.gallery_values' ).val( ids.join( ',' ) );
                                     redux_change( current_gallery.find( '.gallery_values' ) );
-
+                                    frame.detach();
                                 }
                             );
 

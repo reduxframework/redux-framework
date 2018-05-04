@@ -107,11 +107,12 @@ if ( ! class_exists( 'ReduxFramework_image_select' ) ) {
                     }
 
                     $theValue = $k;
+                    
+                    $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
+                    
                     if ( ! empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
                         $theValue = $v['img'];
                     }
-
-                    $selected = ( checked( $this->value, $theValue, false ) != '' ) ? ' redux-image-select-selected' : '';
 
                     $presets   = '';
                     $is_preset = false;

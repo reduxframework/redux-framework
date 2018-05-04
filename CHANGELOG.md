@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.9
+* Fixed:    Bypassing a WP bug where the gallery field would show a spinner on first open with no selected images.
+* Fixed:    #3512 - Image select in tile mode not highlighting default.
+
 ## 3.6.8
 * New:      Added values to media field return array: (title, caption, alt, description).
 
