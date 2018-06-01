@@ -754,8 +754,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                             $key_string .= ".wf-loading " . $value . ',';
                             $key_string_ie .= ".ie.wf-loading " . $value . ',';
                         }
-                        $this->parent->outputCSS .= $key_string . "{opacity: 0;}";
-                        $this->parent->outputCSS .= $key_string_ie . "{visibility: hidden;}";
+                        $this->parent->outputCSS .= rtrim( $key_string, ',' ) . "{opacity: 0;}";
+                        $this->parent->outputCSS .= rtrim( $key_string_ie, ',' ) . "{visibility: hidden;}";
                     }
                 }
 
@@ -769,8 +769,8 @@ if ( ! class_exists( 'ReduxFramework_typography' ) ) {
                             $key_string .= ".wf-loading " . $value . ',';
                             $key_string_ie .= ".ie.wf-loading " . $value . ',';
                         }
-                        $this->parent->compilerCSS .= $key_string . "{opacity: 0;}";
-                        $this->parent->compilerCSS .= $key_string_ie . "{visibility: hidden;}";
+                        $this->parent->compilerCSS .= rtrim( $key_string, ',' ) . "{opacity: 0;}";
+                        $this->parent->compilerCSS .= rtrim( $key_string_ie, ',' ) . "{visibility: hidden;}";
                     }
                 }
             }
