@@ -179,7 +179,7 @@
             public $omit_share_icons = false;
             public $omit_admin_items = false;
             public $apiHasRun = false;
-            private $transients;
+            public $transients;
 
             /**
              * Class Constructor. Defines the args for the theme options class
