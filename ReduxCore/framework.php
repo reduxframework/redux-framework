@@ -178,6 +178,8 @@
             public $reload_fields = array();
             public $omit_share_icons = false;
             public $omit_admin_items = false;
+            public $apiHasRun = false;
+            public $transients;
 
             /**
              * Class Constructor. Defines the args for the theme options class
@@ -188,14 +190,13 @@
              * @param       array $args       Class constructor arguments.
              * @param       array $extra_tabs Extra panel tabs. // REMOVE
              *
-             * @return \ReduxFramework
              */
             public function __construct( $sections = array(), $args = array(), $extra_tabs = array() ) {
                 // Disregard WP AJAX 'heartbeat'call.  Why waste resources?
                 if ( isset ( $_POST ) && isset ( $_POST['action'] ) && $_POST['action'] == 'heartbeat' ) {
 
                     // Hook, for purists.
-                    if ( ! has_action( 'redux/ajax/heartbeat' ) ) {
+                    if ( has_action( 'redux/ajax/heartbeat' ) ) {
                         do_action( 'redux/ajax/heartbeat', $this );
                     }
 
@@ -1441,39 +1442,37 @@
                     );
 
                     if ( true === $this->args['allow_sub_menu'] ) {
-                        if ( ! isset ( $section['type'] ) || $section['type'] != 'divide' ) {
-                            foreach ( $this->sections as $k => $section ) {
-                                $canBeSubSection = ( $k > 0 && ( ! isset ( $this->sections[ ( $k ) ]['type'] ) || $this->sections[ ( $k ) ]['type'] != "divide" ) ) ? true : false;
+                    	foreach ( $this->sections as $k => $section ) {
+							$canBeSubSection = ( $k > 0 && ( ! isset ( $this->sections[ ( $k ) ]['type'] ) || $this->sections[ ( $k ) ]['type'] != "divide" ) ) ? true : false;
 
-                                if ( ! isset ( $section['title'] ) || ( $canBeSubSection && ( isset ( $section['subsection'] ) && $section['subsection'] == true ) ) ) {
-                                    continue;
-                                }
+							if ( ! isset ( $section['title'] ) || ( $canBeSubSection && ( isset ( $section['subsection'] ) && $section['subsection'] == true ) ) ) {
+								continue;
+							}
 
-                                if ( isset ( $section['submenu'] ) && $section['submenu'] == false ) {
-                                    continue;
-                                }
+							if ( isset ( $section['submenu'] ) && $section['submenu'] == false ) {
+								continue;
+							}
 
-                                if ( isset ( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
-                                    continue;
-                                }
+							if ( isset ( $section['customizer_only'] ) && $section['customizer_only'] == true ) {
+								continue;
+							}
 
-                                if ( isset ( $section['hidden'] ) && $section['hidden'] == true ) {
-                                    continue;
-                                }
+							if ( isset ( $section['hidden'] ) && $section['hidden'] == true ) {
+								continue;
+							}
 
-                                if ( isset( $section['permissions'] ) && ! self::current_user_can( $section['permissions'] ) ) {
-                                    continue;
-                                }
+							if ( isset( $section['permissions'] ) && ! self::current_user_can( $section['permissions'] ) ) {
+								continue;
+							}
 
-                                // ONLY for non-wp.org themes OR plugins. Theme-Check alert shown if used and IS theme.
-                                call_user_func( 'add_submenu_page', $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
-                                    //create_function( '$a', "return null;" )
-                                    '__return_null' );
-                            }
+							// ONLY for non-wp.org themes OR plugins. Theme-Check alert shown if used and IS theme.
+							call_user_func( 'add_submenu_page', $this->args['page_slug'], $section['title'], $section['title'], $this->args['page_permissions'], $this->args['page_slug'] . '&tab=' . $k,
+								//create_function( '$a', "return null;" )
+								'__return_null' );
+						}
 
-                            // Remove parent submenu item instead of adding null item.
-                            remove_submenu_page( $this->args['page_slug'], $this->args['page_slug'] );
-                        }
+						// Remove parent submenu item instead of adding null item.
+						remove_submenu_page( $this->args['page_slug'], $this->args['page_slug'] );
                     }
                 }
 
@@ -1491,9 +1490,6 @@
              */
             public function _admin_bar_menu() {
                 global $menu, $submenu, $wp_admin_bar;
-
-                $ct         = wp_get_theme();
-                $theme_data = $ct;
 
                 if ( ! is_super_admin() || ! is_admin_bar_showing() || ! $this->args['admin_bar'] || $this->args['menu_type'] == 'hidden' ) {
                     return;
@@ -2527,7 +2523,7 @@
              *
              * @param       array $plugin_options The options array
              *
-             * @return array|mixed|string|void
+             * @return array|mixed|string
              */
             public function _validate_options( $plugin_options ) {
                 //print_r($plugin_options);
@@ -2782,7 +2778,7 @@
                     //exit();
                 }
 
-                $this->set_transients( $this->transients );
+                $this->set_transients();
 
                 return $plugin_options;
             }
@@ -2923,7 +2919,7 @@
                 if ( isset( $return_array ) ) {
                     if ( $return_array['status'] == "success" ) {
                         require_once 'core/panel.php';
-                        $panel = new reduxCorePanel ( $redux );
+                        $panel = new reduxCorePanel( $redux );
                         ob_start();
                         $panel->notification_bar();
                         $notification_bar = ob_get_contents();
@@ -3138,7 +3134,7 @@
              *
              * @since       3.1.5
              * @access      public
-             * @return      void
+             * @return      string
              */
             public function section_menu( $k, $section, $suffix = "", $sections = array() ) {
                 $display = true;
@@ -3275,7 +3271,7 @@
              */
             public function generate_panel() {
                 require_once 'core/panel.php';
-                $panel = new reduxCorePanel ( $this );
+                $panel = new reduxCorePanel( $this );
                 $panel->init();
                 $this->set_transients();
             }
@@ -3653,7 +3649,7 @@
              *
              * @param array $field
              *
-             * @return array $params
+             * 
              */
             public function check_dependencies( $field ) {
                 //$params = array('data_string' => "", 'class_string' => "");
@@ -3936,7 +3932,7 @@
              *
              * @param   string $string
              *
-             * @return  array $result
+             * @return  array|bool $result
              */
             function redux_parse_str( $string ) {
                 if ( '' == $string ) {
@@ -4067,8 +4063,6 @@
              * @since 3.6.3.4
              *
              * @param  string|array $capabilities Permission string or array to check. See self::user_can() for details.
-             * @param  int          $object_id    (Optional) ID of the specific object to check against if capability is a "meta" cap.
-             *                                    e.g. 'edit_post', 'edit_user', 'edit_page', etc.,
              *
              * @return bool Whether or not the user meets the requirements. False on invalid user.
              */
@@ -4262,5 +4256,6 @@
          *
          * @param null
          */
-        do_action( 'redux/init', ReduxFramework::init() );
+        ReduxFramework::init();
+        do_action( 'redux/init');
     } // class_exists('ReduxFramework')
