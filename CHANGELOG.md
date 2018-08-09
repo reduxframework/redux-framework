@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.11
+* Fixed:    #3561, #3562 - Not all selectors in async typography were properly formed, causing them not to render properly on screen.
+
 ## 3.6.10
 * Updated   Google font update.
 * Updated:  #3447 - Updated RTL CSS.  Thanks @Abolfazlrt.
