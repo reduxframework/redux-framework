@@ -5,7 +5,7 @@
      *
      * @author        Redux Framework
      * @package       ReduxFramework/Templates
-     * @version:      3.5.8.3
+     * @version:      3.6.10
      */
 ?>
 <div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
@@ -55,10 +55,12 @@
 <?php 
             if ( false === $this->parent->args['hide_save'] ) {
                 submit_button( __( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false );
+                echo '&nbsp';
             }
 
             if ( false === $this->parent->args['hide_reset'] ) {
                 submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false, array( 'id' => 'redux-defaults-section' ) );
+                echo '&nbsp';
                 submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false, array( 'id' => 'redux-defaults' ) );
             } 
 ?>

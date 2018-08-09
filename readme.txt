@@ -124,6 +124,19 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+## 3.6.10
+* Updated   Google font update.
+* Updated:  #3447 - Updated RTL CSS.  Thanks @Abolfazlrt.
+* Fixed:    Duplicate ID warnings.
+* Fixed:    http warnings in https environments.
+* Fixed:    #3539 - Checkbox label not appearing unless 'desc' was set. Thanks @Enchiridion.
+* Fixed:    #3547 - ace_editor not rendering properly within a subsection. Thanks @Tofandel.
+* Fixed:    #3534 - Fix invalid CSS in asycn_typography (trailing commas).  Thanks @ksere
+* Fixed:    Spacing between Save and Reset buttons.
+* Added:    #3285 - dir and url filters for customizer extension.  Thanks @aaronhuisinga.
+            add_filter ("redux/extension/customizer/dir", $dir)
+            add_filter ("redux/extension/customizer/url", $url)
+
 ## 3.6.9
 * Fixed:    Bypassing a WP bug where the gallery field would show a spinner on first open with no selected images.
 * Fixed:    #3512 - Image select in tile mode not highlighting default.
@@ -1297,13 +1310,3 @@ Feature: Code at bottom of sample-config.php to hide plugin activation text abou
 
 = 3.0 =
 Redux is now hosted on WordPress.org! Update in order to get proper, stable updates.
-
-
-== Attribution ==
-
-Redux is was originally based off the following frameworks:
-
-* [NHP](https://github.com/leemason/NHP-Theme-Options-Framework)
-* [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework")
-
-It has now a completely different code base. If you like what you see, realize this is a labor of love. Please [donate to the Redux Framework](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U) if you are able.

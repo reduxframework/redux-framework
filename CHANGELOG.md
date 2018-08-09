@@ -2,8 +2,16 @@
 
 ## 3.6.10
 * Updated   Google font update.
+* Updated:  #3447 - Updated RTL CSS.  Thanks @Abolfazlrt.
 * Fixed:    Duplicate ID warnings.
-^ Fixed:    http warnings in https environments.
+* Fixed:    http warnings in https environments.
+* Fixed:    #3539 - Checkbox label not appearing unless 'desc' was set. Thanks @Enchiridion.
+* Fixed:    #3547 - ace_editor not rendering properly within a subsection. Thanks @Tofandel.
+* Fixed:    #3534 - Fix invalid CSS in asycn_typography (trailing commas).  Thanks @ksere
+* Fixed:    Spacing between Save and Reset buttons.
+* Added:    #3285 - dir and url filters for customizer extension.  Thanks @aaronhuisinga.
+            add_filter ("redux/extension/customizer/dir", $dir)
+            add_filter ("redux/extension/customizer/url", $url)
 
 ## 3.6.9
 * Fixed:    Bypassing a WP bug where the gallery field would show a spinner on first open with no selected images.
