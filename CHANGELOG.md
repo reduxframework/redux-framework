@@ -2,6 +2,8 @@
 
 ## 3.6.10
 * Updated   Google font update.
+* Fixed:    Duplicate ID warnings.
+^ Fixed:    http warnings in https environments.
 
 ## 3.6.9
 * Fixed:    Bypassing a WP bug where the gallery field would show a spinner on first open with no selected images.
