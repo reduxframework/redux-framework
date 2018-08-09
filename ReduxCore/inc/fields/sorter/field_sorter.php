@@ -167,7 +167,7 @@
 
                                     //echo '<li id="' . $key . '" class="sortee">';
                                     echo '<li id="sortee-' . esc_attr($key) . '" class="sortee" data-id="' . esc_attr($key) . '">';
-                                    echo '<input class="position ' . esc_attr($this->field['class']) . '" type="hidden" name="' . esc_attr($this->field['name'] . '[' . $group . '][' . $key . ']' . $this->field['name_suffix']) . '" value="' . esc_attr($list) . '">';
+                                    echo '<input class="position ' . esc_attr($this->field['class']) . '" type="hidden" name="' . esc_attr($this->field['name'] . '[' . $group . '][' . sanitize_title($key) . ']' . $this->field['name_suffix']) . '" value="' . esc_attr($list) . '">';
                                     echo esc_html($list);
                                     echo '</li>';
                                 }
