@@ -934,7 +934,7 @@
                 //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
                 'desc'     => __( 'Basic media uploader with disabled URL input field.', 'redux-framework-demo' ),
                 'subtitle' => __( 'Upload any media using the WordPress native uploader', 'redux-framework-demo' ),
-                'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
+                'default'  => array( 'url' => 'https://s.wordpress.org/style/images/codeispoetry.png' ),
                 //'hint'      => array(
                 //    'title'     => 'Hint Title',
                 //    'content'   => 'This is a <b>hint</b> for the media field with a Title.',
