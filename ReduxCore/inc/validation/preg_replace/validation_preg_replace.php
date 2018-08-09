@@ -26,7 +26,7 @@
              * @since ReduxFramework 1.0.0
              */
             function validate() {
-                $this->value = preg_replace_callback($this->field['preg']['pattern'], function($matches){return $this->field['preg']['replacement'];}, $this->value);
+                $this->value = preg_replace($this->field['preg']['pattern'], $this->field['preg']['replacement'], $this->value);
             } //function
         } //class
     }
