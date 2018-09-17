@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.12
+* Fixed:    #3577 - Added isset to REMOTE_ADDR check to prevent error.
+
 ## 3.6.11
 * Fixed:    #3561, #3562 - Not all selectors in async typography were properly formed, causing them not to render properly on screen.
 
