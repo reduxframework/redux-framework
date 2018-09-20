@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.12.1
+* Fixed:    #3580 - 'tax_query' array in args for WordPress data arg throwing a string conversation error.
+
 ## 3.6.12
 * Fixed:    #3577 - Added isset to REMOTE_ADDR check to prevent error.
 
