@@ -520,10 +520,12 @@
                 $sysinfo['plugins'] = array();
 
                 foreach ( $active_plugins as $plugin ) {
-                    $plugin_data = @get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin );
-                    $plugin_name = esc_html( $plugin_data['Name'] );
+                    if (file_exists(WP_PLUGIN_DIR . '/' . $plugin)) {
+                        $plugin_data = @get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin );
+                        $plugin_name = esc_html( $plugin_data['Name'] );
 
-                    $sysinfo['plugins'][ $plugin_name ] = $plugin_data;
+                        $sysinfo['plugins'][ $plugin_name ] = $plugin_data;
+                    }
                 }
 
                 $redux = ReduxFrameworkInstances::get_all_instances();
