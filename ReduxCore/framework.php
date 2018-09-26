@@ -911,17 +911,7 @@
                  */
                 $data = apply_filters( "redux/options/{$this->args['opt_name']}/data/$type", $data );
 
-                $argsKey = "";
-                foreach ( $args as $key => $value ) {
-                    if ( ! is_array( $value ) ) {
-                        $argsKey .= $value . "-";
-                    } else {
-                        if ($key == 'tax_query') {
-                            continue;
-                        }
-                        $argsKey .= implode( "-", $value );
-                    }
-                }
+                $argsKey = md5( serialize( $args ) );
 
                 if ( empty ( $data ) && isset ( $this->wp_data[ $type . $argsKey ] ) ) {
                     $data = $this->wp_data[ $type . $argsKey ];
