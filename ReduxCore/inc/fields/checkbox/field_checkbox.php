@@ -160,5 +160,4 @@ if ( !class_exists ( 'ReduxFramework_checkbox' ) ) {
             );
         }
     }
-
 }

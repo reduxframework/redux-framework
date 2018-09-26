@@ -148,7 +148,7 @@
                         type="hidden"
                         class="redux-hidden-color"
                         data-id="' . $field_id . '-color"
-                        id="' . $field_id . '-color"
+                        id="' . $field_id . '-color-hidden"
                         value="' . $this->value['color'] . '"
                       />';
 

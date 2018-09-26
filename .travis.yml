@@ -2,8 +2,8 @@ language: php
 dist: precise
 php:
 #- 5.2
-- 7.0
 - 7.1
+- 7.2
 #- 5.4
 env:
   global:

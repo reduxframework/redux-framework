@@ -1,6 +1,6 @@
 {
   "name": "redux-framework",
-  "version": "3.6.9",
+  "version": "3.6.12",
   "title": "ReduxFramework",
   "description": "Redux is a simple, truly extensible options framework for WordPress themes and plugins.",
   "main": "Gruntfile.js",

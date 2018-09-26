@@ -82,7 +82,7 @@
         // Set it you want google fonts to update weekly. A google_api_key value is required.
         'google_update_weekly' => false,
         // Must be defined to add google fonts to the typography module
-        'async_typography'     => true,
+        'async_typography'     => false,
         // Use a asynchronous font on the front end or font string
         //'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
         'admin_bar'            => true,
@@ -934,7 +934,7 @@
                 //'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
                 'desc'     => __( 'Basic media uploader with disabled URL input field.', 'redux-framework-demo' ),
                 'subtitle' => __( 'Upload any media using the WordPress native uploader', 'redux-framework-demo' ),
-                'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
+                'default'  => array( 'url' => 'https://s.wordpress.org/style/images/codeispoetry.png' ),
                 //'hint'      => array(
                 //    'title'     => 'Hint Title',
                 //    'content'   => 'This is a <b>hint</b> for the media field with a Title.',
@@ -1713,6 +1713,7 @@
                 'title'    => __( 'Body Font', 'redux-framework-demo' ),
                 'subtitle' => __( 'Specify the body font properties.', 'redux-framework-demo' ),
                 'google'   => true,
+                'output' => array('h1, h2, h3, h4'),
                 'default'  => array(
                     'color'       => '#dd9933',
                     'font-size'   => '30px',
@@ -1739,9 +1740,9 @@
                 //'preview'       => false, // Disable the previewer
                 'all_styles'  => true,
                 // Enable all Google Font style/weight variations to be added to the page
-                'output'      => array( 'h2.site-description, .entry-title' ),
+                'output'      => array( '.site-description' ),
                 // An array of CSS selectors to apply this font style to dynamically
-                'compiler'    => array( 'h2.site-description-compiler' ),
+                'compiler'    => array( 'site-description-compiler' ),
                 // An array of CSS selectors to apply this font style to dynamically
                 'units'       => 'px',
                 // Defaults to px

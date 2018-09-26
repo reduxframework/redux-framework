@@ -127,7 +127,7 @@
                     // nothing to do here, but I'm leaving the construct just in case I have to debug this again.
                 }
 
-                echo '<fieldset id="' . $this->field['id'] . '" class="redux-dimensions-container" data-id="' . $this->field['id'] . '">';
+                echo '<fieldset id="' . $this->field['id'] . '-fieldset" class="redux-dimensions-container" data-id="' . $this->field['id'] . '">';
 
                 if ( isset( $this->field['select2'] ) ) { // if there are any let's pass them to js
                     $select2_params = json_encode( $this->field['select2'] );

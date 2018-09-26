@@ -5,7 +5,7 @@
      *
      * @author        Redux Framework
      * @package       ReduxFramework/Templates
-     * @version:      3.5.7.8
+     * @version:      3.6.10
      */
 ?>
 <div id="redux-sticky">
@@ -17,14 +17,18 @@
 
         <div class="redux-action_bar">
             <span class="spinner"></span>
-            <?php if ( false === $this->parent->args['hide_save'] ) { ?>
-                <?php submit_button( esc_attr__( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save', false ); ?>
-            <?php } ?>
+<?php 
+            if ( false === $this->parent->args['hide_save'] ) {
+                submit_button( esc_attr__( 'Save Changes', 'redux-framework' ), 'primary', 'redux_save_sticky', false );
+                echo '&nbsp';
+            }
             
-            <?php if ( false === $this->parent->args['hide_reset'] ) { ?>
-                <?php submit_button( esc_attr__( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false, array( 'id' => 'redux-defaults-section' ) ); ?>
-                <?php submit_button( esc_attr__( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false, array( 'id' => 'redux-defaults' ) ); ?>
-            <?php } ?>
+            if ( false === $this->parent->args['hide_reset'] ) {
+                submit_button( esc_attr__( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false, array( 'id' => 'redux-defaults-section-sticky' ) );
+                echo '&nbsp';
+                submit_button( esc_attr__( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false, array( 'id' => 'redux-defaults-sticky' ) );
+            }
+?>
         </div>
         <div class="redux-ajax-loading" alt="<?php esc_attr_e( 'Working...', 'redux-framework' ) ?>">&nbsp;</div>
         <div class="clear"></div>

@@ -94,13 +94,13 @@
                 if ( ! $this->is_field || ( $this->is_field && false == $fullWidth ) ) { ?>
                     <style>#<?php echo esc_html($id); ?> {padding: 0;}</style>
                     </td></tr></table>
-                    <table id="<?php echo esc_attr($id); ?>" class="form-table no-border redux-group-table redux-raw-table" style=" overflow: <?php esc_attr($this->field['overflow']); ?>;">
+                    <table id="<?php echo esc_attr($id); ?>-table" class="form-table no-border redux-group-table redux-raw-table" style=" overflow: <?php esc_attr($this->field['overflow']); ?>;">
                     <tbody><tr><td>
 <?php
                     $bDoClose = true;
                 }
 ?>                
-                <fieldset id="<?php echo esc_attr($id); ?>" class="redux-field redux-container-<?php echo esc_attr($this->field['type']) . ' ' . esc_attr($this->field['class']); ?>" data-id="<?php echo esc_attr($this->field['id']); ?>">
+                <fieldset id="<?php echo esc_attr($id); ?>-fieldset" class="redux-field redux-container-<?php echo esc_attr($this->field['type']) . ' ' . esc_attr($this->field['class']); ?>" data-id="<?php echo esc_attr($this->field['id']); ?>">
                     <h3><?php esc_html_e( 'Options Object', 'redux-framework' ); ?></h3>
                     <div id="redux-object-browser"></div>
                     <div id="redux-object-json" class="hide"><?php echo $json; ?></div>
