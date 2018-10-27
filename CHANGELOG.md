@@ -1,5 +1,9 @@
 # Redux Framework Changelog
 
+## 3.6.12.2
+* Fixed:    #3586:  Database not saving properly in 'network' mode.  Thanks @Tofandel.
+* Fixed:    #3584:  Improved fox for #3580.  Thanks @Enchiridion.
+
 ## 3.6.12.1
 * Fixed:    #3580 - 'tax_query' array in args for WordPress data arg throwing a string conversation error.
 
