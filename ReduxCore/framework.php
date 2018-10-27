@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.12.1';
+            public static $_version = '3.6.12.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -808,7 +808,7 @@
                         }
                     } else if ( $this->args['database'] === 'network' ) {
                         // Strip those slashes!
-                        $value = json_decode( stripslashes( json_encode( $value ) ), true );
+                        //$value = json_decode( stripslashes( json_encode( $value ) ), true );
                         update_site_option( $this->args['opt_name'], $value );
                     } else {
                         update_option( $this->args['opt_name'], $value );
@@ -860,7 +860,7 @@
                     $result = get_theme_mods();
                 } else if ( $this->args['database'] === 'network' ) {
                     $result = get_site_option( $this->args['opt_name'], array() );
-                    $result = json_decode( stripslashes( json_encode( $result ) ), true );
+                    //$result = json_decode( stripslashes( json_encode( $result ) ), true );
                 } else {
                     $result = get_option( $this->args['opt_name'], array() );
                 }
@@ -911,17 +911,7 @@
                  */
                 $data = apply_filters( "redux/options/{$this->args['opt_name']}/data/$type", $data );
 
-                $argsKey = "";
-                foreach ( $args as $key => $value ) {
-                    if ( ! is_array( $value ) ) {
-                        $argsKey .= $value . "-";
-                    } else {
-                        if ($key == 'tax_query') {
-                            continue;
-                        }
-                        $argsKey .= implode( "-", $value );
-                    }
-                }
+                $argsKey = md5( serialize( $args ) );
 
                 if ( empty ( $data ) && isset ( $this->wp_data[ $type . $argsKey ] ) ) {
                     $data = $this->wp_data[ $type . $argsKey ];
