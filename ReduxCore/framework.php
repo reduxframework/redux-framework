@@ -69,7 +69,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.6.12.2';
+            public static $_version = '3.6.12.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -2841,7 +2841,7 @@
                                 }
                             }
 
-                            if ( $do_reload || ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) ) ) {
+                    if ( $do_reload || ( isset ( $values['defaults'] ) && ! empty ( $values['defaults'] ) ) || ( isset ( $values['defaults-section'] ) && ! empty ( $values['defaults-section'] ) ) || ( isset ( $values['import_code'] ) && ! empty ($values['import_code']) ) || ( isset ( $values['import_link'] ) && ! empty ($values['import_link']) ) ) {
                                 echo json_encode( array( 'status' => 'success', 'action' => 'reload' ) );
                                 die ();
                             }

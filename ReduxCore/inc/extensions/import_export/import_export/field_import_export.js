@@ -34,8 +34,6 @@
                                     e.preventDefault();
                                     return false;
                                 }
-                                window.onbeforeunload = null;
-                                redux.args.ajax_save = false;
                             }
                         );
 

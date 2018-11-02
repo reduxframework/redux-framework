@@ -169,7 +169,7 @@
         );
 
         // Save button clicked
-        $( '.redux-action_bar input' ).on(
+        $( '.redux-action_bar input, #redux-import-action input' ).on(
             'click', function( e ) {
                 if ( $( this ).attr( 'name' ) == redux.args.opt_name + '[defaults]' ) {
                     // Defaults button clicked
@@ -181,6 +181,10 @@
                     if ( !confirm( redux.args.reset_section_confirm ) ) {
                         return false;
                     }
+                } else if ( $( this ).attr( 'name' ) == 'import' ) {
+                    if ( !confirm( redux.args.import_section_confirm ) ) {
+                        return false;
+                    }                    
                 }
 
                 window.onbeforeunload = null;
@@ -193,32 +197,6 @@
                 }
             }
         );
-        //
-        //// Default button clicked
-        //$( 'input[name="' + redux.args.opt_name + '[defaults]"]' ).click(
-        //    function() {
-        //        if ( !confirm( redux.args.reset_confirm ) ) {
-        //            return false;
-        //        }
-        //        window.onbeforeunload = null;
-        //    }
-        //);
-
-
-        //$( 'input[name="' + redux.args.opt_name + '[defaults-section]"]' ).click(
-        //    function() {
-        //        if ( !confirm( redux.args.reset_section_confirm ) ) {
-        //            return false;
-        //        }
-        //
-        //        window.onbeforeunload = null;
-        //    }
-        //);
-        //$( '.redux-save' ).click(
-        //    function() {
-        //        window.onbeforeunload = null;
-        //    }
-        //);
 
         $( '.expand_options' ).click(
             function( e ) {
