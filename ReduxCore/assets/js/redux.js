@@ -103,8 +103,7 @@
                 },
                 error: function( response ) {
                     if ( !window.console ) console = {};
-                    console.log = console.log || function( name, data ) {
-                        };
+                    console.log = console.log || function( name, data ) {};
                     console.log( redux.ajax.console );
                     console.log( response.responseText );
                     jQuery( '.redux-action_bar input' ).removeAttr( 'disabled' );

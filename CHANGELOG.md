@@ -1,7 +1,10 @@
 # Redux Framework Changelog
 
-## 3.6.12.3
-8 Fixed:    #3583:  Import failing when max_input_vars exceeded.  Function moved to ajax_save to avoid this issue.
+## 3.6.14
+* Fixed:    #3583:  Import failing when max_input_vars exceeded.  Function moved to ajax_save to avoid this issue.
+
+## 3.6.13
+* Skipping.  I'm superstitious! - kp
 
 ## 3.6.12.2
 * Fixed:    #3586:  Database not saving properly in 'network' mode.  Thanks @Tofandel.

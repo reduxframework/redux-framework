@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.9.9
-Stable tag: 3.6.12
+Stable tag: 3.6.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,19 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+## 3.6.14
+* Fixed:    #3583:  Import failing when max_input_vars exceeded.  Function moved to ajax_save to avoid this issue.
+
+## 3.6.13
+* Skipping.  I'm superstitious! - kp
+
+## 3.6.12.2
+* Fixed:    #3586:  Database not saving properly in 'network' mode.  Thanks @Tofandel.
+* Fixed:    #3584:  Improved fox for #3580.  Thanks @Enchiridion.
+
+## 3.6.12.1
+* Fixed:    #3580 - 'tax_query' array in args for WordPress data arg throwing a string conversation error.
+
 ## 3.6.12
 * Fixed:    #3577 - Added isset to REMOTE_ADDR check to prevent error.
 
