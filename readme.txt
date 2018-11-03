@@ -14,23 +14,16 @@ Redux is a simple, truly extensible and fully responsive options framework for W
 
 Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. Built on the WordPress Settings API, Redux supports a multitude of field types as well as: custom error handling, custom fields & validation types, and import/export functionality.
 
-But what does Redux actually DO? We don't believe that theme and plugin
-developers should have to reinvent the wheel every time they start work on a
-project. Redux is designed to simplify the development cycle by providing a
-streamlined, extensible framework for developers to build on. Through a
-simple, well-documented config file, third-party developers can build out an
-options panel limited only by their own imagination in a fraction of the time
-it would take to build from the ground up!
+But what does Redux actually DO?  We don't believe that theme and plugin developers should have to reinvent the wheel every time they start work on a project. Redux is designed to simplify the development cycle by providing a streamlined, extensible framework for developers to build on. Through a simple, well-documented config file, third-party developers can build out an options panel limited only by their own imagination in a fraction of the time it would take to build from the ground up!
 
 = Online Demo =
 Don't take our word for it, check out our online demo and try Redux without installing a thing!
 [**http://demo.redux.io/**](http://demo.redux.io/)
 
 = Use the Redux Builder to Get Started =
-Want to use Redux, but not sure what to do? Use our [builder](http://build.reduxframework.com/)! It will allow you to make
-a custom theme based on [_s](http://underscores.me), [TGM](http://tgmpluginactivation.com), and [Redux](http://reduxframework.com), and any Redux arguments you want to set.
-Don't want to make your own theme? Then output a custom admin folder that you can place
-in a theme or plugin. Oh and did we mention it's free? Try it today at:
+Want to use Redux, but not sure what to do? Use our [builder](http://build.reduxframework.com/)! It will allow you to make a custom theme based on [_s](http://underscores.me), [TGM](http://tgmpluginactivation.com), and [Redux](http://reduxframework.com), and any Redux arguments you want to set.
+
+Don't want to make your own theme? Then output a custom admin folder that you can place in a theme or plugin. Oh and did we mention it's free? Try it today at:
 [**http://build.reduxframework.com/**](http://build.reduxframework.com/)
 
 
@@ -94,12 +87,9 @@ It is hard to continue development and support for this free plugin without cont
 We need your help to translate Redux into your language! Redux is part of the WP-Translations.org team. To help us translate Redux create a few account here: <a href="https://www.transifex.com/organization/wp-translations">https://www.transifex.com/organization/wp-translations</a>. Once you're in, you can head over to the <a href="https://www.transifex.com/projects/p/redux-framework/">Redux sub-project</a> and translate away. Thank you for your assistance.
 
 = Get Involved =
-Redux is an ever-changing, living system. Want to stay up to date or
-contribute? Subscribe to one of our mailing lists or join us on [Facebook](https://facebook.com/reduxframework) or [Twitter](https://twitter.com/reduxframework) or [Github](https://github.com/ReduxFramework/ReduxFramework)!
+Redux is an ever-changing, living system. Want to stay up to date or contribute? Subscribe to one of our mailing lists or join us on [Facebook](https://facebook.com/reduxframework) or [Twitter](https://twitter.com/reduxframework) or [Github](https://github.com/ReduxFramework/ReduxFramework)!
 
-NOTE: Redux is not intended to be used on its own. It requires a config file
-provided by a third-party theme or plugin developer to actual do anything
-cool!
+NOTE: Redux is not intended to be used on its own. It requires a config file provided by a third-party theme or plugin developer to actual do anything cool!
 
 == Installation ==
 
