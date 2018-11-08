@@ -42,7 +42,7 @@
     "shelljs": "^0.8.2"
   },
   "engines": {
-    "node": ">=0.10.0",
+    "node": ">=6.0.0",
     "npm": ">=1.4.0"
   },
   "dependencies": {}
