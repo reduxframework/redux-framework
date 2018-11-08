@@ -154,7 +154,7 @@ module.exports = function( grunt ) {
                 },
                 php: {
                     files: ['ReduxCore/**/*.php'],
-                    tasks: ['phplint:core']
+                    //tasks: ['phplint:core']
                 },
                 css: {
                     files: ['ReduxCore/**/*.less'],
@@ -265,21 +265,21 @@ module.exports = function( grunt ) {
                 }
             },
 
-            phpdocumentor: {
-                options: {
-                    directory: 'ReduxCore/',
-                    target: 'docs/'
-                },
-                generate: {}
-            },
-
-            phplint: {
-                options: {
-                    swapPath: './'
-                },
-                core: ["ReduxCore/**/*.php"],
-                plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"]
-            },
+//            phpdocumentor: {
+//                options: {
+//                    directory: 'ReduxCore/',
+//                    target: 'docs/'
+//                },
+//                generate: {}
+//            },
+//
+//            phplint: {
+//                options: {
+//                    swapPath: './'
+//                },
+//                core: ["ReduxCore/**/*.php"],
+//                plugin: ["class-redux-plugin.php", "index.php", "redux-framework.php"]
+//            },
 
             sass: {
                 fields: {
@@ -391,10 +391,8 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-contrib-watch' );
     grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
     grunt.loadNpmTasks( 'grunt-contrib-concat' );
-    grunt.loadNpmTasks( 'grunt-phpdocumentor' );
     grunt.loadNpmTasks( 'grunt-gh-pages' );
-    grunt.loadNpmTasks( "grunt-phplint" );
-    //grunt.loadNpmTasks( 'grunt-recess' );
+    //grunt.loadNpmTasks( "grunt-phplint" );
 
     grunt.registerTask(
         'langUpdate', [

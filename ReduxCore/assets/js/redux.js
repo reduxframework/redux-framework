@@ -596,7 +596,7 @@
             return;
         }
 
-        var tab = decodeURI( (new RegExp( 'tab' + '=' + '(.+?)(&|$)' ).exec( location.search ) || [, ''])[1] );
+        var tab = decodeURI( (new RegExp( 'tab' + '=' + '(.+?)(&|$)' ).exec( location.search ) || ['', ''])[1] );
 
         if ( tab !== "" ) {
             if ( $.cookie( "redux_current_tab_get" ) !== tab ) {
