@@ -420,7 +420,7 @@ module.exports = function( grunt ) {
             'cssmin'
         ]
     );
-    grunt.registerTask( 'travis', ['jshint', 'lintPHP'] );
+    //grunt.registerTask( 'travis', ['jshint', 'lintPHP'] );
 
     // this would be run by typing "grunt test" on the command line
     grunt.registerTask( 'testJS', ['jshint', 'concat:core', 'concat:vendor'] );
@@ -428,7 +428,7 @@ module.exports = function( grunt ) {
     grunt.registerTask( 'watchUI', ['watch:ui'] );
     grunt.registerTask( 'watchPHP', ['watch:php', 'phplint:core', 'phplint:plugin'] );
 
-    grunt.registerTask( "lintPHP", ["phplint:plugin", "phplint:core"] );
+    //grunt.registerTask( "lintPHP", ["phplint:plugin", "phplint:core"] );
     grunt.registerTask( "compileSCSS", ["sass:admin", "sass:fields", "sass:extensions", "sass:vendor", "sass:welcome"] );
     grunt.registerTask(
         'compileJS',
