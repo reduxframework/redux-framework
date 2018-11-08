@@ -1,5 +1,5 @@
 <?php
-//return;
+return;
 class SampleTest extends WP_UnitTestCase {
 
 	function testSample() {
