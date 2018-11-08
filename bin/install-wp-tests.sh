@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-
+echo 'HI!"
 if [ $# -lt 3 ]; then
 	echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version]"
 	exit 1
 fi
+
+echo 'HI 2!"
 
 DB_NAME=$1
 DB_USER=$2
