@@ -1,10 +1,8 @@
 language: php
 dist: precise
 php:
-#- 5.2
 - 7.1
 - 7.2
-#- 5.4
 env:
   global:
     #secure: "HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo="
@@ -22,11 +20,11 @@ install:
 - npm install -g grunt-cli
 - npm install
 - find ReduxCore -type f | sort -u | xargs cat | md5sum > md5
-before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+#before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 script:
-- phpunit
+# - phpunit
 - grunt jshint
-- grunt lintPHP
+# - grunt lintPHP
 after_success:
   # Install the Heroku gem (or the Heroku toolbelt)
   # - gem install heroku
@@ -43,7 +41,7 @@ after_success:
   # - yes | heroku keys:add
 after_script:
   #- ./bin/commit-uncompressed-files.sh
-  - ./bin/update-mirrors-docs.sh
+  #- ./bin/update-mirrors-docs.sh
 notifications:
   email:
     recipients:
