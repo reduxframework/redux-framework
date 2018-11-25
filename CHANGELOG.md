@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.15
+* Fixed:    Redux API setSections would hang up when several sections with no ID share the same title.
+
 ## 3.6.14
 * Fixed:    #3583:  Import failing when max_input_vars exceeded.  Function moved to ajax_save to avoid this issue.
 

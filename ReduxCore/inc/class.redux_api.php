@@ -278,6 +278,8 @@
                         $i    = 0;
                         while ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
                             $section['id'] = $orig . '_' . $i;
+
+                            $i ++;
                         }
                     }
                 }
