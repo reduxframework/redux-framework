@@ -27,7 +27,7 @@ All pre-sale and support for premium extensions need to be posted to the Redux E
 
 Think you found a bug?
 ======================
-Please use the "BUG REPORT" template below. Remember, we are rabbid about backwards compatability. Do not submit fixes that break previous ways of doing so or they will be rejected.
+Please use the "BUG REPORT" template below. Remember, we are rabid about backwards compatability. Do not submit fixes that break previous ways of doing so or they will be rejected.
 
 Also, unless you provide a Support Hash, your request will also be rejected. See https://docs.reduxframework.com/core/generating-a-support-hash/ for more details.
 
