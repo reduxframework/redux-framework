@@ -3,7 +3,7 @@
 	"immed": true,
 	"noarg": true,
 	"onevar": true,
-	
+	"validthis": true,
 	"browser": true,
 	
 	"globals": {
