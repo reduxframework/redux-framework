@@ -14,10 +14,9 @@ The public beta for Redux v4 is now available! You can find it here: https://git
 
 A couple of things.
 
-    1. Please review carefully the READ ME text posted on the repository.  That information is very important and may answer many questions ahead of time.
+1. Please review carefully the READ ME text posted on the repository.  That information is very important and may answer many questions ahead of time.
 
-    2. Please do NOT post issues about Redux v4 in THIS repo.  Please use the issue tracker via the link above.
-
+2. Please do NOT post issues about Redux v4 in THIS repo.  Please use the issue tracker via the link above.
 
 Have fun!
 
