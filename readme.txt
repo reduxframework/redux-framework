@@ -114,29 +114,29 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
-## 3.6.15
+= 3.6.15 =
 * Fixed:    Redux API setSections would hang up when several sections with no ID share the same title.
 
-## 3.6.14
+= 3.6.14 =
 * Fixed:    #3583:  Import failing when max_input_vars exceeded.  Function moved to ajax_save to avoid this issue.
 
-## 3.6.13
+= 3.6.13 =
 * Skipping.  I'm superstitious! - kp
 
-## 3.6.12.2
+= 3.6.12.2 =
 * Fixed:    #3586:  Database not saving properly in 'network' mode.  Thanks @Tofandel.
 * Fixed:    #3584:  Improved fox for #3580.  Thanks @Enchiridion.
 
-## 3.6.12.1
+= 3.6.12.1 =
 * Fixed:    #3580 - 'tax_query' array in args for WordPress data arg throwing a string conversation error.
 
-## 3.6.12
+= 3.6.12 =
 * Fixed:    #3577 - Added isset to REMOTE_ADDR check to prevent error.
 
-## 3.6.11
+= 3.6.11 =
 * Fixed:    #3561, #3562 - Not all selectors in async typography were properly formed, causing them not to render properly on screen.
 
-## 3.6.10
+= 3.6.10 =
 * Updated   Google font update.
 * Updated:  #3447 - Updated RTL CSS.  Thanks @Abolfazlrt.
 * Fixed:    Duplicate ID warnings.
@@ -149,11 +149,11 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
             add_filter ("redux/extension/customizer/dir", $dir)
             add_filter ("redux/extension/customizer/url", $url)
 
-## 3.6.9
+= 3.6.9 =
 * Fixed:    Bypassing a WP bug where the gallery field would show a spinner on first open with no selected images.
 * Fixed:    #3512 - Image select in tile mode not highlighting default.
 
-## 3.6.8
+= 3.6.8 =
 * Fixed:    Error in AJAX save due to incorrect object reference in redux.js.
 * Fixed:    Removed unused set_transient in welcome routine.  It was causing slow queries.
 * Updated:  Google Font update.
@@ -162,7 +162,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:    #3429 - Select2 Sortable needed jQuery Sortable dependency.
 * Fixed:    Admin noticies when multiple instances of Redux running not displaying per panel.
 
-## 3.6.7.7
+= 3.6.7.7 =
 * Fixed:    Filesystem path correction.
 * Fixed:    #3414: Incorrect classname causing an error on load, via the filesystem API.
 * Fixed:    #3413 - Restored old code allowing non array value for mode. This is for backward compatibility 
@@ -175,7 +175,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
             full path to default image.
 * Updated:  Google Fonts.
 
-## 3.6.6
+= 3.6.6 =
 * Misspelled class name is system info compiler causing System Status to fail.
 * #3359 - Responsive issue on option panel.  Too much blank space on panel in smartphone mode.
 * #2914, #3356 - Default image_select preset image not selected.  This was originally by design.  Now it's a thing.
@@ -185,7 +185,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
 * Modified: PHP7 compatibility.
 
-## 3.6.5
+= 3.6.5 =
 * Modified: #3321 - Font subset in typography not rendering on IE and Edge (Seriously?  People still use those?)
 * Fixed:    #3293 - Required not liking/hiding fields with switch default of 'false'.
 * Fixed:    Remove leftover var_dump from the core.
@@ -201,7 +201,7 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:    Default data not saving correctly in sorter field.
 
 
-## 3.6.4
+= 3.6.4 =
 * Modified: Changed gitignore file to exclude sublime text files.
 * Fixed:    #2966 - Translation bug. Identified and fixed by @iiandrade. Thanks!
 * Modified: Generated all CSS map files to get rid of Chrome warnings.
@@ -217,19 +217,19 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:    #3186 - Multi text field not removing single field when clicking "Remove".
 * Fixed:    #3180, #2641 - Button set multi mode saving incorrectly.  Please check your code for a possible backward compatibility issue when using this mode.  The foreach() function with an empty() check must now be used, versus individual array keys as only selected options are saved to the database.
 
-## 3.6.3
+= 3.6.3 =
 * Modified: Change customizer hover styles to match WP 4.7.
 * Modified: #3169 - print_r of wpdb queries in dev_mode removed.
 * Fixed: #3159 - Support for SVG in gallery media selection.
 * Fixed: #3158 - PHP warning for _validate_values function when extensions installed on PHP7.
 
-## 3.6.2
+= 3.6.2 =
 * Fixed:   #3105 - link_color output failing due to PHP error.
 * Fixed:   #3103 - WP 4.6 forces new default date format, breaking date validation.
 * Fixed:   Typography subsets error due to typo.
 * Fixed:   Extra dead files on WP.org repo. Bah SVN.
 
-## 3.6.1
+= 3.6.1 =
 * Removed   Empty PHP file from editor field.
 * Modified: Replaced class primary function name in browser.php to __construct for PHP7 compatibility.
 * Fixed:    #3051 - Color_RBGA field RGBA value outputting zeros when color is left blank.
@@ -247,10 +247,10 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 * Fixed:    Deleted old deleted files stuck in our WP.org SVN repo.
 
 
-## 3.6.0.2
+= 3.6.0.2 =
 * Fixed     Outdated customizer.min.js on wp.org causing customizer failure.
 
-## 3.6.0.1
+= 3.6.0.1 =
 * Fixed     Outdated redux.min.js on wp.org causing option panel failure.
 * Fixed:    #2936 - Border field outputting px with blank value.
 * Fixed:    Resolved Theme-Check php shortcode false notice.
