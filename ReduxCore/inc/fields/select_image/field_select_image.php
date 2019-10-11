@@ -88,7 +88,7 @@ if ( ! class_exists( 'ReduxFramework_select_image' ) ) {
 
                     // If selected returns something other than a blank space, we
                     // found our default/saved name.  Save the array number in a
-                    // variable to use later on when we want to extract its associted
+                    // variable to use later on when we want to extract its associated
                     // url.
                     if ( '' != $selected ) {
                         $arrNum = $x;
