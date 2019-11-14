@@ -1,5 +1,5 @@
 <!--
-Hello, and welcome to Redux Framework!
+Hello, and welcome to Redux!
 
 PLEASE, BEFORE YOU POST, READ THIS ENTIRE BLOCK OF TEXT!!!  
 
@@ -15,7 +15,7 @@ Have a development usage question?
 ==================================
 The issue tracker isn't the best place for usage questions. This format is not well-suited for Q&A, and questions here don't have as much visibility as they do elsewhere. Before you ask a question, here are some resources to get help first:
 
-- Try Redux: https://demo.reduxframework.com/
+- Try Redux: https://demo.redux.io
 - Read the docs: https://docs.reduxframework.com/
 - Look for/ask questions on StackOverflow: https://stackoverflow.com/questions/tagged/redux-framework
 - Ask in our community Slack channel: http://slack.redux.io/
@@ -27,7 +27,7 @@ All pre-sale and support for premium extensions need to be posted to the Redux E
 
 Think you found a bug?
 ======================
-Please use the "BUG REPORT" template below. Remember, we are rabid about backwards compatability. Do not submit fixes that break previous ways of doing so or they will be rejected.
+Please use the "BUG REPORT" template below. Remember, we are rabid about backwards compatibility. Do not submit fixes that break previous ways of doing so or they will be rejected.
 
 Also, unless you provide a Support Hash, your request will also be rejected. See https://docs.reduxframework.com/core/generating-a-support-hash/ for more details.
 
