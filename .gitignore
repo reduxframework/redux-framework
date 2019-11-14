@@ -10,7 +10,6 @@ codekit-config.json
 .idea
 *.sublime-project
 *.sublime-workspace
-package-lock.json
 
 # Grunt
 md5
