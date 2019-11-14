@@ -10,10 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Build
-        run: |
-          npm install
-          npm install -g sass
-          grunt
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@master
         env:
