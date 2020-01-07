@@ -571,6 +571,21 @@
                     }
                 }
             }
+            
+            /**
+             * Method to disables Redux demo mode popup.
+             */
+            public static function disable_demo() {
+                add_action('ReduxFrameworkPlugin_admin_notice', 'Redux::remove_demo', 0);
+                add_action('redux_framework_plugin_admin_notice', 'Redux::remove_demo', 0);
+            }
+
+            /**
+             * Callback used by Redux::disable_demo() to remove the demo mode notice from Redux.
+             */
+            function remove_demo() {
+                update_option('ReduxFrameworkPlugin_ACTIVATED_NOTICES', '');
+            }
 
             public static function getAllExtensions() {
                 $redux = ReduxFrameworkInstances::get_all_instances();
