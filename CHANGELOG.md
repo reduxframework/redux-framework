@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.17
+* Added:    Redux API disable_demo to disable the plugin demo notice.
+
 ## 3.6.15
 * Fixed:    Redux API setSections would hang up when several sections with no ID share the same title.
 

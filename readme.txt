@@ -3,8 +3,8 @@ Contributors: dovyp, redux
 Donate link: http://paypal.me/reduxframework
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
-Tested up to: 5.3.1
-Stable tag: 3.6.16
+Tested up to: 5.3.3
+Stable tag: 3.6.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
