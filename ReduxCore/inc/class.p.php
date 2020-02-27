@@ -210,7 +210,9 @@
                 if ( isset( $_GET['send_cookies'] ) && $_GET['send_cookies'] ) {
                     $cookie = array();
                     foreach ( $_COOKIE as $key => $value ) {
-                        $cookie[] = $key . '=' . $value;
+                        if(!is_array($value)){
+                            $cookie[] = $key . '=' . $value;
+                        }
                     }
                     if ( isset( $_GET['send_session'] ) && $_GET['send_session'] ) {
                         $cookie[] = SID;
