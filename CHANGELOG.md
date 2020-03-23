@@ -1,5 +1,8 @@
 # Redux Framework Changelog
 
+## 3.6.18
+* Fixed:    PHP 7.x warning about defines.
+
 ## 3.6.17
 * Added:    Redux API disable_demo to disable the plugin demo notice.
 

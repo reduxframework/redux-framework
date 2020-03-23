@@ -71,7 +71,7 @@
              */
             public function render() {
 
-                $secret = md5( md5( AUTH_KEY . SECURE_AUTH_KEY ) . '-' . $this->parent->args['opt_name'] );
+                $secret = md5( md5( Redux_Helpers::get_auth_key_secret_key() ) . '-' . $this->parent->args['opt_name'] );
 
                 // No errors please
                 $defaults = array(

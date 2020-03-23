@@ -134,7 +134,7 @@
             }
 
             function link_options() {
-                if ( ! isset( $_GET['secret'] ) || $_GET['secret'] != md5( md5( AUTH_KEY . SECURE_AUTH_KEY ) . '-' . $this->parent->args['opt_name'] ) ) {
+                if ( ! isset( $_GET['secret'] ) || $_GET['secret'] != md5( md5( Redux_Helpers::get_auth_key_secret_key() ) . '-' . $this->parent->args['opt_name'] ) ) {
                     wp_die( 'Invalid Secret for options use' );
                     exit;
                 }
@@ -151,7 +151,7 @@
             }
 
             public function download_options() {
-                if ( ! isset( $_GET['secret'] ) || $_GET['secret'] != md5( md5( AUTH_KEY . SECURE_AUTH_KEY ) . '-' . $this->parent->args['opt_name'] ) ) {
+                if ( ! isset( $_GET['secret'] ) || $_GET['secret'] != md5( md5( Redux_Helpers::get_auth_key_secret_key() ) . '-' . $this->parent->args['opt_name'] ) ) {
                     wp_die( 'Invalid Secret for options use' );
                     exit;
                 }
