@@ -130,8 +130,9 @@
 
                 $hash_path = trailingslashit( ReduxFramework::$_upload_dir ) . 'hash';
                 if ( ! file_exists( $hash_path ) ) {
+                    $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
                     $this->do_action( 'put_contents', $hash_path, array(
-                            'content' => md5( network_site_url() . '-' . $_SERVER['REMOTE_ADDR'] )
+                            'content' => md5( network_site_url() . '-' . $remote_addr )
                         )
                     );
                 }
