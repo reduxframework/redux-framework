@@ -20,7 +20,7 @@
   "homepage": "http://reduxframework.com",
   "devDependencies": {
     "compass-options": "^0.1.1",
-    "grunt": "^1.0.3",
+    "grunt": "^1.3.0",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-compass": "^1.1.1",
     "grunt-contrib-concat": "^1.0.1",
