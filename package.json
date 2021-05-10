@@ -36,7 +36,7 @@
     "grunt-scss-lint": "^0.5.0",
     "grunt-shell": "^2.1.0",
     "grunt-wp-i18n": "^1.0.2",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "minimatch": "^3.0.4",
     "recess": "^1.1.9",
     "shelljs": "^0.8.2"
