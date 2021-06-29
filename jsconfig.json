@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@wordpress/*": ["./node_modules/@wordpress/*"],
+			"~redux-templates/*": ["./redux-templates/src/*"]
+		}
+	},
+	"include": [
+		"./src/**/*"
+	],
+	"typeAcquisition": {
+		"include": [
+			"jest"
+		]
+	}
+}

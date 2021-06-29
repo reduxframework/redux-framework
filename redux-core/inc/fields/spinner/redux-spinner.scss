@@ -1,0 +1,157 @@
+.redux-container-spinner {
+    .spinner-wrpr {
+        position: relative;
+        display: block;
+        height: 30px;
+        overflow: hidden;
+
+        .spinner-input {
+            position: relative !important;
+            z-index: 1;
+            width: 75px !important;
+            height: 30px !important;
+            background: #eee !important;
+            border: 1px solid #bfbfbf !important;
+            border-right: 0 !important;
+            border-left: 0 !important;
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+        }
+    }
+
+    .ui-spinner {
+        position: static;
+        display: inline;
+    }
+
+
+    .ui-spinner-buttons {
+        position: absolute;
+        padding: 0;
+    }
+
+    .ui-widget .ui-spinner-button {
+        color: #fff;
+        position: absolute;
+        top: 0;
+        padding: 0 0 30px;
+        overflow: hidden;
+        cursor: pointer;
+        background: -moz-linear-gradient(#fff, #f3f3f3);
+        background: -o-linear-gradient(#fff, #f3f3f3);
+        background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f3f3f3));
+        background: linear-gradient(#fff, #f3f3f3);
+        background-color: #fff;
+        border: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .ui-spinner-button:hover,
+    .ui-state-hover {
+        background: -moz-linear-gradient(#f3f3f3, #fff);
+        background: -o-linear-gradient(#f3f3f3, #fff);
+        background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#fff));
+        background: linear-gradient(#f3f3f3, #fff);
+        background-color: #f3f3f3;
+    }
+
+    .ui-corner-tr,
+    .ui-spinner-button .ui-icon-triangle-1-n {
+        -webkit-border-radius: 0 5px 5px 0;
+        -moz-border-radius: 0 3px 3px 0;
+        border-radius: 0 3px 3px 0;
+    }
+
+    .ui-corner-br,
+    .ui-spinner-button .ui-icon-triangle-1-s {
+        -webkit-border-radius: 5px 0 0 5px;
+        -moz-border-radius: 3px 0 0 3px;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .ui-spinner-button {
+        .ui-icon {
+            top: 0;
+            display: block;
+            width: 28px;
+            height: 28px;
+            margin: 0;
+            border: 1px solid #b7b7b7;
+            background-image: initial;
+            text-indent: 0;
+            text-align: center;
+            font-size: 18px;
+            line-height: 26px;
+        }
+
+        .ui-icon-triangle-1-n {
+            // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADxJREFUeNpsjwsKADAIQu3u3tsRY6M5gz7w0AqSQFLdZ3ZRgmf44JQ/EOZ9oYOsiDviVemP2oYoWCwBBgDpO6VXVo3RyQAAAABJRU5ErkJggg==) 10px 10px no-repeat!important;
+        }
+
+        .ui-icon-triangle-1-s {
+            // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADhJREFUeNpi+P//PwM6bmlpwS4IorEKokggC8Il0AVhEv9x6sAmiaz9P05XIUsygmVRAUiAESDAAFHcpVdWtdj/AAAAAElFTkSuQmCC) 10px 10px no-repeat!important;
+        }
+    }
+}
+
+.dp-numberPicker,
+.dp-numberPicker-add,
+.dp-numberPicker-sub,
+.dp-numberPicker-input {
+    display: inline-block;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    text-align: center;
+    vertical-align: top;
+    height: 30px;
+}
+
+.dp-numberPicker {
+    border-radius: 3px;
+}
+
+.redux-container .redux-container-spinner .dp-numberPicker-add,
+.redux-container .redux-container-spinner .dp-numberPicker-sub {
+    width: 30px;
+    font-size: 21px;
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    background-color: #33b5e5;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    height: 29px !important;
+
+    &.disabled {
+        background-color: #2c6a81;
+    }
+}
+
+.dp-numberPicker-add {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.dp-numberPicker-sub {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.dp-numberPicker-input {
+    width: 70px;
+    background-color: #eee;
+    border: 0;
+    margin: 0 !important;
+    box-shadow:
+        inset 0px 1px 1px rgba(255, 255, 255, 0.5),
+        inset 0px -1px 1px rgba(0, 0, 0, 0.5);
+
+    &:disabled {
+        background-color: #eee;
+    }
+}

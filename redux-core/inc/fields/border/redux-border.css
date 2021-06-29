@@ -1,0 +1,15 @@
+.redux-container-border .select2-container { float: left; display: block; margin-right: 10px; }
+
+.redux-container-border .select_wrapper { float: left; width: inherit; }
+
+.redux-container-border .select_wrapper select { width: 80px; float: left; }
+
+.redux-container-border .field-border-input { margin-right: 10px; margin-bottom: 7px; }
+
+@media screen and (max-width: 782px) { .redux-container-border .field-border-input input { display: inline-block !important; width: 100px !important; }
+	.redux-container-border .field-border-input .add-on { padding: 7px 4px; font-size: 16px; line-height: 1.5; }
+	.redux-container-border .select_wrapper { margin-top: 6px; } }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtYm9yZGVyLmNzcyIsInNvdXJjZXMiOlsicmVkdXgtYm9yZGVyLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsQUFDSSx1QkFEbUIsQ0FDbkIsa0JBQWtCLENBQUMsRUFDZixLQUFLLEVBQUUsSUFBSSxFQUNYLE9BQU8sRUFBRSxLQUFLLEVBQ2QsWUFBWSxFQUFFLElBQUksR0FDckI7O0FBTEwsQUFPSSx1QkFQbUIsQ0FPbkIsZUFBZSxDQUFDLEVBQ1osS0FBSyxFQUFFLElBQUksRUFNWCxLQUFLLEVBQUUsT0FBTyxHQUNqQjs7QUFmTCxBQVNRLHVCQVRlLENBT25CLGVBQWUsQ0FFWCxNQUFNLENBQUMsRUFDSCxLQUFLLEVBQUUsSUFBSSxFQUNYLEtBQUssRUFBRSxJQUFJLEdBRWQ7O0FBYlQsQUFpQkksdUJBakJtQixDQWlCbkIsbUJBQW1CLENBQUMsRUFDaEIsWUFBWSxFQUFFLElBQUksRUFDbEIsYUFBYSxFQUFFLEdBQUcsR0FDckI7O0FBR0wsTUFBTSxDQUFDLE1BQU0sTUFBTSxTQUFTLEVBQUUsS0FBSyxJQUMvQixBQUVRLHVCQUZlLENBQ25CLG1CQUFtQixDQUNmLEtBQUssQ0FBQyxFQUNGLE9BQU8sRUFBRSx1QkFBdUIsRUFDaEMsS0FBSyxFQUFFLGdCQUFnQixHQUMxQjtDQUxULEFBT1EsdUJBUGUsQ0FDbkIsbUJBQW1CLENBTWYsT0FBTyxDQUFDLEVBQ0osT0FBTyxFQUFFLE9BQU8sRUFDaEIsU0FBUyxFQUFFLElBQUksRUFDZixXQUFXLEVBQUUsR0FBRyxHQUNuQjtDQVhULEFBY0ksdUJBZG1CLENBY25CLGVBQWUsQ0FBQyxFQUNaLFVBQVUsRUFBRSxHQUFHLEdBQ2xCIn0= */
+
+/*# sourceMappingURL=redux-border.css.map */

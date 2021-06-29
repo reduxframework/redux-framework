@@ -1,28 +1,81 @@
-# Editors
-project.xml
-project.properties
-/nbproject/private/
-.buildpath
-.project
-.settings*
-sftp-config.json
-codekit-config.json
-.idea
-*.sublime-project
-*.sublime-workspace
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
 
-# Grunt
-md5
-/docs/
-/redux/
-/output/
-/node_modules/
-/grunt-phplint/
-/tmp-wp-dev/
-npm-debug.log
+# Logs and databases #
+######################
+*.log
+*.sql
 
-# OS X metadata
-.DS_Store
-
-# Windows junk
+# OS generated files #
+######################
+**.DS_Store*
+ehthumbs.db
 Thumbs.db
+._*
+
+# Vim generated files #
+######################
+*.un~
+
+# SASS #
+##########
+**/.sass-cache
+**/.sass-cache/*
+
+# Composer #
+##########
+vendors/composer/
+!assets/js/vendor/
+wpcs/
+composer.lock
+
+# Bower #
+##########
+assets/bower_components/*
+
+# Codekit #
+##########
+/codekit-config.json
+*.codekit
+**.codekit-cache/*
+
+# NPM #
+##########
+node_modules
+
+# Compiled Files and Build Dirs #
+##########
+/README.html
+/build/
+
+# PhpStrom Project Files #
+.idea/
+library/vendors/composer
+assets/img/.DS_Store
+assets/sass/HTML
+assets/sass/Rails
+HTML
+Rails
+
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*/.DS_Store
+build
+*/.DS_Store
+
+vendor/*
+redux-templates/classes/library.json
+local_developer.txt

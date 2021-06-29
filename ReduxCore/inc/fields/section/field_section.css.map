@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,wCAA6B;EACzB,KAAK,EAAE,GAAG;EACV,WAAW,EAAE,aAAa;AAG9B,iEAAsD;EAClD,OAAO,EAAE,cAAc;AAG3B,cAAG;EACC,UAAU,EAAE,IAAI;AAIhB,iEAAc;EACV,OAAO,EAAE,IAAI;AAGjB,uEAAoB;EAChB,aAAa,EAAE,CAAC",
-"sources": ["field_section.scss"],
-"names": [],
-"file": "field_section.css"
-}

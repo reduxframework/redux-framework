@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,8CAAe;EACX,OAAO,EAAE,YAAY;AAEzB,wCAAS;EACL,YAAY,EAAE,IAAI;;AAI1B,oCAAqC;EAE7B,8CAAe;IACX,OAAO,EAAE,KAAK;IACd,UAAU,EAAE,iBAAiB",
-"sources": ["field_color_gradient.scss"],
-"names": [],
-"file": "field_color_gradient.css"
-}

@@ -1,0 +1,95 @@
+.redux-templates-modal-wrapper {
+  /* ReduxTemplatesPremiumBox */ }
+  .redux-templates-modal-wrapper .redux-templates-modal-body {
+    flex: 1 1 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    background: #fff; }
+    .redux-templates-modal-wrapper .redux-templates-modal-body h5 {
+      font-size: 1.1em;
+      font-weight: 600; }
+    .redux-templates-modal-wrapper .redux-templates-modal-body ul {
+      list-style-position: inside;
+      list-style-type: disc; }
+      .redux-templates-modal-wrapper .redux-templates-modal-body ul.redux-templates-import-wizard-missing-dependency li {
+        line-height: 1.8; }
+    .redux-templates-modal-wrapper .redux-templates-modal-body .error {
+      color: #f00; }
+  .redux-templates-modal-wrapper .redux-templates-import-wizard-spinner-wrapper {
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%; }
+    .redux-templates-modal-wrapper .redux-templates-import-wizard-spinner-wrapper h3 {
+      text-align: center;
+      font-size: 18px;
+      color: #555d66;
+      margin-bottom: 20px; }
+  .redux-templates-modal-wrapper .redux-templates-import-progress {
+    font-size: 1.1em;
+    text-align: center; }
+    .redux-templates-modal-wrapper .redux-templates-import-progress li {
+      list-style: none; }
+      .redux-templates-modal-wrapper .redux-templates-import-progress li.success i {
+        color: #46b450; }
+      .redux-templates-modal-wrapper .redux-templates-import-progress li.failure i {
+        color: #dc3232; }
+      .redux-templates-modal-wrapper .redux-templates-import-progress li.info i {
+        color: #00a0d2; }
+  .redux-templates-modal-wrapper .redux-templates-import-progress {
+    width: 50%;
+    margin: 10px auto; }
+    .redux-templates-modal-wrapper .redux-templates-import-progress li {
+      display: flex;
+      justify-content: space-between; }
+  .redux-templates-modal-wrapper .section-box.premium-box {
+    margin: 35px auto;
+    text-align: center; }
+    .redux-templates-modal-wrapper .section-box.premium-box h3 {
+      font-size: 1.5em;
+      line-height: 1.1em;
+      margin-top: 0px; }
+    .redux-templates-modal-wrapper .section-box.premium-box p {
+      font-size: calc(13px + 0.2vw); }
+    .redux-templates-modal-wrapper .section-box.premium-box ul {
+      width: 50%;
+      margin: 0 auto;
+      text-align: left;
+      list-style-type: disc;
+      list-style-position: inside; }
+    .redux-templates-modal-wrapper .section-box.premium-box .redux-templates-upgrade-button {
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      opacity: 1;
+      background: #8c33da;
+      background: linear-gradient(90deg, #7557ff -30%, #c751ff 130%);
+      transition: opacity 0.2s ease-in-out;
+      box-shadow: none !important;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75em 1.25em;
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+      text-align: center;
+      font-size: calc(13px + 0.1vw); }
+      .redux-templates-modal-wrapper .section-box.premium-box .redux-templates-upgrade-button:hover {
+        color: #fff;
+        opacity: 0.85;
+        box-shadow: none !important; }
+  .redux-templates-modal-wrapper .redux-templates-importmodal-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+
+.text-transition {
+  width: 100% !important;
+  text-align: center; }
+  .text-transition .text-transition_inner > div {
+    font-size: 1.1rem; }
+
+/*# sourceMappingURL=style.css.map */

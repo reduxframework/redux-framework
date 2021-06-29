@@ -1,16 +1,9 @@
 /.wordpress-org
 /.git
+/.config
+/.idea
 /.github
 /node_modules
-/.tx
-/.github
-/bin
-/codestyles
-/tests
 
 .distignore
 .gitignore
-.travis.yml
-ISSUE_TEMPLATE
-CONTRIBUTING.md
-package-lock.json

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,kBAAmB;EACf,OAAO,EAAE,aAAa;;AAG1B,qBAAsB;EAClB,gBAAgB,EAAE,OAAO",
-"sources": ["field_date.scss"],
-"names": [],
-"file": "field_date.css"
-}

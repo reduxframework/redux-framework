@@ -16,17 +16,17 @@ Are you a user reporting a bug with a theme or plugin?
 ======================================================
 Redux is a tool for developers to include an options panel in their project. Consequently, we do not offer support for folks who have purchased a theme or plugin that uses Redux. The responsibility of support for themes and plugins falls upon it's author. We realize that some authors have included support links for Redux in their projects when they should not have. We do apologize for that confusion and are taking steps to remedy that situtation. 
 
-If you have purchased a theme or plugin that utilizes Redux, please contact the author for support. If the author is unavailable for support or has discontinued support, please refer to this before posting to our issue tracker: https://docs.reduxframework.com/core/support-defined/  If you are unable to get support for the author, we might be able to help you with a premium support purchase (https://reduxframework.com/extension/premium-support).
+If you have purchased a theme or plugin that utilizes Redux, please contact the author for support. If the author is unavailable for support or has discontinued support, please refer to this before posting to our issue tracker: https://redux.io/contact/  If you are unable to get support for the author, we might be able to help you with a premium support purchase (https://redux.io/extension/premium-support).
 	
 Have a development usage question?
 ==================================
 The issue tracker isn't the best place for usage questions. This format is not well-suited for questions & answers and questions here don't have as much visibility as they do elsewhere. Before you ask a question, here are some resources to get help first:
 
-- Try Redux: https://demo.reduxframework.com/
-- Read the docs: https://docs.reduxframework.com/
+- Try Redux: https://demo.redux.io/
+- Read the docs: https://devs.redux.io/
 - Look for/ask questions on StackOverflow: https://stackoverflow.com/questions/tagged/redux-framework
 - Ask in our community Slack channel: http://slack.redux.io/
-- For Premium support or advanced customizations we offer premium support. See https://reduxframework.com/extension/premium-support/ for more information.
+- For Premium support or advanced customizations we offer premium support. See https://redux.io/extension/premium-support/ for more information.
 
 Questions about a Redux extension?
 ==================================
@@ -36,7 +36,7 @@ Think you found a bug?
 ======================
 Please use the "BUG REPORT" template below. Remember, we are rabid about backwards compatability. Do not submit fixes that break previous ways of doing so or they will be rejected.
 
-Also, unless you provide a Support Hash, your request will also be rejected.  NO exceptions.  If you do not including this information and we close your ticket, please do not ask why. See See https://docs.reduxframework.com/core/generating-a-support-hash/ for more details.
+Also, unless you provide a Support Hash, your request will also be rejected.  NO exceptions.  If you do not including this information and we close your ticket, please do not ask why. See See https://docsv3.redux.io/core/generating-a-support-hash/index.html for more details.
 
 You MUST be using Redux in dev mode when submitting an issue to us. If you are not, or have circumvented our dev mode protocol, you are on your own. There could be information in your issue that requires dev move active (Compressed Javascript, for example. We are unable to diagnose issues with compressed Javascript and why dev mode needs to be enabled).
 
@@ -50,7 +50,7 @@ Sometimes, an issue may be tied to JavaScript. To make this determination, you w
 
 <!-- BUG TEMPLATE -->
 ## Support Hash
-<!-- Instructions:  https://docs.reduxframework.com/core/generating-a-support-hash -->
+<!-- Instructions:  https://docsv3.redux.io/core/generating-a-support-hash/index.html -->
 
 ## Steps to reproduce
 <!-- Please list your steps clearly so that we are able to do the same things you do to reproduce the issue.  -->

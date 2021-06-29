@@ -16,7 +16,7 @@ The reason is simple.  Each theme/plugin author integrates Redux is different wa
 
 We realize that some authors have included support links for Redux in their projects, when they should not have. We do apologize for that confusion and are taking steps to remedy this confusion. 
 
-If you have purchased a theme or plugin that utilizes Redux, please contact the author for support. If the author is unavailable for support or has discontinued support, please refer to this before posting to our issue tracker: https://docs.reduxframework.com/core/support-defined.  In extreme cases where support from the author is impossible, we might be able to help you with a premium support purchase: https://reduxframework.com/extension/premium-support.  That service is not free.  Please read the terms on that page carefully.
+If you have purchased a theme or plugin that utilizes Redux, please contact the author for support. If the author is unavailable for support or has discontinued support, please refer to this before posting to our issue tracker: https://devs.redux.io/core/support-defined.  In extreme cases where support from the author is impossible, we might be able to help you with a premium support purchase: https://redux.io/extension/premium-support.  That service is not free.  Please read the terms on that page carefully.
 
 Because of these policies, we will no longer be able to answer the influx of these types of issues individually.  They will be closed without reply.  We're sorry about this and apologize for this inconvenience.
 

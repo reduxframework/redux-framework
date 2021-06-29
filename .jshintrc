@@ -1,19 +1,36 @@
 {
-	"boss": true,
+	"boss" : true,
+	"curly" : true,
+	"eqeqeq": true,
+	"eqnull": true,
+	"esversion": 5,
+	"expr": true,
 	"immed": true,
 	"noarg": true,
+	"nonbsp": true,
 	"onevar": true,
-	"validthis": true,
+	"quotmark": "single",
+	"trailing": true,
+	"undef": true,
+	"unused": true,
+	"devel": true,
+	"jquery": true,
 	"browser": true,
-	
+
 	"globals": {
 		"_": false,
-		"jQuery": true,
+		"Backbone": false,
+		"jQuery": false,
+		"JSON": false,
+		"wp": false,
+		"export": false,
+		"require": true,
 		"module": true,
 		"console": true,
 		"document": true,
-                "window": true,
+		"window": true,
 		"redux_change": true,
-                "redux": true
+		"redux": true,
+		"tinyMCE": true
 	}
 }

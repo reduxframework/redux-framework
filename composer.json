@@ -1,21 +1,55 @@
 {
-  "name": "redux-framework/redux-framework",
-  "version": "3.6.18",
-  "authors": [
-    {
-      "name": "Team Redux"
-    }
-  ],
-  "type": "wordpress-plugin",
-  "description": "Redux is a simple, truly extensible options framework for WordPress themes and plugins.",
-  "homepage": "http://reduxframework.com",
-  "license": "GPL-3.0+",
-  "keywords": ["settings", "wordpress", "options", "framework", "redux", "customizer", "plugin"],
-  "support": {
-   	"issues": "https://github.com/reduxframework/redux-framework/issues"
-  },
-  "require" : {
-    "php" : ">=5.2.0",
-    "composer/installers": "~1.0"
-  }
+	"name": "reduxframework/redux-framework-4",
+	"version": "4.1.28",
+	"authors": [
+		{
+			"name": "Redux.io",
+			"homepage": "http://redux.io",
+			"email": "support@redux.io",
+			"role": "Support"
+		}
+	],
+	"type": "wordpress-plugin",
+	"description": "Build better and beautiful sites in WordPress, faster.",
+	"homepage": "http://redux.io",
+	"license": "GPL-3.0+",
+	"keywords": [
+		"settings",
+		"wordpress",
+		"options",
+		"framework",
+		"redux",
+		"customizer",
+		"plugin"
+	],
+	"support": {
+		"issues": "https://github.com/reduxframework/redux-framework/issues",
+		"docs": "https://devs.redux.io",
+		"forum": "https://wordpress.org/support/plugin/redux-framework/",
+		"website": "https://redux.io/"
+	},
+	"require": {
+		"php": ">=7.1.0",
+		"composer/installers": "~1.0"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"lucatume/wp-browser": "^2.6",
+		"codeception/module-asserts": "^1.0",
+		"codeception/module-phpbrowser": "^1.0",
+		"codeception/module-webdriver": "^1.0",
+		"codeception/module-db": "^1.0",
+		"codeception/module-filesystem": "^1.0",
+		"codeception/module-cli": "^1.0",
+		"codeception/util-universalframework": "^1.0",
+		"phpstan/phpstan": "^0.12.90",
+		"szepeviktor/phpstan-wordpress": "^0.7.6",
+		"phpstan/extension-installer": "^1.1"
+	},
+	"scripts": {
+		"standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+		"standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf",
+		"analyze": "@php ./vendor/bin/phpstan analyze"
+	}
 }
