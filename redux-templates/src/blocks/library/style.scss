@@ -1,0 +1,33 @@
+.redux-template-library-block {
+    .components-placeholder__label {
+        svg {
+            margin-right: 8px;
+        }
+    }
+
+    button.components-button {
+        height: auto;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        padding: 11px 20px;
+        background: #fff;
+    }
+}
+.components-button.has-icon.redux-templates-insert-library-button {
+    height: 100%;
+}
+.redux-templates-insert-library-button {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.redux-insert-library-button {
+    margin-left: 10px;
+    margin-right: 10px;
+}

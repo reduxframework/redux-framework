@@ -1,0 +1,20 @@
+.redux-container-import_export {
+    #redux-import-link-wrapper,
+    #redux-import-code-wrapper {
+        display: none;
+    }
+
+    #redux-export-code,
+    #redux-export-link-value,
+    #redux-import-upload-file {
+        display: none;
+    }
+
+    #redux-import-action span {
+        color: #b94a48;
+    }
+    #redux-import-upload span {
+        font-weight: bold;
+    }
+}
+

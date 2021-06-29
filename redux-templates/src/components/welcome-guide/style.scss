@@ -1,0 +1,46 @@
+.redux-edit-post-welcome-guide {
+    //$image-height: 240px;
+    $image-width: 512px;
+    width: 412px;
+
+    &__image {
+        background: #00a0d2;
+        width: 412px;
+        border-bottom: 1px solid #ddd;
+
+        &__prm-r {
+            display: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            &__prm-r {
+                display: block;
+            }
+
+            &__prm-np {
+                display: none;
+            }
+        }
+    }
+
+    &__heading {
+        font-family: "Noto Serif", serif;
+        font-size: 24px;
+        line-height: 1.4;
+        margin: 0 0 16px 0;
+        padding: 0 32px;
+    }
+
+    &__text {
+        font-size: 16px;
+        line-height: 1.4;
+        margin: 0 0 24px 0;
+        padding: 0 32px;
+        font-weight: normal;
+    }
+
+    &__inserter-icon {
+        margin: 0 4px;
+        vertical-align: text-top;
+    }
+}

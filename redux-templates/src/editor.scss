@@ -1,0 +1,96 @@
+#redux-templatesImportCollectionBtn {
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid rgb(186, 186, 186);
+    border-radius: 3px;
+    white-space: nowrap;
+    color: #555d66;
+    font-size: 13px;
+    margin: 0 15px 0 15px;
+    padding: 9px 12px;
+    background: transparent;
+
+
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: 400ms;
+
+    svg {
+        height: 16px;
+        width: 16px;
+        margin-right: 8px;
+
+        * {
+            stroke: #555d66;
+            fill: #555d66;
+            stroke-width: 0;
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        border: 1px solid #191e23;
+        color: #191e23;
+
+        svg * {
+            stroke: #191e23 !important;
+            fill: #191e23 !important;
+            stroke-width: 0;
+        }
+    }
+
+}
+
+// Common
+.redux-templates-editor-btn {
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    -webkit-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+// Hide Qubely Library
+//.qubely-import-layout-btn-container,
+//#qubelyImportLayoutBtn,
+//.gutentor-export-button,
+//#getwid-layout-insert-button,
+//.kb-toolbar-insert-layout,
+//.edit-post-header .gutentor-import-button,
+////#AMPBlocksImportLayoutBtn,
+//.ab-toolbar-insert-layout {
+//    display: none !important;
+//}
+
+.redux-css-editor {
+    border: 1px solid #e2e4e7;
+    margin-bottom: 20px;
+}
+
+.redux-css-editor-help {
+    background: #f7f7f7;
+    padding: 20px;
+}

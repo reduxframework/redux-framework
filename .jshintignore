@@ -1,0 +1,17 @@
+./redux-core/assets/js/*.js
+./redux-core/assets/js/media/*.min.js
+./redux-core/assets/js/vendor/*.js
+./redux-core/assets/js/vendor/**/*.js
+./redux-core/assets/js/redux/*.js
+./redux-core/inc/fields/**/*.min.js
+./redux-core/inc/fields/typography/todo/*.*
+./redux-core/inc/fields/spinner/vendor/*.*
+./redux-core/inc/extensions/**/*.min.js
+./redux-core/inc/welcome/js/*.min.js
+./redux-core/inc/welcome/js/jquery.easing.min.js
+./redux-core/inc/welcome/js/redux-banner-admin.js
+./redux-core/inc/themecheck/js/*.min.js
+./redux-templates/**
+./node_modules/**
+./.config/*.js
+./.*/**

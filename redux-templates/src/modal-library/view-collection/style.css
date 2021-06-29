@@ -1,0 +1,176 @@
+.redux-templates-collection-details-view {
+  padding: 40px 22.5px 60px;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  display: flex; }
+  .redux-templates-collection-details-view .redux-templates-collection-details-left {
+    width: 600px;
+    margin: 0 37px 0 17px; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-left .details-back {
+      height: 32px;
+      line-height: 20px;
+      color: #818a91;
+      font-size: 15px;
+      font-weight: 600;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 20px;
+      -webkit-transition: color 0.1s ease;
+      transition: color 0.1s ease; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-left .details-preview {
+      transition: all linear 1s;
+      background-position: center top;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 84.71%; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-left .details-preview:hover {
+        background-position: center bottom;
+        background-size: cover; }
+  .redux-templates-collection-details-view .redux-templates-collection-details-right {
+    width: 520px; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-right .details-title {
+      height: 30px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 2px 25px 0 10px;
+      margin-bottom: 20px; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .details-title h3 {
+        color: rgba(3, 8, 15, 0.92);
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 34px;
+        margin: 0; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .details-title span {
+        color: #818a91;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 16px; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-right .details-list {
+      height: 84.71%; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .details-list .details-inner {
+        height: 100%;
+        overflow-y: auto; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select {
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      margin: 0 8px 15px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: inline-block;
+      cursor: pointer; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select::before, .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 3px;
+        pointer-events: none;
+        opacity: 0;
+        -webkit-transition: opacity 0.1s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
+        box-sizing: border-box; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select::before {
+        border: 3px solid #3dbfe8;
+        z-index: 2; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select::after {
+        border: 3px solid #ececec;
+        z-index: 1; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select .detail-image {
+        width: 100%;
+        height: 150px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: 1px solid #ececec;
+        position: relative; }
+        .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select .detail-image .pro,
+        .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select .detail-image .install {
+          position: absolute;
+          background: #f00;
+          padding: 2px 3px;
+          border-radius: 3px;
+          color: #fff;
+          font-size: 9px;
+          right: 5px;
+          top: 5px;
+          text-transform: uppercase;
+          line-height: 1; }
+        .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select .detail-image .pro {
+          background: #f00; }
+        .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select .detail-image .install {
+          background: #f2a848; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select .detail-label {
+        border-top: 1px solid #f2f4f7;
+        width: 100%;
+        height: 30px;
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.9);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #23282d;
+        font-family: pn, "Open Sans", Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 30px;
+        padding-left: 10px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select:hover::before, .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select:hover::after {
+        opacity: 1; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select.detail-select-active::before, .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select.detail-select-active::after,
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select.detail-select-active .detail-label {
+        opacity: 1; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-right .detail-select.detail-select-active .detail-label {
+        background-color: rgba(61, 192, 232, 0.9);
+        color: rgba(3, 8, 15, 0.92); }
+  .redux-templates-collection-details-view .redux-templates-collection-details-footer {
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-footer .footer-grid {
+      width: 100%;
+      padding: 0 10px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; }
+    .redux-templates-collection-details-view .redux-templates-collection-details-footer .import-button {
+      margin-left: 11.5px;
+      background-color: #3dbfe8;
+      color: #fff;
+      font-family: pn, "Open Sans", Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 18px;
+      padding: 9px 32px;
+      border-radius: 3px;
+      cursor: pointer;
+      -webkit-transition: background-color 150ms linear;
+      transition: background-color 150ms linear; }
+      .redux-templates-collection-details-view .redux-templates-collection-details-footer .import-button:hover {
+        background: rgba(61, 191, 232, 0.8); }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,5 @@
 {
-	"name": "reduxframework/redux-framework-4",
+	"name": "reduxframework/redux-framework",
 	"version": "4.1.28",
 	"authors": [
 		{
@@ -43,13 +43,9 @@
 		"codeception/module-filesystem": "^1.0",
 		"codeception/module-cli": "^1.0",
 		"codeception/util-universalframework": "^1.0",
-		"phpstan/phpstan": "^0.12.90",
-		"szepeviktor/phpstan-wordpress": "^0.7.6",
-		"phpstan/extension-installer": "^1.1"
 	},
 	"scripts": {
 		"standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
 		"standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf",
-		"analyze": "@php ./vendor/bin/phpstan analyze"
 	}
 }

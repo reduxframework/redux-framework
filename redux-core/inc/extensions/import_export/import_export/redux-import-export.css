@@ -1,0 +1,11 @@
+.redux-container-import_export #redux-import-link-wrapper, .redux-container-import_export #redux-import-code-wrapper { display: none; }
+
+.redux-container-import_export #redux-export-code, .redux-container-import_export #redux-export-link-value, .redux-container-import_export #redux-import-upload-file { display: none; }
+
+.redux-container-import_export #redux-import-action span { color: #b94a48; }
+
+.redux-container-import_export #redux-import-upload span { font-weight: bold; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtaW1wb3J0LWV4cG9ydC5jc3MiLCJzb3VyY2VzIjpbInJlZHV4LWltcG9ydC1leHBvcnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxBQUNJLDhCQUQwQixDQUMxQiwwQkFBMEIsRUFEOUIsOEJBQThCLENBRTFCLDBCQUEwQixDQUFDLEVBQ3ZCLE9BQU8sRUFBRSxJQUFJLEdBQ2hCOztBQUpMLEFBTUksOEJBTjBCLENBTTFCLGtCQUFrQixFQU50Qiw4QkFBOEIsQ0FPMUIsd0JBQXdCLEVBUDVCLDhCQUE4QixDQVExQix5QkFBeUIsQ0FBQyxFQUN0QixPQUFPLEVBQUUsSUFBSSxHQUNoQjs7QUFWTCxBQVlJLDhCQVowQixDQVkxQixvQkFBb0IsQ0FBQyxJQUFJLENBQUMsRUFDdEIsS0FBSyxFQUFFLE9BQU8sR0FDakI7O0FBZEwsQUFlSSw4QkFmMEIsQ0FlMUIsb0JBQW9CLENBQUMsSUFBSSxDQUFDLEVBQ3RCLFdBQVcsRUFBRSxJQUFJLEdBQ3BCIn0= */
+
+/*# sourceMappingURL=redux-import-export.css.map */

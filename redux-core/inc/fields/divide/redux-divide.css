@@ -1,0 +1,11 @@
+.redux-main .divide { height: 20px; line-height: 20px; float: none; border-color: #e7e7e7; display: block; width: 100%; height: 35px !important; line-height: 35px !important; position: relative; margin: 15px 0 10px 0; }
+
+.redux-main .divide .inner { width: 42% !important; left: 40% !important; margin-left: -6%; background-color: #fcfcfc; border-color: #e7e7e7; position: absolute; height: 1px; top: 50%; width: 100%; margin-top: -1px; border-top-width: 1px; border-top-style: solid; }
+
+.redux-main .divide .inner span { background-color: #fcfcfc; border-color: #e7e7e7; height: 5px; width: 5px; border-width: 2px; border-style: solid; display: block; position: absolute; left: 50%; margin-left: -5px; margin-top: -5px; }
+
+.wp-customizer .redux-container-divide .divide .inner { width: 82% !important; left: 18% !important; margin-left: -8%; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtZGl2aWRlLmNzcyIsInNvdXJjZXMiOlsicmVkdXgtZGl2aWRlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsQUFDSSxXQURPLENBQ1AsT0FBTyxDQUFDLEVBQ0osTUFBTSxFQUFFLElBQUksRUFDWixXQUFXLEVBQUUsSUFBSSxFQUNqQixLQUFLLEVBQUUsSUFBSSxFQUNYLFlBQVksRUFBRSxPQUFPLEVBQ3JCLE9BQU8sRUFBRSxLQUFLLEVBQ2QsS0FBSyxFQUFFLElBQUksRUFDWCxNQUFNLEVBQUUsZUFBZSxFQUN2QixXQUFXLEVBQUUsZUFBZSxFQUM1QixRQUFRLEVBQUUsUUFBUSxFQUNsQixNQUFNLEVBQUUsYUFBYSxHQTZCeEI7O0FBeENMLEFBYVEsV0FiRyxDQUNQLE9BQU8sQ0FZSCxNQUFNLENBQUMsRUFDSCxLQUFLLEVBQUUsY0FBYyxFQUNyQixJQUFJLEVBQUUsY0FBYyxFQUNwQixXQUFXLEVBQUUsR0FBRyxFQUNoQixnQkFBZ0IsRUFBRSxPQUFPLEVBQ3pCLFlBQVksRUFBRSxPQUFPLEVBQ3JCLFFBQVEsRUFBRSxRQUFRLEVBQ2xCLE1BQU0sRUFBRSxHQUFHLEVBQ1gsR0FBRyxFQUFFLEdBQUcsRUFDUixLQUFLLEVBQUUsSUFBSSxFQUNYLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLGdCQUFnQixFQUFFLEdBQUcsRUFDckIsZ0JBQWdCLEVBQUUsS0FBSyxHQWMxQjs7QUF2Q1QsQUEwQlksV0ExQkQsQ0FDUCxPQUFPLENBWUgsTUFBTSxDQWFGLElBQUksQ0FBQyxFQUNELGdCQUFnQixFQUFFLE9BQU8sRUFDekIsWUFBWSxFQUFFLE9BQU8sRUFDckIsTUFBTSxFQUFFLEdBQUcsRUFDWCxLQUFLLEVBQUUsR0FBRyxFQUNWLFlBQVksRUFBRSxHQUFHLEVBQ2pCLFlBQVksRUFBRSxLQUFLLEVBQ25CLE9BQU8sRUFBRSxLQUFLLEVBQ2QsUUFBUSxFQUFFLFFBQVEsRUFDbEIsSUFBSSxFQUFFLEdBQUcsRUFDVCxXQUFXLEVBQUUsSUFBSSxFQUNqQixVQUFVLEVBQUUsSUFBSSxHQUNuQjs7QUFLYixBQUNJLGNBRFUsQ0FBQyx1QkFBdUIsQ0FDbEMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxFQUNYLEtBQUssRUFBRSxjQUFjLEVBQ3JCLElBQUksRUFBRSxjQUFjLEVBQ3BCLFdBQVcsRUFBRSxHQUFHLEdBQ25CIn0= */
+
+/*# sourceMappingURL=redux-divide.css.map */

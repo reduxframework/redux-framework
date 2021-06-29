@@ -1,0 +1,11 @@
+.redux-container-text label { display: block; position: relative; font-size: 12px !important; text-align: left; color: #999; margin: 4px 0 2px 0 !important; cursor: default; top: 5px; width: 100px; }
+
+.redux-container-text input { clear: left; }
+
+.redux-container-text .input_wrapper { display: block; position: relative; padding: 0; width: 23%; max-width: 23%; min-width: 70px; float: left; clear: left; height: 57px; -webkit-box-sizing: border-box; -o-box-sizing: border-box; box-sizing: border-box; vertical-align: baseline; }
+
+.wp-customizer .redux-container-text .input_wrapper { width: 100%; max-width: 100%; height: auto; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtdGV4dC5jc3MiLCJzb3VyY2VzIjpbInJlZHV4LXRleHQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxBQUNJLHFCQURpQixDQUNqQixLQUFLLENBQUMsRUFDRixPQUFPLEVBQUUsS0FBSyxFQUNkLFFBQVEsRUFBRSxRQUFRLEVBQ2xCLFNBQVMsRUFBRSxlQUFlLEVBQzFCLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLEtBQUssRUFBRSxJQUFJLEVBQ1gsTUFBTSxFQUFFLHNCQUFzQixFQUM5QixNQUFNLEVBQUUsT0FBTyxFQUNmLEdBQUcsRUFBRSxHQUFHLEVBQ1IsS0FBSyxFQUFFLEtBQUssR0FDZjs7QUFYTCxBQWFJLHFCQWJpQixDQWFqQixLQUFLLENBQUMsRUFDRixLQUFLLEVBQUUsSUFBSSxHQUNkOztBQWZMLEFBaUJJLHFCQWpCaUIsQ0FpQmpCLGNBQWMsQ0FBQyxFQUNYLE9BQU8sRUFBRSxLQUFLLEVBQ2QsUUFBUSxFQUFFLFFBQVEsRUFDbEIsT0FBTyxFQUFFLENBQUMsRUFDVixLQUFLLEVBQUUsR0FBRyxFQUNWLFNBQVMsRUFBRSxHQUFHLEVBQ2QsU0FBUyxFQUFFLElBQUksRUFDZixLQUFLLEVBQUUsSUFBSSxFQUNYLEtBQUssRUFBRSxJQUFJLEVBQ1gsTUFBTSxFQUFFLElBQUksRUFDWixrQkFBa0IsRUFBRSxVQUFVLEVBQzlCLGVBQWUsRUFBRSxVQUFVLEVBQzNCLGFBQWEsRUFBRSxVQUFVLEVBQ3pCLFVBQVUsRUFBRSxVQUFVLEVBQ3RCLGNBQWMsRUFBRSxRQUFRLEdBQzNCOztBQUdMLEFBRVEsY0FGTSxDQUNWLHFCQUFxQixDQUNqQixjQUFjLENBQUMsRUFDWCxLQUFLLEVBQUUsSUFBSSxFQUNYLFNBQVMsRUFBRSxJQUFJLEVBQ2YsTUFBTSxFQUFFLElBQUksR0FDZiJ9 */
+
+/*# sourceMappingURL=redux-text.css.map */

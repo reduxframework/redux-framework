@@ -7,10 +7,10 @@
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://github.com/reduxframework/redux-framework-4.git"
+    "url": "https://github.com/reduxframework/redux-framework.git"
   },
   "bugs": {
-    "url": "https://github.com/reduxframework/redux-framework-4/issues"
+    "url": "https://github.com/reduxframework/redux-framework/issues"
   },
   "homepage": "https://redux.io",
   "resolutions": {

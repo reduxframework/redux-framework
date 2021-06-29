@@ -1,0 +1,80 @@
+.redux-main {
+    .redux-container-box_shadow {
+        .box-shadow-inset {
+            margin: 0 auto;
+
+            #shadow-result {
+                padding: 20px;
+                margin-bottom: 20px;
+                margin-top: 20px;
+                min-height: 180px;
+                border: 0px solid #ddd;
+                background: #f1f1f1;
+                transition: all 0.2s ease;
+
+            }
+
+            .row-content:after,
+            .row:after {
+                clear: both;
+                content: " ";
+                display: block;
+                height: 0;
+                visibility: hidden;
+            }
+
+            .row {
+                .col-2 {
+                    width: 50%;
+                    float: left;
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+
+                    &.disabled {
+                        label {
+                            strong {
+                                color: #cccccc;
+                            }
+                        }
+                    }
+                    
+                    label {
+                        color: #999999;
+                    }
+                    
+                    .wp-picker-container {
+                        &.disabled {
+                            pointer-events:none;
+
+                            button {
+                                background-color: #888;
+                            }
+
+                            opacity: 0.4;
+                            z-index: 200;
+                            background: 0;
+                            padding: 0!important;
+                            
+                            a {
+                                z-index: -1;
+                            }
+                        }
+                    }
+                    
+                    ul li {
+                        padding-bottom: 10px;                        
+                    }
+                    
+                    &:first-child {
+                        padding-right: 20px;
+                    }
+
+                    &:last-child {
+                        padding-left: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

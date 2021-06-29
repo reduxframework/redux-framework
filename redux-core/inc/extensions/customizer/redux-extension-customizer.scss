@@ -1,0 +1,119 @@
+.wp-customizer {
+    .redux-container {
+        overflow: visible;
+        .redux-main {
+            input {
+                margin: 0 !important;
+            }
+
+            input.spinner-input {
+                margin-right: 30px !important;
+                margin-left: 30px !important;
+                margin-top: 0px !important;
+            }
+        }
+    }
+    .redux-section.open .redux-group-tab {
+        display: block !important;
+    }
+
+    .redux-section {
+        p.customize-section-description {
+            margin-top: 22px;
+            word-break: break-word;
+            &.legacy {
+                margin-top: 7px;
+            }
+        }
+    }
+
+    .control-section-themes .accordion-section-title {
+        margin: 0;
+    }
+
+    #customize-controls {
+        .description {
+            display: block;
+        }
+        .customize-info {
+            margin-bottom: 0;
+        }
+        .redux-section .accordion-section-content {
+            background: #fcfcfc;
+        }
+    }
+
+    .redux-section .accordion-section-title i,
+    .redux-field .accordion-field-title i,
+    .redux-panel .accordion-section-title i {
+        margin-right: 5px;
+    }
+
+    .accordion-section.redux-main {
+        background: inherit;
+        margin-left: inherit;
+        border-left: inherit;
+        -moz-box-shadow: inherit;
+        -webkit-box-shadow: inherit;
+        padding: inherit;
+        box-shadow: inherit;
+    }
+
+    .redux_field_th {
+        padding: 13px 0px 0px 0px;
+    }
+
+    .redux-main {
+        .redux-field-container {
+            padding: 10px 0;
+        }
+        .select_wrapper {
+            float: none;
+            width: 100%;
+            display: inline-block;
+        }
+        .select2-container {
+            margin-right: 0 !important;
+            margin-bottom: 5px !important;
+            width: 100% !important;
+        }
+        .select_wrapper:nth-child(odd) {
+            margin-right: 0;
+        }
+        .redux-option-image {
+            max-width: 42% !important;
+            margin-right: 3%;
+        }
+        .customize-control {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+        }
+        .customize-control:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+        .upload {
+            width: 100% !important;
+        }
+        h3 {
+            margin-top: inherit;
+        }
+        .redux-container-raw {
+            margin-top: 22px;
+            word-break: break-word;
+            padding: 0 !important;
+        }
+        .redux-container-password input {
+            width: 100%;
+        }
+    }
+
+    .select2-drop,
+    .select2-container {
+        z-index: 999999;
+    }
+
+    .customize-control-redux-raw {
+        list-style: none;
+    }
+}

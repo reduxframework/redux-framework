@@ -1,0 +1,252 @@
+@mixin placeholder-color($color) {
+    &::-webkit-input-placeholder { /* WebKit browsers */
+        color: $color;
+        font-style: italic;
+        opacity: 1;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: $color;
+        font-style: italic;
+        opacity: 1;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: $color;
+        font-style: italic;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: $color;
+        font-style: italic;
+        opacity: 1;
+    }
+}
+
+.redux-templates-modal-wrapper {
+
+    .redux-templates-modal-body {
+        flex: 1 1 auto;
+        padding-left: 30px;
+        padding-right: 30px;
+        box-sizing: border-box;
+        background: #fff;
+
+        h5 {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style-position: inside;
+            list-style-type: disc;
+
+            &.redux-templates-import-wizard-missing-dependency li {
+                line-height: 1.8;
+            }
+        }
+
+        .error {
+            color: #f00;
+            i {
+                color: inherit;
+            }
+            &.installError {
+                text-align: center;
+            }
+        }
+    }
+
+    .redux-templates-import-wizard-spinner-wrapper {
+        position: absolute;
+        width: calc(100% - 60px); // as the parent has 30px each horizontal padding
+        height: 100%;
+        flex: 1 1 auto;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        .text-transition {
+            text-align: center;
+            font-size: 18px;
+            color: #555d66;
+            margin-bottom: 20px;
+        }
+    }
+
+    .redux-templates-import-progress {
+
+        font-size: 1.1em;
+        text-align: center;
+
+        li {
+            list-style: none;
+
+            &.success {
+                i {
+                    color: #46b450;
+                }
+            }
+
+            &.info {
+                i {
+                    color: #00a0d2;
+                }
+            }
+
+
+        }
+    }
+
+    .redux-templates-import-progress {
+        width: 50%;
+        margin: 10px auto;
+        li {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    /* ReduxTemplatesPremiumBox */
+    .section-box.premium-box {
+        //width: 60%;
+        margin: 35px auto;
+        text-align: center;
+
+        input {
+            display: block;
+            width: 100%;
+            box-shadow: 0 0 0 transparent;
+            transition: box-shadow 0.1s linear;
+            border-radius: 2px;
+            line-height: normal;
+            display: block;
+            padding: 16px 48px 16px 16px;
+            background: #f3f4f5;
+            border: none;
+            width: 100%;
+            height: 40px;
+            font-size: 13px;
+            text-align: center;
+
+            @include placeholder-color(#606a73);
+
+            &:focus {
+                border-color: #007cba;
+                border-color: var(--wp-admin-theme-color);
+                background: #fff;
+                box-shadow: 0 0 0 1.5px #007cba;
+                box-shadow: 0 0 0 1.5px var(--wp-admin-theme-color);
+                outline: 2px solid transparent;
+            }
+        }
+
+        h3 {
+
+            font-size: 1.5em;
+            line-height: 1.1em;
+            margin-top: 0px;
+        }
+        p {
+            font-size: calc(13px + 0.2vw);
+        }
+        ul {
+            width: 50%;
+            margin: 0 auto;
+            text-align: left;
+            list-style-type: disc;
+            list-style-position: inside;
+        }
+
+        .redux-templates-upgrade-button {
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 1;
+            background: #24b0a6;
+            //background: linear-gradient(90deg, #7557ff -30%, #c751ff 130%);
+            transition: opacity 0.2s ease-in-out;
+            box-shadow: none !important;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.75em 1.25em;
+            display: block;
+            //margin: 0 auto;
+            margin: 30px auto 0 auto;
+            max-width: 250px;
+            text-align: center;
+            //font-size: calc(13px + 0.1vw);
+            font-size: 1em;
+            &:hover {
+                color: #fff;
+                opacity: 0.85;
+                box-shadow: none !important;
+                background: #19837c;
+            }
+        }
+        .subscription_key_button {
+            margin-top: 40px;
+            button {
+                background: #f8f8f8;
+                border: 1px solid #ddd;
+            }
+
+        }
+
+        .redux-pro-activate-button {
+            i {
+                margin-right: 10px;
+            }
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 1;
+            background: #24b0a6;
+            //background: linear-gradient(90deg, #7557ff -30%, #c751ff 130%);
+            transition: opacity 0.2s ease-in-out;
+            box-shadow: none !important;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.75em 1.25em;
+            display: block;
+            //margin: 0 auto;
+            margin: 30px auto 0 auto;
+            max-width: 250px;
+            text-align: center;
+            //font-size: calc(13px + 0.1vw);
+            font-size: 1em;
+            &:hover {
+                color: #fff;
+                opacity: 0.85;
+                box-shadow: none !important;
+                background: #19837c;
+            }
+        }
+
+    }
+    .redux-templates-importmodal-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .redux-templates-psmodal-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .redux-templates-modal-footer.nps-footer {
+        text-align: center;
+        justify-content: center;
+    }
+
+}
+.text-transition {
+    width: 100% !important;
+    text-align: center;
+    .text-transition_inner > div {
+        font-size: 1.1rem;
+    }
+}

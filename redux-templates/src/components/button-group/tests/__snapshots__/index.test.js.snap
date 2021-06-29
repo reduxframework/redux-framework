@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Group 1. renders correctly: snapshot testing 1`] = `
+<div
+  className="redux-templates-import-button-group"
+>
+  PreviewImport
+  DependentPlugins
+</div>
+`;

@@ -1,0 +1,224 @@
+[class*="ugb-"] form[class*="-link"],
+form[class*="ugb-"][class*="-link"],
+[class*="ugb-"] + form[class*="-link"] {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.redux-templates-options-section {
+  padding: 30px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%; }
+
+.redux-templates-options-section-header {
+  /*border-bottom: 1px solid #EBEBF1;*/
+  margin: -30px -30px 30px;
+  padding: 20px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .redux-templates-options-section-header .redux-templates-header-left {
+    background-repeat: no-repeat;
+    background-position: center left;
+    padding-left: 55px;
+    background-size: 40px 40px;
+    min-height: 40px; }
+
+.redux-templates-options-section-header h2,
+.redux-templates-options-section-header h3 {
+  margin: 0;
+  line-height: 1; }
+
+.redux-templates-options-section-header h2 {
+  font-size: 24px;
+  color: #232323;
+  margin-bottom: 10px; }
+
+.redux-templates-options-section-header h3 {
+  font-size: 18px;
+  font-weight: 300;
+  color: #232323; }
+
+@media (min-width: 992px) {
+  .redux-templates-options-section {
+    padding: 60px; }
+
+  .redux-templates-options-section-header h2 {
+    font-size: 35px;
+    margin-bottom: 20px; }
+
+  .redux-templates-options-section-header h3 {
+    font-size: 25px; }
+
+  .redux-templates-options-section-header {
+    margin: -60px -60px 30px;
+    padding: 30px 60px; } }
+h2.redux-templates-options-section-title,
+h3.redux-templates-options-section-title {
+  line-height: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+h2.redux-templates-options-section-title {
+  font-size: 28px;
+  line-height: 40px;
+  color: #7557ff;
+  margin: 0; }
+
+h3.redux-templates-options-section-title {
+  font-size: 21px;
+  color: #232323;
+  margin: 0 0 20px; }
+
+.redux-templates-options-section-title img {
+  margin-left: 15px; }
+
+.redux-templates-options-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px; }
+
+.redux-templates-options-features::after {
+  display: block;
+  clear: both;
+  content: " "; }
+
+.redux-templates-options-features > li {
+  font-size: 14px;
+  line-height: 1.8;
+  display: block;
+  color: #838383;
+  width: 50%;
+  float: left; }
+
+.redux-templates-options-features > li > i {
+  font-style: normal;
+  color: #60da4f;
+  margin-right: 10px; }
+
+.redux-templates-embed-responsive {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden; }
+
+.redux-templates-embed-responsive::before {
+  content: " ";
+  display: block;
+  padding-top: 56.25%; }
+
+.redux-templates-embed-responsive .redux-templates-embed-responsive-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; }
+
+.redux-templates-mb-0 {
+  margin-bottom: 0; }
+
+.redux-templates-mb-30 {
+  margin-bottom: 30px; }
+
+.redux-templates-mt-20 {
+  margin-top: 20px; }
+
+.redux-templates-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  box-sizing: border-box; }
+
+.redux-templates-row > div {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box; }
+
+@media (min-width: 992px) {
+  .redux-templates-row.redux-templates-columns-2 > div {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%; } }
+#adminmenu .toplevel_page_redux-templates-settings .wp-menu-image > img {
+  width: 19px !important;
+  margin: 7.5px 9px;
+  display: block;
+  padding: 0; }
+
+.redux-templates-options-section-body-container {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  grid-gap: 30px;
+  padding-top: 0; }
+  .redux-templates-options-section-body-container .section-box {
+    box-shadow: 0 5px 5px 0 rgba(18, 63, 82, 0.035), 0 0 0 1px rgba(176, 181, 193, 0.2);
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 40px 35px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease; }
+    @media screen and (max-width: 782px) {
+      .redux-templates-options-section-body-container .section-box {
+        padding: 26.66667px 23.33333px; } }
+    @media screen and (max-width: 600px) {
+      .redux-templates-options-section-body-container .section-box {
+        padding: 35px 17.5px; } }
+    .redux-templates-options-section-body-container .section-box h3 {
+      font-size: 1.5em;
+      line-height: 1.1em;
+      margin-top: 0px; }
+    .redux-templates-options-section-body-container .section-box p {
+      font-size: calc(13px + 0.2vw); }
+    .redux-templates-options-section-body-container .section-box ul {
+      list-style-type: disc;
+      list-style-position: inside; }
+    .redux-templates-options-section-body-container .section-box.grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      grid-gap: 35px;
+      justify-content: center; }
+    .redux-templates-options-section-body-container .section-box .components-button {
+      border: none;
+      border-radius: 35px;
+      box-shadow: none !important;
+      cursor: pointer;
+      opacity: 1;
+      background: #8c33da;
+      background: linear-gradient(90deg, #7557ff -30%, #c751ff 130%);
+      transition: opacity 0.2s ease-in-out;
+      box-shadow: none !important;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75em 1.25em;
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+      text-align: center;
+      font-size: calc(13px + 0.1vw); }
+      .redux-templates-options-section-body-container .section-box .components-button:hover {
+        opacity: 0.85;
+        box-shadow: none !important; }
+
+.text-center {
+  text-align: center; }
+
+/*# sourceMappingURL=admin.css.map */

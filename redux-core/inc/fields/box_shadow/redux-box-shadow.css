@@ -1,0 +1,27 @@
+.redux-main .redux-container-box_shadow .box-shadow-inset { margin: 0 auto; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset #shadow-result { padding: 20px; margin-bottom: 20px; margin-top: 20px; min-height: 180px; border: 0px solid #ddd; background: #f1f1f1; -webkit-transition: all 0.2s ease; transition: all 0.2s ease; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row-content:after, .redux-main .redux-container-box_shadow .box-shadow-inset .row:after { clear: both; content: " "; display: block; height: 0; visibility: hidden; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2 { width: 50%; float: left; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2.disabled label strong { color: #cccccc; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2 label { color: #999999; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2 .wp-picker-container.disabled { pointer-events: none; opacity: 0.4; z-index: 200; background: 0; padding: 0 !important; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2 .wp-picker-container.disabled button { background-color: #888; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2 .wp-picker-container.disabled a { z-index: -1; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2 ul li { padding-bottom: 10px; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2:first-child { padding-right: 20px; }
+
+.redux-main .redux-container-box_shadow .box-shadow-inset .row .col-2:last-child { padding-left: 20px; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtYm94LXNoYWRvdy5jc3MiLCJzb3VyY2VzIjpbInJlZHV4LWJveC1zaGFkb3cuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxBQUVRLFdBRkcsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBQUMsRUFDZCxNQUFNLEVBQUUsTUFBTSxHQTBFakI7O0FBN0VULEFBS1ksV0FMRCxDQUNQLDJCQUEyQixDQUN2QixpQkFBaUIsQ0FHYixjQUFjLENBQUMsRUFDWCxPQUFPLEVBQUUsSUFBSSxFQUNiLGFBQWEsRUFBRSxJQUFJLEVBQ25CLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLFVBQVUsRUFBRSxLQUFLLEVBQ2pCLE1BQU0sRUFBRSxjQUFjLEVBQ3RCLFVBQVUsRUFBRSxPQUFPLEVBQ25CLFVBQVUsRUFBRSxhQUFhLEdBRTVCOztBQWRiLEFBZ0JZLFdBaEJELENBQ1AsMkJBQTJCLENBQ3ZCLGlCQUFpQixDQWNiLFlBQVksQUFBQSxNQUFNLEVBaEI5QixXQUFXLENBQ1AsMkJBQTJCLENBQ3ZCLGlCQUFpQixDQWViLElBQUksQUFBQSxNQUFNLENBQUMsRUFDUCxLQUFLLEVBQUUsSUFBSSxFQUNYLE9BQU8sRUFBRSxHQUFHLEVBQ1osT0FBTyxFQUFFLEtBQUssRUFDZCxNQUFNLEVBQUUsQ0FBQyxFQUNULFVBQVUsRUFBRSxNQUFNLEdBQ3JCOztBQXZCYixBQTBCZ0IsV0ExQkwsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBdUJiLElBQUksQ0FDQSxNQUFNLENBQUMsRUFDSCxLQUFLLEVBQUUsR0FBRyxFQUNWLEtBQUssRUFBRSxJQUFJLEVBQ1gsZUFBZSxFQUFFLFVBQVUsRUFDM0Isa0JBQWtCLEVBQUUsVUFBVSxFQUM5QixVQUFVLEVBQUUsVUFBVSxHQTRDekI7O0FBM0VqQixBQW1DNEIsV0FuQ2pCLENBQ1AsMkJBQTJCLENBQ3ZCLGlCQUFpQixDQXVCYixJQUFJLENBQ0EsTUFBTSxBQU9ELFNBQVMsQ0FDTixLQUFLLENBQ0QsTUFBTSxDQUFDLEVBQ0gsS0FBSyxFQUFFLE9BQU8sR0FDakI7O0FBckM3QixBQXlDb0IsV0F6Q1QsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBdUJiLElBQUksQ0FDQSxNQUFNLENBZUYsS0FBSyxDQUFDLEVBQ0YsS0FBSyxFQUFFLE9BQU8sR0FDakI7O0FBM0NyQixBQThDd0IsV0E5Q2IsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBdUJiLElBQUksQ0FDQSxNQUFNLENBbUJGLG9CQUFvQixBQUNmLFNBQVMsQ0FBQyxFQUNQLGNBQWMsRUFBQyxJQUFJLEVBTW5CLE9BQU8sRUFBRSxHQUFHLEVBQ1osT0FBTyxFQUFFLEdBQUcsRUFDWixVQUFVLEVBQUUsQ0FBQyxFQUNiLE9BQU8sRUFBRSxDQUFDLENBQUEsVUFBVSxHQUt2Qjs7QUE3RHpCLEFBaUQ0QixXQWpEakIsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBdUJiLElBQUksQ0FDQSxNQUFNLENBbUJGLG9CQUFvQixBQUNmLFNBQVMsQ0FHTixNQUFNLENBQUMsRUFDSCxnQkFBZ0IsRUFBRSxJQUFJLEdBQ3pCOztBQW5EN0IsQUEwRDRCLFdBMURqQixDQUNQLDJCQUEyQixDQUN2QixpQkFBaUIsQ0F1QmIsSUFBSSxDQUNBLE1BQU0sQ0FtQkYsb0JBQW9CLEFBQ2YsU0FBUyxDQVlOLENBQUMsQ0FBQyxFQUNFLE9BQU8sRUFBRSxFQUFFLEdBQ2Q7O0FBNUQ3QixBQWdFb0IsV0FoRVQsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBdUJiLElBQUksQ0FDQSxNQUFNLENBc0NGLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFDRixjQUFjLEVBQUUsSUFBSSxHQUN2Qjs7QUFsRXJCLEFBb0VvQixXQXBFVCxDQUNQLDJCQUEyQixDQUN2QixpQkFBaUIsQ0F1QmIsSUFBSSxDQUNBLE1BQU0sQUEwQ0QsWUFBWSxDQUFDLEVBQ1YsYUFBYSxFQUFFLElBQUksR0FDdEI7O0FBdEVyQixBQXdFb0IsV0F4RVQsQ0FDUCwyQkFBMkIsQ0FDdkIsaUJBQWlCLENBdUJiLElBQUksQ0FDQSxNQUFNLEFBOENELFdBQVcsQ0FBQyxFQUNULFlBQVksRUFBRSxJQUFJLEdBQ3JCIn0= */
+
+/*# sourceMappingURL=redux-box-shadow.css.map */

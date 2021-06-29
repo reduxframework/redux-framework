@@ -1,0 +1,120 @@
+.redux-templates-collection-modal-sidebar {
+  min-width: 270px;
+  background: #23282d;
+  color: #b4b9be;
+  /* $secondaryColor;*/
+  overflow-y: auto; }
+  .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content {
+    padding: 25px; }
+    .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content h3 {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      line-height: 14px;
+      font-family: pn, "Open Sans", Arial, sans-serif;
+      text-transform: uppercase;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      white-space: nowrap;
+      -ms-flex-align: center;
+      align-items: center;
+      margin-bottom: 10px; }
+      .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content h3::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: #424951;
+        margin-left: 20px;
+        display: block; }
+    .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group {
+      margin: 0;
+      border: 1px solid #383e48;
+      width: 100%;
+      display: inline-flex;
+      margin-bottom: 10px; }
+      .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div {
+        display: flex; }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div:last-child button {
+          color: #f5a623; }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div button {
+          display: inline-flex;
+          line-height: 20px;
+          padding: 5px 10px;
+          align-items: center;
+          background: none;
+          border: none;
+          position: relative;
+          z-index: 1;
+          cursor: pointer;
+          outline: none;
+          color: #fff;
+          box-shadow: none;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          margin: 5px; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div button:hover {
+            border: 1px solid #424951;
+            color: rgba(255, 255, 255, 0.9); }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div button:focus {
+            outline: none; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div button.active {
+            background: #383e48;
+            color: #3dbfe8 !important;
+            border: 1px solid #555d66; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div button.disabled {
+            opacity: 0.5; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content .redux-templates-template-filter-button-group > div button img {
+            display: inline-block;
+            width: auto;
+            height: 14px;
+            margin-right: 4px; }
+    .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul {
+      list-style: none;
+      margin: 0;
+      padding: 0; }
+      .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li {
+        padding: 2px 0;
+        display: block;
+        font-size: 14px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: 300ms; }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li:not(.disabled):hover {
+          color: rgba(255, 255, 255, 0.9); }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li.active {
+          color: #3dbfe8; }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li.disabled {
+          opacity: 0.5; }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li span {
+          float: right; }
+        .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li.missing-dependency {
+          color: #967757; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li.missing-dependency:hover {
+            color: #b76914; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li.missing-dependency.active {
+            color: #3dbfe8; }
+          .redux-templates-collection-modal-sidebar .redux-templates-modal-sidebar-content ul li.missing-dependency i {
+            font-size: 0.9em;
+            margin-left: 5px; }
+  .redux-templates-collection-modal-sidebar ul.redux-templates-sidebar-dependencies li .components-base-control {
+    display: inline-block;
+    margin-bottom: 0 !important; }
+    .redux-templates-collection-modal-sidebar ul.redux-templates-sidebar-dependencies li .components-base-control .components-base-control__field {
+      margin-bottom: 3px; }
+    .redux-templates-collection-modal-sidebar ul.redux-templates-sidebar-dependencies li .components-base-control span {
+      float: none; }
+  .redux-templates-collection-modal-sidebar .redux-templates-select-actions {
+    margin-bottom: 8px;
+    display: inline-flex; }
+    .redux-templates-collection-modal-sidebar .redux-templates-select-actions i.challenge-dot {
+      margin-left: 10px; }
+  .redux-templates-collection-modal-sidebar .redux-templates-sidebar-dependencies li a {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 90%;
+    float: right; }
+
+/*# sourceMappingURL=style.css.map */

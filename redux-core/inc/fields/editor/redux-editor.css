@@ -1,0 +1,15 @@
+.redux-container-editor .mceLayout td { border-width: 1px; margin: 0; padding: 1px; }
+
+.redux-container-editor input, .redux-container-editor textarea { margin: inherit; }
+
+.redux-container-editor textarea { border-style: none; border: 0; border-width: 0; }
+
+.redux-container-editor .wp-editor-container { border-radius: 3px; }
+
+.redux-container-editor .wp-editor-container textarea { border-radius: 0; border-style: inherit; }
+
+.redux-container-editor .quicktags-toolbar input { margin: 2px 1px 4px; display: inline-block; min-width: 26px; padding: 2px 4px; font: 12px/18px Arial, Helvetica, sans-serif normal; color: #464646; border: 1px solid #c3c3c3; border-radius: 3px; background: #eee; background-image: -webkit-gradient(linear, left bottom, left top, from(#e3e3e3), to(#fff)); background-image: -webkit-linear-gradient(bottom, #e3e3e3, #fff); background-image: linear-gradient(to top, #e3e3e3, #fff); }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtZWRpdG9yLmNzcyIsInNvdXJjZXMiOlsicmVkdXgtZWRpdG9yLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsQUFDSSx1QkFEbUIsQ0FDbkIsVUFBVSxDQUFDLEVBQUUsQ0FBQyxFQUNWLFlBQVksRUFBRSxHQUFHLEVBQ2pCLE1BQU0sRUFBRSxDQUFDLEVBQ1QsT0FBTyxFQUFFLEdBQUcsR0FDZjs7QUFMTCxBQU9JLHVCQVBtQixDQU9uQixLQUFLLEVBUFQsdUJBQXVCLENBUW5CLFFBQVEsQ0FBQyxFQUNMLE1BQU0sRUFBRSxPQUFPLEdBQ2xCOztBQVZMLEFBWUksdUJBWm1CLENBWW5CLFFBQVEsQ0FBQyxFQUNMLFlBQVksRUFBRSxJQUFJLEVBQ2xCLE1BQU0sRUFBRSxDQUFDLEVBQ1QsWUFBWSxFQUFFLENBQUMsR0FDbEI7O0FBaEJMLEFBa0JJLHVCQWxCbUIsQ0FrQm5CLG9CQUFvQixDQUFDLEVBQ2pCLHFCQUFxQixFQUFFLEdBQUcsRUFDMUIsa0JBQWtCLEVBQUUsR0FBRyxFQUN2QixhQUFhLEVBQUUsR0FBRyxHQVFyQjs7QUE3QkwsQUF1QlEsdUJBdkJlLENBa0JuQixvQkFBb0IsQ0FLaEIsUUFBUSxDQUFDLEVBQ0wscUJBQXFCLEVBQUUsQ0FBQyxFQUN4QixrQkFBa0IsRUFBRSxDQUFDLEVBQ3JCLGFBQWEsRUFBRSxDQUFDLEVBQ2hCLFlBQVksRUFBRSxPQUFPLEdBQ3hCOztBQTVCVCxBQStCSSx1QkEvQm1CLENBK0JuQixrQkFBa0IsQ0FBQyxLQUFLLENBQUMsRUFDckIsTUFBTSxFQUFFLFdBQVcsRUFDbkIsT0FBTyxFQUFFLFlBQVksRUFDckIsU0FBUyxFQUFFLElBQUksRUFDZixPQUFPLEVBQUUsT0FBTyxFQUNoQixJQUFJLEVBQUUsNkNBQTZDLEVBQ25ELEtBQUssRUFBRSxPQUFPLEVBQ2QsTUFBTSxFQUFFLGlCQUFpQixFQUN6QixxQkFBcUIsRUFBRSxHQUFHLEVBQzFCLGFBQWEsRUFBRSxHQUFHLEVBQ2xCLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLGdCQUFnQixFQUFFLHdFQUF3RSxFQUMxRixnQkFBZ0IsRUFBRSw4Q0FBOEMsRUFDaEUsZ0JBQWdCLEVBQUUsMkNBQTJDLEVBQzdELGdCQUFnQixFQUFFLHlDQUF5QyxFQUMzRCxnQkFBZ0IsRUFBRSxzQ0FBc0MsR0FDM0QifQ== */
+
+/*# sourceMappingURL=redux-editor.css.map */

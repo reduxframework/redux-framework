@@ -1,0 +1,34 @@
+.redux-container-color_gradient {
+    .redux-gradient-preview {
+        height: 150px;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+
+    .colorGradient,
+    .redux-gradient-type {
+        display: inline-block;
+        margin-right: 20px;
+
+        strong {
+            display: table;
+            margin-bottom: 5px;
+            margin-left: 3px;
+            font-size: 12px;
+            color: #999;
+        }
+    }
+
+    .toLabel {
+        //padding-left: 18px;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .redux-container-color_gradient {
+        .colorGradient {
+            display: block;
+            text-align: center !important;
+        }
+    }
+}

@@ -1,0 +1,236 @@
+@import "../_mixins.scss";
+
+@mixin adminThemeColorOverrides($darkColor, $accentColor, $secondaryColor, $buttonPrimary) {
+    .button.ui-datepicker-current,
+    button.ui-datepicker-close {
+        background-color: lighten($accentColor, 3%) !important;
+    }
+
+    .ui-datepicker-buttonpane button.ui-datepicker-current {
+        background: $buttonPrimary !important;
+        color: #fff !important;
+        border: 1px solid darken($buttonPrimary, 20%) !important;
+
+    }
+
+    .ui-datepicker-header {
+        background-color: $secondaryColor !important;
+        color: #fff !important;
+    }
+
+    .ui-datepicker td .ui-state-active {
+        background-color: lighten($accentColor, 3%) !important;
+        color: #fff !important;
+    }
+
+    .ui-datepicker td .ui-state-hover {
+        color: lighten($accentColor, 3%) !important;
+    }
+
+    .ui-datepicker td .ui-state-highlight {
+        background: $accentColor !important;
+        border: 1px solid $secondaryColor !important;
+        color: #fff !important;
+    }
+
+    .redux-container-switch .cb-disable,
+    .redux-container-switch .cb-enable,
+    .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-widget-header .ui-state-default {
+        @include backgroundGradient(#f5f5f5, #f8f8f8);
+        border-color: #ccc !important;
+    }
+
+    .ui-datepicker td .ui-state-active {
+        color: #000 !important;
+        font-weight: 700 !important;
+        background: #fff !important;
+    }
+
+    .redux-container-switch .cb-disable.selected {
+        @include backgroundGradient(#646464, #929292);
+        border-color: #767676 !important;
+    }
+
+    .redux-container-switch .cb-enable.selected,
+    .redux-field-container .ui-buttonset .ui-state-active {
+        @include backgroundGradient($accentColor);
+        border-color: darken($accentColor, 15%) !important;
+        border-color: darken($accentColor, 10%) !important;
+        -webkit-box-shadow: inset 0 1px 0 lighten($accentColor, 15%), 0 1px 0 rgba(0, 0, 0, 0.15) !important;
+        box-shadow: inset 0 1px 0 lighten($accentColor, 15%), 0 1px 0 rgba(0, 0, 0, 0.15) !important;
+
+    }
+
+    #redux-header {
+        background: $secondaryColor;
+        border-color: $accentColor;
+
+        .display_header span {
+            color: $darkColor;
+        }
+    }
+
+    .redux-sidebar .redux-group-menu {
+        li {
+            &.active,
+            &.activeChild {
+                a {
+                    color: $secondaryColor;
+                }
+
+                &.hasSubSections {
+                    ul.subsection li {
+                        a {
+                            &:hover {
+                                color: $buttonPrimary;
+                                background: darken($secondaryColor, 10%);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.hasSubSections {
+                &.redux-section-hover {
+                    .redux-group-tab-link-a {
+                        color: $accentColor;
+
+                        :hover {
+                            color: $accentColor;
+                        }
+                    }
+                }
+            }
+
+            &.active {
+                &.hasSubSections {
+                    a {
+                        background: $accentColor;
+                    }
+
+                    ul.subsection li a {
+                        background: $secondaryColor;
+                    }
+                }
+            }
+
+            &.activeChild {
+                &.hasSubSections {
+                    a {
+                        background: $darkColor;
+                        text-shadow: 1px 1px darken($darkColor, 30%);
+                    }
+
+                    ul.subsection li {
+                        a {
+                            background: $secondaryColor;
+                            text-shadow: none;
+                        }
+
+                        &.active {
+                            a {
+                                background: $accentColor;
+                                text-shadow: 1px 1px darken($accentColor, 20%);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.redux-section-hover {
+                a {
+                    background: $secondaryColor;
+                    opacity: 1;
+                    border-style: hidden;
+
+                    &:hover {
+                        color: $secondaryColor;
+                        background: darken($secondaryColor, 10%);
+                    }
+                }
+            }
+        }
+    }
+
+    .redux-container-image_select .redux-image-select-selected img {
+        border-color: $accentColor;
+    }
+
+    .redux-container-image_select .redux-image-select-selected .tiles {
+        border-color: $accentColor;
+    }
+
+    #redux-footer #redux-share a {
+        color: $accentColor;
+
+        &:hover {
+            color: darken($accentColor, 20%);
+        }
+    }
+
+    .select2-results .select2-highlighted {
+        background: $accentColor;
+    }
+
+    .select2-drop-active,
+    .select2-container-multi.select2-container-active .select2-choices,
+    .select2-drop.select2-drop-above.select2-drop-active,
+    .select2-container-active .select2-choice,
+    .select2-container-active .select2-choices,
+    .select2-dropdown-open.select2-drop-above .select2-choice,
+    .select2-dropdown-open.select2-drop-above .select2-choices {
+        border-color: $accentColor;
+    }
+
+    .select2-dropdown-open.select2-drop-above .select2-choice,
+    .select2-dropdown-open.select2-drop-above .select2-choices {
+        border-top: inherit;
+    }
+
+    .noUi-connect {
+        @include backgroundGradient(lighten($accentColor, 3%));
+    }
+}
+
+/* Light fresh theme */
+.admin-color-fresh,
+.wp-customizer {
+    @include adminThemeColorOverrides(#a0a5aa, #0073aa, #23282d, #1e8cbe);
+}
+
+/* Light admin theme */
+.admin-color-light {
+    @include adminThemeColorOverrides(#e6e6e6, #04a4cc, #888888, #0384a4);
+}
+
+/* Blue admin theme */
+.admin-color-blue {
+    @include adminThemeColorOverrides(#e2ecf1, #4796b3, #096484, #db9825);
+}
+
+/* Coffee admin theme */
+.admin-color-coffee {
+    @include adminThemeColorOverrides(#cdcbc9, #c7a589, #46403c, #ba906d);
+}
+
+/* Ectoplasm admin theme */
+.admin-color-ectoplasm {
+    @include adminThemeColorOverrides(#cbc5d3, #a3b745, #413256, #89993a);
+}
+
+/* Midnight admin theme */
+.admin-color-midnight {
+    @include adminThemeColorOverrides(#c2c4c5, #e14d43, #363b3f, #d92c23);
+}
+
+/* Ocean admin theme */
+.admin-color-ocean {
+    @include adminThemeColorOverrides(#d5dddf, #9ebaa0, #627c83, #86a988);
+}
+
+/* Sunrise admin theme */
+.admin-color-sunrise {
+    @include adminThemeColorOverrides(#f0c8c6, #dd823b, #b43c38, #cc6c23);
+}

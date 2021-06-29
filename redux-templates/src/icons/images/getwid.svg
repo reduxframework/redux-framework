@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" xml:space="preserve">
+<rect x="70" y="54" style="fill:#B3C315;" width="41" height="18"/>
+<rect x="65" y="54" style="fill:#96A40A;" width="5" height="18"/>
+<rect x="94" y="50" style="fill:#B3C315;" width="13" height="3"/>
+<rect x="89" y="50" style="fill:#96A40A;" width="5" height="3"/>
+<rect x="74" y="50" style="fill:#B3C315;" width="13" height="3"/>
+<rect x="69" y="50" style="fill:#96A40A;" width="5" height="3"/>
+<rect x="72" y="92" style="fill:#B977C7;" width="13" height="3"/>
+<rect x="67" y="92" style="fill:#9E5CAC;" width="5" height="3"/>
+<rect x="51" y="92" style="fill:#B977C7;" width="13" height="3"/>
+<rect x="46" y="92" style="fill:#9E5CAC;" width="5" height="3"/>
+<rect x="92" y="75" style="fill:#49C3F5;" width="19" height="19"/>
+<rect x="87" y="75" style="fill:#109AD4;" width="5" height="19"/>
+<path style="fill:#B977C7;" d="M25,97h86l-18,19H43L25,97z"/>
+<polygon style="fill:#9E5CAC;" points="20,97 38,116 43,116 25,97 "/>
+<path style="fill:#F1B014;" d="M111,36H25l18-19h50L111,36z"/>
+<polygon style="fill:#F09108;" points="43,17 38,17 20,36 25,36 "/>
+<rect x="51" y="12" style="fill:#F1B014;" width="14" height="3"/>
+<rect x="46" y="12" style="fill:#F09108;" width="5" height="3"/>
+<rect x="73" y="12" style="fill:#F1B014;" width="14" height="3"/>
+<rect x="68" y="12" style="fill:#F09108;" width="5" height="3"/>
+<rect x="25" y="39" style="fill:#49C3F5;" width="18" height="26"/>
+<rect x="20" y="39" style="fill:#109AD4;" width="5" height="26"/>
+<rect x="20" y="68" style="fill:#D25E4D;" width="5" height="26"/>
+<rect x="25" y="68" style="fill:#E67666;" width="18" height="26"/>
+</svg>

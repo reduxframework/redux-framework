@@ -1,0 +1,322 @@
+/*Ain't this some complicated shit!*/
+
+@import "_mixins.scss";
+
+.redux-main {
+    fieldset.disabled,
+    .redux-group-tab.disabled {
+        h2 {
+            padding-top: 10px;
+        }
+
+        &::before {
+            color: $primary;
+        }
+    }
+}
+
+// Header
+#redux-header {
+    border-color: $secondary !important;
+    background: $header_background !important;
+
+    .display_header {
+
+        // Theme Title
+        h2 {
+            color: $header_text;
+        }
+
+        // Theme version
+        span {
+            color: $header_text !important;
+        }
+    }
+}
+
+// Entire background
+.redux-container {
+    background: $background;
+
+    // Sidebar background
+    .redux-sidebar {
+        font-size: 13px;
+        font-weight: 400 !important;
+        line-height: 18px;
+
+        .redux-group-menu {
+            background-color: $background;
+
+            li {
+                &.divide {
+                    border-bottom-color: lighten($primary, 20%) !important;
+                    border-top-color: lighten($primary, 20%) !important;
+                }
+
+                &.activeChild {
+                    &.hasSubSections {
+
+                        // Menu item with closed subsection
+                        a {
+                            background-color: $primary !important;
+
+                            //@if $text_shadow == 1 {
+                            //    text-shadow: 1px 1px darken($primary, 30%)!important;
+                            //} @else {
+                            //    text-shadow: 1px 1px transparent!important;
+                            //}
+
+                            color: $active_menu_text !important;
+                        }
+
+                        .subsection {
+                            li {
+                                &.active {
+
+                                    // Subsection selected item
+                                    a {
+                                        font-weight: 700 !important;
+                                        color: $active_submenu_text !important;
+
+                                        //@if $text_shadow == 1 {
+                                        //    text-shadow: 1px 1px darken($primary, 20%)!important;
+                                        //} @else {
+                                        //    text-shadow: 1px 1px transparent!important;
+                                        //}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Active menu item, no subsection
+                &.active {
+                    a {
+                        background-color: $primary !important;
+                        color: $active_menu_text !important;
+                        opacity: 1 !important;
+                        font-weight: 700 !important;
+
+                        // Active menu item, no subsection hover
+                        &:hover {
+                            background-color: $primary;
+                            color: $menu_hover_text !important;
+                        }
+                    }
+                }
+
+                // Inactive menu item, no subsection
+                a {
+                    font-weight: 400 !important;
+                    color: $text !important;
+                    opacity: 0.9 !important;
+                    border-style: hidden !important;
+                    -webkit-transition: all 0.2s ease-in-out !important;
+                    -moz-transition: all 0.2s ease-in-out !important;
+                    -ms-transition: all 0.2s ease-in-out !important;
+                    -o-transition: all 0.2s ease-in-out !important;
+                    transition: all 0.2s ease-in-out !important;
+
+                    // Inactive menu item, no subsection hover
+                    &:hover {
+                        color: $menu_hover_text !important;
+                        background-color: $primary !important;
+                    }
+                }
+
+                .subsection {
+                    background: $subsection_background;
+
+                    .redux-group-tab-link-li {
+
+                        // subsection inactive menu
+                        .redux-group-tab-link-a {
+                            font-weight: 400 !important;
+                            //opacity: 0.7!important;
+                            color: $subsection_text !important;
+                            background-color: $subsection_background !important;
+
+                            // subsection inactive menu hover
+                            &:hover {
+                                background-color: $subsection_background_hover !important;
+                                color: $menu_hover !important;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+
+                &.hasSubSections {
+                    &.redux-section-hover {
+
+                        // subsection item with flyout inactive
+                        > a {
+                            background-color: $primary;
+                            color: $menu_hover_text !important;
+
+                            &::after {
+                                border-right-color: $subsection_background;
+                            }
+                        }
+
+                        // subsection item with flyout inactive hover
+                        .redux-group-tab-link-a {
+                            //color: $menu_hover_text!important;
+
+                            &:hover {
+                                color: $menu_hover_text !important;
+                            }
+                        }
+
+                        .subsection {
+                            background-color: $subsection_background;
+
+                            // flyout subsection inactive
+                            .redux-group-tab-link-a {
+                                -webkit-transition: all 0.2s ease-in-out;
+                                -moz-transition: all 0.2s ease-in-out;
+                                -ms-transition: all 0.2s ease-in-out;
+                                -o-transition: all 0.2s ease-in-out;
+                                transition: all 0.2s ease-in-out;
+
+                                // flyout subsection inactive hover
+                                &:hover {
+                                    background-color: $background;
+                                    color: $menu_hover !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .redux-main {
+        border-left-width: 0;
+    }
+}
+
+// Metabox.  Psh!
+.postbox.redux-metabox {
+    .redux-container {
+        .redux-group-menu {
+            li {
+                &.active {
+                    a {
+                        background-color: $menu_hover;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Fields
+.button.ui-datepicker-current,
+button.ui-datepicker-close {
+    background-color: lighten($primary, 3%) !important;
+}
+
+.ui-datepicker-buttonpane button.ui-datepicker-current {
+    background: $primary !important;
+    color: #fff !important;
+    border: 1px solid darken($primary, 20%) !important;
+
+}
+
+.ui-datepicker-header {
+    background-color: $secondary !important;
+    color: #fff !important;
+}
+
+.ui-datepicker td {
+    .ui-state-active {
+        color: #000 !important;
+        font-weight: 700 !important;
+        background: #fff !important;
+    }
+
+    .ui-state-hover {
+        color: lighten($primary, 3%) !important;
+    }
+
+    .ui-state-highlight {
+        background: $primary !important;
+        border: 1px solid $secondary !important;
+        color: #fff !important;
+    }
+}
+
+.redux-container-switch .cb-disable,
+.redux-container-switch .cb-enable,
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    @include backgroundGradient(#f5f5f5, #f8f8f8);
+    border-color: #ccc !important;
+}
+
+.redux-container-switch .cb-disable.selected {
+    @include backgroundGradient(#646464, #929292);
+    border-color: #767676 !important;
+}
+
+.redux-container-spinner .ui-widget .ui-spinner-button.ui-state-hover span {
+    @include backgroundGradient(lighten($primary, 5%));
+    border-color: lighten($primary, 5%) !important;
+    border-color: lighten($primary, 1%) !important;
+}
+
+.redux-container-spinner .ui-widget .ui-spinner-button.ui-state-active span {
+    @include backgroundGradient(darken($primary, 15%));
+    border-color: darken($primary, 25%) !important;
+    border-color: darken($primary, 20%) !important;
+    color: #fff;
+}
+
+.redux-container-spinner .ui-widget .ui-spinner-button .ui-icon,
+.redux-container-switch .cb-enable.selected,
+.redux-field-container .ui-buttonset .ui-state-active {
+    @include backgroundGradient($primary);
+    border-color: darken($primary, 15%) !important;
+    border-color: darken($primary, 10%) !important;
+    -webkit-box-shadow: inset 0 1px 0 lighten($primary, 15%), 0 1px 0 rgba(0, 0, 0, 0.15) !important;
+    box-shadow: inset 0 1px 0 lighten($primary, 15%), 0 1px 0 rgba(0, 0, 0, 0.15) !important;
+
+}
+
+.redux-container-image_select .redux-image-select-selected img {
+    border-color: $primary !important;
+}
+
+.redux-container-image_select .redux-image-select-selected .tiles {
+    border-color: $primary !important;
+}
+
+.select2-results .select2-results__option--highlighted {
+    background: $primary !important;
+}
+
+.select2-container--classic {
+    &.select2-container--open .select2-dropdown,
+    &.select2-container--open .select2-selection--single,
+    &.select2-container--open .select2-selection--multiple,
+    .select2-selection--single:focus {
+        border-color: $primary !important;
+    }
+}
+
+.noUi-connect {
+    @include backgroundGradient(lighten($primary, 3%));
+}
+
+// Footer
+#redux-footer #redux-share a {
+    color: $primary;
+
+    &:hover {
+        color: darken($primary, 20%);
+    }
+}

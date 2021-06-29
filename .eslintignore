@@ -1,0 +1,7 @@
+build
+redux-templates/assets/js/redux-templates.js
+*.min.js
+**/tests/
+redux-core/assets/js/redux-vendors.js
+redux-core/assets/js/vendor/**/*.js
+redux-templates/assets/js/vendor.js

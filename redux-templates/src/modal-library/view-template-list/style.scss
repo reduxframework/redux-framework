@@ -1,0 +1,96 @@
+#collections-sections-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 10px 0 10px;
+
+    > div {
+        width: 33.3333%;
+        padding: 15px;
+        position: relative;
+        @media (max-width: 1199px) {
+            width: 50%;
+        }
+
+        &.redux-templates-builder-template-found-empty {
+            width: 100%;
+            text-align: center;
+            opacity: 0.5;
+            border: none !important;
+            padding-top: 70px !important;
+        }
+    }
+
+    &.redux-templates-frontend-section-list {
+        display: block;
+        padding-bottom: 10px;
+        padding-top: 0px;
+
+        > div {
+            &.redux-templates-reusable-list-title {
+                color: #adafb2;
+            }
+
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            border-bottom: 1px solid #e2e4e7;
+            font-weight: 600;
+            padding: 12px 0 12px 15px;
+            margin-bottom: 0;
+            align-items: center;
+
+            &:first-child {
+                border-top: 1px solid #e2e4e7;
+            }
+
+            .redux-templates-reusable-list-content {
+                flex-grow: 1;
+            }
+
+            .redux-templates-reusable-list-info {
+                flex-grow: 1;
+                max-width: 165px;
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
+            .redux-templates-reusable-list-button {
+                margin-left: 30px;
+            }
+
+            .redux-templates-reusable-list-button button {
+                display: inline-block;
+                padding: 0;
+                border: none;
+                transition: 300ms;
+                cursor: pointer;
+                background-color: transparent;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+
+                i {
+                    font-size: 16px;
+                    color: #cdcfd1;
+                }
+
+                &:hover i {
+                    color: #007cba;
+                }
+
+                &:last-child:hover i {
+                    color: #f00;
+                }
+            }
+        }
+    }
+    .redux-templates-pagelist-column.loading {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+}

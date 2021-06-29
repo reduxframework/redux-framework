@@ -1,0 +1,313 @@
+@import "../_variables";
+
+.wp-full-overlay {
+    margin-left: 300px;
+}
+
+@media screen and (min-width: 1667px) {
+    .wp-full-overlay {
+        margin-left: 18%;
+    }
+}
+
+button {
+    box-sizing: border-box;
+    pointer-events: all;
+}
+
+.wp-full-overlay.hide {
+    display: none;
+}
+
+.theme-screenshot-wrap {
+    overflow: hidden;
+    position: relative;
+    max-height: 300px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+}
+.install-theme-info {
+    padding-bottom: 0px;
+    h3 a {
+        float: right;
+        opacity: 0.6;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.install-theme-info .theme-screenshot {
+    width: 100% !important;
+    border: none !important;
+    margin: 0 !important;
+    display: block;
+}
+
+.expanded .wp-full-overlay-footer {
+    height: 111px !important;
+    left: initial;
+
+    .button-hero {
+        text-align: center;
+    }
+}
+
+.wp-full-overlay .wp-full-overlay-sidebar-content {
+    bottom: 100px;
+
+    .redux-templates-dependencies-list {
+        h4 {
+            color: #23282d;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        border-top: 1px solid #eee;
+        color: #82878c;
+        font-size: 13px;
+        font-weight: 400;
+        margin: 30px 0 0 0;
+
+        .redux-templates-dependency-blocks {
+            .redux-templates-dependency-name {
+                color: #444;
+                font-weight: 600;
+                margin-right: 5px;
+            }
+        }
+
+    }
+}
+
+.footer-import-button-wrap {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.wp-full-overlay-footer .view-site,
+.wp-full-overlay-footer .go-pro,
+.wp-full-overlay-footer .redux-templates-import {
+    width: 100%;
+}
+
+.redux-templates-button-download {
+    border: 1px solid #3dbfe8;
+    background: #3dbfe8;
+    box-shadow: 0 1px 0 #165cb4;
+    color: #fff;
+}
+
+.wp-full-overlay-main {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    background-color: unset;
+
+    &.loaded {
+        &::before {
+            display: none !important;
+        }
+
+        iframe {
+            background-color: #fff;
+        }
+    }
+
+    .components-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+.theme-install-overlay iframe {
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    transition: opacity 0.3s;
+
+}
+
+
+.redux-templates-dependency-blocks {
+    display: flex;
+
+    .block-head {
+        text-align: center;
+        width: 60px;
+        margin-right: 10px;
+    }
+}
+
+
+.requirements-list {
+    width: 100%;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            cursor: pointer;
+
+            svg {
+                margin-right: 5px;
+
+                * {
+                    fill: rgb(154, 154, 154);
+                }
+            }
+
+            line-height: 20px;
+            padding-bottom: 25px;
+            clear: left;
+
+            svg,
+            span,
+            div {
+                float: left;
+            }
+
+            transition: 300ms;
+
+            .redux-icon-wrapper {
+                display: inline;
+            }
+
+            span.pluginURL {
+                float: right;
+            }
+
+            i {
+                font-size: 1.1em;
+            }
+
+            .redux-icon-wrapper {
+                padding-left: 5px;
+            }
+
+            i {
+                &.fa-exclamation-triangle {
+                    font-size: 0.9em;
+                    line-height: 1.5em;
+                    color: $missingColor;
+                }
+            }
+
+            &:hover {
+                svg * {
+                    fill: rgb(105, 105, 105);
+                }
+
+                i.fa-exclamation-triangle {
+                    color: $missingColorHover;
+                }
+            }
+        }
+    }
+}
+
+
+.redux-block-pills {
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            margin: 0px 5px 10px 0;
+            float: left;
+            span {
+                --bg-opacity: 1 !important;
+                background-color: #edf2f7 !important;
+                background-color: rgba(237, 242, 247, var(--bg-opacity)) !important;
+                border-radius: 9999px !important;
+                padding-top: 0.25rem !important;
+                padding-bottom: 0.25rem !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+                --text-opacity: 1 !important;
+                color: #4a5568 !important;
+                color: rgba(74, 85, 104, var(--text-opacity)) !important;
+            }
+        }
+    }
+}
+
+.redux-templates-modal-preview-box {
+    background: #f1f1f1; // To hide the spinner
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.theme-hash {
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+
+    i {
+        cursor: pointer;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .copied {
+        color: #656a6f;
+        position: absolute;
+        line-height: 75%;
+        margin-left: 10px;
+        opacity: 0.6;
+    }
+
+    .the-copy {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .the-hash {
+        border-bottom-left-radius: 0 !important;
+        border-top-left-radius: 0 !important;
+        border-left: 0 !important;
+    }
+
+    .hideMe {
+        -webkit-animation: cssAnimation 3s forwards;
+        animation: cssAnimation 3s forwards;
+    }
+
+    @keyframes cssAnimation {
+        0% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes cssAnimation {
+        0% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+}

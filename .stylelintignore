@@ -1,0 +1,9 @@
+node_modules
+bin
+obj
+*.*
+!*.scss
+*.svg
+*.png
+redux-core/assets/scss/vendor/*.scss
+redux-core/assets/scss/vendor/**/*.scss

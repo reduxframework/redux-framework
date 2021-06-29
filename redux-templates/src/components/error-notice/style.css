@@ -1,0 +1,29 @@
+.redux-templates-error-notice .components-notice {
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  background-color: #e5f5fa;
+  border-left: 4px solid #00a0d2;
+  margin: 5px 15px 2px;
+  padding: 8px 12px;
+  align-items: center;
+  position: absolute;
+  height: 50px;
+  z-index: 9999;
+  width: 50%;
+  right: 0;
+  top: 70px;
+  transition: opacity 2s linear; }
+  .redux-templates-error-notice .components-notice.is-dismissible {
+    padding-right: 0; }
+  .redux-templates-error-notice .components-notice.is-success {
+    border-left-color: #4ab866;
+    background-color: rgba(74, 184, 102, 0.95); }
+  .redux-templates-error-notice .components-notice.is-warning {
+    border-left-color: #f0b849;
+    background-color: rgba(254, 248, 238, 0.95); }
+  .redux-templates-error-notice .components-notice.is-error {
+    border-left-color: #d94f4f;
+    background-color: rgba(249, 226, 226, 0.95); }
+
+/*# sourceMappingURL=style.css.map */

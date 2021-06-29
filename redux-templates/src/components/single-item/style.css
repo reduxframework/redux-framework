@@ -1,0 +1,41 @@
+.redux-templates-single-section-item {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  transition: all 0.05s ease-in-out; }
+  .redux-templates-single-section-item .redux-templates-tmpl-title {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid #f2f4f7;
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    color: #23282d;
+    padding: 13px 15px;
+    font-size: 15px; }
+  .redux-templates-single-section-item .redux-templates-single-item-inner {
+    position: relative;
+    overflow: hidden;
+    background: #999; }
+    .redux-templates-single-section-item .redux-templates-single-item-inner .warn_notice {
+      color: #fbbc0e;
+      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 14px;
+      opacity: 0;
+      text-align: center; }
+    .redux-templates-single-section-item .redux-templates-single-item-inner .redux-templates-default-template-image {
+      max-height: 350px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: 300ms; }
+
+#collections-sections-list.large > div {
+  width: 50%; }
+
+#collections-sections-list.small > div {
+  width: 25%; }
+
+/*# sourceMappingURL=style.css.map */

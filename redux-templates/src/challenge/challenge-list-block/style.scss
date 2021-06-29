@@ -1,0 +1,115 @@
+@import "../variable";
+.challenge-list-block {
+    padding: 15px 20px 20px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.2);
+}
+
+.challenge-bar {
+    border-radius: 20px;
+    background-color: #eee;
+}
+
+.challenge-bar div {
+    width: 0;
+    height: 20px;
+    border-radius: 20px;
+    background-color: $progress-color;
+}
+
+.challenge-list {
+    list-style: none;
+    margin: 17px 0 20px;
+    font-size: 13px;
+
+    li {
+        margin-bottom: 17px;
+        i {
+            display: inline-block;
+            font-size: 18px;
+            color: #d6d6d6;
+            margin-right: 8px;
+            line-height: 15px;
+            vertical-align: bottom;
+            border-radius: 50%;
+        }
+
+        &.challenge-item-current {
+            font-weight: bold;
+        }
+
+        &.challenge-item-current i {
+            color: $item-current-color;
+            font-size: 17.5px;
+            line-height: 1;
+            text-indent: 0.5px;
+        }
+
+        &.challenge-item-completed {
+            font-weight: initial;
+            text-decoration: line-through;
+        }
+
+        &.challenge-item-completed i {
+            color: $item-completed-color;
+            font-size: 18px;
+            background-color: #fff;
+        }
+
+        .dashicons-yes {
+            display: none;
+            vertical-align: middle;
+        }
+    }
+} /* /.challenge-list */
+
+
+button.btn-challenge-start {
+    font-size: 12px;
+    padding: 6px 15px;
+    border: 1px solid $border-color;
+    background-color: $primary-color;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+        background-color: $hover-color;
+    }
+}
+
+.btn-challenge-cancel,
+.btn-challenge-skip {
+    margin: 6px 0;
+    border: 0;
+    text-decoration: underline;
+}
+
+.btn-challenge-cancel,
+.btn-challenge-skip {
+    align-self: flex-end;
+    color: #909090;
+    font-size: 12px;
+    font-weight: normal;
+    background: none;
+}
+
+.wpforms-btn-md {
+    min-height: initial;
+}
+
+.challenge-button-row {
+    display: flex;
+    justify-content: space-between;
+    button {
+        cursor: pointer;
+    }
+}
+.started.challenge-button-row {
+    align-content: space-between;
+    flex-direction: column;
+}

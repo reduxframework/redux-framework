@@ -1,0 +1,104 @@
+.redux-container-sortable {
+    i {
+        &.el,
+        &.dashicons-menu {
+            cursor: move;
+            padding-top: 5px;
+        }
+    }
+
+    label {
+        margin-right: 10px;
+
+        &.bugger {
+            margin-bottom: 0px !important;
+            font-size: 12px !important;
+            color: #999;
+        }
+    }
+
+    input {
+        margin-right: 10px;
+    }
+
+    .checkbox-container {
+        width: 100%;
+
+        label {
+            margin-bottom: 2px !important;
+            cursor: inherit;
+        }
+
+        .drag {
+            float: right;
+            margin-left: 10px;
+        }
+    }
+
+    ul {
+        &.checkbox {
+            li {
+                padding: 5px 10px;
+                border: 1px solid #333;
+                background: #fff;
+                margin-bottom: 5px !important;
+
+                .dashicons.visibility {
+                    padding-top: 4px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+
+                &.invisible {
+                    color: #aaa;
+                    border: 1px dashed #aaa;
+
+                    .dashicons.visibility {
+                        color: #aaa;
+                    }
+                }
+
+            }
+        }
+
+        &.labeled {
+            li {
+                line-height: 1.4em !important;
+            }
+        }
+    }
+
+    li {
+        line-height: 30px !important;
+
+        &.ui-state-highlight {
+            height: 30px;
+            width: 364px;
+            margin-bottom: 13px;
+        }
+
+        &.placeholder {
+            height: 30px;
+            margin: 10px 0;
+        }
+    }
+}
+
+.wp-customizer {
+    .redux-sortable {
+        input[type="text"] {
+            width: 92%;
+        }
+        i.el {
+            margin-left: 5px;
+        }
+    }
+    .redux-container-sortable {
+        .checkbox-container {
+            width: inherit;
+        }
+        .ui-draggable-handle {
+            margin-left: 3%;
+        }
+    }
+}

@@ -1,0 +1,1 @@
+(function(a){a(function(){a("#theme-check > h2").html(a("#theme-check > h2").html()+" with Redux Theme-Check");if(typeof redux_check_intro!=="undefined"){a("#theme-check .theme-check").append(redux_check_intro.text)}a("#theme-check form").append('&nbsp;&nbsp;<input name="redux_wporg" type="checkbox">  Extra WP.org Requirements.')})}(jQuery));
