@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.7.3
-Stable tag: 4.1.28
+Stable tag: 4.1.29
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -151,6 +151,10 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 6. Within each template kit you can see the full page template types.
 
 == Changelog ==
+
+== 4.1.29 ==
+* Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
+* Fixed: Index error in the image_select field.
 
 == 4.1.28 ==
 * Fixed: #217 - Redux templates loading on post types with no block editor.

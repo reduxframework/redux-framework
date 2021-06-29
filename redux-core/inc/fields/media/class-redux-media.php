@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 		 *
 		 * @var bool $filters_enabled .
 		 */
-		private bool $filters_enabled = false;
+		private $filters_enabled = false;
 
 		/**
 		 * Set field and value defaults.

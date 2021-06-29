@@ -22,14 +22,14 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 *
 		 * @var array
 		 */
-		private array $typography_preview = array();
+		private $typography_preview = array();
 
 		/**
 		 *  Standard font array.
 		 *
 		 * @var array $std_fonts
 		 */
-		private array $std_fonts = array(
+		private $std_fonts = array(
 			'Arial, Helvetica, sans-serif'            => 'Arial, Helvetica, sans-serif',
 			'\'Arial Black\', Gadget, sans-serif'     => '\'Arial Black\', Gadget, sans-serif',
 			'\'Bookman Old Style\', serif'            => '\'Bookman Old Style\', serif',
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 *
 		 * @var bool $user_fonts
 		 */
-		private bool $user_fonts = true;
+		private $user_fonts = true;
 
 		/**
 		 * Redux_Field constructor.

@@ -23,28 +23,28 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 		 *
 		 * @var int
 		 */
-		private int $display_none = 0;
+		private $display_none = 0;
 
 		/**
 		 * Label value readout.
 		 *
 		 * @var int
 		 */
-		private int $display_label = 1;
+		private $display_label = 1;
 
 		/**
 		 * Text value readout.
 		 *
 		 * @var int
 		 */
-		private int $display_text = 2;
+		private $display_text = 2;
 
 		/**
 		 * Select box value readout.
 		 *
 		 * @var int
 		 */
-		private int $display_select = 3;
+		private $display_select = 3;
 
 		/**
 		 * Set field and value defaults.

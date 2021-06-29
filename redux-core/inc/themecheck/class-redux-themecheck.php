@@ -23,7 +23,7 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 * @since   1.0.0
 		 * @var     string
 		 */
-		protected string $version = '1.0.0';
+		protected $version = '1.0.0';
 
 		/**
 		 * Instance of this class.

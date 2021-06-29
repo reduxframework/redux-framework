@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.1.29
+* Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
+* Fixed: Index error in the image_select field.
+
 ## 4.1.28
 * Fixed: #217 - Redux templates loading on post types with no block editor.
 * Fixed: #158 - Redux theme checks no longer prevent theme check plugin from functioning.
