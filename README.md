@@ -50,7 +50,7 @@ Field sanitizing allows one to pass an array of function names as an argument to
 
 One may use any existing function including PHP functions, WordPress functions and custom written functions.  The return value of any used function must be that of a string.  Any other return value will be disregarded.
 
-Please view the [sample-config.php](https://github.com/reduxframework/redux-framework-4/blob/master/sample/sample-config.php) file for specific examples.
+Please view the [sample-config.php](https://github.com/reduxframework/redux-framework/blob/master/sample/sample-config.php) file for specific examples.
 
 ### Select2 AJAX Loading
 The AJAX loading routines for the select2 fields have been fixed/finished.  See the 'capabilities' field in the demo panel for an example.  

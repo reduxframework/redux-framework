@@ -5,7 +5,7 @@
  * standards and PHP best practices in mind.
  *
  * Plugin Name:     Redux
- * Plugin URI:      http://wordpress.org/plugins/redux-framework-4
+ * Plugin URI:      http://wordpress.org/plugins/redux-framework
  * GitHub URI:      reduxframework/redux-framework
  * Description:     Build better sites in WordPress fast
  * Author:          Redux.io, Extendify
