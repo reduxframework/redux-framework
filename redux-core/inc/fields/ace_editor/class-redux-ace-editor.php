@@ -95,7 +95,7 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 					// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
 					'//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.4.12/ace.js',
 					array( 'jquery' ),
-					'1.4.2',
+					'1.4.12',
 					true
 				);
 			}

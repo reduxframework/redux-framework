@@ -193,7 +193,7 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 		 */
 		private function make_option( string $id, $value, string $group_name = '' ) {
 			if ( is_array( $this->value ) ) {
-				$selected = ( is_array( $this->value ) && in_array( $id, $this->value, true ) ) ? ' selected="selected"' : '';
+				$selected = ( in_array( $id, $this->value, true ) ) ? ' selected="selected"' : '';
 			} else {
 				$selected = selected( $this->value, $id, false );
 			}

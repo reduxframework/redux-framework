@@ -179,7 +179,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'select2-css',
 				Redux_Core::$url . 'assets/css/vendor/select2.min.css',
 				array(),
-				'4.0.5',
+				'4.1.0',
 				'all'
 			);
 
@@ -295,7 +295,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'select2-js',
 				Redux_Core::$url . 'assets/js/vendor/select2/select2' . $this->min . '.js`',
 				array( 'jquery', 'redux-select2-sortable-js' ),
-				'4.0.5',
+				'4.1.0',
 				true
 			);
 

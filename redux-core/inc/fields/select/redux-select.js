@@ -1,4 +1,4 @@
-/*global redux_change, redux, ajaxurl*/
+/* global redux_change, redux, ajaxurl, jQuery */
 
 (function( $ ) {
 	'use strict';
@@ -109,17 +109,19 @@
 						el.find( '.select2-search__field' ).width( 'auto' );
 
 						if ( $( this ).hasClass( 'select2-sortable' ) ) {
+
 							default_params                 = {};
 							default_params.bindOrder       = 'sortableStop';
-							default_params.sortableOptions = { placeholder: 'ui-state-highlight' };
+							default_params.sortableOptions = { axis: 'x', placeholder: false };
 
 							$( this ).select2Sortable( default_params );
 						}
 
 						$( this ).on(
-							'change',
+							'select2:select',
 							function() {
 								redux_change( $( $( this ) ) );
+
 								$( this ).select2SortableOrder();
 							}
 						);

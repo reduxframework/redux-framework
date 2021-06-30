@@ -9,5 +9,5 @@
     background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Opera 12
     background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
     background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#{ie-hex-str($start-color)}", endColorstr="#{ie-hex-str($end-color)}", GradientType=0); // IE9 and down
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down
 }
