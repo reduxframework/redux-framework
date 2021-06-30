@@ -152,11 +152,11 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
-== 4.1.29 ==
+= 4.1.29 =
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
 * Fixed: Index error in the image_select field.
 
-== 4.1.28 ==
+= 4.1.28 =
 * Fixed: #217 - Redux templates loading on post types with no block editor.
 * Fixed: #158 - Redux theme checks no longer prevent theme check plugin from functioning.
 * Fixed: #215 - Heatbeat check no longer eats the function if disregarded.
@@ -168,7 +168,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Modified: buttonset() jQuery widget deprecated.  Replaced with controlgroup().
 * Modified: Additional JavaScript updates to fix jQuery deprecation notices.
 
-== 4.1.27 ==
+= 4.1.27 =
 * Fixed: Image select not selecting default value.
 * Modified: #209 - Link color field overridden by theme.  Added 'important' arg to the output array to fix.  See sample config.
 * Fixed: #208 - Same config not setting footer background in Twenty-twenty theme due to incorrect class.
@@ -176,7 +176,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Modified: #210 - Donation text removed.
 * Fixed: #206 - Link color CSS compiling incorrectly due to late escaping.
 
-== 4.1.26 ==
+= 4.1.26 =
 * Added: Menu accent introduced in WordPress 5.7.
 * Updated: ACE Editor 1.4.12.
 * Updated select2 to support cssContainer.
@@ -189,14 +189,14 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Malformed SCSS.
 * Release date: March 17, 2021
 
-== 4.1.25 ==
+= 4.1.25 =
 * Fixed: Erroneous icon on button_set field after WP 5.6 update.
 * Fixed: Erroneous icon on palette field after WP 5.6 update.
 * Fixed: PHP error in init_delay function during heartbeat API.
 * Fixed: Options object field not rendering.
 * Release date: Jan 21, 2021
 
-== 4.1.24 ==
+= 4.1.24 =
 * Fixed: Select2 callback fix for select fields.
 * Added: Shim: empty field_*.php files to fix developers including files improperly.
 * Fixed: Changed use of ctype_xdigit to account for hosts where it's disabled.
@@ -209,7 +209,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Pro template count error if previously activated and Redux Pro not enabled.
 * Release date: Dec 12, 2020
 
-== 4.1.23 ==
+= 4.1.23 =
 * Fixed: Massive speed improvement to the library.
 * Fixed: Pro template count error if previously activated and Redux Pro not enabled.
 * Release date: Oct 24, 2020
