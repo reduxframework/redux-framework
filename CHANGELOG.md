@@ -1,5 +1,11 @@
 # Redux Changelog
 
+## 4.1.30 RC
+* Updated: select2 library to 4.1.0.
+* Updated: readme.txt to conform to wp.org standards.
+* Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
+* Added:  WordPress 5.8 compatibility.
+
 ## 4.1.29
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
 * Fixed: Index error in the image_select field.
