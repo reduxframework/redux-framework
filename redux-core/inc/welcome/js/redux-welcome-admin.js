@@ -16,24 +16,27 @@ $.redux_welcome = $.redux_welcome || {};
 	);
 
 	$.redux_welcome.supportHash = function() {
-		$( '#support_hash' ).focus(
+		$( '#support_hash' ).on(
+			'focus',
 			function() {
 				var $this = $( this );
-				$this.select();
+				$this.trigger( 'select' );
 
 				// Work around Chrome's little problem.
-				$this.mouseup(
+				$this.on(
+					'mouseup',
 					function() {
 
 						// Prevent further mouseup intervention.
-						$this.unbind( 'mouseup' );
+						$this.off( 'mouseup' );
 						return false;
 					}
 				);
 			}
 		);
 
-		$( '.redux_support_hash' ).click(
+		$( '.redux_support_hash' ).on(
+			'click',
 			function( e ) {
 				var $nonce;
 
@@ -72,7 +75,7 @@ $.redux_welcome = $.redux_welcome || {};
 						success: function( response ) {
 							if ( 'success' === response.status ) {
 								$( '#support_hash' ).val( 'https://support.redux.io/?id=' + response.identifier );
-								$button.parents( 'fieldset:first' ).find( '.next' ).removeAttr( 'disabled' ).click();
+								$button.parents( 'fieldset:first' ).find( '.next' ).prop( 'disabled', false ).trigger( 'click' );
 							} else {
 								window.console.log( response );
 								alert( 'There was an error. Please try again later.' );
@@ -132,23 +135,26 @@ $.redux_welcome = $.redux_welcome || {};
 			}
 		);
 
-		$( '#is_user' ).click(
+		$( '#is_user' ).on(
+			'click',
 			function() {
 				$( '#final_support .is_user' ).show();
 				$( '#final_support .is_developer' ).hide();
-				$( this ).parents( 'fieldset:first' ).find( '.next' ).click();
+				$( this ).parents( 'fieldset:first' ).find( '.next' ).trigger( 'click' );
 			}
 		);
 
-		$( '#is_developer' ).click(
+		$( '#is_developer' ).on(
+			'click',
 			function() {
 				$( '#final_support .is_user' ).hide();
 				$( '#final_support .is_developer' ).show();
-				$( this ).parents( 'fieldset:first' ).find( '.next' ).click();
+				$( this ).parents( 'fieldset:first' ).find( '.next' ).trigger( 'click' );
 			}
 		);
 
-		$( '#support_div .next' ).click(
+		$( '#support_div .next' ).on(
+			'click',
 			function() {
 				if ( animating ) {
 					return false;
@@ -194,7 +200,8 @@ $.redux_welcome = $.redux_welcome || {};
 			}
 		);
 
-		$( '#support_div .previous' ).click(
+		$( '#support_div .previous' ).on(
+			'click',
 			function() {
 				if ( animating ) {
 					return false;
