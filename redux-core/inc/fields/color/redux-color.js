@@ -39,7 +39,7 @@
 
 							redux_change( $( this ) );
 
-							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).prop( 'checked', false );
 						}, clear: function() {
 							$( this ).val( '' );
 
@@ -94,7 +94,7 @@
 								}
 							}
 
-							el.find( id + '-transparency' ).removeAttr( 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', false );
 						}
 					}
 				);

@@ -58,7 +58,7 @@
 						} else {
 							contentNewTitle = $( this ).parent( '.redux-slides-accordion' ).data( 'new-content-title' );
 
-							$( this ).parents( '.redux-slides-accordion-group:first' ).find( '.remove-image' ).click();
+							$( this ).parents( '.redux-slides-accordion-group:first' ).find( '.remove-image' ).trigger( 'click' );
 							$( this ).parents( '.redux-container-slides:first' ).find( '.redux-slides-accordion-group:last' ).find( '.redux-slides-header' ).text( contentNewTitle );
 						}
 					}
