@@ -214,7 +214,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'qtip-css',
 				Redux_Core::$url . "assets/css/vendor/qtip{$this->min}.css",
 				array(),
-				'2.2.0',
+				'3.0.3',
 				'all'
 			);
 
@@ -306,7 +306,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'qtip-js',
 				Redux_Core::$url . 'assets/js/vendor/qtip/qtip' . $this->min . '.js',
 				array( 'jquery' ),
-				'2.2.0',
+				'3.0.3',
 				true
 			);
 
