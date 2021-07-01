@@ -40,14 +40,22 @@ class Templates {
 				return;
 		}
 
+		// Include ReduxTemplates default template without wrapper.
+		add_filter( 'template_include', array( $this, 'template_include' ) );
+
+		// Override the default content-width when using Redux templates so the template doesn't look like crao.
+		add_action( 'wp', array( $this, 'modify_template_content_width' ) );
+
+		add_action( 'current_screen', array( $this, 'redux_templates' ) );
+
+		add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 999 );
+
+	}
+
+	public function redux_templates( $current_screen ){
 		if ( ! $this->is_gutenberg_page() ) {
 			return;
 		}
-
-		// Include ReduxTemplates default template without wrapper.
-		add_filter( 'template_include', array( $this, 'template_include' ) );
-		// Override the default content-width when using Redux templates so the template doesn't look like crao.
-		add_action( 'wp', array( $this, 'modify_template_content_width' ) );
 
 		// Add ReduxTemplates supported Post type in page template.
 		$post_types = get_post_types();
@@ -57,9 +65,6 @@ class Templates {
 				add_filter( "theme_{$post_type}_templates", array( $this, 'add_templates' ) );
 			}
 		}
-
-		add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 999 );
-
 	}
 
 	/**
