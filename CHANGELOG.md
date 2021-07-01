@@ -6,6 +6,7 @@
 * Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
 * Fixed: Redux tempates not showing on 'page attributes' for some.
 * Added:  WordPress 5.8 compatibility.
+* Improved: Better Gutenberg block editor detection.
 
 ## 4.1.29
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.

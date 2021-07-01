@@ -46,50 +46,19 @@ class Templates {
 		// Override the default content-width when using Redux templates so the template doesn't look like crao.
 		add_action( 'wp', array( $this, 'modify_template_content_width' ) );
 
-		add_action( 'current_screen', array( $this, 'redux_templates' ) );
-
-		add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 999 );
-
-	}
-
-	public function redux_templates( $current_screen ){
-		if ( ! $this->is_gutenberg_page() ) {
-			return;
-		}
-
 		// Add ReduxTemplates supported Post type in page template.
-		$post_types = get_post_types();
+		$post_types = get_post_types( array(), 'object' );
 
 		if ( ! empty( $post_types ) ) {
 			foreach ( $post_types as $post_type ) {
-				add_filter( "theme_{$post_type}_templates", array( $this, 'add_templates' ) );
+				if ( isset( $post_type->name ) && isset($post_type->show_in_rest) && $post_type->show_in_rest === true ) {
+					add_filter( "theme_{$post_type->name}_templates", array( $this, 'add_templates' ) );
+				}
 			}
 		}
-	}
 
-	/**
-	 * Is Gutenburg loaded via WordPress core.
-	 *
-	 * @return bool
-	 */
-	public function is_gutenberg_page(): bool {
-		if ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) {
-			// The Gutenberg plugin is on.
-			return true;
-		}
+		add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 999 );
 
-		if ( ! function_exists( 'get_current_screen' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/screen.php';
-		}
-
-		$current_screen = get_current_screen();
-
-		if ( isset( $current_screen ) && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() ) {
-			// Gutenberg page on 5+.
-			return true;
-		}
-
-		return false;
 	}
 
 	/**
