@@ -640,6 +640,26 @@
     width: 202px;
     float: left;
 
+    // Flyout menu
+    .redux-group-tab-link-li {
+        &.hasSubSections {
+            &:hover {
+                .el-rotate {
+                    -webkit-transition: 0.1s ease-in-out;
+                    -moz-transition: 0.1s ease-in-out;
+                    -o-transition: 0.1s ease-in-out;
+                    transition: 0.1s ease-in-out;
+
+                    -webkit-transform: rotate(270deg);
+                    -moz-transform: rotate(270deg);
+                    -ms-transform: rotate(270deg);
+                    -o-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                }
+            }
+        }
+    }
+
     .redux-group-menu {
         margin-top: 0 !important;
         background: #f2f2f2;
@@ -1034,6 +1054,28 @@ pre {
 
 #redux-header {
     position: relative;
+}
+
+// Iris alpha color picker.
+.redux-main {
+    .iris-picker {
+        .iris-slider-offset {
+            width: 17px!important;
+        }
+
+        .iris-slider {
+            width: 17px!important;
+        }
+
+        .iris-alpha-slider {
+            width: 16px!important;
+        }
+
+        .iris-strip .ui-slider-handle {
+            right: -10px!important;
+            left: 1px!important;
+        }
+    }
 }
 
 // Modern Theme
