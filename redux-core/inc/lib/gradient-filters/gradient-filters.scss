@@ -1,0 +1,71 @@
+.redux-main {
+    .redux-gradient-preview {
+        height: 150px;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+
+    .redux-gradient-slider {
+        margin-top: 10px;
+        margin-right: 35px;
+    }
+
+    .redux-gradient-type, div.colorGradient{
+        vertical-align: top;
+        .wp-picker-container, .color-transparency-check {
+            display: inline;
+        }
+    }
+
+    .redux-gradient-type {
+        margin-right: 20px;
+
+        select {
+            width: 100px;
+        }
+    }
+
+    .slider-gradient-angle {
+        width: 33%!important;
+        margin-top: 10px;
+
+        input {
+            width: 33%;
+        }
+    }
+
+    .slider-from-reach,
+    .slider-to-reach,
+    .slider-gradient-angle {
+        margin-top: 10px;
+        width: 33%;
+
+        label {
+            display: block;
+            position: relative;
+            font-size: 12px !important;
+            text-align: left;
+            color: #999999;
+            margin: 4px 0 2px 0 !important;
+            cursor: default;            
+        }
+
+        input:not(.slider-gradient-angle) {
+            width: 90%;
+        }
+    }
+
+    .slider-to-reach,
+    .slider-from-reach,
+    .slider-gradient-angle {
+        display: inline-block;
+        margin-bottom: 10px;
+
+        strong {
+            margin-bottom: 5px;
+            margin-left: 3px;
+            font-size: 12px;
+            color: #999;
+        }
+    }   
+}
