@@ -362,6 +362,7 @@ require_once Redux_Core::$dir . '../sample/sections/color-selection/color-gradie
 require_once Redux_Core::$dir . '../sample/sections/color-selection/color-rgba.php';
 require_once Redux_Core::$dir . '../sample/sections/color-selection/link-color.php';
 require_once Redux_Core::$dir . '../sample/sections/color-selection/palette.php';
+require_once Redux_Core::$dir . '../sample/sections/color-selection/color-palette.php';
 
 // -> START Design Fields.
 Redux::set_section(

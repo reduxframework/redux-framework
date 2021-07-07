@@ -230,7 +230,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Custom callback with select field.
 * Fixed: Typography bug when style was hidden.
 * Fixed: Issue with text labels.
-* Fixed: Google fonts html validation issues.
+* Fixed: Google fonts HTML validation issues.
 * Added: Feedback modal.
 * Fixed: Import logic flaw.
 * Fixed: Security bug. Thanks, @lenonleite of www.lenonleite.com.br.

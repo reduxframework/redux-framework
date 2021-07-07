@@ -50,7 +50,7 @@ Redux::set_section(
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#F44336',
 				'options'  => array(
-					'colors' => Redux_Pro_Helpers::get_material_design_colors( 'all' ),
+					'colors' => Redux_Helpers::get_material_design_colors( 'all' ),
 					'size'   => 17,
 				),
 			),
@@ -62,7 +62,7 @@ Redux::set_section(
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#000000',
 				'options'  => array(
-					'colors'     => Redux_Pro_Helpers::get_material_design_colors( 'primary' ),
+					'colors'     => Redux_Helpers::get_material_design_colors(),
 					'size'       => 25,
 					'box-shadow' => true,
 					'margin'     => true,
@@ -76,7 +76,7 @@ Redux::set_section(
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#FF1744',
 				'options'  => array(
-					'colors' => Redux_Pro_Helpers::get_material_design_colors( 'red' ),
+					'colors' => Redux_Helpers::get_material_design_colors( 'red' ),
 					'size'   => 25,
 				),
 			),
@@ -88,7 +88,7 @@ Redux::set_section(
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#FF80AB',
 				'options'  => array(
-					'colors' => Redux_Pro_Helpers::get_material_design_colors( 'A100' ),
+					'colors' => Redux_Helpers::get_material_design_colors( 'A100' ),
 					'size'   => 60,
 					'style'  => 'round',
 				),
