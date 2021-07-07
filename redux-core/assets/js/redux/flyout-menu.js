@@ -1,4 +1,4 @@
-/* global redux */
+/* global redux, jQuery */
 
 (function( $ ) {
 	'use strict';
@@ -7,7 +7,7 @@
 
 	$( document ).ready(
 		function() {
-			if ( 'undefined' !== typeof redux ) {
+			if ( undefined === typeof redux.field_objects.pro ) {
 				$.redux.flyoutSubmenus();
 			}
 		}

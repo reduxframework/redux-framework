@@ -175,6 +175,9 @@ $args = array(
 	// Set the theme of the option panel.  Use 'wp' to use a more modern style, default is classic.
 	'admin_theme'               => 'wp',
 
+	// Enable or disable flyout menus when hovering over a menu with submenus.
+	'flyout_submenus'           => true,
+
 	// HINTS.
 	'hints'                     => array(
 		'icon'          => 'el el-question-sign',
@@ -607,15 +610,14 @@ Redux::set_section(
 // .
 if ( ! function_exists( 'compiler_action' ) ) {
 	/**
-	 *
 	 * This is a test function that will let you see when the compiler hook occurs.
 	 * It only runs if a field's value has changed and compiler=>true is set.
 	 *
 	 * @param array  $options        Options values.
 	 * @param string $css            Compiler selector CSS values  compiler => array( CSS SELECTORS ).
-	 * @param array  $changed_values Values changed since last save.
+	 * @param array  $changed_values Any values changed since last save.
 	 */
-	function compiler_action( $options, $css, $changed_values ) {
+	function compiler_action( array $options, string $css, array $changed_values ) {
 		echo '<h1>The compiler hook has run!</h1>';
 		echo '<pre>';
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions
@@ -636,9 +638,9 @@ if ( ! function_exists( 'redux_validate_callback_function' ) ) {
 	 * @param mixed $value          New value.
 	 * @param mixed $existing_value Existing value.
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	function redux_validate_callback_function( $field, $value, $existing_value ) {
+	function redux_validate_callback_function( array $field, $value, $existing_value ): array {
 		$error   = false;
 		$warning = false;
 
@@ -673,13 +675,13 @@ if ( ! function_exists( 'dynamic_section' ) ) {
 	 * Custom function for filtering the sections array. Good for child themes to override or add to the sections.
 	 * Simply include this function in the child themes functions.php file.
 	 * NOTE: the defined constants for URLs, and directories will NOT be available at this point in a child theme,
-	 * so you must use get_template_directory_uri() if you want to use any of the built in icons.
+	 * so you must use get_template_directory_uri() if you want to use any of the built-in icons.
 	 *
 	 * @param array $sections Section array.
 	 *
 	 * @return array
 	 */
-	function dynamic_section( $sections ) {
+	function dynamic_section( array $sections ): array {
 		$sections[] = array(
 			'title'  => esc_html__( 'Section via hook', 'your-textdomain-here' ),
 			'desc'   => '<p class="description">' . esc_html__( 'This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.', 'your-textdomain-here' ) . '</p>',
@@ -702,7 +704,7 @@ if ( ! function_exists( 'change_arguments' ) ) {
 	 *
 	 * @return array
 	 */
-	function change_arguments( $args ) {
+	function change_arguments( array $args ): array {
 		$args['dev_mode'] = true;
 
 		return $args;
@@ -717,7 +719,7 @@ if ( ! function_exists( 'change_defaults' ) ) {
 	 *
 	 * @return array
 	 */
-	function change_defaults( $defaults ) {
+	function change_defaults( array $defaults ): array {
 		$defaults['str_replace'] = esc_html__( 'Testing filter hook!', 'your-textdomain-here' );
 
 		return $defaults;
@@ -727,14 +729,13 @@ if ( ! function_exists( 'change_defaults' ) ) {
 if ( ! function_exists( 'redux_custom_sanitize' ) ) {
 	/**
 	 * Function to be used if the field santize argument.
-	 *
 	 * Return value MUST be the formatted or cleaned text to display.
 	 *
 	 * @param string $value Value to evaluate or clean.  Required.
 	 *
 	 * @return string
 	 */
-	function redux_custom_sanitize( $value ) {
+	function redux_custom_sanitize( string $value ): string {
 		$return = '';
 
 		foreach ( explode( ' ', $value ) as $w ) {
@@ -745,6 +746,7 @@ if ( ! function_exists( 'redux_custom_sanitize' ) ) {
 					$return .= $v;
 				}
 			}
+
 			$return .= ' ';
 		}
 

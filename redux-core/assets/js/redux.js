@@ -373,7 +373,7 @@ function colorNameToHex( colour ) {
 	};
 })( jQuery );
 
-/* global redux */
+/* global redux, jQuery */
 
 (function( $ ) {
 	'use strict';
@@ -382,7 +382,7 @@ function colorNameToHex( colour ) {
 
 	$( document ).ready(
 		function() {
-			if ( 'undefined' !== typeof redux ) {
+			if ( undefined === typeof redux.field_objects.pro ) {
 				$.redux.flyoutSubmenus();
 			}
 		}

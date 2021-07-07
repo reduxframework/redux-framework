@@ -1058,22 +1058,11 @@ pre {
 
 // Iris alpha color picker.
 .redux-main {
-    .iris-picker {
-        .iris-slider-offset {
-            width: 17px!important;
-        }
-
-        .iris-slider {
-            width: 17px!important;
-        }
-
-        .iris-alpha-slider {
-            width: 16px!important;
-        }
-
-        .iris-strip .ui-slider-handle {
-            right: -10px!important;
-            left: 1px!important;
+    .alpha-enabled {
+        .iris-picker {
+            .iris-strip .ui-slider-handle {
+                right: 7px!important;
+            }
         }
     }
 }
