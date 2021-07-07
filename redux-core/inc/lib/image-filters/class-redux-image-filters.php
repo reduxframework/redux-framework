@@ -1,20 +1,20 @@
 <?php
 /**
- * Redux Pro Image Filters Class
+ * Redux Image Filters Class
  *
- * @class Redux_Pro_Includes
- * @version 1.0.0
- * @package Redux Pro
+ * @class Redux_Includes
+ * @version 4.1.30
+ * @package Redux Framework
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Redux_Pro_Image_Filters' ) ) {
+if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 
 	/**
-	 * Class Redux_Pro_Image_Filters
+	 * Class Redux_Image_Filters
 	 */
-	class Redux_Pro_Image_Filters {
+	class Redux_Image_Filters {
 
 		/**
 		 * Render preview.
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Redux_Pro_Image_Filters' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function render( $data ) {
+		public static function render( array $data ): string {
 			extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$output = '';
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Redux_Pro_Image_Filters' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function get_filter_unit( $filter ) {
+		public static function get_filter_unit( string $filter ): string {
 			if ( 'grayscale' === $filter || 'invert' === $filter || 'brightness' === $filter || 'contrast' === $filter ) {
 				return '%';
 			} elseif ( 'blur' === $filter ) {
@@ -146,10 +146,10 @@ if ( ! class_exists( 'Redux_Pro_Image_Filters' ) ) {
 		/**
 		 * Enqueue suport files.
 		 *
-		 * @param array $field Option field.
+		 * @param array $field           Option field.
 		 * @param bool  $filters_enabled Filtered enabled bit.
 		 */
-		public static function enqueue( $field, $filters_enabled ) {
+		public static function enqueue( array $field, bool $filters_enabled ) {
 			$min = Redux_Functions::is_min();
 
 			if ( $filters_enabled ) {
@@ -158,8 +158,7 @@ if ( ! class_exists( 'Redux_Pro_Image_Filters' ) ) {
 						'redux-nouislider-css',
 						Redux_Core::$url . 'assets/css/vendor/nouislider/redux.jquery.nouislider.css',
 						array(),
-						'5.0.0',
-						'all'
+						'5.0.0'
 					);
 
 					wp_enqueue_script(
@@ -172,19 +171,18 @@ if ( ! class_exists( 'Redux_Pro_Image_Filters' ) ) {
 				}
 
 				wp_enqueue_script(
-					'redux-pro-image-filters-js',
-					Redux_Pro::$url . 'core/inc/lib/image-filters/image-filters' . $min . '.js',
+					'redux-image-filters-js',
+					Redux_Core::$url . 'inc/lib/image-filters/image-filters' . $min . '.js',
 					array( 'jquery' ),
-					Redux_Pro::$version,
+					Redux_Core::$version,
 					true
 				);
 
 				wp_enqueue_style(
-					'redux-pro-image-filters-css',
-					Redux_Pro::$url . 'core/inc/lib/image-filters/image-filters.css',
+					'redux-image-filters-css',
+					Redux_Core::$url . 'inc/lib/image-filters/image-filters.css',
 					array(),
-					Redux_Pro::$version,
-					'all'
+					Redux_Core::$version
 				);
 			}
 		}

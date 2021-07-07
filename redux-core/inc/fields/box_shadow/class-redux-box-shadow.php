@@ -225,9 +225,9 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 		 *
 		 * @param string $data Data.
 		 *
-		 * @return string|void
+		 * @return string
 		 */
-		public function css_style( $data ) {
+		public function css_style( $data ): string {
 			$css = '';
 
 			if ( $this->field['inset-shadow'] ) {
@@ -271,7 +271,7 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 
 		/**
 		 * Enqueue Function.
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 * If this field requires any scripts, or CSS define this function and register/enqueue the scripts/css
 		 *
 		 * @since       1.0.0
 		 * @access      public
@@ -302,8 +302,7 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 				'redux-nouislider-css',
 				Redux_Core::$url . 'assets/css/vendor/nouislider' . $min . '.css',
 				array(),
-				'5.0.0',
-				'all'
+				'5.0.0'
 			);
 
 			wp_enqueue_script(
@@ -319,8 +318,7 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 					'redux-field-box-shadow-css',
 					Redux_Core::$url . 'inc/fields/box_shadow/redux-box-shadow.css',
 					array(),
-					time(),
-					'all'
+					time()
 				);
 
 				wp_enqueue_style( 'redux-color-picker-css' );

@@ -3,7 +3,7 @@
 	Author:  Kevin Provnace (kprovance)
  */
 
-/* global jQuery, document, redux */
+/* global jQuery, document, redux, redux_change */
 
 (function( $ ) {
 	'use strict';

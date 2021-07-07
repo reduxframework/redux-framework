@@ -3,11 +3,10 @@
 (function( $ ) {
 	'use strict';
 
-	redux.field_objects                   = redux.field_objects || {};
-	redux.field_objects.pro               = redux.field_objects.pro || {};
-	redux.field_objects.pro.image_filters = redux.field_objects.pro.image_filters || {};
+	redux.field_objects               = redux.field_objects || {};
+	redux.field_objects.image_filters = redux.field_objects.image_filters || {};
 
-	redux.field_objects.pro.image_filters.sliderInit = function( el, mode ) {
+	redux.field_objects.image_filters.sliderInit = function( el, mode ) {
 		el.find( '.redux-' + mode + '-slider' ).each(
 			function() {
 				var mainID = $( this ).data( 'id' );
@@ -58,7 +57,7 @@
 		);
 	};
 
-	redux.field_objects.pro.image_filters.changeValue = function( el, update, mode ) {
+	redux.field_objects.image_filters.changeValue = function( el, update, mode ) {
 		var parent    = el.parents( '.redux-container-' + mode );
 		var container = parent.find( '.redux-' + mode + '-filter-container' );
 
@@ -115,7 +114,7 @@
 		}
 	};
 
-	redux.field_objects.pro.image_filters.checkbox = function( el, mode ) {
+	redux.field_objects.image_filters.checkbox = function( el, mode ) {
 		el.find( '.checkbox' ).on(
 			'click',
 			function() {

@@ -23,7 +23,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function render_select( $data ) {
+		public static function render_select( array $data ): string {
 			extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$output = '';
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function render_sliders( $data ) {
+		public static function render_sliders( array $data ): string {
 			extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$output = '';
@@ -165,7 +165,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function render_preview( $data ) {
+		public static function render_preview( array $data ): string {
 			extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$output = '';
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function get_output( $data ) {
+		public static function get_output( array $data ) {
 			if ( ! is_array( $data ) ) {
 				return $data;
 			}
@@ -216,10 +216,10 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		/**
 		 * Enqueue support files.
 		 *
-		 * @param array $field Field array.
+		 * @param array $field           Field array.
 		 * @param bool  $filters_enabled Enbale filter bit.
 		 */
-		public static function enqueue( $field, $filters_enabled ) {
+		public static function enqueue( array $field, bool $filters_enabled ) {
 			$min = Redux_Functions::is_min();
 
 			if ( $filters_enabled ) {
@@ -238,8 +238,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 						'redux-nouislider-css',
 						Redux_Core::$url . 'assets/css/vendor/nouislider' . $min . '.css',
 						array(),
-						'5.0.0',
-						'all'
+						'5.0.0'
 					);
 
 					wp_enqueue_script(
@@ -263,8 +262,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 					'redux-gradient-filters-css',
 					Redux_Core::$url . 'inc/lib/gradient-filters/gradient-filters.css',
 					array(),
-					Redux_Core::$version,
-					'all'
+					Redux_Core::$version
 				);
 			}
 		}
