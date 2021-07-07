@@ -93,15 +93,12 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				echo 'type="text"';
 				echo 'data-default-color="' . esc_attr( $this->field['default'][ $mode ] ) . '"';
 
-				if ( Redux_Core::$pro_loaded ) {
-					$data = array(
-						'field' => $this->field,
-						'index' => $mode,
-					);
+				$data = array(
+					'field' => $this->field,
+					'index' => $mode,
+				);
 
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-					echo apply_filters( 'redux/pro/render/color_alpha', $data );
-				}
+				echo Redux_Functions_Ex::output_alpha_data( $data);
 
 				echo '>';
 
@@ -150,9 +147,10 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				true
 			);
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				do_action( 'redux/pro/color_gradient/enqueue' );
+			if ( isset( $this->field['color_alpha'] ) && $this->field['color_alpha'] ) {
+				if ( ! wp_script_is( 'redux-wp-color-picker-alpha-js' ) ) {
+					wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
+				}
 			}
 
 			if ( $this->parent->args['dev_mode'] ) {

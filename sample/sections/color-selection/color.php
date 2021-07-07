@@ -28,13 +28,13 @@ Redux::set_section(
 				'color_alpha' => true,
 			),
 			array(
-				'id'       => 'opt-color-footer',
-				'type'     => 'color',
-				'title'    => esc_html__( 'Footer Background Color', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'Pick a background color for the footer (default: #dd9933).', 'your-textdomain-here' ),
-				'default'  => '#dd9933',
-				'validate' => 'color',
-				'output'   => array(
+				'id'          => 'opt-color-footer',
+				'type'        => 'color',
+				'title'       => esc_html__( 'Footer Background Color', 'your-textdomain-here' ),
+				'subtitle'    => esc_html__( 'Pick a background color for the footer (default: #dd9933).', 'your-textdomain-here' ),
+				'default'     => '#dd9933',
+				'validate'    => 'color',
+				'output'      => array(
 					'background-color' => '.footer, #site-footer, .site-footer',
 				),
 			),

@@ -102,15 +102,12 @@ if ( ! class_exists( 'Redux_Background', false ) ) {
 				echo 'type="text" value="' . esc_attr( $this->value['background-color'] ) . '"';
 				echo 'data-default-color="' . esc_attr( $def_bg_color ) . '"';
 
-				if ( Redux_Core::$pro_loaded ) {
-					$data = array(
-						'field' => $this->field,
-						'index' => 'color',
-					);
+				$data = array(
+					'field' => $this->field,
+					'index' => 'color',
+				);
 
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-					echo apply_filters( 'redux/pro/render/color_alpha', $data );
-				}
+				echo Redux_Functions_Ex::output_alpha_data( $data);
 
 				echo '>';
 

@@ -15,7 +15,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 
 	/**
 	 * Redux Functions Class
-	 * Class of useful functions that can/should be shared among all Redux files.
+	 * A Class of useful functions that can/should be shared among all Redux files.
 	 *
 	 * @since       3.0.0
 	 */
@@ -29,17 +29,39 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		public static $args;
 
 		/**
+		 * Output alpha data tag for Iris alpha color picker, if enabled.
+		 *
+		 * @param array $data Data array.
+		 *
+		 * @return string
+		 */
+		public static function output_alpha_data( array $data ): string {
+			extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract
+
+			$value = false;
+
+			if ( isset( $field['color_alpha'] ) && $field['color_alpha'] ) {
+				if ( is_array( $field['color_alpha'] ) ) {
+					$value = $field['color_alpha'][ $index ] ?? false;
+				} else {
+					$value = $field['color_alpha'];
+				}
+			}
+
+			return 'data-alpha-enabled="' . (bool) $value . '"';
+		}
+
+		/**
 		 * Parses the string into variables without the max_input_vars limitation.
 		 *
-		 * @since   3.5.7.11
-		 *
 		 * @param     string $string String of data.
-		 *
+				  *
 		 * @return  array|false $result
+		 * @since   3.5.7.11
 		 * @author  harunbasic
 		 * @access  private
 		 */
-		public static function parse_str( $string ) {
+		public static function parse_str( string $string ) {
 			if ( '' === $string ) {
 				return false;
 			}
@@ -76,7 +98,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @author  harunbasic
 		 * @access  private
 		 */
-		public static function array_merge_recursive_distinct( array $array1, array $array2 ) {
+		public static function array_merge_recursive_distinct( array $array1, array $array2 ): array {
 			$merged = $array1;
 
 			foreach ( $array2 as $key => $value ) {
@@ -96,9 +118,9 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Records calling function.
 		 *
-		 * @param     string $opt_name Panel opt_name.
+		 * @param string $opt_name Panel opt_name.
 		 */
-		public static function record_caller( $opt_name = '' ) {
+		public static function record_caller( string $opt_name = '' ) {
 			global $pagenow;
 
 			// phpcs:ignore WordPress.Security.NonceVerification
@@ -131,11 +153,11 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Normalize path.
 		 *
-		 * @param     string $path Path to normalize.
+		 * @param string $path Path to normalize.
 		 *
-		 * @return mixed|null|string|string[]
+		 * @return string|string[]|null
 		 */
-		public static function wp_normalize_path( $path = '' ) {
+		public static function wp_normalize_path( string $path = '' ) {
 			if ( function_exists( 'wp_normalize_path' ) ) {
 				$path = wp_normalize_path( $path );
 			} else {
@@ -169,19 +191,21 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Run URL through a ssl check.
 		 *
-		 * @param     string $url URL to check.
+		 * @param string $url URL to check.
 		 *
 		 * @return string
 		 */
-		public static function verify_url_protocol( $url ) {
+		public static function verify_url_protocol( string $url ): string {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$protocol = ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] || ( ! empty( $_SERVER['SERVER_PORT'] ) && 443 === $_SERVER['SERVER_PORT'] ) ? 'https://' : 'http://';
+
 			if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$new_protocol = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) . '://'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				if ( 'http://' === $protocol && $new_protocol !== $protocol && false === strpos( $url, $new_protocol ) ) {
 					$url = str_replace( $protocol, $new_protocol, $url );
 				}
 			}
+
 			return $url;
 		}
 
@@ -192,7 +216,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @since 4.0.0
 		 * @return bool
 		 */
-		public static function s() {
+		public static function s(): bool {
 			if ( ! get_option( 'redux_p' . 'ro_lic' . 'ense_key', false ) ) { // phpcs:ignore Generic.Strings.UnnecessaryStringConcat.Found
 				$s = get_option( 'redux_p' . 'ro_l' . 'icense_status', false ); // phpcs:ignore Generic.Strings.UnnecessaryStringConcat.Found
 
@@ -207,27 +231,28 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Is file in theme.
 		 *
-		 * @param     string $file File to check.
+		 * @param string $file File to check.
 		 *
 		 * @return bool
 		 */
-		public static function file_in_theme( $file ) {
+		public static function file_in_theme( string $file ): bool {
 			if ( strpos( dirname( $file ), get_template_directory() ) !== false ) {
 				return true;
 			} elseif ( strpos( dirname( $file ), get_stylesheet_directory() ) !== false ) {
 				return true;
 			}
+
 			return false;
 		}
 
 		/**
 		 * Is Redux embedded inside a plugin.
 		 *
-		 * @param     string $file File to check.
+		 * @param string $file File to check.
 		 *
 		 * @return array|bool
 		 */
-		public static function is_inside_plugin( $file ) {
+		public static function is_inside_plugin( string $file ) {
 			$file            = self::wp_normalize_path( $file );
 			$plugin_basename = self::wp_normalize_path( plugin_basename( $file ) );
 
@@ -239,15 +264,13 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 				$slug = explode( '/', $plugin_basename );
 				$slug = $slug[0];
 
-				$data = array(
+				return array(
 					'slug'      => $slug,
 					'basename'  => $plugin_basename,
 					'path'      => $file,
 					'url'       => self::verify_url_protocol( plugins_url( $plugin_basename ) ),
 					'real_path' => self::wp_normalize_path( dirname( realpath( $file ) ) ),
 				);
-
-				return $data;
 			}
 
 			return false;
@@ -256,11 +279,11 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Is Redux embedded in a theme.
 		 *
-		 * @param     string $file File to check.
+		 * @param string $file File to check.
 		 *
 		 * @return array|bool
 		 */
-		public static function is_inside_theme( $file = '' ) {
+		public static function is_inside_theme( string $file = '' ) {
 
 			if ( ! self::file_in_theme( $file ) ) {
 				return false;
@@ -289,7 +312,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 					continue;
 				}
 
-				if ( ! empty( $real_path ) && strpos( $file_path, $real_path ) !== false ) {
+				if ( strpos( $file_path, $real_path ) !== false ) {
 					$slug             = explode( '/', $theme_path );
 					$slug             = end( $slug );
 					$relative_path    = explode( $slug . '/', dirname( $file_path ) );
@@ -328,15 +351,15 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Used to fix 3.x and 4 compatibility for extensions
 		 *
-		 * @param     object $parent The extension parent object.
-		 * @param     string $path - Path of the file.
-		 * @param     string $ext_class - Extension class name.
-		 * @param     string $new_class_name - New dynamic class name.
-		 * @param     string $name extension name.
+		 * @param     object $parent         The extension parent object.
+		 * @param string     $path           - Path of the file.
+		 * @param string     $ext_class      - Extension class name.
+		 * @param string     $new_class_name - New dynamic class name.
+		 * @param string     $name           extension name.
 		 *
 		 * @return object - Extended field class.
 		 */
-		public static function extension_compatibility( $parent, $path, $ext_class, $new_class_name, $name ) {
+		public static function extension_compatibility( $parent, string $path, string $ext_class, string $new_class_name, string $name ) {
 			if ( empty( $new_class_name ) ) {
 				return;
 			}
@@ -376,25 +399,23 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 					if ( class_exists( $new_class_name ) ) {
 						return new $new_class_name( $parent, $path, $ext_class );
 					}
-				} else {
-					// Why doesn't the file exist? Gah permissions.
-					return;
 				}
 			}
 		}
 
 		/**
-		 * Used to deep merge two arrays.
+		 * Used to merge two deep arrays.
 		 *
-		 * @param     array $a First array to deep merge.
-		 * @param     array $b Second array to deep merge.
+		 * @param array $a First array to deep merge.
+		 * @param array $b Second array to deep merge.
 		 *
 		 * @return    array - Deep merge of the two arrays.
 		 */
-		public static function nested_wp_parse_args( &$a, $b ) {
-			$a      = (array) $a;
-			$b      = (array) $b;
+		public static function nested_wp_parse_args( array &$a, array $b ): array {
+			$a      = $a;
+			$b      = $b;
 			$result = $b;
+
 			foreach ( $a as $k => &$v ) {
 				if ( is_array( $v ) && isset( $result[ $k ] ) ) {
 					$result[ $k ] = self::nested_wp_parse_args( $v, $result[ $k ] );
@@ -409,9 +430,8 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * AJAX callback key
 		 */
-		public static function hash_key() {
-			$key  = '';
-			$key .= defined( 'AUTH_KEY' ) ? AUTH_KEY : get_site_url();
+		public static function hash_key(): string {
+			$key  = defined( 'AUTH_KEY' ) ? AUTH_KEY : get_site_url();
 			$key .= defined( 'SECURE_AUTH_KEY' ) ? SECURE_AUTH_KEY : '';
 
 			return $key;
@@ -423,15 +443,16 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @access public
 		 * @since 4.0.0
 		 */
-		public static function activated() {
+		public static function activated(): bool {
 			if ( Redux_Core::$insights->tracking_allowed() ) {
 				return true;
 			}
+
 			return false;
 		}
 
 		/**
-		 * Set Redux to activated.
+		 * Set Redux to activate.
 		 *
 		 * @access public
 		 * @since 4.0.0
@@ -441,7 +462,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		}
 
 		/**
-		 * Set Redux to deactivated.
+		 * Set Redux to deactivate.
 		 *
 		 * @access public
 		 * @since 4.0.0
@@ -452,20 +473,21 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 
 		/**
 		 * Register a class path to be autoloaded.
-		 *
 		 * Registers a namespace to be autoloaded from a given path, using the
 		 * WordPress/HM-style filenames (`class-{name}.php`).
 		 *
 		 * @link https://engineering.hmn.md/standards/style/php/#file-naming
 		 *
 		 * @param string $prefix Prefix to autoload from.
-		 * @param string $path Path to validate.
+		 * @param string $path   Path to validate.
 		 */
-		public static function register_class_path( $prefix = '', $path = '' ) {
+		public static function register_class_path( string $prefix = '', string $path = '' ) {
 			if ( ! class_exists( 'Redux_Autoloader' ) ) {
 				require_once Redux_Path::get_path( '/inc/classes/class-redux-autoloader.php' );
 			}
+
 			$loader = new Redux_Autoloader( $prefix, $path );
+
 			spl_autoload_register( array( $loader, 'load' ) );
 		}
 
@@ -473,10 +495,11 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Check if a string starts with a string.
 		 *
 		 * @param string $haystack Full string.
-		 * @param string $needle String to check if it starts with.
-		 * @return string
+		 * @param string $needle   String to check if it starts with.
+		 *
+		 * @return bool
 		 */
-		public static function string_starts_with( $haystack, $needle ) {
+		public static function string_starts_with( string $haystack, string $needle ): bool {
 			$length = strlen( $needle );
 			return substr( $haystack, 0, $length ) === $needle;
 		}
@@ -485,14 +508,17 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Check if a string ends with a string.
 		 *
 		 * @param string $haystack Full string.
-		 * @param string $needle String to check if it starts with.
-		 * @return string
+		 * @param string $needle   String to check if it starts with.
+		 *
+		 * @return bool
 		 */
-		public static function string_ends_with( $haystack, $needle ) {
+		public static function string_ends_with( string $haystack, string $needle ): bool {
 			$length = strlen( $needle );
+
 			if ( ! $length ) {
 				return true;
 			}
+
 			return substr( $haystack, -$length ) === $needle;
 		}
 
@@ -503,7 +529,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 *
 		 * @return string
 		 */
-		private static function get_site_url( $path = '' ) {
+		private static function get_site_url( string $path = '' ): string {
 			$url = 'https://redux.io';
 
 			if ( ! empty( $path ) ) {
@@ -516,14 +542,14 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Url with utm tags
 		 *
-		 * @param string $path Path on site.
-		 * @param string $utm_medium Medium var.
-		 * @param string $utm_content Content var.
-		 * @param bool   $utm_campaign Campaign var.
+		 * @param string      $path         Path on site.
+		 * @param string      $utm_medium   Medium var.
+		 * @param string|null $utm_content  Content var.
+		 * @param bool        $utm_campaign Campaign var.
 		 *
 		 * @return string
 		 */
-		public static function get_site_utm_url( $path, $utm_medium, $utm_content = null, $utm_campaign = false ) {
+		public static function get_site_utm_url( string $path, string $utm_medium, string $utm_content = null, bool $utm_campaign ): string {
 			$url = self::get_site_url( $path );
 
 			if ( ! $utm_campaign ) {

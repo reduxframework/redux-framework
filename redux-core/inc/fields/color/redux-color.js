@@ -32,6 +32,10 @@
 					return;
 				}
 
+				if ( el.find( 'input.redux-color' ).hasClass( 'alpha-enabled' ) ) {
+					el.addClass( 'alpha-enabled' );
+				}
+
 				el.find( '.redux-color-init' ).wpColorPicker(
 					{
 						change: function( e, ui ) {
