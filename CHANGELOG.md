@@ -1,6 +1,7 @@
 # Redux Changelog
 
 ## 4.1.30 RC
+* New: Filters (type, reach, angle) for Gradient color field.
 * New: Box Shadow field.
 * New: Flyout Submenus: `flyout_submenu` global arg.
 * New: Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
