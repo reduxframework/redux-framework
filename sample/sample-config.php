@@ -374,6 +374,7 @@ Redux::set_section(
 );
 
 require_once Redux_Core::$dir . '../sample/sections/design-fields/background.php';
+require_once Redux_Core::$dir . '../sample/sections/design-fields/box-shadow.php';
 require_once Redux_Core::$dir . '../sample/sections/design-fields/border.php';
 require_once Redux_Core::$dir . '../sample/sections/design-fields/dimensions.php';
 require_once Redux_Core::$dir . '../sample/sections/design-fields/spacing.php';

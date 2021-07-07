@@ -53,7 +53,7 @@
 						if ( $( this ).is( ':checked' ) ) {
 							val = $( this ).parent().find( '.checkbox-check' ).attr( 'data-val' );
 							color.removeClass( 'disabled' );
-							slider.removeAttr( 'disabled' );
+							slider.attr( 'disabled', false );
 							label.removeClass( 'pro-disabled' );
 						} else {
 							color.addClass( 'disabled' );
