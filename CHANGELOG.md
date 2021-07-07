@@ -1,6 +1,9 @@
 # Redux Changelog
 
 ## 4.1.30 RC
+* New: Box Shadow field.
+* New: Flyout Submenus: `flyout_submenu` global arg.
+* New: Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
 * Updated: select2 library to 4.1.0.
 * Updated: readme.txt to conform to wp.org standards.
 * Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
@@ -58,7 +61,7 @@
 * Fixed: Changed use of ctype_xdigit to account for hosts where it's disabled.
 * Added: Shim for people using terms data key, but using taxonomies instead of taxonomy.
 * Fixed: Static call mismatch in redux colors.
-* Fixed: CSRF security issue with a flipped if conditional. Thanks @ErwanLR.
+* Fixed: CSRF security issue with a flipped if conditional. Thanks, @ErwanLR.
 * Fixed: WordPress 4.6 API warnings.
 * Fixed: WordPress 4.6 customizer issue where fields not displaying properly.
 * Fixed: Massive speed improvement to the library.
@@ -89,7 +92,7 @@
 * Fixed: Google fonts html validation issues.
 * Added: Feedback modal.
 * Fixed: Import logic flaw.
-* Fixed: Security bug. Thanks @lenonleite of www.lenonleite.com.br.
+* Fixed: Security bug. Thanks, @lenonleite of www.lenonleite.com.br.
 * Release date: Oct 08, 2020
 
 ## 4.1.20
@@ -125,7 +128,7 @@
 * Added: Site name to WP data return.
 * Fixed: Set height for library button when other plugins modify the CSS for the Gutenberg toolbar.
 * Fixed: Don't show template messages on the front-end if an extension is missing. How did that get through?
-* Fixed: Non-array values for WP data. Thanks @wilokecom.
+* Fixed: Non-array values for WP data. Thanks, @wilokecom.
 * Added: Notification so users can enable Gutenberg when disabled.
 * Added: Welcome guide to Gutenberg screen.
 * Fixed: Some readme issues.
@@ -254,13 +257,13 @@
 ## 4.0.3
 * Fixed:    PHPCS findings.
 * Added:    New output_variables flags that dynamically add CSS variables to pages even on fields that do not support 
-            dynamic CSS output. Thanks @andrejarh for the idea!
+            dynamic CSS output. Thanks, @andrejarh, for the idea!
 
 ## 4.0.2
-* Fixed:    PHP backwards compatibility for extensions. Still have to work on JS probably.
+* Fixed:    PHP backwards compatibility for extensions. Still have to work on JS, probably.
 
 ## 4.0.1.9
-* Fixed:    #33 - Reset Section and Reset All not show appropriate message. Thanks @voldemortensen!
+* Fixed:    #33 - Reset Section and Reset All not show appropriate message. Thanks, @voldemortensen!
 * Fixed:    #29 - Multi-Text class not saving properly per new field. Adding to parent container only instead.
 * Fixed:    #48 - Color RGBa field alpha was not showing.
 * Removed:  Deprecated notices for old Redux API is fine.
@@ -272,14 +275,14 @@
 * Fixed:    #30 - Typography field causing a "save" notice.
 * Added:    Start of Redux Builder API for fields.
 * Modified: Moved some methods to new classes.
-* Fixed:    Fix underscore naming convention in in Redux_Field,
+* Fixed:    Fix underscore naming convention in Redux_Field,
 * Modified: Move two ajax saves routines to Redux_Functions_Ex for advanced customizer validation on save.
 
 ## 4.0.1.7
 * Fixed:    #20 - variable mssing $ dev.
 * Fixed:    Customizer saving.
 * Fixed     Customizer 'required'.
-* Fixed:    button_set field not saving or loading in multi mode.
+* Fixed:    button_set field not saving or loading in multimode.
 * Fixed:    Section disable and section hidde in customizer.
 * Fixed:    Some malformed field ids in sample-config, for some reason.
 * Change:   #19 - `validate_msg` field arg replaces `msg` for validation schemes.  Shim in place for backward compatibility.
@@ -343,8 +346,8 @@
 * Fixed:    Multi text not removing new added boxes until after save.
 
 ## 4.0.0.14
-* Fixed:    Sections in customizer not rendering properly when customizer is set to false.  Thanks @onurdemir.
-* Fixed:    Function in ajax save class bombing when v3 is embedded.  Thanks @danielbarenkamp.
+* Fixed:    Sections in customizer not rendering properly when customizer is set to false.  Thanks, @onurdemir.
+* Fixed:    Function in ajax save class bombing when v3 is embedded.  Thanks, @danielbarenkamp.
 
 ## 4.0.0.13
 * Nope.  I'm supersticous!
@@ -365,11 +368,11 @@
 
 ## 4.0.0.9
 * Fixed:    Import/Export feature not importing.  Damn typesafe decs got me again!!!  Thanks, WPCS.  ;-)
-* Modified: Replace wpFileSystemInit in sample-config.php with a more practical solution.  Thanks @Torfindel 
+* Modified: Replace wpFileSystemInit in sample-config.php with a more practical solution.  Thanks, @Torfindel 
 
 ## 4.0.0.8
 * Modified: Changed typography update localize handle.  Too generic.  Conflicted with something else.
-* Fixed:    Template head structure cause tempalte notice to fail.  Thanks @anikitas.
+* Fixed:    Template head structure cause tempalte notice to fail.  Thanks, @anikitas.
 * Fixed:    Google font update choked over incorrect protocol.
 * Fixed:    Required logic was operating backward.  Damn those typesafe operators!
 * Fixed:    Redux v3 templates no longer crash v4 panel.
@@ -394,7 +397,7 @@
 
 ## 4.0.0.2
 * Modified: Sorter 'checkbox' now 'toggle' with UI redesign.  Full backward compatibility in place.
-* Added:    Shim for redux localization JS object from 3.x where the optName is not appended.  This broke repeater.
+* Added:    Shim for redux localization JS objects from 3.x where the optName is not appended.  This broke repeater.
 
 ## 4.0.0.1
 * Rewrite:  Core.  Now modularized.
