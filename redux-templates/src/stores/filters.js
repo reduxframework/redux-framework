@@ -107,7 +107,7 @@ const isTemplateDependencyFilterIncluded = (item, truthyDependenciesList, depend
 }
 
 // check dependency filter is selected on sidebar
-// Input: dependencyFilter={'qubely', 
+// Input: dependencyFilter={'qubely',
 export const valueOfDependencyFilter = (dependencyFilter) => {
     if (dependencyFilter != null && dependencyFilter.hasOwnProperty('value')) return (dependencyFilter.value === true);
     return (dependencyFilter === true);

@@ -12005,7 +12005,7 @@ const isTemplateDependencyFilterIncluded = (item, truthyDependenciesList, depend
   const filteredList = item.dependencies.filter(dependency => truthyDependenciesList.includes(dependency));
   return dependencyFilterRule ? item.dependencies.length === filteredList.length : filteredList.length > 0; // filter rule = ture => AND operation
 }; // check dependency filter is selected on sidebar
-// Input: dependencyFilter={'qubely', 
+// Input: dependencyFilter={'qubely',
 
 
 const valueOfDependencyFilter = dependencyFilter => {
