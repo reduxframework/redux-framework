@@ -109,9 +109,6 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 						'index' => $shadow_type . '-shadow',
 					);
 
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName
-					// echo apply_filters( 'redux/pro/render/color_alpha', $data ); // WPCS: XSS ok.
-
 					echo '/>';
 					echo '</li>';
 					echo '<li>';
