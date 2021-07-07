@@ -243,6 +243,16 @@ function reduxStyles() {
 		}
 	);
 
+	var lib_dirs = getFolders( 'redux-core/inc/lib/' );
+	lib_dirs.map(
+		function( folder ) {
+			var the_path = './redux-core/inc/lib/' + folder + '/';
+			folder       = folder.replace( '_', '-' );
+
+			return process_scss( the_path + folder + '.scss', the_path );
+		}
+	);
+
 	// Colors.
 	var color_dirs = getFolders( 'redux-core/assets/scss/colors/' );
 	var colors = color_dirs.map(
@@ -341,6 +351,33 @@ function extFieldJS( done ) {
 			)
 			.pipe( uglify() )
 			.pipe( lineec() )
+			.pipe( gulp.dest( the_path ) );
+		}
+	);
+
+	done();
+}
+
+function reduxLibJS ( done ) {
+	var field_dirs = getFolders( 'redux-core/inc/lib' );
+
+	field_dirs.map(
+		function( folder ) {
+			var the_path = './redux-core/inc/lib/' + folder + '/';
+
+			gulp.src( the_path + '/' + folder + '.js' )
+			.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+			.pipe( gulp.dest( the_path ) )
+			.pipe(
+				rename(
+					{
+						basename: folder,
+						suffix: '.min'
+					}
+				)
+			)
+			.pipe( uglify() )
+			.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 			.pipe( gulp.dest( the_path ) );
 		}
 	);
@@ -615,7 +652,7 @@ function translate() {
  * Tasks
  */
 gulp.task( 'styles', reduxStyles );
-gulp.task( 'fieldsJS', gulp.series( fieldsJS, extJS, extFieldJS, reduxMedia, reduxSpinner ) );
+gulp.task( 'fieldsJS', gulp.series( fieldsJS, reduxLibJS, extJS, extFieldJS, reduxMedia, reduxSpinner ) );
 gulp.task( 'media', reduxMedia );
 gulp.task( 'reduxJS', gulp.series( reduxJS, reduxCombineModules, reduxMedia ) );
 gulp.task( 'vendorsJS', vendorsJS );
