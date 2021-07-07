@@ -191,32 +191,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 				}
 				$typography = new Redux_Typography( null, null, $core );
 
-				if ( $core->args['async_typography'] && ! empty( $core->typography ) ) {
-					$families = array();
-
-					foreach ( $core->typography as $key => $value ) {
-						$families[] = $key;
-					}
-					?>
-					<script>
-						if ( typeof WebFontConfig === "undefined" ) {
-							WebFontConfig = {};
-						}
-
-						WebFontConfig['google'] = {
-							families: [<?php echo $typography->make_google_web_font_string( $core->typography ); // phpcs:ignore WordPress.Security.EscapeOutput ?>]
-						};
-
-						(function( d ) {
-							var wf = d.createElement( 'script' );
-							var s = d.scripts[0];
-							wf.src = '//' + 'ajax' + '.googleapis' + '.com/ajax/libs/webfont/1.6.26/webfont.js';
-							wf.async = true;
-							s.parentNode.insertBefore( wf, s );
-						})( document );
-					</script>
-					<?php
-				} elseif ( ! $core->args['disable_google_fonts_link'] ) {
+				if ( ! $core->args['disable_google_fonts_link'] ) {
 					$url = $typography->make_google_web_font_link( $core->typography );
 					wp_enqueue_style( 'redux-google-fonts-' . $core->args['opt_name'], $url, array(), $version, 'all' );
 					add_filter( 'style_loader_tag', array( $this, 'add_style_attributes' ), 10, 4 );

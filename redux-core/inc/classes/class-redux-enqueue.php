@@ -347,17 +347,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				$this->timestamp,
 				true
 			);
-
-			if ( $core->args['async_typography'] ) {
-				wp_enqueue_script(
-					'webfontloader',
-					// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
-					'//' . 'ajax' . '.googleapis' . '.com/ajax/libs/webfont/1.6.26/webfont.js',
-					array( 'jquery', 'redux-vendor' ),
-					'1.6.26',
-					true
-				);
-			}
 		}
 
 		/**

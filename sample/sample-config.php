@@ -92,9 +92,6 @@ $args = array(
 	// The text to appear on the page title.
 	'page_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 
-	// Enabled the Webfonts typography module to use asynchronous fonts.
-	'async_typography'          => false,
-
 	// Disable to create your own google fonts loader.
 	'disable_google_fonts_link' => false,
 
@@ -177,6 +174,10 @@ $args = array(
 
 	// Enable or disable flyout menus when hovering over a menu with submenus.
 	'flyout_submenus'           => true,
+
+	// Mode to display fonts (auto|block|swap|fallback|optional)
+	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+	'font_display'              => 'swap',
 
 	// HINTS.
 	'hints'                     => array(

@@ -44,9 +44,6 @@ $args = array(
 	'menu_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 	'page_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 
-	// Use a asynchronous font on the front end or font string.
-	'async_typography'          => true,
-
 	// Disable this in case you want to create your own google fonts loader.
 	'disable_google_fonts_link' => false,
 
@@ -117,6 +114,13 @@ $args = array(
 	// If you prefer not to use the CDN for Select2, Ace Editor, and others, you may download the Redux Vendor Support plugin yourself and run locally or embed it in your code.
 	'use_cdn'                   => true,
 	'compiler'                  => true,
+
+	// Enable or disable flyout menus when hovering over a menu with submenus.
+	'flyout_submenus'           => true,
+
+	// Mode to display fonts (auto|block|swap|fallback|optional)
+	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+	'font_display'              => 'swap',
 
 	// HINTS.
 	'hints'                     => array(

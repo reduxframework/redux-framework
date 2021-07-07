@@ -172,7 +172,8 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 			if ( ! in_array( $args['font_display'], array( 'block', 'swap', 'fallback', 'optional' ), true ) ) {
 				$args['font_display'] = 'swap';
 			}
-			if ( $args['async_typography'] ) { // TODO: Disable this for now. We'll rip it out completely shortly.
+
+			if ( $args['async_typography'] ) {
 				$args['async_typography'] = false;
 			}
 
