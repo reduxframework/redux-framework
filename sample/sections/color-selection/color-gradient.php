@@ -23,10 +23,17 @@ Redux::set_section(
 				'subtitle' => esc_html__( 'Only color validation can be done on this field type', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'output'   => '.site-header', // applies only when Redux Pro is installed and active.
+				'gradient-type'  => true,
+				'gradient-reach' => true,
+				'gradient-angle' => true,
 				'preview'  => true,
-				'default'  => array(
-					'from' => '#1e73be',
-					'to'   => '#00897e',
+				'default'        => array(
+					'from'           => '#1e73be',
+					'to'             => '#00897e',
+					'gradient-reach' => array(
+						'to'   => 50,
+						'from' => 0,
+					),
 				),
 			),
 		),
