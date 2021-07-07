@@ -203,6 +203,17 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		}
 
 		/**
+		 * CSS output data.
+		 *
+		 * @param mixed $style Output data.
+		 *
+		 * @return string
+		 */
+		public function output( $style = '' ): string {
+			return Redux_Gradient_Filters::get_output( $style );
+		}
+
+		/**
 		 * Enable output_variables to be generated.
 		 *
 		 * @since       4.0.3

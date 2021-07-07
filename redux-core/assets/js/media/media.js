@@ -4,7 +4,10 @@
  * Media Uploader
  * Dependencies        : jquery, wp media uploader
  * Feature added by    : Smartik - http://smartik.ws/
- * Date                  : 05.28.2013
+ * Date                : 05.28.2013
+ *
+ * Modified by         : Kevin Provance (kprovance/svl-studios)
+ * Date                : 07.07.2021
  */
 
 ( function( $ ) {
@@ -37,6 +40,11 @@
 					parent.removeClass( 'redux-field-init' );
 				} else {
 					return;
+				}
+
+				if ( undefined === redux.field_objects.pro && undefined !== redux.field_objects.image_filters ) {
+					redux.field_objects.image_filters.sliderInit( el, 'media' );
+					redux.field_objects.image_filters.checkbox( el, 'media' );
 				}
 
 				isFiltered = false;

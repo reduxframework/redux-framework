@@ -1472,7 +1472,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * If you get the error: PHP Notice:  Undefined offset: 0 in /wp-includes/capabilities.php, you didn't
 		 * pass the required $object_id.
 		 *
-		 * @param int          $user          User ID or WP_User object to check. Defaults to the current user.
+		 * @param int/object   $user          User ID or WP_User object to check. Defaults to the current user.
 		 * @param string|array $capabilities  Capability string or array to check. The array lets you use multiple
 		 *                                    conditions to determine if a user has permission.
 		 *                                    Invalid conditions are skipped (conditions which aren't a string/array/bool/number(cast to bool)).
@@ -1501,7 +1501,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *        user_can( 42, 'edit_page', 17433 );                  // Checks if user ID 42 has the 'edit_page' cap for post ID 17433.
 		 *        user_can( 42, array( 'edit_pages', 'edit_posts' ) ); // Checks if user ID 42 has both the 'edit_pages' and 'edit_posts' caps.
 		 */
-		public static function user_can( int $user, $capabilities, int $object_id = null ): bool {
+		public static function user_can( $user, $capabilities, int $object_id = null ): bool {
 			static $depth = 0;
 
 			if ( $depth >= 30 ) {

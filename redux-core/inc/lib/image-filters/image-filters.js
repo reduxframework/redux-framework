@@ -49,7 +49,7 @@
 								'<strong>' + val + unit + '</strong>'
 							);
 
-							redux.field_objects.pro.image_filters.changeValue( $( this ), true, mode );
+							redux.field_objects.image_filters.changeValue( $( this ), true, mode );
 						}
 					}
 				);
@@ -134,7 +134,7 @@
 
 				$( this ).parent().find( '.checkbox-check' ).val( val );
 
-				redux.field_objects.pro.image_filters.changeValue( $( this ), true );
+				redux.field_objects.image_filters.changeValue( $( this ), true, mode );
 			}
 		);
 	};

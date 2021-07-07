@@ -33,7 +33,7 @@ Redux::set_section(
 				'desc'     => esc_html__( 'This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 				'url'      => false,
-				'preview'  => false,
+				'preview'  => true,
 			),
 			array(
 				'id'       => 'media-no-preview',
@@ -58,6 +58,52 @@ Redux::set_section(
 
 				'desc'       => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
 				'subtitle'   => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
+			),
+			array(
+				'id'           => 'opt-media-filter',
+				'type'         => 'media',
+				'url'          => true,
+				'title'        => esc_html__( 'Media w/ URL', 'your-textdomain-here' ),
+				'compiler'     => 'true',
+				'desc'         => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
+				'subtitle'     => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
+				'preview_size' => 'full',
+				'default'      => array(
+					'url'    => 'https://s.wordpress.org/style/images/codeispoetry.png',
+					'filter' => array(
+						'grayscale' => array(
+							'checked' => true,
+							'value'   => 50,
+						),
+					),
+				),
+				'preview_size' => 'full',
+				'filter'       => array(
+					'grayscale'  => true,
+					'blur'       => true,
+					'sepia'      => true,
+					'saturate'   => true,
+					'opacity'    => true,
+					'brightness' => true,
+					'contrast'   => true,
+					'hue-rotate' => true,
+					'invert'     => true,
+				),
+				'output'       => array( '.header-image img' ),
+			),
+			array(
+				'id'       => 'media-no-url-filter',
+				'type'     => 'media',
+				'title'    => esc_html__( 'Media w/o URL', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
+				'url'      => false,
+				'filter'   => array(
+					'grayscale' => true,
+					'blur'      => true,
+				),
+				'preview'  => true,
+				'preview_size' => 'full',
 			),
 		),
 	)

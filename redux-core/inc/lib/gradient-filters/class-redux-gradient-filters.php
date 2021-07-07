@@ -187,11 +187,11 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		/**
 		 * Get CSS output.
 		 *
-		 * @param array $data Data.
+		 * @param mixed $data Data.
 		 *
 		 * @return string
 		 */
-		public static function get_output( array $data ) {
+		public static function get_output( $data ): string {
 			if ( ! is_array( $data ) ) {
 				return $data;
 			}
