@@ -79,6 +79,27 @@ Redux::set_section(
 				// 'compiler'    => array( 'h2.site-description-compiler' ),
 				// .
 			),
+			array(
+				'id'                => 'opt-typography-body-shadow',
+				'type'              => 'typography',
+				'title'             => esc_html__( 'Body Font', 'your-textdomain-here' ),
+				'subtitle'          => esc_html__( 'Specify the body font properties.', 'your-textdomain-here' ),
+				'google'            => true,
+				'font_family_clear' => false,
+				'text-shadow'       => true,
+				'color_alpha'       => true,
+				'margin-top'        => true,
+				'margin-bottom'     => true,
+				'default'           => array(
+					'color'         => '#dd9933',
+					'font-size'     => '30px',
+					'font-family'   => 'Arial, Helvetica, sans-serif',
+					'font-weight'   => 'Normal',
+					'margin-top'    => '2px',
+					'margin-bottom' => '2px',
+				),
+				'output'            => array( '.content-sidebar' ),
+			),
 		),
 	)
 );

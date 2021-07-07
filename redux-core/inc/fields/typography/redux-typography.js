@@ -7,8 +7,8 @@
  * Date:                06.14.2013
  *
  * Rewrite:             Kevin Provance (kprovance)
- * Date:                May 25, 2014
- * And again on:        April 4, 2017 for v4.0
+ * Date:                May 25, 2014,
+ * And again on:        April 4, 2017, for v4.0
  */
 (function( $ ) {
 	'use strict';
@@ -37,6 +37,7 @@
 				}
 
 				if ( undefined === redux.field_objects.pro ) {
+
 					proLoaded = false;
 				}
 
@@ -91,7 +92,7 @@
 
 								isUserFonts = isUserFonts ? 1 : 0;
 
-								// Google font isn use?
+								// Google font isn't in use?
 								usingGoogleFonts = usingGoogleFonts ? 1 : 0;
 
 								// If custom fonts, push onto array.
@@ -145,7 +146,7 @@
 									buildData.push( redux.googlefonts );
 								}
 
-								// Output data to drop down.
+								// Output data to dropdown.
 								data = buildData;
 
 								val = $( this ).find( '.redux-typography-family' ).data( 'value' );
@@ -228,20 +229,15 @@
 								);
 
 								// Init when value is changed.
-								$( this ).find( '.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter' ).on(
+								$( this ).find( '.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-margin-top, .redux-typography-margin-bottom' ).on(
 									'keyup',
 									function() {
 										redux.field_objects.typography.select( $( this ).parents( '.redux-container-typography:first' ) );
 									}
 								);
 
-								if ( proLoaded ) {
-									redux.field_objects.pro.typography.fieldChange( $( this ) );
-									redux.field_objects.pro.typography.colorPicker( $( this ) );
-								}
-
 								// Have to redeclare the wpColorPicker to get a callback function.
-								$( this ).find( '.redux-typography-color' ).wpColorPicker(
+								$( this ).find( '.redux-typography-color, .redux-typography-shadow-color' ).wpColorPicker(
 									{
 										change: function( e, ui ) {
 											e = null;
@@ -315,8 +311,51 @@
 
 								window.onbeforeunload = null;
 								parent.removeClass( 'redux-field-init' );
+
+								if ( ! proLoaded ) {
+									redux.field_objects.typography.sliderInit( el );
+								}
 							}
 						);
+					}
+				);
+			}
+		);
+	};
+
+	redux.field_objects.typography.sliderInit = function( el ) {
+		el.find( '.redux-typography-slider' ).each(
+			function() {
+				var mainID = $( this ).data( 'id' );
+				var minVal = $( this ).data( 'min' );
+				var maxVal = $( this ).data( 'max' );
+				var step   = $( this ).data( 'step' );
+				var def    = $( this ).data( 'default' );
+				var label  = $( this ).data( 'label' );
+				var rtl    = Boolean( $( this ).data( 'rtl' ) );
+				var range  = [minVal, maxVal];
+
+				var slider = $( this ).reduxNoUiSlider(
+					{
+						range: range,
+						start: def,
+						handles: 1,
+						step: step,
+						connect: 'lower',
+						behaviour: 'tap-drag',
+						rtl: rtl,
+						serialization: {
+							resolution: 1
+						},
+						slide: function() {
+							$( this ).next( '#redux-slider-value-' + mainID ).attr( 'value', slider.val() );
+
+							$( this ).prev( 'label' ).html(
+								label + ':  <strong>' + slider.val() + 'px</strong>'
+							);
+
+							redux.field_objects.typography.select( el );
+						}
 					}
 				);
 			}
@@ -473,6 +512,8 @@
 		var the_font;
 		var link;
 		var isPreviewSize;
+		var marginTop;
+		var marginBottom;
 
 		var typekit              = false;
 		var details              = '';
@@ -515,6 +556,8 @@
 		style        = that.find( 'select.redux-typography-style' ).val();
 		script       = that.find( 'select.redux-typography-subsets' ).val();
 		color        = that.find( '.redux-typography-color' ).val();
+		marginTop    = that.find( '.redux-typography-margin-top' ).val();
+		marginBottom = that.find( '.redux-typography-margin-bottom' ).val();
 		units        = that.data( 'units' );
 
 		// Is selected font a google font?
@@ -811,8 +854,16 @@
 			that.find( '.typography-letter-spacing' ).val( letter + units );
 		}
 
-		if ( proLoaded ) {
-			redux.field_objects.pro.typography.select( mainID );
+		if ( '' === marginTop || undefined === marginTop ) {
+			that.find( '.typography-margin-top' ).val( '' );
+		} else {
+			that.find( '.typography-margin-top' ).val( marginTop + units );
+		}
+
+		if ( '' === marginBottom || undefined === marginBottom ) {
+			that.find( '.typography-margin-bottom' ).val( '' );
+		} else {
+			that.find( '.typography-margin-bottom' ).val( marginBottom + units );
 		}
 
 		// Show more preview stuff.
@@ -827,7 +878,9 @@
 				{
 					'font-weight': style,
 					'text-align': align,
-					'font-family': family + ', sans-serif'
+					'font-family': family + ', sans-serif',
+					'padding-top': marginTop + units,
+					'padding-bottom': marginBottom + units
 				}
 			);
 
@@ -849,7 +902,7 @@
 				that.find( '.typography-preview' ).css( 'color', color );
 			}
 
-			if ( proLoaded ) {
+			if ( ! proLoaded ) {
 				redux.field_objects.typography.previewShadow( mainID );
 			}
 
@@ -885,6 +938,20 @@
 
 		if ( ! skipCheck ) {
 			redux_change( selector );
+		}
+	};
+
+	redux.field_objects.typography.previewShadow = function( mainID ) {
+		var shadowColor = $( '#' + mainID + ' .redux-typography-shadow-color' ).val();
+		var shadowHorz  = $( '#redux-slider-value-' + mainID + '-h' ).val();
+		var shadowVert  = $( '#redux-slider-value-' + mainID + '-v' ).val();
+		var shadowBlur  = $( '#redux-slider-value-' + mainID + '-b' ).val();
+
+		if ( shadowColor ) {
+			$( '#' + mainID + ' .typography-preview' ).css(
+				'text-shadow',
+				shadowHorz + 'px ' + shadowVert + 'px ' + shadowBlur + 'px ' + shadowColor
+			);
 		}
 	};
 })( jQuery );

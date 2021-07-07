@@ -1,6 +1,7 @@
 # Redux Changelog
 
 ## 4.1.30 RC
+* New: Typography features:  Top and bottom margins, text shadow.
 * New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
 * New: Filters (type, reach, angle) for Gradient color field.
 * New: Box Shadow field.
@@ -12,6 +13,7 @@
 * Fixed: Redux tempates not showing on 'page attributes' for some.
 * Added:  WordPress 5.8 compatibility.
 * Improved: Better Gutenberg block editor detection.
+* Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
 
 ## 4.1.29
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.

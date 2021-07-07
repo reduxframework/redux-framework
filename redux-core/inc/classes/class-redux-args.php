@@ -169,7 +169,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 			$args = $this->args( $args );
 			$args = $this->default_cleanup( $args );
 
-			if ( ! in_array( $args['font_display'], array( 'block', 'swap', 'fallback', 'optional' ), true ) ) {
+			if ( ! in_array( $args['font_display'], array( 'auto', 'block', 'swap', 'fallback', 'optional' ), true ) ) {
 				$args['font_display'] = 'swap';
 			}
 

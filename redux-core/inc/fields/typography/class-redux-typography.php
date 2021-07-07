@@ -114,9 +114,27 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				'google'                  => true,
 				'font_family_clear'       => true,
 				'allow_empty_line_height' => false,
+				'margin-top'              => false,
+				'margin-bottom'           => false,
+				'text-shadow'             => false,
 			);
 
 			$this->field = wp_parse_args( $this->field, $defaults );
+
+			if ( isset( $this->field['color_alpha'] ) ) {
+				if ( is_array( $this->field['color_alpha'] ) ) {
+					$this->field['color_alpha']['color']        = $this->field['color_alpha']['color'] ?? false;
+					$this->field['color_alpha']['shadow-color'] = $this->field['color_alpha']['shadow-color'] ?? false;
+				} else {
+					$mode                                       = $this->field['color_alpha'];
+					$this->field['color_alpha']                 = array();
+					$this->field['color_alpha']['color']        = $mode;
+					$this->field['color_alpha']['shadow-color'] = $mode;
+				}
+			} else {
+				$this->field['color_alpha']['color']        = false;
+				$this->field['color_alpha']['shadow-color'] = false;
+			}
 
 			// Set value defaults.
 			$defaults = array(
@@ -137,6 +155,12 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				'font-style'      => '',
 				'color'           => '',
 				'font-size'       => '',
+				'margin-top'        => '',
+				'margin-bottom'     => '',
+				'shadow-color'      => '#000000',
+				'shadow-horizontal' => '1',
+				'shadow-vertical'   => '1',
+				'shadow-blur'       => '4',
 			);
 
 			$this->value = wp_parse_args( $this->value, $defaults );
@@ -149,14 +173,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			);
 			if ( empty( $this->field['units'] ) || ! in_array( $this->field['units'], $units, true ) ) {
 				$this->field['units'] = 'px';
-			}
-
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->field = apply_filters( 'redux/pro/typography/field/set_defaults', $this->field );
-
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->value = apply_filters( 'redux/pro/typography/value/set_defaults', $this->value );
 			}
 
 			// Get the google array.
@@ -617,9 +633,32 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			echo '<div class="clearfix"></div>';
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-				echo apply_filters( 'redux/pro/typography/render/extra_inputs', null );
+			// Margins
+			if ( $this->field['margin-top'] ) {
+				echo '<div class="input_wrapper margin-top redux-container-typography">';
+				echo '<label>' . __( 'Margin Top', 'redux-framework' ) . '</label>';
+				echo '<div class="input-append">';
+				echo '<input type="text" class="span2 redux-typography redux-typography-margin-top mini typography-input ' . esc_attr( $this->field['class'] ) . '" title="' . esc_html__( 'Margin Top', 'redux-framework' ) . '" placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '" id="' . esc_attr( $this->field['id'] ) . '-margin-top" value="' . esc_attr( str_replace( $unit, '', $this->value['margin-top'] ) ) . '" data-value="' . esc_attr( str_replace( $unit, '', $this->value['margin-top'] ) ) . '">';
+				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+				echo '</div>';
+				echo '<input type="hidden" class="typography-margin-top" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[margin-top]" value="' . esc_attr( $this->value['margin-top'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
+				echo '</div>';
+			}
+
+			/* Bottom Margin */
+			if ( $this->field['margin-bottom'] ) {
+				echo '<div class="input_wrapper margin-bottom redux-container-typography">';
+				echo '<label>' . __( 'Margin Bottom', 'redux-framework' ) . '</label>';
+				echo '<div class="input-append">';
+				echo '<input type="text" class="span2 redux-typography redux-typography-margin-bottom mini typography-input ' . esc_attr( $this->field['class'] ) . '" title="' . esc_html__( 'Margin Bottom', 'redux-framework' ) . '" placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '" id="' . esc_attr( $this->field['id'] ) . '-margin-bottom" value="' . esc_attr( str_replace( $unit, '', $this->value['margin-bottom'] ) ) . '" data-value="' . esc_attr( str_replace( $unit, '', $this->value['margin-bottom'] ) ) . '">';
+				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+				echo '</div>';
+				echo '<input type="hidden" class="typography-margin-bottom" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[margin-bottom]" value="' . esc_attr( $this->value['margin-bottom'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
+				echo '</div>';
+			}
+
+			if ( $this->field['margin-top'] || $this->field['margin-bottom'] ) {
+				echo '<div class="clearfix"></div>';
 			}
 
 			/* Font Color */
@@ -714,9 +753,75 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 				echo '<p data-preview-size="' . esc_attr( $in_use ) . '" class="clear ' . esc_attr( $this->field['id'] ) . '_previewer typography-preview" style="' . esc_attr( $style ) . '">' . esc_html( $g_text ) . '</p>';
 
-				if ( Redux_Core::$pro_loaded ) {
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-					echo apply_filters( 'redux/pro/typography/render/text_shadow', null );
+				if ( $this->field['text-shadow'] ) {
+
+					/* Shadow Colour */
+					echo '<div class="picker-wrapper">';
+					echo '<label>' . esc_html__( 'Shadow Color', 'redux-framework' ) . '</label>';
+					echo '<div id="' . esc_attr( $this->field['id'] ) . '_color_picker" class="colorSelector typography-shadow-color"><div style="background-color: ' . esc_attr( $this->value['color'] ) . '"></div></div>';
+					echo '<input
+		                    data-default-color="' . esc_attr( $this->value['shadow-color'] ) . '"
+		                    class="color-picker redux-color redux-typography-shadow-color ' . esc_attr( $this->field['class'] ) . '"
+		                    original-title="' . esc_html__( 'Shadow color', 'redux-framework' ) . '"
+		                    id="' . esc_attr( $this->field['id'] ) . '-shadow-color"
+		                    name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[shadow-color]"
+		                    type="text"
+		                    value="' . esc_attr( $this->value['shadow-color'] ) . '"
+		                    data-alpha="' . esc_attr( $this->field['color_alpha']['shadow-color'] ) . '"
+		                    data-id="' . esc_attr( $this->field['id'] ) . '"
+		                  />';
+					echo '</div>';
+
+					/* Shadow Horizontal Length */
+					echo '<div class="input_wrapper shadow-horizontal redux-container-typography" style="top:-60px;margin-left:20px;width:20%">';
+					echo '<label>' . esc_html__( 'Horizontal', 'redux-framework' ) . ': <strong>' . esc_attr( $this->value['shadow-horizontal'] ) . 'px</strong></label>';
+					echo '<div
+                            class="redux-typography-slider span2 redux-typography redux-typography-shadow-horizontal mini typography-input ' . esc_attr( $this->field['class'] ) . '"
+                            id="' . esc_attr( $this->field['id'] ) . '"
+                            data-id="' . esc_attr( $this->field['id'] ) . '-h"
+                            data-min="-20"
+                            data-max="20"
+                            data-step="1"
+                            data-rtl="' . esc_attr( is_rtl() ) . '"
+                            data-label="' . esc_attr__( 'Horizontal', 'redux-framework' ) . '"
+                            data-default = "' . esc_attr( $this->value['shadow-horizontal'] ) . '">
+                        </div>';
+					echo '<input type="hidden" id="redux-slider-value-' . esc_attr( $this->field['id'] ) . '-h" class="typography-shadow-horizontal" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[shadow-horizontal]" value="' . esc_attr( $this->value['shadow-horizontal'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
+					echo '</div>';
+
+					/* Shadow Vertical Length */
+					echo '<div class="input_wrapper shadow-vertical redux-container-typography" style="top:-60px;margin-left:20px;width:20%">';
+					echo '<label>' . esc_html__( 'Vertical', 'redux-framework' ) . ': <strong>' . esc_attr( $this->value['shadow-vertical'] ) . 'px</strong></label>';
+					echo '<div
+                            class="redux-typography-slider span2 redux-typography redux-typography-shadow-vertical mini typography-input ' . esc_attr( $this->field['class'] ) . '"
+                            id="' . esc_attr( $this->field['id'] ) . '"
+                            data-id="' . esc_attr( $this->field['id'] ) . '-v"
+                            data-min="-20"
+                            data-max="20"
+                            data-step="1"
+                            data-rtl="' . esc_attr( is_rtl() ) . '"
+                            data-label="' . esc_attr__( 'Vertical', 'redux-framework' ) . '"
+                            data-default = "' . esc_attr( $this->value['shadow-vertical'] ) . '">
+                        </div>';
+					echo '<input type="hidden" id="redux-slider-value-' . esc_attr( $this->field['id'] ) . '-v" class="typography-shadow-vertical" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[shadow-vertical]" value="' . esc_attr( $this->value['shadow-vertical'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
+					echo '</div>';
+
+					/* Shadow Blur */
+					echo '<div class="input_wrapper shadow-blur redux-container-typography" style="top:-60px;margin-left:20px;width:20%">';
+					echo '<label>' . esc_html__( 'Blur', 'redux-framework' ) . ': <strong>' . esc_attr( $this->value['shadow-blur'] ) . 'px</strong></label>';
+					echo '<div
+                            class="redux-typography-slider span2 redux-typography redux-typography-shadow-blur mini typography-input ' . esc_attr( $this->field['class'] ) . '"
+                            id="' . esc_attr( $this->field['id'] ) . '"
+                            data-id="' . esc_attr( $this->field['id'] ) . '-b"
+                            data-min="0"
+                            data-max="25"
+                            data-step="1"
+                            data-rtl="' . esc_attr( is_rtl() ) . '"
+                            data-label="' . esc_attr__( 'Blur', 'redux-framework' ) . '"
+                            data-default = "' . esc_attr( $this->value['shadow-blur'] ) . '">
+                        </div>';
+					echo '<input type="hidden" id="redux-slider-value-' . esc_attr( $this->field['id'] ) . '-b" class="typography-shadow-blur" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[shadow-blur]" value="' . esc_attr( $this->value['shadow-blur'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
+					echo '</div>';
 				}
 
 				echo '</div>'; // end typography container.
@@ -761,16 +866,38 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				)
 			);
 
-			if ( isset( $this->field['color_alpha'] ) && $this->field['color_alpha'] ) {
-				if ( ! wp_script_is( 'redux-wp-color-picker-alpha-js' ) ) {
+			if ( isset( $this->field['color_alpha'] ) && is_array( $this->field['color_alpha'] ) ) {
+				if ( $this->field['color_alpha']['color'] || $this->field['color_alpha']['shadow-color'] ) {
 					wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
 				}
+			}
+
+			if ( ! wp_style_is( 'redux-nouislider-css' ) && isset( $this->field['text-shadow'] ) && $this->field['text-shadow'] ) {
+				wp_enqueue_style(
+					'redux-nouislider-css',
+					Redux_Core::$url . "assets/css/vendor/nouislider$min.css",
+					array(),
+					'5.0.0'
+				);
+
+				wp_enqueue_script(
+					'redux-nouislider-js',
+					Redux_Core::$url . "assets/js/vendor/nouislider/redux.jquery.nouislider$min.js",
+					array( 'jquery' ),
+					'5.0.0',
+					true
+				);
 			}
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style( 'redux-color-picker-css' );
 
-				wp_enqueue_style( 'redux-field-typography-css', Redux_Core::$url . 'inc/fields/typography/redux-typography.css', array(), $this->timestamp );
+				wp_enqueue_style(
+					'redux-field-typography-css',
+					Redux_Core::$url . 'inc/fields/typography/redux-typography.css',
+					array(),
+					$this->timestamp
+				);
 			}
 		}
 
@@ -967,16 +1094,27 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						continue;
 					}
 
-					if ( Redux_Core::$pro_loaded ) {
-						// phpcs:ignored WordPress.NamingConventions.ValidHookName
-						$pro_data = apply_filters( 'redux/pro/typography/output', $data, $key, $value );
+					if ( isset( $data['key'] ) ) {
+						return $data;
+					}
 
-						// phpcs:ignore WordPress.PHP.DontExtract
-						extract( $pro_data );
+					$continue = false;
 
-						if ( $continue ) {
-							continue;
+					if ( 'shadow-horizontal' === $key || 'shadow-vertical' === $key || 'shadow-blur' === $key ) {
+						$continue = true;
+					}
+
+					if ( 'shadow-color' === $key ) {
+						if ( $this->field['text-shadow'] ) {
+							$key   = 'text-shadow';
+							$value = $data['shadow-horizontal'] . 'px ' . $data['shadow-vertical'] . 'px ' . $data['shadow-blur'] . 'px ' . $data['shadow-color'];
+						} else {
+							$continue = true;
 						}
+					}
+
+					if ( $continue ) {
+						continue;
 					}
 
 					$style .= $key . ':' . $value . ';';
