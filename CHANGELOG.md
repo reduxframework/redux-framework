@@ -1,6 +1,7 @@
 # Redux Changelog
 
 ## 4.1.30 RC
+* New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
 * New: Filters (type, reach, angle) for Gradient color field.
 * New: Box Shadow field.
 * New: Flyout Submenus: `flyout_submenu` global arg.
