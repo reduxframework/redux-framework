@@ -46,7 +46,7 @@ if ( ! class_exists( 'Redux_Raw', false ) ) {
 			if ( ! empty( $this->field['content'] ) && isset( $this->field['content'] ) ) {
 				if ( isset( $this->field['markdown'] ) && true === $this->field['markdown'] && ! empty( $this->field['content'] ) ) {
 					require_once dirname( __FILE__ ) . '/parsedown.php';
-					$parsedown = new Parsedown();
+					$parsedown = new Redux_Parsedown();
 
 					echo( $parsedown->text( $this->field['content'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 				} else {
