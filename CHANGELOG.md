@@ -13,6 +13,7 @@
 * Fixed: Redux tempates not showing on 'page attributes' for some.
 * Added:  WordPress 5.8 compatibility.
 * Improved: Better Gutenberg block editor detection.
+* Modified: Redux Pro no longer required for automatice Google font updates.
 * Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
 
 ## 4.1.29
