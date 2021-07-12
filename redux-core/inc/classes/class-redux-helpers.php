@@ -687,12 +687,12 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Determines deep array status.
 		 *
-		 * @param array $needle   array to test.
+		 * @param array|string $needle   array to test.
 		 * @param array $haystack Array to search.
 		 *
 		 * @return bool
 		 */
-		public static function array_in_array( array $needle, array $haystack ): bool {
+		public static function array_in_array( $needle, array $haystack ): bool {
 			// Make sure $needle is an array for foreach.
 			if ( ! is_array( $needle ) ) {
 				$needle = array( $needle );
