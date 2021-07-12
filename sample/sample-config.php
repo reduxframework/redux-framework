@@ -521,16 +521,12 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	);
 
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/accordion.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/box-shadow.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-gradient.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-palette.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-scheme.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/custom-fonts.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/date-time-picker.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/icon-select.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/js-button.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/metaboxes.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/multi-media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/repeater.php';
@@ -538,7 +534,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/shortcodes.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/social-profiles.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/taxonomy.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/typography.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/users.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/widget-areas.php';
 }
