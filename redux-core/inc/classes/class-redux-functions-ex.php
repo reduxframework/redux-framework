@@ -549,7 +549,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 *
 		 * @return string
 		 */
-		public static function get_site_utm_url( string $path, string $utm_medium, string $utm_content = null, bool $utm_campaign ): string {
+		public static function get_site_utm_url( string $path, string $utm_medium, string $utm_content = null, bool $utm_campaign = false ): string {
 			$url = self::get_site_url( $path );
 
 			if ( ! $utm_campaign ) {
