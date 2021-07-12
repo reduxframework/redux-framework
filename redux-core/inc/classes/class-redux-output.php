@@ -119,8 +119,8 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 								}
 							}
 
-							$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
-							$value            = isset( $core->options[ $field['id'] ] ) ? $core->options[ $field['id'] ] : $field['default'];
+							$field['default'] = $field['default'] ?? '';
+							$value            = $core->options[ $field['id'] ] ?? $field['default'];
 							$style_data       = '';
 							$data             = array(
 								'field' => $field,
@@ -172,6 +172,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 							}
 						}
 					}
+
 					if ( ! empty( $core->outputCSS ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 						// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 						$core->outputCSS = html_entity_decode( $core->outputCSS, ENT_QUOTES, 'UTF-8' );
@@ -353,6 +354,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$field = apply_filters( "redux/field/{$core->args['opt_name']}/_can_output_css", $field );
+
 			if ( isset( $field['force_output'] ) && true === $field['force_output'] ) {
 				return $return;
 			}
@@ -360,14 +362,14 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 			if ( ! empty( $field['required'] ) ) {
 				if ( isset( $field['required'][0] ) ) {
 					if ( ! is_array( $field['required'][0] ) && 3 === count( $field['required'] ) ) {
-						$parent_value = isset( $GLOBALS[ $core->args['global_variable'] ][ $field['required'][0] ] ) ? $GLOBALS[ $core->args['global_variable'] ][ $field['required'][0] ] : '';
+						$parent_value = $GLOBALS[ $core->args['global_variable'] ][ $field['required'][0] ] ?? '';
 						$check_value  = $field['required'][2];
 						$operation    = $field['required'][1];
 						$return       = $core->required_class->compare_value_dependencies( $parent_value, $check_value, $operation );
 					} elseif ( is_array( $field['required'][0] ) ) {
 						foreach ( $field['required'] as $required ) {
 							if ( isset( $required[0] ) && ! is_array( $required[0] ) && 3 === count( $required ) ) {
-								$parent_value = isset( $GLOBALS[ $core->args['global_variable'] ][ $required[0] ] ) ? $GLOBALS[ $core->args['global_variable'] ][ $required[0] ] : '';
+								$parent_value = $GLOBALS[ $core->args['global_variable'] ][ $required[0] ] ?? '';
 								$check_value  = $required[2];
 								$operation    = $required[1];
 								$return       = $core->required_class->compare_value_dependencies( $parent_value, $check_value, $operation );

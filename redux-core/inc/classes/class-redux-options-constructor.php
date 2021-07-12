@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Redux_Options_Object', false ) ) {
+if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 	/**
 	 * Class Redux_Options
@@ -50,8 +50,8 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		 * @param object $parent ReduxFramework pointer.
 		 */
 		public function __construct( $parent ) {
-
 			parent::__construct( $parent );
+
 			add_action( 'admin_init', array( $this, 'register' ) );
 
 		}
@@ -313,7 +313,7 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 					$core->sections[ $k ] = $section;
 				}
 
-				$heading = isset( $section['heading'] ) ? $section['heading'] : $section['title'];
+				$heading = $section['heading'] ?? $section['title'];
 
 				if ( isset( $section['permissions'] ) && false !== $section['permissions'] ) {
 					if ( ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
@@ -324,8 +324,8 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 
 							if ( 'section' !== $field_type || 'divide' !== $field_type || 'info' !== $field_type || 'raw' !== $field_type ) {
 								$field_id = $field_data['id'];
-								$default  = isset( $core->options_defaults[ $field_id ] ) ? $core->options_defaults[ $field_id ] : '';
-								$data     = isset( $core->options[ $field_id ] ) ? $core->options[ $field_id ] : $default;
+								$default  = $core->options_defaults[ $field_id ] ?? '';
+								$data     = $core->options[ $field_id ] ?? $default;
 
 								$this->hidden_perm_fields[ $field_id ] = $data;
 							}
