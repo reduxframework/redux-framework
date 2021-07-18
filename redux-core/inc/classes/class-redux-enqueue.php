@@ -411,7 +411,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 						}
 					}
 
-					if ( ( method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) {
+					if ( false !== $field_class && ( ( method_exists( $field_class, 'enqueue' ) ) || method_exists( $field_class, 'localize' ) ) ) {
 						if ( ! isset( $core->options[ $field['id'] ] ) ) {
 							$core->options[ $field['id'] ] = '';
 						}

@@ -138,23 +138,23 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			// Set value defaults.
 			$defaults = array(
-				'font-family'     => '',
-				'font-options'    => '',
-				'font-backup'     => '',
-				'text-align'      => '',
-				'text-transform'  => '',
-				'font-variant'    => '',
-				'text-decoration' => '',
-				'line-height'     => '',
-				'word-spacing'    => '',
-				'letter-spacing'  => '',
-				'subsets'         => '',
-				'google'          => false,
-				'font-script'     => '',
-				'font-weight'     => '',
-				'font-style'      => '',
-				'color'           => '',
-				'font-size'       => '',
+				'font-family'       => '',
+				'font-options'      => '',
+				'font-backup'       => '',
+				'text-align'        => '',
+				'text-transform'    => '',
+				'font-variant'      => '',
+				'text-decoration'   => '',
+				'line-height'       => '',
+				'word-spacing'      => '',
+				'letter-spacing'    => '',
+				'subsets'           => '',
+				'google'            => false,
+				'font-script'       => '',
+				'font-weight'       => '',
+				'font-style'        => '',
+				'color'             => '',
+				'font-size'         => '',
 				'margin-top'        => '',
 				'margin-bottom'     => '',
 				'shadow-color'      => '#000000',
@@ -633,10 +633,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			echo '<div class="clearfix"></div>';
 
-			// Margins
+			// Margins.
 			if ( $this->field['margin-top'] ) {
 				echo '<div class="input_wrapper margin-top redux-container-typography">';
-				echo '<label>' . __( 'Margin Top', 'redux-framework' ) . '</label>';
+				echo '<label>' . esc_html__( 'Margin Top', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
 				echo '<input type="text" class="span2 redux-typography redux-typography-margin-top mini typography-input ' . esc_attr( $this->field['class'] ) . '" title="' . esc_html__( 'Margin Top', 'redux-framework' ) . '" placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '" id="' . esc_attr( $this->field['id'] ) . '-margin-top" value="' . esc_attr( str_replace( $unit, '', $this->value['margin-top'] ) ) . '" data-value="' . esc_attr( str_replace( $unit, '', $this->value['margin-top'] ) ) . '">';
 				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
@@ -648,7 +648,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			/* Bottom Margin */
 			if ( $this->field['margin-bottom'] ) {
 				echo '<div class="input_wrapper margin-bottom redux-container-typography">';
-				echo '<label>' . __( 'Margin Bottom', 'redux-framework' ) . '</label>';
+				echo '<label>' . esc_html__( 'Margin Bottom', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
 				echo '<input type="text" class="span2 redux-typography redux-typography-margin-bottom mini typography-input ' . esc_attr( $this->field['class'] ) . '" title="' . esc_html__( 'Margin Bottom', 'redux-framework' ) . '" placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '" id="' . esc_attr( $this->field['id'] ) . '-margin-bottom" value="' . esc_attr( str_replace( $unit, '', $this->value['margin-bottom'] ) ) . '" data-value="' . esc_attr( str_replace( $unit, '', $this->value['margin-bottom'] ) ) . '">';
 				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
@@ -691,7 +691,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					'index' => 'color',
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				echo Redux_Functions_Ex::output_alpha_data( $data );
 
 				echo '>';
 				echo '</div>';
