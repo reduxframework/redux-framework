@@ -150,7 +150,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 *
 		 * @since ReduxFramework 3.0.0
 		 *
-		 * @param mixed $value the value of the option being added.
+		 * @param string|array $value the value of the option being added.
 		 */
 		public function set( $value = '' ) {
 			$core = $this->core();
@@ -969,11 +969,11 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		/**
 		 * ->get_default(); This is used to return the default value if default_show is set.
 		 *
-		 * @param       string $opt_name The option name to return.
-		 * @param mixed        $default  (null)  The value to return if default not set.
+		 * @param string $opt_name The option name to return.
+		 * @param mixed  $default  (null)  The value to return if default not set.
 		 *
 		 * @return      mixed $default
-		 *@since       1.0.1
+		 * @since       1.0.1
 		 * @access      public
 		 */
 		public function get_default( string $opt_name, $default = null ) {

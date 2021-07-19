@@ -533,9 +533,9 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * SHIM: set_options
 		 *
-		 * @param string $value Option values.
+		 * @param string|array $value Option values.
 		 */
-		public function set_options( string $value ) {
+		public function set_options( $value ) {
 			$this->options_class->set( $value );
 		}
 

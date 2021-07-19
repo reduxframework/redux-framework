@@ -90,12 +90,12 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Gets panel tab number from specified field.
 		 *
-		 * @param object $parent ReduxFramework object.
-		 * @param array  $field  Field array.
+		 * @param object       $parent ReduxFramework object.
+		 * @param array|string $field  Field array.
 		 *
 		 * @return int|string
 		 */
-		public static function tab_from_field( $parent, array $field ) {
+		public static function tab_from_field( $parent, $field ) {
 			foreach ( $parent->sections as $k => $section ) {
 				if ( ! isset( $section['title'] ) ) {
 					continue;
@@ -709,12 +709,12 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Enum through an entire deep array.
 		 *
-		 * @param string $needle   String to search for.
-		 * @param array  $haystack Array in which to search.
+		 * @param string|array $needle   String to search for.
+		 * @param array        $haystack Array in which to search.
 		 *
 		 * @return bool
 		 */
-		public static function recursive_array_search( string $needle, array $haystack ): bool {
+		public static function recursive_array_search( $needle, array $haystack ): bool {
 			foreach ( $haystack as $key => $value ) {
 				if ( $needle === $value || ( is_array( $value ) && self::recursive_array_search( $needle, $value ) !== false ) ) {
 					return true;

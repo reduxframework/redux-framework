@@ -39,15 +39,15 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Get the data.
 		 *
-		 * @param string     $type          Type.
-		 * @param array      $args          Args.
-		 * @param string     $opt_name      Opt name.
-		 * @param string|int $current_value Current value.
-		 * @param bool       $ajax          Tells if this is an AJAX call.
+		 * @param string|array $type          Type.
+		 * @param array        $args          Args.
+		 * @param string       $opt_name      Opt name.
+		 * @param string|int   $current_value Current value.
+		 * @param bool         $ajax          Tells if this is an AJAX call.
 		 *
 		 * @return array|mixed|string
 		 */
-		public function get( string $type, array $args = array(), string $opt_name = '', $current_value = '', bool $ajax = false ) {
+		public function get( $type, array $args = array(), string $opt_name = '', $current_value = '', bool $ajax = false ) {
 			$opt_name = $this->opt_name;
 
 			// We don't want to run this, it's not a string value. Send it back!

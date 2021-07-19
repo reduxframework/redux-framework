@@ -159,8 +159,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					'redux-extension-customizer',
 					$this->extension_url . 'redux-extension-customizer.css',
 					array(),
-					self::$version,
-					'all'
+					self::$version
 				);
 			}
 
@@ -202,7 +201,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function remove_core_customizer_class( $path ) {
+		public function remove_core_customizer_class( string $path ): string {
 			return '';
 		}
 
@@ -228,9 +227,9 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @param array $data Values.
 		 *
-		 * @return mixed
+		 * @return array
 		 */
-		public function override_values( $data ) {
+		public function override_values( array $data ): array {
 			self::get_post_values();
 
 			if ( isset( $_POST['customized'] ) && ! empty( self::$post_values ) ) { // phpcs:ignore WordPress.Security.NonceVerification
@@ -254,7 +253,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Render Redux fields.
 		 *
-		 * @param array $control .
+		 * @param object $control .
 		 */
 		public function render( $control ) {
 			$field_id = str_replace( $this->parent->args['opt_name'] . '-', '', $control->redux_id );
@@ -279,9 +278,9 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Register customizer controls.
 		 *
-		 * @param object $wp_customize .
+		 * @param WP_Customize_Manager $wp_customize .
 		 */
-		public function register_customizer_controls( $wp_customize ) {
+		public function register_customizer_controls( WP_Customize_Manager $wp_customize ) {
 			if ( ! class_exists( 'Redux_Customizer_Section' ) ) {
 				require_once dirname( __FILE__ ) . '/inc/class-redux-customizer-section.php';
 				if ( method_exists( $wp_customize, 'register_section_type' ) ) {
@@ -354,7 +353,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					continue;
 				}
 
-				$section['permissions'] = isset( $section['permissions'] ) ? $section['permissions'] : 'edit_theme_options';
+				$section['permissions'] = $section['permissions'] ?? 'edit_theme_options';
 
 				// No errors please.
 				if ( ! isset( $section['desc'] ) ) {
@@ -455,7 +454,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 						)
 					);
 
-					$option['permissions'] = isset( $option['permissions'] ) ? $option['permissions'] : 'edit_theme_options';
+					$option['permissions'] = $option['permissions'] ?? 'edit_theme_options';
 
 					// Change the item priority if not set.
 					if ( 'heading' !== $option['type'] && ! isset( $option['priority'] ) ) {
@@ -513,7 +512,8 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 								require_once $icons_file;
 							}
 						}
-						$option['options'] = $this->parent->wordpress_data->get( $option['data'], $option['args'] );
+
+						$option['options'] = $this->parent->wordpress_data->get( $option['data'], $option['args'], $this->parent->args['opt_name'] );
 					}
 
 					$class_name = 'Redux_Customizer_Control_' . $option['type'];
@@ -567,11 +567,11 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Add customizer section.
 		 *
-		 * @param string $id           ID.
-		 * @param array  $args         Args.
-		 * @param mixed $wp_customize .
+		 * @param string               $id           ID.
+		 * @param array                $args         Args.
+		 * @param WP_Customize_Manager $wp_customize .
 		 */
-		public function add_section( string $id, array $args, $wp_customize ) {
+		public function add_section( string $id, array $args, WP_Customize_Manager $wp_customize ) {
 
 			if ( is_a( $id, 'WP_Customize_Section' ) ) {
 				$section = $id;
@@ -587,14 +587,14 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Add a customize panel.
 		 *
+		 * @param WP_Customize_Panel|string $id           Customize Panel object, or Panel ID.
+		 * @param array                     $args         Optional. Panel arguments. Default empty array.
+		 * @param WP_Customize_Manager      $wp_customize .
+		 *
 		 * @since  4.0.0
 		 * @access public
-		 *
-		 * @param WP_Customize_Panel|string $id   Customize Panel object, or Panel ID.
-		 * @param array                     $args Optional. Panel arguments. Default empty array.
-		 * @param object                    $wp_customize .
 		 */
-		public function add_panel( $id, $args, $wp_customize ) {
+		public function add_panel( $id, array $args, WP_Customize_Manager $wp_customize ) {
 			if ( is_a( $id, 'WP_Customize_Panel' ) ) {
 				$panel = $id;
 			} else {
@@ -611,7 +611,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @param array $option Option.
 		 */
-		public function field_render( $option ) {
+		public function field_render( array $option ) {
 			echo '1';
 			preg_match_all( '/\[([^\]]*)\]/', $option->id, $matches );
 			$id = $matches[1][0];
@@ -626,16 +626,16 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @param array $plugin_options .
 		 */
-		public function customizer_save_before( $plugin_options ) {
+		public function customizer_save_before( array $plugin_options ) {
 			$this->before_save = $this->parent->options;
 		}
 
 		/**
 		 * Actions to take after customizer save.
 		 *
-		 * @param Object $wp_customize .
+		 * @param WP_Customize_Manager $wp_customize .
 		 */
-		public function customizer_save_after( $wp_customize ) {
+		public function customizer_save_after( WP_Customize_Manager $wp_customize ) {
 			if ( empty( $this->parent->options ) ) {
 				$this->parent->get_options();
 			}
@@ -780,14 +780,13 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Validate the options before insertion
 		 *
-		 * @since       3.0.0
-		 * @access      public
-		 *
 		 * @param       array $value The options array.
 		 *
-		 * @return $value
+		 * @return      $value
+		 * @since       3.0.0
+		 * @access      public
 		 */
-		public function field_validation( $value ) {
+		public function field_validation( array $value ): array {
 
 			return $value;
 		}

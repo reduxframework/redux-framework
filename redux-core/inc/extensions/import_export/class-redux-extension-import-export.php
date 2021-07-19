@@ -99,7 +99,7 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function custom_upload_mimes( $existing_mimes = array() ) {
+		public function custom_upload_mimes( array $existing_mimes = array() ): array {
 			$existing_mimes['redux'] = 'application/redux';
 
 			return $existing_mimes;
@@ -174,10 +174,6 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 				header( 'Expires: 0' );
 				header( 'Cache-Control: must-revalidate' );
 				header( 'Pragma: public' );
-
-				echo( $content ); // phpcs:ignore WordPress.Security.EscapeOutput
-
-				exit;
 			} else {
 				header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
 				header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . 'GMT' );
@@ -188,10 +184,11 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 
 				// Can't include the type. Thanks old Firefox and IE. BAH.
 				// header('Content-type: application/json');.
-				echo( $content ); // phpcs:ignore WordPress.Security.EscapeOutput
-
-				exit;
 			}
+
+			// phpcs:ignore WordPress.Security.EscapeOutput
+			echo( $content );
+			exit;
 		}
 
 		/**
