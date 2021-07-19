@@ -35,10 +35,18 @@ class Init {
 	 * @access public
 	 */
 	public function __construct() {
+		global $pagenow;
+
+		if ( 'widgets.php' === $pagenow ) {
+			return;
+		}
+
 		add_action( 'init', array( $this, 'load' ) );
+
 		if ( did_action( 'init' ) ) { // In case the devs load it at the wrong place.
 			$this->load();
 		}
+
 		// Editor Load.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ), 1 );
 		// Admin Load.
