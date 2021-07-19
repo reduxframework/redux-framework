@@ -119,9 +119,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function isFieldInUseByType( array $fields, array $field = array() ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// TODO - Uncomment this at release.
 			// phpcs:ignore Squiz.PHP.CommentedOutCode
-			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::tab_from_field( $parent, $field )' );
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::tab_from_field( $parent, $field )' );
 			return self::is_field_in_use_by_type( $fields, $field );
 		}
 
@@ -129,7 +128,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * Verifies if specified field type is in use.
 		 *
 		 * @param array $fields Field arrays.
-		 * @param array $field  Field array to check.
+		 * @param array $field  Field arrays to check.
 		 *
 		 * @return bool
 		 */
@@ -153,7 +152,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @deprecated No longer using camelCase function names.
 		 */
 		public static function isFieldInUse( ReduxFramework $parent, string $field ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// TODO - Uncomment this at release.
 			// phpcs:ignore Squiz.PHP.CommentedOutCode
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::is_field_in_use( $parent, $field )' );
 			return self::is_field_in_use( $parent, $field );
@@ -736,7 +734,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @since      3.1.7
 		 */
 		public static function cleanFilePath( string $path ): string { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// TODO - Uncomment this at release.
 			// phpcs:ignore Squiz.PHP.CommentedOutCode
 			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Functions_Ex::wp_normalize_path( $path )' );
 			return Redux_Functions_Ex::wp_normalize_path( $path );

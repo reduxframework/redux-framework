@@ -22,7 +22,6 @@ abstract class Redux_Descriptor_Types {
 	const NUMBER   = 'number';
 	const RANGE    = 'range';
 	const OPTIONS  = 'array';
-	const WP_DATA  = 'wp_data';
 	const RADIO    = 'radio';
 	// Todo add more field types for the builder!
 
@@ -31,7 +30,7 @@ abstract class Redux_Descriptor_Types {
 	 *
 	 * @return array
 	 */
-	public static function get_types() {
+	public static function get_types(): array {
 		static $const_cache;
 
 		if ( ! isset( $const_cache ) ) {
@@ -50,7 +49,7 @@ abstract class Redux_Descriptor_Types {
 	 *
 	 * @return bool
 	 */
-	public static function is_valid_type( $value ) {
+	public static function is_valid_type( string $value ): bool {
 		return in_array( $value, self::get_types(), true );
 	}
 

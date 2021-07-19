@@ -27,13 +27,6 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 		private $slug;
 
 		/**
-		 * Name.
-		 *
-		 * @var string $name
-		 */
-		private $name;
-
-		/**
 		 * No Bug Option.
 		 *
 		 * @var string $nobug_option
@@ -87,7 +80,7 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 		 *
 		 * @param array $args Arguments.
 		 */
-		public function __construct( $args = array() ) {
+		public function __construct( array $args = array() ) {
 			global $pagenow;
 
 			$defaults = array(
@@ -106,18 +99,17 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 				$args['slug'] .= '-gutenberg';
 			}
 			$this->slug              = $args['slug'];
-			$this->name              = $args['name'];
 			$this->nobug_option      = $this->slug . '-no-bug';
 			$this->nonce             = $this->slug . '-nonce';
 			$this->autoenable_option = $this->slug . '-force-enable';
 			$this->decativate_option = $this->slug . '-deactivate-plugins';
 
-			if ( is_admin() && ! self::$is_disabled && ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) && ! get_site_option( $this->nobug_option, false ) ) {
+			if ( is_admin() && ! self::$is_disabled && ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) && ! get_site_option( $this->nobug_option ) ) {
 				// We only want to do this for posts or pages.
 				if ( ! isset( $_GET['post_type'] ) || ( isset( $_GET['post_type'] ) && 'page' === $_GET['post_type'] ) ) { // phpcs:ignore
 					add_action( 'init', array( $this, 'check_init' ), 998 );
 					add_action( 'init', array( $this, 'run_user_actions' ), 999 );
-					if ( ! get_site_option( $this->nobug_option, false ) ) {
+					if ( ! get_site_option( $this->nobug_option ) ) {
 						add_action( 'plugins_loaded', array( $this, 'check_plugin' ), 999 );
 						add_action( 'after_setup_theme', array( $this, 'check_theme' ), 999 );
 						add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
@@ -131,7 +123,7 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 		 *
 		 * @param string $slug Slug for instance.
 		 */
-		public static function cleanup_options( $slug = '' ) {
+		public static function cleanup_options( string $slug = '' ) {
 			if ( ! empty( $slug ) ) {
 				$obj = new Redux_Enable_Gutenberg(
 					array(
@@ -181,13 +173,13 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 				if ( isset( $_GET[ $this->decativate_option ] ) ) {  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					// That didn't work.
 					$data['header']  = __( 'Hmm, it seems something else is disabling Gutenberg...', 'redux-framework' );
-					$data['content'] = sprintf( '<p>Well seems like we have more to do. Don\'t worry, we can still fix this! Click the <strong>Enable Gutenberg</strong> button and Redux will enable Gutenberg for you.</p>' );
+					$data['content'] = sprintf( '<p>' . esc_html( "Well seems like we have more to do. Don't worry, we can still fix this! Click the $1%sEnable Gutenberg$2%s button and Redux will enable Gutenberg for you." ) . '</p>', '<strong>', '</strong>' );
 				} elseif ( self::$theme_disabled ) {
 					$data['header']   = __( 'Your theme author has disabled Gutenberg!', 'redux-framework' );
-					$data['content'] .= sprintf( '<p>It looks like your theme has disabled Gutenberg. Don\'t panic though! Click the <strong>Enable Gutenberg</strong> button to the right and Redux will enable Gutenberg for you.</p>' );
+					$data['content'] .= sprintf( '<p>' . esc_html( "It looks like your theme has disabled Gutenberg. Don\'t panic though! Click the $1%sEnable Gutenberg$2%s button to the right and Redux will enable Gutenberg for you." ) . '</p>', '<strong>', '</strong>' );
 				} else {
 					$data['header']   = __( 'Looks like something has disabled Gutenberg?', 'redux-framework' );
-					$data['content'] .= sprintf( '<p>Did you know that Gutenberg is disabled? If that\'s intended you can dismiss this notice, not what you intended? Click <strong>Enable Gutenberg</strong> and Redux will automatically fix this for you.</p>' );
+					$data['content'] .= sprintf( '<p>' . esc_html( "Did you know that Gutenberg is disabled? If that\'s intended you can dismiss this notice, not what you intended? Click $1%sEnable Gutenberg$2%s and Redux will automatically fix this for you." ) . '</p>', '<strong>', '</strong>' );
 				}
 
 				$data['url']    = $auto_enable_url;
@@ -397,7 +389,7 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 		/**
 		 * Check for filter method.
 		 */
-		private function check_for_filter() {
+		private function check_for_filter(): bool {
 			if ( version_compare( $GLOBALS['wp_version'], '5.0-beta', '>' ) ) {
 				if ( has_filter( 'use_block_editor_for_post_type', '__return_false' ) ) {
 					return true;
@@ -494,7 +486,7 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 				}
 			}
 
-			if ( self::$is_disabled && get_site_option( $this->autoenable_option, false ) ) {
+			if ( self::$is_disabled && get_site_option( $this->autoenable_option ) ) {
 				$this->remove_filter();
 			}
 

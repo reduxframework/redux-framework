@@ -53,13 +53,6 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		private $wp_filesystem;
 
 		/**
-		 * Result of call to `request_filesystem_credentials().
-		 *
-		 * @var array
-		 */
-		private $credentials;
-
-		/**
 		 * If DBI_Filesystem should attempt to use the WP_Filesystem class.
 		 *
 		 * @var bool
@@ -92,7 +85,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @param bool $force_no_fs Force no use of the filesystem.
 		 */
-		public function __construct( $force_no_fs = false ) {
+		public function __construct( bool $force_no_fs = false ) {
 
 			// This little number fixes some issues with certain filesystem setups.
 
@@ -161,15 +154,15 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * TODO: provide notice and input in wp-admin for users when this fails
 		 */
 		public function maybe_init_wp_filesystem() {
-			// Setup the filesystem with creds.
+			// Set up the filesystem with creds.
 			require_once ABSPATH . '/wp-admin/includes/template.php';
 			require_once ABSPATH . '/wp-includes/pluggable.php';
 			require_once ABSPATH . '/wp-admin/includes/file.php';
 			ob_start();
-			$this->credentials = request_filesystem_credentials( '', '', false, false, null );
-			$ob_contents       = ob_get_contents();
+			$credentials = request_filesystem_credentials( '', '', false, false );
+			$ob_contents = ob_get_contents();
 			ob_end_clean();
-			if ( @wp_filesystem( $this->credentials ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors
+			if ( @wp_filesystem( $credentials ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors
 				global $wp_filesystem;
 				$this->wp_filesystem  = $wp_filesystem;
 				$this->use_filesystem = true;
@@ -181,13 +174,13 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Init WO Filesystem.
 		 *
 		 * @param string $form_url Form URL.
-		 * @param string $method Connect method.
-		 * @param bool   $context Context.
-		 * @param null   $fields Fields.
+		 * @param string $method   Connect method.
+		 * @param bool   $context  Context.
+		 * @param null   $fields   Fields.
 		 *
 		 * @return bool
 		 */
-		public function advanced_filesystem_init( $form_url, $method = '', $context = false, $fields = null ) {
+		public function advanced_filesystem_init( string $form_url, string $method = '', bool $context = false, $fields = null ): bool {
 			if ( ! empty( $this->wp_filesystem ) && $this->use_filesystem ) {
 				return true;
 			}
@@ -207,7 +200,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				ob_end_clean();
 
 				/**
-				 * If we comes here - we don't have credentials
+				 * If we come here - we don't have credentials
 				 * so the request for them is displaying
 				 * no need for further processing
 				 * */
@@ -250,11 +243,11 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @param string $action Action to perform.
 		 * @param string $file File to perform upon.
-		 * @param string $params Argument for action.
+		 * @param array  $params Argument for action.
 		 *
 		 * @return bool|void
 		 */
-		public function execute( $action, $file = '', $params = '' ) {
+		public function execute( string $action, string $file = '', array $params = array() ) {
 			if ( empty( $this->parent->args ) ) {
 				return;
 			}
@@ -314,22 +307,22 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$this->put_contents( $version_path, Redux_Core::$version );
 			} else {
 				$version_compare = $this->get_contents( $version_path );
-				if ( Redux_Core::$version !== $version_compare ) {
+				if ( (string) Redux_Core::$version !== $version_compare ) {
 					$this->put_contents( $version_path, Redux_Core::$version );
 				}
 			}
 		}
 
 		/**
-		 * Do requested filesystem action.
+		 * Do request filesystem action.
 		 *
 		 * @param string $action Requested action.
 		 * @param string $file File to perform action upon.
-		 * @param string $params Action arguments.
+		 * @param array  $params Action arguments.
 		 *
 		 * @return bool|void
 		 */
-		public function do_action( $action, $file = '', $params = '' ) {
+		public function do_action( string $action, string $file = '', array $params = array() ) {
 			if ( ! empty( $params ) ) {
 
 				// phpcs:ignore WordPress.PHP.DontExtract
@@ -422,11 +415,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $res ) {
 				if ( 'dirlist' === $action ) {
-					if ( empty( $res ) || false === $res || '' === $res ) {
-						return;
-					}
-
-					if ( is_array( $res ) && empty( $res ) ) {
+					if ( empty( $res ) || '' === $res ) {
 						return;
 					}
 
@@ -475,7 +464,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function using_wp_filesystem() {
+		public function using_wp_filesystem(): bool {
 			return $this->use_filesystem;
 		}
 
@@ -483,9 +472,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Attempts to use the correct path for the FS method being used.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return string
 		 */
-		public function get_sanitized_path( $abs_path ) {
+		public function get_sanitized_path( string $abs_path ): string {
 			if ( $this->using_wp_filesystem() ) {
 				return str_replace( ABSPATH, $this->wp_filesystem->abspath(), $abs_path );
 			}
@@ -502,10 +492,11 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function touch( $abs_path, $time = 0, $atime = 0 ) {
+		public function touch( string $abs_path, int $time = 0, int $atime = 0 ): bool {
 			if ( 0 === $time ) {
 				$time = time();
 			}
+
 			if ( 0 === $atime ) {
 				$atime = time();
 			}
@@ -524,13 +515,13 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Calls file_put_contents with chmod.
 		 *
-		 * @param string $abs_path Absolute path.
-		 * @param string $contents Content to write to the file.
-		 * @param string $perms Default permissions value.
+		 * @param string      $abs_path Absolute path.
+		 * @param string      $contents Content to write to the file.
+		 * @param string|null $perms    Default permissions value.
 		 *
 		 * @return bool
 		 */
-		public function put_contents( $abs_path, $contents, $perms = null ) {
+		public function put_contents( string $abs_path, string $contents, string $perms = null ): bool {
 
 			if ( ! $this->is_dir( dirname( $abs_path ) ) ) {
 				$this->mkdir( dirname( $abs_path ) );
@@ -561,7 +552,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function get_cache_path( $path ) {
+		public function get_cache_path( string $path ): string {
 			return $this->folder . $path;
 		}
 
@@ -570,9 +561,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @param string $abs_path Absolute path.
 		 * @param string $contents Contents to put in the cache.
+		 *
 		 * @return bool
 		 */
-		public function put_contents_cache( $abs_path, $contents ) {
+		public function put_contents_cache( string $abs_path, string $contents ): bool {
 			return $this->put_contents( $this->get_cache_path( $abs_path ), $contents );
 		}
 
@@ -582,7 +574,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @param string $abs_path Absolute path.
 		 * @return bool
 		 */
-		public function file_exists( $abs_path ) {
+		public function file_exists( string $abs_path ): bool {
 			$return = file_exists( $abs_path );
 
 			if ( ! $return && $this->use_filesystem ) {
@@ -597,9 +589,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Get a file's size.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return int
 		 */
-		public function filesize( $abs_path ) {
+		public function filesize( string $abs_path ): int {
 			$return = filesize( $abs_path );
 
 			if ( ! $return && $this->use_filesystem ) {
@@ -614,9 +607,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Get the contents of a file as a string.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return string
 		 */
-		public function get_local_file_contents( $abs_path ) {
+		public function get_local_file_contents( string $abs_path ): string {
 
 			try {
 				ob_start();
@@ -625,7 +619,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				}
 				$contents = ob_get_clean();
 			} catch ( Exception $e ) {
-				// This means that ob_start has been disabled on the system. Let's fallback to good old file_get_contents.
+				// This means that ob_start has been disabled on the system. Lets fallback to good old file_get_contents.
 				$contents = file_get_contents( $abs_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			}
 
@@ -636,9 +630,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Get the contents of a file as a string.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return string
 		 */
-		public function get_contents( $abs_path ) {
+		public function get_contents( string $abs_path ): string {
 			$abs_path = $this->get_sanitized_path( $abs_path );
 			$return   = '';
 			if ( $this->use_filesystem ) {
@@ -654,10 +649,11 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Delete a file.
 		 *
-		 * @param string $abs_path  Absolute path.
+		 * @param string $abs_path Absolute path.
+		 *
 		 * @return bool
 		 */
-		public function unlink( $abs_path ) {
+		public function unlink( string $abs_path ): bool {
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors
 			$return = @unlink( $abs_path );
 
@@ -672,11 +668,12 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Chmod a file.
 		 *
-		 * @param string $abs_path Absolute path.
-		 * @param int    $perms Permission value, if not provided, defaults to WP standards.
+		 * @param string   $abs_path Absolute path.
+		 * @param int|null $perms    Permission value, if not provided, defaults to WP standards.
+		 *
 		 * @return bool
 		 */
-		public function chmod( $abs_path, $perms = null ) {
+		public function chmod( string $abs_path, int $perms = null ): bool {
 			if ( ! $this->file_exists( $abs_path ) ) {
 				return false;
 			}
@@ -698,9 +695,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Check if this path is a directory.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return bool
 		 */
-		public function is_dir( $abs_path ) {
+		public function is_dir( string $abs_path ): bool {
 			$return = is_dir( $abs_path );
 
 			if ( ! $return && $this->use_filesystem ) {
@@ -715,9 +713,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Check if the specified path is a file.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return bool
 		 */
-		public function is_file( $abs_path ) {
+		public function is_file( string $abs_path ): bool {
 			$return = is_file( $abs_path );
 
 			if ( ! $return && $this->use_filesystem ) {
@@ -732,9 +731,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Is the specified path readable.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return bool
 		 */
-		public function is_readable( $abs_path ) {
+		public function is_readable( string $abs_path ): bool {
 			$return = is_readable( $abs_path );
 
 			if ( ! $return && $this->use_filesystem ) {
@@ -749,9 +749,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Is the specified path writable.
 		 *
 		 * @param string $abs_path Absolute path.
+		 *
 		 * @return bool
 		 */
-		public function is_writable( $abs_path ) {
+		public function is_writable( string $abs_path ): bool {
 			$return = is_writable( $abs_path );
 
 			if ( ! $return && $this->use_filesystem ) {
@@ -767,7 +768,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @param string $path Directory to add the index to.
 		 */
-		private function create_index( $path ) {
+		private function create_index( string $path ) {
 			$index_path = trailingslashit( $path ) . 'index.php';
 			if ( ! $this->file_exists( $index_path ) ) {
 				$this->put_contents( $index_path, "<?php\n//Silence is golden" );
@@ -777,11 +778,12 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Recursive mkdir.
 		 *
-		 * @param string $abs_path Absolute path.
-		 * @param int    $perms Permissions, if default not required.
+		 * @param string   $abs_path Absolute path.
+		 * @param int|null $perms    Permissions, if default not required.
+		 *
 		 * @return bool
 		 */
-		public function mkdir( $abs_path, $perms = null ) {
+		public function mkdir( string $abs_path, int $perms = null ): bool {
 			if ( is_null( $perms ) ) {
 				$perms = $this->chmod_dir;
 			}
@@ -843,11 +845,12 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Delete a directory.
 		 *
-		 * @param string $abs_path Absolute path.
+		 * @param string $abs_path  Absolute path.
 		 * @param bool   $recursive Set to recursive create.
+		 *
 		 * @return bool
 		 */
-		public function rmdir( $abs_path, $recursive = false ) {
+		public function rmdir( string $abs_path, bool $recursive = false ): bool {
 			if ( ! $this->is_dir( $abs_path ) ) {
 				return false;
 			}
@@ -892,12 +895,13 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Get a list of files/folders under specified directory.
 		 *
-		 * @param array $abs_path Absolute path.
-		 * @param bool  $include_hidden Include hidden files, defaults to true.
-		 * @param bool  $recursive Recursive search, defaults to false.
+		 * @param string $abs_path       Absolute path.
+		 * @param bool   $include_hidden Include hidden files, defaults to true.
+		 * @param bool   $recursive      Recursive search, defaults to false.
+		 *
 		 * @return array|bool
 		 */
-		public function scandir( $abs_path, $include_hidden = true, $recursive = false ) {
+		public function scandir( string $abs_path, bool $include_hidden = true, bool $recursive = false ) {
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors
 			$dirlist = @scandir( $abs_path );
 			if ( false === $dirlist ) {
@@ -930,12 +934,13 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Light wrapper for move_uploaded_file with chmod.
 		 *
-		 * @param string   $file Source file.
+		 * @param string   $file        Source file.
 		 * @param string   $destination File destination.
-		 * @param int|null $perms Permission value.
+		 * @param int|null $perms       Permission value.
+		 *
 		 * @return bool
 		 */
-		public function move_uploaded_file( $file, $destination, $perms = null ) {
+		public function move_uploaded_file( string $file, string $destination, int $perms = null ): bool {
 			// TODO: look into replicating more functionality from wp_handle_upload().
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors
 			$return = @move_uploaded_file( $file, $destination );
@@ -957,7 +962,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @return bool
 		 * Taken from WP_Filesystem_Direct
 		 */
-		public function copy( $source_abs_path, $destination_abs_path, $overwrite = true, $perms = false ) {
+		public function copy( string $source_abs_path, string $destination_abs_path, bool $overwrite = true, $perms = false ): bool {
 
 			// Error if source file doesn't exist.
 			if ( ! $this->file_exists( $source_abs_path ) ) {
@@ -999,7 +1004,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @param bool   $overwrite Overwrite if file exists.
 		 * @return bool
 		 */
-		public function move( $source_abs_path, $destination_abs_path, $overwrite = true ) {
+		public function move( string $source_abs_path, string $destination_abs_path, bool $overwrite = true ): bool {
 
 			// Error if source file doesn't exist.
 			if ( ! $this->file_exists( $source_abs_path ) ) {
@@ -1024,7 +1029,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				}
 			}
 
-			if ( ! $return && $this->use_filesystem ) {
+			if ( $this->use_filesystem ) {
 				$source_abs_path      = $this->get_sanitized_path( $source_abs_path );
 				$destination_abs_path = $this->get_sanitized_path( $destination_abs_path );
 
@@ -1038,13 +1043,13 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Shim: get_template.
 		 *
 		 * @param string $file Template name.
-		 * @return string Path to template file.
+		 *
+		 * @return void Path to template file.
 		 */
-		public function get_template( $file ) {
+		public function get_template( string $file ) {
 			$panel = new Redux_Panel( $this );
-			return $panel->get_template( $file );
+			$panel->get_template( $file );
 		}
-
 	}
 
 	Redux_Filesystem::get_instance();

@@ -18,10 +18,10 @@ if ( ! class_exists( 'Redux_I18n', false ) ) {
 		/**
 		 * Redux_I18n constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
-		 * @param string $file Translation file.
+		 * @param ReduxFramework $parent ReduxFramework pointer.
+		 * @param string         $file Translation file.
 		 */
-		public function __construct( $parent, $file ) {
+		public function __construct( ReduxFramework $parent, string $file ) {
 			parent::__construct( $parent );
 
 			$this->load( $file );
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Redux_I18n', false ) ) {
 		 *
 		 * @param string $file Path to translation files.
 		 */
-		private function load( $file ) {
+		private function load( string $file ) {
 			$domain = 'redux-framework';
 
 			$core = $this->core();

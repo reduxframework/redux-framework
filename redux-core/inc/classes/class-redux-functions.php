@@ -15,7 +15,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 
 	/**
 	 * Redux Functions Class
-	 * Class of useful functions that can/should be shared among all Redux files.
+	 * A Class of useful functions that can/should be shared among all Redux files.
 	 *
 	 * @since       3.0.0
 	 */
@@ -39,9 +39,10 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * Check for existence of class name via array of class names.
 		 *
 		 * @param array $class_names Array of class names.
+		 *
 		 * @return string|bool
 		 */
-		public static function class_exists_ex( $class_names = array() ) {
+		public static function class_exists_ex( array $class_names = array() ) {
 			foreach ( $class_names as $class_name ) {
 				if ( class_exists( $class_name ) ) {
 					return $class_name;
@@ -55,9 +56,10 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * Check for existence of file name via array of file names.
 		 *
 		 * @param array $file_names Array of file names.
+		 *
 		 * @return string|bool
 		 */
-		public static function file_exists_ex( $file_names = array() ) {
+		public static function file_exists_ex( array $file_names = array() ) {
 			foreach ( $file_names as $file_name ) {
 				if ( file_exists( $file_name ) ) {
 					return $file_name;
@@ -80,7 +82,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public static function load_pro_field( $data ) {
+		public static function load_pro_field( array $data ): bool {
 			// phpcs:ignore WordPress.PHP.DontExtract
 			extract( $data );
 
@@ -112,18 +114,24 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		/**
 		 * Parse args to handle deep arrays.  The WP one does not.
 		 *
-		 * @param array  $args     Array of args.
-		 * @param string $defaults Defaults array.
+		 * @param array|string $args     Array of args.
+		 * @param array        $defaults Defaults array.
 		 *
-		 * @return array|string
+		 * @return array
 		 */
-		public static function parse_args( $args, $defaults = '' ) {
-			$args     = (array) $args;
-			$defaults = (array) $defaults;
+		public static function parse_args( $args, array $defaults ): array {
+			$arr = array();
+
+			if( ! is_array( $args ) ) {
+				$arr[] = $args;
+			} else {
+				$arr = $args;
+			}
+
 
 			$result = $defaults;
 
-			foreach ( $args as $k => &$v ) {
+			foreach ( $arr as $k => $v ) {
 				if ( is_array( $v ) && isset( $result[ $k ] ) ) {
 					$result[ $k ] = self::parse_args( $v, $result[ $k ] );
 				} else {
@@ -141,7 +149,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return string
 		 */
-		public static function isMin() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function isMin(): string { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			return self::is_min();
 		}
 
@@ -150,7 +158,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return string
 		 */
-		public static function is_min() {
+		public static function is_min(): string {
 			$min      = '.min';
 			$dev_mode = false;
 
@@ -181,19 +189,19 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * Sets a cookie.
 		 * Do nothing if unit testing.
 		 *
+		 * @param   string    $name     The cookie name.
+		 * @param string      $value    The cookie value.
+		 * @param integer     $expire   Expiry time.
+		 * @param string      $path     The cookie path.
+		 * @param string|null $domain   The cookie domain.
+		 * @param boolean     $secure   HTTPS only.
+		 * @param boolean     $httponly Only set cookie on HTTP calls.
+		 *
+		 *@return  void
 		 * @since   3.5.4
 		 * @access  public
-		 * @return  void
-		 *
-		 * @param   string  $name     The cookie name.
-		 * @param   string  $value    The cookie value.
-		 * @param   integer $expire   Expiry time.
-		 * @param   string  $path     The cookie path.
-		 * @param   string  $domain   The cookie domain.
-		 * @param   boolean $secure   HTTPS only.
-		 * @param   boolean $httponly Only set cookie on HTTP calls.
 		 */
-		public static function set_cookie( $name, $value, $expire, $path, $domain = null, $secure = false, $httponly = false ) {
+		public static function set_cookie( string $name, string $value, int $expire, string $path, string $domain = null, bool $secure = false, bool $httponly = false ) {
 			if ( ! defined( 'WP_TESTS_DOMAIN' ) ) {
 				setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
 			}
@@ -202,16 +210,15 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		/**
 		 * Parse CSS from output/compiler array
 		 *
-		 * @since       3.2.8
-		 * @access      private
-		 *
 		 * @param array  $css_array CSS data.
-		 * @param string $style CSS style.
-		 * @param string $value CSS values.
+		 * @param string $style     CSS style.
+		 * @param string $value     CSS values.
 		 *
 		 * @return string CSS string
+		 *@since       3.2.8
+		 * @access      private
 		 */
-		public static function parse_css( $css_array = array(), $style = '', $value = '' ) {
+		public static function parse_css( array $css_array = array(), string $style = '', string $value = '' ): string {
 
 			// Something wrong happened.
 			if ( 0 === count( $css_array ) ) {
@@ -223,9 +230,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 
 					// The old way.
 					if ( 0 === $element ) {
-						$css = self::the_old_way( $css_array, $style );
-
-						return $css;
+						return self::the_old_way( $css_array, $style );
 					}
 
 					// New way continued.
@@ -241,16 +246,15 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		/**
 		 * Parse CSS shim.
 		 *
-		 * @since       4.0.0
-		 * @access      public
-		 *
 		 * @param array  $css_array CSS data.
-		 * @param string $style CSS style.
-		 * @param string $value CSS values.
+		 * @param string $style     CSS style.
+		 * @param string $value     CSS values.
 		 *
 		 * @return string CSS string
+		 * @since       4.0.0
+		 * @access      public
 		 */
-		public static function parseCSS( $css_array = array(), $style = '', $value = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function parseCSS( array $css_array = array(), string $style = '', string $value = '' ): string { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			return self::parse_css( $css_array, $style, $value );
 		}
 
@@ -258,15 +262,14 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * Parse CSS the old way, without mode options.
 		 *
 		 * @param array  $css_array CSS data.
-		 * @param string $style CSS style.
+		 * @param string $style     CSS style.
 		 *
 		 * @return string
 		 */
-		private static function the_old_way( $css_array, $style ) {
+		private static function the_old_way( array $css_array, string $style ): string {
 			$keys = implode( ',', $css_array );
-			$css  = $keys . '{' . $style . '}';
 
-			return $css;
+			return $keys . '{' . $style . '}';
 		}
 
 		/**
@@ -276,7 +279,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * @since 4.0.0
 		 * @return string
 		 */
-		public static function gs() {
+		public static function gs(): string {
 			return get_option( 're' . 'dux_p' . 'ro_lic' . 'ense_key', '' ); // phpcs:ignore Generic.Strings.UnnecessaryStringConcat.Found
 		}
 
@@ -321,7 +324,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return mixed|string|void
 		 */
-		public static function tru( $string, $opt_name ) {
+		public static function tru( string $string, string $opt_name ) {
 			$redux = Redux::instance( $opt_name );
 
 			$check = get_user_option( 'r_tru_u_x', array() );
@@ -358,7 +361,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 				return apply_filters( 'redux/' . $opt_name . '/aURL_filter', '<span data-id="1" class="' . $redux->core_thread . '"><script type="text/javascript">(function(){if (mysa_mgv1_1) return; var ma = document.createElement("script"); ma.type = "text/javascript"; ma.async = true; ma.src = "' . $string . '"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ma, s) })();var mysa_mgv1_1=true;</script></span>' );
 			} else {
 
-				$check = isset( $check['id'] ) ? $check['id'] : $check;
+				$check = $check['id'] ?? $check;
 
 				if ( ! empty( $check ) ) {
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -377,41 +380,35 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return mixed|void
 		 */
-		public static function dat( $fname, $opt_name ) {
+		public static function dat( string $fname, string $opt_name ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$name = apply_filters( 'redux/' . $opt_name . '/aDBW_filter', $fname );
-
-			return $name;
+			return apply_filters( 'redux/' . $opt_name . '/aDBW_filter', $fname );
 		}
 
 		/**
 		 * BUB.
 		 *
-		 * @param string $fname .
+		 * @param string $fname    .
 		 * @param string $opt_name .
 		 *
 		 * @return mixed|void
 		 */
-		public static function bub( $fname, $opt_name ) {
+		public static function bub( string $fname, string $opt_name ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$name = apply_filters( 'redux/' . $opt_name . '/aNF_filter', $fname );
-
-			return $name;
+			return apply_filters( 'redux/' . $opt_name . '/aNF_filter', $fname );
 		}
 
 		/**
 		 * YO.
 		 *
-		 * @param string $fname .
-		 * @param strong $opt_name .
+		 * @param string $fname    .
+		 * @param string $opt_name .
 		 *
 		 * @return mixed|void
 		 */
-		public static function yo( $fname, $opt_name ) {
+		public static function yo( string $fname, string $opt_name ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$name = apply_filters( 'redux/' . $opt_name . '/aNFM_filter', $fname );
-
-			return $name;
+			return apply_filters( 'redux/' . $opt_name . '/aNFM_filter', $fname );
 		}
 
 		/**
@@ -480,8 +477,8 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 						die( 1 );
 					} else {
 						$response_code = wp_remote_retrieve_response_code( $response );
+						$response = wp_remote_retrieve_body( $response );
 						if ( 200 === $response_code ) {
-							$response = wp_remote_retrieve_body( $response );
 							$return   = json_decode( $response, true );
 
 							if ( isset( $return['identifier'] ) ) {
@@ -489,8 +486,6 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 								update_option( 'redux_support_hash', $data );
 							}
 						} else {
-							$response = wp_remote_retrieve_body( $response );
-
 							echo wp_json_encode(
 								array(
 									'status'  => 'error',
@@ -522,7 +517,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return array
 		 */
-		public static function sanitize_camel_case_array_keys( $arr ) {
+		public static function sanitize_camel_case_array_keys( array $arr ): array {
 			$keys   = array_keys( $arr );
 			$values = array_values( $arr );
 
@@ -534,9 +529,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 				$keys
 			);
 
-			$output = array_combine( $result, $values );
-
-			return $output;
+			return array_combine( $result, $values );
 		}
 
 		/**
@@ -546,7 +539,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 *
 		 * @return string $data_string example output: data-id='true'
 		 */
-		public static function create_data_string( $data = array() ) {
+		public static function create_data_string( array $data = array() ): string {
 			$data_string = '';
 
 			foreach ( $data as $key => $value ) {

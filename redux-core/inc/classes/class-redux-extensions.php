@@ -78,7 +78,7 @@ if ( ! class_exists( 'Redux_Extensions', false ) ) {
 				$path = untrailingslashit( $path );
 
 				// Backwards compatibility for extensions.
-				$instance_extensions = Redux::get_extensions( $core->args['opt_name'], '' );
+				$instance_extensions = Redux::get_extensions( $core->args['opt_name'] );
 				if ( ! empty( $instance_extensions ) ) {
 					foreach ( $instance_extensions as $name => $extension ) {
 						if ( ! isset( $core->extensions[ $name ] ) ) {

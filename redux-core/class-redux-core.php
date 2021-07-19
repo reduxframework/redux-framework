@@ -223,7 +223,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 				$client->slug       = 'redux-framework';
 				$client->textdomain = 'redux-framework';
-				$client->version    = \Redux_Core::$version;
+				$client->version    = self::$version;
 			}
 
 			$plugin_info = Redux_Functions_Ex::is_inside_plugin( __FILE__ );
@@ -311,10 +311,10 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Code to execute on framework __construct.
 		 *
-		 * @param object $parent Pointer to ReduxFramework object.
-		 * @param array  $args Global arguments array.
+		 * @param ReduxFramework $parent Pointer to ReduxFramework object.
+		 * @param array          $args   Global arguments array.
 		 */
-		public static function core_construct( $parent, $args ) {
+		public static function core_construct( ReduxFramework $parent, array $args ) {
 			self::$third_party_fixes = new Redux_ThirdParty_Fixes( $parent );
 
 			Redux_ThemeCheck::get_instance();
@@ -361,8 +361,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 *
 		 * @param string $class_name name of class.
 		 */
-		public function register_classes( $class_name ) {
-			$class_name_test = Redux_Core::strtolower( $class_name );
+		public function register_classes( string $class_name ) {
+			$class_name_test = self::strtolower( $class_name );
 
 			if ( strpos( $class_name_test, 'redux' ) === false ) {
 				return;
@@ -486,7 +486,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 *
 		 * @return string
 		 */
-		public static function strtolower( $str ) {
+		public static function strtolower( string $str ): string {
 			if ( function_exists( 'mb_strtolower' ) && function_exists( 'mb_detect_encoding' ) ) {
 				return mb_strtolower( $str, mb_detect_encoding( $str ) );
 			} else {

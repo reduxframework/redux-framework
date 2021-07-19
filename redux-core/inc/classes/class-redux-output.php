@@ -87,7 +87,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 								 * @param array $field field config data
 								 */
 								$field_type = str_replace( '_', '-', $field['type'] );
-								$core_path  = Redux_Core::$dir . "inc/fields/{$field['type']}/class-redux-{$field_type}.php";
+								$core_path  = Redux_Core::$dir . "inc/fields/{$field['type']}/class-redux-$field_type.php";
 
 								if ( ! file_exists( $core_path ) ) {
 									$core_path = Redux_Core::$dir . "inc/fields/{$field['type']}/field_{$field['type']}.php";
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 									$pro_path = '';
 
 									if ( class_exists( 'Redux_Pro' ) ) {
-										$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-{$field_type}.php";
+										$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-$field_type.php";
 									}
 
 									if ( file_exists( $pro_path ) ) {
@@ -185,7 +185,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 				return;
 			}
 
-			if ( ! empty( $core->typography ) && ! empty( $core->typography ) && filter_var( $core->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
+			if ( ! empty( $core->typography ) && filter_var( $core->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
 				$version = ! empty( $core->transients['last_save'] ) ? $core->transients['last_save'] : '';
 				if ( ! class_exists( 'Redux_Typography' ) ) {
 					require_once Redux_Core::$dir . '/inc/fields/typography/class-redux-typography.php';
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 
 				if ( ! $core->args['disable_google_fonts_link'] ) {
 					$url = $typography->make_google_web_font_link( $core->typography );
-					wp_enqueue_style( 'redux-google-fonts-' . $core->args['opt_name'], $url, array(), $version, 'all' );
+					wp_enqueue_style( 'redux-google-fonts-' . $core->args['opt_name'], $url, array(), $version );
 					add_filter( 'style_loader_tag', array( $this, 'add_style_attributes' ), 10, 4 );
 					add_filter( 'wp_resource_hints', array( $this, 'google_fonts_preconnect' ), 10, 2 );
 				}
@@ -204,14 +204,14 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Add Google Fonts preconnect link.
 		 *
-		 * @param array  $urls      HTML to be added.
-		 * @param string $relationship_type    Handle name.
+		 * @param array  $urls              HTML to be added.
+		 * @param string $relationship_type Handle name.
 		 *
 		 * @return      array
 		 * @since       4.1.15
 		 * @access      public
 		 */
-		public function google_fonts_preconnect( $urls, $relationship_type ) {
+		public function google_fonts_preconnect( array $urls, string $relationship_type ): array {
 			if ( 'preconnect' !== $relationship_type ) {
 				return $urls;
 			}
@@ -226,21 +226,20 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Filter to enhance the google fonts enqueue.
 		 *
-		 * @param string $html      HTML to be added.
-		 * @param string $handle    Handle name.
-		 * @param string $href      HREF URL of script.
-		 * @param string $media     Media type.
+		 * @param string $html   HTML to be added.
+		 * @param string $handle Handle name.
+		 * @param string $href   HREF URL of script.
+		 * @param string $media  Media type.
 		 *
 		 * @return      string
 		 * @since       4.1.15
 		 * @access      public
 		 */
-		public function add_style_attributes( $html = '', $handle = '', $href = '', $media = '' ) {
+		public function add_style_attributes( string $html = '', string $handle = '', string $href = '', string $media = '' ): string {
 			if ( Redux_Functions_Ex::string_starts_with( $handle, 'redux-google-fonts-' ) ) {
 				// Revamp thanks to Harry: https://csswizardry.com/2020/05/the-fastest-google-fonts/.
 				$href      = str_replace( array( '|', ' ' ), array( '%7C', '%20' ), urldecode( $href ) );
-				$new_html  = '';
-				$new_html .= '<link rel="preload" as="style" href="' . esc_attr( $href ) . '" />';
+				$new_html  = '<link rel="preload" as="style" href="' . esc_attr( $href ) . '" />';
 				$new_html .= '<link rel="stylesheet" href="' . esc_attr( $href ) . '" media="print" onload="this.media=\'all\'">';  // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 				$new_html .= '<noscript><link rel="stylesheet" href="' . esc_attr( $href ) . '" /></noscript>'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 				$html      = $new_html;
@@ -252,17 +251,17 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Function to output output_variables to the dynamic output.
 		 *
-		 * @param array  $core       ReduxFramework core pointer.
-		 * @param array  $section    Section containing this field.
-		 * @param array  $field      Field object.
-		 * @param array  $value      Current value of field.
-		 * @param string $style_data CSS output string to append to the root output variable.
+		 * @param ReduxFramework $core       ReduxFramework core pointer.
+		 * @param array          $section    Section containing this field.
+		 * @param array          $field      Field object.
+		 * @param array|string   $value      Current value of field.
+		 * @param string|null    $style_data CSS output string to append to the root output variable.
 		 *
 		 * @return      void
 		 * @since       4.0.3
 		 * @access      public
 		 */
-		private function output_variables( $core = array(), $section = array(), $field = array(), $value = array(), $style_data = '' ) {
+		private function output_variables( ReduxFramework $core, array $section = array(), array $field = array(), $value = array(), ?string $style_data = '' ) {
 			// Let's allow section overrides please.
 			if ( isset( $section['output_variables'] ) && ! isset( $field['output_variables'] ) ) {
 				$field['output_variables'] = $section['output_variables'];
@@ -294,11 +293,11 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 						}
 					}
 				} else {
+					$val_key = $output_variables_prefix . sanitize_title_with_dashes( $field['id'] );
+
 					if ( ! empty( $style_data ) ) {
-						$val_key                            = $output_variables_prefix . sanitize_title_with_dashes( $field['id'] );
 						$core->output_variables[ $val_key ] = $style_data;
 					} else {
-						$val_key                            = $output_variables_prefix . sanitize_title_with_dashes( $field['id'] );
 						$core->output_variables[ $val_key ] = $value;
 					}
 				}
@@ -326,7 +325,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 			if ( ! empty( $core->output_variables ) ) {
 				$root_css = ':root{';
 				foreach ( $core->output_variables as $key => $value ) {
-					$root_css .= "{$key}:{$value};";
+					$root_css .= "$key:$value;";
 				}
 				$root_css .= '}';
 				// phpcs:ignore WordPress.NamingConventions.ValidVariableName, WordPress.Security.EscapeOutput
@@ -349,7 +348,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		 *
 		 * @return bool
 		 */
-		private function can_output_css( $core, $field ) {
+		private function can_output_css( $core, array $field ): ?bool {
 			$return = true;
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName

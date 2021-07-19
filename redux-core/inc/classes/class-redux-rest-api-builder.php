@@ -24,7 +24,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return string
 	 */
-	public function get_namespace() {
+	public function get_namespace(): string {
 		return self::ENDPOINT . '/' . self::VER;
 	}
 
@@ -35,7 +35,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return string
 	 */
-	public function get_url( $route ) {
+	public function get_url( string $route ): string {
 		return rest_url( trailingslashit( $this->get_namespace() ) . ltrim( '/', $route ) );
 	}
 
@@ -96,7 +96,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return RecursiveDirectoryIterator
 	 */
-	public function field_directories() {
+	public function field_directories(): RecursiveDirectoryIterator {
 
 		return $dirs;
 	}
@@ -106,7 +106,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return array
 	 */
-	public function get_field_paths() {
+	public function get_field_paths(): array {
 		$fields     = array();
 		$fields_dir = trailingslashit( Redux_Core::$dir ) . 'inc' . DIRECTORY_SEPARATOR . 'fields' . DIRECTORY_SEPARATOR;
 		$dirs       = new RecursiveDirectoryIterator( $fields_dir );
@@ -129,9 +129,7 @@ class Redux_Rest_Api_Builder {
 			}
 		}
 		// phpcs:ignore WordPress.NamingConventions.ValidHookName
-		$data = apply_filters( 'redux/fields', $data );
-
-		return $data;
+		return apply_filters( 'redux/fields', $data );
 	}
 
 	/**
@@ -139,7 +137,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return array
 	 */
-	public function list_fields() {
+	public function list_fields(): array {
 		$field_classes = $this->get_field_paths();
 		$fields        = array();
 
@@ -173,7 +171,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return array
 	 */
-	public function get_field( $request = array() ) {
+	public function get_field( array $request = array() ): array {
 		$type = $request['type'];
 
 		$field_classes = $this->get_field_paths();
@@ -213,7 +211,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return array
 	 */
-	public function sort_by_order( $a, $b ) {
+	public function sort_by_order( array $a, array $b ): array {
 		return $a['order'] - $b['order'];
 	}
 
@@ -224,7 +222,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return array
 	 */
-	private function prepare_fields_output( $fields = array() ) {
+	private function prepare_fields_output( array $fields = array() ): array {
 		if ( empty( $fields ) ) {
 			return $fields;
 		}
@@ -245,7 +243,7 @@ class Redux_Rest_Api_Builder {
 	 *
 	 * @return array
 	 */
-	public function render_field( $request = array() ) {
+	public function render_field( array $request = array() ): array {
 		$type          = $request['type'];
 		$field_classes = $this->get_field_paths();
 		if ( isset( $field_classes[ mb_strtolower( $type ) ] ) ) {
@@ -284,8 +282,8 @@ class Redux_Rest_Api_Builder {
 					)
 				);
 
-				$req['id']   = isset( $request['id'] ) ? $request['id'] : 'redux_field';
-				$req['name'] = isset( $request['name'] ) ? $request['name'] : $req['id'];
+				$req['id']   = $request['id'] ?? 'redux_field';
+				$req['name'] = $request['name'] ?? $req['id'];
 
 				$field = $class->newInstance( $req, $request['example_values'], $redux_instance );
 				ob_start();

@@ -19,14 +19,14 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Sanitises a HEX value.
 		 * The way this works is by splitting the string in 6 substrings.
-		 * Each sub-string is individually sanitized, and the result is then returned.
+		 * Each sub-string is individually sanitised, and the result is then returned.
 		 *
-		 * @param   string  $color The hex value of a color.
-		 * @param   boolean $hash Whether we want to include a hash (#) at the beginning or not.
+		 * @param string  $color The hex value of a color.
+		 * @param boolean $hash  Whether we want to include a hash (#) at the beginning or not.
 		 *
 		 * @return  string      The sanitized hex color.
 		 */
-		public static function sanitize_hex( $color = '#FFFFFF', $hash = true ) {
+		public static function sanitize_hex( string $color = '#FFFFFF', bool $hash = true ): string {
 			$word_colors = array(
 				'aliceblue'            => 'F0F8FF',
 				'antiquewhite'         => 'FAEBD7',
@@ -215,9 +215,9 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 *
 		 * @param string $hex_code Hex string.
 		 *
-		 * @return string
+		 * @return bool
 		 */
-		public static function is_hex( $hex_code = '' ) {
+		public static function is_hex( string $hex_code = '' ): bool {
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 			return @preg_match( '/^[a-f0-9]{2,}$/i', strtolower( $hex_code ) ) && ! ( strlen( $hex_code ) & 1 );
 		}
@@ -229,7 +229,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 *
 		 * @return string
 		 */
-		public static function sanitize_rgba( $value ) {
+		public static function sanitize_rgba( string $value ): string {
 			// If empty or an array return transparent.
 			if ( empty( $value ) || is_array( $value ) ) {
 				return 'rgba(0,0,0,0)';
@@ -241,7 +241,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 				return self::get_rgba( self::sanitize_hex( $value ) );
 			}
 
-			// By now we know the string is formatted as an rgba color so we can just return it.
+			// By now we know the string is formatted as a rgba color, so we can just return it.
 			$value = str_replace( array( ' ', 'rgba', '(', ')' ), '', $value );
 			$value = explode( ',', $value );
 			$red   = ( isset( $value[0] ) ) ? intval( $value[0] ) : 255;
@@ -254,15 +254,14 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 
 		/**
 		 * Sanitize colors.
-		 * Determine if the current value is a hex or an rgba color and call the appropriate method.
-		 *
-		 * @since 0.8.5
+		 * Determine if the current value is a hex or a rgba color and call the appropriate method.
 		 *
 		 * @param  string $value  hex or rgba color.
 		 *
 		 * @return string
+		 *@since 0.8.5
 		 */
-		public static function sanitize_color( $value ) {
+		public static function sanitize_color( string $value ): string {
 			if ( is_array( $value ) ) {
 				if ( isset( $value['rgba'] ) ) {
 					$value = $value['rgba'];
@@ -281,7 +280,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 				return 'transparent';
 			}
 
-			// Is this an rgba color or a hex?
+			// Is this a rgba color or a hex?
 			$mode = ( false === strpos( $value, 'rgba' ) ) ? 'rgba' : 'hex';
 
 			if ( 'rgba' === $mode ) {
@@ -294,12 +293,12 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Gets the rgb value of the $hex color.
 		 *
-		 * @param   string  $hex The hex value of a color.
+		 * @param string    $hex     The hex value of a color.
 		 * @param   boolean $implode Whether we want to implode the values or not.
 		 *
-		 * @return  mixed       array|string
+		 * @return  array|string       array|string
 		 */
-		public static function get_rgb( $hex, $implode = false ) {
+		public static function get_rgb( string $hex, bool $implode = false ) {
 			// Remove any trailing '#' symbols from the color value.
 			$hex = self::sanitize_hex( $hex, false );
 
@@ -314,15 +313,15 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		}
 
 		/**
-		 * Converts an rgba color to hex
+		 * Converts a rgba color to hex
 		 * This is an approximation and not completely accurate.
 		 *
-		 * @param string $color RGBA color.
+		 * @param string $color         RGBA color.
 		 * @param bool   $apply_opacity Opacity value.
 		 *
 		 * @return  string  The hex value of the color.
 		 */
-		public static function rgba2hex( $color, $apply_opacity = false ) {
+		public static function rgba2hex( string $color, bool $apply_opacity = false ): string {
 			// Remove parts of the string.
 			$color = str_replace( array( 'rgba', '(', ')', ' ' ), '', $color );
 
@@ -368,13 +367,13 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		}
 
 		/**
-		 * Get the alpha channel from an rgba color
+		 * Get the alpha channel from a rgba color
 		 *
-		 * @param  string $color The rgba color formatted like rgba(r,g,b,a).
+		 * @param string $color The rgba color formatted like rgba(r,g,b,a).
 		 *
 		 * @return  string  The alpha value of the color.
 		 */
-		public static function get_alpha_from_rgba( $color ) {
+		public static function get_alpha_from_rgba( string $color ) {
 			if ( is_array( $color ) ) {
 				if ( isset( $color['opacity'] ) ) {
 					return $color['opacity'];
@@ -404,12 +403,12 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Gets the rgb value of the $hex color.
 		 *
-		 * @param   string $hex The hex value of a color.
-		 * @param   int    $opacity Opacity level (1-100).
+		 * @param string $hex     The hex value of a color.
+		 * @param int    $opacity Opacity level (1-100).
 		 *
 		 * @return  string
 		 */
-		public static function get_rgba( $hex = '#fff', $opacity = 100 ) {
+		public static function get_rgba( string $hex = '#fff', int $opacity = 100 ): string {
 			$hex = self::sanitize_hex( $hex, false );
 
 			/**
@@ -428,19 +427,18 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 
 			// Divide the opacity by 100 to end-up with a CSS value for the opacity.
 			$opacity = ( $opacity / 100 );
-			$color   = 'rgba(' . self::get_rgb( $hex, true ) . ', ' . $opacity . ')';
 
-			return $color;
+			return 'rgba(' . self::get_rgb( $hex, true ) . ', ' . $opacity . ')';
 		}
 
 		/**
 		 * Strips the alpha value from an RGBA color string.
 		 *
-		 * @param    string $rgba The RGBA color string.
+		 * @param string $rgba The RGBA color string.
 		 *
 		 * @return  string            The corresponding RGB string.
 		 */
-		public static function rgba_to_rgb( $rgba ) {
+		public static function rgba_to_rgb( string $rgba ): string {
 			$rgba          = str_replace( ' ', '', $rgba );
 			$rgba_array    = explode( ',', $rgba );
 			$rgba_array[0] = str_replace( 'rgba(', '', $rgba_array[0] );
@@ -449,19 +447,17 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 				unset( $rgba_array[3] );
 			}
 
-			$rgb = sprintf( 'rgb(%s)', implode( ',', $rgba_array ) );
-
-			return $rgb;
+			return sprintf( 'rgb(%s)', implode( ',', $rgba_array ) );
 		}
 
 		/**
 		 * Gets the brightness of the $hex color.
 		 *
-		 * @param   string $hex The hex value of a color.
+		 * @param string $hex The hex value of a color.
 		 *
 		 * @return  int         value between 0 and 255.
 		 */
-		public static function get_brightness( $hex ) {
+		public static function get_brightness( string $hex ): int {
 			$hex = self::sanitize_hex( $hex, false );
 
 			// returns brightness value from 0 to 255.
@@ -471,12 +467,12 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Adjusts brightness of the $hex color.
 		 *
-		 * @param   string $hex The hex value of a color.
-		 * @param   int    $steps A value between -255 (darken) and 255 (lighten).
+		 * @param string $hex   The hex value of a color.
+		 * @param int    $steps A value between -255 (darken) and 255 (lighten).
 		 *
 		 * @return  string      returns hex color.
 		 */
-		public static function adjust_brightness( $hex, $steps ) {
+		public static function adjust_brightness( string $hex, int $steps ): string {
 			$hex = self::sanitize_hex( $hex, false );
 
 			// Steps should be between -255 and 255. Negative = darker, positive = lighter.
@@ -499,13 +495,13 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 * the "percentage" variable is the percent of the first color
 		 * to be used it the mix. default is 50 (equal mix).
 		 *
-		 * @param  string $hex1 The hex value of color 1.
-		 * @param  string $hex2 The hex value of color 2.
-		 * @param  int    $percentage A value between 0 and 100.
+		 * @param string $hex1       The hex value of color 1.
+		 * @param string $hex2       The hex value of color 2.
+		 * @param int    $percentage A value between 0 and 100.
 		 *
 		 * @return  string      returns hex color.
 		 */
-		public static function mix_colors( $hex1, $hex2, $percentage ) {
+		public static function mix_colors( string $hex1, string $hex2, int $percentage ): string {
 			$hex1 = self::sanitize_hex( $hex1, false );
 			$hex2 = self::sanitize_hex( $hex2, false );
 
@@ -523,12 +519,12 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Convert hex color to hsv
 		 *
-		 * @param   string $hex The hex value of color 1.
+		 * @param string $hex The hex value of color 1.
 		 *
 		 * @return  array       returns array( 'h', 's', 'v' ).
 		 */
-		public static function hex_to_hsv( $hex ) {
-			$rgb = (array) (array) self::get_rgb( self::sanitize_hex( $hex, false ) );
+		public static function hex_to_hsv( string $hex ): array {
+			$rgb = (array) self::get_rgb( self::sanitize_hex( $hex, false ) );
 
 			return self::rgb_to_hsv( $rgb );
 		}
@@ -536,11 +532,11 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Convert hex color to hsv
 		 *
-		 * @param   array $color The rgb color to conver array( 'r', 'g', 'b' ).
+		 * @param array $color The rgb color to conver array( 'r', 'g', 'b' ).
 		 *
 		 * @return  array       returns array( 'h', 's', 'v' ).
 		 */
-		public static function rgb_to_hsv( $color = array() ) {
+		public static function rgb_to_hsv( array $color = array() ): array {
 			$var_r = ( $color[0] / 255 );
 			$var_g = ( $color[1] / 255 );
 			$var_b = ( $color[2] / 255 );
@@ -593,7 +589,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 *
 		 * @return mixed
 		 */
-		public static function color_difference( $color_1 = '#ffffff', $color_2 = '#000000' ) {
+		public static function color_difference( string $color_1 = '#ffffff', string $color_2 = '#000000' ) {
 			$color_1 = self::sanitize_hex( $color_1, false );
 			$color_2 = self::sanitize_hex( $color_2, false );
 
@@ -604,9 +600,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 			$g_diff = max( $color_1_rgb[1], $color_2_rgb[1] ) - min( $color_1_rgb[1], $color_2_rgb[1] );
 			$b_diff = max( $color_1_rgb[2], $color_2_rgb[2] ) - min( $color_1_rgb[2], $color_2_rgb[2] );
 
-			$color_diff = $r_diff + $g_diff + $b_diff;
-
-			return $color_diff;
+			return $r_diff + $g_diff + $b_diff;
 		}
 
 		/**
@@ -619,7 +613,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 *
 		 * @return int
 		 */
-		public static function brightness_difference( $color_1 = '#ffffff', $color_2 = '#000000' ) {
+		public static function brightness_difference( string $color_1 = '#ffffff', string $color_2 = '#000000' ): int {
 			$color_1 = self::sanitize_hex( $color_1, false );
 			$color_2 = self::sanitize_hex( $color_2, false );
 
@@ -641,7 +635,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 *
 		 * @return float
 		 */
-		public static function lumosity_difference( $color_1 = '#ffffff', $color_2 = '#000000' ) {
+		public static function lumosity_difference( string $color_1 = '#ffffff', string $color_2 = '#000000' ): float {
 			$color_1 = self::sanitize_hex( $color_1, false );
 			$color_2 = self::sanitize_hex( $color_2, false );
 

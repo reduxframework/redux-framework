@@ -1,6 +1,6 @@
 <?php // phpcs:ignore Squiz.Commenting.FileComment.Missing
 /**
- * Redux, a simple, truly extensible and fully responsive options framework
+ * Redux, a simple, truly extensible and fully responsive option framework
  * for WordPress themes and plugins. Developed with WordPress coding
  * standards and PHP best practices in mind.
  *

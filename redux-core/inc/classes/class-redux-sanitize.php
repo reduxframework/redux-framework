@@ -22,13 +22,13 @@ if ( ! class_exists( 'Redux_Sanitize', false ) ) {
 		 * @since       4.0.0
 		 * @access      public
 		 *
-		 * @param       array $plugin_options PLugin Options.
+		 * @param       array $plugin_options Plugin Options.
 		 * @param       array $options Options.
 		 * @param       array $sections Sections array.
 		 *
 		 * @return      array $plugin_options
 		 */
-		public function sanitize( $plugin_options, $options, $sections ) {
+		public function sanitize( array $plugin_options, array $options, array $sections ): array {
 			$core = $this->core();
 
 			foreach ( $sections as $k => $section ) {
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Redux_Sanitize', false ) ) {
 											$core->sanitize[] = $field;
 										}
 
-										continue;
+										break;
 									}
 								}
 							}

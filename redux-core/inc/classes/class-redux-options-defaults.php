@@ -33,21 +33,22 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		/**
 		 * Creates default options array.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param array  $sections Panel sections array.
+		 * @param string $opt_name      Panel opt_name.
+		 * @param array  $sections      Panel sections array.
 		 * @param null   $wp_data_class WordPress data class.
 		 *
 		 * @return array
 		 */
-		public function default_values( $opt_name, $sections = array(), $wp_data_class = null ) {
+		public function default_values( string $opt_name, array $sections = array(), $wp_data_class = null ): array {
 			// We want it to be clean each time this is run.
 			$this->options_defaults = array();
 
 			// Check to make sure we're not in the select2 action, we don't want to fetch any there.
 			if ( isset( $_REQUEST['action'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 				if ( Redux_Functions_Ex::string_ends_with( $action, '_select2' ) && Redux_Functions_Ex::string_starts_with( $action, 'redux_' ) ) {
-					return;
+					return '';
 				}
 			}
 
@@ -82,11 +83,11 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		/**
 		 * Field default values.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param array  $field Fiel array.
+		 * @param string $opt_name      Panel opt_name.
+		 * @param array  $field         Fiel array.
 		 * @param object $wp_data_class WordPress data class.
 		 */
-		public function field_default_values( $opt_name = '', $field = array(), $wp_data_class = null ) {
+		public function field_default_values( string $opt_name = '', array $field = array(), $wp_data_class = null ) {
 			if ( null === $wp_data_class && class_exists( 'Redux_WordPress_Data' ) && ! ( 'select' === $field['type'] && isset( $field['ajax'] ) && $field['ajax'] ) ) {
 				$wp_data_class = new Redux_WordPress_Data( $opt_name );
 			}
@@ -100,9 +101,9 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 
 			if ( isset( $field['default'] ) ) {
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->options_defaults[ $field['id'] ] = apply_filters( "redux/{$opt_name}/field/{$field['type']}/defaults", $field['default'], $field );
+				$this->options_defaults[ $field['id'] ] = apply_filters( "redux/$opt_name/field/{$field['type']}/defaults", $field['default'], $field );
 			} elseif ( ( 'ace_editor' !== $field['type'] ) && ! ( 'select' === $field['type'] && ! empty( $field['ajax'] ) ) ) {
-				if ( isset( $field['data'] ) && empty( $field['data'] ) ) {
+				if ( isset( $field['data'] ) ) {
 					if ( ! isset( $field['args'] ) ) {
 						$field['args'] = array();
 					}

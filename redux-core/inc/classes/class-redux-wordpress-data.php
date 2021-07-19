@@ -39,15 +39,15 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Get the data.
 		 *
-		 * @param bool       $type          Type.
+		 * @param string     $type          Type.
 		 * @param array      $args          Args.
-		 * @param array      $opt_name      Opt name.
+		 * @param string     $opt_name      Opt name.
 		 * @param string|int $current_value Current value.
-		 * @param bool       $ajax          Tells if this is a AJAX call.
+		 * @param bool       $ajax          Tells if this is an AJAX call.
 		 *
 		 * @return array|mixed|string
 		 */
-		public function get( $type = false, $args = array(), $opt_name = '', $current_value = '', $ajax = false ) {
+		public function get( string $type, array $args = array(), string $opt_name = '', $current_value = '', bool $ajax = false ) {
 			$opt_name = $this->opt_name;
 
 			// We don't want to run this, it's not a string value. Send it back!
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 			 *
 			 * @param string $data
 			 */
-			$pre_data = apply_filters( "redux/options/{$opt_name}/pre_data/$type", null ); // phpcs:ignore WordPress.NamingConventions.ValidHookName
+			$pre_data = apply_filters( "redux/options/$opt_name/pre_data/$type", null ); // phpcs:ignore WordPress.NamingConventions.ValidHookName
 			if ( null !== $pre_data || empty( $type ) ) {
 				return $pre_data;
 			}
@@ -91,11 +91,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 				$current_data_args_key = md5( maybe_serialize( $current_data_args ) );
 
 				// Check to make sure we haven't already run this call before.
-				if ( isset( $this->wp_data[ $type . $current_data_args_key ] ) ) {
-					$current_data = $this->wp_data[ $type . $current_data_args_key ];
-				} else {
-					$current_data = $this->get_data( $type, $current_data_args, $current_value );
-				}
+				$current_data = $this->wp_data[ $type . $current_data_args_key ] ?? $this->get_data( $type, $current_data_args, $current_value );
 			}
 
 			// If ajax is enabled AND $current_data is empty, set a dummy value for the init.
@@ -139,9 +135,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 			 */
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$data = apply_filters( "redux/options/{$opt_name}/data/$type", $data );
-
-			return $data;
+			return apply_filters( "redux/options/$opt_name/data/$type", $data );
 		}
 
 
@@ -151,7 +145,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * @param array       $results       Results to process in the data array.
 		 * @param string|bool $id_key        Key on object/array that represents the ID.
 		 * @param string|bool $name_key      Key on object/array that represents the name/text.
-		 * @param bool        $add_key       If true, the display key will appear in the text..
+		 * @param bool        $add_key       If true, the display key will appear in the text.
 		 * @param string|bool $secondary_key If a data type you'd rather display a different ID as the display key.
 		 *
 		 * @return array
@@ -207,7 +201,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 *
 		 * @return array
 		 */
-		private function order_data( $data = array(), $sort = 'value', $order = 'asc' ) {
+		private function order_data( array $data = array(), string $sort = 'value', string $order = 'asc' ): array {
 			if ( 'key' === $sort ) {
 				if ( 'asc' === $order ) {
 					ksort( $data );
@@ -228,13 +222,13 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Fetch the data for a given type.
 		 *
-		 * @param string $type          The data type we're fetching..
-		 * @param array  $args          Arguments to pass.
-		 * @param mixed  $current_value If a current value already set in the database.
+		 * @param string      $type          The data type we're fetching.
+		 * @param array       $args          Arguments to pass.
+		 * @param mixed|array $current_value If a current value already set in the database.
 		 *
 		 * @return array
 		 */
-		private function get_data( $type, $args, $current_value ) {
+		private function get_data( string $type, array $args, $current_value ): array {
 			$args = $this->get_arg_defaults( $type, $args );
 
 			$opt_name = $this->opt_name;
@@ -415,7 +409,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
-					$font_icons = apply_filters( "redux/{$opt_name}/field/font/icons", $font_icons );
+					$font_icons = apply_filters( "redux/$opt_name/field/font/icons", $font_icons );
 
 					break;
 
@@ -492,11 +486,11 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Router for translation based on the given post type.
 		 *
-		 * @param string $type          Type of data request..
-		 * @param mixed  $current_value Current value stored in DB.
-		 * @param array  $args          Arguments for the call.
+		 * @param string      $type          Type of data request.
+		 * @param mixed|array $current_value Current value stored in DB.
+		 * @param array       $args          Arguments for the call.
 		 */
-		private function maybe_get_translation( $type, &$current_value = '', $args = array() ) {
+		private function maybe_get_translation( string $type, &$current_value = '', array $args = array() ) {
 			switch ( $type ) {
 				case 'categories':
 				case 'category':
@@ -510,7 +504,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 
 				case 'terms':
 				case 'term':
-					$this->maybe_translate( $current_value, isset( $args['taxonomy'] ) ? $args['taxonomy'] : '' );
+					$this->maybe_translate( $current_value, $args['taxonomy'] ?? '' );
 					break;
 
 				case 'tags':
@@ -535,13 +529,13 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Maybe translate the values.
 		 *
-		 * @param string $value     Value.
-		 * @param string $post_type Post type.
+		 * @param mixed|array $value     Value.
+		 * @param string      $post_type Post type.
 		 */
-		private function maybe_translate( &$value, $post_type ) {
+		private function maybe_translate( &$value, string $post_type ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$value = apply_filters( "redux/options/{$this->opt_name}/wordpress_data/translate/post_type_value", $value, $post_type );
+			$value = apply_filters( "redux/options/$this->opt_name/wordpress_data/translate/post_type_value", $value, $post_type );
 
 			// WPML Integration, see https://wpml.org/documentation/support/creating-multilingual-wordpress-themes/language-dependent-ids/.
 			if ( function_exists( 'icl_object_id' ) ) {
@@ -563,13 +557,13 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Set the default arguments for a current query (existing data).
 		 *
-		 * @param string $type          Type of data request.
-		 * @param array  $args          Arguments for the call.
-		 * @param mixed  $current_value Current value stored in DB.
+		 * @param string      $type          Type of data request.
+		 * @param array       $args          Arguments for the call.
+		 * @param mixed|array $current_value Current value stored in DB.
 		 *
 		 * @return array
 		 */
-		private function get_current_data_args( $type, $args, &$current_value ) {
+		private function get_current_data_args( string $type, array $args, $current_value ): array {
 			// In this section we set the default arguments for each data type.
 			switch ( $type ) {
 				case 'categories':
@@ -613,7 +607,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 *
 		 * @return array
 		 */
-		private function get_arg_defaults( $type, $args = array() ) {
+		private function get_arg_defaults( string $type, array $args = array() ): array {
 			// In this section we set the default arguments for each data type.
 			switch ( $type ) {
 				case 'categories':

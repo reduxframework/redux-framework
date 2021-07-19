@@ -65,7 +65,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 *
 		 * @return Redux_Connection_Banner
 		 */
-		public static function init() {
+		public static function init(): ?Redux_Connection_Banner {
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new Redux_Connection_Banner();
 			}
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 * @since 4.1.21
 		 * @return array
 		 */
-		private function get_urls( $location = true ) {
+		private function get_urls( $location = true ): array {
 			if ( ! empty( $this->urls ) ) {
 				return $this->urls;
 			}
@@ -148,9 +148,10 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 * AJAX callback for dismissing the notice.
 		 *
 		 * @param string $admin_body_class Class string.
+		 *
 		 * @return string
 		 */
-		public function admin_body_class( $admin_body_class = '' ) {
+		public function admin_body_class( string $admin_body_class = '' ): string {
 			$classes = explode( ' ', trim( $admin_body_class ) );
 
 			$classes[] = false ? 'redux-connected' : 'redux-disconnected';
@@ -291,9 +292,9 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 			echo '&nbsp;<a href="' . esc_url( $urls['register'] ) . '" class="button-primary button-large redux-activate-connection redux-connection-banner-action" data-url="' . admin_url( 'admin-ajax.php' ) . '" data-activate="panel_banner">' . __( 'Register Now', 'redux-framework' ) . '</a>';
 			echo '&nbsp;&nbsp;&nbsp;<a href="' . esc_url( $urls['dismiss'] ) . '" style="color: #aaa;" class="redux-connection-banner-action" data-activate="false" data-url="' . admin_url( 'admin-ajax.php' ) . '">' . __( 'No thanks', 'redux-framework' ) . '</a>';
 			echo '</p></div>';
-			echo '<style type="text/css">.wp-core-ui .button-primary.redux-activate-connection{background: #24b0a6;}.wp-core-ui .button-primary.redux-activate-connection:hover{background: #19837c;}</style>';
+			echo '<style>.wp-core-ui .button-primary.redux-activate-connection{background: #24b0a6;}.wp-core-ui .button-primary.redux-activate-connection:hover{background: #19837c;}</style>';
 
-			echo "<noscript><style type='text/css'>#redux-connect-message{display:none;}</style></noscript>";
+			echo "<noscript><style>#redux-connect-message{display:none;}</style></noscript>";
 
 		}
 
@@ -414,7 +415,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 					</div>
 				</div>
 			</div>
-			<noscript><style type='text/css'>#redux-connect-message{display:none;}</style></noscript>
+			<noscript><style>#redux-connect-message{display:none;}</style></noscript>
 			<?php
 		}
 
@@ -428,8 +429,8 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 			} else {
 				$bottom_connect_url_from = 'landing-page-bottom';
 			}
+
 			if ( 'plugins' === $current_screen->base ) :
-				?>
 				?>
 				<div class="redux-banner-full-container">
 					<div class="redux-banner-full-container-card">
@@ -499,19 +500,17 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 							</div>
 						</div>
 
-						<?php if ( 'plugins' === $current_screen->base ) : ?>
-							<p class="redux-banner-full-dismiss-paragraph">
-								<a>
-									<?php
-									echo esc_html_x(
-										'Not now, thank you.',
-										'a link that closes the modal window that offers to connect Redux',
-										'redux-framework'
-									);
-									?>
-								</a>
-							</p>
-						<?php endif; ?>
+						<p class="redux-banner-full-dismiss-paragraph">
+							<a>
+								<?php
+								echo esc_html_x(
+									'Not now, thank you.',
+									'a link that closes the modal window that offers to connect Redux',
+									'redux-framework'
+								);
+								?>
+							</a>
+						</p>
 					</div>
 				</div>
 				<?php
@@ -538,7 +537,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 					</h2>
 				</div>
 			</div>
-			<noscript><style type='text/css'>#message{display:none;}</style></noscript>
+			<noscript><style>#message{display:none;}</style></noscript>
 			<?php
 		}
 
@@ -549,7 +548,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 *
 		 * @echo string
 		 */
-		public static function tos_blurb( $campaign = 'options_panel' ) {
+		public static function tos_blurb( $campaign = 'options_panel' ): string {
 			return sprintf(
 				__( 'By clicking the <strong>Register</strong> button, you agree to our <a href="%1$s" target="_blank">terms of service</a>, to create an account, and to share details of your usage metrics with Redux.io.', 'redux-framework' ),
 				Redux_Functions_Ex::get_site_utm_url( 'terms', 'appsero', 'activate', $campaign )

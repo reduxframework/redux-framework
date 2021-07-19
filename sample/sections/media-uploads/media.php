@@ -56,8 +56,8 @@ Redux::set_section(
 				// Can be set to false to allow any media type, or can also be set to any mime type.
 				'mode'       => false,
 
-				'desc'       => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
-				'subtitle'   => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 			),
 			array(
 				'id'           => 'opt-media-filter',
@@ -92,17 +92,17 @@ Redux::set_section(
 				'output'       => array( '.header-image img' ),
 			),
 			array(
-				'id'       => 'media-no-url-filter',
-				'type'     => 'media',
-				'title'    => esc_html__( 'Media w/o URL', 'your-textdomain-here' ),
-				'desc'     => esc_html__( 'This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
-				'url'      => false,
-				'filter'   => array(
+				'id'           => 'media-no-url-filter',
+				'type'         => 'media',
+				'title'        => esc_html__( 'Media w/o URL', 'your-textdomain-here' ),
+				'desc'         => esc_html__( 'This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'your-textdomain-here' ),
+				'subtitle'     => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
+				'url'          => false,
+				'filter'       => array(
 					'grayscale' => true,
 					'blur'      => true,
 				),
-				'preview'  => true,
+				'preview'      => true,
 				'preview_size' => 'full',
 			),
 		),

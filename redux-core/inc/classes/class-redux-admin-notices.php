@@ -66,7 +66,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		 *
 		 * @param array $data Notice data.
 		 */
-		public static function set_notice( $data ) {
+		public static function set_notice( array $data ) {
 			$type    = null;
 			$msg     = null;
 			$id      = null;
@@ -80,21 +80,20 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 				'msg'     => $msg,
 				'id'      => $id . '_' . $parent->args['opt_name'],
 				'dismiss' => $dismiss,
-				'color'   => isset( $color ) ? $color : '#00A2E3',
+				'color'   => $color ?? '#00A2E3',
 			);
 		}
 
 		/**
 		 * Evaluates user dismiss option for displaying admin notices.
 		 *
-		 * @since       3.2.0
-		 * @access      public
-		 *
 		 * @param array $notices Array of stored notices to display.
 		 *
 		 * @return      void
+		 * @since       3.2.0
+		 * @access      public
 		 */
-		public function admin_notices( $notices = array() ) {
+		public function admin_notices( array $notices = array() ) {
 			global $current_user, $pagenow;
 
 			$core = $this->core();

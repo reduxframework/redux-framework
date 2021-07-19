@@ -29,7 +29,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 		 *
 		 * @return      array $plugin_options
 		 */
-		public function validate( $plugin_options, $options, $sections ) {
+		public function validate( array $plugin_options, array $options, array $sections ): array {
 			$core = $this->core();
 
 			foreach ( $sections as $k => $section ) {
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 									$file = str_replace( '_', '-', $val );
 
 									// phpcs:ignore WordPress.NamingConventions.ValidHookName
-									$class_file = apply_filters( "redux/validate/{$core->args['opt_name']}/class/{$val}", Redux_Core::$dir . "inc/validation/{$val}/class-redux-validation-{$file}.php", $validate );
+									$class_file = apply_filters( "redux/validate/{$core->args['opt_name']}/class/$val", Redux_Core::$dir . "inc/validation/$val/class-redux-validation-$file.php", $validate );
 
 									if ( $class_file ) {
 										if ( file_exists( $class_file ) ) {
@@ -210,7 +210,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 										}
 									}
 
-									continue;
+									break;
 								}
 							}
 						}
@@ -219,8 +219,8 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 							$callback = $field['validate_callback'];
 							unset( $field['validate_callback'] );
 
-							$plugin_option = isset( $plugin_options[ $field['id'] ] ) ? $plugin_options[ $field['id'] ] : null;
-							$option        = isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : null;
+							$plugin_option = $plugin_options[ $field['id'] ] ?? null;
+							$option        = $options[ $field['id'] ] ?? null;
 
 							$callbackvalues = call_user_func( $callback, $field, $plugin_option, $option );
 

@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * Class Redux_Extension_Abstract
  * An abstract class to make the writing of redux extensions easier by allowing users to extend this class
  *
- * @see the samples directory to find an usage example
+ * @see the samples directory to find a usage example
  */
 abstract class Redux_Extension_Abstract {
 	/**
@@ -68,10 +68,10 @@ abstract class Redux_Extension_Abstract {
 	/**
 	 * Redux_Extension_Abstract constructor.
 	 *
-	 * @param object $parent ReduxFramework pointer.
-	 * @param string $file   Extension file.
+	 * @param ReduxFramework $parent ReduxFramework pointer.
+	 * @param string         $file   Extension file.
 	 */
-	public function __construct( $parent, $file = '' ) {
+	public function __construct( ReduxFramework $parent, string $file = '' ) {
 		$this->parent = $parent;
 
 		// If the file is not given make sure we have one.
@@ -102,7 +102,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return ReflectionClass
 	 */
-	protected function get_reflection() {
+	protected function get_reflection(): ReflectionClass {
 		if ( ! isset( $this->reflection_class ) ) {
 			try {
 				$this->reflection_class = new ReflectionClass( $this );
@@ -119,7 +119,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public static function get_version() {
+	public static function get_version(): string {
 		return static::$version;
 	}
 
@@ -128,7 +128,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return Redux_Extension_Abstract
 	 */
-	public static function get_instance() {
+	public static function get_instance(): Redux_Extension_Abstract {
 		return static::$instance;
 	}
 
@@ -137,7 +137,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function get_dir() {
+	public function get_dir(): string {
 		return $this->extension_dir;
 	}
 
@@ -146,7 +146,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function get_url() {
+	public function get_url(): string {
 		return $this->extension_url;
 	}
 
@@ -155,7 +155,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @param string $field_name Name of field.
 	 */
-	protected function add_overload_field_filter( $field_name ) {
+	protected function add_overload_field_filter( string $field_name ) {
 		// phpcs:ignore WordPress.NamingConventions.ValidHookName
 		add_filter(
 			'redux/' . $this->parent->args['opt_name'] . '/field/class/' . $field_name,
@@ -173,7 +173,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @param string $field_name Name of field.
 	 */
-	protected function add_field( $field_name ) {
+	protected function add_field( string $field_name ) {
 		$class = $this->get_reflection()->getName();
 
 		// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -196,7 +196,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function overload_field_path( $file, $field ) {
+	public function overload_field_path( string $file, array $field ): string {
 		$filename_fix = str_replace( '_', '-', $field['type'] );
 
 		$files = array(
@@ -204,9 +204,7 @@ abstract class Redux_Extension_Abstract {
 			trailingslashit( dirname( $this->file ) ) . $field['type'] . DIRECTORY_SEPARATOR . 'class-redux-' . $filename_fix . '.php',
 		);
 
-		$filename = Redux_Functions::file_exists_ex( $files );
-
-		return $filename;
+		return Redux_Functions::file_exists_ex( $files );
 	}
 
 	/**
@@ -218,7 +216,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @return bool
 	 */
-	public function is_minimum_version( $min_version = '', $extension_version = '', $friendly_name = '' ) {
+	public function is_minimum_version( string $min_version = '', string $extension_version = '', string $friendly_name = '' ): bool {
 		$redux_ver = Redux_Core::$version;
 
 		if ( '' !== $min_version ) {

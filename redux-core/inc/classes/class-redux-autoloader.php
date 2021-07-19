@@ -40,7 +40,7 @@ class Redux_Autoloader {
 	 * @param string $prefix Prefix to validate against.
 	 * @param string $path Path to validate.
 	 */
-	public function __construct( $prefix, $path ) {
+	public function __construct( string $prefix, string $path ) {
 		$this->prefix        = $prefix;
 		$this->prefix_length = strlen( $prefix );
 		$this->path          = trailingslashit( $path );
@@ -51,7 +51,7 @@ class Redux_Autoloader {
 	 *
 	 * @param string $class Class to test and/or load.
 	 */
-	public function load( $class ) {
+	public function load( string $class ) {
 
 		// Strip prefix from the start (ala PSR-4).
 		$class = substr( $class, $this->prefix_length + 1 );

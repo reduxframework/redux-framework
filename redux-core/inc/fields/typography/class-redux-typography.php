@@ -175,7 +175,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				$this->field['units'] = 'px';
 			}
 
-			// Get the google array.
+			// Get the Google array.
 			$this->get_google_array();
 
 			if ( empty( $this->field['fonts'] ) ) {
@@ -213,7 +213,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 */
 		public function render() {
 			// Since fonts declared is CSS (@font-face) are not rendered in the preview,
-			// they can be declared in a CSS file and passed here so they DO display in
+			// they can be declared in a CSS file and passed here, so they DO display in
 			// font preview.  Do NOT pass style.css in your theme, as that will mess up
 			// admin page styling.  It's recommended to pass a CSS file with ONLY font
 			// declarations.
@@ -320,7 +320,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				$google_set = false;
 				if ( true === $this->field['google'] ) {
 
-					// Set a flag so we know to set a header style or not.
+					// Set a flag, so we know to set a header style or not.
 					echo '<input
 							type="hidden"
 							class="redux-typography-google ' . esc_attr( $this->field['class'] ) . '"
@@ -335,7 +335,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			/* Backup Font */
 			if ( true === $this->field['font-family'] && true === $this->field['google'] ) {
 				if ( false === $google_set ) {
-					// Set a flag so we know to set a header style or not.
+					// Set a flag, so we know to set a header style or not.
 					echo '<input
 							type="hidden"
 							class="redux-typography-google ' . esc_attr( $this->field['class'] ) . '"
@@ -1056,12 +1056,12 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 							$value = '"' . $value . '"';
 						}
 
-						// Ensure fontBackup isn't empty (we already option
+						// Ensure fontBackup isn't empty. We already option
 						// checked this earlier.  No need to do it again.
 						if ( ! empty( $font_backup ) ) {
 
 							// Apply the backup font to the font-family element
-							// via the saved variable.  We do this here so it
+							// via the saved variable.  We do this here, so it
 							// doesn't get appended to the Google stuff below.
 							$value .= $font_backup;
 						}

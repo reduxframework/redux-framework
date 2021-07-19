@@ -27,7 +27,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		 *
 		 * @var null
 		 */
-		private $parent = null;
+		private $parent;
 
 		/**
 		 * Switch to omit social icons if dev_mode is set to true and Redux defaults are used.
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		 * @param     object $parent ReduxFramework object.
 		 * @param     array  $args Global arguments array.
 		 */
-		public function __construct( $parent, $args ) {
+		public function __construct( $parent, array $args ) {
 			$this->parent = $parent;
 
 			$default = array(
@@ -191,9 +191,9 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		 *
 		 * @param     array $args Global args.
 		 *
-		 * @return mixed|void
+		 * @return array
 		 */
-		private function args( $args ) {
+		private function args( array $args ): array {
 			$args = $this->no_errors_please( $args );
 
 			$this->parent->old_opt_name = $args['opt_name'];
@@ -217,9 +217,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				$args['save_defaults'] = false;
 			}
 
-			$args = $this->shim( $args );
-
-			return $args;
+			return $this->shim( $args );
 		}
 
 		/**
@@ -229,7 +227,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		 *
 		 * @return mixed|void
 		 */
-		private function filters( $args ) {
+		private function filters( array $args ) {
 			/**
 			 * Filter 'redux/args/{opt_name}'
 			 *
@@ -246,19 +244,17 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 			 */
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$args = apply_filters( "redux/options/{$args['opt_name']}/args", $args );
-
-			return $args;
+			return apply_filters( "redux/options/{$args['opt_name']}/args", $args );
 		}
 
 		/**
 		 * Sanitize args that should not be empty.
 		 *
-		 * @param     array $args Global args.
+		 * @param array $args Global args.
 		 *
-		 * @return mixed
+		 * @return array
 		 */
-		private function no_errors_please( $args ) {
+		private function no_errors_please( array $args ): array {
 			if ( empty( $args['transient_time'] ) ) {
 				$args['transient_time'] = 60 * MINUTE_IN_SECONDS;
 			}
@@ -301,11 +297,11 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * Shims for much older v3 configs.
 		 *
-		 * @param     array $args Global args.
+		 * @param array $args Global args.
 		 *
-		 * @return mixed
+		 * @return array
 		 */
-		private function shim( $args ) {
+		private function shim( array $args ): array {
 			/**
 			 * SHIM SECTION
 			 * Old variables and ways of doing things that need correcting.  ;)
@@ -332,9 +328,9 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * Verify to see if dev has bothered to change admin bar links and share icons from demo data to their own.
 		 *
-		 * @param     array $args Global args.
+		 * @param array $args Global args.
 		 */
-		private function change_demo_defaults( $args ) {
+		private function change_demo_defaults( array $args ) {
 			if ( $args['dev_mode'] || true === Redux_Helpers::is_local_host() ) {
 				if ( ! empty( $args['admin_bar_links'] ) ) {
 					foreach ( $args['admin_bar_links'] as $idx => $arr ) {
@@ -353,7 +349,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 									);
 
 									$this->omit_items = true;
-									continue;
+									break;
 								}
 							}
 						}
@@ -388,14 +384,14 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * Fix other arg criteria that sometimes gets hosed up.
 		 *
-		 * @param     array $args Global args.
+		 * @param array $args Global args.
 		 *
-		 * @return mixed
+		 * @return array
 		 */
-		private function default_cleanup( $args ) {
+		private function default_cleanup( array $args ): array {
 
 			// Fix the global variable name.
-			if ( '' === $args['global_variable'] && false !== $args['global_variable'] ) {
+			if ( '' === $args['global_variable'] && false !== (bool) $args['global_variable'] ) {
 				$args['global_variable'] = str_replace( '-', '_', $args['opt_name'] );
 			}
 

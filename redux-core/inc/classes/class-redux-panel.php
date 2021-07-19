@@ -116,7 +116,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 			echo '</div>';
 
 			if ( true === $this->parent->args['dev_mode'] ) {
-				echo '<br /><div class="redux-timer">' . esc_html( get_num_queries() ) . ' queries in ' . esc_html( timer_stop( 0 ) ) . ' seconds<br/>Redux is currently set to developer mode.</div>';
+				echo '<br /><div class="redux-timer">' . esc_html( get_num_queries() ) . ' queries in ' . esc_html( timer_stop() ) . ' seconds<br/>Redux is currently set to developer mode.</div>';
 			}
 
 			/**
@@ -289,7 +289,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function tick_file_deprecate_warning() {
+		public function tick_file_deprecate_warning(): bool {
 			return true;
 		}
 
@@ -298,7 +298,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 		 *
 		 * @param string $file Path to template file.
 		 */
-		public function get_template( $file ) {
+		public function get_template( string $file ) {
 			if ( empty( $file ) ) {
 				return;
 			}
@@ -345,7 +345,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function scan_template_files( $template_path ) {
+		public function scan_template_files( string $template_path ): array {
 			$files  = scandir( $template_path );
 			$result = array();
 			if ( $files ) {
@@ -391,7 +391,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 						?>
 						<div id="message" class="error redux-message">
 							<p>
-								<strong><?php esc_html_e( 'Your panel has bundled copies of Redux Framework template files that are outdated!', 'redux-framework' ); ?></strong>&nbsp;&nbsp;<?php esc_html_e( 'Please update them now as functionality issues could arise.', 'redux-framework' ); ?></a></strong>
+								<strong><?php esc_html_e( 'Your panel has bundled copies of Redux Framework template files that are outdated!', 'redux-framework' ); ?></strong>&nbsp;&nbsp;<?php esc_html_e( 'Please update them now as functionality issues could arise.', 'redux-framework' ); ?>
 							</p>
 						</div>
 						<?php

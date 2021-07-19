@@ -32,13 +32,13 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		/**
 		 * Check for enqueued status of style/script.
 		 *
-		 * @param string $handle File handle.
-		 * @param string $list Mode to check.
+		 * @param string $handle    File handle.
+		 * @param string $list      Mode to check.
 		 * @param bool   $is_script Flag for scrip/style.
 		 *
 		 * @return bool
 		 */
-		private static function is_enqueued( $handle, $list = 'enqueued', $is_script = true ) {
+		private static function is_enqueued( string $handle, string $list, bool $is_script = true ): bool {
 			if ( $is_script ) {
 				return wp_script_is( $handle, $list );
 			} else {
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param mixed  $footer_or_media True or 'all'.
 		 * @param bool   $is_script Script or style.
 		 */
-		private static function register( $handle, $src_cdn, $deps, $ver, $footer_or_media, $is_script = true ) {
+		private static function register( string $handle, string $src_cdn, array $deps, string $ver, $footer_or_media, bool $is_script = true ) {
 			if ( $is_script ) {
 				wp_register_script( $handle, $src_cdn, $deps, $ver, $footer_or_media );
 			} else {
@@ -74,7 +74,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param      mixed  $footer_or_media True or 'all'.
 		 * @param      bool   $is_script Script or style.
 		 */
-		private static function enqueue( $handle, $src_cdn, $deps, $ver, $footer_or_media, $is_script = true ) {
+		private static function enqueue( string $handle, string $src_cdn, array $deps, string $ver, $footer_or_media, bool $is_script = true ) {
 			if ( $is_script ) {
 				wp_enqueue_script( $handle, $src_cdn, $deps, $ver, $footer_or_media );
 			} else {
@@ -199,13 +199,13 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		/**
 		 * Register style CDN or local.
 		 *
-		 * @param string $handle File handle.
-		 * @param bool   $src_cdn CDN source.
-		 * @param array  $deps File deps.
-		 * @param bool   $ver File version.
-		 * @param string $media True or 'all'.
+		 * @param string $handle  File handle.
+		 * @param string $src_cdn CDN source.
+		 * @param array  $deps    File deps.
+		 * @param string $ver     File version.
+		 * @param string $media   True or 'all'.
 		 */
-		public static function register_style( $handle, $src_cdn = false, $deps = array(), $ver = false, $media = 'all' ) {
+		public static function register_style( string $handle, string $src_cdn, array $deps = array(), string $ver, string $media = 'all' ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
 				self::cdn( true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
 			} else {
@@ -215,13 +215,13 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 
 		/** Register script CDN or local.
 		 *
-		 * @param string $handle File handle.
-		 * @param bool   $src_cdn CDN source.
-		 * @param array  $deps File deps.
-		 * @param bool   $ver File version.
+		 * @param string $handle    File handle.
+		 * @param string $src_cdn   CDN source.
+		 * @param array  $deps      File deps.
+		 * @param string $ver       File version.
 		 * @param bool   $in_footer Script in footer.
 		 */
-		public static function register_script( $handle, $src_cdn = false, $deps = array(), $ver = false, $in_footer = false ) {
+		public static function register_script( string $handle, string $src_cdn, array $deps = array(), string $ver, bool $in_footer ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
 				self::cdn( true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
 			} else {
@@ -232,13 +232,13 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		/**
 		 * Enqueue style CDN or local.
 		 *
-		 * @param string $handle File handle.
-		 * @param bool   $src_cdn CDN source.
-		 * @param array  $deps File deps.
-		 * @param bool   $ver File version.
-		 * @param string $media Media type.
+		 * @param string $handle  File handle.
+		 * @param string $src_cdn CDN source.
+		 * @param array  $deps    File deps.
+		 * @param string $ver     File version.
+		 * @param string $media   Media type.
 		 */
-		public static function enqueue_style( $handle, $src_cdn = false, $deps = array(), $ver = false, $media = 'all' ) {
+		public static function enqueue_style( string $handle, string $src_cdn, array $deps = array(), string $ver, string $media = 'all' ) {
 			if ( self::$parent->args['use_cdn'] ) {
 				self::cdn( false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
 			} else {
@@ -249,13 +249,13 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		/**
 		 * Enqueue script CDN or local.
 		 *
-		 * @param String $handle File handle.
-		 * @param bool   $src_cdn CDN source.
-		 * @param array  $deps File seps.
-		 * @param bool   $ver File version.
+		 * @param string $handle    File handle.
+		 * @param string $src_cdn   CDN source.
+		 * @param array  $deps      File seps.
+		 * @param string $ver       File version.
 		 * @param bool   $in_footer Script in footer.
 		 */
-		public static function enqueue_script( $handle, $src_cdn = false, $deps = array(), $ver = false, $in_footer = false ) {
+		public static function enqueue_script( string $handle, string $src_cdn, array $deps = array(), string $ver, bool $in_footer ) {
 			if ( self::$parent->args['use_cdn'] ) {
 				self::cdn( false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
 			} else {

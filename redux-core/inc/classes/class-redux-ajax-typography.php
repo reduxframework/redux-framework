@@ -29,7 +29,7 @@ if ( ! class_exists( 'Redux_AJAX_Typography', false ) ) {
 		/**
 		 * Google font AJAX callback
 		 *
-		 * @return mixed
+		 * @return void
 		 */
 		public function google_fonts_update() {
 			$field_class = 'Redux_typography';

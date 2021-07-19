@@ -407,7 +407,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param       array $sections Panel sections.
 		 * @param       array $args     Class constructor arguments.
 		 */
-		public function __construct( $sections = array(), $args = array() ) {
+		public function __construct( array $sections = array(), array $args = array() ) {
 			global $pagenow;
 
 			if ( Redux_Core::is_heartbeat() ) {
@@ -514,10 +514,10 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * SHIM: _field_input
 		 *
-		 * @param array $field Field array.
-		 * @param null  $v Field values.
+		 * @param array        $field Field array.
+		 * @param string|array $v     Field values.
 		 */
-		public function _field_input( $field, $v = null ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function _field_input( array $field, $v = null ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			$this->render_class->field_input( $field, $v );
 		}
 
@@ -526,7 +526,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @param array $field Field array.
 		 */
-		public function field_default_values( $field ) {
+		public function field_default_values( array $field ) {
 			$this->options_defaults_class->field_default_values( '', $field );
 		}
 
@@ -535,7 +535,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @param string $value Option values.
 		 */
-		public function set_options( $value ) {
+		public function set_options( string $value ) {
 			$this->options_class->set( $value );
 		}
 
@@ -551,7 +551,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function _default_values() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function _default_values(): array { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			if ( ! isset( $this->options_class ) ) {
 				$this->options_defaults_class = new Redux_Options_Defaults();
 				$this->options_class          = new Redux_Options_Constructor( $this );
@@ -565,7 +565,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @param array $field Field array.
 		 */
-		public function check_dependencies( $field ) {
+		public function check_dependencies( array $field ) {
 			$this->required_class->check_dependencies( $field );
 		}
 
@@ -604,37 +604,37 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * SHIM: get_default_values
 		 *
-		 * @param string $key Key value.
+		 * @param string $key       Key value.
 		 * @param bool   $array_key Flag to determine array status.
 		 *
 		 * @return array
 		 */
-		public function get_default_values( $key, $array_key = false ) {
+		public function get_default_values( string $key, bool $array_key = false ): array {
 			return $this->options_defaults_class->default_values( $key, $array_key );
 		}
 
 		/**
 		 * SHIM: get_default_value
 		 *
-		 * @param string $key Key value.
+		 * @param string $key       Key value.
 		 * @param bool   $array_key Flag to determine array status.
 		 *
 		 * @return array
 		 */
-		public function get_default_value( $key, $array_key = false ) {
+		public function get_default_value( string $key, bool $array_key = false ): array {
 			return $this->options_defaults_class->default_values( $key, $array_key );
 		}
 
 		/**
 		 * SHIM: get_wordpress_data
 		 *
-		 * @param bool   $type data type.
-		 * @param array  $args args to pass to WordPress API.
-		 * @param string $current_value Current value.
+		 * @param bool         $type data type.
+		 * @param array        $args args to pass to WordPress API.
+		 * @param string|array $current_value Current value.
 		 *
 		 * @return array|mixed|string|void
 		 */
-		public function get_wordpress_data( $type = false, $args = array(), $current_value = '' ) {
+		public function get_wordpress_data( bool $type = false, array $args = array(), $current_value = null ) {
 			return $this->wordpress_data->get( $type, $args, $this->args['opt_name'], $current_value );
 		}
 
@@ -642,12 +642,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * SHIM: _validate_values
 		 *
 		 * @param array $plugin_options Current panel options.
-		 * @param array $options Options to validate.
-		 * @param array $sections Sections array.
+		 * @param array $options        Options to validate.
+		 * @param array $sections       Sections array.
 		 *
 		 * @return array
 		 */
-		public function _validate_values( $plugin_options, $options, $sections ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function _validate_values( array $plugin_options, array $options, array $sections ): array { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			if ( ! isset( $this->validate_class ) ) {
 				$this->validate_class = new Redux_Validation( $this );
 			}
@@ -664,14 +664,14 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * SHIM: section_menu
 		 *
-		 * @param int    $k Array Key.
-		 * @param array  $section Section array.
-		 * @param string $suffix Unique string.
+		 * @param int    $k        Array Key.
+		 * @param array  $section  Section array.
+		 * @param string $suffix   Unique string.
 		 * @param array  $sections Section array.
 		 *
-		 * @return string|void
+		 * @return string
 		 */
-		public function section_menu( $k, $section, $suffix = '', $sections = array() ) {
+		public function section_menu( int $k, array $section, string $suffix = '', array $sections = array() ): string {
 			return $this->render_class->section_menu( $k, $section, $suffix, $sections );
 		}
 
@@ -682,7 +682,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function get_header_html( $field ) {
+		public function get_header_html( array $field ): string {
 			return $this->render_class->get_header_html( $field );
 		}
 
@@ -693,7 +693,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function current_user_can( $permission ) {
+		public function current_user_can( string $permission ): bool {
 			_deprecated_function( __FUNCTION__, '4.0.0', 'Redux_Helpers::current_user_can' );
 
 			return Redux_Helpers::current_user_can( $permission );
@@ -706,9 +706,9 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * Pointer to the ReduxFramework instance.
 		 *
-		 * @return ReduxFramework
+		 * @return ReduxFramework|null
 		 */
-		public function get_instance() {
+		public function get_instance(): ?ReduxFramework {
 			return self::$instance;
 		}
 
@@ -723,7 +723,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return      mixed
 		 */
-		public function get( $opt_name, $default = null ) {
+		public function get( string $opt_name, $default = null ) {
 			return ( ! empty( $this->options[ $opt_name ] ) ) ? $this->options[ $opt_name ] : $this->options_class->get_default( $opt_name, $default );
 		}
 
@@ -738,8 +738,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return      void
 		 */
-		public function set( $opt_name = '', $values = array() ) {
-			if ( ! empty( $opt_name ) && is_array( $values ) && null !== $values ) {
+		public function set( string $opt_name = '', $values = array() ) {
+			if ( ! empty( $opt_name ) && is_array( $values ) ) {
 				$this->options[ $opt_name ] = $values;
 				$this->options_class->set( $values );
 			}

@@ -34,7 +34,7 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 		 *
 		 * @param array $field Field array.
 		 */
-		public function check_dependencies( $field ) {
+		public function check_dependencies( array $field ) {
 			$core = $this->core();
 
 			if ( isset( $field['ajax_save'] ) && false === $field['ajax_save'] ) {
@@ -88,12 +88,12 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 		/**
 		 * Check field for require deps.
 		 *
-		 * @param object $core ReduxFramework core pointer.
-		 * @param array  $field Field array.
-		 * @param array  $data Required data.
+		 * @param ReduxFramework $core  ReduxFramework core pointer.
+		 * @param array          $field Field array.
+		 * @param array          $data  Required data.
 		 */
-		private function check_required_dependencies( $core, $field, $data ) {
-			// required field must not be hidden. otherwise hide this one by default.
+		private function check_required_dependencies( ReduxFramework $core, array $field, array $data ) {
+			// required field must not be hidden. Otherwise, hide this one by default.
 			if ( ! in_array( $data['parent'], $core->fields_hidden, true ) && ( ! isset( $core->folds[ $field['id'] ] ) || 'hide' !== $core->folds[ $field['id'] ] ) ) {
 				if ( isset( $core->options[ $data['parent'] ] ) ) {
 					$return = $this->compare_value_dependencies( $core->options[ $data['parent'] ], $data['checkValue'], $data['operation'] );
@@ -115,12 +115,12 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 		 * Compare data for required field.
 		 *
 		 * @param mixed  $parent_value Parent value.
-		 * @param mixed  $check_value Check value.
-		 * @param string $operation Operation.
+		 * @param mixed  $check_value  Check value.
+		 * @param string $operation    Operation.
 		 *
 		 * @return bool
 		 */
-		public function compare_value_dependencies( $parent_value, $check_value, $operation ) {
+		public function compare_value_dependencies( $parent_value, $check_value, string $operation ): bool {
 			$return = false;
 
 			switch ( $operation ) {
@@ -271,14 +271,14 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 				case 'is_empty':
 				case 'empty':
 				case '!isset':
-					if ( empty( $parent_value ) || '' === $parent_value || null === $parent_value ) {
+					if ( empty( $parent_value ) || '' === $parent_value ) {
 						$return = true;
 					}
 					break;
 				case 'not_empty':
 				case '!empty':
 				case 'isset':
-					if ( ! empty( $parent_value ) && '' !== $parent_value && null !== $parent_value ) {
+					if ( ! empty( $parent_value ) && '' !== $parent_value ) {
 						$return = true;
 					}
 					break;

@@ -61,7 +61,7 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 
 					$post_data = wp_unslash( $_POST['data'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
-					// New method to avoid input_var nonsense.  Thanks @harunbasic.
+					// New method to avoid input_var nonsense.  Thanks, @harunbasic.
 					$values = Redux_Functions_Ex::parse_str( $post_data );
 					$values = $values[ $redux->args['opt_name'] ];
 
@@ -99,9 +99,9 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 							$return_array = array(
 								'status'   => 'success',
 								'options'  => $redux->options,
-								'errors'   => isset( $redux->enqueue_class->localize_data['errors'] ) ? $redux->enqueue_class->localize_data['errors'] : null,
-								'warnings' => isset( $redux->enqueue_class->localize_data['warnings'] ) ? $redux->enqueue_class->localize_data['warnings'] : null,
-								'sanitize' => isset( $redux->enqueue_class->localize_data['sanitize'] ) ? $redux->enqueue_class->localize_data['sanitize'] : null,
+								'errors'   => $redux->enqueue_class->localize_data['errors'] ?? null,
+								'warnings' => $redux->enqueue_class->localize_data['warnings'] ?? null,
+								'sanitize' => $redux->enqueue_class->localize_data['sanitize'] ?? null,
 							);
 						} catch ( Exception $e ) {
 							$return_array = array( 'status' => $e->getMessage() );
@@ -120,10 +120,12 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 			if ( isset( $core->transients['run_compiler'] ) && $core->transients['run_compiler'] ) {
 				$core->no_output = true;
 				$temp            = $core->args['output_variables_prefix'];
-				// Allow the override of variables prefix for use by SCSS or LESS.
+
+				// Allow the override of variable's prefix for use by SCSS or LESS.
 				if ( isset( $core->args['compiler_output_variables_prefix'] ) ) {
 					$core->args['output_variables_prefix'] = $core->args['compiler_output_variables_prefix'];
 				}
+
 				$core->output_class->enqueue();
 				$core->args['output_variables_prefix'] = $temp;
 

@@ -41,7 +41,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @throws Exception Throwable.
 	 */
-	public function __construct( $name, $title, $type, $description = '', $default = null ) {
+	public function __construct( string $name, string $title, string $type, string $description = '', $default = null ) {
 		if ( ! Redux_Descriptor_Types::is_valid_type( $type ) ) {
 			throw new Exception( 'Unknown type ' . $type . ' for option ' . $name );
 		}
@@ -55,7 +55,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 			'description' => $description,
 			'default'     => $default,
 			'order'       => static::$order ++,
-			'required'    => (bool) $this->required,
+			'required'    => $this->required,
 		);
 	}
 
@@ -74,7 +74,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @return Redux_Descriptor_Fields
 	 */
-	public function set_required( $required = true ) {
+	public function set_required( bool $required = true ): Redux_Descriptor_Fields {
 		$this->required = $required;
 
 		return $this;
@@ -87,7 +87,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @return $this
 	 */
-	public function set_order( $order ) {
+	public function set_order( int $order ): Redux_Descriptor_Fields {
 		static::$order          = $order;
 		$this->options['order'] = (float) $order;
 
@@ -101,7 +101,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @return $this
 	 */
-	public function set_group( $group ) {
+	public function set_group( string $group ): Redux_Descriptor_Fields {
 		$this->options['group'] = $group;
 
 		return $this;
@@ -110,12 +110,12 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	/**
 	 * Set an option.
 	 *
-	 * @param string $option_key Option key.
+	 * @param string $option_key   Option key.
 	 * @param mixed  $option_value Value to set.
 	 *
 	 * @return $this
 	 */
-	public function set_option( $option_key, $option_value ) {
+	public function set_option( string $option_key, $option_value ): Redux_Descriptor_Fields {
 		$this->options[ $option_key ] = $option_value;
 
 		return $this;
@@ -128,7 +128,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @return mixed
 	 */
-	public function get_option( $option_key ) {
+	public function get_option( string $option_key ) {
 		return $this->options[ $option_key ];
 	}
 
@@ -137,7 +137,7 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @param string $option_key Named key of the option.
 	 */
-	public function remove_option( $option_key ) {
+	public function remove_option( string $option_key ) {
 		unset( $this->options[ $option_key ] );
 	}
 
@@ -146,10 +146,8 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @return string
 	 */
-	public function to_doc() {
-		$doc = $this['name'] . '(' . $this['type'] . ')\n' . $this['description'] . "\n";
-
-		return $doc;
+	public function to_doc(): string {
+		return $this['name'] . '(' . $this['type'] . ')\n' . $this['description'] . "\n";
 	}
 
 	/**
@@ -157,21 +155,21 @@ class Redux_Descriptor_Fields implements ArrayAccess {
 	 *
 	 * @return array
 	 */
-	public function to_array() {
+	public function to_array(): array {
 		return $this->options;
 	}
 
 	/**
-	 * Whether a offset exists
+	 * Whether an offset exists
 	 *
 	 * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
 	 * @param mixed $offset An offset to check for.
 	 * @return boolean true on success or false on failure.
 	 *
-	 * The return value will be casted to boolean if non-boolean was returned.
+	 * The return value will be cast to boolean if non-boolean was returned.
 	 * @since 5.0.0
 	 */
-	public function offsetExists( $offset ) {
+	public function offsetExists( $offset ): bool {
 		return array_key_exists( $offset, $this->options );
 	}
 

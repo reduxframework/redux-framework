@@ -82,7 +82,7 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 				if ( isset( $this->field['ajax'] ) && $this->field['ajax'] ) {
 					$ajax = true;
 				}
-				$this->field['options'] = $this->parent->wordpress_data->get( $this->field['data'], $this->field['args'], $this->value, $ajax );
+				$this->field['options'] = $this->parent->wordpress_data->get( $this->field['data'], $this->field['args'], $this->parent->args['opt_name'], $this->value, $ajax );
 			}
 
 			if ( ! empty( $this->field['data'] ) && in_array( $this->field['data'], array( 'elusive-icons', 'elusive-icon', 'elusive', 'dashicons', 'dashicon', 'dash' ), true ) ) {

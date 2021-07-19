@@ -70,7 +70,7 @@ class Redux_Descriptor {
 	 *
 	 * @param string $field Field name.
 	 */
-	public function __construct( $field ) {
+	public function __construct( string $field ) {
 		Redux_Descriptor_Fields::$order = 0;
 		try {
 			$this->reflection_class = new ReflectionClass( $field );
@@ -86,18 +86,18 @@ class Redux_Descriptor {
 	 *
 	 * @return string
 	 */
-	public function get_field_type() {
+	public function get_field_type(): string {
 		return $this->field_type;
 	}
 
 	/**
 	 * Set the basic required information.
 	 *
-	 * @param string $name Set name for the descriptor.
+	 * @param string $name        Set name for the descriptor.
 	 * @param string $description Set description for the descriptor.
-	 * @param string $icon Set icon for the descriptor.
+	 * @param string $icon        Set icon for the descriptor.
 	 */
-	public function set_info( $name, $description = '', $icon = '' ) {
+	public function set_info( string $name, string $description = '', string $icon = '' ) {
 		$this->name        = $name;
 		$this->description = $description;
 		$this->icon        = $icon;
@@ -108,7 +108,7 @@ class Redux_Descriptor {
 	 *
 	 * @return string
 	 */
-	public function get_name() {
+	public function get_name(): string {
 		return $this->name;
 	}
 
@@ -123,7 +123,7 @@ class Redux_Descriptor {
 	 *
 	 * @return Redux_Descriptor_Fields
 	 */
-	public function add_field( $name, $title, $type, $description = '', $default = null ) {
+	public function add_field( string $name, string $title, string $type, string $description = '', $default = null ): ?Redux_Descriptor_Fields {
 		try {
 			$this->fields[ $name ] = new Redux_Descriptor_Fields( $name, $title, $type, $description, $default );
 		} catch ( Exception $e ) {
@@ -141,7 +141,7 @@ class Redux_Descriptor {
 	 *
 	 * @return array
 	 */
-	public function parse_request( $req ) {
+	public function parse_request( array $req ): array {
 		$parsed_req = array();
 		foreach ( $req as $k => $v ) {
 			if ( isset( $this->fields[ $k ] ) ) {
@@ -159,16 +159,12 @@ class Redux_Descriptor {
 	 *
 	 * @return mixed|null
 	 */
-	public function field( $field_name = '' ) {
+	public function field( string $field_name = '' ) {
 		if ( ! empty( $field_name ) ) {
 			$this->current_field = $field_name;
 		}
 
-		if ( isset( $this->fields[ $this->current_field ] ) ) {
-			return $this->fields[ $this->current_field ];
-		} else {
-			return null;
-		}
+		return $this->fields[ $this->current_field ] ?? null;
 	}
 
 	/**
@@ -176,7 +172,7 @@ class Redux_Descriptor {
 	 *
 	 * @param string $name Remove a field from the keys.
 	 */
-	public function remove_field( $name ) {
+	public function remove_field( string $name ) {
 		unset( $this->fields[ $name ] );
 	}
 
@@ -185,7 +181,7 @@ class Redux_Descriptor {
 	 *
 	 * @return string
 	 */
-	public function to_doc() {
+	public function to_doc(): string {
 		$doc  = $this->name . "\n" . $this->description . "\n";
 		$doc .= 'Fields:';
 		$this->sort_fields();
@@ -216,7 +212,7 @@ class Redux_Descriptor {
 	 *
 	 * @return array
 	 */
-	public function to_array() {
+	public function to_array(): array {
 		$fields = array();
 
 		$this->sort_fields();

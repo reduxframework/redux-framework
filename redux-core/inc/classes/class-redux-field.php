@@ -30,15 +30,15 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 *
 		 * @return Redux_Descriptor
 		 */
-		public static function make_base_descriptor() {
+		public static function make_base_descriptor(): Redux_Descriptor {
 			$d                                       = new Redux_Descriptor( get_called_class() );
 			self::$descriptors[ get_called_class() ] = $d;
 
 			$d->add_field( 'id', __( 'Field ID', 'redux-framework' ), RDT::TEXT )->set_order( 0 )->set_required();
-			$d->add_field( 'title', __( 'Title', 'redux-framework' ), RDT::TEXT, '' )->set_order( 1 );
-			$d->add_field( 'subtitle', __( 'Subtitle', 'redux-framework' ), RDT::TEXT, '' )->set_order( 2 );
-			$d->add_field( 'desc', __( 'Description', 'redux-framework' ), RDT::TEXT, '' )->set_order( 3 );
-			$d->add_field( 'class', __( 'Class', 'redux-framework' ), RDT::TEXT, '' )->set_order( 3 );
+			$d->add_field( 'title', __( 'Title', 'redux-framework' ), RDT::TEXT )->set_order( 1 );
+			$d->add_field( 'subtitle', __( 'Subtitle', 'redux-framework' ), RDT::TEXT )->set_order( 2 );
+			$d->add_field( 'desc', __( 'Description', 'redux-framework' ), RDT::TEXT )->set_order( 3 );
+			$d->add_field( 'class', __( 'Class', 'redux-framework' ), RDT::TEXT )->set_order( 3 );
 			$d->add_field( 'compiler', __( 'Compiler', 'redux-framework' ), RDT::BOOL, '', false )->set_order( 60 );
 			$d->add_field( 'default', __( 'Default', 'redux-framework' ), RDT::OPTIONS, '', false )->set_order( 60 );
 			$d->add_field( 'disabled', __( 'Disabled', 'redux-framework' ), RDT::BOOL, '', false )->set_order( 60 );
@@ -50,13 +50,13 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		}
 
 		/**
-		 * Renders an attribute array into an html attributes string.
+		 * Renders an attribute array into a html attributes string.
 		 *
 		 * @param array $attributes HTML attributes.
 		 *
 		 * @return string
 		 */
-		public static function render_attributes( $attributes = array() ) {
+		public static function render_attributes( array $attributes = array() ): string {
 			$output = '';
 
 			if ( empty( $attributes ) ) {
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 *
 		 * @return Redux_Descriptor
 		 */
-		public static function get_descriptor() {
+		public static function get_descriptor(): Redux_Descriptor {
 			if ( ! isset( static::$descriptors[ get_called_class() ] ) ) {
 				static::make_descriptor();
 			}
@@ -149,13 +149,13 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		/**
 		 * Redux_Field constructor.
 		 *
-		 * @param array  $field Field array.
-		 * @param string $value Field values.
-		 * @param null   $parent ReduxFramework object pointer.
+		 * @param array|string   $field Field array.
+		 * @param array|string   $value Field values.
+		 * @param ReduxFramework $parent ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Comment.
 		 */
-		public function __construct( $field = array(), $value = null, $parent = null ) {
+		public function __construct( $field = array(), $value = null, ReduxFramework $parent = null ) {
 			$this->parent = $parent;
 			$this->field  = $field;
 			$this->value  = $value;
@@ -186,7 +186,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 *
 		 * @return string
 		 */
-		protected function get_dir() {
+		protected function get_dir(): ?string {
 			return $this->dir;
 		}
 
@@ -195,14 +195,14 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 *
 		 * @param string $style_data CSS string.
 		 */
-		public function media_query( $style_data = '' ) {
+		public function media_query( string $style_data = '' ) {
 			$query_arr = $this->field['media_query'];
 			$css       = '';
 
 			if ( isset( $query_arr['queries'] ) ) {
 				foreach ( $query_arr['queries'] as $idx => $query ) {
-					$rule      = isset( $query['rule'] ) ? $query['rule'] : '';
-					$selectors = isset( $query['selectors'] ) ? $query['selectors'] : array();
+					$rule      = $query['rule'] ?? '';
+					$selectors = $query['selectors'] ?? array();
 
 					if ( ! is_array( $selectors ) && '' !== $selectors ) {
 						$selectors = array( $selectors );
@@ -232,9 +232,9 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		/**
 		 * CSS for field output, if set.
 		 *
-		 * @param string $style CSS string.
+		 * @param string|null $style CSS string.
 		 */
-		public function output( $style = '' ) {
+		public function output( ?string $style = '' ) {
 			if ( '' !== $style ) {
 
 				// Force output value into an array.
@@ -309,7 +309,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 * @param array  $field Field array.
 		 * @param string $value Value array.
 		 */
-		public function localize( $field, $value = '' ) {
+		public function localize( array $field, string $value = '' ) {
 
 		}
 	}
