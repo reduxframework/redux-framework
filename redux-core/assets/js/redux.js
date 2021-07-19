@@ -373,59 +373,6 @@ function colorNameToHex( colour ) {
 	};
 })( jQuery );
 
-/* global redux, jQuery */
-
-(function( $ ) {
-	'use strict';
-
-	$.redux = $.redux || {};
-
-	$( document ).ready(
-		function() {
-			if ( undefined === typeof redux.field_objects.pro ) {
-				$.redux.flyoutSubmenus();
-			}
-		}
-	);
-
-	$.redux.flyoutSubmenus = function() {
-
-		// Close flyouts when a new menu item is activated.
-		$( '.redux-group-tab-link-li a' ).on(
-			'click',
-			function() {
-				if ( true === redux.optName.args.flyout_submenus ) {
-					$( '.redux-group-tab-link-li' ).removeClass( 'redux-section-hover' );
-				}
-			}
-		);
-
-		if ( true === redux.optName.args.flyout_submenus ) {
-
-			// Submenus flyout when a main menu item is hovered.
-			$( '.redux-group-tab-link-li.hasSubSections' ).each(
-				function() {
-					$( this ).on(
-						'mouseenter',
-						function() {
-							if ( ! $( this ).hasClass( 'active' ) && ! $( this ).hasClass( 'activeChild' ) ) {
-								$( this ).addClass( 'redux-section-hover' );
-							}
-						}
-					);
-
-					$( this ).on(
-						'mouseleave',
-						function() {
-							$( this ).removeClass( 'redux-section-hover' );
-						}
-					);
-				}
-			);
-		}
-	};
-})( jQuery );
-
 /* global redux, redux_change, jQuery */
 
 (function( $ ) {
@@ -637,8 +584,6 @@ function colorNameToHex( colour ) {
 	$( document ).ready(
 		function() {
 			var opt_name;
-			var li;
-
 			var tempArr = [];
 
 			$.fn.isOnScreen = function() {
@@ -650,17 +595,17 @@ function colorNameToHex( colour ) {
 					return;
 				}
 
-				win = $( window );
+				win      = $( window );
 				viewport = {
 					top: win.scrollTop()
 				};
 
-				viewport.right = viewport.left + win.width();
+				viewport.right  = viewport.left + win.width();
 				viewport.bottom = viewport.top + win.height();
 
 				bounds = this.offset();
 
-				bounds.right = bounds.left + this.outerWidth();
+				bounds.right  = bounds.left + this.outerWidth();
 				bounds.bottom = bounds.top + this.outerHeight();
 
 				return ( ! ( viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom ) );
@@ -699,9 +644,50 @@ function colorNameToHex( colour ) {
 				$.redux.initQtip();
 				$.redux.tabCheck();
 				$.redux.notices();
+
+				if ( 'undefined' === typeof $.redux.flyoutSubmenus ) {
+					$.redux.flyoutSubmenu();
+				}
 			}
 		}
 	);
+
+	$.redux.flyoutSubmenu = function() {
+
+		// Close flyouts when a new menu item is activated.
+		$( '.redux-group-tab-link-li a' ).on(
+			'click',
+			function() {
+				if ( true === redux.optName.args.flyout_submenus ) {
+					$( '.redux-group-tab-link-li' ).removeClass( 'redux-section-hover' );
+				}
+			}
+		);
+
+		if ( true === redux.optName.args.flyout_submenus ) {
+
+			// Submenus flyout when a main menu item is hovered.
+			$( '.redux-group-tab-link-li.hasSubSections' ).each(
+				function() {
+					$( this ).on(
+						'mouseenter',
+						function() {
+							if ( ! $( this ).hasClass( 'active' ) && ! $( this ).hasClass( 'activeChild' ) ) {
+								$( this ).addClass( 'redux-section-hover' );
+							}
+						}
+					);
+
+					$( this ).on(
+						'mouseleave',
+						function() {
+							$( this ).removeClass( 'redux-section-hover' );
+						}
+					);
+				}
+			);
+		}
+	};
 
 	$.redux.disableSections = function() {
 		$( '.redux-group-tab' ).each(
