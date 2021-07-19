@@ -371,13 +371,13 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 		 * Field HTML OUTPUT.
 		 * Gets option from options array, then calls the specific field type class - allows extending by other devs
 		 *
-		 * @param array       $field   Field array.
-		 * @param string|null $v       Values.
+		 * @param array             $field   Field array.
+		 * @param string|array|null $v       Values.
 		 *
 		 * @return      void
 		 * @since       1.0.0
 		 */
-		public function field_input( array $field, string $v = null ) {
+		public function field_input( array $field, $v = null ) {
 			$core = $this->core();
 
 			if ( isset( $field['callback'] ) && ( is_callable( $field['callback'] ) || ( is_string( $field['callback'] ) && function_exists( $field['callback'] ) ) ) ) {

@@ -205,7 +205,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param string $ver     File version.
 		 * @param string $media   True or 'all'.
 		 */
-		public static function register_style( string $handle, string $src_cdn, array $deps = array(), string $ver, string $media = 'all' ) {
+		public static function register_style( string $handle, string $src_cdn, array $deps = array(), string $ver = '', string $media = 'all' ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
 				self::cdn( true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
 			} else {
@@ -221,7 +221,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param string $ver       File version.
 		 * @param bool   $in_footer Script in footer.
 		 */
-		public static function register_script( string $handle, string $src_cdn, array $deps = array(), string $ver, bool $in_footer ) {
+		public static function register_script( string $handle, string $src_cdn, array $deps = array(), string $ver = '', bool $in_footer = false ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
 				self::cdn( true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
 			} else {
@@ -238,7 +238,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param string $ver     File version.
 		 * @param string $media   Media type.
 		 */
-		public static function enqueue_style( string $handle, string $src_cdn, array $deps = array(), string $ver, string $media = 'all' ) {
+		public static function enqueue_style( string $handle, string $src_cdn, array $deps = array(), string $ver = '', string $media = 'all' ) {
 			if ( self::$parent->args['use_cdn'] ) {
 				self::cdn( false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
 			} else {
@@ -255,7 +255,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param string $ver       File version.
 		 * @param bool   $in_footer Script in footer.
 		 */
-		public static function enqueue_script( string $handle, string $src_cdn, array $deps = array(), string $ver, bool $in_footer ) {
+		public static function enqueue_script( string $handle, string $src_cdn, array $deps = array(), string $ver = '', bool $in_footer = false ) {
 			if ( self::$parent->args['use_cdn'] ) {
 				self::cdn( false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
 			} else {

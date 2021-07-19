@@ -385,7 +385,8 @@
 		var redux_initFields;
 
 		$( 'body' ).addClass( redux.customizer.body_class );
-		$( '.accordion-section.redux-section, .accordion-section.redux-panel, .accordion-section-title' ).click(
+		$( '.accordion-section.redux-section, .accordion-section.redux-panel, .accordion-section-title' ).on(
+			'click',
 			function() {
 				$.redux.initFields();
 			}

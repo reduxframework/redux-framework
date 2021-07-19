@@ -780,13 +780,13 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Validate the options before insertion
 		 *
-		 * @param       array $value The options array.
+		 * @param       array|string $value The options array.
 		 *
-		 * @return      $value
+		 * @return      string|array
 		 * @since       3.0.0
 		 * @access      public
 		 */
-		public function field_validation( array $value ): array {
+		public function field_validation( $value ) {
 
 			return $value;
 		}
