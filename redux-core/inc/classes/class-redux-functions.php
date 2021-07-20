@@ -224,7 +224,14 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 			if ( 0 === count( $css_array ) ) {
 				return '';
 			} else {
-				$css = '';
+				$css       = '';
+				$important = false;
+
+				if ( isset( $css_array['important'] ) && true === $css_array['important'] ) {
+					$important = '!important';
+
+					unset( $css_array['important'] );
+				}
 
 				foreach ( $css_array as $element => $selector ) {
 
@@ -234,7 +241,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 					}
 
 					// New way continued.
-					$css_style = $element . ':' . $value . ';';
+					$css_style = $element . ':' . $value . $important . ';';
 
 					$css .= $selector . '{' . $css_style . '}';
 				}
