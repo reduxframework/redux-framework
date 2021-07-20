@@ -1,16 +1,18 @@
 # Redux Changelog
 
-## 4.1.30 RC
+## 4.2.0
 * New: Typography features:  Top and bottom margins, text shadow.
 * New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
 * New: Filters (type, reach, angle) for Gradient color field.
 * New: Box Shadow field.
-* New: Flyout Submenus: `flyout_submenu` global arg.
+* New: Flyout Submenus: `flyout_submenus` global arg.
 * New: Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
 * Updated: select2 library to 4.1.0.
 * Updated: readme.txt to conform to wp.org standards.
 * Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
 * Fixed: Redux tempates not showing on 'page attributes' for some.
+* Fixed: Additional PHP 8.0 compatibility.
+* Fixed: Widget screen would not load due to conflict with template library.
 * Added:  WordPress 5.8 compatibility.
 * Improved: Better Gutenberg block editor detection.
 * Modified: Redux Pro no longer required for automatic Google font updates.

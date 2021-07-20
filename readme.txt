@@ -4,9 +4,9 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 4.1.29
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Stable tag: 4.2.0
+License: GPL-3.0+
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 Supercharge the Gutenberg editor with our ever-growing library of block-based templates!
 
@@ -152,15 +152,34 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.2.0 =
+* New: Typography features:  Top and bottom margins, text shadow.
+* New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
+* New: Filters (type, reach, angle) for Gradient color field.
+* New: Box Shadow field.
+* New: Flyout Submenus: `flyout_submenus` global arg.
+* New: Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
+* Updated: select2 library to 4.1.0.
+* Updated: readme.txt to conform to wp.org standards.
+* Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
+* Fixed: Redux tempates not showing on 'page attributes' for some.
+* Fixed: Additional PHP 8.0 compatibility.
+* Fixed: Widget screen would not load due to conflict with template library.
+* Added:  WordPress 5.8 compatibility.
+* Improved: Better Gutenberg block editor detection.
+* Modified: Redux Pro no longer required for automatic Google font updates.
+* Modified: Rename Parsedown class for raw field to avoid conflicts with other plugins.
+* Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
+
 = 4.1.29 =
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
 * Fixed: Index error in the image_select field.
 
 = 4.1.28 =
-* Fixed: #217 - Redux templates loading on post types with no block editor.
-* Fixed: #158 - Redux theme checks no longer prevent theme check plugin from functioning.
-* Fixed: #215 - Heatbeat check no longer eats the function if disregarded.
-* Fixed: #222 - Background field image now hides preview image upon removal.
+* Fixed: Redux templates loading on post types with no block editor.
+* Fixed: Redux theme checks no longer prevent theme check plugin from functioning.
+* Fixed: Heatbeat check no longer eats the function if disregarded.
+* Fixed: Background field image now hides preview image upon removal.
 * Fixed: RAW field in sample config now works.
 * Fixed: Helper function is_field_in_use now returns false, instead of null.
 * Fixed: Palette field rendering improperly.
@@ -170,11 +189,11 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 = 4.1.27 =
 * Fixed: Image select not selecting default value.
-* Modified: #209 - Link color field overridden by theme.  Added 'important' arg to the output array to fix.  See sample config.
-* Fixed: #208 - Same config not setting footer background in Twenty-twenty theme due to incorrect class.
-* Fixed: #207 - Radio field not displaying text after save/refresh when displaying WordPress data.
-* Modified: #210 - Donation text removed.
-* Fixed: #206 - Link color CSS compiling incorrectly due to late escaping.
+* Modified: Link color field overridden by theme.  Added 'important' arg to the output array to fix.  See sample config.
+* Fixed: Same config not setting footer background in Twenty-twenty theme due to incorrect class.
+* Fixed: Radio field not displaying text after save/refresh when displaying WordPress data.
+* Modified: Donation text removed.
+* Fixed: Link color CSS compiling incorrectly due to late escaping.
 
 = 4.1.26 =
 * Added: Menu accent introduced in WordPress 5.7.
