@@ -22,7 +22,7 @@ Redux::set_section(
 				'type'     => 'color_palette',
 				'title'    => esc_html__( 'Color Palette Control', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'User defined colors with round selectors.', 'your-textdomain-here' ),
-				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'Set the Widget Title color here.', 'your-textdomain-here' ),
 				'default'  => '#888888',
 				'options'  => array(
 					'colors' => array(
@@ -39,7 +39,8 @@ Redux::set_section(
 					'style'  => 'round',
 				),
 				'output'   => array(
-					'background-color' => 'body',
+					'color'     => '.widget-title',
+					'important' => true,
 				),
 			),
 			array(

@@ -34,7 +34,7 @@ Redux::set_section(
 			array(
 				'id'          => 'opt-typography',
 				'type'        => 'typography',
-				'title'       => esc_html__( 'Typography h2.site-description', 'your-textdomain-here' ),
+				'title'       => esc_html__( 'Typography Site Description', 'your-textdomain-here' ),
 
 				// Use if you want to hook in your own CSS compiler.
 				'compiler'    => true,
@@ -55,34 +55,42 @@ Redux::set_section(
 					'font-size'   => '33px',
 					'line-height' => '40px',
 				),
-				'output'      => array( 'h2.site-description, h2.entry-title' ),
+				'output'      => array( 'h2.site-description, h2.entry-title, .site-description' ),
 				// Disable google fonts.
-				// 'google'      => false,
+				// 'google'      => false,.
+
 				// Includes font-style and weight. Can use font-style or font-weight to declare.
-				// 'font-style'    => false,
-				// Only appears if google is true and subsets not set to false.
-				// 'subsets'       => false,
+				// 'font-style'    => false,.
+
+				// Only appears if Google is true and subsets not set to false.
+				// 'subsets'       => false,.
+
 				// Hide or show the font size input.
-				// 'font-size'     => false,
+				// 'font-size'     => false,.
+
 				// Hide or show the line height input.
-				// 'line-height'   => false,
+				// 'line-height'   => false,.
+
 				// Hide or show the word spacing input. Defaults to false.
-				// 'word-spacing'  => true,
+				// 'word-spacing'  => true,.
+
 				// Hide or show the word spacing input. Defaults to false.
-				// 'letter-spacing'=> true,
+				// 'letter-spacing'=> true,.
+
 				// Hide or show the font color picker.
-				// 'color'         => false,
+				// 'color'         => false,.
+
 				// Disable the font previewer
-				// 'preview'       => false,
-				// An array of CSS selectors to apply this font style to dynamically.
-				// An array of CSS selectors to apply this font style to dynamically.
-				// 'compiler'    => array( 'h2.site-description-compiler' ),
-				// .
+				// 'preview'       => false,.
+
+				// An array of CSS selectors in which to apply dynamically to this font style.
+				// 'compiler'    => array( 'h2.site-description-compiler' ),.
+
 			),
 			array(
 				'id'                => 'opt-typography-body-shadow',
 				'type'              => 'typography',
-				'title'             => esc_html__( 'Body Font', 'your-textdomain-here' ),
+				'title'             => esc_html__( 'Title Font', 'your-textdomain-here' ),
 				'subtitle'          => esc_html__( 'Specify the body font properties.', 'your-textdomain-here' ),
 				'google'            => true,
 				'font_family_clear' => false,
@@ -91,14 +99,14 @@ Redux::set_section(
 				'margin-top'        => true,
 				'margin-bottom'     => true,
 				'default'           => array(
-					'color'         => '#dd9933',
+					'color'         => '',
 					'font-size'     => '30px',
 					'font-family'   => 'Arial, Helvetica, sans-serif',
 					'font-weight'   => 'Normal',
-					'margin-top'    => '2px',
-					'margin-bottom' => '2px',
+					'margin-top'    => '20px',
+					'margin-bottom' => '20px',
 				),
-				'output'            => array( '.content-sidebar' ),
+				'output'            => array( '.site-title' ),
 			),
 		),
 	)

@@ -247,6 +247,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 						if ( $this->field['output']['important'] ) {
 							$style = str_replace( ';', ' !important;', $style );
 						}
+
 						unset( $this->field['output']['important'] );
 					}
 

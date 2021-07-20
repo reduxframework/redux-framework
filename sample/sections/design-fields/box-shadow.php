@@ -20,7 +20,7 @@ Redux::set_section(
 			array(
 				'id'          => 'opt-box_shadow',
 				'type'        => 'box_shadow',
-				'output'      => array( '.entry-content' ),
+				'output'      => array( '.site-header' ),
 				'color_alpha' => array(
 					'inset-shadow' => true,
 				),
@@ -39,7 +39,7 @@ Redux::set_section(
 					),
 				),
 				'title'       => esc_html__( 'Box Shadow', 'your-textdomain-here' ),
-				'subtitle'    => esc_html__( 'Box Shadow with inset and drop shadows.', 'your-textdomain-here' ),
+				'subtitle'    => esc_html__( 'Site Header Box Shadow with inset and drop shadows.', 'your-textdomain-here' ),
 				'desc'        => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 			),
 		),

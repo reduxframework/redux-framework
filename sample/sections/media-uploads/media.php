@@ -89,7 +89,7 @@ Redux::set_section(
 					'hue-rotate' => true,
 					'invert'     => true,
 				),
-				'output'       => array( '.header-image img' ),
+				'output'       => array( '.header-image img, .site-logo' ),
 			),
 			array(
 				'id'           => 'media-no-url-filter',

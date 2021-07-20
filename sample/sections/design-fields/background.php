@@ -23,6 +23,9 @@ Redux::set_section(
 					'background-color' => 'body',
 					'important'        => true,
 				),
+				'default'  => array(
+					'background-color' => '#d1b7e2',
+				),
 				'title'    => __( 'Body Background', 'your-textdomain-here' ),
 				'subtitle' => __( 'Body background with image, color, etc.', 'your-textdomain-here' ),
 			),

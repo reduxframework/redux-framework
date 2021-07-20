@@ -43,8 +43,8 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		public function set_defaults() {
 			// No errors please.
 			$defaults = array(
-				'from' => '',
-				'to'   => '',
+				'from'           => '',
+				'to'             => '',
 				'gradient-type'  => 'linear',
 				'gradient-angle' => 0,
 				'gradient-reach' => array(
@@ -89,6 +89,8 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				'value' => $this->value,
 			);
 
+			// Escaping done in function.
+			// phpcs:ignore WordPress.Security.EscapeOutput
 			echo Redux_Gradient_Filters::render_select( $data );
 
 			$mode_arr = array(
@@ -115,7 +117,9 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 					'value' => $this->value,
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				// Escaping done in function.
+				// phpcs:ignore WordPress.Security.EscapeOutput
+				echo Redux_Functions_Ex::output_alpha_data( $data );
 
 				echo '>';
 
@@ -136,7 +140,12 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				echo '</div>';
 			}
 
+			// Escaping done in function.
+			// phpcs:ignore WordPress.Security.EscapeOutput
 			echo Redux_Gradient_Filters::render_preview( $data );
+
+			// Escaping done in function.
+			// phpcs:ignore WordPress.Security.EscapeOutput
 			echo Redux_Gradient_Filters::render_sliders( $data );
 		}
 
@@ -196,21 +205,10 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		 *
 		 * @param string $data CSS data.
 		 *
-		 * @return array|string
-		 */
-		public function css_style( $data ) {
-			return Redux_Gradient_Filters::get_output( $data );
-		}
-
-		/**
-		 * CSS output data.
-		 *
-		 * @param mixed $style Output data.
-		 *
 		 * @return string
 		 */
-		public function output( $style = '' ): string {
-			return Redux_Gradient_Filters::get_output( $style );
+		public function css_style( $data ): string {
+			return Redux_Gradient_Filters::get_output( $data );
 		}
 
 		/**
