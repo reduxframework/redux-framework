@@ -1,6 +1,5 @@
 {
 	"name": "reduxframework/redux-framework",
-	"version": "4.1.29",
 	"authors": [
 		{
 			"name": "Redux.io",
@@ -12,7 +11,7 @@
 	"type": "wordpress-plugin",
 	"description": "Build better and beautiful sites in WordPress, faster.",
 	"homepage": "http://redux.io",
-	"license": "GPL-3.0+",
+	"license": "GPL-3.0-or-later",
 	"keywords": [
 		"settings",
 		"wordpress",
@@ -31,21 +30,5 @@
 	"require": {
 		"php": ">=7.1.0",
 		"composer/installers": "~1.0"
-	},
-	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-		"phpcompatibility/phpcompatibility-wp": "^2.1",
-		"lucatume/wp-browser": "^2.6",
-		"codeception/module-asserts": "^1.0",
-		"codeception/module-phpbrowser": "^1.0",
-		"codeception/module-webdriver": "^1.0",
-		"codeception/module-db": "^1.0",
-		"codeception/module-filesystem": "^1.0",
-		"codeception/module-cli": "^1.0",
-		"codeception/util-universalframework": "^1.0"
-	},
-	"scripts": {
-		"standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
-		"standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
 	}
 }
