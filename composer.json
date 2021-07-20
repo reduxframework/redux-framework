@@ -42,10 +42,10 @@
 		"codeception/module-db": "^1.0",
 		"codeception/module-filesystem": "^1.0",
 		"codeception/module-cli": "^1.0",
-		"codeception/util-universalframework": "^1.0",
+		"codeception/util-universalframework": "^1.0"
 	},
 	"scripts": {
 		"standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
-		"standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf",
+		"standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
 	}
 }
