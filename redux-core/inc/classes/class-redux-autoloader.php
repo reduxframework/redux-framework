@@ -52,6 +52,9 @@ class Redux_Autoloader {
 	 * @param string $class Class to test and/or load.
 	 */
 	public function load( string $class ) {
+		if ( strpos( $class, 'Redux' ) === false ) {
+			return;
+		}
 
 		// Strip prefix from the start (ala PSR-4).
 		$class = substr( $class, $this->prefix_length + 1 );
