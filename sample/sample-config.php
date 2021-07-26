@@ -92,7 +92,7 @@ $args = array(
 	// The text to appear on the page title.
 	'page_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 
-	// Disable to create your own google fonts loader.
+	// Disable to create your own Google fonts loader.
 	'disable_google_fonts_link' => false,
 
 	// Show the panel pages on the admin bar.
@@ -107,13 +107,13 @@ $args = array(
 	// Sets a different name for your global variable other than the opt_name.
 	'global_variable'           => '',
 
-	// Show the time the page took to load, etc (forced on while on localhost or when WP_DEBUG is enabled).
+	// Show the time the page took to load, etc. (forced on while on localhost or when WP_DEBUG is enabled).
 	'dev_mode'                  => true,
 
 	// Enable basic customizer support.
 	'customizer'                => true,
 
-	// Allow the panel to opened expanded.
+	// Allow the panel to open expanded.
 	'open_expanded'             => false,
 
 	// Disable the save warning when a user changes a field.
@@ -176,7 +176,7 @@ $args = array(
 	'flyout_submenus'           => true,
 
 	// Mode to display fonts (auto|block|swap|fallback|optional)
-	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display.
 	'font_display'              => 'swap',
 
 	// HINTS.

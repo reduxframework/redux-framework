@@ -352,10 +352,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		/**
 		 * Enqueue fields that are in use.
 		 *
-		 * @param     object $core  ReduxFramework object.
-		 * @param array      $field Field array.
+		 * @param ReduxFramework $core  ReduxFramework object.
+		 * @param array          $field Field array.
 		 */
-		public function enqueue_field( $core, array $field ) {
+		public function enqueue_field( ReduxFramework $core, array $field ) {
 			if ( isset( $field['type'] ) && 'callback' !== $field['type'] ) {
 
 				/**
@@ -447,11 +447,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 						}
 
 						// Move dev_mode check to a new if/then block.
-						if ( ( ! wp_script_is( 'redux-field-' . $field_type . '-js' ) || ! wp_script_is(
-							'redux-extension-' . $field_type . '-js'
-								) || ! wp_script_is(
-							'redux-pro-field-' . $field_type . '-js'
-								) ) && class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
+						if ( ( ! wp_script_is( 'redux-field-' . $field_type . '-js' ) ||
+							! wp_script_is( 'redux-extension-' . $field_type . '-js' ) ||
+							! wp_script_is( 'redux-pro-field-' . $field_type . '-js' ) ) &&
+							class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) {
 							$the_field->enqueue();
 						}
 
@@ -501,10 +500,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		/**
 		 * Build localize array from field functions, if any.
 		 *
-		 * @param     object $core ReduxFramework object.
-		 * @param string     $type Field type.
+		 * @param ReduxFramework $core ReduxFramework object.
+		 * @param string         $type Field type.
 		 */
-		private function build_local_array( $core, string $type ) {
+		private function build_local_array( ReduxFramework $core, string $type ) {
 			if ( isset( $core->transients['last_save_mode'] ) && ! empty( $core->transients['notices'][ $type ] ) ) {
 				$the_total = 0;
 				$messages  = array();

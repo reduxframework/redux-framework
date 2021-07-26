@@ -13,7 +13,7 @@
 #
 #
 
-if (! class_exists( 'Redux_Parsedown' ) )
+if (! class_exists( 'Redux_Parsedown' ) ) {
 	class Redux_Parsedown
 	{
 		# ~
