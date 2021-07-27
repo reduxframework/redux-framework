@@ -1,7 +1,7 @@
 # Redux Changelog
 
 ## 4.2.0
-* New: Typography features:  Top and bottom margins, text shadow.
+* New: Typography features:  Top and bottom margins, text-shadow.
 * New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
 * New: Filters (type, reach, angle) for Gradient color field.
 * New: Box Shadow field.
@@ -10,15 +10,15 @@
 * Updated: select2 library to 4.1.0.
 * Updated: readme.txt to conform to wp.org standards.
 * Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
-* Fixed: Redux tempates not showing on 'page attributes' for some.
+* Fixed: Redux templates not showing on 'page attributes' for some.
 * Fixed: Additional PHP 8.0 compatibility.
 * Fixed: Widget screen would not load due to conflict with template library.
 * Added:  WordPress 5.8 compatibility.
 * Improved: Better Gutenberg block editor detection.
 * Modified: Redux Pro no longer required for automatic Google font updates.
-* Modified: Rename Parsedown class for raw field to avoid conflicts with other plugins.
+* Modified: Rename Parsedown class for the raw field to avoid conflicts with other plugins.
 * Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
-
+* 
 ## 4.1.29
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
 * Fixed: Index error in the image_select field.
