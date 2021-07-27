@@ -220,7 +220,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 		 * @return array Params to be saved as a javascript object accessable to the UI.
 		 * @since  Redux_Framework 3.1.5
 		 */
-		public function localize( $field, $value = '' ): array {
+		public function localize( array $field, string $value = '' ): array {
 			$params = array();
 
 			if ( isset( $field['limits'] ) && ! empty( $field['limits'] ) ) {

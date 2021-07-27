@@ -30,7 +30,7 @@ Redux::setSection(
 
 				// Disable auto-enqueue of stylesheet on the front-end.
 				'enqueue_frontend' => false,
-				'stylesheet'       => 'https://use.fontawesome.com/releases/v5.6.3/css/all.css',
+				'stylesheet'       => 'https://use.fontawesome.com/releases/v5.15.3/css/all.css',
 
 				// If needed to initialize the icon.
 				'prefix'           => 'fa',

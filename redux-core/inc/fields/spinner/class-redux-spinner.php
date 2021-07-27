@@ -148,7 +148,7 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		/**
 		 * CSS/compiler output.
 		 *
-		 * @param string $style CSS styles.
+		 * @param string|null|array $style CSS styles.
 		 */
 		public function output( $style = '' ) {
 			$style = '';

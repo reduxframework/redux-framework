@@ -84,7 +84,7 @@ if ( ! class_exists( 'Redux_Color_Palette' ) ) {
 		/**
 		 * CSS output.
 		 *
-		 * @param string $style CSS data.
+		 * @param string|null|array $style CSS data.
 		 */
 		public function output( $style = '' ) {
 			if ( ! empty( $this->value ) ) {

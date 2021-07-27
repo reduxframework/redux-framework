@@ -242,7 +242,7 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 		 * @since   1.0.0
 		 * @access  public
 		 *
-		 * @param   string $style css data.
+		 * @param   string|null|array $style css data.
 		 *
 		 * @return  void
 		 */

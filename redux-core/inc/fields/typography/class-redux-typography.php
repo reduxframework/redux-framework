@@ -195,7 +195,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function localize( $field, $value = '' ): array {
+		public function localize( array $field, string $value = '' ): array {
 			$params = array();
 
 			if ( true === $this->user_fonts && ! empty( $this->field['fonts'] ) ) {
@@ -1125,7 +1125,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		/**
 		 * CSS Output to send to the page.
 		 *
-		 * @param string $style CSS styles.
+		 * @param string|null|array $style CSS styles.
 		 */
 		public function output( $style = '' ) {
 			$font = $this->value;

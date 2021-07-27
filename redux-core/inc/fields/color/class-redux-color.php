@@ -126,7 +126,7 @@ if ( ! class_exists( 'Redux_Color', false ) ) {
 		/**
 		 * Output CSS styling.
 		 *
-		 * @param string $style CSS style.
+		 * @param string|null|array $style CSS style.
 		 */
 		public function output( $style = '' ) {
 			if ( ! empty( $this->value ) ) {

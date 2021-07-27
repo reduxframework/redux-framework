@@ -232,9 +232,9 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		/**
 		 * CSS for field output, if set.
 		 *
-		 * @param string|null $style CSS string.
+		 * @param string|array|null $style CSS string.
 		 */
-		public function output( ?string $style = '' ) {
+		public function output( $style = '' ) {
 			if ( '' !== $style ) {
 
 				// Force output value into an array.

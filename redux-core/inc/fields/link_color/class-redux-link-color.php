@@ -246,7 +246,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 		/**
 		 * Output CSS/compiler.
 		 *
-		 * @param mixed $style Style to output.
+		 * @param string|null|array $style Style to output.
 		 */
 		public function output( $style = '' ) {
 			if ( ! empty( $style ) ) {
