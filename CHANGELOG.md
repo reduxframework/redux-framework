@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.7
+* Fixed: Options reverting or not saving.
+
 ## 4.2.6
 * Fixed: Fatal error if passing null as an option section.
 * Fixed: Error in connection banner routine.

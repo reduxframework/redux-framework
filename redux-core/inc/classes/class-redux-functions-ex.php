@@ -351,15 +351,15 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Used to fix 3.x and 4 compatibility for extensions
 		 *
-		 * @param ReduxFramework $parent         The extension parent object.
-		 * @param string         $path           - Path of the file.
-		 * @param string         $ext_class      - Extension class name.
-		 * @param string         $new_class_name - New dynamic class name.
-		 * @param string         $name           extension name.
+		 * @param object $parent         The extension parent object.
+		 * @param string $path           - Path of the file.
+		 * @param string $ext_class      - Extension class name.
+		 * @param string $new_class_name - New dynamic class name.
+		 * @param string $name           extension name.
 		 *
 		 * @return object - Extended field class.
 		 */
-		public static function extension_compatibility( ReduxFramework $parent, string $path, string $ext_class, string $new_class_name, string $name ) {
+		public static function extension_compatibility( $parent, string $path, string $ext_class, string $new_class_name, string $name ) {
 			if ( empty( $new_class_name ) ) {
 				return;
 			}

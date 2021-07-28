@@ -565,9 +565,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 			Redux_Functions_Ex::record_caller( $opt_name );
 
 			foreach ( $sections as $section ) {
-				if ( isset( $section ) && ! empty( $section ) ) {
-					self::set_section( $opt_name, $section );
-				}
+				self::set_section( $opt_name, $section );
 			}
 		}
 
@@ -1584,9 +1582,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * Gets all loaded extension for the passed ReduxFramework instance.
 		 *
 		 * @param string              $opt_name Panel opt_name.
-		 * @param ReduxFramework|null $instance ReduxFramework instance.
+		 * @param object|null $instance ReduxFramework instance.
 		 */
-		public static function get_instance_extension( string $opt_name, ?ReduxFramework $instance ) {
+		public static function get_instance_extension( string $opt_name, $instance ) {
 			if ( ! empty( self::$uses_extensions[ $opt_name ] ) || empty( $opt_name ) ) {
 				return;
 			}
@@ -1712,7 +1710,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Function which forces a panel/page to render.
 		 *
-		 * @param string|ReduxFramework $redux Panel opt_name or Redux object.
+		 * @param string|object $redux Panel opt_name or Redux object.
 		 */
 		public static function render( $redux = '' ) {
 			if ( is_string( $redux ) ) {

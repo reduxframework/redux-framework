@@ -19,12 +19,12 @@ if ( ! class_exists( 'Redux_Validate', false ) ) {
 		/**
 		 * Redux_Validate constructor.
 		 *
-		 * @param ReduxFramework $parent ReduxFramework pointer.
-		 * @param array          $field Fields array.
-		 * @param array|string   $value Values array.
-		 * @param mixed          $current Current.
+		 * @param object       $parent ReduxFramework pointer.
+		 * @param array        $field Fields array.
+		 * @param array|string $value Values array.
+		 * @param mixed        $current Current.
 		 */
-		public function __construct( ReduxFramework $parent, array $field, $value, $current ) {
+		public function __construct( $parent, array $field, $value, $current ) {
 			$this->parent  = $parent;
 			$this->field   = $field;
 			$this->value   = $value;

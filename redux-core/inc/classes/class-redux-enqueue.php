@@ -352,10 +352,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		/**
 		 * Enqueue fields that are in use.
 		 *
-		 * @param ReduxFramework $core  ReduxFramework object.
-		 * @param array          $field Field array.
+		 * @param object $core  ReduxFramework object.
+		 * @param array  $field Field array.
 		 */
-		public function enqueue_field( ReduxFramework $core, array $field ) {
+		public function enqueue_field( $core, array $field ) {
 			if ( isset( $field['type'] ) && 'callback' !== $field['type'] ) {
 
 				/**
@@ -500,10 +500,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		/**
 		 * Build localize array from field functions, if any.
 		 *
-		 * @param ReduxFramework $core ReduxFramework object.
-		 * @param string         $type Field type.
+		 * @param object $core ReduxFramework object.
+		 * @param string $type Field type.
 		 */
-		private function build_local_array( ReduxFramework $core, string $type ) {
+		private function build_local_array( $core, string $type ) {
 			if ( isset( $core->transients['last_save_mode'] ) && ! empty( $core->transients['notices'][ $type ] ) ) {
 				$the_total = 0;
 				$messages  = array();

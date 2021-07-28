@@ -88,11 +88,11 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 		/**
 		 * Check field for require deps.
 		 *
-		 * @param ReduxFramework $core  ReduxFramework core pointer.
-		 * @param array          $field Field array.
-		 * @param array          $data  Required data.
+		 * @param object $core  ReduxFramework core pointer.
+		 * @param array  $field Field array.
+		 * @param array  $data  Required data.
 		 */
-		private function check_required_dependencies( ReduxFramework $core, array $field, array $data ) {
+		private function check_required_dependencies( $core, array $field, array $data ) {
 			// required field must not be hidden. Otherwise, hide this one by default.
 			if ( ! in_array( $data['parent'], $core->fields_hidden, true ) && ( ! isset( $core->folds[ $field['id'] ] ) || 'hide' !== $core->folds[ $field['id'] ] ) ) {
 				if ( isset( $core->options[ $data['parent'] ] ) ) {

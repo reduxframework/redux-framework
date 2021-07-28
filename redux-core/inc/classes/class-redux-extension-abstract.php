@@ -68,10 +68,10 @@ abstract class Redux_Extension_Abstract {
 	/**
 	 * Redux_Extension_Abstract constructor.
 	 *
-	 * @param ReduxFramework $parent ReduxFramework pointer.
-	 * @param string         $file   Extension file.
+	 * @param object $parent ReduxFramework pointer.
+	 * @param string $file   Extension file.
 	 */
-	public function __construct( ReduxFramework $parent, string $file = '' ) {
+	public function __construct( $parent, string $file = '' ) {
 		$this->parent = $parent;
 
 		// If the file is not given make sure we have one.

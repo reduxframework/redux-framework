@@ -251,17 +251,17 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Function to output output_variables to the dynamic output.
 		 *
-		 * @param ReduxFramework $core       ReduxFramework core pointer.
-		 * @param array          $section    Section containing this field.
-		 * @param array          $field      Field object.
-		 * @param array|string   $value      Current value of field.
-		 * @param string|null    $style_data CSS output string to append to the root output variable.
+		 * @param object       $core       ReduxFramework core pointer.
+		 * @param array        $section    Section containing this field.
+		 * @param array        $field      Field object.
+		 * @param array|string $value      Current value of field.
+		 * @param string|null  $style_data CSS output string to append to the root output variable.
 		 *
 		 * @return      void
 		 * @since       4.0.3
 		 * @access      public
 		 */
-		private function output_variables( ReduxFramework $core, array $section = array(), array $field = array(), $value = array(), ?string $style_data = '' ) {
+		private function output_variables( $core, array $section = array(), array $field = array(), $value = array(), ?string $style_data = '' ) {
 			// Let's allow section overrides please.
 			if ( isset( $section['output_variables'] ) && ! isset( $field['output_variables'] ) ) {
 				$field['output_variables'] = $section['output_variables'];

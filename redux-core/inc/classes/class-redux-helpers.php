@@ -145,13 +145,13 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Deprecated Verifies if field is in use.
 		 *
-		 * @param ReduxFramework $parent ReduxFramework object.
-		 * @param string         $field  Field type.
+		 * @param object $parent ReduxFramework object.
+		 * @param string $field  Field type.
 		 *
 		 * @return bool
 		 * @deprecated No longer using camelCase function names.
 		 */
-		public static function isFieldInUse( ReduxFramework $parent, string $field ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function isFieldInUse( $parent, string $field ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			// phpcs:ignore Squiz.PHP.CommentedOutCode
 			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::is_field_in_use( $parent, $field )' );
 			return self::is_field_in_use( $parent, $field );

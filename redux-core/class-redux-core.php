@@ -311,10 +311,10 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Code to execute on framework __construct.
 		 *
-		 * @param ReduxFramework $parent Pointer to ReduxFramework object.
-		 * @param array          $args   Global arguments array.
+		 * @param object $parent Pointer to ReduxFramework object.
+		 * @param array  $args   Global arguments array.
 		 */
-		public static function core_construct( ReduxFramework $parent, array $args ) {
+		public static function core_construct( $parent, array $args ) {
 			self::$third_party_fixes = new Redux_ThirdParty_Fixes( $parent );
 
 			Redux_ThemeCheck::get_instance();
