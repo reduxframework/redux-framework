@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.9
+* Fixed: WordPress data class now works properly.
+
 ## 4.2.8
 * Fixed Redux instances returning null.  Saved options now show on the front end.
 
