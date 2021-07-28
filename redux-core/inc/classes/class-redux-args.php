@@ -173,7 +173,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				$args['font_display'] = 'swap';
 			}
 
-			if ( $args['async_typography'] ) {
+			if ( isset($args['async_typography']) && $args['async_typography'] ) {
 				$args['async_typography'] = false;
 			}
 
