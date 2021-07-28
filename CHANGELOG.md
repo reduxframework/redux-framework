@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.1
+* Fixed: Type mismatch regarding select boxes and callbacks.
+
 ## 4.2.0
 * New: Typography features:  Top and bottom margins, text-shadow.
 * New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).

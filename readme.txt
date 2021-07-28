@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 4.2.0
+Stable tag: 4.2.1
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -152,8 +152,11 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.2.1 =
+Fixed: Type mismatch regarding select boxes and callbacks.
+
 = 4.2.0 =
-* New: Typography features:  Top and bottom margins, text shadow.
+* New: Typography features:  Top and bottom margins, text-shadow.
 * New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
 * New: Filters (type, reach, angle) for Gradient color field.
 * New: Box Shadow field.
@@ -162,7 +165,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Updated: select2 library to 4.1.0.
 * Updated: readme.txt to conform to wp.org standards.
 * Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
-* Fixed: Redux tempates not showing on 'page attributes' for some.
+* Fixed: Redux templates not showing on 'page attributes' for some.
 * Fixed: Additional PHP 8.0 compatibility.
 * Fixed: Widget screen would not load due to conflict with template library.
 * Added:  WordPress 5.8 compatibility.

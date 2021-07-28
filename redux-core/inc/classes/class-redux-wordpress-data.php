@@ -40,14 +40,14 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * Get the data.
 		 *
 		 * @param string|array $type          Type.
-		 * @param array        $args          Args.
+		 * @param array|string $args          Args.
 		 * @param string       $opt_name      Opt name.
 		 * @param string|int   $current_value Current value.
 		 * @param bool         $ajax          Tells if this is an AJAX call.
 		 *
 		 * @return array|mixed|string
 		 */
-		public function get( $type, array $args = array(), string $opt_name = '', $current_value = '', bool $ajax = false ) {
+		public function get( $type, $args = array(), string $opt_name = '', $current_value = '', bool $ajax = false ) {
 			$opt_name = $this->opt_name;
 
 			// We don't want to run this, it's not a string value. Send it back!
@@ -222,13 +222,13 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Fetch the data for a given type.
 		 *
-		 * @param string      $type          The data type we're fetching.
-		 * @param array       $args          Arguments to pass.
-		 * @param mixed|array $current_value If a current value already set in the database.
+		 * @param string       $type          The data type we're fetching.
+		 * @param array|string $args          Arguments to pass.
+		 * @param mixed|array  $current_value If a current value already set in the database.
 		 *
 		 * @return array
 		 */
-		private function get_data( string $type, array $args, $current_value ): array {
+		private function get_data( string $type, $args, $current_value ): array {
 			$args = $this->get_arg_defaults( $type, $args );
 
 			$opt_name = $this->opt_name;
@@ -486,11 +486,11 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Router for translation based on the given post type.
 		 *
-		 * @param string      $type          Type of data request.
-		 * @param mixed|array $current_value Current value stored in DB.
-		 * @param array       $args          Arguments for the call.
+		 * @param string       $type          Type of data request.
+		 * @param mixed|array  $current_value Current value stored in DB.
+		 * @param array|string $args          Arguments for the call.
 		 */
-		private function maybe_get_translation( string $type, &$current_value = '', array $args = array() ) {
+		private function maybe_get_translation( string $type, &$current_value = '', $args = array() ) {
 			switch ( $type ) {
 				case 'categories':
 				case 'category':
@@ -602,12 +602,12 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Get default arguments for a given data type.
 		 *
-		 * @param string $type Type of data request.
-		 * @param array  $args Arguments for the call.
+		 * @param string       $type Type of data request.
+		 * @param array|string $args Arguments for the call.
 		 *
-		 * @return array
+		 * @return array|string
 		 */
-		private function get_arg_defaults( string $type, array $args = array() ): array {
+		private function get_arg_defaults( string $type, $args = array() ) {
 			// In this section we set the default arguments for each data type.
 			switch ( $type ) {
 				case 'categories':
