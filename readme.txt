@@ -152,6 +152,9 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.2.3 =
+Fixed: Return type error in Redux templates.
+
 = 4.2.2 =
 Fixed: WordPress data options not handling WP_Error properly.
 

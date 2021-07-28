@@ -50,12 +50,12 @@ class Templates {
 		// Override the default content-width when using Redux templates so the template doesn't look like crao.
 		add_action( 'wp', array( $this, 'modify_template_content_width' ) );
 
-		// Add ReduxTemplates supported Post type in page template.
+		// Add ReduxTemplates supported Post types in page template.
 		$post_types = get_post_types( array(), 'object' );
 
 		if ( ! empty( $post_types ) ) {
 			foreach ( $post_types as $post_type ) {
-				if ( isset( $post_type->name ) && isset($post_type->show_in_rest) && $post_type->show_in_rest === true ) {
+				if ( isset( $post_type->name ) && isset( $post_type->show_in_rest ) && true === $post_type->show_in_rest ) {
 					add_filter( "theme_{$post_type->name}_templates", array( $this, 'add_templates' ) );
 				}
 			}
@@ -68,12 +68,12 @@ class Templates {
 	/**
 	 * Add the redux-template class to the admin body if a redux-templates page type is selected.
 	 *
-	 * @param string $classes Classes string for admin panel.
+	 * @param string|null $classes Classes string for admin panel.
 	 *
+	 * @return string|null
 	 * @since 4.1.19
-	 * @return string
 	 */
-	public function add_body_class( $classes ): string {
+	public function add_body_class( ?string $classes ): ?string {
 		global $post;
 
 		$screen = get_current_screen();
