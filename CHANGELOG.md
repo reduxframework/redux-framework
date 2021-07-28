@@ -2,6 +2,7 @@
 
 ## 4.2.6
 * Fixed: Fatal error if passing null as an option section.
+* Fixed: Error in connection banner routine.
 
 ## 4.2.5
 * Fixed: Return type mismatch in Redux Helpers.

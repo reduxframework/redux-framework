@@ -154,6 +154,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 = 4.2.6 =
 Fixed: Fatal error if passing null as an option section.
+Fixed: Error in connection banner routine.
 
 = 4.2.5 =
 Fixed: Type mismatch in Redux Helpers.
