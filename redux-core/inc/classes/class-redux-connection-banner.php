@@ -147,11 +147,11 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		/**
 		 * AJAX callback for dismissing the notice.
 		 *
-		 * @param string $admin_body_class Class string.
+		 * @param string|null $admin_body_class Class string.
 		 *
 		 * @return string
 		 */
-		public function admin_body_class( string $admin_body_class = '' ): string {
+		public function admin_body_class( ?string $admin_body_class = '' ): string {
 			$classes = explode( ' ', trim( $admin_body_class ) );
 
 			$classes[] = false ? 'redux-connected' : 'redux-disconnected';
