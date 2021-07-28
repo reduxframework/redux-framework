@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.4
+* Fixed: Taxonomy WordPress data not handled properly in fields that support WordPress data.
+
 ## 4.2.3
 * Fixed: Return type error in Redux templates.
 

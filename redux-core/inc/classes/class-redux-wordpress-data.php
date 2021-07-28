@@ -530,9 +530,9 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * Maybe translate the values.
 		 *
 		 * @param mixed|array $value     Value.
-		 * @param string      $post_type Post type.
+		 * @param mixed|array $post_type Post type.
 		 */
-		private function maybe_translate( &$value, string $post_type ) {
+		private function maybe_translate( &$value, $post_type ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$value = apply_filters( "redux/options/$this->opt_name/wordpress_data/translate/post_type_value", $value, $post_type );
