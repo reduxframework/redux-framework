@@ -16,6 +16,8 @@
  * @subpackage  Core
  * @subpackage  Core
  * @author      Redux Framework Team
+ *
+ * @noinspection PhpMissingParamTypeInspection
  */
 
 // Exit if accessed directly.
@@ -609,7 +611,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_default_values( string $key, bool $array_key = false ): array {
+		public function get_default_values( $key, $array_key = false ): array {
 			return $this->options_defaults_class->default_values( $key, $array_key );
 		}
 
@@ -621,7 +623,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_default_value( string $key, bool $array_key = false ): array {
+		public function get_default_value( $key, $array_key = false ): array {
 			return $this->options_defaults_class->default_values( $key, $array_key );
 		}
 
@@ -634,7 +636,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array|mixed|string|void
 		 */
-		public function get_wordpress_data( bool $type = false, array $args = array(), $current_value = null ) {
+		public function get_wordpress_data( $type = false, $args = array(), $current_value = null ) {
 			return $this->wordpress_data->get( $type, $args, $this->args['opt_name'], $current_value );
 		}
 
@@ -647,7 +649,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function _validate_values( array $plugin_options, array $options, array $sections ): array { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function _validate_values( $plugin_options, $options, $sections ): array { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			if ( ! isset( $this->validate_class ) ) {
 				$this->validate_class = new Redux_Validation( $this );
 			}
@@ -671,7 +673,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function section_menu( int $k, array $section, string $suffix = '', array $sections = array() ): string {
+		public function section_menu( $k, $section, $suffix = '', $sections = array() ): string {
 			return $this->render_class->section_menu( $k, $section, $suffix, $sections );
 		}
 
@@ -682,7 +684,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function get_header_html( array $field ): string {
+		public function get_header_html( $field ): string {
 			return $this->render_class->get_header_html( $field );
 		}
 
@@ -693,7 +695,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function current_user_can( string $permission ): bool {
+		public function current_user_can( $permission ): bool {
 			_deprecated_function( __FUNCTION__, '4.0.0', 'Redux_Helpers::current_user_can' );
 
 			return Redux_Helpers::current_user_can( $permission );
