@@ -149,13 +149,13 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		/**
 		 * Redux_Field constructor.
 		 *
-		 * @param array             $field  Field array.
+		 * @param array|string|null $field  Field array.
 		 * @param string|array|null $value  Field values.
 		 * @param null              $parent ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Comment.
 		 */
-		public function __construct( array $field = array(), $value = null, $parent = null ) {
+		public function __construct( $field = array(), $value = null, $parent = null ) {
 			$this->parent = $parent;
 			$this->field  = $field;
 			$this->value  = $value;
