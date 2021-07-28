@@ -1,7 +1,10 @@
 # Redux Changelog
 
+## 4.2.6
+* Fixed: Fatal error if passing null as an option section.
+
 ## 4.2.5
-* Fixed: Type mismatch in Redux Helpers.
+* Fixed: Return type mismatch in Redux Helpers.
 
 ## 4.2.4
 * Fixed: Taxonomy WordPress data not handled properly in fields that support WordPress data.

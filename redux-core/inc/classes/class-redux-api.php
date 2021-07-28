@@ -565,7 +565,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 			Redux_Functions_Ex::record_caller( $opt_name );
 
 			foreach ( $sections as $section ) {
-				self::set_section( $opt_name, $section );
+				if ( isset( $section ) && ! empty( $section ) ) {
+					self::set_section( $opt_name, $section );
+				}
 			}
 		}
 
@@ -658,12 +660,12 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Sets a single option panel section.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param array  $section  Section data.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param array|null $section  Section data.
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function setSection( string $opt_name = '', array $section = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function setSection( string $opt_name = '', ?array $section = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -674,11 +676,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Sets a single option panel section.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param array  $section  Section data.
-		 * @param bool   $replace  Replaces section instead of creating a new one.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param array|null $section  Section data.
+		 * @param bool       $replace  Replaces section instead of creating a new one.
 		 */
-		public static function set_section( string $opt_name = '', array $section = array(), bool $replace = false ) {
+		public static function set_section( string $opt_name = '', ?array $section = array(), bool $replace = false ) {
 			if ( empty( $section ) || '' === $opt_name ) {
 				return;
 			}
