@@ -105,7 +105,7 @@ $args = array(
 	'admin_bar_priority'        => 50,
 
 	// Sets a different name for your global variable other than the opt_name.
-	'global_variable'           => '',
+	'global_variable'           => $opt_name,
 
 	// Show the time the page took to load, etc. (forced on while on localhost or when WP_DEBUG is enabled).
 	'dev_mode'                  => true,

@@ -140,6 +140,23 @@ Redux::set_section(
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 			),
 			array(
+				'id'       => 'opt-select-terms',
+				'type'     => 'select',
+				'data'     => 'terms',
+				'title'    => esc_html__( 'Terms Select Option', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
+			),
+			array(
+				'id'       => 'opt-multi-select-terms',
+				'type'     => 'select',
+				'data'     => 'terms',
+				'multi'    => true,
+				'title'    => esc_html__( 'Terms Multi Select Option', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
+			),
+			array(
 				'id'       => 'opt-select-menus',
 				'type'     => 'select',
 				'data'     => 'menus',
@@ -237,6 +254,31 @@ Redux::set_section(
 				'subtitle'         => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
 				'desc'             => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 			),
+			array(
+				'id'       => 'opt-select-callback',
+				'type'     => 'select',
+				'data'     => 'callback',
+				'args'     => 'redux_select_callback',
+				'title'    => esc_html__( 'Select Option using a Callback', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'The items in this selcect were added via a callback function.', 'your-textdomain-here' ),
+			),
 		),
 	)
 );
+
+/**
+ * Select callback function.
+ *
+ * @return array
+ */
+function redux_select_callback(): array {
+	$options = array();
+
+	$options[0] = esc_html__( 'Zero', 'your-textdomain-here' );
+	$options[1] = esc_html__( 'One', 'your-textdomain-here' );
+	$options[2] = esc_html__( 'Two', 'your-textdomain-here' );
+	$options[3] = esc_html__( 'Three', 'your-textdomain-here' );
+
+	return $options;
+}
