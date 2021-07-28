@@ -58,7 +58,7 @@ if ( ! class_exists( 'Redux_Instances', false ) ) {
 		 *
 		 * @return [type] [description]
 		 */
-		public static function get_all_instances(): array {
+		public static function get_all_instances(): ?array {
 			return self::$instances;
 		}
 
@@ -113,7 +113,7 @@ if ( ! function_exists( 'get_all_redux_instances' ) ) {
 	 *
 	 * @return array        format ['opt_name' => $ReduxFramework]
 	 */
-	function get_all_redux_instances(): array {
+	function get_all_redux_instances(): ?array {
 		return Redux_Instances::get_all_instances();
 	}
 }

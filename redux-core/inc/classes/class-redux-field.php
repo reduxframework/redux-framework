@@ -149,13 +149,13 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		/**
 		 * Redux_Field constructor.
 		 *
-		 * @param array|string $field Field array.
-		 * @param array|string $value Field values.
-		 * @param object       $parent ReduxFramework object pointer.
+		 * @param array             $field  Field array.
+		 * @param string|array|null $value  Field values.
+		 * @param null              $parent ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Comment.
 		 */
-		public function __construct( $field = array(), $value = null, $parent = null ) {
+		public function __construct( array $field = array(), $value = null, $parent = null ) {
 			$this->parent = $parent;
 			$this->field  = $field;
 			$this->value  = $value;
@@ -232,9 +232,9 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		/**
 		 * CSS for field output, if set.
 		 *
-		 * @param string|array|null $style CSS string.
+		 * @param string $style CSS string.
 		 */
-		public function output( $style = '' ) {
+		public function output( string $style = '' ) {
 			if ( '' !== $style ) {
 
 				// Force output value into an array.
@@ -247,7 +247,6 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 						if ( $this->field['output']['important'] ) {
 							$style = str_replace( ';', ' !important;', $style );
 						}
-
 						unset( $this->field['output']['important'] );
 					}
 

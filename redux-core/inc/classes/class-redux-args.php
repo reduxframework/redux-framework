@@ -169,11 +169,10 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 			$args = $this->args( $args );
 			$args = $this->default_cleanup( $args );
 
-			if ( ! in_array( $args['font_display'], array( 'auto', 'block', 'swap', 'fallback', 'optional' ), true ) ) {
+			if ( ! in_array( $args['font_display'], array( 'block', 'swap', 'fallback', 'optional' ), true ) ) {
 				$args['font_display'] = 'swap';
 			}
-
-			if ( isset($args['async_typography']) && $args['async_typography'] ) {
+			if ( isset( $args['async_typography'] ) && $args['async_typography'] ) {
 				$args['async_typography'] = false;
 			}
 
@@ -250,7 +249,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * Sanitize args that should not be empty.
 		 *
-		 * @param array $args Global args.
+		 * @param     array $args Global args.
 		 *
 		 * @return array
 		 */
@@ -297,7 +296,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * Shims for much older v3 configs.
 		 *
-		 * @param array $args Global args.
+		 * @param     array $args Global args.
 		 *
 		 * @return array
 		 */
@@ -337,16 +336,9 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 						if ( is_array( $arr ) && ! empty( $arr ) ) {
 							foreach ( $arr as $x => $y ) {
 								if ( strpos( Redux_Core::strtolower( $y ), 'redux' ) !== false ) {
-									$msg = '<strong>' . esc_html__(
-										'Redux Framework Notice',
-										'redux-framework'
-									) . ' </strong>' . esc_html__(
-										'There are references to the Redux Framework support site in your config\'s ',
-										'redux-framework'
-									) . '<code>admin_bar_links</code> ' . esc_html__(
-										'argument.  This is sample data.  Please change or remove this data before shipping your product.',
-										'redux-framework'
-									);
+									$msg = '<strong>' . esc_html__( 'Redux Framework Notice', 'redux-framework' ) . ' </strong>' .
+										esc_html__( 'There are references to the Redux Framework support site in your config\'s ', 'redux-framework' ) .
+										'<code>admin_bar_links</code> ' . esc_html__( 'argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework' );
 
 									$this->omit_items = true;
 									break;
@@ -361,16 +353,9 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 						if ( is_array( $arr ) && ! empty( $arr ) ) {
 							foreach ( $arr as $x => $y ) {
 								if ( strpos( Redux_Core::strtolower( $y ), 'redux' ) !== false ) {
-									$msg = '<strong>' . esc_html__(
-										'Redux Framework Notice:',
-										'redux-framework'
-									) . '</strong>' . esc_html__(
-										'There are references to the Redux Framework support site in your config\'s',
-										'redux-framework'
-									) . ' <code>share_icons</code> ' . esc_html__(
-										'argument.  This is sample data.  Please change or remove this data before shipping your product.',
-										'redux-framework'
-									);
+									$msg = '<strong>' . esc_html__( 'Redux Framework Notice:', 'redux-framework' ) . '</strong>' .
+										esc_html__( 'There are references to the Redux Framework support site in your config\'s', 'redux-framework' ) .
+										' <code>share_icons</code> ' . esc_html__( 'argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework' );
 
 									$this->omit_icons = true;
 								}
@@ -391,7 +376,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		private function default_cleanup( array $args ): array {
 
 			// Fix the global variable name.
-			if ( '' === $args['global_variable'] && false !== (bool) $args['global_variable'] ) {
+			if ( '' === $args['global_variable'] && false !== $args['global_variable'] ) {
 				$args['global_variable'] = str_replace( '-', '_', $args['opt_name'] );
 			}
 

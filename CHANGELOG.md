@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.8
+* Fixed Redux instances returning null.  Saved options now show on the front end.
+
 ## 4.2.7
 * Fixed: Options reverting or not saving.
 

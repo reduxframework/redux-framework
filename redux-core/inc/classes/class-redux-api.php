@@ -197,9 +197,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Retrieve all ReduxFramework Instances.
 		 *
-		 * @return array|ReduxFramework[]
+		 * @return null|array|ReduxFramework[]
 		 */
-		public static function all_instances(): array {
+		public static function all_instances(): ?array {
 			return Redux_Instances::get_all_instances();
 		}
 
@@ -926,9 +926,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Create multiple fields of the option panel and apply to a section.
 		 *
-		 * @param string      $opt_name   Panel opt_name.
-		 * @param int|string  $section_id Section ID this field belongs to.
-		 * @param array       $fields     Array of field arrays.
+		 * @param string     $opt_name   Panel opt_name.
+		 * @param int|string $section_id Section ID this field belongs to.
+		 * @param array      $fields     Array of field arrays.
 		 */
 		public static function set_fields( string $opt_name = '', $section_id = '', array $fields = array() ) {
 			if ( ! is_array( $fields ) || empty( $fields ) || '' === $opt_name || '' === $section_id ) {
@@ -1581,7 +1581,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Gets all loaded extension for the passed ReduxFramework instance.
 		 *
-		 * @param string              $opt_name Panel opt_name.
+		 * @param string      $opt_name Panel opt_name.
 		 * @param object|null $instance ReduxFramework instance.
 		 */
 		public static function get_instance_extension( string $opt_name, $instance ) {
