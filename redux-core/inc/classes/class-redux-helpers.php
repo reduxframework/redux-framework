@@ -907,10 +907,11 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *
 		 * @param mixed $var String to convert to true boolean.
 		 *
-		 * @return string::make_bool_str( $var )
+		 * @return mixed|array
+		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function makeBoolStr( $var ): string { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function makeBoolStr( $var ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0.0', 'Redux_Instances::make_bool_str( $var )' );
 
 			return self::make_bool_str( $var );
@@ -921,9 +922,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *
 		 * @param mixed $var true|false to convert.
 		 *
-		 * @return string
+		 * @return mixed|array
 		 */
-		public static function make_bool_str( $var ): string {
+		public static function make_bool_str( $var ) {
 			if ( false === $var || 'false' === $var || 0 === $var || '0' === $var || '' === $var || empty( $var ) ) {
 				return 'false';
 			} elseif ( true === $var || 'true' === $var || 1 === $var || '1' === $var ) {

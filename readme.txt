@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 4.2.4
+Stable tag: 4.2.5
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -152,7 +152,10 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
-- 4.2.4 =
+= 4.2.5 =
+Fixed: Type mismatch in Redux Helpers.
+
+= 4.2.4 =
 Fixed: Taxonomy WordPress data not handled properly in fields that support WordPress data.
 
 = 4.2.3 =

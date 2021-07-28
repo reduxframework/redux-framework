@@ -133,7 +133,7 @@ Redux::set_section(
 			array(
 				'id'       => 'opt-multi-select-tags',
 				'type'     => 'select',
-				'data'     => 'tags',
+				'data'     => 'terms',
 				'multi'    => true,
 				'title'    => esc_html__( 'Tags Multi Select Option', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
