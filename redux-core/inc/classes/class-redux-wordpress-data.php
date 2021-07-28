@@ -557,13 +557,13 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Set the default arguments for a current query (existing data).
 		 *
-		 * @param string      $type          Type of data request.
-		 * @param array       $args          Arguments for the call.
-		 * @param mixed|array $current_value Current value stored in DB.
+		 * @param string       $type          Type of data request.
+		 * @param array|string $args          Arguments for the call.
+		 * @param mixed|array  $current_value Current value stored in DB.
 		 *
 		 * @return array
 		 */
-		private function get_current_data_args( string $type, array $args, $current_value ): array {
+		private function get_current_data_args( string $type, $args, $current_value ): array {
 			// In this section we set the default arguments for each data type.
 			switch ( $type ) {
 				case 'categories':
