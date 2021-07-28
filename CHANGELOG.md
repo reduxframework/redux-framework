@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.2
+* Fixed: WordPress data options not handling WP_Error properly.
+
 ## 4.2.1
 * Fixed: Type mismatch regarding select boxes and callbacks.
 

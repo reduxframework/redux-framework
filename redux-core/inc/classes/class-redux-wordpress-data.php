@@ -142,15 +142,15 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Process the results into a proper array, fetching the data elements needed for each data type.
 		 *
-		 * @param array       $results       Results to process in the data array.
-		 * @param string|bool $id_key        Key on object/array that represents the ID.
-		 * @param string|bool $name_key      Key on object/array that represents the name/text.
-		 * @param bool        $add_key       If true, the display key will appear in the text.
-		 * @param string|bool $secondary_key If a data type you'd rather display a different ID as the display key.
+		 * @param array|WP_Error $results       Results to process in the data array.
+		 * @param string|bool    $id_key        Key on object/array that represents the ID.
+		 * @param string|bool    $name_key      Key on object/array that represents the name/text.
+		 * @param bool           $add_key       If true, the display key will appear in the text.
+		 * @param string|bool    $secondary_key If a data type you'd rather display a different ID as the display key.
 		 *
 		 * @return array
 		 */
-		private function process_results( array $results = array(), $id_key = '', $name_key = '', bool $add_key = true, $secondary_key = 'slug' ): array {
+		private function process_results( $results = array(), $id_key = '', $name_key = '', bool $add_key = true, $secondary_key = 'slug' ): array {
 			$data = array();
 			if ( ! empty( $results ) && ! is_a( $results, 'WP_Error' ) ) {
 				foreach ( $results as $k => $v ) {
@@ -684,7 +684,5 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 
 			return $args;
 		}
-
-
 	}
 }
