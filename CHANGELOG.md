@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.10
+* Fixed: Output on the frontend triggering error. 
+
 ## 4.2.9
 * Fixed: WordPress data class now works properly.
 

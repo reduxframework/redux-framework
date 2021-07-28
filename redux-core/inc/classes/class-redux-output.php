@@ -152,11 +152,14 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 									}
 								}
 
-								if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] ) ) {
-									$field_object->output( $style_data );
-								}
-								if ( isset( $field['media_query'] ) && ! empty( $field['media_query'] ) ) {
-									$field_object->media_query( $style_data );
+								if ( null !== $style_data ) {
+									if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] ) ) {
+										$field_object->output( $style_data );
+									}
+
+									if ( isset( $field['media_query'] ) && ! empty( $field['media_query'] ) ) {
+										$field_object->media_query( $style_data );
+									}
 								}
 							}
 
