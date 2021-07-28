@@ -154,6 +154,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 = 4.2.10 =
 Fixed: Output on the frontend triggering error.
+Fixed: Updated shims to support older extensions not authored by Redux.io
 
 = 4.2.9 =
 Fixed: WordPress data class now works properly.
