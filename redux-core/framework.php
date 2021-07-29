@@ -12,12 +12,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
+ * The addition of the noinspection tags is because there are devs writing their
+ * in-house extensions improperly, and we have to compensate for that.
+ *
  * @package     Redux_Framework
  * @subpackage  Core
  * @subpackage  Core
  * @author      Redux Framework Team
  *
  * @noinspection PhpMissingParamTypeInspection
+ * @noinspection PhpMissingReturnTypeInspection
  */
 
 // Exit if accessed directly.
@@ -25,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.2.10';
+Redux_Core::$version    = '4.2.11';
 Redux_Core::$redux_path = dirname( __FILE__ );
 Redux_Core::instance();
 
@@ -553,7 +557,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function _default_values(): array { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function _default_values() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			if ( ! isset( $this->options_class ) ) {
 				$this->options_defaults_class = new Redux_Options_Defaults();
 				$this->options_class          = new Redux_Options_Constructor( $this );
@@ -611,7 +615,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_default_values( $key, $array_key = false ): array {
+		public function get_default_values( $key, $array_key = false ) {
 			return $this->options_defaults_class->default_values( $key, $array_key );
 		}
 
@@ -623,7 +627,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_default_value( $key, $array_key = false ): array {
+		public function get_default_value( $key, $array_key = false ) {
 			return $this->options_defaults_class->default_values( $key, $array_key );
 		}
 
@@ -649,7 +653,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return array
 		 */
-		public function _validate_values( $plugin_options, $options, $sections ): array { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function _validate_values( $plugin_options, $options, $sections ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			if ( ! isset( $this->validate_class ) ) {
 				$this->validate_class = new Redux_Validation( $this );
 			}
@@ -673,7 +677,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function section_menu( $k, $section, $suffix = '', $sections = array() ): string {
+		public function section_menu( $k, $section, $suffix = '', $sections = array() ) {
 			return $this->render_class->section_menu( $k, $section, $suffix, $sections );
 		}
 
@@ -684,7 +688,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function get_header_html( $field ): string {
+		public function get_header_html( $field ) {
 			return $this->render_class->get_header_html( $field );
 		}
 
@@ -695,7 +699,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function current_user_can( $permission ): bool {
+		public function current_user_can( $permission ) {
 			_deprecated_function( __FUNCTION__, '4.0.0', 'Redux_Helpers::current_user_can' );
 
 			return Redux_Helpers::current_user_can( $permission );
