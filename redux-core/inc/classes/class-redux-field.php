@@ -230,11 +230,13 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		}
 
 		/**
-		 * CSS for field output, if set.
+		 * CSS for field output, if set (Remove the noinpection line and fix this function when we drop support for PHP 7.1).
 		 *
 		 * @param string $style CSS string.
+		 *
+		 * @noinspection PhpMissingParamTypeInspection
 		 */
-		public function output( string $style = '' ) {
+		public function output( $style = '' ) {
 			if ( '' !== $style ) {
 
 				// Force output value into an array.

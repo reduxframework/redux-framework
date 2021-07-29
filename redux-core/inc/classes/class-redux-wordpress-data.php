@@ -226,9 +226,9 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * @param array|string $args          Arguments to pass.
 		 * @param mixed|array  $current_value If a current value already set in the database.
 		 *
-		 * @return array
+		 * @return array|null|string
 		 */
-		private function get_data( string $type, $args, $current_value ): array {
+		private function get_data( string $type, $args, $current_value ) {
 			$args = $this->get_arg_defaults( $type, $args );
 
 			$opt_name = $this->opt_name;
