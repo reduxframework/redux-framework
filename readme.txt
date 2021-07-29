@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 4.2.10
+Stable tag: 4.2.11
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -151,6 +151,11 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 6. Within each template kit you can see the full page template types.
 
 == Changelog ==
+
+= 4.2.11 =
+Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
+Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
+Fixed: Removed type declarations on field code to support outdated versions of PHP (PHP 7.4 is the minimum recommendation from WordPress...please update if you are able. [https://wordpress.org/about/requirements](https://wordpress.org/about/requirements) ).
 
 = 4.2.10 =
 Fixed: Output on the frontend triggering error.
