@@ -75,13 +75,13 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Deprecated. Gets panel tab number from specified field.
 		 *
-		 * @param object $parent ReduxFramework object.
-		 * @param array  $field  Field array.
+		 * @param object       $parent ReduxFramework object.
+		 * @param array|string $field  Field array.
 		 *
 		 * @return int|string
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function tabFromField( $parent, array $field ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function tabFromField( $parent, $field ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::tab_from_field( $parent, $field )' );
 
 			return self::tab_from_field( $parent, $field );
@@ -395,7 +395,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 				'lang'            => get_locale(),
 				'wp_debug'        => ( defined( 'WP_DEBUG' ) && WP_DEBUG ),
 				'memory'          => WP_MEMORY_LIMIT,
-				'localhost'       => Redux_Helpers::is_local_host(),
+				'localhost'       => self::is_local_host(),
 				'php'             => PHP_VERSION,
 				'posts'           => $pts,
 				'comments'        => array(
@@ -444,9 +444,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 				$theme['theme_parent_uri']        = $parent_theme->get( 'ThemeURI' );
 			}
 
-			$data = wp_parse_args( $data, $theme );
-
-			$parts    = explode( ' ', Redux_Core::$server['SERVER_SOFTWARE'] );
+			$data  = wp_parse_args( $data, $theme );
+			$parts = explode( ' ', Redux_Core::$server['SERVER_SOFTWARE'] );
 
 			foreach ( $parts as $part ) {
 				if ( '(' === $part[0] ) {
@@ -686,7 +685,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * Determines deep array status.
 		 *
 		 * @param array|string $needle   array to test.
-		 * @param array $haystack Array to search.
+		 * @param array        $haystack Array to search.
 		 *
 		 * @return bool
 		 */
@@ -761,7 +760,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			$themes         = wp_get_themes();
 
 			foreach ( $themes as $theme ) {
-				$path          = Redux_Functions_Ex::wp_normalize_path( trailingslashit( $theme->get_theme_root() ) . $theme->get_template() );
+				$path = Redux_Functions_Ex::wp_normalize_path( trailingslashit( $theme->get_theme_root() ) . $theme->get_template() );
 
 				if ( Redux_Functions_Ex::wp_normalize_path( realpath( $path ) ) !== $path ) {
 					$theme_paths[] = Redux_Functions_Ex::wp_normalize_path( realpath( $path ) );
@@ -1020,7 +1019,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *
 		 * @return array
 		 */
-		public static function compile_system_status( bool $json_output, bool $remote_checks ): array {
+		public static function compile_system_status( bool $json_output = false, bool $remote_checks = false ): array {
 			global $wpdb;
 
 			$sysinfo = array();
@@ -1263,7 +1262,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 								$outdated_templates = true;
 							}
 
-							$found_files[ $plugin_name ][] = sprintf( '<code>%s</code> ' . esc_html__( 'version', 'redux-framework' ) . ' <strong style="color:red">%s</strong> ' . esc_html__( 'is out of date. The core version is', 'redux-framework' ) . ' %s', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? : '-', $core_version );
+							$found_files[ $plugin_name ][] = sprintf( '<code>%s</code> ' . esc_html__( 'version', 'redux-framework' ) . ' <strong style="color:red">%s</strong> ' . esc_html__( 'is out of date. The core version is', 'redux-framework' ) . ' %s', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? $theme_version : '-', $core_version );
 						} else {
 							$found_files[ $plugin_name ][] = sprintf( '<code>%s</code>', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ) );
 						}
@@ -1485,7 +1484,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *                                    'add_users',
 		 *                                    ),
 		 *                                    ).
-		 * @param int|null $object_id         (Optional) ID of the specific object to check against if capability is a "meta" cap.
+		 * @param int|null     $object_id         (Optional) ID of the specific object to check against if capability is a "meta" cap.
 		 *                                    e.g. 'edit_post', 'edit_user', 'edit_page', etc.
 		 *
 		 * @return bool Whether the user meets the requirements.
