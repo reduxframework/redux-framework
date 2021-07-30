@@ -156,6 +156,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
 Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
 Fixed: Removed type declarations on field code to support outdated versions of PHP (PHP 7.4 is the minimum recommendation from WordPress...please update if you are able. [https://wordpress.org/about/requirements](https://wordpress.org/about/requirements) ).
+Fixed: Support URL button kicking back a JavaScript error.
 
 = 4.2.10 =
 Fixed: Output on the frontend triggering error.
