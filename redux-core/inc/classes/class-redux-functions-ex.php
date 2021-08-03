@@ -236,9 +236,11 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @return bool
 		 */
 		public static function file_in_theme( string $file ): bool {
-			if ( strpos( dirname( $file ), get_template_directory() ) !== false ) {
+			$file_path = self::wp_normalize_path( dirname( $file ) );
+
+			if ( strpos( $file_path, self::wp_normalize_path( get_template_directory() ) ) !== false ) {
 				return true;
-			} elseif ( strpos( dirname( $file ), get_stylesheet_directory() ) !== false ) {
+			} elseif ( strpos( $file_path, self::wp_normalize_path( get_stylesheet_directory() ) ) !== false ) {
 				return true;
 			}
 

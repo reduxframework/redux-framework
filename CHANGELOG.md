@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.2.12 RC
+* Fixed: #3822 - Default value function returns string or array to prvvent type error.
+* Modified: #3820 - Better support for Redux embedded in themes.
+* 
 ## 4.2.11
 * Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
 * Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
