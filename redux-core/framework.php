@@ -420,7 +420,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 				return;
 			}
 
-			if ( 'wp-cron.php' === $pagenow || empty( $args ) || ! isset( $args['opt_name'] ) || ( isset( $args['opt_name'] ) && empty( $args['opt_name'] ) ) ) {
+			if ( empty( $args ) || ! isset( $args['opt_name'] ) || ( isset( $args['opt_name'] ) && empty( $args['opt_name'] ) ) ) {
 				return;
 			}
 
