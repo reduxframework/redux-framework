@@ -514,12 +514,12 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Retrieve panel section.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Section ID.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Section ID.
 		 *
-		 * @return bool
+		 * @return bool|string|int
 		 */
-		public static function get_section( string $opt_name = '', string $id = '' ): bool {
+		public static function get_section( string $opt_name = '', $id = '' ) {
 			self::check_opt_name( $opt_name );
 
 			if ( ! empty( $opt_name ) && ! empty( $id ) ) {
@@ -601,13 +601,13 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Remove option panel by ID.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Sectio ID.
-		 * @param bool   $fields   Remove fields.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Sectio ID.
+		 * @param bool       $fields   Remove fields.
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function removeSection( string $opt_name = '', string $id = '', bool $fields = false ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function removeSection( string $opt_name = '', $id = '', bool $fields = false ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -618,11 +618,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Remove option panel by ID.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Sectio ID.
-		 * @param bool   $fields   Remove fields.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Sectio ID.
+		 * @param bool       $fields   Remove fields.
 		 */
-		public static function remove_section( string $opt_name = '', string $id = '', bool $fields = false ) {
+		public static function remove_section( string $opt_name = '', $id = '', bool $fields = false ) {
 			if ( '' !== $opt_name && '' !== $id ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 
@@ -748,13 +748,13 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Hides an option panel section.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Section ID.
-		 * @param bool   $hide     Flag to hide/show.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Section ID.
+		 * @param bool       $hide     Flag to hide/show.
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function hideSection( string $opt_name = '', string $id = '', bool $hide = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function hideSection( string $opt_name = '', $id = '', bool $hide = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -765,11 +765,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Hides an option panel section.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Section ID.
-		 * @param bool   $hide     Flag to hide/show.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Section ID.
+		 * @param bool       $hide     Flag to hide/show.
 		 */
-		public static function hide_section( string $opt_name = '', string $id = '', bool $hide = true ) {
+		public static function hide_section( string $opt_name = '', $id = '', bool $hide = true ) {
 			self::check_opt_name( $opt_name );
 
 			if ( '' !== $opt_name && '' !== $id ) {
@@ -784,11 +784,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Compiles field array data.
 		 *
-		 * @param string $opt_name   Panel opt_name.
-		 * @param string $section_id Section ID.
-		 * @param array  $fields     Field data.
+		 * @param string     $opt_name   Panel opt_name.
+		 * @param string|int $section_id Section ID.
+		 * @param array      $fields     Field data.
 		 */
-		private static function process_field_array( string $opt_name = '', string $section_id = '', array $fields = array() ) {
+		private static function process_field_array( string $opt_name = '', $section_id = '', array $fields = array() ) {
 			if ( ! empty( $opt_name ) && ! empty( $section_id ) && is_array( $fields ) && ! empty( $fields ) ) {
 				foreach ( $fields as $field ) {
 					if ( ! is_array( $field ) ) {
@@ -802,25 +802,25 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Retrieves an option panel field.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Field ID.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Field ID.
 		 *
 		 * @return int|bool
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function getField( string $opt_name = '', string $id = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function getField( string $opt_name = '', $id = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			return self::get_field( $opt_name, $id );
 		}
 
 		/**
 		 * Retrieves an option panel field.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Field ID.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Field ID.
 		 *
 		 * @return int|bool
 		 */
-		public static function get_field( string $opt_name = '', string $id = '' ) {
+		public static function get_field( string $opt_name = '', $id = '' ) {
 			self::check_opt_name( $opt_name );
 
 			if ( ! empty( $opt_name ) && ! empty( $id ) ) {
@@ -833,13 +833,13 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Hides an optio panel field.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Field ID.
-		 * @param bool   $hide     Set hide/show.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Field ID.
+		 * @param bool       $hide     Set hide/show.
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function hideField( string $opt_name = '', string $id = '', bool $hide = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function hideField( string $opt_name = '', $id = '', bool $hide = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -850,11 +850,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Hides an option panel field.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Field ID.
-		 * @param bool   $hide     Set hide/show.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Field ID.
+		 * @param bool       $hide     Set hide/show.
 		 */
-		public static function hide_field( string $opt_name = '', string $id = '', bool $hide = true ) {
+		public static function hide_field( string $opt_name = '', $id = '', bool $hide = true ) {
 			self::check_opt_name( $opt_name );
 
 			if ( '' !== $opt_name && '' !== $id ) {
@@ -873,9 +873,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Creates an option panel field.
 		 *
-		 * @param string $opt_name   Panel opt_name.
-		 * @param array  $section_id Section ID this field belongs to.
-		 * @param array  $field      Field data.
+		 * @param string      $opt_name   Panel opt_name.
+		 * @param string|int  $section_id Section ID this field belongs to.
+		 * @param array       $field      Field data.
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
@@ -950,13 +950,13 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Removes an option panel field.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Field ID.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Field ID.
 		 *
 		 * @return bool
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function removeField( string $opt_name = '', string $id = '' ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function removeField( string $opt_name = '', $id = '' ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -967,12 +967,12 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Removes an option panel field.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $id       Field ID.
+		 * @param string     $opt_name Panel opt_name.
+		 * @param string|int $id       Field ID.
 		 *
 		 * @return bool
 		 */
-		public static function remove_field( string $opt_name = '', string $id = '' ): bool {
+		public static function remove_field( string $opt_name = '', $id = '' ): bool {
 			if ( '' !== $opt_name && '' !== $id ) {
 				self::check_opt_name( $opt_name );
 
@@ -1019,7 +1019,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @param array  $tab      Tab data.
 		 */
 		public static function set_help_tab( string $opt_name = '', array $tab = array() ) {
-			if ( empty( $tab ) ) {
+			if ( ! is_array( $tab ) && empty( $tab ) ) {
 				return;
 			}
 
@@ -1109,10 +1109,10 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Set's developer key for premium services.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $arg      Args data.
+		 * @param string       $opt_name Panel opt_name.
+		 * @param string|array $arg      Args data.
 		 */
-		public static function set_developer( string $opt_name = '', string $arg = '' ) {
+		public static function set_developer( string $opt_name = '', $arg = '' ) {
 			if ( empty( $arg ) || '' === $opt_name ) {
 				return;
 			}
@@ -1142,7 +1142,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $key      Argument key name to be returned.
 		 *
-		 * @return mixed
+		 * @return mixed|null|array
 		 */
 		public static function get_args( string $opt_name = '', string $key = '' ) {
 			self::check_opt_name( $opt_name );
@@ -1177,7 +1177,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $key      Argument name.
 		 *
-		 * @return mixed
+		 * @return mixed|array|null
 		 */
 		public static function get_arg( string $opt_name = '', string $key = '' ) {
 			self::check_opt_name( $opt_name );
@@ -1192,14 +1192,14 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Retrieves single option from the database.
 		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $key      Option key.
-		 * @param string $default  Default value.
+		 * @param string       $opt_name Panel opt_name.
+		 * @param string       $key      Option key.
+		 * @param string|array $default  Default value.
 		 *
 		 * @return mixed
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function getOption( string $opt_name = '', string $key = '', string $default = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function getOption( string $opt_name = '', string $key = '', $default = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			return self::get_option( $opt_name, $key );
 		}
 
