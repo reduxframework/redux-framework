@@ -37,9 +37,9 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		 * @param array  $sections      Panel sections array.
 		 * @param null   $wp_data_class WordPress data class.
 		 *
-		 * @return array
+		 * @return array|string
 		 */
-		public function default_values( string $opt_name, array $sections = array(), $wp_data_class = null ): array {
+		public function default_values( string $opt_name, array $sections = array(), $wp_data_class = null ) {
 			// We want it to be clean each time this is run.
 			$this->options_defaults = array();
 
