@@ -60,7 +60,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 		 * @access      public
 		 */
 		public function render() {
-			$secret = md5( md5( Redux_Functions_Ex::hash_key() ) . '-' . $this->parent->args['opt_name'] );
+			$secret = wp_create_nonce( 'redux_io_' . $this->parent->args['opt_name'], );
 
 			// No errors please.
 			$defaults = array(
@@ -82,14 +82,6 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 					class="button-secondary">
 					<?php esc_html_e( 'Import from Clipboard', 'redux-framework' ); ?>
 				</a>
-
-				<a
-					href="javascript:void(0);"
-					id="redux-import-link-button"
-					class="button-secondary">
-					<?php esc_html_e( 'Import from URL', 'redux-framework' ); ?>
-				</a>
-
 				<a
 					href="#"
 					id="redux-import-upload"
@@ -107,17 +99,6 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 					id="import-code-value"
 					name="<?php echo esc_attr( $this->parent->args['opt_name'] ); ?>[import_code]"
 					class="large-text no-update" rows="3"></textarea>
-			</div>
-			<div id="redux-import-link-wrapper">
-				<p class="description" id="import-link-description">
-					<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
-					<?php echo esc_html( apply_filters( 'redux-import-link-description', esc_html__( 'Input the URL to another sites options set and hit Import to load the options from that site.', 'redux-framework' ) ) ); ?>
-				</p>
-				<input
-					class="large-text no-update"
-					id="import-link-value"
-					name="<?php echo esc_attr( $this->parent->args['opt_name'] ); ?>[import_link]"
-					rows="2"/>
 			</div>
 			<p id="redux-import-action">
 				<input
@@ -154,12 +135,6 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 				<a href="<?php echo esc_url( $link ); ?>" id="redux-export-code-dl" class="button-primary">
 					<?php esc_html_e( 'Export File', 'redux-framework' ); ?>
 				</a>
-				<a href="javascript:void(0);" id="redux-export-link" class="button-secondary"
-				   data-copy="<?php esc_attr_e( 'Copy Export URL', 'redux-framework' ); ?>"
-				   data-copied="<?php esc_attr_e( 'Copied!', 'redux-framework' ); ?>"
-				   data-url="<?php echo esc_url( $link ); ?>">
-					<?php esc_html_e( 'Copy Export URL', 'redux-framework' ); ?>
-				</a>
 			</p>
 			<p></p>
 			<textarea class="large-text no-update" id="redux-export-code" rows="1"></textarea>
@@ -186,7 +161,20 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 				true
 			);
 
-			wp_enqueue_style( 'redux-import-export', $this->url . 'redux-import-export.css', array(), Redux_Extension_Import_Export::$version );
+			wp_localize_script(
+				'redux-extension-import-export-js',
+				'ImportExport',
+				array(
+					'unchanged_values' => esc_html__( 'Your panel has unchanged values, would you like to save them now?', 'redux-framework' ),
+				)
+			);
+
+			wp_enqueue_style(
+				'redux-import-export',
+				$this->url . 'redux-import-export.css',
+				array(),
+				Redux_Extension_Import_Export::$version
+			);
 		}
 	}
 }

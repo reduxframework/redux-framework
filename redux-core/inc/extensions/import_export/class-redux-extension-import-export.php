@@ -2,7 +2,7 @@
 /**
  * Redux Import/Export Extention Class
  *
- * @class Redux_Extension_Import_Export
+ * @class   Redux_Extension_Import_Export
  * @version 4.0.0
  * @package Redux Framework
  */
@@ -36,49 +36,19 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		/**
 		 * Class Constructor. Defines the args for the extions class
 		 *
-		 * @since       1.0.0
-		 * @access      public
-		 *
-		 * @param       object $parent ReduxFramework object.
+		 * @param object $parent ReduxFramework object.
 		 *
 		 * @return      void
+		 * @since       1.0.0
+		 * @access      public
 		 */
 		public function __construct( $parent ) {
 			parent::__construct( $parent, __FILE__ );
 
 			$this->add_field( 'import_export' );
 
-			add_action(
-				'wp_ajax_redux_link_options-' . $this->parent->args['opt_name'],
-				array(
-					$this,
-					'link_options',
-				)
-			);
-
-			add_action(
-				'wp_ajax_nopriv_redux_link_options-' . $this->parent->args['opt_name'],
-				array(
-					$this,
-					'link_options',
-				)
-			);
-
-			add_action(
-				'wp_ajax_redux_download_options-' . $this->parent->args['opt_name'],
-				array(
-					$this,
-					'download_options',
-				)
-			);
-
-			add_action(
-				'wp_ajax_nopriv_redux_download_options-' . $this->parent->args['opt_name'],
-				array(
-					$this,
-					'download_options',
-				)
-			);
+			add_action( 'wp_ajax_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
+			add_action( 'wp_ajax_nopriv_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/options/' . $this->parent->args['opt_name'] . '/import', array( $this, 'remove_cookie' ) );
@@ -126,32 +96,11 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		}
 
 		/**
-		 * Import link options.
-		 */
-		public function link_options() {
-			if ( ! isset( $_GET['secret'] ) || md5( md5( Redux_Functions_Ex::hash_key() ) . '-' . $this->parent->args['opt_name'] ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-				wp_die( 'Invalid Secret for options use' );
-				exit;
-			}
-
-			$var                 = $this->parent->options;
-			$var['redux-backup'] = 1;
-
-			if ( isset( $var['REDUX_imported'] ) ) {
-				unset( $var['REDUX_imported'] );
-			}
-
-			echo wp_json_encode( $var );
-
-			die();
-		}
-
-		/**
 		 * Import download options.
 		 */
 		public function download_options() {
-			if ( ! isset( $_GET['secret'] ) || md5( md5( Redux_Functions_Ex::hash_key() ) . '-' . $this->parent->args['opt_name'] ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-				wp_die( 'Invalid Secret for options use' );
+			if ( ! isset( $_GET['secret'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['secret'] ) ), 'redux_io_' . $this->parent->args['opt_name'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+				wp_die( 'Invalid Secret for options use.' );
 				exit;
 			}
 
@@ -169,7 +118,7 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 			if ( isset( $_GET['action'] ) && 'redux_download_options-' . $this->parent->args['opt_name'] === $_GET['action'] ) { // phpcs:ignore WordPress.Security.NonceVerification
 				header( 'Content-Description: File Transfer' );
 				header( 'Content-type: application/txt' );
-				header( 'Content-Disposition: attachment; filename="redux_options_"' . $this->parent->args['opt_name'] . '_backup_' . gmdate( 'd-m-Y' ) . '.json' );
+				header( 'Content-Disposition: attachment; filename="redux_options_"' . $this->parent->args['opt_name'] . '_backup_' . gmdate( 'm-d-Y' ) . '.json' );
 				header( 'Content-Transfer-Encoding: binary' );
 				header( 'Expires: 0' );
 				header( 'Cache-Control: must-revalidate' );
