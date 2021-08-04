@@ -484,9 +484,9 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 						die( 1 );
 					} else {
 						$response_code = wp_remote_retrieve_response_code( $response );
-						$response = wp_remote_retrieve_body( $response );
+						$response      = wp_remote_retrieve_body( $response );
 						if ( 200 === $response_code ) {
-							$return   = json_decode( $response, true );
+							$return = json_decode( $response, true );
 
 							if ( isset( $return['identifier'] ) ) {
 								$data['identifier'] = $return['identifier'];

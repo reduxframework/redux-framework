@@ -345,13 +345,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
-			$support_hash = md5( md5( Redux_Functions_Ex::hash_key() . '-redux' ) . '-support' );
-			add_action( 'wp_ajax_nopriv_' . $support_hash, array( 'Redux_Helpers', 'support_args' ) );
-			add_action( 'wp_ajax_' . $support_hash, array( 'Redux_Helpers', 'support_args' ) );
-			$hash_arg = md5( trailingslashit( network_site_url() ) . '-redux' );
-			add_action( 'wp_ajax_nopriv_' . $hash_arg, array( 'Redux_Helpers', 'hash_arg' ) );
-			add_action( 'wp_ajax_' . $hash_arg, array( 'Redux_Helpers', 'hash_arg' ) );
-			add_action( 'wp_ajax_redux_support_hash', array( 'Redux_Functions', 'support_hash' ) );
+			// This needs reworking.  Disabled.
+			// add_action( 'wp_ajax_redux_support_hash', array( 'Redux_Functions', 'support_hash' ) );
 
 			add_filter( 'redux/tracking/options', array( 'Redux_Helpers', 'redux_stats_additions' ) );
 		}

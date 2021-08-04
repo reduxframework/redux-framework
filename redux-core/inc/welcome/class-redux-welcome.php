@@ -104,14 +104,14 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			$page( esc_html__( 'What is Redux Framework?', 'redux-framework' ), esc_html__( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-framework', array( $this, 'about_screen' ) );
 
 			// Support Page.
-			$page( esc_html__( 'Get Support', 'redux-framework' ), esc_html__( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array( $this, 'get_support' ) );
+			// $page( esc_html__( 'Get Support', 'redux-framework' ), esc_html__( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array( $this, 'get_support' ) );
 
 			// Status Page.
 			$page( esc_html__( 'Redux Health Check', 'redux-framework' ), esc_html__( 'Redux Health Check', 'redux-framework' ), $this->minimum_capability, 'redux-health', array( $this, 'heath_check' ) );
 
 			remove_submenu_page( 'tools.php', 'redux-status' );
 			remove_submenu_page( 'tools.php', 'redux-health' );
-			remove_submenu_page( 'tools.php', 'redux-support' );
+			// remove_submenu_page( 'tools.php', 'redux-support' );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/pro/welcome/admin/menu', $page, $this );
@@ -210,12 +210,6 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-health' ), 'tools.php' ) ) ); ?>">
 					<?php esc_attr_e( 'Health Check', 'redux-framework' ); ?>
 				</a>
-				<a
-					class="nav-tab <?php echo( 'redux-support' === $selected ? 'nav-tab-active' : '' ); ?>"
-					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-support' ), 'tools.php' ) ) ); ?>">
-					<?php esc_attr_e( 'Get Support', 'redux-framework' ); ?>
-				</a>
-
 				<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
 				<?php do_action( 'redux/pro/welcome/admin/tab', $selected ); ?>
 
@@ -235,20 +229,6 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
 			require_once 'views/about.php';
-		}
-
-		/**
-		 * Render Get Support Screen
-		 *
-		 * @access public
-		 * @since  1.9
-		 * @return void
-		 */
-		public function get_support() {
-			// Stupid hack for WordPress alerts and warnings.
-			echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
-
-			require_once 'views/support.php';
 		}
 
 		/**
