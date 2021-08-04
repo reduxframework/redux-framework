@@ -159,6 +159,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'elusive_frontend'                 => false,
 				'pro'                              => array(),
 				'font_display'                     => 'swap', // block|swap|fallback|optional.
+				'load_on_cron'                     => false,
 			);
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -167,11 +168,13 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 			$args = Redux_Functions::parse_args( $args, $default );
 
 			$args = $this->args( $args );
+
 			$args = $this->default_cleanup( $args );
 
 			if ( ! in_array( $args['font_display'], array( 'block', 'swap', 'fallback', 'optional' ), true ) ) {
 				$args['font_display'] = 'swap';
 			}
+
 			if ( isset( $args['async_typography'] ) && $args['async_typography'] ) {
 				$args['async_typography'] = false;
 			}

@@ -420,7 +420,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 				return;
 			}
 
-			if ( 'wp-cron.php' === $pagenow || empty( $args ) || ! isset( $args['opt_name'] ) || ( isset( $args['opt_name'] ) && empty( $args['opt_name'] ) ) ) {
+			$args['load_on_cron'] = $args['load_on_cron'] ?? false;
+
+			if ( false === $args['load_on_cron'] && 'wp-cron.php' === $pagenow ) {
+				return;
+			}
+
+			if ( empty( $args ) || ! isset( $args['opt_name'] ) || ( isset( $args['opt_name'] ) && empty( $args['opt_name'] ) ) ) {
 				return;
 			}
 
