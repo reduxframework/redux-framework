@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Adding CSS classes should be done with consideration and rarely */
+.extendify-sdk *, .extendify-sdk *:after, .extendify-sdk *:before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+.extendify-sdk .button-focus {
+    @apply focus:ring-2 focus:ring-wp-theme-500 ring-offset-1 outline-none;
+}
+
+.button-extendify-main {
+    @apply bg-extendify-main cursor-pointer transition duration-200 p-1.5 px-3 text-white hover:text-white no-underline hover:bg-gray-900 button-focus active:bg-gray-900 active:text-white focus:text-white;
+}
+
+/* WP tweaks and overrides */
+.extendify-sdk .components-panel__body > .components-panel__body-title {
+    /* Override WP aggressive boder:none and border:0 */
+    border-bottom: 1px solid #e0e0e0 !important;
+    @apply bg-transparent;
+}
