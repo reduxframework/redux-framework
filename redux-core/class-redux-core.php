@@ -479,9 +479,9 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 *
 		 * @param string $str String to make lowercase.
 		 *
-		 * @return string
+		 * @return string|null
 		 */
-		public static function strtolower( string $str ): string {
+		public static function strtolower( ?string $str ): string {
 			if ( function_exists( 'mb_strtolower' ) && function_exists( 'mb_detect_encoding' ) ) {
 				return mb_strtolower( $str, mb_detect_encoding( $str ) );
 			} else {
