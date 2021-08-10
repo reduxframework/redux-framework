@@ -622,7 +622,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @return array
 		 */
 		public function get_default_values( $key, $array_key = false ) {
-			return $this->options_defaults_class->default_values( $key, $array_key );
+			if ( ! isset( $this->options_class ) ) {
+				$this->options_defaults_class = new Redux_Options_Defaults();
+				$this->options_class          = new Redux_Options_Constructor( $this );
+			}
+
+			return $this->options_class->get_default_value( $key, $array_key );
 		}
 
 		/**
@@ -634,7 +639,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @return array
 		 */
 		public function get_default_value( $key, $array_key = false ) {
-			return $this->options_defaults_class->default_values( $key, $array_key );
+			if ( ! isset( $this->options_class ) ) {
+				$this->options_defaults_class = new Redux_Options_Defaults();
+				$this->options_class          = new Redux_Options_Constructor( $this );
+			}
+
+			return $this->options_class->get_default_value( $key, $array_key );
 		}
 
 		/**
