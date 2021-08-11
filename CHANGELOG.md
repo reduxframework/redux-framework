@@ -1,6 +1,6 @@
 # Redux Changelog
 
-## 4.2.12
+## 4.2.13
 * Fixed: #3822 - Default value function returns string or array to prevent type error.
 * Modified: #3820 - Better support for Redux embedded in themes.
 * Modified: `install_plugins` security level now required to install Template blocks that require additional plugins.  This was done for security reasons.

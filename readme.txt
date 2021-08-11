@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 4.2.12
+Stable tag: 4.2.13
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -152,7 +152,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
-= 4.2.12 =
+= 4.2.13 =
 Fixed: #3822 - Default value function returns string or array to prevent type error.
 Modified: #3820 - Better support for Redux embedded in themes.
 Modified: `install_plugins` security level now required to install Template blocks that require additional plugins.  This was done for security reasons.
