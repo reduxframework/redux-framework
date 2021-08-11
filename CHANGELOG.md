@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.2.14
+* Fixed: Parse error in Import/Export module due to old versions of PHP.  Remember folks, recommended minumim for WordPress is PHP 7.4.
+
 ## 4.2.13
 * Fixed: #3822 - Default value function returns string or array to prevent type error.
 * Modified: #3820 - Better support for Redux embedded in themes.
