@@ -60,7 +60,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 		 * @access      public
 		 */
 		public function render() {
-			$secret = wp_create_nonce( 'redux_io_' . $this->parent->args['opt_name'], );
+			$secret = wp_create_nonce( 'redux_io_' . $this->parent->args['opt_name'] );
 
 			// No errors please.
 			$defaults = array(
