@@ -1,7 +1,7 @@
 # Redux Changelog
 
-## 4.2.12 RC
-* Fixed: #3822 - Default value function returns string or array to prvvent type error.
+## 4.2.12
+* Fixed: #3822 - Default value function returns string or array to prevent type error.
 * Modified: #3820 - Better support for Redux embedded in themes.
 * Modified: `install_plugins` security level now required to install Template blocks that require additional plugins.  This was done for security reasons.
 * Added: New global arg `load_on_cron`.  Set to true if you require Redux to run within a cron initiated function.

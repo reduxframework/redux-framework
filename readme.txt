@@ -152,6 +152,14 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.2.12 =
+Fixed: #3822 - Default value function returns string or array to prevent type error.
+Modified: #3820 - Better support for Redux embedded in themes.
+Modified: `install_plugins` security level now required to install Template blocks that require additional plugins.  This was done for security reasons.
+Added: New global arg `load_on_cron`.  Set to true if you require Redux to run within a cron initiated function.
+Removed: URL based  Import/Export option due to security concerns.  Manual Import/Export features remain.
+Removed: Support URL feature due to security issues.  Please use WordPress Site Health 'copy to clipboard' compiler to submit system data when reporting issues.
+
 = 4.2.11 =
 Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
 Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
