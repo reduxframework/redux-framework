@@ -30,7 +30,7 @@ class Notices {
 	public static function php_error_notice() {
 		$message      = sprintf( /* translators: %s: php version number */
 			esc_html__( 'ReduxTemplates requires PHP version %s or more.', 'redux-framework' ),
-			'5.4'
+			'7.1'
 		);
 		$html_message = sprintf( '<div class="notice notice-error is-dismissible">%s</div>', wpautop( $message ) );
 		echo wp_kses_post( $html_message );

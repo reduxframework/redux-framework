@@ -41,11 +41,11 @@ defined( 'ABSPATH' ) || exit;
 				<tbody>
 				<tr valign="top">
 					<th scope="row" valign="top">
-						<?php esc_html_e( 'Redux Templates', 'redux-framework' ); ?>
+						<?php esc_html_e( 'Redux Template Library', 'redux-framework' ); ?>
 					</th>
 					<td>
 						<input id="redux-pro_license_key" name="use_redux_templates" type="checkbox" class="regular-text" value="1" <?php checked( $value, '1', true ); ?>/>
-						<label class="description" for="use_redux_templates"><?php esc_html_e( 'Load Redux Templates', 'redux-framework' ); ?></label>
+						<label class="description" for="use_redux_templates"><?php esc_html_e( 'Load legacy Redux template library', 'redux-framework' ); ?></label>
 					</td>
 				</tr>
 				</tbody>
