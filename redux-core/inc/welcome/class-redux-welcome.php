@@ -47,6 +47,14 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 		public function __construct() {
 			// Load the welcome page even if a Redux panel isn't running.
 			add_action( 'init', array( $this, 'init' ), 999 );
+			add_action( 'admin_init', array( $this, 'register_options' ) );
+		}
+
+		/**
+		 * Register template option.
+		 */
+		public function register_options() {
+			register_setting( 'redux_templates', 'use_redux_templates' );
 		}
 
 		/**
@@ -104,14 +112,14 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			$page( esc_html__( 'What is Redux Framework?', 'redux-framework' ), esc_html__( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-framework', array( $this, 'about_screen' ) );
 
 			// Support Page.
-			// $page( esc_html__( 'Get Support', 'redux-framework' ), esc_html__( 'Get Support', 'redux-framework' ), $this->minimum_capability, 'redux-support', array( $this, 'get_support' ) );
+			$page( esc_html__( 'Templates', 'redux-framework' ), esc_html__( 'Templates', 'redux-framework' ), $this->minimum_capability, 'redux-templates', array( $this, 'templates' ) );
 
 			// Status Page.
 			$page( esc_html__( 'Redux Health Check', 'redux-framework' ), esc_html__( 'Redux Health Check', 'redux-framework' ), $this->minimum_capability, 'redux-health', array( $this, 'heath_check' ) );
 
 			remove_submenu_page( 'tools.php', 'redux-status' );
 			remove_submenu_page( 'tools.php', 'redux-health' );
-			// remove_submenu_page( 'tools.php', 'redux-support' );
+			remove_submenu_page( 'tools.php', 'redux-templates' );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/pro/welcome/admin/menu', $page, $this );
@@ -161,7 +169,7 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 				href='<?php echo esc_url( Redux_Core::$url ); ?>inc/welcome/css/redux-welcome.css'
 				type='text/css' media='all'/>
 
-			<style type="text/css">
+			<style>
 				.redux-badge:before {
 				<?php echo is_rtl() ? 'right' : 'left'; ?>: 0;
 				}
@@ -206,6 +214,11 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 					<?php esc_attr_e( 'What is Redux?', 'redux-framework' ); ?>
 				</a>
 				<a
+					class="nav-tab <?php echo( 'redux-templates' === $selected ? 'nav-tab-active' : '' ); ?>"
+					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-templates' ), 'tools.php' ) ) ); ?>">
+					<?php esc_attr_e( 'Templates', 'redux-framework' ); ?>
+				</a>
+				<a
 					class="nav-tab <?php echo( 'redux-status' === $selected || 'redux-health' === $selected ? 'nav-tab-active' : '' ); ?>"
 					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-health' ), 'tools.php' ) ) ); ?>">
 					<?php esc_attr_e( 'Health Check', 'redux-framework' ); ?>
@@ -229,6 +242,20 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
 			require_once 'views/about.php';
+		}
+
+		/**
+		 * Render Templates Screen
+		 *
+		 * @access public
+		 * @since  4.2
+		 * @return void
+		 */
+		public function templates() {
+			// Stupid hack for WordPress alerts and warnings.
+			echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
+
+			require_once 'views/templates.php';
 		}
 
 		/**

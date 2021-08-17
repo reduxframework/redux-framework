@@ -41,6 +41,10 @@ class Init {
 			return;
 		}
 
+		if ( false === \Redux_Core::$redux_templates_enabled ) {
+			return;
+		}
+
 		add_action( 'init', array( $this, 'load' ) );
 
 		if ( did_action( 'init' ) ) { // In case the devs load it at the wrong place.
@@ -154,7 +158,7 @@ class Init {
 			// phpcs:ignore
 			// delete_user_meta( get_current_user_id(), '_redux_welcome_guide' ); // For testing.
 			if ( \Redux_Helpers::is_gutenberg_page() && $global_vars['left'] === self::$default_left ) {
-				// We don't want to show unless Gutenberg is running and they haven't tried the library yet.
+				// We don't want to show unless Gutenberg is running, and they haven't tried the library yet.
 				$launched = get_user_meta( get_current_user_id(), '_redux_welcome_guide', true );
 				if ( '1' !== $launched ) {
 					$global_vars['welcome'] = 1;

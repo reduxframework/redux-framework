@@ -157,6 +157,13 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static $insights = null;
 
 		/**
+		 * Flag for Redux Template snables status.
+		 *
+		 * @var bool
+		 */
+		public static $redux_templates_enabled = false;
+
+		/**
 		 * Creates instance of class.
 		 *
 		 * @return Redux_Core
@@ -306,6 +313,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			self::$upload_url = apply_filters( 'redux/upload_url', self::$upload_url );
 
+			self::$redux_templates_enabled = (bool) get_option( 'use_redux_templates' );
 		}
 
 		/**

@@ -152,6 +152,9 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.2.15 RC =
+Added: Option to enable/disable Redux Template library.  Found under Tools > Redux Framework > Templates
+
 = 4.2.14 =
 Fixed: Parse error in Import/Export module due to old versions of PHP.
 
