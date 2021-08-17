@@ -69,7 +69,7 @@ defined( 'ABSPATH' ) || exit;
 					);
 
 					// translators: %1$s: URL, %2$s: close tag.
-					echo sprintf( esc_html__( 'Maybe not! If you want to see what Redux is all about, click here to %1$sActivate Demo Mode%2$s.', 'redux-framework' ), '<a href="' . esc_url( admin_url( add_query_arg( $query_args, 'tools.php' ) ) ) . '">', '</a>' );
+					echo sprintf( esc_html__( 'Maybe not! If you want to see what Redux is all about, click here to %1$sActivate Demo Mode%2$s.', 'redux-framework' ), '<a href="' . esc_url( admin_url( add_query_arg( $query_args, 'options-general.php' ) ) ) . '">', '</a>' );
 				}
 				?>
 

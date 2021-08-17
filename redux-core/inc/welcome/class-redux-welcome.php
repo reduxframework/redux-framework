@@ -83,7 +83,7 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 		 */
 		public function do_redirect() {
 			if ( ! defined( 'WP_CLI' ) ) {
-				wp_safe_redirect( esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'tools.php' ) ) ) );
+				wp_safe_redirect( esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ) );
 				exit();
 			}
 		}
@@ -106,10 +106,10 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 		 * @return void
 		 */
 		public function admin_menus() {
-			$page = 'add_management_page';
+			$page = 'add_options_page';
 
 			// About Page.
-			$page( esc_html__( 'What is Redux Framework?', 'redux-framework' ), esc_html__( 'Redux Framework', 'redux-framework' ), $this->minimum_capability, 'redux-framework', array( $this, 'about_screen' ) );
+			$page( esc_html__( 'What is Redux Framework?', 'redux-framework' ), esc_html__( 'Redux', 'redux-framework' ), $this->minimum_capability, 'redux-framework', array( $this, 'about_screen' ) );
 
 			// Support Page.
 			$page( esc_html__( 'Templates', 'redux-framework' ), esc_html__( 'Templates', 'redux-framework' ), $this->minimum_capability, 'redux-templates', array( $this, 'templates' ) );
@@ -117,9 +117,9 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			// Status Page.
 			$page( esc_html__( 'Redux Health Check', 'redux-framework' ), esc_html__( 'Redux Health Check', 'redux-framework' ), $this->minimum_capability, 'redux-health', array( $this, 'heath_check' ) );
 
-			remove_submenu_page( 'tools.php', 'redux-status' );
-			remove_submenu_page( 'tools.php', 'redux-health' );
-			remove_submenu_page( 'tools.php', 'redux-templates' );
+			remove_submenu_page( 'options-general.php', 'redux-status' );
+			remove_submenu_page( 'options-general.php', 'redux-health' );
+			remove_submenu_page( 'options-general.php', 'redux-templates' );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/pro/welcome/admin/menu', $page, $this );
@@ -210,17 +210,17 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			<h2 class="nav-tab-wrapper">
 				<a
 					class="nav-tab <?php echo( 'redux-framework' === $selected ? 'nav-tab-active' : '' ); ?>"
-					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'tools.php' ) ) ); ?>">
+					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ); ?>">
 					<?php esc_attr_e( 'What is Redux?', 'redux-framework' ); ?>
 				</a>
 				<a
 					class="nav-tab <?php echo( 'redux-templates' === $selected ? 'nav-tab-active' : '' ); ?>"
-					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-templates' ), 'tools.php' ) ) ); ?>">
+					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-templates' ), 'options-general.php' ) ) ); ?>">
 					<?php esc_attr_e( 'Templates', 'redux-framework' ); ?>
 				</a>
 				<a
 					class="nav-tab <?php echo( 'redux-status' === $selected || 'redux-health' === $selected ? 'nav-tab-active' : '' ); ?>"
-					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-health' ), 'tools.php' ) ) ); ?>">
+					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-health' ), 'options-general.php' ) ) ); ?>">
 					<?php esc_attr_e( 'Health Check', 'redux-framework' ); ?>
 				</a>
 				<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
@@ -302,13 +302,13 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 				if ( $options['demo'] ) {
 					?>
 					<a
-						href="<?php echo esc_url( admin_url( add_query_arg( $query_args, 'tools.php' ) ) ); ?>"
+						href="<?php echo esc_url( admin_url( add_query_arg( $query_args, 'options-general.php' ) ) ); ?>"
 						class=" button-text button-demo"><?php echo esc_html__( 'Disable Panel Demo', 'redux-framework' ); ?></a>
 					<?php
 				} else {
 					?>
 					<a
-						href="<?php echo esc_url( admin_url( add_query_arg( $query_args, 'tools.php' ) ) ); ?>"
+						href="<?php echo esc_url( admin_url( add_query_arg( $query_args, 'options-general.php' ) ) ); ?>"
 						class=" button-text button-demo active"><?php echo esc_html__( 'Enable Panel Demo', 'redux-framework' ); ?></a>
 					<?php
 				}

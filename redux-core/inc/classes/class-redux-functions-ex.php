@@ -124,7 +124,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			global $pagenow;
 
 			// phpcs:ignore WordPress.Security.NonceVerification
-			if ( ! ( 'tools.php' === $pagenow && isset( $_GET['page'] ) && ( 'redux-framework' === $_GET['page'] || 'health-check' === $_GET['page'] ) ) ) {
+			if ( ! ( 'options-general.php' === $pagenow && isset( $_GET['page'] ) && ( 'redux-framework' === $_GET['page'] || 'health-check' === $_GET['page'] ) ) ) {
 				return;
 			}
 
@@ -155,6 +155,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 *
 		 * @param string $path Path to normalize.
 		 *
+		 * @return string|string[]|null
 		 * @return string|string[]|null
 		 */
 		public static function wp_normalize_path( string $path = '' ) {

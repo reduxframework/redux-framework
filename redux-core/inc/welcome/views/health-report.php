@@ -838,6 +838,7 @@ $sysinfo = Redux_Helpers::compile_system_status( false, true );
 							<?php
 							ksort( $ext );
 							foreach ( $ext as $name => $arr ) {
+								print_r($ext);
 								$ver = $arr['version'];
 
 								echo '<a href="//redux.io/extensions/' . esc_html( str_replace( array( '_' ), '-', $name ) ) . '" target="blank">' . esc_html( ucwords( str_replace( array( '_', '-' ), ' ', $name ) ) ) . '</a> - ' . esc_html( $ver );

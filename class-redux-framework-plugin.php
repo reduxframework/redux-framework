@@ -429,7 +429,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 
 			if ( isset( $_GET['nonce'] ) && wp_verify_nonce( sanitize_key( $_GET['nonce'] ), 'redux_framework_demo' ) ) {
 				if ( isset( $_GET['redux-framework-plugin'] ) && 'demo' === $_GET['redux-framework-plugin'] ) {
-					$url = admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'tools.php' ) );
+					$url = admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) );
 
 					if ( 'demo' === $_GET['redux-framework-plugin'] ) {
 						if ( false === $this->options['demo'] ) {
@@ -550,8 +550,11 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 */
 		public function plugin_metalinks( $links, $file ) {
 			if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
-				$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'tools.php' ) ) ) . '">' . esc_html__( 'What is this?', 'redux-framework' ) . '</a>';
-				$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) ) . '#redux_templates=1">' . esc_html__( 'Template Library', 'redux-framework' ) . '</a>';
+				$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ) . '">' . esc_html__( 'What is this?', 'redux-framework' ) . '</a>';
+
+				if ( true === Redux_Core::$redux_templates_enabled ) {
+					$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) ) . '#redux_templates=1">' . esc_html__( 'Template Library', 'redux-framework' ) . '</a>';
+				}
 			}
 
 			return $links;

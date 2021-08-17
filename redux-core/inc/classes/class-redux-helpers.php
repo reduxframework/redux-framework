@@ -1182,11 +1182,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 					$sysinfo['redux_instances'][ $inst ]['extensions'] = Redux::get_extensions( $inst );
 
-					$metabox_key = isset( $data->extensions['metaboxes'] ) ? 'metaboxes' : 'metaboxes_lite';
-
-					if ( isset( $data->extensions[ $metabox_key ] ) ) {
-						$data->extensions[ $metabox_key ]->init();
-						$sysinfo['redux_instances'][ $inst ][ $metabox_key ] = $data->extensions[ $metabox_key ]->boxes;
+					if ( isset( $data->extensions[ 'metaboxes' ] ) ) {
+						$data->extensions[ 'metaboxes' ]->init();
+						$sysinfo['redux_instances'][ $inst ][ 'metaboxes' ] = $data->extensions[ 'metaboxes' ]->boxes;
 					}
 
 					if ( isset( $data->args['templates_path'] ) && '' !== $data->args['templates_path'] ) {
