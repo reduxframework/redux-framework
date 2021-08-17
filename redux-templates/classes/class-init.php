@@ -41,14 +41,14 @@ class Init {
 			return;
 		}
 
-		if ( false === \Redux_Core::$redux_templates_enabled ) {
-			return;
-		}
-
 		add_action( 'init', array( $this, 'load' ) );
 
 		if ( did_action( 'init' ) ) { // In case the devs load it at the wrong place.
 			$this->load();
+		}
+
+		if ( false === \Redux_Core::$redux_templates_enabled ) {
+			return;
 		}
 
 		// Editor Load.
