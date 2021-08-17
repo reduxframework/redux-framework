@@ -30,13 +30,14 @@ if ( ! class_exists( 'Redux_Date', false ) ) {
 		public function render() {
 			$placeholder = ( isset( $this->field['placeholder'] ) ) ? ' placeholder="' . $this->field['placeholder'] . '" ' : '';
 
-			echo '<input
-					data-id="' . esc_attr( $this->field['id'] ) . '"
-					type="text"
-					id="' . esc_attr( $this->field['id'] ) . '-date"
-					name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '"' . esc_attr( $placeholder ) . '
-					value="' . esc_attr( $this->value ) . '"
-					class="redux-datepicker regular-text ' . esc_attr( $this->field['class'] ) . '" />';
+			$this->field['attributes']['data-id']     = $this->field['id'];
+			$this->field['attributes']['id']          = $this->field['id'];
+			$this->field['attributes']['name']        = esc_attr( $this->field['name'] . $this->field['name_suffix'] );
+			$this->field['attributes']['value']       = $this->value;
+			$this->field['attributes']['placeholder'] = ( isset( $this->field['placeholder'] ) && ! is_array( $this->field['placeholder'] ) ) ? esc_attr( $this->field['placeholder'] ) : '';
+			$this->field['attributes']['class']       = 'redux-datepicker regular-text ' . esc_attr( $this->field['class'] );
+			$attributes_string                        = $this->render_attributes( $this->field['attributes'] );
+			echo '<input ' . $attributes_string . '>'; // phpcs:ignore WordPress.Security.EscapeOutput
 		}
 
 		/**
