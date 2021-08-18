@@ -1,0 +1,360 @@
+.redux_field_th {
+    padding-bottom: 0px !important;
+}
+
+.redux-group-tab {
+    margin-bottom: 0 !important;
+}
+
+.block-editor-page {
+    .postbox{
+        &.closed .el {
+            &:before {
+                content: ""!important;
+            }
+        }
+
+        .el{
+            &:before{
+                content: ""
+            }
+        }
+    }
+}
+
+.postbox {
+    .redux-container {
+        filter: none;
+        border: none;
+        -moz-border-radius: 0;
+        /* Firefox */
+
+        -webkit-border-radius: 0;
+        /* Safari, Chrome */
+
+        border-radius: 0;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+
+        .redux-group-menu .active a {
+            background: #FFF;
+        }
+
+        .redux-section-title {
+            padding-left: 0 !important;
+            margin-bottom: 15px !important;
+        }
+
+        .redux-section-desc {
+            margin-bottom: 20px;
+        }
+
+        .redux_main {
+            border-left: 1px solid #D8D8D8;
+            moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+
+            input[type=text] {
+                width: 95%;
+            }
+        }
+
+        &.redux-no-sections {
+            margin: 0;
+            background: none;
+
+            .redux-main {
+                background: none;
+                margin-left: inherit;
+                padding: inherit;
+                border-left: none !important;
+                min-height: 0 !important;
+
+                tr {
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    &:last-child {
+                        th,
+                        td {
+                            padding-bottom: 0;
+                        }
+                    }
+
+                    td {
+                        //padding-top: 20px !important;
+                        padding-top: 10px !important;
+                        width: 100%;
+                    }
+                }
+
+                .form-table:first-child tr:first-child td {
+                    padding-top: 0 !important;
+                }
+
+                .redux-field {
+                    margin-bottom: 10px !important;
+                }
+
+                .redux-field:last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+
+        &.redux-has-sections {
+            .redux-main {
+                background: #fff;
+
+                span.description {
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+
+    .redux-main h3 {
+        cursor: text !important;
+        -webkit-user-select: inherit !important;
+        -moz-user-select: inherit !important;
+        user-select: inherit !important;
+        padding-left: 0 !important;
+    }
+}
+
+.redux-box-side {
+    .redux-main {
+        .redux-field-container {
+            padding: 0;
+            padding-top: 5px;
+
+            .select2-container,
+            select {
+                width: 100% !important;
+            }
+        }
+    }
+
+    .form-table {
+        tr {
+            td {
+                padding: 15px 0 !important;
+            }
+
+            &:last-child td {
+                padding-bottom: 0 !important;
+            }
+
+            &:first-child td {
+                padding-top: 5px !important;
+            }
+
+        }
+    }
+}
+
+#poststuff .redux-metabox h3.hndle,
+.metabox-holder .redux-metabox h3.hndle {
+    cursor: pointer;
+    border-bottom: 0;
+}
+
+.display-group {
+    display: inherit !important;
+}
+
+/* Metaboxes CSS overrides */
+@media (min-width: 1125px) and (max-width: 1405px) {
+    .postbox {
+        table.form-table,
+        .form-table > thead,
+        .form-table > tbody,
+        .form-table > tbody > tr > th,
+        .form-table > tbody > tr > td,
+        .form-table > tbody > tr {
+            display: block !important;
+            width: 100% !important;
+            padding: 0px !important;
+
+            &.hide {
+                display: none !important;
+            }
+        }
+
+        .form-table > tbody > tr {
+            > th,
+            > td {
+                padding: 10px !important;
+            }
+        }
+
+        .form-table > tbody > tr > th {
+            width: 35%;
+        }
+    }
+}
+
+.redux-metabox .form-table th,
+.redux-metabox .form-table td {
+    margin: 0;
+    padding: 0;
+/*    width: auto;*/
+}
+
+.redux-box-side .redux-main .redux-field-container {
+    .select2-container,
+    select {
+        width: 96% !important;
+    }
+}
+
+@media (max-width: 1405px) {
+    .redux-box-side .redux-main .redux-field-container {
+        .select2-container,
+        select {
+            width: 92% !important;
+        }
+    }
+}
+
+@media (max-width: 1125px) {
+    .redux-box-side .redux-main .redux-field-container {
+        .select2-container,
+        select {
+            width: 100% !important;
+        }
+    }
+}
+
+@media (max-width: 1405px) {
+    .redux-main {
+        .form-table > tbody > tr > td {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .redux-field-container {
+            padding: 0 0 20px 0 !important;
+            padding-bottom: 10px !important;
+        }
+    }
+
+    .postbox .form-table > tbody > tr > th {
+        padding-bottom: 0 !important;
+    }
+
+    .redux_field_th {
+        padding-top: 0 !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+.redux-no-sections .redux-group-tab {
+    display: block !important;
+}
+
+@mixin metaboxesAdminThemeColorOverrides ($darkColor, $textColor) {
+    #poststuff .redux-metabox h3.hndle,
+    .metabox-holder .redux-metabox h3.hndle {
+        background: $darkColor;
+        color: $textColor;
+    }
+}
+
+/* Light fresh theme */
+.admin-color-fresh {
+    @include metaboxesAdminThemeColorOverrides(#222222, #fff);
+}
+
+/* Light admin theme */
+.admin-color-light {
+    @include metaboxesAdminThemeColorOverrides(#888888, #fff);
+}
+
+/* Blue admin theme */
+.admin-color-blue {
+    @include metaboxesAdminThemeColorOverrides(#096484, #fff);
+}
+
+/* Coffee admin theme */
+.admin-color-coffee {
+    @include metaboxesAdminThemeColorOverrides(#46403c, #fff);
+}
+
+/* Ectoplasm admin theme */
+.admin-color-ectoplasm {
+    @include metaboxesAdminThemeColorOverrides(#413256, #fff);
+}
+
+/* Midnight admin theme */
+.admin-color-midnight {
+    @include metaboxesAdminThemeColorOverrides(#363b3f, #fff);
+}
+
+/* Ocean admin theme */
+.admin-color-ocean {
+    @include metaboxesAdminThemeColorOverrides(#627c83, #fff);
+}
+
+/* Sunrise admin theme */
+.admin-color-sunrise {
+    @include metaboxesAdminThemeColorOverrides(#b43c38, #fff);
+}
+
+.redux-notices {
+    margin-bottom: 0;
+    border: 0;
+}
+
+.redux-metabox {
+    .redux-container {
+        margin-top: 0;
+    }
+
+    .inside {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .redux-no-sections {
+        .redux-main {
+            padding: 6px 15px 15px 15px !important;
+
+            .default_br {
+                display: none;
+            }
+
+            .redux-field-container {
+                padding: 10px 0 20px !important;
+            }
+
+            .redux_field_th {
+                padding-top: 5px !important;
+            }
+        }
+
+        &.redux-box-side {
+            .redux-main {
+                padding: 6px 8px 8px 8px !important;
+                input[type=text] {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+}
+
+.wp-color-result {
+    margin: 0 6px 0 0px !important;
+}
+
+.redux-container .ui-button-text-only .ui-button-text {
+    padding: 0;
+}
+
+.wpseotab tr { 
+    display: table-row !important 
+}

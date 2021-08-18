@@ -527,7 +527,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/icon-select.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/js-button.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/metaboxes.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/multi-media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/repeater.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/search.php';
@@ -538,6 +537,14 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/widget-areas.php';
 }
 
+/**
+ * Metaboxes
+ */
+require_once Redux_Core::$dir . '../sample/metaboxes.php';
+
+/**
+ * Raw README
+ */
 if ( file_exists( $dir . '/../README.md' ) ) {
 	$section = array(
 		'icon'   => 'el el-list-alt',

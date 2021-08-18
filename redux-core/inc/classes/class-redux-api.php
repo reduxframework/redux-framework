@@ -122,9 +122,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 			add_action( 'init', array( 'Redux', 'create_redux' ) );
 			add_action( 'switch_theme', array( 'Redux', 'create_redux' ) );
 
-			if ( version_compare( PHP_VERSION, '5.5.0', '<' ) ) {
-				include_once Redux_Core::$dir . 'inc/lib/array-column.php';
-			}
+			require_once Redux_Core::$dir . 'inc/extensions/metaboxes/class-redux-metaboxes-api.php';
 		}
 
 		/**
@@ -873,9 +871,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Creates an option panel field.
 		 *
-		 * @param string      $opt_name   Panel opt_name.
-		 * @param string|int  $section_id Section ID this field belongs to.
-		 * @param array       $field      Field data.
+		 * @param string     $opt_name   Panel opt_name.
+		 * @param string|int $section_id Section ID this field belongs to.
+		 * @param array      $field      Field data.
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
