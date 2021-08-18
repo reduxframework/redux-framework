@@ -111,14 +111,9 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			// About Page.
 			$page( esc_html__( 'What is Redux Framework?', 'redux-framework' ), esc_html__( 'Redux', 'redux-framework' ), $this->minimum_capability, 'redux-framework', array( $this, 'about_screen' ) );
 
-			// Support Page.
+			// Templates Page.
 			$page( esc_html__( 'Templates', 'redux-framework' ), esc_html__( 'Templates', 'redux-framework' ), $this->minimum_capability, 'redux-templates', array( $this, 'templates' ) );
 
-			// Status Page.
-			$page( esc_html__( 'Redux Health Check', 'redux-framework' ), esc_html__( 'Redux Health Check', 'redux-framework' ), $this->minimum_capability, 'redux-health', array( $this, 'heath_check' ) );
-
-			remove_submenu_page( 'options-general.php', 'redux-status' );
-			remove_submenu_page( 'options-general.php', 'redux-health' );
 			remove_submenu_page( 'options-general.php', 'redux-templates' );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -218,11 +213,7 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-templates' ), 'options-general.php' ) ) ); ?>">
 					<?php esc_attr_e( 'Templates', 'redux-framework' ); ?>
 				</a>
-				<a
-					class="nav-tab <?php echo( 'redux-status' === $selected || 'redux-health' === $selected ? 'nav-tab-active' : '' ); ?>"
-					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-health' ), 'options-general.php' ) ) ); ?>">
-					<?php esc_attr_e( 'Health Check', 'redux-framework' ); ?>
-				</a>
+
 				<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
 				<?php do_action( 'redux/pro/welcome/admin/tab', $selected ); ?>
 
@@ -256,20 +247,6 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
 
 			require_once 'views/templates.php';
-		}
-
-		/**
-		 * Render Status Report Screen
-		 *
-		 * @access public
-		 * @since  1.4
-		 * @return void
-		 */
-		public function heath_check() {
-			// Stupid hack for WordPress alerts and warnings.
-			echo '<div class="wrap" style="height:0;overflow:hidden;"><h2></h2></div>';
-
-			require_once 'views/health-report.php';
 		}
 
 		/**
