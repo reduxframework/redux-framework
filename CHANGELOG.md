@@ -1,6 +1,7 @@
 # Redux Changelog
 
 ## 4.2.15 RC
+* Added: Metaboxes!  See metaboxes.php in the sample folder for an example.
 * Added: Option to enable/disable Redux Template library.  Found under Settings > Redux > Templates
 * Added: Redux debug data moved to WordPress Site Health Info screen.
 * Removed: Redux Framework Health Screen.

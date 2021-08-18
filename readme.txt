@@ -153,6 +153,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 == Changelog ==
 
 = 4.2.15 RC =
+Added: Metaboxes!  See metaboxes.php in the sample folder for an example.
 Added: Option to enable/disable Redux Template library.  Found under Tools > Redux Framework > Templates
 Added: Redux debug data moved to WordPress Site Health Info screen.
 Removed: Redux Framework Health Screen.
