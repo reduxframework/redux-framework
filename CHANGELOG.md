@@ -1,7 +1,10 @@
 # Redux Changelog
 
 ## 4.2.15 RC
-* Added: Option to enable/disable Redux Template library.  Found under Tools > Redux Framework > Templates
+* Added: Option to enable/disable Redux Template library.  Found under Settings > Redux > Templates
+* Added: Redux debug data moved to WordPress Site Health Info screen.
+* Removed: Redux Framework Health Screen.
+* Modified: Tools > Redux Framework screen moved to Settings > Redux
 
 ## 4.2.14
 * Fixed: Parse error in Import/Export module due to old versions of PHP.  Remember folks, recommended minumim for WordPress is PHP 7.4.
