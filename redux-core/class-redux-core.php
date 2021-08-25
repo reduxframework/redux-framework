@@ -2,7 +2,7 @@
 /**
  * Redux Core Class
  *
- * @class Redux_Core
+ * @class   Redux_Core
  * @version 4.0.0
  * @package Redux Framework
  */
@@ -357,11 +357,18 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			add_filter( 'redux/tracking/options', array( 'Redux_Helpers', 'redux_stats_additions' ) );
 		}
 
-		public function add_debug_info( $debug_info ) {
+		/**
+		 * Add debug infor the WP Site Health screen.
+		 *
+		 * @param array $debug_info Debug data.
+		 *
+		 * @return array
+		 */
+		public function add_debug_info( array $debug_info ): array {
 
 			// Test Redux upload folder for permission to write.
 			$fs        = Redux_Filesystem::get_instance();
-			$test_file = Redux_Core::$upload_dir . 'test-log.log';
+			$test_file = self::$upload_dir . 'test-log.log';
 
 			if ( $fs->is_file( $test_file ) ) {
 				$res = $fs->unlink( $test_file );
@@ -372,7 +379,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			// Get browser data.
 			if ( ! class_exists( 'Browser' ) ) {
-				require_once Redux_Core::$dir . 'inc/lib/browser.php';
+				require_once self::$dir . 'inc/lib/browser.php';
 			}
 
 			$browser = new Browser();
@@ -387,7 +394,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			// Set Redux dir permission results to Site Health screen.
 			$debug_info['wp-filesystem']['fields'][] = array(
 				'label' => esc_html__( 'The Redux upload directory', 'redux-framework' ),
-				'value' => $res ? 'Writable' : 'Not writable'
+				'value' => $res ? 'Writable' : 'Not writable',
 			);
 
 			// Set Redux plugin results to Site Health screen.
@@ -395,15 +402,19 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 				'label'       => esc_html__( 'Redux Framework', 'redux-framework' ),
 				'description' => esc_html__( 'Debug information specific to Redux Framework.', 'redux-framework' ),
 				'fields'      => array(
-					'version'    => array(
+					'version'        => array(
 						'label' => esc_html__( 'Version', 'redux-framework' ),
-						'value' => Redux_Core::$version,
+						'value' => self::$version,
+					),
+					'installation'   => array(
+						'label' => esc_html__( 'Installation', 'redux-framework' ),
+						'value' => self::$installed,
 					),
 					'data directory' => array(
 						'label' => esc_html__( 'Data directory', 'redux-framerwork' ),
-						'value' => Redux_Core::$dir,
+						'value' => self::$dir,
 					),
-					'browser' => array(
+					'browser'        => array(
 						'label' => esc_html__( 'Browser', 'redux-framework' ),
 						'value' => $browser_data,
 					),
@@ -415,8 +426,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			if ( ! empty( $redux ) && is_array( $redux ) ) {
 				foreach ( $redux as $inst => $data ) {
 					Redux::init( $inst );
-
-					// $data = (array) $data;
 
 					$inst_name = ucwords( str_replace( array( '_', '-' ), ' ', $inst ) );
 					$args      = $data->args;
@@ -430,64 +439,66 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 							$ex = esc_html( ucwords( str_replace( array( '_', '-' ), ' ', $name ) ) );
 
-							$extensions[$ex] = esc_html( $ver );
+							$extensions[ $ex ] = esc_html( $ver );
 						}
 					}
 
 					// Output Redux instances.
-					$debug_info['redux-instance-' . $inst] = array(
+					$debug_info[ 'redux-instance-' . $inst ] = array(
+						// translators: %s = Instance name.
 						'label'       => sprintf( esc_html__( 'Redux Instance: %s', 'redux-framework' ), $inst_name ),
+						// translators: %s = Instance name w/ HTML.
 						'description' => sprintf( esc_html__( 'Debug information for the %s Redux instance.', 'redux-framework' ), '<code>' . $inst . '</code>' ),
 						'fields'      => array(
-							'opt_name'    => array(
+							'opt_name'         => array(
 								'label' => esc_html( 'opt_name' ),
 								'value' => $args['opt_name'],
 							),
-							'global_variable'    => array(
+							'global_variable'  => array(
 								'label' => esc_html( 'global_variable' ),
 								'value' => $args['global_variable'],
 							),
-							'dev_mode'    => array(
+							'dev_mode'         => array(
 								'label' => esc_html( 'dev_mode' ),
 								'value' => $args['dev_mode'] ? 'true' : 'false',
 							),
-							'ajax_save'    => array(
+							'ajax_save'        => array(
 								'label' => esc_html( 'ajax_save' ),
 								'value' => $args['ajax_save'] ? 'true' : 'false',
 							),
-							'page_slug'    => array(
+							'page_slug'        => array(
 								'label' => esc_html( 'page_slug' ),
 								'value' => $args['page_slug'],
 							),
-							'page_permissions'    => array(
+							'page_permissions' => array(
 								'label' => esc_html( 'page_permissions' ),
 								'value' => $args['page_permissions'],
 							),
-							'menu_type'    => array(
+							'menu_type'        => array(
 								'label' => esc_html( 'menu_type' ),
 								'value' => $args['menu_type'],
 							),
-							'page_parent'    => array(
+							'page_parent'      => array(
 								'label' => esc_html( 'page_parent' ),
 								'value' => $args['page_parent'],
 							),
-							'compiler'    => array(
+							'compiler'         => array(
 								'label' => esc_html( 'compiler' ),
 								'value' => $args['compiler'] ? 'true' : 'false',
 							),
-							'output'    => array(
+							'output'           => array(
 								'label' => esc_html( 'output' ),
 								'value' => $args['output'] ? 'true' : 'false',
 							),
-							'output_tag'    => array(
+							'output_tag'       => array(
 								'label' => esc_html( 'output_tag' ),
 								'value' => $args['output_tag'] ? 'true' : 'false',
 							),
-							'templates_path'    => array(
+							'templates_path'   => array(
 								'label' => esc_html( 'templates_path' ),
 								'value' => $args['templates_path'],
 							),
-							'extensions'    => array(
+							'extensions'       => array(
 								'label' => esc_html( 'extensions' ),
 								'value' => $extensions,
 							),
