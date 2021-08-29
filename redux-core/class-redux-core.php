@@ -366,17 +366,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 */
 		public function add_debug_info( array $debug_info ): array {
 
-			// Test Redux upload folder for permission to write.
-			$fs        = Redux_Filesystem::get_instance();
-			$test_file = self::$upload_dir . 'test-log.log';
-
-			if ( $fs->is_file( $test_file ) ) {
-				$res = $fs->unlink( $test_file );
-			} else {
-				$res = $fs->touch( $test_file );
-				$fs->unlink( $test_file );
-			}
-
 			// Get browser data.
 			if ( ! class_exists( 'Browser' ) ) {
 				require_once self::$dir . 'inc/lib/browser.php';
@@ -394,7 +383,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			// Set Redux dir permission results to Site Health screen.
 			$debug_info['wp-filesystem']['fields'][] = array(
 				'label' => esc_html__( 'The Redux upload directory', 'redux-framework' ),
-				'value' => $res ? 'Writable' : 'Not writable',
+				'value' => wp_is_writable( self::$upload_dir ) ? 'Writable' : 'Not writable',
 			);
 
 			// Set Redux plugin results to Site Health screen.

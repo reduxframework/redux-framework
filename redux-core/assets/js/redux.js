@@ -373,7 +373,7 @@ function colorNameToHex( colour ) {
 	};
 })( jQuery );
 
-/* global redux, redux_change, jQuery */
+/* global redux, redux_change, jQuery, pagenow */
 
 (function( $ ) {
 	'use strict';
@@ -382,6 +382,46 @@ function colorNameToHex( colour ) {
 
 	$.redux.initEvents = function( el ) {
 		var stickyHeight;
+		var search  = window.location.search;
+		var curPage = pagenow;
+		var dialog;
+
+		if ( 'string' === typeof search & 'string' === typeof curPage ) {
+			search  = search.replace( '?page=', '' );
+			curPage = curPage.replace( 'toplevel_page_', '' );
+
+			if ( search === curPage ) {
+				document.addEventListener(
+					'keydown',
+					function( event ) {
+						if ( event.ctrlKey && event.shiftKey && 'H' === event.key ) {
+							dialog.dialog( 'open' );
+						}
+					}
+				);
+
+				dialog = $( '#dialog-confirm' ).dialog(
+					{
+						modal: true,
+						classes: {
+							'ui-dialog': 'redux-support-dialog'
+						},
+						autoOpen: false,
+						resizable: false,
+						height: 'auto',
+						width: 400,
+						buttons: {
+							'Submit My Data': function() {
+								$( this ).dialog( 'close' );
+							},
+							Cancel: function() {
+								$( this ).dialog( 'close' );
+							}
+						}
+					}
+				);
+			}
+		}
 
 		el.find( '.redux-presets-bar' ).on(
 			'click',

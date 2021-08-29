@@ -101,6 +101,10 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 				$this->parent->args['class'] = ' redux-rtl';
 			}
 
+			echo '<div id="dialog-confirm" title="Submit Support Information?">';
+			echo '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Redux will send the debug information found on the WordPress Site Health page and your Redux config to our secure server.  Are you ready to proceed?</p>';
+			echo '</div>';
+
 			$this->get_template( 'container.tpl.php' );
 
 			/**
