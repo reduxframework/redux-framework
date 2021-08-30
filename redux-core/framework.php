@@ -499,6 +499,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 				new Redux_AJAX_Save( $this );
 				new Redux_AJAX_Typography( $this );
 				new Redux_AJAX_Select2( $this );
+				new Redux_Health( $this );
 			}
 
 			/**

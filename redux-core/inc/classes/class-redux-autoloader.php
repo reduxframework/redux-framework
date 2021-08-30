@@ -88,6 +88,4 @@ class Redux_Autoloader {
 			}
 		}
 	}
-
-
 }

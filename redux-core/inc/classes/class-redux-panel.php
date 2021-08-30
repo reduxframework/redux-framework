@@ -101,8 +101,9 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 				$this->parent->args['class'] = ' redux-rtl';
 			}
 
-			echo '<div id="dialog-confirm" title="Submit Support Information?">';
-			echo '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Redux will send the debug information found on the WordPress Site Health page and your Redux config to our secure server.  Are you ready to proceed?</p>';
+			echo '<div id="dialog-confirm" title="' . esc_html__( 'Submit Support Information?', 'redux-framework' ) . '" data-nonce="' . esc_attr( wp_create_nonce( 'redux_sumbit_support' ) ) . '">';
+			// translators: %s = WP Site Health Screen URL.
+			echo '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' . sprintf( esc_html__( 'Redux will send the debug information found on the %s and your Redux config to our secure server.  Are you ready to proceed?', 'redux-framework' ), '<a href="' . esc_url( admin_url( 'site-health.php?tab=debug' ) ) . '" target="_blank">' . esc_html__( 'WordPress Site Health screen', 'redux-framework' ) . '</a>' ) . '</p>';
 			echo '</div>';
 
 			$this->get_template( 'container.tpl.php' );

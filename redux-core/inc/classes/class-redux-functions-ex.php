@@ -156,7 +156,6 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @param string $path Path to normalize.
 		 *
 		 * @return string|string[]|null
-		 * @return string|string[]|null
 		 */
 		public static function wp_normalize_path( string $path = '' ) {
 			if ( function_exists( 'wp_normalize_path' ) ) {

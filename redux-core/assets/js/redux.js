@@ -373,7 +373,7 @@ function colorNameToHex( colour ) {
 	};
 })( jQuery );
 
-/* global redux, redux_change, jQuery, pagenow */
+/* global redux, redux_change, jQuery, pagenow, ajaxurl */
 
 (function( $ ) {
 	'use strict';
@@ -411,7 +411,30 @@ function colorNameToHex( colour ) {
 						height: 'auto',
 						width: 400,
 						buttons: {
-							'Submit My Data': function() {
+							Submit: function() {
+								$.ajax(
+									{ type: 'post',
+										dataType: 'json',
+										url: ajaxurl,
+										data: {
+											action:     'redux_submit_support_data',
+											nonce:      $( '#dialog-confirm' ).data( 'nonce' )
+										},
+										error: function( response ) {
+											if ( true === redux.optName.args.dev_mode ) {
+												console.log( response );
+											} else {
+												console.log( response );
+											}
+										},
+										success: function( response ) {
+											if ( response.status && 'success' === response.status ) {
+												console.log( response );
+											}
+										}
+									}
+								);
+
 								$( this ).dialog( 'close' );
 							},
 							Cancel: function() {
