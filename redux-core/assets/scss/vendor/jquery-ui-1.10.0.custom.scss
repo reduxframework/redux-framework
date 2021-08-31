@@ -8,11 +8,13 @@
  * Portions copyright jQuery UI & Twitter Bootstrap
  */
 
-#dialog-confirm {
+#redux-dialog-confirm,
+#redux-dialog-message{
     display:none;
 }
 
-.redux-support-dialog {
+.redux-support-dialog,
+.redux-message-dialog {
     &.ui-dialog {
         position: absolute;
         top: 0;
@@ -234,6 +236,10 @@
 
     .ui-icon-alert {
         background-position: 0 -144px;
+    }
+
+    .ui-icon-circle-check {
+        background-position: -208px -192px;
     }
 
     .ui-icon {
