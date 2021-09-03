@@ -106,6 +106,7 @@ You can also contribute code-wise via our <a href="https://github.com/reduxframe
 
 <h4>⚡ Like the Redux Plugin?</h4>
 <ul>
+<li>Redux is powered by the Extendify team. Learn more at <a href="https://extendify.com" rel="nofollow ugc">extendify.com</a></li>
 <li>Follow us on <a href="https://www.facebook.com/reduxframework" rel="nofollow ugc">Facebook 💬</a></li>
 <li><strong>Rate us 5 ⭐ stars</strong> on <a href="https://wordpress.org/support/plugin/redux-framework/reviews/?filter=5/#new-post">WordPress.org</a></li>
 <li>Follow us on Twitter 🐦: <a href="https://twitter.com/reduxframework" rel="nofollow ugc">@ReduxFramework</a></li>

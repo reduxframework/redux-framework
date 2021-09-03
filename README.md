@@ -1,6 +1,8 @@
 ## Gutenberg Template Library & Redux Framework
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/) [![Build Status](https://travis-ci.org/reduxframework/redux-framework.png?branch=master)](https://travis-ci.org/reduxframework/redux-framework) [![Slack](https://redux-slackin.herokuapp.com/badge.svg)](https://redux-slackin.herokuapp.com)
 
+#### Redux is powered by the Extendify team. Learn more at [extendify.com](https://extendify.com) ####
+
 ## New to Version 4.2 ##
 ### See the sample folder for examples for the new and improved fields. ###
 * Additional Typography features:  Top and bottom margins, text shadow.
@@ -74,7 +76,7 @@ To set AJAX loading, add the `'ajax' => true` argument to your select field.  Th
 ### Field/Section Disabling
 This feature has been request quite a few times over the years.  Fields and sections can now be disabled by adding the `'disabled' => true` argument to either a section or a field.  The section or field will then appear 'greyed out' and not respond to input.  This comes in handy in the event one may want to offer teasers for premium versions of their products.
 
-Since those with a little CSS know-how could easily reactive disabled fields with a little CSS, we took the added precaution of having Redux remove any `name` attributes on disabled fields/sections.  This way, even if a clever user reactivates the field, it will never save.
+Since those with a little CSS know-how could easily reactivate disabled fields with a little CSS, we took the added precaution of having Redux remove any `name` attributes on disabled fields/sections.  This way, even if a clever user reactivates the field, it will never save.
 
 ### Updated Panel Interface
 The option panel interface has been brought up to date with the current WordPress admin design.  It is also now ‘theme aware’.  Panel colors will now follow suit with the selected admin theme.
