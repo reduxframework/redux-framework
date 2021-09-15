@@ -26,12 +26,13 @@ defined( 'ABSPATH' ) || exit;
 	<?php $this->actions(); ?>
 	<?php $this->tabs(); ?>
 
+	<?php $ext_value = Redux_Core::$extendify_templates_enabled; ?>
 	<?php $value = Redux_Core::$redux_templates_enabled; ?>
 
 	<div class="feature-section one-col">
 		<div class="col">
 			<?php // translators: %s: HTML. ?>
-			<h2><?php echo sprintf( esc_html__( ' Template Library', 'redux-framework' ), '<br />' ); ?></h2>
+			<h2><?php echo sprintf( esc_html__( ' Template Libraries', 'redux-framework' ), '<br />' ); ?></h2>
 		</div>
 	</div>
 	<div class='wrap'>
@@ -39,12 +40,21 @@ defined( 'ABSPATH' ) || exit;
 			<?php settings_fields( 'redux_templates' ); ?>
 			<table class="form-table">
 				<tbody>
-				<tr valign="top">
-					<th scope="row" valign="top">
+				<tr style='vertical-align:top'>
+					<th scope='row' style='vertical-align:top'>
+						<?php esc_html_e( 'Extendify Template Library', 'redux-framework' ); ?>
+					</th>
+					<td>
+						<input id="extendify-templates" name="use_extendify_templates" type="checkbox" class="regular-text" value="1" <?php checked( $ext_value, '1' ); ?>/>
+						<label class="description" for="use_extendify_templates"><?php esc_html_e( 'Load Extendify template library', 'redux-framework' ); ?></label>
+					</td>
+				</tr>
+				<tr style='vertical-align:top'>
+					<th scope="row" style="vertical-align:top">
 						<?php esc_html_e( 'Redux Template Library', 'redux-framework' ); ?>
 					</th>
 					<td>
-						<input id="redux-pro_license_key" name="use_redux_templates" type="checkbox" class="regular-text" value="1" <?php checked( $value, '1', true ); ?>/>
+						<input id="redux-templates" name="use_redux_templates" type="checkbox" class="regular-text" value="1" <?php checked( $value, '1' ); ?>/>
 						<label class="description" for="use_redux_templates"><?php esc_html_e( 'Load legacy Redux template library', 'redux-framework' ); ?></label>
 					</td>
 				</tr>

@@ -55,6 +55,7 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 		 */
 		public function register_options() {
 			register_setting( 'redux_templates', 'use_redux_templates' );
+			register_setting( 'redux_templates', 'use_extendify_templates' );
 		}
 
 		/**
