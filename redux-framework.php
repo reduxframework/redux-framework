@@ -29,6 +29,12 @@ if ( ! defined( 'REDUX_PLUGIN_FILE' ) ) {
 	define( 'REDUX_PLUGIN_FILE', __FILE__ );
 }
 
+// Including extendify sdk.
+if ( file_exists( plugin_dir_path( REDUX_PLUGIN_FILE ) . 'extendify-sdk/loader.php' ) ) {
+	$GLOBALS['extendifySdkSourcePlugin'] = 'Redux';
+    require_once plugin_dir_path( __FILE__ ) . 'extendify-sdk/loader.php';
+}
+
 // Require the main plugin class.
 require_once plugin_dir_path( __FILE__ ) . 'class-redux-framework-plugin.php';
 

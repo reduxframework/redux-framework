@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Adding CSS classes should be done with consideration and rarely */
+.extendify-sdk *, .extendify-sdk *:after, .extendify-sdk *:before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+.extendify-sdk .button-focus {
+    @apply focus:ring-2 focus:ring-wp-theme-500 ring-offset-1 outline-none;
+}
+.extendify-sdk .button-focus-big-green {
+    @apply focus:ring-4 focus:ring-offset-4 focus:ring-extendify-main outline-none;
+}
+.extendify-sdk select.button-focus,
+.extendify-sdk input.button-focus {
+    @apply focus:border-transparent focus:outline-none;
+}
+
+.button-extendify-main {
+    @apply bg-extendify-main button-focus cursor-pointer transition duration-200 p-1.5 px-3 text-white hover:text-white no-underline hover:bg-gray-900 active:bg-gray-900 active:text-white focus:text-white whitespace-nowrap;
+}
+#extendify-search-input:focus ~ svg,
+#extendify-search-input:not(:placeholder-shown) ~ svg {
+    @apply hidden;
+}
+#extendify-search-input::-webkit-textfield-decoration-container {
+    @apply mr-3;
+}
+
+/* WP tweaks and overrides */
+.extendify-sdk .components-panel__body > .components-panel__body-title {
+    /* Override WP aggressive boder:none and border:0 */
+    border-bottom: 1px solid #e0e0e0 !important;
+    @apply bg-transparent;
+}
+.extendify-sdk .components-modal__header {
+    @apply border-b border-gray-300;
+}
+
+/* Special input animation */
+.extendify-special-input:placeholder-shown ~ label {
+    @apply top-1.5;
+    @apply text-sm;
+    @apply text-gray-600;
+}
+.extendify-special-input:focus ~ label {
+    @apply -top-4;
+    @apply text-xs;
+    @apply text-extendify-main;
+}
