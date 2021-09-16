@@ -605,7 +605,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 					// Just have it fail gracefully.
 				}
 				// Run this regardless. If the try/catch failed, better not to keep trying as something else is wrong.
-				// In that case we can expect them to come to support and we can give them a fresh key.
+				// In that case we can expect them to come to support, and we can give them a fresh key.
 				update_user_option( get_current_user_id(), 'extendifysdk_redux_key_moved', true );
 			}
 		}

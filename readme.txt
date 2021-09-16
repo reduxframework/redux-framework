@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.8.1
-Stable tag: 4.2.14
+Stable tag: 4.2.15
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -154,11 +154,12 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 == Changelog ==
 
 = 4.2.15 RC =
-Added: Metaboxes!  See metaboxes.php in the sample folder for an example.
-Added: Option to enable/disable Redux Template library.  Found under Tools > Redux Framework > Templates
+Added: Extendify Template library.
+Added: Option to enable/disable Template libraries.  Found under Settings > Redux > Templates
 Added: Redux debug data moved to WordPress Site Health Info screen.
 Removed: Redux Framework Health Screen.
 Modified: Tools > Redux Framework screen moved to Settings > Redux
+Modified: Redux Templates disabled by default.
 
 = 4.2.14 =
 Fixed: Parse error in Import/Export module due to old versions of PHP.
