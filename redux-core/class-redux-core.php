@@ -322,6 +322,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
 			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
+
+			Redux_Functions_Ex::pro_to_ext();
 		}
 
 		/**
