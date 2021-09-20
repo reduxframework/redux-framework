@@ -1,0 +1,70 @@
+name: Build development zip file
+on: push
+jobs:
+  build:
+    name: Build test, and zip
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.0]
+        node-version: [14.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php }}'
+          tools: composer:v1
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Use Composer cache
+        uses: actions/cache@master
+        with:
+          path: ${{ steps['composer-cache'].outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Build autoloader
+        run: composer install --prefer-dist --no-progress --no-suggest --no-dev
+
+      - name: Using Node version ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        run: |
+          npm ci
+          npm run dev
+          touch .devbuild
+        env:
+          CI: true
+      - name: Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: extendify-sdk
+          retention-days: 5
+          path: |
+            ${{ github.workspace }}/
+            !${{ github.workspace }}/node_modules/
+            !${{ github.workspace }}/.github/
+            !${{ github.workspace }}/.git/
+            !${{ github.workspace }}/src/
+            !${{ github.workspace }}/.editorconfig
+            !${{ github.workspace }}/.eslintrc.js
+            !${{ github.workspace }}/.eslintignore
+            !${{ github.workspace }}/.gitignore
+            !${{ github.workspace }}/.svgrrc
+            !${{ github.workspace }}/.prettierrc.js
+            !${{ github.workspace }}/.phpcs.xml.dist
+            !${{ github.workspace }}/webpack.config.js
+            !${{ github.workspace }}/composer.json
+            !${{ github.workspace }}/composer.lock
+            !${{ github.workspace }}/package.json
+            !${{ github.workspace }}/package-lock.json
+            !${{ github.workspace }}/readme.md

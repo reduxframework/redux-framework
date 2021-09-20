@@ -50,6 +50,10 @@ export default function Welcome() {
         </div>
     </div>
 
+    const headerText = window.extendifySdkData.source === 'Redux' ?
+        __('Welcome to the Redux Library by Extendify', 'extendify-sdk') :
+        __('Welcome to the Extendify library', 'extendify-sdk')
+
     return <div className="w-full h-full flex flex-col items-center relative shadow-xl max-w-screen-4xl mx-auto bg-white">
         {emptyToolbar}
         <section className="flex-grow w-full justify-between flex flex-col overflow-y-scroll">
@@ -57,7 +61,7 @@ export default function Welcome() {
                 <div className="w-full p-8 max-w-screen-2xl mx-auto lg:space-x-16 lg:flex space-y-16 lg:space-y-0">
                     <div className="flex-grow text-left">
                         <h1 className="m-0 mb-10 text-5xl">
-                            {__('Welcome to the Extendify library', 'extendify-sdk')}
+                            {headerText}
                         </h1>
                         <div className="max-w-2xl mb-24">
                             <p className="mb-10 leading-loose">{__('Congratulations! You have access to our entire library of Gutenberg patterns and templates. You can add up to 3 templates or patterns to your site completely free.', 'extendify-sdk')}</p>
