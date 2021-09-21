@@ -998,16 +998,16 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 		/**
 		 * Return Section Menu HTML.
 		 *
-		 * @param int    $k        Section index.
-		 * @param array  $section  Sectio array.
-		 * @param string $suffix   Optional suffix.
-		 * @param array  $sections Sections array.
+		 * @param int|string $k        Section index.
+		 * @param array      $section  Sectio array.
+		 * @param string     $suffix   Optional suffix.
+		 * @param array      $sections Sections array.
 		 *
 		 * @return      string
 		 * @since       3.1.5
 		 * @access      public
 		 */
-		public function section_menu( int $k, array $section, string $suffix = '', array $sections = array() ): string {
+		public function section_menu( $k, array $section, string $suffix = '', array $sections = array() ): string {
 			$function_count = 0;
 
 			$core = $this->core();
