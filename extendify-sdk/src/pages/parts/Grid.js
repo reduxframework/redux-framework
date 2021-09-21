@@ -52,11 +52,11 @@ export default function TemplatesList() {
             setServerError(response?.error)
         }
         if (response?.records && searchParamsRaw === searchParams.current) {
-            appendTemplates(response.records)
-            setNothingFound(response.records.length <= 0)
             useTemplatesStore.setState({
                 nextPage: response.offset,
             })
+            appendTemplates(response.records)
+            setNothingFound(response.records.length <= 0)
         }
     }, [searchParamsRaw, appendTemplates, isMounted])
 
@@ -130,21 +130,15 @@ export default function TemplatesList() {
                 </li>
             })}
         </ul>
-        {
-            useTemplatesStore.getState().nextPage &&
-
-            <>
-                <div
-                    className="-translate-y-full flex flex-col h-80 items-end justify-end my-2 relative transform z-0 text"
-                    ref={loadMoreRef}
-                    style={{
-                        zIndex: -1,
-                    }}>
-                </div>
-                <div className="my-4">
-                    <Spinner/>
-                </div>
-            </>
-        }
+        {useTemplatesStore.getState().nextPage && <>
+            <div
+                className="-translate-y-full flex flex-col h-80 items-end justify-end my-2 relative transform z-0 text"
+                ref={loadMoreRef}
+                style={{ zIndex: -1 }}>
+            </div>
+            <div className="my-4">
+                <Spinner/>
+            </div>
+        </>}
     </>
 }
