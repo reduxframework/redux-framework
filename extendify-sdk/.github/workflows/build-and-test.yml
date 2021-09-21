@@ -1,0 +1,62 @@
+name: Build and test
+on: [push, pull_request]
+jobs:
+ # TODO: create another job for integration testing that includes Cypress, booting up WPO, etc
+ # Reference wp-cli: https://github.com/wp-cli/wp-cli/blob/master/.github/workflows/testing.yml
+  unit: #-------------------------------------------
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4']
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php }}'
+          extensions: mysql, zip
+          coverage: none
+          tools: composer:v1, wp-cli, cs2pr, phpcs
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Use Composer cache
+        uses: actions/cache@master
+        with:
+          path: ${{ steps['composer-cache'].outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Install PHPCS
+        run: git clone -b master https://github.com/WordPress/WordPress-Coding-Standards.git ${{ github.workspace }}/wpcs
+
+      - name: PHPCS check
+        run: |
+            phpcs --config-set installed_paths ${{ github.workspace }}/vendor/phpcompatibility/phpcompatibility-wp/PHPCompatibilityWP,${{ github.workspace }}/vendor/phpcompatibility/php-compatibility/PHPCompatibility,${{ github.workspace }}/vendor/phpcompatibility/phpcompatibility-paragonie/PHPCompatibilityParagonieSodiumCompat,${{ github.workspace }}/vendor/phpcompatibility/phpcompatibility-paragonie/PHPCompatibilityParagonieRandomCompat,${{ github.workspace }}/wpcs
+            phpcs -i
+            phpcs -q --report=checkstyle . | cs2pr
+
+      - name: Install NPM packages
+        run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: "0"
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Test JavaScript
+        run: npm run test
+
+      - name: Lint JavaScript
+        run: npm run lint

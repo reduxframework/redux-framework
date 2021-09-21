@@ -1,0 +1,44 @@
+{
+	"name": "extendify-sdk",
+	"description": "",
+	"scripts": {
+		"build": "npx mix --production",
+		"dev": "npx mix",
+		"watch": "npx mix watch",
+		"lint": "eslint src/**/*.js",
+		"lint-fix": "eslint src/**/*.js --fix",
+		"tailwind-config-viewer": "tailwind-config-viewer -o"
+	},
+	"devDependencies": {
+		"@babel/preset-react": "^7.14.5",
+		"autoprefixer": "^10.3.4",
+		"browser-sync": "^2.27.5",
+		"browser-sync-webpack-plugin": "^2.3.0",
+		"eslint": "^7.32.0",
+		"eslint-plugin-react": "^7.25.1",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"laravel-mix": "^6.0.30",
+		"resolve-url-loader": "^4.0.0",
+		"tailwind-config-viewer": "^1.6.2"
+	},
+	"dependencies": {
+		"@tailwindcss/aspect-ratio": "^0.2.1",
+		"@headlessui/react": "^1.4.1",
+		"@wordpress/base-styles": "*",
+		"@wordpress/block-editor": "^7.0.2",
+		"@wordpress/blocks": "^11.1.0",
+		"@wordpress/components": "^17.0.0",
+		"@wordpress/edit-post": "^5.0.2",
+		"@wordpress/icons": "5.0.2",
+		"axios": "^0.21.4",
+		"classnames": "^2.3.1",
+		"fuse.js": "^6.4.6",
+		"postcss": "^8.3.6",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-intersection-observer": "^8.32.1",
+		"react-transition-group": "^4.4.2",
+		"tailwindcss": "^2.2.14",
+		"zustand": "^3.5.10"
+	}
+}
