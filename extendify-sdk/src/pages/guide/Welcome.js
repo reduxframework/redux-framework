@@ -25,7 +25,7 @@ export default function Welcome() {
         // })
         // Delete if using welcome guide
         updateSearchParams({
-            type: type,
+            type: type ?? 'pattern',
         })
         useGlobalStore.setState({ currentPage: 'main' })
     }
