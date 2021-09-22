@@ -68,7 +68,7 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 <h4>📝 Documentation and Support</h4>
 <ul>
 <li>For more information about the Template Library, check out <a href="https://extendify.com/" rel="nofollow ugc">Extendify</a>.</li>
-<li>For information about the Redux Options Framework, check out <a href="https://devs.redux.io/” rel=”nofollow ugc”>Redux Documentation</a>.</li>
+<li>For information about the Redux Options Framework, check out <a href="https://devs.redux.io/" rel="nofollow ugc">Redux Documentation</a>.</li>
 <li>If you have additional questions, reach out to us at support@redux.io</li>
 </ul>
 
