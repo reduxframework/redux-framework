@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.3.1
+* Fixed: `wp_mail has been declared by another process or plugin` message.
+* Fixed: Malformed README wouldn't allow clicking of some support links.
+* Release date: September 22, 2021
+
 ## 4.3.0
 * Added: Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
 * Added: Option to enable/disable Template libraries.  Found under Settings > Redux > Templates
