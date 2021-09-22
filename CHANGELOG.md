@@ -1,7 +1,7 @@
 # Redux Changelog
 
 ## 4.3.0
-* Added: Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/extendify-upgrade](https://redux.io/extendify-upgrade).
+* Added: Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
 * Added: Option to enable/disable Template libraries.  Found under Settings > Redux > Templates
 * Added: Redux debug data moved to WordPress Site Health Info screen.
 * Removed: Redux Framework Health Screen.
