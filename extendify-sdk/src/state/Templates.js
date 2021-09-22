@@ -85,12 +85,19 @@ export const useTemplatesStore = create((set, get) => ({
             })
         }
 
+        const searchParams = Object.assign(
+            {}, get().searchParams, params,
+        )
+
+        // If the params are the same then don't update
+        if (JSON.stringify(searchParams) === JSON.stringify(get().searchParams)) {
+            return
+        }
+
         set({
             templates: [],
             nextPage: '',
-            searchParams: {
-                ...Object.assign(get().searchParams, params),
-            },
+            searchParams,
         })
     },
 }))
