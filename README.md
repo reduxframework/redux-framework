@@ -3,6 +3,9 @@
 
 #### Redux is powered by the Extendify team. Learn more at [extendify.com](https://extendify.com) ####
 
+## New to Version 4.3 ##
+* Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/extendify-upgrade](https://redux.io/extendify-upgrade).
+
 ## New to Version 4.2 ##
 ### See the sample folder for examples for the new and improved fields. ###
 * Additional Typography features:  Top and bottom margins, text shadow.
