@@ -183,9 +183,18 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 				self::$instance->includes();
 				self::$instance->init();
 				self::$instance->hooks();
+
+				add_action( 'plugins_loaded', array( 'Redux_Core', 'plugins_loaded' ) );
 			}
 
 			return self::$instance;
+		}
+
+		/**
+		 * Things to run after pluggable.php had loaded.
+		 */
+		public static function plugins_loaded() {
+			Redux_Functions_Ex::pro_to_ext();
 		}
 
 		/**
@@ -322,8 +331,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
 			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
-
-			Redux_Functions_Ex::pro_to_ext();
 		}
 
 		/**

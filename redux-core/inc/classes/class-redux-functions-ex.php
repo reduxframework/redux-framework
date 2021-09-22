@@ -583,10 +583,6 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		public static function pro_to_ext() {
 
 			// If they are a pro user, convert their key to use with Extendify.
-			if ( ! function_exists( 'get_userdata' ) ) {
-				require_once ABSPATH . '/wp-includes/pluggable.php';
-			}
-
 			$redux_pro_key = get_option( 'redux_pro_license_key' );
 
 			if ( $redux_pro_key && ! get_user_option( 'extendifysdk_redux_key_moved' ) ) {
