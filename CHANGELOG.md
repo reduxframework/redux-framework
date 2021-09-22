@@ -1,12 +1,13 @@
 # Redux Changelog
 
-## 4.2.15 RC
-* Added: Extendify Template library.
+## 4.3.0
+* Added: Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/extendify-upgrade](https://redux.io/extendify-upgrade).
 * Added: Option to enable/disable Template libraries.  Found under Settings > Redux > Templates
 * Added: Redux debug data moved to WordPress Site Health Info screen.
 * Removed: Redux Framework Health Screen.
 * Modified: Tools > Redux Framework screen moved to Settings > Redux
 * Modified: Redux Templates disabled by default.
+* Release date: September 21, 2021
 
 ## 4.2.14
 * Fixed: Parse error in Import/Export module due to old versions of PHP.  Remember folks, recommended minumim for WordPress is PHP 7.4.

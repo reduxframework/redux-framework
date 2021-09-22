@@ -8,18 +8,18 @@
  * Plugin URI:          http://wordpress.org/plugins/redux-framework
  * GitHub URI:          reduxframework/redux-framework
  * Description:         Build better sites in WordPress fast!
- * Version:             4.2.15
+ * Version:             4.3.0
  * Requires at least:   4.0
  * Requires PHP:        7.1
- * Author:              Redux.io
- * Author URI:          https://redux.io
+ * Author:              Extendify
+ * Author URI:          https://extendify.com
  * License:             GPLv3 or later
  * License URI:         http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:         redux-framework
  * Provides:            ReduxFramework
  *
  * @package             ReduxFramework
- * @author              Redux.io by Dovy Paukstys <dovy@redux.io>
+ * @author              Extendify
  * @license             GNU General Public License, version 3
  * @copyright           2012-2021 Redux.io
  */
