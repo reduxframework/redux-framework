@@ -274,7 +274,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 *
 		 * @return      void
 		 */
-		public static function activate( bool $network_wide ) {
+		public static function activate( ?bool $network_wide ) {
 			// phpcs:disable
 			//if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 			//	if ( $network_wide ) {
