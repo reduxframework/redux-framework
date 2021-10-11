@@ -274,26 +274,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 *
 		 * @return      void
 		 */
-		public static function activate( bool $network_wide ) {
-			// phpcs:disable
-			//if ( function_exists( 'is_multisite' ) && is_multisite() ) {
-			//	if ( $network_wide ) {
-			//		// Get all blog IDs.
-			//		$blog_ids = self::get_blog_ids();
-			//
-			//		foreach ( $blog_ids as $blog_id ) {
-			//			switch_to_blog( $blog_id );
-			//			self::single_activate();
-			//		}
-			//		restore_current_blog();
-			//	} else {
-			//		self::single_activate();
-			//	}
-			//} else {
-			//	self::single_activate();
-			//}
-			// phpcs:enable
-
+		public static function activate( ?bool $network_wide ) {
 			delete_site_transient( 'update_plugins' );
 		}
 
@@ -307,7 +288,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 *
 		 * @return      void
 		 */
-		public static function deactivate( bool $network_wide ) {
+		public static function deactivate( ?bool $network_wide ) {
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 				if ( $network_wide ) {
 					// Get all blog IDs.

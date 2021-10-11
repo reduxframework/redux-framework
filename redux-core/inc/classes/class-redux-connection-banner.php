@@ -381,7 +381,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 								<p>
 									<?php
 									esc_html_e(
-										'The Redux block library service allows you to build any site you want in minutes with a click of a button. With over 1,000+ templates, Redux helps you build sites fast!',
+										'The Redux block library service, powered by Extendify, allows you to build any site you want in minutes with a click of a button. With over 1,000+ templates, Redux helps you build sites fast!',
 										'redux_framework'
 									);
 									?>

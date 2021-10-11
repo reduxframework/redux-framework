@@ -678,7 +678,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 * @access      public
 		 * @return      array $this->options_defaults
 		 */
-		public function default_values(): array {
+		public function default_values() {
 			$core = $this->core();
 
 			if ( ! is_null( $core->sections ) && is_null( $core->options_defaults ) ) {

@@ -48,7 +48,7 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 				$action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 				if ( Redux_Functions_Ex::string_ends_with( $action, '_select2' ) && Redux_Functions_Ex::string_starts_with( $action, 'redux_' ) ) {
-					return '';
+					return array();
 				}
 			}
 

@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.1 RC
+* Added: Metaboxes!
+* Fixed: Incorrect return type in Options Constructor.
+
 ## 4.3.1
 * Fixed: `wp_mail has been declared by another process or plugin` message.
 * Fixed: Malformed README wouldn't allow clicking of some support links.
