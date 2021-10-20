@@ -4,7 +4,14 @@
 #### Redux is powered by the Extendify team. Learn more at [extendify.com](https://extendify.com) ####
 
 ## New to Version 4.3 ##
+* METABOXES!
 * Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
+
+## Beta testing instructions for Metaboxes ##
+* Metaboxes config is includes in the sample config.  Demo metaboxes are viewable on pages and posts when the demo panel is active.
+* If you are already using the Metaboxes extension of Redux Pro, there is nothing you need to update.  The version of Metaboxes within the Redux core will override both the extension and Pro.
+* Please verify metaboxes in your existing project still function normally.
+* Please do not use this code in your production releases yet.  Internal beta testing for your organization fine and encouraged.
 
 ## New to Version 4.2 ##
 ### See the sample folder for examples for the new and improved fields. ###
@@ -16,7 +23,6 @@
 * New Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
 * Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
 * Automatic update option for Google Fonts without a Pro subscription.
-
 
 ## Follow us on Social Media! ##
 [![Follow us on Twitter](https://www.download82.com/images/produse/iconuri/twitter-for-android.png "Follow us on Twitter")](https://www.twitter.com/ReduxFramework)
