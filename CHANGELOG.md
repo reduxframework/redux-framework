@@ -1,6 +1,6 @@
 # Redux Changelog
 
-## 4.3.1 RC
+## 4.3.1.1 Beta
 * Added: Metaboxes!
 * Fixed: Incorrect return type in Options Constructor.
 
