@@ -35,7 +35,7 @@
  * http://apptools.com/phptools/browser/
  *
  */
-class Browser {
+class ReduxBrowser {
 
     private $_agent = '';
     private $_browser_name = '';

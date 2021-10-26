@@ -1066,11 +1066,11 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 			$sysinfo['wp_lang'] = get_locale();
 
-			if ( ! class_exists( 'Browser' ) ) {
+			if ( ! class_exists( 'ReduxBrowser' ) ) {
 				require_once Redux_Core::$dir . 'inc/lib/browser.php';
 			}
 
-			$browser = new Browser();
+			$browser = new ReduxBrowser();
 
 			$sysinfo['browser'] = array(
 				'agent'    => $browser->getUserAgent(),

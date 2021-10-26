@@ -384,11 +384,11 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public function add_debug_info( array $debug_info ): array {
 
 			// Get browser data.
-			if ( ! class_exists( 'Browser' ) ) {
+			if ( ! class_exists( 'ReduxBrowser' ) ) {
 				require_once self::$dir . 'inc/lib/browser.php';
 			}
 
-			$browser = new Browser();
+			$browser = new ReduxBrowser();
 
 			$browser_data = array(
 				'Agent'    => $browser->getUserAgent(),
