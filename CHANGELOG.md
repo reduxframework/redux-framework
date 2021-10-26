@@ -3,6 +3,7 @@
 ## 4.3.1.1 Beta
 * Added: Metaboxes!
 * Fixed: Incorrect return type in Options Constructor.
+* Modified: Prefixed Browser class to avoid conflict with older versions inother projects.
 
 ## 4.3.1
 * Fixed: `wp_mail has been declared by another process or plugin` message.
