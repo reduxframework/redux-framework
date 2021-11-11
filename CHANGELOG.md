@@ -2,7 +2,6 @@
 
 ## 4.3.2
 * Added: Metaboxes!
-* Updated: Extendify Library.
 * Fixed: Incorrect return type in Options Constructor.
 * Modified: Prefixed Browser class to avoid conflict with older versions inother projects.
 * Release date: November 11, 2021
