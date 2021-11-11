@@ -3,7 +3,7 @@
 ## 4.3.2
 * Added: Metaboxes!
 * Fixed: Incorrect return type in Options Constructor.
-* Modified: Prefixed Browser class to avoid conflict with older versions inother projects.
+* Modified: Prefixed Browser class to avoid conflict with older versions in other projects.
 * Release date: November 11, 2021
 
 ## 4.3.1
