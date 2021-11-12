@@ -21,11 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Define File DIR.
+const REDUXTEMPLATES_FILE = __FILE__;
+
 // Define Version.
 define( 'REDUXTEMPLATES_VERSION', Redux_Core::$version );
-
-// Define File DIR.
-define( 'REDUXTEMPLATES_FILE', __FILE__ );
 
 // Define Dir URL.
 define( 'REDUXTEMPLATES_DIR_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
