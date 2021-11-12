@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.2.1
+* Modified: Move template libraries to redux-core directory.
+
 ## 4.3.2
 * Added: Metaboxes!
 * Fixed: Incorrect return type in Options Constructor.

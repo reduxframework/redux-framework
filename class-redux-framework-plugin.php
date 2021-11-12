@@ -162,7 +162,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 				require_once dirname( __FILE__ ) . '/redux-core/framework.php';
 			}
 
-			// Including extendify sdk.
+/*			// Including extendify sdk.
 			if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
 				if ( file_exists( plugin_dir_path( REDUX_PLUGIN_FILE ) . 'extendify-sdk/loader.php' ) ) {
 					$GLOBALS['extendifySdkSourcePlugin'] = 'Redux';
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 
 			if ( file_exists( dirname( __FILE__ ) . '/redux-templates/redux-templates.php' ) ) {
 				require_once dirname( __FILE__ ) . '/redux-templates/redux-templates.php';
-			}
+			}*/
 
 			if ( isset( Redux_Core::$as_plugin ) ) {
 				Redux_Core::$as_plugin = true;

@@ -328,9 +328,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			self::$upload_url = apply_filters( 'redux/upload_url', self::$upload_url );
-
-			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
-			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
 		}
 
 		/**
@@ -356,6 +353,9 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 				self::$pro_loaded = true;
 			}
 
+			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
+			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
+
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-path.php';
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-functions-ex.php';
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-helpers.php';
@@ -367,6 +367,18 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			self::$welcome = new Redux_Welcome();
 			new Redux_Rest_Api_Builder( $this );
+
+			// Including extendify sdk.
+			if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
+				if ( file_exists( dirname( __FILE__ ) . '/extendify-sdk/loader.php' ) ) {
+					$GLOBALS['extendifySdkSourcePlugin'] = 'Redux';
+					require_once dirname( __FILE__ ) . '/extendify-sdk/loader.php';
+				}
+			}
+
+			if ( file_exists( dirname( __FILE__ ) . '/redux-templates/redux-templates.php' ) ) {
+				require_once dirname( __FILE__ ) . '/redux-templates/redux-templates.php';
+			}
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
