@@ -2,7 +2,6 @@ import { ImportButton } from '../../components/ImportButton'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { useUserStore } from '../../state/User'
-import { ExternalLink } from '@wordpress/components'
 import {
     useEffect, useState, useCallback,
 } from '@wordpress/element'
@@ -58,9 +57,6 @@ export default function Single({ template }) {
         <div className="lg:sticky top-0 bg-white flex flex-col lg:flex-row items-start justify-start lg:items-center lg:justify-between w-full max-w-screen-xl lg:border-b border-gray-300">
             <div className="text-left m-0 h-full px-6 sm:p-0">
                 <h1 className="leading-tight text-left mb-2.5 mt-0 sm:text-3xl font-normal">{template.fields.display_title}</h1>
-                <ExternalLink href={template.fields.url}>
-                    {__('Demo', 'extendify-sdk')}
-                </ExternalLink>
             </div>
             <div className={classNames({
                 'inline-flex sm:top-auto right-0 m-6 sm:m-0 sm:my-6 space-x-3': true,

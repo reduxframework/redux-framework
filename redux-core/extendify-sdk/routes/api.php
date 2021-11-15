@@ -13,6 +13,7 @@ use Extendify\ExtendifySdk\Controllers\MetaController;
 use Extendify\ExtendifySdk\Controllers\PingController;
 use Extendify\ExtendifySdk\Controllers\UserController;
 use Extendify\ExtendifySdk\Controllers\PluginController;
+use Extendify\ExtendifySdk\Controllers\SiteSettingsController;
 use Extendify\ExtendifySdk\Controllers\TaxonomyController;
 use Extendify\ExtendifySdk\Controllers\TemplateController;
 
@@ -23,7 +24,7 @@ use Extendify\ExtendifySdk\Controllers\TemplateController;
         ApiRouter::get('/plugins', [PluginController::class, 'index']);
         ApiRouter::post('/plugins', [PluginController::class, 'install']);
 
-        ApiRouter::get('/taxonomies', [TaxonomyController::class, 'index']);
+        ApiRouter::get('/taxonomies-simple', [TaxonomyController::class, 'index']);
 
         ApiRouter::post('/templates', [TemplateController::class, 'index']);
         ApiRouter::post('/templates/(?P<template_id>[a-zA-Z0-9-]+)', [TemplateController::class, 'ping']);
@@ -39,5 +40,8 @@ use Extendify\ExtendifySdk\Controllers\TemplateController;
 
         ApiRouter::get('/meta-data', [MetaController::class, 'getAll']);
         ApiRouter::post('/simple-ping', [PingController::class, 'ping']);
+
+        ApiRouter::get('/site-settings', [SiteSettingsController::class, 'show']);
+        ApiRouter::post('/site-settings', [SiteSettingsController::class, 'store']);
     }
 );

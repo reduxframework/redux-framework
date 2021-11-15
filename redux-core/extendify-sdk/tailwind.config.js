@@ -10,7 +10,7 @@
 module.exports = {
     // mode: 'jit',
     purge: ['src/**/*'],
-    important: '.extendify-sdk',
+    important: 'div.extendify-sdk',
     darkMode: false,
     theme: {
         screens: {
@@ -25,12 +25,23 @@ module.exports = {
             '3xl': '1600px',
             '4xl': '1920px',
         },
+        order: {},
         // Extend will add on to TW config, where the above will override and replace
         extend: {
+            boxShadow:{
+                'inner-sm': 'inset 0 0 0 1px rgba(0,0,0,0.08),0 3px 15px -3px rgba(0,0,0,0.025),0 0 1px rgba(0,0,0,.02)',
+                'inner-md': 'inset 0 0 0 1px rgba(0,0,0,0.16),0 3px 15px -3px rgba(0,0,0,0.025),0 0 1px rgba(0,0,0,.02)',
+                modal: ' 0 0 0 1px rgba(0,0,0,0.1),0 3px 15px -3px rgba(0,0,0,0.035),0 0 1px rgba(0,0,0,.05)',
+            },
+            maxWidth: {
+                '8xl': '98rem',
+            },
             minWidth: {
                 md2: '960px',
             },
             minHeight: {
+                20: '5rem',
+                40: '10rem',
                 60: '15rem',
             },
             fontSize: {
@@ -41,8 +52,13 @@ module.exports = {
                     lightest: '#f8fffe',
                     light: '#e7f8f5',
                     main: '#008160',
+                    'main-dark':'#05312C',
                     link: '#299875',
                     bright: '#30a850',
+                    alert: '#841010',
+                    gray: '#5F5F5F',
+                    secondary: '#CBC3F5',
+                    black: '#1e1e1e',
                 },
                 'wp-theme': {
                     // It's a Tailwind convention for the base color to use 500 then build off that
@@ -74,6 +90,12 @@ module.exports = {
                 high: '99999',
                 max: '2147483647', // Highest the browser allows - don't block WP re-auth modal though
             },
+            lineHeight: {
+                'extra-tight': '0.5',
+            },
+            ringWidth: {
+                wp: 'var(--wp-admin-border-width-focus)',
+            },
         },
     },
     variants: {
@@ -83,11 +105,10 @@ module.exports = {
             textColor: ['active'],
         },
     },
-    plugins: [
-        require('@tailwindcss/aspect-ratio'),
-    ],
+    plugins: [],
     corePlugins: {
         preflight: false,
+        animation: false,
         container: false,
     },
 }

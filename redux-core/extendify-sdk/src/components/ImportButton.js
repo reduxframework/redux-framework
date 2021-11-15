@@ -29,6 +29,7 @@ export function ImportButton({ template }) {
                 injectTemplateBlocks(activeTemplateBlocks, template)
                     .then(() => setOpen(false))
                     .then(() => render(<ExtendifyLibrary/>, document.getElementById('extendify-root')))
+                    .then(() => setTimeout(() => useGlobalStore.setState({ currentPage: 'main' }), 500))
             }, 100)
         })
     }
@@ -62,7 +63,7 @@ export function ImportButton({ template }) {
             ref={importButtonRef}
             className="button-extendify-main text-lg sm:text-2xl py-1.5 px-3 sm:py-2.5 sm:px-5"
             target="_blank"
-            href={`https://extendify.com/pricing?utm_source=${window.extendifySdkData.source}&utm_medium=library&utm_campaign=sign_up&utm_content=single_page`}
+            href={`https://extendify.com/pricing?utm_source=${window.extendifySdkData.sdk_partner}&utm_medium=library&utm_campaign=sign_up&utm_content=single_page`}
             rel="noreferrer">
             {__('Sign up now', 'extendify-sdk')}
         </a>

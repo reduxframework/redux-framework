@@ -8,10 +8,13 @@ import { Spinner, Button } from '@wordpress/components'
 import { __, sprintf } from '@wordpress/i18n'
 import { useIsMounted } from '../../hooks/helpers'
 import TemplateButton from '../../components/TemplateButton'
+import Masonry from 'react-masonry-css'
+import { ImportTemplateBlock } from '../../components/ImportTemplateBlock'
 
 export default function TemplatesList() {
     const isMounted = useIsMounted()
     const templates = useTemplatesStore(state => state.templates)
+
     const setActiveTemplate = useTemplatesStore(state => state.setActive)
     const appendTemplates = useTemplatesStore(state => state.appendTemplates)
     const [serverError, setServerError] = useState('')
@@ -104,11 +107,6 @@ export default function TemplatesList() {
     }
 
     if (nothingFound) {
-        if (searchParamsRaw?.search.length) {
-            return <h2 className="text-left">
-                {sprintf(__('No results for %s.', 'extendify-sdk'), searchParamsRaw?.search)}
-            </h2>
-        }
         return <h2 className="text-left">{__('No results found.', 'extendify-sdk')}</h2>
     }
 
@@ -118,18 +116,34 @@ export default function TemplatesList() {
         </div>
     }
 
+    const breakpointColumnsObj = {
+        default: 3,
+        1320: 2,
+        860: 1,
+        599: 2,
+        400: 1,
+    }
+
     return <>
-        <ul className="flex-grow gap-6 grid xl:grid-cols-2 2xl:grid-cols-3 pb-32 m-0">
+        <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="flex -ml-8 w-auto pb-40"
+            columnClassName="pl-8 bg-clip-padding">
             {templates.map((template) => {
-                return <li key={template.id}>
-                    <TemplateButton
+                if (searchParamsRaw.type === 'pattern') {
+                    return <ImportTemplateBlock
+                        key={template.id}
                         template={template}
-                        setActiveTemplate={() => setActiveTemplate(template)}
-                        imageLoaded={() => {}}
                     />
-                </li>
+                }
+                return <TemplateButton
+                    key={template.id}
+                    template={template}
+                    setActiveTemplate={() => setActiveTemplate(template)}
+                    imageLoaded={() => {}}
+                />
             })}
-        </ul>
+        </Masonry>
         {useTemplatesStore.getState().nextPage && <>
             <div
                 className="-translate-y-full flex flex-col h-80 items-end justify-end my-2 relative transform z-0 text"

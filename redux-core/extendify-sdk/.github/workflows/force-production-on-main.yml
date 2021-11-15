@@ -1,4 +1,4 @@
-name: Build production assets
+name: Build production and deploy
 on:
   push:
     branches:
@@ -53,9 +53,11 @@ jobs:
           npm run build
         env:
           CI: true
+
       - name: Increment version number
         run: |
           perl -i -pe 's/(Stable tag: )([\d.]+)$/$1.($2+.1)/e' readme.txt
+          perl -i -pe 's/(Version:           )([\d.]+)$/$1.($2+.1)/e' extendify-sdk.php
       - name: Commit dist folder if needed #it fails if nothing has changed so we allow an error
         run: git commit -am 'Build produciton assets'
         continue-on-error: true
@@ -64,3 +66,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+
+      - name: Deploy to library.extendify.com
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: ${{ secrets.DEPLOY_WEBHOOK }}
+          method: 'POST'

@@ -24,7 +24,7 @@ export default function SidebarSingle({ template }) {
             <a
                 className="button-extendify-main"
                 target="_blank"
-                href={`https://extendify.com/pricing?utm_source=${window.extendifySdkData.source}&utm_medium=library&utm_campaign=sign_up&utm_content=main`}
+                href={`https://extendify.com/pricing?utm_source=${window.extendifySdkData.sdk_partner}&utm_medium=library&utm_campaign=sign_up&utm_content=main`}
                 rel="noreferrer">
                 {__('Sign up today to get unlimited access', 'extendify-sdk')}
             </a>

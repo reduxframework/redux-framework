@@ -7,24 +7,32 @@ const storage = {
     setItem: async (_name, value) => await User.setData(value),
 }
 
+const isGlobalLibraryEnabled = () => window.extendifySdkData.sitesettings === null || window.extendifySdkData?.sitesettings?.state?.enabled
+
 export const useUserStore = create(persist((set, get) => ({
     email: '',
     apiKey: '',
     imports: 0,
     uuid: '',
+    sdkPartner: '',
     registration: {
         email: '',
     },
+    noticesDismissedAt: {
+        welcome: '',
+    },
     allowedImports: 0,
     entryPoint: 'not-set',
-    enabled: true,
-    hasClickedThroughWelcomePage: false,
+    enabled:isGlobalLibraryEnabled(),
     canInstallPlugins: false,
     canActivatePlugins: false,
     preferredOptions: {
         taxonomies: {},
         type: '',
         search: '',
+    },
+    preferredOptionsHistory: {
+        siteType: [],
     },
     incrementImports: () => set({ imports: get().imports + 1 }),
     canImport: () => get().apiKey
@@ -36,6 +44,19 @@ export const useUserStore = create(persist((set, get) => ({
         }
         const remaining = Number(get().allowedImports) - Number(get().imports)
         return remaining > 0 ? remaining : 0
+    },
+    updateSiteType: (value) => {
+        get().updatePreferredOption('tax_categories', value)
+        if (!value || value === 'Unknown') return
+
+        const history = new Set([value, ...get().preferredOptionsHistory.siteType])
+        set({
+            preferredOptionsHistory: Object.assign(
+                {}, get().preferredOptionsHistory, {
+                    siteType: [...history].slice(0, 3),
+                },
+            ),
+        })
     },
     updatePreferredOption: (option, value) => {
         // If the option doesn't exist, assume it's a taxonomy

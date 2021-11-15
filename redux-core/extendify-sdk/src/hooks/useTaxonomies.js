@@ -1,9 +1,9 @@
 import { useEffect, useCallback } from '@wordpress/element'
 import { Taxonomies as TaxonomiesApi } from '../api/Taxonomies'
-import { useTemplatesStore } from '../state/Templates'
 import { useTaxonomyStore } from '../state/Taxonomies'
+import { useTemplatesStore } from '../state/Templates'
 
-export default function useTaxonomies(open) {
+export default function useTaxonomies(fetchImmediately=false) {
     const setupDefaultTaxonomies = useTemplatesStore(state => state.setupDefaultTaxonomies)
     const setTaxonomies = useTaxonomyStore(state => state.setTaxonomies)
     const fetchTaxonomies = useCallback(async () => {
@@ -15,11 +15,11 @@ export default function useTaxonomies(open) {
                 taxFiltered[key] = tax[key]
                 return taxFiltered
             }, {})
-        setupDefaultTaxonomies(tax)
         setTaxonomies(tax)
-    }, [setupDefaultTaxonomies, setTaxonomies])
+        setupDefaultTaxonomies()
+    }, [setTaxonomies, setupDefaultTaxonomies])
 
     useEffect(() => {
-        open && fetchTaxonomies()
-    }, [fetchTaxonomies, open])
+        fetchImmediately && fetchTaxonomies()
+    }, [fetchTaxonomies, fetchImmediately])
 }

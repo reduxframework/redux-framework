@@ -5,6 +5,8 @@
 
 namespace Extendify\ExtendifySdk;
 
+use Extendify\ExtendifySdk\App;
+
 /**
  * Helper class for interacting with the user
  */
@@ -103,15 +105,21 @@ class User
             $userData['version'] = 0;
         }
 
-        // Get the current default number of imports allowed.
-        if (!isset($userData['state']['allowedImports'])) {
+        // This will update the user's allowed import allowance weekly.
+        if (!get_transient('extendifySdk_import_max_check_' . $this->user->ID) || !isset($userData['state']['allowedImports'])) {
+            set_transient('extendifySdk_import_max_check_' . $this->user->ID, time(), strtotime('1 week', 0));
             $currentImports = Http::get('/max-free-imports');
-            $userData['state']['allowedImports'] = is_numeric($currentImports) && $currentImports > 0 ? $currentImports : 3;
+            $userData['state']['allowedImports'] = is_numeric($currentImports) && $currentImports > 0 ? $currentImports : 25;
+        }
+
+        if (!$userData['state']['sdkPartner']) {
+            $userData['state']['sdkPartner'] = App::$sdkPartner;
         }
 
         $userData['state']['uuid'] = self::data('uuid');
         $userData['state']['canInstallPlugins'] = \current_user_can('install_plugins');
         $userData['state']['canActivatePlugins'] = \current_user_can('activate_plugins');
+        $userData['state']['isAdmin'] = \current_user_can('create_users');
 
         return \wp_json_encode($userData);
     }

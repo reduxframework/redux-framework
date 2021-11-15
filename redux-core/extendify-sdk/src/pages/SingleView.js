@@ -7,7 +7,7 @@ import Toolbar from './parts/Toolbar'
 
 export default function SingleView() {
     const activeTemplate = useTemplatesStore(state => state.activeTemplate)
-    return <div className="bg-white h-full flex flex-col items-center relative shadow-xl max-w-screen-4xl mx-auto">
+    return <div className="bg-white h-full flex flex-col items-center relative max-w-screen-4xl mx-auto">
         <Toolbar className="w-full h-16 border-solid border-0 border-b border-gray-300 flex-shrink-0"/>
         <div className="w-full flex-grow overflow-hidden">
             <a href="#extendify-templates" className="sr-only focus:not-sr-only focus:text-blue-500">

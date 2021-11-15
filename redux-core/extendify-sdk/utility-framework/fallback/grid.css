@@ -1,0 +1,140 @@
+/* Classic themes use an inner [class*="_inner-container"] that our utilities cannot directly target, so we need to do so with a few */
+.ext .ext-grid > [class*="_inner-container"] {
+    /* no suggestion */
+    display: grid;
+}
+
+/* Unhinge grid for container blocks in classic themes, and < 5.9 */
+.ext > [class*="_inner-container"] > .ext-grid:not([class*="columns"]),
+.ext > [class*="_inner-container"] > .wp-block > .ext-grid:not([class*="columns"]) {
+    /* no suggestion */
+    display: initial !important;
+}
+
+/* Grid Columns */
+.ext .ext-grid-cols-1 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-2 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-3 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-4 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-5 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-6 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-7 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-8 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-9 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-10 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(10, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-11 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(11, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-12 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-13 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: repeat(13, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-cols-none > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-columns: none !important;
+}
+
+/* Grid Rows */
+.ext .ext-grid-rows-1 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-rows-2 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-rows-3 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-rows-4 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-rows-5 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: repeat(5, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-rows-6 > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: repeat(6, minmax(0, 1fr)) !important;
+}
+
+.ext .ext-grid-rows-none > [class*="_inner-container"] {
+    /* no suggestion */
+    grid-template-rows: none !important;
+}
+
+/* Align */
+.ext .ext-items-start > [class*="_inner-container"] {
+    align-items: flex-start !important;
+}
+
+.ext .ext-items-end > [class*="_inner-container"] {
+    align-items: flex-end !important;
+}
+
+.ext .ext-items-center > [class*="_inner-container"] {
+    align-items: center !important;
+}
+
+.ext .ext-items-baseline > [class*="_inner-container"] {
+    align-items: baseline !important;
+}
+
+.ext .ext-items-stretch > [class*="_inner-container"] {
+    align-items: stretch !important;
+}

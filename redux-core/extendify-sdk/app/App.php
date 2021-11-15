@@ -56,11 +56,11 @@ class App
     public static $environment = '';
 
     /**
-     * Host plugin
+     * The partner plugin/theme
      *
      * @var string
      */
-    public static $sourcePlugin = 'Not set';
+    public static $sdkPartner = '';
 
     /**
      * Host plugin
@@ -83,8 +83,10 @@ class App
      */
     public function __construct()
     {
-        if (isset($GLOBALS['extendifySdkSourcePlugin'])) {
-            self::$sourcePlugin = $GLOBALS['extendifySdkSourcePlugin'];
+        // Set the "partner" plugin/theme here with a fallback to support the previous plugin implementation.
+        self::$sdkPartner = isset($GLOBALS['extendify_sdk_partner']) ? $GLOBALS['extendify_sdk_partner'] : '';
+        if (!self::$sdkPartner && isset($GLOBALS['extendifySdkSourcePlugin'])) {
+            self::$sdkPartner = $GLOBALS['extendifySdkSourcePlugin'];
         }
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents

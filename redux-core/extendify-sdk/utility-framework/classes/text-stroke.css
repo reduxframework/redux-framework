@@ -1,0 +1,14 @@
+.text-stroke {
+	-webkit-text-stroke-width: var(--wp--custom--typography--text-stroke-width, 2px );
+	-webkit-text-stroke-color: var(--wp--preset--color--background);
+}
+
+.text-stroke--primary {
+	-webkit-text-stroke-width: var(--wp--custom--typography--text-stroke-width, 2px );
+	-webkit-text-stroke-color: var(--wp--preset--color--primary);
+}
+
+.text-stroke--secondary {
+	-webkit-text-stroke-width: var(--wp--custom--typography--text-stroke-width, 2px );
+	-webkit-text-stroke-color: var(--wp--preset--color--secondary);
+}

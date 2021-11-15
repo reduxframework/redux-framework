@@ -1,6 +1,7 @@
 import create from 'zustand'
+import { persist } from 'zustand/middleware'
 
-export const useTaxonomyStore = create((set, get) => ({
+export const useTaxonomyStore = create(persist((set, get) => ({
     taxonomies: {},
     openedTaxonomies: [],
     setTaxonomies: (taxonomies) => set({
@@ -13,4 +14,6 @@ export const useTaxonomyStore = create((set, get) => ({
             openedTaxonomies: add ? [...opened, tax] : [...opened.filter(t => t != tax)],
         })
     },
+}), {
+    name: 'extendify-taxonomies',
 }))

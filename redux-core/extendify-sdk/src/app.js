@@ -1,7 +1,8 @@
 import ExtendifyLibrary from './ExtendifyLibrary'
 import { render } from '@wordpress/element'
 import { useWantedTemplateStore } from './state/Importing'
-import { injectTemplate } from './util/templateInjection'
+import { injectTemplateBlocks } from './util/templateInjection'
+import { rawHandler } from '@wordpress/blocks'
 import './buttons'
 import './listeners'
 
@@ -20,7 +21,7 @@ window._wpLoadBlockEditor && window.wp.domReady(() => {
     // fix a bug where imports would go from 3->0.
     if (useWantedTemplateStore.getState().importOnLoad) {
         const template = useWantedTemplateStore.getState().wantedTemplate
-        setTimeout(() => { injectTemplate(template) }, 0)
+        setTimeout(() => { injectTemplateBlocks(rawHandler({ HTML: template.fields.code }), template) }, 0)
     }
 
     // Reset template state after checking if we need an import

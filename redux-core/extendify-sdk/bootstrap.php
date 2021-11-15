@@ -4,6 +4,8 @@
  */
 
 use Extendify\ExtendifySdk\Admin;
+use Extendify\ExtendifySdk\Frontend;
+use Extendify\ExtendifySdk\Shared;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
@@ -18,6 +20,8 @@ if (is_readable(EXTENDIFYSDK_PATH . 'vendor/autoload.php')) {
 }
 
 $extendifysdkAdmin = new Admin();
+$extendifysdkFrontend = new Frontend();
+$extendifysdkShared = new Shared();
 
 require EXTENDIFYSDK_PATH . 'routes/api.php';
 require EXTENDIFYSDK_PATH . 'editorplus/EditorPlus.php';
