@@ -16,7 +16,6 @@ if (!defined('ABSPATH')) {
  */
 class TaxonomyController
 {
-
     /**
      * Return all taxonomies
      *
@@ -24,7 +23,7 @@ class TaxonomyController
      */
     public static function index()
     {
-        $response = Http::get('/airtable-taxonomies', []);
+        $response = Http::get('/airtable-taxonomies-simple', []);
         return new \WP_REST_Response($response);
     }
 }

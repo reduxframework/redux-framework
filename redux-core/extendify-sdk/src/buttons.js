@@ -1,39 +1,46 @@
 import { __ } from '@wordpress/i18n'
-import { renderToString } from '@wordpress/element'
+import { renderToString, render } from '@wordpress/element'
 import { registerPlugin } from '@wordpress/plugins'
 import { openModal } from './util/general'
 import { PluginSidebarMoreMenuItem } from '@wordpress/edit-post'
-import { User } from './api/User'
+import { Icon } from '@wordpress/icons'
+import { brandMark } from './components/icons/'
+import LibraryAccessModal from './components/LibraryAccessModal'
 
 const openLibrary = (event) => {
     openModal(event.target.closest('[data-extendify-identifier]')?.dataset?.extendifyIdentifier)
 }
 
 // This returns true if the user object is null (Library never opened), or if it's enabled in the user settings
-const isLibraryEnabled = () => window.extendifySdkData.user === null || window.extendifySdkData?.user?.state?.enabled
+const isAdmin = () => window.extendifySdkData.user === null || window.extendifySdkData?.user?.state?.isAdmin
+const isGlobalLibraryEnabled = () => window.extendifySdkData.sitesettings === null || window.extendifySdkData?.sitesettings?.state?.enabled
+const isLibraryEnabled = () => window.extendifySdkData.user === null ? isGlobalLibraryEnabled() : window.extendifySdkData?.user?.state?.enabled
 
-const mainButton = <div id="extendify-templates-inserter">
+const mainButton = <div id="extendify-templates-inserter" className="extendify-sdk">
     <button
-        style="background:#D9F1EE;color:#1e1e1e;border:1px solid #949494;font-weight:bold;font-size:14px;padding:8px;margin-right:8px"
+        style="background:#D9F1EE;color:#1e1e1e;border:1px solid #949494 !important;font-weight:bold;font-size:14px;padding:8px;margin-right:8px"
         type="button"
         data-extendify-identifier="main-button"
         id="extendify-templates-inserter-btn"
         className="components-button">
-        <svg style="margin-right:0.5rem" width="20" height="20" viewBox="0 0 103 103" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect y="25.75" width="70.8125" height="77.25" fill="#000000"/>
-            <rect x="45.0625" width="57.9375" height="57.9375" fill="#37C2A2"/>
-        </svg>
+        <Icon 
+            icon={ brandMark } 
+            size={ 24 } 
+            className="-ml-1 mr-1" />
         {__('Library', 'extendify-sdk')}
     </button>
 </div>
 
 // Add the MAIN button when Gutenberg is available and ready
 window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
+
     setTimeout(() => {
-        // Redundant extra check added because of a bug where the above check wasn't working
-        if (!isLibraryEnabled()) {
+
+        if(!isGlobalLibraryEnabled() && !isAdmin()){
             return
         }
+
+        // Redundant extra check added because of a bug where the above check wasn't working
         if (document.getElementById('extendify-templates-inserter-btn')) {
             return
         }
@@ -42,6 +49,9 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
         }
         document.querySelector('.edit-post-header-toolbar').insertAdjacentHTML('beforeend', renderToString(mainButton))
         document.getElementById('extendify-templates-inserter-btn').addEventListener('click', openLibrary)
+        if (!isLibraryEnabled()) {
+            document.getElementById('extendify-templates-inserter-btn').classList.add('invisible')
+        }
     }, 0)
 })
 
@@ -49,7 +59,7 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
 window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
     setTimeout(() => {
         // Redundant extra check added because of a bug where the above check wasn't working
-        if (!isLibraryEnabled()) {
+        if(!isGlobalLibraryEnabled() && !isAdmin()){
             return
         }
         if (!document.querySelector('[id$=patterns-view]')) {
@@ -72,42 +82,22 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
     }, 0)
 })
 
-// The right dropdown side menu
-const SideMenuButton = () => <PluginSidebarMoreMenuItem
-    data-extendify-identifier="sidebar-button"
-    onClick={openLibrary}
-    icon={
-        <span className="components-menu-items__item-icon">
-            <svg width="20" height="20" viewBox="0 0 103 103" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect y="25.75" width="70.8125" height="77.25" fill="#000000"/>
-                <rect x="45.0625" width="57.9375" height="57.9375" fill="#37C2A2"/>
-            </svg>
-        </span>
-    }
->
-    {__('Library', 'extendify-sdk')}
-</PluginSidebarMoreMenuItem>
-window._wpLoadBlockEditor && isLibraryEnabled() && registerPlugin('extendify-temps-more-menu-trigger', {
-    render: SideMenuButton,
-})
-
 // This will add a button to enable or disable the library button
-const LibraryEnableDisable = () => <PluginSidebarMoreMenuItem
-    onClick={async () => {
-        // This works even when the Library hasn't been opened yet
-        // because User.getData() will build a barebones User object
-        let userData = await User.getData()
-        userData = JSON.parse(userData)
-        userData.state.enabled = !isLibraryEnabled()
-        await User.setData(JSON.stringify(Object.assign({}, userData)))
-        location.reload()
-    }}
-    icon={<></>}
->
-    {isLibraryEnabled()
-        ? __('Disable Extendify', 'extendify-sdk')
-        : __('Enable Extendify', 'extendify-sdk')}
-</PluginSidebarMoreMenuItem>
+const LibraryEnableDisable = () => {
+
+    function setOpenSiteSettingsModal(){
+        const util = document.getElementById('extendify-util')
+        render(<LibraryAccessModal/>, util)
+    }
+
+    return <>
+        <PluginSidebarMoreMenuItem
+            onClick={setOpenSiteSettingsModal}
+            icon={ <Icon icon={ brandMark } size={ 24 } /> }
+        >  { __('Extendify', 'extendify-sdk') }
+        </PluginSidebarMoreMenuItem>
+    </>
+}
 
 // Load this button always, which is used to enable or disable
 window._wpLoadBlockEditor && registerPlugin('extendify-settings-enable-disable', {

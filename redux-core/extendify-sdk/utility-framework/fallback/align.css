@@ -1,0 +1,5 @@
+/* Remove odd spacing some themes may apply to inner blocks */
+.ext .wp-block[data-align="wide"] {
+    /* no suggestion */
+    @apply ext-my-0 !important;
+}

@@ -1,0 +1,19 @@
+.is-style-angled {
+    /* no suggestion */
+    @apply ext-items-center ext-justify-end;
+}
+
+.is-style-angled .wp-block-cover__image-background,
+.is-style-angled .wp-block-cover__video-background {
+    /* no suggestion */
+    clip-path: polygon(0 0, 30% 0%, 50% 100%, 0% 100%);
+    z-index: 1;
+}
+
+@screen tablet {
+    .is-style-angled .wp-block-cover__image-background,
+    .is-style-angled .wp-block-cover__video-background {
+        /* no suggestion */
+        clip-path: polygon(0 0, 55% 0%, 65% 100%, 0% 100%);
+    }
+}

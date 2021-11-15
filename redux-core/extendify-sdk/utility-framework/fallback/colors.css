@@ -1,0 +1,51 @@
+.has-foreground-color {
+    /* no suggestion */
+    color: var(--wp--preset--color--foreground, #000) !important;
+}
+
+.has-foreground-background-color {
+    /* no suggestion */
+    background-color: var(--wp--preset--color--foreground, #000) !important;
+}
+
+.has-background-color {
+    /* no suggestion */
+    color: var(--wp--preset--color--background, #fff) !important;
+}
+
+.has-background-background-color {
+    /* no suggestion */
+    background-color: var(--wp--preset--color--background, #fff) !important;
+}
+
+.has-primary-color {
+    /* no suggestion */
+    color: var(--wp--preset--color--primary, #4B5563) !important;
+}
+
+.has-primary-background-color {
+    /* no suggestion */
+    background-color: var(--wp--preset--color--primary, #4B5563) !important;
+}
+
+.has-secondary-color {
+    /* no suggestion */
+    color: var(--wp--preset--color--secondary, #9CA3AF) !important;
+}
+
+.has-secondary-background-color {
+    /* no suggestion */
+    background-color: var(--wp--preset--color--secondary, #9CA3AF) !important;
+}
+
+/* Ensure themes that target specific elements use the right colors */
+.ext.has-text-color p,
+.ext.has-text-color h1,
+.ext.has-text-color h2,
+.ext.has-text-color h3,
+.ext.has-text-color h4,
+.ext.has-text-color h5,
+.ext.has-text-color h6 {
+    /* no suggestion */        
+    color: currentColor;
+}

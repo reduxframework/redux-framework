@@ -43,3 +43,11 @@ export function getPluginDescription(plugin) {
     }
     return plugin
 }
+
+export function getTaxonomyName(key) {
+    switch (key) {
+        case 'tax_categories': return 'Site Type'
+        case 'tax_pattern_types': return 'Content'
+    }
+    return key.replace('tax_', '').replace(/_/g , ' ').replace(/\b\w/g, l => l.toUpperCase())
+}

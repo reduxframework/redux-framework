@@ -1,0 +1,7 @@
+.has-gigantic-font-size,
+.editor-styles-wrapper .has-gigantic-font-size.wp-block {
+    /* no suggestion */
+    /* Have to be specific for how Neve targets headings */
+    --fallback-size: clamp(var(--wp--preset--font-size--huge, 22px), calc(1rem + var(--wp--custom--typography--gigantic--preferred, 5vw)), var(--wp--preset--font-size--huge, 42px) * 2 );
+    font-size: var( --wp--preset--font-size--gigantic, var(--fallback-size ) );
+}

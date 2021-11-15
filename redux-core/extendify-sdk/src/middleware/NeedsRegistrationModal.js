@@ -2,9 +2,7 @@ import { __ } from '@wordpress/i18n'
 import {
     Modal, Button, ButtonGroup,
 } from '@wordpress/components'
-import {
-    render, useEffect, useRef,
-} from '@wordpress/element'
+import { render, useRef } from '@wordpress/element'
 import { useUserStore } from '../state/User'
 import { useState } from '@wordpress/element'
 import { User as UserApi } from '../api/User'
@@ -22,12 +20,6 @@ export default function NeedsRegistrationModal({ finished }) {
         finished()
     }
 
-    useEffect(() => {
-        UserApi.getMeta('user_email')
-            .then((value) => setEmail(value ?? ''))
-        submitRef.current.focus()
-    }, [])
-
     return <Modal
         className="extendify-sdk"
         title={__('One last step...', 'extendify-sdk')}
@@ -39,7 +31,6 @@ export default function NeedsRegistrationModal({ finished }) {
             <div className="relative w-full max-w-xs">
                 <input
                     id="extendify-email-register"
-                    value={email}
                     required
                     onChange={(event) => setEmail(event.target.value)}
                     type="text"
@@ -66,7 +57,7 @@ export default function NeedsRegistrationModal({ finished }) {
 export function check() {
     return {
         id: 'NeedsRegistrationModal',
-        pass: (useUserStore.getState().registration?.email || useUserStore.getState().apiKey),
+        pass: (Boolean(useUserStore.getState().registration?.email || useUserStore.getState().apiKey)),
         allow() {},
         deny() {
             return new Promise((finished) => {

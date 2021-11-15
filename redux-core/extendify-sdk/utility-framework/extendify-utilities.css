@@ -1,0 +1,60 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './classes/clip-path';
+@import './classes/columns';
+@import './classes/direction';
+@import './classes/inline-list';
+@import './classes/misc';
+@import './classes/text-stroke';
+
+@import './classes/editor/no-caption';
+@import './classes/editor/no-inserter';
+@import './classes/editor/no-resize';
+@import './classes/editor/pointer-events';
+
+@import './block-styles/cover-angled';
+
+@import './fallback/align';
+@import './fallback/colors';
+@import './fallback/font-sizes';
+@import './fallback/grid';
+@import './fallback/group';
+@import './fallback/image';
+
+
+body {
+    /* no suggestion */
+    /* We need to abstract this out of tailwind.config because clamp doesnt translate with negative margins */
+    --extendify--spacing--large: var(--wp--custom--spacing--large, clamp(2em, 8vw, 8em));
+}
+
+/* Astra */
+.ast-separate-container .ext .block-editor-block-list__layout {
+    /* no suggestion */
+    @apply ext-p-0 !important;
+}
+
+/* Twenty Twenty One */
+.ext [data-block].wp-block-buttons .wp-block-button {
+    @apply ext-my-0;
+}
+
+.ext [data-block].wp-block-buttons .wp-block-button:first-child {
+    /* no suggestion */
+    @apply ext-mt-0 ext-mb-base !important;
+}
+
+/* Twenty Twenty adds a lot of margin automatically to blocks. We only want our own margin added to our patterns. */
+.ext .wp-block-group__inner-container figure.wp-block-gallery.alignfull  {
+     /* no suggestion */
+     margin-top: unset;
+     margin-bottom: unset;
+}
+
+/* Ensure no funky business is assigned to alignwide */
+.ext .alignwide {
+    /* no suggestion */
+    @apply ext-mx-auto !important;
+}

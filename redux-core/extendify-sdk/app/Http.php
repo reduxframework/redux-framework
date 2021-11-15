@@ -60,10 +60,13 @@ class Http
         $this->baseUrl = $request->get_header('x_extendify_local_mode') !== 'false' ? App::$config['api']['local'] : $this->baseUrl;
 
         $this->data = [
+            'wp_language' => \get_locale(),
+            'wp_theme' => \get_option('template'),
             'mode' => App::$environment,
             'uuid' => User::data('uuid'),
             'sdk_version' => App::$version,
-            'wp_plugins' => $request->get_method() === 'POST' ? array_keys(\get_plugins()) : [],
+            'wp_active_plugins' => $request->get_method() === 'POST' ? \get_option('active_plugins') : [],
+            'sdk_partner' => App::$sdkPartner,
         ];
 
         $this->headers = [
