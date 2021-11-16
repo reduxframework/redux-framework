@@ -328,6 +328,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			self::$upload_url = apply_filters( 'redux/upload_url', self::$upload_url );
+
+			self::load_template_libraries();
 		}
 
 		/**
@@ -344,29 +346,13 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		}
 
 		/**
-		 * Autoregister run.
+		 * Load Redux and Extendify template libraries.
 		 *
-		 * @throws Exception Comment.
+		 * @return void
 		 */
-		private function includes() {
-			if ( class_exists( 'Redux_Pro' ) && isset( Redux_Pro::$dir ) ) {
-				self::$pro_loaded = true;
-			}
-
+		private static function load_template_libraries(){
 			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
 			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
-
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-path.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-functions-ex.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-helpers.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-enable-gutenberg.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-instances.php';
-			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/classes' );
-			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/welcome' );
-			spl_autoload_register( array( $this, 'register_classes' ) );
-
-			self::$welcome = new Redux_Welcome();
-			new Redux_Rest_Api_Builder( $this );
 
 			// Including extendify sdk.
 			if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
@@ -379,6 +365,29 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			if ( file_exists( dirname( __FILE__ ) . '/redux-templates/redux-templates.php' ) ) {
 				require_once dirname( __FILE__ ) . '/redux-templates/redux-templates.php';
 			}
+		}
+
+		/**
+		 * Autoregister run.
+		 *
+		 * @throws Exception Comment.
+		 */
+		private function includes() {
+			if ( class_exists( 'Redux_Pro' ) && isset( Redux_Pro::$dir ) ) {
+				self::$pro_loaded = true;
+			}
+
+			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-path.php';
+			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-functions-ex.php';
+			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-helpers.php';
+			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-enable-gutenberg.php';
+			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-instances.php';
+			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/classes' );
+			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/welcome' );
+			spl_autoload_register( array( $this, 'register_classes' ) );
+
+			self::$welcome = new Redux_Welcome();
+			new Redux_Rest_Api_Builder( $this );
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
