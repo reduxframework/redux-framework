@@ -81,4 +81,4 @@ redux-templates/classes/library.json
 local_developer.txt
 
 # Keep extendify SDK build directory
-!/extendify-sdk/public/build
+!/redux-core/extendify-sdk/public/build
