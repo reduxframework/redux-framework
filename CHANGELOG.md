@@ -1,7 +1,9 @@
 # Redux Changelog
 
-## 4.3.2.1
+## 4.3.3
 * Modified: Move template libraries to redux-core directory.
+* Modified: Update to the Extendify template library.
+* Release date: November 16, 2021
 
 ## 4.3.2
 * Added: Metaboxes!
