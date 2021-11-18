@@ -92,7 +92,7 @@
 * Modified: Redux Pro no longer required for automatic Google font updates.
 * Modified: Rename Parsedown class for the raw field to avoid conflicts with other plugins.
 * Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
-* 
+
 ## 4.1.29
 * Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
 * Fixed: Index error in the image_select field.

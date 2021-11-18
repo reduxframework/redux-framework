@@ -56,15 +56,15 @@ Redux::set_section(
 				// Can be set to false to allow any media type, or can also be set to any mime type.
 				'mode'       => false,
 
-				'desc'     => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
+				'desc'       => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
+				'subtitle'   => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 			),
 			array(
 				'id'           => 'opt-media-filter',
 				'type'         => 'media',
 				'url'          => true,
 				'title'        => esc_html__( 'Media w/ URL', 'your-textdomain-here' ),
-				'compiler'     => 'true',
+				'compiler'     => true,
 				'desc'         => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
 				'subtitle'     => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 				'preview_size' => 'full',

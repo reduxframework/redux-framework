@@ -59,7 +59,6 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 				'preview'        => false,
 				'preview_height' => '150px',
 				'transparent'    => true,
-				'alpha'          => false,
 				'gradient-type'  => false,
 				'gradient-reach' => false,
 				'gradient-angle' => false,

@@ -1,10 +1,10 @@
 <?php
 /**
- * Redux Pro Color Palette Sample config.
+ * Redux Color Palette Sample config.
  *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,7 +13,7 @@ Redux::set_section(
 	$opt_name,
 	array(
 		'title'      => esc_html__( 'Color Palette', 'your-textdomain-here' ),
-		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-fields/palette-color.html" target="_blank">https://devs.redux.io/core-fields/palette-color.html</a>',
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-fields/color-palette.html" target="_blank">https://devs.redux.io/core-fields/palette-color.html</a>',
 		'id'         => 'color-palette',
 		'subsection' => true,
 		'fields'     => array(
@@ -47,7 +47,7 @@ Redux::set_section(
 				'id'       => 'opt-color-palette-mui-all',
 				'type'     => 'color_palette',
 				'title'    => esc_html__( 'Color Palette Control', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'All Material Dedign Colors.', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'All Material Design Colors.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#F44336',
 				'options'  => array(
@@ -59,7 +59,7 @@ Redux::set_section(
 				'id'       => 'opt-color-palette-mui-primary',
 				'type'     => 'color_palette',
 				'title'    => esc_html__( 'Color Palette Control', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'Primary Material Dedign Colors.', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'Primary Material Design Colors.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#000000',
 				'options'  => array(
@@ -73,7 +73,7 @@ Redux::set_section(
 				'id'       => 'opt-color-palette-mui-red',
 				'type'     => 'color_palette',
 				'title'    => esc_html__( 'Color Palette Control', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'Red Material Dedign Colors.', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'Red Material Design Colors.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#FF1744',
 				'options'  => array(
@@ -85,7 +85,7 @@ Redux::set_section(
 				'id'       => 'opt-color-palette-mui-a100',
 				'type'     => 'color_palette',
 				'title'    => esc_html__( 'Color Palette Control', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'A100 Material Dedign Colors.', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'A100 Material Design Colors.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => '#FF80AB',
 				'options'  => array(

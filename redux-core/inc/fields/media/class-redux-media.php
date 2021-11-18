@@ -37,7 +37,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 				'width'     => '',
 				'height'    => '',
 				'thumbnail' => '',
-				'filter' => array(
+				'filter'    => array(
 					'grayscale'  => array(
 						'checked' => false,
 						'value'   => 0,
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 				'placeholder'  => esc_html__( 'No media selected', 'redux-framework' ),
 				'readonly'     => true,
 				'class'        => '',
-				'filter' => array(
+				'filter'       => array(
 					'grayscale'  => false,
 					'blur'       => false,
 					'sepia'      => false,
