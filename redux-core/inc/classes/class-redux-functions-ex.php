@@ -301,7 +301,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			$theme_paths = array_unique( $theme_paths );
 			$file_path   = self::wp_normalize_path( $file );
 
-			$filename = explode( '\\', $file );
+			$filename = explode( DIRECTORY_SEPARATOR, $file );
 
 			end( $filename );
 

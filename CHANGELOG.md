@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.3.1
+* Fixed: CSS and JS not loading when embedding Redux due to malformed path.
+
 ## 4.3.3
 * Modified: Move template libraries to redux-core directory.
 * Modified: Update to the Extendify template library.
