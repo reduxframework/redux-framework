@@ -4,13 +4,15 @@
 @tailwind utilities;
 
 .extendify-sdk {
-    --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: transparent;
     --tw-ring-color: var(--wp-admin-theme-color);
 }
 
-.extendify-sdk *, .extendify-sdk *:after, .extendify-sdk *:before {
+.extendify-sdk *,
+.extendify-sdk *:after,
+.extendify-sdk *:before {
     box-sizing: border-box;
     border: 0 solid #e5e7eb;
 }
@@ -57,19 +59,23 @@
 }
 
 /* A shim to ensure live previews w/o iframes display properly */
-.block-editor-block-preview__content .block-editor-block-list__layout.is-root-container > .ext {
+.block-editor-block-preview__content
+    .block-editor-block-list__layout.is-root-container
+    > .ext {
     @apply max-w-none;
 }
 
 /* Ensure our patterns display fullwidth on old themes + < 5.9 */
-.block-editor-block-list__layout.is-root-container .ext.block-editor-block-list__block  {
-     @apply max-w-full;
+.block-editor-block-list__layout.is-root-container
+    .ext.block-editor-block-list__block {
+    @apply max-w-full;
 }
 
 .extendify-sdk .block-editor-block-preview__container {
     /* no important */
     @apply opacity-0;
-    animation: extendifyOpacityIn 200ms cubic-bezier(0.694, 0, 0.335, 1) forwards 0ms;
+    animation: extendifyOpacityIn 200ms cubic-bezier(0.694, 0, 0.335, 1)
+        forwards 0ms;
 }
 
 /* Remove excess margin for top-level patterns on < 5.9 */
@@ -80,19 +86,47 @@
 }
 
 /* Remove excess margin for top-level patterns on 5.9+ */
-.editor-styles-wrapper:not(.block-editor-writing-flow) > .is-root-container :where(.wp-block)[data-align=full] {
-        @apply my-0 !important;
+.editor-styles-wrapper:not(.block-editor-writing-flow)
+    > .is-root-container
+    :where(.wp-block)[data-align="full"] {
+    @apply my-0 !important;
 }
 
 @keyframes extendifyOpacityIn {
-    0% { opacity: 0 }
-    100% { opacity: 1 }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .extendify-sdk .with-light-shadow::after {
-    content: '';
+    content: "";
     @apply absolute inset-0 border-0 shadow-inner-sm;
 }
 .extendify-sdk .with-light-shadow:hover::after {
     @apply shadow-inner-md;
+}
+
+/* Style contentType/pageType control in sidebar */
+.components-panel__body.ext-type-control .components-panel__body-toggle {
+    @apply pl-0 pr-0;
+}
+
+.components-panel__body.ext-type-control .components-panel__body-title {
+    @apply m-0 border-b-0;
+}
+
+.components-panel__body.ext-type-control
+    .components-panel__body-title
+    .components-button {
+    @apply m-0 border-b-0 text-extendify-gray py-2 uppercase font-medium;
+    font-size: 11px; /* To match exactly from core UI */
+}
+
+.components-panel__body.ext-type-control
+    .components-button
+    .components-panel__arrow {
+    @apply right-0 text-extendify-gray;
 }

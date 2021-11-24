@@ -7,9 +7,14 @@ const storage = {
     setItem: async (_name, value) => await SiteSettings.setData(value),
 }
 
-export const useSiteSettingsStore = create(persist(() => ({
-    enabled: true,
-}), {
-    name: 'extendify-sitesettings',
-    getStorage: () => storage,
-}))
+export const useSiteSettingsStore = create(
+    persist(
+        () => ({
+            enabled: true,
+        }),
+        {
+            name: 'extendify-sitesettings',
+            getStorage: () => storage,
+        },
+    ),
+)

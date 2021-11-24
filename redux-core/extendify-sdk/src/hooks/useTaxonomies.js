@@ -3,9 +3,11 @@ import { Taxonomies as TaxonomiesApi } from '../api/Taxonomies'
 import { useTaxonomyStore } from '../state/Taxonomies'
 import { useTemplatesStore } from '../state/Templates'
 
-export default function useTaxonomies(fetchImmediately=false) {
-    const setupDefaultTaxonomies = useTemplatesStore(state => state.setupDefaultTaxonomies)
-    const setTaxonomies = useTaxonomyStore(state => state.setTaxonomies)
+export default function useTaxonomies(fetchImmediately = false) {
+    const setupDefaultTaxonomies = useTemplatesStore(
+        (state) => state.setupDefaultTaxonomies,
+    )
+    const setTaxonomies = useTaxonomyStore((state) => state.setTaxonomies)
     const fetchTaxonomies = useCallback(async () => {
         let tax = await TaxonomiesApi.get()
         // Only allow items that have the 'tax_' prefix
@@ -15,6 +17,9 @@ export default function useTaxonomies(fetchImmediately=false) {
                 taxFiltered[key] = tax[key]
                 return taxFiltered
             }, {})
+        if (!Object.keys(tax)?.length) {
+            return
+        }
         setTaxonomies(tax)
         setupDefaultTaxonomies()
     }, [setTaxonomies, setupDefaultTaxonomies])

@@ -1,9 +1,10 @@
 # Extendify SDK
 
 Notable additional tools used:
-- [Laravel Mix](https://laravel-mix.com/) - A webpack wrapper + dev server
-- [TailwindCSS](https://tailwindcss.com/) - A utility framework for styling. Also their [Headless UI](https://headlessui.dev/) package.
-- [Zustand](https://github.com/pmndrs/zustand) - A not-opinionated state management solution
+
+-   [Laravel Mix](https://laravel-mix.com/) - A webpack wrapper + dev server
+-   [TailwindCSS](https://tailwindcss.com/) - A utility framework for styling. Also their [Headless UI](https://headlessui.dev/) package.
+-   [Zustand](https://github.com/pmndrs/zustand) - A not-opinionated state management solution
 
 <!-- TODO: Write doc on integration into other plugins -->
 
@@ -12,12 +13,13 @@ Notable additional tools used:
 To get started, run `npm ci` then `npm run watch` to start a server. It's designed to proxy a server at `wordpres.test` to `localhost:3000` but we can extend that to be customizable via an environment variable or the like.
 
 ## Project structure
+
 Below is a short description of the main files and directories of the application.
 | Directory/File | Description |
 | --- | --- |
 | `/routes/api.php` | This file contains exposed REST endpoints. It's a custom router and essentially lets you define a route pattern and assign a class to handle it. |
 | `/app` | This contains the server related files. It could even be renamed to `server` for clarity. |
-| `/app/Controllers` | This directory contains controllers for various parts of the applications, like requesting templates or plugins.  |
+| `/app/Controllers` | This directory contains controllers for various parts of the applications, like requesting templates or plugins. |
 | `/app/App.php` | This file contains information about the application. The intent is to make it dynamically generated from the readme, configs, etc |
 | `/app/ApiRouter.php` | An abstraction for making interfacing with the REST api a little less painless |
 | `/app/Admin.php` | Loads in our script and styles to the admin area |
@@ -29,15 +31,17 @@ Below is a short description of the main files and directories of the applicatio
 | `/extendify-sdk.php` | This file decides whetehr to load the applocation, then loads it. This file shoudl probably remain withoug much logic. |
 | `/bootstrap.php` | This file essentially does the loading. It could probably be combined with extendify-sdk, but it's an abstraction (and used to be much larger). |
 
-
 ## React application
+
 The React part of the application starts by injecting a few buttons through the editor. You can find these in `buttons.js`. The app itself however is comprised of the main modal view, the api, some listeners to handle button clicks, and a "middleware" type section that will cycle through checks then take action based on pass/fail (this part was written quickly so will need tweaking with every addition).
 
 TODO: complete this
 | Directory/File | Description |
 | --- | --- |
 | `/src` | This is where the components are, as well as global listeners and helpers |
+
 ## Build files and configurations
+
 Below is a just a few notes on the various build files we are currenly using
 | Directory/File | Description |
 | --- | --- |
@@ -48,4 +52,5 @@ Below is a just a few notes on the various build files we are currenly using
 | `/.eslintrc.js` | A very opinionated style guide. |
 
 ## Testing
+
 Coming soon!

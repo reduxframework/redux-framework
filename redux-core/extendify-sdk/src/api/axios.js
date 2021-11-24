@@ -27,7 +27,9 @@ function handleErrors(error) {
 
 function addDefaults(request) {
     if (request.data) {
-        request.data.remaining_imports = useUserStore.getState().remainingImports()
+        request.data.remaining_imports = useUserStore
+            .getState()
+            .remainingImports()
         request.data.entry_point = useUserStore.getState().entryPoint
         request.data.total_imports = useUserStore.getState().imports
     }
@@ -35,26 +37,34 @@ function addDefaults(request) {
 }
 
 function checkDevMode(request) {
-    request.headers['X-Extendify-Dev-Mode'] = window.location.search.indexOf('DEVMODE') > -1
-    request.headers['X-Extendify-Local-Mode'] = window.location.search.indexOf('LOCALMODE') > -1
+    request.headers['X-Extendify-Dev-Mode'] =
+        window.location.search.indexOf('DEVMODE') > -1
+    request.headers['X-Extendify-Local-Mode'] =
+        window.location.search.indexOf('LOCALMODE') > -1
     return request
 }
 
 function checkForSoftError(response) {
     if (Object.prototype.hasOwnProperty.call(response, 'soft_error')) {
-        window.dispatchEvent(new CustomEvent('extendify-sdk::softerror-encountered', {
-            detail: response.soft_error,
-            bubbles: true,
-        }))
+        window.dispatchEvent(
+            new CustomEvent('extendify-sdk::softerror-encountered', {
+                detail: response.soft_error,
+                bubbles: true,
+            }),
+        )
     }
     return response
 }
 
-Axios.interceptors.response.use((response) => checkForSoftError(findResponse(response)),
-    (error) => handleErrors(error))
+Axios.interceptors.response.use(
+    (response) => checkForSoftError(findResponse(response)),
+    (error) => handleErrors(error),
+)
 
 // TODO: setup a pipe function instead of this nested pattern
-Axios.interceptors.request.use((request) => checkDevMode(addDefaults(request)),
-    (error) => error)
+Axios.interceptors.request.use(
+    (request) => checkDevMode(addDefaults(request)),
+    (error) => error,
+)
 
 export { Axios }

@@ -19,9 +19,7 @@ export function search(string, searchString) {
     searchString = toLower(searchString)
 
     // comparing
-    return -1 !== searchString.indexOf(string)
-        ? true
-        : false
+    return -1 !== searchString.indexOf(string) ? true : false
 }
 
 export const openModal = (source) => setModalVisibility(source, 'open')
@@ -30,24 +28,33 @@ export function setModalVisibility(source = 'broken-event', state = 'open') {
     useUserStore.setState({
         entryPoint: source,
     })
-    window.dispatchEvent(new CustomEvent(`extendify-sdk::${state}-library`, {
-        detail: source,
-        bubbles: true,
-    }))
+    window.dispatchEvent(
+        new CustomEvent(`extendify-sdk::${state}-library`, {
+            detail: source,
+            bubbles: true,
+        }),
+    )
 }
 
 export function getPluginDescription(plugin) {
     switch (plugin) {
-        case 'editorplus': return 'Editor Plus'
-        case 'ml-slider': return 'MetaSlider'
+        case 'editorplus':
+            return 'Editor Plus'
+        case 'ml-slider':
+            return 'MetaSlider'
     }
     return plugin
 }
 
 export function getTaxonomyName(key) {
     switch (key) {
-        case 'tax_categories': return 'Site Type'
-        case 'tax_pattern_types': return 'Content'
+        case 'tax_categories':
+            return 'Site Type'
+        case 'tax_pattern_types':
+            return 'Content'
     }
-    return key.replace('tax_', '').replace(/_/g , ' ').replace(/\b\w/g, l => l.toUpperCase())
+    return key
+        .replace('tax_', '')
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, (l) => l.toUpperCase())
 }

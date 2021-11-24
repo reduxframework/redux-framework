@@ -21,7 +21,7 @@ if (!class_exists('edpl__EditorPlus')) {
          *
          * @var array $templates
          */
-        protected $templates;
+        protected $templates = ['editorplus-template.php' => 'Extendify Template'];
 
         /**
          * Returns an instance of this class.
@@ -42,79 +42,99 @@ if (!class_exists('edpl__EditorPlus')) {
         }
 
         /**
-         * Initializes the plugin by setting filters and administration functions.
+         * Check whether we need to use the Extendify/EP template.
          */
         public function __construct()
         {
-            if ($this->isSupported()) {
-                $this->templates = [];
+            // Maybe show the styles on the frontend.
+            add_action('wp_head', function () {
+                if ($this->useDeprecatedTemplate()) {
+                    $this->showStylesheet();
+                }
+            });
 
-                \add_action(
-                    'admin_enqueue_scripts',
-                    function () {
-                        // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion
-                        \wp_enqueue_script(
-                            'extendifysdk-editorplus-scripts',
-                            EXTENDIFYSDK_BASE_URL . 'public/editorplus/editorplus.min.js',
-                            [],
-                            false,
-                            true
-                        );
-                    }
-                );
+            // Maybe show the styles in admin.
+            add_action('admin_head', function () {
+                if ($this->useDeprecatedTemplate()) {
+                    $this->showStylesheet();
+                }
+            });
 
-                add_action('wp_head', [$this, 'enqueueStylesheet']);
-
-                add_filter(
-                    'theme_page_templates',
-                    [
-                        $this,
-                        'addNewTemplate',
-                    ]
-                );
-
-                // Add a filter to the save post to inject out template into the page cache.
-                add_filter(
-                    'wp_insert_post_data',
-                    [
-                        $this,
-                        'registerProjectTemplates',
-                    ]
-                );
-                // Add a filter to the template include to determine if the page has our template assigned and return it's path.
-                add_filter(
-                    'template_include',
-                    [
-                        $this,
-                        'viewProjectTemplate',
-                    ]
-                );
-
-                $this->templates = ['editorplus-template.php' => 'Extendify Template'];
-                add_filter(
-                    'body_class',
-                    function ($classes) {
-                        $classes[] = 'eplus_styles';
-                        return $classes;
-                    }
-                );
-
-                // Registering meta data to store editorplus generated stylesheet of template.
-                $postTypes = get_post_types(['_builtin' => false], 'names', 'and');
-                $postTypes['post'] = 'post';
-                foreach ($postTypes as $postType) {
-                    register_meta(
-                        $postType,
-                        'extendify_custom_stylesheet',
-                        [
-                            'show_in_rest' => true,
-                            'single'       => true,
-                            'type'         => 'string',
-                            'default'       => '',
-                        ]
+            // Maybe load the JS to inject the admin styles.
+            add_action(
+                'admin_enqueue_scripts',
+                function () {
+                    wp_enqueue_script(
+                        'extendifysdk-editorplus-scripts',
+                        EXTENDIFYSDK_BASE_URL . 'public/editorplus/editorplus.min.js',
+                        [],
+                        '1.0',
+                        true
                     );
                 }
-            }//end if
+            );
+
+            // Maybe add the body class name to the front end.
+            add_filter(
+                'body_class',
+                function ($classes) {
+                    if ($this->useDeprecatedTemplate()) {
+                        $classes[] = 'eplus_styles';
+                    }
+
+                    return $classes;
+                }
+            );
+
+            // Maybe add the body class name to the admin.
+            add_filter(
+                'admin_body_class',
+                function ($classes) {
+                    if ($this->useDeprecatedTemplate()) {
+                        $classes .= ' eplus_styles';
+                    }
+
+                    return $classes;
+                }
+            );
+
+            // Maybe register the template into WP.
+            add_filter('theme_page_templates', function ($templates) {
+                if (!$this->useDeprecatedTemplate()) {
+                    return $templates;
+                }
+
+                return array_merge($templates, $this->templates);
+            });
+
+            // Maybe add template to the dropdown list.
+            add_filter('wp_insert_post_data', [$this, 'registerProjectTemplates']);
+
+            // Maybe add template file path.
+            add_filter('template_include', [$this, 'viewProjectTemplate']);
+        }
+
+        /**
+         * Checks whether the page needs the EP template
+         *
+         * @return boolean
+         */
+        public function useDeprecatedTemplate()
+        {
+            $post = get_post();
+            if (isset($GLOBALS['post'])) {
+                // This will populate on the frontend.
+                $post = wp_unslash($GLOBALS['post']);
+            }
+
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if (is_admin() && isset($_GET['post'])) {
+                // This will populate on the admin.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $post = get_post(sanitize_text_field(wp_unslash($_GET['post'])));
+            }
+
+            return isset($post->ID) && get_post_meta($post->ID, '_wp_page_template', true) === 'editorplus-template.php';
         }
 
         /**
@@ -122,13 +142,9 @@ if (!class_exists('edpl__EditorPlus')) {
          *
          * @return void
          */
-        public function enqueueStylesheet()
+        public function showStylesheet()
         {
-            if (!isset($GLOBALS['post']) || !$GLOBALS['post']) {
-                return;
-            }
-
-            $post = $GLOBALS['post'];
+            $post = get_post();
             $cssContent = apply_filters(
                 'extendifysdk_template_css',
                 get_post_meta($post->ID, 'extendify_custom_stylesheet', true),
@@ -137,29 +153,10 @@ if (!class_exists('edpl__EditorPlus')) {
 
             // Note that esc_html() cannot be used because `div &gt; span` is not interpreted properly.
             // See: https://github.com/WordPress/WordPress/blob/ccdb1766aead26d4cef79badb015bb2727fefd59/wp-includes/theme.php#L1824-L1833 for reference.
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo "<style id='extendify-custom-stylesheet' type='text/css'>" . wp_strip_all_tags($cssContent) . '</style>';
-        }
-
-        /**
-         * Will check if page templates are supported in the installed wp version.
-         *
-         * @return bool
-         */
-        public function isSupported()
-        {
-            return version_compare(floatval(get_bloginfo('version')), '4.7', '>');
-        }
-
-        /**
-         * Adds our template to the page dropdown for v4.7+
-         *
-         * @param array $postsTemplates - Array of page templates.
-         * @return array
-         */
-        public function addNewTemplate($postsTemplates)
-        {
-            return array_merge($postsTemplates, $this->templates);
+            if ($cssContent) {
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo "<style id='extendify-custom-stylesheet' type='text/css'>" . wp_strip_all_tags($cssContent) . '</style>';
+            }
         }
 
         /**
@@ -171,8 +168,12 @@ if (!class_exists('edpl__EditorPlus')) {
          */
         public function registerProjectTemplates($attributes)
         {
+            if (!$this->useDeprecatedTemplate()) {
+                return $attributes;
+            }
+
             // Create the key used for the themes cache.
-            $cacheKey = 'page_templates-' . \wp_hash(get_theme_root() . '/' . get_stylesheet());
+            $cacheKey = 'page_templates-' . wp_hash(get_theme_root() . '/' . get_stylesheet());
             // Retrieve the cache list.
             // If it doesn't exist, or it's empty prepare an array.
             $templates = wp_get_theme()->get_page_templates();
@@ -198,8 +199,8 @@ if (!class_exists('edpl__EditorPlus')) {
          */
         public function viewProjectTemplate($template)
         {
-            $post = $GLOBALS['post'];
-            if (!$post) {
+            $post = get_post();
+            if (!$post || !$this->useDeprecatedTemplate()) {
                 return $template;
             }
 

@@ -9,7 +9,10 @@ export const hasPluginsActivated = async (template) => {
         allow() {},
         deny() {
             return new Promise(() => {
-                render(<ActivatePluginsModal showClose={true}/>, document.getElementById('extendify-root'))
+                render(
+                    <ActivatePluginsModal showClose={true} />,
+                    document.getElementById('extendify-root'),
+                )
             })
         },
     }

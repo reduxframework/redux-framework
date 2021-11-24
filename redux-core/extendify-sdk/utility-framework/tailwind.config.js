@@ -5,7 +5,7 @@ module.exports = {
         enabled: true,
         content: [],
         safelist: {
-            greedy: suggestions?.map(s => new RegExp(`^${s}$`)) ?? [],
+            greedy: suggestions?.map((s) => new RegExp(`^${s}$`)) ?? [],
         },
     },
     prefix: 'ext-',

@@ -7,12 +7,10 @@ export const SiteSettings = {
     setData(data) {
         const formData = new FormData()
         formData.append('data', JSON.stringify(data))
-        return api.post(
-            'site-settings', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+        return api.post('site-settings', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
             },
-        )
+        })
     },
 }
