@@ -11,9 +11,7 @@ export const Middleware = (middleware = []) => {
         async check(template) {
             for (const m of middleware) {
                 const cb = await this[`${m}`](template)
-                this.stack.push(cb.pass
-                    ? cb.allow
-                    : cb.deny)
+                this.stack.push(cb.pass ? cb.allow : cb.deny)
             }
         },
         reset() {

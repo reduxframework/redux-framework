@@ -1,4 +1,3 @@
-
 /* Use "is-style-" prefix to support adding this style to the core/list block */
 .is-style-inline-list {
     @apply ext-pl-0 !important;

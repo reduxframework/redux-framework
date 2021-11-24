@@ -172,7 +172,7 @@ class Shared
         }
 
         if ($this->theme === 'generatepress') {
-            $settings = get_option( 'generate_settings' );
+            $settings = (array) get_option( 'generate_settings', [] );
 
             if (! array_key_exists( 'background_color', $settings )) {
                 $background = '#f7f8f9';

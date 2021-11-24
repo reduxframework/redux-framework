@@ -33,10 +33,6 @@ $extendifysdkCustomStyles = get_post_meta(
     .ep-temp-container {
         margin-left: auto;
         margin-right: auto;
-        min-width: 1280px;
-    }
-    .ep-temp-container .alignfull {
-        min-width: 1280px !important;
     }
     @media(min-width: 700px) {
             .ep-temp-container [class*=extendify-] [class*=wp-block] > * {

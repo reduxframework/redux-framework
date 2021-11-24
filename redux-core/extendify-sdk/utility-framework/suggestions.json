@@ -261,6 +261,7 @@
         "clip-path--rhombus",
         "clip-path--diamond",
         "clip-path--rhombus-alt",
+        "wp-block-columns[class*=\"fullwidth-cols\"]\n",
         "tablet\\:fullwidth-cols",
         "desktop\\:fullwidth-cols",
         "direction-rtl",

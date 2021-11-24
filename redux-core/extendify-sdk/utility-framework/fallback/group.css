@@ -3,7 +3,7 @@
     @apply ext-mb-0;
 }
 
- /* For <5.9 */
+/* For <5.9 */
 .ext .wp-block-group__inner-container {
     /* no suggestion */
     @apply ext-p-0 !important;
@@ -15,22 +15,22 @@
 }
 
 /* Fallback for classic theme group blocks */
-.ext *[class*=inner-container] > .alignwide *[class*=inner-container] {
+.ext *[class*="inner-container"] > .alignwide *[class*="inner-container"] {
     /* no suggestion */
     max-width: var(--responsive--alignwide-width, 120rem);
 }
 
-.ext *[class*=inner-container] > .alignwide *[class*=inner-container] > * {
+.ext *[class*="inner-container"] > .alignwide *[class*="inner-container"] > * {
     /* no suggestion */
     @apply ext-max-w-full !important;
 }
 
-.ext *[class*=inner-container] > .alignfull *[class*=inner-container] {
+.ext *[class*="inner-container"] > .alignfull *[class*="inner-container"] {
     /* no suggestion */
     @apply ext-max-w-full;
 }
 
-.ext *[class*=inner-container] > .alignfull *[class*=inner-container] > * {
+.ext *[class*="inner-container"] > .alignfull *[class*="inner-container"] > * {
     /* no suggestion */
     @apply ext-max-w-full !important;
 }

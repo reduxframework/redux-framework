@@ -29,9 +29,7 @@ function addEditProps(settings) {
             props = existingGetEditWrapperProps(attributes)
         }
 
-        return addSaveProps(
-            props, settings, attributes,
-        )
+        return addSaveProps(props, settings, attributes)
     }
 
     return settings
@@ -46,36 +44,32 @@ const utilityClassEdit = createHigherOrderComponent((BlockEdit) => {
             return s.replace('.', '').replace(new RegExp('\\\\', 'g'), '')
         })
 
-        return <>
-            <BlockEdit {...props} />
-            {classes && (
-                <InspectorAdvancedControls>
-                    <FormTokenField
-                        label={__('Extendify Utilities', 'extendify-sdk')}
-                        tokenizeOnSpace={true}
-                        value={ classes }
-                        suggestions={suggestionList}
-                        onChange={(value) => {
-                            props.setAttributes({
-                                extUtilities: value,
-                            })
-                        }}
-                    />
-                </InspectorAdvancedControls>
-            )}
-        </>
-
+        return (
+            <>
+                <BlockEdit {...props} />
+                {classes && (
+                    <InspectorAdvancedControls>
+                        <FormTokenField
+                            label={__('Extendify Utilities', 'extendify-sdk')}
+                            tokenizeOnSpace={true}
+                            value={classes}
+                            suggestions={suggestionList}
+                            onChange={(value) => {
+                                props.setAttributes({
+                                    extUtilities: value,
+                                })
+                            }}
+                        />
+                    </InspectorAdvancedControls>
+                )}
+            </>
+        )
     }
 }, 'utilityClassEdit')
 
-function addSaveProps(
-    saveElementProps, blockType, attributes,
-) {
+function addSaveProps(saveElementProps, blockType, attributes) {
     let { className: generatedClasses } = saveElementProps
-    let {
-        extUtilities: classes,
-        className: additionalClasses,
-    } = attributes
+    let { extUtilities: classes, className: additionalClasses } = attributes
 
     if (!classes || !Object.keys(classes).length) {
         return saveElementProps
@@ -84,9 +78,12 @@ function addSaveProps(
     // EK seems to be converting string values to objects in some situations
     const normalizeAsArray = (item) => {
         switch (Object.prototype.toString.call(item)) {
-            case '[object String]': return item.split(' ')
-            case '[object Array]': return item
-            default: return []
+            case '[object String]':
+                return item.split(' ')
+            case '[object Array]':
+                return item
+            default:
+                return []
         }
     }
     const classesCombined = new Set([
@@ -95,11 +92,9 @@ function addSaveProps(
         ...normalizeAsArray(classes),
     ])
 
-    return Object.assign(
-        {},
-        saveElementProps,
-        { className: [...classesCombined].join(' ') },
-    )
+    return Object.assign({}, saveElementProps, {
+        className: [...classesCombined].join(' '),
+    })
 }
 
 addFilter(

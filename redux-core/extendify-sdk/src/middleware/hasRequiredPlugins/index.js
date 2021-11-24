@@ -9,7 +9,10 @@ export const hasRequiredPlugins = async (template) => {
         allow() {},
         deny() {
             return new Promise(() => {
-                render(<RequiredPluginsModal/>, document.getElementById('extendify-root'))
+                render(
+                    <RequiredPluginsModal />,
+                    document.getElementById('extendify-root'),
+                )
             })
         },
     }

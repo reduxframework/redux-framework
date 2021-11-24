@@ -6,7 +6,10 @@
 
 /* Unhinge grid for container blocks in classic themes, and < 5.9 */
 .ext > [class*="_inner-container"] > .ext-grid:not([class*="columns"]),
-.ext > [class*="_inner-container"] > .wp-block > .ext-grid:not([class*="columns"]) {
+.ext
+    > [class*="_inner-container"]
+    > .wp-block
+    > .ext-grid:not([class*="columns"]) {
     /* no suggestion */
     display: initial !important;
 }

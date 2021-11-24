@@ -16,8 +16,9 @@ const utilities = [
     'list-none',
     'border(-.{1})?-0',
 ]
-const withPrefix = (classes) => classes.map(c => `ext-${c}`)
-const withBreakpoints = (classes) => classes.map(c => `(${[...breakpoints, ''].join(':|')})${c}`)
+const withPrefix = (classes) => classes.map((c) => `ext-${c}`)
+const withBreakpoints = (classes) =>
+    classes.map((c) => `(${[...breakpoints, ''].join(':|')})${c}`)
 
 module.exports = {
     suggestions: withBreakpoints(withPrefix(utilities)),

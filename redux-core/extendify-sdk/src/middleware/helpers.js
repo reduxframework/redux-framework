@@ -17,11 +17,11 @@ export async function checkIfUserNeedsToInstallPlugins(template) {
     // if no dependencies are required, then this will be false automatically
     const weNeedInstalls = required.length
         ? required.filter((plugin) => {
-            // TODO: if we have better data to work with this can be more literal
-            return !installedPlugins.some((k) => {
-                return k.includes(plugin)
-            })
-        })
+              // TODO: if we have better data to work with this can be more literal
+              return !installedPlugins.some((k) => {
+                  return k.includes(plugin)
+              })
+          })
         : false
 
     return weNeedInstalls.length
@@ -43,11 +43,11 @@ export async function checkIfUserNeedsToActivatePlugins(template) {
     // if no dependencies are required, then this will be false automatically
     const weNeedActivations = required.length
         ? required.filter((plugin) => {
-            // TODO: if we have better data to work with this can be more literal
-            return !activatedPlugins.some((k) => {
-                return k.includes(plugin)
-            })
-        })
+              // TODO: if we have better data to work with this can be more literal
+              return !activatedPlugins.some((k) => {
+                  return k.includes(plugin)
+              })
+          })
         : false
 
     // if the plugins we need to have activated are not even installed, handle them elsewhere

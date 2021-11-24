@@ -5,17 +5,22 @@ import RequiredPluginsModal from '../middleware/hasRequiredPlugins/RequiredPlugi
 // use this to trigger an error from outside the application
 export const softErrorHandler = {
     register() {
-        window.addEventListener('extendify-sdk::softerror-encountered', (event) => {
-            this[camelCase(event.detail.type)](event.detail)
-        })
+        window.addEventListener(
+            'extendify-sdk::softerror-encountered',
+            (event) => {
+                this[camelCase(event.detail.type)](event.detail)
+            },
+        )
     },
     versionOutdated(error) {
-        render(<RequiredPluginsModal
-            title={error.data.title}
-            message={error.data.message}
-            buttonLabel={error.data.buttonLabel}
-            forceOpen={true}
-        />,
-        document.getElementById('extendify-root'))
+        render(
+            <RequiredPluginsModal
+                title={error.data.title}
+                message={error.data.message}
+                buttonLabel={error.data.buttonLabel}
+                forceOpen={true}
+            />,
+            document.getElementById('extendify-root'),
+        )
     },
 }

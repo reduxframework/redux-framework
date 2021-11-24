@@ -5,29 +5,28 @@ module.exports = {
         jest: true,
         node: true,
     },
-    extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended'],
+    extends: [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'prettier',
+    ],
     parserOptions: {
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
     },
-    plugins: ['react'],
+    plugins: ['react', 'prettier'],
     rules: {
-        indent: ['error', 4, { SwitchCase: 1 }],
         'require-await': 'error',
-        quotes: ['error', 'single'],
+        quotes: ['error', 'single', { avoidEscape: true }],
         'comma-dangle': ['error', 'always-multiline'],
-        'multiline-ternary': ['error', 'always-multiline'],
         'array-element-newline': ['error', 'consistent'],
         'no-constant-condition': ['error', { checkLoops: false }],
         'no-multi-spaces': ['error'],
         semi: ['error', 'never'],
         'space-in-parens': ['error', 'never'],
-        'space-unary-ops': [
-            2, {
-                words: true,
-                nonwords: false,
-                overrides: {},
-            }],
+        'key-spacing': ['error', { afterColon: true }],
+        'space-infix-ops': ['error'],
         'space-before-function-paren': [
             'error',
             {
@@ -37,16 +36,8 @@ module.exports = {
             },
         ],
         'react/react-in-jsx-scope': 'off',
-        'function-paren-newline': [
-            'error',
-            { minItems: 3 },
-        ],
         'quote-props': ['error', 'as-needed'],
-        'object-curly-spacing': ['error', 'always', { objectsInObjects: false }],
-        'no-multiple-empty-lines': [
-            'error',
-            { max: 1 },
-        ],
+        'no-multiple-empty-lines': ['error', { max: 1 }],
         'react/prop-types': 0, // TODO: Do we want this required?
         'lines-around-comment': [
             'error',
@@ -55,20 +46,6 @@ module.exports = {
                 allowBlockStart: true,
             },
         ],
-        'object-curly-newline': [
-            'error',
-            {
-                ObjectExpression: {
-                    consistent: true, multiline: true, minProperties: 3,
-                },
-                ObjectPattern: { consistent: true, multiline: true },
-                ImportDeclaration: { multiline: true, minProperties: 3 },
-                ExportDeclaration: {
-                    multiline: true,
-                    minProperties: 3,
-                },
-            },
-        ],
     },
-    settings: { react: { version: 'detect' }},
+    settings: { react: { version: 'detect' } },
 }

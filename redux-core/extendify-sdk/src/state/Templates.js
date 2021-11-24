@@ -1,25 +1,22 @@
 import create from 'zustand'
-import { templates as config } from '../config'
-import { rawHandler } from '@wordpress/blocks'
 import { useGlobalStore } from './GlobalState'
 import { useUserStore } from './User'
 import { useTaxonomyStore } from './Taxonomies'
 
-const defaultCategoryForType = (tax) => tax === 'tax_categories'
-    ? 'Unknown'
-    : useTaxonomyStore.getState()?.taxonomies[tax][0]?.term ?? undefined
+const defaultCategoryForType = (tax) =>
+    tax === 'tax_categories'
+        ? 'Unknown'
+        : useTaxonomyStore.getState()?.taxonomies[tax][0]?.term ?? undefined
 
 export const useTemplatesStore = create((set, get) => ({
     templates: [],
     skipNextFetch: false,
     fetchToken: null,
-    activeTemplate: {},
-    activeTemplateBlocks: {},
     taxonomyDefaultState: {},
     nextPage: '',
     searchParams: {
         taxonomies: {},
-        type: config.defaultType,
+        type: 'pattern',
     },
     initTemplateData() {
         set({
@@ -28,17 +25,25 @@ export const useTemplatesStore = create((set, get) => ({
         get().setupDefaultTaxonomies()
         get().updateType(useGlobalStore.getState().currentType)
     },
-    removeTemplates: () => set({
-        nextPage: '',
-        templates: [],
-    }),
-    appendTemplates: (templates) => set({
-        templates: [...new Map([...get().templates, ...templates].map(item => [item.id, item])).values()],
-    }),
+    appendTemplates: (templates) =>
+        set({
+            templates: [
+                ...new Map(
+                    [...get().templates, ...templates].map((item) => [
+                        item.id,
+                        item,
+                    ]),
+                ).values(),
+            ],
+        }),
     setupDefaultTaxonomies: () => {
         const taxonomies = useTaxonomyStore.getState().taxonomies
-        let taxonomyDefaultState = Object.entries(taxonomies).reduce((state, current) =>
-            (state[current[0]] = defaultCategoryForType(current[0]), state), {})
+        let taxonomyDefaultState = Object.entries(taxonomies).reduce(
+            (state, current) => (
+                (state[current[0]] = defaultCategoryForType(current[0])), state
+            ),
+            {},
+        )
         const tax = {}
 
         taxonomyDefaultState = Object.assign(
@@ -61,28 +66,22 @@ export const useTemplatesStore = create((set, get) => ({
             },
         })
     },
-    setActive: (template) => {
-        set({ activeTemplate: template })
-
-        // If we havea  template, we should move that that page
-        if (Object.keys(template).length > 0) {
-            useGlobalStore.setState({ currentPage: 'single' })
-        }
-
-        // This will convert the template to blocks for quick(er) injection
-        if (template?.fields?.code) {
-            set({ activeTemplateBlocks: rawHandler({ HTML: template.fields.code }) })
-        }
-    },
     updateTaxonomies: (params) => {
         const data = {}
         data.taxonomies = Object.assign(
-            {}, get().searchParams.taxonomies, params,
+            {},
+            get().searchParams.taxonomies,
+            params,
         )
         if (data?.taxonomies?.tax_categories) {
             // This is what the user "prefers", which may be used outside the library
             // which is persisted to the database, where as the global library state is in local storage
-            useUserStore.getState().updatePreferredOption('tax_categories', data?.taxonomies?.tax_categories)
+            useUserStore
+                .getState()
+                .updatePreferredOption(
+                    'tax_categories',
+                    data?.taxonomies?.tax_categories,
+                )
         }
         useGlobalStore.getState().updateCurrentTaxonomies(data?.taxonomies)
         get().updateSearchParams(data)
@@ -97,12 +96,12 @@ export const useTemplatesStore = create((set, get) => ({
             params.taxonomies = get().taxonomyDefaultState
         }
 
-        const searchParams = Object.assign(
-            {}, get().searchParams, params,
-        )
+        const searchParams = Object.assign({}, get().searchParams, params)
 
         // If the params are the same then don't update
-        if (JSON.stringify(searchParams) === JSON.stringify(get().searchParams)) {
+        if (
+            JSON.stringify(searchParams) === JSON.stringify(get().searchParams)
+        ) {
             return
         }
 

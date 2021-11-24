@@ -28,9 +28,11 @@ module.exports = {
         order: {},
         // Extend will add on to TW config, where the above will override and replace
         extend: {
-            boxShadow:{
-                'inner-sm': 'inset 0 0 0 1px rgba(0,0,0,0.08),0 3px 15px -3px rgba(0,0,0,0.025),0 0 1px rgba(0,0,0,.02)',
-                'inner-md': 'inset 0 0 0 1px rgba(0,0,0,0.16),0 3px 15px -3px rgba(0,0,0,0.025),0 0 1px rgba(0,0,0,.02)',
+            boxShadow: {
+                'inner-sm':
+                    'inset 0 0 0 1px rgba(0,0,0,0.1),0 3px 15px -3px rgba(0,0,0,0.025),0 0 1px rgba(0,0,0,.02)',
+                'inner-md':
+                    'inset 0 0 0 1px rgba(0,0,0,0.2),0 3px 15px -3px rgba(0,0,0,0.025),0 0 1px rgba(0,0,0,.02)',
                 modal: ' 0 0 0 1px rgba(0,0,0,0.1),0 3px 15px -3px rgba(0,0,0,0.035),0 0 1px rgba(0,0,0,.05)',
             },
             maxWidth: {
@@ -38,6 +40,7 @@ module.exports = {
             },
             minWidth: {
                 md2: '960px',
+                sm: '7rem',
             },
             minHeight: {
                 20: '5rem',
@@ -51,8 +54,8 @@ module.exports = {
                 extendify: {
                     lightest: '#f8fffe',
                     light: '#e7f8f5',
-                    main: '#008160',
-                    'main-dark':'#05312C',
+                    main: '#0B4A43',
+                    'main-dark': '#05312C',
                     link: '#299875',
                     bright: '#30a850',
                     alert: '#841010',
@@ -69,12 +72,12 @@ module.exports = {
                 wp: {
                     alert: {
                         yellow: '#f0b849',
-                        red:    '#cc1818',
-                        green:  '#4ab866',
+                        red: '#cc1818',
+                        green: '#4ab866',
                     },
                 },
                 gray: {
-                    50:  '#fafafa',
+                    50: '#fafafa',
                     100: '#f0f0f0',
                     150: '#eaeaea', // This wasn't a variable but I saw it on buttons
                     200: '#e0e0e0', // Used sparingly for light borders.

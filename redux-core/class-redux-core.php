@@ -357,7 +357,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			// Including extendify sdk.
 			if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
 				if ( file_exists( dirname( __FILE__ ) . '/extendify-sdk/loader.php' ) ) {
-					$GLOBALS['extendifySdkSourcePlugin'] = 'Redux';
+					$GLOBALS['extendify_sdk_partner'] = 'Redux';
 					require_once dirname( __FILE__ ) . '/extendify-sdk/loader.php';
 				}
 			}
