@@ -1872,7 +1872,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @param array $array Array to sanitize.
 		 */
 		public static function sanitize_array( array $array ): array {
-			return self::array_map_r( 'sanitize_text_field', $array );
+			return self::array_map_r( 'wp_kses_post', $array );
 		}
 
 		/**
