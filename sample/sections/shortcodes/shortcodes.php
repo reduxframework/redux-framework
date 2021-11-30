@@ -3,7 +3,7 @@
  * Redux Pro Search Sample config.
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,10 +16,8 @@ Redux::set_section(
 	$opt_name,
 	array(
 		'customizer' => false,
-		'subsection' => true,
 		'title'      => esc_html__( 'Shortcodes', 'your-textdomain-here' ),
-		// phpcs:ignore
-		// 'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/extensions/shortcodes.html" target="_blank">https://devs.redux.io/extensions/shortcodes.html</a>',
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/shortcodes.html" target="_blank">https://devs.redux.io/extensions/shortcodes.html</a>',
 		'fields'     => array(
 			array(
 				'id'         => 'sc-bloginfo',

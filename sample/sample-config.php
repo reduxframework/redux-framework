@@ -33,7 +33,6 @@ if ( is_dir( $sample_patterns_path ) ) {
 	$sample_patterns_dir = opendir( $sample_patterns_path );
 
 	if ( $sample_patterns_dir ) {
-		$sample_patterns = array();
 
 		// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition
 		while ( false !== ( $sample_patterns_file = readdir( $sample_patterns_dir ) ) ) {
@@ -508,6 +507,9 @@ Redux::set_section(
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-field.php';
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-section.php';
 
+require_once Redux_Core::$dir . '../sample/sections/search/search.php';
+require_once Redux_Core::$dir . '../sample/sections/shortcodes/shortcodes.php';
+
 // -> START Pro Fields.
 if ( class_exists( 'Redux_Pro' ) ) {
 	Redux::set_section(
@@ -530,8 +532,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/js-button.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/multi-media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/repeater.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/search.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/shortcodes.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/social-profiles.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/taxonomy.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/users.php';
