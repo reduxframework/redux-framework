@@ -69,14 +69,20 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		public function __construct( $parent ) {
 			if ( ! shortcode_exists( 'bloginfo' ) ) {
 				add_shortcode( 'bloginfo', array( $this, 'blog_info' ) );
+			} else {
+				add_shortcode( 'redux_bloginfo', array( $this, 'blog_info' ) );
 			}
 
 			if ( ! shortcode_exists( 'themeinfo' ) ) {
 				add_shortcode( 'themeinfo', array( $this, 'theme_info' ) );
+			} else {
+				add_shortcode( 'redux_themeinfo', array( $this, 'theme_info' ) );
 			}
 
 			if ( ! shortcode_exists( 'date' ) ) {
 				add_shortcode( 'date', array( $this, 'date' ) );
+			} else {
+				add_shortcode( 'redux_date', array( $this, 'date' ) );
 			}
 		}
 
