@@ -516,7 +516,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 								continue;
 							}
 
-							if ( isset( $extension::$version ) ) {
+							if ( isset($extension) && isset( $extension::$version ) ) {
 								$extensions[ $key ] = $extension::$version;
 							} elseif ( isset( $extension->version ) ) {
 								$extensions[ $key ] = $extension->version;
