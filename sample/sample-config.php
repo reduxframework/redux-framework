@@ -213,6 +213,7 @@ $args = array(
 	// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 	'database'                  => '',
 	'network_admin'             => true,
+	'search'                    => true,
 );
 
 
