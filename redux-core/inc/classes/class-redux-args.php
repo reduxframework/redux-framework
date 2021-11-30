@@ -160,6 +160,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'pro'                              => array(),
 				'font_display'                     => 'swap', // block|swap|fallback|optional.
 				'load_on_cron'                     => false,
+				'search'                           => false,
 			);
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
