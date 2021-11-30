@@ -122,11 +122,6 @@ if (!class_exists('edpl__EditorPlus')) {
         public function useDeprecatedTemplate()
         {
             $post = get_post();
-            if (isset($GLOBALS['post'])) {
-                // This will populate on the frontend.
-                $post = wp_unslash($GLOBALS['post']);
-            }
-
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if (is_admin() && isset($_GET['post'])) {
                 // This will populate on the admin.

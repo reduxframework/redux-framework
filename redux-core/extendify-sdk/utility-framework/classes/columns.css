@@ -33,17 +33,17 @@ We use it here to ensure columns blocks display well across themes.
     @apply ext-mb-0;
 }
 
-[class*="fullwidth-cols"] .wp-block-column:first-child * {
+[class*="fullwidth-cols"] .wp-block-column:first-child > * {
     /* no suggestion */
     @apply ext-mt-0;
 }
 
-[class*="fullwidth-cols"] .wp-block-column *:first-child {
+[class*="fullwidth-cols"] .wp-block-column > *:first-child {
     /* no suggestion */
     @apply ext-mt-0;
 }
 
-[class*="fullwidth-cols"] .wp-block-column *:last-child {
+[class*="fullwidth-cols"] .wp-block-column > *:last-child {
     /* no suggestion */
     @apply ext-mb-0;
 }
