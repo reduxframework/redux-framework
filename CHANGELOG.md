@@ -1,16 +1,16 @@
 # Redux Changelog
 
-## 4.3.4.2
+## 4.3.5
 * Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
 * Added: Add former premium feature: Shortcodes.  See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
-
-## 4.3.4.1
 * Fixed: #3852 - Editor in metaboxes not saving HTML.  WIll now save the same HTML posts/pages allows.
+* Fixed: Front end formatting issue with the Extendify template library.
+* Release date: December 01, 2021
 
 ## 4.3.4
 * Fixed: CSS and JS not loading when embedding Redux due to malformed path.
 * Modified: Update to the Extendify template library.
-* Release date: November, 24 2021
+* Release date: November 24, 2021
 
 ## 4.3.3
 * Modified: Move template libraries to redux-core directory.
