@@ -9,9 +9,9 @@
         "dev": "npx mix",
         "watch": "npx mix watch",
         "lint": "eslint . --ext .js",
-        "lint-fix": "eslint . --ext .js --fix && git add -A .",
+        "lint-fix": "eslint . --ext .js --fix",
         "prettier": "prettier . --check",
-        "prettier-fix": "prettier . --write && git add -A .",
+        "prettier-fix": "prettier . --write",
         "prepare": "husky install",
         "clean-build": "./bin/clean-build-files.sh"
     },
