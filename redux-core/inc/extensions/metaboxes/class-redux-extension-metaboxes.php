@@ -857,7 +857,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 							'showposts' => 1,
 						);
 
-						if ( get_posts( $args ) === $post ) {
+						if ( isset( $post ) && get_posts( $args ) === $post ) {
 							return $post[0]->ID;
 						}
 					}
