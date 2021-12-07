@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.5.1 Beta
+* Fixed: `date` shortcode without attributes producing error.
+
 ## 4.3.5
 * Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
 * Added: Add former premium feature: Shortcodes.  See Sample demo or the [docs site](https://devs.redux.io/core-extensions).

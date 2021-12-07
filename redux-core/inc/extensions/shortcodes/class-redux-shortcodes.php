@@ -90,17 +90,17 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		/**
 		 * Get shortcode data.
 		 *
-		 * @param array $atts    Attributes.
-		 * @param null  $content Content.
+		 * @param array|string $atts    Attributes.
+		 * @param string       $content Content.
 		 *
 		 * @return bool|string|void|null
 		 */
-		public function blog_info( array $atts = array(), $content = null ) {
-			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
-				if ( ! is_array( $atts ) ) {
-					$atts = array();
-				}
+		public function blog_info( $atts = array(), string $content = null ) {
+			if ( ! is_array( $atts ) ) {
+				$atts = aray();
+			}
 
+			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
 				$atts['data'] = $content;
 			}
 
@@ -144,17 +144,17 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		/**
 		 * Get theme info.
 		 *
-		 * @param array $atts    Attributes.
-		 * @param null  $content Content.
+		 * @param array|string $atts    Attributes.
+		 * @param string       $content Content.
 		 *
 		 * @return array|bool|string
 		 */
-		public function theme_info( array $atts = array(), $content = null ) {
-			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
-				if ( ! is_array( $atts ) ) {
-					$atts = array();
-				}
+		public function theme_info( array $atts = array(), string $content = null ) {
+			if ( ! is_array( $att ) ) {
+				$atts = array();
+			}
 
+			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
 				$atts['data'] = $content;
 			}
 
@@ -200,17 +200,17 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		/**
 		 * Get date info.
 		 *
-		 * @param array $atts Attributes.
-		 * @param null  $content Content.
+		 * @param array|string $atts Attributes.
+		 * @param string       $content Content.
 		 *
 		 * @return false|string
 		 */
-		public function date( array $atts = array(), $content = null ) {
-			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
-				if ( ! is_array( $atts ) ) {
-					$atts = array();
-				}
+		public function date( $atts = array(), string $content = null ) {
+			if ( ! is_array( $atts ) ) {
+				$atts = array();
+			}
 
+			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
 				$atts['data'] = $content;
 			}
 
