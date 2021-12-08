@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.5.2 Beta
+* Modified: Moved Extendify and Redux templates libraries back to root folder.
+* Modified: Removed "Gutenberg is currently disabled" notice when the Classic Editor plugin is active.
+
 ## 4.3.5.1 Beta
 * Fixed: `date` shortcode without attributes producing error.
 

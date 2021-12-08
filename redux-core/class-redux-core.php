@@ -356,7 +356,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-path.php';
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-functions-ex.php';
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-helpers.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-enable-gutenberg.php';
+			// require_once dirname( __FILE__ ) . '/inc/classes/class-redux-enable-gutenberg.php';
 			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-instances.php';
 			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/classes' );
 			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/welcome' );
