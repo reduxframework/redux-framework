@@ -328,8 +328,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			self::$upload_url = apply_filters( 'redux/upload_url', self::$upload_url );
-
-			self::load_template_libraries();
 		}
 
 		/**
@@ -343,28 +341,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			Redux_ThemeCheck::get_instance();
 
-		}
-
-		/**
-		 * Load Redux and Extendify template libraries.
-		 *
-		 * @return void
-		 */
-		private static function load_template_libraries(){
-			self::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
-			self::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
-
-			// Including extendify sdk.
-			if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
-				if ( file_exists( dirname( __FILE__ ) . '/extendify-sdk/loader.php' ) ) {
-					$GLOBALS['extendify_sdk_partner'] = 'Redux';
-					require_once dirname( __FILE__ ) . '/extendify-sdk/loader.php';
-				}
-			}
-
-			if ( file_exists( dirname( __FILE__ ) . '/redux-templates/redux-templates.php' ) ) {
-				require_once dirname( __FILE__ ) . '/redux-templates/redux-templates.php';
-			}
 		}
 
 		/**
