@@ -24,7 +24,8 @@ jQuery(
 					$( '.postbox .toggle-indicator' ).removeClass( 'toggle-indicator' ).addClass( 'el' );
 				}
 
-				$( '#publishing-action .button, #save-action .button, .editor-post-publish-button' ).click(
+				$( '#publishing-action .button, #save-action .button, .editor-post-publish-button' ).on(
+					'click',
 					function() {
 						$( '.redux-save-warn' ).slideUp();
 
@@ -49,7 +50,8 @@ jQuery(
 					function() {
 						$.reduxMetaBoxes.checkBoxVisibility();
 
-						$( '.editor-post-format__content select' ).change(
+						$( '.editor-post-format__content select' ).on(
+							'change',
 							function() {
 								$.reduxMetaBoxes.checkBoxVisibility( 'post_format' );
 							}
@@ -60,13 +62,15 @@ jQuery(
 			} else {
 				$.reduxMetaBoxes.checkBoxVisibility();
 
-				$( '#page_template' ).change(
+				$( '#page_template' ).on(
+					'change',
 					function() {
 						$.reduxMetaBoxes.checkBoxVisibility( 'page_template' );
 					}
 				);
 
-				$( 'input[name="post_format"]:radio' ).change(
+				$( 'input[name="post_format"]:radio' ).on(
+					'change',
 					function() {
 						$.reduxMetaBoxes.checkBoxVisibility( 'post_format' );
 					}

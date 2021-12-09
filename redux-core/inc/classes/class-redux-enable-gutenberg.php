@@ -81,6 +81,7 @@ if ( ! class_exists( 'Redux_Enable_Gutenberg', false ) ) {
 		 * @param array $args Arguments.
 		 */
 		public function __construct( array $args = array() ) {
+			return;
 			global $pagenow;
 
 			$defaults = array(
