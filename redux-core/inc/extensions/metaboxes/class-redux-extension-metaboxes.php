@@ -566,12 +566,14 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					 *
 					 * @param string  bundled stylesheet src
 					 */
-					wp_enqueue_style(
-						'redux-extension-metaboxes-css',
-						apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-css", $this->extension_url . 'redux-extension-metaboxes.css' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
-						array(),
-						self::$version
-					);
+					if ( $this->parent->args['dev_mode'] ) {
+						wp_enqueue_style(
+							'redux-extension-metaboxes-css',
+							apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-css", $this->extension_url . 'redux-extension-metaboxes.css' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
+							array(),
+							self::$version
+						);
+					}
 
 					/**
 					 * Redux metaboxes JS

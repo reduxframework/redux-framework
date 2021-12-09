@@ -1,4 +1,4 @@
-/* global jQuery, reduxsearch */
+/* global jQuery, reduxSearch */
 
 (function( $ ) {
 	$( document ).ready(
@@ -6,7 +6,7 @@
 			$( '.redux-container' ).each(
 				function( ) {
 					if ( ! $( this ).hasClass( 'redux-no-sections' ) ) {
-						$( this ).find( '.redux-main' ).prepend( '<input class="redux_field_search" type="text" placeholder="' + reduxsearch.search + '"/>' );
+						$( this ).find( '.redux-main' ).prepend( '<input class="redux_field_search" type="text" placeholder="' + reduxSearch.search + '"/>' );
 					}
 				}
 			);

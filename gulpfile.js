@@ -279,10 +279,6 @@ function reduxStyles() {
 			var the_path = './redux-core/inc/extensions/' + folder + '/';
 			folder = folder.replace( '_', '-' );
 
-			if ( folder === 'metaboxes-lite' ) {
-				folder = 'metaboxes';
-			}
-
 			return process_scss( the_path + 'redux-extension-' + folder + '.scss', the_path );
 		}
 	);

@@ -126,23 +126,23 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 		 * @return      void
 		 */
 		public function enqueue() {
+			wp_enqueue_script(
+				'redux-extension-options-object-js',
+				$this->url . 'redux-options-object' . Redux_Functions::is_min() . '.js',
+				array( 'jquery', 'redux-js' ),
+				Redux_Extension_Options_Object::$version,
+				true
+			);
+
 			if ( $this->parent->args['dev_mode'] ) {
-				wp_enqueue_script(
-					'redux-extension-options-object-js',
-					$this->url . 'redux-options-object' . Redux_Functions::is_min() . '.js',
-					array( 'jquery', 'redux-js' ),
+				wp_enqueue_style(
+					'redux-options-object',
+					$this->url . 'redux-options-object.css',
+					array(),
 					Redux_Extension_Options_Object::$version,
-					true
+					'all'
 				);
 			}
-
-			wp_enqueue_style(
-				'redux-options-object',
-				$this->url . 'redux-options-object.css',
-				array(),
-				Redux_Extension_Options_Object::$version,
-				'all'
-			);
 		}
 	}
 }

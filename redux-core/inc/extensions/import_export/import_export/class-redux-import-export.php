@@ -169,12 +169,14 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 				)
 			);
 
-			wp_enqueue_style(
-				'redux-import-export',
-				$this->url . 'redux-import-export.css',
-				array(),
-				Redux_Extension_Import_Export::$version
-			);
+			if ( $this->parent->args['dev_mode'] ) {
+				wp_enqueue_style(
+					'redux-import-export',
+					$this->url . 'redux-import-export.css',
+					array(),
+					Redux_Extension_Import_Export::$version
+				);
+			}
 		}
 	}
 }
