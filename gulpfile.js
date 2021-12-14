@@ -96,8 +96,8 @@ var AUTOPREFIXER_BROWSERS = ['last 2 version', '> 1%', 'ie > 10', 'ie_mob > 10',
 var gulp = require( 'gulp' ); // Gulp of-course.
 
 // CSS related plugins.
-var sass = require( 'gulp-sass' ); // Gulp pluign for Sass compilation.
-sass.compiler = require( 'node-sass' );
+var sass = require( 'gulp-sass' )(require('node-sass')); // Gulp pluign for Sass compilation.
+//sass.compiler = require( 'node-sass' );
 
 var minifycss = require( 'gulp-uglifycss' ); // Minifies CSS files.
 var autoprefixer = require( 'gulp-autoprefixer' ); // Autoprefixing magic.
@@ -125,10 +125,6 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 var merge = require( 'merge-stream' );
 var sassPackager = require( 'gulp-sass-packager' );
-var zip = require( 'gulp-zip' );
-var clean = require( 'gulp-clean' );
-var minifyCSS = require( 'gulp-csso' );
-var minifyJS = require( 'gulp-minify' );
 
 /**
  * Task: `browser-sync`.
