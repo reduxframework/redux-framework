@@ -44,7 +44,7 @@ if ( ! class_exists( 'Redux_Extension_Shortcodes' ) ) {
 
 			if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 				require_once dirname( __FILE__ ) . '/class-redux-shortcodes.php';
-				new Redux_Shortcodes( $parent );
+				new Redux_Shortcodes();
 			}
 
 			// Allow users to extend if they want.
