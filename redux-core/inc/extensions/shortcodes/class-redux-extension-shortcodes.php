@@ -49,7 +49,7 @@ if ( ! class_exists( 'Redux_Extension_Shortcodes' ) ) {
 
 			// Allow users to extend if they want.
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			do_action( 'redux/shorcodes/' . $parent->args['opt_name'] . '/construct' );
+			do_action( 'redux/shortcodes/' . $parent->args['opt_name'] . '/construct' );
 		}
 	}
 }
