@@ -37,8 +37,6 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 		 * @param object $parent ReduxFramework object pointer.
 		 */
 		public function __construct( $parent ) {
-			global $pagenow;
-
 			if ( false === $parent->args['search'] ) {
 				return;
 			}
@@ -84,7 +82,7 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 			 * Redux search JS
 			 * filter 'redux/page/{opt_name}/enqueue/redux-extension-search-js
 			 *
-			 * @param string  bundled javscript
+			 * @param string  bundled javascript
 			 */
 			wp_enqueue_script(
 				'redux-extension-search-js',

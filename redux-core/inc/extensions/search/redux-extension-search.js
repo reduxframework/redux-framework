@@ -15,16 +15,14 @@
 				'keypress',
 				function( evt ) {
 
-					// Deterime where our character code is coming from within the event.
+					// Determine where our character code is coming from within the event.
 					var charCode = evt.charCode || evt.keyCode;
 
 					if ( 13 === charCode ) { // Enter key's keycode.
 						return false;
 					}
 				}
-			);
-
-			$( '.redux_field_search' ).typeWatch(
+			).typeWatch(
 				{
 					callback: function( searchString ) {
 						var searchArray;
