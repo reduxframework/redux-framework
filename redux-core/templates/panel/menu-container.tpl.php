@@ -5,7 +5,7 @@
  *
  * @author     Redux Framework
  * @package    ReduxFramework/Templates
- * @version:    4.0.0
+ * @version:    4.3.6
  */
 
 ?>
@@ -13,7 +13,7 @@
 	<ul class="redux-group-menu">
 		<?php
 		foreach ( $this->parent->sections as $k => $section ) {
-			$the_title = isset( $section['title'] ) ? $section['title'] : '';
+			$the_title = $section['title'] ?? '';
 			$skip_sec  = false;
 			foreach ( $this->parent->options_class->hidden_perm_sections as $num => $section_title ) {
 				if ( $section_title === $the_title ) {

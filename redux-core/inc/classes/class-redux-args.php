@@ -336,9 +336,9 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		private function change_demo_defaults( array $args ) {
 			if ( $args['dev_mode'] || true === Redux_Helpers::is_local_host() ) {
 				if ( ! empty( $args['admin_bar_links'] ) ) {
-					foreach ( $args['admin_bar_links'] as $idx => $arr ) {
+					foreach ( $args['admin_bar_links'] as $arr ) {
 						if ( is_array( $arr ) && ! empty( $arr ) ) {
-							foreach ( $arr as $x => $y ) {
+							foreach ( $arr as $y ) {
 								if ( strpos( Redux_Core::strtolower( $y ), 'redux' ) !== false ) {
 									$msg = '<strong>' . esc_html__( 'Redux Framework Notice', 'redux-framework' ) . ' </strong>' .
 										esc_html__( 'There are references to the Redux Framework support site in your config\'s ', 'redux-framework' ) .
@@ -353,9 +353,9 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				}
 
 				if ( ! empty( $args['share_icons'] ) ) {
-					foreach ( $args['share_icons'] as $idx => $arr ) {
+					foreach ( $args['share_icons'] as $arr ) {
 						if ( is_array( $arr ) && ! empty( $arr ) ) {
-							foreach ( $arr as $x => $y ) {
+							foreach ( $arr as $y ) {
 								if ( strpos( Redux_Core::strtolower( $y ), 'redux' ) !== false ) {
 									$msg = '<strong>' . esc_html__( 'Redux Framework Notice:', 'redux-framework' ) . '</strong>' .
 										esc_html__( 'There are references to the Redux Framework support site in your config\'s', 'redux-framework' ) .
@@ -380,7 +380,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		private function default_cleanup( array $args ): array {
 
 			// Fix the global variable name.
-			if ( '' === $args['global_variable'] && false !== $args['global_variable'] ) {
+			if ( '' === $args['global_variable'] || false !== $args['global_variable'] ) {
 				$args['global_variable'] = str_replace( '-', '_', $args['opt_name'] );
 			}
 

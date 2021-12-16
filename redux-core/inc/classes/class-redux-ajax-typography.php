@@ -19,7 +19,7 @@ if ( ! class_exists( 'Redux_AJAX_Typography', false ) ) {
 		/**
 		 * Redux_AJAX_Typography constructor.
 		 *
-		 * @param object $parent RedusFramework object.
+		 * @param object $parent ReduxFramework object.
 		 */
 		public function __construct( $parent ) {
 			parent::__construct( $parent );
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Redux_AJAX_Typography', false ) ) {
 			if ( class_exists( $field_class ) && method_exists( $field_class, 'google_fonts_update_ajax' ) ) {
 				$f = new $field_class( array(), '', $this->parent );
 
-				return $f->google_fonts_update_ajax();
+				$f->google_fonts_update_ajax();
 			}
 
 			die();

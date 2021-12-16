@@ -358,7 +358,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 			$field = apply_filters( "redux/field/{$core->args['opt_name']}/_can_output_css", $field );
 
 			if ( isset( $field['force_output'] ) && true === $field['force_output'] ) {
-				return $return;
+				return true;
 			}
 
 			if ( ! empty( $field['required'] ) ) {

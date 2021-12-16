@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Path', false ) ) {
 		/**
 		 * Gets Redux path.
 		 *
-		 * @param string $relative_path Self explanitory.
+		 * @param string $relative_path Self-explanatory.
 		 *
 		 * @return string
 		 */

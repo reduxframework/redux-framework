@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUndefinedFieldInspection */
 /**
  * Redux Helper Class
  *
@@ -21,7 +21,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 	class Redux_Helpers {
 
 		/**
-		 * Resuable supported unit array.
+		 * Reusable supported unit array.
 		 *
 		 * @var array
 		 */
@@ -41,9 +41,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					$sections = $redux->sections;
 
 					if ( is_array( $sections ) && ! empty( $sections ) ) {
-						foreach ( $sections as $idx => $section ) {
+						foreach ( $sections as $section ) {
 							if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
-								foreach ( $section['fields'] as $i => $field ) {
+								foreach ( $section['fields'] as $field ) {
 									if ( is_array( $field ) && ! empty( $field ) ) {
 										if ( isset( $field['id'] ) && $field['id'] === $field_id ) {
 											return $section;
@@ -55,6 +55,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					}
 				}
 			}
+
+			return null;
 		}
 
 		/**
@@ -107,6 +109,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					}
 				}
 			}
+
+			return null;
 		}
 
 		/**
@@ -170,7 +174,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 				return false;
 			}
 
-			foreach ( $parent->sections as $k => $section ) {
+			foreach ( $parent->sections as $section ) {
 				if ( ! isset( $section['title'] ) ) {
 					continue;
 				}
@@ -469,7 +473,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 				/*
 				 * print_r($data['developer']);
-				 * echo "NOOO";
+				 * echo "NO";
 				 */
 				// phpcs:enable Squiz.PHP.CommentedOutCode
 			}
@@ -516,7 +520,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 								continue;
 							}
 
-							if ( isset($extension) && isset( $extension::$version ) ) {
+							if ( isset( $extension ) && isset( $extension::$version ) ) {
 								$extensions[ $key ] = $extension::$version;
 							} elseif ( isset( $extension->version ) ) {
 								$extensions[ $key ] = $extension->version;
@@ -531,29 +535,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			return $extensions;
 
 		}
-
-		/**
-		 * Get encrypted tracking object.
-		 *
-		 * @return array
-		 */
-		// phpcs:ignore Squiz.PHP.CommentedOutCode
-		// public static function tracking_object() {
-		// $data = wp_remote_post(
-		// 'http://verify.redux.io',
-		// array(
-		// 'body' => array(
-		// 'hash' => $_GET['action'], // phpcs:ignore WordPress.Security.NonceVerification, sanitization ok.
-		// 'site' => esc_url( home_url( '/' ) ),
-		// ),
-		// )
-		// );
-		// $data['body'] = urldecode( $data['body'] );
-		// if ( ! isset( $_GET['code'] ) || $data['body'] !== $_GET['code'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-		// die();
-		// }
-		// return self::get_statistics_object();
-		// } .
 
 		/**
 		 * Deprecated. Determines if theme is parent.
@@ -616,18 +597,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0.0', 'Redux_Instances::is_child_theme( $file )' );
 
 			return self::is_child_theme( $file );
-		}
-
-		/**
-		 * Deprecated. Returns true if Redux is running as a plugin.
-		 *
-		 * @return bool::()
-		 * @deprecated No longer using camelCase naming convention.
-		 */
-		private static function reduxAsPlugin(): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0.0', 'Redux_Core::$as_plugin()' );
-
-			return Redux_Core::$as_plugin;
 		}
 
 		/**
@@ -714,7 +683,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return bool
 		 */
 		public static function recursive_array_search( $needle, array $haystack ): bool {
-			foreach ( $haystack as $key => $value ) {
+			foreach ( $haystack as $value ) {
 				if ( $needle === $value || ( is_array( $value ) && self::recursive_array_search( $needle, $value ) !== false ) ) {
 					return true;
 				}
@@ -771,7 +740,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 			return array(
 				'full_paths'  => $wp_theme_paths,
-				'theme_paths' => $theme,
+				'theme_paths' => $theme_paths,
 			);
 		}
 
@@ -941,9 +910,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return array
 		 */
 		public static function localize( array $localize ): array {
-			$redux = Redux::instance( $localize['args']['opt_name'] );
-			$nonce = wp_create_nonce( 'redux-ads-nonce' );
-			$base  = admin_url( 'admin-ajax.php' ) . '?t=' . $redux->core_thread . '&action=redux_p&nonce=' . $nonce . '&url=';
 
 			return $localize;
 		}
@@ -1212,20 +1178,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Deprecated. Returns array of Redux templates.
-		 *
-		 * @param string $custom_template_path The Path to custom template.
-		 *
-		 * @return array::get_redux_templates( $custom_template_path )
-		 * @deprecated No longer using camelCase naming convention.
-		 */
-		private static function getReduxTemplates( string $custom_template_path ): array { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0.0', 'Redux_Instances::get_redux_templates( $custom_template_path )' );
-
-			return self::get_redux_templates( $custom_template_path );
-		}
-
-		/**
 		 * Returns array of Redux templates.
 		 *
 		 * @param string $custom_template_path The Path to template dir.
@@ -1233,7 +1185,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return array
 		 */
 		private static function get_redux_templates( string $custom_template_path ): array {
-			$filesystem         = Redux_Filesystem::get_instance();
+			Redux_Filesystem::get_instance();
+
 			$template_paths     = array( 'ReduxFramework' => Redux_Core::$dir . 'templates/panel' );
 			$scanned_files      = array();
 			$found_files        = array();
@@ -1272,35 +1225,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Deprecated. URL Fix.
-		 *
-		 * @param string $base     Base string of site.
-		 * @param string $opt_name Redux instance opt_name.
-		 *
-		 * @return Redux_Helpers::r_url_fix( $base, $opt_name )
-		 * @deprecated No longer using camelCase naming convention.
-		 */
-		public static function rURL_fix( string $base, string $opt_name ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0.0', 'Redux_Instances::r_url_fix( $base, $opt_name )' );
-
-			return self::r_url_fix( $base, $opt_name );
-		}
-
-		/**
-		 * URL Fix.
-		 *
-		 * @param string $base     Base.
-		 * @param string $opt_name Panel opt_name.
-		 *
-		 * @return mixed|string|void
-		 */
-		public static function r_url_fix( string $base, string $opt_name ) {
-			$url = $base . rawurlencode( 'https://look.redux.io/api/index.php?js&g&1&v=2' ) . '&proxy=' . rawurlencode( $base ) . '';
-
-			return Redux_Functions::tru( $url, $opt_name );
-		}
-
-		/**
 		 * Scan template files for ver changes.
 		 *
 		 * @param string $template_path The Path to templates.
@@ -1312,10 +1236,10 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			$result = array();
 
 			if ( $files ) {
-				foreach ( $files as $key => $value ) {
+				foreach ( $files as $value ) {
 					if ( ! in_array( $value, array( '.', '..' ), true ) ) {
 						if ( is_dir( $template_path . DIRECTORY_SEPARATOR . $value ) ) {
-							$sub_files = redux_scan_template_files( $template_path . DIRECTORY_SEPARATOR . $value );
+							$sub_files = self::scan_template_files( $template_path . DIRECTORY_SEPARATOR . $value );
 							foreach ( $sub_files as $sub_file ) {
 								$result[] = $value . DIRECTORY_SEPARATOR . $sub_file;
 							}
@@ -1394,18 +1318,16 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			$ret = substr( $size, 0, - 1 );
 
 			switch ( strtoupper( $l ) ) {
+				case 'T':
+				case 'G':
+				case 'M':
 				case 'P':
 					$ret *= 1024;
-					// Must remain recursive, do not use 'break'.
-				case 'T':
-					$ret *= 1024;
-					// Must remain recursive, do not use 'break'.
-				case 'G':
-					$ret *= 1024;
-					// Must remain recursive, do not use 'break'.
-				case 'M':
-					$ret *= 1024;
-					// Must remain recursive, do not use 'break'.
+					break;
+				// Must remain recursive, do not use 'break'.
+				// Must remain recursive, do not use 'break'.
+				// Must remain recursive, do not use 'break'.
+				// Must remain recursive, do not use 'break'.
 				case 'K':
 					$ret *= 1024;
 			}
@@ -1640,13 +1562,16 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			// TODO - Get shim values for here.
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$data = array( apply_filters( 'redux/tracking/developer', array() ) );
+
 			if ( 1 === count( $data ) ) {
 				if ( empty( $data[0] ) ) {
 					$data = array();
 				}
 			}
+
 			$instances = Redux_Instances::get_all_instances();
 			$data      = array();
+
 			if ( ! empty( $instance ) ) {
 				foreach ( $instances as $instance ) {
 					if ( isset( $instance->args['developer'] ) && ! empty( $instance->args['developer'] ) ) {
@@ -1852,8 +1777,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 				foreach ( $plugins as $file => $plugin ) {
 					if ( strpos( $file, 'redux-framework.php' ) !== false ) {
-						$plugin_network_activated = true;
-						$options                  = get_site_option( 'ReduxFrameworkPlugin', $defaults );
+						$options = get_site_option( 'ReduxFrameworkPlugin', $defaults );
 					}
 				}
 			}

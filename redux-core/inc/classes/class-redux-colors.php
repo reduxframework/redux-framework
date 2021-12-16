@@ -231,7 +231,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 */
 		public static function sanitize_rgba( string $value ): string {
 			// If empty or an array return transparent.
-			if ( empty( $value ) || is_array( $value ) ) {
+			if ( empty( $value ) ) {
 				return 'rgba(0,0,0,0)';
 			}
 
@@ -256,12 +256,12 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		 * Sanitize colors.
 		 * Determine if the current value is a hex or a rgba color and call the appropriate method.
 		 *
-		 * @param  string $value  hex or rgba color.
+		 * @param  string|array $value  hex or rgba color.
 		 *
 		 * @return string
-		 *@since 0.8.5
+		 * @since 0.8.5
 		 */
-		public static function sanitize_color( string $value ): string {
+		public static function sanitize_color( $value ): string {
 			if ( is_array( $value ) ) {
 				if ( isset( $value['rgba'] ) ) {
 					$value = $value['rgba'];
@@ -293,8 +293,8 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Gets the rgb value of the $hex color.
 		 *
-		 * @param string    $hex     The hex value of a color.
-		 * @param   boolean $implode Whether we want to implode the values or not.
+		 * @param string  $hex     The hex value of a color.
+		 * @param boolean $implode Whether we want to implode the values or not.
 		 *
 		 * @return  array|string       array|string
 		 */
@@ -369,11 +369,11 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Get the alpha channel from a rgba color
 		 *
-		 * @param string $color The rgba color formatted like rgba(r,g,b,a).
+		 * @param string|array $color The rgba color formatted like rgba(r,g,b,a).
 		 *
 		 * @return  string  The alpha value of the color.
 		 */
-		public static function get_alpha_from_rgba( string $color ) {
+		public static function get_alpha_from_rgba( $color ) {
 			if ( is_array( $color ) ) {
 				if ( isset( $color['opacity'] ) ) {
 					return $color['opacity'];
@@ -383,6 +383,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 					return 1;
 				}
 			}
+
 			if ( false === strpos( $color, 'rgba' ) ) {
 				return '1';
 			}
@@ -532,7 +533,7 @@ if ( ! class_exists( 'Redux_Colors', false ) ) {
 		/**
 		 * Convert hex color to hsv
 		 *
-		 * @param array $color The rgb color to conver array( 'r', 'g', 'b' ).
+		 * @param array $color The rgb color to convert array( 'r', 'g', 'b' ).
 		 *
 		 * @return  array       returns array( 'h', 's', 'v' ).
 		 */

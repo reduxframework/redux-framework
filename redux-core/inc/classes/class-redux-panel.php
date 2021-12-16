@@ -17,7 +17,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 	class Redux_Panel {
 
 		/**
-		 * ReduxFramwrok object pointer.
+		 * ReduxFramework object pointer.
 		 *
 		 * @var object
 		 */
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 				$this->parent->args['class'] = ' redux-rtl';
 			}
 
-			echo '<div id="redux-dialog-confirm" title="' . esc_html__( 'Submit Support Information?', 'redux-framework' ) . '" data-nonce="' . esc_attr( wp_create_nonce( 'redux_sumbit_support' ) ) . '">';
+			echo '<div id="redux-dialog-confirm" title="' . esc_html__( 'Submit Support Information?', 'redux-framework' ) . '" data-nonce="' . esc_attr( wp_create_nonce( 'redux_submit_support' ) ) . '">';
 			// translators: %s = WP Site Health Screen URL.
 			echo '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' . sprintf( esc_html__( 'Redux will send the debug information found on the %s and your Redux config to our secure server.  Are you ready to proceed?', 'redux-framework' ), '<a href="' . esc_url( admin_url( 'site-health.php?tab=debug' ) ) . '" target="_blank">' . esc_html__( 'WordPress Site Health screen', 'redux-framework' ) . '</a>' ) . '</p>';
 			echo '</div>';
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 		}
 
 		/**
-		 * Used to intitialize the settings fields for this panel. Required for saving and redirect.
+		 * Used to initialize the settings fields for this panel. Required for saving and redirect.
 		 */
 		private function init_settings_fields() {
 			// Must run or the page won't redirect properly.
@@ -360,7 +360,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 			$files  = scandir( $template_path );
 			$result = array();
 			if ( $files ) {
-				foreach ( $files as $key => $value ) {
+				foreach ( $files as $value ) {
 					if ( ! in_array( $value, array( '.', '..' ), true ) ) {
 						if ( is_dir( $template_path . DIRECTORY_SEPARATOR . $value ) ) {
 							$sub_files = self::scan_template_files( $template_path . DIRECTORY_SEPARATOR . $value );

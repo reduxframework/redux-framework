@@ -83,6 +83,11 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * @return bool
 		 */
 		public static function load_pro_field( array $data ): bool {
+			$field = null;
+			$value = null;
+			$core  = null;
+			$mode  = null;
+
 			// phpcs:ignore WordPress.PHP.DontExtract
 			extract( $data );
 
@@ -122,12 +127,11 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		public static function parse_args( $args, array $defaults ): array {
 			$arr = array();
 
-			if( ! is_array( $args ) ) {
+			if ( ! is_array( $args ) ) {
 				$arr[] = $args;
 			} else {
 				$arr = $args;
 			}
-
 
 			$result = $defaults;
 
@@ -165,7 +169,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 			$instances = Redux::all_instances();
 
 			if ( ! empty( $instances ) ) {
-				foreach ( $instances as $opt_name => $instance ) {
+				foreach ( $instances as $instance ) {
 
 					if ( empty( self::$parent ) ) {
 						self::$parent  = $instance;
@@ -189,7 +193,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * Sets a cookie.
 		 * Do nothing if unit testing.
 		 *
-		 * @param   string    $name     The cookie name.
+		 * @param string      $name     The cookie name.
 		 * @param string      $value    The cookie value.
 		 * @param integer     $expire   Expiry time.
 		 * @param string      $path     The cookie path.
@@ -197,7 +201,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * @param boolean     $secure   HTTPS only.
 		 * @param boolean     $httponly Only set cookie on HTTP calls.
 		 *
-		 *@return  void
+		 * @return  void
 		 * @since   3.5.4
 		 * @access  public
 		 */
@@ -215,7 +219,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * @param string $value     CSS values.
 		 *
 		 * @return string CSS string
-		 *@since       3.2.8
+		 * @since       3.2.8
 		 * @access      private
 		 */
 		public static function parse_css( array $css_array = array(), string $style = '', string $value = '' ): string {
@@ -518,7 +522,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		}
 
 		/**
-		 * Sanatize camcelCase keys in array, makes then snake_case.
+		 * Sanitize camelCase keys in array, makes then snake_case.
 		 *
 		 * @param array $arr Array of keys.
 		 *
@@ -554,7 +558,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 					$value = implode( '|', $value );
 				}
 
-				$data_string .= ' data-' . $key . '=' . Redux_Helpers::make_bool_str( $value ) . '';
+				$data_string .= ' data-' . $key . '=' . Redux_Helpers::make_bool_str( $value ) . ' ';
 			}
 
 			return $data_string;

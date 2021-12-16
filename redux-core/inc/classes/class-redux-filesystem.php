@@ -227,7 +227,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Load WP fiesystem directly.
+		 * Load WP filesystem directly.
 		 */
 		public static function load_direct() {
 			if ( null === self::$direct ) {
@@ -323,6 +323,10 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @return bool|void
 		 */
 		public function do_action( string $action, string $file = '', array $params = array() ) {
+			$destination = '';
+			$overwrite   = '';
+			$content     = '';
+
 			if ( ! empty( $params ) ) {
 
 				// phpcs:ignore WordPress.PHP.DontExtract
@@ -415,7 +419,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $res ) {
 				if ( 'dirlist' === $action ) {
-					if ( empty( $res ) || '' === $res ) {
+					if ( empty( $res ) ) {
 						return;
 					}
 

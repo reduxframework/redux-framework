@@ -129,9 +129,9 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 					$data['operation'] = '=';
 
 					if ( is_array( $parent_value ) ) {
-						foreach ( $parent_value as $idx => $val ) {
+						foreach ( $parent_value as $val ) {
 							if ( is_array( $check_value ) ) {
-								foreach ( $check_value as $i => $v ) {
+								foreach ( $check_value as $v ) {
 									if ( Redux_Helpers::make_bool_str( $val ) === Redux_Helpers::make_bool_str( $v ) ) {
 										$return = true;
 									}
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 						}
 					} else {
 						if ( is_array( $check_value ) ) {
-							foreach ( $check_value as $i => $v ) {
+							foreach ( $check_value as $v ) {
 								if ( Redux_Helpers::make_bool_str( $parent_value ) === Redux_Helpers::make_bool_str( $v ) ) {
 									$return = true;
 								}
@@ -161,9 +161,9 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 				case 'not':
 					$data['operation'] = '!==';
 					if ( is_array( $parent_value ) ) {
-						foreach ( $parent_value as $idx => $val ) {
+						foreach ( $parent_value as $val ) {
 							if ( is_array( $check_value ) ) {
-								foreach ( $check_value as $i => $v ) {
+								foreach ( $check_value as $v ) {
 									if ( Redux_Helpers::make_bool_str( $val ) !== Redux_Helpers::make_bool_str( $v ) ) {
 										$return = true;
 									}
@@ -176,7 +176,7 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 						}
 					} else {
 						if ( is_array( $check_value ) ) {
-							foreach ( $check_value as $i => $v ) {
+							foreach ( $check_value as $v ) {
 								if ( Redux_Helpers::make_bool_str( $parent_value ) !== Redux_Helpers::make_bool_str( $v ) ) {
 									$return = true;
 								}
@@ -227,7 +227,7 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 					}
 
 					if ( is_array( $check_value ) ) {
-						foreach ( $check_value as $idx => $opt ) {
+						foreach ( $check_value as $opt ) {
 							if ( strpos( $parent_value, (string) $opt ) !== false ) {
 								$return = true;
 							}
@@ -246,7 +246,7 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 					}
 
 					if ( is_array( $check_value ) ) {
-						foreach ( $check_value as $idx => $opt ) {
+						foreach ( $check_value as $opt ) {
 							if ( strpos( $parent_value, (string) $opt ) === false ) {
 								$return = true;
 							}
@@ -271,7 +271,7 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 				case 'is_empty':
 				case 'empty':
 				case '!isset':
-					if ( empty( $parent_value ) || '' === $parent_value ) {
+					if ( empty( $parent_value ) ) {
 						$return = true;
 					}
 					break;

@@ -159,7 +159,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		/**
 		 * Register/enqueue file from vendor library.
 		 *
-		 * @param      bool   $register Reigster or enqueue.
+		 * @param      bool   $register Register or enqueue.
 		 * @param      string $handle File handle.
 		 * @param      string $src_cdn CDN source.
 		 * @param      array  $deps File deps.
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 				}
 			} else {
 				if ( ! self::$set ) {
-					// translators: %s: Vendor support URL. %s: Admin pluygins page.
+					// translators: %s: Vendor support URL. %s: Admin plugins page.
 					$msg = sprintf( esc_html__( 'The %1$s (or extension) is either not installed or not activated and thus, some controls may not render properly.  Please ensure that it is installed and %2$s', 'redux-framework' ), '<a href="https://github.com/reduxframework/redux-vendor-support">Vendor Support plugin</a>', '<a href="' . admin_url( 'plugins.php' ) . '">' . esc_html__( 'activated.', 'redux-framework' ) . '</a>' );
 
 					$data = array(
@@ -207,9 +207,9 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 */
 		public static function register_style( string $handle, string $src_cdn, array $deps = array(), string $ver = '', string $media = 'all' ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
-				self::cdn( true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
+				self::cdn( true, $handle, $src_cdn, $deps, $ver, $media, false );
 			} else {
-				self::vendor_plugin( true, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
+				self::vendor_plugin( true, $handle, $src_cdn, $deps, $ver, $media, false );
 			}
 		}
 
@@ -223,9 +223,9 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 */
 		public static function register_script( string $handle, string $src_cdn, array $deps = array(), string $ver = '', bool $in_footer = false ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
-				self::cdn( true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
+				self::cdn( true, $handle, $src_cdn, $deps, $ver, $in_footer, true );
 			} else {
-				self::vendor_plugin( true, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
+				self::vendor_plugin( true, $handle, $src_cdn, $deps, $ver, $in_footer, true );
 			}
 		}
 
@@ -240,9 +240,9 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 */
 		public static function enqueue_style( string $handle, string $src_cdn, array $deps = array(), string $ver = '', string $media = 'all' ) {
 			if ( self::$parent->args['use_cdn'] ) {
-				self::cdn( false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
+				self::cdn( false, $handle, $src_cdn, $deps, $ver, $media, false );
 			} else {
-				self::vendor_plugin( false, $handle, $src_cdn, $deps, $ver, $media, $is_script = false );
+				self::vendor_plugin( false, $handle, $src_cdn, $deps, $ver, $media, false );
 			}
 		}
 
@@ -257,9 +257,9 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 */
 		public static function enqueue_script( string $handle, string $src_cdn, array $deps = array(), string $ver = '', bool $in_footer = false ) {
 			if ( self::$parent->args['use_cdn'] ) {
-				self::cdn( false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
+				self::cdn( false, $handle, $src_cdn, $deps, $ver, $in_footer, true );
 			} else {
-				self::vendor_plugin( false, $handle, $src_cdn, $deps, $ver, $in_footer, $is_script = true );
+				self::vendor_plugin( false, $handle, $src_cdn, $deps, $ver, $in_footer, true );
 			}
 		}
 	}

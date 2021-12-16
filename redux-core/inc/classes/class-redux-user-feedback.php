@@ -88,9 +88,9 @@ class Redux_User_Feedback {
 	 *
 	 * @param string $seconds Seconds in time.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
-	public function seconds_to_words( string $seconds ): string {
+	public function seconds_to_words( string $seconds ): ?string {
 
 		// Get the years.
 		$years = ( intval( $seconds ) / YEAR_IN_SECONDS ) % 100;
@@ -145,6 +145,8 @@ class Redux_User_Feedback {
 		} elseif ( $seconds > 0 ) {
 			return __( 'a second', 'redux-framework' );
 		}
+
+		return null;
 	}
 
 	/**
@@ -246,7 +248,7 @@ class Redux_User_Feedback {
 					.notice.redux-notice {
 						padding: 20px !important;
 					}
-					.notice.redux-noticee .redux-notice-inner {
+					.notice.redux-notice .redux-notice-inner {
 						display: block;
 					}
 					.notice.redux-notice .redux-notice-inner .redux-notice-content {

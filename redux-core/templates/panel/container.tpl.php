@@ -5,10 +5,10 @@
  *
  * @author      Redux Framework
  * @package     ReduxFramework/Templates
- * @version:    4.0.0
+ * @version:    4.3.6
  */
 
-$expanded = ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : '' . ( ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '' );
+$expanded = ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : ( ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '' );
 $nonce    = wp_create_nonce( 'redux_ajax_nonce' . $this->parent->args['opt_name'] );
 $actionn  = ( 'network' === $this->parent->args['database'] && $this->parent->args['network_admin'] && is_network_admin() ? './edit.php?action=redux_' . $this->parent->args['opt_name'] : './options.php' );
 

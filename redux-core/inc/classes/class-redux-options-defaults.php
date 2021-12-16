@@ -52,7 +52,7 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 				}
 			}
 
-			if ( ! is_null( $sections ) && ! empty( $sections ) ) {
+			if ( ! empty( $sections ) ) {
 
 				// Fill the cache.
 				foreach ( $sections as $sk => $section ) {
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 						$sections[ $sk ] = $section;
 					}
 					if ( isset( $section['fields'] ) ) {
-						foreach ( $section['fields'] as $k => $field ) {
+						foreach ( $section['fields'] as $field ) {
 							if ( empty( $field['id'] ) && empty( $field['type'] ) ) {
 								continue;
 							}
@@ -84,7 +84,7 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		 * Field default values.
 		 *
 		 * @param string $opt_name      Panel opt_name.
-		 * @param array  $field         Fiel array.
+		 * @param array  $field         Field array.
 		 * @param object $wp_data_class WordPress data class.
 		 */
 		public function field_default_values( string $opt_name = '', array $field = array(), $wp_data_class = null ) {
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 						$field['options'] = $wp_data_class->get( $field['data'], $field['args'], $opt_name );
 					}
 
-					if ( 'sorter' === $field['type'] && isset( $field['data'] ) && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
+					if ( 'sorter' === $field['type'] && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
 						if ( ! isset( $field['args'] ) ) {
 							$field['args'] = array();
 						}

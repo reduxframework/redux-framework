@@ -36,6 +36,8 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @return string
 		 */
 		public static function output_alpha_data( array $data ): string {
+			$index = null;
+
 			extract( $data ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$value = false;
@@ -69,7 +71,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			$result = array();
 			$pairs  = explode( '&', $string );
 
-			foreach ( $pairs as $key => $pair ) {
+			foreach ( $pairs as $pair ) {
 				// use the original parse_str() on each element.
 				parse_str( $pair, $params );
 
@@ -220,7 +222,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			if ( ! get_option( 'redux_p' . 'ro_lic' . 'ense_key', false ) ) { // phpcs:ignore Generic.Strings.UnnecessaryStringConcat.Found
 				$s = get_option( 'redux_p' . 'ro_l' . 'icense_status', false ); // phpcs:ignore Generic.Strings.UnnecessaryStringConcat.Found
 
-				if ( false !== $s && in_array( $s, array( 'valid', 'site_inactive' ), true ) ) {
+				if ( in_array( $s, array( 'valid', 'site_inactive' ), true ) ) {
 					return true;
 				}
 			}
@@ -339,7 +341,6 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 						$parent_slug_end = explode( '/', $theme_paths_end );
 						$parent_slug_end = end( $parent_slug_end );
 
-						$data['parent_slug'] = $theme_paths_end;
 						$data['parent_slug'] = $parent_slug_end;
 					}
 
@@ -363,9 +364,11 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 */
 		public static function extension_compatibility( $parent, string $path, string $ext_class, string $new_class_name, string $name ) {
 			if ( empty( $new_class_name ) ) {
-				return;
+				return null;
 			}
+
 			$upload_dir = ReduxFramework::$_upload_dir . '/extension_compatibility/';
+
 			if ( ! file_exists( $upload_dir . $ext_class . '.php' ) ) {
 				if ( ! is_dir( $upload_dir ) ) {
 					$parent->filesystem->mkdir( $upload_dir );
@@ -394,6 +397,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 					$template   = str_replace( '{{ext_class}}', $new_class_name, $class_file );
 					$parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
 				}
+
 				if ( file_exists( $upload_dir . $new_class_name . '.php' ) ) {
 					if ( ! class_exists( $new_class_name ) ) {
 						require_once $upload_dir . $new_class_name . '.php';
@@ -403,19 +407,19 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 					}
 				}
 			}
+
+			return null;
 		}
 
 		/**
 		 * Used to merge two deep arrays.
 		 *
-		 * @param array $a First array to deep merge.
-		 * @param array $b Second array to deep merge.
+		 * @param array $a First array to deeply merge.
+		 * @param array $b Second array to deeply merge.
 		 *
 		 * @return    array - Deep merge of the two arrays.
 		 */
 		public static function nested_wp_parse_args( array &$a, array $b ): array {
-			$a      = $a;
-			$b      = $b;
 			$result = $b;
 
 			foreach ( $a as $k => &$v ) {

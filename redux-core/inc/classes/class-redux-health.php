@@ -28,9 +28,11 @@ if ( ! class_exists( 'Redux_Health', false ) ) {
 
 		/**
 		 * AJAX
+		 *
+		 * @throws ImagickException Exception.
 		 */
 		public function ajax() {
-			if ( isset( $_POST ) && isset( $_POST['nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_sumbit_support' ) ) {
+			if ( isset( $_POST ) && isset( $_POST['nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_submit_support' ) ) {
 				$nonce = wp_remote_post(
 					'http://127.0.0.1/redux-4/wp-admin/admin-ajax.php',
 					array(
@@ -47,7 +49,7 @@ if ( ! class_exists( 'Redux_Health', false ) ) {
 					echo wp_json_encode(
 						array(
 							'status' => 'error',
-							'data'   => esc_html__( 'Security token', 'redux-framework' ) . ' ' . wp_remote_retrieve_response_code( $report ) . ': ' . wp_remote_retrieve_response_message( $report ),
+							'data'   => esc_html__( 'Security token', 'redux-framework' ) . ' ' . wp_remote_retrieve_response_code( $nonce ) . ': ' . wp_remote_retrieve_response_message( $nonce ),
 						)
 					);
 

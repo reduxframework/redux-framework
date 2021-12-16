@@ -86,7 +86,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 								}
 
 								// Check for empty id value.
-								if ( ! isset( $field['id'] ) || ! isset( $plugin_options[ $field['id'] ] ) || ( isset( $plugin_options[ $field['id'] ] ) && '' === $plugin_options[ $field['id'] ] ) ) {
+								if ( ! isset( $field['id'] ) || ! isset( $plugin_options[ $field['id'] ] ) || ( '' === $plugin_options[ $field['id'] ] ) ) {
 
 									// If we are looking for an empty value, in the case of 'not_empty'
 									// then we need to keep processing.
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 									continue;
 								}
 
-								// Shim out old colorgrba validators.
+								// Shim out old color rgba validators.
 								if ( 'color_rgba' === $val || 'colorrgba' === $val ) {
 									$val = 'color';
 								}

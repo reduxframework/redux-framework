@@ -179,7 +179,6 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 				}
 
 				.about-wrap .feature-rest div.last-feature {
-					padding- <?php echo is_rtl() ? 'right' : 'left'; ?>: 100px;
 					padding- <?php echo is_rtl() ? 'left' : 'right'; ?>: 0;
 				}
 

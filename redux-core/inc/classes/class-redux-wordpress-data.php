@@ -409,7 +409,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
-					$font_icons = apply_filters( "redux/$opt_name/field/font/icons", $font_icons );
+					$data = apply_filters( "redux/$opt_name/field/font/icons", $font_icons );
 
 					break;
 

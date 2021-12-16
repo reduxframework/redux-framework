@@ -98,7 +98,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			}
 
 			$this->register_styles( $core );
-			$this->register_scripts( $core );
+			$this->register_scripts();
 
 			add_thickbox();
 
@@ -181,8 +181,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			// *****************************************************************
 			// Spectrum CSS
 			// *****************************************************************
-			$css_file = 'redux-spectrum.css';
-
 			wp_register_style(
 				'redux-spectrum-css',
 				Redux_Core::$url . "assets/css/vendor/spectrum$this->min.css",
@@ -258,10 +256,8 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 
 		/**
 		 * Register all core framework scripts.
-		 *
-		 * @param     object $core ReduxFramework object.
 		 */
-		private function register_scripts( $core ) {
+		private function register_scripts() {
 			// *****************************************************************
 			// JQuery / JQuery UI JS
 			// *****************************************************************
@@ -455,7 +451,8 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 						}
 
 						if ( method_exists( $field_class, 'localize' ) ) {
-							$params = $the_field->localize( $field );
+							$the_field->localize( $field );
+
 							if ( ! isset( $this->localize_data[ $field['type'] ] ) ) {
 								$this->localize_data[ $field['type'] ] = array();
 							}
@@ -486,8 +483,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		 * @param     object $core ReduxFramework object.
 		 */
 		private function enqueue_fields( $core ) {
-			$data = array();
-
 			foreach ( $core->sections as $section ) {
 				if ( isset( $section['fields'] ) ) {
 					foreach ( $section['fields'] as $field ) {
@@ -529,7 +524,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		}
 
 		/**
-		 * Compile panel errors and warings for locaize array.
+		 * Compile panel errors and wearings for localize array.
 		 */
 		public function get_warnings_and_errors_array() {
 			$core = $this->core();

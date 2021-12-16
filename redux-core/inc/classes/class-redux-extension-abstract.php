@@ -104,11 +104,7 @@ abstract class Redux_Extension_Abstract {
 	 */
 	protected function get_reflection(): ReflectionClass {
 		if ( ! isset( $this->reflection_class ) ) {
-			try {
-				$this->reflection_class = new ReflectionClass( $this );
-			} catch ( ReflectionException $e ) { // phpcs:ignore
-				error_log( $e->getMessage() ); // phpcs:ignore
-			}
+			$this->reflection_class = new ReflectionClass( $this );
 		}
 
 		return $this->reflection_class;
@@ -208,7 +204,7 @@ abstract class Redux_Extension_Abstract {
 	}
 
 	/**
-	 * Sets the minimum version of Redux to use.  Displays a notice if requirments not met.
+	 * Sets the minimum version of Redux to use.  Displays a notice if requirements not met.
 	 *
 	 * @param string $min_version       Minimum version to evaluate.
 	 * @param string $extension_version Extension version number.
@@ -222,7 +218,7 @@ abstract class Redux_Extension_Abstract {
 		if ( '' !== $min_version ) {
 			if ( version_compare( $redux_ver, $min_version ) < 0 ) {
 				// translators: %1$s Extension friendly name. %2$s: minimum Redux version.
-				$msg = '<strong>' . sprintf( esc_html__( 'The %1$s extension requires Redux Framework version %2$s or higher.', 'redux-framework' ), $friendly_name, $min_version ) . '</strong>&nbsp;&nbsp;' . esc_html__( 'You are currently running Redux Framework version ', 'redux-framework' ) . ' ' . $redux_ver . '.<br/><br/>' . esc_html__( 'This field will not render in your option panel, and featuress of this extension will not be available until the latest version of Redux Framework has been installed.', 'redux-framework' );
+				$msg = '<strong>' . sprintf( esc_html__( 'The %1$s extension requires Redux Framework version %2$s or higher.', 'redux-framework' ), $friendly_name, $min_version ) . '</strong>&nbsp;&nbsp;' . esc_html__( 'You are currently running Redux Framework version ', 'redux-framework' ) . ' ' . $redux_ver . '.<br/><br/>' . esc_html__( 'This field will not render in your option panel, and features of this extension will not be available until the latest version of Redux Framework has been installed.', 'redux-framework' );
 
 				$data = array(
 					'parent'  => $this->parent,

@@ -20,7 +20,7 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 		 * Redux_AJAX_Save constructor.
 		 * array_merge_recursive_distinct
 		 *
-		 * @param object $parent ReduxFrameword object.
+		 * @param object $parent ReduxFramework object.
 		 */
 		public function __construct( $parent ) {
 			parent::__construct( $parent );
@@ -32,9 +32,11 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 		 * AJAX callback to save the option panel values.
 		 */
 		public function save() {
+			$redux = null;
+
 			$core = $this->core();
 
-			if ( ! isset( $_REQUEST['nonce'] ) || ( isset( $_REQUEST['nonce'] ) && ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['nonce'] ) ), 'redux_ajax_nonce' . $this->args['opt_name'] ) ) ) {
+			if ( ! isset( $_REQUEST['nonce'] ) || ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['nonce'] ) ), 'redux_ajax_nonce' . $this->args['opt_name'] ) ) ) {
 				echo wp_json_encode(
 					array(
 						'status' => esc_html__( 'Invalid security credential.  Please reload the page and try again.', 'redux-framework' ),
