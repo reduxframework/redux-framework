@@ -26,21 +26,21 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Project version
 		 *
-		 * @var project string
+		 * @var string
 		 */
 		public static $version;
 
 		/**
 		 * Project directory.
 		 *
-		 * @var project string.
+		 * @var string.
 		 */
 		public static $dir;
 
 		/**
 		 * Project URL.
 		 *
-		 * @var project URL.
+		 * @var string.
 		 */
 		public static $url;
 
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static $server = null;
 
 		/**
-		 * Pointer to the thirdparty fixes class.
+		 * Pointer to the third party fixes class.
 		 *
 		 * @var null
 		 */
@@ -157,14 +157,14 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static $insights = null;
 
 		/**
-		 * Flag for Redux Template snables status.
+		 * Flag for Redux Template enabled status.
 		 *
 		 * @var bool
 		 */
 		public static $redux_templates_enabled = false;
 
 		/**
-		 * Flag for Extendify Template snables status.
+		 * Flag for Extendify Template enabled status.
 		 *
 		 * @var bool
 		 */
@@ -334,9 +334,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 * Code to execute on framework __construct.
 		 *
 		 * @param object $parent Pointer to ReduxFramework object.
-		 * @param array  $args   Global arguments array.
 		 */
-		public static function core_construct( $parent, array $args ) {
+		public static function core_construct( $parent ) {
 			self::$third_party_fixes = new Redux_ThirdParty_Fixes( $parent );
 
 			Redux_ThemeCheck::get_instance();
@@ -363,7 +362,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			spl_autoload_register( array( $this, 'register_classes' ) );
 
 			self::$welcome = new Redux_Welcome();
-			new Redux_Rest_Api_Builder( $this );
+			new Redux_Rest_Api_Builder();
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
@@ -372,11 +371,12 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		}
 
 		/**
-		 * Add debug infor the WP Site Health screen.
+		 * Add debug info for the WP Site Health screen.
 		 *
 		 * @param array $debug_info Debug data.
 		 *
 		 * @return array
+		 * @noinspection PhpIncludeInspection
 		 */
 		public function add_debug_info( array $debug_info ): array {
 
@@ -414,7 +414,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 						'value' => self::$installed,
 					),
 					'data directory' => array(
-						'label' => esc_html__( 'Data directory', 'redux-framerwork' ),
+						'label' => esc_html__( 'Data directory', 'redux-framework' ),
 						'value' => self::$dir,
 					),
 					'browser'        => array(
@@ -425,6 +425,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			);
 
 			$redux = Redux::all_instances();
+
+			$extensions = array();
 
 			if ( ! empty( $redux ) && is_array( $redux ) ) {
 				foreach ( $redux as $inst => $data ) {
@@ -560,7 +562,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 				$mappings = array(
 					'ReduxFrameworkInstances'  => 'Redux_Instances',
-					'reduxCoreEnqueue'         => '',
 					'reduxCorePanel'           => 'Redux_Panel',
 					'reduxCoreEnqueue'         => 'Redux_Enqueue',
 					'Redux_Abstract_Extension' => 'Redux_Extension_Abstract',
@@ -639,7 +640,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Helper method to check for mb_strtolower or to use the standard strtolower.
 		 *
-		 * @param string $str String to make lowercase.
+		 * @param string|null $str String to make lowercase.
 		 *
 		 * @return string|null
 		 */

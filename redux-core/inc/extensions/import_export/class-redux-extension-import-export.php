@@ -101,7 +101,6 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		public function download_options() {
 			if ( ! isset( $_GET['secret'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['secret'] ) ), 'redux_io_' . $this->parent->args['opt_name'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				wp_die( 'Invalid Secret for options use.' );
-				exit;
 			}
 
 			$this->parent->get_options();

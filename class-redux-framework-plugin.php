@@ -30,7 +30,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		/**
 		 * Use this value as the text domain when translating strings from this plugin. It should match
 		 * the Text Domain field set in the plugin header, as well as the directory name of the plugin.
-		 * Additionally, text domains should only contain letters, number and hypens, not underscores
+		 * Additionally, text domains should only contain letters, number and hyphens, not underscores
 		 * or spaces.
 		 *
 		 * @access      protected
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * Class instance.
 		 *
 		 * @access      private
-		 * @var         \Redux_Framework_Plugin $instance The one true Redux_Framework_Plugin
+		 * @var         Redux_Framework_Plugin $instance The one true Redux_Framework_Plugin
 		 * @since       3.0.0
 		 */
 		private static $instance;
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * Crash flag.
 		 *
 		 * @access      private
-		 * @var         \Redux_Framework_Plugin $crash Crash flag if inside a crash.
+		 * @var         Redux_Framework_Plugin $crash Crash flag if inside a crash.
 		 * @since       4.1.15
 		 */
 		public static $crash = false;
@@ -75,6 +75,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 */
 		public static function instance(): ?Redux_Framework_Plugin {
 			$path = REDUX_PLUGIN_FILE;
+			$res  = false;
 
 			if ( function_exists( 'get_plugin_data' ) && file_exists( $path ) ) {
 				$data = get_plugin_data( $path );
@@ -104,7 +105,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		}
 
 		/**
-		 * Shim for geting instance
+		 * Shim for getting instance
 		 *
 		 * @access      public
 		 * @since       4.0.1
@@ -271,13 +272,10 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * Fired on plugin activation
 		 *
 		 * @access      public
-		 * @since       3.0.0
-		 *
-		 * @param       boolean $network_wide True if plugin is network activated, false otherwise.
-		 *
 		 * @return      void
+		 * @since       3.0.0
 		 */
-		public static function activate( ?bool $network_wide ) {
+		public static function activate() {
 			delete_site_transient( 'update_plugins' );
 		}
 
@@ -346,11 +344,11 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 
 			$var = '0';
 
-			// Get an array of IDs (We have to do it this way because WordPress says so, however reduntant).
+			// Get an array of IDs (We have to do it this way because WordPress says so, however redundant).
 			$result = wp_cache_get( 'redux-blog-ids' );
 			if ( false === $result ) {
 
-				// WordPress asys get_col is discouraged?  I found no alternative.  So...ignore! - kp.
+				// WordPress says get_col is discouraged?  I found no alternative.  So...ignore! - kp.
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 				$result = $wpdb->get_col( $wpdb->prepare( "SELECT blog_id FROM $wpdb->blogs WHERE archived = %s AND spam = %s AND deleted = %s", $var, $var, $var ) );
 
@@ -368,8 +366,6 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @return      void
 		 */
 		private static function single_activate() {
-			$notices = array();
-
 			$nonce = wp_create_nonce( 'redux_framework_demo' );
 
 			$notices   = get_option( 'ReduxFrameworkPlugin_ACTIVATED_NOTICES', array() );
@@ -413,12 +409,9 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 *
 		 * @access      public
 		 * @since       3.0.0
-		 * @global      string $pagenow The current page being displayed
 		 * @return      void
 		 */
 		public function options_toggle_check() {
-			global $pagenow;
-
 			if ( isset( $_GET['nonce'] ) && wp_verify_nonce( sanitize_key( $_GET['nonce'] ), 'redux_framework_demo' ) ) {
 				if ( isset( $_GET['redux-framework-plugin'] ) && 'demo' === $_GET['redux-framework-plugin'] ) {
 					$url = admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) );
