@@ -39,7 +39,8 @@
 				/**    Sorter (Layout Manager) */
 				el.find( '.redux-sorter' ).each(
 					function() {
-						var id = $( this ).attr( 'id' );
+						var id         = $( this ).attr( 'id' );
+						var inRepeater = $( this ).hasClass( 'in-repeater' );
 
 						el.find( '#' + id ).find( 'ul' ).sortable(
 							{
@@ -72,13 +73,20 @@
 								stop: function( event, ui ) {
 									var sorter;
 									var id;
+									var index;
 
 									event = null;
 
-									sorter = redux.optName.sorter[$( this ).attr( 'data-id' )];
+									if ( inRepeater ) {
+										index = $( this ).attr( 'data-repeater-id' );
+									} else {
+										index = $( this ).attr( 'data-id' );
+									}
+
+									sorter = redux.optName.sorter[index];
 									id     = $( this ).find( 'h3' ).text();
 
-									if ( sorter.limits && id && sorter.limits[id] ) {
+									if ( undefined !== sorter.limits && sorter.limits && id && sorter.limits[id] ) {
 										if ( $( this ).children( 'li' ).length >= sorter.limits[id] ) {
 											$( this ).addClass( 'filled' );
 											if ( $( this ).children( 'li' ).length > sorter.limits[id] ) {
@@ -92,13 +100,20 @@
 								update: function( event, ui ) {
 									var sorter;
 									var id;
+									var index;
 
 									event = null;
 
-									sorter = redux.optName.sorter[$( this ).attr( 'data-id' )];
+									if ( inRepeater ) {
+										index = $( this ).attr( 'data-repeater-id' );
+									} else {
+										index = $( this ).attr( 'data-id' );
+									}
+
+									sorter = redux.optName.sorter[index];
 									id     = $( this ).find( 'h3' ).text();
 
-									if ( sorter.limits && id && sorter.limits[id] ) {
+									if ( undefined !== sorter.limits && sorter.limits && id && sorter.limits[id] ) {
 										if ( $( this ).children( 'li' ).length >= sorter.limits[id] ) {
 											$( this ).addClass( 'filled' );
 											if ( $( this ).children( 'li' ).length > sorter.limits[id] ) {
@@ -112,15 +127,22 @@
 									$( this ).find( '.position' ).each(
 										function() {
 											var optionID;
+											var suffix;
 
 											var listID   = $( this ).parent().attr( 'data-id' );
 											var parentID = $( this ).parent().parent().attr( 'data-group-id' );
 
 											redux_change( $( this ) );
 
-											optionID = $( this ).parent().parent().parent().attr( 'id' );
+											suffix = $( this ).parent().parent().attr( 'data-suffix' );
 
-											$( this ).prop( 'name', redux.optName.args.opt_name + '[' + optionID + '][' + parentID + '][' + listID + ']' );
+											if ( inRepeater ) {
+												optionID = $( this ).parent().parent().attr( 'data-repeater-id' );
+											} else {
+												optionID = $( this ).parent().parent().attr( 'data-id' );
+											}
+
+											$( this ).prop( 'name', redux.optName.args.opt_name + '[' + optionID + ']' + suffix + '[' + parentID + '][' + listID + ']' );
 										}
 									);
 								}

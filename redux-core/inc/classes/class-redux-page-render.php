@@ -498,6 +498,8 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					$filter_path = $core_path;
 				}
 
+				$field_class = '';
+
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$class_file = apply_filters( "redux/{$core->args['opt_name']}/field/class/{$field['type']}", $filter_path, $field );
 

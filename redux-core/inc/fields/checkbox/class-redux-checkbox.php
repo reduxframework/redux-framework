@@ -77,7 +77,7 @@ if ( ! class_exists( 'Redux_Checkbox', false ) ) {
 					$id      = $ident_1 . '_' . $ident_2;
 
 					echo '<label for="' . esc_attr( $id ) . '">';
-					echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . esc_attr( $this->field['name'] . '[' . $k . ']' . $this->field['name_suffix'] ) . '" value="' . esc_attr( $this->value[ $k ] ) . '"/>';
+					echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . $k . ']' ) . '" value="' . esc_attr( $this->value[ $k ] ) . '"/>';
 					echo '<input type="checkbox" class="checkbox ' . esc_attr( $this->field['class'] ) . '" id="' . esc_attr( $id ) . '" value="1" ' . checked( $this->value[ $k ], '1', false ) . '/>';
 					echo ' ' . esc_attr( $v ) . '</label>';
 					echo '</li>';

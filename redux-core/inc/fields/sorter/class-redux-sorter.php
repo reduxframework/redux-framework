@@ -52,7 +52,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 		 */
 		private function is_value_empty( $val ): bool {
 			if ( ! empty( $val ) ) {
-				foreach ( $val as $section => $arr ) {
+				foreach ( $val as $arr ) {
 					if ( ! empty( $arr ) ) {
 						return false;
 					}
@@ -81,6 +81,8 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 				$this->field['options'] = $this->parent->options_defaults[ $this->field['id'] ];
 			}
 
+			$this->field['repeater_id'] = $this->field['repeater_id'] ?? '';
+
 			// Make sure to get list of all the default blocks first.
 			$all_blocks = ! empty( $this->field['options'] ) ? $this->field['options'] : array();
 			$temp       = array(); // holds default blocks.
@@ -99,6 +101,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 			}
 
 			$sortlists = $this->value;
+
 			if ( ! empty( $sortlists ) ) {
 				foreach ( $sortlists as $section => $arr ) {
 					$arr                     = $this->replace_id_with_slug( $arr );
@@ -141,7 +144,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 					$sortlists[ $key ] = $sortlist;
 				}
 
-				// assuming all sync'ed, now get the correct naming for each block.
+				// assuming all synced, now get the correct naming for each block.
 				foreach ( $sortlists as $key => $sortlist ) {
 					foreach ( $sortlist as $k => $v ) {
 						$sortlist[ $k ] = $temp[ $k ];
@@ -150,7 +153,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 				}
 
 				if ( $sortlists ) {
-					echo '<fieldset id="' . esc_attr( $this->field['id'] ) . '" class="redux-sorter-container redux-sorter">';
+					echo '<fieldset id="' . esc_attr( $this->field['id'] ) . '" class="redux-sorter-container redux-sorter ' . esc_attr( $this->field['class'] ) . '">';
 
 					foreach ( $sortlists as $group => $sortlist ) {
 						$filled = '';
@@ -159,7 +162,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 							$filled = ' filled';
 						}
 
-						echo '<ul id="' . esc_attr( $this->field['id'] . '_' . $group ) . '" class="sortlist_' . esc_attr( $this->field['id'] . $filled ) . '" data-id="' . esc_attr( $this->field['id'] ) . '" data-group-id="' . esc_attr( $group ) . '">';
+						echo '<ul id="' . esc_attr( $this->field['id'] . '_' . $group ) . '" class="sortlist_' . esc_attr( $this->field['id'] . $filled ) . '" data-id="' . esc_attr( $this->field['id'] ) . '" data-repeater-id="' . esc_attr( $this->field['repeater_id'] ) . '" data-suffix="' . esc_attr( $this->field['name_suffix'] ) . '" data-group-id="' . esc_attr( $group ) . '">';
 						echo '<h3>' . esc_html( $group ) . '</h3>';
 
 						if ( ! isset( $sortlist['placebo'] ) ) {
@@ -170,12 +173,12 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 							echo '<input
 									class="sorter-placebo"
 									type="hidden"
-									name="' . esc_attr( $this->field['name'] ) . '[' . esc_html( $group ) . '][placebo]' . esc_attr( $this->field['name_suffix'] ) . '"
+									name="' . esc_attr( $this->field['name'] ) . esc_attr( $this->field['name_suffix'] ) . '[' . esc_html( $group ) . '][placebo]"
 									value="placebo">';
 
 							if ( 'placebo' !== $key ) {
 								echo '<li id="sortee-' . esc_attr( $key ) . '" class="sortee" data-id="' . esc_attr( $key ) . '">';
-								echo '<input class="position ' . esc_attr( $this->field['class'] ) . '" type="hidden" name="' . esc_attr( $this->field['name'] . '[' . $group . '][' . $key . ']' . $this->field['name_suffix'] ) . '" value="' . esc_attr( $list ) . '">';
+								echo '<input class="position ' . esc_attr( $this->field['class'] ) . '" type="hidden" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . $group . '][' . $key . ']' ) . '" value="' . esc_attr( $list ) . '">';
 								echo esc_html( $list );
 								echo '</li>';
 							}
@@ -195,7 +198,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-sorder-css',
+					'redux-field-sorter-css',
 					Redux_Core::$url . 'inc/fields/sorter/redux-sorter.css',
 					array(),
 					$this->timestamp
@@ -217,7 +220,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 		 * @param array  $field Field values.
 		 * @param string $value Option values.
 		 *
-		 * @return array Params to be saved as a javascript object accessable to the UI.
+		 * @return array Params to be saved as a javascript object accessible to the UI.
 		 * @since  Redux_Framework 3.1.5
 		 */
 		public function localize( array $field, string $value = '' ): array {
