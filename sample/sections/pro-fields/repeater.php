@@ -41,6 +41,7 @@ Redux::set_section(
 					array(
 						'id'          => 'select_field',
 						'type'        => 'select',
+						'multi'       => true,
 						'title'       => esc_html__( 'Select Field', 'your-textdomain-here' ),
 						'options'     => array(
 							'1' => esc_html__( 'Option 1', 'your-textdomain-here' ),
