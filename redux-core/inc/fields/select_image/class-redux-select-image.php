@@ -76,7 +76,7 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 				echo '<option></option>';
 
 				// Enum through the options array.
-				foreach ( $this->field['options'] as $k => $v ) {
+				foreach ( $this->field['options'] as $v ) {
 
 					// No array?  No problem!
 					if ( ! is_array( $v ) ) {

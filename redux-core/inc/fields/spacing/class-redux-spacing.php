@@ -74,7 +74,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
 			}
 
 			if ( false === $this->field['units'] ) {
-				'' === $this->value['units'];
+				$this->value['units'] = '';
 			}
 
 			if ( ! in_array( $this->field['mode'], array( 'margin', 'padding' ), true ) ) {
@@ -342,6 +342,9 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
 		 */
 		public function css_style( $data ) {
 			$style = '';
+
+			$data = (array) $data;
+
 			if ( ! isset( $this->field ) ) {
 				return;
 			}
@@ -350,7 +353,6 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
 				$this->field['mode'] = 'padding';
 			}
 
-			$mode  = ( 'absolute' !== $this->field['mode'] ) ? $this->field['mode'] : '';
 			$units = $data['units'] ?? '';
 
 			foreach ( $data as $key => $value ) {

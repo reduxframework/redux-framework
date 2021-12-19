@@ -49,8 +49,6 @@ if ( ! class_exists( 'Redux_Slides', false ) ) {
 
 			$x = 0;
 
-			$multi = ( isset( $this->field['multi'] ) && $this->field['multi'] ) ? ' multiple="multiple"' : '';
-
 			if ( isset( $this->value ) && is_array( $this->value ) && ! empty( $this->value ) ) {
 				$slides = $this->value;
 
@@ -107,7 +105,7 @@ if ( ! class_exists( 'Redux_Slides', false ) ) {
 					echo '<span class="button media_upload_button" id="add_' . esc_attr( $x ) . '">' . esc_html__( 'Upload', 'redux-framework' ) . '</span>';
 
 					$hide = '';
-					if ( empty( $slide['image'] ) || '' === $slide['image'] ) {
+					if ( empty( $slide['image'] ) ) {
 						$hide = ' hide';
 					}
 

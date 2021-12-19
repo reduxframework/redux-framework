@@ -73,7 +73,7 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 			echo '<div class="box-shadow-inset">';
 			echo '<div class="box-shadow-controls row">';
 
-			foreach ( $shadow_arr as $idx => $shadow_type ) {
+			foreach ( $shadow_arr as $shadow_type ) {
 				if ( $this->field[ $shadow_type . '-shadow' ] ) {
 					$disabled = ' pro-disabled';
 
@@ -103,11 +103,6 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 					echo 'class="color-picker redux-color redux-box-shadow-' . esc_attr( $shadow_type ) . '-input redux-color-init ' . esc_attr( $this->field['class'] ) . '"';
 					echo 'type="text" value="' . esc_attr( $this->value[ $shadow_type . '-shadow' ]['color'] ) . '"';
 					echo 'data-default-color="' . esc_attr( $def_color ) . '"';
-
-					$data = array(
-						'field' => $this->field,
-						'index' => $shadow_type . '-shadow',
-					);
 
 					echo '/>';
 					echo '</li>';
@@ -216,14 +211,14 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 			$css .= 'background:' . esc_html( $this->field['preview-color'] );
 
 			echo '</div>';
-			echo '<div class="" id="shadow-result" style="' . $css . '"></div>'; // WPCS: XSS ok.
+			echo '<div class="" id="shadow-result" style="' . $css . '"></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
 			echo '</div>';
 		}
 
 		/**
 		 * Compile CSS output.
 		 *
-		 * @param string $data Data.
+		 * @param mixed $data Data.
 		 *
 		 * @return string
 		 */

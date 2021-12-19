@@ -28,8 +28,6 @@ if ( ! class_exists( 'Redux_Date', false ) ) {
 		 * @return        void
 		 */
 		public function render() {
-			$placeholder = ( isset( $this->field['placeholder'] ) ) ? ' placeholder="' . $this->field['placeholder'] . '" ' : '';
-
 			$this->field['attributes']['data-id']     = $this->field['id'];
 			$this->field['attributes']['id']          = $this->field['id'];
 			$this->field['attributes']['name']        = esc_attr( $this->field['name'] . $this->field['name_suffix'] );

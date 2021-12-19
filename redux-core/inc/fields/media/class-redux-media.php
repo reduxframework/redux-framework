@@ -77,7 +77,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 				),
 			);
 
-			// Since value subarrays do not get parsed in wp_parse_args!
+			// Since value sub-arrays do not get parsed in wp_parse_args!
 			$this->value = Redux_Functions::parse_args( $this->value, $defaults );
 
 			$defaults = array(
@@ -214,7 +214,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 				if ( ! empty( $this->value['id'] ) ) {
 					$image = wp_get_attachment_image_src( $this->value['id'], array( 150, 150 ) );
 
-					if ( empty( $image[0] ) || '' === $image[0] ) {
+					if ( empty( $image[0] ) ) {
 						$this->value['thumbnail'] = $this->value['url'];
 					} else {
 						$this->value['thumbnail'] = $image[0];
@@ -223,8 +223,6 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 					$this->value['thumbnail'] = $this->value['url'];
 				}
 			}
-
-			$css = '';
 
 			$css = $this->get_filter_css( $this->value['filter'] );
 
@@ -259,7 +257,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 					'mode'   => 'media',
 				);
 
-				echo Redux_Image_Filters::render( $data );
+				echo Redux_Image_Filters::render( $data ); // phpcs:ignore WordPress.Security.EscapeOutput
 			}
 		}
 
@@ -303,6 +301,8 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 		 * @return string|null
 		 */
 		public function css_style( $data ): string {
+			$data = (array) $data;
+
 			if ( isset( $data['filter'] ) ) {
 				return $this->get_filter_css( $data['filter'] );
 			}

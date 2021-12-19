@@ -46,7 +46,7 @@ if ( ! class_exists( 'Redux_Textarea', false ) ) {
 		}
 
 		/**
-		 * Santize value.
+		 * Sanitize value.
 		 *
 		 * @param array  $field Field array.
 		 * @param string $value Values array.

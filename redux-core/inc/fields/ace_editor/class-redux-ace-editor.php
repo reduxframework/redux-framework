@@ -56,6 +56,7 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 					type="hidden"
 					class="localize_data"
 					value="<?php echo esc_html( wp_json_encode( $params ) ); ?>"/>
+				<label for="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"></label>
 				<textarea
 					name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>"
 					id="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"

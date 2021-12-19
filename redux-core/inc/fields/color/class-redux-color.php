@@ -58,7 +58,7 @@ if ( ! class_exists( 'Redux_Color', false ) ) {
 				'index' => '',
 			);
 
-			echo Redux_Functions_Ex::output_alpha_data( $data);
+			echo Redux_Functions_Ex::output_alpha_data( $data );  // phpcs:ignore WordPress.Security.EscapeOutput
 
 			echo '>';
 

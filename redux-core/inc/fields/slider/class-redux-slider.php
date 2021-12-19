@@ -47,6 +47,13 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 		private $display_select = 3;
 
 		/**
+		 * Select2 options.
+		 *
+		 * @var string
+		 */
+		private $select2_data = '';
+
+		/**
 		 * Set field and value defaults.
 		 */
 		public function set_defaults() {
@@ -343,12 +350,12 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 
 				$this->field['select2'] = Redux_Functions::sanitize_camel_case_array_keys( $this->field['select2'] );
 
-				$select2_data = Redux_Functions::create_data_string( $this->field['select2'] );
+				$this->select2_data = Redux_Functions::create_data_string( $this->field['select2'] );
 
 				echo '<select
 						class="redux-slider-select-one redux-slider-select-one-' . esc_attr( $field_id ) . ' ' . esc_attr( $this->field['class'] ) . '"
                         name="' . esc_attr( $name_one ) . '"
-                        id="' . esc_attr( $id_one ) . '" ' . esc_attr( $select2_data ) . '></select>';
+                        id="' . esc_attr( $id_one ) . '" ' . esc_attr( $this->select2_data ) . '></select>';
 			}
 
 			// DIV output.
@@ -392,7 +399,7 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 					echo '<select
 								class="redux-slider-select-two redux-slider-select-two-' . esc_attr( $field_id ) . ' ' . esc_attr( $this->field['class'] ) . '"
                                 name="' . esc_attr( $name_two ) . '"
-                                id="' . esc_attr( $id_two ) . '" ' . esc_attr( $select2_data ) . '></select>';
+                                id="' . esc_attr( $id_two ) . '" ' . esc_attr( $this->select2_data ) . '></select>';
 				}
 			}
 

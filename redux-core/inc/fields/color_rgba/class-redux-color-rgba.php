@@ -162,7 +162,7 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 			// Field dependent JS.
 			wp_enqueue_script(
 				'redux-field-color-rgba-js',
-				Redux_Core::$url . 'inc/fields/color_rgba/redux-color-rgba' . Redux_Functions::is_min() . '.js',
+				Redux_Core::$url . 'inc/fields/color_rgba/redux-color-rgba' . $min . '.js',
 				array( 'jquery', 'redux-spectrum-js', 'redux-js' ),
 				$this->timestamp,
 				true
@@ -210,7 +210,6 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 					} elseif ( 'color' === $id ) {
 						$color = ! empty( $val ) ? $val : '';
 					} elseif ( 'rgba' === $id ) {
-						$rgba = ! empty( $val ) ? $val : '';
 						$rgba = Redux_Helpers::hex2rgba( $color, $alpha );
 					}
 				}

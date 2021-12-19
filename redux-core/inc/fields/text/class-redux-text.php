@@ -91,7 +91,7 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 			$this->field['attributes']['class'] = implode( ' ', $this->field['attributes']['class'] );
 
 			if ( isset( $this->field['options'] ) && ! empty( $this->field['options'] ) ) {
-				if ( ! isset( $this->value ) || ( isset( $this->value ) && ! is_array( $this->value ) ) ) {
+				if ( ! isset( $this->value ) || ( ! is_array( $this->value ) ) ) {
 					$this->value = array();
 				}
 				foreach ( $this->field['options'] as $k => $v ) {

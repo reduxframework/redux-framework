@@ -18,7 +18,7 @@ if ( ! class_exists( 'Redux_Palette', false ) ) {
 
 		/**
 		 * Field Render Function.
-		 * Takes the vars and outputs the HTML for the field in the settingss
+		 * Takes the vars and outputs the HTML for the field in the settings.
 		 *
 		 * @since       1.0.0
 		 * @access      public

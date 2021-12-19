@@ -76,7 +76,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					'index' => 'regular',
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				echo Redux_Functions_Ex::output_alpha_data( $data ); // phpcs:ignore WordPress.Security.EscapeOutput
 
 				echo '>';
 				echo '</span>';
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					'index' => 'hover',
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				echo Redux_Functions_Ex::output_alpha_data( $data ); // phpcs:ignore WordPress.Security.EscapeOutput
 
 				echo '>';
 				echo '</span>';
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					'index' => 'visited',
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				echo Redux_Functions_Ex::output_alpha_data( $data ); // phpcs:ignore WordPress.Security.EscapeOutput
 
 				echo '>';
 				echo '</span>';
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					'index' => 'active',
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				echo Redux_Functions_Ex::output_alpha_data( $data ); // phpcs:ignore WordPress.Security.EscapeOutput
 
 				echo '>';
 				echo '</span>';
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					'index' => 'focus',
 				);
 
-				echo Redux_Functions_Ex::output_alpha_data( $data);
+				echo Redux_Functions_Ex::output_alpha_data( $data ); // phpcs:ignore WordPress.Security.EscapeOutput
 
 				echo '>';
 				echo '</span>';
@@ -269,7 +269,9 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 							$style_string .= implode( ',', $this->field['output'] ) . '{' . $value . '}';
 						} else {
 							if ( 1 === count( $this->field['output'] ) ) {
-								foreach ( $this->field['output'] as $sel => $elem ) {
+								$elem = '';
+
+								foreach ( $this->field['output'] as $elem ) {
 									break;
 								}
 
@@ -277,7 +279,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 									$selector_arr = explode( ',', $elem );
 									$sel_list     = '';
 
-									foreach ( $selector_arr as $idx => $selector ) {
+									foreach ( $selector_arr as $selector ) {
 										$sel_list .= $selector . ':' . $key . ',';
 									}
 
@@ -288,7 +290,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 								}
 							} else {
 								$blah = '';
-								foreach ( $this->field['output'] as $k => $sel ) {
+								foreach ( $this->field['output'] as $sel ) {
 									$blah .= $sel . ':' . $key . ',';
 								}
 
@@ -323,7 +325,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 								$style_string .= $this->field['compiler'][0] . ':' . $key . '{' . $value . '}';
 							} else {
 								$blah = '';
-								foreach ( $this->field['compiler'] as $k => $sel ) {
+								foreach ( $this->field['compiler'] as $sel ) {
 									$blah .= $sel . ':' . $key . ',';
 								}
 

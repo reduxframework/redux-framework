@@ -219,7 +219,7 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 					}
 				}
 				echo '</select></div>';
-			};
+			}
 
 			echo '</fieldset>';
 		}
@@ -252,13 +252,13 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 		}
 
 		/**
-		 * Compile CSS style for output.
+		 * Compile CSS styles for output.
 		 *
 		 * @param string $data CSS data.
 		 *
-		 * @return string|void
+		 * @return string
 		 */
-		public function css_style( $data ) {
+		public function css_style( $data ): string {
 			$style = '';
 
 			// If field units has a value and IS an array, then evaluate as needed.
@@ -289,7 +289,7 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 				// nothing to do here, but I'm leaving the construct just in case I have to debug this again.
 			}
 
-			$units = isset( $this->value['units'] ) ? $this->value['units'] : '';
+			$units = $this->value['units'] ?? '';
 
 			if ( ! is_array( $this->field['mode'] ) ) {
 				$height = isset( $this->field['mode'] ) && ! empty( $this->field['mode'] ) ? $this->field['mode'] : 'height';
