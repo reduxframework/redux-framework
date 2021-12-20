@@ -1143,8 +1143,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					$this->parent->outputCSS .= $keys . '{' . $style . '}';
 				}
 
-				if ( ! empty( $this->$field['compiler'] ) && ! is_array( $this->$field['compiler'] ) ) {
-					$this->$field['compiler'] = array( $this->$field['compiler'] );
+				if ( ! empty( $this->field['compiler'] ) && ! is_array( $this->field['compiler'] ) ) {
+					$this->field['compiler'] = array( $this->field['compiler'] );
 				}
 
 				if ( ! empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
