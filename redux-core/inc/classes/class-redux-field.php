@@ -72,7 +72,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 					$value = wp_json_encode( $value );
 				}
 
-				$output .= sprintf( true === $value ? ' %s' : ' %s="%s"', $key, esc_attr( $value ) );
+				$output .= sprintf( true === $value ? ' %1$s' : ' %1$s="%2$s"', $key, esc_attr( $value ) );
 			}
 
 			return $output;

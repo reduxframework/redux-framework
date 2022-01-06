@@ -542,7 +542,7 @@
 					self.colorAlpha.css( { 'background-color': ui.color.to_s( self.alphaOptions.alphaColorType ) } );
 
 					// fire change callback if we have one
-					if ( $.isFunction( self.options.change ) ) {
+					if ( 'function' === typeof self.options.change ) {
 						self.options.change.call( this, event, ui );
 					}
 				}
@@ -596,7 +596,7 @@
 					self.colorAlpha.css( 'background-color', '' );
 
 					// fire clear callback if we have one
-					if ( $.isFunction( self.options.clear ) ) {
+					if ( 'function' === typeof self.options.clear ) {
 						self.options.clear.call( this, event );
 					}
 				}
@@ -623,7 +623,7 @@
 					self.colorAlpha.css( 'background-color', '' );
 
 					// fire clear callback if we have one
-					if ( $.isFunction( self.options.clear ) ) {
+					if ( 'function' === typeof self.options.clear ) {
 						self.options.clear.call( this, event );
 					}
 

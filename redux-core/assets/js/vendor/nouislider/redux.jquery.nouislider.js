@@ -944,7 +944,7 @@
 				 *	Not required. Must be a function.
 				 */, 'slide': {
 					't': function( q ) {
-						return $.isFunction( q );
+						return 'function' === typeof q;
 					}
 				}
 				/*	Set.
@@ -952,7 +952,7 @@
 				 *	Tested using the 'slide' test.
 				 */, 'set': {
 					't': function( q ) {
-						return $.isFunction( q );
+						return 'function' === typeof q;
 					}
 				}
 				/*	Block.
@@ -960,7 +960,7 @@
 				 *	Tested using the 'slide' test.
 				 */, 'block': {
 					't': function( q ) {
-						return $.isFunction( q );
+						return 'function' === typeof q;
 					}
 				}
 				/*	Step.

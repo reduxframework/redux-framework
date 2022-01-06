@@ -866,7 +866,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 			$th   = '';
 
 			if ( isset( $field['title'] ) && isset( $field['type'] ) && 'info' !== $field['type'] && 'section' !== $field['type'] ) {
-				$default_mark = ( ! empty( $field['default'] ) && isset( $core->options[ $field['id'] ] ) && $field['default'] === $core->options[ $field['id'] ] && ! empty( $core->args['default_mark'] ) && isset( $field['default'] ) ) ? $core->args['default_mark'] : '';
+				$default_mark = ( ! empty( $field['default'] ) && isset( $core->options[ $field['id'] ] ) && $field['default'] === $core->options[ $field['id'] ] && ! empty( $core->args['default_mark'] ) ) ? $core->args['default_mark'] : '';
 
 				// If a hint is specified in the field, process it.
 				if ( isset( $field['hint'] ) && ! empty( $field['hint'] ) ) {
@@ -879,6 +879,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 
 					// Get user pref for displaying hints.
 					$meta_val = get_user_meta( $current_user->ID, 'ignore_hints', true );
+
 					if ( 'true' === $meta_val || empty( $meta_val ) && empty( $hint ) ) {
 
 						// Set hand cursor for clickable hints.

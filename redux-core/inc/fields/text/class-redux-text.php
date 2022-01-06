@@ -65,8 +65,8 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 						}
 					}
 				}
-				$this->field['attributes']['qtip_title'] = isset( $this->field['text_hint']['title'] ) ? 'qtip-title="' . $this->field['text_hint']['title'] . '" ' : '';
-				$this->field['attributes']['qtip_text']  = isset( $this->field['text_hint']['content'] ) ? 'qtip-content="' . $this->field['text_hint']['content'] . '" ' : '';
+				$this->field['attributes']['qtip-title'] = $this->field['text_hint']['title'] ?? '';
+				$this->field['attributes']['qtip-text']  = $this->field['text_hint']['content'] ?? '';
 			}
 
 			if ( ! empty( $this->field['data'] ) && is_array( $this->field['data'] ) ) {
