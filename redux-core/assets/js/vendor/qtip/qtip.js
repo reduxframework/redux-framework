@@ -2727,7 +2727,7 @@
 					elem = self.elem = $('<div />', {
 						id: 'qtip-overlay',
 						html: '<div></div>',
-						mousedown: function() { return FALSE; },
+						mousedown: function() { return FALSE; }
 					})
 					.hide();
 
