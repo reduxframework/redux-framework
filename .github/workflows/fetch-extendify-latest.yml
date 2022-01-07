@@ -1,7 +1,7 @@
 name: Fetch Extendify and create PR
 on: workflow_dispatch
 jobs:
-    Fetch and PR:
+    fetch-and-pr:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
