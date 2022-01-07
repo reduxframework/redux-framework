@@ -114,7 +114,7 @@
 
 			// Allow the passing of an unwrapped function.
 			// Leaves other code a more comprehensible.
-			if ( ! $.isArray( functions ) ) {
+			if ( ! Array.isArray( functions ) ) {
 				functions = [functions];
 			}
 
@@ -834,7 +834,7 @@
 				 */, 'start': {
 					'r': true, 't': function( q, o, w ) {
 						if ( o['handles'] === 1 ) {
-							if ( $.isArray( q ) ) {
+							if ( Array.isArray( q ) ) {
 								q = q[0];
 							}
 							q       = parseFloat( q );
@@ -1186,7 +1186,7 @@
 
 			// If the value is to be set to a number, which is valid
 			// when using a one-handle slider, wrap it in an array.
-			if ( ! $.isArray( args ) ) {
+			if ( ! Array.isArray( args ) ) {
 				args = [args];
 			}
 
