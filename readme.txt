@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.9
-Stable tag: 4.3.5
+Stable tag: 4.3.6
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -17,7 +17,7 @@ Supercharge the Gutenberg editor with our ever-growing library of WordPress Bloc
 
 Worried that our templates may not work with your theme? We've got you covered. With our custom <em>page templates</em> option you can override any theme. Missing a plugin a template needs? No worries, we’ll even help you install what you need, all from the Gutenberg editor.
 
-Don’t waste hours trying to recreate a template you love. With a click of a button it its own website where you can start customizing it for your needs.
+Don’t waste hours trying to recreate a template you love. With a click of a button in its own website where you can start customizing it for your needs.
 
 <h4>♥️ What the Plugin does?</h4>
 <ul>
@@ -107,6 +107,14 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.6 =
+* Modified: Update to the Extendify Library.
+* Modified: Moved Extendify and Redux templates libraries back to root folder.
+* Modified: Removed "Gutenberg is currently disabled" notice when the Classic Editor plugin is active.
+* Fixed: `date` shortcode without attributes producing error.
+* Fixed: Various jQuery deprecation fixes.
+* Release date: January 07, 2022
 
 = 4.3.5 =
 * Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
@@ -261,7 +269,7 @@ Fixed: Multiple submenus in metaboxes; the last submenu it cut off.
 Fixed: Fatal error: Can't use function return value in write context.
 Fixed: PHP 8.0 deprecation warnings.
 Fixed: Malformed HTML causing Redux pro alpha color-picker to not render.
-Fixed: IMproved class checks for Redux Pro.
+Fixed: Improved class checks for Redux Pro.
 Fixed: jQuery 3.x deprecation notices.
 Fixed: Malformed SCSS.
 Release date: March 17, 2021
