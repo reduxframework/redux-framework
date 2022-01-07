@@ -3,11 +3,11 @@
  * Admin.
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
-use Extendify\ExtendifySdk\App;
-use Extendify\ExtendifySdk\User;
-use Extendify\ExtendifySdk\SiteSettings;
+use Extendify\Library\App;
+use Extendify\Library\User;
+use Extendify\Library\SiteSettings;
 
 /**
  * This class handles any file loading for the admin area.
@@ -35,6 +35,24 @@ class Admin
 
         self::$instance = $this;
         $this->loadScripts();
+
+        \add_filter('plugin_action_links_' . EXTENDIFY_PLUGIN_BASENAME, [ $this, 'pluginActionLinks' ]);
+    }
+
+    /**
+     * Adds action links to the plugin list table
+     *
+     * @param array $links An array of plugin action links.
+     * @return array An array of plugin action links.
+     */
+    public function pluginActionLinks($links)
+    {
+        $theme = get_option('template');
+        $label = esc_html__('Upgrade', 'extendify');
+
+        $links['upgrade'] = sprintf('<a href="%1$s" target="_blank"><b>%2$s</b></a>', "https://extendify.com/pricing?utm_source=extendify-plugin&utm_medium=wp-dash&utm_campaign=action-link&utm_content=$label&utm_term=$theme", $label);
+
+        return $links;
     }
 
     /**
@@ -90,7 +108,7 @@ class Admin
 
         \wp_register_script(
             App::$slug . '-scripts',
-            EXTENDIFYSDK_BASE_URL . 'public/build/extendify-sdk.js',
+            EXTENDIFY_BASE_URL . 'public/build/extendify.js',
             [
                 'wp-i18n',
                 'wp-components',
@@ -102,13 +120,14 @@ class Admin
         );
         \wp_localize_script(
             App::$slug . '-scripts',
-            'extendifySdkData',
+            'extendifyData',
             [
                 'root' => \esc_url_raw(rest_url(APP::$slug . '/' . APP::$apiVersion)),
                 'nonce' => \wp_create_nonce('wp_rest'),
                 'user' => json_decode(User::data('extendifysdk_user_data'), true),
                 'sitesettings' => json_decode(SiteSettings::data()),
                 'sdk_partner' => \esc_attr(APP::$sdkPartner),
+                'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
             ]
         );
         \wp_enqueue_script(App::$slug . '-scripts');
@@ -116,16 +135,16 @@ class Admin
         \wp_set_script_translations(App::$slug . '-scripts', App::$textDomain);
 
         \wp_enqueue_style(
-            App::$slug . '-theme',
-            EXTENDIFYSDK_BASE_URL . 'public/build/extendify-sdk.css',
+            App::$slug,
+            EXTENDIFY_BASE_URL . 'public/build/extendify.css',
             [],
             $version,
             'all'
         );
 
         \wp_enqueue_style(
-            App::$slug . '-utility-classes',
-            EXTENDIFYSDK_BASE_URL . 'public/build/extendify-utilities.css',
+            App::$slug . '-utilities',
+            EXTENDIFY_BASE_URL . 'public/build/extendify-utilities.css',
             [],
             $version,
             'all'

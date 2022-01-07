@@ -3,37 +3,46 @@
  * Bootstrap the application
  */
 
-use Extendify\ExtendifySdk\Admin;
-use Extendify\ExtendifySdk\Frontend;
-use Extendify\ExtendifySdk\Shared;
+use Extendify\Library\Admin;
+use Extendify\Library\Frontend;
+use Extendify\Library\Shared;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
 }
 
-if (!defined('EXTENDIFYSDK_PATH')) {
-    define('EXTENDIFYSDK_PATH', \plugin_dir_path(__FILE__));
+if (!defined('EXTENDIFY_PATH')) {
+    define('EXTENDIFY_PATH', \plugin_dir_path(__FILE__));
 }
 
-if (is_readable(EXTENDIFYSDK_PATH . 'vendor/autoload.php')) {
-    require EXTENDIFYSDK_PATH . 'vendor/autoload.php';
+if (!defined('EXTENDIFY_URL')) {
+    define('EXTENDIFY_URL', \plugin_dir_url(__FILE__));
 }
 
-$extendifysdkAdmin = new Admin();
-$extendifysdkFrontend = new Frontend();
-$extendifysdkShared = new Shared();
+if (!defined('EXTENDIFY_PLUGIN_BASENAME')) {
+    define('EXTENDIFY_PLUGIN_BASENAME', \plugin_basename(__DIR__ . '/extendify.php'));
+}
 
-require EXTENDIFYSDK_PATH . 'routes/api.php';
-require EXTENDIFYSDK_PATH . 'editorplus/EditorPlus.php';
+if (is_readable(EXTENDIFY_PATH . 'vendor/autoload.php')) {
+    require EXTENDIFY_PATH . 'vendor/autoload.php';
+}
+
+$extendifyAdmin = new Admin();
+$extendifyFrontend = new Frontend();
+$extendifyShared = new Shared();
+
+require EXTENDIFY_PATH . 'routes/api.php';
+require EXTENDIFY_PATH . 'editorplus/EditorPlus.php';
 
 \add_action(
     'init',
     function () {
-        // Hard-coded to run only within Editor Plus for now.
-        if (isset($GLOBALS['extendifySdkSourcePlugin']) && in_array($GLOBALS['extendifySdkSourcePlugin'], ['Editor Plus'], true)) {
-            require EXTENDIFYSDK_PATH . 'support/notices.php';
-        }
-
-        \load_plugin_textdomain('extendify-sdk', false, EXTENDIFYSDK_PATH . 'languages');
+        \load_plugin_textdomain('extendify', false, EXTENDIFY_PATH . 'languages');
     }
 );
+
+// To cover legacy conflicts.
+// phpcs:ignore
+class ExtendifySdk
+{
+}

@@ -8,7 +8,7 @@ export default function SettingsModal({ isOpen, onClose }) {
 
     return (
         <Modal
-            heading={__('Settings', 'extendify-sdk')}
+            heading={__('Settings', 'extendify')}
             isOpen={isOpen}
             ref={initialFocus}
             onRequestClose={onClose}>

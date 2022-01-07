@@ -3,9 +3,9 @@
  * Helper class for interacting with the user
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
-use Extendify\ExtendifySdk\App;
+use Extendify\Library\App;
 
 /**
  * Helper class for interacting with the user
@@ -28,7 +28,7 @@ class User
     protected $user = null;
 
     /**
-     * The DB key for scoping
+     * The DB key for scoping. For historical reasons do not change
      *
      * @var string
      */
@@ -105,11 +105,10 @@ class User
             $userData['version'] = 0;
         }
 
-        // This will update the user's allowed import allowance weekly.
-        if (!get_transient('extendifySdk_import_max_check_' . $this->user->ID) || !isset($userData['state']['allowedImports'])) {
-            set_transient('extendifySdk_import_max_check_' . $this->user->ID, time(), strtotime('1 week', 0));
-            $currentImports = Http::get('/max-free-imports');
-            $userData['state']['allowedImports'] = is_numeric($currentImports) && $currentImports > 0 ? $currentImports : 25;
+        // This will reset the allowed imports to 0 once a week which will force the library to re-check.
+        if (!get_transient('extendify_import_max_check_' . $this->user->ID)) {
+            set_transient('extendify_import_max_check_' . $this->user->ID, time(), strtotime('1 week', 0));
+            $userData['state']['allowedImports'] = 0;
         }
 
         if (!$userData['state']['sdkPartner']) {

@@ -5,15 +5,17 @@ import { User } from '../api/User'
 const storage = {
     getItem: async () => await User.getData(),
     setItem: async (_name, value) => await User.setData(value),
+    removeItem: () => {},
 }
 
 const isGlobalLibraryEnabled = () =>
-    window.extendifySdkData.sitesettings === null ||
-    window.extendifySdkData?.sitesettings?.state?.enabled
+    window.extendifyData.sitesettings === null ||
+    window.extendifyData?.sitesettings?.state?.enabled
 
 export const useUserStore = create(
     persist(
         (set, get) => ({
+            firstLoadedOn: new Date().toISOString(),
             email: '',
             apiKey: '',
             imports: 0,
@@ -21,6 +23,7 @@ export const useUserStore = create(
             sdkPartner: '',
             registration: {
                 email: '',
+                optedOut: false,
             },
             noticesDismissedAt: {},
             allowedImports: 0,
@@ -49,23 +52,22 @@ export const useUserStore = create(
                     Number(get().allowedImports) - Number(get().imports)
                 return remaining > 0 ? remaining : 0
             },
-            updateSiteType: (value) => {
-                get().updatePreferredOption('tax_categories', value)
-                if (!value || value === 'Unknown') return
+            updatePreferredSiteType: (value) => {
+                get().updatePreferredOption('siteType', value)
+                if (!value?.slug || value.slug === 'unknown') return
+                const current = get().preferredOptionsHistory?.siteType ?? []
 
-                const history = new Set([
-                    value,
-                    ...get().preferredOptionsHistory.siteType,
-                ])
-                set({
-                    preferredOptionsHistory: Object.assign(
-                        {},
-                        get().preferredOptionsHistory,
-                        {
-                            siteType: [...history].slice(0, 3),
-                        },
-                    ),
-                })
+                // If the site type isn't already included, prepend it
+                if (!current.find((t) => t.slug === value.slug)) {
+                    const siteType = [value, ...current]
+                    set({
+                        preferredOptionsHistory: Object.assign(
+                            {},
+                            get().preferredOptionsHistory,
+                            { siteType: siteType.slice(0, 3) },
+                        ),
+                    })
+                }
             },
             updatePreferredOption: (option, value) => {
                 // If the option doesn't exist, assume it's a taxonomy
@@ -82,17 +84,12 @@ export const useUserStore = create(
                     )
                     option = 'taxonomies'
                 }
-                // Reset if the type changes from template/pattern/etc
-                const resetTaxonomies =
-                    option == 'type' && value !== get().preferredOptions?.type
+
                 set({
                     preferredOptions: {
-                        ...Object.assign(
-                            {},
-                            get().preferredOptions,
-                            { [option]: value },
-                            resetTaxonomies ? { taxonomies: {} } : {},
-                        ),
+                        ...Object.assign({}, get().preferredOptions, {
+                            [option]: value,
+                        }),
                     },
                 })
             },

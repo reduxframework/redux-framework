@@ -17,7 +17,7 @@ export default function NeedsPermissionModal() {
     const requiredPlugins = wantedTemplate?.fields?.required_plugins || []
     return (
         <Modal
-            title={__('Plugins required', 'extendify-sdk')}
+            title={__('Plugins required', 'extendify')}
             isDismissible={false}>
             <p
                 style={{
@@ -26,7 +26,7 @@ export default function NeedsPermissionModal() {
                 {sprintf(
                     __(
                         'In order to add this %s to your site, the following plugins are required to be installed and activated.',
-                        'extendify-sdk',
+                        'extendify',
                     ),
                     wantedTemplate?.fields?.type ?? 'template',
                 )}
@@ -49,7 +49,7 @@ export default function NeedsPermissionModal() {
                 }}>
                 {__(
                     'Please contact a site admin for assistance in adding these plugins to your site.',
-                    'extendify-sdk',
+                    'extendify',
                 )}
             </p>
             <Button
@@ -58,7 +58,7 @@ export default function NeedsPermissionModal() {
                 style={{
                     boxShadow: 'none',
                 }}>
-                {__('Return to library', 'extendify-sdk')}
+                {__('Return to library', 'extendify')}
             </Button>
         </Modal>
     )

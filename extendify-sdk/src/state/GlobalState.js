@@ -6,9 +6,13 @@ export const useGlobalStore = create(
         (set) => ({
             open: false,
             metaData: {},
+            // These two are here just to persist their previous values,
+            // but could be refactored to be the source instead.
+            // It would require a refactor to state/Templates.js
             currentTaxonomies: {},
             currentType: 'pattern',
             settingsModal: false,
+            currentModal: null,
             updateCurrentTaxonomies: (data) =>
                 set({
                     currentTaxonomies: Object.assign({}, data),
@@ -17,9 +21,16 @@ export const useGlobalStore = create(
             setOpen: (value) => {
                 set({ open: value })
             },
+            setCurrentModal: (value) => {
+                set({ currentModal: value })
+            },
         }),
         {
             name: 'extendify-global-state',
+            partialize: (state) => {
+                delete state.currentModal
+                return state
+            },
         },
     ),
 )

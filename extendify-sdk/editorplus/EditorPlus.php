@@ -6,7 +6,7 @@
 
 if (!class_exists('edpl__EditorPlus')) {
     // phpcs:ignore Squiz.Classes.ClassFileName.NoMatch,Squiz.Commenting.ClassComment.Missing,PEAR.Commenting.ClassComment.Missing
-    final class ExtendifySdkEditorPlus
+    final class ExtendifyEditorPlus
     {
 
         /**
@@ -35,7 +35,7 @@ if (!class_exists('edpl__EditorPlus')) {
             }
 
             if (is_null(self::$instance)) {
-                self::$instance = new ExtendifySdkEditorPlus();
+                self::$instance = new ExtendifyEditorPlus();
             }
 
             return self::$instance;
@@ -65,8 +65,8 @@ if (!class_exists('edpl__EditorPlus')) {
                 'admin_enqueue_scripts',
                 function () {
                     wp_enqueue_script(
-                        'extendifysdk-editorplus-scripts',
-                        EXTENDIFYSDK_BASE_URL . 'public/editorplus/editorplus.min.js',
+                        'extendify-editorplus-scripts',
+                        EXTENDIFY_BASE_URL . 'public/editorplus/editorplus.min.js',
                         [],
                         '1.0',
                         true
@@ -141,6 +141,7 @@ if (!class_exists('edpl__EditorPlus')) {
         {
             $post = get_post();
             $cssContent = apply_filters(
+                // For historical reasons do not change this key.
                 'extendifysdk_template_css',
                 get_post_meta($post->ID, 'extendify_custom_stylesheet', true),
                 $post
@@ -216,5 +217,5 @@ if (!class_exists('edpl__EditorPlus')) {
         // phpcs:ignore Squiz.Classes.ClassDeclaration.SpaceBeforeCloseBrace
     }
 
-    add_action('after_setup_theme', ['ExtendifySdkEditorPlus', 'getInstance']);
+    add_action('after_setup_theme', ['ExtendifyEditorPlus', 'getInstance']);
 }//end if

@@ -29,7 +29,7 @@ export function setModalVisibility(source = 'broken-event', state = 'open') {
         entryPoint: source,
     })
     window.dispatchEvent(
-        new CustomEvent(`extendify-sdk::${state}-library`, {
+        new CustomEvent(`extendify::${state}-library`, {
             detail: source,
             bubbles: true,
         }),
@@ -48,13 +48,11 @@ export function getPluginDescription(plugin) {
 
 export function getTaxonomyName(key) {
     switch (key) {
-        case 'tax_categories':
+        case 'siteType':
             return 'Site Type'
-        case 'tax_pattern_types':
+        case 'patternType':
             return 'Content'
+        case 'layoutType':
+            return 'Page Types'
     }
-    return key
-        .replace('tax_', '')
-        .replace(/_/g, ' ')
-        .replace(/\b\w/g, (l) => l.toUpperCase())
 }

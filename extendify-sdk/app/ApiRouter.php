@@ -3,10 +3,10 @@
  * API router
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
-use Extendify\ExtendifySdk\App;
-use Extendify\ExtendifySdk\Http;
+use Extendify\Library\App;
+use Extendify\Library\Http;
 
 /**
  * Simple router for the REST Endpoints

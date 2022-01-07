@@ -8,13 +8,14 @@ export default function MainWindow() {
     const containerRef = useRef(null)
     const open = useGlobalStore((state) => state.open)
     const setOpen = useGlobalStore((state) => state.setOpen)
+    const ModalStore = useGlobalStore((state) => state.currentModal)
 
     return (
-        <Transition.Root show={open} as={Fragment}>
+        <Transition appear show={open} as={Fragment}>
             <Dialog
                 as="div"
                 static
-                className="extendify-sdk"
+                className="extendify"
                 initialFocus={containerRef}
                 onClose={() => setOpen(false)}>
                 <div className="h-screen w-screen sm:h-auto m-auto sm:w-auto fixed z-high inset-0 overflow-y-auto">
@@ -41,11 +42,12 @@ export default function MainWindow() {
                                 className="fixed lg:absolute inset-0 lg:overflow-hidden transform transition-all p-2 lg:p-16">
                                 <Layout />
                                 <FooterNotice />
+                                {ModalStore}
                             </div>
                         </Transition.Child>
                     </div>
                 </div>
             </Dialog>
-        </Transition.Root>
+        </Transition>
     )
 }

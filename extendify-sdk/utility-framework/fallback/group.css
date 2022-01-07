@@ -15,22 +15,40 @@
 }
 
 /* Fallback for classic theme group blocks */
-.ext *[class*="inner-container"] > .alignwide *[class*="inner-container"] {
+.ext *[class*="inner-container"] > .alignwide *[class*="inner-container"],
+.ext
+    *[class*="inner-container"]
+    > [data-align="wide"]
+    *[class*="inner-container"] {
     /* no suggestion */
     max-width: var(--responsive--alignwide-width, 120rem);
 }
 
-.ext *[class*="inner-container"] > .alignwide *[class*="inner-container"] > * {
+.ext *[class*="inner-container"] > .alignwide *[class*="inner-container"] > *,
+.ext
+    *[class*="inner-container"]
+    > [data-align="wide"]
+    *[class*="inner-container"]
+    > * {
     /* no suggestion */
     @apply ext-max-w-full !important;
 }
 
-.ext *[class*="inner-container"] > .alignfull *[class*="inner-container"] {
+.ext *[class*="inner-container"] > .alignfull *[class*="inner-container"],
+.ext
+    *[class*="inner-container"]
+    > [data-align="full"]
+    *[class*="inner-container"] {
     /* no suggestion */
     @apply ext-max-w-full;
 }
 
-.ext *[class*="inner-container"] > .alignfull *[class*="inner-container"] > * {
+.ext *[class*="inner-container"] > .alignfull *[class*="inner-container"] > *,
+.ext
+    *[class*="inner-container"]
+    > [data-align="full"]
+    *[class*="inner-container"]
+    > * {
     /* no suggestion */
     @apply ext-max-w-full !important;
 }

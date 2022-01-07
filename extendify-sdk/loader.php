@@ -1,21 +1,21 @@
 <?php
 /**
- * Use this file to load in the SDK from another plugin
- * Example: require_once plugin_dir_path(__FILE__) . 'extendify-templates-sdk/loader.php';
+ * This file is used to help side load the library.
+ * Be sure to remove the front matter from extendify.php
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!function_exists('extendifysdkCheckPluginInstalled')) {
+if (!function_exists('extendifyCheckPluginInstalled')) {
     /**
      * Will be truthy if the plugin is installed.
      *
-     * @param  string $name name of the plugin 'extendify-sdk'.
-     * @return bool|string - will return path, ex. 'extendify-sdk/extendify-sdk.php'.
+     * @param  string $name name of the plugin 'extendify'.
+     * @return bool|string - will return path, ex. 'extendify/extendify.php'.
      */
-    function extendifysdkCheckPluginInstalled($name)
+    function extendifyCheckPluginInstalled($name)
     {
         if (!function_exists('get_plugins')) {
             include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -31,31 +31,20 @@ if (!function_exists('extendifysdkCheckPluginInstalled')) {
     }
 }//end if
 
-// If the template SDK development build is installed, default to that.
-$extendifysdkSdk = extendifysdkCheckPluginInstalled('extendify-sdk');
-
-if ($extendifysdkSdk) {
-    // Only if it's deactivated.
-    if (is_plugin_active($extendifysdkSdk)) {
+$extendifyPluginName = extendifyCheckPluginInstalled('extendify');
+if ($extendifyPluginName) {
+    // Exit if the library is installed and active.
+    // Remember, this file is only loaded by partner plugins.
+    if (is_plugin_active($extendifyPluginName)) {
+        // If the SDK is active then ignore the partner plugins.
+        $GLOBALS['extendify_sdk_partner'] = '';
         return false;
     }
 }
 
-// If Editor Plus is installed, next default to that.
-$extendifysdkEditorPlus = extendifysdkCheckPluginInstalled('editor_plus');
-if ($extendifysdkEditorPlus) {
-    // Only if it's deactivated.
-    if (is_plugin_active($extendifysdkEditorPlus)) {
-        // Only if we aren't currently inside Editor Plus.
-        if (strpos(basename(dirname(__DIR__)), 'editorplus') === false) {
-            return false;
-        }
-    }
-}
-
-// Next is first come, first serve.
-if (class_exists('ExtendifySdk')) {
+// Next is first come, first serve. The later class is left in for historical reasons.
+if (class_exists('Extendify') || class_exists('ExtendifySdk')) {
     return false;
 }
 
-require_once plugin_dir_path(__FILE__) . 'extendify-sdk.php';
+require_once plugin_dir_path(__FILE__) . 'extendify.php';

@@ -8,6 +8,7 @@ import { Spinner, Button } from '@wordpress/components'
 import { Icon } from '@wordpress/icons'
 import { user } from './icons/'
 import { success as successIcon } from './icons/'
+import { useIsDevMode } from '../hooks/helpers'
 
 export default function LoginInterface({ actionCallback, initialFocus }) {
     const loggedIn = useUserStore((state) => state.apiKey.length)
@@ -19,6 +20,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
     const [success, setSuccess] = useState(false)
     const viewPatternsButtonRef = useRef(null)
     const licenseKeyRef = useRef(null)
+    const devMode = useIsDevMode()
 
     useEffect(() => {
         setEmail(useUserStore.getState().email)
@@ -68,7 +70,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
         if (!token || typeof token !== 'string') {
             setFeedbackType('error')
             setIsWorking(false)
-            setFeedback(__('Something went wrong', 'extendify-sdk'))
+            setFeedback(__('Something went wrong', 'extendify'))
             return
         }
 
@@ -87,13 +89,13 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
             <section className="w-80 space-y-8 text-center pt-2 pb-4">
                 <Icon icon={successIcon} size={148} />
                 <p className="text-lg text-extendify-black text-center leading-extra-tight font-semibold">
-                    {__("You've signed in to Extendify", 'extendify-sdk')}
+                    {__("You've signed in to Extendify", 'extendify')}
                 </p>
                 <Button
                     ref={viewPatternsButtonRef}
                     className="px-4 p-2 cursor-pointer text-center rounded bg-extendify-main text-white"
                     onClick={actionCallback}>
-                    {__('View patterns', 'extendify-sdk')}
+                    {__('View patterns', 'extendify')}
                 </Button>
             </section>
         )
@@ -103,7 +105,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
         return (
             <section className="space-y-8 w-full pb-2">
                 <p className="text-base text-extendify-black leading-extra-tight">
-                    {__('Account', 'extendify-sdk')}
+                    {__('Account', 'extendify')}
                 </p>
                 <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-2 -ml-2">
@@ -111,14 +113,14 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                         <p className="text-extendify-black">
                             {email?.length
                                 ? email
-                                : __('Logged In', 'extendify-sdk')}
+                                : __('Logged In', 'extendify')}
                         </p>
                     </div>
-                    {window.location.search.indexOf('DEVMODE') > -1 && (
+                    {devMode && (
                         <Button
                             className="px-4 py-3 cursor-pointer text-center rounded bg-extendify-main hover:bg-extendify-main-dark text-white"
                             onClick={logout}>
-                            {__('Sign out', 'extendify-sdk')}
+                            {__('Sign out', 'extendify')}
                         </Button>
                     )}
                 </div>
@@ -130,33 +132,31 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
         <section className="w-80 text-left space-y-8 pb-6">
             <div>
                 <p className="text-lg text-extendify-black text-center leading-extra-tight font-semibold">
-                    {__('Sign in to Extendify', 'extendify-sdk')}
+                    {__('Sign in to Extendify', 'extendify')}
                 </p>
                 <p className="text-sm text-extendify-gray text-center space-x-1 leading-extra-tight">
-                    <span>{__("Don't have an account?", 'extendify-sdk')}</span>
+                    <span>{__("Don't have an account?", 'extendify')}</span>
                     <a
-                        href={`https://extendify.com/pricing?utm_source=${window.extendifySdkData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=sign-up`}
+                        href={`https://extendify.com/pricing?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=sign-up`}
                         target="_blank"
                         className="underline hover:no-underline text-extendify-gray"
                         rel="noreferrer">
-                        {__('Sign up', 'extendify-sdk')}
+                        {__('Sign up', 'extendify')}
                     </a>
                 </p>
             </div>
             <form onSubmit={confirmKey} className="space-y-2">
                 <div className="flex items-center">
-                    <label
-                        className="sr-only"
-                        htmlFor="extendifysdk-login-email">
-                        {__('Email address', 'extendify-sdk')}
+                    <label className="sr-only" htmlFor="extendify-login-email">
+                        {__('Email address', 'extendify')}
                     </label>
                     <input
                         ref={initialFocus}
-                        id="extendifysdk-login-email"
-                        name="extendifysdk-login-email"
+                        id="extendify-login-email"
+                        name="extendify-login-email"
                         type="email"
                         className="border-2 p-2 w-full rounded"
-                        placeholder={__('Email address', 'extendify-sdk')}
+                        placeholder={__('Email address', 'extendify')}
                         value={email.length ? email : ''}
                         onChange={(event) => setEmail(event.target.value)}
                     />
@@ -164,16 +164,16 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                 <div className="flex items-center">
                     <label
                         className="sr-only"
-                        htmlFor="extendifysdk-login-license">
-                        {__('License key', 'extendify-sdk')}
+                        htmlFor="extendify-login-license">
+                        {__('License key', 'extendify')}
                     </label>
                     <input
                         ref={licenseKeyRef}
-                        id="extendifysdk-login-license"
-                        name="extendifysdk-login-license"
+                        id="extendify-login-license"
+                        name="extendify-login-license"
                         type="text"
                         className="border-2 p-2 w-full rounded"
-                        placeholder={__('License key', 'extendify-sdk')}
+                        placeholder={__('License key', 'extendify')}
                         value={apiKey}
                         onChange={(event) => setApiKey(event.target.value)}
                     />
@@ -182,7 +182,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                     <button
                         type="submit"
                         className="relative p-2 py-3 w-72 max-w-full flex justify-center cursor-pointer text-center rounded bg-extendify-main hover:bg-extendify-main-dark text-base text-white ">
-                        <span>{__('Sign In', 'extendify-sdk')}</span>
+                        <span>{__('Sign In', 'extendify')}</span>
                         {isWorking && (
                             <div className="absolute right-2.5">
                                 <Spinner />
@@ -207,9 +207,9 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href={`https://extendify.com/guides/sign-in?utm_source=${window.extendifySdkData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=need-help`}
+                        href={`https://extendify.com/guides/sign-in?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=need-help`}
                         className="underline hover:no-underline text-sm text-extendify-gray">
-                        {__('Need Help?', 'extendify-sdk')}
+                        {__('Need Help?', 'extendify')}
                     </a>
                 </div>
             </form>

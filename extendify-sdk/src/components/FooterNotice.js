@@ -3,6 +3,7 @@ import { Icon, closeSmall } from '@wordpress/icons'
 import { Button } from '@wordpress/components'
 import WelcomeNotice from './notices/WelcomeNotice'
 import PromotionNotice from './notices/PromotionNotice'
+import FeedbackNotice from './notices/FeedbackNotice'
 import { useUserStore } from '../state/User'
 import { useGlobalStore } from '../state/GlobalState'
 import { useState, useEffect, useRef } from '@wordpress/element'
@@ -10,6 +11,7 @@ import { useState, useEffect, useRef } from '@wordpress/element'
 const NoticesByPriority = {
     welcome: WelcomeNotice,
     promotion: PromotionNotice,
+    feedback: FeedbackNotice,
 }
 
 export default function FooterNotice() {
@@ -18,6 +20,17 @@ export default function FooterNotice() {
     const promotionData = useGlobalStore(
         (state) => state.metaData?.banners?.footer,
     )
+
+    const showFeedback = () => {
+        const imports = useUserStore.getState().imports ?? 0
+        const firstLoadedOn =
+            useUserStore.getState()?.firstLoadedOn ?? new Date()
+        const timeDifference =
+            new Date().getTime() - new Date(firstLoadedOn).getTime()
+        const daysSinceActivated = timeDifference / 86_400_000 // 24 hours
+
+        return imports >= 3 && daysSinceActivated > 3
+    }
 
     // Find the first notice key to use
     const componentKey =
@@ -32,13 +45,21 @@ export default function FooterNotice() {
                     ]
                 )
             }
+
+            if (key === 'feedback') {
+                return (
+                    showFeedback() &&
+                    !useUserStore.getState().noticesDismissedAt[key]
+                )
+            }
+
             return !useUserStore.getState().noticesDismissedAt[key]
         }) ?? null
     const Notice = NoticesByPriority[componentKey]
 
     const dismiss = () => {
         setHasNotice(false)
-        // The noticesDismissedAt key will either be the welcome notice,
+        // The noticesDismissedAt key will either be the key from NoticesByPriority,
         // or a key passed in from the server, such as 'holiday-sale2077'
         const key =
             componentKey === 'promotion' ? promotionData.key : componentKey
@@ -72,7 +93,7 @@ export default function FooterNotice() {
                 <Button
                     className="opacity-50 hover:opacity-100 focus:opacity-100 text-extendify-black"
                     icon={<Icon icon={closeSmall} />}
-                    label={__('Dismiss this notice', 'extendify-sdk')}
+                    label={__('Dismiss this notice', 'extendify')}
                     onClick={dismiss}
                     showTooltip={false}
                 />

@@ -3,9 +3,9 @@
  * Controls Http requests
  */
 
-namespace Extendify\ExtendifySdk\Controllers;
+namespace Extendify\Library\Controllers;
 
-use Extendify\ExtendifySdk\Http;
+use Extendify\Library\Http;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
@@ -25,19 +25,7 @@ class TemplateController
      */
     public static function index($request)
     {
-        $response = Http::post('/airtable-data', $request->get_params());
-        return new \WP_REST_Response($response);
-    }
-
-    /**
-     * Get related templates
-     *
-     * @param \WP_REST_Request $request - The request.
-     * @return WP_REST_Response|WP_Error
-     */
-    public static function related($request)
-    {
-        $response = Http::post('/templates/related', $request->get_params());
+        $response = Http::post('/templates', $request->get_params());
         return new \WP_REST_Response($response);
     }
 
@@ -49,7 +37,7 @@ class TemplateController
      */
     public static function ping($request)
     {
-        $response = Http::post('/airtable-data', $request->get_params());
+        $response = Http::post('/templates', $request->get_params());
         return new \WP_REST_Response($response);
     }
 }

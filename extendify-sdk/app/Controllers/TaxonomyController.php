@@ -3,9 +3,9 @@
  * Controls Taxonomies
  */
 
-namespace Extendify\ExtendifySdk\Controllers;
+namespace Extendify\Library\Controllers;
 
-use Extendify\ExtendifySdk\Http;
+use Extendify\Library\Http;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
@@ -23,7 +23,7 @@ class TaxonomyController
      */
     public static function index()
     {
-        $response = Http::get('/airtable-taxonomies-simple', []);
+        $response = Http::get('/taxonomies', []);
         return new \WP_REST_Response($response);
     }
 }

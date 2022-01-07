@@ -3,9 +3,9 @@
  * Manage any shared assets that load within the editor and the front-end.
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
-use Extendify\ExtendifySdk\App;
+use Extendify\Library\App;
 
 /**
  * This class handles assets that load within the editor and the front-end.
@@ -113,7 +113,7 @@ class Shared
                 --wp--preset--color--tertiary: var(--global-palette7);
                 --wp--custom--spacing--large: clamp(var(--global-sm-spacing), 5vw, var(--global-xxl-spacing));
                 --wp--preset--font-size--large: var(--h2FontSize);
-                --wp--preset--font-size--huge: var(--h1FontSize); 
+                --wp--preset--font-size--huge: var(--h1FontSize);
             }';
         }
 
@@ -126,7 +126,7 @@ class Shared
                 --wp--preset--color--tertiary: var(--nv-light-bg);
                 --wp--custom--spacing--large: clamp(15px, 5vw, 80px);
                 --wp--preset--font-size--large: var(--h2FontSize);
-                --wp--preset--font-size--huge: var(--h1FontSize); 
+                --wp--preset--font-size--huge: var(--h1FontSize);
             }';
         }
 
@@ -211,7 +211,7 @@ class Shared
 
         if ($this->theme === 'twentytwentytwo') {
             $css = 'body, .editor-styles-wrapper {
-                --extendify--spacing--large: clamp(2rem,8vw,8rem); 
+                --extendify--spacing--large: clamp(2rem,8vw,8rem);
             }';
         }
 
@@ -224,7 +224,7 @@ class Shared
                 --wp--preset--color--tertiary: var(--global--color-light-gray);
                 --wp--style--block-gap: var(--global--spacing-unit);
                 --wp--preset--font-size--large: 2.5rem;
-                --wp--preset--font-size--huge: var(--global--font-size-xxl); 
+                --wp--preset--font-size--huge: var(--global--font-size-xxl);
             }
             .has-foreground-background-color,
             .has-primary-background-color,
@@ -293,6 +293,6 @@ class Shared
             }';
         }//end if
 
-        wp_add_inline_style( App::$slug . '-utility-classes',  $css );
+        wp_add_inline_style( App::$slug . '-utilities',  $css );
     }
 }

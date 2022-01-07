@@ -48,4 +48,7 @@ export const User = {
             },
         })
     },
+    allowedImports() {
+        return api.get('max-free-imports')
+    },
 }

@@ -47,17 +47,11 @@ export default function ExtendifyLibrary({ show = false }) {
 
     // Let the visibility to be controlled from outside the application
     useEffect(() => {
-        window.addEventListener('extendify-sdk::open-library', showLibrary)
-        window.addEventListener('extendify-sdk::close-library', hideLibrary)
+        window.addEventListener('extendify::open-library', showLibrary)
+        window.addEventListener('extendify::close-library', hideLibrary)
         return () => {
-            window.removeEventListener(
-                'extendify-sdk::open-library',
-                showLibrary,
-            )
-            window.removeEventListener(
-                'extendify-sdk::close-library',
-                hideLibrary,
-            )
+            window.removeEventListener('extendify::open-library', showLibrary)
+            window.removeEventListener('extendify::close-library', hideLibrary)
         }
     }, [hideLibrary, showLibrary])
 

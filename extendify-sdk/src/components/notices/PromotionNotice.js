@@ -1,7 +1,6 @@
 import { Button } from '@wordpress/components'
 
 export default function PromotionNotice({ promotionData }) {
-    console.log({ promotionData })
     return (
         <>
             <span className="text-black">{promotionData?.text ?? ''}</span>
@@ -13,7 +12,7 @@ export default function PromotionNotice({ promotionData }) {
                     <Button
                         variant="link"
                         className="text-black underline hover:no-underline p-0 h-auto"
-                        href={`${promotionData.url}?utm_source=${window.extendifySdkData.sdk_partner}`}
+                        href={`${promotionData.url}?utm_source=${window.extendifyData.sdk_partner}`}
                         target="_blank">
                         {promotionData?.button_text}
                     </Button>

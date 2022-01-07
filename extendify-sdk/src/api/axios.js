@@ -2,9 +2,9 @@ import axios from 'axios'
 import { useUserStore } from '../state/User'
 
 const Axios = axios.create({
-    baseURL: window.extendifySdkData.root,
+    baseURL: window.extendifyData.root,
     headers: {
-        'X-WP-Nonce': window.extendifySdkData.nonce,
+        'X-WP-Nonce': window.extendifyData.nonce,
         'X-Requested-With': 'XMLHttpRequest',
         'X-Extendify': true,
     },
@@ -47,7 +47,7 @@ function checkDevMode(request) {
 function checkForSoftError(response) {
     if (Object.prototype.hasOwnProperty.call(response, 'soft_error')) {
         window.dispatchEvent(
-            new CustomEvent('extendify-sdk::softerror-encountered', {
+            new CustomEvent('extendify::softerror-encountered', {
                 detail: response.soft_error,
                 bubbles: true,
             }),

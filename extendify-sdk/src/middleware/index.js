@@ -20,10 +20,18 @@ export const Middleware = (middleware = []) => {
     }
 }
 
-export async function AuthorizationCheck(pipes) {
-    const middleware = MiddlewareGenerator(pipes)
+export async function AuthorizationCheck(middleware) {
+    const middlewareGenerator = MiddlewareGenerator(middleware.stack)
     while (true) {
-        const result = await middleware.next()
+        let result
+        try {
+            result = await middlewareGenerator.next()
+        } catch {
+            // Reset the stack and exit the middleware
+            // This is used if you want to have the user cancel
+            middleware.reset()
+            throw 'Middleware exited'
+        }
 
         // TODO: Could probably have a check for errors here
         if (result.done) {

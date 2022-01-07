@@ -50,7 +50,7 @@ const utilityClassEdit = createHigherOrderComponent((BlockEdit) => {
                 {classes && (
                     <InspectorAdvancedControls>
                         <FormTokenField
-                            label={__('Extendify Utilities', 'extendify-sdk')}
+                            label={__('Extendify Utilities', 'extendify')}
                             tokenizeOnSpace={true}
                             value={classes}
                             suggestions={suggestionList}

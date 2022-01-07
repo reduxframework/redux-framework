@@ -3,10 +3,10 @@
  * Helper class for making http requests
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
-use Extendify\ExtendifySdk\App;
-use Extendify\ExtendifySdk\User;
+use Extendify\Library\App;
+use Extendify\Library\User;
 
 /**
  * Controller for http communication
@@ -64,7 +64,7 @@ class Http
             'wp_theme' => \get_option('template'),
             'mode' => App::$environment,
             'uuid' => User::data('uuid'),
-            'sdk_version' => App::$version,
+            'library_version' => App::$version,
             'wp_active_plugins' => $request->get_method() === 'POST' ? \get_option('active_plugins') : [],
             'sdk_partner' => App::$sdkPartner,
         ];

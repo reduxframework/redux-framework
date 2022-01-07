@@ -41,7 +41,7 @@ export default function ActivatingModal() {
 
     return (
         <Modal
-            title={__('Activating plugins', 'extendify-sdk')}
+            title={__('Activating plugins', 'extendify')}
             isDismissible={false}>
             <Button
                 style={{
@@ -51,7 +51,7 @@ export default function ActivatingModal() {
                 isPrimary
                 isBusy
                 onClick={() => {}}>
-                {__('Activating...', 'extendify-sdk')}
+                {__('Activating...', 'extendify')}
             </Button>
         </Modal>
     )
