@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Extendify\\ExtendifySdk\\' => array($baseDir . '/app'),
+    'Extendify\\Library\\' => array($baseDir . '/app'),
 );

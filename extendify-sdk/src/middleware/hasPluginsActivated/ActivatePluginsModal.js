@@ -27,7 +27,7 @@ export default function ActivatePluginsModal(props) {
 
     return (
         <Modal
-            title={__('Activate required plugins', 'extendify-sdk')}
+            title={__('Activate required plugins', 'extendify')}
             isDismissible={false}>
             <div>
                 <p
@@ -40,7 +40,7 @@ export default function ActivatePluginsModal(props) {
                                 'There is just one more step. This %s requires the following plugins to be installed and activated:',
                                 wantedTemplate?.fields?.type ?? 'template',
                             ),
-                            'extendify-sdk',
+                            'extendify',
                         )}
                 </p>
                 <ul>
@@ -58,7 +58,7 @@ export default function ActivatePluginsModal(props) {
                 </ul>
                 <ButtonGroup>
                     <Button isPrimary onClick={installPlugins}>
-                        {__('Activate Plugins', 'extendify-sdk')}
+                        {__('Activate Plugins', 'extendify')}
                     </Button>
                     {props.showClose && (
                         <Button
@@ -68,10 +68,7 @@ export default function ActivatePluginsModal(props) {
                                 boxShadow: 'none',
                                 margin: '0 4px',
                             }}>
-                            {__(
-                                'No thanks, return to library',
-                                'extendify-sdk',
-                            )}
+                            {__('No thanks, return to library', 'extendify')}
                         </Button>
                     )}
                 </ButtonGroup>

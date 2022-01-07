@@ -1,18 +1,7 @@
-/**
- * External dependencies
- */
 import Masonry from 'react-masonry-css'
-
-/**
- * WordPress dependencies
- */
 import { useEffect, useState, useCallback, useRef } from '@wordpress/element'
 import { Spinner, Button } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
-
-/**
- * Internal dependencies
- */
+import { __, sprintf } from '@wordpress/i18n'
 import { useTemplatesStore } from '../state/Templates'
 import { Templates as TemplatesApi } from '../api/Templates'
 import { useInView } from 'react-intersection-observer'
@@ -22,13 +11,10 @@ import { ImportTemplateBlock } from '../components/ImportTemplateBlock'
 export default function GridView() {
     const isMounted = useIsMounted()
     const templates = useTemplatesStore((state) => state.templates)
-
     const appendTemplates = useTemplatesStore((state) => state.appendTemplates)
     const [serverError, setServerError] = useState('')
     const [nothingFound, setNothingFound] = useState(false)
-    // const [imagesLoaded, setImagesLoaded] = useState([])
     const [loadMoreRef, inView] = useInView()
-
     const updateSearchParams = useTemplatesStore(
         (state) => state.updateSearchParams,
     )
@@ -37,6 +23,10 @@ export default function GridView() {
     // Store the next page in case we have pagination
     const nextPage = useRef(useTemplatesStore.getState().nextPage)
     const searchParams = useRef(useTemplatesStore.getState().searchParams)
+    const taxonomyType =
+        searchParams.current.type === 'pattern' ? 'patternType' : 'layoutType'
+    const currentTax = searchParams.current.taxonomies[taxonomyType]
+
     // Connect to the store on mount, disconnect on unmount, catch state-changes in a reference
     useEffect(
         () =>
@@ -71,7 +61,7 @@ export default function GridView() {
                     ? error.message
                     : __(
                           'Unknown error occured. Check browser console or contact support.',
-                          'extendify-sdk',
+                          'extendify',
                       ),
             )
         })
@@ -119,9 +109,7 @@ export default function GridView() {
     if (serverError.length) {
         return (
             <div className="text-left">
-                <h2 className="text-left">
-                    {__('Server error', 'extendify-sdk')}
-                </h2>
+                <h2 className="text-left">{__('Server error', 'extendify')}</h2>
                 <code
                     className="block max-w-xl p-4 mb-4"
                     style={{
@@ -132,7 +120,6 @@ export default function GridView() {
                 <Button
                     isTertiary
                     onClick={() => {
-                        // setImagesLoaded([])
                         updateSearchParams({
                             taxonomies: {},
                             search: '',
@@ -147,15 +134,28 @@ export default function GridView() {
 
     if (nothingFound) {
         return (
-            <h2 className="text-left">
-                {__('No results found.', 'extendify-sdk')}
-            </h2>
+            <div className="flex h-full items-center justify-center w-full -mt-2 sm:mt-0">
+                <h2 className="text-sm text-extendify-gray font-normal">
+                    {sprintf(
+                        searchParams.current.type === 'template'
+                            ? __(
+                                  'We couldn\'t find any layouts in the "%s" category.',
+                                  'extendify',
+                              )
+                            : __(
+                                  'We couldn\'t find any patterns in the "%s" category.',
+                                  'extendify',
+                              ),
+                        currentTax?.title ?? currentTax.slug,
+                    )}
+                </h2>
+            </div>
         )
     }
 
     if (!templates.length) {
         return (
-            <div className="flex items-center justify-center w-full sm:mt-64">
+            <div className="flex h-full items-center justify-center w-full -mt-2 sm:mt-0">
                 <Spinner />
             </div>
         )
@@ -168,13 +168,12 @@ export default function GridView() {
         599: 2,
         400: 1,
     }
-
     return (
         <>
             <Masonry
                 breakpointCols={breakpointColumnsObj}
-                className="flex -ml-8 w-auto pb-40 pt-0.5 pl-0.5"
-                columnClassName="pl-8 bg-clip-padding min-h-screen">
+                className="flex -ml-6 md:-ml-8 w-auto pb-40 pt-0.5 px-0.5"
+                columnClassName="pl-6 md:pl-8 bg-clip-padding min-h-screen">
                 {templates.map((template) => {
                     return (
                         <ImportTemplateBlock

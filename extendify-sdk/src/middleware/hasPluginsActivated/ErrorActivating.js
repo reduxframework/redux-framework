@@ -16,18 +16,18 @@ export default function ErrorActivating({ msg }) {
             style={{
                 maxWidth: '500px',
             }}
-            title={__('Error Activating plugins', 'extendify-sdk')}
+            title={__('Error Activating plugins', 'extendify')}
             isDismissible={false}>
             {__(
                 'You have encountered an error that we cannot recover from. Please try again.',
-                'extendify-sdk',
+                'extendify',
             )}
             <br />
             <Notice isDismissible={false} status="error">
                 {msg}
             </Notice>
             <Button isPrimary onClick={goBack}>
-                {__('Go back', 'extendify-sdk')}
+                {__('Go back', 'extendify')}
             </Button>
         </Modal>
     )

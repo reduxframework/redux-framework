@@ -73,17 +73,17 @@ const LibraryAccessModal = () => {
 
     return (
         <Modal
-            title={__('Extendify Settings', 'extendify-sdk')}
+            title={__('Extendify Settings', 'extendify')}
             onRequestClose={closeModal}>
             <ToggleControl
                 label={
                     isAdmin
-                        ? __('Enable the library for myself', 'extendify-sdk')
-                        : __('Enable the library', 'extendify-sdk')
+                        ? __('Enable the library for myself', 'extendify')
+                        : __('Enable the library', 'extendify')
                 }
                 help={__(
                     'Publish with hundreds of patterns & page layouts',
-                    'extendify-sdk',
+                    'extendify',
                 )}
                 checked={libraryforMyself}
                 onChange={() => handleToggle('user')}
@@ -98,7 +98,7 @@ const LibraryAccessModal = () => {
                         )}
                         help={__(
                             'Everyone publishes with patterns & page layouts',
-                            'extendify-sdk',
+                            'extendify',
                         )}
                         checked={libraryforEveryone}
                         onChange={() => handleToggle('global')}

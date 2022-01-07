@@ -9,7 +9,9 @@ const searchMemo = new Map()
 
 export default function SiteTypeSelector({ value, setValue, terms }) {
     const preferredOptionsHistory = useUserStore(
-        (state) => state.preferredOptionsHistory,
+        (state) =>
+            state.preferredOptionsHistory?.siteType?.filter((t) => t.slug) ??
+            {},
     )
     const searchParams = useTemplatesStore((state) => state.searchParams)
     const [expanded, setExpanded] = useState(false)
@@ -18,19 +20,15 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
     const [tempValue, setTempValue] = useState('')
     const [visibleChoices, setVisibleChoices] = useState([])
 
-    const examples = useMemo(
-        () =>
-            Object.values(
-                terms
-                    .filter((t) => t?.featured)
-                    .sort((a, b) => {
-                        if (a.term < b.term) return -1
-                        if (a.term > b.term) return 1
-                        return 0
-                    }),
-            ),
-        [terms],
-    )
+    const examples = useMemo(() => {
+        return terms
+            .filter((t) => t?.featured)
+            .sort((a, b) => {
+                if (a.slug < b.slug) return -1
+                if (a.slug > b.slug) return 1
+                return 0
+            })
+    }, [terms])
 
     const updateSearch = (term) => {
         setTempValue(term)
@@ -52,13 +50,13 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
 
     const showRecent = () =>
         visibleChoices === examples &&
-        preferredOptionsHistory?.siteType?.length > 0
-    const unknown = value === 'Unknown' || !value.length
+        Object.keys(preferredOptionsHistory).length > 0
+    const unknown = value.slug === 'unknown' || !value?.slug
 
     useEffect(() => {
         setFuzzy(
             new Fuse(terms, {
-                keys: ['term', 'parent', 'keywords'],
+                keys: ['slug', 'title', 'keywords'],
                 minMatchCharLength: 2,
                 threshold: 0.3,
             }),
@@ -78,7 +76,7 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
             <>
                 <span className="flex flex-col text-left">
                     <span className="text-sm mb-1">
-                        {__('Site Type', 'extendify-sdk')}
+                        {__('Site Type', 'extendify')}
                     </span>
                     <span className="font-light text-xs">{description}</span>
                 </span>
@@ -129,42 +127,36 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
         )
     }
 
-    const choicesList = (
-        choices,
-        title = __('Suggestions', 'extendify-sdk'),
-    ) => {
+    const choicesList = (choices, title = __('Suggestions', 'extendify')) => {
         if (choices === examples) {
-            title = __('Examples', 'extendify-sdk')
+            title = __('Examples', 'extendify')
         }
         return (
             <>
-                <h4 className="mt-4 mb-2 text-left uppercase text-xs text-gray-700">
+                <h4 className="mt-4 mb-2 text-left uppercase text-xss text-gray-700 font-medium">
                     {title}
                 </h4>
                 <ul className="m-0">
                     {choices.map((item) => {
-                        if (
-                            Object.prototype.hasOwnProperty.call(item, 'term')
-                        ) {
-                            item = item.term
-                        }
+                        const label = item?.title ?? item.slug
                         const current =
-                            searchParams?.taxonomies?.tax_categories === item
+                            searchParams?.taxonomies?.siteType?.slug ===
+                            item.slug
                         return (
-                            <li key={item} className="m-0 mb-1">
+                            <li
+                                key={item.slug + item?.title}
+                                className="m-0 mb-1">
                                 <button
                                     type="button"
                                     className={classNames(
                                         'w-full text-left text-sm bg-transparent hover:text-wp-theme-500 m-0 pl-0 cursor-pointer',
-                                        {
-                                            'text-gray-800': !current,
-                                        },
+                                        { 'text-gray-800': !current },
                                     )}
                                     onClick={() => {
                                         setExpanded(false)
                                         setValue(item)
                                     }}>
-                                    {item}
+                                    {label}
                                 </button>
                             </li>
                         )
@@ -175,33 +167,33 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
     }
 
     return (
-        <div className="w-full bg-gray-100 rounded">
+        <div className="w-full bg-extendify-transparent-black rounded">
             <button
                 type="button"
-                onClick={() => setExpanded((value) => !value)}
-                className="flex items-center justify-between text-gray-800 button-focus w-full p-4 m-0 cursor-pointer bg-gray-100 hover:bg-gray-150 rounded">
+                onClick={() => setExpanded((expanded) => !expanded)}
+                className="flex items-center justify-between text-gray-800 button-focus w-full p-4 m-0 cursor-pointer bg-transparent hover:bg-extendify-transparent-black-100 rounded">
                 {contentHeader(
                     expanded
-                        ? __('What kind of site is this?', 'extendify-sdk')
-                        : value,
+                        ? __('What kind of site is this?', 'extendify')
+                        : value?.title ?? value.slug ?? 'Unknown',
                 )}
             </button>
             {expanded && (
-                <div className="p-4 pt-0">
+                <div className="p-4 pt-0 overflow-y-auto max-h-96">
                     <div className="relative my-2">
                         <label htmlFor="site-type-search" className="sr-only">
-                            {__('Search', 'extendify-sdk')}
+                            {__('Search', 'extendify')}
                         </label>
                         <input
                             ref={searchRef}
                             id="site-type-search"
-                            value={tempValue || ''}
+                            value={tempValue ?? ''}
                             onChange={(event) =>
                                 updateSearch(event.target.value)
                             }
                             type="text"
                             className="button-focus bg-white border-0 m-0 p-3.5 py-2.5 rounded text-sm w-full"
-                            placeholder={__('Search', 'extendify-sdk')}
+                            placeholder={__('Search', 'extendify')}
                         />
                         <svg
                             className="absolute top-2 right-2 hidden lg:block pointer-events-none"
@@ -217,19 +209,21 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
                     </div>
                     {tempValue.length > 1 && visibleChoices === examples && (
                         <p className="text-left">
-                            {__('Nothing found...', 'extendify-sdk')}
+                            {__('Nothing found...', 'extendify')}
                         </p>
                     )}
                     {showRecent() && (
                         <div className="mb-8">
                             {choicesList(
-                                preferredOptionsHistory?.siteType,
-                                __('Recent', 'extendify-sdk'),
+                                preferredOptionsHistory,
+                                __('Recent', 'extendify'),
                             )}
                         </div>
                     )}
-                    {visibleChoices && <div>{choicesList(visibleChoices)}</div>}
-                    {unknown || (
+                    {visibleChoices.length > 0 && (
+                        <div>{choicesList(visibleChoices)}</div>
+                    )}
+                    {unknown ? null : (
                         <button
                             type="button"
                             className="mt-4 w-full text-left text-sm bg-transparent hover:text-wp-theme-500 pl-0 cursor-pointer text-wp-theme-500"
@@ -237,7 +231,7 @@ export default function SiteTypeSelector({ value, setValue, terms }) {
                                 setExpanded(false)
                                 setValue('Unknown')
                             }}>
-                            {__('Reset', 'extendify-sdk')}
+                            {__('Reset', 'extendify')}
                         </button>
                     )}
                 </div>

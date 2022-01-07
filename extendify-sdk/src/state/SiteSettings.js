@@ -5,6 +5,7 @@ import { SiteSettings } from '../api/SiteSettings'
 const storage = {
     getItem: async () => await SiteSettings.getData(),
     setItem: async (_name, value) => await SiteSettings.setData(value),
+    removeItem: () => {},
 }
 
 export const useSiteSettingsStore = create(

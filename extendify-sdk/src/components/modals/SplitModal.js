@@ -10,7 +10,7 @@ export default function SplitModal({ onRequestClose, isOpen, left, right }) {
                 as="div"
                 static
                 open={isOpen}
-                className="extendify-sdk"
+                className="extendify"
                 onClose={onRequestClose}>
                 <div className="fixed z-high inset-0 flex">
                     <Transition.Child
@@ -31,7 +31,7 @@ export default function SplitModal({ onRequestClose, isOpen, left, right }) {
                                     onClick={onRequestClose}
                                     className="absolute bg-transparent block p-4 top-0 right-0 rounded-md cursor-pointer text-gray-700 opacity-30 hover:opacity-100">
                                     <span className="sr-only">
-                                        {__('Close', 'extendify-sdk')}
+                                        {__('Close', 'extendify')}
                                     </span>
                                     <Icon icon={close} />
                                 </button>

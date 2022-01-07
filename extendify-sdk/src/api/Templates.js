@@ -1,5 +1,4 @@
 import { Axios as api } from './axios'
-import { useTaxonomyStore } from '../state/Taxonomies'
 import { useUserStore } from '../state/User'
 
 let count = 0
@@ -8,8 +7,10 @@ export const Templates = {
     async get(searchParams, options = {}) {
         count++
         const defaultpageSize = searchParams.type === 'pattern' ? '8' : '4'
+        const taxonomyType =
+            searchParams.type === 'pattern' ? 'patternType' : 'layoutType'
         const templates = await api.post('templates', {
-            filterByFormula: prepareFilterFormula(searchParams),
+            filterByFormula: prepareFilterFormula(searchParams, taxonomyType),
             pageSize: options?.pageSize ?? defaultpageSize,
             categories: searchParams.taxonomies,
             search: searchParams.search,
@@ -17,29 +18,17 @@ export const Templates = {
             offset: options.offset ?? '',
             initial: count === 1,
             request_count: count,
-            sdk_partner: useUserStore.getState().sdkPartner ?? '',
+            sdk_partner: useUserStore.getState()?.sdkPartner ?? '',
         })
         return templates
-    },
-    related(template, queryType, wantedType) {
-        return api.post('related', {
-            pageSize: 4,
-            query_type: queryType,
-            wanted_type: wantedType,
-            categories: template?.fields?.tax_categories,
-            pattern_types: template?.fields?.tax_pattern_types,
-            style: template?.fields?.tax_style,
-            type: template?.fields?.type,
-            template_id: template?.id,
-        })
     },
 
     // TODO: Refactor this later to combine the following three
     maybeImport(template) {
         return api.post(`templates/${template.id}`, {
-            template_id: template.id,
+            template_id: template?.id,
             maybe_import: true,
-            type: template.fields.type,
+            type: template.fields?.type,
             pageSize: '1',
             template_name: template.fields?.title,
         })
@@ -48,7 +37,10 @@ export const Templates = {
         return api.post(`templates/${template.id}`, {
             template_id: template.id,
             imported: true,
-            base_pattern: template.fields?.base_pattern[0] ?? '',
+            basePattern:
+                template.fields?.basePattern ??
+                template.fields?.baseLayout ??
+                '',
             type: template.fields.type,
             pageSize: '1',
             template_name: template.fields?.title,
@@ -56,45 +48,16 @@ export const Templates = {
     },
 }
 
-const prepareFilterFormula = (filters) => {
-    let { taxonomies, type } = filters
-    taxonomies = { ...taxonomies }
-    const formula = []
-
-    // In Airtable, we tag them as Default
-    if (taxonomies?.tax_categories === 'Unknown') {
-        taxonomies.tax_categories = 'Default'
+const prepareFilterFormula = ({ taxonomies }, type) => {
+    const siteType = taxonomies?.siteType?.slug?.length
+        ? taxonomies.siteType.slug
+        : 'default'
+    const formula = [
+        `{type}="${type.replace('Type', '')}"`,
+        `{siteType}="${siteType}"`,
+    ]
+    if (taxonomies[type]?.slug) {
+        formula.push(`{${type}}="${taxonomies[type].slug}"`)
     }
-
-    // Builds the taxonomy list by looping over all supplied taxonomies
-    const taxFormula = Object.entries(taxonomies)
-        .filter(([tax, term]) => checkTermIsAvailableOnType(tax, term, type))
-        .filter(([tax]) => Boolean(tax[1].length))
-        .map(([tax, term]) => `${tax} = "${term}"`)
-        .join(', ')
-
-    taxFormula.length && formula.push(taxFormula)
-    type.length && formula.push(`{type}="${type}"`)
-
-    return formula.length
-        ? `AND(${formula.join(', ')})`.replace(/\r?\n|\r/g, '')
-        : ''
-}
-
-const termTypeMap = new Map()
-const checkTermIsAvailableOnType = (tax, term, type) => {
-    const key = `${tax}-${term}-${type}`
-    if (key === 'tax_categories-Default-pattern') {
-        return true
-    }
-    if (!termTypeMap.has(key)) {
-        termTypeMap.set(
-            key,
-            useTaxonomyStore
-                .getState()
-                ?.taxonomies[tax]?.find((item) => item?.term === term)
-                ?.type?.includes(type),
-        )
-    }
-    return termTypeMap.get(key)
+    return `AND(${formula.join(', ')})`.replace(/\r?\n|\r/g, '')
 }

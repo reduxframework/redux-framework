@@ -30,12 +30,36 @@ body {
         --wp--custom--spacing--large,
         clamp(2em, 8vw, 8em)
     );
+
+    /* Add pattern preset font sizes */
+    --wp--preset--font-size--ext-small: 1rem;
+    --wp--preset--font-size--ext-medium: clamp(1.5rem, 2vw, 2rem);
+    --wp--preset--font-size--ext-large: clamp(2.25rem, 4vw, 3.75rem);
+    --wp--preset--font-size--ext-x-large: clamp(3rem, 6vw, 4.75rem);
+    --wp--preset--font-size--ext-gigantic: clamp(3.25rem, 7.5vw, 5.75rem);
 }
 
 /* Astra */
 .ast-separate-container .ext .block-editor-block-list__layout {
     /* no suggestion */
     @apply ext-p-0 !important;
+}
+
+/* Astra: Remove spacer block visuals in the library */
+.block-editor-block-preview__content-iframe
+    .ext
+    [data-type="core/spacer"]
+    .components-resizable-box__container {
+    /* no suggestion */
+    background: transparent !important;
+}
+
+.block-editor-block-preview__content-iframe
+    .ext
+    [data-type="core/spacer"]
+    .block-library-spacer__resize-container::before {
+    /* no suggestion */
+    display: none !important;
 }
 
 /* Twenty Twenty One */

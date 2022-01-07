@@ -3,9 +3,9 @@
  * Controls User info
  */
 
-namespace Extendify\ExtendifySdk\Controllers;
+namespace Extendify\Library\Controllers;
 
-use Extendify\ExtendifySdk\SiteSettings;
+use Extendify\Library\SiteSettings;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');

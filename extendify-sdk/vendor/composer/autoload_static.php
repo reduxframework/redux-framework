@@ -9,12 +9,12 @@ class ComposerStaticInit340a6822f05e2bfceab6432d90c2eeaa
     public static $prefixLengthsPsr4 = array (
         'E' => 
         array (
-            'Extendify\\ExtendifySdk\\' => 23,
+            'Extendify\\Library\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Extendify\\ExtendifySdk\\' => 
+        'Extendify\\Library\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),

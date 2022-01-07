@@ -3,15 +3,15 @@ import { useTemplatesStore } from '../state/Templates'
 import classNames from 'classnames'
 import { useGlobalStore } from '../state/GlobalState'
 
-export default function TypeSelect() {
+export const TypeSelect = ({ className }) => {
     const updateType = useTemplatesStore((state) => state.updateType)
     const currentType = useGlobalStore((state) =>
         state.currentType ? state.currentType : 'pattern',
     )
 
     return (
-        <div className="text-center w-full md:pl-36 md:ml-2">
-            <h4 className="sr-only">{__('Type select', 'extendify-sdk')}</h4>
+        <div className={className}>
+            <h4 className="sr-only">{__('Type select', 'extendify')}</h4>
             <button
                 type="button"
                 className={classNames({
@@ -20,7 +20,7 @@ export default function TypeSelect() {
                     'bg-transparent text-black': currentType !== 'pattern',
                 })}
                 onClick={() => updateType('pattern')}>
-                <span className="">{__('Patterns', 'extendify-sdk')}</span>
+                <span className="">{__('Patterns', 'extendify')}</span>
             </button>
             <button
                 type="button"
@@ -30,7 +30,7 @@ export default function TypeSelect() {
                     'bg-transparent text-black': currentType !== 'template',
                 })}
                 onClick={() => updateType('template')}>
-                <span className="">{__('Page Layouts', 'extendify-sdk')}</span>
+                <span className="">{__('Page Layouts', 'extendify')}</span>
             </button>
         </div>
     )

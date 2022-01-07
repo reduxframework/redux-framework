@@ -3,9 +3,9 @@
  * Manage any frontend related tasks here.
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
-use Extendify\ExtendifySdk\App;
+use Extendify\Library\App;
 
 /**
  * This class handles any file loading for the frontend of the site.
@@ -60,8 +60,8 @@ class Frontend
     {
         $version = App::$environment === 'PRODUCTION' ? App::$version : uniqid();
         \wp_enqueue_style(
-            App::$slug . '-utility-classes',
-            EXTENDIFYSDK_BASE_URL . 'public/build/extendify-utilities.css',
+            App::$slug . '-utilities',
+            EXTENDIFY_BASE_URL . 'public/build/extendify-utilities.css',
             [],
             $version,
             'all'

@@ -1,21 +1,14 @@
-import { useUserStore } from '../../state/User'
-import ImportCounter from '../../components/ImportCounter'
-
 export default function HasSidebar({ children }) {
-    const apiKey = useUserStore((state) => state.apiKey)
     return (
         <>
-            <aside className="flex-shrink-0 sm:pl-8 py-0 relative">
-                <div className="sm:w-56 lg:w-72 sticky flex flex-col lg:h-full">
+            <aside className="flex-shrink-0 py-0 sm:py-5 relative border-r border-extendify-transparent-black-100 bg-extendify-transparent-white backdrop-filter backdrop-blur-xl backdrop-saturate-200">
+                <div className="flex flex-col h-full sm:w-64 py-6 sm:py-0 sm:space-y-6">
                     {children[0]}
-                </div>
-                <div className="hidden sm:flex flex-col absolute bottom-0 mb-8 w-72 text-left space-y-4">
-                    {!apiKey.length && <ImportCounter />}
                 </div>
             </aside>
             <main
                 id="extendify-templates"
-                className="w-full smp:l-12 h-full overflow-hidden">
+                className="bg-white w-full pt-6 sm:pt-0 h-full overflow-hidden">
                 {children[1]}
             </main>
         </>

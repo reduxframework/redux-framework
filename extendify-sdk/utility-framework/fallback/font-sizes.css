@@ -9,3 +9,28 @@
     );
     font-size: var(--wp--preset--font-size--gigantic, var(--fallback-size));
 }
+
+.has-ext-small-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-small) !important;
+}
+
+.has-ext-medium-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-medium) !important;
+}
+
+.has-ext-large-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-large) !important;
+}
+
+.has-ext-x-large-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-x-large) !important;
+}
+
+.has-ext-gigantic-font-size {
+    /* no suggestion */
+    font-size: var(--wp--preset--font-size--ext-gigantic) !important;
+}

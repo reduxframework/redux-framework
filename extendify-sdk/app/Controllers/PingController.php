@@ -3,9 +3,9 @@
  * Controls Http requests
  */
 
-namespace Extendify\ExtendifySdk\Controllers;
+namespace Extendify\Library\Controllers;
 
-use Extendify\ExtendifySdk\Http;
+use Extendify\Library\Http;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');

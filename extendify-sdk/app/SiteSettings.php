@@ -3,7 +3,7 @@
  * Helper class for interacting with the user
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
 
 /**
  * Helper class for interacting with the user
@@ -12,7 +12,7 @@ class SiteSettings
 {
 
     /**
-     * SiteSettings option_name
+     * SiteSettings option_name - For historical reasons do not change.
      *
      * @var string
      */

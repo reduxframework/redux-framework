@@ -10,13 +10,10 @@ export default function useTaxonomies(fetchImmediately = false) {
     const setTaxonomies = useTaxonomyStore((state) => state.setTaxonomies)
     const fetchTaxonomies = useCallback(async () => {
         let tax = await TaxonomiesApi.get()
-        // Only allow items that have the 'tax_' prefix
-        tax = Object.keys(tax)
-            .filter((t) => t.startsWith('tax_'))
-            .reduce((taxFiltered, key) => {
-                taxFiltered[key] = tax[key]
-                return taxFiltered
-            }, {})
+        tax = Object.keys(tax).reduce((taxFiltered, key) => {
+            taxFiltered[key] = tax[key]
+            return taxFiltered
+        }, {})
         if (!Object.keys(tax)?.length) {
             return
         }

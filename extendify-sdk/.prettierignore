@@ -1,6 +1,0 @@
-node_modules/*
-vendor/*
-public/build/*
-*.min.js
-wpcs
-utility-framework/suggestions.json

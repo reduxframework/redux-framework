@@ -5,6 +5,7 @@ import { injectTemplateBlocks } from './util/templateInjection'
 import { rawHandler } from '@wordpress/blocks'
 import './buttons'
 import './listeners'
+import './blocks/blocks'
 
 window._wpLoadBlockEditor &&
     window.wp.domReady(() => {

@@ -4,9 +4,9 @@ import { useUserStore } from './User'
 import { useTaxonomyStore } from './Taxonomies'
 
 const defaultCategoryForType = (tax) =>
-    tax === 'tax_categories'
-        ? 'Unknown'
-        : useTaxonomyStore.getState()?.taxonomies[tax][0]?.term ?? undefined
+    tax === 'siteType'
+        ? { slug: '', title: 'Unknown' }
+        : { slug: '', title: 'Featured' }
 
 export const useTemplatesStore = create((set, get) => ({
     templates: [],
@@ -19,9 +19,7 @@ export const useTemplatesStore = create((set, get) => ({
         type: 'pattern',
     },
     initTemplateData() {
-        set({
-            activeTemplate: {},
-        })
+        set({ activeTemplate: {} })
         get().setupDefaultTaxonomies()
         get().updateType(useGlobalStore.getState().currentType)
     },
@@ -45,13 +43,19 @@ export const useTemplatesStore = create((set, get) => ({
             {},
         )
         const tax = {}
+        let preferredTax =
+            useUserStore.getState().preferredOptions?.taxonomies ?? {}
 
+        // Check for old site type and set it if it exists
+        if (preferredTax.tax_categories) {
+            preferredTax = get().getLegacySiteType(preferredTax, taxonomies)
+        }
         taxonomyDefaultState = Object.assign(
             {},
             taxonomyDefaultState,
 
-            // Override with the user's preferred taxonomies - Currently only supported with tax_categories
-            useUserStore.getState().preferredOptions?.taxonomies ?? {},
+            // Override with the user's preferred taxonomies
+            preferredTax,
 
             // Override with the global state
             useGlobalStore.getState()?.currentTaxonomies ?? {},
@@ -73,15 +77,12 @@ export const useTemplatesStore = create((set, get) => ({
             get().searchParams.taxonomies,
             params,
         )
-        if (data?.taxonomies?.tax_categories) {
+        if (data?.taxonomies?.siteType) {
             // This is what the user "prefers", which may be used outside the library
             // which is persisted to the database, where as the global library state is in local storage
             useUserStore
                 .getState()
-                .updatePreferredOption(
-                    'tax_categories',
-                    data?.taxonomies?.tax_categories,
-                )
+                .updatePreferredOption('siteType', data?.taxonomies?.siteType)
         }
         useGlobalStore.getState().updateCurrentTaxonomies(data?.taxonomies)
         get().updateSearchParams(data)
@@ -100,15 +101,24 @@ export const useTemplatesStore = create((set, get) => ({
 
         // If the params are the same then don't update
         if (
-            JSON.stringify(searchParams) === JSON.stringify(get().searchParams)
+            JSON.stringify(searchParams) !== JSON.stringify(get().searchParams)
         ) {
-            return
+            set({
+                templates: [],
+                nextPage: '',
+                searchParams,
+            })
         }
-
-        set({
-            templates: [],
-            nextPage: '',
-            searchParams,
-        })
+    },
+    getLegacySiteType: (preferredTax, taxonomies) => {
+        const oldSiteType = taxonomies.siteType.find((t) =>
+            [t.slug, t?.title].includes(preferredTax.tax_categories),
+        )
+        // TODO: This is kind of wonky, as we keep track of the state in two places.
+        useUserStore.getState().updatePreferredSiteType(oldSiteType)
+        get().updateTaxonomies({ siteType: oldSiteType })
+        // Remove the legacy term so this only runs once
+        useUserStore.getState().updatePreferredOption('tax_categories', null)
+        return useUserStore.getState().preferredOptions.taxonomies
     },
 }))

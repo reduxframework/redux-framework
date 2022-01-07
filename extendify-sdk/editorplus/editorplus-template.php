@@ -4,12 +4,6 @@
  * Template Post Type: post, page
  */
 
-$extendifysdkCustomStyles = get_post_meta(
-    isset($GLOBALS['post']) ? $GLOBALS['post']->ID : 0,
-    'extendify_custom_stylesheet',
-    true
-);
-
 ?>
 <?php wp_head(); ?>
 <body <?php body_class(); ?>>

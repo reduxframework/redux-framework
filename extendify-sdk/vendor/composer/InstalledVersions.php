@@ -31,7 +31,7 @@ private static $installed = array (
     array (
     ),
     'reference' => 'ac2cfec95277e7980dfcf8dfde5cd858f1023e03',
-    'name' => 'extendify/extendify-sdk',
+    'name' => 'extendify/extendify',
   ),
   'versions' => 
   array (
@@ -53,7 +53,7 @@ private static $installed = array (
       ),
       'reference' => 'd56bf6102915de5702778fe20f2de3b2fe570b5b',
     ),
-    'extendify/extendify-sdk' => 
+    'extendify/extendify' => 
     array (
       'pretty_version' => 'dev-main',
       'version' => 'dev-main',

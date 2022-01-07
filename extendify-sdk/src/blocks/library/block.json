@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "extendify/library",
+    "title": "Pattern Library",
+    "category": "design",
+    "description": "Add block patterns and full page layouts with the Extendify Library.",
+    "keywords": ["pattern", "extendify", "library", "template", "layouts"],
+    "textdomain": "extendify",
+    "attributes": {
+        "preview": {
+            "type": "string"
+        }
+    }
+}

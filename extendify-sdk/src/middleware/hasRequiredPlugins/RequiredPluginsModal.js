@@ -8,12 +8,23 @@ import { getPluginDescription } from '../../util/general'
 import { useUserStore } from '../../state/User'
 import NeedsPermissionModal from '../NeedsPermissionModal'
 
-export default function RequiredPluginsModal(props) {
+export default function RequiredPluginsModal({
+    forceOpen,
+    buttonLabel,
+    title,
+    message,
+    requiredPlugins,
+}) {
+    // If there's a template in cache ready to be installed.
+    // TODO: this could probably be refactored out when overhauling required plugins
     const wantedTemplate = useWantedTemplateStore(
         (store) => store.wantedTemplate,
     )
+    requiredPlugins =
+        requiredPlugins ?? wantedTemplate?.fields?.required_plugins
+
     const closeModal = () => {
-        if (props.forceOpen) {
+        if (forceOpen) {
             return
         }
         render(
@@ -22,8 +33,10 @@ export default function RequiredPluginsModal(props) {
         )
     }
     const installPlugins = () =>
-        render(<InstallingModal />, document.getElementById('extendify-root'))
-    const requiredPlugins = wantedTemplate?.fields?.required_plugins || []
+        render(
+            <InstallingModal requiredPlugins={requiredPlugins} />,
+            document.getElementById('extendify-root'),
+        )
 
     if (!useUserStore.getState()?.canInstallPlugins) {
         return <NeedsPermissionModal />
@@ -31,24 +44,22 @@ export default function RequiredPluginsModal(props) {
 
     return (
         <Modal
-            title={
-                props.title ?? __('Install required plugins', 'extendify-sdk')
-            }
+            title={title ?? __('Install required plugins', 'extendify')}
             isDismissible={false}>
             <p
                 style={{
                     maxWidth: '400px',
                 }}>
-                {props.message ??
+                {message ??
                     __(
                         sprintf(
                             'There is just one more step. This %s requires the following to be automatically installed and activated:',
                             wantedTemplate?.fields?.type ?? 'template',
                         ),
-                        'extendify-sdk',
+                        'extendify',
                     )}
             </p>
-            {props.message?.length > 0 || (
+            {message?.length > 0 || (
                 <ul>
                     {
                         // Hardcoded temporarily to not force EP install
@@ -65,10 +76,9 @@ export default function RequiredPluginsModal(props) {
             )}
             <ButtonGroup>
                 <Button isPrimary onClick={installPlugins}>
-                    {props.buttonLabel ??
-                        __('Install Plugins', 'extendify-sdk')}
+                    {buttonLabel ?? __('Install Plugins', 'extendify')}
                 </Button>
-                {props.forceOpen || (
+                {forceOpen || (
                     <Button
                         isTertiary
                         onClick={closeModal}
@@ -76,7 +86,7 @@ export default function RequiredPluginsModal(props) {
                             boxShadow: 'none',
                             margin: '0 4px',
                         }}>
-                        {__('No thanks, take me back', 'extendify-sdk')}
+                        {__('No thanks, take me back', 'extendify')}
                     </Button>
                 )}
             </ButtonGroup>
