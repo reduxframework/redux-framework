@@ -1,0 +1,31 @@
+name: Fetch Extendify and create PR
+on: workflow_dispatch
+jobs:
+    fetch-and-pr:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+            - name: Download and replace code
+              run: |
+                # 1. Clean up the existing directory
+                rm -rf ./extendify-sdk && mkdir ./extendify-sdk && mkdir ./extendify-tmp
+                # 2. Fetch from .org
+                curl -LO https://downloads.wordpress.org/plugin/extendify.latest-stable.zip
+                # 3. Unzip to temp directory
+                unzip ./extendify.latest-stable.zip -d ./extendify-tmp
+                # 4. Copy to the sdk directory
+                cp -R ./extendify-tmp/extendify/* ./extendify-sdk
+                # 5. Cleanup directories and remove zip
+                rm -rf ./extendify-tmp && rm ./extendify.latest-stable.zip
+                # 6. Remove main file header content
+                php -w ./extendify-sdk/extendify.php > ./ext.tmp && mv ./ext.tmp ./extendify-sdk/extendify.php
+            - name: Create Pull Request
+              uses: peter-evans/create-pull-request@v3
+              with:
+                commit-message: Update Extendify Library
+                title: Update Extendify Library
+                branch: update-extendify
+                branch-suffix: random
