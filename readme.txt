@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.9
-Stable tag: 4.3.6
+Stable tag: 4.3.7
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -107,6 +107,10 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.7 =
+* Fixed: Incorrect global variable assignment. Thanks, @webbudesign.
+* Release date: January 11, 2022
 
 = 4.3.6 =
 * Modified: Update to the Extendify Library.

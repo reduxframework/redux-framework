@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.7
+* Fixed: #3861 - Incorrect global variable assignment. Thanks, @webbudesign.
+* Release date: January 11, 2022
+
 ## 4.3.6
 * Modified: Update to the Extendify Library.
 * Modified: Moved Extendify and Redux templates libraries back to root folder.
