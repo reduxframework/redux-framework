@@ -10,7 +10,7 @@
 * Modified: Removed "Gutenberg is currently disabled" notice when the Classic Editor plugin is active.
 * Fixed: `date` shortcode without attributes producing error.
 * Fixed: Various jQuery deprecation fixes.
-* Release date: January 07, 2022
+* Release date: January 11, 2022
 * 
 ## 4.3.5
 * Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
