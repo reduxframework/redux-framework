@@ -380,7 +380,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		private function default_cleanup( array $args ): array {
 
 			// Fix the global variable name.
-			if ( '' === $args['global_variable'] || false !== $args['global_variable'] ) {
+			if ( '' === $args['global_variable'] && false !== $args['global_variable'] ) {
 				$args['global_variable'] = str_replace( '-', '_', $args['opt_name'] );
 			}
 

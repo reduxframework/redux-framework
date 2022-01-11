@@ -548,7 +548,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						$field = apply_filters( "redux/options/{$core->args['opt_name']}/field/{$field['id']}", $field );
 
-						if ( empty( $field ) ) {
+						if ( empty( $field ) || ! $field ) {
 							unset( $core->sections[ $k ]['fields'][ $fieldk ] );
 							continue;
 						}
@@ -675,9 +675,9 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 *
 		 * @since       1.0.0
 		 * @access      public
-		 * @return      array|null|string $this->options_defaults
+		 * @return      array $this->options_defaults
 		 */
-		public function default_values() {
+		public function default_values(): array {
 			$core = $this->core();
 
 			if ( ! is_null( $core->sections ) && is_null( $core->options_defaults ) ) {

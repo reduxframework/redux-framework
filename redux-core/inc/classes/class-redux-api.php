@@ -404,7 +404,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 			foreach ( self::$sections as $opt_name => $the_sections ) {
 				if ( ! empty( $the_sections ) ) {
 					if ( ! self::$init[ $opt_name ] ) {
-						self::loadRedux( $opt_name );
+						self::load_redux( $opt_name );
 					}
 				}
 			}
@@ -905,7 +905,6 @@ if ( ! class_exists( 'Redux', false ) ) {
 			// Shim for the old method!
 			if ( is_array( $section_id ) ) {
 				$field = $section_id;
-
 				if ( isset( $field['section_id'] ) ) {
 					$section_id = $field['section_id'];
 				}
@@ -1123,7 +1122,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Deprecated Retrieves option panel global argument array.
+		 * Deprecated Retries option panel global argument array.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
@@ -1135,7 +1134,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Retrieves option panel global argument array.
+		 * Retries option panel global argument array.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $key      Argument key name to be returned.
@@ -1224,6 +1223,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 			$redux = ReduxFrameworkInstances::get_instance( $opt_name );
 
+			// We don't ever need to specify advanced_metaboxes here as all function for metaboxes are core,
+			// and thus, metabox_lite.  The extension handles its own functions and is handled by this condition. - kp.
 			$metaboxes = $redux->extensions['metaboxes'];
 
 			if ( null === $default || '' === $default ) {
@@ -1690,8 +1691,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 		/**
 		 * Method to disables Redux demo mode popup.
-		 *
-		 * @noinspection PhpUnused*/
+		 */
 		public static function disable_demo() {
 			add_action( 'ReduxFrameworkPlugin_admin_notice', 'Redux::remove_demo' );
 			add_action( 'redux_framework_plugin_admin_notice', 'Redux::remove_demo' );
@@ -1707,7 +1707,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Function which forces a panel/page to render.
 		 *
-		 * @param string/ReduxFramework $redux Panel opt_name or Redux object.
+		 * @param string|object $redux Panel opt_name or Redux object.
 		 */
 		public static function render( $redux = '' ) {
 			if ( is_string( $redux ) ) {
@@ -1716,7 +1716,6 @@ if ( ! class_exists( 'Redux', false ) ) {
 					return;
 				}
 			}
-
 			$enqueue = new Redux_Enqueue( $redux );
 			$enqueue->init();
 			$panel = new Redux_Panel( $redux );
