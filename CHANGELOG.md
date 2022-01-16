@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.7.1
+* Fixed: Remove plugin.php hack in Appsero SDK.
+
 ## 4.3.7
 * Fixed: #3861 - Incorrect global variable assignment. Thanks, @webbudesign.
 * Release date: January 11, 2022
