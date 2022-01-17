@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.3.7.1';
+Redux_Core::$version    = '4.3.7.2';
 Redux_Core::$redux_path = dirname( __FILE__ );
 
 /** @noinspection PhpUnhandledExceptionInspection */
@@ -410,10 +410,11 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * Class Constructor. Defines the args for the theme options class
 		 *
-		 * @since       1.0.0
+		 * @param array $sections Panel sections.
+		 * @param array $args     Class constructor arguments.
 		 *
-		 * @param       array $sections Panel sections.
-		 * @param       array $args     Class constructor arguments.
+		 * @throws ReflectionException
+		 * @since       1.0.0
 		 */
 		public function __construct( array $sections = array(), array $args = array() ) {
 			global $pagenow;
@@ -586,6 +587,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 
 		/**
 		 * SHIM: _enqueue_output
+		 *
+		 * @throws ReflectionException
 		 */
 		public function _enqueue_output() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			if ( empty( $this->output_class ) ) {

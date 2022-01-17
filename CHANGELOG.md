@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.7.2
+* Added: Repeater extension.
+
 ## 4.3.7.1
 * Fixed: Remove plugin.php hack in Appsero SDK.
 
