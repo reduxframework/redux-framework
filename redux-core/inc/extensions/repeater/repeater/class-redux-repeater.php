@@ -139,7 +139,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					}
 
 					if ( is_array( $repeater['title'] ) ) {
-						$repeater['title'] = esc_html__( 'Title', 'redux-pro' );
+						$repeater['title'] = esc_html__( 'Title', 'redux-framework' );
 					}
 
 					echo '<h3><span class="redux-repeater-header">' . esc_html( $repeater['title'] ) . ' </span></h3>';
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					}
 
 					if ( ! isset( $this->field['static'] ) && empty( $this->field['static'] ) ) {
-						echo '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-pro' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a>';
+						echo '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-framework' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a>';
 					}
 
 					echo '</div>';
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					}
 
 					if ( ! isset( $this->field['static'] ) && empty( $this->field['static'] ) ) {
-						echo '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-pro' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a>';
+						echo '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-framework' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a>';
 					}
 
 					echo '</div>';
@@ -234,7 +234,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					}
 				}
 
-				echo '<a href="javascript:void(0);" class="button redux-repeaters-add button-primary' . esc_attr( $disabled ) . '" data-name="' . esc_attr( $this->parent->args['opt_name'] . $this->repeater_values ) . '[title][]">' . esc_html__( 'Add', 'redux-pro' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a><br/>';
+				echo '<a href="javascript:void(0);" class="button redux-repeaters-add button-primary' . esc_attr( $disabled ) . '" data-name="' . esc_attr( $this->parent->args['opt_name'] . $this->repeater_values ) . '[title][]">' . esc_html__( 'Add', 'redux-framework' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a><br/>';
 			}
 		}
 
@@ -385,7 +385,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 				$var = ob_get_contents();
 
 				$var = array(
-					'html'     => $var . '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-pro' ) . '</a>',
+					'html'     => $var . '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-framework' ) . '</a>',
 					'count'    => count( $value ),
 					'sortable' => true,
 					'limit'    => '',

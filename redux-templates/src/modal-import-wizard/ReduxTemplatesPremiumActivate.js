@@ -1,3 +1,5 @@
+// noinspection JSAnnotator
+
 const {__, sprintf} = wp.i18n;
 const {useState} = wp.element;
 const {apiFetch} = wp;

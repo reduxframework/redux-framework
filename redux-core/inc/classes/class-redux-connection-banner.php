@@ -550,7 +550,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 */
 		public static function tos_blurb( $campaign = 'options_panel' ): string {
 			return sprintf(
-				__( 'By clicking the <strong>Register</strong> button, you agree to our <a href="%1$s" target="_blank">terms of service</a>, to create an account, and to share details of your usage metrics with Redux.io.  We may also ocasionally send you emails with product updates, special offers, or other marketing content.', 'redux-framework' ),
+				__( 'By clicking the <strong>Register</strong> button, you agree to our <a href="%1$s" target="_blank">terms of service</a>, to create an account, and to share details of your usage metrics with Redux.io.  We may also occasionally send you emails with product updates, special offers, or other marketing content.', 'redux-framework' ),
 				Redux_Functions_Ex::get_site_utm_url( 'terms', 'appsero', 'activate', $campaign )
 			);
 		}

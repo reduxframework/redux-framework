@@ -461,7 +461,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 				case 'capability_group':
 					global $wp_roles;
 
-					foreach ( $wp_roles->roles as $k => $role ) {
+					foreach ( $wp_roles->roles as $role ) {
 						$caps = array();
 						foreach ( $role['capabilities'] as $key => $cap ) {
 							$caps[ $key ] = ucwords( str_replace( '_', ' ', $key ) );

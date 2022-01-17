@@ -1,3 +1,5 @@
+// noinspection JSAnnotator
+
 const {Fragment} = wp.element;
 const {__} = wp.i18n;
 
