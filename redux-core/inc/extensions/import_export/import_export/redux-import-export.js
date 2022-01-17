@@ -65,7 +65,8 @@
 
 				el.each(
 					function() {
-						$( '#redux-import' ).click(
+						$( '#redux-import' ).on(
+							'click',
 							function( e ) {
 								if ( '' === $( '#import-code-value' ).val() && '' === $( '#import-link-value' ).val() ) {
 									e.preventDefault();
@@ -74,10 +75,11 @@
 							}
 						);
 
-						$( this ).find( '#redux-import-code-button' ).click(
+						$( this ).find( '#redux-import-code-button' ).on(
+							'click',
 							function() {
 								var $el = $( '#redux-import-code-wrapper' );
-								if ( $( '#redux-import-link-wrapper' ).is( ':visible' ) ) {
+								if ( $el.is( ':visible' ) ) {
 									$( '#import-link-value' ).val( '' );
 									$( '#redux-import-link-wrapper' ).fadeOut(
 										'fast',
