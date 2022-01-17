@@ -128,6 +128,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Delay init action function
 		 * Delays all Redux objects from loaded before `plugins_loaded` runs.
+		 *
+		 * @throws ReflectionException
 		 */
 		public static function delay_init() {
 			if ( ! empty( self::$delay_init ) ) {
@@ -163,6 +165,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * Init Redux object
 		 *
 		 * @param string $opt_name Panel opt_name.
+		 *
+		 * @throws ReflectionException
 		 */
 		public static function init( string $opt_name = '' ) {
 			if ( ! empty( $opt_name ) ) {
@@ -295,6 +299,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
+		 * @throws ReflectionException
 		 * @deprecated No longer using camelCase naming conventions.
 		 */
 		public static function loadRedux( string $opt_name = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
@@ -347,6 +352,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * Load Redux Framework.
 		 *
 		 * @param string $opt_name Panel opt_name.
+		 *
+		 * @throws ReflectionException
 		 */
 		public static function load_redux( string $opt_name = '' ) {
 			if ( empty( $opt_name ) ) {
@@ -391,6 +398,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Create Redux instance.
 		 *
+		 * @throws ReflectionException
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function createRedux() {       // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
@@ -399,6 +407,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 		/**
 		 * Create Redux instance.
+		 *
+		 * @throws ReflectionException
 		 */
 		public static function create_redux() {
 			foreach ( self::$sections as $opt_name => $the_sections ) {
@@ -1502,10 +1512,6 @@ if ( ! class_exists( 'Redux', false ) ) {
 		public static function set_extensions( string $opt_name, string $path, bool $force = false ) {
 			if ( '' === $path || '' === $opt_name ) {
 				return;
-			}
-
-			if ( version_compare( PHP_VERSION, '5.5.0', '<' ) ) {
-				include_once Redux_Core::$dir . 'inc/lib/array-column.php';
 			}
 
 			self::check_opt_name( $opt_name );

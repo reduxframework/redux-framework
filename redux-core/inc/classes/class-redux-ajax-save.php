@@ -78,7 +78,7 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 							$do_reload = false;
 							if ( isset( $core->required_class->reload_fields ) && ! empty( $core->required_class->reload_fields ) ) {
 								if ( ! empty( $core->transients['changed_values'] ) ) {
-									foreach ( $core->required_class->reload_fields as $idx => $val ) {
+									foreach ( $core->required_class->reload_fields as $val ) {
 										if ( array_key_exists( $val, $core->transients['changed_values'] ) ) {
 											$do_reload = true;
 										}
