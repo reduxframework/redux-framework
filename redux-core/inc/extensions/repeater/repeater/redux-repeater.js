@@ -148,7 +148,7 @@
 				 * }
 				 */
 
-				// Append to the accordian.
+				// Append to the accordion.
 				$( parent ).append( newSlide );
 
 				/* Render tinymce !
@@ -267,7 +267,7 @@
 
 	redux.field_objects.repeater.setAccordion = function( el, gid ) {
 		var active;
-		var accordian;
+		var accordion;
 
 		var base = el.find( '.redux-repeater-accordion' );
 
@@ -279,7 +279,7 @@
 			active = parseInt( 0 );
 		}
 
-		accordian = el.find( '.redux-repeater-accordion' ).accordion(
+		accordion = el.find( '.redux-repeater-accordion' ).accordion(
 			{
 				header: '> div > fieldset > h3',
 				collapsible: true,
@@ -327,7 +327,7 @@
 		);
 
 		if ( true === reduxObject.repeater[gid].sortable ) {
-			accordian.sortable(
+			accordion.sortable(
 				{
 					axis: 'y',
 					handle: 'h3',
@@ -351,7 +351,7 @@
 				}
 			);
 		} else {
-			accordian.find( 'h3.ui-accordion-header' ).css( 'cursor', 'pointer' );
+			accordion.find( 'h3.ui-accordion-header' ).css( 'cursor', 'pointer' );
 		}
 	};
 
@@ -382,7 +382,7 @@
 
 				$( this ).attr( 'data-sortid', idx );
 
-				// Fix the accordian header.
+				// Fix the accordion header.
 				header = $( this ).find( '.ui-accordion-header' );
 				split  = header.attr( 'id' ).split( '-header-' );
 
@@ -391,7 +391,7 @@
 
 				header.attr( 'aria-controls', split[0] + '-panel-' + idx );
 
-				// Fix the accordian content.
+				// Fix the accordion content.
 				content = $( this ).find( '.ui-accordion-content' );
 				split   = content.attr( 'id' ).split( '-panel-' );
 

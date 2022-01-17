@@ -39,7 +39,7 @@ var text_domain = 'redux-framework';                         // Your textdomain 
 var destFile = 'redux-framework.pot';                     // Name of the transalation file.
 var packageName = 'redux-framework';                         // Package name.
 var bugReport = 'https://redux.io/contact';                // Where can users report bugs.
-var lastTranslator = 'Dovy Paukstys <dovy@redux.io>';           // Last translator Email ID.
+var lastTranslator = 'Kev Provance <kevin.provance@gmail.com>';           // Last translator Email ID.
 var team = 'Redux.io <support@redux.io>';    // Team's Email ID.
 var translatePath = './redux-core/languages/';                  // Where to save the translation files.
 
