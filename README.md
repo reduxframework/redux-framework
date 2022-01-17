@@ -5,12 +5,13 @@
 
 ## New to Version 4.3 ##
 * METABOXES!
+* REPEATER EXTENSION!
 * Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
 
-## Beta testing instructions for Metaboxes ##
-* Metaboxes config is includes in the sample config.  Demo metaboxes are viewable on pages and posts when the demo panel is active.
-* If you are already using the Metaboxes extension of Redux Pro, there is nothing you need to update.  The version of Metaboxes within the Redux core will override both the extension and Pro.
-* Please verify metaboxes in your existing project still function normally.
+## Beta testing instructions for the Repeater extension ##
+* Repeater config is includes in the sample config.  
+* If you are already using the Repeater extension of Redux Pro, there is nothing you need to update.  The version of the Repeater field within the Redux core will override both the extension and Pro.
+* Please verify the repeater field in your existing project still function normally.
 * Please do not use this code in your production releases yet.  Internal beta testing for your organization fine and encouraged.
 
 ## New to Version 4.2 ##
@@ -69,7 +70,7 @@ https://translate.wordpress.org/projects/wp-plugins/redux-framework/
 ## Features ##
 * Uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API")
 * Multiple built in field types
-* Multple layout field types
+* Multiple layout field types
 * Fields can be overloaded with a callback function, for custom field types
 * Easily extendable by creating Field Classes
 * Built in Validation Classes
