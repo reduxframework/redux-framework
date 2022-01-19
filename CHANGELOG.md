@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.7.3
+* Fixed: Spacing field defaults to `px` if no default is set.
+* Updated:  Default Google Fonts list brought up to current release
+
 ## 4.3.7.2
 * Added: Repeater extension.
 
@@ -56,7 +60,7 @@
 * Release date: September 21, 2021
 
 ## 4.2.14
-* Fixed: Parse error in Import/Export module due to old versions of PHP.  Remember folks, recommended minumim for WordPress is PHP 7.4.
+* Fixed: Parse error in Import/Export module due to old versions of PHP.  Remember folks, recommended minimum for WordPress is PHP 7.4.
 
 ## 4.2.13
 * Fixed: #3822 - Default value function returns string or array to prevent type error.
@@ -130,7 +134,7 @@
 ## 4.1.28
 * Fixed: #217 - Redux templates loading on post types with no block editor.
 * Fixed: #158 - Redux theme checks no longer prevent theme check plugin from functioning.
-* Fixed: #215 - Heatbeat check no longer eats the function if disregarded.
+* Fixed: #215 - Heartbeat check no longer eats the function if disregarded.
 * Fixed: #222 - Background field image now hides preview image upon removal.
 * Fixed: RAW field in sample config now works.
 * Fixed: Helper function is_field_in_use now returns false, instead of null.
@@ -155,7 +159,7 @@
 * Fixed: #200 - Fatal error: Can't use function return value in write context.
 * Fixed: #203 - PHP 8.0 deprecation warnings.
 * Fixed: Malformed HTML causing Redux pro alpha color-picker to not render.
-* Fixed: IMproved class checks for Redux Pro.
+* Fixed: Improved class checks for Redux Pro.
 * Fixed: jQuery 3.x deprecation notices.
 * Fixed: Malformed SCSS.
 * Release date: March 17, 2021
@@ -391,7 +395,7 @@
 * Modified: Move two ajax saves routines to Redux_Functions_Ex for advanced customizer validation on save.
 
 ## 4.0.1.7
-* Fixed:    #20 - variable mssing $ dev.
+* Fixed:    #20 - variable missing $ dev.
 * Fixed:    Customizer saving.
 * Fixed     Customizer 'required'.
 * Fixed:    button_set field not saving or loading in multimode.
@@ -420,7 +424,7 @@
 
 ## 4.0.1.1
 * Fixed:      Section field not hiding with required calls.
-* Fixed:      Tour pointer not remembing closed state. 
+* Fixed:      Tour pointer not remembering closed state. 
 
 ## 4.0.1
 * New:        Initial public beta release.
@@ -432,13 +436,13 @@
 * Fixed:    Editor field not saving.
 
 ## 4.0.0.20
-* Modified: Continued work for compatibility with the forecoming Redux Pro.
+* Modified: Continued work for compatibility with the forthcoming Redux Pro.
 * New:      Global arg `elusive_frontend` to enqueue the internal Elusive Font CSS on the front end.
 
 ## 4.0.0.19
 * Added:    Metaboxes Lite.  See READ ME & sample config (sample-metabox-config.php).
 * Added:    Removed "welcome" screen.  Replaced with 'What is this?' screen that no longer appears on first launch.
-* Fixed:    Demo mode actiavtes in Netword Enabled mode.
+* Fixed:    Demo mode activates in Network Enabled mode.
 * Modified: Additional WPCS work.
 * Modified: Improved tracking.
 
@@ -453,7 +457,7 @@
 * Disabled: WordPress Data caching.  It's broke.  See issue tracker.
 
 ## 4.0.0.15
-* Added:    Field sanitzing added.  See README.
+* Added:    Field sanitizing added.  See README.
 * Added:    Sanitizing examples added to sample config.
 * Fixed:    Multi text not removing new added boxes until after save.
 
@@ -462,7 +466,7 @@
 * Fixed:    Function in ajax save class bombing when v3 is embedded.  Thanks, @danielbarenkamp.
 
 ## 4.0.0.13
-* Nope.  I'm supersticous!
+* Nope.  I'm superstitious!
 
 ## 4.0.0.12
 * Modified: Core to accept v3 based extensions with deprecation notice.
@@ -476,7 +480,7 @@
 
 ## 4.0.0.10
 * Modified: redux.js opt_name logic to shim in older versions of metaboxes.
-* Updated:  Spinner field mods.  New look.  No more jQuery depricated notices.
+* Updated:  Spinner field mods.  New look.  No more jQuery deprecated notices.
 
 ## 4.0.0.9
 * Fixed:    Import/Export feature not importing.  Damn typesafe decs got me again!!!  Thanks, WPCS.  ;-)
@@ -484,7 +488,7 @@
 
 ## 4.0.0.8
 * Modified: Changed typography update localize handle.  Too generic.  Conflicted with something else.
-* Fixed:    Template head structure cause tempalte notice to fail.  Thanks, @anikitas.
+* Fixed:    Template head structure cause template notice to fail.  Thanks, @anikitas.
 * Fixed:    Google font update choked over incorrect protocol.
 * Fixed:    Required logic was operating backward.  Damn those typesafe operators!
 * Fixed:    Redux v3 templates no longer crash v4 panel.
@@ -500,7 +504,7 @@
 * Fixed:    CDN loading failed even on success due to typesafe comparison (whoops, my bad) - kp.
 
 ## 4.0.0.6 (Welcome Fundraiser participants)
-* Fixed:    Admin notices were msflromed due to mis-escaped code.
+* Fixed:    Admin notices were malformed due to mis-escaped code.
 * Added:    Abstract class for extensions.
 * Modified: Last of the JavaScript mods from JSHint and JSCS.  Travis checks will no longer fail.
 
