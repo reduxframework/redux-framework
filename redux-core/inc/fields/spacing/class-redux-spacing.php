@@ -40,7 +40,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
 				'right'  => '',
 				'bottom' => '',
 				'left'   => '',
-				'units'  => '',
+				'units'  => 'px',
 			);
 
 			$this->value = wp_parse_args( $this->value, $defaults );
