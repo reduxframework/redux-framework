@@ -9,18 +9,24 @@ export const Templates = {
         const defaultpageSize = searchParams.type === 'pattern' ? '8' : '4'
         const taxonomyType =
             searchParams.type === 'pattern' ? 'patternType' : 'layoutType'
-        const templates = await api.post('templates', {
-            filterByFormula: prepareFilterFormula(searchParams, taxonomyType),
-            pageSize: options?.pageSize ?? defaultpageSize,
-            categories: searchParams.taxonomies,
-            search: searchParams.search,
-            type: searchParams.type,
-            offset: options.offset ?? '',
-            initial: count === 1,
-            request_count: count,
-            sdk_partner: useUserStore.getState()?.sdkPartner ?? '',
-        })
-        return templates
+        const args = Object.assign(
+            {
+                filterByFormula: prepareFilterFormula(
+                    searchParams,
+                    taxonomyType,
+                ),
+                pageSize: defaultpageSize,
+                categories: searchParams.taxonomies,
+                search: searchParams.search,
+                type: searchParams.type,
+                offset: '',
+                initial: count === 1,
+                request_count: count,
+                sdk_partner: useUserStore.getState()?.sdkPartner ?? '',
+            },
+            options,
+        )
+        return await api.post('templates', args)
     },
 
     // TODO: Refactor this later to combine the following three

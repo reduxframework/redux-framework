@@ -1,17 +1,20 @@
 import { __ } from '@wordpress/i18n'
 import { Icon, closeSmall } from '@wordpress/icons'
 import { Button } from '@wordpress/components'
-import WelcomeNotice from './notices/WelcomeNotice'
-import PromotionNotice from './notices/PromotionNotice'
-import FeedbackNotice from './notices/FeedbackNotice'
-import { useUserStore } from '../state/User'
-import { useGlobalStore } from '../state/GlobalState'
+import WelcomeNotice from './WelcomeNotice'
+import PromotionNotice from './PromotionNotice'
+import FeedbackNotice from './FeedbackNotice'
+import { useUserStore } from '../../state/User'
+import { useGlobalStore } from '../../state/GlobalState'
 import { useState, useEffect, useRef } from '@wordpress/element'
+import { InstallStandaloneNotice } from './InstallStandaloneNotice'
+import { General } from '../../api/General'
 
 const NoticesByPriority = {
     welcome: WelcomeNotice,
     promotion: PromotionNotice,
     feedback: FeedbackNotice,
+    standalone: InstallStandaloneNotice,
 }
 
 export default function FooterNotice() {
@@ -33,6 +36,7 @@ export default function FooterNotice() {
     }
 
     // Find the first notice key to use
+    // TODO: extract this logic into the individual component instead of controlling it here
     const componentKey =
         Object.keys(NoticesByPriority).find((key) => {
             if (key === 'promotion') {
@@ -53,25 +57,25 @@ export default function FooterNotice() {
                 )
             }
 
+            if (key === 'standalone') {
+                return (
+                    !window.extendifyData.standalone &&
+                    !useUserStore.getState().noticesDismissedAt[key]
+                )
+            }
+
             return !useUserStore.getState().noticesDismissedAt[key]
         }) ?? null
     const Notice = NoticesByPriority[componentKey]
 
-    const dismiss = () => {
+    const dismiss = async () => {
         setHasNotice(false)
         // The noticesDismissedAt key will either be the key from NoticesByPriority,
         // or a key passed in from the server, such as 'holiday-sale2077'
         const key =
             componentKey === 'promotion' ? promotionData.key : componentKey
-        useUserStore.setState({
-            noticesDismissedAt: Object.assign(
-                {},
-                {
-                    ...useUserStore.getState().noticesDismissedAt,
-                    [key]: new Date().toISOString(),
-                },
-            ),
-        })
+        useUserStore.getState().markNoticeSeen(key, 'notices')
+        await General.ping(`footer-notice-x-${key}`)
     }
 
     useEffect(() => {

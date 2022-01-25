@@ -29,11 +29,11 @@ const isLibraryEnabled = () =>
 const mainButton = (
     <div id="extendify-templates-inserter" className="extendify">
         <button
-            style="background:#D9F1EE;color:#1e1e1e;border:1px solid #949494 !important;font-weight:bold;font-size:14px;padding:8px;margin-right:8px"
+            style="padding:4px 12px; height: 34px;"
             type="button"
             data-extendify-identifier="main-button"
             id="extendify-templates-inserter-btn"
-            className="components-button">
+            className="components-button bg-wp-theme-500 hover:bg-wp-theme-600 border-color-wp-theme-500 text-white ml-1">
             <Icon icon={brandMark} size={24} className="-ml-1 mr-1" />
             {__('Library', 'extendify')}
         </button>

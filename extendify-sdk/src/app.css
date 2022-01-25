@@ -25,7 +25,7 @@
 }
 
 .button-extendify-main {
-    @apply bg-extendify-main button-focus cursor-pointer transition duration-200 p-1.5 px-3 text-white hover:text-white no-underline hover:bg-extendify-main-dark active:bg-gray-900 active:text-white focus:text-white whitespace-nowrap;
+    @apply bg-extendify-main button-focus cursor-pointer transition duration-200 p-1.5 px-3 text-white hover:text-white no-underline hover:bg-extendify-main-dark active:bg-gray-900 active:text-white focus:text-white whitespace-nowrap rounded text-base;
 }
 #extendify-search-input:focus ~ svg,
 #extendify-search-input:not(:placeholder-shown) ~ svg {
@@ -56,6 +56,12 @@
 .block-editor-block-list__layout.is-root-container
     .ext.block-editor-block-list__block {
     @apply max-w-full;
+}
+
+.block-editor-block-preview__content-iframe
+    .block-editor-block-list__layout.is-root-container
+    .ext.block-editor-block-list__block {
+    @apply max-w-none;
 }
 
 .extendify .block-editor-block-preview__container {
@@ -96,6 +102,16 @@
     @apply shadow-inner-md;
 }
 
+/* Fallback as FireFox does not support backdrop filter */
+@supports not (
+    (-webkit-backdrop-filter: saturate(2) blur(24px)) or
+        (backdrop-filter: saturate(2) blur(24px))
+) {
+    div.extendify .bg-extendify-transparent-white {
+        @apply bg-gray-100;
+    }
+}
+
 /* Style contentType/pageType control in sidebar */
 .components-panel__body.ext-type-control .components-panel__body-toggle {
     @apply pl-0 pr-0;
@@ -129,4 +145,14 @@
     50% {
         opacity: 0.5;
     }
+}
+
+.is-template--inactive::before,
+.is-template--in-review::before {
+    content: "";
+    @apply absolute w-full h-full top-0 left-0 bottom-0 right-0 z-40 border-solid border-8 border-extendify-secondary;
+}
+
+.is-template--inactive::before {
+    border-color: #fdeab6;
 }

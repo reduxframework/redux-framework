@@ -31,15 +31,19 @@ export default function WelcomeNotice() {
                     target="_blank">
                     {__('Tell me more', 'extendify')}
                 </Button>
-                <span className="font-bold" aria-hidden="true">
-                    &bull;
-                </span>
-                <Button
-                    variant="link"
-                    className="text-black underline hover:no-underline p-0 h-auto"
-                    onClick={disableLibrary}>
-                    {__('Turn off the library', 'extendify')}
-                </Button>
+                {window.extendifyData.standalone ? null : (
+                    <>
+                        <span className="font-bold" aria-hidden="true">
+                            &bull;
+                        </span>
+                        <Button
+                            variant="link"
+                            className="text-black underline hover:no-underline p-0 h-auto"
+                            onClick={disableLibrary}>
+                            {__('Turn off the library', 'extendify')}
+                        </Button>
+                    </>
+                )}
             </div>
         </>
     )
