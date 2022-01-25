@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block ed
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.9
-Stable tag: 4.3.7
+Stable tag: 4.3.8
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -107,6 +107,12 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.8 =
+* Fixed: Spacing field defaults to `px` if no default is set.
+* Fixed: Remove plugin.php hack in Appsero SDK.
+* Updated: Default Google Fonts list brought up to current release
+* Updated: Extendify Library.
 
 = 4.3.7 =
 * Fixed: Incorrect global variable assignment. Thanks, @webbudesign.

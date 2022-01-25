@@ -1,14 +1,10 @@
 # Redux Changelog
 
-## 4.3.7.3
+## 4.3.8
 * Fixed: Spacing field defaults to `px` if no default is set.
-* Updated:  Default Google Fonts list brought up to current release
-
-## 4.3.7.2
-* Added: Repeater extension.
-
-## 4.3.7.1
 * Fixed: Remove plugin.php hack in Appsero SDK.
+* Updated: Default Google Fonts list brought up to current release
+* Updated: Extendify Library.
 
 ## 4.3.7
 * Fixed: #3861 - Incorrect global variable assignment. Thanks, @webbudesign.
