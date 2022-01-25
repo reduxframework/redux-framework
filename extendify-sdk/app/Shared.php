@@ -14,70 +14,11 @@ class Shared
 {
 
     /**
-     * The instance
-     *
-     * @var $instance
-     */
-    public static $instance = null;
-
-    /**
-     * Current theme
-     *
-     * @var string
-     */
-    // phpcs:ignore
-    private $theme;
-
-    /**
      * Adds various actions to set up the page
      *
      * @return self|void
      */
     public function __construct()
-    {
-        if (self::$instance) {
-            return self::$instance;
-        }
-
-        self::$instance = $this;
-
-        // Load only if a compatible theme is active.
-        $this->theme = get_option('template');
-        if (in_array( $this->theme, $this->compatibleThemes(), true )) {
-            $this->loadScripts();
-        }
-    }
-
-    /**
-     * Themes with additional compatibility
-     *
-     * @return array
-     */
-    public function compatibleThemes()
-    {
-        $themes = [
-            'kadence',
-            'neve',
-            'blocksy',
-            'go',
-            'astra',
-            'oceanwp',
-            'generatepress',
-            'twentytwentyone',
-            'twentytwentytwo',
-            'twentytwenty',
-            'twentynineteen',
-        ];
-
-        return $themes;
-    }
-
-    /**
-     * Adds styles to the front-end and editor
-     *
-     * @return void
-     */
-    public function loadScripts()
     {
         \add_action(
             'wp_enqueue_scripts',
@@ -87,7 +28,7 @@ class Shared
         );
 
         \add_action(
-            'admin_enqueue_scripts',
+            'admin_init',
             function () {
                 $this->themeCompatInlineStyles();
             }
@@ -103,8 +44,9 @@ class Shared
     public function themeCompatInlineStyles()
     {
         $css = '';
+        $theme = get_option('template');
 
-        if ($this->theme === 'kadence') {
+        if ($theme === 'kadence') {
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: var(--global-palette8);
                 --wp--preset--color--foreground: var(--global-palette4);
@@ -117,7 +59,7 @@ class Shared
             }';
         }
 
-        if ($this->theme === 'neve') {
+        if ($theme === 'neve') {
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: var(--nv-site-bg);
                 --wp--preset--color--foreground: var(--nv-text-color);
@@ -130,7 +72,7 @@ class Shared
             }';
         }
 
-        if ($this->theme === 'blocksy') {
+        if ($theme === 'blocksy') {
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: var(--paletteColor7);
                 --wp--preset--color--foreground: var(--color);
@@ -139,14 +81,14 @@ class Shared
             }';
         }
 
-        if ($this->theme === 'go') {
+        if ($theme === 'go') {
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: var(--go--color--background);
                 --wp--preset--color--foreground: var(--go--color--text);
             }';
         }
 
-        if ($this->theme === 'astra') {
+        if ($theme === 'astra') {
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: #ffffff;
                 --wp--preset--color--foreground: var(--ast-global-color-2);
@@ -155,11 +97,11 @@ class Shared
             }';
         }
 
-        if ($this->theme === 'oceanwp') {
-            $background = get_theme_mod( 'ocean_background_color', '#ffffff' );
-            $primary    = get_theme_mod( 'ocean_primary_color', '#13aff0' );
-            $secondary  = get_theme_mod( 'ocean_hover_primary_color', '#0b7cac' );
-            $gap        = get_theme_mod( 'ocean_separate_content_padding', '30px' );
+        if ($theme === 'oceanwp') {
+            $background = get_theme_mod('ocean_background_color', '#ffffff');
+            $primary    = get_theme_mod('ocean_primary_color', '#13aff0');
+            $secondary  = get_theme_mod('ocean_hover_primary_color', '#0b7cac');
+            $gap        = get_theme_mod('ocean_separate_content_padding', '30px');
 
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: ' . $background . ';
@@ -171,28 +113,28 @@ class Shared
             }';
         }
 
-        if ($this->theme === 'generatepress') {
-            $settings = (array) get_option( 'generate_settings', [] );
+        if ($theme === 'generatepress') {
+            $settings = (array) get_option('generate_settings', []);
 
-            if (! array_key_exists( 'background_color', $settings )) {
+            if (! array_key_exists('background_color', $settings)) {
                 $background = '#f7f8f9';
             } else {
                 $background = $settings['background_color'];
             }
 
-            if (! array_key_exists( 'text_color', $settings )) {
+            if (! array_key_exists('text_color', $settings)) {
                 $foreground = '#222222';
             } else {
                 $foreground = $settings['text_color'];
             }
 
-            if (! array_key_exists( 'link_color', $settings )) {
+            if (! array_key_exists('link_color', $settings)) {
                 $primary = '#1e73be';
             } else {
                 $primary = $settings['link_color'];
             }
 
-            if (! array_key_exists( 'link_color', $settings )) {
+            if (! array_key_exists('link_color', $settings)) {
                 $primary = '#1e73be';
             } else {
                 $primary = $settings['link_color'];
@@ -209,13 +151,13 @@ class Shared
             }';
         }//end if
 
-        if ($this->theme === 'twentytwentytwo') {
+        if ($theme === 'twentytwentytwo') {
             $css = 'body, .editor-styles-wrapper {
                 --extendify--spacing--large: clamp(2rem,8vw,8rem);
             }';
         }
 
-        if ($this->theme === 'twentytwentyone') {
+        if ($theme === 'twentytwentyone') {
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--background: var(--global--color-background);
                 --wp--preset--color--foreground: var(--global--color-primary);
@@ -234,8 +176,8 @@ class Shared
             }';
         }
 
-        if ($this->theme === 'twentytwenty') {
-            $background = sanitize_hex_color_no_hash( get_theme_mod( 'background_color', 'f5efe0' ) );
+        if ($theme === 'twentytwenty') {
+            $background = sanitize_hex_color_no_hash(get_theme_mod('background_color', 'f5efe0'));
             $primary = get_theme_mod(
                 'accent_accessible_colors',
                 [
@@ -254,13 +196,13 @@ class Shared
             }';
         }//end if
 
-        if ($this->theme === 'twentynineteen') {
+        if ($theme === 'twentynineteen') {
             /**
              * Use the color from Twenty Nineteen's customizer value.
              */
             $primary = 199;
-            if (get_theme_mod( 'primary_color', 'default' ) !== 'default') {
-                $primary = absint( get_theme_mod( 'primary_color_hue', 199 ) );
+            if (get_theme_mod('primary_color', 'default') !== 'default') {
+                $primary = absint(get_theme_mod('primary_color_hue', 199));
             }
 
             /**
@@ -271,8 +213,8 @@ class Shared
              * @param int $saturation Color saturation level.
              */
             // phpcs:ignore
-            $saturation = apply_filters( 'twentynineteen_custom_colors_saturation', 100 );
-            $saturation = absint( $saturation ) . '%';
+            $saturation = apply_filters('twentynineteen_custom_colors_saturation', 100);
+            $saturation = absint($saturation) . '%';
 
             /**
              * Filters Twenty Nineteen default lightness level.
@@ -282,8 +224,8 @@ class Shared
              * @param int $lightness Color lightness level.
              */
             // phpcs:ignore
-            $lightness = apply_filters( 'twentynineteen_custom_colors_lightness', 33 );
-            $lightness = absint( $lightness ) . '%';
+            $lightness = apply_filters('twentynineteen_custom_colors_lightness', 33);
+            $lightness = absint($lightness) . '%';
 
             $css = 'body, .editor-styles-wrapper {
                 --wp--preset--color--foreground: #111;
@@ -293,6 +235,13 @@ class Shared
             }';
         }//end if
 
-        wp_add_inline_style( App::$slug . '-utilities',  $css );
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+        $content = file_get_contents(EXTENDIFY_PATH . 'public/build/extendify-utilities.css');
+        $version = App::$environment === 'PRODUCTION' ? App::$version : uniqid();
+        \wp_register_style(App::$slug . '-utilities', false, [], $version);
+        \wp_enqueue_style(App::$slug . '-utilities');
+        \wp_add_inline_style(App::$slug . '-utilities', $content . $css);
+        // Adds inline to the live preview.
+        \wp_add_inline_style('wp-components', $content . $css);
     }
 }

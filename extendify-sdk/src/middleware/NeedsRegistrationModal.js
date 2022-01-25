@@ -14,14 +14,12 @@ export default function NeedsRegistrationModal({ finished, resetMiddleware }) {
     const [email, setEmail] = useState('')
     const remainingImports = useUserStore((state) => state.remainingImports)
     const emailRef = useRef(null)
-    const setCurrentModal = useGlobalStore((state) => state.setCurrentModal)
+    const removeAllModals = useGlobalStore((state) => state.removeAllModals)
     const registerAndContinue = async (event) => {
         event.preventDefault()
-        const newAllowedImports =
-            Number(useUserStore.getState().allowedImports) + 10
         useUserStore.setState({
             registration: { email },
-            allowedImports: newAllowedImports,
+            freebieImports: Number(useUserStore.getState().freebieImports) + 10,
         })
         await UserApi.registerMailingList(email)
         finished()
@@ -37,8 +35,8 @@ export default function NeedsRegistrationModal({ finished, resetMiddleware }) {
     return (
         <Modal
             isOpen={true}
-            onRequestClose={() => {
-                setCurrentModal(null)
+            onClose={() => {
+                removeAllModals()
                 resetMiddleware()
             }}
             ref={emailRef}>
@@ -122,20 +120,20 @@ const pass = () => {
 }
 
 export function check() {
+    const pushModal = useGlobalStore.getState().pushModal
+
     return {
         id: 'NeedsRegistrationModal',
         pass: pass(),
         allow() {},
         deny() {
             return new Promise((resolve, reject) => {
-                useGlobalStore.setState({
-                    currentModal: (
-                        <NeedsRegistrationModal
-                            finished={resolve}
-                            resetMiddleware={reject}
-                        />
-                    ),
-                })
+                pushModal(
+                    <NeedsRegistrationModal
+                        finished={resolve}
+                        resetMiddleware={reject}
+                    />,
+                )
             })
         },
     }

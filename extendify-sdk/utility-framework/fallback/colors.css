@@ -49,3 +49,40 @@
     /* no suggestion */
     color: currentColor;
 }
+
+.has-white-color {
+    /* no suggestion */
+    color: var(--wp--preset--color--white, #fff) !important;
+}
+
+.has-black-color {
+    /* no suggestion */
+    color: var(--wp--preset--color--black, #000) !important;
+}
+
+.has-ext-foreground-background-color {
+    /* no suggestion */
+    background-color: var(
+        --wp--preset--color--foreground,
+        var(--wp--preset--color--black, #000)
+    ) !important;
+}
+
+.has-ext-primary-background-color {
+    /* no suggestion */
+    background-color: var(
+        --wp--preset--color--primary,
+        var(--wp--preset--color--cyan-bluish-gray, #000)
+    ) !important;
+}
+
+/* Fix button borders with specified background colors */
+.wp-block-button__link.has-black-background-color {
+    /* no suggestion */
+    border-color: var(--wp--preset--color--black, #000);
+}
+
+.wp-block-button__link.has-white-background-color {
+    /* no suggestion */
+    border-color: var(--wp--preset--color--white, #fff);
+}

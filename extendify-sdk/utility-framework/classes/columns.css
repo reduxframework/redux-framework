@@ -7,7 +7,12 @@ We use it here to ensure columns blocks display well across themes.
     margin-bottom: unset;
 }
 
-/* Some popular themes use padding instead of core's margin for columns; remove it */
+.wp-block-column.editor\:pointer-events-none {
+    /* no suggestion */
+    @apply ext-my-0 !important;
+}
+
+/* Some popular themes use padding instead of core margin for columns; remove it */
 .ext .wp-block-columns .wp-block-column[style*="padding"] {
     /* no suggestion */
     @apply ext-px-0 !important;

@@ -9,7 +9,7 @@ import { useUserStore } from '../../state/User'
 
 export const Toolbar = ({ className }) => {
     const setOpen = useGlobalStore((state) => state.setOpen)
-    const setCurrentModal = useGlobalStore((state) => state.setCurrentModal)
+    const pushModal = useGlobalStore((state) => state.pushModal)
     const loggedIn = useUserStore((state) => state.apiKey.length)
 
     return (
@@ -19,14 +19,7 @@ export const Toolbar = ({ className }) => {
                 <TypeSelect className="flex-1 flex items-center justify-center" />
                 <div className="flex-1 flex justify-end items-center">
                     <Button
-                        onClick={() =>
-                            setCurrentModal(
-                                <SettingsModal
-                                    isOpen={true}
-                                    onClose={() => setCurrentModal(null)}
-                                />,
-                            )
-                        }
+                        onClick={() => pushModal(<SettingsModal />)}
                         icon={<Icon icon={user} size={24} />}
                         label={__('Login and settings area', 'extendify')}>
                         {loggedIn ? '' : __('Log In', 'extendify')}

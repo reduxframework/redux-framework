@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 
 export const useGlobalStore = create(
     persist(
-        (set) => ({
+        (set, get) => ({
             open: false,
             metaData: {},
             // These two are here just to persist their previous values,
@@ -11,8 +11,10 @@ export const useGlobalStore = create(
             // It would require a refactor to state/Templates.js
             currentTaxonomies: {},
             currentType: 'pattern',
-            settingsModal: false,
-            currentModal: null,
+            modals: [],
+            pushModal: (modal) => set({ modals: [modal, ...get().modals] }),
+            popModal: () => set({ modals: get().modals.slice(1) }),
+            removeAllModals: () => set({ modals: [] }),
             updateCurrentTaxonomies: (data) =>
                 set({
                     currentTaxonomies: Object.assign({}, data),
@@ -21,14 +23,11 @@ export const useGlobalStore = create(
             setOpen: (value) => {
                 set({ open: value })
             },
-            setCurrentModal: (value) => {
-                set({ currentModal: value })
-            },
         }),
         {
             name: 'extendify-global-state',
             partialize: (state) => {
-                delete state.currentModal
+                delete state.modals
                 return state
             },
         },

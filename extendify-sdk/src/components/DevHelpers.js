@@ -12,7 +12,7 @@ export const DevButtonOverlay = ({ template }) => {
     }, [idText, template.id])
 
     return (
-        <div className="group-hover:opacity-90 opacity-0 flex space-x-2 items-center mb-2 ml-2 absolute bottom-0 left-0 transition duration-200 ease-in-out">
+        <div className="group-hover:opacity-90 opacity-0 flex space-x-2 items-center mb-2 ml-2 absolute bottom-0 left-0 transition duration-200 ease-in-out z-50">
             <CopyToClipboard
                 text={template.id}
                 onCopy={() => setIdText(__('Copied...', 'extendify'))}>
