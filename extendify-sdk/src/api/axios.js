@@ -26,10 +26,12 @@ function handleErrors(error) {
 }
 
 function addDefaults(request) {
+    const userState = useUserStore.getState()
+    const remainingImports = userState.apiKey
+        ? 'unlimited'
+        : userState.remainingImports()
     if (request.data) {
-        request.data.remaining_imports = useUserStore
-            .getState()
-            .remainingImports()
+        request.data.remaining_imports = remainingImports
         request.data.entry_point = useUserStore.getState().entryPoint
         request.data.total_imports = useUserStore.getState().imports
     }

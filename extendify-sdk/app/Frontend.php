@@ -58,13 +58,5 @@ class Frontend
      */
     public function addStylesheets()
     {
-        $version = App::$environment === 'PRODUCTION' ? App::$version : uniqid();
-        \wp_enqueue_style(
-            App::$slug . '-utilities',
-            EXTENDIFY_BASE_URL . 'public/build/extendify-utilities.css',
-            [],
-            $version,
-            'all'
-        );
     }
 }

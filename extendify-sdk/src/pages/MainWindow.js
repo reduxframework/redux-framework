@@ -1,14 +1,15 @@
 import { Fragment, useRef } from '@wordpress/element'
 import { Dialog, Transition } from '@headlessui/react'
 import { useGlobalStore } from '../state/GlobalState'
-import Layout from './layout/Layout'
-import FooterNotice from '../components/FooterNotice'
+import { Layout } from './layout/Layout'
+import FooterNotice from '../components/notices/FooterNotice'
+import { useModal } from '../hooks/useModal'
 
 export default function MainWindow() {
     const containerRef = useRef(null)
     const open = useGlobalStore((state) => state.open)
     const setOpen = useGlobalStore((state) => state.setOpen)
-    const ModalStore = useGlobalStore((state) => state.currentModal)
+    const modal = useModal(open)
 
     return (
         <Transition appear show={open} as={Fragment}>
@@ -42,7 +43,7 @@ export default function MainWindow() {
                                 className="fixed lg:absolute inset-0 lg:overflow-hidden transform transition-all p-2 lg:p-16">
                                 <Layout />
                                 <FooterNotice />
-                                {ModalStore}
+                                {modal}
                             </div>
                         </Transition.Child>
                     </div>

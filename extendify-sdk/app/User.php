@@ -105,13 +105,19 @@ class User
             $userData['version'] = 0;
         }
 
-        // This will reset the allowed imports to 0 once a week which will force the library to re-check.
+        // This will reset the allowed max imports to 0 once a week which will force the library to re-check.
         if (!get_transient('extendify_import_max_check_' . $this->user->ID)) {
             set_transient('extendify_import_max_check_' . $this->user->ID, time(), strtotime('1 week', 0));
             $userData['state']['allowedImports'] = 0;
         }
 
-        if (!$userData['state']['sdkPartner']) {
+        // Similiar to above, this will give the user free imports once a month just for logging in.
+        if (!get_transient('extendify_free_extra_imports_check_' . $this->user->ID)) {
+            set_transient('extendify_free_extra_imports_check_' . $this->user->ID, time(), strtotime('first day of next month', 0));
+            $userData['state']['runningImports'] = 0;
+        }
+
+        if (!isset($userData['state']['sdkPartner']) || !$userData['state']['sdkPartner']) {
             $userData['state']['sdkPartner'] = App::$sdkPartner;
         }
 

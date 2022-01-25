@@ -128,27 +128,19 @@ class Admin
                 'sitesettings' => json_decode(SiteSettings::data()),
                 'sdk_partner' => \esc_attr(APP::$sdkPartner),
                 'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
+                'standalone' => \esc_attr(APP::$standalone),
             ]
         );
         \wp_enqueue_script(App::$slug . '-scripts');
 
-        \wp_set_script_translations(App::$slug . '-scripts', App::$textDomain);
+        \wp_set_script_translations(App::$slug . '-scripts', 'extendify');
 
-        \wp_enqueue_style(
-            App::$slug,
-            EXTENDIFY_BASE_URL . 'public/build/extendify.css',
-            [],
-            $version,
-            'all'
-        );
-
-        \wp_enqueue_style(
-            App::$slug . '-utilities',
-            EXTENDIFY_BASE_URL . 'public/build/extendify-utilities.css',
-            [],
-            $version,
-            'all'
-        );
+        // Inline the library styles to keep them out of the iframe live preview.
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+        $css = file_get_contents(EXTENDIFY_PATH . 'public/build/extendify.css');
+        \wp_register_style(App::$slug, false, [], $version);
+        \wp_enqueue_style(App::$slug);
+        \wp_add_inline_style(App::$slug, $css);
     }
 
     /**
@@ -158,6 +150,10 @@ class Admin
      */
     private function isAdmin()
     {
+        if (\is_multisite()) {
+            return \is_super_admin();
+        }
+
         return in_array('administrator', \wp_get_current_user()->roles, true);
     }
 

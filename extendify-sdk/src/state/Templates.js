@@ -99,17 +99,14 @@ export const useTemplatesStore = create((set, get) => ({
 
         const searchParams = Object.assign({}, get().searchParams, params)
 
-        // If the params are the same then don't update
+        // If the params are not the same, then update
         if (
             JSON.stringify(searchParams) !== JSON.stringify(get().searchParams)
         ) {
-            set({
-                templates: [],
-                nextPage: '',
-                searchParams,
-            })
+            set({ templates: [], nextPage: '', searchParams })
         }
     },
+    resetTemplates: () => set({ templates: [], nextPage: '' }),
     getLegacySiteType: (preferredTax, taxonomies) => {
         const oldSiteType = taxonomies.siteType.find((t) =>
             [t.slug, t?.title].includes(preferredTax.tax_categories),

@@ -1,15 +1,3 @@
-.has-gigantic-font-size,
-.editor-styles-wrapper .has-gigantic-font-size.wp-block {
-    /* no suggestion */
-    /* Have to be specific for how Neve targets headings */
-    --fallback-size: clamp(
-        var(--wp--preset--font-size--huge, 22px),
-        calc(1rem + var(--wp--custom--typography--gigantic--preferred, 5vw)),
-        var(--wp--preset--font-size--huge, 42px) * 2
-    );
-    font-size: var(--wp--preset--font-size--gigantic, var(--fallback-size));
-}
-
 .has-ext-small-font-size {
     /* no suggestion */
     font-size: var(--wp--preset--font-size--ext-small) !important;
@@ -23,14 +11,54 @@
 .has-ext-large-font-size {
     /* no suggestion */
     font-size: var(--wp--preset--font-size--ext-large) !important;
+    line-height: 1.2;
 }
 
 .has-ext-x-large-font-size {
     /* no suggestion */
     font-size: var(--wp--preset--font-size--ext-x-large) !important;
+    line-height: 1;
 }
 
-.has-ext-gigantic-font-size {
+.has-ext-xx-large-font-size {
     /* no suggestion */
-    font-size: var(--wp--preset--font-size--ext-gigantic) !important;
+    font-size: var(--wp--preset--font-size--ext-xx-large) !important;
+    line-height: 1;
+}
+
+/* Line height */
+.has-ext-x-large-font-size:not([style*="line-height"]) {
+    /* no suggestion */
+    line-height: 1.1;
+}
+
+.has-ext-xx-large-font-size:not([style*="line-height"]) {
+    /* no suggestion */
+    line-height: 1.1;
+}
+
+.ext .wp-block-group > * {
+    /* Line height */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.ext .wp-block-group > * + * {
+    margin-top: var(--wp--style--block-gap, 1.75rem);
+    margin-bottom: 0;
+}
+
+.ext h2 {
+    margin-top: var(--wp--style--block-gap, 1.75rem);
+    margin-bottom: var(--wp--style--block-gap, 1.75rem);
+}
+
+.has-ext-x-large-font-size + p,
+.has-ext-x-large-font-size + h3 {
+    margin-top: 0.5rem;
+}
+
+.ext .wp-block-buttons > .wp-block-button.wp-block-button__width-25 {
+    width: calc(25% - var(--wp--style--block-gap, 0.5em) * 0.75);
+    min-width: 12rem;
 }
