@@ -5,6 +5,7 @@
 * Fixed: Remove plugin.php hack in Appsero SDK.
 * Updated: Default Google Fonts list brought up to current release
 * Updated: Extendify Library.
+* Release date: January 25, 2022
 
 ## 4.3.7
 * Fixed: #3861 - Incorrect global variable assignment. Thanks, @webbudesign.
