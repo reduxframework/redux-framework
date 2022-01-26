@@ -108,7 +108,7 @@ export function ImportTemplateBlock({ template }) {
                                             frame.style.height = height + 'px'
                                         },
                                     )
-                                    const id = window.setTimout(() => {
+                                    const id = window.setTimeout(() => {
                                         frame.style.height = height + 'px'
                                     }, 1000)
                                     timeouts.push(id)

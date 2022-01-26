@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { Icon } from '@wordpress/icons'
-import { __, sprintf } from '@wordpress/i18n'
+import { __, _n, sprintf } from '@wordpress/i18n'
 import { useEffect } from '@wordpress/element'
 import { alert, download } from './icons/'
 import { useUserStore } from '../state/User'
@@ -10,7 +10,8 @@ import { growthArrow } from './icons'
 export const ImportCounter = () => {
     const remainingImports = useUserStore((state) => state.remainingImports)
     const allowedImports = useUserStore((state) => state.allowedImports)
-    const status = remainingImports() > 0 ? 'has-imports' : 'no-imports'
+    const count = remainingImports()
+    const status = count > 0 ? 'has-imports' : 'no-imports'
     const backgroundColor =
         status === 'has-imports'
             ? 'bg-extendify-main hover:bg-extendify-main-dark'
@@ -51,7 +52,10 @@ export const ImportCounter = () => {
             <div className="flex items-center space-x-2 no-underline text-xs">
                 <Icon icon={icon} size={14} />
                 <span>
-                    {sprintf(__('%s Imports', 'extendify'), remainingImports())}
+                    {sprintf(
+                        _n('%s Import', '%s Imports', count, 'extendify'),
+                        count,
+                    )}
                 </span>
             </div>
             <span className="text-white text-sm no-underline font-medium outline-none flex items-center">
