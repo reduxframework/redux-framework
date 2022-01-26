@@ -38,7 +38,7 @@ function addEditProps(settings) {
 // Create HOC to add Extendify Utility to Advanced Panel of block.
 const utilityClassEdit = createHigherOrderComponent((BlockEdit) => {
     return function editPanel(props) {
-        const { extUtilities: classes } = props.attributes
+        const classes = props?.attributes?.extUtilities ?? []
         const suggestionList = suggestions.suggestions.map((s) => {
             // Remove all extra // and . from classnames
             return s.replace('.', '').replace(new RegExp('\\\\', 'g'), '')
@@ -68,8 +68,9 @@ const utilityClassEdit = createHigherOrderComponent((BlockEdit) => {
 }, 'utilityClassEdit')
 
 function addSaveProps(saveElementProps, blockType, attributes) {
-    let { className: generatedClasses } = saveElementProps
-    let { extUtilities: classes, className: additionalClasses } = attributes
+    const generatedClasses = saveElementProps?.className ?? []
+    const classes = attributes?.extUtilities ?? []
+    const additionalClasses = attributes?.className ?? []
 
     if (!classes || !Object.keys(classes).length) {
         return saveElementProps
