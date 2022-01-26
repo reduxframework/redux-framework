@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.8.1
+* Restored: Repeater field.
+
 ## 4.3.8
 * Fixed: Spacing field defaults to `px` if no default is set.
 * Fixed: Remove plugin.php hack in Appsero SDK.
