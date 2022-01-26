@@ -2,6 +2,7 @@
 
 ## 4.3.9
 * Fixed: Extendify Library JavaScript error.
+* Release date: January 26, 2022
 
 ## 4.3.8
 * Fixed: Spacing field defaults to `px` if no default is set.
