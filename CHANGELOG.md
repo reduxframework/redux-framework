@@ -1,10 +1,7 @@
 # Redux Changelog
 
-## 4.3.8.2
-* Fixed: Repeater field JavaScript not loaded due to missing enqueue dependency.
-
-## 4.3.8.1
-* Restored: Repeater field.
+## 4.3.9
+* Fixed: Extendify Library JavaScript error.
 
 ## 4.3.8
 * Fixed: Spacing field defaults to `px` if no default is set.
