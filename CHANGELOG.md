@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.8.2
+* Fixed: Repeater field JavaScript not loaded due to missing enqueue dependency.
+
 ## 4.3.8.1
 * Restored: Repeater field.
 
