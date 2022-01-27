@@ -187,7 +187,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Callback for wp_head hook to add meta tag.
 		 */
 		public static function meta_tag() {
-			echo '<meta name="framework" content="Redux ' . esc_html( Redux_Core::$version ) . '" />';
+			echo '<meta name="generator" content="Redux ' . esc_html( Redux_Core::$version ) . '" />';
 		}
 
 		/**
