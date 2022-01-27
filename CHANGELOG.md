@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.9.1
+* Restored: Repeater field for beta testing.
+
 ## 4.3.9
 * Fixed: Extendify Library JavaScript error.
 * Release date: January 26, 2022

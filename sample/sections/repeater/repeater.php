@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/*Redux::set_section(
+Redux::set_section(
 	$opt_name,
 	array(
 		'title'      => __( 'Repeater', 'your-textdomain-here' ),
@@ -66,4 +66,4 @@ defined( 'ABSPATH' ) || exit;
 			),
 		),
 	)
-);*/
+);
