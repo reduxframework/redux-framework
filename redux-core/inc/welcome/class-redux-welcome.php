@@ -113,7 +113,9 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 			$page( esc_html__( 'What is Redux Framework?', 'redux-framework' ), esc_html__( 'Redux', 'redux-framework' ), $this->minimum_capability, 'redux-framework', array( $this, 'about_screen' ) );
 
 			// Templates Page.
-			$page( esc_html__( 'Templates', 'redux-framework' ), esc_html__( 'Templates', 'redux-framework' ), $this->minimum_capability, 'redux-templates', array( $this, 'templates' ) );
+			if ( Redux_Core::$is_plugin ) {
+				$page( esc_html__( 'Templates', 'redux-framework' ), esc_html__( 'Templates', 'redux-framework' ), $this->minimum_capability, 'redux-templates', array( $this, 'templates' ) );
+			}
 
 			remove_submenu_page( 'options-general.php', 'redux-templates' );
 
@@ -130,31 +132,6 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 		 */
 		public function admin_head() {
 			?>
-
-			<script
-				id="redux-qtip-js"
-				src='<?php echo esc_url( Redux_Core::$url ); ?>assets/js/vendor/qtip/qtip.js'>
-			</script>
-
-			<script
-				id="redux-welcome-admin-js"
-				src='<?php echo esc_url( Redux_Core::$url ); ?>inc/welcome/js/redux-welcome-admin.js'>
-			</script>
-
-			<?php
-			if ( isset( $_GET['page'] ) && 'redux-support' === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-				?>
-				<script
-					id="jquery-easing"
-					src='<?php echo esc_url( Redux_Core::$url ); ?>inc/welcome/js/jquery.easing.min.js'>
-				</script>
-			<?php } ?>
-
-			<link
-				rel='stylesheet' id='redux-qtip-css' <?php // phpcs:ignore WordPress.WP.EnqueuedResources ?>
-				href='<?php echo esc_url( Redux_Core::$url ); ?>assets/css/vendor/qtip.css'
-				type='text/css' media='all'/>
-
 			<link
 				rel='stylesheet' id='elusive-icons' <?php // phpcs:ignore WordPress.WP.EnqueuedResources ?>
 				href='<?php echo esc_url( Redux_Core::$url ); ?>assets/css/vendor/elusive-icons.css'
@@ -208,12 +185,13 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ); ?>">
 					<?php esc_attr_e( 'What is Redux?', 'redux-framework' ); ?>
 				</a>
+				<?php if ( Redux_Core::$is_plugin ) { ?>
 				<a
 					class="nav-tab <?php echo( 'redux-templates' === $selected ? 'nav-tab-active' : '' ); ?>"
 					href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'redux-templates' ), 'options-general.php' ) ) ); ?>">
 					<?php esc_attr_e( 'Templates', 'redux-framework' ); ?>
 				</a>
-
+				<?php } ?>
 				<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
 				<?php do_action( 'redux/pro/welcome/admin/tab', $selected ); ?>
 
