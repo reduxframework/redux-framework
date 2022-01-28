@@ -21,7 +21,7 @@ Redux::set_section(
 				'type'     => 'border',
 				'title'    => esc_html__( 'Header Border Option', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Only color validation can be done on this field type', 'your-textdomain-here' ),
-				'output'   => array( '.site-header' ),
+				'output'   => array( '.site-header, header' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'default'  => array(
 					'border-color'  => '#1e73be',

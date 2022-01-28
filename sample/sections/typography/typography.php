@@ -55,7 +55,7 @@ Redux::set_section(
 					'font-size'   => '33px',
 					'line-height' => '40px',
 				),
-				'output'      => array( 'h2.site-description, h2.entry-title, .site-description' ),
+				'output'      => array( 'h2.site-description, h2.entry-title, .site-description, h2.wp-block-post-title' ),
 				// Disable google fonts.
 				// 'google'      => false,.
 
@@ -106,7 +106,7 @@ Redux::set_section(
 					'margin-top'    => '20px',
 					'margin-bottom' => '20px',
 				),
-				'output'            => array( '.site-title' ),
+				'output'            => array( '.site-title, .wp-block-site-title' ),
 			),
 		),
 	)

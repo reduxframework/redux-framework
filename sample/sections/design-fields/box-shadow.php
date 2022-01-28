@@ -19,7 +19,7 @@ Redux::set_section(
 			array(
 				'id'          => 'opt-box_shadow',
 				'type'        => 'box_shadow',
-				'output'      => array( '.site-header' ),
+				'output'      => array( '.site-header, header' ),
 				'media_query' => array(
 					'output'   => true,
 					'compiler' => true,

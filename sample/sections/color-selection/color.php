@@ -20,7 +20,8 @@ Redux::set_section(
 				'id'          => 'opt-color-title',
 				'type'        => 'color',
 				'output'      => array(
-					'color' => '.site-title',
+					'color'     => '.site-title, .wp-block-site-title a',
+					'important' => true,
 				),
 				'title'       => esc_html__( 'Site Title Color', 'your-textdomain-here' ),
 				'subtitle'    => esc_html__( 'Pick a title color for the theme (default: #000).', 'your-textdomain-here' ),
@@ -35,7 +36,7 @@ Redux::set_section(
 				'default'  => '#dd9933',
 				'validate' => 'color',
 				'output'   => array(
-					'background-color' => '.footer, #site-footer, .site-footer',
+					'background-color' => '.footer, #site-footer, .site-footer, footer',
 				),
 			),
 		),
