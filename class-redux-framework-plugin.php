@@ -448,21 +448,18 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @since 1.0
 		 */
 		public function add_settings_link( array $links, string $file ): array {
-
-			if ( strpos( REDUX_PLUGIN_FILE, $file ) === false ) {
+			if ( basename( plugin_dir_path( __FILE__ ) ) . '/redux-framework.php' !== $file ) {
 				return $links;
 			}
 
-			if ( ! class_exists( 'Redux_Pro' ) ) {
-				$links[] = sprintf(
-					'<a href="%s" target="_blank">%s</a>',
-					esc_url( $this->get_site_utm_url( '', 'upgrade' ) ),
-					sprintf(
-						'<span style="font-weight: bold;">%s</span>',
-						__( 'Go Pro', 'redux-framework' )
-					)
-				);
-			}
+			$links[] = sprintf(
+				'<a href="%1$s" target="_blank">%2$s</a>',
+				esc_url( $this->get_site_utm_url( '', 'plugins-page','', 'go-pro' ) ),
+				sprintf(
+					'<span style="font-weight: bold;">%s</span>',
+					__( 'Go Pro', 'redux-framework' )
+				)
+			);
 
 			return $links;
 		}
@@ -475,7 +472,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @return string
 		 */
 		private function get_site_url( string $path = '' ): string {
-			$url = 'https://redux.io';
+			$url = 'https://extendify.com/pricing/';
 
 			if ( ! empty( $path ) ) {
 				$url .= '/' . trim( $path, '/' ) . '/';
@@ -490,11 +487,11 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @param string      $path         Path on site.
 		 * @param string      $utm_medium   Medium var.
 		 * @param string|null $utm_content  Content var.
-		 * @param bool        $utm_campaign Campaign var.
+		 * @param string|bool $utm_campaign Campaign var.
 		 *
 		 * @return string
 		 */
-		public function get_site_utm_url( string $path, string $utm_medium, string $utm_content = null, bool $utm_campaign = false ): string {
+		public function get_site_utm_url( string $path, string $utm_medium, string $utm_content = null, $utm_campaign = false ): string {
 			$url = self::get_site_url( $path );
 
 			if ( ! $utm_campaign ) {
@@ -503,7 +500,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 
 			$args = array(
 				// Referrer: plugin.
-				'utm_source'   => 'plugin-installation',
+				'utm_source'   => 'redux',
 
 				// Specific promotions or sales.
 				'utm_campaign' => $utm_campaign,
@@ -532,13 +529,13 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @since       3.0.0
 		 */
 		public function plugin_metalinks( array $links, string $file ): array {
-			if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
+/*			if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
 				$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ) . '">' . esc_html__( 'What is this?', 'redux-framework' ) . '</a>';
 
 				if ( true === Redux_Core::$redux_templates_enabled ) {
 					$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) ) . '#redux_templates=1">' . esc_html__( 'Template Library', 'redux-framework' ) . '</a>';
 				}
-			}
+			}*/
 
 			return $links;
 		}
