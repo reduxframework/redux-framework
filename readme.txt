@@ -1,6 +1,6 @@
-=== Gutenberg Template Library & Redux Framework ===
+=== Gutenberg Template and Pattern Library & Redux Framework ===
 Contributors: dovyp, redux, kprovance
-Tags: gutenberg, blocks, gutenberg blocks, editor, block, page builder, block editor, block library, editor, templates, library
+Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.9
@@ -8,41 +8,39 @@ Stable tag: 4.3.9
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
-Supercharge the Gutenberg editor with our library of block-based templates and patterns!
+Supercharge the Gutenberg editor with our library of Gutenberg block templates, layouts, and patterns!
 
 == Description ==
 <strong>Redux - Quickly create full pages in WordPress’ Gutenberg</strong>
 
-Supercharge the Gutenberg editor with our ever-growing library of WordPress Blocks and templates. Discover what's possible and implement any design on your website in virtually no time at all.
+Supercharge the Gutenberg editor with our ever-growing library of WordPress blocks templates, layouts, and patterns. Discover what's possible and implement any design on your website in virtually no time at all.
 
-Worried that our templates may not work with your theme? We've got you covered. With our custom <em>page templates</em> option you can override any theme. Missing a plugin a template needs? No worries, we’ll even help you install what you need, all from the Gutenberg editor.
+Worried that our Gutenberg block templates, layouts, or patterns may not work with your theme? We've got you covered. Our template, layouts, and patterns will adapt to your theme's styles, so they look great with your site.
 
-Don’t waste hours trying to recreate a template you love. With a click of a button in its own website where you can start customizing it for your needs.
+Don’t waste hours trying to recreate a Gutenberg block template, layout, or pattern you love. With a click of a button in its own website where you can start customizing it for your needs.
 
 <h4>♥️ What the Plugin does?</h4>
 <ul>
-    <li><strong>Browse 1,000+</strong> templates from your Gutenberg Editor that you can add to your site immediately.</li>
-    <li><strong>Preview</strong> each template on a demo site.</li>
-    <li><strong>Filter</strong> between the dependencies you want, and find exactly what you're looking for.</li>
-    <li><strong>See instantly</strong> which Gutenberg templates you have everything for, or may need to install some dependencies.</li>
-    <li><strong>Automated install</strong> of anything you may need to install any template.</li>
-    <li><strong>Block Patterns library</strong> support built in.</li>
+    <li><strong>Browse 1,000+</strong> block templates, layouts, and patterns from your Gutenberg Editor that you can add to your site immediately.</li>
+    <li><strong>Preview</strong> each block template, layout, or pattern on a demo site.</li>
+    <li><strong>Filter</strong> different content types and site types to find exactly what you're looking for.</li>
+    <li><strong>Gutenberg Block Patterns library</strong> support built in.</li>
     <li>The most trusted option framework in the industry.</li>
     <li>Developer friendly: clean code, inline documentation</li>
 </ul>
 
 <h4>🚀 TYPICAL USE CASE OF THIS PLUGIN</h4>
-Whether you are building a simple site or a **big site** with **lots of pages**, you just want it to look amazing. With the Extendify Library in Redux, you can begin making pages with various patterns or templates.
+Whether you are building a simple site or a **big site** with **lots of pages**, you just want it to look amazing. With the Gutenberg block template, layout, and pattern library in Redux, you can begin making pages with various Gutenberg block patterns, templates or layouts.
 
-You can browse through the categories, as well as collections of like-styled pages. When you find something you like, we make sure you have everything you need. If a dependency (or required plugin) is missing, you are notified and can install the missing dependency. Worried that our templates may not work with your theme? No problem! With our custom `page templates` options, you can transform any site into precisely what you want it to be, no matter what you are using them for.
+You can browse through the categories, as well as collections of like-styled pages. When you find something you like, we make sure you have everything you need. Worried that our Gutenberg block templates, layouts, or patterns may not work with your theme? No problem! Our templates will adapt to your theme’s style to fit within your site’s design.
 
-Don’t waste hours trying to recreate a design you love. With a click of a button, you have it on your own site, and you can begin customizing your template for your needs.
+Don’t waste hours trying to recreate a design you love. With a click of a button, you have it on your own site, and you can begin customizing your Gutenberg block template, layout or pattern for your needs.
 
 <h4>🎉 Supported Page Builders</h4>
-Currently Redux supports only the <a href="https://wordpress.org/plugins/gutenberg/"><strong>Gutenberg / Block Editor of WordPress 5.0+</strong></a>.
+Redux supports only the <a href="https://wordpress.org/plugins/gutenberg/"><strong>Gutenberg / Block Editor of WordPress 5.0+</strong></a>.
 
 <h4>🎨 Supported Themes</h4>
-Though Redux will work with any theme that uses Gutenberg, we have done extra work to ensure complete compatibility with these themes.
+Though Redux will work with any theme that uses the Gutenberg block editor, we have done extra work to ensure complete compatibility with these themes.
 
 <ul>
 <li><a href="https://wordpress.org/themes/astra/"><strong>Astra Theme</strong></a> with <strong>Astra Pro</strong> Add-On Plugin – <strong>Custom Layouts</strong> (for Layouts, Headers, Footers, Hooks)</li>
@@ -67,7 +65,7 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 
 <h4>📝 Documentation and Support</h4>
 <ul>
-<li>For more information about the Template Library, check out <a href="https://extendify.com/" rel="nofollow ugc">Extendify</a>.</li>
+<li>For more information about the Gutenberg block template, layout, and pattern library, check out <a href="https://extendify.com/" rel="nofollow ugc">Extendify</a>.</li>
 <li>For information about the Redux Options Framework, check out <a href="https://devs.redux.io/" rel="nofollow ugc">Redux Documentation</a>.</li>
 <li>If you have additional questions, reach out to us at support@redux.io</li>
 </ul>
@@ -82,9 +80,9 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 <h4>🔐 Privacy</h4>
 Redux does not interact with end users on your website. Our templates will continue to work even if Redux is uninstalled. If a product is using Redux the option panel will cease to function without Redux.
 
-Redux utilizes [AppSero](https://appsero.com/) for account management as well as to enable our premium offerings. You can find their privacy policy here: [https://appsero.com/privacy-policy/](https://appsero.com/privacy-policy/). Activation of Redux is not necessary, but additional features such as Google Font Updates and increased access to the template library will be limited.
+Redux utilizes [AppSero](https://appsero.com/) for account management as well as to enable our premium offerings. You can find their privacy policy here: [https://appsero.com/privacy-policy/](https://appsero.com/privacy-policy/). Activation of Redux is not necessary, but additional features such as Google Font Updates and increased access to the Gutenberg block template, layout, and pattern library will be limited.
 
-The Redux plugin uses a custom API to fetch our content library and our Gutenberg templates. To improve the service and stability we store logs which may or may not contain the following:
+The Redux plugin uses a custom API to fetch our content library and our Gutenberg block templates, layouts, and patterns. To improve the service and stability we store logs which may or may not contain the following:
 <ul>
 <li>browser type</li>
 <li>referring site</li>
@@ -353,11 +351,11 @@ Release date: Sep 18, 2020
 
 == Frequently Asked Questions ==
 
-= Who should use the Gutenberg Template Library? =
+= Who should use the Gutenberg Block Template, Layout, and Pattern Library? =
 
-The Redux Block Library for Gutenberg is a complete package of unique and creative templates that will help you build beautiful pages and posts on a website. It is of value for everyone and for all who love Gutenberg.
+The Redux Block Library for Gutenberg is a complete package of unique and creative block templates, layouts, and patterns that will help you build beautiful pages and posts on a website. It is of value for everyone and for all who love Gutenberg.
 
-= What are the requirements to use the Gutenberg Template Library? =
+= What are the requirements to use the Gutenberg Template, Layout, and Pattern Library? =
 
 You only need to have the latest version of WordPress on your website, to begin with. Redux is for Gutenberg is basically an addon for the default WordPress block editor. Therefore, the latest WordPress installation along with a theme should be enough, to begin with.
 
@@ -367,12 +365,12 @@ Redux is built to work wonderfully with all themes.
 
 = Can I use Redux for Gutenberg even while having another Page Builder? =
 
-The basic need or requirement for the Gutenberg Template Library is the latest WordPress version. Should you need help, you can <a href="https://redux.io/contact/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme" target="_blank" rel="">get in touch with us.</a>
+The basic need or requirement for the Gutenberg Template, Layout, and Pattern Library is the latest WordPress version. Should you need help, you can <a href="https://redux.io/contact/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme" target="_blank" rel="">get in touch with us.</a>
 
-= Can I use the Gutenberg Template Library on client websites? =
+= Can I use the Gutenberg Template, Layout, and Pattern Library on client websites? =
 
 Yes! You can certainly use Redux on yours as well as your client's websites.
 
 = Will Redux slow down my website? =
 
-Absolutely not! The Gutenberg Template Library plugin is built with ease and performance in mind. Its module architecture and the clean code keep it extremely fast. Every performance issue that seems to be coming from Redux is actually the integration code of third-party developers. If you're having issues let us know, and we'll try to help you out.
+Absolutely not! The Gutenberg Template, Layout, and Pattern Library plugin is built with ease and performance in mind. Its module architecture and the clean code keep it extremely fast. Every performance issue that seems to be coming from Redux is actually the integration code of third-party developers. If you're having issues let us know, and we'll try to help you out.
