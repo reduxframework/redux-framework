@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.9.2
+* Modified: Background field will now show background styling options even if `background-image` is not set.
+* Modified: Connection banner now promotes Extendify plugin with download/activate option.
+
 ## 4.3.9.1
 * Restored: Repeater field for beta testing.
 
