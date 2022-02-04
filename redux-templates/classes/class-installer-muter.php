@@ -2,8 +2,6 @@
 
 namespace ReduxTemplates;
 
-use ReduxTemplates;
-
 /**
  * ReduxTemplates InstallerMuter.
  *

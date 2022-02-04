@@ -98,7 +98,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 
 			$core = $this->core();
 			if ( isset( $_GET ) && isset( $_GET['page'] ) && $core->args['page_slug'] === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-				do_action( 'redux_admin_notices_run', $core->args );
+				// do_action( 'redux_admin_notices_run', $core->args );
 
 				// Check for an active admin notice array.
 				if ( ! empty( $notices ) ) {

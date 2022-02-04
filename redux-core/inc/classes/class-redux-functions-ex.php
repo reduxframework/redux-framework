@@ -56,7 +56,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Parses the string into variables without the max_input_vars limitation.
 		 *
-		 * @param     string $string String of data.
+		 * @param string $string String of data.
 		 *
 		 * @return  array|false $result
 		 * @since   3.5.7.11
@@ -91,12 +91,11 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Merge arrays without converting values with duplicate keys to arrays as array_merge_recursive does.
 		 * As seen here http://php.net/manual/en/function.array-merge-recursive.php#92195
 		 *
-		 * @since   3.5.7.11
-		 *
-		 * @param     array $array1 array one.
-		 * @param     array $array2 array two.
+		 * @param array $array1 array one.
+		 * @param array $array2 array two.
 		 *
 		 * @return  array $merged
+		 * @since   3.5.7.11
 		 * @author  harunbasic
 		 * @access  private
 		 */
@@ -215,8 +214,8 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Check s.
 		 *
 		 * @access public
-		 * @since 4.0.0
 		 * @return bool
+		 * @since  4.0.0
 		 */
 		public static function s(): bool {
 			if ( ! get_option( 'redux_p' . 'ro_lic' . 'ense_key', false ) ) { // phpcs:ignore Generic.Strings.UnnecessaryStringConcat.Found
@@ -379,21 +378,21 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 				}
 				if ( ! file_exists( $upload_dir . $new_class_name . '.php' ) ) {
 					$class_file = '<?php' . PHP_EOL . PHP_EOL .
-						'class {{ext_class}} extends Redux_Extension_Abstract {' . PHP_EOL .
-						'    private $c;' . PHP_EOL .
-						'    public function __construct( $parent, $path, $ext_class ) {' . PHP_EOL .
-						'        $this->c = $parent->extensions[\'' . $name . '\'];' . PHP_EOL .
-						'        // Add all the params of the Abstract to this instance.' . PHP_EOL .
-						'        foreach( get_object_vars( $this->c ) as $key => $value ) {' . PHP_EOL .
-						'            $this->$key = $value;' . PHP_EOL .
-						'        }' . PHP_EOL .
-						'        parent::__construct( $parent, $path );' . PHP_EOL .
-						'    }' . PHP_EOL .
-						'    // fake "extends Redux_Extension_Abstract\" using magic function' . PHP_EOL .
-						'    public function __call( $method, $args ) {' . PHP_EOL .
-						'        return call_user_func_array( array( $this->c, $method ), $args );' . PHP_EOL .
-						'    }' . PHP_EOL .
-						'}' . PHP_EOL;
+					              'class {{ext_class}} extends Redux_Extension_Abstract {' . PHP_EOL .
+					              '    private $c;' . PHP_EOL .
+					              '    public function __construct( $parent, $path, $ext_class ) {' . PHP_EOL .
+					              '        $this->c = $parent->extensions[\'' . $name . '\'];' . PHP_EOL .
+					              '        // Add all the params of the Abstract to this instance.' . PHP_EOL .
+					              '        foreach( get_object_vars( $this->c ) as $key => $value ) {' . PHP_EOL .
+					              '            $this->$key = $value;' . PHP_EOL .
+					              '        }' . PHP_EOL .
+					              '        parent::__construct( $parent, $path );' . PHP_EOL .
+					              '    }' . PHP_EOL .
+					              '    // fake "extends Redux_Extension_Abstract\" using magic function' . PHP_EOL .
+					              '    public function __call( $method, $args ) {' . PHP_EOL .
+					              '        return call_user_func_array( array( $this->c, $method ), $args );' . PHP_EOL .
+					              '    }' . PHP_EOL .
+					              '}' . PHP_EOL;
 					$template   = str_replace( '{{ext_class}}', $new_class_name, $class_file );
 					$parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
 				}
@@ -437,7 +436,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * AJAX callback key
 		 */
 		public static function hash_key(): string {
-			$key  = defined( 'AUTH_KEY' ) ? AUTH_KEY : get_site_url();
+			$key = defined( 'AUTH_KEY' ) ? AUTH_KEY : get_site_url();
 			$key .= defined( 'SECURE_AUTH_KEY' ) ? SECURE_AUTH_KEY : '';
 
 			return $key;
@@ -447,7 +446,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Check if Redux is activated.
 		 *
 		 * @access public
-		 * @since 4.0.0
+		 * @since  4.0.0
 		 */
 		public static function activated(): bool {
 			if ( Redux_Core::$insights->tracking_allowed() ) {
@@ -461,7 +460,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Set Redux to activate.
 		 *
 		 * @access public
-		 * @since 4.0.0
+		 * @since  4.0.0
 		 */
 		public static function set_activated() {
 			Redux_Core::$insights->optin();
@@ -471,7 +470,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * Set Redux to deactivate.
 		 *
 		 * @access public
-		 * @since 4.0.0
+		 * @since  4.0.0
 		 */
 		public static function set_deactivated() {
 			Redux_Core::$insights->optout();
@@ -507,6 +506,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 */
 		public static function string_starts_with( string $haystack, string $needle ): bool {
 			$length = strlen( $needle );
+
 			return substr( $haystack, 0, $length ) === $needle;
 		}
 
@@ -525,7 +525,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 				return true;
 			}
 
-			return substr( $haystack, -$length ) === $needle;
+			return substr( $haystack, - $length ) === $needle;
 		}
 
 		/**
@@ -611,6 +611,42 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 				// In that case we can expect them to come to support, and we can give them a fresh key.
 				update_user_option( get_current_user_id(), 'extendifysdk_redux_key_moved', true );
 			}
+		}
+
+		/**
+		 * Determine if Extendify plugin is installed.
+		 *
+		 * @param string $name Plugin name.
+		 *
+		 * @return bool
+		 */
+		public static function is_plugin_installed( string $name ): bool {
+			if ( ! function_exists( 'get_plugins' ) ) {
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			foreach ( get_plugins() as $plugin => $data ) {
+				if ( $data['TextDomain'] === $name ) {
+					return $plugin;
+				}
+			}
+
+			return false;
+		}
+
+		/**
+		 * Is plugin active.
+		 *
+		 * @param string $name Plugin name.
+		 *
+		 * @return bool
+		 */
+		public static function is_plugin_active( string $name ): bool {
+			if ( in_array( $name . '/' . $name . '.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

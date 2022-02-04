@@ -221,7 +221,7 @@
 
 .redux-banner-container-top-text {
     padding: 15px 35px 25px 15px;
-    background-color: #24b0a6;
+    background-color: #CBC3F5;
     color: #fff;
     display: flex;
     align-items: baseline;
@@ -275,7 +275,7 @@
 }
 
 .redux-banner-content-container {
-    width: 1250px;
+    //width: 1250px;
     position: relative;
     padding: 2rem;
     z-index: 0;
@@ -521,4 +521,14 @@ img.redux-banner-logo {
     width: 50px;
     height: auto;
     margin-bottom: 10px;
+}
+
+.redux-connection-banner-action {
+    &.disabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
 }

@@ -8,9 +8,7 @@
  */
 
 // @codingStandardsIgnoreStart
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
@@ -130,18 +128,131 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 * AJAX callback for dismissing the notice.
 		 */
 		public function admin_ajax() {
+
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
+
 			if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, $this->nonce ) ) {
 				die( __( 'Security check failed.', 'redux-framework' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
-			if ( 'true' === $_REQUEST['activate'] ) {
-				Redux_Functions_Ex::set_activated( sanitize_text_field( wp_unslash( $_REQUEST['activate'] ) ) );
-			} else {
-				Redux_Functions_Ex::set_deactivated();
-				update_option( 'redux-framework_tracking_notice', 'hide' );
+
+			if ( 'false' === $_REQUEST['activate'] ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'close',
+						'msg'  => '',
+					)
+				);
+
+				update_option( 'redux-framework_extendify_notice', 'hide' );
+
+				die();
 			}
+
+			$res = $this->install_extendify();
+
+			if ( true === $res ) {
+				update_option( 'redux-framework_extendify_notice', 'hide' );
+			}
+
+			//if ( 'true' === $_REQUEST['activate'] ) {
+			//	Redux_Functions_Ex::set_activated( sanitize_text_field( wp_unslash( $_REQUEST['activate'] ) ) );
+			//} else {
+			//	Redux_Functions_Ex::set_deactivated();
+			//	update_option( 'redux-framework_tracking_notice', 'hide' );
+			//}
+
 			die();
+		}
+
+		/**
+		 * Install and activate Extendify Plugin.
+		 *
+		 * @return bool
+		 */
+		private function install_extendify(): bool {
+			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			require_once ABSPATH . 'wp-admin/includes/misc.php';
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+
+			$api = plugins_api(
+				'plugin_information',
+				array(
+					'slug'   => 'extendify',
+					'fields' => array(
+						'short_description' => false,
+						'sections'          => false,
+						'requires'          => false,
+						'rating'            => false,
+						'ratings'           => false,
+						'downloaded'        => false,
+						'last_updated'      => false,
+						'added'             => false,
+						'tags'              => false,
+						'compatibility'     => false,
+						'homepage'          => false,
+						'donate_link'       => false,
+					),
+				)
+			);
+
+			$download_link = $api->download_link;
+
+			if ( empty( $download_link ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'Error: Install URL for Extendify could not be located.', 'redux-framework' ),
+					)
+				);
+
+				return false;
+			}
+
+			ob_start();
+
+			$skin     = new Redux_Installer_Muter( array( 'api' => $api ) );
+			$upgrader = new Plugin_Upgrader( $skin );
+			$install  = $upgrader->install( $download_link );
+
+			if ( ob_get_contents() ) {
+				ob_end_clean();
+			}
+
+			if ( true !== $install ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'Install process for Extendify failed.', 'redux-framework' ),
+					)
+				);
+
+				return false;
+			}
+
+			$plugin_dir = WP_PLUGIN_DIR . '/extendify/extendify.php';
+
+			$activate = activate_plugin( $plugin_dir );
+
+			if ( is_wp_error( $activate ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'Extendify activation failed.', 'redux-framework' ),
+					)
+				);
+			}
+
+			echo wp_json_encode(
+				array(
+					'type' => 'success',
+					'msg'  => esc_html__( 'Extendify installed and activated.', 'redux-framework' ),
+				)
+			);
+
+			return true;
 		}
 
 		/**
@@ -176,7 +287,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		public function maybe_initialize_hooks( $current_screen ) {
 			// Redux_Functions_Ex::set_deactivated(); // Test code.
 
-			if ( Redux_Functions_Ex::activated() || 'hide' === get_option( 'redux-framework_tracking_notice', null ) ) {
+			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hidee' === get_option( 'redux-framework_extendify_notice', null ) ) {
 				return;
 			}
 
@@ -193,71 +304,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				add_action( 'network_admin_notices', array( $this, 'network_connect_notice' ) );
 				add_action( 'admin_head', array( $this, 'admin_head' ) );
 				add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 20 );
-
-				// Only fires immediately after plugin activation
-				if ( get_transient( 'activated_Redux' ) ) {
-					add_action( 'admin_notices', array( $this, 'render_connect_prompt_full_screen' ) );
-					delete_transient( 'activated_Redux' );
-				}
 			}
-		}
-
-		/**
-		 * Enqueues JavaScript and CSS for new connect-in-place flow.
-		 *
-		 * @since 7.7
-		 */
-		public static function enqueue_connect_button_scripts() {
-			global $is_safari;
-
-			wp_enqueue_script(
-				'Redux-connect-button',
-				'_inc/connect-button.js',
-				array( 'jquery' ),
-				Redux_Core::$version,
-				true
-			);
-
-			wp_enqueue_style(
-				'Redux-connect-button',
-				'css/Redux-connect.css'
-			);
-
-			$ReduxApiUrl = wp_parse_url( Redux::connection()->api_url( '' ) );
-
-			// Due to the limitation in how 3rd party cookies are handled in Safari,
-			// we're falling back to the original flow on Safari desktop and mobile.
-			if ( $is_safari ) {
-				$force_variation = 'original';
-			} elseif ( Constants::is_true( 'Redux_SHOULD_USE_CONNECTION_IFRAME' ) ) {
-				$force_variation = 'in_place';
-			} elseif ( Constants::is_defined( 'Redux_SHOULD_USE_CONNECTION_IFRAME' ) ) {
-				$force_variation = 'original';
-			} else {
-				$force_variation = null;
-			}
-
-			$tracking = new Automattic\Redux\Tracking();
-			$identity = $tracking->tracks_get_identity( get_current_user_id() );
-
-			wp_localize_script(
-				'Redux-connect-button',
-				'reduxConnect',
-				array(
-					'apiBaseUrl'            => esc_url_raw( rest_url( 'Redux/v4' ) ),
-					'registrationNonce'     => wp_create_nonce( 'Redux-registration-nonce' ),
-					'apiNonce'              => wp_create_nonce( 'wp_rest' ),
-					'apiSiteDataNonce'      => wp_create_nonce( 'wp_rest' ),
-					'buttonTextRegistering' => __( 'Loading...', 'redux-framework' ),
-					'ReduxApiDomain'        => $ReduxApiUrl['scheme'] . '://' . $ReduxApiUrl['host'],
-					'forceVariation'        => $force_variation,
-					'connectInPlaceUrl'     => Redux::admin_url( 'page=Redux#/setup' ),
-					'dashboardUrl'          => Redux::admin_url( 'page=Redux#/dashboard' ),
-					'plansPromptUrl'        => Redux::admin_url( 'page=Redux#/plans-prompt' ),
-					'identity'              => $identity,
-					'preFetchScript'        => plugins_url( '_inc/build/admin.js', Redux__PLUGIN_FILE ) . '?ver=' . Redux__VERSION,
-				)
-			);
 		}
 
 		/**
@@ -334,7 +381,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				<div class="redux-banner-container-top-text">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"/><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 15h-2v-2h2v2zm0-4h-2l-.5-6h3l-.5 6z"/></g></svg>
 					<span>
-						<?php esc_html_e( 'You’re almost done. Register for our service to unlock even more tools to help you build better sites faster in WordPress.', 'redux-framework' ); ?>
+						<?php esc_html_e( 'You’re almost done. Finish setting up the Gutenberg pattern and template library to unlock more amazing features.', 'redux-framework' ); ?>
 					</span>
 				</div>
 				<div class="redux-banner-inner-container">
@@ -350,7 +397,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 							<div class="redux-banner-content-icon redux-illo">
 								<a href="<?php echo esc_url( 'https://redux.io/?utm_source=plugin&utm_medium=appsero&utm_campaign=redux_banner_logo' ); ?>" target="_blank"><img
-										src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/logo--color.svg"
+										src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/logo-color.png"
 										class="redux-banner-content-logo"
 										alt="
 									<?php
@@ -359,9 +406,9 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 											'redux-framework'
 										);
 									?>
-									"
+									" height="auto"
 									/></a>
-								<img
+								<!-- <img
 									src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/redux-powering-up.svg"
 									class="redux-banner-hide-phone-and-smaller"
 									alt="
@@ -373,15 +420,15 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 									?>
 									"
 									height="auto"
-								/>
+								/> -->
 							</div>
 
 							<div class="redux-banner-slide-text">
-								<h2><?php esc_html_e( 'Build better sites faster with Redux', 'redux-framework' ); ?></h2>
+								<h2><?php esc_html_e( 'Build better sites faster with Gutenberg patterns and templates', 'redux-framework' ); ?></h2>
 								<p>
 									<?php
 									esc_html_e(
-										'The Redux block library service, powered by Extendify, allows you to build any site you want in minutes with a click of a button. With over 1,000+ templates, Redux helps you build sites fast!',
+										'The Redux block library service, powered by Extendify, allows you to build any site you want in minutes with a click of a button. With over 1,000+ templates, Redux helps you build sites fast! Clicking “Complete installation” below will install the Extendify plugin to unlock the latest Gutenberg pattern and template library features, and will increase the number of free pattern and template imports you are granted each month.',
 										'redux_framework'
 									);
 									?>
@@ -398,15 +445,15 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 								</p>
 
 								<div class="redux-banner-button-container">
-									<span class="redux-banner-tos-blurb"><?php echo self::tos_blurb( 'plugin_dashboard' ); ?></span>
+									<span class="redux-banner-tos-blurb"><?php // echo self::tos_blurb( 'plugin_dashboard' ); ?></span>
 
-									<a href="<?php echo esc_url( $urls['dismiss'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>"
+									<!-- <a href="<?php echo esc_url( $urls['dismiss'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>"
 									   class="button button-tiny button-link redux-connection-banner-action"
-									   title="<?php esc_attr_e( 'No thanks', 'redux-framework' ); ?>" data-activate="false"><?php esc_html_e( 'No Thanks', 'redux-framework' ); ?></a>&nbsp;&nbsp;
+									   title="<?php esc_attr_e( 'No thanks', 'redux-framework' ); ?>" data-activate="false"><?php esc_html_e( 'No Thanks', 'redux-framework' ); ?></a>&nbsp;&nbsp;-->
 
 									<a href="<?php echo esc_url( $urls['register'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-activate="main_banner"
 									   class="button button-primary button-large redux-alt-connect-button redux-connection-banner-action">
-										<?php esc_html_e( 'Register', 'redux-framework' ); ?>
+										<?php esc_html_e( 'Complete Installation', 'redux-framework' ); ?>
 									</a>
 								</div>
 
@@ -417,104 +464,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 			</div>
 			<noscript><style>#redux-connect-message{display:none;}</style></noscript>
 			<?php
-		}
-
-		/**
-		 * Renders the full-screen connection prompt.  Only shown once and on plugin activation.
-		 */
-		public static function render_connect_prompt_full_screen() {
-			$current_screen = get_current_screen();
-			if ( 'plugins' === $current_screen->base ) {
-				$bottom_connect_url_from = 'full-screen-prompt';
-			} else {
-				$bottom_connect_url_from = 'landing-page-bottom';
-			}
-
-			if ( 'plugins' === $current_screen->base ) :
-				?>
-				<div class="redux-banner-full-container">
-					<div class="redux-banner-full-container-card">
-						<div class="redux-banner-full-dismiss">
-							<svg class="redux-banner-svg-dismiss" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Dismiss Redux Connection Window</title><rect x="0" fill="none" /><g><path d="M17.705 7.705l-1.41-1.41L12 10.59 7.705 6.295l-1.41 1.41L10.59 12l-4.295 4.295 1.41 1.41L12 13.41l4.295 4.295 1.41-1.41L13.41 12l4.295-4.295z"/></g></svg>
-						</div>
-
-						<img
-							src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/logo.svg"
-							alt="<?php esc_attr_e( 'Redux Logo', 'redux-template' ); ?>"
-							class="redux-banner-logo"
-						/>
-
-						<div class="redux-banner-full-step-header">
-							<h2 class="redux-banner-full-step-header-title"><?php esc_html_e( 'Activate essential WordPress security and performance tools by setting up Redux', 'redux-framework' ); ?></h2>
-						</div>
-						<p class="redux-banner-full-tos-blurb">
-							<?php self::tos_blurb( 'fullscreen' ); ?>
-						</p>
-						<p class="redux-banner-button-container">
-							<a href=""
-							   class="dops-button is-primary redux-button">
-								<?php esc_html_e( 'Register', 'redux-framework' ); ?>
-							</a>
-						</p>
-
-						<div class="redux-banner-full-row" id="Redux-connection-cards">
-							<div class="redux-banner-full-slide">
-								<div class="redux-banner-full-slide-card illustration">
-									<img
-										src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/security.svg"
-										alt="<?php esc_attr_e( 'Security & Backups', 'redux-framework' ); ?>"
-									/>
-								</div>
-								<div class="redux-banner-full-slide-card">
-									<p>
-										<?php
-										esc_html_e(
-											'Redux protects you against brute force attacks and unauthorized logins. ' .
-											'Basic protection is always free, while premium plans add unlimited backups of your whole site, ' .
-											'spam protection, malware scanning, and automated fixes.',
-											'redux-framework'
-										);
-										?>
-									</p>
-								</div>
-							</div>
-							<div class="redux-banner-full-slide">
-								<div class="redux-banner-full-slide-card illustration">
-									<img
-										src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/redux-speed.svg"
-										alt="<?php esc_attr_e( 'Built-in Performance', 'redux-framework' ); ?>"
-									/>
-								</div>
-								<div class="redux-banner-full-slide-card">
-									<p>
-										<?php
-										esc_html_e(
-											'Activate site accelerator tools and watch your page load times decrease—' .
-											"we'll optimize your images and serve them from our own powerful global network of servers, " .
-											'and speed up your mobile site to reduce bandwidth usage.',
-											'redux-framework'
-										);
-										?>
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<p class="redux-banner-full-dismiss-paragraph">
-							<a>
-								<?php
-								echo esc_html_x(
-									'Not now, thank you.',
-									'a link that closes the modal window that offers to connect Redux',
-									'redux-framework'
-								);
-								?>
-							</a>
-						</p>
-					</div>
-				</div>
-				<?php
-			endif;
 		}
 
 		/**
@@ -554,7 +503,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				Redux_Functions_Ex::get_site_utm_url( 'terms', 'appsero', 'activate', $campaign )
 			);
 		}
-
 	}
 }
+
 // @codingStandardsIgnoreEnd
