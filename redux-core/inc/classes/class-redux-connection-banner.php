@@ -287,7 +287,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		public function maybe_initialize_hooks( $current_screen ) {
 			// Redux_Functions_Ex::set_deactivated(); // Test code.
 
-			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hidee' === get_option( 'redux-framework_extendify_notice', null ) ) {
+			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_notice', null ) ) {
 				return;
 			}
 
@@ -381,7 +381,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				<div class="redux-banner-container-top-text">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"/><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 15h-2v-2h2v2zm0-4h-2l-.5-6h3l-.5 6z"/></g></svg>
 					<span>
-						<?php esc_html_e( 'You’re almost done. Finish setting up the Gutenberg pattern and template library to unlock more amazing features.', 'redux-framework' ); ?>
+						<strong><?php esc_html_e( 'You’re almost done. Finish setting up the Gutenberg pattern and template library to unlock more amazing features.', 'redux-framework' ); ?></strong>
 					</span>
 				</div>
 				<div class="redux-banner-inner-container">

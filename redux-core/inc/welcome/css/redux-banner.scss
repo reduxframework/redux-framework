@@ -216,13 +216,13 @@
 }
 
 .redux-banner-container-top-text + .redux-banner-inner-container .notice-dismiss::before {
-    color: #fff;
+    color: #000000;
 }
 
 .redux-banner-container-top-text {
     padding: 15px 35px 25px 15px;
     background-color: #CBC3F5;
-    color: #fff;
+    color: #000000;
     display: flex;
     align-items: baseline;
 }
@@ -242,7 +242,7 @@
 }
 
 .redux-banner-container-top-text svg path {
-    fill: #fff;
+    fill: #000000;
 }
 
 .redux-banner-container-top-text span {
