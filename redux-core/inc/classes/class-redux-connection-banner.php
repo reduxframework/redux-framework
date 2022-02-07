@@ -291,10 +291,15 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				return;
 			}
 
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				return;
+			}
+
 			// Don't show the connect notice anywhere but the plugins.php after activating
 			if ( 'plugins' !== $current_screen->base && 'dashboard' !== $current_screen->base ) {
 				add_action( 'redux_admin_notices_run', array( $this, 'panel_admin_notice' ), 100, 2 );
 				add_action( 'admin_head', array( $this, 'admin_head' ) );
+
 				return;
 			}
 
