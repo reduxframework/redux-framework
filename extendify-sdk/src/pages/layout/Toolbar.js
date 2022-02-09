@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
+import { memo } from '@wordpress/element'
 import { Button } from '@wordpress/components'
 import { TypeSelect } from '../../components/TypeSelect'
 import { useGlobalStore } from '../../state/GlobalState'
@@ -7,7 +8,7 @@ import { user } from '../../components/icons/'
 import SettingsModal from '../../components/modals/SettingsModal'
 import { useUserStore } from '../../state/User'
 
-export const Toolbar = ({ className }) => {
+export const Toolbar = memo(function Toolbar({ className }) {
     const setOpen = useGlobalStore((state) => state.setOpen)
     const pushModal = useGlobalStore((state) => state.pushModal)
     const loggedIn = useUserStore((state) => state.apiKey.length)
@@ -22,7 +23,7 @@ export const Toolbar = ({ className }) => {
                         onClick={() => pushModal(<SettingsModal />)}
                         icon={<Icon icon={user} size={24} />}
                         label={__('Login and settings area', 'extendify')}>
-                        {loggedIn ? '' : __('Log In', 'extendify')}
+                        {loggedIn ? '' : __('Sign in', 'extendify')}
                     </Button>
                     <Button
                         onClick={() => setOpen(false)}
@@ -33,4 +34,4 @@ export const Toolbar = ({ className }) => {
             </div>
         </div>
     )
-}
+})

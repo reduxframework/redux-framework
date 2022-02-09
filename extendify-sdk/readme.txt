@@ -3,7 +3,7 @@ Contributors: extendify, richtabor, kbat82, clubkert, arturgrabo
 Tags: page builder, editor, patterns, drag-and-drop, blocks, visual editor, wysiwyg, design, website builder, landing page builder, front-end builder
 Requires at least: 5.4
 Tested up to: 5.9.0
-Stable tag: 0.3.1
+Stable tag: 0.4.0
 Requires PHP: 5.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -119,6 +119,12 @@ Nope! Extendify imports lightweight block-based content that is served directly 
 3. The Extendify library, as seen with the Twenty Twenty Two block theme
 
 == Changelog ==
+
+= 0.4.0 - 2022-02-08 =
+- Enhance layout view with autoscroll
+- Improve modal layout design consistency
+- Remove NeedsRegistrationModal
+- Add various performance improvements
 
 = 0.3.1 - 2022-01-26 =
 - Add singular value when import count is 1

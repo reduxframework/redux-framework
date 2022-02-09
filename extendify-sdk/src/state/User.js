@@ -20,10 +20,6 @@ export const useUserStore = create(
             apiKey: '',
             uuid: '',
             sdkPartner: '',
-            registration: {
-                email: '',
-                optedOut: false,
-            },
             noticesDismissedAt: {},
             modalNoticesDismissedAt: {},
             imports: 0, // total imports over time

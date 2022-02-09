@@ -8,8 +8,7 @@ export const ProModal = () => {
     const initialFocus = useRef(null)
     return (
         <SplitModal isOpen={true} invertedButtonColor={true} ref={initialFocus}>
-            {/* TODO: extract this padding to parent */}
-            <div className="p-12 py-2">
+            <div>
                 <div className="flex space-x-2 items-center mb-5 text-extendify-black">
                     {brandLogo}
                 </div>

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n'
-import Sidebar from '../Sidebar'
+import { Sidebar } from '../Sidebar'
 import HasSidebar from './HasSidebar'
 import { Toolbar } from './Toolbar'
 import { GridView } from '../GridView'
@@ -38,8 +38,8 @@ export const Layout = ({ setOpen }) => {
                             .querySelector('button')
                             .focus()
                     }
-                    className="sr-only focus:not-sr-only focus:text-blue-500">
-                    {__('Skip to content', 'extendify')}
+                    className="extendify-skip-to-sr-link sr-only focus:not-sr-only focus:text-blue-500">
+                    {__('Skip to templates', 'extendify')}
                 </button>
                 <div className="sm:flex relative mx-auto h-full">
                     <HasSidebar>
