@@ -86,7 +86,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				}
 				if ( isset( $clean_get[ $this->dismiss_option ] ) ) {
 					Redux_Functions_Ex::set_deactivated();
-					update_option( 'redux-framework_tracking_notice', 'hide' );
+					update_option( 'redux-framework_extendify_notice', 'hide' );
 					return;
 				}
 			}

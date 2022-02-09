@@ -1,12 +1,12 @@
 # Redux Changelog
 
-## 4.3.9.2
+## 4.3.10
+* Added: Repeater field for beta testing.
 * Modified: Background field will now show background styling options even if `background-image` is not set.
 * Modified: Connection banner now promotes Extendify plugin with download/activate option.
-
-## 4.3.9.1
-* Restored: Repeater field for beta testing.
-
+* Updated: Extendify Library.
+* Release date: February 09, 2022
+ 
 ## 4.3.9
 * Fixed: Extendify Library JavaScript error.
 * Release date: January 26, 2022

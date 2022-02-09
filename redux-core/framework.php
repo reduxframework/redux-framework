@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.3.9.2';
+Redux_Core::$version    = '4.3.10';
 Redux_Core::$redux_path = dirname( __FILE__ );
 
 /** @noinspection PhpUnhandledExceptionInspection */
