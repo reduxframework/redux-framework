@@ -24,6 +24,10 @@
     @apply focus:border-transparent focus:outline-none focus:shadow-none;
 }
 
+div.extendify button.extendify-skip-to-sr-link:focus {
+    @apply fixed z-high top-0 bg-white p-4;
+}
+
 .button-extendify-main {
     @apply bg-extendify-main button-focus cursor-pointer transition duration-200 p-1.5 px-3 text-white hover:text-white no-underline hover:bg-extendify-main-dark active:bg-gray-900 active:text-white focus:text-white whitespace-nowrap rounded text-base;
 }
@@ -155,4 +159,21 @@
 
 .is-template--inactive::before {
     border-color: #fdeab6;
+}
+
+.extendify-tooltip-default:not(.is-without-arrow)[data-y-axis="bottom"]::after {
+    border-bottom-color: #1e1e1e;
+}
+.extendify-tooltip-default:not(.is-without-arrow)::before {
+    @apply border-transparent;
+}
+.extendify-tooltip-default:not(.is-without-arrow) .components-popover__content {
+    min-width: 250px;
+    @apply border-transparent bg-gray-900 text-white p-4;
+}
+.extendify-bottom-arrow::after {
+    content: "";
+    bottom: -15px;
+    @apply border-8 border-transparent w-0 h-0 inline-block absolute transform -translate-y-px;
+    border-top-color: #1e1e1e !important;
 }

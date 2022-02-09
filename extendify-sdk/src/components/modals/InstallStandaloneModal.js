@@ -47,7 +47,7 @@ export const InstallStandaloneModal = () => {
     }
     return (
         <SplitModal ref={initialFocus} onClose={dismiss}>
-            <div className="px-12">
+            <div>
                 <div className="flex space-x-2 items-center mb-10 text-extendify-black">
                     {brandLogo}
                 </div>

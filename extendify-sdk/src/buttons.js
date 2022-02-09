@@ -1,44 +1,21 @@
 import { __ } from '@wordpress/i18n'
-import { renderToString, render } from '@wordpress/element'
+import { render } from '@wordpress/element'
 import { registerPlugin } from '@wordpress/plugins'
-import { openModal } from './util/general'
 import { PluginSidebarMoreMenuItem } from '@wordpress/edit-post'
 import { Icon } from '@wordpress/icons'
 import { brandMark } from './components/icons/'
 import LibraryAccessModal from './components/LibraryAccessModal'
+import { CtaButton, MainButton } from './components/MainButtons'
 
-const openLibrary = (event) => {
-    openModal(
-        event.target.closest('[data-extendify-identifier]')?.dataset
-            ?.extendifyIdentifier,
-    )
-}
-
-// This returns true if the user object is null (Library never opened), or if it's enabled in the user settings
-const isAdmin = () =>
-    window.extendifyData.user === null ||
-    window.extendifyData?.user?.state?.isAdmin
+const userState = window.extendifyData?.user?.state
+const isAdmin = () => window.extendifyData.user === null || userState?.isAdmin
 const isGlobalLibraryEnabled = () =>
     window.extendifyData.sitesettings === null ||
     window.extendifyData?.sitesettings?.state?.enabled
 const isLibraryEnabled = () =>
     window.extendifyData.user === null
         ? isGlobalLibraryEnabled()
-        : window.extendifyData?.user?.state?.enabled
-
-const mainButton = (
-    <div id="extendify-templates-inserter" className="extendify">
-        <button
-            style="padding:4px 12px; height: 34px;"
-            type="button"
-            data-extendify-identifier="main-button"
-            id="extendify-templates-inserter-btn"
-            className="components-button bg-wp-theme-500 hover:bg-wp-theme-600 border-color-wp-theme-500 text-white ml-1">
-            <Icon icon={brandMark} size={24} className="-ml-1 mr-1" />
-            {__('Library', 'extendify')}
-        </button>
-    </div>
-)
+        : userState?.enabled
 
 // Add the MAIN button when Gutenberg is available and ready
 if (window._wpLoadBlockEditor) {
@@ -47,20 +24,21 @@ if (window._wpLoadBlockEditor) {
             if (!isGlobalLibraryEnabled() && !isAdmin()) {
                 return
             }
-
-            // Redundant extra check added because of a bug where the above check wasn't working
-            if (document.getElementById('extendify-templates-inserter-btn')) {
+            if (document.getElementById('extendify-templates-inserter')) {
                 return
             }
             if (!document.querySelector('.edit-post-header-toolbar')) {
                 return
             }
+            const buttonContainer = Object.assign(
+                document.createElement('div'),
+                { id: 'extendify-templates-inserter' },
+            )
             document
                 .querySelector('.edit-post-header-toolbar')
-                .insertAdjacentHTML('beforeend', renderToString(mainButton))
-            document
-                .getElementById('extendify-templates-inserter-btn')
-                .addEventListener('click', openLibrary)
+                .append(buttonContainer)
+            render(<MainButton />, buttonContainer)
+
             if (!isLibraryEnabled()) {
                 document
                     .getElementById('extendify-templates-inserter-btn')
@@ -73,9 +51,8 @@ if (window._wpLoadBlockEditor) {
 
 // The CTA button inside patterns
 if (window._wpLoadBlockEditor) {
-    const finish = window.wp.data.subscribe(() => {
+    window.wp.data.subscribe(() => {
         requestAnimationFrame(() => {
-            // Redundant extra check added because of a bug where the above check wasn't working
             if (!isGlobalLibraryEnabled() && !isAdmin()) {
                 return
             }
@@ -85,27 +62,15 @@ if (window._wpLoadBlockEditor) {
             if (document.getElementById('extendify-cta-button')) {
                 return
             }
-            const ctaButton = (
-                <div>
-                    <button
-                        id="extendify-cta-button"
-                        style="margin:1rem 1rem 0;width: calc(100% - 2rem);justify-content: center;"
-                        data-extendify-identifier="patterns-cta"
-                        className="components-button is-secondary">
-                        {__(
-                            'Discover patterns in Extendify Library',
-                            'extendify',
-                        )}
-                    </button>
-                </div>
+            const ctaButtonContainer = Object.assign(
+                document.createElement('div'),
+                { id: 'extendify-cta-button-container' },
             )
+
             document
                 .querySelector('[id$=patterns-view]')
-                .insertAdjacentHTML('afterbegin', renderToString(ctaButton))
-            document
-                .getElementById('extendify-cta-button')
-                .addEventListener('click', openLibrary)
-            finish()
+                .prepend(ctaButtonContainer)
+            render(<CtaButton />, ctaButtonContainer)
         })
     })
 }

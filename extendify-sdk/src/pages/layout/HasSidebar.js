@@ -8,7 +8,7 @@ export default function HasSidebar({ children }) {
             </aside>
             <main
                 id="extendify-templates"
-                className="bg-white w-full pt-6 sm:pt-0 h-full overflow-hidden">
+                className="bg-gray-50 w-full pt-6 sm:pt-0 h-full overflow-hidden">
                 {children[1]}
             </main>
         </>

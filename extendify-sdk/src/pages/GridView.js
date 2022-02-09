@@ -13,8 +13,9 @@ import { Templates as TemplatesApi } from '../api/Templates'
 import { useInView } from 'react-intersection-observer'
 import { useIsMounted } from '../hooks/helpers'
 import { ImportTemplateBlock } from '../components/ImportTemplateBlock'
+import { useGlobalStore } from '../state/GlobalState'
 
-export const GridView = memo(() => {
+export const GridView = memo(function GridView() {
     const isMounted = useIsMounted()
     const templates = useTemplatesStore((state) => state.templates)
     const appendTemplates = useTemplatesStore((state) => state.appendTemplates)
@@ -23,6 +24,7 @@ export const GridView = memo(() => {
     const [loading, setLoading] = useState(false)
     const [loadMoreRef, inView] = useInView()
     const searchParamsRaw = useTemplatesStore((state) => state.searchParams)
+    const currentType = useGlobalStore((state) => state.currentType)
     const resetTemplates = useTemplatesStore((state) => state.resetTemplates)
 
     // Store the next page in case we have pagination
@@ -155,14 +157,6 @@ export const GridView = memo(() => {
         )
     }
 
-    const breakpointColumnsObj = {
-        default: 2,
-        1320: 2,
-        860: 1,
-        599: 2,
-        400: 1,
-    }
-
     return (
         <>
             {loading && (
@@ -170,19 +164,20 @@ export const GridView = memo(() => {
                     <Spinner />
                 </div>
             )}
-            <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className="flex -ml-6 md:-ml-8 w-auto pb-40 pt-0.5 px-0.5 relative z-10"
-                columnClassName="pl-6 md:pl-8 bg-clip-padding min-h-screen">
+
+            <Grid type={currentType} templates={templates}>
                 {templates.map((template) => {
                     return (
                         <ImportTemplateBlock
+                            maxHeight={
+                                currentType === 'template' ? 520 : 'none'
+                            }
                             key={template.id}
                             template={template}
                         />
                     )
                 })}
-            </Masonry>
+            </Grid>
 
             {nextPage.current && (
                 <>
@@ -195,8 +190,9 @@ export const GridView = memo(() => {
                         ref={loadMoreRef}
                         style={{
                             zIndex: -1,
-                            marginBottom: '-200vh',
-                            height: '200vh',
+                            marginBottom: '-100%',
+                            height:
+                                currentType === 'template' ? '150vh' : '75vh',
                         }}
                     />
                 </>
@@ -204,3 +200,31 @@ export const GridView = memo(() => {
         </>
     )
 })
+
+const Grid = ({ type, children }) => {
+    const sharedClasses = 'relative min-h-screen z-10 pb-40 pt-0.5'
+    switch (type) {
+        case 'template':
+            return (
+                <div
+                    className={`grid lg:grid-cols-2 gap-6 md:gap-8 ${sharedClasses}`}>
+                    {children}
+                </div>
+            )
+    }
+    const breakpointColumnsObj = {
+        default: 3,
+        1600: 2,
+        860: 1,
+        599: 2,
+        400: 1,
+    }
+    return (
+        <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className={`flex -ml-6 md:-ml-8 w-auto px-0.5 ${sharedClasses}`}
+            columnClassName="pl-6 md:pl-8 bg-clip-padding space-y-6 md:space-y-8">
+            {children}
+        </Masonry>
+    )
+}

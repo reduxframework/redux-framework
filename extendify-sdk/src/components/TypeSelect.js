@@ -5,8 +5,8 @@ import { useGlobalStore } from '../state/GlobalState'
 
 export const TypeSelect = ({ className }) => {
     const updateType = useTemplatesStore((state) => state.updateType)
-    const currentType = useGlobalStore((state) =>
-        state.currentType ? state.currentType : 'pattern',
+    const currentType = useGlobalStore(
+        (state) => state?.currentType ?? 'pattern',
     )
 
     return (

@@ -7,7 +7,7 @@ import { useUserStore } from '../state/User'
 
 const searchMemo = new Map()
 
-export default function SiteTypeSelector({ value, setValue, terms }) {
+export const SiteTypeSelector = ({ value, setValue, terms }) => {
     const preferredOptionsHistory = useUserStore(
         (state) =>
             state.preferredOptionsHistory?.siteType?.filter((t) => t.slug) ??

@@ -26,7 +26,7 @@ export const Modal = forwardRef(
                             enter="ease-out duration-200 transition"
                             enterFrom="opacity-0"
                             enterTo="opacity-100">
-                            <Dialog.Overlay className="fixed inset-0 bg-white bg-opacity-40" />
+                            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
                         </Transition.Child>
                         <Transition.Child
                             as={Fragment}

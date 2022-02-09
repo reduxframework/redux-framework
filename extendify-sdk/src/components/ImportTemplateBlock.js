@@ -14,12 +14,11 @@ import { NoImportModal } from './modals/NoImportModal'
 import { ProModal } from './modals/ProModal'
 
 const canImportMiddleware = Middleware([
-    'NeedsRegistrationModal',
     'hasRequiredPlugins',
     'hasPluginsActivated',
 ])
 
-export function ImportTemplateBlock({ template }) {
+export function ImportTemplateBlock({ template, maxHeight }) {
     const importButtonRef = useRef(null)
     const once = useRef(false)
     const hasAvailableImports = useUserStore(
@@ -35,6 +34,7 @@ export function ImportTemplateBlock({ template }) {
     )
     const [loaded, setLoaded] = useState(false)
     const devMode = useIsDevMode()
+    const [topValue, setTopValue] = useState(0)
 
     const focusTrapInnerBlocks = () => {
         if (once.current) return
@@ -110,7 +110,7 @@ export function ImportTemplateBlock({ template }) {
                                     )
                                     const id = window.setTimeout(() => {
                                         frame.style.height = height + 'px'
-                                    }, 1000)
+                                    }, 2000)
                                     timeouts.push(id)
                                 }
                             }
@@ -134,24 +134,53 @@ export function ImportTemplateBlock({ template }) {
         }
     }, [])
 
+    useEffect(() => {
+        if (!Number.isInteger(maxHeight)) return
+        const button = importButtonRef.current
+        const handleIn = () => {
+            // The live component changes over time so easier to query on demand
+            const height = button.offsetHeight
+            button.style.transitionDuration = height * 1.5 + 'ms'
+            setTopValue(Math.abs(height - maxHeight) * -1)
+        }
+        const handleOut = () => {
+            const height = button.offsetHeight
+            button.style.transitionDuration = height / 1.5 + 'ms'
+            setTopValue(0)
+        }
+        button.addEventListener('focus', handleIn)
+        button.addEventListener('mouseenter', handleIn)
+        button.addEventListener('blur', handleOut)
+        button.addEventListener('mouseleave', handleOut)
+        return () => {
+            button.removeEventListener('focus', handleIn)
+            button.removeEventListener('mouseenter', handleIn)
+            button.removeEventListener('blur', handleOut)
+            button.removeEventListener('mouseleave', handleOut)
+        }
+    }, [maxHeight])
+
     return (
         <div className="relative group">
             <div
                 role="button"
                 tabIndex="0"
-                ref={importButtonRef}
                 aria-label={sprintf(
                     __('Press to import %s', 'extendify'),
                     template?.fields?.type,
                 )}
-                className="mb-6 md:mb-8 cursor-pointer button-focus"
+                style={{ maxHeight }}
+                className="m-0 cursor-pointer button-focus ease-in-out relative overflow-hidden bg-gray-100"
                 onFocus={focusTrapInnerBlocks}
                 onClick={importTemplate}
                 onKeyDown={handleKeyDown}>
                 <div
+                    ref={importButtonRef}
+                    style={{ top: topValue, transitionProperty: 'all' }}
                     className={classNames('with-light-shadow relative', {
                         [`is-template--${template.fields.status}`]:
                             template?.fields?.status && devMode,
+                        'p-6 md:p-8': Number.isInteger(maxHeight),
                     })}>
                     <BlockPreview
                         blocks={blocks}

@@ -1,6 +1,7 @@
 import { Icon } from '@wordpress/components'
 import { Button } from '@wordpress/components'
 import { __ } from '@wordpress/i18n'
+import { useRef } from '@wordpress/element'
 import { SplitModal } from './SplitModal'
 import SettingsModal from './SettingsModal'
 import {
@@ -10,21 +11,24 @@ import {
     support,
     star,
     brandLogo,
+    diamond,
 } from '../icons'
 import { useGlobalStore } from '../../state/GlobalState'
-import Primary from '../buttons/Primary'
 
 export const NoImportModal = () => {
     const pushModal = useGlobalStore((state) => state.pushModal)
-
+    const initialFocus = useRef(null)
     return (
-        <SplitModal isOpen={true}>
-            <div className="bg-white p-12 text-center items-center">
-                <div className="flex space-x-2 items-center justify-center mb-10 text-extendify-black">
+        <SplitModal
+            isOpen={true}
+            ref={initialFocus}
+            leftContainerBgColor="bg-white">
+            <div>
+                <div className="flex space-x-2 items-center mb-5 text-extendify-black">
                     {brandLogo}
                 </div>
 
-                <h3 className="text-xl md:leading-3">
+                <h3 className="text-xl mt-0">
                     {__("You're out of imports", 'extendify')}
                 </h3>
                 <p className="text-sm text-black">
@@ -34,16 +38,17 @@ export const NoImportModal = () => {
                     )}
                 </p>
                 <div>
-                    <Primary
-                        tagName="a"
+                    <a
                         target="_blank"
-                        className="m-auto mt-10 py-3"
+                        ref={initialFocus}
+                        className="button-extendify-main inline-flex mt-2 px-4 py-3 button-focus justify-center"
+                        style={{ minWidth: '225px' }}
                         href={`https://extendify.com/pricing/?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=no-imports-modal&utm_content=get-unlimited-imports`}
                         rel="noreferrer">
                         {__('Get Unlimited Imports', 'extendify')}
                         <Icon icon={growthArrow} size={24} className="-mr-1" />
-                    </Primary>
-                    <p className="text-sm text-extendify-gray mb-0">
+                    </a>
+                    <p className="text-sm text-extendify-gray mb-0 text-left">
                         {__('Have an account?', 'extendify')}
                         <Button
                             onClick={() => pushModal(<SettingsModal />)}
@@ -53,27 +58,33 @@ export const NoImportModal = () => {
                     </p>
                 </div>
             </div>
-            <div className="space-y-2 justify-center p-10 text-black">
-                <div className="flex items-center space-x-2">
-                    <Icon icon={patterns} size={24} className="-ml-1 mr-1" />
+            <div className="space-y-2 flex flex-col justify-center p-10 text-black h-full">
+                <div className="flex items-center space-x-3">
+                    <Icon icon={patterns} size={24} />
                     <span className="text-sm leading-none">
                         {__("Access to 100's of Patterns", 'extendify')}
                     </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <Icon icon={layouts} size={24} className="-ml-1 mr-1" />
+                <div className="flex items-center space-x-3">
+                    <Icon icon={diamond} size={24} />
+                    <span className="text-sm leading-none">
+                        {__('Access to "Pro" catalog', 'extendify')}
+                    </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                    <Icon icon={layouts} size={24} />
                     <span className="text-sm leading-none">
                         {__('Beautiful full page layouts', 'extendify')}
                     </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <Icon icon={support} size={24} className="-ml-1 mr-1" />
+                <div className="flex items-center space-x-3">
+                    <Icon icon={support} size={24} />
                     <span className="text-sm leading-none">
                         {__('Fast and friendly support', 'extendify')}
                     </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <Icon icon={star} size={24} className="-ml-1 mr-1" />
+                <div className="flex items-center space-x-3">
+                    <Icon icon={star} size={24} />
                     <span className="text-sm leading-none">
                         {__('14-Day guarantee', 'extendify')}
                     </span>

@@ -1,8 +1,9 @@
+import { memo } from '@wordpress/element'
 import { useTemplatesStore } from '../state/Templates'
 import { Panel } from '@wordpress/components'
 import TaxonomySection from '../components/TaxonomySection'
 import { useTaxonomyStore } from '../state/Taxonomies'
-import SiteTypeSelector from '../components/SiteTypeSelector'
+import { SiteTypeSelector } from '../components/SiteTypeSelector'
 import { useUserStore } from '../state/User'
 import { ImportCounter } from '../components/ImportCounter'
 import { brandMark } from '../components/icons/'
@@ -11,7 +12,7 @@ import { featured } from '../components/icons'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 
-export default function SidebarMain() {
+export const Sidebar = memo(function Sidebar() {
     const taxonomies = useTaxonomyStore((state) => state.taxonomies)
     const searchParams = useTemplatesStore((state) => state.searchParams)
     const updatePreferredSiteType = useUserStore(
@@ -74,4 +75,4 @@ export default function SidebarMain() {
             )}
         </>
     )
-}
+})
