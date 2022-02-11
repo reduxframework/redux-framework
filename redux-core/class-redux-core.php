@@ -377,7 +377,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 *
 		 * @return array
 		 * @noinspection PhpIncludeInspection
-		 * @throws ReflectionException
+		 * @throws ReflectionException Exception.
 		 */
 		public function add_debug_info( array $debug_info ): array {
 

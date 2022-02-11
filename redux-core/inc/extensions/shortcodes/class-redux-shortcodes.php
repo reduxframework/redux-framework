@@ -183,7 +183,7 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 
 			switch ( $atts['data'] ) {
 				case 'is_child':
-					return is_child_theme();
+					return Redux_Helpers::is_child_theme( get_template_directory() );
 				default:
 					$return = $this->theme_info->get( $atts['data'] );
 
