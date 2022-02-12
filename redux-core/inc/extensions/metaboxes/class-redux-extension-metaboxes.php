@@ -450,7 +450,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 * @return array
 		 */
 		public function override_options( array $options ): array {
-			$this->parent->_default_values();
+			$this->parent->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
 			$meta = $this->get_meta( $this->post_id );
@@ -1042,11 +1042,11 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 */
 		private function field_default( $field_id ) {
 			if ( ! isset( $this->parent->options_defaults ) ) {
-				$this->parent->options_defaults = $this->parent->_default_values();
+				$this->parent->options_defaults = $this->parent->default_values();
 			}
 
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
-				$this->parent->get_options();
+				$this->parent->options_class->get();
 			}
 
 			$this->options = $this->parent->options;
