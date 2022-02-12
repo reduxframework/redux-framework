@@ -1,4 +1,4 @@
-/* global jQuery, document, redux, redux_change:true, wp */
+/* global jQuery, document, redux, redux_change:true, wp, ajaxurl */
 
 /**
  * SerializeJSON jQuery plugin.
@@ -16,7 +16,7 @@
 	$.fn.serializeJSON = function( options ) {
 		var serializedObject, formAsArray, keys, type, value, f, opts;
 		f           = $.serializeJSON;
-		opts        = f.setupOpts( options );                       // Calculate values for options {parseNumbers, parseBoolens, parseNulls}.
+		opts        = f.setupOpts( options );                       // Calculate values for options {parseNumbers, parseBooleans, parseNulls}.
 		formAsArray = this.serializeArray();                        // Array of objects {name, value}.
 		f.readCheckboxUncheckedValues( formAsArray, this, opts );   // Add {name, value} of unchecked checkboxes if needed.
 
@@ -29,7 +29,7 @@
 
 				keys = f.splitInputNameIntoKeysArray( input.name, opts );
 				type = keys.pop();                                      // The last element is always the type ('string' by default).
-				if ( 'skip' !== type ) {                                // Aasy way to skip a value.
+				if ( 'skip' !== type ) {                                // Easy way to skip a value.
 					value = f.parseValue( input.value, type, opts );    // String, number, boolean or null.
 					if ( opts.parseWithFunction && '_' === type ) {
 						value = opts.parseWithFunction( value, input.name );
@@ -43,7 +43,7 @@
 		return serializedObject;
 	};
 
-	// Use $.serializeJSON as namespace for the auxiliar functions
+	// Use $.serializeJSON as namespace for the auxiliary functions
 	// and to define defaults.
 	$.serializeJSON = {
 
@@ -53,7 +53,7 @@
 			parseNumbers: false, // Convert values like '1', '-2.33' to 1, -2.33.
 			parseBooleans: false, // Convert 'true', 'false' to true, false.
 			parseNulls: false, // Convert 'null' to null.
-			parseAll: false, // All of the above.
+			parseAll: false, // All the above.
 			parseWithFunction: null, // To use custom parser, a function like: function(val){ return parsed_val; }.
 
 			customTypes: {}, // Override defaultTypes.
@@ -193,7 +193,7 @@
 			}
 		}, // Polyfill Object.keys to get option keys in IE<9.
 
-		// Split the input name in programatically readable keys.
+		// Split the input name in programmatically readable keys.
 		// The last element is always the type (default "_").
 		// Examples:
 		// "foo"              => ['foo', '_']
@@ -303,7 +303,7 @@
 				// with nextKey, set the value into the same object, in object[nextKey].
 				// Covers the case of ['', 'foo'] and ['', 'var'] to push the object {foo, var}, and the case of nested arrays.
 				if ( '' === key ) {
-					lastIdx = o.length - 1; // asume o is array.
+					lastIdx = o.length - 1; // assume o is array.
 					lastVal = o[lastIdx];
 					if ( f.isObject( lastVal ) && ( f.isUndefined( lastVal[nextKey] ) || keys.length > 2 ) ) { // If nextKey is not present in the last object element, or there are more keys to deep set.
 						key = lastIdx; // then set the new value in the same object element.
@@ -495,7 +495,7 @@
 	};
 
 	redux.customizer.resize = function( el ) {
-		var width = '';
+		var width;
 		var test;
 		var id;
 

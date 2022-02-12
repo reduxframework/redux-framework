@@ -34,13 +34,20 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 	public $opt_name = '';
 
 	/**
+	 * Section array.
+	 *
+	 * @var array|mixed
+	 */
+	public $section = array();
+
+	/**
 	 * Constructor.
 	 * Any supplied $args override class property defaults.
 	 *
 	 * @since 3.4.0
 	 *
 	 * @param WP_Customize_Manager $manager Customizer bootstrap instance.
-	 * @param string               $id      An specific ID of the section.
+	 * @param string               $id      A specific ID of the section.
 	 * @param array                $args    Section arguments.
 	 */
 	public function __construct( $manager, $id, $args = array() ) {
@@ -48,8 +55,8 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 		// Redux addition.
 		if ( isset( $args['section'] ) ) {
 			$this->section     = $args['section'];
-			$this->description = isset( $this->section['desc'] ) ? $this->section['desc'] : '';
-			$this->opt_name    = isset( $args['opt_name'] ) ? $args['opt_name'] : '';
+			$this->description = $this->section['desc'] ?? '';
+			$this->opt_name    = $args['opt_name'] ?? '';
 		}
 	}
 
@@ -94,7 +101,7 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 				<?php
 				if ( isset( $this->opt_name ) && isset( $this->section ) ) {
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
-					do_action( "redux/page/{$this->opt_name}/section/before", $this->section );
+					do_action( "redux/page/$this->opt_name/section/before", $this->section );
 				}
 				?>
 				<?php if ( ! empty( $this->description ) ) { ?>
@@ -115,9 +122,36 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 	 *
 	 * @return array The array to be exported to the client as JSON.
 	 */
-	public function json() {
-		$array             = parent::json();
+	public function json(): array {
+		$array = wp_array_slice_assoc(
+			parent::json(),
+			array(
+				'id',
+				'title',
+				'description',
+				'priority',
+				'panel',
+				'type',
+			)
+		);
+
+		$array['content']        = $this->get_content();
+		$array['active']         = $this->active();
+		$array['instanceNumber'] = $this->instance_number;
+
+		if ( $this->panel ) {
+			/* translators: &#9656; is the unicode right-pointing triangle, and %s is the section title in the Customizer */
+			$array['customizeAction'] = sprintf( __( 'Customizing &#9656; %s', 'redux-framework' ), esc_html( $this->manager->get_panel( $this->panel )->title ) );
+		} else {
+			$array['customizeAction'] = __( 'Customizing', 'redux-framework' );
+		}
+
+		// BEGIN Redux Additions.
+		$array['width'] = $this->section['customizer_width'] ?? '';
+		$array['icon']  = ( isset( $this->section['icon'] ) && ! empty( $this->section['icon'] ) ) ? $this->section['icon'] : 'hide';
+
 		$array['opt_name'] = $this->opt_name;
+
 		return $array;
 	}
 
@@ -134,13 +168,13 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 		?>
 		<li id="accordion-section-{{ data.id }}"
 			class="redux-standalone-section redux-customizer-opt-name redux-section accordion-section control-section control-section-{{ data.type }}"
-			data-opt-name="{{ data.opt_name }}">
+			data-opt-name="{{ data.opt_name }}"
+			data-width="{{ data.width }}">
 			<h3 class="accordion-section-title" tabindex="0">
-				{{ data.title }}
+				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>{{ data.title }}
 				<span class="screen-reader-text"><?php esc_html_e( 'Press return or enter to open', 'redux-framework' ); ?></span>
 			</h3>
 			<ul class="accordion-section-content redux-main">
-
 				<li class="customize-section-description-container">
 					<div class="customize-section-title">
 						<button class="customize-section-back" tabindex="-1">
@@ -158,7 +192,7 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 					<?php
 					if ( isset( $this->opt_name ) && isset( $this->section ) ) {
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
-						do_action( "redux/page/{$this->opt_name}/section/before", $this->section );
+						do_action( "redux/page/$this->opt_name/section/before", $this->section );
 					}
 					?>
 				</li>
@@ -166,8 +200,4 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 		</li>
 		<?php
 	}
-
-
-
-
 }
