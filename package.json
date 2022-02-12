@@ -18,6 +18,7 @@
 	},
 	"dependencies": {
 		"browser-sync": "^2.27.7",
+		"del": "^6.0.0",
 		"gifsicle": "^6.1.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
@@ -50,5 +51,8 @@
 	"engines": {
 		"node": ">=0.10.33",
 		"npm": ">=1.4.0"
+	},
+	"devDependencies": {
+		"gulp-composer": "^0.4.5"
 	}
 }

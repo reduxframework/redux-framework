@@ -125,6 +125,8 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 var merge = require( 'merge-stream' );
 var sassPackager = require( 'gulp-sass-packager' );
+var composer = require('gulp-composer');
+var del = require('del');
 
 /**
  * Task: `browser-sync`.
@@ -640,6 +642,30 @@ function translate() {
 	.pipe( gulp.dest( translatePath + '/' + destFile ) );
 }
 
+function installFontawesome( done ){
+	composer();
+
+	del([
+		'redux-core/assets/font-awesome/*.*',
+		'redux-core/assets/font-awesome/js',
+		'redux-core/assets/font-awesome/js-packages',
+		'redux-core/assets/font-awesome/less',
+		'redux-core/assets/font-awesome/otfs',
+		'redux-core/assets/font-awesome/scss',
+		'redux-core/assets/font-awesome/sprites',
+		'redux-core/assets/font-awesome/svgs',
+		'redux-core/assets/font-awesome/css/brands.*',
+		'redux-core/assets/font-awesome/css/fontawesome.*',
+		'redux-core/assets/font-awesome/css/regular.*',
+		'redux-core/assets/font-awesome/css/solid.*',
+		'redux-core/assets/font-awesome/css/svg-with-js.*',
+		'redux-core/assets/font-awesome/css/v4-font-face.*',
+		'redux-core/assets/font-awesome/css/v5-font-face.*'
+	]);
+
+	done();
+}
+
 /**
  * Tasks
  */
@@ -650,7 +676,7 @@ gulp.task( 'reduxJS', gulp.series( reduxJS, reduxCombineModules, reduxMedia ) );
 gulp.task( 'vendorsJS', vendorsJS );
 gulp.task( 'images', reduxImages );
 gulp.task( 'translate', translate );
-
+gulp.task( 'composer', installFontawesome );
 
 function cleanBuild() {
 	return gulp.src( './build', {read: false, allowEmpty: true} )
@@ -751,6 +777,7 @@ gulp.task(
 		'styles',
 		'vendorsJS',
 		'reduxJS',
-		'fieldsJS'
+		'fieldsJS',
+		'composer'
 	)
 );

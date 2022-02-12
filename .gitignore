@@ -38,6 +38,7 @@ vendors/composer/
 !assets/js/vendor/
 wpcs/
 composer.lock
+vendor/
 
 # Bower #
 ##########

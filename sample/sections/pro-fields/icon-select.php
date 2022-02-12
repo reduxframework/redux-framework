@@ -35,7 +35,7 @@ Redux::setSection(
 				// If needed to initialize the icon.
 				'prefix'           => 'fa',
 
-				// How each icons begins for this given font.
+				// How each icon begins for this given font.
 				'selector'         => 'fa-',
 
 				// Change the height of the container. defaults to 300px; .

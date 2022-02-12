@@ -29,6 +29,19 @@
 	},
 	"require": {
 		"php": ">=7.1.0",
-		"composer/installers": "~1.0"
+		"fortawesome/font-awesome": "^6.0",
+		"oomphinc/composer-installers-extender": "^2.0"
+	},
+	"extra": {
+		"installer-types": ["library"],
+		"installer-paths": {
+			"redux-core/assets/font-awesome": ["fortawesome/font-awesome"]
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true,
+			"oomphinc/composer-installers-extender": true
+		}
 	}
 }
