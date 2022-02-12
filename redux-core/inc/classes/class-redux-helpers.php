@@ -1,6 +1,8 @@
-<?php /** @noinspection PhpUndefinedFieldInspection */
+<?php
 /**
  * Redux Helper Class
+ *
+ * @noinspection PhpUndefinedFieldInspection
  *
  * @class   Redux_Helpers
  * @version 3.0.0
@@ -893,7 +895,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return mixed|array
 		 */
 		public static function make_bool_str( $var ) {
-			if ( false === $var || 'false' === $var || 0 === $var || '0' === $var || '' === $var || empty( $var ) ) {
+			if ( 'false' === $var || empty( $var ) ) {
 				return 'false';
 			} elseif ( true === $var || 'true' === $var || 1 === $var || '1' === $var ) {
 				return 'true';
@@ -1563,14 +1565,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$data = array( apply_filters( 'redux/tracking/developer', array() ) );
 
-			if ( 1 === count( $data ) ) {
-				if ( empty( $data[0] ) ) {
-					$data = array();
-				}
-			}
-
 			$instances = Redux_Instances::get_all_instances();
-			$data      = array();
 
 			if ( ! empty( $instance ) ) {
 				foreach ( $instances as $instance ) {
@@ -1742,21 +1737,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			return false;
 		}
 
-		/**
-		 * Nonces.
-		 *
-		 * @return array
-		 */
-		public static function nonces(): array {
-			return array(
-				'9fced129522f128b2445a41fb0b6ef9f',
-				'70dda5dfb8053dc6d1c492574bce9bfd',
-				'62933a2951ef01f4eafd9bdf4d3cd2f0',
-				'a398fb77df76e6153df57cd65fd0a7c5',
-				'1cb251ec0d568de6a929b520c4aed8d1',
-				'6394d816bfb4220289a6f4b29cfb1834',
-			);
-		}
 
 		/**
 		 * Get plugin options.
@@ -1852,6 +1832,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			header( 'Pragma: no-cache' );
 
 			$instances = Redux::all_instances();
+			$opt_name  = '';
 
 			if ( isset( $_REQUEST['i'] ) && ! empty( $_REQUEST['i'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				if ( is_array( $instances ) && ! empty( $instances ) ) {
@@ -1862,7 +1843,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					}
 				}
 
-				if ( isset( $array ) ) {
+				if ( isset( $array ) && '' !== $opt_name ) {
 
 					// We only want the extension names and versions.
 					$array->extensions = self::get_extensions( $opt_name );

@@ -266,7 +266,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 			}
 
 			if ( empty( $core->options_defaults ) ) {
-				$core->options_defaults = $core->_default_values();
+				$core->options_defaults = $core->default_values();
 			}
 
 			$run_update = false;

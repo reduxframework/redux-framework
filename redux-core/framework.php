@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.3.10';
+Redux_Core::$version    = '4.3.10.1';
 Redux_Core::$redux_path = dirname( __FILE__ );
 
 /** @noinspection PhpUnhandledExceptionInspection */
@@ -58,6 +58,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @var string
 		 * @access public
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public static $_version = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
@@ -66,6 +68,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @var string
 		 * @access public
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public static $_dir = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
@@ -74,6 +78,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @var string
 		 * @access public
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public static $_url = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
@@ -82,6 +88,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @var string
 		 * @access public
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public static $_upload_dir = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
@@ -90,6 +98,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @var string
 		 * @access public
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public static $_upload_url; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
@@ -413,7 +423,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param array $sections Panel sections.
 		 * @param array $args     Class constructor arguments.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException Exception.
 		 * @since       1.0.0
 		 */
 		public function __construct( array $sections = array(), array $args = array() ) {
@@ -522,8 +532,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 
 		/**
 		 * SHIM: _register_settings
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function _register_settings() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->options_class->register();
 		}
 
@@ -532,8 +546,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @param array        $field Field array.
 		 * @param string|array $v     Field values.
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function _field_input( array $field, $v = null ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->render_class->field_input( $field, $v );
 		}
 
@@ -541,8 +559,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * SHIM: field_default_values
 		 *
 		 * @param array $field Field array.
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function field_default_values( array $field ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->options_defaults_class->field_default_values( '', $field );
 		}
 
@@ -550,15 +572,23 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * SHIM: set_options
 		 *
 		 * @param string|array $value Option values.
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function set_options( $value ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->options_class->set( $value );
 		}
 
 		/**
 		 * SHIM: get_options
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function get_options() {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->options_class->get();
 		}
 
@@ -566,8 +596,21 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * SHIM: _default_values
 		 *
 		 * @return array
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function _default_values() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
+			return $this->default_values();
+		}
+
+		/**
+		 * Get default values.
+		 *
+		 * @return array
+		 */
+		public function default_values() {
 			if ( ! isset( $this->options_class ) ) {
 				$this->options_defaults_class = new Redux_Options_Defaults();
 				$this->options_class          = new Redux_Options_Constructor( $this );
@@ -580,17 +623,25 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * SHIM: check_dependencies
 		 *
 		 * @param array $field Field array.
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function check_dependencies( array $field ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->required_class->check_dependencies( $field );
 		}
 
 		/**
 		 * SHIM: _enqueue_output
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException Exception.
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function _enqueue_output() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			if ( empty( $this->output_class ) ) {
 				$obj          = new ReduxFramework( $this->sections, $this->args );
 				$obj->options = $this->options;
@@ -603,8 +654,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 
 		/**
 		 * SHIM: _enqueue
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function _enqueue() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->enqueue_class->init();
 		}
 
@@ -614,8 +669,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @since       1.0.0
 		 * @access      public
 		 * @return      void
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function generate_panel() {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			$this->render_class->generate_panel();
 		}
 
@@ -626,8 +685,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param bool   $array_key Flag to determine array status.
 		 *
 		 * @return array
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function get_default_values( $key, $array_key = false ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			if ( ! isset( $this->options_class ) ) {
 				$this->options_defaults_class = new Redux_Options_Defaults();
 				$this->options_class          = new Redux_Options_Constructor( $this );
@@ -643,8 +706,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param bool   $array_key Flag to determine array status.
 		 *
 		 * @return array
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function get_default_value( $key, $array_key = false ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			if ( ! isset( $this->options_class ) ) {
 				$this->options_defaults_class = new Redux_Options_Defaults();
 				$this->options_class          = new Redux_Options_Constructor( $this );
@@ -661,8 +728,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param string|array $current_value Current value.
 		 *
 		 * @return array|mixed|string|void
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function get_wordpress_data( $type = false, $args = array(), $current_value = null ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			return $this->wordpress_data->get( $type, $args, $this->args['opt_name'], $current_value );
 		}
 
@@ -674,8 +745,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param array $sections       Sections array.
 		 *
 		 * @return array
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function _validate_values( $plugin_options, $options, $sections ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			if ( ! isset( $this->validate_class ) ) {
 				$this->validate_class = new Redux_Validation( $this );
 			}
@@ -686,8 +761,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * SHIM: set_transients
 		 *
 		 * @return void
+		 *
+		 * @deprecated 4.0.0
 		 */
-		public function set_transients() {}
+		public function set_transients() {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+		}
 
 		/**
 		 * SHIM: section_menu
@@ -698,8 +777,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param array  $sections Section array.
 		 *
 		 * @return string
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function section_menu( $k, $section, $suffix = '', $sections = array() ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			return $this->render_class->section_menu( $k, $section, $suffix, $sections );
 		}
 
@@ -709,8 +792,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param array $field Field array.
 		 *
 		 * @return string
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function get_header_html( $field ) {
+			_deprecated_function( __FUNCTION__, '4.0.0', 'Please update the extension that uses this deprecated function.' );
+
 			return $this->render_class->get_header_html( $field );
 		}
 
@@ -720,6 +807,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @param string $permission User permission.
 		 *
 		 * @return bool
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function current_user_can( $permission ) {
 			_deprecated_function( __FUNCTION__, '4.0.0', 'Redux_Helpers::current_user_can' );

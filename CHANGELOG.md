@@ -1,7 +1,12 @@
 # Redux Changelog
 
+## 4.3.10.1
+* Added: Advanced Customizer!
+* Added: Font Awesome 6 Library for future extensions.
+* Modified: Enforcing deprecation notices for deprecated functions. Developers: Please update your code as necessary.
+
 ## 4.3.10
-* Added: Repeater field for beta testing.
+* Added: Repeater field!
 * Modified: Background field will now show background styling options even if `background-image` is not set.
 * Modified: Connection banner now promotes Extendify plugin with download/activate option.
 * Updated: Extendify Library.
