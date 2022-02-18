@@ -31,7 +31,7 @@ if ( ! class_exists( 'Redux_Radio', false ) ) {
 				if ( is_array( $this->field['data'] ) ) {
 					$this->field['options'] = $this->field['data'];
 				} else {
-					$this->field['options'] = $this->parent->get_wordpress_data( $this->field['data'], $this->field['args'], $this->value );
+					$this->field['options'] = $this->parent->wordpress_data->get( $this->field['data'], $this->field['args'], $this->parent->args['opt_name'], $this->value );
 				}
 			}
 

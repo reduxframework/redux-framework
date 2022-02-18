@@ -5,7 +5,7 @@
  *
  * @author     Redux Framework
  * @package    ReduxFramework/Templates
- * @version:    4.3.6
+ * @version:    4.3.11
  */
 
 ?>
@@ -26,7 +26,7 @@
 			}
 
 			if ( false === $skip_sec ) {
-				echo( $this->parent->section_menu( $k, $section ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+				echo( $this->parent->render_class->section_menu( $k, $section ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 				$skip_sec = false;
 			}
 		}
