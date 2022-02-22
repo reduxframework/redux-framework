@@ -83,7 +83,7 @@ class App
      */
     public function __construct()
     {
-        if (isset($GLOBALS['extendify_sdk_partner']) && $GLOBALS['extendify_sdk_partner']) {
+        if (isset($GLOBALS['extendify_sdk_partner'])) {
             self::$sdkPartner = $GLOBALS['extendify_sdk_partner'];
         }
 

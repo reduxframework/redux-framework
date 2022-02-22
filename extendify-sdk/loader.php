@@ -37,7 +37,7 @@ if ($extendifyPluginName) {
     // Remember, this file is only loaded by partner plugins.
     if (is_plugin_active($extendifyPluginName)) {
         // If the SDK is active then ignore the partner plugins.
-        $GLOBALS['extendify_sdk_partner'] = 'standalone';
+        $GLOBALS['extendify_sdk_partner'] = '';
         return false;
     }
 }
