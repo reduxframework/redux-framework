@@ -287,7 +287,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		public function maybe_initialize_hooks( $current_screen ) {
 			// Redux_Functions_Ex::set_deactivated(); // Test code.
 
-			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hidee' === get_option( 'redux-framework_extendify_notice', null ) ) {
+			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_notice', null ) ) {
 				return;
 			}
 
