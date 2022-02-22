@@ -429,7 +429,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 							</div>
 
 							<div class="redux-banner-slide-text">
-								<h2><?php esc_html_e( 'Build better sites faster with Gutenberg patterns and templates', 'redux-framework' ); ?></h2>
+								<h2><?php esc_html_e( 'Get access to even more free templates!', 'redux-framework' ); ?></h2>
 								<p>
 									<?php
 									esc_html_e(
