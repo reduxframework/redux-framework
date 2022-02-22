@@ -1,9 +1,12 @@
 # Redux Changelog
 
-## 4.3.10.1
+## 4.3.11
 * Added: Advanced Customizer!
 * Added: Font Awesome 6 Library for future extensions.
 * Modified: Enforcing deprecation notices for deprecated functions. Developers: Please update your code as necessary.
+* Modified: Connection banner to meet wp.org library standards.
+* Updated: Extendify Library.
+* Release date: February 22, 2022
 
 ## 4.3.10
 * Added: Repeater field!

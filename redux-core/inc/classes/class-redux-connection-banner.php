@@ -287,7 +287,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		public function maybe_initialize_hooks( $current_screen ) {
 			// Redux_Functions_Ex::set_deactivated(); // Test code.
 
-			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_notice', null ) ) {
+			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hidee' === get_option( 'redux-framework_extendify_notice', null ) ) {
 				return;
 			}
 
@@ -383,12 +383,12 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 			?>
 			<div id="redux-connect-message" class="updated redux-banner-container" data-nonce="<?php echo wp_create_nonce( $this->nonce ); ?>">
-				<div class="redux-banner-container-top-text">
+				<!-- <div class="redux-banner-container-top-text">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"/><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 15h-2v-2h2v2zm0-4h-2l-.5-6h3l-.5 6z"/></g></svg>
 					<span>
-						<strong><?php esc_html_e( 'You’re almost done. Finish setting up the Gutenberg pattern and template library to unlock more amazing features.', 'redux-framework' ); ?></strong>
+						<strong><?php // esc_html_e( 'You’re almost done. Finish setting up the Gutenberg pattern and template library to unlock more amazing features.', 'redux-framework' ); ?></strong>
 					</span>
-				</div>
+				</div> -->
 				<div class="redux-banner-inner-container">
 					<a href="<?php echo esc_url( $urls['dismiss'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>"
 					   class="notice-dismiss redux-banner-svg-dismiss redux-connection-banner-action"
@@ -414,14 +414,14 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 									" height="auto"
 									/></a>
 								<!-- <img
-									src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/redux-powering-up.svg"
+									src="<?php //echo esc_url( Redux_Core::$url ); ?>assets/img/redux-powering-up.svg"
 									class="redux-banner-hide-phone-and-smaller"
 									alt="
 									<?php
-									esc_attr_e(
-										'Redux helps you to take your site to the next level with tools that greatly enhance your WordPress experience.',
-										'redux-framework'
-									);
+									//esc_attr_e(
+									//	'Redux helps you to take your site to the next level with tools that greatly enhance your WordPress experience.',
+									//	'redux-framework'
+									//);
 									?>
 									"
 									height="auto"
@@ -433,32 +433,27 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 								<p>
 									<?php
 									esc_html_e(
-										'The Redux block library service, powered by Extendify, allows you to build any site you want in minutes with a click of a button. With over 1,000+ templates, Redux helps you build sites fast! Clicking “Complete installation” below will install the Extendify plugin to unlock the latest Gutenberg pattern and template library features, and will increase the number of free pattern and template imports you are granted each month.',
+										"Redux users have been asking for easier options to create and edit their sites using the Gutenberg editor. We're excited to announce that Redux is partnering with the Extendify library of Gutenberg patterns and templates to bring the power of WordPress 5.9 to Redux users! By clicking “Install & Activate Extendify” you will get access to 10 free monthly imports of patterns and templates. Installing Extendify is optional, and Redux will continue to work if you decide to not install Extendify.",
 										'redux_framework'
 									);
 									?>
 								</p>
 
-								<p><em>
+								<!-- <p><em>
 										<?php
-										esc_html_e(
-											'No registration is required to use Redux as you always have. By registering for our service you gain access to Google Font updates as well as access to all free templates in our block template library.',
-											'redux-framework'
-										);
+										// esc_html_e(
+										//	'No registration is required to use Redux as you always have. By registering for our service you gain access to Google Font updates as well as access to all free templates in our block template library.',
+										//	'redux-framework'
+										//);
 										?>
 										</em>
-								</p>
+								</p> -->
 
 								<div class="redux-banner-button-container">
 									<span class="redux-banner-tos-blurb"><?php // echo self::tos_blurb( 'plugin_dashboard' ); ?></span>
-
-									<!-- <a href="<?php echo esc_url( $urls['dismiss'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>"
-									   class="button button-tiny button-link redux-connection-banner-action"
-									   title="<?php esc_attr_e( 'No thanks', 'redux-framework' ); ?>" data-activate="false"><?php esc_html_e( 'No Thanks', 'redux-framework' ); ?></a>&nbsp;&nbsp;-->
-
 									<a href="<?php echo esc_url( $urls['register'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-activate="main_banner"
 									   class="button button-primary button-large redux-alt-connect-button redux-connection-banner-action">
-										<?php esc_html_e( 'Complete Installation', 'redux-framework' ); ?>
+										<?php esc_html_e( 'Install and Activate Extendify', 'redux-framework' ); ?>
 									</a>
 								</div>
 
