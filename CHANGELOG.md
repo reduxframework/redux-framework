@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.11.1
+* Fixed: #3871 - Fix core deprecation notices in metaboxes.
+
 ## 4.3.11
 * Added: Advanced Customizer!
 * Added: Font Awesome 6 Library for future extensions.

@@ -90,6 +90,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 
 		/**
 		 * Enqueue function.
+		 *
+		 * @throws ReflectionException Exception.
 		 */
 		public static function enqueue() {
 			global $pagenow;
@@ -120,12 +122,12 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 						);
 
 						Redux::init( $opt_name );
+
+						$instances = ReduxFrameworkInstances::get_all_instances();
+
+						add_action( 'admin_enqueue_scripts', array( $instances[ $opt_name ], 'enqueue' ), 1 );
 					}
 				}
-
-				$instances = ReduxFrameworkInstances::get_all_instances();
-
-				add_action( 'admin_enqueue_scripts', array( $instances[ $opt_name ], '_enqueue' ), 1 );
 			}
 		}
 

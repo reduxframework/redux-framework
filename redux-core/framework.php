@@ -22,6 +22,7 @@
  *
  * @noinspection PhpMissingParamTypeInspection
  * @noinspection PhpMissingReturnTypeInspection
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 // Exit if accessed directly.
@@ -29,10 +30,8 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.3.11';
+Redux_Core::$version    = '4.3.11.1';
 Redux_Core::$redux_path = dirname( __FILE__ );
-
-/** @noinspection PhpUnhandledExceptionInspection */
 Redux_Core::instance();
 
 // Don't duplicate me!
@@ -660,6 +659,15 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public function _enqueue() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			_deprecated_function( __FUNCTION__, '4.0.0', 'enqueue_class->init()' );
 
+			$this->enqueue_class->init();
+		}
+
+		/**
+		 * _enqueue replacement.
+		 *
+		 * @return void
+		 */
+		public function enqueue() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			$this->enqueue_class->init();
 		}
 

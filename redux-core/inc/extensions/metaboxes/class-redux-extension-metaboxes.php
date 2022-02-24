@@ -557,7 +557,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					}
 
 					delete_transient( $this->parent->args['opt_name'] . '-transients-metaboxes' );
-					$this->parent->_enqueue();
+					$this->parent->enqueue_class->init();
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
 					do_action( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue" );
@@ -1231,7 +1231,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 									continue;
 								}
 
-								echo $this->parent->section_menu( $s_key, $section, '_box_' . $metabox['id'], $sections ); // phpcs:ignore WordPress.Security.EscapeOutput
+								echo $this->parent->render_class->section_menu( $s_key, $section, '_box_' . $metabox['id'], $sections ); // phpcs:ignore WordPress.Security.EscapeOutput
 							}
 							?>
 						</ul>
@@ -1281,7 +1281,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 
 								echo '<tr valign="top"' . $ex_style . '>'; // phpcs:ignore WordPress.Security.EscapeOutput
 
-								$th = $this->parent->get_header_html( $field );
+								$th = $this->parent->render_class->get_header_html( $field );
 
 								if ( $is_hidden ) {
 									$str_pos = strpos( $th, 'redux_field_th' );
