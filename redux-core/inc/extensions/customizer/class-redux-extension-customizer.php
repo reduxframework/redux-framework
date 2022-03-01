@@ -400,7 +400,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			$panel = '';
 
 			$this->parent->args['options_api'] = false;
-			$this->parent->_register_settings();
+			$this->parent->options_class->register();
 
 			$parent_section_id = null;
 			$new_parent        = true;
@@ -691,7 +691,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				}
 
 				if ( $changed ) {
-					$this->parent->set_options( $this->parent->options );
+					$this->parent->options_class->set( $this->parent->options );
 					if ( $compiler ) {
 						// Have to set this to stop the output of the CSS and typography stuff.
 						$this->parent->no_output = true;
@@ -803,13 +803,13 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		/**
 		 * Validate the options before insertion
 		 *
-		 * @param array $value The options array.
+		 * @param array|string $value The options array.
 		 *
-		 * @return array $value
+		 * @return array|string $value
 		 * @since       3.0.0
 		 * @access      public
 		 */
-		public function field_validation( array $value ): array {
+		public function field_validation( $value ) {
 
 			return $value;
 		}
