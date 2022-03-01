@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.11.2
+* Fixed: - Fix deprecation errors in customizer.
+
 ## 4.3.11.1
 * Fixed: #3871 - Fix core deprecation notices in metaboxes.
 
