@@ -180,6 +180,10 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					// New method to avoid input_var nonsense.  Thanks @harunbasic.
 					$values = Redux_Functions_Ex::parse_str( $post_data );
 
+					$all_options = get_option( sanitize_text_field( wp_unslash( $_POST['opt_name'] ) ) );
+
+					$values = wp_parse_args( $values, $all_options );
+
 					$redux->options_class->set( $redux->options_class->validate_options( $values ) );
 
 					$redux->enqueue_class->get_warnings_and_errors_array();
