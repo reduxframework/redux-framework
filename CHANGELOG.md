@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.11.4
+* Fixed: Filesystem class error.
+
 ## 4.3.11.3
 * Fixed: Customizer not saving data for sections not shown in the customizer.
 

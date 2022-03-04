@@ -692,7 +692,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$return   = $this->wp_filesystem->chmod( $abs_path, $perms, false );
 			}
 
-			return $return;
+			return (bool) $return;
 		}
 
 		/**
