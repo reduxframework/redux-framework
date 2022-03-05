@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.11.5
+* Updated: Vendor libraries.
+* Fixed: jQuery deprecation notices.
+
 ## 4.3.11.4
 * Fixed: Filesystem class error.
 
