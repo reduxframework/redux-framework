@@ -103,7 +103,7 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 				wp_die( 'Invalid Secret for options use.' );
 			}
 
-			$this->parent->get_options();
+			$this->parent->options_class->get();
 			$backup_options                 = $this->parent->options;
 			$backup_options['redux-backup'] = 1;
 
