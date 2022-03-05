@@ -66,7 +66,7 @@
 						change: function( e, ui ) {
 							$( this ).val( ui.color.toString() );
 							redux_change( $( this ) );
-							$( '#' + e.target.id + '-transparency' ).removeAttr( 'checked' );
+							$( '#' + e.target.id + '-transparency' ).prop( 'checked', false );
 							redux.field_objects.background.preview( $( this ) );
 						},
 
