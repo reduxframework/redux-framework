@@ -50,7 +50,7 @@
 								redux.field_objects.gradient_filters.changeValue( $( this ), true, 'color_gradient' );
 							}
 
-							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).removeAttr( 'checked' );
+							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).propr( 'checked', false );
 						}, clear: function() {
 							$( this ).val( '' );
 
@@ -71,9 +71,9 @@
 						if ( 'transparent' === value ) {
 							$( this ).parent().parent().find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 
-							el.find( id + '-transparency' ).attr( 'checked', 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', true );
 						} else {
-							el.find( id + '-transparency' ).removeAttr( 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', false );
 
 							if ( color && color !== $( this ).val() ) {
 								$( this ).val( color );
@@ -100,7 +100,7 @@
 								}
 							}
 
-							el.find( id + '-transparency' ).removeAttr( 'checked' );
+							el.find( id + '-transparency' ).prop( 'checked', false );
 						}
 					}
 				);
