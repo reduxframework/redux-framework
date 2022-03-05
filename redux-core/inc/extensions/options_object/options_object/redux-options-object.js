@@ -25,7 +25,7 @@
 			'click',
 			function( e ) {
 				e.preventDefault();
-				console.log( $.parseJSON( $( '#redux-object-json' ).html() ) );
+				console.log( JSON.parse( $( '#redux-object-json' ).html() ) );
 			}
 		);
 

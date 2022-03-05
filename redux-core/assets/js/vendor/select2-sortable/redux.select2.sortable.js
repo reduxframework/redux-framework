@@ -152,7 +152,7 @@
 
 								default:
 									// apply options ordering in form submit.
-									$select.closest( 'form' ).unbind( 'submit.select2sortable' ).on(
+									$select.closest( 'form' ).off( 'submit.select2sortable' ).on(
 										'submit.select2sortable',
 										function() {
 											$select.select2SortableOrder();

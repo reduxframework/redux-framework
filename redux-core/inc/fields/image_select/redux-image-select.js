@@ -52,14 +52,14 @@
 							merge   = presets.data( 'merge' );
 
 							if ( undefined !== merge && null !== merge ) {
-								if ( 'string' === $.type( merge ) ) {
+								if ( 'string' === typeof( merge ) ) {
 									merge = merge.split( '|' );
 								}
 
 								$.each(
 									data,
 									function( index ) {
-										if ( 'object' === $.type( redux.optName.options[index] ) && (
+										if ( 'object' === typeof( redux.optName.options[index] ) && (
 											true === merge || -1 !== $.inArray( index, merge ) )
 										) {
 											data[index] = $.extend( redux.optName.options[index], data[index] );
@@ -83,9 +83,9 @@
 								}
 
 								if ( 0 !== $( '#publishing-action #publish' ).length ) {
-									$( '#publish' ).click();
+									$( '#publish' ).trigger( 'click' );
 								} else {
-									$( '#redux-import' ).click();
+									$( '#redux-import' ).trigger( 'click' );
 								}
 							}
 
