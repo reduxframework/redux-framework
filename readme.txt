@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 5.9.1
-Stable tag: 4.3.11
+Stable tag: 4.3.12
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -106,55 +106,65 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 
+= 4.3.12 =
+Updated: Vendor libraries.
+Updated: Extendify Library.
+Fixed: jQuery deprecation notices.
+Fixed: Filesystem class error.
+Fixed: Customizer not saving data for sections not shown in the customizer.
+Fixed: Fix deprecation errors in customizer.
+Fixed: Fix core deprecation notices in metaboxes.
+Release date: March 08, 2022
+
 = 4.3.11 =
-* Added: Advanced Customizer!
-* Added: Font Awesome 6 Library for future extensions.
-* Modified: Enforcing deprecation notices for deprecated functions. Developers: Please update your code as necessary.
-* Modified: Connection banner to meet wp.org library standards.
-* Updated: Extendify Library.
-* Release date: February 23, 2022
+Added: Advanced Customizer!
+Added: Font Awesome 6 Library for future extensions.
+Modified: Enforcing deprecation notices for deprecated functions. Developers: Please update your code as necessary.
+Modified: Connection banner to meet wp.org library standards.
+Updated: Extendify Library.
+Release date: February 23, 2022
 
 = 4.3.10 =
-* Added: Repeater field for beta testing.
-* Modified: Background field will now show background styling options even if `background-image` is not set.
-* Modified: Connection banner now promotes Extendify plugin with download/activate option.
-* Updated: Extendify Library.
-* Release date: February 09, 2022
+Added: Repeater field for beta testing.
+Modified: Background field will now show background styling options even if `background-image` is not set.
+Modified: Connection banner now promotes Extendify plugin with download/activate option.
+Updated: Extendify Library.
+Release date: February 09, 2022
 
 = 4.3.9 =
-* Fixed: Extendify Library JavaScript error.
-* Release date: January 26, 2022
+Fixed: Extendify Library JavaScript error.
+Release date: January 26, 2022
 
 = 4.3.8 =
-* Fixed: Spacing field defaults to `px` if no default is set.
-* Fixed: Remove plugin.php hack in Appsero SDK.
-* Updated: Default Google Fonts list brought up to current release
-* Updated: Extendify Library.
-* Release date: January 25, 2022
+Fixed: Spacing field defaults to `px` if no default is set.
+Fixed: Remove plugin.php hack in Appsero SDK.
+Updated: Default Google Fonts list brought up to current release
+Updated: Extendify Library.
+Release date: January 25, 2022
 
 = 4.3.7 =
-* Fixed: Incorrect global variable assignment. Thanks, @webbudesign.
-* Release date: January 11, 2022
+Fixed: Incorrect global variable assignment. Thanks, @webbudesign.
+Release date: January 11, 2022
 
 = 4.3.6 =
-* Modified: Update to the Extendify Library.
-* Modified: Moved Extendify and Redux templates libraries back to root folder.
-* Modified: Removed "Gutenberg is currently disabled" notice when the Classic Editor plugin is active.
-* Fixed: `date` shortcode without attributes producing error.
-* Fixed: Various jQuery deprecation fixes.
-* Release date: January 11, 2022
+Modified: Update to the Extendify Library.
+Modified: Moved Extendify and Redux templates libraries back to root folder.
+Modified: Removed "Gutenberg is currently disabled" notice when the Classic Editor plugin is active.
+Fixed: `date` shortcode without attributes producing error.
+Fixed: Various jQuery deprecation fixes.
+Release date: January 11, 2022
 
 = 4.3.5 =
-* Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
-* Added: Add former premium feature: Shortcodes.  See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
-* Fixed: #3852 - Editor in metaboxes not saving HTML.  WIll now save the same HTML posts/pages allows.
-* Fixed: Front end formatting issue with the Extendify template library.
-* Release date: December 01, 2021
+Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
+Added: Add former premium feature: Shortcodes.  See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
+Fixed: #3852 - Editor in metaboxes not saving HTML.  WIll now save the same HTML posts/pages allows.
+Fixed: Front end formatting issue with the Extendify template library.
+Release date: December 01, 2021
 
 = 4.3.4 =
-* Fixed: CSS and JS not loading when embedding Redux due to malformed path.
-* Modified: Update to the Extendify template library.
-* Release date: November, 24 2021
+Fixed: CSS and JS not loading when embedding Redux due to malformed path.
+Modified: Update to the Extendify template library.
+Release date: November, 24 2021
 
 = 4.3.3 =
 Modified: Move template libraries to redux-core directory.

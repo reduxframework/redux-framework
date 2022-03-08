@@ -1,20 +1,14 @@
 # Redux Changelog
 
-## 4.3.11.5
+## 4.3.12
 * Updated: Vendor libraries.
+* Updated: Extendify Library.
 * Fixed: jQuery deprecation notices.
-
-## 4.3.11.4
 * Fixed: Filesystem class error.
-
-## 4.3.11.3
 * Fixed: Customizer not saving data for sections not shown in the customizer.
-
-## 4.3.11.2
-* Fixed: - Fix deprecation errors in customizer.
-
-## 4.3.11.1
-* Fixed: #3871 - Fix core deprecation notices in metaboxes.
+* Fixed: Fix deprecation errors in customizer.
+* Fixed: Fix core deprecation notices in metaboxes.
+* Release date: March 08, 2022
 
 ## 4.3.11
 * Added: Advanced Customizer!
