@@ -1,23 +1,19 @@
-import classnames from 'classnames'
-import { Icon } from '@wordpress/icons'
-import { __, _n, sprintf } from '@wordpress/i18n'
-import { useEffect, memo, useRef } from '@wordpress/element'
-import { alert, download } from './icons/'
-import { useUserStore } from '../state/User'
-import { User as UserApi } from '../api/User'
-import { growthArrow } from './icons'
 import { safeHTML } from '@wordpress/dom'
+import { useEffect, memo, useRef } from '@wordpress/element'
+import { __, _n, sprintf } from '@wordpress/i18n'
+import { Icon } from '@wordpress/icons'
+import classnames from 'classnames'
+import { General } from '@extendify/api/General'
+import { User as UserApi } from '@extendify/api/User'
+import { useUserStore } from '@extendify/state/User'
+import { growthArrow } from './icons'
+import { alert, download } from './icons/'
 
 export const ImportCounter = memo(function ImportCounter() {
     const remainingImports = useUserStore((state) => state.remainingImports)
     const allowedImports = useUserStore((state) => state.allowedImports)
     const count = remainingImports()
     const status = count > 0 ? 'has-imports' : 'no-imports'
-    const backgroundColor =
-        status === 'has-imports'
-            ? 'bg-extendify-main hover:bg-extendify-main-dark'
-            : 'bg-extendify-alert'
-    const icon = status === 'has-imports' ? download : alert
     const buttonRef = useRef()
 
     useEffect(() => {
@@ -48,14 +44,20 @@ export const ImportCounter = memo(function ImportCounter() {
                 ref={buttonRef}
                 rel="noreferrer"
                 className={classnames(
-                    backgroundColor,
-                    'hidden sm:flex w-full no-underline button-focus text-sm justify-between py-3 px-4 text-white rounded',
+                    'button-focus hidden w-full justify-between rounded py-3 px-4 text-sm text-white no-underline sm:flex',
+                    {
+                        'bg-wp-theme-500 hover:bg-wp-theme-600': count > 0,
+                        'bg-extendify-alert': !count,
+                    },
                 )}
+                onClick={async () => await General.ping('import-counter-click')}
                 href={`https://www.extendify.com/pricing/?utm_source=${encodeURIComponent(
                     window.extendifyData.sdk_partner,
-                )}&utm_medium=library&utm_campaign=import-counter&utm_content=get-more&utm_term=${status}`}>
-                <span className="flex items-center space-x-2 no-underline text-xs">
-                    <Icon icon={icon} size={14} />
+                )}&utm_medium=library&utm_campaign=import-counter&utm_content=get-more&utm_term=${status}&utm_group=${useUserStore
+                    .getState()
+                    .activeTestGroupsUtmValue()}`}>
+                <span className="flex items-center space-x-2 text-xs no-underline">
+                    <Icon icon={count > 0 ? download : alert} size={14} />
                     <span>
                         {sprintf(
                             _n('%s Import', '%s Imports', count, 'extendify'),
@@ -63,21 +65,27 @@ export const ImportCounter = memo(function ImportCounter() {
                         )}
                     </span>
                 </span>
-                <span className="text-white text-sm no-underline font-medium outline-none flex items-center">
+                <span className="outline-none flex items-center text-sm font-medium text-white no-underline">
                     {__('Get more', 'extendify')}
                     <Icon icon={growthArrow} size={24} className="-mr-1.5" />
                 </span>
             </a>
             <div
-                className="invisible opacity-0 -translate-y-full absolute duration-300 delay-200 ease-in-out group-hover:-top-2.5 group-hover:opacity-100 group-hover:visible group-focus:-top-2.5 group-focus:opacity-100 group-focus:visible top-0 transform transition-all w-full extendify-bottom-arrow shadow-md"
+                className="extendify-bottom-arrow invisible absolute top-0 w-full -translate-y-full transform opacity-0 shadow-md transition-all delay-200 duration-300 ease-in-out group-hover:visible group-hover:-top-2.5 group-hover:opacity-100 group-focus:visible group-focus:-top-2.5 group-focus:opacity-100"
                 tabIndex="-1">
                 <a
                     href={`https://www.extendify.com/pricing/?utm_source=${encodeURIComponent(
                         window.extendifyData.sdk_partner,
-                    )}&utm_medium=library&utm_campaign=import-counter-tooltip&utm_content=get-50-off&utm_term=${status}`}
+                    )}&utm_medium=library&utm_campaign=import-counter-tooltip&utm_content=get-50-off&utm_term=${status}&utm_group=${useUserStore
+                        .getState()
+                        .activeTestGroupsUtmValue()}`}
                     className="block bg-gray-900 text-white p-4 no-underline rounded bg-cover"
+                    onClick={async () =>
+                        await General.ping('import-counter-tooltip-click')
+                    }
                     style={{
                         backgroundImage: `url(${window.extendifyData.asset_path}/logo-tips.png)`,
+                        backgroundSize: '100% 100%',
                     }}>
                     <span
                         dangerouslySetInnerHTML={{

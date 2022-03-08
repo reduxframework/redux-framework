@@ -1,9 +1,9 @@
-import { __, sprintf } from '@wordpress/i18n'
 import { Modal, Button } from '@wordpress/components'
 import { render } from '@wordpress/element'
-import ExtendifyLibrary from '../ExtendifyLibrary'
-import { useWantedTemplateStore } from '../state/Importing'
-import { getPluginDescription } from '../util/general'
+import { __, sprintf } from '@wordpress/i18n'
+import ExtendifyLibrary from '@extendify/ExtendifyLibrary'
+import { useWantedTemplateStore } from '@extendify/state/Importing'
+import { getPluginDescription } from '@extendify/util/general'
 
 export default function NeedsPermissionModal() {
     const wantedTemplate = useWantedTemplateStore(

@@ -1,13 +1,13 @@
-import { useState, useRef } from '@wordpress/element'
 import { Icon } from '@wordpress/components'
-import { __, sprintf } from '@wordpress/i18n'
-import { SplitModal } from './SplitModal'
-import { download2, brandLogo } from '../icons'
-import { Plugins } from '../../api/Plugins'
-import { General } from '../../api/General'
-import { useUserStore } from '../../state/User'
 import { safeHTML } from '@wordpress/dom'
-import { useGlobalStore } from '../../state/GlobalState'
+import { useState, useRef } from '@wordpress/element'
+import { __, sprintf } from '@wordpress/i18n'
+import { General } from '@extendify/api/General'
+import { Plugins } from '@extendify/api/Plugins'
+import { download2, brandLogo } from '@extendify/components/icons'
+import { useGlobalStore } from '@extendify/state/GlobalState'
+import { useUserStore } from '@extendify/state/User'
+import { SplitModal } from './SplitModal'
 
 export const InstallStandaloneModal = () => {
     const [text, setText] = useState(__('Install Extendify', 'extendify'))
@@ -48,7 +48,7 @@ export const InstallStandaloneModal = () => {
     return (
         <SplitModal ref={initialFocus} onClose={dismiss}>
             <div>
-                <div className="flex space-x-2 items-center mb-10 text-extendify-black">
+                <div className="mb-10 flex items-center space-x-2 text-extendify-black">
                     {brandLogo}
                 </div>
                 <h3 className="text-xl">
@@ -77,23 +77,23 @@ export const InstallStandaloneModal = () => {
                         onClick={installAndActivate}
                         ref={initialFocus}
                         disabled={disabled}
-                        className="button-extendify-main inline-flex mt-2 px-4 py-3 button-focus justify-center"
+                        className="button-extendify-main button-focus mt-2 inline-flex justify-center px-4 py-3"
                         style={{ minWidth: '225px' }}>
                         {text}
                         {success || (
                             <Icon
                                 icon={download2}
                                 size={24}
-                                className="w-6 ml-2 flex-grow-0"
+                                className="ml-2 w-6 flex-grow-0"
                             />
                         )}
                     </button>
                 </div>
             </div>
-            <div className="w-full bg-extendify-secondary flex justify-end rounded-tr-sm rounded-br-sm">
+            <div className="flex w-full justify-end rounded-tr-sm rounded-br-sm bg-extendify-secondary">
                 <img
                     alt={__('Upgrade Now', 'extendify')}
-                    className="max-w-full rounded-tr-sm roudned-br-sm"
+                    className="roudned-br-sm max-w-full rounded-tr-sm"
                     src={
                         window.extendifyData.asset_path +
                         '/modal-extendify-purple.png'

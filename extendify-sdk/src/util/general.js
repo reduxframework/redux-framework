@@ -1,5 +1,5 @@
 import { isString, toLower } from 'lodash'
-import { useUserStore } from '../state/User'
+import { useUserStore } from '@extendify/state/User'
 
 /**
  * Will check if the given string contains the search string
@@ -55,4 +55,5 @@ export function getTaxonomyName(key) {
         case 'layoutType':
             return 'Page Types'
     }
+    return key
 }

@@ -1,6 +1,6 @@
-import { camelCase } from 'lodash'
 import { render } from '@wordpress/element'
-import RequiredPluginsModal from '../middleware/hasRequiredPlugins/RequiredPluginsModal'
+import { camelCase } from 'lodash'
+import RequiredPluginsModal from '@extendify/middleware/hasRequiredPlugins/RequiredPluginsModal'
 
 // use this to trigger an error from outside the application
 export const softErrorHandler = {

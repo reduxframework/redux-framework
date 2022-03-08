@@ -1,12 +1,12 @@
-import { __, sprintf } from '@wordpress/i18n'
-import ExtendifyLibrary from '../../ExtendifyLibrary'
 import { Modal, Button, ButtonGroup } from '@wordpress/components'
 import { render } from '@wordpress/element'
-import InstallingModal from './InstallingModal'
-import { useWantedTemplateStore } from '../../state/Importing'
-import { getPluginDescription } from '../../util/general'
-import { useUserStore } from '../../state/User'
+import { __, sprintf } from '@wordpress/i18n'
+import ExtendifyLibrary from '@extendify/ExtendifyLibrary'
+import { useWantedTemplateStore } from '@extendify/state/Importing'
+import { useUserStore } from '@extendify/state/User'
+import { getPluginDescription } from '@extendify/util/general'
 import NeedsPermissionModal from '../NeedsPermissionModal'
+import InstallingModal from './InstallingModal'
 
 export default function RequiredPluginsModal({
     forceOpen,

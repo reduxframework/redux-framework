@@ -12,11 +12,15 @@ export function useIsMounted() {
 
 export const useIsDevMode = () => {
     const [devMode, setDevMode] = useState(false)
-    const handle = () => {
-        setDevMode(window.location.search.indexOf('DEVMODE') > -1)
+    const check = () => {
+        return (
+            window.location.search.indexOf('DEVMODE') > -1 ||
+            window.location.search.indexOf('LOCALMODE') > -1
+        )
     }
     useEffect(() => {
-        setDevMode(window.location.search.indexOf('DEVMODE') > -1)
+        const handle = () => setDevMode(check())
+        handle()
         window.addEventListener('popstate', handle)
         return () => {
             window.removeEventListener('popstate', handle)

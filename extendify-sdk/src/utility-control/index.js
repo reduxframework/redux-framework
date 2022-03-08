@@ -1,9 +1,8 @@
-import { __ } from '@wordpress/i18n'
 import { InspectorAdvancedControls } from '@wordpress/block-editor'
+import { FormTokenField } from '@wordpress/components'
 import { createHigherOrderComponent } from '@wordpress/compose'
 import { addFilter } from '@wordpress/hooks'
-import { FormTokenField } from '@wordpress/components'
-
+import { __ } from '@wordpress/i18n'
 import suggestions from '../../utility-framework/suggestions.json'
 
 function addAttributes(settings) {

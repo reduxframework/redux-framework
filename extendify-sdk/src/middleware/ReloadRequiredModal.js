@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n'
 import { Modal, Button, ButtonGroup } from '@wordpress/components'
-import { useState } from '@wordpress/element'
 import { dispatch, select } from '@wordpress/data'
+import { useState } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
 
 export default function ReloadRequiredModal() {
     const [isSaving, setSaving] = useState(false)

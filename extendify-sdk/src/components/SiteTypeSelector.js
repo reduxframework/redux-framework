@@ -2,8 +2,8 @@ import { useEffect, useState, useRef, useMemo } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 import Fuse from 'fuse.js'
-import { useTemplatesStore } from '../state/Templates'
-import { useUserStore } from '../state/User'
+import { useTemplatesStore } from '@extendify/state/Templates'
+import { useUserStore } from '@extendify/state/User'
 
 const searchMemo = new Map()
 
@@ -64,7 +64,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     }, [terms])
 
     useEffect(() => {
-        if (!tempValue.length) setVisibleChoices(examples)
+        if (!tempValue?.length) setVisibleChoices(examples)
     }, [examples, tempValue])
 
     useEffect(() => {
@@ -75,10 +75,10 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
         return (
             <>
                 <span className="flex flex-col text-left">
-                    <span className="text-sm mb-1">
+                    <span className="mb-1 text-sm">
                         {__('Site Type', 'extendify')}
                     </span>
-                    <span className="font-light text-xs">{description}</span>
+                    <span className="text-xs font-light">{description}</span>
                 </span>
                 <span className="flex items-center space-x-4">
                     {unknown && !expanded && (
@@ -107,8 +107,8 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                         </svg>
                     )}
                     <svg
-                        className={classNames('text-gray-700 stroke-current', {
-                            'transform rotate-90 -translate-x-1': expanded,
+                        className={classNames('stroke-current text-gray-700', {
+                            '-translate-x-1 rotate-90 transform': expanded,
                         })}
                         aria-hidden="true"
                         focusable="false"
@@ -133,7 +133,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
         }
         return (
             <>
-                <h4 className="mt-4 mb-2 text-left uppercase text-xss text-gray-700 font-medium">
+                <h4 className="mt-4 mb-2 text-left text-xss font-medium uppercase text-gray-700">
                     {title}
                 </h4>
                 <ul className="m-0">
@@ -149,7 +149,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                                 <button
                                     type="button"
                                     className={classNames(
-                                        'w-full text-left text-sm bg-transparent hover:text-wp-theme-500 m-0 pl-0 cursor-pointer',
+                                        'm-0 w-full cursor-pointer bg-transparent pl-0 text-left text-sm hover:text-wp-theme-500',
                                         { 'text-gray-800': !current },
                                     )}
                                     onClick={() => {
@@ -167,11 +167,11 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     }
 
     return (
-        <div className="w-full bg-extendify-transparent-black rounded">
+        <div className="w-full rounded bg-extendify-transparent-black">
             <button
                 type="button"
                 onClick={() => setExpanded((expanded) => !expanded)}
-                className="flex items-center justify-between text-gray-800 button-focus w-full p-4 m-0 cursor-pointer bg-transparent hover:bg-extendify-transparent-black-100 rounded">
+                className="button-focus m-0 flex w-full cursor-pointer items-center justify-between rounded bg-transparent p-4 text-gray-800 hover:bg-extendify-transparent-black-100">
                 {contentHeader(
                     expanded
                         ? __('What kind of site is this?', 'extendify')
@@ -179,7 +179,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                 )}
             </button>
             {expanded && (
-                <div className="p-4 pt-0 overflow-y-auto max-h-96">
+                <div className="max-h-96 overflow-y-auto p-4 pt-0">
                     <div className="relative my-2">
                         <label htmlFor="site-type-search" className="sr-only">
                             {__('Search', 'extendify')}
@@ -192,11 +192,11 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                                 updateSearch(event.target.value)
                             }
                             type="text"
-                            className="button-focus bg-white border-0 m-0 p-3.5 py-2.5 rounded text-sm w-full"
+                            className="button-focus m-0 w-full rounded border-0 bg-white p-3.5 py-2.5 text-sm"
                             placeholder={__('Search', 'extendify')}
                         />
                         <svg
-                            className="absolute top-2 right-2 hidden lg:block pointer-events-none"
+                            className="pointer-events-none absolute top-2 right-2 hidden lg:block"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             width="24"
@@ -207,7 +207,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                             <path d="M13.5 6C10.5 6 8 8.5 8 11.5c0 1.1.3 2.1.9 3l-3.4 3 1 1.1 3.4-2.9c1 .9 2.2 1.4 3.6 1.4 3 0 5.5-2.5 5.5-5.5C19 8.5 16.5 6 13.5 6zm0 9.5c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"></path>
                         </svg>
                     </div>
-                    {tempValue.length > 1 && visibleChoices === examples && (
+                    {tempValue?.length > 1 && visibleChoices === examples && (
                         <p className="text-left">
                             {__('Nothing found...', 'extendify')}
                         </p>
@@ -220,16 +220,16 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                             )}
                         </div>
                     )}
-                    {visibleChoices.length > 0 && (
+                    {visibleChoices?.length > 0 && (
                         <div>{choicesList(visibleChoices)}</div>
                     )}
                     {unknown ? null : (
                         <button
                             type="button"
-                            className="mt-4 w-full text-left text-sm bg-transparent hover:text-wp-theme-500 pl-0 cursor-pointer text-wp-theme-500"
+                            className="mt-4 w-full cursor-pointer bg-transparent pl-0 text-left text-sm text-wp-theme-500 hover:text-wp-theme-500"
                             onClick={() => {
                                 setExpanded(false)
-                                setValue('Unknown')
+                                setValue({ slug: '', title: 'Unknown' })
                             }}>
                             {__('Reset', 'extendify')}
                         </button>

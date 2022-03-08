@@ -1,5 +1,5 @@
-import { hasRequiredPlugins } from './hasRequiredPlugins'
 import { hasPluginsActivated } from './hasPluginsActivated'
+import { hasRequiredPlugins } from './hasRequiredPlugins'
 
 export const Middleware = (middleware = []) => {
     return {

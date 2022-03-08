@@ -1,19 +1,19 @@
-import { __ } from '@wordpress/i18n'
-import { Sidebar } from '../Sidebar'
-import HasSidebar from './HasSidebar'
-import { Toolbar } from './Toolbar'
-import { GridView } from '../GridView'
 import { Button } from '@wordpress/components'
 import { useRef, useEffect, useState, useCallback } from '@wordpress/element'
-import { useTemplatesStore } from '../../state/Templates'
-import { useWhenIdle } from '../../hooks/helpers'
+import { __ } from '@wordpress/i18n'
+import { useWhenIdle } from '@extendify/hooks/helpers'
+import { GridView } from '@extendify/pages/GridView'
+import { Sidebar } from '@extendify/pages/Sidebar'
+import { useTemplatesStore } from '@extendify/state/Templates'
+import HasSidebar from './HasSidebar'
+import { Toolbar } from './Toolbar'
 
 export const Layout = ({ setOpen }) => {
     const gridContainer = useRef()
     const searchParams = useTemplatesStore((state) => state.searchParams)
     const [showIdleScreen, setShowIdleScreen] = useState(false)
     const resetTemplates = useTemplatesStore((state) => state.resetTemplates)
-    const idle = useWhenIdle(600_000) // 10 minutes
+    const idle = useWhenIdle(300_000) // 5 minutes
     const removeIdleScreen = useCallback(() => {
         setShowIdleScreen(false)
         resetTemplates()
@@ -26,10 +26,12 @@ export const Layout = ({ setOpen }) => {
         setShowIdleScreen(false)
     }, [searchParams])
     useEffect(() => {
+        if (!gridContainer.current) return
         gridContainer.current.scrollTop = 0
     }, [searchParams])
+
     return (
-        <div className="h-full flex flex-col items-center relative max-w-screen-4xl mx-auto">
+        <div className="relative mx-auto flex h-full max-w-screen-4xl flex-col items-center">
             <div className="w-full flex-grow overflow-hidden">
                 <button
                     onClick={() =>
@@ -41,17 +43,17 @@ export const Layout = ({ setOpen }) => {
                     className="extendify-skip-to-sr-link sr-only focus:not-sr-only focus:text-blue-500">
                     {__('Skip to templates', 'extendify')}
                 </button>
-                <div className="sm:flex relative mx-auto h-full">
+                <div className="relative mx-auto h-full sm:flex">
                     <HasSidebar>
                         <Sidebar />
-                        <div className="relative h-full z-30 flex flex-col">
+                        <div className="relative z-30 flex h-full flex-col">
                             <Toolbar
-                                className="hidden sm:block w-full h-20 flex-shrink-0 px-6 md:px-8"
+                                className="hidden h-20 w-full flex-shrink-0 px-6 sm:block md:px-8"
                                 hideLibrary={() => setOpen(false)}
                             />
                             <div
                                 ref={gridContainer}
-                                className="flex-grow z-20 overflow-y-auto px-6 md:px-8">
+                                className="z-20 flex-grow overflow-y-auto px-6 md:px-8">
                                 {showIdleScreen ? (
                                     <IdleScreen callback={removeIdleScreen} />
                                 ) : (
@@ -67,12 +69,12 @@ export const Layout = ({ setOpen }) => {
 }
 
 const IdleScreen = ({ callback }) => (
-    <div className="flex flex-col items-center justify-center h-full">
-        <p className="text-sm text-extendify-gray font-normal mb-6">
+    <div className="flex h-full flex-col items-center justify-center">
+        <p className="mb-6 text-sm font-normal text-extendify-gray">
             {__("We've added new stuff while you were away.", 'extendify')}
         </p>
         <Button
-            className="components-button bg-wp-theme-500 hover:bg-wp-theme-600 border-color-wp-theme-500 text-white"
+            className="components-button border-color-wp-theme-500 bg-wp-theme-500 text-white hover:bg-wp-theme-600"
             onClick={callback}>
             {__('Reload')}
         </Button>

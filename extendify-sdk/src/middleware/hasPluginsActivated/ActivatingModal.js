@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n'
 import { Modal, Button } from '@wordpress/components'
 import { useState, render } from '@wordpress/element'
-import { Plugins } from '../../api/Plugins'
-import { useWantedTemplateStore } from '../../state/Importing'
-import ErrorActivating from './ErrorActivating'
+import { __ } from '@wordpress/i18n'
+import { Plugins } from '@extendify/api/Plugins'
+import { useWantedTemplateStore } from '@extendify/state/Importing'
 import ReloadRequiredModal from '../ReloadRequiredModal'
+import ErrorActivating from './ErrorActivating'
 
 export default function ActivatingModal() {
     const [errorMessage, setErrorMessage] = useState('')

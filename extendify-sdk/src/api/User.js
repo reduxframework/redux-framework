@@ -1,8 +1,18 @@
 import { Axios as api } from './axios'
 
 export const User = {
-    getData() {
-        return api.get('user')
+    async getData() {
+        // Zustand changed their persist middleware to bind to the store
+        // so api was undefined here. That's why using fetch for this one request.
+        const data = await fetch(`${window.extendifyData.root}/user`, {
+            method: 'GET',
+            headers: {
+                'X-WP-Nonce': window.extendifyData.nonce,
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-Extendify': true,
+            },
+        })
+        return await data.json()
     },
     getMeta(key) {
         return api.get('user-meta', {
@@ -38,6 +48,9 @@ export const User = {
                 'Content-Type': 'multipart/form-data',
             },
         })
+    },
+    deleteData() {
+        return api.post('clear-user')
     },
     registerMailingList(email) {
         const formData = new FormData()

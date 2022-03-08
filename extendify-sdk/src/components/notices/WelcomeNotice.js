@@ -1,7 +1,8 @@
-import { __ } from '@wordpress/i18n'
 import { Button } from '@wordpress/components'
-import { useUserStore } from '../../state/User'
-import { useGlobalStore } from '../../state/GlobalState'
+import { __ } from '@wordpress/i18n'
+import { General } from '@extendify/api/General'
+import { useGlobalStore } from '@extendify/state/GlobalState'
+import { useUserStore } from '@extendify/state/User'
 
 export default function WelcomeNotice() {
     const setOpen = useGlobalStore((state) => state.setOpen)
@@ -23,11 +24,18 @@ export default function WelcomeNotice() {
             <span className="px-2 opacity-50" aria-hidden="true">
                 &#124;
             </span>
-            <div className="flex space-x-2 justify-center items-center">
+            <div className="flex items-center justify-center space-x-2">
                 <Button
                     variant="link"
-                    className="text-black underline hover:no-underline p-0 h-auto"
-                    href={`https://extendify.com/welcome/?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=welcome-notice&utm_content=tell-me-more`}
+                    className="h-auto p-0 text-black underline hover:no-underline"
+                    href={`https://extendify.com/welcome/?utm_source=${
+                        window.extendifyData.sdk_partner
+                    }&utm_medium=library&utm_campaign=welcome-notice&utm_content=tell-me-more&utm_group=${useUserStore
+                        .getState()
+                        .activeTestGroupsUtmValue()}`}
+                    onClick={async () =>
+                        await General.ping('welcome-notice-tell-me-more-click')
+                    }
                     target="_blank">
                     {__('Tell me more', 'extendify')}
                 </Button>
@@ -38,7 +46,7 @@ export default function WelcomeNotice() {
                         </span>
                         <Button
                             variant="link"
-                            className="text-black underline hover:no-underline p-0 h-auto"
+                            className="h-auto p-0 text-black underline hover:no-underline"
                             onClick={disableLibrary}>
                             {__('Turn off the library', 'extendify')}
                         </Button>

@@ -1,14 +1,14 @@
-import classNames from 'classnames'
-import { useEffect, useState, useRef, useMemo } from '@wordpress/element'
-import { __, sprintf } from '@wordpress/i18n'
 import { BlockPreview } from '@wordpress/block-editor'
 import { rawHandler } from '@wordpress/blocks'
-import { AuthorizationCheck, Middleware } from '../middleware'
-import { injectTemplateBlocks } from '../util/templateInjection'
-import { useUserStore } from '../state/User'
-import { useGlobalStore } from '../state/GlobalState'
-import { Templates as TemplatesApi } from '../api/Templates'
-import { useIsDevMode } from '../hooks/helpers'
+import { useEffect, useState, useRef, useMemo } from '@wordpress/element'
+import { __, sprintf } from '@wordpress/i18n'
+import classNames from 'classnames'
+import { Templates as TemplatesApi } from '@extendify/api/Templates'
+import { useIsDevMode } from '@extendify/hooks/helpers'
+import { AuthorizationCheck, Middleware } from '@extendify/middleware'
+import { useGlobalStore } from '@extendify/state/GlobalState'
+import { useUserStore } from '@extendify/state/User'
+import { injectTemplateBlocks } from '@extendify/util/templateInjection'
 import { DevButtonOverlay } from './DevHelpers'
 import { NoImportModal } from './modals/NoImportModal'
 import { ProModal } from './modals/ProModal'
@@ -105,11 +105,15 @@ export function ImportTemplateBlock({ template, maxHeight }) {
                                 if (height) {
                                     rafId4 = window.requestAnimationFrame(
                                         () => {
-                                            frame.style.height = height + 'px'
+                                            frame.contentWindow.dispatchEvent(
+                                                new Event('resize'),
+                                            )
                                         },
                                     )
                                     const id = window.setTimeout(() => {
-                                        frame.style.height = height + 'px'
+                                        frame.contentWindow.dispatchEvent(
+                                            new Event('resize'),
+                                        )
                                     }, 2000)
                                     timeouts.push(id)
                                 }
@@ -161,7 +165,7 @@ export function ImportTemplateBlock({ template, maxHeight }) {
     }, [maxHeight])
 
     return (
-        <div className="relative group">
+        <div className="group relative">
             <div
                 role="button"
                 tabIndex="0"
@@ -170,7 +174,7 @@ export function ImportTemplateBlock({ template, maxHeight }) {
                     template?.fields?.type,
                 )}
                 style={{ maxHeight }}
-                className="m-0 cursor-pointer button-focus ease-in-out relative overflow-hidden bg-gray-100"
+                className="button-focus relative m-0 cursor-pointer overflow-hidden bg-gray-100 ease-in-out"
                 onFocus={focusTrapInnerBlocks}
                 onClick={importTemplate}
                 onKeyDown={handleKeyDown}>
@@ -192,7 +196,7 @@ export function ImportTemplateBlock({ template, maxHeight }) {
             {/* Show dev info after the preview is loaded to trigger observer */}
             {devMode && loaded && <DevButtonOverlay template={template} />}
             {template?.fields?.pro && (
-                <div className="bg-white bg-wp-theme-500 border font-medium border-none absolute z-20 top-4 right-4 py-1 px-2.5 rounded-md shadow-sm no-underline text-white pointer-events-none">
+                <div className="pointer-events-none absolute top-4 right-4 z-20 rounded-md border border-none bg-white bg-wp-theme-500 py-1 px-2.5 font-medium text-white no-underline shadow-sm">
                     {__('Pro', 'extendify')}
                 </div>
             )}

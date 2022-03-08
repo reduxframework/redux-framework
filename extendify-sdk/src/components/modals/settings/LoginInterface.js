@@ -1,14 +1,14 @@
-import { useUserStore } from '../state/User'
-import { useState, useEffect, useRef } from '@wordpress/element'
-import { User as UserApi } from '../api/User'
-import { __ } from '@wordpress/i18n'
-import classNames from 'classnames'
 import { Spinner, Button } from '@wordpress/components'
-
+import { useState, useEffect, useRef } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
 import { Icon } from '@wordpress/icons'
-import { user } from './icons/'
-import { success as successIcon } from './icons/'
-import { useIsDevMode } from '../hooks/helpers'
+import classNames from 'classnames'
+import { General } from '@extendify/api/General'
+import { User as UserApi } from '@extendify/api/User'
+import { useIsDevMode } from '@extendify/hooks/helpers'
+import { useUserStore } from '@extendify/state/User'
+import { user } from '../../icons'
+import { success as successIcon } from '../../icons'
 
 export default function LoginInterface({ actionCallback, initialFocus }) {
     const loggedIn = useUserStore((state) => state.apiKey.length)
@@ -53,7 +53,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
             setFeedbackType('error')
             setIsWorking(false)
             setFeedback(
-                message.length
+                message?.length
                     ? message
                     : 'Error: Are you interacting with the wrong server?',
             )
@@ -63,7 +63,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
         if (error || exception) {
             setFeedbackType('error')
             setIsWorking(false)
-            setFeedback(error.length ? error : exception)
+            setFeedback(error?.length ? error : exception)
             return
         }
 
@@ -86,14 +86,14 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
 
     if (success) {
         return (
-            <section className="w-80 space-y-8 text-center pt-2 pb-4">
+            <section className="space-y-6 p-6 text-center flex flex-col items-center">
                 <Icon icon={successIcon} size={148} />
-                <p className="text-lg text-extendify-black text-center leading-extra-tight font-semibold">
+                <p className="text-center text-lg font-semibold m-0 text-extendify-black">
                     {__("You've signed in to Extendify", 'extendify')}
                 </p>
                 <Button
                     ref={viewPatternsButtonRef}
-                    className="px-4 p-2 cursor-pointer text-center rounded bg-extendify-main text-white"
+                    className="cursor-pointer rounded bg-extendify-main p-2 px-4 text-center text-white"
                     onClick={actionCallback}>
                     {__('View patterns', 'extendify')}
                 </Button>
@@ -103,12 +103,12 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
 
     if (loggedIn) {
         return (
-            <section className="space-y-8 w-full pb-2">
-                <p className="text-base text-extendify-black leading-extra-tight">
+            <section className="w-full space-y-6 p-6">
+                <p className="text-base m-0 text-extendify-black">
                     {__('Account', 'extendify')}
                 </p>
-                <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-2 -ml-2">
+                <div className="flex items-center justify-between">
+                    <div className="-ml-2 flex items-center space-x-2">
                         <Icon icon={user} size={48} />
                         <p className="text-extendify-black">
                             {email?.length
@@ -118,7 +118,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                     </div>
                     {devMode && (
                         <Button
-                            className="px-4 py-3 cursor-pointer text-center rounded bg-extendify-main hover:bg-extendify-main-dark text-white"
+                            className="cursor-pointer rounded bg-extendify-main px-4 py-3 text-center text-white hover:bg-extendify-main-dark"
                             onClick={logout}>
                             {__('Sign out', 'extendify')}
                         </Button>
@@ -129,23 +129,34 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
     }
 
     return (
-        <section className="w-80 text-left space-y-8 pb-6">
+        <section className="space-y-6 p-6 text-left">
             <div>
-                <p className="text-lg text-extendify-black text-center leading-extra-tight font-semibold">
+                <p className="text-center text-lg font-semibold m-0 text-extendify-black">
                     {__('Sign in to Extendify', 'extendify')}
                 </p>
-                <p className="text-sm text-extendify-gray text-center space-x-1 leading-extra-tight">
+                <p className="space-x-1 text-center text-sm m-0 text-extendify-gray">
                     <span>{__("Don't have an account?", 'extendify')}</span>
                     <a
-                        href={`https://extendify.com/pricing?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=sign-up`}
+                        href={`https://extendify.com/pricing?utm_source=${
+                            window.extendifyData.sdk_partner
+                        }&utm_medium=library&utm_campaign=sign-in-form&utm_content=sign-up&utm_group=${useUserStore
+                            .getState()
+                            .activeTestGroupsUtmValue()}`}
                         target="_blank"
+                        onClick={async () =>
+                            await General.ping(
+                                'sign-up-link-from-login-modal-click',
+                            )
+                        }
                         className="underline hover:no-underline text-extendify-gray"
                         rel="noreferrer">
                         {__('Sign up', 'extendify')}
                     </a>
                 </p>
             </div>
-            <form onSubmit={confirmKey} className="space-y-2">
+            <form
+                onSubmit={confirmKey}
+                className="flex flex-col items-center justify-center space-y-2">
                 <div className="flex items-center">
                     <label className="sr-only" htmlFor="extendify-login-email">
                         {__('Email address', 'extendify')}
@@ -154,8 +165,9 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                         ref={initialFocus}
                         id="extendify-login-email"
                         name="extendify-login-email"
+                        style={{ minWidth: '320px' }}
                         type="email"
-                        className="border-2 p-2 w-full rounded"
+                        className="w-full rounded border-2 p-2"
                         placeholder={__('Email address', 'extendify')}
                         value={email.length ? email : ''}
                         onChange={(event) => setEmail(event.target.value)}
@@ -171,17 +183,18 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                         ref={licenseKeyRef}
                         id="extendify-login-license"
                         name="extendify-login-license"
+                        style={{ minWidth: '320px' }}
                         type="text"
-                        className="border-2 p-2 w-full rounded"
+                        className="w-full rounded border-2 p-2"
                         placeholder={__('License key', 'extendify')}
                         value={apiKey}
                         onChange={(event) => setApiKey(event.target.value)}
                     />
                 </div>
-                <div className="pt-2 flex justify-center">
+                <div className="flex justify-center pt-2">
                     <button
                         type="submit"
-                        className="relative p-2 py-3 w-72 max-w-full flex justify-center cursor-pointer text-center rounded bg-extendify-main hover:bg-extendify-main-dark text-base text-white ">
+                        className="relative flex w-72 max-w-full cursor-pointer justify-center rounded bg-extendify-main p-2 py-3 text-center text-base text-white hover:bg-extendify-main-dark ">
                         <span>{__('Sign In', 'extendify')}</span>
                         {isWorking && (
                             <div className="absolute right-2.5">
@@ -203,11 +216,20 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                         {feedback}
                     </div>
                 )}
-                <div className="text-center pt-4">
+                <div className="pt-4 text-center">
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href={`https://extendify.com/guides/sign-in?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=need-help`}
+                        href={`https://extendify.com/guides/sign-in?utm_source=${
+                            window.extendifyData.sdk_partner
+                        }&utm_medium=library&utm_campaign=sign-in-form&utm_content=need-help&utm_group=${useUserStore
+                            .getState()
+                            .activeTestGroupsUtmValue()}`}
+                        onClick={async () =>
+                            await General.ping(
+                                'need-help-link-from-login-modal-click',
+                            )
+                        }
                         className="underline hover:no-underline text-sm text-extendify-gray">
                         {__('Need Help?', 'extendify')}
                     </a>
