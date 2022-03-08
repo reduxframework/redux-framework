@@ -1,11 +1,11 @@
-import { __ } from '@wordpress/i18n'
-import { render } from '@wordpress/element'
-import { registerPlugin } from '@wordpress/plugins'
 import { PluginSidebarMoreMenuItem } from '@wordpress/edit-post'
+import { render } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
 import { Icon } from '@wordpress/icons'
-import { brandMark } from './components/icons/'
-import LibraryAccessModal from './components/LibraryAccessModal'
-import { CtaButton, MainButton } from './components/MainButtons'
+import { registerPlugin } from '@wordpress/plugins'
+import LibraryAccessModal from '@extendify/components/LibraryAccessModal'
+import { CtaButton, MainButtonWrapper } from '@extendify/components/MainButtons'
+import { brandMark } from '@extendify/components/icons/'
 
 const userState = window.extendifyData?.user?.state
 const isAdmin = () => window.extendifyData.user === null || userState?.isAdmin
@@ -37,12 +37,12 @@ if (window._wpLoadBlockEditor) {
             document
                 .querySelector('.edit-post-header-toolbar')
                 .append(buttonContainer)
-            render(<MainButton />, buttonContainer)
+            render(<MainButtonWrapper />, buttonContainer)
 
             if (!isLibraryEnabled()) {
                 document
                     .getElementById('extendify-templates-inserter-btn')
-                    .classList.add('invisible')
+                    .classList.add('hidden')
             }
             finish()
         })

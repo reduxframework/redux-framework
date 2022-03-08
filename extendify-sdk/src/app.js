@@ -1,11 +1,11 @@
-import ExtendifyLibrary from './ExtendifyLibrary'
-import { render } from '@wordpress/element'
-import { useWantedTemplateStore } from './state/Importing'
-import { injectTemplateBlocks } from './util/templateInjection'
 import { rawHandler } from '@wordpress/blocks'
-import './buttons'
-import './listeners'
-import './blocks/blocks'
+import { render } from '@wordpress/element'
+import ExtendifyLibrary from '@extendify/ExtendifyLibrary'
+import '@extendify/blocks/blocks'
+import '@extendify/buttons'
+import '@extendify/listeners'
+import { useWantedTemplateStore } from '@extendify/state/Importing'
+import { injectTemplateBlocks } from '@extendify/util/templateInjection'
 
 window._wpLoadBlockEditor &&
     window.wp.domReady(() => {

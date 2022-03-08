@@ -1,15 +1,18 @@
 import { Fragment, useRef } from '@wordpress/element'
 import { Dialog, Transition } from '@headlessui/react'
-import { useGlobalStore } from '../state/GlobalState'
+import FooterNotice from '@extendify/components/notices/FooterNotice'
+import { useModal } from '@extendify/hooks/useModal'
+import { useTestGroup } from '@extendify/hooks/useTestGroup'
+import { useGlobalStore } from '@extendify/state/GlobalState'
 import { Layout } from './layout/Layout'
-import FooterNotice from '../components/notices/FooterNotice'
-import { useModal } from '../hooks/useModal'
 
 export default function MainWindow() {
     const containerRef = useRef(null)
     const open = useGlobalStore((state) => state.open)
     const setOpen = useGlobalStore((state) => state.setOpen)
     const modal = useModal(open)
+    const ready = useGlobalStore((state) => state.ready)
+    const footerNoticePosition = useTestGroup('notice-position', ['A', 'B'])
 
     return (
         <Transition appear show={open} as={Fragment}>
@@ -19,8 +22,8 @@ export default function MainWindow() {
                 className="extendify"
                 initialFocus={containerRef}
                 onClose={() => setOpen(false)}>
-                <div className="h-screen w-screen sm:h-auto m-auto sm:w-auto fixed z-high inset-0 overflow-y-auto">
-                    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 z-high m-auto h-screen w-screen overflow-y-auto sm:h-auto sm:w-auto">
+                    <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -40,10 +43,19 @@ export default function MainWindow() {
                                     e.target === e.currentTarget &&
                                     setOpen(false)
                                 }
-                                className="fixed lg:absolute inset-0 lg:overflow-hidden transform transition-all p-2 lg:p-16">
+                                className="fixed inset-0 transform p-2 transition-all lg:absolute lg:overflow-hidden lg:p-16">
+                                {footerNoticePosition === 'B' && (
+                                    <FooterNotice className="-mt-6" />
+                                )}
                                 <Layout />
-                                <FooterNotice />
-                                {modal}
+                                {ready ? (
+                                    <>
+                                        {footerNoticePosition === 'A' && (
+                                            <FooterNotice />
+                                        )}
+                                        {modal}
+                                    </>
+                                ) : null}
                             </div>
                         </Transition.Child>
                     </div>

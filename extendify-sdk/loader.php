@@ -21,7 +21,10 @@ if (!function_exists('extendifyCheckPluginInstalled')) {
             include_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
 
-        foreach (get_plugins() as $plugin => $data) {
+        $plugins = get_plugins();
+        // Don't cache plugins this early.
+        wp_cache_delete('plugins', 'plugins');
+        foreach ($plugins as $plugin => $data) {
             if ($data['TextDomain'] === $name) {
                 return $plugin;
             }
@@ -37,7 +40,7 @@ if ($extendifyPluginName) {
     // Remember, this file is only loaded by partner plugins.
     if (is_plugin_active($extendifyPluginName)) {
         // If the SDK is active then ignore the partner plugins.
-        $GLOBALS['extendify_sdk_partner'] = '';
+        $GLOBALS['extendify_sdk_partner'] = 'standalone';
         return false;
     }
 }

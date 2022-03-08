@@ -1,11 +1,10 @@
 import { Modal } from '@wordpress/components'
-import { unmountComponentAtNode, useState, useEffect } from '@wordpress/element'
 import { ToggleControl } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
 import { useSelect } from '@wordpress/data'
-
-import { useUserStore } from '../state/User'
-import { useSiteSettingsStore } from '../state/SiteSettings'
+import { unmountComponentAtNode, useState, useEffect } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
+import { useSiteSettingsStore } from '@extendify/state/SiteSettings'
+import { useUserStore } from '@extendify/state/User'
 
 const LibraryAccessModal = () => {
     const isAdmin = useSelect((select) =>
@@ -13,10 +12,10 @@ const LibraryAccessModal = () => {
     )
 
     const [libraryforMyself, setLibraryforMyself] = useState(
-        useUserStore((store) => store.enabled),
+        useUserStore.getState().enabled,
     )
     const [libraryforEveryone, setLibraryforEveryone] = useState(
-        useSiteSettingsStore((store) => store.enabled),
+        useSiteSettingsStore.getState().enabled,
     )
 
     const closeModal = () => {
@@ -34,9 +33,9 @@ const LibraryAccessModal = () => {
         )
         if (!button) return
         if (state) {
-            button.classList.add('invisible')
+            button.classList.add('hidden')
         } else {
-            button.classList.remove('invisible')
+            button.classList.remove('hidden')
         }
     }
 

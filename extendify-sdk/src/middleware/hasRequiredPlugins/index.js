@@ -1,6 +1,6 @@
+import { render } from '@wordpress/element'
 import { checkIfUserNeedsToInstallPlugins } from '../helpers'
 import RequiredPluginsModal from './RequiredPluginsModal'
-import { render } from '@wordpress/element'
 
 export const hasRequiredPlugins = async (template) => {
     return {

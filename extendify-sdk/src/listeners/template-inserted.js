@@ -1,7 +1,7 @@
-import { Templates } from '../api/Templates'
-import { useUserStore } from '../state/User'
 import { dispatch } from '@wordpress/data'
 import { __ } from '@wordpress/i18n'
+import { Templates } from '@extendify/api/Templates'
+import { useUserStore } from '@extendify/state/User'
 
 // This fires after a template is inserted
 export const templateHandler = {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from '@wordpress/element'
-import { InstallStandaloneModal } from '../components/modals/InstallStandaloneModal'
-import { useGlobalStore } from '../state/GlobalState'
-import { useUserStore } from '../state/User'
+import { InstallStandaloneModal } from '@extendify/components/modals/InstallStandaloneModal'
+import { useGlobalStore } from '@extendify/state/GlobalState'
+import { useUserStore } from '@extendify/state/User'
 
 /** Return any pending modals and check if any need to show  */
 export const useModal = () => {
@@ -14,8 +14,8 @@ export const useModal = () => {
     useEffect(
         () =>
             useGlobalStore.subscribe(
-                (value) => setModal(value?.length > 0 ? value[0] : null),
                 (state) => state.modals,
+                (value) => setModal(value?.length > 0 ? value[0] : null),
             ),
         [],
     )

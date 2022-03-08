@@ -1,6 +1,6 @@
+import { render } from '@wordpress/element'
 import { checkIfUserNeedsToActivatePlugins } from '../helpers'
 import ActivatePluginsModal from './ActivatePluginsModal'
-import { render } from '@wordpress/element'
 
 export const hasPluginsActivated = async (template) => {
     return {

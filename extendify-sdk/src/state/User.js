@@ -1,20 +1,31 @@
+import { sample } from 'lodash'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-import { User } from '../api/User'
+import { User } from '@extendify/api/User'
 
 const storage = {
     getItem: async () => await User.getData(),
     setItem: async (_name, value) => await User.setData(value),
-    removeItem: () => {},
+    removeItem: async () => await User.deleteData(),
 }
 
 const isGlobalLibraryEnabled = () =>
     window.extendifyData.sitesettings === null ||
     window.extendifyData?.sitesettings?.state?.enabled
 
+// Keep track of active tests as some might be active
+// but never rendered.
+const activeTests = {
+    ['notice-position']: '0001',
+    ['main-button-text']: '0002',
+    ['default-or-alt-sitetype']: '0004',
+    ['import-counter-type']: '0005',
+}
+
 export const useUserStore = create(
     persist(
         (set, get) => ({
+            _hasHydrated: false,
             firstLoadedOn: new Date().toISOString(),
             email: '',
             apiKey: '',
@@ -30,6 +41,7 @@ export const useUserStore = create(
             enabled: isGlobalLibraryEnabled(),
             canInstallPlugins: false,
             canActivatePlugins: false,
+            participatingTestsGroups: {},
             preferredOptions: {
                 taxonomies: {},
                 type: '',
@@ -60,6 +72,36 @@ export const useUserStore = create(
                 return (
                     Number(get().allowedImports) + Number(get().freebieImports)
                 )
+            },
+            testGroup(testKey, groupOptions) {
+                if (!Object.keys(activeTests).includes(testKey)) return
+                let groups = get().participatingTestsGroups
+                // If the test is already in the group, don't add it again
+                if (!groups[testKey]) {
+                    set({
+                        participatingTestsGroups: Object.assign({}, groups, {
+                            [testKey]: sample(groupOptions),
+                        }),
+                    })
+                }
+                groups = get().participatingTestsGroups
+                return groups[testKey]
+            },
+            activeTestGroups() {
+                return Object.entries(get().participatingTestsGroups)
+                    .filter(([key]) => Object.keys(activeTests).includes(key))
+                    .reduce((obj, [key, value]) => {
+                        obj[key] = value
+                        return obj
+                    }, {})
+            },
+            activeTestGroupsUtmValue() {
+                const active = Object.entries(get().activeTestGroups())
+                    .map(([key, value]) => {
+                        return `${activeTests[key]}=${value}`
+                    }, '')
+                    .join(':')
+                return encodeURIComponent(active)
             },
             hasAvailableImports: () => {
                 return get().apiKey
@@ -132,6 +174,13 @@ export const useUserStore = create(
         {
             name: 'extendify-user',
             getStorage: () => storage,
+            onRehydrateStorage: () => () => {
+                useUserStore.setState({ _hasHydrated: true })
+            },
+            partialize: (state) => {
+                delete state._hasHydrated
+                return state
+            },
         },
     ),
 )

@@ -1,6 +1,6 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-import { SiteSettings } from '../api/SiteSettings'
+import { SiteSettings } from '@extendify/api/SiteSettings'
 
 const storage = {
     getItem: async () => await SiteSettings.getData(),

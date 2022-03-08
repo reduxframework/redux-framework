@@ -1,10 +1,11 @@
 import { useRef } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
-import { useGlobalStore } from '../../state/GlobalState'
-import LoginInterface from '../LoginInterface'
-import { Modal } from './Modal'
+import { useGlobalStore } from '@extendify/state/GlobalState'
+import { Modal } from '../Modal'
+import { DevSettings } from './DevSettings'
+import LoginInterface from './LoginInterface'
 
-export default function SettingsModal() {
+export const SettingsModal = () => {
     const initialFocus = useRef(null)
     const actionCallback = useGlobalStore((state) => state.removeAllModals)
 
@@ -13,7 +14,8 @@ export default function SettingsModal() {
             heading={__('Settings', 'extendify')}
             isOpen={true}
             ref={initialFocus}>
-            <div className="flex p-6 justify-center">
+            <div className="flex justify-center flex-col divide-y">
+                <DevSettings />
                 <LoginInterface
                     initialFocus={initialFocus}
                     actionCallback={actionCallback}

@@ -129,6 +129,7 @@ class Admin
                 'sdk_partner' => \esc_attr(APP::$sdkPartner),
                 'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
                 'standalone' => \esc_attr(APP::$standalone),
+                'devbuild' => \esc_attr(APP::$environment === 'DEVELOPMENT'),
             ]
         );
         \wp_enqueue_script(App::$slug . '-scripts');

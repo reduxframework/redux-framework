@@ -1,12 +1,16 @@
-=== Extendify ===
+=== Extendify — Gutenberg Patterns and Templates ===
 Contributors: extendify, richtabor, kbat82, clubkert, arturgrabo
-Tags: page builder, editor, patterns, drag-and-drop, blocks, visual editor, wysiwyg, design, website builder, landing page builder, front-end builder
+Tags: templates, patterns, layouts, blocks, gutenberg
 Requires at least: 5.4
 Tested up to: 5.9.0
-Stable tag: 0.4.0
+Stable tag: 0.6.0
 Requires PHP: 5.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+The best WordPress templates, pattern, and layout library with 1,000+ designs built for the Gutenberg block editor.
+
+== Description ==
 
 Extendify is the platform of site design and creation tools for people that want to build a beautiful WordPress website with a library of patterns and full page layouts for the Gutenberg block editor.
 
@@ -119,6 +123,17 @@ Nope! Extendify imports lightweight block-based content that is served directly 
 3. The Extendify library, as seen with the Twenty Twenty Two block theme
 
 == Changelog ==
+
+= 0.6.0 - 2022-03-08 =
+- Add new design categories
+- Add ability to open library via search param
+- Tweak get_plugins call to not cache results
+- Improve toolbar on mobile
+
+= 0.5.0 - 2022-02-22 =
+- Add support for inverted style patterns
+- Improve library loading time
+- Add pattern library variants to open the library
 
 = 0.4.0 - 2022-02-08 =
 - Enhance layout view with autoscroll

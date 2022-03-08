@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n'
 import { Modal, Button, Notice } from '@wordpress/components'
 import { render } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
 import RequiredPluginsModal from './RequiredPluginsModal'
 
 export default function ErrorInstalling({ msg }) {

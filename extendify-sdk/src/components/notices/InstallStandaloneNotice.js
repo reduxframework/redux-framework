@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n'
 import { Button } from '@wordpress/components'
 import { useState } from '@wordpress/element'
-import { Plugins } from '../../api/Plugins'
+import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
-import { General } from '../../api/General'
-import { useUserStore } from '../../state/User'
+import { General } from '@extendify/api/General'
+import { Plugins } from '@extendify/api/Plugins'
+import { useUserStore } from '@extendify/state/User'
 
 export const InstallStandaloneNotice = () => {
     const [text, setText] = useState('')
@@ -40,11 +40,11 @@ export const InstallStandaloneNotice = () => {
             <span className="px-2 opacity-50" aria-hidden="true">
                 &#124;
             </span>
-            <div className="inline-flex space-x-2 items-center relative">
+            <div className="relative inline-flex items-center space-x-2">
                 <Button
                     variant="link"
                     className={classNames(
-                        'text-black underline hover:no-underline p-0 h-auto',
+                        'h-auto p-0 text-black underline hover:no-underline',
                         { 'opacity-0': text },
                     )}
                     onClick={installAndActivate}>
@@ -55,7 +55,7 @@ export const InstallStandaloneNotice = () => {
                     <Button
                         variant="link"
                         disabled={true}
-                        className="text-black underline hover:no-underline p-0 h-auto absolute left-0 opacity-100"
+                        className="absolute left-0 h-auto p-0 text-black underline opacity-100 hover:no-underline"
                         onClick={() => {}}>
                         {text}
                     </Button>

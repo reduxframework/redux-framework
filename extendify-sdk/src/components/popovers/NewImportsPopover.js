@@ -1,7 +1,7 @@
 import { Button, Popover } from '@wordpress/components'
-import { Icon, close } from '@wordpress/icons'
-import { __, sprintf } from '@wordpress/i18n'
 import { safeHTML } from '@wordpress/dom'
+import { __, sprintf } from '@wordpress/i18n'
+import { Icon, close } from '@wordpress/icons'
 
 export const NewImportsPopover = ({
     anchorRef,

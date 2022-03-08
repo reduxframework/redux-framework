@@ -1,9 +1,10 @@
 import { Icon } from '@wordpress/components'
 import { Button } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
 import { useRef } from '@wordpress/element'
-import { SplitModal } from './SplitModal'
-import SettingsModal from './SettingsModal'
+import { __ } from '@wordpress/i18n'
+import { General } from '@extendify/api/General'
+import { useGlobalStore } from '@extendify/state/GlobalState'
+import { useUserStore } from '@extendify/state/User'
 import {
     growthArrow,
     patterns,
@@ -13,7 +14,8 @@ import {
     brandLogo,
     diamond,
 } from '../icons'
-import { useGlobalStore } from '../../state/GlobalState'
+import { SplitModal } from './SplitModal'
+import { SettingsModal } from './settings/SettingsModal'
 
 export const NoImportModal = () => {
     const pushModal = useGlobalStore((state) => state.pushModal)
@@ -24,11 +26,11 @@ export const NoImportModal = () => {
             ref={initialFocus}
             leftContainerBgColor="bg-white">
             <div>
-                <div className="flex space-x-2 items-center mb-5 text-extendify-black">
+                <div className="mb-5 flex items-center space-x-2 text-extendify-black">
                     {brandLogo}
                 </div>
 
-                <h3 className="text-xl mt-0">
+                <h3 className="mt-0 text-xl">
                     {__("You're out of imports", 'extendify')}
                 </h3>
                 <p className="text-sm text-black">
@@ -41,24 +43,31 @@ export const NoImportModal = () => {
                     <a
                         target="_blank"
                         ref={initialFocus}
-                        className="button-extendify-main inline-flex mt-2 px-4 py-3 button-focus justify-center"
+                        className="button-extendify-main button-focus mt-2 inline-flex justify-center px-4 py-3"
                         style={{ minWidth: '225px' }}
-                        href={`https://extendify.com/pricing/?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=no-imports-modal&utm_content=get-unlimited-imports`}
+                        href={`https://extendify.com/pricing/?utm_source=${
+                            window.extendifyData.sdk_partner
+                        }&utm_medium=library&utm_campaign=no-imports-modal&utm_content=get-unlimited-imports&utm_group=${useUserStore
+                            .getState()
+                            .activeTestGroupsUtmValue()}`}
+                        onClick={async () =>
+                            await General.ping('no-imports-modal-click')
+                        }
                         rel="noreferrer">
                         {__('Get Unlimited Imports', 'extendify')}
                         <Icon icon={growthArrow} size={24} className="-mr-1" />
                     </a>
-                    <p className="text-sm text-extendify-gray mb-0 text-left">
+                    <p className="mb-0 text-left text-sm text-extendify-gray">
                         {__('Have an account?', 'extendify')}
                         <Button
                             onClick={() => pushModal(<SettingsModal />)}
-                            className="underline hover:no-underline text-sm text-extendify-gray pl-2">
+                            className="pl-2 text-sm text-extendify-gray underline hover:no-underline">
                             {__('Sign in', 'extendify')}
                         </Button>
                     </p>
                 </div>
             </div>
-            <div className="space-y-2 flex flex-col justify-center p-10 text-black h-full">
+            <div className="flex h-full flex-col justify-center space-y-2 p-10 text-black">
                 <div className="flex items-center space-x-3">
                     <Icon icon={patterns} size={24} />
                     <span className="text-sm leading-none">

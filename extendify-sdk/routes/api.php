@@ -31,6 +31,7 @@ use Extendify\Library\Controllers\TemplateController;
 
         ApiRouter::get('/user', [UserController::class, 'show']);
         ApiRouter::post('/user', [UserController::class, 'store']);
+        ApiRouter::post('/clear-user', [UserController::class, 'delete']);
         ApiRouter::get('/user-meta', [UserController::class, 'meta']);
         ApiRouter::get('/max-free-imports', [UserController::class, 'maxImports']);
 

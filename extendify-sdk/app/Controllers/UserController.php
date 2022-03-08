@@ -56,6 +56,17 @@ class UserController
     }
 
     /**
+     * Delete the data
+     *
+     * @return array
+     */
+    public static function delete()
+    {
+        \delete_user_meta(\get_current_user_id(), 'extendifysdk_user_data');
+        return new \WP_REST_Response(User::state());
+    }
+
+    /**
      * Sign up the user to the mailing list.
      *
      * @param \WP_REST_Request $request - The request.
