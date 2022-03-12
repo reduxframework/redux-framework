@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once dirname( __FILE__ ) . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.3.12';
+Redux_Core::$version    = '4.3.12.1';
 Redux_Core::$redux_path = dirname( __FILE__ );
 Redux_Core::instance();
 
@@ -667,7 +667,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+		public function init_enqueue() {
 			$this->enqueue_class->init();
 		}
 

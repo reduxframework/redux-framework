@@ -449,14 +449,14 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					$section['desc'] = $section['subtitle'];
 				}
 
-				// Let's make a section ID from the title.
-				if ( empty( $section['id'] ) ) {
-					$section['id'] = Redux_Core::strtolower( str_replace( ' ', '', $section['title'] ) );
-				}
-
 				// No title is present, let's show what section is missing a title.
 				if ( ! isset( $section['title'] ) ) {
 					$section['title'] = '';
+				}
+
+				// Let's make a section ID from the title.
+				if ( empty( $section['id'] ) ) {
+					$section['id'] = Redux_Core::strtolower( str_replace( ' ', '', $section['title'] ) );
 				}
 
 				// Let's set a default priority.

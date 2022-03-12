@@ -931,7 +931,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 									$this->boxes[ $key ]['sections'][ $sk ]['fields'][ $k ] = $field;
 								}
 
-								$this->parent->field_default_values( $field );
+								$this->parent->options_defaults_class->field_default_values( $this->parent->args['opt_name'], $field );
 							}
 						}
 					}
@@ -1425,7 +1425,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/metaboxes/save/before_validate', $to_save, $to_compare, $this->sections );
 
-			$validate = $this->parent->_validate_values( $to_save, $to_compare, $this->sections );
+			$validate = $this->parent->validate_class->validate( $to_save, $to_compare, $this->sections );
 
 			// Validate fields (if needed).
 			foreach ( $to_save as $key => $value ) {

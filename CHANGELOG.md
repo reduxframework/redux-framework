@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.12.1
+* Modified: Customizer code to eliminate `init()` error.
+
 ## 4.3.12
 * Updated: Vendor libraries.
 * Updated: Extendify Library.

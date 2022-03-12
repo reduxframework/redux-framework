@@ -202,7 +202,7 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 				wp_enqueue_style( 'redux-color-picker-css' );
 
 				wp_enqueue_style(
-					'redux-field-link_color-js',
+					'redux-field-link_color-css',
 					Redux_Core::$url . 'inc/fields/link_color/redux-link-color.css',
 					array(),
 					$this->timestamp
