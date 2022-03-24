@@ -44,6 +44,10 @@
 				optName = el.parents().find( '.redux-ajax-security' ).data( 'opt-name' );
 
 				if ( undefined === optName ) {
+					optName = el.parents( '.redux-container' ).data( 'opt-name' );
+				}
+
+				if ( undefined === optName ) {
 					reduxObject = redux;
 				} else {
 					reduxObject = redux.optName;

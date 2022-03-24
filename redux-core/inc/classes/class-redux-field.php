@@ -174,6 +174,10 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 			$this->field  = $field;
 			$this->value  = $value;
 
+			if ( empty( $this->field ) ) {
+				return;
+			}
+
 			$this->select2_config = array(
 				'width'      => 'resolve',
 				'allowClear' => false,

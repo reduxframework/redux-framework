@@ -65,11 +65,11 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		/**
 		 * Adds the appropriate mime types to WordPress
 		 *
-		 * @param array $existing_mimes .
+		 * @param array|null $existing_mimes .
 		 *
 		 * @return array
 		 */
-		public function custom_upload_mimes( array $existing_mimes = array() ): array {
+		public function custom_upload_mimes( ?array $existing_mimes = array() ): array {
 			$existing_mimes['redux'] = 'application/redux';
 
 			return $existing_mimes;
