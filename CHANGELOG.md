@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.12.2
+* Fixed: `required` functionality within the `repeater` field.
+
 ## 4.3.12.1
 * Modified: Customizer code to eliminate `init()` error.
 

@@ -643,7 +643,7 @@ function translate() {
 }
 
 function installFontawesome( done ){
-	composer();
+	composer(  'update' );
 
 	del([
 		'redux-core/assets/font-awesome/*.*',

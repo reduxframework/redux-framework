@@ -41,7 +41,7 @@
 					parent = el.parents( '.redux-field-container:first' );
 				}
 
-				optName = el.parents( '.redux-ajax-security' ).data( 'opt-name' );
+				optName = el.parents().find( '.redux-ajax-security' ).data( 'opt-name' );
 
 				if ( undefined === optName ) {
 					reduxObject = redux;
@@ -276,7 +276,7 @@
 		if ( true === panelsClosed ) {
 			active = Boolean( false );
 		} else {
-			active = parseInt( 0 );
+			active = 0;
 		}
 
 		accordion = el.find( '.redux-repeater-accordion' ).accordion(
@@ -285,7 +285,7 @@
 				collapsible: true,
 				active: active,
 
-				beforeActivate: function( event, ui ) {
+				beforeActivate: function( event ) {
 					var a;
 					var relName;
 					var optName;
@@ -299,7 +299,7 @@
 					optName = relName.substr( 0, bracket );
 
 					if ( 'function' === typeof reduxRepeaterAccordionBeforeActivate ) {
-						reduxRepeaterAccordionBeforeActivate( $( this ), el, event, ui.optName );
+						reduxRepeaterAccordionBeforeActivate( $( this ), el, event, optName );
 					}
 				},
 				activate: function( event, ui ) {
@@ -315,7 +315,7 @@
 						relName = a.attr( 'data-name' );
 						bracket = relName.indexOf( '[' );
 
-						optName = relName.substr( 0, bracket );
+						optName = relName.substring( 0, bracket );
 
 						reduxRepeaterAccordionActivate( $( this ), el, event, ui, optName );
 					}
@@ -417,15 +417,17 @@
 				function( i, parentData ) {
 					var parentValue;
 					var value;
+					var id;
 
-					i = null;
+					i  = null;
+					id = $( '#' + reduxObject.args.opt_name + '-' + parentData.parent + '-' + index );
 
-					if ( $( '#' + reduxObject.args.opt_name + '-' + parentData.parent + '-' + index ).hasClass( 'hide' ) ) {
+					if ( id.hasClass( 'hide' ) ) {
 						show = false;
 						return false;
 					} else {
 						if ( false !== show ) {
-							value = $( '#' + reduxObject.args.opt_name + '-' + parentData.parent + '-' + index ).serializeForm();
+							value = id.serializeForm();
 
 							if ( null !== value && 'object' === typeof value && value.hasOwnProperty( reduxObject.args.opt_name ) ) {
 								value = value[reduxObject.args.opt_name][parentData.parent][index];
@@ -514,7 +516,7 @@
 			var idNoIndex;
 			var index;
 
-			if ( $( variable ).hasClass( 'repeater' ) ) {
+			if ( $( variable ).hasClass( 'in-repeater' ) ) {
 				current   = $( variable );
 				id        = current.parents( '.redux-field:first' ).data( 'id' );
 				container = current.parents( '.redux-field-container:first' );
@@ -524,7 +526,7 @@
 				index     = id.substring( dash + 1 );
 
 				$.each(
-					reduxObject.optName.required[idNoIndex],
+					reduxObject.required[idNoIndex],
 					function( child, dependents ) {
 						var current;
 						var show;
