@@ -648,6 +648,7 @@ function installFontawesome( done ){
 	del([
 		'redux-core/assets/font-awesome/*.*',
 		'redux-core/assets/font-awesome/js',
+		'redux-core/assets/font-awesome/metadata',
 		'redux-core/assets/font-awesome/js-packages',
 		'redux-core/assets/font-awesome/less',
 		'redux-core/assets/font-awesome/otfs',
