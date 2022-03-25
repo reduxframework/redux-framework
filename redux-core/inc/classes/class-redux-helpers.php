@@ -851,25 +851,36 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @since ReduxFramework 3.0.4
 		 */
 		public static function hex2rgba( string $hex, string $alpha = '' ): string {
-			$hex = str_replace( '#', '', $hex );
-			if ( 3 === strlen( $hex ) ) {
-				$r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
-				$g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
-				$b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
-			} else {
-				$r = hexdec( substr( $hex, 0, 2 ) );
-				$g = hexdec( substr( $hex, 2, 2 ) );
-				$b = hexdec( substr( $hex, 4, 2 ) );
-			}
-			$rgb = $r . ',' . $g . ',' . $b;
+			$hex = ltrim( $hex, '#' );
+			$hex = sanitize_hex_color_no_hash( $hex );
 
-			if ( '' === $alpha ) {
-				return $rgb;
-			} else {
-				$alpha = floatval( $alpha );
-
-				return 'rgba(' . $rgb . ',' . $alpha . ')';
+			if ( '' === $hex ) {
+				return '';
 			}
+
+			if ( ctype_xdigit( $hex ) ) {
+				if ( 3 === strlen( $hex ) ) {
+					$r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
+					$g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
+					$b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
+				} else {
+					$r = hexdec( substr( $hex, 0, 2 ) );
+					$g = hexdec( substr( $hex, 2, 2 ) );
+					$b = hexdec( substr( $hex, 4, 2 ) );
+				}
+
+				$rgb = $r . ',' . $g . ',' . $b;
+
+				if ( '' === $alpha ) {
+					return $rgb;
+				} else {
+					$alpha = floatval( $alpha );
+
+					return 'rgba(' . $rgb . ',' . $alpha . ')';
+				}
+			}
+
+			return '';
 		}
 
 		/**
