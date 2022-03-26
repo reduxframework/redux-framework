@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.12.4
+* Modified: Additional sanitizing on color hex values.
+
 ## 4.3.12.3
 * Fixed: Type error in `import_export` field.  Additional `repeater` JS fix.
 

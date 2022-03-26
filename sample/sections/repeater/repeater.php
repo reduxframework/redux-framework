@@ -32,10 +32,27 @@ Redux::set_section(
 						'placeholder' => esc_html__( 'Title', 'your-textdomain-here' ),
 					),
 					array(
+						'id'       => 'mtb-select',
+						'type'     => 'select',
+						'multi'    => false,
+						'title'    => esc_html__( 'one select', 'your-textdomain-here' ),
+						'options'  => array(
+							'none' => 'none',
+							'custom' => 'custom',),
+						'default'  => 'none',
+					),
+					array(
+						'required' => array( 'mtb-select', '=', 'custom' ),
+						'id'        => 'mtb-text',
+						'type'      => 'text',
+						'title'     => 'one text',
+					),
+					array(
 						'id'          => 'textarea_field',
 						'type'        => 'textarea',
 						'placeholder' => esc_html__( 'Text Field', 'your-textdomain-here' ),
 						'default'     => 'Text Field here',
+						'title'       => esc_html__( 'Title', 'your-domain-here' ),
 					),
 					array(
 						'id'          => 'select_field',
@@ -57,6 +74,7 @@ Redux::set_section(
 					),
 					array(
 						'id'          => 'text_field',
+						'title'       => esc_html__( 'Text Field', 'your-textdomain-here' ),
 						'type'        => 'text',
 						'placeholder' => esc_html__( 'Text Field', 'your-textdomain-here' ),
 						'required'    => array( 'switch_field', '=', false ),

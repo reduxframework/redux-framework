@@ -421,17 +421,17 @@
 				function( i, parentData ) {
 					var parentValue;
 					var value;
-					var id;
+					var idx;
 
-					i  = null;
-					id = $( '#' + reduxObject.args.opt_name + '-' + parentData.parent + '-' + index );
+					i   = null;
+					idx = $( '#' + reduxObject.args.opt_name + '-' + parentData.parent + '-' + index );
 
-					if ( id.hasClass( 'hide' ) ) {
+					if ( idx.hasClass( 'hide' ) ) {
 						show = false;
 						return false;
 					} else {
 						if ( false !== show ) {
-							value = id.serializeForm();
+							value = idx.serializeForm();
 
 							if ( null !== value && 'object' === typeof value && value.hasOwnProperty( reduxObject.args.opt_name ) ) {
 								value = value[reduxObject.args.opt_name][parentData.parent][index];
