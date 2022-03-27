@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.12.5
+* Fixed: Filter out bad default values for `color_rgba` field.
+* Fixed: jQuery deprecation notice.
+
 ## 4.3.12.4
 * Modified: Additional sanitizing on color hex values.
 
