@@ -9,6 +9,22 @@
 	redux.field_objects          = redux.field_objects || {};
 	redux.field_objects.repeater = redux.field_objects.repeater || {};
 
+	redux.field_objects.repeater.getOptName = function( el ){
+		var optName;
+
+		optName = el.parents().find( '.redux-ajax-security' ).data( 'opt-name' );
+
+		if ( undefined === optName ) {
+			optName = el.parents( '.redux-container' ).data( 'opt-name' );
+		}
+
+		if ( undefined === optName ) {
+			return redux;
+		} else {
+			return redux.optName;
+		}
+	};
+
 	redux.field_objects.repeater.init = function( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-repeater:visible' );
@@ -16,7 +32,6 @@
 
 		$( selector ).each(
 			function() {
-				var optName;
 				var gid;
 				var blank;
 
@@ -41,17 +56,7 @@
 					parent = el.parents( '.redux-field-container:first' );
 				}
 
-				optName = el.parents().find( '.redux-ajax-security' ).data( 'opt-name' );
-
-				if ( undefined === optName ) {
-					optName = el.parents( '.redux-container' ).data( 'opt-name' );
-				}
-
-				if ( undefined === optName ) {
-					reduxObject = redux;
-				} else {
-					reduxObject = redux.optName;
-				}
+				reduxObject = redux.field_objects.repeater.getOptName( el );
 
 				gid   = parent.attr( 'data-id' );
 				blank = el.find( '.redux-repeater-accordion-repeater:last-child' );
@@ -300,7 +305,7 @@
 
 					bracket = relName.indexOf( '[' );
 
-					optName = relName.substr( 0, bracket );
+					optName = relName.substring( 0, bracket );
 
 					if ( 'function' === typeof reduxRepeaterAccordionBeforeActivate ) {
 						reduxRepeaterAccordionBeforeActivate( $( this ), el, event, optName );
@@ -463,9 +468,14 @@
 		$.redux,
 		'required',
 		function( returnValue, originalFunction ) {
+			var reduxObj;
+
+			reduxObj = redux.field_objects.repeater.getOptName( $( '.redux-container-repeater' ) );
+
 			$.each(
-				redux.folds,
+				reduxObj.folds,
 				function( i, v ) {
+
 					var fieldset;
 					var div;
 					var rawTable;
@@ -474,12 +484,13 @@
 						i = i.replace( '-99999', '' );
 					}
 
-					fieldset = $( '[id^=' + redux.args.opt_name + '-' + i + ']' );
+					fieldset = $( '[id^=' + reduxObj.args.opt_name + '-' + i + ']' );
 
 					fieldset.addClass( 'fold' );
 
 					if ( 'hide' === v ) {
 						fieldset.addClass( 'hide' );
+						fieldset.prev( 'h4' ).addClass( 'hide' );
 
 						if ( fieldset.hasClass( 'redux-container-section' ) ) {
 							div = $( '#section-' + i );
@@ -553,6 +564,8 @@
 								300,
 								function() {
 									$( this ).removeClass( 'hide' );
+									$( this ).prev( 'h4' ).removeClass( 'hide' );
+
 									if ( reduxObject.required.hasOwnProperty( child ) ) {
 										$.redux.check_dependencies( $( '#' + reduxObject.args.opt_name + '-' + child ).children().first() );
 									}
@@ -565,6 +578,8 @@
 								100,
 								function() {
 									$( this ).addClass( 'hide' );
+									$( this ).prev( 'h4' ).addClass( 'hide' );
+
 									if ( reduxObject.required.hasOwnProperty( child ) ) {
 										$.redux.required_recursive_hide( child );
 									}
