@@ -78,6 +78,10 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 				unset( $this->field['subfields'] );
 			}
 
+			if ( $this->field['fields'] ) {
+				// var_dump($this->field['fields']);
+			}
+
 			echo '<div class="redux-repeater-accordion" data-id="' . esc_attr( $this->field['id'] ) . '" data-panels-closed="' . esc_attr( $this->field['panels_closed'] ) . '">';
 
 			$x = 0;
@@ -155,7 +159,11 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 							$field['class'] .= ' bind_title';
 						}
 
-						$this->output_field( $field, $x );
+						if ( 'social_profiles' === $field['type'] || 'color_scheme' === $field['type'] ) {
+							echo esc_html__( 'The', 'redux-framework' ) . ' <code>' . esc_html( $field['type'] ) . '</code> ' . esc_html__( 'field is not supported within the Repeater field.', 'redux-framework' );
+						} else {
+							$this->output_field( $field, $x );
+						}
 					}
 
 					if ( ! isset( $this->field['static'] ) && empty( $this->field['static'] ) ) {
