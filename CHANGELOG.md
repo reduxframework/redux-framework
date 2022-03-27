@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.12.6
+* Fixed: (I hope) -`required` functionality within the `repeater` field.
+
 ## 4.3.12.5
 * Fixed: Filter out bad default values for `color_rgba` field.
 * Fixed: jQuery deprecation notice.
