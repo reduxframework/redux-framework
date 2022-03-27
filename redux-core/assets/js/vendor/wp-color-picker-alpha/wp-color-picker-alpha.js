@@ -613,7 +613,7 @@
 			 */
 			self.button.on( 'click', function( event ) {
 				if ( $( this ).hasClass( 'wp-picker-default' ) ) {
-					el.val( self.options.defaultColor ).change();
+					el.val( self.options.defaultColor ).trigger( 'change' );
 				} else if ( $( this ).hasClass( 'wp-picker-clear' ) ) {
 					el.val( '' );
 					if ( isDeprecated ) {
