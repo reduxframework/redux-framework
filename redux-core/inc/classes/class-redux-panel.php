@@ -400,7 +400,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 
 					if ( $core_version && $developer_version && version_compare( $developer_version, $core_version, '<' ) && isset( $this->parent->args['dev_mode'] ) && ! empty( $this->parent->args['dev_mode'] ) ) {
 						?>
-						<div id="message" class="error redux-message">
+						<div id="message" class="error redux-message" style="display:block!important">
 							<p>
 								<strong><?php esc_html_e( 'Your panel has bundled copies of Redux Framework template files that are outdated!', 'redux-framework' ); ?></strong>&nbsp;&nbsp;<?php esc_html_e( 'Please update them now as functionality issues could arise.', 'redux-framework' ); ?>
 							</p>
