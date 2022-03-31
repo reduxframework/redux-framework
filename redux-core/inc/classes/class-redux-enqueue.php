@@ -205,14 +205,14 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'font-awesome',
 				Redux_Core::$url . 'assets/font-awesome/css/all.min.css',
 				array(),
-				'6.0.0'
+				'6.1.1'
 			);
 
 			wp_register_style(
 				'font-awesome-4-shims',
 				Redux_Core::$url . 'assets/font-awesome/css/v4-shims.min.css',
 				array(),
-				'6.0.0'
+				'6.1.1'
 			);
 
 			// *****************************************************************
