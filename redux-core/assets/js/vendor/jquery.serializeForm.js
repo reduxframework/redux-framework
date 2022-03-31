@@ -1,13 +1,11 @@
 // jscs:disable
 // jshint ignore: start
 
-/*
- * serializeForm
- * https://github.com/danheberden/serializeForm
- *
- * Copyright (c) 2012 Dan Heberden
- * Licensed under the MIT, GPL licenses.
- */
+/*! jquery-serializeForm - v1.2.1 - 2013-11-06
+ * http://danheberden.com/
+ * Copyright (c) 2013 Dan Heberden
+ * Licensed MIT
+**/
 (function( $ ) {
 	$.fn.serializeForm = function() {
 
@@ -33,9 +31,10 @@
 
 			// Ensure that only elements with valid `name` properties will be serialized.
 			if ( named[0] ) {
-				for ( var i = 0; i < cap; i ++ ) {
+				for ( var i = 0; i < cap; i++ ) {
 					// move down the tree - create objects or array if necessary.
-					lookup = lookup[named[i]] = lookup[named[i]] || ((named[i + 1] === "" || named[i + 1] === '0') ? [] : {});
+					lookup = lookup[named[i]] = lookup[named[i]] ||
+						((named[i + 1] === '' || named[i + 1] === '0') ? [] : {});
 				}
 
 				// at the end, push or assign the value.
