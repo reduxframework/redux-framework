@@ -16,7 +16,7 @@ Redux::set_section(
 		'desc'   => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/repeater.html" target="_blank">https://devs.redux.io/premium/repeater.html</a>',
 		'fields' => array(
 			array(
-				'id'          => 'repeater-field-id2',
+				'id'          => 'repeater-field-id',
 				'type'        => 'repeater',
 				'title'       => esc_html__( 'Repeater Demo', 'your-textdomain-here' ),
 				'full_width'  => true,

@@ -919,7 +919,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 									continue;
 								}
 
-								if ( in_array( $field['type'], array( 'ace_editor' ), true ) && isset( $field['options'] ) ) {
+								if ( 'ace_editor' === $field['type'] && isset( $field['options'] ) ) {
 									$this->boxes[ $key ]['sections'][ $sk ]['fields'][ $k ]['args'] = $field['options'];
 									unset( $this->boxes[ $key ]['sections'][ $sk ]['fields'][ $k ]['options'] );
 								}
@@ -932,6 +932,14 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 								}
 
 								$this->parent->options_defaults_class->field_default_values( $this->parent->args['opt_name'], $field );
+
+								if ( 'repeater' === $field['type'] ) {
+									foreach ( $field['fields'] as $f ) {
+										$this->parent->options_defaults_class->field_default_values( $this->parent->args['opt_name'], $f, null, true );
+									}
+								}
+
+								$this->parent->options_defaults = $this->parent->options_defaults_class->options_defaults;
 							}
 						}
 					}

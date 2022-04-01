@@ -9,7 +9,7 @@
 	redux.field_objects          = redux.field_objects || {};
 	redux.field_objects.repeater = redux.field_objects.repeater || {};
 
-	redux.field_objects.repeater.getOptName = function( el ){
+	redux.field_objects.repeater.getOptName = function( el ) {
 		var optName;
 
 		optName = el.parents().find( '.redux-ajax-security' ).data( 'opt-name' );
@@ -427,6 +427,7 @@
 					var parentValue;
 					var value;
 					var idx;
+					var x;
 
 					i   = null;
 					idx = $( '#' + reduxObject.args.opt_name + '-' + parentData.parent + '-' + index );
@@ -439,7 +440,13 @@
 							value = idx.serializeForm();
 
 							if ( null !== value && 'object' === typeof value && value.hasOwnProperty( reduxObject.args.opt_name ) ) {
-								value = value[reduxObject.args.opt_name][parentData.parent][index];
+								if ( undefined === value[reduxObject.args.opt_name][parentData.parent] ) {
+									x = Object.values( value[reduxObject.args.opt_name] )[0][parentData.parent];
+								} else {
+									x = value[reduxObject.args.opt_name][parentData.parent];
+								}
+
+								value = x[index];
 							}
 
 							if ( $( '#' + reduxObject.args.opt_name + '-' + id ).hasClass( 'redux-container-media' ) ) {
@@ -490,7 +497,7 @@
 
 					if ( 'hide' === v ) {
 						fieldset.addClass( 'hide' );
-						fieldset.prev( 'h4' ).addClass( 'hide' );
+						fieldset.prevUntil( 'fieldset' ).addClass( 'hide' );
 
 						if ( fieldset.hasClass( 'redux-container-section' ) ) {
 							div = $( '#section-' + i );
@@ -564,7 +571,7 @@
 								300,
 								function() {
 									$( this ).removeClass( 'hide' );
-									$( this ).prev( 'h4' ).removeClass( 'hide' );
+									$( this ).prevUntil( 'fieldset' ).removeClass( 'hide' );
 
 									if ( reduxObject.required.hasOwnProperty( child ) ) {
 										$.redux.check_dependencies( $( '#' + reduxObject.args.opt_name + '-' + child ).children().first() );
@@ -578,7 +585,7 @@
 								100,
 								function() {
 									$( this ).addClass( 'hide' );
-									$( this ).prev( 'h4' ).addClass( 'hide' );
+									$( this ).prevUntil( 'fieldset' ).addClass( 'hide' );
 
 									if ( reduxObject.required.hasOwnProperty( child ) ) {
 										$.redux.required_recursive_hide( child );

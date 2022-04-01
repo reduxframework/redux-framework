@@ -454,7 +454,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 
 			$links[] = sprintf(
 				'<a href="%1$s" target="_blank">%2$s</a>',
-				esc_url( $this->get_site_utm_url( '', 'plugins-page','', 'go-pro' ) ),
+				esc_url( $this->get_site_utm_url( '', 'plugins-page', '', 'go-pro' ) ),
 				sprintf(
 					'<span style="font-weight: bold;">%s</span>',
 					__( 'Go Pro', 'redux-framework' )

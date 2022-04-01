@@ -31,6 +31,20 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		public $fields = array();
 
 		/**
+		 * Is repeater group flag.
+		 *
+		 * @var bool
+		 */
+		private $is_repeater_group = false;
+
+		/**
+		 * Repeater ID.
+		 *
+		 * @var bool
+		 */
+		private $repeater_id = '';
+
+		/**
 		 * Creates default options array.
 		 *
 		 * @param string $opt_name      Panel opt_name.
@@ -71,7 +85,13 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 								continue;
 							}
 
-							$this->field_default_values( $opt_name, $field, $wp_data_class );
+							$this->field_default_values( $opt_name, $field, $wp_data_class, false );
+
+							if ( 'repeater' === $field['type'] ) {
+								foreach ( $field['fields'] as $f ) {
+									$this->field_default_values( $opt_name, $f, $wp_data_class, true );
+								}
+							}
 						}
 					}
 				}
@@ -85,9 +105,17 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		 *
 		 * @param string $opt_name      Panel opt_name.
 		 * @param array  $field         Field array.
-		 * @param object $wp_data_class WordPress data class.
+		 * @param null   $wp_data_class WordPress data class.
+		 * @param bool   $is_repeater   Is repeater field.
 		 */
-		public function field_default_values( string $opt_name = '', array $field = array(), $wp_data_class = null ) {
+		public function field_default_values( string $opt_name = '', array $field = array(), $wp_data_class = null, bool $is_repeater = false ) {
+			if ( 'repeater' === $field['type'] ) {
+				if ( isset( $field['group_values'] ) && true === $field['group_values'] ) {
+					$this->is_repeater_group = true;
+					$this->repeater_id       = $field['id'];
+				}
+			}
+
 			if ( null === $wp_data_class && class_exists( 'Redux_WordPress_Data' ) && ! ( 'select' === $field['type'] && isset( $field['ajax'] ) && $field['ajax'] ) ) {
 				$wp_data_class = new Redux_WordPress_Data( $opt_name );
 			}
@@ -101,7 +129,18 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 
 			if ( isset( $field['default'] ) ) {
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->options_defaults[ $field['id'] ] = apply_filters( "redux/$opt_name/field/{$field['type']}/defaults", $field['default'], $field );
+				$def = apply_filters( "redux/$opt_name/field/{$field['type']}/defaults", $field['default'], $field );
+
+				if ( true === $is_repeater ) {
+					if ( true === $this->is_repeater_group ) {
+						$this->options_defaults[ $this->repeater_id ][ $field['id'] ] = array( $def );
+					} else {
+						$this->options_defaults[ $field['id'] ] = array( $def );
+					}
+				} else {
+					$this->options_defaults[ $field['id'] ] = $def;
+				}
+
 			} elseif ( ( 'ace_editor' !== $field['type'] ) && ! ( 'select' === $field['type'] && ! empty( $field['ajax'] ) ) ) {
 				if ( isset( $field['data'] ) ) {
 					if ( ! isset( $field['args'] ) ) {
@@ -138,13 +177,13 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 
 					if ( isset( $field['options'] ) ) {
 						if ( 'sortable' === $field['type'] ) {
-							$this->options_defaults[ $field['id'] ] = array();
+							$this->options_defaults[ $field['id'] ] = ( true === $is_repeater ) ? array( array() ) : array();
 						} elseif ( 'image_select' === $field['type'] ) {
-							$this->options_defaults[ $field['id'] ] = '';
+							$this->options_defaults[ $field['id'] ] = ( true === $is_repeater ) ? array( '' ) : '';
 						} elseif ( 'select' === $field['type'] ) {
-							$this->options_defaults[ $field['id'] ] = '';
+							$this->options_defaults[ $field['id'] ] = ( true === $is_repeater ) ? array( '' ) : '';
 						} else {
-							$this->options_defaults[ $field['id'] ] = $field['options'];
+							$this->options_defaults[ $field['id'] ] = ( true === $is_repeater ) ? array( $field['options'] ) : $field['options'];
 						}
 					}
 				}

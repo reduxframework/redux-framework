@@ -33,6 +33,18 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 			if ( ! isset( $this->field['bind_title'] ) && ! empty( $this->field['fields'] ) ) {
 				$this->field['bind_title'] = $this->field['fields'][0]['id'];
 			}
+
+			$default = array(
+				'group_values'  => false,
+				'item_name'     => '',
+				'bind_title'    => true,
+				'sortable'      => true,
+				'limit'         => 10,
+				'init_empty'    => false,
+				'panels_closed' => false,
+			);
+
+			$this->field = wp_parse_args( $this->field, $default );
 		}
 
 		/**
@@ -44,20 +56,9 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 		 * @return      void
 		 */
 		public function render() {
-			if ( ! isset( $this->field['item_name'] ) ) {
-				$this->field['item_name'] = '';
-			}
-
-			if ( ! isset( $this->field['limit'] ) ) {
-				$this->field['limit'] = 10;
-			}
-
 			if ( isset( $this->field['group_values'] ) && $this->field['group_values'] ) {
 				$this->repeater_values = '[' . $this->field['id'] . ']';
 			}
-
-			$this->field['init_empty']    = $this->field['init_empty'] ?? false;
-			$this->field['panels_closed'] = $this->field['panels_closed'] ?? false;
 
 			if ( false === $this->field['init_empty'] ) {
 				$title = '';
@@ -76,10 +77,6 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 			if ( isset( $this->field['subfields'] ) && empty( $this->field['fields'] ) ) {
 				$this->field['fields'] = $this->field['subfields'];
 				unset( $this->field['subfields'] );
-			}
-
-			if ( $this->field['fields'] ) {
-				// var_dump($this->field['fields']);
 			}
 
 			echo '<div class="redux-repeater-accordion" data-id="' . esc_attr( $this->field['id'] ) . '" data-panels-closed="' . esc_attr( $this->field['panels_closed'] ) . '">';
@@ -197,7 +194,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					echo '<table style="margin-top: 0;" class="redux-repeater-accordion redux-repeater form-table no-border">';
 					echo '<fieldset class="redux-field" data-id="' . esc_attr( $this->field['id'] ) . '">';
 
-					if ( ! isset( $this->value['redux_repeater_data'][ $x ]['title'] ) && is_array( $this->value ) && is_array( $this->value['redux_repeater_data'] ) ) {
+					if ( ! isset( $this->value['redux_repeater_data'][ $x ]['title'] ) && is_array( $this->value ) && isset( $this->value['redux_repeater_data'] ) && is_array( $this->value['redux_repeater_data'] ) ) {
 						$this->value['redux_repeater_data'][ $x ]['title'] = null;
 					}
 
@@ -308,7 +305,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 			$field['id']          = $field['id'] . '-' . $x;
 			$field['name']        = $this->parent->args['opt_name'] . $this->repeater_values . '[' . $orig_field_id . ']';
 			$field['name_suffix'] = '[' . $x . ']';
-			$field['class']       = 'in-repeater';
+			$field['class']      .= ' in-repeater';
 			$field['repeater_id'] = $orig_field_id;
 
 			if ( isset( $field['options'] ) ) {
@@ -331,9 +328,9 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 			$default = $field['default'] ?? '';
 
 			if ( ! empty( $this->repeater_values ) ) {
-				$value = ! isset( $this->parent->options[ $this->field['id'] ][ $orig_field_id ][ $x ] ) ? $default : $this->parent->options[ $this->field['id'] ][ $orig_field_id ][ $x ];
+				$value = empty( $this->parent->options[ $this->field['id'] ][ $orig_field_id ][ $x ] ) ? $default : $this->parent->options[ $this->field['id'] ][ $orig_field_id ][ $x ];
 			} else {
-				$value = ! isset( $this->parent->options[ $orig_field_id ][ $x ] ) ? $default : $this->parent->options[ $orig_field_id ][ $x ];
+				$value = empty( $this->parent->options[ $orig_field_id ][ $x ] ) ? $default : $this->parent->options[ $orig_field_id ][ $x ];
 			}
 
 			ob_start();
