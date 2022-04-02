@@ -156,7 +156,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 							$field['class'] .= ' bind_title';
 						}
 
-						if ( 'social_profiles' === $field['type'] || 'color_scheme' === $field['type'] ) {
+						if ( 'repeater' === $field['type'] || 'social_profiles' === $field['type'] || 'color_scheme' === $field['type'] ) {
 							echo esc_html__( 'The', 'redux-framework' ) . ' <code>' . esc_html( $field['type'] ) . '</code> ' . esc_html__( 'field is not supported within the Repeater field.', 'redux-framework' );
 						} else {
 							$this->output_field( $field, $x );
