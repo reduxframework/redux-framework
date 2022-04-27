@@ -21,8 +21,10 @@ import { useTemplatesStore } from '@extendify/state/Templates'
 export const GridView = memo(function GridView() {
     const isMounted = useIsMounted()
     const templates = useTemplatesStore((state) => state.templates)
+    const [templatesCount, setTemplatesCount] = useState(0)
     const appendTemplates = useTemplatesStore((state) => state.appendTemplates)
     const [serverError, setServerError] = useState('')
+    const retryOnce = useRef(false)
     const [nothingFound, setNothingFound] = useState(false)
     const [loading, setLoading] = useState(false)
     const [loadMoreRef, inView] = useInView()
@@ -66,7 +68,7 @@ export const GridView = memo(function GridView() {
         setServerError('')
         setNothingFound(false)
         const defaultError = __(
-            'Unknown error occured. Check browser console or contact support.',
+            'Unknown error occurred. Check browser console or contact support.',
             'extendify',
         )
         const args = { offset: nextPage.current }
@@ -97,7 +99,9 @@ export const GridView = memo(function GridView() {
                     useTemplatesStore.setState({
                         nextPage: response?.offset ?? '',
                     })
+                    // Essentially used to trigger the inview observer
                     appendTemplates(response.records)
+                    setTemplatesCount((c) => response.records.length + c)
                     setLoading(false)
                 }
             })
@@ -116,8 +120,18 @@ export const GridView = memo(function GridView() {
     }, [templates?.length, searchParamsRaw])
 
     useEffect(() => {
+        // If there's a server error, retry the request
+        // This is temporary until we upgrade the backend and add
+        // a tool like react query to handle this automatically
+        if (!retryOnce.current && serverError.length) {
+            retryOnce.current = true
+            fetchTemplates()
+        }
+    }, [serverError, fetchTemplates])
+
+    useEffect(() => {
         // This will check the URL for a pattern type and set that and remove it
-        // TODO: possibly refactor this if we exapnd it to support layouts
+        // TODO: possibly refactor this if we expand it to support layouts
         if (!open || !taxonomies?.patternType?.length) return
         const search = new URLSearchParams(window.location.search)
         if (!search.has('ext-patternType')) return
@@ -160,9 +174,9 @@ export const GridView = memo(function GridView() {
     // Fetches when the load more is in view
     useEffect(() => {
         nextPage.current && inView && fetchTemplates()
-    }, [inView, fetchTemplates, templates])
+    }, [inView, fetchTemplates, templatesCount])
 
-    if (serverError.length) {
+    if (serverError.length && retryOnce.current) {
         return (
             <div className="text-left">
                 <h2 className="text-left">{__('Server error', 'extendify')}</h2>
@@ -173,7 +187,10 @@ export const GridView = memo(function GridView() {
                 </code>
                 <Button
                     isTertiary
-                    onClick={() => resetTemplates() && fetchTemplates()}>
+                    onClick={() => {
+                        retryOnce.current = false
+                        fetchTemplates()
+                    }}>
                     {__('Press here to reload')}
                 </Button>
             </div>
@@ -225,19 +242,13 @@ export const GridView = memo(function GridView() {
 
             {nextPage.current && (
                 <>
-                    <div className="my-20">
+                    <div className="mt-8">
                         <Spinner />
                     </div>
-                    {/* This is a large div that, when in view, will trigger more patterns to load */}
                     <div
-                        className="relative flex -translate-y-full transform flex-col items-end justify-end"
+                        className="relative flex flex-col items-end justify-end -top-1/4 h-4"
                         ref={loadMoreRef}
-                        style={{
-                            zIndex: -1,
-                            marginBottom: '-100%',
-                            height:
-                                currentType === 'template' ? '150vh' : '75vh',
-                        }}
+                        style={{ zIndex: -1 }}
                     />
                 </>
             )}

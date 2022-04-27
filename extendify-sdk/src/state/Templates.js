@@ -6,7 +6,7 @@ import { useUserStore } from './User'
 
 const defaultCategoryForType = (tax) =>
     tax === 'siteType'
-        ? { slug: '', title: 'Unknown' }
+        ? { slug: '', title: 'Not set' }
         : { slug: '', title: 'Featured' }
 
 export const useTemplatesStore = create(
@@ -25,17 +25,20 @@ export const useTemplatesStore = create(
             get().setupDefaultTaxonomies()
             get().updateType(useGlobalStore.getState().currentType)
         },
-        appendTemplates: (templates) =>
-            set({
-                templates: [
-                    ...new Map(
-                        [...get().templates, ...templates].map((item) => [
-                            item.id,
-                            item,
-                        ]),
-                    ).values(),
-                ],
-            }),
+        appendTemplates: async (templates) => {
+            for (const template of templates) {
+                // If we already have this one, ignore it
+                if (get().templates.find((t) => t.id === template.id)) {
+                    continue
+                }
+                // Add some delay to prevent a batch update.
+                await new Promise((resolve) => setTimeout(resolve, 5))
+                requestAnimationFrame(() => {
+                    const templatesAll = [...get().templates, template]
+                    set({ templates: templatesAll })
+                })
+            }
+        },
         setupDefaultTaxonomies: () => {
             const taxonomies = useTaxonomyStore.getState().taxonomies
             let taxonomyDefaultState = Object.entries(taxonomies).reduce(

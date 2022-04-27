@@ -2,38 +2,39 @@ import { useEffect, useState, useRef, useMemo } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 import Fuse from 'fuse.js'
+import { useTestGroup } from '@extendify/hooks/useTestGroup'
 import { useTemplatesStore } from '@extendify/state/Templates'
-import { useUserStore } from '@extendify/state/User'
 
 const searchMemo = new Map()
 
 export const SiteTypeSelector = ({ value, setValue, terms }) => {
-    const preferredOptionsHistory = useUserStore(
-        (state) =>
-            state.preferredOptionsHistory?.siteType?.filter((t) => t.slug) ??
-            {},
-    )
     const searchParams = useTemplatesStore((state) => state.searchParams)
     const [expanded, setExpanded] = useState(false)
     const searchRef = useRef()
     const [fuzzy, setFuzzy] = useState({})
     const [tempValue, setTempValue] = useState('')
     const [visibleChoices, setVisibleChoices] = useState([])
+    const [showExamples, setShowExamples] = useState(true)
+    const openOrClosed = useTestGroup('sitetype-open-closed', ['A', 'B'])
+
+    const termsSorted = useMemo(() => {
+        return terms.sort((a, b) => {
+            if (a.slug < b.slug) return -1
+            if (a.slug > b.slug) return 1
+            return 0
+        })
+    }, [terms])
 
     const examples = useMemo(() => {
-        return terms
-            .filter((t) => t?.featured)
-            .sort((a, b) => {
-                if (a.slug < b.slug) return -1
-                if (a.slug > b.slug) return 1
-                return 0
-            })
-    }, [terms])
+        return termsSorted.filter((t) => t?.featured)
+    }, [termsSorted])
 
     const updateSearch = (term) => {
         setTempValue(term)
         filter(term)
     }
+
+    const toggleExamples = () => setShowExamples((show) => !show)
 
     const filter = (term = '') => {
         if (searchMemo.has(term)) {
@@ -48,40 +49,47 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
         setVisibleChoices(searchMemo.get(term))
     }
 
-    const showRecent = () =>
-        visibleChoices === examples &&
-        Object.keys(preferredOptionsHistory).length > 0
-    const unknown = value.slug === 'unknown' || !value?.slug
-
     useEffect(() => {
         setFuzzy(
             new Fuse(terms, {
                 keys: ['slug', 'title', 'keywords'],
-                minMatchCharLength: 2,
+                minMatchCharLength: 1,
                 threshold: 0.3,
             }),
         )
     }, [terms])
 
     useEffect(() => {
-        if (!tempValue?.length) setVisibleChoices(examples)
-    }, [examples, tempValue])
+        if (!tempValue?.length) {
+            setVisibleChoices(showExamples ? examples : termsSorted)
+        }
+    }, [examples, tempValue, termsSorted, showExamples])
 
     useEffect(() => {
         expanded && searchRef.current.focus()
     }, [expanded])
 
+    useEffect(() => {
+        if (openOrClosed === 'B' && !value.slug) {
+            setExpanded(true)
+        }
+    }, [openOrClosed, value.slug])
+
     const contentHeader = (description) => {
         return (
             <>
                 <span className="flex flex-col text-left">
-                    <span className="mb-1 text-sm">
+                    <span
+                        className={classNames('mb-1', {
+                            'text-base font-normal': !value.slug,
+                            'text-sm font-normal': value.slug?.length,
+                        })}>
                         {__('Site Type', 'extendify')}
                     </span>
                     <span className="text-xs font-light">{description}</span>
                 </span>
                 <span className="flex items-center space-x-4">
-                    {unknown && !expanded && (
+                    {!expanded && !value.slug && (
                         <svg
                             className="text-wp-alert-red"
                             aria-hidden="true"
@@ -107,7 +115,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                         </svg>
                     )}
                     <svg
-                        className={classNames('stroke-current text-gray-700', {
+                        className={classNames('stroke-current text-gray-900', {
                             '-translate-x-1 rotate-90 transform': expanded,
                         })}
                         aria-hidden="true"
@@ -127,16 +135,10 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
         )
     }
 
-    const choicesList = (choices, title = __('Suggestions', 'extendify')) => {
-        if (choices === examples) {
-            title = __('Examples', 'extendify')
-        }
+    const choicesList = (choices) => {
         return (
             <>
-                <h4 className="mt-4 mb-2 text-left text-xss font-medium uppercase text-gray-700">
-                    {title}
-                </h4>
-                <ul className="m-0">
+                <ul className="mt-4 mb-0">
                     {choices.map((item) => {
                         const label = item?.title ?? item.slug
                         const current =
@@ -149,7 +151,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                                 <button
                                     type="button"
                                     className={classNames(
-                                        'm-0 w-full cursor-pointer bg-transparent pl-0 text-left text-sm hover:text-wp-theme-500',
+                                        'm-0 w-full cursor-pointer bg-transparent pl-0 text-left text-sm font-normal hover:text-wp-theme-500',
                                         { 'text-gray-800': !current },
                                     )}
                                     onClick={() => {
@@ -167,74 +169,69 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     }
 
     return (
-        <div className="w-full rounded bg-extendify-transparent-black">
+        <div className="w-full rounded bg-gray-50 border border-gray-900">
             <button
                 type="button"
                 onClick={() => setExpanded((expanded) => !expanded)}
-                className="button-focus m-0 flex w-full cursor-pointer items-center justify-between rounded bg-transparent p-4 text-gray-800 hover:bg-extendify-transparent-black-100">
+                className="button-focus m-0 flex w-full cursor-pointer items-center justify-between rounded bg-transparent p-4 text-gray-800">
                 {contentHeader(
                     expanded
-                        ? __('What kind of site is this?', 'extendify')
-                        : value?.title ?? value.slug ?? 'Unknown',
+                        ? __('Choose a site industry', 'extendify')
+                        : value?.title ?? value.slug ?? 'Not set',
                 )}
             </button>
             {expanded && (
-                <div className="max-h-96 overflow-y-auto p-4 pt-0">
-                    <div className="relative my-2">
-                        <label htmlFor="site-type-search" className="sr-only">
-                            {__('Search', 'extendify')}
-                        </label>
-                        <input
-                            ref={searchRef}
-                            id="site-type-search"
-                            value={tempValue ?? ''}
-                            onChange={(event) =>
-                                updateSearch(event.target.value)
-                            }
-                            type="text"
-                            className="button-focus m-0 w-full rounded border-0 bg-white p-3.5 py-2.5 text-sm"
-                            placeholder={__('Search', 'extendify')}
-                        />
-                        <svg
-                            className="pointer-events-none absolute top-2 right-2 hidden lg:block"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="24"
-                            height="24"
-                            role="img"
-                            aria-hidden="true"
-                            focusable="false">
-                            <path d="M13.5 6C10.5 6 8 8.5 8 11.5c0 1.1.3 2.1.9 3l-3.4 3 1 1.1 3.4-2.9c1 .9 2.2 1.4 3.6 1.4 3 0 5.5-2.5 5.5-5.5C19 8.5 16.5 6 13.5 6zm0 9.5c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"></path>
-                        </svg>
+                <div className="max-h-96 overflow-y-auto px-4 py-0">
+                    <div className="sticky top-0 pt-0.5 pb-2 bg-gray-50">
+                        <div className="relative">
+                            <label
+                                htmlFor="site-type-search"
+                                className="sr-only">
+                                {__('Search', 'extendify')}
+                            </label>
+                            <input
+                                ref={searchRef}
+                                id="site-type-search"
+                                value={tempValue ?? ''}
+                                onChange={(event) =>
+                                    updateSearch(event.target.value)
+                                }
+                                type="text"
+                                className="button-focus m-0 w-full bg-white p-3.5 py-2.5 text-sm border border-gray-900"
+                                placeholder={__('Search', 'extendify')}
+                            />
+                            <svg
+                                className="pointer-events-none absolute top-2 right-2 hidden lg:block"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                height="24"
+                                role="img"
+                                aria-hidden="true"
+                                focusable="false">
+                                <path d="M13.5 6C10.5 6 8 8.5 8 11.5c0 1.1.3 2.1.9 3l-3.4 3 1 1.1 3.4-2.9c1 .9 2.2 1.4 3.6 1.4 3 0 5.5-2.5 5.5-5.5C19 8.5 16.5 6 13.5 6zm0 9.5c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"></path>
+                            </svg>
+                        </div>
                     </div>
                     {tempValue?.length > 1 && visibleChoices === examples && (
                         <p className="text-left">
                             {__('Nothing found...', 'extendify')}
                         </p>
                     )}
-                    {showRecent() && (
-                        <div className="mb-8">
-                            {choicesList(
-                                preferredOptionsHistory,
-                                __('Recent', 'extendify'),
-                            )}
-                        </div>
-                    )}
                     {visibleChoices?.length > 0 && (
                         <div>{choicesList(visibleChoices)}</div>
                     )}
-                    {unknown ? null : (
-                        <button
-                            type="button"
-                            className="mt-4 w-full cursor-pointer bg-transparent pl-0 text-left text-sm text-wp-theme-500 hover:text-wp-theme-500"
-                            onClick={() => {
-                                setExpanded(false)
-                                setValue({ slug: '', title: 'Unknown' })
-                            }}>
-                            {__('Reset', 'extendify')}
-                        </button>
-                    )}
                 </div>
+            )}
+            {tempValue || !expanded ? null : (
+                <button
+                    type="button"
+                    className="w-full cursor-pointer bg-transparent p-4 py-2 text-left text-sm text-wp-theme-500 hover:text-wp-theme-500"
+                    onClick={toggleExamples}>
+                    {showExamples
+                        ? __('Show all', 'extendify')
+                        : __('Close', 'extendify')}
+                </button>
             )}
         </div>
     )

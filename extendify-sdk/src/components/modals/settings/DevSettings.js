@@ -1,6 +1,7 @@
 import { Button } from '@wordpress/components'
 import { useState } from '@wordpress/element'
 import { useIsDevMode } from '@extendify/hooks/helpers'
+import { useGlobalStore } from '@extendify/state/GlobalState'
 import { useTaxonomyStore } from '@extendify/state/Taxonomies'
 import { useTemplatesStore } from '@extendify/state/Templates'
 import { useUserStore } from '@extendify/state/User'
@@ -24,6 +25,7 @@ export const DevSettings = () => {
             return
         }
         useUserStore.persist.clearStorage()
+        useGlobalStore.persist.clearStorage()
         await new Promise((resolve) => setTimeout(resolve, 1000))
         window.extendifyData._canRehydrate = true
         setCanHydrate(true)

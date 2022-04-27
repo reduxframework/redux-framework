@@ -111,7 +111,7 @@ class User
             $userData['state']['allowedImports'] = 0;
         }
 
-        // Similiar to above, this will give the user free imports once a month just for logging in.
+        // Similar to above, this will give the user free imports once a month just for logging in.
         if (!get_transient('extendify_free_extra_imports_check_' . $this->user->ID)) {
             set_transient('extendify_free_extra_imports_check_' . $this->user->ID, time(), strtotime('first day of next month', 0));
             $userData['state']['runningImports'] = 0;

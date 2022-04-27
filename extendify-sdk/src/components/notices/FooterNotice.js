@@ -44,6 +44,7 @@ export default function FooterNotice({ className = '' }) {
                 return (
                     // When checking promotions, use the key sent from the server
                     // to check whether it's been dismissed
+                    !useUserStore.getState().apiKey?.length &&
                     promotionData?.key &&
                     !useUserStore.getState().noticesDismissedAt[
                         promotionData.key
@@ -87,7 +88,7 @@ export default function FooterNotice({ className = '' }) {
         }
     }, [componentKey])
 
-    if (!hasNotice) {
+    if (!hasNotice || !Notice) {
         return null
     }
     return (

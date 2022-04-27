@@ -2,7 +2,7 @@ import { safeHTML } from '@wordpress/dom'
 import { useEffect, memo, useRef } from '@wordpress/element'
 import { __, _n, sprintf } from '@wordpress/i18n'
 import { Icon } from '@wordpress/icons'
-import classnames from 'classnames'
+import clasNames from 'classnames'
 import { General } from '@extendify/api/General'
 import { User as UserApi } from '@extendify/api/User'
 import { useUserStore } from '@extendify/state/User'
@@ -38,12 +38,12 @@ export const ImportCounter = memo(function ImportCounter() {
 
     return (
         // tabIndex for group focus animations
-        <div tabIndex="0" className="group relative">
+        <div tabIndex="0" className="group relative mb-5">
             <a
                 target="_blank"
                 ref={buttonRef}
                 rel="noreferrer"
-                className={classnames(
+                className={clasNames(
                     'button-focus hidden w-full justify-between rounded py-3 px-4 text-sm text-white no-underline sm:flex',
                     {
                         'bg-wp-theme-500 hover:bg-wp-theme-600': count > 0,

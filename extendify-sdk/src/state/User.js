@@ -20,6 +20,7 @@ const activeTests = {
     ['main-button-text']: '0002',
     ['default-or-alt-sitetype']: '0004',
     ['import-counter-type']: '0005',
+    ['sitetype-open-closed']: '0006',
 }
 
 export const useUserStore = create(
@@ -46,9 +47,6 @@ export const useUserStore = create(
                 taxonomies: {},
                 type: '',
                 search: '',
-            },
-            preferredOptionsHistory: {
-                siteType: [],
             },
             incrementImports: () => {
                 // If the user has freebie imports, use those first
@@ -114,7 +112,7 @@ export const useUserStore = create(
                     Number(get().totalAvailableImports()) -
                     Number(get().runningImports)
                 // If they have no allowed imports, this might be a first load
-                // where it's just fetching templates (and/or their max alllowed)
+                // where it's just fetching templates (and/or their max allowed)
                 if (!get().allowedImports) {
                     return null
                 }
@@ -122,20 +120,6 @@ export const useUserStore = create(
             },
             updatePreferredSiteType: (value) => {
                 get().updatePreferredOption('siteType', value)
-                if (!value?.slug || value.slug === 'unknown') return
-                const current = get().preferredOptionsHistory?.siteType ?? []
-
-                // If the site type isn't already included, prepend it
-                if (!current.find((t) => t.slug === value.slug)) {
-                    const siteType = [value, ...current]
-                    set({
-                        preferredOptionsHistory: Object.assign(
-                            {},
-                            get().preferredOptionsHistory,
-                            { siteType: siteType.slice(0, 3) },
-                        ),
-                    })
-                }
             },
             updatePreferredOption: (option, value) => {
                 // If the option doesn't exist, assume it's a taxonomy

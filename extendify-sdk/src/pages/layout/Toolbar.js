@@ -2,7 +2,6 @@ import { Button } from '@wordpress/components'
 import { memo } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
-import { TypeSelect } from '@extendify/components/TypeSelect'
 import { user } from '@extendify/components/icons/'
 import { SettingsModal } from '@extendify/components/modals/settings/SettingsModal'
 import { useGlobalStore } from '@extendify/state/GlobalState'
@@ -16,9 +15,7 @@ export const Toolbar = memo(function Toolbar({ className }) {
     return (
         <div className={className}>
             <div className="flex h-full items-center justify-between">
-                <div className="flex-1"></div>
-                <TypeSelect className="flex flex-1 items-center justify-center" />
-                <div className="flex flex-1 items-center justify-end">
+                <div className="flex flex-1 items-center justify-end lg:-mr-1">
                     <Button
                         onClick={() => pushModal(<SettingsModal />)}
                         icon={<Icon icon={user} size={24} />}
