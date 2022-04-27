@@ -23,9 +23,11 @@ class Welcome
      */
     public function __construct()
     {
-        add_action( 'admin_menu', [ $this, 'addAdminMenu' ] );
+		if ('standalone' === $GLOBALS['extendify_sdk_partner']) {
+			add_action( 'admin_menu', [ $this, 'addAdminMenu' ] );
 
-        $this->loadScripts();
+			$this->loadScripts();
+		}
     }
 
     /**
