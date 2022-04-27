@@ -43,11 +43,11 @@
 
 .about-wrap #footer-upgrade { display: none; }
 
-.about-wrap .redux-badge { position: absolute; top: 0; background: #00a2e3; padding: 20px; color: #efefef; margin: 5px 0 0 0; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+.about-wrap .redux-badge { position: absolute; top: 0; background: #cbc3f5; padding: 20px; color: #efefef; margin: 5px 0 0 0; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
 
 .about-wrap .redux-badge::before { color: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 80px; font-weight: normal; width: 165px; height: 165px; line-height: 165px; text-align: center; position: absolute; top: 0; margin: 0; vertical-align: middle; }
 
-.about-wrap .redux-badge .el { background: #00a2e3; display: block !important; font-size: 8em; color: #fff; margin-bottom: 30px; }
+.about-wrap .redux-badge .el { background: #cbc3f5; display: block !important; font-size: 8em; color: #fff; margin-bottom: 30px; }
 
 .about-wrap .redux-badge span { font-weight: 600; font-size: 14px; text-align: center; position: absolute; bottom: 0; background: rgba(50, 50, 49, 0.47); left: 0; right: 0; padding: 8px; }
 
