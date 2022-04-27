@@ -78,21 +78,23 @@ export const MainButtonWrapper = () => {
 }
 const MainButton = ({ buttonRef, text }) => {
     return (
-        <Button
-            isPrimary
-            ref={buttonRef}
-            style={{ padding: '12px' }}
-            onClick={() => openModal('main-button')}
-            id="extendify-templates-inserter-btn"
-            icon={
-                <Icon
-                    style={{ marginRight: '4px' }}
-                    icon={brandMark}
-                    size={24}
-                />
-            }>
-            {text}
-        </Button>
+        <div className="extendify">
+            <Button
+                isPrimary
+                ref={buttonRef}
+                className="h-8 xs:h-9 px-1 min-w-0 xs:pl-2 xs:pr-3 sm:ml-2"
+                onClick={() => openModal('main-button')}
+                id="extendify-templates-inserter-btn"
+                icon={
+                    <Icon
+                        icon={brandMark}
+                        size={24}
+                        style={{ marginRight: 0 }}
+                    />
+                }>
+                <span className="hidden xs:inline ml-1">{text}</span>
+            </Button>
+        </div>
     )
 }
 export const CtaButton = () => {

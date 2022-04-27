@@ -41,7 +41,7 @@ export const SidebarNotice = memo(function SidebarNotice() {
     return (
         <a
             target="_blank"
-            className="absolute bottom-4 left-0 mx-5 block bg-white rounded border-solid border border-gray-200 p-4 text-left no-underline group button-focus"
+            className="absolute bottom-4 left-0 mx-5 hidden sm:block bg-white rounded border-solid border border-gray-200 p-4 text-left no-underline group button-focus"
             rel="noreferrer"
             onClick={async () => await General.ping('fp-sb-click')}
             href={link}>

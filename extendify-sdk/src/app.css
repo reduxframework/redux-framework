@@ -117,24 +117,8 @@ div.extendify button.extendify-skip-to-sr-link:focus {
 }
 
 /* Style contentType/pageType control in sidebar */
-.components-panel__body.ext-type-control .components-panel__body-toggle {
-    @apply pl-0 pr-0;
-}
-
 .components-panel__body.ext-type-control .components-panel__body-title {
-    @apply m-0 border-b-0 px-5;
-}
-
-.components-panel__body.ext-type-control
-    .components-panel__body-title
-    .components-button {
-    @apply m-0 border-b-0 py-2 text-xss font-medium uppercase text-extendify-gray;
-}
-
-.components-panel__body.ext-type-control
-    .components-button
-    .components-panel__arrow {
-    @apply right-0 text-extendify-gray;
+    @apply my-0 -mx-4 border-b-0 px-5;
 }
 
 .extendify .animate-pulse {

@@ -6,6 +6,7 @@
 use Extendify\Library\Admin;
 use Extendify\Library\Frontend;
 use Extendify\Library\Shared;
+use Extendify\Library\Welcome;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
@@ -30,6 +31,7 @@ if (is_readable(EXTENDIFY_PATH . 'vendor/autoload.php')) {
 $extendifyAdmin = new Admin();
 $extendifyFrontend = new Frontend();
 $extendifyShared = new Shared();
+$extendifyWelcome = new Welcome();
 
 require EXTENDIFY_PATH . 'routes/api.php';
 require EXTENDIFY_PATH . 'editorplus/EditorPlus.php';

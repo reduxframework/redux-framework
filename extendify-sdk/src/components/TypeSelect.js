@@ -12,26 +12,28 @@ export const TypeSelect = ({ className }) => {
     return (
         <div className={className}>
             <h4 className="sr-only">{__('Type select', 'extendify')}</h4>
-            <button
-                type="button"
-                className={classNames({
-                    'button-focus m-0 min-w-sm cursor-pointer rounded-tl-sm rounded-bl-sm border border-black py-2.5 px-4 text-xs leading-none': true,
-                    'bg-gray-900 text-white': currentType === 'pattern',
-                    'bg-transparent text-black': currentType !== 'pattern',
-                })}
-                onClick={() => updateType('pattern')}>
-                <span className="">{__('Patterns', 'extendify')}</span>
-            </button>
-            <button
-                type="button"
-                className={classNames({
-                    'outline-none button-focus m-0 -ml-px min-w-sm cursor-pointer items-center rounded-tr-sm rounded-br-sm border border-black py-2.5 px-4 text-xs leading-none': true,
-                    'bg-gray-900 text-white': currentType === 'template',
-                    'bg-transparent text-black': currentType !== 'template',
-                })}
-                onClick={() => updateType('template')}>
-                <span className="">{__('Page Layouts', 'extendify')}</span>
-            </button>
+            <div className="flex justify-evenly border border-gray-900 p-0.5 rounded">
+                <button
+                    type="button"
+                    className={classNames({
+                        'w-full m-0 min-w-sm cursor-pointer rounded py-2.5 px-4 text-xs leading-none': true,
+                        'bg-gray-900 text-white': currentType === 'pattern',
+                        'bg-transparent text-black': currentType !== 'pattern',
+                    })}
+                    onClick={() => updateType('pattern')}>
+                    <span className="">{__('Patterns', 'extendify')}</span>
+                </button>
+                <button
+                    type="button"
+                    className={classNames({
+                        'outline-none w-full m-0 -ml-px min-w-sm cursor-pointer items-center rounded-tr-sm rounded-br-sm py-2.5 px-4 text-xs leading-none': true,
+                        'bg-gray-900 text-white': currentType === 'template',
+                        'bg-transparent text-black': currentType !== 'template',
+                    })}
+                    onClick={() => updateType('template')}>
+                    <span className="">{__('Templates', 'extendify')}</span>
+                </button>
+            </div>
         </div>
     )
 }

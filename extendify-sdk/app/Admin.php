@@ -90,8 +90,16 @@ class Admin
      */
     public function checkItsGutenbergPost($hook = '')
     {
-        if (isset($GLOBALS['typenow']) && \use_block_editor_for_post_type($GLOBALS['typenow'])) {
-            return $hook && in_array($hook, ['post.php', 'post-new.php'], true);
+        // Check for the post type, or on the FSE page.
+        $type = isset($GLOBALS['typenow']) ? $GLOBALS['typenow'] : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (!$type && isset($_GET['postType'])) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $type = sanitize_text_field(wp_unslash($_GET['postType']));
+        }
+
+        if (\use_block_editor_for_post_type($type)) {
+            return $hook && in_array($hook, ['post.php', 'post-new.php', 'appearance_page_gutenberg-edit-site'], true);
         }
 
         return false;

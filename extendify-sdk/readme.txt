@@ -2,8 +2,8 @@
 Contributors: extendify, richtabor, kbat82, clubkert, arturgrabo
 Tags: templates, patterns, layouts, blocks, gutenberg
 Requires at least: 5.4
-Tested up to: 5.9.0
-Stable tag: 0.6.0
+Tested up to: 5.9
+Stable tag: 0.8.0
 Requires PHP: 5.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -118,11 +118,27 @@ Nope! Extendify imports lightweight block-based content that is served directly 
 
 == Screenshots ==
 
-1. Select a site type/industry to use patterns with images and copy relevent to you
+1. Select a site type/industry to use patterns with images and copy relevant to you
 2. Quickly open the Extendify library with the Pattern Library block
 3. The Extendify library, as seen with the Twenty Twenty Two block theme
 
 == Changelog ==
+
+= 0.8.0 - 2022-04-26 =
+- Optimize live preview rendering
+- Add faster server backend
+- Add Extendify welcome page
+- Remove content idle timer
+- Update sidebar handle accessability styling
+- Updated wp tested up to value
+- Implement UI improvements to encourage discoverability
+
+= 0.7.0 - 2022-03-21 =
+- Add support for the Full Site Editor experience
+- Update SiteType UX component
+- Optimize layout rendering idle checker
+- Improve server error refresh
+- Fix library button on mobile
 
 = 0.6.0 - 2022-03-08 =
 - Add new design categories

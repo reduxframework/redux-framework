@@ -69,6 +69,10 @@ class Http
             'sdk_partner' => App::$sdkPartner,
         ];
 
+        if ($request->get_header('x_extendify_dev_mode') !== 'false') {
+            $this->data['devmode'] = true;
+        }
+
         $this->headers = [
             'Accept' => 'application/json',
             'referer' => $request->get_header('referer'),

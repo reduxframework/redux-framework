@@ -18,62 +18,68 @@ const isLibraryEnabled = () =>
         : userState?.enabled
 
 // Add the MAIN button when Gutenberg is available and ready
-if (window._wpLoadBlockEditor) {
-    const finish = window.wp.data.subscribe(() => {
-        requestAnimationFrame(() => {
-            if (!isGlobalLibraryEnabled() && !isAdmin()) {
-                return
-            }
-            if (document.getElementById('extendify-templates-inserter')) {
-                return
-            }
-            if (!document.querySelector('.edit-post-header-toolbar')) {
-                return
-            }
-            const buttonContainer = Object.assign(
-                document.createElement('div'),
-                { id: 'extendify-templates-inserter' },
-            )
-            document
-                .querySelector('.edit-post-header-toolbar')
-                .append(buttonContainer)
-            render(<MainButtonWrapper />, buttonContainer)
-
-            if (!isLibraryEnabled()) {
-                document
-                    .getElementById('extendify-templates-inserter-btn')
-                    .classList.add('hidden')
-            }
-            finish()
+const finish = window?.wp?.data?.subscribe(() => {
+    requestAnimationFrame(() => {
+        if (!isGlobalLibraryEnabled() && !isAdmin()) {
+            return
+        }
+        if (document.getElementById('extendify-templates-inserter')) {
+            return
+        }
+        if (
+            !document.querySelector('.edit-post-header-toolbar') &&
+            !document.querySelector('.edit-site-header_start') // FSE
+        ) {
+            return
+        }
+        const buttonContainer = Object.assign(document.createElement('div'), {
+            id: 'extendify-templates-inserter',
         })
+        // Standard block editor
+        document
+            .querySelector('.edit-post-header-toolbar')
+            ?.append(buttonContainer)
+        // FSE block editor
+        document
+            .querySelector('.edit-site-header_start')
+            ?.append(buttonContainer)
+
+        render(<MainButtonWrapper />, buttonContainer)
+
+        if (!isLibraryEnabled()) {
+            document
+                .getElementById('extendify-templates-inserter-btn')
+                .classList.add('hidden')
+        }
+        finish()
     })
-}
+})
 
 // The CTA button inside patterns
-if (window._wpLoadBlockEditor) {
-    window.wp.data.subscribe(() => {
-        requestAnimationFrame(() => {
-            if (!isGlobalLibraryEnabled() && !isAdmin()) {
-                return
-            }
-            if (!document.querySelector('[id$=patterns-view]')) {
-                return
-            }
-            if (document.getElementById('extendify-cta-button')) {
-                return
-            }
-            const ctaButtonContainer = Object.assign(
-                document.createElement('div'),
-                { id: 'extendify-cta-button-container' },
-            )
+const finish2 = window?.wp?.data?.subscribe(() => {
+    requestAnimationFrame(() => {
+        if (!isGlobalLibraryEnabled() && !isAdmin()) {
+            return
+        }
+        if (!document.querySelector('[id$=patterns-view]')) {
+            return
+        }
+        if (document.getElementById('extendify-cta-button')) {
+            return
+        }
+        const ctaButtonContainer = Object.assign(
+            document.createElement('div'),
+            { id: 'extendify-cta-button-container' },
+        )
 
-            document
-                .querySelector('[id$=patterns-view]')
-                .prepend(ctaButtonContainer)
-            render(<CtaButton />, ctaButtonContainer)
-        })
+        document
+            .querySelector('[id$=patterns-view]')
+            .prepend(ctaButtonContainer)
+        render(<CtaButton />, ctaButtonContainer)
+
+        finish2()
     })
-}
+})
 
 // This will add a button to enable or disable the library button
 const LibraryEnableDisable = () => {
@@ -95,7 +101,14 @@ const LibraryEnableDisable = () => {
 }
 
 // Load this button always, which is used to enable or disable
-window._wpLoadBlockEditor &&
+// FSE doesn't seem to recognize registerPlugin (yet)
+try {
     registerPlugin('extendify-settings-enable-disable', {
         render: LibraryEnableDisable,
     })
+} catch (e) {
+    console.error(
+        'registerPlugin not supported? (error handled gracefully)',
+        e.message,
+    )
+}

@@ -1,6 +1,6 @@
 import { BlockPreview } from '@wordpress/block-editor'
 import { rawHandler } from '@wordpress/blocks'
-import { useEffect, useState, useRef, useMemo } from '@wordpress/element'
+import { useRef, useMemo, useEffect, useState } from '@wordpress/element'
 import { __, sprintf } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { Templates as TemplatesApi } from '@extendify/api/Templates'
@@ -20,7 +20,6 @@ const canImportMiddleware = Middleware([
 
 export function ImportTemplateBlock({ template, maxHeight }) {
     const importButtonRef = useRef(null)
-    const once = useRef(false)
     const hasAvailableImports = useUserStore(
         (state) => state.hasAvailableImports,
     )
@@ -28,30 +27,27 @@ export function ImportTemplateBlock({ template, maxHeight }) {
     const setOpen = useGlobalStore((state) => state.setOpen)
     const pushModal = useGlobalStore((state) => state.pushModal)
     const removeAllModals = useGlobalStore((state) => state.removeAllModals)
+    const [topValue, setTopValue] = useState(0)
+    const type = Array.isArray(template?.fields?.type)
+        ? template.fields.type[0]
+        : template?.fields?.type
     const blocks = useMemo(
+        () => rawHandler({ HTML: halfImageSizes(template.fields.code) }),
+        [template.fields.code],
+    )
+    // The above will cut the image sizes in half, and the below will be inserted into the page
+    const blocksRaw = useMemo(
         () => rawHandler({ HTML: template.fields.code }),
         [template.fields.code],
     )
-    const [loaded, setLoaded] = useState(false)
     const devMode = useIsDevMode()
-    const [topValue, setTopValue] = useState(0)
-
-    const focusTrapInnerBlocks = () => {
-        if (once.current) return
-        once.current = true
-        Array.from(
-            importButtonRef.current.querySelectorAll(
-                'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])',
-            ),
-        ).forEach((el) => el.setAttribute('tabIndex', '-1'))
-    }
 
     const importTemplates = async () => {
         await canImportMiddleware.check(template)
         AuthorizationCheck(canImportMiddleware)
             .then(() => {
                 setTimeout(() => {
-                    injectTemplateBlocks(blocks, template)
+                    injectTemplateBlocks(blocksRaw, template)
                         .then(() => removeAllModals())
                         .then(() => setOpen(false))
                         .then(() => canImportMiddleware.reset())
@@ -84,62 +80,10 @@ export function ImportTemplateBlock({ template, maxHeight }) {
         importTemplates()
     }
 
-    // Trigger resize event on the live previews to add
-    // Grammerly/Loom/etc compatability
-    // TODO: This can probably be removed after WP 5.9
-    useEffect(() => {
-        const rafIds = []
-        const timeouts = []
-        let rafId1, rafId2, rafId3, rafId4
-        rafId1 = window.requestAnimationFrame(() => {
-            rafId2 = window.requestAnimationFrame(() => {
-                importButtonRef.current
-                    .querySelectorAll('iframe')
-                    .forEach((frame) => {
-                        const inner = frame.contentWindow.document.body
-                        const rafId = window.requestAnimationFrame(() => {
-                            const maybeRoot =
-                                inner.querySelector('.is-root-container')
-                            if (maybeRoot) {
-                                const height = maybeRoot?.offsetHeight
-                                if (height) {
-                                    rafId4 = window.requestAnimationFrame(
-                                        () => {
-                                            frame.contentWindow.dispatchEvent(
-                                                new Event('resize'),
-                                            )
-                                        },
-                                    )
-                                    const id = window.setTimeout(() => {
-                                        frame.contentWindow.dispatchEvent(
-                                            new Event('resize'),
-                                        )
-                                    }, 2000)
-                                    timeouts.push(id)
-                                }
-                            }
-                            frame.contentWindow.dispatchEvent(
-                                new Event('resize'),
-                            )
-                        })
-                        rafIds.push(rafId)
-                    })
-                rafId3 = window.requestAnimationFrame(() => {
-                    window.dispatchEvent(new Event('resize'))
-                    setLoaded(true)
-                })
-            })
-        })
-        return () => {
-            ;[...rafIds, rafId1, rafId2, rafId3, rafId4].forEach((id) =>
-                window.cancelAnimationFrame(id),
-            )
-            timeouts.forEach((id) => window.clearTimeout(id))
-        }
-    }, [])
-
+    // Handle layout animation
     useEffect(() => {
         if (!Number.isInteger(maxHeight)) return
+        if (type !== 'layout') return
         const button = importButtonRef.current
         const handleIn = () => {
             // The live component changes over time so easier to query on demand
@@ -162,7 +106,7 @@ export function ImportTemplateBlock({ template, maxHeight }) {
             button.removeEventListener('blur', handleOut)
             button.removeEventListener('mouseleave', handleOut)
         }
-    }, [maxHeight])
+    }, [maxHeight, type])
 
     return (
         <div className="group relative">
@@ -175,7 +119,6 @@ export function ImportTemplateBlock({ template, maxHeight }) {
                 )}
                 style={{ maxHeight }}
                 className="button-focus relative m-0 cursor-pointer overflow-hidden bg-gray-100 ease-in-out"
-                onFocus={focusTrapInnerBlocks}
                 onClick={importTemplate}
                 onKeyDown={handleKeyDown}>
                 <div
@@ -194,12 +137,22 @@ export function ImportTemplateBlock({ template, maxHeight }) {
                 </div>
             </div>
             {/* Show dev info after the preview is loaded to trigger observer */}
-            {devMode && loaded && <DevButtonOverlay template={template} />}
+            {devMode && <DevButtonOverlay template={template} />}
             {template?.fields?.pro && (
                 <div className="pointer-events-none absolute top-4 right-4 z-20 rounded-md border border-none bg-white bg-wp-theme-500 py-1 px-2.5 font-medium text-white no-underline shadow-sm">
                     {__('Pro', 'extendify')}
                 </div>
             )}
         </div>
+    )
+}
+
+const halfImageSizes = (html) => {
+    return html.replace(
+        /\w+:\/\/\S*(w=(\d*))&(h=(\d*))&\w+\S*"/g,
+        (url, w, width, h, height) =>
+            url
+                .replace(w, 'w=' + Math.floor(Number(width) / 2))
+                .replace(h, 'h=' + Math.floor(Number(height) / 2)),
     )
 }

@@ -7,7 +7,8 @@ import classNames from 'classnames'
 import { ImportCounter } from '@extendify/components/ImportCounter'
 import { SidebarNotice } from '@extendify/components/SidebarNotice'
 import { SiteTypeSelector } from '@extendify/components/SiteTypeSelector'
-import TaxonomySection from '@extendify/components/TaxonomySection'
+import { TaxonomySection } from '@extendify/components/TaxonomySection'
+import { TypeSelect } from '@extendify/components/TypeSelect'
 import { featured } from '@extendify/components/icons'
 import { brandMark } from '@extendify/components/icons/'
 import { useTestGroup } from '@extendify/hooks/useTestGroup'
@@ -52,7 +53,7 @@ export const Sidebar = memo(function Sidebar() {
                         })
                     }
                     className={classNames(
-                        'button-focus m-0 flex w-full cursor-pointer items-center space-x-1 bg-transparent px-0 py-2 text-left text-sm leading-none transition duration-200 hover:text-wp-theme-500',
+                        'm-0 flex w-full cursor-pointer items-center space-x-1 bg-transparent px-0 py-2 text-left text-sm leading-none transition duration-200 hover:text-wp-theme-500',
                         { 'text-wp-theme-500': isFeatured },
                     )}>
                     <Icon icon={featured} size={24} />
@@ -73,7 +74,8 @@ export const Sidebar = memo(function Sidebar() {
                     />
                 )}
             </div>
-            <div className="mt-px hidden flex-grow overflow-y-auto pb-36 pt-px sm:block space-y-6">
+            <TypeSelect className="mx-6 px-5 pt-0.5 sm:mx-0 sm:mb-8 sm:mt-0" />
+            <div className="mt-px hidden flex-grow overflow-y-auto overflow-x-hidden pb-36 pt-px sm:block space-y-6">
                 <Panel className="bg-transparent">
                     <TaxonomySection
                         taxType={taxonomyType}
