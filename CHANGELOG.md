@@ -1,26 +1,15 @@
 # Redux Changelog
 
-## 4.3.12.7
-* Fixed: More work for `required` functionality within the `repeater` field.
-
-## 4.3.12.6
-* Fixed: (I hope) -`required` functionality within the `repeater` field.
-
-## 4.3.12.5
+## 4.3.13
+* Fixed: Work for `required` functionality within the `repeater` field.
 * Fixed: Filter out bad default values for `color_rgba` field.
 * Fixed: jQuery deprecation notice.
-
-## 4.3.12.4
-* Modified: Additional sanitizing on color hex values.
-
-## 4.3.12.3
 * Fixed: Type error in `import_export` field.  Additional `repeater` JS fix.
-
-## 4.3.12.2
 * Fixed: `required` functionality within the `repeater` field.
-
-## 4.3.12.1
+* Modified: Additional sanitizing on color hex values.
 * Modified: Customizer code to eliminate `init()` error.
+* Updated: Extendify Library.
+* Release date: April 27, 2022
 
 ## 4.3.12
 * Updated: Vendor libraries.

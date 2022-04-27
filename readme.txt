@@ -3,8 +3,8 @@ Contributors: dovyp, redux, kprovance
 Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
-Tested up to: 5.9.1
-Stable tag: 4.3.12
+Tested up to: 6.0
+Stable tag: 4.3.13
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -105,6 +105,17 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.13 =
+* Fixed: Work for `required` functionality within the `repeater` field.
+* Fixed: Filter out bad default values for `color_rgba` field.
+* Fixed: jQuery deprecation notice.
+* Fixed: Type error in `import_export` field.  Additional `repeater` JS fix.
+* Fixed: `required` functionality within the `repeater` field.
+* Modified: Additional sanitizing on color hex values.
+* Modified: Customizer code to eliminate `init()` error.
+* Updated: Extendify Library.
+* Release date: April 27, 2022
 
 = 4.3.12 =
 Updated: Vendor libraries.
