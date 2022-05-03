@@ -115,7 +115,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Modified: Additional sanitizing on color hex values.
 * Modified: Customizer code to eliminate `init()` error.
 * Updated: Extendify Library.
-* Release date: April 27, 2022
+* Release date: May 05, 2022
 
 = 4.3.12 =
 Updated: Vendor libraries.
