@@ -470,14 +470,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 			if ( empty( $data['developer'] ) ) {
 				unset( $data['developer'] );
-			} else { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-				// phpcs:disable Squiz.PHP.CommentedOutCode
-
-				/*
-				 * print_r($data['developer']);
-				 * echo "NO";
-				 */
-				// phpcs:enable Squiz.PHP.CommentedOutCode
 			}
 
 			ksort( $data );
