@@ -121,7 +121,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				'margin-top'              => false,
 				'margin-bottom'           => false,
 				'text-shadow'             => false,
-				//'line-height-unit'        => '',
 				'word-spacing-unit'       => '',
 				'letter-spacing-unit'     => '',
 				'font-size-unit'          => '',
