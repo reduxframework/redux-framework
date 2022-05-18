@@ -62,6 +62,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 * @param array  $field  Field array.
 		 * @param string $value  Field values.
 		 * @param null   $parent ReduxFramework object pointer.
+		 *
+		 * @throws ReflectionException Exception.
 		 */
 		public function __construct( $field = array(), $value = null, $parent = null ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod
 			parent::__construct( $field, $value, $parent );
@@ -119,6 +121,12 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				'margin-top'              => false,
 				'margin-bottom'           => false,
 				'text-shadow'             => false,
+				//'line-height-unit'        => '',
+				'word-spacing-unit'       => '',
+				'letter-spacing-unit'     => '',
+				'font-size-unit'          => '',
+				'margin-top-unit'         => '',
+				'margin-bottom-unit'      => '',
 			);
 
 			$this->field = wp_parse_args( $this->field, $defaults );
@@ -167,13 +175,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			$this->value = wp_parse_args( $this->value, $defaults );
 
-			$units = array(
-				'px',
-				'em',
-				'rem',
-				'%',
-			);
-			if ( empty( $this->field['units'] ) || ! in_array( $this->field['units'], $units, true ) ) {
+			if ( empty( $this->field['units'] ) || ! in_array( $this->field['units'], Redux_Helpers::$array_units, true ) ) {
 				$this->field['units'] = 'px';
 			}
 
@@ -267,9 +269,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 						// Make array 0 = array 1.
 						$font_family[0] = $font_family[1];
-
-						// Clear array 1.
-						$font_family[1] = '';
 					}
 				}
 
@@ -551,6 +550,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			/* Font Size */
 			if ( true === $this->field['font-size'] ) {
+				$the_unit = '' !== $this->field['font-size-unit'] ? $this->field['font-size-unit'] : $unit;
+
 				echo '<div class="input_wrapper font-size redux-container-typography">';
 				echo '<label>' . esc_html__( 'Font Size', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
@@ -560,9 +561,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						title="' . esc_html__( 'Font Size', 'redux-framework' ) . '"
 						placeholder="' . esc_html__( 'Size', 'redux-framework' ) . '"
 						id="' . esc_attr( $this->field['id'] ) . '-size"
-						value="' . esc_attr( str_replace( $unit, '', $this->value['font-size'] ) ) . '"
-						data-value="' . esc_attr( str_replace( $unit, '', $this->value['font-size'] ) ) . '">';
-				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+						value="' . esc_attr( str_replace( Redux_Helpers::$array_units, '', $this->value['font-size'] ) ) . '"
+						data-unit="' . esc_attr( $the_unit ) . '"
+						data-value="' . esc_attr( str_replace( Redux_Helpers::$array_units, '', $this->value['font-size'] ) ) . '">';
+				echo '<span class="add-on">' . esc_html( $the_unit ) . '</span>';
 				echo '</div>';
 				echo '<input type="hidden" class="typography-font-size" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[font-size]" value="' . esc_attr( $this->value['font-size'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"/>';
 				echo '</div>';
@@ -570,6 +572,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			/* Line Height */
 			if ( true === $this->field['line-height'] ) {
+				$the_unit = $this->field['line-height-unit'] ?? $unit;
+
 				echo '<div class="input_wrapper line-height redux-container-typography">';
 				echo '<label>' . esc_html__( 'Line Height', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
@@ -579,17 +583,25 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						title="' . esc_html__( 'Line Height', 'redux-framework' ) . '"
 						placeholder="' . esc_html__( 'Height', 'redux-framework' ) . '"
 						id="' . esc_attr( $this->field['id'] ) . '-height"
-						value="' . esc_attr( str_replace( $unit, '', $this->value['line-height'] ) ) . '"
+						value="' . esc_attr( str_replace( Redux_Helpers::$array_units, '', $this->value['line-height'] ) ) . '"
 						data-allow-empty="' . esc_attr( $this->field['allow_empty_line_height'] ) . '"
-						data-value="' . esc_attr( str_replace( $unit, '', $this->value['line-height'] ) ) . '">';
-				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+						data-unit="' . esc_attr( $the_unit ) . '"
+						data-value="' . esc_attr( str_replace( Redux_Helpers::$array_units, '', $this->value['line-height'] ) ) . '">';
+				echo '<span class="add-on">' . esc_html( '' === $the_unit ? '&nbsp;' : $the_unit ) . '</span>';
 				echo '</div>';
-				echo '<input type="hidden" class="typography-line-height" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[line-height]" value="' . esc_attr( $this->value['line-height'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"/>';
+				echo '<input
+						type="hidden"
+						class="typography-line-height"
+						name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[line-height]"
+						value="' . esc_attr( $this->value['line-height'] ) . '"
+						data-id="' . esc_attr( $this->field['id'] ) . '"/>';
 				echo '</div>';
 			}
 
 			/* Word Spacing */
 			if ( true === $this->field['word-spacing'] ) {
+				$the_unit = '' !== $this->field['word-spacing-unit'] ? $this->field['word-spacing-unit'] : $unit;
+
 				echo '<div class="input_wrapper word-spacing redux-container-typography">';
 				echo '<label>' . esc_html__( 'Word Spacing', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
@@ -599,10 +611,11 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						title="' . esc_html__( 'Word Spacing', 'redux-framework' ) . '"
 						placeholder="' . esc_html__( 'Word Spacing', 'redux-framework' ) . '"
 						id="' . esc_attr( $this->field['id'] ) . '-word"
-						value="' . esc_attr( str_replace( $unit, '', $this->value['word-spacing'] ) ) . '"
-						data-value="' . esc_attr( str_replace( $unit, '', $this->value['word-spacing'] ) ) . '">';
+						data-unit="' . esc_attr( $the_unit ) . '"
+						value="' . esc_attr( str_replace( $the_unit, '', $this->value['word-spacing'] ) ) . '"
+						data-value="' . esc_attr( str_replace( $the_unit, '', $this->value['word-spacing'] ) ) . '">';
 
-				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+				echo '<span class="add-on">' . esc_html( $the_unit ) . '</span>';
 				echo '</div>';
 				echo '<input type="hidden" class="typography-word-spacing" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[word-spacing] " value="' . esc_attr( $this->value['word-spacing'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"/>';
 				echo '</div>';
@@ -610,6 +623,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			/* Letter Spacing */
 			if ( true === $this->field['letter-spacing'] ) {
+				$the_unit = '' !== $this->field['letter-spacing-unit'] ? $this->field['letter-spacing-unit'] : $unit;
+
 				echo '<div class="input_wrapper letter-spacing redux-container-typography">';
 				echo '<label>' . esc_html__( 'Letter Spacing', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
@@ -619,10 +634,11 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						title="' . esc_html__( 'Letter Spacing', 'redux-framework' ) . '"
 						placeholder="' . esc_html__( 'Letter Spacing', 'redux-framework' ) . '"
 						id="' . esc_attr( $this->field['id'] ) . '-letter"
-						value="' . esc_attr( str_replace( $unit, '', $this->value['letter-spacing'] ) ) . '"
-						data-value="' . esc_attr( str_replace( $unit, '', $this->value['letter-spacing'] ) ) . '">';
+						data-unit="' . esc_attr( $the_unit ) . '"
+						value="' . esc_attr( str_replace( $the_unit, '', $this->value['letter-spacing'] ) ) . '"
+						data-value="' . esc_attr( str_replace( $the_unit, '', $this->value['letter-spacing'] ) ) . '">';
 
-				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+				echo '<span class="add-on">' . esc_html( $the_unit ) . '</span>';
 				echo '</div>';
 				echo '<input
 						type="hidden"
@@ -638,23 +654,48 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			// Margins.
 			if ( $this->field['margin-top'] ) {
+				$the_unit = '' !== $this->field['margin-top-unit'] ? $this->field['margin-top-unit'] : $unit;
+
 				echo '<div class="input_wrapper margin-top redux-container-typography">';
 				echo '<label>' . esc_html__( 'Margin Top', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
-				echo '<input type="text" class="span2 redux-typography redux-typography-margin-top mini typography-input ' . esc_attr( $this->field['class'] ) . '" title="' . esc_html__( 'Margin Top', 'redux-framework' ) . '" placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '" id="' . esc_attr( $this->field['id'] ) . '-margin-top" value="' . esc_attr( str_replace( $unit, '', $this->value['margin-top'] ) ) . '" data-value="' . esc_attr( str_replace( $unit, '', $this->value['margin-top'] ) ) . '">';
-				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+				echo '<input
+						type="text"
+						class="span2 redux-typography redux-typography-margin-top mini typography-input ' . esc_attr( $this->field['class'] ) . '"
+						title="' . esc_html__( 'Margin Top', 'redux-framework' ) . '"
+						placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '"
+						id="' . esc_attr( $this->field['id'] ) . '-margin-top"
+						data-unit="' . esc_attr( $the_unit ) . '"
+						value="' . esc_attr( str_replace( $the_unit, '', $this->value['margin-top'] ) ) . '"
+						data-value="' . esc_attr( str_replace( $the_unit, '', $this->value['margin-top'] ) ) . '">';
+				echo '<span class="add-on">' . esc_html( $the_unit ) . '</span>';
 				echo '</div>';
-				echo '<input type="hidden" class="typography-margin-top" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[margin-top]" value="' . esc_attr( $this->value['margin-top'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
+				echo '<input
+						type="hidden"
+						class="typography-margin-top"
+						name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[margin-top]"
+						value="' . esc_attr( $this->value['margin-top'] ) . '"
+						data-id="' . esc_attr( $this->field['id'] ) . '"  />';
 				echo '</div>';
 			}
 
 			/* Bottom Margin */
 			if ( $this->field['margin-bottom'] ) {
+				$the_unit = '' !== $this->field['margin-bottom-unit'] ? $this->field['margin-bottom-unit'] : $unit;
+
 				echo '<div class="input_wrapper margin-bottom redux-container-typography">';
 				echo '<label>' . esc_html__( 'Margin Bottom', 'redux-framework' ) . '</label>';
 				echo '<div class="input-append">';
-				echo '<input type="text" class="span2 redux-typography redux-typography-margin-bottom mini typography-input ' . esc_attr( $this->field['class'] ) . '" title="' . esc_html__( 'Margin Bottom', 'redux-framework' ) . '" placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '" id="' . esc_attr( $this->field['id'] ) . '-margin-bottom" value="' . esc_attr( str_replace( $unit, '', $this->value['margin-bottom'] ) ) . '" data-value="' . esc_attr( str_replace( $unit, '', $this->value['margin-bottom'] ) ) . '">';
-				echo '<span class="add-on">' . esc_html( $unit ) . '</span>';
+				echo '<input
+						type="text"
+						class="span2 redux-typography redux-typography-margin-bottom mini typography-input ' . esc_attr( $this->field['class'] ) . '"
+						title="' . esc_html__( 'Margin Bottom', 'redux-framework' ) . '"
+						placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '"
+						id="' . esc_attr( $this->field['id'] ) . '-margin-bottom"
+						data-unit="' . esc_attr( $the_unit ) . '"
+						value="' . esc_attr( str_replace( $the_unit, '', $this->value['margin-bottom'] ) ) . '"
+						data-value="' . esc_attr( str_replace( $the_unit, '', $this->value['margin-bottom'] ) ) . '">';
+				echo '<span class="add-on">' . esc_html( $the_unit ) . '</span>';
 				echo '</div>';
 				echo '<input type="hidden" class="typography-margin-bottom" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[margin-bottom]" value="' . esc_attr( $this->value['margin-bottom'] ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"  />';
 				echo '</div>';
@@ -860,7 +901,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						// translators: Aria title, link title.
 						'error'    => sprintf( esc_html__( 'Update Failed|msg. %1$s', 'redux-framework' ), sprintf( '<a href="#" class="update-google-fonts" data-action="manual" aria-label="%s">%s</a>', esc_html__( 'Retry?', 'redux-framework' ), esc_html__( 'Retry?', 'redux-framework' ) ) ),
 						// translators: Javascript reload command, link title.
-						'success'  => sprintf( esc_html__( 'Updated! %1$s to start using your updated fonts.', 'redux-framework' ), sprintf( '<a href="%s">%s</a>', 'javascript:location.reload();', esc_html__( 'Reload the page', 'redux-framework' ) ) ),
+						'success'  => sprintf( esc_html__( 'Updated! %1$s to start using your updated fonts.', 'redux-framework' ), sprintf( '<a href="%1$s">%2$s</a>', 'javascript:location.reload();', esc_html__( 'Reload the page', 'redux-framework' ) ) ),
 					),
 				)
 			);
@@ -933,13 +974,13 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					if ( ! empty( $font['all-subsets'] ) ) {
 						foreach ( $font['all-subsets'] as $subset ) {
 							if ( ! in_array( $subset, $subsets, true ) ) {
-								array_push( $subsets, $subset );
+								$subsets[] = $subset;
 							}
 						}
 					} elseif ( ! empty( $font['subset'] ) ) {
 						foreach ( $font['subset'] as $subset ) {
 							if ( ! in_array( $subset, $subsets, true ) ) {
-								array_push( $subsets, $subset );
+								$subsets[] = $subset;
 							}
 						}
 					}
@@ -987,13 +1028,13 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					if ( ! empty( $font['all-subsets'] ) ) {
 						foreach ( $font['all-subsets'] as $subset ) {
 							if ( ! in_array( $subset, $subsets, true ) && ! is_numeric( $subset ) ) {
-								array_push( $subsets, $subset );
+								$subsets[] = $subset;
 							}
 						}
 					} elseif ( ! empty( $font['subset'] ) ) {
 						foreach ( $font['subset'] as $subset ) {
 							if ( ! in_array( $subset, $subsets, true ) && ! is_numeric( $subset ) ) {
-								array_push( $subsets, $subset );
+								$subsets[] = $subset;
 							}
 						}
 					}
@@ -1405,12 +1446,9 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					$name = ucfirst( $v );
 				}
 
-				array_push(
-					$result,
-					array(
-						'id'   => $v,
-						'name' => $name,
-					)
+				$result[] = array(
+					'id'   => $v,
+					'name' => $name,
 				);
 			}
 

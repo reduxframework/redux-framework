@@ -141,7 +141,7 @@
 									buildData.push( fontData );
 								}
 
-								// If googfonts on and had data, push into array.
+								// If googlefonts on and had data, push into array.
 								if ( 1 === usingGoogleFonts || true === usingGoogleFonts && undefined !== redux.googlefonts ) {
 									buildData.push( redux.googlefonts );
 								}
@@ -169,10 +169,13 @@
 								$( this ).find( '.redux-typography-font-variant' ).select2();
 								$( this ).find( '.redux-typography-decoration' ).select2();
 
-								$( this ).find( '.redux-insights-data-we-collect-typography' ).on( 'click', function( e ) {
-									e.preventDefault();
-									$( this ).parent().find( '.description' ).toggle();
-								});
+								$( this ).find( '.redux-insights-data-we-collect-typography' ).on(
+									'click',
+									function( e ) {
+										e.preventDefault();
+										$( this ).parent().find( '.description' ).toggle();
+									}
+								);
 
 								// Init select2 for indicated fields.
 								redux.field_objects.typography.select( family, true, false, null, true );
@@ -477,9 +480,9 @@
 			// Replace the hash with a blank.
 			hexcolour = hexcolour.replace( '#', '' );
 
-			r   = parseInt( hexcolour.substr( 0, 2 ), 16 );
-			g   = parseInt( hexcolour.substr( 2, 2 ), 16 );
-			b   = parseInt( hexcolour.substr( 4, 2 ), 16 );
+			r   = parseInt( hexcolour.substring( 0, 2 ), 16 );
+			g   = parseInt( hexcolour.substring( 2, 2 ), 16 );
+			b   = parseInt( hexcolour.substring( 4, 2 ), 16 );
 			res = ( ( r * 299 ) + ( g * 587 ) + ( b * 114 ) ) / 1000;
 
 			// Instead of pure black, I opted to use WP 3.8 black, so it looks uniform.  :) - kp.
@@ -508,18 +511,24 @@
 		var script;
 		var color;
 		var units;
+		var marginTopUnit;
+		var marginBottomUnit;
+		var lineHeightUnit;
+		var wordSpacingUnit;
+		var letterSpacingUnit;
+		var baseUnits;
 		var _linkclass;
 		var the_font;
 		var link;
 		var isPreviewSize;
 		var marginTop;
 		var marginBottom;
+		var allowEmptyLineHeight;
 
 		var typekit              = false;
 		var details              = '';
 		var html                 = '<option value=""></option>';
 		var selected             = '';
-		var allowEmptyLineHeight = false;
 		var default_font_weights = {
 			'400': 'Normal 400',
 			'700': 'Bold 700',
@@ -558,14 +567,14 @@
 		color        = that.find( '.redux-typography-color' ).val();
 		marginTop    = that.find( '.redux-typography-margin-top' ).val();
 		marginBottom = that.find( '.redux-typography-margin-bottom' ).val();
-		units        = that.data( 'units' );
+		baseUnits    = that.data( 'units' );
 
-		// Is selected font a google font?
+		// Is selected font a Google font?
 		if ( true === isSelecting ) {
 			google = redux.field_objects.typography.makeBool( selVals['data-google'] );
 			that.find( '.redux-typography-google-font' ).val( google );
 		} else {
-			google = redux.field_objects.typography.makeBool( that.find( '.redux-typography-google-font' ).val() ); // Check if font is a google font.
+			google = redux.field_objects.typography.makeBool( that.find( '.redux-typography-google-font' ).val() ); // Check if font is a Google font.
 		}
 
 		if ( active ) {
@@ -632,7 +641,7 @@
 						that.find( '.redux-typography-style' ).select2( 'destroy' );
 					}
 
-					// Instert new HTML.
+					// Insert new HTML.
 					that.find( '.redux-typography-style' ).html( html ).select2();
 
 					// SUBSETS.
@@ -683,7 +692,7 @@
 					// Destroy select2.
 					that.find( '.redux-typography-style' ).select2( 'destroy' );
 
-					// Instert new HTML.
+					// Insert new HTML.
 					that.find( '.redux-typography-style' ).html( html ).select2();
 
 					// Prettify things.
@@ -705,7 +714,7 @@
 							}
 						);
 
-						// Destory select2.
+						// Destroy select2.
 						if ( destroy ) {
 							that.find( '.redux-typography-style' ).select2( 'destroy' );
 						}
@@ -735,7 +744,7 @@
 						}
 					);
 
-					// Destory select2.
+					// Destroy select2.
 					if ( destroy ) {
 						that.find( '.redux-typography-style' ).select2( 'destroy' );
 					}
@@ -833,37 +842,43 @@
 		if ( '' === size || undefined === size ) {
 			that.find( '.typography-font-size' ).val( '' );
 		} else {
+			units = that.find( '.redux-typography-size' ).data( 'unit' );
 			that.find( '.typography-font-size' ).val( size + units );
 		}
 
 		if ( '' === height || undefined === height ) {
 			that.find( '.typography-line-height' ).val( '' );
 		} else {
-			that.find( '.typography-line-height' ).val( height + units );
+			lineHeightUnit = that.find( '.redux-typography-height' ).data( 'unit' );
+			that.find( '.typography-line-height' ).val( height + lineHeightUnit );
 		}
 
 		if ( '' === word || undefined === word ) {
 			that.find( '.typography-word-spacing' ).val( '' );
 		} else {
-			that.find( '.typography-word-spacing' ).val( word + units );
+			wordSpacingUnit = that.find( '.redux-typography-word' ).data( 'unit' );
+			that.find( '.typography-word-spacing' ).val( word + wordSpacingUnit );
 		}
 
 		if ( '' === letter || undefined === letter ) {
 			that.find( '.typography-letter-spacing' ).val( '' );
 		} else {
-			that.find( '.typography-letter-spacing' ).val( letter + units );
+			letterSpacingUnit = that.find( '.letter-spacing' ).data( 'unit' );
+			that.find( '.typography-letter-spacing' ).val( letter + letterSpacingUnit );
 		}
 
 		if ( '' === marginTop || undefined === marginTop ) {
 			that.find( '.typography-margin-top' ).val( '' );
 		} else {
-			that.find( '.typography-margin-top' ).val( marginTop + units );
+			marginTopUnit = that.find( '.redux-typography-margin-top' ).data( 'unit' );
+			that.find( '.typography-margin-top' ).val( marginTop + marginTopUnit );
 		}
 
 		if ( '' === marginBottom || undefined === marginBottom ) {
 			that.find( '.typography-margin-bottom' ).val( '' );
 		} else {
-			that.find( '.typography-margin-bottom' ).val( marginBottom + units );
+			marginBottomUnit = that.find( '.redux-typography-margin-bottom' ).data( 'unit' );
+			that.find( '.typography-margin-bottom' ).val( marginBottom + marginBottomUnit );
 		}
 
 		// Show more preview stuff.
@@ -871,7 +886,7 @@
 			isPreviewSize = that.find( '.typography-preview' ).data( 'preview-size' );
 
 			if ( 0 === isPreviewSize ) {
-				that.find( '.typography-preview' ).css( 'font-size', size + units );
+				that.find( '.typography-preview' ).css( 'font-size', size + baseUnits );
 			}
 
 			that.find( '.typography-preview' ).css(
@@ -879,8 +894,8 @@
 					'font-weight': style,
 					'text-align': align,
 					'font-family': family + ', sans-serif',
-					'padding-top': marginTop + units,
-					'padding-bottom': marginBottom + units
+					'padding-top': marginTop + marginTopUnit,
+					'padding-bottom': marginBottom + marginBottomUnit
 				}
 			);
 
@@ -892,9 +907,9 @@
 
 			that.find( '.typography-preview' ).css(
 				{
-					'line-height': height + units,
-					'word-spacing': word + units,
-					'letter-spacing': letter + units
+					'line-height': height + lineHeightUnit,
+					'word-spacing': word + wordSpacingUnit,
+					'letter-spacing': letter + letterSpacingUnit
 				}
 			);
 
