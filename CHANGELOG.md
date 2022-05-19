@@ -1,5 +1,11 @@
 # Redux Changelog
 
+## 4.3.14
+* New: `typgraphy` field supports individual unit types for subfields that support them (font-size, line-height, etc.)  See: [https://devs.redux.io/core-fields/typography.html](https://devs.redux.io/core-fields/typography.html)
+* Fixed: Redux installed via TGMPA failing with "This plugin does not have a valid header."
+* Updated: Extendify Library.
+* Release date: May 19, 2022 
+
 ## 4.3.13
 * Fixed: Work for `required` functionality within the `repeater` field.
 * Fixed: Filter out bad default values for `color_rgba` field.
