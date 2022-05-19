@@ -107,7 +107,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 == Changelog ==
 
 = 4.3.14 =
-* New: `typgraphy` field supports individual unit types for subfields that support them (font-size, line-height, etc.)  See: [https://devs.redux.io/core-fields/typography.html](https://devs.redux.io/core-fields/typography.html)
+* New: `typography` field supports individual unit types for subfields that support them (font-size, line-height, etc.)  See: [https://devs.redux.io/core-fields/typography.html](https://devs.redux.io/core-fields/typography.html)
 * Fixed: Redux installed via TGMPA failing with "This plugin does not have a valid header."
 * Updated: Extendify Library.
 * Release date: May 19, 2022
