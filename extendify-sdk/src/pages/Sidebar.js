@@ -5,13 +5,11 @@ import { __ } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
 import classNames from 'classnames'
 import { ImportCounter } from '@extendify/components/ImportCounter'
-import { SidebarNotice } from '@extendify/components/SidebarNotice'
 import { SiteTypeSelector } from '@extendify/components/SiteTypeSelector'
 import { TaxonomySection } from '@extendify/components/TaxonomySection'
 import { TypeSelect } from '@extendify/components/TypeSelect'
 import { featured } from '@extendify/components/icons'
 import { brandMark } from '@extendify/components/icons/'
-import { useTestGroup } from '@extendify/hooks/useTestGroup'
 import { useGlobalStore } from '@extendify/state/GlobalState'
 import { useTaxonomyStore } from '@extendify/state/Taxonomies'
 import { useTemplatesStore } from '@extendify/state/Templates'
@@ -31,7 +29,6 @@ export const Sidebar = memo(function Sidebar() {
         searchParams.type === 'pattern' ? 'patternType' : 'layoutType'
     const isFeatured = !searchParams?.taxonomies[taxonomyType]?.slug?.length
     const setOpen = useGlobalStore((state) => state.setOpen)
-    const noticeVariety = useTestGroup('import-counter-type', ['A', 'B'])
 
     return (
         <>
@@ -96,8 +93,7 @@ export const Sidebar = memo(function Sidebar() {
             </div>
             {!apiKey.length && (
                 <div className="px-5">
-                    {noticeVariety === 'A' ? <ImportCounter /> : null}
-                    {noticeVariety === 'B' ? <SidebarNotice /> : null}
+                    <ImportCounter />
                 </div>
             )}
         </>

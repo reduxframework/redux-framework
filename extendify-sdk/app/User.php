@@ -69,6 +69,20 @@ class User
     }
 
     /**
+     * Updates the site type. Currently used by onboarding only
+     *
+     * @param array $siteType - Site type array.
+     * @return mixed - Data about the user.
+     */
+    public static function updateSiteType($siteType)
+    {
+        $data = json_decode(static::state(), true);
+        $data['state']['preferredOptions']['taxonomies']['siteType']['slug'] = $siteType['slug'];
+        $data['state']['preferredOptions']['taxonomies']['siteType']['title'] = $siteType['title'];
+        return static::updateState(\wp_json_encode($data));
+    }
+
+    /**
      * Returns data about the user
      * Use it like User::data('ID') to get the user id
      *
@@ -86,7 +100,19 @@ class User
     }
 
     /**
-     * Returns the application state for he current user
+     * Update the user state
+     *
+     * @param string $newState - JSON encoded state.
+     * @return string - JSON representation of the updated state
+     */
+    private function updateStateHandler($newState)
+    {
+        \update_user_meta($this->user->ID, $this->key . 'user_data', $newState);
+        return \get_user_meta($this->user->ID, $this->key . 'user_data');
+    }
+
+    /**
+     * Returns application state for the current user
      * Use it like User::data('ID') to get the user id
      *
      * @return string - JSON representation of the current state

@@ -13,7 +13,6 @@ import Masonry from 'react-masonry-css'
 import { Templates as TemplatesApi } from '@extendify/api/Templates'
 import { ImportTemplateBlock } from '@extendify/components/ImportTemplateBlock'
 import { useIsMounted } from '@extendify/hooks/helpers'
-import { useTestGroup } from '@extendify/hooks/useTestGroup'
 import { useGlobalStore } from '@extendify/state/GlobalState'
 import { useTaxonomyStore } from '@extendify/state/Taxonomies'
 import { useTemplatesStore } from '@extendify/state/Templates'
@@ -44,7 +43,6 @@ export const GridView = memo(function GridView() {
     const taxonomyType =
         searchParams.current.type === 'pattern' ? 'patternType' : 'layoutType'
     const currentTax = searchParams.current.taxonomies[taxonomyType]
-    const defaultOrAlt = useTestGroup('default-or-alt-sitetype', ['A', 'B'])
 
     // Subscribing to the store will keep these values updates synchronously
     useEffect(() => {
@@ -62,9 +60,6 @@ export const GridView = memo(function GridView() {
 
     // Fetch the templates then add them to the current state
     const fetchTemplates = useCallback(() => {
-        if (!defaultOrAlt) {
-            return
-        }
         setServerError('')
         setNothingFound(false)
         const defaultError = __(
@@ -73,11 +68,9 @@ export const GridView = memo(function GridView() {
         )
         const args = { offset: nextPage.current }
         // AB test the default or defaultAlt site type
-        const defaultSiteType =
-            defaultOrAlt === 'A' ? { slug: 'default' } : { slug: 'defaultAlt' }
         const siteType = searchParams.current.taxonomies?.siteType?.slug?.length
             ? searchParams.current.taxonomies.siteType
-            : defaultSiteType
+            : { slug: 'default' }
         // End AB test - otherwise use { slug: 'default' } when empty
         const params = cloneDeep(searchParams.current)
         params.taxonomies.siteType = siteType
@@ -110,7 +103,7 @@ export const GridView = memo(function GridView() {
                 console.error(error)
                 setServerError(defaultError)
             })
-    }, [appendTemplates, isMounted, searchParamsRaw, defaultOrAlt])
+    }, [appendTemplates, isMounted, searchParamsRaw])
 
     useEffect(() => {
         if (templates?.length === 0) {
