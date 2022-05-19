@@ -5,8 +5,6 @@
 
 namespace Extendify\Library;
 
-use Extendify\Library\Plugin;
-
 /**
  * Controller for handling various app data
  */

@@ -21,7 +21,7 @@ export const MainButtonWrapper = () => {
         (state) => state.allowedImports === 0,
     )
     const uuid = useUserStore((state) => state.uuid)
-    const buttonText = useTestGroup('main-button-text', ['A', 'B', 'C'], true)
+    const buttonText = useTestGroup('main-button-text2', ['A', 'B'], true)
     const [libraryButtonText, setLibraryButtonText] = useState()
 
     const handleTooltipClose = async () => {
@@ -39,11 +39,9 @@ export const MainButtonWrapper = () => {
         const text = () => {
             switch (buttonText) {
                 case 'A':
-                    return __('Library', 'extendify')
-                case 'B':
-                    return __('Add section', 'extendify')
-                case 'C':
                     return __('Add template', 'extendify')
+                case 'B':
+                    return __('Design Library', 'extendify')
             }
         }
         setLibraryButtonText(text())

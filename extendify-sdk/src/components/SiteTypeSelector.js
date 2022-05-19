@@ -2,7 +2,6 @@ import { useEffect, useState, useRef, useMemo } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 import Fuse from 'fuse.js'
-import { useTestGroup } from '@extendify/hooks/useTestGroup'
 import { useTemplatesStore } from '@extendify/state/Templates'
 
 const searchMemo = new Map()
@@ -15,7 +14,6 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     const [tempValue, setTempValue] = useState('')
     const [visibleChoices, setVisibleChoices] = useState([])
     const [showExamples, setShowExamples] = useState(true)
-    const openOrClosed = useTestGroup('sitetype-open-closed', ['A', 'B'])
 
     const termsSorted = useMemo(() => {
         return terms.sort((a, b) => {
@@ -70,10 +68,10 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     }, [expanded])
 
     useEffect(() => {
-        if (openOrClosed === 'B' && !value.slug) {
+        if (!value.slug) {
             setExpanded(true)
         }
-    }, [openOrClosed, value.slug])
+    }, [value.slug])
 
     const contentHeader = (description) => {
         return (
@@ -99,6 +97,12 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                             viewBox="0 0 21 21"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
+                            <title>
+                                {__(
+                                    'Click to select a preferred site industry',
+                                    'extendify',
+                                )}
+                            </title>
                             <path
                                 className="stroke-current"
                                 d="M10.9982 4.05371C7.66149 4.05371 4.95654 6.75866 4.95654 10.0954C4.95654 13.4321 7.66149 16.137 10.9982 16.137C14.3349 16.137 17.0399 13.4321 17.0399 10.0954C17.0399 6.75866 14.3349 4.05371 10.9982 4.05371V4.05371Z"

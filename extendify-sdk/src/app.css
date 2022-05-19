@@ -56,18 +56,6 @@ div.extendify button.extendify-skip-to-sr-link:focus {
     @apply max-w-none;
 }
 
-/* Ensure our patterns display fullwidth on old themes + < 5.9 */
-.block-editor-block-list__layout.is-root-container
-    .ext.block-editor-block-list__block {
-    @apply max-w-full;
-}
-
-.block-editor-block-preview__content-iframe
-    .block-editor-block-list__layout.is-root-container
-    .ext.block-editor-block-list__block {
-    @apply max-w-none;
-}
-
 .extendify .block-editor-block-preview__container {
     /* no important */
     @apply opacity-0;

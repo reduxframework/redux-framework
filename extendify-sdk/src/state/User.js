@@ -16,11 +16,7 @@ const isGlobalLibraryEnabled = () =>
 // Keep track of active tests as some might be active
 // but never rendered.
 const activeTests = {
-    ['notice-position']: '0001',
-    ['main-button-text']: '0002',
-    ['default-or-alt-sitetype']: '0004',
-    ['import-counter-type']: '0005',
-    ['sitetype-open-closed']: '0006',
+    ['main-button-text2']: '0007',
 }
 
 export const useUserStore = create(

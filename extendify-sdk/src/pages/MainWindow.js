@@ -2,7 +2,6 @@ import { Fragment, useRef } from '@wordpress/element'
 import { Dialog, Transition } from '@headlessui/react'
 import FooterNotice from '@extendify/components/notices/FooterNotice'
 import { useModal } from '@extendify/hooks/useModal'
-import { useTestGroup } from '@extendify/hooks/useTestGroup'
 import { useGlobalStore } from '@extendify/state/GlobalState'
 import { Layout } from './layout/Layout'
 
@@ -12,7 +11,6 @@ export default function MainWindow() {
     const setOpen = useGlobalStore((state) => state.setOpen)
     const modal = useModal(open)
     const ready = useGlobalStore((state) => state.ready)
-    const footerNoticePosition = useTestGroup('notice-position', ['A', 'B'])
 
     return (
         <Transition appear show={open} as={Fragment}>
@@ -44,15 +42,10 @@ export default function MainWindow() {
                                     setOpen(false)
                                 }
                                 className="fixed inset-0 transform p-2 transition-all lg:absolute lg:overflow-hidden lg:p-16">
-                                {footerNoticePosition === 'B' && (
-                                    <FooterNotice className="-mt-6" />
-                                )}
                                 <Layout />
                                 {ready ? (
                                     <>
-                                        {footerNoticePosition === 'A' && (
-                                            <FooterNotice />
-                                        )}
+                                        <FooterNotice />
                                         {modal}
                                     </>
                                 ) : null}
