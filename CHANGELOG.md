@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.14.1
+* Fixed: Deprecation error surrounding `add_menu_page` in WordPress 6.0.
+* Fixed: `undefined` unit entry in `letter-spacing` subfield of the `typography` field.
+
 ## 4.3.14
 * New: `typography` field supports individual unit types for subfields that support them (font-size, line-height, etc.)  See: [https://devs.redux.io/core-fields/typography.html](https://devs.redux.io/core-fields/typography.html)
 * Fixed: Redux installed via TGMPA failing with "This plugin does not have a valid header."

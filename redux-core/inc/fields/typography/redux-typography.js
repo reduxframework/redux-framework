@@ -863,7 +863,7 @@
 		if ( '' === letter || undefined === letter ) {
 			that.find( '.typography-letter-spacing' ).val( '' );
 		} else {
-			letterSpacingUnit = that.find( '.letter-spacing' ).data( 'unit' );
+			letterSpacingUnit = that.find( '.redux-typography-letter' ).data( 'unit' );
 			that.find( '.typography-letter-spacing' ).val( letter + letterSpacingUnit );
 		}
 

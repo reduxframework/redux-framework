@@ -79,7 +79,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 						'generate_panel',
 					),
 					$core->args['menu_icon'],
-					$core->args['page_priority']
+					(int) $core->args['page_priority']
 				);
 
 				if ( true === $core->args['allow_sub_menu'] ) {
