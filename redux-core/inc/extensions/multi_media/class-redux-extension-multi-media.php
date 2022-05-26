@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Redux_Extension_Multi_Media' ) ) {
 
 	/**
-	 * Main ReduxFramework_extension_multi_media extension class
+	 * Main Redux_Extension_multi_media extension class
 	 *
 	 * @since       1.0.0
 	 */
@@ -49,6 +49,21 @@ if ( ! class_exists( 'Redux_Extension_Multi_Media' ) ) {
 			parent::__construct( $parent, __FILE__ );
 
 			$this->add_field( 'multi_media' );
+		}
+
+		/**
+		 * Get extended image data.
+		 *
+		 * @param int|string $id image ID.
+		 *
+		 * @return array|void
+		 *
+		 * @depreacted Remove camelCase function name.
+		 */
+		public static function getExtendedData( $id ) {
+			_deprecated_function( 'getExtendedData', '4.3.15', 'Redux_Extension_Multi_Media::get_extended_data( $id )' );
+
+			return self::get_extended_data( $id );
 		}
 
 		/**
