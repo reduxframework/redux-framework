@@ -3,9 +3,10 @@
  * Redux Framework API Class
  * Makes instantiating a Redux object an absolute piece of cake.
  *
- * @package     Redux_Framework
- * @author      Dovy Paukstys
- * @subpackage  Core
+ * @package      Redux_Framework
+ * @author       Dovy Paukstys
+ * @subpackage   Core
+ * @noinspection PhpUnused
  */
 
 // Exit if accessed directly.
@@ -129,7 +130,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * Delay init action function
 		 * Delays all Redux objects from loaded before `plugins_loaded` runs.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException Exception.
 		 */
 		public static function delay_init() {
 			if ( ! empty( self::$delay_init ) ) {
@@ -166,7 +167,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException  Exception.
 		 */
 		public static function init( string $opt_name = '' ) {
 			if ( ! empty( $opt_name ) ) {
@@ -213,6 +214,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming conventions.
 		 */
 		public static function loadExtensions( $redux_framework ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, ' Redux 4.3', 'Redux::load_extensions( $redux_framework )' );
+
 			self::load_extensions( $redux_framework );
 		}
 
@@ -269,6 +272,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using cameCase naming conventions.
 		 */
 		public static function extensionPath( string $extension, bool $folder = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::extension_path( $extension, $folder )' );
+
 			return self::extension_path( $extension, $folder );
 		}
 
@@ -299,10 +304,13 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException Exception.
+		 *
 		 * @deprecated No longer using camelCase naming conventions.
 		 */
 		public static function loadRedux( string $opt_name = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::load_redux( $opt_name )' );
+
 			self::load_redux( $opt_name );
 		}
 
@@ -353,7 +361,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException  Exception.
 		 */
 		public static function load_redux( string $opt_name = '' ) {
 			if ( empty( $opt_name ) ) {
@@ -398,17 +406,20 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Deprecated Create Redux instance.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException  Exception.
+		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function createRedux() {       // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::createRedux()' );
+
 			self::create_redux();
 		}
 
 		/**
 		 * Create Redux instance.
 		 *
-		 * @throws ReflectionException
+		 * @throws ReflectionException  Exception.
 		 */
 		public static function create_redux() {
 			foreach ( self::$sections as $opt_name => $the_sections ) {
@@ -516,6 +527,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function getSection( string $opt_name = '', string $id = '' ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_section( $opt_name, $id )' );
+
 			return self::get_section( $opt_name, $id );
 		}
 
@@ -550,6 +563,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setSections( string $opt_name = '', array $sections = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_sections( $opt_name, $sections )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -586,6 +601,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function getSections( string $opt_name = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_sections( $opt_name )' );
+
 			return self::get_sections( $opt_name );
 		}
 
@@ -616,6 +633,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function removeSection( string $opt_name = '', $id = '', bool $fields = false ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::remove_section( $opt_name, $id )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -672,6 +691,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setSection( string $opt_name = '', ?array $section = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_section( $opt_name, $section )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -763,6 +784,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function hideSection( string $opt_name = '', $id = '', bool $hide = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::hide_section( $opt_name, $id )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -817,6 +840,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function getField( string $opt_name = '', $id = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_field( $opt_name, $id )' );
+
 			return self::get_field( $opt_name, $id );
 		}
 
@@ -848,6 +873,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function hideField( string $opt_name = '', $id = '', bool $hide = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::hide_field( $opt_name, $id )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -888,6 +915,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setField( string $opt_name = '', $section_id = '', array $field = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_field( $opt_name, $section_id, $field )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -964,6 +993,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function removeField( string $opt_name = '', $id = '' ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::remove_field( $opt_name, $id )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -1016,6 +1047,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setHelpTab( string $opt_name = '', array $tab = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_help_tab( $opt_name, $tab )' );
+
 			self::set_help_tab( $opt_name, $tab );
 		}
 
@@ -1056,6 +1089,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setHelpSidebar( string $opt_name = '', string $content = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_help_sidebar( $opt_name, $content )' );
+
 			self::set_help_sidebar( $opt_name, $content );
 		}
 
@@ -1083,6 +1118,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setArgs( string $opt_name = '', array $args = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_args( $opt_name, $args )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -1140,6 +1177,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer camelCase naming convention.
 		 */
 		public static function getArgs( string $opt_name = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_args( $opt_name )' );
+
 			return self::get_args( $opt_name );
 		}
 
@@ -1177,6 +1216,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention and using singular function self::get_args() now.
 		 */
 		public static function getArg( string $opt_name = '', string $key = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_arg( $opt_name, $key )' );
+
 			return self::get_args( $opt_name, $key );
 		}
 
@@ -1209,6 +1250,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function getOption( string $opt_name = '', string $key = '', $default = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_option( $opt_name, $key, $default )' );
+
 			return self::get_option( $opt_name, $key, $default );
 		}
 
@@ -1336,6 +1379,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setOption( string $opt_name = '', string $key = '', $option = '' ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_option( $opt_name, $key, $option )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
@@ -1495,6 +1540,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setExtensions( string $opt_name, string $path ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_extensions( $opt_name, $path )' );
+
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );
 			}
