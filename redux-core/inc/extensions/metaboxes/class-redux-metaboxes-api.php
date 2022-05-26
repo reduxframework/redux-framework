@@ -1,11 +1,12 @@
 <?php // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 /**
  * Redux Framework Metaboxes API Class
- * Makes instantiating a Redux Metasbox object an absolute piece of cake.
+ * Makes instantiating a Redux Metabox object an absolute piece of cake.
  *
- * @package     Redux_Framework
- * @author      Dovy Paukstys
- * @subpackage  Core
+ * @package      Redux_Framework
+ * @author       Dovy Paukstys
+ * @subpackage   Core
+ * @noinspection PhpUnused
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -36,7 +37,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		public static $sections = array();
 
 		/**
-		 * Feilds array.
+		 * Fields array.
 		 *
 		 * @var array
 		 */
@@ -137,6 +138,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function filterMetaboxes() { // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::filter_metaboxes()' );
+
 			self::filter_metaboxes();
 		}
 
@@ -166,7 +169,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Constuct global args array.
+		 * Construct global args array.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
@@ -174,11 +177,13 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function constructArgs( string $opt_name ) { // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::construct_args( $opt_name )' );
+
 			return self::construct_args( $opt_name );
 		}
 
 		/**
-		 * Constuct global args array.
+		 * Construct global args array.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
@@ -215,6 +220,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function constructBoxes( string $opt_name ): array {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::construct_boxes( $opt_name )' );
+
 			return self::construct_boxes( $opt_name );
 		}
 
@@ -234,7 +241,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 				return $boxes;
 			}
 
-			foreach ( self::$boxes[ $opt_name ] as $box_id => $box ) {
+			foreach ( self::$boxes[ $opt_name ] as $box ) {
 				$box['sections'] = self::construct_sections( $opt_name, $box['id'] );
 				$boxes[]         = $box;
 			}
@@ -255,6 +262,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function constructSections( string $opt_name, string $box_id ): array {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::construct_sections( $opt_name, $box_id )' );
+
 			return self::construct_sections( $opt_name, $box_id );
 		}
 
@@ -302,6 +311,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No moe camelCase.
 		 */
 		public static function constructFields( string $opt_name = '', $section_id = '' ): array {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::construct_fields( $opt_name, $section_id )' );
+
 			return self::construct_fields( $opt_name, $section_id );
 		}
 
@@ -322,7 +333,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 				return $fields;
 			}
 
-			foreach ( self::$fields[ $opt_name ] as $key => $field ) {
+			foreach ( self::$fields[ $opt_name ] as $field ) {
 				if ( $section_id === $field['section_id'] ) {
 					$p = $field['priority'];
 
@@ -350,6 +361,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @return bool
 		 */
 		public static function getSection( string $opt_name = '', $id = '' ): bool {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::get_section( $opt_name, $id )' );
+
 			return self::get_section( $opt_name, $id );
 		}
 
@@ -384,6 +397,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function setSection( string $opt_name = '', array $section = array() ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::set_section( $opt_name, $section )' );
+
 			self::set_section( $opt_name, $section );
 		}
 
@@ -469,6 +484,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function processFieldsArray( string $opt_name = '', $section_id = '', array $fields = array() ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::process_fields_array( $opt_name, $section_id, $fields )' );
+
 			self::process_fields_array( $opt_name, $section_id, $fields );
 		}
 
@@ -495,7 +512,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Retrives field array.
+		 * Retrieves field array.
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param string|int $id Field ID.
@@ -505,11 +522,13 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @return bool
 		 */
 		public static function getField( string $opt_name = '', $id = '' ): bool {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::get_field( $opt_name, $id )' );
+
 			return self::get_field( $opt_name, $id );
 		}
 
 		/**
-		 * Retrives field array.
+		 * Retrieves field array.
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param string|int $id Field ID.
@@ -535,6 +554,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function setField( string $opt_name = '', array $field = array() ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::set_field( $opt_name, $field )' );
+
 			self::set_field( $opt_name, $field );
 		}
 
@@ -567,6 +588,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function setBox( string $opt_name = '', array $box = array() ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::set_box( $opt_name, $box )' );
+
 			self::set_box( $opt_name, $box );
 		}
 
@@ -623,6 +646,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function setBoxes( string $opt_name = '', array $boxes = array() ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::set_boxes( $opt_name, $boxes )' );
+
 			self::set_boxes( $opt_name, $boxes );
 		}
 
@@ -652,6 +677,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @return mixed
 		 */
 		public static function getBoxes( string $opt_name = '' ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::get_boxes( $opt_name )' );
+
 			return self::get_boxes( $opt_name );
 		}
 
@@ -668,6 +695,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 			if ( ! empty( $opt_name ) && ! empty( self::$boxes[ $opt_name ] ) ) {
 				return self::$boxes[ $opt_name ];
 			}
+
+			return null;
 		}
 
 		/**
@@ -681,6 +710,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @return mixed
 		 */
 		public static function getBox( string $opt_name = '', string $key = '' ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::get_box( $opt_name, $key )' );
+
 			return self::get_box( $opt_name, $key );
 		}
 
@@ -698,6 +729,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 			if ( ! empty( $opt_name ) && ! empty( $key ) && ! empty( self::$boxes[ $opt_name ] ) && isset( self::$boxes[ $opt_name ][ $key ] ) ) {
 				return self::$boxes[ $opt_name ][ $key ];
 			}
+
+			return null;
 		}
 
 		/**
@@ -711,6 +744,8 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		 * @deprecated 4.0.0 No more camelCase.
 		 */
 		public static function getPriority( string $opt_name, string $type ) {  // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::get_priority( $opt_name, $type )' );
+
 			return self::get_priority( $opt_name, $type );
 		}
 
