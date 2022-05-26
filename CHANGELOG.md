@@ -1,7 +1,7 @@
 # Redux Changelog
 
 ## 4.3.14.2
-* Added: Multi Media extension.
+* Added: Multi Media extension. [https://devs.redux.io/core-extensions/multi-media.html](https://devs.redux.io/core-extensions/multi-media.html)
 
 ## 4.3.14.1
 * Fixed: Deprecation error surrounding `add_menu_page` in WordPress 6.0.
