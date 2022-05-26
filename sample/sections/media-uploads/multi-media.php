@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 Redux::setSection(
 	$opt_name,
 	array(
-		'title'      => esc_html__( 'Multi Media Selector', 'your-textdomain-here' ),
+		'title'      => esc_html__( 'Multi Media', 'your-textdomain-here' ),
 		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/multi-media.html" target="_blank">https://devs.redux.io/premium/multi-media.html</a>',
 		'subsection' => true,
 		'fields'     => array(

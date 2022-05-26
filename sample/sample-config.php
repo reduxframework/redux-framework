@@ -393,6 +393,7 @@ Redux::set_section(
 
 require_once Redux_Core::$dir . '../sample/sections/media-uploads/gallery.php';
 require_once Redux_Core::$dir . '../sample/sections/media-uploads/media.php';
+require_once Redux_Core::$dir . '../sample/sections/media-uploads/multi-media.php';
 require_once Redux_Core::$dir . '../sample/sections/media-uploads/slides.php';
 
 // -> START Presentation Fields.
@@ -531,7 +532,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/icon-select.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/js-button.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/multi-media.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/social-profiles.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/taxonomy.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/users.php';

@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.14.2
+* Added: Multi Media extension.
+
 ## 4.3.14.1
 * Fixed: Deprecation error surrounding `add_menu_page` in WordPress 6.0.
 * Fixed: `undefined` unit entry in `letter-spacing` subfield of the `typography` field.

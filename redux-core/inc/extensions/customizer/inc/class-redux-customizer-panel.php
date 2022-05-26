@@ -228,7 +228,7 @@ class Redux_Customizer_Panel extends WP_Customize_Panel {
 			data-width="{{ data.width }}">
 			<h3 class="accordion-section-title" tabindex="0">
 				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>{{ data.title }}
-				<span class="screen-reader-text"><?php echo esc_html__( 'Press return or enter to open this panel', 'redux-pro' ); ?></span>
+				<span class="screen-reader-text"><?php echo esc_html__( 'Press return or enter to open this panel', 'redux-framework' ); ?></span>
 			</h3>
 			<ul class="accordion-sub-container control-panel-content"></ul>
 		</li>
