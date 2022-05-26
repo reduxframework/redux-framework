@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-Redux::setSection(
+Redux::set_section(
 	$opt_name,
 	array(
 		'title'      => esc_html__( 'Accordion Field', 'your-textdomain-here' ),

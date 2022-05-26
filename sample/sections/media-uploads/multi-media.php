@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-Redux::setSection(
+Redux::set_section(
 	$opt_name,
 	array(
 		'title'      => esc_html__( 'Multi Media', 'your-textdomain-here' ),

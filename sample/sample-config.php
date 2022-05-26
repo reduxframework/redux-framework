@@ -119,7 +119,7 @@ $args = array(
 	'disable_save_warn'         => false,
 
 	// Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
-	'page_priority'             => null,
+	'page_priority'             => 90,
 
 	// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters.
 	'page_parent'               => 'themes.php',
