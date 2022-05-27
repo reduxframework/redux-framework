@@ -392,7 +392,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 			$sections = self::construct_sections( $opt_name );
 
 			if ( isset( self::$uses_extensions[ $opt_name ] ) && ! empty( self::$uses_extensions[ $opt_name ] ) ) {
-				add_action( "redux/extensions/$opt_name/before", array( 'Redux', 'loadExtensions' ), 0 );
+				add_action( "redux/extensions/$opt_name/before", array( 'Redux', 'load_extensions' ), 0 );
 			}
 
 			$redux                   = new ReduxFramework( $sections, $args );
