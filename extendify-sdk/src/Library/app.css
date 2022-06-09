@@ -1,0 +1,151 @@
+/* Adding CSS classes should be done with consideration and rarely */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.extendify {
+    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: transparent;
+    --tw-ring-color: var(--wp-admin-theme-color);
+}
+
+.extendify *,
+.extendify *:after,
+.extendify *:before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+.extendify .button-focus {
+    @apply outline-none focus:shadow-none focus:ring-wp focus:ring-wp-theme-500;
+}
+.extendify select.button-focus,
+.extendify input.button-focus {
+    @apply focus:outline-none focus:border-transparent focus:shadow-none;
+}
+
+div.extendify button.extendify-skip-to-sr-link:focus {
+    @apply fixed top-0 z-high bg-white p-4;
+}
+
+.button-extendify-main {
+    @apply button-focus cursor-pointer whitespace-nowrap rounded bg-extendify-main p-1.5 px-3 text-base text-white no-underline transition duration-200 hover:bg-extendify-main-dark hover:text-white focus:text-white active:bg-gray-900 active:text-white;
+}
+#extendify-search-input:focus ~ svg,
+#extendify-search-input:not(:placeholder-shown) ~ svg {
+    @apply hidden;
+}
+#extendify-search-input::-webkit-textfield-decoration-container {
+    @apply mr-3;
+}
+
+/* WP tweaks and overrides */
+.extendify .components-panel__body > .components-panel__body-title {
+    /* Override WP aggressive border:none and border:0 */
+    border-bottom: 1px solid #e0e0e0 !important;
+    @apply bg-transparent;
+}
+.extendify .components-modal__header {
+    @apply border-b border-gray-300;
+}
+
+/* A shim to ensure live previews w/o iframes display properly */
+.block-editor-block-preview__content
+    .block-editor-block-list__layout.is-root-container
+    > .ext {
+    @apply max-w-none;
+}
+
+.extendify .block-editor-block-preview__container {
+    /* no important */
+    @apply opacity-0;
+    animation: extendifyOpacityIn 200ms cubic-bezier(0.694, 0, 0.335, 1)
+        forwards 0ms;
+}
+
+/* Remove excess margin for top-level patterns on < 5.9 */
+.extendify .is-root-container > [data-block],
+.extendify .is-root-container > [data-align="full"],
+.extendify .is-root-container > [data-align="full"] > .wp-block {
+    @apply my-0 !important;
+}
+
+/* Remove excess margin for top-level patterns on 5.9+ */
+.editor-styles-wrapper:not(.block-editor-writing-flow)
+    > .is-root-container
+    :where(.wp-block)[data-align="full"] {
+    @apply my-0 !important;
+}
+
+@keyframes extendifyOpacityIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.extendify .with-light-shadow::after {
+    content: "";
+    @apply absolute inset-0 border-0 shadow-inner-sm;
+}
+.extendify .with-light-shadow:hover::after {
+    @apply shadow-inner-md;
+}
+
+/* Fallback as FireFox does not support backdrop filter */
+@supports not (
+    (-webkit-backdrop-filter: saturate(2) blur(24px)) or
+        (backdrop-filter: saturate(2) blur(24px))
+) {
+    div.extendify .bg-extendify-transparent-white {
+        @apply bg-gray-100;
+    }
+}
+
+/* Style contentType/pageType control in sidebar */
+.components-panel__body.ext-type-control .components-panel__body-title {
+    @apply my-0 -mx-4 border-b-0 px-5;
+}
+
+.extendify .animate-pulse {
+    animation: extendifyPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes extendifyPulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.is-template--inactive::before,
+.is-template--in-review::before {
+    content: "";
+    @apply absolute top-0 left-0 bottom-0 right-0 z-40 h-full w-full border-8 border-solid border-extendify-secondary;
+}
+
+.is-template--inactive::before {
+    border-color: #fdeab6;
+}
+
+.extendify-tooltip-default:not(.is-without-arrow)[data-y-axis="bottom"]::after {
+    border-bottom-color: #1e1e1e;
+}
+.extendify-tooltip-default:not(.is-without-arrow)::before {
+    @apply border-transparent;
+}
+.extendify-tooltip-default:not(.is-without-arrow) .components-popover__content {
+    min-width: 250px;
+    @apply border-transparent bg-gray-900 p-4 text-white;
+}
+.extendify-bottom-arrow::after {
+    content: "";
+    bottom: -15px;
+    @apply absolute inline-block h-0 w-0 -translate-y-px transform border-8 border-transparent;
+    border-top-color: #1e1e1e !important;
+}

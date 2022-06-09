@@ -3,10 +3,10 @@
  * API router
  */
 
-namespace Extendify\Library;
+namespace Extendify;
 
-use Extendify\Library\App;
-use Extendify\Library\Http;
+use Extendify\Config;
+use Extendify\Http;
 
 /**
  * Simple router for the REST Endpoints
@@ -22,7 +22,7 @@ class ApiRouter extends \WP_REST_Controller
     protected static $instance = null;
 
     /**
-     * The capablity required for access.
+     * The capability required for access.
      *
      * @var $capability
      */
@@ -34,7 +34,7 @@ class ApiRouter extends \WP_REST_Controller
      */
     public function __construct()
     {
-        $this->capability = App::$requiredCapability;
+        $this->capability = Config::$requiredCapability;
         add_filter(
             'rest_request_before_callbacks',
             // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundInExtendedClassBeforeLastUsed
@@ -132,6 +132,6 @@ class ApiRouter extends \WP_REST_Controller
         }
 
         $r = self::$instance;
-        return $r->$name(APP::$slug . '/' . APP::$apiVersion, ...$arguments);
+        return $r->$name(Config::$slug . '/' . Config::$apiVersion, ...$arguments);
     }
 }
