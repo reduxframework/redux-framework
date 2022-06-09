@@ -1,0 +1,71 @@
+/* Adding CSS classes should be done with consideration and rarely */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.extendify-onboarding {
+    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: transparent;
+    --tw-ring-color: var(--ext-partner-theme-primary-bg, #007cba);
+}
+
+.extendify-onboarding *,
+.extendify-onboarding *:after,
+.extendify-onboarding *:before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+.extendify-onboarding {
+    -webkit-font-smoothing: antialiased;
+}
+
+.extendify-onboarding .search-panel .icon-search {
+    position: absolute;
+    right: 16px;
+}
+.extendify-onboarding .button-focus {
+    @apply outline-none cursor-pointer rounded-lg bg-transparent text-center text-base no-underline ring-partner-primary-bg ring-offset-2 ring-offset-white focus:shadow-none focus:ring-wp;
+}
+.extendify-onboarding .input-focus {
+    @apply outline-none rounded-lg text-base ring-partner-primary-bg ring-offset-2 ring-offset-white focus:shadow-none focus:ring-wp;
+}
+
+.extendify-onboarding .button-card {
+    @apply m-0 block flex-1 overflow-hidden border p-4;
+}
+.extendify-onboarding .preview-container .block-editor-block-preview__content {
+    max-height: none !important;
+}
+
+.extendify-onboarding .spin {
+    animation: extendify-loading-spinner 2.5s linear infinite;
+}
+
+@keyframes extendify-loading-spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Checkbox styles for page selection step. */
+.extendify-onboarding .components-checkbox-control__input[type="checkbox"] {
+    @apply border border-gray-900;
+}
+.extendify-onboarding
+    .components-checkbox-control__input[type="checkbox"]:focus {
+    @apply outline-none ring-wp ring-partner-primary-bg ring-offset-2 ring-offset-white;
+}
+.extendify-onboarding
+    .components-checkbox-control__input[type="checkbox"]:checked {
+    @apply bg-partner-primary-bg;
+}
+
+/* Goal checkbox */
+.extendify-onboarding .goal-select .components-base-control__field {
+    @apply mb-0;
+}

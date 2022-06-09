@@ -3,10 +3,10 @@
  * Helper class for making http requests
  */
 
-namespace Extendify\Library;
+namespace Extendify;
 
-use Extendify\Library\App;
-use Extendify\Library\User;
+use Extendify\Config;
+use Extendify\User;
 
 /**
  * Controller for http communication
@@ -50,23 +50,28 @@ class Http
      */
     public function __construct($request)
     {
-        // Redundant, but extra prodection!
+        // Redundant, but extra protection!
         if (!\wp_verify_nonce(sanitize_text_field(wp_unslash($request->get_header('x_wp_nonce'))), 'wp_rest')) {
             return;
         }
 
-        // Some special cases for development.
-        $this->baseUrl = $request->get_header('x_extendify_dev_mode') !== 'false' ? App::$config['api']['dev'] : App::$config['api']['live'];
-        $this->baseUrl = $request->get_header('x_extendify_local_mode') !== 'false' ? App::$config['api']['local'] : $this->baseUrl;
+        // Some special cases for library development.
+        $this->baseUrl = $request->get_header('x_extendify_dev_mode') !== 'false' ? Config::$config['api']['dev'] : Config::$config['api']['live'];
+        $this->baseUrl = $request->get_header('x_extendify_local_mode') !== 'false' ? Config::$config['api']['local'] : $this->baseUrl;
+
+        // Onboarding request.
+        $this->baseUrl = $request->get_header('x_extendify_onboarding') === 'true' ? Config::$config['api']['onboarding'] : $this->baseUrl;
+        $this->baseUrl = $request->get_header('x_extendify_onboarding_dev_mode') === 'true' ? Config::$config['api']['onboarding-dev'] : $this->baseUrl;
+        $this->baseUrl = $request->get_header('x_extendify_onboarding_local_mode') === 'true' ? Config::$config['api']['onboarding-local'] : $this->baseUrl;
 
         $this->data = [
             'wp_language' => \get_locale(),
             'wp_theme' => \get_option('template'),
-            'mode' => App::$environment,
+            'mode' => Config::$environment,
             'uuid' => User::data('uuid'),
-            'library_version' => App::$version,
+            'library_version' => Config::$version,
             'wp_active_plugins' => $request->get_method() === 'POST' ? \get_option('active_plugins') : [],
-            'sdk_partner' => App::$sdkPartner,
+            'sdk_partner' => Config::$sdkPartner,
         ];
 
         if ($request->get_header('x_extendify_dev_mode') !== 'false') {
@@ -104,6 +109,9 @@ class Http
                 'headers' => array_merge($this->headers, $headers),
             ]
         );
+        if (\is_wp_error($response)) {
+            return $response;
+        }
 
         $responseBody = \wp_remote_retrieve_body($response);
         return json_decode($responseBody, true);
@@ -127,6 +135,9 @@ class Http
                 'body' => array_merge($this->data, $data),
             ]
         );
+        if (\is_wp_error($response)) {
+            return $response;
+        }
 
         $responseBody = \wp_remote_retrieve_body($response);
         return json_decode($responseBody, true);

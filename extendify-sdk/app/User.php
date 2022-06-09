@@ -3,9 +3,9 @@
  * Helper class for interacting with the user
  */
 
-namespace Extendify\Library;
+namespace Extendify;
 
-use Extendify\Library\App;
+use Extendify\Config;
 
 /**
  * Helper class for interacting with the user
@@ -144,7 +144,7 @@ class User
         }
 
         if (!isset($userData['state']['sdkPartner']) || !$userData['state']['sdkPartner']) {
-            $userData['state']['sdkPartner'] = App::$sdkPartner;
+            $userData['state']['sdkPartner'] = Config::$sdkPartner;
         }
 
         $userData['state']['uuid'] = self::data('uuid');
