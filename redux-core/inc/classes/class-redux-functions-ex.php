@@ -378,21 +378,21 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 				}
 				if ( ! file_exists( $upload_dir . $new_class_name . '.php' ) ) {
 					$class_file = '<?php' . PHP_EOL . PHP_EOL .
-					              'class {{ext_class}} extends Redux_Extension_Abstract {' . PHP_EOL .
-					              '    private $c;' . PHP_EOL .
-					              '    public function __construct( $parent, $path, $ext_class ) {' . PHP_EOL .
-					              '        $this->c = $parent->extensions[\'' . $name . '\'];' . PHP_EOL .
-					              '        // Add all the params of the Abstract to this instance.' . PHP_EOL .
-					              '        foreach( get_object_vars( $this->c ) as $key => $value ) {' . PHP_EOL .
-					              '            $this->$key = $value;' . PHP_EOL .
-					              '        }' . PHP_EOL .
-					              '        parent::__construct( $parent, $path );' . PHP_EOL .
-					              '    }' . PHP_EOL .
-					              '    // fake "extends Redux_Extension_Abstract\" using magic function' . PHP_EOL .
-					              '    public function __call( $method, $args ) {' . PHP_EOL .
-					              '        return call_user_func_array( array( $this->c, $method ), $args );' . PHP_EOL .
-					              '    }' . PHP_EOL .
-					              '}' . PHP_EOL;
+								'class {{ext_class}} extends Redux_Extension_Abstract {' . PHP_EOL .
+								'    private $c;' . PHP_EOL .
+								'    public function __construct( $parent, $path, $ext_class ) {' . PHP_EOL .
+								'        $this->c = $parent->extensions[\'' . $name . '\'];' . PHP_EOL .
+								'        // Add all the params of the Abstract to this instance.' . PHP_EOL .
+								'        foreach( get_object_vars( $this->c ) as $key => $value ) {' . PHP_EOL .
+								'            $this->$key = $value;' . PHP_EOL .
+								'        }' . PHP_EOL .
+								'        parent::__construct( $parent, $path );' . PHP_EOL .
+								'    }' . PHP_EOL .
+								'    // fake "extends Redux_Extension_Abstract\" using magic function' . PHP_EOL .
+								'    public function __call( $method, $args ) {' . PHP_EOL .
+								'        return call_user_func_array( array( $this->c, $method ), $args );' . PHP_EOL .
+								'    }' . PHP_EOL .
+								'}' . PHP_EOL;
 					$template   = str_replace( '{{ext_class}}', $new_class_name, $class_file );
 					$parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
 				}
