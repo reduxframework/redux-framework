@@ -6,13 +6,9 @@
 ## New to Version 4.3 ##
 * METABOXES!
 * REPEATER EXTENSION!
+* Multi Media extension.
+* DateTime extension.
 * Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
-
-## Beta testing instructions for the Repeater extension ##
-* Repeater config is includes in the sample config.  
-* If you are already using the Repeater extension of Redux Pro, there is nothing you need to update.  The version of the Repeater field within the Redux core will override both the extension and Pro.
-* Please verify the repeater field in your existing project still function normally.
-* Please do not use this code in your production releases yet.  Internal beta testing for your organization fine and encouraged.
 
 ## New to Version 4.2 ##
 ### See the sample folder for examples for the new and improved fields. ###
