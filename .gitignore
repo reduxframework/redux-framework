@@ -37,8 +37,9 @@ Thumbs.db
 vendors/composer/
 !assets/js/vendor/
 wpcs/
+../composer.lock
 composer.lock
-vendor/
+/vendor/
 
 # Bower #
 ##########
@@ -73,7 +74,7 @@ yarn-debug.log*
 yarn-error.log*
 */.DS_Store
 
-vendor/*
+# vendor/*
 redux-templates/classes/library.json
 local_developer.txt
 

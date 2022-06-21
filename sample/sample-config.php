@@ -472,6 +472,7 @@ Redux::set_section(
 );
 
 require_once Redux_Core::$dir . '../sample/sections/additional-types/date.php';
+require_once Redux_Core::$dir . '../sample/sections/additional-types/date-time-picker.php';
 require_once Redux_Core::$dir . '../sample/sections/additional-types/sorter.php';
 require_once Redux_Core::$dir . '../sample/sections/additional-types/raw.php';
 
@@ -528,7 +529,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/accordion.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-scheme.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/custom-fonts.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/date-time-picker.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/icon-select.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/js-button.php';
