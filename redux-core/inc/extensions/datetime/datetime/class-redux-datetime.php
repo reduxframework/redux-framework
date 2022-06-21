@@ -114,7 +114,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 				}
 			}
 
-			// Assignment, make it eaasier to read.
+			// Assignment, make it easier to read.
 			$field_id     = $this->field['id'];
 			$field_name   = $this->field['name'];
 			$split        = $this->field['split'];
@@ -154,63 +154,63 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 
 			// Output defaults to div, so JS can read it.
 			// Broken up for readability, coz I'm the one who has to debug it!
-			echo '<div id="' . esc_attr( $field_id ) . '" class="redux-datetime-container" 
+			echo '<div id="' . esc_attr( $field_id ) . '" class="redux-datetime-container"
                        data-dev-mode="' . esc_attr( $this->parent->args['dev_mode'] ) . '"
                        data-version="' . esc_attr( Redux_Extension_Datetime::$version ) . '"
-                       data-id="' . esc_attr( $field_id ) . '" 
-                       data-mode="' . esc_attr( $split ) . '" 
-                       data-separator="' . esc_attr( $this->field['separator'] ) . '" 
-                       data-control-type="' . esc_attr( $control_type ) . '" 
-                       data-rtl="' . esc_attr( is_rtl() ) . '" 
-                       data-num-of-months="' . esc_attr( $num_of_months ) . '" 
-                       data-hour-min="' . esc_attr( $hour_min ) . '" 
-                       data-hour-max="' . esc_attr( $hour_max ) . '" 
-                       data-minute-min="' . esc_attr( $min_min ) . '" 
-                       data-minute-max="' . esc_attr( $min_max ) . '" 
-                       data-date-min="' . rawurlencode( wp_json_encode( $this->field['date-min'] ) ) . '" 
-                       data-date-max="' . rawurlencode( wp_json_encode( $this->field['date-max'] ) ) . '" 
-                       data-timezone="' . esc_attr( $this->field['timezone'] ) . '" 
-                       data-timezone-list="' . rawurlencode( wp_json_encode( $this->field['timezone-list'] ) ) . '" 
-                       data-date-picker="' . esc_attr( $this->field['date-picker'] ) . '" 
-                       data-time-picker="' . esc_attr( $this->field['time-picker'] ) . '" 
-                       data-time-format="' . esc_attr( $this->field['time-format'] ) . '" 
+                       data-id="' . esc_attr( $field_id ) . '"
+                       data-mode="' . esc_attr( $split ) . '"
+                       data-separator="' . esc_attr( $this->field['separator'] ) . '"
+                       data-control-type="' . esc_attr( $control_type ) . '"
+                       data-rtl="' . esc_attr( is_rtl() ) . '"
+                       data-num-of-months="' . esc_attr( $num_of_months ) . '"
+                       data-hour-min="' . esc_attr( $hour_min ) . '"
+                       data-hour-max="' . esc_attr( $hour_max ) . '"
+                       data-minute-min="' . esc_attr( $min_min ) . '"
+                       data-minute-max="' . esc_attr( $min_max ) . '"
+                       data-date-min="' . rawurlencode( wp_json_encode( $this->field['date-min'] ) ) . '"
+                       data-date-max="' . rawurlencode( wp_json_encode( $this->field['date-max'] ) ) . '"
+                       data-timezone="' . esc_attr( $this->field['timezone'] ) . '"
+                       data-timezone-list="' . rawurlencode( wp_json_encode( $this->field['timezone-list'] ) ) . '"
+                       data-date-picker="' . esc_attr( $this->field['date-picker'] ) . '"
+                       data-time-picker="' . esc_attr( $this->field['time-picker'] ) . '"
+                       data-time-format="' . esc_attr( $this->field['time-format'] ) . '"
                        data-date-format="' . esc_attr( $this->field['date-format'] ) . '">';
 
 			// If split mode is on, output two text boxes.
 			if ( true === $split ) {
 				echo '<div class="redux-date-input input_wrapper">';
 				echo '<label class="redux-date-input-label">' . esc_html( $date_placeholder ) . '</label>';
-				echo ' <input 
-							data-id="' . esc_attr( $field_id ) . '" 
-							type="text" 
-							id="' . esc_attr( $field_id ) . '-date" 
-							name="' . esc_attr( $field_name ) . '[date]" 
-							placeholder="' . esc_attr( $date_placeholder ) . '" 
-							value="' . esc_attr( $this->value['date'] ) . '" 
+				echo ' <input
+							data-id="' . esc_attr( $field_id ) . '"
+							type="text"
+							id="' . esc_attr( $field_id ) . '-date"
+							name="' . esc_attr( $field_name ) . '[date]"
+							placeholder="' . esc_attr( $date_placeholder ) . '"
+							value="' . esc_attr( $this->value['date'] ) . '"
 							class="redux-date-picker ' . esc_attr( $this->field['class'] ) . '" />&nbsp;&nbsp;';
 
 				echo '</div>';
 
 				echo '<div class="redux-time-input input_wrapper">';
 				echo '<label class="redux-time-input-label">' . esc_html( $time_placeholder ) . '</label>';
-				echo ' <input 
-							data-id="' . esc_attr( $field_id ) . '" 
-							type="text" id="' . esc_attr( $field_id ) . '-time" 
-							name="' . esc_attr( $field_name ) . '[time]" 
-							placeholder="' . esc_attr( $time_placeholder ) . '" 
-							value="' . esc_attr( $this->value['time'] ) . '" 
+				echo ' <input
+							data-id="' . esc_attr( $field_id ) . '"
+							type="text" id="' . esc_attr( $field_id ) . '-time"
+							name="' . esc_attr( $field_name ) . '[time]"
+							placeholder="' . esc_attr( $time_placeholder ) . '"
+							value="' . esc_attr( $this->value['time'] ) . '"
 							class="redux-time-picker ' . esc_attr( $this->field['class'] ) . '" />';
 
 				// Otherwise, just one.
 			} else {
 				echo '<div class="redux-datetime-input single_wrapper">';
 				echo '<label class="redux-datetime-input-label">' . esc_attr( $date_placeholder ) . '</label>';
-				echo ' <input 
-							data-id="' . esc_attr( $field_id ) . '" 
-							type="text" id="' . esc_attr( $field_id ) . '-date" 
-							name="' . esc_attr( $field_name ) . '" 
-							placeholder="' . esc_attr( $date_placeholder ) . '" 
-							value="' . esc_attr( $this->value ) . '" 
+				echo ' <input
+							data-id="' . esc_attr( $field_id ) . '"
+							type="text" id="' . esc_attr( $field_id ) . '-date"
+							name="' . esc_attr( $field_name ) . '"
+							placeholder="' . esc_attr( $date_placeholder ) . '"
+							value="' . esc_attr( $this->value ) . '"
 							class="redux-date-picker ' . esc_attr( $this->field['class'] ) . '" />';
 
 			}
