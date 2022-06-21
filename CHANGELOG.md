@@ -1,11 +1,12 @@
 # Redux Changelog
 
-## 4.3.14.2
+## 4.3.15
 * Added: Multi Media extension. [https://devs.redux.io/core-extensions/multi-media.html](https://devs.redux.io/core-extensions/multi-media.html)
-
-## 4.3.14.1
+* Added: DateTime extension. [https://devs.redux.io/core-extensions/date-time-picker.html](https://devs.redux.io/core-extensions/date-time-picker.html)
 * Fixed: Deprecation error surrounding `add_menu_page` in WordPress 6.0.
 * Fixed: `undefined` unit entry in `letter-spacing` subfield of the `typography` field.
+* Updated: Extendify Library.
+* Release date: June 21, 2022
 
 ## 4.3.14
 * New: `typography` field supports individual unit types for subfields that support them (font-size, line-height, etc.)  See: [https://devs.redux.io/core-fields/typography.html](https://devs.redux.io/core-fields/typography.html)
