@@ -53,9 +53,9 @@ The Extendify library uses a custom API to fetch block patterns and page layouts
 
 * Active plugins
 
-* Anonymized UUID
+* Anonymize UUID
 
-* Anonymized IP address
+* Anonymize IP address
 
 By accessing the Extendify library, you agree to the Extendify [privacy policy](https://extendify.com/privacy-policy) and [terms of service](https://extendify.com/terms-of-service).
 
