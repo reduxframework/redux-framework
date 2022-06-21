@@ -111,6 +111,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Added: DateTime extension. [https://devs.redux.io/core-extensions/date-time-picker.html](https://devs.redux.io/core-extensions/date-time-picker.html)
 * Fixed: Deprecation error surrounding `add_menu_page` in WordPress 6.0.
 * Fixed: `undefined` unit entry in `letter-spacing` subfield of the `typography` field.
+* Modified: Deprecation notices for outdated API.
 * Updated: Extendify Library.
 * Release date: June 21, 2022
 
