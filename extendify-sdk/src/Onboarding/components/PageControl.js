@@ -16,10 +16,12 @@ export const PageControl = () => {
     return (
         <div className="flex items-center justify-between space-x-2">
             <div className="flex-1"></div>
-            <ProgressBar
-                currentPageIndex={currentPageIndex}
-                totalPages={totalPages}
-            />
+            {onFirstPage || (
+                <ProgressBar
+                    currentPageIndex={currentPageIndex}
+                    totalPages={totalPages}
+                />
+            )}
             <div className="flex space-x-2 flex-1 justify-end">
                 {onFirstPage || (
                     <button

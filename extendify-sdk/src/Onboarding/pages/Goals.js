@@ -26,7 +26,7 @@ export const Goals = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__(
                         'What do you want to accomplish with this new site?',
                         'extendify',
@@ -51,21 +51,23 @@ export const Goals = () => {
                         className="w-full max-w-2xl grid lg:grid-cols-2 gap-4 goal-select">
                         {/* Added so forms can be submitted by pressing Enter */}
                         <input type="submit" className="hidden" />
-                        {goals &&
-                            goals?.map((goal, index) => (
-                                <div
-                                    key={goal.id}
-                                    className="border p-4"
-                                    ref={
-                                        index === 0 ? initialFocus : undefined
-                                    }>
-                                    <CheckboxControl
-                                        label={goal.title}
-                                        checked={has('goals', goal)}
-                                        onChange={() => toggle('goals', goal)}
-                                    />
-                                </div>
-                            ))}
+                        {/* Seems excessive but this keeps failing and crashing randomly */}
+                        {goals && goals?.length > 0
+                            ? goals?.map((goal, index) => (
+                                  <div
+                                      key={goal.id}
+                                      className="border p-4"
+                                      ref={
+                                          index === 0 ? initialFocus : undefined
+                                      }>
+                                      <CheckboxControl
+                                          label={goal.title}
+                                          checked={has('goals', goal)}
+                                          onChange={() => toggle('goals', goal)}
+                                      />
+                                  </div>
+                              ))
+                            : null}
                     </form>
                 )}
             </div>

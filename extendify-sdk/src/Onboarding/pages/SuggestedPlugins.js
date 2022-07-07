@@ -13,10 +13,7 @@ export const fetchData = () => ({ key: 'suggested-plugins' })
 export const SuggestedPlugins = () => {
     // Airtable will tag the image url with a timestamp thus forcing a re-render on every fetch
     // This will slow down revalidation to only occur if they are idle for 10 minutes
-    const { data: suggestedPlugins } = useFetch(fetchData, fetcher, {
-        dedupingInterval: 60_000,
-        refreshInterval: 0,
-    })
+    const { data: suggestedPlugins } = useFetch(fetchData, fetcher)
     const { plugins, goals, toggle, has, add, remove } = useUserSelectionStore()
 
     const nothingToRecommend = useMemo(() => {
@@ -61,7 +58,7 @@ export const SuggestedPlugins = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('Choose from these recommended plugins', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70">

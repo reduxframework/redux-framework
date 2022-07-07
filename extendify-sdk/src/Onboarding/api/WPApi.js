@@ -1,8 +1,5 @@
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { Axios as api } from './axios'
-
-export const saveThemeJson = (themeJson) =>
-    api.post('onboarding/save-theme-json', { themeJson })
 
 export const parseThemeJson = (themeJson) =>
     api.post('onboarding/parse-theme-json', { themeJson })
@@ -81,7 +78,10 @@ export const updateTemplatePart = async (part, content) => {
             theme: 'extendable',
             type: 'wp_template_part',
             status: 'publish',
-            description: __('Added by Extendify Launch', 'extendify'),
+            description: sprintf(
+                __('Added by %s', 'extendify'),
+                'Extendify Launch',
+            ),
             content,
         }),
     }
@@ -91,6 +91,74 @@ export const updateTemplatePart = async (part, content) => {
         const response = await fetch(url, options)
         const data = await response.json()
         return data
+    } catch (e) {
+        // Fail gracefully for now
+    }
+}
+export const getHeadersAndFooters = async () => {
+    let patterns = await getTemplateParts()
+    patterns = patterns?.filter((p) => p.theme === 'extendable')
+    const headers = patterns?.filter((p) => p?.slug?.includes('header'))
+    const footers = patterns?.filter((p) => p?.slug?.includes('footer'))
+    return { headers, footers }
+}
+
+const getTemplateParts = async () => {
+    try {
+        const parts = await fetch(
+            window.extOnbData.wpRoot + 'wp/v2/template-parts',
+            {
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-WP-Nonce': window.extOnbData.nonce,
+                },
+            },
+        )
+        if (!parts.ok) return
+        return await parts.json()
+    } catch (e) {
+        // Fail gracefully for now
+    }
+}
+
+export const getThemeVariations = async () => {
+    try {
+        const variations = await fetch(
+            window.extOnbData.wpRoot +
+                'wp/v2/global-styles/themes/extendable/variations',
+            {
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-WP-Nonce': window.extOnbData.nonce,
+                },
+            },
+        )
+        if (!variations.ok) return
+        return await variations.json()
+    } catch (e) {
+        // Fail gracefully for now
+    }
+}
+
+export const updateThemeVariation = async (id, variation) => {
+    try {
+        const response = await fetch(
+            `${window.extOnbData.wpRoot}wp/v2/global-styles/${id}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-WP-Nonce': window.extOnbData.nonce,
+                },
+                body: JSON.stringify({
+                    id,
+                    settings: variation.settings,
+                    styles: variation.styles,
+                }),
+            },
+        )
+        if (!response.ok) return
+        return await response.json()
     } catch (e) {
         // Fail gracefully for now
     }

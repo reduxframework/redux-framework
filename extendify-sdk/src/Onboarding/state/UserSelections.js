@@ -31,6 +31,9 @@ const store = (set, get) => ({
     remove(type, item) {
         set({ [type]: get()[type].filter((t) => t.id !== item.id) })
     },
+    reset(type) {
+        set({ [type]: [] })
+    },
     toggle(type, item) {
         if (get().has(type, item)) {
             get().remove(type, item)
@@ -55,7 +58,15 @@ const store = (set, get) => ({
 })
 export const useUserSelectionStore = create(
     persist(devtools(store), {
-        name: 'extendify',
+        name: 'extendify-site-selection',
         getStorage: () => sessionStorage,
+        partialize: (state) => ({
+            orderId: state?.orderId ?? null,
+            siteType: state?.siteType ?? {},
+            style: state?.style ?? null,
+            pages: state?.pages ?? [],
+            plugins: state?.plugins ?? [],
+            goals: state?.goals ?? [],
+        }),
     }),
 )

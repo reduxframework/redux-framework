@@ -149,15 +149,18 @@ class Admin
         \wp_add_inline_script(
             Config::$slug . '-onboarding-scripts',
             'window.extOnbData = ' . wp_json_encode([
+                'globalStylesPostID' => \WP_Theme_JSON_Resolver::get_user_global_styles_post_id(),
                 'site' => \esc_url_raw(\get_site_url()),
                 'adminUrl' => \esc_url_raw(\admin_url()),
                 'pluginUrl' => \esc_url_raw(EXTENDIFY_BASE_URL),
                 'home' => \esc_url_raw(\get_home_url()),
                 'root' => \esc_url_raw(\rest_url(Config::$slug . '/' . Config::$apiVersion)),
+                'config' => Config::$config,
                 'wpRoot' => \esc_url_raw(\rest_url()),
                 'nonce' => \wp_create_nonce('wp_rest'),
                 'partnerLogo' => defined('EXTENDIFY_PARTNER_LOGO') ? constant('EXTENDIFY_PARTNER_LOGO') : null,
                 'partnerName' => defined('EXTENDIFY_PARTNER_NAME') ? constant('EXTENDIFY_PARTNER_NAME') : null,
+                'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
             ]),
             'before'
         );
@@ -171,7 +174,7 @@ class Admin
             $version,
             'all'
         );
-        $bg = defined('EXTENDIFY_ONBOARDING_BG') ? constant('EXTENDIFY_ONBOARDING_BG') : 'var(--wp-admin-theme-color, #007cba)';
+        $bg = defined('EXTENDIFY_ONBOARDING_BG') ? constant('EXTENDIFY_ONBOARDING_BG') : '#3e58e1';
         $txt = defined('EXTENDIFY_ONBOARDING_TXT') ? constant('EXTENDIFY_ONBOARDING_TXT') : '#ffffff';
         \wp_add_inline_style(Config::$slug . '-onboarding-styles', "body {
             --ext-partner-theme-primary-bg: {$bg};

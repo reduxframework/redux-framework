@@ -31,7 +31,7 @@ export const SiteInformation = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__("What's the name of your new site?", 'extendify')}
                 </h1>
                 <p className="text-base opacity-70">

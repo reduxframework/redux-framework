@@ -10,6 +10,7 @@ export const PageLayout = ({ children, includeNav = true }) => {
                     {window.extOnbData?.partnerLogo && (
                         <div className="pb-8">
                             <img
+                                style={{ maxWidth: '200px' }}
                                 src={window.extOnbData.partnerLogo}
                                 alt={window.extOnbData?.partnerName ?? ''}
                             />
@@ -23,9 +24,9 @@ export const PageLayout = ({ children, includeNav = true }) => {
                         {__('Powered by', 'extendify')}
                     </span>
                     <span className="relative">
-                        <Logo className="logo text-white w-28" />
+                        <Logo className="logo text-partner-primary-text w-28" />
                         <span className="absolute -bottom-2 right-3 font-semibold tracking-tight">
-                            {__('Launch', 'extendify')}
+                            Launch
                         </span>
                     </span>
                 </div>

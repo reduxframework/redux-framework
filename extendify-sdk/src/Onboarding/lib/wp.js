@@ -1,8 +1,8 @@
 import { getTemplate } from '@onboarding/api/DataApi'
 import {
     updateOption,
-    saveThemeJson as saveThemeJsonWP,
     createPage,
+    updateThemeVariation,
 } from '@onboarding/api/WPApi'
 
 export const createWordpressPages = async (pages, siteType, style) => {
@@ -28,7 +28,7 @@ export const createWordpressPages = async (pages, siteType, style) => {
             name,
             status: 'publish',
             content: content,
-            // template: 'blank',
+            template: 'no-title',
         })
         pageIds[name] = { id: result.id, title: page.title }
     }
@@ -47,4 +47,5 @@ export const createWordpressPages = async (pages, siteType, style) => {
     return pageIds
 }
 
-export const saveThemeJson = ({ themeJson }) => saveThemeJsonWP(themeJson)
+export const updateGlobalStyleVariant = (variation) =>
+    updateThemeVariation(window.extOnbData.globalStylesPostID, variation)

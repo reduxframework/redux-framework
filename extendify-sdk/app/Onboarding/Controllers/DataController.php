@@ -36,7 +36,11 @@ class DataController
     public static function getStyles($request)
     {
         $siteType = $request->get_param('siteType');
-        $response = Http::get('/styles', ['siteType' => $siteType]);
+        $styles = $request->get_param('styles');
+        $response = Http::get('/styles', [
+            'siteType' => $siteType,
+            'styles' => $styles,
+        ]);
         return new \WP_REST_Response($response);
     }
     /**
@@ -90,14 +94,13 @@ class DataController
     }
 
     /**
-     * Send data about the order.
+     * Create an order.
      *
-     * @param \WP_REST_Request $request - The request.
      * @return \WP_REST_Response
      */
-    public static function createOrder($request)
+    public static function createOrder()
     {
-        $response = Http::post('/create-order', $request->get_params());
+        $response = Http::post('/create-order');
         return new \WP_REST_Response($response);
     }
 }

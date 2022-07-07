@@ -3,9 +3,9 @@ import classNames from 'classnames'
 import { getTemplate } from '@onboarding/api/DataApi'
 import { StylePreview } from '@onboarding/components/StyledPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
+import { findTheCode } from '@onboarding/lib/util'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { Checkmark } from '@onboarding/svg'
-import { findTheCode } from '../lib/util'
 
 export const fetcher = (data) => getTemplate(data)
 export const PagePreview = ({
@@ -27,7 +27,7 @@ export const PagePreview = ({
     )
     if (displayOnly) {
         return (
-            <div className="text-base p-0 bg-transparent overflow-hidden rounded-lg border border-gray-100">
+            <div className="text-base p-0 bg-transparent overflow-hidden rounded-lg border border-gray-100 mb-2">
                 <div className="border-gray-100 border-b p-2 flex justify-between min-w-sm">
                     {page.title}
                 </div>
@@ -58,19 +58,21 @@ export const PagePreview = ({
                     }
                 }}
                 onClick={() => lock || toggle('pages', page)}>
-                <div className="border-gray-100 border-b p-2 flex justify-between min-w-sm">
-                    <div
-                        className={classNames('flex items-center', {
-                            'text-gray-700': !has('pages', page),
-                        })}>
-                        <span>{page.title}</span>
-                        {lock && (
-                            <span className="w-4 h-4 text-base leading-none pl-2 mr-6 dashicons dashicons-lock"></span>
+                <div className="border-gray-100 border-b min-w-sm z-30 relative bg-white">
+                    <div className="p-2 flex justify-between">
+                        <div
+                            className={classNames('flex items-center', {
+                                'text-gray-700': !has('pages', page),
+                            })}>
+                            <span>{page.title}</span>
+                            {lock && (
+                                <span className="w-4 h-4 text-base leading-none pl-2 mr-6 dashicons dashicons-lock"></span>
+                            )}
+                        </div>
+                        {has('pages', page) && (
+                            <Checkmark className="text-partner-primary-bg w-6" />
                         )}
                     </div>
-                    {has('pages', page) && (
-                        <Checkmark className="text-partner-primary-bg w-6" />
-                    )}
                 </div>
                 <StylePreview
                     blockHeight={blockHeight}

@@ -28,12 +28,12 @@ export const Landing = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('Welcome to Your WordPress Site', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70">
                     {__(
-                        "Design and launch your site with our guided experience, or jump right to the WordPress dashboard if you already know what you're doing.",
+                        'Design and launch your site with this guided experience, or head right into the WordPress dashboard if you know your way around.',
                         'extendify',
                     )}
                 </p>
@@ -56,7 +56,7 @@ export const Landing = () => {
                             }}
                         />
                         <p className="font-bold text-lg text-gray-900">
-                            {__('Extendify Launch', 'extendify')}
+                            Extendify Launch
                         </p>
                         <p className="text-base text-gray-900">
                             {__(

@@ -16,7 +16,7 @@ const store = (set, get) => ({
     },
     nextPageData() {
         const nextIndex = get().currentPageIndex + 1
-        if (nextIndex > get().pageOrder().length - 1) return {}
+        if (nextIndex > get().count() - 1) return {}
         return get().pages.get(get().pageOrder()[nextIndex])
     },
     setPage(page) {
@@ -24,7 +24,7 @@ const store = (set, get) => ({
         if (typeof page === 'string') {
             page = get().pageOrder().indexOf(page)
         }
-        if (page > get().pageOrder().length - 1) return
+        if (page > get().count() - 1) return
         if (page < 0) return
         set({ currentPageIndex: page })
     },

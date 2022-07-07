@@ -50,7 +50,11 @@ class Admin
         $theme = get_option('template');
         $label = esc_html__('Upgrade', 'extendify');
 
-        $links['upgrade'] = sprintf('<a href="%1$s" target="_blank"><b>%2$s</b></a>', "https://extendify.com/pricing?utm_source=extendify-plugin&utm_medium=wp-dash&utm_campaign=action-link&utm_content=$label&utm_term=$theme", $label);
+        $links['upgrade'] = sprintf(
+            '<a href="%1$s" target="_blank"><b>%2$s</b></a>',
+            "https://extendify.com/pricing?utm_source=extendify-plugin&utm_medium=wp-dash&utm_campaign=action-link&utm_content=$label&utm_term=$theme",
+            $label
+        );
 
         return $links;
     }
