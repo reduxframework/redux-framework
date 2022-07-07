@@ -73,11 +73,13 @@
 					$.each(
 						sectionArray.errors,
 						function( key, value ) {
-							$( '#' + redux.optName.args.opt_name + '-' + value.id ).addClass( 'redux-field-error' );
-							if ( 0 === $( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).length ) {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).append( '<div class="redux-th-error">' + value.msg + '</div>' );
+							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
+
+							fieldset.addClass( 'redux-field-error' );
+							if ( 0 === fieldset.parent().find( '.redux-th-error' ).length ) {
+								fieldset.append( '<div class="redux-th-error">' + value.msg + '</div>' );
 							} else {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).html( value.msg ).css( 'display', 'block' );
+								fieldset.parent().find( '.redux-th-error' ).html( value.msg ).css( 'display', 'block' );
 							}
 
 							$.redux.fixInput( key, value );
@@ -134,12 +136,14 @@
 					$.each(
 						sectionArray.warnings,
 						function( key, value ) {
-							$( '#' + redux.optName.args.opt_name + '-' + value.id ).addClass( 'redux-field-warning' );
+							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
 
-							if ( 0 === $( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).length ) {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).append( '<div class="redux-th-warning">' + value.msg + '</div>' );
+							fieldset.addClass( 'redux-field-warning' );
+
+							if ( 0 === fieldset.parent().find( '.redux-th-warning' ).length ) {
+								fieldset.append( '<div class="redux-th-warning">' + value.msg + '</div>' );
 							} else {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).html( value.msg ).css( 'display', 'block' );
+								fieldset.parent().find( '.redux-th-warning' ).html( value.msg ).css( 'display', 'block' );
 							}
 
 							$.redux.fixInput( key, value );

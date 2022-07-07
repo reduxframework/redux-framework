@@ -954,11 +954,13 @@ function colorNameToHex( colour ) {
 					$.each(
 						sectionArray.errors,
 						function( key, value ) {
-							$( '#' + redux.optName.args.opt_name + '-' + value.id ).addClass( 'redux-field-error' );
-							if ( 0 === $( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).length ) {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).append( '<div class="redux-th-error">' + value.msg + '</div>' );
+							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
+
+							fieldset.addClass( 'redux-field-error' );
+							if ( 0 === fieldset.parent().find( '.redux-th-error' ).length ) {
+								fieldset.append( '<div class="redux-th-error">' + value.msg + '</div>' );
 							} else {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-error' ).html( value.msg ).css( 'display', 'block' );
+								fieldset.parent().find( '.redux-th-error' ).html( value.msg ).css( 'display', 'block' );
 							}
 
 							$.redux.fixInput( key, value );
@@ -1015,12 +1017,14 @@ function colorNameToHex( colour ) {
 					$.each(
 						sectionArray.warnings,
 						function( key, value ) {
-							$( '#' + redux.optName.args.opt_name + '-' + value.id ).addClass( 'redux-field-warning' );
+							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
 
-							if ( 0 === $( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).length ) {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).append( '<div class="redux-th-warning">' + value.msg + '</div>' );
+							fieldset.addClass( 'redux-field-warning' );
+
+							if ( 0 === fieldset.parent().find( '.redux-th-warning' ).length ) {
+								fieldset.append( '<div class="redux-th-warning">' + value.msg + '</div>' );
 							} else {
-								$( '#' + redux.optName.args.opt_name + '-' + value.id ).parent().find( '.redux-th-warning' ).html( value.msg ).css( 'display', 'block' );
+								fieldset.parent().find( '.redux-th-warning' ).html( value.msg ).css( 'display', 'block' );
 							}
 
 							$.redux.fixInput( key, value );
@@ -1309,6 +1313,7 @@ function redux_change( variable ) {
 		var parentID;
 		var id;
 		var th;
+		var li;
 		var subParent;
 		var errorCount;
 		var errorsLeft;
@@ -1339,18 +1344,19 @@ function redux_change( variable ) {
 		id = id[0];
 
 		th        = rContainer.find( '.redux-group-tab-link-a[data-key="' + id + '"]' ).parents( '.redux-group-tab-link-li:first' );
-		subParent = $( '#' + parentID + '_li' ).parents( '.hasSubSections:first' );
+		li        = $( '#' + parentID + '_li' );
+		subParent = li.parents( '.hasSubSections:first' );
 
 		if ( $( variable ).parents( 'fieldset.redux-field:first' ).hasClass( 'redux-field-error' ) ) {
 			$( variable ).parents( 'fieldset.redux-field:first' ).removeClass( 'redux-field-error' );
-			$( variable ).parent().find( '.redux-th-error' ).slideUp();
+			$( variable ).parents().find( '.redux-th-error' ).slideUp();
 
 			errorCount = ( parseInt( rContainer.find( '.redux-field-errors span' ).text(), 0 ) - 1 );
 
 			if ( errorCount <= 0 ) {
 				$( '#' + parentID + '_li .redux-menu-error' ).fadeOut( 'fast' ).remove();
 				$( '#' + parentID + '_li .redux-group-tab-link-a' ).removeClass( 'hasError' );
-				$( '#' + parentID + '_li' ).parents( '.inside:first' ).find( '.redux-field-errors' ).slideUp();
+				li.parents( '.inside:first' ).find( '.redux-field-errors' ).slideUp();
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-errors' ).slideUp();
 				$( '#redux_metaboxes_errors' ).slideUp();
 			} else {
@@ -1381,7 +1387,7 @@ function redux_change( variable ) {
 			if ( warningCount <= 0 ) {
 				$( '#' + parentID + '_li .redux-menu-warning' ).fadeOut( 'fast' ).remove();
 				$( '#' + parentID + '_li .redux-group-tab-link-a' ).removeClass( 'hasWarning' );
-				$( '#' + parentID + '_li' ).parents( '.inside:first' ).find( '.redux-field-warnings' ).slideUp();
+				li.parents( '.inside:first' ).find( '.redux-field-warnings' ).slideUp();
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-warnings' ).slideUp();
 				$( '#redux_metaboxes_warnings' ).slideUp();
 			} else {

@@ -33,6 +33,7 @@ function redux_change( variable ) {
 		var parentID;
 		var id;
 		var th;
+		var li;
 		var subParent;
 		var errorCount;
 		var errorsLeft;
@@ -63,18 +64,19 @@ function redux_change( variable ) {
 		id = id[0];
 
 		th        = rContainer.find( '.redux-group-tab-link-a[data-key="' + id + '"]' ).parents( '.redux-group-tab-link-li:first' );
-		subParent = $( '#' + parentID + '_li' ).parents( '.hasSubSections:first' );
+		li        = $( '#' + parentID + '_li' );
+		subParent = li.parents( '.hasSubSections:first' );
 
 		if ( $( variable ).parents( 'fieldset.redux-field:first' ).hasClass( 'redux-field-error' ) ) {
 			$( variable ).parents( 'fieldset.redux-field:first' ).removeClass( 'redux-field-error' );
-			$( variable ).parent().find( '.redux-th-error' ).slideUp();
+			$( variable ).parents().find( '.redux-th-error' ).slideUp();
 
 			errorCount = ( parseInt( rContainer.find( '.redux-field-errors span' ).text(), 0 ) - 1 );
 
 			if ( errorCount <= 0 ) {
 				$( '#' + parentID + '_li .redux-menu-error' ).fadeOut( 'fast' ).remove();
 				$( '#' + parentID + '_li .redux-group-tab-link-a' ).removeClass( 'hasError' );
-				$( '#' + parentID + '_li' ).parents( '.inside:first' ).find( '.redux-field-errors' ).slideUp();
+				li.parents( '.inside:first' ).find( '.redux-field-errors' ).slideUp();
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-errors' ).slideUp();
 				$( '#redux_metaboxes_errors' ).slideUp();
 			} else {
@@ -105,7 +107,7 @@ function redux_change( variable ) {
 			if ( warningCount <= 0 ) {
 				$( '#' + parentID + '_li .redux-menu-warning' ).fadeOut( 'fast' ).remove();
 				$( '#' + parentID + '_li .redux-group-tab-link-a' ).removeClass( 'hasWarning' );
-				$( '#' + parentID + '_li' ).parents( '.inside:first' ).find( '.redux-field-warnings' ).slideUp();
+				li.parents( '.inside:first' ).find( '.redux-field-warnings' ).slideUp();
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-warnings' ).slideUp();
 				$( '#redux_metaboxes_warnings' ).slideUp();
 			} else {
