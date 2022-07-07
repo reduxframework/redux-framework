@@ -1,0 +1,21 @@
+.redux-main .redux-accordion-field { overflow: hidden; cursor: pointer; margin-top: 10px; }
+
+.redux-main .redux-accordion-field:first-child { margin-top: 0; }
+
+.redux-main .redux-accordion-field .redux-accordion-info { border: 1px solid #dfdfdf; padding: 10px 15px; height: auto; min-height: 20px; overflow: hidden; word-wrap: break-word; background: #FAFAFA; -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); }
+
+.redux-main .redux-accordion-field .redux-accordion-info:hover { border-color: #999; }
+
+.redux-main .redux-accordion-field .redux-accordion-info .el { color: #000; float: right; margin-top: -23px; margin-right: 10px; -webkit-transition: all 0.5s; transition: all 0.5s; }
+
+.redux-main .redux-accordion-field .redux-accordion-info .el.subtitled { margin-top: -33px; }
+
+.redux-main .redux-accordion-field h3 { margin: 0; border-bottom: 0; }
+
+.redux-main .redux-accordion-field .redux-accordion-desc { margin: -5px 0 10px; }
+
+.redux-accordion-wrap { border: 1px solid #e5e5e5; -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04); border-top: none; padding: 0 15px; background: #fff; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtYWNjb3JkaW9uLmNzcyIsInNvdXJjZXMiOlsicmVkdXgtYWNjb3JkaW9uLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsQUFDSSxXQURPLENBQ1Asc0JBQXNCLENBQUMsRUFDbkIsUUFBUSxFQUFFLE1BQU0sRUFDaEIsTUFBTSxFQUFFLE9BQU8sRUFDZixVQUFVLEVBQUUsSUFBSSxHQXlDbkI7O0FBN0NMLEFBTVEsV0FORyxDQUNQLHNCQUFzQixBQUtqQixZQUFZLENBQUMsRUFDVixVQUFVLEVBQUUsQ0FBQyxHQUNoQjs7QUFSVCxBQVVRLFdBVkcsQ0FDUCxzQkFBc0IsQ0FTbEIscUJBQXFCLENBQUMsRUFDbEIsTUFBTSxFQUFFLGlCQUFpQixFQUN6QixPQUFPLEVBQUUsU0FBUyxFQUNsQixNQUFNLEVBQUUsSUFBSSxFQUNaLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLFFBQVEsRUFBRSxNQUFNLEVBQ2hCLFNBQVMsRUFBRSxVQUFVLEVBQ3JCLFVBQVUsRUFBRSxPQUFPLEVBQ25CLGtCQUFrQixFQUFFLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLG1CQUFrQixFQUNoRCxVQUFVLEVBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsbUJBQWtCLEdBZ0IzQzs7QUFuQ1QsQUFxQlksV0FyQkQsQ0FDUCxzQkFBc0IsQ0FTbEIscUJBQXFCLEFBV2hCLE1BQU0sQ0FBQyxFQUNKLFlBQVksRUFBRSxJQUFJLEdBQ3JCOztBQXZCYixBQXlCWSxXQXpCRCxDQUNQLHNCQUFzQixDQVNsQixxQkFBcUIsQ0FlakIsR0FBRyxDQUFDLEVBQ0EsS0FBSyxFQUFFLElBQUksRUFDWCxLQUFLLEVBQUUsS0FBSyxFQUNaLFVBQVUsRUFBRSxLQUFLLEVBQ2pCLFlBQVksRUFBRSxJQUFJLEVBQ2xCLFVBQVUsRUFBRSxRQUFRLEdBSXZCOztBQWxDYixBQStCZ0IsV0EvQkwsQ0FDUCxzQkFBc0IsQ0FTbEIscUJBQXFCLENBZWpCLEdBQUcsQUFNRSxVQUFVLENBQUMsRUFDUixVQUFVLEVBQUUsS0FBSyxHQUNwQjs7QUFqQ2pCLEFBcUNRLFdBckNHLENBQ1Asc0JBQXNCLENBb0NsQixFQUFFLENBQUMsRUFDQyxNQUFNLEVBQUUsQ0FBQyxFQUNULGFBQWEsRUFBRSxDQUFDLEdBQ25COztBQXhDVCxBQTBDUSxXQTFDRyxDQUNQLHNCQUFzQixDQXlDbEIscUJBQXFCLENBQUMsRUFDbEIsTUFBTSxFQUFFLFdBQVcsR0FDdEI7O0FBSVQsQUFBQSxxQkFBcUIsQ0FBQyxFQUNsQixNQUFNLEVBQUUsaUJBQWlCLEVBQ3pCLGtCQUFrQixFQUFFLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLG1CQUFrQixFQUNoRCxVQUFVLEVBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsbUJBQWtCLEVBQ3hDLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLE9BQU8sRUFBRSxNQUFNLEVBQ2YsVUFBVSxFQUFFLElBQUksR0FDbkIifQ== */
+
+/*# sourceMappingURL=redux-accordion.css.map */

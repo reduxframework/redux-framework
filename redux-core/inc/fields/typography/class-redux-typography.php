@@ -991,6 +991,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			}
 			$link .= '&display=' . $this->parent->args['font_display'];
 
+			//return 'https://fonts.bunny.net/css?family=' . $link;
 			return 'https://fonts.googleapis.com/css?family=' . $link;
 		}
 

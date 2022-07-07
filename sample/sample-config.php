@@ -510,6 +510,7 @@ require_once Redux_Core::$dir . '../sample/sections/disabling/disable-field.php'
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-section.php';
 
 require_once Redux_Core::$dir . '../sample/sections/repeater/repeater.php';
+require_once Redux_Core::$dir . '../sample/sections/accordion/accordion.php';
 require_once Redux_Core::$dir . '../sample/sections/search/search.php';
 require_once Redux_Core::$dir . '../sample/sections/shortcodes/shortcodes.php';
 
@@ -526,7 +527,6 @@ if ( class_exists( 'Redux_Pro' ) ) {
 		)
 	);
 
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/accordion.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-scheme.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/custom-fonts.php';
 	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';

@@ -1,10 +1,10 @@
 <?php
 /**
- * Redux Pro Box Accordion config.
+ * Accordion config.
  *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,9 +12,8 @@ defined( 'ABSPATH' ) || exit;
 Redux::set_section(
 	$opt_name,
 	array(
-		'title'      => esc_html__( 'Accordion Field', 'your-textdomain-here' ),
-		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/accordion.html" target="_blank">https://devs.redux.io/premium/accordion.html</a>',
-		'subsection' => true,
+		'title'      => esc_html__( 'Accordion', 'your-textdomain-here' ),
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/accordion.html" target="_blank">https://devs.redux.io/core-extensions/accordion.html</a>',
 		'fields'     => array(
 			array(
 				'id'       => 'accordion-section-1',

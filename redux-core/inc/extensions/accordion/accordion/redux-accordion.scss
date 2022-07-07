@@ -1,0 +1,56 @@
+.redux-main {
+    .redux-accordion-field {
+        overflow: hidden;
+        cursor: pointer;
+        margin-top: 10px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        .redux-accordion-info {
+            border: 1px solid #dfdfdf;
+            padding: 10px 15px;
+            height: auto;
+            min-height: 20px;
+            overflow: hidden;
+            word-wrap: break-word;
+            background: #FAFAFA;
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+
+            &:hover {
+                border-color: #999;
+            }
+
+            .el {
+                color: #000;
+                float: right;
+                margin-top: -23px;
+                margin-right: 10px;
+                transition: all 0.5s;
+                &.subtitled {
+                    margin-top: -33px;
+                }
+            }
+        }
+
+        h3 {
+            margin: 0;
+            border-bottom: 0;
+        }
+
+        .redux-accordion-desc {
+            margin: -5px 0 10px;
+        }
+    }
+}
+
+.redux-accordion-wrap {
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    border-top: none;
+    padding: 0 15px;
+    background: #fff;
+}
