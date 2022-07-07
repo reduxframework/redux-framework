@@ -57,7 +57,7 @@
 						group.find( 'h3:first' ).css( 'margin-top', '0' );
 					}
 
-					accordionMarker = $( '#accordion-' + $id + '-marker' );
+					accordionMarker = table;
 					openIcon        = accordionMarker.data( 'open-icon' );
 					closeIcon       = accordionMarker.data( 'close-icon' );
 
