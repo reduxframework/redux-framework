@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.15.1
+* Added: Accordion extension.
+* Fixed: #3888 - Validation messages dismissed when using `ace_editor` field after `redux_change` event.
+
 ## 4.3.15
 * Added: Multi Media extension. [https://devs.redux.io/core-extensions/multi-media.html](https://devs.redux.io/core-extensions/multi-media.html)
 * Added: DateTime extension. [https://devs.redux.io/core-extensions/date-time-picker.html](https://devs.redux.io/core-extensions/date-time-picker.html)
