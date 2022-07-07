@@ -76,7 +76,13 @@ class Welcome
                 <div class="welcome-section has-2-columns has-gutters is-wider-right">
                     <div class="column is-edge-to-edge">
                         <h3>
-                            <?php \esc_html_e('1. Open the Extendify Library', 'extendify'); ?>
+                            <?php
+                            echo sprintf(
+                                /* translators: %s: Extendify Library term */
+                                \esc_html__('1. Open the %s', 'extendify'),
+                                'Extendify Library'
+                            );
+                            ?>
                         </h3>
                         <p>
                             <?php \esc_html_e("When editing a page or post within the block editor, you'll see the Extendify library button within the editor's header", 'extendify'); ?>

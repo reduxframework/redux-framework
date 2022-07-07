@@ -2,7 +2,7 @@ export const ProgressBar = ({ currentPageIndex, totalPages }) => {
     const currentProgress = Math.round(
         ((currentPageIndex + 1) / totalPages) * 100,
     )
-    const currentPageText = `(${currentPageIndex + 1}/${totalPages})`
+    const currentPageText = `(${currentPageIndex}/${totalPages - 1})`
 
     return (
         <div className="flex-1 hidden md:flex justify-center items-center">

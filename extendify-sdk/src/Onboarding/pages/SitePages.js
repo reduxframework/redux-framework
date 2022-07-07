@@ -1,6 +1,6 @@
-import { CheckboxControl } from '@wordpress/components'
 import { useState, useEffect } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
+import { useIsMounted } from '@library/hooks/helpers'
 import { getLayoutTypes } from '@onboarding/api/DataApi'
 import { PagePreview } from '@onboarding/components/PagePreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
@@ -8,13 +8,8 @@ import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 
 export const fetcher = async () => {
-    // TODO: these transforms should be moved to the server eventually
     const layoutTypes = await getLayoutTypes()
-    const pageRecords = layoutTypes?.data?.map((record) => ({
-        id: record.id,
-        slug: record.slug,
-        title: record.title,
-    }))
+    const pageRecords = layoutTypes?.data ?? []
     if (!pageRecords?.length) throw new Error('Error fetching pages')
 
     // Home first and sort the other pages
@@ -29,31 +24,43 @@ export const fetchData = () => {
 }
 export const SitePages = () => {
     const { data: availablePages } = useFetch(fetchData, fetcher)
-    const [toggleAllPages, setToggleAllPages] = useState(false)
-    const { pages: pagesSelected, add, remove } = useUserSelectionStore()
+    const [pagesToShow, setPagesToShow] = useState([])
+    const { add, goals, reset } = useUserSelectionStore()
+    const isMounted = useIsMounted()
 
-    // Toggle all pages on/off (except home)
-    const updateToggleStatus = () => {
-        availablePages?.map((page) => {
-            if (page.slug === 'home') return
-            toggleAllPages ? remove('pages', page) : add('pages', page)
-        })
-    }
-
-    // Every time the number of selected pages changes, update the checkbox value
     useEffect(() => {
-        setToggleAllPages(pagesSelected?.length === availablePages?.length)
-    }, [pagesSelected, availablePages])
+        if (!availablePages?.length) return
+        const pagesbyGoal = availablePages.filter((page) => {
+            // Show all if the user hasn't selected any goals
+            if (!goals?.length) return true
+            // If this page has no associated goals, show it
+            if (!page?.goals?.length) return true
+            // If this page has goals that the user has selected, show it
+            return (
+                // Check whether the goals intersect
+                page?.goals?.some((goal) => goals.some((g) => goal == g.id)) ??
+                true
+            )
+        })
+        ;(async () => {
+            for (const page of pagesbyGoal) {
+                if (!isMounted.current) return
+                setPagesToShow((pages) => [...pages, page])
+                await new Promise((resolve) => setTimeout(resolve, 100))
+            }
+        })()
+    }, [availablePages, goals, isMounted])
 
     // Select all pages by default
     useEffect(() => {
-        availablePages?.map((page) => add('pages', page))
-    }, [availablePages, add])
+        reset('pages')
+        pagesToShow?.map((page) => add('pages', page))
+    }, [pagesToShow, add, reset])
 
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('What pages do you want on this site?', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70">
@@ -61,25 +68,17 @@ export const SitePages = () => {
                 </p>
             </div>
             <div className="w-full">
-                <div className="flex justify-between">
-                    <p className="mt-0 mb-8 text-base">
-                        {__(
-                            "Pick the pages you'd like to add to your site",
-                            'extendify',
-                        )}
-                    </p>
-
-                    <CheckboxControl
-                        label={__('Include all pages', 'extendify')}
-                        checked={toggleAllPages}
-                        onChange={updateToggleStatus}
-                    />
-                </div>
-                <div className="lg:flex space-y-6 -m-8 lg:space-y-0 flex-wrap">
-                    {availablePages?.map((page) => {
+                <p className="mt-0 mb-8 text-base">
+                    {__(
+                        "Pick the pages you'd like to add to your site",
+                        'extendify',
+                    )}
+                </p>
+                <div className="lg:flex space-y-6 -m-6 mt-0 mb-12 lg:space-y-0 flex-wrap">
+                    {pagesToShow?.map((page) => {
                         return (
                             <div
-                                className="p-8 relative"
+                                className="p-6 relative"
                                 style={{ height: 442.5, width: 318.75 }}
                                 key={page.id}>
                                 <PagePreview

@@ -1,25 +1,25 @@
 import { __ } from '@wordpress/i18n'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 
-export const CreateError = () => {
+export const NeedsTheme = () => {
     return (
         <PageLayout includeNav={false}>
             <div>
                 <h1 className="text-3xl text-white mb-4 mt-0">
-                    {__('We encountered an error.', 'extendify')}
+                    {__('Hey, one more thing before we start.', 'extendify')}
                 </h1>
             </div>
             <div className="w-full">
                 <p className="mt-0 mb-8 text-base">
                     {__(
-                        "We encountered an error that we can't recover from. You can attempt to start over by pressing the button below.",
+                        'Hey there, Launch is powered by Extendable and is required to proceed. You can install it from the link below and start over once activated.',
                         'extendify',
                     )}
                 </p>
                 <div className="flex flex-col items-start space-y-4 text-base">
                     <a
-                        href={`${window.extOnbData.site}/wp-admin/post-new.php?extendify=onboarding`}>
-                        {__('Start over')}
+                        href={`${window.extOnbData.site}/wp-admin/theme-install.php?theme=extendable`}>
+                        {__('Take me there')}
                     </a>
                 </div>
             </div>

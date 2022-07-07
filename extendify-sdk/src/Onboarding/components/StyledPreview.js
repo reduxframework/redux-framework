@@ -3,12 +3,18 @@ import { rawHandler } from '@wordpress/blocks'
 import { useState, useRef, useEffect, useMemo } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
-import { parseThemeJson } from '@onboarding/api/WPApi'
+import { getThemeVariations, parseThemeJson } from '@onboarding/api/WPApi'
+import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMounted } from '@onboarding/hooks/useIsMounted'
 import { lowerImageQuality } from '@onboarding/lib/util'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { SpinnerIcon } from '@onboarding/svg'
 
+const fetcher = async (themeJson) => {
+    if (!themeJson) return '{}'
+    const res = await parseThemeJson(JSON.stringify(themeJson))
+    return res?.styles ?? '{}'
+}
 export const StylePreview = ({
     style,
     selectStyle,
@@ -18,33 +24,44 @@ export const StylePreview = ({
     const siteType = useUserSelectionStore((state) => state.siteType)
     const isMounted = useIsMounted()
     const [code, setCode] = useState('')
-    const [themeJson, setThemeJson] = useState('')
     const [loaded, setLoaded] = useState(false)
     const [inView, setInView] = useState(false)
     const [hoverCleanup, setHoverCleanup] = useState(null)
+    const [variation, setVariation] = useState()
     const previewContainer = useRef(null)
     const content = useRef(null)
     const blockRef = useRef(null)
     const observer = useRef(null)
+    const { data: themeJson } = useFetch(
+        inView && variation ? variation : null,
+        fetcher,
+    )
+    const { data: variations } = useFetch('variations', getThemeVariations)
+
     const blocks = useMemo(
         () => rawHandler({ HTML: lowerImageQuality(code) }),
         [code],
     )
     const transformedStyles = useMemo(
-        () => transformStyles([{ css: themeJson }], '.editor-styles-wrapper'),
+        () =>
+            themeJson
+                ? transformStyles(
+                      [{ css: themeJson }],
+                      '.editor-styles-wrapper',
+                  )
+                : null,
         [themeJson],
     )
 
     useEffect(() => {
-        // If no theme provided, just load normally.
-        if (!style?.themeJson) {
-            setThemeJson('{}')
-            return
-        }
-        parseThemeJson(style.themeJson).then((res) => {
-            setThemeJson(res?.styles ?? '{}')
-        })
-    }, [style?.themeJson])
+        if (!variations?.length) return
+
+        // Grab the styles from the theme.json variation
+        const variation = variations.find(
+            (theme) => theme.title === style.label,
+        )
+        setVariation(variation)
+    }, [style, variations])
 
     useEffect(() => {
         if (!themeJson || !style?.code) return
@@ -52,7 +69,13 @@ export const StylePreview = ({
             .filter(Boolean)
             .join('')
             .replace(
-                /<!-- wp:navigation {(.|\n)*?(\/wp:navigation -->|} \/-->)/g,
+                // <!-- wp:navigation --> <!-- /wp:navigation -->
+                /<!-- wp:navigation[.\S\s]*?\/wp:navigation -->/g,
+                '<!-- wp:paragraph {"className":"tmp-nav"} --><p class="tmp-nav">Home | About | Contact</p ><!-- /wp:paragraph -->',
+            )
+            .replace(
+                // <!-- wp:navigation /-->
+                /<!-- wp:navigation.*\/-->/g,
                 '<!-- wp:paragraph {"className":"tmp-nav"} --><p class="tmp-nav">Home | About | Contact</p ><!-- /wp:paragraph -->',
             )
         setCode(code)
@@ -176,7 +199,7 @@ export const StylePreview = ({
                     selectStyle ? __('Press to select', 'extendify') : undefined
                 }
                 className={classNames(
-                    'w-full overflow-hidden bg-transparent z-10',
+                    'group w-full overflow-hidden bg-transparent z-10',
                     {
                         relative: loaded,
                         'absolute opacity-0': !loaded,
@@ -185,7 +208,7 @@ export const StylePreview = ({
                 )}
                 onKeyDown={(e) => {
                     if (['Enter', 'Space', ' '].includes(e.key)) {
-                        selectStyle && selectStyle(style)
+                        selectStyle && selectStyle({ ...style, variation })
                     }
                 }}
                 onMouseEnter={() => {
@@ -198,7 +221,16 @@ export const StylePreview = ({
                         setHoverCleanup(null)
                     }
                 }}
-                onClick={selectStyle ? () => selectStyle(style) : () => {}}>
+                onClick={
+                    selectStyle
+                        ? () => selectStyle({ ...style, variation })
+                        : () => {}
+                }>
+                {window?.extOnbData?.devbuild ? (
+                    <div className="-m-px absolute bg-gray-900 border border-t border-white bottom-0 group-hover:opacity-100 left-0 opacity-0 p-1 px-4 text-left text-sm text-white z-30 transition duration-300">
+                        {style?.label}
+                    </div>
+                ) : null}
                 <div ref={previewContainer} className="relative rounded-lg">
                     {inView ? (
                         <BlockPreview

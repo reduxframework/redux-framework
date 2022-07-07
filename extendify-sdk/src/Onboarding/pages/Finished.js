@@ -24,7 +24,7 @@ export const Finished = () => {
     return (
         <PageLayout includeNav={false}>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {sprintf(
                         __(
                             'Your site has been successfully created. Enjoy!',

@@ -5,43 +5,24 @@ import { StylePreview } from '@onboarding/components/StyledPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMountedLayout } from '@onboarding/hooks/useIsMounted'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
-import { findTheCode } from '@onboarding/lib/util'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { SpinnerIcon } from '@onboarding/svg'
 
-export const fetcher = async (params) => {
-    const res = await getStyles(params)
-    // TODO: these transforms should be moved to the server eventually
-    return res?.data
-        ?.map((style) => {
-            return {
-                label: style.title,
-                slug: style.slug,
-                recordId: style.id,
-                themeJson: style?.themeJson,
-                homeBaseLayout: style?.homeBaseLayout,
-                header: style?.header,
-                footer: style?.footer,
-                kit: style?.kit,
-                headerCode: style?.headerCode,
-                footerCode: style?.footerCode,
-                code: findTheCode(style),
-            }
-        })
-        ?.filter((style) => style.code)
-}
+export const fetcher = (params) => getStyles(params)
 export const fetchData = (siteType) => {
     siteType = siteType ?? useUserSelectionStore?.getState().siteType
     return {
         key: 'site-style',
         siteType: siteType?.slug ?? 'default',
+        styles: siteType?.styles ?? [],
     }
 }
 export const SiteStyle = () => {
     const siteType = useUserSelectionStore((state) => state.siteType)
     const nextPage = usePagesStore((state) => state.nextPage)
-    const { data, loading } = useFetch(fetchData, fetcher)
+    const { data: styleData, loading } = useFetch(fetchData, fetcher)
+
     const isMounted = useIsMountedLayout()
     const selectStyle = useCallback(
         (style) => {
@@ -53,15 +34,15 @@ export const SiteStyle = () => {
     const [styles, setStyles] = useState([])
 
     useEffect(() => {
-        if (!data?.length) return
+        if (!styleData?.length) return
         ;(async () => {
-            for (const style of data) {
+            for (const style of styleData) {
                 if (!isMounted.current) return
                 setStyles((styles) => [...styles, style])
                 await new Promise((resolve) => setTimeout(resolve, 1000))
             }
         })()
-    }, [data, isMounted])
+    }, [styleData, isMounted])
 
     useEffect(() => {
         if (styles?.length && !useUserSelectionStore.getState().style) {
@@ -72,7 +53,7 @@ export const SiteStyle = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {sprintf(
                         __(
                             'Now pick a design for your new %s site.',
@@ -107,7 +88,8 @@ export const SiteStyle = () => {
                             />
                         </div>
                     ))}
-                    {data?.slice(styles?.length).map((data) => (
+                    {/* Budget skeleton loaders */}
+                    {styleData?.slice(styles?.length).map((data) => (
                         <div
                             key={data.slug}
                             style={{ height: 590, width: 425 }}

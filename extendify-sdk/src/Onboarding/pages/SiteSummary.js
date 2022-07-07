@@ -14,7 +14,7 @@ export const SiteSummary = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__("Let's launch your site!", 'extendify')}
                 </h1>
                 <p className="text-base">
@@ -33,7 +33,7 @@ export const SiteSummary = () => {
                         {siteType?.label ? (
                             <div
                                 className="p-4 py-2 rounded-lg text-base flex bg-transparent border border-gray-600 cursor-pointer"
-                                onClick={() => setPage('site-type-select')}
+                                onClick={() => setPage('site-type')}
                                 title={__(
                                     'Press to change the site type',
                                     'extendify',
@@ -42,7 +42,7 @@ export const SiteSummary = () => {
                             </div>
                         ) : (
                             <button
-                                onClick={() => setPage('site-type-select')}
+                                onClick={() => setPage('site-type')}
                                 className="bg-transparent text-partner-primary underline text-base">
                                 {__('Press to set a site type', 'extendify')}
                             </button>
@@ -55,7 +55,7 @@ export const SiteSummary = () => {
                         {style?.label ? (
                             <div
                                 className="cursor-pointer overflow-hidden border rounded-lg"
-                                onClick={() => setPage('site-style-select')}
+                                onClick={() => setPage('style')}
                                 title={__(
                                     'Press to change the site style',
                                     'extendify',
@@ -72,7 +72,7 @@ export const SiteSummary = () => {
                             </div>
                         ) : (
                             <button
-                                onClick={() => setPage('site-style-select')}
+                                onClick={() => setPage('style')}
                                 className="bg-transparent text-partner-primary underline text-base">
                                 {__('Press to set a style type', 'extendify')}
                             </button>
@@ -85,16 +85,16 @@ export const SiteSummary = () => {
                         {pages.length > 0 ? (
                             <div
                                 className="flex items-start space-x-2 cursor-pointer w-full"
-                                onClick={() => setPage('site-pages-select')}
+                                onClick={() => setPage('pages')}
                                 title={__(
                                     'Press to change the selected pages',
                                     'extendify',
                                 )}>
-                                <div className="lg:flex space-y-6 -m-8 lg:space-y-0 flex-wrap">
+                                <div className="lg:flex space-y-6 -m-6 lg:space-y-0 flex-wrap">
                                     {pages?.map((page) => {
                                         return (
                                             <div
-                                                className="p-8 relative"
+                                                className="p-6 relative"
                                                 style={{
                                                     height: 354,
                                                     width: 255,
@@ -112,7 +112,7 @@ export const SiteSummary = () => {
                             </div>
                         ) : (
                             <button
-                                onClick={() => setPage('site-pages-select')}
+                                onClick={() => setPage('pages')}
                                 className="bg-transparent text-partner-primary underline text-base">
                                 {__('Press to set your pages', 'extendify')}
                             </button>

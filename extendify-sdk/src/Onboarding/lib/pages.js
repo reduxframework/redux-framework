@@ -28,10 +28,11 @@ import {
 //     fetchData as suggestedPluginsData,
 // } from '@onboarding/pages/SuggestedPlugins'
 
+// pages added here will need to match the orders table on the Styles base
 export const pages = [
-    ['landing', { component: Landing }],
+    ['welcome', { component: Landing }],
     [
-        'site-information',
+        'site-title',
         {
             component: SiteInformation,
             fetcher: siteInfoFetcher,
@@ -47,7 +48,7 @@ export const pages = [
     //     },
     // ],
     [
-        'site-type-select',
+        'site-type',
         {
             component: SiteTypeSelect,
             fetcher: siteTypeFetcher,
@@ -62,14 +63,14 @@ export const pages = [
             fetchData: goalsData,
         },
     ],
-    ['site-style-select', { component: SiteStyle }],
+    ['style', { component: SiteStyle }],
     [
-        'site-pages-select',
+        'pages',
         {
             component: SitePages,
             fetcher: availablePagesFetcher,
             fetchData: availablePagesData,
         },
     ],
-    ['site-summary', { component: SiteSummary }],
+    ['confirmation', { component: SiteSummary }],
 ]

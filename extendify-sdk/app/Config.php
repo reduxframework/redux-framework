@@ -92,6 +92,9 @@ class Config
             self::$sdkPartner = $GLOBALS['extendify_sdk_partner'];
         }
 
+        // Set up whether this is the standalone plugin instead of integrated.
+        self::$standalone = self::$sdkPartner === 'standalone';
+
         // Always use the partner name if set as a constant.
         if (defined('EXTENDIFY_PARTNER_NAME')) {
             self::$sdkPartner = constant('EXTENDIFY_PARTNER_NAME');
@@ -111,7 +114,6 @@ class Config
         $isDev = is_readable(EXTENDIFY_PATH . 'public/build/.devbuild');
         self::$environment = $isDev ? 'DEVELOPMENT' : 'PRODUCTION';
 
-        self::$standalone = self::$sdkPartner === 'standalone';
         self::$showOnboarding = $this->showOnboarding();
 
         // Add the config.

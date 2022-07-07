@@ -78,6 +78,7 @@ export const SiteTypeSelect = () => {
             label: optionValue.title,
             recordId: optionValue.id,
             slug: optionValue.slug,
+            styles: optionValue.styles,
         })
 
         // Update the site type in the library
@@ -94,14 +95,11 @@ export const SiteTypeSelect = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-white mb-4 mt-0">
+                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('What is your site about?', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70">
-                    {__(
-                        'Search for the industry that best suits your site.',
-                        'extendify',
-                    )}
+                    {__('Search for your site industry.', 'extendify')}
                 </p>
             </div>
             <div className="w-80">
@@ -180,7 +178,7 @@ const SelectButton = ({ option, selectSiteType }) => {
                 window.clearTimeout(hoveringTimeout.current)
             }}
             className="flex bg-gray-100 hover:bg-gray-200 items-center justify-between mb-2 p-4 py-3 relative w-full button-focus">
-            <span>{option.title}</span>
+            <span className="text-left">{option.title}</span>
             <LeftArrowIcon />
         </button>
     )

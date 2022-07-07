@@ -52,7 +52,6 @@ use Extendify\Library\Controllers\SiteSettingsController;
         // Onboarding.
         ApiRouter::post('/onboarding/options', [WPController::class, 'updateOption']);
         ApiRouter::get('/onboarding/options', [WPController::class, 'getOption']);
-        ApiRouter::post('/onboarding/save-theme-json', [WPController::class, 'saveThemeJson']);
         ApiRouter::post('/onboarding/parse-theme-json', [WPController::class, 'parseThemeJson']);
 
         ApiRouter::get('/onboarding/site-types', [DataController::class, 'getSiteTypes']);
@@ -61,7 +60,7 @@ use Extendify\Library\Controllers\SiteSettingsController;
         ApiRouter::get('/onboarding/goals', [DataController::class, 'getGoals']);
         ApiRouter::get('/onboarding/suggested-plugins', [DataController::class, 'getSuggestedPlugins']);
         ApiRouter::get('/onboarding/template', [DataController::class, 'getTemplate']);
-        ApiRouter::post('/onboarding/orders', [DataController::class, 'createOrder']);
+        ApiRouter::post('/onboarding/create-order', [DataController::class, 'createOrder']);
 
         // TODO: consider merging this route into the library.
         ApiRouter::post('/library/site-type', [LibraryController::class, 'updateSiteType']);
