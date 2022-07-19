@@ -24,7 +24,14 @@ class SiteSettingsController
      */
     public static function show()
     {
-        return new \WP_REST_Response(SiteSettings::data());
+        $siteSettings = json_decode(SiteSettings::data(), true);
+        // Keep the user sitetype in sync across all users.
+        $siteType = \get_option('extendify_siteType', false);
+        if ($siteType) {
+            $siteSettings['state']['siteType'] = $siteType;
+        }
+
+        return new \WP_REST_Response(wp_json_encode($siteSettings));
     }
 
     /**

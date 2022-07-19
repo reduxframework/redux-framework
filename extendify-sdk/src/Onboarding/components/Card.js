@@ -34,7 +34,7 @@ export const Card = ({
                     className={classNames('flex items-center', {
                         'text-gray-700': !selected,
                     })}>
-                    <span>{name}</span>
+                    <span className="text-left">{name}</span>
                     {lock && (
                         <span className="w-4 h-4 text-base leading-none pl-2 mr-6 dashicons dashicons-lock"></span>
                     )}
@@ -44,13 +44,19 @@ export const Card = ({
                 )}
             </div>
             <div className="flex flex-col">
-                <div
-                    style={{ backgroundImage: `url(${image})` }}
-                    className="h-32 bg-cover"
-                />
-                <div className="p-6 text-left">
-                    <div className="text-base font-bold mb-2">{heading}</div>
-                    <div className="text-sm">{description}</div>
+                {image ? (
+                    <div
+                        style={{ backgroundImage: `url(${image})` }}
+                        className="h-32 bg-cover"
+                    />
+                ) : (
+                    <div className="h-32 bg-gray-100" />
+                )}
+                <div className="p-6">
+                    <div className="text-left text-base font-bold mb-2">
+                        {heading}
+                    </div>
+                    <div className="text-left text-sm">{description}</div>
                 </div>
             </div>
         </div>

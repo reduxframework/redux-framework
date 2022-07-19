@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { mutate } from 'swr'
 import { getSiteTypes } from '@onboarding/api/DataApi'
-import { updateSiteType } from '@onboarding/api/LibraryApi'
+import { updateOption } from '@onboarding/api/WPApi'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
+import { useProgressStore } from '@onboarding/state/Progress'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { SearchIcon, LeftArrowIcon } from '@onboarding/svg'
 import {
@@ -15,6 +16,11 @@ import {
 
 export const fetcher = () => getSiteTypes()
 export const fetchData = () => ({ key: 'site-types' })
+export const metadata = {
+    key: 'site-type',
+    title: __('Site Industry', 'extendify'),
+    completed: () => true,
+}
 export const SiteTypeSelect = () => {
     const siteType = useUserSelectionStore((state) => state.siteType)
     const nextPage = usePagesStore((state) => state.nextPage)
@@ -80,15 +86,7 @@ export const SiteTypeSelect = () => {
             slug: optionValue.slug,
             styles: optionValue.styles,
         })
-
-        // Update the site type in the library
-        window.localStorage.removeItem('extendify-global-state')
-        await updateSiteType({
-            siteType: {
-                title: optionValue.title,
-                slug: optionValue.slug,
-            },
-        })
+        await updateOption('extendify_siteType', optionValue)
         nextPage()
     }
 
@@ -103,14 +101,32 @@ export const SiteTypeSelect = () => {
                 </p>
             </div>
             <div className="w-80">
-                <p className="mt-0 mb-8 text-base">
-                    {__('Choose a site industry:', 'extendify')}
-                </p>
+                <div className="flex justify-between mb-4">
+                    <h2 className="text-lg m-0 text-gray-900">
+                        {__('Choose an industry', 'extendify')}
+                    </h2>
+                    {search?.length > 0 ? null : (
+                        <button
+                            type="button"
+                            className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline cursor-pointer"
+                            onClick={() => {
+                                setShowExamples((show) => !show)
+                                searchRef.current.focus()
+                            }}>
+                            {showExamples
+                                ? sprintf(
+                                      __('Show all %s', 'extendify'),
+                                      loading ? '...' : siteTypes.length,
+                                  )
+                                : __('Show less', 'extendify')}
+                        </button>
+                    )}
+                </div>
                 <div className="search-panel flex items-center justify-center relative mb-8">
                     <input
                         ref={searchRef}
                         type="text"
-                        className="w-full border h-12 input-focus"
+                        className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder={__('Search...', 'extendify')}
@@ -120,28 +136,10 @@ export const SiteTypeSelect = () => {
                 {loading && <p>{__('Loading...', 'extendify')}</p>}
                 {visibleSiteTypes?.length > 0 && (
                     <div>
-                        <div className="flex justify-between mb-3">
-                            <p className="text-left uppercase text-xss m-0">
-                                {__('Industries', 'extendify')}
-                            </p>
-                            {search?.length > 0 ? null : (
-                                <button
-                                    type="button"
-                                    className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline"
-                                    onClick={() => {
-                                        setShowExamples((show) => !show)
-                                        searchRef.current.focus()
-                                    }}>
-                                    {showExamples
-                                        ? __('Show all', 'extendify')
-                                        : __('Show less', 'extendify')}
-                                </button>
-                            )}
-                        </div>
                         <div
                             className="overflow-y-auto p-2 -m-2"
                             style={{
-                                maxHeight: '360px',
+                                maxHeight: '380px',
                             }}>
                             {visibleSiteTypes.map((option) => (
                                 <SelectButton
@@ -160,9 +158,13 @@ export const SiteTypeSelect = () => {
 
 const SelectButton = ({ option, selectSiteType }) => {
     const hoveringTimeout = useRef(0)
+    const touch = useProgressStore((state) => state.touch)
     return (
         <button
-            onClick={() => selectSiteType(option)}
+            onClick={() => {
+                selectSiteType(option)
+                touch(metadata.key)
+            }}
             onMouseEnter={() => {
                 // Prefetch style templates when hovering over site type
                 window.clearTimeout(hoveringTimeout.current)
@@ -177,7 +179,7 @@ const SelectButton = ({ option, selectSiteType }) => {
             onMouseLeave={() => {
                 window.clearTimeout(hoveringTimeout.current)
             }}
-            className="flex bg-gray-100 hover:bg-gray-200 items-center justify-between mb-2 p-4 py-3 relative w-full button-focus">
+            className="flex border border-gray-800 hover:text-partner-primary-bg focus:text-partner-primary-bg items-center justify-between mb-2 p-4 py-3 relative w-full button-focus">
             <span className="text-left">{option.title}</span>
             <LeftArrowIcon />
         </button>

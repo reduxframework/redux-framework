@@ -16,7 +16,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     const [showExamples, setShowExamples] = useState(true)
 
     const termsSorted = useMemo(() => {
-        return terms.sort((a, b) => {
+        return [...terms].sort((a, b) => {
             if (a.slug < b.slug) return -1
             if (a.slug > b.slug) return 1
             return 0

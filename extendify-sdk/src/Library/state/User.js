@@ -39,11 +39,6 @@ export const useUserStore = create(
             canInstallPlugins: false,
             canActivatePlugins: false,
             participatingTestsGroups: {},
-            preferredOptions: {
-                taxonomies: {},
-                type: '',
-                search: '',
-            },
             incrementImports: () => {
                 // If the user has freebie imports, use those first
                 const freebieImports =
@@ -113,33 +108,6 @@ export const useUserStore = create(
                     return null
                 }
                 return remaining > 0 ? remaining : 0
-            },
-            updatePreferredSiteType: (value) => {
-                get().updatePreferredOption('siteType', value)
-            },
-            updatePreferredOption: (option, value) => {
-                // If the option doesn't exist, assume it's a taxonomy
-                if (
-                    !Object.prototype.hasOwnProperty.call(
-                        get().preferredOptions,
-                        option,
-                    )
-                ) {
-                    value = Object.assign(
-                        {},
-                        get().preferredOptions?.taxonomies ?? {},
-                        { [option]: value },
-                    )
-                    option = 'taxonomies'
-                }
-
-                set({
-                    preferredOptions: {
-                        ...Object.assign({}, get().preferredOptions, {
-                            [option]: value,
-                        }),
-                    },
-                })
             },
             // Will mark a modal or footer notice
             markNoticeSeen: (key, type) => {

@@ -18,9 +18,7 @@ export const useGlobalStore = create(
                 popModal: () => set({ modals: get().modals.slice(1) }),
                 removeAllModals: () => set({ modals: [] }),
                 updateCurrentTaxonomies: (data) =>
-                    set({
-                        currentTaxonomies: Object.assign({}, data),
-                    }),
+                    set({ currentTaxonomies: { ...data } }),
                 updateCurrentType: (data) => set({ currentType: data }),
                 setOpen: (value) => set({ open: value }),
                 setReady: (value) => set({ ready: value }),

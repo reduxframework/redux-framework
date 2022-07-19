@@ -3,7 +3,7 @@ Contributors: extendify, richtabor, kbat82, clubkert, arturgrabo
 Tags: templates, patterns, layouts, blocks, gutenberg
 Requires at least: 5.4
 Tested up to: 6.0
-Stable tag: 0.8.4
+Stable tag: 0.9.0
 Requires PHP: 5.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -123,6 +123,12 @@ Nope! Extendify imports lightweight block-based content that is served directly 
 3. The Extendify library, as seen with the Twenty Twenty Two block theme
 
 == Changelog ==
+
+= 0.9.0 - 2022-07-19 =
+- Update UI/UX components
+- Add shared site type experience across users
+- Better handle asset and data loading
+- Various bug fixes and updates
 
 = 0.8.3 - 2022-06-09 =
 - Add API language support

@@ -1,14 +1,16 @@
 import { __ } from '@wordpress/i18n'
-import { Card } from '@onboarding/components/Card'
 import { PagePreview } from '@onboarding/components/PagePreview'
-import { StylePreview } from '@onboarding/components/StyledPreview'
+import { SuggestedPlugins } from '@onboarding/components/SuggestedPlugins'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
-import { stripUrlParams } from '@onboarding/lib/util'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
+import { Checkmark } from '@onboarding/svg'
 
+export const metadata = {
+    key: 'confirmation',
+}
 export const SiteSummary = () => {
-    const { siteType, style, pages, plugins } = useUserSelectionStore()
+    const { siteType, style, pages, goals } = useUserSelectionStore()
     const setPage = usePagesStore((state) => state.setPage)
 
     return (
@@ -22,131 +24,183 @@ export const SiteSummary = () => {
                 </p>
             </div>
             <div className="w-full">
-                <p className="mt-0 mb-8 text-base">
-                    {__('Site settings', 'extendify')}
-                </p>
                 <div className="flex flex-col space-y-8">
-                    <div className="flex items-center">
-                        <div className="w-20 flex-shrink-0 text-base">
-                            {__('Industry:', 'extendify')}
+                    <div className="block">
+                        <div className="flex align-center">
+                            <h2 className="text-lg m-0 mb-4 text-gray-900">
+                                {__('Design', 'extendify')}
+                            </h2>
+                            <button
+                                className="text-xs underline cursor-pointer text-partner-primary-bg bg-white mb-4 ml-2"
+                                onClick={() => setPage('style')}
+                                title={__(
+                                    'Press to change the style',
+                                    'extendify',
+                                )}>
+                                {__('Change', 'extendify')}
+                            </button>
                         </div>
-                        {siteType?.label ? (
-                            <div
-                                className="p-4 py-2 rounded-lg text-base flex bg-transparent border border-gray-600 cursor-pointer"
+
+                        {style?.label ? (
+                            <div className="overflow-hidden rounded-lg relative">
+                                <span
+                                    aria-hidden="true"
+                                    className="absolute top-0 bottom-0 left-3/4 right-0 z-40 bg-gradient-to-l from-white"></span>
+                                {pages.length > 0 && (
+                                    <div className="flex items-start space-x-2 w-full">
+                                        <div className="lg:flex flex-no-wrap">
+                                            {pages?.map((page) => {
+                                                return (
+                                                    <div
+                                                        className="px-3 relative pointer-events-none"
+                                                        style={{
+                                                            height: 387,
+                                                            width: 255,
+                                                        }}
+                                                        key={page.id}>
+                                                        <PagePreview
+                                                            displayOnly={true}
+                                                            page={page}
+                                                            blockHeight={175}
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <button
+                                onClick={() => setPage('style')}
+                                className="bg-transparent text-partner-primary underline text-base cursor-pointer">
+                                {__('Press to change the style', 'extendify')}
+                            </button>
+                        )}
+                    </div>
+                    <div className="block">
+                        <div className="flex align-center">
+                            <h2 className="text-lg m-0 mb-4">
+                                {__('Industry', 'extendify')}
+                            </h2>
+                            <button
+                                className="text-xs underline cursor-pointer text-partner-primary-bg bg-white mb-4 ml-2"
                                 onClick={() => setPage('site-type')}
                                 title={__(
                                     'Press to change the site type',
                                     'extendify',
                                 )}>
-                                {siteType.label}
+                                {__('Change', 'extendify')}
+                            </button>
+                        </div>
+                        {siteType?.label ? (
+                            <div className="flex items-center">
+                                <Checkmark
+                                    className="text-extendify-main-dark"
+                                    style={{ width: 24 }}
+                                />
+                                <span className="text-base pl-2">
+                                    {siteType.label}
+                                </span>
                             </div>
                         ) : (
                             <button
                                 onClick={() => setPage('site-type')}
-                                className="bg-transparent text-partner-primary underline text-base">
+                                className="bg-transparent text-partner-primary underline text-base cursor-pointer">
                                 {__('Press to set a site type', 'extendify')}
                             </button>
                         )}
                     </div>
-                    <div className="flex items-start">
-                        <div className="w-20 flex-shrink-0 text-base">
-                            {__('Style:', 'extendify')}
-                        </div>
-                        {style?.label ? (
-                            <div
-                                className="cursor-pointer overflow-hidden border rounded-lg"
-                                onClick={() => setPage('style')}
+                    <div className="block">
+                        <div className="flex align-center">
+                            <h2 className="text-lg m-0 mb-4">
+                                {__('Goals', 'extendify')}
+                            </h2>
+                            <button
+                                className="text-xs underline cursor-pointer text-partner-primary-bg bg-white mb-4 ml-2"
+                                onClick={() => setPage('goals')}
                                 title={__(
-                                    'Press to change the site style',
+                                    'Press to change the selected goals',
                                     'extendify',
                                 )}>
-                                <div
-                                    className="p-2 relative"
-                                    style={{ height: 354, width: 255 }}
-                                    key={style.recordId}>
-                                    <StylePreview
-                                        style={style}
-                                        blockHeight={354}
-                                    />
-                                </div>
+                                {__('Change', 'extendify')}
+                            </button>
+                        </div>
+                        {goals.length > 0 ? (
+                            <div className="xl:grid grid-cols-3-minmax-300px-1fr gap-x-4 gap-y-1 -mx-6">
+                                {goals?.map((goal) => {
+                                    return (
+                                        <div
+                                            className="px-6 pb-2 flex items-center"
+                                            key={goal.id}>
+                                            <Checkmark
+                                                className="text-extendify-main-dark"
+                                                style={{ width: 24 }}
+                                            />
+                                            <span className="text-base pl-2">
+                                                {goal.title}
+                                            </span>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         ) : (
                             <button
-                                onClick={() => setPage('style')}
-                                className="bg-transparent text-partner-primary underline text-base">
-                                {__('Press to set a style type', 'extendify')}
+                                onClick={() => setPage('goals')}
+                                className="bg-transparent text-partner-primary underline text-base cursor-pointer">
+                                {__('Press to set your goals', 'extendify')}
                             </button>
                         )}
                     </div>
-                    <div className="flex items-start">
-                        <div className="w-20 flex-shrink-0 text-base">
-                            {__('Pages:', 'extendify')}
-                        </div>
-                        {pages.length > 0 ? (
-                            <div
-                                className="flex items-start space-x-2 cursor-pointer w-full"
+                    <div className="block">
+                        <div className="flex align-center">
+                            <h2 className="text-lg m-0 mb-4">
+                                {__('Pages', 'extendify')}
+                            </h2>
+                            <button
+                                className="text-xs underline cursor-pointer text-partner-primary-bg bg-white mb-4 ml-2"
                                 onClick={() => setPage('pages')}
                                 title={__(
                                     'Press to change the selected pages',
                                     'extendify',
                                 )}>
-                                <div className="lg:flex space-y-6 -m-6 lg:space-y-0 flex-wrap">
-                                    {pages?.map((page) => {
-                                        return (
-                                            <div
-                                                className="p-6 relative"
-                                                style={{
-                                                    height: 354,
-                                                    width: 255,
-                                                }}
-                                                key={page.id}>
-                                                <PagePreview
-                                                    displayOnly={true}
-                                                    page={page}
-                                                    blockHeight={175}
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
+                                {__('Change', 'extendify')}
+                            </button>
+                        </div>
+                        {pages.length > 0 ? (
+                            <div className="xl:grid grid-cols-3-minmax-300px-1fr gap-x-4 gap-y-1 -mx-6">
+                                {pages?.map((page) => {
+                                    return (
+                                        <div
+                                            className="px-6 pb-2 flex items-center"
+                                            key={page.id}>
+                                            <Checkmark
+                                                className="text-extendify-main-dark"
+                                                style={{ width: 24 }}
+                                            />
+                                            <span className="text-base pl-2">
+                                                {page.title}
+                                            </span>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         ) : (
                             <button
                                 onClick={() => setPage('pages')}
-                                className="bg-transparent text-partner-primary underline text-base">
+                                className="bg-transparent text-partner-primary underline text-base cursor-pointer">
                                 {__('Press to set your pages', 'extendify')}
                             </button>
                         )}
                     </div>
-                    {plugins.length > 0 ? (
-                        <div className="flex items-start">
-                            <div className="w-20 flex-shrink-0 text-base">
-                                {__('Plugins:', 'extendify')}
-                            </div>
-                            <div
-                                className="flex items-start space-x-2 cursor-pointer w-full"
-                                onClick={() => setPage('suggested-plugins')}
-                                title={__(
-                                    'Press to change the selected plugins',
-                                    'extendify',
-                                )}>
-                                <div className="grid w-full grid-cols-3 gap-4">
-                                    {plugins.map((plugin) => (
-                                        <Card
-                                            key={plugin.id}
-                                            lock={true}
-                                            image={stripUrlParams(
-                                                plugin.previewImage,
-                                            )}
-                                            name={plugin.name}
-                                            heading={plugin.heading}
-                                            description={plugin.description}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
+                    <div className="block">
+                        <h2 className="text-lg m-0 mb-4">
+                            {__('Plugins', 'extendify')}
+                        </h2>
+                        <div className="flex items-start space-x-2 cursor-pointer w-full">
+                            <SuggestedPlugins />
                         </div>
-                    ) : null}
+                    </div>
                 </div>
             </div>
         </PageLayout>

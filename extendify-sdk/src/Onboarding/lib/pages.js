@@ -2,8 +2,9 @@ import {
     Goals,
     fetcher as goalsFetcher,
     fetchData as goalsData,
+    metadata as goalsMeta,
 } from '@onboarding/pages/Goals'
-import { Landing } from '@onboarding/pages/Landing'
+import { Landing, metadata as landingMeta } from '@onboarding/pages/Landing'
 import {
     SiteInformation,
     fetcher as siteInfoFetcher,
@@ -11,26 +12,34 @@ import {
 } from '@onboarding/pages/SiteInformation'
 import {
     SitePages,
-    fetcher as availablePagesFetcher,
-    fetchData as availablePagesData,
+    fetcher as sitePagesFetcher,
+    fetchData as sitePagesData,
+    metadata as sitePagesMeta,
 } from '@onboarding/pages/SitePages'
-import { SiteStyle } from '@onboarding/pages/SiteStyle'
-import { SiteSummary } from '@onboarding/pages/SiteSummary'
+import {
+    SiteStyle,
+    metadata as siteStyleMeta,
+} from '@onboarding/pages/SiteStyle'
+import {
+    SiteSummary,
+    metadata as confirmationMeta,
+} from '@onboarding/pages/SiteSummary'
 import {
     SiteTypeSelect,
     fetcher as siteTypeFetcher,
     fetchData as siteTypeData,
+    metadata as siteTypeMeta,
 } from '@onboarding/pages/SiteTypeSelect'
 
-// import {
-//     SuggestedPlugins,
-//     fetcher as suggestedPluginsFetcher,
-//     fetchData as suggestedPluginsData,
-// } from '@onboarding/pages/SuggestedPlugins'
-
 // pages added here will need to match the orders table on the Styles base
-export const pages = [
-    ['welcome', { component: Landing }],
+const defaultPages = [
+    [
+        'welcome',
+        {
+            component: Landing,
+            metadata: landingMeta,
+        },
+    ],
     [
         'site-title',
         {
@@ -39,20 +48,13 @@ export const pages = [
             fetchData: siteInfoData,
         },
     ],
-    // [
-    //     'suggested-plugins',
-    //     {
-    //         component: SuggestedPlugins,
-    //         fetcher: suggestedPluginsFetcher,
-    //         fetchData: suggestedPluginsData,
-    //     },
-    // ],
     [
         'site-type',
         {
             component: SiteTypeSelect,
             fetcher: siteTypeFetcher,
             fetchData: siteTypeData,
+            metadata: siteTypeMeta,
         },
     ],
     [
@@ -61,16 +63,35 @@ export const pages = [
             component: Goals,
             fetcher: goalsFetcher,
             fetchData: goalsData,
+            metadata: goalsMeta,
         },
     ],
-    ['style', { component: SiteStyle }],
+    [
+        'style',
+        {
+            component: SiteStyle,
+            metadata: siteStyleMeta,
+        },
+    ],
     [
         'pages',
         {
             component: SitePages,
-            fetcher: availablePagesFetcher,
-            fetchData: availablePagesData,
+            fetcher: sitePagesFetcher,
+            fetchData: sitePagesData,
+            metadata: sitePagesMeta,
         },
     ],
-    ['confirmation', { component: SiteSummary }],
+    [
+        'confirmation',
+        {
+            component: SiteSummary,
+            metadata: confirmationMeta,
+        },
+    ],
 ]
+
+const pages = defaultPages.filter(
+    (pageKey) => !window.extOnbData?.partnerSkipSteps?.includes(pageKey[0]),
+)
+export { pages }

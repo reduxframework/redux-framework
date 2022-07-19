@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from '@wordpress/element'
-import { __, sprintf } from '@wordpress/i18n'
+import { __, sprintf, _n } from '@wordpress/i18n'
 import { installPlugin, updateTemplatePart } from '@onboarding/api/WPApi'
 import { updateOption } from '@onboarding/api/WPApi'
 import { useWarnOnLeave } from '@onboarding/hooks/useWarnOnLeave'
@@ -30,11 +30,28 @@ export const CreatingSite = () => {
         inform(__('Installing your theme', 'extendify'))
         await updateGlobalStyleVariant(style.variation)
         if (plugins?.length) {
-            inform(__('Installing plugins', 'extendify'))
-            await Promise.all([
-                ...plugins.map((plugin) => installPlugin(plugin.wordpressSlug)),
-                new Promise((resolve) => setTimeout(resolve, 2000)),
-            ])
+            inform(
+                _n(
+                    `Getting ready to install ${plugins.length} plugin`,
+                    `Getting ready to install ${plugins.length} plugins`,
+                    plugins.length,
+                    'extendify',
+                ),
+            )
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+            for (const [index, plugin] of plugins.entries()) {
+                // TODO: instead of updating here, we could have a progress component
+                // that we can update a % of the width every index/n
+                inform(
+                    __(
+                        `Installing (${index + 1}/${plugins.length}): ${
+                            plugin.name
+                        }`,
+                        'extendify',
+                    ),
+                )
+                await installPlugin(plugin)
+            }
         }
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Inserting header area', 'extendify'))

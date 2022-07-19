@@ -39,7 +39,31 @@ class Admin
         self::$instance = $this;
         $this->loadScripts();
         $this->addAdminMenu();
-        $this->redirectOnLogin();
+        $this->redirectOnce();
+        $this->addMetaField();
+    }
+
+    /**
+     * Adds a meta field so we can indicate a page was made with launch
+     *
+     * @return void
+     */
+    public function addMetaField()
+    {
+        \add_action(
+            'init',
+            function () {
+                register_post_meta(
+                    'page',
+                    'made_with_extendify_launch',
+                    [
+                        'single'       => true,
+                        'type'         => 'boolean',
+                        'show_in_rest' => true,
+                    ]
+                );
+            }
+        );
     }
 
     /**
@@ -81,33 +105,32 @@ class Admin
     }
 
     /**
-     * Always redirect to Extendify Launch on login unless onboarding has been previously completed or skipped.
-     *
-     * Applies to the main admin account, whose email matches the entry in WP Admin > Settings > General.
+     * Redirect once to Launch, only once when
+     * the email matches the entry in WP Admin > Settings > General.
      *
      * @return void
      */
-    public function redirectOnLogin()
+    public function redirectOnce()
     {
-        // phpcs:disable Generic.CodeAnalysis.UnusedFunctionParameter
-        \add_filter('login_redirect', function ($location, $request, $user) {
-            // Don't redirect if Launch previously completed, or user skipped to WP admin.
-            if (get_option('extendify_onboarding_skipped', 0) || get_option('extendify_onboarding_completed', 0)) {
-                return $location;
+        \add_action('admin_init', function () {
+            if (\get_option('extendify_onboarding_skipped', 0)
+                || \get_option('extendify_onboarding_completed', 0)
+                || \get_option('extendify_onboarding_redirected', 0)
+            ) {
+                return;
             }
 
-            // Redirect to Extendify Launch if user is admin, and their email matches the entry in general settings.
-            if (is_object($user) && isset($user->data->user_email)) {
-                $loginEmail = $user->data->user_email;
-                $adminEmail = \get_option('admin_email');
-                if ($loginEmail === $adminEmail && (isset($user->roles) && is_array($user->roles))) {
-                    return in_array('administrator', $user->roles, true) ? admin_url() . 'post-new.php?extendify=onboarding' : $location;
-                }
+            $user = \wp_get_current_user();
+            if ($user
+                // Check the main admin email, and they have an admin role.
+                // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+                && \get_option('admin_email') === $user->user_email
+                && in_array('administrator', $user->roles, true)
+            ) {
+                \update_option('extendify_onboarding_redirected', gmdate('c'));
+                \wp_safe_redirect(\admin_url() . 'post-new.php?extendify=onboarding');
             }
-
-            // Redirect as normal.
-            return $location;
-        }, 10, 3);
+        });
     }
 
     /**
@@ -160,6 +183,7 @@ class Admin
                 'nonce' => \wp_create_nonce('wp_rest'),
                 'partnerLogo' => defined('EXTENDIFY_PARTNER_LOGO') ? constant('EXTENDIFY_PARTNER_LOGO') : null,
                 'partnerName' => defined('EXTENDIFY_PARTNER_NAME') ? constant('EXTENDIFY_PARTNER_NAME') : null,
+                'partnerSkipSteps' => defined('EXTENDIFY_SKIP_STEPS') ? constant('EXTENDIFY_SKIP_STEPS') : [],
                 'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
             ]),
             'before'

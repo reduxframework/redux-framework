@@ -1,6 +1,7 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import { SiteSettings } from '@library/api/SiteSettings'
+import { updateOption } from '@onboarding/api/WPApi'
 
 const storage = {
     getItem: async () => await SiteSettings.getData(),
@@ -10,8 +11,13 @@ const storage = {
 
 export const useSiteSettingsStore = create(
     persist(
-        () => ({
+        (set) => ({
             enabled: true,
+            siteType: {},
+            setSiteType: async (siteType) => {
+                set({ siteType })
+                await updateOption('extendify_siteType', siteType)
+            },
         }),
         {
             name: 'extendify-sitesettings',

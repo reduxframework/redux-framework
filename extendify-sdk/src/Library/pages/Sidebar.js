@@ -11,6 +11,7 @@ import { TypeSelect } from '@library/components/TypeSelect'
 import { featured } from '@library/components/icons'
 import { brandMark } from '@library/components/icons/'
 import { useGlobalStore } from '@library/state/GlobalState'
+import { useSiteSettingsStore } from '@library/state/SiteSettings'
 import { useTaxonomyStore } from '@library/state/Taxonomies'
 import { useTemplatesStore } from '@library/state/Templates'
 import { useUserStore } from '@library/state/User'
@@ -18,9 +19,6 @@ import { useUserStore } from '@library/state/User'
 export const Sidebar = memo(function Sidebar() {
     const taxonomies = useTaxonomyStore((state) => state.taxonomies)
     const searchParams = useTemplatesStore((state) => state.searchParams)
-    const updatePreferredSiteType = useUserStore(
-        (state) => state.updatePreferredSiteType,
-    )
     const updateTaxonomies = useTemplatesStore(
         (state) => state.updateTaxonomies,
     )
@@ -29,6 +27,12 @@ export const Sidebar = memo(function Sidebar() {
         searchParams.type === 'pattern' ? 'patternType' : 'layoutType'
     const isFeatured = !searchParams?.taxonomies[taxonomyType]?.slug?.length
     const setOpen = useGlobalStore((state) => state.setOpen)
+    const [siteType, setSiteType] = useSiteSettingsStore((state) => [
+        Object.keys(state?.siteType)?.length > 0
+            ? state?.siteType
+            : { slug: '', title: 'Not set' },
+        state.setSiteType,
+    ])
 
     return (
         <>
@@ -60,11 +64,11 @@ export const Sidebar = memo(function Sidebar() {
                 </button>
             </div>
             <div className="mx-6 px-5 pt-0.5 sm:mx-0 sm:mb-8 sm:mt-0">
-                {Object.keys(taxonomies?.siteType ?? {}).length > 0 && (
+                {Object.keys(siteType).length > 0 && (
                     <SiteTypeSelector
-                        value={searchParams?.taxonomies?.siteType ?? ''}
+                        value={siteType}
                         setValue={(termData) => {
-                            updatePreferredSiteType(termData)
+                            setSiteType(termData)
                             updateTaxonomies({ siteType: termData })
                         }}
                         terms={taxonomies.siteType}
