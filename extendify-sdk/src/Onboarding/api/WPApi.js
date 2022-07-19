@@ -29,36 +29,57 @@ export const createPage = async (pageData) => {
     return data
 }
 
-export const installPlugin = async (slug) => {
+export const installPlugin = async (plugin) => {
     // Fail silently if no slug is provided
-    if (!slug) return
-    const headers = {
-        'Content-type': 'application/json',
-        'X-WP-Nonce': window.extOnbData.nonce,
-    }
-    const url = `${window.extOnbData.wpRoot}wp/v2/plugins`
-    const response = await fetch(url, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ slug, status: 'active' }),
-    })
-    if (response.status >= 200 && response.status < 300) {
-        return await response.json()
-    }
-    // The above could fail if the plugin is already installed
-    // But we at least want to try and activate it if that's the case
-    return await activatePlugin(slug)
-}
-
-export const activatePlugin = async (slug) => {
+    if (!plugin?.wordpressSlug) return
     const headers = {
         'Content-type': 'application/json',
         'X-WP-Nonce': window.extOnbData.nonce,
     }
     const endpoint = `${window.extOnbData.wpRoot}wp/v2/plugins`
-    const response = await fetch(`${endpoint}?search=${slug}`, { headers })
-    const plugin = (await response.json())?.[0]?.plugin
-    const response2 = await fetch(`${endpoint}/${plugin}`, {
+
+    // Install plugin and try to activate it.
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+                slug: plugin.wordpressSlug,
+                status: 'active',
+            }),
+        })
+        if (response.status >= 200 && response.status < 300) {
+            return await response.json()
+        }
+    } catch (e) {
+        // Fail gracefully for now
+    }
+
+    // Try and activate it if the above fails
+    try {
+        return await activatePlugin(plugin)
+    } catch (e) {
+        // Fail gracefully for now
+    }
+}
+
+export const activatePlugin = async (plugin) => {
+    const headers = {
+        'Content-type': 'application/json',
+        'X-WP-Nonce': window.extOnbData.nonce,
+    }
+    const endpoint = `${window.extOnbData.wpRoot}wp/v2/plugins`
+
+    const response = await fetch(`${endpoint}?search=${plugin.wordpressSlug}`, {
+        headers,
+    })
+    const pluginSlug = (await response.json())?.[0]?.plugin
+
+    if (!pluginSlug) {
+        throw new Error('Plugin not found')
+    }
+    // Attempt to activate the plugin with the slug we found
+    const response2 = await fetch(`${endpoint}/${pluginSlug}`, {
         method: 'POST',
         headers,
         body: JSON.stringify({ status: 'active' }),

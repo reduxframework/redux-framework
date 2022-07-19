@@ -1,24 +1,21 @@
 import { memo } from '@wordpress/element'
 
-const LeftArrowIcon = (props) => {
+const Radio = (props) => {
     const { className, ...otherProps } = props
 
     return (
         <svg
-            className={`icon ${className}`}
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            className={className}
+            viewBox="-4 -4 22 22"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             {...otherProps}>
             <path
-                d="M10 17.5L15 12L10 6.5"
                 stroke="currentColor"
-                strokeWidth="1.75"
+                d="M6.5 0.5h0s6 0 6 6v0s0 6 -6 6h0s-6 0 -6 -6v0s0 -6 6 -6"
             />
         </svg>
     )
 }
 
-export default memo(LeftArrowIcon)
+export default memo(Radio)

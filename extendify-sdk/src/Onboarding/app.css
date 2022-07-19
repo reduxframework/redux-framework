@@ -21,6 +21,10 @@
     -webkit-font-smoothing: antialiased;
 }
 
+.extendify-onboarding .search-panel input[type="text"]::placeholder {
+    @apply text-sm;
+}
+
 .extendify-onboarding .search-panel .icon-search {
     position: absolute;
     right: 16px;
@@ -53,16 +57,17 @@
 }
 
 /* Checkbox styles for page selection step. */
-.extendify-onboarding .components-checkbox-control__input[type="checkbox"] {
+.extendify-onboarding input[type="checkbox"] {
     @apply border border-gray-900;
 }
-.extendify-onboarding
-    .components-checkbox-control__input[type="checkbox"]:focus {
+.extendify-onboarding input[type="checkbox"]:focus {
     @apply outline-none ring-wp ring-partner-primary-bg ring-offset-2 ring-offset-white;
 }
-.extendify-onboarding
-    .components-checkbox-control__input[type="checkbox"]:checked {
+.extendify-onboarding input[type="checkbox"]:checked {
     @apply bg-partner-primary-bg;
+}
+.extendify-onboarding input[type="checkbox"]:checked::before {
+    content: "";
 }
 
 /* Goal checkbox */

@@ -4,7 +4,7 @@ import { persist, devtools } from 'zustand/middleware'
 const initialState = {
     siteType: {},
     siteInformation: {
-        title: '',
+        title: undefined,
     },
     style: null,
     pages: [],
@@ -56,17 +56,19 @@ const store = (set, get) => ({
         set(initialState)
     },
 })
-export const useUserSelectionStore = create(
-    persist(devtools(store), {
-        name: 'extendify-site-selection',
-        getStorage: () => sessionStorage,
-        partialize: (state) => ({
-            orderId: state?.orderId ?? null,
-            siteType: state?.siteType ?? {},
-            style: state?.style ?? null,
-            pages: state?.pages ?? [],
-            plugins: state?.plugins ?? [],
-            goals: state?.goals ?? [],
-        }),
-    }),
-)
+export const useUserSelectionStore = window?.extOnbData?.devbuild
+    ? create(devtools(store))
+    : create(
+          persist(devtools(store), {
+              name: 'extendify-site-selection',
+              getStorage: () => localStorage,
+              partialize: (state) => ({
+                  siteType: state?.siteType ?? {},
+                  siteInformation: state?.siteInformation ?? {},
+                  style: state?.style ?? null,
+                  pages: state?.pages ?? [],
+                  plugins: state?.plugins ?? [],
+                  goals: state?.goals ?? [],
+              }),
+          }),
+      )

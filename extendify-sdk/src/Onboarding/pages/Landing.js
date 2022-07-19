@@ -4,6 +4,10 @@ import { updateOption } from '@onboarding/api/WPApi'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
 
+export const metadata = {
+    key: 'welcome',
+    skippable: true,
+}
 export const Landing = () => {
     const nextPage = usePagesStore((state) => state.nextPage)
     const continueButton = useRef(null)
@@ -39,9 +43,9 @@ export const Landing = () => {
                 </p>
             </div>
             <div className="">
-                <p className="mt-0 mb-8 text-base">
+                <h2 className="text-lg m-0 mb-4 text-gray-900">
                     {__('Pick one:', 'extendify')}
-                </p>
+                </h2>
                 <div className="lg:flex lg:space-x-8">
                     <button
                         onClick={nextPage}

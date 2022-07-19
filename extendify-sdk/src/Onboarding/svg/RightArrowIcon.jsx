@@ -1,6 +1,6 @@
 import { memo } from '@wordpress/element'
 
-const LeftArrowIcon = (props) => {
+const RightArrowIcon = (props) => {
     const { className, ...otherProps } = props
 
     return (
@@ -13,7 +13,7 @@ const LeftArrowIcon = (props) => {
             xmlns="http://www.w3.org/2000/svg"
             {...otherProps}>
             <path
-                d="M10 17.5L15 12L10 6.5"
+                d="M15 17.5L10 12L15 6.5"
                 stroke="currentColor"
                 strokeWidth="1.75"
             />
@@ -21,4 +21,4 @@ const LeftArrowIcon = (props) => {
     )
 }
 
-export default memo(LeftArrowIcon)
+export default memo(RightArrowIcon)

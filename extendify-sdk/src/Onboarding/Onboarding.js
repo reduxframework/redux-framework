@@ -8,12 +8,10 @@ import { CreatingSite } from '@onboarding/pages/CreatingSite'
 import { Finished } from '@onboarding/pages/Finished'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
-import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { useTelemetry } from './hooks/useTelemetry'
 import { NeedsTheme } from './pages/NeedsTheme'
 
 export const Onboarding = () => {
-    const resetState = useUserSelectionStore((state) => state.resetState)
     const [retrying, setRetrying] = useState(false)
     const { component: CurrentPage } = usePagesStore((state) =>
         state.currentPageData(),
@@ -58,10 +56,9 @@ export const Onboarding = () => {
     }, [show])
 
     useEffect(() => {
-        resetState()
         const q = new URLSearchParams(window.location.search)
         setShow(['onboarding'].includes(q.get('extendify')))
-    }, [resetState])
+    }, [])
 
     useEffect(() => {
         if (fetcher) {

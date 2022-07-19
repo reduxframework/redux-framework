@@ -5,6 +5,7 @@ import { getLayoutTypes } from '@onboarding/api/DataApi'
 import { PagePreview } from '@onboarding/components/PagePreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
+import { useProgressStore } from '@onboarding/state/Progress'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 
 export const fetcher = async () => {
@@ -22,11 +23,17 @@ export const fetcher = async () => {
 export const fetchData = () => {
     return { key: 'layout-types' }
 }
+export const metadata = {
+    key: 'pages',
+    title: __('Pages', 'extendify'),
+    completed: () => true,
+}
 export const SitePages = () => {
     const { data: availablePages } = useFetch(fetchData, fetcher)
     const [pagesToShow, setPagesToShow] = useState([])
     const { add, goals, reset } = useUserSelectionStore()
     const isMounted = useIsMounted()
+    const touch = useProgressStore((state) => state.touch)
 
     useEffect(() => {
         if (!availablePages?.length) return
@@ -68,21 +75,22 @@ export const SitePages = () => {
                 </p>
             </div>
             <div className="w-full">
-                <p className="mt-0 mb-8 text-base">
+                <h2 className="text-lg m-0 mb-4 text-gray-900">
                     {__(
                         "Pick the pages you'd like to add to your site",
                         'extendify',
                     )}
-                </p>
-                <div className="lg:flex space-y-6 -m-6 mt-0 mb-12 lg:space-y-0 flex-wrap">
+                </h2>
+                <div className="lg:flex mt-0 flex-wrap">
                     {pagesToShow?.map((page) => {
                         return (
                             <div
-                                className="p-6 relative"
+                                onClick={() => touch(metadata.key)}
+                                className="px-3 mb-12 relative"
                                 style={{ height: 442.5, width: 318.75 }}
                                 key={page.id}>
                                 <PagePreview
-                                    lock={page?.slug === 'home'}
+                                    required={page?.slug === 'home'}
                                     page={page}
                                     blockHeight={442.5}
                                 />

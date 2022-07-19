@@ -5,6 +5,7 @@ import { Taxonomies as TaxonomiesApi } from '@library/api/Taxonomies'
 export const useTaxonomyStore = create(
     persist(
         (set, get) => ({
+            // No longer handles site types
             taxonomies: {},
             setTaxonomies: (taxonomies) => set({ taxonomies }),
             fetchTaxonomies: async () => {

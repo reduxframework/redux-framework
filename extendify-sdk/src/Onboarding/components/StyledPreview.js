@@ -187,7 +187,7 @@ export const StylePreview = ({
     return (
         <>
             {loaded && code ? null : (
-                <div className="m-6 absolute inset-0 bg-gray-50 flex items-center justify-center">
+                <div className="m-3 absolute inset-0 bg-gray-50 flex items-center justify-center">
                     <SpinnerIcon className="spin w-8" />
                 </div>
             )}

@@ -4,6 +4,7 @@ import { getOption } from '@onboarding/api/WPApi'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
+import { useProgressStore } from '@onboarding/state/Progress'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 
 export const fetcher = async () => {
@@ -11,11 +12,15 @@ export const fetcher = async () => {
     return { title }
 }
 export const fetchData = () => ({ key: 'site-info' })
+export const metadata = {
+    key: 'site-title',
+}
 export const SiteInformation = () => {
     const { siteInformation, setSiteInformation } = useUserSelectionStore()
     const initialFocus = useRef(null)
     const nextPage = usePagesStore((state) => state.nextPage)
     const { data: existingSiteInfo } = useFetch(fetchData, fetcher)
+    const touch = useProgressStore((state) => state.touch)
 
     useEffect(() => {
         const raf = requestAnimationFrame(() => initialFocus.current.focus())
@@ -23,10 +28,10 @@ export const SiteInformation = () => {
     }, [initialFocus])
 
     useEffect(() => {
-        if (existingSiteInfo?.title) {
+        if (existingSiteInfo?.title && siteInformation?.title === undefined) {
             setSiteInformation('title', existingSiteInfo.title)
         }
-    }, [existingSiteInfo, setSiteInformation])
+    }, [existingSiteInfo, setSiteInformation, siteInformation])
 
     return (
         <PageLayout>
@@ -46,7 +51,7 @@ export const SiteInformation = () => {
                     }}>
                     <label
                         htmlFor="extendify-site-title-input"
-                        className="block mt-0 mb-8 text-base">
+                        className="block text-lg m-0 mb-4 font-semibold text-gray-900">
                         {__("What's the name of your site?", 'extendify')}
                     </label>
                     <div className="mb-8">
@@ -58,9 +63,10 @@ export const SiteInformation = () => {
                             id="extendify-site-title-input"
                             className="w-96 max-w-full border h-12 input-focus"
                             value={siteInformation?.title ?? ''}
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 setSiteInformation('title', e.target.value)
-                            }
+                                touch(metadata.key)
+                            }}
                             placeholder={__(
                                 'Enter your preferred site title...',
                                 'extendify',

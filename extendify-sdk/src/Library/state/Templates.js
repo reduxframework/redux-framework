@@ -1,13 +1,8 @@
 import create from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { useGlobalStore } from './GlobalState'
+import { useSiteSettingsStore } from './SiteSettings'
 import { useTaxonomyStore } from './Taxonomies'
-import { useUserStore } from './User'
-
-const defaultCategoryForType = (tax) =>
-    tax === 'siteType'
-        ? { slug: '', title: 'Not set' }
-        : { slug: '', title: 'Featured' }
 
 export const useTemplatesStore = create(
     subscribeWithSelector((set, get) => ({
@@ -43,37 +38,24 @@ export const useTemplatesStore = create(
             const taxonomies = useTaxonomyStore.getState().taxonomies
             let taxonomyDefaultState = Object.entries(taxonomies).reduce(
                 (state, current) => (
-                    (state[current[0]] = defaultCategoryForType(current[0])),
-                    state
+                    (state[current[0]] = { slug: '', title: 'Featured' }), state
                 ),
                 {},
             )
-            const tax = {}
-            let preferredTax =
-                useUserStore.getState().preferredOptions?.taxonomies ?? {}
-
-            // Check for old site type and set it if it exists
-            if (preferredTax.tax_categories) {
-                preferredTax = get().getLegacySiteType(preferredTax, taxonomies)
-            }
-            taxonomyDefaultState = Object.assign(
-                {},
-                taxonomyDefaultState,
-
-                // Override with the user's preferred taxonomies
-                preferredTax,
-
-                // Override with the global state
-                useGlobalStore.getState()?.currentTaxonomies ?? {},
-            )
-
-            tax.taxonomies = Object.assign({}, taxonomyDefaultState)
-            set({
-                taxonomyDefaultState: taxonomyDefaultState,
-                searchParams: {
-                    ...Object.assign(get().searchParams, tax),
+            const tax = {
+                taxonomies: {
+                    ...taxonomyDefaultState,
+                    // Override with the global state
+                    ...(useGlobalStore.getState()?.currentTaxonomies ?? {}),
+                    siteType: useSiteSettingsStore.getState().siteType,
                 },
-            })
+            }
+            set((state) => ({
+                taxonomyDefaultState: taxonomyDefaultState,
+                searchParams: { ...state.searchParams, ...tax },
+            }))
+            // Do this because the siteType could change from the server
+            useGlobalStore.getState().updateCurrentTaxonomies(tax.taxonomies)
         },
         updateTaxonomies: (params) => {
             const data = {}
@@ -82,16 +64,6 @@ export const useTemplatesStore = create(
                 get().searchParams.taxonomies,
                 params,
             )
-            if (data?.taxonomies?.siteType) {
-                // This is what the user "prefers", which may be used outside the library
-                // which is persisted to the database, where as the global library state is in local storage
-                useUserStore
-                    .getState()
-                    .updatePreferredOption(
-                        'siteType',
-                        data?.taxonomies?.siteType,
-                    )
-            }
             useGlobalStore.getState().updateCurrentTaxonomies(data?.taxonomies)
             get().updateSearchParams(data)
         },
@@ -116,18 +88,5 @@ export const useTemplatesStore = create(
             }
         },
         resetTemplates: () => set({ templates: [], nextPage: '' }),
-        getLegacySiteType: (preferredTax, taxonomies) => {
-            const oldSiteType = taxonomies.siteType.find((t) =>
-                [t.slug, t?.title].includes(preferredTax.tax_categories),
-            )
-            // TODO: This is kind of wonky, as we keep track of the state in two places.
-            useUserStore.getState().updatePreferredSiteType(oldSiteType)
-            get().updateTaxonomies({ siteType: oldSiteType })
-            // Remove the legacy term so this only runs once
-            useUserStore
-                .getState()
-                .updatePreferredOption('tax_categories', null)
-            return useUserStore.getState().preferredOptions.taxonomies
-        },
     })),
 )

@@ -29,6 +29,7 @@ export const createWordpressPages = async (pages, siteType, style) => {
             status: 'publish',
             content: content,
             template: 'no-title',
+            meta: { made_with_extendify_launch: true },
         })
         pageIds[name] = { id: result.id, title: page.title }
     }

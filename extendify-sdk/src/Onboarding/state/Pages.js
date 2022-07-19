@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { persist, devtools } from 'zustand/middleware'
 import { pages } from '@onboarding/lib/pages'
 
 const store = (set, get) => ({
@@ -12,7 +12,10 @@ const store = (set, get) => ({
         return Array.from(get().pages.keys())
     },
     currentPageData() {
-        return get().pages.get(get().pageOrder()[get().currentPageIndex])
+        return get().pages.get(get().currentPageSlug())
+    },
+    currentPageSlug() {
+        return get().pageOrder()[get().currentPageIndex]
     },
     nextPageData() {
         const nextIndex = get().currentPageIndex + 1
@@ -35,4 +38,14 @@ const store = (set, get) => ({
         get().setPage(get().currentPageIndex - 1)
     },
 })
-export const usePagesStore = create(devtools(store))
+export const usePagesStore = window?.extOnbData?.devbuild
+    ? create(devtools(store))
+    : create(
+          persist(devtools(store), {
+              name: 'extendify-pages',
+              getStorage: () => localStorage,
+              partialize: (state) => ({
+                  currentPageIndex: state?.currentPageIndex ?? 0,
+              }),
+          }),
+      )
