@@ -1,8 +1,11 @@
 # Redux Changelog
 
-## 4.3.15.1
-* Added: Accordion extension.
+## 4.3.16
+* Added: Accordion extension. [https://devs.redux.io/core-extensions/accordion.html](https://devs.redux.io/core-extensions/accordion.html)
+* Added: JS Button extension. [https://devs.redux.io/core-extensions/js-button.html](https://devs.redux.io/core-extensions/js-button.html)
 * Fixed: #3888 - Validation messages dismissed when using `ace_editor` field after `redux_change` event.
+* Updated: Extendify Library.
+* Release date: July 21, 2022
 
 ## 4.3.15
 * Added: Multi Media extension. [https://devs.redux.io/core-extensions/multi-media.html](https://devs.redux.io/core-extensions/multi-media.html)
