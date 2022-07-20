@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Accordion' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '2.0.0';
+		public static $version = '4.3.16';
 
 		/**
 		 * Extension friendly name.
