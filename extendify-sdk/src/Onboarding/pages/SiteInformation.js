@@ -14,6 +14,8 @@ export const fetcher = async () => {
 export const fetchData = () => ({ key: 'site-info' })
 export const metadata = {
     key: 'site-title',
+    title: __('Site Title', 'extendify'),
+    completed: () => true,
 }
 export const SiteInformation = () => {
     const { siteInformation, setSiteInformation } = useUserSelectionStore()

@@ -8,6 +8,7 @@ import { CreatingSite } from '@onboarding/pages/CreatingSite'
 import { Finished } from '@onboarding/pages/Finished'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
+import { updateOption } from './api/WPApi'
 import { useTelemetry } from './hooks/useTelemetry'
 import { NeedsTheme } from './pages/NeedsTheme'
 
@@ -57,7 +58,10 @@ export const Onboarding = () => {
 
     useEffect(() => {
         const q = new URLSearchParams(window.location.search)
-        setShow(['onboarding'].includes(q.get('extendify')))
+        if (['onboarding'].includes(q.get('extendify'))) {
+            setShow(true)
+            updateOption('extendify_launch_loaded', new Date().toISOString())
+        }
     }, [])
 
     useEffect(() => {

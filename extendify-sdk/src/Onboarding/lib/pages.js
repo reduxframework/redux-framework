@@ -9,6 +9,7 @@ import {
     SiteInformation,
     fetcher as siteInfoFetcher,
     fetchData as siteInfoData,
+    metadata as siteInfoMeta,
 } from '@onboarding/pages/SiteInformation'
 import {
     SitePages,
@@ -41,11 +42,12 @@ const defaultPages = [
         },
     ],
     [
-        'site-title',
+        'goals',
         {
-            component: SiteInformation,
-            fetcher: siteInfoFetcher,
-            fetchData: siteInfoData,
+            component: Goals,
+            fetcher: goalsFetcher,
+            fetchData: goalsData,
+            metadata: goalsMeta,
         },
     ],
     [
@@ -55,15 +57,6 @@ const defaultPages = [
             fetcher: siteTypeFetcher,
             fetchData: siteTypeData,
             metadata: siteTypeMeta,
-        },
-    ],
-    [
-        'goals',
-        {
-            component: Goals,
-            fetcher: goalsFetcher,
-            fetchData: goalsData,
-            metadata: goalsMeta,
         },
     ],
     [
@@ -80,6 +73,15 @@ const defaultPages = [
             fetcher: sitePagesFetcher,
             fetchData: sitePagesData,
             metadata: sitePagesMeta,
+        },
+    ],
+    [
+        'site-title',
+        {
+            component: SiteInformation,
+            fetcher: siteInfoFetcher,
+            fetchData: siteInfoData,
+            metadata: siteInfoMeta,
         },
     ],
     [

@@ -105,7 +105,7 @@ class Admin
     }
 
     /**
-     * Redirect once to Launch, only once when
+     * Redirect once to Launch, only once (at least once) when
      * the email matches the entry in WP Admin > Settings > General.
      *
      * @return void
@@ -113,10 +113,17 @@ class Admin
     public function redirectOnce()
     {
         \add_action('admin_init', function () {
-            if (\get_option('extendify_onboarding_skipped', 0)
+            if (\get_option('extendify_launch_loaded', 0)
+                // These are here for legacy reasons.
+                || \get_option('extendify_onboarding_skipped', 0)
                 || \get_option('extendify_onboarding_completed', 0)
-                || \get_option('extendify_onboarding_redirected', 0)
             ) {
+                return;
+            }
+
+            // Only redirect if we aren't already on the page.
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if (isset($_GET['extendify'])) {
                 return;
             }
 
@@ -127,7 +134,6 @@ class Admin
                 && \get_option('admin_email') === $user->user_email
                 && in_array('administrator', $user->roles, true)
             ) {
-                \update_option('extendify_onboarding_redirected', gmdate('c'));
                 \wp_safe_redirect(\admin_url() . 'post-new.php?extendify=onboarding');
             }
         });

@@ -47,7 +47,7 @@ export const SiteSummary = () => {
                                     aria-hidden="true"
                                     className="absolute top-0 bottom-0 left-3/4 right-0 z-40 bg-gradient-to-l from-white"></span>
                                 {pages.length > 0 && (
-                                    <div className="flex items-start space-x-2 w-full">
+                                    <div className="flex items-start space-x-2 w-full overflow-y-scroll">
                                         <div className="lg:flex flex-no-wrap">
                                             {pages?.map((page) => {
                                                 return (
