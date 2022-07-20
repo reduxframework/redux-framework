@@ -13,7 +13,7 @@ export const CheckboxInput = ({
             className="flex hover:text-partner-primary-bg focus-within:text-partner-primary-bg"
             htmlFor={slug}
             onClick={onClick}
-            onChange={onChange}>
+            onChange={onChange ?? onClick}>
             <span className="mt-0.5 w-6 h-6 relative inline-block mr-3 align-middle">
                 <input
                     id={slug}

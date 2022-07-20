@@ -13,4 +13,7 @@ export const SiteSettings = {
             },
         })
     },
+    updateOption(option, value) {
+        return api.post('site-settings/options', { option, value })
+    },
 }

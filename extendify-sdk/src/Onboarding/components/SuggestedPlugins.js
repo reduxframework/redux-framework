@@ -37,6 +37,9 @@ export const SuggestedPlugins = () => {
         // Clean up first in case they updated their choices
         suggestedPlugins?.forEach((plugin) => remove('plugins', plugin))
 
+        // If nothing to recommend, don't autoselect anything
+        if (nothingToRecommend) return
+
         // Select all plugins that match goals on mount
         suggestedPlugins
             ?.filter(hasGoal)
@@ -52,7 +55,7 @@ export const SuggestedPlugins = () => {
                             label={plugin.name}
                             slug={plugin.wordpressSlug}
                             description={plugin.description}
-                            checked={true}
+                            checked={!nothingToRecommend}
                             onClick={() => toggle('plugins', plugin)}
                         />
                     </div>

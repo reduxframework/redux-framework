@@ -46,4 +46,16 @@ class SiteSettingsController
         \update_option(SiteSettings::key(), $settingsData, true);
         return new \WP_REST_Response(SiteSettings::data());
     }
+    /**
+     * Persist the data
+     *
+     * @param \WP_REST_Request $request - The request.
+     * @return \WP_REST_Response
+     */
+    public static function updateOption($request)
+    {
+        $params = $request->get_json_params();
+        \update_option($params['option'], $params['value']);
+        return new \WP_REST_Response(['success' => true], 200);
+    }
 }

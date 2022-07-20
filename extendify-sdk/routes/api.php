@@ -48,6 +48,7 @@ use Extendify\Library\Controllers\SiteSettingsController;
 
         ApiRouter::get('/site-settings', [SiteSettingsController::class, 'show']);
         ApiRouter::post('/site-settings', [SiteSettingsController::class, 'store']);
+        ApiRouter::post('/site-settings/options', [SiteSettingsController::class, 'updateOption']);
 
         // Onboarding.
         ApiRouter::post('/onboarding/options', [WPController::class, 'updateOption']);
