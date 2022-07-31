@@ -29,6 +29,32 @@ export const createPage = async (pageData) => {
     return data
 }
 
+export const trashPost = async (postId, postType) => {
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'X-WP-Nonce': window.extOnbData.nonce,
+        },
+    }
+    const url = `${window.extOnbData.wpRoot}wp/v2/${postType}s/${postId}`
+    const response = await fetch(url, options)
+    return await response.json()
+}
+
+export const getPost = async (postSlug, type = 'post') => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'X-WP-Nonce': window.extOnbData.nonce,
+        },
+    }
+    const url = `${window.extOnbData.wpRoot}wp/v2/${type}s?slug=${postSlug}`
+    const response = await fetch(url, options)
+    return await response.json()
+}
+
 export const installPlugin = async (plugin) => {
     // Fail silently if no slug is provided
     if (!plugin?.wordpressSlug) return

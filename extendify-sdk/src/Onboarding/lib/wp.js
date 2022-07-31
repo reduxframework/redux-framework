@@ -2,6 +2,8 @@ import { getTemplate } from '@onboarding/api/DataApi'
 import {
     updateOption,
     createPage,
+    trashPost,
+    getPost,
     updateThemeVariation,
 } from '@onboarding/api/WPApi'
 
@@ -46,6 +48,18 @@ export const createWordpressPages = async (pages, siteType, style) => {
         new Date().toISOString(),
     )
     return pageIds
+}
+
+export const trashWordpressPages = (posts) => {
+    posts.forEach(async (el) => {
+        // Try and retrieve posts via slug.
+        const post = await getPost(el.slug, el.type)
+
+        // If post exists (but not trashed) then send it to trash.
+        if (post?.length && post[0].status !== 'trash') {
+            await trashPost(post[0].id, el.type)
+        }
+    })
 }
 
 export const updateGlobalStyleVariant = (variation) =>

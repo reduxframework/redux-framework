@@ -47,6 +47,10 @@ class Admin
      */
     public function pluginActionLinks($links)
     {
+        if (defined('EXTENDIFY_SITE_LICENSE')) {
+            return $links;
+        }
+
         $theme = get_option('template');
         $label = esc_html__('Upgrade', 'extendify');
 

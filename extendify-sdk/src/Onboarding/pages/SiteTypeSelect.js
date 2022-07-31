@@ -23,6 +23,9 @@ export const metadata = {
 }
 export const SiteTypeSelect = () => {
     const siteType = useUserSelectionStore((state) => state.siteType)
+    const feedback = useUserSelectionStore(
+        (state) => state.feedbackMissingSiteType,
+    )
     const nextPage = usePagesStore((state) => state.nextPage)
     const [visibleSiteTypes, setVisibleSiteTypes] = useState([])
     const [search, setSearch] = useState('')
@@ -75,7 +78,9 @@ export const SiteTypeSelect = () => {
     useEffect(() => {
         if (loading) return
         setVisibleSiteTypes(
-            showExamples ? siteTypes.filter((i) => i.featured) : siteTypes,
+            showExamples
+                ? siteTypes.filter((i) => i.featured)
+                : siteTypes.sort((a, b) => a.title.localeCompare(b.title)),
         )
     }, [siteTypes, showExamples, loading])
 
@@ -96,7 +101,7 @@ export const SiteTypeSelect = () => {
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('What is your site about?', 'extendify')}
                 </h1>
-                <p className="text-base opacity-70">
+                <p className="text-base opacity-70 mb-0">
                     {__('Search for your site industry.', 'extendify')}
                 </p>
             </div>
@@ -148,6 +153,49 @@ export const SiteTypeSelect = () => {
                                     option={option}
                                 />
                             ))}
+                        </div>
+                    </div>
+                )}
+                {!loading && visibleSiteTypes?.length === 0 && (
+                    <div>
+                        <div className="flex items-center justify-between uppercase">
+                            {__('No Results', 'extendify')}
+                            <button
+                                type="button"
+                                className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline cursor-pointer"
+                                onClick={() => {
+                                    setSearch('')
+                                    searchRef.current.focus()
+                                }}>
+                                {sprintf(
+                                    __('Show all %s', 'extendify'),
+                                    loading ? '...' : siteTypes.length,
+                                )}
+                            </button>
+                        </div>
+                        <h2 className="text-lg mt-12 mb-4 text-gray-900">
+                            {__(
+                                "Don't see what you're looking for?",
+                                'extendify',
+                            )}
+                        </h2>
+                        <div className="search-panel flex items-center justify-center relative mb-8">
+                            <input
+                                type="text"
+                                className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
+                                value={feedback}
+                                onChange={(e) =>
+                                    useUserSelectionStore
+                                        .getState()
+                                        .setFeedbackMissingSiteType(
+                                            e.target.value,
+                                        )
+                                }
+                                placeholder={__(
+                                    'Describe your site...',
+                                    'extendify',
+                                )}
+                            />
                         </div>
                     </div>
                 )}
