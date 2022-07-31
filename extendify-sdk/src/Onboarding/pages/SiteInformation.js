@@ -41,7 +41,7 @@ export const SiteInformation = () => {
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__("What's the name of your new site?", 'extendify')}
                 </h1>
-                <p className="text-base opacity-70">
+                <p className="text-base opacity-70 mb-0">
                     {__('You can change this later.', 'extendify')}
                 </p>
             </div>

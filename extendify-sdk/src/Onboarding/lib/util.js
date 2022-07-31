@@ -12,3 +12,7 @@ export const lowerImageQuality = (html) => {
         url.replace(w, 'w=' + Math.floor(Number(width)) + '&q=10'),
     )
 }
+
+/** Capitalize first letter of a string */
+export const capitalize = (str) =>
+    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()

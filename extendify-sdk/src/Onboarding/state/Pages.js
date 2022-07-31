@@ -38,14 +38,17 @@ const store = (set, get) => ({
         get().setPage(get().currentPageIndex - 1)
     },
 })
+const withDevtools = devtools(store, {
+    name: 'Extendify Launch Pages',
+    serialize: true,
+})
+const withPersist = persist(withDevtools, {
+    name: 'extendify-pages',
+    getStorage: () => localStorage,
+    partialize: (state) => ({
+        currentPageIndex: state?.currentPageIndex ?? 0,
+    }),
+})
 export const usePagesStore = window?.extOnbData?.devbuild
-    ? create(devtools(store))
-    : create(
-          persist(devtools(store), {
-              name: 'extendify-pages',
-              getStorage: () => localStorage,
-              partialize: (state) => ({
-                  currentPageIndex: state?.currentPageIndex ?? 0,
-              }),
-          }),
-      )
+    ? create(withDevtools)
+    : create(withPersist)

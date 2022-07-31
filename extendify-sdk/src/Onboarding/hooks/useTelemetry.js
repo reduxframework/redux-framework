@@ -11,6 +11,8 @@ export const useTelemetry = () => {
         plugins: selectedPlugins,
         siteType: selectedSiteType,
         style: selectedStyle,
+        feedbackMissingSiteType,
+        feedbackMissingGoal,
     } = useUserSelectionStore()
     const { orderId, setOrderId, generating } = useGlobalStore()
     const { pages, currentPageIndex } = usePagesStore()
@@ -81,6 +83,10 @@ export const useTelemetry = () => {
                     stepProgress,
                     pages,
                     viewedStyles: [...viewedStyles].slice(1),
+                    feedbackMissingSiteType,
+                    feedbackMissingGoal,
+                    perfStyles: getPerformance('style'),
+                    perfPages: getPerformance('page'),
                 }),
             })
         }, 1000)
@@ -96,5 +102,14 @@ export const useTelemetry = () => {
         orderId,
         stepProgress,
         viewedStyles,
+        feedbackMissingSiteType,
+        feedbackMissingGoal,
     ])
+}
+
+const getPerformance = (type) => {
+    return performance
+        .getEntriesByType('measure')
+        .filter((m) => m.detail.extendify && m.detail.context.type === type)
+        .map((m) => ({ [m.name]: m.duration }))
 }

@@ -16,14 +16,14 @@ const store = (set) => ({
         set(initialState)
     },
 })
+const withDevtools = devtools(store, { name: 'Extendify Launch Progress' })
+const withPersist = persist(withDevtools, {
+    name: 'extendify-progress',
+    getStorage: () => localStorage,
+    partialize: (state) => ({
+        touched: state.touched,
+    }),
+})
 export const useProgressStore = window?.extOnbData?.devbuild
-    ? create(devtools(store))
-    : create(
-          persist(devtools(store), {
-              name: 'extendify-progress',
-              getStorage: () => localStorage,
-              partialize: (state) => ({
-                  touched: state.touched,
-              }),
-          }),
-      )
+    ? create(withDevtools)
+    : create(withPersist)

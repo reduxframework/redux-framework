@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useState, useRef } from '@wordpress/element'
+import {
+    useCallback,
+    useEffect,
+    useState,
+    useRef,
+    useMemo,
+} from '@wordpress/element'
 import { __, sprintf } from '@wordpress/i18n'
 import { getStyles } from '@onboarding/api/DataApi'
 import { StylePreview } from '@onboarding/components/StyledPreview'
@@ -26,21 +32,11 @@ export const metadata = {
 }
 export const SiteStyle = () => {
     const siteType = useUserSelectionStore((state) => state.siteType)
-    const nextPage = usePagesStore((state) => state.nextPage)
     const { data: styleData, loading } = useFetch(fetchData, fetcher)
     const once = useRef(false)
     const stylesRef = useRef()
     const isMounted = useIsMountedLayout()
-    const selectStyle = useCallback(
-        (style) => {
-            useUserSelectionStore.getState().setStyle(style)
-            touch(metadata.key)
-            nextPage()
-        },
-        [nextPage, touch],
-    )
     const [styles, setStyles] = useState([])
-    const touch = useProgressStore((state) => state.touch)
 
     useEffect(() => {
         if (!styleData?.length) return
@@ -78,7 +74,7 @@ export const SiteStyle = () => {
                         siteType?.label?.toLowerCase(),
                     )}
                 </h1>
-                <p className="text-base opacity-70">
+                <p className="text-base opacity-70 mb-0">
                     {__('You can personalize this later.', 'extendify')}
                 </p>
             </div>
@@ -91,27 +87,19 @@ export const SiteStyle = () => {
                           )
                         : __('Pick your style', 'extendify')}
                 </h2>
-                <div
-                    ref={stylesRef}
-                    className="lg:flex space-y-6 lg:space-y-0 flex-wrap">
+                <div ref={stylesRef} className="lg:flex gap-6 flex-wrap">
                     {styles?.map((style) => (
-                        <div
-                            className="p-3 relative"
-                            style={{ height: 590, width: 425 }}
-                            key={style.recordId}>
-                            <StylePreview
-                                style={style}
-                                selectStyle={selectStyle}
-                                blockHeight={590}
-                            />
-                        </div>
+                        <StylePreviewWrapper
+                            key={style.recordId}
+                            style={style}
+                        />
                     ))}
                     {/* Budget skeleton loaders */}
                     {styleData?.slice(styles?.length).map((data) => (
                         <div
                             key={data.slug}
-                            style={{ height: 590, width: 425 }}
-                            className="p-3 relative">
+                            style={{ height: 600, width: 425 }}
+                            className="relative">
                             <div className="bg-gray-50 h-full w-full flex items-center justify-center">
                                 <SpinnerIcon className="spin w-8" />
                             </div>
@@ -120,5 +108,36 @@ export const SiteStyle = () => {
                 </div>
             </div>
         </PageLayout>
+    )
+}
+
+const StylePreviewWrapper = ({ style }) => {
+    const nextPage = usePagesStore((state) => state.nextPage)
+    const touch = useProgressStore((state) => state.touch)
+    const selectStyle = useCallback(
+        (style) => {
+            useUserSelectionStore.getState().setStyle(style)
+            touch(metadata.key)
+            nextPage()
+        },
+        [nextPage, touch],
+    )
+    const context = useMemo(
+        () => ({
+            type: 'style',
+            detail: style.slug,
+            measure: true,
+        }),
+        [style],
+    )
+    return (
+        <div className="relative" style={{ height: 600, width: 425 }}>
+            <StylePreview
+                style={style}
+                context={context}
+                selectStyle={selectStyle}
+                blockHeight={600}
+            />
+        </div>
     )
 }

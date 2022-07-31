@@ -70,7 +70,7 @@ export const SitePages = () => {
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('What pages do you want on this site?', 'extendify')}
                 </h1>
-                <p className="text-base opacity-70">
+                <p className="text-base opacity-70 mb-0">
                     {__('You may add more later', 'extendify')}
                 </p>
             </div>
@@ -81,21 +81,23 @@ export const SitePages = () => {
                         'extendify',
                     )}
                 </h2>
-                <div className="lg:flex mt-0 flex-wrap">
+                <div className="lg:flex flex-wrap gap-4">
                     {pagesToShow?.map((page) => {
-                        return (
-                            <div
-                                onClick={() => touch(metadata.key)}
-                                className="px-3 mb-12 relative"
-                                style={{ height: 442.5, width: 318.75 }}
-                                key={page.id}>
-                                <PagePreview
-                                    required={page?.slug === 'home'}
-                                    page={page}
-                                    blockHeight={442.5}
-                                />
-                            </div>
-                        )
+                        if (page.slug !== 'home')
+                            return (
+                                <div
+                                    onClick={() => touch(metadata.key)}
+                                    className="relative"
+                                    style={{ height: 490, width: 318.75 }}
+                                    key={page.id}>
+                                    <PagePreview
+                                        required={page?.slug === 'home'}
+                                        page={page}
+                                        title={page?.title}
+                                        blockHeight={490}
+                                    />
+                                </div>
+                            )
                     })}
                 </div>
             </div>
