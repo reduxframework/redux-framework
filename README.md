@@ -6,6 +6,7 @@
 ## New to Version 4.3 ##
 * METABOXES!
 * REPEATER EXTENSION!
+* SOCIAL PROFILES EXTENSION!
 * Multi Media extension.
 * DateTime extension.
 * Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
