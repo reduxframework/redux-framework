@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.16.1
+* Added: Social Profiles extension. [https://devs.redux.io/core-extensions/social-profiles.html](https://devs.redux.io/core-extensions/social-profiles.html)
+* Updated: Extendify Library.
+
 ## 4.3.16
 * Added: Accordion extension. [https://devs.redux.io/core-extensions/accordion.html](https://devs.redux.io/core-extensions/accordion.html)
 * Added: JS Button extension. [https://devs.redux.io/core-extensions/js-button.html](https://devs.redux.io/core-extensions/js-button.html)
