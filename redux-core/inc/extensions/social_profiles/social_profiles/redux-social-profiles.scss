@@ -1,0 +1,254 @@
+ul {
+    &#redux-social-profiles-selector-list {
+        li {
+            &.sortable-placeholder {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                border: 1px dashed gray;
+                margin: 0;
+                padding: 0;
+                display: inline;
+                float: left;
+            }
+        }
+    }
+
+    &#redux-social-profiles-list {
+        li {
+            line-height: 40px;
+            height: 100px;
+            display: block;
+            clear: left;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+.redux-icon-preview {
+    float: left;
+    display: block;
+    font-size: 30px;
+    cursor: move;
+    margin-right: 10px;
+}
+
+.redux-social-item-container {
+    background-color: white;
+    height: 100%;
+    border: #D8D8D8 1px solid;
+}
+
+#redux-social-profiles-information {
+    padding-bottom: 10px;
+}
+
+.redux-social-profiles-item-enabled {
+    float: right !important;
+    padding-right: 10px;
+    margin-top: -40px;
+}
+
+.redux-social-profiles-selector-container {
+    display: inline-block;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+li {
+    &.redux-social-profiles-item-enable {
+        display: block;
+        float: left;
+        font-size: 30px;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        padding: 0 5px 5px;
+        text-align: center;
+        border: 1px solid transparent;
+        &.enabled {
+            color: #555;
+            border-color: #D8D8D8;
+            background-color: #e0e0e0;
+        }
+        &:hover {
+            background-color: #e5e5e5;
+            color: #777;
+            border-color: #D8D8D8;
+        }
+    }
+}
+
+.redux-social-profiles-item-name {
+    width: auto;
+    font-size: 150% !important;
+
+    .redux-text-name-label {
+        font-size: 150% !important;
+    }
+}
+
+.redux-icon-preview,
+.redux-social-profiles-item-enable-item-name,
+.redux-social-profiles-item-enabled,
+.redux-social-profiles-text-color,
+.redux-social-profiles-background-color,
+.redux-social-profiles-link-url,
+.redux-social-profiles-item-order,
+.redux-social-profiles-item-reset {
+    display: block;
+    float: left;
+    margin-left: 10px;
+    line-height: 40px;
+}
+
+.rdx-icon-preview input,
+.rdx-social-profiles-item-name input,
+.rdx-social-profiles-item-enabled input,
+.rdx-social-profiles-text-color div,
+.rdx-social-profiles-background-color div,
+.rdx-social-profiles-link-url input,
+.rdx-social-profiles-item-order input {
+    /*    margin-left: 5px;*/
+}
+
+.redux-social-profiles-text-color {
+    .redux-text-color-label {
+        top: -30px;
+        left: auto;
+        width: 0;
+    }
+}
+
+.redux-social-profiles-background-color {
+    padding-left: 9px !important;
+
+    .redux-background-color-label {
+        top: -30px;
+        left: auto;
+        width: 0;
+    }
+}
+
+.redux-social-profiles-item-order {
+    display: none;
+
+    input {
+        width: 30px;
+    }
+}
+
+.redux-social-profiles-item-reset {
+    float: right;
+    padding-right: 10px;
+    margin-top: 15px;
+
+    .button {
+        margin-top: 5px;
+    }
+}
+
+.redux-social-profiles-link-url {
+    clear: left !important;
+    margin-top: -10px;
+
+    .redux-text-url-label {
+        margin-bottom: 3px !important;
+    }
+    input {
+        width: 100%;
+        top: 30px;
+        left: 0;
+        position: absolute;
+    }
+}
+
+.redux-social-item-container {
+    label {
+        display: block;
+        position: relative;
+        font-size: 12px !important;
+        text-align: left;
+        color: #999999;
+        margin: 4px 0 2px 0 !important;
+        cursor: default;
+    }
+
+    .input_wrapper {
+        display: block;
+        position: relative;
+        padding: 0;
+        width: 54%;
+        max-width: 54%;
+        min-width: 70px;
+        float: left;
+        clear: none;
+        height: 57px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        vertical-align: baseline;
+        
+        &.no-color-pickers {
+            width: 80%;
+            max-width: 80%;
+        }
+    }
+
+    .picker_wrapper {
+        top: 17px;
+        display: block;
+        position: relative;
+        margin: 0 4px 0 5px;
+        padding: 0 0 0 10px;
+        clear: none;
+        height: 57px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        vertical-align: baseline;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    ul {
+        &#redux-social-profiles-list {
+            li {
+                height: 110px;
+            }
+        }
+    }
+
+    .redux-social-item-container {
+        .picker_wrapper {
+            top: 20px !important;
+        }
+    }
+
+    .redux-social-profiles-link-url {
+        .redux-text-url-label {
+            margin-bottom: -16px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 628px) {
+    ul {
+        &#redux-social-profiles-list {
+            li {
+                height: 170px;
+            }
+        }
+    }
+
+    .redux-social-profiles-text-color {
+        clear: both !important;
+    }
+
+    .redux-social-item-container {
+        .picker_wrapper {
+            top: 30px;
+        }
+    }
+}
