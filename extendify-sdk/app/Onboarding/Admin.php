@@ -204,7 +204,7 @@ class Admin
             $version,
             'all'
         );
-        $bg = defined('EXTENDIFY_ONBOARDING_BG') ? constant('EXTENDIFY_ONBOARDING_BG') : '#3e58e1';
+        $bg = defined('EXTENDIFY_ONBOARDING_BG') ? constant('EXTENDIFY_ONBOARDING_BG') : '#2c39bd';
         $txt = defined('EXTENDIFY_ONBOARDING_TXT') ? constant('EXTENDIFY_ONBOARDING_TXT') : '#ffffff';
         \wp_add_inline_style(Config::$slug . '-onboarding-styles', "body {
             --ext-partner-theme-primary-bg: {$bg};

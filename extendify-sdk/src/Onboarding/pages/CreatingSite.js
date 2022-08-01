@@ -6,6 +6,7 @@ import { useWarnOnLeave } from '@onboarding/hooks/useWarnOnLeave'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import {
     createWordpressPages,
+    trashWordpressPages,
     updateGlobalStyleVariant,
 } from '@onboarding/lib/wp'
 import { useGlobalStore } from '@onboarding/state/Global'
@@ -64,6 +65,11 @@ export const CreatingSite = () => {
         await updateTemplatePart('extendable//footer', style?.footerCode)
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Finalizing your site', 'extendify'))
+        await trashWordpressPages([
+            { slug: 'hello-world', type: 'post' },
+            { slug: 'sample-page', type: 'page' },
+        ])
+
         return pageIds
     }, [pages, plugins, siteType, style, canLaunch, siteInformation.title])
 
@@ -80,7 +86,7 @@ export const CreatingSite = () => {
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('Building your site now!', 'extendify')}
                 </h1>
-                <p className="text-base">
+                <p className="text-base mb-0">
                     {__("Please don't close the window.", 'extendify')}
                 </p>
             </div>

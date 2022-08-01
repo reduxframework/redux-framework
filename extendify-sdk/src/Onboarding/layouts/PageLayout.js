@@ -7,8 +7,8 @@ export const PageLayout = ({ children, includeNav = true }) => {
     return (
         <div className="flex flex-col md:flex-row">
             <div className="bg-partner-primary-bg text-partner-primary-text py-12 px-10 md:h-screen flex flex-col justify-between md:w-40vw md:max-w-md flex-shrink-0">
-                <div className="max-w-sm pr-8">
-                    <div className="min-h-48">
+                <div className="max-w-prose md:max-w-sm pr-8">
+                    <div className="md:min-h-48">
                         {window.extOnbData?.partnerLogo && (
                             <div className="pb-8">
                                 <img
@@ -23,7 +23,7 @@ export const PageLayout = ({ children, includeNav = true }) => {
                     <CompletedTasks disabled={!includeNav} />
                 </div>
 
-                <div className="flex items-center space-x-3">
+                <div className="hidden md:flex items-center space-x-3">
                     <span className="opacity-70 text-xs">
                         {__('Powered by', 'extendify')}
                     </span>

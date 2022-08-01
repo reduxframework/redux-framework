@@ -9,12 +9,12 @@ const store = (set) => ({
         set({ orderId })
     },
 })
-export const useGlobalStore = create(
-    persist(devtools(store), {
-        name: 'extendify-launch-globals',
-        getStorage: () => localStorage,
-        partialize: (state) => ({
-            orderId: state?.orderId ?? null,
-        }),
+const withDevtools = devtools(store, { name: 'Extendify Launch Globals' })
+const withPersist = persist(withDevtools, {
+    name: 'extendify-launch-globals',
+    getStorage: () => localStorage,
+    partialize: (state) => ({
+        orderId: state?.orderId ?? null,
     }),
-)
+})
+export const useGlobalStore = create(withPersist)

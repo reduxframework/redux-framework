@@ -25,7 +25,7 @@ export const CompletedTasks = ({ disabled = false }) => {
     }
 
     return (
-        <div className="mt-20">
+        <div className="hidden md:block mt-20">
             <h3 className="text-sm text-partner-primary-text uppercase">
                 {__('Steps', 'extendify')}
             </h3>

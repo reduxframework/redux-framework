@@ -35,7 +35,7 @@ export const Landing = () => {
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
                     {__('Welcome to Your WordPress Site', 'extendify')}
                 </h1>
-                <p className="text-base opacity-70">
+                <p className="text-base opacity-70 mb-0">
                     {__(
                         'Design and launch your site with this guided experience, or head right into the WordPress dashboard if you know your way around.',
                         'extendify',

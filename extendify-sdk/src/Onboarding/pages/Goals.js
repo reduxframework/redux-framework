@@ -18,6 +18,8 @@ export const metadata = {
 export const Goals = () => {
     const { data: goals, loading } = useFetch(fetchData, fetcher)
     const { toggle, has } = useUserSelectionStore()
+    const { feedbackMissingGoal: feedback, setFeedbackMissingGoal } =
+        useUserSelectionStore()
     const nextPage = usePagesStore((state) => state.nextPage)
     const initialFocus = useRef()
     const touch = useProgressStore((state) => state.touch)
@@ -39,7 +41,7 @@ export const Goals = () => {
                         'extendify',
                     )}
                 </h1>
-                <p className="text-base opacity-70">
+                <p className="text-base opacity-70 mb-0">
                     {__('You can change these later.', 'extendify')}
                 </p>
             </div>
@@ -79,6 +81,30 @@ export const Goals = () => {
                               ))
                             : null}
                     </form>
+                )}
+                {!loading && (
+                    <div className="w-80">
+                        <h2 className="text-lg mt-12 mb-4 text-gray-900">
+                            {__(
+                                "Don't see what you're looking for?",
+                                'extendify',
+                            )}
+                        </h2>
+                        <div className="search-panel flex items-center justify-center relative mb-8">
+                            <input
+                                type="text"
+                                className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
+                                value={feedback}
+                                onChange={(e) =>
+                                    setFeedbackMissingGoal(e.target.value)
+                                }
+                                placeholder={__(
+                                    'Add your goals...',
+                                    'extendify',
+                                )}
+                            />
+                        </div>
+                    </div>
                 )}
             </div>
         </PageLayout>
