@@ -37,11 +37,11 @@ export const PageLayout = ({ children, includeNav = true }) => {
             </div>
             <div className="flex-grow md:h-screen md:overflow-y-scroll">
                 {includeNav ? (
-                    <div className="py-4 px-8 sticky top-0 bg-white z-50">
+                    <div className="py-4 sticky top-0 bg-white z-50 max-w-onboarding-content mx-auto px-4 xl:px-0">
                         <PageControl />
                     </div>
                 ) : null}
-                <div className="mt-8 p-8 lg:px-12 flex justify-center">
+                <div className="mt-8 mb-8 xl:mb-12 flex justify-center max-w-onboarding-content mx-auto px-4 xl:px-0">
                     {children[1]}
                 </div>
             </div>

@@ -5,20 +5,18 @@ export const CheckboxInput = ({
     slug,
     description,
     checked,
-    onClick,
     onChange,
 }) => {
     return (
         <label
             className="flex hover:text-partner-primary-bg focus-within:text-partner-primary-bg"
-            htmlFor={slug}
-            onClick={onClick}
-            onChange={onChange ?? onClick}>
+            htmlFor={slug}>
             <span className="mt-0.5 w-6 h-6 relative inline-block mr-3 align-middle">
                 <input
                     id={slug}
                     className="h-5 w-5 rounded-sm"
                     type="checkbox"
+                    onChange={onChange}
                     defaultChecked={checked}
                 />
                 <Checkmark

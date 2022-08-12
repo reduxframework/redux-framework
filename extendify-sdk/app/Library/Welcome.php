@@ -130,17 +130,19 @@ class Welcome
                     </div>
                 </div>
                 <hr class="is-small"/>
-                <div class="welcome-section">
-                    <h2 class="aligncenter">
-                        <?php \esc_html_e('Upgrade to Extendify Pro', 'extendify'); ?>
-                    </h2>
-                    <p class="aligncenter is-subheading">
-                        <?php \esc_html_e('Do you want more patterns and layouts - without limits? Choose one of our plans and receive unlimited access to our complete library.', 'extendify'); ?>
-                    </p>
-                </div>
-                <a href="https://extendify.com/pricing/?utm_source=welcome&amp;utm_medium=settings&amp;utm_campaign=get_started&amp;utm_campaign=get_started" class="button button-primary components-button">
-                    <?php echo \esc_html__('View Pricing', 'extendify'); ?></a>
-                <hr/>
+                <?php if (!defined('EXTENDIFY_SITE_LICENSE')) : ?>
+                    <div class="welcome-section">
+                        <h2 class="aligncenter">
+                            <?php \esc_html_e('Upgrade to Extendify Pro', 'extendify'); ?>
+                        </h2>
+                        <p class="aligncenter is-subheading">
+                            <?php \esc_html_e('Do you want more patterns and layouts - without limits? Choose one of our plans and receive unlimited access to our complete library.', 'extendify'); ?>
+                        </p>
+                    </div>
+                    <a href="https://extendify.com/pricing/?utm_source=welcome&amp;utm_medium=settings&amp;utm_campaign=get_started&amp;utm_campaign=get_started" class="button button-primary components-button">
+                        <?php echo \esc_html__('View Pricing', 'extendify'); ?></a>
+                    <hr/>
+                <?php endif; ?>
             </div>
         </div>
         <?php

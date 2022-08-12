@@ -4,11 +4,17 @@ import { SuggestedPlugins } from '@onboarding/components/SuggestedPlugins'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
+import { pageState } from '@onboarding/state/factory'
 import { Checkmark } from '@onboarding/svg'
 
-export const metadata = {
-    key: 'confirmation',
-}
+export const state = pageState('Site Summary', () => ({
+    title: __('Summary', 'extendify'),
+    default: undefined,
+    showInSidebar: true,
+    // Not ready because this is where the launch button shows
+    ready: false,
+    isDefault: () => true,
+}))
 export const SiteSummary = () => {
     const { siteType, style, pages, goals } = useUserSelectionStore()
     const setPage = usePagesStore((state) => state.setPage)
@@ -23,8 +29,8 @@ export const SiteSummary = () => {
                     {__('Review your site configuration.', 'extendify')}
                 </p>
             </div>
-            <div className="w-full max-w-4xl">
-                <div className="flex flex-col space-y-8">
+            <div className="w-full">
+                <div className="flex flex-col gap-y-12">
                     <div className="block">
                         <h2 className="text-lg m-0 mb-4 text-gray-900">
                             {__('Design', 'extendify')}
@@ -36,8 +42,8 @@ export const SiteSummary = () => {
                                     aria-hidden="true"
                                     className="absolute top-0 bottom-0 left-3/4 right-0 z-40 bg-gradient-to-l from-white pointer-events-none"></span>
                                 {pages.length > 0 && (
-                                    <div className="flex items-start w-full overflow-y-scroll lg:pr-52">
-                                        <div className="lg:flex flex-no-wrap gap-4">
+                                    <div className="flex justify-center lg:justify-start w-full overflow-y-scroll lg:pr-52">
+                                        <div className="flex flex-col lg:flex-row lg:flex-no-wrap gap-4">
                                             {pages?.map((page) => {
                                                 return (
                                                     <div
@@ -96,11 +102,11 @@ export const SiteSummary = () => {
                         </h2>
 
                         {goals.length > 0 ? (
-                            <div className="lg:grid grid-cols-2 gap-x-4 gap-y-1">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 {goals?.map((goal) => {
                                     return (
                                         <div
-                                            className="pb-2 flex items-center"
+                                            className="flex items-center"
                                             key={goal.id}>
                                             <Checkmark
                                                 className="text-extendify-main-dark"
@@ -127,11 +133,11 @@ export const SiteSummary = () => {
                         </h2>
 
                         {pages.length > 0 ? (
-                            <div className="lg:grid grid-cols-2 gap-x-4 gap-y-1">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 {pages?.map((page) => {
                                     return (
                                         <div
-                                            className="pb-2 flex items-center"
+                                            className="flex items-center"
                                             key={page.id}>
                                             <Checkmark
                                                 className="text-extendify-main-dark"

@@ -4,25 +4,28 @@ import { getOption } from '@onboarding/api/WPApi'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
-import { useProgressStore } from '@onboarding/state/Progress'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
+import { pageState } from '@onboarding/state/factory'
 
 export const fetcher = async () => {
     const title = await getOption('blogname')
     return { title }
 }
 export const fetchData = () => ({ key: 'site-info' })
-export const metadata = {
-    key: 'site-title',
+export const state = pageState('Site Title', (set, get) => ({
     title: __('Site Title', 'extendify'),
-    completed: () => true,
-}
+    default: undefined,
+    showInSidebar: true,
+    ready: false,
+    isDefault: () =>
+        get().default ===
+        useUserSelectionStore.getState()?.siteInformation?.title,
+}))
 export const SiteInformation = () => {
     const { siteInformation, setSiteInformation } = useUserSelectionStore()
     const initialFocus = useRef(null)
     const nextPage = usePagesStore((state) => state.nextPage)
     const { data: existingSiteInfo } = useFetch(fetchData, fetcher)
-    const touch = useProgressStore((state) => state.touch)
 
     useEffect(() => {
         const raf = requestAnimationFrame(() => initialFocus.current.focus())
@@ -32,6 +35,10 @@ export const SiteInformation = () => {
     useEffect(() => {
         if (existingSiteInfo?.title && siteInformation?.title === undefined) {
             setSiteInformation('title', existingSiteInfo.title)
+            state.setState({ default: existingSiteInfo.title })
+        }
+        if (existingSiteInfo?.title || siteInformation?.title) {
+            state.setState({ ready: true })
         }
     }, [existingSiteInfo, setSiteInformation, siteInformation])
 
@@ -45,7 +52,7 @@ export const SiteInformation = () => {
                     {__('You can change this later.', 'extendify')}
                 </p>
             </div>
-            <div className="w-full">
+            <div className="w-full max-w-onboarding-sm mx-auto">
                 <form
                     onSubmit={(e) => {
                         e.preventDefault()
@@ -67,7 +74,6 @@ export const SiteInformation = () => {
                             value={siteInformation?.title ?? ''}
                             onChange={(e) => {
                                 setSiteInformation('title', e.target.value)
-                                touch(metadata.key)
                             }}
                             placeholder={__(
                                 'Enter your preferred site title...',

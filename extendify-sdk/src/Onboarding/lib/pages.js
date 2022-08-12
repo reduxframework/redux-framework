@@ -2,52 +2,43 @@ import {
     Goals,
     fetcher as goalsFetcher,
     fetchData as goalsData,
-    metadata as goalsMeta,
+    state as goalsState,
 } from '@onboarding/pages/Goals'
-import { Landing, metadata as landingMeta } from '@onboarding/pages/Landing'
+import { Landing, state as welcomeState } from '@onboarding/pages/Landing'
 import {
     SiteInformation,
     fetcher as siteInfoFetcher,
     fetchData as siteInfoData,
-    metadata as siteInfoMeta,
+    state as siteInfoState,
 } from '@onboarding/pages/SiteInformation'
 import {
     SitePages,
     fetcher as sitePagesFetcher,
     fetchData as sitePagesData,
-    metadata as sitePagesMeta,
+    state as sitePagesState,
 } from '@onboarding/pages/SitePages'
-import {
-    SiteStyle,
-    metadata as siteStyleMeta,
-} from '@onboarding/pages/SiteStyle'
+import { SiteStyle, state as siteStyleState } from '@onboarding/pages/SiteStyle'
 import {
     SiteSummary,
-    metadata as confirmationMeta,
+    state as confirmationState,
 } from '@onboarding/pages/SiteSummary'
 import {
     SiteTypeSelect,
     fetcher as siteTypeFetcher,
     fetchData as siteTypeData,
-    metadata as siteTypeMeta,
+    state as siteTypeState,
 } from '@onboarding/pages/SiteTypeSelect'
 
 // pages added here will need to match the orders table on the Styles base
 const defaultPages = [
-    [
-        'welcome',
-        {
-            component: Landing,
-            metadata: landingMeta,
-        },
-    ],
+    ['welcome', { component: Landing, state: welcomeState.getState }],
     [
         'goals',
         {
             component: Goals,
             fetcher: goalsFetcher,
             fetchData: goalsData,
-            metadata: goalsMeta,
+            state: goalsState.getState,
         },
     ],
     [
@@ -56,14 +47,14 @@ const defaultPages = [
             component: SiteTypeSelect,
             fetcher: siteTypeFetcher,
             fetchData: siteTypeData,
-            metadata: siteTypeMeta,
+            state: siteTypeState.getState,
         },
     ],
     [
         'style',
         {
             component: SiteStyle,
-            metadata: siteStyleMeta,
+            state: siteStyleState.getState,
         },
     ],
     [
@@ -72,7 +63,7 @@ const defaultPages = [
             component: SitePages,
             fetcher: sitePagesFetcher,
             fetchData: sitePagesData,
-            metadata: sitePagesMeta,
+            state: sitePagesState.getState,
         },
     ],
     [
@@ -81,15 +72,12 @@ const defaultPages = [
             component: SiteInformation,
             fetcher: siteInfoFetcher,
             fetchData: siteInfoData,
-            metadata: siteInfoMeta,
+            state: siteInfoState.getState,
         },
     ],
     [
         'confirmation',
-        {
-            component: SiteSummary,
-            metadata: confirmationMeta,
-        },
+        { component: SiteSummary, state: confirmationState.getState },
     ],
 ]
 

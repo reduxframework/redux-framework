@@ -3,11 +3,14 @@ import { __ } from '@wordpress/i18n'
 import { updateOption } from '@onboarding/api/WPApi'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
+import { pageState } from '@onboarding/state/factory'
 
-export const metadata = {
-    key: 'welcome',
-    skippable: true,
-}
+export const state = pageState('Welcome', () => ({
+    title: __('Welcome', 'extendify'),
+    default: undefined,
+    ready: true,
+    isDefault: () => true,
+}))
 export const Landing = () => {
     const nextPage = usePagesStore((state) => state.nextPage)
     const continueButton = useRef(null)
@@ -42,19 +45,19 @@ export const Landing = () => {
                     )}
                 </p>
             </div>
-            <div className="">
+            <div>
                 <h2 className="text-lg m-0 mb-4 text-gray-900">
                     {__('Pick one:', 'extendify')}
                 </h2>
-                <div className="lg:flex lg:space-x-8">
+                <div className="xl:flex xl:gap-x-6">
                     <button
                         onClick={nextPage}
                         ref={continueButton}
                         type="button"
                         aria-label={__('Press to continue', 'extendify')}
-                        className="button-card max-w-sm button-focus">
+                        className="button-card max-w-sm button-focus mb-6 xl:mb-0">
                         <div
-                            className="bg-gray-100 w-full h-64 bg-cover border border-gray-200"
+                            className="bg-gray-100 w-full h-64 bg-cover bg-center border border-gray-200"
                             style={{
                                 backgroundImage: `url(${window.extOnbData.pluginUrl}/public/assets/extendify-preview.png)`,
                             }}
@@ -73,7 +76,7 @@ export const Landing = () => {
                         onClick={(e) => handleSkipLaunch(e)}
                         className="button-card max-w-sm button-focus">
                         <div
-                            className="bg-gray-100 w-full h-64 bg-cover border border-gray-200"
+                            className="bg-gray-100 w-full h-64 bg-cover bg-center border border-gray-200"
                             style={{
                                 backgroundImage: `url(${window.extOnbData.pluginUrl}/public/assets/wp-admin.png)`,
                             }}

@@ -26,7 +26,7 @@ export const TypeSelect = ({ className }) => {
                 <button
                     type="button"
                     className={classNames({
-                        'outline-none w-full m-0 -ml-px min-w-sm cursor-pointer items-center rounded-tr-sm rounded-br-sm py-2.5 px-4 text-xs leading-none': true,
+                        'outline-none w-full m-0 -ml-px min-w-sm cursor-pointer items-center rounded py-2.5 px-4 text-xs leading-none': true,
                         'bg-gray-900 text-white': currentType === 'template',
                         'bg-transparent text-black': currentType !== 'template',
                     })}

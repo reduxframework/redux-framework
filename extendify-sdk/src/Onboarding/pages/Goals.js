@@ -5,16 +5,22 @@ import { CheckboxInput } from '@onboarding/components/CheckboxInput'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
-import { useProgressStore } from '@onboarding/state/Progress'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
+import { pageState } from '@onboarding/state/factory'
 
 export const fetcher = () => getGoals()
 export const fetchData = () => ({ key: 'goals' })
-export const metadata = {
-    key: 'goals',
+export const state = pageState('Goals', () => ({
     title: __('Goals', 'extendify'),
-    completed: () => true,
-}
+    default: undefined,
+    showInSidebar: true,
+    ready: false,
+    isDefault: () => {
+        // If no goals are selected and no text is entered
+        const { feedbackMissingGoal, goals } = useUserSelectionStore.getState()
+        return !feedbackMissingGoal?.length && goals?.length === 0
+    },
+}))
 export const Goals = () => {
     const { data: goals, loading } = useFetch(fetchData, fetcher)
     const { toggle, has } = useUserSelectionStore()
@@ -22,7 +28,10 @@ export const Goals = () => {
         useUserSelectionStore()
     const nextPage = usePagesStore((state) => state.nextPage)
     const initialFocus = useRef()
-    const touch = useProgressStore((state) => state.touch)
+
+    useEffect(() => {
+        state.setState({ ready: !loading })
+    }, [loading])
 
     useEffect(() => {
         if (!initialFocus.current) return
@@ -57,7 +66,7 @@ export const Goals = () => {
                             e.preventDefault()
                             nextPage()
                         }}
-                        className="w-full max-w-2xl grid lg:grid-cols-2 gap-4 goal-select">
+                        className="w-full grid lg:grid-cols-2 gap-3 goal-select">
                         {/* Added so forms can be submitted by pressing Enter */}
                         <input type="submit" className="hidden" />
                         {/* Seems excessive but this keeps failing and crashing randomly */}
@@ -71,10 +80,9 @@ export const Goals = () => {
                                       }>
                                       <CheckboxInput
                                           label={goal.title}
-                                          checked={has(metadata.key, goal)}
+                                          checked={has('goals', goal)}
                                           onChange={() => {
-                                              toggle(metadata.key, goal)
-                                              touch(metadata.key)
+                                              toggle('goals', goal)
                                           }}
                                       />
                                   </div>
@@ -83,14 +91,14 @@ export const Goals = () => {
                     </form>
                 )}
                 {!loading && (
-                    <div className="w-80">
+                    <div className="max-w-onboarding-sm mx-auto">
                         <h2 className="text-lg mt-12 mb-4 text-gray-900">
                             {__(
                                 "Don't see what you're looking for?",
                                 'extendify',
                             )}
                         </h2>
-                        <div className="search-panel flex items-center justify-center relative mb-8">
+                        <div className="search-panel flex items-center justify-center relative">
                             <input
                                 type="text"
                                 className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
