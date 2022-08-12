@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Sentry } from '@onboarding/hooks/useSentry'
 
 const Axios = axios.create({
     baseURL: window.extOnbData.root,
@@ -29,6 +30,7 @@ const handleErrors = (error) => {
     if (!error.response) {
         return
     }
+    Sentry.captureException(error)
     console.error(error.response)
     return Promise.reject(findResponse(error.response))
 }

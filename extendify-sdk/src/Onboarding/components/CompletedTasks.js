@@ -11,7 +11,7 @@ export const CompletedTasks = ({ disabled = false }) => {
     const watched = useMemo(() => {
         return Array.from(pages.values())
             .map((task, index) => ({ ...task, pageIndex: index }))
-            .filter((page) => page?.metadata?.completed !== undefined)
+            .filter((page) => page?.state()?.showInSidebar)
     }, [pages])
     const lowestIndexWatched = useMemo(() => {
         return watched.reduce(
@@ -32,7 +32,7 @@ export const CompletedTasks = ({ disabled = false }) => {
             <ul>
                 {watched.map((page) => (
                     <li
-                        key={page?.metadata?.title}
+                        key={page?.state()?.title}
                         className={classNames('text-base', {
                             hidden: page.pageIndex > currentPageIndex,
                             'line-through opacity-60':
@@ -56,7 +56,7 @@ export const CompletedTasks = ({ disabled = false }) => {
                             ) : (
                                 <Radio className="text-partner-primary-text h-6 w-6 mr-1" />
                             )}
-                            {page?.metadata?.title}
+                            {page?.state()?.title}
                         </button>
                     </li>
                 ))}

@@ -26,10 +26,18 @@ export const CreatingSite = () => {
             throw new Error(__('Site is not ready to launch.', 'extendify'))
         }
         inform(__('Preparing your website', 'extendify'))
-        await updateOption('blogname', siteInformation.title)
+        try {
+            await updateOption('blogname', siteInformation.title)
+        } catch (e) {
+            /* do nothing */
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Installing your theme', 'extendify'))
-        await updateGlobalStyleVariant(style.variation)
+        try {
+            await updateGlobalStyleVariant(style?.variation ?? {})
+        } catch (e) {
+            /* do nothing */
+        }
         if (plugins?.length) {
             inform(
                 _n(
@@ -51,24 +59,45 @@ export const CreatingSite = () => {
                         'extendify',
                     ),
                 )
-                await installPlugin(plugin)
+                try {
+                    await installPlugin(plugin)
+                } catch (e) {
+                    /* do nothing */
+                }
             }
         }
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Inserting header area', 'extendify'))
-        await updateTemplatePart('extendable//header', style?.headerCode)
+        try {
+            await updateTemplatePart('extendable//header', style?.headerCode)
+        } catch (e) {
+            /* do nothing */
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Generating page content', 'extendify'))
-        const pageIds = await createWordpressPages(pages, siteType, style)
+        let pageIds
+        try {
+            pageIds = await createWordpressPages(pages, siteType, style)
+        } catch (e) {
+            /* do nothing */
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Inserting footer area', 'extendify'))
-        await updateTemplatePart('extendable//footer', style?.footerCode)
+        try {
+            await updateTemplatePart('extendable//footer', style?.footerCode)
+        } catch (e) {
+            /* do nothing */
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000))
         inform(__('Finalizing your site', 'extendify'))
-        await trashWordpressPages([
-            { slug: 'hello-world', type: 'post' },
-            { slug: 'sample-page', type: 'page' },
-        ])
+        try {
+            await trashWordpressPages([
+                { slug: 'hello-world', type: 'post' },
+                { slug: 'sample-page', type: 'page' },
+            ])
+        } catch (e) {
+            /* do nothing */
+        }
 
         return pageIds
     }, [pages, plugins, siteType, style, canLaunch, siteInformation.title])

@@ -23,9 +23,10 @@ const fetcher = async (themeJson) => {
 }
 export const StylePreview = ({
     style,
-    selectStyle,
+    onSelect,
     blockHeight,
     context,
+    active = false,
     onHover = null,
 }) => {
     const siteType = useUserSelectionStore((state) => state.siteType)
@@ -226,22 +227,24 @@ export const StylePreview = ({
             )}
             <div
                 ref={blockRef}
-                role={selectStyle ? 'button' : undefined}
-                tabIndex={selectStyle ? 0 : undefined}
+                role={onSelect ? 'button' : undefined}
+                tabIndex={onSelect ? 0 : undefined}
                 aria-label={
-                    selectStyle ? __('Press to select', 'extendify') : undefined
+                    onSelect ? __('Press to select', 'extendify') : undefined
                 }
                 className={classNames(
                     'group w-full overflow-hidden bg-transparent z-10',
                     {
                         'relative min-h-full': loaded,
                         'absolute opacity-0': !loaded,
-                        'button-focus button-card p-2': selectStyle,
+                        'button-focus button-card p-2': onSelect,
+                        'ring-partner-primary-bg ring-offset-2 ring-offset-white ring-wp':
+                            active,
                     },
                 )}
                 onKeyDown={(e) => {
                     if (['Enter', 'Space', ' '].includes(e.key)) {
-                        selectStyle && selectStyle({ ...style, variation })
+                        onSelect && onSelect({ ...style, variation })
                     }
                 }}
                 onMouseEnter={() => {
@@ -255,8 +258,8 @@ export const StylePreview = ({
                     }
                 }}
                 onClick={
-                    selectStyle
-                        ? () => selectStyle({ ...style, variation })
+                    onSelect
+                        ? () => onSelect({ ...style, variation })
                         : () => {}
                 }>
                 {window?.extOnbData?.devbuild ? (

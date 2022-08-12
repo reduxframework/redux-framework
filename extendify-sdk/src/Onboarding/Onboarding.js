@@ -9,6 +9,7 @@ import { Finished } from '@onboarding/pages/Finished'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { updateOption } from './api/WPApi'
+import { useSentry } from './hooks/useSentry'
 import { useTelemetry } from './hooks/useTelemetry'
 import { NeedsTheme } from './pages/NeedsTheme'
 
@@ -26,6 +27,7 @@ export const Onboarding = () => {
     const [show, setShow] = useState(false)
     const [needsTheme, setNeedsTheme] = useState(false)
     const theme = useSelect((select) => select('core').getCurrentTheme())
+    const { Sentry } = useSentry()
     useDisableWelcomeGuide()
     useBodyScrollLock()
     useTelemetry()
@@ -76,17 +78,37 @@ export const Onboarding = () => {
         <SWRConfig
             value={{
                 errorRetryInterval: 1000,
-                onErrorRetry: (error, key) => {
-                    console.error(key, error)
+                onErrorRetry: (
+                    error,
+                    key,
+                    config,
+                    revalidate,
+                    { retryCount },
+                ) => {
                     if (error?.data?.status === 403) {
                         // if they are logged out, we can't recover
                         window.location.reload()
                         return
                     }
                     if (retrying) return
+
+                    if (retryCount >= 5) {
+                        console.error('Encountered unrecoverable error', error)
+                        throw new Error(error?.message ?? 'Unknown error')
+                    }
+                    console.error(key, error)
+                    Sentry.captureException(
+                        new Error(error?.message ?? 'Unknown error'),
+                        {
+                            tags: { retrying: true },
+                            extra: { cacheKey: key },
+                        },
+                    )
+
                     setRetrying(true)
                     setTimeout(() => {
                         setRetrying(false)
+                        revalidate({ retryCount })
                     }, 5000)
                 },
             }}>

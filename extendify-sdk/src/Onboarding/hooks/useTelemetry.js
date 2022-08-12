@@ -13,6 +13,7 @@ export const useTelemetry = () => {
         style: selectedStyle,
         feedbackMissingSiteType,
         feedbackMissingGoal,
+        siteTypeSearch,
     } = useUserSelectionStore()
     const { orderId, setOrderId, generating } = useGlobalStore()
     const { pages, currentPageIndex } = usePagesStore()
@@ -85,8 +86,10 @@ export const useTelemetry = () => {
                     viewedStyles: [...viewedStyles].slice(1),
                     feedbackMissingSiteType,
                     feedbackMissingGoal,
+                    siteTypeSearch,
                     perfStyles: getPerformance('style'),
                     perfPages: getPerformance('page'),
+                    insightsId: window.extOnbData?.insightsId,
                 }),
             })
         }, 1000)
@@ -104,6 +107,7 @@ export const useTelemetry = () => {
         viewedStyles,
         feedbackMissingSiteType,
         feedbackMissingGoal,
+        siteTypeSearch,
     ])
 }
 

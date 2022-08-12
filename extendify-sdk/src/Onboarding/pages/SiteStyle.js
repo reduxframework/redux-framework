@@ -11,9 +11,8 @@ import { StylePreview } from '@onboarding/components/StyledPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMountedLayout } from '@onboarding/hooks/useIsMounted'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
-import { usePagesStore } from '@onboarding/state/Pages'
-import { useProgressStore } from '@onboarding/state/Progress'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
+import { pageState } from '@onboarding/state/factory'
 import { SpinnerIcon } from '@onboarding/svg'
 
 export const fetcher = (params) => getStyles(params)
@@ -25,11 +24,14 @@ export const fetchData = (siteType) => {
         styles: siteType?.styles ?? [],
     }
 }
-export const metadata = {
-    key: 'style',
+export const state = pageState('Design', (set, get) => ({
     title: __('Design', 'extendify'),
-    completed: () => true,
-}
+    default: undefined,
+    showInSidebar: true,
+    ready: false,
+    isDefault: () =>
+        useUserSelectionStore.getState().style?.slug === get().default?.slug,
+}))
 export const SiteStyle = () => {
     const siteType = useUserSelectionStore((state) => state.siteType)
     const { data: styleData, loading } = useFetch(fetchData, fetcher)
@@ -37,6 +39,10 @@ export const SiteStyle = () => {
     const stylesRef = useRef()
     const isMounted = useIsMountedLayout()
     const [styles, setStyles] = useState([])
+
+    useEffect(() => {
+        state.setState({ ready: !loading })
+    }, [loading])
 
     useEffect(() => {
         if (!styleData?.length) return
@@ -52,6 +58,7 @@ export const SiteStyle = () => {
     useEffect(() => {
         if (styles?.length && !useUserSelectionStore.getState().style) {
             useUserSelectionStore.getState().setStyle(styles[0])
+            state.setState({ default: styles[0] })
         }
     }, [styles])
 
@@ -87,7 +94,9 @@ export const SiteStyle = () => {
                           )
                         : __('Pick your style', 'extendify')}
                 </h2>
-                <div ref={stylesRef} className="lg:flex gap-6 flex-wrap">
+                <div
+                    ref={stylesRef}
+                    className="flex gap-6 flex-wrap justify-center">
                     {styles?.map((style) => (
                         <StylePreviewWrapper
                             key={style.recordId}
@@ -98,7 +107,7 @@ export const SiteStyle = () => {
                     {styleData?.slice(styles?.length).map((data) => (
                         <div
                             key={data.slug}
-                            style={{ height: 600, width: 425 }}
+                            style={{ height: 497, width: 352 }}
                             className="relative">
                             <div className="bg-gray-50 h-full w-full flex items-center justify-center">
                                 <SpinnerIcon className="spin w-8" />
@@ -112,16 +121,9 @@ export const SiteStyle = () => {
 }
 
 const StylePreviewWrapper = ({ style }) => {
-    const nextPage = usePagesStore((state) => state.nextPage)
-    const touch = useProgressStore((state) => state.touch)
-    const selectStyle = useCallback(
-        (style) => {
-            useUserSelectionStore.getState().setStyle(style)
-            touch(metadata.key)
-            nextPage()
-        },
-        [nextPage, touch],
-    )
+    const onSelect = useCallback((style) => {
+        useUserSelectionStore.getState().setStyle(style)
+    }, [])
     const context = useMemo(
         () => ({
             type: 'style',
@@ -131,12 +133,15 @@ const StylePreviewWrapper = ({ style }) => {
         [style],
     )
     return (
-        <div className="relative" style={{ height: 600, width: 425 }}>
+        <div className="relative" style={{ height: 497, width: 352 }}>
             <StylePreview
                 style={style}
                 context={context}
-                selectStyle={selectStyle}
-                blockHeight={600}
+                onSelect={onSelect}
+                active={
+                    useUserSelectionStore.getState()?.style?.slug === style.slug
+                }
+                blockHeight={497}
             />
         </div>
     )

@@ -191,6 +191,10 @@ class Admin
                 'partnerName' => defined('EXTENDIFY_PARTNER_NAME') ? constant('EXTENDIFY_PARTNER_NAME') : null,
                 'partnerSkipSteps' => defined('EXTENDIFY_SKIP_STEPS') ? constant('EXTENDIFY_SKIP_STEPS') : [],
                 'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
+                'version' => Config::$version,
+                'insightsId' => \get_option('extendify_site_id', ''),
+                // Only send insights if they have opted in explicitly.
+                'insightsEnabled' => defined('EXTENDIFY_INSIGHTS_URL'),
             ]),
             'before'
         );
