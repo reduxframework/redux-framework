@@ -66,7 +66,15 @@ Axios.interceptors.response.use(
 )
 
 Axios.interceptors.request.use(
-    (request) => checkDevMode(addDefaults(request)),
+    (request) => {
+        const q = new URLSearchParams(window.location.search)
+        if (['onboarding'].includes(q.get('extendify'))) {
+            throw new axios.Cancel(
+                'Library is not available while running Launch',
+            )
+        }
+        return checkDevMode(addDefaults(request))
+    },
     (error) => error,
 )
 

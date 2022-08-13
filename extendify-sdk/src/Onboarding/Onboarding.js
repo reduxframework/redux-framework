@@ -92,10 +92,11 @@ export const Onboarding = () => {
                     }
                     if (retrying) return
 
-                    if (retryCount >= 5) {
-                        console.error('Encountered unrecoverable error', error)
-                        throw new Error(error?.message ?? 'Unknown error')
-                    }
+                    // TODO: Add back when we have something to show here
+                    // if (retryCount >= 5) {
+                    //     console.error('Encountered unrecoverable error', error)
+                    //     throw new Error(error?.message ?? 'Unknown error')
+                    // }
                     console.error(key, error)
                     Sentry.captureException(
                         new Error(error?.message ?? 'Unknown error'),

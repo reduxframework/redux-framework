@@ -40,7 +40,7 @@ export const SiteTypeSelect = () => {
     }, [loading])
 
     useEffect(() => {
-        const raf = requestAnimationFrame(() => searchRef.current.focus())
+        const raf = requestAnimationFrame(() => searchRef.current?.focus())
         return () => cancelAnimationFrame(raf)
     }, [searchRef])
 
@@ -137,7 +137,7 @@ export const SiteTypeSelect = () => {
                                 className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline cursor-pointer"
                                 onClick={() => {
                                     setShowExamples((show) => !show)
-                                    searchRef.current.focus()
+                                    searchRef.current?.focus()
                                 }}>
                                 {showExamples
                                     ? sprintf(
@@ -181,7 +181,7 @@ export const SiteTypeSelect = () => {
                                 className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline cursor-pointer"
                                 onClick={() => {
                                     setSearch('')
-                                    searchRef.current.focus()
+                                    searchRef.current?.focus()
                                 }}>
                                 {sprintf(
                                     __('Show all %s', 'extendify'),
