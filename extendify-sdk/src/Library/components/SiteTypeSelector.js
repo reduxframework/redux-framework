@@ -64,7 +64,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     }, [examples, tempValue, termsSorted, showExamples])
 
     useEffect(() => {
-        expanded && searchRef.current.focus()
+        expanded && searchRef.current?.focus()
     }, [expanded])
 
     useEffect(() => {

@@ -8,7 +8,13 @@ import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
 
-export const fetcher = () => getGoals()
+export const fetcher = async () => {
+    const goals = await getGoals()
+    if (!Array.isArray(goals?.data)) {
+        throw new Error('Goals data is not an array', goals)
+    }
+    return goals
+}
 export const fetchData = () => ({ key: 'goals' })
 export const state = pageState('Goals', () => ({
     title: __('Goals', 'extendify'),
@@ -69,25 +75,20 @@ export const Goals = () => {
                         className="w-full grid lg:grid-cols-2 gap-3 goal-select">
                         {/* Added so forms can be submitted by pressing Enter */}
                         <input type="submit" className="hidden" />
-                        {/* Seems excessive but this keeps failing and crashing randomly */}
-                        {goals && goals?.length > 0
-                            ? goals?.map((goal, index) => (
-                                  <div
-                                      key={goal.id}
-                                      className="border border-gray-800 rounded-lg p-4"
-                                      ref={
-                                          index === 0 ? initialFocus : undefined
-                                      }>
-                                      <CheckboxInput
-                                          label={goal.title}
-                                          checked={has('goals', goal)}
-                                          onChange={() => {
-                                              toggle('goals', goal)
-                                          }}
-                                      />
-                                  </div>
-                              ))
-                            : null}
+                        {goals?.map((goal, index) => (
+                            <div
+                                key={goal.id}
+                                className="border border-gray-800 rounded-lg p-4"
+                                ref={index === 0 ? initialFocus : undefined}>
+                                <CheckboxInput
+                                    label={goal.title}
+                                    checked={has('goals', goal)}
+                                    onChange={() => {
+                                        toggle('goals', goal)
+                                    }}
+                                />
+                            </div>
+                        ))}
                     </form>
                 )}
                 {!loading && (

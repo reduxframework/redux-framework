@@ -8,14 +8,10 @@ import '@library/utility-control'
 import { useTaxonomyStore } from './state/Taxonomies'
 
 export default function ExtendifyLibrary({ show = false }) {
-    const open = useGlobalStore((state) => state.open)
-    const setReady = useGlobalStore((state) => state.setReady)
-    const setOpen = useGlobalStore((state) => state.setOpen)
+    const { open, setReady, setOpen } = useGlobalStore()
     const showLibrary = useCallback(() => setOpen(true), [setOpen])
     const hideLibrary = useCallback(() => setOpen(false), [setOpen])
-    const initTemplateData = useTemplatesStore(
-        (state) => state.initTemplateData,
-    )
+    const { initTemplateData } = useTemplatesStore()
     const fetchTaxonomies = useTaxonomyStore((state) => state.fetchTaxonomies)
 
     // When the uuid of the user comes back from the database, we can
