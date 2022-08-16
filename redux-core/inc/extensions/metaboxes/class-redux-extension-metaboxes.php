@@ -310,7 +310,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 							$this->wp_links[ $box_id ]['page_template'] = isset( $this->wp_links[ $box_id ]['page_template'] ) ? wp_parse_args( $this->wp_links[ $box_id ]['page_template'], $box['page_template'] ) : $box['page_template'];
 						}
 
-						if ( isset( $box['post_format'] ) && ( in_array( $this->post_type, $this->post_types, true ) || '' === $this->post_type ) ) {
+						if ( isset( $box['post_format'] ) && ( in_array( $this->post_type, $this->post_types, true ) || '' === $this->post_type || false === $this->post_type ) ) {
 							if ( ! is_array( $box['post_format'] ) ) {
 								$box['post_format'] = array( $box['post_format'] );
 							}
