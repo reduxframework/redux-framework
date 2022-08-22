@@ -1,8 +1,10 @@
 # Redux Changelog
 
-## 4.3.16.1
+## 4.3.17
 * Added: Social Profiles extension. [https://devs.redux.io/core-extensions/social-profiles.html](https://devs.redux.io/core-extensions/social-profiles.html)
+* Fixed: Metabox post types and templates selection inoperative on new posts.
 * Updated: Extendify Library.
+* Release date: August 22, 2002
 
 ## 4.3.16
 * Added: Accordion extension. [https://devs.redux.io/core-extensions/accordion.html](https://devs.redux.io/core-extensions/accordion.html)
