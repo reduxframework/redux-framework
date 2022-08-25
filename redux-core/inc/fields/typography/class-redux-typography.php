@@ -777,15 +777,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 					echo '<div data-nonce="' . esc_attr( $nonce ) . '" class="redux-update-google-fonts update-message notice inline notice-warning notice-alt">';
 					echo '<p>' . esc_html__( 'Your Google Fonts are out of date. In order to update them you must register for Redux to enable updates.', 'redux-framework' );
-					if ( ! Redux_Functions_Ex::activated() ) {
-						echo '&nbsp;<a href="#" class="update-google-fonts" data-action="activate" aria-label="' . esc_attr__( 'Register', 'redux-framework' ) . '">' . esc_html__( 'Register', 'redux-framework' ) . '</a> ' . esc_html__( 'to enable font updates', 'redux-framework' ) . '.';
-						echo ' (<a class="redux-insights-data-we-collect-typography" href="#" style="white-space: nowrap;">' . esc_html__( 'learn more', 'redux-framework' ) . '</a>)';
-						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo '<small class="description" style="display:none;"><br />' . Redux_Connection_Banner::tos_blurb( 'google_fonts' ) . ' </small>';
-					} else {
-						echo '&nbsp;<a href="#" class="update-google-fonts" data-action="automatic" aria-label="' . esc_attr__( 'Automated updates', 'redux-framework' ) . '">' . esc_html__( 'Automated updates', 'redux-framework' ) . '</a> or <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
-					}
-
+					echo '&nbsp;<a href="#" class="update-google-fonts" data-action="automatic" aria-label="' . esc_attr__( 'Automated updates', 'redux-framework' ) . '">' . esc_html__( 'Automated updates', 'redux-framework' ) . '</a> or <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
 					echo '</p>';
 					echo '</div>';
 				}
@@ -1529,10 +1521,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			if ( isset( $_POST['data'] ) && 'automatic' === $_POST['data'] ) {
 				update_option( 'auto_update_redux_google_fonts', true );
-			}
-
-			if ( ! Redux_Functions_Ex::activated() ) {
-				Redux_Functions_Ex::set_activated();
 			}
 
 			$fonts = Redux_Helpers::google_fonts_array( true );

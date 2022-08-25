@@ -163,7 +163,6 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 				require_once dirname( __FILE__ ) . '/redux-core/framework.php';
 			}
 
-			Redux_Core::$redux_templates_enabled     = (bool) get_option( 'use_redux_templates' );
 			Redux_Core::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
 
 			// Including extendify sdk.
@@ -308,7 +307,6 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 			}
 
 			delete_option( 'ReduxFrameworkPlugin' );
-			Redux_Enable_Gutenberg::cleanup_options( 'redux-framework' ); // Auto disable Gutenberg and all that.
 		}
 
 		/**
@@ -531,10 +529,6 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		public function plugin_metalinks( array $links, string $file ): array {
 /*			if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
 				$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ) . '">' . esc_html__( 'What is this?', 'redux-framework' ) . '</a>';
-
-				if ( true === Redux_Core::$redux_templates_enabled ) {
-					$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) ) . '#redux_templates=1">' . esc_html__( 'Template Library', 'redux-framework' ) . '</a>';
-				}
 			}*/
 
 			return $links;

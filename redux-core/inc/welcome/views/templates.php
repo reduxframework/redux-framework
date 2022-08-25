@@ -27,7 +27,6 @@ defined( 'ABSPATH' ) || exit;
 	<?php $this->tabs(); ?>
 
 	<?php $ext_value = Redux_Core::$extendify_templates_enabled; ?>
-	<?php $value = Redux_Core::$redux_templates_enabled; ?>
 
 	<div class="feature-section one-col">
 		<div class="col">
@@ -51,15 +50,6 @@ defined( 'ABSPATH' ) || exit;
 					</td>
 				</tr>
 				<?php } ?>
-				<tr style='vertical-align:top'>
-					<th scope="row" style="vertical-align:top">
-						<?php esc_html_e( 'Redux Template Library', 'redux-framework' ); ?>
-					</th>
-					<td>
-						<input id="redux-templates" name="use_redux_templates" type="checkbox" class="regular-text" value="1" <?php checked( $value, '1' ); ?>/>
-						<label class="description" for="use_redux_templates"><?php esc_html_e( 'Load legacy Redux template library', 'redux-framework' ); ?></label>
-					</td>
-				</tr>
 				</tbody>
 			</table>
 			<?php submit_button(); ?>

@@ -17,24 +17,11 @@
  * @author      Redux.io + Dovy Paukstys
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-
-// Define File DIR.
-const REDUXTEMPLATES_FILE = __FILE__;
-
-// Define Version.
-define( 'REDUXTEMPLATES_VERSION', Redux_Core::$version );
-
-// Define Dir URL.
-define( 'REDUXTEMPLATES_DIR_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+defined( 'ABSPATH' ) || exit;
 
 // Define Physical Path.
 define( 'REDUXTEMPLATES_DIR_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
 // Version Check & Include Core.
-if ( version_compare( PHP_VERSION, '7.1', '>=' ) && version_compare( get_bloginfo( 'version' ), '5.4', '>=' ) ) {
-	Redux_Functions_Ex::register_class_path( 'ReduxTemplates', REDUXTEMPLATES_DIR_PATH . 'classes/' );
-	new ReduxTemplates\Init();
-}
+Redux_Functions_Ex::register_class_path( 'ReduxTemplates', REDUXTEMPLATES_DIR_PATH . 'classes/' );
+new ReduxTemplates\Init();

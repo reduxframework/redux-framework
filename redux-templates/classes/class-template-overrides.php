@@ -52,7 +52,7 @@ class Template_Overrides {
 	public static function get_overrides() {
 
 		if ( ! self::is_gutenberg() ) {
-			return;
+			return '';
 		}
 
 		$template = mb_strtolower( get_template() );

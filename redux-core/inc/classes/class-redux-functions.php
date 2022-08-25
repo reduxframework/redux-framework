@@ -190,28 +190,6 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		}
 
 		/**
-		 * Sets a cookie.
-		 * Do nothing if unit testing.
-		 *
-		 * @param string      $name     The cookie name.
-		 * @param string      $value    The cookie value.
-		 * @param integer     $expire   Expiry time.
-		 * @param string      $path     The cookie path.
-		 * @param string|null $domain   The cookie domain.
-		 * @param boolean     $secure   HTTPS only.
-		 * @param boolean     $httponly Only set cookie on HTTP calls.
-		 *
-		 * @return  void
-		 * @since   3.5.4
-		 * @access  public
-		 */
-		public static function set_cookie( string $name, string $value, int $expire, string $path, string $domain = null, bool $secure = false, bool $httponly = false ) {
-			if ( ! defined( 'WP_TESTS_DOMAIN' ) ) {
-				setcookie( $name, $value, $expire, $path, $domain, $secure, $httponly );
-			}
-		}
-
-		/**
 		 * Parse CSS from output/compiler array
 		 *
 		 * @param array  $css_array CSS data.
@@ -388,105 +366,6 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 */
 		public static function yo( string $fname, string $opt_name ) {
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0', '' );
-		}
-
-		/**
-		 * Support Hash.
-		 */
-		public static function support_hash() {
-			if ( isset( $_POST['nonce'] ) ) {
-				if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux-support-hash' ) ) {
-					die();
-				}
-
-				$data          = get_option( 'redux_support_hash' );
-				$data          = wp_parse_args(
-					$data,
-					array(
-						'check'      => '',
-						'identifier' => '',
-					)
-				);
-				$generate_hash = true;
-				$system_info   = Redux_Helpers::compile_system_status();
-				$new_hash      = md5( wp_json_encode( $system_info ) );
-				$return        = array();
-
-				if ( $data['check'] === $new_hash ) {
-					unset( $generate_hash );
-				}
-
-				$post_data = array(
-					'hash'          => md5( network_site_url() . '-' . Redux_Core::$server['REMOTE_ADDR'] ),
-					'site'          => esc_url( home_url( '/' ) ),
-					'tracking'      => Redux_Helpers::get_statistics_object(),
-					'system_status' => $system_info,
-				);
-
-				$post_data = maybe_serialize( $post_data );
-
-				if ( isset( $generate_hash ) && $generate_hash ) {
-					$data['check']      = $new_hash;
-					$data['identifier'] = '';
-					$response           = wp_remote_post(
-						'https://api.redux.io/support',
-						array(
-							'method'      => 'POST',
-							'timeout'     => 65,
-							'redirection' => 5,
-							'httpversion' => '1.0',
-							'blocking'    => true,
-							'compress'    => true,
-							'headers'     => Redux_Helpers::get_request_headers(),
-							'body'        => array(
-								'data'      => $post_data,
-								'serialize' => 1,
-							),
-						)
-					);
-
-					if ( is_wp_error( $response ) ) {
-						echo wp_json_encode(
-							array(
-								'status'  => 'error',
-								'message' => $response->get_error_message(),
-							)
-						);
-
-						die( 1 );
-					} else {
-						$response_code = wp_remote_retrieve_response_code( $response );
-						$response      = wp_remote_retrieve_body( $response );
-						if ( 200 === $response_code ) {
-							$return = json_decode( $response, true );
-
-							if ( isset( $return['identifier'] ) ) {
-								$data['identifier'] = $return['identifier'];
-								update_option( 'redux_support_hash', $data );
-							}
-						} else {
-							echo wp_json_encode(
-								array(
-									'status'  => 'error',
-									'message' => $response,
-								)
-							);
-						}
-					}
-				}
-
-				if ( ! empty( $data['identifier'] ) ) {
-					$return['status']     = 'success';
-					$return['identifier'] = $data['identifier'];
-				} else {
-					$return['status']  = 'error';
-					$return['message'] = esc_html__( 'Support hash could not be generated. Please try again later.', 'redux-framework' );
-				}
-
-				echo wp_json_encode( $return );
-
-				die( 1 );
-			}
 		}
 
 		/**

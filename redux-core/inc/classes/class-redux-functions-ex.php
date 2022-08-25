@@ -436,44 +436,10 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * AJAX callback key
 		 */
 		public static function hash_key(): string {
-			$key = defined( 'AUTH_KEY' ) ? AUTH_KEY : get_site_url();
+			$key  = defined( 'AUTH_KEY' ) ? AUTH_KEY : get_site_url();
 			$key .= defined( 'SECURE_AUTH_KEY' ) ? SECURE_AUTH_KEY : '';
 
 			return $key;
-		}
-
-		/**
-		 * Check if Redux is activated.
-		 *
-		 * @access public
-		 * @since  4.0.0
-		 */
-		public static function activated(): bool {
-			if ( Redux_Core::$insights->tracking_allowed() ) {
-				return true;
-			}
-
-			return false;
-		}
-
-		/**
-		 * Set Redux to activate.
-		 *
-		 * @access public
-		 * @since  4.0.0
-		 */
-		public static function set_activated() {
-			Redux_Core::$insights->optin();
-		}
-
-		/**
-		 * Set Redux to deactivate.
-		 *
-		 * @access public
-		 * @since  4.0.0
-		 */
-		public static function set_deactivated() {
-			Redux_Core::$insights->optout();
 		}
 
 		/**
