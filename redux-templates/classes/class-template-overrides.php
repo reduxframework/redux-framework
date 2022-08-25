@@ -9,9 +9,7 @@
 
 namespace ReduxTemplates;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Redux Templates Templates Class
@@ -34,7 +32,7 @@ class Template_Overrides {
 	 * @return bool
 	 * @since 4.0.0
 	 */
-	public static function is_gutenberg() {
+	public static function is_gutenberg(): bool {
 		global $post;
 		if ( function_exists( 'has_blocks' ) && has_blocks( $post->ID ) ) {
 			return true;
@@ -49,7 +47,7 @@ class Template_Overrides {
 	 * @return string
 	 * @since 4.0.0
 	 */
-	public static function get_overrides() {
+	public static function get_overrides(): string {
 
 		if ( ! self::is_gutenberg() ) {
 			return '';
@@ -89,9 +87,7 @@ EOD;
 		// Remove space after opening bracket.
 		$css = str_replace( ' {', '{', $css );
 		// Remove whitespace.
-		$css = str_replace( array( "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ), '', $css );
-
-		return $css;
+		return str_replace( array( "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ), '', $css );
 	}
 
 	/**
@@ -100,7 +96,7 @@ EOD;
 	 * @return string
 	 * @since 4.0.0
 	 */
-	public static function consulting() {
+	public static function consulting(): string {
 		return <<<'EOD'
 			#content-core {
 				max-width: 100%;
@@ -114,7 +110,7 @@ EOD;
 	 * @return string
 	 * @since 4.0.0
 	 */
-	public static function avada() {
+	public static function avada(): string {
 		return <<<'EOD'
 			#main .fusion-row {
 				max-width: unset;
@@ -128,7 +124,7 @@ EOD;
 	 * @return string
 	 * @since 4.1.24
 	 */
-	public static function generatepress() {
+	public static function generatepress(): string {
 		return <<<'EOD'
 			.site-content {
                             display: block!important;
@@ -142,7 +138,7 @@ EOD;
 	 * @return string
 	 * @since 4.0.0
 	 */
-	public static function twentytwenty() {
+	public static function twentytwenty(): string {
 		return <<<'EOD'
 			[class*="__inner-container"] > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
 				max-width: unset !important;

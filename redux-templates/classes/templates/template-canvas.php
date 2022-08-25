@@ -6,9 +6,7 @@
  * @package redux-framework
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+defined( 'ABSPATH' ) || exit;
 
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,4 @@
-<?php // phpcs:ignore WordPress.Files.FileName
-
+<?php
 /**
  * Initialize the Redux Template Library.
  *
