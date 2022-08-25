@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.3.17.1
+* Removed: Redux template library (use Extendify template library instead).
+* Removed: Appsero registration for Redux Pro.
+* Modified: Cleanup of old or outdated code.
+
 ## 4.3.17
 * Added: Social Profiles extension. [https://devs.redux.io/core-extensions/social-profiles.html](https://devs.redux.io/core-extensions/social-profiles.html)
 * Fixed: Metabox post types and templates selection inoperative on new posts.
