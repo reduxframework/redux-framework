@@ -53,9 +53,7 @@ export const ImportCounter = memo(function ImportCounter() {
                 onClick={async () => await General.ping('import-counter-click')}
                 href={`https://www.extendify.com/pricing/?utm_source=${encodeURIComponent(
                     window.extendifyData.sdk_partner,
-                )}&utm_medium=library&utm_campaign=import-counter&utm_content=get-more&utm_term=${status}&utm_group=${useUserStore
-                    .getState()
-                    .activeTestGroupsUtmValue()}`}>
+                )}&utm_medium=library&utm_campaign=import-counter&utm_content=get-more&utm_term=${status}`}>
                 <span className="flex items-center space-x-2 text-xs no-underline">
                     <Icon icon={count > 0 ? download : alert} size={14} />
                     <span>
@@ -76,9 +74,7 @@ export const ImportCounter = memo(function ImportCounter() {
                 <a
                     href={`https://www.extendify.com/pricing/?utm_source=${encodeURIComponent(
                         window.extendifyData.sdk_partner,
-                    )}&utm_medium=library&utm_campaign=import-counter-tooltip&utm_content=get-50-off&utm_term=${status}&utm_group=${useUserStore
-                        .getState()
-                        .activeTestGroupsUtmValue()}`}
+                    )}&utm_medium=library&utm_campaign=import-counter-tooltip&utm_content=get-50-off&utm_term=${status}`}
                     className="block bg-gray-900 text-white p-4 no-underline rounded bg-cover"
                     onClick={async () =>
                         await General.ping('import-counter-tooltip-click')

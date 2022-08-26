@@ -1,0 +1,10 @@
+/* Adding CSS classes should be done with consideration and rarely */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.extendify-assist *,
+.extendify-assist *:after,
+.extendify-assist *:before {
+    box-sizing: border-box;
+}

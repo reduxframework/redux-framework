@@ -90,6 +90,7 @@ export const useTelemetry = () => {
                     perfStyles: getPerformance('style'),
                     perfPages: getPerformance('page'),
                     insightsId: window.extOnbData?.insightsId,
+                    activeTests: JSON.stringify(window.extOnbData?.activeTests),
                 }),
             })
         }, 1000)
@@ -114,6 +115,8 @@ export const useTelemetry = () => {
 const getPerformance = (type) => {
     return performance
         .getEntriesByType('measure')
-        .filter((m) => m.detail.extendify && m.detail.context.type === type)
+        .filter(
+            (m) => m?.detail?.extendify && m?.detail?.context?.type === type,
+        )
         .map((m) => ({ [m.name]: m.duration }))
 }

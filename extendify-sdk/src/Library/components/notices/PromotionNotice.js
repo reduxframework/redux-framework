@@ -1,5 +1,4 @@
 import { Button } from '@wordpress/components'
-import { useUserStore } from '@library/state/User'
 import { General } from '../../api/General'
 
 export default function PromotionNotice({ promotionData }) {
@@ -14,11 +13,7 @@ export default function PromotionNotice({ promotionData }) {
                     <Button
                         variant="link"
                         className="h-auto p-0 text-black underline hover:no-underline"
-                        href={`${promotionData.url}&utm_source=${
-                            window.extendifyData.sdk_partner
-                        }&utm_group=${useUserStore
-                            .getState()
-                            .activeTestGroupsUtmValue()}`}
+                        href={`${promotionData.url}&utm_source=${window.extendifyData.sdk_partner}`}
                         onClick={async () =>
                             await General.ping('promotion-notice-click')
                         }

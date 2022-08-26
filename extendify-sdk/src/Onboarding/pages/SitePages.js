@@ -18,7 +18,7 @@ export const fetcher = async () => {
     const otherPages = pageRecords
         .slice(1)
         ?.sort((a, b) => (a.title > b.title ? 1 : -1))
-    return [homePage, ...(otherPages ?? [])]
+    return { data: [homePage, ...(otherPages ?? [])] }
 }
 export const fetchData = () => {
     return { key: 'layout-types' }

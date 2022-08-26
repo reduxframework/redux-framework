@@ -19,7 +19,7 @@ export const PageControl = () => {
                 })}>
                 {onFirstPage || (
                     <button
-                        className="flex items-center px-4 py-3 text-partner-primary-bg font-medium button-focus bg-gray-100 hover:bg-gray-200 focus:bg-gray-200"
+                        className="flex items-center px-4 py-3 text-partner-primary-bg font-medium button-focus bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 bg-transparent"
                         type="button"
                         onClick={previousPage}>
                         <RightArrowIcon className="h-5 w-5" />
@@ -52,6 +52,7 @@ const NextButton = () => {
             </button>
         )
     }
+
     return (
         <button
             className="flex items-center px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus"

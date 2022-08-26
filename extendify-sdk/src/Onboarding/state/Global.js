@@ -3,7 +3,6 @@ import { devtools, persist } from 'zustand/middleware'
 
 const store = (set) => ({
     generating: false,
-    generatedPages: {},
     orderId: null,
     setOrderId(orderId) {
         set({ orderId })

@@ -137,11 +137,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                 <p className="space-x-1 text-center text-sm m-0 text-extendify-gray">
                     <span>{__("Don't have an account?", 'extendify')}</span>
                     <a
-                        href={`https://extendify.com/pricing?utm_source=${
-                            window.extendifyData.sdk_partner
-                        }&utm_medium=library&utm_campaign=sign-in-form&utm_content=sign-up&utm_group=${useUserStore
-                            .getState()
-                            .activeTestGroupsUtmValue()}`}
+                        href={`https://extendify.com/pricing?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=sign-up`}
                         target="_blank"
                         onClick={async () =>
                             await General.ping(
@@ -220,11 +216,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href={`https://extendify.com/guides/sign-in?utm_source=${
-                            window.extendifyData.sdk_partner
-                        }&utm_medium=library&utm_campaign=sign-in-form&utm_content=need-help&utm_group=${useUserStore
-                            .getState()
-                            .activeTestGroupsUtmValue()}`}
+                        href={`https://extendify.com/guides/sign-in?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=sign-in-form&utm_content=need-help`}
                         onClick={async () =>
                             await General.ping(
                                 'need-help-link-from-login-modal-click',

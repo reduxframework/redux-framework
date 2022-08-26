@@ -3,7 +3,6 @@ import { useRef } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { General } from '@library/api/General'
 import { growthArrow, brandLogo } from '@library/components/icons'
-import { useUserStore } from '@library/state/User'
 import { SplitModal } from './SplitModal'
 
 export const ProModal = () => {
@@ -32,11 +31,7 @@ export const ProModal = () => {
                         ref={initialFocus}
                         className="button-extendify-main button-focus mt-2 inline-flex justify-center px-4 py-3"
                         style={{ minWidth: '225px' }}
-                        href={`https://extendify.com/pricing/?utm_source=${
-                            window.extendifyData.sdk_partner
-                        }&utm_medium=library&utm_campaign=pro-modal&utm_content=upgrade-now&utm_group=${useUserStore
-                            .getState()
-                            .activeTestGroupsUtmValue()}`}
+                        href={`https://extendify.com/pricing/?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=pro-modal&utm_content=upgrade-now`}
                         onClick={async () =>
                             await General.ping('pro-modal-click')
                         }

@@ -1,7 +1,6 @@
 import { Button } from '@wordpress/components'
 import { __ } from '@wordpress/i18n'
 import { General } from '@library/api/General'
-import { useUserStore } from '@library/state/User'
 
 export default function FeedbackNotice() {
     return (
@@ -19,11 +18,7 @@ export default function FeedbackNotice() {
                 <Button
                     variant="link"
                     className="h-auto p-0 text-black underline hover:no-underline"
-                    href={`https://extendify.com/feedback/?utm_source=${
-                        window.extendifyData.sdk_partner
-                    }&utm_medium=library&utm_campaign=feedback-notice&utm_content=give-feedback&utm_group=${useUserStore
-                        .getState()
-                        .activeTestGroupsUtmValue()}`}
+                    href={`https://extendify.com/feedback/?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=feedback-notice&utm_content=give-feedback`}
                     onClick={async () =>
                         await General.ping('feedback-notice-click')
                     }

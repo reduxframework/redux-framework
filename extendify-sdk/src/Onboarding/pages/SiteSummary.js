@@ -96,12 +96,11 @@ export const SiteSummary = () => {
                             </button>
                         )}
                     </div>
-                    <div className="block">
-                        <h2 className="text-lg m-0 mb-4">
-                            {__('Goals', 'extendify')}
-                        </h2>
-
-                        {goals.length > 0 ? (
+                    {goals?.length > 0 ? (
+                        <div className="block">
+                            <h2 className="text-lg m-0 mb-4">
+                                {__('Goals', 'extendify')}
+                            </h2>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 {goals?.map((goal) => {
                                     return (
@@ -119,14 +118,8 @@ export const SiteSummary = () => {
                                     )
                                 })}
                             </div>
-                        ) : (
-                            <button
-                                onClick={() => setPage('goals')}
-                                className="bg-transparent text-partner-primary underline text-base cursor-pointer">
-                                {__('Press to set your goals', 'extendify')}
-                            </button>
-                        )}
-                    </div>
+                        </div>
+                    ) : null}
                     <div className="block">
                         <h2 className="text-lg m-0 mb-4">
                             {__('Pages', 'extendify')}

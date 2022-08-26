@@ -10,16 +10,19 @@ import {
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { getThemeVariations, parseThemeJson } from '@onboarding/api/WPApi'
+import { SkeletonLoader } from '@onboarding/components/SkeletonLoader'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMounted } from '@onboarding/hooks/useIsMounted'
 import { capitalize, lowerImageQuality } from '@onboarding/lib/util'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
-import { SpinnerIcon } from '@onboarding/svg'
 
 const fetcher = async (themeJson) => {
     if (!themeJson) return '{}'
     const res = await parseThemeJson(JSON.stringify(themeJson))
-    return res?.styles ?? '{}'
+    if (!res?.styles) {
+        throw new Error('Invalid theme json')
+    }
+    return { data: res.styles }
 }
 export const StylePreview = ({
     style,
@@ -40,12 +43,14 @@ export const StylePreview = ({
     const content = useRef(null)
     const blockRef = useRef(null)
     const observer = useRef(null)
+    const startTime = useRef(null)
     const loadTime = useRef(false)
     const { data: themeJson } = useFetch(
         inView && variation ? variation : null,
         fetcher,
     )
     const { data: variations } = useFetch('variations', getThemeVariations)
+    const theme = variation?.settings?.color?.palette?.theme
 
     const blocks = useMemo(
         () => rawHandler({ HTML: lowerImageQuality(code) }),
@@ -65,24 +70,30 @@ export const StylePreview = ({
     useLayoutEffect(() => {
         if (!inView || !context.measure) return
         const key = `${context.type}-${context.detail}`
-        // If the componeent is in view, start the timer
+        // If the component is in view, start the timer
         if (!loaded && !loadTime.current) {
-            performance.mark(key)
+            loadTime.current = 0
+            startTime.current = performance.now()
             return
         }
-        const time = performance.measure(key, {
-            start: key,
-            // The extendify key is used to filter only our measurements
-            detail: { context, extendify: true },
-        })
+        let time
+        try {
+            time = performance.measure(key, {
+                start: startTime.current,
+                // The extendify key is used to filter only our measurements
+                detail: { context, extendify: true },
+            })
+        } catch (e) {
+            console.error(e)
+        }
 
-        loadTime.current = time.duration
+        loadTime.current = time?.duration ?? 0
         const q = new URLSearchParams(window.location.search)
-        if (q?.has('performance')) {
+        if (q?.has('performance') && loadTime.current) {
             console.info(
                 `🚀 ${capitalize(context.type)} (${
                     context.detail
-                }) in ${time.duration.toFixed()}ms`,
+                }) in ${loadTime.current.toFixed()}ms`,
             )
         }
     }, [loaded, context, inView])
@@ -221,9 +232,21 @@ export const StylePreview = ({
     return (
         <>
             {loaded && code ? null : (
-                <div className="absolute inset-0 z-20 bg-gray-50 flex items-center justify-center">
-                    <SpinnerIcon className="spin w-8" />
-                </div>
+                <>
+                    <div className="absolute inset-0 z-20 flex items-center justify-center">
+                        <SkeletonLoader
+                            context="style"
+                            theme={{
+                                color: theme?.find(
+                                    (c) => c.slug === 'foreground',
+                                )?.color,
+                                bgColor: theme?.find(
+                                    (c) => c.slug === 'background',
+                                )?.color,
+                            }}
+                        />
+                    </div>
+                </>
             )}
             <div
                 ref={blockRef}

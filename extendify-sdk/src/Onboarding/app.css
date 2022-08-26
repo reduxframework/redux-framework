@@ -30,7 +30,7 @@
     right: 16px;
 }
 .extendify-onboarding .button-focus {
-    @apply outline-none cursor-pointer rounded-lg bg-transparent text-center text-base no-underline ring-partner-primary-bg ring-offset-2 ring-offset-white focus:shadow-none focus:ring-wp;
+    @apply outline-none cursor-pointer rounded-lg text-center text-base no-underline ring-partner-primary-bg ring-offset-2 ring-offset-white focus:shadow-none focus:ring-wp;
 }
 .extendify-onboarding .input-focus {
     @apply outline-none rounded-lg text-base ring-partner-primary-bg ring-offset-2 ring-offset-white focus:shadow-none focus:ring-wp;

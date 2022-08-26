@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { Icon } from '@wordpress/icons'
 import { General } from '@library/api/General'
-import { useTestGroup } from '@library/hooks/useTestGroup'
 import { useGlobalStore } from '@library/state/GlobalState'
 import { useUserStore } from '@library/state/User'
 import { openModal } from '@library/util/general'
@@ -20,9 +19,6 @@ export const MainButtonWrapper = () => {
     const hasPendingNewImports = useUserStore(
         (state) => state.allowedImports === 0,
     )
-    const uuid = useUserStore((state) => state.uuid)
-    const buttonText = useTestGroup('main-button-text2', ['A', 'B'], true)
-    const [libraryButtonText, setLibraryButtonText] = useState()
 
     const handleTooltipClose = async () => {
         await General.ping('mb-tooltip-closed')
@@ -34,18 +30,6 @@ export const MainButtonWrapper = () => {
             allowedImports: -1,
         })
     }
-    useEffect(() => {
-        if (!uuid) return
-        const text = () => {
-            switch (buttonText) {
-                case 'A':
-                    return __('Add template', 'extendify')
-                case 'B':
-                    return __('Design Library', 'extendify')
-            }
-        }
-        setLibraryButtonText(text())
-    }, [buttonText, uuid])
 
     useEffect(() => {
         if (open) {
@@ -60,7 +44,10 @@ export const MainButtonWrapper = () => {
 
     return (
         <>
-            <MainButton buttonRef={buttonRef} text={libraryButtonText} />
+            <MainButton
+                buttonRef={buttonRef}
+                text={__('Design Library', 'extendify')}
+            />
             {showTooltip && (
                 <NewImportsPopover
                     anchorRef={buttonRef}

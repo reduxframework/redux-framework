@@ -7,10 +7,9 @@ import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
 
-export const fetcher = async () => {
-    const title = await getOption('blogname')
-    return { title }
-}
+export const fetcher = async () => ({
+    data: { title: await getOption('blogname') },
+})
 export const fetchData = () => ({ key: 'site-info' })
 export const state = pageState('Site Title', (set, get) => ({
     title: __('Site Title', 'extendify'),
