@@ -8,13 +8,7 @@ import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
 
-export const fetcher = async () => {
-    const goals = await getGoals()
-    if (!Array.isArray(goals?.data)) {
-        throw new Error('Goals data is not an array', goals)
-    }
-    return goals
-}
+export const fetcher = () => getGoals()
 export const fetchData = () => ({ key: 'goals' })
 export const state = pageState('Goals', () => ({
     title: __('Goals', 'extendify'),
@@ -34,9 +28,12 @@ export const Goals = () => {
         useUserSelectionStore()
     const nextPage = usePagesStore((state) => state.nextPage)
     const initialFocus = useRef()
+    const showMissingInput = () =>
+        window.extOnbData?.activeTests?.['remove-dont-see-inputs'] === 'A'
 
     useEffect(() => {
-        state.setState({ ready: !loading })
+        if (loading) return
+        state.setState({ ready: true })
     }, [loading])
 
     useEffect(() => {
@@ -91,7 +88,7 @@ export const Goals = () => {
                         ))}
                     </form>
                 )}
-                {!loading && (
+                {!loading && showMissingInput() && (
                     <div className="max-w-onboarding-sm mx-auto">
                         <h2 className="text-lg mt-12 mb-4 text-gray-900">
                             {__(

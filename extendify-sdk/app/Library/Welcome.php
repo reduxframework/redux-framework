@@ -21,7 +21,13 @@ class Welcome
     public function __construct()
     {
         if (Config::$standalone || Config::$showOnboarding) {
-            \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
+            if ((!Config::$launchCompleted && Config::$environment !== 'DEVELOPMENT') || (Config::$launchCompleted && Config::$environment !== 'DEVELOPMENT' && !Config::$showAssist)) {
+                \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
+            }
+
+            if (Config::$launchCompleted || Config::$environment === 'DEVELOPMENT') {
+                \add_action('admin_menu', [ $this, 'addAdminSubMenu' ], 15);
+            }
 
             $this->loadScripts();
         }
@@ -38,13 +44,34 @@ class Welcome
             'Extendify',
             'Extendify',
             Config::$requiredCapability,
-            'extendify',
+            'extendify-welcome',
             [
                 $this,
                 'createAdminPage',
             ],
             // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
             'data:image/svg+xml;base64,' . base64_encode('<svg width="20" height="20" viewBox="0 0 60 62" fill="black" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M36.0201 0H49.2377C52.9815 0 54.3365 0.391104 55.7061 1.12116C57.0756 1.85412 58.1469 2.92893 58.8795 4.29635C59.612 5.66666 60 7.02248 60 10.7684V23.9935C60 27.7394 59.6091 29.0952 58.8795 30.4655C58.1469 31.8358 57.0727 32.9078 55.7061 33.6407C55.0938 33.9684 54.4831 34.2381 53.661 34.4312V44.9564C53.661 50.7417 53.0573 52.8356 51.9305 54.952C50.7991 57.0683 49.1401 58.7238 47.0294 59.8558C44.9143 60.9878 42.8215 61.5873 37.0395 61.5873H16.626C10.844 61.5873 8.75122 60.9833 6.63608 59.8558C4.52094 58.7238 2.86639 57.0638 1.73504 54.952C0.603687 52.8401 0 50.7417 0 44.9564V24.5358C0 18.7506 0.603687 16.6566 1.73057 14.5403C2.86192 12.424 4.52094 10.764 6.63608 9.63201C8.74675 8.5045 10.844 7.90047 16.626 7.90047H25.3664C25.5303 6.18172 25.8724 5.24393 26.3754 4.29924C27.1079 2.92893 28.1821 1.85412 29.5517 1.12116C30.9183 0.391104 32.2763 0 36.0201 0ZM29.2266 8.41812C29.2266 5.96352 31.2155 3.97368 33.6689 3.97368H51.5859C54.0393 3.97368 56.0282 5.96352 56.0282 8.41812V26.3438C56.0282 28.7984 54.0393 30.7882 51.5859 30.7882H33.6689C31.2155 30.7882 29.2266 28.7984 29.2266 26.3438V8.41812Z" fill="black"/></svg>')
+        );
+    }
+
+    /**
+     * Adds Extendify Welcome page to Assist admin menu.
+     *
+     * @return void
+     */
+    public function addAdminSubMenu()
+    {
+        add_submenu_page(
+            'extendify-assist',
+            'Library',
+            'Library',
+            Config::$requiredCapability,
+            'extendify-welcome',
+            [
+                $this,
+                'createAdminPage',
+            ],
+            400
         );
     }
 
@@ -60,6 +87,13 @@ class Welcome
         ?>
         <div class="extendify-outer-container">
             <div class="wrap welcome-container">
+                <?php
+                if ((Config::$launchCompleted || Config::$environment === 'DEVELOPMENT') && Config::$showAssist) { ?>
+                    <ul class="extendify-welcome-tabs">
+                        <li><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-assist')); ?>">Assist</a></li>
+                        <li class="active"><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-welcome')); ?>">Library</a></li>
+                    </ul>
+                <?php } ?>
                 <div class="welcome-header">
                     <img alt="<?php \esc_html_e('Extendify Banner', 'extendify'); ?>" src="<?php echo \esc_url(EXTENDIFY_URL . 'public/assets/welcome-banner.jpg'); ?>">
                 </div>
@@ -149,7 +183,7 @@ class Welcome
     }
 
     /**
-     * Adds scripts and styles to every page is enabled
+     * Adds scripts and styles to every page if enabled
      *
      * @return void
      */
@@ -157,7 +191,7 @@ class Welcome
     {
         // No nonce for _GET.
         // phpcs:ignore WordPress.Security.NonceVerification
-        if (isset($_GET['page']) && $_GET['page'] === 'extendify') {
+        if (isset($_GET['page']) && ($_GET['page'] === 'extendify-welcome')) {
             \add_action(
                 'in_admin_header',
                 function () {
@@ -174,7 +208,7 @@ class Welcome
                         'extendify-welcome',
                         EXTENDIFY_URL . 'public/admin-page/welcome.css',
                         [],
-                        Config::$version
+                        Config::$environment === 'PRODUCTION' ? Config::$version : uniqid()
                     );
                 }
             );

@@ -34,6 +34,8 @@ export const SiteTypeSelect = () => {
     const [showExamples, setShowExamples] = useState(true)
     const searchRef = useRef(null)
     const { data: siteTypes, loading } = useFetch(fetchData, fetcher)
+    const showMissingInput = () =>
+        window.extOnbData?.activeTests?.['remove-dont-see-inputs'] === 'A'
 
     useEffect(() => {
         state.setState({ ready: !loading })
@@ -142,7 +144,7 @@ export const SiteTypeSelect = () => {
                                 {showExamples
                                     ? sprintf(
                                           __('Show all %s', 'extendify'),
-                                          loading ? '...' : siteTypes.length,
+                                          loading ? '...' : siteTypes?.length,
                                       )
                                     : __('Show less', 'extendify')}
                             </button>
@@ -185,34 +187,38 @@ export const SiteTypeSelect = () => {
                                 }}>
                                 {sprintf(
                                     __('Show all %s', 'extendify'),
-                                    loading ? '...' : siteTypes.length,
+                                    loading ? '...' : siteTypes?.length,
                                 )}
                             </button>
                         </div>
-                        <h2 className="text-lg mt-12 mb-4 text-gray-900">
-                            {__(
-                                "Don't see what you're looking for?",
-                                'extendify',
-                            )}
-                        </h2>
-                        <div className="search-panel flex items-center justify-center relative">
-                            <input
-                                type="text"
-                                className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
-                                value={feedback}
-                                onChange={(e) =>
-                                    useUserSelectionStore
-                                        .getState()
-                                        .setFeedbackMissingSiteType(
-                                            e.target.value,
-                                        )
-                                }
-                                placeholder={__(
-                                    'Describe your site...',
-                                    'extendify',
-                                )}
-                            />
-                        </div>
+                        {showMissingInput() && (
+                            <>
+                                <h2 className="text-lg mt-12 mb-4 text-gray-900">
+                                    {__(
+                                        "Don't see what you're looking for?",
+                                        'extendify',
+                                    )}
+                                </h2>
+                                <div className="search-panel flex items-center justify-center relative">
+                                    <input
+                                        type="text"
+                                        className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
+                                        value={feedback}
+                                        onChange={(e) =>
+                                            useUserSelectionStore
+                                                .getState()
+                                                .setFeedbackMissingSiteType(
+                                                    e.target.value,
+                                                )
+                                        }
+                                        placeholder={__(
+                                            'Describe your site...',
+                                            'extendify',
+                                        )}
+                                    />
+                                </div>
+                            </>
+                        )}
                     </div>
                 )}
             </div>
@@ -241,7 +247,7 @@ const SelectButton = ({ option, selectSiteType }) => {
             onMouseLeave={() => {
                 window.clearTimeout(hoveringTimeout.current)
             }}
-            className="flex border border-gray-800 hover:text-partner-primary-bg focus:text-partner-primary-bg items-center justify-between mb-3 p-4 py-3 relative w-full button-focus">
+            className="flex border border-gray-800 hover:text-partner-primary-bg focus:text-partner-primary-bg items-center justify-between mb-3 p-4 py-3 relative w-full button-focus bg-transparent">
             <span className="text-left">{option.title}</span>
             <LeftArrowIcon />
         </button>

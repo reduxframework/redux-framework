@@ -33,21 +33,21 @@ import {
 const defaultPages = [
     ['welcome', { component: Landing, state: welcomeState.getState }],
     [
-        'goals',
-        {
-            component: Goals,
-            fetcher: goalsFetcher,
-            fetchData: goalsData,
-            state: goalsState.getState,
-        },
-    ],
-    [
         'site-type',
         {
             component: SiteTypeSelect,
             fetcher: siteTypeFetcher,
             fetchData: siteTypeData,
             state: siteTypeState.getState,
+        },
+    ],
+    [
+        'goals',
+        {
+            component: Goals,
+            fetcher: goalsFetcher,
+            fetchData: goalsData,
+            state: goalsState.getState,
         },
     ],
     [

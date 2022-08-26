@@ -98,8 +98,13 @@ class Admin
     {
         \add_action('admin_menu', function () {
             if (Config::$environment === 'DEVELOPMENT' || Config::$showOnboarding) {
-                \add_submenu_page('extendify', \__('Welcome', 'extendify'), \__('Welcome', 'extendify'), Config::$requiredCapability, 'extendify', '', 400);
-                \add_submenu_page('extendify', 'Extendify Launch', 'Extendify Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
+                if (Config::$showAssist) {
+                    \add_submenu_page('extendify-assist', 'Assist', 'Assist', Config::$requiredCapability, 'extendify-assist', '', 300);
+                    \add_submenu_page('extendify-assist', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
+                } else {
+                    \add_submenu_page('extendify-welcome', \__('Welcome', 'extendify'), \__('Welcome', 'extendify'), Config::$requiredCapability, 'extendify-welcome', '', 400);
+                    \add_submenu_page('extendify-welcome', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
+                }
             }
         });
     }
@@ -116,7 +121,7 @@ class Admin
             if (\get_option('extendify_launch_loaded', 0)
                 // These are here for legacy reasons.
                 || \get_option('extendify_onboarding_skipped', 0)
-                || \get_option('extendify_onboarding_completed', 0)
+                || Config::$launchCompleted
             ) {
                 return;
             }
@@ -155,6 +160,37 @@ class Admin
     }
 
     /**
+     * Check if partner data is available.
+     *
+     * @return array
+     */
+    public function checkPartnerDataSources()
+    {
+        $return = [];
+
+        try {
+            if (defined('EXTENDIFY_ONBOARDING_BG')) {
+                $return['bgColor'] = constant('EXTENDIFY_ONBOARDING_BG');
+                $return['fgColor'] = constant('EXTENDIFY_ONBOARDING_TXT');
+                $return['logo'] = constant('EXTENDIFY_PARTNER_LOGO');
+            }
+
+            $data = get_option('extendify_partner_data');
+            if ($data) {
+                $return['bgColor'] = $data['backgroundColor'];
+                $return['fgColor'] = $data['foregroundColor'];
+                // Need this check to avoid errors if no partner logo is set in Airtable.
+                $return['logo'] = $data['logo'] ? $data['logo'][0]['thumbnails']['small']['url'] : null;
+            }
+        } catch (\Exception $e) {
+            // Do nothing here, set variables below. Coding Standards require something to be in the catch.
+            $e;
+        }//end try
+
+        return $return;
+    }
+
+    /**
      * Adds various JS scripts
      *
      * @return void
@@ -162,6 +198,12 @@ class Admin
     public function addScopedScriptsAndStyles()
     {
         $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+
+        $partnerData = $this->checkPartnerDataSources();
+
+        $bgColor = isset($partnerData['bgColor']) ? $partnerData['bgColor'] : '#2c39bd';
+        $fgColor = isset($partnerData['fgColor']) ? $partnerData['fgColor'] : '#ffffff';
+        $logo = isset($partnerData['logo']) ? $partnerData['logo'] : null;
 
         \wp_enqueue_script(
             Config::$slug . '-onboarding-scripts',
@@ -187,14 +229,15 @@ class Admin
                 'config' => Config::$config,
                 'wpRoot' => \esc_url_raw(\rest_url()),
                 'nonce' => \wp_create_nonce('wp_rest'),
-                'partnerLogo' => defined('EXTENDIFY_PARTNER_LOGO') ? constant('EXTENDIFY_PARTNER_LOGO') : null,
-                'partnerName' => defined('EXTENDIFY_PARTNER_NAME') ? constant('EXTENDIFY_PARTNER_NAME') : null,
+                'partnerLogo' => $logo,
+                'partnerName' => \esc_attr(Config::$sdkPartner),
                 'partnerSkipSteps' => defined('EXTENDIFY_SKIP_STEPS') ? constant('EXTENDIFY_SKIP_STEPS') : [],
                 'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
                 'version' => Config::$version,
                 'insightsId' => \get_option('extendify_site_id', ''),
                 // Only send insights if they have opted in explicitly.
                 'insightsEnabled' => defined('EXTENDIFY_INSIGHTS_URL'),
+                'activeTests' => \get_option('extendify_active_tests', []),
             ]),
             'before'
         );
@@ -208,11 +251,10 @@ class Admin
             $version,
             'all'
         );
-        $bg = defined('EXTENDIFY_ONBOARDING_BG') ? constant('EXTENDIFY_ONBOARDING_BG') : '#2c39bd';
-        $txt = defined('EXTENDIFY_ONBOARDING_TXT') ? constant('EXTENDIFY_ONBOARDING_TXT') : '#ffffff';
+
         \wp_add_inline_style(Config::$slug . '-onboarding-styles', "body {
-            --ext-partner-theme-primary-bg: {$bg};
-            --ext-partner-theme-primary-text: {$txt};
+            --ext-partner-theme-primary-bg: {$bgColor};
+            --ext-partner-theme-primary-text: {$fgColor};
         }");
     }
 }

@@ -5,7 +5,6 @@ import { RetryNotice } from '@onboarding/components/RetryNotice'
 import { useDisableWelcomeGuide } from '@onboarding/hooks/useDisableWelcomeGuide'
 import { useBodyScrollLock } from '@onboarding/hooks/useScrollLock'
 import { CreatingSite } from '@onboarding/pages/CreatingSite'
-import { Finished } from '@onboarding/pages/Finished'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { updateOption } from './api/WPApi'
@@ -23,7 +22,6 @@ export const Onboarding = () => {
     )
     const { mutate } = useSWRConfig()
     const generating = useGlobalStore((state) => state.generating)
-    const generatedPages = useGlobalStore((state) => state.generatedPages)
     const [show, setShow] = useState(false)
     const [needsTheme, setNeedsTheme] = useState(false)
     const theme = useSelect((select) => select('core').getCurrentTheme())
@@ -34,7 +32,6 @@ export const Onboarding = () => {
 
     const page = () => {
         if (needsTheme) return <NeedsTheme />
-        if (Object.keys(generatedPages)?.length) return <Finished />
         if (generating) return <CreatingSite />
         return <CurrentPage />
     }
@@ -59,11 +56,8 @@ export const Onboarding = () => {
     }, [show])
 
     useEffect(() => {
-        const q = new URLSearchParams(window.location.search)
-        if (['onboarding'].includes(q.get('extendify'))) {
-            setShow(true)
-            updateOption('extendify_launch_loaded', new Date().toISOString())
-        }
+        setShow(true)
+        updateOption('extendify_launch_loaded', new Date().toISOString())
     }, [])
 
     useEffect(() => {

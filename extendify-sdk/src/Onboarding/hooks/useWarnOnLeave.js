@@ -1,8 +1,9 @@
 import { useEffect } from '@wordpress/element'
 
-export const useWarnOnLeave = () => {
+export const useWarnOnLeave = (enabled = true) => {
     // Display warning alert if user tries to exit
     useEffect(() => {
+        if (!enabled) return
         const handleUnload = (event) => {
             event.preventDefault()
             return (event.returnValue = '')
@@ -12,5 +13,5 @@ export const useWarnOnLeave = () => {
         return () => {
             window.removeEventListener('beforeunload', handleUnload, opts)
         }
-    }, [])
+    }, [enabled])
 }

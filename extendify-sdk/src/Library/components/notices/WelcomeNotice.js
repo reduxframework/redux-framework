@@ -28,11 +28,7 @@ export default function WelcomeNotice() {
                 <Button
                     variant="link"
                     className="h-auto p-0 text-black underline hover:no-underline"
-                    href={`https://extendify.com/welcome/?utm_source=${
-                        window.extendifyData.sdk_partner
-                    }&utm_medium=library&utm_campaign=welcome-notice&utm_content=tell-me-more&utm_group=${useUserStore
-                        .getState()
-                        .activeTestGroupsUtmValue()}`}
+                    href={`https://extendify.com/welcome/?utm_source=${window.extendifyData.sdk_partner}&utm_medium=library&utm_campaign=welcome-notice&utm_content=tell-me-more`}
                     onClick={async () =>
                         await General.ping('welcome-notice-tell-me-more-click')
                     }

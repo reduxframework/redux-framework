@@ -5,15 +5,15 @@ import {
     useRef,
     useMemo,
 } from '@wordpress/element'
-import { __, sprintf } from '@wordpress/i18n'
+import { __ } from '@wordpress/i18n'
 import { getStyles } from '@onboarding/api/DataApi'
+import { SkeletonLoader } from '@onboarding/components/SkeletonLoader'
 import { StylePreview } from '@onboarding/components/StyledPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMountedLayout } from '@onboarding/hooks/useIsMounted'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
-import { SpinnerIcon } from '@onboarding/svg'
 
 export const fetcher = (params) => getStyles(params)
 export const fetchData = (siteType) => {
@@ -33,7 +33,6 @@ export const state = pageState('Design', (set, get) => ({
         useUserSelectionStore.getState().style?.slug === get().default?.slug,
 }))
 export const SiteStyle = () => {
-    const siteType = useUserSelectionStore((state) => state.siteType)
     const { data: styleData, loading } = useFetch(fetchData, fetcher)
     const once = useRef(false)
     const stylesRef = useRef()
@@ -73,13 +72,7 @@ export const SiteStyle = () => {
         <PageLayout>
             <div>
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
-                    {sprintf(
-                        __(
-                            'Now pick a design for your new %s site.',
-                            'extendify',
-                        ),
-                        siteType?.label?.toLowerCase(),
-                    )}
+                    {__('Now pick a design for your new site.', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70 mb-0">
                     {__('You can personalize this later.', 'extendify')}
@@ -103,15 +96,12 @@ export const SiteStyle = () => {
                             style={style}
                         />
                     ))}
-                    {/* Budget skeleton loaders */}
                     {styleData?.slice(styles?.length).map((data) => (
                         <div
                             key={data.slug}
                             style={{ height: 497, width: 352 }}
-                            className="relative">
-                            <div className="bg-gray-50 h-full w-full flex items-center justify-center">
-                                <SpinnerIcon className="spin w-8" />
-                            </div>
+                            className="lg:flex gap-6 relative">
+                            <SkeletonLoader context="style" />
                         </div>
                     ))}
                 </div>

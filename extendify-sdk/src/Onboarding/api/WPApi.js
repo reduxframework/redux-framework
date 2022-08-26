@@ -84,11 +84,16 @@ export const getHeadersAndFooters = async () => {
 const getTemplateParts = () =>
     api.get(window.extOnbData.wpRoot + 'wp/v2/template-parts')
 
-export const getThemeVariations = () =>
-    api.get(
+export const getThemeVariations = async () => {
+    const variations = await api.get(
         window.extOnbData.wpRoot +
             'wp/v2/global-styles/themes/extendable/variations',
     )
+    if (!Array.isArray(variations)) {
+        throw new Error('Could not get theme variations')
+    }
+    return { data: variations }
+}
 
 export const updateThemeVariation = (id, variation) =>
     api.post(`${window.extOnbData.wpRoot}wp/v2/global-styles/${id}`, {
@@ -96,3 +101,25 @@ export const updateThemeVariation = (id, variation) =>
         settings: variation.settings,
         styles: variation.styles,
     })
+
+export const addLaunchPagesToNav = (
+    pages,
+    pageIds,
+    rawCode,
+    replace = null,
+) => {
+    if (!replace)
+        replace =
+            '<!-- wp:page-list {"isNavigationChild":true,"showSubmenuIcon":true,"openSubmenusOnClick":false} /-->'
+    const pageListItems = pages
+        .map(
+            (page) =>
+                `<!-- wp:navigation-link {"label":"${
+                    page.title
+                }","type":"page","id":${pageIds[page.slug].id},"url":"/${
+                    page.slug
+                }","kind":"post-type","isTopLevelLink":true} /-->`,
+        )
+        .join('')
+    return rawCode.replace(replace, pageListItems)
+}

@@ -4,11 +4,14 @@
  */
 
 use Extendify\Config;
+use Extendify\Insights;
 use Extendify\Onboarding\Admin as OnboardingAdmin;
 use Extendify\Library\Admin as LibraryAdmin;
 use Extendify\Library\Shared;
 use Extendify\Library\Welcome;
 use Extendify\Library\Frontend;
+use Extendify\Assist\AdminPage as AssistAdminPage;
+use Extendify\Assist\Admin as AssistAdmin;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
@@ -31,11 +34,14 @@ if (is_readable(EXTENDIFY_PATH . 'vendor/autoload.php')) {
 }
 
 new Config();
+new Insights();
 new OnboardingAdmin();
 new LibraryAdmin();
 new Frontend();
 new Shared();
 new Welcome();
+new AssistAdminPage();
+new AssistAdmin();
 
 require EXTENDIFY_PATH . 'routes/api.php';
 require EXTENDIFY_PATH . 'editorplus/EditorPlus.php';

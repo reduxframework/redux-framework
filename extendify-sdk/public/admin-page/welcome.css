@@ -301,6 +301,32 @@
     text-decoration: none;
 }
 
+/* Tab styles */
+.extendify-outer-container .extendify-welcome-tabs {
+    border: 1px black solid;
+    margin: 40px 0;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+.extendify-outer-container .extendify-welcome-tabs li {
+    margin: 0;
+}
+
+.extendify-outer-container .extendify-welcome-tabs li a {
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    border-bottom: 2px solid transparent;
+}
+
+.extendify-outer-container .extendify-welcome-tabs li.active a {
+    border-bottom-color: #2271b1;
+}
+
 @media screen and (max-width: 782px) {
     .extendify-outer-container .welcome-section.has-2-columns.is-wider-right, .extendify-outer-container .welcome-section.has-2-columns.is-wider-left {
         display: block;

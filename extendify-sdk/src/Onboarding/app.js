@@ -8,5 +8,8 @@ const extendify = Object.assign(document.createElement('div'), {
 })
 document.body.append(extendify)
 domReady(() => {
-    window._wpLoadBlockEditor && render(<Onboarding />, extendify)
+    const q = new URLSearchParams(window.location.search)
+    if (['onboarding'].includes(q.get('extendify'))) {
+        render(<Onboarding />, extendify)
+    }
 })

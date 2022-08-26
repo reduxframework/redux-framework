@@ -7,20 +7,25 @@ export const getStyles = async (data) => {
     // First get the header and footer code
     const styles = await api.get('onboarding/styles', { params: data })
     const { headers, footers } = await getHeadersAndFooters()
-    return styles?.data?.map((style) => {
-        const header = headers?.find(
-            (h) => h?.slug === style?.headerSlug ?? 'header',
-        )
-        const footer = footers?.find(
-            (f) => f?.slug === style?.footerSlug ?? 'footer',
-        )
+    if (!styles?.data?.length) {
+        throw new Error('Could not get styles')
+    }
+    return {
+        data: styles.data.map((style) => {
+            const header = headers?.find(
+                (h) => h?.slug === style?.headerSlug ?? 'header',
+            )
+            const footer = footers?.find(
+                (f) => f?.slug === style?.footerSlug ?? 'footer',
+            )
 
-        return {
-            ...style,
-            headerCode: header?.content?.raw?.trim() ?? '',
-            footerCode: footer?.content?.raw?.trim() ?? '',
-        }
-    })
+            return {
+                ...style,
+                headerCode: header?.content?.raw?.trim() ?? '',
+                footerCode: footer?.content?.raw?.trim() ?? '',
+            }
+        }),
+    }
 }
 
 export const getGoals = () => api.get('onboarding/goals')

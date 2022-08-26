@@ -35,7 +35,6 @@ function addDefaults(request) {
         request.data.remaining_imports = remainingImports
         request.data.entry_point = userState.entryPoint
         request.data.total_imports = userState.imports
-        request.data.participating_tests = userState.activeTestGroups()
     }
     return request
 }

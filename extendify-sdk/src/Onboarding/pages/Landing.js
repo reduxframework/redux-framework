@@ -55,7 +55,7 @@ export const Landing = () => {
                         ref={continueButton}
                         type="button"
                         aria-label={__('Press to continue', 'extendify')}
-                        className="button-card max-w-sm button-focus mb-6 xl:mb-0">
+                        className="button-card max-w-sm button-focus mb-6 xl:mb-0 bg-transparent">
                         <div
                             className="bg-gray-100 w-full h-64 bg-cover bg-center border border-gray-200"
                             style={{
@@ -74,7 +74,7 @@ export const Landing = () => {
                     </button>
                     <a
                         onClick={(e) => handleSkipLaunch(e)}
-                        className="button-card max-w-sm button-focus">
+                        className="button-card max-w-sm button-focus bg-transparent">
                         <div
                             className="bg-gray-100 w-full h-64 bg-cover bg-center border border-gray-200"
                             style={{

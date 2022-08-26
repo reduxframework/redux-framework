@@ -16,3 +16,22 @@ export const lowerImageQuality = (html) => {
 /** Capitalize first letter of a string */
 export const capitalize = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+
+export const runAtLeastFor = async (functionPromise, time, options) => {
+    if (options.dryRun) {
+        return new Promise((resolve) => setTimeout(resolve, time))
+    }
+    const start = Date.now()
+    try {
+        return await Promise.all([
+            await functionPromise(),
+            new Promise((resolve) => setTimeout(resolve, time)),
+        ])
+    } catch (error) {
+        console.error(error)
+        return await new Promise((resolve) =>
+            // Check at least min milliseconds have passed
+            setTimeout(resolve, Math.max(0, time - (Date.now() - start))),
+        )
+    }
+}
