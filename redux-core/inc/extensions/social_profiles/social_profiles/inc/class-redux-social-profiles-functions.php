@@ -160,22 +160,23 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 
 					foreach ( $boxes as $sections ) {
 						foreach ( $sections['sections'] as $fields ) {
-							foreach ( $fields['fields'] as $f ) {
-								if ( 'social_profiles' === $f['type'] ) {
-									return $f;
-								}
+							if ( isset( $fields['fields'] ) ) {
+								foreach ( $fields['fields'] as $f ) {
+									if ( 'social_profiles' === $f['type'] ) {
+										return $f;
+									}
 
-								if ( 'repeater' === $f['type'] ) {
-									foreach ( $f['fields'] as $r ) {
-										if ( 'social_profiles' === $r['type'] ) {
-											return $r;
+									if ( 'repeater' === $f['type'] ) {
+										foreach ( $f['fields'] as $r ) {
+											if ( 'social_profiles' === $r['type'] ) {
+												return $r;
+											}
 										}
 									}
 								}
 							}
 						}
 					}
-					// }
 				}
 			} else {
 				if ( ! empty( $parent ) ) {
