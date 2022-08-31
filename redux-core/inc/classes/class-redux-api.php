@@ -1581,7 +1581,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 				if ( $ext_file ) {
 					self::check_extension_class_file( $opt_name, $folder, $ext_file );
 				} else {
-					$folders = scandir( $path, 1 );
+					$folders = scandir( $path );
 
 					foreach ( $folders as $folder ) {
 						if ( '.' === $folder || '..' === $folder ) {

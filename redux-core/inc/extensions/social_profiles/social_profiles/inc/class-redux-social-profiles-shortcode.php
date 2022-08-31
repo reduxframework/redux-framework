@@ -46,12 +46,12 @@ if ( ! class_exists( 'Redux_Social_Profiles_Shortcode' ) ) {
 		/**
 		 * Render shortcode.
 		 *
-		 * @param array $atts    Shortcode attributes.
-		 * @param null  $content Shortcode content.
+		 * @param array|string $atts    Shortcode attributes.
+		 * @param null         $content Shortcode content.
 		 *
 		 * @return string
 		 */
-		public function redux_social_profiles( array $atts, $content = null ): string {
+		public function redux_social_profiles( $atts, $content = null ): string {
 			$redux_options = get_option( $this->parent->args['opt_name'] );
 			$social_items  = $redux_options[ $this->field_id ];
 
