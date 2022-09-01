@@ -1537,6 +1537,8 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 	}
 }
 
+class_alias( 'Redux_Extension_Metaboxes', 'ReduxFramework_Extension_metaboxes' );
+
 if ( ! function_exists( 'redux_metaboxes_loop_start' ) ) {
 	/**
 	 * Start loop.

@@ -51,3 +51,5 @@ if ( ! class_exists( 'Redux_Extension_Repeater' ) ) {
 		}
 	}
 }
+
+class_alias( 'Redux_Extension_Repeater', 'ReduxFramework_Extension_repeater' );

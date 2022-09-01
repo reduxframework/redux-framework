@@ -80,7 +80,7 @@ if ( ! class_exists( 'Redux_Extensions', false ) ) {
 				$path = untrailingslashit( $path );
 
 				// Backwards compatibility for extensions.
-				$instance_extensions = Redux::get_extensions( $core->args['opt_name'] );
+				// $instance_extensions = Redux::get_extensions( $core->args['opt_name'] );
 				if ( ! empty( $instance_extensions ) ) {
 					foreach ( $instance_extensions as $name => $extension ) {
 						if ( ! isset( $core->extensions[ $name ] ) ) {
@@ -89,7 +89,9 @@ if ( ! class_exists( 'Redux_Extensions', false ) ) {
 								Redux::set_extensions( $core->args['opt_name'], dirname( $a->getFileName() ), true );
 							}
 						}
+
 						if ( ! isset( $core->extensions[ $name ] ) ) {
+
 							/* translators: %s is the name of an extension */
 							$msg  = '<strong>' . sprintf( esc_html__( 'The `%s` extension was not located properly', 'redux-framework' ), $name ) . '</strong>';
 							$data = array(

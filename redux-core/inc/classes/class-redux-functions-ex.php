@@ -394,7 +394,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 								'    }' . PHP_EOL .
 								'}' . PHP_EOL;
 					$template   = str_replace( '{{ext_class}}', $new_class_name, $class_file );
-					$parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
+					// $parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
 				}
 
 				if ( file_exists( $upload_dir . $new_class_name . '.php' ) ) {
