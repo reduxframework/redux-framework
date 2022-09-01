@@ -1,9 +1,13 @@
 # Redux Changelog
 
+## 4.3.17.3
+* Modified: Attempt to override old theme embedded extensions that use the 3.x loading method.
+* Updated: Font Awesome 6.2.0
+* Updated Extendify Library 0.9.5
+
 ## 4.3.17.2
 * Removed: Social Profiles Widget (use the shortcode in HTML widget instead. See docs).
 * Fixed: Social Profiles in metaboxes, hopefully.
-* Modified: Attempt to override old theme embedded extensions that use the 3.x loading method.
 
 ## 4.3.17.1
 * Removed: Redux template library (use Extendify template library instead).
