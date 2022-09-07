@@ -15,7 +15,12 @@ const store = (set, get) => ({
         return get().pages.get(get().currentPageSlug())
     },
     currentPageSlug() {
-        return get().pageOrder()[get().currentPageIndex]
+        const page = get().pageOrder()[get().currentPageIndex]
+        if (!page) {
+            get().setPage(0)
+            return get().pageOrder()[0]
+        }
+        return page
     },
     nextPageData() {
         const nextIndex = get().currentPageIndex + 1

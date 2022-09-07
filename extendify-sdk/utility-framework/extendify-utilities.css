@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "./classes/aspect-ratio";
 @import "./classes/clip-path";
 @import "./classes/columns";
 @import "./classes/direction";

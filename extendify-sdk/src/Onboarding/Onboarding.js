@@ -14,9 +14,10 @@ import { NeedsTheme } from './pages/NeedsTheme'
 
 export const Onboarding = () => {
     const [retrying, setRetrying] = useState(false)
-    const { component: CurrentPage } = usePagesStore((state) =>
-        state.currentPageData(),
-    )
+    const CurrentPage = usePagesStore((state) => {
+        const pageData = state.currentPageData()
+        return pageData?.component
+    })
     const { fetcher, fetchData } = usePagesStore((state) =>
         state.nextPageData(),
     )
@@ -33,6 +34,7 @@ export const Onboarding = () => {
     const page = () => {
         if (needsTheme) return <NeedsTheme />
         if (generating) return <CreatingSite />
+        if (!CurrentPage) return null
         return <CurrentPage />
     }
 

@@ -1,0 +1,26 @@
+.ext-aspect-square img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.ext-aspect-landscape img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.ext-aspect-landscape-wide img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.ext-aspect-portrait img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.ext-aspect-square .components-resizable-box__container,
+.ext-aspect-landscape .components-resizable-box__container,
+.ext-aspect-landscape-wide .components-resizable-box__container,
+.ext-aspect-portrait .components-resizable-box__container {
+    height: auto !important;
+}

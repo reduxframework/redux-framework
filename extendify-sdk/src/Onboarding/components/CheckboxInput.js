@@ -9,7 +9,7 @@ export const CheckboxInput = ({
 }) => {
     return (
         <label
-            className="flex hover:text-partner-primary-bg focus-within:text-partner-primary-bg"
+            className="flex items-baseline hover:text-partner-primary-bg focus-within:text-partner-primary-bg"
             htmlFor={slug}>
             <span className="mt-0.5 w-6 h-6 relative inline-block mr-3 align-middle">
                 <input
