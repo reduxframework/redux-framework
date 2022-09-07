@@ -121,17 +121,20 @@ export const SiteTypeSelect = () => {
         <PageLayout>
             <div>
                 <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
-                    {__('What is your site about?', 'extendify')}
+                    {__('Welcome to your WordPress site', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70 mb-0">
-                    {__('Search for your site industry.', 'extendify')}
+                    {__(
+                        'Design and launch your site with this guided experience, or head right into the WordPress dashboard if you know your way around.',
+                        'extendify',
+                    )}
                 </p>
             </div>
             <div className="w-full relative max-w-onboarding-sm mx-auto">
                 <div className="sticky bg-white top-10 z-40 pt-9 pb-3 mb-2">
                     <div className="mx-auto flex justify-between mb-4">
                         <h2 className="text-lg m-0 text-gray-900">
-                            {__('Choose an industry', 'extendify')}
+                            {__('What is your site about?', 'extendify')}
                         </h2>
                         {search?.length > 0 ? null : (
                             <button

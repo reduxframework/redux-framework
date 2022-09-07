@@ -28,6 +28,7 @@ export const useSentry = () => {
     const { pages, currentPageIndex } = usePagesStore()
 
     useEffect(() => {
+        if (!window.extOnbData.insightsEnabled) return
         Sentry.setUser({ id: window.extOnbData?.insightsId })
         Sentry.configureScope((scope) => {
             scope.setExtra('Partner', window.extOnbData?.partnerName)
@@ -38,6 +39,7 @@ export const useSentry = () => {
     }, [orderId])
 
     useEffect(() => {
+        if (!window.extOnbData.insightsEnabled) return
         const p = [...pages].map((p) => p[0])
         Sentry.addBreadcrumb({
             type: 'navigation',
