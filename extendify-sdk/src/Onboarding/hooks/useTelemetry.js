@@ -58,7 +58,7 @@ export const useTelemetry = () => {
     useEffect(() => {
         if (!url || orderId?.length) return
         // Create a order that persists over local storage
-        createOrder().then((response) => {
+        createOrder()?.then((response) => {
             setOrderId(response.data.id)
         })
     }, [url, setOrderId, orderId])

@@ -66,6 +66,7 @@ export const SiteTypeSelect = () => {
     useEffect(() => {
         if (loading) return
         if (search?.length > 0) {
+            if (!Array.isArray(siteTypes)) return
             setVisibleSiteTypes(
                 siteTypes?.filter((option) => {
                     const { title, keywords } = option
@@ -81,7 +82,7 @@ export const SiteTypeSelect = () => {
             return
         }
         // If search = '' then show the examples
-        setVisibleSiteTypes(siteTypes?.filter((i) => i.featured))
+        setVisibleSiteTypes(siteTypes?.filter((i) => i?.featured))
         setShowExamples(true)
     }, [siteTypes, search, loading])
 
@@ -89,8 +90,8 @@ export const SiteTypeSelect = () => {
         if (loading) return
         setVisibleSiteTypes(
             showExamples
-                ? siteTypes.filter((i) => i.featured)
-                : siteTypes.sort((a, b) => a.title.localeCompare(b.title)),
+                ? siteTypes?.filter((i) => i?.featured)
+                : siteTypes?.sort((a, b) => a.title.localeCompare(b.title)),
         )
     }, [siteTypes, showExamples, loading])
 
