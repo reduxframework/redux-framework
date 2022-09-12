@@ -4,7 +4,6 @@ import {
     fetchData as goalsData,
     state as goalsState,
 } from '@onboarding/pages/Goals'
-import { Landing, state as welcomeState } from '@onboarding/pages/Landing'
 import {
     SiteInformation,
     fetcher as siteInfoFetcher,
@@ -31,7 +30,6 @@ import {
 
 // pages added here will need to match the orders table on the Styles base
 const defaultPages = [
-    ['welcome', { component: Landing, state: welcomeState.getState }],
     [
         'site-type',
         {

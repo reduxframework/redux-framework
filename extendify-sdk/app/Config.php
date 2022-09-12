@@ -136,10 +136,7 @@ class Config
 
         self::$environment = $isDev ? 'DEVELOPMENT' : 'PRODUCTION';
         self::$showOnboarding = $this->showOnboarding();
-
-        // phpcs:ignore
-        // self::$showAssist = $isDev || self::$launchCompleted;
-        self::$showAssist = $isDev ? true : false;
+        self::$showAssist = $isDev || self::$launchCompleted;
 
         // Add the config.
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents

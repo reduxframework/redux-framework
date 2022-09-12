@@ -59,9 +59,13 @@ class Admin
                     Config::$slug . '-assist-scripts',
                     EXTENDIFY_BASE_URL . 'public/build/extendify-assist.js',
                     [
-                        'wp-i18n',
                         'wp-components',
                         'wp-element',
+                        'wp-data',
+                        'wp-core-data',
+                        'wp-html-entities',
+                        'wp-i18n',
+                        'wp-polyfill',
                     ],
                     $version,
                     true
@@ -70,6 +74,9 @@ class Admin
                     Config::$slug . '-assist-scripts',
                     'window.extAssistData = ' . wp_json_encode([
                         'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
+                        'root' => \esc_url_raw(\rest_url(Config::$slug . '/' . Config::$apiVersion)),
+                        'nonce' => \wp_create_nonce('wp_rest'),
+                        'adminUrl' => \esc_url_raw(\admin_url()),
                     ]),
                     'before'
                 );

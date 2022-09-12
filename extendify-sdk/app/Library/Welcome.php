@@ -21,7 +21,7 @@ class Welcome
     public function __construct()
     {
         if (Config::$standalone || Config::$showOnboarding) {
-            if ((!Config::$launchCompleted && Config::$environment !== 'DEVELOPMENT') || (Config::$launchCompleted && Config::$environment !== 'DEVELOPMENT' && !Config::$showAssist)) {
+            if (!Config::$launchCompleted && Config::$environment !== 'DEVELOPMENT') {
                 \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
             }
 
@@ -87,13 +87,12 @@ class Welcome
         ?>
         <div class="extendify-outer-container">
             <div class="wrap welcome-container">
-                <?php
-                if ((Config::$launchCompleted || Config::$environment === 'DEVELOPMENT') && Config::$showAssist) { ?>
+                <?php if (Config::$showAssist) : ?>
                     <ul class="extendify-welcome-tabs">
                         <li><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-assist')); ?>">Assist</a></li>
                         <li class="active"><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-welcome')); ?>">Library</a></li>
                     </ul>
-                <?php } ?>
+                <?php endif; ?>
                 <div class="welcome-header">
                     <img alt="<?php \esc_html_e('Extendify Banner', 'extendify'); ?>" src="<?php echo \esc_url(EXTENDIFY_URL . 'public/assets/welcome-banner.jpg'); ?>">
                 </div>
