@@ -511,6 +511,7 @@
 		var script;
 		var color;
 		var units;
+		var weights;
 		var marginTopUnit;
 		var marginBottomUnit;
 		var lineHeightUnit;
@@ -524,17 +525,12 @@
 		var marginTop;
 		var marginBottom;
 		var allowEmptyLineHeight;
+		var defaultFontWeights;
 
-		var typekit              = false;
-		var details              = '';
-		var html                 = '<option value=""></option>';
-		var selected             = '';
-		var default_font_weights = {
-			'400': 'Normal 400',
-			'700': 'Bold 700',
-			'400italic': 'Normal 400 Italic',
-			'700italic': 'Bold 700 Italic'
-		};
+		var typekit  = false;
+		var details  = '';
+		var html     = '<option value=""></option>';
+		var selected = '';
 
 		// Main id for selected field.
 		mainID = $( selector ).parents( '.redux-container-typography:first' ).data( 'id' );
@@ -567,7 +563,10 @@
 		color        = that.find( '.redux-typography-color' ).val();
 		marginTop    = that.find( '.redux-typography-margin-top' ).val();
 		marginBottom = that.find( '.redux-typography-margin-bottom' ).val();
+		weights      = that.find( '.typography-style' );
 		baseUnits    = that.data( 'units' );
+
+		defaultFontWeights = JSON.parse( decodeURIComponent( weights.data( 'weights' ) ) );
 
 		// Is selected font a Google font?
 		if ( true === isSelecting ) {
@@ -606,7 +605,7 @@
 					typekit = true;
 					details = redux.fonts.typekit[family];
 				} else {
-					details = default_font_weights;
+					details = defaultFontWeights;
 				}
 			}
 
@@ -701,7 +700,7 @@
 				} else {
 					if ( that.find( '.redux-typography-style' ) ) {
 						$.each(
-							default_font_weights,
+							defaultFontWeights,
 							function( index, value ) {
 								if ( style === index || 'normal' === index ) {
 									selected = ' selected="selected"';
@@ -728,7 +727,7 @@
 			} else if ( $( selector ).hasClass( 'redux-typography-family-backup' ) && '' !== familyBackup ) {
 				that.find( '.redux-typography-font-family-backup' ).val( familyBackup );
 			} else {
-				details = default_font_weights;
+				details = defaultFontWeights;
 				if ( details ) {
 					$.each(
 						details,

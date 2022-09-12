@@ -50,6 +50,18 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		);
 
 		/**
+		 * Default font weights.
+		 *
+		 * @var string[]
+		 */
+		private $default_font_weights = array(
+			'400'       => 'Normal 400',
+			'700'       => 'Bold 700',
+			'400italic' => 'Normal 400 Italic',
+			'700italic' => 'Bold 700 Italic',
+		);
+
+		/**
 		 * User font array.
 		 *
 		 * @var bool $user_fonts
@@ -185,6 +197,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				$this->user_fonts     = false;
 				$this->field['fonts'] = $this->std_fonts;
 			}
+
+			$this->field['weights'] = $this->field['weights'] ?? $this->default_font_weights;
 
 			// Localize std fonts.
 			$this->localize_std_fonts();
@@ -368,7 +382,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			/* Font Style/Weight */
 			if ( true === $this->field['font-style'] || true === $this->field['font-weight'] ) {
-				echo '<div class="select_wrapper typography-style" original-title="' . esc_html__( 'Font style', 'redux-framework' ) . '">';
+				echo '<div data-weights="' . rawurlencode( wp_json_encode( $this->field['weights'] ) ) . '" class="select_wrapper typography-style" original-title="' . esc_html__( 'Font style', 'redux-framework' ) . '">';
 				echo '<label>' . esc_html__( 'Font Weight &amp; Style', 'redux-framework' ) . '</label>';
 
 				$style = $this->value['font-weight'] . $this->value['font-style'];
