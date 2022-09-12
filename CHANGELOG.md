@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.17.4
+* New: #3903 - Typography `weights` argument to override standard default weights.
+* Updated Extendify Library 0.10.1
+* 
 ## 4.3.17.3
 * Modified: Attempt to override old theme embedded extensions that use the 3.x loading method.
 * Updated: Font Awesome 6.2.0
