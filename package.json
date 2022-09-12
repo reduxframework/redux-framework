@@ -44,7 +44,7 @@
 		"lodash": "^4.17.21",
 		"merge-stream": "^2.0.0",
 		"node-gyp": "^8.4.1",
-		"node-sass": "^7.0.0",
+		"node-sass": "^7.0.3",
 		"npm-force-resolutions": "^0.0.10",
 		"optipng-bin": "^8.1.0"
 	},
