@@ -30,12 +30,6 @@ Redux::set_section(
 					'font-weight' => 'Normal',
 				),
 				'output'            => array( 'p' ),
-				'weights' => array(
-					'400'       => 'Normal 400',
-					'800'       => 'Bold 800',
-					'400italic' => 'Normal 400 Italic',
-					'800italic' => 'Bold 800 Italic',
-				),
 			),
 			array(
 				'id'          => 'opt-typography',
