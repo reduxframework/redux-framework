@@ -2,6 +2,7 @@
 
 ## 4.3.17.4
 * New: #3903 - Typography `weights` argument to override standard default weights.
+* Fixed: `slides` field not showing image upon select. Thanks @animeiswrong
 * Updated Extendify Library 0.10.1
 * 
 ## 4.3.17.3
