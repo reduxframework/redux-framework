@@ -4,9 +4,12 @@ import { devtools, persist } from 'zustand/middleware'
 const store = (set) => ({
     generating: false,
     orderId: null,
-    setOrderId(orderId) {
-        set({ orderId })
-    },
+    setOrderId: (orderId) => set({ orderId }),
+    exitModalOpen: false,
+    closeExitModal: () => set({ exitModalOpen: false }),
+    openExitModal: () => set({ exitModalOpen: true }),
+    hoveredOverExitButton: false,
+    setExitButtonHovered: () => set({ hoveredOverExitButton: true }),
 })
 const withDevtools = devtools(store, { name: 'Extendify Launch Globals' })
 const withPersist = persist(withDevtools, {

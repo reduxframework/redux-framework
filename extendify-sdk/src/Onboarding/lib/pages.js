@@ -79,7 +79,7 @@ const defaultPages = [
     ],
 ]
 
-const pages = defaultPages.filter(
+const pages = defaultPages?.filter(
     (pageKey) => !window.extOnbData?.partnerSkipSteps?.includes(pageKey[0]),
 )
 export { pages }

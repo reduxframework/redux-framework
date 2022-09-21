@@ -20,16 +20,21 @@ class Welcome
      */
     public function __construct()
     {
+        // Only load the scripts if they are using the standalong, or they have Launch.
         if (Config::$standalone || Config::$showOnboarding) {
-            if (!Config::$launchCompleted && Config::$environment !== 'DEVELOPMENT') {
-                \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
-            }
-
-            if (Config::$launchCompleted || Config::$environment === 'DEVELOPMENT') {
-                \add_action('admin_menu', [ $this, 'addAdminSubMenu' ], 15);
-            }
-
             $this->loadScripts();
+        }
+
+        // If they can see assist, show it as a submenu.
+        if (Config::$showAssist) {
+            \add_action('admin_menu', [ $this, 'addAdminSubMenu' ], 15);
+            return;
+        }
+
+        // If they aren't using Launch, then show the top level page.
+        if (!Config::$showOnboarding) {
+            \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
+            return;
         }
     }
 
@@ -91,6 +96,10 @@ class Welcome
                     <ul class="extendify-welcome-tabs">
                         <li><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-assist')); ?>">Assist</a></li>
                         <li class="active"><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-welcome')); ?>">Library</a></li>
+                        <?php if (Config::$showOnboarding) : ?>
+                            <li><a href="<?php echo \esc_url(\admin_url('post-new.php?extendify=onboarding')); ?>">Launch</a></li>
+                        <?php endif; ?>
+                        <li class="cta-button"><a href="<?php echo \esc_url_raw(\get_home_url()); ?>" target="_blank"><?php echo \esc_html(__('View Site', 'extendify')); ?></a></li>
                     </ul>
                 <?php endif; ?>
                 <div class="welcome-header">

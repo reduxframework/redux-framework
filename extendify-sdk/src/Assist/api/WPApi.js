@@ -1,3 +1,3 @@
 import { Axios as api } from './axios'
 
-export const getLaunchPages = () => api.get('assist/get-launch-pages')
+export const getLaunchPages = () => api.get('assist/launch-pages')

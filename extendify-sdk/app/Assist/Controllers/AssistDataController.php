@@ -18,25 +18,28 @@ class AssistDataController
     /**
      * Return pages created via Launch.
      *
-     * @return array
+     * @return \WP_REST_Response
      */
     public static function getLaunchPages()
     {
         $pages = \get_pages(['sort_column' => 'post_title']);
-        $newPages = [];
-
-        foreach ($pages as $page) {
+        $pages = array_filter($pages, function ($page) {
             $meta = \metadata_exists( 'post', $page->ID, 'made_with_extendify_launch' );
-            if ($meta === true) {
-                $page->permalink = \get_the_permalink($page->ID);
-                $path = \wp_parse_url($page->permalink)['path'];
-                $parseSiteUrl = \wp_parse_url(\get_site_url());
-                $page->url = $parseSiteUrl['scheme'] . '://' . $parseSiteUrl['host'] . $path;
-                $page->madeWithLaunch = true;
-                array_push($newPages, $page);
-            }
-        }
+            return $meta === true;
+        });
 
-        return $newPages;
+        $data = array_map(function ($page) {
+            $page->permalink = \get_the_permalink($page->ID);
+            $path = \wp_parse_url($page->permalink)['path'];
+            $parseSiteUrl = \wp_parse_url(\get_site_url());
+            $page->url = $parseSiteUrl['scheme'] . '://' . $parseSiteUrl['host'] . $path;
+            $page->madeWithLaunch = true;
+            return $page;
+        }, $pages);
+
+        return new \WP_REST_Response([
+            'success' => true,
+            'data' => array_values($data),
+        ]);
     }
 }

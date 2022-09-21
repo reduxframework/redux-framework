@@ -20,6 +20,7 @@ use Extendify\Onboarding\Controllers\DataController;
 use Extendify\Onboarding\Controllers\LibraryController;
 use Extendify\Onboarding\Controllers\WPController;
 use Extendify\Assist\Controllers\AssistDataController;
+use Extendify\Assist\Controllers\TasksController;
 
 \add_action(
     'rest_api_init',
@@ -63,9 +64,13 @@ use Extendify\Assist\Controllers\AssistDataController;
         ApiRouter::get('/onboarding/suggested-plugins', [DataController::class, 'getSuggestedPlugins']);
         ApiRouter::get('/onboarding/template', [DataController::class, 'getTemplate']);
         ApiRouter::post('/onboarding/create-order', [DataController::class, 'createOrder']);
+        ApiRouter::get('/onboarding/exit-questions', [DataController::class, 'exitQuestions']);
 
         // Assist.
-        ApiRouter::get('/assist/get-launch-pages', [AssistDataController::class, 'getLaunchPages']);
+        ApiRouter::get('/assist/launch-pages', [AssistDataController::class, 'getLaunchPages']);
+        ApiRouter::get('/assist/tasks', [TasksController::class, 'fetchTasks']);
+        ApiRouter::get('/assist/task-data', [TasksController::class, 'get']);
+        ApiRouter::post('/assist/task-data', [TasksController::class, 'store']);
 
         // TODO: consider merging this route into the library.
         ApiRouter::post('/library/site-type', [LibraryController::class, 'updateSiteType']);

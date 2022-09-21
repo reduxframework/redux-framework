@@ -33,6 +33,9 @@ class Admin
 
         self::$instance = $this;
         $this->loadScripts();
+        if (Config::$environment === 'PRODUCTION') {
+            $this->hideSubmenus();
+        }
     }
 
     /**
@@ -92,6 +95,27 @@ class Admin
                 );
             }
         );
+    }
+
+    /**
+     * Hide Extendify 'Welcome' and 'Assist' submenus on all admin pages.
+     *
+     * @return void
+     */
+    public function hideSubmenus()
+    {
+        add_action('admin_head', function () {
+            echo '<style>
+            #toplevel_page_extendify-assist .wp-submenu,
+            #toplevel_page_extendify-welcome .wp-submenu {
+                display:none!important;
+            }
+            #toplevel_page_extendify-assist::after,
+            #toplevel_page_extendify-welcome::after {
+                content:none!important;
+            }
+            </style>';
+        });
     }
 
 }

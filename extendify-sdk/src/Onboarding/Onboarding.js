@@ -8,6 +8,7 @@ import { CreatingSite } from '@onboarding/pages/CreatingSite'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { updateOption } from './api/WPApi'
+import { ExitModal } from './components/ExitModal'
 import { useSentry } from './hooks/useSentry'
 import { useTelemetry } from './hooks/useTelemetry'
 import { NeedsTheme } from './pages/NeedsTheme'
@@ -22,7 +23,7 @@ export const Onboarding = () => {
         state.nextPageData(),
     )
     const { mutate } = useSWRConfig()
-    const generating = useGlobalStore((state) => state.generating)
+    const { generating } = useGlobalStore()
     const [show, setShow] = useState(false)
     const [needsTheme, setNeedsTheme] = useState(false)
     const theme = useSelect((select) => select('core').getCurrentTheme())
@@ -115,6 +116,7 @@ export const Onboarding = () => {
                 {page()}
             </div>
             {retrying && <RetryNotice />}
+            <ExitModal />
         </SWRConfig>
     )
 }
