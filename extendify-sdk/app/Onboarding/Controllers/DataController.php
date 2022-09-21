@@ -24,7 +24,10 @@ class DataController
     public static function getSiteTypes()
     {
         $response = Http::get('/site-types');
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 
     /**
@@ -41,7 +44,10 @@ class DataController
             'siteType' => $siteType,
             'styles' => $styles,
         ]);
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
     /**
      * Get styles with code template.
@@ -57,7 +63,10 @@ class DataController
             wp_send_json_error(['message' => $response->get_error_message()], 400);
         }
 
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 
     /**
@@ -68,7 +77,10 @@ class DataController
     public static function getLayoutTypes()
     {
         $response = Http::get('/layout-types');
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 
     /**
@@ -79,7 +91,10 @@ class DataController
     public static function getGoals()
     {
         $response = Http::get('/goals');
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 
     /**
@@ -90,7 +105,10 @@ class DataController
     public static function getSuggestedPlugins()
     {
         $response = Http::get('/suggested-plugins');
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 
     /**
@@ -101,6 +119,23 @@ class DataController
     public static function createOrder()
     {
         $response = Http::post('/create-order');
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
+    }
+
+    /**
+     * Fetch exit questions
+     *
+     * @return \WP_REST_Response
+     */
+    public static function exitQuestions()
+    {
+        $response = Http::get('/exit-questions');
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 }

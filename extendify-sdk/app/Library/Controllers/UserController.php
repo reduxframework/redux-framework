@@ -75,7 +75,10 @@ class UserController
     public static function mailingList($request)
     {
         $response = Http::post('/register-mailing-list', $request->get_params());
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 
     /**
@@ -86,6 +89,9 @@ class UserController
     public static function maxImports()
     {
         $response = Http::get('/max-free-imports');
-        return new \WP_REST_Response($response);
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
     }
 }

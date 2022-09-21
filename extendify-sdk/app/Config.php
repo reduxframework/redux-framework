@@ -89,7 +89,7 @@ class Config
     public static $config = [];
 
     /**
-     * Plugin completed status
+     * Whether Launch was finished
      *
      * @var mixed
      */
@@ -136,7 +136,9 @@ class Config
 
         self::$environment = $isDev ? 'DEVELOPMENT' : 'PRODUCTION';
         self::$showOnboarding = $this->showOnboarding();
-        self::$showAssist = $isDev || self::$launchCompleted;
+
+        // If they can see onboarding, or they've completed it, they can see assist.
+        self::$showAssist = self::$launchCompleted || self::$showOnboarding;
 
         // Add the config.
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
@@ -163,11 +165,6 @@ class Config
 
         // Check if they disabled it and respect that.
         if (constant('EXTENDIFY_SHOW_ONBOARDING') === false) {
-            return false;
-        }
-
-        // time() will be truthy and 0 falsy.
-        if (get_option('extendify_onboarding_skipped', 0)) {
             return false;
         }
 

@@ -327,6 +327,18 @@
     border-bottom-color: #2271b1;
 }
 
+.extendify-outer-container .extendify-welcome-tabs li.cta-button {
+    margin-left: auto;
+}
+
+.extendify-outer-container .extendify-welcome-tabs li.cta-button a {
+    background: var(--ext-partner-theme-primary-bg, #2c39bd);
+    color: var(--ext-partner-theme-primary-text, #ffffff);
+    border-radius: 0.25rem;
+    margin: 5px;
+    padding: 10px 30px;
+}
+
 @media screen and (max-width: 782px) {
     .extendify-outer-container .welcome-section.has-2-columns.is-wider-right, .extendify-outer-container .welcome-section.has-2-columns.is-wider-left {
         display: block;

@@ -139,7 +139,7 @@ export const StylePreview = ({
         }
 
         const handleIn = () => {
-            if (!body.offsetHeight) return
+            if (!body?.offsetHeight) return
             const dynBlockHeight =
                 (blockRef?.current?.offsetHeight ?? blockHeight) - 32
             const bodyHeight =
@@ -151,7 +151,7 @@ export const StylePreview = ({
             })
         }
         const handleOut = () => {
-            if (!body.offsetHeight) return
+            if (!body?.offsetHeight) return
             const dynBlockHeight =
                 (blockRef?.current?.offsetHeight ?? blockHeight) - 32
             const bodyHeight = body.offsetHeight - dynBlockHeight / scale

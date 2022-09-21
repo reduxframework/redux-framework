@@ -20,6 +20,16 @@ class AdminPage
     public function __construct()
     {
         if (Config::$showAssist) {
+            \add_filter('wp_redirect', function ($url) {
+                // No nonce for _GET.
+                // phpcs:ignore WordPress.Security.NonceVerification
+                if (isset($_GET['extendify-launch-successful'])) {
+                    return \admin_url() . 'admin.php?page=extendify-assist';
+                }
+
+                return $url;
+            }, 9999);
+
             \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
             $this->loadScripts();
         }
@@ -69,10 +79,14 @@ class AdminPage
     {
         ?>
         <div class="extendify-outer-container">
-            <div class="wrap welcome-container">
+            <div class="wrap" style="max-width:1000px;margin:-16px auto 24px;">
                 <ul class="extendify-welcome-tabs">
                     <li class="active"><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-assist')); ?>">Assist</a></li>
                     <li><a href="<?php echo \esc_url(\admin_url('admin.php?page=extendify-welcome')); ?>">Library</a></li>
+                    <?php if (Config::$showOnboarding) : ?>
+                        <li><a href="<?php echo \esc_url(\admin_url('post-new.php?extendify=onboarding')); ?>">Launch</a></li>
+                    <?php endif; ?>
+                    <li class="cta-button"><a href="<?php echo \esc_url_raw(\get_home_url()); ?>" target="_blank"><?php echo \esc_html(__('View Site', 'extendify')); ?></a></li>
                 </ul>
                 <div id="extendify-assist-landing-page" class="extendify-assist"></div>
             </div>

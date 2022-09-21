@@ -37,3 +37,7 @@ export const getTemplate = (data) =>
     api.get('onboarding/template', { params: data })
 
 export const createOrder = () => api.post('onboarding/create-order')
+export const getExitQuestions = () =>
+    api.get('onboarding/exit-questions', {
+        timeout: 1500,
+    })

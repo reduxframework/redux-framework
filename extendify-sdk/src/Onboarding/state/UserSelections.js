@@ -8,6 +8,7 @@ const initialState = {
     },
     feedbackMissingSiteType: '',
     feedbackMissingGoal: '',
+    exitFeedback: undefined,
     siteTypeSearch: [],
     style: null,
     pages: [],
@@ -23,12 +24,11 @@ const store = (set, get) => ({
         const siteInformation = { ...get().siteInformation, [name]: value }
         set({ siteInformation })
     },
-    setFeedbackMissingSiteType(feedback) {
-        set({ feedbackMissingSiteType: feedback })
-    },
-    setFeedbackMissingGoal(feedback) {
-        set({ feedbackMissingGoal: feedback })
-    },
+    setFeedbackMissingSiteType: (feedbackMissingSiteType) =>
+        set({ feedbackMissingSiteType }),
+    setFeedbackMissingGoal: (feedbackMissingGoal) =>
+        set({ feedbackMissingGoal }),
+    setExitFeedback: (exitFeedback) => set({ exitFeedback }),
     has(type, item) {
         if (!item?.id) return false
         return get()[type].some((t) => t.id === item.id)
@@ -38,7 +38,7 @@ const store = (set, get) => ({
         set({ [type]: [...get()[type], item] })
     },
     remove(type, item) {
-        set({ [type]: get()[type].filter((t) => t.id !== item.id) })
+        set({ [type]: get()[type]?.filter((t) => t.id !== item.id) })
     },
     reset(type) {
         set({ [type]: [] })

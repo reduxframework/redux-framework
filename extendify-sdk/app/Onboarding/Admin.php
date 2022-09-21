@@ -97,15 +97,18 @@ class Admin
     public function addAdminMenu()
     {
         \add_action('admin_menu', function () {
-            if (Config::$environment === 'DEVELOPMENT' || Config::$showOnboarding) {
-                if (Config::$showAssist) {
-                    \add_submenu_page('extendify-assist', 'Assist', 'Assist', Config::$requiredCapability, 'extendify-assist', '', 300);
-                    \add_submenu_page('extendify-assist', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
-                } else {
-                    \add_submenu_page('extendify-welcome', \__('Welcome', 'extendify'), \__('Welcome', 'extendify'), Config::$requiredCapability, 'extendify-welcome', '', 400);
-                    \add_submenu_page('extendify-welcome', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
-                }
+            if (!Config::$showOnboarding) {
+                return;
             }
+
+            if (Config::$showAssist) {
+                \add_submenu_page('extendify-assist', 'Assist', 'Assist', Config::$requiredCapability, 'extendify-assist', '', 300);
+                \add_submenu_page('extendify-assist', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
+                return;
+            }
+
+            \add_submenu_page('extendify-welcome', \__('Welcome', 'extendify'), \__('Welcome', 'extendify'), Config::$requiredCapability, 'extendify-welcome', '', 400);
+            \add_submenu_page('extendify-welcome', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
         });
     }
 

@@ -56,13 +56,7 @@ class Http
         }
 
         // Some special cases for library development.
-        $this->baseUrl = $request->get_header('x_extendify_dev_mode') !== 'false' ? Config::$config['api']['dev'] : Config::$config['api']['live'];
-        $this->baseUrl = $request->get_header('x_extendify_local_mode') !== 'false' ? Config::$config['api']['local'] : $this->baseUrl;
-
-        // Onboarding request.
-        $this->baseUrl = $request->get_header('x_extendify_onboarding') === 'true' ? Config::$config['api']['onboarding'] : $this->baseUrl;
-        $this->baseUrl = $request->get_header('x_extendify_onboarding_dev_mode') === 'true' ? Config::$config['api']['onboarding-dev'] : $this->baseUrl;
-        $this->baseUrl = $request->get_header('x_extendify_onboarding_local_mode') === 'true' ? Config::$config['api']['onboarding-local'] : $this->baseUrl;
+        $this->baseUrl = $this->getBaseUrl($request);
 
         $this->data = [
             'wp_language' => \get_locale(),
@@ -162,5 +156,58 @@ class Http
         $r = self::$instance;
 
         return $r->$name(...$arguments);
+    }
+
+    /**
+     * Figure out the base URL to use.
+     *
+     * @param \WP_REST_Request $request - The request.
+     *
+     * @return string
+     */
+    public function getBaseUrl($request)
+    {
+        // Library Dev request.
+        if ($request->get_header('x_extendify_dev_mode') === 'true') {
+            return Config::$config['api']['dev'];
+        }
+
+        // Library Local request.
+        if ($request->get_header('x_extendify_local_mode') === 'true') {
+            return Config::$config['api']['local'];
+        }
+
+        // Onboarding dev request.
+        if ($request->get_header('x_extendify_onboarding_dev_mode') === 'true') {
+            return Config::$config['api']['onboarding-dev'];
+        }
+
+        // Onborarding local request.
+        if ($request->get_header('x_extendify_onboarding_local_mode') === 'true') {
+            return Config::$config['api']['onboarding-local'];
+        }
+
+        // Onboarding request.
+        if ($request->get_header('x_extendify_onboarding') === 'true') {
+            return Config::$config['api']['onboarding'];
+        }
+
+        // Assist dev request.
+        if ($request->get_header('x_extendify_assist_dev_mode') === 'true') {
+            return Config::$config['api']['assist-dev'];
+        }
+
+        // Assist local request.
+        if ($request->get_header('x_extendify_assist_local_mode') === 'true') {
+            return Config::$config['api']['assist-local'];
+        }
+
+        // Assist request.
+        if ($request->get_header('x_extendify_assist') === 'true') {
+            return Config::$config['api']['assist'];
+        }
+
+        // Normal Library request.
+        return Config::$config['api']['live'];
     }
 }

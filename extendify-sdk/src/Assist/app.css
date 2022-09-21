@@ -3,8 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.extendify-assist {
+    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: transparent;
+    --tw-ring-color: var(--ext-partner-theme-primary-bg, #2c39bd);
+}
+
 .extendify-assist *,
 .extendify-assist *:after,
 .extendify-assist *:before {
     box-sizing: border-box;
+}
+.hide-checkmark::before {
+    content: none;
 }

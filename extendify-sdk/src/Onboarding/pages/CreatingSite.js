@@ -142,7 +142,10 @@ export const CreatingSite = () => {
 
     useEffect(() => {
         doEverything().then(() => {
-            window.location.replace(window.extOnbData.home)
+            window.location.replace(
+                window.extOnbData.adminUrl +
+                    'admin.php?page=extendify-assist&extendify-launch-successful',
+            )
         })
     }, [doEverything])
 
