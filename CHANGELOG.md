@@ -1,23 +1,17 @@
 # Redux Changelog
 
-## 4.3.17.4
+## 4.3.18
 * New: #3903 - Typography `weights` argument to override standard default weights.
-* Fixed: `slides` field not showing image upon select. Thanks @animeiswrong
-* Updated Extendify Library 0.10.1
-* 
-## 4.3.17.3
-* Modified: Attempt to override old theme embedded extensions that use the 3.x loading method.
+* Updated Extendify Library 0.10.2
 * Updated: Font Awesome 6.2.0
-* Updated Extendify Library 0.9.5
-
-## 4.3.17.2
-* Removed: Social Profiles Widget (use the shortcode in HTML widget instead. See docs).
+* Modified: Attempt to override old theme embedded extensions that use the 3.x loading method.
 * Fixed: Social Profiles in metaboxes, hopefully.
-
-## 4.3.17.1
+* Fixed: `slides` field not showing image upon select. Thanks @animeiswrong
+* Removed: Social Profiles Widget (use the shortcode in HTML widget instead. See docs).
 * Removed: Redux template library (use Extendify template library instead).
 * Removed: Appsero registration for Redux Pro.
 * Modified: Cleanup of old or outdated code.
+* Release date: September 26, 2022
 
 ## 4.3.17
 * Added: Social Profiles extension. [https://devs.redux.io/core-extensions/social-profiles.html](https://devs.redux.io/core-extensions/social-profiles.html)

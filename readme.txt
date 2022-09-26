@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 6.1
-Stable tag: 4.3.17
+Stable tag: 4.3.18
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -105,6 +105,19 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.18 =
+* New: Typography `weights` argument to override standard default weights.
+* Updated Extendify Library 0.10.2
+* Updated: Font Awesome 6.2.0
+* Modified: Attempt to override old theme embedded extensions that use the 3.x loading method.
+* Fixed: Social Profiles in metaboxes, hopefully.
+* Fixed: `slides` field not showing image upon select. Thanks @animeiswrong
+* Removed: Social Profiles Widget (use the shortcode in HTML widget instead. See docs).
+* Removed: Redux template library (use Extendify template library instead).
+* Removed: Appsero registration for Redux Pro.
+* Modified: Cleanup of old or outdated code.
+* Release date: September 26, 2022
 
 = 4.3.17 =
 * Added: Social Profiles extension. [https://devs.redux.io/core-extensions/social-profiles.html](https://devs.redux.io/core-extensions/social-profiles.html)
