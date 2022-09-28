@@ -133,12 +133,12 @@ class Templates {
 	/**
 	 * Include the template
 	 *
-	 * @param string $template Template type.
+	 * @param string|null $template Template type.
 	 *
-	 * @return string
+	 * @return string|null
 	 * @since 4.0.0
 	 */
-	public function template_include( string $template ): string {
+	public function template_include( ?string $template ): ?string {
 		if ( is_singular() ) {
 			$page_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
 

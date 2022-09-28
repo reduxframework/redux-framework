@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.18.1
+* Fixed: #3909 - Blank page template would cause fatal error.
+
 ## 4.3.18
 * New: #3903 - Typography `weights` argument to override standard default weights.
 * Updated Extendify Library 0.10.2
