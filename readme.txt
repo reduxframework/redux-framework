@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 6.1
-Stable tag: 4.3.18
+Stable tag: 4.3.19
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -105,6 +105,10 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.19 =
+* Fixed: Extendify menu item appearing when it should not.
+* Fixed: Blank page template would cause fatal error.
 
 = 4.3.18 =
 * New: Typography `weights` argument to override standard default weights.

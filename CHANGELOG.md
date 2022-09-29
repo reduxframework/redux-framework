@@ -1,9 +1,7 @@
 # Redux Changelog
 
-## 4.3.18.2
+## 4.3.19
 * Fixed: Extendify menu item appearing when it should not.
-
-## 4.3.18.1
 * Fixed: #3909 - Blank page template would cause fatal error.
 
 ## 4.3.18
