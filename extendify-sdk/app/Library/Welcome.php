@@ -32,7 +32,7 @@ class Welcome
         }
 
         // If they aren't using Launch, then show the top level page.
-        if (!Config::$showOnboarding) {
+        if (!Config::$showOnboarding && Config::$standalone) {
             \add_action('admin_menu', [ $this, 'addAdminMenu' ]);
             return;
         }
