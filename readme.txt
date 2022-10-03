@@ -80,8 +80,6 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 <h4>🔐 Privacy</h4>
 Redux does not interact with end users on your website. Our templates will continue to work even if Redux is uninstalled. If a product is using Redux the option panel will cease to function without Redux.
 
-Redux utilizes [AppSero](https://appsero.com/) for account management as well as to enable our premium offerings. You can find their privacy policy here: [https://appsero.com/privacy-policy/](https://appsero.com/privacy-policy/). Activation of Redux is not necessary, but additional features such as Google Font Updates and increased access to the Gutenberg block template, layout, and pattern library will be limited.
-
 The Redux plugin uses a custom API to fetch our content library and our Gutenberg block templates, layouts, and patterns. To improve the service and stability we store logs which may or may not contain the following:
 <ul>
 <li>browser type</li>
@@ -91,7 +89,7 @@ The Redux plugin uses a custom API to fetch our content library and our Gutenber
 <li>anonymized IP address</li>
 </ul>
 
-API requests are only made when a user clicks on the Library button, launches the Redux Challenge, or opts into Google Font updates.
+API requests are only made when a user clicks on the Library button or opts into Google Font updates.
 
 For more details on our privacy policy: [https://redux.io/privacy](https://redux.io/privacy)
 For more details on our terms and conditions: [https://redux.io/terms](https://redux.io/terms)
