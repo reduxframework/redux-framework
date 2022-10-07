@@ -33,9 +33,6 @@ class Admin
 
         self::$instance = $this;
         $this->loadScripts();
-        if (Config::$environment === 'PRODUCTION') {
-            $this->hideSubmenus();
-        }
     }
 
     /**
@@ -73,6 +70,9 @@ class Admin
                     $version,
                     true
                 );
+
+                $assistState = get_option('extendify_assist_globals');
+                $dismissed = isset($assistState['state']['dismissedNotices']) ? $assistState['state']['dismissedNotices'] : [];
                 \wp_add_inline_script(
                     Config::$slug . '-assist-scripts',
                     'window.extAssistData = ' . wp_json_encode([
@@ -80,6 +80,9 @@ class Admin
                         'root' => \esc_url_raw(\rest_url(Config::$slug . '/' . Config::$apiVersion)),
                         'nonce' => \wp_create_nonce('wp_rest'),
                         'adminUrl' => \esc_url_raw(\admin_url()),
+                        'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
+                        'launchCompleted' => Config::$launchCompleted,
+                        'dismissedNotices' => $dismissed,
                     ]),
                     'before'
                 );
@@ -96,26 +99,4 @@ class Admin
             }
         );
     }
-
-    /**
-     * Hide Extendify 'Welcome' and 'Assist' submenus on all admin pages.
-     *
-     * @return void
-     */
-    public function hideSubmenus()
-    {
-        add_action('admin_head', function () {
-            echo '<style>
-            #toplevel_page_extendify-assist .wp-submenu,
-            #toplevel_page_extendify-welcome .wp-submenu {
-                display:none!important;
-            }
-            #toplevel_page_extendify-assist::after,
-            #toplevel_page_extendify-welcome::after {
-                content:none!important;
-            }
-            </style>';
-        });
-    }
-
 }

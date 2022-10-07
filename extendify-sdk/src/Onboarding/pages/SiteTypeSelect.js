@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from '@wordpress/element'
-import { __, sprintf } from '@wordpress/i18n'
+import { __ } from '@wordpress/i18n'
 import { mutate } from 'swr'
 import { getSiteTypes } from '@onboarding/api/DataApi'
 import { updateOption } from '@onboarding/api/WPApi'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { PageLayout } from '@onboarding/layouts/PageLayout'
+import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
 import { SearchIcon, LeftArrowIcon } from '@onboarding/svg'
@@ -25,15 +26,21 @@ export const state = pageState('Site Industry', (set, get) => ({
         get().default?.slug,
 }))
 export const SiteTypeSelect = () => {
+    const { nextPage } = usePagesStore()
     const siteType = useUserSelectionStore((state) => state.siteType)
     const feedback = useUserSelectionStore(
         (state) => state.feedbackMissingSiteType,
     )
-    const [visibleSiteTypes, setVisibleSiteTypes] = useState([])
     const [search, setSearch] = useState('')
-    const [showExamples, setShowExamples] = useState(true)
     const searchRef = useRef(null)
     const { data: siteTypes, loading } = useFetch(fetchData, fetcher)
+    const visibleSiteTypes = siteTypes?.filter((option) => {
+        const { title } = option
+        const searchTerm = search?.toLowerCase()
+        if (!searchTerm) return option?.featured
+        if (title.toLowerCase().indexOf(searchTerm) > -1) return true
+    })
+
     const showMissingInput = () =>
         window.extOnbData?.activeTests?.['remove-dont-see-inputs'] === 'A'
 
@@ -64,38 +71,6 @@ export const SiteTypeSelect = () => {
     }, [loading, siteType?.slug, siteTypes])
 
     useEffect(() => {
-        if (loading) return
-        if (search?.length > 0) {
-            if (!Array.isArray(siteTypes)) return
-            setVisibleSiteTypes(
-                siteTypes?.filter((option) => {
-                    const { title, keywords } = option
-                    const s = search?.toLowerCase()
-                    if (!s) return true
-                    if (title.toLowerCase().indexOf(s) > -1) return true
-                    if (!keywords?.length) return false
-                    return keywords.find(
-                        (value) => value.toLowerCase().indexOf(s) > -1,
-                    )
-                }),
-            )
-            return
-        }
-        // If search = '' then show the examples
-        setVisibleSiteTypes(siteTypes?.filter((i) => i?.featured))
-        setShowExamples(true)
-    }, [siteTypes, search, loading])
-
-    useEffect(() => {
-        if (loading) return
-        setVisibleSiteTypes(
-            showExamples
-                ? siteTypes?.filter((i) => i?.featured)
-                : siteTypes?.sort((a, b) => a.title.localeCompare(b.title)),
-        )
-    }, [siteTypes, showExamples, loading])
-
-    useEffect(() => {
         if (!search) return
         const timer = setTimeout(() => {
             useUserSelectionStore.setState({
@@ -116,6 +91,7 @@ export const SiteTypeSelect = () => {
             styles: optionValue.styles,
         })
         await updateOption('extendify_siteType', optionValue)
+        nextPage()
     }
 
     return (
@@ -133,26 +109,10 @@ export const SiteTypeSelect = () => {
             </div>
             <div className="w-full relative max-w-onboarding-sm mx-auto">
                 <div className="sticky bg-white top-10 z-40 pt-9 pb-3 mb-2">
-                    <div className="mx-auto flex justify-between mb-4">
+                    <div className="mb-4">
                         <h2 className="text-lg m-0 text-gray-900">
                             {__('What is your site about?', 'extendify')}
                         </h2>
-                        {search?.length > 0 ? null : (
-                            <button
-                                type="button"
-                                className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline cursor-pointer"
-                                onClick={() => {
-                                    setShowExamples((show) => !show)
-                                    searchRef.current?.focus()
-                                }}>
-                                {showExamples
-                                    ? sprintf(
-                                          __('Show all %s', 'extendify'),
-                                          loading ? '...' : siteTypes?.length,
-                                      )
-                                    : __('Show less', 'extendify')}
-                            </button>
-                        )}
                     </div>
                     <div className="mx-auto search-panel flex items-center justify-center relative mb-6">
                         <input
@@ -180,20 +140,8 @@ export const SiteTypeSelect = () => {
                 )}
                 {!loading && visibleSiteTypes?.length === 0 && (
                     <div className="mx-auto w-full">
-                        <div className="flex items-center justify-between uppercase">
+                        <div className="uppercase">
                             {__('No Results', 'extendify')}
-                            <button
-                                type="button"
-                                className="bg-transparent hover:text-partner-primary-bg p-0 text-partner-primary-bg text-xs underline cursor-pointer"
-                                onClick={() => {
-                                    setSearch('')
-                                    searchRef.current?.focus()
-                                }}>
-                                {sprintf(
-                                    __('Show all %s', 'extendify'),
-                                    loading ? '...' : siteTypes?.length,
-                                )}
-                            </button>
                         </div>
                         {showMissingInput() && (
                             <>

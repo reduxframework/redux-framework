@@ -20,7 +20,9 @@ use Extendify\Onboarding\Controllers\DataController;
 use Extendify\Onboarding\Controllers\LibraryController;
 use Extendify\Onboarding\Controllers\WPController;
 use Extendify\Assist\Controllers\AssistDataController;
+use Extendify\Assist\Controllers\GlobalsController;
 use Extendify\Assist\Controllers\TasksController;
+use Extendify\Assist\Controllers\UserSelectionController;
 
 \add_action(
     'rest_api_init',
@@ -71,6 +73,10 @@ use Extendify\Assist\Controllers\TasksController;
         ApiRouter::get('/assist/tasks', [TasksController::class, 'fetchTasks']);
         ApiRouter::get('/assist/task-data', [TasksController::class, 'get']);
         ApiRouter::post('/assist/task-data', [TasksController::class, 'store']);
+        ApiRouter::get('/assist/global-data', [GlobalsController::class, 'get']);
+        ApiRouter::post('/assist/global-data', [GlobalsController::class, 'store']);
+        ApiRouter::get('/assist/user-selection-data', [UserSelectionController::class, 'get']);
+        ApiRouter::post('/assist/user-selection-data', [UserSelectionController::class, 'store']);
 
         // TODO: consider merging this route into the library.
         ApiRouter::post('/library/site-type', [LibraryController::class, 'updateSiteType']);

@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
 import { Dialog } from '@headlessui/react'
 import classNames from 'classnames'
+import { shuffle } from 'lodash'
 import { getExitQuestions } from '@onboarding/api/DataApi'
 import { updateOption } from '@onboarding/api/WPApi'
 import { useGlobalStore } from '@onboarding/state/Global'
@@ -34,20 +35,19 @@ export const ExitModal = () => {
                 if (!Array.isArray(data) || !data[0]?.key) {
                     throw new Error('Invalid data')
                 }
-                setOptions(data)
-            })
-            .catch(() =>
                 setOptions([
+                    ...shuffle(data.filter((d) => d.key !== 'Other')),
+                    { key: 'Other', label: __('Other', 'extendify') },
+                ])
+            })
+            .catch(() => {
+                const backupQuestions = [
                     {
                         key: 'I still want it, just disabling temporary',
                         label: __(
                             'I still want it, just disabling temporary',
                             'extendify',
                         ),
-                    },
-                    {
-                        key: "I don't really need it",
-                        label: __("I don't really need it", 'extendify'),
                     },
                     {
                         key: 'I plan on using my own theme or builder',
@@ -63,9 +63,12 @@ export const ExitModal = () => {
                             'extendify',
                         ),
                     },
+                ]
+                setOptions([
+                    ...shuffle(backupQuestions),
                     { key: 'Other', label: __('Other', 'extendify') },
-                ]),
-            )
+                ])
+            })
             .finally(() => {
                 initialFocus.current?.focus()
             })
@@ -116,7 +119,11 @@ export const ExitModal = () => {
                                 slug={key}
                                 label={label}
                                 value={value}
-                                setValue={(v) => setValue(v)}
+                                setValue={(v) =>
+                                    setValue((previousValue) =>
+                                        previousValue === v ? null : v,
+                                    )
+                                }
                             />
                         ))}
                     </div>

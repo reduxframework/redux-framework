@@ -22,7 +22,11 @@ export const PagePreview = ({
         {
             siteType: siteType.slug,
             layoutType: page.slug,
-            baseLayout: isHome ? style?.homeBaseLayout : null,
+            baseLayout: isHome
+                ? siteType.slug.startsWith('blog')
+                    ? style?.blogBaseLayout
+                    : style?.homeBaseLayout
+                : null,
             kit: page.slug !== 'home' ? style?.kit : null,
         },
         fetcher,

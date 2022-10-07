@@ -50,7 +50,7 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
     useEffect(() => {
         setFuzzy(
             new Fuse(terms, {
-                keys: ['slug', 'title', 'keywords'],
+                keys: ['slug', 'title'],
                 minMatchCharLength: 1,
                 threshold: 0.3,
             }),
@@ -139,39 +139,6 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
         )
     }
 
-    const choicesList = (choices) => {
-        return (
-            <>
-                <ul className="mt-4 mb-0">
-                    {choices.map((item) => {
-                        const label = item?.title ?? item.slug
-                        const current =
-                            searchParams?.taxonomies?.siteType?.slug ===
-                            item.slug
-                        return (
-                            <li
-                                key={item.slug + item?.title}
-                                className="m-0 mb-1">
-                                <button
-                                    type="button"
-                                    className={classNames(
-                                        'm-0 w-full cursor-pointer bg-transparent pl-0 text-left text-sm font-normal hover:text-wp-theme-500',
-                                        { 'text-gray-800': !current },
-                                    )}
-                                    onClick={() => {
-                                        setExpanded(false)
-                                        setValue(item)
-                                    }}>
-                                    {label}
-                                </button>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </>
-        )
-    }
-
     return (
         <div className="w-full rounded bg-gray-50 border border-gray-900">
             <button
@@ -223,7 +190,18 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
                         </p>
                     )}
                     {visibleChoices?.length > 0 && (
-                        <div>{choicesList(visibleChoices)}</div>
+                        <div>
+                            <ChoicesList
+                                choices={visibleChoices}
+                                onClick={(item) => {
+                                    setExpanded(false)
+                                    setValue(item)
+                                }}
+                                currentSiteType={
+                                    searchParams?.taxonomies?.siteType?.slug
+                                }
+                            />
+                        </div>
                     )}
                 </div>
             )}
@@ -240,3 +218,25 @@ export const SiteTypeSelector = ({ value, setValue, terms }) => {
         </div>
     )
 }
+
+const ChoicesList = ({ choices, currentSiteType, onClick }) => (
+    <ul className="mt-4 mb-0">
+        {choices.map((item) => {
+            const label = item?.title ?? item.slug
+            const current = currentSiteType === item.slug
+            return (
+                <li key={item.id} className="m-0 mb-1">
+                    <button
+                        type="button"
+                        className={classNames(
+                            'm-0 w-full cursor-pointer bg-transparent pl-0 text-left text-sm font-normal hover:text-wp-theme-500',
+                            { 'text-gray-800': !current },
+                        )}
+                        onClick={() => onClick(item)}>
+                        {label}
+                    </button>
+                </li>
+            )
+        })}
+    </ul>
+)

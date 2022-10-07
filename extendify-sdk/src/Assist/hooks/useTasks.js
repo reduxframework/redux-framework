@@ -1,5 +1,5 @@
 import useSWRImmutable from 'swr/immutable'
-import { getTasks } from '@assist/api/Tasks'
+import { getTasks } from '@assist/api/Data'
 
 export const useTasks = () => {
     const { data: tasks, error } = useSWRImmutable('tasks', async () => {

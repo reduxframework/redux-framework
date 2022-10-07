@@ -91,9 +91,9 @@ class Config
     /**
      * Whether Launch was finished
      *
-     * @var mixed
+     * @var boolean
      */
-    public static $launchCompleted = 0;
+    public static $launchCompleted = false;
 
     /**
      * Process the readme file to get version and name
@@ -102,8 +102,6 @@ class Config
      */
     public function __construct()
     {
-        self::$launchCompleted = get_option('extendify_onboarding_completed', 0);
-
         if (isset($GLOBALS['extendify_sdk_partner']) && $GLOBALS['extendify_sdk_partner']) {
             self::$sdkPartner = $GLOBALS['extendify_sdk_partner'];
         }
@@ -131,13 +129,16 @@ class Config
         preg_match('/Stable tag: ([0-9.:]+)/', $readme, $matches);
         self::$version = $matches[1];
 
+        if (!get_option('extendify_first_installed_version')) {
+            update_option('extendify_first_installed_version', self::$version);
+        }
+
         // An easy way to check if we are in dev mode is to look for a dev specific file.
         $isDev = is_readable(EXTENDIFY_PATH . 'public/build/.devbuild');
 
         self::$environment = $isDev ? 'DEVELOPMENT' : 'PRODUCTION';
+        self::$launchCompleted = (bool) get_option('extendify_onboarding_completed') || $isDev;
         self::$showOnboarding = $this->showOnboarding();
-
-        // If they can see onboarding, or they've completed it, they can see assist.
         self::$showAssist = self::$launchCompleted || self::$showOnboarding;
 
         // Add the config.
@@ -168,7 +169,6 @@ class Config
             return false;
         }
 
-        // time() will be truthy and 0 falsy, so we reverse it.
-        return !self::$launchCompleted;
+        return true;
     }
 }

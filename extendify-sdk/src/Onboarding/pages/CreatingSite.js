@@ -124,7 +124,9 @@ export const CreatingSite = () => {
             2000,
             { dryRun: dryRun.current },
         )
-
+        if (!dryRun.current) {
+            await updateOption('permalink_structure', '/%postname%/')
+        }
         inform(__('Your site has been created!', 'extendify'))
         informDesc(__('Redirecting in 3, 2, 1...', 'extendify'))
         // fire confetti here
@@ -144,7 +146,7 @@ export const CreatingSite = () => {
         doEverything().then(() => {
             window.location.replace(
                 window.extOnbData.adminUrl +
-                    'admin.php?page=extendify-assist&extendify-launch-successful',
+                    'admin.php?page=extendify-assist&extendify-launch-success',
             )
         })
     }, [doEverything])

@@ -12,16 +12,19 @@ import { ExitModal } from './components/ExitModal'
 import { useSentry } from './hooks/useSentry'
 import { useTelemetry } from './hooks/useTelemetry'
 import { NeedsTheme } from './pages/NeedsTheme'
+import { useUserSelectionStore } from './state/UserSelections'
 
 export const Onboarding = () => {
     const [retrying, setRetrying] = useState(false)
+    const { siteType } = useUserSelectionStore()
     const CurrentPage = usePagesStore((state) => {
-        const pageData = state.currentPageData()
+        const pageData = state.getCurrentPageData()
         return pageData?.component
     })
     const { fetcher, fetchData } = usePagesStore((state) =>
-        state.nextPageData(),
+        state.getNextPageData(),
     )
+    const { setPage, currentPageIndex } = usePagesStore()
     const { mutate } = useSWRConfig()
     const { generating } = useGlobalStore()
     const [show, setShow] = useState(false)
@@ -34,6 +37,11 @@ export const Onboarding = () => {
 
     const page = () => {
         if (needsTheme) return <NeedsTheme />
+        // Site type is required to progress
+        if (!siteType?.slug && currentPageIndex !== 0) {
+            setPage(0)
+            return null
+        }
         if (generating) return <CreatingSite />
         if (!CurrentPage) return null
         return <CurrentPage />

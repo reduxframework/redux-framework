@@ -38,7 +38,6 @@ class Admin
 
         self::$instance = $this;
         $this->loadScripts();
-        $this->addAdminMenu();
         $this->redirectOnce();
         $this->addMetaField();
     }
@@ -89,28 +88,6 @@ class Admin
         );
     }
 
-    /**
-     * Adds settings menu
-     *
-     * @return void
-     */
-    public function addAdminMenu()
-    {
-        \add_action('admin_menu', function () {
-            if (!Config::$showOnboarding) {
-                return;
-            }
-
-            if (Config::$showAssist) {
-                \add_submenu_page('extendify-assist', 'Assist', 'Assist', Config::$requiredCapability, 'extendify-assist', '', 300);
-                \add_submenu_page('extendify-assist', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
-                return;
-            }
-
-            \add_submenu_page('extendify-welcome', \__('Welcome', 'extendify'), \__('Welcome', 'extendify'), Config::$requiredCapability, 'extendify-welcome', '', 400);
-            \add_submenu_page('extendify-welcome', 'Launch', 'Launch', Config::$requiredCapability, 'post-new.php?extendify=onboarding', '', 500);
-        });
-    }
 
     /**
      * Redirect once to Launch, only once (at least once) when
@@ -183,7 +160,7 @@ class Admin
                 $return['bgColor'] = $data['backgroundColor'];
                 $return['fgColor'] = $data['foregroundColor'];
                 // Need this check to avoid errors if no partner logo is set in Airtable.
-                $return['logo'] = $data['logo'] ? $data['logo'][0]['thumbnails']['small']['url'] : null;
+                $return['logo'] = $data['logo'] ? $data['logo'][0]['thumbnails']['large']['url'] : null;
             }
         } catch (\Exception $e) {
             // Do nothing here, set variables below. Coding Standards require something to be in the catch.

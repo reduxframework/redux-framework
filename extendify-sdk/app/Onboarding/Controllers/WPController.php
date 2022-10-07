@@ -44,6 +44,7 @@ class WPController
     {
         $params = $request->get_json_params();
         \update_option($params['option'], $params['value']);
+
         return new \WP_REST_Response(['success' => true]);
     }
 
