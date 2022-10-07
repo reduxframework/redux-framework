@@ -1,15 +1,27 @@
 import { ExternalLink, Spinner } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
+import { __, _n, sprintf } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { Checkmark } from '@onboarding/svg'
 import { useTasks } from '@assist/hooks/useTasks'
+import {
+    useSelectionStore,
+    useSelectionStoreReady,
+} from '@assist/state/Selections'
 import { useTasksStoreReady, useTasksStore } from '@assist/state/Tasks'
 
 export const TasksList = () => {
+    const { isCompleted } = useTasksStore()
     const { tasks, loading, error } = useTasks()
-    const ready = useTasksStoreReady()
+    const readyTasks = useTasksStoreReady()
+    const readyPlugins = useSelectionStoreReady()
+    const pluginBasedGoals = useSelectionStore((state) =>
+        state.plugins?.reduce(
+            (acc, plugin) => [...acc, ...(plugin?.goals ?? [])],
+            [],
+        ),
+    )
 
-    if (loading || !ready || error) {
+    if (loading || !readyTasks || !readyPlugins || error) {
         return (
             <div className="my-4 w-full flex items-center max-w-3/4 mx-auto bg-gray-100 p-12">
                 <Spinner />
@@ -25,18 +37,42 @@ export const TasksList = () => {
         )
     }
 
+    // Filter out tasks that have goal dependencies that don't match the user's goals
+    const tasksFiltered = tasks.filter((task) => {
+        // If no goals, show the task
+        if (!task?.goals?.length) return true
+        // Check if task.goals intersect with pluginBasedGoals
+        return task?.goals?.some((goal) => pluginBasedGoals.includes(goal))
+    })
+    const remainingTasks = tasksFiltered?.reduce(
+        (count, task) => count - Number(isCompleted(task.slug)),
+        tasksFiltered.length,
+    )
+
     return (
-        <div className="my-4 max-w-3/4 w-full mx-auto bg-gray-100 p-12">
-            <div className="flex gap-2 items-center justify-center">
-                <h2 className="mb-0 text-lg text-center">
+        <div className="my-4 max-w-3/4 w-full mx-auto bg-gray-100 p-12 pt-10">
+            <div className="mb-6 flex gap-2 items-center justify-center">
+                <h2 className="my-0 text-lg text-center">
                     {__('Get ready to go live', 'extendify')}
                 </h2>
-                <span className="rounded-full bg-gray-700 text-white text-base px-3 py-0.5">
-                    {tasks.length}
-                </span>
+                {remainingTasks > 0 && (
+                    <span
+                        title={sprintf(
+                            _n(
+                                '%s task remaining',
+                                '%s tasks remaining',
+                                remainingTasks,
+                                'extendify',
+                            ),
+                            remainingTasks,
+                        )}
+                        className="rounded-full bg-gray-700 text-white text-base px-2 py-0 cursor-default">
+                        {remainingTasks}
+                    </span>
+                )}
             </div>
             <div className="w-full">
-                {tasks.map((task) => (
+                {tasksFiltered.map((task) => (
                     <TaskCheckBox key={task.slug} task={task} />
                 ))}
             </div>

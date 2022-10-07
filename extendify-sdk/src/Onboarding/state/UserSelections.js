@@ -15,7 +15,7 @@ const initialState = {
     plugins: [],
     goals: [],
 }
-const store = (set, get) => ({
+const state = (set, get) => ({
     ...initialState,
     setSiteType(siteType) {
         set({ siteType })
@@ -66,24 +66,10 @@ const store = (set, get) => ({
     },
 })
 
-const withDevtools = devtools(store, {
-    name: 'Extendify Launch User Selection',
-})
-const withPersist = persist(withDevtools, {
-    name: 'extendify-site-selection',
-    getStorage: () => localStorage,
-    partialize: (state) => ({
-        siteType: state?.siteType ?? {},
-        siteInformation: state?.siteInformation ?? {},
-        feedbackMissingSiteType: state?.feedbackMissingSiteType ?? '',
-        feedbackMissingGoal: state?.feedbackMissingGoal ?? '',
-        siteTypeSearch: state?.siteTypeSearch ?? [],
-        style: state?.style ?? null,
-        pages: state?.pages ?? [],
-        plugins: state?.plugins ?? [],
-        goals: state?.goals ?? [],
+export const useUserSelectionStore = create(
+    persist(devtools(state, { name: 'Extendify User Selection' }), {
+        name: 'extendify-site-selection',
+        getStorage: () => localStorage,
     }),
-})
-export const useUserSelectionStore = window?.extOnbData?.devbuild
-    ? create(withDevtools)
-    : create(withPersist)
+    state,
+)

@@ -10,7 +10,7 @@ export const CheckboxInputCard = ({
 }) => {
     return (
         <label
-            className="w-full flex items-center justify-between hover:text-partner-primary-bg focus-within:text-partner-primary-bg font-semibold p-4"
+            className="w-full flex items-center justify-between text-gray-900 font-semibold p-4"
             htmlFor={slug}>
             <div className="flex items-center flex-auto">
                 <span className="mt-0.5 w-6 h-6 relative inline-block mr-3 align-middle">

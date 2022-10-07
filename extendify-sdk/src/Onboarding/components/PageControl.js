@@ -16,7 +16,7 @@ export const PageControl = () => {
             {onFirstPage && (
                 <div className="fixed top-0 right-0 px-3 md:px-6 py-2">
                     <button
-                        className="flex items-center p-1 text-partner-primary-bg font-medium button-focus md:focus:bg-transparent bg-transparent shadow-none"
+                        className="flex items-center p-1 text-gray-900 font-medium button-focus md:focus:bg-transparent bg-transparent shadow-none"
                         type="button"
                         title={__('Exit Launch', 'extendify')}
                         onMouseEnter={setExitButtonHovered}
@@ -32,7 +32,7 @@ export const PageControl = () => {
                 })}>
                 {onFirstPage || (
                     <button
-                        className="flex items-center px-4 py-3 text-partner-primary-bg font-medium button-focus bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 bg-transparent"
+                        className="flex items-center px-4 py-3 font-medium button-focus text-gray-900 bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 bg-transparent"
                         type="button"
                         onClick={previousPage}>
                         <RightArrowIcon className="h-5 w-5" />
@@ -41,7 +41,7 @@ export const PageControl = () => {
                 )}
                 {onFirstPage && (
                     <button
-                        className="flex items-center px-4 py-3 text-partner-primary-bg font-medium button-focus bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 bg-transparent"
+                        className="flex items-center px-4 py-3 font-medium button-focus text-gray-900 bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 bg-transparent"
                         type="button"
                         onMouseEnter={setExitButtonHovered}
                         onClick={openExitModal}>

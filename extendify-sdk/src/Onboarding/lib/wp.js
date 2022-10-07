@@ -13,7 +13,12 @@ export const createWordpressPages = async (pages, siteType, style) => {
         const template = await getTemplate({
             siteType: siteType.slug,
             layoutType: page.slug,
-            baseLayout: page.slug === 'home' ? style?.homeBaseLayout : null,
+            baseLayout:
+                page.slug === 'home'
+                    ? siteType.slug.startsWith('blog')
+                        ? style?.blogBaseLayout
+                        : style?.homeBaseLayout
+                    : null,
             kit: page.slug !== 'home' ? style?.kit : null,
         })
         let content = ''
