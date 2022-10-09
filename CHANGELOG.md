@@ -2,6 +2,7 @@
 
 ## 4.3.19.1
 * Fixed: JS error when `typography` `font-style` set to `false`.
+* Updated: Extendify Library 0.11.1
 
 ## 4.3.19
 * Fixed: Extendify menu item appearing when it should not.
