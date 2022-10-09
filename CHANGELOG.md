@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.19.1
+* Fixed: JS error when `typography` `font-style` set to `false`.
+
 ## 4.3.19
 * Fixed: Extendify menu item appearing when it should not.
 * Fixed: #3909 - Blank page template would cause fatal error.
