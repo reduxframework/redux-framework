@@ -566,7 +566,9 @@
 		weights      = that.find( '.typography-style' );
 		baseUnits    = that.data( 'units' );
 
-		defaultFontWeights = JSON.parse( decodeURIComponent( weights.data( 'weights' ) ) );
+		if ( weights.length > 0 ) {
+			defaultFontWeights = JSON.parse( decodeURIComponent( weights.data( 'weights' ) ) );
+		}
 
 		// Is selected font a Google font?
 		if ( true === isSelecting ) {
