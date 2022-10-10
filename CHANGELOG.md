@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.19.2
+* Added: Widget Areas extension (for use with Classic Widgets only).
+
 ## 4.3.19.1
 * Fixed: JS error when `typography` `font-style` set to `false`.
 * Updated: Extendify Library 0.11.1
