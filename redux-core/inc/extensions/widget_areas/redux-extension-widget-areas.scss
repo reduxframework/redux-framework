@@ -1,0 +1,107 @@
+#widget_area-redux-custom,
+#widget_area-redux-custom h3 {
+    position: relative;
+}
+
+#redux-add-widget {
+    margin: 10px 0 0;
+    position: relative;
+
+    p {
+        margin-top: 0;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    h3 {
+        text-align: center !important;
+        padding: 15px 7px;
+        font-size: 1.3em;
+        margin-top: 5px;
+    }
+}
+
+.redux-widget_area-delete {
+    position: absolute;
+    top: 0;
+    right: 35px;
+    padding: 12px 10px;
+    cursor: pointer;
+
+    &:before {
+        font-family: "dashicons";
+        content: "\f182";
+        font: 400 20px/1 dashicons;
+        speak: none;
+        display: inline-block;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-decoration: none !important;
+        color: #aaa;
+    }
+
+    &:hover:before {
+        color: #888;
+    }
+}
+
+.activate_spinner {
+    display: block !important;
+    position: absolute;
+    top: 10px;
+    right: 4px;
+    background-color: #ECECEC;
+}
+
+#redux-add-widget-input {
+    max-width: 95%;
+    padding: 8px;
+    margin-bottom: 14px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+div#widgets-right {
+    .sidebar-redux-custom {
+        .widgets-sortables {
+            padding-bottom: 45px;
+        }
+        &.closed .widgets-sortables {
+            padding-bottom: 0;
+            .redux-widget-area-edit {
+                display: none;
+            }
+        }
+    }
+}
+
+.redux-widget-area-edit {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    border-top: 1px solid #eee;
+
+    .redux-widget-area-delete {
+        display: block;
+        float: right;
+        margin: 11px 8px 0 0!important;
+    }
+
+    .redux-widget-area-delete-confirm {
+        display: none;
+        float: right;
+        margin: 11px 8px 0 0!important;
+    }
+
+    .redux-widget-area-delete-cancel {
+        display: none;
+        float: right;
+        margin: 11px 8px 0 0!important;
+    }
+}

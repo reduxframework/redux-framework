@@ -31,6 +31,16 @@ if ( ! class_exists( 'Redux_ThirdParty_Fixes', false ) ) {
 			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/repeater', array( $this, 'repeater_extension_override' ), 10, 1 );
 			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/metaboxes', array( $this, 'metaboxes_extension_override' ), 10, 1 );
 			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/social_profiles', array( $this, 'social_profiles_extension_override' ), 10, 1 );
+			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/widget_areas', array( $this, 'widget_areas_extension_override' ), 10, 1 );
+		}
+
+		/**
+		 * Widget Area extension override.
+		 *
+		 * @return string
+		 */
+		public function widget_areas_extension_override(): string {
+			return Redux_core::$dir . 'inc/extensions/widget_areas/class-redux-extension-widget-areas.php';
 		}
 
 		/**
