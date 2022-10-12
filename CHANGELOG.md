@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.19.3
+* Fixed: #3913 - `required` not working outside a `repeater` when `repeater` field is loaded somewhere in the project.
+
 ## 4.3.19.2
 * Added: Widget Areas extension (for use with Classic Widgets only).
 
