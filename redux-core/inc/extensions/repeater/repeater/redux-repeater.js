@@ -493,6 +493,10 @@
 
 					fieldset = $( '[id^=' + reduxObj.args.opt_name + '-' + i + ']' );
 
+					if ( ! fieldset.children().hasClass( 'in-repeater' ) ) {
+						return;
+					}
+
 					fieldset.addClass( 'fold' );
 
 					if ( 'hide' === v ) {
