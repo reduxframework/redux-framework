@@ -148,7 +148,6 @@ jQuery.uaMatch = function( ua ) {
 				var upButton;
 				var downButton;
 				var buttons;
-				var icons;
 				var hoverDelay;
 				var hoverDelayCallback;
 				var hovered;
@@ -178,8 +177,8 @@ jQuery.uaMatch = function( ua ) {
 						input = _this.element[0];
 						dir   = upButton === this ? 1 : - 1;
 
-						input.trigger( 'focus' );
-						input.trigger( 'select' );
+						input.focus;
+						input.select;
 
 						$( this ).addClass( active );
 
@@ -225,11 +224,7 @@ jQuery.uaMatch = function( ua ) {
 						return false;
 					}
 
-					if ( _this.places > 0 && ch === options.point || ch === options.group ) {
-						return false;
-					}
-
-					return true;
+					return ! ( _this.places > 0 && ch === options.point || ch === options.group );
 				}
 
 				function isSpecialKey( keyCode ) {
@@ -283,7 +278,6 @@ jQuery.uaMatch = function( ua ) {
 
 				upButton   = buttons[0];
 				downButton = buttons[1];
-				icons      = buttons.find( '.ui-icon' );
 
 				btnContainer.width( '135px' );
 
