@@ -236,7 +236,7 @@ class Shared
         }//end if
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-        $content = file_get_contents(EXTENDIFY_PATH . 'public/build/extendify-utilities.css');
+        $content = file_get_contents(EXTENDIFY_PATH . 'public/extendify-utilities.css');
         $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
         \wp_register_style(Config::$slug . '-utilities', false, [], $version);
         \wp_enqueue_style(Config::$slug . '-utilities');

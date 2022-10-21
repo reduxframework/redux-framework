@@ -130,7 +130,7 @@ export const Goals = () => {
                                             },
                                         )}
                                         style={{ opacity: '0.04' }}></div>
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex items-center gap-4 h-full">
                                         <CheckboxInputCard
                                             label={goal.title}
                                             slug={`goal-${goal.slug}`}

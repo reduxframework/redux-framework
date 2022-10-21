@@ -49,10 +49,13 @@ export const useTelemetry = () => {
     }, [selectedStyle])
 
     useEffect(() => {
+        // For now, don't send on devbuilds. Later we can better isolate these
+        if (window.extOnbData?.devbuild) return
         let mode = 'onboarding'
         const search = window.location?.search
         mode = search?.indexOf('DEVMODE') > -1 ? 'onboarding-dev' : mode
         mode = search?.indexOf('LOCALMODE') > -1 ? 'onboarding-local' : mode
+
         setUrl(window?.extOnbData?.config?.api[mode])
     }, [])
 

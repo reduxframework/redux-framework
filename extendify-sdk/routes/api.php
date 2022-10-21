@@ -23,6 +23,7 @@ use Extendify\Assist\Controllers\AssistDataController;
 use Extendify\Assist\Controllers\GlobalsController;
 use Extendify\Assist\Controllers\TasksController;
 use Extendify\Assist\Controllers\UserSelectionController;
+use Extendify\Assist\Controllers\WPController as AssistWPController;
 
 \add_action(
     'rest_api_init',
@@ -69,6 +70,8 @@ use Extendify\Assist\Controllers\UserSelectionController;
         ApiRouter::get('/onboarding/exit-questions', [DataController::class, 'exitQuestions']);
 
         // Assist.
+        ApiRouter::post('/assist/options', [AssistWPController::class, 'updateOption']);
+        ApiRouter::get('/assist/options', [AssistWPController::class, 'getOption']);
         ApiRouter::get('/assist/launch-pages', [AssistDataController::class, 'getLaunchPages']);
         ApiRouter::get('/assist/tasks', [TasksController::class, 'fetchTasks']);
         ApiRouter::get('/assist/task-data', [TasksController::class, 'get']);

@@ -137,6 +137,8 @@ export const StylePreview = ({
             body.style.transitionProperty = 'all'
             body.style.top = 0
         }
+        // Remove load-styles in case WP laods them
+        body.querySelector('[href*=load-styles]')?.remove()
 
         const handleIn = () => {
             if (!body?.offsetHeight) return

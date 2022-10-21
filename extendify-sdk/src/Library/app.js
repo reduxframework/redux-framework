@@ -6,6 +6,7 @@ import '@library/buttons'
 import '@library/listeners'
 import { useWantedTemplateStore } from '@library/state/Importing'
 import { injectTemplateBlocks } from '@library/util/templateInjection'
+import './app.css'
 
 window?.wp?.domReady(() => {
     // Insert into the editor (note: Modal opens in a portal)

@@ -5,31 +5,61 @@ import { getTaskData, saveTaskData } from '../api/Data'
 
 const state = (set, get) => ({
     // These are tests the user is in progress of completing.
+    // Not to be confused with tasks that are in progress.
     activeTests: [],
-    // these are tasks the user has already completed
+    // These are tasks that the user has seen. When added,
+    // they will look like [{ key, firstSeenAt }]
+    seenTasks: [],
+    // These are tasks the user has already completed
+    // [{ key, completedAt }] but it used to just be [key]
+    // so use ?.completedAt to check if it's completed with the (.?)
     completedTasks: [],
-    isCompleted(task) {
-        return get().completedTasks.includes(task)
+    inProgressTasks: [],
+    isCompleted(taskId) {
+        return get().completedTasks.some((task) => task?.id === taskId)
     },
-    completeTask(task) {
-        if (get().isCompleted(task)) {
+    completeTask(taskId) {
+        if (get().isCompleted(taskId)) {
             return
         }
         set((state) => ({
-            completedTasks: [...state.completedTasks, task],
+            completedTasks: [
+                ...state.completedTasks,
+                {
+                    id: taskId,
+                    completedAt: new Date().toISOString(),
+                },
+            ],
         }))
     },
-    uncompleteTask(task) {
-        set((state) => ({
-            completedTasks: state.completedTasks.filter((t) => t !== task),
-        }))
+    isSeen(taskId) {
+        return get().seenTasks.some((task) => task?.id === taskId)
     },
-    toggleCompleted(task) {
-        if (get().isCompleted(task)) {
-            get().uncompleteTask(task)
+    seeTask(taskId) {
+        if (get().isSeen(taskId)) {
             return
         }
-        get().completeTask(task)
+        const task = {
+            id: taskId,
+            firstSeenAt: new Date().toISOString(),
+        }
+        set((state) => ({
+            seenTasks: [...state.seenTasks, task],
+        }))
+    },
+    uncompleteTask(taskId) {
+        set((state) => ({
+            completedTasks: state.completedTasks.filter(
+                (task) => task.id !== taskId,
+            ),
+        }))
+    },
+    toggleCompleted(taskId) {
+        if (get().isCompleted(taskId)) {
+            get().uncompleteTask(taskId)
+            return
+        }
+        get().completeTask(taskId)
     },
 })
 

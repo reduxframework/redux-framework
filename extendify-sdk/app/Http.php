@@ -68,7 +68,7 @@ class Http
             'sdk_partner' => Config::$sdkPartner,
         ];
 
-        if ($request->get_header('x_extendify_dev_mode') !== 'false') {
+        if ($request->get_header('x_extendify_dev_mode') === 'true') {
             $this->data['devmode'] = true;
         }
 

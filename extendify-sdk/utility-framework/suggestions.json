@@ -1,5 +1,5 @@
 {
-    "notes": "This file is generated in webpack.mix.js. Do not edit directly.",
+    "notes": "This file is generated in postcss.config.js. Do not edit directly.",
     "suggestions": [
         "ext-absolute",
         "ext-relative",
@@ -277,6 +277,7 @@
         "editor\\:no-inserter",
         "editor\\:no-resize",
         "editor\\:pointer-events-none",
+        "ext-mr-0.alignfull",
         "tablet\\:ext-absolute",
         "tablet\\:ext-relative",
         "tablet\\:ext-top-base",

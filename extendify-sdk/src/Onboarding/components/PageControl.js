@@ -61,7 +61,7 @@ const NextButton = () => {
     const canLaunch = useUserSelectionStore((state) => state.canLaunch())
     const onLastPage = currentPageIndex === totalPages - 1
     const currentPageKey = Array.from(pages.keys())[currentPageIndex]
-    const pageState = pages.get(currentPageKey).state()
+    const pageState = pages.get(currentPageKey).state.getState()
 
     if (canLaunch && onLastPage) {
         return (

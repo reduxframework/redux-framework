@@ -5,7 +5,7 @@ import { LeftArrowIcon } from '@onboarding/svg'
 export const SquareNextButton = () => {
     const { nextPage, currentPageIndex, pages } = usePagesStore()
     const currentPageKey = Array.from(pages.keys())[currentPageIndex]
-    const pageState = pages.get(currentPageKey).state()
+    const pageState = pages.get(currentPageKey).state.getState()
 
     return (
         <button

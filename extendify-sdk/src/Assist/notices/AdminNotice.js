@@ -1,7 +1,7 @@
 import { Fragment } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
-import { colord } from 'colord'
+import { useAdminColors } from '@assist/hooks/useAdminColors'
 import { useGlobalStore } from '../state/Global'
 
 const steps = {
@@ -55,6 +55,7 @@ const steps = {
 export const AdminNotice = () => {
     const noticeKey = 'extendify-launch'
     const { isDismissed, dismissNotice } = useGlobalStore()
+    const { mainColor: bgColor, darkColor: bgDarker } = useAdminColors()
 
     // To avoid content flash, we load in this partial piece of state early via php
     const dismissed = window.extAssistData.dismissedNotices.find(
@@ -76,13 +77,6 @@ export const AdminNotice = () => {
         : 'site-type'
 
     let reached = false
-
-    // Compute the color based on the active admin menu item color
-    const bgColor =
-        window.getComputedStyle(
-            document.querySelector('a.wp-has-current-submenu'),
-        )['background-color'] ?? '#3858e9'
-    const bgDarker = colord(bgColor).darken(0.05).toHex()
 
     return (
         <div className="mt-6 mb-8 max-w-screen-3xl">
@@ -124,7 +118,7 @@ export const AdminNotice = () => {
                     </p>
                     <div className="flex items-center gap-x-4 mt-9">
                         <a
-                            href={`${window.extAssistData.adminUrl}post-new.php?extendify=onboarding`}
+                            href={`${window.extAssistData.adminUrl}admin.php?page=extendify-launch`}
                             className="cursor-pointer rounded-sm px-6 py-4 bg-gray-900 text-lg text-white border-none no-underline">
                             {steps[currentStep]?.buttonText}
                         </a>

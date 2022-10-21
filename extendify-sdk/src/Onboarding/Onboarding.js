@@ -1,9 +1,9 @@
+import { registerCoreBlocks } from '@wordpress/block-library'
 import { useSelect } from '@wordpress/data'
+import { useDispatch } from '@wordpress/data'
 import { useEffect, useState } from '@wordpress/element'
 import { SWRConfig, useSWRConfig } from 'swr'
 import { RetryNotice } from '@onboarding/components/RetryNotice'
-import { useDisableWelcomeGuide } from '@onboarding/hooks/useDisableWelcomeGuide'
-import { useBodyScrollLock } from '@onboarding/hooks/useScrollLock'
 import { CreatingSite } from '@onboarding/pages/CreatingSite'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
@@ -15,6 +15,7 @@ import { NeedsTheme } from './pages/NeedsTheme'
 import { useUserSelectionStore } from './state/UserSelections'
 
 export const Onboarding = () => {
+    const { updateSettings } = useDispatch('core/block-editor')
     const [retrying, setRetrying] = useState(false)
     const { siteType } = useUserSelectionStore()
     const CurrentPage = usePagesStore((state) => {
@@ -31,8 +32,6 @@ export const Onboarding = () => {
     const [needsTheme, setNeedsTheme] = useState(false)
     const theme = useSelect((select) => select('core').getCurrentTheme())
     const { Sentry } = useSentry()
-    useDisableWelcomeGuide()
-    useBodyScrollLock()
     useTelemetry()
 
     const page = () => {
@@ -48,23 +47,23 @@ export const Onboarding = () => {
     }
 
     useEffect(() => {
+        // Add editor styles to use for live previews
+        updateSettings(window.extOnbData.editorStyles)
+    }, [updateSettings])
+
+    useEffect(() => {
+        // Keep an eye on this. If WP starts registering blocks when
+        // importing the block-library module (as they likely should be doing)
+        // then we will need to have a conditional here
+        registerCoreBlocks()
+    }, [])
+
+    useEffect(() => {
         // Check that the textdomain came back and that it's extendable
         if (!theme?.textdomain) return
         if (theme?.textdomain === 'extendable') return
         setNeedsTheme(true)
     }, [theme])
-
-    useEffect(() => {
-        if (!show) return
-        // If the library happens to be open, try to close it.
-        const timeout = setTimeout(() => {
-            window.dispatchEvent(
-                new CustomEvent('extendify::close-library', { bubbles: true }),
-            )
-        }, 0)
-        document.title = 'Extendify Launch' // Don't translate
-        return () => clearTimeout(timeout)
-    }, [show])
 
     useEffect(() => {
         setShow(true)

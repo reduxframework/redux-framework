@@ -5,6 +5,16 @@ import { getGlobalData, saveGlobalData } from '../api/Data'
 
 const state = (set, get) => ({
     dismissedNotices: [],
+    modals: [],
+    pushModal(modal) {
+        set((state) => ({ modals: [modal, ...state.modals] }))
+    },
+    popModal() {
+        set((state) => ({ modals: state.modals.slice(1) }))
+    },
+    clearModals() {
+        set({ modals: [] })
+    },
     isDismissed(id) {
         return get().dismissedNotices.some((notice) => notice.id === id)
     },
@@ -27,6 +37,10 @@ export const useGlobalStore = create(
     persist(devtools(state, { name: 'Extendify Assist Globals' }), {
         name: 'extendify-assist-globals',
         getStorage: () => storage,
+        partialize: (state) => {
+            delete state.modals
+            return state
+        },
     }),
     state,
 )

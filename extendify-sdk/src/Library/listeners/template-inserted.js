@@ -9,7 +9,7 @@ export const templateHandler = {
         const { createNotice } = dispatch('core/notices')
         const increaseImports = useUserStore.getState().incrementImports
         window.addEventListener('extendify::template-inserted', (event) => {
-            createNotice('info', __('Page layout added'), {
+            createNotice('info', __('Page layout added', 'extendify'), {
                 isDismissible: true,
                 type: 'snackbar',
             })

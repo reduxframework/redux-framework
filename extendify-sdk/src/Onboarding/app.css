@@ -44,15 +44,12 @@
 }
 
 .extendify-onboarding .spin {
-    animation: extendify-loading-spinner 2.5s linear infinite;
+    animation: extendify-loading-spinner 1s linear infinite;
 }
 
 @keyframes extendify-loading-spinner {
-    from {
-        transform: rotate(0deg);
-    }
     to {
-        transform: rotate(360deg);
+        transform: rotate(1turn);
     }
 }
 
@@ -68,9 +65,26 @@
 }
 .extendify-onboarding input[type="checkbox"]:checked::before {
     content: "";
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* Goal checkbox */
 .extendify-onboarding .goal-select .components-base-control__field {
     @apply mb-0;
+}
+.block-editor-block-preview__content {
+    @apply top-0 left-0 m-0 overflow-visible;
+    transform-origin: top left;
+    text-align: initial;
+    min-height: auto;
+}
+
+body {
+    background: white;
+}
+
+#adminmenumain,
+#wpadminbar {
+    display: none;
 }

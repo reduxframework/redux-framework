@@ -10,16 +10,7 @@ const Axios = axios.create({
     },
 })
 Axios.interceptors.request.use(
-    (request) => {
-        // Thiis is here to limit network requests when encountering aggressive rate limiting
-        const q = new URLSearchParams(window.location.search)
-        if (['onboarding'].includes(q.get('extendify'))) {
-            throw new axios.Cancel(
-                'Assist is not available while running Launch',
-            )
-        }
-        return checkDevMode(request)
-    },
+    (request) => checkDevMode(request),
     (error) => error,
 )
 Axios.interceptors.response.use((response) =>

@@ -14,7 +14,6 @@ if (!defined('ABSPATH')) {
  */
 class WPController
 {
-
     /**
      * Parse theme.json file.
      *

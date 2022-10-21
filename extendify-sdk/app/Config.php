@@ -10,7 +10,6 @@ namespace Extendify;
  */
 class Config
 {
-
     /**
      * Plugin name
      *
@@ -134,7 +133,7 @@ class Config
         }
 
         // An easy way to check if we are in dev mode is to look for a dev specific file.
-        $isDev = is_readable(EXTENDIFY_PATH . 'public/build/.devbuild');
+        $isDev = is_readable(EXTENDIFY_PATH . '.devbuild');
 
         self::$environment = $isDev ? 'DEVELOPMENT' : 'PRODUCTION';
         self::$launchCompleted = (bool) get_option('extendify_onboarding_completed') || $isDev;

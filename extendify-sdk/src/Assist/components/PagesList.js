@@ -1,7 +1,7 @@
 import { Spinner } from '@wordpress/components'
 import { __ } from '@wordpress/i18n'
 import { usePagesList } from '@assist/hooks/usePagesList'
-import { maybeHttps } from '@assist/lib/util'
+import { maybeHttps } from '@assist/util/util'
 
 export const PagesList = () => {
     const { pages, loading, error } = usePagesList()

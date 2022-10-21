@@ -182,7 +182,7 @@ export const GridView = memo(function GridView() {
                         retryOnce.current = false
                         fetchTemplates()
                     }}>
-                    {__('Press here to reload')}
+                    {__('Press here to reload', 'extendify')}
                 </Button>
             </div>
         )

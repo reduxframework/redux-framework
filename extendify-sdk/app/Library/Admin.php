@@ -14,7 +14,6 @@ use Extendify\Library\SiteSettings;
  */
 class Admin
 {
-
     /**
      * The instance
      *
@@ -121,17 +120,21 @@ class Admin
     public function addScopedScriptsAndStyles()
     {
         $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+        $scriptAssetPath = EXTENDIFY_PATH . 'public/build/extendify-asset.php';
+        $fallback = [
+            'dependencies' => [],
+            'version' => $version,
+        ];
+        $scriptAsset = file_exists($scriptAssetPath) ? require $scriptAssetPath : $fallback;
+        foreach ($scriptAsset['dependencies'] as $style) {
+            wp_enqueue_style($style);
+        }
 
         \wp_register_script(
             Config::$slug . '-scripts',
             EXTENDIFY_BASE_URL . 'public/build/extendify.js',
-            [
-                'wp-i18n',
-                'wp-components',
-                'wp-element',
-                'wp-editor',
-            ],
-            $version,
+            $scriptAsset['dependencies'],
+            $scriptAsset['version'],
             true
         );
         \wp_localize_script(
@@ -146,6 +149,7 @@ class Admin
                 'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
                 'standalone' => \esc_attr(Config::$standalone),
                 'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
+                'insightsId' => \get_option('extendify_site_id', ''),
             ]
         );
         \wp_enqueue_script(Config::$slug . '-scripts');
