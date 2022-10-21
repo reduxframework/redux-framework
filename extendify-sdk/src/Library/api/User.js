@@ -2,11 +2,6 @@ import { Axios as api } from './axios'
 
 export const User = {
     async getData() {
-        // Thiis is here to limit network requests when encountering aggressive rate limiting
-        const q = new URLSearchParams(window.location.search)
-        if (['onboarding'].includes(q.get('extendify'))) {
-            return '{}'
-        }
         // Zustand changed their persist middleware to bind to the store
         // so api was undefined here. That's why using fetch for this one request.
         const data = await fetch(`${window.extendifyData.root}/user`, {

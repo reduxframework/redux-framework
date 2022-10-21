@@ -12,7 +12,6 @@ use Extendify\Config;
  */
 class Admin
 {
-
     /**
      * The instance
      *
@@ -79,11 +78,7 @@ class Admin
                     return;
                 }
 
-                if (!$this->checkItsGutenbergPost($hook)) {
-                    return;
-                }
-
-                $this->addScopedScriptsAndStyles();
+                $this->addScopedScriptsAndStyles($hook);
             }
         );
     }
@@ -108,7 +103,7 @@ class Admin
 
             // Only redirect if we aren't already on the page.
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            if (isset($_GET['extendify'])) {
+            if (isset($_GET['page']) && $_GET['page'] === 'extendify-launch') {
                 return;
             }
 
@@ -119,24 +114,9 @@ class Admin
                 && \get_option('admin_email') === $user->user_email
                 && in_array('administrator', $user->roles, true)
             ) {
-                \wp_safe_redirect(\admin_url() . 'post-new.php?extendify=onboarding');
+                \wp_safe_redirect(\admin_url() . 'admin.php?page=extendify-launch');
             }
         });
-    }
-
-    /**
-     * Makes sure we are on the correct page
-     *
-     * @param string $hook - An optional hook provided by WP to identify the page.
-     * @return boolean
-     */
-    public function checkItsGutenbergPost($hook = '')
-    {
-        if (isset($GLOBALS['typenow']) && \use_block_editor_for_post_type($GLOBALS['typenow'])) {
-            return $hook && in_array($hook, ['post.php', 'post-new.php'], true);
-        }
-
-        return false;
     }
 
     /**
@@ -173,11 +153,15 @@ class Admin
     /**
      * Adds various JS scripts
      *
+     * @param string $hook - The WP admin page identifier.
+     *
      * @return void
      */
-    public function addScopedScriptsAndStyles()
+    public function addScopedScriptsAndStyles($hook)
     {
-        $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+        if ($hook !== 'extendify_page_extendify-launch') {
+            return;
+        }
 
         $partnerData = $this->checkPartnerDataSources();
 
@@ -185,22 +169,29 @@ class Admin
         $fgColor = isset($partnerData['fgColor']) ? $partnerData['fgColor'] : '#ffffff';
         $logo = isset($partnerData['logo']) ? $partnerData['logo'] : null;
 
+        $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+        $scriptAssetPath = EXTENDIFY_PATH . 'public/build/extendify-onboarding.asset.php';
+        $fallback = [
+            'dependencies' => [],
+            'version' => $version,
+        ];
+        $scriptAsset = file_exists($scriptAssetPath) ? require $scriptAssetPath : $fallback;
+        foreach ($scriptAsset['dependencies'] as $style) {
+            wp_enqueue_style($style);
+        }
+
         \wp_enqueue_script(
             Config::$slug . '-onboarding-scripts',
             EXTENDIFY_BASE_URL . 'public/build/extendify-onboarding.js',
-            [
-                'wp-i18n',
-                'wp-components',
-                'wp-element',
-                'wp-editor',
-            ],
-            $version,
+            $scriptAsset['dependencies'],
+            $scriptAsset['version'],
             true
         );
         \wp_add_inline_script(
             Config::$slug . '-onboarding-scripts',
-            'window.extOnbData = ' . wp_json_encode([
+            'window.extOnbData = ' . \wp_json_encode([
                 'globalStylesPostID' => \WP_Theme_JSON_Resolver::get_user_global_styles_post_id(),
+                'editorStyles' => \get_block_editor_settings([], null),
                 'site' => \esc_url_raw(\get_site_url()),
                 'adminUrl' => \esc_url_raw(\admin_url()),
                 'pluginUrl' => \esc_url_raw(EXTENDIFY_BASE_URL),
@@ -228,8 +219,7 @@ class Admin
             Config::$slug . '-onboarding-styles',
             EXTENDIFY_BASE_URL . 'public/build/extendify-onboarding.css',
             [],
-            $version,
-            'all'
+            $version
         );
 
         \wp_add_inline_style(Config::$slug . '-onboarding-styles', "body {

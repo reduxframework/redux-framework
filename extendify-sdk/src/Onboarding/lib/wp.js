@@ -28,23 +28,24 @@ export const createWordpressPages = async (pages, siteType, style) => {
                 .join('')
         }
 
-        const name = page.slug
         // Get content
         const result = await createPage({
             title: page.title,
-            name,
             status: 'publish',
             content: content,
             template: 'no-title',
             meta: { made_with_extendify_launch: true },
         })
-        pageIds[name] = { id: result.id, title: page.title }
+        pageIds[page.slug] = { id: result.id, title: page.title }
     }
-    // When we have home and blog, set reading setting
+    // When we have home, set reading setting
     if (pageIds?.home) {
         await updateOption('show_on_front', 'page')
         await updateOption('page_on_front', pageIds.home.id)
-        if (pageIds?.blog) await updateOption('page_for_posts', pageIds.blog)
+    }
+    // When we have blog, set reading setting
+    if (pageIds?.blog) {
+        await updateOption('page_for_posts', pageIds.blog.id)
     }
 
     // If we've created pages, consider the onboarding in a completed state

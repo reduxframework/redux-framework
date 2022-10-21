@@ -10,9 +10,7 @@ if (window.extOnbData.insightsEnabled) {
         integrations: [new BrowserTracing()],
         release: window.extOnbData?.version,
         environment: window?.extOnbData?.devbuild ? 'dev' : 'production',
-
-        // TODO: consider lowering this in production to reduce the amount of data sent
-        tracesSampleRate: 1.0,
+        tracesSampleRate: 0.25,
         beforeSend(event) {
             // Check if it is an exception, and if so, show the report dialog
             if (event.exception) {

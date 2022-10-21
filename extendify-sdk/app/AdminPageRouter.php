@@ -8,13 +8,13 @@ namespace Extendify;
 use Extendify\Config;
 use Extendify\Library\AdminPage as LibraryAdminPage;
 use Extendify\Assist\AdminPage as AssistAdminPage;
+use Extendify\Onboarding\AdminPage as OnboardingAdminPage;
 
 /**
  * This class handles routing when the main admin button is pressed.
  */
 class AdminPageRouter
 {
-
     /**
      * Adds various actions to set up the page
      *
@@ -30,7 +30,7 @@ class AdminPageRouter
         // When Launch is finished, fire this to set the correct permalinks.
         // phpcs:ignore WordPress.Security.NonceVerification
         if (isset($_GET['extendify-launch-success'])) {
-            \add_action( 'admin_init', function () {
+            \add_action('admin_init', function () {
                 \flush_rewrite_rules();
             });
         }
@@ -53,8 +53,10 @@ class AdminPageRouter
             $this->addSubMenu('Library', $library->slug, $cb);
 
             // Show the Launch menu for dev users.
-            if (Config::$environment === 'DEVELOPMENT') {
-                $this->addSubMenu('Launch', 'post-new.php?extendify=onboarding');
+            if ((Config::$showOnboarding && !Config::$launchCompleted) || Config::$environment === 'DEVELOPMENT') {
+                $onboarding = new OnboardingAdminPage();
+                $cb = [$onboarding, 'pageContent'];
+                $this->addSubMenu('Launch', $onboarding->slug, $cb);
             }
         });
 
@@ -76,6 +78,12 @@ class AdminPageRouter
         \add_filter('wp_redirect', function ($url) {
             // Check for extendify-launch-success as other plugins will not override
             // this as they intercept the request.
+            // Special treatment for Yoast to disable their redirect when installing.
+            if ($url == \admin_url() . 'admin.php?page=wpseo_installation_successful_free') {
+                $yoast_options = \get_option('wpseo');
+                $yoast_options['should_redirect_after_install_free'] = true;
+                \update_option('wpseo', $yoast_options);
+            }
             // phpcs:ignore WordPress.Security.NonceVerification
             if (isset($_GET['extendify-launch-success'])) {
                 return \admin_url() . $this->getRoute();
@@ -150,7 +158,7 @@ class AdminPageRouter
 
         // If they've yet to complete launch, send them back to Launch.
         if (!Config::$launchCompleted) {
-            return 'post-new.php?extendify=onboarding';
+            return 'admin.php?page=extendify-launch';
         }
 
         // If they made it this far, they can go to Assist.

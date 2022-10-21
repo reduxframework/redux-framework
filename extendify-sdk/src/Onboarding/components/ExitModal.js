@@ -15,10 +15,20 @@ export const ExitModal = () => {
     const { exitModalOpen, closeExitModal, hoveredOverExitButton } =
         useGlobalStore()
     const { setExitFeedback } = useUserSelectionStore()
-    const [value, setValue] = useState()
+    const [value, setValue] = useState(null)
+    const [customOther, setCustomOther] = useState('')
     const [options, setOptions] = useState([])
     const initialFocus = useRef()
-    const closeLaunch = async () => {
+    const submitExitSurvey = () => {
+        setExitFeedback(
+            value === __('Other', 'extendify')
+                ? `Other: ${customOther}`
+                : value,
+        )
+        skipLaunch()
+    }
+
+    const skipLaunch = async () => {
         // Store when Launch is skipped.
         await updateOption(
             'extendify_onboarding_skipped',
@@ -74,10 +84,6 @@ export const ExitModal = () => {
             })
     }, [hoveredOverExitButton])
 
-    useEffect(() => {
-        setExitFeedback(value)
-    }, [value, setExitFeedback])
-
     return (
         <Dialog
             as="div"
@@ -91,10 +97,10 @@ export const ExitModal = () => {
                     aria-hidden="true"
                 />
                 <Dialog.Title className="sr-only">
-                    {__('Exit Launch')}
+                    {__('Exit Launch', 'extendify')}
                 </Dialog.Title>
                 <form
-                    onSubmit={closeLaunch}
+                    onSubmit={submitExitSurvey}
                     style={{ maxWidth: '400px' }}
                     className="sm:flex relative shadow-2xl sm:overflow-hidden mx-auto bg-white flex flex-col p-8">
                     <Button
@@ -119,6 +125,8 @@ export const ExitModal = () => {
                                 slug={key}
                                 label={label}
                                 value={value}
+                                customOther={customOther}
+                                setCustomOther={setCustomOther}
                                 setValue={(v) =>
                                     setValue((previousValue) =>
                                         previousValue === v ? null : v,
@@ -133,14 +141,20 @@ export const ExitModal = () => {
                             <button
                                 className="px-4 py-3 mr-4 button-focus"
                                 type="button"
-                                onClick={closeLaunch}>
+                                onClick={skipLaunch}>
                                 {__('Skip', 'extendify')}
                             </button>
                         )}
                         <button
-                            className="px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus"
+                            className={classNames(
+                                'px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus',
+                                {
+                                    'opacity-50 cursor-default': !value,
+                                },
+                            )}
                             type="button"
-                            onClick={closeLaunch}>
+                            onClick={submitExitSurvey}
+                            disabled={!value}>
                             {__('Submit', 'extendify')}
                         </button>
                     </div>
@@ -150,8 +164,15 @@ export const ExitModal = () => {
     )
 }
 
-const LabeledCheckbox = ({ label, slug, setValue, value, initialFocus }) => {
-    const { setExitFeedback } = useUserSelectionStore()
+const LabeledCheckbox = ({
+    label,
+    slug,
+    setValue,
+    value,
+    customOther,
+    setCustomOther,
+    initialFocus,
+}) => {
     const needsInput = slug === 'Other'
     const checked = value === slug
     const id = slug
@@ -192,9 +213,8 @@ const LabeledCheckbox = ({ label, slug, setValue, value, initialFocus }) => {
             </span>
             {needsInput && checked ? (
                 <textarea
-                    onChange={(e) =>
-                        setExitFeedback(`Other: ${e.target.value}`)
-                    }
+                    value={customOther}
+                    onChange={(e) => setCustomOther(e.target.value)}
                     className="border border-gray-400 mt-2 text-base p-2"
                     rows="4"
                 />

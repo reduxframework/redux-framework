@@ -36,7 +36,7 @@ const defaultPages = [
             component: SiteTypeSelect,
             fetcher: siteTypeFetcher,
             fetchData: siteTypeData,
-            state: siteTypeState.getState,
+            state: siteTypeState,
         },
     ],
     [
@@ -45,14 +45,14 @@ const defaultPages = [
             component: Goals,
             fetcher: goalsFetcher,
             fetchData: goalsData,
-            state: goalsState.getState,
+            state: goalsState,
         },
     ],
     [
         'style',
         {
             component: SiteStyle,
-            state: siteStyleState.getState,
+            state: siteStyleState,
         },
     ],
     [
@@ -61,7 +61,7 @@ const defaultPages = [
             component: SitePages,
             fetcher: sitePagesFetcher,
             fetchData: sitePagesData,
-            state: sitePagesState.getState,
+            state: sitePagesState,
         },
     ],
     [
@@ -70,13 +70,10 @@ const defaultPages = [
             component: SiteInformation,
             fetcher: siteInfoFetcher,
             fetchData: siteInfoData,
-            state: siteInfoState.getState,
+            state: siteInfoState,
         },
     ],
-    [
-        'confirmation',
-        { component: SiteSummary, state: confirmationState.getState },
-    ],
+    ['confirmation', { component: SiteSummary, state: confirmationState }],
 ]
 
 const pages = defaultPages?.filter(

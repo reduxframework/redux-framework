@@ -74,7 +74,17 @@ export const CreatingSite = () => {
             inform(__('Generating page content', 'extendify'))
             await runAtLeastFor(
                 async () => {
-                    pageIds = await createWordpressPages(pages, siteType, style)
+                    const blogPage = {
+                        // slug is only used internally
+                        slug: 'blog',
+                        title: __('Blog', 'extendify'),
+                    }
+                    const pagesWithBlog = [...pages, blogPage]
+                    pageIds = await createWordpressPages(
+                        pagesWithBlog,
+                        siteType,
+                        style,
+                    )
                     const updatedHeaderCode = addLaunchPagesToNav(
                         pages,
                         pageIds,
@@ -203,7 +213,7 @@ export const CreatingSite = () => {
                             }
                         })}
                         <div className="flex space-x-4 items-center mt-6">
-                            <Spinner className="animate-spin" />
+                            <Spinner className="spin" />
                             {infoDesc.map((step, index) => {
                                 if (!index) {
                                     return (

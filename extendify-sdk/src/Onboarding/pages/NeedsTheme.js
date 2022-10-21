@@ -19,7 +19,7 @@ export const NeedsTheme = () => {
                 <div className="flex flex-col items-start space-y-4 text-base">
                     <a
                         href={`${window.extOnbData.site}/wp-admin/theme-install.php?theme=extendable`}>
-                        {__('Take me there')}
+                        {__('Take me there', 'extendify')}
                     </a>
                 </div>
             </div>

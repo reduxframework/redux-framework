@@ -94,6 +94,7 @@ const LibraryAccessModal = () => {
                     <ToggleControl
                         label={__(
                             'Allow all users to publish with the library',
+                            'extendify',
                         )}
                         help={__(
                             'Everyone publishes with patterns & page layouts',

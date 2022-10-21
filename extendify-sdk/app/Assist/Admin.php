@@ -12,7 +12,6 @@ use Extendify\Config;
  */
 class Admin
 {
-
     /**
      * The instance
      *
@@ -33,6 +32,13 @@ class Admin
 
         self::$instance = $this;
         $this->loadScripts();
+
+        add_action('after_setup_theme', function () {
+            // phpcs:ignore WordPress.Security.NonceVerification
+            if (isset($_GET['extendify-disable-admin-bar'])) {
+                show_admin_bar(false);
+            }
+        });
     }
 
     /**
@@ -54,20 +60,22 @@ class Admin
                 }
 
                 $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+                $scriptAssetPath = EXTENDIFY_PATH . 'public/build/extendify-assist.asset.php';
+                $fallback = [
+                    'dependencies' => [],
+                    'version' => $version,
+                ];
+                $scriptAsset = file_exists($scriptAssetPath) ? require $scriptAssetPath : $fallback;
+                wp_enqueue_media();
+                foreach ($scriptAsset['dependencies'] as $style) {
+                    wp_enqueue_style($style);
+                }
 
                 \wp_enqueue_script(
                     Config::$slug . '-assist-scripts',
                     EXTENDIFY_BASE_URL . 'public/build/extendify-assist.js',
-                    [
-                        'wp-components',
-                        'wp-element',
-                        'wp-data',
-                        'wp-core-data',
-                        'wp-html-entities',
-                        'wp-i18n',
-                        'wp-polyfill',
-                    ],
-                    $version,
+                    $scriptAsset['dependencies'],
+                    $scriptAsset['version'],
                     true
                 );
 
@@ -77,9 +85,13 @@ class Admin
                     Config::$slug . '-assist-scripts',
                     'window.extAssistData = ' . wp_json_encode([
                         'devbuild' => \esc_attr(Config::$environment === 'DEVELOPMENT'),
+                        'insightsId' => \get_option('extendify_site_id', ''),
+                        // Only send insights if they have opted in explicitly.
+                        'insightsEnabled' => defined('EXTENDIFY_INSIGHTS_URL'),
                         'root' => \esc_url_raw(\rest_url(Config::$slug . '/' . Config::$apiVersion)),
                         'nonce' => \wp_create_nonce('wp_rest'),
                         'adminUrl' => \esc_url_raw(\admin_url()),
+                        'home' => \esc_url_raw(\get_home_url()),
                         'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
                         'launchCompleted' => Config::$launchCompleted,
                         'dismissedNotices' => $dismissed,

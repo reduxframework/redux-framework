@@ -1,11 +1,14 @@
-import { useGlobalStore, useGlobalStoreReady } from '../state/Global'
+import { useGlobalStore } from '../state/Global'
 
 const noticeKey = 'next-steps'
 export const NextSteps = () => {
     const { isDismissed, dismissNotice } = useGlobalStore()
-    const ready = useGlobalStoreReady()
+    // To avoid content flash, we load in this partial piece of state early via php
+    const dismissed = window.extAssistData.dismissedNotices.find(
+        (notice) => notice.id === noticeKey,
+    )
 
-    if (!ready || isDismissed(noticeKey)) return null
+    if (!dismissed || isDismissed(noticeKey)) return null
 
     return (
         <div>
