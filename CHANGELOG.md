@@ -1,18 +1,12 @@
 # Redux Changelog
 
-## 4.3.19.4
+## 4.3.20
 * Fixed: `spinner` field returning JavaScript error.
-
-## 4.3.19.3
-* Fixed: #3913 - `required` not working outside a `repeater` when `repeater` field is loaded somewhere in the project.
-* Updated: Removed registration verbiage from Google Fonts update notice.
-
-## 4.3.19.2
-* Added: Widget Areas extension (for use with Classic Widgets only).
-
-## 4.3.19.1
+* Fixed: `required` not working outside a `repeater` when `repeater` field is loaded somewhere in the project.
 * Fixed: JS error when `typography` `font-style` set to `false`.
-* Updated: Extendify Library 0.11.1
+* Updated: Removed registration verbiage from Google Fonts update notice.
+* Added: Widget Areas extension (for use with Classic Widgets only).
+* Updated: Extendify Library 1.0.1
 
 ## 4.3.19
 * Fixed: Extendify menu item appearing when it should not.

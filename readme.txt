@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 6.1
-Stable tag: 4.3.19
+Stable tag: 4.3.20
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -103,6 +103,14 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+
+= 4.3.20 =
+* Added: Widget Areas extension (for use with Classic Widgets only).
+* Fixed: `spinner` field returning JavaScript error.
+* Fixed: `required` not working outside a `repeater` when `repeater` field is loaded somewhere in the project.
+* Fixed: JS error when `typography` `font-style` set to `false`.
+* Updated: Removed registration verbiage from Google Fonts update notice.
+* Updated: Extendify Library 1.0.1
 
 = 4.3.19 =
 * Fixed: Extendify menu item appearing when it should not.
