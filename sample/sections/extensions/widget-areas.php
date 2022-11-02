@@ -26,7 +26,7 @@ Redux::set_section(
 				'title'    => esc_html__( 'Widget Areas is Already Running!', 'your-textdomain-here' ),
 
 				// translators: %1$s: Widget Admin URL.
-				'subtitle' => sprintf( esc_html__( 'To see it in action, head over to your %1$s', 'your-textdomain-here' ), '<a href="' . admin_url( 'widgets.php' ) . '">' . esc_html__( 'Widgets page', 'your-textdomain-here' ) . '</a>.' ),
+				'subtitle' => sprintf( esc_html__( 'To see it in action, head over to your %1$s', 'your-textdomain-here' ), '<a href="' . admin_url( 'widgets.php' ) . '">' . esc_html__( 'Widgets page', 'your-textdomain-here' ) . '</a> (Applicable for Classic Widgets only).' ),
 			),
 		),
 	)

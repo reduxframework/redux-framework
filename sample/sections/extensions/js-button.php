@@ -1,7 +1,6 @@
 <?php
 /**
  * Redux Pro JS Button Sample config.
- *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
  * @package Redux Pro
@@ -13,7 +12,8 @@ Redux::set_section(
 	$opt_name,
 	array(
 		'title'      => esc_html__( 'JS Button', 'your-textdomain-here' ),
-		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/js-button.html" target="_blank">https://devs.redux.io/premium/js-button.html</a>',
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/js-button.html" target="_blank">https://devs.redux.io/core-extensions/js-button.html</a>',
+		'subsection' => true,
 		'fields'     => array(
 			array(
 				'id'       => 'opt-js-button',
@@ -22,7 +22,7 @@ Redux::set_section(
 				'subtitle' => esc_html__( 'Run javascript in the options panel from button clicks.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'Click the Add Date button to add the current date into the text field below.', 'your-textdomain-here' ),
 				'script'   => array(
-					'url'       => plugins_url( 'sample/sections/js-button/js-button.js', REDUX_PLUGIN_FILE ),
+					'url'       => plugins_url( 'sample/sections/extensions/js-button.js', REDUX_PLUGIN_FILE ),
 					'dir'       => dirname( __FILE__ ) . '/js-button.js',
 					'dep'       => array( 'jquery' ),
 					'ver'       => time(),

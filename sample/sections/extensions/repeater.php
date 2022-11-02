@@ -1,7 +1,6 @@
 <?php
 /**
  * Redux Repeater Sample config.
- *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
  * @package Redux Pro
@@ -12,9 +11,10 @@ defined( 'ABSPATH' ) || exit;
 Redux::set_section(
 	$opt_name,
 	array(
-		'title'  => __( 'Repeater', 'your-textdomain-here' ),
-		'desc'   => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/repeater.html" target="_blank">https://devs.redux.io/premium/repeater.html</a>',
-		'fields' => array(
+		'title'      => __( 'Repeater', 'your-textdomain-here' ),
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/repeater.html" target="_blank">https://devs.redux.io/core-extensions/repeater.html</a>',
+		'subsection' => true,
+		'fields'     => array(
 			array(
 				'id'          => 'repeater-field-id',
 				'type'        => 'repeater',

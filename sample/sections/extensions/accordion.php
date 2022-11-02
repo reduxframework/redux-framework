@@ -14,6 +14,7 @@ Redux::set_section(
 	array(
 		'title'      => esc_html__( 'Accordion', 'your-textdomain-here' ),
 		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/accordion.html" target="_blank">https://devs.redux.io/core-extensions/accordion.html</a>',
+		'subsection' => true,
 		'fields'     => array(
 			array(
 				'id'       => 'accordion-section-1',

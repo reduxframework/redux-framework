@@ -509,33 +509,34 @@ Redux::set_section(
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-field.php';
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-section.php';
 
-require_once Redux_Core::$dir . '../sample/sections/accordion/accordion.php';
-require_once Redux_Core::$dir . '../sample/sections/js-button/js-button.php';
-require_once Redux_Core::$dir . '../sample/sections/repeater/repeater.php';
-require_once Redux_Core::$dir . '../sample/sections/search/search.php';
-require_once Redux_Core::$dir . '../sample/sections/shortcodes/shortcodes.php';
-require_once Redux_Core::$dir . '../sample/sections/social-profiles/social-profiles.php';
-
 // -> START Pro Fields.
-if ( class_exists( 'Redux_Pro' ) ) {
-	Redux::set_section(
-		$opt_name,
-		array(
-			'title' => esc_html__( 'Redux Pro Fields', 'your-textdomain-here' ),
-			'id'    => 'redux-pro-fields',
-			'icon'  => 'el el-redux',
-			'class' => 'pro_highlight',
-			'desc'  => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/" target="_blank">https://devs.redux.io/premium/</a>',
-		)
-	);
 
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/color-scheme.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/custom-fonts.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/google-maps.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/icon-select.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/taxonomy.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/users.php';
-	require_once Redux_Core::$dir . '../sample/sections/pro-fields/widget-areas.php';
+Redux::set_section(
+	$opt_name,
+	array(
+		'title' => esc_html__( 'Redux Extensions', 'your-textdomain-here' ),
+		'id'    => 'redux-extensions',
+		'icon'  => 'el el-redux',
+		'class' => 'pro_highlight',
+		'desc'  => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/" target="_blank">https://devs.redux.io/core-extensions/</a>',
+	)
+);
+
+require_once Redux_Core::$dir . '../sample/sections/extensions/accordion.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/js-button.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/repeater.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/search.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/shortcodes.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/social-profiles.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/widget-areas.php';
+
+if ( class_exists( 'Redux_Pro' ) ) {
+	require_once Redux_Core::$dir . '../sample/sections/extensions/color-scheme.php';
+	require_once Redux_Core::$dir . '../sample/sections/extensions/custom-fonts.php';
+	require_once Redux_Core::$dir . '../sample/sections/extensions/google-maps.php';
+	require_once Redux_Core::$dir . '../sample/sections/extensions/icon-select.php';
+	require_once Redux_Core::$dir . '../sample/sections/extensions/taxonomy.php';
+	require_once Redux_Core::$dir . '../sample/sections/extensions/users.php';
 }
 
 /**
