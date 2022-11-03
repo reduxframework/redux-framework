@@ -43,35 +43,15 @@ export const CreatingSite = () => {
             2000,
             { dryRun: dryRun.current },
         )
-        await runAtLeastFor(
-            async () => await updateGlobalStyleVariant(style?.variation ?? {}),
-            2000,
-            { dryRun: dryRun.current },
-        )
-        await runAtLeastFor(
-            async () =>
-                await updateTemplatePart(
-                    'extendable//header',
-                    style?.headerCode,
-                ),
-            2000,
-            { dryRun: dryRun.current },
-        )
-        await runAtLeastFor(
-            async () =>
-                await updateTemplatePart(
-                    'extendable//footer',
-                    style?.footerCode,
-                ),
-            2000,
-            { dryRun: dryRun.current },
-        )
-
-        inform(__('Creating site pages', 'extendify'))
-        informDesc(__('Starting off with a full site...', 'extendify'))
+        if (!dryRun.current) {
+            await updateGlobalStyleVariant(style?.variation ?? {})
+            await updateTemplatePart('extendable//header', style?.headerCode)
+            await updateTemplatePart('extendable//footer', style?.footerCode)
+        }
         let pageIds
         try {
             inform(__('Generating page content', 'extendify'))
+            informDesc(__('Starting off with a full site...', 'extendify'))
             await runAtLeastFor(
                 async () => {
                     const blogPage = {
@@ -98,7 +78,6 @@ export const CreatingSite = () => {
                 2000,
                 { dryRun: dryRun.current },
             )
-            await new Promise((resolve) => setTimeout(resolve, 2000))
         } catch (e) {
             /* do nothing */
         }
@@ -119,7 +98,6 @@ export const CreatingSite = () => {
                 } catch (e) {
                     /* do nothing */
                 }
-                await new Promise((resolve) => setTimeout(resolve, 2000))
             }
         }
 

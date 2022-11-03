@@ -36,11 +36,12 @@ export const StylePreview = ({
     const isMounted = useIsMounted()
     const [code, setCode] = useState('')
     const [loaded, setLoaded] = useState(false)
+    const [waitForIframe, setWaitForIframe] = useState(0)
+    const [iFrame, setIFrame] = useState(null)
     const [inView, setInView] = useState(false)
     const [hoverCleanup, setHoverCleanup] = useState(null)
     const [variation, setVariation] = useState()
     const previewContainer = useRef(null)
-    const content = useRef(null)
     const blockRef = useRef(null)
     const observer = useRef(null)
     const startTime = useRef(null)
@@ -66,6 +67,18 @@ export const StylePreview = ({
                 : null,
         [themeJson],
     )
+
+    useEffect(() => {
+        if (iFrame || !inView) return
+        // continuously check for iframe
+        const interval = setTimeout(() => {
+            const container = previewContainer.current
+            const frame = container?.querySelector('iframe[title]')
+            if (!frame) return setWaitForIframe((prev) => prev + 1)
+            setIFrame(frame)
+        }, 100)
+        return () => clearTimeout(interval)
+    }, [iFrame, inView, waitForIframe])
 
     useLayoutEffect(() => {
         if (!inView || !context.measure) return
@@ -127,12 +140,11 @@ export const StylePreview = ({
     }, [siteType?.slug, themeJson, style])
 
     useEffect(() => {
+        if (!iFrame || !loaded) return
         let raf1, raf2
-        if (!content.current || !loaded) return
         const p = previewContainer.current
         const scale = p.offsetWidth / 1400
-        const iframe = content.current
-        const body = iframe.contentDocument.body
+        const body = iFrame.contentDocument.body
         if (body?.style) {
             body.style.transitionProperty = 'all'
             body.style.top = 0
@@ -175,60 +187,38 @@ export const StylePreview = ({
             p.removeEventListener('blur', handleOut)
             p.removeEventListener('mouseleave', handleOut)
         }
-    }, [blockHeight, loaded])
+    }, [blockHeight, loaded, iFrame])
 
     useEffect(() => {
-        if (!blocks?.length || !inView) return
-        let iframe
+        if (!blocks?.length || !iFrame) return
+        let timer, timer2
 
         // Inserts theme styles after iframe is loaded
-        const handle = () => {
-            if (!iframe.contentDocument?.getElementById('ext-tj')) {
-                iframe.contentDocument?.head?.insertAdjacentHTML(
-                    'beforeend',
-                    `<style id="ext-tj">${transformedStyles}</style>`,
-                )
+        const load = () => {
+            const doc = iFrame.contentDocument
+            const style = `<style id="ext-tj">${transformedStyles}</style>`
+            if (!doc?.getElementById('ext-tj')) {
+                doc?.head?.insertAdjacentHTML('beforeend', style)
             }
-            content.current = iframe
-            setTimeout(() => {
-                if (isMounted.current) setLoaded(true)
-            }, 100)
+            timer2 = setTimeout(() => isMounted.current && setLoaded(true), 100)
+            clearTimeout(timer)
         }
-        // The callback will attach a load event to the iframe
-        const observer = new MutationObserver(() => {
-            iframe = previewContainer.current.querySelector('iframe[title]')
-            iframe.addEventListener('load', handle)
-            setTimeout(() => {
-                // In some cases, the load event doesn't fire.
-                handle()
-            }, 2000)
-            observer.disconnect()
-        })
-        // observe the ref for when the iframe is injected by wp
-        observer.observe(previewContainer.current, {
-            attributes: false,
-            childList: true,
-            subtree: false,
-        })
+        iFrame.addEventListener('load', load)
+        // In some cases, the load event doesn't fire.
+        timer = setTimeout(load, 2000)
         return () => {
-            observer.disconnect()
-            iframe?.removeEventListener('load', handle)
+            iFrame?.removeEventListener('load', load)
+            ;[(timer, timer2)].forEach((t) => clearTimeout(t))
         }
-    }, [blocks, transformedStyles, isMounted, inView])
+    }, [blocks, transformedStyles, isMounted, inView, iFrame])
 
     useEffect(() => {
-        // Only trigger the mutation observer if we are in view
-        if (!observer.current) {
-            observer.current = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    setInView(true)
-                }
-            })
-        }
+        if (observer.current) return
+        observer.current = new IntersectionObserver((entries) => {
+            entries[0].isIntersecting && setInView(true)
+        })
         observer.current.observe(blockRef.current)
-        return () => {
-            observer.current.disconnect()
-        }
+        return () => observer.current.disconnect()
     }, [])
 
     return (

@@ -112,20 +112,6 @@ class DataController
     }
 
     /**
-     * Create an order.
-     *
-     * @return \WP_REST_Response
-     */
-    public static function createOrder()
-    {
-        $response = Http::post('/create-order');
-        return new \WP_REST_Response(
-            $response,
-            wp_remote_retrieve_response_code($response)
-        );
-    }
-
-    /**
      * Fetch exit questions
      *
      * @return \WP_REST_Response

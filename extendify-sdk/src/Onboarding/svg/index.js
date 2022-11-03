@@ -11,6 +11,7 @@ import PriceTag from './PriceTag'
 import Radio from './Radio'
 import RefreshIcon from './RefreshIcon'
 import RightArrowIcon from './RightArrowIcon'
+import School from './School'
 import SearchIcon from './SearchIcon'
 import Shop from './Shop'
 import Speech from './Speech'
@@ -30,6 +31,7 @@ export {
     Planner,
     PriceTag,
     Radio,
+    School,
     RefreshIcon,
     RightArrowIcon,
     SearchIcon,

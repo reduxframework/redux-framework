@@ -1,6 +1,6 @@
 import { ExternalLink, Spinner } from '@wordpress/components'
 import { useEffect, useState } from '@wordpress/element'
-import { __, _n, sprintf } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { Checkmark } from '@onboarding/svg'
 import { getOption } from '@assist/api/WPApi'
@@ -13,11 +13,13 @@ import {
 } from '@assist/state/Selections'
 import { useTasksStoreReady, useTasksStore } from '@assist/state/Tasks'
 import { UpdateLogo } from '@assist/tasks/UpdateLogo'
+import { UpdateSiteDescription } from '@assist/tasks/UpdateSiteDescription'
 import { UpdateSiteIcon } from '@assist/tasks/UpdateSiteIcon'
 
 export const TasksList = () => {
-    const { isCompleted, seeTask } = useTasksStore()
+    const { seeTask, completedTasks } = useTasksStore()
     const { tasks, loading, error } = useTasks()
+    const [showCompleted, setShowCompleted] = useState(false)
     const readyTasks = useTasksStoreReady()
     const readyPlugins = useSelectionStoreReady()
     const pluginBasedGoals = useSelectionStore((state) =>
@@ -33,10 +35,20 @@ export const TasksList = () => {
         // Check if task.goals intersect with pluginBasedGoals
         return task?.goals?.some((goal) => pluginBasedGoals.includes(goal))
     })
-    const remainingTasks = tasksFiltered?.reduce(
-        (count, task) => count - Number(isCompleted(task.slug)),
-        tasksFiltered.length,
-    )
+    // Divide filtered tasks by completion status, first simplify the array
+    const completedTasksArray = completedTasks.map((task) => task.id)
+    // Now filter all tasks that are marked as completed
+    const tasksCompleted = tasksFiltered?.filter((task) => {
+        return completedTasksArray.includes(task.slug)
+    })
+    // Now filter all tasks that are not completed yet
+    const tasksOpen = tasksFiltered?.filter((task) => {
+        return !completedTasksArray.includes(task.slug)
+    })
+    // Toggle show/hide completed tasks
+    const toggleCompletedTasks = () => {
+        showCompleted ? setShowCompleted(false) : setShowCompleted(true)
+    }
 
     useEffect(() => {
         if (!tasksFiltered?.length || !readyTasks) return
@@ -62,31 +74,43 @@ export const TasksList = () => {
 
     return (
         <div className="my-4 max-w-3/4 w-full mx-auto bg-gray-100 p-12 pt-10">
-            <div className="mb-6 flex gap-2 items-center justify-center">
-                <h2 className="my-0 text-lg text-center">
+            <div className="mb-6 flex gap-0 flex-col">
+                <h2 className="my-0 text-lg">
                     {__('Get ready to go live', 'extendify')}
                 </h2>
-                {remainingTasks > 0 && (
-                    <span
-                        title={sprintf(
-                            _n(
-                                '%s task remaining',
-                                '%s tasks remaining',
-                                remainingTasks,
-                                'extendify',
-                            ),
-                            remainingTasks,
+                <div className="flex gap-1">
+                    <span>
+                        {sprintf(
+                            __('%s completed', 'extendify'),
+                            tasksCompleted.length,
                         )}
-                        className="rounded-full bg-gray-700 text-white text-base px-2 py-0 cursor-default">
-                        {remainingTasks}
                     </span>
-                )}
+                    {tasksCompleted.length > 0 && (
+                        <>
+                            <span>&middot;</span>
+                            <button
+                                className="underline cursor-pointer p-0"
+                                onClick={toggleCompletedTasks}>
+                                {showCompleted
+                                    ? __('Hide', 'extendify')
+                                    : __('Show', 'extendify')}
+                            </button>
+                        </>
+                    )}
+                </div>
             </div>
             <div className="w-full">
-                {tasksFiltered.map((task) => (
+                {tasksOpen.map((task) => (
                     <TaskCheckBox key={task.slug} task={task} />
                 ))}
             </div>
+            {showCompleted && (
+                <div className="completed-tasks w-full">
+                    {tasksCompleted.map((task) => (
+                        <TaskCheckBox key={task.slug} task={task} />
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
@@ -143,13 +167,16 @@ const TaskCheckBox = ({ task }) => {
 const ActionButton = ({ task }) => {
     const { pushModal } = useGlobalStore()
     const { mainColor } = useAdminColors()
+    const { isCompleted } = useTasksStore()
     if (task?.slug === 'logo') {
         return (
             <button
                 style={{ backgroundColor: mainColor }}
                 className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
                 onClick={() => pushModal(UpdateLogo)}>
-                {__('Upload', 'extendify')}
+                {isCompleted('logo')
+                    ? __('Replace', 'extendify')
+                    : __('Upload', 'extendify')}
             </button>
         )
     }
@@ -159,7 +186,21 @@ const ActionButton = ({ task }) => {
                 style={{ backgroundColor: mainColor }}
                 className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
                 onClick={() => pushModal(UpdateSiteIcon)}>
-                {__('Upload', 'extendify')}
+                {isCompleted('site-icon')
+                    ? __('Replace', 'extendify')
+                    : __('Upload', 'extendify')}
+            </button>
+        )
+    }
+    if (task?.slug === 'site-description') {
+        return (
+            <button
+                style={{ backgroundColor: mainColor }}
+                className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
+                onClick={() => pushModal(UpdateSiteDescription)}>
+                {isCompleted('site-description')
+                    ? __('Change', 'extendify')
+                    : __('Add', 'extendify')}
             </button>
         )
     }

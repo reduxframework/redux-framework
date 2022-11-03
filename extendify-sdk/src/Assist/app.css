@@ -14,6 +14,7 @@
 .extendify-assist *:after,
 .extendify-assist *:before {
     box-sizing: border-box;
+    border: 0 solid #e5e7eb;
 }
 .hide-checkmark::before {
     content: none;

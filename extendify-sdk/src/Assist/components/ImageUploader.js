@@ -14,7 +14,7 @@ import { MediaUpload, uploadMedia } from '@wordpress/media-utils'
 import { getOption, updateOption } from '@assist/api/WPApi'
 import { getMediaDetails } from '../lib/media'
 
-export const ImageUploader = ({ type, title, actionLabel, modalTitle }) => {
+export const ImageUploader = ({ type, title, actionLabel }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [imageId, setImageId] = useState(0)
     const media = useSelect(
@@ -56,7 +56,6 @@ export const ImageUploader = ({ type, title, actionLabel, modalTitle }) => {
 
     return (
         <div>
-            <h3>{modalTitle}</h3>
             <MediaUploadCheck>
                 <MediaUpload
                     title={title}

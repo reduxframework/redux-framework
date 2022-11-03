@@ -209,6 +209,7 @@ class Admin
                 // Only send insights if they have opted in explicitly.
                 'insightsEnabled' => defined('EXTENDIFY_INSIGHTS_URL'),
                 'activeTests' => \get_option('extendify_active_tests', []),
+                'wpLanguage' => \get_locale(),
             ]),
             'before'
         );

@@ -10,5 +10,6 @@ export const useTasks = () => {
         }
         return response.data
     })
+
     return { tasks, error, loading: !tasks && !error }
 }
