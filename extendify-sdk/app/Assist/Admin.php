@@ -50,12 +50,17 @@ class Admin
     {
         \add_action(
             'admin_enqueue_scripts',
-            function () {
+            function ($hook) {
                 if (!current_user_can(Config::$requiredCapability)) {
                     return;
                 }
 
                 if (!Config::$showAssist) {
+                    return;
+                }
+
+                // Don't show on Launch pages.
+                if ($hook === 'extendify_page_extendify-launch') {
                     return;
                 }
 

@@ -74,15 +74,13 @@ class AdminPageRouter
             });
         }
 
-        // If the user is redirected to this while visitng our url, intercept it.
+        // If the user is redirected to this while visiting our url, intercept it.
         \add_filter('wp_redirect', function ($url) {
             // Check for extendify-launch-success as other plugins will not override
             // this as they intercept the request.
             // Special treatment for Yoast to disable their redirect when installing.
             if ($url == \admin_url() . 'admin.php?page=wpseo_installation_successful_free') {
-                $yoast_options = \get_option('wpseo');
-                $yoast_options['should_redirect_after_install_free'] = true;
-                \update_option('wpseo', $yoast_options);
+                return \admin_url() . 'admin.php?page=extendify-assist';
             }
             // phpcs:ignore WordPress.Security.NonceVerification
             if (isset($_GET['extendify-launch-success'])) {
@@ -135,7 +133,7 @@ class AdminPageRouter
             'extendify-admin-page',
             '__return_null',
             // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
-            'data:image/svg+xml;base64,' . base64_encode('<svg width="20" height="20" viewBox="0 0 60 62" fill="black" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M36.0201 0H49.2377C52.9815 0 54.3365 0.391104 55.7061 1.12116C57.0756 1.85412 58.1469 2.92893 58.8795 4.29635C59.612 5.66666 60 7.02248 60 10.7684V23.9935C60 27.7394 59.6091 29.0952 58.8795 30.4655C58.1469 31.8358 57.0727 32.9078 55.7061 33.6407C55.0938 33.9684 54.4831 34.2381 53.661 34.4312V44.9564C53.661 50.7417 53.0573 52.8356 51.9305 54.952C50.7991 57.0683 49.1401 58.7238 47.0294 59.8558C44.9143 60.9878 42.8215 61.5873 37.0395 61.5873H16.626C10.844 61.5873 8.75122 60.9833 6.63608 59.8558C4.52094 58.7238 2.86639 57.0638 1.73504 54.952C0.603687 52.8401 0 50.7417 0 44.9564V24.5358C0 18.7506 0.603687 16.6566 1.73057 14.5403C2.86192 12.424 4.52094 10.764 6.63608 9.63201C8.74675 8.5045 10.844 7.90047 16.626 7.90047H25.3664C25.5303 6.18172 25.8724 5.24393 26.3754 4.29924C27.1079 2.92893 28.1821 1.85412 29.5517 1.12116C30.9183 0.391104 32.2763 0 36.0201 0ZM29.2266 8.41812C29.2266 5.96352 31.2155 3.97368 33.6689 3.97368H51.5859C54.0393 3.97368 56.0282 5.96352 56.0282 8.41812V26.3438C56.0282 28.7984 54.0393 30.7882 51.5859 30.7882H33.6689C31.2155 30.7882 29.2266 28.7984 29.2266 26.3438V8.41812Z" fill="black"/></svg>')
+            'data:image/svg+xml;base64,' . base64_encode('<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5009 2H14.9873C15.9747 2 16.3322 2.10161 16.6934 2.29127C17.0546 2.48169 17.3372 2.76092 17.5304 3.11616C17.7237 3.47216 17.826 3.8244 17.826 4.79756V8.23336C17.826 9.20652 17.7229 9.55876 17.5304 9.91475C17.3372 10.2708 17.0539 10.5492 16.6934 10.7396C16.5319 10.8248 16.3708 10.8948 16.154 10.945V13.6794C16.154 15.1824 15.9947 15.7264 15.6975 16.2762C15.3991 16.826 14.9615 17.2561 14.4048 17.5502C13.8469 17.8442 13.2949 18 11.7698 18H6.38538C4.86028 18 4.30828 17.8431 3.75038 17.5502C3.19247 17.2561 2.75606 16.8248 2.45765 16.2762C2.15923 15.7275 2 15.1824 2 13.6794V8.37426C2 6.87129 2.15923 6.32729 2.45647 5.77748C2.75488 5.22767 3.19247 4.79642 3.75038 4.50234C4.3071 4.20941 4.86028 4.05249 6.38538 4.05249H8.69081C8.73405 3.60597 8.82426 3.36234 8.95694 3.11692C9.15016 2.76092 9.4335 2.48169 9.79474 2.29127C10.1552 2.10161 10.5134 2 11.5009 2ZM9.709 4.18698C9.709 3.54929 10.2336 3.03234 10.8807 3.03234H15.6066C16.2538 3.03234 16.7784 3.54929 16.7784 4.18698V8.84395C16.7784 9.48164 16.2538 9.99859 15.6066 9.99859H10.8807C10.2336 9.99859 9.709 9.48164 9.709 8.84395V4.18698Z" fill="currentColor" /> </svg>')
         );
     }
 

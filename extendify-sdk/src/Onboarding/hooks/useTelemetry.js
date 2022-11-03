@@ -1,5 +1,4 @@
 import { useEffect, useState } from '@wordpress/element'
-import { createOrder } from '@onboarding/api/DataApi'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
@@ -16,7 +15,7 @@ export const useTelemetry = () => {
         siteTypeSearch,
         exitFeedback,
     } = useUserSelectionStore()
-    const { orderId, setOrderId, generating } = useGlobalStore()
+    const { generating } = useGlobalStore()
     const { pages, currentPageIndex } = usePagesStore()
     const [url, setUrl] = useState()
     const [stepProgress, setStepProgress] = useState([])
@@ -43,53 +42,56 @@ export const useTelemetry = () => {
         // Add selectedStyle to the set
         setViewedStyles((styles) => {
             const newStyles = new Set(styles)
-            newStyles.add(selectedStyle.recordId)
+            newStyles.add(selectedStyle)
             return newStyles
         })
     }, [selectedStyle])
 
     useEffect(() => {
-        // For now, don't send on devbuilds. Later we can better isolate these
-        if (window.extOnbData?.devbuild) return
         let mode = 'onboarding'
         const search = window.location?.search
         mode = search?.indexOf('DEVMODE') > -1 ? 'onboarding-dev' : mode
         mode = search?.indexOf('LOCALMODE') > -1 ? 'onboarding-local' : mode
-
         setUrl(window?.extOnbData?.config?.api[mode])
     }, [])
 
     useEffect(() => {
-        if (!url || orderId?.length) return
-        // Create a order that persists over local storage
-        createOrder()?.then((response) => {
-            if (response.data?.id) {
-                setOrderId(response.data.id)
-            }
-        })
-    }, [url, setOrderId, orderId])
-
-    useEffect(() => {
-        if (!url || !orderId) return
+        if (!url) return
         let id = 0
+        let innerId = 0
         id = window.setTimeout(() => {
+            const controller = new AbortController()
+            innerId = window.setTimeout(() => {
+                controller.abort()
+            }, 500)
             fetch(`${url}/progress`, {
                 method: 'POST',
-                headers: { 'Content-type': 'application/json' },
+                headers: {
+                    'Content-type': 'application/json',
+                    Accept: 'application/json',
+                },
+                signal: controller.signal,
                 body: JSON.stringify({
-                    orderId,
                     selectedGoals: selectedGoals?.map((g) => g.id),
+                    selectedGoalsSlugs: selectedGoals?.map((g) => g.slug),
                     selectedPages: selectedPages?.map((p) => p.id),
-                    selectedPlugins,
+                    selectedPagesSlugs: selectedPages?.map((p) => p.slug),
+                    selectedPlugins: selectedPlugins?.map((p) => p.name),
                     selectedSiteType: selectedSiteType?.recordId
                         ? [selectedSiteType.recordId]
                         : [],
+                    selectedSiteTypeSlug: selectedSiteType?.slug,
                     selectedStyle: selectedStyle?.recordId
                         ? [selectedStyle.recordId]
                         : [],
+                    selectedStyleSlug: selectedStyle?.slug,
                     stepProgress,
-                    pages,
-                    viewedStyles: [...viewedStyles].slice(1),
+                    viewedStyles: [...viewedStyles]
+                        .map((s) => s.recordId)
+                        .slice(1),
+                    viewedStylesSlugs: [...viewedStyles]
+                        .map((s) => s.slug)
+                        .slice(1),
                     feedbackMissingSiteType,
                     feedbackMissingGoal,
                     siteTypeSearch,
@@ -98,10 +100,12 @@ export const useTelemetry = () => {
                     insightsId: window.extOnbData?.insightsId,
                     activeTests: JSON.stringify(window.extOnbData?.activeTests),
                     exitFeedback,
+                    partnerName: window.extOnbData?.partnerName,
+                    wpLanguage: window.extOnbData?.wpLanguage,
                 }),
             })
         }, 1000)
-        return () => window.clearTimeout(id)
+        return () => [id, innerId].forEach((i) => window.clearTimeout(i))
     }, [
         url,
         selectedGoals,
@@ -110,7 +114,6 @@ export const useTelemetry = () => {
         selectedSiteType,
         selectedStyle,
         pages,
-        orderId,
         stepProgress,
         viewedStyles,
         feedbackMissingSiteType,
