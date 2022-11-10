@@ -97,7 +97,9 @@ export const SiteTypeSelect = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
+                <h1
+                    className="text-3xl text-partner-primary-text mb-4 mt-0"
+                    data-cy="launch-welcome-message">
                     {__('Welcome to your WordPress site', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70 mb-0">
@@ -128,7 +130,7 @@ export const SiteTypeSelect = () => {
                     {loading && <p>{__('Loading...', 'extendify')}</p>}
                 </div>
                 {visibleSiteTypes?.length > 0 && (
-                    <div className="relative">
+                    <div className="relative" data-cy="siteTypeSection">
                         {visibleSiteTypes.map((option) => (
                             <SelectButton
                                 key={option.id}
@@ -182,6 +184,7 @@ const SelectButton = ({ option, selectSiteType }) => {
     const hoveringTimeout = useRef(0)
     return (
         <button
+            data-cy="selectSiteTypeButton"
             onClick={() => {
                 selectSiteType(option)
             }}

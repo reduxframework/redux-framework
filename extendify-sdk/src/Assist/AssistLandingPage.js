@@ -1,5 +1,5 @@
 import { ExternalLink } from '@wordpress/components'
-import { __, sprintf } from '@wordpress/i18n'
+import { __ } from '@wordpress/i18n'
 import { SWRConfig } from 'swr'
 import { PagesList } from '@assist/components/PagesList'
 import { TasksList } from '@assist/components/TasksList'
@@ -13,11 +13,11 @@ const Page = () => {
             <WelcomeNotice />
             <div className="max-w-screen-lg mx-auto pt-12 flex justify-center flex-col">
                 <h2 className="text-center text-3xl m-0 mb-2">
-                    {sprintf(__('Welcome to %s', 'extendify'), 'Assist')}
+                    Extendify Assist
                 </h2>
                 <p className="text-center text-xl m-0 p-0">
                     {__(
-                        'Manage your site content from a centralized location.',
+                        'Personalized recommendations for your site.',
                         'extendify',
                     )}
                 </p>

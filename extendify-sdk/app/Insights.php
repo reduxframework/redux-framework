@@ -21,6 +21,10 @@ class Insights
             'A',
             'B',
         ],
+        'launch-site-vs-next' => [
+            'A',
+            'B',
+        ],
     ];
 
     /**
@@ -36,13 +40,13 @@ class Insights
             if (defined('EXTENDIFY_INSIGHTS_URL') && class_exists('ExtendifyInsights')) {
                 // If we are generating an ID, then trigger the job here too.
                 // This only runs if they have opted in.
-                add_action('init', function() {
+                add_action('init', function () {
                     wp_schedule_single_event(time(), 'extendify_insights');
                     spawn_cron();
                 });
             }
-
         }
+
         $this->setUpActiveTests();
         $this->filterExternalInsights();
     }
@@ -74,11 +78,12 @@ class Insights
     public function filterExternalInsights()
     {
         add_filter('extendify_insights_data', function ($data) {
-            return array_merge($data, [
-              'launch' => defined('EXTENDIFY_SHOW_ONBOARDING') && constant('EXTENDIFY_SHOW_ONBOARDING'),
-              'partner' => defined('EXTENDIFY_PARTNER_ID') ? constant('EXTENDIFY_PARTNER_ID') : null,
-              'siteCreatedAt' => get_user_option('user_registered', 1),
+            $insights = array_merge($data, [
+                'launch' => defined('EXTENDIFY_SHOW_ONBOARDING') && constant('EXTENDIFY_SHOW_ONBOARDING'),
+                'partner' => defined('EXTENDIFY_PARTNER_ID') ? constant('EXTENDIFY_PARTNER_ID') : null,
+                'siteCreatedAt' => get_user_option('user_registered', 1),
             ]);
+            return $insights;
         });
     }
 }

@@ -16,7 +16,6 @@ if (!defined('ABSPATH')) {
  */
 class TasksController
 {
-
     /**
      * Return tasks from either database or source.
      *
@@ -53,5 +52,22 @@ class TasksController
         $data = json_decode($request->get_param('data'), true);
         update_option('extendify_assist_tasks', $data);
         return new \WP_REST_Response($data);
+    }
+
+    /**
+     * Returns remaining incomplete tasks.
+     *
+     * @return int
+     */
+    public function getRemainingCount()
+    {
+        $tasks = get_option('extendify_assist_tasks', []);
+        if (!isset($tasks['state']['seenTasks'])) {
+            return 0;
+        }
+
+        $seenTasks = count($tasks['state']['seenTasks']);
+        $completedTasks = count($tasks['state']['completedTasks']);
+        return max(($seenTasks - $completedTasks), 0);
     }
 }

@@ -81,6 +81,7 @@ export const TasksList = () => {
                 <div className="flex gap-1">
                     <span>
                         {sprintf(
+                            // translators: %s is the number of tasks
                             __('%s completed', 'extendify'),
                             tasksCompleted.length,
                         )}
@@ -167,7 +168,7 @@ const TaskCheckBox = ({ task }) => {
 const ActionButton = ({ task }) => {
     const { pushModal } = useGlobalStore()
     const { mainColor } = useAdminColors()
-    const { isCompleted } = useTasksStore()
+    const { isCompleted, completeTask } = useTasksStore()
     if (task?.slug === 'logo') {
         return (
             <button
@@ -180,6 +181,7 @@ const ActionButton = ({ task }) => {
             </button>
         )
     }
+    //add-pages
     if (task?.slug === 'site-icon') {
         return (
             <button
@@ -204,6 +206,22 @@ const ActionButton = ({ task }) => {
             </button>
         )
     }
+    if (task?.slug === 'add-pages') {
+        return (
+            <button
+                style={{ backgroundColor: mainColor }}
+                className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
+                onClick={() => {
+                    completeTask('add-pages')
+                    window.open(
+                        `${window.extAssistData.adminUrl}post-new.php?post_type=page&ext-open&ext-patternType=template`,
+                        '_blank',
+                    )
+                }}>
+                {__('Add new', 'extendify')}
+            </button>
+        )
+    }
     if (task?.slug === 'edit-homepage') {
         return <EditHomePageButton />
     }
@@ -217,11 +235,13 @@ const EditHomePageButton = () => {
         getOption('page_on_front').then(setHomepageId)
     }, [homepageId])
     const handleClick = () => {
+        completeTask('edit-homepage')
         window.open(
             `${window.extAssistData.adminUrl}post.php?post=${homepageId}&action=edit`,
             '_blank',
         )
     }
+    const { completeTask } = useTasksStore()
 
     if (!homepageId) return null
     return (

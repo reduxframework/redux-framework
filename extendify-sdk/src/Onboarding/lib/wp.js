@@ -48,11 +48,6 @@ export const createWordpressPages = async (pages, siteType, style) => {
         await updateOption('page_for_posts', pageIds.blog.id)
     }
 
-    // If we've created pages, consider the onboarding in a completed state
-    await updateOption(
-        'extendify_onboarding_completed',
-        new Date().toISOString(),
-    )
     return pageIds
 }
 

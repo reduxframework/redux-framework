@@ -58,6 +58,7 @@ export const ImportCounter = memo(function ImportCounter() {
                     <Icon icon={count > 0 ? download : alert} size={14} />
                     <span>
                         {sprintf(
+                            // translators: %s is the number of imports remaining
                             _n('%s Import', '%s Imports', count, 'extendify'),
                             count,
                         )}
@@ -88,6 +89,7 @@ export const ImportCounter = memo(function ImportCounter() {
                             __html: safeHTML(
                                 sprintf(
                                     __(
+                                        // translators: %s is a discount amount
                                         '%1$sGet %2$s off%3$s Extendify Pro when you upgrade today!',
                                         'extendify',
                                     ),

@@ -40,3 +40,5 @@ export const getExitQuestions = () =>
     api.get('onboarding/exit-questions', {
         timeout: 1500,
     })
+
+export const pingServer = () => api.get('onboarding/ping')

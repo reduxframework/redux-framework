@@ -124,4 +124,14 @@ class DataController
             wp_remote_retrieve_response_code($response)
         );
     }
+
+    /**
+     * Just here to check for 200 (vs server rate limting)
+     *
+     * @return \WP_REST_Response
+     */
+    public static function ping()
+    {
+        return new \WP_REST_Response(true, 200);
+    }
 }

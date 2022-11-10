@@ -9,7 +9,6 @@ import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { updateOption } from './api/WPApi'
 import { ExitModal } from './components/ExitModal'
-import { useSentry } from './hooks/useSentry'
 import { useTelemetry } from './hooks/useTelemetry'
 import { NeedsTheme } from './pages/NeedsTheme'
 import { useUserSelectionStore } from './state/UserSelections'
@@ -31,7 +30,6 @@ export const Onboarding = () => {
     const [show, setShow] = useState(false)
     const [needsTheme, setNeedsTheme] = useState(false)
     const theme = useSelect((select) => select('core').getCurrentTheme())
-    const { Sentry } = useSentry()
     useTelemetry()
 
     const page = () => {
@@ -102,14 +100,6 @@ export const Onboarding = () => {
                     //     throw new Error(error?.message ?? 'Unknown error')
                     // }
                     console.error(key, error)
-                    Sentry.captureException(
-                        new Error(error?.message ?? 'Unknown error'),
-                        {
-                            tags: { retrying: true },
-                            extra: { cacheKey: key },
-                        },
-                    )
-
                     setRetrying(true)
                     setTimeout(() => {
                         setRetrying(false)

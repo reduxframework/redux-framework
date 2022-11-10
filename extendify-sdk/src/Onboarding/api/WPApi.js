@@ -67,6 +67,7 @@ export const updateTemplatePart = (part, content) =>
         type: 'wp_template_part',
         status: 'publish',
         description: sprintf(
+            // translators: %s is the name of the product, Extendify Launch
             __('Added by %s', 'extendify'),
             'Extendify Launch',
         ),

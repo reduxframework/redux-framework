@@ -22,7 +22,11 @@ export const DevButtonOverlay = ({ template }) => {
                 text={template?.fields?.basePattern}
                 onCopy={() => setIdText(__('Copied!', 'extendify'))}>
                 <button className="text-sm rounded-md border border-black bg-white py-1 px-2.5 font-medium text-black no-underline m-0 cursor-pointer">
-                    {sprintf(__('Base: %s', 'extendify'), idText)}
+                    {sprintf(
+                        // translators: %s is an ID
+                        __('Base: %s', 'extendify'),
+                        idText,
+                    )}
                 </button>
             </CopyToClipboard>
             <a

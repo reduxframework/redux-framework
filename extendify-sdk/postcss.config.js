@@ -56,15 +56,21 @@ const findContent = (file) => {
     return []
 }
 
-const findImportant = (file) => {
-    if (file.endsWith('Library/app.css')) {
-        return 'div.extendify'
+const findImportant = (rawFile) => {
+    const file = rawFile.toLowerCase()
+    let tailwindPrefix = true
+
+    const filePrefixes = {
+        library: 'div.extendify',
+        onboarding: 'div.extendify-onboarding',
+        assist: 'div.extendify-assist',
     }
-    if (file.endsWith('Onboarding/app.css')) {
-        return 'div.extendify-onboarding'
-    }
-    if (file.endsWith('Assist/app.css')) {
-        return 'div.extendify-assist'
-    }
-    return true
+
+    Object.keys(filePrefixes).forEach((key) => {
+        if (file.includes(key) && file.endsWith('app.css')) {
+            tailwindPrefix = filePrefixes[key]
+        }
+    })
+
+    return tailwindPrefix
 }

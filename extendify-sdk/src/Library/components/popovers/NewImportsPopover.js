@@ -58,6 +58,7 @@ export const NewImportsPopover = ({
                     dangerouslySetInnerHTML={{
                         __html: safeHTML(
                             sprintf(
+                                // translators: %s: <strong> tags
                                 __(
                                     "%1$sGood news!%2$s We've added more imports to your library. Enjoy!",
                                     'extendify',

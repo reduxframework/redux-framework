@@ -80,11 +80,14 @@
     min-height: auto;
 }
 
-body {
+body.site-assistant_page_extendify-launch,
+body.site-launcher_page_extendify-launch {
     background: white;
 }
 
-#adminmenumain,
-#wpadminbar {
+.site-assistant_page_extendify-launch #adminmenumain,
+.site-launcher_page_extendify-launch #adminmenumain,
+.site-assistant_page_extendify-launch #wpadminbar,
+.site-launcher_page_extendify-launch #wpadminbar {
     display: none;
 }

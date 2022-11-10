@@ -67,6 +67,7 @@ use Extendify\Assist\Controllers\WPController as AssistWPController;
         ApiRouter::get('/onboarding/suggested-plugins', [DataController::class, 'getSuggestedPlugins']);
         ApiRouter::get('/onboarding/template', [DataController::class, 'getTemplate']);
         ApiRouter::get('/onboarding/exit-questions', [DataController::class, 'exitQuestions']);
+        ApiRouter::get('/onboarding/ping', [DataController::class, 'ping']);
 
         // Assist.
         ApiRouter::post('/assist/options', [AssistWPController::class, 'updateOption']);

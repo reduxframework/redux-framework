@@ -121,6 +121,7 @@ registerBlockType(metadata, {
                 style={{ display: 'block', maxWidth: '100%' }}
                 src={attributes.preview}
                 alt={sprintf(
+                    // translators: %s: The name of the plugin, Extendify.
                     __('%s Pattern Library', 'extendify'),
                     'Extendify',
                 )}

@@ -114,6 +114,7 @@ export function ImportTemplateBlock({ template, maxHeight }) {
                 role="button"
                 tabIndex="0"
                 aria-label={sprintf(
+                    // translators: %s is the type of template (e.g. layout, pattern)
                     __('Press to import %s', 'extendify'),
                     template?.fields?.type,
                 )}

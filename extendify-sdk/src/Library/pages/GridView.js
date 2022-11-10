@@ -194,11 +194,13 @@ export const GridView = memo(function GridView() {
                 <h2 className="text-sm font-normal text-extendify-gray">
                     {sprintf(
                         searchParams.current.type === 'template'
-                            ? __(
+                            ? // translators: %s is the layout category name
+                              __(
                                   'We couldn\'t find any layouts in the "%s" category.',
                                   'extendify',
                               )
-                            : __(
+                            : // translators: %s is the pattern category name
+                              __(
                                   'We couldn\'t find any patterns in the "%s" category.',
                                   'extendify',
                               ),

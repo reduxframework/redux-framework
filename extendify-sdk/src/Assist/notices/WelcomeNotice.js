@@ -107,14 +107,19 @@ export const WelcomeNotice = () => {
                             ease: 'easeInOut',
                         }}
                         onAnimationComplete={() => {
-                            setIFrameInView(true)
-                            if (iFrameCentered) setContentReady(true)
+                            window.requestAnimationFrame(() => {
+                                setIFrameInView(true)
+                                if (iFrameCentered) setContentReady(true)
+                            })
                         }}>
                         {/* added to prevent mouse scroll */}
                         <div className="absolute z-10 inset-0 pointer-events-none" />
                         <motion.iframe
                             ref={(r) => {
-                                const load = () => setIFrameSettled(true)
+                                const load = () =>
+                                    window.requestAnimationFrame(() =>
+                                        setIFrameSettled(true),
+                                    )
                                 if (!iFrameSettled) {
                                     r?.addEventListener('load', load)
                                     return
@@ -131,7 +136,9 @@ export const WelcomeNotice = () => {
                             transition={{ delay: 2, duration: 0.5 }}
                             layout
                             onAnimationComplete={() => {
-                                setIFrameCentered(true)
+                                window.requestAnimationFrame(() => {
+                                    setIFrameCentered(true)
+                                })
                             }}
                             animate={{
                                 transform: iFrameInView
