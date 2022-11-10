@@ -62,6 +62,7 @@ export const InstallStandaloneModal = () => {
                     dangerouslySetInnerHTML={{
                         __html: safeHTML(
                             sprintf(
+                                // translators: %s: <strong> tags
                                 __(
                                     'Install the new Extendify Library plugin to get the latest we have to offer — right from WordPress.org. Plus, well send you %1$s10 more imports%2$s. Nice.',
                                     'extendify',

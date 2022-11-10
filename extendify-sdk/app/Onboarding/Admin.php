@@ -73,12 +73,17 @@ class Admin
     {
         \add_action(
             'admin_enqueue_scripts',
-            function ($hook) {
+            function () {
                 if (!current_user_can(Config::$requiredCapability)) {
                     return;
                 }
 
-                $this->addScopedScriptsAndStyles($hook);
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                if (!isset($_GET['page']) || $_GET['page'] !== 'extendify-launch') {
+                    return;
+                }
+
+                $this->addScopedScriptsAndStyles();
             }
         );
     }
@@ -153,16 +158,10 @@ class Admin
     /**
      * Adds various JS scripts
      *
-     * @param string $hook - The WP admin page identifier.
-     *
      * @return void
      */
-    public function addScopedScriptsAndStyles($hook)
+    public function addScopedScriptsAndStyles()
     {
-        if ($hook !== 'extendify_page_extendify-launch') {
-            return;
-        }
-
         $partnerData = $this->checkPartnerDataSources();
 
         $bgColor = isset($partnerData['bgColor']) ? $partnerData['bgColor'] : '#2c39bd';

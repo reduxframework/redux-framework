@@ -7,6 +7,7 @@ import {
 } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { getStyles } from '@onboarding/api/DataApi'
+import { getThemeVariations } from '@onboarding/api/WPApi'
 import { SkeletonLoader } from '@onboarding/components/SkeletonLoader'
 import { StylePreview } from '@onboarding/components/StyledPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
@@ -34,6 +35,7 @@ export const state = pageState('Design', (set, get) => ({
 }))
 export const SiteStyle = () => {
     const { data: styleData, loading } = useFetch(fetchData, fetcher)
+    const { data: variations } = useFetch('variations', getThemeVariations)
     const once = useRef(false)
     const stylesRef = useRef()
     const isMounted = useIsMountedLayout()
@@ -55,11 +57,21 @@ export const SiteStyle = () => {
     }, [styleData, isMounted])
 
     useEffect(() => {
-        if (styles?.length && !useUserSelectionStore.getState().style) {
-            useUserSelectionStore.getState().setStyle(styles[0])
-            state.setState({ default: styles[0] })
+        if (
+            variations?.length &&
+            styles?.length &&
+            !useUserSelectionStore.getState().style
+        ) {
+            // Grab the styles from the theme.json variation
+            const variation = variations.find(
+                (theme) => theme.title === styles[0].label,
+            )
+            useUserSelectionStore
+                .getState()
+                .setStyle({ ...styles[0], variation })
+            state.setState({ default: { ...styles[0], variation } })
         }
-    }, [styles])
+    }, [styles, variations])
 
     useEffect(() => {
         if (!styles?.length || once.current) return

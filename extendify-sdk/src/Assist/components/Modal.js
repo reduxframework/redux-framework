@@ -20,7 +20,7 @@ export const Modal = () => {
             className="extendify-assist extendify-assist-modal"
             open={modals.length > 0}
             onClose={popModal}>
-            <div className="absolute top-0 mx-auto w-full h-full overflow-hidden p-2 md:p-6 md:flex justify-center items-center z-high">
+            <div className="fixed top-0 mx-auto w-full h-full overflow-hidden p-2 md:p-6 md:flex justify-center items-center z-high">
                 <div
                     className="fixed inset-0 bg-black bg-opacity-40 transition-opacity"
                     aria-hidden="true"

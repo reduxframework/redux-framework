@@ -8,6 +8,7 @@ namespace Extendify;
 use Extendify\Config;
 use Extendify\Library\AdminPage as LibraryAdminPage;
 use Extendify\Assist\AdminPage as AssistAdminPage;
+use Extendify\Assist\Controllers\TasksController as AssistTasksController;
 use Extendify\Onboarding\AdminPage as OnboardingAdminPage;
 
 /**
@@ -79,9 +80,10 @@ class AdminPageRouter
             // Check for extendify-launch-success as other plugins will not override
             // this as they intercept the request.
             // Special treatment for Yoast to disable their redirect when installing.
-            if ($url == \admin_url() . 'admin.php?page=wpseo_installation_successful_free') {
+            if ($url === \admin_url() . 'admin.php?page=wpseo_installation_successful_free') {
                 return \admin_url() . 'admin.php?page=extendify-assist';
             }
+
             // phpcs:ignore WordPress.Security.NonceVerification
             if (isset($_GET['extendify-launch-success'])) {
                 return \admin_url() . $this->getRoute();
@@ -126,9 +128,16 @@ class AdminPageRouter
      */
     public function addAdminMenu()
     {
+        $tasksController = new AssistTasksController();
+        $remainingTasks = $tasksController->getRemainingCount();
+        $badgeCount = $remainingTasks > 9 ? '9' : strval($remainingTasks);
+        $menuLabel = Config::$launchCompleted ? __('Site Assistant', 'extendify') : __('Site Launcher', 'extendify');
+        $menuLabel = Config::$showOnboarding ? $menuLabel : __('Extendify', 'extendify');
+        $menuLabel = $badgeCount ? sprintf('%1$s <span class="awaiting-mod">%2$s</span>', $menuLabel, $badgeCount) : $menuLabel;
+
         \add_menu_page(
             'Extendify',
-            'Extendify',
+            $menuLabel,
             Config::$requiredCapability,
             'extendify-admin-page',
             '__return_null',

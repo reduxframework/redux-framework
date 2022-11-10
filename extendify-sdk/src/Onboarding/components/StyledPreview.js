@@ -241,6 +241,7 @@ export const StylePreview = ({
                 </>
             )}
             <div
+                data-cy="styleSelector"
                 ref={blockRef}
                 role={onSelect ? 'button' : undefined}
                 tabIndex={onSelect ? 0 : undefined}

@@ -1,3 +1,5 @@
+import { pingServer } from '@onboarding/api/DataApi'
+
 /** Takes each possible code section and filters out undefined */
 export const findTheCode = (item) =>
     [item?.template?.code, item?.template?.code2].filter(Boolean).join('')
@@ -21,17 +23,21 @@ export const runAtLeastFor = async (functionPromise, time, options) => {
     if (options.dryRun) {
         return new Promise((resolve) => setTimeout(resolve, time))
     }
-    const start = Date.now()
+    return Promise.all([
+        await functionPromise(),
+        new Promise((resolve) => setTimeout(resolve, time)),
+    ])
+}
+
+/** Will ping every 1s until we get a 200 response from the server  */
+export const waitFor200Response = async () => {
     try {
-        return await Promise.all([
-            await functionPromise(),
-            new Promise((resolve) => setTimeout(resolve, time)),
-        ])
+        // This will error if not 200
+        await pingServer()
+        return true
     } catch (error) {
-        console.error(error)
-        return await new Promise((resolve) =>
-            // Check at least min milliseconds have passed
-            setTimeout(resolve, Math.max(0, time - (Date.now() - start))),
-        )
+        //
     }
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    return waitFor200Response()
 }

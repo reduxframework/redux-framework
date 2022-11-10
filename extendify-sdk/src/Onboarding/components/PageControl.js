@@ -64,6 +64,8 @@ const NextButton = () => {
     const currentPageKey = Array.from(pages.keys())[currentPageIndex]
     const pageState = pages.get(currentPageKey).state
     const [canProgress, setCanProgress] = useState(false)
+    const showNextButton = () =>
+        window.extOnbData?.activeTests?.['launch-site-vs-next'] === 'A'
 
     useEffect(() => {
         setCanProgress(pageState?.getState()?.ready)
@@ -73,12 +75,15 @@ const NextButton = () => {
     if (canLaunch && onLastPage) {
         return (
             <button
-                className="px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus"
+                className="flex items-center px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus"
                 onClick={() => {
                     useGlobalStore.setState({ generating: true })
                 }}
                 type="button">
-                {__('Launch site', 'extendify')}
+                {showNextButton
+                    ? __('Next', 'extendify')
+                    : __('Launch site', 'extendify')}
+                {showNextButton ? <LeftArrowIcon className="h-5 w-5" /> : null}
             </button>
         )
     }

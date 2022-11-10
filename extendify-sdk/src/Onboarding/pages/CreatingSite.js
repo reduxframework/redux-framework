@@ -9,7 +9,7 @@ import {
 } from '@onboarding/api/WPApi'
 import { useConfetti } from '@onboarding/hooks/useConfetti'
 import { useWarnOnLeave } from '@onboarding/hooks/useWarnOnLeave'
-import { runAtLeastFor } from '@onboarding/lib/util'
+import { runAtLeastFor, waitFor200Response } from '@onboarding/lib/util'
 import {
     createWordpressPages,
     trashWordpressPages,
@@ -36,22 +36,33 @@ export const CreatingSite = () => {
         if (!canLaunch) {
             throw new Error(__('Site is not ready to launch.', 'extendify'))
         }
-        inform(__('Applying site styles', 'extendify'))
-        informDesc(__('A beautiful site in... 3, 2, 1', 'extendify'))
-        await runAtLeastFor(
-            async () => await updateOption('blogname', siteInformation.title),
-            2000,
-            { dryRun: dryRun.current },
-        )
-        if (!dryRun.current) {
-            await updateGlobalStyleVariant(style?.variation ?? {})
-            await updateTemplatePart('extendable//header', style?.headerCode)
-            await updateTemplatePart('extendable//footer', style?.footerCode)
-        }
-        let pageIds
         try {
+            inform(__('Applying site styles', 'extendify'))
+            informDesc(__('A beautiful site in... 3, 2, 1', 'extendify'))
+
+            await waitFor200Response()
+            await runAtLeastFor(
+                async () =>
+                    await updateOption('blogname', siteInformation.title),
+                2000,
+                { dryRun: dryRun.current },
+            )
+
+            if (!dryRun.current) {
+                await waitFor200Response()
+                await updateGlobalStyleVariant(style?.variation ?? {})
+
+                await waitFor200Response()
+                await updateTemplatePart('extendable/header', style?.headerCode)
+
+                await waitFor200Response()
+                await updateTemplatePart('extendable/footer', style?.footerCode)
+            }
+
+            let pageIds
             inform(__('Generating page content', 'extendify'))
             informDesc(__('Starting off with a full site...', 'extendify'))
+            await waitFor200Response()
             await runAtLeastFor(
                 async () => {
                     const blogPage = {
@@ -60,69 +71,97 @@ export const CreatingSite = () => {
                         title: __('Blog', 'extendify'),
                     }
                     const pagesWithBlog = [...pages, blogPage]
+                    await waitFor200Response()
                     pageIds = await createWordpressPages(
                         pagesWithBlog,
                         siteType,
                         style,
                     )
+                    await waitFor200Response()
                     const updatedHeaderCode = addLaunchPagesToNav(
                         pages,
                         pageIds,
                         style?.headerCode,
                     )
+
+                    await waitFor200Response()
                     await updateTemplatePart(
-                        'extendable//header',
+                        'extendable/header',
                         updatedHeaderCode,
                     )
                 },
                 2000,
                 { dryRun: dryRun.current },
             )
-        } catch (e) {
-            /* do nothing */
-        }
 
-        if (plugins?.length) {
-            inform(__('Installing suggested plugins', 'extendify'))
-            for (const [index, plugin] of plugins.entries()) {
-                // TODO: instead of updating here, we could have a progress component
-                // that we can update a % of the width every index/n
-                informDesc(
-                    __(
-                        `${index + 1}/${plugins.length}: ${plugin.name}`,
-                        'extendify',
-                    ),
-                )
-                try {
-                    await installPlugin(plugin)
-                } catch (e) {
-                    /* do nothing */
+            if (plugins?.length) {
+                inform(__('Installing suggested plugins', 'extendify'))
+                for (const [index, plugin] of plugins.entries()) {
+                    // TODO: instead of updating here, we could have a progress component
+                    // that we can update a % of the width every index/n
+                    informDesc(
+                        __(
+                            `${index + 1}/${plugins.length}: ${plugin.name}`,
+                            'extendify',
+                        ),
+                    )
+                    await waitFor200Response()
+                    try {
+                        await installPlugin(plugin)
+                    } catch (e) {
+                        // If this fails, wait and try again
+                        await waitFor200Response()
+                        await installPlugin(plugin)
+                    }
                 }
             }
-        }
 
-        inform(__('Setting up your site assistant', 'extendify'))
-        informDesc(__('Helping your site to be successful...', 'extendify'))
-        await runAtLeastFor(
-            async () =>
-                await trashWordpressPages([
-                    { slug: 'hello-world', type: 'post' },
-                    { slug: 'sample-page', type: 'page' },
-                ]),
-            2000,
-            { dryRun: dryRun.current },
-        )
-        if (!dryRun.current) {
-            await updateOption('permalink_structure', '/%postname%/')
-        }
-        inform(__('Your site has been created!', 'extendify'))
-        informDesc(__('Redirecting in 3, 2, 1...', 'extendify'))
-        // fire confetti here
-        setConfettiReady(true)
-        setWarnOnLeaveReady(false)
-        await new Promise((resolve) => setTimeout(resolve, 2500))
+            inform(__('Setting up your site assistant', 'extendify'))
+            informDesc(__('Helping your site to be successful...', 'extendify'))
+            await waitFor200Response()
+            await runAtLeastFor(
+                async () =>
+                    await trashWordpressPages([
+                        { slug: 'hello-world', type: 'post' },
+                        { slug: 'sample-page', type: 'page' },
+                    ]),
+                2000,
+                { dryRun: dryRun.current },
+            )
+            if (!dryRun.current) {
+                await waitFor200Response()
+                await updateOption('permalink_structure', '/%postname%/')
+            }
+            inform(__('Your site has been created!', 'extendify'))
+            informDesc(__('Redirecting in 3, 2, 1...', 'extendify'))
+            // fire confetti here
+            setConfettiReady(true)
+            setWarnOnLeaveReady(false)
+            await new Promise((resolve) => setTimeout(resolve, 2500))
 
-        return pageIds
+            if (!dryRun.current) {
+                await waitFor200Response()
+                await updateOption(
+                    'extendify_onboarding_completed',
+                    new Date().toISOString(),
+                )
+            }
+
+            return pageIds
+        } catch (e) {
+            // if the error is 4xx, we should stop trying and prompt them to reload
+            if (e.status >= 400 && e.status < 500) {
+                setWarnOnLeaveReady(false)
+                const alertMsg = __(
+                    'We encountered a server error we cannot recover from. Please reload the page and try again.',
+                    'extendify',
+                )
+                alert(alertMsg)
+                location.href = window.extOnbData.adminUrl
+            }
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+            return doEverything()
+        }
     }, [pages, plugins, siteType, style, canLaunch, siteInformation.title])
 
     useEffect(() => {

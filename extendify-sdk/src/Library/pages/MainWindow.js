@@ -1,4 +1,5 @@
-import { useRef } from '@wordpress/element'
+import { useSelect, dispatch } from '@wordpress/data'
+import { useRef, useLayoutEffect } from '@wordpress/element'
 import { Dialog } from '@headlessui/react'
 import FooterNotice from '@library/components/notices/FooterNotice'
 import { useModal } from '@library/hooks/useModal'
@@ -11,6 +12,17 @@ export default function MainWindow() {
     const setOpen = useGlobalStore((state) => state.setOpen)
     const modal = useModal(open)
     const ready = useGlobalStore((state) => state.ready)
+    const welcomeScreenOpen = useSelect((select) =>
+        select('core/edit-post')?.isFeatureActive('welcomeGuide'),
+    )
+
+    useLayoutEffect(() => {
+        if (!open) return
+        // Disable the welcome guide if open
+        if (welcomeScreenOpen) {
+            dispatch('core/edit-post').toggleFeature('welcomeGuide')
+        }
+    }, [open, welcomeScreenOpen])
 
     return (
         <Dialog

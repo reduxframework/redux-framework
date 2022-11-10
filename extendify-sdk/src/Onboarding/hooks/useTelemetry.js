@@ -103,7 +103,7 @@ export const useTelemetry = () => {
                     partnerName: window.extOnbData?.partnerName,
                     wpLanguage: window.extOnbData?.wpLanguage,
                 }),
-            })
+            }).catch(() => undefined)
         }, 1000)
         return () => [id, innerId].forEach((i) => window.clearTimeout(i))
     }, [
