@@ -111,10 +111,12 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: JS error when `typography` `font-style` set to `false`.
 * Updated: Removed registration verbiage from Google Fonts update notice.
 * Updated: Extendify Library 1.0.1
+* Release date: November 2, 2022
 
 = 4.3.19 =
 * Fixed: Extendify menu item appearing when it should not.
 * Fixed: Blank page template would cause fatal error.
+* Release date: September 30, 2022
 
 = 4.3.18 =
 * New: Typography `weights` argument to override standard default weights.

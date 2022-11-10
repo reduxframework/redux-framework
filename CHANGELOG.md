@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.20.1
+* Update: Extendify Library 1.2.0
+
 ## 4.3.20
 * Fixed: `spinner` field returning JavaScript error.
 * Fixed: `required` not working outside a `repeater` when `repeater` field is loaded somewhere in the project.
@@ -7,11 +10,13 @@
 * Updated: Removed registration verbiage from Google Fonts update notice.
 * Added: Widget Areas extension (for use with Classic Widgets only).
 * Updated: Extendify Library 1.0.1
+* Release date: November 2, 2022
 
 ## 4.3.19
 * Fixed: Extendify menu item appearing when it should not.
 * Fixed: #3909 - Blank page template would cause fatal error.
-
+* Release date: September 30, 2022
+ 
 ## 4.3.18
 * New: #3903 - Typography `weights` argument to override standard default weights.
 * Updated Extendify Library 0.10.2
