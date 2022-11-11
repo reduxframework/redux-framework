@@ -523,6 +523,7 @@ Redux::set_section(
 );
 
 require_once Redux_Core::$dir . '../sample/sections/extensions/accordion.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/google-maps.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/js-button.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/repeater.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/search.php';
@@ -533,7 +534,6 @@ require_once Redux_Core::$dir . '../sample/sections/extensions/widget-areas.php'
 if ( class_exists( 'Redux_Pro' ) ) {
 	require_once Redux_Core::$dir . '../sample/sections/extensions/color-scheme.php';
 	require_once Redux_Core::$dir . '../sample/sections/extensions/custom-fonts.php';
-	require_once Redux_Core::$dir . '../sample/sections/extensions/google-maps.php';
 	require_once Redux_Core::$dir . '../sample/sections/extensions/icon-select.php';
 	require_once Redux_Core::$dir . '../sample/sections/extensions/taxonomy.php';
 	require_once Redux_Core::$dir . '../sample/sections/extensions/users.php';
