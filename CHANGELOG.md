@@ -1,6 +1,7 @@
 # Redux Changelog
 
 ## 4.3.20.1
+* Added: Google Maps extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extensions/google-maps.html)
 * Update: Extendify Library 1.2.0
 
 ## 4.3.20
