@@ -1,11 +1,3 @@
-.redux_field_th {
-    padding-bottom: 0px !important;
-}
-
-.redux-group-tab {
-    margin-bottom: 0 !important;
-}
-
 .block-editor-page {
     .postbox{
         &.closed .el {
@@ -23,6 +15,14 @@
 }
 
 .postbox {
+    .redux_field_th {
+        padding-bottom: 0px !important;
+    }
+
+    .redux-group-tab {
+        margin-bottom: 0 !important;
+    }
+
     .redux-container {
         filter: none;
         border: none;
@@ -355,6 +355,6 @@
     padding: 0;
 }
 
-.wpseotab tr { 
-    display: table-row !important 
+.wpseotab tr {
+    display: table-row !important
 }
