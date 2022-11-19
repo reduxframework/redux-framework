@@ -1,6 +1,6 @@
 import { Button } from '@wordpress/components'
 import { useState, useEffect, useRef } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { Icon } from '@wordpress/icons'
 import { General } from '@library/api/General'
 import { useGlobalStore } from '@library/state/GlobalState'
@@ -93,7 +93,11 @@ export const CtaButton = () => {
             }}
             onClick={() => openModal('patterns-cta')}
             isSecondary>
-            {__('Discover patterns in Extendify Library', 'extendify')}
+            {sprintf(
+                // translators: %s: Extendify Library term.
+                __('Discover patterns in the %s', 'extendify'),
+                'Extendify Library',
+            )}
         </Button>
     )
 }

@@ -1,5 +1,9 @@
-import { useEffect, useState, useRef } from '@wordpress/element'
+import { useEffect, useState, useRef, Fragment } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
+import { Combobox } from '@headlessui/react'
+import uFuzzy from '@leeoniya/ufuzzy'
+import classNames from 'classnames'
+import { motion, AnimatePresence } from 'framer-motion'
 import { mutate } from 'swr'
 import { getSiteTypes } from '@onboarding/api/DataApi'
 import { updateOption } from '@onboarding/api/WPApi'
@@ -8,7 +12,7 @@ import { PageLayout } from '@onboarding/layouts/PageLayout'
 import { usePagesStore } from '@onboarding/state/Pages'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
-import { SearchIcon, LeftArrowIcon } from '@onboarding/svg'
+import { SearchIcon, LeftArrowIcon, Checkmark } from '@onboarding/svg'
 import {
     fetcher as styleFetcher,
     fetchData as styleFetchData,
@@ -25,24 +29,58 @@ export const state = pageState('Site Industry', (set, get) => ({
         useUserSelectionStore.getState()?.siteType?.slug ===
         get().default?.slug,
 }))
+
+const fuzzyFilter = new uFuzzy({
+    intraIns: 2,
+    intraMode: 1,
+})
+
 export const SiteTypeSelect = () => {
     const { nextPage } = usePagesStore()
-    const siteType = useUserSelectionStore((state) => state.siteType)
-    const feedback = useUserSelectionStore(
-        (state) => state.feedbackMissingSiteType,
-    )
+    const { siteType, setSiteType } = useUserSelectionStore()
     const [search, setSearch] = useState('')
     const searchRef = useRef(null)
     const { data: siteTypes, loading } = useFetch(fetchData, fetcher)
-    const visibleSiteTypes = siteTypes?.filter((option) => {
-        const { title } = option
-        const searchTerm = search?.toLowerCase()
-        if (!searchTerm) return option?.featured
-        if (title.toLowerCase().indexOf(searchTerm) > -1) return true
-    })
+    const handleSetSiteType = async (optionValue) => {
+        await updateOption('extendify_siteType', optionValue)
+        setSiteType({
+            label: optionValue.title,
+            recordId: optionValue.id,
+            slug: optionValue.slug,
+            styles: optionValue.styles,
+        })
+        nextPage()
+    }
 
-    const showMissingInput = () =>
-        window.extOnbData?.activeTests?.['remove-dont-see-inputs'] === 'A'
+    // Fuzzy search
+    const titles = siteTypes?.map(({ title }) => title) ?? []
+    const idx = fuzzyFilter.filter(titles, search)
+    const info = fuzzyFilter.info(idx, titles, search)
+    const order = fuzzyFilter.sort(info, titles, search)
+
+    const visibleSiteTypes = search
+        ? siteTypes
+              // fitler and highlight
+              ?.filter((_, i) => idx.includes(i))
+              ?.map((_, i, types) => {
+                  const item = types[order[i]]
+                  return {
+                      ...item,
+                      titleMarked: uFuzzy.highlight(
+                          item.title,
+                          info.ranges[order[i]],
+                          (part, matched) =>
+                              matched
+                                  ? '<b class="font-bold">' + part + '</b>'
+                                  : part,
+                      ),
+                  }
+              })
+              .filter((item) => item.slug !== 'default')
+        : siteTypes
+              ?.filter((option) => option.slug !== 'default')
+              ?.sort((a) => (a?.featured ? -1 : 0))
+              ?.sort((a) => (a.slug === siteType.slug ? -1 : 0))
 
     useEffect(() => {
         state.setState({ ready: !loading })
@@ -59,16 +97,16 @@ export const SiteTypeSelect = () => {
         const defaultSiteType = siteTypes?.find(
             (record) => record.slug === 'default',
         )
-        if (defaultSiteType) {
-            const defaultS = {
-                label: defaultSiteType.title,
-                recordId: defaultSiteType.id,
-                slug: defaultSiteType.slug,
-            }
-            useUserSelectionStore.getState().setSiteType(defaultS)
-            state.setState({ default: defaultS })
+        if (!defaultSiteType) return
+
+        const fallback = {
+            label: defaultSiteType.title,
+            recordId: defaultSiteType.id,
+            slug: defaultSiteType.slug,
         }
-    }, [loading, siteType?.slug, siteTypes])
+        setSiteType(fallback)
+        state.setState({ default: fallback })
+    }, [loading, siteType?.slug, siteTypes, setSiteType])
 
     useEffect(() => {
         if (!search) return
@@ -82,17 +120,6 @@ export const SiteTypeSelect = () => {
         }, 500)
         return () => clearTimeout(timer)
     }, [search])
-
-    const selectSiteType = async (optionValue) => {
-        useUserSelectionStore.getState().setSiteType({
-            label: optionValue.title,
-            recordId: optionValue.id,
-            slug: optionValue.slug,
-            styles: optionValue.styles,
-        })
-        await updateOption('extendify_siteType', optionValue)
-        nextPage()
-    }
 
     return (
         <PageLayout>
@@ -109,90 +136,85 @@ export const SiteTypeSelect = () => {
                     )}
                 </p>
             </div>
-            <div className="w-full relative max-w-onboarding-sm mx-auto">
-                <div className="sticky bg-white top-10 z-40 pt-9 pb-3 mb-2">
-                    <div className="mb-4">
-                        <h2 className="text-lg m-0 text-gray-900">
-                            {__('What is your site about?', 'extendify')}
-                        </h2>
-                    </div>
-                    <div className="mx-auto search-panel flex items-center justify-center relative mb-6">
-                        <input
-                            ref={searchRef}
-                            type="text"
-                            className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder={__('Search...', 'extendify')}
-                        />
-                        <SearchIcon className="icon-search" />
-                    </div>
-                    {loading && <p>{__('Loading...', 'extendify')}</p>}
-                </div>
-                {visibleSiteTypes?.length > 0 && (
-                    <div className="relative" data-cy="siteTypeSection">
-                        {visibleSiteTypes.map((option) => (
-                            <SelectButton
-                                key={option.id}
-                                selectSiteType={selectSiteType}
-                                option={option}
+
+            <div className="w-full relative max-w-onboarding-md mx-auto">
+                <h2 className="text-lg m-0 mb-4 text-gray-900">
+                    {__('What is your site about?', 'extendify')}
+                </h2>
+                <Combobox
+                    value={siteType}
+                    by={(option, current) => option.slug === current.slug}
+                    onChange={handleSetSiteType}>
+                    <div className="relative border border-gray-200 rounded">
+                        <div className="mx-auto search-panel flex items-center justify-center relative">
+                            <Combobox.Input
+                                ref={searchRef}
+                                className="w-full h-14 px-4 m-0 input-focus ring-offset-0 focus:bg-white relative z-20 rounded"
+                                autoComplete="off"
+                                displayValue={() => ''}
+                                placeholder={__(
+                                    'Search for your business...',
+                                    'extendify',
+                                )}
+                                onChange={(event) =>
+                                    setSearch(event.target.value)
+                                }
+                                onBlur={() =>
+                                    visibleSiteTypes?.length === 0 &&
+                                    setSearch('')
+                                }
                             />
-                        ))}
-                    </div>
-                )}
-                {!loading && visibleSiteTypes?.length === 0 && (
-                    <div className="mx-auto w-full">
-                        <div className="uppercase">
-                            {__('No Results', 'extendify')}
+                            <Combobox.Button className="absolute inset-y-0 right-0 mx-2 bg-transparent flex items-center p-2">
+                                <SearchIcon />
+                            </Combobox.Button>
                         </div>
-                        {showMissingInput() && (
-                            <>
-                                <h2 className="text-lg mt-12 mb-4 text-gray-900">
-                                    {__(
-                                        "Don't see what you're looking for?",
-                                        'extendify',
-                                    )}
-                                </h2>
-                                <div className="search-panel flex items-center justify-center relative">
-                                    <input
-                                        type="text"
-                                        className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
-                                        value={feedback}
-                                        onChange={(e) =>
-                                            useUserSelectionStore
-                                                .getState()
-                                                .setFeedbackMissingSiteType(
-                                                    e.target.value,
-                                                )
-                                        }
-                                        placeholder={__(
-                                            'Describe your site...',
-                                            'extendify',
-                                        )}
-                                    />
-                                </div>
-                            </>
+                        {loading ? (
+                            <span className="flex border-none items-center justify-between p-4 py-2.5 relative w-full text-base m-0 text-gray-700">
+                                {__('Loading...', 'extendify')}
+                            </span>
+                        ) : (
+                            <Combobox.Options
+                                static
+                                className="m-0 py-2 border-t border-gray-200 overflow-auto max-h-half rounded-b">
+                                {visibleSiteTypes?.length === 0 &&
+                                search !== '' ? (
+                                    <div className="flex border-none items-center justify-between p-4 py-2.5 relative w-full text-base m-0 text-gray-700">
+                                        {__('No Results', 'extendify')}
+                                    </div>
+                                ) : (
+                                    visibleSiteTypes?.map((type) => (
+                                        <SelectButton
+                                            type={type}
+                                            key={type.id}
+                                        />
+                                    ))
+                                )}
+                            </Combobox.Options>
                         )}
                     </div>
+                </Combobox>
+                {loading || (
+                    <AnimatePresence>
+                        <MissingSiteType
+                            siteTypes={visibleSiteTypes}
+                            search={search}
+                        />
+                    </AnimatePresence>
                 )}
             </div>
         </PageLayout>
     )
 }
 
-const SelectButton = ({ option, selectSiteType }) => {
+const SelectButton = ({ type }) => {
     const hoveringTimeout = useRef(0)
     return (
-        <button
-            data-cy="selectSiteTypeButton"
-            onClick={() => {
-                selectSiteType(option)
-            }}
+        <Combobox.Option
             onMouseEnter={() => {
                 // Prefetch style templates when hovering over site type
                 window.clearTimeout(hoveringTimeout.current)
                 hoveringTimeout.current = window.setTimeout(() => {
-                    const data = () => styleFetchData(option)
+                    const data = () => styleFetchData(type)
                     mutate(data, (cache) => {
                         if (cache?.length) return cache
                         return styleFetcher(data())
@@ -202,9 +224,69 @@ const SelectButton = ({ option, selectSiteType }) => {
             onMouseLeave={() => {
                 window.clearTimeout(hoveringTimeout.current)
             }}
-            className="flex border border-gray-800 hover:text-partner-primary-bg focus:text-partner-primary-bg items-center justify-between mb-3 p-4 py-3 relative w-full button-focus bg-transparent">
-            <span className="text-left">{option.title}</span>
-            <LeftArrowIcon />
-        </button>
+            className="flex border-none items-center justify-between p-4 py-2.5 relative w-full text-base cursor-pointer m-0 text-gray-900"
+            value={type}>
+            {({ selected, active }) => (
+                <>
+                    <span
+                        className={classNames(
+                            'absolute inset-0 pointer-events-none',
+                            {
+                                'bg-partner-primary-bg': active,
+                            },
+                        )}
+                        aria-hidden="true"
+                        style={{ opacity: '0.04' }}
+                    />
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: type?.titleMarked ?? type.title,
+                        }}
+                    />
+                    {selected ? (
+                        <Checkmark className="h-6 w-6" />
+                    ) : active ? (
+                        <LeftArrowIcon className="h-6 w-6" />
+                    ) : null}
+                </>
+            )}
+        </Combobox.Option>
+    )
+}
+
+const MissingSiteType = ({ siteTypes, search }) => {
+    const { feedbackMissingSiteType, setFeedbackMissingSiteType } =
+        useUserSelectionStore()
+    const [show, setShow] = useState(false)
+
+    useEffect(() => {
+        // only show if there was a search that reproduced no results
+        if (search !== '' && siteTypes?.length === 0) {
+            setShow(
+                window.extOnbData?.activeTests?.['remove-dont-see-inputs'] !==
+                    'A',
+            )
+        }
+    }, [search, siteTypes])
+
+    if (!show) return null
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-auto w-full">
+            <h2 className="text-lg mt-12 mb-4 text-gray-900">
+                {__("Don't see what you're looking for?", 'extendify')}
+            </h2>
+            <div className="search-panel flex items-center justify-center relative">
+                <input
+                    type="text"
+                    className="w-full bg-gray-100 h-12 pl-4 input-focus rounded-none ring-offset-0 focus:bg-white"
+                    value={feedbackMissingSiteType}
+                    onChange={(e) => setFeedbackMissingSiteType(e.target.value)}
+                    placeholder={__('Describe your site...', 'extendify')}
+                />
+            </div>
+        </motion.div>
     )
 }

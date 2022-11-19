@@ -90,12 +90,13 @@ export const ImportCounter = memo(function ImportCounter() {
                                 sprintf(
                                     __(
                                         // translators: %s is a discount amount
-                                        '%1$sGet %2$s off%3$s Extendify Pro when you upgrade today!',
+                                        '%1$sGet %2$s off%3$s %4$s Pro when you upgrade today!',
                                         'extendify',
                                     ),
                                     '<strong>',
                                     '50%',
                                     '</strong>',
+                                    'Extendify',
                                 ),
                             ),
                         }}

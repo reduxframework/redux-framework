@@ -31,6 +31,8 @@ export const useUserStore = create(
             enabled: isGlobalLibraryEnabled(),
             canInstallPlugins: false,
             canActivatePlugins: false,
+            openOnNewPage: undefined, // This is only being used on the server
+            setOpenOnNewPage: (value) => set({ openOnNewPage: value }),
             incrementImports: () => {
                 // If the user has freebie imports, use those first
                 const freebieImports =

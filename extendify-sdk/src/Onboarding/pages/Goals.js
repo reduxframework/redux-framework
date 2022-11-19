@@ -132,7 +132,9 @@ export const Goals = () => {
                                                     selected,
                                             },
                                         )}
-                                        style={{ opacity: '0.04' }}></div>
+                                        aria-hidden="true"
+                                        style={{ opacity: '0.04' }}
+                                    />
                                     <div className="flex items-center gap-4 h-full">
                                         <CheckboxInputCard
                                             label={goal.title}

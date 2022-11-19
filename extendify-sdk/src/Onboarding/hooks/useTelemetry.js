@@ -102,6 +102,7 @@ export const useTelemetry = () => {
                     exitFeedback,
                     partnerName: window.extOnbData?.partnerName,
                     wpLanguage: window.extOnbData?.wpLanguage,
+                    siteCreatedAt: window.extOnbData?.siteCreatedAt,
                 }),
             }).catch(() => undefined)
         }, 1000)

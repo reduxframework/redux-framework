@@ -1,6 +1,6 @@
 import { Icon } from '@wordpress/components'
 import { useRef } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { General } from '@library/api/General'
 import { growthArrow, brandLogo } from '@library/components/icons'
 import { SplitModal } from './SplitModal'
@@ -20,9 +20,13 @@ export const ProModal = () => {
                     )}
                 </h3>
                 <p className="text-sm text-black">
-                    {__(
-                        "Upgrade to Extendify Pro and use all the patterns and layouts you'd like, including our exclusive Pro catalog.",
-                        'extendify',
+                    {sprintf(
+                        // translators: %s: The name of the plugin, Extendify.
+                        __(
+                            "Upgrade to %s Pro and use all the patterns and layouts you'd like, including our exclusive Pro catalog.",
+                            'extendify',
+                        ),
+                        'Extendify',
                     )}
                 </p>
                 <div>

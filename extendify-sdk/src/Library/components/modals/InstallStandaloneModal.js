@@ -10,7 +10,13 @@ import { useUserStore } from '@library/state/User'
 import { SplitModal } from './SplitModal'
 
 export const InstallStandaloneModal = () => {
-    const [text, setText] = useState(__('Install Extendify', 'extendify'))
+    const [text, setText] = useState(
+        sprintf(
+            // translators: %s: The name of the plugin, Extendify.
+            __('Install %s', 'extendify'),
+            'Extendify',
+        ),
+    )
     const [success, setSuccess] = useState(false)
     const [disabled, setDisabled] = useState(false)
     const initialFocus = useRef(null)
@@ -52,9 +58,10 @@ export const InstallStandaloneModal = () => {
                     {brandLogo}
                 </div>
                 <h3 className="text-xl">
-                    {__(
-                        'Get the brand new Extendify plugin today!',
-                        'extendify',
+                    {sprintf(
+                        // translators: %s: The name of the plugin, Extendify.
+                        __('Get the brand new %s plugin today!', 'extendify'),
+                        'Extendify',
                     )}
                 </h3>
                 <p
@@ -62,11 +69,12 @@ export const InstallStandaloneModal = () => {
                     dangerouslySetInnerHTML={{
                         __html: safeHTML(
                             sprintf(
-                                // translators: %s: <strong> tags
+                                // translators: %1$s: The name of the plugin, Extendify; %2$s and %3$s: <strong> tags.
                                 __(
-                                    'Install the new Extendify Library plugin to get the latest we have to offer — right from WordPress.org. Plus, well send you %1$s10 more imports%2$s. Nice.',
+                                    'Install the new %1$s Library plugin to get the latest we have to offer — right from WordPress.org. Plus, well send you %2$s10 more imports%3$s. Nice.',
                                     'extendify',
                                 ),
+                                'Extendify',
                                 '<strong>',
                                 '</strong>',
                             ),
