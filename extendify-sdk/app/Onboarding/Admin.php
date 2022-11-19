@@ -209,6 +209,7 @@ class Admin
                 'insightsEnabled' => defined('EXTENDIFY_INSIGHTS_URL'),
                 'activeTests' => \get_option('extendify_active_tests', []),
                 'wpLanguage' => \get_locale(),
+                'siteCreatedAt' => get_user_option('user_registered', 1),
             ]),
             'before'
         );

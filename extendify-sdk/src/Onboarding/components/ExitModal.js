@@ -1,6 +1,6 @@
 import { Button } from '@wordpress/components'
 import { useRef, useState, useEffect } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
 import { Dialog } from '@headlessui/react'
 import classNames from 'classnames'
@@ -110,9 +110,13 @@ export const ExitModal = () => {
                         label={__('Exit Launch', 'extendify')}
                     />
                     <p className="m-0 text-lg font-bold text-left">
-                        {__(
-                            'Thanks for trying Extendify Launch. How can we make this better?',
-                            'extendify',
+                        {sprintf(
+                            // translators: %s: The name of the plugin, Extendify.
+                            __(
+                                'Thanks for trying %s Launch. How can we make this better?',
+                                'extendify',
+                            ),
+                            'Extendify',
                         )}
                     </p>
                     <div

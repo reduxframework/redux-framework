@@ -1,6 +1,6 @@
 import { Spinner, Button } from '@wordpress/components'
 import { useState, useEffect, useRef } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { Icon } from '@wordpress/icons'
 import classNames from 'classnames'
 import { General } from '@library/api/General'
@@ -89,7 +89,11 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
             <section className="space-y-6 p-6 text-center flex flex-col items-center">
                 <Icon icon={successIcon} size={148} />
                 <p className="text-center text-lg font-semibold m-0 text-extendify-black">
-                    {__("You've signed in to Extendify", 'extendify')}
+                    {sprintf(
+                        // translators: %s: The name of the plugin, Extendify.
+                        __("You've signed in to %s", 'extendify'),
+                        'Extendify',
+                    )}
                 </p>
                 <Button
                     ref={viewPatternsButtonRef}

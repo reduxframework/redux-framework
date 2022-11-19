@@ -2,7 +2,7 @@ import { Modal } from '@wordpress/components'
 import { ToggleControl } from '@wordpress/components'
 import { useSelect } from '@wordpress/data'
 import { unmountComponentAtNode, useState, useEffect } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { useSiteSettingsStore } from '@library/state/SiteSettings'
 import { useUserStore } from '@library/state/User'
 
@@ -72,7 +72,11 @@ const LibraryAccessModal = () => {
 
     return (
         <Modal
-            title={__('Extendify Settings', 'extendify')}
+            title={sprintf(
+                // translators: %s: The name of the plugin, Extendify.
+                __('%s Settings', 'extendify'),
+                'Extendify',
+            )}
             onRequestClose={closeModal}>
             <ToggleControl
                 label={

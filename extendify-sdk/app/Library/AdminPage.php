@@ -75,15 +75,35 @@ class AdminPage
                     </ul>
                 <?php endif; ?>
                 <div class="welcome-header">
-                    <img alt="<?php \esc_html_e('Extendify Banner', 'extendify'); ?>" src="<?php echo \esc_url(EXTENDIFY_URL . 'public/assets/welcome-banner.jpg'); ?>">
+                    <img alt="
+                        <?php
+                            echo \wp_sprintf(
+                                /* translators: %s: The name of the plugin, Extendify */
+                                \esc_html__('%s Banner', 'extendify'),
+                                'Extendify'
+                            );
+                        ?>
+                    " src="<?php echo \esc_url(EXTENDIFY_URL . 'public/assets/welcome-banner.jpg'); ?>">
                 </div>
                 <hr class="is-small"/>
                 <div class="welcome-section">
                     <h2 class="aligncenter">
-                        <?php \esc_html_e('Welcome to Extendify', 'extendify'); ?>
+                        <?php
+                            echo \wp_sprintf(
+                                /* translators: %s: The name of the plugin, Extendify */
+                                \esc_html__('Welcome to %s', 'extendify'),
+                                'Extendify'
+                            );
+                        ?>
                     </h2>
                     <p class="aligncenter is-subheading">
-                        <?php \esc_html_e('Extendify is a massive library of drop-in black patterns easily customized to your liking. Each pattern is meticulously designed to work with your existing WordPress theme.', 'extendify'); ?>
+                        <?php
+                            echo \wp_sprintf(
+                                /* translators: %s: The name of the plugin, Extendify */
+                                \esc_html__('%s is a massive library of drop-in block patterns easily customized to your liking. Each pattern is meticulously designed to work with your existing WordPress theme.', 'extendify'),
+                                'Extendify'
+                            );
+                        ?>
                     </p>
                 </div>
                 <hr/>
@@ -91,7 +111,7 @@ class AdminPage
                     <div class="column is-edge-to-edge">
                         <h3>
                             <?php
-                            echo sprintf(
+                            echo \wp_sprintf(
                                 /* translators: %s: Extendify Library term */
                                 \esc_html__('1. Open the %s', 'extendify'),
                                 'Extendify Library'
@@ -99,7 +119,13 @@ class AdminPage
                             ?>
                         </h3>
                         <p>
-                            <?php \esc_html_e("When editing a page or post within the block editor, you'll see the Extendify library button within the editor's header", 'extendify'); ?>
+                            <?php
+                                echo \wp_sprintf(
+                                    /* translators: %s: Extendify Library term */
+                                    \esc_html__("When editing a page or post within the block editor, you'll see the %s button within the editor's header", 'extendify'),
+                                    'Extendify Library'
+                                );
+                            ?>
                         </p>
                         <p>
                             <?php
@@ -123,7 +149,13 @@ class AdminPage
                             <?php \esc_html_e('With the library open, you can set your site industry - or type - which will surface the perfect industry-specific patterns and full page layouts to drop onto your website.', 'extendify'); ?>
                         </p>
                         <p>
-                            <?php \esc_html_e('Extendify supports over sixty types with new industries added regularly.', 'extendify'); ?>
+                            <?php
+                                echo \wp_sprintf(
+                                    /* translators: %s: The name of the plugin, Extendify */
+                                    \esc_html__('%s supports over sixty types with new industries added regularly.', 'extendify'),
+                                    'Extendify'
+                                );
+                            ?>
                         </p>
                     </div>
                 </div>
@@ -133,7 +165,13 @@ class AdminPage
                             <?php \esc_html_e('3. Browse Patterns & Layouts.', 'extendify'); ?>
                         </h3>
                         <p>
-                            <?php \esc_html_e('Search by industry, contents, and design attributes. Extendify has thousands of best-in-class block patterns. Find what you love and add it to the page - done!', 'extendify'); ?>
+                            <?php
+                                echo \wp_sprintf(
+                                    /* translators: %s: The name of the plugin, Extendify */
+                                    \esc_html__('Search by industry, contents, and design attributes. %s has thousands of best-in-class block patterns. Find what you love and add it to the page - done!', 'extendify'),
+                                    'Extendify'
+                                );
+                            ?>
                         </p>
                         <p>
                             <?php \esc_html_e("You'll find beautiful high fidelity Gutenberg content to add to your pages in no time!", 'extendify'); ?>
@@ -147,7 +185,13 @@ class AdminPage
                 <?php if (!defined('EXTENDIFY_SITE_LICENSE')) : ?>
                     <div class="welcome-section">
                         <h2 class="aligncenter">
-                            <?php \esc_html_e('Upgrade to Extendify Pro', 'extendify'); ?>
+                            <?php
+                                echo \wp_sprintf(
+                                    /* translators: %s: The name of the plugin, Extendify */
+                                    \esc_html__('Upgrade to %s Pro', 'extendify'),
+                                    'Extendify'
+                                );
+                            ?>
                         </h2>
                         <p class="aligncenter is-subheading">
                             <?php \esc_html_e('Do you want more patterns and layouts - without limits? Choose one of our plans and receive unlimited access to our complete library.', 'extendify'); ?>

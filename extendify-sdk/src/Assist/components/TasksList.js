@@ -2,6 +2,7 @@ import { ExternalLink, Spinner } from '@wordpress/components'
 import { useEffect, useState } from '@wordpress/element'
 import { __, sprintf } from '@wordpress/i18n'
 import classNames from 'classnames'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Checkmark } from '@onboarding/svg'
 import { getOption } from '@assist/api/WPApi'
 import { useAdminColors } from '@assist/hooks/useAdminColors'
@@ -56,6 +57,25 @@ export const TasksList = () => {
         tasksFiltered.forEach((task) => seeTask(task.slug))
     }, [tasksFiltered, seeTask, readyTasks])
 
+    useEffect(() => {
+        const badgeCount = tasksFiltered?.length - tasksCompleted?.length
+        document
+            .querySelector(
+                '#toplevel_page_extendify-admin-page.wp-has-current-submenu',
+            )
+            ?.classList.add('current')
+
+        const badges = document.querySelectorAll(
+            '.extendify-assist-badge-count',
+        )
+        for (const badge of badges) {
+            if (badgeCount || badgeCount >= 0) {
+                badge.style.opacity = badgeCount === 0 ? '0' : '1'
+                badge.textContent = `${badgeCount}`
+            }
+        }
+    }, [tasksFiltered, tasksCompleted])
+
     if (loading || !readyTasks || !readyPlugins || error) {
         return (
             <div className="my-4 w-full flex items-center max-w-3/4 mx-auto bg-gray-100 p-12">
@@ -101,9 +121,37 @@ export const TasksList = () => {
                 </div>
             </div>
             <div className="w-full">
-                {tasksOpen.map((task) => (
-                    <TaskCheckBox key={task.slug} task={task} />
-                ))}
+                {showCompleted ? (
+                    tasksOpen.map((task) => (
+                        <TaskCheckBox key={task.slug} task={task} />
+                    ))
+                ) : (
+                    <AnimatePresence>
+                        {tasksOpen.map((task) => (
+                            <motion.div
+                                key={task.slug}
+                                variants={{
+                                    fade: {
+                                        opacity: 0,
+                                        x: 15,
+                                        transition: {
+                                            duration: 0.5,
+                                        },
+                                    },
+                                    shrink: {
+                                        height: 0,
+                                        transition: {
+                                            delay: 0.5,
+                                            duration: 0.2,
+                                        },
+                                    },
+                                }}
+                                exit={['fade', 'shrink']}>
+                                <TaskCheckBox key={task.slug} task={task} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                )}
             </div>
             {showCompleted && (
                 <div className="completed-tasks w-full">
@@ -118,49 +166,52 @@ export const TasksList = () => {
 
 const TaskCheckBox = ({ task }) => {
     const { isCompleted, toggleCompleted } = useTasksStore()
-
     return (
-        <div className="p-3 flex gap-3 justify-between border border-solid border-gray-400 bg-white mt-4 relative items-center">
-            <div className="flex gap-3 w-4/5">
-                <span className="block mt-1 relative self-start">
-                    <input
-                        id={`task-${task.slug}`}
-                        type="checkbox"
-                        className={classNames(
-                            'hide-checkmark h-6 w-6 rounded-full border-gray-400 outline-none focus:ring-wp ring-partner-primary-bg ring-offset-2 ring-offset-white m-0 focus:outline-none focus:shadow-none',
-                            {
-                                'bg-partner-primary-bg': isCompleted(task.slug),
-                            },
-                        )}
-                        checked={isCompleted(task.slug)}
-                        value={task.slug}
-                        name={task.slug}
-                        onChange={() => toggleCompleted(task.slug)}
-                    />
-                    <Checkmark className="text-white fill-current absolute h-6 w-6 block top-0" />
-                </span>
-                <span className="flex flex-col">
-                    <label
-                        htmlFor={`task-${task.slug}`}
-                        className="text-base font-semibold">
-                        <span
-                            aria-hidden="true"
-                            className="absolute inset-0"></span>
-                        {task.title}
-                    </label>
-                    <span>
-                        {task.description}{' '}
-                        {task.link && (
-                            <ExternalLink
-                                className="relative z-10"
-                                href={task.link}>
-                                {__('Learn more', 'extendify')}
-                            </ExternalLink>
-                        )}
+        <div className="pt-4">
+            <div className="p-3 flex gap-3 justify-between border border-solid border-gray-400 bg-white relative items-center">
+                <div className="flex gap-3 w-4/5">
+                    <span className="block mt-1 relative self-start">
+                        <input
+                            id={`task-${task.slug}`}
+                            type="checkbox"
+                            className={classNames(
+                                'hide-checkmark h-6 w-6 rounded-full border-gray-400 outline-none focus:ring-wp ring-partner-primary-bg ring-offset-2 ring-offset-white m-0 focus:outline-none focus:shadow-none',
+                                {
+                                    'bg-partner-primary-bg': isCompleted(
+                                        task.slug,
+                                    ),
+                                },
+                            )}
+                            checked={isCompleted(task.slug)}
+                            value={task.slug}
+                            name={task.slug}
+                            onChange={() => toggleCompleted(task.slug)}
+                        />
+                        <Checkmark className="text-white fill-current absolute h-6 w-6 block top-0" />
                     </span>
-                </span>
+                    <span className="flex flex-col">
+                        <label
+                            htmlFor={`task-${task.slug}`}
+                            className="text-base font-semibold">
+                            <span
+                                aria-hidden="true"
+                                className="absolute inset-0"></span>
+                            {task.title}
+                        </label>
+                        <span>
+                            {task.description}{' '}
+                            {task.link && (
+                                <ExternalLink
+                                    className="relative z-10"
+                                    href={task.link}>
+                                    {__('Learn more', 'extendify')}
+                                </ExternalLink>
+                            )}
+                        </span>
+                    </span>
+                </div>
+                <ActionButton task={task} />
             </div>
-            <ActionButton task={task} />
         </div>
     )
 }
@@ -214,7 +265,7 @@ const ActionButton = ({ task }) => {
                 onClick={() => {
                     completeTask('add-pages')
                     window.open(
-                        `${window.extAssistData.adminUrl}post-new.php?post_type=page&ext-open&ext-patternType=template`,
+                        `${window.extAssistData.adminUrl}post-new.php?post_type=page`,
                         '_blank',
                     )
                 }}>
