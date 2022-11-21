@@ -7,11 +7,9 @@ import { useGlobalStore } from '@library/state/GlobalState'
 import { Layout } from './layout/Layout'
 
 export default function MainWindow() {
+    const { open, setOpen, ready } = useGlobalStore()
     const containerRef = useRef(null)
-    const open = useGlobalStore((state) => state.open)
-    const setOpen = useGlobalStore((state) => state.setOpen)
     const modal = useModal(open)
-    const ready = useGlobalStore((state) => state.ready)
     const welcomeScreenOpen = useSelect((select) =>
         select('core/edit-post')?.isFeatureActive('welcomeGuide'),
     )

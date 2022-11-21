@@ -23,7 +23,7 @@ export const CreatingSite = () => {
     const [confettiReady, setConfettiReady] = useState(false)
     const [warnOnLeaveReady, setWarnOnLeaveReady] = useState(true)
     const canLaunch = useUserSelectionStore((state) => state.canLaunch())
-    const { siteType, siteInformation, pages, style, plugins } =
+    const { siteType, siteInformation, pages, style, plugins, goals } =
         useUserSelectionStore()
     const [info, setInfo] = useState([])
     const [infoDesc, setInfoDesc] = useState([])
@@ -78,8 +78,11 @@ export const CreatingSite = () => {
                         style,
                     )
                     await waitFor200Response()
+                    const addBlogPageToNav = goals.some(
+                        (goal) => goal.slug === 'blog',
+                    )
                     const updatedHeaderCode = addLaunchPagesToNav(
-                        pages,
+                        addBlogPageToNav ? pagesWithBlog : pages,
                         pageIds,
                         style?.headerCode,
                     )
@@ -162,7 +165,15 @@ export const CreatingSite = () => {
             await new Promise((resolve) => setTimeout(resolve, 2000))
             return doEverything()
         }
-    }, [pages, plugins, siteType, style, canLaunch, siteInformation.title])
+    }, [
+        goals,
+        pages,
+        plugins,
+        siteType,
+        style,
+        canLaunch,
+        siteInformation.title,
+    ])
 
     useEffect(() => {
         const q = new URLSearchParams(window.location.search)

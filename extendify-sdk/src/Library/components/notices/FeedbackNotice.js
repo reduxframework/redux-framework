@@ -1,14 +1,18 @@
 import { Button } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import { General } from '@library/api/General'
 
 export default function FeedbackNotice() {
     return (
         <>
             <span className="text-black">
-                {__(
-                    'Tell us how to make the Extendify Library work better for you',
-                    'extendify',
+                {sprintf(
+                    // translators: %s: Extendify Library term.
+                    __(
+                        'Tell us how to make the %s work better for you',
+                        'extendify',
+                    ),
+                    'Extendify Library',
                 )}
             </span>
             <span className="px-2 opacity-50" aria-hidden="true">

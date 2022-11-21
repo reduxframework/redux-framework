@@ -2,7 +2,7 @@ import { InspectorAdvancedControls } from '@wordpress/block-editor'
 import { FormTokenField } from '@wordpress/components'
 import { createHigherOrderComponent } from '@wordpress/compose'
 import { addFilter } from '@wordpress/hooks'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import suggestions from '../../../utility-framework/suggestions.json'
 
 function addAttributes(settings) {
@@ -49,7 +49,11 @@ const utilityClassEdit = createHigherOrderComponent((BlockEdit) => {
                 {classes && (
                     <InspectorAdvancedControls>
                         <FormTokenField
-                            label={__('Extendify Utilities', 'extendify')}
+                            label={sprintf(
+                                // translators: %s: The name of the plugin, Extendify.
+                                __('%s Utilities', 'extendify'),
+                                'Extendify',
+                            )}
                             tokenizeOnSpace={true}
                             value={classes}
                             suggestions={suggestionList}

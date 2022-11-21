@@ -132,8 +132,8 @@ class AdminPageRouter
         $remainingTasks = $tasksController->getRemainingCount();
         $badgeCount = $remainingTasks > 9 ? '9' : strval($remainingTasks);
         $menuLabel = Config::$launchCompleted ? __('Site Assistant', 'extendify') : __('Site Launcher', 'extendify');
-        $menuLabel = Config::$showOnboarding ? $menuLabel : __('Extendify', 'extendify');
-        $menuLabel = $badgeCount ? sprintf('%1$s <span class="awaiting-mod">%2$s</span>', $menuLabel, $badgeCount) : $menuLabel;
+        $menuLabel = Config::$showOnboarding ? $menuLabel : 'Extendify';
+        $menuLabel = sprintf('%1$s <span class="awaiting-mod extendify-assist-badge-count"%2$s>%3$s</span>', $menuLabel, $badgeCount === '0' ? ' style="opacity:0;"' : '', $badgeCount);
 
         \add_menu_page(
             'Extendify',

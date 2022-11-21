@@ -119,6 +119,8 @@ class Admin
      */
     public function addScopedScriptsAndStyles()
     {
+        $user = json_decode(User::data('extendifysdk_user_data'), true);
+        $openOnNewPage = isset($user['state']['openOnNewPage']) ? $user['state']['openOnNewPage'] : Config::$launchCompleted;
         $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
         $scriptAssetPath = EXTENDIFY_PATH . 'public/build/extendify-asset.php';
         $fallback = [
@@ -143,7 +145,8 @@ class Admin
             [
                 'root' => \esc_url_raw(rest_url(Config::$slug . '/' . Config::$apiVersion)),
                 'nonce' => \wp_create_nonce('wp_rest'),
-                'user' => json_decode(User::data('extendifysdk_user_data'), true),
+                'user' => $user,
+                'openOnNewPage' => $openOnNewPage,
                 'sitesettings' => json_decode(SiteSettings::data()),
                 'sdk_partner' => \esc_attr(Config::$sdkPartner),
                 'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),

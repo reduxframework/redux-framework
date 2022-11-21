@@ -56,7 +56,7 @@ class Admin
     public function loadScripts()
     {
         \add_action(
-            'admin_enqueue_scripts',
+            'init',
             function () {
                 if (!current_user_can(Config::$requiredCapability)) {
                     return;

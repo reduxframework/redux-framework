@@ -21,14 +21,6 @@
     -webkit-font-smoothing: antialiased;
 }
 
-.extendify-onboarding .search-panel input[type="text"]::placeholder {
-    @apply text-sm;
-}
-
-.extendify-onboarding .search-panel .icon-search {
-    position: absolute;
-    right: 16px;
-}
 .extendify-onboarding .button-focus {
     @apply outline-none cursor-pointer rounded-lg text-center text-base no-underline ring-partner-primary-bg ring-offset-2 ring-offset-white focus:shadow-none focus:ring-wp;
 }

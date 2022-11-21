@@ -44,6 +44,15 @@ export default function ExtendifyLibrary({ show = false }) {
     }, [show, setOpen])
 
     useEffect(() => {
+        if (
+            window?.location?.pathname?.includes('post-new.php') &&
+            window.extendifyData.openOnNewPage === '1'
+        ) {
+            setOpen(true)
+        }
+    }, [setOpen])
+
+    useEffect(() => {
         GeneralApi.metaData().then((data) => {
             useGlobalStore.setState({
                 metaData: data,

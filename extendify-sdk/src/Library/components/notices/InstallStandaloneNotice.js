@@ -1,6 +1,6 @@
 import { Button } from '@wordpress/components'
 import { useState } from '@wordpress/element'
-import { __ } from '@wordpress/i18n'
+import { __, sprintf } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { General } from '@library/api/General'
 import { Plugins } from '@library/api/Plugins'
@@ -32,9 +32,13 @@ export const InstallStandaloneNotice = () => {
     return (
         <div>
             <span className="text-black">
-                {__(
-                    'Install the new Extendify Library plugin to get the latest we have to offer',
-                    'extendify',
+                {sprintf(
+                    // translators: %s: Extendify Library term.
+                    __(
+                        'Install the new %s plugin to get the latest we have to offer',
+                        'extendify',
+                    ),
+                    'Extendify Library',
                 )}
             </span>
             <span className="px-2 opacity-50" aria-hidden="true">
