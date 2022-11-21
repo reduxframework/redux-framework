@@ -50,7 +50,7 @@ if ( ! class_exists( 'Redux_Radio', false ) ) {
 							name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '"
 							value="' . esc_attr( $k ) . '" ' . checked( $this->value, $k, false ) . '/>';
 
-					echo ' <span>' . esc_html( $v ) . '</span>';
+					echo ' <span>' . wp_kses_post( $v ) . '</span>';
 					echo '</label>';
 					echo '</li>';
 				}

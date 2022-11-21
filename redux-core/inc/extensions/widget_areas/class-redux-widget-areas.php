@@ -279,14 +279,12 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 				true
 			);
 
-			if ( $this->parent->args['dev_mode'] ) {
-				wp_enqueue_style(
-					'redux-widget-areas-css',
-					$this->extension_url . 'redux-extension-widget-areas.css',
-					array(),
-					time()
-				);
-			}
+			wp_enqueue_style(
+				'redux-widget-areas-css',
+				$this->extension_url . 'redux-extension-widget-areas.css',
+				array(),
+				time()
+			);
 
 			// Localize script.
 			wp_localize_script(

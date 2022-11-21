@@ -121,10 +121,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		 * @param     object $core ReduxFramework object.
 		 */
 		private function register_styles( $core ) {
-
 			// *****************************************************************
 			// Redux Admin CSS
 			// *****************************************************************
+
 			if ( 'wordpress' === $core->args['admin_theme'] || 'wp' === $core->args['admin_theme'] ) { // phpcs:ignore WordPress.WP.CapitalPDangit
 				$color_scheme = get_user_option( 'admin_color' );
 			} elseif ( 'classic' === $core->args['admin_theme'] || '' === $core->args['admin_theme'] ) {
@@ -205,14 +205,14 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'font-awesome',
 				Redux_Core::$url . 'assets/font-awesome/css/all.min.css',
 				array(),
-				'6.1.1'
+				'6.2.1'
 			);
 
 			wp_register_style(
 				'font-awesome-4-shims',
 				Redux_Core::$url . 'assets/font-awesome/css/v4-shims.min.css',
 				array(),
-				'6.1.1'
+				'6.2.1'
 			);
 
 			// *****************************************************************

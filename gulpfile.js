@@ -96,7 +96,7 @@ var AUTOPREFIXER_BROWSERS = ['last 2 version', '> 1%', 'ie > 10', 'ie_mob > 10',
 var gulp = require( 'gulp' ); // Gulp of-course.
 
 // CSS related plugins.
-var sass = require( 'gulp-sass' )(require('node-sass')); // Gulp pluign for Sass compilation.
+var sass = require( 'gulp-sass' )( require( 'node-sass' ) ); // Gulp pluign for Sass compilation.
 //sass.compiler = require( 'node-sass' );
 
 var minifycss = require( 'gulp-uglifycss' ); // Minifies CSS files.
@@ -125,8 +125,8 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 var merge = require( 'merge-stream' );
 var sassPackager = require( 'gulp-sass-packager' );
-var composer = require('gulp-composer');
-var del = require('del');
+var composer = require( 'gulp-composer' );
+var del = require( 'del' );
 
 /**
  * Task: `browser-sync`.
@@ -245,7 +245,7 @@ function reduxStyles() {
 	lib_dirs.map(
 		function( folder ) {
 			var the_path = './redux-core/inc/lib/' + folder + '/';
-			folder       = folder.replace( '_', '-' );
+			folder = folder.replace( '_', '-' );
 
 			return process_scss( the_path + folder + '.scss', the_path );
 		}
@@ -294,29 +294,29 @@ function reduxStyles() {
 		{allowEmpty: true}
 	)
 
-	.pipe( sassPackager( {} ) )
-	.pipe( concat( 'redux-fields.min.scss' ) )
-	.pipe(
-		sass(
-			{
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				// outputStyle: 'compact',
-				// outputStyle: 'nested',
-				// outputStyle: 'expanded'.
-				precision: 10
-			}
+		.pipe( sassPackager( {} ) )
+		.pipe( concat( 'redux-fields.min.scss' ) )
+		.pipe(
+			sass(
+				{
+					errLogToConsole: true,
+					outputStyle: 'compressed',
+					// outputStyle: 'compact',
+					// outputStyle: 'nested',
+					// outputStyle: 'expanded'.
+					precision: 10
+				}
+			)
 		)
-	)
-	.on( 'error', console.error.bind( console ) )
-	.pipe( sourcemaps.write( {includeContent: false} ) )
-	.pipe( sourcemaps.init( {loadMaps: true} ) )
-	.pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
-	.pipe( sourcemaps.write( './' ) )
-	.pipe( lineec() )                                       // Consistent Line Endings for non UNIX systems.
-	.pipe( gulp.dest( 'redux-core/assets/css/' ) );
+		.on( 'error', console.error.bind( console ) )
+		.pipe( sourcemaps.write( {includeContent: false} ) )
+		.pipe( sourcemaps.init( {loadMaps: true} ) )
+		.pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
+		.pipe( sourcemaps.write( './' ) )
+		.pipe( lineec() )                                       // Consistent Line Endings for non UNIX systems.
+		.pipe( gulp.dest( 'redux-core/assets/css/' ) );
 
-	return merge( core, colors, fields, extensions, extension_fields, redux_files );
+		return merge( core, colors, fields, extensions, extension_fields, redux_files );
 }
 
 function extFieldJS( done ) {
@@ -352,7 +352,7 @@ function extFieldJS( done ) {
 	done();
 }
 
-function reduxLibJS ( done ) {
+function reduxLibJS( done ) {
 	var field_dirs = getFolders( 'redux-core/inc/lib' );
 
 	field_dirs.map(
@@ -564,7 +564,6 @@ function reduxJS( done ) {
  *     4. Uglifes/Minifies the JS file and generates vendors.min.js
  */
 function vendorsJS( done ) {
-
 	gulp.src( jsVendorSRC )
 	.pipe( concat( jsVendorFile + '.js' ) )
 	.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
@@ -642,10 +641,10 @@ function translate() {
 	.pipe( gulp.dest( translatePath + '/' + destFile ) );
 }
 
-function installFontawesome( done ){
-	composer(  'update' );
+function installFontawesome( done ) {
+	composer( 'update' );
 
-	del([
+	del( [
 		'redux-core/assets/font-awesome/*.*',
 		'redux-core/assets/font-awesome/.github',
 		'redux-core/assets/font-awesome/js',
@@ -663,7 +662,7 @@ function installFontawesome( done ){
 		'redux-core/assets/font-awesome/css/svg-with-js.*',
 		'redux-core/assets/font-awesome/css/v4-font-face.*',
 		'redux-core/assets/font-awesome/css/v5-font-face.*'
-	]);
+	] );
 
 	done();
 }
