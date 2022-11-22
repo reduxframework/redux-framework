@@ -193,6 +193,17 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		}
 
 		/**
+		 * Generate CSS style (unused, but needed).
+		 *
+		 * @param string $data Field data.
+		 *
+		 * @return string
+		 */
+		public function css_style( $data ): string {
+			return '';
+		}
+
+		/**
 		 * Enable output_variables to be generated.
 		 *
 		 * @since       4.0.3

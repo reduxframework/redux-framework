@@ -2,6 +2,7 @@
 
 ## 4.3.20.2
 * Fixed: Widget area UI improperly aligned when `dev_mode` set to `false`.
+* Fixed: `spinner` field not outputting `output` data.
 * Update: Extendify Library 1.2.1
 
 ## 4.3.20.1
