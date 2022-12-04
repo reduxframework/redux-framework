@@ -1,13 +1,11 @@
 # Redux Changelog
 
-## 4.3.20.2
+## 4.3.21
+* Added: Google Maps extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extensions/google-maps.html)
 * Fixed: Widget area UI improperly aligned when `dev_mode` set to `false`.
 * Fixed: `spinner` field not outputting `output` data.
-* Update: Extendify Library 1.2.1
-
-## 4.3.20.1
-* Added: Google Maps extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extensions/google-maps.html)
 * Fixed: Metaboxes CSS causing layout issues when `dev_mode` set to `false`.
+* Update: Extendify Library 1.2.1
 * Update: Font Awesome 6.2.1
 
 ## 4.3.20

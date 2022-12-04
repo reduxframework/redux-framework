@@ -10,6 +10,7 @@
 * Multi Media extension.
 * DateTime extension.
 * JS Button extension.
+* Google Maps extension
 * Widget Areas extension (applies to Classic Widgets only).
 * Gutenberg Template Library updated to the new Extendify library. See more information here about this upgrade and how to access the legacy library: [https://redux.io/gutenberg-template-library-upgrade](https://redux.io/gutenberg-template-library-upgrade).
 

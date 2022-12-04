@@ -3,8 +3,8 @@ Contributors: kprovance, dovyp, redux
 Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
-Tested up to: 6.1
-Stable tag: 4.3.20
+Tested up to: 6.2
+Stable tag: 4.3.21
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
