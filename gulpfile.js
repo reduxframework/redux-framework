@@ -294,29 +294,29 @@ function reduxStyles() {
 		{allowEmpty: true}
 	)
 
-		.pipe( sassPackager( {} ) )
-		.pipe( concat( 'redux-fields.min.scss' ) )
-		.pipe(
-			sass(
-				{
-					errLogToConsole: true,
-					outputStyle: 'compressed',
-					// outputStyle: 'compact',
-					// outputStyle: 'nested',
-					// outputStyle: 'expanded'.
-					precision: 10
-				}
-			)
+	.pipe( sassPackager( {} ) )
+	.pipe( concat( 'redux-fields.min.scss' ) )
+	.pipe(
+		sass(
+			{
+				errLogToConsole: true,
+				outputStyle: 'compressed',
+				// outputStyle: 'compact',
+				// outputStyle: 'nested',
+				// outputStyle: 'expanded'.
+				precision: 10
+			}
 		)
-		.on( 'error', console.error.bind( console ) )
-		.pipe( sourcemaps.write( {includeContent: false} ) )
-		.pipe( sourcemaps.init( {loadMaps: true} ) )
-		.pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
-		.pipe( sourcemaps.write( './' ) )
-		.pipe( lineec() )                                       // Consistent Line Endings for non UNIX systems.
-		.pipe( gulp.dest( 'redux-core/assets/css/' ) );
+	)
+	.on( 'error', console.error.bind( console ) )
+	.pipe( sourcemaps.write( {includeContent: false} ) )
+	.pipe( sourcemaps.init( {loadMaps: true} ) )
+	.pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
+	.pipe( sourcemaps.write( './' ) )
+	.pipe( lineec() )                                       // Consistent Line Endings for non UNIX systems.
+	.pipe( gulp.dest( 'redux-core/assets/css/' ) );
 
-		return merge( core, colors, fields, extensions, extension_fields, redux_files );
+	return merge( core, colors, fields, extensions, extension_fields, redux_files );
 }
 
 function extFieldJS( done ) {
@@ -597,19 +597,18 @@ function vendorsJS( done ) {
  * again, do it with the command `gulp images`.
  */
 function reduxImages( done ) {
-
 	gulp.src( imagesSRC )
-	.pipe(
-		imagemin(
-			{
-				progressive: true,
-				optimizationLevel: 3, // 0-7 low-high
-				interlaced: true,
-				svgoPlugins: [{removeViewBox: false}]
-			}
+		.pipe(
+			imagemin(
+				{
+					progressive: true,
+					optimizationLevel: 3, // 0-7 low-high
+					interlaced: true,
+					svgoPlugins: [{removeViewBox: false}]
+				}
+			)
 		)
-	)
-	.pipe( gulp.dest( imagesDestination ) );
+		.pipe( gulp.dest( imagesDestination ) );
 
 	done();
 }
@@ -625,20 +624,20 @@ function reduxImages( done ) {
  */
 function translate() {
 	return gulp.src( projectPHPWatchFiles )
-	.pipe( sort() )
-	.pipe(
-		wpPot(
-			{
-				domain: text_domain,
-				destFile: destFile,
-				package: packageName,
-				bugReport: bugReport,
-				lastTranslator: lastTranslator,
-				team: team
-			}
+		.pipe( sort() )
+		.pipe(
+			wpPot(
+				{
+					domain: text_domain,
+					destFile: destFile,
+					package: packageName,
+					bugReport: bugReport,
+					lastTranslator: lastTranslator,
+					team: team
+				}
+			)
 		)
-	)
-	.pipe( gulp.dest( translatePath + '/' + destFile ) );
+		.pipe( gulp.dest( translatePath + '/' + destFile ) );
 }
 
 function installFontawesome( done ) {
@@ -679,94 +678,6 @@ gulp.task( 'images', reduxImages );
 gulp.task( 'translate', translate );
 gulp.task( 'composer', installFontawesome );
 
-function cleanBuild() {
-	return gulp.src( './build', {read: false, allowEmpty: true} )
-	.pipe( clean() );
-}
-
-function makeBuild() {
-	return gulp.src( [
-		'./**/*.*',
-		'!./assets/js/*.dev.*',
-		'!./node_modules/**/*.*',
-		'!./src/**/*.*',
-		'!./.wordpress-org/**/*.*',
-		'!./.github/**/*.*',
-		'!./build/**/*.zip',
-		'!./gulpfile.js',
-		'!./yarn.lock',
-		'!./yarn-error.log',
-		'!.babelrc',
-		'!./languages/**/*',
-		'!.eslintrc',
-		'!./package-lock.json',
-		'!./composer-lock.json',
-		'!./composer.lock',
-		'!./webpack.*.js',
-		'!./jest.config.js',
-		'!./**/jest.config.js',
-		'!./**/babel.config.js',
-		'!./package.json',
-		'!./composer.json',
-		'!./ruleset.xml',
-		'!./codestyles/*',
-		'!./local_developer.txt',
-		'!./jsconfig.json',
-		'!./vendor/**/*',
-		'!./tests/**/*',
-		'!./redux-core/assets/scss/**/*',
-		'!./redux-core/assets/img/raw/**/*',
-		'!./redux-templates/src/**/*',
-		'!./redux-templates/classes/*.json',
-	] ).pipe( gulp.dest( 'build/' ) );
-}
-
-function admin_css() {
-	return gulp.src( ['./redux-templates/src/scss/*.scss'] )
-	.pipe( sass() )
-	.pipe( autoprefixer( {
-		cascade: false
-	} ) )
-	.pipe( minifyCSS() )
-	.pipe( concat( 'admin.min.css' ) )
-	.pipe( gulp.dest( 'redux-templates/assets/css/' ) );
-}
-
-
-function minify_js() {
-	return gulp.src( ['./build/redux-templates/assets/js/*.js'] )
-	.pipe( minifyJS( {
-		ext: {
-			src: '.js',
-			min: '.min.js'
-		},
-		exclude: ['tasks'],
-		ignoreFiles: ['redux-templates.min.js', '*-min.js', '*.min.js']
-	} ) )
-	.pipe( gulp.dest( ['./build/redux-templates/assets/js/'] ) );
-
-}
-
-
-function makeZip() {
-	return gulp.src( './build/**/*.*' )
-	.pipe( zip( './build/redux.zip' ) )
-	.pipe( gulp.dest( './' ) );
-}
-
-gulp.task( 'makeBuild', makeBuild );
-gulp.task( 'admin_css', admin_css );
-gulp.task( 'minify_js', minify_js );
-gulp.task( 'cleanBuild', cleanBuild );
-gulp.task( 'makeZip', makeZip );
-
-gulp.task( 'templates', gulp.series(
-	'cleanBuild',
-	'makeBuild',
-	'admin_css',
-	'minify_js',
-	'makeZip'
-) );
 /**
  * Watch Tasks.
  *

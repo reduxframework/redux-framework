@@ -7,6 +7,7 @@
 * Fixed: Metaboxes CSS causing layout issues when `dev_mode` set to `false`.
 * Update: Extendify Library 1.2.1
 * Update: Font Awesome 6.2.1
+* Release date: December 05, 2022
 
 ## 4.3.20
 * Fixed: `spinner` field returning JavaScript error.
@@ -15,7 +16,7 @@
 * Updated: Removed registration verbiage from Google Fonts update notice.
 * Added: Widget Areas extension (for use with Classic Widgets only).
 * Updated: Extendify Library 1.0.1
-* Release date: November 2, 2022
+* Release date: November 02, 2022
 
 ## 4.3.19
 * Fixed: Extendify menu item appearing when it should not.
