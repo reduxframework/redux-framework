@@ -49,7 +49,11 @@ class AdminPage
     public function pageContent()
     {
         ?>
-        <div id="extendify-assist-landing-page" class="extendify-assist"></div>
+        <div
+            id="extendify-assist-landing-page"
+            class="extendify-assist"
+            data-test="assist-landing">
+        ></div>
         <?php
     }
 }

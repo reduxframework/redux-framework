@@ -126,7 +126,7 @@ export const SiteTypeSelect = () => {
             <div>
                 <h1
                     className="text-3xl text-partner-primary-text mb-4 mt-0"
-                    data-cy="launch-welcome-message">
+                    data-test="launch-welcome-message">
                     {__('Welcome to your WordPress site', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70 mb-0">

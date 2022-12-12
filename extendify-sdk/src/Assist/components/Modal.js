@@ -17,7 +17,7 @@ export const Modal = () => {
     return (
         <Dialog
             as="div"
-            className="extendify-assist extendify-assist-modal"
+            className="extendify-assist"
             open={modals.length > 0}
             onClose={popModal}>
             <div className="fixed top-0 mx-auto w-full h-full overflow-hidden p-2 md:p-6 md:flex justify-center items-center z-high">

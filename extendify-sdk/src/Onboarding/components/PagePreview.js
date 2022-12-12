@@ -55,7 +55,7 @@ export const PagePreview = ({
 
     return (
         <div
-            data-cy="pageSelector"
+            data-test="pageSelector"
             role="button"
             tabIndex={0}
             aria-label={__('Press to select', 'extendify')}

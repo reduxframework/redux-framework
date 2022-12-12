@@ -8,7 +8,7 @@ export const PagesList = () => {
 
     if (loading || error) {
         return (
-            <div className="my-4 w-full flex items-center max-w-3/4 mx-auto bg-gray-100 p-12">
+            <div className="my-4 w-full flex items-center lg:max-w-3/4 mx-auto p-4 lg:p-12">
                 <Spinner />
             </div>
         )
@@ -16,14 +16,14 @@ export const PagesList = () => {
 
     if (pages.length === 0) {
         return (
-            <div className="my-4 max-w-3/4 w-full mx-auto bg-gray-100 p-12">
+            <div className="my-4 lg:max-w-3/4 w-full mx-auto bg-gray-100 p-4 lg:p-12">
                 {__('No pages found...', 'extendify')}
             </div>
         )
     }
 
     return (
-        <div className="my-4 text-base max-w-3/4 w-full mx-auto">
+        <div className="my-4 text-base lg:max-w-3/4 w-full mx-auto p-4 lg:p-0">
             <h2 className="text-lg mb-3">{__('Pages', 'extendify')}:</h2>
             <div className="grid grid-cols-2 gap-4">
                 {pages.map((page) => (
