@@ -50,7 +50,7 @@ class PluginController
     public static function install($request)
     {
         if (!\current_user_can('activate_plugins')) {
-            return new \WP_Error('not_allowed', \__('You are not allowed to activate plugins on this site.', 'extendify'));
+            return new \WP_Error('not_allowed', __('You are not allowed to activate plugins on this site.', 'extendify'));
         }
 
         $requiredPlugins = json_decode($request->get_param('plugins'), true);

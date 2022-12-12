@@ -30,3 +30,6 @@ body[class*="_page_extendify-assist"] {
 body[class*="_page_extendify-assist"] #wpcontent {
     @apply p-0;
 }
+.ext-force-overflow-auto {
+    @apply overflow-auto;
+}

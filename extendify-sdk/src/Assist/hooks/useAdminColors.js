@@ -1,17 +1,25 @@
-import { useLayoutEffect, useState } from '@wordpress/element'
+import { useEffect } from '@wordpress/element'
 import { colord } from 'colord'
+import useSWRImmutable from 'swr/immutable'
 
 export const useAdminColors = () => {
-    const [mainColor, setMainColor] = useState('#3959e9')
-    const [darkColor, setDarkColor] = useState(
-        colord('#3959e9').darken(0.05).toHex(),
-    )
-    useLayoutEffect(() => {
-        const menu = document.querySelector('a.wp-has-current-submenu')
-        if (!menu) return
+    const { data: adminColors } = useSWRImmutable('adminColors', () => {
+        const menu = document?.querySelector('a.wp-has-current-submenu')
+        if (!menu) return null
         const adminColor = window.getComputedStyle(menu)?.['background-color']
-        setMainColor(adminColor)
-        setDarkColor(colord(adminColor).darken(0.05).toHex())
-    }, [])
-    return { mainColor, darkColor }
+        return {
+            mainColor: adminColor,
+            darkColor: colord(adminColor).darken(0.5).toHex(),
+        }
+    })
+    useEffect(() => {
+        if (adminColors?.mainColor) {
+            document.documentElement.style.setProperty(
+                '--wp-admin-theme-color',
+                adminColors.mainColor,
+            )
+        }
+    }, [adminColors])
+
+    return adminColors || {}
 }

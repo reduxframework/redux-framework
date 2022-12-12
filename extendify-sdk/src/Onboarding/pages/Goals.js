@@ -97,7 +97,7 @@ export const Goals = () => {
                     <p>{__('Loading...', 'extendify')}</p>
                 ) : (
                     <form
-                        data-cy="goalsForm"
+                        data-test="goalsForm"
                         onSubmit={(e) => {
                             e.preventDefault()
                             nextPage()

@@ -6,6 +6,7 @@ import { getTaskData, saveTaskData } from '../api/Data'
 const state = (set, get) => ({
     // These are tests the user is in progress of completing.
     // Not to be confused with tasks that are in progress.
+    // ! This should have probably been in Global or elsewhere?
     activeTests: [],
     // These are tasks that the user has seen. When added,
     // they will look like [{ key, firstSeenAt }]

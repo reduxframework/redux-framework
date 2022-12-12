@@ -5,36 +5,32 @@ import classNames from 'classnames'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Checkmark } from '@onboarding/svg'
 import { getOption } from '@assist/api/WPApi'
+import { useActivePlugins } from '@assist/hooks/useActivePlugins'
 import { useAdminColors } from '@assist/hooks/useAdminColors'
 import { useTasks } from '@assist/hooks/useTasks'
 import { useGlobalStore } from '@assist/state/Global'
-import {
-    useSelectionStore,
-    useSelectionStoreReady,
-} from '@assist/state/Selections'
+import { useSelectionStoreReady } from '@assist/state/Selections'
 import { useTasksStoreReady, useTasksStore } from '@assist/state/Tasks'
 import { UpdateLogo } from '@assist/tasks/UpdateLogo'
 import { UpdateSiteDescription } from '@assist/tasks/UpdateSiteDescription'
 import { UpdateSiteIcon } from '@assist/tasks/UpdateSiteIcon'
+import { useTourStore } from '../state/Tours'
+import welcomeTour from '../tours/welcome.js'
 
 export const TasksList = () => {
     const { seeTask, completedTasks } = useTasksStore()
     const { tasks, loading, error } = useTasks()
+    const { activePlugins } = useActivePlugins()
     const [showCompleted, setShowCompleted] = useState(false)
     const readyTasks = useTasksStoreReady()
     const readyPlugins = useSelectionStoreReady()
-    const pluginBasedGoals = useSelectionStore((state) =>
-        state.plugins?.reduce(
-            (acc, plugin) => [...acc, ...(plugin?.goals ?? [])],
-            [],
-        ),
-    )
-    // Filter out tasks that have goal dependencies that don't match the user's goals
+
+    // Filter out tasks that have plugin dependencies that don't match the user's plugins
     const tasksFiltered = tasks?.filter((task) => {
-        // If no goals, show the task
-        if (!task?.goals?.length) return true
-        // Check if task.goals intersect with pluginBasedGoals
-        return task?.goals?.some((goal) => pluginBasedGoals.includes(goal))
+        // If no plugins, show the task
+        if (!task?.plugins?.length) return true
+        // Check if task.plugins intersect with activePlugins
+        return task?.plugins?.some((plugin) => activePlugins.includes(plugin))
     })
     // Divide filtered tasks by completion status, first simplify the array
     const completedTasksArray = completedTasks.map((task) => task.id)
@@ -78,7 +74,7 @@ export const TasksList = () => {
 
     if (loading || !readyTasks || !readyPlugins || error) {
         return (
-            <div className="my-4 w-full flex items-center max-w-3/4 mx-auto bg-gray-100 p-12">
+            <div className="my-4 w-full flex items-center lg:max-w-3/4 mx-auto bg-gray-100 p-4 lg:p-12">
                 <Spinner />
             </div>
         )
@@ -86,14 +82,16 @@ export const TasksList = () => {
 
     if (tasks?.length === 0 || tasksFiltered?.length === 0) {
         return (
-            <div className="my-4 max-w-3/4 w-full mx-auto bg-gray-100 p-12">
+            <div
+                className="my-4 lg:max-w-3/4 w-full mx-auto bg-gray-100 p-4 lg:p-12"
+                data-test="no-tasks-found">
                 {__('No tasks found...', 'extendify')}
             </div>
         )
     }
 
     return (
-        <div className="my-4 max-w-3/4 w-full mx-auto bg-gray-100 p-12 pt-10">
+        <div className="my-4 lg:max-w-3/4 w-full mx-auto bg-gray-100 p-4 lg:p-12 pt-10">
             <div className="mb-6 flex gap-0 flex-col">
                 <h2 className="my-0 text-lg">
                     {__('Get ready to go live', 'extendify')}
@@ -120,7 +118,9 @@ export const TasksList = () => {
                     )}
                 </div>
             </div>
-            <div className="w-full">
+            <div
+                className="uncompleted-tasks w-full"
+                data-test="uncompleted-tasks">
                 {showCompleted ? (
                     tasksOpen.map((task) => (
                         <TaskCheckBox key={task.slug} task={task} />
@@ -210,97 +210,81 @@ const TaskCheckBox = ({ task }) => {
                         </span>
                     </span>
                 </div>
-                <ActionButton task={task} />
+                {task.taskType === 'modal' && <ModalButton task={task} />}
+                {task.taskType === 'internal link' && (
+                    <InternalLinkButton task={task} />
+                )}
+                {task.taskType === 'tour' && <TourButton task={task} />}
             </div>
         </div>
     )
 }
 
-const ActionButton = ({ task }) => {
-    const { pushModal } = useGlobalStore()
+const TourButton = ({ task }) => {
     const { mainColor } = useAdminColors()
-    const { isCompleted, completeTask } = useTasksStore()
-    if (task?.slug === 'logo') {
-        return (
-            <button
-                style={{ backgroundColor: mainColor }}
-                className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
-                onClick={() => pushModal(UpdateLogo)}>
-                {isCompleted('logo')
-                    ? __('Replace', 'extendify')
-                    : __('Upload', 'extendify')}
-            </button>
-        )
-    }
-    //add-pages
-    if (task?.slug === 'site-icon') {
-        return (
-            <button
-                style={{ backgroundColor: mainColor }}
-                className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
-                onClick={() => pushModal(UpdateSiteIcon)}>
-                {isCompleted('site-icon')
-                    ? __('Replace', 'extendify')
-                    : __('Upload', 'extendify')}
-            </button>
-        )
-    }
-    if (task?.slug === 'site-description') {
-        return (
-            <button
-                style={{ backgroundColor: mainColor }}
-                className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
-                onClick={() => pushModal(UpdateSiteDescription)}>
-                {isCompleted('site-description')
-                    ? __('Change', 'extendify')
-                    : __('Add', 'extendify')}
-            </button>
-        )
-    }
-    if (task?.slug === 'add-pages') {
-        return (
-            <button
-                style={{ backgroundColor: mainColor }}
-                className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
-                onClick={() => {
-                    completeTask('add-pages')
-                    window.open(
-                        `${window.extAssistData.adminUrl}post-new.php?post_type=page`,
-                        '_blank',
-                    )
-                }}>
-                {__('Add new', 'extendify')}
-            </button>
-        )
-    }
-    if (task?.slug === 'edit-homepage') {
-        return <EditHomePageButton />
-    }
-    return null
+    const { startTour } = useTourStore()
+    const { isCompleted } = useTasksStore()
+
+    return (
+        <button
+            style={{ backgroundColor: mainColor }}
+            className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
+            onClick={() => startTour(welcomeTour)}>
+            {isCompleted(task.slug) ? task.buttonTextDone : task.buttonTextToDo}
+        </button>
+    )
 }
 
-const EditHomePageButton = () => {
+const ModalButton = ({ task }) => {
+    const { pushModal } = useGlobalStore()
+    const { mainColor } = useAdminColors()
+    const { isCompleted } = useTasksStore()
+    const Components = {
+        UpdateLogo,
+        UpdateSiteDescription,
+        UpdateSiteIcon,
+    }
+
+    if (!Components[task.modalFunction]) return null
+
+    return (
+        <button
+            style={{ backgroundColor: mainColor }}
+            className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5"
+            onClick={() => pushModal(Components[task.modalFunction])}>
+            {isCompleted(task.slug) ? task.buttonTextDone : task.buttonTextToDo}
+        </button>
+    )
+}
+
+const InternalLinkButton = ({ task }) => {
     const [homepageId, setHomepageId] = useState(0)
     const { mainColor } = useAdminColors()
-    useEffect(() => {
-        getOption('page_on_front').then(setHomepageId)
-    }, [homepageId])
+    const { completeTask } = useTasksStore()
     const handleClick = () => {
-        completeTask('edit-homepage')
+        completeTask(task.slug)
+        if (task.slug === 'edit-homepage' && homepageId) {
+            const split = task.internalLink.split('$')
+            task.internalLink = split[0] + homepageId + split[1]
+        }
         window.open(
-            `${window.extAssistData.adminUrl}post.php?post=${homepageId}&action=edit`,
+            `${window.extAssistData.adminUrl + task.internalLink}`,
             '_blank',
         )
     }
-    const { completeTask } = useTasksStore()
+
+    useEffect(() => {
+        getOption('page_on_front').then(setHomepageId)
+    }, [homepageId])
 
     if (!homepageId) return null
+
     return (
         <button
             style={{ backgroundColor: mainColor }}
             className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5 disabled:bg-gray-700"
             onClick={handleClick}>
-            {__('Edit now', 'extendify')}
+            {task.buttonTextToDo}
         </button>
     )
 }

@@ -195,7 +195,7 @@ export default function LoginInterface({ actionCallback, initialFocus }) {
                     <button
                         type="submit"
                         className="relative flex w-72 max-w-full cursor-pointer justify-center rounded bg-extendify-main p-2 py-3 text-center text-base text-white hover:bg-extendify-main-dark ">
-                        <span>{__('Sign In', 'extendify')}</span>
+                        <span>{__('Sign in', 'extendify')}</span>
                         {isWorking && (
                             <div className="absolute right-2.5">
                                 <Spinner />
