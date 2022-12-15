@@ -60,6 +60,7 @@ use Extendify\Assist\Controllers\WPController as AssistWPController;
         ApiRouter::post('/onboarding/options', [WPController::class, 'updateOption']);
         ApiRouter::get('/onboarding/options', [WPController::class, 'getOption']);
         ApiRouter::post('/onboarding/parse-theme-json', [WPController::class, 'parseThemeJson']);
+        ApiRouter::get('/onboarding/active-plugins', [WPController::class, 'getActivePlugins']);
 
         ApiRouter::get('/onboarding/site-types', [DataController::class, 'getSiteTypes']);
         ApiRouter::get('/onboarding/styles', [DataController::class, 'getStyles']);
@@ -84,6 +85,7 @@ use Extendify\Assist\Controllers\WPController as AssistWPController;
         ApiRouter::get('/assist/user-selection-data', [UserSelectionController::class, 'get']);
         ApiRouter::post('/assist/user-selection-data', [UserSelectionController::class, 'store']);
         ApiRouter::get('/assist/active-plugins', [AssistWPController::class, 'getActivePlugins']);
+        ApiRouter::get('/assist/tasks/dependency-completed', [TasksController::class, 'dependencyCompleted']);
 
         // TODO: consider merging this route into the library.
         ApiRouter::post('/library/site-type', [LibraryController::class, 'updateSiteType']);

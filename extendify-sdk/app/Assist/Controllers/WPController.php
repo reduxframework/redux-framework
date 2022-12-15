@@ -53,7 +53,7 @@ class WPController
         $value = \get_option('active_plugins', null);
         $slugs = [];
         foreach ($value as $plugin) {
-            $slugs[] = explode( '/', $plugin )[0];
+            $slugs[] = explode('/', $plugin)[0];
         }
 
         return new \WP_REST_Response([

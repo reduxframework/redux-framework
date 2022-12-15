@@ -4,18 +4,20 @@ import { __, sprintf } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Checkmark } from '@onboarding/svg'
+import { completedDependency } from '@assist/api/Data'
 import { getOption } from '@assist/api/WPApi'
 import { useActivePlugins } from '@assist/hooks/useActivePlugins'
 import { useAdminColors } from '@assist/hooks/useAdminColors'
+import { useTaskDependencies } from '@assist/hooks/useFetch'
 import { useTasks } from '@assist/hooks/useTasks'
 import { useGlobalStore } from '@assist/state/Global'
 import { useSelectionStoreReady } from '@assist/state/Selections'
 import { useTasksStoreReady, useTasksStore } from '@assist/state/Tasks'
+import { useTourStore } from '@assist/state/Tours'
 import { UpdateLogo } from '@assist/tasks/UpdateLogo'
 import { UpdateSiteDescription } from '@assist/tasks/UpdateSiteDescription'
 import { UpdateSiteIcon } from '@assist/tasks/UpdateSiteIcon'
-import { useTourStore } from '../state/Tours'
-import welcomeTour from '../tours/welcome.js'
+import welcomeTour from '@assist/tours/welcome.js'
 
 export const TasksList = () => {
     const { seeTask, completedTasks } = useTasksStore()
@@ -30,8 +32,9 @@ export const TasksList = () => {
         // If no plugins, show the task
         if (!task?.plugins?.length) return true
         // Check if task.plugins intersect with activePlugins
-        return task?.plugins?.some((plugin) => activePlugins.includes(plugin))
+        return task?.plugins?.some((plugin) => activePlugins?.includes(plugin))
     })
+
     // Divide filtered tasks by completion status, first simplify the array
     const completedTasksArray = completedTasks.map((task) => task.id)
     // Now filter all tasks that are marked as completed
@@ -52,25 +55,6 @@ export const TasksList = () => {
         // Mark all tasks as seen. If always seen they will not update.
         tasksFiltered.forEach((task) => seeTask(task.slug))
     }, [tasksFiltered, seeTask, readyTasks])
-
-    useEffect(() => {
-        const badgeCount = tasksFiltered?.length - tasksCompleted?.length
-        document
-            .querySelector(
-                '#toplevel_page_extendify-admin-page.wp-has-current-submenu',
-            )
-            ?.classList.add('current')
-
-        const badges = document.querySelectorAll(
-            '.extendify-assist-badge-count',
-        )
-        for (const badge of badges) {
-            if (badgeCount || badgeCount >= 0) {
-                badge.style.opacity = badgeCount === 0 ? '0' : '1'
-                badge.textContent = `${badgeCount}`
-            }
-        }
-    }, [tasksFiltered, tasksCompleted])
 
     if (loading || !readyTasks || !readyPlugins || error) {
         return (
@@ -165,33 +149,66 @@ export const TasksList = () => {
 }
 
 const TaskCheckBox = ({ task }) => {
-    const { isCompleted, toggleCompleted } = useTasksStore()
+    const {
+        isCompleted,
+        isAvailable,
+        completeTask,
+        setAvailable,
+        toggleCompleted,
+    } = useTasksStore()
+    const { slug, doneDependencies } = task
+    // Some tasks have a dependency we look for before showing them
+    // in case we want to pre-emptively mark it as completed
+    const { data, loading } = useTaskDependencies(
+        `tasks${slug}}`,
+        () => {
+            return doneDependencies
+                ? completedDependency(slug)
+                : // If no dependencies, return false to NOT mark it as completed
+                  { data: false, loading: false }
+        },
+        !isCompleted(slug), // refresh when not completed
+    )
+
+    useEffect(() => {
+        if (loading) return
+        if (data) completeTask(slug)
+        // All tasks are available by default currently,
+        // but some we may want to mark as completed before showing
+        setAvailable(slug)
+    }, [data, loading, completeTask, slug, setAvailable])
+
+    if (!isAvailable(slug)) return null
+
     return (
         <div className="pt-4">
             <div className="p-3 flex gap-3 justify-between border border-solid border-gray-400 bg-white relative items-center">
                 <div className="flex gap-3 w-4/5">
                     <span className="block mt-1 relative self-start">
                         <input
-                            id={`task-${task.slug}`}
+                            id={`task-${slug}`}
                             type="checkbox"
                             className={classNames(
                                 'hide-checkmark h-6 w-6 rounded-full border-gray-400 outline-none focus:ring-wp ring-partner-primary-bg ring-offset-2 ring-offset-white m-0 focus:outline-none focus:shadow-none',
                                 {
-                                    'bg-partner-primary-bg': isCompleted(
-                                        task.slug,
-                                    ),
+                                    'bg-partner-primary-bg':
+                                        !doneDependencies && isCompleted(slug),
+                                    'bg-gray-400':
+                                        doneDependencies && isCompleted(slug),
                                 },
                             )}
-                            checked={isCompleted(task.slug)}
-                            value={task.slug}
-                            name={task.slug}
-                            onChange={() => toggleCompleted(task.slug)}
+                            checked={isCompleted(slug)}
+                            // If we force completed this then they can't uncheck it
+                            disabled={doneDependencies && isCompleted(slug)}
+                            value={slug}
+                            name={slug}
+                            onChange={() => toggleCompleted(slug)}
                         />
                         <Checkmark className="text-white fill-current absolute h-6 w-6 block top-0" />
                     </span>
                     <span className="flex flex-col">
                         <label
-                            htmlFor={`task-${task.slug}`}
+                            htmlFor={`task-${slug}`}
                             className="text-base font-semibold">
                             <span
                                 aria-hidden="true"
@@ -258,33 +275,34 @@ const ModalButton = ({ task }) => {
 }
 
 const InternalLinkButton = ({ task }) => {
-    const [homepageId, setHomepageId] = useState(0)
     const { mainColor } = useAdminColors()
     const { completeTask } = useTasksStore()
+    const [link, setLink] = useState(null)
     const handleClick = () => {
-        completeTask(task.slug)
-        if (task.slug === 'edit-homepage' && homepageId) {
-            const split = task.internalLink.split('$')
-            task.internalLink = split[0] + homepageId + split[1]
-        }
-        window.open(
-            `${window.extAssistData.adminUrl + task.internalLink}`,
-            '_blank',
-        )
+        // If no dependency then complete the task
+        !task.doneDependencies && completeTask(task.slug)
     }
-
     useEffect(() => {
-        getOption('page_on_front').then(setHomepageId)
-    }, [homepageId])
+        if (task.slug === 'edit-homepage') {
+            const split = task.internalLink.split('$')
+            getOption('page_on_front').then((id) => {
+                setLink(split[0] + id + split[1])
+            })
+            return
+        }
+        setLink(task.internalLink)
+    }, [task])
 
-    if (!homepageId) return null
-
+    if (!link) return null
     return (
-        <button
+        <a
             style={{ backgroundColor: mainColor }}
-            className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5 disabled:bg-gray-700"
+            href={window.extAssistData.adminUrl + link}
+            target="_blank"
+            rel="noreferrer"
+            className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer w-1/5 disabled:bg-gray-700 text-center no-underline"
             onClick={handleClick}>
             {task.buttonTextToDo}
-        </button>
+        </a>
     )
 }

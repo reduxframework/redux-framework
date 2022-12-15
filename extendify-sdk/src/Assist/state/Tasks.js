@@ -16,6 +16,9 @@ const state = (set, get) => ({
     // so use ?.completedAt to check if it's completed with the (.?)
     completedTasks: [],
     inProgressTasks: [],
+    // Available tasks that are actually shown to the user
+    // Each tasks is responsible for checking if it's available
+    availableTasks: [],
     isCompleted(taskId) {
         return get().completedTasks.some((task) => task?.id === taskId)
     },
@@ -62,6 +65,15 @@ const state = (set, get) => ({
         }
         get().completeTask(taskId)
     },
+    setAvailable(taskId) {
+        if (get().isAvailable(taskId)) return
+        set((state) => ({
+            availableTasks: [...state.availableTasks, taskId],
+        }))
+    },
+    isAvailable(taskId) {
+        return get().availableTasks.some((task) => task === taskId)
+    },
 })
 
 const storage = {
@@ -74,6 +86,12 @@ export const useTasksStore = create(
     persist(devtools(state, { name: 'Extendify Assist Tasks' }), {
         name: 'extendify-assist-tasks',
         getStorage: () => storage,
+        partialize: (state) => {
+            // return without availableTasks
+            // eslint-disable-next-line no-unused-vars
+            const { availableTasks, ...newState } = state
+            return newState
+        },
     }),
     state,
 )
