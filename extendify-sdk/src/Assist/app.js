@@ -1,6 +1,8 @@
 import { render } from '@wordpress/element'
 import { Assist } from '@assist/Assist'
 import { AssistLandingPage } from '@assist/AssistLandingPage'
+import { AssistTaskbar } from '@assist/AssistTaskbar'
+import { TaskBadge } from '@assist/components/TaskBadge'
 import { AdminNotice } from '@assist/notices/AdminNotice'
 import './app.css'
 
@@ -39,4 +41,23 @@ if (!launchActive) {
     })
     document.body.append(assist)
     render(<Assist />, assist)
+}
+
+if (!launchActive) {
+    document
+        .querySelector(
+            '#toplevel_page_extendify-admin-page.wp-has-current-submenu',
+        )
+        ?.classList.add('current')
+    document
+        .querySelectorAll('.extendify-assist-badge-count')
+        ?.forEach((el) => render(<TaskBadge />, el))
+}
+
+if (!launchActive) {
+    const taskbar = Object.assign(document.createElement('li'), {
+        id: 'wp-admin-bar-extendify-assist-link',
+    })
+    document.querySelector('#wp-admin-bar-my-account')?.after(taskbar)
+    render(<AssistTaskbar />, taskbar)
 }

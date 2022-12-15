@@ -23,6 +23,9 @@ export const trashPost = (postId, postType) =>
 export const getPost = (postSlug, type = 'post') =>
     api.get(`${window.extOnbData.wpRoot}wp/v2/${type}s?slug=${postSlug}`)
 
+export const getPageById = (pageId) =>
+    api.get(`${window.extOnbData.wpRoot}wp/v2/pages/${pageId}`)
+
 export const installPlugin = async (plugin) => {
     // Fail silently if no slug is provided
     if (!plugin?.wordpressSlug) return
@@ -117,10 +120,14 @@ export const addLaunchPagesToNav = (
             (page) =>
                 `<!-- wp:navigation-link {"label":"${
                     page.title
-                }","type":"page","id":${pageIds[page.slug].id},"url":"/${
+                }","type":"page","id":${
+                    pageIds[page.slug]?.id ? pageIds[page.slug].id : page.id
+                },"url":"/${
                     page.slug
                 }","kind":"post-type","isTopLevelLink":true} /-->`,
         )
         .join('')
     return rawCode.replace(replace, pageListItems)
 }
+
+export const getActivePlugins = () => api.get('onboarding/active-plugins')

@@ -61,4 +61,17 @@ class WPController
             'data' => $value,
         ]);
     }
+
+    /**
+     * Get the list of active plugins slugs
+     *
+     * @return \WP_REST_Response
+     */
+    public static function getActivePlugins()
+    {
+        return new \WP_REST_Response([
+            'success' => true,
+            'data' => \get_option('active_plugins', null),
+        ]);
+    }
 }

@@ -6,6 +6,9 @@ import {
     updateTemplatePart,
     addLaunchPagesToNav,
     updateOption,
+    getOption,
+    getPageById,
+    getActivePlugins,
 } from '@onboarding/api/WPApi'
 import { useConfetti } from '@onboarding/hooks/useConfetti'
 import { useWarnOnLeave } from '@onboarding/hooks/useWarnOnLeave'
@@ -30,6 +33,7 @@ export const CreatingSite = () => {
     const inform = (msg) => setInfo((info) => [msg, ...info])
     const informDesc = (msg) => setInfoDesc((infoDesc) => [msg, ...infoDesc])
     const dryRun = useRef()
+
     useWarnOnLeave(warnOnLeaveReady)
 
     const doEverything = useCallback(async () => {
@@ -59,44 +63,6 @@ export const CreatingSite = () => {
                 await updateTemplatePart('extendable/footer', style?.footerCode)
             }
 
-            let pageIds
-            inform(__('Generating page content', 'extendify'))
-            informDesc(__('Starting off with a full site...', 'extendify'))
-            await waitFor200Response()
-            await runAtLeastFor(
-                async () => {
-                    const blogPage = {
-                        // slug is only used internally
-                        slug: 'blog',
-                        title: __('Blog', 'extendify'),
-                    }
-                    const pagesWithBlog = [...pages, blogPage]
-                    await waitFor200Response()
-                    pageIds = await createWordpressPages(
-                        pagesWithBlog,
-                        siteType,
-                        style,
-                    )
-                    await waitFor200Response()
-                    const addBlogPageToNav = goals.some(
-                        (goal) => goal.slug === 'blog',
-                    )
-                    const updatedHeaderCode = addLaunchPagesToNav(
-                        addBlogPageToNav ? pagesWithBlog : pages,
-                        pageIds,
-                        style?.headerCode,
-                    )
-
-                    await waitFor200Response()
-                    await updateTemplatePart(
-                        'extendable/header',
-                        updatedHeaderCode,
-                    )
-                },
-                2000,
-                { dryRun: dryRun.current },
-            )
-
             if (plugins?.length) {
                 inform(__('Installing suggested plugins', 'extendify'))
                 for (const [index, plugin] of plugins.entries()) {
@@ -118,6 +84,78 @@ export const CreatingSite = () => {
                     }
                 }
             }
+
+            let pageIds, navPages
+            inform(__('Generating page content', 'extendify'))
+            informDesc(__('Starting off with a full site...', 'extendify'))
+            await waitFor200Response()
+            await runAtLeastFor(
+                async () => {
+                    const blogPage = {
+                        // slug is only used internally
+                        slug: 'blog',
+                        title: __('Blog', 'extendify'),
+                    }
+                    const pagesWithBlog = [...pages, blogPage]
+                    await waitFor200Response()
+                    pageIds = await createWordpressPages(
+                        pagesWithBlog,
+                        siteType,
+                        style,
+                    )
+                    await waitFor200Response()
+                    const addBlogPageToNav = goals.some(
+                        (goal) => goal.slug === 'blog',
+                    )
+
+                    navPages = [...pages]
+
+                    navPages = addBlogPageToNav
+                        ? [...navPages, blogPage]
+                        : [...navPages]
+
+                    const { data: active } = await getActivePlugins()
+
+                    // Add plugin related pages only if plugin is active
+                    if (active?.filter((p) => p.includes('woocom'))?.length) {
+                        const shopPageId = await getOption(
+                            'woocommerce_shop_page_id',
+                        )
+                        const shopPage = await getPageById(shopPageId)
+                        const cartPageId = await getOption(
+                            'woocommerce_cart_page_id',
+                        )
+                        const cartPage = await getPageById(cartPageId)
+                        if (shopPageId && shopPage && cartPageId && cartPage) {
+                            const wooShopPage = {
+                                id: shopPageId,
+                                slug: shopPage.slug,
+                                title: shopPage.title.rendered,
+                            }
+                            const wooCartPage = {
+                                id: cartPageId,
+                                slug: cartPage.slug,
+                                title: cartPage.title.rendered,
+                            }
+                            navPages = [...navPages, wooShopPage, wooCartPage]
+                        }
+                    }
+
+                    const updatedHeaderCode = addLaunchPagesToNav(
+                        navPages,
+                        pageIds,
+                        style?.headerCode,
+                    )
+
+                    await waitFor200Response()
+                    await updateTemplatePart(
+                        'extendable/header',
+                        updatedHeaderCode,
+                    )
+                },
+                2000,
+                { dryRun: dryRun.current },
+            )
 
             inform(__('Setting up your site assistant', 'extendify'))
             informDesc(__('Helping your site to be successful...', 'extendify'))

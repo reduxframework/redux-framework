@@ -4,7 +4,9 @@ import useSWRImmutable from 'swr/immutable'
 
 export const useAdminColors = () => {
     const { data: adminColors } = useSWRImmutable('adminColors', () => {
-        const menu = document?.querySelector('a.wp-has-current-submenu')
+        const menu = document?.querySelector(
+            'a.wp-has-current-submenu, li.current > a.current',
+        )
         if (!menu) return null
         const adminColor = window.getComputedStyle(menu)?.['background-color']
         return {
