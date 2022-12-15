@@ -563,7 +563,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setSections( string $opt_name = '', array $sections = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_sections( $opt_name, $sections )' );
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_sections( $opt_name, $sections )' );
 
 			if ( '' !== $opt_name ) {
 				Redux_Functions_Ex::record_caller( $opt_name );

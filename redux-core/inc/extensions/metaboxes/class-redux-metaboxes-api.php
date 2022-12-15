@@ -104,14 +104,14 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 
 				foreach ( self::$fields as $opt_name => $fields ) {
 					if ( ! isset( $instances[ $opt_name ] ) ) {
-						Redux::setArgs(
+						Redux::set_args(
 							$opt_name,
 							array(
 								'menu_type' => 'hidden',
 							)
 						);
 
-						Redux::setSections(
+						Redux::set_sections(
 							$opt_name,
 							array(
 								array(
