@@ -69,7 +69,7 @@ export const SiteInformation = () => {
                         </label>
                         <div className="mb-8">
                             <input
-                                data-cy="siteTitle"
+                                data-test="siteTitle"
                                 autoComplete="off"
                                 ref={initialFocus}
                                 type="text"

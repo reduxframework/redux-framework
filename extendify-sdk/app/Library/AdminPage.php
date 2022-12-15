@@ -79,7 +79,7 @@ class AdminPage
                         <?php
                             echo \wp_sprintf(
                                 /* translators: %s: The name of the plugin, Extendify */
-                                \esc_html__('%s Banner', 'extendify'),
+                                esc_html__('%s Banner', 'extendify'),
                                 'Extendify'
                             );
                         ?>
@@ -91,7 +91,7 @@ class AdminPage
                         <?php
                             echo \wp_sprintf(
                                 /* translators: %s: The name of the plugin, Extendify */
-                                \esc_html__('Welcome to %s', 'extendify'),
+                                esc_html__('Welcome to %s', 'extendify'),
                                 'Extendify'
                             );
                         ?>
@@ -100,7 +100,7 @@ class AdminPage
                         <?php
                             echo \wp_sprintf(
                                 /* translators: %s: The name of the plugin, Extendify */
-                                \esc_html__('%s is a massive library of drop-in block patterns easily customized to your liking. Each pattern is meticulously designed to work with your existing WordPress theme.', 'extendify'),
+                                esc_html__('%s is a massive library of drop-in block patterns easily customized to your liking. Each pattern is meticulously designed to work with your existing WordPress theme.', 'extendify'),
                                 'Extendify'
                             );
                         ?>
@@ -113,7 +113,7 @@ class AdminPage
                             <?php
                             echo \wp_sprintf(
                                 /* translators: %s: Extendify Library term */
-                                \esc_html__('1. Open the %s', 'extendify'),
+                                esc_html__('1. Open the %s', 'extendify'),
                                 'Extendify Library'
                             );
                             ?>
@@ -122,7 +122,7 @@ class AdminPage
                             <?php
                                 echo \wp_sprintf(
                                     /* translators: %s: Extendify Library term */
-                                    \esc_html__("When editing a page or post within the block editor, you'll see the %s button within the editor's header", 'extendify'),
+                                    esc_html__("When editing a page or post within the block editor, you'll see the %s button within the editor's header", 'extendify'),
                                     'Extendify Library'
                                 );
                             ?>
@@ -130,7 +130,7 @@ class AdminPage
                         <p>
                             <?php
                             // translators: %1$s = URL.
-                            echo \wp_sprintf(\esc_html__('You may also add a new page with the library opened for you by %1$s.', 'extendify'), '<a href="' . \esc_url(\admin_url('post-new.php?post_type=page&ext-open')) . '">' . \esc_html__('clicking here', 'extendify') . '</a>'); ?>
+                            echo \wp_sprintf(esc_html__('You may also add a new page with the library opened for you by %1$s.', 'extendify'), '<a href="' . \esc_url(\admin_url('post-new.php?post_type=page&ext-open')) . '">' . esc_html__('clicking here', 'extendify') . '</a>'); ?>
                         </p>
                     </div>
                     <div class="column welcome-image is-vertically-aligned-center is-edge-to-edge">
@@ -143,16 +143,16 @@ class AdminPage
                     </div>
                     <div class="column is-edge-to-edge">
                         <h3>
-                            <?php \esc_html_e('2. Choose a site industry', 'extendify'); ?>
+                            <?php esc_html_e('2. Choose a site industry', 'extendify'); ?>
                         </h3>
                         <p>
-                            <?php \esc_html_e('With the library open, you can set your site industry - or type - which will surface the perfect industry-specific patterns and full page layouts to drop onto your website.', 'extendify'); ?>
+                            <?php esc_html_e('With the library open, you can set your site industry - or type - which will surface the perfect industry-specific patterns and full page layouts to drop onto your website.', 'extendify'); ?>
                         </p>
                         <p>
                             <?php
                                 echo \wp_sprintf(
                                     /* translators: %s: The name of the plugin, Extendify */
-                                    \esc_html__('%s supports over sixty types with new industries added regularly.', 'extendify'),
+                                    esc_html__('%s supports over sixty types with new industries added regularly.', 'extendify'),
                                     'Extendify'
                                 );
                             ?>
@@ -162,19 +162,19 @@ class AdminPage
                 <div class="welcome-section has-2-columns has-gutters is-wider-right">
                     <div class="column is-edge-to-edge">
                         <h3>
-                            <?php \esc_html_e('3. Browse Patterns & Layouts.', 'extendify'); ?>
+                            <?php esc_html_e('3. Browse Patterns & Layouts.', 'extendify'); ?>
                         </h3>
                         <p>
                             <?php
                                 echo \wp_sprintf(
                                     /* translators: %s: The name of the plugin, Extendify */
-                                    \esc_html__('Search by industry, contents, and design attributes. %s has thousands of best-in-class block patterns. Find what you love and add it to the page - done!', 'extendify'),
+                                    esc_html__('Search by industry, contents, and design attributes. %s has thousands of best-in-class block patterns. Find what you love and add it to the page - done!', 'extendify'),
                                     'Extendify'
                                 );
                             ?>
                         </p>
                         <p>
-                            <?php \esc_html_e("You'll find beautiful high fidelity Gutenberg content to add to your pages in no time!", 'extendify'); ?>
+                            <?php esc_html_e("You'll find beautiful high fidelity Gutenberg content to add to your pages in no time!", 'extendify'); ?>
                         </p>
                     </div>
                     <div class="column welcome-image is-vertically-aligned-center is-edge-to-edge">
@@ -188,17 +188,17 @@ class AdminPage
                             <?php
                                 echo \wp_sprintf(
                                     /* translators: %s: The name of the plugin, Extendify */
-                                    \esc_html__('Upgrade to %s Pro', 'extendify'),
+                                    esc_html__('Upgrade to %s Pro', 'extendify'),
                                     'Extendify'
                                 );
                             ?>
                         </h2>
                         <p class="aligncenter is-subheading">
-                            <?php \esc_html_e('Do you want more patterns and layouts - without limits? Choose one of our plans and receive unlimited access to our complete library.', 'extendify'); ?>
+                            <?php esc_html_e('Do you want more patterns and layouts - without limits? Choose one of our plans and receive unlimited access to our complete library.', 'extendify'); ?>
                         </p>
                     </div>
                     <a href="https://extendify.com/pricing/?utm_source=welcome&amp;utm_medium=settings&amp;utm_campaign=get_started&amp;utm_campaign=get_started" class="button button-primary components-button">
-                        <?php echo \esc_html__('View Pricing', 'extendify'); ?></a>
+                        <?php echo esc_html__('View Pricing', 'extendify'); ?></a>
                     <hr/>
                 <?php endif; ?>
             </div>

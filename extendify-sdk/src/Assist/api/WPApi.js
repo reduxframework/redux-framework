@@ -11,3 +11,5 @@ export const getOption = async (option) => {
     })
     return data
 }
+
+export const getActivePlugins = () => api.get('assist/active-plugins')
