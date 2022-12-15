@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.21.1
+* Added: Custom Fonts extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extension/custom-fonts.html)
+* Update: Extendify Library 1.2.2 
+
 ## 4.3.21
 * Added: Google Maps extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extensions/google-maps.html)
 * Fixed: Widget area UI improperly aligned when `dev_mode` set to `false`.
