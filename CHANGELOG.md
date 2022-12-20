@@ -1,8 +1,11 @@
 # Redux Changelog
 
+## 4.3.21.2
+* Fixed: #3928 - Metaboxes `post_format` selections not responding to clicks when Gutenberg is active due to class name changes.
+
 ## 4.3.21.1
 * Added: Custom Fonts extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extension/custom-fonts.html)
-* Update: Extendify Library 1.2.2 
+* Update: Extendify Library 1.2.3 
 
 ## 4.3.21
 * Added: Google Maps extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extensions/google-maps.html)
