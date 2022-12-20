@@ -50,10 +50,28 @@ jQuery(
 					function() {
 						$.reduxMetaBoxes.checkBoxVisibility();
 
-						$( '.editor-post-format__content select' ).on(
+						$( '.editor-post-format__content select, .editor-post-format select' ).on(
 							'change',
 							function() {
 								$.reduxMetaBoxes.checkBoxVisibility( 'post_format' );
+							}
+						);
+
+						$( '.edit-post-post-template__toggle' ).on(
+							'click',
+							function() {
+								setTimeout(
+									function() {
+										$( '.components-popover .components-select-control__input' ).on(
+											'change',
+											function() {
+												console.log( 'change' );
+												$.reduxMetaBoxes.checkBoxVisibility( 'page_template' );
+											}
+										);
+									},
+									1000
+								);
 							}
 						);
 					},
@@ -92,7 +110,7 @@ jQuery(
 								if ( field === fieldID || ! fieldID ) {
 									if ( 'post_format' === field ) {
 										if ( isGutenberg ) {
-											testValue = $( ' .editor-post-format__content select option:selected' ).val();
+											testValue = $( '.editor-post-format__content select option:selected, .editor-post-format select option:Selected' ).val();
 										} else {
 											testValue = $( 'input:radio[name="post_format"]:checked' ).val();
 										}
