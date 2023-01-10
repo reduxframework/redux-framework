@@ -3,8 +3,9 @@
 ## 4.3.22
 * Added: Custom Fonts extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extension/custom-fonts.html)
 * Fixed: #3928 - Metaboxes `post_format` selections not responding to clicks when Gutenberg is active due to class name changes.
+* Fixed: Custom font data added via filter would trigger a warning if not an array.
 * Update: Extendify Library 1.2.3 
-* Release date: January 10, 2023
+* Release date: January 11, 2023
 
 ## 4.3.21
 * Added: Google Maps extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extensions/google-maps.html)
