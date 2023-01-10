@@ -1233,9 +1233,11 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					}
 
 					$lc_fonts = array_change_key_case( $this->field['custom_fonts'] );
-					foreach ( $lc_fonts as $font_arr ) {
-						foreach ( $font_arr as $key => $value ) {
-							$arr[ Redux_Core::strtolower( $key ) ] = $key;
+					if ( is_aarray( $lc_fonts ) ) {
+						foreach ( $lc_fonts as $font_arr ) {
+							foreach ( $font_arr as $key => $value ) {
+								$arr[ Redux_Core::strtolower( $key ) ] = $key;
+							}
 						}
 					}
 
