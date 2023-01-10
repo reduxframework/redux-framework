@@ -67,12 +67,12 @@
 				if ( 'custom-font-convert' === checkName ) {
 					if ( $( this ).is( ':checked' ) ) {
 						checkVal = '';
-						opVal = 1;
+						opVal    = 1;
 
 						el.find( '.conversion-types' ).removeClass( 'is-disabled' );
 					} else {
 						checkVal = 'disabled';
-						opVal = 0.7;
+						opVal    = 0.7;
 
 						el.find( '.conversion-types' ).addClass( 'is-disabled' );
 					}
@@ -118,9 +118,9 @@
 
 				parent.find( '.spinner' ).show();
 
-				data = $( this ).data();
+				data        = $( this ).data();
 				data.action = 'redux_custom_fonts';
-				data.nonce = $( this ).parents( '.redux-container-custom_font:first' ).find( '.media_add_font' ).attr( 'data-nonce' );
+				data.nonce  = $( this ).parents( '.redux-container-custom_font:first' ).find( '.media_add_font' ).attr( 'data-nonce' );
 
 				$.post(
 					ajaxurl,
@@ -172,7 +172,7 @@
 
 						msg = reduxObject.args.please_wait + ': ' + status + '<br><br>' + data;
 					} else {
-						msg = l10n.complete;
+						msg  = l10n.complete;
 						data = 'finished';
 					}
 
@@ -229,7 +229,7 @@
 
 				// Grab the selected attachment.
 				var attachment = frame.state().get( 'selection' ).first();
-				var error = selector.find( '.font-error' );
+				var error      = selector.find( '.font-error' );
 
 				error.slideUp();
 				error.find( 'span' ).text( '' );

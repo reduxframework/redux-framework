@@ -115,18 +115,20 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 			add_filter( "redux/{$this->parent->args['opt_name']}/field/typography/custom_fonts", array( $this, 'add_custom_fonts' ) );
 
-			$this->is_field = Redux_Helpers::is_field_in_use( $parent, 'custom_fonts' );
+			// phpcs:disable
+			// $this->is_field = Redux_Helpers::is_field_in_use( $parent, 'custom_fonts' );
 
-			if ( ! $this->is_field ) {
-				$this->add_section();
-			}
+			// if ( ! $this->is_field ) {
+			// 	$this->add_section();
+			// }
 
 			add_filter( "redux/options/{$this->parent->args['opt_name']}/section/redux_dynamic_font_control", array( $this, 'remove_dynamic_section' ) ); // phpcs:ignore WordPress.NamingConventions.ValidHookName
 			add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 			add_action( 'wp_head', array( $this, 'enqueue_output' ), 150 );
 			add_filter( 'tiny_mce_before_init', array( $this, 'extend_tinymce_dropdown' ) );
 
-			$this->can_convert = true; //has_filter( 'redux/' . $this->parent->args['opt_name'] . '/extensions/custom_fonts/api_url' );
+			$this->can_convert = true; // has_filter( 'redux/' . $this->parent->args['opt_name'] . '/extensions/custom_fonts/api_url' );
+			// phpcs:enable
 		}
 
 		/**
@@ -506,7 +508,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					}
 
 					if ( true === $this->can_convert && 'true' === $conversion ) {
-						// $ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder );
+						$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder );
 					}
 				}
 
@@ -631,7 +633,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					'user-agent'   => 'redux-custom-fonts-' . self::$version . ' using ' . wp_get_theme(),
 				);
 
-				$payload = '--' . $boundary;
+				$payload  = '--' . $boundary;
 				$payload .= "\r\n";
 				$payload .= 'Content-Disposition: form-data; name="md5"' . "\r\n\r\n";
 				$payload .= md5( 'redux_custom_font' );
