@@ -27,6 +27,12 @@
 						$( this ).data( 'url' ),
 						post_data,
 						function( response ) {
+							var point = response.indexOf( '{"type":' )
+
+							if ( point > 0 ) {
+								response = response.substring( point );
+							}
+
 							response = JSON.parse( response );
 
 							console.log( response.msg );
