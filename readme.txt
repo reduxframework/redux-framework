@@ -108,7 +108,7 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 * Fixed: Metaboxes `post_format` selections not responding to clicks when Gutenberg is active due to class name changes.
 * Fixed: Custom font data added via filter would trigger a warning if not an array.
 * Update: Extendify Library 1.2.3
-* Release date: January 11, 2023
+* Release date: January 19, 2023
 
 = 4.3.21 =
 * Added: Google Maps extension.
