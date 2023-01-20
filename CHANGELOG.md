@@ -2,6 +2,7 @@
 
 ## 4.3.23
 * Tweaked Custom Fonts extension to avoid conflicts with older standalone extension.
+* Update: Extendify Library 1.2.4
 * Release date: January 20, 2023 
 
 ## 4.3.22
