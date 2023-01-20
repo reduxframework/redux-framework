@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.3.23
+* Tweaked Custom Fonts extension to avoid conflicts with older standalone extension.
+* Release date: January 20, 2023 
+
 ## 4.3.22
 * Added: Custom Fonts extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extension/custom-fonts.html)
 * Fixed: #3928 - Metaboxes `post_format` selections not responding to clicks when Gutenberg is active due to class name changes.

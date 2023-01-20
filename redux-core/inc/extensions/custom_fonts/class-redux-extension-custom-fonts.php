@@ -886,3 +886,5 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		}
 	}
 }
+
+class_alias( 'Redux_Extension_Custom_Fonts', 'ReduxFramework_Extension_custom_fonts' );

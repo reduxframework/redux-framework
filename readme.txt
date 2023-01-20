@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 6.1
-Stable tag: 4.3.22
+Stable tag: 4.3.23
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -103,6 +103,10 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+= 4.3.23 =
+* Tweaked Custom Fonts extension to avoid conflicts with older standalone extension.
+* Release date: January 20, 2023
+
 = 4.3.22 =
 * Added: Custom Fonts extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extension/custom-fonts.html)
 * Fixed: Metaboxes `post_format` selections not responding to clicks when Gutenberg is active due to class name changes.
