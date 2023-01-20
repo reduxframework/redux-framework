@@ -104,6 +104,10 @@ If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg
 
 == Changelog ==
 = 4.3.23 =
+* Additional work to make `custom_fonts` override old standalone extension version.
+* Release date: January 20, 2023
+
+= 4.3.23 =
 * Tweaked Custom Fonts extension to avoid conflicts with older standalone extension.
 * Update: Extendify Library 1.2.4
 * Release date: January 20, 2023
