@@ -16,7 +16,7 @@ import { SearchIcon, LeftArrowIcon, Checkmark } from '@onboarding/svg'
 import {
     fetcher as styleFetcher,
     fetchData as styleFetchData,
-} from './SiteStyle'
+} from './SiteLayout'
 
 export const fetcher = () => getSiteTypes()
 export const fetchData = () => ({ key: 'site-types' })
@@ -163,6 +163,7 @@ export const SiteTypeSelect = () => {
                                     visibleSiteTypes?.length === 0 &&
                                     setSearch('')
                                 }
+                                data-test="sitetype-search-input"
                             />
                             <Combobox.Button className="absolute inset-y-0 right-0 mx-2 bg-transparent flex items-center p-2">
                                 <SearchIcon />
@@ -175,7 +176,8 @@ export const SiteTypeSelect = () => {
                         ) : (
                             <Combobox.Options
                                 static
-                                className="m-0 py-2 border-t border-gray-200 overflow-auto max-h-half rounded-b">
+                                className="m-0 py-2 border-t border-gray-200 overflow-auto max-h-half rounded-b"
+                                data-test="site-type-options">
                                 {visibleSiteTypes?.length === 0 &&
                                 search !== '' ? (
                                     <div className="flex border-none items-center justify-between p-4 py-2.5 relative w-full text-base m-0 text-gray-700">

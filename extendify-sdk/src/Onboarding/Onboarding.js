@@ -70,7 +70,9 @@ export const Onboarding = () => {
 
     useEffect(() => {
         if (fetcher) {
-            mutate(fetchData, fetcher)
+            const data =
+                typeof fetchData === 'function' ? fetchData() : fetchData
+            mutate(data, () => fetcher(data))
         }
     }, [fetcher, mutate, fetchData])
 

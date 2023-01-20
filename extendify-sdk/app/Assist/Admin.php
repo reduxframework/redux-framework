@@ -65,25 +65,14 @@ class Admin
                     return;
                 }
 
-                $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
-                $scriptAssetPath = EXTENDIFY_PATH . 'public/build/extendify-assist.asset.php';
-                $fallback = [
-                    'dependencies' => [],
-                    'version' => $version,
-                ];
-                $scriptAsset = file_exists($scriptAssetPath) ? require $scriptAssetPath : $fallback;
-                wp_enqueue_media();
-                foreach ($scriptAsset['dependencies'] as $style) {
-                    wp_enqueue_style($style);
-                }
+                $partnerData = $this->checkPartnerDataSources();
 
-                \wp_enqueue_script(
-                    Config::$slug . '-assist-scripts',
-                    EXTENDIFY_BASE_URL . 'public/build/extendify-assist.js',
-                    $scriptAsset['dependencies'],
-                    $scriptAsset['version'],
-                    true
-                );
+                $logo = isset($partnerData['logo']) ? $partnerData['logo'] : null;
+                $name = isset($partnerData['name']) ? $partnerData['name'] : \__('Partner logo', 'extendify');
+
+                $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+
+                $this->enqueueGutenbergAssets();
 
                 $assistState = get_option('extendify_assist_globals');
                 $dismissed = isset($assistState['state']['dismissedNotices']) ? $assistState['state']['dismissedNotices'] : [];
@@ -101,6 +90,8 @@ class Admin
                         'asset_path' => \esc_url(EXTENDIFY_URL . 'public/assets'),
                         'launchCompleted' => Config::$launchCompleted,
                         'dismissedNotices' => $dismissed,
+                        'partnerLogo' => $logo,
+                        'partnerName' => $name,
                     ]),
                     'before'
                 );
@@ -114,7 +105,74 @@ class Admin
                     $version,
                     'all'
                 );
+
+                if (isset($partnerData['bgColor']) && isset($partnerData['fgColor'])) {
+                    \wp_add_inline_style(Config::$slug . '-assist-styles', ":root {
+                        --ext-partner-theme-primary-bg: {$partnerData['bgColor']};
+                        --ext-partner-theme-primary-text: {$partnerData['fgColor']};
+                    }");
+                }
             }
         );
+    }
+
+    /**
+     * Enqueues Gutenberg stuff on a non-Gutenberg page.
+     *
+     * @return void
+     */
+    public function enqueueGutenbergAssets()
+    {
+        $version = Config::$environment === 'PRODUCTION' ? Config::$version : uniqid();
+        $scriptAssetPath = EXTENDIFY_PATH . 'public/build/extendify-assist.asset.php';
+        $fallback = [
+            'dependencies' => [],
+            'version' => $version,
+        ];
+        $scriptAsset = file_exists($scriptAssetPath) ? require $scriptAssetPath : $fallback;
+        wp_enqueue_media();
+        foreach ($scriptAsset['dependencies'] as $style) {
+            wp_enqueue_style($style);
+        }
+
+        \wp_enqueue_script(
+            Config::$slug . '-assist-scripts',
+            EXTENDIFY_BASE_URL . 'public/build/extendify-assist.js',
+            $scriptAsset['dependencies'],
+            $scriptAsset['version'],
+            true
+        );
+    }
+
+    /**
+     * Check if partner data is available.
+     *
+     * @return array
+     */
+    public function checkPartnerDataSources()
+    {
+        $return = [];
+
+        try {
+            if (defined('EXTENDIFY_ONBOARDING_BG')) {
+                $return['bgColor'] = constant('EXTENDIFY_ONBOARDING_BG');
+                $return['fgColor'] = constant('EXTENDIFY_ONBOARDING_TXT');
+                $return['logo'] = constant('EXTENDIFY_PARTNER_LOGO');
+            }
+
+            $data = get_option('extendify_partner_data');
+            if ($data) {
+                $return['bgColor'] = $data['backgroundColor'];
+                $return['fgColor'] = $data['foregroundColor'];
+                // Need this check to avoid errors if no partner logo is set in Airtable.
+                $return['logo'] = $data['logo'] ? $data['logo'][0]['thumbnails']['large']['url'] : null;
+                $return['name'] = isset($data['name']) ? $data['name'] : '';
+            }
+        } catch (\Exception $e) {
+            // Do nothing here, set variables below. Coding Standards require something to be in the catch.
+            $e;
+        }//end try
+
+        return $return;
     }
 }

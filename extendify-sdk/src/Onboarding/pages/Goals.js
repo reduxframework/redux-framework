@@ -79,7 +79,9 @@ export const Goals = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
+                <h1
+                    className="text-3xl text-partner-primary-text mb-4 mt-0"
+                    data-test="goals-heading">
                     {__(
                         'What do you want to accomplish with this new site?',
                         'extendify',
@@ -97,7 +99,7 @@ export const Goals = () => {
                     <p>{__('Loading...', 'extendify')}</p>
                 ) : (
                     <form
-                        data-test="goalsForm"
+                        data-test="goals-form"
                         onSubmit={(e) => {
                             e.preventDefault()
                             nextPage()
@@ -121,9 +123,8 @@ export const Goals = () => {
                                                 selected,
                                         },
                                     )}
-                                    ref={
-                                        index === 0 ? initialFocus : undefined
-                                    }>
+                                    ref={index === 0 ? initialFocus : undefined}
+                                    data-test="goal-item">
                                     <div
                                         className={classNames(
                                             'absolute inset-0 pointer-events-none',

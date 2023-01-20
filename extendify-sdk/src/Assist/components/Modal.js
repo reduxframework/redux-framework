@@ -27,7 +27,7 @@ export const Modal = () => {
                 />
                 <div className="sm:flex relative shadow-2xl sm:overflow-hidden mx-auto bg-white flex flex-col min-w-md rounded-sm">
                     <div className="flex items-center justify-between">
-                        <Dialog.Title className="m-0 px-6">
+                        <Dialog.Title className="m-0 px-6 text-base text-gray-900">
                             {title}
                         </Dialog.Title>
                         <Button

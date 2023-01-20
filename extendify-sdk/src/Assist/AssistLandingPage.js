@@ -1,38 +1,16 @@
-import { ExternalLink } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
 import { SWRConfig } from 'swr'
-import { PagesList } from '@assist/components/PagesList'
-import { TasksList } from '@assist/components/TasksList'
-import { useAdminColors } from '@assist/hooks/useAdminColors'
+import { useRouter } from '@assist/hooks/useRouter'
 import { WelcomeNotice } from '@assist/notices/WelcomeNotice'
+import { Header } from '@assist/pages/parts/Header'
 
 const Page = () => {
-    const { mainColor } = useAdminColors()
+    const { CurrentPage } = useRouter()
     return (
-        <div>
+        <>
+            <Header />
             <WelcomeNotice />
-            <div className="max-w-screen-lg mx-auto pt-12 flex justify-center flex-col">
-                <h2 className="text-center text-3xl m-0 mb-2">
-                    Extendify Assist
-                </h2>
-                <p className="text-center text-xl m-0 p-0">
-                    {__(
-                        'Personalized recommendations for your site.',
-                        'extendify',
-                    )}
-                </p>
-                <div className="flex justify-center my-8">
-                    <ExternalLink
-                        style={{ backgroundColor: mainColor }}
-                        className="flex items-center gap-1 text-base cursor-pointer rounded px-6 py-2 text-white border-none no-underline"
-                        href={window.extAssistData.home}>
-                        {__('View site', 'extendify')}
-                    </ExternalLink>
-                </div>
-                <TasksList />
-                <PagesList />
-            </div>
-        </div>
+            <CurrentPage />
+        </>
     )
 }
 

@@ -17,3 +17,6 @@ export const saveGlobalData = (data) => api.post('assist/global-data', { data })
 export const getUserSelectionData = () => api.get('assist/user-selection-data')
 export const saveUserSelectionData = (data) =>
     api.post('assist/user-selection-data', { data })
+
+export const getQuickLinks = () => api.get('assist/quicklinks')
+export const getRecommendations = () => api.get('assist/recommendations')

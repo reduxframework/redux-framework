@@ -1,14 +1,21 @@
 import { Button } from '@wordpress/components'
-import { useRef, useLayoutEffect, useState } from '@wordpress/element'
+import {
+    useRef,
+    useEffect,
+    useLayoutEffect,
+    useState,
+} from '@wordpress/element'
 import { sprintf, __ } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
 import { Dialog } from '@headlessui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import useSWRImmutable from 'swr/immutable'
-import { useAdminColors } from '@assist/hooks/useAdminColors'
+import { useDesignColors } from '@assist/hooks/useDesignColors'
+import { useGlobalSyncStore } from '@assist/state/GlobalSync'
 import { useTasksStore } from '@assist/state/Tasks'
 import { useTourStore } from '@assist/state/Tours'
-import { copyNodeStyle } from '../util/element'
+import welcomeTour from '@assist/tours/welcome.js'
+import { copyNodeStyle } from '@assist/util/element'
 
 const useClonedElement = ({ elementSelector, key, options }) => {
     const { data: clonedNode } = useSWRImmutable(key, () => {
@@ -28,17 +35,26 @@ const useClonedElement = ({ elementSelector, key, options }) => {
     return clonedNode
 }
 
+const availableTours = {
+    [welcomeTour.id]: welcomeTour,
+}
+
 export const GuidedTour = () => {
     const tourModalRef = useRef()
     const {
         currentTour,
         currentStep,
+        startTour,
         closeCurrentTourManually,
         closeCurrentTourFromError,
+        closeForRedirect,
     } = useTourStore()
     const { steps, settings } = currentTour || {}
     const { image, title, text, attachTo, events, cloneOptions } =
         steps?.[currentStep] ?? {}
+    const { queueTourForRedirect, queuedTour, clearQueuedTour } =
+        useGlobalSyncStore()
+    const [redirecting, setRedirecting] = useState(false)
     const { onAttach, onDetach, beforeAttach } = events || {}
     const { element: elementSelector, offset, position, hook } = attachTo || {}
     const [attachToElement, setAttachToElement] = useState(null)
@@ -53,8 +69,40 @@ export const GuidedTour = () => {
         options: cloneOptions,
     })
 
+    useEffect(() => {
+        if (redirecting) return
+        const tour = queuedTour
+        if (!tour || !availableTours[tour]) return
+        clearQueuedTour()
+        return () =>
+            requestAnimationFrame(() => startTour(availableTours[tour]))
+    }, [startTour, queuedTour, redirecting, clearQueuedTour])
+
     useLayoutEffect(() => {
-        if (!currentTour) return
+        // if the tour has a start from url, redirect there
+        if (!settings?.startFrom) return
+        if (window.location.href === settings.startFrom) return
+        if (
+            // if only hash changed, update the url only
+            window.location.href.split('#')[0] ===
+            settings.startFrom.split('#')[0]
+        ) {
+            window.location.assign(settings?.startFrom)
+            return
+        }
+        setRedirecting(true)
+        queueTourForRedirect(currentTour.id)
+        closeForRedirect()
+        window.location.assign(settings?.startFrom)
+    }, [
+        settings?.startFrom,
+        currentTour,
+        queueTourForRedirect,
+        closeForRedirect,
+    ])
+
+    useLayoutEffect(() => {
+        if (!currentTour || redirecting) return
         const currentElement = document.querySelector(elementSelector)
         if (!currentElement) {
             // TODO: error message? snackbar?
@@ -132,6 +180,7 @@ export const GuidedTour = () => {
         beforeAttach,
         onAttach,
         onDetach,
+        redirecting,
     ])
 
     useLayoutEffect(() => {
@@ -168,7 +217,7 @@ export const GuidedTour = () => {
                                 className="fixed top-0 left-0 shadow-2xl sm:overflow-hidden bg-transparent flex flex-col min-h-60 max-w-xs z-20"
                                 style={{ minWidth: '325px' }}>
                                 <button
-                                    className="absolute bg-white cursor-pointer flex ring-gray ring-1 focus:ring-wp focus:ring-wp-theme-500 focus:shadow-none h-6 items-center justify-center leading-none m-2 outline-none p-0 right-0 rounded-full top-0 w-6 border-0 z-20"
+                                    className="absolute bg-white cursor-pointer flex ring-gray ring-1 focus:ring-wp focus:ring-design-main focus:shadow-none h-6 items-center justify-center leading-none m-2 outline-none p-0 right-0 rounded-full top-0 w-6 border-0 z-20"
                                     onClick={closeCurrentTourManually}
                                     aria-label={__('Close Modal', 'extendify')}>
                                     <Icon icon={close} className="w-4 h-4" />
@@ -232,7 +281,7 @@ const BottomNav = ({ initialFocus }) => {
     } = useTourStore()
     const { currentTour } = useTourStore()
     const { id, steps } = currentTour || {}
-    const { mainColor } = useAdminColors()
+    const { mainColor } = useDesignColors()
     const { completeTask } = useTasksStore()
     return (
         <div className="flex justify-between items-center w-full">
@@ -243,7 +292,7 @@ const BottomNav = ({ initialFocus }) => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}>
                             <button
-                                className="flex p-0 h-8 rounded-sm items-center justify-center bg-transparent hover:bg-transparent focus:outline-none ring-wp-theme-500 focus:ring-wp focus:ring-offset-1 focus:ring-offset-white text-gray-900"
+                                className="flex p-0 h-8 rounded-sm items-center justify-center bg-transparent hover:bg-transparent focus:outline-none ring-design-main focus:ring-wp focus:ring-offset-1 focus:ring-offset-white text-gray-900"
                                 onClick={prevStep}>
                                 {__('Back', 'extendify')}
                             </button>
@@ -271,9 +320,9 @@ const BottomNav = ({ initialFocus }) => {
                                     steps.length,
                                 )}
                                 aria-current={index === currentStep}
-                                className={`focus:ring-wp focus:outline-none ring-offset-1 ring-offset-white focus:ring-wp-theme-500 block cursor-pointer w-2.5 h-2.5 m-0 p-0 rounded-full ${
+                                className={`focus:ring-wp focus:outline-none ring-offset-1 ring-offset-white focus:ring-design-main block cursor-pointer w-2.5 h-2.5 m-0 p-0 rounded-full ${
                                     index === currentStep
-                                        ? 'bg-wp-theme-500'
+                                        ? 'bg-design-main'
                                         : 'bg-gray-300'
                                 }`}
                                 onClick={() => goToStep(index)}

@@ -25,7 +25,7 @@ export const PagesList = () => {
     return (
         <div className="my-4 text-base lg:max-w-3/4 w-full mx-auto p-4 lg:p-0">
             <h2 className="text-lg mb-3">{__('Pages', 'extendify')}:</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4" data-test="page-list">
                 {pages.map((page) => (
                     <div
                         key={page.ID}

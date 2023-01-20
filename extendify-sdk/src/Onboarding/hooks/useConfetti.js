@@ -12,7 +12,10 @@ export const useConfetti = (config = {}, time = 0, ready = false) => {
                 zIndex: 100000,
             })
             if (Date.now() < secondsFromNow) {
-                requestAnimationFrame(frame)
+                // run every two frames
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(frame)
+                })
             }
         }
         frame()

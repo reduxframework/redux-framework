@@ -79,7 +79,9 @@ export const SitePages = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
+                <h1
+                    className="text-3xl text-partner-primary-text mb-4 mt-0"
+                    data-test="pages-heading">
                     {__('What pages do you want on this site?', 'extendify')}
                 </h1>
                 <p className="text-base opacity-70 mb-0">
@@ -93,7 +95,9 @@ export const SitePages = () => {
                         'extendify',
                     )}
                 </h2>
-                <div className="flex gap-6 flex-wrap justify-center">
+                <div
+                    className="flex gap-6 flex-wrap justify-center"
+                    data-test="page-preview-wrapper">
                     {pagesToShow?.map((page) => {
                         if (page.slug !== 'home')
                             return (

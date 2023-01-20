@@ -29,10 +29,11 @@ export const CompletedTasks = ({ disabled = false }) => {
             <h3 className="text-sm text-partner-primary-text uppercase">
                 {__('Steps', 'extendify')}
             </h3>
-            <ul>
+            <ul data-test="sidebar-step-list">
                 {watched.map((page) => (
                     <li
                         key={page?.state.getState()?.title}
+                        data-test={page?.state.getState()?.title}
                         className={classNames('text-base', {
                             hidden: page.pageIndex > currentPageIndex,
                             'line-through opacity-60':

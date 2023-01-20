@@ -31,6 +31,20 @@ class DataController
     }
 
     /**
+     * Get Site type information.
+     *
+     * @return \WP_REST_Response
+     */
+    public static function getStylesList()
+    {
+        $response = Http::get('/styles-list');
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
+    }
+
+    /**
      * Get styles with code template.
      *
      * @param \WP_REST_Request $request - The request.

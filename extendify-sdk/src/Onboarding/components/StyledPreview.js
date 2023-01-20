@@ -9,7 +9,7 @@ import {
 } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
-import { getThemeVariations, parseThemeJson } from '@onboarding/api/WPApi'
+import { parseThemeJson } from '@onboarding/api/WPApi'
 import { SkeletonLoader } from '@onboarding/components/SkeletonLoader'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMounted } from '@onboarding/hooks/useIsMounted'
@@ -32,7 +32,7 @@ export const StylePreview = ({
     active = false,
     onHover = null,
 }) => {
-    const siteType = useUserSelectionStore((state) => state.siteType)
+    const { siteType, variation } = useUserSelectionStore()
     const isMounted = useIsMounted()
     const [code, setCode] = useState('')
     const [loaded, setLoaded] = useState(false)
@@ -40,7 +40,6 @@ export const StylePreview = ({
     const [iFrame, setIFrame] = useState(null)
     const [inView, setInView] = useState(false)
     const [hoverCleanup, setHoverCleanup] = useState(null)
-    const [variation, setVariation] = useState()
     const previewContainer = useRef(null)
     const blockRef = useRef(null)
     const observer = useRef(null)
@@ -50,7 +49,6 @@ export const StylePreview = ({
         inView && variation ? variation : null,
         fetcher,
     )
-    const { data: variations } = useFetch('variations', getThemeVariations)
     const theme = variation?.settings?.color?.palette?.theme
 
     const blocks = useMemo(
@@ -110,16 +108,6 @@ export const StylePreview = ({
             )
         }
     }, [loaded, context, inView])
-
-    useEffect(() => {
-        if (!variations?.length) return
-
-        // Grab the styles from the theme.json variation
-        const variation = variations.find(
-            (theme) => theme.title === style.label,
-        )
-        setVariation(variation)
-    }, [style, variations])
 
     useEffect(() => {
         if (!themeJson || !style?.code) return
@@ -241,7 +229,7 @@ export const StylePreview = ({
                 </>
             )}
             <div
-                data-test="styleSelector"
+                data-test="layout-preview"
                 ref={blockRef}
                 role={onSelect ? 'button' : undefined}
                 tabIndex={onSelect ? 0 : undefined}
@@ -278,11 +266,6 @@ export const StylePreview = ({
                         ? () => onSelect({ ...style, variation })
                         : () => {}
                 }>
-                {window?.extOnbData?.devbuild ? (
-                    <div className="-m-px absolute bg-gray-900 border border-t border-white bottom-0 group-hover:opacity-100 left-0 opacity-0 p-1 px-4 text-left text-sm text-white z-30 transition duration-300">
-                        {style?.label} - {Number(loadTime.current).toFixed(2)}ms
-                    </div>
-                ) : null}
                 <div ref={previewContainer} className="relative rounded-lg">
                     {inView ? (
                         <BlockPreview

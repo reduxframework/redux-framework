@@ -1,4 +1,5 @@
 import { render } from '@wordpress/element'
+import { __ } from '@wordpress/i18n'
 import { Assist } from '@assist/Assist'
 import { AssistLandingPage } from '@assist/AssistLandingPage'
 import { AssistTaskbar } from '@assist/AssistTaskbar'
@@ -17,6 +18,16 @@ const dashboard = document.getElementById('dashboard-widgets-wrap')
 
 // Assist landing page
 if (!launchActive && assistPage) {
+    // append skip link to get here
+    document
+        .querySelector('.screen-reader-shortcut')
+        .insertAdjacentHTML(
+            'afterend',
+            `<a href="#extendify-assist-landing-page" class="screen-reader-shortcut">${__(
+                'Skip to Assist',
+                'extendify',
+            )}</a>`,
+        )
     render(<AssistLandingPage />, assistPage)
 }
 

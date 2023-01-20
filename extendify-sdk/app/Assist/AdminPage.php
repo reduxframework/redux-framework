@@ -53,7 +53,7 @@ class AdminPage
             id="extendify-assist-landing-page"
             class="extendify-assist"
             data-test="assist-landing">
-        ></div>
+        </div>
         <?php
     }
 }
