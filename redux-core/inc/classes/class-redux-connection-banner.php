@@ -285,9 +285,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 * @param $current_screen
 		 */
 		public function maybe_initialize_hooks( $current_screen ) {
-			// Redux_Functions_Ex::set_deactivated(); // Test code.
-
-			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_noticee', null ) ) {
+			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_notice', null ) ) {
 				return;
 			}
 
@@ -326,9 +324,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 			if ( empty( $this->notice ) ) {
 				$name = 'Redux';
-				// if ( isset( $args['display_name'] ) && !empty( $args['display_name'] )) {
-				// $name = $name . ' & '.$args['display_name'];
-				// }
 				$notice = sprintf( __( 'Register <strong>%1$s</strong> to enable automatic Google Font updates service. Plus unlock all free block templates in the Redux template library.', 'redux-framework' ), $name );
 			} else {
 				$notice = $this->notice;
@@ -413,19 +408,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 										?>
 									" height="auto"
 									/></a>
-								<!-- <img
-									src="<?php //echo esc_url( Redux_Core::$url ); ?>assets/img/redux-powering-up.svg"
-									class="redux-banner-hide-phone-and-smaller"
-									alt="
-									<?php
-								//esc_attr_e(
-								//	'Redux helps you to take your site to the next level with tools that greatly enhance your WordPress experience.',
-								//	'redux-framework'
-								//);
-								?>
-									"
-									height="auto"
-								/> -->
 							</div>
 
 							<div class="redux-banner-slide-text">
@@ -438,17 +420,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 									);
 									?>
 								</p>
-
-								<!-- <p><em>
-										<?php
-								// esc_html_e(
-								//	'No registration is required to use Redux as you always have. By registering for our service you gain access to Google Font updates as well as access to all free templates in our block template library.',
-								//	'redux-framework'
-								//);
-								?>
-										</em>
-								</p> -->
-
 								<div class="redux-banner-button-container">
 									<span class="redux-banner-tos-blurb"><?php // echo self::tos_blurb( 'plugin_dashboard' ); ?></span>
 									<a href="<?php echo esc_url( $urls['register'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-activate="main_banner"
