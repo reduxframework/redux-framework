@@ -278,11 +278,11 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		/**
 		 * Add custom fonts.
 		 *
-		 * @param array $custom_fonts Custom fonts.
+		 * @param mixed $custom_fonts Custom fonts.
 		 *
 		 * @return array
 		 */
-		public function add_custom_fonts( array $custom_fonts ): array {
+		public function add_custom_fonts( $custom_fonts ): array {
 			if ( empty( $custom_fonts ) ) {
 				$custom_fonts = array();
 			}
