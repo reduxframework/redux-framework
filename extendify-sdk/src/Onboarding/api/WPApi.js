@@ -116,16 +116,23 @@ export const addLaunchPagesToNav = (
         replace =
             '<!-- wp:page-list {"isNavigationChild":true,"showSubmenuIcon":true,"openSubmenusOnClick":false} /-->'
     const pageListItems = pages
-        .map(
-            (page) =>
-                `<!-- wp:navigation-link {"label":"${
-                    page.title
-                }","type":"page","id":${
-                    pageIds[page.slug]?.id ? pageIds[page.slug].id : page.id
-                },"url":"/${
-                    page.slug
-                }","kind":"post-type","isTopLevelLink":true} /-->`,
-        )
+        .map((page) => {
+            return pageIds[page.slug]?.id || page.id
+                ? `<!-- wp:navigation-link {
+                        "label":"${page.title}",
+                        "type":"page",
+                        "id":${pageIds?.[page.slug]?.id ?? page.id},
+                        "url":"/${page.slug}",
+                        "kind":"post-type",
+                        "isTopLevelLink":true
+                    } /-->`
+                : `<!-- wp:navigation-link {
+                        "label":"${page.title}",
+                        "url":"/${page.slug}",
+                        "kind":"custom",
+                        "isTopLevelLink":true
+                    } /-->`
+        })
         .join('')
     return rawCode.replace(replace, pageListItems)
 }

@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback, useRef } from '@wordpress/element'
+import { useEffect, useState, useCallback } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { Transition } from '@headlessui/react'
+import { colord } from 'colord'
 import {
     installPlugin,
     updateTemplatePart,
@@ -11,8 +12,9 @@ import {
     getActivePlugins,
 } from '@onboarding/api/WPApi'
 import { useConfetti } from '@onboarding/hooks/useConfetti'
+import { useFetch } from '@onboarding/hooks/useFetch'
 import { useWarnOnLeave } from '@onboarding/hooks/useWarnOnLeave'
-import { runAtLeastFor, waitFor200Response } from '@onboarding/lib/util'
+import { waitFor200Response } from '@onboarding/lib/util'
 import {
     createWordpressPages,
     trashWordpressPages,
@@ -24,15 +26,23 @@ import { Logo, Spinner } from '@onboarding/svg'
 export const CreatingSite = () => {
     const [isShowing] = useState(true)
     const [confettiReady, setConfettiReady] = useState(false)
+    const [confettiColors, setConfettiColors] = useState(['#ffffff'])
     const [warnOnLeaveReady, setWarnOnLeaveReady] = useState(true)
     const canLaunch = useUserSelectionStore((state) => state.canLaunch())
-    const { siteType, siteInformation, pages, style, plugins, goals } =
-        useUserSelectionStore()
+    const { data: activePlugins } = useFetch('active-plugins', getActivePlugins)
+    const {
+        siteType,
+        siteInformation,
+        pages,
+        style,
+        variation,
+        plugins,
+        goals,
+    } = useUserSelectionStore()
     const [info, setInfo] = useState([])
     const [infoDesc, setInfoDesc] = useState([])
     const inform = (msg) => setInfo((info) => [msg, ...info])
     const informDesc = (msg) => setInfoDesc((infoDesc) => [msg, ...infoDesc])
-    const dryRun = useRef()
 
     useWarnOnLeave(warnOnLeaveReady)
 
@@ -43,25 +53,19 @@ export const CreatingSite = () => {
         try {
             inform(__('Applying site styles', 'extendify'))
             informDesc(__('A beautiful site in... 3, 2, 1', 'extendify'))
+            await new Promise((resolve) => setTimeout(resolve, 1000))
 
             await waitFor200Response()
-            await runAtLeastFor(
-                async () =>
-                    await updateOption('blogname', siteInformation.title),
-                2000,
-                { dryRun: dryRun.current },
-            )
+            await updateOption('blogname', siteInformation.title)
 
-            if (!dryRun.current) {
-                await waitFor200Response()
-                await updateGlobalStyleVariant(style?.variation ?? {})
+            await waitFor200Response()
+            await updateGlobalStyleVariant(variation ?? {})
 
-                await waitFor200Response()
-                await updateTemplatePart('extendable/header', style?.headerCode)
+            await waitFor200Response()
+            await updateTemplatePart('extendable/header', style?.headerCode)
 
-                await waitFor200Response()
-                await updateTemplatePart('extendable/footer', style?.footerCode)
-            }
+            await waitFor200Response()
+            await updateTemplatePart('extendable/footer', style?.footerCode)
 
             if (plugins?.length) {
                 inform(__('Installing suggested plugins', 'extendify'))
@@ -88,91 +92,79 @@ export const CreatingSite = () => {
             let pageIds, navPages
             inform(__('Generating page content', 'extendify'))
             informDesc(__('Starting off with a full site...', 'extendify'))
+            await new Promise((resolve) => setTimeout(resolve, 1000))
             await waitFor200Response()
-            await runAtLeastFor(
-                async () => {
-                    const blogPage = {
-                        // slug is only used internally
-                        slug: 'blog',
-                        title: __('Blog', 'extendify'),
+
+            const blogPage = {
+                // slug is only used internally
+                slug: 'blog',
+                title: __('Blog', 'extendify'),
+            }
+            const pagesWithBlog = [...pages, blogPage]
+            await waitFor200Response()
+            pageIds = await createWordpressPages(pagesWithBlog, siteType, style)
+            await waitFor200Response()
+            const addBlogPageToNav = goals.some((goal) => goal.slug === 'blog')
+
+            navPages = [...pages]
+
+            navPages = addBlogPageToNav
+                ? [...navPages, blogPage]
+                : [...navPages]
+
+            // Add plugin related pages only if plugin is active
+            if (
+                activePlugins?.filter((p) => p.includes('woocommerce'))?.length
+            ) {
+                const shopPageId = await getOption('woocommerce_shop_page_id')
+                const shopPage = await getPageById(shopPageId)
+                const cartPageId = await getOption('woocommerce_cart_page_id')
+                const cartPage = await getPageById(cartPageId)
+                if (shopPageId && shopPage && cartPageId && cartPage) {
+                    const wooShopPage = {
+                        id: shopPageId,
+                        slug: shopPage.slug,
+                        title: shopPage.title.rendered,
                     }
-                    const pagesWithBlog = [...pages, blogPage]
-                    await waitFor200Response()
-                    pageIds = await createWordpressPages(
-                        pagesWithBlog,
-                        siteType,
-                        style,
-                    )
-                    await waitFor200Response()
-                    const addBlogPageToNav = goals.some(
-                        (goal) => goal.slug === 'blog',
-                    )
-
-                    navPages = [...pages]
-
-                    navPages = addBlogPageToNav
-                        ? [...navPages, blogPage]
-                        : [...navPages]
-
-                    const { data: active } = await getActivePlugins()
-
-                    // Add plugin related pages only if plugin is active
-                    if (active?.filter((p) => p.includes('woocom'))?.length) {
-                        const shopPageId = await getOption(
-                            'woocommerce_shop_page_id',
-                        )
-                        const shopPage = await getPageById(shopPageId)
-                        const cartPageId = await getOption(
-                            'woocommerce_cart_page_id',
-                        )
-                        const cartPage = await getPageById(cartPageId)
-                        if (shopPageId && shopPage && cartPageId && cartPage) {
-                            const wooShopPage = {
-                                id: shopPageId,
-                                slug: shopPage.slug,
-                                title: shopPage.title.rendered,
-                            }
-                            const wooCartPage = {
-                                id: cartPageId,
-                                slug: cartPage.slug,
-                                title: cartPage.title.rendered,
-                            }
-                            navPages = [...navPages, wooShopPage, wooCartPage]
-                        }
+                    const wooCartPage = {
+                        id: cartPageId,
+                        slug: cartPage.slug,
+                        title: cartPage.title.rendered,
                     }
+                    navPages = [...navPages, wooShopPage, wooCartPage]
+                }
+            }
 
-                    const updatedHeaderCode = addLaunchPagesToNav(
-                        navPages,
-                        pageIds,
-                        style?.headerCode,
-                    )
+            if (
+                activePlugins?.filter((p) => p.includes('the-events-calendar'))
+                    ?.length
+            ) {
+                const eventsPage = {
+                    slug: 'events',
+                    title: __('Events', 'extendify'),
+                }
+                navPages = [...navPages, eventsPage]
+            }
 
-                    await waitFor200Response()
-                    await updateTemplatePart(
-                        'extendable/header',
-                        updatedHeaderCode,
-                    )
-                },
-                2000,
-                { dryRun: dryRun.current },
+            const updatedHeaderCode = addLaunchPagesToNav(
+                navPages,
+                pageIds,
+                style?.headerCode,
             )
+
+            await waitFor200Response()
+            await updateTemplatePart('extendable/header', updatedHeaderCode)
 
             inform(__('Setting up your site assistant', 'extendify'))
             informDesc(__('Helping your site to be successful...', 'extendify'))
+            await new Promise((resolve) => setTimeout(resolve, 1000))
             await waitFor200Response()
-            await runAtLeastFor(
-                async () =>
-                    await trashWordpressPages([
-                        { slug: 'hello-world', type: 'post' },
-                        { slug: 'sample-page', type: 'page' },
-                    ]),
-                2000,
-                { dryRun: dryRun.current },
-            )
-            if (!dryRun.current) {
-                await waitFor200Response()
-                await updateOption('permalink_structure', '/%postname%/')
-            }
+            await trashWordpressPages([
+                { slug: 'hello-world', type: 'post' },
+                { slug: 'sample-page', type: 'page' },
+            ])
+            await waitFor200Response()
+            await updateOption('permalink_structure', '/%postname%/')
             inform(__('Your site has been created!', 'extendify'))
             informDesc(__('Redirecting in 3, 2, 1...', 'extendify'))
             // fire confetti here
@@ -180,16 +172,15 @@ export const CreatingSite = () => {
             setWarnOnLeaveReady(false)
             await new Promise((resolve) => setTimeout(resolve, 2500))
 
-            if (!dryRun.current) {
-                await waitFor200Response()
-                await updateOption(
-                    'extendify_onboarding_completed',
-                    new Date().toISOString(),
-                )
-            }
+            await waitFor200Response()
+            await updateOption(
+                'extendify_onboarding_completed',
+                new Date().toISOString(),
+            )
 
             return pageIds
         } catch (e) {
+            console.error(e)
             // if the error is 4xx, we should stop trying and prompt them to reload
             if (e.status >= 400 && e.status < 500) {
                 setWarnOnLeaveReady(false)
@@ -204,36 +195,51 @@ export const CreatingSite = () => {
             return doEverything()
         }
     }, [
+        activePlugins,
         goals,
         pages,
         plugins,
         siteType,
         style,
+        variation,
         canLaunch,
         siteInformation.title,
     ])
 
     useEffect(() => {
-        const q = new URLSearchParams(window.location.search)
-        dryRun.current = q.has('dry-run')
-    }, [])
-
-    useEffect(() => {
+        if (!activePlugins) return
         doEverything().then(() => {
             window.location.replace(
                 window.extOnbData.adminUrl +
                     'admin.php?page=extendify-assist&extendify-launch-success',
             )
         })
-    }, [doEverything])
+    }, [doEverything, activePlugins])
+
+    useEffect(() => {
+        const documentStyles = window.getComputedStyle(document.documentElement)
+        const partnerBg = documentStyles?.getPropertyValue(
+            '--ext-partner-theme-primary-bg',
+        )
+        const partnerText = documentStyles?.getPropertyValue(
+            '--ext-partner-theme-primary-text',
+        )
+        if (partnerBg) {
+            setConfettiColors([
+                colord(partnerBg).darken(0.3).toHex(),
+                colord(partnerText).alpha(0.5).toHex(),
+                colord(partnerBg).lighten(0.2).toHex(),
+            ])
+        }
+    }, [])
 
     useConfetti(
         {
-            particleCount: 2,
+            particleCount: 3,
             angle: 320,
-            spread: 120,
+            spread: 220,
             origin: { x: 0, y: 0 },
-            colors: ['var(--ext-partner-theme-primary-text, #ffffff)'],
+            colors: confettiColors,
         },
         2500,
         confettiReady,

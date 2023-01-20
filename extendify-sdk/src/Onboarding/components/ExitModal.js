@@ -102,12 +102,14 @@ export const ExitModal = () => {
                 <form
                     onSubmit={submitExitSurvey}
                     style={{ maxWidth: '400px' }}
-                    className="sm:flex relative shadow-2xl sm:overflow-hidden mx-auto bg-white flex flex-col p-8">
+                    className="sm:flex relative shadow-2xl sm:overflow-hidden mx-auto bg-white flex flex-col p-8"
+                    data-test="exit-survey-form">
                     <Button
                         className="absolute top-0 right-0"
                         onClick={closeExitModal}
                         icon={<Icon icon={close} size={24} />}
                         label={__('Exit Launch', 'extendify')}
+                        data-test="close-exit-survey"
                     />
                     <p className="m-0 text-lg font-bold text-left">
                         {sprintf(
@@ -145,7 +147,8 @@ export const ExitModal = () => {
                             <button
                                 className="px-4 py-3 mr-4 button-focus"
                                 type="button"
-                                onClick={skipLaunch}>
+                                onClick={skipLaunch}
+                                data-test="skip-exit-survey">
                                 {__('Skip', 'extendify')}
                             </button>
                         )}
@@ -158,7 +161,8 @@ export const ExitModal = () => {
                             )}
                             type="button"
                             onClick={submitExitSurvey}
-                            disabled={!value}>
+                            disabled={!value}
+                            data-test="submit-exit-survey">
                             {__('Submit', 'extendify')}
                         </button>
                     </div>
@@ -186,7 +190,9 @@ const LabeledCheckbox = ({
 
     return (
         <>
-            <span className="flex items-center leading-loose">
+            <span
+                className="flex items-center leading-loose"
+                data-test="exit-survey-item">
                 <span
                     onClick={() => setValue(slug)}
                     onKeyDown={(e) => {

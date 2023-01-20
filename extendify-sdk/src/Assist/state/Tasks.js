@@ -18,6 +18,8 @@ const state = (set, get) => ({
     inProgressTasks: [],
     // Available tasks that are actually shown to the user
     // Each tasks is responsible for checking if it's available
+    // Use this for keeping a total count of available tasks,
+    // and not for showing the task itself
     availableTasks: [],
     isCompleted(taskId) {
         return get().completedTasks.some((task) => task?.id === taskId)
@@ -35,6 +37,20 @@ const state = (set, get) => ({
                 },
             ],
         }))
+    },
+    // Marks the task as dismissed: true
+    dismissTask(taskId) {
+        get().completeTask(taskId)
+        set((state) => {
+            const { completedTasks } = state
+            const task = completedTasks.find((task) => task.id === taskId)
+            return {
+                completedTasks: [
+                    ...completedTasks,
+                    { ...task, dismissed: true },
+                ],
+            }
+        })
     },
     isSeen(taskId) {
         return get().seenTasks.some((task) => task?.id === taskId)

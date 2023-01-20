@@ -1,7 +1,7 @@
 import { Fragment } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
-import { useAdminColors } from '@assist/hooks/useAdminColors'
+import { useDesignColors } from '@assist/hooks/useDesignColors'
 import { useGlobalStore } from '../state/Global'
 
 const steps = {
@@ -55,7 +55,7 @@ const steps = {
 export const AdminNotice = () => {
     const noticeKey = 'extendify-launch'
     const { isDismissed, dismissNotice } = useGlobalStore()
-    const { mainColor: bgColor, darkColor: bgDarker } = useAdminColors()
+    const { mainColor: bgColor, darkColor: bgDarker } = useDesignColors()
 
     // To avoid content flash, we load in this partial piece of state early via php
     const dismissed = window.extAssistData.dismissedNotices.find(
@@ -79,7 +79,9 @@ export const AdminNotice = () => {
     let reached = false
 
     return (
-        <div className="mt-6 mb-8 max-w-screen-3xl">
+        <div
+            className="mt-6 mb-8 max-w-screen-3xl"
+            data-test="assist-admin-notice">
             <div
                 style={{ background: bgColor, minHeight: '420px' }}
                 className="relative flex flex-col">

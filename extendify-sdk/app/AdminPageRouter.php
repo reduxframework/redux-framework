@@ -133,7 +133,7 @@ class AdminPageRouter
         $badgeCount = $remainingTasks > 9 ? '9' : strval($remainingTasks);
         $menuLabel = Config::$launchCompleted ? __('Site Assistant', 'extendify') : __('Site Launcher', 'extendify');
         $menuLabel = Config::$showOnboarding ? $menuLabel : 'Extendify';
-        $menuLabel = sprintf('%1$s <span class="extendify-assist-badge-count"></span>', $menuLabel);
+        $menuLabel = sprintf('%1$s <span class="extendify-assist-badge-count" data-test="assist-badge-count"></span>', $menuLabel);
 
         \add_menu_page(
             'Extendify',

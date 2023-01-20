@@ -7,7 +7,6 @@ import {
 } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import { getStyles } from '@onboarding/api/DataApi'
-import { getThemeVariations } from '@onboarding/api/WPApi'
 import { SkeletonLoader } from '@onboarding/components/SkeletonLoader'
 import { StylePreview } from '@onboarding/components/StyledPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
@@ -20,22 +19,22 @@ export const fetcher = (params) => getStyles(params)
 export const fetchData = (siteType) => {
     siteType = siteType ?? useUserSelectionStore?.getState().siteType
     return {
-        key: 'site-style',
+        key: 'site-layout',
         siteType: siteType?.slug ?? 'default',
         styles: siteType?.styles ?? [],
     }
 }
-export const state = pageState('Design', (set, get) => ({
-    title: __('Design', 'extendify'),
+export const state = pageState('Layout', (set, get) => ({
+    title: __('Layout', 'extendify'),
     default: undefined,
     showInSidebar: true,
     ready: false,
     isDefault: () =>
         useUserSelectionStore.getState().style?.slug === get().default?.slug,
 }))
-export const SiteStyle = () => {
+export const SiteLayout = () => {
+    const { style, variation, setStyle } = useUserSelectionStore()
     const { data: styleData, loading } = useFetch(fetchData, fetcher)
-    const { data: variations } = useFetch('variations', getThemeVariations)
     const once = useRef(false)
     const stylesRef = useRef()
     const isMounted = useIsMountedLayout()
@@ -57,34 +56,28 @@ export const SiteStyle = () => {
     }, [styleData, isMounted])
 
     useEffect(() => {
-        if (
-            variations?.length &&
-            styles?.length &&
-            !useUserSelectionStore.getState().style
-        ) {
-            // Grab the styles from the theme.json variation
-            const variation = variations.find(
-                (theme) => theme.title === styles[0].label,
-            )
-            useUserSelectionStore
-                .getState()
-                .setStyle({ ...styles[0], variation })
-            state.setState({ default: { ...styles[0], variation } })
-        }
-    }, [styles, variations])
+        if (!styles?.length || style) return
+        setStyle(styles[0])
+        state.setState({ default: styles[0] })
+    }, [variation, styles, style, setStyle])
 
     useEffect(() => {
-        if (!styles?.length || once.current) return
+        if (!styles?.length || once.current || !style) return
         once.current = true
         // Focus the first style
         stylesRef?.current?.querySelector('[role=button]')?.focus()
-    }, [styles])
+    }, [styles, style])
 
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
-                    {__('Now pick a design for your new site.', 'extendify')}
+                <h1
+                    className="text-3xl text-partner-primary-text mb-4 mt-0"
+                    data-test="layout-heading">
+                    {__(
+                        'Now pick a layout for your site homepage.',
+                        'extendify',
+                    )}
                 </h1>
                 <p className="text-base opacity-70 mb-0">
                     {__('You can personalize this later.', 'extendify')}
@@ -97,16 +90,14 @@ export const SiteStyle = () => {
                               'Please wait a moment while we generate style previews...',
                               'extendify',
                           )
-                        : __('Pick your style', 'extendify')}
+                        : __('Pick your homepage layout', 'extendify')}
                 </h2>
                 <div
                     ref={stylesRef}
-                    className="flex gap-6 flex-wrap justify-center">
+                    className="flex gap-6 flex-wrap justify-center"
+                    data-test="layout-preview-wrapper">
                     {styles?.map((style) => (
-                        <StylePreviewWrapper
-                            key={style.recordId}
-                            style={style}
-                        />
+                        <StylePreviewWrapper key={style.slug} style={style} />
                     ))}
                     {styleData?.slice(styles?.length).map((data) => (
                         <div
@@ -123,9 +114,8 @@ export const SiteStyle = () => {
 }
 
 const StylePreviewWrapper = ({ style }) => {
-    const onSelect = useCallback((style) => {
-        useUserSelectionStore.getState().setStyle(style)
-    }, [])
+    const { setStyle, style: currentStyle } = useUserSelectionStore()
+    const onSelect = useCallback((style) => setStyle(style), [setStyle])
     const context = useMemo(
         () => ({
             type: 'style',
@@ -140,9 +130,7 @@ const StylePreviewWrapper = ({ style }) => {
                 style={style}
                 context={context}
                 onSelect={onSelect}
-                active={
-                    useUserSelectionStore.getState()?.style?.slug === style.slug
-                }
+                active={currentStyle?.slug === style.slug}
                 blockHeight={497}
             />
         </div>

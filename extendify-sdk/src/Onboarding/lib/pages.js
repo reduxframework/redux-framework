@@ -11,12 +11,17 @@ import {
     state as siteInfoState,
 } from '@onboarding/pages/SiteInformation'
 import {
+    SiteLayout,
+    fetcher as siteLayoutFetcher,
+    fetchData as siteLayoutData,
+    state as siteLayoutState,
+} from '@onboarding/pages/SiteLayout'
+import {
     SitePages,
     fetcher as sitePagesFetcher,
     fetchData as sitePagesData,
     state as sitePagesState,
 } from '@onboarding/pages/SitePages'
-import { SiteStyle, state as siteStyleState } from '@onboarding/pages/SiteStyle'
 import {
     SiteSummary,
     state as confirmationState,
@@ -27,6 +32,12 @@ import {
     fetchData as siteTypeData,
     state as siteTypeState,
 } from '@onboarding/pages/SiteTypeSelect'
+import {
+    SiteVariation,
+    fetcher as siteVariationFetcher,
+    fetchData as siteVariationData,
+    state as siteVariationState,
+} from '@onboarding/pages/SiteVariation'
 
 // pages added here will need to match the orders table on the Styles base
 const defaultPages = [
@@ -49,10 +60,21 @@ const defaultPages = [
         },
     ],
     [
-        'style',
+        'variation',
         {
-            component: SiteStyle,
-            state: siteStyleState,
+            component: SiteVariation,
+            fetcher: siteVariationFetcher,
+            fetchData: siteVariationData,
+            state: siteVariationState,
+        },
+    ],
+    [
+        'layout',
+        {
+            component: SiteLayout,
+            fetcher: siteLayoutFetcher,
+            fetchData: siteLayoutData,
+            state: siteLayoutState,
         },
     ],
     [

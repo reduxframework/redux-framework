@@ -32,10 +32,16 @@ const state = (set, get) => ({
             completedCount: tour.completedCount + 1,
             lastAction: 'completed',
         })
-        set({
-            currentTour: null,
-            currentStep: 0,
+        set({ currentTour: null, currentStep: 0 })
+    },
+    closeForRedirect() {
+        if (!get().currentTour) return
+        const tour = get().findTourProgress(get().currentTour.id)
+        // update last action
+        get().updateProgress(tour?.id ?? get().currentTour, {
+            lastAction: 'redirected',
         })
+        set({ currentTour: null, currentStep: 0 })
     },
     closeCurrentTourManually() {
         const tour = get().findTourProgress(get().currentTour.id)
@@ -47,7 +53,9 @@ const state = (set, get) => ({
         set({ currentTour: null, currentStep: 0 })
     },
     closeCurrentTourFromError() {
+        if (!get().currentTour) return console.error('No tour found')
         const tour = get().findTourProgress(get().currentTour.id)
+        if (!tour) return console.error('No tour found')
         get().updateProgress(tour.id, {
             errored: true,
             lastAction: 'closed-by-caught-error',

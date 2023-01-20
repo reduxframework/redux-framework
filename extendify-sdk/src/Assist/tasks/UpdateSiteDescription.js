@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
 import { getOption, updateOption } from '@assist/api/WPApi'
-import { useAdminColors } from '@assist/hooks/useAdminColors'
+import { useDesignColors } from '@assist/hooks/useDesignColors'
 import { useTasksStore } from '@assist/state/Tasks'
 
 export const UpdateSiteDescription = ({ popModal, setModalTitle }) => {
@@ -10,7 +10,7 @@ export const UpdateSiteDescription = ({ popModal, setModalTitle }) => {
     const [initialValue, setInitialValue] = useState(undefined)
     const inputRef = useRef()
     const { completeTask } = useTasksStore()
-    const { mainColor } = useAdminColors()
+    const { mainColor } = useDesignColors()
 
     useEffect(() => {
         setModalTitle(__('Add site description', 'extendify'))
@@ -37,7 +37,7 @@ export const UpdateSiteDescription = ({ popModal, setModalTitle }) => {
             onSubmit={(e) => e.preventDefault()}>
             <div>
                 <label
-                    className="block mb-1"
+                    className="block mb-1 text-gray-900 text-sm"
                     htmlFor="extendify-site-description-input">
                     {__('Site description', 'extendify')}
                 </label>
@@ -46,7 +46,7 @@ export const UpdateSiteDescription = ({ popModal, setModalTitle }) => {
                     type="text"
                     name="extendify-site-description-input"
                     id="extendify-site-description-input"
-                    className="w-96 max-w-full border h-12 input-focus"
+                    className="w-96 max-w-full border border-gray-900 px-2 h-12 input-focus"
                     onChange={(e) => {
                         setSiteDescription(e.target.value)
                     }}

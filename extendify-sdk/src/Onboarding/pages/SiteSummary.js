@@ -22,7 +22,9 @@ export const SiteSummary = () => {
     return (
         <PageLayout>
             <div>
-                <h1 className="text-3xl text-partner-primary-text mb-4 mt-0">
+                <h1
+                    className="text-3xl text-partner-primary-text mb-4 mt-0"
+                    data-test="summary-heading">
                     {__("Let's launch your site!", 'extendify')}
                 </h1>
                 <p className="text-base mb-0">

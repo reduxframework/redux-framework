@@ -7,7 +7,7 @@
     --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: transparent;
-    --tw-ring-color: var(--ext-partner-theme-primary-bg, #2c39bd);
+    --tw-ring-color: var(--ext-design-main, #2c39bd);
 }
 
 .extendify-assist *,
@@ -32,4 +32,11 @@ body[class*="_page_extendify-assist"] #wpcontent {
 }
 .ext-force-overflow-auto {
     @apply overflow-auto;
+}
+.extendify-assist *:not(.dashicons) {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+}
+.extendify-assist .input-focus {
+    @apply outline-none text-sm ring-design-main focus:shadow-none focus:ring-wp;
 }

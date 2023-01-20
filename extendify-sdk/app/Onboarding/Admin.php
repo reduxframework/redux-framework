@@ -223,7 +223,7 @@ class Admin
             $version
         );
 
-        \wp_add_inline_style(Config::$slug . '-onboarding-styles', "body {
+        \wp_add_inline_style(Config::$slug . '-onboarding-styles', ":root {
             --ext-partner-theme-primary-bg: {$bgColor};
             --ext-partner-theme-primary-text: {$fgColor};
         }");

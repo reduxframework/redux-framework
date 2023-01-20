@@ -11,6 +11,9 @@ export default {
     description: __('The Welcome Tour', 'extendify'),
     settings: {
         allowOverflow: true,
+        startFrom:
+            window.extAssistData.adminUrl +
+            'admin.php?page=extendify-assist#dashboard',
     },
     steps: [
         {
@@ -19,9 +22,7 @@ export default {
                 'Use the pages menu to add, delete, or edit the pages on your site.',
                 'extendify',
             ),
-            image:
-                window.extAssistData.asset_path +
-                '/tours/welcome/add-pages.gif',
+            image: 'https://assets.extendify.com/tours/welcome/add-pages.gif',
             attachTo: {
                 element: '#menu-pages',
                 offset: {
@@ -49,9 +50,7 @@ export default {
                 'Use the posts menu to add, delete, or edit blog posts on your site.',
                 'extendify',
             ),
-            image:
-                window.extAssistData.asset_path +
-                '/tours/welcome/blog-posts.gif',
+            image: 'https://assets.extendify.com/tours/welcome/blog-posts.gif',
             attachTo: {
                 element: '#menu-posts',
                 offset: {
@@ -79,9 +78,7 @@ export default {
                 "At any time, you can view your site (from a visitor's perspective) from the top admin bar under your site's name.",
                 'extendify',
             ),
-            image:
-                window.extAssistData.asset_path +
-                '/tours/welcome/view-site.gif',
+            image: 'https://assets.extendify.com/tours/welcome/view-site.gif',
             attachTo: {
                 element: '#wp-admin-bar-view-site',
                 offset: {
@@ -132,9 +129,7 @@ export default {
                 'Your site assistant will give you personalized recommendations for your site and help guide you through what is needed to achieve your goals. You can access the assistant from the top admin bar or in the left side menu.',
                 'extendify',
             ),
-            image:
-                window.extAssistData.asset_path +
-                '/tours/welcome/site-assistant.gif',
+            image: 'https://assets.extendify.com/tours/welcome/site-assistant.gif',
             attachTo: {
                 element: '#wp-admin-bar-extendify-assist-link',
                 offset: {

@@ -25,6 +25,8 @@ use Extendify\Assist\Controllers\TasksController;
 use Extendify\Assist\Controllers\TourController;
 use Extendify\Assist\Controllers\UserSelectionController;
 use Extendify\Assist\Controllers\WPController as AssistWPController;
+use Extendify\Assist\Controllers\QuickLinksController;
+use Extendify\Assist\Controllers\RecommendationsController;
 
 \add_action(
     'rest_api_init',
@@ -63,6 +65,7 @@ use Extendify\Assist\Controllers\WPController as AssistWPController;
         ApiRouter::get('/onboarding/active-plugins', [WPController::class, 'getActivePlugins']);
 
         ApiRouter::get('/onboarding/site-types', [DataController::class, 'getSiteTypes']);
+        ApiRouter::get('/onboarding/styles-list', [DataController::class, 'getStylesList']);
         ApiRouter::get('/onboarding/styles', [DataController::class, 'getStyles']);
         ApiRouter::get('/onboarding/layout-types', [DataController::class, 'getLayoutTypes']);
         ApiRouter::get('/onboarding/goals', [DataController::class, 'getGoals']);
@@ -86,6 +89,8 @@ use Extendify\Assist\Controllers\WPController as AssistWPController;
         ApiRouter::post('/assist/user-selection-data', [UserSelectionController::class, 'store']);
         ApiRouter::get('/assist/active-plugins', [AssistWPController::class, 'getActivePlugins']);
         ApiRouter::get('/assist/tasks/dependency-completed', [TasksController::class, 'dependencyCompleted']);
+        ApiRouter::get('/assist/quicklinks', [QuickLinksController::class, 'fetchQuickLinks']);
+        ApiRouter::get('/assist/recommendations', [RecommendationsController::class, 'fetchRecommendations']);
 
         // TODO: consider merging this route into the library.
         ApiRouter::post('/library/site-type', [LibraryController::class, 'updateSiteType']);

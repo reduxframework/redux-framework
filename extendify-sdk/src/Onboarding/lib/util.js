@@ -19,16 +19,6 @@ export const lowerImageQuality = (html) => {
 export const capitalize = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 
-export const runAtLeastFor = async (functionPromise, time, options) => {
-    if (options.dryRun) {
-        return new Promise((resolve) => setTimeout(resolve, time))
-    }
-    return Promise.all([
-        await functionPromise(),
-        new Promise((resolve) => setTimeout(resolve, time)),
-    ])
-}
-
 /** Will ping every 1s until we get a 200 response from the server  */
 export const waitFor200Response = async () => {
     try {
