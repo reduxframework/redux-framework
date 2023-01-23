@@ -906,9 +906,20 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @return array|bool
 		 */
 		public function scandir( string $abs_path, bool $include_hidden = true, bool $recursive = false ) {
-			// phpcs:ignore WordPress.PHP.NoSilencedErrors
-			$dirlist = @scandir( $abs_path );
-			if ( false === $dirlist ) {
+			if ( $this->is_file( $abs_path ) ) {
+				$limit_file = basename( $abs_path );
+				$abs_path   = dirname( $abs_path );
+			} else {
+				$limit_file = false;
+			}
+
+			if ( ! $this->is_dir( $abs_path ) || ! $this->is_readable( $abs_path ) ) {
+				return false;
+			}
+
+			$dir = dir( $abs_path );
+
+			if ( false === $dir ) {
 				if ( $this->use_filesystem ) {
 					$abs_path = $this->get_sanitized_path( $abs_path );
 
@@ -918,21 +929,42 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				return false;
 			}
 
-			$return = array();
+			$ret = array();
 
-			// Normalize return to look somewhat like the return value for WP_Filesystem::dirlist.
-			foreach ( $dirlist as $entry ) {
-				if ( '.' === $entry || '..' === $entry ) {
+			while ( false !== ( $entry = $dir->read() ) ) {
+				$struc         = array();
+				$struc['name'] = $entry;
+
+				if ( '.' === $struc['name'] || '..' === $struc['name'] ) {
 					continue;
 				}
-				$return[ $entry ] = array(
-					'name' => $entry,
-					'type' => $this->is_dir( $abs_path . '/' . $entry ) ? 'd' : 'f',
-				);
+
+				if ( ! $include_hidden && '.' === $struc['name'][0] ) {
+					continue;
+				}
+
+				if ( $limit_file && $struc['name'] !== $limit_file ) {
+					continue;
+				}
+
+				$struc['type']        = $this->is_dir( $abs_path . '/' . $entry ) ? 'd' : 'f';
+
+				if ( 'd' === $struc['type'] ) {
+					if ( $recursive ) {
+						$struc['files'] = $this->scandir( $abs_path . '/' . $struc['name'], $include_hidden, $recursive );
+					} else {
+						$struc['files'] = array();
+					}
+				}
+
+				$ret[ $struc['name'] ] = $struc;
 			}
 
-			return $return;
+			$dir->close();
 
+			unset( $dir );
+
+			return $ret;
 		}
 
 		/**

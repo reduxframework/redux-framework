@@ -236,7 +236,12 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 */
 		public function get_fonts() {
 			if ( empty( $this->custom_fonts ) ) {
-				$fonts = $this->parent->filesystem->get_wp_filesystem()->dirlist( $this->upload_dir, false, true );
+				$params = array(
+					'include_hidden' => false,
+					'recursive'      => true,
+				);
+
+				$fonts = $this->parent->filesystem->execute( 'dirlist', $this->upload_dir, $params );
 
 				if ( ! empty( $fonts ) ) {
 					foreach ( $fonts as $section ) {
@@ -517,7 +522,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				$this->generate_css();
 
 				wp_delete_attachment( $attachment_id, true );
-			} elseif ( 'svg+xml' === $subtype || 'vnd.ms-fontobject' === $subtype || 'ttf' === $subtype || 'otf' === $subtype || 'font-woff' === $subtype || 'font-woff2' === $subtype || 'application-octet-stream' === $subtype || 'octet-stream' === $subtype ) {
+			} elseif ( 'svg+xml' === $subtype || 'vnd.ms-fontobject' === $subtype || 'x-font-ttf' === $subtype || 'ttf' === $subtype || 'otf' === $subtype || 'font-woff' === $subtype || 'font-woff2' === $subtype || 'application-octet-stream' === $subtype || 'octet-stream' === $subtype ) {
 				foreach ( $complete as $test ) {
 					if ( $subtype !== $test ) {
 						if ( ! isset( $output[ $test ] ) ) {
