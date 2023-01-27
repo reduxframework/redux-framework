@@ -1,7 +1,7 @@
 # Redux Changelog
 
-## 4.3.24.1
-* Modified: #3931 - Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
+## 4.3.25
+* Modified: Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
 
 ## 4.3.24
 * Additional work to make `custom_fonts` override old standalone extension version.

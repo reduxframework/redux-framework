@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 6.1
-Stable tag: 4.3.23
+Stable tag: 4.3.25
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -103,7 +103,10 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
-= 4.3.23 =
+= 4.3.25 =
+* Modified: Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
+
+= 4.3.24 =
 * Additional work to make `custom_fonts` override old standalone extension version.
 * Release date: January 20, 2023
 
@@ -278,187 +281,6 @@ Removed: Redux Framework Health Screen.
 Modified: Tools > Redux Framework screen moved to Settings > Redux
 Modified: Redux Templates disabled by default.
 Release date: September 21, 2021
-
-= 4.2.14 =
-Fixed: Parse error in Import/Export module due to old versions of PHP.
-Release date: August 11, 2021
-
-= 4.2.13 =
-Fixed: #3822 - Default value function returns string or array to prevent type error.
-Modified: #3820 - Better support for Redux embedded in themes.
-Modified: `install_plugins` security level now required to install Template blocks that require additional plugins.  This was done for security reasons.
-Added: New global arg `load_on_cron`.  Set to true if you require Redux to run within a cron initiated function.
-Removed: URL based  Import/Export option due to security concerns.  Manual Import/Export features remain.
-Removed: Support URL feature due to security issues.  Please use WordPress Site Health 'copy to clipboard' compiler to submit system data when reporting issues.
-Release date: August 11, 2021
-
-= 4.2.11 =
-Fixed: Removed type declarations on core return values to support improperly written third-party extensions.
-Fixed: Added shim to prevent errors on functions calls outdated extensions are still using.
-Fixed: Removed type declarations on field code to support outdated versions of PHP (PHP 7.4 is the minimum recommendation from WordPress...please update if you are able). [https://wordpress.org/about/requirements](https://wordpress.org/about/requirements).
-Fixed: Support URL button kicking back a JavaScript error.
-Release date: July 29, 2021
-
-= 4.2.10 =
-Fixed: Output on the frontend triggering error.
-Fixed: Updated shims to support older extensions not authored by Redux.io
-Release date: July 28, 2021
-
-= 4.2.9 =
-Fixed: WordPress data class now works properly.
-Release date: July 28, 2021
-
-= 4.2.8 =
-Redux instances returning null.  Saved options now show on the front end.
-Release date: July 28, 2021
-
-= 4.2.7 =
-Fixed: Options reverting or not saving.
-Release date: July 28, 2021
-
-= 4.2.6 =
-Fixed: Fatal error if passing null as an option section.
-Fixed: Error in connection banner routine.
-Release date: July 28, 2021
-
-= 4.2.5 =
-Fixed: Type mismatch in Redux Helpers.
-Release date: July 28, 2021
-
-= 4.2.4 =
-Fixed: Taxonomy WordPress data not handled properly in fields that support WordPress data.
-Release date: July 28, 2021
-
-= 4.2.3 =
-Fixed: Return type error in Redux templates.
-Release date: July 28, 2021
-
-= 4.2.2 =
-Fixed: WordPress data options not handling WP_Error properly.
-Release date: July 28, 2021
-
-= 4.2.1 =
-Fixed: Type mismatch regarding select boxes and callbacks.
-Release date: July 27, 2021
-
-= 4.2.0 =
-New: Typography features:  Top and bottom margins, text-shadow.
-New: Media Image Filters (greyscale, sepia, opacity, contrast, invert, blur, saturate, brightness, hue-rotate).
-New: Filters (type, reach, angle) for Gradient color field.
-New: Box Shadow field.
-New: Flyout Submenus: `flyout_submenus` global arg.
-New: Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
-Updated: select2 library to 4.1.0.
-Updated: readme.txt to conform to wp.org standards.
-Fixed: Remove PHP 7.2 syntax to keep older versions of PHP 7 happy.
-Fixed: Redux templates not showing on 'page attributes' for some.
-Fixed: Additional PHP 8.0 compatibility.
-Fixed: Widget screen would not load due to conflict with template library.
-Added:  WordPress 5.8 compatibility.
-Improved: Better Gutenberg block editor detection.
-Modified: Redux Pro no longer required for automatic Google font updates.
-Modified: Rename Parsedown class for raw field to avoid conflicts with other plugins.
-Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
-Release date: July 27, 2021
-
-= 4.1.29 =
-Fixed: All PHP 7.4 specific syntax backed out.  It caused older versions of PHP to report fatal errors.
-Fixed: Index error in the image_select field.
-Release date: June 29, 2021
-
-= 4.1.28 =
-Fixed: Redux templates loading on post types with no block editor.
-Fixed: Redux theme checks no longer prevent theme check plugin from functioning.
-Fixed: Heatbeat check no longer eats the function if disregarded.
-Fixed: Background field image now hides preview image upon removal.
-Fixed: RAW field in sample config now works.
-Fixed: Helper function is_field_in_use now returns false, instead of null.
-Fixed: Palette field rendering improperly.
-Fixed: Google font update fail.
-Modified: buttonset() jQuery widget deprecated.  Replaced with controlgroup().
-Modified: Additional JavaScript updates to fix jQuery deprecation notices.
-Release date: June 29, 2021
-
-= 4.1.27 =
-Fixed: Image select not selecting default value.
-Modified: Link color field overridden by theme.  Added 'important' arg to the output array to fix.  See sample config.
-Fixed: Same config not setting footer background in Twenty-twenty theme due to incorrect class.
-Fixed: Radio field not displaying text after save/refresh when displaying WordPress data.
-Modified: Donation text removed.
-Fixed: Link color CSS compiling incorrectly due to late escaping.
-
-= 4.1.26 =
-Added: Menu accent introduced in WordPress 5.7.
-Updated: ACE Editor 1.4.12.
-Updated select2 to support cssContainer.
-Fixed: Multiple submenus in metaboxes; the last submenu it cut off.
-Fixed: Fatal error: Can't use function return value in write context.
-Fixed: PHP 8.0 deprecation warnings.
-Fixed: Malformed HTML causing Redux pro alpha color-picker to not render.
-Fixed: Improved class checks for Redux Pro.
-Fixed: jQuery 3.x deprecation notices.
-Fixed: Malformed SCSS.
-Release date: March 17, 2021
-
-= 4.1.25 =
-Fixed: Erroneous icon on button_set field after WP 5.6 update.
-Fixed: Erroneous icon on palette field after WP 5.6 update.
-Fixed: PHP error in init_delay function during heartbeat API.
-Fixed: Options object field not rendering.
-Release date: Jan 21, 2021
-
-= 4.1.24 =
-Fixed: Select2 callback fix for select fields.
-Added: Shim: empty field_*.php files to fix developers including files improperly.
-Fixed: Changed use of ctype_xdigit to account for hosts where it's disabled.
-Added: Shim for people using terms data key, but using taxonomies instead of taxonomy.
-Fixed: Static call mismatch in redux colors.
-Fixed: CSRF security issue with a flipped if conditional. Thanks, @ErwanLR.
-Fixed: WordPress 4.6 API warnings.
-Fixed: WordPress 4.6 customizer issue where fields not displaying properly.
-Fixed: Massive speed improvement to the library.
-Fixed: Pro template count error if previously activated and Redux Pro not enabled.
-Release date: Dec 12, 2020
-
-= 4.1.23 =
-Fixed: Massive speed improvement to the library.
-Fixed: Pro template count error if previously activated and Redux Pro not enabled.
-Release date: Oct 24, 2020
-
-= 4.1.22 =
-Fixed: Menu locations WordPress data object not providing name.
-Added: Undefined if menu location is not assigned to a menu.
-Fixed: Another import/export edge case.
-Fixed: Fix setField API value.
-Fixed: Older extension compatibility.
-Fixed: Text field error with data/options args not displaying properly.
-Fixed: Import/Export now properly respects order of objects. Now using PHP over JS json_encode.
-Release date: Oct 23, 2020
-
-= 4.1.21 =
-Fixed: Fixed connection banner to hide even if JS is broken by jQuery migrate issue (WP 5.5).
-Fixed: Resolved all remaining legacy extension compatibility issues.
-Fixed: Custom callback with select field.
-Fixed: Typography bug when style was hidden.
-Fixed: Issue with text labels.
-Fixed: Google fonts HTML validation issues.
-Added: Feedback modal.
-Fixed: Import logic flaw.
-Fixed: Security bug. Thanks, @lenonleite of www.lenonleite.com.br.
-Release date: Oct 08, 2020
-
-= 4.1.20 =
-Added: Properly adjust the blocked editor page width based on template selected.
-Added: Broke out third-party premium plugins for filtering to help with understanding of what comes with Redux Pro.
-Added: Update block editor width when selecting a Redux template.
-Fixed: Some styling issues with preview modal.
-Fixed: Issue where plugin titles were not alphabetical.
-Fixed: Disabled third party premium dependencies.
-Fixed: Issue where crash would occur when Redux could not write out a file.
-Fixed: CSS selectors with HTML entities, like >, were not getting decoded for the passed compiler values.
-Fixed: Redux Pro activation issue.
-Fixed: Invalid logic causing some extensions not to run.
-Release date: Sep 18, 2020
 
 ** For a full changelog, see https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md **
 
