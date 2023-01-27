@@ -303,9 +303,9 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 			// Only show this notice when the plugin is installed.
 			if ( class_exists( 'Redux_Framework_Plugin' ) && false === Redux_Framework_Plugin::$crash ) {
-				add_action( 'admin_notices', array( $this, 'render_banner' ) );
+				// add_action( 'admin_notices', array( $this, 'render_banner' ) );
 				add_action( 'network_admin_notices', array( $this, 'network_connect_notice' ) );
-				add_action( 'admin_head', array( $this, 'admin_head' ) );
+				// add_action( 'admin_head', array( $this, 'admin_head' ) );
 				add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 20 );
 			}
 		}
