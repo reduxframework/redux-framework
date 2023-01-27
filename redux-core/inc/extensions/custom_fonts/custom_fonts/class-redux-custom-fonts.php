@@ -19,21 +19,6 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 	class Redux_Custom_Fonts extends Redux_Field {
 
 		/**
-		 * Constructor.
-		 *
-		 * @param array  $field Field.
-		 * @param array  $value Values.
-		 * @param object $parent ReduxFramework.
-		 *
-		 * @throws ReflectionException Exception.
-		 */
-		public function __construct( $field = array(), $value = null, $parent = null ) {
-			parent::__construct( $field, $value, $parent );
-
-			add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_styles' ), 99 );
-		}
-
-		/**
 		 * Set field defaults.
 		 */
 		public function set_defaults() {
@@ -208,24 +193,6 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 				time()
 			);
 
-			$class = Redux_Extension_Custom_Fonts::$instance;
-
-			if ( ! empty( $class->custom_fonts ) ) {
-				wp_enqueue_style(
-					'redux-custom_fonts-css',
-					$class->upload_url . 'fonts.css',
-					array(),
-					time()
-				);
-			}
-		}
-
-		/**
-		 * Add styles for block editor.
-		 *
-		 * @return void
-		 */
-		public function block_editor_styles(): void {
 			$class = Redux_Extension_Custom_Fonts::$instance;
 
 			if ( ! empty( $class->custom_fonts ) ) {
