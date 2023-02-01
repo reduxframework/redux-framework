@@ -196,12 +196,14 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 			$class = Redux_Extension_Custom_Fonts::$instance;
 
 			if ( ! empty( $class->custom_fonts ) ) {
-				wp_enqueue_style(
-					'redux-custom_fonts-css',
-					$class->upload_url . 'fonts.css',
-					array(),
-					time()
-				);
+				if ( file_exists( $class->upload_dir . 'fonts.css' ) ) {
+					wp_enqueue_style(
+						'redux-custom_fonts-css',
+						$class->upload_url . 'fonts.css',
+						array(),
+						time()
+					);
+				}
 			}
 		}
 	}

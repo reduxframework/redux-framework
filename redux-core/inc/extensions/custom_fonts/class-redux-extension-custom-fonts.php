@@ -766,8 +766,11 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			);
 
 			$fonts = $this->parent->filesystem->execute( 'dirlist', $this->upload_dir . 'custom/', $params );
+			foreach ( $fonts as $font ) {
+				if ( 'd' === $font['type'] ) {
+					break;
+				}
 
-			if ( empty( $fonts ) ) {
 				if ( file_exists( $this->upload_dir . 'fonts.css' ) ) {
 					$this->parent->filesystem->execute( 'delete', $this->upload_dir . 'fonts.css' );
 				}
@@ -783,12 +786,14 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				}
 			}
 
-			$param_array = array(
-				'content' => $css,
-				'chmod'   => FS_CHMOD_FILE,
-			);
+			if ( '' !== $css ) {
+				$param_array = array(
+					'content' => $css,
+					'chmod'   => FS_CHMOD_FILE,
+				);
 
-			$this->parent->filesystem->execute( 'put_contents', $this->upload_dir . 'fonts.css', $param_array );
+				$this->parent->filesystem->execute( 'put_contents', $this->upload_dir . 'fonts.css', $param_array );
+			}
 		}
 
 		/**
