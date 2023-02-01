@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.25.1
+* Modified: Empty `custom_font` list no longer creates empty fonts.css file.
+
 ## 4.3.25
 * Modified: Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
 
