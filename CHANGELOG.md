@@ -1,11 +1,13 @@
 # Redux Changelog
 
-## 4.3.25.1
+## 4.3.26
 * Modified: Empty `custom_font` list no longer creates empty fonts.css file.
-
+* Release date: February 02, 2023
+* 
 ## 4.3.25
 * Modified: Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
-
+* Release date: January 27, 2023
+* 
 ## 4.3.24
 * Additional work to make `custom_fonts` override old standalone extension version.
 * Release date: January 20, 2023

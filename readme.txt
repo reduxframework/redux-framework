@@ -4,7 +4,7 @@ Tags: patterns, templates, blocks, gutenberg, library, editor, page builder
 Requires at least: 4.0
 Requires PHP: 7.1
 Tested up to: 6.1
-Stable tag: 4.3.25
+Stable tag: 4.3.26
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -103,6 +103,10 @@ Once Installed and Activated you will be invited to Activate your Redux account.
 If you want, you can use the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin to get bleeding-edge experiments by the Gutenberg team.
 
 == Changelog ==
+= 4.3.26 =
+* Modified: Empty `custom_font` list no longer creates empty fonts.css file.
+* Release date: February 02, 2023
+
 = 4.3.25 =
 * Modified: Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
 
