@@ -7,6 +7,7 @@
 * METABOXES!
 * REPEATER EXTENSION!
 * SOCIAL PROFILES EXTENSION!
+* CUSTOM FONTS EXTENSION!
 * Multi Media extension.
 * DateTime extension.
 * JS Button extension.
