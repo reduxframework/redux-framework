@@ -127,6 +127,20 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $fields = array();
 
 		/**
+		 * Array of field types.
+		 *
+		 * @var array
+		 */
+		public $field_types = array();
+
+		/**
+		 * Array of field heads.
+		 *
+		 * @var array
+		 */
+		public $field_head = array();
+
+		/**
 		 * Array of extensions by type used in the panel.
 		 *
 		 * @var array
@@ -202,6 +216,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @var array
 		 */
 		public $fonts = array();
+
+		/**
+		 * Array of Google fonts used by the panel for localization.
+		 *
+		 * @var array
+		 */
+		public $google_array = array();
 
 		/**
 		 * Array of fields to be folded.
@@ -370,6 +391,20 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @var array
 		 */
 		public $transients = array();
+
+		/**
+		 * Array of localized repeater data.
+		 *
+		 * @var array
+		 */
+		public $repeater_data = array();
+
+		/**
+		 * Array of localized data.
+		 *
+		 * @var array
+		 */
+		public $localize_data = array();
 
 		/**
 		 * Deprecated shim for v3 templates.

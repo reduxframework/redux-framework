@@ -33,6 +33,14 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 		public $opt_name = '';
 
 		/**
+		 * Defaults array.
+		 *
+		 * @var array
+		 */
+
+		private $defaults = array();
+
+		/**
 		 * Set defaults.
 		 */
 		public function set_defaults() {

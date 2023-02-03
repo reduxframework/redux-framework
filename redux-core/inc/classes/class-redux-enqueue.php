@@ -565,9 +565,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				$this->localize_data['last_tab'] = $core->args['last_tab'];
 			}
 
-			$this->localize_data['core_instance'] = $core->core_instance;
-			$this->localize_data['core_thread']   = $core->core_thread;
-
 			$this->localize_data['font_weights'] = $this->args['font_weights'];
 
 			$this->localize_data['required'] = $core->required;

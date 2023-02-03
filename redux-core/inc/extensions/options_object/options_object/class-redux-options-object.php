@@ -21,6 +21,8 @@ if ( ! class_exists( 'Redux_Options_Object', false ) ) {
 	 */
 	class Redux_Options_Object extends Redux_Field {
 
+		public $is_field;
+
 		/**
 		 * Redux_Options_Object constructor.
 		 *

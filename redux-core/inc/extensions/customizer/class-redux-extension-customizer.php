@@ -266,13 +266,6 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				true
 			);
 
-			$custom_css  = '#' . $this->parent->core_thread . '{line-height:0;border:0;}';
-			$custom_css .= '#' . $this->parent->core_instance . '{position:inherit!important;right:0!important;top:0!important;bottom:0!important;';
-			$custom_css .= 'left:0!important;text-align:center;margin-bottom:0;line-height:0;-webkit-transition:left ease-in-out .18s;transition:left ease-in-out .18s;}';
-			$custom_css .= '#' . $this->parent->core_instance . ' img{-webkit-transition:left ease-in-out .18s;transition:left ease-in-out .18s;}';
-
-			wp_add_inline_style( 'redux-extension-customizer', $custom_css );
-
 			wp_localize_script(
 				'redux-extension-customizer',
 				'redux_customizer',

@@ -48,6 +48,11 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		protected $orig = array();
 
 		/**
+		 * @var object
+		 */
+		private $parent;
+
+		/**
 		 * Redux_Widget_Areas constructor.
 		 *
 		 * @param object $parent ReduxFramework pointer.
