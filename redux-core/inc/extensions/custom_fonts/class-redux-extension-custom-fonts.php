@@ -766,6 +766,11 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			);
 
 			$fonts = $this->parent->filesystem->execute( 'dirlist', $this->upload_dir . 'custom/', $params );
+
+			if ( empty( $fonts ) || ! is_array( $fonts) ) {
+				return;
+			}
+
 			foreach ( $fonts as $font ) {
 				if ( 'd' === $font['type'] ) {
 					break;
