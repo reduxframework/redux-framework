@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.3.26.1
+* Fixed: `Invalid argument` error inside `custom_fonts` on certain set ups.
+
 ## 4.3.26
 * Modified: Empty `custom_font` list no longer creates empty fonts.css file.
 * Release date: February 02, 2023
