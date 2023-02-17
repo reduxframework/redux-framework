@@ -163,15 +163,16 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 				require_once dirname( __FILE__ ) . '/redux-core/framework.php';
 			}
 
-			Redux_Core::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
+			// TODO: Delete when stable.
+			//Redux_Core::$extendify_templates_enabled = (bool) get_option( 'use_extendify_templates', true );
 
 			// Including extendify sdk.
-			if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
-				if ( file_exists( dirname( __FILE__ ) . '/extendify-sdk/loader.php' ) ) {
-					$GLOBALS['extendify_sdk_partner'] = 'Redux';
-					require_once dirname( __FILE__ ) . '/extendify-sdk/loader.php';
-				}
-			}
+			//if ( true === (bool) get_option( 'use_extendify_templates', true ) ) {
+			//	if ( file_exists( dirname( __FILE__ ) . '/extendify-sdk/loader.php' ) ) {
+			//		$GLOBALS['extendify_sdk_partner'] = 'Redux';
+			//		require_once dirname( __FILE__ ) . '/extendify-sdk/loader.php';
+			//	}
+			//}
 
 			if ( file_exists( dirname( __FILE__ ) . '/redux-templates/redux-templates.php' ) ) {
 				require_once dirname( __FILE__ ) . '/redux-templates/redux-templates.php';

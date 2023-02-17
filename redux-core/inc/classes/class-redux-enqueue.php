@@ -551,7 +551,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			$this->build_local_array( $core, 'sanitize' );
 
 			if ( empty( $core->transients['notices'] ) ) {
-				unset( $core->transients['notices'] );
+				if ( isset( $core->transients['notices'] ) ) {
+					unset( $core->transients['notices'] );
+				}
 			}
 		}
 
