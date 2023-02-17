@@ -32,7 +32,7 @@ export const StylePreview = ({
     active = false,
     onHover = null,
 }) => {
-    const { siteType, variation } = useUserSelectionStore()
+    const { siteType } = useUserSelectionStore()
     const isMounted = useIsMounted()
     const [code, setCode] = useState('')
     const [loaded, setLoaded] = useState(false)
@@ -45,6 +45,7 @@ export const StylePreview = ({
     const observer = useRef(null)
     const startTime = useRef(null)
     const loadTime = useRef(false)
+    const variation = style?.variation
     const { data: themeJson } = useFetch(
         inView && variation ? variation : null,
         fetcher,

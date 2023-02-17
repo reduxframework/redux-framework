@@ -8,7 +8,7 @@ export const QuickLinks = () => {
 
     if (loading || error) {
         return (
-            <div className="w-full flex justify-center mx-auto border border-gray-400 p-2 lg:p-4">
+            <div className="w-full flex justify-center mx-auto bg-gray-50 border border-gray-400 p-2 lg:p-4">
                 <Spinner />
             </div>
         )
@@ -23,15 +23,15 @@ export const QuickLinks = () => {
     }
 
     return (
-        <div className="w-full border border-gray-400 mx-auto text-base">
-            <h2 className="text-base m-0 border-b border-gray-400 p-3">
+        <div className="w-full border border-gray-400 mx-auto text-base bg-white">
+            <h2 className="text-base m-0 border-b border-gray-400 bg-gray-50 p-3">
                 {__('Quick links', 'extendify')}
             </h2>
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 p-3 py-4">
                 {quickLinks.map((link) => (
                     <a
                         key={link.slug}
-                        className="flex items-center no-underline hover:underline text-black hover:text-partner-primary-bg"
+                        className="flex items-center no-underline hover:underline text-black text-design-main"
                         href={
                             link.slug == 'view-site'
                                 ? `${window.extAssistData.home}`

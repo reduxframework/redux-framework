@@ -24,9 +24,6 @@
     display: block;
     padding-bottom: 192px !important;
 }
-body[class*="_page_extendify-assist"] {
-    @apply bg-white;
-}
 body[class*="_page_extendify-assist"] #wpcontent {
     @apply p-0;
 }
@@ -35,7 +32,7 @@ body[class*="_page_extendify-assist"] #wpcontent {
 }
 .extendify-assist *:not(.dashicons) {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 .extendify-assist .input-focus {
     @apply outline-none text-sm ring-design-main focus:shadow-none focus:ring-wp;

@@ -27,6 +27,7 @@ use Extendify\Assist\Controllers\UserSelectionController;
 use Extendify\Assist\Controllers\WPController as AssistWPController;
 use Extendify\Assist\Controllers\QuickLinksController;
 use Extendify\Assist\Controllers\RecommendationsController;
+use Extendify\Assist\Controllers\SupportArticlesController;
 
 \add_action(
     'rest_api_init',
@@ -81,6 +82,7 @@ use Extendify\Assist\Controllers\RecommendationsController;
         ApiRouter::get('/assist/tasks', [TasksController::class, 'fetchTasks']);
         ApiRouter::get('/assist/task-data', [TasksController::class, 'get']);
         ApiRouter::post('/assist/task-data', [TasksController::class, 'store']);
+        ApiRouter::get('/assist/tours', [TourController::class, 'fetchTours']);
         ApiRouter::get('/assist/tour-data', [TourController::class, 'get']);
         ApiRouter::post('/assist/tour-data', [TourController::class, 'store']);
         ApiRouter::get('/assist/global-data', [GlobalsController::class, 'get']);
@@ -90,7 +92,11 @@ use Extendify\Assist\Controllers\RecommendationsController;
         ApiRouter::get('/assist/active-plugins', [AssistWPController::class, 'getActivePlugins']);
         ApiRouter::get('/assist/tasks/dependency-completed', [TasksController::class, 'dependencyCompleted']);
         ApiRouter::get('/assist/quicklinks', [QuickLinksController::class, 'fetchQuickLinks']);
-        ApiRouter::get('/assist/recommendations', [RecommendationsController::class, 'fetchRecommendations']);
+        ApiRouter::get('/assist/recommendations', [RecommendationsController::class, 'get']);
+        ApiRouter::get('/assist/support-articles', [SupportArticlesController::class, 'articles']);
+        ApiRouter::get('/assist/support-article-categories', [SupportArticlesController::class, 'categories']);
+        ApiRouter::get('/assist/support-article', [SupportArticlesController::class, 'article']);
+        ApiRouter::get('/assist/get-redirect', [SupportArticlesController::class, 'getRedirect']);
 
         // TODO: consider merging this route into the library.
         ApiRouter::post('/library/site-type', [LibraryController::class, 'updateSiteType']);

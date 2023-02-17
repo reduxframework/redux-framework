@@ -32,12 +32,6 @@ import {
     fetchData as siteTypeData,
     state as siteTypeState,
 } from '@onboarding/pages/SiteTypeSelect'
-import {
-    SiteVariation,
-    fetcher as siteVariationFetcher,
-    fetchData as siteVariationData,
-    state as siteVariationState,
-} from '@onboarding/pages/SiteVariation'
 
 // pages added here will need to match the orders table on the Styles base
 const defaultPages = [
@@ -51,21 +45,21 @@ const defaultPages = [
         },
     ],
     [
+        'site-title',
+        {
+            component: SiteInformation,
+            fetcher: siteInfoFetcher,
+            fetchData: siteInfoData,
+            state: siteInfoState,
+        },
+    ],
+    [
         'goals',
         {
             component: Goals,
             fetcher: goalsFetcher,
             fetchData: goalsData,
             state: goalsState,
-        },
-    ],
-    [
-        'variation',
-        {
-            component: SiteVariation,
-            fetcher: siteVariationFetcher,
-            fetchData: siteVariationData,
-            state: siteVariationState,
         },
     ],
     [
@@ -84,15 +78,6 @@ const defaultPages = [
             fetcher: sitePagesFetcher,
             fetchData: sitePagesData,
             state: sitePagesState,
-        },
-    ],
-    [
-        'site-title',
-        {
-            component: SiteInformation,
-            fetcher: siteInfoFetcher,
-            fetchData: siteInfoData,
-            state: siteInfoState,
         },
     ],
     ['confirmation', { component: SiteSummary, state: confirmationState }],

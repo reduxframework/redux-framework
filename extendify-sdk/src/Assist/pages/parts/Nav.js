@@ -7,7 +7,7 @@ export const Nav = ({ pages, activePage, setActivePage }) => (
         <h2 id="assist-landing-nav" className="sr-only">
             {__('Assist navigation', 'extendify')}
         </h2>
-        <ul className="flex m-0 p-0 gap-1.5">
+        <ul className="flex m-0 p-0 gap-1.5 mr-6">
             {pages.map((page) => (
                 <li className="list-none m-0 p-0" key={page.slug}>
                     <button
@@ -15,20 +15,18 @@ export const Nav = ({ pages, activePage, setActivePage }) => (
                         type="button"
                         aria-current={activePage === page.slug}
                         className={classNames(
-                            'w-full pl-4 pr-5 py-4 text-sm text-design-text whitespace-nowrap cursor-pointer flex gap-1.5 items-center focus:outline-none focus:bg-white focus:bg-opacity-20',
+                            'w-full px-2 lg:pr-3 py-2 text-sm text-design-text whitespace-nowrap cursor-pointer flex gap-1.5 items-center focus:outline-none focus:bg-white focus:bg-opacity-20',
                             activePage === page.slug
                                 ? 'bg-white bg-opacity-20'
                                 : 'bg-transparent hover:bg-white hover:bg-opacity-20',
                         )}>
                         {page.icon && (
-                            <span>
-                                <Icon
-                                    icon={page.icon}
-                                    className="fill-current flex"
-                                />
-                            </span>
+                            <Icon
+                                icon={page.icon}
+                                className="fill-current flex"
+                            />
                         )}
-                        {page.name}
+                        <span className="hidden lg:block">{page.name}</span>
                     </button>
                 </li>
             ))}

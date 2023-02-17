@@ -94,7 +94,12 @@ const NextButton = () => {
 
     return (
         <button
-            className="flex items-center px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus"
+            className={classNames(
+                'flex items-center px-4 py-3 font-bold bg-partner-primary-bg text-partner-primary-text button-focus',
+                {
+                    'opacity-50 cursor-not-allowed': !canProgress,
+                },
+            )}
             onClick={nextPage}
             disabled={!canProgress}
             type="button"

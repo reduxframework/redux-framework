@@ -1,2 +1,6 @@
 export { default as Confetti } from './Confetti'
+export { default as helpIcon } from './HelpIcon'
 export { default as LogoIcon } from './LogoIcon'
+export { default as recommendationsIcon } from './RecommendationsIcon'
+export { default as tasksIcon } from './TasksIcon'
+export { default as toursIcon } from './ToursIcon'

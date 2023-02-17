@@ -1,9 +1,10 @@
+import { SupportArticlesList } from '@assist/components/SupportArticlesList'
 import { Full } from './layouts/Full'
 
 export const HelpCenter = () => {
     return (
         <Full>
-            <div>help center</div>
+            <SupportArticlesList />
         </Full>
     )
 }

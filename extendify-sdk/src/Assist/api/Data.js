@@ -8,6 +8,7 @@ export const completedDependency = (taskName) =>
         params: { taskName },
     })
 
+export const getTours = () => api.get('assist/tours')
 export const getTourData = () => api.get('assist/tour-data')
 export const saveTourData = (data) => api.post('assist/tour-data', { data })
 
@@ -20,3 +21,10 @@ export const saveUserSelectionData = (data) =>
 
 export const getQuickLinks = () => api.get('assist/quicklinks')
 export const getRecommendations = () => api.get('assist/recommendations')
+export const getSupportArticles = () => api.get('assist/support-articles')
+export const getSupportArticleCategories = () =>
+    api.get('assist/support-article-categories')
+export const getSupportArticle = (slug) =>
+    api.get('assist/support-article', { params: { slug } })
+export const getArticleRedirect = (path) =>
+    api.get('assist/get-redirect', { params: { path } })

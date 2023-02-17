@@ -21,7 +21,7 @@ class RecommendationsController
      *
      * @return \WP_REST_Response
      */
-    public static function fetchRecommendations()
+    public static function get()
     {
         $response = Http::get('/recommendations');
         return new \WP_REST_Response(

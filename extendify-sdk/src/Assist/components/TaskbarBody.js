@@ -77,12 +77,12 @@ export const TaskbarBody = () => {
                     },
                 )}>
                 <a
-                    className="w-28 flex items-center justify-center"
+                    className="w-28 flex items-center justify-center text-white"
                     href={
                         window.extAssistData.adminUrl +
                         'admin.php?page=extendify-assist#dashboard'
                     }>
-                    <LogoIcon className="w-8 h-8" />
+                    <LogoIcon className="w-10 h-10 fill-current" />
                 </a>
 
                 <div className="flex-grow bg-design-main relative flex justify-center items-center">

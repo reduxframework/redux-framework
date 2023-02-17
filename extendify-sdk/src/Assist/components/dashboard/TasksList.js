@@ -25,7 +25,7 @@ export const TasksList = () => {
 
     if (loading || !readyTasks || !readyPlugins || error) {
         return (
-            <div className="my-4 w-full flex justify-center mx-auto border border-gray-400 p-2 lg:p-4">
+            <div className="w-full flex justify-center mx-auto bg-gray-50 border border-gray-400 p-2 lg:p-4">
                 <Spinner />
             </div>
         )
@@ -33,15 +33,15 @@ export const TasksList = () => {
 
     if (tasks?.length === 0) {
         return (
-            <div className="my-4 w-full mx-auto border border-gray-400 p-2 lg:p-4">
+            <div className="w-full mx-auto border border-gray-400 p-2 lg:p-4">
                 {__('No tasks found...', 'extendify')}
             </div>
         )
     }
 
     return (
-        <div className="my-4 w-full border border-gray-400 mx-auto text-base">
-            <h2 className="text-base m-0 border-b border-gray-400 p-3">
+        <div className="w-full border border-gray-400 mx-auto text-base bg-white">
+            <h2 className="text-base m-0 border-b border-gray-400 bg-gray-50 p-3">
                 {__('Tasks', 'extendify')}
             </h2>
             {notCompleted.length === 0 ? (
@@ -67,7 +67,7 @@ export const TasksList = () => {
             <div className="p-3">
                 <a
                     href="admin.php?page=extendify-assist#tasks"
-                    className="inline-flex items-center no-underline text-base">
+                    className="inline-flex items-center no-underline text-base text-design-main hover:underline">
                     {notCompleted?.length > 0
                         ? sprintf(__('View all %s', 'extendify'), tasks?.length)
                         : __('View completed tasks', 'extendify')}
@@ -79,7 +79,7 @@ export const TasksList = () => {
 }
 
 const TaskItemWrapper = ({ task, Action }) => (
-    <div className="p-3 flex gap-3 justify-between border-0 border-b border-gray-400 bg-white relative items-center">
+    <div className="p-3 flex gap-3 justify-between border-0 border-b border-gray-400 relative items-center">
         <TaskItemOld task={task} Action={Action} />
     </div>
 )

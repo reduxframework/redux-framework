@@ -1,0 +1,96 @@
+.extendify-documentation {
+    max-width: 75ch;
+    margin: 0 auto;
+}
+
+.extendify-documentation p {
+    font-size: 1rem;
+}
+
+.extendify-documentation .link-disabled {
+    @apply focus:outline-none cursor-text text-gray-900 no-underline shadow-none;
+}
+
+.extendify-documentation p.has-background,
+.extendify-documentation .wp-block-group.has-background {
+    padding: 20px;
+}
+
+.extendify-documentation ul {
+    list-style: disc;
+}
+
+.extendify-documentation ul,
+.extendify-documentation ol {
+    padding-left: 30px;
+}
+
+.extendify-documentation code {
+    font-family: monospace !important;
+}
+
+.extendify-documentation pre.wp-block-preformatted {
+    background-color: #f6f6f6;
+    border-radius: 2px;
+    border-color: #d9d9d9;
+    border-width: 1px;
+    border-style: solid;
+    color: #1e1e1e;
+    font-family: monospace !important;
+    padding: 20px;
+}
+
+.extendify-documentation .wp-block-table {
+    margin: 0;
+    overflow-x: auto;
+}
+
+.extendify-documentation .wp-block-table table {
+    border-collapse: collapse;
+}
+
+.extendify-documentation .wp-block-table td,
+.extendify-documentation .wp-block-table th,
+.extendify-documentation .wp-block-table.is-style-stripes td,
+.extendify-documentation .wp-block-table.is-style-stripes th {
+    border: 1px solid #d9d9d9;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.extendify-documentation .aligncenter {
+    text-align: center;
+}
+
+.extendify-documentation .wp-block-image img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: bottom;
+}
+
+.extendify-documentation figure[class*="wp-block-"] figcaption,
+.extendify-documentation figure[class*="wp-block-"] .wp-element-caption,
+.extendify-documentation [class*="wp-block-"] figcaption,
+.extendify-documentation [class*="wp-block-"] .wp-element-caption {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 1em 0;
+}
+
+.extendify-documentation .is-layout-flex {
+    display: flex;
+    gap: 20px;
+}
+
+.extendify-documentation .is-nowrap {
+    flex-wrap: nowrap;
+}
+
+.extendify-documentation .wp-block-group__inner-container > *:first-child {
+    margin-top: 0;
+}
+
+.extendify-documentation .changelog {
+    display: none;
+}

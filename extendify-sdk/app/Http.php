@@ -182,7 +182,7 @@ class Http
             return Config::$config['api']['onboarding-dev'];
         }
 
-        // Onborarding local request.
+        // Onboarding local request.
         if ($request->get_header('x_extendify_onboarding_local_mode') === 'true') {
             return Config::$config['api']['onboarding-local'];
         }

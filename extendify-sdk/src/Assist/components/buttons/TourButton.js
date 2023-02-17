@@ -1,17 +1,26 @@
-import { useTasksStore } from '@assist/state/Tasks'
+import { __ } from '@wordpress/i18n'
 import { useTourStore } from '@assist/state/Tours'
-import welcomeTour from '@assist/tours/welcome.js'
+import tours from '@assist/tours/tours.js'
 
 export const TourButton = ({ task, className }) => {
-    const { startTour } = useTourStore()
-    const { isCompleted } = useTasksStore()
+    const { startTour, wasOpened } = useTourStore()
+
+    if (!tours[task.slug]) return null
+
+    const getButtonText = () => {
+        const { buttonTextDone, buttonTextToDo } = task
+        if (wasOpened(task.slug)) {
+            return buttonTextDone ?? __('Restart Tour', 'extendify')
+        }
+        return buttonTextToDo ?? __('Start Tour', 'extendify')
+    }
 
     return (
         <button
             className={className}
             type="button"
-            onClick={() => startTour(welcomeTour)}>
-            {isCompleted(task.slug) ? task.buttonTextDone : task.buttonTextToDo}
+            onClick={() => startTour(tours[task.slug])}>
+            {getButtonText()}
         </button>
     )
 }

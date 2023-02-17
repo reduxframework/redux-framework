@@ -19,7 +19,11 @@ export const lowerImageQuality = (html) => {
 export const capitalize = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 
-/** Will ping every 1s until we get a 200 response from the server  */
+/**
+ * Will ping every 1s until we get a 200 response from the server.
+ * This is used because we were dealing with a particular issue where
+ * servers we're very resource limited and rate limiting was common.
+ * */
 export const waitFor200Response = async () => {
     try {
         // This will error if not 200

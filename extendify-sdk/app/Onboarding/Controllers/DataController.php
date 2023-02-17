@@ -73,7 +73,6 @@ class DataController
     {
         $response = Http::get('/templates', $request->get_params());
         if (\is_wp_error($response)) {
-            // TODO: Maybe handle errors better here, or higher up in the Http class.
             wp_send_json_error(['message' => $response->get_error_message()], 400);
         }
 

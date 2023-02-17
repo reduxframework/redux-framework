@@ -1,83 +1,114 @@
 import { Button } from '@wordpress/components'
 import {
     useRef,
+    useCallback,
     useEffect,
     useLayoutEffect,
     useState,
+    useMemo,
 } from '@wordpress/element'
 import { sprintf, __ } from '@wordpress/i18n'
 import { Icon, close } from '@wordpress/icons'
 import { Dialog } from '@headlessui/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import useSWRImmutable from 'swr/immutable'
 import { useDesignColors } from '@assist/hooks/useDesignColors'
 import { useGlobalSyncStore } from '@assist/state/GlobalSync'
 import { useTasksStore } from '@assist/state/Tasks'
 import { useTourStore } from '@assist/state/Tours'
-import welcomeTour from '@assist/tours/welcome.js'
-import { copyNodeStyle } from '@assist/util/element'
+import availableTours from '@assist/tours/tours.js'
 
-const useClonedElement = ({ elementSelector, key, options }) => {
-    const { data: clonedNode } = useSWRImmutable(key, () => {
-        const currentElement = document.querySelector(elementSelector)
-        if (!currentElement) return null
-        // Clone currentElement then place the new element fixed in the same position
-        // as the original element. This allows us to use the original element as a
-        // reference for positioning the tour modal.
-        const clonedElement = currentElement?.cloneNode(true)
-        // copy over computed styles, walking down - mutates the node directly
-        copyNodeStyle(currentElement, clonedElement, options)
-        // add to the DOM with max z-index
-        clonedElement.style.position = 'fixed'
-        clonedElement.style.zIndex = 999999
-        return clonedElement
-    })
-    return clonedNode
-}
-
-const availableTours = {
-    [welcomeTour.id]: welcomeTour,
+const getBoundingClientRect = (element) => {
+    const { top, right, bottom, left, width, height, x, y } =
+        element.getBoundingClientRect()
+    return { top, right, bottom, left, width, height, x, y }
 }
 
 export const GuidedTour = () => {
-    const tourModalRef = useRef()
+    const tourBoxRef = useRef()
     const {
         currentTour,
         currentStep,
         startTour,
         closeCurrentTourManually,
-        closeCurrentTourFromError,
         closeForRedirect,
+        getStepData,
     } = useTourStore()
-    const { steps, settings } = currentTour || {}
-    const { image, title, text, attachTo, events, cloneOptions } =
-        steps?.[currentStep] ?? {}
+    const { settings } = currentTour || {}
+    const { image, title, text, attachTo, events, options } =
+        getStepData(currentStep)
+
     const { queueTourForRedirect, queuedTour, clearQueuedTour } =
         useGlobalSyncStore()
-    const [redirecting, setRedirecting] = useState(false)
-    const { onAttach, onDetach, beforeAttach } = events || {}
-    const { element: elementSelector, offset, position, hook } = attachTo || {}
-    const [attachToElement, setAttachToElement] = useState(null)
+    const { element, offset, position, hook, boxPadding } = attachTo || {}
+    const elementSelector = useMemo(
+        () => (typeof element === 'function' ? element() : element),
+        [element],
+    )
+    const offsetNormalized = useMemo(
+        () => (typeof offset === 'function' ? offset() : offset),
+        [offset],
+    )
+    const hookNormalized = useMemo(
+        () => (typeof hook === 'function' ? hook() : hook),
+        [hook],
+    )
+
+    const [targetedElement, setTargetedElement] = useState(null)
+
     const initialFocus = useRef()
-    const [x, setX] = useState()
-    const [y, setY] = useState()
-    // x is 20 on mobile, so exclude the offset here
-    const placement = x === 20 ? { x, y } : { x, y, ...offset }
-    const clonedElement = useClonedElement({
-        elementSelector,
-        key: { elementSelector, x },
-        options: cloneOptions,
+    const [redirecting, setRedirecting] = useState(false)
+    const [visible, setVisible] = useState(false)
+
+    const [overlayRect, setOverlayRect] = useState(null)
+
+    const [placement, setPlacement] = useState({
+        x: undefined,
+        y: undefined,
+        ...offsetNormalized,
     })
+    const setTourBox = useCallback(
+        (x, y) => {
+            // x is 20 on mobile, so exclude the offset here
+            setPlacement(x === 20 ? { x, y } : { x, y, ...offsetNormalized })
+        },
+        [offsetNormalized],
+    )
+    const getOffset = useCallback(() => {
+        const hooks = hookNormalized?.split(' ') || []
+        return {
+            x: hooks.includes('right') ? tourBoxRef.current?.offsetWidth : 0,
+            y: hooks.includes('bottom') ? tourBoxRef.current?.offsetHeight : 0,
+        }
+    }, [hookNormalized])
 
-    useEffect(() => {
-        if (redirecting) return
-        const tour = queuedTour
-        if (!tour || !availableTours[tour]) return
-        clearQueuedTour()
-        return () =>
-            requestAnimationFrame(() => startTour(availableTours[tour]))
-    }, [startTour, queuedTour, redirecting, clearQueuedTour])
+    const startOrRecalc = useCallback(() => {
+        if (!targetedElement) return
+        const rect = getBoundingClientRect(
+            document.querySelector(elementSelector) ?? targetedElement,
+        )
+        // Just put near the top if on smaller screens
+        // (960 is when the admin bar collapses)
+        if (window.innerWidth <= 960) {
+            return setTourBox(20, 20)
+        }
+        if (position?.x === undefined) {
+            setTourBox(undefined, undefined)
+            setOverlayRect(null)
+            setVisible(false)
+            return
+        }
+        const x = rect?.[position.x] - getOffset().x
+        const y = rect?.[position.y] - getOffset().y
+        const box = tourBoxRef.current
+        // make sure it doesn't go off screen
+        setTourBox(
+            Math.min(x, window.innerWidth - (box?.offsetWidth ?? 0) - 20),
+            Math.min(y, window.innerHeight - (box?.offsetHeight ?? 0) - 20),
+        )
+        setOverlayRect(rect)
+    }, [targetedElement, position, getOffset, setTourBox, elementSelector])
 
+    // Pre launch check whether to redirect
     useLayoutEffect(() => {
         // if the tour has a start from url, redirect there
         if (!settings?.startFrom) return
@@ -101,99 +132,77 @@ export const GuidedTour = () => {
         closeForRedirect,
     ])
 
+    // Possibly start the tour, or wait for the load event
     useLayoutEffect(() => {
-        if (!currentTour || redirecting) return
-        const currentElement = document.querySelector(elementSelector)
-        if (!currentElement) {
-            // TODO: error message? snackbar?
-            closeCurrentTourFromError()
-            return
+        if (redirecting) return
+        const tour = queuedTour
+        let rafId = 0
+        if (!tour || !availableTours[tour]) return clearQueuedTour()
+        const handle = () => {
+            requestAnimationFrame(() => {
+                startTour(availableTours[tour])
+            })
+            clearQueuedTour()
         }
-        beforeAttach && beforeAttach(clonedElement)
-        setAttachToElement(currentElement)
 
-        // Cache so we can access it in render callback
-        const previouslyCloned = clonedElement
-
-        const model = tourModalRef.current
-        const offset = () => {
-            const hooks = hook?.split(' ') || []
-            return {
-                x: hooks.includes('right') ? model?.offsetWidth : 0,
-                y: hooks.includes('bottom') ? model?.offsetHeight : 0,
-            }
+        addEventListener('load', handle)
+        if (document.readyState === 'complete') {
+            // Page is already loaded, so we can start the tour immediately
+            rafId = requestAnimationFrame(handle)
         }
-        const reset = () => {
-            if (onDetach && previouslyCloned) onDetach(previouslyCloned)
-            if (previouslyCloned) document.body.removeChild(previouslyCloned)
-            setAttachToElement(null)
-            removeEventListener('resize', measure)
-            setX(null)
-            setY(null)
+        return () => {
+            cancelAnimationFrame(rafId)
+            removeEventListener('load', handle)
         }
-        // Measure the position of the element and set the position of the modal nearby
-        const measure = () => {
-            const currentElementRect = currentElement?.getBoundingClientRect()
-            const windowSize = window.innerWidth
-            // Just put near the top if on smaller screens
-            // (960 is when the admin bar collapses)
-            if (windowSize <= 960) {
-                setX(20)
-                setY(20)
-                const id = requestAnimationFrame(() => {
-                    if (clonedElement?.parentNode) {
-                        // set opacity to 0
-                        clonedElement.style.opacity = 0
-                    }
-                })
-                return () => {
-                    cancelAnimationFrame(id)
-                    reset()
-                }
-            }
+    }, [startTour, queuedTour, clearQueuedTour, redirecting])
 
-            // Happy path - animate to the position
-            setX(currentElementRect?.[position.x] - offset().x)
-            setY(currentElementRect?.[position.y] - offset().y)
+    useEffect(() => {
+        // Find an set the element we are attaching to
+        const element = document.querySelector(elementSelector)
+        if (!element) return
+        setTargetedElement(element)
+        return () => setTargetedElement(null)
+    }, [elementSelector])
 
-            if (!clonedElement) return
-            // Position the clone right above the source
-            clonedElement.style.top = `${currentElementRect?.top}px`
-            clonedElement.style.left = `${currentElementRect?.left}px`
-            clonedElement.style.opacity = 1
+    // Start building the tour step
+    useLayoutEffect(() => {
+        if (!targetedElement || redirecting) return
+        setVisible(true)
+        startOrRecalc()
+        addEventListener('resize', startOrRecalc)
+        targetedElement.style.pointerEvents = 'none'
+        return () => {
+            removeEventListener('resize', startOrRecalc)
+            targetedElement.style.pointerEvents = 'auto'
         }
-        measure()
+    }, [redirecting, targetedElement, startOrRecalc])
 
-        if (!clonedElement) return reset
-        if (onAttach) onAttach(clonedElement)
-        document.body.appendChild(clonedElement)
-        addEventListener('resize', measure)
-        return reset
-    }, [
-        closeCurrentTourFromError,
-        clonedElement,
-        currentStep,
-        currentTour,
-        elementSelector,
-        hook,
-        position,
-        beforeAttach,
-        onAttach,
-        onDetach,
-        redirecting,
-    ])
+    // Handle the attach and detach events
+    useEffect(() => {
+        if (currentStep === undefined || !targetedElement) return
+        events?.onAttach?.(targetedElement)
+        let inner = 0
+        const id = requestAnimationFrame(() => {
+            inner = requestAnimationFrame(startOrRecalc)
+        })
+        return () => {
+            events?.onDetach?.(targetedElement)
+            cancelAnimationFrame(id)
+            cancelAnimationFrame(inner)
+        }
+    }, [currentStep, events, targetedElement, startOrRecalc])
 
     useLayoutEffect(() => {
         if (!settings?.allowOverflow) return
-        // TODO: Should this be an option? We may need to scroll
         document.documentElement.classList.add('ext-force-overflow-auto')
         return () => {
             document.documentElement.classList.remove('ext-force-overflow-auto')
         }
     }, [settings])
 
-    if (!attachToElement) return null
+    if (!visible) return null
 
+    const rectWithPadding = addPaddingToRect(overlayRect, boxPadding)
     return (
         <>
             <AnimatePresence>
@@ -205,19 +214,23 @@ export const GuidedTour = () => {
                         className="extendify-assist"
                         open={Boolean(currentTour)}
                         onClose={() => undefined}>
-                        <div className="relative z-high">
+                        <div className="relative z-max">
                             <motion.div
-                                ref={tourModalRef}
-                                initial={{ opacity: 0, ...placement }}
+                                ref={tourBoxRef}
                                 animate={{ opacity: 1, ...placement }}
+                                initial={{ opacity: 0, ...placement }}
+                                // TODO: fire another event after animation completes?
+                                onAnimationComplete={() => {
+                                    startOrRecalc()
+                                }}
                                 transition={{
                                     duration: 0.5,
                                     ease: 'easeInOut',
                                 }}
-                                className="fixed top-0 left-0 shadow-2xl sm:overflow-hidden bg-transparent flex flex-col min-h-60 max-w-xs z-20"
+                                className="fixed top-0 left-0 shadow-2xl sm:overflow-hidden bg-transparent flex flex-col max-w-xs z-20"
                                 style={{ minWidth: '325px' }}>
                                 <button
-                                    className="absolute bg-white cursor-pointer flex ring-gray ring-1 focus:ring-wp focus:ring-design-main focus:shadow-none h-6 items-center justify-center leading-none m-2 outline-none p-0 right-0 rounded-full top-0 w-6 border-0 z-20"
+                                    className="absolute bg-white cursor-pointer flex ring-gray-200 ring-1 focus:ring-wp focus:ring-design-main focus:shadow-none h-6 items-center justify-center leading-none m-2 outline-none p-0 right-0 rounded-full top-0 w-6 border-0 z-20"
                                     onClick={closeCurrentTourManually}
                                     aria-label={__('Close Modal', 'extendify')}>
                                     <Icon icon={close} className="w-4 h-4" />
@@ -226,20 +239,21 @@ export const GuidedTour = () => {
                                     {currentTour?.title ??
                                         __('Tour', 'extendify')}
                                 </Dialog.Title>
-                                <div
-                                    className="w-full p-6"
-                                    style={{
-                                        background:
-                                            'linear-gradient(58.72deg, #485563 7.71%, #29323C 92.87%)',
-                                    }}>
-                                    {image && (
+                                {image && (
+                                    <div
+                                        className="w-full p-6"
+                                        style={{
+                                            minHeight: 150,
+                                            background:
+                                                'linear-gradient(58.72deg, #485563 7.71%, #29323C 92.87%)',
+                                        }}>
                                         <img
                                             src={image}
                                             className="w-full block"
                                             alt={title}
                                         />
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                                 <div className="m-0 p-6 pt-0 text-left relative bg-white">
                                     {title && (
                                         <h2 className="text-xl font-medium mb-2">
@@ -254,15 +268,40 @@ export const GuidedTour = () => {
                     </Dialog>
                 )}
             </AnimatePresence>
+            {options?.blockPointerEvents && (
+                <div aria-hidden={true} className="fixed inset-0 z-max-1" />
+            )}
             <AnimatePresence>
-                {Boolean(currentTour) && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.1, ease: 'easeIn' }}
-                        className="fixed inset-0 bg-black bg-opacity-60 transition-opacity z-high"
-                        aria-hidden="true"
-                    />
+                {Boolean(currentTour) && overlayRect?.left !== undefined && (
+                    <>
+                        <motion.div
+                            initial={{
+                                opacity: 0,
+                                clipPath:
+                                    'polygon(0px 0px, 100% 0px, 100% 100%, 0px 100%, 0 0)',
+                            }}
+                            animate={{
+                                opacity: 1,
+                                clipPath: `polygon(0px 0px, 100% 0px, 100% 100%, 0px 100%, 0 0, ${rectWithPadding.left}px 0, ${rectWithPadding.left}px ${rectWithPadding?.bottom}px, ${rectWithPadding?.right}px ${rectWithPadding.bottom}px, ${rectWithPadding.right}px ${rectWithPadding.top}px, ${rectWithPadding.left}px ${rectWithPadding.top}px)`,
+                            }}
+                            transition={{ duration: 0.5, ease: 'easeInOut' }}
+                            className="hidden lg:block fixed inset-0 bg-black bg-opacity-70 z-high"
+                            aria-hidden="true"
+                        />
+                        <motion.div
+                            initial={{
+                                opacity: 0,
+                                ...(rectWithPadding ?? {}),
+                            }}
+                            animate={{
+                                opacity: 1,
+                                ...(rectWithPadding ?? {}),
+                            }}
+                            transition={{ duration: 0.5, ease: 'easeInOut' }}
+                            className="hidden lg:block fixed inset-0 border-2 border-design-main z-high"
+                            aria-hidden="true"
+                        />
+                    </>
                 )}
             </AnimatePresence>
         </>
@@ -336,6 +375,8 @@ const BottomNav = ({ initialFocus }) => {
                 {hasNextStep() ? (
                     <Button
                         ref={initialFocus}
+                        id="assist-tour-next-button"
+                        data-test="assist-tour-next-button"
                         onClick={nextStep}
                         style={{
                             backgroundColor: mainColor,
@@ -345,6 +386,8 @@ const BottomNav = ({ initialFocus }) => {
                     </Button>
                 ) : (
                     <Button
+                        id="assist-tour-next-button"
+                        data-test="assist-tour-next-button"
                         onClick={() => {
                             completeTask(id)
                             completeCurrentTour()
@@ -360,3 +403,14 @@ const BottomNav = ({ initialFocus }) => {
         </div>
     )
 }
+
+const addPaddingToRect = (rect, padding) => ({
+    top: rect.top - (padding?.top ?? 0),
+    left: rect.left - (padding?.left ?? 0),
+    right: rect.right + (padding?.right ?? 0),
+    bottom: rect.bottom + (padding?.bottom ?? 0),
+    width: rect.width + (padding?.left ?? 0) + (padding?.right ?? 0),
+    height: rect.height + (padding?.top ?? 0) + (padding?.bottom ?? 0),
+    x: rect.x - (padding?.left ?? 0),
+    y: rect.y - (padding?.top ?? 0),
+})

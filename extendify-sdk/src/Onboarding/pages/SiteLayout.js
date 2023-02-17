@@ -1,19 +1,16 @@
-import {
-    useCallback,
-    useEffect,
-    useState,
-    useRef,
-    useMemo,
-} from '@wordpress/element'
+import { useCallback, useEffect, useState, useRef } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
+import classNames from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
 import { getStyles } from '@onboarding/api/DataApi'
-import { SkeletonLoader } from '@onboarding/components/SkeletonLoader'
-import { StylePreview } from '@onboarding/components/StyledPreview'
+import { getThemeVariations } from '@onboarding/api/WPApi'
+import { SmallPreview } from '@onboarding/components/SmallPreview'
 import { useFetch } from '@onboarding/hooks/useFetch'
 import { useIsMountedLayout } from '@onboarding/hooks/useIsMounted'
-import { PageLayout } from '@onboarding/layouts/PageLayout'
+import { PageLayoutFull } from '@onboarding/layouts/PageLayoutFull'
 import { useUserSelectionStore } from '@onboarding/state/UserSelections'
 import { pageState } from '@onboarding/state/factory'
+import { Checkmark } from '@onboarding/svg'
 
 export const fetcher = (params) => getStyles(params)
 export const fetchData = (siteType) => {
@@ -33,106 +30,130 @@ export const state = pageState('Layout', (set, get) => ({
         useUserSelectionStore.getState().style?.slug === get().default?.slug,
 }))
 export const SiteLayout = () => {
-    const { style, variation, setStyle } = useUserSelectionStore()
     const { data: styleData, loading } = useFetch(fetchData, fetcher)
-    const once = useRef(false)
-    const stylesRef = useRef()
     const isMounted = useIsMountedLayout()
     const [styles, setStyles] = useState([])
+    const { data: variations } = useFetch('variations', getThemeVariations)
+    const { setStyle, style: currentStyle } = useUserSelectionStore()
+    const onSelect = useCallback((style) => setStyle(style), [setStyle])
+    const wrapperRef = useRef()
+    const once = useRef(false)
 
     useEffect(() => {
         state.setState({ ready: !loading })
     }, [loading])
 
     useEffect(() => {
-        if (!styleData?.length) return
+        if (!styleData || !variations) return
         ;(async () => {
             for (const style of styleData) {
                 if (!isMounted.current) return
-                setStyles((styles) => [...styles, style])
-                await new Promise((resolve) => setTimeout(resolve, 1000))
+                // Combine location variations with styles
+                const variation = variations.find(
+                    ({ title }) => title === style.label,
+                )
+                setStyles((styles) => [...styles, { ...style, variation }])
+                // number between 750 and 1500 to make it less rigid
+                const random = Math.floor(Math.random() * 750) + 750
+                await new Promise((resolve) => setTimeout(resolve, random))
             }
         })()
-    }, [styleData, isMounted])
+    }, [styleData, isMounted, variations])
 
     useEffect(() => {
-        if (!styles?.length || style) return
+        if (!styles || currentStyle) return
         setStyle(styles[0])
         state.setState({ default: styles[0] })
-    }, [variation, styles, style, setStyle])
+    }, [styles, currentStyle, setStyle])
 
     useEffect(() => {
-        if (!styles?.length || once.current || !style) return
+        if (!currentStyle || !styles || once.current) return
         once.current = true
-        // Focus the first style
-        stylesRef?.current?.querySelector('[role=button]')?.focus()
-    }, [styles, style])
-
+        wrapperRef.current
+            ?.querySelector(
+                `#layout-style-${currentStyle.slug} [role="button"]`,
+            )
+            ?.focus()
+    }, [currentStyle, styles])
     return (
-        <PageLayout>
-            <div>
-                <h1
-                    className="text-3xl text-partner-primary-text mb-4 mt-0"
-                    data-test="layout-heading">
-                    {__(
-                        'Now pick a layout for your site homepage.',
-                        'extendify',
-                    )}
-                </h1>
-                <p className="text-base opacity-70 mb-0">
-                    {__('You can personalize this later.', 'extendify')}
-                </p>
-            </div>
+        <PageLayoutFull>
             <div className="w-full">
-                <h2 className="text-lg m-0 mb-4 text-gray-900">
-                    {loading
-                        ? __(
-                              'Please wait a moment while we generate style previews...',
-                              'extendify',
-                          )
-                        : __('Pick your homepage layout', 'extendify')}
-                </h2>
+                <div className="flex flex-col gap-2 mb-16">
+                    <h1
+                        data-test="layout-heading"
+                        className={classNames(
+                            'text-2xl text-center m-0 text-gray-900 transition-opacity duration-1000',
+                            {
+                                'opacity-0': loading,
+                            },
+                        )}>
+                        {__(
+                            'Now pick a design for your new site.',
+                            'extendify',
+                        )}
+                    </h1>
+                    <p className="text-center text-base m-0 p-0">
+                        {loading
+                            ? __(
+                                  'Please wait a moment while we generate the homepage layout previews...',
+                                  'extendify',
+                              )
+                            : __(
+                                  'You can personalize this later.',
+                                  'extendify',
+                              )}
+                    </p>
+                </div>
                 <div
-                    ref={stylesRef}
-                    className="flex gap-6 flex-wrap justify-center"
-                    data-test="layout-preview-wrapper">
+                    className="gap-8 grid md:grid-cols-2 lg:grid-cols-3"
+                    data-test="layout-preview-wrapper"
+                    ref={wrapperRef}>
                     {styles?.map((style) => (
-                        <StylePreviewWrapper key={style.slug} style={style} />
-                    ))}
-                    {styleData?.slice(styles?.length).map((data) => (
                         <div
-                            key={data.slug}
-                            style={{ height: 497, width: 352 }}
-                            className="lg:flex gap-6 relative">
-                            <SkeletonLoader context="style" />
+                            id={`layout-style-${style.slug}`}
+                            className="relative"
+                            key={style.slug}>
+                            <AnimatePresence>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    duration={0.7}
+                                    className={classNames(
+                                        'relative overflow-hidden border border-gray-200 rounded focus-within:ring-4 focus-within:ring-offset-2 focus-within:ring-offset-white focus-within:ring-design-main focus-within:outline-none',
+                                        {
+                                            'ring-4 ring-offset-2 ring-offset-white ring-design-main':
+                                                currentStyle?.slug ===
+                                                style.slug,
+                                        },
+                                    )}
+                                    style={{ aspectRatio: '1.55' }}>
+                                    <SmallPreview
+                                        style={style}
+                                        onSelect={onSelect}
+                                    />
+                                </motion.div>
+                            </AnimatePresence>
+                            <span aria-hidden="true">
+                                {currentStyle?.slug === style.slug ? (
+                                    <Checkmark className="absolute top-0 right-0 m-2 text-design-text bg-design-main w-6 h-6 z-50 rounded-full transform translate-x-5 -translate-y-5" />
+                                ) : null}
+                            </span>
                         </div>
+                    ))}
+                    {styleData?.slice(styles?.length).map((_, i) => (
+                        <AnimatePresence key={i}>
+                            <motion.div
+                                initial={{ opacity: 1 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                duration={0.7}
+                                style={{ aspectRatio: '1.55' }}
+                                className="relative bg-gray-100"
+                            />
+                        </AnimatePresence>
                     ))}
                 </div>
             </div>
-        </PageLayout>
-    )
-}
-
-const StylePreviewWrapper = ({ style }) => {
-    const { setStyle, style: currentStyle } = useUserSelectionStore()
-    const onSelect = useCallback((style) => setStyle(style), [setStyle])
-    const context = useMemo(
-        () => ({
-            type: 'style',
-            detail: style.slug,
-            measure: true,
-        }),
-        [style],
-    )
-    return (
-        <div className="relative" style={{ height: 497, width: 352 }}>
-            <StylePreview
-                style={style}
-                context={context}
-                onSelect={onSelect}
-                active={currentStyle?.slug === style.slug}
-                blockHeight={497}
-            />
-        </div>
+        </PageLayoutFull>
     )
 }

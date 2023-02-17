@@ -1,4 +1,3 @@
-import { __ } from '@wordpress/i18n'
 import { CompletedTasks } from '@onboarding/components/CompletedTasks'
 import { PageControl } from '@onboarding/components/PageControl'
 import { Logo } from '@onboarding/svg'
@@ -9,30 +8,20 @@ export const PageLayout = ({ children, includeNav = true }) => {
             <div className="bg-partner-primary-bg text-partner-primary-text py-12 px-10 md:h-screen flex flex-col justify-between md:w-40vw md:max-w-md flex-shrink-0">
                 <div className="max-w-prose md:max-w-sm pr-8">
                     <div className="md:min-h-48">
-                        {window.extOnbData?.partnerLogo && (
-                            <div className="pb-8">
+                        {window.extOnbData?.partnerLogo ? (
+                            <div className="mb-8">
                                 <img
                                     style={{ maxWidth: '200px' }}
                                     src={window.extOnbData.partnerLogo}
                                     alt={window.extOnbData?.partnerName ?? ''}
                                 />
                             </div>
+                        ) : (
+                            <Logo className="logo text-design-text w-32 sm:w-40 mb-8" />
                         )}
                         {children[0]}
                     </div>
                     <CompletedTasks disabled={!includeNav} />
-                </div>
-
-                <div className="hidden md:flex items-center space-x-3">
-                    <span className="opacity-70 text-xs">
-                        {__('Powered by', 'extendify')}
-                    </span>
-                    <span className="relative">
-                        <Logo className="logo text-partner-primary-text w-28" />
-                        <span className="absolute -bottom-2 right-3 font-semibold tracking-tight">
-                            Launch
-                        </span>
-                    </span>
                 </div>
             </div>
             <div className="flex-grow md:h-screen md:overflow-y-scroll">

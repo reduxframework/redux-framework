@@ -31,7 +31,7 @@ export const WelcomeNotice = () => {
     if (!enabled) return null
 
     return (
-        <div className="bg-partner-primary-bg text-partner-primary-text p-8 max-w-screen-lg mx-auto flex justify-center mt-12">
+        <div className="bg-design-main text-design-text p-8 max-w-screen-lg mx-auto flex justify-center mt-12">
             <div className="flex justify-center lg:max-w-3/4 gap-8">
                 <div className="">
                     <p className="font-bold m-0 text-2xl">
@@ -53,7 +53,7 @@ export const WelcomeNotice = () => {
                     </p>
                     <div className="flex mt-8">
                         <button
-                            className="flex items-center gap-1 text-sm sm:text-base text-partner-primary-bg cursor-pointer rounded px-3 sm:px-6 py-2 bg-white border-none no-underline"
+                            className="flex items-center gap-1 text-sm sm:text-base text-design-main cursor-pointer rounded px-3 sm:px-6 py-2 bg-white border-none no-underline"
                             onClick={() => startTour(welcomeTour)}>
                             {__('Take a tour', 'extendify')}
                         </button>
