@@ -86,7 +86,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				}
 				if ( isset( $clean_get[ $this->dismiss_option ] ) ) {
 					Redux_Functions_Ex::set_deactivated();
-					update_option( 'redux-framework_extendify_notice', 'hide' );
+					update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
 					return;
 				}
 			}
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 					)
 				);
 
-				update_option( 'redux-framework_extendify_notice', 'hide' );
+				update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
 
 				die();
 			}
@@ -152,15 +152,8 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 			$res = $this->install_extendify();
 
 			if ( true === $res ) {
-				update_option( 'redux-framework_extendify_notice', 'hide' );
+				update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
 			}
-
-			//if ( 'true' === $_REQUEST['activate'] ) {
-			//	Redux_Functions_Ex::set_activated( sanitize_text_field( wp_unslash( $_REQUEST['activate'] ) ) );
-			//} else {
-			//	Redux_Functions_Ex::set_deactivated();
-			//	update_option( 'redux-framework_tracking_notice', 'hide' );
-			//}
 
 			die();
 		}
@@ -285,7 +278,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 * @param $current_screen
 		 */
 		public function maybe_initialize_hooks( $current_screen ) {
-			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_notice', null ) ) {
+			if ( Redux_Functions_Ex::is_plugin_installed( 'extendify' ) || 'hide' === get_option( 'redux-framework_extendify_plugin_notice', null ) ) {
 				return;
 			}
 
@@ -295,7 +288,8 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 			// Don't show the connect notice anywhere but the plugins.php after activating
 			if ( 'plugins' !== $current_screen->base && 'dashboard' !== $current_screen->base ) {
-				add_action( 'redux_admin_notices_run', array( $this, 'panel_admin_notice' ), 100, 2 );
+				// TODO: Delete when stable.
+				// add_action( 'redux_admin_notices_run', array( $this, 'panel_admin_notice' ), 100, 2 );
 				add_action( 'admin_head', array( $this, 'admin_head' ) );
 
 				return;
@@ -303,47 +297,48 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 			// Only show this notice when the plugin is installed.
 			if ( class_exists( 'Redux_Framework_Plugin' ) && false === Redux_Framework_Plugin::$crash ) {
-				// add_action( 'admin_notices', array( $this, 'render_banner' ) );
+				add_action( 'admin_notices', array( $this, 'render_banner' ) );
 				add_action( 'network_admin_notices', array( $this, 'network_connect_notice' ) );
-				// add_action( 'admin_head', array( $this, 'admin_head' ) );
+				add_action( 'admin_head', array( $this, 'admin_head' ) );
 				add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 20 );
 			}
 		}
 
+		// TODO: Delete when stable.
 		/**
 		 * Display the admin notice to users that have not opted-in or out
 		 *
 		 * @return void
 		 */
-		public function panel_admin_notice( $args ) {
-
-			$urls = $this->get_urls( 'panel_banner' );
-
-			$this->client = Redux_Core::$appsero;
-			// don't show tracking if a local server
-
-			if ( empty( $this->notice ) ) {
-				$name = 'Redux';
-				$notice = sprintf( __( 'Register <strong>%1$s</strong> to enable automatic Google Font updates service. Plus unlock all free block templates in the Redux template library.', 'redux-framework' ), $name );
-			} else {
-				$notice = $this->notice;
-			}
-
-			$notice .= ' (<a class="redux-insights-data-we-collect" href="#" style="white-space: nowrap;">' . __( 'learn more', 'redux-framework' ) . '</a>)';
-
-			$notice .= '<p class="description" style="display:none;">' . self::tos_blurb( 'option_panel' ) . ' </p>';
-
-			echo '<div class="updated" id="redux-connect-message" data-nonce="' . wp_create_nonce( $this->nonce ) . '" style="border-left-color: #24b0a6;"><p>';
-			echo $notice;
-			echo '</p><p class="submit">';
-			echo '&nbsp;<a href="' . esc_url( $urls['register'] ) . '" class="button-primary button-large redux-activate-connection redux-connection-banner-action" data-url="' . admin_url( 'admin-ajax.php' ) . '" data-activate="panel_banner">' . __( 'Register Now', 'redux-framework' ) . '</a>';
-			echo '&nbsp;&nbsp;&nbsp;<a href="' . esc_url( $urls['dismiss'] ) . '" style="color: #aaa;" class="redux-connection-banner-action" data-activate="false" data-url="' . admin_url( 'admin-ajax.php' ) . '">' . __( 'No thanks', 'redux-framework' ) . '</a>';
-			echo '</p></div>';
-			echo '<style>.wp-core-ui .button-primary.redux-activate-connection{background: #24b0a6;}.wp-core-ui .button-primary.redux-activate-connection:hover{background: #19837c;}</style>';
-
-			echo "<noscript><style>#redux-connect-message{display:none;}</style></noscript>";
-
-		}
+//		public function panel_admin_notice( $args ) {
+//
+//			$urls = $this->get_urls( 'panel_banner' );
+//
+//			$this->client = Redux_Core::$appsero;
+//			// don't show tracking if a local server
+//
+//			if ( empty( $this->notice ) ) {
+//				$name = 'Redux';
+//				$notice = sprintf( __( 'Register <strong>%1$s</strong> to enable automatic Google Font updates service. Plus unlock all free block templates in the Redux template library.', 'redux-framework' ), $name );
+//			} else {
+//				$notice = $this->notice;
+//			}
+//
+//			$notice .= ' (<a class="redux-insights-data-we-collect" href="#" style="white-space: nowrap;">' . __( 'learn more', 'redux-framework' ) . '</a>)';
+//
+//			$notice .= '<p class="description" style="display:none;">' . self::tos_blurb( 'option_panel' ) . ' </p>';
+//
+//			echo '<div class="updated" id="redux-connect-message" data-nonce="' . wp_create_nonce( $this->nonce ) . '" style="border-left-color: #24b0a6;"><p>';
+//			echo $notice;
+//			echo '</p><p class="submit">';
+//			echo '&nbsp;<a href="' . esc_url( $urls['register'] ) . '" class="button-primary button-large redux-activate-connection redux-connection-banner-action" data-url="' . admin_url( 'admin-ajax.php' ) . '" data-activate="panel_banner">' . __( 'Register Now', 'redux-framework' ) . '</a>';
+//			echo '&nbsp;&nbsp;&nbsp;<a href="' . esc_url( $urls['dismiss'] ) . '" style="color: #aaa;" class="redux-connection-banner-action" data-activate="false" data-url="' . admin_url( 'admin-ajax.php' ) . '">' . __( 'No thanks', 'redux-framework' ) . '</a>';
+//			echo '</p></div>';
+//			echo '<style>.wp-core-ui .button-primary.redux-activate-connection{background: #24b0a6;}.wp-core-ui .button-primary.redux-activate-connection:hover{background: #19837c;}</style>';
+//
+//			echo "<noscript><style>#redux-connect-message{display:none;}</style></noscript>";
+//
+//		}
 
 		/**
 		 * Hide Individual Dashboard Pages
@@ -396,8 +391,8 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 						<div class="redux-banner-slide redux-banner-slide-one redux-slide-is-active">
 
 							<div class="redux-banner-content-icon redux-illo">
-								<a href="<?php echo esc_url( 'https://redux.io/?utm_source=plugin&utm_medium=appsero&utm_campaign=redux_banner_logo' ); ?>" target="_blank"><img
-										src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/logo-color.png"
+								<a href="<?php echo esc_url( 'https://redux.io/?utm_source=plugin&utm_medium=extendify-plugin&utm_campaign=redux_banner_logo' ); ?>" target="_blank"><img
+										src="<?php echo esc_url( Redux_Core::$url ); ?>assets/img/logo-color.svg"
 										class="redux-banner-content-logo"
 										alt="
 									<?php
@@ -411,11 +406,11 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 							</div>
 
 							<div class="redux-banner-slide-text">
-								<h2><?php esc_html_e( 'Get access to even more free templates!', 'redux-framework' ); ?></h2>
+								<h2><?php esc_html_e( 'Action needed to continue using the template library.', 'redux-framework' ); ?></h2>
 								<p>
 									<?php
 									esc_html_e(
-										"Redux users have been asking for easier options to create and edit their sites using the Gutenberg editor. We're excited to announce that Redux is partnering with the Extendify library of Gutenberg patterns and templates to bring the power of WordPress 5.9 to Redux users! By clicking “Install & Activate Extendify” you will get access to 10 free monthly imports of patterns and templates. Installing Extendify is optional, and Redux will continue to work if you decide to not install Extendify.",
+										"The Extendify Library of Patterns and Templates has been unbundled from the Redux Options Framework to give our users more control over their WordPress experience. To continue using the Extendify Library click Install & Activate below.",
 										'redux_framework'
 									);
 									?>
@@ -461,6 +456,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 			<?php
 		}
 
+		// TODO: Delete when stable.
 		/**
 		 * Prints a TOS blurb used throughout the connection prompts.
 		 *
@@ -468,12 +464,12 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		 *
 		 * @echo string
 		 */
-		public static function tos_blurb( $campaign = 'options_panel' ): string {
-			return sprintf(
-				__( 'By clicking the <strong>Register</strong> button, you agree to our <a href="%1$s" target="_blank">terms of service</a>, to create an account, and to share details of your usage metrics with Redux.io.  We may also occasionally send you emails with product updates, special offers, or other marketing content.', 'redux-framework' ),
-				Redux_Functions_Ex::get_site_utm_url( 'terms', 'appsero', 'activate', $campaign )
-			);
-		}
+		//public static function tos_blurb( $campaign = 'options_panel' ): string {
+		//	return sprintf(
+		//		__( 'By clicking the <strong>Register</strong> button, you agree to our <a href="%1$s" target="_blank">terms of service</a>, to create an account, and to share details of your usage metrics with Redux.io.  We may also occasionally send you emails with product updates, special offers, or other marketing content.', 'redux-framework' ),
+		//		Redux_Functions_Ex::get_site_utm_url( 'terms', 'appsero', 'activate', $campaign )
+		//	);
+		//}
 	}
 }
 

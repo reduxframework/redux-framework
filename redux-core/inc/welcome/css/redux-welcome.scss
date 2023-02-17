@@ -14,7 +14,7 @@ $blue: #2ea2cc;
         border: inherit;
         border-top: 1px solid #ccc;
     }
-    &.redux-status {
+/*    &.redux-status {
         .updated,
         .error {
             margin-top: 10px;
@@ -143,7 +143,7 @@ $blue: #2ea2cc;
                 }
             }
         }
-    }
+    } */
 }
 
 .about-wrap {
@@ -180,7 +180,7 @@ $blue: #2ea2cc;
         }
 
         .el {
-            background: #cbc3f5;
+            background: #00a2e3;
             display: block !important;
             font-size: 8em;
             color: #fff;
@@ -212,7 +212,7 @@ $blue: #2ea2cc;
         }
     }
 
-    .redux-feature {
+    /* .redux-feature {
         overflow: visible !important;
         *zoom: 1;
 
@@ -252,7 +252,7 @@ $blue: #2ea2cc;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-    }
+    } */
 
     div.icon {
         width: 0 !important;
@@ -260,13 +260,13 @@ $blue: #2ea2cc;
         margin: 20px 0 !important;
     }
 
-    .about-integrations {
+    /* .about-integrations {
         background: #fff;
         margin: 20px 0;
         padding: 1px 20px 10px;
-    }
+    } */
 
-    .changelog {
+    /* .changelog {
         h2 {
             line-height: 1.4;
             padding-bottom: 0;
@@ -296,9 +296,9 @@ $blue: #2ea2cc;
                 }
             }
         }
-    }
+    } */
 
-    .theme-screenshot {
+    /* .theme-screenshot {
         color: #eee;
         transition: all 0.5s;
         &:hover {
@@ -411,7 +411,7 @@ $blue: #2ea2cc;
             text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
         }
 
-    }
+    } */
 
     figure {
         figcaption {
@@ -491,12 +491,12 @@ p.redux-actions {
     }
 }
 
-@media only screen and (min-width: 2000px) {
+/* @media only screen and (min-width: 2000px) {
     #wpwrap .theme-browser .theme:nth-child(4n),
     #wpwrap .theme-browser .theme:nth-child(5n) {
         margin-right: 3%;
     }
-}
+} */
 
 @media screen and (max-width: 500px) {
     .about-wrap h2 .nav-tab {
@@ -516,7 +516,7 @@ p.redux-actions {
     }
 }
 
-@media only screen and (max-width: 1120px) {
+/* @media only screen and (max-width: 1120px) {
     .theme-browser .theme:nth-child(odd) {
         margin-right: 5% !important;
     }
@@ -532,9 +532,9 @@ p.redux-actions {
         width: 100% !important;
         margin-right: 0;
     }
-}
+} */
 
-#support_div {
+/* #support_div {
     input.hash {
         text-align: center;
     }
@@ -546,9 +546,7 @@ p.redux-actions {
         opacity: 0.8;
     }
 
-    /*form styles*/
     #supportform {
-        /*width: 500px;*/
         margin-top: 10px;
         text-align: center;
         position: relative;
@@ -562,14 +560,11 @@ p.redux-actions {
             box-sizing: border-box;
             width: 86%;
             margin: 0 7%;
-            /*stacking fieldsets above each other*/
             position: absolute;
-            /*Hide all except first fieldset*/
             &:not(:first-of-type) {
                 display: none;
             }
         }
-        /*inputs*/
         input,
         textarea {
             padding: 15px;
@@ -588,7 +583,6 @@ p.redux-actions {
             margin-top: 10px;
         }
 
-        /*buttons*/
         .action-button {
             width: 100px;
             background: #27ae60;
@@ -607,7 +601,7 @@ p.redux-actions {
                 box-shadow: 0 0 0 2px #fff, 0 0 0 3px #27ae60;
             }
         }
-        /*headings*/
+
         .fs-title {
             font-size: 15px;
             text-transform: uppercase;
@@ -653,13 +647,13 @@ p.redux-actions {
     }
 
     .breadcrumb {
-        /*centering*/
+
         display: inline-block;
         box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
         overflow: hidden;
         border-radius: 5px;
         margin: 15px 0;
-        /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+
         counter-reset: flag;
         li {
             text-decoration: none;
@@ -672,72 +666,57 @@ p.redux-actions {
             margin: 0;
             line-height: 36px;
             color: #fff;
-            /*need more margin on the left of links to accomodate the numbers*/
             padding: 0 10px 0 60px;
             background: #666;
-            //background: linear-gradient(#666, #333);
             position: relative;
-            /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
             &:first-child {
                 padding-left: 46px;
-                border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+                border-radius: 5px 0 0 5px;
                 &::before {
                     left: 14px;
                 }
             }
             &:last-child {
-                border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+                border-radius: 0 5px 5px 0;
                 padding-right: 20px;
-                /*we dont need an arrow after the last link*/
+
                 &::after {
                     content: none;
                 }
             }
             &.active {
                 background: #333;
-                //background: linear-gradient(#333, #000);
+
                 &::after {
                     background: #333;
-                    //background: linear-gradient(135deg, #333, #000);
+
                 }
                 &::before {
                     background: #555;
                 }
             }
-            /*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+
             &::after {
                 content: "";
                 position: absolute;
                 top: 0;
-                right: -18px; /*half of square's length*/
-                /*same dimension as the line-height of .breadcrumb a */
+                right: -18px;
                 width: 36px;
                 height: 36px;
-                /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
-                length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
-                if diagonal required = 1; length = 1/1.414 = 0.707*/
                 transform: scale(0.707) rotate(45deg);
-                /*we need to prevent the arrows from getting buried under the next link*/
                 z-index: 1;
-                /*background same as links but the gradient will be rotated to compensate with the transform applied*/
                 background: #666;
-                //background: linear-gradient(135deg, #666, #333);
-                /*stylish arrow design using box shadow*/
                 box-shadow:
                     2px -2px 0 2px rgba(0, 0, 0, 0.4),
                     3px -3px 0 2px rgba(255, 255, 255, 0.1);
-                /*
-                    5px - for rounded arrows and
-                    50px - to prevent hover glitches on the border created using shadows*/
                 border-radius: 0 5px 0 50px;
                 transition: all 0.5s;
             }
-            /*we will use the :before element to show numbers*/
+
             &::before {
                 transition: all 0.5s;
                 content: counter(flag);
                 counter-increment: flag;
-                /*some styles now*/
                 border-radius: 100%;
                 width: 20px;
                 height: 20px;
@@ -753,7 +732,7 @@ p.redux-actions {
 
         }
     }
-}
+} */
 
 .redux-product {
     margin-bottom: 15px;

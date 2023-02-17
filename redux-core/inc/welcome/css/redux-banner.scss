@@ -1,13 +1,13 @@
-.updated.jp-banner {
+/* .updated.jp-banner {
     position: relative;
     padding: 0;
-}
+} */
 
-.updated .redux-banner-header {
+/* .updated .redux-banner-header {
     font-size: 1.125rem;
     font-weight: 400;
     margin-top: 0;
-}
+} */
 
 .updated .redux-banner-button-container {
     padding: 2rem 0 0;
@@ -44,13 +44,13 @@
     text-decoration: none;
 }
 
-.redux-banner-description {
+/* .redux-banner-description {
     font-size: 0.875rem;
 }
 
 .redux-banner-description-container {
     padding: 1rem;
-}
+} */
 
 .redux-banner-svg-dismiss {
     position: absolute;
@@ -63,7 +63,7 @@
     cursor: pointer;
 }
 
-.redux-banner-full-step-header {
+/* .redux-banner-full-step-header {
     max-width: 700px;
     margin: 0 auto 40px auto;
     line-height: 1.5;
@@ -97,7 +97,7 @@
 
 .redux-banner-full-step-header.bottom {
     margin-top: 5rem;
-}
+} */
 
 .redux-tos-blurb {
     font-size: 0.6875rem;
@@ -108,18 +108,17 @@
     cursor: pointer;
 }
 
-.redux-banner-full-dismiss-paragraph {
+/* .redux-banner-full-dismiss-paragraph {
     font-size: 0.6875rem;
-}
+} */
 
-.redux-tos-blurb a,
-.redux-banner-full-dismiss-paragraph a {
+.redux-tos-blurb a {
     cursor: pointer;
     color: inherit;
     text-decoration: underline;
 }
 
-.redux-banner-full-row {
+/* .redux-banner-full-row {
     display: flex;
     justify-content: space-around;
     justify-content: space-evenly;
@@ -172,18 +171,18 @@
     font-size: 1rem;
     font-weight: normal;
     margin: 0.625rem 0 1.5rem;
-}
+} */
 
-.redux-banner-button-container-loading {
+/* .redux-banner-button-container-loading {
     font-size: 14px;
     animation: jetpack-loading-fade 1.6s ease-in-out infinite;
-}
+} */
 
 .redux-banner-button-container .redux-spinner {
     width: 100%;
 }
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
     .redux-banner-full-row {
         display: block;
     }
@@ -191,7 +190,7 @@
         margin: 2em 0;
         max-width: 100%;
     }
-}
+} */
 
 .updated.redux-banner-container {
     border-left: none;
@@ -206,9 +205,9 @@
     }
 }
 
-.updated.redux-banner-container .dops-button {
+/* .updated.redux-banner-container .dops-button {
     padding: 7px 14px 9px;
-}
+} */
 
 .updated .notice-dismiss {
     z-index: 1;
@@ -221,7 +220,7 @@
 
 .redux-banner-container-top-text {
     padding: 15px 35px 25px 15px;
-    background-color: #CBC3F5;
+    background-color: #cbc3f5;
     color: #000000;
     display: flex;
     align-items: baseline;
@@ -292,14 +291,15 @@
     display: block;
     margin-bottom: 1.5rem;
 }
-@media (min-width: 1300px) {
+
+/* @media (min-width: 1300px) {
     .redux-banner-hide-phone-and-smaller {
         width: 320px !important;
     }
 }
 .redux-banner-hide-phone-and-smaller {
     max-width: 400px;
-}
+} */
 
 .redux-banner-content-logo {
     width: 150px;
@@ -316,12 +316,11 @@
     }
 }
 
-
-@media (max-width: 530px) {
+/* @media (max-width: 530px) {
     .redux-banner-hide-phone-and-smaller {
         display: none !important;
     }
-}
+} */
 
 .redux-banner-content-icon {
     margin: 0 1.5rem;
@@ -330,13 +329,13 @@
     flex-direction: column;
 }
 
-.redux-banner-button-container .dops-button.is-primary {
+/* .redux-banner-button-container .dops-button.is-primary {
     background: #24b0a6;
     border-color: #00a523;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     flex-shrink: 0;
-}
+} */
 
 .redux-illo img {
     display: block;
@@ -392,7 +391,7 @@
     font-size: 0.75rem;
 }
 
-.redux-banner-button-container .dops-button {
+/* .redux-banner-button-container .dops-button {
     margin: 0.3125rem 0;
 }
 
@@ -424,7 +423,7 @@
 
 .redux-banner-button-container .dops-button.is-primary:focus {
     box-shadow: 0 0 0 1px #fff, 0 0 0 3px #0071a1;
-}
+} */
 
 .redux-disconnected .redux-banner-full-container {
     box-sizing: border-box;
