@@ -40,7 +40,14 @@ export const SiteTypeSelect = () => {
     const { siteType, setSiteType } = useUserSelectionStore()
     const [search, setSearch] = useState('')
     const searchRef = useRef(null)
-    const { data: siteTypes, loading } = useFetch(fetchData, fetcher)
+    const { data, loading } = useFetch(fetchData, fetcher)
+    const siteTypes = data?.map((t) => {
+        // Include the parent site type styles if found.
+        t.styles = t?.parent
+            ? data.find((p) => p.slug === t.parent).styles
+            : t.styles
+        return t
+    })
     const handleSetSiteType = async (optionValue) => {
         await updateOption('extendify_siteType', optionValue)
         setSiteType({
@@ -60,7 +67,7 @@ export const SiteTypeSelect = () => {
 
     const visibleSiteTypes = search
         ? siteTypes
-              // fitler and highlight
+              // filter and highlight
               ?.filter((_, i) => idx.includes(i))
               ?.map((_, i, types) => {
                   const item = types[order[i]]
@@ -244,6 +251,7 @@ const SelectButton = ({ type }) => {
                         dangerouslySetInnerHTML={{
                             __html: type?.titleMarked ?? type.title,
                         }}
+                        data-test="site-type-label"
                     />
                     {selected ? (
                         <Checkmark className="h-6 w-6" />

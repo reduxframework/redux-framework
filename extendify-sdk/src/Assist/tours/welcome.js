@@ -1,14 +1,7 @@
 import { __ } from '@wordpress/i18n'
-import {
-    adminBgColor,
-    adminTextColor,
-    assistAdminBarBgColor,
-} from '../util/colors'
 
 export default {
     id: 'welcome-tour',
-    title: __('Welcome Tour', 'extendify'),
-    description: __('The Welcome Tour', 'extendify'),
     settings: {
         allowOverflow: true,
         startFrom:
@@ -35,14 +28,7 @@ export default {
                 },
                 hook: 'top left',
             },
-            events: {
-                onAttach: (el) => {
-                    el.style.setProperty('background-color', adminBgColor())
-                    Array.from(el.querySelectorAll('*')).forEach((child) => {
-                        child.style.setProperty('color', adminTextColor())
-                    })
-                },
-            },
+            events: {},
         },
         {
             title: __('Blog Posts', 'extendify'),
@@ -63,14 +49,7 @@ export default {
                 },
                 hook: 'top left',
             },
-            events: {
-                onAttach: (el) => {
-                    el.style.setProperty('background-color', adminBgColor())
-                    Array.from(el.querySelectorAll('*')).forEach((child) => {
-                        child.style.setProperty('color', adminTextColor())
-                    })
-                },
-            },
+            events: {},
         },
         {
             title: __('View Site', 'extendify'),
@@ -91,35 +70,30 @@ export default {
                 },
                 hook: 'top left',
             },
-            cloneOptions: {
-                includePsuedoDepth: 2,
-            },
             events: {
                 beforeAttach: () => {
-                    document
-                        .querySelector('#wp-admin-bar-site-name')
-                        ?.classList?.add('hover')
-                },
-                onAttach: (el) => {
-                    el?.querySelectorAll('#wp-admin-bar-view-site *').forEach(
-                        (child) => {
-                            child?.style?.setProperty(
-                                'background-color',
-                                assistAdminBarBgColor(),
-                                'important',
-                            )
-                            child?.style?.setProperty(
-                                'color',
-                                adminTextColor(),
-                                'important',
-                            )
-                        },
+                    if (window.innerWidth <= 960) return
+                    const menu = document.querySelector(
+                        '#wp-admin-bar-site-name .ab-sub-wrapper',
                     )
+                    menu.style.position = 'relative'
+                    menu.style.display = 'block'
+                },
+                onAttach: () => {
+                    if (window.innerWidth <= 960) return
+                    const menu = document.querySelector(
+                        '#wp-admin-bar-site-name .ab-sub-wrapper',
+                    )
+                    menu.style.position = 'relative'
+                    menu.style.display = 'block'
                 },
                 onDetach: () => {
-                    document
-                        .querySelector('#wp-admin-bar-site-name')
-                        ?.classList?.remove('hover')
+                    if (window.innerWidth <= 960) return
+                    const menu = document.querySelector(
+                        '#wp-admin-bar-site-name .ab-sub-wrapper',
+                    )
+                    menu.style.position = 'absolute'
+                    menu.style.display = ''
                 },
             },
         },
@@ -131,7 +105,7 @@ export default {
             ),
             image: 'https://assets.extendify.com/tours/welcome/site-assistant.gif',
             attachTo: {
-                element: '#wp-admin-bar-extendify-assist-link',
+                element: '#wp-admin-bar-extendify-assist-link button',
                 offset: {
                     marginTop: 15,
                     marginLeft: 0,
@@ -142,15 +116,7 @@ export default {
                 },
                 hook: 'top right',
             },
-            events: {
-                onAttach: (el) => {
-                    el.querySelector('.ab-item')?.style?.setProperty(
-                        'background-color',
-                        assistAdminBarBgColor(),
-                        'important',
-                    )
-                },
-            },
+            events: {},
         },
     ],
 }

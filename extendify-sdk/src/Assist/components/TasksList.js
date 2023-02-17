@@ -32,7 +32,7 @@ export const TasksList = () => {
 
     if (loading || !readyTasks || !readyPlugins || error) {
         return (
-            <div className="my-4 w-full flex justify-center mx-auto border border-gray-400 p-2 lg:p-8">
+            <div className="my-4 w-full flex justify-center mx-auto bg-white border border-gray-400 p-2 lg:p-8">
                 <Spinner />
             </div>
         )
@@ -41,7 +41,7 @@ export const TasksList = () => {
     if (tasks?.length === 0 || tasks?.length === 0) {
         return (
             <div
-                className="my-4 w-full mx-auto border border-gray-400 p-2 lg:p-8"
+                className="my-4 w-full mx-auto bg-white border border-gray-400 p-2 lg:p-8"
                 data-test="no-tasks-found">
                 {__('No tasks found...', 'extendify')}
             </div>
@@ -49,7 +49,7 @@ export const TasksList = () => {
     }
 
     return (
-        <div className="my-4 w-full mx-auto border border-gray-400 p-2 lg:p-6">
+        <div className="my-4 w-full mx-auto bg-white border border-gray-400 p-2 lg:p-6">
             <div className="mb-6 flex gap-0 flex-col">
                 <h2 className="my-0 text-lg">
                     {__('Personalized tasks for your site', 'extendify')}
@@ -135,8 +135,8 @@ export const TasksList = () => {
     )
 }
 
-const TaskItemWrapper = ({ task, Action }) => (
-    <div className="p-3 flex gap-3 justify-between border-0 border-b border-gray-400 bg-white relative items-center">
-        <TaskItemOld task={task} Action={Action} />
+const TaskItemWrapper = ({ task }) => (
+    <div className="p-3 flex gap-3 justify-between border-0 border-b border-gray-400 relative items-center">
+        <TaskItemOld task={task} />
     </div>
 )

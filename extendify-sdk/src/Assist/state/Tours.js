@@ -5,76 +5,93 @@ import { getTourData, saveTourData } from '../api/Data'
 
 const state = (set, get) => ({
     currentTour: null,
-    currentStep: 0,
+    currentStep: undefined,
     progress: [],
-    startTour(tourData) {
-        set({ currentTour: tourData })
+    startTour: async (tourData) => {
+        const { trackTourProgress, updateProgress, getStepData } = get()
         // See if the tour already was opened
-        const tour = get().trackTourProgress(tourData.id)
+        await tourData?.onStart?.(tourData)
+        await getStepData(0, tourData)?.events?.beforeAttach?.(tourData)
+        set({ currentTour: tourData, currentStep: 0 })
         // Increment the opened count
-        get().updateProgress(tour.id, {
+        const tour = trackTourProgress(tourData.id)
+        updateProgress(tour.id, {
             openedCount: tour.openedCount + 1,
             lastAction: 'started',
         })
     },
-    completeCurrentTour() {
-        if (!get().currentTour) return
-        const tour = get().findTourProgress(get().currentTour.id)
-        // if already completed, dont update the completedAt
-        if (!get().isCompleted(tour.id)) {
-            get().updateProgress(tour.id, {
+    completeCurrentTour: async () => {
+        const { currentTour, finishedTour, findTourProgress, updateProgress } =
+            get()
+        if (!currentTour) return
+        const tour = findTourProgress(currentTour.id)
+        // if already completed, don't update the completedAt
+        if (!finishedTour(tour.id)) {
+            updateProgress(tour.id, {
                 completedAt: new Date().toISOString(),
                 lastAction: 'completed',
             })
         }
         // Track how many times it was completed
-        get().updateProgress(tour.id, {
+        updateProgress(tour.id, {
             completedCount: tour.completedCount + 1,
             lastAction: 'completed',
         })
-        set({ currentTour: null, currentStep: 0 })
+        await currentTour?.onDetach?.()
+        await currentTour?.onFinish?.()
+        set({ currentTour: null, currentStep: undefined })
     },
     closeForRedirect() {
-        if (!get().currentTour) return
-        const tour = get().findTourProgress(get().currentTour.id)
+        const { currentTour, findTourProgress, updateProgress } = get()
+        if (!currentTour) return
+        const tour = findTourProgress(currentTour.id)
         // update last action
-        get().updateProgress(tour?.id ?? get().currentTour, {
+        updateProgress(tour?.id ?? currentTour, {
             lastAction: 'redirected',
         })
-        set({ currentTour: null, currentStep: 0 })
+        set({ currentTour: null, currentStep: undefined })
     },
-    closeCurrentTourManually() {
-        const tour = get().findTourProgress(get().currentTour.id)
+    closeCurrentTourManually: async () => {
+        const { currentTour, findTourProgress, updateProgress } = get()
+        const tour = findTourProgress(currentTour.id)
         // Track how many times it was closed early
-        get().updateProgress(tour.id, {
+        updateProgress(tour.id, {
             closedManuallyCount: tour.closedManuallyCount + 1,
             lastAction: 'closed-manually',
         })
-        set({ currentTour: null, currentStep: 0 })
+        await currentTour?.onDetach?.()
+        await currentTour?.onFinish?.()
+        set({ currentTour: null, currentStep: undefined })
     },
     closeCurrentTourFromError() {
-        if (!get().currentTour) return console.error('No tour found')
-        const tour = get().findTourProgress(get().currentTour.id)
+        const { currentTour, findTourProgress, updateProgress } = get()
+        if (!currentTour) return console.error('No tour found')
+        const tour = findTourProgress(currentTour.id)
         if (!tour) return console.error('No tour found')
-        get().updateProgress(tour.id, {
+        updateProgress(tour.id, {
             errored: true,
             lastAction: 'closed-by-caught-error',
         })
-        set({ currentTour: null, currentStep: 0 })
+        // Don't call onFinish here, as it was an error?
+        set({ currentTour: null, currentStep: undefined })
     },
     findTourProgress(tourId) {
         return get().progress.find((tour) => tour.id === tourId)
     },
-    isCompleted(tourId) {
+    finishedTour(tourId) {
         return get().findTourProgress(tourId)?.completedAt
+    },
+    wasOpened(tourId) {
+        return get().findTourProgress(tourId)?.openedCount > 0
     },
     isSeen(tourId) {
         return get().findTourProgress(tourId)?.firstSeenAt
     },
     trackTourProgress(tourId) {
+        const { findTourProgress } = get()
         // If we are already tracking it, return that
-        if (get().findTourProgress(tourId)) {
-            return get().findTourProgress(tourId)
+        if (findTourProgress(tourId)) {
+            return findTourProgress(tourId)
         }
         set((state) => ({
             progress: [
@@ -93,7 +110,7 @@ const state = (set, get) => ({
                 },
             ],
         }))
-        return get().findTourProgress(tourId)
+        return findTourProgress(tourId)
     },
     updateProgress(tourId, update) {
         const lastAction = update?.lastAction ?? 'unknown'
@@ -112,19 +129,31 @@ const state = (set, get) => ({
             return { progress }
         })
     },
+    getStepData(step, tour = get().currentTour) {
+        return tour?.steps?.[step] ?? {}
+    },
     hasNextStep() {
         if (!get().currentTour) return false
         return get().currentStep < get().currentTour.steps.length - 1
     },
-    nextStep() {
-        if (!get().hasNextStep()) {
-            get().closeCurrentTourFromError()
+    nextStep: async () => {
+        const {
+            currentTour,
+            currentStep,
+            updateProgress,
+            hasNextStep,
+            closeCurrentTourFromError,
+            getStepData,
+        } = get()
+        if (!hasNextStep()) {
+            closeCurrentTourFromError()
             return
         }
-        const tour = get().currentTour
-        const next = get().currentStep + 1
+        const tour = currentTour
+        const next = currentStep + 1
+        await getStepData(next)?.events?.beforeAttach?.(tour)
         set(() => ({ currentStep: next }))
-        get().updateProgress(tour.id, {
+        updateProgress(tour.id, {
             currentStep: next,
             lastAction: 'next',
         })
@@ -133,27 +162,39 @@ const state = (set, get) => ({
         if (!get().currentTour) return false
         return get().currentStep > 0
     },
-    prevStep() {
-        if (!get().hasPreviousStep()) {
-            get().closeCurrentTourFromError()
+    prevStep: async () => {
+        const {
+            updateProgress,
+            hasPreviousStep,
+            closeCurrentTourFromError,
+            currentTour,
+            currentStep,
+            getStepData,
+        } = get()
+        if (!hasPreviousStep()) {
+            closeCurrentTourFromError()
             return
         }
-        const tour = get().currentTour
-        const prev = get().currentStep - 1
+        const tour = currentTour
+        const prev = currentStep - 1
+        await getStepData(prev)?.events?.beforeAttach?.(tour)
         set(() => ({ currentStep: prev }))
-        get().updateProgress(tour.id, {
+        // make events async here?
+        updateProgress(tour.id, {
             currentStep: prev,
             lastAction: 'prev',
         })
     },
-    goToStep(step) {
-        const tour = get().currentTour
+    goToStep: async (step) => {
+        const { currentTour, updateProgress, getStepData } = get()
+        const tour = currentTour
         // Check that the step is valid
         if (step < 0 || step > tour.steps.length - 1) return
-        get().updateProgress(tour.id, {
+        updateProgress(tour.id, {
             currentStep: step,
             lastAction: `go-to-step-${step}`,
         })
+        await getStepData(step)?.events?.beforeAttach?.(tour)
         set(() => ({ currentStep: step }))
     },
 })

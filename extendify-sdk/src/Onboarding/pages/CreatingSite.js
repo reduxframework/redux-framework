@@ -30,15 +30,7 @@ export const CreatingSite = () => {
     const [warnOnLeaveReady, setWarnOnLeaveReady] = useState(true)
     const canLaunch = useUserSelectionStore((state) => state.canLaunch())
     const { data: activePlugins } = useFetch('active-plugins', getActivePlugins)
-    const {
-        siteType,
-        siteInformation,
-        pages,
-        style,
-        variation,
-        plugins,
-        goals,
-    } = useUserSelectionStore()
+    const { siteType, pages, style, plugins, goals } = useUserSelectionStore()
     const [info, setInfo] = useState([])
     const [infoDesc, setInfoDesc] = useState([])
     const inform = (msg) => setInfo((info) => [msg, ...info])
@@ -56,10 +48,7 @@ export const CreatingSite = () => {
             await new Promise((resolve) => setTimeout(resolve, 1000))
 
             await waitFor200Response()
-            await updateOption('blogname', siteInformation.title)
-
-            await waitFor200Response()
-            await updateGlobalStyleVariant(variation ?? {})
+            await updateGlobalStyleVariant(style?.variation ?? {})
 
             await waitFor200Response()
             await updateTemplatePart('extendable/header', style?.headerCode)
@@ -194,17 +183,7 @@ export const CreatingSite = () => {
             await new Promise((resolve) => setTimeout(resolve, 2000))
             return doEverything()
         }
-    }, [
-        activePlugins,
-        goals,
-        pages,
-        plugins,
-        siteType,
-        style,
-        variation,
-        canLaunch,
-        siteInformation.title,
-    ])
+    }, [activePlugins, goals, pages, plugins, siteType, style, canLaunch])
 
     useEffect(() => {
         if (!activePlugins) return
@@ -255,14 +234,16 @@ export const CreatingSite = () => {
             className="bg-partner-primary-bg text-partner-primary-text py-12 px-10 md:h-screen flex flex-col justify-between md:w-40vw md:max-w-md flex-shrink-0">
             <div className="max-w-prose">
                 <div className="md:min-h-48">
-                    {window.extOnbData?.partnerLogo && (
-                        <div className="pb-8">
+                    {window.extOnbData?.partnerLogo ? (
+                        <div className="mb-8">
                             <img
                                 style={{ maxWidth: '200px' }}
                                 src={window.extOnbData.partnerLogo}
                                 alt={window.extOnbData?.partnerName ?? ''}
                             />
                         </div>
+                    ) : (
+                        <Logo className="logo text-design-text w-32 sm:w-40 mb-8" />
                     )}
                     <div>
                         {info.map((step, index) => {
@@ -308,17 +289,6 @@ export const CreatingSite = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="hidden md:flex items-center space-x-3">
-                <span className="opacity-70 text-xs">
-                    {__('Powered by', 'extendify')}
-                </span>
-                <span className="relative">
-                    <Logo className="logo text-partner-primary-text w-28" />
-                    <span className="absolute -bottom-2 right-3 font-semibold tracking-tight">
-                        Launch
-                    </span>
-                </span>
             </div>
         </Transition>
     )

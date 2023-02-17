@@ -72,7 +72,7 @@ export const TaskItemOld = ({ task }) => {
                 {Action && (
                     <Action
                         task={task}
-                        className="px-4 py-3 text-white button-focus border-0 rounded relative z-10 cursor-pointer md:w-48 disabled:bg-gray-700 bg-design-main text-center no-underline"
+                        className="px-4 py-2 w-max button-focus bg-white border border-design-main text-design-main rounded relative z-10 cursor-pointer text-center no-underline text-sm"
                     />
                 )}
                 {isCompleted(slug) ? (

@@ -26,8 +26,8 @@ export const AssistTaskbar = () => {
                             'bg-design-dark': open,
                         },
                     )}>
-                    <span className="w-4 h-4 flex items-center justify-center">
-                        <LogoIcon />
+                    <span className="flex items-center justify-center fill-current">
+                        <LogoIcon className="w-6 h-6" />
                     </span>
                     <span>{__('Site Assistant', 'extendify')}</span>
                     <span className="flex items-center justify-center">

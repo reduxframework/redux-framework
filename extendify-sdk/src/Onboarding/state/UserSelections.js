@@ -11,7 +11,6 @@ const initialState = {
     exitFeedback: undefined,
     siteTypeSearch: [],
     style: null,
-    variation: null,
     pages: [],
     plugins: [],
     goals: [],

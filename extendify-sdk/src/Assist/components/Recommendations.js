@@ -4,26 +4,38 @@ import { useRecommendations } from '@assist/hooks/useRecommendations'
 
 export const Recommendations = () => {
     const { recommendations, loading, error } = useRecommendations()
+    const { partnerName } = window.extAssistData
+
+    // Checks if the recommendation is available for the current partner
+    const excluded = (rec) => rec?.excludedPartnersName?.includes(partnerName)
+    const active = (rec) =>
+        rec?.activePartnersName?.includes(partnerName) ||
+        rec?.activePartnersName === null
+    const recsFiltererd =
+        recommendations?.filter((rec) => !excluded(rec) && active(rec)) ?? []
 
     if (loading || error) {
         return (
-            <div className="my-4 w-full flex justify-center mx-auto border border-gray-400 p-2 lg:p-4">
+            <div className="my-4 w-full flex justify-center mx-auto bg-white border border-gray-400 p-2 lg:p-4">
                 <Spinner />
             </div>
         )
     }
 
-    if (recommendations.length === 0) {
+    if (recsFiltererd.length === 0) {
         return (
-            <div className="my-4 w-full mx-auto border border-gray-400 p-2 lg:p-4">
-                {__('No recommendations found...', 'extendify')}
+            <div className="my-4 w-full mx-auto bg-white border border-gray-400 p-2 lg:p-4">
+                {__(
+                    "All set! We don't have any recommendations right now for your site.",
+                    'extendify',
+                )}
             </div>
         )
     }
 
     return (
         <div className="my-4 w-full mx-auto text-base">
-            {recommendations.map(
+            {recsFiltererd.map(
                 ({
                     slug,
                     title,
@@ -35,7 +47,7 @@ export const Recommendations = () => {
                 }) => (
                     <div
                         key={slug}
-                        className="mb-4 w-full border border-gray-400 p-4 flex flex-col">
+                        className="mb-4 w-full bg-white border border-gray-400 p-4 flex flex-col">
                         <h3 className="m-0 mb-2 text-md font-bold">{title}</h3>
                         <p className="m-0 text-sm">{description}</p>
                         <a

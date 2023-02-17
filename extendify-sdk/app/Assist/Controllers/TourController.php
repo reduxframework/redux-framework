@@ -5,6 +5,8 @@
 
 namespace Extendify\Assist\Controllers;
 
+use Extendify\Http;
+
 if (!defined('ABSPATH')) {
     die('No direct access.');
 }
@@ -14,6 +16,20 @@ if (!defined('ABSPATH')) {
  */
 class TourController
 {
+    /**
+     * Return tasks from either database or source.
+     *
+     * @return \WP_REST_Response
+     */
+    public static function fetchTours()
+    {
+        $response = Http::get('/tours');
+        return new \WP_REST_Response(
+            $response,
+            wp_remote_retrieve_response_code($response)
+        );
+    }
+
     /**
      * Return the data
      *

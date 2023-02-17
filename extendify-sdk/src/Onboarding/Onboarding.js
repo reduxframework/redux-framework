@@ -7,6 +7,7 @@ import { RetryNotice } from '@onboarding/components/RetryNotice'
 import { CreatingSite } from '@onboarding/pages/CreatingSite'
 import { useGlobalStore } from '@onboarding/state/Global'
 import { usePagesStore } from '@onboarding/state/Pages'
+import { useDesignColors } from '@assist/hooks/useDesignColors'
 import { updateOption } from './api/WPApi'
 import { ExitModal } from './components/ExitModal'
 import { useTelemetry } from './hooks/useTelemetry'
@@ -31,6 +32,7 @@ export const Onboarding = () => {
     const [needsTheme, setNeedsTheme] = useState(false)
     const theme = useSelect((select) => select('core').getCurrentTheme())
     useTelemetry()
+    useDesignColors()
 
     const page = () => {
         if (needsTheme) return <NeedsTheme />

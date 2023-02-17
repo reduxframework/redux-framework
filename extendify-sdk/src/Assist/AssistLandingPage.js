@@ -2,6 +2,7 @@ import { SWRConfig } from 'swr'
 import { useRouter } from '@assist/hooks/useRouter'
 import { WelcomeNotice } from '@assist/notices/WelcomeNotice'
 import { Header } from '@assist/pages/parts/Header'
+import './documentation.css'
 
 const Page = () => {
     const { CurrentPage } = useRouter()
