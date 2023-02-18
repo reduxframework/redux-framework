@@ -4,24 +4,24 @@
  * for WordPress themes and plugins. Developed with WordPress coding
  * standards and PHP best practices in mind.
  *
- * Plugin Name:         Template Library and Redux Framework
+ * Plugin Name:         Redux Framework
  * Plugin URI:          http://wordpress.org/plugins/redux-framework
  * GitHub URI:          reduxframework/redux-framework
  * Description:         Build better sites in WordPress fast!
  * Version:             4.4.0
  * Requires at least:   4.0
  * Requires PHP:        7.1
- * Author:              Extendify
- * Author URI:          https://extendify.com/?utm_source=redux&utm_medium=plugins-page&utm_campaign=by
+ * Author:              Team Redux
+ * Author URI:          https://redux.io
  * License:             GPLv3 or later
  * License URI:         http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:         redux-framework
  * Provides:            ReduxFramework
  *
  * @package             ReduxFramework
- * @author              Extendify
+ * @author              Team Redux
  * @license             GNU General Public License, version 3
- * @copyright           2012-2021 Redux.io
+ * @copyright           2012-2023 Redux.io
  */
 
 // Exit if accessed directly.
