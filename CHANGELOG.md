@@ -1,7 +1,9 @@
 # Redux Changelog
 
-## 4.3.26.1
+## 4.0.0
 * Fixed: `Invalid argument` error inside `custom_fonts` on certain set ups.
+* Removed: Extendify Template Library
+* Added: Connection banner to display Extendify removal notice with plugin download option.
 
 ## 4.3.26
 * Modified: Empty `custom_font` list no longer creates empty fonts.css file.

@@ -1,7 +1,8 @@
-## Gutenberg Template Library & Redux Framework
+## Redux Framework
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/) [![Build Status](https://travis-ci.org/reduxframework/redux-framework.png?branch=master)](https://travis-ci.org/reduxframework/redux-framework) [![Slack](https://redux-slackin.herokuapp.com/badge.svg)](https://redux-slackin.herokuapp.com)
 
-#### Redux is powered by the Extendify team. Learn more at [extendify.com](https://extendify.com) ####
+## New to Version 4.4 ##
+* The Extendify Templates and Patterns library has been unbundled from Redux. To continue using Extendify, please download the standalone plugin from the WordPress.org repository: [https://wordpress.org/plugins/extendify](https://wordpress.org/plugins/extendify)
 
 ## New to Version 4.3 ##
 * METABOXES!
@@ -35,34 +36,6 @@ See [Changelog.md](https://github.com/reduxframework/redux-framework/blob/master
 
 ## Documentation ##
 Need a little help with Redux?  Come check out our brand-new documentation site at  [devs.redux.io](http://devs.redux.io), chock-full of tutorials and examples!
-
-
-
-## Template and Pattern Library
-
-Redux Framework includes access to the Extendify template and pattern library that can be accessed by clicking the "Library" button in the menu bar of the editor. We provide a variety of templates and patterns to serve different use cases and are adding more templates every week.
-
-## Privacy
-
-The Extendify library uses a custom API to fetch block patterns and page layouts from our servers. API requests are only made when a user clicks on the Library button. In order to provide and improve this service, Extendify passes site data along with an API request, including:
-
-* Browser
-
-* Referring site
-
-* Category selection
-
-* WP language
-
-* Active theme
-
-* Active plugins
-
-* Anonymize UUID
-
-* Anonymize IP address
-
-By accessing the Extendify library, you agree to the Extendify [privacy policy](https://extendify.com/privacy-policy) and [terms of service](https://extendify.com/terms-of-service).
 
 ## Help Us Translate Redux ##
 Please head over to the plugin page to learn how you can help us translate Redux quickly. Any and all are translations are welcome. We appreciate your help!
