@@ -28,6 +28,32 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 */
 		public static $args;
 
+		public static function load_extendify_css() {
+			add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'block_editor_styles' ), 99 );
+			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'frontend_init' ), 10 );
+		}
+
+		public static function block_editor_styles(){
+			wp_enqueue_style(
+				'redux-editor-styles',
+				Redux_Core::$url . 'assets/css/extendify-utilities.css',
+				array(),
+				Redux_Core::$version
+			);
+		}
+
+		/**
+		 * Scripts to enqueue on the frontend
+		 */
+		public static function frontend_init() {
+			wp_enqueue_style(
+				'redux-extendify-styles',
+				Redux_Core::$url . 'assets/css/extendify-utilities.css',
+				array(),
+				Redux_Core::$version
+			);
+		}
+
 		/**
 		 * Output alpha data tag for Iris alpha color picker, if enabled.
 		 *

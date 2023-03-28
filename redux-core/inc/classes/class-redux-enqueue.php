@@ -57,7 +57,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				add_action( 'admin_enqueue_scripts', array( $this, 'init' ), 1 );
 			}
 
-			add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_styles' ), 99 );
 			add_action( 'wp_enqueue_scripts', array( $this, 'frontend_init' ), 10 );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -66,27 +65,11 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			do_action( 'redux/enqueue/construct', $this );
 		}
 
-		public function block_editor_styles(){
-			wp_enqueue_style(
-				'redux-editor-styles',
-				Redux_Core::$url . 'assets/css/extendify-utilities.css',
-				array(),
-				Redux_Core::$version
-			);
-		}
-
 		/**
 		 * Scripts to enqueue on the frontend
 		 */
 		public function frontend_init() {
 			$core = $this->core();
-
-			wp_enqueue_style(
-				'redux-extendify-styles',
-				Redux_Core::$url . 'assets/css/extendify-utilities.css',
-				array(),
-				Redux_Core::$version
-			);
 
 			if ( $core->args['elusive_frontend'] ) {
 				wp_enqueue_style(
