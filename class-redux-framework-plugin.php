@@ -451,14 +451,14 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 				return $links;
 			}
 
-			$links[] = sprintf(
-				'<a href="%1$s" target="_blank">%2$s</a>',
-				esc_url( $this->get_site_utm_url( '', 'plugins-page', '', 'go-pro' ) ),
-				sprintf(
-					'<span style="font-weight: bold;">%s</span>',
-					__( 'Go Pro', 'redux-framework' )
-				)
-			);
+			//$links[] = sprintf(
+			//	'<a href="%1$s" target="_blank">%2$s</a>',
+			//	esc_url( $this->get_site_utm_url( '', 'plugins-page', '', 'go-pro' ) ),
+			//	sprintf(
+			//		'<span style="font-weight: bold;">%s</span>',
+			//		__( 'Go Pro', 'redux-framework' )
+			//	)
+			//);
 
 			return $links;
 		}

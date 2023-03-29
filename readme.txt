@@ -114,6 +114,11 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.0.0 =
+* Fixed: `Invalid argument` error inside `custom_fonts` on certain setups.
+* Removed: Extendify Template Library
+* Added: Connection banner to display Extendify removal notice with plugin download option.
+
 = 4.3.26 =
 * Modified: Empty `custom_font` list no longer creates empty fonts.css file.
 * Release date: February 02, 2023
