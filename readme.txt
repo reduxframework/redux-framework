@@ -116,6 +116,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 == Changelog ==
 = 4.0.0 =
 * Fixed: `Invalid argument` error inside `custom_fonts` on certain setups.
+* Fixed: Deprecated Google Map API broke `google_maps` extension.
 * Removed: Extendify Template Library
 * Added: Connection banner to display Extendify removal notice with plugin download option.
 

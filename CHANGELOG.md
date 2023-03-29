@@ -2,6 +2,7 @@
 
 ## 4.0.0
 * Fixed: `Invalid argument` error inside `custom_fonts` on certain set ups.
+* Fixed: Deprecated Google Map API broke `google_maps` extension.
 * Removed: Extendify Template Library
 * Added: Connection banner to display Extendify removal notice with plugin download option.
 * Updated: Font Awesome 6.4
