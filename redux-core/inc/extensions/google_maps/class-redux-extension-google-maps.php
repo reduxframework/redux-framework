@@ -22,7 +22,7 @@ if ( ! class_exists( 'Redux_Extension_Google_Maps' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.3.21';
+		public static $version = '4.4.0';
 
 		/**
 		 * Extension friendly name.

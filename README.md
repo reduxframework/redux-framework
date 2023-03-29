@@ -1,5 +1,5 @@
 ## Redux Framework
-[![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/) [![Build Status](https://travis-ci.org/reduxframework/redux-framework.png?branch=master)](https://travis-ci.org/reduxframework/redux-framework) [![Slack](https://redux-slackin.herokuapp.com/badge.svg)](https://redux-slackin.herokuapp.com)
+[![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/)
 
 ## New to Version 4.4 ##
 * The Extendify Templates and Patterns library has been unbundled from Redux. To continue using Extendify, please download the standalone plugin from the WordPress.org repository: [https://wordpress.org/plugins/extendify](https://wordpress.org/plugins/extendify)
@@ -26,6 +26,9 @@
 * New Alpha color option for color field: `color_alpha` field arg for fields that support color pickers.
 * Removed: `async_typography` global arg.  Google no longer supports it.  Use `font_display` with one of the following `auto|block|swap|fallback|optional`.  See: [https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
 * Automatic update option for Google Fonts without a Pro subscription.
+
+## Join us on Slack ##
+[Redux Slack](https://join.slack.com/t/redux/shared_invite/zt-1op7uw3up-kXgZp4Y93TeCSmq_LALl~Q)
 
 ## Follow us on Social Media! ##
 [![Follow us on Twitter](https://www.download82.com/images/produse/iconuri/twitter-for-android.png "Follow us on Twitter")](https://www.twitter.com/ReduxFramework)
