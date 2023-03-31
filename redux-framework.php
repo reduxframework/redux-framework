@@ -9,7 +9,7 @@
  * GitHub URI:          reduxframework/redux-framework
  * Description:         Build better sites in WordPress fast!
  * Version:             4.4.0
- * Requires at least:   4.0
+ * Requires at least:   5.0
  * Requires PHP:        7.1
  * Author:              Team Redux
  * Author URI:          https://redux.io

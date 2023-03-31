@@ -68,9 +68,6 @@ Our code base has been rebuilt from the ground up.  With compartmentalized code,
 ### Top of the Line Security!
 Redux meets security standards laid out by WordPress Coding Standards, WordPress VIP Standards, and ThemeForest Guidelines.  Focus includes escaping, sanitizing, and nonces verification, and database query prep/caching.
 
-### Gutenberg Template Library
-Supercharge the Gutenberg editor with our ever-growing library of WordPress Blocks and templates. Discover what’s possible and implement any design on your website in virtually no time at all.  See the [WordPress plugin page](https://wordpress.org/plugins/redux-framework/#description) for much more information!
-
 ### Automatic Google Font Updates.
 This is one of the crown jewels of Redux v4!  Your users will have the ability to update Google Fonts as updates are available or automatic ‘behind the scenes’ updates.  No more waiting for updates and no API key required!
 

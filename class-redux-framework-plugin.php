@@ -528,9 +528,9 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @since       3.0.0
 		 */
 		public function plugin_metalinks( array $links, string $file ): array {
-/*			if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
+			if ( strpos( $file, 'redux-framework.php' ) !== false && is_plugin_active( $file ) ) {
 				$links[] = '<a href="' . esc_url( admin_url( add_query_arg( array( 'page' => 'redux-framework' ), 'options-general.php' ) ) ) . '">' . esc_html__( 'What is this?', 'redux-framework' ) . '</a>';
-			}*/
+			}
 
 			return $links;
 		}
