@@ -6,7 +6,7 @@
  * @author Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Multi_Media
  *
- * @version 4.3.15
+ * @version 4.4.1
  */
 
 defined( 'ABSPATH' ) || exit;
