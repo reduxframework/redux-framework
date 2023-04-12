@@ -124,6 +124,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 			add_action( 'switch_theme', array( 'Redux', 'create_redux' ) );
 
 			require_once Redux_Core::$dir . 'inc/extensions/metaboxes/class-redux-metaboxes-api.php';
+			require_once Redux_Core::$dir . 'inc/extensions/users/class-redux-users-api.php';
 		}
 
 		/**
@@ -1143,7 +1144,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 			Redux_Functions_Ex::record_caller( $opt_name );
 
 			if ( is_array( $args ) ) {
-				if ( isset( self::$args[ $opt_name ] ) && isset( self::$args[ $opt_name ]['clearArgs'] ) ) {
+				if ( isset( self::$args[ $opt_name ]['clearArgs'] ) ) {
 					self::$args[ $opt_name ] = array();
 				}
 				self::$args[ $opt_name ] = wp_parse_args( $args, self::$args[ $opt_name ] );
@@ -1595,7 +1596,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 				}
 			} elseif ( file_exists( $path ) ) {
 				$name = explode( 'extension_', basename( $path ) );
-				if ( isset( $name[1] ) && ! empty( $name[1] ) ) {
+				if ( ! empty( $name[1] ) ) {
 					$name = str_replace( '.php', '', $name[1] );
 					self::check_extension_class_file( $opt_name, $name, $path );
 				}

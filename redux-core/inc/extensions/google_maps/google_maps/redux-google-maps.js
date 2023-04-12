@@ -4,13 +4,6 @@
 
 /* global jQuery, document, redux_change, redux, google */
 
-//async function initMap() {
-//	const { Map } = await google.maps.importLibrary("maps");
-//	console.log(map);
-//}
-
-//initMap();
-
 (function( $ ) {
 	'use strict';
 
@@ -138,14 +131,13 @@
 		var autocomplete = containerID + '_autocomplete';
 		var canvas       = containerID + '_map_canvas';
 		var canvasId     = $( '#' + canvas );
+		var ac;
 
 		// Create the autocomplete object, restricting the search
 		// to geographical location types.
-		//var x = new google.maps
-		//console.log(x);
-		//g_autoComplete = new google.maps.importLibrary("places").Autocomplete(
 		g_autoComplete = await google.maps.importLibrary( 'places' );
-		var ac = new g_autoComplete.Autocomplete(
+
+		ac = new g_autoComplete.Autocomplete(
 			( document.getElementById( autocomplete ) ),
 			{
 				types: ['geocode']

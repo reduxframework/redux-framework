@@ -28,7 +28,7 @@ Redux_Users::set_profile(
 		'style'    => 'wp',
 		'sections' => array(
 			array(
-				'title'  => esc_html__( 'Home Settings', 'your-textdomain-here' ),
+				'title'  => esc_html__( 'User Settings', 'your-textdomain-here' ),
 				'icon'   => 'el-icon-home',
 				'fields' => array(
 					array(
@@ -53,7 +53,7 @@ Redux_Users::set_profile(
 						'title'    => esc_html__( 'Web Fonts', 'your-textdomain-here' ),
 						'compiler' => 'true',
 						'mode'     => false,
-						// Can be set to false to allow any media type, or can also be set to any mime type.
+						// Can be set to false allowing for any media type, or can also be set to any mime type.
 						'desc'     => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 					),
@@ -72,7 +72,7 @@ Redux_Users::set_profile(
 						'compiler' => 'true',
 						'desc'     => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
-						'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
+						'default'  => array( 'url' => 'https://s.wordpress.org/style/images/codeispoetry.png' ),
 					),
 					array(
 						'id'     => 'section-media-end',
@@ -207,8 +207,8 @@ Redux_Users::set_profile(
 // Recovering user data.
 $data = Redux_Users::get_user_meta(
 	array(
-		'key'      => 'user-text',   /* If you're only looking for a key within the meta, otherwise all values will be returned. */
-		'opt_name' => $opt_name, // Optional, but needed to recover default values for unset values.
-		'user'     => '',         // User id, else current user ID is returned.
+		'key'      => 'user-text', /* If you're only looking for a key within the meta, otherwise all values will be returned. */
+		'opt_name' => $opt_name,   // Optional, but needed to recover default values for unset values.
+		'user'     => '',          // User id, else current user ID is returned.
 	)
 );

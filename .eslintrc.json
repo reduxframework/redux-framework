@@ -14,7 +14,8 @@
 		"react"
 	],
 	"parserOptions": {
-		"ecmaVersion": 5,
-		"sourceType": "script"
+		"ecmaVersion": 8,
+		"sourceType": "script",
+		"esversion": 8
 	}
 }
