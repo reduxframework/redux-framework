@@ -1,6 +1,13 @@
 # Redux Changelog
 
-## 4.0.0
+## 4.4.0.2
+* New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
+* Fixed: Google Maps JavaScript.
+
+## 4.4.0.1
+* Updated: Minimum WordPress version to 5.0
+
+## 4.4.0
 * Fixed: `Invalid argument` error inside `custom_fonts` on certain set ups.
 * Fixed: Deprecated Google Map API broke `google_maps` extension.
 * Removed: Extendify Template Library
