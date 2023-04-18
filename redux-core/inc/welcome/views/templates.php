@@ -25,35 +25,4 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php $this->actions(); ?>
 	<?php $this->tabs(); ?>
-
-	<?php // TODO: Delete when stable. ?>
-	<?php // $ext_value = Redux_Core::$extendify_templates_enabled; ?>
-
-	<!-- <div class="feature-section one-col">
-		<div class="col">
-			<?php // translators: %s: HTML. ?>
-			<h2><?php // echo sprintf( esc_html__( ' Template Libraries', 'redux-framework' ), '<br />' ); ?></h2>
-		</div>
-	</div>
-	<div class='wrap'>
-		<form method="post" action="options.php">
-			<?php // settings_fields( 'redux_templates' ); ?>
-			<table class="form-table">
-				<tbody>
-				<?php // if ( ! Redux_Functions_Ex::is_plugin_active( 'extendify' ) ) { ?>
-				<tr style='vertical-align:top'>
-					<th scope='row' style='vertical-align:top'>
-						<?php // esc_html_e( 'Extendify Template Library', 'redux-framework' ); ?>
-					</th>
-					<td>
-						<input id="extendify-templates" name="use_extendify_templates" type="checkbox" class="regular-text" value="1" <?php // checked( $ext_value, '1' ); ?>/>
-						<label class="description" for="use_extendify_templates"><?php // esc_html_e( 'Load Extendify template library', 'redux-framework' ); ?></label>
-					</td>
-				</tr>
-				<?php // } ?>
-				</tbody>
-			</table>
-			<?php // submit_button(); ?>
-		</form>
-		<hr>
-</div> -->
+</div>

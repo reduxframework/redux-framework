@@ -288,8 +288,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 
 			// Don't show the connect notice anywhere but the plugins.php after activating
 			if ( 'plugins' !== $current_screen->base && 'dashboard' !== $current_screen->base ) {
-				// TODO: Delete when stable.
-				// add_action( 'redux_admin_notices_run', array( $this, 'panel_admin_notice' ), 100, 2 );
 				add_action( 'admin_head', array( $this, 'admin_head' ) );
 
 				return;
@@ -303,42 +301,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 				add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 20 );
 			}
 		}
-
-		// TODO: Delete when stable.
-		/**
-		 * Display the admin notice to users that have not opted-in or out
-		 *
-		 * @return void
-		 */
-//		public function panel_admin_notice( $args ) {
-//
-//			$urls = $this->get_urls( 'panel_banner' );
-//
-//			$this->client = Redux_Core::$appsero;
-//			// don't show tracking if a local server
-//
-//			if ( empty( $this->notice ) ) {
-//				$name = 'Redux';
-//				$notice = sprintf( __( 'Register <strong>%1$s</strong> to enable automatic Google Font updates service. Plus unlock all free block templates in the Redux template library.', 'redux-framework' ), $name );
-//			} else {
-//				$notice = $this->notice;
-//			}
-//
-//			$notice .= ' (<a class="redux-insights-data-we-collect" href="#" style="white-space: nowrap;">' . __( 'learn more', 'redux-framework' ) . '</a>)';
-//
-//			$notice .= '<p class="description" style="display:none;">' . self::tos_blurb( 'option_panel' ) . ' </p>';
-//
-//			echo '<div class="updated" id="redux-connect-message" data-nonce="' . wp_create_nonce( $this->nonce ) . '" style="border-left-color: #24b0a6;"><p>';
-//			echo $notice;
-//			echo '</p><p class="submit">';
-//			echo '&nbsp;<a href="' . esc_url( $urls['register'] ) . '" class="button-primary button-large redux-activate-connection redux-connection-banner-action" data-url="' . admin_url( 'admin-ajax.php' ) . '" data-activate="panel_banner">' . __( 'Register Now', 'redux-framework' ) . '</a>';
-//			echo '&nbsp;&nbsp;&nbsp;<a href="' . esc_url( $urls['dismiss'] ) . '" style="color: #aaa;" class="redux-connection-banner-action" data-activate="false" data-url="' . admin_url( 'admin-ajax.php' ) . '">' . __( 'No thanks', 'redux-framework' ) . '</a>';
-//			echo '</p></div>';
-//			echo '<style>.wp-core-ui .button-primary.redux-activate-connection{background: #24b0a6;}.wp-core-ui .button-primary.redux-activate-connection:hover{background: #19837c;}</style>';
-//
-//			echo "<noscript><style>#redux-connect-message{display:none;}</style></noscript>";
-//
-//		}
 
 		/**
 		 * Hide Individual Dashboard Pages
@@ -455,21 +417,6 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 			<noscript><style>#message{display:none;}</style></noscript>
 			<?php
 		}
-
-		// TODO: Delete when stable.
-		/**
-		 * Prints a TOS blurb used throughout the connection prompts.
-		 *
-		 * @since 4.0
-		 *
-		 * @echo string
-		 */
-		//public static function tos_blurb( $campaign = 'options_panel' ): string {
-		//	return sprintf(
-		//		__( 'By clicking the <strong>Register</strong> button, you agree to our <a href="%1$s" target="_blank">terms of service</a>, to create an account, and to share details of your usage metrics with Redux.io.  We may also occasionally send you emails with product updates, special offers, or other marketing content.', 'redux-framework' ),
-		//		Redux_Functions_Ex::get_site_utm_url( 'terms', 'appsero', 'activate', $campaign )
-		//	);
-		//}
 	}
 }
 

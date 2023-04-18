@@ -135,14 +135,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 */
 		public static $welcome = null;
 
-		// TODO: Delete when stable.
-		/**
-		 * Flag for Extendify Template enabled status.
-		 *
-		 * @var bool
-		 */
-		// public static $extendify_templates_enabled = true;
-
 		/**
 		 * Creates instance of class.
 		 *
