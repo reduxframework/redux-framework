@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.0.3
+* Fixed: #3945 - Glitch in validation causing color pickers to fail in rare use case.
+
 ## 4.4.0.2
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
 * Fixed: Google Maps JavaScript.
