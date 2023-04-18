@@ -34,9 +34,9 @@
 					link = elements.slice( index + 1, index + 2 );
 				}
 
-				el    = link.parents( '.redux-container:first' );
-				relid = link.data( 'rel' ); // The group ID of interest.
-				oldid = el.find( '.redux-group-tab-link-li.active:first .redux-group-tab-link-a' ).data( 'rel' );
+				el       = link.parents( '.redux-container:first' );
+				relid    = link.data( 'rel' ); // The group ID of interest.
+				oldid    = el.find( '.redux-group-tab-link-li.active:first .redux-group-tab-link-a' ).data( 'rel' );
 				opt_name = $.redux.getOptName( el );
 
 				if ( oldid === relid ) {

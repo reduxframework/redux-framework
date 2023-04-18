@@ -16,7 +16,7 @@ function colorValidate( field ) {
 function colorNameToHex( colour ) {
 	'use strict';
 
-	var tcolour = colour.replace( /^\s\s*/, '' ).replace( /\s\s*$/, '' ).replace( '#', '' );
+	var tcolour = colour.replace( /^\s+/, '' ).replace( /\s+$/, '' ).replace( '#', '' );
 
 	var colours = {
 		'aliceblue': '#f0f8ff',

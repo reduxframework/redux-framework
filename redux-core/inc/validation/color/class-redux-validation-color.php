@@ -37,6 +37,10 @@ if ( ! class_exists( 'Redux_Validation_Color', false ) ) {
 				$this->value   = '';
 
 				return;
+			} else {
+				$this->field['msg'] = '';
+				$this->warning      = $this->field;
+
 			}
 
 			$sanitized_value = Redux_Colors::sanitize_color( $this->value );

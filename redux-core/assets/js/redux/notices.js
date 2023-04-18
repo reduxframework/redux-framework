@@ -75,7 +75,10 @@
 						function( key, value ) {
 							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
 
-							fieldset.addClass( 'redux-field-error' );
+							if ( '' !== value.msg ) {
+								fieldset.addClass( 'redux-field-error' );
+							}
+
 							if ( 0 === fieldset.parent().find( '.redux-th-error' ).length ) {
 								fieldset.append( '<div class="redux-th-error">' + value.msg + '</div>' );
 							} else {
@@ -138,7 +141,9 @@
 						function( key, value ) {
 							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
 
-							fieldset.addClass( 'redux-field-warning' );
+							if ( '' !== value.msg ) {
+								fieldset.addClass( 'redux-field-warning' );
+							}
 
 							if ( 0 === fieldset.parent().find( '.redux-th-warning' ).length ) {
 								fieldset.append( '<div class="redux-th-warning">' + value.msg + '</div>' );

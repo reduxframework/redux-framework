@@ -4,30 +4,33 @@
 	$.redux = $.redux || {};
 
 	$.redux.stickyInfo = function() {
+		var sticky      = $( '#redux-sticky' );
+		var infoBar     = $( '#info_bar' );
+		var reduxFooter = $( '#redux-footer' );
 		var stickyWidth = $( '.redux-main' ).innerWidth() - 20;
-		var $width      = $( '#redux-sticky' ).offset().left;
+		var $width      = sticky.offset().left;
 
 		$( '.redux-save-warn' ).css( 'left', $width + 'px' );
 
-		if ( ! $( '#info_bar' ).isOnScreen() && ! $( '#redux-footer-sticky' ).isOnScreen() ) {
-			$( '#redux-footer' ).css(
+		if ( ! infoBar.isOnScreen() && ! $( '#redux-footer-sticky' ).isOnScreen() ) {
+			reduxFooter.css(
 				{ position: 'fixed', bottom: '0', width: stickyWidth, right: 21 }
 			);
 
-			$( '#redux-footer' ).addClass( 'sticky-footer-fixed' );
+			reduxFooter.addClass( 'sticky-footer-fixed' );
 			$( '#redux-sticky-padder' ).show();
 		} else {
-			$( '#redux-footer' ).css(
+			reduxFooter.css(
 				{ background: '#eee', position: 'inherit', bottom: 'inherit', width: 'inherit' }
 			);
 
 			$( '#redux-sticky-padder' ).hide();
-			$( '#redux-footer' ).removeClass( 'sticky-footer-fixed' );
+			reduxFooter.removeClass( 'sticky-footer-fixed' );
 		}
-		if ( ! $( '#info_bar' ).isOnScreen() ) {
-			$( '#redux-sticky' ).addClass( 'sticky-save-warn' );
+		if ( ! infoBar.isOnScreen() ) {
+			sticky.addClass( 'sticky-save-warn' );
 		} else {
-			$( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
+			sticky.removeClass( 'sticky-save-warn' );
 		}
 	};
 })( jQuery );

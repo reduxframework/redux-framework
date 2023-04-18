@@ -122,7 +122,7 @@
 							el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.redux-field-container' ).find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 						} else {
-							prevColor =  $( this ).parents( '.redux-field-container' ).find( '.redux-saved-color' ).val();
+							prevColor = $( this ).parents( '.redux-field-container' ).find( '.redux-saved-color' ).val();
 							if ( '' === prevColor ) {
 								prevColor = $( '#' + $( this ).data( 'id' ) ).data( 'default-color' );
 							}

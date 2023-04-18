@@ -16,9 +16,13 @@
 	};
 
 	$.redux.checkRequired = function( el ) {
+		var body;
+
 		$.redux.required();
 
-		$( 'body' ).on(
+		body = $( 'body' );
+
+		body.on(
 			'change',
 			'.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]',
 			function() {
@@ -26,7 +30,7 @@
 			}
 		);
 
-		$( 'body' ).on(
+		body.on(
 			'check_dependencies',
 			function( e, variable ) {
 				e = null;
@@ -45,7 +49,7 @@
 
 		// Hide the fold elements on load.
 		// It's better to do this by PHP but there is no filter in tr tag , so is not possible
-		// we going to move each attributes we may need for folding to tr tag.
+		// we're going to move each attributes we may need for folding to tr tag.
 		$.each(
 			redux.opt_names,
 			function( x ) {
@@ -91,13 +95,17 @@
 	};
 
 	$.redux.getContainerValue = function( id ) {
-		var value = $( '#' + redux.optName.args.opt_name + '-' + id ).serializeForm();
+		var theId;
+		var value;
+
+		theId = $( '#' + redux.optName.args.opt_name + '-' + id );
+		value = theId.serializeForm();
 
 		if ( null !== value && 'object' === typeof value && value.hasOwnProperty( redux.optName.args.opt_name ) ) {
 			value = value[redux.optName.args.opt_name][id];
 		}
 
-		if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-media' ) ) {
+		if ( theId.hasClass( 'redux-container-media' ) ) {
 			value = value.url;
 		}
 
@@ -210,10 +218,13 @@
 		var div;
 		var rawTable;
 		var toFade;
+		var theId;
 
-		toFade = $( '#' + redux.optName.args.opt_name + '-' + id ).parents( 'tr:first' );
+		theId = $( '#' + redux.optName.args.opt_name + '-' + id );
+
+		toFade = theId.parents( 'tr:first' );
 		if ( 0 === toFade ) {
-			toFade = $( '#' + redux.optName.args.opt_name + '-' + id ).parents( 'li:first' );
+			toFade = theId.parents( 'li:first' );
 		}
 
 		toFade.fadeOut(
@@ -221,7 +232,7 @@
 			function() {
 				$( this ).addClass( 'hide' );
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-section' ) ) {
+				if ( theId.hasClass( 'redux-container-section' ) ) {
 					div = $( '#section-' + id );
 
 					if ( div.hasClass( 'redux-section-indent-start' ) ) {
@@ -230,15 +241,15 @@
 					}
 				}
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-info' ) ) {
+				if ( theId.hasClass( 'redux-container-info' ) ) {
 					$( '#info-' + id ).fadeOut( 50 ).addClass( 'hide' );
 				}
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-divide' ) ) {
+				if ( theId.hasClass( 'redux-container-divide' ) ) {
 					$( '#divide-' + id ).fadeOut( 50 ).addClass( 'hide' );
 				}
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-raw' ) ) {
+				if ( theId.hasClass( 'redux-container-raw' ) ) {
 					rawTable = $( '#' + redux.optName.args.opt_name + '-' + id ).parents().find( 'table#' + redux.optName.args.opt_name + '-' + id );
 					rawTable.fadeOut( 50 ).addClass( 'hide' );
 				}
@@ -263,12 +274,15 @@
 				redux.optName.required_child[id],
 				function( i, parentData ) {
 					var parentValue;
+					var parent;
+
+					parent = $( '#' + redux.optName.args.opt_name + '-' + parentData.parent );
 
 					i = null;
 
-					if ( $( '#' + redux.optName.args.opt_name + '-' + parentData.parent ).parents( 'tr:first' ).hasClass( 'hide' ) ) {
+					if ( parent.parents( 'tr:first' ).hasClass( 'hide' ) ) {
 						show = false;
-					} else if ( $( '#' + redux.optName.args.opt_name + '-' + parentData.parent ).parents( 'li:first' ).hasClass( 'hide' ) ) {
+					} else if ( parent.parents( 'li:first' ).hasClass( 'hide' ) ) {
 						show = false;
 					} else {
 						if ( false !== show ) {

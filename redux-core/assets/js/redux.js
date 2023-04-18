@@ -79,7 +79,9 @@
 					data:       $data
 				},
 				error: function( response ) {
-					$( '.redux-action_bar input' ).prop( 'disabled', false );
+					var input = $( '.redux-action_bar input' );
+
+					input.prop( 'disabled', false );
 
 					if ( true === redux.optName.args.dev_mode ) {
 						console.log( response.responseText );
@@ -91,7 +93,7 @@
 						redux.optName.args.ajax_save = false;
 
 						$( button ).trigger( 'click' );
-						$( '.redux-action_bar input' ).prop( 'disabled', true );
+						input.prop( 'disabled', true );
 					}
 				},
 				success: function( response ) {
@@ -158,7 +160,7 @@ function colorValidate( field ) {
 function colorNameToHex( colour ) {
 	'use strict';
 
-	var tcolour = colour.replace( /^\s\s*/, '' ).replace( /\s\s*$/, '' ).replace( '#', '' );
+	var tcolour = colour.replace( /^\s+/, '' ).replace( /\s+$/, '' ).replace( '#', '' );
 
 	var colours = {
 		'aliceblue': '#f0f8ff',
@@ -685,6 +687,7 @@ function colorNameToHex( colour ) {
 		function() {
 			var opt_name;
 			var tempArr = [];
+			var container;
 
 			$.fn.isOnScreen = function() {
 				var win;
@@ -718,7 +721,9 @@ function colorNameToHex( colour ) {
 				$( '.wp-full-overlay-sidebar' ).addClass( 'redux-container' );
 			}
 
-			$( '.redux-container' ).each(
+			container = $( '.redux-container' );
+
+			container.each(
 				function() {
 					opt_name = $.redux.getOptName( this );
 
@@ -730,7 +735,7 @@ function colorNameToHex( colour ) {
 				}
 			);
 
-			$( '.redux-container' ).on(
+			container.on(
 				'click',
 				function() {
 					opt_name = $.redux.getOptName( this );
@@ -819,7 +824,6 @@ function colorNameToHex( colour ) {
 
 	$.redux.getOptName = function( el ) {
 		var metabox;
-		var li;
 		var optName;
 		var item = $( el );
 
@@ -829,7 +833,7 @@ function colorNameToHex( colour ) {
 			optName = $( el ).parents( '.redux-wrap-div' ).data( 'opt-name' );
 		}
 
-		// Compatibility for metaboxes
+		// Compatibility for metaboxes.
 		if ( undefined === optName ) {
 			metabox = $( el ).parents( '.postbox' );
 			if ( 0 === metabox.length ) {
@@ -956,7 +960,10 @@ function colorNameToHex( colour ) {
 						function( key, value ) {
 							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
 
-							fieldset.addClass( 'redux-field-error' );
+							if ( '' !== value.msg ) {
+								fieldset.addClass( 'redux-field-error' );
+							}
+
 							if ( 0 === fieldset.parent().find( '.redux-th-error' ).length ) {
 								fieldset.append( '<div class="redux-th-error">' + value.msg + '</div>' );
 							} else {
@@ -1019,7 +1026,9 @@ function colorNameToHex( colour ) {
 						function( key, value ) {
 							var fieldset = $( '#' + redux.optName.args.opt_name + '-' + value.id );
 
-							fieldset.addClass( 'redux-field-warning' );
+							if ( '' !== value.msg ) {
+								fieldset.addClass( 'redux-field-warning' );
+							}
 
 							if ( 0 === fieldset.parent().find( '.redux-th-warning' ).length ) {
 								fieldset.append( '<div class="redux-th-warning">' + value.msg + '</div>' );
@@ -1309,7 +1318,6 @@ function redux_change( variable ) {
 
 	(function( $ ) {
 		var rContainer;
-		var opt_name;
 		var parentID;
 		var id;
 		var th;
@@ -1323,12 +1331,6 @@ function redux_change( variable ) {
 		variable = $( variable );
 
 		rContainer = $( variable ).parents( '.redux-container:first' );
-
-		if ( redux.customizer ) {
-			opt_name = $( '.redux-customizer-opt-name' ).data( 'opt-name' );
-		} else {
-			opt_name = $.redux.getOptName( rContainer );
-		}
 
 		$( 'body' ).trigger( 'check_dependencies', variable );
 
@@ -1360,12 +1362,12 @@ function redux_change( variable ) {
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-errors' ).slideUp();
 				$( '#redux_metaboxes_errors' ).slideUp();
 			} else {
-				errorsLeft = ( parseInt( th.find( '.redux-menu-error:first' ).text(), 0 ) - 1 );
+				errorsLeft = ( parseInt( th.find( 'li .redux-menu-error:first' ).text(), 0 ) - 1 );
 
 				if ( errorsLeft <= 0 ) {
 					th.find( '.redux-menu-error:first' ).fadeOut().remove();
 				} else {
-					th.find( '.redux-menu-error:first' ).text( errorsLeft );
+					th.find( 'li .redux-menu-error:first' ).text( errorsLeft );
 				}
 
 				rContainer.find( '.redux-field-errors span' ).text( errorCount );
@@ -1393,7 +1395,7 @@ function redux_change( variable ) {
 			} else {
 
 				// Let's count down the warnings now. Fancy.  ;).
-				warningsLeft = ( parseInt( th.find( '.redux-menu-warning:first' ).text(), 0 ) - 1 );
+				warningsLeft = ( parseInt( th.find( 'li .redux-menu-warning:first' ).text(), 0 ) - 1 );
 
 				if ( warningsLeft <= 0 ) {
 					th.find( '.redux-menu-warning:first' ).fadeOut().remove();
@@ -1401,7 +1403,7 @@ function redux_change( variable ) {
 					th.find( '.redux-menu-warning:first' ).text( warningsLeft );
 				}
 
-				rContainer.find( '.redux-field-warning span' ).text( warningCount );
+				rContainer.find( 'li .redux-field-warning span' ).text( warningCount );
 			}
 
 			if ( 0 !== subParent.length ) {
@@ -1465,9 +1467,13 @@ function redux_hook( object, functionName, callback, before ) {
 	};
 
 	$.redux.checkRequired = function( el ) {
+		var body;
+
 		$.redux.required();
 
-		$( 'body' ).on(
+		body = $( 'body' );
+
+		body.on(
 			'change',
 			'.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]',
 			function() {
@@ -1475,7 +1481,7 @@ function redux_hook( object, functionName, callback, before ) {
 			}
 		);
 
-		$( 'body' ).on(
+		body.on(
 			'check_dependencies',
 			function( e, variable ) {
 				e = null;
@@ -1494,7 +1500,7 @@ function redux_hook( object, functionName, callback, before ) {
 
 		// Hide the fold elements on load.
 		// It's better to do this by PHP but there is no filter in tr tag , so is not possible
-		// we going to move each attributes we may need for folding to tr tag.
+		// we're going to move each attributes we may need for folding to tr tag.
 		$.each(
 			redux.opt_names,
 			function( x ) {
@@ -1540,13 +1546,17 @@ function redux_hook( object, functionName, callback, before ) {
 	};
 
 	$.redux.getContainerValue = function( id ) {
-		var value = $( '#' + redux.optName.args.opt_name + '-' + id ).serializeForm();
+		var theId;
+		var value;
+
+		theId = $( '#' + redux.optName.args.opt_name + '-' + id );
+		value = theId.serializeForm();
 
 		if ( null !== value && 'object' === typeof value && value.hasOwnProperty( redux.optName.args.opt_name ) ) {
 			value = value[redux.optName.args.opt_name][id];
 		}
 
-		if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-media' ) ) {
+		if ( theId.hasClass( 'redux-container-media' ) ) {
 			value = value.url;
 		}
 
@@ -1659,10 +1669,13 @@ function redux_hook( object, functionName, callback, before ) {
 		var div;
 		var rawTable;
 		var toFade;
+		var theId;
 
-		toFade = $( '#' + redux.optName.args.opt_name + '-' + id ).parents( 'tr:first' );
+		theId = $( '#' + redux.optName.args.opt_name + '-' + id );
+
+		toFade = theId.parents( 'tr:first' );
 		if ( 0 === toFade ) {
-			toFade = $( '#' + redux.optName.args.opt_name + '-' + id ).parents( 'li:first' );
+			toFade = theId.parents( 'li:first' );
 		}
 
 		toFade.fadeOut(
@@ -1670,7 +1683,7 @@ function redux_hook( object, functionName, callback, before ) {
 			function() {
 				$( this ).addClass( 'hide' );
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-section' ) ) {
+				if ( theId.hasClass( 'redux-container-section' ) ) {
 					div = $( '#section-' + id );
 
 					if ( div.hasClass( 'redux-section-indent-start' ) ) {
@@ -1679,15 +1692,15 @@ function redux_hook( object, functionName, callback, before ) {
 					}
 				}
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-info' ) ) {
+				if ( theId.hasClass( 'redux-container-info' ) ) {
 					$( '#info-' + id ).fadeOut( 50 ).addClass( 'hide' );
 				}
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-divide' ) ) {
+				if ( theId.hasClass( 'redux-container-divide' ) ) {
 					$( '#divide-' + id ).fadeOut( 50 ).addClass( 'hide' );
 				}
 
-				if ( $( '#' + redux.optName.args.opt_name + '-' + id ).hasClass( 'redux-container-raw' ) ) {
+				if ( theId.hasClass( 'redux-container-raw' ) ) {
 					rawTable = $( '#' + redux.optName.args.opt_name + '-' + id ).parents().find( 'table#' + redux.optName.args.opt_name + '-' + id );
 					rawTable.fadeOut( 50 ).addClass( 'hide' );
 				}
@@ -1712,12 +1725,15 @@ function redux_hook( object, functionName, callback, before ) {
 				redux.optName.required_child[id],
 				function( i, parentData ) {
 					var parentValue;
+					var parent;
+
+					parent = $( '#' + redux.optName.args.opt_name + '-' + parentData.parent );
 
 					i = null;
 
-					if ( $( '#' + redux.optName.args.opt_name + '-' + parentData.parent ).parents( 'tr:first' ).hasClass( 'hide' ) ) {
+					if ( parent.parents( 'tr:first' ).hasClass( 'hide' ) ) {
 						show = false;
-					} else if ( $( '#' + redux.optName.args.opt_name + '-' + parentData.parent ).parents( 'li:first' ).hasClass( 'hide' ) ) {
+					} else if ( parent.parents( 'li:first' ).hasClass( 'hide' ) ) {
 						show = false;
 					} else {
 						if ( false !== show ) {
@@ -2009,30 +2025,33 @@ function redux_hook( object, functionName, callback, before ) {
 	$.redux = $.redux || {};
 
 	$.redux.stickyInfo = function() {
+		var sticky      = $( '#redux-sticky' );
+		var infoBar     = $( '#info_bar' );
+		var reduxFooter = $( '#redux-footer' );
 		var stickyWidth = $( '.redux-main' ).innerWidth() - 20;
-		var $width      = $( '#redux-sticky' ).offset().left;
+		var $width      = sticky.offset().left;
 
 		$( '.redux-save-warn' ).css( 'left', $width + 'px' );
 
-		if ( ! $( '#info_bar' ).isOnScreen() && ! $( '#redux-footer-sticky' ).isOnScreen() ) {
-			$( '#redux-footer' ).css(
+		if ( ! infoBar.isOnScreen() && ! $( '#redux-footer-sticky' ).isOnScreen() ) {
+			reduxFooter.css(
 				{ position: 'fixed', bottom: '0', width: stickyWidth, right: 21 }
 			);
 
-			$( '#redux-footer' ).addClass( 'sticky-footer-fixed' );
+			reduxFooter.addClass( 'sticky-footer-fixed' );
 			$( '#redux-sticky-padder' ).show();
 		} else {
-			$( '#redux-footer' ).css(
+			reduxFooter.css(
 				{ background: '#eee', position: 'inherit', bottom: 'inherit', width: 'inherit' }
 			);
 
 			$( '#redux-sticky-padder' ).hide();
-			$( '#redux-footer' ).removeClass( 'sticky-footer-fixed' );
+			reduxFooter.removeClass( 'sticky-footer-fixed' );
 		}
-		if ( ! $( '#info_bar' ).isOnScreen() ) {
-			$( '#redux-sticky' ).addClass( 'sticky-save-warn' );
+		if ( ! infoBar.isOnScreen() ) {
+			sticky.addClass( 'sticky-save-warn' );
 		} else {
-			$( '#redux-sticky' ).removeClass( 'sticky-save-warn' );
+			sticky.removeClass( 'sticky-save-warn' );
 		}
 	};
 })( jQuery );
@@ -2073,9 +2092,9 @@ function redux_hook( object, functionName, callback, before ) {
 					link = elements.slice( index + 1, index + 2 );
 				}
 
-				el    = link.parents( '.redux-container:first' );
-				relid = link.data( 'rel' ); // The group ID of interest.
-				oldid = el.find( '.redux-group-tab-link-li.active:first .redux-group-tab-link-a' ).data( 'rel' );
+				el       = link.parents( '.redux-container:first' );
+				relid    = link.data( 'rel' ); // The group ID of interest.
+				oldid    = el.find( '.redux-group-tab-link-li.active:first .redux-group-tab-link-a' ).data( 'rel' );
 				opt_name = $.redux.getOptName( el );
 
 				if ( oldid === relid ) {
