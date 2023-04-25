@@ -89,7 +89,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 					type="button"
 					class="redux_upload_button button redux_upload_list"
 					name=""
-					id=""
+					id="' . esc_attr( $field_id ) . '-multi-media-upload"
 					value="' . esc_attr( $button_text ) . '" />';
 
 			// list container.

@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.0.4
+* Fixed: #3946 - Multiple `multi_media` fields in same section not respecting `max_upload_count`.
+
 ## 4.4.0.3
 * Fixed: #3945 - Glitch in validation causing color pickers to fail in rare use case.
 
