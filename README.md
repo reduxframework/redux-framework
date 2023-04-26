@@ -2,6 +2,7 @@
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/)
 
 ## New to Version 4.4 ##
+* USER PROFILE METABOXES!
 * The Extendify Templates and Patterns library has been unbundled from Redux. To continue using Extendify, please download the standalone plugin from the WordPress.org repository: [https://wordpress.org/plugins/extendify](https://wordpress.org/plugins/extendify)
 
 ## New to Version 4.3 ##

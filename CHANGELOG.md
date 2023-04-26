@@ -1,16 +1,10 @@
 # Redux Changelog
 
-## 4.4.0.4
-* Fixed: #3946 - Multiple `multi_media` fields in same section not respecting `max_upload_count`.
-
-## 4.4.0.3
-* Fixed: #3945 - Glitch in validation causing color pickers to fail in rare use case.
-
-## 4.4.0.2
+## 4.4.1
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
+* Fixed: Multiple `multi_media` fields in same section not respecting `max_upload_count`.
+* Fixed: Glitch in validation causing color pickers to fail in rare use case.
 * Fixed: Google Maps JavaScript.
-
-## 4.4.0.1
 * Updated: Minimum WordPress version to 5.0
 
 ## 4.4.0

@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.2
-Stable tag: 4.4.0
+Stable tag: 4.4.1
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -114,6 +114,13 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.1 =
+* New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
+* Fixed: Multiple `multi_media` fields in same section not respecting `max_upload_count`.
+* Fixed: Glitch in validation causing color pickers to fail in rare use case.
+* Fixed: Google Maps JavaScript.
+* Updated: Minimum WordPress version to 5.0
+
 = 4.4.0 =
 * Fixed: `Invalid argument` error inside `custom_fonts` on certain setups.
 * Fixed: Deprecated Google Map API broke `google_maps` extension.
