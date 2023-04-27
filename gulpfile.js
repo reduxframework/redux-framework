@@ -666,6 +666,17 @@ function installFontawesome( done ) {
 	done();
 }
 
+var exec = require('child_process').exec
+
+function getFontAwesomeClasses( done ){
+	exec('php vendor/fortawesome/getfonts.php', function (err, stdout, stderr) {
+		console.log(stdout)
+		console.log(stderr)
+	})
+
+	done();
+}
+
 /**
  * Tasks
  */
@@ -676,7 +687,8 @@ gulp.task( 'reduxJS', gulp.series( reduxJS, reduxCombineModules, reduxMedia ) );
 gulp.task( 'vendorsJS', vendorsJS );
 gulp.task( 'images', reduxImages );
 gulp.task( 'translate', translate );
-gulp.task( 'composer', installFontawesome );
+gulp.task( 'composer', gulp.series( installFontawesome, getFontAwesomeClasses ) );
+gulp.task( 'fa', getFontAwesomeClasses );
 
 /**
  * Watch Tasks.
