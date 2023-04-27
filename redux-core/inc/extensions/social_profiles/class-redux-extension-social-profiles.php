@@ -269,14 +269,6 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		 * Enqueue scripts/styles.
 		 */
 		public function enqueue_styles() {
-			wp_enqueue_script(
-				'font-awesome-kit',
-				'https://kit.fontawesome.com/a29229187e.js',
-				array(),
-				time(),
-				true
-			);
-
 			// Field CSS.
 			wp_enqueue_style(
 				'redux-field-social-profiles-frontend',
