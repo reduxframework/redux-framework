@@ -164,7 +164,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					}
 
 					if ( ! isset( $this->field['static'] ) && empty( $this->field['static'] ) ) {
-						echo '<a href="javascript:void(0);" class="button deletion redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-framework' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a>';
+						echo '<a href="javascript:void(0);" class="button deletion redux-warning-primary redux-repeaters-remove">' . esc_html__( 'Delete', 'redux-framework' ) . ' ' . esc_html( $this->field['item_name'] ) . '</a>';
 					}
 
 					echo '</div>';
