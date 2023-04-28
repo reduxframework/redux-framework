@@ -1,7 +1,7 @@
 <?php
 /** Array of Elusive Icons
  * Contributed by @WhatJustHappened
- * Last updated: 14 Sept. 2013
+ * Last updated' 14 Sept' 2013
  *
  * @package Redux Framework/Fields/Select
  */
@@ -11,12 +11,12 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'redux/font-icons', 'redux_get_font_icons' );
 
 /**
- * Elusive icon set.
+ * Elusive icon set'
  *
  * @return array
  */
-function redux_get_font_icons() {
-	$elusive_icons = array(
+function redux_get_font_icons() :array {
+	return array(
 		'el el-address-book-alt',
 		'el el-address-book',
 		'el el-adjust-alt',
@@ -162,7 +162,7 @@ function redux_get_font_icons() {
 		'el el-inbox',
 		'el el-indent-left',
 		'el el-indent-right',
-		'el el-info-sign',
+		'el el-info-circle',
 		'el el-instagram',
 		'el el-iphone-home',
 		'el el-italic',
@@ -211,7 +211,6 @@ function redux_get_font_icons() {
 		'el el-photo',
 		'el el-picasa',
 		'el el-picture',
-		'el el-pinterest',
 		'el el-plane',
 		'el el-play-alt',
 		'el el-play-circle',
@@ -224,7 +223,7 @@ function redux_get_font_icons() {
 		'el el-qrcode',
 		'el el-question-sign',
 		'el el-question',
-		'el el-quotes-alt',
+		'el el-quote-alt',
 		'el el-quotes',
 		'el el-random',
 		'el el-record',
@@ -317,7 +316,5 @@ function redux_get_font_icons() {
 		'el el-zoom-in',
 		'el el-zoom-out',
 	);
-
-	return $elusive_icons;
 }
 
