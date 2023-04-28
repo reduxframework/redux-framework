@@ -52,7 +52,7 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 				}
 
 				if ( 'elusive-icons' === $this->field['data'] || 'elusive-icon' === $this->field['data'] || 'elusive' === $this->field['data'] ) {
-					$icons_file = Redux_Core::$dir . 'inc/fields/select/elusive-icons.php';
+					$icons_file = Redux_Core::$dir . 'lib/elusive-icons.php';
 
 					/**
 					 * Filter 'redux-font-icons-file}'
