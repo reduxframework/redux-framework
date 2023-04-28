@@ -668,7 +668,7 @@ var exec = require('child_process').exec;
 
 function getFontAwesomeClasses( done ){
 	exec(
-		'php redux-core/inc/extensions/icon_select/get-font-classes.php',
+		'php redux-core/inc/lib/get-font-classes.php',
 		function (err, stdout, stderr ) {
 			console.log( stdout );
 			console.log( stderr );
