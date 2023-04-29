@@ -185,11 +185,9 @@ li {
         float: left;
         clear: none;
         height: 57px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
         vertical-align: baseline;
-        
+
         &.no-color-pickers {
             width: 80%;
             max-width: 80%;
@@ -204,8 +202,6 @@ li {
         padding: 0 0 0 10px;
         clear: none;
         height: 57px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
         vertical-align: baseline;
     }

@@ -19,8 +19,6 @@
         border-style: solid;
         -webkit-appearance: none;
         white-space: nowrap;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
 
         span {
@@ -28,9 +26,7 @@
             display: block;
             font-weight: 700;
             -webkit-user-select: none;
-            -khtml-user-select: none;
             -moz-user-select: none;
-            -o-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
@@ -46,9 +42,9 @@
 
     .cb-enable {
         border-right: 0;
-        border-radius: 3px 0px 0px 3px;
-        -moz-border-radius: 3px 0px 0px 3px;
-        -webkit-border-radius: 3px 0px 0px 3px;
+        border-radius: 3px 0 0 3px;
+        -moz-border-radius: 3px 0 0 3px;
+        -webkit-border-radius: 3px 0 0 3px;
 
         &.selected {
             color: #fff;
@@ -57,9 +53,9 @@
 
     .cb-disable {
         border-left: 0;
-        border-radius: 0px 3px 3px 0px;
-        -moz-border-radius: 0px 3px 3px 0px;
-        -webkit-border-radius: 0px 3px 3px 0px;
+        border-radius: 0 3px 3px 0;
+        -moz-border-radius: 0 3px 3px 0;
+        -webkit-border-radius: 0 3px 3px 0;
 
         &.selected {
             color: #fff;

@@ -86,14 +86,6 @@
             font-size: 18px;
             line-height: 26px;
         }
-
-        .ui-icon-triangle-1-n {
-            // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADxJREFUeNpsjwsKADAIQu3u3tsRY6M5gz7w0AqSQFLdZ3ZRgmf44JQ/EOZ9oYOsiDviVemP2oYoWCwBBgDpO6VXVo3RyQAAAABJRU5ErkJggg==) 10px 10px no-repeat!important;
-        }
-
-        .ui-icon-triangle-1-s {
-            // background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADhJREFUeNpi+P//PwM6bmlpwS4IorEKokggC8Il0AVhEv9x6sAmiaz9P05XIUsygmVRAUiAESDAAFHcpVdWtdj/AAAAAElFTkSuQmCC) 10px 10px no-repeat!important;
-        }
     }
 }
 
@@ -103,7 +95,6 @@
 .dp-numberPicker-input {
     display: inline-block;
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
     text-align: center;
     vertical-align: top;
     height: 30px;
@@ -119,9 +110,7 @@
     font-size: 21px;
     cursor: pointer;
     -moz-user-select: none;
-    -khtml-user-select: none;
     -webkit-user-select: none;
-    -o-user-select: none;
     background-color: #33b5e5;
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -148,8 +137,8 @@
     border: 0;
     margin: 0 !important;
     box-shadow:
-        inset 0px 1px 1px rgba(255, 255, 255, 0.5),
-        inset 0px -1px 1px rgba(0, 0, 0, 0.5);
+        inset 0 1px 1px rgba(255, 255, 255, 0.5),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.5);
 
     &:disabled {
         background-color: #eee;

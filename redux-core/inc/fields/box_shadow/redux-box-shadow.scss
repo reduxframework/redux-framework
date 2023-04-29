@@ -8,7 +8,7 @@
                 margin-bottom: 20px;
                 margin-top: 20px;
                 min-height: 180px;
-                border: 0px solid #ddd;
+                border: 0 solid #ddd;
                 background: #f1f1f1;
                 transition: all 0.2s ease;
 
@@ -27,8 +27,6 @@
                 .col-2 {
                     width: 50%;
                     float: left;
-                    -moz-box-sizing: border-box;
-                    -webkit-box-sizing: border-box;
                     box-sizing: border-box;
 
                     &.disabled {
@@ -38,11 +36,11 @@
                             }
                         }
                     }
-                    
+
                     label {
                         color: #999999;
                     }
-                    
+
                     .wp-picker-container {
                         &.disabled {
                             pointer-events:none;
@@ -55,17 +53,17 @@
                             z-index: 200;
                             background: 0;
                             padding: 0!important;
-                            
+
                             a {
                                 z-index: -1;
                             }
                         }
                     }
-                    
+
                     ul li {
-                        padding-bottom: 10px;                        
+                        padding-bottom: 10px;
                     }
-                    
+
                     &:first-child {
                         padding-right: 20px;
                     }

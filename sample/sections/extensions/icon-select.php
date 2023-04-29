@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-require_once Redux_Pro::$dir . 'core/inc/extensions/icon_select/font-awesome-5-free.php';
+require_once Redux_Core::$dir . 'inc/extensions/icon_select/font-awesome-5-free.php';
 
 Redux::set_section(
 	$opt_name,
@@ -23,23 +23,41 @@ Redux::set_section(
 				'title'            => esc_html__( 'Icon Select', 'your-textdomain-here' ),
 				'subtitle'         => esc_html__( 'Select an icon.', 'your-textdomain-here' ),
 				'default'          => '',
-				'options'          => redux_icon_select_fa_5_free(),
+				//'options'          => redux_icon_select_fa_5_free(),
 
 				// Disable auto-enqueue of stylesheet if present in the panel.
 				'enqueue'          => true,
 
 				// Disable auto-enqueue of stylesheet on the front-end.
 				'enqueue_frontend' => false,
-				'stylesheet'       => 'https://use.fontawesome.com/releases/v5.15.3/css/all.css',
+				//'stylesheet'       => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css',
 
 				// If needed to initialize the icon.
 				'prefix'           => 'fa',
 
 				// How each icon begins for this given font.
 				'selector'         => 'fa-',
+			),
+			array(
+				'id'               => 'icon_select_field_2',
+				'type'             => 'icon_select',
+				'title'            => esc_html__( 'Icon Select 2', 'your-textdomain-here' ),
+				'subtitle'         => esc_html__( 'Select an icon.', 'your-textdomain-here' ),
+				'default'          => '',
+				//'options'          => redux_icon_select_fa_5_free(),
 
-				// Change the height of the container. defaults to 300px; .
-				'height'           => 300,
+				// Disable auto-enqueue of stylesheet if present in the panel.
+				'enqueue'          => true,
+
+				// Disable auto-enqueue of stylesheet on the front-end.
+				'enqueue_frontend' => false,
+				'stylesheet'       => array('stylesheet' => '', 'title' => 'title' ), //'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css',
+
+				// If needed to initialize the icon.
+				'prefix'           => 'fa',
+
+				// How each icon begins for this given font.
+				'selector'         => 'fa-',
 			),
 		),
 	)

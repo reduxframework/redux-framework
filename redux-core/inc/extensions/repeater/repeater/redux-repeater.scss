@@ -1,17 +1,16 @@
 .redux-container-repeater {
-    padding: 15px 20px;
     margin-bottom: 7px;
-    padding-top: 0;
+    padding: 0 20px 15px;
 
     h4 {
-        margin: 5px 0px 0px 0px;
+        margin: 5px 0 0 0;
         &:first-child {
-            margin-top: 0px;
+            margin-top: 0;
         }
     }
 
     .description {
-        margin: 5px 0 5px 0px;
+        margin: 5px 0 5px 0;
     }
 
     .redux-repeater-accordion {
@@ -29,7 +28,7 @@
     .redux-repeater-accordion-repeater > div {
         border: 1px solid #dfdfdf !important;
         border-radius: 0 !important;
-        margin-top: 0px !important;
+        margin-top: 0 !important;
         padding: 10px;
     }
 

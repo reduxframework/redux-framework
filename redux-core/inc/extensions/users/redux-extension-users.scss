@@ -14,7 +14,7 @@
         .redux_field_th {
             width: 100% !important;
             float: none;
-            padding-top: 0px;
+            padding-top: 0;
         }
         .redux_field {
             width: 100%;
@@ -30,11 +30,11 @@
     margin-top: 10px;
     .redux-section-title {
         padding-left: 0 !important;
-        margin-bottom: 0px !important;
+        margin-bottom: 0 !important;
     }
 
     .redux-field-container {
-        padding: 10px 0 0px !important;
+        padding: 10px 0 0 !important;
     }
 
     .redux-section-desc {
@@ -85,7 +85,7 @@
         border: none;
         background: none;
         .redux-field-container {
-            padding: 10px 0 0px !important;
+            padding: 10px 0 0 !important;
         }
         .redux-group-tab h3 {
             border-bottom-color: #ddd;
@@ -232,7 +232,7 @@
 }
 
 .wp-color-result {
-    margin: 0 6px 0 0px !important;
+    margin: 0 6px 0 0 !important;
 }
 
 .redux-container .ui-button-text-only .ui-button-text {

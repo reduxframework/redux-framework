@@ -27,9 +27,6 @@
 
         input.wp-picker-default,
         .redux-typography-color {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
             height: 24px;
             padding: 0 14px !important;
@@ -48,9 +45,6 @@
             min-width: 210px !important;
             max-width: 324px !important;
             height: 57px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
 
             &:nth-child(odd) {
@@ -75,9 +69,6 @@
                 line-height: 50px !important;
                 padding: 0 !important;
                 width: 100% !important;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                -o-box-sizing: border-box;
                 box-sizing: border-box;
             }
         }
@@ -103,15 +94,12 @@
             float: left;
             clear: none;
             height: 57px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
             vertical-align: baseline;
 
             &.margin-top,
             &.margin-bottom {
-                margin-left: 0px;
+                margin-left: 0;
             }
 
             &.font-size {
@@ -119,9 +107,6 @@
             }
 
             input.mini {
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                -o-box-sizing: border-box;
                 box-sizing: border-box;
                 width: 78%;
                 text-align: center;
@@ -145,9 +130,6 @@
             min-width: 100%;
             clear: none;
             height: 57px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
             vertical-align: baseline;
         }
@@ -159,7 +141,6 @@
             text-align: left;
             color: #999;
             width: 100%;
-            //margin: 4px 0 2px 0 !important;
             margin:0!important;
             cursor: default;
         }
@@ -173,8 +154,6 @@
             font-size: 10pt;
             height: auto;
             margin: 5px 0 10px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
             box-sizing: border-box;
             overflow: hidden;
         }

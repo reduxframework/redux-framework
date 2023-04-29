@@ -16,7 +16,7 @@
 
 .postbox {
     .redux_field_th {
-        padding-bottom: 0px !important;
+        padding-bottom: 0 !important;
     }
 
     .redux-group-tab {
@@ -52,7 +52,6 @@
 
         .redux_main {
             border-left: 1px solid #D8D8D8;
-            moz-box-shadow: none;
             -webkit-box-shadow: none;
             box-shadow: none;
 
@@ -128,8 +127,7 @@
 .redux-box-side {
     .redux-main {
         .redux-field-container {
-            padding: 0;
-            padding-top: 5px;
+            padding: 5px 0 0;
 
             .select2-container,
             select {
@@ -177,7 +175,7 @@
         .form-table > tbody > tr {
             display: block !important;
             width: 100% !important;
-            padding: 0px !important;
+            padding: 0 !important;
 
             &.hide {
                 display: none !important;
@@ -348,7 +346,7 @@
 }
 
 .wp-color-result {
-    margin: 0 6px 0 0px !important;
+    margin: 0 6px 0 0 !important;
 }
 
 .redux-container .ui-button-text-only .ui-button-text {
