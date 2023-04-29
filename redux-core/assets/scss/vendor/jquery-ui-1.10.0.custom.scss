@@ -129,12 +129,7 @@
 
     .ui-widget-content {
         border: 1px solid #dddddd;
-        border-top-width: 1px;
-        border-right-width: 1px;
-        border-bottom-width: 1px;
-        border-left-width: 1px;
-        background: #ffffff;
-        background-image: none;
+        background: #ffffff none;
         color: #333333;
     }
 
@@ -429,7 +424,6 @@
         color: #404040;
         background-color: #eedc94;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#fceec1), to(#eedc94));
         background-image: -moz-linear-gradient(top, #fceec1, #eedc94);
         background-image: -ms-linear-gradient(top, #fceec1, #eedc94);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fceec1), color-stop(100%, #eedc94));
@@ -475,7 +469,6 @@
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
         background-color: #c43c35;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
         background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
         background-image: -ms-linear-gradient(top, #ee5f5b, #c43c35);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee5f5b), color-stop(100%, #c43c35));
@@ -1092,7 +1085,6 @@
     .ui-corner-tl {
         -moz-border-radius-topleft: 4px;
         -webkit-border-top-left-radius: 4px;
-        -khtml-border-top-left-radius: 4px;
         border-top-left-radius: 4px;
     }
     .ui-corner-all,
@@ -1101,7 +1093,6 @@
     .ui-corner-tr {
         -moz-border-radius-topright: 4px;
         -webkit-border-top-right-radius: 4px;
-        -khtml-border-top-right-radius: 4px;
         border-top-right-radius: 4px;
     }
     .ui-corner-all,
@@ -1110,7 +1101,6 @@
     .ui-corner-bl {
         -moz-border-radius-bottomleft: 4px;
         -webkit-border-bottom-left-radius: 4px;
-        -khtml-border-bottom-left-radius: 4px;
         border-bottom-left-radius: 4px;
     }
     .ui-corner-all,
@@ -1119,10 +1109,8 @@
     .ui-corner-br {
         -moz-border-radius-bottomright: 4px;
         -webkit-border-bottom-right-radius: 4px;
-        -khtml-border-bottom-right-radius: 4px;
         border-bottom-right-radius: 4px;
     }
-
 
     /* Overlays */
 
@@ -1139,7 +1127,6 @@
         opacity: 0.3;
         filter: alpha(Opacity=30);
         -moz-border-radius: 8px;
-        -khtml-border-radius: 8px;
         -webkit-border-radius: 8px;
         border-radius: 8px;
     }
@@ -1249,7 +1236,6 @@
         color: #fff;
         background-color: #0064cd;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
         background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
         background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
@@ -1267,7 +1253,6 @@
         color: #fff;
         background-color: #57a957;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462), to(#57a957));
         background-image: -moz-linear-gradient(top, #62c462, #57a957);
         background-image: -ms-linear-gradient(top, #62c462, #57a957);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62c462), color-stop(100%, #57a957));
@@ -1284,7 +1269,6 @@
         color: #fff;
         background-color: #c43c35;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
         background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
         background-image: -ms-linear-gradient(top, #ee5f5b, #c43c35);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee5f5b), color-stop(100%, #c43c35));
@@ -1374,7 +1358,6 @@
         color: #fff;
         background-color: #0064cd;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
         background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
         background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
@@ -1414,7 +1397,7 @@
     .ui-datepicker .ui-datepicker-header {
         position: relative;
         padding: 0.2em 0;
-        border: 0px;
+        border: 0;
         font-weight: bold;
         width: 100%;
         padding: 4px 0;
@@ -1607,14 +1590,14 @@
         background-color: #bfbfbf;
         cursor: pointer;
         padding: 0 4px;
-        margin-bottom: 0px;
+        margin-bottom: 0;
 
     }
 
 
     .ui-datepicker td a {
-        margin-bottom: 0px;
-        border: 0px;
+        margin-bottom: 0;
+        border: 0;
     }
 
     .ui-datepicker td:hover {
@@ -1622,9 +1605,9 @@
     }
 
     .ui-datepicker td .ui-state-default {
-        border: 0px;
+        border: 0;
         background: none;
-        margin-bottom: 0px;
+        margin-bottom: 0;
         padding: 5px;
         color: gray;
         text-align: center;
@@ -1634,9 +1617,9 @@
 
     .ui-datepicker td .ui-state-active {
         background: #bfbfbf;
-        margin-bottom: 0px;
+        margin-bottom: 0;
         font-size: normal;
-        text-shadow: 0px;
+        text-shadow: 0;
         color: #fff;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
@@ -1648,7 +1631,6 @@
         background: #0064cd;
         background-color: #0064cd;
         background-repeat: repeat-x;
-        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
         background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
         background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
@@ -1661,7 +1643,6 @@
         border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
-        -khtml-border-radius: 4px;
         border-radius: 4px;
     }
 

@@ -55,7 +55,7 @@
             .iris-slider-offset {
                 position: absolute;
                 top: 2px;
-                left: 0px;
+                left: 0;
                 right: 0;
                 bottom: 4px;
                 width: 28px; //17
@@ -77,7 +77,6 @@
 
             .wp-color-result {
                 outline: 0;
-                margin: 0;
                 height: 24px !important;
                 margin: 0 6px 6px 0 !important;
             }
@@ -109,7 +108,7 @@
     .redux-main input.wp-picker-default,
     .redux-main .redux-typography-container input.wp-picker-default,
     .redux-main .redux-typography-container .redux-typography-color {
-        padding: 0px 4px !important;
+        padding: 0 4px !important;
     }
     .redux-main input.wp-color-picker {
         width: 65px !important;

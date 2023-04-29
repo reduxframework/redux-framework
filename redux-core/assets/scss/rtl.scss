@@ -16,8 +16,8 @@ html[dir="rtl"]
 }
 
 .redux-main {
-    border-left: 0px;
-    margin-left: 0px;
+    border-left: 0;
+    margin-left: 0;
     border-right: 1px solid #d8d8d8;
     margin-right: 201px;
 
@@ -28,7 +28,7 @@ html[dir="rtl"]
 }
 
 .redux-group-tab-link-a {
-    padding-left: 0px;
+    padding-left: 0;
     padding-right: 30px;
 
     i {
@@ -37,13 +37,13 @@ html[dir="rtl"]
     }
 
     span.group_title {
-        padding-left: 0px;
+        padding-left: 0;
         padding-right: 30px;
     }
 }
 
 .redux_slider {
-    margin-left: 0px;
+    margin-left: 0;
     margin-right: 15px;
 }
 

@@ -124,7 +124,7 @@ License: MIT
 .sp-clear-enabled .sp-clear {
     display: block;
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 84%;
@@ -143,8 +143,7 @@ License: MIT
 .sp-container.sp-dragging .sp-input,
 .sp-container button {
     -webkit-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
+    -moz-user-select: none;
     user-select: none;
 }
 
@@ -314,9 +313,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .sp-hue,
 .sp-clear {
     font: normal 12px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -365,8 +361,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .sp-palette-container {
     float: left;
     position: relative;
-    padding: 10px;
-    padding-bottom: 300px;
+    padding: 10px 10px 300px;
     margin-bottom: -290px;
 }
 
@@ -528,7 +523,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     border-bottom: 1px solid #888;
     -webkit-box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
     -moz-box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
-    -ms-box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
     -o-box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
     box-shadow: inset 0 0 5px 2px #aaa, 0 1px 0 0 #eee;
 }
@@ -536,9 +530,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .sp-cancel {
     font-size: 11px;
     color: #d93f3f !important;
-    margin: 0;
     padding: 2px;
-    margin-right: 5px;
+    margin: 0 5px 0 0;
     vertical-align: middle;
     text-decoration: none;
 
