@@ -125,7 +125,7 @@ if ( ! class_exists( 'Redux_Checkbox', false ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-checkbox-css',
+					'redux-field-checkbox',
 					Redux_Core::$url . 'inc/fields/checkbox/redux-checkbox.css',
 					array(),
 					$this->timestamp
@@ -133,9 +133,9 @@ if ( ! class_exists( 'Redux_Checkbox', false ) ) {
 			}
 
 			wp_enqueue_script(
-				'redux-field-checkbox-js',
+				'redux-field-checkbox',
 				Redux_Core::$url . 'inc/fields/checkbox/redux-checkbox' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				$this->timestamp,
 				true
 			);

@@ -233,7 +233,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 			$min = Redux_Functions::is_min();
 
 			wp_enqueue_script(
-				'redux-datetime-slider-js',
+				'redux-datetime-slider',
 				$this->url . 'vendor/jquery-ui-sliderAccess' . $min . '.js',
 				array( 'jquery' ),
 				'0.3',
@@ -241,23 +241,23 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 			);
 
 			wp_enqueue_script(
-				'redux-datetime-js',
+				'redux-datetime',
 				$this->url . 'vendor/jquery-ui-timepicker-addon' . $min . '.js',
 				array(
 					'jquery',
 					'jquery-ui-datepicker',
 					'jquery-ui-widget',
 					'jquery-ui-slider',
-					'redux-datetime-slider-js',
+					'redux-datetime-slider',
 				),
 				'1.6.3',
 				true
 			);
 
 			wp_enqueue_script(
-				'redux-field-datetime-js',
+				'redux-field-datetime',
 				$this->url . 'redux-datetime' . $min . '.js',
-				array( 'jquery', 'redux-datetime-js', 'redux-js' ),
+				array( 'jquery', 'redux-datetime', 'redux' ),
 				Redux_Extension_Datetime::$version,
 				true
 			);

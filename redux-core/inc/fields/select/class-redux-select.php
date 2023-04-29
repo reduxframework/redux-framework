@@ -202,29 +202,36 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 		}
 
 		/**
+		 * Do enqueue for each field instance.
+		 *
+		 * @return void
+		 */
+		public function always_enqueue() {
+			if ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) {
+				wp_enqueue_script( 'jquery-ui-sortable' );
+			}
+		}
+
+		/**
 		 * Enqueue Function.
 		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
 		 *
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function enqueue() {
-			wp_enqueue_style( 'select2-css' );
-
-			if ( isset( $this->field['sortable'] ) && $this->field['sortable'] ) {
-				wp_enqueue_script( 'jquery-ui-sortable' );
-			}
+			wp_enqueue_style( 'select2' );
 
 			wp_enqueue_script(
-				'redux-field-select-js',
+				'redux-field-select',
 				Redux_Core::$url . 'inc/fields/select/redux-select' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'select2-js', 'redux-js' ),
+				array( 'jquery', 'select2', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-select-css',
+					'redux-field-select',
 					Redux_Core::$url . 'inc/fields/select/redux-select.css',
 					array(),
 					$this->timestamp

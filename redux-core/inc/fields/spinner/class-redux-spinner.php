@@ -120,24 +120,24 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 */
 		public function enqueue() {
 			wp_enqueue_script(
-				'redux-field-spinner-custom-js',
+				'redux-field-spinner-custom',
 				Redux_Core::$url . 'inc/fields/spinner/vendor/jquery.ui.spinner' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			wp_enqueue_script(
-				'redux-field-spinner-js',
+				'redux-field-spinner',
 				Redux_Core::$url . 'inc/fields/spinner/redux-spinner' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-field-spinner-custom-js', 'jquery-ui-core', 'jquery-ui-dialog', 'redux-js' ),
+				array( 'jquery', 'redux-field-spinner-custom', 'jquery-ui-core', 'jquery-ui-dialog', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-spinner-css',
+					'redux-field-spinner',
 					Redux_Core::$url . 'inc/fields/spinner/redux-spinner.css',
 					array(),
 					$this->timestamp

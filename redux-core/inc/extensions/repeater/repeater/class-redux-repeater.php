@@ -107,7 +107,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 								if ( isset( $field['options'] ) ) {
 
 									// Sorter data filter.
-									if ( 'sorter' === $field['type'] && isset( $field['data'] ) && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
+									if ( 'sorter' === $field['type'] && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
 										if ( ! isset( $field['args'] ) ) {
 											$field['args'] = array();
 										}
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 									$repeater['title'] = ! isset( $this->parent->options[ $field['id'] ][ $x ] ) ? $default : $this->parent->options[ $field['id'] ][ $x ];
 								}
 
-								if ( isset( $field['options'] ) && is_array( $field['options'] ) && ! empty( $field['options'] ) ) {
+								if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 									if ( isset( $field['options'][ $repeater['title'] ] ) ) {
 										$repeater['title'] = $field['options'][ $repeater['title'] ];
 									}
@@ -258,17 +258,17 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 			$min = Redux_Functions::is_min();
 
 			wp_enqueue_script(
-				'redux-field-repeater-js',
+				'redux-field-repeater',
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$this->url . 'redux-repeater' . $min . '.js',
-				array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'jquery-ui-sortable', 'wp-color-picker', 'redux-js' ),
+				array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'jquery-ui-sortable', 'wp-color-picker', 'redux' ),
 				Redux_Extension_Repeater::$version,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-repeater-css',
+					'redux-field-repeater',
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
 					$this->url . 'redux-repeater.css',
 					array(),
@@ -311,7 +311,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 			if ( isset( $field['options'] ) ) {
 
 				// Sorter data filter.
-				if ( 'sorter' === $field['type'] && isset( $field['data'] ) && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
+				if ( 'sorter' === $field['type'] && ! empty( $field['data'] ) && is_array( $field['data'] ) ) {
 					if ( ! isset( $field['args'] ) ) {
 						$field['args'] = array();
 					}
@@ -372,7 +372,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 				$value = array();
 			}
 
-			if ( isset( $field['fields'] ) && ! empty( $field['fields'] ) ) {
+			if ( ! empty( $field['fields'] ) ) {
 				ob_start();
 
 				foreach ( $field['fields'] as $f ) {

@@ -48,6 +48,8 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		protected $orig = array();
 
 		/**
+		 * ReduxFramework object.
+		 *
 		 * @var object
 		 */
 		private $parent;
@@ -125,7 +127,7 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		 */
 		public function add_widget_area_area() {
 			if ( isset( $_POST ) && isset( $_POST['redux-add-widget-nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['redux-add-widget-nonce'] ) ), 'add-redux-widget_area-nonce' ) ) {
-				if ( isset( $_POST['redux-add-widget-input'] ) && ! empty( $_POST['redux-add-widget-input'] ) ) {
+				if ( ! empty( $_POST['redux-add-widget-input'] ) ) {
 					$this->widget_areas = $this->get_widget_areas();
 
 					$this->widget_areas[] = $this->check_widget_area_name( sanitize_text_field( wp_unslash( $_POST['redux-add-widget-input'] ) ) );
@@ -277,7 +279,7 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 			wp_enqueue_style( 'dashicons' );
 
 			wp_enqueue_script(
-				'redux-widget-areas-js',
+				'redux-widget-areas',
 				$this->extension_url . 'redux-extension-widget-areas' . $min . '.js',
 				array( 'jquery' ),
 				Redux_Extension_Widget_Areas::$version,
@@ -285,7 +287,7 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 			);
 
 			wp_enqueue_style(
-				'redux-widget-areas-css',
+				'redux-widget-areas',
 				$this->extension_url . 'redux-extension-widget-areas.css',
 				array(),
 				time()
@@ -293,7 +295,7 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 
 			// Localize script.
 			wp_localize_script(
-				'redux-widget-areas-js',
+				'redux-widget-areas',
 				'reduxWidgetAreasLocalize',
 				array(
 					'count'   => count( $this->orig ),

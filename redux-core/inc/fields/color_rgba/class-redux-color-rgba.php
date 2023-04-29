@@ -161,21 +161,21 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 
 			// Field dependent JS.
 			wp_enqueue_script(
-				'redux-field-color-rgba-js',
+				'redux-field-color-rgba',
 				Redux_Core::$url . 'inc/fields/color_rgba/redux-color-rgba' . $min . '.js',
-				array( 'jquery', 'redux-spectrum-js', 'redux-js' ),
+				array( 'jquery', 'redux-spectrum', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			// Spectrum CSS.
-			if ( ! wp_style_is( 'redux-spectrum-css' ) ) {
-				wp_enqueue_style( 'redux-spectrum-css' );
+			if ( ! wp_style_is( 'redux-spectrum' ) ) {
+				wp_enqueue_style( 'redux-spectrum' );
 			}
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-color-rgba-css',
+					'redux-field-color-rgba',
 					Redux_Core::$url . 'inc/fields/color_rgba/redux-color-rgba.css',
 					array(),
 					$this->timestamp

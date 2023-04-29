@@ -874,6 +874,36 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		}
 
 		/**
+		 * Enqueue for every field instance.
+		 */
+		public function always_enqueue() {
+			$min = Redux_Functions::is_min();
+
+			if ( isset( $this->field['color_alpha'] ) && is_array( $this->field['color_alpha'] ) ) {
+				if ( $this->field['color_alpha']['color'] || $this->field['color_alpha']['shadow-color'] ) {
+					wp_enqueue_script( 'redux-wp-color-picker-alpha' );
+				}
+			}
+
+			if ( ! wp_style_is( 'redux-nouislider' ) && isset( $this->field['text-shadow'] ) && $this->field['text-shadow'] ) {
+				wp_enqueue_style(
+					'redux-nouislider',
+					Redux_Core::$url . "assets/css/vendor/nouislider$min.css",
+					array(),
+					'5.0.0'
+				);
+
+				wp_enqueue_script(
+					'redux-nouislider',
+					Redux_Core::$url . "assets/js/vendor/nouislider/redux.jquery.nouislider$min.js",
+					array( 'jquery' ),
+					'5.0.0',
+					true
+				);
+			}
+		}
+
+		/**
 		 * Enqueue Function.
 		 * If this field requires any scripts, or CSS define this function and register/enqueue the scripts/css
 		 *
@@ -882,22 +912,34 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::is_min();
 
-			if ( ! wp_style_is( 'select2-css' ) ) {
-				wp_enqueue_style( 'select2-css' );
+			if ( ! wp_style_is( 'select2' ) ) {
+				wp_enqueue_style( 'select2' );
 			}
 
 			if ( ! wp_style_is( 'wp-color-picker' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			wp_enqueue_script( 'redux-webfont-js', '//' . 'ajax' . '.googleapis' . '.com/ajax/libs/webfont/1.6.26/webfont.js', array(), '1.6.26', true ); // phpcs:ignore Generic.Strings.UnnecessaryStringConcat
+			wp_enqueue_script(
+				'redux-webfont',
+				'//' . 'ajax' . '.googleapis' . '.com/ajax/libs/webfont/1.6.26/webfont.js', // phpcs:ignore Generic.Strings.UnnecessaryStringConcat
+				array(),
+				'1.6.26',
+				true
+			);
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js', 'redux-webfont-js' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'select2', 'redux', 'redux-webfont' );
 
-			wp_enqueue_script( 'redux-field-typography-js', Redux_Core::$url . "inc/fields/typography/redux-typography$min.js", $dep_array, $this->timestamp, true );
+			wp_enqueue_script(
+				'redux-field-typography',
+				Redux_Core::$url . "inc/fields/typography/redux-typography$min.js",
+				$dep_array,
+				$this->timestamp,
+				true
+			);
 
 			wp_localize_script(
-				'redux-field-typography-js',
+				'redux-field-typography',
 				'redux_typography_ajax',
 				array(
 					'ajaxurl'             => esc_url( admin_url( 'admin-ajax.php' ) ),
@@ -911,34 +953,11 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				)
 			);
 
-			if ( isset( $this->field['color_alpha'] ) && is_array( $this->field['color_alpha'] ) ) {
-				if ( $this->field['color_alpha']['color'] || $this->field['color_alpha']['shadow-color'] ) {
-					wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
-				}
-			}
-
-			if ( ! wp_style_is( 'redux-nouislider-css' ) && isset( $this->field['text-shadow'] ) && $this->field['text-shadow'] ) {
-				wp_enqueue_style(
-					'redux-nouislider-css',
-					Redux_Core::$url . "assets/css/vendor/nouislider$min.css",
-					array(),
-					'5.0.0'
-				);
-
-				wp_enqueue_script(
-					'redux-nouislider-js',
-					Redux_Core::$url . "assets/js/vendor/nouislider/redux.jquery.nouislider$min.js",
-					array( 'jquery' ),
-					'5.0.0',
-					true
-				);
-			}
-
 			if ( $this->parent->args['dev_mode'] ) {
-				wp_enqueue_style( 'redux-color-picker-css' );
+				wp_enqueue_style( 'redux-color-picker' );
 
 				wp_enqueue_style(
-					'redux-field-typography-css',
+					'redux-field-typography',
 					Redux_Core::$url . 'inc/fields/typography/redux-typography.css',
 					array(),
 					$this->timestamp

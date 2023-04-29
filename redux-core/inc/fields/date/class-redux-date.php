@@ -49,7 +49,7 @@ if ( ! class_exists( 'Redux_Date', false ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-date-css',
+					'redux-field-date',
 					Redux_Core::$url . 'inc/fields/date/redux-date.css',
 					array(),
 					$this->timestamp
@@ -57,9 +57,9 @@ if ( ! class_exists( 'Redux_Date', false ) ) {
 			}
 
 			wp_enqueue_script(
-				'redux-field-date-js',
+				'redux-field-date',
 				Redux_Core::$url . 'inc/fields/date/redux-date' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'redux-js' ),
+				array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'redux' ),
 				$this->timestamp,
 				true
 			);

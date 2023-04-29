@@ -224,25 +224,25 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 
 			if ( $filters_enabled ) {
 				if ( $field['gradient-type'] ) {
-					if ( ! wp_style_is( 'select2-css' ) ) {
-						wp_enqueue_style( 'select2-css' );
+					if ( ! wp_style_is( 'select2' ) ) {
+						wp_enqueue_style( 'select2' );
 					}
 
-					if ( ! wp_script_is( 'select2-js' ) ) {
-						wp_enqueue_script( 'select2-js' );
+					if ( ! wp_script_is( 'select2' ) ) {
+						wp_enqueue_script( 'select2' );
 					}
 				}
 
-				if ( ! wp_style_is( 'redux-nouislider-css' ) ) {
+				if ( ! wp_style_is( 'redux-nouislider' ) ) {
 					wp_enqueue_style(
-						'redux-nouislider-css',
+						'redux-nouislider',
 						Redux_Core::$url . 'assets/css/vendor/nouislider' . $min . '.css',
 						array(),
 						'5.0.0'
 					);
 
 					wp_enqueue_script(
-						'redux-nouislider-js',
+						'redux-nouislider',
 						Redux_Core::$url . 'assets/js/vendor/nouislider/redux.jquery.nouislider' . $min . '.js',
 						array( 'jquery' ),
 						'5.0.0',
@@ -251,7 +251,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 				}
 
 				wp_enqueue_script(
-					'redux-gradient-filters-js',
+					'redux-gradient-filters',
 					Redux_Core::$url . 'inc/lib/gradient-filters/gradient-filters' . Redux_Functions::isMin() . '.js',
 					array( 'jquery' ),
 					Redux_Core::$version,
@@ -259,7 +259,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 				);
 
 				wp_enqueue_style(
-					'redux-gradient-filters-css',
+					'redux-gradient-filters',
 					Redux_Core::$url . 'inc/lib/gradient-filters/gradient-filters.css',
 					array(),
 					Redux_Core::$version

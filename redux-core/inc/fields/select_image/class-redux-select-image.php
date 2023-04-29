@@ -153,19 +153,19 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function enqueue() {
-			wp_enqueue_style( 'select2-css' );
+			wp_enqueue_style( 'select2' );
 
 			wp_enqueue_script(
-				'redux-field-select-image-js',
+				'redux-field-select-image',
 				Redux_Core::$url . 'inc/fields/select_image/redux-select-image' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'select2-js', 'redux-js' ),
+				array( 'jquery', 'select2', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-select-image-css',
+					'redux-field-select-image',
 					Redux_Core::$url . 'inc/fields/select_image/redux-select-image.css',
 					array(),
 					$this->timestamp

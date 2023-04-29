@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.1.1
+* Updated: ACE Editor 1.18.0
+* Improved: Redux no longer enqueues resources for each field instance.
+
 ## 4.4.1
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
 * Fixed: Multiple `multi_media` fields in same section not respecting `max_upload_count`.

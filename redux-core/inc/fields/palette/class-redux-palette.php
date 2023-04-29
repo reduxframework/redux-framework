@@ -68,16 +68,16 @@ if ( ! class_exists( 'Redux_Palette', false ) ) {
 			$min = Redux_Functions::is_min();
 
 			wp_enqueue_script(
-				'redux-field-palette-js',
+				'redux-field-palette',
 				Redux_Core::$url . 'inc/fields/palette/redux-palette' . $min . '.js',
-				array( 'jquery', 'redux-js', 'jquery-ui-button', 'jquery-ui-core' ),
+				array( 'jquery', 'redux', 'jquery-ui-button', 'jquery-ui-core' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-palette-css',
+					'redux-field-palette',
 					Redux_Core::$url . 'inc/fields/palette/redux-palette.css',
 					array(),
 					$this->timestamp

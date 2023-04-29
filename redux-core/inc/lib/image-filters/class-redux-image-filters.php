@@ -153,16 +153,16 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 			$min = Redux_Functions::is_min();
 
 			if ( $filters_enabled ) {
-				if ( ! wp_style_is( 'redux-nouislider-css' ) ) {
+				if ( ! wp_style_is( 'redux-nouislider' ) ) {
 					wp_enqueue_style(
-						'redux-nouislider-css',
+						'redux-nouislider',
 						Redux_Core::$url . 'assets/css/vendor/nouislider/redux.jquery.nouislider.css',
 						array(),
 						'5.0.0'
 					);
 
 					wp_enqueue_script(
-						'redux-nouislider-js',
+						'redux-nouislider',
 						Redux_Core::$url . 'assets/js/vendor/nouislider/redux.jquery.nouislider' . $min . '.js',
 						array( 'jquery' ),
 						'5.0.0',
@@ -171,7 +171,7 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 				}
 
 				wp_enqueue_script(
-					'redux-image-filters-js',
+					'redux-image-filters',
 					Redux_Core::$url . 'inc/lib/image-filters/image-filters' . $min . '.js',
 					array( 'jquery' ),
 					Redux_Core::$version,
@@ -179,7 +179,7 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 				);
 
 				wp_enqueue_style(
-					'redux-image-filters-css',
+					'redux-image-filters',
 					Redux_Core::$url . 'inc/lib/image-filters/image-filters.css',
 					array(),
 					Redux_Core::$version

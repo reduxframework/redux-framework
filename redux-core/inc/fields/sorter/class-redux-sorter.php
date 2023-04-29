@@ -198,7 +198,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-sorter-css',
+					'redux-field-sorter',
 					Redux_Core::$url . 'inc/fields/sorter/redux-sorter.css',
 					array(),
 					$this->timestamp
@@ -206,9 +206,9 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 			}
 
 			wp_enqueue_script(
-				'redux-field-sorter-js',
+				'redux-field-sorter',
 				Redux_Core::$url . 'inc/fields/sorter/redux-sorter' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js', 'jquery-ui-sortable' ),
+				array( 'jquery', 'redux', 'jquery-ui-sortable' ),
 				$this->timestamp,
 				true
 			);

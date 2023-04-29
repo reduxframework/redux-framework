@@ -39,8 +39,8 @@ if ( ! class_exists( 'Redux_Js_Button' ) ) {
 
 			// Button render.
 			if ( isset( $this->field['buttons'] ) && is_array( $this->field['buttons'] ) ) {
-				echo '<div 
-	                    class="redux-js-button-button-container" 
+				echo '<div
+	                    class="redux-js-button-button-container"
 	                    id="redux-js-button-button-container"
 	                    style="display: inline-flex;"
 	                >';
@@ -66,15 +66,13 @@ if ( ! class_exists( 'Redux_Js_Button' ) ) {
 			echo '</div>';
 		}
 
+
 		/**
-		 * Enqueue Function.
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 * Do enqueue for every field instance.
 		 *
-		 * @since       1.0.0
-		 * @access      public
-		 * @return      void
+		 * @return void
 		 */
-		public function enqueue() {
+		public function always_enqueue() {
 			// Make sure script data exists first.
 			if ( isset( $this->field['script'] ) && ! empty( $this->field['script'] ) ) {
 
@@ -93,7 +91,7 @@ if ( ! class_exists( 'Redux_Js_Button' ) ) {
 				// If a script exists, enqueue it.
 				if ( '' !== $script_url ) {
 					wp_enqueue_script(
-						'redux-js-button-' . $this->field['id'] . '-js',
+						'redux-js-button-' . $this->field['id'],
 						$script_url,
 						$script_dep,
 						$script_ver,
@@ -103,19 +101,30 @@ if ( ! class_exists( 'Redux_Js_Button' ) ) {
 
 				if ( isset( $this->field['enqueue_ajax'] ) && $this->field['enqueue_ajax'] ) {
 					wp_localize_script(
-						'redux-js-button-' . $this->field['id'] . '-js',
+						'redux-js-button-' . $this->field['id'],
 						'redux_ajax_script',
 						array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) )
 					);
 				}
 			}
+		}
+
+		/**
+		 * Enqueue Function.
+		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 *
+		 * @since       1.0.0
+		 * @access      public
+		 * @return      void
+		 */
+		public function enqueue() {
 
 			// Set up min files for dev_mode = false.
 			$min = Redux_Functions::isMin();
 
 			// Field dependent JS.
 			wp_enqueue_script(
-				'redux-field-js-button-js',
+				'redux-field-js-button',
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				apply_filters( "redux/js_button/{$this->parent->args['opt_name']}/enqueue/redux-field-js-button-js", $this->url . 'redux-js-button' . $min . '.js' ),
 				array( 'jquery' ),

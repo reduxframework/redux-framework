@@ -321,6 +321,13 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 
 		/**
 		 * Unused for now.
+		 */
+		public function always_enqueue() {
+
+		}
+
+		/**
+		 * Unused for now.
 		 *
 		 * @param array  $field Field array.
 		 * @param string $value Value array.

@@ -265,6 +265,17 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 		}
 
 		/**
+		 * Do enqueue for each field instance.
+		 *
+		 * @return void
+		 */
+		public function always_enqueue() {
+			if ( isset( $this->field['color_alpha'] ) && ( $this->field['color_alpha'] || ( $this->field['color_alpha']['inset-shadow'] || $this->field['color_alpha']['drop-shadow'] ) ) ) {
+				wp_enqueue_script( 'redux-wp-color-picker-alpha' );
+			}
+		}
+
+		/**
 		 * Enqueue Function.
 		 * If this field requires any scripts, or CSS define this function and register/enqueue the scripts/css
 		 *
@@ -279,14 +290,10 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'redux-js' );
-
-			if ( isset( $this->field['color_alpha'] ) && ( $this->field['color_alpha'] || ( $this->field['color_alpha']['inset-shadow'] || $this->field['color_alpha']['drop-shadow'] ) ) ) {
-				wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
-			}
+			$dep_array = array( 'jquery', 'wp-color-picker', 'redux' );
 
 			wp_enqueue_script(
-				'redux-field-box-shadow-js',
+				'redux-field-box-shadow',
 				Redux_Core::$url . 'inc/fields/box_shadow/redux-box-shadow' . $min . '.js',
 				$dep_array,
 				$this->timestamp,
@@ -294,14 +301,14 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 			);
 
 			wp_enqueue_style(
-				'redux-nouislider-css',
+				'redux-nouislider',
 				Redux_Core::$url . 'assets/css/vendor/nouislider' . $min . '.css',
 				array(),
 				'5.0.0'
 			);
 
 			wp_enqueue_script(
-				'redux-nouislider-js',
+				'redux-nouislider',
 				Redux_Core::$url . 'assets/js/vendor/nouislider/redux.jquery.nouislider' . $min . '.js',
 				array( 'jquery' ),
 				'5.0.0',
@@ -310,13 +317,13 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-box-shadow-css',
+					'redux-field-box-shadow',
 					Redux_Core::$url . 'inc/fields/box_shadow/redux-box-shadow.css',
 					array(),
 					time()
 				);
 
-				wp_enqueue_style( 'redux-color-picker-css' );
+				wp_enqueue_style( 'redux-color-picker' );
 			}
 		}
 	}

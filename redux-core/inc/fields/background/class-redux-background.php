@@ -373,18 +373,18 @@ if ( ! class_exists( 'Redux_Background', false ) ) {
 				}
 			}
 
-			if ( ! wp_style_is( 'select2-css' ) ) {
-				wp_enqueue_style( 'select2-css' );
+			if ( ! wp_style_is( 'select2' ) ) {
+				wp_enqueue_style( 'select2' );
 			}
 
 			if ( ! wp_style_is( 'wp-color-picker' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'select2', 'redux' );
 
 			wp_enqueue_script(
-				'redux-field-background-js',
+				'redux-field-background',
 				Redux_Core::$url . 'inc/fields/background/redux-background' . Redux_Functions::is_min() . '.js',
 				$dep_array,
 				$this->timestamp,
@@ -393,13 +393,13 @@ if ( ! class_exists( 'Redux_Background', false ) ) {
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-background-css',
+					'redux-field-background',
 					Redux_Core::$url . 'inc/fields/background/redux-background.css',
 					array(),
 					$this->timestamp
 				);
 
-				wp_enqueue_style( 'redux-color-picker-css' );
+				wp_enqueue_style( 'redux-color-picker' );
 			}
 		}
 

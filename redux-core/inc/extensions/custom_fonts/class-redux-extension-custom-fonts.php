@@ -204,7 +204,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		public function enqueue_output() {
 			if ( file_exists( $this->upload_dir . 'fonts.css' ) ) {
 				wp_enqueue_style(
-					'redux-custom-fonts-css',
+					'redux-custom-fonts',
 					$this->upload_url . 'fonts.css',
 					array(),
 					time()

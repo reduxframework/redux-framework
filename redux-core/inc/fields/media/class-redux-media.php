@@ -262,6 +262,15 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 		}
 
 		/**
+		 * Do enqueue for each field instance.
+		 *
+		 * @return void
+		 */
+		public function always_enqueue() {
+			Redux_Image_Filters::enqueue( $this->field, $this->filters_enabled );
+		}
+
+		/**
 		 * Enqueue Function.
 		 * If this field requires any scripts, or CSS define this function and register/enqueue the scripts/css
 		 *
@@ -276,20 +285,16 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 				wp_enqueue_script( 'media-upload' );
 			}
 
-			if ( $this->filters_enabled ) {
-				Redux_Image_Filters::enqueue( $this->field, $this->filters_enabled );
-			}
-
 			wp_enqueue_script(
-				'redux-field-media-js',
+				'redux-field-media',
 				Redux_Core::$url . 'assets/js/media/media' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
-				wp_enqueue_style( 'redux-field-media-css' );
+				wp_enqueue_style( 'redux-field-media' );
 			}
 		}
 

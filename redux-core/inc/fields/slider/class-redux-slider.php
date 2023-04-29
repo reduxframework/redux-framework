@@ -234,17 +234,17 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::is_min();
 
-			wp_enqueue_style( 'select2-css' );
+			wp_enqueue_style( 'select2' );
 
 			wp_enqueue_style(
-				'redux-nouislider-css',
+				'redux-nouislider',
 				Redux_Core::$url . "assets/css/vendor/nouislider$min.css",
 				array(),
 				'5.0.0'
 			);
 
 			wp_register_script(
-				'redux-nouislider-js',
+				'redux-nouislider',
 				Redux_Core::$url . 'assets/js/vendor/nouislider/redux.jquery.nouislider' . $min . '.js',
 				array( 'jquery' ),
 				'5.0.0',
@@ -252,16 +252,16 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 			);
 
 			wp_enqueue_script(
-				'redux-field-slider-js',
+				'redux-field-slider',
 				Redux_Core::$url . 'inc/fields/slider/redux-slider' . $min . '.js',
-				array( 'jquery', 'redux-nouislider-js', 'redux-js', 'select2-js' ),
+				array( 'jquery', 'redux-nouislider', 'redux', 'select2' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-slider-css',
+					'redux-field-slider',
 					Redux_Core::$url . 'inc/fields/slider/redux-slider.css',
 					array(),
 					$this->timestamp

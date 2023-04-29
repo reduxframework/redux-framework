@@ -261,7 +261,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			wp_enqueue_script(
 				'redux-extension-customizer',
 				$this->extension_url . 'redux-extension-customizer' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				self::$version,
 				true
 			);
@@ -713,7 +713,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 * @return      void
 		 */
 		public function enqueue_previewer() {
-			wp_enqueue_script( 'redux-extension-previewer-js', $this->extension_url . 'assets/js/preview.js', array(), self::$version, true );
+			wp_enqueue_script( 'redux-extension-previewer', $this->extension_url . 'assets/js/preview.js', array(), self::$version, true );
 
 			$localize = array(
 				'save_pending'   => esc_html__( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ),
@@ -727,7 +727,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				// 'folds'             => $this->folds,
 			);
 
-			wp_localize_script( 'redux-extension-previewer-js', 'reduxPost', $localize );
+			wp_localize_script( 'redux-extension-previewer', 'reduxPost', $localize );
 		}
 
 		/**
@@ -750,7 +750,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			);
 
 			// Values used by the javascript.
-			wp_localize_script( 'redux-js', 'redux_opts', $localize );
+			wp_localize_script( 'redux', 'redux_opts', $localize );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux-enqueue-' . $this->parent->args['opt_name'] );

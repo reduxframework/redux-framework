@@ -554,10 +554,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				 */
 				if ( true === $this->parent->args['dev_mode'] ) {
 					wp_enqueue_style(
-						'redux-extension-users-css',
+						'redux-extension-users',
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						apply_filters( "redux/users/{$this->parent->args['opt_name']}/enqueue/redux-extension-users-css", $this->extension_url . 'redux-extension-users.css' ),
-						array( 'redux-admin-css' ),
+						array( 'redux-admin' ),
 						self::$version
 					);
 				}
@@ -567,16 +567,16 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				 * filter 'redux/page/{opt_name}/enqueue/redux-extension-users-js
 				 */
 				wp_enqueue_script(
-					'redux-extension-users-js',
+					'redux-extension-users',
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
 					apply_filters( "redux/users/{$this->parent->args['opt_name']}/enqueue/redux-extension-users-js", $this->extension_url . 'redux-extension-users' . Redux_Functions::is_min() . '.js' ),
-					array( 'jquery', 'redux-js' ),
+					array( 'jquery', 'redux' ),
 					self::$version,
 					true
 				);
 
 				// Values used by the javascript.
-				wp_localize_script( 'redux-extension-users-js', 'reduxUsers', $this->users_roles );
+				wp_localize_script( 'redux-extension-users', 'reduxUsers', $this->users_roles );
 
 			}
 		}
@@ -608,7 +608,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 									continue;
 								}
 
-								if ( $field['type'] === 'ace_editor' && isset( $field['options'] ) ) {
+								if ( 'ace_editor' === $field['type'] && isset( $field['options'] ) ) {
 									$this->profiles[ $key ]['sections'][ $sk ]['fields'][ $k ]['args'] = $field['options'];
 									unset( $this->profiles[ $key ]['sections'][ $sk ]['fields'][ $k ]['options'] );
 								}

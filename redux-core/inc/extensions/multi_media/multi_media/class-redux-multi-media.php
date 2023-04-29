@@ -249,16 +249,16 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 
 			// Field dependent JS.
 			wp_enqueue_script(
-				'redux-field-multi-media-js',
+				'redux-field-multi-media',
 				$this->url . 'redux-multi-media' . $min . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				Redux_Extension_Multi_Media::$version,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-multi-media-css',
+					'redux-field-multi-media',
 					$this->url . 'redux-multi-media.css',
 					array(),
 					Redux_Extension_Multi_Media::$version
@@ -278,7 +278,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 			);
 
 			wp_localize_script(
-				'redux-field-multi-media-js',
+				'redux-field-multi-media',
 				'redux_multi_media_l10',
 				apply_filters( 'redux_multi_media_localized_data', $data_arr )
 			);

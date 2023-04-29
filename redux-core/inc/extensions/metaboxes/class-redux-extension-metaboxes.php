@@ -578,7 +578,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					 */
 					if ( $this->parent->args['dev_mode'] ) {
 						wp_enqueue_style(
-							'redux-extension-metaboxes-css',
+							'redux-extension-metaboxes',
 							apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-css", $this->extension_url . 'redux-extension-metaboxes.css' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
 							array(),
 							self::$version
@@ -590,15 +590,15 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					 * filter 'redux/page/{opt_name}/enqueue/redux-extension-metaboxes-js
 					 */
 					wp_enqueue_script(
-						'redux-extension-metaboxes-js',
+						'redux-extension-metaboxes',
 						apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-js", $this->extension_url . 'redux-extension-metaboxes' . Redux_Functions::isMin() . '.js' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
-						array( 'jquery', 'redux-js' ),
+						array( 'jquery', 'redux' ),
 						self::$version,
 						true
 					);
 
 					// Values used by the javascript.
-					wp_localize_script( 'redux-extension-metaboxes-js', 'reduxMetaboxes', $this->wp_links );
+					wp_localize_script( 'redux-extension-metaboxes', 'reduxMetaboxes', $this->wp_links );
 				}
 			}
 		}

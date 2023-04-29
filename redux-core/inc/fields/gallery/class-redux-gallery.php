@@ -69,9 +69,9 @@ if ( ! class_exists( 'Redux_Gallery', false ) ) {
 			}
 
 			wp_enqueue_script(
-				'redux-field-gallery-js',
+				'redux-field-gallery',
 				Redux_Core::$url . 'inc/fields/gallery/redux-gallery' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				$this->timestamp,
 				true
 			);

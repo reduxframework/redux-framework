@@ -161,7 +161,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 			);
 
 			wp_enqueue_script(
-				'redux-field-custom_fonts-js',
+				'redux-field-custom_fonts',
 				$this->url . '/redux-custom-fonts' . $min . '.js',
 				array( 'jquery', 'redux-blockUI' ),
 				Redux_Extension_Custom_Fonts::$version,
@@ -169,7 +169,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 			);
 
 			wp_localize_script(
-				'redux-field-custom_fonts-js',
+				'redux-field-custom_fonts',
 				'redux_custom_fonts_l10',
 				apply_filters(
 					'redux_custom_fonts_localized_data',
@@ -187,7 +187,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 			);
 
 			wp_enqueue_style(
-				'redux-field-custom_fonts-css',
+				'redux-field-custom_fonts',
 				$this->url . 'redux-custom-fonts.css',
 				array(),
 				time()
@@ -198,7 +198,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 			if ( ! empty( $class->custom_fonts ) ) {
 				if ( file_exists( $class->upload_dir . 'fonts.css' ) ) {
 					wp_enqueue_style(
-						'redux-custom_fonts-css',
+						'redux-custom_fonts',
 						$class->upload_url . 'fonts.css',
 						array(),
 						time()

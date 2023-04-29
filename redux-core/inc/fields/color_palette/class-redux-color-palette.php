@@ -116,7 +116,7 @@ if ( ! class_exists( 'Redux_Color_Palette' ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-color-palette-css',
+					'redux-field-color-palette',
 					Redux_Core::$url . 'inc/fields/color_palette/redux-color-palette.css',
 					array(),
 					time()

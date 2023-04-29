@@ -50,7 +50,7 @@
 								redux.field_objects.gradient_filters.changeValue( $( this ), true, 'color_gradient' );
 							}
 
-							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).propr( 'checked', false );
+							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).prop( 'checked', false );
 						}, clear: function() {
 							$( this ).val( '' );
 
@@ -124,7 +124,7 @@
 							el.find( '#' + $( this ).data( 'id' ) ).val( 'transparent' );
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.colorGradient' ).find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 						} else {
-							prevColor =  $( this ).parents( '.colorGradient' ).find( '.redux-saved-color' ).val();
+							prevColor = $( this ).parents( '.colorGradient' ).find( '.redux-saved-color' ).val();
 							if ( '' === prevColor ) {
 								prevColor = $( '#' + $( this ).data( 'id' ) ).data( 'default-color' );
 							}

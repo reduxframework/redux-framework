@@ -54,16 +54,16 @@ if ( ! class_exists( 'Redux_Switch', false ) ) {
 		 */
 		public function enqueue() {
 			wp_enqueue_script(
-				'redux-field-switch-js',
+				'redux-field-switch',
 				Redux_Core::$url . 'inc/fields/switch/redux-switch' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux-js' ),
+				array( 'jquery', 'redux' ),
 				$this->timestamp,
 				true
 			);
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-switch-css',
+					'redux-field-switch',
 					Redux_Core::$url . 'inc/fields/switch/redux-switch.css',
 					array(),
 					$this->timestamp

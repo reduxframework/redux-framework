@@ -79,6 +79,19 @@ if ( ! class_exists( 'Redux_Color', false ) ) {
 		}
 
 		/**
+		 * Do enqueue for each field instance.
+		 *
+		 * @return void
+		 */
+		public function always_enqueue() {
+			if ( isset( $this->field['color_alpha'] ) && $this->field['color_alpha'] ) {
+				if ( ! wp_script_is( 'redux-wp-color-picker-alpha' ) ) {
+					wp_enqueue_script( 'redux-wp-color-picker-alpha' );
+				}
+			}
+		}
+
+		/**
 		 * Enqueue Function.
 		 * If this field requires any scripts, or CSS define this function and register/enqueue the scripts/css
 		 *
@@ -88,28 +101,22 @@ if ( ! class_exists( 'Redux_Color', false ) ) {
 		 */
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
-				wp_enqueue_style( 'redux-color-picker-css' );
+				wp_enqueue_style( 'redux-color-picker' );
 			}
 
 			if ( ! wp_style_is( 'wp-color-picker' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'redux-js' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'redux' );
 
 			wp_enqueue_script(
-				'redux-field-color-js',
+				'redux-field-color',
 				Redux_Core::$url . 'inc/fields/color/redux-color' . Redux_Functions::is_min() . '.js',
 				$dep_array,
 				$this->timestamp,
 				true
 			);
-
-			if ( isset( $this->field['color_alpha'] ) && $this->field['color_alpha'] ) {
-				if ( ! wp_script_is( 'redux-wp-color-picker-alpha-js' ) ) {
-					wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
-				}
-			}
 		}
 
 		/**

@@ -130,7 +130,7 @@ if ( ! class_exists( 'Redux_Welcome', false ) ) {
 				type='text/css' media='all'/>
 
 			<link
-				rel='stylesheet' id='redux-welcome-css' <?php // phpcs:ignore WordPress.WP.EnqueuedResources ?>
+				rel='stylesheet' id='redux-welcome' <?php // phpcs:ignore WordPress.WP.EnqueuedResources ?>
 				href='<?php echo esc_url( Redux_Core::$url ); ?>inc/welcome/css/redux-welcome.css'
 				type='text/css' media='all'/>
 
