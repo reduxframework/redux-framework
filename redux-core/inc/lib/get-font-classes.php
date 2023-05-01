@@ -27,7 +27,7 @@ $output .= "\t" . ' *' . "\r";
 $output .= "\t" . ' * @return array' . "\r";
 $output .= "\t" . ' */' . "\r";
 $output .= "\t" . 'function redux_icon_select_fa_6_free(): array {' . "\r";
-$output .= "\t\t" . 'return array( array( ' . "'icons' => array( " . fa_icons() . ') ) );' . "\r";
+$output .= "\t\t" . 'return array( ' . fa_icons() . ' );' . "\r";
 $output .= "\t" . '}' . "\r";
 $output .= '}' . "\r";
 
