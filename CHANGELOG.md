@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.1.2
+* New: Icon Select Extension. Please review notes in README.md. [https://devs.redux.io/core-extensions/icon-select.html](https://devs.redux.io/core-extensions/icon-select.html)
+
 ## 4.4.1.1
 * Updated: ACE Editor 1.18.0
 * Improved: Redux no longer enqueues resources for each field instance.
