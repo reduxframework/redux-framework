@@ -1,0 +1,335 @@
+.redux-container-icon_select {
+    .redux-icon-select {
+        display: flex;
+        grid-gap: 5px;
+    }
+
+    .redux-icon-select-preview {
+        .dashicons {
+            height:initial!important;
+        }
+
+        &:not(.hidden) {
+            display: flex;
+        }
+
+        i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            font-size: 14px;
+            text-align: center;
+            vertical-align: top;
+            color: #555;
+            border: 1px solid #ccc;
+            background-color: #f7f7f7;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    .redux-icon-container {
+        position: relative;
+        overflow-y: auto;
+        border: 2px solid #eee;
+        padding: 5px;
+        text-align: center;
+    }
+
+/*    .redux-icon-select {
+        margin: 0 !important;
+
+        input[type='radio']{
+            display:none;
+        }
+
+        i {
+            border-color:transparent;
+            color: #555;
+
+            &:hover {
+                border-color:#ddd;
+                color: #111;
+            }
+        }
+    }*/
+
+    ul{
+        &.redux-icon-select li {
+            margin: 10px;
+            display:block;
+            float: left;
+            padding:5px;
+        }
+    }
+
+/*    .redux-icon-select i,
+    .redux-icon-select-selected i {
+        border-width:4px;
+        border-style: solid;
+        font-size: 30px;
+        padding: 5px;
+    }
+
+    .redux-icon-select-selected {
+        i,
+        i:hover {
+            border-color:#7a7a7a;
+            color:#269ad6;
+        }
+    }*/
+}
+
+.redux-modal{
+    position: fixed;
+    z-index: 100101;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &.hidden{
+        display: none;
+    }
+}
+
+.redux-modal-icon{
+    z-index: 100102;
+
+    .redux-icon-title{
+        padding: 15px 0;
+        margin: 4px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        border: 1px solid #eee;
+        background-color: #f7f7f7;
+    }
+
+    .redux-modal-header{
+        text-align: center;
+    }
+
+    .redux-icon-select-font{
+        display: inline-block;
+        height: 40px;
+        top: -2px;
+        position: relative;
+    }
+
+    .redux-icon-search{
+        width: 50%;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    i{
+        cursor: pointer;
+        display: inline-block;
+        margin: 4px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+        color: #555;
+        text-align: center;
+        border: 1px solid #ccc;
+        background-color: #f7f7f7;
+        border-radius: 2px;
+        box-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+
+        &:hover {
+            color: #fff;
+            border-color: #222;
+            background-color: #222;
+        }
+    }
+
+    .redux-modal-content{
+        padding: 10px;
+        height: 618px;
+    }
+
+    .redux-error-text{
+        padding: 10px;
+    }
+}
+
+.redux-modal-table{
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.redux-modal-table-cell{
+    display: table-cell;
+    vertical-align: middle;
+    margin: 100px 0;
+}
+
+.redux-modal-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+}
+
+.redux-modal-inner{
+    position: relative;
+    z-index: 10;
+    width: 760px;
+    height: 750px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.redux-modal-content{
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 595px;
+
+    .redux-field{
+        padding: 15px 30px 15px 15px;
+    }
+
+    a{
+        &:active,
+        &:focus{
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    h4{
+        font-size: 13px;
+
+        small{
+            font-style: italic;
+            font-weight: 400;
+            color: #aaa;
+        }
+    }
+}
+
+.redux-modal-title{
+    position: relative;
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #ddd;
+    height: 36px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 36px;
+    margin: 0;
+    padding: 0 36px 0 16px;
+}
+
+.redux-modal-header{
+    width: 100%;
+    padding: 14px 0;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+
+    .redux-modal-loading{
+        display: none;
+        position: absolute;
+        left: 20px;
+        top: 59px;
+    }
+
+    select{
+        display: block;
+        width: 250px;
+        margin: 0 auto;
+        font-size: 13px;
+        line-height: 1;
+        height: 30px;
+        min-height: 30px;
+        background-color: #fff;
+    }
+}
+
+.redux-modal-close{
+    color: #666;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:before{
+        font: normal 20px/36px dashicons;
+        content: "\f158";
+        vertical-align: top;
+        width: 36px;
+        height: 36px;
+    }
+
+    &:hover{
+        opacity: 0.5;
+    }
+}
+
+.redux-loading{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+
+    &:after{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 4px;
+        height: 4px;
+        content: "";
+        margin-top: -2px;
+        margin-left: -2px;
+        background-color: white;
+        animation-duration: 0.5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-name: reduxLoader;
+        border-radius: 4px;
+    }
+}
+
+@media only screen and (max-width: 782px) {
+    .redux-modal{
+        .redux-modal-inner{
+            width: 90%;
+        }
+    }
+}
+
+@media only screen and (max-height: 750px) {
+    .redux-modal{
+        .redux-modal-inner{
+            height: auto;
+        }
+
+        .redux-modal-content{
+            height: calc(100vh - 200px);
+        }
+    }
+}
+
+@keyframes reduxLoader {
+    0% {
+        transform: rotate(0deg) translateX(-6px) rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg) translateX(-6px) rotate(-360deg);
+    }
+}

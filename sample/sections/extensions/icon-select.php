@@ -23,42 +23,55 @@ Redux::set_section(
 				'title'            => esc_html__( 'Icon Select', 'your-textdomain-here' ),
 				'subtitle'         => esc_html__( 'Select an icon.', 'your-textdomain-here' ),
 				'default'          => '',
-				//'options'          => redux_icon_select_fa_5_free(),
+				'options'          => redux_icon_select_fa_5_free(),
 
 				// Disable auto-enqueue of stylesheet if present in the panel.
 				'enqueue'          => true,
 
 				// Disable auto-enqueue of stylesheet on the front-end.
 				'enqueue_frontend' => false,
-				//'stylesheet'       => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css',
+				'stylesheet'       => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css',
 
 				// If needed to initialize the icon.
 				'prefix'           => 'fa',
-
-				// How each icon begins for this given font.
-				'selector'         => 'fa-',
 			),
 			array(
-				'id'               => 'icon_select_field_2',
+				'id'               => 'icon_select_material',
 				'type'             => 'icon_select',
-				'title'            => esc_html__( 'Icon Select 2', 'your-textdomain-here' ),
+				'title'            => esc_html__( 'Icon Material', 'your-textdomain-here' ),
 				'subtitle'         => esc_html__( 'Select an icon.', 'your-textdomain-here' ),
-				'default'          => '',
-				//'options'          => redux_icon_select_fa_5_free(),
+				'default'          => 'fas fa-1',
 
 				// Disable auto-enqueue of stylesheet if present in the panel.
 				'enqueue'          => true,
 
 				// Disable auto-enqueue of stylesheet on the front-end.
 				'enqueue_frontend' => false,
-				'stylesheet'       => array('stylesheet' => '', 'title' => 'title' ), //'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css',
 
-				// If needed to initialize the icon.
-				'prefix'           => 'fa',
-
-				// How each icon begins for this given font.
-				'selector'         => 'fa-',
+				// Stylesheet data.
+				'stylesheet'       => array(
+					array(
+						'url'    => 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.css',
+						'title'  => 'Material Icons',
+						'prefix' => 'mdi-set',
+						'regex'  => array(),
+					),
+					array(
+						'url'    => 'https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css',
+						'title'  => 'Bootstrap',
+						'prefix' => 'bi',
+						'regex'  => array(),
+					),
+					array(
+						'url'    => 'https://cdn.lineicons.com/4.0/lineicons.css',
+						'title'  => 'Line Icons',
+						'prefix' => 'lni',
+						'regex'  => array(),
+					),
+				),
 			),
+
 		),
 	)
 );
+
