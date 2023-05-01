@@ -36,6 +36,10 @@
 }
 
 .redux-container {
+    #redux-intro-text {
+        padding-left:20px;
+    }
+
     .redux-container-button_set,
     .redux-container-palette {
         .ui-icon {
@@ -290,7 +294,20 @@
         float: right;
         .spinner {
             float: left;
-            margin-top: 4px;
+            margin-top: 7px;
+            margin-left: 10px;
+            right: 5px;
+            position: relative;
+        }
+
+        #redux-defaults-top,
+        #redux-defaults-bottom {
+            margin-left:2px;
+        }
+
+        #redux-defaults-section-top,
+        #redux-defaults-section-bottom {
+            margin-left:2px;
         }
     }
 
