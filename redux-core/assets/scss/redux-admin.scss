@@ -79,7 +79,7 @@
     background-image: -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%); /* IE10+ */
     background-image: -o-linear-gradient(top, #fff 0%, #f2f2f2 100%); /* Opera 11.10+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff", endColorstr="#f2f2f2", GradientType=0); /* IE6-9 */
-    background-image: linear-gradient(top, #fff 0%, #f2f2f2 100%); /* W3C */
+    background-image: linear-gradient(to bottom, #fff 0%, #f2f2f2 100%); /* W3C */
     border: 1px solid #dedede;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
