@@ -99,7 +99,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 					} else {
 						$this->stylesheet_url[] = $sub_arr['url'];
 					}
-
+//var_dump($this->stylesheet_url);
 					if ( empty( $sub_arr['icons'] ) && ! empty( $sub_arr ) ) {
 						if ( false === stripos( $sub_arr['url'], '//' ) ) {
 							$to_parse = '';
@@ -188,8 +188,6 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 					}
 				}
 			}
-
-			$this->stylesheets();
 		}
 
 		/**
@@ -199,7 +197,6 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		 * @param mixed $array2 Second array.
 		 *
 		 * @return array
-		 * @noinspection PhpConditionAlreadyCheckedInspection
 		 */
 		private function array_merge( $array1, $array2 ): array {
 			if ( ! is_array( $array1 ) ) {
@@ -353,18 +350,18 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		}
 
 		/**
-		 * Enqueue stylesheets.
+		 * Do enqueue for all instances of the field.
 		 *
 		 * @return void
 		 */
-		public function stylesheets() {
+		public function always_enqueue() {
 			if ( isset( $this->stylesheet_url ) && is_array( $this->stylesheet_url ) && isset( $this->field['enqueue'] ) && $this->field['enqueue'] ) {
 				foreach ( $this->stylesheet_url as $idx => $stylesheet_url ) {
 					wp_enqueue_style(
 						$this->field['id'] . '-webfont-' . $idx,
 						$stylesheet_url,
 						array(),
-						Redux_Extension_Icon_Select::$version
+						Redux_Core::$version
 					);
 				}
 			}
@@ -392,7 +389,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 				'redux-field-icon-select',
 				$this->url . 'redux-icon-select' . $min . '.js',
 				array( 'jquery', 'redux' ),
-				Redux_Extension_Icon_Select::$version,
+				Redux_Core::$version,
 				true
 			);
 
@@ -400,19 +397,19 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 				'redux-field-icon-select',
 				$this->url . 'redux-icon-select.css',
 				array(),
-				Redux_Extension_Icon_Select::$version
+				Redux_Core::$version
 			);
+		}
 
-			if ( isset( $this->stylesheet_url ) && is_array( $this->stylesheet_url ) && isset( $this->field['enqueue'] ) && $this->field['enqueue'] ) {
-				foreach ( $this->stylesheet_url as $idx => $stylesheet_url ) {
-					wp_enqueue_style(
-						$this->field['id'] . '-webfont-' . $idx,
-						$stylesheet_url,
-						array(),
-						Redux_Extension_Icon_Select::$version
-					);
-				}
-			}
+		/**
+		 * Function is unused, by necessary to trigger output.
+		 *
+		 * @param mixed $data CSS data.
+		 *
+		 * @return mixed|string|void
+		 */
+		public function css_style( $data ) {
+			return $data;
 		}
 
 		/**
@@ -425,13 +422,21 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 				return;
 			}
 
+			if ( true === $this->field['elusive'] ) {
+				Redux_Functions_Ex::enqueue_elusive_font();
+			}
+
+			if ( true === $this->field['fontawesome'] ) {
+				Redux_Functions_Ex::enqueue_font_awesome();
+			}
+
 			if ( isset( $this->stylesheet_url ) && is_array( $this->stylesheet_url ) && $this->field['enqueue_frontend'] ) {
 				foreach ( $this->stylesheet_url as $idx => $stylesheet_url ) {
 					wp_enqueue_style(
-						'redux-' . $this->field['selector'] . '-webfont-' . $idx,
-						$this->stylesheet_url,
+						$this->field['id'] . '-webfont-' . $idx,
+						$stylesheet_url,
 						array(),
-						Redux_Extension_Icon_Select::$version
+						Redux_Core::$version
 					);
 				}
 			}
