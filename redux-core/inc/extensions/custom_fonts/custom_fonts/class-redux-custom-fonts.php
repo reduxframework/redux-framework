@@ -152,19 +152,13 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::isMin();
 
-			wp_enqueue_script(
-				'redux-blockUI',
-				$this->url . '/jquery.blockUI' . $min . '.js',
-				array( 'jquery' ),
-				'2.70.0',
-				true
-			);
+			wp_enqueue_script( 'redux-block-ui' );
 
 			wp_enqueue_script(
 				'redux-field-custom_fonts',
 				$this->url . '/redux-custom-fonts' . $min . '.js',
 				array( 'jquery', 'redux-blockUI' ),
-				Redux_Extension_Custom_Fonts::$version,
+				Redux_Core::$version,
 				true
 			);
 

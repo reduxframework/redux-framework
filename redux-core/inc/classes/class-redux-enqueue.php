@@ -116,10 +116,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		 * @param     object $core ReduxFramework object.
 		 */
 		private function register_styles( $core ) {
-			// *****************************************************************
-			// Redux Admin CSS
-			// *****************************************************************
 
+			/**
+			 * Redux Admin CSS
+			 */
 			if ( 'wordpress' === $core->args['admin_theme'] || 'wp' === $core->args['admin_theme'] ) { // phpcs:ignore WordPress.WP.CapitalPDangit
 				$color_scheme = get_user_option( 'admin_color' );
 			} elseif ( 'classic' === $core->args['admin_theme'] || '' === $core->args['admin_theme'] ) {
@@ -151,9 +151,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				$this->timestamp
 			);
 
-			// *****************************************************************
-			// Redux Fields CSS
-			// *****************************************************************
+			/**
+			 * Redux Fields CSS
+			 */
 			if ( ! $core->args['dev_mode'] ) {
 				wp_enqueue_style(
 					'redux-fields',
@@ -163,9 +163,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				);
 			}
 
-			// *****************************************************************
-			// Select2 CSS
-			// *****************************************************************
+			/**
+			 * Select2 CSS
+			 */
 			wp_enqueue_style(
 				'select2',
 				Redux_Core::$url . 'assets/css/vendor/select2.min.css',
@@ -173,9 +173,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'4.1.0'
 			);
 
-			// *****************************************************************
-			// Spectrum CSS
-			// *****************************************************************
+			/**
+			 * Spectrum CSS
+			 */
 			wp_register_style(
 				'redux-spectrum',
 				Redux_Core::$url . "assets/css/vendor/spectrum$this->min.css",
@@ -183,19 +183,19 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'1.3.3'
 			);
 
-			// *****************************************************************
-			// Elusive Icon CSS
-			// *****************************************************************
+			/**
+			 * Elusive Icon CSS
+			 */
 			Redux_Functions_Ex::enqueue_elusive_font();
 
-			// *****************************************************************
-			// Font Awesome for Social Profiles and Icon Select
-			// *****************************************************************
+			/**
+			 * Font Awesome for Social Profiles and Icon Select
+			 */
 			Redux_Functions_Ex::enqueue_font_awesome();
 
-			// *****************************************************************
-			// QTip CSS
-			// *****************************************************************
+			/**
+			 * QTip CSS
+			 */
 			wp_enqueue_style(
 				'qtip',
 				Redux_Core::$url . "assets/css/vendor/qtip$this->min.css",
@@ -203,10 +203,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'3.0.3'
 			);
 
-			// *****************************************************************
-			// JQuery UI CSS
-			// *****************************************************************
-
+			/**
+			 * JQuery UI CSS
+			 */
 			wp_enqueue_style(
 				'jquery-ui',
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -219,15 +218,16 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				$this->timestamp
 			);
 
-			// *****************************************************************
-			// Iris CSS
-			// *****************************************************************
+			/**
+			 * Iris CSS
+			 */
 			wp_enqueue_style( 'wp-color-picker' );
 
 			if ( $core->args['dev_mode'] ) {
-				// *****************************************************************
-				// Media CSS
-				// *****************************************************************
+
+				/**
+				 * Media CSS
+				 */
 				wp_enqueue_style(
 					'redux-field-media',
 					Redux_Core::$url . 'assets/css/media.css',
@@ -236,9 +236,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				);
 			}
 
-			// *****************************************************************
-			// RTL CSS
-			// *****************************************************************
+			/**
+			 * RTL CSS
+			 */
 			if ( is_rtl() ) {
 				wp_enqueue_style(
 					'redux-rtl',
@@ -260,9 +260,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_script( 'jquery-ui-dialog' );
 
-			// *****************************************************************
-			// Select2 Sortable JS
-			// *****************************************************************
+			/**
+			 * Select2 Sortable JS
+			 */
 			wp_register_script(
 				'redux-select2-sortable',
 				Redux_Core::$url . 'assets/js/vendor/select2-sortable/redux.select2.sortable' . $this->min . '.js',
@@ -271,6 +271,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				true
 			);
 
+			/**
+			 * Select2
+			 */
 			wp_enqueue_script(
 				'select2',
 				Redux_Core::$url . 'assets/js/vendor/select2/select2' . $this->min . '.js`',
@@ -279,9 +282,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				true
 			);
 
-			// *****************************************************************
-			// QTip JS
-			// *****************************************************************
+			/**
+			 * QTip JS
+			 */
 			wp_enqueue_script(
 				'qtip',
 				Redux_Core::$url . 'assets/js/vendor/qtip/qtip' . $this->min . '.js',
@@ -290,10 +293,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				true
 			);
 
-			// *****************************************************************
-			// Iris alpha color picker
-			// *****************************************************************
-
+			/**
+			 * Iris alpha color picker
+			 */
 			if ( ! wp_script_is( 'redux-wp-color-picker-alpha' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 
@@ -306,9 +308,20 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				);
 			}
 
-			// *****************************************************************
-			// Spectrum JS
-			// *****************************************************************
+			/**
+			 * Block UI (used by Custom Fonts and Color Schemes).
+			 */
+			wp_register_script(
+				'redux-block-ui',
+				Redux_Core::$url . 'assets/js/vendor/block-ui/jquery.blockUI' . $this->min . '.js',
+				array( 'jquery' ),
+				'2.70.0',
+				true
+			);
+
+			/**
+			 * Spectrum JS
+			 */
 			wp_register_script(
 				'redux-spectrum',
 				Redux_Core::$url . 'assets/js/vendor/spectrum/redux-spectrum' . $this->min . '.js',
@@ -317,9 +330,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				true
 			);
 
-			// *****************************************************************
-			// Vendor JS
-			// *****************************************************************
+			/**
+			 * Vendor JS
+			 */
 			wp_register_script(
 				'redux-vendor',
 				Redux_Core::$url . 'assets/js/redux-vendors' . $this->min . '.js',
@@ -328,9 +341,9 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				true
 			);
 
-			// *****************************************************************
-			// Redux JS
-			// *****************************************************************
+			/**
+			 * Redux JS
+			 */
 			wp_register_script(
 				'redux',
 				Redux_Core::$url . 'assets/js/redux' . $this->min . '.js',
@@ -348,14 +361,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		 */
 		public function enqueue_field( $core, array $field ) {
 			if ( isset( $field['type'] ) && 'callback' !== $field['type'] ) {
-
-				/**
-				 * Field class file
-				 * filter 'redux/{opt_name}/field/class/{field.type}
-				 *
-				 * @param     string        field class file path
-				 * @param     array     $field field config data
-				 */
 				$field_type = str_replace( '_', '-', $field['type'] );
 				$core_path  = Redux_Core::$dir . "inc/fields/{$field['type']}/class-redux-$field_type.php";
 
@@ -380,6 +385,13 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 					$filter_path = $core_path;
 				}
 
+				/**
+				 * Field class file
+				 * filter 'redux/{opt_name}/field/class/{field.type}
+				 *
+				 * @param     string    $filter_path Field class file path
+				 * @param     array     $field       Field config data
+				 */
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$class_file = apply_filters(
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -596,7 +608,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Save pending string
 			 * filter 'redux/{opt_name}/localize/save_pending
 			 *
-			 * @param     string        save_pending string
+			 * @param string $msg Save_pending string
 			 */
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$save_pending = apply_filters(
@@ -612,7 +624,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Reset all string
 			 * filter 'redux/{opt_name}/localize/reset
 			 *
-			 * @param     string        reset all string
+			 * @param string $msg Reset all string.
 			 */
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$reset_all = apply_filters(
@@ -628,7 +640,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Reset section string
 			 * filter 'redux/{opt_name}/localize/reset_section
 			 *
-			 * @param     string        reset section string
+			 * @param string $msg Reset section string.
 			 */
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$reset_section = apply_filters(
@@ -644,7 +656,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Preset confirm string
 			 * filter 'redux/{opt_name}/localize/preset
 			 *
-			 * @param     string        preset confirm string
+			 * @param string $msg Preset confirm string.
 			 */
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$preset_confirm = apply_filters(
@@ -660,7 +672,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Import confirm string
 			 * filter 'redux/{opt_name}/localize/import
 			 *
-			 * @param     string        import confirm string
+			 * @param string $msg Import confirm string.
 			 */
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$import_confirm = apply_filters(
