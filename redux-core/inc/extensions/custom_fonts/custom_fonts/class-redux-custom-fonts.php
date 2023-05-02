@@ -157,7 +157,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 			wp_enqueue_script(
 				'redux-field-custom_fonts',
 				$this->url . '/redux-custom-fonts' . $min . '.js',
-				array( 'jquery', 'redux-blockUI' ),
+				array( 'jquery', 'redux-block-ui' ),
 				Redux_Core::$version,
 				true
 			);
