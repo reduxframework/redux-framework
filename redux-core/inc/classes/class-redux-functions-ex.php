@@ -28,12 +28,57 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 */
 		public static $args;
 
+		/**
+		 * Enqueue Font Awesome.
+		 *
+		 * @return void
+		 */
+		public static function enqueue_font_awesome() {
+			wp_enqueue_style(
+				'font-awesome',
+				Redux_Core::$url . 'assets/font-awesome/css/all' . Redux_Functions::is_min() . '.css',
+				array(),
+				'6.4.0'
+			);
+
+			wp_enqueue_style(
+				'font-awesome-4-shims',
+				Redux_Core::$url . 'assets/font-awesome/css/v4-shims' . Redux_Functions::is_min() . '.css',
+				array(),
+				'6.4.0'
+			);
+		}
+
+		/**
+		 * Enqueue Elusive Font.
+		 *
+		 * @return void
+		 */
+		public static function enqueue_elusive_font() {
+			wp_enqueue_style(
+				'redux-elusive-icon',
+				Redux_Core::$url . 'assets/css/vendor/elusive-icons' . Redux_Functions::is_min() . '.css',
+				array(),
+				'2.0.0'
+			);
+		}
+
+		/**
+		 * Shim to load Extendify for backward compatibility.
+		 *
+		 * @return void
+		 */
 		public static function load_extendify_css() {
 			add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'block_editor_styles' ), 99 );
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'frontend_init' ), 10 );
 		}
 
-		public static function block_editor_styles(){
+		/**
+		 * Shim to enqueue Extendify CSS in the block editor.
+		 *
+		 * @return void
+		 */
+		public static function block_editor_styles() {
 			wp_enqueue_style(
 				'redux-editor-styles',
 				Redux_Core::$url . 'assets/css/extendify-utilities.css',

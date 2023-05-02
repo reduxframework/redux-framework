@@ -289,7 +289,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 			if ( ! empty( $this->value ) ) {
 				foreach ( $this->value as $arr ) {
 					if ( $arr['enabled'] ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-
+						Redux_Functions_Ex::enqueue_font_awesome();
 					}
 				}
 			}
@@ -310,9 +310,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 
 			$min = Redux_Functions::isMin();
 
-			// font-awesome.
-			wp_enqueue_style( 'font-awesome' );
-			wp_enqueue_style( 'font-awesome-4-shims' );
+			Redux_Functions_Ex::enqueue_font_awesome();
 
 			// Field dependent JS.
 			wp_enqueue_script(

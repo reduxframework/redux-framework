@@ -72,12 +72,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			$core = $this->core();
 
 			if ( $core->args['elusive_frontend'] ) {
-				wp_enqueue_style(
-					'redux-elusive-icon',
-					Redux_Core::$url . 'assets/css/vendor/elusive-icons.min.css',
-					array(),
-					Redux_Core::$version
-				);
+				Redux_Functions_Ex::enqueue_elusive_font();
 			}
 		}
 
@@ -191,29 +186,12 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			// *****************************************************************
 			// Elusive Icon CSS
 			// *****************************************************************
-			wp_enqueue_style(
-				'redux-elusive-icon',
-				Redux_Core::$url . "assets/css/vendor/elusive-icons$this->min.css",
-				array(),
-				$this->timestamp
-			);
+			Redux_Functions_Ex::enqueue_elusive_font();
 
 			// *****************************************************************
 			// Font Awesome for Social Profiles and Icon Select
 			// *****************************************************************
-			wp_register_style(
-				'font-awesome',
-				Redux_Core::$url . 'assets/font-awesome/css/all.min.css',
-				array(),
-				'6.2.1'
-			);
-
-			wp_register_style(
-				'font-awesome-4-shims',
-				Redux_Core::$url . 'assets/font-awesome/css/v4-shims.min.css',
-				array(),
-				'6.2.1'
-			);
+			Redux_Functions_Ex::enqueue_font_awesome();
 
 			// *****************************************************************
 			// QTip CSS
