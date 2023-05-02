@@ -99,7 +99,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 					} else {
 						$this->stylesheet_url[] = $sub_arr['url'];
 					}
-//var_dump($this->stylesheet_url);
+
 					if ( empty( $sub_arr['icons'] ) && ! empty( $sub_arr ) ) {
 						if ( false === stripos( $sub_arr['url'], '//' ) ) {
 							$to_parse = '';
