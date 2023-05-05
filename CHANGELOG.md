@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.1.3
+* Updated: Default Google font list.
+* Fixed: jQuery deprecation notices in `typography` field.
+
 ## 4.4.1.2
 * New: Icon Select Extension. Please review notes in README.md. [https://devs.redux.io/core-extensions/icon-select.html](https://devs.redux.io/core-extensions/icon-select.html)
 
