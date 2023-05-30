@@ -271,7 +271,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$protocol = ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] || ( ! empty( $_SERVER['SERVER_PORT'] ) && 443 === $_SERVER['SERVER_PORT'] ) ? 'https://' : 'http://';
 
-			if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+			if ( ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$new_protocol = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) . '://'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				if ( 'http://' === $protocol && $new_protocol !== $protocol && false === strpos( $url, $new_protocol ) ) {
 					$url = str_replace( $protocol, $new_protocol, $url );
@@ -320,7 +320,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		}
 
 		/**
-		 * Is Redux embedded inside a plugin.
+		 * Is Redux embedded inside a plugin?
 		 *
 		 * @param string $file File to check.
 		 *
@@ -351,7 +351,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		}
 
 		/**
-		 * Is Redux embedded in a theme.
+		 * Is Redux embedded in a theme?
 		 *
 		 * @param string $file File to check.
 		 *

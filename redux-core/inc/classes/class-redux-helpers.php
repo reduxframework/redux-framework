@@ -44,7 +44,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 					if ( is_array( $sections ) && ! empty( $sections ) ) {
 						foreach ( $sections as $section ) {
-							if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
+							if ( ! empty( $section['fields'] ) ) {
 								foreach ( $section['fields'] as $field ) {
 									if ( is_array( $field ) && ! empty( $field ) ) {
 										if ( isset( $field['id'] ) && $field['id'] === $field_id ) {
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					continue;
 				}
 
-				if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
+				if ( ! empty( $section['fields'] ) ) {
 					if ( self::recursive_array_search( $field, $section['fields'] ) ) {
 						return $k;
 					}
@@ -181,7 +181,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					continue;
 				}
 
-				if ( isset( $section['fields'] ) && ! empty( $section['fields'] ) ) {
+				if ( ! empty( $section['fields'] ) ) {
 					if ( self::recursive_array_search( $field, $section['fields'] ) ) {
 						return true;
 					}
@@ -476,33 +476,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Return array of installed themes.
-		 *
-		 * @return array
-		 */
-		public static function get_wp_themes(): array {
-			global $wp_theme_paths;
-
-			$wp_theme_paths = array();
-			$themes         = wp_get_themes();
-
-			foreach ( $themes as $theme ) {
-				$path = Redux_Functions_Ex::wp_normalize_path( trailingslashit( $theme->get_theme_root() ) . $theme->get_template() );
-
-				if ( Redux_Functions_Ex::wp_normalize_path( realpath( $path ) ) !== $path ) {
-					$theme_paths[] = Redux_Functions_Ex::wp_normalize_path( realpath( $path ) );
-				}
-
-				$wp_theme_paths[ $path ] = Redux_Functions_Ex::wp_normalize_path( realpath( $path ) );
-			}
-
-			return array(
-				'full_paths'  => $wp_theme_paths,
-				'theme_paths' => $theme_paths,
-			);
-		}
-
-		/**
 		 * Get info for specified file.
 		 *
 		 * @param string $file File to check.
@@ -568,33 +541,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			}
 
 			return $data;
-		}
-
-		/**
-		 * Take a path and delete it
-		 *
-		 * @param string $dir Dir to remove.
-		 *
-		 * @since    3.3.3
-		 */
-		public static function rmdir( string $dir ) {
-			if ( is_dir( $dir ) ) {
-				$objects = scandir( $dir );
-
-				foreach ( $objects as $object ) {
-					if ( '.' !== $object && '..' !== $object ) {
-						if ( filetype( $dir . '/' . $object ) === 'dir' ) {
-							rmdir( $dir . '/' . $object );
-						} else {
-							unlink( $dir . '/' . $object );
-						}
-					}
-				}
-
-				reset( $objects );
-
-				rmdir( $dir );
-			}
 		}
 
 		/**
@@ -668,7 +614,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Compile localized array.
+		 * Compile a localized array.
 		 *
 		 * @param array $localize Array of localized strings.
 		 *
@@ -692,82 +638,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			}
 
 			return false;
-		}
-
-		/**
-		 * Returns array of Redux templates.
-		 *
-		 * @param string $custom_template_path The Path to template dir.
-		 *
-		 * @return array
-		 */
-		private static function get_redux_templates( string $custom_template_path ): array {
-			Redux_Filesystem::get_instance();
-
-			$template_paths     = array( 'ReduxFramework' => Redux_Core::$dir . 'templates/panel' );
-			$scanned_files      = array();
-			$found_files        = array();
-			$outdated_templates = false;
-
-			foreach ( $template_paths as $plugin_name => $template_path ) {
-				$scanned_files[ $plugin_name ] = self::scan_template_files( $template_path );
-			}
-
-			foreach ( $scanned_files as $plugin_name => $files ) {
-				foreach ( $files as $file ) {
-					if ( file_exists( $custom_template_path . '/' . $file ) ) {
-						$theme_file = $custom_template_path . '/' . $file;
-					} else {
-						$theme_file = false;
-					}
-
-					if ( $theme_file ) {
-						$core_version  = self::get_template_version( Redux_Core::$dir . 'templates/panel/' . $file );
-						$theme_version = self::get_template_version( $theme_file );
-
-						if ( $core_version && ( empty( $theme_version ) || version_compare( $theme_version, $core_version, '<' ) ) ) {
-							if ( ! $outdated_templates ) {
-								$outdated_templates = true;
-							}
-
-							$found_files[ $plugin_name ][] = sprintf( '<code>%s</code> ' . esc_html__( 'version', 'redux-framework' ) . ' <strong style="color:red">%s</strong> ' . esc_html__( 'is out of date. The core version is', 'redux-framework' ) . ' %s', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ), $theme_version ? $theme_version : '-', $core_version );
-						} else {
-							$found_files[ $plugin_name ][] = sprintf( '<code>%s</code>', str_replace( WP_CONTENT_DIR . '/themes/', '', $theme_file ) );
-						}
-					}
-				}
-			}
-
-			return $found_files;
-		}
-
-		/**
-		 * Scan template files for ver changes.
-		 *
-		 * @param string $template_path The Path to templates.
-		 *
-		 * @return array
-		 */
-		private static function scan_template_files( string $template_path ): array {
-			$files  = scandir( $template_path );
-			$result = array();
-
-			if ( $files ) {
-				foreach ( $files as $value ) {
-					if ( ! in_array( $value, array( '.', '..' ), true ) ) {
-						if ( is_dir( $template_path . DIRECTORY_SEPARATOR . $value ) ) {
-							$sub_files = self::scan_template_files( $template_path . DIRECTORY_SEPARATOR . $value );
-							foreach ( $sub_files as $sub_file ) {
-								$result[] = $value . DIRECTORY_SEPARATOR . $sub_file;
-							}
-						} else {
-							$result[] = $value;
-						}
-					}
-				}
-			}
-
-			return $result;
 		}
 
 		/**
@@ -821,35 +691,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 					array_keys( $attributes )
 				)
 			) . ' ';
-		}
-
-		/**
-		 * Output filesize based on letter indicator.
-		 *
-		 * @param string $size Size with letter.
-		 *
-		 * @return bool|int|string
-		 */
-		private static function let_to_num( string $size ) {
-			$l   = substr( $size, - 1 );
-			$ret = substr( $size, 0, - 1 );
-
-			switch ( strtoupper( $l ) ) {
-				case 'T':
-				case 'G':
-				case 'M':
-				case 'P':
-					$ret *= 1024;
-					break;
-				// Must remain recursive, do not use 'break'.
-				// Must remain recursive, do not use 'break'.
-				// Must remain recursive, do not use 'break'.
-				// Must remain recursive, do not use 'break'.
-				case 'K':
-					$ret *= 1024;
-			}
-
-			return $ret;
 		}
 
 		/**

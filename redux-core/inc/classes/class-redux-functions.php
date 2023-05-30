@@ -36,7 +36,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		public static $_parent; // phpcs:ignore PSR2.Classes.PropertyDeclaration.Underscore
 
 		/**
-		 * Check for existence of class name via array of class names.
+		 * Check for the existence of class name via an array of class names.
 		 *
 		 * @param array $class_names Array of class names.
 		 *
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		}
 
 		/**
-		 * Check for existence of file name via array of file names.
+		 * Check for the existence of file name via an array of file names.
 		 *
 		 * @param array $file_names Array of file names.
 		 *
@@ -190,7 +190,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		}
 
 		/**
-		 * Parse CSS from output/compiler array
+		 * Parse CSS from an output/compiler array
 		 *
 		 * @param array  $css_array CSS data.
 		 * @param string $style     CSS style.
@@ -369,7 +369,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		}
 
 		/**
-		 * Sanitize camelCase keys in array, makes then snake_case.
+		 * Sanitize camelCase keys in an array, makes then snake_case.
 		 *
 		 * @param array $arr Array of keys.
 		 *
@@ -391,7 +391,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		}
 
 		/**
-		 * Converts an array into a html data string.
+		 * Converts an array into an html data string.
 		 *
 		 * @param array $data example input: array('id'=>'true').
 		 *
