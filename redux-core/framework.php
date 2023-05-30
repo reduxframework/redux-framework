@@ -910,8 +910,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 
 	/**
 	 * Action 'redux/init'
-	 *
-	 * @param null
 	 */
 	do_action( 'redux/init' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName
 }

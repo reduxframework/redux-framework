@@ -15,6 +15,33 @@ if ( ! class_exists( 'Redux_Validate', false ) ) {
 	 * Class Redux_Validate
 	 */
 	abstract class Redux_Validate {
+		/**
+		 * ReduxFramework object.
+		 *
+		 * @var object
+		 */
+		public $parent;
+
+		/**
+		 * Redux fields array.
+		 *
+		 * @var array
+		 */
+		public $field = array();
+
+		/**
+		 * Redux values array|string.
+		 *
+		 * @var array|string
+		 */
+		public $value;
+
+		/**
+		 * Validation current value.
+		 *
+		 * @var mixed
+		 */
+		public $current;
 
 		/**
 		 * Redux_Validate constructor.

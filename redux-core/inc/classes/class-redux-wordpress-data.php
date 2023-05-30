@@ -249,7 +249,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 
 			$secondary_key = 'slug';
 			if ( isset( $args['secondary_key'] ) ) {
-				$display_key = $args['secondary_key'];
+				$secondary_key = $args['secondary_key'];
 				unset( $args['secondary_key'] );
 			}
 
@@ -298,13 +298,8 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 
 				case 'sites':
 				case 'site':
-					// WP > 4.6.
-					if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
-						$sites = get_sites();
-						// WP < 4.6.
-					} elseif ( function_exists( 'wp_get_sites' ) ) {
-						$sites = wp_get_sites(); // phpcs:ignore WordPress.WP.DeprecatedFunctions
-					}
+					$sites = get_sites();
+
 					if ( isset( $sites ) ) {
 						$results = array();
 						foreach ( $sites as $site ) {

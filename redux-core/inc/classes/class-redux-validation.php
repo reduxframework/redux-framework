@@ -92,7 +92,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 									// then we need to keep processing.
 									if ( ! $is_not_empty ) {
 
-										// Empty id and not checking for 'not_empty.  Bail out...
+										// Empty id and not checking for 'not_empty'.  Bail out...
 										if ( ! isset( $field['validate_callback'] ) ) {
 											continue;
 										}
@@ -121,15 +121,13 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 								$validate = 'Redux_Validation_' . $val;
 
 								if ( ! class_exists( $validate ) ) {
+									$file = str_replace( '_', '-', $val );
 
 									/**
 									 * Filter 'redux/validate/{opt_name}/class/{field.validate}'
 									 *
-									 * @param        string                validation class file path
-									 * @param string $class_file validation class file path
+									 * @param string $validate   validation class file path
 									 */
-
-									$file = str_replace( '_', '-', $val );
 
 									// phpcs:ignore WordPress.NamingConventions.ValidHookName
 									$class_file = apply_filters( "redux/validate/{$core->args['opt_name']}/class/$val", Redux_Core::$dir . "inc/validation/$val/class-redux-validation-$file.php", $validate );
@@ -146,7 +144,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 										$options[ $field['id'] ] = '';
 									}
 
-									if ( isset( $plugin_options[ $field['id'] ] ) && is_array( $plugin_options[ $field['id'] ] ) && ! empty( $plugin_options[ $field['id'] ] ) ) {
+									if ( is_array( $plugin_options[ $field['id'] ] ) && ! empty( $plugin_options[ $field['id'] ] ) ) {
 										foreach ( $plugin_options[ $field['id'] ] as $key => $value ) {
 											$before = null;
 											$after  = null;

@@ -80,7 +80,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 			if ( function_exists( 'get_plugin_data' ) && file_exists( $path ) ) {
 				$data = get_plugin_data( $path );
 
-				if ( isset( $data ) && isset( $data['Version'] ) && '' !== $data['Version'] ) {
+				if ( isset( $data['Version'] ) && '' !== $data['Version'] ) {
 					$res = version_compare( $data['Version'], '4', '<' );
 				}
 
@@ -435,19 +435,6 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @since 1.0
 		 */
 		public function add_settings_link( array $links, string $file ): array {
-			if ( basename( plugin_dir_path( __FILE__ ) ) . '/redux-framework.php' !== $file ) {
-				return $links;
-			}
-
-			//$links[] = sprintf(
-			//	'<a href="%1$s" target="_blank">%2$s</a>',
-			//	esc_url( $this->get_site_utm_url( '', 'plugins-page', '', 'go-pro' ) ),
-			//	sprintf(
-			//		'<span style="font-weight: bold;">%s</span>',
-			//		__( 'Go Pro', 'redux-framework' )
-			//	)
-			//);
-
 			return $links;
 		}
 
