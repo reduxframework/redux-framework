@@ -5,6 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys (dovy)
  * @class   Redux_Extension_Widget_Areas
+ * @version 4.3.20
  */
 
 defined( 'ABSPATH' ) || exit;

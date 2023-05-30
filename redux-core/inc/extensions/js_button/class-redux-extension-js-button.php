@@ -2,10 +2,10 @@
 /**
  * Redux JS Button Extension Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Js_Button
- * @version 2.0.0
+ * @version 4.3.16
  */
 
 defined( 'ABSPATH' ) || exit;

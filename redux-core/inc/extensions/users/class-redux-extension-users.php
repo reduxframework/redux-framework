@@ -2,7 +2,7 @@
 /**
  * Redux User Meta Extension Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Users
  * @version 4.4.1

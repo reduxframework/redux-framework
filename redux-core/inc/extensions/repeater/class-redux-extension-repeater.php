@@ -6,7 +6,7 @@
  * @author  Dovy Paukstys & Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Repeater
  *
- * @version 4.3.7
+ * @version 4.3.13
  */
 
 defined( 'ABSPATH' ) || exit;

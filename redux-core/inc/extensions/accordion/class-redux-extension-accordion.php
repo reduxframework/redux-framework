@@ -2,11 +2,10 @@
 /**
  * Redux Accordion Extension Class
  *
- * @package Redux Extentions
+ * @package Redux
  * @author Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Accordion
- *
- * @version 1.0.1
+ * @version 4.3.16
  */
 
 defined( 'ABSPATH' ) || exit;

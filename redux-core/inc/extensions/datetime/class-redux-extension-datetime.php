@@ -6,7 +6,7 @@
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Datetime
  *
- * @version 2.0.0
+ * @version 4.3.15
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Extension_Datetime', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '2.0.0';
+		public static $version = '4.3.15';
 
 		/**
 		 * Extension friendly name.

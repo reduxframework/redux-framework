@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys (dovy) & Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Shortcodes
- * @version 4.3.5
+ * @version 4.3.6
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -5,7 +5,7 @@
  * @package Redux Pro
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Google_Maps
- * @version 2.0.0
+ * @version 4.4.0
  */
 
 defined( 'ABSPATH' ) || exit;

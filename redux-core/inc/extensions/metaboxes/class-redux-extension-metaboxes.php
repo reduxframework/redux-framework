@@ -2,11 +2,11 @@
 /**
  * Redux Metabox Extension Class
  *
- * @package Redux Extentions
+ * @package Redux
  * @author  Dovy Paukstys <dovy@reduxframework.com> & Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Metaboxes
  *
- * @version 4.0.0
+ * @version 4.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
