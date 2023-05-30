@@ -101,7 +101,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static $pro_loaded = false;
 
 		/**
-		 * Pointer to updated google fonts array.
+		 * Pointer to an updated Google fonts array.
 		 *
 		 * @var array
 		 */
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		}
 
 		/**
-		 * Code to execute on framework __construct.
+		 * Code to execute on a framework __construct.
 		 *
 		 * @param object $parent Pointer to ReduxFramework object.
 		 */
