@@ -105,7 +105,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * Init
 		 *
-		 * Backward compatibility for previous version of Redux.
+		 * Backward compatibility for previous versions of Redux.
 		 */
 		public static function init() {
 
@@ -204,7 +204,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $required = array();
 
 		/**
-		 * Field child folding information for localization.
+		 * Field child-folding information for localization.
 		 *
 		 * @var array
 		 */
@@ -443,7 +443,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
-		 * Un-serializing instances of this class is forbidden.
+		 * Un-serializing instances of this class are forbidden.
 		 *
 		 * @since 4.0.0
 		 */
@@ -873,13 +873,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
-		 * ->get(); This is used to return and option value from the options array
+		 * ->get(); This is used to return and option value from the option array
 		 *
 		 * @since       1.0.0
 		 * @access      public
 		 *
 		 * @param       string $opt_name The option name to return.
-		 * @param       mixed  $default  (null) The value to return if option not set.
+		 * @param       mixed  $default  (null) The value to return if an option isn't set.
 		 *
 		 * @return      mixed
 		 */
@@ -888,7 +888,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
-		 * ->set(); This is used to set an arbitrary option in the options array
+		 * ->set(); This is used to set an arbitrary option in the option array
 		 *
 		 * @since       1.0.0
 		 * @access      public
