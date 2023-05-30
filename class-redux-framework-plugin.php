@@ -199,7 +199,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 			add_action( 'activated_plugin', array( $this, 'load_first' ) );
 			add_action( 'wp_loaded', array( $this, 'options_toggle_check' ) );
 
-			// Activate plugin when new blog is added.
+			// Activate plugin when a new blog is added.
 			add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
 			// Display admin notices.
@@ -215,7 +215,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		}
 
 		/**
-		 * Pushes Redux to top of plugin load list, so it initializes before any plugin that may use it.
+		 * Pushes Redux to the top of plugin load list, so it initializes before any plugin that may use it.
 		 */
 		public function load_first() {
 			if ( ! class_exists( 'Redux_Functions_Ex' ) ) {
@@ -436,59 +436,6 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 */
 		public function add_settings_link( array $links, string $file ): array {
 			return $links;
-		}
-
-		/**
-		 * Get the url where the Admin Columns website is hosted
-		 *
-		 * @param string $path Path to add to url.
-		 *
-		 * @return string
-		 */
-		private function get_site_url( string $path = '' ): string {
-			$url = 'https://extendify.com/pricing/';
-
-			if ( ! empty( $path ) ) {
-				$url .= '/' . trim( $path, '/' ) . '/';
-			}
-
-			return $url;
-		}
-
-		/**
-		 * Url with utm tags
-		 *
-		 * @param string      $path         Path on site.
-		 * @param string      $utm_medium   Medium var.
-		 * @param string|null $utm_content  Content var.
-		 * @param string|bool $utm_campaign Campaign var.
-		 *
-		 * @return string
-		 */
-		public function get_site_utm_url( string $path, string $utm_medium, string $utm_content = null, $utm_campaign = false ): string {
-			$url = self::get_site_url( $path );
-
-			if ( ! $utm_campaign ) {
-				$utm_campaign = 'plugin-installation';
-			}
-
-			$args = array(
-				// Referrer: plugin.
-				'utm_source'   => 'redux',
-
-				// Specific promotions or sales.
-				'utm_campaign' => $utm_campaign,
-
-				// Marketing medium: banner, documentation or email.
-				'utm_medium'   => $utm_medium,
-
-				// Used for differentiation of medium.
-				'utm_content'  => $utm_content,
-			);
-
-			$args = array_map( 'sanitize_key', array_filter( $args ) );
-
-			return add_query_arg( $args, $url );
 		}
 
 		/**
