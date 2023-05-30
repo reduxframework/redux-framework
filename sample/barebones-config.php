@@ -44,7 +44,7 @@ $args = array(
 	'menu_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 	'page_title'                => esc_html__( 'Sample Options', 'your-textdomain-here' ),
 
-	// Disable this in case you want to create your own google fonts loader.
+	// Disable this in case you want to create your own Google fonts loader.
 	'disable_google_fonts_link' => false,
 
 	// Show the panel pages on the admin bar.
@@ -53,7 +53,7 @@ $args = array(
 	// Choose an icon for the admin bar menu.
 	'admin_bar_icon'            => 'dashicons-portfolio',
 
-	// Choose an priority for the admin bar menu.
+	// Choose a priority for the admin bar menu.
 	'admin_bar_priority'        => 50,
 
 	// Set a different name for your global variable other than the opt_name.
@@ -108,7 +108,7 @@ $args = array(
 	'output_tag'                => true,
 
 	// FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
-	// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
+	// Possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 	'database'                  => '',
 
 	// If you prefer not to use the CDN for Select2, Ace Editor, and others, you may download the Redux Vendor Support plugin yourself and run locally or embed it in your code.
@@ -119,7 +119,7 @@ $args = array(
 	'flyout_submenus'           => true,
 
 	// Mode to display fonts (auto|block|swap|fallback|optional)
-	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+	// See: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display .
 	'font_display'              => 'swap',
 
 	// HINTS.
@@ -190,17 +190,18 @@ $args['share_icons'][] = array(
 );
 $args['share_icons'][] = array(
 	'url'   => '//www.linkedin.com/company/redux-framework',
-	'title' => esc_html__( 'FInd us on LinkedIn', 'your-textdomain-here' ),
+	'title' => esc_html__( 'Find us on LinkedIn', 'your-textdomain-here' ),
 	'icon'  => 'el el-linkedin',
 );
 
 // Panel Intro text -> before the form.
-if ( ! isset( $args['global_variable'] ) || false !== $args['global_variable'] ) {
+if ( false !== $args['global_variable'] ) {
 	if ( ! empty( $args['global_variable'] ) ) {
 		$v = $args['global_variable'];
 	} else {
 		$v = str_replace( '-', '_', $args['opt_name'] );
 	}
+
 	$args['intro_text'] = '<p>' . sprintf( __( 'Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: $s', 'your-textdomain-here' ) . '</p>', '<strong>' . $v . '</strong>' );
 } else {
 	$args['intro_text'] = '<p>' . esc_html__( 'This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.', 'your-textdomain-here' ) . '</p>';
@@ -274,7 +275,7 @@ $section = array(
 			'desc'     => esc_html__( 'Example description.', 'your-textdomain-here' ),
 			'subtitle' => esc_html__( 'Example subtitle.', 'your-textdomain-here' ),
 			'hint'     => array(
-				'content' => wp_kses( __( 'This is a <strong>hint</strong> tool-tip for the text field.<br/><br/>Add any HTML based text you like here.', 'your-textdomain-here' ), $kses_exceptions ),
+				'content' => wp_kses( __( 'This is a <strong>hint</strong> tool-tip for the text field.<br/><br/>Add any HTML-based text you like here.', 'your-textdomain-here' ), $kses_exceptions ),
 			),
 		),
 	),
