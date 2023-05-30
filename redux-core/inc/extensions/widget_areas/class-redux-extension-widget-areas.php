@@ -46,7 +46,7 @@ if ( ! class_exists( 'Redux_Extension_Widget_Areas' ) ) {
 			$widget_areas = new Redux_Widget_Areas( $this->parent );
 
 			// Allow users to extend if they want.
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			// Phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/widget_areas/' . $parent->args['opt_name'] . '/construct' );
 
 			add_action( 'wp_ajax_redux_delete_widget_area', array( $widget_areas, 'redux_delete_widget_area_area' ) );

@@ -233,8 +233,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 					$old_class = str_replace( 'Redux_', 'ReduxFramework_', $extension['class'] );
 
 					if ( ! class_exists( $extension['class'] ) && ! class_exists( $old_class ) ) {
-						// In case you wanted override your override, hah.
-						// phpcs:ignore WordPress.NamingConventions.ValidHookName
+						// In case you wanted to override your override, hah.
+						// Phpcs:ignore WordPress.NamingConventions.ValidHookName
 						$extension['path'] = apply_filters( 'redux/extension/' . $redux_framework->args['opt_name'] . '/' . $name, $extension['path'] );
 						if ( file_exists( $extension['path'] ) ) {
 							require_once $extension['path'];
@@ -264,10 +264,10 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Deprecated function to set extension path.
+		 * Deprecated function to set an extension path.
 		 *
 		 * @param string $extension Path.
-		 * @param bool   $folder    Set if path is a folder.
+		 * @param bool   $folder    Set if a path is a folder.
 		 *
 		 * @return bool|mixed
 		 * @deprecated No longer using cameCase naming conventions.
@@ -281,8 +281,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 		/**
 		 * Sets a path to an extension.
 		 *
-		 * @param string $extension Path to extension.
-		 * @param bool   $folder    Set if path is a folder.
+		 * @param string $extension Path to an extension.
+		 * @param bool   $folder    Set if a path is a folder.
 		 *
 		 * @return bool|mixed
 		 */
@@ -321,7 +321,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @param string $opt_name Panel opt_name.
 		 */
 		public static function set_defaults( string $opt_name = '' ) {
-			// Try to load the class if in the same directory, so the user only have to include the Redux API.
+			// Try to load the class if in the same directory, so the user only has to include the Redux API.
 			if ( ! class_exists( 'Redux_Options_Defaults' ) ) {
 				$file_check = trailingslashit( dirname( __FILE__ ) ) . 'class-redux-options-defaults.php';
 
@@ -492,7 +492,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * Construct option panel fields.
 		 *
 		 * @param string $opt_name   Panel opt_name.
-		 * @param string $section_id ID of section.
+		 * @param string $section_id ID of a section.
 		 *
 		 * @return array
 		 */
@@ -644,7 +644,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Remove option panel by ID.
+		 * Remove an option panel by ID.
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param string|int $id       Section ID.
@@ -706,7 +706,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param array|null $section  Section data.
-		 * @param bool       $replace  Replaces section instead of creating a new one.
+		 * @param bool       $replace  Replaces a section instead of creating a new one.
 		 */
 		public static function set_section( string $opt_name = '', ?array $section = array(), bool $replace = false ) {
 
@@ -1241,7 +1241,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Deprecated Retrieves single option from the database.
+		 * Deprecated Retrieves a single option from the database.
 		 *
 		 * @param string       $opt_name Panel opt_name.
 		 * @param string       $key      Option key.
@@ -1277,7 +1277,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 			$redux = ReduxFrameworkInstances::get_instance( $opt_name );
 
-			// We don't ever need to specify advanced_metaboxes here as all function for metaboxes are core,
+			// We don't ever need to specify advanced_metaboxes here as all functions for metaboxes are core,
 			// and thus, metabox_lite.  The extension handles its own functions and is handled by this condition. - kp.
 			$metaboxes = $redux->extensions['metaboxes'];
 
@@ -1301,7 +1301,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Retrieves single option from the database.
+		 * Retrieves a single option from the database.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $key      Option key.
@@ -1418,7 +1418,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Get next available priority for field/section.
+		 * Get the next available priority for field/section.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $type     Field or section.
@@ -1533,7 +1533,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Deprecated Sets all extensions in path.
+		 * Deprecated Sets all extensions in a path.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $path     Path to extension folder.
@@ -1551,7 +1551,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Sets all extensions in path.
+		 * Sets all extensions in a path.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $path     Path to extension folder.
@@ -1632,7 +1632,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		}
 
 		/**
-		 * Gets all loaded extension for the passed ReduxFramework instance.
+		 * Gets all loaded extensions for the passed ReduxFramework instance.
 		 *
 		 * @param string      $opt_name Panel opt_name.
 		 * @param object|null $instance ReduxFramework instance.
