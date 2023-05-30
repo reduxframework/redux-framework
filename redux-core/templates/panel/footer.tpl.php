@@ -5,7 +5,7 @@
  *
  * @author        Redux Framework
  * @package       ReduxFramework/Templates
- * @version:      4.0.0
+ * @version:      4.4.2
  */
 
 // Exit if accessed directly.
@@ -30,21 +30,21 @@ defined( 'ABSPATH' ) || exit;
 						continue;
 					}
 					// SHIM, use URL now.
-					if ( isset( $links['link'] ) && ! empty( $links['link'] ) ) {
+					if ( ! empty( $links['link'] ) ) {
 						$links['url'] = $links['link'];
 						unset( $links['link'] );
 					}
-					if ( isset( $links['icon'] ) && ! empty( $links['icon'] ) ) {
+					if ( ! empty( $links['icon'] ) ) {
 						if ( strpos( $links['icon'], 'el-icon' ) !== false && strpos( $links['icon'], 'el ' ) === false ) {
 							$links['icon'] = 'el ' . $links['icon'];
 						}
 					}
 					?>
 					<a href="<?php echo esc_url( $links['url'] ); ?>" title="<?php echo esc_attr( $links['title'] ); ?>" target="_blank">
-						<?php if ( isset( $links['icon'] ) && ! empty( $links['icon'] ) ) { ?>
+						<?php if ( ! empty( $links['icon'] ) ) { ?>
 							<i class="<?php echo esc_attr( $links['icon'] ); ?>"></i>
 						<?php } else { ?>
-							<img src="<?php echo esc_url( $links['img'] ); ?>"/>
+							<img alt="<?php echo esc_url( $links['img'] ); ?>" src="<?php echo esc_url( $links['img'] ); ?>"/>
 						<?php } ?>
 					</a>
 				<?php } ?>
@@ -64,7 +64,6 @@ defined( 'ABSPATH' ) || exit;
 			}
 			?>
 		</div>
-		<div class="redux-ajax-loading" alt="<?php esc_html_e( 'Working...', 'redux-framework' ); ?>">&nbsp;</div>
 		<div class="clear"></div>
 	</div>
 </div>
