@@ -40,10 +40,10 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 				'invert',
 			);
 
-			// Make array of in use filters.
+			// Make an array of in use filters.
 			$in_use_filters = array();
 
-			foreach ( $filter_arr as $key => $filter ) {
+			foreach ( $filter_arr as $filter ) {
 				if ( $field['filter'][ $filter ] ) {
 					$in_use_filters[] = $filter;
 				}
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 			$output .= '<div class="redux-' . $mode . '-filter-container" data-filters="' . $filters . '">';
 			$output .= '<div class="container-label">' . esc_html__( 'Filters', 'redux-framework' ) . '</div>';
 
-			foreach ( $in_use_filters as $key => $filter ) {
+			foreach ( $in_use_filters as $filter ) {
 				$step = 1;
 				$unit = self::get_filter_unit( $filter );
 
@@ -144,12 +144,11 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 		}
 
 		/**
-		 * Enqueue suport files.
+		 * Enqueue support files.
 		 *
-		 * @param array $field           Option field.
-		 * @param bool  $filters_enabled Filtered enabled bit.
+		 * @param bool $filters_enabled Filtered enabled bit.
 		 */
-		public static function enqueue( array $field, bool $filters_enabled ) {
+		public static function enqueue( bool $filters_enabled ) {
 			$min = Redux_Functions::is_min();
 
 			if ( $filters_enabled ) {

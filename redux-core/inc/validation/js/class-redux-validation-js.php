@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Js', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'Javascript has been successfully escaped.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'Javascript has been successfully escaped.', 'redux-framework' );
 
 			$js = esc_js( $this->value );
 

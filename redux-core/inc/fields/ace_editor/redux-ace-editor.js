@@ -34,19 +34,11 @@
 						var params    = JSON.parse( $( this ).parent().find( '.localize_data' ).val() );
 						var editor    = $( element ).attr( 'data-editor' );
 						var aceeditor = ace.edit( editor );
-						var id        = '';
 
 						index = null;
 
-						aceeditor.setTheme( 'ace/theme/' + jQuery( element ).attr( 'data-theme' ) );
+						aceeditor.setTheme( 'ace/theme/' + $( element ).attr( 'data-theme' ) );
 						aceeditor.getSession().setMode( 'ace/mode/' + $( element ).attr( 'data-mode' ) );
-
-						if ( el.hasClass( 'redux-field-container' ) ) {
-							id = el.attr( 'data-id' );
-						} else {
-							id = el.parents( '.redux-field-container:first' ).attr( 'data-id' );
-						}
-
 						aceeditor.setOptions( params );
 						aceeditor.on(
 							'change',

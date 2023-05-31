@@ -17,7 +17,7 @@
 	/*******************************************************************************
 	 * Function: init
 	 *
-	 * Runs when library is loaded.
+	 * Runs when the library is loaded.
 	 ******************************************************************************/
 	redux.field_objects.multi_media.init = function( selector ) {
 

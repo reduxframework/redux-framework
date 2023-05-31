@@ -1,6 +1,6 @@
 <?php
 /**
- * CUstom HTML validation
+ * Custom HTML validation
  *
  * @package     Redux Framework
  * @subpackage  Validation
@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Html_Custom', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'Unallowed HTML was found in this field and has been removed.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'Invalid HTML was found in this field and has been removed.', 'redux-framework' );
 
 			if ( isset( $this->field['allowed_html'] ) ) {
 				$html = wp_kses( $this->value, $this->field['allowed_html'] );

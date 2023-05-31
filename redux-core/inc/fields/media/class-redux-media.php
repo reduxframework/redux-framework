@@ -267,7 +267,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 		 * @return void
 		 */
 		public function always_enqueue() {
-			Redux_Image_Filters::enqueue( $this->field, $this->filters_enabled );
+			Redux_Image_Filters::enqueue( $this->filters_enabled );
 		}
 
 		/**

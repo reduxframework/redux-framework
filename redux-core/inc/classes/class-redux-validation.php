@@ -144,7 +144,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 										$options[ $field['id'] ] = '';
 									}
 
-									if ( is_array( $plugin_options[ $field['id'] ] ) && ! empty( $plugin_options[ $field['id'] ] ) ) {
+									if ( isset( $plugin_options[ $field['id'] ] ) && is_array( $plugin_options[ $field['id'] ] ) && ! empty( $plugin_options[ $field['id'] ] ) ) {
 										foreach ( $plugin_options[ $field['id'] ] as $key => $value ) {
 											$before = null;
 											$after  = null;

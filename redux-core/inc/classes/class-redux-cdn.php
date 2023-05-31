@@ -114,8 +114,8 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 				$cdn_response = @wp_remote_get( $prefix . $src_cdn );
 
 				if ( is_wp_error( $cdn_response ) || 200 !== wp_remote_retrieve_response_code( $cdn_response ) ) {
-					if ( class_exists( 'Redux_VendorURL' ) ) {
-						$src = Redux_VendorURL::get_url( $handle );
+					if ( class_exists( 'Redux_Vendor_URL' ) || class_exists( 'Redux_VendorURL' ) ) {
+						$src = Redux_Vendor_URL::get_url( $handle );
 
 						if ( $register ) {
 							self::register( $handle, $src, $deps, $ver, $footer_or_media, $is_script );
@@ -168,8 +168,8 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * @param      bool   $is_script Script or style.
 		 */
 		private static function vendor_plugin( bool $register, string $handle, string $src_cdn, array $deps, string $ver, $footer_or_media, bool $is_script ) {
-			if ( class_exists( 'Redux_VendorURL' ) ) {
-				$src = Redux_VendorURL::get_url( $handle );
+			if ( class_exists( 'Redux_Vendor_URL' ) || class_exists( 'Redux_VendorURL' ) ) {
+				$src = Redux_Vendor_URL::get_url( $handle );
 
 				if ( $register ) {
 					self::register( $handle, $src, $deps, $ver, $footer_or_media, $is_script );

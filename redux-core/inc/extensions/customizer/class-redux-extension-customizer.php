@@ -134,7 +134,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				$this->parent->args['customizer_only'] = true;
 			}
 
-			if ( isset( $_POST['wp_customize'] ) && 'on' === $_POST['wp_customize'] && ! empty( $_POST['customized'] ) && ! isset( $_POST['action'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( isset( $_POST['wp_customize'] ) && 'on' === $_POST['wp_customize'] && isset( $_POST['customized'] ) && ! empty( $_POST['customized'] ) && ! isset( $_POST['action'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				add_action( "redux/options/{$this->parent->args['opt_name']}/options", array( $this, 'override_values' ), 100 );
 			}
 
@@ -301,7 +301,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 * Get post values.
 		 */
 		protected static function get_post_values() {
-			if ( empty( self::$post_values ) && ! empty( $_POST['customized'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( empty( self::$post_values ) && isset( $_POST['customized'] ) && ! empty( $_POST['customized'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				self::$post_values = json_decode( stripslashes_deep( sanitize_text_field( wp_unslash( $_POST['customized'] ) ) ), true ); // phpcs:ignore WordPress.Security.NonceVerification
 			}
 		}
@@ -342,7 +342,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			$field_id = str_replace( $this->parent->args['opt_name'] . '-', '', $control->redux_id );
 			$field    = $this->options[ $field_id ];
 
-			if ( ! empty( $field['compiler'] ) ) {
+			if ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) {
 				echo '<tr class="compiler">';
 			} else {
 				echo '<tr>';

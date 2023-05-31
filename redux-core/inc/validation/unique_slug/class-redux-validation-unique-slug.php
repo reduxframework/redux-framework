@@ -26,8 +26,8 @@ if ( ! class_exists( 'Redux_Validation_Unique_Slug', false ) ) {
 		public function validate() {
 			global $wpdb, $wp_rewrite;
 
-			$this->field['msg']              = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'That URL slug is in use, please choose another.', 'redux-framework' );
-			$this->field['flush_permalinks'] = ( isset( $this->field['flush_permalinks'] ) ) ? $this->field['flush_permalinks'] : false;
+			$this->field['msg']              = $this->field['msg'] ?? esc_html__( 'That URL slug is in use, please choose another.', 'redux-framework' );
+			$this->field['flush_permalinks'] = $this->field['flush_permalinks'] ?? false;
 
 			$slug = $this->value;
 
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Redux_Validation_Unique_Slug', false ) ) {
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 				$post_name_check = $wpdb->get_var( $wpdb->prepare( "SELECT post_name FROM $wpdb->posts WHERE post_name = %s LIMIT 1", $slug ) );
 
-				wp_cache_set( 'redux-post-name', $result );
+				wp_cache_set( 'redux-post-name', $post_name_check );
 			}
 
 			/**

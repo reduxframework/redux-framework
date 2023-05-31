@@ -66,7 +66,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		}
 
 		/**
-		 * Redner sliders.
+		 * Render sliders.
 		 *
 		 * @param array $data Data.
 		 *
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 		 * Enqueue support files.
 		 *
 		 * @param array $field           Field array.
-		 * @param bool  $filters_enabled Enbale filter bit.
+		 * @param bool  $filters_enabled Enable filter bit.
 		 */
 		public static function enqueue( array $field, bool $filters_enabled ) {
 			$min = Redux_Functions::is_min();

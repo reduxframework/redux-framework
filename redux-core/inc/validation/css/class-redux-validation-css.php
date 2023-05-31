@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Css', false ) ) {
 		 * @since ReduxFramework 3.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = isset( $this->field['msg'] ) ? $this->field['msg'] : esc_html__( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
 
 			$data = $this->value;
 

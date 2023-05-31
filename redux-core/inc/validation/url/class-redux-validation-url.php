@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Url', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'You must provide a valid URL for this option.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'You must provide a valid URL for this option.', 'redux-framework' );
 
 			if ( false === filter_var( $this->value, FILTER_VALIDATE_URL ) ) {
 				$this->value            = ( isset( $this->current ) ) ? $this->current : '';

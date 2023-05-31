@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Not_Empty', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'This field cannot be empty. Please provide a value.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'This field cannot be empty. Please provide a value.', 'redux-framework' );
 
 			if ( ! isset( $this->value ) || '' === $this->value || 0 === strlen( $this->value ) ) {
 				$this->error = $this->field;

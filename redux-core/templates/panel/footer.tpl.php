@@ -30,18 +30,18 @@ defined( 'ABSPATH' ) || exit;
 						continue;
 					}
 					// SHIM, use URL now.
-					if ( ! empty( $links['link'] ) ) {
+					if ( isset( $links['link'] ) && ! empty( $links['link'] ) ) {
 						$links['url'] = $links['link'];
 						unset( $links['link'] );
 					}
-					if ( ! empty( $links['icon'] ) ) {
+					if ( isset( $links['icon'] ) && ! empty( $links['icon'] ) ) {
 						if ( strpos( $links['icon'], 'el-icon' ) !== false && strpos( $links['icon'], 'el ' ) === false ) {
 							$links['icon'] = 'el ' . $links['icon'];
 						}
 					}
 					?>
 					<a href="<?php echo esc_url( $links['url'] ); ?>" title="<?php echo esc_attr( $links['title'] ); ?>" target="_blank">
-						<?php if ( ! empty( $links['icon'] ) ) { ?>
+						<?php if ( isset( $links['icon'] ) && ! empty( $links['icon'] ) ) { ?>
 							<i class="<?php echo esc_attr( $links['icon'] ); ?>"></i>
 						<?php } else { ?>
 							<img alt="<?php echo esc_url( $links['img'] ); ?>" src="<?php echo esc_url( $links['img'] ); ?>"/>

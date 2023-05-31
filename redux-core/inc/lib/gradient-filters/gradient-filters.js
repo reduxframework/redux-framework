@@ -3,7 +3,7 @@
 (function( $ ) {
 	'use strict';
 
-	redux.field_objects                      = redux.field_objects || {};
+	redux.field_objects                  = redux.field_objects || {};
 	redux.field_objects.gradient_filters = redux.field_objects.gradient_filters || {};
 
 	redux.field_objects.gradient_filters.sliderInit = function( el, mode ) {
@@ -90,16 +90,14 @@
 
 		var type = parent.find( '.redux-gradient-select' ).val();
 
-		var result_w3c = '';
-		var result     = '';
-
-		var angle     = 0;
-		var fromReach = 0;
-		var toReach   = 100;
-
-		var w3c_deg = Math.abs( angle - 450 ) % 360;
-
+		var result_w3c;
+		var result;
+		var fromReach;
+		var toReach;
 		var colors;
+
+		var angle   = 0;
+		var w3c_deg = Math.abs( angle - 450 ) % 360;
 
 		fromReach = parent.find( '#redux-slider-value-' + mainID + '-from' ).val();
 		toReach   = parent.find( '#redux-slider-value-' + mainID + '-to' ).val();

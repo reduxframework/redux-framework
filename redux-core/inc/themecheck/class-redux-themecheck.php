@@ -67,7 +67,7 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 				return;
 			}
 
-			// Load admin style sheet and JavaScript.
+			// Load the admin stylesheet and JavaScript.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 * @param array $php_files Array of files to check.
 		 *
 		 * @return    object    A single instance of this class.
-		 *@since     1.0.0
+		 * @since     1.0.0
 		 */
 		public static function get_redux_details( array $php_files = array() ) {
 			if ( null === self::$redux_details ) {
@@ -144,9 +144,12 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 * @since    1.0.0
 		 */
 		public function disable_checks() {
-			global $themechecks;
-
-			/** $checks_to_disable = array(
+			/**
+			 * Uncomment code to use.
+			 *
+			 * global $themechecks;
+			 *
+			 * $checks_to_disable = array(
 			 *    'IncludeCheck',
 			 *    'I18NCheck',
 			 *    'AdminMenu',
@@ -174,7 +177,6 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 * @since    1.0.0
 		 */
 		public function add_checks() {
-			global $themechecks;
 
 			// load all the checks in the checks directory.
 			$dir = 'checks';

@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Date', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'This field must be a valid date.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'This field must be a valid date.', 'redux-framework' );
 
 			$string = str_replace( '/', '', $this->value );
 

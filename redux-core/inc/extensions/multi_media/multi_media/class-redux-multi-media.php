@@ -113,7 +113,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
                                     id="filelist-' . $id . '"
                                     class="" />';
 
-					// Check for valid image extension.
+					// Check for a valid image extension.
 					if ( $this->is_valid_img_ext( $url ) ) {
 
 						// Add image to array.
@@ -175,7 +175,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 				}
 			}
 
-			// Close list.
+			// Close the list.
 			echo '</ul>';
 
 			// Close container.
@@ -201,7 +201,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 		 *
 		 * @param  string $file File url.
 		 *
-		 * @return bool         Whether file has a valid image extension
+		 * @return bool         Whether the file has a valid image extension
 		 * @since  1.0.0
 		 */
 		private function is_valid_img_ext( string $file ): bool {

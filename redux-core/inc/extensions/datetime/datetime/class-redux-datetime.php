@@ -134,7 +134,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 				}
 			}
 
-			// dummy check, in case something other than select or slider
+			// Dummy check, in case something other than select or slider
 			// is entered.
 			switch ( $control_type ) {
 				case 'select':
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 			}
 
 			// Output defaults to div, so JS can read it.
-			// Broken up for readability, coz I'm the one who has to debug it!
+			// Broken up for readability; coz I'm the one who has to debug it!
 			echo '<div id="' . esc_attr( $field_id ) . '" class="redux-datetime-container"
                        data-dev-mode="' . esc_attr( $this->parent->args['dev_mode'] ) . '"
                        data-version="' . esc_attr( Redux_Extension_Datetime::$version ) . '"

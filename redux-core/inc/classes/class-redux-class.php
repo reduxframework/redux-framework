@@ -51,7 +51,7 @@ if ( ! class_exists( 'Redux_Class', false ) ) {
 		}
 
 		/**
-		 * Pointer to project specific ReduxFramework object.
+		 * Pointer to a project-specific ReduxFramework object.
 		 *
 		 * @return null|object|ReduxFramework
 		 */

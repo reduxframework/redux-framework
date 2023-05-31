@@ -44,6 +44,27 @@ if ( ! class_exists( 'Redux_Validate', false ) ) {
 		public $current;
 
 		/**
+		 * Warning array.
+		 *
+		 * @var array
+		 */
+		public $warning = array();
+
+		/**
+		 * Error array.
+		 *
+		 * @var array
+		 */
+		public $error = array();
+
+		/**
+		 * Sanitize array.
+		 *
+		 * @var array
+		 */
+		public $sanitize = array();
+
+		/**
 		 * Redux_Validate constructor.
 		 *
 		 * @param object       $parent ReduxFramework pointer.

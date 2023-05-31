@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Validation_Numeric', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function validate() {
-			$this->field['msg'] = ( isset( $this->field['msg'] ) ) ? $this->field['msg'] : esc_html__( 'You must provide a numerical value for this option.', 'redux-framework' );
+			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'You must provide a numerical value for this option.', 'redux-framework' );
 
 			if ( ! is_numeric( $this->value ) ) {
 				$this->value            = ( isset( $this->current ) ) ? $this->current : '';
