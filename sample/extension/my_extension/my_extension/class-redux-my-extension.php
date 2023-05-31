@@ -7,11 +7,13 @@
  * @class   Redux_Extension_My_Extension
  * @version 1.0.0
  *
- * There is no free support for extension development.  This example is 'as is'.  If you need assitance,
- * please consider a Premium Support purchase: https://redux.io/extension/premium-support
+ * There is no free support for extension development.
+ * This example is 'as is'.
  *
  * Please be sure to replace ALL instances of "My Extension" and "My_Extension" with the name of your actual
- * extension.  Please also change the file name so the 'my-extension' portion is also the name of your extension.
+ * extension.
+ *
+ * Please also change the file name, so the 'my-extension' portion is also the name of your extension.
  * Please use dashes and not underscores in the filename.  Please use underscores instead of dashes in the classname.
  */
 
@@ -30,9 +32,11 @@ if ( ! class_exists( 'Redux_My_Extension', false ) ) {
 		 * Field Constructor.
 		 * Required - must call the parent constructor, then assign field and value to vars
 		 *
-		 * @param array  $field Field array.
-		 * @param mixed  $value Field values.
+		 * @param array  $field  Field array.
+		 * @param mixed  $value  Field values.
 		 * @param object $parent ReduxFramework pointer.
+		 *
+		 * @throws ReflectionException Construct Exception.
 		 */
 		public function __construct( array $field, $value, $parent ) {
 			parent::__construct( $field, $value, $parent );
@@ -78,7 +82,7 @@ if ( ! class_exists( 'Redux_My_Extension', false ) ) {
 				'redux-my-field',
 				$this->url . 'redux-my-extension.css',
 				array(),
-				ReduxFramework_Extension_my_extension::$version
+				Redux_Extension_my_extension::$version
 			);
 		}
 	}
