@@ -94,9 +94,9 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 				Redux_CDN::enqueue_script(
 					'ace-editor',
 					// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
-					'//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.18.0/ace.js',
+					'//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.22.0/ace.min.js',
 					array( 'jquery' ),
-					'1.4.12',
+					'1.22.0',
 					true
 				);
 			}
