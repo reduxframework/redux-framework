@@ -39,7 +39,7 @@ Redux::set_section(
 				'id'       => 'opt-text-custom-sanitize',
 				'type'     => 'text',
 				'title'    => esc_html__( 'Text Option - Custom Sanitize', 'your-textdomain-here' ),
-				'subtitle' => esc_html__( 'Uses the custom function redux_custom_santize to capitalize every other letter.', 'your-textdomain-here' ),
+				'subtitle' => esc_html__( 'Uses the custom function redux_custom_sanitize to capitalize every other letter.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 				'sanitize' => array( 'redux_custom_sanitize' ),
 				'default'  => 'Sanitize This Text',

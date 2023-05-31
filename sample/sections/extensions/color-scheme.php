@@ -47,9 +47,9 @@ Redux::set_section(
 						'hidden'         => false,
 						'accordion_open' => true,
 					),
-					esc_html__( 'Body', 'your-textdomain-here' )   => esc_html__( 'Set body and content colors here.', 'your-textdomain-here' ),
+					esc_html__( 'Body', 'your-textdomain-here' ) => esc_html__( 'Set body and content colors here.', 'your-textdomain-here' ),
 					esc_html__( 'Widget', 'your-textdomain-here' ) => '',
-					''                                             => esc_html__( 'These colors are not asigned to any group.', 'your-textdomain-here' ),
+					'' => esc_html__( 'These colors are not assigned to any group.', 'your-textdomain-here' ),
 				),
 				'default'  => array(
 					array(

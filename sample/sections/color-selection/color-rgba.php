@@ -26,7 +26,7 @@ Redux::set_section(
 					'alpha' => '.8',
 				),
 				'output'   => array(
-					'color' => '.posted-on, .wp-block-post-date a',
+					'color'     => '.posted-on, .wp-block-post-date a',
 					'important' => true,
 				),
 			),

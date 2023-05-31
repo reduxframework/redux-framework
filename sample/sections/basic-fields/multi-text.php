@@ -21,7 +21,7 @@ Redux::set_section(
 				'type'     => 'multi_text',
 				'title'    => esc_html__( 'Multi Text Option', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Field subtitle', 'your-textdomain-here' ),
-				'desc'     => esc_html__( 'Field Decription', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'Field Description', 'your-textdomain-here' ),
 			),
 		),
 	)

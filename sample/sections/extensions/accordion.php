@@ -26,7 +26,7 @@ Redux::set_section(
 			array(
 				'id'       => 'opt-blank-text-1',
 				'type'     => 'text',
-				'title'    => esc_html__( 'Textbox for some noble purpose.', 'your-textdomain-here' ),
+				'title'    => esc_html__( 'Text box for some noble purpose.', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Frailty, thy name is woman!', 'your-textdomain-here' ),
 			),
 			array(
@@ -50,7 +50,7 @@ Redux::set_section(
 			array(
 				'id'       => 'opt-blank-text-3',
 				'type'     => 'text',
-				'title'    => esc_html__( 'Look, another sample textbox.', 'your-textdomain-here' ),
+				'title'    => esc_html__( 'Look, another sample text box.', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'The tartness of his face sours ripe grapes.', 'your-textdomain-here' ),
 			),
 			array(

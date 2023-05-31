@@ -44,7 +44,7 @@ Redux::set_section(
 				'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 				'hint'     => array(
 					'title'   => esc_html__( 'Test Hint', 'your-textdomain-here' ),
-					'content' => wp_kses_post( 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.' ),
+					'content' => wp_kses_post( 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML-based text you like here.' ),
 				),
 			),
 			array(
@@ -77,7 +77,6 @@ Redux::set_section(
 						),
 					),
 				),
-				'preview_size' => 'full',
 				'filter'       => array(
 					'grayscale'  => true,
 					'blur'       => true,

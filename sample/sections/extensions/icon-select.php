@@ -25,8 +25,8 @@ Redux::set_section(
 			/**
 			 * This field was left in the sample config to display that every effort to maintain backward compatibility with older
 			 * versions of Icon Select has been implemented.
-			 *
-			 * Please, do NOT use argument in this field in your projects. They are considered deprecated.
+			 * Please do NOT use argument in this field in your projects.
+			 * They are considered deprecated.
 			 */
 			array(
 				'id'               => 'icon-select-legacy',

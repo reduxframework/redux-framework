@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Redux_Taxonomny' ) ) {
+if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 	return;
 }
 
@@ -31,7 +31,7 @@ Redux_Taxonomy::set_term(
 
 		'add_visibility' => true,
 
-		// Can bet set on term, section, or field level. Denotes what fields to be displayed on the add {TERM} pages.
+		// Can be set on term, section, or field level. Denote what fields to be displayed on the added {TERM} pages.
 		'sections'       => array(
 			array(
 				'title'  => __( 'Home Settings', 'your-textdomain-here' ),
@@ -178,7 +178,7 @@ Redux_Taxonomy::set_term(
 
 			array(
 				'title'  => __( 'Home Layout', 'your-textdomain-here' ),
-				'desc'   => __( 'Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'your-textdomain-here' ),
+				'desc'   => __( 'Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the GitHub repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'your-textdomain-here' ),
 				'icon'   => 'el-icon-home',
 				'fields' => array(
 					array(

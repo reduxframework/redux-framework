@@ -20,7 +20,7 @@ Redux::set_section(
 				'id'          => 'opt-slides',
 				'type'        => 'slides',
 				'title'       => esc_html__( 'Slides Options', 'your-textdomain-here' ),
-				'subtitle'    => esc_html__( 'Unlimited slides with drag and drop sortings.', 'your-textdomain-here' ),
+				'subtitle'    => esc_html__( 'Unlimited slides with drag and drop sorting.', 'your-textdomain-here' ),
 				'desc'        => esc_html__( 'This field will store all slides values into a multidimensional array to use into a foreach loop.', 'your-textdomain-here' ),
 				'placeholder' => array(
 					'title'       => esc_html__( 'This is a title', 'your-textdomain-here' ),

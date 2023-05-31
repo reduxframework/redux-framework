@@ -261,7 +261,7 @@ Redux::set_section(
 				'args'     => 'redux_select_callback',
 				'title'    => esc_html__( 'Select Option using a Callback', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
-				'desc'     => esc_html__( 'The items in this selcect were added via a callback function.', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'The items in this select were added via a callback function.', 'your-textdomain-here' ),
 			),
 		),
 	)
