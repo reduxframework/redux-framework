@@ -11,10 +11,10 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. It ships with an integrated demo.
 
 == Description ==
-Redux was built by developers for developers. We save you months, if not years in your development time. Everything we do is to help innovation in the industry.
+Redux was built by developers for developers. We save you months if not years in your development time. Everything we do is to help innovation in the industry.
 
 <h4>♥️ What the Plugin does?</h4>
-Redux is a simple, genuinely extensible, and fully responsive options framework for WordPress themes and plugins. Built on the WordPress Settings API, Redux supports many field types, custom error handling, custom fields & validation types, and import/export functionality.
+Redux is a simple, genuinely extensible, and fully responsive options framework for WordPress themes and plugins. Built on the WordPress Settings API; Redux supports many field types, custom error handling, custom fields & validation types, and import/export functionality.
 
 But what does Redux actually DO? We don't believe that theme and plugin developers should have to reinvent the wheel every time they start work on a project. Redux simplifies the development cycle by providing a streamlined, extensible framework for developers to build on. Through a simple, well-documented config file, third-party developers can build out an options panel limited only by their imagination in a fraction of the time it would take to build from the ground up!
 
@@ -76,7 +76,7 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <ul>
 <li>Full value escaping</li>
 <li>Required - Link visibility from parent fields. Set this to affect the visibility of the field on the parent's value. Fully nested with multiple required parents possible.</li>
-<li>Output CSS Automatically - Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).</li>
+<li>Output CSS Automatically - Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need to only specify the CSS selector to apply the CSS to (limited to certain fields).</li>
 <li>Compiler integration! A custom hook runs when any fields with the argument `compile => true` are changed.</li>
 <li>Field validation and sanitization</li>
 <li>Field and section disabling</li>
@@ -102,7 +102,7 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 </ul>
 
 <h4>🔐 Privacy</h4>
-Redux does not interact with end users on your website. If a product is using Redux the option panel will cease to function without Redux.
+Redux does not interact with end users on your website. If a product is using Redux, the option panel will cease to function without Redux.
 
 For more details on our privacy policy: [https://redux.io/privacy](https://redux.io/privacy)
 For more details on our terms and conditions: [https://redux.io/terms](https://redux.io/terms)
@@ -116,7 +116,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 == Changelog ==
 = 4.4.1 =
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
-* Fixed: Multiple `multi_media` fields in same section not respecting `max_upload_count`.
+* Fixed: Multiple `multi_media` fields in the same section not respecting `max_upload_count`.
 * Fixed: Glitch in validation causing color pickers to fail in rare use case.
 * Fixed: Google Maps JavaScript.
 * Updated: Minimum WordPress version to 5.0
@@ -126,7 +126,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: `Invalid argument` error inside `custom_fonts` on certain setups.
 * Fixed: Deprecated Google Map API broke `google_maps` extension.
 * Removed: Extendify Template Library
-* Added: Connection banner to display Extendify removal notice with plugin download option.
+* Added: Connection banner to display Extendify removal notice with a plugin download option.
 * Release date: March 29, 2023
 
 = 4.3.26 =
@@ -141,7 +141,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Release date: January 20, 2023
 
 = 4.3.23 =
-* Tweaked Custom Fonts extension to avoid conflicts with older standalone extension.
+* Tweaked Custom Fonts extension to avoid conflicts with the older standalone extension.
 * Update: Extendify Library 1.2.4
 * Release date: January 20, 2023
 
@@ -172,7 +172,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 = 4.3.19 =
 * Fixed: Extendify menu item appearing when it should not.
-* Fixed: Blank page template would cause fatal error.
+* Fixed: Blank page template would cause a fatal error.
 * Release date: September 30, 2022
 
 = 4.3.18 =
@@ -190,7 +190,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 = 4.3.17 =
 * Added: Social Profiles extension. [https://devs.redux.io/core-extensions/social-profiles.html](https://devs.redux.io/core-extensions/social-profiles.html)
-* Fixed: Metabox post types and templates selection inoperative on new posts.
+* Fixed: Metabox post-types and templates selection inoperative on new posts.
 * Updated: Extendify Library.
 * Release date: August 22, 2002
 
@@ -283,7 +283,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Release date: December 01, 2021
 
 = 4.3.4 =
-* Fixed: CSS and JS not loading when embedding Redux due to malformed path.
+* Fixed: CSS and JS not loading when embedding Redux due to a malformed path.
 * Modified: Update to the Extendify template library.
 * Release date: November, 24 2021
 
@@ -318,7 +318,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 = Why doesn't this plugin do anything? =
 
-Redux is an options framework... in other words, it's not designed to do anything on its own! You can however activate a demo mode to see how it works.
+Redux is an option framework... in other words, it's not designed to do anything on its own! You can, however, activate a demo mode to see how it works.
 
 = How can I learn more about Redux? =
 
