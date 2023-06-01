@@ -45,14 +45,6 @@
 					);
 				}
 			);
-
-			$( '.redux-insights-data-we-collect' ).on(
-				'click',
-				function( e ) {
-					e.preventDefault();
-					$( this ).parents( '.updated' ).find( 'p.description' ).slideToggle( 'fast' );
-				}
-			);
 		}
 	);
 })( jQuery );

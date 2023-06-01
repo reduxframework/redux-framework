@@ -53,12 +53,10 @@ defined( 'ABSPATH' ) || exit;
 					// translators: %1$s: URL, %2$s: close tag.
 					echo sprintf( esc_html__( 'Maybe not! If you want to see what Redux is all about, click here to %1$sActivate Demo Mode%2$s.', 'redux-framework' ), '<a href="' . esc_url( admin_url( add_query_arg( $query_args, 'options-general.php' ) ) ) . '">', '</a>' );
 				}
+
 				?>
-
-
 			</h3>
 		</div>
-
 		<div class="col">
 			<?php
 			if ( ! empty( $sysinfo ) && is_array( $sysinfo ) ) {
@@ -74,6 +72,7 @@ defined( 'ABSPATH' ) || exit;
 				foreach ( $sysinfo as $project_type => $products ) {
 					if ( 'theme' === $project_type ) {
 						$my_theme = wp_get_theme();
+
 						?>
 						<div class="redux-product">
 							<h2 class="name"><?php echo esc_html( $my_theme->get( 'Name' ) ); ?>
@@ -112,8 +111,8 @@ defined( 'ABSPATH' ) || exit;
 								</small>
 							</p>
 						</div>
-
 						<?php
+
 					} else {
 						foreach ( $products as $product => $data ) {
 							if ( ! isset( $plugin_index[ $product ] ) ) {
