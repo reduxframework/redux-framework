@@ -36,7 +36,7 @@ class Templates {
 			return;
 		}
 
-		if ( ( 'post.php' === $pagenow || 'post-new.php' === $pagenow ) && ( class_exists( 'Classic_Editor' ) || defined( 'DISABLE_GUTENBERG_FILE' ) || class_exists( 'CodePopular_disable_gutenburg' ) ) ) {
+		if ( ( 'post.php' === $pagenow || 'post-new.php' === $pagenow ) && ( class_exists( 'Classic_Editor' ) || defined( 'DISABLE_GUTENBERG_FILE' ) || class_exists( 'CodePopular_disable_gutenberg' ) ) ) {
 
 			// We don't want to add templates unless it's a gutenberg page.
 			return;
@@ -45,7 +45,7 @@ class Templates {
 		// Include ReduxTemplates default template without wrapper.
 		add_filter( 'template_include', array( $this, 'template_include' ) );
 
-		// Override the default content-width when using Redux templates so the template doesn't look like crap.
+		// Override the default content-width when using Redux templates so the template doesn't look like shit.
 		add_action( 'wp', array( $this, 'modify_template_content_width' ) );
 
 		// Add ReduxTemplates supported Post types in page template.
@@ -66,7 +66,7 @@ class Templates {
 	/**
 	 * Add the redux-template class to the admin body if a redux-templates page type is selected.
 	 *
-	 * @param string|null $classes Classes string for admin panel.
+	 * @param string|null $classes Classes string for the admin panel.
 	 *
 	 * @return string|null
 	 * @since 4.1.19
@@ -88,7 +88,7 @@ class Templates {
 	}
 
 	/**
-	 * Override the $content_width variable for themes so our templates work properly and don't look squished.
+	 * Override the $content_width variable for themes, so our templates work properly and don't look squished.
 	 *
 	 * @param array $to_find Template keys to check against.
 	 *
@@ -116,7 +116,7 @@ class Templates {
 	}
 
 	/**
-	 * Override the $content_width variable for themes so our templates work properly and don't look squished.
+	 * Override the $content_width variable for themes, so our templates work properly and don't look squished.
 	 *
 	 * @since 4.0.0
 	 */
@@ -157,7 +157,7 @@ class Templates {
 	/**
 	 * Hook to add the templates to the dropdown
 	 *
-	 * @param array $post_templates Default post templates array.
+	 * @param array $post_templates Default post template array.
 	 *
 	 * @return array
 	 * @since 4.0.0
