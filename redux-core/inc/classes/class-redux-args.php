@@ -190,7 +190,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		}
 
 		/**
-		 * Builds and sanitizes global args array.
+		 * Builds and sanitizes a global args array.
 		 *
 		 * @param     array $args Global args.
 		 *
@@ -278,7 +278,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				$args['page_title'] = esc_html__( 'Options', 'redux-framework' );
 			}
 
-			// Auto create the page_slug appropriately.
+			// Auto creates the page_slug appropriately.
 			if ( empty( $args['page_slug'] ) ) {
 				if ( ! empty( $args['display_name'] ) ) {
 					$args['page_slug'] = sanitize_html_class( $args['display_name'] );
@@ -337,10 +337,6 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 						if ( is_array( $arr ) && ! empty( $arr ) ) {
 							foreach ( $arr as $y ) {
 								if ( strpos( Redux_Core::strtolower( $y ), 'redux' ) !== false ) {
-									$msg = '<strong>' . esc_html__( 'Redux Framework Notice', 'redux-framework' ) . ' </strong>' .
-										esc_html__( 'There are references to the Redux Framework support site in your config\'s ', 'redux-framework' ) .
-										'<code>admin_bar_links</code> ' . esc_html__( 'argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework' );
-
 									$this->omit_items = true;
 									break;
 								}
@@ -354,10 +350,6 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 						if ( is_array( $arr ) && ! empty( $arr ) ) {
 							foreach ( $arr as $y ) {
 								if ( strpos( Redux_Core::strtolower( $y ), 'redux' ) !== false ) {
-									$msg = '<strong>' . esc_html__( 'Redux Framework Notice:', 'redux-framework' ) . '</strong>' .
-										esc_html__( 'There are references to the Redux Framework support site in your config\'s', 'redux-framework' ) .
-										' <code>share_icons</code> ' . esc_html__( 'argument.  This is sample data.  Please change or remove this data before shipping your product.', 'redux-framework' );
-
 									$this->omit_icons = true;
 								}
 							}

@@ -92,7 +92,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 
 			static::make_descriptor();
 
-			// This part is out of opt name because it's non vendor dependant!
+			// This part is out of opt name because it's non-vendor dependant!
 			return apply_filters( 'redux/field/' . $d->get_field_type() . '/get_descriptor', $d ); // phpcs:ignore WordPress.NamingConventions.ValidHookName
 		}
 
@@ -193,15 +193,6 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 			if ( $parent->args['dev_mode'] ) {
 				$this->timestamp .= '.' . time();
 			}
-		}
-
-		/**
-		 * Retrieve dirname.
-		 *
-		 * @return string
-		 */
-		protected function get_dir(): ?string {
-			return $this->dir;
 		}
 
 		/**

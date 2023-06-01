@@ -139,8 +139,10 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 					/**
 					 * Action 'redux/options/{opt_name}/compiler'
 					 *
-					 * @param array  options
-					 * @param string CSS that get sent to the compiler hook
+					 * @param array  $options Global options.
+					 * @param string $css CSS that get sent to the compiler hook.
+					 * @param array  $changed_values Changed option values.
+					 * @param array  $output_variables Output variables.
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -149,8 +151,7 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 					/**
 					 * Action 'redux/options/{opt_name}/compiler/advanced'
 					 *
-					 * @param array  options
-					 * @param string CSS that get sent to the compiler hook, which sends the full Redux object
+					 * @param object $redux ReduxFramework object.
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName

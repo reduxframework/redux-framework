@@ -44,7 +44,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		}
 
 		/**
-		 * Display notices stored in notices array.
+		 * Display notices stored in a notice array.
 		 *
 		 * @access public
 		 */
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		}
 
 		/**
-		 * Evaluates user dismiss option for displaying admin notices.
+		 * Evaluates a user-dismissed option for displaying admin notices.
 		 *
 		 * @param array $notices Array of stored notices to display.
 		 *
@@ -97,8 +97,8 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 			global $current_user;
 
 			$core = $this->core();
-			if ( isset( $_GET ) && isset( $_GET['page'] ) && $core->args['page_slug'] === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-				// do_action( 'redux_admin_notices_run', $core->args );
+			if ( isset( $_GET['page'] ) && $core->args['page_slug'] === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+				do_action( 'redux_admin_notices_run', $core->args );
 
 				// Check for an active admin notice array.
 				if ( ! empty( $notices ) ) {
@@ -177,7 +177,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		private function dismiss_admin_notice() {
 			global $current_user;
 
-			// Verify the dismiss notice and id parameters are present.
+			// Verify the dismissed notice and id parameters are present.
 			if ( isset( $_GET['dismiss'] ) && isset( $_GET['id'] ) ) {
 				if ( isset( $_GET['nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_GET['nonce'] ) ), 'redux_hint_toggle' ) ) {
 					if ( 'true' === $_GET['dismiss'] || 'false' === $_GET['dismiss'] ) {
@@ -189,7 +189,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 						$id  = sanitize_text_field( wp_unslash( $_GET['id'] ) );
 						$val = sanitize_text_field( wp_unslash( $_GET['dismiss'] ) );
 
-						// Add the dismiss request to the user meta.
+						// Add the dismissed request to the user meta.
 						update_user_meta( $userid, 'ignore_' . $id, $val );
 					}
 				} else {
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 				if ( ! isset( $_POST['nonce'] ) || ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), $id . $userid . 'nonce' ) ) ) {
 					die( 0 );
 				} else {
-					// Add the dismiss request to the user meta.
+					// Add the dismissed request to the user meta.
 					update_user_meta( $userid, 'ignore_' . $id, true );
 				}
 			}
