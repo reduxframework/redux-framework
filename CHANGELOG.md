@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.1.4
+* Added: Class alias for customizer extension for Redux 3.x backward compatibility.
+* Modified: Unused code cleanup.
+
 ## 4.4.1.3
 * Updated: Default Google font list.
 * Fixed: jQuery deprecation notices in `typography` field.
