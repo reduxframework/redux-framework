@@ -159,7 +159,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 					/**
 					 * Filter 'redux-imported-text-{opt_name}'
 					 *
-					 * @param string  translated "settings imported" text
+					 * @param string $text Translated "settings imported" text.
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -180,7 +180,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 					/**
 					 * Filter 'redux-defaults-text-{opt_name}'
 					 *
-					 * @param string  translated "settings imported" text
+					 * @param string $text Translated "settings imported" text.
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -201,7 +201,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 					/**
 					 * Filter 'redux-defaults-section-text-{opt_name}'
 					 *
-					 * @param string  translated "settings imported" text
+					 * @param string $text Translated "settings imported" text.
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -222,7 +222,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 					/**
 					 * Filter 'redux-saved-text-{opt_name}'
 					 *
-					 * @param string translated "settings saved" text
+					 * @param string $text Translated "settings saved" text.
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -249,7 +249,7 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 			/**
 			 * Filter 'redux-changed-text-{opt_name}'
 			 *
-			 * @param string translated "settings have changed" text
+			 * @param string $text Translated "settings have changed" text.
 			 */
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName

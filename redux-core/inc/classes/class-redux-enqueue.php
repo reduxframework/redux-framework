@@ -501,7 +501,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		}
 
 		/**
-		 * Build localize array from field functions, if any.
+		 * Build a localize array from field functions, if any.
 		 *
 		 * @param object $core ReduxFramework object.
 		 * @param string $type Field type.
@@ -532,7 +532,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		}
 
 		/**
-		 * Compile panel errors and wearings for localize array.
+		 * Compile panel errors and wearings for a localize array.
 		 */
 		public function get_warnings_and_errors_array() {
 			$core = $this->core();

@@ -74,7 +74,7 @@ abstract class Redux_Extension_Abstract {
 	public function __construct( $parent, string $file = '' ) {
 		$this->parent = $parent;
 
-		// If the file is not given make sure we have one.
+		// If the file is not given, make sure we have one.
 		if ( empty( $file ) ) {
 			$file = $this->get_reflection()->getFileName();
 		}
@@ -185,7 +185,7 @@ abstract class Redux_Extension_Abstract {
 	}
 
 	/**
-	 * Overload field path.
+	 * Overload a field path.
 	 *
 	 * @param string $file  Extension file.
 	 * @param array  $field Field array.
@@ -204,7 +204,7 @@ abstract class Redux_Extension_Abstract {
 	}
 
 	/**
-	 * Sets the minimum version of Redux to use.  Displays a notice if requirements not met.
+	 * Sets the minimum version of Redux to use.  Displays a notice if requirements are not met.
 	 *
 	 * @param string $min_version       Minimum version to evaluate.
 	 * @param string $extension_version Extension version number.

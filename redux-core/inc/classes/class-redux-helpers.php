@@ -30,7 +30,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		public static $array_units = array( '', '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px', 'vh', 'vw', 'vmin', 'vmax', 'ch' );
 
 		/**
-		 * Retrieve section array from field ID.
+		 * Retrieve the section array from field ID.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 * @param string $field_id Field ID.
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Deprecated. Gets panel tab number from specified field.
+		 * Deprecated. Gets panel tab number from the specified field.
 		 *
 		 * @param object       $parent ReduxFramework object.
 		 * @param array|string $field  Field array.
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Gets panel tab number from specified field.
+		 * Gets panel tab number from the specified field.
 		 *
 		 * @param object       $parent ReduxFramework object.
 		 * @param array|string $field  Field array.
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Deprecated. Verifies if specified field type is in use.
+		 * Deprecated. Verifies if a specified field type is in use.
 		 *
 		 * @param array $fields Field arrays.
 		 * @param array $field  Field array.
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Verifies if specified field type is in use.
+		 * Verifies if a specified field type is in use.
 		 *
 		 * @param array $fields Field arrays.
 		 * @param array $field  Field arrays to check.
@@ -343,7 +343,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Deprecated. Determines if theme is child.
+		 * Deprecated. Determines if the theme is child.
 		 *
 		 * @param string $file Path to file.
 		 *
@@ -357,7 +357,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Determines if theme is child.
+		 * Determines if the theme is child.
 		 *
 		 * @param string $file Path to theme dir.
 		 *
@@ -744,7 +744,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * The capability 'relation' is reserved for controlling the relation mode (AND/OR), which defaults to AND.
 		 * Max depth of 30 levels.  False is returned for any conditions exceeding max depth.
 		 * If you want to check meta caps, you must also pass the object ID on which to check against.
-		 * If you get the error: PHP Notice:  Undefined offset: 0 in /wp-includes/capabilities.php, you didn't
+		 * If you get the error: PHP Notice: Undefined offset: 0 in /wp-includes/capabilities.php, you didn't
 		 * pass the required $object_id.
 		 *
 		 * @param int|object   $user          User ID or WP_User object to check. Defaults to the current user.
@@ -773,7 +773,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @since 3.6.3.4
 		 * @example
 		 *        user_can( 42, 'edit_pages' );                        // Checks if user ID 42 has the 'edit_pages' cap.
-		 *        user_can( 42, 'edit_page', 17433 );                  // Checks if user ID 42 has the 'edit_page' cap for post ID 17433.
+		 *        user_can( 42, 'edit_page', 17433 );                  // Checks if user ID 42 has the 'edit_page' cap for post-ID 17433.
 		 *        user_can( 42, array( 'edit_pages', 'edit_posts' ) ); // Checks if user ID 42 has both the 'edit_pages' and 'edit_posts' caps.
 		 */
 		public static function user_can( $user, $capabilities, int $object_id = null ): bool {
@@ -911,7 +911,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Retrieve updated Google font array.
+		 * Retrieve an updated Google font array.
 		 *
 		 * @param bool $download Flag to download to file.
 		 *
@@ -1133,9 +1133,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *
 		 * @param string $context Mode to use.
 		 *
-		 * @return array|mixed
+		 * @return array
 		 */
-		public static function get_material_design_colors( string $context = 'primary' ) {
+		public static function get_material_design_colors( string $context = 'primary' ): array {
 			$colors = array(
 				'primary'     => array( '#FFFFFF', '#000000', '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B' ),
 				'red'         => array( '#FFEBEE', '#FFCDD2', '#EF9A9A', '#E57373', '#EF5350', '#F44336', '#E53935', '#D32F2F', '#C62828', '#B71C1C', '#FF8A80', '#FF5252', '#FF1744', '#D50000' ),

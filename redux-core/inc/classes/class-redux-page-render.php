@@ -17,7 +17,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 	class Redux_Page_Render extends Redux_Class {
 
 		/**
-		 * Flag to show or hide hints in panel.
+		 * Flag to show or hide hints in a panel.
 		 *
 		 * @var bool
 		 * @access private
@@ -205,10 +205,10 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 			// Sidebar text.
 			if ( '' !== $core->args['help_sidebar'] ) {
 
-				// Specify users text from arguments.
+				// Specify user's text from arguments.
 				$screen->set_help_sidebar( $core->args['help_sidebar'] );
 			} else {
-				// If sidebar text is empty and hints are active, display text
+				// If a sidebar text is empty and hints are active, display text
 				// about hints.
 				if ( true === $this->show_hints ) {
 					$screen->set_help_sidebar( '<p><strong>Redux Framework</strong><br/><br/>' . esc_html__( 'Hint Tooltip Preferences', 'redux-framework' ) . '</p>' );
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 		}
 
 		/**
-		 * Class Add Sub Menu Function, creates options submenu in WordPress admin area.
+		 * Class Add Sub Menu Function, creates option submenu in WordPress admin area.
 		 *
 		 * @param       object $core ReduxFramework core pointer.
 		 *
@@ -272,7 +272,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 			} else {
 				// Network settings and Post type menus. These do not have
 				// wrappers and need to be appended to using add_submenu_page.
-				// Okay, since we've left the post type menu appending
+				// Okay, since we've left the post-type menu appending
 				// as default, we need to validate it, so anything that
 				// isn't post_type=<post_type> doesn't get through and mess
 				// things up.
@@ -287,12 +287,12 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					// It's there, so...
 					if ( $needle_pos > 0 ) {
 
-						// Get the post type.
+						// Get the post-type.
 						$post_type = substr( $page_parent, $needle_pos + strlen( $needle ) );
 
 						// Ensure it exists.
 						if ( post_type_exists( $post_type ) ) {
-							// Set flag to add the menu page.
+							// Set the flag to add the menu page.
 							$add_menu = true;
 						}
 						// custom menu.
@@ -315,8 +315,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 						}
 					}
 				} else {
-					// The page_parent was settings.php, so set menu add
-					// flag to true.
+					// The page_parent was settings.php, so set menu add flag to true.
 					$add_menu = true;
 				}
 				// Add the submenu if it's permitted.
@@ -371,7 +370,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 
 		/**
 		 * Field HTML OUTPUT.
-		 * Gets option from options array, then calls the specific field type class - allows extending by other devs
+		 * Gets an option from an option array, then calls the specific field type class - allows extending by other devs
 		 *
 		 * @param array             $field   Field array.
 		 * @param string|array|null $v       Values.
@@ -469,12 +468,6 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					return;
 				}
 
-				/**
-				 * Filter 'redux/{opt_name}/field/class/{field.type}'
-				 *
-				 * @param       string        field class file path
-				 * @param array $field field data
-				 */
 				$field_type = str_replace( '_', '-', $field['type'] );
 				$core_path  = Redux_Core::$dir . "inc/fields/{$field['type']}/class-redux-$field_type.php";
 
@@ -499,6 +492,13 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				}
 
 				$field_class = '';
+
+				/**
+				 * Filter 'redux/{opt_name}/field/class/{field.type}'
+				 *
+				 * @param string $path Field class file path.
+				 * @param array  $field field data
+				 */
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$class_file = apply_filters( "redux/{$core->args['opt_name']}/field/class/{$field['type']}", $filter_path, $field );
@@ -583,8 +583,8 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					/**
 					 * Filter 'redux/field/{opt_name}'
 					 *
-					 * @param       string        rendered field markup
-					 * @param array $field field data
+					 * @param string $content Rendered field markup.
+					 * @param array  $field field data
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -593,8 +593,8 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					/**
 					 * Filter 'redux/field/{opt_name}/{field.type}/render/after'
 					 *
-					 * @param       string        rendered field markup
-					 * @param array $field field data
+					 * @param string $content Rendered field markup.
+					 * @param array  $field Field data
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -603,8 +603,8 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					/**
 					 * Filter 'redux/field/{opt_name}/render/after'
 					 *
-					 * @param       string        rendered field markup
-					 * @param array $field field data
+					 * @param string $content Rendered field markup.
+					 * @param array  $field Field data
 					 */
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -817,7 +817,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 		}
 
 		/**
-		 * Do action redux-admin-head for options page
+		 * Do action redux-admin-head for option page
 		 *
 		 * @since       1.0.0
 		 * @access      public
@@ -871,7 +871,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				// If a hint is specified in the field, process it.
 				if ( isset( $field['hint'] ) && ! empty( $field['hint'] ) ) {
 
-					// Set show_hints flag to true, so help tab will be displayed.
+					// Set the show_hints flag to true, so the help tab will be displayed.
 					$this->show_hints = true;
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -940,7 +940,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 		}
 
 		/**
-		 * Return default output string for use in panel
+		 * Return default output string for use in a panel
 		 *
 		 * @param array $field Field array.
 		 *

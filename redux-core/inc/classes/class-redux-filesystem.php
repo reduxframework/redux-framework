@@ -131,7 +131,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Build FTP form.
+		 * Build an FTP form.
 		 */
 		public function ftp_form() {
 			if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				ob_end_clean();
 
 				/**
-				 * If we come here - we don't have credentials
+				 * If we come here, we don't have credentials
 				 * so the request for them is displaying
 				 * no need for further processing
 				 * */
@@ -210,7 +210,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 			/* now we got some credentials - try to use them */
 			if ( ! @wp_filesystem( $this->creds ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors
 				$this->creds = array();
-				/* incorrect connection data - ask for credentials again, now with error message */
+				/* incorrect connection data - ask for credentials again, now with an error message */
 				request_filesystem_credentials( $form_url, '', true, $context );
 				$this->parent->ftp_form = ob_get_contents();
 				ob_end_clean();
@@ -384,12 +384,12 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 					$res = $this->put_contents( $file, $content, $chmod );
 				}
 			} elseif ( 'chown' === $action ) {
-				// Changes file owner.
+				// Changes the file owner.
 				if ( isset( $owner ) && ! empty( $owner ) ) {
 					$res = $wp_filesystem->chmod( $file, $chmod, $recursive );
 				}
 			} elseif ( 'owner' === $action ) {
-				// Gets file owner.
+				// Gets the file owner.
 				$res = $this->wp_filesystem->owner( $file );
 			} elseif ( 'chmod' === $action ) {
 				if ( ! isset( $params['chmod'] ) || ( isset( $params['chmod'] ) && empty( $params['chmod'] ) ) ) {
@@ -552,7 +552,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Calls file_put_contents with chmod.
 		 *
-		 * @param string $path Get full cache path.
+		 * @param string $path Get a full cache path.
 		 *
 		 * @return string
 		 */
@@ -573,7 +573,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Does the specified file or dir exist.
+		 * Does the specified file or dir exist?
 		 *
 		 * @param string $abs_path Absolute path.
 		 * @return bool
@@ -732,7 +732,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Is the specified path readable.
+		 * Is the specified path readable?
 		 *
 		 * @param string $abs_path Absolute path.
 		 *
@@ -750,7 +750,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Is the specified path writable.
+		 * Is the specified path writable?
 		 *
 		 * @param string $abs_path Absolute path.
 		 *
@@ -850,7 +850,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Delete a directory.
 		 *
 		 * @param string $abs_path  Absolute path.
-		 * @param bool   $recursive Set to recursive create.
+		 * @param bool   $recursive Set to recursively create.
 		 *
 		 * @return bool
 		 */
@@ -865,7 +865,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$return = @rmdir( $abs_path );
 			} else {
 
-				// At this point it's a folder, and we're in recursive mode.
+				// At this point, it's a folder, and we're in recursive mode.
 				$abs_path = trailingslashit( $abs_path );
 				$filelist = $this->scandir( $abs_path );
 
@@ -897,7 +897,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Get a list of files/folders under specified directory.
+		 * Get a list of files/folders under the specified directory.
 		 *
 		 * @param string $abs_path       Absolute path.
 		 * @param bool   $include_hidden Include hidden files, defaults to true.
@@ -947,7 +947,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 					continue;
 				}
 
-				$struc['type']        = $this->is_dir( $abs_path . '/' . $entry ) ? 'd' : 'f';
+				$struc['type'] = $this->is_dir( $abs_path . '/' . $entry ) ? 'd' : 'f';
 
 				if ( 'd' === $struc['type'] ) {
 					if ( $recursive ) {
@@ -1047,7 +1047,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				return false;
 			}
 
-			// Try using rename first. if that fails (for example, source is read only) try copy.
+			// Try using rename first.
+			// If that fails (for example, the source is read only) try copy.
 			// Taken in part from WP_Filesystem_Direct.
 			if ( ! $overwrite && $this->file_exists( $destination_abs_path ) ) {
 				return false;

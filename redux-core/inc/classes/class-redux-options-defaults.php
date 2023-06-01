@@ -45,15 +45,15 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		private $repeater_id = '';
 
 		/**
-		 * Creates default options array.
+		 * Creates a default options array.
 		 *
 		 * @param string $opt_name      Panel opt_name.
 		 * @param array  $sections      Panel sections array.
 		 * @param null   $wp_data_class WordPress data class.
 		 *
-		 * @return array|string
+		 * @return array
 		 */
-		public function default_values( string $opt_name = '', array $sections = array(), $wp_data_class = null ) {
+		public function default_values( string $opt_name = '', array $sections = array(), $wp_data_class = null ): array {
 			// We want it to be clean each time this is run.
 			$this->options_defaults = array();
 
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 		 * @param string $opt_name      Panel opt_name.
 		 * @param array  $field         Field array.
 		 * @param null   $wp_data_class WordPress data class.
-		 * @param bool   $is_repeater   Is repeater field.
+		 * @param bool   $is_repeater   Is a repeater field.
 		 */
 		public function field_default_values( string $opt_name = '', array $field = array(), $wp_data_class = null, bool $is_repeater = false ) {
 			if ( 'repeater' === $field['type'] ) {
@@ -142,7 +142,6 @@ if ( ! class_exists( 'Redux_Options_Defaults', false ) ) {
 				} else {
 					$this->options_defaults[ $field['id'] ] = $def;
 				}
-
 			} elseif ( ( 'ace_editor' !== $field['type'] ) && ! ( 'select' === $field['type'] && ! empty( $field['ajax'] ) ) ) {
 				if ( isset( $field['data'] ) ) {
 					if ( ! isset( $field['args'] ) ) {

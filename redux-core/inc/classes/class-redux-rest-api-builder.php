@@ -107,7 +107,6 @@ class Redux_Rest_Api_Builder {
 	 * @return array
 	 */
 	public function get_field_paths(): array {
-		$fields     = array();
 		$fields_dir = trailingslashit( Redux_Core::$dir ) . 'inc' . DIRECTORY_SEPARATOR . 'fields' . DIRECTORY_SEPARATOR;
 		$dirs       = new RecursiveDirectoryIterator( $fields_dir );
 
@@ -147,7 +146,7 @@ class Redux_Rest_Api_Builder {
 				require_once $filename;
 			}
 			$field_class = Redux_Functions::class_exists_ex( $field_classes );
-			// Load it here to save some resources in autoloading!
+			// Load it here to save some resources in autoload!
 			if ( $field_class && is_subclass_of( $class, 'Redux_Field' ) ) {
 				$descriptor      = call_user_func( array( $class, 'get_descriptor' ) );
 				$descriptor_type = $descriptor->get_field_type();
@@ -216,7 +215,7 @@ class Redux_Rest_Api_Builder {
 	}
 
 	/**
-	 * Prepares the fields value to have the proper order.
+	 * Prepares the field value to have the proper order.
 	 *
 	 * @param array $fields Array of fields.
 	 *
@@ -242,6 +241,7 @@ class Redux_Rest_Api_Builder {
 	 * @param array $request Name of field.
 	 *
 	 * @return array
+	 * @throws ReflectionException Exception.
 	 */
 	public function render_field( array $request = array() ): array {
 		$type          = $request['type'];

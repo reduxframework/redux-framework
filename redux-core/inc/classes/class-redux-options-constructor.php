@@ -59,7 +59,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		/**
 		 * If we switch language in wpml the id of the post/page selected will be in the wrong language
 		 * So it won't appear as selected in the list of options and will be lost on next save, this fixes this by translating this id
-		 * Bonus it also gives the user the id of the post in the right language when they retrieve it
+		 * Bonus it also gives the user the id of the post in the right language when they retrieve it.
 		 * The recursion allows for it to work in a repeatable field.
 		 *
 		 * @param array $sections       Sections array.
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		}
 
 		/**
-		 * ->set_options(); This is used to set an arbitrary option in the options array
+		 * ->set_options(); This is used to set an arbitrary option in the option array
 		 *
 		 * @since ReduxFramework 3.0.0
 		 *
@@ -239,9 +239,10 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		/**
 		 * Register Option for use
 		 *
-		 * @since       1.0.0
-		 * @access      public
-		 * @return      void
+		 * @return void
+		 * @throws ReflectionException Exception.
+		 * @since  1.0.0
+		 * @access public
 		 */
 		public function register() {
 			$core = $this->core();
@@ -451,11 +452,11 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 							$core->options[ $field['id'] ]          = $field['default'];
 							$do_update                              = true;
 
-							// Check fields that hae no default value, but an options value with settings to
+							// Check fields that hae no default value, but an option value with settings to
 							// be saved by default.
 						} elseif ( ! isset( $core->options[ $field['id'] ] ) && isset( $field['options'] ) ) {
 
-							// If sorter field, check for options and save them as defaults.
+							// If a sorter field, check for options and save them as defaults.
 							if ( 'sorter' === $field['type'] || 'sortable' === $field['type'] ) {
 								$core->options_defaults[ $field['id'] ] = $field['options'];
 								$core->options[ $field['id'] ]          = $field['options'];
@@ -535,7 +536,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 							}
 						}
 
-						if ( ! isset( $field['class'] ) ) { // No errors please.
+						if ( ! isset( $field['class'] ) ) { // No errors, please.
 							$field['class'] = '';
 						}
 
@@ -621,7 +622,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 			/**
 			 * Action 'redux/options/{opt_name}/register'
 			 *
-			 * @param array option sections
+			 * @param array $section Option sections
 			 */
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -642,15 +643,17 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 				$core->output_class->enqueue();
 				$core->args['output_variables_prefix'] = $temp;
 
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName
+				$compiler_css = $core->compilerCSS;
+
 				/**
 				 * Action 'redux/options/{opt_name}/compiler'
 				 *
-				 * @param array  options
-				 * @param string CSS that get sent to the compiler hook
+				 * @param array  $options Options.
+				 * @param string $css CSS that get sent to the compiler hook.
+				 * @param array  $changed_values Changed values.
+				 * @param array  $output_variables Output variables.
 				 */
-
-				// phpcs:ignore WordPress.NamingConventions.ValidVariableName
-				$compiler_css = $core->compilerCSS;
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				do_action( "redux/options/{$core->args['opt_name']}/compiler", $core->options, $compiler_css, $core->transients['changed_values'], $core->output_variables );
@@ -658,8 +661,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 				/**
 				 * Action 'redux/options/{opt_name}/compiler/advanced'
 				 *
-				 * @param array  options
-				 * @param string CSS that get sent to the compiler hook, which sends the full Redux object
+				 * @param object $redux ReduxFramework object.
 				 */
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -701,11 +703,11 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		/**
 		 * Validate the Options before insertion
 		 *
-		 * @param       array $plugin_options The options array.
+		 * @param  array $plugin_options The option array.
 		 *
 		 * @return array|mixed|string
-		 * @since       3.0.0
-		 * @access      public
+		 * @since  3.0.0
+		 * @access public
 		 */
 		public function validate_options( array $plugin_options ) {
 			$core = $this->core();
@@ -969,7 +971,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 * ->get_default(); This is used to return the default value if default_show is set.
 		 *
 		 * @param string $opt_name The option name to return.
-		 * @param mixed  $default  (null)  The value to return if default not set.
+		 * @param mixed  $default  (null) The value to return if default not set.
 		 *
 		 * @return      mixed $default
 		 * @since       1.0.1

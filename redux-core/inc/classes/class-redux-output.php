@@ -51,9 +51,10 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Enqueue CSS and Google fonts for front end
 		 *
-		 * @return      void
-		 * @since       1.0.0
-		 * @access      public
+		 * @return void
+		 * @throws ReflectionException Exception.
+		 * @since  1.0.0
+		 * @access public
 		 */
 		public function enqueue() {
 			$core = $this->core();
@@ -79,13 +80,6 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 									$field['compiler'] = '';
 								}
 
-								/**
-								 * Field class file
-								 * filter 'redux/{opt_name}/field/class/{field.type}
-								 *
-								 * @param string        field class file
-								 * @param array $field field config data
-								 */
 								$field_type = str_replace( '_', '-', $field['type'] );
 								$core_path  = Redux_Core::$dir . "inc/fields/{$field['type']}/class-redux-$field_type.php";
 
@@ -108,6 +102,14 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 								} else {
 									$filter_path = $core_path;
 								}
+
+								/**
+								 * Field class file
+								 * filter 'redux/{opt_name}/field/class/{field.type}
+								 *
+								 * @param string $file field class file.
+								 * @param array $field field config data
+								 */
 
 								// phpcs:ignore WordPress.NamingConventions.ValidHookName
 								$class_file = apply_filters( "redux/{$core->args['opt_name']}/field/class/{$field['type']}", $filter_path, $field );
@@ -205,7 +207,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		}
 
 		/**
-		 * Add Google Fonts preconnect link.
+		 * Add a Google Fonts preconnect link.
 		 *
 		 * @param array  $urls              HTML to be added.
 		 * @param string $relationship_type Handle name.
@@ -231,14 +233,13 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		 *
 		 * @param string $html   HTML to be added.
 		 * @param string $handle Handle name.
-		 * @param string $href   HREF URL of script.
-		 * @param string $media  Media type.
+		 * @param string $href   HREF URL of a script.
 		 *
 		 * @return      string
 		 * @since       4.1.15
 		 * @access      public
 		 */
-		public function add_style_attributes( string $html = '', string $handle = '', string $href = '', string $media = '' ): string {
+		public function add_style_attributes( string $html = '', string $handle = '', string $href = '' ): string {
 			if ( Redux_Functions_Ex::string_starts_with( $handle, 'redux-google-fonts-' ) ) {
 				// Revamp thanks to Harry: https://csswizardry.com/2020/05/the-fastest-google-fonts/.
 				$href      = str_replace( array( '|', ' ' ), array( '%7C', '%20' ), urldecode( $href ) );
@@ -265,7 +266,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		 * @access      public
 		 */
 		private function output_variables( $core, array $section = array(), array $field = array(), $value = array(), ?string $style_data = '' ) {
-			// Let's allow section overrides please.
+			// Let's allow section overrides, please.
 			if ( isset( $section['output_variables'] ) && ! isset( $field['output_variables'] ) ) {
 				$field['output_variables'] = $section['output_variables'];
 			}
@@ -308,7 +309,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		}
 
 		/**
-		 * Output dynamic CSS at bottom of HEAD
+		 * Output dynamic CSS at the bottom of HEAD
 		 *
 		 * @return      void
 		 * @since       3.2.8

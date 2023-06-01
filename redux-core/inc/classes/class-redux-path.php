@@ -47,19 +47,6 @@ if ( ! class_exists( 'Redux_Path', false ) ) {
 
 			return $path;
 		}
-
-		/**
-		 * Require class.
-		 *
-		 * @param string $relative_path Path.
-		 */
-		public static function require_class( string $relative_path ) {
-			$path = self::get_path( $relative_path );
-
-			if ( file_exists( $path ) ) {
-				require_once $path;
-			}
-		}
 	}
 
 	Redux_Path::init();

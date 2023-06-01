@@ -566,38 +566,6 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		}
 
 		/**
-		 * Conversion.
-		 */
-		public static function pro_to_ext() {
-
-			// If they are a pro user, convert their key to use with Extendify.
-			$redux_pro_key = get_option( 'redux_pro_license_key' );
-
-			if ( $redux_pro_key && ! get_user_option( 'extendifysdk_redux_key_moved' ) ) {
-				try {
-					$extendify_user_state = get_user_meta( get_current_user_id(), 'extendifysdk_user_data' );
-					if ( false === $extendify_user_state ) {
-						$extendify_user_state = array();
-					}
-
-					if ( ! isset( $extendify_user_state[0] ) ) {
-						$extendify_user_state[0] = wp_json_encode( array() ); // '{}';
-					}
-
-					$extendify_user_data                    = json_decode( $extendify_user_state[0], true );
-					$extendify_user_data['state']['apiKey'] = $redux_pro_key;
-
-					update_user_meta( get_current_user_id(), 'extendifysdk_user_data', wp_json_encode( $extendify_user_data ) );
-				} catch ( Exception $e ) {
-					// Just have it fail gracefully.
-				}
-				// Run this regardless. If the try/catch failed, better not to keep trying as something else is wrong.
-				// In that case we can expect them to come to support, and we can give them a fresh key.
-				update_user_option( get_current_user_id(), 'extendifysdk_redux_key_moved', true );
-			}
-		}
-
-		/**
 		 * Determine if Extendify plugin is installed.
 		 *
 		 * @param string $name Plugin name.

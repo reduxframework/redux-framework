@@ -158,15 +158,12 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Things to run after pluggable.php had loaded.
 		 */
-		public static function plugins_loaded() {
-			Redux_Functions_Ex::pro_to_ext();
-		}
+		public static function plugins_loaded() {}
 
 		/**
 		 * Class init.
 		 */
 		private function init() {
-
 			self::$server = array(
 				'SERVER_SOFTWARE' => '',
 				'REMOTE_ADDR'     => Redux_Helpers::is_local_host() ? '127.0.0.1' : '',

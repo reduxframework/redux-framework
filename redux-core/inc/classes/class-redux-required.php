@@ -35,8 +35,8 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 		/**
 		 * Checks dependencies between objects based on the $field['required'] array
 		 * If the array is set it needs to have exactly 3 entries.
-		 * The first entry describes which field should be monitored by the current field. eg: "content"
-		 * The second entry describes the comparison parameter. eg: "equals, not, is_larger, is_smaller ,contains"
+		 * The first entry describes which field should be monitored by the current field. e.g.: "content"
+		 * The second entry describes the comparison parameter. eg: "equals, not, is_larger, is_smaller, contains"
 		 * The third entry describes the value that we are comparing against.
 		 * Example: if the required array is set to array('content','equals','Hello World'); then the current
 		 * field will only be displayed if the field with id "content" has exactly the value "Hello World"
@@ -95,14 +95,14 @@ if ( ! class_exists( 'Redux_Required', false ) ) {
 		}
 
 		/**
-		 * Check field for require deps.
+		 * Check field for required deps.
 		 *
 		 * @param object $core  ReduxFramework core pointer.
 		 * @param array  $field Field array.
 		 * @param array  $data  Required data.
 		 */
 		private function check_required_dependencies( $core, array $field, array $data ) {
-			// required field must not be hidden. Otherwise, hide this one by default.
+			// The Required field must not be hidden. Otherwise, hide this one by default.
 			if ( ! in_array( $data['parent'], $core->fields_hidden, true ) && ( ! isset( $core->folds[ $field['id'] ] ) || 'hide' !== $core->folds[ $field['id'] ] ) ) {
 				if ( isset( $core->options[ $data['parent'] ] ) ) {
 					$return = $this->compare_value_dependencies( $core->options[ $data['parent'] ], $data['checkValue'], $data['operation'] );
