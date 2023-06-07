@@ -219,12 +219,12 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function enqueue() {
-			wp_enqueue_style( 'select2' );
+			wp_enqueue_style( 'select2-css' );
 
 			wp_enqueue_script(
 				'redux-field-select',
 				Redux_Core::$url . 'inc/fields/select/redux-select' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'select2', 'redux' ),
+				array( 'jquery', 'select2-js', 'redux' ),
 				$this->timestamp,
 				true
 			);

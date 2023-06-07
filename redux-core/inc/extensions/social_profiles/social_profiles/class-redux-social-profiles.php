@@ -316,7 +316,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 			wp_enqueue_script(
 				'redux-field-social-profiles',
 				$this->url . 'redux-social-profiles' . $min . '.js',
-				array( 'jquery', 'jquery-ui-sortable', 'redux-spectrum', 'redux' ),
+				array( 'jquery', 'jquery-ui-sortable', 'redux-spectrum-js', 'redux' ),
 				time(),
 				true
 			);
@@ -331,7 +331,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 				wp_enqueue_style(
 					'redux-field-social-profiles',
 					$this->url . 'redux-social-profiles.css',
-					array( 'redux-spectrum' ),
+					array( 'redux-spectrum-css' ),
 					time()
 				);
 			}

@@ -912,8 +912,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::is_min();
 
-			if ( ! wp_style_is( 'select2' ) ) {
-				wp_enqueue_style( 'select2' );
+			if ( ! wp_style_is( 'select2-css' ) ) {
+				wp_enqueue_style( 'select2-css' );
 			}
 
 			if ( ! wp_style_is( 'wp-color-picker' ) ) {

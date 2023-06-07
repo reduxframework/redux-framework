@@ -167,7 +167,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Select2 CSS
 			 */
 			wp_enqueue_style(
-				'select2',
+				'select2-css',
 				Redux_Core::$url . 'assets/css/vendor/select2.min.css',
 				array(),
 				'4.1.0'
@@ -177,7 +177,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Spectrum CSS
 			 */
 			wp_register_style(
-				'redux-spectrum',
+				'redux-spectrum-css',
 				Redux_Core::$url . "assets/css/vendor/spectrum$this->min.css",
 				array(),
 				'1.3.3'
@@ -275,7 +275,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Select2
 			 */
 			wp_enqueue_script(
-				'select2',
+				'select2-js',
 				Redux_Core::$url . 'assets/js/vendor/select2/select2' . $this->min . '.js`',
 				array( 'jquery', 'redux-select2-sortable' ),
 				'4.1.0',
@@ -323,7 +323,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Spectrum JS
 			 */
 			wp_register_script(
-				'redux-spectrum',
+				'redux-spectrum-js',
 				Redux_Core::$url . 'assets/js/vendor/spectrum/redux-spectrum' . $this->min . '.js',
 				array( 'jquery' ),
 				'1.3.3',

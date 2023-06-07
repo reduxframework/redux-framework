@@ -224,12 +224,12 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 
 			if ( $filters_enabled ) {
 				if ( $field['gradient-type'] ) {
-					if ( ! wp_style_is( 'select2' ) ) {
-						wp_enqueue_style( 'select2' );
+					if ( ! wp_style_is( 'select2-css' ) ) {
+						wp_enqueue_style( 'select2-css' );
 					}
 
-					if ( ! wp_script_is( 'select2' ) ) {
-						wp_enqueue_script( 'select2' );
+					if ( ! wp_script_is( 'select2-js' ) ) {
+						wp_enqueue_script( 'select2-js' );
 					}
 				}
 

@@ -231,12 +231,12 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 		 * @since ReduxFramework 1.0.0
 		 */
 		public function enqueue() {
-			wp_enqueue_style( 'select2' );
+			wp_enqueue_style( 'select2-css' );
 
 			wp_enqueue_script(
 				'redux-field-dimensions',
 				Redux_Core::$url . 'inc/fields/dimensions/redux-dimensions' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'select2', 'redux' ),
+				array( 'jquery', 'select2-js', 'redux' ),
 				$this->timestamp,
 				true
 			);

@@ -373,15 +373,15 @@ if ( ! class_exists( 'Redux_Background', false ) ) {
 				}
 			}
 
-			if ( ! wp_style_is( 'select2' ) ) {
-				wp_enqueue_style( 'select2' );
+			if ( ! wp_style_is( 'select2-css' ) ) {
+				wp_enqueue_style( 'select2-css' );
 			}
 
 			if ( ! wp_style_is( 'wp-color-picker' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'select2', 'redux' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'select2-js', 'redux' );
 
 			wp_enqueue_script(
 				'redux-field-background',

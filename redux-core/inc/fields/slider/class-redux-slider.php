@@ -234,7 +234,7 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::is_min();
 
-			wp_enqueue_style( 'select2' );
+			wp_enqueue_style( 'select2-js' );
 
 			wp_enqueue_style(
 				'redux-nouislider',

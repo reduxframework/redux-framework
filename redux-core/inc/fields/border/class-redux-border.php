@@ -239,15 +239,15 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::is_min();
 
-			if ( ! wp_style_is( 'select2' ) ) {
-				wp_enqueue_style( 'select2' );
+			if ( ! wp_style_is( 'select2-css' ) ) {
+				wp_enqueue_style( 'select2-css' );
 			}
 
 			if ( ! wp_style_is( 'wp-color-picker' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'select2', 'wp-color-picker', 'redux' );
+			$dep_array = array( 'jquery', 'select2-js', 'wp-color-picker', 'redux' );
 
 			wp_enqueue_script(
 				'redux-field-border',
