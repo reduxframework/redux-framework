@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.1.5
+* Added: `init_empty` argument for `repeater` field.
+
 ## 4.4.1.4
 * Added: Class alias for customizer extension for Redux 3.x backward compatibility.
 * Modified: Unused code cleanup.
