@@ -138,39 +138,8 @@
 
 				newSlide.find( '.ui-accordion-content' ).html( html );
 
-				/* Var items = {};
-				 * if ( newSlide.find( '.redux-container-editor' ) ) {
-				 *    var first_editor_id = $( '.redux-repeater-accordion-repeater:first' ).find( '.redux-container-editor' ).attr( 'data-id' );
-				 *    var editor_settings = window.tinyMCEPreInit.mceInit[first_editor_id];
-				 *    $.each(
-				 *        newSlide.find( '.redux-container-editor' ), function( key, value ) {
-				 *            // Grab an editor id
-				 *            items.push( $( this ).attr( 'data-id' ) );
-				 *            // Grab an editor settings from wp_editor
-				 *
-				 *            // Grab a quicktags settings
-				 *            var quicktags_setting = QTags.getInstance( 'content' ).settings;
-				 *            var quicktags_id = items[items.length - 1];
-				 *            quicktags_setting.id = quicktags_id;
-				 *        }
-				 *    );
-				 * }
-				 */
-
 				// Append to the accordion.
 				$( parent ).append( newSlide );
-
-				/* Render tinymce !
-				 * if ( newSlide.find( '.redux-container-editor' ) ) {
-				 *    jQuery.each(
-				 *        items, function( i, new_editor_id ) {
-				 *            tinymce.createEditor( new_editor_id, editor_settings ).render();
-				 *            quicktags( new_editor_id );
-				 *            QTags._buttonsInit();
-				 *        }
-				 *    );
-				 * }
-				 */
 
 				// Reorder.
 				redux.field_objects.repeater.sort_repeaters( newSlide );
@@ -206,7 +175,9 @@
 					}
 				}
 
-				redux.field_objects.repeater.remove( newSlide );
+				if ( count > 1 ) {
+					redux.field_objects.repeater.remove( newSlide );
+				}
 			}
 		);
 	};
