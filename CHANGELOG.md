@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.1.6
+* Modified: Moved `font-display` to Google font API enqueue and out of `output` CSS string.
+
 ## 4.4.1.5
 * Added: `init_empty` argument for `repeater` field.
 
