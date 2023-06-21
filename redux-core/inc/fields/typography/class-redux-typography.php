@@ -1184,8 +1184,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 					$style .= $key . ':' . $value . ';';
 				}
-
-				$style .= 'font-display:' . $this->parent->args['font_display'] . ';';
 			}
 
 			return $style;
