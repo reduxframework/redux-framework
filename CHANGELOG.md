@@ -1,25 +1,16 @@
 # Redux Changelog
 
-## 4.4.1.6
-* Modified: Moved `font-display` to Google font API enqueue and out of `output` CSS string.
-
-## 4.4.1.5
+## 4.4.2
+* New: Icon Select Extension. Please review notes in README.md. [https://devs.redux.io/core-extensions/icon-select.html](https://devs.redux.io/core-extensions/icon-select.html)
 * Added: `init_empty` argument for `repeater` field.
-
-## 4.4.1.4
 * Added: Class alias for customizer extension for Redux 3.x backward compatibility.
 * Modified: Unused code cleanup.
-
-## 4.4.1.3
+* Modified: Moved `font-display` to Google font API enqueue and out of `output` CSS string.
 * Updated: Default Google font list.
-* Fixed: jQuery deprecation notices in `typography` field.
-
-## 4.4.1.2
-* New: Icon Select Extension. Please review notes in README.md. [https://devs.redux.io/core-extensions/icon-select.html](https://devs.redux.io/core-extensions/icon-select.html)
-
-## 4.4.1.1
 * Updated: ACE Editor 1.18.0
+* Fixed: jQuery deprecation notices in `typography` field.
 * Improved: Redux no longer enqueues resources for each field instance.
+* Release date: June 26, 2023
 
 ## 4.4.1
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)

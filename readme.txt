@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.2
-Stable tag: 4.4.1
+Stable tag: 4.4.2
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -114,6 +114,18 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.2 =
+* New: Icon Select Extension. Please review notes in README.md. [https://devs.redux.io/core-extensions/icon-select.html](https://devs.redux.io/core-extensions/icon-select.html)
+* Added: `init_empty` argument for `repeater` field.
+* Added: Class alias for customizer extension for Redux 3.x backward compatibility.
+* Modified: Unused code cleanup.
+* Modified: Moved `font-display` to Google font API enqueue and out of `output` CSS string.
+* Updated: Default Google font list.
+* Updated: ACE Editor 1.18.0
+* Fixed: jQuery deprecation notices in `typography` field.
+* Improved: Redux no longer enqueues resources for each field instance.
+* Release date: June 26, 2023
+
 = 4.4.1 =
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
 * Fixed: Multiple `multi_media` fields in the same section not respecting `max_upload_count`.
