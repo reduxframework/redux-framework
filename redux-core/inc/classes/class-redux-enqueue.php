@@ -508,18 +508,21 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 		 */
 		private function build_local_array( $core, string $type ) {
 			if ( isset( $core->transients['last_save_mode'] ) && ! empty( $core->transients['notices'][ $type ] ) ) {
+				error_log(print_r($core->transients['notices'][ $type ], true));
 				$the_total = 0;
 				$messages  = array();
 
 				foreach ( $core->transients['notices'][ $type ] as $msg ) {
-					$messages[ $msg['section_id'] ][ $type ][] = $msg;
+					if ( is_array( $msg ) && ! empty( $msg ) ) {
+						$messages[ $msg['section_id'] ][ $type ][] = $msg;
 
-					if ( ! isset( $messages[ $msg['section_id'] ]['total'] ) ) {
-						$messages[ $msg['section_id'] ]['total'] = 0;
+						if ( ! isset( $messages[ $msg['section_id'] ]['total'] ) ) {
+							$messages[ $msg['section_id'] ]['total'] = 0;
+						}
+
+						$messages[ $msg['section_id'] ]['total'] ++;
+						$the_total ++;
 					}
-
-					$messages[ $msg['section_id'] ]['total'] ++;
-					$the_total ++;
 				}
 
 				$this->localize_data[ $type ] = array(

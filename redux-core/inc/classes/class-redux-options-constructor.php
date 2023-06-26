@@ -226,12 +226,12 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 				// Last save key.
 				if ( isset( $core->transients['last_save'] ) ) {
-					$GLOBALS[ $options_global ]['REDUX_LAST_SAVE'] = $core->transients['last_save'];
+					$GLOBALS[ $options_global ]['REDUX_LAST_SAVE'] = $core->transients['last_save'] ?? '';
 				}
 
 				// Last compiler hook key.
 				if ( isset( $core->transients['last_compiler'] ) ) {
-					$GLOBALS[ $options_global ]['REDUX_LAST_COMPILER'] = $core->transients['last_compiler'];
+					$GLOBALS[ $options_global ]['REDUX_LAST_COMPILER'] = $core->transients['last_compiler'] ?? '';
 				}
 			}
 		}

@@ -28,13 +28,16 @@ if ( ! class_exists( 'Redux_Validation_No_Special_Chars', false ) ) {
 
 			$val = preg_match( '/[^a-zA-Z0-9_ -]/s', $this->value );
 
-			if ( $val > 0 || false !== $val ) {
+			if ( $val > 0 ) {
 				$this->field['current'] = $this->current;
 
 				$this->warning = $this->field;
 			}
 
 			$this->value = preg_replace( '/[^a-zA-Z0-9_ -]/s', '', $this->value );
+
+			$this->field['current'] = $this->value;
+			$this->sanitize         = $this->field;
 		}
 	}
 }
