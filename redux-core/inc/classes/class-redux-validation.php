@@ -169,15 +169,15 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 												unset( $plugin_options[ $field['id'] ][ $key ] );
 											}
 
-											if ( isset( $validation->error ) ) {
+											if ( ! empty( $validation->error ) ) {
 												$core->errors[] = $validation->error;
 											}
 
-											if ( isset( $validation->warning ) ) {
+											if ( ! empty( $validation->warning ) ) {
 												$core->warnings[] = $validation->warning;
 											}
 
-											if ( isset( $validation->sanitize ) ) {
+											if ( ! empty( $validation->sanitize ) ) {
 												$core->sanitize[] = $validation->sanitize;
 											}
 										}
@@ -195,15 +195,15 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 										$validation                     = new $validate( $core, $field, $pofi, $options[ $field['id'] ] );
 										$plugin_options[ $field['id'] ] = $validation->value;
 
-										if ( isset( $validation->error ) ) {
+										if ( ! empty( $validation->error ) ) {
 											$core->errors[] = $validation->error;
 										}
 
-										if ( isset( $validation->warning ) ) {
+										if ( ! empty( $validation->warning ) ) {
 											$core->warnings[] = $validation->warning;
 										}
 
-										if ( isset( $validation->sanitize ) ) {
+										if ( ! empty( $validation->sanitize ) ) {
 											$core->sanitize[] = $validation->sanitize;
 										}
 									}
