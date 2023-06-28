@@ -56,7 +56,7 @@ if ( ! class_exists( 'Redux_Switch', false ) ) {
 			wp_enqueue_script(
 				'redux-field-switch',
 				Redux_Core::$url . 'inc/fields/switch/redux-switch' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

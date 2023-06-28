@@ -316,7 +316,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 			wp_enqueue_script(
 				'redux-field-social-profiles',
 				$this->url . 'redux-social-profiles' . $min . '.js',
-				array( 'jquery', 'jquery-ui-sortable', 'redux-spectrum-js', 'redux' ),
+				array( 'jquery', 'jquery-ui-sortable', 'redux-spectrum-js', 'redux-js' ),
 				time(),
 				true
 			);

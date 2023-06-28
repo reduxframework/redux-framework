@@ -224,7 +224,7 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 			wp_enqueue_script(
 				'redux-field-select',
 				Redux_Core::$url . 'inc/fields/select/redux-select' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'select2-js', 'redux' ),
+				array( 'jquery', 'select2-js', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

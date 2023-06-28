@@ -290,7 +290,7 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'redux' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'redux-js' );
 
 			wp_enqueue_script(
 				'redux-field-box-shadow',

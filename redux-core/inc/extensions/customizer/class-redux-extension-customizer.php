@@ -261,7 +261,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			wp_enqueue_script(
 				'redux-extension-customizer',
 				$this->extension_url . 'redux-extension-customizer' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				self::$version,
 				true
 			);
@@ -724,7 +724,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			);
 
 			// Values used by the javascript.
-			wp_localize_script( 'redux', 'redux_opts', $localize );
+			wp_localize_script( 'redux-js', 'redux_opts', $localize );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux-enqueue-' . $this->parent->args['opt_name'] );

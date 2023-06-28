@@ -200,7 +200,7 @@ if ( ! class_exists( 'Redux_Sortable', false ) ) {
 			wp_enqueue_script(
 				'redux-field-sortable',
 				Redux_Core::$url . 'inc/fields/sortable/redux-sortable' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux', 'jquery-ui-sortable' ),
+				array( 'jquery', 'redux-js', 'jquery-ui-sortable' ),
 				$this->timestamp,
 				true
 			);

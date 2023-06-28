@@ -318,7 +318,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
 			wp_enqueue_script(
 				'redux-field-spacing',
 				Redux_Core::$url . 'inc/fields/spacing/redux-spacing' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'select2-js', 'redux' ),
+				array( 'jquery', 'select2-js', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

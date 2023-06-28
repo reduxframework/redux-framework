@@ -257,7 +257,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 			wp_enqueue_script(
 				'redux-field-datetime',
 				$this->url . 'redux-datetime' . $min . '.js',
-				array( 'jquery', 'redux-datetime', 'redux' ),
+				array( 'jquery', 'redux-datetime', 'redux-js' ),
 				Redux_Extension_Datetime::$version,
 				true
 			);

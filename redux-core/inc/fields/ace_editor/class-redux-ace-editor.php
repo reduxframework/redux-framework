@@ -104,7 +104,7 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 			wp_enqueue_script(
 				'redux-field-ace-editor',
 				Redux_Core::$url . 'inc/fields/ace_editor/redux-ace-editor' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'ace-editor', 'redux' ),
+				array( 'jquery', 'ace-editor', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

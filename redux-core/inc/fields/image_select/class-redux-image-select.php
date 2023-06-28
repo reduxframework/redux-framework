@@ -196,7 +196,7 @@ if ( ! class_exists( 'Redux_Image_Select', false ) ) {
 			wp_enqueue_script(
 				'redux-field-image-select',
 				Redux_Core::$url . 'inc/fields/image_select/redux-image-select' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

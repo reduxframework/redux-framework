@@ -158,7 +158,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 				$this->url . 'redux-import-export' . Redux_Functions::is_min() . '.js',
 				array(
 					'jquery',
-					'redux',
+					'redux-js',
 				),
 				Redux_Extension_Import_Export::$version,
 				true

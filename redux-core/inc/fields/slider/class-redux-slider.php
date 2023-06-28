@@ -254,7 +254,7 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 			wp_enqueue_script(
 				'redux-field-slider',
 				Redux_Core::$url . 'inc/fields/slider/redux-slider' . $min . '.js',
-				array( 'jquery', 'redux-nouislider', 'redux', 'select2' ),
+				array( 'jquery', 'redux-nouislider', 'redux-js', 'select2' ),
 				$this->timestamp,
 				true
 			);

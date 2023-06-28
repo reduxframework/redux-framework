@@ -73,7 +73,7 @@ if ( ! class_exists( 'Redux_My_Extension', false ) ) {
 			wp_enqueue_script(
 				'redux-my-field',
 				$this->url . 'redux-my-extension.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				Redux_Extension_My_Extension::$version,
 				true
 			);

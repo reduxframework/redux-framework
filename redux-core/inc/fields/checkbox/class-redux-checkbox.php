@@ -135,7 +135,7 @@ if ( ! class_exists( 'Redux_Checkbox', false ) ) {
 			wp_enqueue_script(
 				'redux-field-checkbox',
 				Redux_Core::$url . 'inc/fields/checkbox/redux-checkbox' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

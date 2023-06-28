@@ -70,7 +70,7 @@ if ( ! class_exists( 'Redux_Palette', false ) ) {
 			wp_enqueue_script(
 				'redux-field-palette',
 				Redux_Core::$url . 'inc/fields/palette/redux-palette' . $min . '.js',
-				array( 'jquery', 'redux', 'jquery-ui-button', 'jquery-ui-core' ),
+				array( 'jquery', 'redux-js', 'jquery-ui-button', 'jquery-ui-core' ),
 				$this->timestamp,
 				true
 			);

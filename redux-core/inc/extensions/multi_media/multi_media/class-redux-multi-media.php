@@ -251,7 +251,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 			wp_enqueue_script(
 				'redux-field-multi-media',
 				$this->url . 'redux-multi-media' . $min . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				Redux_Extension_Multi_Media::$version,
 				true
 			);

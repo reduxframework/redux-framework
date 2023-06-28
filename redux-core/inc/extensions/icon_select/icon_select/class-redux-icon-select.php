@@ -388,7 +388,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 			wp_enqueue_script(
 				'redux-field-icon-select',
 				$this->url . 'redux-icon-select' . $min . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				Redux_Core::$version,
 				true
 			);

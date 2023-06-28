@@ -570,7 +570,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					'redux-extension-users',
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
 					apply_filters( "redux/users/{$this->parent->args['opt_name']}/enqueue/redux-extension-users-js", $this->extension_url . 'redux-extension-users' . Redux_Functions::is_min() . '.js' ),
-					array( 'jquery', 'redux' ),
+					array( 'jquery', 'redux-js' ),
 					self::$version,
 					true
 				);

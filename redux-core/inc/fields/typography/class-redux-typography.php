@@ -928,7 +928,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				true
 			);
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'select2', 'redux', 'redux-webfont' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'select2', 'redux-js', 'redux-webfont' );
 
 			wp_enqueue_script(
 				'redux-field-typography',

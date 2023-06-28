@@ -73,7 +73,7 @@ if ( ! class_exists( 'Redux_Editor', false ) ) {
 			wp_enqueue_script(
 				'redux-field-editor',
 				Redux_Core::$url . 'inc/fields/editor/redux-editor' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

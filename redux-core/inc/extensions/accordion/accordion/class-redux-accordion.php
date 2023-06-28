@@ -105,7 +105,7 @@ if ( ! class_exists( 'Redux_Accordion' ) ) {
 			wp_enqueue_script(
 				'redux-field-accordion',
 				$this->url . 'redux-accordion' . $min . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				Redux_Extension_Accordion::$version,
 				true
 			);

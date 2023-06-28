@@ -247,7 +247,7 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'select2-js', 'wp-color-picker', 'redux' );
+			$dep_array = array( 'jquery', 'select2-js', 'wp-color-picker', 'redux-js' );
 
 			wp_enqueue_script(
 				'redux-field-border',

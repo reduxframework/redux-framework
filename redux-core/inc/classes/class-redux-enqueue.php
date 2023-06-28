@@ -345,7 +345,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			 * Redux JS
 			 */
 			wp_register_script(
-				'redux',
+				'redux-js',
 				Redux_Core::$url . 'assets/js/redux' . $this->min . '.js',
 				array( 'jquery', 'redux-vendor' ),
 				$this->timestamp,
@@ -750,18 +750,18 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			}
 
 			wp_localize_script(
-				'redux',
+				'redux-js',
 				'redux',
 				$this->repeater_data
 			);
 
 			wp_localize_script(
-				'redux',
+				'redux-js',
 				'redux_' . str_replace( '-', '_', $core->args['opt_name'] ),
 				$this->localize_data
 			);
 
-			wp_enqueue_script( 'redux' ); // Enqueue the JS now.
+			wp_enqueue_script( 'redux-js' ); // Enqueue the JS now.
 		}
 	}
 }

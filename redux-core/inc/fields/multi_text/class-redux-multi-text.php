@@ -118,7 +118,7 @@ if ( ! class_exists( 'Redux_Multi_Text', false ) ) {
 			wp_enqueue_script(
 				'redux-field-multi-text',
 				Redux_Core::$url . 'inc/fields/multi_text/redux-multi-text' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

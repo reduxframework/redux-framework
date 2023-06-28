@@ -288,7 +288,7 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 			wp_enqueue_script(
 				'redux-field-media',
 				Redux_Core::$url . 'assets/js/media/media' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

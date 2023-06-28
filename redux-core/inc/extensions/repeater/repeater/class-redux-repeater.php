@@ -261,7 +261,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 				'redux-field-repeater',
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$this->url . 'redux-repeater' . $min . '.js',
-				array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'jquery-ui-sortable', 'wp-color-picker', 'redux' ),
+				array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion', 'jquery-ui-sortable', 'wp-color-picker', 'redux-js' ),
 				Redux_Extension_Repeater::$version,
 				true
 			);

@@ -598,7 +598,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					wp_enqueue_script(
 						'redux-extension-metaboxes',
 						apply_filters( "redux/metaboxes/{$this->parent->args['opt_name']}/enqueue/redux-extension-metaboxes-js", $this->extension_url . 'redux-extension-metaboxes' . Redux_Functions::isMin() . '.js' ), // phpcs:ignore: WordPress.NamingConventions.ValidHookName
-						array( 'jquery', 'redux' ),
+						array( 'jquery', 'redux-js' ),
 						self::$version,
 						true
 					);

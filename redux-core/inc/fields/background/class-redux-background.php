@@ -381,7 +381,7 @@ if ( ! class_exists( 'Redux_Background', false ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 			}
 
-			$dep_array = array( 'jquery', 'wp-color-picker', 'select2-js', 'redux' );
+			$dep_array = array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' );
 
 			wp_enqueue_script(
 				'redux-field-background',

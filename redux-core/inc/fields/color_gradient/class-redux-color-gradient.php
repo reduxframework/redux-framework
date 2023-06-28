@@ -176,7 +176,7 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 			wp_enqueue_script(
 				'redux-field-color-gradient',
 				Redux_Core::$url . 'inc/fields/color_gradient/redux-color-gradient' . $min . '.js',
-				array( 'jquery', 'wp-color-picker', 'redux' ),
+				array( 'jquery', 'wp-color-picker', 'redux-js' ),
 				$this->timestamp,
 				true
 			);

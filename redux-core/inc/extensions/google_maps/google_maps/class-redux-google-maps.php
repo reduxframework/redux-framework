@@ -368,7 +368,7 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 			wp_register_script(
 				'redux-field-google_maps',
 				$this->url . 'redux-google-maps' . $min . '.js',
-				array( 'jquery', 'redux' ),
+				array( 'jquery', 'redux-js' ),
 				Redux_Extension_Google_Maps::$version,
 				true
 			);
