@@ -10,8 +10,9 @@
 * Updated: ACE Editor 1.18.0
 * Fixed: jQuery deprecation notices in `typography` field.
 * Fixed: Special characters validation not catching special characters.
+* Fixed: #3957 - Validation routines not working complete with multiple metaboxes
 * Improved: Redux no longer enqueues resources for each field instance.
-* Release date: June 27, 2023
+* Release date: June 29, 2023
 
 ## 4.4.1
 * New: User Metaboxes Extensions [https://devs.redux.io/core-extensions/user-metaboxes.html](https://devs.redux.io/core-extensions/user-metaboxes.html)
