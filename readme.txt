@@ -115,7 +115,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 == Changelog ==
 = 4.4.3 =
-* Fixed: Typo is JavaScript enqueue handle broke `typography` and `slider` fields.
+* Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
 * Release date: June 29, 2023
 
 = 4.4.2 =
