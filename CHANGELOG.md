@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.3.1
+* Fixed: Revert `redux-admin` CSS handle to previous handle.
+
 ## 4.4.3
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
 * Release date: June 29, 2023
