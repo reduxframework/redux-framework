@@ -114,6 +114,10 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.3 =
+* Fixed: Typo is JavaScript enqueue handle broke `typography` and `slider` fields.
+* Release date: June 29, 2023
+
 = 4.4.2 =
 * New: Icon Select Extension. Please review notes in README.md. [https://devs.redux.io/core-extensions/icon-select.html](https://devs.redux.io/core-extensions/icon-select.html)
 * Added: `init_empty` argument for `repeater` field.
