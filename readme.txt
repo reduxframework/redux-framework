@@ -121,7 +121,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Modified: Unused code cleanup.
 * Modified: Moved `font-display` to Google font API enqueue and out of `output` CSS string.
 * Updated: Default Google font list.
-* Updated: ACE Editor 1.18.0
+* Updated: ACE Editor 1.23.0
 * Fixed: jQuery deprecation notices in `typography` field.
 * Fixed: Special characters validation not catching special characters.
 * Fixed: Validation routines not working complete with multiple metaboxes
