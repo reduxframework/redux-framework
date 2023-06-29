@@ -349,7 +349,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 					 * Filter 'redux/options/{opt_name}/global_variable'
 					 *
 					 * @param array $value option value to set global_variable with
-					 */ global $$option_global;
+					 */
+					global $$option_global;
 
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
 					$$option_global = apply_filters( 'redux/options/' . $opt_name . '/global_variable', self::$options_defaults[ $opt_name ] );
