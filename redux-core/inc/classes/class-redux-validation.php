@@ -35,7 +35,6 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 			foreach ( $sections as $k => $section ) {
 				if ( isset( $section['fields'] ) ) {
 					foreach ( $section['fields'] as $fkey => $field ) {
-
 						if ( is_array( $field ) ) {
 							$field['section_id'] = $k;
 						}
@@ -220,20 +219,22 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 							$plugin_option = $plugin_options[ $field['id'] ] ?? null;
 							$option        = $options[ $field['id'] ] ?? null;
 
-							$callbackvalues = call_user_func( $callback, $field, $plugin_option, $option );
+							if ( null !== $plugin_option ) {
+								$callbackvalues = call_user_func( $callback, $field, $plugin_option, $option );
 
-							$plugin_options[ $field['id'] ] = $callbackvalues['value'];
+								$plugin_options[ $field['id'] ] = $callbackvalues['value'];
 
-							if ( isset( $callbackvalues['error'] ) ) {
-								$core->errors[] = $callbackvalues['error'];
-							}
+								if ( isset( $callbackvalues['error'] ) ) {
+									$core->errors[] = $callbackvalues['error'];
+								}
 
-							if ( isset( $callbackvalues['warning'] ) ) {
-								$core->warnings[] = $callbackvalues['warning'];
-							}
+								if ( isset( $callbackvalues['warning'] ) ) {
+									$core->warnings[] = $callbackvalues['warning'];
+								}
 
-							if ( isset( $callbackvalues['sanitize'] ) ) {
-								$core->sanitize[] = $callbackvalues['sanitize'];
+								if ( isset( $callbackvalues['sanitize'] ) ) {
+									$core->sanitize[] = $callbackvalues['sanitize'];
+								}
 							}
 						}
 					}

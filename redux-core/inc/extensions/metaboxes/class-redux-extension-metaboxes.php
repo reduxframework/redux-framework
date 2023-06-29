@@ -276,7 +276,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 
 			foreach ( $this->boxes as $bk => $box ) {
 
-				// If the post ids for this box are set, we're limiting to the current post id.
+				// If the post-ids for this box are set, we're limiting to the current post id.
 				if ( ! empty( $box['post_ids'] ) ) {
 					if ( ! is_array( $box['post_ids'] ) ) {
 						$box['post_ids'] = array( $box['post_ids'] );
@@ -287,7 +287,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 				}
 
 				if ( ! empty( $box['sections'] ) ) {
-					$this->sections = $box['sections'];
+					$this->sections = wp_parse_args( $this->sections, $box['sections'] );
 
 					$this->post_types = wp_parse_args( $this->post_types, $box['post_types'] );
 
