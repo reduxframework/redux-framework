@@ -145,7 +145,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			);
 
 			wp_enqueue_style(
-				'redux-admin',
+				'redux-admin-css',
 				Redux_Core::$url . "assets/css/redux-admin$this->min.css",
 				array( 'redux-admin-theme' ),
 				$this->timestamp
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				wp_enqueue_style(
 					'redux-rtl',
 					Redux_Core::$url . 'assets/css/rtl.css',
-					array( 'redux-admin' ),
+					array(),
 					$this->timestamp
 				);
 			}

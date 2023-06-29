@@ -557,7 +557,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 						'redux-extension-users',
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						apply_filters( "redux/users/{$this->parent->args['opt_name']}/enqueue/redux-extension-users-css", $this->extension_url . 'redux-extension-users.css' ),
-						array( 'redux-admin' ),
+						array(),
 						self::$version
 					);
 				}
