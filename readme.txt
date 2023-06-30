@@ -117,6 +117,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 = 4.4.4 =
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
 * Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
+* Fixed: jQuery deprecation notices in `typography` JavaScript.
 
 = 4.4.3 =
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
