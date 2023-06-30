@@ -1,7 +1,8 @@
 # Redux Changelog
 
-## 4.4.3.1
+## 4.4.4
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
+* Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
 
 ## 4.4.3
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.

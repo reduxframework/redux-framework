@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.2
-Stable tag: 4.4.3
+Stable tag: 4.4.4
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -24,7 +24,7 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <li>ACE Editor</li>
 <li>Background</li>
 <li>Border</li>
-<li>Bow Shadow</li>
+<li>Box Shadow</li>
 <li>Button Set</li>
 <li>Checkbox / Multi-Check</li>
 <li>Color (WordPress Native)</li>
@@ -114,6 +114,10 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.4 =
+* Fixed: Revert `redux-admin` CSS handle to previous handle.
+* Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
+
 = 4.4.3 =
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
 * Release date: June 29, 2023
