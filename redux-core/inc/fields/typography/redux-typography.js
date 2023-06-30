@@ -566,6 +566,14 @@
 		weights      = that.find( '.typography-style' );
 		baseUnits    = that.data( 'units' );
 
+		if ( undefined === word ) {
+			word = '0';
+		}
+
+		if ( undefined === letter ) {
+			letter = '0';
+		}
+
 		if ( weights.length > 0 ) {
 			defaultFontWeights = JSON.parse( decodeURIComponent( weights.data( 'weights' ) ) );
 		}
