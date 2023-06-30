@@ -169,8 +169,8 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 			);
 
 			// Spectrum CSS.
-			if ( ! wp_style_is( 'redux-spectrum-js' ) ) {
-				wp_enqueue_style( 'redux-spectrum-js' );
+			if ( ! wp_style_is( 'redux-spectrum-css' ) ) {
+				wp_enqueue_style( 'redux-spectrum-css' );
 			}
 
 			if ( $this->parent->args['dev_mode'] ) {
