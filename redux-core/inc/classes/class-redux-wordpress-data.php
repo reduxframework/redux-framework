@@ -469,6 +469,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 					if ( ! empty( $args ) ) {
 						$data = call_user_func( $args, $current_value );
 					}
+
 					break;
 			}
 

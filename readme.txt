@@ -119,6 +119,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
 * Fixed: jQuery deprecation notices in `typography` JavaScript.
 * Fixed: Error in connection banner on first-time activation.
+* Fixed: Missing redux-banner-admin.min.js file.
 
 = 4.4.3 =
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
