@@ -228,8 +228,8 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 				$color_class = $color_pickers ? '' : ' no-color-pickers';
 
 				echo '<div class="redux-social-profiles-link-url input_wrapper' . esc_attr( $color_class ) . '">';
-				echo '<label class="redux-text-url-label">' . esc_html( $label ) . '</label>';
-				echo '<input class="redux-social-profiles-url-text" data-key="' . esc_attr( $key ) . '" type="text" value="' . esc_url( $url ) . '" />';
+				echo '<label for="redux-social-profiles-url-' . esc_attr( $key ) . '-text" class="redux-text-url-label">' . esc_html( $label ) . '</label>';
+				echo '<input id="redux-social-profiles-url-' . esc_attr( $key ) . '-text" class="redux-social-profiles-url-text" data-key="' . esc_attr( $key ) . '" type="text" value="' . esc_url( $url ) . '" />';
 				echo '</div>';
 
 				$reset_text = __( 'Reset', 'redux-framework' );
@@ -242,9 +242,10 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 					$label = apply_filters( 'redux/extensions/social_profiles/' . $this->opt_name . '/color_picker/text', esc_html__( 'Text', 'redux-framework' ) );
 
 					echo '<div class="redux-social-profiles-text-color picker_wrapper" >';
-					echo '<label class="redux-text-color-label">' . esc_html( $label ) . '</label>';
+					echo '<label for="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' text" class="redux-text-color-label">' . esc_html( $label ) . '</label>';
 					echo '<input
                             class="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' text"
+                            id="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' text"
                             type="text"
                             value="' . esc_attr( $color ) . '"
                             data-key="' . esc_attr( $key ) . '"
@@ -255,9 +256,10 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 					$label = apply_filters( 'redux/extensions/social_profiles/' . $this->opt_name . '/color_picker/background', esc_html__( 'Background', 'redux-framework' ) );
 
 					echo '<div class="redux-social-profiles-background-color picker_wrapper">';
-					echo '<label class="redux-background-color-label">' . esc_html( $label ) . '</label>';
+					echo '<label for="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' background" class="redux-background-color-label" for="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' background">' . esc_html( $label ) . '</label>';
 					echo '<input
                             class="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' background"
+                            id="redux-social-profiles-color-picker-' . esc_attr( $key ) . ' background"
                             type="text"
                             value="' . esc_attr( $background ) . '"
                             data-key="' . esc_attr( $key ) . '"

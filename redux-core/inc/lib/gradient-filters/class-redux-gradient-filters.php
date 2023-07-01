@@ -79,7 +79,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 
 			if ( $field['gradient-reach'] ) {
 				$output .= '<div class="slider-from-reach">';
-				$output .= '<label>' . esc_html__( 'From Reach ', 'redux-framework' ) . ':  <strong>' . esc_html( $value['gradient-reach']['from'] ) . '%</strong></label>';
+				$output .= '<div class="label">' . esc_html__( 'From Reach ', 'redux-framework' ) . ':  <strong>' . esc_html( $value['gradient-reach']['from'] ) . '%</strong></div>';
 				$output .= '<div ';
 				$output .= 'class="redux-gradient-slider redux-color-gradient redux-gradient-from-reach color-gradient-input ' . esc_attr( $field['class'] ) . '"';
 				$output .= 'id="' . esc_attr( $field['id'] ) . '"';
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 				$output .= '</div>';
 
 				$output .= '<div class="slider-to-reach">';
-				$output .= '<label>' . esc_html__( 'To Reach', 'redux-framework' ) . ':  <strong>' . esc_html( $value['gradient-reach']['to'] ) . '%</strong></label>';
+				$output .= '<div class="label">' . esc_html__( 'To Reach', 'redux-framework' ) . ':  <strong>' . esc_html( $value['gradient-reach']['to'] ) . '%</strong></div>';
 				$output .= '<div ';
 				$output .= 'class="redux-gradient-slider redux-color-gradient redux-gradient-reach-to color-gradient-input ' . esc_attr( $field['class'] ) . '"';
 				$output .= 'id="' . esc_attr( $field['id'] ) . '"';
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Redux_Gradient_Filters' ) ) {
 				}
 
 				$output .= '<div class="slider-gradient-angle" ' . $style . '>';
-				$output .= '<label>' . esc_html__( 'Gradient Angle', 'redux-framework' ) . ':  <strong>' . $value['gradient-angle'] . '&deg;</strong></label>';
+				$output .= '<div class="label">' . esc_html__( 'Gradient Angle', 'redux-framework' ) . ':  <strong>' . $value['gradient-angle'] . '&deg;</strong></div>';
 				$output .= '<div ';
 				$output .= 'class="redux-gradient-slider redux-color-gradient redux-gradient-angle color-gradient-input ' . esc_attr( $field['class'] ) . '"';
 				$output .= 'id="' . esc_attr( $field['id'] ) . '"';

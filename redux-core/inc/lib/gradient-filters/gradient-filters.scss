@@ -40,14 +40,14 @@
         margin-top: 10px;
         width: 33%;
 
-        label {
+        .label {
             display: block;
             position: relative;
             font-size: 12px !important;
             text-align: left;
             color: #999999;
             margin: 4px 0 2px 0 !important;
-            cursor: default;            
+            cursor: default;
         }
 
         input:not(.slider-gradient-angle) {
@@ -67,5 +67,5 @@
             font-size: 12px;
             color: #999;
         }
-    }   
+    }
 }

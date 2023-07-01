@@ -594,11 +594,11 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 							$this->no_panel[] = $field['id'];
 						} else {
 							if ( isset( $field['disabled'] ) && $field['disabled'] ) {
-								$field['label_for'] = 'redux_disable_field';
+								$field['class'] = 'redux_disable_field';
 							}
 
 							if ( isset( $field['hidden'] ) && $field['hidden'] ) {
-								$field['label_for'] = 'redux_hide_field';
+								$field['class'] = 'redux_hide_field';
 							}
 
 							if ( true === $core->args['options_api'] ) {

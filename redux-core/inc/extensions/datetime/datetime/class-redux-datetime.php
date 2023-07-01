@@ -179,7 +179,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 			// If split mode is on, output two text boxes.
 			if ( true === $split ) {
 				echo '<div class="redux-date-input input_wrapper">';
-				echo '<label class="redux-date-input-label">' . esc_html( $date_placeholder ) . '</label>';
+				echo '<label for="' . esc_attr( $field_id ) . '-date" class="redux-date-input-label">' . esc_html( $date_placeholder ) . '</label>';
 				echo ' <input
 							data-id="' . esc_attr( $field_id ) . '"
 							type="text"
@@ -192,10 +192,11 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 				echo '</div>';
 
 				echo '<div class="redux-time-input input_wrapper">';
-				echo '<label class="redux-time-input-label">' . esc_html( $time_placeholder ) . '</label>';
+				echo '<label for="' . esc_attr( $field_id ) . '-time" class="redux-time-input-label">' . esc_html( $time_placeholder ) . '</label>';
 				echo ' <input
 							data-id="' . esc_attr( $field_id ) . '"
-							type="text" id="' . esc_attr( $field_id ) . '-time"
+							type="text"
+							id="' . esc_attr( $field_id ) . '-time"
 							name="' . esc_attr( $field_name ) . '[time]"
 							placeholder="' . esc_attr( $time_placeholder ) . '"
 							value="' . esc_attr( $this->value['time'] ) . '"
@@ -204,10 +205,11 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 				// Otherwise, just one.
 			} else {
 				echo '<div class="redux-datetime-input single_wrapper">';
-				echo '<label class="redux-datetime-input-label">' . esc_attr( $date_placeholder ) . '</label>';
+				echo '<label for="' . esc_attr( $field_id ) . '-date" class="redux-datetime-input-label">' . esc_attr( $date_placeholder ) . '</label>';
 				echo ' <input
 							data-id="' . esc_attr( $field_id ) . '"
-							type="text" id="' . esc_attr( $field_id ) . '-date"
+							type="text"
+							id="' . esc_attr( $field_id ) . '-date"
 							name="' . esc_attr( $field_name ) . '"
 							placeholder="' . esc_attr( $date_placeholder ) . '"
 							value="' . esc_attr( $this->value ) . '"

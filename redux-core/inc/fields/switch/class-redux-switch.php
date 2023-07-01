@@ -40,8 +40,8 @@ if ( ! class_exists( 'Redux_Switch', false ) ) {
 			$this->field['off'] = $this->field['off'] ?? esc_html__( 'Off', 'redux-framework' );
 
 			echo '<div class="switch-options">';
-			echo '<label class="cb-enable' . esc_attr( $cb_enabled ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"><span>' . esc_html( $this->field['on'] ) . '</span></label>';
-			echo '<label class="cb-disable' . esc_attr( $cb_disabled ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"><span>' . esc_html( $this->field['off'] ) . '</span></label>';
+			echo '<div class="cb-enable label' . esc_attr( $cb_enabled ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"><span>' . esc_html( $this->field['on'] ) . '</span></div>';
+			echo '<div class="cb-disable label' . esc_attr( $cb_disabled ) . '" data-id="' . esc_attr( $this->field['id'] ) . '"><span>' . esc_html( $this->field['off'] ) . '</span></div>';
 			echo '<input type="hidden" class="checkbox checkbox-input ' . esc_attr( $this->field['class'] ) . '" id="' . esc_attr( $this->field['id'] ) . '" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '" value="' . esc_attr( $this->value ) . '" />';
 			echo '</div>';
 		}

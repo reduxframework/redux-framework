@@ -60,7 +60,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 
 			if ( $can_convert ) {
 				echo '<div class="">';
-				echo '<label>';
+				echo '<label for="custom-font-convert">';
 				echo '<input type="hidden" class="checkbox-check" data-val="1" name="' . esc_attr( $this->field['name'] ) . '[convert]" value="' . esc_attr( $this->value['convert'] ) . '"/>';
 				echo '<input type="checkbox" class="checkbox" id="custom-font-convert" value="1"' . checked( $this->value['convert'], '1', false ) . '">';
 				echo 'Enable font conversion';

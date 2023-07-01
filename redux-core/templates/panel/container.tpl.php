@@ -5,7 +5,7 @@
  *
  * @author      Redux Framework
  * @package     ReduxFramework/Templates
- * @version:    4.3.6
+ * @version:    4.4.4
  */
 
 $expanded = ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : ( ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '' );
@@ -25,6 +25,7 @@ $this->parent->options['last_tab'] = ( isset( $_GET['tab'] ) && ! isset( $this->
 			data-nonce="<?php echo esc_attr( $nonce ); ?>"
 			enctype="multipart/form-data"
 			class="redux-form-wrapper"
+			id="redux-form-wrapper"
 			data-opt-name="<?php echo esc_attr( $this->parent->args['opt_name'] ); ?>">
 			<input
 				type="hidden" id="redux-compiler-hook"

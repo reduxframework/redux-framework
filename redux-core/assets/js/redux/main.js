@@ -127,7 +127,7 @@
 	};
 
 	$.redux.disableFields = function() {
-		$( 'label[for="redux_disable_field"]' ).each(
+		$( 'tr.redux_disable_field' ).each(
 			function() {
 				$( this ).parents( 'tr' ).find( 'fieldset:first' ).find( 'input, select, textarea' ).attr( 'name', '' );
 			}
@@ -135,11 +135,9 @@
 	};
 
 	$.redux.hideFields = function() {
-		$( 'label[for="redux_hide_field"]' ).each(
+		$( 'tr.redux_hide_field' ).each(
 			function() {
-				var tr = $( this ).parent().parent();
-
-				$( tr ).addClass( 'hidden' );
+				$( this ).addClass( 'hidden' );
 			}
 		);
 	};

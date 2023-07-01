@@ -329,11 +329,11 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 								<div class="redux-modal-close redux-icon-close"></div>
 							</div>
 							<div class="redux-modal-header">
-								<label>
-									<select class="redux-icon-select-font"></select>
+								<label for="redux-icon-select-font">
+									<select class="redux-icon-select-font" id="redux-icon-select-font"></select>
 								</label>
-								<label>
-									<input type="text" placeholder="<?php esc_html_e( 'Search...', 'redux-framework' ); ?>" class="redux-icon-search"/>
+								<label for="redux-icon-search">
+									<input type="text" placeholder="<?php esc_html_e( 'Search...', 'redux-framework' ); ?>" class="redux-icon-search" id="redux-icon-search"/>
 								</label>
 								<div class="redux-modal-loading">
 									<div class="redux-loading"></div>
