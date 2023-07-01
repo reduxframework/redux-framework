@@ -4,6 +4,7 @@
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
 * Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
 * Fixed: jQuery deprecation notices in `typography` JavaScript.
+* Fixed: Error in connection banner on first-time activation.
 
 ## 4.4.3
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
