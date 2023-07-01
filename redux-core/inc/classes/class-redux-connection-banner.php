@@ -80,12 +80,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		private function __construct() {
 			$clean_get = $_GET; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( isset( $clean_get['_wpnonce'] ) && wp_verify_nonce( $clean_get['_wpnonce'], $this->nonce ) ) {
-				if ( isset( $clean_get[ $this->register_option ] ) ) {
-					Redux_Functions_Ex::set_activated();
-					return;
-				}
 				if ( isset( $clean_get[ $this->dismiss_option ] ) ) {
-					Redux_Functions_Ex::set_deactivated();
 					update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
 					return;
 				}
