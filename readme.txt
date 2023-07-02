@@ -40,6 +40,7 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <li>Editor (WordPress Native)</li>
 <li>Gallery (WordPress Native)</li>
 <li>Google Maps</li>
+<li>Icon Select</li>
 <li>Image Select (Patterns/Presets)</li>
 <li>Import/Export</li>
 <li>Info (Header/Notice)</li>
@@ -69,6 +70,7 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <li>Textarea</li>
 <li>Typography</li>
  * The most advanced typography module complete with preview, Google fonts, and auto-css output!
+<li>User Profile Metaboxes</li>
 <li>Widget Areas (Classic Widgets only)</li>
 </ul>
 
@@ -121,6 +123,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: Error in connection banner on first-time activation.
 * Fixed: Missing redux-banner-admin.min.js file.
 * Fixed: Added extra check for the existence of the function name with callbacks. Some themes are not doing it correctly and crashing WordPress.
+* Release date: July 02, 2023
 
 = 4.4.3 =
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.

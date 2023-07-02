@@ -7,7 +7,8 @@
 * Fixed: Error in connection banner on first-time activation.
 * Fixed: Missing redux-banner-admin.min.js file.
 * Fixed: Added extra check for the existence of the function name with callbacks. Some themes are not doing it correctly and crashing WordPress.
-
+* Release date: July 02, 2023
+ 
 ## 4.4.3
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
 * Release date: June 29, 2023
