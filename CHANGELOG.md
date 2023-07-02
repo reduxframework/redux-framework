@@ -6,7 +6,7 @@
 * Fixed: jQuery deprecation notices in `typography` JavaScript.
 * Fixed: Error in connection banner on first-time activation.
 * Fixed: Missing redux-banner-admin.min.js file.
-* Fixed: Added extra check for the existance of the function name with callbacks. Some themes are not doing it right and crashing WordPress.
+* Fixed: Added extra check for the existence of the function name with callbacks. Some themes are not doing it correctly and crashing WordPress.
 
 ## 4.4.3
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
