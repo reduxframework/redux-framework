@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.4.1
+* Fixed: Added class alias for the old version of Redux Vendor Support so Redux doesn't crash.
+
 ## 4.4.4
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
 * Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
