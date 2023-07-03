@@ -264,3 +264,8 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		}
 	}
 }
+
+if ( ! class_exists( 'Redux_VendorURL' ) ) {
+	class_alias( 'Redux_Vendor_URL', 'Redux_VendorURL' );
+}
+
