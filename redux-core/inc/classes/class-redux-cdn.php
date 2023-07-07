@@ -67,14 +67,14 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		/**
 		 * Enqueue script or style.
 		 *
-		 * @param      string $handle File handle.
-		 * @param      string $src_cdn CDN source.
-		 * @param      array  $deps File deps.
-		 * @param      string $ver File version.
-		 * @param      mixed  $footer_or_media True or 'all'.
-		 * @param      bool   $is_script Script or style.
+		 * @param string      $handle          File handle.
+		 * @param string|null $src_cdn         CDN source.
+		 * @param array       $deps            File deps.
+		 * @param string      $ver             File version.
+		 * @param mixed       $footer_or_media True or 'all'.
+		 * @param bool        $is_script       Script or style.
 		 */
-		private static function enqueue( string $handle, string $src_cdn, array $deps, string $ver, $footer_or_media, bool $is_script = true ) {
+		private static function enqueue( string $handle, ?string $src_cdn, array $deps, string $ver, $footer_or_media, bool $is_script = true ) {
 			if ( $is_script ) {
 				wp_enqueue_script( $handle, $src_cdn, $deps, $ver, $footer_or_media );
 			} else {
@@ -265,7 +265,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 	}
 }
 
-if ( ! class_exists( 'Redux_VendorURL' ) ) {
-	class_alias( 'Redux_Vendor_URL', 'Redux_VendorURL' );
+if ( ! class_exists( 'Redux_Vendor_URL' ) && class_exists( 'Redux_Extension_Vendor_Support' ) ) {
+	class_alias( 'Redux_VendorURL', 'Redux_Vendor_URL' );
 }
 

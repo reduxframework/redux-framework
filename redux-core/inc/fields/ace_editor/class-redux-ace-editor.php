@@ -90,9 +90,9 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 				);
 			}
 
-			if ( ! wp_script_is( 'ace-editor' ) ) {
+			if ( ! wp_script_is( 'ace-editor-js' ) ) {
 				Redux_CDN::enqueue_script(
-					'ace-editor',
+					'ace-editor-js',
 					// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
 					'//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.23.0/ace.min.js',
 					array( 'jquery' ),
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 			wp_enqueue_script(
 				'redux-field-ace-editor',
 				Redux_Core::$url . 'inc/fields/ace_editor/redux-ace-editor' . Redux_Functions::is_min() . '.js',
-				array( 'jquery', 'ace-editor', 'redux-js' ),
+				array( 'jquery', 'ace-editor-js', 'redux-js' ),
 				$this->timestamp,
 				true
 			);
