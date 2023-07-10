@@ -552,8 +552,8 @@
 		familyBackup = that.find( 'select.redux-typography-family-backup' ).val();
 		size         = that.find( '.redux-typography-size' ).val();
 		height       = that.find( '.redux-typography-height' ).val();
-		word         = 0 !== that.find( '.redux-typography-word' ).val.length ? that.find( '.redux-typography-word' ).val() : '0';
-		letter       = 0 !== that.find( '.redux-typography-letter' ).val.length ? that.find( '.redux-typography-letter' ).val() : '0';
+		word         = that.find( '.redux-typography-word' ).val();
+		letter       = that.find( '.redux-typography-letter' ).val();
 		align        = that.find( 'select.redux-typography-align' ).val();
 		transform    = that.find( 'select.redux-typography-transform' ).val();
 		fontVariant  = that.find( 'select.redux-typography-font-variant' ).val();
@@ -914,13 +914,17 @@
 				that.find( '.typography-preview' ).css( 'font-family', 'inherit' );
 			}
 
-			that.find( '.typography-preview' ).css(
-				{
-					'line-height': height + lineHeightUnit,
-					'word-spacing': word + wordSpacingUnit,
-					'letter-spacing': letter + letterSpacingUnit
-				}
-			);
+			if ( height ) {
+				that.find( '.typography-preview' ).css( 'line-height', height + lineHeightUnit );
+			}
+
+			if ( word ) {
+				that.find( '.typography-preview' ).css( 'word-spacing', word + wordSpacingUnit );
+			}
+
+			if ( letter ) {
+				that.find( '.typography-preview' ).css( 'letter-spacing', letter + letterSpacingUnit );
+			}
 
 			if ( color ) {
 				that.find( '.typography-preview' ).css( 'color', color );
