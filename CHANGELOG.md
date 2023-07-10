@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.4.2
+* Fixed: `typography` letter-spacing and word-spacing stuck on zero value.
+
 ## 4.4.4.1
 * Fixed: Added class alias for the old version of Redux Vendor Support so Redux doesn't crash.
 * Fixed: Added additional shim to fix Vendor Support code embedded by themes that are doing it incorrectly.
