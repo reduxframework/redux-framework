@@ -1,9 +1,9 @@
 {
 	"description": "Redux is a simple, truly extensible options framework for WordPress themes and plugins.",
 	"main": "gulpfile.js",
-	"name": "Redux Framework",
+	"name": "redux-framework",
 	"author": "Team Redux",
-	"version": "4.4.4",
+	"version": "4.4.5",
 	"license": "GPL-3.0-or-later",
 	"repository": {
 		"type": "git",
@@ -12,7 +12,7 @@
 	"bugs": {
 		"url": "https://github.com/reduxframework/redux-framework/issues"
 	},
-	"homepage": "http://reduxframework.com",
+	"homepage": "https://redux.io",
 	"resolutions": {
 		"lodash": "4.17.5"
 	},

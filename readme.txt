@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.3
-Stable tag: 4.4.4
+Stable tag: 4.4.5
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -116,6 +116,14 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.5 =
+* Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
+* Fixed: Output HTML in the admin panel now complies with W3C standards.
+* Fixed: `typography` letter-spacing and word-spacing stuck on zero value.
+* Fixed: Field classes were disregarded when using `hidden` or `disable` arguments.
+* Fixed: Added class alias for the old version of Redux Vendor Support so Redux doesn't crash.
+* Fixed: Added additional shim to fix Vendor Support code embedded by themes that are doing it incorrectly.
+
 = 4.4.4 =
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
 * Fixed: `color_rgba` field not rendering properly due to misspelled CSS enqueue handle.
