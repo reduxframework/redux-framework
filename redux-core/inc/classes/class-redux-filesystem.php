@@ -617,11 +617,17 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		public function get_local_file_contents( string $abs_path ): string {
 
 			try {
-				ob_start();
+				$contents = '';
+
 				if ( $this->file_exists( $abs_path ) && is_file( $abs_path ) ) {
-					require_once $abs_path;
+					if ( is_writable( $abs_path ) ) {
+						ob_start();
+
+						include_once $abs_path;
+
+						$contents = ob_get_clean();
+					}
 				}
-				$contents = ob_get_clean();
 			} catch ( Exception $e ) {
 				// This means that ob_start has been disabled on the system. Lets fallback to good old file_get_contents.
 				$contents = file_get_contents( $abs_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
