@@ -346,7 +346,17 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( "redux/{$this->parent->args['opt_name']}/panel/template/" . $file . '/after' );
 
-			require $path;
+			if ( file_exists( $path ) ) {
+				if ( is_readable( $path ) ) {
+					require $path;
+				} else {
+					// translators: %1$s: template path.
+					echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux Panel Template %1$s cannot be read. Please check the permissions for this file.', 'redux-framework' ), '<code>' . esc_html( $path ) . '</code>' ) . '</p></div>';
+				}
+			} else {
+				// translators: %1$s: template path.
+				echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux Panel Template %1$s does not exist. Please reinstall Redux to replace this file.', 'redux-framework' ), '<code>' . esc_html( $path ) . '</code>' ) . '</p></div>';
+			}
 		}
 
 		/**
