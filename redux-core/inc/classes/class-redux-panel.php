@@ -354,8 +354,12 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 					echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux Panel Template %1$s cannot be read. Please check the permissions for this file.', 'redux-framework' ), '<code>' . esc_html( $path ) . '</code>' ) . '</p></div>';
 				}
 			} else {
-				// translators: %1$s: template path.
-				echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux Panel Template %1$s does not exist. Please reinstall Redux to replace this file.', 'redux-framework' ), '<code>' . esc_html( $path ) . '</code>' ) . '</p></div>';
+				if ( file_exists( Redux_Core::$dir . 'templates/panel/' . $file ) ) {
+					require Redux_Core::$dir . 'templates/panel/' . $file;
+				} else {
+					// translators: %1$s: template path.
+					echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux Panel Template %1$s does not exist. Please reinstall Redux to replace this file.', 'redux-framework' ), '<code>' . esc_html( $path ) . '</code>' ) . '</p></div>';
+				}
 			}
 		}
 
