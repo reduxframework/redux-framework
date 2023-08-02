@@ -10,6 +10,7 @@
 * Fixed: Add `wp-util` dependency to `icon_select` since, in some cases, WordPress does not.
 * Added: Error trapping for panel template loading for missing or unreadable files to avoid crashing the site.
 * Updated: Default Google Fonts.
+* Release date: August 03, 2023
 
 ## 4.4.4
 * Fixed: Revert `redux-admin` CSS handle to previous handle.

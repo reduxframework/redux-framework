@@ -123,7 +123,10 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: Field classes were disregarded when using `hidden` or `disable` arguments.
 * Fixed: Added class alias for the old version of Redux Vendor Support so Redux doesn't crash.
 * Fixed: Added additional shim to fix Vendor Support code embedded by themes that are doing it incorrectly.
+* Fixed: Add `wp-util` dependency to `icon_select` since, in some cases, WordPress does not.
+* Added: Error trapping for panel template loading for missing or unreadable files to avoid crashing the site.
 * Updated: Default Google Fonts.
+* Release date: August 03, 2023
 
 = 4.4.4 =
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
