@@ -326,9 +326,9 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 
 				add_filter( 'deprecated_file_trigger_error', array( $this, 'tick_file_deprecate_warning' ) );
 
-				$file = str_replace( '-', '_', $file );
+				$file = str_replace( '_', '-', $file );
 
-				_deprecated_file( esc_html( $file ), '4.0', esc_html( $old_file ), 'Please replace this outdated template with the current one from the Redux core.' );
+				_deprecated_file( esc_html( $old_file ), '4.0', esc_html( $file ), 'Please replace this outdated template with the current one from the Redux core.' );
 
 				if ( file_exists( $this->template_path . $file ) ) {
 					$path = $this->template_path . $file;
@@ -412,11 +412,11 @@ if ( ! class_exists( 'Redux_Panel', false ) ) {
 					$core_version      = Redux_Helpers::get_template_version( $this->original_path . $file );
 					$developer_version = Redux_Helpers::get_template_version( $developer_theme_file );
 
-					if ( $core_version && $developer_version && version_compare( $developer_version, $core_version, '<' ) && isset( $this->parent->args['dev_mode'] ) && ! empty( $this->parent->args['dev_mode'] ) ) {
+					if ( $core_version && $developer_version && version_compare( $developer_version, $core_version, '<' ) /* && isset( $this->parent->args['dev_mode'] ) && ! empty( $this->parent->args['dev_mode'] ) */ ) {
 						?>
 						<div id="message" class="error redux-message" style="display:block!important">
 							<p>
-								<strong><?php esc_html_e( 'Your panel has bundled copies of Redux Framework template files that are outdated!', 'redux-framework' ); ?></strong>&nbsp;&nbsp;<?php esc_html_e( 'Please update them now as functionality issues could arise.', 'redux-framework' ); ?>
+								<strong><?php esc_html_e( 'Your panel has bundled copies of Redux Framework template files that are outdated!', 'redux-framework' ); ?></strong>&nbsp;&nbsp;<?php esc_html_e( 'Please ask the author of this theme to update them as functionality issues could arise.', 'redux-framework' ); ?>
 							</p>
 						</div>
 						<?php
