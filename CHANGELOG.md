@@ -10,6 +10,7 @@
 * Fixed: Add `wp-util` dependency to `icon_select` since, in some cases, WordPress does not.
 * Added: Error trapping for panel template loading for missing or unreadable files to avoid crashing the site.
 * Updated: Default Google Fonts.
+* Updated: Font Awesome 6.4.2
 * Release date: August 03, 2023
 
 ## 4.4.4
