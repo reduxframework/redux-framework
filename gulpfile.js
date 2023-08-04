@@ -4,7 +4,6 @@
  * Gulp with WordPress.
  *
  * Implements:
- *      1. Live reloads browser with BrowserSync.
  *      2. CSS: Sass to CSS conversion, error catching, Auto prefixing, Sourcemaps,
  *         CSS minification, and Merge Media Queries.
  *      3. JS: Concatenates & uglifies Vendor and Custom JS files.
@@ -29,11 +28,6 @@
  */
 
 	// START Editing Project Variables.
-	// Project related.
-	// var project    = 'Redux Framework'; // Project Name.
-	// var productURL = './'; .
-var projectURL = 'http://127.0.0.1/redux-demo'; // Project URL. Could be something like localhost:8888.
-
 // Translation related.
 var text_domain    = 'redux-framework';                         // Your textdomain here.
 var destFile       = 'redux-framework.pot';                     // Name of the translation file.
@@ -58,8 +52,6 @@ var imagesSRC         = './redux-core/assets/img/raw/**/*.{png,jpg,gif,svg}'; //
 var imagesDestination = './redux-core/assets/img/'; // Destination folder of optimized images. Must be different from the imagesSRC folder.
 
 // Watch files paths.
-// var styleWatchFiles      = './redux-core/assets/css/**/*.scss'; // Path to all *.scss files inside css folder and inside them.
-// var vendorJSWatchFiles   = './redux-core/assets/js/vendor/*.js'; // Path to all vendor JS files.
 var reduxJSWatchFiles    = './redux-core/assets/js/redux/*.js'; // Path to all custom JS files.
 var projectPHPWatchFiles = './**/*.php'; // Path to all PHP files.
 
@@ -97,8 +89,6 @@ var rename      = require( 'gulp-rename' );                // Renames files E.g.
 var lineec      = require( 'gulp-line-ending-corrector' ); // Consistent Line Endings for non UIX systems. Gulp Plugin for Line Ending Corrector (A utility that makes sure your files have consistent line endings).
 var filter      = require( 'gulp-filter' );                // Enables you to work on a subset of the original files by filtering them using globbing.
 var sourcemaps  = require( 'gulp-sourcemaps' );            // Maps code in a compressed file (E.g. style.css) back to itâ€™s original position in a source file.
-var browserSync = require( 'browser-sync' ).create();      // Reloads browser and injects CSS. Time-saving synchronised browser testing.
-// var reload       = browserSync.reload;                  // For manual browser reload.
 var wpPot        = require( 'gulp-wp-pot' );               // For generating the .pot file.
 var sort         = require( 'gulp-sort' );                 // Recommended to prevent unnecessary changes in pot-file.
 var fs           = require( 'fs' );
@@ -123,42 +113,6 @@ var styles = [
 	{'path': './redux-core/inc/welcome/css/redux-welcome.scss', 'dest': './redux-core/inc/welcome/css/'},
 	{'path': './redux-core/inc/welcome/css/redux-banner.scss', 'dest': './redux-core/inc/welcome/css/'}
 ];
-
-/**
- * Task: `browser-sync`.
- *
- * Live Reloads, CSS injections, Localhost tunneling.
- *
- * This task does the following:
- *    1. Sets the project URL
- *    2. Sets inject CSS
- *    3. You may define a custom port
- *    4. You may want to stop the browser from opening automatically
- */
-gulp.task(
-	'browser-sync',
-	function() {
-		browserSync.init(
-			{
-				// For more options.
-				// @link http://www.browsersync.io/docs/options.
-				// Project URL.
-				proxy: projectURL,
-
-				// `true` Automatically open the browser with BrowserSync live server.
-				// `false` Stop the browser from automatically opening.
-				open: true,
-
-				// Inject CSS changes.
-				// Comment it to reload browser for every CSS change.
-				injectChanges: true
-
-				// Use a specific port (instead of the one auto-detected by Browsersync).
-				// port: 7000.
-			}
-		);
-	}
-);
 
 function getFolders( dir ) {
 	return fs.readdirSync( dir ).filter(
@@ -194,8 +148,7 @@ function process_scss( source, dest, add_min ) {
 	.pipe( sourcemaps.write( './' ) )
 	.pipe( lineec() )                                       // Consistent Line Endings for non UNIX systems.
 	.pipe( gulp.dest( dest ) ).pipe( filter( '**/*.css' ) ) // Filtering stream to only css files.
-	.pipe( mmq( {log: true} ) )                     // Merge Media Queries only for .min.css version.
-	.pipe( browserSync.stream() );                          // Reloads style.css if that is enqueued.
+	.pipe( mmq( {log: true} ) );                     // Merge Media Queries only for .min.css version.
 
 	if ( add_min ) {
 		process = process.pipe( rename( {suffix: '.min'} ) ).pipe(
@@ -207,8 +160,7 @@ function process_scss( source, dest, add_min ) {
 		)
 		.pipe( lineec() )               // Consistent Line Endings for non UNIX systems.
 		.pipe( gulp.dest( dest ) )
-		.pipe( filter( '**/*.css' ) )   // Filtering stream to only css files.
-		.pipe( browserSync.stream() );  // Reloads style.min.css if that is enqueued.
+		.pipe( filter( '**/*.css' ) );   // Filtering stream to only css files.
 	}
 
 	return process;
@@ -226,7 +178,6 @@ function process_scss( source, dest, add_min ) {
  *    4. Autoprefixes it and generates style.css
  *    5. Renames the CSS file with suffix .min.css
  *    6. Minifies the CSS file and generates style.min.css
- *    7. Injects CSS or reloads the browser via browserSync
  */
 function reduxStyles() {
 
@@ -664,7 +615,7 @@ function installFontawesome( done ) {
 	done();
 }
 
-var exec = require('child_process').exec;
+var exec = require( 'child_process' ).exec;
 
 function getFontAwesomeClasses( done ){
 	exec(

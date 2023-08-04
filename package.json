@@ -17,7 +17,6 @@
 		"lodash": "4.17.5"
 	},
 	"dependencies": {
-		"browser-sync": "^2.27.7",
 		"del": "^6.0.0",
 		"eslint": "^8.39.0",
 		"gifsicle": "^6.1.0",
