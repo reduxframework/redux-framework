@@ -127,7 +127,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Added: Error trapping for panel template loading for missing or unreadable files to avoid crashing the site.
 * Updated: Default Google Fonts.
 * Updated: Font Awesome 6.4.2
-* Release date: August 03, 2023
+* Release date: August 07, 2023
 
 = 4.4.4 =
 * Fixed: Revert `redux-admin` CSS handle to previous handle.
