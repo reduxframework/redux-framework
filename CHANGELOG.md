@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.5.1
+* Fixed: Adjusted translation for Google Font update message.
+
 ## 4.4.5
 * Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
 * Fixed: Output HTML in the admin panel now complies with W3C standards.
