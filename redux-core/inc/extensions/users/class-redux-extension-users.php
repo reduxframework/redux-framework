@@ -895,7 +895,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			}
 
 			$class = implode( ' ', $metaterm['args']['class'] );
-			echo '<div class=' . esc_attr( $class ) . '>';
+			echo '<div class="' . esc_attr( $class ) . '">';
 
 			$sections = $metaterm['args']['sections'];
 
@@ -943,7 +943,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 								}
 
 								// phpcs:ignore WordPress.Security.EscapeOutput
-								echo $this->parent->section_menu( $s_key, $section, '_' . $metaterm['args']['id'], $sections );
+								echo $this->parent->render_class->section_menu( $s_key, $section, '_' . $metaterm['args']['id'], $sections );
 							}
 							?>
 						</ul>
@@ -1047,8 +1047,9 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				</div>
 				<div class="clear"></div>
 			</div>
-
 			<?php
+
+			echo '</div>';
 		}
 
 		/**
