@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.4.5.2
+* New: Taxonomy Metaboxes Extension [https://devs.redux.io/core-extensions/taxonomy.html](https://devs.redux.io/core-extensions/taxonomy.html)
+* Fixed: HTML Output for User Profile Metaboxes.
+* Fixed: Admin panel CSS.
+
 ## 4.4.5.1
 * Fixed: Adjusted translation for Google Font update message.
 
