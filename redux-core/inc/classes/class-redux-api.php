@@ -125,6 +125,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 			require_once Redux_Core::$dir . 'inc/extensions/metaboxes/class-redux-metaboxes-api.php';
 			require_once Redux_Core::$dir . 'inc/extensions/users/class-redux-users-api.php';
+			require_once Redux_Core::$dir . 'inc/extensions/taxonomy/class-redux-taxonomy-api.php';
 		}
 
 		/**

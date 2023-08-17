@@ -1,0 +1,230 @@
+.redux-main {
+    min-height: 0 !important;
+}
+
+.redux-taxonomy.edit-page {
+    .redux-group-tab {
+        margin-bottom: 10px !important;
+    }
+    .redux-main {
+        .redux_field_th {
+            width: 100% !important;
+            float: none;
+            padding-top: 0;
+        }
+        .redux_field {
+            width: 100%;
+        }
+        .redux-field-container {
+            padding: 10px 0 0 0;
+        }
+    }
+}
+
+.redux-container {
+    display: block;
+    margin-top: 10px;
+    .redux-section-title {
+        padding-left: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .redux-field-container {
+        padding: 10px 0 0 !important;
+    }
+
+    .redux-section-desc {
+        margin-bottom: 20px;
+    }
+
+    .redux_main {
+        input[type=text] {
+            width: 95%;
+        }
+    }
+    .redux-group-tab h3:first-child {
+        margin-top: 0;
+    }
+    &.redux-has-sections {
+        .redux-group-tab {
+            margin-bottom: 0 !important;
+        }
+        .redux-main {
+            background: #fff;
+            span.description {
+                padding-bottom: 20px;
+            }
+        }
+        .redux-field-container {
+            padding: 10px 0 20px !important;
+        }
+    }
+    &.redux-no-sections {
+        .redux-field-container {
+            padding: 10px 0 20px !important;
+        }
+        .redux-main {
+            padding: 6px 15px 15px 15px !important;
+            margin-left: 0;
+            border-left: 0;
+            .default_br {
+                display: none;
+            }
+
+            .form-table th, .form-table td {
+                width: 100%;
+            }
+        }
+    }
+    &.redux-wp-style {
+        box-shadow: 0 0 !important;
+        border: none;
+        background: none;
+        .redux-field-container {
+            padding: 10px 0 0 !important;
+        }
+        .redux-group-tab h3 {
+            border-bottom-color: #ddd;
+        }
+        .redux-main {
+            box-shadow: none;
+            background: none;
+            margin-left: inherit;
+            padding: inherit;
+            border-left: none !important;
+            min-height: 0 !important;
+            .form-table tr {
+                border-bottom: 0;
+            }
+            .redux-field-container {
+                padding: 5px 0 !important;
+            }
+
+            .redux_field_th {
+                width: 210px;
+                float: left;
+            }
+            .redux_field {
+                width: 70%;
+            }
+            img {
+                max-width: 99% !important;
+            }
+
+            tr {
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:last-child {
+                    th,
+                    td {
+                        padding-bottom: 0;
+                    }
+                }
+
+                td {
+                    //padding-top: 20px !important;
+                    padding-top: 10px !important;
+                    width: 100%;
+                }
+            }
+
+            .form-table:first-child tr:first-child td {
+                padding-top: 0 !important;
+            }
+
+            .redux-field {
+                margin-bottom: 10px !important;
+            }
+
+            .redux-field:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+}
+
+.redux-container .redux-group-tab h3 {
+    cursor: text !important;
+    -webkit-user-select: inherit !important;
+    -moz-user-select: inherit !important;
+    user-select: inherit !important;
+    padding-left: 0 !important;
+    margin-top: 10px;
+}
+
+.display-group {
+    display: inherit !important;
+}
+
+.redux-metabox .form-table th,
+.redux-metabox .form-table td {
+    margin: 0;
+    padding: 0;
+    /*    width: auto;*/
+}
+@media (max-width: 601px) {
+    .redux-container.redux-wp-style .redux-main img {
+        max-width: 95% !important;
+    }
+}
+@media (max-width: 782px) {
+    .redux-container {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        .redux-main {
+            margin-left: 0;
+            border-left: 0;
+        }
+        .redux-sidebar {
+            margin-left: -314px;
+        }
+        .redux-group-tab {
+            display: block;
+        }
+    }
+    .redux-main {
+        .redux_field_th {
+            width: 100% !important;
+            float: none;
+        }
+        .redux_field {
+            width: 100% !important;
+        }
+
+        .form-table > tbody > tr > td {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .redux-field-container {
+            padding: 0 0 20px 0 !important;
+            padding-bottom: 10px !important;
+        }
+    }
+
+    .redux_field_th {
+        padding-top: 0 !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+.redux-no-sections .redux-group-tab {
+    display: block !important;
+}
+
+.redux-notices {
+    margin-bottom: 0;
+    border: 0;
+}
+
+.wp-color-result {
+    margin: 0 6px 0 0 !important;
+}
+
+.redux-container .ui-button-text-only .ui-button-text {
+    padding: 0;
+}
+
