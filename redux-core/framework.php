@@ -407,6 +407,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $localize_data = array();
 
 		/**
+		 * Array of checked transients used by Redux.
+		 *
+		 * @var array
+		 */
+		public $transients_check = array();
+
+		/**
 		 * Deprecated shim for v3 templates.
 		 *
 		 * @var array
