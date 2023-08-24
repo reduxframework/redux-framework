@@ -159,9 +159,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 			}
 
 			foreach ( self::$terms[ $opt_name ] as $term ) {
-				$permissions      = $term['permissions'] ?? false;
-				$add_visibility   = $term['add_visibility'] ?? false;
-				$term['sections'] = self::construct_sections( $opt_name, $term['id'], $permissions, $add_visibility );
+				$term['sections'] = self::construct_sections( $opt_name, $term['id'] );
 				$terms[]          = $term;
 			}
 
@@ -175,12 +173,10 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 		 *
 		 * @param string $opt_name       Panel opt_name.
 		 * @param string $term_id        Term ID.
-		 * @param bool   $permissions    Permissions.
-		 * @param bool   $add_visibility Add visibility.
 		 *
 		 * @return array
 		 */
-		public static function construct_sections( string $opt_name, string $term_id, bool $permissions = false, bool $add_visibility = false ): array {
+		public static function construct_sections( string $opt_name, string $term_id ): array {
 			$sections = array();
 
 			if ( ! isset( self::$sections[ $opt_name ] ) ) {
@@ -194,7 +190,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 					$p = $section['priority'];
 
 					while ( isset( $sections[ $p ] ) ) {
-						echo esc_html( $p ++ );
+						echo esc_html( $p++ );
 					}
 
 					$section['fields'] = self::construct_fields( $opt_name, $section_id );
@@ -239,7 +235,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 					$p = $field['priority'];
 
 					while ( isset( $fields[ $p ] ) ) {
-						echo esc_html( $p ++ );
+						echo esc_html( $p++ );
 					}
 
 					$fields[ $p ] = $field;
@@ -476,20 +472,6 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Set terms.
-		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param array  $terms    Terms array.
-		 */
-		public static function set_terms( string $opt_name = '', array $terms = array() ) {
-			if ( ! empty( $terms ) && is_array( $terms ) ) {
-				foreach ( $terms as $term ) {
-					self::set_term( $opt_name, $term );
-				}
-			}
-		}
-
-		/**
 		 * Get terms.
 		 *
 		 * @param string $opt_name Panel opt_name.
@@ -501,24 +483,6 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 
 			if ( ! empty( $opt_name ) && ! empty( self::$terms[ $opt_name ] ) ) {
 				return self::$terms[ $opt_name ];
-			}
-
-			return false;
-		}
-
-		/**
-		 * Get box.
-		 *
-		 * @param string $opt_name Panel opt_name.
-		 * @param string $key      Key.
-		 *
-		 * @return mixed
-		 */
-		public static function get_box( string $opt_name = '', string $key = '' ) {
-			self::check_opt_name( $opt_name );
-
-			if ( ! empty( $opt_name ) && ! empty( $key ) && ! empty( self::$terms[ $opt_name ] ) && isset( self::$terms[ $opt_name ][ $key ] ) ) {
-				return self::$terms[ $opt_name ][ $key ];
 			}
 
 			return false;
@@ -658,10 +622,8 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 						if ( is_array( $default_value ) ) {
 							$meta = wp_parse_args( $meta, $default_value );
 						}
-					} else {
-						if ( '' === $meta && '' !== $default_value ) {
+					} elseif ( '' === $meta && '' !== $default_value ) {
 							$meta = $default_value;
-						}
 					}
 				} else {
 					$meta = wp_parse_args( $meta, $defaults );

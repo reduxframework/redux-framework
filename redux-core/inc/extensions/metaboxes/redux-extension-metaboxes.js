@@ -1,7 +1,7 @@
 /* global reduxMetaboxes */
 
 jQuery(
-	function( $ ) {
+	function ( $ ) {
 		'use strict';
 
 		var isGutenberg = false;
@@ -9,7 +9,7 @@ jQuery(
 		$.reduxMetaBoxes = $.reduxMetaBoxes || {};
 
 		$( document ).ready(
-			function() {
+			function () {
 				$.reduxMetaBoxes.init();
 
 				if ( $( 'body' ).hasClass( 'block-editor-page' ) ) {
@@ -19,14 +19,14 @@ jQuery(
 		);
 
 		setTimeout(
-			function() {
+			function () {
 				if ( true === isGutenberg ) {
 					$( '.postbox .toggle-indicator' ).removeClass( 'toggle-indicator' ).addClass( 'el' );
 				}
 
 				$( '#publishing-action .button, #save-action .button, .editor-post-publish-button' ).on(
 					'click',
-					function() {
+					function () {
 						$( '.redux-save-warn' ).slideUp();
 
 						window.onbeforeunload = null;
@@ -36,7 +36,7 @@ jQuery(
 			1000
 		);
 
-		$.reduxMetaBoxes.init = function() {
+		$.reduxMetaBoxes.init = function () {
 			$.reduxMetaBoxes.notLoaded = true;
 
 			$.redux.initFields();
@@ -47,24 +47,24 @@ jQuery(
 
 			if ( isGutenberg ) {
 				setTimeout(
-					function() {
+					function () {
 						$.reduxMetaBoxes.checkBoxVisibility();
 
 						$( '.editor-post-format__content select, .editor-post-format select' ).on(
 							'change',
-							function() {
+							function () {
 								$.reduxMetaBoxes.checkBoxVisibility( 'post_format' );
 							}
 						);
 
 						$( '.edit-post-post-template__toggle' ).on(
 							'click',
-							function() {
+							function () {
 								setTimeout(
-									function() {
+									function () {
 										$( '.components-popover .components-select-control__input' ).on(
 											'change',
-											function() {
+											function () {
 												console.log( 'change' );
 												$.reduxMetaBoxes.checkBoxVisibility( 'page_template' );
 											}
@@ -82,28 +82,28 @@ jQuery(
 
 				$( '#page_template' ).on(
 					'change',
-					function() {
+					function () {
 						$.reduxMetaBoxes.checkBoxVisibility( 'page_template' );
 					}
 				);
 
 				$( 'input[name="post_format"]:radio' ).on(
 					'change',
-					function() {
+					function () {
 						$.reduxMetaBoxes.checkBoxVisibility( 'post_format' );
 					}
 				);
 			}
 		};
 
-		$.reduxMetaBoxes.checkBoxVisibility = function( fieldID ) {
+		$.reduxMetaBoxes.checkBoxVisibility = function ( fieldID ) {
 			if ( 0 !== reduxMetaboxes.length ) {
 				$.each(
 					reduxMetaboxes,
-					function( box, values ) {
+					function ( box, values ) {
 						$.each(
 							values,
-							function( field, v ) {
+							function ( field, v ) {
 								var visible = false;
 								var testValue;
 
@@ -121,7 +121,7 @@ jQuery(
 									if ( testValue ) {
 										$.each(
 											v,
-											function( key, val ) {
+											function ( key, val ) {
 												if ( val === testValue ) {
 													visible = true;
 												}

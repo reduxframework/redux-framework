@@ -1,25 +1,25 @@
 /**
  * Redux Taxonomy
- * Dependencies      : jquery
- * Created by        : Dovy Paukstys
- * Date              : 19 Feb. 2014
+ * Dependencies: jquery
+ * Created by: Dovy Paukstys
+ * Date: 19 Feb. 2014
  */
 
 /* global redux */
 
 jQuery(
-	function( $ ) {
+	function ( $ ) {
 		'use strict';
 
 		$.reduxTaxonomy = $.reduxTaxonomy || {};
 
 		$( document ).ready(
-			function() {
+			function () {
 				$.reduxTaxonomy.init();
 			}
 		);
 
-		$.reduxTaxonomy.init = function() {
+		$.reduxTaxonomy.init = function () {
 			var reduxObject;
 			var optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
@@ -36,10 +36,10 @@ jQuery(
 			reduxObject.args.disable_save_warn = true;
 		};
 
-		// Check for successful element added since WP ajax doesn't have a callback.
+		// Check for a successful element added since WP ajax doesn't have a callback.
 		$.reduxTaxonomy.editCount = $( '#the-list tr' );
 
-		$.reduxTaxonomy.editCheck = function() {
+		$.reduxTaxonomy.editCheck = function () {
 			var tr;
 
 			if ( $( '#ajax-response .error' ).length ) {
@@ -60,13 +60,13 @@ jQuery(
 
 		$( '#submit' ).on(
 			'click',
-			function() {
+			function () {
 				window.onbeforeunload = null;
 
 				$.reduxTaxonomy.editCount = $( '#the-list tr' ).length;
 
 				$( document ).ajaxSuccess(
-					function() {
+					function () {
 						$.reduxTaxonomy.editCheck();
 					}
 				);

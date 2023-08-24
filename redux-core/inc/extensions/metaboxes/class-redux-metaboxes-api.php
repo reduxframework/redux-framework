@@ -169,7 +169,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Construct global args array.
+		 * Construct the global args array.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Construct global args array.
+		 * Construct the global args array.
 		 *
 		 * @param string $opt_name Panel opt_name.
 		 *
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 					$p = $section['priority'];
 
 					while ( isset( $sections[ $p ] ) ) {
-						echo esc_html( $p ++ );
+						echo esc_html( $p++ );
 					}
 
 					$section['fields'] = self::construct_fields( $opt_name, $section_id );
@@ -338,7 +338,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 					$p = $field['priority'];
 
 					while ( isset( $fields[ $p ] ) ) {
-						echo esc_html( $p ++ );
+						echo esc_html( $p++ );
 					}
 
 					$fields[ $p ] = $field;
@@ -351,7 +351,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Retrieve section array.
+		 * Retrieve the section array.
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param string|int $id Section ID.
@@ -427,7 +427,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 
 						while ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
 							$section['id'] = $orig . '_' . $i;
-							$i++;
+							++$i;
 						}
 					}
 				}
@@ -512,7 +512,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Retrieves field array.
+		 * Retrieves the field array.
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param string|int $id Field ID.
@@ -528,7 +528,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		}
 
 		/**
-		 * Retrieves field array.
+		 * Retrieves the field array.
 		 *
 		 * @param string     $opt_name Panel opt_name.
 		 * @param string|int $id Field ID.
@@ -618,7 +618,7 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 
 						while ( isset( self::$boxes[ $opt_name ][ $box['id'] ] ) ) {
 							$box['id'] = $orig . '_' . $i;
-							$i++;
+							++$i;
 						}
 					}
 				}

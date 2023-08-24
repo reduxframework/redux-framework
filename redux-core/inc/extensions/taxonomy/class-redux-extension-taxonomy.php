@@ -170,17 +170,19 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		/**
 		 * Redux_Extension_Taxonomy constructor.
 		 *
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 */
-		public function __construct( $parent ) {
+		public function __construct( $redux ) {
 			global $pagenow;
 
-			parent::__construct( $parent, __FILE__ );
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'taxonomy' );
 			$this->parent->extensions['taxonomy'] = $this;
 
 			$this->pagenows = array( 'edit-tags.php', 'term.php', 'admin-ajax.php' );
+
+			include_once Redux_Core::$dir . 'inc/extensions/taxonomy/redux-taxonomy-helpers.php';
 
 			add_action( 'admin_notices', array( $this, 'meta_terms_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
@@ -195,11 +197,10 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					add_action( 'edit_' . sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) ), array( $this, 'meta_terms_save' ), 10, 3 );
 				}
 			}
-
 		}
 
 		/**
-		 * Add te4rm classes.
+		 * Add term classes.
 		 *
 		 * @param array $classes Classes.
 		 *
@@ -487,7 +488,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Enqueue suport files and fields.
+		 * Enqueue support files and fields.
 		 */
 		public function enqueue() {
 			global $pagenow;
@@ -641,17 +642,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 						if ( $_GET['taxonomy'] !== $termtype ) { // phpcs:ignore WordPress.Security.NonceVerification
 							continue;
 						}
-						if ( isset( $term['title'] ) ) {
-							$title = $term['title'];
-						} else {
-							if ( isset( $term['sections'] ) && count( $term['sections'] ) === 1 && isset( $term['sections'][0]['fields'] ) && count( $term['sections'][0]['fields'] ) === 1 && isset( $term['sections'][0]['fields'][0]['title'] ) ) {
-
-								// If only one field in this term.
-								$title = $term['sections'][0]['fields'][0]['title'];
-							} else {
-								$title = ucfirst( $termtype ) . ' ' . esc_html__( 'Options', 'redux-framework' );
-							}
-						}
 
 						// Override the parent args on a metaterm level.
 						if ( empty( $this->orig_args ) ) {
@@ -733,7 +723,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Function to get and cache the post meta.
+		 * Function to get and cache the post-meta.
 		 *
 		 * @param string $id ID.
 		 *
@@ -823,29 +813,27 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		/**
 		 * Check edit visibility.
 		 *
-		 * @param array $array Array.
+		 * @param array $params Array.
 		 *
 		 * @return bool
 		 */
-		private function check_edit_visibility( array $array = array() ): bool {
+		private function check_edit_visibility( array $params = array() ): bool {
 			global $pagenow;
 
 			// Edit page visibility.
 			if ( strpos( $pagenow, 'edit-' ) !== false ) {
-				if ( isset( $array['fields'] ) ) {
-					foreach ( $array['fields'] as $field ) {
+				if ( isset( $params['fields'] ) ) {
+					foreach ( $params['fields'] as $field ) {
 						if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 							// Not visible.
-						} else {
-							if ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
+						} elseif ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
 								return true;
-							}
 						}
 					}
 
 					return false;
 				}
-				if ( isset( $array['add_visibility'] ) && $array['add_visibility'] ) {
+				if ( isset( $params['add_visibility'] ) && $params['add_visibility'] ) {
 					return true;
 				}
 
@@ -1197,26 +1185,3 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 }
 
 class_alias( 'Redux_Extension_Taxonomy', 'ReduxFramework_extension_taxonomy' );
-
-// Helper function to bypass WordPress hook priorities.
-if ( ! function_exists( 'create_term_redux_taxonomy' ) ) {
-
-	/**
-	 * Create.
-	 *
-	 * @param int    $term_id  Term ID.
-	 * @param int    $tt_id    TT ID.
-	 * @param string $taxonomy Tax.
-	 */
-	function create_term_redux_taxonomy( int $term_id, int $tt_id = 0, string $taxonomy = '' ) {
-		$instances = Redux::all_instances();
-
-		foreach ( $_POST as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification
-			if ( is_array( $value ) && isset( $instances[ $key ] ) ) {
-				$instances[ $key ]->extensions['taxonomy']->meta_terms_save( $term_id );
-			}
-		}
-	}
-}
-
-add_action( 'create_term', 'create_term_redux_taxonomy', 4 );

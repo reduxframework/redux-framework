@@ -1,25 +1,25 @@
 /**
  * Redux Users
- * Dependencies      : jquery
- * Created by        : Dovy Paukstys
- * Date              : 19 Feb. 2016
+ * Dependencies: jquery
+ * Created by: Dovy Paukstys
+ * Date: 19 Feb. 2016
  */
 
 /* global redux */
 
 jQuery(
-	function( $ ) {
+	function ( $ ) {
 		'use strict';
 
 		$.reduxUsers = $.reduxUsers || {};
 
 		$( document ).ready(
-			function() {
+			function () {
 				$.reduxUsers.init();
 			}
 		);
 
-		$.reduxUsers.init = function() {
+		$.reduxUsers.init = function () {
 			var reduxObject;
 			var optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
@@ -36,10 +36,10 @@ jQuery(
 			reduxObject.args.disable_save_warn = true;
 		};
 
-		// Check for successful element added since WP ajax doesn't have a callback.
+		// Check for a successful element added since WP ajax doesn't have a callback.
 		$.reduxUsers.editCount = $( '#the-list tr' );
 
-		$.reduxUsers.editCheck = function() {
+		$.reduxUsers.editCheck = function () {
 			var len;
 
 			if ( $( '#ajax-response .error' ).length ) {
@@ -60,13 +60,13 @@ jQuery(
 
 		$( '#submit' ).on(
 			'click',
-			function() {
+			function () {
 				window.onbeforeunload = null;
 
 				$.reduxUsers.editCount = $( '#the-list tr' ).length;
 
 				$( document ).ajaxSuccess(
-					function() {
+					function () {
 						$.reduxUsers.editCheck();
 					}
 				);
