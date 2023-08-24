@@ -1,6 +1,6 @@
 <?php
 /**
- * Redux Import/Export Extention Class
+ * Redux Import/Export Extension Class
  *
  * @class   Redux_Extension_Import_Export
  * @version 4.0.0
@@ -34,16 +34,16 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		public $is_field = false;
 
 		/**
-		 * Class Constructor. Defines the args for the extions class
+		 * Class Constructor. Defines the args for the extensions class
 		 *
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 *
 		 * @return      void
 		 * @since       1.0.0
 		 * @access      public
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'import_export' );
 
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/options/' . $this->parent->args['opt_name'] . '/import', array( $this, 'remove_cookie' ) );
 
-			$this->is_field = Redux_Helpers::is_field_in_use( $parent, 'import_export' );
+			$this->is_field = Redux_Helpers::is_field_in_use( $redux, 'import_export' );
 
 			if ( ! $this->is_field && $this->parent->args['show_import_export'] ) {
 				$this->add_section();
@@ -144,14 +144,14 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		 */
 		public function remove_cookie() {
 			// Remove the import/export tab cookie.
-			if ( isset( $_COOKIE ) && isset( $_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] ) && 'import_export_default' === $_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] ) {
+			if ( isset( $_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] ) && 'import_export_default' === $_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] ) {
 				setcookie( 'redux_current_tab_' . $this->parent->args['opt_name'], '', 1, '/' );
 				$_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] = 1;
 			}
 		}
 	}
+}
 
-	if ( ! class_exists( 'ReduxFramework_extension_import_export' ) ) {
-		class_alias( 'Redux_Extension_Import_Export', 'ReduxFramework_extension_import_export' );
-	}
+if ( ! class_exists( 'ReduxFramework_extension_import_export' ) ) {
+	class_alias( 'Redux_Extension_Import_Export', 'ReduxFramework_extension_import_export' );
 }

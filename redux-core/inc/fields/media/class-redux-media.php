@@ -164,12 +164,11 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 					if ( ! empty( $this->field['default']['url'] ) ) {
 						$this->value['url'] = $this->field['default']['url'];
 					}
-				} else {
-					if ( is_numeric( $this->field['default'] ) ) { // Check if it's an attachment ID.
-						$this->value['id'] = $this->field['default'];
-					} else { // Must be a URL.
-						$this->value['url'] = $this->field['default'];
-					}
+				} elseif ( is_numeric( $this->field['default'] ) ) {
+					// Check if it's an attachment ID.
+					$this->value['id'] = $this->field['default'];
+				} else { // Must be a URL.
+					$this->value['url'] = $this->field['default'];
 				}
 			}
 
@@ -345,7 +344,6 @@ if ( ! class_exists( 'Redux_Media', false ) ) {
 
 			return '';
 		}
-
 	}
 }
 

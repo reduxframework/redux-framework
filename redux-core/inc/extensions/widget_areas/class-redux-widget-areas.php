@@ -57,15 +57,15 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		/**
 		 * Redux_Widget_Areas constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
+		public function __construct( $redux ) {
 			global $pagenow;
 
-			$this->parent = $parent;
+			$this->parent = $redux;
 
 			if ( empty( $this->extension_dir ) ) {
-				$this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+				$this->extension_dir = trailingslashit( str_replace( '\\', '/', __DIR__ ) );
 				$this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
 			}
 
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		 *
 		 * @param    string $name Name of the widget_area to be created.
 		 *
-		 * @return    string|void     $name      Name of the new widget_area just created.
+		 * @return    string|void     $name Name of the new widget_area just created.
 		 * @since     1.0.0
 		 */
 		private function check_widget_area_name( string $name ) {

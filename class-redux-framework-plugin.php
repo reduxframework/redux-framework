@@ -159,12 +159,12 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		public function includes() {
 
 			// Include Redux_Core.
-			if ( file_exists( dirname( __FILE__ ) . '/redux-core/framework.php' ) ) {
-				require_once dirname( __FILE__ ) . '/redux-core/framework.php';
+			if ( file_exists( __DIR__ . '/redux-core/framework.php' ) ) {
+				require_once __DIR__ . '/redux-core/framework.php';
 			}
 
-			if ( file_exists( dirname( __FILE__ ) . '/redux-templates/redux-templates.php' ) ) {
-				require_once dirname( __FILE__ ) . '/redux-templates/redux-templates.php';
+			if ( file_exists( __DIR__ . '/redux-templates/redux-templates.php' ) ) {
+				require_once __DIR__ . '/redux-templates/redux-templates.php';
 			}
 
 			if ( isset( Redux_Core::$as_plugin ) ) {
@@ -183,8 +183,8 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 */
 		public function load_sample_config() {
 			// Include demo config, if demo mode is active.
-			if ( $this->options['demo'] && file_exists( dirname( __FILE__ ) . '/sample/sample-config.php' ) ) {
-				require_once dirname( __FILE__ ) . '/sample/sample-config.php';
+			if ( $this->options['demo'] && file_exists( __DIR__ . '/sample/sample-config.php' ) ) {
+				require_once __DIR__ . '/sample/sample-config.php';
 			}
 		}
 
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 */
 		public function load_first() {
 			if ( ! class_exists( 'Redux_Functions_Ex' ) ) {
-				require_once dirname( __FILE__ ) . '/redux-core/inc/classes/class-redux-functions-ex.php';
+				require_once __DIR__ . '/redux-core/inc/classes/class-redux-functions-ex.php';
 			}
 
 			$plugin_dir = Redux_Functions_Ex::wp_normalize_path( WP_PLUGIN_DIR ) . '/';

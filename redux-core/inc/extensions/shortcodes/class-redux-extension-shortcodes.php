@@ -35,21 +35,21 @@ if ( ! class_exists( 'Redux_Extension_Shortcodes' ) ) {
 		/**
 		 * Redux_Extension_Shortcodes constructor.
 		 *
-		 * @param object $parent ReduxFramework Object pointer.
+		 * @param object $redux ReduxFramework Object pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'shortcodes' );
 
 			if ( ! class_exists( 'Redux_Shortcodes' ) ) {
-				require_once dirname( __FILE__ ) . '/class-redux-shortcodes.php';
+				require_once __DIR__ . '/class-redux-shortcodes.php';
 				new Redux_Shortcodes();
 			}
 
 			// Allow users to extend if they want.
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			do_action( 'redux/shortcodes/' . $parent->args['opt_name'] . '/construct' );
+			do_action( 'redux/shortcodes/' . $redux->args['opt_name'] . '/construct' );
 		}
 	}
 }

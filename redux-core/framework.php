@@ -28,10 +28,10 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-require_once dirname( __FILE__ ) . '/class-redux-core.php';
+require_once __DIR__ . '/class-redux-core.php';
 
 Redux_Core::$version    = '4.4.5.2';
-Redux_Core::$redux_path = dirname( __FILE__ );
+Redux_Core::$redux_path = __DIR__;
 Redux_Core::instance();
 
 // Don't duplicate me!
@@ -174,6 +174,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @var array
 		 */
 		public $sanitize = array();
+
+		/**
+		 * Validation ran flag.
+		 *
+		 * @var bool
+		 */
+		public $validation_ran;
 
 		/**
 		 * Array of current option values.

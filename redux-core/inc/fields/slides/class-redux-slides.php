@@ -49,7 +49,7 @@ if ( ! class_exists( 'Redux_Slides', false ) ) {
 
 			$x = 0;
 
-			if ( isset( $this->value ) && is_array( $this->value ) && ! empty( $this->value ) ) {
+			if ( is_array( $this->value ) && ! empty( $this->value ) ) {
 				$slides = $this->value;
 
 				foreach ( $slides as $slide ) {
@@ -220,7 +220,7 @@ if ( ! class_exists( 'Redux_Slides', false ) ) {
 					echo '</fieldset>';
 					echo '</div>';
 
-					$x ++;
+					++$x;
 				}
 			}
 

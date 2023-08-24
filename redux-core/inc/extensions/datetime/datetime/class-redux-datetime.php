@@ -128,10 +128,8 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 					$this->value['time'] = '';
 					$this->value['date'] = '';
 				}
-			} else {
-				if ( is_array( $this->value ) ) {
+			} elseif ( is_array( $this->value ) ) {
 					$this->value = '';
-				}
 			}
 
 			// Dummy check, in case something other than select or slider

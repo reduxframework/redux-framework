@@ -33,11 +33,11 @@ if ( ! class_exists( 'Redux_Social_Profiles_Shortcode' ) ) {
 		/**
 		 * Redux_Social_Profiles_Shortcode constructor.
 		 *
-		 * @param object $parent   ReduxFramework object.
-		 * @param string $field_id Field ID.
+		 * @param ReduxFramework $redux    ReduxFramework object.
+		 * @param string         $field_id Field ID.
 		 */
-		public function __construct( $parent, string $field_id ) {
-			$this->parent   = $parent;
+		public function __construct( ReduxFramework $redux, string $field_id ) {
+			$this->parent   = $redux;
 			$this->field_id = $field_id;
 
 			add_shortcode( 'social_profiles', array( $this, 'redux_social_profiles' ) );
@@ -46,12 +46,9 @@ if ( ! class_exists( 'Redux_Social_Profiles_Shortcode' ) ) {
 		/**
 		 * Render shortcode.
 		 *
-		 * @param array|string $atts    Shortcode attributes.
-		 * @param null         $content Shortcode content.
-		 *
 		 * @return string
 		 */
-		public function redux_social_profiles( $atts, $content = null ): string {
+		public function redux_social_profiles(): string {
 			$redux_options = get_option( $this->parent->args['opt_name'] );
 			$social_items  = $redux_options[ $this->field_id ];
 

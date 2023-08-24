@@ -242,13 +242,12 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Code to execute on a framework __construct.
 		 *
-		 * @param object $parent Pointer to ReduxFramework object.
+		 * @param object $redux Pointer to ReduxFramework object.
 		 */
-		public static function core_construct( $parent ) {
-			self::$third_party_fixes = new Redux_ThirdParty_Fixes( $parent );
+		public static function core_construct( $redux ) {
+			self::$third_party_fixes = new Redux_ThirdParty_Fixes( $redux );
 
 			Redux_ThemeCheck::get_instance();
-
 		}
 
 		/**
@@ -261,13 +260,13 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 				self::$pro_loaded = true;
 			}
 
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-path.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-functions-ex.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-helpers.php';
-			require_once dirname( __FILE__ ) . '/inc/classes/class-redux-instances.php';
+			require_once __DIR__ . '/inc/classes/class-redux-path.php';
+			require_once __DIR__ . '/inc/classes/class-redux-functions-ex.php';
+			require_once __DIR__ . '/inc/classes/class-redux-helpers.php';
+			require_once __DIR__ . '/inc/classes/class-redux-instances.php';
 
-			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/classes' );
-			Redux_Functions_Ex::register_class_path( 'Redux', dirname( __FILE__ ) . '/inc/welcome' );
+			Redux_Functions_Ex::register_class_path( 'Redux', __DIR__ . '/inc/classes' );
+			Redux_Functions_Ex::register_class_path( 'Redux', __DIR__ . '/inc/welcome' );
 			Redux_Functions_Ex::load_extendify_css();
 
 			spl_autoload_register( array( $this, 'register_classes' ) );

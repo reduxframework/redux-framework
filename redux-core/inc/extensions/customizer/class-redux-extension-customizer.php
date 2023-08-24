@@ -806,4 +806,3 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 if ( ! class_exists( 'ReduxFramework_extension_customizer' ) ) {
 	class_alias( 'Redux_Extension_Customizer', 'ReduxFramework_extension_customizer' );
 }
-

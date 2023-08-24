@@ -40,12 +40,12 @@ if ( ! class_exists( 'Redux_Extension_Repeater' ) ) {
 		 * @since       1.0.0
 		 * @access      public
 		 *
-		 * @param       object $parent Parent settings.
+		 * @param       object $redux Parent settings.
 		 *
 		 * @return      void
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'repeater' );
 		}

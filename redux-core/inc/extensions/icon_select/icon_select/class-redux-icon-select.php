@@ -45,12 +45,12 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		 *
 		 * @param array          $field  Field array.
 		 * @param string         $value  Value.
-		 * @param ReduxFramework $parent ReduxFramework object.
+		 * @param ReduxFramework $redux ReduxFramework object.
 		 *
 		 * @throws ReflectionException Exception.
 		 */
-		public function __construct( $field = array(), $value = '', $parent = object ) {
-			parent::__construct( $field, $value, $parent );
+		public function __construct( $field = array(), $value = '', $redux = object ) {
+			parent::__construct( $field, $value, $redux );
 
 			if ( empty( $field ) ) {
 				return;
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		}
 
 		/**
-		 * Combine array with null check.
+		 * Combine the array with null check.
 		 *
 		 * @param mixed $array1 First array.
 		 * @param mixed $array2 Second array.
@@ -211,14 +211,14 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		}
 
 		/**
-		 * Check if array is multidimensional.
+		 * Check if the array is multidimensional.
 		 *
-		 * @param array $array Array to evaluate.
+		 * @param array $my_array Array to evaluate.
 		 *
 		 * @return bool
 		 */
-		private function is_multi_array( array $array ): bool {
-			if ( count( $array ) === count( $array, COUNT_RECURSIVE ) ) {
+		private function is_multi_array( array $my_array ): bool {
+			if ( count( $my_array ) === count( $my_array, COUNT_RECURSIVE ) ) {
 				return false;
 			}
 
@@ -402,7 +402,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		}
 
 		/**
-		 * Function is unused, by necessary to trigger output.
+		 * This function is unused, but necessary to trigger output.
 		 *
 		 * @param mixed $data CSS data.
 		 *
@@ -445,13 +445,13 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		/**
 		 * Remove items from an array.
 		 *
-		 * @param array $array   The array to manage.
+		 * @param array $my_array   The array to manage.
 		 * @param mixed $element An array or a string of the item to remove.
 		 *
 		 * @return array The cleaned array with reset keys.
 		 */
-		private function array_delete( array $array, $element ): array {
-			return ( is_array( $element ) ) ? array_values( array_diff( $array, $element ) ) : array_values( array_diff( $array, array( $element ) ) );
+		private function array_delete( array $my_array, $element ): array {
+			return ( is_array( $element ) ) ? array_values( array_diff( $my_array, $element ) ) : array_values( array_diff( $my_array, array( $element ) ) );
 		}
 	}
 }

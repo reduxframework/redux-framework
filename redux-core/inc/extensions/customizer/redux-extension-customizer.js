@@ -1,17 +1,17 @@
 /* global jQuery, document, redux, redux_change:true, wp, ajaxurl */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.customizer = redux.customizer || {};
 
 	$( document ).ready(
-		function() {
+		function () {
 			redux.customizer.init();
 		}
 	);
 
-	redux.customizer.init = function() {
+	redux.customizer.init = function () {
 		var reduxChange;
 		var redux_initFields;
 
@@ -19,14 +19,14 @@
 
 		$( '.accordion-section.redux-section, .accordion-section.redux-panel, .accordion-section-title' ).on(
 			'click',
-			function() {
+			function () {
 				$.redux.initFields();
 			}
 		);
 
 		$( '.accordion-section.redux-section h3, .accordion-section.redux-panel h3' ).on(
 			'click',
-			function() {
+			function () {
 				redux.customizer.resize( $( this ).parent() );
 			}
 		);
@@ -38,7 +38,7 @@
 
 		$( '.control-panel-back, .customize-panel-back' ).on(
 			'click',
-			function() {
+			function () {
 				$( document ).find( 'form#customize-controls' ).removeAttr( 'style' );
 				$( document ).find( '.wp-full-overlay' ).removeAttr( 'style' );
 				redux.customizer.width = 0;
@@ -47,7 +47,7 @@
 
 		$( '.control-section-back, .customize-section-back' ).on(
 			'click',
-			function() {
+			function () {
 				redux.customizer.resize( $( this ).parent().parent().parent() );
 			}
 		);
@@ -57,9 +57,9 @@
 			// Customizer save hook.
 			$( '#customize-save-button-wrapper #save' ).on(
 				'click',
-				function() {
+				function () {
 					setTimeout(
-						function() {
+						function () {
 							var $parent = $( document.getElementById( 'customize-controls' ) );
 							var $data   = $parent.serialize();
 							var nonce   = $( '.redux-customizer-nonce' ).data( 'nonce' );
@@ -75,12 +75,12 @@
 										opt_name: redux.optName.args.opt_name,
 										data: $data
 									},
-									error: function( response ) {
+									error: function ( response ) {
 										if ( true === redux.optName.args.dev_mode ) {
 											console.log( response.responseText );
 										}
 									},
-									success: function( response ) {
+									success: function ( response ) {
 										if ( 'success' === response.status ) {
 											console.log( response );
 											$( '.redux-action_bar .spinner' ).removeClass( 'is-active' );
@@ -113,7 +113,7 @@
 		redux.optName.args.disable_save_warn = true;
 
 		reduxChange  = redux_change;
-		redux_change = function( variable ) {
+		redux_change = function ( variable ) {
 			variable = $( variable );
 			reduxChange.apply( this, arguments );
 			redux.customizer.save( variable );
@@ -121,15 +121,16 @@
 
 		redux_initFields = $.redux.initFields;
 
-		$.redux.initFiles = function() {
+		$.redux.initFiles = function () {
 			redux_initFields();
 		};
 	};
 
-	redux.customizer.resize = function( el ) {
+	redux.customizer.resize = function ( el ) {
 		var width;
 		var test;
 		var id;
+		var parentId;
 
 		if ( el.attr( 'data-width' ) ) {
 			redux.customizer.width = el.attr( 'data-width' );
@@ -163,10 +164,9 @@
 				);
 			}
 		} else {
-			id = el.attr( 'id' );
-			id = $( '*[aria-owns="' + id + '"]' ).parents( '.redux-panel:first' ).attr( 'id' );
-
-			width = $( '*[aria-owns="' + id + '"]' ).attr( 'data-width' );
+			id       = el.attr( 'id' );
+			parentId = $( '*[aria-owns="' + id + '"]' ).parents( '.redux-panel:first' ).attr( 'id' );
+			width    = $( '*[aria-owns="' + parentId + '"]' ).attr( 'data-width' );
 
 			if ( ! width ) {
 				$( document ).find( 'form#customize-controls' ).removeAttr( 'style' );
@@ -184,12 +184,12 @@
 		}
 	};
 
-	redux.customizer.save = function( $obj ) {
+	redux.customizer.save = function ( $obj ) {
 		var $parent = $obj.hasClass( 'redux-field' ) ? $obj : $obj.parents( '.redux-field-container:first' );
 		redux.customizer.inputSave( $parent );
 	};
 
-	redux.customizer.inputSave = function( $parent ) {
+	redux.customizer.inputSave = function ( $parent ) {
 		var $id;
 		var $nData;
 		var $key;
@@ -210,7 +210,7 @@
 
 		$.each(
 			$nData,
-			function( $k, $v ) {
+			function ( $k, $v ) {
 				$k     = null;
 				$nData = $v;
 			}

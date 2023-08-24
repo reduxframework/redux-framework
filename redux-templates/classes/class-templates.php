@@ -60,7 +60,6 @@ class Templates {
 		}
 
 		add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 999 );
-
 	}
 
 	/**

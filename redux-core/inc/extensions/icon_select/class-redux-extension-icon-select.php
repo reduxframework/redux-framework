@@ -38,10 +38,10 @@ if ( ! class_exists( 'Redux_Extension_Icon_Select' ) ) {
 		/**
 		 * ReduxFramework_Extension_Icon_Select constructor.
 		 *
-		 * @param ReduxFramework $parent ReduxFramework object.
+		 * @param ReduxFramework $redux ReduxFramework object.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'icon_select' );
 

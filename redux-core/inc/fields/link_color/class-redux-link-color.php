@@ -275,36 +275,34 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					foreach ( $style as $key => $value ) {
 						if ( is_numeric( $key ) ) {
 							$style_string .= implode( ',', $this->field['output'] ) . '{' . $value . '}';
-						} else {
-							if ( 1 === count( $this->field['output'] ) ) {
+						} elseif ( 1 === count( $this->field['output'] ) ) {
 								$elem = '';
 
-								foreach ( $this->field['output'] as $elem ) {
-									break;
-								}
-
-								if ( false !== strpos( $elem, ',' ) ) {
-									$selector_arr = explode( ',', $elem );
-									$sel_list     = '';
-
-									foreach ( $selector_arr as $selector ) {
-										$sel_list .= $selector . ':' . $key . ',';
-									}
-
-									$sel_list      = rtrim( $sel_list, ',' );
-									$style_string .= $sel_list . '{' . $value . '}';
-								} else {
-									$style_string .= $elem . ':' . $key . '{' . $value . '}';
-								}
-							} else {
-								$blah = '';
-								foreach ( $this->field['output'] as $sel ) {
-									$blah .= $sel . ':' . $key . ',';
-								}
-
-								$blah          = substr( $blah, 0, strlen( $blah ) - 1 );
-								$style_string .= $blah . '{' . $value . '}';
+							foreach ( $this->field['output'] as $elem ) {
+								break;
 							}
+
+							if ( false !== strpos( $elem, ',' ) ) {
+								$selector_arr = explode( ',', $elem );
+								$sel_list     = '';
+
+								foreach ( $selector_arr as $selector ) {
+									$sel_list .= $selector . ':' . $key . ',';
+								}
+
+								$sel_list      = rtrim( $sel_list, ',' );
+								$style_string .= $sel_list . '{' . $value . '}';
+							} else {
+								$style_string .= $elem . ':' . $key . '{' . $value . '}';
+							}
+						} else {
+							$blah = '';
+							foreach ( $this->field['output'] as $sel ) {
+								$blah .= $sel . ':' . $key . ',';
+							}
+
+							$blah          = substr( $blah, 0, strlen( $blah ) - 1 );
+							$style_string .= $blah . '{' . $value . '}';
 						}
 					}
 
@@ -328,18 +326,16 @@ if ( ! class_exists( 'Redux_Link_Color', false ) ) {
 					foreach ( $style as $key => $value ) {
 						if ( is_numeric( $key ) ) {
 							$style_string .= implode( ',', $this->field['compiler'] ) . '{' . $value . '}';
-						} else {
-							if ( 1 === count( $this->field['compiler'] ) ) {
+						} elseif ( 1 === count( $this->field['compiler'] ) ) {
 								$style_string .= $this->field['compiler'][0] . ':' . $key . '{' . $value . '}';
-							} else {
-								$blah = '';
-								foreach ( $this->field['compiler'] as $sel ) {
-									$blah .= $sel . ':' . $key . ',';
-								}
-
-								$blah          = substr( $blah, 0, strlen( $blah ) - 1 );
-								$style_string .= $blah . '{' . $value . '}';
+						} else {
+							$blah = '';
+							foreach ( $this->field['compiler'] as $sel ) {
+								$blah .= $sel . ':' . $key . ',';
 							}
+
+							$blah          = substr( $blah, 0, strlen( $blah ) - 1 );
+							$style_string .= $blah . '{' . $value . '}';
 						}
 					}
 					$this->parent->compilerCSS .= $style_string;

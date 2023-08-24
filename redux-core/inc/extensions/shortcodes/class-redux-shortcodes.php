@@ -64,7 +64,7 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		/**
 		 * Redux_Shortcodes constructor.
 		 */
-		public function __construct(  ) {
+		public function __construct() {
 			if ( ! shortcode_exists( 'bloginfo' ) ) {
 				add_shortcode( 'bloginfo', array( $this, 'blog_info' ) );
 			} else {
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		 * @param array|string $atts    Attributes.
 		 * @param string|null  $content Content.
 		 *
-		 * @return bool|string|void|null
+		 * @return bool|string|null
 		 */
 		public function blog_info( $atts = array(), string $content = null ) {
 			if ( ! is_array( $atts ) ) {

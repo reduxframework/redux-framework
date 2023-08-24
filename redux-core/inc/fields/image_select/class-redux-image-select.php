@@ -175,7 +175,7 @@ if ( ! class_exists( 'Redux_Image_Select', false ) ) {
 					echo '</label>';
 					echo '</li>';
 
-					$x ++;
+					++$x;
 				}
 
 				echo '</ul>';

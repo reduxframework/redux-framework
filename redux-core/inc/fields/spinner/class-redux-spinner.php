@@ -81,7 +81,7 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 			}
 
 			if ( empty( $this->field['max'] ) ) {
-				$this->field['max'] = intval( $this->field['min'] ) + 1;
+				$this->field['max'] = $this->field['min'] + 1;
 			} else {
 				$this->field['max'] = intval( $this->field['max'] );
 			}
@@ -92,12 +92,12 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 				$this->field['step'] = intval( $this->field['step'] );
 			}
 
-			if ( empty( $this->value ) && ! empty( $this->field['default'] ) && intval( $this->field['min'] ) >= 1 ) {
+			if ( empty( $this->value ) && ! empty( $this->field['default'] ) && $this->field['min'] >= 1 ) {
 				$this->value = intval( $this->field['default'] );
 			}
 
-			if ( empty( $this->value ) && intval( $this->field['min'] ) >= 1 ) {
-				$this->value = intval( $this->field['min'] );
+			if ( empty( $this->value ) && $this->field['min'] >= 1 ) {
+				$this->value = $this->field['min'];
 			}
 
 			if ( empty( $this->value ) ) {
@@ -106,9 +106,9 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 
 			// Extra Validation.
 			if ( $this->value < $this->field['min'] ) {
-				$this->value = intval( $this->field['min'] );
+				$this->value = $this->field['min'];
 			} elseif ( $this->value > $this->field['max'] ) {
-				$this->value = intval( $this->field['max'] );
+				$this->value = $this->field['max'];
 			}
 		}
 
@@ -151,8 +151,6 @@ if ( ! class_exists( 'Redux_Spinner', false ) ) {
 		 * @param string|null|array $style CSS styles.
 		 */
 		public function output( $style = '' ) {
-			$style = '';
-
 			if ( ! empty( $this->value ) ) {
 				if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
 					$css                      = $this->parse_css( $this->value, $this->field['output'] );

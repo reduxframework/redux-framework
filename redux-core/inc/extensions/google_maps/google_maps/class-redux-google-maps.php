@@ -18,6 +18,11 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 	 */
 	class Redux_Google_Maps extends Redux_Field {
 
+		/**
+		 * API Key.
+		 *
+		 * @var string
+		 */
 		private $api_key = '';
 
 		/**

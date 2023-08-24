@@ -226,7 +226,7 @@ if ( ! class_exists( 'Redux_Sorter', false ) ) {
 		public function localize( array $field, string $value = '' ): array {
 			$params = array();
 
-			if ( isset( $field['limits'] ) && ! empty( $field['limits'] ) ) {
+			if ( ! empty( $field['limits'] ) ) {
 				$params['limits'] = $field['limits'];
 			}
 

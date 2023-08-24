@@ -57,14 +57,13 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 					$this->field['text_hint'] = array(
 						'content' => $this->field['text_hint'],
 					);
-				} else {
-					if ( isset( $this->field['text_hint']['title'] ) && ! empty( $this->field['text_hint']['title'] ) ) {
-						if ( ! isset( $this->field['text_hint']['content'] ) || ( isset( $this->field['text_hint']['content'] ) && empty( $this->field['text_hint']['content'] ) ) ) {
-							$this->field['text_hint']['content'] = $this->field['text_hint']['title'];
-							unset( $this->field['text_hint']['title'] );
-						}
+				} elseif ( isset( $this->field['text_hint']['title'] ) && ! empty( $this->field['text_hint']['title'] ) ) {
+					if ( ! isset( $this->field['text_hint']['content'] ) || ( isset( $this->field['text_hint']['content'] ) && empty( $this->field['text_hint']['content'] ) ) ) {
+						$this->field['text_hint']['content'] = $this->field['text_hint']['title'];
+						unset( $this->field['text_hint']['title'] );
 					}
 				}
+
 				$this->field['attributes']['qtip-title'] = $this->field['text_hint']['title'] ?? '';
 				$this->field['attributes']['qtip-text']  = $this->field['text_hint']['content'] ?? '';
 			}

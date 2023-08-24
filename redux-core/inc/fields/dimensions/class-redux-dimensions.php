@@ -21,7 +21,7 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 		 * Set field and value defaults.
 		 */
 		public function set_defaults() {
-			// No errors please.
+			// No errors, please.
 			$defaults = array(
 				'width'          => true,
 				'height'         => true,
@@ -76,23 +76,23 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 			}
 
 			/*
-			 * Since units field could be an array, string value or bool (to hide the unit field)
+			 * Since the unit field could be an array, string value or bool (to hide the unit field)
 			 * we need to separate our functions to avoid those nasty PHP index notices!
 			 */
 
-			// if field units has a value and IS an array, then evaluate as needed.
+			// if field units have a value and ARE an array, then evaluate as needed.
 			if ( isset( $this->field['units'] ) && ! is_array( $this->field['units'] ) ) {
 
 				// If units fields has a value but units value does not then make units value the field value.
 				if ( isset( $this->field['units'] ) && ! isset( $this->value['units'] ) || false === $this->field['units'] ) {
 					$this->value['units'] = $this->field['units'];
 
-					// If units field does NOT have a value and units value does NOT have a value, set both to blank (default?).
+					// If unit field does NOT have a value and units value does NOT have a value, set both to blank (default?).
 				} elseif ( ! isset( $this->field['units'] ) && ! isset( $this->value['units'] ) ) {
 					$this->field['units'] = 'px';
 					$this->value['units'] = 'px';
 
-					// If units field has NO value but units value does, then set unit field to value field.
+					// If unit field has NO value but units value does, then set unit field to value field.
 				} elseif ( ! isset( $this->field['units'] ) && isset( $this->value['units'] ) ) {
 					$this->field['units'] = $this->value['units'];
 

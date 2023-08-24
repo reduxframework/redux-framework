@@ -34,20 +34,20 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 		/**
 		 * Redux_Extension_Search constructor.
 		 *
-		 * @param object $parent ReduxFramework object pointer.
+		 * @param object $redux ReduxFramework object pointer.
 		 */
-		public function __construct( $parent ) {
-			if ( false === $parent->args['search'] ) {
+		public function __construct( $redux ) {
+			if ( false === $redux->args['search'] ) {
 				return;
 			}
 
-			parent::__construct( $parent, __FILE__ );
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'search' );
 
 			// Allow users to extend if they want.
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			do_action( 'redux/search/' . $parent->args['opt_name'] . '/construct' );
+			do_action( 'redux/search/' . $redux->args['opt_name'] . '/construct' );
 
 			if ( isset( $_GET['page'] ) && sanitize_text_field( wp_unslash( $_GET['page'] === $this->parent->args['page_slug'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 0 );

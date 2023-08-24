@@ -31,12 +31,12 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 		 *
 		 * @param array  $field  Field array.
 		 * @param string $value  Value array.
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 *
 		 * @throws ReflectionException .
 		 */
-		public function __construct( $field, $value, $parent ) {
-			parent::__construct( $field, $value, $parent );
+		public function __construct( $field, $value, $redux ) {
+			parent::__construct( $field, $value, $redux );
 
 			$this->is_field = $this->parent->extensions['import_export']->is_field;
 		}
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 		public function render() {
 			$secret = wp_create_nonce( 'redux_io_' . $this->parent->args['opt_name'] );
 
-			// No errors please.
+			// No errors, please.
 			$defaults = array(
 				'full_width' => true,
 				'overflow'   => 'inherit',

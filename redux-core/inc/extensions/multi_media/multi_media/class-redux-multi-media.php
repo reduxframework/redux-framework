@@ -137,7 +137,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 						$title      = '';
 						$part_count = count( $parts );
 
-						for ( $i = 0; $i < $part_count; ++ $i ) {
+						for ( $i = 0; $i < $part_count; ++$i ) {
 							$title = $parts[ $i ];
 						}
 

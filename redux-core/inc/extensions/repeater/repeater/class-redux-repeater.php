@@ -172,7 +172,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					echo '</table>';
 					echo '</div>';
 
-					$x ++;
+					++$x;
 				}
 			}
 
@@ -224,8 +224,8 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					echo '</table>';
 					echo '</div>';
 
-					$x ++;
-					$loop --;
+					++$x;
+					--$loop;
 				}
 			}
 

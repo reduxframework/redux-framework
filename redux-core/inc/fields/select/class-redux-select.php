@@ -167,7 +167,7 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 						echo '<optgroup label="' . esc_attr( $k ) . '">';
 
 						foreach ( $v as $opt => $val ) {
-							$this->make_option( (string) $opt, $val, $k );
+							$this->make_option( (string) $opt, $val );
 						}
 
 						echo '</optgroup>';
@@ -189,9 +189,8 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 		 *
 		 * @param string $id         HTML ID.
 		 * @param mixed  $value      Value array.
-		 * @param string $group_name Group name.
 		 */
-		private function make_option( string $id, $value, string $group_name = '' ) {
+		private function make_option( string $id, $value ) {
 			if ( is_array( $this->value ) ) {
 				$selected = ( in_array( $id, $this->value, true ) ) ? ' selected="selected"' : '';
 			} else {

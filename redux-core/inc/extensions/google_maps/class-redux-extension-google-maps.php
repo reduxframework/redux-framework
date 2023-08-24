@@ -34,10 +34,10 @@ if ( ! class_exists( 'Redux_Extension_Google_Maps' ) ) {
 		/**
 		 * ReduxFramework_extension_google_maps constructor.
 		 *
-		 * @param ReduxFramework $parent ReduxFramework object.
+		 * @param ReduxFramework $redux ReduxFramework object.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'google_maps' );
 		}

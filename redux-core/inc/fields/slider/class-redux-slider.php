@@ -100,15 +100,15 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 		/**
 		 * Sanitize value.
 		 *
-		 * @param mixed $var Value to sanitize.
+		 * @param mixed $val Value to sanitize.
 		 *
 		 * @return float|int
 		 */
-		private function clean_val( $var ) {
-			if ( is_float( $var ) ) {
-				$clear_var = floatval( $var );
+		private function clean_val( $val ) {
+			if ( is_float( $val ) ) {
+				$clear_var = floatval( $val );
 			} else {
-				$clear_var = intval( $var );
+				$clear_var = intval( $val );
 			}
 
 			return $clear_var;

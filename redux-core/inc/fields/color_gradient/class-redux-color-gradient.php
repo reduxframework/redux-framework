@@ -31,12 +31,12 @@ if ( ! class_exists( 'Redux_Color_Gradient', false ) ) {
 		 *
 		 * @param array  $field  Field array.
 		 * @param string $value  Field values.
-		 * @param null   $parent ReduxFramework object pointer.
+		 * @param null   $redux  ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Reflection.
 		 */
-		public function __construct( $field = array(), $value = null, $parent = null ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod
-			parent::__construct( $field, $value, $parent );
+		public function __construct( $field = array(), $value = null, $redux = null ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod
+			parent::__construct( $field, $value, $redux );
 		}
 
 		/**

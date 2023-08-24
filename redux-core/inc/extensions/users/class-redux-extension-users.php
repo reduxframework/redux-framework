@@ -178,6 +178,8 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			$this->pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
 
+			require_once __DIR__ . '/redux-users-helpers.php';
+
 			add_action( 'admin_notices', array( $this, 'meta_profiles_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
 

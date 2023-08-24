@@ -47,13 +47,12 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		/**
 		 * Redux_Options constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			add_action( 'admin_init', array( $this, 'register' ) );
-
 		}
 
 		/**
@@ -223,16 +222,6 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$GLOBALS[ $options_global ] = apply_filters( "redux/options/{$core->args['opt_name']}/global_variable", $core->options );
-
-				// Last save key.
-				if ( isset( $core->transients['last_save'] ) ) {
-					//$GLOBALS[ $options_global ]['REDUX_LAST_SAVE'] = $core->transients['last_save'] ?? '';
-				}
-
-				// Last compiler hook key.
-				if ( isset( $core->transients['last_compiler'] ) ) {
-					//$GLOBALS[ $options_global ]['REDUX_LAST_COMPILER'] = $core->transients['last_compiler'] ?? '';
-				}
 			}
 		}
 
@@ -971,20 +960,20 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 * ->get_default(); This is used to return the default value if default_show is set.
 		 *
 		 * @param string $opt_name The option name to return.
-		 * @param mixed  $default  (null) The value to return if default not set.
+		 * @param mixed  $defaults (null) The value to return if default not set.
 		 *
 		 * @return      mixed $default
 		 * @since       1.0.1
 		 * @access      public
 		 */
-		public function get_default( string $opt_name, $default = null ) {
+		public function get_default( string $opt_name, $defaults = null ) {
 			if ( true === $this->args['default_show'] ) {
 
 				if ( empty( $this->options_defaults ) ) {
 					$this->default_values(); // fill cache.
 				}
 
-				$default = array_key_exists( $opt_name, $this->options_defaults ) ? $this->options_defaults[ $opt_name ] : $default;
+				$default = array_key_exists( $opt_name, $this->options_defaults ) ? $this->options_defaults[ $opt_name ] : $defaults;
 			}
 
 			return $default;

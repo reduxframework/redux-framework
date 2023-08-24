@@ -36,10 +36,10 @@ if ( ! class_exists( 'Redux_Extension_Datetime', false ) ) {
 		/**
 		 * Redux_Extension_Datetime constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'datetime' );
 		}

@@ -18,7 +18,7 @@ $opt_name = 'redux_demo';  // YOU MUST CHANGE THIS.  DO NOT USE 'redux_demo' IN 
 // Uncomment to disable demo mode.
 /* Redux::disable_demo(); */  // phpcs:ignore Squiz.PHP.CommentedOutCode
 
-$dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$dir = __DIR__ . DIRECTORY_SEPARATOR;
 
 /*
  * --> Used within different fields. Simply examples. Search for ACTUAL DECLARATION for field examples
@@ -556,7 +556,7 @@ if ( file_exists( $dir . '/../README.md' ) ) {
 				'id'           => 'opt-raw-documentation',
 				'type'         => 'raw',
 				'markdown'     => true,
-				'content_path' => dirname( __FILE__ ) . '/../README.md', // FULL PATH, not relative, please.
+				'content_path' => __DIR__ . '/../README.md', // FULL PATH, not relative, please.
 			),
 		),
 	);

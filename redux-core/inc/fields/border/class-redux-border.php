@@ -21,7 +21,7 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
 		 * Set field and value defaults.
 		 */
 		public function set_defaults() {
-			// No errors please.
+			// No errors, please.
 			$defaults = array(
 				'top'    => true,
 				'bottom' => true,
@@ -347,10 +347,8 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
 						$style .= 'border-' . $key . ':' . $value . ' ' . $clean_value['style'] . ' ' . $clean_value['color'] . ';';
 					}
 				}
-			} else {
-				if ( ! empty( $clean_value['top'] ) ) {
-					$style .= 'border:' . $clean_value['top'] . ' ' . $clean_value['style'] . ' ' . $clean_value['color'] . ';';
-				}
+			} elseif ( ! empty( $clean_value['top'] ) ) {
+				$style .= 'border:' . $clean_value['top'] . ' ' . $clean_value['style'] . ' ' . $clean_value['color'] . ';';
 			}
 
 			return $style;

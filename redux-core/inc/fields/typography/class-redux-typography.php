@@ -73,25 +73,25 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 *
 		 * @param array  $field  Field array.
 		 * @param string $value  Field values.
-		 * @param null   $parent ReduxFramework object pointer.
+		 * @param null   $redux  ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Exception.
 		 */
-		public function __construct( $field = array(), $value = null, $parent = null ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod
-			parent::__construct( $field, $value, $parent );
+		public function __construct( $field = array(), $value = null, $redux = null ) { // phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod
+			parent::__construct( $field, $value, $redux );
 
-			$this->parent = $parent;
+			$this->parent = $redux;
 			$this->field  = $field;
 			$this->value  = $value;
 
 			$this->set_defaults();
 
-			$path_info = Redux_Helpers::path_info( __file__ );
+			$path_info = Redux_Helpers::path_info( __FILE__ );
 			$this->dir = trailingslashit( dirname( $path_info['real_path'] ) );
 			$this->url = trailingslashit( dirname( $path_info['url'] ) );
 
 			$this->timestamp = Redux_Core::$version;
-			if ( $parent->args['dev_mode'] ) {
+			if ( $redux->args['dev_mode'] ) {
 				$this->timestamp .= '.' . time();
 			}
 		}
@@ -1016,7 +1016,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			}
 			$link .= '&display=' . $this->parent->args['font_display'];
 
-			//return 'https://fonts.bunny.net/css?family=' . $link;
+			// return 'https://fonts.bunny.net/css?family=' . $link;
 			return 'https://fonts.googleapis.com/css?family=' . $link;
 		}
 
@@ -1422,7 +1422,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			$fonts = Redux_Helpers::google_fonts_array( get_option( 'auto_update_redux_google_fonts', false ) );
 			if ( empty( $fonts ) ) {
-				$google_font = dirname( __FILE__ ) . '/googlefonts.php';
+				$google_font = __DIR__ . '/googlefonts.php';
 				$fonts       = include $google_font;
 			}
 
@@ -1598,4 +1598,3 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 if ( ! class_exists( 'ReduxFramework_Typography' ) ) {
 	class_alias( 'Redux_Typography', 'ReduxFramework_Typography' );
 }
-

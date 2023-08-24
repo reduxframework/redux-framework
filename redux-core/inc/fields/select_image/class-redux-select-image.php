@@ -109,7 +109,7 @@ if ( ! class_exists( 'Redux_Select_Image', false ) ) {
 					echo '<option value="' . esc_url( $v['img'] ) . '" ' . esc_html( $selected ) . '>' . esc_attr( $v['alt'] ) . '</option>';
 
 					// Add a bean.
-					$x ++;
+					++$x;
 				}
 
 				// Close the <select> tag.

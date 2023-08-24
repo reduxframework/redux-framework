@@ -61,33 +61,35 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		 * @since       1.0.0
 		 * @access      public
 		 *
-		 * @param       ReduxFramework $parent Parent settings.
+		 * @param       ReduxFramework $redux Parent settings.
 		 *
 		 * @return      void
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			$this->add_field( 'social_profiles' );
+
+			require_once __DIR__ . '/redux-social-profiles-helpers.php';
 
 			include_once 'social_profiles/inc/class-redux-social-profiles-defaults.php';
 			include_once 'social_profiles/inc/class-redux-social-profiles-functions.php';
 
-			Redux_Social_Profiles_Functions::init( $parent );
+			Redux_Social_Profiles_Functions::init( $redux );
 
-			$this->field = Redux_Social_Profiles_Functions::get_field( $parent );
+			$this->field = Redux_Social_Profiles_Functions::get_field( $redux );
 
 			if ( ! is_array( $this->field ) ) {
 				return;
 			}
 
 			$this->field_id = $this->field['id'];
-			$this->opt_name = $parent->args['opt_name'];
+			$this->opt_name = $redux->args['opt_name'];
 
 			$upload_dir = Redux_Social_Profiles_Functions::$upload_dir;
 
 			if ( ! is_dir( $upload_dir ) ) {
-				$parent->filesystem->execute( 'mkdir', $upload_dir );
+				$redux->filesystem->execute( 'mkdir', $upload_dir );
 			}
 
 			if ( ! class_exists( 'Redux_Social_Profiles_Widget' ) ) {
@@ -95,7 +97,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 
 				if ( $enable ) {
 					include_once 'social_profiles/inc/class-redux-social-profiles-widget.php';
-					new Redux_Social_Profiles_Widget( $parent, $this->field_id );
+					new Redux_Social_Profiles_Widget( $redux, $this->field_id );
 				}
 			}
 
@@ -104,7 +106,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 
 				if ( $enable ) {
 					include_once 'social_profiles/inc/class-redux-social-profiles-shortcode.php';
-					new Redux_Social_Profiles_Shortcode( $parent, $this->field_id );
+					new Redux_Social_Profiles_Shortcode( $redux, $this->field_id );
 				}
 			}
 
@@ -117,7 +119,6 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 			// Reset hooks.
 			add_action( 'redux/validate/' . $this->parent->args['opt_name'] . '/defaults', array( $this, 'reset_defaults' ), 0, 3 );
 			add_action( 'redux/validate/' . $this->parent->args['opt_name'] . '/defaults_section', array( $this, 'reset_defaults_section' ), 0, 3 );
-
 		}
 
 		/**
@@ -195,11 +196,10 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		 *
 		 * @param array $saved_options  Saved options.
 		 * @param array $changed_values Changed values.
-		 * @param array $sections       Sections.
 		 *
 		 * @return array
 		 */
-		public function save_me( array $saved_options = array(), array $changed_values = array(), array $sections = array() ): array {
+		public function save_me( array $saved_options = array(), array $changed_values = array() ): array {
 			if ( empty( $this->field ) ) {
 				$this->field    = Redux_Social_Profiles_Functions::get_field();
 				$this->field_id = $this->field['id'];
@@ -281,95 +281,3 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 }
 
 class_alias( 'Redux_Extension_Social_Profiles', 'ReduxFramework_Extension_social_profiles' );
-
-
-if ( ! function_exists( 'redux_social_profile_value_from_id' ) ) {
-	/**
-	 * Returns social profile value from passed profile ID.
-	 *
-	 * @param string $opt_name Redux Framework opt_name.
-	 * @param string $id       Profile ID.
-	 * @param string $value    Social profile value to return (icon, name, background, color, url, or order).
-	 *
-	 * @return      string Returns HTML string when $echo is set to false.  Otherwise, true.
-	 * @since       1.0.0
-	 * @access      public
-	 */
-	function redux_social_profile_value_from_id( string $opt_name, string $id, string $value ): string {
-		if ( empty( $opt_name ) || empty( $id ) || empty( $value ) ) {
-			return '';
-		}
-
-		$redux           = ReduxFrameworkInstances::get_instance( $opt_name );
-		$social_profiles = $redux->extensions['social_profiles'];
-
-		$redux_options = get_option( $social_profiles->opt_name );
-		$settings      = $redux_options[ $social_profiles->field_id ];
-
-		foreach ( $settings as $arr ) {
-			if ( $id === $arr['id'] ) {
-				if ( $arr['enabled'] ) {
-					if ( isset( $arr[ $value ] ) ) {
-						return $arr[ $value ];
-					}
-				} else {
-					return '';
-				}
-			}
-		}
-
-		return '';
-	}
-}
-
-if ( ! function_exists( 'redux_render_icon_from_id' ) ) {
-	/**
-	 * Renders social icon from passed profile ID.
-	 *
-	 * @param string  $opt_name Redux Framework opt_name.
-	 * @param string  $id       Profile ID.
-	 * @param boolean $echo     Echos icon HTML when true.  Returns icon HTML when false.
-	 * @param string  $a_class  Class name for a tag.
-	 *
-	 * @return      string Returns HTML string when $echo is set to false.  Otherwise, true.
-	 * @since       1.0.0
-	 * @access      public
-	 */
-	function redux_render_icon_from_id( string $opt_name, string $id, bool $echo = true, string $a_class = '' ) {
-		if ( empty( $opt_name ) || empty( $id ) ) {
-			return '';
-		}
-
-		include_once 'social_profiles/inc/class-redux-social-profiles-functions.php';
-
-		$redux           = ReduxFrameworkInstances::get_instance( $opt_name );
-		$social_profiles = $redux->extensions['social_profiles'];
-
-		$redux_options = get_option( $social_profiles->opt_name );
-		$settings      = $redux_options[ $social_profiles->field_id ];
-
-		foreach ( $settings as $arr ) {
-			if ( $id === $arr['id'] ) {
-				if ( $arr['enabled'] ) {
-
-					if ( $echo ) {
-						echo '<a class="' . esc_attr( $a_class ) . '" href="' . esc_url( $arr['url'] ) . '">';
-						Redux_Social_Profiles_Functions::render_icon( $arr['icon'], $arr['color'], $arr['background'], '' );
-						echo '</a>';
-
-						return true;
-					} else {
-						$html = '<a class="' . $a_class . '"href="' . $arr['url'] . '">';
-
-						$html .= Redux_Social_Profiles_Functions::render_icon( $arr['icon'], $arr['color'], $arr['background'], '', false );
-						$html .= '</a>';
-
-						return $html;
-					}
-				}
-			}
-		}
-
-		return '';
-	}
-}

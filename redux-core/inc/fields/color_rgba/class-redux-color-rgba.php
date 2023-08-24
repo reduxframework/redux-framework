@@ -54,7 +54,7 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 
 			$this->field['options'] = isset( $this->field['options'] ) ? wp_parse_args( $this->field['options'], $option_defaults ) : $option_defaults;
 
-			// Convert empty array to null, if there.
+			// Convert an empty array to null, if there.
 			$this->field['options']['palette'] = empty( $this->field['options']['palette'] ) ? null : $this->field['options']['palette'];
 
 			$this->field['output_transparent'] = $this->field['output_transparent'] ?? false;
@@ -185,7 +185,7 @@ if ( ! class_exists( 'Redux_Color_Rgba', false ) ) {
 
 		/**
 		 * -> getColorVal.  Returns formatted color val in hex or rgba.
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+		 * If this field requires any scripts or css, define this function and register/enqueue the scripts/css
 		 *
 		 * @since       1.0.0
 		 * @access      private

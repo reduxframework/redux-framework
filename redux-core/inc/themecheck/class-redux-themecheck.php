@@ -180,7 +180,7 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 
 			// load all the checks in the checks directory.
 			$dir = 'checks';
-			foreach ( glob( dirname( __FILE__ ) . '/' . $dir . '/*.php' ) as $file ) {
+			foreach ( glob( __DIR__ . '/' . $dir . '/*.php' ) as $file ) {
 				require_once $file;
 			}
 		}
