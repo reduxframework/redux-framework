@@ -1,18 +1,18 @@
 /* global jQuery, document, redux */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	redux.field_objects           = redux.field_objects || {};
 	redux.field_objects.accordion = redux.field_objects.accordion || {};
 
-	redux.field_objects.accordion.init = function( selector ) {
+	redux.field_objects.accordion.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-accordion:visible' );
 		}
 
 		$( selector ).each(
-			function() {
+			function () {
 				var $id;
 				var group;
 				var test;
@@ -46,7 +46,7 @@
 
 					$.each(
 						test,
-						function( key, value ) {
+						function ( key, value ) {
 							key = null;
 
 							$( value ).css( 'margin-top', '20px' );
@@ -63,7 +63,7 @@
 
 					group.find( '.redux-accordion-field' ).on(
 						'click',
-						function( e ) {
+						function ( e ) {
 							var id    = $( this ).attr( 'id' );
 							var table = $( '#accordion-table-' + id );
 
@@ -81,7 +81,7 @@
 					);
 
 					group.find( '.redux-accordion-field' ).each(
-						function() {
+						function () {
 							var id;
 							var state;
 							var table;

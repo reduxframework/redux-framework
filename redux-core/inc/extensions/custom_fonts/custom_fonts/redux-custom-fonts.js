@@ -1,6 +1,6 @@
 /* global redux, wp, redux_custom_fonts_l10, ajaxurl */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	var l10n;
@@ -10,7 +10,7 @@
 	redux.field_objects              = redux.field_objects || {};
 	redux.field_objects.custom_fonts = redux.field_objects.custom_fonts || {};
 
-	redux.field_objects.custom_fonts.init = function( selector ) {
+	redux.field_objects.custom_fonts.init = function ( selector ) {
 
 		// If no selector is passed, grab one from the HTML.
 		if ( ! selector ) {
@@ -19,7 +19,7 @@
 
 		// Enum instances of our object.
 		$( selector ).each(
-			function() {
+			function () {
 				var el     = $( this );
 				var parent = el;
 
@@ -43,7 +43,7 @@
 		);
 	};
 
-	redux.field_objects.custom_fonts.modInit = function( el ) {
+	redux.field_objects.custom_fonts.modInit = function ( el ) {
 		var optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
 		l10n = redux_custom_fonts_l10;
@@ -56,7 +56,7 @@
 
 		el.find( '.checkbox' ).on(
 			'click',
-			function() {
+			function () {
 				var val = 0;
 				var checkName;
 				var checkVal;
@@ -94,7 +94,7 @@
 		// Remove the image button.
 		el.find( '.remove-font' ).off( 'click' ).on(
 			'click',
-			function() {
+			function () {
 				redux.field_objects.custom_fonts.remove_font( el, $( this ).parents( 'fieldset.redux-field:first' ) );
 			}
 		);
@@ -102,14 +102,14 @@
 		// Upload media button.
 		el.find( '.media_add_font' ).off().on(
 			'click',
-			function( event ) {
+			function ( event ) {
 				redux.field_objects.custom_fonts.add_font( el, event, $( this ).parents( 'fieldset.redux-field:first' ) );
 			}
 		);
 
 		el.find( '.fontDelete' ).on(
 			'click',
-			function( e ) {
+			function ( e ) {
 				var data;
 
 				var parent = $( this ).parents( 'td:first' );
@@ -125,7 +125,7 @@
 				$.post(
 					ajaxurl,
 					data,
-					function( response ) {
+					function ( response ) {
 						var rowCount;
 
 						response = JSON.parse( response );
@@ -151,7 +151,7 @@
 		);
 	};
 
-	redux.field_objects.custom_fonts.startTimer = function( el, status ) {
+	redux.field_objects.custom_fonts.startTimer = function ( el, status ) {
 		var cur_data;
 
 		$.ajax(
@@ -161,10 +161,10 @@
 				data: {
 					action: 'redux_custom_font_timer'
 				},
-				beforeSend: function() {
+				beforeSend: function () {
 
 				},
-				success: function( data ) {
+				success: function ( data ) {
 					var msg;
 
 					if ( false === ajaxDone ) {
@@ -188,7 +188,7 @@
 		);
 	};
 
-	redux.field_objects.custom_fonts.add_font = function( el, event, selector ) {
+	redux.field_objects.custom_fonts.add_font = function ( el, event, selector ) {
 		var frame;
 
 		event.preventDefault();
@@ -221,7 +221,7 @@
 		// When an image is selected, run a callback.
 		frame.on(
 			'select',
-			function() {
+			function () {
 				var nonce;
 				var data;
 				var status;
@@ -266,7 +266,7 @@
 				$.post(
 					ajaxurl,
 					data,
-					function( response ) {
+					function ( response ) {
 						console.log( 'Redux Custom Fonts API Response (For support purposes)' );
 						console.log( response );
 
@@ -306,7 +306,7 @@
 		frame.open();
 	};
 
-	redux.field_objects.custom_fonts.remove_font = function( el, selector ) {
+	redux.field_objects.custom_fonts.remove_font = function ( el, selector ) {
 		el = null;
 
 		// This shouldn't have been run...
@@ -315,7 +315,7 @@
 		}
 	};
 
-	redux.field_objects.custom_fonts.sleep = function( milliseconds ) {
+	redux.field_objects.custom_fonts.sleep = function ( milliseconds ) {
 		var start = new Date().getTime();
 
 		var i;

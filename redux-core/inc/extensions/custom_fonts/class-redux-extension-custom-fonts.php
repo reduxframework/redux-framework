@@ -69,14 +69,14 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		/**
 		 * Class Constructor. Defines the args for the extensions class
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 *
 		 * @return      void
 		 * @since       1.0.0
 		 * @access      public
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			self::$instance = parent::get_instance();
 
@@ -881,7 +881,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					'fields' => array(),
 				);
 
-				for ( $i = count( $this->parent->sections ); $i >= 1; $i -- ) {
+				for ( $i = count( $this->parent->sections ); $i >= 1; $i-- ) {
 					if ( isset( $this->parent->sections[ $i ] ) && isset( $this->parent->sections[ $i ]['title'] ) && esc_html__( 'Font Control', 'redux-framework' ) === $this->parent->sections[ $i ]['title'] ) {
 						$this->parent->fontControl                                        = $i;
 						$this->parent->sections[ $this->parent->fontControl ]['fields'][] = array(

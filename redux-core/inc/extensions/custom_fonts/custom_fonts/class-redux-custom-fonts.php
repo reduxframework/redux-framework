@@ -52,7 +52,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
                     data-id="' . esc_attr( $this->field['id'] ) . '"
                   >';
 
-			$can_convert = true; // has_filter( 'redux/' . $this->parent->args['opt_name'] . '/extensions/custom_fonts/api_url' );
+			$can_convert = true;
 
 			$nonce = wp_create_nonce( 'redux_custom_fonts' );
 
