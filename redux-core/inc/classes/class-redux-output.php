@@ -5,6 +5,7 @@
  * @class   Redux_Output
  * @version 3.0.0
  * @package Redux Framework/Classes
+ * @noinspection PhpConditionCheckedByNextConditionInspection
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -19,10 +20,10 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Redux_Output constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			// Output dynamic CSS.
 			// Frontend: Maybe enqueue dynamic CSS and Google fonts.
@@ -387,7 +388,5 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 
 			return $return;
 		}
-
 	}
-
 }

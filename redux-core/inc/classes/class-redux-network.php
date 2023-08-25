@@ -19,14 +19,14 @@ if ( ! class_exists( 'Redux_Network', false ) ) {
 		/**
 		 * Redux_Network constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
-			if ( 'network' === $parent->args['database'] && $parent->args['network_admin'] ) {
+			if ( 'network' === $redux->args['database'] && $redux->args['network_admin'] ) {
 				add_action(
-					'network_admin_edit_redux_' . $parent->args['opt_name'],
+					'network_admin_edit_redux_' . $redux->args['opt_name'],
 					array(
 						$this,
 						'save_network_page',

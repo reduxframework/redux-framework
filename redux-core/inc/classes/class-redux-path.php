@@ -19,9 +19,7 @@ if ( ! class_exists( 'Redux_Path', false ) ) {
 		/**
 		 * Class init
 		 */
-		public static function init() {
-
-		}
+		public static function init() {}
 
 		/**
 		 * Gets Redux path.

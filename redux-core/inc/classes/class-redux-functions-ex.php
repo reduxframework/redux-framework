@@ -127,20 +127,20 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Parses the string into variables without the max_input_vars limitation.
 		 *
-		 * @param string $string String of data.
+		 * @param string $str String of data.
 		 *
 		 * @return  array|false $result
 		 * @since   3.5.7.11
 		 * @author  harunbasic
 		 * @access  private
 		 */
-		public static function parse_str( string $string ) {
-			if ( '' === $string ) {
+		public static function parse_str( string $str ) {
+			if ( '' === $str ) {
 				return false;
 			}
 
 			$result = array();
-			$pairs  = explode( '&', $string );
+			$pairs  = explode( '&', $str );
 
 			foreach ( $pairs as $pair ) {
 				// use the original parse_str() on each element.
@@ -424,7 +424,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		/**
 		 * Used to fix 3.x and 4 compatibility for extensions
 		 *
-		 * @param object $parent         The extension parent object.
+		 * @param object $extension      The extension parent object.
 		 * @param string $path           - Path of the file.
 		 * @param string $ext_class      - Extension class name.
 		 * @param string $new_class_name - New dynamic class name.
@@ -432,7 +432,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 *
 		 * @return object - Extended field class.
 		 */
-		public static function extension_compatibility( $parent, string $path, string $ext_class, string $new_class_name, string $name ) {
+		public static function extension_compatibility( $extension, string $path, string $ext_class, string $new_class_name, string $name ) {
 			if ( empty( $new_class_name ) ) {
 				return null;
 			}
@@ -441,8 +441,8 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 
 			if ( ! file_exists( $upload_dir . $ext_class . '.php' ) ) {
 				if ( ! is_dir( $upload_dir ) ) {
-					$parent->filesystem->mkdir( $upload_dir );
-					$parent->filesystem->put_contents( $upload_dir . 'index.php', '<?php // Silence is golden.' );
+					$extension->filesystem->mkdir( $upload_dir );
+					$extension->filesystem->put_contents( $upload_dir . 'index.php', '<?php // Silence is golden.' );
 				}
 				if ( ! class_exists( $ext_class ) ) {
 					require_once $path;
@@ -465,6 +465,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 								'    }' . PHP_EOL .
 								'}' . PHP_EOL;
 					$template   = str_replace( '{{ext_class}}', $new_class_name, $class_file );
+					// phpcs:ignore Squiz.PHP.CommentedOutCode.Found
 					// $parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
 				}
 
@@ -473,7 +474,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 						require_once $upload_dir . $new_class_name . '.php';
 					}
 					if ( class_exists( $new_class_name ) ) {
-						return new $new_class_name( $parent, $path, $ext_class );
+						return new $new_class_name( $extension, $path, $ext_class );
 					}
 				}
 			}

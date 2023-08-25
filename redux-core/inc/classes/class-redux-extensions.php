@@ -18,12 +18,12 @@ if ( ! class_exists( 'Redux_Extensions', false ) ) {
 		/**
 		 * Redux_Extensions constructor.
 		 *
-		 * @param object $parent ReduxFramework object pointer.
+		 * @param object $redux ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Exception.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			$this->load();
 		}
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Redux_Extensions', false ) ) {
 				$max = 2;
 			}
 
-			for ( $i = 1; $i <= $max; $i ++ ) {
+			for ( $i = 1; $i <= $max; $i++ ) {
 				$path = Redux_Core::$dir . 'inc/extensions/';
 
 				if ( 2 === $i ) {
@@ -79,6 +79,7 @@ if ( ! class_exists( 'Redux_Extensions', false ) ) {
 
 				$path = untrailingslashit( $path );
 
+				// TODO: Delete this when finished porting Redux Pro.
 				// Backwards compatibility for extensions.
 				// $instance_extensions = Redux::get_extensions( $core->args['opt_name'] );
 				if ( ! empty( $instance_extensions ) ) {

@@ -5,6 +5,7 @@
  * @class   Redux_Extension_Abstract
  * @version 4.0.0
  * @package Redux Framework/Classes
+ * @noinspection PhpUnused
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -68,11 +69,11 @@ abstract class Redux_Extension_Abstract {
 	/**
 	 * Redux_Extension_Abstract constructor.
 	 *
-	 * @param object $parent ReduxFramework pointer.
-	 * @param string $file   Extension file.
+	 * @param object $redux ReduxFramework pointer.
+	 * @param string $file  Extension file.
 	 */
-	public function __construct( $parent, string $file = '' ) {
-		$this->parent = $parent;
+	public function __construct( $redux, string $file = '' ) {
+		$this->parent = $redux;
 
 		// If the file is not given, make sure we have one.
 		if ( empty( $file ) ) {
@@ -153,15 +154,7 @@ abstract class Redux_Extension_Abstract {
 	 */
 	protected function add_overload_field_filter( string $field_name ) {
 		// phpcs:ignore WordPress.NamingConventions.ValidHookName
-		add_filter(
-			'redux/' . $this->parent->args['opt_name'] . '/field/class/' . $field_name,
-			array(
-				&$this,
-				'overload_field_path',
-			),
-			10,
-			2
-		);
+		add_filter( 'redux/' . $this->parent->args['opt_name'] . '/field/class/' . $field_name, array( &$this, 'overload_field_path' ), 10, 2 );
 	}
 
 	/**
@@ -177,6 +170,7 @@ abstract class Redux_Extension_Abstract {
 			'redux/fields',
 			function ( $classes ) use ( $field_name, $class ) {
 				$classes[ $field_name ] = $class;
+
 				return $classes;
 			}
 		);

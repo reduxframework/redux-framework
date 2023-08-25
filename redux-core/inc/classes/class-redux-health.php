@@ -18,10 +18,10 @@ if ( ! class_exists( 'Redux_Health', false ) ) {
 		/**
 		 * Redux_Args constructor.
 		 *
-		 * @param     object $parent ReduxFramework object.
+		 * @param     object $redux ReduxFramework object.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			add_action( 'wp_ajax_redux_submit_support_data', array( $this, 'ajax' ) );
 		}

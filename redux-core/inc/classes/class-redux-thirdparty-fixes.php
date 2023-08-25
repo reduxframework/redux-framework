@@ -19,10 +19,10 @@ if ( ! class_exists( 'Redux_ThirdParty_Fixes', false ) ) {
 		/**
 		 * Redux_ThirdParty_Fixes constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			$this->gt3_page_builder();
 

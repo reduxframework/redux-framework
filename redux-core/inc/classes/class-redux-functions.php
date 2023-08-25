@@ -287,6 +287,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 */
 		public static function initWpFilesystem() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			// TODO: Activate after Redux Pro is discontinued.
+			// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
 			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0', 'init_wp_filesystem()' );
 
 			self::init_wp_filesystem();

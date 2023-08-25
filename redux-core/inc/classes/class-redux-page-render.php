@@ -5,6 +5,8 @@
  * @class Redux_Page_Render
  * @version 3.0.0
  * @package Redux Framework/Classes
+ * @noinspection HtmlUnknownAttribute
+ * @noinspection PhpConditionCheckedByNextConditionInspection
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -35,19 +37,19 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 		/**
 		 * Redux_Page_Render constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param object $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
-			add_action( 'admin' . '_bar' . '_menu', array( $this, 'add_menu' ), $parent->args['admin_bar_priority'] );
+			add_action( 'admin' . '_bar' . '_menu', array( $this, 'add_menu' ), $redux->args['admin_bar_priority'] );
 
 			// Options page.
 			add_action( 'admin_menu', array( $this, 'options_page' ) );
 
 			// Add a network menu.
-			if ( 'network' === $parent->args['database'] && $parent->args['network_admin'] ) {
+			if ( 'network' === $redux->args['database'] && $redux->args['network_admin'] ) {
 				add_action( 'network_admin_menu', array( $this, 'options_page' ) );
 			}
 		}
@@ -207,12 +209,11 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 
 				// Specify user's text from arguments.
 				$screen->set_help_sidebar( $core->args['help_sidebar'] );
-			} else {
+			} elseif ( true === $this->show_hints ) {
 				// If a sidebar text is empty and hints are active, display text
 				// about hints.
-				if ( true === $this->show_hints ) {
-					$screen->set_help_sidebar( '<p><strong>Redux Framework</strong><br/><br/>' . esc_html__( 'Hint Tooltip Preferences', 'redux-framework' ) . '</p>' );
-				}
+
+				$screen->set_help_sidebar( '<p><strong>Redux Framework</strong><br/><br/>' . esc_html__( 'Hint Tooltip Preferences', 'redux-framework' ) . '</p>' );
 			}
 
 			/**
@@ -514,7 +515,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 							$field_class = Redux_Functions::class_exists_ex( $field_classes );
 						} else {
 							// translators: %1$s is the field ID, %2$s is the field type.
-							echo sprintf( esc_html__( 'Field %1$s could not be displayed. Field type %2$s was not found.', 'redux-framework' ), '<code>' . esc_attr( $field['id'] ) . '</code>', '<code>' . esc_attr( $field['type'] ) . '</code>' );
+							printf( esc_html__( 'Field %1$s could not be displayed. Field type %2$s was not found.', 'redux-framework' ), '<code>' . esc_attr( $field['id'] ) . '</code>', '<code>' . esc_attr( $field['type'] ) . '</code>' );
 						}
 					}
 				}
@@ -577,7 +578,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					try {
 						$render->render();
 					} catch ( Error $e ) {
-						echo 'Field failed to render: ',  esc_html( $e->getMessage() ), "\n";
+						echo 'Field failed to render: ', esc_html( $e->getMessage() ), "\n";
 					}
 
 					/**
@@ -959,12 +960,10 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				if ( ! empty( $field['options'][ $field['default'] ] ) ) {
 					if ( ! empty( $field['options'][ $field['default'] ]['alt'] ) ) {
 						$default_output .= $field['options'][ $field['default'] ]['alt'] . ', ';
-					} else {
-						if ( ! is_array( $field['options'][ $field['default'] ] ) ) {
+					} elseif ( ! is_array( $field['options'][ $field['default'] ] ) ) {
 							$default_output .= $field['options'][ $field['default'] ] . ', ';
-						} else {
-							$default_output .= maybe_serialize( $field['options'][ $field['default'] ] ) . ', ';
-						}
+					} else {
+						$default_output .= maybe_serialize( $field['options'][ $field['default'] ] ) . ', ';
 					}
 				} elseif ( ! empty( $field['options'][ $field['default'] ] ) ) {
 					$default_output .= $field['options'][ $field['default'] ] . ', ';
@@ -1071,7 +1070,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					$core->args['pro']['flyout_submenus'] = false;
 				}
 
-				$subsections        = isset( $sections[ ( $k + 1 ) ] ) && isset( $sections[ ( $k + 1 ) ]['subsection'] ) && true === $sections[ ( $k + 1 ) ]['subsection'];
+				$subsections        = isset( $sections[ ( $k + 1 ) ]['subsection'] ) && true === $sections[ ( $k + 1 ) ]['subsection'];
 				$subsections_class  = $subsections ? ' hasSubSections' : '';
 				$subsections_class .= ( empty( $section['fields'] ) ) ? ' empty_section' : '';
 				$rotate             = true === $core->args['pro']['flyout_submenus'] ? ' el-rotate' : '';
@@ -1088,8 +1087,8 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					$do_loop = true;
 
 					while ( $do_loop ) {
-						$next_k ++;
-						$function_count++;
+						++$next_k;
+						++$function_count;
 
 						$display = true;
 

@@ -5,6 +5,7 @@
  * @class Redux_Options
  * @version 3.0.0
  * @package Redux Framework/Classes
+ * @noinspection PhpConditionCheckedByNextConditionInspection
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -43,6 +44,13 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 * @var array
 		 */
 		public $hidden_perm_sections = array();
+
+		/**
+		 * Array to hold default options.
+		 *
+		 * @var array
+		 */
+		private $options_defaults = array();
 
 		/**
 		 * Redux_Options constructor.
@@ -973,10 +981,10 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 					$this->default_values(); // fill cache.
 				}
 
-				$default = array_key_exists( $opt_name, $this->options_defaults ) ? $this->options_defaults[ $opt_name ] : $defaults;
+				return array_key_exists( $opt_name, $this->options_defaults ) ? $this->options_defaults[ $opt_name ] : $defaults;
 			}
 
-			return $default;
+			return '';
 		}
 
 		/**

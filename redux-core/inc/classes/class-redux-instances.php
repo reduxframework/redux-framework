@@ -6,6 +6,7 @@
  *
  * @package     Redux_Framework/Classes
  * @subpackage  Core
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 defined( 'ABSPATH' ) || exit;

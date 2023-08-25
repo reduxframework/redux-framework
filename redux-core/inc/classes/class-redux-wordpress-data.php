@@ -26,13 +26,13 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		/**
 		 * Redux_WordPress_Data constructor.
 		 *
-		 * @param mixed $parent ReduxFramework pointer or opt_name.
+		 * @param mixed $redux ReduxFramework pointer or opt_name.
 		 */
-		public function __construct( $parent = null ) {
-			if ( is_string( $parent ) ) {
-				$this->opt_name = $parent;
+		public function __construct( $redux = null ) {
+			if ( is_string( $redux ) ) {
+				$this->opt_name = $redux;
 			} else {
-				parent::__construct( $parent );
+				parent::__construct( $redux );
 			}
 		}
 
@@ -165,6 +165,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 							$key = $k;
 						}
 					}
+
 					if ( empty( $name_key ) ) {
 						$value = $v;
 					} else {

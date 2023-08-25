@@ -9,100 +9,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use Redux_Descriptor_Types as RDT; // TODO Require instead!
-
 if ( ! class_exists( 'Redux_Field', false ) ) {
 
 	/**
 	 * Class Redux_Field
 	 */
 	abstract class Redux_Field {
-
-		/**
-		 * Array of descriptors.
-		 *
-		 * @var Redux_Descriptor[]
-		 */
-		public static $descriptors = array();
-
-		/**
-		 * Make base descriptor.
-		 *
-		 * @return Redux_Descriptor
-		 */
-		public static function make_base_descriptor(): Redux_Descriptor {
-			$d                                       = new Redux_Descriptor( get_called_class() );
-			self::$descriptors[ get_called_class() ] = $d;
-
-			$d->add_field( 'id', __( 'Field ID', 'redux-framework' ), RDT::TEXT )->set_order( 0 )->set_required();
-			$d->add_field( 'title', __( 'Title', 'redux-framework' ), RDT::TEXT )->set_order( 1 );
-			$d->add_field( 'subtitle', __( 'Subtitle', 'redux-framework' ), RDT::TEXT )->set_order( 2 );
-			$d->add_field( 'desc', __( 'Description', 'redux-framework' ), RDT::TEXT )->set_order( 3 );
-			$d->add_field( 'class', __( 'Class', 'redux-framework' ), RDT::TEXT )->set_order( 3 );
-			$d->add_field( 'compiler', __( 'Compiler', 'redux-framework' ), RDT::BOOL, '', false )->set_order( 60 );
-			$d->add_field( 'default', __( 'Default', 'redux-framework' ), RDT::OPTIONS, '', false )->set_order( 60 );
-			$d->add_field( 'disabled', __( 'Disabled', 'redux-framework' ), RDT::BOOL, '', false )->set_order( 60 );
-			$d->add_field( 'hint', __( 'Hint', 'redux-framework' ), RDT::OPTIONS, '', false )->set_order( 60 );
-			$d->add_field( 'hint', __( 'Permissions', 'redux-framework' ), RDT::OPTIONS, '', false )->set_order( 60 );
-			$d->add_field( 'required', __( 'Required', 'redux-framework' ), RDT::BOOL, '', false )->set_order( 60 );
-
-			return $d;
-		}
-
-		/**
-		 * Renders an attribute array into a html attributes string.
-		 *
-		 * @param array $attributes HTML attributes.
-		 *
-		 * @return string
-		 */
-		public static function render_attributes( array $attributes = array() ): string {
-			$output = '';
-
-			if ( empty( $attributes ) ) {
-				return $output;
-			}
-
-			foreach ( $attributes as $key => $value ) {
-				if ( false === $value || '' === $value ) {
-					continue;
-				}
-
-				if ( is_array( $value ) ) {
-					$value = wp_json_encode( $value );
-				}
-
-				$output .= sprintf( true === $value ? ' %1$s' : ' %1$s="%2$s"', $key, esc_attr( $value ) );
-			}
-
-			return $output;
-		}
-
-		/**
-		 * Get descriptor.
-		 *
-		 * @return Redux_Descriptor
-		 */
-		public static function get_descriptor(): Redux_Descriptor {
-			if ( ! isset( static::$descriptors[ get_called_class() ] ) ) {
-				static::make_descriptor();
-			}
-
-			$d = self::$descriptors[ get_called_class() ];
-
-			static::make_descriptor();
-
-			// This part is out of opt name because it's non-vendor dependant!
-			return apply_filters( 'redux/field/' . $d->get_field_type() . '/get_descriptor', $d ); // phpcs:ignore WordPress.NamingConventions.ValidHookName
-		}
-
-		/**
-		 * Build the field descriptor in this function.
-		 */
-		public static function make_descriptor() {
-			static::make_base_descriptor();
-		}
-
 
 		/**
 		 * CSS styling per field output/compiler.
@@ -165,12 +77,12 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 *
 		 * @param array|string|null $field  Field array.
 		 * @param string|array|null $value  Field values.
-		 * @param null              $parent ReduxFramework object pointer.
+		 * @param null              $redux ReduxFramework object pointer.
 		 *
 		 * @throws ReflectionException Comment.
 		 */
-		public function __construct( $field = array(), $value = null, $parent = null ) {
-			$this->parent = $parent;
+		public function __construct( $field = array(), $value = null, $redux = null ) {
+			$this->parent = $redux;
 			$this->field  = $field;
 			$this->value  = $value;
 
@@ -190,7 +102,7 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 			$this->url  = trailingslashit( dirname( $path_info['url'] ) );
 
 			$this->timestamp = Redux_Core::$version;
-			if ( $parent->args['dev_mode'] ) {
+			if ( $redux->args['dev_mode'] ) {
 				$this->timestamp .= '.' . time();
 			}
 		}
@@ -285,37 +197,27 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 *
 		 * @param mixed $data CSS data.
 		 */
-		public function css_style( $data ) {
-
-		}
+		public function css_style( $data ) {}
 
 		/**
 		 * Unused for now.
 		 */
-		public function set_defaults() {
-
-		}
+		public function set_defaults() {}
 
 		/**
 		 * Unused for now.
 		 */
-		public function render() {
-
-		}
+		public function render() {}
 
 		/**
 		 * Unused for now.
 		 */
-		public function enqueue() {
-
-		}
+		public function enqueue() {}
 
 		/**
 		 * Unused for now.
 		 */
-		public function always_enqueue() {
-
-		}
+		public function always_enqueue() {}
 
 		/**
 		 * Unused for now.
@@ -323,8 +225,6 @@ if ( ! class_exists( 'Redux_Field', false ) ) {
 		 * @param array  $field Field array.
 		 * @param string $value Value array.
 		 */
-		public function localize( array $field, string $value = '' ) {
-
-		}
+		public function localize( array $field, string $value = '' ) {}
 	}
 }

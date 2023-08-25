@@ -14,13 +14,13 @@ if ( ! class_exists( 'Redux_Installer_Muter', false ) ) {
 		/**
 		 * Suppress feedback.
 		 *
-		 * @param string|null $string  A string.
+		 * @param string|null $feedback  A string.
 		 * @param array|null  ...$args Passed args.
 		 *
 		 * @return void
 		 * @since 4.0.0
 		 */
-		public function feedback( $string, ...$args ) {
+		public function feedback( $feedback, ...$args ) {
 			/* no output */
 		}
 	}

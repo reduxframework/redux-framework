@@ -3,6 +3,7 @@
  * Redux Helper Class
  *
  * @noinspection PhpUndefinedFieldInspection
+ * @noinspection PhpUnused
  *
  * @class   Redux_Helpers
  * @version 3.0.0
@@ -73,34 +74,34 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 				return false;
 			}
 
-			return is_float( $val ) ? false : preg_match( '~^((?:\+|-)?[0-9]+)$~', $val );
+			return is_float( $val ) ? false : preg_match( '~^([+\-]?[0-9]+)$~', $val );
 		}
 
 		/**
 		 * Deprecated. Gets panel tab number from the specified field.
 		 *
-		 * @param object       $parent ReduxFramework object.
+		 * @param object       $redux ReduxFramework object.
 		 * @param array|string $field  Field array.
 		 *
 		 * @return int|string
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function tabFromField( $parent, $field ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function tabFromField( $redux, $field ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::tab_from_field( $parent, $field )' );
 
-			return self::tab_from_field( $parent, $field );
+			return self::tab_from_field( $redux, $field );
 		}
 
 		/**
 		 * Gets panel tab number from the specified field.
 		 *
-		 * @param object       $parent ReduxFramework object.
+		 * @param object       $redux ReduxFramework object.
 		 * @param array|string $field  Field array.
 		 *
 		 * @return int|string
 		 */
-		public static function tab_from_field( $parent, $field ) {
-			foreach ( $parent->sections as $k => $section ) {
+		public static function tab_from_field( $redux, $field ) {
+			foreach ( $redux->sections as $k => $section ) {
 				if ( ! isset( $section['title'] ) ) {
 					continue;
 				}
@@ -151,32 +152,32 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Deprecated Verifies if field is in use.
 		 *
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 * @param string $field  Field type.
 		 *
 		 * @return bool
 		 * @deprecated No longer using camelCase function names.
 		 */
-		public static function isFieldInUse( $parent, string $field ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// phpcs:ignore Squiz.PHP.CommentedOutCode
-			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::is_field_in_use( $parent, $field )' );
-			return self::is_field_in_use( $parent, $field );
+		public static function isFieldInUse( $redux, string $field ): bool { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Helpers::is_field_in_use( $parent, $field )' );
+
+			return self::is_field_in_use( $redux, $field );
 		}
 
 		/**
 		 * Verifies if field is in use.
 		 *
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 * @param string $field  Field type.
 		 *
 		 * @return bool
 		 */
-		public static function is_field_in_use( $parent, string $field ): bool {
-			if ( empty( $parent->sections ) ) {
+		public static function is_field_in_use( $redux, string $field ): bool {
+			if ( empty( $redux->sections ) ) {
 				return false;
 			}
 
-			foreach ( $parent->sections as $section ) {
+			foreach ( $redux->sections as $section ) {
 				if ( ! isset( $section['title'] ) ) {
 					continue;
 				}
@@ -584,32 +585,32 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Deprecated. Returns string boolean value.
 		 *
-		 * @param mixed $var String to convert to true boolean.
+		 * @param mixed $variable String to convert to true boolean.
 		 *
 		 * @return mixed|array
 		 *
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function makeBoolStr( $var ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function makeBoolStr( $variable ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0.0', 'Redux_Instances::make_bool_str( $var )' );
 
-			return self::make_bool_str( $var );
+			return self::make_bool_str( $variable );
 		}
 
 		/**
 		 * Returns string boolean value.
 		 *
-		 * @param mixed $var true|false to convert.
+		 * @param mixed $variable true|false to convert.
 		 *
 		 * @return mixed|array
 		 */
-		public static function make_bool_str( $var ) {
-			if ( 'false' === $var || empty( $var ) ) {
+		public static function make_bool_str( $variable ) {
+			if ( 'false' === $variable || empty( $variable ) ) {
 				return 'false';
-			} elseif ( true === $var || 'true' === $var || 1 === $var || '1' === $var ) {
+			} elseif ( true === $variable || 'true' === $variable || 1 === $variable || '1' === $variable ) {
 				return 'true';
 			} else {
-				return $var;
+				return $variable;
 			}
 		}
 
@@ -677,8 +678,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *
 		 * @param array $attributes Array of attributes.
 		 */
-		public static function html_attributes( array $attributes = array() ) {
-			$string = join(
+		public static function html_attributes( array $attributes = array() ): string {
+			return join(
 				' ',
 				array_map(
 					function ( $key ) use ( $attributes ) {
@@ -720,12 +721,12 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Checks a nested capabilities array or string to determine if the current user meets the requirements.
 		 *
-		 * @param string|array $capabilities Permission string or array to check. See self::user_can() for details.
+		 * @param string|array $caps Permission string or array to check. See self::user_can() for details.
 		 *
 		 * @return bool Whether the user meets the requirements. False on invalid user.
 		 * @since 3.6.3.4
 		 */
-		public static function current_user_can( $capabilities ): bool {
+		public static function current_user_can( $caps ): bool { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 			$current_user = wp_get_current_user();
 
 			if ( empty( $current_user ) ) {
@@ -747,7 +748,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * If you get the error: PHP Notice: Undefined offset: 0 in /wp-includes/capabilities.php, you didn't
 		 * pass the required $object_id.
 		 *
-		 * @param int|object   $user          User ID or WP_User object to check. Defaults to the current user.
+		 * @param int|WP_User  $user          User ID or WP_User object to check. Defaults to the current user.
 		 * @param string|array $capabilities  Capability string or array to check. The array lets you use multiple
 		 *                                    conditions to determine if a user has permission.
 		 *                                    Invalid conditions are skipped (conditions which aren't a string/array/bool/number(cast to bool)).
@@ -841,11 +842,11 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 						$expression_result = call_user_func_array( 'user_can', $args ) === true;
 					} elseif ( is_array( $value ) ) {
-						$depth ++;
+						++$depth;
 
 						$expression_result = self::user_can( $user, $value, $object_id );
 
-						$depth --;
+						--$depth;
 					} else {
 						// Invalid types are skipped.
 						continue;
@@ -861,11 +862,11 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 
 						$expression_result = call_user_func_array( 'user_can', $args ) === (bool) $value;
 					} elseif ( is_array( $value ) ) {
-						$depth ++;
+						++$depth;
 
 						$expression_result = self::user_can( $user, $value, $object_id );
 
-						$depth --;
+						--$depth;
 					} else {
 						// Invalid types are skipped.
 						continue;
@@ -878,11 +879,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 						// If the relation is OR, return on the first true expression.
 						return true;
 					}
-				} else {
-					if ( ! $expression_result ) {
-						// If the relation is AND, return on the first false expression.
-						return false;
-					}
+				} elseif ( ! $expression_result ) {
+					// If the relation is AND, return on the first false expression.
+					return false;
 				}
 			}
 
@@ -897,10 +896,10 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return bool
 		 */
 		public static function google_fonts_update_needed(): bool {
-
 			$path = trailingslashit( Redux_Core::$upload_dir ) . 'google_fonts.json';
 			$now  = time();
 			$secs = 60 * 60 * 24 * 7;
+
 			if ( file_exists( $path ) ) {
 				if ( ( $now - filemtime( $path ) ) < $secs ) {
 					return false;
@@ -1104,10 +1103,10 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Sanitize array keys and values.
 		 *
-		 * @param array $array Array to sanitize.
+		 * @param array $arr Array to sanitize.
 		 */
-		public static function sanitize_array( array $array ): array {
-			return self::array_map_r( 'wp_kses_post', $array );
+		public static function sanitize_array( array $arr ): array {
+			return self::array_map_r( 'wp_kses_post', $arr );
 		}
 
 		/**
