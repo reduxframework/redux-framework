@@ -219,6 +219,14 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 						$this->redux_fields[] = str_replace( Redux_Core::$dir . 'inc/fields/', '', $file );
 					}
 				}
+
+				$file_paths = glob( Redux_Core::$dir . 'inc/extensions/*' );
+
+				foreach ( $file_paths as $file ) {
+					if ( 'section' !== $file && 'divide' !== $file && 'editor' !== $file ) {
+						$this->redux_fields[] = str_replace( Redux_Core::$dir . 'inc/extensions/', '', $file );
+					}
+				}
 			}
 
 			$class_name = 'Redux_Customizer_Control_' . $option['type'];
@@ -733,7 +741,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux-enqueue-' . $this->parent->args['opt_name'] );
 
-			foreach ( $this->sections as $section ) {
+			foreach ( $this->parent->sections as $section ) {
 				if ( isset( $section['fields'] ) ) {
 					foreach ( $section['fields'] as $field ) {
 						if ( isset( $field['type'] ) ) {
