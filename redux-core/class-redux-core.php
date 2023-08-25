@@ -272,10 +272,8 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			spl_autoload_register( array( $this, 'register_classes' ) );
 
 			self::$welcome = new Redux_Welcome();
-			new Redux_Rest_Api_Builder();
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
-
 			add_filter( 'debug_information', array( $this, 'add_debug_info' ) );
 		}
 

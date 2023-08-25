@@ -49,38 +49,38 @@ class Redux_Autoloader {
 	/**
 	 * Load a class file if it matches our criteria.
 	 *
-	 * @param string $class Class to test and/or load.
+	 * @param string $classname Class to test and/or load.
 	 */
-	public function load( string $class ) {
-		if ( strpos( $class, 'Redux' ) === false ) {
+	public function load( string $classname ) {
+		if ( strpos( $classname, 'Redux' ) === false ) {
 			return;
 		}
 
 		// Strip prefix from the start (ala PSR-4).
-		$class = substr( $class, $this->prefix_length + 1 );
+		$class = substr( $classname, $this->prefix_length + 1 );
 		if ( function_exists( 'mb_strtolower' ) && function_exists( 'mb_detect_encoding' ) ) {
-			$class = mb_strtolower( $class, mb_detect_encoding( $class ) );
+			$classname = mb_strtolower( $class, mb_detect_encoding( $classname ) );
 		} else {
-			$class = strtolower( $class );
+			$classname = strtolower( $classname );
 		}
 
 		$file = '';
 		// Split on namespace separator.
-		$last_ns_pos = strripos( $class, self::NS_SEPARATOR );
+		$last_ns_pos = strripos( $classname, self::NS_SEPARATOR );
 		if ( false !== $last_ns_pos ) {
-			$namespace = substr( $class, 0, $last_ns_pos );
-			$class     = substr( $class, $last_ns_pos + 1 );
+			$namespace = substr( $classname, 0, $last_ns_pos );
+			$class     = substr( $classname, $last_ns_pos + 1 );
 			$file      = str_replace( self::NS_SEPARATOR, DIRECTORY_SEPARATOR, $namespace ) . DIRECTORY_SEPARATOR;
 		}
 		$file_prefix = $file;
-		$file        = $file_prefix . 'class-' . str_replace( '_', '-', $class ) . '.php';
+		$file        = $file_prefix . 'class-' . str_replace( '_', '-', $classname ) . '.php';
 
 		$path = $this->path . $file;
 
 		if ( file_exists( $path ) ) {
 			require_once $path;
 		} else {
-			$file = $file_prefix . 'class-redux-' . str_replace( '_', '-', $class ) . '.php';
+			$file = $file_prefix . 'class-redux-' . str_replace( '_', '-', $classname ) . '.php';
 			$path = $this->path . $file;
 
 			if ( file_exists( $path ) ) {

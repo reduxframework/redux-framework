@@ -4,6 +4,7 @@
  *
  * @author      Kevin Provance (kprovance)
  * @package     Redux_Framework/Classes
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 // Exit if accessed directly.
@@ -33,16 +34,17 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 * Check for enqueued status of style/script.
 		 *
 		 * @param string $handle    File handle.
-		 * @param string $list      Mode to check.
+		 * @param string $mode      Mode to check.
 		 * @param bool   $is_script Flag for scrip/style.
 		 *
 		 * @return bool
+		 * @noinspection PhpSameParameterValueInspection
 		 */
-		private static function is_enqueued( string $handle, string $list, bool $is_script = true ): bool {
+		private static function is_enqueued( string $handle, string $mode = 'enqueued', bool $is_script = true ): bool {
 			if ( $is_script ) {
-				return wp_script_is( $handle, $list );
+				return wp_script_is( $handle, $mode );
 			} else {
-				return wp_style_is( $handle, $list );
+				return wp_style_is( $handle, $mode );
 			}
 		}
 
@@ -122,13 +124,12 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 						} else {
 							self::enqueue( $handle, $src, $deps, $ver, $footer_or_media, $is_script );
 						}
-					} else {
-						if ( ! self::is_enqueued( $handle, 'enqueued', $is_script ) ) {
+					} elseif ( ! self::is_enqueued( $handle, 'enqueued', $is_script ) ) {
 							$msg = esc_html__( 'Please wait a few minutes, then try refreshing the page. Unable to load some remotely hosted scripts.', 'redux-framework' );
-							if ( self::$parent->args['dev_mode'] ) {
-								// translators: %s: URL.
-								$msg = sprintf( esc_html__( 'If you are developing offline, please download and install the %s plugin/extension to bypass our CDN and avoid this warning', 'redux-framework' ), '<a href="https://github.com/reduxframework/redux-vendor-support" target="_blank">Redux Vendor Support</a>' );
-							}
+						if ( self::$parent->args['dev_mode'] ) {
+							// translators: %s: URL.
+							$msg = sprintf( esc_html__( 'If you are developing offline, please download and install the %s plugin/extension to bypass our CDN and avoid this warning', 'redux-framework' ), '<a href="https://github.com/reduxframework/redux-vendor-support" target="_blank">Redux Vendor Support</a>' );
+						}
 
 							// translators: %s: CDN handle.
 							$msg = '<strong>' . esc_html__( 'Redux Framework Warning', 'redux-framework' ) . '</strong><br/>' . sprintf( esc_html__( '%s CDN unavailable.  Some controls may not render properly.', 'redux-framework' ), $handle ) . '  ' . $msg;
@@ -142,7 +143,6 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 							);
 
 							Redux_Admin_Notices::set_notice( $data );
-						}
 					}
 				} else {
 					set_transient( $handle . $tran_key, true, MINUTE_IN_SECONDS * self::$parent->args['cdn_check_time'] );
@@ -161,13 +161,12 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 		 *
 		 * @param      bool   $register Register or enqueue.
 		 * @param      string $handle File handle.
-		 * @param      string $src_cdn CDN source.
 		 * @param      array  $deps File deps.
 		 * @param      string $ver File version.
 		 * @param      mixed  $footer_or_media True or 'all'.
 		 * @param      bool   $is_script Script or style.
 		 */
-		private static function vendor_plugin( bool $register, string $handle, string $src_cdn, array $deps, string $ver, $footer_or_media, bool $is_script ) {
+		private static function vendor_plugin( bool $register, string $handle, array $deps, string $ver, $footer_or_media, bool $is_script ) {
 			if ( class_exists( 'Redux_Vendor_URL' ) || class_exists( 'Redux_VendorURL' ) ) {
 				$src = Redux_Vendor_URL::get_url( $handle );
 
@@ -176,8 +175,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 				} else {
 					self::enqueue( $handle, $src, $deps, $ver, $footer_or_media, $is_script );
 				}
-			} else {
-				if ( ! self::$set ) {
+			} elseif ( ! self::$set ) {
 					// translators: %s: Vendor support URL. %s: Admin plugins page.
 					$msg = sprintf( esc_html__( 'The %1$s (or extension) is either not installed or not activated and thus, some controls may not render properly.  Please ensure that it is installed and %2$s', 'redux-framework' ), '<a href="https://github.com/reduxframework/redux-vendor-support">Vendor Support plugin</a>', '<a href="' . admin_url( 'plugins.php' ) . '">' . esc_html__( 'activated.', 'redux-framework' ) . '</a>' );
 
@@ -192,7 +190,6 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 					Redux_Admin_Notices::set_notice( $data );
 
 					self::$set = true;
-				}
 			}
 		}
 
@@ -209,7 +206,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
 				self::cdn( true, $handle, $src_cdn, $deps, $ver, $media, false );
 			} else {
-				self::vendor_plugin( true, $handle, $src_cdn, $deps, $ver, $media, false );
+				self::vendor_plugin( true, $handle, $deps, $ver, $media, false );
 			}
 		}
 
@@ -225,7 +222,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 			if ( empty( self::$parent ) || self::$parent->args['use_cdn'] ) {
 				self::cdn( true, $handle, $src_cdn, $deps, $ver, $in_footer, true );
 			} else {
-				self::vendor_plugin( true, $handle, $src_cdn, $deps, $ver, $in_footer, true );
+				self::vendor_plugin( true, $handle, $deps, $ver, $in_footer, true );
 			}
 		}
 
@@ -242,7 +239,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 			if ( self::$parent->args['use_cdn'] ) {
 				self::cdn( false, $handle, $src_cdn, $deps, $ver, $media, false );
 			} else {
-				self::vendor_plugin( false, $handle, $src_cdn, $deps, $ver, $media, false );
+				self::vendor_plugin( false, $handle, $deps, $ver, $media, false );
 			}
 		}
 
@@ -259,7 +256,7 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 			if ( self::$parent->args['use_cdn'] ) {
 				self::cdn( false, $handle, $src_cdn, $deps, $ver, $in_footer, true );
 			} else {
-				self::vendor_plugin( false, $handle, $src_cdn, $deps, $ver, $in_footer, true );
+				self::vendor_plugin( false, $handle, $deps, $ver, $in_footer, true );
 			}
 		}
 	}
@@ -268,4 +265,3 @@ if ( ! class_exists( 'Redux_CDN', false ) ) {
 if ( ! class_exists( 'Redux_Vendor_URL' ) && class_exists( 'Redux_Extension_Vendor_Support' ) ) {
 	class_alias( 'Redux_VendorURL', 'Redux_Vendor_URL' );
 }
-

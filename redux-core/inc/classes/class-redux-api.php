@@ -7,6 +7,7 @@
  * @author       Dovy Paukstys
  * @subpackage   Core
  * @noinspection PhpUnused
+ * @noinspection PhpMissingParamTypeInspection
  */
 
 // Exit if accessed directly.
@@ -694,6 +695,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setSection( string $opt_name = '', ?array $section = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			// phpcs:ignore Squiz.PHP.CommentedOutCode.Found
 			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_section( $opt_name, $section )' );
 
 			if ( '' !== $opt_name ) {
@@ -1119,6 +1121,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @deprecated No longer using camelCase naming convention.
 		 */
 		public static function setArgs( string $opt_name = '', array $args = array() ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+			// phpcs:ignore Squiz.PHP.CommentedOutCode.Found
 			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::set_args( $opt_name, $args )' );
 
 			if ( '' !== $opt_name ) {
@@ -1277,8 +1280,6 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 			$redux = ReduxFrameworkInstances::get_instance( $opt_name );
 
-			// We don't ever need to specify advanced_metaboxes here as all functions for metaboxes are core,
-			// and thus, metabox_lite.  The extension handles its own functions and is handled by this condition. - kp.
 			$metaboxes = $redux->extensions['metaboxes'];
 
 			if ( null === $defaults || '' === $defaults ) {
@@ -1309,10 +1310,9 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @return mixed
 		 */
-		public static function get_option( string $opt_name = '', string $key = '', $default = null ) {
+		public static function get_option( string $opt_name = '', string $key = '', $default = null ) { // phpcs:ignore Universal.NamingConventions
 			self::check_opt_name( $opt_name );
 
-			// TODO - Add metaboxes magic here!
 			if ( ! empty( $opt_name ) && ! empty( $key ) ) {
 				global $$opt_name;
 

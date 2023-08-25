@@ -91,7 +91,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 		}
 
 		/**
-		 * Get the URL for the current page to fallback if JS is broken.
+		 * Get the URL for the current page to fall back if JS is broken.
 		 *
 		 * @param bool|string $location Used to determine the location of the banner for account creation.
 		 * @since 4.1.21

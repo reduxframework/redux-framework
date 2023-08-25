@@ -3,6 +3,7 @@
  * Redux Framework Args Class
  *
  * @package     Redux_Framework/Classes
+ * @noinspection PhpConditionCheckedByNextConditionInspection
  */
 
 // Exit if accessed directly.
@@ -365,6 +366,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		 * @param array $args Global args.
 		 *
 		 * @return array
+		 * @noinspection PhpStrictComparisonWithOperandsOfDifferentTypesInspection
 		 */
 		private function default_cleanup( array $args ): array {
 

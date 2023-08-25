@@ -59,6 +59,7 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 					echo '<label for="' . esc_attr( $this->field['id'] . '-text-' . $k ) . '">' . esc_html( $v ) . '</label> ';
 
 					$value = $this->value[ $k ] ?? '';
+					$value = ! empty( $this->value[ $k ] ) ? $this->value[ $k ] : '';
 
 					// phpcs:ignore WordPress.Security.EscapeOutput
 					echo '<input type="text" id="' . esc_attr( $this->field['id'] . '-text-' . $k ) . '" ' . esc_attr( $qtip_title ) . esc_attr( $qtip_text ) . ' name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . esc_attr( $k ) ) . ']" ' . $placeholder . ' value="' . esc_attr( $value ) . '" class="regular-text ' . esc_attr( $this->field['class'] ) . '" ' . esc_html( $readonly ) . esc_html( $autocomplete ) . '/><br />';
