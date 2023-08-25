@@ -17,32 +17,41 @@ if ( ! class_exists( 'Redux_Textarea', false ) ) {
 	class Redux_Textarea extends Redux_Field {
 
 		/**
+		 * Set field and value defaults.
+		 */
+		public function set_defaults() {
+			$defaults = array(
+				'placeholder'  => '',
+				'rows'         => 6,
+				'autocomplete' => false,
+				'readonly'     => false,
+				'class'        => '',
+			);
+
+			$this->field = wp_parse_args( $this->field, $defaults );
+		}
+
+		/**
 		 * Field Render Function.
 		 * Takes the vars and outputs the HTML for the field in the settings
 		 *
 		 * @since ReduxFramework 1.0.0
 		 * */
 		public function render() {
+			$readonly     = ( true === boolval( $this->field['readonly'] ) ) ? ' readonly' : '';
+			$autocomplete = ( true === boolval( $this->field['autocomplete'] ) ) ? 'on' : 'off';
 
-			$this->field['attributes'] = wp_parse_args(
-				$this->field['attributes'] ?? array(),
-				array(
-					'placeholder'  => $this->field['placeholder'] ?? '',
-					'rows'         => $this->field['rows'] ?? 6,
-					'autocomplete' => ( isset( $this->field['autocomplete'] ) && false === $this->field['autocomplete'] ) ? 'off' : '',
-					'readonly'     => isset( $this->field['readonly'] ) && $this->field['readonly'] ? 'readonly' : '',
-					'name'         => esc_attr( $this->field['name'] . $this->field['name_suffix'] ),
-					'id'           => esc_attr( $this->field['id'] ),
-					'class'        => isset( $this->field['class'] ) && ! empty( $this->field['class'] ) ? array( trim( $this->field['class'] ) ) : array(),
-				)
-			);
-
-			$this->field['attributes']['class'][] = 'large-text';
-
-			$this->field['attributes']['class'] = implode( ' ', $this->field['attributes']['class'] );
-
-			$attributes_string = $this->render_attributes( $this->field['attributes'] );
-			echo '<textarea ' . $attributes_string . '>' . esc_textarea( $this->value ) . '</textarea>'; // phpcs:ignore WordPress.Security.EscapeOutput
+			?>
+			<label for="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"></label>
+			<textarea <?php echo esc_html( $readonly ); ?>
+					name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>"
+					id="<?php echo esc_attr( $this->field['id'] ); ?>-textarea"
+					placeholder="<?php echo esc_attr( $this->field['placeholder'] ); ?>"
+					autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
+					class="large-text <?php echo esc_attr( $this->field['class'] ); ?>"
+					rows="<?php echo esc_attr( $this->field['rows'] ); ?>"><?php echo esc_textarea( $this->value ); ?>
+			</textarea>
+			<?php
 		}
 
 		/**
