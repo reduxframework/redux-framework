@@ -324,11 +324,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		public static function set_defaults( string $opt_name = '' ) {
 			// Try to load the class if in the same directory, so the user only has to include the Redux API.
 			if ( ! class_exists( 'Redux_Options_Defaults' ) ) {
-				$file_check = trailingslashit( dirname( __FILE__ ) ) . 'class-redux-options-defaults.php';
+				$file_check = trailingslashit( __DIR__ ) . 'class-redux-options-defaults.php';
 
 				if ( file_exists( dirname( $file_check ) ) ) {
 					include_once $file_check;
-					$file_check = trailingslashit( dirname( __FILE__ ) ) . 'class-redux-wordpress-data.php';
+					$file_check = trailingslashit( __DIR__ ) . 'class-redux-wordpress-data.php';
 					if ( file_exists( dirname( $file_check ) ) ) {
 						include_once $file_check;
 					}
@@ -479,7 +479,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 				$p                 = $section['priority'];
 
 				while ( isset( $sections[ $p ] ) ) {
-					$p++;
+					++$p;
 				}
 
 				$sections[ $p ] = $section;
@@ -662,7 +662,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 					foreach ( self::$sections[ $opt_name ] as $key => $section ) {
 						if ( $key === $id ) {
 							$priority = $section['priority'];
-							self::$priority[ $opt_name ]['sections']--;
+							--self::$priority[ $opt_name ]['sections'];
 							unset( self::$sections[ $opt_name ][ $id ] );
 							continue;
 						}
@@ -723,12 +723,10 @@ if ( ! class_exists( 'Redux', false ) ) {
 			if ( ! isset( $section['id'] ) ) {
 				if ( isset( $section['type'] ) && 'divide' === $section['type'] ) {
 					$section['id'] = time();
-				} else {
-					if ( isset( $section['title'] ) ) {
+				} elseif ( isset( $section['title'] ) ) {
 						$section['id'] = Redux_Core::strtolower( sanitize_title( $section['title'] ) );
-					} else {
-						$section['id'] = time();
-					}
+				} else {
+					$section['id'] = time();
 				}
 
 				if ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) && ! $replace ) {
@@ -737,7 +735,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 					while ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
 						$section['id'] = $orig . '_' . $i;
-						$i++;
+						++$i;
 					}
 				} elseif ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) && $replace ) {
 					// If replace is set, let's update the default values with these!
@@ -1023,7 +1021,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 					foreach ( self::$fields[ $opt_name ] as $key => $field ) {
 						if ( $key === $id ) {
 							$priority = $field['priority'];
-							self::$priority[ $opt_name ]['fields']--;
+							--self::$priority[ $opt_name ]['fields'];
 							unset( self::$fields[ $opt_name ][ $id ] );
 							continue;
 						}
@@ -1247,15 +1245,15 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @param string       $opt_name Panel opt_name.
 		 * @param string       $key      Option key.
-		 * @param string|array $default  Default value.
+		 * @param string|array $defaults  Default value.
 		 *
 		 * @return mixed
 		 * @deprecated No longer using camelCase naming convention.
 		 */
-		public static function getOption( string $opt_name = '', string $key = '', $default = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+		public static function getOption( string $opt_name = '', string $key = '', $defaults = '' ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', 'Redux::get_option( $opt_name, $key, $default )' );
 
-			return self::get_option( $opt_name, $key, $default );
+			return self::get_option( $opt_name, $key, $defaults );
 		}
 
 		/**
@@ -1264,11 +1262,11 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 * @param string $opt_name Panel opt_name.
 		 * @param mixed  $the_post Post object to denote the current post, or custom.
 		 * @param string $key      Option key.
-		 * @param mixed  $default  Default value.
+		 * @param mixed  $defaults Default value.
 		 *
 		 * @return mixed
 		 */
-		public static function get_post_meta( string $opt_name = '', $the_post = array(), string $key = '', $default = null ) {
+		public static function get_post_meta( string $opt_name = '', $the_post = array(), string $key = '', $defaults = null ) {
 			self::check_opt_name( $opt_name );
 
 			if ( empty( $opt_name ) ) {
@@ -1283,23 +1281,23 @@ if ( ! class_exists( 'Redux', false ) ) {
 			// and thus, metabox_lite.  The extension handles its own functions and is handled by this condition. - kp.
 			$metaboxes = $redux->extensions['metaboxes'];
 
-			if ( null === $default || '' === $default ) {
-				$default = self::get_option( $opt_name, $key );
+			if ( null === $defaults || '' === $defaults ) {
+				$defaults = self::get_option( $opt_name, $key );
 			}
 
 			if ( isset( $the_post ) && is_array( $the_post ) ) {
 				$the_post = $post;
 			} elseif ( ! isset( $the_post ) || 0 === $the_post ) {
-				return $default;
+				return $defaults;
 			} elseif ( is_numeric( $the_post ) ) {
 				$the_post = get_post( $the_post );
 			} elseif ( ! is_object( $the_post ) ) {
 				$the_post = $post;
 			}
 
-			$default = self::get_option( $opt_name, $key );
+			$defaults = self::get_option( $opt_name, $key );
 
-			return $metaboxes->get_values( $the_post, $key, $default );
+			return $metaboxes->get_values( $the_post, $key, $defaults );
 		}
 
 		/**
@@ -1696,10 +1694,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 
 				if ( empty( $key ) ) {
 					return self::$extension_paths;
-				} else {
-					if ( isset( self::$extension_paths[ $key ] ) ) {
+				} elseif ( isset( self::$extension_paths[ $key ] ) ) {
 						return self::$extension_paths[ $key ];
-					}
 				}
 			} else {
 				if ( empty( self::$uses_extensions[ $opt_name ] ) ) {

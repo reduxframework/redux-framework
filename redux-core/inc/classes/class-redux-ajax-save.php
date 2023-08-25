@@ -20,16 +20,18 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 		 * Redux_AJAX_Save constructor.
 		 * array_merge_recursive_distinct
 		 *
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			add_action( 'wp_ajax_' . $this->args['opt_name'] . '_ajax_save', array( $this, 'save' ) );
 		}
 
 		/**
 		 * AJAX callback to save the option panel values.
+		 *
+		 * @throws ReflectionException Exception.
 		 */
 		public function save() {
 			$redux = null;

@@ -19,12 +19,12 @@ if ( ! class_exists( 'Redux_AJAX_Select2', false ) ) {
 		/**
 		 * Redux_AJAX_Select2 constructor.
 		 *
-		 * @param object $parent ReduxFramework object pointer.
+		 * @param object $redux ReduxFramework object pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_action( "wp_ajax_redux_{$parent->args['opt_name']}_select2", array( $this, 'ajax' ) );
+			add_action( "wp_ajax_redux_{$redux->args['opt_name']}_select2", array( $this, 'ajax' ) );
 		}
 
 		/**

@@ -32,11 +32,11 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		/**
 		 * Redux_Admin_Notices constructor.
 		 *
-		 * @param array $parent ReduxFramework object.
+		 * @param array $redux ReduxFramework object.
 		 * @access public
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 
 			add_action( 'wp_ajax_redux_hide_admin_notice', array( $this, 'ajax' ) );
 			add_action( 'admin_notices', array( $this, 'notices' ), 99 );

@@ -53,11 +53,11 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * Redux_Args constructor.
 		 *
-		 * @param     object $parent ReduxFramework object.
+		 * @param     object $redux ReduxFramework object.
 		 * @param     array  $args Global arguments array.
 		 */
-		public function __construct( $parent, array $args ) {
-			$this->parent = $parent;
+		public function __construct( $redux, array $args ) {
+			$this->parent = $redux;
 
 			$default = array(
 				'opt_name'                         => '',

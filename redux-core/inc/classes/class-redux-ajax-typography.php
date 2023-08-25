@@ -19,10 +19,10 @@ if ( ! class_exists( 'Redux_AJAX_Typography', false ) ) {
 		/**
 		 * Redux_AJAX_Typography constructor.
 		 *
-		 * @param object $parent ReduxFramework object.
+		 * @param object $redux ReduxFramework object.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent );
+		public function __construct( $redux ) {
+			parent::__construct( $redux );
 			add_action( 'wp_ajax_redux_update_google_fonts', array( $this, 'google_fonts_update' ) );
 		}
 
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Redux_AJAX_Typography', false ) ) {
 			$field_class = 'Redux_typography';
 
 			if ( ! class_exists( $field_class ) ) {
-				$dir = str_replace( '/classes', '', Redux_Functions_Ex::wp_normalize_path( dirname( __FILE__ ) ) );
+				$dir = str_replace( '/classes', '', Redux_Functions_Ex::wp_normalize_path( __DIR__ ) );
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
 				$class_file = apply_filters( 'redux-typeclass-load', $dir . '/fields/typography/class-redux-typography.php', $field_class );
