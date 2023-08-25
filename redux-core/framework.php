@@ -183,6 +183,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $validation_ran;
 
 		/**
+		 * No output flag.
+		 *
+		 * @var bool
+		 */
+		public $no_output;
+
+		/**
 		 * Array of current option values.
 		 *
 		 * @var array
