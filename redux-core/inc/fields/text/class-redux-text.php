@@ -29,7 +29,7 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 					$this->field['args'] = array();
 				}
 
-				$this->field['options'] = $this->parent->get_wordpress_data( $this->field['data'], $this->field['args'], $this->value );
+				$this->field['options'] = $this->parent->wordpress_data->get( $this->field['data'], $this->field['args'], $this->parent->args['opt_name'], $this->value );
 				$this->field['class']  .= ' hasOptions ';
 			}
 
@@ -57,13 +57,18 @@ if ( ! class_exists( 'Redux_Text', false ) ) {
 
 					echo '<div class="input_wrapper">';
 					echo '<label for="' . esc_attr( $this->field['id'] . '-text-' . $k ) . '">' . esc_html( $v ) . '</label> ';
-					echo '<input type="text" ' . esc_attr( $qtip_title ) . esc_attr( $qtip_text ) . ' name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . esc_attr( $k ) ) . ']" ' . esc_attr( $placeholder ) . ' value="' . esc_attr( $this->value[ $k ] ) . '" class="regular-text ' . esc_attr( $this->field['class'] ) . '" ' . esc_html( $readonly ) . esc_html( $autocomplete ) . '/><br />';
+
+					$value = $this->value[ $k ] ?? '';
+
+					// phpcs:ignore WordPress.Security.EscapeOutput
+					echo '<input type="text" id="' . esc_attr( $this->field['id'] . '-text-' . $k ) . '" ' . esc_attr( $qtip_title ) . esc_attr( $qtip_text ) . ' name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] . '[' . esc_attr( $k ) ) . ']" ' . $placeholder . ' value="' . esc_attr( $value ) . '" class="regular-text ' . esc_attr( $this->field['class'] ) . '" ' . esc_html( $readonly ) . esc_html( $autocomplete ) . '/><br />';
 					echo '</div>';
 				}
 			} else {
 				$placeholder = ( isset( $this->field['placeholder'] ) && ! is_array( $this->field['placeholder'] ) ) ? ' placeholder="' . esc_attr( $this->field['placeholder'] ) . '" ' : '';
 
-				echo '<input ' . esc_attr( $qtip_title ) . esc_attr( $qtip_text ) . 'type="text" id="' . esc_attr( $this->field['id'] ) . '" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '" ' . esc_attr( $placeholder ) . 'value="' . esc_attr( $this->value ) . '" class="regular-text ' . esc_attr( $this->field['class'] ) . '"' . esc_html( $readonly ) . esc_html( $autocomplete ) . ' />';
+				// phpcs:ignore WordPress.Security.EscapeOutput
+				echo '<input ' . esc_attr( $qtip_title ) . esc_attr( $qtip_text ) . 'type="text" id="' . esc_attr( $this->field['id'] ) . '" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '" ' . $placeholder . 'value="' . esc_attr( $this->value ) . '" class="regular-text ' . esc_attr( $this->field['class'] ) . '"' . esc_html( $readonly ) . esc_html( $autocomplete ) . ' />';
 			}
 		}
 
