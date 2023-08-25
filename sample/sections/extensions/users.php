@@ -48,7 +48,7 @@ Redux_Users::set_profile(
 						'title' => esc_html__( 'Input 3', 'your-textdomain-here' ),
 					),
 					array(
-						'id'       => 'webFonts',
+						'id'       => 'user-web-fonts',
 						'type'     => 'media',
 						'title'    => esc_html__( 'Web Fonts', 'your-textdomain-here' ),
 						'compiler' => 'true',
@@ -58,14 +58,14 @@ Redux_Users::set_profile(
 						'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 					),
 					array(
-						'id'       => 'section-media-start',
+						'id'       => 'user-section-media-start',
 						'type'     => 'section',
 						'title'    => esc_html__( 'Media Options', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'With the "section" field you can create indent option sections.', 'your-textdomain-here' ),
 						'indent'   => true,
 					),
 					array(
-						'id'       => 'mediaurl',
+						'id'       => 'user-mediaurl',
 						'type'     => 'media',
 						'url'      => true,
 						'title'    => esc_html__( 'Media w/ URL', 'your-textdomain-here' ),
@@ -75,19 +75,19 @@ Redux_Users::set_profile(
 						'default'  => array( 'url' => 'https://s.wordpress.org/style/images/codeispoetry.png' ),
 					),
 					array(
-						'id'     => 'section-media-end',
+						'id'     => 'user-section-media-end',
 						'type'   => 'section',
 						'indent' => false,
 					),
 					array(
-						'id'       => 'media-nourl',
+						'id'       => 'user-media-nourl',
 						'type'     => 'media',
 						'title'    => esc_html__( 'Media w/o URL', 'your-textdomain-here' ),
 						'desc'     => esc_html__( 'This represents the minimalistic view. It does not have the preview box or the display URL in an input box. ', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 					),
 					array(
-						'id'       => 'media-nopreview',
+						'id'       => 'user-media-nopreview',
 						'type'     => 'media',
 						'preview'  => false,
 						'title'    => esc_html__( 'Media No Preview', 'your-textdomain-here' ),
@@ -95,14 +95,14 @@ Redux_Users::set_profile(
 						'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 					),
 					array(
-						'id'       => 'gallery',
+						'id'       => 'user-gallery',
 						'type'     => 'gallery',
 						'title'    => esc_html__( 'Add/Edit Gallery', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', 'your-textdomain-here' ),
 						'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
 					),
 					array(
-						'id'      => 'slider1bDOVY23',
+						'id'      => 'user-slider-one',
 						'type'    => 'slider',
 						'title'   => esc_html__( 'JQuery UI Slider Example 1', 'your-textdomain-here' ),
 						'desc'    => esc_html__( 'JQuery UI slider description. Min: 1, max: 500, step: 3, default value: 45', 'your-textdomain-here' ),
@@ -112,7 +112,7 @@ Redux_Users::set_profile(
 						'max'     => '500',
 					),
 					array(
-						'id'      => 'slider2bc',
+						'id'      => 'user-slider-two',
 						'type'    => 'slider',
 						'title'   => esc_html__( 'JQuery UI Slider Example 2 w/ Steps (5)', 'your-textdomain-here' ),
 						'desc'    => esc_html__( 'JQuery UI slider description. Min: 0, max: 300, step: 5, default value: 75', 'your-textdomain-here' ),
@@ -122,7 +122,7 @@ Redux_Users::set_profile(
 						'max'     => '300',
 					),
 					array(
-						'id'      => 'spinner1bcd',
+						'id'      => 'user-spinner',
 						'type'    => 'spinner',
 						'title'   => esc_html__( 'JQuery UI Spinner Example 1', 'your-textdomain-here' ),
 						'desc'    => esc_html__( 'JQuery UI spinner description. Min:20, max: 100, step:20, default value: 40', 'your-textdomain-here' ),
@@ -132,7 +132,7 @@ Redux_Users::set_profile(
 						'max'     => '100',
 					),
 					array(
-						'id'       => 'switch-parent',
+						'id'       => 'user-switch-parent',
 						'type'     => 'switch',
 						'title'    => esc_html__( 'Switch - Nested Children, Enable to show', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Look, it\'s on! Also hidden child elements!', 'your-textdomain-here' ),
@@ -141,7 +141,7 @@ Redux_Users::set_profile(
 						'off'      => 'Disabled',
 					),
 					array(
-						'id'       => 'switch-child1',
+						'id'       => 'user-switch-child',
 						'type'     => 'switch',
 						'required' => array( 'switch-parent', '=', '1' ),
 						'title'    => esc_html__( 'Switch - This and the next switch required for patterns to show', 'your-textdomain-here' ),
@@ -156,7 +156,7 @@ Redux_Users::set_profile(
 				'icon'   => 'el-icon-home',
 				'fields' => array(
 					array(
-						'id'       => 'homepage_blocks',
+						'id'       => 'user-homepage_blocks',
 						'type'     => 'sorter',
 						'title'    => 'Homepage Layout Manager',
 						'desc'     => 'Organize how you want the layout to appear on the homepage',
@@ -174,7 +174,7 @@ Redux_Users::set_profile(
 					),
 
 					array(
-						'id'       => 'presets',
+						'id'       => 'user-presets',
 						'type'     => 'image_select',
 						'presets'  => true,
 						'title'    => esc_html__( 'Preset', 'your-textdomain-here' ),

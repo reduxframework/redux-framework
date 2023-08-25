@@ -86,7 +86,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 			global $pagenow;
 
 			// Check and run instances of Redux where the opt_name hasn't been run.
-			$pagenows = array( 'edit-tags.php', 'term.php', 'admin-ajax.php' );
+			$pagenows = array( 'edit-tags.php', 'term.php' );
 
 			if ( ! empty( self::$sections ) && in_array( $pagenow, $pagenows, true ) ) {
 				$instances = Redux::all_instances();
@@ -241,6 +241,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 					$fields[ $p ] = $field;
 				}
 			}
+
 			ksort( $fields );
 
 			return $fields;
@@ -340,6 +341,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 					}
 
 					$section['term_id'] = $term_id;
+
 					if ( ! isset( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
 						$section['fields'] = array();
 					}
@@ -362,7 +364,9 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 					if ( ! is_array( $field ) ) {
 						continue;
 					}
+
 					$field['section_id'] = $section_id;
+
 					self::set_field( $opt_name, $field );
 				}
 			}
@@ -399,6 +403,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 				if ( ! isset( $field['priority'] ) ) {
 					$field['priority'] = self::get_priority( $opt_name, 'fields' );
 				}
+
 				self::$fields[ $opt_name ][ $field['id'] ] = $field;
 			}
 		}

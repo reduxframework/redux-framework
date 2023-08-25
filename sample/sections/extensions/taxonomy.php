@@ -74,7 +74,7 @@ Redux_Taxonomy::set_term(
 						'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
 					),
 					array(
-						'id'       => 'section-media-start',
+						'id'       => 'tax-section-media-start',
 						'type'     => 'section',
 						'title'    => esc_html__( 'Media Options', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'With the "section" field you can create indent option sections.', 'your-textdomain-here' ),
@@ -91,7 +91,7 @@ Redux_Taxonomy::set_term(
 						'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
 					),
 					array(
-						'id'     => 'section-media-end',
+						'id'     => 'tax-section-media-end',
 						'type'   => 'section',
 						'indent' => false,
 					),

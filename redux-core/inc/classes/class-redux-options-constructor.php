@@ -165,8 +165,6 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 			$core->transients['last_save'] = time();
 
 			if ( ! empty( $value ) ) {
-				$core->options = $value;
-
 				switch ( $core->args['database'] ) {
 					case 'transient':
 						set_transient( $core->args['opt_name'] . '-transient', $value, $core->args['transient_time'] );
@@ -315,7 +313,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						foreach ( $section['fields'] as $field_data ) {
 							$field_type = $field_data['type'];
 
-							if ( 'section' !== $field_type || 'divide' !== $field_type || 'info' !== $field_type || 'raw' !== $field_type ) {
+							if ( ! in_array( $field_type, array( 'section', 'divide', 'info', 'raw' ), true ) ) {
 								$field_id = $field_data['id'];
 								$default  = $core->options_defaults[ $field_id ] ?? '';
 								$data     = $core->options[ $field_id ] ?? $default;
@@ -546,7 +544,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						$field = apply_filters( "redux/options/{$core->args['opt_name']}/field/{$field['id']}", $field );
 
-						if ( empty( $field ) || ! $field ) {
+						if ( empty( $field ) ) {
 							unset( $core->sections[ $k ]['fields'][ $fieldk ] );
 							continue;
 						}

@@ -736,7 +736,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			$name_arr = func_get_args();
 			$args     = array_merge( array( $current_user ), $name_arr );
 
-			return call_user_func_array( array( 'self', 'user_can' ), $args );
+			return call_user_func_array( array( __CLASS__, 'user_can' ), $args );
 		}
 
 		/**
@@ -801,11 +801,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 				}
 
 				return call_user_func_array( 'user_can', $args );
-			} else {
+			} elseif ( ! is_array( $capabilities ) ) {
 				// Only strings and arrays are allowed as valid capabilities.
-				if ( ! is_array( $capabilities ) ) {
-					return false;
-				}
+				return false;
 			}
 
 			// Capability array check.

@@ -184,7 +184,6 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 
 			foreach ( self::$sections[ $opt_name ] as $section_id => $section ) {
 				if ( $section['profile_id'] === $profile_id ) {
-
 					self::$sections[ $opt_name ][ $section_id ]['roles'] = $section;
 
 					$p = $section['priority'];
@@ -302,6 +301,7 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 					if ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
 						$orig = $section['id'];
 						$i    = 0;
+
 						while ( isset( self::$sections[ $opt_name ][ $section['id'] ] ) ) {
 							$section['id'] = $orig . '_' . $i;
 						}
@@ -314,12 +314,12 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 
 				if ( isset( $section['fields'] ) ) {
 					if ( ! empty( $section['fields'] ) && is_array( $section['fields'] ) ) {
-
 						if ( isset( $section['permissions'] ) || isset( $section['roles'] ) ) {
 							foreach ( $section['fields'] as $key => $field ) {
 								if ( ! isset( $field['permissions'] ) && isset( $section['permissions'] ) ) {
 									$section['fields'][ $key ]['permissions'] = $section['permissions'];
 								}
+
 								if ( ! isset( $field['roles'] ) && isset( $section['roles'] ) ) {
 									$section['fields'][ $key ]['roles'] = $section['roles'];
 								}
@@ -328,6 +328,7 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 
 						self::process_fields_array( $opt_name, $section['id'], $section['fields'] );
 					}
+
 					unset( $section['fields'] );
 				}
 
@@ -439,6 +440,7 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 					if ( isset( self::$profiles[ $opt_name ][ $profile['id'] ] ) ) {
 						$orig = $profile['id'];
 						$i    = 0;
+
 						while ( isset( self::$profiles[ $opt_name ][ $profile['id'] ] ) ) {
 							$profile['id'] = $orig . '_' . $i;
 						}
@@ -452,6 +454,7 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 								if ( ! isset( $section['permissions'] ) && isset( $profile['permissions'] ) ) {
 									$profile['sections'][ $key ]['permissions'] = $profile['permissions'];
 								}
+
 								if ( ! isset( $section['roles'] ) && isset( $profile['roles'] ) ) {
 									$profile['sections'][ $key ]['roles'] = $profile['roles'];
 								}

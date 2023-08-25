@@ -6,6 +6,7 @@
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Taxonomy
  * @version 4.4.6
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -177,12 +178,14 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 			parent::__construct( $redux, __FILE__ );
 
+			$this->parent = $redux;
+
 			$this->add_field( 'taxonomy' );
 			$this->parent->extensions['taxonomy'] = $this;
 
-			$this->pagenows = array( 'edit-tags.php', 'term.php', 'admin-ajax.php' );
+			$this->pagenows = array( 'edit-tags.php', 'term.php' );
 
-			include_once Redux_Core::$dir . 'inc/extensions/taxonomy/redux-taxonomy-helpers.php';
+			include_once __DIR__ . '/redux-taxonomy-helpers.php';
 
 			add_action( 'admin_notices', array( $this, 'meta_terms_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
@@ -235,6 +238,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		 */
 		public function init() {
 			global $pagenow;
+
 			if ( isset( $_POST['action'] ) && 'redux_demo_customizer_save' === $_POST['action'] ) { // phpcs:ignore WordPress.Security.NonceVerification
 				return;
 			}

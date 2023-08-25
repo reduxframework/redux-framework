@@ -509,8 +509,7 @@ Redux::set_section(
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-field.php';
 require_once Redux_Core::$dir . '../sample/sections/disabling/disable-section.php';
 
-// -> START Pro Fields.
-
+// -> START Extensions.
 Redux::set_section(
 	$opt_name,
 	array(
