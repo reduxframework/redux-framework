@@ -428,6 +428,13 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $transients_check = array();
 
 		/**
+		 * Never save to DB flag for metaboxes.
+		 *
+		 * @var bool
+		 */
+		public $never_save_to_db;
+
+		/**
 		 * Deprecated shim for v3 templates.
 		 *
 		 * @var array

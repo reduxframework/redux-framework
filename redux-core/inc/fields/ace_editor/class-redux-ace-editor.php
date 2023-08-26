@@ -5,6 +5,7 @@
  * @package     Redux Framework/Fields
  * @subpackage  ACE_Editor
  * @version     3.0.0
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 defined( 'ABSPATH' ) || exit;
