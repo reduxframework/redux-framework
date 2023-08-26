@@ -23,6 +23,8 @@
  * @noinspection PhpMissingParamTypeInspection
  * @noinspection PhpMissingReturnTypeInspection
  * @noinspection PhpUnhandledExceptionInspection
+ * @noinspection PhpDeprecationInspection
+ * @noinspection PhpUnused
  */
 
 // Exit if accessed directly.
@@ -907,12 +909,12 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @access      public
 		 *
 		 * @param       string $opt_name The option name to return.
-		 * @param       mixed  $default  (null) The value to return if an option isn't set.
+		 * @param       mixed  $defaults (null) The value to return if an option isn't set.
 		 *
 		 * @return      mixed
 		 */
-		public function get( string $opt_name, $default = null ) {
-			return ( ! empty( $this->options[ $opt_name ] ) ) ? $this->options[ $opt_name ] : $this->options_class->get_default( $opt_name, $default );
+		public function get( string $opt_name, $defaults = null ) {
+			return ( ! empty( $this->options[ $opt_name ] ) ) ? $this->options[ $opt_name ] : $this->options_class->get_default( $opt_name, $defaults );
 		}
 
 		/**
