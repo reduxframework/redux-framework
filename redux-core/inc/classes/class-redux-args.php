@@ -158,6 +158,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'allow_tracking'                   => true,
 				'admin_theme'                      => 'wp',
 				'elusive_frontend'                 => false,
+				'fontawesome_frontend'             => false,
 				'pro'                              => array(),
 				'font_display'                     => 'swap', // block|swap|fallback|optional.
 				'load_on_cron'                     => false,

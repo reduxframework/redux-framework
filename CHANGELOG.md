@@ -2,6 +2,7 @@
 
 ## 4.4.5.3
 * Fixed: Font Awesome not enqueueing on the frontend for `social_profiles` field.
+* New: Global arg `fontawesome_frontend` to enqueue the internal Font Awesome CSS on the front end.
 
 ## 4.4.5.2
 * New: Taxonomy Metaboxes Extension [https://devs.redux.io/core-extensions/taxonomy.html](https://devs.redux.io/core-extensions/taxonomy.html)

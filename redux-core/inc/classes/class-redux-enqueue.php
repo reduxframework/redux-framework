@@ -75,6 +75,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			if ( $core->args['elusive_frontend'] ) {
 				Redux_Functions_Ex::enqueue_elusive_font();
 			}
+
+			if ( $core->args['fontawesome_frontend'] ) {
+				Redux_Functions_Ex::enqueue_font_awesome();
+			}
 		}
 
 		/**
