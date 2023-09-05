@@ -149,14 +149,14 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 									$field['output'] = array( $field['output'] );
 								}
 
-								if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || isset( $field['media_query'] ) && ! empty( $field['media_query'] ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] ) ) {
+								if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || isset( $field['media_query'] ) && ! empty( $field['media_query'] ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] || 'social_profiles' === $field['type'] ) ) {
 									if ( method_exists( $field_class, 'css_style' ) ) {
 										$style_data = $field_object->css_style( $field_object->value );
 									}
 								}
 
 								if ( null !== $style_data ) {
-									if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] ) ) {
+									if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] || 'social_profiles' === $field['type'] ) ) {
 										$field_object->output( $style_data );
 									}
 

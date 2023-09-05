@@ -282,6 +282,17 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 		}
 
 		/**
+		 * This function is unused, but necessary to trigger output.
+		 *
+		 * @param mixed $data CSS data.
+		 *
+		 * @return mixed|string|void
+		 */
+		public function css_style( $data ) {
+			return $data;
+		}
+
+		/**
 		 * Used to enqueue to the front-end
 		 *
 		 * @param string|null|array $style Style.
