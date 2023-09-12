@@ -1,14 +1,8 @@
 ## Redux Framework
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/)
 
-## Testing the New & Improved Icon Select Extension ##
-The old Icon Select extension has been rewritten with a new popup interface and several new features, which are documented on its [docs page](https://devs.redux.io/core-extensions/icon-select.html).
-
-Painstaking efforts were made to ensure backward compatibility with the previous standalone extension and Redux Pro version. However, the possibility exists we could have missed something as we have no themes that use the older version of Icon Select to test again. If you are a theme author and discover and issue, please post it to our [issue tracker](https://github.com/reduxframework/redux-framework/issues) making sure to include a detailed description of your issue and a copy of your theme's options config for us to review. In fact, please read the instructions we provided within the issue tracker posting form and provide the required data.
-
-If you are a theme user (that is, someone who purchased a theme that uses the Icon Select extension), we cannot offer support as you do not have permission from the theme author to send us a copy of their theme. You will need to report the issue to the author of your theme, ensure they are able to duplicate your issue, and ask them to file a report on our issue tracker. We are only able to work with theme authors to address issues within Redux, and changes may need to be made to the theme code, which is something we are unable to do.
-
 ## New to Version 4.4 ##
+* TAXONOMY METABOXES!
 * USER PROFILE METABOXES!
 * ICON SELECT Extension.
 * The Extendify Templates and Patterns library has been unbundled from Redux. To continue using Extendify, please download the standalone plugin from the WordPress.org repository: [https://wordpress.org/plugins/extendify](https://wordpress.org/plugins/extendify)
