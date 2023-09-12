@@ -1,15 +1,11 @@
 # Redux Changelog
 
-## 4.4.5.3
-* Fixed: Font Awesome not enqueueing on the frontend for `social_profiles` field.
+## 4.4.6
 * New: Global arg `fontawesome_frontend` to enqueue the internal Font Awesome CSS on the front end.
-
-## 4.4.5.2
 * New: Taxonomy Metaboxes Extension [https://devs.redux.io/core-extensions/taxonomy.html](https://devs.redux.io/core-extensions/taxonomy.html)
+* Fixed: Font Awesome not enqueueing on the frontend for `social_profiles` field.
 * Fixed: HTML Output for User Profile Metaboxes.
 * Fixed: Admin panel CSS.
-
-## 4.4.5.1
 * Fixed: Adjusted translation for Google Font update message.
 
 ## 4.4.5
