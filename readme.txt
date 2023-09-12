@@ -123,6 +123,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: HTML Output for User Profile Metaboxes.
 * Fixed: Admin panel CSS.
 * Fixed: Adjusted translation for Google Font update message.
+* Fixed: Continuing effort to combat old CDN code because some devs aren't updating their code.
 
 = 4.4.5 =
 * Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
