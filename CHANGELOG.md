@@ -8,6 +8,7 @@
 * Fixed: Admin panel CSS.
 * Fixed: Adjusted translation for Google Font update message.
 * Fixed: Continuing effort to combat old CDN code because some devs aren't updating their code.
+* Fixed: REDUX_PLUGIN_FILE failed with embedded installed.  WE NO LONGER SUPPORT EMBEDDED. IT'S FOR LEGACY INSTALLS ONLY.
 
 ## 4.4.5
 * Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
