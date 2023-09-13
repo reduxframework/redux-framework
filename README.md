@@ -1,6 +1,11 @@
 ## Redux Framework
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/)
 
+## ATTENTION ##
+While we recognize Redux could be embedded in a theme or plugin in the past, we are no longer supporting the practice. Too many developers are not keeping their Redux code up-to-date (which could easily accomplished with Composer). When users of the projects experiences issues, they seek support from us, which we are unable to provide short of suggesting they contact the project author (you) and ask you update your vendor code. This puts your users in the middle and we'd prefer to not do that anymore.
+
+Thank you for your kind attention in this matter.
+
 ## New to Version 4.4 ##
 * TAXONOMY METABOXES!
 * USER PROFILE METABOXES!
