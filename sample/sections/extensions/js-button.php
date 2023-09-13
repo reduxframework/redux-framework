@@ -22,8 +22,8 @@ Redux::set_section(
 				'subtitle' => esc_html__( 'Run javascript in the options panel from button clicks.', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'Click the Add Date button to add the current date into the text field below.', 'your-textdomain-here' ),
 				'script'   => array(
-					'url'       => plugins_url( 'sample/sections/extensions/js-button.js', REDUX_PLUGIN_FILE ),
-					'dir'       => dirname( __FILE__ ) . '/js-button.js',
+					'url'       => plugins_url( '/extensions/js-button.js', __DIR__ ),
+					'dir'       => __DIR__ . '/js-button.js',
 					'dep'       => array( 'jquery' ),
 					'ver'       => time(),
 					'in_footer' => true,
