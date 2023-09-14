@@ -1,6 +1,6 @@
 # Redux Changelog
 
-## 4.4.6.1
+## 4.4.6.2
 * Removed: CDN alternative support for `ace_editor`. Devs won't update their code, leaving us no choice. Use the `redux/<opt_name>/fields/ace/script` filter to enqueue a local ACE Editor script if needed.
 * Fixed: Redux template PHP not autoloading.
 
