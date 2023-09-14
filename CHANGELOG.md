@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.6.1
+* Removed: CDN alternative support for `ace_editor`. Devs won't update their code, leaving us no choice. Use the `redux/<opt_name>/fields/ace/script` filter to enqueue a local ACE Editor script if needed.
+* Fixed: Redux template PHP not autoloading.
+
 ## 4.4.6
 * New: Global arg `fontawesome_frontend` to enqueue the internal Font Awesome CSS on the front end.
 * New: Taxonomy Metaboxes Extension [https://devs.redux.io/core-extensions/taxonomy.html](https://devs.redux.io/core-extensions/taxonomy.html)
