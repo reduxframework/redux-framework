@@ -15,4 +15,5 @@ define( 'REDUXTEMPLATES_DIR_PATH', trailingslashit( plugin_dir_path( __FILE__ ) 
 
 // Version Check & Include Core.
 Redux_Functions_Ex::register_class_path( 'ReduxTemplates', REDUXTEMPLATES_DIR_PATH . 'classes/' );
+
 new ReduxTemplates\Init();

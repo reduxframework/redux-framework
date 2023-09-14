@@ -57,9 +57,9 @@ class Redux_Autoloader {
 		}
 
 		// Strip prefix from the start (ala PSR-4).
-		$class = substr( $classname, $this->prefix_length + 1 );
+		$classname = substr( $classname, $this->prefix_length + 1 );
 		if ( function_exists( 'mb_strtolower' ) && function_exists( 'mb_detect_encoding' ) ) {
-			$classname = mb_strtolower( $class, mb_detect_encoding( $classname ) );
+			$classname = mb_strtolower( $classname, mb_detect_encoding( $classname ) );
 		} else {
 			$classname = strtolower( $classname );
 		}
@@ -69,7 +69,7 @@ class Redux_Autoloader {
 		$last_ns_pos = strripos( $classname, self::NS_SEPARATOR );
 		if ( false !== $last_ns_pos ) {
 			$namespace = substr( $classname, 0, $last_ns_pos );
-			$class     = substr( $classname, $last_ns_pos + 1 );
+			$classname = substr( $classname, $last_ns_pos + 1 );
 			$file      = str_replace( self::NS_SEPARATOR, DIRECTORY_SEPARATOR, $namespace ) . DIRECTORY_SEPARATOR;
 		}
 		$file_prefix = $file;
