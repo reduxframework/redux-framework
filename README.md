@@ -2,7 +2,17 @@
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/plugins/redux-framework) [![WordPress](https://img.shields.io/wordpress/v/redux-framework.svg?maxAge=3600)](https://wordpress.org/download/)
 
 ## ATTENTION ##
-While we recognize Redux could be embedded in a theme or plugin in the past, we are no longer supporting the practice. Too many developers are not keeping their Redux code up-to-date (which could easily accomplished with Composer). When users of the projects experiences issues, they seek support from us, which we are unable to provide short of suggesting they contact the project author (you) and ask you update your vendor code. This puts your users in the middle and we'd prefer to not do that anymore.
+While we recognize Redux could be embedded in a theme or plugin in the past, we are no longer supporting the practice. 
+Too many developers are not keeping their Redux code up-to-date (which could easily accomplished with Composer).
+When users of the projects experience issues, they seek support from us,
+which we are unable to provide short of suggesting they contact the project author (you) and ask you to update your vendor code.
+This puts your users in the middle and we'd prefer to not do that anymore.
+
+Consequently, the vendor support plugin/extension for `ace_editor` has been discontinued.
+The ACE Editor will load exclusively via CDN.
+If your project requires a local installation of the ACE Editor JavaScript (whose size is substantial),
+please include it in your project and use the `redux/<opt_name>/fields/ace/script` filter to specify the URL to that script.
+The `ace_editor` field will use that URL to enqueue the ACE library.
 
 Thank you for your kind attention in this matter.
 
@@ -10,7 +20,7 @@ Thank you for your kind attention in this matter.
 * TAXONOMY METABOXES!
 * USER PROFILE METABOXES!
 * ICON SELECT Extension.
-* The Extendify Templates and Patterns library has been unbundled from Redux. To continue using Extendify, please download the standalone plugin from the WordPress.org repository: [https://wordpress.org/plugins/extendify](https://wordpress.org/plugins/extendify)
+* The Extendify Templates and Patterns library have been unbundled from Redux. To continue using Extendify, please download the standalone plugin from the WordPress.org repository: [https://wordpress.org/plugins/extendify](https://wordpress.org/plugins/extendify)
 
 ## New to Version 4.3 ##
 * METABOXES!
