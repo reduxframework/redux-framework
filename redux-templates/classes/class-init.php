@@ -31,6 +31,8 @@ class Init {
 			return;
 		}
 
+		require_once REDUXTEMPLATES_DIR_PATH . 'classes/class-templates.php';
+
 		add_action( 'init', array( $this, 'load' ) );
 
 		if ( did_action( 'init' ) ) { // In case the devs load it at the wrong place.
