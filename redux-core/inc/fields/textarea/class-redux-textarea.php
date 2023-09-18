@@ -49,27 +49,8 @@ if ( ! class_exists( 'Redux_Textarea', false ) ) {
 					placeholder="<?php echo esc_attr( $this->field['placeholder'] ); ?>"
 					autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 					class="large-text <?php echo esc_attr( $this->field['class'] ); ?>"
-					rows="<?php echo esc_attr( $this->field['rows'] ); ?>"><?php echo esc_textarea( $this->value ); ?>
-			</textarea>
+					rows="<?php echo esc_attr( $this->field['rows'] ); ?>"><?php echo esc_textarea( $this->value ); ?></textarea>
 			<?php
-		}
-
-		/**
-		 * Sanitize value.
-		 *
-		 * @param array  $field Field array.
-		 * @param string $value Values array.
-		 *
-		 * @return string
-		 */
-		public function sanitize( array $field, string $value ): string {
-			if ( empty( $value ) ) {
-				$value = '';
-			} else {
-				$value = esc_textarea( $value );
-			}
-
-			return $value;
 		}
 	}
 }
