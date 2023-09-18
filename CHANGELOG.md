@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.7.1
+* Fixed: Removed extra spaces from `textarea`.
+
 ## 4.4.7
 * Removed: CDN vendor support for `ace_editor`. Devs won't update their code, leaving us no choice. Use the `redux/<opt_name>/fields/ace/script` filter to enqueue a local ACE Editor script if needed.
 * Fixed: Redux template PHP not autoloading.
