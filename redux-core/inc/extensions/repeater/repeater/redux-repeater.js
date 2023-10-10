@@ -1,6 +1,6 @@
 /* global redux_change, redux, reduxRepeaterAccordionActivate, reduxRepeaterAccordionBeforeActivate */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var reduxObject;
@@ -9,7 +9,7 @@
 	redux.field_objects          = redux.field_objects || {};
 	redux.field_objects.repeater = redux.field_objects.repeater || {};
 
-	redux.field_objects.repeater.getOptName = function( el ) {
+	redux.field_objects.repeater.getOptName = function ( el ) {
 		var optName;
 
 		optName = el.parents().find( '.redux-ajax-security' ).data( 'opt-name' );
@@ -25,13 +25,13 @@
 		}
 	};
 
-	redux.field_objects.repeater.init = function( selector ) {
+	redux.field_objects.repeater.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-repeater:visible' );
 		}
 
 		$( selector ).each(
-			function() {
+			function () {
 				var gid;
 				var blank;
 
@@ -81,16 +81,16 @@
 		);
 	};
 
-	redux.field_objects.repeater.add = function( el ) {
+	redux.field_objects.repeater.add = function ( el ) {
 
 		/* jshint -W121 */
-		String.prototype.reduxReplaceAll = function( s1, s2 ) {
-			return this.replace( new RegExp( s1.replace( /[.^$*+?()[{\|]/g, '\\$&' ), 'g' ), s2 );
+		String.prototype.reduxReplaceAll = function ( s1, s2 ) {
+			return this.replace( new RegExp( s1.replace( /[.^$*+?()[{|]/g, '\\$&' ), 'g' ), s2 );
 		};
 
 		el.find( '.redux-repeaters-add' ).on(
 			'click',
-			function() {
+			function () {
 				var parent;
 				var count;
 				var gid;
@@ -150,7 +150,7 @@
 				newSlide.find( '.redux-repeater-accordion-repeater:last .ui-accordion-header' ).trigger( 'click' );
 				newSlide.find( '.redux-repeater-accordion-repeater:last .bind_title' ).on(
 					'change keyup',
-					function( event ) {
+					function ( event ) {
 						var value;
 
 						if ( $( event.target ).find( ':selected' ).text().length > 0 ) {
@@ -182,13 +182,13 @@
 		);
 	};
 
-	redux.field_objects.repeater.remove = function( el ) {
+	redux.field_objects.repeater.remove = function ( el ) {
 		var x;
 
 		// Handler to remove the given repeater.
 		el.find( '.redux-repeaters-remove' ).on(
 			'click',
-			function() {
+			function () {
 				var parent;
 				var gid;
 				var count;
@@ -202,7 +202,7 @@
 
 				$( this ).parents( '.redux-repeater-accordion-repeater:first' ).slideUp(
 					'medium',
-					function() {
+					function () {
 						$( this ).remove();
 
 						redux.field_objects.repeater.sort_repeaters( el );
@@ -228,10 +228,10 @@
 		}
 	};
 
-	redux.field_objects.repeater.bindTitle = function( el ) {
+	redux.field_objects.repeater.bindTitle = function ( el ) {
 		el.find( '.redux-repeater-accordion-repeater .bind_title' ).on(
 			'change keyup',
-			function( event ) {
+			function ( event ) {
 				var value;
 
 				if ( $( event.target ).find( ':selected' ).text().length > 0 ) {
@@ -245,7 +245,7 @@
 		);
 	};
 
-	redux.field_objects.repeater.setAccordion = function( el, gid ) {
+	redux.field_objects.repeater.setAccordion = function ( el, gid ) {
 		var active;
 		var accordion;
 
@@ -265,7 +265,7 @@
 				collapsible: true,
 				active: active,
 
-				beforeActivate: function( event ) {
+				beforeActivate: function ( event ) {
 					var a;
 					var relName;
 					var optName;
@@ -282,7 +282,7 @@
 						reduxRepeaterAccordionBeforeActivate( $( this ), el, event, optName );
 					}
 				},
-				activate: function( event, ui ) {
+				activate: function ( event, ui ) {
 					var a;
 					var relName;
 					var optName;
@@ -312,13 +312,13 @@
 					axis: 'y',
 					handle: 'h3',
 					placeholder: 'ui-state-highlight',
-					start: function( e, ui ) {
+					start: function ( e, ui ) {
 						e = null;
 
 						ui.placeholder.height( ui.item.height() );
 						ui.placeholder.width( ui.item.width() );
 					},
-					stop: function( event, ui ) {
+					stop: function ( event, ui ) {
 						event = null;
 
 						// IE doesn't register the blur when sorting
@@ -335,13 +335,13 @@
 		}
 	};
 
-	redux.field_objects.repeater.sort_repeaters = function( selector ) {
+	redux.field_objects.repeater.sort_repeaters = function ( selector ) {
 		if ( ! selector.hasClass( 'redux-container-repeater' ) ) {
 			selector = selector.parents( '.redux-container-repeater:first' );
 		}
 
 		selector.find( '.redux-repeater-accordion-repeater' ).each(
-			function( idx ) {
+			function ( idx ) {
 				var header;
 				var split;
 				var content;
@@ -350,7 +350,7 @@
 				var input = $( this ).find( '.redux-field .repeater[name*=\'[' + id + ']\']' );
 
 				input.each(
-					function() {
+					function () {
 						$( this ).attr( 'name', $( this ).attr( 'name' ).replace( '[' + id + ']', '[' + idx + ']' ) );
 					}
 				);
@@ -384,7 +384,7 @@
 		);
 	};
 
-	redux.field_objects.repeater.check_parents_dependencies = function( id ) {
+	redux.field_objects.repeater.check_parents_dependencies = function ( id ) {
 		var show    = '';
 		var current = id;
 		var dash    = current.lastIndexOf( '-' );
@@ -394,7 +394,7 @@
 		if ( reduxObject.required_child.hasOwnProperty( fixedId ) ) {
 			$.each(
 				reduxObject.required_child[fixedId],
-				function( i, parentData ) {
+				function ( i, parentData ) {
 					var parentValue;
 					var value;
 					var idx;
@@ -445,14 +445,14 @@
 	redux_hook(
 		$.redux,
 		'required',
-		function( returnValue, originalFunction ) {
+		function ( returnValue, originalFunction ) {
 			var reduxObj;
 
 			reduxObj = redux.field_objects.repeater.getOptName( $( '.redux-container-repeater' ) );
 
 			$.each(
 				reduxObj.folds,
-				function( i, v ) {
+				function ( i, v ) {
 
 					var fieldset;
 					var div;
@@ -464,36 +464,34 @@
 
 					fieldset = $( '[id^=' + reduxObj.args.opt_name + '-' + i + ']' );
 
-					if ( ! fieldset.children().hasClass( 'in-repeater' ) ) {
-						return;
-					}
+					if ( fieldset.find( '*' ).hasClass( 'in-repeater' ) ) {
+						fieldset.addClass( 'fold' );
 
-					fieldset.addClass( 'fold' );
+						if ( 'hide' === v ) {
+							fieldset.addClass( 'hide' );
+							fieldset.prevUntil( 'fieldset' ).addClass( 'hide' );
 
-					if ( 'hide' === v ) {
-						fieldset.addClass( 'hide' );
-						fieldset.prevUntil( 'fieldset' ).addClass( 'hide' );
+							if ( fieldset.hasClass( 'redux-container-section' ) ) {
+								div = $( '#section-' + i );
 
-						if ( fieldset.hasClass( 'redux-container-section' ) ) {
-							div = $( '#section-' + i );
-
-							if ( div.hasClass( 'redux-section-indent-start' ) ) {
-								$( '#section-table-' + i ).hide().addClass( 'hide' );
-								div.hide().addClass( 'hide' );
+								if ( div.hasClass( 'redux-section-indent-start' ) ) {
+									$( '#section-table-' + i ).hide().addClass( 'hide' );
+									div.hide().addClass( 'hide' );
+								}
 							}
-						}
 
-						if ( fieldset.hasClass( 'redux-container-info' ) ) {
-							$( '#info-' + i ).hide().addClass( 'hide' );
-						}
+							if ( fieldset.hasClass( 'redux-container-info' ) ) {
+								$( '#info-' + i ).hide().addClass( 'hide' );
+							}
 
-						if ( fieldset.hasClass( 'redux-container-divide' ) ) {
-							$( '#divide-' + i ).hide().addClass( 'hide' );
-						}
+							if ( fieldset.hasClass( 'redux-container-divide' ) ) {
+								$( '#divide-' + i ).hide().addClass( 'hide' );
+							}
 
-						if ( fieldset.hasClass( 'redux-container-raw' ) ) {
-							rawTable = fieldset.parents().find( 'table#' + redux.args.opt_name + '-' + i );
-							rawTable.hide().addClass( 'hide' );
+							if ( fieldset.hasClass( 'redux-container-raw' ) ) {
+								rawTable = fieldset.parents().find( 'table#' + redux.args.opt_name + '-' + i );
+								rawTable.hide().addClass( 'hide' );
+							}
 						}
 					}
 				}
@@ -504,7 +502,7 @@
 	redux_hook(
 		$.redux,
 		'check_dependencies',
-		function( returnValue, originalFunction, variable ) {
+		function ( returnValue, originalFunction, variable ) {
 			var current;
 			var id;
 			var container;
@@ -524,7 +522,7 @@
 
 				$.each(
 					reduxObject.required[idNoIndex],
-					function( child, dependents ) {
+					function ( child, dependents ) {
 						var current;
 						var show;
 						var childFieldset;
@@ -544,7 +542,7 @@
 						if ( true === show ) {
 							childFieldset.fadeIn(
 								300,
-								function() {
+								function () {
 									$( this ).removeClass( 'hide' );
 									$( this ).prevUntil( 'fieldset' ).removeClass( 'hide' );
 
@@ -558,7 +556,7 @@
 						} else {
 							childFieldset.fadeOut(
 								100,
-								function() {
+								function () {
 									$( this ).addClass( 'hide' );
 									$( this ).prevUntil( 'fieldset' ).addClass( 'hide' );
 

@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.4.7.1';
+Redux_Core::$version    = '4.4.7.2';
 Redux_Core::$redux_path = __DIR__;
 Redux_Core::instance();
 
@@ -576,7 +576,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 				new Redux_AJAX_Save( $this );
 				new Redux_AJAX_Typography( $this );
 				new Redux_AJAX_Select2( $this );
-				new Redux_Health( $this );
 			}
 
 			/**

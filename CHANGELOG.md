@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.7.2
+* Fixed: #3970 - Added `is_string` check to WordPress data callback argument.
+* Removed: Unused code for Support Ticket Submission feature that was never finished.
+
 ## 4.4.7.1
 * Fixed: Removed extra spaces from `textarea`.
 

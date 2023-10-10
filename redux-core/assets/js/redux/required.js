@@ -1,11 +1,11 @@
 /* global redux */
 
-(function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	$.redux = $.redux || {};
 
-	$.redux.makeBoolStr = function( val ) {
+	$.redux.makeBoolStr = function ( val ) {
 		if ( 'false' === val || false === val || '0' === val || 0 === val || null === val || '' === val ) {
 			return 'false';
 		} else if ( 'true' === val || true === val || '1' === val || 1 === val ) {
@@ -15,7 +15,7 @@
 		}
 	};
 
-	$.redux.checkRequired = function( el ) {
+	$.redux.checkRequired = function ( el ) {
 		var body;
 
 		$.redux.required();
@@ -25,14 +25,14 @@
 		body.on(
 			'change',
 			'.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]',
-			function() {
+			function () {
 				$.redux.check_dependencies( this );
 			}
 		);
 
 		body.on(
 			'check_dependencies',
-			function( e, variable ) {
+			function ( e, variable ) {
 				e = null;
 				$.redux.check_dependencies( variable );
 			}
@@ -45,26 +45,40 @@
 		el.find( '.redux-container td > fieldset:empty,td > div:empty' ).parent().parent().hide();
 	};
 
-	$.redux.required = function() {
+	$.redux.required = function () {
 
 		// Hide the fold elements on load.
 		// It's better to do this by PHP but there is no filter in tr tag , so is not possible
 		// we're going to move each attributes we may need for folding to tr tag.
 		$.each(
 			redux.opt_names,
-			function( x ) {
+			function ( x ) {
 				$.each(
 					window['redux_' + redux.opt_names[x].replace( /\-/g, '_' )].folds,
-					function( i, v ) {
+					function ( i, v ) {
 						var div;
 						var rawTable;
-
+						var inTabbed = false;
 						var fieldset = $( '#' + redux.opt_names[x] + '-' + i );
 
-						fieldset.parents( 'tr:first, li:first' ).addClass( 'fold' );
+						if ( fieldset.find( '*' ).hasClass( 'in-tabbed' ) ) {
+							inTabbed = true;
+						}
+
+						if ( true === inTabbed ) {
+							fieldset.addClass( 'fold' );
+							fieldset.parents( '.redux-tab-field' ).addClass( 'fold' );
+						} else {
+							fieldset.parents( 'tr:first, li:first' ).addClass( 'fold' );
+						}
 
 						if ( 'hide' === v ) {
-							fieldset.parents( 'tr:first, li:first' ).addClass( 'hide' );
+							if ( true === inTabbed ) {
+								fieldset.addClass( 'hide' );
+								fieldset.parents( '.redux-tab-field' ).addClass( 'hide' );
+							} else {
+								fieldset.parents( 'tr:first, li:first' ).addClass( 'hide' );
+							}
 
 							if ( fieldset.hasClass( 'redux-container-section' ) ) {
 								div = $( '#section-' + i );
@@ -94,7 +108,7 @@
 		);
 	};
 
-	$.redux.getContainerValue = function( id ) {
+	$.redux.getContainerValue = function ( id ) {
 		var theId;
 		var value;
 
@@ -112,14 +126,19 @@
 		return value;
 	};
 
-	$.redux.check_dependencies = function( variable ) {
+	$.redux.check_dependencies = function ( variable ) {
 		var current;
 		var id;
 		var container;
 		var isHidden;
+		var inTabbed = false;
 
 		if ( null === redux.optName.required ) {
 			return;
+		}
+
+		if ( $( variable ).hasClass( 'in-tabbed' ) ) {
+			inTabbed = true;
 		}
 
 		current = $( variable );
@@ -130,27 +149,41 @@
 		}
 
 		container = current.parents( '.redux-field-container:first' );
-		isHidden  = container.parents( 'tr:first' ).hasClass( 'hide' );
 
-		if ( ! container.parents( 'tr:first' ).length ) {
-			isHidden = container.parents( '.customize-control:first' ).hasClass( 'hide' );
+		if ( true === inTabbed ) {
+			isHidden = container.hasClass( 'hide' );
+		} else {
+			isHidden = container.parents( 'tr:first' ).hasClass( 'hide' );
+
+			if ( ! container.parents( 'tr:first' ).length ) {
+				isHidden = container.parents( '.customize-control:first' ).hasClass( 'hide' );
+			}
 		}
 
 		$.each(
 			redux.optName.required[id],
-			function( child ) {
+			function ( child ) {
 				var div;
 				var rawTable;
 				var tr;
+				var tabbed = false;
 
 				var current       = $( this );
 				var show          = false;
 				var childFieldset = $( '#' + redux.optName.args.opt_name + '-' + child );
 
-				tr = childFieldset.parents( 'tr:first' );
+				if ( childFieldset.find( '*' ).hasClass( 'in-tabbed' ) ) {
+					tabbed = true;
+				}
 
-				if ( 0 === tr.length ) {
-					tr = childFieldset.parents( 'li:first' );
+				if ( true === tabbed ) {
+					tr = childFieldset;
+				} else {
+					tr = childFieldset.parents( 'tr:first' );
+
+					if ( 0 === tr.length ) {
+						tr = childFieldset.parents( 'li:first' );
+					}
 				}
 
 				if ( ! isHidden ) {
@@ -184,8 +217,13 @@
 
 					tr.fadeIn(
 						300,
-						function() {
+						function () {
 							$( this ).removeClass( 'hide' );
+
+							if ( true === tabbed ) {
+								$( this ).parents( '.redux-tab-field' ).removeClass( 'hide' ).css( { display:'' } );
+							}
+
 							if ( redux.optName.required.hasOwnProperty( child ) ) {
 								$.redux.check_dependencies( $( '#' + redux.optName.args.opt_name + '-' + child ).children().first() );
 							}
@@ -200,8 +238,13 @@
 				} else if ( false === show ) {
 					tr.fadeOut(
 						100,
-						function() {
+						function () {
 							$( this ).addClass( 'hide' );
+
+							if ( true === tabbed ) {
+								$( this ).parents( '.redux-tab-field' ).addClass( 'hide' );
+							}
+
 							if ( redux.optName.required.hasOwnProperty( child ) ) {
 								$.redux.required_recursive_hide( child );
 							}
@@ -214,22 +257,31 @@
 		);
 	};
 
-	$.redux.required_recursive_hide = function( id ) {
+	$.redux.required_recursive_hide = function ( id ) {
 		var div;
 		var rawTable;
 		var toFade;
 		var theId;
+		var inTabbed = false;
 
 		theId = $( '#' + redux.optName.args.opt_name + '-' + id );
 
-		toFade = theId.parents( 'tr:first' );
-		if ( 0 === toFade ) {
-			toFade = theId.parents( 'li:first' );
+		if ( theId.find( '*' ).hasClass( 'in-tabbed' ) ) {
+			inTabbed = true;
+		}
+
+		if ( true === inTabbed ) {
+			toFade = theId.parents( '.redux-tab-field:first' );
+		} else {
+			toFade = theId.parents( 'tr:first' );
+			if ( 0 === toFade ) {
+				toFade = theId.parents( 'li:first' );
+			}
 		}
 
 		toFade.fadeOut(
 			50,
-			function() {
+			function () {
 				$( this ).addClass( 'hide' );
 
 				if ( theId.hasClass( 'redux-container-section' ) ) {
@@ -257,7 +309,7 @@
 				if ( redux.optName.required.hasOwnProperty( id ) ) {
 					$.each(
 						redux.optName.required[id],
-						function( child ) {
+						function ( child ) {
 							$.redux.required_recursive_hide( child );
 						}
 					);
@@ -266,13 +318,13 @@
 		);
 	};
 
-	$.redux.check_parents_dependencies = function( id ) {
+	$.redux.check_parents_dependencies = function ( id ) {
 		var show = '';
 
 		if ( redux.optName.required_child.hasOwnProperty( id ) ) {
 			$.each(
 				redux.optName.required_child[id],
-				function( i, parentData ) {
+				function ( i, parentData ) {
 					var parentValue;
 					var parent;
 
@@ -300,7 +352,7 @@
 		return show;
 	};
 
-	$.redux.check_dependencies_visibility = function( parentValue, data ) {
+	$.redux.check_dependencies_visibility = function ( parentValue, data ) {
 		var show       = false;
 		var checkValue = data.checkValue;
 		var operation  = data.operation;
@@ -308,7 +360,7 @@
 
 		if ( $.isPlainObject( parentValue ) ) {
 			parentValue = Object.keys( parentValue ).map(
-				function( key ) {
+				function ( key ) {
 					return [key, parentValue[key]];
 				}
 			);
@@ -319,12 +371,12 @@
 			case 'equals':
 				if ( Array.isArray( parentValue ) ) {
 					$( parentValue[0] ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							idx = null;
 
 							if ( Array.isArray( checkValue ) ) {
 								$( checkValue ).each(
-									function( i, v ) {
+									function ( i, v ) {
 										i = null;
 										if ( $.redux.makeBoolStr( val ) === $.redux.makeBoolStr( v ) ) {
 											show = true;
@@ -345,7 +397,7 @@
 				} else {
 					if ( Array.isArray( checkValue ) ) {
 						$( checkValue ).each(
-							function( i, v ) {
+							function ( i, v ) {
 								i = null;
 
 								if ( $.redux.makeBoolStr( parentValue ) === $.redux.makeBoolStr( v ) ) {
@@ -365,12 +417,12 @@
 			case 'not':
 				if ( Array.isArray( parentValue ) ) {
 					$( parentValue[0] ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							idx = null;
 
 							if ( Array.isArray( checkValue ) ) {
 								$( checkValue ).each(
-									function( i, v ) {
+									function ( i, v ) {
 										i = null;
 
 										if ( $.redux.makeBoolStr( val ) !== $.redux.makeBoolStr( v ) ) {
@@ -392,7 +444,7 @@
 				} else {
 					if ( Array.isArray( checkValue ) ) {
 						$( checkValue ).each(
-							function( i, v ) {
+							function ( i, v ) {
 								i = null;
 
 								if ( $.redux.makeBoolStr( parentValue ) !== $.redux.makeBoolStr( v ) ) {
@@ -443,7 +495,7 @@
 			case 'contains':
 				if ( $.isPlainObject( parentValue ) ) {
 					parentValue = Object.keys( parentValue ).map(
-						function( key ) {
+						function ( key ) {
 							return [key, parentValue[key]];
 						}
 					);
@@ -451,7 +503,7 @@
 
 				if ( $.isPlainObject( checkValue ) ) {
 					checkValue = Object.keys( checkValue ).map(
-						function( key ) {
+						function ( key ) {
 							return [key, checkValue[key]];
 						}
 					);
@@ -459,7 +511,7 @@
 
 				if ( Array.isArray( checkValue ) ) {
 					$( checkValue ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							var breakMe = false;
 							var toFind  = val[0];
 							var findVal = val[1];
@@ -467,7 +519,7 @@
 							idx = null;
 
 							$( parentValue ).each(
-								function( i, v ) {
+								function ( i, v ) {
 									var toMatch  = v[0];
 									var matchVal = v[1];
 
@@ -500,7 +552,7 @@
 			case 'not_contain':
 				if ( $.isPlainObject( parentValue ) ) {
 					arr = Object.keys( parentValue ).map(
-						function( key ) {
+						function ( key ) {
 							return parentValue[key];
 						}
 					);
@@ -510,7 +562,7 @@
 
 				if ( $.isPlainObject( checkValue ) ) {
 					arr = Object.keys( checkValue ).map(
-						function( key ) {
+						function ( key ) {
 							return checkValue[key];
 						}
 					);
@@ -520,7 +572,7 @@
 
 				if ( Array.isArray( checkValue ) ) {
 					$( checkValue ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							idx = null;
 
 							if ( parentValue.toString().indexOf( val ) === - 1 ) {
