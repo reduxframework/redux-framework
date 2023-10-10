@@ -1,4 +1,4 @@
-/* global redux, redux_change, jQuery, pagenow, ajaxurl */
+/* global redux, redux_change, jQuery */
 
 (function( $ ) {
 	'use strict';
@@ -7,106 +7,6 @@
 
 	$.redux.initEvents = function( el ) {
 		var stickyHeight;
-		var search  = window.location.search;
-		var curPage = pagenow;
-		var dialog;
-		var messageDialog;
-
-		if ( 'string' === typeof search && 'string' === typeof curPage && true === redux.optName.args.dev_mode ) {
-			search  = search.replace( '?page=', '' );
-			curPage = curPage.replace( 'toplevel_page_', '' );
-
-			if ( search === curPage ) {
-				document.addEventListener(
-					'keydown',
-					function( event ) {
-						if ( event.ctrlKey && event.shiftKey && 'H' === event.key ) {
-							dialog.dialog( 'open' );
-						}
-					}
-				);
-
-				messageDialog = $( '#redux-dialog-message' ).dialog(
-					{
-						classes: {
-							'ui-dialog': 'redux-message-dialog',
-							'ui-dialog-buttonpane': 'redux-message-dialog-buttonpane',
-							'ui-dialog-title': 'redux-message-dialog-title',
-							'ui-dialog-content': 'redux-message-dialog-content'
-						},
-						modal: true,
-						autoOpen: false,
-						resizable: false,
-						height: 'auto',
-						width: 400,
-						buttons: {
-							Ok: function() {
-								$( this ).dialog( 'close' );
-							}
-						}
-					}
-				);
-
-				dialog = $( '#redux-dialog-confirm' ).dialog(
-					{
-						modal: true,
-						classes: {
-							'ui-dialog': 'redux-support-dialog'
-						},
-						autoOpen: false,
-						resizable: false,
-						height: 'auto',
-						width: 400,
-						buttons: {
-							Submit: function() {
-								var buttonPane  = $( '.redux-message-dialog-buttonpane' );
-								var dialogTitle = $( '.redux-message-dialog-title' );
-								var content     = $( '.redux-message-dialog-content .redux-message-p' );
-
-								$.ajax(
-									{ type: 'post',
-										dataType: 'json',
-										url: ajaxurl,
-										data: {
-											action:     'redux_submit_support_data',
-											nonce:      $( '#redux-dialog-confirm' ).data( 'nonce' )
-										},
-										beforeSend: function() {
-											buttonPane.css( { 'display': 'none' } );
-											$( '#redux-dialog-message .spinner' ).css( { 'visibility': 'visible' } );
-
-											messageDialog.dialog( 'open' );
-										},
-										error: function( response ) {
-											buttonPane.css( { 'display': 'block' } );
-											dialogTitle.text( 'Error' );
-
-											console.log( response );
-										},
-										success: function( response ) {
-											buttonPane.css( { 'display': 'block' } );
-
-											if ( response.status && 'success' === response.status ) {
-												dialogTitle.text( 'Information Sent' );
-												content.html( 'Your support data has been transmitted.  The reference number for this transmission is: <strong>' + response.data + '</strong>' );
-											} else {
-												dialogTitle.text( 'Error' );
-												content.text( response.data );
-											}
-										}
-									}
-								);
-
-								$( this ).dialog( 'close' );
-							},
-							Cancel: function() {
-								$( this ).dialog( 'close' );
-							}
-						}
-					}
-				);
-			}
-		}
 
 		el.find( '.redux-presets-bar' ).on(
 			'click',
