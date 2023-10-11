@@ -532,7 +532,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors
 			// @codingStandardsIgnoreStart
-			$return = @file_put_contents( $abs_path, $contents );
+			$return = is_writable( $abs_path ) ? @file_put_contents( $abs_path, $contents ) : false;
 			// @codingStandardsIgnoreEnd
 			$this->chmod( $abs_path );
 
@@ -542,7 +542,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $return && $this->use_filesystem ) {
 				$abs_path = $this->get_sanitized_path( $abs_path );
-				$return   = $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
+				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+				$return = is_writable( $abs_path ) && $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
 			}
 
 			return (bool) $return;
@@ -805,7 +806,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 			}
 
 			try {
-				$mkdirp = wp_mkdir_p( $abs_path );
+				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+				$mkdirp = is_writable( $abs_path ) && wp_mkdir_p( $abs_path );
 			} catch ( Exception $e ) {
 				$mkdirp = false;
 			}
@@ -816,8 +818,9 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 				return true;
 			}
-			// phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
-			$return = @mkdir( $abs_path, $perms, true );
+
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions, WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+			$return = is_writable( $abs_path ) && @mkdir( $abs_path, $perms, true );
 
 			if ( ! $return && $this->use_filesystem ) {
 				$abs_path = $this->get_sanitized_path( $abs_path );
@@ -840,7 +843,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 				foreach ( $dirs as $dir ) {
 					$current_dir .= '/' . $dir;
-					if ( ! $this->is_dir( $current_dir ) ) {
+					// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+					if ( ! $this->is_dir( $current_dir ) && is_writable( $current_dir )) {
 						$this->wp_filesystem->mkdir( $current_dir, $perms );
 					}
 				}
