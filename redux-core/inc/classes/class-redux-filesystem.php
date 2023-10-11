@@ -540,6 +540,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $return && $this->use_filesystem ) {
 				$abs_path = $this->get_sanitized_path( $abs_path );
+
 				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable, WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 				$return = is_writable( $abs_path ) && $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
 			}
@@ -841,6 +842,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 				foreach ( $dirs as $dir ) {
 					$current_dir .= '/' . $dir;
+
 					// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable, WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 					if ( ! $this->is_dir( $current_dir ) && is_writable( $current_dir ) ) {
 						$this->wp_filesystem->mkdir( $current_dir, $perms );
@@ -937,9 +939,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			$ret = array();
 
-			$entry = $dir->read();
-
-			while ( false !== ( $entry ) ) {
+			while ( false !== ( $entry = $dir->read() ) ) {
 				$struc         = array();
 				$struc['name'] = $entry;
 
