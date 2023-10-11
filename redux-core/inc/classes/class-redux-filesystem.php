@@ -543,7 +543,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 			if ( ! $return && $this->use_filesystem ) {
 				$abs_path = $this->get_sanitized_path( $abs_path );
 				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
-				$return = is_writable($abs_path) && $this->wp_filesystem->put_contents($abs_path, $contents, $perms);
+				$return = is_writable( $abs_path ) && $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
 			}
 
 			return (bool) $return;
