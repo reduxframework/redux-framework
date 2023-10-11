@@ -418,18 +418,16 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $res ) {
 				if ( 'dirlist' === $action ) {
-					if ( empty( $res ) ) {
+					if ( empty( $res ) && is_array( $res ) ) {
 						return;
 					}
 
-					if ( ! is_array( $res ) ) {
-						if ( count( glob( "$file*" ) ) === 0 ) {
-							return;
-						}
+					if ( count( glob( "$file*" ) ) === 0 ) {
+						return;
 					}
 				}
 
-				$this->killswitch = true;
+				$this->wp_filesystem->killswitch = true;
 
 				// translators: %1$s: Upload URL.  %2$s: Codex URL.
 				$msg = '<strong>' . esc_html__( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( esc_html__( 'We were unable to modify required files. Please ensure that %1$s has the proper read-write permissions, or modify your wp-config.php file to contain your FTP login credentials as %2$s.', 'redux-framework' ), '<code>' . esc_url( Redux_Functions_Ex::wp_normalize_path( trailingslashit( WP_CONTENT_DIR ) ) ) . '/uploads/</code>', '<a href="https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants" target="_blank">' . esc_html__( 'outlined here', 'redux-framework' ) . '</a>' );
@@ -542,7 +540,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $return && $this->use_filesystem ) {
 				$abs_path = $this->get_sanitized_path( $abs_path );
-				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable, WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 				$return = is_writable( $abs_path ) && $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
 			}
 
@@ -806,7 +804,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 			}
 
 			try {
-				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable, WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 				$mkdirp = is_writable( $abs_path ) && wp_mkdir_p( $abs_path );
 			} catch ( Exception $e ) {
 				$mkdirp = false;
@@ -843,8 +841,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 				foreach ( $dirs as $dir ) {
 					$current_dir .= '/' . $dir;
-					// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
-					if ( ! $this->is_dir( $current_dir ) && is_writable( $current_dir )) {
+					// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable, WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
+					if ( ! $this->is_dir( $current_dir ) && is_writable( $current_dir ) ) {
 						$this->wp_filesystem->mkdir( $current_dir, $perms );
 					}
 				}
@@ -939,7 +937,9 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			$ret = array();
 
-			while ( false !== ( $entry = $dir->read() ) ) {
+			$entry = $dir->read();
+
+			while ( false !== ( $entry ) ) {
 				$struc         = array();
 				$struc['name'] = $entry;
 
