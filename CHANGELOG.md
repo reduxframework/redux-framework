@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.7.3
+* Modified: Additional safeguards against read-only filesystems. Thanks @cezarpopa-cognita.
+
 ## 4.4.7.2
 * Fixed: #3970 - Added `is_string` check to WordPress data callback argument.
 * Removed: Unused code for Support Ticket Submission feature that was never finished.
