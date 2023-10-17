@@ -1,18 +1,16 @@
 # Redux Changelog
 
-## 4.4.7.3
+## 4.4.8
 * Modified: Additional safeguards against read-only filesystems. Thanks @cezarpopa-cognita.
-
-## 4.4.7.2
 * Fixed: #3970 - Added `is_string` check to WordPress data callback argument.
 * Removed: Unused code for Support Ticket Submission feature that was never finished.
-
-## 4.4.7.1
 * Fixed: Removed extra spaces from `textarea`.
+* Release date: October 17, 2023
 
 ## 4.4.7
 * Removed: CDN vendor support for `ace_editor`. Devs won't update their code, leaving us no choice. Use the `redux/<opt_name>/fields/ace/script` filter to enqueue a local ACE Editor script if needed.
 * Fixed: Redux template PHP not autoloading.
+* Release date: September 14, 2023
 
 ## 4.4.6
 * New: Global arg `fontawesome_frontend` to enqueue the internal Font Awesome CSS on the front end.
@@ -23,7 +21,8 @@
 * Fixed: Adjusted translation for Google Font update message.
 * Fixed: Continuing effort to combat old CDN code because some devs aren't updating their code.
 * Fixed: REDUX_PLUGIN_FILE failed with embedded installed.  WE NO LONGER SUPPORT EMBEDDED. IT'S FOR LEGACY INSTALLS ONLY.
-
+* Release date: September 13, 2023
+* 
 ## 4.4.5
 * Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
 * Fixed: Output HTML in the admin panel now complies with W3C standards.

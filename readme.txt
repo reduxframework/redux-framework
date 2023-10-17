@@ -3,8 +3,8 @@ Contributors: kprovance, dovyp, redux
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts, metaboxes, settings
 Requires at least: 5.0
 Requires PHP: 7.1
-Tested up to: 6.3
-Stable tag: 4.4.7
+Tested up to: 6.4
+Stable tag: 4.4.8
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -116,9 +116,17 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.8 =
+* Modified: Additional safeguards against read-only filesystems. Thanks @cezarpopa-cognita.
+* Fixed: #3970 - Added `is_string` check to WordPress data callback argument.
+* Removed: Unused code for Support Ticket Submission feature that was never finished.
+* Fixed: Removed extra spaces from `textarea`.
+* Release date: October 17, 2023
+
 = 4.4.7 =
 * Removed: CDN vendor support for `ace_editor`. Devs won't update their code, leaving us no choice. Use the `redux/<opt_name>/fields/ace/script` filter to enqueue a local ACE Editor script if needed.
 * Fixed: Redux template PHP not autoloading.
+* Release date: September 14, 2023
 
 = 4.4.6 =
 * New: Global arg `fontawesome_frontend` to enqueue the internal Font Awesome CSS on the front end.
@@ -129,6 +137,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: Adjusted translation for Google Font update message.
 * Fixed: Continuing effort to combat old CDN code because some devs aren't updating their code.
 * Fixed: REDUX_PLUGIN_FILE failed with embedded installed.  WE NO LONGER SUPPORT EMBEDDED. IT'S FOR LEGACY INSTALLS ONLY.
+* Release date: September 13, 2023
 
 = 4.4.5 =
 * Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
