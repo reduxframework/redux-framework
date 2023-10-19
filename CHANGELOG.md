@@ -5,6 +5,7 @@
 * Fixed: #3970 - Added `is_string` check to WordPress data callback argument.
 * Removed: Unused code for Support Ticket Submission feature that was never finished.
 * Fixed: Removed extra spaces from `textarea`.
+* Added: WordPress 6.4 compatibility.
 * Release date: October 17, 2023
 
 ## 4.4.7
