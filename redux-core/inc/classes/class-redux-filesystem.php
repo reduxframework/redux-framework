@@ -418,12 +418,14 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $res ) {
 				if ( 'dirlist' === $action ) {
-					if ( empty( $res ) && is_array( $res ) ) {
+					if ( empty( $res ) ) {
 						return;
 					}
 
-					if ( count( glob( "$file*" ) ) === 0 ) {
-						return;
+					if ( ! is_array( $res ) ) {
+						if ( count( glob( "$file*" ) ) === 0 ) {
+							return;
+						}
 					}
 				}
 
