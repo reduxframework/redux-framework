@@ -1,6 +1,6 @@
 # Redux Changelog
 
-## 4.4.8.1
+## 4.4.8.2
 * Modified: Rollback changes made to the filesystem class. It's causing issues for some users that I cannot reproduce.
 
 ## 4.4.8
