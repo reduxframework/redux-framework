@@ -532,7 +532,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors
 			// @codingStandardsIgnoreStart
-			$return = @file_put_contents( $abs_path, $contents );
+			$return = is_writable( $abs_path ) ? @file_put_contents( $abs_path, $contents ) : false;
 			// @codingStandardsIgnoreEnd
 			$this->chmod( $abs_path );
 
@@ -542,7 +542,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			if ( ! $return && $this->use_filesystem ) {
 				$abs_path = $this->get_sanitized_path( $abs_path );
-				$return   = $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
+				// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
+				$return = is_writable( $abs_path ) && $this->wp_filesystem->put_contents( $abs_path, $contents, $perms );
 			}
 
 			return (bool) $return;
