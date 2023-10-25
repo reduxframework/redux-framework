@@ -1,7 +1,7 @@
 # Redux Changelog
 
-## 4.4.8.2
-* Modified: Rollback changes made to the filesystem class. It's causing issues for some users that I cannot reproduce.
+## 4.4.9
+* Modified: Rollback changes made to the filesystem class causing false file permission issue messages.
 
 ## 4.4.8
 * Modified: Additional safeguards against read-only filesystems. Thanks @cezarpopa-cognita.
