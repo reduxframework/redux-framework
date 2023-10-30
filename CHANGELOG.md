@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.9.1
+* Modified: Additional rollback changes made to the filesystem class causing false file permission issue messages.
+
 ## 4.4.9
 * Modified: Rollback changes made to the filesystem class causing false file permission issue messages.
 
