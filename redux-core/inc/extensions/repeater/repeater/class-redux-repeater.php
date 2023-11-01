@@ -56,6 +56,8 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 		 * @return      void
 		 */
 		public function render() {
+			$unallowed = array( 'tabbed', 'social_profiles', 'color_scheme', 'repeater' );
+
 			if ( isset( $this->field['group_values'] ) && $this->field['group_values'] ) {
 				$this->repeater_values = '[' . $this->field['id'] . ']';
 			}
@@ -156,7 +158,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 							$field['class'] .= ' bind_title';
 						}
 
-						if ( 'repeater' === $field['type'] || 'social_profiles' === $field['type'] || 'color_scheme' === $field['type'] ) {
+						if ( in_array( $field['type'], $unallowed, true ) ) {
 							echo esc_html__( 'The', 'redux-framework' ) . ' <code>' . esc_html( $field['type'] ) . '</code> ' . esc_html__( 'field is not supported within the Repeater field.', 'redux-framework' );
 						} else {
 							$this->output_field( $field, $x );

@@ -1,0 +1,72 @@
+.redux-container-tabbed {
+    .redux-tabbed-content {
+        border: 1px solid #ccd0d4;
+        background-color: #fff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .redux-tabbed-content > .redux-tab-field {
+        padding: 15px;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .redux-tabbed-nav .redux-tab-icon {
+        padding-right: 5px;
+    }
+
+    .redux-tabbed-nav a {
+        display: inline-block;
+        padding: 12px 15px;
+        margin-top: 1px;
+        margin-right: 5px;
+        margin-bottom: -1px;
+        position: relative;
+        text-decoration: none;
+        color: #444;
+        font-weight: 600;
+        border: 1px solid #ccd0d4;
+        background-color: #f3f3f3;
+        transition: all .2s;
+    }
+
+    .redux-tabbed-nav a:hover {
+        background-color: #f9f9f9;
+    }
+
+    .redux-tabbed-nav a.redux-tabbed-active {
+        background-color: #fff;
+        border-bottom-color: #fff;
+    }
+
+    .redux-tabbed-nav a:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .redux-tab-field + .redux-tab-field {
+        border-top: 1px solid #eee;
+    }
+
+    .redux-field-title {
+        position: relative;
+        width: 20%;
+        float: left;
+
+        h4 {
+            margin-bottom: 0;
+        }
+    }
+
+    .redux-field-subtitle {
+        margin-top: 6px;
+        font-weight: 400;
+        color: #999;
+    }
+
+    .description {
+        color: #999;
+    }
+}

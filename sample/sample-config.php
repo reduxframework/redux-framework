@@ -231,12 +231,6 @@ $args['admin_bar_links'][] = array(
 	'title' => __( 'Support', 'your-textdomain-here' ),
 );
 
-$args['admin_bar_links'][] = array(
-	'id'    => 'redux-extensions',
-	'href'  => 'redux.io/extensions',
-	'title' => __( 'Extensions', 'your-textdomain-here' ),
-);
-
 // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
 // PLEASE CHANGE THESE SETTINGS IN YOUR THEME BEFORE RELEASING YOUR PRODUCT!!
 // If these are left unchanged, they will not display in your panel!
@@ -530,6 +524,7 @@ require_once Redux_Core::$dir . '../sample/sections/extensions/repeater.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/search.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/shortcodes.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/social-profiles.php';
+require_once Redux_Core::$dir . '../sample/sections/extensions/tabbed.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/widget-areas.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/taxonomy.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/users.php';

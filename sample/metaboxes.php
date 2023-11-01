@@ -123,7 +123,7 @@ Redux_Metaboxes::set_box(
 					array(
 						'id'       => 'opt-color',
 						'type'     => 'color',
-						'title'    => __( 'Color Field', 'your-textdomain-here' ),
+						'title'    => esc_html__( 'Color Field', 'your-textdomain-here' ),
 						'default'  => '#333333',
 						'required' => array( 'opt-layout', '=', 'on' ),
 					),
