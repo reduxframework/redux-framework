@@ -19,9 +19,9 @@ Thank you for your kind attention in this matter.
 ## NEW: Tabbed Extension ##
 
 ![redux-tabbed](https://github.com/reduxframework/redux-framework/assets/3412363/fd75fb5c-0248-4a50-bfbe-8db2bca2db92)
-* Tabbed config is includes in the sample config.
-* Please do not use this code in your production releases yet. Internal beta testing for your organization fine and encouraged.
-* For the month of November, we're beeta testing the new `tabbed` extension. If you're a theme author and discover and issue, please post it to our [issue tracker](https://github.com/reduxframework/redux-framework/issues) making sure to include a detailed description of your issue and a copy of your theme's options config for us to review. In fact, please read the instructions we provided within the issue tracker posting form and provide the required data.
+* Tabbed config is included in the sample config.
+* Please do not use this code in your production releases yet. Internal beta testing for your organization is fine and encouraged.
+* For the month of November, we're beta testing the new `tabbed` extension. If you're a theme author and discover an issue, please post it to our [issue tracker](https://github.com/reduxframework/redux-framework/issues), making sure to include a detailed description of your issue and a copy of your theme's options config for us to review. In fact, please read the instructions we provided within the issue tracker posting form and provide the required data.
 
 ## New to Version 4.4 ##
 * TABBED Extension.
