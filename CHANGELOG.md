@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.9.2
+* New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
+
 ## 4.4.9.1
 * Modified: Additional rollback changes made to the filesystem class causing false file permission issue messages.
 
