@@ -16,6 +16,8 @@ The `ace_editor` field will use that URL to enqueue the ACE library.
 
 Thank you for your kind attention in this matter.
 
+## NEW: TABBED EXTENSION ##
+
 ## New to Version 4.4 ##
 * TAXONOMY METABOXES!
 * USER PROFILE METABOXES!
