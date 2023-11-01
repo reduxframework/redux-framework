@@ -18,6 +18,8 @@ Thank you for your kind attention in this matter.
 
 ## NEW: TABBED EXTENSION ##
 
+![redux-tabbed](https://github.com/reduxframework/redux-framework/assets/3412363/fd75fb5c-0248-4a50-bfbe-8db2bca2db92)
+
 ## New to Version 4.4 ##
 * TAXONOMY METABOXES!
 * USER PROFILE METABOXES!
