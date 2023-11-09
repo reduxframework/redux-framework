@@ -67,8 +67,7 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 					data-theme="<?php echo esc_attr( $this->field['theme'] ); ?>"><?php echo esc_textarea( $this->value ); ?></textarea>
 				<pre
 					id="<?php echo esc_attr( $this->field['id'] ); ?>-editor"
-					class="ace-editor-area"><?php echo esc_html( $this->value ); ?>
-				</pre>
+					class="ace-editor-area"><?php echo esc_html( $this->value ); ?></pre>
 			</div>
 			<?php
 		}
