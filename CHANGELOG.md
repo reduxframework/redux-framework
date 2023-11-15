@@ -4,6 +4,7 @@
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
 * Fixed: Errant spaces in ACE Editor field.
 * Fixed: Array check in color validation to avoid errors. It works ONLY with the color field. Nothing else.
+* Improved: Filesystem killswitch logic.
 
 ## 4.4.9.1
 * Modified: Additional rollback changes made to the filesystem class causing false file permission issue messages.
