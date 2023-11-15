@@ -83,6 +83,14 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		public $cache_folder;
 
 		/**
+		 * Kill switch.
+		 *
+		 * @var bool
+		 */
+		public $killswitch = false;
+
+
+		/**
 		 * Pass `true` when instantiating to skip using WP_Filesystem.
 		 *
 		 * @param bool $force_no_fs Force no use of the filesystem.
@@ -359,9 +367,9 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$res = $this->mkdir( $file, $chmod );
 			} elseif ( 'rmdir' === $action ) {
 				$res = $this->rmdir( $file, $recursive );
-			} elseif ( 'copy' === $action && ! isset( $this->wp_filesystem->killswitch ) ) {
+			} elseif ( 'copy' === $action && false === $this->killswitch ) {
 				$res = $this->copy( $file, $destination, $overwrite, $chmod );
-			} elseif ( 'move' === $action && ! isset( $this->wp_filesystem->killswitch ) ) {
+			} elseif ( 'move' === $action && false === $this->killswitch ) {
 				$res = $this->move( $file, $destination, $overwrite );
 			} elseif ( 'delete' === $action ) {
 				if ( $this->is_dir( $file ) ) {
@@ -374,7 +382,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 					$include_hidden = true;
 				}
 				$res = $this->scandir( $file, $include_hidden, $recursive );
-			} elseif ( 'put_contents' === $action && ! isset( $this->wp_filesystem->killswitch ) ) {
+			} elseif ( 'put_contents' === $action && false === $this->killswitch ) {
 				// Write a string to a file.
 				if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
 					self::load_direct();
@@ -429,7 +437,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 					}
 				}
 
-				$this->wp_filesystem->killswitch = true;
+				$this->killswitch = true;
 
 				// translators: %1$s: Upload URL.  %2$s: Codex URL.
 				$msg = '<strong>' . esc_html__( 'File Permission Issues', 'redux-framework' ) . '</strong><br/>' . sprintf( esc_html__( 'We were unable to modify required files. Please ensure that %1$s has the proper read-write permissions, or modify your wp-config.php file to contain your FTP login credentials as %2$s.', 'redux-framework' ), '<code>' . esc_url( Redux_Functions_Ex::wp_normalize_path( trailingslashit( WP_CONTENT_DIR ) ) ) . '/uploads/</code>', '<a href="https://codex.wordpress.org/Editing_wp-config.php#WordPress_Upgrade_Constants" target="_blank">' . esc_html__( 'outlined here', 'redux-framework' ) . '</a>' );
