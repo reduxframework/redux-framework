@@ -492,6 +492,16 @@
 		return retVal;
 	};
 
+	redux.field_objects.typography.hexToInt = function ( hexColor ) {
+		// Remove the '#' if present.
+		if ( hexColor.indexOf( '#' ) === 0 ) {
+			hexColor = hexColor.slice( 1 );
+		}
+		// Convert hex to integer.
+		return parseInt( hexColor, 16 );
+	};
+
+
 	// Sync up font options.
 	redux.field_objects.typography.select = function( selector, skipCheck, destroy, fontName, active ) {
 		var mainID;
@@ -928,6 +938,19 @@
 
 			if ( color ) {
 				that.find( '.typography-preview' ).css( 'color', color );
+
+				// Convert the color and range values to integers.
+				var colorInt     = redux.field_objects.typography.hexToInt( color );
+				var whiteInt     = redux.field_objects.typography.hexToInt( 'ffffff' );
+				var lightGreyInt = redux.field_objects.typography.hexToInt( 'dddddd' );
+
+				// Check if the color is within the specified range.
+				if (colorInt >= lightGreyInt && colorInt <= whiteInt) {
+					that.find( '.typography-preview' ).css( 'background-color', 'black' );
+				} else {
+					// Optionally reset the background color if the text color is not within the range.
+					that.find( '.typography-preview' ).css( 'background-color', '' ); // Or set to a default color.
+				}
 			}
 
 			if ( ! proLoaded ) {
