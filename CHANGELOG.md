@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.9.3
+* Modified: Typography preview background will shift to black when lighter font colors are selected. Thanks, @herculesdesign
+
 ## 4.4.9.2
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
 * Fixed: Errant spaces in ACE Editor field.
