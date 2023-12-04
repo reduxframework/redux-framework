@@ -1,16 +1,12 @@
 # Redux Changelog
 
-## 4.4.9.3
-* Modified: Typography preview background will shift to black when lighter font colors are selected. Thanks, @herculesdesign
-
-## 4.4.9.2
+## 4.4.10
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
+* Modified: Typography preview background will shift to black when lighter font colors are selected. Thanks, @herculesdesign
+* Modified: Additional rollback changes made to the filesystem class causing false file permission issue messages.
 * Fixed: Errant spaces in ACE Editor field.
 * Fixed: Array check in color validation to avoid errors. It works ONLY with the color field. Nothing else.
 * Improved: Filesystem killswitch logic.
-
-## 4.4.9.1
-* Modified: Additional rollback changes made to the filesystem class causing false file permission issue messages.
 
 ## 4.4.9
 * Modified: Rollback changes made to the filesystem class causing false file permission issue messages.
