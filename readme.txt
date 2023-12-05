@@ -66,9 +66,12 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <li>Spacing (Margin/Padding/Absolute)</li>
 <li>Spinner</li>
 <li>Switch</li>
+<li>Tabbed</li>
+<li>Taxonomy Metaboxes</li>
 <li>Text</li>
 <li>Textarea</li>
 <li>Typography</li>
+<li>User Profile Metaboxes</li>
  * The most advanced typography module complete with preview, Google fonts, and auto-css output!
 <li>User Profile Metaboxes</li>
 <li>Widget Areas (Classic Widgets only)</li>
