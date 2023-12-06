@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.2';
+		public static $version = '4.4.11';
 
 		/**
 		 * Set the name of the field.  Ideally, this will also be your extension's name.

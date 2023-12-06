@@ -19,8 +19,13 @@
             }
         }
     }
+
     .redux-section.open .redux-group-tab {
         display: block !important;
+
+        &.hide {
+            display:none!important;
+        }
     }
 
     .redux-section {
