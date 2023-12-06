@@ -1,6 +1,7 @@
 # Redux Changelog
 
 ## 4.4.10.1
+* Fixed: Required not hiding linked fields in customizer.
 * Updated: Font Awesome 6.5.1
 
 ## 4.4.10
