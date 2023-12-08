@@ -829,6 +829,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				return true;
 			}
 
+			$return = true;
+
 			if ( $this->is_writable( dirname( $abs_path ) ) ) {
 				// phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions, WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_is_writable
 				$return = @mkdir( $abs_path, $perms, true );
