@@ -3,6 +3,7 @@
 ## 4.4.10.1
 * Fixed: Required not hiding linked fields in customizer.
 * Updated: Font Awesome 6.5.1
+* Fixed: #3983 - Continued damage done by WP Filesystem PR
 
 ## 4.4.10
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
