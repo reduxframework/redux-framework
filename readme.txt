@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.4
-Stable tag: 4.4.10
+Stable tag: 4.4.11
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -119,6 +119,12 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.11 =
+* Fixed: Cosmetic `box_shadow` fix.
+* Fixed: Required not hiding linked fields in customizer.
+* Fixed: Continued damage done by WP Filesystem PR
+* Updated: Font Awesome 6.5.1
+
 = 4.4.10 =
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
 * Modified: Typography preview background will shift to black when lighter font colors are selected. Thanks, @herculesdesign

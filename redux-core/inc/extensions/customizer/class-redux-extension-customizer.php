@@ -5,7 +5,7 @@
  *
  * @package ReduxFramework/Extentions
  * @class Redux_Extension_Customizer
- * @version 4.4.2
+ * @version 4.4.11
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
 

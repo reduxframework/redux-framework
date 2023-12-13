@@ -1,6 +1,7 @@
 # Redux Changelog
 
-## 4.4.10.1
+## 4.4.11
+* Fixed: Cosmetic `box_shadow` fix.
 * Fixed: Required not hiding linked fields in customizer.
 * Updated: Font Awesome 6.5.1
 * Fixed: #3983 - Continued damage done by WP Filesystem PR

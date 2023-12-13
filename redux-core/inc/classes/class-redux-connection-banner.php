@@ -367,7 +367,7 @@ if ( ! class_exists( 'Redux_Connection_Banner', false ) ) {
 									?>
 								</p>
 								<div class="redux-banner-button-container">
-									<span class="redux-banner-tos-blurb"><?php // echo self::tos_blurb( 'plugin_dashboard' ); ?></span>
+									<span class="redux-banner-tos-blurb"></span>
 									<a href="<?php echo esc_url( $urls['register'] ); ?>" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-activate="main_banner"
 									   class="button button-primary button-large redux-alt-connect-button redux-connection-banner-action">
 										<?php esc_html_e( 'Install and Activate Extendify', 'redux-framework' ); ?>

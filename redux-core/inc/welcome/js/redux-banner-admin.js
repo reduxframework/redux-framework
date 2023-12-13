@@ -1,10 +1,10 @@
 /* global console:true, ajaxurl */
 
-(function( $ ) {
+(function ( $ ) {
 	$.redux_banner = $.redux_banner || {};
 
 	$( document ).ready(
-		function() {
+		function () {
 			var post_data = {
 				'action': 'redux_activation',
 				'nonce': $( '#redux-connect-message' ).data( 'nonce' )
@@ -12,7 +12,7 @@
 
 			$( '.redux-connection-banner-action' ).on(
 				'click',
-				function( e ) {
+				function ( e ) {
 					var status = $( '.redux-banner-tos-blurb' );
 
 					$( this ).addClass( 'disabled' );
@@ -26,7 +26,7 @@
 					$.post(
 						$( this ).data( 'url' ),
 						post_data,
-						function( response ) {
+						function ( response ) {
 							var point = response.indexOf( '{"type":' )
 
 							if ( point > 0 ) {
