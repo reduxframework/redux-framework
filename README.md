@@ -57,7 +57,7 @@ Thank you for your kind attention in this matter.
 [Redux Slack](https://join.slack.com/t/redux/shared_invite/zt-1op7uw3up-kXgZp4Y93TeCSmq_LALl~Q)
 
 ## Follow us on Social Media! ##
-[![Follow us on Twitter](https://www.download82.com/images/produse/iconuri/twitter-for-android.png "Follow us on Twitter")](https://www.twitter.com/ReduxFramework)
+[![Follow us on X](https://abs.twimg.com/favicons/twitter.3.ico "Follow us on Twitter")](https://www.twitter.com/ReduxFramework)
 [![Like us on Facebook](https://addons.thunderbird.net/user-media/addon_icons/79/79494-64.png "Like us on Facebook")](https://www.facebook.com/ReduxFramework/)
 
 ## Changelog ##
