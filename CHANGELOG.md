@@ -3,8 +3,9 @@
 ## 4.4.11
 * Fixed: Cosmetic `box_shadow` fix.
 * Fixed: Required not hiding linked fields in customizer.
-* Updated: Font Awesome 6.5.1
+* Fixed: `tabbed` and `repeater` fields not resetting when using Section Reset.
 * Fixed: #3983 - Continued damage done by WP Filesystem PR
+* Updated: Font Awesome 6.5.1
 
 ## 4.4.10
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
