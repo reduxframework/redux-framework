@@ -840,10 +840,36 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 					}
 
 					foreach ( $core->sections[ $plugin_options['redux-section'] ]['fields'] as $field ) {
-						if ( isset( $core->options_defaults[ $field['id'] ] ) ) {
-							$plugin_options[ $field['id'] ] = $core->options_defaults[ $field['id'] ];
+						if ( 'tabbed' === $field['type'] ) {
+							if ( ! empty( $field['tabs'] ) ) {
+								foreach ( $field['tabs'] as $val ) {
+									if ( ! empty( $val['fields'] ) ) {
+										foreach ( $val['fields'] as $f ) {
+											if ( isset( $core->options_defaults[ $f['id'] ] ) ) {
+												$plugin_options[ $f['id'] ] = $core->options_defaults[ $f['id'] ];
+											} else {
+												$plugin_options[ $f['id'] ] = '';
+											}
+										}
+									}
+								}
+							}
+						} elseif ( 'repeater' === $field['type'] ) {
+							if ( ! empty( $field['fields'] ) ) {
+								foreach ( $field['fields'] as $f ) {
+									if ( isset( $core->options_defaults[ $f['id'] ] ) ) {
+										$plugin_options[ $f['id'] ] = $core->options_defaults[ $f['id'] ];
+									} else {
+										$plugin_options[ $f['id'] ] = '';
+									}
+								}
+							}
 						} else {
-							$plugin_options[ $field['id'] ] = '';
+							if ( isset( $core->options_defaults[ $field['id'] ] ) ) {
+								$plugin_options[ $field['id'] ] = $core->options_defaults[ $field['id'] ];
+							} else {
+								$plugin_options[ $field['id'] ] = '';
+							}
 						}
 
 						if ( isset( $field['compiler'] ) ) {
@@ -862,6 +888,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 				}
 
 				$core->transients['changed_values'] = array();
+
 				foreach ( $core->options as $key => $value ) {
 					if ( isset( $plugin_options[ $key ] ) && $plugin_options[ $key ] !== $value ) {
 						$core->transients['changed_values'][ $key ] = $value;
