@@ -10,7 +10,7 @@
  * Date                : 07.07.2021
  */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var isFiltered;
@@ -18,13 +18,13 @@
 	redux.field_objects       = redux.field_objects || {};
 	redux.field_objects.media = redux.field_objects.media || {};
 
-	redux.field_objects.media.init = function( selector ) {
+	redux.field_objects.media.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-media:visible' );
 		}
 
 		$( selector ).each(
-			function() {
+			function () {
 				var el     = $( this );
 				var parent = el;
 
@@ -42,7 +42,7 @@
 					return;
 				}
 
-				if ( undefined === redux.field_objects.pro && undefined !== redux.field_objects.image_filters ) {
+				if ( undefined !== redux.field_objects.image_filters) {
 					redux.field_objects.image_filters.sliderInit( el, 'media' );
 					redux.field_objects.image_filters.checkbox( el, 'media' );
 				}
@@ -52,7 +52,7 @@
 				// Remove the image button.
 				el.find( '.remove-image, .remove-file' ).off( 'click' ).on(
 					'click',
-					function() {
+					function () {
 						redux.field_objects.media.removeFile( $( this ).parents( 'fieldset.redux-field:first' ) );
 					}
 				);
@@ -60,7 +60,7 @@
 				// Upload media button.
 				el.find( '.media_upload_button' ).off().on(
 					'click',
-					function( event ) {
+					function ( event ) {
 						redux.field_objects.media.addFile( event, $( this ).parents( 'fieldset.redux-field:first' ) );
 					}
 				);
@@ -69,7 +69,7 @@
 	};
 
 	// Add a file via the wp.media function.
-	redux.field_objects.media.addFile = function( event, selector ) {
+	redux.field_objects.media.addFile = function ( event, selector ) {
 		var frame;
 		var libFilter;
 		var filter;
@@ -102,7 +102,7 @@
 
 				$.each(
 					filter,
-					function( index, value ) {
+					function ( index, value ) {
 						index = null;
 						libFilter.push( value );
 					}
@@ -133,7 +133,7 @@
 		// When an image is selected, run a callback.
 		frame.on(
 			'select',
-			function() {
+			function () {
 
 				// Grab the selected attachment.
 				var attachment = frame.state().get( 'selection' ).first();
@@ -211,7 +211,7 @@
 	};
 
 	// Function to remove the image on click. Still requires a save.
-	redux.field_objects.media.removeFile = function( selector ) {
+	redux.field_objects.media.removeFile = function ( selector ) {
 		var screenshot;
 
 		// This shouldn't have been run...
