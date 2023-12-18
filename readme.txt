@@ -126,7 +126,6 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: #3983 - Continued damage done by WP Filesystem PR
 * Updated: Font Awesome 6.5.1
 
-
 = 4.4.10 =
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
 * Modified: Typography preview background will shift to black when lighter font colors are selected. Thanks, @herculesdesign
