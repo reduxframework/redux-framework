@@ -389,16 +389,18 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 				'redux-field-icon-select',
 				$this->url . 'redux-icon-select' . $min . '.js',
 				array( 'jquery', 'redux-js', 'wp-util' ),
-				Redux_Core::$version,
+				Redux_Extension_Icon_Select::$version,
 				true
 			);
 
-			wp_enqueue_style(
-				'redux-field-icon-select',
-				$this->url . 'redux-icon-select.css',
-				array(),
-				Redux_Core::$version
-			);
+			if ( $this->parent->args['dev_mode'] ) {
+				wp_enqueue_style(
+					'redux-field-icon-select',
+					$this->url . 'redux-icon-select.css',
+					array(),
+					Redux_Extension_Icon_Select::$version
+				);
+			}
 		}
 
 		/**

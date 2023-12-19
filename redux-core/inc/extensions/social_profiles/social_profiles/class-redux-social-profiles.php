@@ -329,7 +329,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 				'redux-field-social-profiles',
 				$this->url . 'redux-social-profiles' . $min . '.js',
 				array( 'jquery', 'jquery-ui-sortable', 'redux-spectrum-js', 'redux-js' ),
-				time(),
+				Redux_Extension_Social_Profiles::$version,
 				true
 			);
 
@@ -344,7 +344,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 					'redux-field-social-profiles',
 					$this->url . 'redux-social-profiles.css',
 					array( 'redux-spectrum-css' ),
-					time()
+					Redux_Extension_Social_Profiles::$version
 				);
 			}
 		}

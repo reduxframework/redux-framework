@@ -199,7 +199,7 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 				'redux-field-tabbed',
 				Redux_Core::$url . 'inc/extensions/tabbed/tabbed/redux-tabbed' . Redux_Functions::is_min() . '.js',
 				array( 'jquery', 'redux-js' ),
-				'4.4.7.1', //$this->timestamp,
+				Redux_Extension_Tabbed::$version,
 				true
 			);
 
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 					'redux-field-tabbed',
 					Redux_Core::$url . 'inc/extensions/tabbed/tabbed/redux-tabbed.css',
 					array(),
-					$this->timestamp
+					Redux_Extension_Tabbed::$version
 				);
 			}
 		}

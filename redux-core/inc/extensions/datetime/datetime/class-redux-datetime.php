@@ -267,7 +267,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 					'redux-field-datetime',
 					$this->url . 'redux-datetime.css',
 					array(),
-					time()
+					Redux_Extension_Datetime::$version,
 				);
 			}
 		}
