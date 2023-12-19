@@ -460,9 +460,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @since      3.1.7
 		 */
 		public static function cleanFilePath( string $path ): string { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// TODO: Uncomment this after Redux Pro is discontinued.
 			// phpcs:ignore Squiz.PHP.CommentedOutCode
-			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Functions_Ex::wp_normalize_path( $path )' );
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Functions_Ex::wp_normalize_path( $path )' );
 			return Redux_Functions_Ex::wp_normalize_path( $path );
 		}
 

@@ -74,7 +74,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 			// Make sanitized upload dir URL.
 			self::$upload_url = Redux_Functions_Ex::wp_normalize_path( Redux_Core::$upload_url . 'social-profiles/' );
 
-			Redux_Functions::initWpFilesystem();
+			Redux_Functions::init_wp_filesystem();
 		}
 
 		/**
