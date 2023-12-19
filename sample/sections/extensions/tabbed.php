@@ -26,7 +26,7 @@ Redux::set_section(
 						'icon'   => 'fas fa-gear',
 						'fields' => array(
 							array(
-								'id'       => 'opt-tab-checkbox',
+								'id'       => 'opt-tab-checkbox-1',
 								'type'     => 'checkbox',
 								'title'    => esc_html__( 'Checkbox', 'your-textdomain-here' ),
 								'subtitle' => esc_html__( 'Basic Checkbox field.', 'your-textdomain-here' ),
