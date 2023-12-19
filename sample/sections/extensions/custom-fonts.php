@@ -1,10 +1,10 @@
 <?php
 /**
- * Redux Pro Custom Fonts Sample config.
+ * Redux Custom Fonts Sample config.
  *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;

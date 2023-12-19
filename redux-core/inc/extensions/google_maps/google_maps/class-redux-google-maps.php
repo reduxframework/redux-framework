@@ -2,7 +2,7 @@
 /**
  * Redux Google Maps Field Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Google_Maps
  */
@@ -371,14 +371,14 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 			}
 
 			wp_register_script(
-				'redux-field-google_maps',
+				'redux-field-google-maps',
 				$this->url . 'redux-google-maps' . $min . '.js',
 				array( 'jquery', 'redux-js' ),
 				Redux_Extension_Google_Maps::$version,
 				true
 			);
 
-			if ( ! wp_script_is( 'redux-field-google_maps' ) ) {
+			if ( ! wp_script_is( 'redux-field-google-maps' ) ) {
 				$script = '(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
 					key:"' . $api_key . '",
 					v:"' . $this->field['map_version'] . '",
@@ -386,17 +386,17 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					callback:"initMap"
 				});';
 
-				wp_add_inline_script( 'redux-field-google_maps', $script );
+				wp_add_inline_script( 'redux-field-google-maps', $script );
 			}
 
-			wp_enqueue_script( 'redux-field-google_maps' );
+			wp_enqueue_script( 'redux-field-google-maps' );
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-google_maps',
+					'redux-field-google-maps',
 					$this->url . 'redux-google-maps.css',
 					array(),
-					time()
+					Redux_Extension_Google_Maps::$version
 				);
 			}
 		}

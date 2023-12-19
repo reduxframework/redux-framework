@@ -1,10 +1,10 @@
 <?php
 /**
- * Redux Pro Multi-Media Sample config.
+ * Redux Multi-Media Sample config.
  *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;

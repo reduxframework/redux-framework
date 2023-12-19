@@ -1,10 +1,10 @@
 <?php
 /**
- * Redux Pro Date/Time Picker Sample config.
+ * Redux Date/Time Picker Sample config.
  *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;

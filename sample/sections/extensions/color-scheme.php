@@ -1,10 +1,10 @@
 <?php
 /**
- * Redux Pro Color Scheme Sample config.
+ * Redux Color Scheme Sample config.
  *
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -21,7 +21,7 @@ Redux::set_section(
 				'type'     => 'color_scheme',
 				'title'    => esc_html__( 'Color Schemes', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Save and load color schemes', 'your-textdomain-here' ),
-				'desc'     => esc_html__( 'If you\'re using the theme 2014, you will be able to see many changes on the current site.', 'your-textdomain-here' ),
+				'desc'     => esc_html__( 'If you\'re using the theme 2023, you will be able to see many changes on the current site.', 'your-textdomain-here' ),
 				'output'   => true,
 				'compiler' => true,
 				'simple'   => false,
@@ -58,8 +58,8 @@ Redux::set_section(
 						'color'     => '#980000',
 						'alpha'     => 1,
 						'selector'  => array(
-							'background-color' => '.site-header-main',
-							'color'            => '.tester',
+							'background' => '.site-header-main,header',
+							'color'      => '.tester',
 						),
 						'mode'      => 'background-color',
 						'important' => true,
@@ -70,7 +70,7 @@ Redux::set_section(
 						'title'     => 'site header border',
 						'color'     => '#ff0000',
 						'alpha'     => 1,
-						'selector'  => '.site-header',
+						'selector'  => '.site-header,header',
 						'mode'      => 'border-color',
 						'important' => true,
 						'group'     => esc_html__( 'Header', 'your-textdomain-here' ),
@@ -80,7 +80,7 @@ Redux::set_section(
 						'title'     => 'home link',     // Display text.
 						'color'     => '#fdfdfd',       // Default colour.
 						'alpha'     => 1,               // Default alpha.
-						'selector'  => '.home-link',    // CSS selector.
+						'selector'  => '.home-link,.wp-block-site-title a',    // CSS selector.
 						'mode'      => 'color',         // CSS mode.
 						'important' => true,            // CSS important.
 						'group'     => esc_html__( 'Header', 'your-textdomain-here' ),
@@ -90,7 +90,7 @@ Redux::set_section(
 						'title'     => 'site description',
 						'color'     => '#ededed',
 						'alpha'     => 1,
-						'selector'  => 'h2.site-description',
+						'selector'  => 'h2.site-description,.wp-block-site-tagline',
 						'mode'      => 'color',
 						'important' => true,
 						'group'     => esc_html__( 'Header', 'your-textdomain-here' ),
@@ -100,7 +100,7 @@ Redux::set_section(
 						'title'    => 'navbar',
 						'color'    => '#e06666',
 						'alpha'    => 1,
-						'selector' => '.navbar',
+						'selector' => '.navbar,.wp-block-navigation',
 						'mode'     => 'background-color',
 						'group'    => esc_html__( 'Header', 'your-textdomain-here' ),
 
@@ -110,7 +110,7 @@ Redux::set_section(
 						'title'    => 'body text',
 						'color'    => '#000000',
 						'alpha'    => 1,
-						'selector' => esc_html__( 'Body', 'your-textdomain-here' ),
+						'selector' => 'body p',
 						'mode'     => 'color',
 						'group'    => esc_html__( 'Body', 'your-textdomain-here' ),
 					),
@@ -203,7 +203,7 @@ Redux::set_section(
 						'title'    => 'site footer',
 						'color'    => '#ededed',
 						'alpha'    => 1,
-						'selector' => '.site-footer',
+						'selector' => '.site-footer,footer',
 						'mode'     => 'background-color',
 						'group'    => '',
 					),
@@ -212,7 +212,7 @@ Redux::set_section(
 						'title'    => 'site footer text',
 						'color'    => '#000000',
 						'alpha'    => 1,
-						'selector' => '.site-footer a',
+						'selector' => '.site-footer a, footer a',
 						'group'    => '',
 					),
 				),

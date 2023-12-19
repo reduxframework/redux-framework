@@ -2,7 +2,7 @@
 /**
  * Redux Custom Font Field Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com> & Dovy Paukstys <dovy@reduxframework.com>
  * @class   Redux_Custom_Fonts
  */
@@ -152,18 +152,16 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 		public function enqueue() {
 			$min = Redux_Functions::isMin();
 
-			wp_enqueue_script( 'redux-block-ui' );
-
 			wp_enqueue_script(
-				'redux-field-custom_fonts',
+				'redux-field-custom-fonts',
 				$this->url . '/redux-custom-fonts' . $min . '.js',
 				array( 'jquery', 'redux-block-ui' ),
-				Redux_Core::$version,
+				Redux_Extension_Custom_Fonts::$version,
 				true
 			);
 
 			wp_localize_script(
-				'redux-field-custom_fonts',
+				'redux-field-custom-fonts',
 				'redux_custom_fonts_l10',
 				apply_filters(
 					'redux_custom_fonts_localized_data',
@@ -180,12 +178,14 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 				)
 			);
 
-			wp_enqueue_style(
-				'redux-field-custom_fonts',
-				$this->url . 'redux-custom-fonts.css',
-				array(),
-				time()
-			);
+			if ( $this->parent->args['dev_mode'] ) {
+				wp_enqueue_style(
+					'redux-field-custom-fonts',
+					$this->url . 'redux-custom-fonts.css',
+					array(),
+					Redux_Extension_Custom_Fonts::$version
+				);
+			}
 
 			$class = Redux_Extension_Custom_Fonts::$instance;
 
@@ -195,7 +195,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 						'redux-custom_fonts',
 						$class->upload_url . 'fonts.css',
 						array(),
-						time()
+						Redux_Core::$version
 					);
 				}
 			}

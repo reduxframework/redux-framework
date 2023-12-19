@@ -1,9 +1,9 @@
 <?php
 /**
- * Redux Pro Google Maps Sample config.
+ * Redux Google Maps Sample config.
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;

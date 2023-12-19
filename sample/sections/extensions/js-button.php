@@ -1,9 +1,9 @@
 <?php
 /**
- * Redux Pro JS Button Sample config.
+ * Redux JS Button Sample config.
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;

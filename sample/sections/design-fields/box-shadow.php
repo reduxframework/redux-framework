@@ -1,9 +1,9 @@
 <?php
 /**
- * Redux Pro Box Shadow Sample config.
+ * Redux Box Shadow Sample config.
  * For full documentation, please visit: http:https://devs.redux.io/
  *
- * @package Redux Pro
+ * @package Redux
  */
 
 defined( 'ABSPATH' ) || exit;

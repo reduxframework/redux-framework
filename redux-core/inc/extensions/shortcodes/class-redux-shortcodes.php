@@ -2,7 +2,7 @@
 /**
  * Redux Shortcodes Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Dovy Paukstys (dovy) & Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Shortcodes
  */

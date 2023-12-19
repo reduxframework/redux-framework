@@ -2,7 +2,7 @@
 /**
  * Redux Taxonomy Meta Extension Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Taxonomy
  * @version 4.4.6
@@ -545,7 +545,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					 */
 					if ( true === $this->parent->args['dev_mode'] ) {
 						wp_enqueue_style(
-							'redux-extension-taxonomy-css',
+							'redux-extension-taxonomy',
 							// phpcs:ignore WordPress.NamingConventions.ValidHookName
 							apply_filters( "redux/taxonomy/{$this->parent->args['opt_name']}/enqueue/redux-extension-taxonomy-css", $this->extension_url . 'redux-extension-taxonomy.css' ),
 							array( 'redux-admin-css' ),
@@ -558,7 +558,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					 * filter 'redux/page/{opt_name}/enqueue/redux-extension-taxonomy-js
 					 */
 					wp_enqueue_script(
-						'redux-extension-taxonomy-js',
+						'redux-extension-taxonomy',
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
 						apply_filters( "redux/taxonomy/{$this->parent->args['opt_name']}/enqueue/redux-extension-taxonomy-js", $this->extension_url . 'redux-extension-taxonomy' . Redux_Functions::is_min() . '.js' ),
 						array( 'jquery', 'redux-js' ),
@@ -567,7 +567,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					);
 
 					// Values used by the javascript.
-					wp_localize_script( 'redux-extension-taxonomy-js', 'reduxTaxonomy', $this->wp_links );
+					wp_localize_script( 'redux-extension-taxonomy', 'reduxTaxonomy', $this->wp_links );
 				}
 			}
 		}

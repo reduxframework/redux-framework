@@ -2,7 +2,7 @@
 /**
  * Redux Widget Areas Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Dovy Paukstys (dovy)
  * @class   Redux_Widget_Areas
  */
@@ -286,12 +286,14 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 				true
 			);
 
-			wp_enqueue_style(
-				'redux-widget-areas',
-				$this->extension_url . 'redux-extension-widget-areas.css',
-				array(),
-				time()
-			);
+			if ( $this->parent->args['dev_mode'] ) {
+				wp_enqueue_style(
+					'redux-widget-areas',
+					$this->extension_url . 'redux-extension-widget-areas.css',
+					array(),
+					Redux_Extension_Widget_Areas::$version
+				);
+			}
 
 			// Localize script.
 			wp_localize_script(

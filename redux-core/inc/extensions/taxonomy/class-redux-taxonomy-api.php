@@ -3,7 +3,7 @@
  * Redux Framework Taxonomy Meta API Class
  * Makes instantiating a Redux object an absolute piece of cake.
  *
- * @package     Redux Pro
+ * @package     Redux
  * @author      Dovy Paukstys
  * @subpackage  Taxonomy
  */
@@ -322,7 +322,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 
 				self::$sections[ $opt_name ][ $section['id'] ] = $section;
 			} else {
-				self::$errors[ $opt_name ]['section']['empty'] = esc_html__( 'Unable to create a section due an empty section array or the section variable passed was not an array.', 'redux-pro' );
+				self::$errors[ $opt_name ]['section']['empty'] = esc_html__( 'Unable to create a section due an empty section array or the section variable passed was not an array.', 'redux-framework' );
 			}
 		}
 
@@ -472,7 +472,7 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 
 				self::$terms[ $opt_name ][ $term['id'] ] = $term;
 			} else {
-				self::$errors[ $opt_name ]['term']['empty'] = esc_html__( 'Unable to create a term due an empty term array or the term variable passed was not an array.', 'redux-pro' );
+				self::$errors[ $opt_name ]['term']['empty'] = esc_html__( 'Unable to create a term due an empty term array or the term variable passed was not an array.', 'redux-framework' );
 			}
 		}
 

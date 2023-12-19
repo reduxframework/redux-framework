@@ -561,29 +561,6 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		}
 
 		/**
-		 * Calls file_put_contents with chmod.
-		 *
-		 * @param string $path Get a full cache path.
-		 *
-		 * @return string
-		 */
-		public function get_cache_path( string $path ): string {
-			return $this->folder . $path;
-		}
-
-		/**
-		 * Calls file_put_contents with chmod in cache directory.
-		 *
-		 * @param string $abs_path Absolute path.
-		 * @param string $contents Contents to put in the cache.
-		 *
-		 * @return bool
-		 */
-		public function put_contents_cache( string $abs_path, string $contents ): bool {
-			return $this->put_contents( $this->get_cache_path( $abs_path ), $contents );
-		}
-
-		/**
 		 * Does the specified file or dir exist?
 		 *
 		 * @param string $abs_path Absolute path.

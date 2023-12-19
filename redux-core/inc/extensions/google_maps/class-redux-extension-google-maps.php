@@ -2,7 +2,7 @@
 /**
  * Redux Google Maps Extension Class
  *
- * @package Redux Pro
+ * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Google_Maps
  * @version 4.4.0
