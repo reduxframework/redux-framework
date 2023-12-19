@@ -1,5 +1,12 @@
 # Redux Changelog
 
+## 4.4.11.1
+* New: Color Scheme Extension
+* Fixed: `typography` sunset dropdown not rendering select2 styling.
+* Fixed: Efficiency for extension loading improved.
+* Removed: Redux Pro support. It's no longer required as all Pro features are now part of Redux.
+
+
 ## 4.4.11
 * Fixed: Cosmetic `box_shadow` fix.
 * Fixed: Required not hiding linked fields in customizer.
