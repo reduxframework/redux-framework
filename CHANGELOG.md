@@ -1,7 +1,7 @@
 # Redux Changelog
 
 ## 4.4.11.1
-* New: Color Scheme Extension
+* New: Color Scheme Extension [https://devs.redux.io/core-extensions/color-scheme.html](https://devs.redux.io/core-extensions/color-scheme.html)
 * Fixed: `typography` sunset dropdown not rendering select2 styling.
 * Fixed: Efficiency for extension loading improved.
 * Removed: Redux Pro support. It's no longer required as all Pro features are now part of Redux.
