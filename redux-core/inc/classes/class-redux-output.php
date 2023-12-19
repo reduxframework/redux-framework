@@ -88,21 +88,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 									$core_path = Redux_Core::$dir . "inc/fields/{$field['type']}/field_{$field['type']}.php";
 								}
 
-								if ( Redux_Core::$pro_loaded ) {
-									$pro_path = '';
-
-									if ( class_exists( 'Redux_Pro' ) ) {
-										$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-$field_type.php";
-									}
-
-									if ( file_exists( $pro_path ) ) {
-										$filter_path = $pro_path;
-									} else {
-										$filter_path = $core_path;
-									}
-								} else {
-									$filter_path = $core_path;
-								}
+								$filter_path = $core_path;
 
 								/**
 								 * Field class file
@@ -125,14 +111,6 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 							$field['default'] = $field['default'] ?? '';
 							$value            = $core->options[ $field['id'] ] ?? $field['default'];
 							$style_data       = '';
-							$data             = array(
-								'field' => $field,
-								'value' => $value,
-								'core'  => $core,
-								'mode'  => 'output',
-							);
-
-							Redux_Functions::load_pro_field( $data );
 
 							if ( empty( $field_class ) ) {
 								continue;

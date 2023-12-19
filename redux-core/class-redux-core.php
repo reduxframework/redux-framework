@@ -94,13 +94,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static $in_theme = false;
 
 		/**
-		 * Set when Redux Pro plugin is loaded and active.
-		 *
-		 * @var bool
-		 */
-		public static $pro_loaded = false;
-
-		/**
 		 * Pointer to an updated Google fonts array.
 		 *
 		 * @var array
@@ -257,7 +250,7 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 */
 		private function includes() {
 			if ( class_exists( 'Redux_Pro' ) && isset( Redux_Pro::$dir ) ) {
-				self::$pro_loaded = true;
+				echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux has detected the Redux Pro plugin is enabled. All featured of Redux Pro are now part of the entire Redux plugin and is no longer required. Please disable the Redux Pro plugin to avoid potential conflicts.', 'redux-framework' ), '<code></code>' ) . '</p></div>';
 			}
 
 			require_once __DIR__ . '/inc/classes/class-redux-path.php';

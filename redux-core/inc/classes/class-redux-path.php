@@ -29,21 +29,7 @@ if ( ! class_exists( 'Redux_Path', false ) ) {
 		 * @return string
 		 */
 		public static function get_path( string $relative_path ): string {
-			$path = Redux_Core::$redux_path . $relative_path;
-
-			if ( Redux_Core::$pro_loaded ) {
-				$pro_path = '';
-
-				if ( class_exists( 'Redux_Pro' ) ) {
-					$pro_path = Redux_Pro::$dir . '/core' . $relative_path;
-				}
-
-				if ( file_exists( $pro_path ) ) {
-					$path = $pro_path;
-				}
-			}
-
-			return $path;
+			return Redux_Core::$redux_path . $relative_path;
 		}
 	}
 

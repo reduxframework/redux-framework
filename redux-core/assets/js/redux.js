@@ -554,10 +554,6 @@ function colorNameToHex( colour ) {
 					redux.field_objects[type].init();
 				}
 
-				if ( 'undefined' !== typeof redux.field_objects.pro && ! $.isEmptyObject( redux.field_objects.pro[type] ) && redux.field_objects.pro[type] ) {
-					redux.field_objects.pro[type].init();
-				}
-
 				if ( ! redux.customizer && $( this ).hasClass( 'redux_remove_th' ) ) {
 					tr = $( this ).parents( 'tr:first' );
 					th = tr.find( 'th:first' );

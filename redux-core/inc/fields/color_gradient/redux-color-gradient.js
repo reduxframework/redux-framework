@@ -34,7 +34,7 @@
 					return;
 				}
 
-				if ( undefined === redux.field_objects.pro && undefined !== redux.field_objects.gradient_filters ) {
+				if ( undefined !== redux.field_objects.gradient_filters ) {
 					filtersLoaded = true;
 
 					redux.field_objects.gradient_filters.sliderInit( el, 'color_gradient' );

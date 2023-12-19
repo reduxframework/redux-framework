@@ -76,47 +76,6 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * $mode = pro field init mode */
 
 		/**
-		 * Load fields from Redux Pro.
-		 *
-		 * @param array $data Pro field data.
-		 *
-		 * @return bool
-		 */
-		public static function load_pro_field( array $data ): bool {
-			$field = null;
-			$value = null;
-			$core  = null;
-			$mode  = null;
-
-			// phpcs:ignore WordPress.PHP.DontExtract
-			extract( $data );
-
-			if ( Redux_Core::$pro_loaded ) {
-				$field_filter = '';
-				$field_type   = str_replace( '_', '-', $field['type'] );
-
-				if ( class_exists( 'Redux_Pro' ) ) {
-					$field_filter = Redux_Pro::$dir . 'core/inc/fields/' . $field['type'] . '/class-redux-pro-' . $field_type . '.php';
-				}
-
-				if ( file_exists( $field_filter ) ) {
-					require_once $field_filter;
-
-					$filter_class_name = 'Redux_Pro_' . $field['type'];
-
-					if ( class_exists( $filter_class_name ) ) {
-						$extend = new $filter_class_name( $field, $value, $core );
-						$extend->init( $mode );
-
-						return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
-		/**
 		 * Parse args to handle deep arrays.  The WP one does not.
 		 *
 		 * @param array|string $args     Array of args.
@@ -286,9 +245,8 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		 * @return      void
 		 */
 		public static function initWpFilesystem() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// TODO: Activate after Redux Pro is discontinued.
 			// phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
-			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0', 'init_wp_filesystem()' );
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0', __CLASS__ . '::init_wp_filesystem()' );
 
 			self::init_wp_filesystem();
 		}

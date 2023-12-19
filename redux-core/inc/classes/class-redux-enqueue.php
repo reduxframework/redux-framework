@@ -375,21 +375,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 					$core_path = Redux_Core::$dir . "inc/fields/{$field['type']}/field_{$field['type']}.php";
 				}
 
-				if ( Redux_Core::$pro_loaded ) {
-					$pro_path = '';
-
-					if ( class_exists( 'Redux_Pro' ) ) {
-						$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-$field_type.php";
-					}
-
-					if ( file_exists( $pro_path ) ) {
-						$filter_path = $pro_path;
-					} else {
-						$filter_path = $core_path;
-					}
-				} else {
-					$filter_path = $core_path;
-				}
+				$filter_path = $core_path;
 
 				/**
 				 * Field class file
@@ -425,35 +411,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 							$core->options[ $field['id'] ] = '';
 						}
 
-						$data = array(
-							'field' => $field,
-							'value' => $core->options[ $field['id'] ],
-							'core'  => $core,
-							'mode'  => 'enqueue',
-						);
-
-						Redux_Functions::load_pro_field( $data );
-
 						$the_field = new $field_class( $field, $core->options[ $field['id'] ], $core );
-
-						if ( Redux_Core::$pro_loaded ) {
-							$field_filter = '';
-
-							if ( class_exists( 'Redux_Pro' ) ) {
-								$field_filter = Redux_Pro::$dir . 'core/inc/fields/' . $field['type'] . '/class-redux-pro-' . $field_type . '.php';
-							}
-
-							if ( file_exists( $field_filter ) ) {
-								require_once $field_filter;
-
-								$filter_class_name = 'Redux_Pro_' . $field['type'];
-
-								if ( class_exists( $filter_class_name ) ) {
-									$extend = new $filter_class_name( $field, $core->options[ $field['id'] ], $core );
-									$extend->init( 'enqueue' );
-								}
-							}
-						}
 
 						// Move dev_mode check to a new if/then block.
 						if ( ! wp_script_is( 'redux-field-' . $field_type ) && ( class_exists( $field_class ) && method_exists( $field_class, 'enqueue' ) ) ) {
