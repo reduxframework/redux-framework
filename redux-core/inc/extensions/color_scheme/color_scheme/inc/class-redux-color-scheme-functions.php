@@ -451,7 +451,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 
 			// array_diff the serialized versions.
 			$diff = array_diff( $first_array_s, $second_array_s );
-			var_dump($diff);
+
 			// unserialize the result.
 			array_walk( $diff, 'my_unserialize' );
 
