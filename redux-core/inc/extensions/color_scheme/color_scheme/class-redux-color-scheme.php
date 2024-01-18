@@ -270,7 +270,7 @@ if ( ! class_exists( 'Redux_Color_Scheme' ) ) {
 
 			// Field dependent JS.
 			wp_enqueue_script(
-				'redux-field-color-cheme',
+				'redux-field-color-scheme',
 				$this->url . 'redux-color-scheme' . $min . '.js',
 				array( 'jquery', 'redux-spectrum-js', 'select2-js', 'redux-block-ui' ),
 				Redux_Extension_Color_Scheme::$version,

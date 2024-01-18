@@ -1,6 +1,6 @@
 /* global redux, redux_ajax_script,redux_change, reduxColorSchemeAfterUpdateHTML */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	redux.field_objects                             = redux.field_objects || {};
@@ -12,7 +12,7 @@
 	redux.field_objects.color_scheme.showTooltips   = '';
 	redux.field_objects.color_scheme.default_params = {};
 
-	redux.field_objects.color_scheme.hexToRGBA = function( hex, alpha ) {
+	redux.field_objects.color_scheme.hexToRGBA = function ( hex, alpha ) {
 		var result;
 		var r;
 		var b;
@@ -33,13 +33,13 @@
 		return result;
 	};
 
-	redux.field_objects.color_scheme.init = function( selector ) {
+	redux.field_objects.color_scheme.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-color_scheme:visible' );
 		}
 
 		$( selector ).each(
-			function() {
+			function () {
 				var el                              = $( this );
 				var parent                          = el;
 				redux.field_objects.color_scheme.el = el;
@@ -68,7 +68,7 @@
 		);
 	};
 
-	redux.field_objects.color_scheme.qtip = function( el ) {
+	redux.field_objects.color_scheme.qtip = function ( el ) {
 		var tooltips;
 		var shadow;
 		var rounded;
@@ -123,7 +123,7 @@
 		atPos = $.redux.verifyPos( atPos.toLowerCase(), false );
 
 		$( 'li.redux-cs-qtip' ).each(
-			function() {
+			function () {
 				var content = $( this ).attr( 'qtip-content' );
 				var title   = $( this ).attr( 'qtip-title' );
 
@@ -140,7 +140,7 @@
 								text: content, title: title
 							},
 							show: {
-								effect: function() {
+								effect: function () {
 									if ( 'slide' === tooltips.effect.show_effect ) {
 										$( this ).slideDown( tooltips.effect.show_duration );
 									} else if ( 'fade' === tooltips.effect.show_effect ) {
@@ -151,7 +151,7 @@
 								}, event: tooltips.effect.show_event
 							},
 							hide: {
-								effect: function() {
+								effect: function () {
 									if ( 'slide' === tooltips.effect.hide_effect ) {
 										$( this ).slideUp( tooltips.effect.hide_duration );
 									} else if ( 'fade' === tooltips.effect.hide_effect ) {
@@ -174,7 +174,7 @@
 		);
 	};
 
-	redux.field_objects.color_scheme.setAccordions = function( el ) {
+	redux.field_objects.color_scheme.setAccordions = function ( el ) {
 		var accordionSection;
 		var isOpen;
 
@@ -189,7 +189,7 @@
 			accordionSection = el.find( '.redux-color-scheme-accordion-section' );
 
 			accordionSection.each(
-				function() {
+				function () {
 					isOpen = Boolean( $( this ).data( 'state' ) );
 
 					if ( false === isOpen ) {
@@ -203,7 +203,7 @@
 
 			el.find( '.redux-color-scheme-accordion' ).on(
 				'click',
-				function( e ) {
+				function ( e ) {
 					var nextAccordion;
 
 					e.preventDefault();
@@ -227,7 +227,7 @@
 		}
 	};
 
-	redux.field_objects.color_scheme.modInit = function( el ) {
+	redux.field_objects.color_scheme.modInit = function ( el ) {
 		var select2_handle;
 		var select2_params;
 
@@ -258,7 +258,7 @@
 		// Auto select text in input box.
 		el.find( 'input.redux-scheme-input-' + redux.field_objects.color_scheme.fieldID ).on(
 			'click',
-			function( e ) {
+			function ( e ) {
 				this.focus();
 				this.select();
 				e.preventDefault();
@@ -271,14 +271,14 @@
 		// Select change.
 		el.find( '#redux-scheme-select-' + redux.field_objects.color_scheme.fieldID ).on(
 			'change',
-			function() {
+			function () {
 				redux.field_objects.color_scheme.selectChange( el );
 			}
 		);
 
 		el.find( '#redux-' + redux.field_objects.color_scheme.fieldID + '-tooltip-checkbox' ).on(
 			'change',
-			function() {
+			function () {
 				var checked = $( this ).is( ':checked' );
 				$( this ).val( checked );
 
@@ -288,7 +288,7 @@
 		);
 	};
 
-	redux.field_objects.color_scheme.import = function( el ) {
+	redux.field_objects.color_scheme.import = function ( el ) {
 		var fieldID  = redux.field_objects.color_scheme.fieldID;
 		var optName  = redux.field_objects.color_scheme.optName;
 		var myUpload = el.find( '#redux-' + fieldID + '-import-scheme-button' );
@@ -310,8 +310,8 @@
 					nonce: nonce
 				},
 				autoSubmit: true,
-				onSubmit: function() {},
-				onComplete: function( data ) {
+				onSubmit: function () {},
+				onComplete: function ( data ) {
 
 					// Parse JSON.
 					data = JSON.parse( data );
@@ -333,7 +333,7 @@
 					// Click OK.
 					$( '#redux-' + fieldID + '-scheme-ok' ).on(
 						'click',
-						function() {
+						function () {
 
 							// Unload modal.
 							$.unblockUI();
@@ -351,18 +351,18 @@
 				},
 
 				// Unused.
-				onSelect: function() {
+				onSelect: function () {
 				}
 			}
 		);
 	};
 
-	redux.field_objects.color_scheme.delete = function( el ) {
+	redux.field_objects.color_scheme.delete = function ( el ) {
 		var field_id = redux.field_objects.color_scheme.fieldID;
 
 		el.find( '#redux-' + field_id + '-delete-scheme-button' ).on(
 			'click',
-			function( event ) {
+			function ( event ) {
 				var select_name;
 
 				// Prevent default action.
@@ -392,7 +392,7 @@
 					// Clicked OK.
 					$( '#redux-' + field_id + '-scheme-ok' ).on(
 						'click',
-						function() {
+						function () {
 							$.unblockUI();
 							return false;
 						}
@@ -416,7 +416,7 @@
 				// Clicked yes.
 				$( '#redux-' + field_id + '-delete-scheme-yes' ).on(
 					'click',
-					function() {
+					function () {
 						var data;
 						var wait_msg;
 
@@ -450,7 +450,7 @@
 							$.post(
 								redux_ajax_script.ajaxurl,
 								data,
-								function( response ) {
+								function ( response ) {
 
 									// Successful delete.
 									if ( 'success' === response ) {
@@ -483,7 +483,7 @@
 										// Click OK, unload msg, bail out.
 										$( '#redux-' + field_id + '-scheme-ok' ).on(
 											'click',
-											function() {
+											function () {
 												$.unblockUI();
 
 												// Update the HTML preview.
@@ -512,7 +512,7 @@
 										// Click OK, unload msg, bail out.
 										$( '#redux-' + field_id + '-scheme-ok' ).on(
 											'click',
-											function() {
+											function () {
 												$.unblockUI();
 												return false;
 											}
@@ -527,7 +527,7 @@
 				// Clicked no.
 				$( '#redux-' + field_id + '-delete-scheme-no' ).on(
 					'click',
-					function() {
+					function () {
 						$.unblockUI();
 						return false;
 					}
@@ -536,12 +536,12 @@
 		);
 	};
 
-	redux.field_objects.color_scheme.save = function( el ) {
+	redux.field_objects.color_scheme.save = function ( el ) {
 		var field_id = redux.field_objects.color_scheme.fieldID;
 
 		el.find( '#redux-' + field_id + '-save-scheme-button' ).on(
 			'click',
-			function( event ) {
+			function ( event ) {
 				var input_text;
 				var scheme_name;
 				var data;
@@ -586,7 +586,7 @@
 					// Clicked OK.  Close message and exit.
 					$( '#redux-' + field_id + '-scheme-ok' ).on(
 						'click',
-						function() {
+						function () {
 							$.unblockUI();
 							return false;
 						}
@@ -598,7 +598,7 @@
 
 				// Enum through them all and collect data.
 				el.find( '.redux-scheme-layout-container' ).each(
-					function() {
+					function () {
 						var obj = $( this ).children( '.redux-color-scheme' );
 
 						var title = obj.data( 'title' );
@@ -663,12 +663,12 @@
 					$.post(
 						redux_ajax_script.ajaxurl,
 						data,
-						function( response ) {
+						function ( response ) {
 
 							// New selector change hook.
 							el.find( '#redux-scheme-select-' + field_id ).on(
 								'change',
-								function() {
+								function () {
 									redux.field_objects.color_scheme.selectChange( el );
 								}
 							);
@@ -699,9 +699,17 @@
 							// Clicked OK.  Unload and exit.
 							$( '#redux-' + field_id + '-scheme-ok' ).on(
 								'click',
-								function() {
+								function () {
 									$.unblockUI();
 									return false;
+								}
+							);
+
+							//redux.field_objects.color_scheme.init( el );
+							el.find( '#redux-scheme-select-' + redux.field_objects.color_scheme.fieldID ).on(
+								'change',
+								function () {
+									redux.field_objects.color_scheme.selectChange( el );
 								}
 							);
 
@@ -714,7 +722,7 @@
 		);
 	};
 
-	redux.field_objects.color_scheme.selectChange = function( el ) {
+	redux.field_objects.color_scheme.selectChange = function ( el ) {
 		var selected;
 
 		var field_id = redux.field_objects.color_scheme.fieldID;
@@ -735,7 +743,7 @@
 		redux.field_objects.color_scheme.updateSchemeHTML( selected, el );
 	};
 
-	redux.field_objects.color_scheme.updateSchemeHTML = function( selected, el ) {
+	redux.field_objects.color_scheme.updateSchemeHTML = function ( selected, el ) {
 		var field_class;
 		var data;
 
@@ -774,7 +782,7 @@
 		$.post(
 			redux_ajax_script.ajaxurl,
 			data,
-			function( response ) {
+			function ( response ) {
 
 				// Replace colour picker layout.
 				el.find( 'ul.redux-scheme-layout' ).replaceWith( response );
@@ -802,7 +810,7 @@
 	};
 
 	// Initialize colour picker.
-	redux.field_objects.color_scheme.initColorPicker = function( el ) {
+	redux.field_objects.color_scheme.initColorPicker = function ( el ) {
 
 		// Get field ID.
 		var field_id = redux.field_objects.color_scheme.fieldID;
@@ -933,7 +941,7 @@
 				palette: palette,
 
 				// On change.
-				change: function( color ) {
+				change: function ( color ) {
 					var colorVal;
 					var alphaVal;
 					var rgbaVal;

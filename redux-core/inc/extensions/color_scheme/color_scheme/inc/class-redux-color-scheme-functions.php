@@ -451,7 +451,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 
 			// array_diff the serialized versions.
 			$diff = array_diff( $first_array_s, $second_array_s );
-
+			var_dump($diff);
 			// unserialize the result.
 			array_walk( $diff, 'my_unserialize' );
 
@@ -513,7 +513,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 
 			// Compare key counts between saved and current defaults to check
 			// for changes in color scheme.
-			if ( false !== $saved_def ) {
+			if ( false !== $saved_def && is_array( $saved_def ) ) {
 
 				// Get the new color inputs.
 				$arr_diff = self::do_diff( $def_opts, $saved_def );
