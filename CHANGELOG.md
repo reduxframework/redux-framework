@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.11.2
+* Fixed: Erroneous error in `color_scheme` when saved scheme array was blank (string).
+* Fixed: Color schemes would not switch via select box after saving a new scheme.
+
 ## 4.4.11.1
 * New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
 * Fixed: `typography` sunset dropdown not rendering select2 styling.
