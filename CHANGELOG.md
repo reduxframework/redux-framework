@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.11.3
+* Fixed: #3988 - Warning/error count displayed NaN on color field validation.
+
 ## 4.4.11.2
 * Fixed: Erroneous error in `color_scheme` when saved scheme array was blank (string).
 * Fixed: Color schemes would not switch via select box after saving a new scheme.
