@@ -73,7 +73,7 @@ function redux_change( variable ) {
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-errors' ).slideUp();
 				$( '#redux_metaboxes_errors' ).slideUp();
 			} else {
-				errorsLeft = ( parseInt( th.find( 'li .redux-menu-error:first' ).text(), 0 ) - 1 );
+				errorsLeft = ( parseInt( th.find( '.redux-menu-error:first' ).text(), 0 ) - 1 );
 
 				if ( errorsLeft <= 0 ) {
 					th.find( '.redux-menu-error:first' ).fadeOut().remove();
@@ -106,7 +106,7 @@ function redux_change( variable ) {
 			} else {
 
 				// Let's count down the warnings now. Fancy.  ;).
-				warningsLeft = ( parseInt( th.find( 'li .redux-menu-warning:first' ).text(), 0 ) - 1 );
+				warningsLeft = ( parseInt( th.find( '.redux-menu-warning:first' ).text(), 0 ) - 1 );
 
 				if ( warningsLeft <= 0 ) {
 					th.find( '.redux-menu-warning:first' ).fadeOut().remove();
