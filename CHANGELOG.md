@@ -1,7 +1,8 @@
 # Redux Changelog
 
 ## 4.4.11.4
-* FIxed: PHP Error when `color_scheme` data doesn't exist.
+* Fixed: PHP Error when `color_scheme` data doesn't exist.
+* Fixed: `custom_fonts` not importing original font on conversion failure.
 
 ## 4.4.11.3
 * Fixed: #3988 - Warning/error count displayed NaN on color field validation.
