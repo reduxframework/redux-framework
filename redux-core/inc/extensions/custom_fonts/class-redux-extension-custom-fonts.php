@@ -393,7 +393,6 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * @param string $mime_type     Mine type.
 		 */
 		public function process_web_font( string $attachment_id, string $name, string $true_filename, string $mime_type ) {
-
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( ! isset( $_POST['conversion'] ) ) {
 				$_POST['conversion'] = 'false';
@@ -507,7 +506,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					}
 
 					if ( true === $this->can_convert && 'true' === $conversion ) {
-						$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder );
+						$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder, $true_filename );
 					}
 				}
 
@@ -531,8 +530,9 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 				$output = array( $subtype => $path );
 
+				// TODO: COnversion error not moving single file.
 				if ( true === $this->can_convert && 'true' === $conversion ) {
-					$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder );
+					$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder, $true_filename );
 				} else {
 					$param_array = array(
 						'destination' => $this->upload_dir . $subfolder . '/' . $name . '/' . $true_filename, // $fontname . '.' . $subtype,
@@ -579,25 +579,16 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * @param string $fontname  Font name.
 		 * @param array  $missing   Missing.
 		 * @param array  $output    Output.
-		 * @param string $subfolder FOlder.
+		 * @param string $subfolder Folder.
+		 * @param string $true_filename Font name with extension.
 		 */
-		private function get_missing_files( string $name, string $fontname, array $missing, array $output, string $subfolder ) {
+		private function get_missing_files( string $name, string $fontname, array $missing, array $output, string $subfolder, string $true_filename ) {
 			if ( ! empty( $name ) && ! empty( $missing ) ) {
 				$temp = $this->upload_dir . 'temp';
 
-				if ( 1 === count( $output ) && isset( $output['eot'] ) ) {
-					echo wp_json_encode(
-						array(
-							'type' => 'error',
-							'msg'  => esc_html__( 'The font format .eot is not supported.', 'redux-framework' ),
-						)
-					);
+				$font_ext = pathinfo( $true_filename, PATHINFO_EXTENSION );
 
-					$this->parent->filesystem->execute( 'rmdir', $this->upload_dir . $subfolder . $name . '/', array( 'recursive' => true ) );
-					$this->parent->filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
-
-					die();
-				}
+				$unsupported = array( 'eot', 'woff', 'woff2' );
 
 				// Find a file to convert from.
 				foreach ( $output as $key => $value ) {
@@ -677,9 +668,9 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					'chmod'     => FS_CHMOD_FILE,
 				);
 
-				$zip_file = $temp . '/' . $fontname . '.zip';
+				$zip_file = $temp . DIRECTORY_SEPARATOR . $fontname . '.zip';
 
-				$this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
+				$ret = $this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
 
 				$zip = unzip_file( $zip_file, $temp );
 
@@ -689,22 +680,40 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 						'recursive'      => false,
 					);
 
-					$files = $this->parent->filesystem->execute( 'dirlist', $temp . '/fonts/', $params );
+					$files = $this->parent->filesystem->execute( 'dirlist', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR, $params );
 
 					foreach ( $files as $file ) {
 						$param_array = array(
-							'destination' => $this->upload_dir . $subfolder . $name . '/' . $file['name'],
+							'destination' => $this->upload_dir . $subfolder . $name . DIRECTORY_SEPARATOR . $file['name'],
 							'overwrite'   => true,
 							'chmod'       => 755,
 						);
 
-						$this->parent->filesystem->execute( 'move', $temp . '/fonts/' . $file['name'], $param_array );
+						$this->parent->filesystem->execute( 'move', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR . $file['name'], $param_array );
 					}
 				} else {
-					return array(
-						'type' => 'error',
-						'msg'  => $zip->get_error_message() . '<br><br>' . esc_html__( 'ZIP error. Your font could not be converted at this time. Please try again later.', 'redux-framework' ),
+					$path_parts = pathinfo( $output[ $main ] );
+
+					$param_array = array(
+						'destination' => $this->upload_dir . $subfolder . $name . DIRECTORY_SEPARATOR . $path_parts['basename'],
+						'overwrite'   => true,
+						'chmod'       => 755,
 					);
+
+					$this->parent->filesystem->execute( 'move', $output[ $main ], $param_array );
+
+					if ( in_array( $font_ext, $unsupported, true ) ) {
+						return array(
+							'type' => 'error',
+							// translators: %s = font extension.
+							'msg'  => $zip->get_error_message() . '<br><br>' . sprintf( esc_html__( 'The font converter does not support %s fonts.', 'redux-framework' ), $font_ext ),
+						);
+					} else {
+						return array(
+							'type' => 'error',
+							'msg'  => $zip->get_error_message() . '<br><br>' . esc_html__( 'ZIP error. Your font could not be converted at this time. Please try again later.', 'redux-framework' ),
+						);
+					}
 				}
 
 				delete_option( 'redux_custom_font_current' );
