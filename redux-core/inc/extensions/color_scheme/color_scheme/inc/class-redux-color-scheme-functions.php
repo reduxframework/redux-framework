@@ -528,6 +528,10 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 			// get current scheme data.
 			$scheme = self::get_scheme_data( $scheme_id );
 
+			if ( false === $scheme ) {
+				return '';
+			}
+
 			// If new color inputs exist...
 			if ( ! empty( $arr_diff ) ) {
 				foreach ( $arr_diff as $val ) {
@@ -791,6 +795,10 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
                                       />';
 
 							$scheme_data = self::get_scheme_data( $scheme_id );
+							if ( false === $scheme_data ) {
+								return '';
+							}
+
 							$picker_data = $scheme_data[ $v['id'] ];
 
 							// Hidden input for data string.
@@ -1058,6 +1066,9 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 
 			// Get scheme data from JSON file.
 			$data = self::get_scheme_data( $scheme );
+			if ( false === $data ) {
+				return array();
+			}
 
 			// Don't need to save select arrays to database,
 			// just the id => value.
