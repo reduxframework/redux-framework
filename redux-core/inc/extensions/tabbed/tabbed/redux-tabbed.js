@@ -88,7 +88,6 @@
 		var show = '';
 
 		if ( reduxObject.required_child.hasOwnProperty( id ) ) {
-			console.log(id);
 			$.each(
 				reduxObject.required_child[id],
 				function ( i, parentData ) {

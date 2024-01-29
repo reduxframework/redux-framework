@@ -65,7 +65,6 @@ jQuery(
 										$( '.components-popover .components-select-control__input' ).on(
 											'change',
 											function () {
-												console.log( 'change' );
 												$.reduxMetaBoxes.checkBoxVisibility( 'page_template' );
 											}
 										);

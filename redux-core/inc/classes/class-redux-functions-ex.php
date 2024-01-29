@@ -38,14 +38,14 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 				'font-awesome',
 				Redux_Core::$url . 'assets/font-awesome/css/all' . Redux_Functions::is_min() . '.css',
 				array(),
-				'6.4.0'
+				'6.5.1'
 			);
 
 			wp_enqueue_style(
 				'font-awesome-4-shims',
 				Redux_Core::$url . 'assets/font-awesome/css/v4-shims' . Redux_Functions::is_min() . '.css',
 				array(),
-				'6.4.0'
+				'6.5.1'
 			);
 		}
 
