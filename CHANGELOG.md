@@ -3,6 +3,7 @@
 ## 4.4.11.4
 * Fixed: PHP Error when `color_scheme` data doesn't exist.
 * Fixed: `custom_fonts` not importing original font on conversion failure.
+* FIxed: Remove debug info from JS. FA version change.
 
 ## 4.4.11.3
 * Fixed: #3988 - Warning/error count displayed NaN on color field validation.
