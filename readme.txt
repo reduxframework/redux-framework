@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.4
-Stable tag: 4.4.11
+Stable tag: 4.4.12
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -119,6 +119,18 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.12 =
+* New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
+* Fixed: PHP Error when `color_scheme` data doesn't exist.
+* Fixed: `custom_fonts` not importing original font on conversion failure.
+* Fixed: Remove debug info from JS. FA version change.
+* Fixed: #3988 - Warning/error count displayed NaN on color field validation.
+* Fixed: Erroneous error in `color_scheme` when saved scheme array was blank (string).
+* Fixed: Color schemes would not switch via select box after saving a new scheme.
+* Fixed: `typography` sunset dropdown not rendering select2 styling.
+* Fixed: Efficiency for extension loading improved.
+* Removed: Redux Pro support. It's no longer required as all Pro features are now part of Redux.
+
 = 4.4.11 =
 * Fixed: Cosmetic `box_shadow` fix.
 * Fixed: Required not hiding linked fields in customizer.

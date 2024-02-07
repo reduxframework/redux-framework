@@ -1,19 +1,13 @@
 # Redux Changelog
 
-## 4.4.11.4
+## 4.4.12
+* New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
 * Fixed: PHP Error when `color_scheme` data doesn't exist.
 * Fixed: `custom_fonts` not importing original font on conversion failure.
-* FIxed: Remove debug info from JS. FA version change.
-
-## 4.4.11.3
+* Fixed: Remove debug info from JS. FA version change.
 * Fixed: #3988 - Warning/error count displayed NaN on color field validation.
-
-## 4.4.11.2
 * Fixed: Erroneous error in `color_scheme` when saved scheme array was blank (string).
 * Fixed: Color schemes would not switch via select box after saving a new scheme.
-
-## 4.4.11.1
-* New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
 * Fixed: `typography` sunset dropdown not rendering select2 styling.
 * Fixed: Efficiency for extension loading improved.
 * Removed: Redux Pro support. It's no longer required as all Pro features are now part of Redux.
