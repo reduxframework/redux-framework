@@ -11,6 +11,7 @@
 * Fixed: `typography` sunset dropdown not rendering select2 styling.
 * Fixed: Efficiency for extension loading improved.
 * Removed: Redux Pro support. It's no longer required as all Pro features are now part of Redux.
+* Release date: February 12, 2024
 
 
 ## 4.4.11
@@ -19,6 +20,7 @@
 * Fixed: `tabbed` and `repeater` fields not resetting when using Section Reset.
 * Fixed: #3983 - Continued damage done by WP Filesystem PR
 * Updated: Font Awesome 6.5.1
+* Release date: December 18, 2023
 
 ## 4.4.10
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
@@ -27,9 +29,11 @@
 * Fixed: Errant spaces in ACE Editor field.
 * Fixed: Array check in color validation to avoid errors. It works ONLY with the color field. Nothing else.
 * Improved: Filesystem killswitch logic.
+* Release date: December 05, 2023
 
 ## 4.4.9
 * Modified: Rollback changes made to the filesystem class causing false file permission issue messages.
+* Release date: October 26, 2023
 
 ## 4.4.8
 * Modified: Additional safeguards against read-only filesystems. Thanks @cezarpopa-cognita.
