@@ -3,8 +3,8 @@ Contributors: kprovance, dovyp, redux
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts, metaboxes, settings
 Requires at least: 5.0
 Requires PHP: 7.1
-Tested up to: 6.4
-Stable tag: 4.4.12
+Tested up to: 6.5
+Stable tag: 4.4.13
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -119,6 +119,12 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.13 =
+* Fixed: `color_scheme` crashing WordPress with 'critical error' for users still using PHP 7.1.
+* Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.
+* Added: WordPress 6.5 compatibility.
+* Release date: February 13, 2024
+
 = 4.4.12 =
 * New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
 * Fixed: PHP Error when `color_scheme` data doesn't exist.

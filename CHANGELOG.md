@@ -1,10 +1,10 @@
 # Redux Changelog
 
-## 4.4.12.2
+## 4.4.13
 * Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.
-
-## 4.4.12.1
-* Fixed: `color_scheme` crashing WordPress for unknown reasons. Guessing at a fix.
+* Fixed: `color_scheme` crashing WordPress with 'critical error' for users still using PHP 7.1.
+* Added: WordPress 6.5 compatibility.
+* Release date: February 13, 2024
 
 ## 4.4.12
 * New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
