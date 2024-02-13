@@ -786,14 +786,17 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 					$in_use = '0';
 				}
 
-				if ( Redux_Helpers::google_fonts_update_needed() && ! get_option( 'auto_update_redux_google_fonts', false ) && $this->field['font-family'] && $this->field['google'] ) {
-					$nonce = wp_create_nonce( 'redux_update_google_fonts' );
+				// Filter to disable Google font updates.
+				if ( apply_filters( "redux/{$this->parent->args['opt_name']}/field/typography/google_font_update", true ) ) { // phpcs:ignored WordPress.NamingConventions.ValidHookName
+					if ( Redux_Helpers::google_fonts_update_needed() && ! get_option( 'auto_update_redux_google_fonts', false ) && $this->field['font-family'] && $this->field['google'] ) {
+						$nonce = wp_create_nonce( 'redux_update_google_fonts' );
 
-					echo '<div data-nonce="' . esc_attr( $nonce ) . '" class="redux-update-google-fonts update-message notice inline notice-warning notice-alt">';
-					echo '<p>' . esc_html__( 'Your Google Fonts are out of date. To update them, please click one of the following:', 'redux-framework' );
-					echo '&nbsp;<a href="#" class="update-google-fonts" data-action="automatic" aria-label="' . esc_attr__( 'Automated updates', 'redux-framework' ) . '">' . esc_html__( 'Automated updates', 'redux-framework' ) . '</a> ' . esc_html__( 'or', 'redux-framework' ) . ' <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
-					echo '</p>';
-					echo '</div>';
+						echo '<div data-nonce="' . esc_attr( $nonce ) . '" class="redux-update-google-fonts update-message notice inline notice-warning notice-alt">';
+						echo '<p>' . esc_html__( 'Your Google Fonts are out of date. To update them, please click one of the following:', 'redux-framework' );
+						echo '&nbsp;<a href="#" class="update-google-fonts" data-action="automatic" aria-label="' . esc_attr__( 'Automated updates', 'redux-framework' ) . '">' . esc_html__( 'Automated updates', 'redux-framework' ) . '</a> ' . esc_html__( 'or', 'redux-framework' ) . ' <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
+						echo '</p>';
+						echo '</div>';
+					}
 				}
 
 				echo '<p data-preview-size="' . esc_attr( $in_use ) . '" class="clear ' . esc_attr( $this->field['id'] ) . '_previewer typography-preview" style="' . esc_attr( $style ) . '">' . esc_html( $g_text ) . '</p>';
