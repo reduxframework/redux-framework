@@ -114,6 +114,10 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 * @return array
 		 */
 		public function set_defaults( array $defaults = array() ): array {
+			if ( ! Redux_Helpers::is_field_in_use( $this->parent, 'color_scheme' ) ) {
+				return $defaults;
+			}
+
 			if ( empty( $this->field_id ) ) {
 				return $defaults;
 			}
