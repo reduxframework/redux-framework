@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.12.2
+* Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.
+
 ## 4.4.12.1
 * Fixed: `color_scheme` crashing WordPress for unknown reasons. Guessing at a fix.
 
