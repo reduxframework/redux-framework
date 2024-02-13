@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.12.1
+* Fixed: `color_scheme` crashing WordPress for unknown reasons. Guessing at a fix.
+
 ## 4.4.12
 * New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
 * Fixed: PHP Error when `color_scheme` data doesn't exist.
