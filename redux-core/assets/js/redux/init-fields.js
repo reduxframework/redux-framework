@@ -32,5 +32,11 @@
 				}
 			}
 		);
+
+		$( '.redux-container-heading, .redux-container-subheading, .redux-container-content' ).parents( '.form-table' ).each(
+			function () {
+				$( this ).remove();
+			}
+		);
 	};
 })( jQuery );

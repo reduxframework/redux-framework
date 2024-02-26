@@ -401,6 +401,7 @@ Redux::set_section(
 );
 
 require_once Redux_Core::$dir . '../sample/sections/presentation-fields/divide.php';
+require_once Redux_Core::$dir . '../sample/sections/presentation-fields/heading.php';
 require_once Redux_Core::$dir . '../sample/sections/presentation-fields/info.php';
 require_once Redux_Core::$dir . '../sample/sections/presentation-fields/section.php';
 
