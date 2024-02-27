@@ -1,10 +1,6 @@
 @import "color-picker";
 @import "media";
 
-.redux-field-borders + .redux-field-borders {
-    border-top: 1px solid #eee;
-}
-
 .redux-warning-primary{
     color: #fff !important;
     border-color: #dc3545 !important;

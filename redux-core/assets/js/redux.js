@@ -570,9 +570,9 @@ function colorNameToHex( colour ) {
 			}
 		);
 
-		$( '.redux-container-heading, .redux-container-subheading, .redux-container-content' ).parents( '.form-table' ).each(
+		$( '.redux-container-heading, .redux-container-subheading, .redux-container-content, .redux-container-submessage' ).parents( '.form-table' ).each(
 			function () {
-				$( this ).remove();
+				//$( this ).remove();
 			}
 		);
 	};
