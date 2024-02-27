@@ -17,6 +17,7 @@ The `ace_editor` field will use that URL to enqueue the ACE library.
 Thank you for your kind attention in this matter.
 
 ## New to Version 4.4 ##
+* [Content Field](https://devs.redux.io/core-fields/content.html)
 * [COLOR SCHEMES](https://devs.redux.io/core-extensions/color-schemes.html) Extension.
 * TABBED Extension.
 * TAXONOMY METABOXES!

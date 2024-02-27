@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.13.1
+* New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
+
 ## 4.4.13
 * Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.
 * Fixed: `color_scheme` crashing WordPress with 'critical error' for users still using PHP 7.1.
