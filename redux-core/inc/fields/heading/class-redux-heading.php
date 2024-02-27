@@ -42,11 +42,19 @@ if ( ! class_exists( 'Redux_Heading', false ) ) {
 		 */
 		public function render() {
 			echo '</td></tr></table>';
-			echo '<h2
+			echo '<div
 					id="heading-' . esc_attr( $this->field['id'] ) . '"
-					class="redux-field redux-field-borders ' . ( isset( $this->field['icon'] ) && ! empty( $this->field['icon'] ) && true !== $this->field['icon'] ? 'hasIcon ' : '' ) . ' ' . esc_attr( $this->field['class'] ) . ' redux-field-' . esc_attr( $this->field['type'] ) . '"' . ( ! empty( $this->field['color'] ) ? ' style="' . esc_attr( $this->field['color'] ) . '"' : '' ) . '>';
-			echo wp_kses_post( $this->field['content'] );
-			echo '</h2>';
+					class="redux-field redux-field-borders ' . ( isset( $this->field['icon'] ) && ! empty( $this->field['icon'] ) && true !== $this->field['icon'] ? 'hasIcon ' : '' ) . ' ' . esc_attr( $this->field['class'] ) . ' redux-field-' . esc_attr( $this->field['type'] ) . '"' .
+					( ! empty( $this->field['color'] ) ? ' style="' . esc_attr( $this->field['color'] ) . '"' : '' ) .
+				'>';
+
+			if ( isset( $this->field['icon'] ) && ! empty( $this->field['icon'] ) && true !== $this->field['icon'] ) {
+				echo '<p class="redux-heading-icon"><i class="' . esc_attr( $this->field['icon'] ) . ' icon-large"></i></p>';
+			}
+
+			echo '<h2 class="redux-heading-text">' . wp_kses_post( $this->field['content'] ) . '</h2>';
+
+			echo '</div>';
 			echo '<table class="form-table no-border" style="margin-top: 0;">';
 			echo '<tbody>';
 			echo '<tr style="border-bottom:0; display:none;">';

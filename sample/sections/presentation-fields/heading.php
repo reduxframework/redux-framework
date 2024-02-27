@@ -24,7 +24,8 @@ Redux::set_section(
 			array(
 				'id'      => 'opt-heading-2',
 				'type'    => 'heading',
-				'content' => 'My Custom Redux Heading',
+				'content' => 'My Custom Redux Heading with icon.',
+				'icon'    => 'fa fa-house',
 			),
 		),
 	)
