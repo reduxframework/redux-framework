@@ -89,6 +89,13 @@
 								}
 							}
 
+							if ( fieldset.hasClass( 'redux-container-content' ) ) {
+								$( '#heading-' + i ).hide().addClass( 'hide' );
+								$( '#subheading-' + i ).hide().addClass( 'hide' );
+								$( '#content-' + i ).hide().addClass( 'hide' );
+								$( '#submessage-' + i ).hide().addClass( 'hide' );
+							}
+
 							if ( fieldset.hasClass( 'redux-container-info' ) ) {
 								$( '#info-' + i ).hide().addClass( 'hide' );
 							}
@@ -202,6 +209,13 @@
 						}
 					}
 
+					if ( childFieldset.hasClass( 'redux-container-content' ) ) {
+						$( '#heading-' + child ).hide().removeClass( 'hide' ).css( 'display', '');
+						$( '#subheading-' + child ).hide().removeClass( 'hide' ).css( 'display', '');
+						$( '#content-' + child ).hide().removeClass( 'hide' ).css( 'display', '');
+						$( '#submessage-' + child ).hide().removeClass( 'hide' ).css( 'display', '');
+					}
+
 					if ( childFieldset.hasClass( 'redux-container-info' ) ) {
 						$( '#info-' + child ).fadeIn( 300 ).removeClass( 'hide' );
 					}
@@ -232,7 +246,7 @@
 						}
 					);
 
-					if ( childFieldset.hasClass( 'redux-container-section' ) || childFieldset.hasClass( 'redux-container-info' ) ) {
+					if ( childFieldset.hasClass( 'redux-container-section' ) || childFieldset.hasClass( 'redux-container-info' ) || childFieldset.hasClass( 'redux-container-content' ) ) {
 						tr.css( { display: 'none' } );
 					}
 				} else if ( false === show ) {
@@ -291,6 +305,13 @@
 						$( '#section-table-' + id ).fadeOut( 50 ).addClass( 'hide' );
 						div.fadeOut( 50 ).addClass( 'hide' );
 					}
+				}
+
+				if ( theId.hasClass( 'redux-container-content' ) ) {
+					$( '#heading-' + id ).hide().addClass( 'hide' );
+					$( '#subheading-' + id ).hide().addClass( 'hide' );
+					$( '#content-' + id ).hide().addClass( 'hide' );
+					$( '#submessage-' + id ).hide().addClass( 'hide' );
 				}
 
 				if ( theId.hasClass( 'redux-container-info' ) ) {

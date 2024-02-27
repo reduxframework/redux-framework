@@ -17,16 +17,10 @@ Redux::set_section(
 		'subsection' => true,
 		'fields'     => array(
 			array(
-				'id' => 'content-switch',
-				'type' => 'switch',
-				'default' => true,
-			),
-			array(
 				'id'      => 'opt-heading-1',
 				'type'    => 'content',
 				'mode'    => 'heading',
 				'content' => 'This is a content field using the mode <strong>heading</strong>',
-				'required' => array( 'content-switch', '=', 'true' )
 			),
 			array(
 				'id'      => 'opt-subheading-1',
@@ -77,8 +71,8 @@ Redux::set_section(
 				'id'      => 'opt-submessage-5',
 				'type'    => 'content',
 				'mode'    => 'submessage',
-				'content' => 'This is a content field using the mode <strong>submessage</strong> with <strong>danger</strong> style.',
-				'style'   => 'danger',
+				'content' => 'This is a content field using the mode <strong>submessage</strong> with <strong>critical</strong> style.',
+				'style'   => 'critical',
 			),
 		),
 	)

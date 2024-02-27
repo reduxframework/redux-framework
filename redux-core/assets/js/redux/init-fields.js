@@ -32,11 +32,5 @@
 				}
 			}
 		);
-
-		$( '.redux-container-heading, .redux-container-subheading, .redux-container-content, .redux-container-submessage' ).parents( '.form-table' ).each(
-			function () {
-				$( this ).remove();
-			}
-		);
 	};
 })( jQuery );

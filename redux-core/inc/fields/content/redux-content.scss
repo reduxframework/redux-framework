@@ -8,7 +8,8 @@
     margin: 0 -20px;
 }
 
-.redux-field-borders + .redux-field-borders {
+.redux-field-borders + .redux-field-borders,
+.redux-field-borders:nth-child(2n){
     border-top: 1px solid #eee;
 }
 
@@ -49,7 +50,7 @@
     background-color: #fcf8e3;
 }
 
-.redux-submessage-danger {
+.redux-submessage-critical {
     color: #a94442;
     border-color: #ebccd1;
     background-color: #f2dede;
@@ -94,4 +95,8 @@
     margin: 0 -20px;
     color: #23282d;
     background-color: #f7f7f7;
+}
+
+.redux-main .redux-field-container.redux-container-content {
+    padding: 0;
 }
