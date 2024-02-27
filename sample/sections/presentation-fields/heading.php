@@ -27,6 +27,12 @@ Redux::set_section(
 				'content' => 'My Custom Redux Heading with icon.',
 				'icon'    => 'fa fa-house',
 			),
+			array(
+				'id'      => 'opt-subheading-1',
+				'type'    => 'subheading',
+				'content' => 'My Custom Redux Subheading.',
+			),
+
 		),
 	)
 );

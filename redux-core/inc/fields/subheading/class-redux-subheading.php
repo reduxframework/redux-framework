@@ -1,6 +1,6 @@
 <?php
 /**
- * Heading Field.
+ * Subheading Field.
  *
  * @package     ReduxFramework/Fields
  * @author      Kevin Provance (kprovance)
@@ -10,14 +10,14 @@
 defined( 'ABSPATH' ) || exit;
 
 // Don't duplicate me!
-if ( ! class_exists( 'Redux_Heading', false ) ) {
+if ( ! class_exists( 'Redux_Subheading', false ) ) {
 
 	/**
-	 * Main Redux_Heading class
+	 * Main Redux_Subheading class
 	 *
 	 * @since       1.0.0
 	 */
-	class Redux_Heading extends Redux_Field {
+	class Redux_Subheading extends Redux_Field {
 
 		/**
 		 * Set field and value defaults.
@@ -25,7 +25,6 @@ if ( ! class_exists( 'Redux_Heading', false ) ) {
 		public function set_defaults() {
 			$defaults = array(
 				'content' => '',
-				'icon'    => '',
 				'class'   => '',
 			);
 
@@ -43,15 +42,11 @@ if ( ! class_exists( 'Redux_Heading', false ) ) {
 		public function render() {
 			echo '</td></tr></table>';
 			echo '<div
-					id="heading-' . esc_attr( $this->field['id'] ) . '"
+					id="subheading-' . esc_attr( $this->field['id'] ) . '"
 					class="redux-field redux-field-borders ' . ( isset( $this->field['icon'] ) && ! empty( $this->field['icon'] ) && true !== $this->field['icon'] ? 'hasIcon ' : '' ) . ' ' . esc_attr( $this->field['class'] ) . ' redux-field-' . esc_attr( $this->field['type'] ) . '"' .
 				'>';
 
-			if ( isset( $this->field['icon'] ) && ! empty( $this->field['icon'] ) && true !== $this->field['icon'] ) {
-				echo '<p class="redux-heading-icon"><i class="' . esc_attr( $this->field['icon'] ) . ' icon-large"></i></p>';
-			}
-
-			echo '<h2 class="redux-heading-text">' . wp_kses_post( $this->field['content'] ) . '</h2>';
+			echo wp_kses_post( $this->field['content'] );
 
 			echo '</div>';
 			echo '<table class="form-table no-border" style="margin-top: 0;">';
@@ -72,8 +67,8 @@ if ( ! class_exists( 'Redux_Heading', false ) ) {
 		public function enqueue() {
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style(
-					'redux-field-heading',
-					Redux_Core::$url . 'inc/fields/heading/redux-heading.css',
+					'redux-field-subheading',
+					Redux_Core::$url . 'inc/fields/subheading/redux-subheading.css',
 					array(),
 					$this->timestamp
 				);
