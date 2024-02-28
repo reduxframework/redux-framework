@@ -2,6 +2,8 @@
 
 ## 4.4.13.1
 * New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
+* Updated: Bring inputs up to W3C standards.
+* Updated: First round of PHP 8.3 compatibility.
 
 ## 4.4.13
 * Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.
