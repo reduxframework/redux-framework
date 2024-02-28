@@ -106,10 +106,10 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
 				echo '<div class="field-border-input input-prepend"><span class="add-on"><i class="el el-fullscreen icon-large"></i></span><input type="text" class="redux-border-all redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'All', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-all" value="' . esc_attr( $this->value['top'] ) . '"></div>';
 			}
 
-			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-top" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-top]" value="' . ( isset( $this->value['top'] ) && '' !== $this->value['top'] ? esc_attr( $this->value['top'] ) . 'px' : '' ) . '">';
-			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-right" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-right]" value="' . ( isset( $this->value['right'] ) && '' !== $this->value['right'] ? esc_attr( $this->value['right'] ) . 'px' : '' ) . '">';
-			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-bottom" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-bottom]" value="' . ( isset( $this->value['bottom'] ) && '' !== $this->value['bottom'] ? esc_attr( $this->value['bottom'] ) . 'px' : '' ) . '">';
-			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-left" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-left]" value="' . ( isset( $this->value['left'] ) && '' !== $this->value['left'] ? esc_attr( $this->value['left'] ) . 'px' : '' ) . '">';
+			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-top-hidden" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-top]" value="' . ( isset( $this->value['top'] ) && '' !== $this->value['top'] ? esc_attr( $this->value['top'] ) . 'px' : '' ) . '">';
+			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-right-hidden" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-right]" value="' . ( isset( $this->value['right'] ) && '' !== $this->value['right'] ? esc_attr( $this->value['right'] ) . 'px' : '' ) . '">';
+			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-bottom-hidden" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-bottom]" value="' . ( isset( $this->value['bottom'] ) && '' !== $this->value['bottom'] ? esc_attr( $this->value['bottom'] ) . 'px' : '' ) . '">';
+			echo '<input type="hidden" class="redux-border-value" id="' . esc_attr( $this->field['id'] ) . '-left-hidden" name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[border-left]" value="' . ( isset( $this->value['left'] ) && '' !== $this->value['left'] ? esc_attr( $this->value['left'] ) . 'px' : '' ) . '">';
 
 			if ( ! isset( $this->field['all'] ) || true !== $this->field['all'] ) {
 				/**
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
                             <span class="add-on">
                                 <i class="el el-arrow-up icon-large"></i>
                             </span>
-                            <input type="text" class="redux-border-top redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-top" value="' . esc_attr( $this->value['top'] ) . '">
+                            <input type="text" id="' . esc_attr( $this->field['id'] ) . '-top" class="redux-border-top redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-top" value="' . esc_attr( $this->value['top'] ) . '">
                          </div>';
 				}
 
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
                             <span class="add-on">
                                 <i class="el el-arrow-right icon-large"></i>
                             </span>
-                            <input type="text" class="redux-border-right redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Right', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-right" value="' . esc_attr( $this->value['right'] ) . '">
+                            <input type="text" id="' . esc_attr( $this->field['id'] ) . '-right" class="redux-border-right redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Right', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-right" value="' . esc_attr( $this->value['right'] ) . '">
                         </div>';
 				}
 
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
                             <span class="add-on">
                                 <i class="el el-arrow-down icon-large"></i>
                             </span>
-                            <input type="text" class="redux-border-bottom redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-bottom" value="' . esc_attr( $this->value['bottom'] ) . '">
+                            <input type="text" id="' . esc_attr( $this->field['id'] ) . '-bottom" class="redux-border-bottom redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-bottom" value="' . esc_attr( $this->value['bottom'] ) . '">
                         </div>';
 				}
 
@@ -156,7 +156,7 @@ if ( ! class_exists( 'Redux_Border', false ) ) {
                             <span class="add-on">
                                 <i class="el el-arrow-left icon-large"></i>
                             </span>
-                            <input type="text" class="redux-border-left redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Left', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-left" value="' . esc_attr( $this->value['left'] ) . '">
+                            <input type="text" id="' . esc_attr( $this->field['id'] ) . '-left" class="redux-border-left redux-border-input mini ' . esc_attr( $this->field['class'] ) . '" placeholder="' . esc_html__( 'Left', 'redux-framework' ) . '" rel="' . esc_attr( $this->field['id'] ) . '-left" value="' . esc_attr( $this->value['left'] ) . '">
                         </div>';
 				}
 			}

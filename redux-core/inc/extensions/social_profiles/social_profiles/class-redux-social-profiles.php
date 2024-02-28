@@ -220,7 +220,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 
 				echo '<div class="redux-social-profiles-item-enabled">';
 				$checked = ( $enabled ) ? 'checked' : '';
-				echo '<input type="checkbox" class="checkbox-' . esc_attr( $key ) . '" data-key="' . esc_attr( $key ) . '" value="1" ' . esc_attr( $checked ) . '/>';
+				echo '<input type="checkbox" id="' . esc_attr( $this->field['id'] ) . '-checkbox-' . esc_attr( $key ) . '" class="checkbox-' . esc_attr( $key ) . '" data-key="' . esc_attr( $key ) . '" value="1" ' . esc_attr( $checked ) . '/>';
 				esc_html_e( 'Enabled', 'redux-framework' );
 				echo '</div>';
 
@@ -268,6 +268,7 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 
 				echo '<div class="redux-social-profiles-item-order">';
 				echo '<input
+				        id="' . esc_attr( $this->field['id'] ) . '-item-order-' . esc_attr( $key ) . '"
                         type="hidden"
                         value="' . esc_attr( $order ) . '"
                     />';
