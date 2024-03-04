@@ -176,11 +176,11 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 *
 		 * @param       array $data Field data.
 		 *
-		 * @return      void
+		 * @return      array
 		 * @since       1.0.0
 		 * @access      public
 		 */
-		public function register_field( array $data ) {
+		public function register_field( array $data ): array {
 
 			// Include color_scheme helper.
 			include_once $this->extension_dir . 'color_scheme/inc/class-redux-color-scheme-functions.php';
@@ -200,6 +200,8 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 
 			// Set upload_dir cookie.
 			setcookie( 'redux_color_scheme_upload_dir', $upload_dir, 0, '/' );
+
+			return $data;
 		}
 
 		/**
