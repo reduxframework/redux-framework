@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.13.2
+* Fixed: #3993, #3992 - "No Field ID is set" message causing jumbled backend layout. 
+
 ## 4.4.13.1
 * New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
 * Updated: Bring inputs up to W3C standards.
@@ -69,7 +72,7 @@
 * Fixed: Continuing effort to combat old CDN code because some devs aren't updating their code.
 * Fixed: REDUX_PLUGIN_FILE failed with embedded installed.  WE NO LONGER SUPPORT EMBEDDED. IT'S FOR LEGACY INSTALLS ONLY.
 * Release date: September 13, 2023
-* 
+*
 ## 4.4.5
 * Fixed: Redux catches error when Google Fonts JSON cannot be read/written due to server misconfiguration.
 * Fixed: Output HTML in the admin panel now complies with W3C standards.
@@ -91,7 +94,7 @@
 * Fixed: Missing redux-banner-admin.min.js file.
 * Fixed: Added extra check for the existence of the function name with callbacks. Some themes are not doing it correctly and crashing WordPress.
 * Release date: July 02, 2023
- 
+
 ## 4.4.3
 * Fixed: Typo in JavaScript enqueue handle broke `typography` and `slider` fields.
 * Release date: June 29, 2023
@@ -133,7 +136,7 @@
 ## 4.3.25
 * Modified: Reworked directory enumeration for `custom_fonts` to avoid potential fatal errors.
 * Release date: January 27, 2023
- 
+
 ## 4.3.24
 * Additional work to make `custom_fonts` override old standalone extension version.
 * Release date: January 20, 2023
@@ -141,13 +144,13 @@
 ## 4.3.23
 * Tweaked Custom Fonts extension to avoid conflicts with older standalone extension.
 * Update: Extendify Library 1.2.4
-* Release date: January 20, 2023 
+* Release date: January 20, 2023
 
 ## 4.3.22
 * Added: Custom Fonts extension [https://devs.redux.io/core-extensions/google-maps.html](https://devs.redux.io/core-extension/custom-fonts.html)
 * Fixed: #3928 - Metaboxes `post_format` selections not responding to clicks when Gutenberg is active due to class name changes.
 * Fixed: Custom font data added via filter would trigger a warning if not an array.
-* Update: Extendify Library 1.2.3 
+* Update: Extendify Library 1.2.3
 * Release date: January 19, 2023
 
 ## 4.3.21
@@ -172,7 +175,7 @@
 * Fixed: Extendify menu item appearing when it should not.
 * Fixed: #3909 - Blank page template would cause fatal error.
 * Release date: September 30, 2022
- 
+
 ## 4.3.18
 * New: #3903 - Typography `weights` argument to override standard default weights.
 * Updated Extendify Library 0.10.2
@@ -212,7 +215,7 @@
 * New: `typography` field supports individual unit types for subfields that support them (font-size, line-height, etc.)  See: [https://devs.redux.io/core-fields/typography.html](https://devs.redux.io/core-fields/typography.html)
 * Fixed: Redux installed via TGMPA failing with "This plugin does not have a valid header."
 * Updated: Extendify Library.
-* Release date: May 19, 2022 
+* Release date: May 19, 2022
 
 ## 4.3.13
 * Fixed: Work for `required` functionality within the `repeater` field.
@@ -249,7 +252,7 @@
 * Modified: Connection banner now promotes Extendify plugin with download/activate option.
 * Updated: Extendify Library.
 * Release date: February 09, 2022
- 
+
 ## 4.3.9
 * Fixed: Extendify Library JavaScript error.
 * Release date: January 26, 2022
@@ -272,7 +275,7 @@
 * Fixed: `date` shortcode without attributes producing error.
 * Fixed: Various jQuery deprecation fixes.
 * Release date: January 11, 2022
-* 
+*
 ## 4.3.5
 * Added: Add former premium feature: Option panel Search Bar. See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
 * Added: Add former premium feature: Shortcodes.  See Sample demo or the [docs site](https://devs.redux.io/core-extensions).
@@ -328,7 +331,7 @@
 * Fixed: Support URL button kicking back a JavaScript error.
 
 ## 4.2.10
-* Fixed: Output on the frontend triggering error. 
+* Fixed: Output on the frontend triggering error.
 * Fixed: Updated shims to support older extensions not authored by Redux.io
 
 ## 4.2.9
@@ -432,12 +435,12 @@
 * Fixed: WordPress 4.6 API warnings.
 * Fixed: WordPress 4.6 customizer issue where fields not displaying properly.
 * Fixed: Massive speed improvement to the library.
-* Fixed: Pro template count error if previously activated and Redux Pro not enabled. 
+* Fixed: Pro template count error if previously activated and Redux Pro not enabled.
 * Release date: Dec 12, 2020
 
 ## 4.1.23
 * Fixed: Massive speed improvement to the library.
-* Fixed: Pro template count error if previously activated and Redux Pro not enabled. 
+* Fixed: Pro template count error if previously activated and Redux Pro not enabled.
 * Release date: Oct 24, 2020
 
 ## 4.1.22
@@ -619,12 +622,12 @@
 ## 4.0.4
 * Fixed:    PHPCS, all.
 * Added:    Redux Templates.
-* Added:    Complete rewrite of the underlying code base is complete and complies with all WordPress coding standards. 
+* Added:    Complete rewrite of the underlying code base is complete and complies with all WordPress coding standards.
 
 ## 4.0.3
 * Fixed:    PHPCS findings.
-* Added:    New output_variables flags that dynamically add CSS variables to pages even on fields that do not support 
-            dynamic CSS output. Thanks, @andrejarh, for the idea!
+* Added:    New output_variables flags that dynamically add CSS variables to pages even on fields that do not support
+  dynamic CSS output. Thanks, @andrejarh, for the idea!
 
 ## 4.0.2
 * Fixed:    PHP backwards compatibility for extensions. Still have to work on JS, probably.
@@ -675,7 +678,7 @@
 
 ## 4.0.1.1
 * Fixed:      Section field not hiding with required calls.
-* Fixed:      Tour pointer not remembering closed state. 
+* Fixed:      Tour pointer not remembering closed state.
 
 ## 4.0.1
 * New:        Initial public beta release.
@@ -735,7 +738,7 @@
 
 ## 4.0.0.9
 * Fixed:    Import/Export feature not importing.  Damn typesafe decs got me again!!!  Thanks, WPCS.  ;-)
-* Modified: Replace wpFileSystemInit in sample-config.php with a more practical solution.  Thanks, @Torfindel 
+* Modified: Replace wpFileSystemInit in sample-config.php with a more practical solution.  Thanks, @Torfindel
 
 ## 4.0.0.8
 * Modified: Changed typography update localize handle.  Too generic.  Conflicted with something else.
