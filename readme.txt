@@ -4,7 +4,7 @@ Tags: admin, admin interface, options, theme options, plugin options, options fr
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.5
-Stable tag: 4.4.13
+Stable tag: 4.4.14
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -31,6 +31,8 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <li>Color Gradient</li>
 <li>Color Palette</li>
 <li>Color RGBA</li>
+<li>Color Scheme</li>
+<li>Content</li>
 <li>Custom Fonts</li>
 <li>Customizer</li>
 <li>Date</li>
@@ -119,6 +121,12 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.14 =
+* Fixed: "No Field ID is set" message causing jumbled backend layout.
+* New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
+* Updated: Bring inputs up to W3C standards.
+* Updated: First round of PHP 8.3 compatibility.
+
 = 4.4.13 =
 * Fixed: `color_scheme` crashing WordPress with 'critical error' for users still using PHP 7.1.
 * Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.

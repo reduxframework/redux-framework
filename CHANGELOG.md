@@ -1,9 +1,7 @@
 # Redux Changelog
 
-## 4.4.13.2
+## 4.4.14
 * Fixed: #3993, #3992 - "No Field ID is set" message causing jumbled backend layout. 
-
-## 4.4.13.1
 * New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
 * Updated: Bring inputs up to W3C standards.
 * Updated: First round of PHP 8.3 compatibility.
