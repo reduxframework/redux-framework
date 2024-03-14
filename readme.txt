@@ -126,6 +126,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
 * Updated: Bring inputs up to W3C standards.
 * Updated: First round of PHP 8.3 compatibility.
+* Release date: March 14, 2024
 
 = 4.4.13 =
 * Fixed: `color_scheme` crashing WordPress with 'critical error' for users still using PHP 7.1.
