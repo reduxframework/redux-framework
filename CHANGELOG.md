@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.14.1
+* Fixed: `spacing`, `dimension`, and `border` fields not saving changed values.
+
 ## 4.4.14
 * Fixed: #3993, #3992 - "No Field ID is set" message causing jumbled backend layout. 
 * New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
