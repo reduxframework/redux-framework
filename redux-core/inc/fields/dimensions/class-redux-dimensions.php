@@ -143,7 +143,7 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 						id="' . esc_attr( $this->field['id'] ) . '-width"
 						class="redux-dimensions-input redux-dimensions-width mini ' . esc_attr( $this->field['class'] ) . '"
 						placeholder="' . esc_html__( 'Width', 'redux-framework' ) . '"
-						rel="' . esc_attr( $this->field['id'] ) . '-width"
+						rel="' . esc_attr( $this->field['id'] ) . '-width-hidden"
 						value="' . esc_attr( filter_var( $this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) ) . '">';
 
 				echo '<input
@@ -173,7 +173,7 @@ if ( ! class_exists( 'Redux_Dimensions', false ) ) {
 						id="' . esc_attr( $this->field['id'] ) . '-height"
 						class="redux-dimensions-input redux-dimensions-height mini ' . esc_attr( $this->field['class'] ) . '"
 						placeholder="' . esc_html__( 'Height', 'redux-framework' ) . '"
-						rel="' . esc_attr( $this->field['id'] ) . '-height"
+						rel="' . esc_attr( $this->field['id'] ) . '-height-hidden"
 						value="' . esc_attr( filter_var( $this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) ) . '">';
 
 				echo '<input

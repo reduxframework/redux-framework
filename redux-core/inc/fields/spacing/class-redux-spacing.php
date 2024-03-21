@@ -224,7 +224,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
                             	   id="' . esc_attr( $this->field['id'] ) . '-top"
                                    class="redux-spacing-top redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
                                    placeholder="' . esc_html__( 'Top', 'redux-framework' ) . '"
-                                   rel="' . esc_attr( $this->field['id'] ) . '-top"
+                                   rel="' . esc_attr( $this->field['id'] ) . '-top-hidden"
                                    value="' . esc_attr( $this->value['top'] ) . '"/>
                         </div>';
 				}
@@ -241,7 +241,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
                             	   id="' . esc_attr( $this->field['id'] ) . '-right"
                                    class="redux-spacing-right redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
                                    placeholder="' . esc_html__( 'Right', 'redux-framework' ) . '"
-                                   rel="' . esc_attr( $this->field['id'] ) . '-right"
+                                   rel="' . esc_attr( $this->field['id'] ) . '-right-hidden"
                                    value="' . esc_attr( $this->value['right'] ) . '"/>
                         </div>';
 				}
@@ -258,7 +258,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
                             	   id="' . esc_attr( $this->field['id'] ) . '-bottom"
                                    class="redux-spacing-bottom redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
                                    placeholder="' . esc_html__( 'Bottom', 'redux-framework' ) . '"
-                                   rel="' . esc_attr( $this->field['id'] ) . '-bottom"
+                                   rel="' . esc_attr( $this->field['id'] ) . '-bottom-hidden"
                                    value="' . esc_attr( $this->value['bottom'] ) . '">
                         </div>';
 				}
@@ -275,7 +275,7 @@ if ( ! class_exists( 'Redux_Spacing', false ) ) {
                                    id="' . esc_attr( $this->field['id'] ) . '-left"
                                    class="redux-spacing-left redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
                                    placeholder="' . esc_html__( 'Left', 'redux-framework' ) . '"
-                                   rel="' . esc_attr( $this->field['id'] ) . '-left"
+                                   rel="' . esc_attr( $this->field['id'] ) . '-left-hidden"
                                    value="' . esc_attr( $this->value['left'] ) . '"/>
                         </div>';
 				}

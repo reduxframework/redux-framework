@@ -1,6 +1,6 @@
 === Redux Framework ===
 Contributors: kprovance, dovyp, redux
-Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts, metaboxes, settings
+Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.5

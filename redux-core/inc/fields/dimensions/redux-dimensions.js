@@ -34,9 +34,11 @@
 					'change',
 					function() {
 						var units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
+
 						if ( 0 !== $( this ).parents( '.redux-field:first' ).find( '.redux-dimensions-units' ).length ) {
 							units = $( this ).parents( '.redux-field:first' ).find( '.redux-dimensions-units option:selected' ).val();
 						}
+
 						if ( 'undefined' !== typeof units ) {
 							el.find( '#' + $( this ).attr( 'rel' ) ).val( $( this ).val() + units );
 						} else {
