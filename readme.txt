@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.5
-Stable tag: 4.4.14
+Stable tag: 4.4.15
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,11 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.15 =
+* Fixed: `spacing`, `dimension`, and `border` fields not saving changed values.
+* Fixed: `switch` and `button_set` not saving within `tabbed` interface.
+* Release date: March 22, 2024
+
 = 4.4.14 =
 * Fixed: "No Field ID is set" message causing jumbled backend layout.
 * New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)

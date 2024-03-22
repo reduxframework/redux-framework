@@ -1,7 +1,9 @@
 # Redux Changelog
 
-## 4.4.14.1
+## 4.4.15
 * Fixed: `spacing`, `dimension`, and `border` fields not saving changed values.
+* Fixed: #3995 - `switch` and `button_set` not saving within `tabbed` interface.
+* Release date: March 22, 2024
 
 ## 4.4.14
 * Fixed: #3993, #3992 - "No Field ID is set" message causing jumbled backend layout. 
