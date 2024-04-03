@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.15.1
+* Updated: Font Awesome 6.5.2
+
 ## 4.4.15
 * Fixed: `spacing`, `dimension`, and `border` fields not saving changed values.
 * Fixed: #3995 - `switch` and `button_set` not saving within `tabbed` interface.
