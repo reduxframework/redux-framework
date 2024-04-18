@@ -52,11 +52,11 @@
 							val = $( this ).parent().find( '.checkbox-check' ).attr( 'data-val' );
 							color.removeClass( 'disabled' );
 							slider.attr( 'disabled', false );
-							label.removeClass( 'pro-disabled' );
+							label.removeClass( 'shadow-disabled' );
 						} else {
 							color.addClass( 'disabled' );
 							slider.attr( 'disabled', true );
-							label.addClass( 'pro-disabled' );
+							label.addClass( 'shadow-disabled' );
 						}
 
 						$( this ).parent().find( '.checkbox-check' ).val( val );
@@ -93,7 +93,7 @@
 				var label     = column.find( 'label[for="' + id + '-' + shadow + '-shadow"]' );
 				var container = column.find( '.wp-picker-container' );
 
-				if ( label.hasClass( 'pro-disabled' ) ) {
+				if ( label.hasClass( 'shadow-disabled' ) ) {
 					container.addClass( 'disabled' );
 				}
 			}

@@ -75,7 +75,7 @@ if ( ! class_exists( 'Redux_Box_Shadow', false ) ) {
 
 			foreach ( $shadow_arr as $shadow_type ) {
 				if ( $this->field[ $shadow_type . '-shadow' ] ) {
-					$disabled = ' pro-disabled';
+					$disabled = ' shadow-disabled';
 
 					if ( $this->value[ $shadow_type . '-shadow' ]['checked'] ) {
 						$disabled = '';

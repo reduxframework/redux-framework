@@ -72,8 +72,7 @@ if ( ! class_exists( 'Redux_Functions', false ) ) {
 		/** Extract data:
 		 * $field = field_array
 		 * $value = field values
-		 * $core = Redux instance
-		 * $mode = pro field init mode */
+		 * $core = Redux instance */
 
 		/**
 		 * Parse args to handle deep arrays.  The WP one does not.

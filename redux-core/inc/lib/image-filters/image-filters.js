@@ -126,10 +126,10 @@
 					val = $( this ).parent().find( '.checkbox-check' ).attr( 'data-val' );
 
 					slider.attr( 'disabled', false );
-					label.removeClass( 'pro-disabled' );
+					label.removeClass( 'filters-disabled' );
 				} else {
 					slider.attr( 'disabled', true );
-					label.addClass( 'pro-disabled' );
+					label.addClass( 'filters-disabled' );
 				}
 
 				$( this ).parent().find( '.checkbox-check' ).val( val );

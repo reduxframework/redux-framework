@@ -76,7 +76,7 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 					$max = 360;
 				}
 
-				$disabled = 'pro-disabled';
+				$disabled = 'filters-disabled';
 				if ( $value['filter'][ $filter ]['checked'] ) {
 					$disabled = '';
 				}

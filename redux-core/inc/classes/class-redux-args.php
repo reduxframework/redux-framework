@@ -165,9 +165,6 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'search'                           => false,
 			);
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$default = apply_filters( 'redux/pro/args/defaults', $default );
-
 			$args = Redux_Functions::parse_args( $args, $default );
 
 			$args = $this->args( $args );

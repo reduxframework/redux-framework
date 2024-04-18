@@ -249,8 +249,10 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 * @throws Exception Comment.
 		 */
 		private function includes() {
-			if ( class_exists( 'Redux_Pro' ) && isset( Redux_Pro::$dir ) ) {
-				echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux has detected the Redux Pro plugin is enabled. All featured of Redux Pro are now part of the entire Redux plugin and is no longer required. Please disable the Redux Pro plugin to avoid potential conflicts.', 'redux-framework' ), '<code></code>' ) . '</p></div>';
+			if ( is_admin() ) {
+				if ( class_exists( 'Redux_Pro' ) && isset( Redux_Pro::$dir ) ) {
+					echo '<div class="error"><p>' . sprintf( esc_html__( 'Redux has detected the Redux Pro plugin is enabled. All featured of Redux Pro are now part of the entire Redux plugin and is no longer required. Please disable the Redux Pro plugin to avoid potential conflicts.', 'redux-framework' ), '<code></code>' ) . '</p></div>';
+				}
 			}
 
 			require_once __DIR__ . '/inc/classes/class-redux-path.php';
