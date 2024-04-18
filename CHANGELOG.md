@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.15.2
+* Remove: Finished removing Redux Pro support.
+
 ## 4.4.15.1
 * Updated: Font Awesome 6.5.2
 
