@@ -31,6 +31,21 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		public static $array_units = array( '', '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px', 'vh', 'vw', 'vmin', 'vmax', 'ch' );
 
 		/**
+		 * Is customizer loaded.
+		 *
+		 * @return bool
+		 */
+		public static function is_customizer_loaded(): bool {
+			global $wp_customize;
+
+			if ( isset( $wp_customize ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
 		 * Retrieve the section array from field ID.
 		 *
 		 * @param string $opt_name Panel opt_name.

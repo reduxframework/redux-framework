@@ -415,8 +415,11 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 
 			foreach ( $this->parent->sections as $key => $section ) {
 				// Not a type that should go on the customizer.
-				if ( isset( $section['type'] ) && ( 'divide' === $section['type'] ) ) {
-					continue;
+
+				foreach ( $section['fields'] as $field ) {
+					if ( 'color_scheme' === $field['type'] || 'social_profiles' === $field['type'] || 'divide' === $field['type'] ) {
+						continue 2;
+					}
 				}
 
 				if ( isset( $section['id'] ) && 'import/export' === $section['id'] ) {
@@ -427,6 +430,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				if ( isset( $section['customizer'] ) && false === $section['customizer'] ) {
 					continue;
 				}
+
 				// if we are in a subsection and parent is set to customizer false !!!
 				if ( ( isset( $section['subsection'] ) && $section['subsection'] ) ) {
 					if ( $new_parent ) {
