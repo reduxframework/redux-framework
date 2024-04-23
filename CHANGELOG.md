@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.15.3
+* Remove `social_profiles` and `color_scheme` from customizer. They don't work.
+
 ## 4.4.15.2
 * Remove: Finished removing Redux Pro support.
 
