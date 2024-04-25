@@ -51,7 +51,7 @@ if ( ! class_exists( 'Redux_Customizer_Control', false ) ) {
 						data-id="<?php echo esc_attr( $this->id ); ?>"
 						data-key="<?php echo esc_attr( str_replace( $opt_name . '-', '', $this->redux_id ) ); ?>"
 						class="redux-customizer-input"
-						id="customizer_control_id_<?php echo esc_attr( $this->redux_id ); ?>" <?php echo esc_url( $this->get_link() ); ?>
+						id="customizer_control_id_<?php echo esc_attr( $this->redux_id ); ?>" <?php echo $this->get_link(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						value=""/>
 				<?php } ?>
 				<?php $this->render_content(); ?>
