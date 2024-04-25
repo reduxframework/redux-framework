@@ -301,6 +301,13 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 		public function output( $style = '' ) {
 			if ( ! empty( $this->value ) ) {
 				foreach ( $this->value as $arr ) {
+
+					// For customizer.
+					if ( isset( $arr['data'] ) ) {
+						$arr = rawurldecode( $arr['data'] );
+						$arr = (array) json_decode( $arr );
+					}
+
 					if ( $arr['enabled'] ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 						Redux_Functions_Ex::enqueue_font_awesome();
 					}
