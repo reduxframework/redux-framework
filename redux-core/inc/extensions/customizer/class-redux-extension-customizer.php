@@ -417,7 +417,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				// Not a type that should go on the customizer.
 
 				foreach ( $section['fields'] as $field ) {
-					if ( 'color_scheme' === $field['type'] || /* 'social_profiles' === $field['type'] || */ 'divide' === $field['type'] ) {
+					if ( 'color_scheme' === $field['type'] || 'social_profiles' === $field['type'] || 'divide' === $field['type'] ) {
 						continue 2;
 					}
 				}
