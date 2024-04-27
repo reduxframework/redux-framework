@@ -5,6 +5,7 @@
 * Removed: Finished removing Redux Pro support.
 * Removed: Extendify plugin banner at first launch.
 * Updated: Font Awesome 6.5.2
+* Release date: April 27, 2024
 
 ## 4.4.15
 * Fixed: `spacing`, `dimension`, and `border` fields not saving changed values.
