@@ -267,7 +267,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			self::$welcome = new Redux_Welcome();
 
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_filter( 'debug_information', array( $this, 'add_debug_info' ) );
 		}
 
@@ -502,13 +501,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		private function hooks() {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/core/hooks', $this );
-		}
-
-		/**
-		 * Display the connection banner.
-		 */
-		public function admin_init() {
-			Redux_Connection_Banner::init();
 		}
 
 		/**
