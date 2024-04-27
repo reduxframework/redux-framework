@@ -262,7 +262,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 
 			Redux_Functions_Ex::register_class_path( 'Redux', __DIR__ . '/inc/classes' );
 			Redux_Functions_Ex::register_class_path( 'Redux', __DIR__ . '/inc/welcome' );
-			Redux_Functions_Ex::load_extendify_css();
 
 			spl_autoload_register( array( $this, 'register_classes' ) );
 

@@ -78,6 +78,4 @@ yarn-error.log*
 redux-templates/classes/library.json
 local_developer.txt
 
-# Keep extendify SDK build directory
-!/redux-core/extendify-sdk/public/build
 !/redux-core/assets/js/vendor/jquery.serializeJSON.js
