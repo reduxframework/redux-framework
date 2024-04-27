@@ -1,13 +1,9 @@
 # Redux Changelog
 
-## 4.4.15.3
+## 4.4.16
 * Modified: Temporarily disable `social_profiles` and `color_scheme` from customizer. They don't work.
-* Fixed: `social_profiles` in customizer.
-
-## 4.4.15.2
-* Remove: Finished removing Redux Pro support.
-
-## 4.4.15.1
+* Removed: Finished removing Redux Pro support.
+* Removed: Extendify plugin banner at first launch.
 * Updated: Font Awesome 6.5.2
 
 ## 4.4.15
