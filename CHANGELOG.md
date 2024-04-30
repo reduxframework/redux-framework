@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.16,1
+* Fixed: Section divide returning `null`, which caused a PHP warning.
+
 ## 4.4.16
 * Modified: Temporarily disable `social_profiles` and `color_scheme` from customizer. They don't work.
 * Removed: Finished removing Redux Pro support.
