@@ -268,10 +268,8 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 			$run_update = false;
 
 			foreach ( $core->sections as $k => $section ) {
-				foreach ( $section['fields'] as $field ) {
-					if ( 'divide' === $field['type'] ) {
-						continue 2;
-					}
+				if ( isset( $section['type'] ) && 'divide' === $section['type'] ) {
+					continue;
 				}
 
 				$display = true;
