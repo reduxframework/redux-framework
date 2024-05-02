@@ -207,6 +207,40 @@ li {
     }
 }
 
+.wp-customizer {
+    .redux-container {
+        ul {
+            #redux-social-profiles-selector-list {
+                li {
+                    margin-left: 5px;
+
+                    .fa {
+                        margin-top: 5px;
+                    }
+                }
+            }
+
+            #redux-social-profiles-list {
+                li {
+                    height: 165px;
+
+                    .redux-social-item-container {
+                        .picker_wrapper {
+                            top: 25px;
+                        }
+                    }
+
+                    .redux-full-spectrum {
+                        top: -40px;
+                        position: relative;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
 @media screen and (max-width: 782px) {
     ul {
         &#redux-social-profiles-list {
