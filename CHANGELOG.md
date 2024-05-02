@@ -1,6 +1,9 @@
 # Redux Changelog
 
-## 4.4.16,1
+## 4.4.16.2
+* Fixed: `social_profiles` in customizer fixed.
+
+## 4.4.16.1
 * Fixed: Section divide returning `null`, which caused a PHP warning.
 
 ## 4.4.16
