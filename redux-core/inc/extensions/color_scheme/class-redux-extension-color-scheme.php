@@ -656,6 +656,12 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 */
 		private function get_default_data(): array {
 			$def_opts = $this->parent->options_defaults[ $this->field_id ];
+
+			if ( isset( $def_opts['color_scheme_name'] ) ) {
+				// error_log(print_r($def_opts,true));
+				return array();
+			}
+
 			$sections = $this->parent->sections;
 			$data     = array();
 

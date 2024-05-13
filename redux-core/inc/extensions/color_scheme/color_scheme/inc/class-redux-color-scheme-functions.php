@@ -606,7 +606,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 					}
 				}
 
-				// Assing color pickers to their specified group.
+				// Assign color pickers to their specified group.
 				foreach ( $scheme as $arr ) {
 					if ( is_array( $arr ) ) {
 						if ( ! empty( $arr['group'] ) ) {
