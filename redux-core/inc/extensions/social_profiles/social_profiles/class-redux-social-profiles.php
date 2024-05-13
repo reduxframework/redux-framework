@@ -67,6 +67,11 @@ if ( ! class_exists( 'Redux_Social_Profiles' ) ) {
 				$default_id = $arr['id'];
 
 				foreach ( $settings as $a ) {
+					if ( isset( $a['data'] ) ) {
+						$a['data'] = rawurldecode( $a['data'] );
+						$a         = (array) json_decode( $a['data'] );
+					}
+
 					if ( $default_id === $a['id'] ) {
 						$search_default    = false;
 						$fixed_arr[ $key ] = $a;
