@@ -311,7 +311,20 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 */
 		protected static function get_post_values() {
 			if ( empty( self::$post_values ) && ! empty( $_POST['customized'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-				self::$post_values = json_decode( stripslashes_deep( sanitize_title( wp_unslash( $_POST['customized'] ) ) ), true ); // phpcs:ignore WordPress.Security.NonceVerification
+				$the_data = json_decode( stripslashes_deep( ( wp_unslash( $_POST['customized'] ) ) ), true ); // phpcs:ignore WordPress.Security.NonceVerification,WordPress.Security.ValidatedSanitizedInput
+
+				foreach ( $the_data as $key => $value ) {
+					if ( strpos( wp_json_encode( $value ), 'data' ) > 0 ) {
+						foreach ( $value as $k => $v ) {
+							$decode           = (array) json_decode( rawurldecode( $v['data'] ) );
+							$v                = $decode;
+							$dumb_array[ $k ] = $v;
+							$the_data[ $key ] = $dumb_array;
+						}
+					}
+				}
+
+				self::$post_values = $the_data;
 			}
 		}
 
@@ -797,6 +810,13 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 * @access      public
 		 */
 		public function field_validation( $value ) {
+			if ( strpos( wp_json_encode( $value ), 'data' ) > 0 ) {
+				$replace = $value;
+				foreach ( $replace as $sub_array ) {
+					$cs_array                 = (array) json_decode( rawurldecode( $sub_array['data'] ) );
+					$value[ $cs_array['id'] ] = $cs_array;
+				}
+			}
 
 			return $value;
 		}
