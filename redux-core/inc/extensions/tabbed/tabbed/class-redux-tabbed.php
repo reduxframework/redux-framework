@@ -124,7 +124,7 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 
 			$default = $field['default'] ?? '';
 
-			$value = empty( $this->parent->options[ $orig_field_id ] ) && 0 !== (int) $this->parent->options[ $orig_field_id ] ? $default : $this->parent->options[ $orig_field_id ];
+			$value = isset( $this->parent->options[ $orig_field_id ] ) && 0 !== (int) $this->parent->options[ $orig_field_id ] ? $this->parent->options[ $orig_field_id ] : $default;
 
 			$this->parent->render_class->field_input( $field, $value );
 
