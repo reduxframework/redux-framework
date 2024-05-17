@@ -124,7 +124,8 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 = 4.4.17 =
 * Fixed: `social_profiles` in customizer.
 * Fixed: Section divide returning `null`, which caused a PHP warning.
-* Release date: May 14, 2024
+* Fixed: Undefined index in `tabbed` when resetting settings.
+* Release date: May 20, 2024
 
 = 4.4.16 =
 * Modified: Temporarily disable `social_profiles` and `color_scheme` from customizer. They don't work.
