@@ -4,7 +4,7 @@
 * Fixed: `social_profiles` in customizer.
 * Fixed: Section divide returning `null`, which caused a PHP warning.
 * Fixed: Undefined index in `tabbed` when resetting settings.
-* Release date: May 20, 2024
+* Release date: May 23, 2024
 
 ## 4.4.16
 * Modified: Temporarily disable `social_profiles` and `color_scheme` from customizer. They don't work.
