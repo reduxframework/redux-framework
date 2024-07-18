@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.17.1
+* Updated: Font Awesome 6.6.0
+
 ## 4.4.17
 * Fixed: `social_profiles` in customizer.
 * Fixed: Section divide returning `null`, which caused a PHP warning.
