@@ -289,69 +289,92 @@
 	};
 
 	redux.field_objects.color_scheme.import = function ( el ) {
-		var fieldID  = redux.field_objects.color_scheme.fieldID;
-		var optName  = redux.field_objects.color_scheme.optName;
-		var myUpload = el.find( '#redux-' + fieldID + '-import-scheme-button' );
-		var submit   = myUpload.data( 'submit' );
-		var nonce    = myUpload.data( 'nonce' );
+		var fieldID = redux.field_objects.color_scheme.fieldID;
 
-		myUpload.upload(
-			{
-				name: 'file',
-				method: 'post',
-				action: submit + 'class-redux-color-scheme-import.php',
-				nonce: nonce,
-				enctype: 'multipart/form-data',
-				fileType: '.json',
-				params: {
-					type: 'import',
-					field_id: fieldID,
-					opt_name: optName,
-					nonce: nonce
-				},
-				autoSubmit: true,
-				onSubmit: function () {},
-				onComplete: function ( data ) {
+		el.find( '.redux-import-scheme-button' ).on(
+			'click',
+			function () {
+				$( '#redux-color-scheme-upload-file' ).trigger( 'click' );
+			}
+		);
 
-					// Parse JSON.
-					data = JSON.parse( data );
+		document.getElementById( 'redux-color-scheme-upload-file' ).addEventListener(
+			'change',
+			function () {
+				var file_to_read = document.getElementById( 'redux-color-scheme-upload-file' ).files[0];
+				console.log( file_to_read );
 
-					// Set success/fail message.
-					el.find( '#redux-' + fieldID + '-scheme-message-notice h2' ).html( data.data );
+				if ( 'application/json' === file_to_read.type ) {
+					var fileread = new FileReader();
 
-					// Show message.
-					$.blockUI(
-						{
-							message: el.find( '#redux-' + fieldID + '-scheme-message-notice' ),
-							theme: false,
-							css: {
-								width: '500px', padding: '5px'
+					fileread.readAsText( file_to_read );
+
+					fileread.onload = function () {
+						var content = fileread.result;
+						var data;
+
+						data = {
+							action: 'redux_color_schemes',
+							nonce: redux.field_objects.color_scheme.nonce,
+							opt_name: redux.field_objects.color_scheme.optName,
+							type: 'import',
+							content: content
+						};
+
+						// Post ajax.
+						$.post(
+							redux_ajax_script.ajaxurl,
+							data,
+							function ( response ) {
+								response = JSON.parse( response );
+
+								console.log( response );
+
+								el.find( '#redux-' + fieldID + '-scheme-message-notice h2' ).html( response.data );
+
+								// Show message.
+								$.blockUI(
+									{
+										message: el.find( '#redux-' + fieldID + '-scheme-message-notice' ),
+										theme: false,
+										css: {
+											width: '500px', padding: '5px'
+										}
+									}
+								);
+
+								// Click OK.
+								$( '#redux-' + fieldID + '-scheme-ok' ).on(
+									'click',
+									function () {
+
+										// Unload modal.
+										$.unblockUI();
+
+										// Reload window on success.
+										if ( true === response.result ) {
+											window.onbeforeunload = '';
+											location.reload();
+										}
+
+										// Bail out!
+										return false;
+									}
+								);
+
+								// Successful import.
+								if ( true === response.result ) {
+									console.log( 'yes' );
+								} else {
+									console.log( 'no' );
+								}
 							}
-						}
-					);
+						);
+					};
 
-					// Click OK.
-					$( '#redux-' + fieldID + '-scheme-ok' ).on(
-						'click',
-						function () {
-
-							// Unload modal.
-							$.unblockUI();
-
-							// Reload window on success.
-							if ( true === data.result ) {
-								window.onbeforeunload = '';
-								location.reload();
-							}
-
-							// Bail out!
-							return false;
-						}
-					);
-				},
-
-				// Unused.
-				onSelect: function () {
+					fileread.onerror = function () {
+						console.log( fileread.error );
+					};
 				}
 			}
 		);
@@ -705,7 +728,6 @@
 								}
 							);
 
-							//redux.field_objects.color_scheme.init( el );
 							el.find( '#redux-scheme-select-' + redux.field_objects.color_scheme.fieldID ).on(
 								'change',
 								function () {

@@ -1,12 +1,12 @@
 /* global jQuery, document, redux, ajaxurl, ImportExport */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects               = redux.field_objects || {};
 	redux.field_objects.import_export = redux.field_objects.import_export || {};
 
-	redux.field_objects.import_export.copy_text = function( $text ) {
+	redux.field_objects.import_export.copy_text = function ( $text ) {
 		var copyFrom = document.createElement( 'textarea' );
 		document.body.appendChild( copyFrom );
 		copyFrom.textContent = $text;
@@ -15,7 +15,7 @@
 		copyFrom.remove();
 	};
 
-	redux.field_objects.import_export.get_options = function( $secret ) {
+	redux.field_objects.import_export.get_options = function ( $secret ) {
 		var $el = $( '#redux-export-code-copy' );
 		var url = ajaxurl + '?download=0&action=redux_download_options-' + redux.optName.args.opt_name + '&secret=' + $secret;
 
@@ -24,12 +24,12 @@
 
 		$.get(
 			url,
-			function( data ) {
+			function ( data ) {
 				redux.field_objects.import_export.copy_text( data );
 				$el.removeClass( 'disabled' );
 				$el.text( $el.data( 'copied' ) );
 				setTimeout(
-					function() {
+					function () {
 						$el.text( $el.data( 'copy' ) ).removeClass( 'disabled' ).prop( 'disabled', false );
 					},
 					2000
@@ -38,11 +38,11 @@
 		);
 	};
 
-	redux.field_objects.import_export.init = function( selector ) {
+	redux.field_objects.import_export.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'import_export' );
 
 		$( selector ).each(
-			function() {
+			function () {
 				var textBox1;
 				var textBox2;
 
@@ -64,11 +64,11 @@
 				}
 
 				el.each(
-					function() {
+					function () {
 						$( '#redux-import' ).on(
 							'click',
-							function( e ) {
-								if ( '' === $( '#import-code-value' ).val() && '' === $( '#import-link-value' ).val() ) {
+							function ( e ) {
+								if ( '' === $( '#import-code-value' ).val() ) {
 									e.preventDefault();
 									return false;
 								}
@@ -77,16 +77,16 @@
 
 						$( this ).find( '#redux-import-code-button' ).on(
 							'click',
-							function() {
+							function () {
 								var $el = $( '#redux-import-code-wrapper' );
 								if ( $el.is( ':visible' ) ) {
 									$( '#import-link-value' ).val( '' );
 									$( '#redux-import-link-wrapper' ).fadeOut(
 										'fast',
-										function() {
+										function () {
 											$el.fadeIn(
 												'fast',
-												function() {
+												function () {
 													$( '#import-code-value' ).trigger( 'focus' );
 												}
 											);
@@ -98,7 +98,7 @@
 									} else {
 										$el.fadeIn(
 											'medium',
-											function() {
+											function () {
 												$( '#import-code-value' ).trigger( 'focus' );
 											}
 										);
@@ -109,14 +109,14 @@
 
 						$( this ).find( '#redux-export-code-dl' ).on(
 							'click',
-							function( e ) {
+							function ( e ) {
 								e.preventDefault();
 
-								if ( !! window.onbeforeunload ) {
+								if ( ! ! window.onbeforeunload ) {
 									if ( confirm( ImportExport.unchanged_values ) ) {
 										$( '#redux_top_save' ).on( 'click' );
 										setTimeout(
-											function() {
+											function () {
 												window.open( $( this ).attr( 'href' ) );
 											},
 											2000
@@ -130,20 +130,20 @@
 
 						$( this ).find( '#redux-import-upload' ).on(
 							'click',
-							function() {
+							function () {
 								$( '#redux-import-upload-file' ).trigger( 'click' );
 							}
 						);
 
 						document.getElementById( 'redux-import-upload-file' ).addEventListener(
 							'change',
-							function() {
+							function () {
 								var file_to_read = document.getElementById( 'redux-import-upload-file' ).files[0];
 								var fileread     = new FileReader();
 
 								$( '#redux-import-upload span' ).text( ': ' + file_to_read.name );
 
-								fileread.onload = function() {
+								fileread.onload = function () {
 									var content = fileread.result;
 									$( '#import-code-value' ).val( content );
 								};
@@ -154,16 +154,16 @@
 
 						$( this ).find( '#redux-export-code-copy' ).on(
 							'click',
-							function( e ) {
+							function ( e ) {
 								var $el     = $( '#redux-export-code' );
 								var $secret = $( this ).data( 'secret' );
 
 								e.preventDefault();
-								if ( !! window.onbeforeunload ) {
+								if ( ! ! window.onbeforeunload ) {
 									if ( confirm( ImportExport.unchanged_values ) ) {
 										$( '#redux_top_save' ).trigger( 'click' );
 										setTimeout(
-											function() {
+											function () {
 												redux.field_objects.import_export.get_options( $secret, $el );
 											},
 											2000
@@ -177,7 +177,7 @@
 
 						$( this ).find( 'textarea' ).on(
 							'focusout',
-							function() {
+							function () {
 								var $id        = $( this ).attr( 'id' );
 								var $el        = $( this );
 								var $container = $el;
@@ -188,7 +188,7 @@
 
 								$container.fadeOut(
 									'medium',
-									function() {
+									function () {
 										if ( 'redux-export-link-value' !== $id ) {
 											$el.text( '' );
 										}
@@ -199,11 +199,11 @@
 
 						textBox1 = document.getElementById( 'redux-export-code' );
 
-						textBox1.onfocus = function() {
+						textBox1.onfocus = function () {
 							textBox1.select();
 
 							// Work around Chrome's little problem.
-							textBox1.onmouseup = function() {
+							textBox1.onmouseup = function () {
 
 								// Prevent further mouseup intervention.
 								textBox1.onmouseup = null;
@@ -213,11 +213,11 @@
 
 						textBox2 = document.getElementById( 'import-code-value' );
 
-						textBox2.onfocus = function() {
+						textBox2.onfocus = function () {
 							textBox2.select();
 
 							// Work around Chrome's little problem.
-							textBox2.onmouseup = function() {
+							textBox2.onmouseup = function () {
 
 								// Prevent further mouseup intervention.
 								textBox2.onmouseup = null;

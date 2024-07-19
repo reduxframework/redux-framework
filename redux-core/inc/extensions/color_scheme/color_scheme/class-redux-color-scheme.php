@@ -219,6 +219,8 @@ if ( ! class_exists( 'Redux_Color_Scheme' ) ) {
                                     class="noUpdate redux-import-scheme-button button-secondary">' . esc_html__( 'Import', 'redux-framework' ) . '
                                 </a>';
 
+				echo '          <input type="file" accept="application/json" id="redux-color-scheme-upload-file" size="50">';
+
 				if ( $this->field['tooltip_toggle'] && $tt_in_use ) {
 					$checked = '';
 					if ( $tt_toggle_state ) {
@@ -258,15 +260,6 @@ if ( ! class_exists( 'Redux_Color_Scheme' ) ) {
 
 			// Set up min files for dev_mode = false.
 			$min = Redux_Functions::is_min();
-
-			// One-Click Upload.
-			wp_enqueue_script(
-				'redux-ocupload',
-				$this->url . 'vendor/jquery.ocupload' . $min . '.js',
-				array( 'jquery' ),
-				'1.1.2',
-				true
-			);
 
 			// Field dependent JS.
 			wp_enqueue_script(
