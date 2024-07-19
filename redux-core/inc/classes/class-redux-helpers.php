@@ -481,16 +481,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Create unique hash.
-		 *
-		 * @return string
-		 */
-		public static function get_hash(): string {
-			$remote_addr = Redux_Core::$server['REMOTE_ADDR'] ?? '127.0.0.1';
-			return md5( network_site_url() . '-' . $remote_addr );
-		}
-
-		/**
 		 * Get info for specified file.
 		 *
 		 * @param string $file File to check.

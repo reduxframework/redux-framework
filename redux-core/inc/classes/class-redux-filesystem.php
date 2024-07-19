@@ -305,21 +305,6 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 			if ( ! $this->is_dir( Redux_Core::$upload_dir ) ) {
 				$this->mkdir( Redux_Core::$upload_dir );
 			}
-
-			$hash_path = trailingslashit( Redux_Core::$upload_dir ) . 'hash';
-			if ( ! $this->file_exists( $hash_path ) ) {
-				$this->put_contents( $hash_path, Redux_Helpers::get_hash() );
-			}
-
-			$version_path = trailingslashit( Redux_Core::$upload_dir ) . 'version';
-			if ( ! $this->file_exists( $version_path ) ) {
-				$this->put_contents( $version_path, Redux_Core::$version );
-			} else {
-				$version_compare = $this->get_contents( $version_path );
-				if ( (string) Redux_Core::$version !== $version_compare ) {
-					$this->put_contents( $version_path, Redux_Core::$version );
-				}
-			}
 		}
 
 		/**
