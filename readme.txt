@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.1
 Tested up to: 6.6
-Stable tag: 4.4.17
+Stable tag: 4.4.18
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,11 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+= 4.4.18 =
+* Fixed: #4006: XSS fix in 'color_scheme' import.
+* Updated: Font Awesome 6.6.0
+* Release date: July 19, 2024
+
 = 4.4.17 =
 * Fixed: `social_profiles` in customizer.
 * Fixed: Section divide returning `null`, which caused a PHP warning.

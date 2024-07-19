@@ -1,7 +1,9 @@
 # Redux Changelog
 
-## 4.4.17.1
+## 4.4.18
+* Fixed: #4006: XSS fix in 'color_scheme' import.
 * Updated: Font Awesome 6.6.0
+* Release date: July 19, 2024
 
 ## 4.4.17
 * Fixed: `social_profiles` in customizer.

@@ -8,7 +8,7 @@
  * Plugin URI:          http://wordpress.org/plugins/redux-framework
  * GitHub URI:          reduxframework/redux-framework
  * Description:         Build better sites in WordPress fast!
- * Version:             4.4.17.1
+ * Version:             4.4.18
  * Requires at least:   5.0
  * Requires PHP:        7.1
  * Author:              Team Redux
@@ -21,7 +21,7 @@
  * @package             ReduxFramework
  * @author              Team Redux
  * @license             GNU General Public License, version 3
- * @copyright           2012-2023 Redux.io
+ * @copyright           2012-2024 Redux.io
  */
 
 // Exit if accessed directly.
