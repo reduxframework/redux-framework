@@ -53,6 +53,34 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		public $upload_url = '';
 
 		/**
+		 * Subfolder name.
+		 *
+		 * @var string
+		 */
+		public $subfolder = 'custom/';
+
+		/**
+		 * Font folder.
+		 *
+		 * @var string
+		 */
+		public $font_folder = '';
+
+		/**
+		 * Font Filename.
+		 *
+		 * @var string
+		 */
+		public $font_filename = '';
+
+		/**
+		 * File selected in media upload.
+		 *
+		 * @var string
+		 */
+		public $selected_file = '';
+
+		/**
 		 * Extension instance.
 		 *
 		 * @var null
@@ -306,9 +334,16 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 				try {
 					if ( isset( $_POST['section'] ) || isset( $_POST['name'] ) ) {
-						$this->parent->filesystem->execute( 'rmdir', $this->upload_dir . sanitize_title( wp_unslash( $_POST['section'] ) ) . '/' . sanitize_title( wp_unslash( $_POST['name'] ) ) . '/', array( 'recursive' => true ) );
+						$ret = $this->parent->filesystem->execute( 'rmdir', $this->upload_dir . sanitize_file_name( wp_unslash( $_POST['section'] ) ) . '/' . sanitize_file_name( wp_unslash( $_POST['name'] ) ) . '/', array( 'recursive' => true ) );
 
-						$result = array( 'type' => 'success' );
+						if ( true === $ret ) {
+							$result = array( 'type' => 'success' );
+						} else {
+							$result = array(
+								'type' => 'error',
+								'msg'  => esc_html__( 'File system failure. Could not delete temp dir.', 'redux-framework' ),
+							);
+						}
 
 						echo wp_json_encode( $result );
 					}
@@ -332,9 +367,12 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				$_POST['filename'] = '';
 			}
 
+			$this->font_folder   = sanitize_file_name( wp_unslash( $_POST['title'] ) );
+			$this->font_filename = sanitize_file_name( wp_unslash( $_POST['filename'] ) );
+
 			if ( ! empty( $_POST['attachment_id'] ) ) {
 				if ( isset( $_POST['title'] ) || isset( $_POST['mime'] ) ) {
-					$msg = $this->process_web_font( sanitize_key( wp_unslash( $_POST['attachment_id'] ) ), sanitize_text_field( wp_unslash( $_POST['title'] ) ), sanitize_text_field( wp_unslash( $_POST['filename'] ) ), sanitize_text_field( wp_unslash( $_POST['mime'] ) ) );
+					$msg = $this->process_web_font( sanitize_key( wp_unslash( $_POST['attachment_id'] ) ), sanitize_text_field( wp_unslash( $_POST['mime'] ) ) );
 
 					if ( empty( $msg ) ) {
 						$msg = '';
@@ -388,11 +426,9 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Take a valid web font and process the missing pieces.
 		 *
 		 * @param string $attachment_id ID.
-		 * @param string $name          Name.
-		 * @param string $true_filename Filename.
 		 * @param string $mime_type     Mine type.
 		 */
-		public function process_web_font( string $attachment_id, string $name, string $true_filename, string $mime_type ) {
+		public function process_web_font( string $attachment_id, string $mime_type ) {
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( ! isset( $_POST['conversion'] ) ) {
 				$_POST['conversion'] = 'false';
@@ -412,22 +448,21 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'otf',
 			);
 
-			$subfolder = 'custom/';
-			$subtype   = explode( '/', $mime_type );
-			$subtype   = trim( max( $subtype ) );
+			$subtype = explode( '/', $mime_type );
+			$subtype = trim( max( $subtype ) );
 
 			if ( ! is_dir( $this->upload_dir ) ) {
 				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir );
 			}
 
-			if ( ! is_dir( $this->upload_dir . $subfolder ) ) {
-				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $subfolder );
+			if ( ! is_dir( $this->upload_dir . $this->subfolder ) ) {
+				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder );
 			}
 
-			$temp = $this->upload_dir . 'temp';
-			$path = get_attached_file( $attachment_id );
+			$temp                = $this->upload_dir . 'temp';
+			$this->selected_file = get_attached_file( $attachment_id );
 
-			if ( empty( $path ) ) {
+			if ( empty( $this->selected_file ) ) {
 				echo wp_json_encode(
 					array(
 						'type' => 'error',
@@ -438,7 +473,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				die();
 			}
 
-			$filename = explode( '/', $path );
+			$filename = explode( '/', $this->selected_file );
 
 			$filename = $filename[ ( count( $filename ) - 1 ) ];
 
@@ -458,8 +493,8 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				)
 			);
 
-			if ( empty( $name ) ) {
-				$name = $fontname;
+			if ( empty( $this->font_folder ) ) {
+				$this->font_folder = $fontname;
 			}
 
 			$ret = array();
@@ -469,7 +504,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			}
 
 			if ( 'zip' === $subtype ) {
-				$unzipfile = unzip_file( $path, $temp );
+				$unzipfile = unzip_file( $this->selected_file, $temp );
 
 				if ( is_wp_error( $unzipfile ) ) {
 					echo wp_json_encode(
@@ -491,13 +526,13 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 						}
 					}
 
-					if ( ! is_dir( $this->upload_dir . $subfolder . $name . '/' ) ) {
-						$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $subfolder . $name . '/' );
+					if ( ! is_dir( $this->upload_dir . $this->subfolder . $this->font_folder . '/' ) ) {
+						$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/' );
 					}
 
 					foreach ( $output as $key => $value ) {
 						$param_array = array(
-							'destination' => $this->upload_dir . $subfolder . $name . '/' . $fontname . '.' . $key,
+							'destination' => $this->upload_dir . $this->subfolder . $this->font_folder . '/' . $fontname . '.' . $key,
 							'overwrite'   => true,
 							'chmod'       => 755,
 						);
@@ -506,7 +541,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					}
 
 					if ( true === $this->can_convert && 'true' === $conversion ) {
-						$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder, $true_filename );
+						$ret = $this->get_missing_files( $fontname, $missing, $output );
 					}
 				}
 
@@ -524,23 +559,36 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					}
 				}
 
-				if ( ! is_dir( $this->upload_dir . $subfolder . $name . '/' ) ) {
-					$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $subfolder . $name . '/' );
+				if ( ! is_dir( $this->upload_dir . $this->subfolder . $this->font_folder . '/' ) ) {
+					$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/' );
 				}
 
-				$output = array( $subtype => $path );
+				$output = array( $subtype => $this->selected_file );
 
-				// TODO: COnversion error not moving single file.
 				if ( true === $this->can_convert && 'true' === $conversion ) {
-					$ret = $this->get_missing_files( $name, $fontname, $missing, $output, $subfolder, $true_filename );
-				} else {
-					$param_array = array(
-						'destination' => $this->upload_dir . $subfolder . '/' . $name . '/' . $true_filename, // $fontname . '.' . $subtype,
-						'overwrite'   => true,
-						'chmod'       => 755,
-					);
+					$ret = $this->get_missing_files( $fontname, $missing, $output );
 
-					$this->parent->filesystem->execute( 'copy', $path, $param_array );
+					if ( false === $ret ) {
+						if ( false === $this->convert_local_font() ) {
+							echo wp_json_encode(
+								array(
+									'type' => 'error',
+									'msg'  => esc_html__( 'File permission error. Local file could not be installed.', 'redux-framework' ) . ' ' . $subtype,
+								)
+							);
+
+							die;
+						}
+					}
+				} elseif ( false === $this->convert_local_font() ) {
+						echo wp_json_encode(
+							array(
+								'type' => 'error',
+								'msg'  => esc_html__( 'File permission error. Local file could not be installed.', 'redux-framework' ) . ' ' . $subtype,
+							)
+						);
+
+						die;
 				}
 
 				$this->parent->filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
@@ -573,20 +621,32 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		}
 
 		/**
+		 * Install selected file into Custom Fonts.
+		 *
+		 * @return bool
+		 */
+		private function convert_local_font(): bool {
+			$param_array = array(
+				'destination' => $this->upload_dir . $this->subfolder . '/' . $this->font_folder . '/' . $this->font_filename,
+				'overwrite'   => true,
+				'chmod'       => 755,
+			);
+
+			return $this->parent->filesystem->execute( 'copy', $this->selected_file, $param_array );
+		}
+
+		/**
 		 * Ping the WebFontOMatic API to get the missing files.
 		 *
-		 * @param string $name      Name.
 		 * @param string $fontname  Font name.
 		 * @param array  $missing   Missing.
 		 * @param array  $output    Output.
-		 * @param string $subfolder Folder.
-		 * @param string $true_filename Font name with extension.
 		 */
-		private function get_missing_files( string $name, string $fontname, array $missing, array $output, string $subfolder, string $true_filename ) {
-			if ( ! empty( $name ) && ! empty( $missing ) ) {
+		private function get_missing_files( string $fontname, array $missing, array $output ) {
+			if ( ! empty( $this->font_folder ) && ! empty( $missing ) ) {
 				$temp = $this->upload_dir . 'temp';
 
-				$font_ext = pathinfo( $true_filename, PATHINFO_EXTENSION );
+				$font_ext = pathinfo( $this->font_filename, PATHINFO_EXTENSION );
 
 				$unsupported = array( 'eot', 'woff', 'woff2' );
 
@@ -609,12 +669,12 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					);
 
 					$this->parent->filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
-					$this->parent->filesystem->execute( 'rmdir', $this->upload_dir . $subfolder . $name . '/', array( 'recursive' => true ) );
+					$this->parent->filesystem->execute( 'rmdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/', array( 'recursive' => true ) );
 
 					die();
 				}
 
-				update_option( 'redux_custom_font_current', $name . '.zip' );
+				update_option( 'redux_custom_font_current', $this->font_folder . '.zip' );
 
 				$boundary = wp_generate_password( 24 );
 
@@ -670,7 +730,11 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 				$zip_file = $temp . DIRECTORY_SEPARATOR . $fontname . '.zip';
 
-				$ret = $this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
+				$this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
+
+				if ( 0 === filesize( $zip_file ) ) {
+					return false;
+				}
 
 				$zip = unzip_file( $zip_file, $temp );
 
@@ -684,18 +748,18 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 					foreach ( $files as $file ) {
 						$param_array = array(
-							'destination' => $this->upload_dir . $subfolder . $name . DIRECTORY_SEPARATOR . $file['name'],
+							'destination' => $this->upload_dir . $this->subfolder . $this->font_folder . DIRECTORY_SEPARATOR . sanitize_file_name( $file['name'] ),
 							'overwrite'   => true,
 							'chmod'       => 755,
 						);
 
-						$this->parent->filesystem->execute( 'move', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR . $file['name'], $param_array );
+						$this->parent->filesystem->execute( 'move', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR . sanitize_file_name( $file['name'] ), $param_array );
 					}
 				} else {
 					$path_parts = pathinfo( $output[ $main ] );
 
 					$param_array = array(
-						'destination' => $this->upload_dir . $subfolder . $name . DIRECTORY_SEPARATOR . $path_parts['basename'],
+						'destination' => $this->upload_dir . $this->subfolder . $this->font_folder . DIRECTORY_SEPARATOR . sanitize_file_name( $path_parts['basename'] ),
 						'overwrite'   => true,
 						'chmod'       => 755,
 					);
@@ -719,7 +783,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				delete_option( 'redux_custom_font_current' );
 			}
 
-			return '';
+			return true;
 		}
 
 		/**
