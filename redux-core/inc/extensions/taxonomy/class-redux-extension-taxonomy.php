@@ -1091,7 +1091,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/taxonomy/save/before_validate', $to_save, $to_compare, $this->sections );
 
-			$validate = $this->parent->_validate_values( $to_save, $to_compare, $this->sections );
+			$validate = $this->parent->validate_class->validate( $to_save, $to_compare, $this->sections );
 
 			// Validate fields (if needed).
 			foreach ( $to_save as $key => $value ) {
