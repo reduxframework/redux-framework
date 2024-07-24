@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.18.1
+* #4008 - Fixed: Font conversion failure fallback.
+* Fixed: Replaced `validate_values` deprecation in `taxonomy` metabox.
+
 ## 4.4.18
 * Fixed: #4006: XSS fix in 'color_scheme' import.
 * Updated: Font Awesome 6.6.0
