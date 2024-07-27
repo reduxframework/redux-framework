@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.18.2
+* Moved: Font conversion routine into core until the redux.io converter can be repaired.
+* Moved: Google Font updated moved off Redux GitHub to Kev's GitHub until it can be fixed.
+
 ## 4.4.18.1
 * #4008 - Fixed: Font conversion failure fallback.
 * Fixed: Replaced `validate_values` deprecation in `taxonomy` metabox.
