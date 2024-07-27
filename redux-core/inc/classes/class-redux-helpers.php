@@ -930,7 +930,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			if ( ! file_exists( $path ) || ( file_exists( $path ) && $download && self::google_fonts_update_needed() ) ) {
 				if ( $download ) {
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
-					$url = apply_filters( 'redux/typography/google_fonts/url', 'https://raw.githubusercontent.com/reduxframework/google-fonts/master/google_fonts.json' );
+					$url = apply_filters( 'redux/typography/google_fonts/url', 'https://raw.githubusercontent.com/svl-studios/google-fonts/master/google_fonts.json' );
 
 					$request = wp_remote_get(
 						$url,
