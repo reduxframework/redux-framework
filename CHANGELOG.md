@@ -1,11 +1,15 @@
 # Redux Changelog
 
+## 4.4.18.3
+* Fixed: #4011 - `editor` in `repeater` field not saving.
+* Fixed: `editor` in added `repeater` fields not properly initializing.
+
 ## 4.4.18.2
 * Moved: Font conversion routine into core until the redux.io converter can be repaired.
 * Moved: Google Font updated moved off Redux GitHub to Kev's GitHub until it can be fixed.
 
 ## 4.4.18.1
-* #4008 - Fixed: Font conversion failure fallback.
+* Fixed: #4008 - Font conversion failure fallback.
 * Fixed: Replaced `validate_values` deprecation in `taxonomy` metabox.
 
 ## 4.4.18
