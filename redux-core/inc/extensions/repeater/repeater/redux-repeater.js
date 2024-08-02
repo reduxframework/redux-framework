@@ -1,4 +1,4 @@
-/* global redux_change, redux, reduxRepeaterAccordionActivate, reduxRepeaterAccordionBeforeActivate */
+/* global redux_change, redux, tinymce, quicktags, QTags, reduxRepeaterAccordionActivate, reduxRepeaterAccordionBeforeActivate */
 
 ( function ( $ ) {
 	'use strict';
@@ -138,8 +138,43 @@
 
 				newSlide.find( '.ui-accordion-content' ).html( html );
 
+				var items = [];
+
+				if ( newSlide.find( '.redux-container-editor' ) ) {
+					var first_editor_id = $( '.redux-repeater-accordion-repeater:first' ).find( '.redux-container-editor' ).attr( 'data-id' );
+					console.log( first_editor_id );
+					var editor_settings = window.tinyMCEPreInit.mceInit[first_editor_id];
+					//console.log( editor_settings );
+					$.each(
+						newSlide.find( '.redux-container-editor' ),
+						function () {
+							// Grab an editor id.
+							items.push( $( this ).attr( 'data-id' ) );
+							// Grab an editor settings from wp_editor
+							// Grab a quicktags settings.
+
+							// console.log( tinymce.get("pref_questions_answer-0").getContent());
+
+							var quicktags_setting = QTags.getInstance( first_editor_id ).settings;
+							quicktags_setting.id  = items[items.length - 1];
+						}
+					);
+				}
+
 				// Append to the accordion.
 				$( parent ).append( newSlide );
+
+				// Render tinymce !
+				if ( newSlide.find( '.redux-container-editor' ) ) {
+					jQuery.each(
+						items,
+						function ( i, new_editor_id ) {
+							tinymce.createEditor( new_editor_id, editor_settings ).render();
+							quicktags( new_editor_id );
+							QTags._buttonsInit();
+						}
+					);
+				}
 
 				// Reorder.
 				redux.field_objects.repeater.sort_repeaters( newSlide );
@@ -445,7 +480,7 @@
 	redux_hook(
 		$.redux,
 		'required',
-		function ( returnValue, originalFunction ) {
+		function () {
 			var reduxObj;
 
 			reduxObj = redux.field_objects.repeater.getOptName( $( '.redux-container-repeater' ) );
@@ -522,7 +557,7 @@
 
 				$.each(
 					reduxObject.required[idNoIndex],
-					function ( child, dependents ) {
+					function ( child ) {
 						var current;
 						var show;
 						var childFieldset;
