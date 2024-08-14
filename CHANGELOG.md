@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.18.4
+* Fixed: Font Conversion issue resolved serverside.
+
 ## 4.4.18.3
 * Fixed: #4011 - `editor` in `repeater` field not saving.
 * Fixed: `editor` in added `repeater` fields not properly initializing.
