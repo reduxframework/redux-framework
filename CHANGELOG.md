@@ -2,6 +2,7 @@
 
 ## 4.4.18.4
 * Fixed: Font Conversion issue resolved serverside.
+* Fixed: #4009 - Google Font update issue resolved.
 
 ## 4.4.18.3
 * Fixed: #4011 - `editor` in `repeater` field not saving.
