@@ -644,8 +644,6 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 */
 		private function get_missing_files( string $fontname, array $missing, array $output ) {
 			if ( ! empty( $this->font_folder ) && ! empty( $missing ) ) {
-				include dirname( __DIR__ ) . '/custom_fonts/vendor/unirest/Unirest.php';
-
 				$temp = $this->upload_dir . 'temp';
 
 				$font_ext = pathinfo( $this->font_filename, PATHINFO_EXTENSION );
@@ -678,25 +676,6 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 				update_option( 'redux_custom_font_current', $this->font_folder . '.zip' );
 
-				$response = Unirest\Request::post(
-					'https://webfontomatic.com/convert',
-					array(
-						'Content-Type' => 'multipart/form-data',
-					),
-					array(
-						'file' => Unirest\Request\Body::file( $output[ $main ] ),
-					)
-				);
-
-				/**
-				 * If the Updraft folks ever gets the redux.io site working again, we can
-				 * uncomment out all the original code and put everything back the way it was.
-				 *
-				 * - Kp.
-				 */
-
-				// phpcs:disable
-				/*
 				$boundary = wp_generate_password( 24 );
 
 				$headers = array(
@@ -735,29 +714,25 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				$response = wp_remote_post( $api_url, $args );
 
 				if ( is_wp_error( $response ) ) {
-				*/
-
-				if ( 200 !== $response->code ) {
 					return array(
 						'type' => 'error',
-						'msg'  => /* $response->get_error_message() . '<br><br>' . */ esc_html__( 'Your font could not be converted at this time. Please try again later.', 'redux-framework' ),
+						'msg'  => $response->get_error_message() . '<br><br>' . esc_html__( 'Your font could not be converted at this time. Please try again later.', 'redux-framework' ),
 					);
-				/* } elseif ( isset( $response['body'] ) ) {
-					if( null !== json_decode( $response['body'] ) ) {
+				} elseif ( isset( $response['body'] ) ) {
+					if ( null !== json_decode( $response['body'] ) ) {
 						return json_decode( $response['body'], true );
-					} */
+					}
 				}
-				// phpcs: enable
 
 				$param_array = array(
-					'content'   => $response->raw_body,
+					'content'   => $response['body'],
 					'overwrite' => true,
 					'chmod'     => FS_CHMOD_FILE,
 				);
 
 				$zip_file = $temp . DIRECTORY_SEPARATOR . $fontname . '.zip';
 
-				$ret = $this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
+				$this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
 
 				if ( 0 === filesize( $zip_file ) ) {
 					return false;
