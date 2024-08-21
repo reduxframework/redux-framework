@@ -142,19 +142,16 @@
 
 				if ( newSlide.find( '.redux-container-editor' ) ) {
 					var first_editor_id = $( '.redux-repeater-accordion-repeater:first' ).find( '.redux-container-editor' ).attr( 'data-id' );
-					console.log( first_editor_id );
 					var editor_settings = window.tinyMCEPreInit.mceInit[first_editor_id];
-					//console.log( editor_settings );
+
 					$.each(
 						newSlide.find( '.redux-container-editor' ),
 						function () {
 							// Grab an editor id.
 							items.push( $( this ).attr( 'data-id' ) );
+
 							// Grab an editor settings from wp_editor
 							// Grab a quicktags settings.
-
-							// console.log( tinymce.get("pref_questions_answer-0").getContent());
-
 							var quicktags_setting = QTags.getInstance( first_editor_id ).settings;
 							quicktags_setting.id  = items[items.length - 1];
 						}
@@ -166,7 +163,7 @@
 
 				// Render tinymce !
 				if ( newSlide.find( '.redux-container-editor' ) ) {
-					jQuery.each(
+					$.each(
 						items,
 						function ( i, new_editor_id ) {
 							tinymce.createEditor( new_editor_id, editor_settings ).render();

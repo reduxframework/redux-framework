@@ -195,6 +195,8 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 		 * @since ReduxFramework 0.0.4
 		 */
 		public function enqueue() {
+			wp_print_styles( 'editor-buttons' );
+
 			wp_enqueue_script(
 				'redux-field-tabbed',
 				Redux_Core::$url . 'inc/extensions/tabbed/tabbed/redux-tabbed' . Redux_Functions::is_min() . '.js',
