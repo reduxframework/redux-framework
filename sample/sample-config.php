@@ -1,7 +1,7 @@
 <?php
 /**
  * ReduxFramework Sample Config File
- * For full documentation, please visit: http://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io/
  *
  * @package Redux Framework
  */
@@ -121,7 +121,7 @@ $args = array(
 	// Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
 	'page_priority'             => 90,
 
-	// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters.
+	// For a full list of options, visit: https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters.
 	'page_parent'               => 'themes.php',
 
 	// Permissions needed to access the options panel.
