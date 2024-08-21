@@ -3,14 +3,14 @@
 	"authors": [
 		{
 			"name": "Redux.io",
-			"homepage": "http://redux.io",
+			"homepage": "https://redux.io",
 			"email": "support@redux.io",
 			"role": "Support"
 		}
 	],
 	"type": "wordpress-plugin",
 	"description": "Build better and beautiful sites in WordPress, faster.",
-	"homepage": "http://redux.io",
+	"homepage": "https://redux.io",
 	"license": "GPL-3.0-or-later",
 	"keywords": [
 		"settings",

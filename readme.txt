@@ -97,7 +97,7 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 
 <h4>📝 Documentation and Support</h4>
 <ul>
-<li>We have extremely extensive docs. Please visit [http://devs.redux.io/](http://devs.redux.io). If that doesn't solve your issue, search [the issue tracker on GitHub](https://github.com/reduxframework/redux-framework/issues). If you can’t locate any topics that pertain to your particular problem, [post a new issue](https://github.com/reduxframework/redux-framework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build on the dev version and push it to WordPress.org when we confirm Redux is stable and ready for release.</li>
+<li>We have extremely extensive docs. Please visit [https://devs.redux.io/](https://devs.redux.io). If that doesn't solve your issue, search [the issue tracker on GitHub](https://github.com/reduxframework/redux-framework/issues). If you can’t locate any topics that pertain to your particular problem, [post a new issue](https://github.com/reduxframework/redux-framework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build on the dev version and push it to WordPress.org when we confirm Redux is stable and ready for release.</li>
 <li>If you have additional questions, reach out to us at support@redux.io</li>
 </ul>
 
@@ -463,5 +463,5 @@ Redux is an option framework... in other words, it's not designed to do anything
 
 = How can I learn more about Redux? =
 
-Visit our website at [https://redux.io/](http://redux.io)
+Visit our website at [https://redux.io/](https://redux.io)
 

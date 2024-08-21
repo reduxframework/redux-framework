@@ -1,7 +1,7 @@
 <?php
 /**
  * Redux Framework palette config.
- * For full documentation, please visit: http://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io/
  *
  * @package Redux Framework
  */

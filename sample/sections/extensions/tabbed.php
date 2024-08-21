@@ -1,7 +1,7 @@
 <?php
 /**
  * Redux Framework tabbed config.
- * For full documentation, please visit: http://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io/
  *
  * @package Redux Framework\Sample\Tabbed
  */
@@ -52,7 +52,7 @@ Redux::set_section(
 								'compiler' => 'true',
 								'desc'     => esc_html__( 'Basic media uploader with disabled URL input field.', 'your-textdomain-here' ),
 								'subtitle' => esc_html__( 'Upload any media using the WordPress native uploader', 'your-textdomain-here' ),
-								'default'  => array( 'url' => 'http://s.wordpress.org/style/images/codeispoetry.png' ),
+								'default'  => array( 'url' => 'https://s.wordpress.org/style/images/codeispoetry.png' ),
 							),
 							array(
 								'id'       => 'opt-tab-gallery',

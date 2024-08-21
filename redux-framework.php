@@ -5,7 +5,7 @@
  * standards and PHP best practices in mind.
  *
  * Plugin Name:         Redux Framework
- * Plugin URI:          http://wordpress.org/plugins/redux-framework
+ * Plugin URI:          https://wordpress.org/plugins/redux-framework
  * GitHub URI:          reduxframework/redux-framework
  * Description:         Build better sites in WordPress fast!
  * Version:             4.4.18.4
@@ -14,7 +14,7 @@
  * Author:              Team Redux
  * Author URI:          https://redux.io
  * License:             GPLv3 or later
- * License URI:         http://www.gnu.org/licenses/gpl-3.0.txt
+ * License URI:         https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:         redux-framework
  * Provides:            ReduxFramework
  *

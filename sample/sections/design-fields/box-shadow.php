@@ -1,7 +1,7 @@
 <?php
 /**
  * Redux Box Shadow Sample config.
- * For full documentation, please visit: http:https://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io
  *
  * @package Redux
  */

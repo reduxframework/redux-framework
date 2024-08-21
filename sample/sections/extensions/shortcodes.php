@@ -1,7 +1,7 @@
 <?php
 /**
  * Redux Search Sample config.
- * For full documentation, please visit: http:https://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io
  *
  * @package Redux
  */
@@ -291,7 +291,7 @@ Redux::set_section(
 				'title'      => esc_html__( '[date data="Y"]', 'your-textdomain-here' ),
 				'subtitle'   => $function . '<code>date("Y")</code>',
 				// translators: %1$s: PHP Date Format URL.
-				'desc'       => sprintf( esc_html__( 'Returns the current year.  Any date format characters as specified by the %1$s may be used.', 'your-textdomain-here' ), '<a href="http://php.net/manual/en/function.date.php" target="_blank">' . esc_html__( 'PHP Date Format Table', 'your-textdomain-here' ) . '</a>' ),
+				'desc'       => sprintf( esc_html__( 'Returns the current year.  Any date format characters as specified by the %1$s may be used.', 'your-textdomain-here' ), '<a href="https://php.net/manual/en/function.date.php" target="_blank">' . esc_html__( 'PHP Date Format Table', 'your-textdomain-here' ) . '</a>' ),
 				'type'       => 'raw',
 				'content'    => $example . do_shortcode( '<strong>[date data="Y"]</strong>' ),
 				'full_width' => false,

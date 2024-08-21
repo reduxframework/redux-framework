@@ -59,14 +59,14 @@ Thank you for your kind attention in this matter.
 See [Changelog.md](https://github.com/reduxframework/redux-framework/blob/master/CHANGELOG.md)
 
 ## Documentation ##
-Need a little help with Redux? Come check out our brand-new documentation site at  [devs.redux.io](http://devs.redux.io), chock-full of tutorials and examples!
+Need a little help with Redux? Come check out our brand-new documentation site at  [devs.redux.io](https://devs.redux.io), chock-full of tutorials and examples!
 
 ## Help Us Translate Redux ##
 Please head over to the plugin page to learn how you can help us translate Redux quickly. Any and all translations are welcome. We appreciate your help!
 https://translate.wordpress.org/projects/wp-plugins/redux-framework/
 
 ## Features ##
-* Uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API")
+* Uses the [WordPress Settings API](https://codex.wordpress.org/Settings_API "WordPress Settings API")
 * Multiple built-in field types
 * Multiple layout field types
 * Fields can be overloaded with a callback function for custom field types
@@ -124,6 +124,6 @@ We take backward compatibility very seriously here and strive to maintain it.  R
 
 1. Why should we use ```require_once``` instead of ```get_template_part```?
 * First, because ```get_template_part``` is for... you guessed it, themes! Redux is designed to work with both themes *and* plugins.
-* Second, read [this](http://kovshenin.com/2013/get_template_part/).
+* Second, read [this](https://kovshenin.com/2013/get_template_part/).
 2. Why shouldn't we edit ```sample-config.php``` in the plugin directory?
 * Because ```sample-config.php``` will be replaced at each update of the plugin. You will lose all your work.
