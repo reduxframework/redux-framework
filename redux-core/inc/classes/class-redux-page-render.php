@@ -510,7 +510,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				if ( class_exists( $field_class ) ) {
 					$value = $core->options[ $field['id'] ] ?? '';
 
-					if ( ! empty( $v ) ) {
+					if ( null !== $v ) {
 						$value = $v;
 					}
 

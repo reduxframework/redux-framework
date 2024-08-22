@@ -122,9 +122,11 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 				}
 			}
 
-			$default = $field['default'] ?? '';
+			$default = $field['default'] ?? null;
 
-			$value = isset( $this->parent->options[ $orig_field_id ] ) && 0 !== (int) $this->parent->options[ $orig_field_id ] ? $this->parent->options[ $orig_field_id ] : $default;
+			// phpcs:ignore Squiz.PHP.CommentedOutCode.Found
+			// $value = isset( $this->parent->options[ $orig_field_id ] ) && 0 !== (int) $this->parent->options[ $orig_field_id ] ? $this->parent->options[ $orig_field_id ] : $default;
+			$value = $this->parent->options[ $orig_field_id ] ?? $default;
 
 			$this->parent->render_class->field_input( $field, $value );
 
