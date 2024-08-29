@@ -13,8 +13,8 @@
 (function ( $ ) {
 	'use strict';
 
-	var selVals     = [];
-	var isSelecting = false;
+	let selVals     = [];
+	let isSelecting = false;
 
 	redux.field_objects            = redux.field_objects || {};
 	redux.field_objects.typography = redux.field_objects.typography || {};
@@ -24,8 +24,8 @@
 
 		$( selector ).each(
 			function () {
-				var el     = $( this );
-				var parent = el;
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -41,28 +41,28 @@
 						// Init each typography field.
 						$( this ).find( '.redux-typography-container' ).each(
 							function () {
-								var el     = $( this );
-								var parent = el;
-								var key;
-								var obj;
-								var prop;
-								var fontData;
-								var val;
-								var xx;
-								var reduxTypography;
+								const el   = $( this );
+								let parent = el;
+								let key;
+								let obj;
+								let prop;
+								let fontData;
+								let val;
+								let xx;
+								let reduxTypography;
 
-								var family           = $( this ).find( '.redux-typography-family' );
-								var familyData       = family.data( 'value' );
-								var data             = [{ id: 'none', text: 'none' }];
-								var thisID           = $( this ).find( '.redux-typography-family' ).parents( '.redux-container-typography:first' ).data( 'id' );
-								var usingGoogleFonts = $( '#' + thisID + ' .redux-typography-google' ).val();
+								let family           = $( this ).find( '.redux-typography-family' );
+								const familyData     = family.data( 'value' );
+								let data             = [{id: 'none', text: 'none'}];
+								const thisID         = $( this ).find( '.redux-typography-family' ).parents( '.redux-container-typography:first' ).data( 'id' );
+								let usingGoogleFonts = $( '#' + thisID + ' .redux-typography-google' ).val();
 
 								// Set up data array.
-								var buildData = [];
-								var fontKids  = [];
+								const buildData = [];
+								const fontKids  = [];
 
 								// User included fonts?
-								var isUserFonts = $( '#' + thisID + ' .redux-typography-font-family' ).data( 'user-fonts' );
+								let isUserFonts = $( '#' + thisID + ' .redux-typography-font-family' ).data( 'user-fonts' );
 
 								if ( ! el.hasClass( 'redux-field-container' ) ) {
 									parent = el.parents( '.redux-field-container:first' );
@@ -179,10 +179,10 @@
 								$( this ).find( '.redux-typography-family, .redux-typography-family-backup, .redux-typography-style, .redux-typography-subsets, .redux-typography-align' ).on(
 									'change',
 									function ( val ) {
-										var getVals;
-										var fontName;
+										let getVals;
+										let fontName;
 
-										var thisID = $( this ).attr( 'id' ), that = $( '#' + thisID );
+										const thisID = $( this ).attr( 'id' ), that = $( '#' + thisID );
 
 										if ( $( this ).hasClass( 'redux-typography-family' ) ) {
 											if ( that.val() ) {
@@ -256,10 +256,10 @@
 								reduxTypography.on(
 									'select2:unselecting',
 									function () {
-										var thisID;
-										var that;
+										let thisID;
+										let that;
 
-										var opts = $( this ).data( 'select2' ).options;
+										const opts = $( this ).data( 'select2' ).options;
 
 										opts.set( 'disabled', true );
 										setTimeout(
@@ -322,16 +322,16 @@
 	redux.field_objects.typography.sliderInit = function ( el ) {
 		el.find( '.redux-typography-slider' ).each(
 			function () {
-				var mainID = $( this ).data( 'id' );
-				var minVal = $( this ).data( 'min' );
-				var maxVal = $( this ).data( 'max' );
-				var step   = $( this ).data( 'step' );
-				var def    = $( this ).data( 'default' );
-				var label  = $( this ).data( 'label' );
-				var rtl    = Boolean( $( this ).data( 'rtl' ) );
-				var range  = [minVal, maxVal];
+				const mainID = $( this ).data( 'id' );
+				const minVal = $( this ).data( 'min' );
+				const maxVal = $( this ).data( 'max' );
+				const step   = $( this ).data( 'step' );
+				const def    = $( this ).data( 'default' );
+				const label  = $( this ).data( 'label' );
+				const rtl    = Boolean( $( this ).data( 'rtl' ) );
+				const range  = [minVal, maxVal];
 
-				var slider = $( this ).reduxNoUiSlider(
+				const slider = $( this ).reduxNoUiSlider(
 					{
 						range: range,
 						start: def,
@@ -362,9 +362,9 @@
 		obj.find( '.update-google-fonts' ).on(
 			'click',
 			function ( e ) {
-				var $action        = $( this ).data( 'action' );
-				var $update_parent = $( this ).parent().parent();
-				var $nonce         = $update_parent.attr( 'data-nonce' );
+				const $action        = $( this ).data( 'action' );
+				const $update_parent = $( this ).parent().parent();
+				const $nonce         = $update_parent.attr( 'data-nonce' );
 
 				$update_parent.find( 'p' ).text( redux_typography_ajax.update_google_fonts.updating );
 				$update_parent.find( 'p' ).attr( 'aria-label', redux_typography_ajax.update_google_fonts.updating );
@@ -382,7 +382,7 @@
 							data: $action
 						},
 						error: function ( response ) {
-							var msg;
+							let msg;
 
 							console.log( response );
 							$update_parent.removeClass( 'notice-warning updating-message updated-message notice-success' ).addClass( 'notice-error' );
@@ -398,7 +398,7 @@
 							redux.field_objects.typography.updates( obj );
 						},
 						success: function ( response ) {
-							var msg;
+							let msg;
 
 							console.log( response );
 
@@ -434,8 +434,8 @@
 
 	// Return font size.
 	redux.field_objects.typography.size = function ( obj ) {
-		var size = 0;
-		var key;
+		let size = 0;
+		let key;
 
 		for ( key in obj ) {
 			if ( obj.hasOwnProperty( key ) ) {
@@ -456,13 +456,13 @@
 	};
 
 	redux.field_objects.typography.contrastColour = function ( hexcolour ) {
-		var r;
-		var b;
-		var g;
-		var res;
+		let r;
+		let b;
+		let g;
+		let res;
 
 		// Default value is black.
-		var retVal = '#444444';
+		let retVal = '#444444';
 
 		// In case - for some reason - a blank value is passed.
 		// This should *not* happen.  If a function passing a value
@@ -496,46 +496,47 @@
 
 	// Sync up font options.
 	redux.field_objects.typography.select = function ( selector, skipCheck, destroy, fontName, active ) {
-		var mainID;
-		var that;
-		var family;
-		var google;
-		var familyBackup;
-		var size;
-		var height;
-		var word;
-		var letter;
-		var align;
-		var transform;
-		var fontVariant;
-		var decoration;
-		var style;
-		var script;
-		var color;
-		var units;
-		var weights;
-		var marginTopUnit;
-		var marginBottomUnit;
-		var lineHeightUnit;
-		var wordSpacingUnit;
-		var letterSpacingUnit;
-		var baseUnits;
-		var _linkclass;
-		var the_font;
-		var link;
-		var isPreviewSize;
-		var marginTop;
-		var marginBottom;
-		var allowEmptyLineHeight;
-		var defaultFontWeights;
+		let mainID;
+		let that;
+		let family;
+		let google;
+		let familyBackup;
+		let size;
+		let height;
+		let word;
+		let letter;
+		let align;
+		let transform;
+		let fontVariant;
+		let decoration;
+		let style;
+		let script;
+		let color;
+		let units;
+		let weights;
+		let marginTopUnit;
+		let marginBottomUnit;
+		let lineHeightUnit;
+		let wordSpacingUnit;
+		let letterSpacingUnit;
+		let baseUnits;
+		let _linkclass;
+		let the_font;
+		let link;
+		let isPreviewSize;
+		let marginTop;
+		let marginBottom;
+		let allowEmptyLineHeight;
+		let defaultFontWeights;
 
-		var typekit  = false;
-		var details  = '';
-		var html     = '<option value=""></option>';
-		var selected = '';
+		let typekit  = false;
+		let details  = '';
+		let html     = '<option value=""></option>';
+		let selected = '';
 
 		// Main id for selected field.
 		mainID = $( selector ).parents( '.redux-container-typography:first' ).data( 'id' );
+
 		if ( undefined === mainID ) {
 			mainID = $( selector ).data( 'id' );
 		}
@@ -932,9 +933,9 @@
 				that.find( '.typography-preview' ).css( 'color', color );
 
 				// Convert the color and range values to integers.
-				var colorInt     = redux.field_objects.typography.hexToInt( color );
-				var whiteInt     = redux.field_objects.typography.hexToInt( 'ffffff' );
-				var lightGreyInt = redux.field_objects.typography.hexToInt( 'dddddd' );
+				const colorInt     = redux.field_objects.typography.hexToInt( color );
+				const whiteInt     = redux.field_objects.typography.hexToInt( 'ffffff' );
+				const lightGreyInt = redux.field_objects.typography.hexToInt( 'dddddd' );
 
 				// Check if the color is within the specified range.
 				if (colorInt >= lightGreyInt && colorInt <= whiteInt) {
@@ -983,10 +984,10 @@
 	};
 
 	redux.field_objects.typography.previewShadow = function ( mainID ) {
-		var shadowColor = $( '#' + mainID + ' .redux-typography-shadow-color' ).val();
-		var shadowHorz  = $( '#redux-slider-value-' + mainID + '-h' ).val();
-		var shadowVert  = $( '#redux-slider-value-' + mainID + '-v' ).val();
-		var shadowBlur  = $( '#redux-slider-value-' + mainID + '-b' ).val();
+		const shadowColor = $( '#' + mainID + ' .redux-typography-shadow-color' ).val();
+		const shadowHorz  = $( '#redux-slider-value-' + mainID + '-h' ).val();
+		const shadowVert  = $( '#redux-slider-value-' + mainID + '-v' ).val();
+		const shadowBlur  = $( '#redux-slider-value-' + mainID + '-b' ).val();
 
 		if ( shadowColor ) {
 			$( '#' + mainID + ' .typography-preview' ).css(

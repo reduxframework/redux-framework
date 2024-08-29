@@ -4,19 +4,19 @@
 
 /*global redux_change, redux, colorValidate */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects        = redux.field_objects || {};
 	redux.field_objects.border = redux.field_objects.border || {};
 
-	redux.field_objects.border.init = function( selector ) {
+	redux.field_objects.border.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'border' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -37,10 +37,10 @@
 
 				el.find( '.redux-border-input' ).on(
 					'change',
-					function() {
-						var value;
+					function () {
+						let value;
 
-						var units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
+						let units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
 
 						if ( 0 !== $( this ).parents( '.redux-field:first' ).find( '.redux-border-units' ).length ) {
 							units = $( this ).parents( '.redux-field:first' ).find( '.redux-border-units option:selected' ).val();
@@ -54,7 +54,7 @@
 
 						if ( $( this ).hasClass( 'redux-border-all' ) ) {
 							$( this ).parents( '.redux-field:first' ).find( '.redux-border-value' ).each(
-								function() {
+								function () {
 									$( this ).val( value );
 								}
 							);
@@ -66,19 +66,19 @@
 
 				el.find( '.redux-border-units' ).on(
 					'change',
-					function() {
+					function () {
 						$( this ).parents( '.redux-field:first' ).find( '.redux-border-input' ).change();
 					}
 				);
 
 				el.find( '.redux-color-init' ).wpColorPicker(
 					{
-						change: function( e, ui ) {
+						change: function ( e, ui ) {
 							$( this ).val( ui.color.toString() );
 							redux_change( $( this ) );
 							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).prop( 'checked', false );
 						},
-						clear: function( e, ui ) {
+						clear: function ( e, ui ) {
 							e = null;
 							$( this ).val( ui.color.toString() );
 							redux_change( $( this ).parent().find( '.redux-color-init' ) );
@@ -88,8 +88,8 @@
 
 				el.find( '.redux-color' ).on(
 					'keyup',
-					function() {
-						var color = colorValidate( this );
+					function () {
+						const color = colorValidate( this );
 
 						if ( color && color !== $( this ).val() ) {
 							$( this ).val( color );
@@ -100,8 +100,8 @@
 				// Replace and validate field on blur.
 				el.find( '.redux-color' ).on(
 					'blur',
-					function() {
-						var value = $( this ).val();
+					function () {
+						const value = $( this ).val();
 
 						if ( colorValidate( this ) === value ) {
 							if ( 0 !== value.indexOf( '#' ) ) {
@@ -114,7 +114,7 @@
 				// Store the old valid color on keydown.
 				el.find( '.redux-color' ).on(
 					'keydown',
-					function() {
+					function () {
 						$( this ).data( 'oldkeypress', $( this ).val() );
 					}
 				);

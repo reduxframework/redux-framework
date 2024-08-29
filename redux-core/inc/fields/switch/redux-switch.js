@@ -7,19 +7,19 @@
  * Date            : 03.17.2013
  */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects        = redux.field_objects || {};
 	redux.field_objects.switch = redux.field_objects.switch || {};
 
-	redux.field_objects.switch.init = function( selector ) {
+	redux.field_objects.switch.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'switch' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -37,10 +37,10 @@
 
 				el.find( '.cb-enable' ).on(
 					'click',
-					function() {
-						var parent;
-						var obj;
-						var $fold;
+					function () {
+						let parent;
+						let obj;
+						let $fold;
 
 						if ( $( this ).hasClass( 'selected' ) ) {
 							return;
@@ -64,10 +64,10 @@
 
 				el.find( '.cb-disable' ).on(
 					'click',
-					function() {
-						var parent;
-						var obj;
-						var $fold;
+					function () {
+						let parent;
+						let obj;
+						let $fold;
 
 						if ( $( this ).hasClass( 'selected' ) ) {
 							return;

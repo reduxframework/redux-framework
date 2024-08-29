@@ -4,19 +4,19 @@
 
 /*global jQuery, redux, redux_change */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects            = redux.field_objects || {};
 	redux.field_objects.button_set = redux.field_objects.button_set || {};
 
-	redux.field_objects.button_set.init = function( selector ) {
+	redux.field_objects.button_set.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'button_set' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -33,7 +33,7 @@
 				}
 
 				el.find( '.buttonset' ).each(
-					function() {
+					function () {
 						if ( $( this ).is( ':checkbox' ) ) {
 							$( this ).find( '.buttonset-item' ).button();
 						}
@@ -44,16 +44,16 @@
 
 				el.find( '.buttonset-item.multi' ).on(
 					'click',
-					function() {
-						var val       = '';
-						var name      = '';
-						var id        = $( this ).attr( 'id' );
-						var empty     = $( this ).parent().find( '.buttonset-empty' );
-						var idName    = empty.attr( 'data-name' );
-						var isChecked = false;
+					function () {
+						let val       = '';
+						let name      = '';
+						const id      = $( this ).attr( 'id' );
+						const empty   = $( this ).parent().find( '.buttonset-empty' );
+						const idName  = empty.attr( 'data-name' );
+						let isChecked = false;
 
 						$( this ).parent().find( '.buttonset-item' ).each(
-							function() {
+							function () {
 								if ( $( this ).is( ':checked' ) ) {
 									isChecked = true;
 								}

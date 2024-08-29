@@ -15,18 +15,18 @@
 	redux.field_objects.editor = redux.field_objects.editor || {};
 
 	redux.field_objects.editor.init = function ( selector ) {
-		var i;
-		var len;
+		let i;
+		let len;
 
 		selector = $.redux.getSelector( selector, 'editor' );
 
 		$( selector ).each(
 			function () {
-				var el     = $( this );
-				var parent = el;
-				var id;
-				var mce;
-				var editorArea;
+				const el   = $( this );
+				let parent = el;
+				let id;
+				let mce;
+				let editorArea;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -72,8 +72,8 @@
 		mce.on(
 			'keyup',
 			function () {
-				var id      = el.data( 'id' );
-				var content = tinymce.get( id ).getContent();
+				const id      = el.data( 'id' );
+				const content = tinymce.get( id ).getContent();
 
 				el.find( '.wp-editor-area' ).text( content );
 

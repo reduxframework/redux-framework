@@ -4,19 +4,19 @@
 
 /*global jQuery, redux*/
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects         = redux.field_objects || {};
 	redux.field_objects.palette = redux.field_objects.palette || {};
 
-	redux.field_objects.palette.init = function( selector ) {
+	redux.field_objects.palette.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'palette' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -33,7 +33,7 @@
 				}
 
 				el.find( '.buttonset' ).each(
-					function() {
+					function () {
 						$( this ).controlgroup();
 					}
 				);

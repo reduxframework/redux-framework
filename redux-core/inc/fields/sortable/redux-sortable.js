@@ -1,20 +1,20 @@
 /*global jQuery, redux_change, redux*/
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
-	var scrollDir = '';
+	let scrollDir = '';
 
 	redux.field_objects          = redux.field_objects || {};
 	redux.field_objects.sortable = redux.field_objects.sortable || {};
 
-	redux.field_objects.sortable.init = function( selector ) {
+	redux.field_objects.sortable.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'sortable' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -36,7 +36,7 @@
 						placeholder: 'placeholder',
 						opacity: 0.7,
 						scroll: false,
-						out: function( event, ui ) {
+						out: function ( event, ui ) {
 							event = null;
 
 							if ( ! ui.helper ) {
@@ -51,13 +51,13 @@
 
 							redux.field_objects.sortable.scrolling( $( this ).parents( '.redux-field-container:first' ) );
 						},
-						over: function() {
+						over: function () {
 							scrollDir = '';
 						},
-						deactivate: function() {
+						deactivate: function () {
 							scrollDir = '';
 						},
-						update: function() {
+						update: function () {
 							redux_change( $( this ) );
 						}
 					}
@@ -65,11 +65,11 @@
 
 				el.find( '.redux-sortable i.visibility' ).on(
 					'click',
-					function() {
-						var val;
-						var hiddenInput;
+					function () {
+						let val;
+						let hiddenInput;
 
-						var li = $( this ).parents( 'li' );
+						const li = $( this ).parents( 'li' );
 
 						if ( li.hasClass( 'invisible' ) ) {
 							li.removeClass( 'invisible' );
@@ -88,8 +88,8 @@
 		);
 	};
 
-	redux.field_objects.sortable.scrolling = function( selector ) {
-		var $scrollable;
+	redux.field_objects.sortable.scrolling = function ( selector ) {
+		let $scrollable;
 
 		if ( undefined === selector ) {
 			return;

@@ -1,18 +1,18 @@
 /*global redux*/
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects         = redux.field_objects || {};
 	redux.field_objects.spacing = redux.field_objects.spacing || {};
 
-	redux.field_objects.spacing.init = function( selector ) {
+	redux.field_objects.spacing.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'spacing' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -32,10 +32,10 @@
 
 				el.find( '.redux-spacing-input' ).on(
 					'change',
-					function() {
-						var value;
+					function () {
+						let value;
 
-						var units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
+						let units = $( this ).parents( '.redux-field:first' ).find( '.field-units' ).val();
 
 						if ( 0 !== $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-units' ).length ) {
 							units = $( this ).parents( '.redux-field:first' ).find( '.redux-spacing-units option:selected' ).val();
@@ -49,7 +49,7 @@
 
 						if ( $( this ).hasClass( 'redux-spacing-all' ) ) {
 							$( this ).parents( '.redux-field:first' ).find( '.redux-spacing-value' ).each(
-								function() {
+								function () {
 									$( this ).val( value );
 								}
 							);
@@ -61,7 +61,7 @@
 
 				el.find( '.redux-spacing-units' ).on(
 					'change',
-					function() {
+					function () {
 						$( this ).parents( '.redux-field:first' ).find( '.redux-spacing-input' ).change();
 
 						el.find( '.field-units' ).val( $( this ).val() );

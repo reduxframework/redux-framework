@@ -1,18 +1,18 @@
 /*global redux_change, redux, jQuery */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects        = redux.field_objects || {};
 	redux.field_objects.slides = redux.field_objects.slides || {};
 
-	redux.field_objects.slides.init = function( selector ) {
+	redux.field_objects.slides.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'slides' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				redux.field_objects.media.init( el );
 
@@ -36,9 +36,9 @@
 
 				el.find( '.redux-slides-remove' ).on(
 					'click',
-					function() {
-						var slideCount;
-						var contentNewTitle;
+					function () {
+						let slideCount;
+						let contentNewTitle;
 
 						redux_change( $( this ) );
 
@@ -51,7 +51,7 @@
 						if ( slideCount > 1 ) {
 							$( this ).parents( '.redux-slides-accordion-group:first' ).slideUp(
 								'medium',
-								function() {
+								function () {
 									$( this ).remove();
 								}
 							);
@@ -66,15 +66,15 @@
 
 				el.find( '.redux-slides-add' ).off( 'click' ).on(
 					'click',
-					function() {
-						var contentNewTitle;
+					function () {
+						let contentNewTitle;
 
-						var newSlide    = $( this ).prev().find( '.redux-slides-accordion-group:last' ).clone( true );
-						var slideCount  = $( newSlide ).find( '.slide-title' ).attr( 'name' ).match( /[0-9]+(?!.*[0-9])/ );
-						var slideCount1 = slideCount * 1 + 1;
+						const newSlide    = $( this ).prev().find( '.redux-slides-accordion-group:last' ).clone( true );
+						const slideCount  = $( newSlide ).find( '.slide-title' ).attr( 'name' ).match( /[0-9]+(?!.*[0-9])/ );
+						const slideCount1 = slideCount * 1 + 1;
 
 						$( newSlide ).find( 'input[type="text"], input[type="hidden"], textarea' ).each(
-							function() {
+							function () {
 								$( this ).attr( 'name', $( this ).attr( 'name' ).replace( /[0-9]+(?!.*[0-9])/, slideCount1 ) ).attr( 'id', $( this ).attr( 'id' ).replace( /[0-9]+(?!.*[0-9])/, slideCount1 ) );
 
 								$( this ).val( '' );
@@ -99,8 +99,9 @@
 
 				el.find( '.slide-title' ).on(
 					'keyup',
-					function( event ) {
-						var newTitle = event.target.value;
+					function ( event ) {
+						const newTitle = event.target.value;
+
 						$( this ).parents().eq( 3 ).find( '.redux-slides-header' ).text( newTitle );
 					}
 				);
@@ -121,14 +122,14 @@
 						axis: 'y',
 						handle: 'h3',
 						connectWith: '.redux-slides-accordion',
-						start: function( e, ui ) {
+						start: function ( e, ui ) {
 							e = null;
 							ui.placeholder.height( ui.item.height() );
 							ui.placeholder.width( ui.item.width() );
 						},
 						placeholder: 'ui-state-highlight',
-						stop: function( event, ui ) {
-							var inputs;
+						stop: function ( event, ui ) {
+							let inputs;
 
 							event = null;
 
@@ -137,7 +138,7 @@
 							ui.item.children( 'h3' ).triggerHandler( 'focusout' );
 							inputs = $( 'input.slide-sort' );
 							inputs.each(
-								function( idx ) {
+								function ( idx ) {
 									$( this ).val( idx );
 								}
 							);

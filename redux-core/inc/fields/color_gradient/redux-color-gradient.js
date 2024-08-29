@@ -4,21 +4,21 @@
 
 /*global jQuery, redux, colorValidate, redux_change */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
-	var filtersLoaded = false;
+	let filtersLoaded = false;
 
 	redux.field_objects                = redux.field_objects || {};
 	redux.field_objects.color_gradient = redux.field_objects.color_gradient || {};
 
-	redux.field_objects.color_gradient.init = function( selector ) {
+	redux.field_objects.color_gradient.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'color_gradient' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -43,7 +43,7 @@
 
 				el.find( '.redux-color-init' ).wpColorPicker(
 					{
-						change: function( e, ui ) {
+						change: function ( e, ui ) {
 							$( this ).val( ui.color.toString() );
 
 							if ( filtersLoaded ) {
@@ -51,7 +51,7 @@
 							}
 
 							el.find( '#' + e.target.getAttribute( 'data-id' ) + '-transparency' ).prop( 'checked', false );
-						}, clear: function() {
+						}, clear: function () {
 							$( this ).val( '' );
 
 							if ( filtersLoaded ) {
@@ -63,10 +63,10 @@
 
 				el.find( '.redux-color' ).on(
 					'keyup',
-					function() {
-						var value = $( this ).val();
-						var color = colorValidate( this );
-						var id    = '#' + $( this ).attr( 'id' );
+					function () {
+						const value = $( this ).val();
+						const color = colorValidate( this );
+						const id    = '#' + $( this ).attr( 'id' );
 
 						if ( 'transparent' === value ) {
 							$( this ).parent().parent().find( '.wp-color-result' ).css( 'background-color', 'transparent' );
@@ -85,9 +85,9 @@
 				// Replace and validate field on blur.
 				el.find( '.redux-color' ).on(
 					'blur',
-					function() {
-						var value = $( this ).val();
-						var id    = '#' + $( this ).attr( 'id' );
+					function () {
+						const value = $( this ).val();
+						const id    = '#' + $( this ).attr( 'id' );
 
 						if ( 'transparent' === value ) {
 							$( this ).parent().parent().find( '.wp-color-result' ).css( 'background-color', 'transparent' );
@@ -108,7 +108,7 @@
 				// Store the old valid color on keydown.
 				el.find( '.redux-color' ).on(
 					'keydown',
-					function() {
+					function () {
 						$( this ).data( 'oldkeypress', $( this ).val() );
 					}
 				);
@@ -116,8 +116,8 @@
 				// When transparency checkbox is clicked.
 				el.find( '.color-transparency' ).on(
 					'click',
-					function() {
-						var prevColor;
+					function () {
+						let prevColor;
 
 						if ( $( this ).is( ':checked' ) ) {
 							el.find( '.redux-saved-color' ).val( $( '#' + $( this ).data( 'id' ) ).val() );
@@ -125,9 +125,11 @@
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.colorGradient' ).find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 						} else {
 							prevColor = $( this ).parents( '.colorGradient' ).find( '.redux-saved-color' ).val();
+
 							if ( '' === prevColor ) {
 								prevColor = $( '#' + $( this ).data( 'id' ) ).data( 'default-color' );
 							}
+
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.colorGradient' ).find( '.wp-color-result' ).css( 'background-color', prevColor );
 							el.find( '#' + $( this ).data( 'id' ) ).val( prevColor );
 						}

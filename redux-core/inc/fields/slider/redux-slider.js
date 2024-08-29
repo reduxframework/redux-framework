@@ -1,18 +1,18 @@
 /*global redux_change, redux, jQuery*/
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects        = redux.field_objects || {};
 	redux.field_objects.slider = redux.field_objects.slider || {};
 
-	redux.field_objects.slider.init = function( selector ) {
+	redux.field_objects.slider.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'slider' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -29,42 +29,43 @@
 				}
 
 				el.find( 'div.redux-slider-container' ).each(
-					function() {
-						var start;
-						var toClass;
-						var defClassOne;
-						var defClassTwo;
-						var connectVal;
-						var range;
-						var startOne;
-						var startTwo;
-						var inputOne;
-						var inputTwo;
-						var classOne;
-						var classTwo;
-						var x;
-						var y;
-						var slider;
-						var inpSliderVal;
+					function () {
+						let start;
+						let toClass;
+						let defClassOne;
+						let defClassTwo;
+						let connectVal;
+						let range;
+						let startOne;
+						let startTwo;
+						let inputOne;
+						let inputTwo;
+						let classOne;
+						let classTwo;
+						let x;
+						let y;
+						let slider;
+						let inpSliderVal;
 
-						var DISPLAY_NONE   = 0;
-						var DISPLAY_LABEL  = 1;
-						var DISPLAY_TEXT   = 2;
-						var DISPLAY_SELECT = 3;
+						const DISPLAY_NONE   = 0;
+						const DISPLAY_LABEL  = 1;
+						const DISPLAY_TEXT   = 2;
+						const DISPLAY_SELECT = 3;
 
-						var mainID       = $( this ).data( 'id' );
-						var minVal       = $( this ).data( 'min' );
-						var maxVal       = $( this ).data( 'max' );
-						var stepVal      = $( this ).data( 'step' );
-						var handles      = $( this ).data( 'handles' );
-						var defValOne    = $( this ).data( 'default-one' );
-						var defValTwo    = $( this ).data( 'default-two' );
-						var resVal       = $( this ).data( 'resolution' );
-						var displayValue = parseInt( ( $( this ).data( 'display' ) ) );
-						var rtlVal       = Boolean( $( this ).data( 'rtl' ) );
-						var floatMark    = ( $( this ).data( 'float-mark' ) );
+						const mainID       = $( this ).data( 'id' );
+						const minVal       = $( this ).data( 'min' );
+						const maxVal       = $( this ).data( 'max' );
+						const stepVal      = $( this ).data( 'step' );
+						const handles      = $( this ).data( 'handles' );
+						const defValOne    = $( this ).data( 'default-one' );
+						const defValTwo    = $( this ).data( 'default-two' );
+						const resVal       = $( this ).data( 'resolution' );
+						const displayValue = parseInt( ($( this ).data( 'display' )) );
+						const rtlVal       = Boolean( $( this ).data( 'rtl' ) );
+						const floatMark    = ($( this ).data( 'float-mark' ));
 
-						var rtl;
+						let rtl;
+
 						if ( true === rtlVal ) {
 							rtl = 'rtl';
 						} else {
@@ -139,7 +140,7 @@
 									to: toClass,
 									mark: floatMark
 								},
-								slide: function() {
+								slide: function () {
 									if ( displayValue === DISPLAY_LABEL ) {
 										if ( 2 === handles ) {
 											inpSliderVal = slider.val();
@@ -167,9 +168,9 @@
 						if ( displayValue === DISPLAY_TEXT ) {
 							inputOne.on(
 								'keydown',
-								function( e ) {
-									var sliderOne = slider.val();
-									var value     = parseInt( sliderOne[0] );
+								function ( e ) {
+									const sliderOne = slider.val();
+									const value     = parseInt( sliderOne[0] );
 
 									switch ( e.which ) {
 										case 38:
@@ -188,9 +189,9 @@
 							if ( 2 === handles ) {
 								inputTwo.on(
 									'keydown',
-									function( e ) {
-										var sliderTwo = slider.val();
-										var value     = parseInt( sliderTwo[1] );
+									function ( e ) {
+										const sliderTwo = slider.val();
+										const value     = parseInt( sliderTwo[1] );
 
 										switch ( e.which ) {
 											case 38:
@@ -216,20 +217,21 @@
 	};
 
 	// Return true for float value, false otherwise.
-	redux.field_objects.slider.isFloat = function( mixed_var ) {
+	redux.field_objects.slider.isFloat = function ( mixed_var ) {
 		return + mixed_var === mixed_var && ( ! ( isFinite( mixed_var ) ) ) || Boolean( ( mixed_var % 1 ) );
 	};
 
 	// Return number of integers after the decimal point.
-	redux.field_objects.slider.decimalCount = function( res ) {
-		var q = res.toString().split( '.' );
+	redux.field_objects.slider.decimalCount = function ( res ) {
+		const q = res.toString().split( '.' );
+
 		return q[1].length;
 	};
 
-	redux.field_objects.slider.loadSelect = function( myClass, min, max, res ) {
-		var decCount;
-		var i;
-		var n;
+	redux.field_objects.slider.loadSelect = function ( myClass, min, max, res ) {
+		let decCount;
+		let i;
+		let n;
 
 		for ( i = min; i <= max; i = i + res ) {
 			n = i;

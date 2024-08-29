@@ -7,19 +7,19 @@
 
 /*global redux_change, wp, redux, colorValidate, jQuery */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects            = redux.field_objects || {};
 	redux.field_objects.background = redux.field_objects.background || {};
 
-	redux.field_objects.background.init = function( selector ) {
+	redux.field_objects.background.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'background' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -38,7 +38,7 @@
 				// Remove the image button.
 				el.find( '.redux-remove-background' ).off( 'click' ).on(
 					'click',
-					function( e ) {
+					function ( e ) {
 						e.preventDefault();
 						redux.field_objects.background.removeImage( $( this ).parents( '.redux-container-background:first' ) );
 						redux.field_objects.background.preview( $( this ) );
@@ -49,28 +49,28 @@
 				// Upload media button.
 				el.find( '.redux-background-upload' ).off().on(
 					'click',
-					function( event ) {
+					function ( event ) {
 						redux.field_objects.background.addImage( event, $( this ).parents( '.redux-container-background:first' ) );
 					}
 				);
 
 				el.find( '.redux-background-input' ).on(
 					'change',
-					function() {
+					function () {
 						redux.field_objects.background.preview( $( this ) );
 					}
 				);
 
 				el.find( '.redux-color' ).wpColorPicker(
 					{
-						change: function( e, ui ) {
+						change: function ( e, ui ) {
 							$( this ).val( ui.color.toString() );
 							redux_change( $( this ) );
 							$( '#' + e.target.id + '-transparency' ).prop( 'checked', false );
 							redux.field_objects.background.preview( $( this ) );
 						},
 
-						clear: function( e ) {
+						clear: function ( e ) {
 							e = null;
 							redux_change( $( this ).parent().find( '.redux-color-init' ) );
 							redux.field_objects.background.preview( $( this ) );
@@ -81,9 +81,9 @@
 				// Replace and validate field on blur.
 				el.find( '.redux-color' ).on(
 					'blur',
-					function() {
-						var value = $( this ).val();
-						var id    = '#' + $( this ).attr( 'id' );
+					function () {
+						const value = $( this ).val();
+						const id    = '#' + $( this ).attr( 'id' );
 
 						if ( 'transparent' === value ) {
 							$( this ).parent().parent().find( '.wp-color-result' ).css( 'background-color', 'transparent' );
@@ -103,17 +103,17 @@
 
 				el.find( '.redux-color' ).on(
 					'focus',
-					function() {
+					function () {
 						$( this ).data( 'oldcolor', $( this ).val() );
 					}
 				);
 
 				el.find( '.redux-color' ).on(
 					'keyup',
-					function() {
-						var value = $( this ).val();
-						var color = colorValidate( this );
-						var id    = '#' + $( this ).attr( 'id' );
+					function () {
+						const value = $( this ).val();
+						const color = colorValidate( this );
+						const id    = '#' + $( this ).attr( 'id' );
 
 						if ( 'transparent' === value ) {
 							$( this ).parent().parent().find( '.wp-color-result' ).css( 'background-color', 'transparent' );
@@ -131,8 +131,8 @@
 				// When transparency checkbox is clicked.
 				el.find( '.color-transparency' ).on(
 					'click',
-					function() {
-						var prevColor;
+					function () {
+						let prevColor;
 
 						if ( $( this ).is( ':checked' ) ) {
 							el.find( '.redux-saved-color' ).val( $( '#' + $( this ).data( 'id' ) ).val() );
@@ -140,9 +140,11 @@
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.redux-field-container' ).find( '.wp-color-result' ).css( 'background-color', 'transparent' );
 						} else {
 							prevColor = $( this ).parents( '.redux-field-container' ).find( '.redux-saved-color' ).val();
+
 							if ( '' === prevColor ) {
 								prevColor = $( '#' + $( this ).data( 'id' ) ).data( 'default-color' );
 							}
+
 							el.find( '#' + $( this ).data( 'id' ) ).parents( '.redux-field-container' ).find( '.wp-color-result' ).css( 'background-color', prevColor );
 							el.find( '#' + $( this ).data( 'id' ) ).val( prevColor );
 						}
@@ -157,12 +159,12 @@
 	};
 
 	// Update the background preview.
-	redux.field_objects.background.preview = function( selector ) {
-		var css;
+	redux.field_objects.background.preview = function ( selector ) {
+		let css;
 
-		var hide    = true;
-		var parent  = $( selector ).parents( '.redux-container-background:first' );
-		var preview = $( parent ).find( '.background-preview' );
+		let hide      = true;
+		const parent  = $( selector ).parents( '.redux-container-background:first' );
+		const preview = $( parent ).find( '.background-preview' );
 
 		if ( ! preview ) { // No preview present.
 			return;
@@ -171,8 +173,8 @@
 		css = 'height:' + preview.height() + 'px;';
 
 		$( parent ).find( '.redux-background-input' ).each(
-			function() {
-				var data = $( this ).serializeArray();
+			function () {
+				let data = $( this ).serializeArray();
 
 				data = data[0];
 				if ( data && data.name.indexOf( '[background-' ) !== - 1 ) {
@@ -200,9 +202,9 @@
 	};
 
 	// Add a file via the wp.media function.
-	redux.field_objects.background.addImage = function( event, selector ) {
-		var frame;
-		var jQueryel = $( this );
+	redux.field_objects.background.addImage = function ( event, selector ) {
+		let frame;
+		const jQueryel = $( this );
 
 		event.preventDefault();
 
@@ -230,14 +232,14 @@
 		// When an image is selected, run a callback.
 		frame.on(
 			'select',
-			function() {
-				var thumbSrc;
-				var height;
-				var key;
-				var object;
+			function () {
+				let thumbSrc;
+				let height;
+				let key;
+				let object;
 
 				// Grab the selected attachment.
-				var attachment = frame.state().get( 'selection' ).first();
+				const attachment = frame.state().get( 'selection' ).first();
 				frame.close();
 
 				if ( 'image' !== attachment.attributes.type ) {
@@ -274,7 +276,7 @@
 				selector.find( '.upload-thumbnail' ).val( thumbSrc );
 
 				if ( ! selector.find( '.upload' ).hasClass( 'noPreview' ) ) {
-					selector.find( '.screenshot' ).empty().hide().append( '<img class="redux-option-image" src="' + thumbSrc + '">' ).slideDown( 'fast' );
+					selector.find( '.screenshot' ).empty().hide().append( '<img alt="" class="redux-option-image" src="' + thumbSrc + '">' ).slideDown( 'fast' );
 				}
 
 				selector.find( '.redux-remove-background' ).removeClass( 'hide' );
@@ -289,8 +291,8 @@
 	};
 
 	// Update the background preview.
-	redux.field_objects.background.removeImage = function( selector ) {
-		var screenshot;
+	redux.field_objects.background.removeImage = function ( selector ) {
+		let screenshot;
 
 		// This shouldn't have been run...
 		if ( ! selector.find( '.redux-remove-background' ).addClass( 'hide' ) ) {

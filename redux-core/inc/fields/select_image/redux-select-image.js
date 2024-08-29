@@ -1,21 +1,21 @@
 /*global redux*/
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects              = redux.field_objects || {};
 	redux.field_objects.select_image = redux.field_objects.select_image || {};
 
-	redux.field_objects.select_image.init = function( selector ) {
+	redux.field_objects.select_image.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'select_image' );
 
 		$( selector ).each(
-			function() {
-				var value;
-				var preview;
+			function () {
+				let value;
+				let preview;
 
-				var el     = $( this );
-				var parent = el;
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -40,13 +40,13 @@
 
 				el.find( '.redux-select-images' ).on(
 					'change',
-					function() {
-						var preview = $( this ).parents( '.redux-field:first' ).find( '.redux-preview-image' );
+					function () {
+						const preview = $( this ).parents( '.redux-field:first' ).find( '.redux-preview-image' );
 
 						if ( '' === $( this ).val() ) {
 							preview.fadeOut(
 								'medium',
-								function() {
+								function () {
 									preview.attr( 'src', '' );
 								}
 							);

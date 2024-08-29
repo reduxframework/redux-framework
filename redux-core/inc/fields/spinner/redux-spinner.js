@@ -1,18 +1,18 @@
 /* global redux */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects         = redux.field_objects || {};
 	redux.field_objects.spinner = redux.field_objects.spinner || {};
 
-	redux.field_objects.spinner.init = function( selector ) {
+	redux.field_objects.spinner.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'spinner' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -29,10 +29,10 @@
 				}
 
 				el.find( '.redux_spinner' ).each(
-					function() {
+					function () {
 
 						// Slider init.
-						var spinner = $( this ).find( '.spinner-input' ).data();
+						const spinner = $( this ).find( '.spinner-input' ).data();
 
 						spinner.id = $( this ).find( '.spinner-input' ).attr( 'id' );
 

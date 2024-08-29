@@ -1,18 +1,18 @@
 /* global redux_change, wp, redux */
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	redux.field_objects         = redux.field_objects || {};
 	redux.field_objects.gallery = redux.field_objects.gallery || {};
 
-	redux.field_objects.gallery.init = function( selector ) {
+	redux.field_objects.gallery.init = function ( selector ) {
 		selector = $.redux.getSelector( selector, 'gallery' );
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -31,20 +31,20 @@
 				// When the user clicks on the Add/Edit gallery button, we need to display the gallery editing.
 				el.on(
 					{
-						click: function( event ) {
-							var current_gallery;
-							var final;
-							var val;
-							var frame;
-							var uploader;
-							var spinner;
-							var inline;
+						click: function ( event ) {
+							let current_gallery;
+							let final;
+							let val;
+							let frame;
+							let uploader;
+							let spinner;
+							let inline;
 
 							// Hide gallery settings used for posts/pages.
 							wp.media.view.Settings.Gallery = wp.media.view.Settings.Gallery.extend(
 								{
-									template: function() {
-										return;
+									template: function () {
+										return null;
 									}
 								}
 							);
@@ -86,7 +86,7 @@
 								spinner  = uploader.find( '.media-toolbar .spinner' );
 
 								setTimeout(
-									function() {
+									function () {
 										if ( inline.hasClass( 'hidden' ) ) {
 											inline.removeClass( 'hidden' );
 											spinner.removeClass( 'is-active' );
@@ -99,18 +99,18 @@
 							// When the gallery-edit state is updated, copy the attachment ids across.
 							frame.state( 'gallery-edit' ).on(
 								'update',
-								function( selection ) {
-									var ids;
-									var element;
-									var preview_img;
+								function ( selection ) {
+									let ids;
+									let element;
+									let preview_img;
 
-									var preview_html = '';
+									let preview_html = '';
 
 									// Clear screenshot div so we can append new selected images.
 									current_gallery.find( '.screenshot' ).html( '' );
 
 									ids = selection.models.map(
-										function( e ) {
+										function ( e ) {
 											element = e.toJSON();
 
 											preview_img = ( 'undefined' !== typeof element.sizes && 'undefined' !== typeof element.sizes.thumbnail ) ? element.sizes.thumbnail.url : element.url;
