@@ -1,6 +1,6 @@
 /* global redux, redux_change, reduxSocialDefaults */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	redux.field_objects                         = redux.field_objects || {};
@@ -8,15 +8,15 @@
 	redux.field_objects.social_profiles.fieldID = '';
 	redux.field_objects.social_profiles.optName = '';
 
-	redux.field_objects.social_profiles.init = function( selector ) {
+	redux.field_objects.social_profiles.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-social_profiles:visible' );
 		}
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -41,7 +41,7 @@
 		);
 	};
 
-	redux.field_objects.social_profiles.modInit = function( el ) {
+	redux.field_objects.social_profiles.modInit = function ( el ) {
 		redux.field_objects.social_profiles.fieldID = el.find( '.redux-social-profiles-container' ).data( 'id' );
 		redux.field_objects.social_profiles.optName = el.find( '.redux-social-profiles-container' ).data( 'opt-name' );
 
@@ -52,7 +52,7 @@
 				helper: 'clone',
 				handle: '.redux-icon-preview',
 				placeholder: 'sortable-placeholder',
-				stop: function() {
+				stop: function () {
 					redux.field_objects.social_profiles.reorderSocialItems( el );
 
 					redux_change( el.find( '.redux-social-profiles-container' ) );
@@ -66,7 +66,7 @@
 				cursor: 'move',
 				helper: 'clone',
 				placeholder: 'sortable-placeholder',
-				stop: function() {
+				stop: function () {
 					redux.field_objects.social_profiles.reorderSocialEnable( el );
 
 					redux_change( el.find( '.redux-social-profiles-container' ) );
@@ -76,9 +76,9 @@
 
 		el.find( '.redux-social-profiles-url-text' ).on(
 			'blur',
-			function() {
-				var key = $( this ).data( 'key' );
-				var val = $( this ).val();
+			function () {
+				const key = $( this ).data( 'key' );
+				const val = $( this ).val();
 
 				redux.field_objects.social_profiles.updateDataString( el, key, 'url', val );
 			}
@@ -86,8 +86,8 @@
 
 		el.find( '.redux-social-profiles-item-enable' ).on(
 			'click',
-			function() {
-				var key = $( this ).data( 'key' );
+			function () {
+				const key = $( this ).data( 'key' );
 
 				redux.field_objects.social_profiles.toggleEnabled( el, key );
 			}
@@ -95,9 +95,9 @@
 
 		el.find( '.redux-social-profiles-item-enabled input' ).on(
 			'click',
-			function( e ) {
-				var item;
-				var key;
+			function ( e ) {
+				let item;
+				let key;
 
 				e.preventDefault();
 
@@ -109,11 +109,11 @@
 		);
 	};
 
-	redux.field_objects.social_profiles.valueFromDataString = function( el, key ) {
-		var theData;
+	redux.field_objects.social_profiles.valueFromDataString = function ( el, key ) {
+		let theData;
 
-		var dataEl  = el.find( '.redux-social-profiles-hidden-data-' + key );
-		var rawData = dataEl.val();
+		const dataEl = el.find( '.redux-social-profiles-hidden-data-' + key );
+		let rawData  = dataEl.val();
 
 		rawData = decodeURIComponent( rawData );
 		rawData = JSON.parse( rawData );
@@ -123,9 +123,9 @@
 		return theData;
 	};
 
-	redux.field_objects.social_profiles.updateDataString = function( el, key, name, value ) {
-		var dataEl  = el.find( '.redux-social-profiles-hidden-data-' + key );
-		var rawData = dataEl.val();
+	redux.field_objects.social_profiles.updateDataString = function ( el, key, name, value ) {
+		const dataEl = el.find( '.redux-social-profiles-hidden-data-' + key );
+		let rawData  = dataEl.val();
 
 		rawData = decodeURIComponent( rawData );
 		rawData = JSON.parse( rawData );
@@ -138,12 +138,14 @@
 		dataEl.val( rawData );
 	};
 
-	redux.field_objects.social_profiles.sortListByOrder = function( el ) {
-		var ul = el.find( 'ul#redux-social-profiles-list ' );
-		var li = ul.children( 'li' );
+	redux.field_objects.social_profiles.sortListByOrder = function ( el ) {
+		const ul = el.find( 'ul#redux-social-profiles-list ' );
+		const li = ul.children( 'li' );
 
-		li.detach().sort(
-			function( a, b ) {
+		li.detach();
+		[].sort.call(
+			li,
+			function ( a, b ) {
 				return $( a ).find( '.redux-social-profiles-item-order input' ).val() - $( b ).find( '.redux-social-profiles-item-order input' ).val();
 			}
 		);
@@ -151,12 +153,14 @@
 		ul.append( li );
 	};
 
-	redux.field_objects.social_profiles.sortEnableListByOrder = function( el ) {
-		var ul = el.find( 'ul#redux-social-profiles-selector-list' );
-		var li = ul.children( 'li' );
+	redux.field_objects.social_profiles.sortEnableListByOrder = function ( el ) {
+		const ul = el.find( 'ul#redux-social-profiles-selector-list' );
+		const li = ul.children( 'li' );
 
-		li.detach().sort(
-			function( a, b ) {
+		li.detach();
+		[].sort.call(
+			li,
+			function ( a, b ) {
 				return $( a ).data( 'order' ) - $( b ).data( 'order' );
 			}
 		);
@@ -164,13 +168,13 @@
 		ul.append( li );
 	};
 
-	redux.field_objects.social_profiles.initializeResetButtons = function( el ) {
+	redux.field_objects.social_profiles.initializeResetButtons = function ( el ) {
 		el.find( '.redux-social-profiles-item-reset a' ).on(
 			'click',
-			function() {
-				var itemToReset;
+			function () {
+				let itemToReset;
 
-				var buttonClicked = $( this );
+				const buttonClicked = $( this );
 
 				if ( buttonClicked.length > 0 ) {
 					itemToReset = buttonClicked.data( 'value' );
@@ -181,9 +185,9 @@
 		);
 	};
 
-	redux.field_objects.social_profiles.resetItem = function( el, itemID ) {
-		var defaultTextColor       = reduxSocialDefaults[itemID].color;
-		var defaultBackgroundColor = reduxSocialDefaults[itemID].background;
+	redux.field_objects.social_profiles.resetItem = function ( el, itemID ) {
+		const defaultTextColor       = reduxSocialDefaults[itemID].color;
+		const defaultBackgroundColor = reduxSocialDefaults[itemID].background;
 
 		el.find( '.redux-social-profiles-color-picker-' + itemID + '.text' ).spectrum( 'set', defaultTextColor );
 		el.find( '.redux-social-profiles-color-picker-' + itemID + '.background' ).spectrum( 'set', defaultBackgroundColor );
@@ -194,22 +198,23 @@
 		redux.field_objects.social_profiles.updatePreview( el, itemID );
 	};
 
-	redux.field_objects.social_profiles.updatePreview = function( el, itemID ) {
-		var textColorInput       = redux.field_objects.social_profiles.valueFromDataString( el, itemID, 'color' );
-		var backgroundColorInput = redux.field_objects.social_profiles.valueFromDataString( el, itemID, 'background' );
+	redux.field_objects.social_profiles.updatePreview = function ( el, itemID ) {
+		const textColorInput       = redux.field_objects.social_profiles.valueFromDataString( el, itemID, 'color' );
+		const backgroundColorInput = redux.field_objects.social_profiles.valueFromDataString( el, itemID, 'background' );
 
-		var icon   = reduxSocialDefaults[itemID].icon;
-		var symbol = el.find( '#redux-social-item-' + itemID + ' i.' + icon );
+		const icon   = reduxSocialDefaults[itemID].icon;
+		const symbol = el.find( '#redux-social-item-' + itemID + ' i.' + icon );
 
 		symbol.css( 'background-color', backgroundColorInput );
 		symbol.css( 'color', textColorInput );
 	};
 
-	redux.field_objects.social_profiles.toggleEnabled = function( el, itemID ) {
-		var itemEnable = el.find( '#redux-social-profiles-item-enable-' + itemID );
-		var enabled    = itemEnable.hasClass( 'enabled' );
+	redux.field_objects.social_profiles.toggleEnabled = function ( el, itemID ) {
+		const itemEnable = el.find( '#redux-social-profiles-item-enable-' + itemID );
+		const enabled    = itemEnable.hasClass( 'enabled' );
 
-		var enabledBool;
+		let enabledBool;
+
 		if ( enabled ) {
 			itemEnable.removeClass( 'enabled' );
 			enabledBool = false;
@@ -225,10 +230,10 @@
 		redux.field_objects.social_profiles.showEnabledDetails( el );
 	};
 
-	redux.field_objects.social_profiles.showEnabledDetails = function( el ) {
-		var palette;
+	redux.field_objects.social_profiles.showEnabledDetails = function ( el ) {
+		let palette;
 
-		var socialItems = el.find( 'li.redux-social-profiles-item-enable' );
+		const socialItems = el.find( 'li.redux-social-profiles-item-enable' );
 
 		if ( socialItems.length > 0 ) {
 
@@ -244,12 +249,12 @@
 			];
 
 			socialItems.each(
-				function() {
-					var enabledInput;
-					var hidden;
+				function () {
+					let enabledInput;
+					let hidden;
 
-					var item = $( this );
-					var key  = item.data( 'key' );
+					let item  = $( this );
+					const key = item.data( 'key' );
 
 					if ( item.hasClass( 'enabled' ) ) {
 
@@ -266,8 +271,8 @@
 								preferredFormat: 'rgb',
 								localStorageKey: 'redux.social-profiles.spectrum',
 								palette: palette,
-								change: function( color ) {
-									var className;
+								change: function ( color ) {
+									let className;
 
 									if ( $( this ).hasClass( 'text' ) ) {
 										className = 'color';
@@ -314,15 +319,15 @@
 		}
 	};
 
-	redux.field_objects.social_profiles.reorderSocialItems = function( el ) {
-		var socialItems = el.find( 'ul#redux-social-profiles-list li' );
+	redux.field_objects.social_profiles.reorderSocialItems = function ( el ) {
+		const socialItems = el.find( 'ul#redux-social-profiles-list li' );
 
 		if ( socialItems.length > 0 ) {
 			socialItems.each(
-				function( index ) {
-					var item       = $( this );
-					var key        = item.data( 'key' );
-					var orderInput = item.find( '.redux-social-profiles-item-order input' );
+				function ( index ) {
+					const item       = $( this );
+					const key        = item.data( 'key' );
+					const orderInput = item.find( '.redux-social-profiles-item-order input' );
 
 					orderInput.val( index );
 					redux.field_objects.social_profiles.updateDataString( el, key, 'order', index );
@@ -336,16 +341,16 @@
 
 	};
 
-	redux.field_objects.social_profiles.reorderSocialEnable = function( el ) {
-		var socialItems = el.find( 'ul#redux-social-profiles-selector-list li' );
+	redux.field_objects.social_profiles.reorderSocialEnable = function ( el ) {
+		const socialItems = el.find( 'ul#redux-social-profiles-selector-list li' );
 
 		if ( socialItems.length > 0 ) {
 			socialItems.each(
-				function( index ) {
-					var item       = $( this );
-					var key        = item.data( 'key' );
-					var control    = el.find( 'li#redux-social-item-' + key );
-					var orderInput = control.find( '.redux-social-profiles-item-order input' );
+				function ( index ) {
+					const item       = $( this );
+					const key        = item.data( 'key' );
+					const control    = el.find( 'li#redux-social-item-' + key );
+					const orderInput = control.find( '.redux-social-profiles-item-order input' );
 
 					item.data( 'order', index );
 
