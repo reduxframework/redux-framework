@@ -4,7 +4,7 @@ jQuery(
 	function ( $ ) {
 		'use strict';
 
-		var isGutenberg = false;
+		let isGutenberg = false;
 
 		$.reduxMetaBoxes = $.reduxMetaBoxes || {};
 
@@ -103,8 +103,8 @@ jQuery(
 						$.each(
 							values,
 							function ( field, v ) {
-								var visible = false;
-								var testValue;
+								let visible = false;
+								let testValue;
 
 								if ( field === fieldID || ! fieldID ) {
 									if ( 'post_format' === field ) {

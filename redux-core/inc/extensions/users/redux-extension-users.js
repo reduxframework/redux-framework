@@ -20,8 +20,8 @@ jQuery(
 		);
 
 		$.reduxUsers.init = function () {
-			var reduxObject;
-			var optName = $( '.redux-ajax-security' ).data( 'opt-name' );
+			let reduxObject;
+			const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
 			if ( undefined === optName ) {
 				reduxObject = redux.optName;
@@ -40,7 +40,7 @@ jQuery(
 		$.reduxUsers.editCount = $( '#the-list tr' );
 
 		$.reduxUsers.editCheck = function () {
-			var len;
+			let len;
 
 			if ( $( '#ajax-response .error' ).length ) {
 				return false;

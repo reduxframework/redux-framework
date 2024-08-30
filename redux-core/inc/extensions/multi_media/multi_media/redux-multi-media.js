@@ -1,4 +1,5 @@
 /* global redux, redux_multi_media_l10, wp, redux_change */
+// noinspection JSUnresolvedReference
 
 /**
  * Multi Media Selector library
@@ -6,10 +7,10 @@
  * @author Kevin Provance (kprovance)
  */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
-	var l10n;
+	let l10n;
 
 	redux.field_objects             = redux.field_objects || {};
 	redux.field_objects.multi_media = redux.field_objects.multi_media || {};
@@ -19,7 +20,7 @@
 	 *
 	 * Runs when the library is loaded.
 	 ******************************************************************************/
-	redux.field_objects.multi_media.init = function( selector ) {
+	redux.field_objects.multi_media.init = function ( selector ) {
 
 		// If no selector is passed, grab one from the HTML.
 		if ( ! selector ) {
@@ -28,9 +29,9 @@
 
 		// Enum instances of our object.
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -52,7 +53,7 @@
 				// Handle clicking of the upload icon.
 				el.find( '.redux_upload_button' ).off().on(
 					'click',
-					function( event ) {
+					function ( event ) {
 						redux.field_objects.multi_media.addFile( event, $( this ).parents( 'fieldset.redux-field:first' ), $( this ) );
 					}
 				);
@@ -68,10 +69,10 @@
 	 *
 	 * Force DOM to recognize new delete button instances.
 	 ******************************************************************************/
-	redux.field_objects.multi_media.bindDelete = function( el ) {
+	redux.field_objects.multi_media.bindDelete = function ( el ) {
 		el.find( '.redux_remove_file_button' ).off( 'click' ).on(
 			'click',
-			function( event ) {
+			function ( event ) {
 				redux.field_objects.multi_media.removeFile( event, $( this ).parents( 'fieldset.redux-field:first' ), $( this ) );
 			}
 		);
@@ -82,7 +83,7 @@
 	 *
 	 * Module level init
 	 ******************************************************************************/
-	redux.field_objects.multi_media.modInit = function() {
+	redux.field_objects.multi_media.modInit = function () {
 
 		// Localization variable.
 		l10n = redux_multi_media_l10;
@@ -96,11 +97,11 @@
 	 ******************************************************************************/
 
 	// Removes error message(s) when clicking the Upload button.
-	redux.field_objects.multi_media.removeErrMsgs = function( mainID ) {
+	redux.field_objects.multi_media.removeErrMsgs = function ( mainID ) {
 
 		// Enumerate and remove existing 'file exists' messages.
 		$( '#' + mainID + ' .attach_list li.redux-file-exists' ).each(
-			function( idx, li ) {
+			function ( idx, li ) {
 				idx = null;
 
 				$( li ).remove();
@@ -109,7 +110,7 @@
 
 		// Enumerate and remove existing 'max upload' messages.
 		$( '#' + mainID + ' .attach_list li.redux-max-limit' ).each(
-			function( idx, li ) {
+			function ( idx, li ) {
 				idx = null;
 
 				$( li ).remove();
@@ -118,14 +119,14 @@
 	};
 
 	// Checks for duplicate after file selection.
-	redux.field_objects.multi_media.selExists = function( mainID, item ) {
-		var len;
+	redux.field_objects.multi_media.selExists = function ( mainID, item ) {
+		let len;
 
-		var val = false;
+		let val = false;
 
 		// Enumerate existing files.
 		$( '#' + mainID + ' .attach_list li' ).each(
-			function( idx, li ) {
+			function ( idx, li ) {
 				idx = null;
 
 				// Check for duplicate based on ID.
@@ -148,27 +149,27 @@
 	 *
 	 * Runs when upload button is clicked.
 	 ******************************************************************************/
-	redux.field_objects.multi_media.addFile = function( event, selector, self ) {
+	redux.field_objects.multi_media.addFile = function ( event, selector, self ) {
 
 		// Variables.
-		var frame;
-		var libFilter;
-		var filter;
-		var maxFileUpload;
+		let frame;
+		let libFilter;
+		let filter;
+		let maxFileUpload;
 
-		var isList       = true;
-		var uploadStatus = true;
+		const isList     = true;
+		let uploadStatus = true;
 
 		// Get input ID.
-		var inputID = self.prev( 'input' ).attr( 'id' );
+		const inputID = self.prev( 'input' ).attr( 'id' );
 
 		// Make form field ID.
-		var $formfield = $( '#' + inputID );
+		const $formfield = $( '#' + inputID );
 
 		// Get form name.
-		var formName = $formfield.attr( 'name' );
+		const formName = $formfield.attr( 'name' );
 
-		var mainID = selector.attr( 'data-id' );
+		const mainID = selector.attr( 'data-id' );
 
 		// Prevent default action.
 		event.preventDefault();
@@ -198,7 +199,7 @@
 				// Enum file extensions.
 				$.each(
 					filter,
-					function( index, value ) {
+					function ( index, value ) {
 						index = null;
 
 						libFilter.push( value );
@@ -224,33 +225,33 @@
 		// When an image is selected, run a callback.
 		frame.on(
 			'select',
-			function() {
-				var addCount = 0;
-				var doChange;
+			function () {
+				let addCount = 0;
+				let doChange;
 
 				// Set up our fileGroup array.
-				var fileGroup = [];
-				var fileArr   = [];
-				var imgArr    = [];
-				var msgArr    = [];
+				const fileGroup = [];
+				const fileArr   = [];
+				const imgArr    = [];
+				const msgArr    = [];
 
 				// Grab the selected attachment.
-				var selection = frame.state().get( 'selection' );
+				const selection = frame.state().get( 'selection' );
 
 				// Get all of our selected files.
-				var attachment = selection.toJSON();
+				const attachment = selection.toJSON();
 
 				// Get existing file count.
-				var childCount = $( '#' + mainID + ' .attach_list' ).children().length;
+				const childCount = $( '#' + mainID + ' .attach_list' ).children().length;
 
 				$formfield.val( attachment.url );
 				$( '#' + inputID + '_id' ).val( attachment.id );
 
 				// Enum through each attachment.
 				$( attachment ).each(
-					function() {
-						var dupMsg;
-						var maxMsg;
+					function () {
+						let dupMsg;
+						let maxMsg;
 
 						// Respect max upload limit.
 						if ( maxFileUpload <= 0 || ( addCount + childCount ) < maxFileUpload ) {
@@ -312,7 +313,7 @@
 				// Push images files onto end of stack.
 				if ( ! $.isEmptyObject( imgArr ) ) {
 					$( imgArr ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							idx = null;
 
 							fileGroup.push( val );
@@ -324,7 +325,7 @@
 				// Push none image files onto end of stack.
 				if ( ! $.isEmptyObject( fileArr ) ) {
 					$( fileArr ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							idx = null;
 
 							fileGroup.push( val );
@@ -336,7 +337,7 @@
 				// Push errors onto end of stack.
 				if ( ! $.isEmptyObject( msgArr ) ) {
 					$( msgArr ).each(
-						function( idx, val ) {
+						function ( idx, val ) {
 							idx = null;
 
 							fileGroup.push( val );
@@ -346,7 +347,7 @@
 
 				// Append each item from our fileGroup array to .redux_media_status.
 				$( fileGroup ).each(
-					function() {
+					function () {
 						$formfield.siblings( '.redux_media_status' ).slideDown().append( this );
 					}
 				);
@@ -372,11 +373,11 @@
 	 *
 	 * Runs when the delete icon or remove link is clicked.
 	 ******************************************************************************/
-	redux.field_objects.multi_media.removeFile = function( event, selector, self ) {
-		var inputID;
-		var $container;
+	redux.field_objects.multi_media.removeFile = function ( event, selector, self ) {
+		let inputID;
+		let $container;
 
-		var $self = self;
+		const $self = self;
 
 		// Prevent default action.
 		event.preventDefault();

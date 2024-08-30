@@ -1,10 +1,10 @@
 /* global jQuery, reduxSearch */
 
-(function( $ ) {
+(function ( $ ) {
 	$( document ).ready(
-		function() {
+		function () {
 			$( '.redux-container' ).each(
-				function( ) {
+				function ( ) {
 					if ( ! $( this ).hasClass( 'redux-no-sections' ) ) {
 						$( this ).find( '.redux-main' ).prepend( '<input class="redux_field_search" id="redux_field_search" type="text" placeholder="' + reduxSearch.search + '"/>' );
 					}
@@ -13,10 +13,10 @@
 
 			$( '.redux_field_search' ).on(
 				'keypress',
-				function( evt ) {
+				function ( evt ) {
 
 					// Determine where our character code is coming from within the event.
-					var charCode = evt.charCode || evt.keyCode;
+					const charCode = evt.charCode || evt.keyCode;
 
 					if ( 13 === charCode ) { // Enter key's keycode.
 						return false;
@@ -24,10 +24,10 @@
 				}
 			).typeWatch(
 				{
-					callback: function( searchString ) {
-						var searchArray;
-						var parent;
-						var expanded_options;
+					callback: function ( searchString ) {
+						let searchArray;
+						let parent;
+						let expanded_options;
 
 						searchString = searchString.toLowerCase();
 
@@ -50,7 +50,7 @@
 						}
 
 						parent.find( '.redux-field-container' ).each(
-							function() {
+							function () {
 								if ( '' !== searchString ) {
 									$( this ).parents( 'tr:first' ).hide();
 								} else {
@@ -60,8 +60,8 @@
 						);
 
 						parent.find( '.form-table tr' ).filter(
-							function() {
-								var isMatch = true, text = $( this ).find( '.redux_field_th' ).text().toLowerCase();
+							function () {
+								let isMatch = true, text = $( this ).find( '.redux_field_th' ).text().toLowerCase();
 
 								if ( ! text || '' === text ) {
 									return false;
@@ -69,7 +69,7 @@
 
 								$.each(
 									searchArray,
-									function( i, searchStr ) {
+									function ( i, searchStr ) {
 										if ( -1 === text.indexOf( searchStr ) ) {
 											isMatch = false;
 										}

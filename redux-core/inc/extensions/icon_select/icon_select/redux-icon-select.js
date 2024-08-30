@@ -1,18 +1,18 @@
 /* global redux, jQuery */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	redux.field_objects             = redux.field_objects || {};
 	redux.field_objects.icon_select = redux.field_objects.icon_select || {};
 
-	redux.field_objects.icon_select.getIconArray = function( el ) {
-		var iconSelect = el.find( '.redux-icon-select' );
+	redux.field_objects.icon_select.getIconArray = function ( el ) {
+		const iconSelect = el.find( '.redux-icon-select' );
 
 		return iconSelect.data( 'options' );
 	};
 
-	redux.field_objects.icon_select.reloadIcons = function( el, button, modal, value, text ) {
+	redux.field_objects.icon_select.reloadIcons = function ( el, button, modal, value, text ) {
 		window.wp.ajax.post(
 			'redux_get_icons',
 			{
@@ -22,19 +22,19 @@
 				data: redux.field_objects.icon_select.getIconArray( el )
 			}
 		).done(
-			function( response ) {
+			function ( response ) {
 				modal.find( '.redux-modal-loading' ).hide();
 
 				modal.find( '.redux-modal-load' ).html( response.content );
 			}
 		).fail(
-			function( response, status, error ) {
+			function ( response, status, error ) {
 				modal.find( '.redux-modal-loading' ).hide();
 				modal.find( '.redux-modal-load' ).html( error );
 
 				modal.on(
 					'click',
-					function() {
+					function () {
 						modal.addClass( 'hidden' );
 						modal.off( 'click' );
 
@@ -46,15 +46,15 @@
 		);
 	};
 
-	redux.field_objects.icon_select.init = function( selector ) {
+	redux.field_objects.icon_select.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-icon_select:visible' );
 		}
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -72,14 +72,14 @@
 
 				el.find( '.redux-icon-add' ).on(
 					'click',
-					function( e ) {
-						var iconModalLoaded = false;
-						var button          = $( this );
-						var modal           = $( '#redux-modal-icon' );
-						var select          = modal.find( '.redux-icon-select-font' );
-						var selectVal;
-						var selectText;
-						var iconSets;
+					function ( e ) {
+						let iconModalLoaded = false;
+						const button        = $( this );
+						const modal         = $( '#redux-modal-icon' );
+						const select        = modal.find( '.redux-icon-select-font' );
+						let selectVal;
+						let selectText;
+						let iconSets;
 
 						e.preventDefault();
 
@@ -114,22 +114,22 @@
 									data: redux.field_objects.icon_select.getIconArray( el )
 								}
 							).done(
-								function( response ) {
+								function ( response ) {
 									modal.find( '.redux-modal-loading' ).hide();
 
 									iconModalLoaded = true;
 
-									var load = modal.find( '.redux-modal-load' ).html( response.content );
+									const load = modal.find( '.redux-modal-load' ).html( response.content );
 
 									load.off( 'click' );
 
 									load.on(
 										'click',
 										'i',
-										function( e ) {
+										function ( e ) {
 											e.preventDefault();
 
-											var icon = $( this ).attr( 'title' );
+											const icon = $( this ).attr( 'title' );
 
 											el.find( '.redux-icon-select-preview i' ).removeAttr( 'class' ).addClass( icon );
 											el.find( '.redux-icon-select-preview' ).removeClass( 'hidden' );
@@ -148,9 +148,9 @@
 									modal.on(
 										'change',
 										'.redux-icon-select-font',
-										function() {
-											var value = $( this ).val();
-											var text  = $( this ).find( ':selected' ).text();
+										function () {
+											const value = $( this ).val();
+											const text  = $( this ).find( ':selected' ).text();
 
 											modal.find( '.redux-modal-loading' ).show();
 
@@ -161,13 +161,13 @@
 									modal.on(
 										'change keyup',
 										'.redux-icon-search',
-										function() {
-											var value = $( this ).val();
-											var icons = load.find( 'i' );
+										function () {
+											const value = $( this ).val();
+											const icons = load.find( 'i' );
 
 											icons.each(
-												function() {
-													var elem = $( this );
+												function () {
+													const elem = $( this );
 
 													if ( elem.attr( 'title' ).search( new RegExp( value, 'i' ) ) < 0 ) {
 														elem.hide();
@@ -182,7 +182,7 @@
 									modal.on(
 										'click',
 										'.redux-modal-close, .redux-modal-overlay',
-										function() {
+										function () {
 											modal.addClass( 'hidden' );
 
 											select.empty();
@@ -191,13 +191,13 @@
 									);
 								}
 							).fail(
-								function( response, status, error ) {
+								function ( response, status, error ) {
 									modal.find( '.redux-modal-loading' ).hide();
 									modal.find( '.redux-modal-load' ).html( error );
 
 									modal.on(
 										'click',
-										function() {
+										function () {
 											select.empty();
 											el.find( '.redux-modal-load' ).empty();
 
@@ -212,7 +212,7 @@
 
 				el.find( '.redux-icon-remove' ).on(
 					'click',
-					function( e ) {
+					function ( e ) {
 						e.preventDefault();
 						el.find( '.redux-icon-select-preview' ).addClass( 'hidden' );
 						el.find( 'input' ).val( '' ).trigger( 'change' );

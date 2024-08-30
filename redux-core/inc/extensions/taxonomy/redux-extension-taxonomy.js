@@ -20,8 +20,8 @@ jQuery(
 		);
 
 		$.reduxTaxonomy.init = function () {
-			var reduxObject;
-			var optName = $( '.redux-ajax-security' ).data( 'opt-name' );
+			let reduxObject;
+			const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
 			if ( undefined === optName ) {
 				reduxObject = redux.optName;
@@ -40,7 +40,7 @@ jQuery(
 		$.reduxTaxonomy.editCount = $( '#the-list tr' );
 
 		$.reduxTaxonomy.editCheck = function () {
-			var tr;
+			let tr;
 
 			if ( $( '#ajax-response .error' ).length ) {
 				return false;

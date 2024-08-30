@@ -1,9 +1,9 @@
 /* global reduxWidgetAreasLocalize, ajaxurl, jQuery */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
-	var reduxWidgetAreas = function() {
+	const reduxWidgetAreas = function () {
 		this.widgetWrap     = $( '.sidebars-column-1' );
 		this.widgetArea     = $( '#widgets-right' );
 		this.parentArea     = $( '.widget-liquid-right' );
@@ -15,17 +15,17 @@
 	};
 
 	reduxWidgetAreas.prototype = {
-		addFormHtml: function() {
+		addFormHtml: function () {
 			this.widgetWrap.append( this.widgetTemplate.html() );
 
 			this.widgetName = this.widgetWrap.find( 'input[name="redux-add-widget-input"]' );
 			this.nonce      = this.widgetWrap.find( 'input[name="redux-nonce"]' ).val();
 		},
 
-		addDelButton: function() {
-			var i = 0;
+		addDelButton: function () {
+			let i = 0;
 			this.widgetArea.find( '.sidebar-redux-custom .widgets-sortables' ).each(
-				function() {
+				function () {
 					if ( i >= reduxWidgetAreasLocalize.count ) {
 						$( this ).append(
 							'<div class="redux-widget-area-edit"><a href="#" class="redux-widget-area-delete button-primary">' + reduxWidgetAreasLocalize.delete +
@@ -39,11 +39,11 @@
 			);
 		},
 
-		bindEvents: function() {
+		bindEvents: function () {
 			this.parentArea.on(
 				'click',
 				'a.redux-widget-area-delete',
-				function( event ) {
+				function ( event ) {
 					event.preventDefault();
 					$( this ).hide();
 					$( this ).next( 'a.redux-widget-area-delete-cancel' ).show().next( 'a.redux-widget-area-delete-confirm' ).show();
@@ -53,7 +53,7 @@
 			this.parentArea.on(
 				'click',
 				'a.redux-widget-area-delete-cancel',
-				function( event ) {
+				function ( event ) {
 					event.preventDefault();
 					$( this ).hide();
 					$( this ).prev( 'a.redux-widget-area-delete' ).show();
@@ -69,8 +69,8 @@
 
 			$( '#addWidgetAreaForm' ).on(
 				'submit',
-				function() {
-					var spinner = $( '#redux-add-widget' ).find( '.spinner' );
+				function () {
+					const spinner = $( '#redux-add-widget' ).find( '.spinner' );
 
 					spinner.css( 'display', 'inline-block' );
 					spinner.css( 'visibility', 'visible' );
@@ -80,19 +80,19 @@
 			);
 		},
 
-		addWidgetArea: function( e ) {
+		addWidgetArea: function ( e ) {
 			e.preventDefault();
 
 			return false;
 		},
 
 		// Delete the widgetArea area with all widgets within, then re calculate the other widgetArea ids and save the order.
-		deleteWidgetArea: function( e ) {
-			var widget     = $( e.currentTarget ).parents( '.widgets-holder-wrap:eq(0)' );
-			var title      = widget.find( '.sidebar-name h2' );
-			var spinner    = title.find( '.spinner' );
-			var widgetName = title.text().trim();
-			var _this      = this;
+		deleteWidgetArea: function ( e ) {
+			const widget     = $( e.currentTarget ).parents( '.widgets-holder-wrap:eq(0)' );
+			const title      = widget.find( '.sidebar-name h2' );
+			const spinner    = title.find( '.spinner' );
+			const widgetName = title.text().trim();
+			const _this      = this;
 
 			widget.addClass( 'closed' );
 
@@ -109,11 +109,11 @@
 						_wpnonce: _this.nonce
 					},
 
-					success: function( response ) {
+					success: function ( response ) {
 						if ( 'widget_area-deleted' === response.trim() ) {
 							widget.slideUp(
 								200,
-								function() {
+								function () {
 									this.remove();
 								}
 							);
@@ -125,7 +125,7 @@
 	};
 
 	$(
-		function() {
+		function () {
 			new reduxWidgetAreas();
 		}
 	);

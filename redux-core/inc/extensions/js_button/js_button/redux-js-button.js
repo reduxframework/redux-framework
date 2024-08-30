@@ -6,7 +6,7 @@
  * @author Kevin Provance (kprovance)
  */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	redux.field_objects                  = redux.field_objects || {};
@@ -16,7 +16,7 @@
 	/*******************************************************************************
 	 * Runs when library is loaded.
 	 ******************************************************************************/
-	redux.field_objects.js_button.init = function( selector ) {
+	redux.field_objects.js_button.init = function ( selector ) {
 
 		// If no selector is passed, grab one from the HTML.
 		if ( ! selector ) {
@@ -25,11 +25,11 @@
 
 		// Enum instances of our object.
 		$( selector ).each(
-			function() {
-				var button;
+			function () {
+				let button;
 
-				var el     = $( this );
-				var parent = el;
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -49,13 +49,13 @@
 
 				$.each(
 					button,
-					function( key, value ) {
+					function ( key, value ) {
 						key = null;
 
 						$( this ).on(
 							'click',
-							function( e ) {
-								var funcName = $( value ).data( 'function' );
+							function ( e ) {
+								const funcName = $( value ).data( 'function' );
 
 								// Not really needed, but just in case.
 								e.preventDefault();
@@ -84,7 +84,7 @@
 	/*******************************************************************************
 	 * Module level init
 	 ******************************************************************************/
-	redux.field_objects.js_button.modInit = function( el ) {
+	redux.field_objects.js_button.modInit = function ( el ) {
 
 		// ID of the fieldset.
 		redux.field_objects.js_button.mainID = el.attr( 'data-id' );

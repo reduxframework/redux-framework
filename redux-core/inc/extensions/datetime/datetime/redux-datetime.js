@@ -1,20 +1,20 @@
 /* global redux, jQuery */
 
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	redux.field_objects          = redux.field_objects || {};
 	redux.field_objects.datetime = redux.field_objects.datetime || {};
 
-	redux.field_objects.datetime.init = function( selector ) {
+	redux.field_objects.datetime.init = function ( selector ) {
 		if ( ! selector ) {
 			selector = $( document ).find( '.redux-group-tab:visible' ).find( '.redux-container-datetime:visible' );
 		}
 
 		$( selector ).each(
-			function() {
-				var el     = $( this );
-				var parent = el;
+			function () {
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -31,32 +31,32 @@
 				}
 
 				el.find( '.redux-date-picker' ).each(
-					function() {
-						var dateFormat;
-						var timeFormat;
-						var separator;
-						var rtl;
-						var numOfMonths;
-						var hourMin;
-						var hourMax;
-						var minuteMin;
-						var minuteMax;
-						var controlType;
-						var datePicker;
-						var timePicker;
-						var timeOnly = false;
-						var timezoneList;
-						var dateMin;
-						var minDate;
-						var dateMax;
-						var maxDate;
-						var timezone;
-						var split;
-						var altField = '';
-						var timePickerID;
+					function () {
+						let dateFormat;
+						let timeFormat;
+						let separator;
+						let rtl;
+						let numOfMonths;
+						let hourMin;
+						let hourMax;
+						let minuteMin;
+						let minuteMax;
+						let controlType;
+						let datePicker;
+						let timePicker;
+						let timeOnly = false;
+						let timezoneList;
+						let dateMin;
+						let minDate;
+						let dateMax;
+						let maxDate;
+						let timezone;
+						let split;
+						let altField = '';
+						let timePickerID;
 
-						var mainID = $( this ).parents( '.redux-datetime-container:first' ).attr( 'id' );
-						var id     = $( '#' + mainID );
+						const mainID = $( this ).parents( '.redux-datetime-container:first' ).attr( 'id' );
+						const id     = $( '#' + mainID );
 
 						dateFormat = id.data( 'date-format' );
 						dateFormat = String( ( '' === dateFormat ) ? 'mm-dd-yy' : dateFormat );
@@ -129,15 +129,15 @@
 
 						$( this ).datetimepicker(
 							{
-								beforeShow: function( input, instance ) {
-									var el      = $( '#ui-datepicker-div' );
-									var popover = instance.dpDiv;
+								beforeShow: function ( input, instance ) {
+									const el      = $( '#ui-datepicker-div' );
+									const popover = instance.dpDiv;
 
 									$( '.redux-container:first' ).append( el );
 									el.hide();
 
 									setTimeout(
-										function() {
+										function () {
 											popover.position(
 												{
 													my: 'left top',

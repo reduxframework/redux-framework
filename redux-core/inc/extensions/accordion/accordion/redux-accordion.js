@@ -13,16 +13,16 @@
 
 		$( selector ).each(
 			function () {
-				var $id;
-				var group;
-				var test;
-				var accordionMarker;
-				var openIcon;
-				var closeIcon;
-				var table;
+				let $id;
+				let group;
+				let test;
+				let accordionMarker;
+				let openIcon;
+				let closeIcon;
+				let table;
 
-				var el     = $( this );
-				var parent = el;
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -64,8 +64,8 @@
 					group.find( '.redux-accordion-field' ).on(
 						'click',
 						function ( e ) {
-							var id    = $( this ).attr( 'id' );
-							var table = $( '#accordion-table-' + id );
+							const id    = $( this ).attr( 'id' );
+							const table = $( '#accordion-table-' + id );
 
 							e.preventDefault();
 
@@ -82,10 +82,10 @@
 
 					group.find( '.redux-accordion-field' ).each(
 						function () {
-							var id;
-							var state;
-							var table;
-							var position = $( this ).data( 'position' );
+							let id;
+							let state;
+							let table;
+							const position = $( this ).data( 'position' );
 
 							if ( 'start' === position ) {
 								id    = $( this ).attr( 'id' );
