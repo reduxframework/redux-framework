@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.4.18.5
+* Updated: JavaScript for jQuery 4.0 release.
+* Fixed: `editor` and `checkbox` fields not saving in `tabbed` field.
+* Fixed: `custom_fonts` not saving uploaded font on conversion failure.
+
 ## 4.4.18.4
 * Fixed: Font Conversion issue resolved serverside.
 * Fixed: #4009 - Google Font update issue resolved.
