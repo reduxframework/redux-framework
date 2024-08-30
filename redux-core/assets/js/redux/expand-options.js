@@ -1,12 +1,12 @@
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	$.redux = $.redux || {};
 
-	$.redux.expandOptions = function( parent ) {
-		var trigger = parent.find( '.expand_options' );
-		var width   = parent.find( '.redux-sidebar' ).width() - 1;
-		var id      = $( '.redux-group-menu .active a' ).data( 'rel' ) + '_section_group';
+	$.redux.expandOptions = function ( parent ) {
+		const trigger = parent.find( '.expand_options' );
+		const width   = parent.find( '.redux-sidebar' ).width() - 1;
+		const id      = $( '.redux-group-menu .active a' ).data( 'rel' ) + '_section_group';
 
 		if ( trigger.hasClass( 'expanded' ) ) {
 			trigger.removeClass( 'expanded' );
@@ -20,13 +20,13 @@
 			parent.find( '.redux-main' ).stop().animate(
 				{ 'margin-left': width },
 				500,
-				function() {
+				function () {
 					parent.find( '.redux-main' ).attr( 'style', '' );
 				}
 			);
 
 			parent.find( '.redux-group-tab' ).each(
-				function() {
+				function () {
 					if ( $( this ).attr( 'id' ) !== id ) {
 						$( this ).fadeOut( 'fast' );
 					}
@@ -50,7 +50,7 @@
 
 			parent.find( '.redux-group-tab' ).fadeIn(
 				'medium',
-				function() {
+				function () {
 					$.redux.initFields();
 				}
 			);

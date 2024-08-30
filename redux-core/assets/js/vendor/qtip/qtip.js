@@ -2727,8 +2727,13 @@
 					elem = self.elem = $('<div />', {
 						id: 'qtip-overlay',
 						html: '<div></div>',
-						mousedown: function() { return FALSE; }
 					})
+					elem.on(
+						'mousedown',
+						function() {
+							return false;
+						}
+					)
 					.hide();
 
 					// Make sure we can't focus anything outside the tooltip

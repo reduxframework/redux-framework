@@ -1,29 +1,30 @@
 /* global redux */
+// noinspection JSUnresolvedReference
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	$.redux = $.redux || {};
 
-	$.redux.tabCheck = function() {
-		var link;
-		var tab;
-		var sTab;
-		var cookieName;
-		var opt_name;
+	$.redux.tabCheck = function () {
+		let link;
+		let tab;
+		let sTab;
+		let cookieName;
+		let opt_name;
 
 		$( '.redux-group-tab-link-a' ).on(
 			'click',
-			function() {
-				var elements;
-				var index;
-				var el;
-				var relid;
-				var oldid;
-				var cookieName;
-				var boxIndex;
-				var parentID;
-				var newParent;
+			function () {
+				let elements;
+				let index;
+				let el;
+				let relid;
+				let oldid;
+				let cookieName;
+				let boxIndex;
+				let parentID;
+				let newParent;
 
 				link = $( this );
 
@@ -78,8 +79,8 @@
 				el.find( '#toplevel_page_' + redux.optName.args.slug + ' .wp-submenu li.current' ).removeClass( 'current' );
 
 				el.find( '#toplevel_page_' + redux.optName.args.slug + ' .wp-submenu a' ).each(
-					function() {
-						var url = $( this ).attr( 'href' ).split( '&tab=' );
+					function () {
+						const url = $( this ).attr( 'href' ).split( '&tab=' );
 
 						if ( url[1] === relid || url[1] === parentID ) {
 							$( this ).addClass( 'current' );
@@ -101,7 +102,7 @@
 					el.find( '#' + relid + '_section_group_li' ).removeClass( 'activeChild' ).addClass( 'active' );
 				} else {
 					setTimeout(
-						function() {
+						function () {
 							el.find( '#' + relid + '_section_group_li' ).addClass( 'active' ).removeClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
 						},
 						1
@@ -110,7 +111,7 @@
 					if ( el.find( '#' + oldid + '_section_group_li' ).find( 'ul.subsection' ).length ) {
 						el.find( '#' + oldid + '_section_group_li' ).find( 'ul.subsection' ).slideUp(
 							'fast',
-							function() {
+							function () {
 								el.find( '#' + oldid + '_section_group_li' ).removeClass( 'active' ).removeClass( 'activeChild' );
 							}
 						);
@@ -134,7 +135,7 @@
 						if ( ! el.find( '#' + oldid + '_section_group_li' ).parents( '#' + relid + '_section_group_li' ).length ) {
 							el.find( '#' + oldid + '_section_group_li' ).parents( 'ul.subsection' ).slideUp(
 								'fast',
-								function() {
+								function () {
 									el.find( '#' + oldid + '_section_group_li' ).removeClass( 'active' );
 									el.find( '#' + oldid + '_section_group_li' ).parents( '.redux-group-tab-link-li' ).removeClass( 'active' ).removeClass( 'activeChild' );
 									el.find( '#' + relid + '_section_group_li' ).parents( '.redux-group-tab-link-li' ).addClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
@@ -149,7 +150,7 @@
 
 						if ( el.find( '#' + relid + '_section_group_li' ).parents( '.redux-group-tab-link-li' ).length ) {
 							setTimeout(
-								function() {
+								function () {
 									el.find( '#' + relid + '_section_group_li' ).parents( '.redux-group-tab-link-li' ).addClass( 'activeChild' ).find( 'ul.subsection' ).slideDown();
 								},
 								50
@@ -165,7 +166,7 @@
 
 				el.find( '#' + relid + '_section_group' ).fadeIn(
 					200,
-					function() {
+					function () {
 						if ( 0 !== el.find( '#redux-footer' ).length ) {
 							$.redux.stickyInfo(); // Race condition fix.
 						}
@@ -222,8 +223,8 @@
 		}
 
 		$( '.redux-container' ).each(
-			function() {
-				var boxIndex;
+			function () {
+				let boxIndex;
 
 				if ( ! $( this ).parents( '.postbox-container:first' ).length ) {
 					opt_name = $( '.redux-ajax-security' ).data( 'opt-name' );

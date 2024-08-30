@@ -5,7 +5,7 @@ function redux_hook( object, functionName, callback, before ) {
 
 	(function ( originalFunction ) {
 		object[functionName] = function () {
-			var returnValue;
+			let returnValue;
 
 			if ( true === before ) {
 				callback.apply( this, [returnValue, originalFunction, arguments] );

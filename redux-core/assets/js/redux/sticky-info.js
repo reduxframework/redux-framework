@@ -1,14 +1,14 @@
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	$.redux = $.redux || {};
 
-	$.redux.stickyInfo = function() {
-		var sticky      = $( '#redux-sticky' );
-		var infoBar     = $( '#info_bar' );
-		var reduxFooter = $( '#redux-footer' );
-		var stickyWidth = $( '.redux-main' ).innerWidth() - 20;
-		var $width      = sticky.offset().left;
+	$.redux.stickyInfo = function () {
+		const sticky      = $( '#redux-sticky' );
+		const infoBar     = $( '#info_bar' );
+		const reduxFooter = $( '#redux-footer' );
+		const stickyWidth = $( '.redux-main' ).innerWidth() - 20;
+		const $width      = sticky.offset().left;
 
 		$( '.redux-save-warn' ).css( 'left', $width + 'px' );
 

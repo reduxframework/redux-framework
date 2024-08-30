@@ -1,20 +1,21 @@
 /* global redux, document */
+// noinspection JSUnresolvedReference
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	$.redux = $.redux || {};
 
 	$( document ).ready(
-		function() {
-			var opt_name;
-			var tempArr = [];
-			var container;
+		function () {
+			let opt_name;
+			let tempArr = [];
+			let container;
 
-			$.fn.isOnScreen = function() {
-				var win;
-				var viewport;
-				var bounds;
+			$.fn.isOnScreen = function () {
+				let win;
+				let viewport;
+				let bounds;
 
 				if ( ! window ) {
 					return;
@@ -46,7 +47,7 @@
 			container = $( '.redux-container' );
 
 			container.each(
-				function() {
+				function () {
 					opt_name = $.redux.getOptName( this );
 
 					if ( $.inArray( opt_name, tempArr ) === -1 ) {
@@ -59,7 +60,7 @@
 
 			container.on(
 				'click',
-				function() {
+				function () {
 					opt_name = $.redux.getOptName( this );
 				}
 			);
@@ -79,12 +80,12 @@
 		}
 	);
 
-	$.redux.flyoutSubmenu = function() {
+	$.redux.flyoutSubmenu = function () {
 
 		// Close flyouts when a new menu item is activated.
 		$( '.redux-group-tab-link-li a' ).on(
 			'click',
-			function() {
+			function () {
 				if ( true === redux.optName.args.flyout_submenus ) {
 					$( '.redux-group-tab-link-li' ).removeClass( 'redux-section-hover' );
 				}
@@ -95,10 +96,10 @@
 
 			// Submenus flyout when a main menu item is hovered.
 			$( '.redux-group-tab-link-li.hasSubSections' ).each(
-				function() {
+				function () {
 					$( this ).on(
 						'mouseenter',
-						function() {
+						function () {
 							if ( ! $( this ).hasClass( 'active' ) && ! $( this ).hasClass( 'activeChild' ) ) {
 								$( this ).addClass( 'redux-section-hover' );
 							}
@@ -107,7 +108,7 @@
 
 					$( this ).on(
 						'mouseleave',
-						function() {
+						function () {
 							$( this ).removeClass( 'redux-section-hover' );
 						}
 					);
@@ -116,9 +117,9 @@
 		}
 	};
 
-	$.redux.disableSections = function() {
+	$.redux.disableSections = function () {
 		$( '.redux-group-tab' ).each(
-			function() {
+			function () {
 				if ( $( this ).hasClass( 'disabled' ) ) {
 					$( this ).find( 'input, select, textarea' ).attr( 'name', '' );
 				}
@@ -126,26 +127,26 @@
 		);
 	};
 
-	$.redux.disableFields = function() {
+	$.redux.disableFields = function () {
 		$( 'tr.redux_disable_field' ).each(
-			function() {
+			function () {
 				$( this ).parents( 'tr' ).find( 'fieldset:first' ).find( 'input, select, textarea' ).attr( 'name', '' );
 			}
 		);
 	};
 
-	$.redux.hideFields = function() {
+	$.redux.hideFields = function () {
 		$( 'tr.redux_hide_field' ).each(
-			function() {
+			function () {
 				$( this ).addClass( 'hidden' );
 			}
 		);
 	};
 
-	$.redux.getOptName = function( el ) {
-		var metabox;
-		var optName;
-		var item = $( el );
+	$.redux.getOptName = function ( el ) {
+		let metabox;
+		let optName;
+		let item = $( el );
 
 		if ( redux.customizer ) {
 			optName = item.find( '.redux-customizer-opt-name' ).data( 'opt-name' );
@@ -190,7 +191,7 @@
 		return optName;
 	};
 
-	$.redux.getSelector = function( selector, fieldType ) {
+	$.redux.getSelector = function ( selector, fieldType ) {
 		if ( ! selector ) {
 			selector = '.redux-container-' + fieldType + ':visible';
 			if ( redux.customizer ) {

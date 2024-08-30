@@ -1,16 +1,17 @@
 /* global redux, redux_change, jQuery */
+// noinspection JSUnresolvedReference
 
-(function( $ ) {
+(function ( $ ) {
 	'use strict';
 
 	$.redux = $.redux || {};
 
-	$.redux.initEvents = function( el ) {
-		var stickyHeight;
+	$.redux.initEvents = function ( el ) {
+		let stickyHeight;
 
 		el.find( '.redux-presets-bar' ).on(
 			'click',
-			function() {
+			function () {
 				window.onbeforeunload = null;
 			}
 		);
@@ -18,15 +19,15 @@
 		// Customizer save hook.
 		el.find( '#customize-save-button-wrapper #save' ).on(
 			'click',
-			function() {
+			function () {
 
 			}
 		);
 
 		el.find( '#toplevel_page_' + redux.optName.args.slug + ' .wp-submenu a, #wp-admin-bar-' + redux.optName.args.slug + ' a.ab-item' ).on(
 			'click',
-			function( e ) {
-				var url;
+			function ( e ) {
+				let url;
 
 				if ( ( el.find( '#toplevel_page_' + redux.optName.args.slug ).hasClass( 'wp-menu-open' ) ||
 					$( this ).hasClass( 'ab-item' ) ) &&
@@ -51,7 +52,7 @@
 		// Save button clicked.
 		el.find( '.redux-action_bar input, #redux-import-action input' ).on(
 			'click',
-			function( e ) {
+			function ( e ) {
 				if ( $( this ).attr( 'name' ) === redux.optName.args.opt_name + '[defaults]' ) {
 
 					// Defaults button clicked.
@@ -83,10 +84,9 @@
 
 		$( '.expand_options' ).on(
 			'click',
-			function( e ) {
-				var tab;
-
-				var container = el;
+			function ( e ) {
+				let tab;
+				const container = el;
 
 				e.preventDefault();
 
@@ -97,7 +97,7 @@
 
 					el.find( '#' + tab + '_section_group' ).fadeIn(
 						200,
-						function() {
+						function () {
 							if ( 0 !== el.find( '#redux-footer' ).length ) {
 								$.redux.stickyInfo(); // Race condition fix.
 							}
@@ -120,7 +120,7 @@
 		$( document.body ).on(
 			'change',
 			'.redux-field input, .redux-field textarea, .redux-field select',
-			function() {
+			function () {
 				if ( $( '.redux-container-typography select' ).hasClass( 'ignore-change' ) ) {
 					return;
 				}
@@ -141,14 +141,14 @@
 		if ( 0 !== el.find( '#redux-footer' ).length ) {
 			$( window ).on(
 				'scroll',
-				function() {
+				function () {
 					$.redux.stickyInfo();
 				}
 			);
 
 			$( window ).on(
 				'resize',
-				function() {
+				function () {
 					$.redux.stickyInfo();
 				}
 			);
