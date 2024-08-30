@@ -13,7 +13,7 @@
 ( function ( $ ) {
 	'use strict';
 
-	var isFiltered;
+	let isFiltered;
 
 	redux.field_objects       = redux.field_objects || {};
 	redux.field_objects.media = redux.field_objects.media || {};
@@ -25,8 +25,8 @@
 
 		$( selector ).each(
 			function () {
-				var el     = $( this );
-				var parent = el;
+				const el   = $( this );
+				let parent = el;
 
 				if ( ! el.hasClass( 'redux-field-container' ) ) {
 					parent = el.parents( '.redux-field-container:first' );
@@ -70,16 +70,16 @@
 
 	// Add a file via the wp.media function.
 	redux.field_objects.media.addFile = function ( event, selector ) {
-		var frame;
-		var libFilter;
-		var filter;
-		var data;
-		var thumbSrc;
-		var height;
-		var key;
-		var object;
+		let frame;
+		let libFilter;
+		let filter;
+		let data;
+		let thumbSrc;
+		let height;
+		let key;
+		let object;
 
-		var jQueryel = $( this );
+		const jQueryel = $( this );
 
 		event.preventDefault();
 
@@ -136,7 +136,8 @@
 			function () {
 
 				// Grab the selected attachment.
-				var attachment = frame.state().get( 'selection' ).first();
+				const attachment = frame.state().get( 'selection' ).first();
+
 				frame.close();
 
 				data = $( selector ).find( '.data' ).data();
@@ -198,7 +199,7 @@
 
 				selector.find( '.upload-thumbnail' ).val( thumbSrc );
 				if ( ! selector.find( '.upload' ).hasClass( 'noPreview' ) ) {
-					selector.find( '.screenshot' ).empty().hide().append( '<img class="redux-option-image" src="' + thumbSrc + '">' ).slideDown( 'fast' );
+					selector.find( '.screenshot' ).empty().hide().append( '<img alt="" class="redux-option-image" src="' + thumbSrc + '">' ).slideDown( 'fast' );
 				}
 
 				selector.find( '.remove-image' ).removeClass( 'hide' ); // Show "Remove" button.
@@ -212,7 +213,7 @@
 
 	// Function to remove the image on click. Still requires a save.
 	redux.field_objects.media.removeFile = function ( selector ) {
-		var screenshot;
+		let screenshot;
 
 		// This shouldn't have been run...
 		if ( ! selector.find( '.remove-image' ).addClass( 'hide' ) ) {
