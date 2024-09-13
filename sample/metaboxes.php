@@ -4,6 +4,8 @@
  * For full documentation, please visit: https://devs.redux.io/
  *
  * @package Redux Framework
+ *
+ * @noinspection PhpUndefinedVariableInspection
  */
 
 defined( 'ABSPATH' ) || exit;

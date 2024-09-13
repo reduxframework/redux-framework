@@ -390,7 +390,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 				return;
 			}
 
-			self::set_defaults( $opt_name );
+			// self::set_defaults( $opt_name );
 
 			$args     = self::construct_args( $opt_name );
 			$sections = self::construct_sections( $opt_name );

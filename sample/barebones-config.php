@@ -98,7 +98,7 @@ $args = array(
 	// Shows the Import/Export panel when not used as a field.
 	'show_import_export'        => true,
 
-	// CAREFUL -> These options are for advanced use only.
+	// CAREFUL: These options are for advanced use only.
 	'transient_time'            => 60 * MINUTE_IN_SECONDS,
 
 	// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output.
@@ -107,12 +107,11 @@ $args = array(
 	// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head.
 	'output_tag'                => true,
 
-	// FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
+	// FUTURE → Not in use yet, but reserved or partially implemented.
+	// Use at your own risk.
 	// Possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 	'database'                  => '',
 
-	// If you prefer not to use the CDN for Select2, Ace Editor, and others, you may download the Redux Vendor Support plugin yourself and run locally or embed it in your code.
-	'use_cdn'                   => true,
 	'compiler'                  => true,
 
 	// Enable or disable flyout menus when hovering over a menu with submenus.
@@ -153,7 +152,7 @@ $args = array(
 	),
 );
 
-// ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
+// ADMIN BAR LINKS → Set up custom links in the admin bar menu as external items.
 $args['admin_bar_links'][] = array(
 	'id'    => 'redux-docs',
 	'href'  => '//devs.redux.io/',
@@ -172,7 +171,7 @@ $args['admin_bar_links'][] = array(
 	'title' => esc_html__( 'Extensions', 'your-textdomain-here' ),
 );
 
-// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
+// SOCIAL ICONS → Set up custom links in the footer for quick links in your panel footer icons.
 $args['share_icons'][] = array(
 	'url'   => '//github.com/ReduxFramework/ReduxFramework',
 	'title' => 'Visit us on GitHub',
@@ -194,7 +193,7 @@ $args['share_icons'][] = array(
 	'icon'  => 'el el-linkedin',
 );
 
-// Panel Intro text -> before the form.
+// Panel Intro text → before the form.
 if ( false !== $args['global_variable'] ) {
 	if ( ! empty( $args['global_variable'] ) ) {
 		$v = $args['global_variable'];

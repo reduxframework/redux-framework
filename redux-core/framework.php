@@ -2,7 +2,7 @@
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * the Free Software Foundation, either version 3 of the License or
  * any later version.
  *
  * Redux Framework is distributed in the hope that it will be useful,
@@ -902,7 +902,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
-		 * ->get(); This is used to return and option value from the option array
+		 * →get(); This is used to return and option value from the option array
 		 *
 		 * @since       1.0.0
 		 * @access      public
@@ -917,7 +917,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
-		 * ->set(); This is used to set an arbitrary option in the option array
+		 * →set(); This is used to set an arbitrary option in the option array
 		 *
 		 * @since       1.0.0
 		 * @access      public

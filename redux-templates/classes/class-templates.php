@@ -42,7 +42,7 @@ class Templates {
 			return;
 		}
 
-		// Include ReduxTemplates default template without wrapper.
+		// Include ReduxTemplates default template without a wrapper.
 		add_filter( 'template_include', array( $this, 'template_include' ) );
 
 		// Override the default content-width when using Redux templates so the template doesn't look like shit.

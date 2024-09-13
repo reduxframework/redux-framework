@@ -118,7 +118,7 @@
 				// Set the title of the modal.
 				title: jQueryel.data( 'choose' ),
 
-				// Customize the submit button.
+				// Customize the 'submit' button.
 				button: {
 
 					// Set the text of the button.

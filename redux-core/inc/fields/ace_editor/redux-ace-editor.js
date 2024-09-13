@@ -1,4 +1,4 @@
-/*global jQuery, redux, redux_change, ace */
+/* global jQuery, redux, redux_change, ace */
 
 ( function ( $ ) {
 	'use strict';

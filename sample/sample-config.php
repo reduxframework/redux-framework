@@ -34,7 +34,7 @@ if ( is_dir( $sample_patterns_path ) ) {
 
 	if ( $sample_patterns_dir ) {
 
-		// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition
+		// phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 		while ( false !== ( $sample_patterns_file = readdir( $sample_patterns_dir ) ) ) {
 			if ( stristr( $sample_patterns_file, '.png' ) !== false || stristr( $sample_patterns_file, '.jpg' ) !== false ) {
 				$name              = explode( '.', $sample_patterns_file );
@@ -68,7 +68,7 @@ $kses_exceptions = array(
  */
 $theme = wp_get_theme(); // For use with some settings. Not necessary.
 
-// TYPICAL -> Change these values as you need/desire.
+// TYPICAL → Change these values as you need/desire.
 $args = array(
 	// This is where your data is stored in the database and also becomes your global variable name.
 	'opt_name'                  => $opt_name,
@@ -208,7 +208,8 @@ $args = array(
 		),
 	),
 
-	// FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
+	// FUTURE → Not in use yet, but reserved or partially implemented.
+	// Use at your own risk.
 	// Possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
 	'database'                  => '',
 	'network_admin'             => true,
@@ -216,7 +217,7 @@ $args = array(
 );
 
 
-// ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
+// ADMIN BAR LINKS → Set up custom links in the admin bar menu as external items.
 // PLEASE CHANGE THESE SETTINGS IN YOUR THEME BEFORE RELEASING YOUR PRODUCT!!
 // If these are left unchanged, they will not display in your panel!
 $args['admin_bar_links'][] = array(
@@ -231,7 +232,7 @@ $args['admin_bar_links'][] = array(
 	'title' => __( 'Support', 'your-textdomain-here' ),
 );
 
-// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
+// SOCIAL ICONS → Set up custom links in the footer for quick links in your panel footer icons.
 // PLEASE CHANGE THESE SETTINGS IN YOUR THEME BEFORE RELEASING YOUR PRODUCT!!
 // If these are left unchanged, they will not display in your panel!
 $args['share_icons'][] = array(
@@ -255,7 +256,7 @@ $args['share_icons'][] = array(
 	'icon'  => 'el el-linkedin',
 );
 
-// Panel Intro text -> before the form.
+// Panel Intro text → before the form.
 if ( ! isset( $args['global_variable'] ) || false !== $args['global_variable'] ) {
 	if ( ! empty( $args['global_variable'] ) ) {
 		$v = $args['global_variable'];
@@ -413,7 +414,7 @@ Redux::set_section(
 	)
 );
 
-// -> START Switch & Button Set.
+// → START Switch & Button Set.
 Redux::set_section(
 	$opt_name,
 	array(
@@ -611,11 +612,11 @@ Redux::set_section(
 if ( ! function_exists( 'compiler_action' ) ) {
 	/**
 	 * This is a test function that will let you see when the compiler hook occurs.
-	 * It only runs if a field's value has changed and compiler=>true is set.
+	 * It only runs if a field's value has changed and compiler => true is set.
 	 *
 	 * @param array  $options        Options values.
 	 * @param string $css            Compiler selector CSS values  compiler => array( CSS SELECTORS ).
-	 * @param array  $changed_values Any values changed since last save.
+	 * @param array  $changed_values Any values that have changed since last save.
 	 */
 	function compiler_action( array $options, string $css, array $changed_values ) {
 		echo '<h1>The compiler hook has run!</h1>';

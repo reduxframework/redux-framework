@@ -150,7 +150,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		}
 
 		/**
-		 * Include necessary files
+		 * Include the necessary files
 		 *
 		 * @access      public
 		 * @since       3.1.3
@@ -412,14 +412,13 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		/**
 		 * Add a settings link to the Redux entry in the plugin overview screen
 		 *
-		 * @param array  $links Links array.
-		 * @param string $file  Plugin filename/slug.
+		 * @param array $links Links array.
 		 *
 		 * @return array
 		 * @see   filter:plugin_action_links
 		 * @since 1.0
 		 */
-		public function add_settings_link( array $links, string $file ): array {
+		public function add_settings_link( array $links ): array {
 			return $links;
 		}
 

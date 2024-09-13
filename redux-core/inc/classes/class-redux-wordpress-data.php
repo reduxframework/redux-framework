@@ -48,7 +48,9 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * @return array|mixed|string
 		 */
 		public function get( $type, $args = array(), string $opt_name = '', $current_value = '', bool $ajax = false ) {
-			$opt_name = $this->opt_name;
+			if ( '' === $opt_name ) {
+				$opt_name = $this->opt_name;
+			}
 
 			// We don't want to run this, it's not a string value. Send it back!
 			if ( is_array( $type ) ) {
@@ -96,7 +98,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 
 			// If ajax is enabled AND $current_data is empty, set a dummy value for the init.
 			if ( $ajax && ! wp_doing_ajax() ) {
-				// Dummy is needed otherwise empty.
+				// Dummy is necessary otherwise empty.
 				if ( empty( $current_data ) ) {
 					$current_data = array(
 						'dummy' => '',
@@ -114,7 +116,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 				$data = $this->wp_data[ $type . $args_key ];
 			} else {
 				/**
-				 * Use data from WordPress to populate options array.
+				 * Use data from WordPress to populate an option array.
 				 * */
 				$data = $this->get_data( $type, $args, $current_value );
 			}
@@ -146,7 +148,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * @param string|bool    $id_key        Key on object/array that represents the ID.
 		 * @param string|bool    $name_key      Key on object/array that represents the name/text.
 		 * @param bool           $add_key       If true, the display key will appear in the text.
-		 * @param string|bool    $secondary_key If a data type you'd rather display a different ID as the display key.
+		 * @param string|bool    $secondary_key If a data type, you'd rather display a different ID as the display key.
 		 *
 		 * @return array
 		 */
@@ -177,7 +179,9 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 							$value = $v;
 						}
 					}
+
 					$display_key = $key;
+
 					if ( is_object( $v ) && isset( $v->$secondary_key ) ) {
 						$display_key = $v->$secondary_key;
 					} elseif ( ! is_object( $v ) && isset( $v[ $secondary_key ] ) ) {
@@ -479,7 +483,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 
 
 		/**
-		 * Router for translation based on the given post type.
+		 * Router for translation based on the given post-type.
 		 *
 		 * @param string       $type          Type of data request.
 		 * @param mixed|array  $current_value Current value stored in DB.
@@ -559,7 +563,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * @return array
 		 */
 		private function get_current_data_args( string $type, $args, $current_value ): array {
-			// In this section we set the default arguments for each data type.
+			// In this section, we set the default arguments for each data type.
 			switch ( $type ) {
 				case 'categories':
 				case 'category':
@@ -603,7 +607,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 		 * @return array|string
 		 */
 		private function get_arg_defaults( string $type, $args = array() ) {
-			// In this section we set the default arguments for each data type.
+			// In this section, we set the default arguments for each data type.
 			switch ( $type ) {
 				case 'categories':
 				case 'category':
