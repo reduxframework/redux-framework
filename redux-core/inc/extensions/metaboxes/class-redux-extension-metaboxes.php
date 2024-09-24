@@ -1399,6 +1399,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			}
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
 				// Have to remove the escaping for array comparison.
 				if ( is_array( $value ) ) {
 					foreach ( $value as $k => $v ) {
@@ -1488,8 +1489,10 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 				delete_post_meta( $post_id, $key, $prev_value );
 			}
 
-			foreach ( $check as $key => $value ) {
-				delete_post_meta( $post_id, $key );
+			if ( ! empty( $check ) ) {
+				foreach ( $check as $key => $value ) {
+					delete_post_meta( $post_id, $key );
+				}
 			}
 
 			return $post_id;

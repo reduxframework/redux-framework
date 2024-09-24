@@ -303,22 +303,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 						$term_id = 'redux-' . $this->parent->args['opt_name'] . '-metaterm-' . $term['id'];
 
-						if ( isset( $term['page_template'] ) && 'page' === $this->taxonomy_type ) {
-							if ( ! is_array( $term['page_template'] ) ) {
-								$term['page_template'] = array( $term['page_template'] );
-							}
-
-							$this->wp_links[ $term_id ]['page_template'] = isset( $this->wp_links[ $term_id ]['page_template'] ) ? wp_parse_args( $this->wp_links[ $term_id ]['page_template'], $term['page_template'] ) : $term['page_template'];
-						}
-
-						if ( isset( $term['post_format'] ) && ( in_array( $this->taxonomy_type, $this->taxonomy_types, true ) || '' === $this->taxonomy_type ) ) {
-							if ( ! is_array( $term['post_format'] ) ) {
-								$term['post_format'] = array( $term['post_format'] );
-							}
-
-							$this->wp_links[ $term_id ]['post_format'] = isset( $this->wp_links[ $term_id ]['post_format'] ) ? wp_parse_args( $this->wp_links[ $term_id ]['post_format'], $term['post_format'] ) : $term['post_format'];
-						}
-
 						$this->meta[ $this->tag_id ] = Redux_Taxonomy::get_term_meta( array( 'taxonomy' => $this->tag_id ) );
 						$this->parent->options       = array_merge( $this->parent->options, $this->meta[ $this->tag_id ] );
 
@@ -1016,7 +1000,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 									$this->meta[ $this->tag_id ][ $field['id'] ] = '';
 								}
 
-								$this->parent->render_class->field_input( $field, $this->meta[ $this->tag_id ][ $field['id'] ] );
+								$this->parent->render_class->field_input( $field, $this->meta[ $this->tag_id ][ $field['id'] ], true );
 								echo '</td></tr>';
 							}
 							echo '</tbody></table>';
@@ -1059,11 +1043,11 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$to_save    = array();
 			$to_compare = array();
 			$to_delete  = array();
+			$dont_save  = true;
 
 			$field_args = Redux_Taxonomy::$fields[ $this->parent->args['opt_name'] ];
 
-			foreach ( $_POST[ $this->parent->args['opt_name'] ] as $key => $value ) { // phpcs:ignore WordPress.Security
-				$key = sanitize_text_field( wp_unslash( $key ) );
+			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
 				// Do not save anything the user doesn't have permissions for.
 				if ( ! empty( $field_args[ $key ]['permissions'] ) ) {
@@ -1087,12 +1071,22 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					}
 				}
 
+				$save = true;
+
 				// parent_options.
-				if ( isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
-					$to_delete[ $key ] = $value;
-				} elseif ( isset( $this->options_defaults[ $key ] ) ) {
+				if ( ! $dont_save && isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
+					$save = false;
+				}
+
+				if ( $save && isset( $this->parent_options[ $key ] ) && $this->parent_options[ $key ] !== $value ) {
+					$save = false;
+				}
+
+				if ( $save ) {
 					$to_save[ $key ]    = $value;
-					$to_compare[ $key ] = $meta[ $key ] ?? '';
+					$to_compare[ $key ] = $this->parent->options[ $key ] ?? '';
+				} else {
+					$to_delete[ $key ] = $value;
 				}
 			}
 
@@ -1139,21 +1133,12 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$to_save = apply_filters( 'redux/taxonomy/save', $to_save, $to_compare, $this->sections );
 
 			foreach ( $to_save as $key => $value ) {
-				if ( is_array( $value ) ) {
-					$still_update = false;
-					foreach ( $value as $vv ) {
-						if ( ! empty( $vv ) ) {
-							$still_update = true;
-						}
-					}
-					if ( ! $still_update ) {
-						continue;
-					}
-				}
 				$prev_value = $this->meta[ $tag_id ][ $key ] ?? '';
+
 				if ( isset( $check[ $key ] ) ) {
 					unset( $check[ $key ] );
 				}
+
 				update_term_meta( $tag_id, $key, $value, $prev_value );
 			}
 
@@ -1165,6 +1150,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 				$prev_value = $this->meta[ $tag_id ][ $key ] ?? '';
 				delete_term_meta( $tag_id, $key, $prev_value );
 			}
+
 			if ( ! empty( $check ) ) {
 				foreach ( $check as $key => $value ) {
 					delete_term_meta( $tag_id, $key );
