@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.18.6
+* Fixed: `repeater` in `taxonomy` and `user` metaboxes.
+* Fixed: Unnecessary loading of default data on load (unless `metaboxes` are in use).
+
 ## 4.4.18.5
 * Updated: JavaScript for jQuery 4.0 release.
 * Fixed: `editor` and `checkbox` fields not saving in `tabbed` field.
