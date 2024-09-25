@@ -89,11 +89,12 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 			$pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
 
 			if ( ! empty( self::$sections ) && in_array( $pagenow, $pagenows, true ) ) {
-				$instances = ReduxFrameworkInstances::get_all_instances();
+				$instances = Redux::all_instances();
 
 				foreach ( self::$fields as $opt_name => $fields ) {
 					if ( ! isset( $instances[ $opt_name ] ) ) {
 						Redux::set_args( $opt_name, array( 'menu_type' => 'hidden' ) );
+
 						Redux::set_sections(
 							$opt_name,
 							array(

@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.1';
+		public static $version = '4.4.19';
 
 		/**
 		 * Extension friendly name.
@@ -78,13 +78,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		public $output = array();
 
 		/**
-		 * Options array.
-		 *
-		 * @var array
-		 */
-		public $options = array();
-
-		/**
 		 * Parent options array.
 		 *
 		 * @var array
@@ -106,25 +99,11 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		public $profile_fields = array();
 
 		/**
-		 * WP Links array.
-		 *
-		 * @var array
-		 */
-		public $wp_links = array();
-
-		/**
 		 * Options defaults.
 		 *
 		 * @var array
 		 */
 		public $options_defaults = array();
-
-		/**
-		 * Localize data array.
-		 *
-		 * @var array
-		 */
-		public $localize_data = array();
 
 		/**
 		 * To replace array.
@@ -139,13 +118,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 * @var array
 		 */
 		public $meta = array();
-
-		/**
-		 * Base URL.
-		 *
-		 * @var string
-		 */
-		public $base_url;
 
 		/**
 		 * Array of page names.
@@ -229,11 +201,11 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		public function init() {
 			global $pagenow;
 
-			// phpcs:ignore WordPress.Security.NonceVerification
-			$user       = isset( $_GET['user_id'] ) ? sanitize_text_field( wp_unslash( $_GET['user_id'] ) ) : get_current_user_id();
-			$this->meta = Redux_Users::get_user_meta( array( 'user' => $user ) );
+			if ( isset( $_POST['action'] ) && 'redux_demo_customizer_save' === $_POST['action'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+				return;
+			}
 
-			$this->parent->options = $this->meta;
+			$this->parent->transients['run_compiler'] = false;
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$this->profiles = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
@@ -245,8 +217,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
 				return;
 			}
-
-			$this->base_url = ( is_ssl() ? 'https://' : 'http://' ) . Redux_Core::$server['HTTP_HOST'] . Redux_Core::$server['REQUEST_URI'];
 
 			foreach ( $this->profiles as $bk => $profile ) {
 				$profile['roles'] = isset( $profile['roles'] ) ? (array) $profile['roles'] : array( 'read' );
@@ -267,24 +237,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 					// Replacing all the fields.
 					if ( $add_field || ( ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) || ( ! is_admin() ) ) ) {
-						$profile_id = 'redux-' . $this->parent->args['opt_name'] . '-metaterm-' . $profile['id'];
-
-						if ( isset( $profile['page_template'] ) && 'page' === $this->users_role ) {
-							if ( ! is_array( $profile['page_template'] ) ) {
-								$profile['page_template'] = array( $profile['page_template'] );
-							}
-
-							$this->wp_links[ $profile_id ]['page_template'] = isset( $this->wp_links[ $profile_id ]['page_template'] ) ? wp_parse_args( $this->wp_links[ $profile_id ]['page_template'], $profile['page_template'] ) : $profile['page_template'];
-						}
-
-						if ( isset( $profile['post_format'] ) && ( in_array( $this->users_role, $this->users_roles, true ) || '' === $this->users_role ) ) {
-							if ( ! is_array( $profile['post_format'] ) ) {
-								$profile['post_format'] = array( $profile['post_format'] );
-							}
-
-							$this->wp_links[ $profile_id ]['post_format'] = isset( $this->wp_links[ $profile_id ]['post_format'] ) ? wp_parse_args( $this->wp_links[ $profile_id ]['post_format'], $profile['post_format'] ) : $profile['post_format'];
-						}
-
 						foreach ( $profile['sections'] as $sk => $section ) {
 							if ( ! empty( $section['fields'] ) ) {
 								foreach ( $section['fields'] as $fk => $field ) {
@@ -295,12 +247,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 									}
 
 									$this->parent->required_class->check_dependencies( $field );
-
-									/** phpcs:ignore
-									 * if ( stripos( $field['class'], 'redux-field-init' ) === 0 ) {
-									 * $field['class'] = trim( $field['class'] . ' redux-field-init' );
-									 * }
-									 */
 
 									if ( $add_field || ( ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) || ( ! is_admin() ) ) ) {
 										if ( empty( $field['id'] ) ) {
@@ -484,7 +430,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 				/*
 				 * If there is only a single clause, call the relation 'OR'.
-				 * This value will not actually be used to join clauses, but it
+				 * This value will not be used to join clauses, but it
 				 * simplifies the logic around combining key-only queries.
 				 */
 			} elseif ( 1 === count( $clean_queries ) ) {
@@ -499,7 +445,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		}
 
 		/**
-		 * Is first order clause.
+		 * Is the first order clause.
 		 *
 		 * @param array $query Query array.
 		 *
@@ -530,6 +476,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				}
 
 				delete_transient( $this->parent->args['opt_name'] . '-transients-users' );
+
 				$this->parent->enqueue_class->init();
 
 				// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -562,7 +509,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					true
 				);
 
-				// Values used by the javascript.
+				// Values used by the JavaScript.
 				wp_localize_script( 'redux-extension-users', 'reduxUsers', $this->users_roles );
 
 			}
@@ -686,14 +633,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				}
 
 				$this->generate_profiles( array( 'args' => $profile ) );
-
-				if ( ! empty( $profile['roles'] ) ) {
-					foreach ( $profile['roles'] as $profiletype ) {
-						if ( sanitize_text_field( wp_unslash( $_GET['users'] ) ) !== $profiletype ) { // phpcs:ignore WordPress.Security.NonceVerification
-							continue;
-						}
-					}
-				}
 			}
 		}
 
@@ -712,8 +651,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
 				$this->parent->get_options();
 			}
-
-			$this->options = $this->parent->options;
 
 			if ( isset( $this->parent->options[ $field_id['id'] ] ) && isset( $this->parent->options_defaults[ $field_id['id'] ] ) && $this->parent->options[ $field_id['id'] ] !== $this->parent->options_defaults[ $field_id['id'] ] ) {
 				return $this->parent->options[ $field_id['id'] ];
@@ -736,7 +673,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		}
 
 		/**
-		 * Function to get and cache the post meta.
+		 * Function to get and cache the post-meta.
 		 *
 		 * @param string $id ID.
 		 *
@@ -837,7 +774,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			if ( strpos( $pagenow, 'edit-' ) !== false ) {
 				if ( isset( $params['fields'] ) ) {
 					foreach ( $params['fields'] as $field ) {
-						if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) {
+						if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) { //phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
 							// Not visible.
 						} elseif ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
 							return true;
@@ -1034,7 +971,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		}
 
 		/**
-		 * Save meta profiles
+		 * Save meta-profiles
 		 * Runs when a post is saved and does an action which to write panel save scripts can hook into.
 		 *
 		 * @access public
@@ -1066,6 +1003,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$to_save    = array();
 			$to_compare = array();
 			$to_delete  = array();
+			$dont_save  = true;
 
 			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ];
 
@@ -1093,14 +1031,22 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					}
 				}
 
+				$save = true;
+
 				// parent_options.
-				if ( isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
-					$to_delete[ $key ] = $value;
-				} elseif ( isset( $this->options_defaults[ $key ] ) ) {
+				if ( ! $dont_save && isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
+					$save = false;
+				}
+
+				if ( $save && isset( $this->parent_options[ $key ] ) && $this->parent_options[ $key ] !== $value ) {
+					$save = false;
+				}
+
+				if ( $save ) {
 					$to_save[ $key ]    = $value;
-					$to_compare[ $key ] = $meta[ $key ] ?? '';
+					$to_compare[ $key ] = $this->parent->options[ $key ] ?? '';
 				} else {
-					break;
+					$to_delete[ $key ] = $value;
 				}
 			}
 
@@ -1145,20 +1091,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$to_save = apply_filters( 'redux/users/save', $to_save, $to_compare, $this->sections );
 
 			foreach ( $to_save as $key => $value ) {
-				if ( is_array( $value ) ) {
-					$still_update = false;
-
-					foreach ( $value as $vv ) {
-						if ( ! empty( $vv ) ) {
-							$still_update = true;
-						}
-					}
-
-					if ( ! $still_update ) {
-						continue;
-					}
-				}
-
 				$prev_value = $this->meta[ $key ] ?? '';
 
 				if ( isset( $check[ $key ] ) ) {

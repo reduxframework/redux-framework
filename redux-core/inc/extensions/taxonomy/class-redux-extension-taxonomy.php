@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.6';
+		public static $version = '4.4.19';
 
 		/**
 		 * Extension friendly name.
@@ -78,13 +78,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		public $output = array();
 
 		/**
-		 * Options array.
-		 *
-		 * @var array
-		 */
-		public $options = array();
-
-		/**
 		 * Parent options.
 		 *
 		 * @var array
@@ -106,25 +99,11 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		public $taxonomy_type_fields = array();
 
 		/**
-		 * WP Links array.
-		 *
-		 * @var array
-		 */
-		public $wp_links = array();
-
-		/**
 		 * Option defaults.
 		 *
 		 * @var array
 		 */
 		public $options_defaults = array();
-
-		/**
-		 * Localized data array.
-		 *
-		 * @var array
-		 */
-		public $localize_data = array();
 
 		/**
 		 * To replace array.
@@ -146,13 +125,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		 * @var int
 		 */
 		public $tag_id = 0;
-
-		/**
-		 * Base URL.
-		 *
-		 * @var string
-		 */
-		public $base_url = '';
 
 		/**
 		 * Accepted WordPress screens.
@@ -256,8 +228,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 				return;
 			}
 
-			$this->base_url = ( is_ssl() ? 'https://' : 'http://' ) . Redux_Core::$server['HTTP_HOST'] . Redux_Core::$server['REQUEST_URI'];
-
 			// phpcs:disable WordPress.Security.NonceVerification
 			if ( ! isset( $_GET['tag_ID'] ) ) {
 				$_GET['tag_ID'] = 0;
@@ -301,8 +271,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					if ( $add_field || ( ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) || ( ! is_admin() ) ) ) {
 						$run_hooks = true;
 
-						$term_id = 'redux-' . $this->parent->args['opt_name'] . '-metaterm-' . $term['id'];
-
 						$this->meta[ $this->tag_id ] = Redux_Taxonomy::get_term_meta( array( 'taxonomy' => $this->tag_id ) );
 						$this->parent->options       = array_merge( $this->parent->options, $this->meta[ $this->tag_id ] );
 
@@ -316,13 +284,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 									}
 
 									$this->parent->required_class->check_dependencies( $field );
-
-									/**  phpcs:ignore
-									/ phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-									/ if ( stripos( $field['class'], 'redux-field-init' ) === 0 ) {
-									/ $field['class'] = trim( $field['class'] . ' redux-field-init' );
-									/}
-									*/
 
 									if ( $add_field || ( ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) || ( ! is_admin() ) ) ) {
 										if ( empty( $field['id'] ) ) {
@@ -549,9 +510,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 						self::$version,
 						true
 					);
-
-					// Values used by the javascript.
-					wp_localize_script( 'redux-extension-taxonomy', 'reduxTaxonomy', $this->wp_links );
 				}
 			}
 		}
@@ -695,8 +653,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
 				$this->parent->options_class->get();
 			}
-
-			$this->options = $this->parent->options;
 
 			if ( isset( $this->parent->options[ $field_id['id'] ] ) && isset( $this->parent->options_defaults[ $field_id['id'] ] ) && $this->parent->options[ $field_id['id'] ] !== $this->parent->options_defaults[ $field_id['id'] ] ) {
 				return $this->parent->options[ $field_id['id'] ];

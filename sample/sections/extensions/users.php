@@ -37,10 +37,9 @@ Redux_Users::set_profile(
 						'title' => esc_html__( 'Input 1', 'your-textdomain-here' ),
 					),
 					array(
-						'id'       => 'user-text-2',
-						'type'     => 'text',
-						'required' => array( 'user-text', '=', 'two' ),
-						'title'    => esc_html__( 'Input 2', 'your-textdomain-here' ),
+						'id'    => 'user-text-2',
+						'type'  => 'text',
+						'title' => esc_html__( 'Input 2', 'your-textdomain-here' ),
 					),
 					array(
 						'id'    => 'user-text-3',
