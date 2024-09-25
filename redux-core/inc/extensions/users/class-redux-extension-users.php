@@ -649,7 +649,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			}
 
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
-				$this->parent->get_options();
+				$this->parent->options_class->get();
 			}
 
 			if ( isset( $this->parent->options[ $field_id['id'] ] ) && isset( $this->parent->options_defaults[ $field_id['id'] ] ) && $this->parent->options[ $field_id['id'] ] !== $this->parent->options_defaults[ $field_id['id'] ] ) {
