@@ -12,6 +12,7 @@
 	let g_map;
 	let g_marker;
 	let g_autoComplete;
+	let g_advancedMarker;
 	let g_LatLng;
 
 	redux.field_objects             = redux.field_objects || {};
@@ -49,7 +50,7 @@
 				containerID = el.find( '.redux_framework_google_maps' ).attr( 'id' );
 
 				// Check for delay render, which is useful for calling a map
-				// render after javascript load.
+				// render after JavaScript load.
 				delayRender = Boolean( el.find( '.redux_framework_google_maps' ).data( 'delay-render' ) );
 
 				// API Key button.
@@ -82,7 +83,7 @@
 
 				if ( wrapper.is( ':visible' ) ) {
 
-					// If wrapper is visible, close it.
+					// If the wrapper is visible, close it.
 					wrapper.slideUp(
 						'fast',
 						function () {
@@ -91,7 +92,7 @@
 					);
 				} else {
 
-					// If wrapper is visible, open it.
+					// If the wrapper is visible, open it.
 					wrapper.slideDown(
 						'medium',
 						function () {
@@ -133,18 +134,13 @@
 		const autocomplete = containerID + '_autocomplete';
 		const canvas       = containerID + '_map_canvas';
 		const canvasId     = $( '#' + canvas );
-		let ac;
 
 		// Create the autocomplete object, restricting the search
 		// to geographical location types.
-		g_autoComplete = await google.maps.importLibrary( 'places' );
+		g_autoComplete   = await google.maps.importLibrary( 'places' );
+		g_advancedMarker = await google.maps.importLibrary( 'marker' );
 
-		ac = new g_autoComplete.Autocomplete(
-			( document.getElementById( autocomplete ) ),
-			{
-				types: ['geocode']
-			}
-		);
+		g_autoComplete = new google.maps.places.Autocomplete( document.getElementById( autocomplete ), {types: ['geocode']} );
 
 		// Data bindings.
 		scrollWheel = Boolean( mapClass.data( 'scroll-wheel' ) );
@@ -170,13 +166,13 @@
 		}
 
 		// Can't have empty values, or the map API will complain.
-		// Set default for middle of the United States.
+		// Set default for the middle of the United States.
 		defLat  = defLat ? defLat : 39.11676722061108;
 		defLong = defLong ? defLong : - 100.47761000000003;
 
 		if ( noLatLng ) {
 
-			// If displaying map based on an address.
+			// If displaying a map based on an address.
 			geocoder = new google.maps.Geocoder();
 
 			// Set up Geocode and pass address.
@@ -202,8 +198,8 @@
 							mapTypeControlOptions: {
 								style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 								position: google.maps.ControlPosition.LEFT_BOTTOM
-							}
-
+							},
+							mapId:'REDUX_GOOGLE_MAPS',
 						};
 
 						// Create map.
@@ -240,8 +236,8 @@
 				mapTypeControlOptions: {
 					style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 					position: google.maps.ControlPosition.LEFT_BOTTOM
-				}
-
+				},
+				mapId:'REDUX_GOOGLE_MAPS',
 			};
 
 			// Create the map.
@@ -273,9 +269,10 @@
 			return;
 		}
 
-		// If map is set to delay render and has been initiated
+		// If a map is set to delay render and has been initiated
 		// from another scrip, add the 'render' class so rendering
-		// does not occur.  it messes things up.
+		// does not occur.
+		// It messes things up.
 		delayed = Boolean( mapClass.data( 'delay-render' ) );
 		if ( true === delayed ) {
 			mapClass.addClass( 'rendered' );
@@ -314,14 +311,16 @@
 		infoWindow = new google.maps.InfoWindow();
 
 		// Create marker.
-		g_marker = new google.maps.Marker(
+		g_marker = new google.maps.marker.AdvancedMarkerElement(
 			{
 				position: g_LatLng,
 				map: g_map,
-				anchorPoint: new google.maps.Point( 0, - 29 ),
-				draggable: true,
+				//anchorPoint: new google.maps.Point( 0, - 29 ),
+				//draggable: true,
 				title: markerTooltip,
-				animation: google.maps.Animation.DROP
+				gmpClickable: true,
+				gmpDraggable: true,
+				//animation: google.maps.Animation.DROP
 
 			}
 		);
@@ -450,7 +449,7 @@
 
 				if ( '' !== infoValue ) {
 					infoWindow.setContent( infoValue );
-					infoWindow.open( g_map, g_marker );
+					infoWindow.open( g_map, marker );
 				}
 			}
 		);
@@ -464,7 +463,7 @@
 
 		// What if someone only wants city, or state, ect...
 		// gotta do it this way to check for the address!
-		// need to check each of the returned components to see what is returned.
+		// Need to check each of the returned components to see what is returned.
 		const componentForm = {
 			street_number: 'short_name',
 			route: 'long_name',
