@@ -314,7 +314,7 @@ if ( ! class_exists( 'Redux_Color_Scheme' ) ) {
 		}
 
 		/**
-		 * If this field requires any scripts or css, define this function and register/enqueue the scripts/css
+		 * If this field requires any scripts or CSS, define this function and register/enqueue the scripts/css
 		 *
 		 * @since       1.0.0
 		 * @access      private

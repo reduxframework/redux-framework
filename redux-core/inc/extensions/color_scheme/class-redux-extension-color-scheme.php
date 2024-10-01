@@ -7,6 +7,8 @@
  * @class   Redux_Extension_Color_Scheme
  *
  * @version 4.4.10
+ *
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -731,7 +733,6 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 			$def_opts = $this->parent->options_defaults[ $this->field_id ];
 
 			if ( isset( $def_opts['color_scheme_name'] ) ) {
-				// error_log(print_r($def_opts,true));
 				return array();
 			}
 
