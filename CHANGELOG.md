@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.18.7
+* Fixed: `google_maps` deprecation notice regarding map markers. 
+
 ## 4.4.18.6
 * Fixed: `repeater` in `taxonomy` and `user` metaboxes.
 * Fixed: Unnecessary loading of default data on load (unless `metaboxes` are in use).
