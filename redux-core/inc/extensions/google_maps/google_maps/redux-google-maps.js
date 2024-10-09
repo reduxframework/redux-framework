@@ -9,12 +9,6 @@
 (function ( $ ) {
 	'use strict';
 
-	let g_map;
-	let g_marker;
-	let g_autoComplete;
-	let g_advancedMarker;
-	let g_LatLng;
-
 	redux.field_objects             = redux.field_objects || {};
 	redux.field_objects.google_maps = redux.field_objects.google_maps || {};
 
@@ -26,7 +20,6 @@
 
 		$( selector ).each(
 			function ( i ) {
-				let containerID;
 				let delayRender;
 
 				const el   = $( this );
@@ -46,9 +39,6 @@
 					return;
 				}
 
-				// Get container ID.
-				containerID = el.find( '.redux_framework_google_maps' ).attr( 'id' );
-
 				// Check for delay render, which is useful for calling a map
 				// render after JavaScript load.
 				delayRender = Boolean( el.find( '.redux_framework_google_maps' ).data( 'delay-render' ) );
@@ -57,66 +47,14 @@
 				redux.field_objects.google_maps.clickHandler( el );
 
 				// Init our maps.
-				redux.field_objects.google_maps.initMap( el, i, containerID, delayRender );
-
-				// Fucking radio button won't check on its own, for some reason.
-				setTimeout(
-					function () {
-						$( '#changetype-all' ).prop( 'checked', true );
-					},
-					1
-				);
+				redux.field_objects.google_maps.initMap( el, i, delayRender );
 			}
 		);
 	};
 
-	/* API BUTTON CLICK HANDLER */
-	redux.field_objects.google_maps.clickHandler = function ( el ) {
-
-		// Find the API Key button and react on click.
-		el.find( '.google_m_api_key_button' ).on(
-			'click',
-			function () {
-
-				// Find message wrapper.
-				const wrapper = el.find( '.google_m_api_key_wrapper' );
-
-				if ( wrapper.is( ':visible' ) ) {
-
-					// If the wrapper is visible, close it.
-					wrapper.slideUp(
-						'fast',
-						function () {
-							el.find( '#google_m_api_key_input' ).trigger( 'focus' );
-						}
-					);
-				} else {
-
-					// If the wrapper is visible, open it.
-					wrapper.slideDown(
-						'medium',
-						function () {
-							el.find( '#google_m_api_key_input' ).trigger( 'focus' );
-						}
-					);
-				}
-			}
-		);
-
-		// Auto select autocomplete contents,
-		// since Google doesn't do this inherently.
-		el.find( '.google_m_autocomplete' ).on(
-			'click',
-			function ( e ) {
-				this.trigger( 'focus' );
-				this.trigger( 'select' );
-				e.preventDefault();
-			}
-		);
-	};
-
-	/* MAP RENDER FUNCTION */
-	redux.field_objects.google_maps.renderMap = async function ( el, mapClass ) {
+	/* INIT MAP FUNCTION */
+	redux.field_objects.google_maps.initMap = async function ( el, idx, delayRender ) {
+		let delayed;
 		let scrollWheel;
 		let streetView;
 		let mapType;
@@ -126,21 +64,59 @@
 		let defaultZoom;
 		let mapOptions;
 		let geocoder;
+		let g_autoComplete;
+		let g_LatLng;
+		let g_map;
+		let markerTooltip;
+		let infoWindow;
+		let g_marker;
 
-		let noLatLng      = false;
-		const containerID = el.find( '.redux_framework_google_maps' ).attr( 'id' );
+		let noLatLng = false;
 
-		// Set IDs to variables.
+		// Pull the map class.
+		const mapClass     = el.find( '.redux_framework_google_maps' );
+		const containerID  = mapClass.attr( 'id' );
 		const autocomplete = containerID + '_autocomplete';
 		const canvas       = containerID + '_map_canvas';
 		const canvasId     = $( '#' + canvas );
 
+		const latitude    = containerID + '_latitude';
+		const longitude   = containerID + '_longitude';
+		const marker_info = containerID + '_marker_info';
+
+		let geoAlert = mapClass.data( 'geo-alert' );
+
+		// Add map index to data attr.
+		// Why, say we want to use delay_render,
+		// and want to init the map later on.
+		// You'd need the index number in the
+		// event of multiple map instances.
+		// This allows one to retrieve it
+		// later.
+		$( mapClass ).attr( 'data-idx', idx );
+		if ( true === delayRender ) {
+			return;
+		}
+
+		// Map has been rendered, no need to process again.
+		if ( $( '#' + containerID ).hasClass( 'rendered' ) ) {
+			return;
+		}
+
+		// If a map is set to delay render and has been initiated
+		// from another scrip, add the 'render' class so rendering
+		// does not occur.
+		// It messes things up.
+		delayed = Boolean( mapClass.data( 'delay-render' ) );
+		if ( true === delayed ) {
+			mapClass.addClass( 'rendered' );
+		}
+
 		// Create the autocomplete object, restricting the search
 		// to geographical location types.
-		g_autoComplete   = await google.maps.importLibrary( 'places' );
-		g_advancedMarker = await google.maps.importLibrary( 'marker' );
+		g_autoComplete = await google.maps.importLibrary( 'places' );
 
-		g_autoComplete = new google.maps.places.Autocomplete( document.getElementById( autocomplete ), {types: ['geocode']} );
+		g_autoComplete = new google.maps.places.Autocomplete( document.getElementById( autocomplete ), {types: [ 'geocode' ] } );
 
 		// Data bindings.
 		scrollWheel = Boolean( mapClass.data( 'scroll-wheel' ) );
@@ -205,9 +181,6 @@
 						// Create map.
 						g_map = new google.maps.Map( document.getElementById( canvas ), mapOptions );
 
-						// Render map controls.
-						redux.field_objects.google_maps.renderControls( el, autocomplete, mapClass );
-
 						// Get and set lat/long data.
 						latitude = el.find( '#' + containerID + '_latitude' );
 						latitude.val( results[0].geometry.location.lat() );
@@ -242,62 +215,13 @@
 
 			// Create the map.
 			g_map = new google.maps.Map( document.getElementById( canvas ), mapOptions );
-
-			// Render map controls.
-			redux.field_objects.google_maps.renderControls( el, autocomplete, mapClass );
 		}
-	};
-
-	/* INIT MAP FUNCTION */
-	redux.field_objects.google_maps.initMap = function ( el, idx, containerID, delayRender ) {
-		let delayed;
-
-		// Pull the map class.
-		const mapClass = el.find( '.redux_framework_google_maps' );
-
-		// Add map index to data attr.  Why, say we want to use delay_render,
-		// and want to init the map later on.  You'd need the index number in the
-		// event of multiple map instances.  This allows one to retrieve it
-		// later.
-		$( mapClass ).attr( 'data-idx', idx );
-		if ( true === delayRender ) {
-			return;
-		}
-
-		// Map has been rendered, no need to process again.
-		if ( $( '#' + containerID ).hasClass( 'rendered' ) ) {
-			return;
-		}
-
-		// If a map is set to delay render and has been initiated
-		// from another scrip, add the 'render' class so rendering
-		// does not occur.
-		// It messes things up.
-		delayed = Boolean( mapClass.data( 'delay-render' ) );
-		if ( true === delayed ) {
-			mapClass.addClass( 'rendered' );
-		}
-
-		// Render the map.
-		redux.field_objects.google_maps.renderMap( el, mapClass );
-	};
-
-	/* RENDER CONTROLS FUNCTION */
-	redux.field_objects.google_maps.renderControls = function ( el, autoComplete, mapClass ) {
-		let markerTooltip;
-		let infoWindow;
-
-		// Set variables.
-		const containerID = el.find( '.redux_framework_google_maps' ).attr( 'id' );
-		const controls    = containerID + '_type_selector';
 
 		// Get HTML.
-		const input = document.getElementById( autoComplete );
-		const types = document.getElementById( controls );
+		const input = document.getElementById( autocomplete );
 
 		// Set objects into the map.
 		g_map.controls[google.maps.ControlPosition.TOP_LEFT].push( input );
-		g_map.controls[google.maps.ControlPosition.TOP_LEFT].push( types );
 
 		// Bind objects to the map.
 		g_autoComplete = new google.maps.places.Autocomplete( input );
@@ -311,34 +235,16 @@
 		infoWindow = new google.maps.InfoWindow();
 
 		// Create marker.
-		g_marker = new google.maps.marker.AdvancedMarkerElement(
+		g_marker = new google.maps.Marker(
 			{
 				position: g_LatLng,
 				map: g_map,
-				//anchorPoint: new google.maps.Point( 0, - 29 ),
-				//draggable: true,
+				anchorPoint: new google.maps.Point( 0, - 29 ),
+				draggable: true,
 				title: markerTooltip,
-				gmpClickable: true,
-				gmpDraggable: true,
-				//animation: google.maps.Animation.DROP
-
+				animation: google.maps.Animation.DROP
 			}
 		);
-
-		// Add Event Listeners.
-		redux.field_objects.google_maps.addListeners( el, mapClass, g_marker, infoWindow );
-	};
-
-	/* ADD LISTENERS FUNCTION */
-	redux.field_objects.google_maps.addListeners = function ( el, mapClass, marker ) {
-		let infoWindow;
-
-		// Set variables.
-		const containerID = el.find( '.redux_framework_google_maps' ).attr( 'id' );
-		const latitude    = containerID + '_latitude';
-		const longitude   = containerID + '_longitude';
-		const marker_info = containerID + '_marker_info';
-		let geoAlert      = mapClass.data( 'geo-alert' );
 
 		geoAlert = decodeURIComponent( geoAlert );
 
@@ -349,9 +255,9 @@
 			function () {
 				let place;
 				let address;
+				let markerTooltip;
 
 				infoWindow.close();
-				marker.setVisible( false );
 
 				// Get place data.
 				place = g_autoComplete.getPlace();
@@ -362,6 +268,7 @@
 					return;
 				}
 
+				console.log( place.geometry.viewport );
 				// If the place has a geometry, then present it on a map.
 				if ( place.geometry.viewport ) {
 					g_map.fitBounds( place.geometry.viewport );
@@ -370,20 +277,25 @@
 					g_map.setZoom( 17 ); // Why 17? Because it looks good.
 				}
 
+				markerTooltip = mapClass.data( 'marker-tooltip' );
+				markerTooltip = decodeURIComponent( markerTooltip );
+
 				// Set the marker icon.
-				marker.setIcon(
-					({
-						url: place.icon,
-						size: new google.maps.Size( 71, 71 ),
-						origin: new google.maps.Point( 0, 0 ),
-						anchor: new google.maps.Point( 17, 34 ),
-						scaledSize: new google.maps.Size( 35, 35 )
-					})
+				g_marker = new google.maps.Marker(
+					{
+						position: g_LatLng,
+						map: g_map,
+						anchorPoint: new google.maps.Point( 0, - 29 ),
+						title: markerTooltip,
+						clickable: true,
+						draggable: true,
+						animation: google.maps.Animation.DROP
+					}
 				);
 
 				// Set marker position and display.
-				marker.setPosition( place.geometry.location );
-				marker.setVisible( true );
+				g_marker.setPosition( place.geometry.location );
+				g_marker.setVisible( true );
 
 				// Form array of address components.
 				address = '';
@@ -395,25 +307,19 @@
 
 				// Set the default marker info window with address data.
 				infoWindow.setContent( '<div><strong>' + place.name + '</strong><br>' + address );
-				infoWindow.open( g_map, marker );
+				infoWindow.open( g_map, g_marker );
 
 				// Run Geolocation.
-				redux.field_objects.google_maps.geoLocate();
+				redux.field_objects.google_maps.geoLocate( g_autoComplete );
 
 				// Fill in address inputs.
-				redux.field_objects.google_maps.fillInAddress( el, latitude, longitude );
+				redux.field_objects.google_maps.fillInAddress( el, latitude, longitude, g_autoComplete );
 			}
 		);
 
-		// Search radio buttons.
-		redux.field_objects.google_maps.setupClickListener( 'changetype-all-' + containerID, [] );
-		redux.field_objects.google_maps.setupClickListener( 'changetype-address-' + containerID, ['address'] );
-		redux.field_objects.google_maps.setupClickListener( 'changetype-establishment-' + containerID, ['establishment'] );
-		redux.field_objects.google_maps.setupClickListener( 'changetype-geocode-' + containerID, ['geocode'] );
-
 		// Marker drag.
 		google.maps.event.addListener(
-			marker,
+			g_marker,
 			'drag',
 			function ( event ) {
 				document.getElementById( latitude ).value  = event.latLng.lat();
@@ -423,7 +329,7 @@
 
 		// End marker drag.
 		google.maps.event.addListener(
-			marker,
+			g_marker,
 			'dragend',
 			function () {
 				redux_change( el.find( '.redux_framework_google_maps' ) );
@@ -442,21 +348,21 @@
 		infoWindow = new google.maps.InfoWindow();
 
 		google.maps.event.addListener(
-			marker,
+			g_marker,
 			'click',
 			function () {
 				const infoValue = document.getElementById( marker_info ).value;
 
 				if ( '' !== infoValue ) {
 					infoWindow.setContent( infoValue );
-					infoWindow.open( g_map, marker );
+					infoWindow.open( g_map, g_marker );
 				}
 			}
 		);
 	};
 
 	/* FILL IN ADDRESS FUNCTION */
-	redux.field_objects.google_maps.fillInAddress = function ( el, latitude, longitude ) {
+	redux.field_objects.google_maps.fillInAddress = function ( el, latitude, longitude, g_autoComplete ) {
 
 		// Set variables.
 		const containerID = el.find( '.redux_framework_google_maps' ).attr( 'id' );
@@ -519,19 +425,7 @@
 		}
 	};
 
-	redux.field_objects.google_maps.setupClickListener = function ( id, types ) {
-		const radioButton = document.getElementById( id );
-
-		google.maps.event.addListener(
-			radioButton,
-			'click',
-			function () {
-				g_autoComplete.setTypes( types );
-			}
-		);
-	};
-
-	redux.field_objects.google_maps.geoLocate = function () {
+	redux.field_objects.google_maps.geoLocate = function ( g_autoComplete ) {
 		if ( navigator.geolocation ) {
 			navigator.geolocation.getCurrentPosition(
 				function ( position ) {
@@ -549,4 +443,59 @@
 			);
 		}
 	};
+
+	/* API BUTTON CLICK HANDLER */
+	redux.field_objects.google_maps.clickHandler = function ( el ) {
+
+		// Find the API Key button and react on click.
+		el.find( '.google_m_api_key_button' ).on(
+			'click',
+			function () {
+
+				// Find message wrapper.
+				const wrapper = el.find( '.google_m_api_key_wrapper' );
+
+				if ( wrapper.is( ':visible' ) ) {
+
+					// If the wrapper is visible, close it.
+					wrapper.slideUp(
+						'fast',
+						function () {
+							el.find( '#google_m_api_key_input' ).trigger( 'focus' );
+						}
+					);
+				} else {
+
+					// If the wrapper is visible, open it.
+					wrapper.slideDown(
+						'medium',
+						function () {
+							el.find( '#google_m_api_key_input' ).trigger( 'focus' );
+						}
+					);
+				}
+			}
+		);
+
+		el.find( '.google_m_autocomplete' ).on(
+			'keypress',
+			function ( e ) {
+				if ( 13 === e.keyCode ) {
+					e.preventDefault();
+				}
+			}
+		);
+
+		// Auto select autocomplete contents,
+		// since Google doesn't do this inherently.
+		el.find( '.google_m_autocomplete' ).on(
+			'click',
+			function ( e ) {
+				$( this ).trigger( 'focus' );
+				$( this ).trigger( 'select' );
+				e.preventDefault();
+			}
+		);
+	};
+
 } )( jQuery );

@@ -65,7 +65,7 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 				'street_number'               => $def_street_number,
 				'route'                       => $def_route,
 				'locality'                    => $def_locality,
-				'administrative_area_level_1' => $def_state,    // ←dickheads at Google. lol, srsly...wtf?
+				'administrative_area_level_1' => $def_state,    // <-dickheads at google. lol, srsly...wtf?
 				// level_1 huh? maybe It's for multiple planets one day.
 				'postal_code'                 => $def_postal,
 				'country'                     => $def_country,
@@ -150,6 +150,7 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 
 			$hidden_style = ' style="display: none!important;" ';
 			?>
+
 			<div
 				class="redux_framework_google_maps <?php echo esc_attr( $this->field['class'] ); ?>"
 				id="<?php echo esc_attr( $this->field['id'] ); ?>"
@@ -178,23 +179,6 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					placeholder="<?php echo esc_attr( $this->field['placeholder'] ); ?>"/>
 
 				<div
-					id="<?php echo esc_attr( $this->field['id'] ); ?>_type_selector"
-					class="google_m_controls <?php echo esc_attr( $is_hidden ); ?>">
-
-					<input class="noUpdate" type="radio" name="type" id="changetype-all-<?php echo esc_attr( $this->field['id'] ); ?>" checked="checked"/>
-					<label for="changetype-all-<?php echo esc_attr( $this->field['id'] ); ?>"><?php esc_html_e( 'All', 'redux-framework' ); ?></label>
-
-					<input class="noUpdate" type="radio" name="type" id="changetype-establishment-<?php echo esc_attr( $this->field['id'] ); ?>"/>
-					<label for="changetype-establishment-<?php echo esc_attr( $this->field['id'] ); ?>"><?php esc_html_e( 'Place', 'redux-framework' ); ?></label>
-
-					<input class="noUpdate" type="radio" name="type" id="changetype-address-<?php echo esc_attr( $this->field['id'] ); ?>"/>
-					<label for="changetype-address-<?php echo esc_attr( $this->field['id'] ); ?>"><?php esc_html_e( 'Address', 'redux-framework' ); ?></label>
-
-					<input class="noUpdate" type="radio" name="type" id="changetype-geocode-<?php echo esc_attr( $this->field['id'] ); ?>"/>
-					<label for="changetype-geocode-<?php echo esc_attr( $this->field['id'] ); ?>"><?php esc_html_e( 'Geo', 'redux-framework' ); ?></label>
-				</div>
-
-				<div
 					id="<?php echo esc_attr( $this->field['id'] ); ?>_map_canvas"
 					class="google_m_canvas"
 					data-default-long="<?php echo esc_attr( $the_long ); ?>"
@@ -208,25 +192,25 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper street-address" <?php echo $is_hidden; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_street_number"><?php esc_html_e( 'Address', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_street_number"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[street_number]"
-								value="<?php echo esc_attr( $this->value['street_number'] ); ?>"
-								class="slimField field"
-								data-default-value="<?php echo esc_attr( $this->value['street_number'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_street_number"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[street_number]"
+							value="<?php echo esc_attr( $this->value['street_number'] ); ?>"
+							class="slimField field"
+							data-default-value="<?php echo esc_attr( $this->value['street_number'] ); ?>"
+							type="text"
 						/>
 					</div>
 					<div class="input_wrapper route" <?php echo $is_hidden; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_route"><?php esc_html_e( 'Street', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_route"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[route]"
-								value="<?php echo esc_attr( $this->value['route'] ); ?>"
-								class="wideField field"
-								data-default-value="<?php echo esc_attr( $this->value['route'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_route"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[route]"
+							value="<?php echo esc_attr( $this->value['route'] ); ?>"
+							class="wideField field"
+							data-default-value="<?php echo esc_attr( $this->value['route'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -234,13 +218,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper city" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_locality"><?php esc_html_e( 'City', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_locality"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[locality]"
-								value="<?php echo esc_attr( $this->value['locality'] ); ?>"
-								class="wideField field"
-								data-default-value="<?php echo esc_attr( $this->value['locality'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_locality"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[locality]"
+							value="<?php echo esc_attr( $this->value['locality'] ); ?>"
+							class="wideField field"
+							data-default-value="<?php echo esc_attr( $this->value['locality'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -248,13 +232,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper state" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_administrative_area_level_1"><?php esc_html_e( 'State', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_administrative_area_level_1"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[administrative_area_level_1]"
-								value="<?php echo esc_attr( $this->value['administrative_area_level_1'] ); ?>"
-								class="slimField field"
-								data-default-value="<?php echo esc_attr( $this->value['administrative_area_level_1'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_administrative_area_level_1"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[administrative_area_level_1]"
+							value="<?php echo esc_attr( $this->value['administrative_area_level_1'] ); ?>"
+							class="slimField field"
+							data-default-value="<?php echo esc_attr( $this->value['administrative_area_level_1'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -262,13 +246,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper zip-code" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_postal_code"><?php esc_html_e( 'ZIP Code', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_postal_code"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[postal_code]"
-								value="<?php echo esc_attr( $this->value['postal_code'] ); ?>"
-								class="slimField field"
-								data-default-value="<?php echo esc_attr( $this->value['postal_code'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_postal_code"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[postal_code]"
+							value="<?php echo esc_attr( $this->value['postal_code'] ); ?>"
+							class="slimField field"
+							data-default-value="<?php echo esc_attr( $this->value['postal_code'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -276,13 +260,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper country" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_country"><?php esc_html_e( 'Country', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_country"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[country]"
-								value="<?php echo esc_attr( $this->value['country'] ); ?>"
-								class="wideField field"
-								data-default-value="<?php echo esc_attr( $this->value['country'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_country"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[country]"
+							value="<?php echo esc_attr( $this->value['country'] ); ?>"
+							class="wideField field"
+							data-default-value="<?php echo esc_attr( $this->value['country'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -290,13 +274,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper latitude" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_latitude"><?php esc_html_e( 'Latitude', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_latitude"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[latitude]"
-								value="<?php echo esc_attr( $this->value['latitude'] ); ?>"
-								class="wideField field"
-								data-default-value="<?php echo esc_attr( $this->value['latitude'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_latitude"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[latitude]"
+							value="<?php echo esc_attr( $this->value['latitude'] ); ?>"
+							class="wideField field"
+							data-default-value="<?php echo esc_attr( $this->value['latitude'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -304,13 +288,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper longitude" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_longitude"><?php esc_html_e( 'Longitude', 'redux-framework' ); ?></label>
 						<input
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_longitude"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[longitude]"
-								value="<?php echo esc_attr( $this->value['longitude'] ); ?>"
-								class="wideField field"
-								data-default-value="<?php echo esc_attr( $this->value['longitude'] ); ?>"
-								type="text"
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_longitude"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[longitude]"
+							value="<?php echo esc_attr( $this->value['longitude'] ); ?>"
+							class="wideField field"
+							data-default-value="<?php echo esc_attr( $this->value['longitude'] ); ?>"
+							type="text"
 						/>
 					</div>
 
@@ -318,13 +302,13 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 					<div class="input_wrapper marker-info" <?php echo( $is_hidden ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<label for="<?php echo esc_attr( $this->field['id'] ); ?>_marker_info"><?php esc_html_e( 'Marker Info', 'redux-framework' ); ?></label>
 						<textarea
-								data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
-								id="<?php echo esc_attr( $this->field['id'] ); ?>_marker_info"
-								name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[marker_info]"
-								class="field"
-								data-default-value="<?php echo esc_attr( $this->value['marker_info'] ); ?>"
-								rows="3"
-								type="text"><?php echo esc_textarea( $this->value['marker_info'] ); ?></textarea>
+							data-id="<?php echo esc_attr( $this->field['id'] ); ?>"
+							id="<?php echo esc_attr( $this->field['id'] ); ?>_marker_info"
+							name="<?php echo esc_attr( $this->field['name'] . $this->field['name_suffix'] ); ?>[marker_info]"
+							class="field"
+							data-default-value="<?php echo esc_attr( $this->value['marker_info'] ); ?>"
+							rows="3"
+							type="text"><?php echo esc_textarea( $this->value['marker_info'] ); ?></textarea>
 					</div>
 				</div>
 				<?php if ( $this->field['show_api_key'] ) { ?>
@@ -382,8 +366,6 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 				$script = '(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
 					key:"' . $api_key . '",
 					v:"' . $this->field['map_version'] . '",
-					libraries:"places,marker",
-					callback:"initMap"
 				});';
 
 				wp_add_inline_script( 'redux-field-google-maps', $script );
