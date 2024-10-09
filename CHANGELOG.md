@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.4.18.8
+* Fixed: #4023 - `google_maps` instances bleeding over from previous issue.
+
 ## 4.4.18.7
 * Fixed: `google_maps` deprecation notice regarding map markers. 
 
