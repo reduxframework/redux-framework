@@ -7,70 +7,69 @@
 
 /* global redux */
 
-jQuery(
-	function ( $ ) {
-		'use strict';
+( function ( $ ) {
+	'use strict';
 
-		$.reduxUsers = $.reduxUsers || {};
+	$.reduxUsers = $.reduxUsers || {};
 
-		$( document ).ready(
-			function () {
-				$.reduxUsers.init();
-			}
-		);
+	document.addEventListener(
+		'DOMContentLoaded',
+		function () {
+			$.reduxUsers.init();
+		}
+	);
 
-		$.reduxUsers.init = function () {
-			let reduxObject;
-			const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
+	$.reduxUsers.init = function () {
+		let reduxObject;
+		const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
-			if ( undefined === optName ) {
-				reduxObject = redux.optName;
-			} else {
-				reduxObject = redux;
-			}
+		if ( undefined === optName ) {
+			reduxObject = redux.optName;
+		} else {
+			reduxObject = redux;
+		}
 
-			$.reduxUsers.notLoaded = true;
-			$.redux.initFields();
+		$.reduxUsers.notLoaded = true;
+		$.redux.initFields();
 
-			reduxObject.args.ajax_save         = 0;
-			reduxObject.args.disable_save_warn = true;
-		};
+		reduxObject.args.ajax_save         = 0;
+		reduxObject.args.disable_save_warn = true;
+	};
 
-		// Check for a successful element added since WP ajax doesn't have a callback.
-		$.reduxUsers.editCount = $( '#the-list tr' );
+	// Check for a successful element added since WP ajax doesn't have a callback.
+	$.reduxUsers.editCount = $( '#the-list tr' );
 
-		$.reduxUsers.editCheck = function () {
-			let len;
+	$.reduxUsers.editCheck = function () {
+		let len;
 
-			if ( $( '#ajax-response .error' ).length ) {
-				return false;
-			}
+		if ( $( '#ajax-response .error' ).length ) {
+			return false;
+		}
 
-			len = $( '#the-list tr' ).length;
+		len = $( '#the-list tr' ).length;
 
-			if ( len > $.reduxUsers.editCount ) {
-				window.location.reload();
-				return false;
-			}
+		if ( len > $.reduxUsers.editCount ) {
+			window.location.reload();
+			return false;
+		}
 
-			setTimeout( $.reduxUsers.editCheck, 100 );
+		setTimeout( $.reduxUsers.editCheck, 100 );
 
-			$.reduxUsers.editCount = len;
-		};
+		$.reduxUsers.editCount = len;
+	};
 
-		$( '#submit' ).on(
-			'click',
-			function () {
-				window.onbeforeunload = null;
+	$( '#submit' ).on(
+		'click',
+		function () {
+			window.onbeforeunload = null;
 
-				$.reduxUsers.editCount = $( '#the-list tr' ).length;
+			$.reduxUsers.editCount = $( '#the-list tr' ).length;
 
-				$( document ).ajaxSuccess(
-					function () {
-						$.reduxUsers.editCheck();
-					}
-				);
-			}
-		);
-	}
-);
+			$( document ).ajaxSuccess(
+				function () {
+					$.reduxUsers.editCheck();
+				}
+			);
+		}
+	);
+} )( jQuery );

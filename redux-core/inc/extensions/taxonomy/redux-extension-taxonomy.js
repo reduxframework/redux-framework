@@ -7,70 +7,75 @@
 
 /* global redux */
 
-jQuery(
-	function ( $ ) {
-		'use strict';
+( function ( $ ) {
+	'use strict';
 
-		$.reduxTaxonomy = $.reduxTaxonomy || {};
+	$.reduxTaxonomy = $.reduxTaxonomy || {};
 
-		$( document ).ready(
-			function () {
-				$.reduxTaxonomy.init();
-			}
-		);
+	$( document ).ready(
+		function () {
+			$.reduxTaxonomy.init();
+		}
+	);
 
-		$.reduxTaxonomy.init = function () {
-			let reduxObject;
-			const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
+	document.addEventListener(
+		'DOMContentLoaded',
+		function () {
+			$.reduxTaxonomy.init();
+		}
+	);
 
-			if ( undefined === optName ) {
-				reduxObject = redux.optName;
-			} else {
-				reduxObject = redux;
-			}
+	$.reduxTaxonomy.init = function () {
+		let reduxObject;
+		const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
-			$.reduxTaxonomy.notLoaded = true;
-			$.redux.initFields();
+		if ( undefined === optName ) {
+			reduxObject = redux.optName;
+		} else {
+			reduxObject = redux;
+		}
 
-			reduxObject.args.ajax_save         = 0;
-			reduxObject.args.disable_save_warn = true;
-		};
+		$.reduxTaxonomy.notLoaded = true;
+		$.redux.initFields();
 
-		// Check for a successful element added since WP ajax doesn't have a callback.
-		$.reduxTaxonomy.editCount = $( '#the-list tr' );
+		reduxObject.args.ajax_save         = 0;
+		reduxObject.args.disable_save_warn = true;
+	};
 
-		$.reduxTaxonomy.editCheck = function () {
-			let tr;
+	// Check for a successful element added since WP ajax doesn't have a callback.
+	$.reduxTaxonomy.editCount = $( '#the-list tr' );
 
-			if ( $( '#ajax-response .error' ).length ) {
-				return false;
-			}
+	$.reduxTaxonomy.editCheck = function () {
+		let tr;
 
-			tr = $( '#the-list tr' );
+		if ( $( '#ajax-response .error' ).length ) {
+			return false;
+		}
 
-			if ( tr.length > $.reduxTaxonomy.editCount ) {
-				window.location.reload();
-				return false;
-			}
+		tr = $( '#the-list tr' );
 
-			setTimeout( $.reduxTaxonomy.editCheck, 100 );
+		if ( tr.length > $.reduxTaxonomy.editCount ) {
+			window.location.reload();
+			return false;
+		}
 
-			$.reduxTaxonomy.editCount = tr.length;
-		};
+		setTimeout( $.reduxTaxonomy.editCheck, 100 );
 
-		$( '#submit' ).on(
-			'click',
-			function () {
-				window.onbeforeunload = null;
+		$.reduxTaxonomy.editCount = tr.length;
+	};
 
-				$.reduxTaxonomy.editCount = $( '#the-list tr' ).length;
+	$( '#submit' ).on(
+		'click',
+		function () {
+			window.onbeforeunload = null;
 
-				$( document ).ajaxSuccess(
-					function () {
-						$.reduxTaxonomy.editCheck();
-					}
-				);
-			}
-		);
-	}
-);
+			$.reduxTaxonomy.editCount = $( '#the-list tr' ).length;
+
+			$( document ).ajaxSuccess(
+				function () {
+					$.reduxTaxonomy.editCheck();
+				}
+			);
+		}
+	);
+} )( jQuery );
