@@ -606,7 +606,19 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					);
 
 					// Values used by the javascript.
-					wp_localize_script( 'redux-extension-metaboxes', 'reduxMetaboxes', $this->wp_links );
+					wp_localize_script(
+						'redux-extension-metaboxes',
+						'reduxMetaboxes',
+						$this->wp_links
+					);
+
+					wp_localize_script(
+						'redux-extension-metaboxes',
+						'reduxMetaboxesPageTemplate',
+						array(
+							'_wp_page_template' => get_post_meta( get_the_ID(), '_wp_page_template', true ),
+						)
+					);
 				}
 			}
 		}

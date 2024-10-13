@@ -1,4 +1,4 @@
-/* global reduxMetaboxes */
+/* global reduxMetaboxes, reduxMetaboxesPageTemplate */
 
 ( function ( $ ) {
 	'use strict';
@@ -57,7 +57,7 @@
 						}
 					);
 
-					$( '.edit-post-post-template__toggle' ).on(
+					$( '.edit-post-post-template__toggle, .editor-post-panel__row-control' ).on(
 						'click',
 						function () {
 							setTimeout(
@@ -114,10 +114,18 @@
 										testValue = $( 'input:radio[name="post_format"]:checked' ).val();
 									}
 								} else {
-									testValue = $( '#' + field ).val();
+									if ( isGutenberg ) {
+										testValue = $( '.components-select-control__input' ).val();
+									} else {
+										testValue = $( '#' + field ).val();
+									}
 								}
 
-								if ( testValue ) {
+								if ( undefined === testValue ) {
+									testValue = reduxMetaboxesPageTemplate._wp_page_template;
+								}
+
+								if ( testValue || '' === testValue ) {
 									$.each(
 										v,
 										function ( key, val ) {
