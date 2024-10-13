@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.4.18.9
+* Fixed: Metaboxes `page_template` feature not showing/hiding properly under Gutenberg due to class name change.
+* Updated: Deprecated JavaScript in all the Metabox extensions.
+
 ## 4.4.18.8
 * Fixed: #4023 - `google_maps` instances bleeding over from previous issue.
 
