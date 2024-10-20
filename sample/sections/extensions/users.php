@@ -142,7 +142,7 @@ Redux_Users::set_profile(
 					array(
 						'id'       => 'user-switch-child',
 						'type'     => 'switch',
-						'required' => array( 'switch-parent', '=', '1' ),
+						'required' => array( 'user-switch-parent', '=', '1' ),
 						'title'    => esc_html__( 'Switch - This and the next switch required for patterns to show', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Also called a "fold" parent.', 'your-textdomain-here' ),
 						'desc'     => esc_html__( 'Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'your-textdomain-here' ),
