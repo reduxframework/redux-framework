@@ -21,13 +21,10 @@
 
 	$.reduxUsers.init = function () {
 		let reduxObject;
-		const optName = $( '.redux-ajax-security' ).data( 'opt-name' );
 
-		if ( undefined === optName ) {
-			reduxObject = redux.optName;
-		} else {
-			reduxObject = redux;
-		}
+		$.redux.getOptName();
+
+		reduxObject = redux.optName;
 
 		$.reduxUsers.notLoaded = true;
 		$.redux.initFields();
