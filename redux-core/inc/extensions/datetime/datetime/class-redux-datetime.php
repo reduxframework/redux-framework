@@ -144,10 +144,10 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 
 			// Set placeholder based on mode.
 			if ( true === $split ) {
-				$date_placeholder = $this->field['placeholder']['date'] ?? __( 'Date', 'your-domain-here' );
-				$time_placeholder = $this->field['placeholder']['time'] ?? __( 'Time', 'your-domain-here' );
+				$date_placeholder = $this->field['placeholder']['date'] ?? esc_html__( 'Date', 'redux-framework' );
+				$time_placeholder = $this->field['placeholder']['time'] ?? esc_html__( 'Time', 'redux-framework' );
 			} else {
-				$date_placeholder = $this->field['placeholder'] ?? __( 'Date / Time', 'your-domain-here' );
+				$date_placeholder = $this->field['placeholder'] ?? esc_html__( 'Date / Time', 'redux-framework' );
 			}
 
 			// Output defaults to div, so JS can read it.
