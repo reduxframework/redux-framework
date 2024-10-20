@@ -2,8 +2,8 @@
 Contributors: kprovance, dovyp, redux
 Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
-Requires PHP: 7.1
-Tested up to: 6.6
+Requires PHP: 7.4
+Tested up to: 6.7
 Stable tag: 4.4.18
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
