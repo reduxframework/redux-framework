@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.4.18.10
+* Fixed: Datetime wasn't escaping some translations and domain was incorrect.
+* Changed: Minimum PHP version now 7.4.
+* Fixed: `required` functionality in `taxonomy` and `users`.
+
 ## 4.4.18.9
 * Fixed: Metaboxes `page_template` feature not showing/hiding properly under Gutenberg due to class name change.
 * Updated: Deprecated JavaScript in all the Metabox extensions.
