@@ -10,7 +10,7 @@
  * Description:         Build better sites in WordPress fast!
  * Version:             4.4.18.9
  * Requires at least:   5.0
- * Requires PHP:        7.1
+ * Requires PHP:        7.4
  * Author:              Team Redux
  * Author URI:          https://redux.io
  * License:             GPLv3 or later
