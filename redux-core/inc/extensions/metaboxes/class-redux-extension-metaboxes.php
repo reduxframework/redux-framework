@@ -33,49 +33,49 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 *
 		 * @var string
 		 */
-		public $ext_name = 'Metaboxes';
+		public string $ext_name = 'Metaboxes';
 
 		/**
 		 * Boxes array.
 		 *
 		 * @var array
 		 */
-		public $boxes = array();
+		public array $boxes = array();
 
 		/**
 		 * Post types array.
 		 *
 		 * @var array
 		 */
-		public $post_types = array();
+		public array $post_types = array();
 
 		/**
 		 * Post type.
 		 *
 		 * @var string
 		 */
-		public $post_type;
+		public string $post_type;
 
 		/**
 		 * Sections array.
 		 *
 		 * @var array
 		 */
-		public $orig_args;
+		public array $orig_args;
 
 		/**
 		 * Sections array.
 		 *
 		 * @var array
 		 */
-		public $sections = array();
+		public array $sections = array();
 
 		/**
 		 * CSS output array.
 		 *
 		 * @var array
 		 */
-		public $output = array();
+		public array $output = array();
 
 		/**
 		 * ReduxFramework object pointer.
@@ -89,42 +89,42 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 *
 		 * @var array
 		 */
-		public $options = array();
+		public array $options = array();
 
 		/**
 		 * Parent options array.
 		 *
 		 * @var array
 		 */
-		public $parent_options = array();
+		public array $parent_options = array();
 
 		/**
 		 * Parent defaults array.
 		 *
 		 * @var array
 		 */
-		public $parent_defaults = array();
+		public array $parent_defaults = array();
 
 		/**
 		 * Post type fields array.
 		 *
 		 * @var array
 		 */
-		public $post_type_fields = array();
+		public array $post_type_fields = array();
 
 		/**
 		 * Options defaults array.
 		 *
 		 * @var array
 		 */
-		public $options_defaults = array();
+		public array $options_defaults = array();
 
 		/**
 		 * Replace array.
 		 *
 		 * @var array
 		 */
-		public $to_replace = array();
+		public array $to_replace = array();
 
 		/**
 		 * Extension URI.
@@ -145,35 +145,35 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 *
 		 * @var array
 		 */
-		public $meta = array();
+		public array $meta = array();
 
 		/**
 		 * Post ID.
 		 *
-		 * @var int
+		 * @var null|int
 		 */
-		public $post_id = 0;
+		public ?int $post_id = 0;
 
 		/**
 		 * Base URI.
 		 *
 		 * @var string
 		 */
-		public $base_url;
+		public string $base_url;
 
 		/**
 		 * WP_Links array.
 		 *
 		 * @var array
 		 */
-		public $wp_links = array();
+		public array $wp_links = array();
 
 		/**
 		 * Notices.
 		 *
 		 * @var array
 		 */
-		private $notices = array();
+		private array $notices = array();
 
 		/**
 		 * ReduxFramework_extension_metaboxes constructor.
@@ -396,7 +396,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			}
 
 			if ( isset( $run_hooks ) && true === $run_hooks ) {
-				$this->parent_options = '';
+				$this->parent_options = array();
 
 				if ( ! empty( $this->to_replace ) ) {
 					foreach ( $this->to_replace as $id => $field ) {
@@ -951,6 +951,10 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 									$this->boxes[ $key ]['sections'][ $sk ]['fields'][ $k ] = $field;
 								}
 
+								if ( ! isset( $this->parent->options_defaults_class ) ) {
+									$this->parent->options_defaults_class = new Redux_Options_Defaults();
+								}
+
 								$this->parent->options_defaults_class->field_default_values( $this->parent->args['opt_name'], $field );
 
 								if ( 'repeater' === $field['type'] ) {
@@ -1072,6 +1076,10 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			}
 
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
+				if ( ! isset( $this->parent->options_class ) ) {
+					$this->parent->options_class = new Redux_Options_Constructor( $this->parent );
+				}
+
 				$this->parent->options_class->get();
 			}
 

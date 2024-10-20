@@ -33,112 +33,112 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Taxonomy';
+		public string $extension_name = 'Taxonomy';
 
 		/**
 		 * Terms array.
 		 *
 		 * @var array
 		 */
-		public $terms = array();
+		public array $terms = array();
 
 		/**
 		 * Taxonomy types array.
 		 *
 		 * @var array
 		 */
-		public $taxonomy_types = array();
+		public array $taxonomy_types = array();
 
 		/**
 		 * Taxonomy type.
 		 *
 		 * @var string
 		 */
-		public $taxonomy_type = '';
+		public string $taxonomy_type = '';
 
 		/**
 		 * Sections array.
 		 *
 		 * @var array
 		 */
-		public $sections = array();
+		public array $sections = array();
 
 		/**
 		 * Original args array.
 		 *
 		 * @var array
 		 */
-		public $orig_args = array();
+		public array $orig_args = array();
 
 		/**
 		 * Output array.
 		 *
 		 * @var array
 		 */
-		public $output = array();
+		public array $output = array();
 
 		/**
 		 * Parent options.
 		 *
 		 * @var array
 		 */
-		public $parent_options = array();
+		public array $parent_options = array();
 
 		/**
 		 * Parent defaults.
 		 *
 		 * @var array
 		 */
-		public $parent_defaults = array();
+		public array $parent_defaults = array();
 
 		/**
 		 * Taxonomy field types array.
 		 *
 		 * @var array
 		 */
-		public $taxonomy_type_fields = array();
+		public array $taxonomy_type_fields = array();
 
 		/**
 		 * Option defaults.
 		 *
 		 * @var array
 		 */
-		public $options_defaults = array();
+		public array $options_defaults = array();
 
 		/**
 		 * To replace array.
 		 *
 		 * @var array
 		 */
-		public $to_replace = array();
+		public array $to_replace = array();
 
 		/**
 		 * Meta array.
 		 *
 		 * @var array
 		 */
-		public $meta = array();
+		public array $meta = array();
 
 		/**
 		 * Tag ID.
 		 *
 		 * @var int
 		 */
-		public $tag_id = 0;
+		public int $tag_id = 0;
 
 		/**
 		 * Accepted WordPress screens.
 		 *
 		 * @var array
 		 */
-		private $pagenows;
+		private array $pagenows;
 
 		/**
 		 * Notices array.
 		 *
 		 * @var array
 		 */
-		public $notices;
+		public array $notices;
 
 		/**
 		 * Redux_Extension_Taxonomy constructor.
@@ -338,7 +338,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			}
 
 			if ( isset( $run_hooks ) && true === $run_hooks ) {
-				$this->parent_options = '';
+				$this->parent_options = array();
 
 				if ( ! empty( $this->to_replace ) ) {
 					foreach ( $this->to_replace as $id => $field ) {
@@ -551,6 +551,10 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 									$this->terms[ $key ]['sections'][ $sk ]['fields'][ $k ] = $field;
 								}
 
+								if ( ! isset( $this->parent->options_defaults_class ) ) {
+									$this->parent->options_defaults_class = new Redux_Options_Defaults();
+								}
+
 								$this->parent->options_defaults_class->field_default_values( $this->parent->args['opt_name'], $field );
 
 								if ( 'repeater' === $field['type'] ) {
@@ -651,6 +655,10 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			}
 
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
+				if ( ! isset( $this->parent->options_class ) ) {
+					$this->parent->options_class = new Redux_Options_Constructor( $this->parent );
+				}
+
 				$this->parent->options_class->get();
 			}
 
@@ -721,7 +729,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		/**
 		 * Get values.
 		 *
-		 * @param object $the_post WP_Post.
+		 * @param mixed  $the_post WP_Post.
 		 * @param string $meta_key Meta key.
 		 * @param string $def_val  Default value.
 		 *

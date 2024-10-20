@@ -32,7 +32,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Users';
+		public string $extension_name = 'Users';
 
 
 		/**
@@ -40,98 +40,98 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var array
 		 */
-		public $profiles = array();
+		public array $profiles = array();
 
 		/**
 		 * User roles array.
 		 *
 		 * @var array
 		 */
-		public $users_roles = array();
+		public array $users_roles = array();
 
 		/**
 		 * User role array.
 		 *
 		 * @var array
 		 */
-		public $users_role = array();
+		public array $users_role = array();
 
 		/**
 		 * Sections array.
 		 *
 		 * @var array
 		 */
-		public $sections = array();
+		public array $sections = array();
 
 		/**
 		 * Original args array.
 		 *
 		 * @var array
 		 */
-		public $orig_args = array();
+		public array $orig_args = array();
 
 		/**
 		 * Output array.
 		 *
 		 * @var array
 		 */
-		public $output = array();
+		public array $output = array();
 
 		/**
 		 * Parent options array.
 		 *
 		 * @var array
 		 */
-		public $parent_options = array();
+		public array $parent_options = array();
 
 		/**
 		 * Parent defaults.
 		 *
 		 * @var array
 		 */
-		public $parent_defaults = array();
+		public array $parent_defaults = array();
 
 		/**
 		 * Profile fields array.
 		 *
 		 * @var array
 		 */
-		public $profile_fields = array();
+		public array $profile_fields = array();
 
 		/**
 		 * Options defaults.
 		 *
 		 * @var array
 		 */
-		public $options_defaults = array();
+		public array $options_defaults = array();
 
 		/**
 		 * To replace array.
 		 *
 		 * @var array
 		 */
-		public $to_replace = array();
+		public array $to_replace = array();
 
 		/**
 		 * Meta array.
 		 *
 		 * @var array
 		 */
-		public $meta = array();
+		public array $meta = array();
 
 		/**
 		 * Array of page names.
 		 *
 		 * @var array
 		 */
-		public $pagenows;
+		public array $pagenows;
 
 		/**
 		 * Notices array.
 		 *
 		 * @var array
 		 */
-		public $notices;
+		public array $notices;
 
 		/**
 		 * Redux_Extension_Users constructor.
@@ -299,7 +299,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				}
 			}
 
-			$this->parent_options = '';
+			$this->parent_options = array();
 
 			if ( ! empty( $this->to_replace ) ) {
 				foreach ( $this->to_replace as $id => $field ) {
@@ -554,6 +554,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 									$this->profiles[ $key ]['sections'][ $sk ]['fields'][ $k ] = $field;
 								}
 
+								if ( ! isset( $this->parent->options_defaults_class ) ) {
+									$this->parent->options_defaults_class = new Redux_Options_Defaults();
+								}
+
 								$this->parent->options_defaults_class->field_default_values( $this->parent->args['opt_name'], $field );
 
 								if ( 'repeater' === $field['type'] ) {
@@ -649,6 +653,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			}
 
 			if ( ! isset( $this->parent->options ) || empty( $this->parent->options ) ) {
+				if ( ! isset( $this->parent->options_class ) ) {
+					$this->parent->options_class = new Redux_Options_Constructor( $this->parent );
+				}
+
 				$this->parent->options_class->get();
 			}
 

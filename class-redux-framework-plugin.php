@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @var         array $options Array of config options, used to check for demo mode
 		 * @since       3.0.0
 		 */
-		protected $options = array();
+		protected array $options = array();
 
 		/**
 		 * Use this value as the text domain when translating strings from this plugin. It should match
@@ -37,25 +37,25 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 		 * @var         string $plugin_slug The unique ID (slug) of this plugin
 		 * @since       3.0.0
 		 */
-		protected $plugin_slug = 'redux-framework';
+		protected string $plugin_slug = 'redux-framework';
 
 		/**
 		 * Set on network activate.
 		 *
 		 * @access      protected
-		 * @var         string $plugin_network_activated Check for plugin network activation
+		 * @var         null|string $plugin_network_activated Check for plugin network activation
 		 * @since       3.0.0
 		 */
-		protected $plugin_network_activated = null;
+		protected ?string $plugin_network_activated = null;
 
 		/**
 		 * Class instance.
 		 *
 		 * @access      private
-		 * @var         Redux_Framework_Plugin $instance The one true Redux_Framework_Plugin
+		 * @var         ?Redux_Framework_Plugin $instance The one true Redux_Framework_Plugin
 		 * @since       3.0.0
 		 */
-		private static $instance;
+		private static ?Redux_Framework_Plugin $instance = null;
 
 		/**
 		 * Crash flag.
