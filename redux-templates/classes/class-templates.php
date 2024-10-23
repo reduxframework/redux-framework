@@ -22,7 +22,7 @@ class Templates {
 	 *
 	 * @var int
 	 */
-	public static $content_width = 1200;
+	public static int $content_width = 1200;
 
 	/**
 	 * ReduxTemplates Template.

@@ -22,15 +22,15 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		/**
 		 * Extension URI.
 		 *
-		 * @var string
+		 * @var null|string
 		 */
-		private $extension_url;
+		private ?string $extension_url;
 
 		/** Extension directory.
 		 *
 		 * @var string
 		 */
-		private $extension_dir;
+		private string $extension_dir;
 
 		/**
 		 * Array of enabled widget_areas
@@ -38,28 +38,28 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		 * @since    1.0.0
 		 * @var      array
 		 */
-		protected $widget_areas = array();
+		protected array $widget_areas = array();
 
 		/**
 		 * Widget array.
 		 *
 		 * @var array
 		 */
-		protected $orig = array();
+		protected array $orig = array();
 
 		/**
 		 * ReduxFramework object.
 		 *
-		 * @var object
+		 * @var ReduxFramework
 		 */
-		private $parent;
+		private ReduxFramework $parent;
 
 		/**
 		 * Redux_Widget_Areas constructor.
 		 *
-		 * @param object $redux ReduxFramework pointer.
+		 * @param ReduxFramework $redux ReduxFramework pointer.
 		 */
-		public function __construct( $redux ) {
+		public function __construct( ReduxFramework $redux ) {
 			global $pagenow;
 
 			$this->parent = $redux;
@@ -215,13 +215,12 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 
 			$options = apply_filters( 'redux_custom_widget_args', $options );
 
-			if ( is_array( $this->widget_areas ) ) {
-				foreach ( array_unique( $this->widget_areas ) as $widget_area ) {
-					$options['class'] = 'redux-custom';
-					$options['name']  = $widget_area;
-					$options['id']    = sanitize_key( $widget_area );
-					register_sidebar( $options );
-				}
+			foreach ( array_unique( $this->widget_areas ) as $widget_area ) {
+				$options['class'] = 'redux-custom';
+				$options['name']  = $widget_area;
+				$options['id']    = sanitize_key( $widget_area );
+
+				register_sidebar( $options );
 			}
 		}
 

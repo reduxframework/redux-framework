@@ -29,7 +29,7 @@ if ( ! class_exists( 'Redux_Extension_Widget_Areas' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Widget Areas';
+		public string $extension_name = 'Widget Areas';
 
 
 		/**
