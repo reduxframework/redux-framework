@@ -171,7 +171,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_term_classes( array $classes ): array {
+		public function add_user_classes( array $classes ): array {
 			$classes[] = 'redux-users';
 			$classes[] = 'redux-' . $this->parent->args['opt_name'];
 
@@ -189,7 +189,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_term_hide_class( array $classes ): array {
+		public function add_user_hide_class( array $classes ): array {
 			$classes[] = 'hide';
 
 			return $classes;
@@ -622,10 +622,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					}
 				}
 
-				$profile['class'] = $this->add_term_classes( $profile['class'] );
+				$profile['class'] = $this->add_user_classes( $profile['class'] );
 
 				if ( isset( $profile['post_format'] ) ) {
-					$profile['class'] = $this->add_term_hide_class( $profile['class'] );
+					$profile['class'] = $this->add_user_hide_class( $profile['class'] );
 				}
 
 				global $pagenow;

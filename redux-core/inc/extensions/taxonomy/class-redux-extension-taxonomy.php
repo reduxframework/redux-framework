@@ -774,26 +774,31 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		 * Check edit visibility.
 		 *
 		 * @param array $params Array.
+		 * @param bool  $subscan Flag to perform scan for fields of fields.
 		 *
 		 * @return bool
 		 */
-		private function check_edit_visibility( array $params = array() ): bool {
+		private function check_edit_visibility( array $params = array(), bool $subscan = true ): bool {
 			global $pagenow;
 
 			// Edit page visibility.
 			if ( strpos( $pagenow, 'edit-' ) !== false ) {
-				if ( isset( $params['fields'] ) ) {
-					foreach ( $params['fields'] as $field ) {
-						if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
-							// Not visible.
-						} elseif ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
-								return true;
-						}
-					}
+				if ( true === $subscan ) {
+					if ( isset( $params['fields'] ) ) {
 
-					return false;
+						foreach ( $params['fields'] as $field ) {
+							if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
+								// Not visible.
+							} elseif ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
+								return true;
+							}
+						}
+
+						return false;
+					}
 				}
-				if ( isset( $params['add_visibility'] ) && $params['add_visibility'] ) {
+
+				if ( isset( $params['add_visibility'] ) && true === $params['add_visibility'] ) {
 					return true;
 				}
 
@@ -885,9 +890,11 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 						if ( ! $this->check_edit_visibility( $section ) ) {
 							continue;
 						}
+
 						if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
 							continue;
 						}
+
 						if ( ! empty( $section['fields'] ) ) {
 							if ( isset( $section['args'] ) ) {
 								$this->parent->args = wp_parse_args( $section['args'], $this->orig_args );
@@ -912,7 +919,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 							echo '<table class="form-table"><tbody>';
 
 							foreach ( $section['fields'] as $field ) {
-								if ( ! $this->check_edit_visibility( $field ) ) {
+								if ( ! $this->check_edit_visibility( $field, false ) ) {
 									continue;
 								}
 
