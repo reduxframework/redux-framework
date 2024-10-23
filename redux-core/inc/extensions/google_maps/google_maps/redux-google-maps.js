@@ -67,9 +67,6 @@
 		let g_autoComplete;
 		let g_LatLng;
 		let g_map;
-		let markerTooltip;
-		let infoWindow;
-		let g_marker;
 
 		let noLatLng = false;
 
@@ -82,9 +79,6 @@
 
 		const latitude    = containerID + '_latitude';
 		const longitude   = containerID + '_longitude';
-		const marker_info = containerID + '_marker_info';
-
-		let geoAlert = mapClass.data( 'geo-alert' );
 
 		// Add map index to data attr.
 		// Why, say we want to use delay_render,
@@ -116,7 +110,7 @@
 		// to geographical location types.
 		g_autoComplete = await google.maps.importLibrary( 'places' );
 
-		g_autoComplete = new google.maps.places.Autocomplete( document.getElementById( autocomplete ), {types: [ 'geocode' ] } );
+		g_autoComplete = new google.maps.places.Autocomplete( document.getElementById( autocomplete ), {types: ['geocode']} );
 
 		// Data bindings.
 		scrollWheel = Boolean( mapClass.data( 'scroll-wheel' ) );
@@ -144,7 +138,7 @@
 		// Can't have empty values, or the map API will complain.
 		// Set default for the middle of the United States.
 		defLat  = defLat ? defLat : 39.11676722061108;
-		defLong = defLong ? defLong : - 100.47761000000003;
+		defLong = defLong ? defLong : -100.47761000000003;
 
 		if ( noLatLng ) {
 
@@ -153,7 +147,7 @@
 
 			// Set up Geocode and pass address.
 			geocoder.geocode(
-				{ 'address': address },
+				{'address': address},
 				function ( results, status ) {
 					let latitude;
 					let longitude;
@@ -175,7 +169,7 @@
 								style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 								position: google.maps.ControlPosition.LEFT_BOTTOM
 							},
-							mapId:'REDUX_GOOGLE_MAPS',
+							mapId: 'REDUX_GOOGLE_MAPS',
 						};
 
 						// Create map.
@@ -187,6 +181,8 @@
 
 						longitude = el.find( '#' + containerID + '_longitude' );
 						longitude.val( results[0].geometry.location.lng() );
+
+						redux.field_objects.google_maps.renderControls( el, latitude, longitude, g_autoComplete, g_map, autocomplete, mapClass, g_LatLng, containerID );
 					} else {
 
 						// No data found, alert the user.
@@ -210,12 +206,22 @@
 					style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 					position: google.maps.ControlPosition.LEFT_BOTTOM
 				},
-				mapId:'REDUX_GOOGLE_MAPS',
+				mapId: 'REDUX_GOOGLE_MAPS',
 			};
 
 			// Create the map.
 			g_map = new google.maps.Map( document.getElementById( canvas ), mapOptions );
+
+			redux.field_objects.google_maps.renderControls( el, latitude, longitude, g_autoComplete, g_map, autocomplete, mapClass, g_LatLng, containerID );
 		}
+	};
+
+	redux.field_objects.google_maps.renderControls = function ( el, latitude, longitude, g_autoComplete, g_map, autocomplete, mapClass, g_LatLng, containerID ) {
+		let markerTooltip;
+		let infoWindow;
+		let g_marker;
+
+		let geoAlert = mapClass.data( 'geo-alert' );
 
 		// Get HTML.
 		const input = document.getElementById( autocomplete );
@@ -351,6 +357,7 @@
 			g_marker,
 			'click',
 			function () {
+				const marker_info = containerID + '_marker_info';
 				const infoValue = document.getElementById( marker_info ).value;
 
 				if ( '' !== infoValue ) {
