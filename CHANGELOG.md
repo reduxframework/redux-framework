@@ -1,46 +1,26 @@
 # Redux Changelog
 
-## 4.4.18.10
-* Fixed: Datetime wasn't escaping some translations and domain was incorrect.
+## 4.5.0
 * Changed: Minimum PHP version now 7.4.
+* Fixed: Datetime wasn't escaping some translations and domain was incorrect.
 * Fixed: `required` functionality in `taxonomy` and `users`.
 * Fixed: `repeater` not rendering inside `taxonomy` metaboxes.
 * Fixed: `repeater` not saving inside `users` metaboxes.
-
-## 4.4.18.9
 * Fixed: Metaboxes `page_template` feature not showing/hiding properly under Gutenberg due to class name change.
-* Updated: Deprecated JavaScript in all the Metabox extensions.
-
-## 4.4.18.8
 * Fixed: #4023 - `google_maps` instances bleeding over from previous issue.
-
-## 4.4.18.7
 * Fixed: `google_maps` deprecation notice regarding map markers. 
-
-## 4.4.18.6
 * Fixed: `repeater` in `taxonomy` and `user` metaboxes.
 * Fixed: Unnecessary loading of default data on load (unless `metaboxes` are in use).
-
-## 4.4.18.5
-* Updated: JavaScript for jQuery 4.0 release.
 * Fixed: `editor` and `checkbox` fields not saving in `tabbed` field.
 * Fixed: `custom_fonts` not saving uploaded font on conversion failure.
-
-## 4.4.18.4
-* Fixed: Font Conversion issue resolved serverside.
 * Fixed: #4009 - Google Font update issue resolved.
-
-## 4.4.18.3
 * Fixed: #4011 - `editor` in `repeater` field not saving.
 * Fixed: `editor` in added `repeater` fields not properly initializing.
-
-## 4.4.18.2
-* Moved: Font conversion routine into core until the redux.io converter can be repaired.
-* Moved: Google Font updated moved off Redux GitHub to Kev's GitHub until it can be fixed.
-
-## 4.4.18.1
 * Fixed: #4008 - Font conversion failure fallback.
 * Fixed: Replaced `validate_values` deprecation in `taxonomy` metabox.
+* Updated: Deprecated JavaScript in all the Metabox extensions.
+* Updated: JavaScript for jQuery 4.0 release.
+* Release date: October 28, 2024
 
 ## 4.4.18
 * Fixed: #4006: XSS fix in 'color_scheme' import.

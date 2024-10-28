@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 6.7
-Stable tag: 4.4.18
+Stable tag: 4.5.0
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,28 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+## 4.5.0
+* Changed: Minimum PHP version now 7.4.
+* Fixed: Datetime wasn't escaping some translations and domain was incorrect.
+* Fixed: `required` functionality in `taxonomy` and `users`.
+* Fixed: `repeater` not rendering inside `taxonomy` metaboxes.
+* Fixed: `repeater` not saving inside `users` metaboxes.
+* Fixed: Metaboxes `page_template` feature not showing/hiding properly under Gutenberg due to class name change.
+* Fixed: #4023 - `google_maps` instances bleeding over from previous issue.
+* Fixed: `google_maps` deprecation notice regarding map markers.
+* Fixed: `repeater` in `taxonomy` and `user` metaboxes.
+* Fixed: Unnecessary loading of default data on load (unless `metaboxes` are in use).
+* Fixed: `editor` and `checkbox` fields not saving in `tabbed` field.
+* Fixed: `custom_fonts` not saving uploaded font on conversion failure.
+* Fixed: #4009 - Google Font update issue resolved.
+* Fixed: #4011 - `editor` in `repeater` field not saving.
+* Fixed: `editor` in added `repeater` fields not properly initializing.
+* Fixed: #4008 - Font conversion failure fallback.
+* Fixed: Replaced `validate_values` deprecation in `taxonomy` metabox.
+* Updated: Deprecated JavaScript in all the Metabox extensions.
+* Updated: JavaScript for jQuery 4.0 release.
+* Release date: October 28, 2024
+
 = 4.4.18 =
 * Fixed: #4006: XSS fix in 'color_scheme' import.
 * Updated: Font Awesome 6.6.0
