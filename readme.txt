@@ -121,7 +121,8 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
-## 4.5.0
+
+= 4.5.0 =
 * Changed: Minimum PHP version now 7.4.
 * Fixed: Datetime wasn't escaping some translations and domain was incorrect.
 * Fixed: `required` functionality in `taxonomy` and `users`.
