@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.5.0.1
+* Modified: Allow `null` assignments to core variable to prevent fatal errors when devs disable Google Fonts.
+* Added: Minimum PHP 7.4 warning message to admin screen to prevent fatal errors. Some people are, apparently, still using outdated PHP.
+
 ## 4.5.0
 * Changed: Minimum PHP version now 7.4.
 * Fixed: Datetime wasn't escaping some translations and domain was incorrect.
