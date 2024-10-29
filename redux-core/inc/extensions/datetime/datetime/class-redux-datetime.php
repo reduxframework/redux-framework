@@ -32,7 +32,7 @@ if ( ! class_exists( 'Redux_Datetime', false ) ) {
 				'num-of-months' => 1,
 
 				// DO NOT CHANGE THESE!!!!
-				// It will make this file's javascript sister
+				// It will make this file's JavaScript sister
 				// cry like a deflowered virgin on prom night.
 				'timezone-list' => null,
 				'timezone'      => '0',

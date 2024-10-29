@@ -26,14 +26,14 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.2.0';
+		public static string $version = '4.2.0';
 
 		/**
 		 * Extension friendly name.
 		 *
 		 * @var string
 		 */
-		public string $ext_name = 'Metaboxes';
+		public string $extension_name = 'Metaboxes';
 
 		/**
 		 * Boxes array.
@@ -78,13 +78,6 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		public array $output = array();
 
 		/**
-		 * ReduxFramework object pointer.
-		 *
-		 * @var object
-		 */
-		public $parent = null;
-
-		/**
 		 * Options array.
 		 *
 		 * @var array
@@ -125,20 +118,6 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 * @var array
 		 */
 		public array $to_replace = array();
-
-		/**
-		 * Extension URI.
-		 *
-		 * @var string|void
-		 */
-		public $extension_url;
-
-		/**
-		 * Extension Directory.
-		 *
-		 * @var string
-		 */
-		public $extension_dir;
 
 		/**
 		 * Meta data array.
@@ -184,8 +163,6 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			global $pagenow;
 
 			parent::__construct( $redux, __FILE__ );
-
-			$this->parent = $redux;
 
 			$this->parent->extensions['metaboxes'] = $this;
 

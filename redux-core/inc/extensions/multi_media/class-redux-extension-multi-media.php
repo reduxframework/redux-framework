@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Multi_Media' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.1';
+		public static string $version = '4.4.1';
 
 		/**
 		 * Extension name.

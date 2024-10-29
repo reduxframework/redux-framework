@@ -31,6 +31,8 @@ if ( ! class_exists( 'Redux_Validation_Unique_Slug', false ) ) {
 
 			$slug = $this->value;
 
+			$post_name_check = '';
+
 			$feeds = $wp_rewrite->feeds;
 			if ( ! is_array( $feeds ) ) {
 				$feeds = array();
@@ -68,7 +70,7 @@ if ( ! class_exists( 'Redux_Validation_Unique_Slug', false ) ) {
 						wp_cache_set( 'redux-alt-post-name', $result );
 					}
 
-					$suffix ++;
+					++$suffix;
 				} while ( $post_name_check );
 
 				$slug                   = $alt_post_name;

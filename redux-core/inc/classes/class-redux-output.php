@@ -92,7 +92,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 
 								/**
 								 * Field class file
-								 * filter 'redux/{opt_name}/field/class/{field.type}
+								 * filter 'redux/{opt_name}/field/class/{field.type}'
 								 *
 								 * @param string $file field class file.
 								 * @param array $field field config data
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 								// phpcs:ignore WordPress.NamingConventions.ValidHookName
 								$class_file = apply_filters( "redux/{$core->args['opt_name']}/field/class/{$field['type']}", $filter_path, $field );
 
-								if ( $class_file && file_exists( $class_file ) && ( ! class_exists( $field_class ) ) ) {
+								if ( $class_file && file_exists( $class_file ) ) {
 									require_once $class_file;
 
 									$field_class = Redux_Functions::class_exists_ex( $field_classes );
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 									$field['output'] = array( $field['output'] );
 								}
 
-								if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || isset( $field['media_query'] ) && ! empty( $field['media_query'] ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] || 'social_profiles' === $field['type'] ) ) {
+								if ( ( ( isset( $field['output'] ) && ! empty( $field['output'] ) ) || ( isset( $field['compiler'] ) && ! empty( $field['compiler'] ) ) || ( isset( $field['media_query'] ) && ! empty( $field['media_query'] ) ) || 'typography' === $field['type'] || 'icon_select' === $field['type'] || 'social_profiles' === $field['type'] ) ) {
 									if ( method_exists( $field_class, 'css_style' ) ) {
 										$style_data = $field_object->css_style( $field_object->value );
 									}
@@ -174,6 +174,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 				if ( ! class_exists( 'Redux_Typography' ) ) {
 					require_once Redux_Core::$dir . '/inc/fields/typography/class-redux-typography.php';
 				}
+
 				$typography = new Redux_Typography( null, null, $core );
 
 				if ( ! $core->args['disable_google_fonts_link'] ) {
@@ -234,17 +235,17 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		/**
 		 * Function to output output_variables to the dynamic output.
 		 *
-		 * @param object       $core       ReduxFramework core pointer.
-		 * @param array        $section    Section containing this field.
-		 * @param array        $field      Field object.
-		 * @param array|string $value      Current value of field.
-		 * @param string|null  $style_data CSS output string to append to the root output variable.
+		 * @param ReduxFramework $core       ReduxFramework core pointer.
+		 * @param array          $section    Section containing this field.
+		 * @param array          $field      Field object.
+		 * @param array|string   $value      Current value of field.
+		 * @param string|null    $style_data CSS output string to append to the root output variable.
 		 *
 		 * @return      void
 		 * @since       4.0.3
 		 * @access      public
 		 */
-		private function output_variables( $core, array $section = array(), array $field = array(), $value = array(), ?string $style_data = '' ) {
+		private function output_variables( ReduxFramework $core, array $section = array(), array $field = array(), $value = array(), ?string $style_data = '' ) {
 			// Let's allow section overrides, please.
 			if ( isset( $section['output_variables'] ) && ! isset( $field['output_variables'] ) ) {
 				$field['output_variables'] = $section['output_variables'];
@@ -326,12 +327,12 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 		 * Can Output CSS
 		 * Check if a field meets its requirements before outputting to CSS
 		 *
-		 * @param object $core  ReduxFramework core pointer.
-		 * @param array  $field Field array.
+		 * @param ReduxFramework $core  ReduxFramework core pointer.
+		 * @param array          $field Field array.
 		 *
 		 * @return bool
 		 */
-		private function can_output_css( $core, array $field ): ?bool {
+		private function can_output_css( ReduxFramework $core, array $field ): ?bool {
 			$return = true;
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName

@@ -21,7 +21,7 @@ if ( ! class_exists( 'Redux_Class', false ) ) {
 		 *
 		 * @var null|ReduxFramework
 		 */
-		public $parent = null;
+		public ?ReduxFramework $parent = null;
 
 		/**
 		 * Global arguments array.
@@ -40,9 +40,9 @@ if ( ! class_exists( 'Redux_Class', false ) ) {
 		/**
 		 * Redux_Class constructor.
 		 *
-		 * @param null|object $redux Pointer to ReduxFramework object.
+		 * @param ReduxFramework|null $redux Pointer to ReduxFramework object.
 		 */
-		public function __construct( $redux = null ) {
+		public function __construct( ReduxFramework $redux = null ) {
 			if ( is_object( $redux ) ) {
 				$this->parent   = $redux;
 				$this->args     = $redux->args;

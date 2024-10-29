@@ -96,23 +96,23 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		/**
 		 * Pointer to an updated Google fonts array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public static array $google_fonts = array();
+		public static ?array $google_fonts = array();
 
 		/**
 		 * List of files calling Redux.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public static array $callers = array();
+		public static ?array $callers = array();
 
 		/**
 		 * Pointer to _SERVER global.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public static array $server = array();
+		public static ?array $server = array();
 
 		/**
 		 * Pointer to the third party fixes class.

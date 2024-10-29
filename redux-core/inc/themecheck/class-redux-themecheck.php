@@ -23,31 +23,31 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 * @since   1.0.0
 		 * @var     string
 		 */
-		protected $version = '1.0.0';
+		protected string $version = '1.0.0';
 
 		/**
 		 * Instance of this class.
 		 *
 		 * @since    1.0.0
-		 * @var      object
+		 * @var      Redux_ThemeCheck|null
 		 */
-		protected static $instance = null;
+		protected static ?Redux_ThemeCheck $instance = null;
 
 		/**
 		 * Instance of the Redux class.
 		 *
 		 * @since    1.0.0
-		 * @var      object
+		 * @var      ReduxFramework|null
 		 */
-		protected static $redux = null;
+		protected static ?ReduxFramework $redux;
 
 		/**
 		 * Details of the embedded Redux class.
 		 *
 		 * @since    1.0.0
-		 * @var      object
+		 * @var      mixed|null
 		 */
-		protected static $redux_details = null;
+		protected static $redux_details = array();
 
 		/**
 		 * Slug for various elements.
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 * @since   1.0.0
 		 * @var     string
 		 */
-		protected $slug = 'redux_themecheck';
+		protected string $slug = 'redux_themecheck';
 
 		/**
 		 * Initialize the plugin by setting localization, filters, and administration functions.
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Redux_ThemeCheck', false ) ) {
 		 *
 		 * @param array $php_files Array of files to check.
 		 *
-		 * @return    object    A single instance of this class.
+		 * @return    array|false|null    A single instance of this class.
 		 * @since     1.0.0
 		 */
 		public static function get_redux_details( array $php_files = array() ) {

@@ -26,14 +26,14 @@ if ( ! class_exists( 'Redux_Extension_Icon_Select' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.2';
+		public static string $version = '4.4.2';
 
 		/**
 		 * Extension friendly name.
 		 *
 		 * @var string
 		 */
-		public $ext_name = 'Icon Select';
+		public $extension_name = 'Icon Select';
 
 		/**
 		 * ReduxFramework_Extension_Icon_Select constructor.

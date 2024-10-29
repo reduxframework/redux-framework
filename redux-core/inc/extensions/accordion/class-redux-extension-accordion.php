@@ -6,6 +6,9 @@
  * @author Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Accordion
  * @version 4.3.16
+ *
+ * @noinspection PhpHierarchyChecksInspection
+ * @noinspection PhpDocFinalChecksInspection
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -25,14 +28,14 @@ if ( ! class_exists( 'Redux_Extension_Accordion' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.3.16';
+		public static string $version = '4.3.16';
 
 		/**
 		 * Extension friendly name.
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Accordion';
+		public string $extension_name = 'Accordion';
 
 		/**
 		 * Class Constructor. Defines the args for the extension class

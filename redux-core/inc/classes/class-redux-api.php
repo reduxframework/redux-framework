@@ -30,91 +30,91 @@ if ( ! class_exists( 'Redux', false ) ) {
 		 *
 		 * @var array
 		 */
-		public static $fields = array();
+		public static array $fields = array();
 
 		/**
 		 * Option sections.
 		 *
 		 * @var array
 		 */
-		public static $sections = array();
+		public static array $sections = array();
 
 		/**
 		 * Option defaults.
 		 *
 		 * @var array
 		 */
-		public static $options_defaults = array();
+		public static array $options_defaults = array();
 
 		/**
 		 * Option help array.
 		 *
 		 * @var array
 		 */
-		public static $help = array();
+		public static array $help = array();
 
 		/**
 		 * Option global args.
 		 *
 		 * @var array
 		 */
-		public static $args = array();
+		public static array $args = array();
 
 		/**
 		 * Option section priorities.
 		 *
 		 * @var array
 		 */
-		public static $priority = array();
+		public static array $priority = array();
 
 		/**
 		 * Panel validations errors.
 		 *
 		 * @var array
 		 */
-		public static $errors = array();
+		public static array $errors = array();
 
 		/**
 		 * Init.
 		 *
 		 * @var array
 		 */
-		public static $init = array();
+		public static array $init = array();
 
 		/**
 		 * Delay Init opt_names
 		 *
 		 * @var array
 		 */
-		public static $delay_init = array();
+		public static array $delay_init = array();
 
 		/**
 		 * Extension list.
 		 *
 		 * @var array
 		 */
-		public static $extensions = array();
+		public static array $extensions = array();
 
 		/**
 		 * Extensions in use.
 		 *
 		 * @var array
 		 */
-		public static $uses_extensions = array();
+		public static array $uses_extensions = array();
 
 		/**
 		 * Extension paths.
 		 *
 		 * @var array
 		 */
-		public static $extension_paths = array();
+		public static array $extension_paths = array();
 
 		/**
 		 * Extension capability flag.
 		 *
 		 * @var boolean
 		 */
-		public static $extension_compatibility = false;
+		public static bool $extension_compatibility = false;
 
 		/**
 		 * Code to run at creation in instance.

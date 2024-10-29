@@ -30,7 +30,7 @@ if ( ! class_exists( 'Redux_Extension_My_Extension', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '1.0.0';
+		public static string $version = '1.0.0';
 
 		/**
 		 * Set the friendly name of the extension.  This is for display purposes.  No underscores or dashes are required.
@@ -52,10 +52,10 @@ if ( ! class_exists( 'Redux_Extension_My_Extension', false ) ) {
 		/**
 		 * Redux_Extension_my_extension constructor.
 		 *
-		 * @param object $parent ReduxFramework pointer.
+		 * @param ReduxFramework $redux ReduxFramework pointer.
 		 */
-		public function __construct( $parent ) {
-			parent::__construct( $parent, __FILE__ );
+		public function __construct( $redux ) {
+			parent::__construct( $redux, __FILE__ );
 
 			if ( is_admin() && ! $this->is_minimum_version( $this->minimum_redux_version, self::$version, $this->extension_name ) ) {
 				return;

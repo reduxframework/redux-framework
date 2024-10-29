@@ -6,6 +6,9 @@
  * @author  Kevin Provance <kevin.provance@gmail.com> & Dovy Paukstys <dovy@reduxframework.com>
  * @class   Redux_Extension_Custom_Fonts
  * @version 4.4.2
+ *
+ * @noinspection PhpHierarchyChecksInspection
+ * @noinspection PhpDocFinalChecksInspection
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,82 +25,81 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.2';
+		public static string $version = '4.4.2';
 
 		/**
 		 * Extension friendly name.
 		 *
 		 * @var string
 		 */
-		public $ext_name = 'Custom Fonts';
+		public string $extension_name = 'Custom Fonts';
+		/**
+		 * Class instance.
+		 *
+		 * @var object|null
+		 */
+		public static ?object $instance;
 
 		/**
 		 * Custom fonts array.
 		 *
 		 * @var array
 		 */
-		public $custom_fonts = array();
+		public array $custom_fonts = array();
 
 		/**
 		 * WordPress upload directory.
 		 *
 		 * @var string
 		 */
-		public $upload_dir = '';
+		public string $upload_dir = '';
 
 		/**
 		 * WordPress upload URI.
 		 *
 		 * @var string
 		 */
-		public $upload_url = '';
+		public string $upload_url = '';
 
 		/**
 		 * Subfolder name.
 		 *
 		 * @var string
 		 */
-		public $subfolder = 'custom/';
+		public string $subfolder = 'custom/';
 
 		/**
 		 * Font folder.
 		 *
 		 * @var string
 		 */
-		public $font_folder = '';
+		public string $font_folder = '';
 
 		/**
 		 * Font Filename.
 		 *
 		 * @var string
 		 */
-		public $font_filename = '';
+		public string $font_filename = '';
 
 		/**
 		 * File selected in media upload.
 		 *
 		 * @var string
 		 */
-		public $selected_file = '';
-
-		/**
-		 * Extension instance.
-		 *
-		 * @var null
-		 */
-		public static $instance = null;
+		public string $selected_file = '';
 
 		/**
 		 * Is font conversation service available?
 		 *
 		 * @var bool
 		 */
-		private $can_convert;
+		private bool $can_convert;
 
 		/**
 		 * Class Constructor. Defines the args for the extensions class
 		 *
-		 * @param object $redux ReduxFramework pointer.
+		 * @param ReduxFramework $redux ReduxFramework pointer.
 		 *
 		 * @return      void
 		 * @since       1.0.0

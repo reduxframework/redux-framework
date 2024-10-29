@@ -22,28 +22,28 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @var string
 	 */
-	public static $version = '1.0.0';
+	public static string $version = '1.0.0';
 
 	/**
 	 * The extension URL.
 	 *
 	 * @var string
 	 */
-	protected $extension_url;
+	protected string $extension_url;
 
 	/**
 	 * The extension dir.
 	 *
 	 * @var string
 	 */
-	protected $extension_dir;
+	protected string $extension_dir;
 
 	/**
 	 * The instance of the extension
 	 *
-	 * @var static
+	 * @var null|object
 	 */
-	protected static $instance;
+	protected static ?object $instance;
 
 	/**
 	 * The extension's file
@@ -55,24 +55,24 @@ abstract class Redux_Extension_Abstract {
 	/**
 	 * The redux framework instance that spawned the extension.
 	 *
-	 * @var ReduxFramework
+	 * @var ReduxFramework|null
 	 */
-	public $parent;
+	public ?ReduxFramework $parent;
 
 	/**
 	 * The ReflectionClass of the extension
 	 *
 	 * @var ReflectionClass
 	 */
-	protected $reflection_class;
+	protected ReflectionClass $reflection_class;
 
 	/**
 	 * Redux_Extension_Abstract constructor.
 	 *
-	 * @param object $redux ReduxFramework pointer.
-	 * @param string $file  Extension file.
+	 * @param ReduxFramework $redux ReduxFramework pointer.
+	 * @param string         $file  Extension file.
 	 */
-	public function __construct( $redux, string $file = '' ) {
+	public function __construct( ReduxFramework $redux, string $file = '' ) {
 		$this->parent = $redux;
 
 		// If the file is not given, make sure we have one.
@@ -123,9 +123,9 @@ abstract class Redux_Extension_Abstract {
 	/**
 	 * Returns extension instance.
 	 *
-	 * @return Redux_Extension_Abstract
+	 * @return object
 	 */
-	public static function get_instance(): Redux_Extension_Abstract {
+	public static function get_instance(): object {
 		return static::$instance;
 	}
 
@@ -218,7 +218,7 @@ abstract class Redux_Extension_Abstract {
 					'parent'  => $this->parent,
 					'type'    => 'error',
 					'msg'     => $msg,
-					'id'      => $this->ext_name . '_notice_' . $extension_version,
+					'id'      => $this->extension_name . '_notice_' . $extension_version,
 					'dismiss' => false,
 				);
 

@@ -14,9 +14,9 @@
  *
  * @param string $opt_name the defined opt_name as passed in $args.
  *
- * @return object                ReduxFramework
+ * @return ReduxFramework                ReduxFramework
  */
-function get_redux_instance( string $opt_name ) {
+function get_redux_instance( string $opt_name ): ReduxFramework {
 	_deprecated_function( __FUNCTION__, '4.0', 'Redux::instance($opt_name)' );
 
 	return Redux::instance( $opt_name );

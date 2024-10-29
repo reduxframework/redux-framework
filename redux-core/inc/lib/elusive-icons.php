@@ -15,7 +15,7 @@ add_filter( 'redux/font-icons', 'redux_get_font_icons' );
  *
  * @return array
  */
-function redux_get_font_icons() :array {
+function redux_get_font_icons(): array {
 	return array(
 		'el el-address-book-alt',
 		'el el-address-book',
@@ -317,4 +317,3 @@ function redux_get_font_icons() :array {
 		'el el-zoom-out',
 	);
 }
-

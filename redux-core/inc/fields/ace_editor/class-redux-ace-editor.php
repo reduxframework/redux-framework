@@ -92,7 +92,6 @@ if ( ! class_exists( 'Redux_Ace_Editor', false ) ) {
 
 			if ( ! wp_script_is( 'ace-editor-js' ) ) {
 				wp_enqueue_script(
-				// Redux_CDN::enqueue_script(
 					'ace-editor-js',
 					// phpcs:ignore Generic.Strings.UnnecessaryStringConcat
 					apply_filters( 'redux/' . $this->parent->args['opt_name'] . 'fields/ace/script', '//' . 'cdnjs' . '.cloudflare' . '.com/ajax/libs/ace/1.23.0/ace.min.js' ),

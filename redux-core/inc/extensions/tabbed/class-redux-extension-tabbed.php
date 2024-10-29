@@ -25,14 +25,14 @@ if ( ! class_exists( 'Redux_Extension_Tabbed' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.8';
+		public static string $version = '4.4.8';
 
 		/**
 		 * Extension friendly name.
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Tabbed';
+		public string $extension_name = 'Tabbed';
 
 		/**
 		 * Class Constructor. Defines the args for the extensions class

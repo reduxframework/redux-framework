@@ -5,7 +5,10 @@
  * @package Redux
  * @author  Dovy Paukstys (dovy)
  * @class   Redux_Extension_Search
- * @version 3.4.5
+ * @version 4.0.0
+ *
+ * @noinspection PhpHierarchyChecksInspection
+ * @noinspection PhpDocFinalChecksInspection
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,19 +25,19 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '3.4.5';
+		public static string $version = '4.0.0';
 
 		/**
 		 * Extension friendly name.
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Search';
+		public string $extension_name = 'Search';
 
 		/**
 		 * Redux_Extension_Search constructor.
 		 *
-		 * @param object $redux ReduxFramework object pointer.
+		 * @param ReduxFramework $redux ReduxFramework object pointer.
 		 */
 		public function __construct( $redux ) {
 			if ( false === $redux->args['search'] ) {
