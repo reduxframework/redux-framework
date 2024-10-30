@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 // --> Below this line not needed. This is just for demonstration purposes.
 $function = '<strong>' . esc_html__( 'Function', 'your-textdomain-here' ) . ': </strong>';
-$example  = esc_html__( 'Example output:', 'your-textdomain-here' ) . ' ';
+$example  = '<strong>' . esc_html__( 'Output:', 'your-textdomain-here' ) . '</strong>';
 
 Redux::set_section(
 	$opt_name,
@@ -26,7 +26,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("name")</code>',
 				'desc'       => esc_html__( 'Displays the "Site Title" set in Settings > General. This data is retrieved from the "blogname" record in the wp_options table.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="name"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -35,7 +35,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("description")</code>',
 				'desc'       => esc_html__( 'Displays the "Tagline" set in Settings > General. This data is retrieved from the "blogdescription" record in the wp_options table.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="description"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -45,7 +45,7 @@ Redux::set_section(
 				'desc'       => esc_html__( 'Displays the "WordPress address (URL)" set in Settings > General. This data is retrieved from the "siteurl" record in the wp_options table. Consider using *root_url* instead, especially for multi-site configurations using paths instead of subdomains (it will return the root site not the current sub-site).', 'your-textdomain-here' ),
 				'type'       => 'raw',
 				'markdown'   => true,
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="wpurl"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -54,7 +54,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>site_url()</code>',
 				'desc'       => esc_html__( 'Return the root site, not the current sub-site.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="root_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -63,7 +63,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>home_url()</code>',
 				'desc'       => esc_html__( 'Displays the "Site address (URL)" set in Settings > General. This data is retrieved from the "home" record in the wp_options table.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -72,7 +72,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("admin_email")</code>',
 				'desc'       => esc_html__( 'Displays the "E-mail address" set in Settings > General. This data is retrieved from the "admin_email" record in the wp_options table.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="admin_email"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -81,7 +81,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("charset")</code>',
 				'desc'       => esc_html__( 'Displays the "Encoding for pages and feeds" set in Settings > Reading. This data is retrieved from the "blog_charset" record in the wp_options.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="charset"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -90,7 +90,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("version")</code>',
 				'desc'       => esc_html__( 'Displays the WordPress Version you use. This data is retrieved from the $wp_version variable set in wp-includes/version.php.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="version"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -99,7 +99,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("html_type")</code>',
 				'desc'       => esc_html__( 'Displays the Content-Type of WordPress HTML pages (default: "text/html"). This data is retrieved from the "html_type" record in the wp_options table. Themes and plugins can override the default value using the pre_option_html_type filter.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="html_type"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -108,7 +108,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>is_multisite()</code>',
 				'desc'       => esc_html__( 'Displays true/false check if WordPress is running in multisite mode.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . ( do_shortcode( '<strong>[bloginfo data="is_multisite"]</strong>' ) ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -117,7 +117,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>is_rtl()</code>',
 				'desc'       => esc_html__( 'Displays true/false check if the Text Direction of WordPress HTML pages is left instead of right.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . ( do_shortcode( '<strong>[bloginfo data="text_direction"]</strong>' ) ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -126,7 +126,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("language")</code>',
 				'desc'       => esc_html__( 'Displays the language of WordPress.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="language"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -135,7 +135,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_stylesheet_uri()</code>',
 				'desc'       => esc_html__( 'Displays the primary CSS (usually style.css) file URL of the active theme.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="stylesheet_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -144,7 +144,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_stylesheet_directory()</code>',
 				'desc'       => esc_html__( 'Displays the stylesheet directory of the active theme.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="stylesheet_directory"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -153,7 +153,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_template_directory_uri()</code>',
 				'desc'       => esc_html__( 'Displays the "Site Title" set in Settings > General. This data is retrieved from the "blogname" record in the wp_options table.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="template_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -162,7 +162,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_stylesheet_directory_uri()</code>',
 				'desc'       => esc_html__( 'Child template URI.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="child_template_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -171,7 +171,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_template_directory()</code>',
 				'desc'       => esc_html__( 'Template directory.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="template_directory"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -180,7 +180,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_stylesheet_directory()</code>',
 				'desc'       => esc_html__( 'Child template Directory.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="child_template_directory"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -189,7 +189,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("pingback_url")</code>',
 				'desc'       => esc_html__( 'Displays the Pingback XML-RPC file URL (xmlrpc.php).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="pingback_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -198,7 +198,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("atom_url")</code>',
 				'desc'       => esc_html__( 'Displays the Atom feed URL (/feed/atom).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="atom_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -207,7 +207,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("rdf_url")</code>',
 				'desc'       => esc_html__( 'Displays the RDF/RSS 1.0 feed URL (/feed/rfd).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="rdf_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -216,7 +216,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("rss_url")</code>',
 				'desc'       => esc_html__( 'Displays the RSS 0.92 feed URL (/feed/rss).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="rss_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -225,7 +225,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("rss2_url")</code>',
 				'desc'       => esc_html__( 'Displays the RSS 2.0 feed URL (/feed).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="rss2_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -234,7 +234,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("comments_atom_url")</code>',
 				'desc'       => esc_html__( 'Displays the comments Atom feed URL (/comments/feed).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="comments_atom_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -243,7 +243,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>get_bloginfo("comments_rss2_url")</code>',
 				'desc'       => esc_html__( 'Displays the comments RSS 2.0 feed URL (/comments/feed).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="comments_rss2_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -252,7 +252,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>wp_login_url()</code>',
 				'desc'       => esc_html__( 'Returns the WordPress login URL.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="login_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -261,7 +261,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>wp_logout_url()</code>',
 				'desc'       => esc_html__( 'Returns the WordPress logout URL.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="logout_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -270,7 +270,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>wp_registration_url()</code>',
 				'desc'       => esc_html__( 'Returns the WordPress register URL.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="register_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -279,7 +279,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>wp_lostpassword_url()</code>',
 				'desc'       => esc_html__( 'Returns the WordPress lost password URL.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[bloginfo data="lost_password_url"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -293,7 +293,7 @@ Redux::set_section(
 				// translators: %1$s: PHP Date Format URL.
 				'desc'       => sprintf( esc_html__( 'Returns the current year.  Any date format characters as specified by the %1$s may be used.', 'your-textdomain-here' ), '<a href="https://php.net/manual/en/function.date.php" target="_blank">' . esc_html__( 'PHP Date Format Table', 'your-textdomain-here' ) . '</a>' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[date data="Y"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -306,7 +306,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Name")</code>',
 				'desc'       => esc_html__( 'Theme name as given in theme\'s style.css.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="name"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -315,7 +315,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("ThemeURI")</code>',
 				'desc'       => esc_html__( 'The URL to the theme\'s directory.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="theme_uri"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -324,7 +324,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Description")</code>',
 				'desc'       => esc_html__( 'The description of the theme.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="description"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -333,7 +333,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Author")</code>',
 				'desc'       => esc_html__( 'The theme\'s author.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="author"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -342,7 +342,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("AuthorURI")</code>',
 				'desc'       => esc_html__( 'The website of the theme author.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="author_uri"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -351,7 +351,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Version")</code>',
 				'desc'       => esc_html__( 'The version of the theme.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="version"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -360,7 +360,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Template")</code>',
 				'desc'       => esc_html__( 'The folder name of the current theme.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="template"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -369,7 +369,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Status")</code>',
 				'desc'       => esc_html__( 'If the theme is published.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="status"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -378,7 +378,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("Tags")</code>',
 				'desc'       => esc_html__( 'Tags used to describe the theme.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="tags"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -387,7 +387,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("TextDomain")</code>',
 				'desc'       => esc_html__( 'The text domain used in the theme for translation purposes.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="text_domain"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -396,7 +396,7 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>$theme_info->get("DomainPath")</code>',
 				'desc'       => esc_html__( 'Path to the theme translation files.', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="domain_path"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
 			array(
@@ -405,10 +405,9 @@ Redux::set_section(
 				'subtitle'   => $function . '<code>is_child_theme()</code>',
 				'desc'       => esc_html__( 'True/False return for child theme active check (Blank indicates False).', 'your-textdomain-here' ),
 				'type'       => 'raw',
-				'content'    => $example . do_shortcode( '<strong>[themeinfo data="is_child"]</strong>' ),
+				'content'    => $example,
 				'full_width' => false,
 			),
-
 		),
 	)
 );
