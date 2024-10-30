@@ -151,6 +151,9 @@ $args = array(
 	// Shows the Import/Export panel when not used as a field.
 	'show_import_export'        => true,
 
+	// Shows the Options Object for debugging purposes. Show be set to false before deploying.
+	'show_options_object'       => true,
+
 	// The time transients will expire when the 'database' arg is set.
 	'transient_time'            => 60 * MINUTE_IN_SECONDS,
 
