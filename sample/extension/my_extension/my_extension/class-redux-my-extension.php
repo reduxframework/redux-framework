@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Redux_My_Extension', false ) ) {
 
 	/**
-	 * Main ReduxFramework_options_object class
+	 * Main Redux_My_Extension class
 	 *
 	 * @since       1.0.0
 	 */
@@ -32,14 +32,14 @@ if ( ! class_exists( 'Redux_My_Extension', false ) ) {
 		 * Field Constructor.
 		 * Required - must call the parent constructor, then assign field and value to vars
 		 *
-		 * @param array  $field  Field array.
-		 * @param mixed  $value  Field values.
-		 * @param object $parent ReduxFramework pointer.
+		 * @param array          $field  Field array.
+		 * @param mixed          $value  Field values.
+		 * @param ReduxFramework $redux ReduxFramework pointer.
 		 *
 		 * @throws ReflectionException Construct Exception.
 		 */
-		public function __construct( array $field, $value, $parent ) {
-			parent::__construct( $field, $value, $parent );
+		public function __construct( array $field, $value, $redux ) {
+			parent::__construct( $field, $value, $redux );
 
 			// Set default args for this field to avoid bad indexes. Change this to anything you use.
 			$defaults = array(
