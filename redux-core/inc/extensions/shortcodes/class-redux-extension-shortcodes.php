@@ -30,7 +30,7 @@ if ( ! class_exists( 'Redux_Extension_Shortcodes' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Shortcodes';
+		public string $extension_name = 'Shortcodes';
 
 		/**
 		 * Redux_Extension_Shortcodes constructor.
