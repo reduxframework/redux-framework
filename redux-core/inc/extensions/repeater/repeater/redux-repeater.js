@@ -100,6 +100,8 @@
 				let html;
 				let editorSettings;
 
+				const items = [];
+
 				redux_change( $( this ) );
 
 				if ( $( this ).hasClass( 'button-disabled' ) ) {
@@ -140,12 +142,12 @@
 
 				newSlide.find( '.ui-accordion-content' ).html( html );
 
-				const items = [];
-
 				if ( newSlide.find( '.redux-container-editor' ) ) {
 					const firstEditorId = $( '.redux-repeater-accordion-repeater:first' ).find( '.redux-container-editor' ).attr( 'data-id' );
 
-					editorSettings = window.tinyMCEPreInit.mceInit[firstEditorId];
+					if ( true === window.tinyMCEPreInit ) {
+						editorSettings = window.tinyMCEPreInit.mceInit[firstEditorId];
+					}
 
 					$.each(
 						newSlide.find( '.redux-container-editor' ),
