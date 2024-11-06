@@ -65,6 +65,15 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/enqueue/construct', $this );
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			do_action( 'redux/search/' . $redux->args['opt_name'] . '/construct' );
+
+			//if ( isset( $_GET['page'] ) && sanitize_text_field( wp_unslash( $_GET['page'] === $this->parent->args['page_slug'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			//	add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 0 );
+			//}
+
+			//add_action( "redux/metaboxes/{$this->parent->args[ 'opt_name' ]}/enqueue", array( $this, 'enqueue' ), 10 );
 		}
 
 		/**
@@ -523,6 +532,8 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				$this->localize_data['last_tab'] = $core->args['last_tab'];
 			}
 
+			$this->localize_data['search'] = esc_html__( 'Search for field(s)', 'redux-framework' );
+
 			$this->localize_data['font_weights'] = $this->args['font_weights'];
 
 			$this->localize_data['required'] = $core->required;
@@ -663,6 +674,7 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 				'please_wait'            => esc_html__( 'Please Wait', 'redux-framework' ),
 				'opt_name'               => $core->args['opt_name'],
 				'flyout_submenus'        => $core->args['flyout_submenus'] ?? false,
+				'search'                 => $core->args['search'] ?? true,
 				'slug'                   => $core->args['page_slug'],
 				'hints'                  => $core->args['hints'],
 				'disable_save_warn'      => $core->args['disable_save_warn'],

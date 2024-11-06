@@ -77,11 +77,6 @@
 
     background-color: #fff; /* Old browsers */
     background-repeat: repeat-x; /* Repeat the gradient */
-    background-image: -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%); /* FF3.6+ */
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #f2f2f2)); /* Chrome,Safari4+ */
-    background-image: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%); /* Chrome 10+,Safari 5.1+ */
-    background-image: -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%); /* IE10+ */
-    background-image: -o-linear-gradient(top, #fff 0%, #f2f2f2 100%); /* Opera 11.10+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff", endColorstr="#f2f2f2", GradientType=0); /* IE6-9 */
     background-image: linear-gradient(to bottom, #fff 0%, #f2f2f2 100%); /* W3C */
     border: 1px solid #dedede;
@@ -406,7 +401,7 @@
             bottom: 0;
             -moz-opacity: 0.1;
             opacity: 0.1;
-            filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
+            //filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
             filter: alpha(opacity=10);
             background: #000;
             z-index: 200;
@@ -1159,9 +1154,8 @@ pre {
                     a {
                         width: auto;
                         border-top: 0 !important;
-                        padding: 7px;
                         color: #fff;
-                        padding-left: 15px;
+                        padding: 7px 7px 7px 15px;
                         -webkit-transition: all 0.2s;
                         -moz-transition: all 0.2s;
                         -ms-transition: all 0.2s;
@@ -1258,8 +1252,8 @@ div.redux-star-holder {
 div.redux-star {
     height: 100%;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     background-color: transparent;
     letter-spacing: 1ex;
     border: none;
@@ -1267,11 +1261,9 @@ div.redux-star {
     img {
         width: 19px;
         height: 19px;
-        border-left: 1px solid #f1f1f1;
-        border-right: 1px solid #f1f1f1;
         display: block;
         position: absolute;
-        right: 0px;
+        right: 0;
         border: none;
         text-decoration: none;
     }
@@ -1485,4 +1477,61 @@ div.redux-star {
             border-right: 1px solid #eee;
         }
     }
+}
+
+// Search
+.redux_field_search {
+    position: absolute;
+    width: 250px !important;
+    right: 20px;
+    padding: 4px 7px;
+    top:6px;
+}
+
+.redux-has-sections {
+    .redux_field_search {
+        right: 10px;
+    }
+}
+.redux-main.redux-search {
+    .redux-section-field,
+    .redux-info-field,
+    .redux-notice-field,
+    .redux-container-group,
+    .redux-container-raw,
+    .redux-section-desc,
+    .redux-group-tab h3,
+    .hr,
+    .redux-field-info,
+    tr {
+        display: none;
+    }
+
+    #import_export_default_section_group,
+    #dev_mode_default_section_group {
+        display:none !important;
+    }
+
+    .redux-group-tab {
+        margin-bottom: 0;
+
+        .form-table-section-indented {
+            margin-left: 0 !important;
+            width: 100%;
+
+            .redux-group-tab {
+                .form-table-section tr:first-of-type th:first-of-type {
+                    padding: inherit !important;
+                }
+
+                h3 {
+                    margin-top: inherit !important;
+                }
+            }
+        }
+    }
+}
+
+.redux-metabox .redux-has-sections .redux_field_search {
+    top:8px
 }

@@ -527,7 +527,6 @@ require_once Redux_Core::$dir . '../sample/sections/extensions/google-maps.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/icon-select.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/js-button.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/repeater.php';
-require_once Redux_Core::$dir . '../sample/sections/extensions/search.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/shortcodes.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/social-profiles.php';
 require_once Redux_Core::$dir . '../sample/sections/extensions/tabbed.php';
