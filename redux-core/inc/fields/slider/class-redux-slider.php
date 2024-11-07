@@ -23,35 +23,35 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 		 *
 		 * @var int
 		 */
-		private $display_none = 0;
+		private int $display_none = 0;
 
 		/**
 		 * Label value readout.
 		 *
 		 * @var int
 		 */
-		private $display_label = 1;
+		private int $display_label = 1;
 
 		/**
 		 * Text value readout.
 		 *
 		 * @var int
 		 */
-		private $display_text = 2;
+		private int $display_text = 2;
 
 		/**
 		 * Select box value readout.
 		 *
 		 * @var int
 		 */
-		private $display_select = 3;
+		private int $display_select = 3;
 
 		/**
 		 * Select2 options.
 		 *
 		 * @var string
 		 */
-		private $select2_data = '';
+		private string $select2_data = '';
 
 		/**
 		 * Set field and value defaults.
@@ -203,14 +203,18 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 
 			if ( 2 === $this->field['handles'] ) {
 				if ( ! is_array( $this->value ) ) {
+					$this->value = array();
+
 					$this->value[1] = 0;
 					$this->value[2] = 1;
 				}
+
 				$this->value = $this->clean_default_array( $this->value );
 			} else {
 				if ( is_array( $this->value ) ) {
 					$this->value = 0;
 				}
+
 				$this->value = $this->clean_default( $this->value );
 			}
 
@@ -422,6 +426,75 @@ if ( ! class_exists( 'Redux_Slider', false ) ) {
 	                            value="' . esc_attr( $val_two ) . '"/>';
 				}
 			}
+		}
+
+		/**
+		 * CSS/compiler output.
+		 *
+		 * @param string|null|array $style CSS styles.
+		 */
+		public function output( $style = '' ) {
+			if ( ! empty( $this->value ) ) {
+				if ( ! empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
+					$css                      = $this->parse_css( $this->value, $this->field['output'] );
+					$this->parent->outputCSS .= esc_attr( $css );
+				}
+
+				if ( ! empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
+					$css                        = $this->parse_css( $this->value, $this->field['compiler'] );
+					$this->parent->compilerCSS .= esc_attr( $css );
+				}
+			}
+		}
+
+		/**
+		 * Compile CSS data for output.
+		 *
+		 * @param mixed $value Value.
+		 * @param mixed $output .
+		 *
+		 * @return string
+		 */
+		private function parse_css( $value, $output ): string {
+			// No notices.
+			$css = '';
+
+			$unit = $this->field['output_unit'] ?? 'px';
+
+			// Must be an array.
+			if ( is_array( $output ) ) {
+				if ( is_array( $value ) ) {
+					foreach ( $output as $idx => $arr ) {
+
+						if ( is_array( $arr ) ) {
+							foreach ( $arr as $selector => $mode ) {
+								if ( '' !== $mode && '' !== $selector ) {
+									$css .= $selector . '{' . $mode . ':' . $value[ $idx ] . $unit . ';}';
+								}
+							}
+						}
+					}
+				} else {
+					foreach ( $output as $selector => $mode ) {
+						if ( '' !== $mode && '' !== $selector ) {
+							$css .= $selector . '{' . $mode . ':' . $value . $unit . ';}';
+						}
+					}
+				}
+			}
+
+			return $css;
+		}
+
+		/**
+		 * Generate CSS style (unused, but needed).
+		 *
+		 * @param string $data Field data.
+		 *
+		 * @return string
+		 */
+		public function css_style( $data ): string {
+			return '';
 		}
 
 		/**
