@@ -251,12 +251,6 @@ if ( ! class_exists( 'Redux', false ) ) {
 						$ext_class     = Redux_Functions::class_exists_ex( $field_classes );
 						if ( false !== $ext_class ) {
 							$redux_framework->extensions[ $name ] = new $ext_class( $redux_framework );
-							// Backwards compatibility for extensions.
-							if ( ! is_subclass_of( $redux_framework->extensions[ $name ], 'Redux_Extension_Abstract' ) ) {
-								$new_class_name                       = $ext_class . '_extended';
-								self::$extension_compatibility        = true;
-								$redux_framework->extensions[ $name ] = Redux_Functions_Ex::extension_compatibility( $redux_framework, $extension['path'], $ext_class, $new_class_name, $name );
-							}
 						} elseif ( is_admin() && true === $redux_framework->args['dev_mode'] ) {
 							echo '<div id="message" class="error"><p>No class named <strong>' . esc_html( $extension['class'] ) . '</strong> exists. Please verify your extension path.</p></div>';
 						}
