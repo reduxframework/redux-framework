@@ -19,58 +19,58 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 		/**
 		 * ReduxFramework object.
 		 *
-		 * @var object
+		 * @var ReduxFramework
 		 */
-		public static $parent;
+		public static ReduxFramework $parent;
 
 		/**
 		 * Field ID
 		 *
 		 * @var string
 		 */
-		public static $field_id;
+		public static string $field_id;
 
 		/**
 		 * Field class.
 		 *
 		 * @var string
 		 */
-		public static $field_class;
+		public static string $field_class;
 
 		/**
 		 * Field array.
 		 *
-		 * @var string
+		 * @var array
 		 */
-		public static $field;
+		public static array $field;
 
 		/**
 		 * WP Upload directory.
 		 *
 		 * @var string
 		 */
-		public static $upload_dir;
+		public static string $upload_dir;
 
 		/**
 		 * WP Upload URI
 		 *
 		 * @var string
 		 */
-		public static $upload_url;
+		public static string $upload_url;
 
 		/**
 		 * Select fields.
 		 *
 		 * @var array
 		 */
-		public static $select;
+		public static array $select;
 
 		/**
 		 * Class init.
 		 *
-		 * @param object $redux ReduxFramework object.
+		 * @param ReduxFramework $redux ReduxFramework object.
 		 */
-		public static function init( $redux ) {
+		public static function init( ReduxFramework $redux ) {
 			self::$parent = $redux;
 
 			if ( empty( self::$field_id ) ) {
@@ -121,13 +121,13 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 
 			if ( is_dir( $upload_dir ) ) {
 				if ( file_exists( $cur_scheme_file ) ) {
-					$data = self::$parent->filesystem->execute( 'get_contents', $cur_scheme_file );
+					$data = Redux_Core::$filesystem->execute( 'get_contents', $cur_scheme_file );
 					if ( ! empty( $data ) ) {
 						$data = json_decode( $data, true );
 
 						update_option( self::get_scheme_key(), $data );
 
-						self::$parent->filesystem->execute( 'delete', $cur_scheme_file );
+						Redux_Core::$filesystem->execute( 'delete', $cur_scheme_file );
 					}
 				}
 			}
@@ -204,25 +204,28 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 		/**
 		 * Get color scheme field.
 		 *
-		 * @param object|array $redux ReduxFramework pointer.
+		 * @param ReduxFramework|null $redux pointer.
 		 *
 		 * @return mixed
 		 */
-		public static function get_field( $redux = array() ) {
-			if ( ! empty( $redux ) ) {
+		public static function get_field( ReduxFramework $redux = null ) {
+			if ( ! is_null( $redux ) ) {
 				self::$parent = $redux;
 			}
 
-			if ( isset( $parent->field_sections['color_scheme'] ) ) {
-				return reset( $parent->field_sections['color_scheme'] );
-			}
+			//if ( isset( $redux->field_sections['color_scheme'] ) ) {
+			//if ( isset( Redux_Core::$field_sections['color_scheme'] ) ) {
+				//return reset( $redux->field_sections['color_scheme'] );
+				//var_dump(Redux_Core::$field_sections['color_scheme']);
+				//die;
+				//return reset( Redux_Core::$field_sections['color_scheme'] );
+			//}
 
 			$arr = self::$parent;
 
 			foreach ( $arr as $part => $bla ) {
 				if ( 'sections' === $part ) {
 					foreach ( $bla as $field ) {
-
 						foreach ( $field as $arg => $val ) {
 							if ( 'fields' === $arg ) {
 								foreach ( $val as $v ) {

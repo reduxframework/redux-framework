@@ -89,7 +89,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 			$upload_dir = Redux_Social_Profiles_Functions::$upload_dir;
 
 			if ( ! is_dir( $upload_dir ) ) {
-				$redux->filesystem->execute( 'mkdir', $upload_dir );
+				Redux_Core::$filesystem->execute( 'mkdir', $upload_dir );
 			}
 
 			if ( ! class_exists( 'Redux_Social_Profiles_Widget' ) ) {
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		public function reset_defaults_section( array $defaults = array() ): array {
 			if ( isset( $_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] ) ) {
 				$cur_tab = sanitize_title( wp_unslash( $_COOKIE[ 'redux_current_tab_' . $this->parent->args['opt_name'] ] ) );
-				$tab_num = strval( $this->parent->field_sections['social_profiles'][ $this->field_id ] );
+				$tab_num = strval( Redux_Core::$field_sections['social_profiles'][ $this->field_id ] );
 
 				if ( $cur_tab === $tab_num ) {
 					if ( '' !== $this->field_id && isset( $this->parent->options_defaults[ $this->field_id ] ) ) {

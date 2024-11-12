@@ -22,35 +22,35 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 *
 		 * @var array
 		 */
-		public $no_panel = array();
+		public array $no_panel = array();
 
 		/**
 		 * Array to hold single panel sections.
 		 *
 		 * @var array
 		 */
-		private $no_panel_section = array();
+		private array $no_panel_section = array();
 
 		/**
 		 * Array to hold hidden fields.
 		 *
 		 * @var array
 		 */
-		private $hidden_perm_fields = array();
+		private array $hidden_perm_fields = array();
 
 		/**
 		 * Array to hold hidden sections.
 		 *
 		 * @var array
 		 */
-		public $hidden_perm_sections = array();
+		public array $hidden_perm_sections = array();
 
 		/**
 		 * Array to hold default options.
 		 *
 		 * @var array
 		 */
-		private $options_defaults = array();
+		private array $options_defaults = array();
 
 		/**
 		 * Redux_Options constructor.
@@ -211,12 +211,12 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		/**
 		 * Set a global variable by the global_variable argument
 		 *
-		 * @param object $core ReduxFramework core object.
+		 * @param null|ReduxFramework $core ReduxFramework core object.
 		 *
 		 * @return  void          (global was set)
 		 * @since   3.1.5
 		 */
-		private function set_global_variable( $core ): void {
+		private function set_global_variable( ?ReduxFramework $core ): void {
 			if ( ! empty( $core->args['global_variable'] ) ) {
 				$options_global = $core->args['global_variable'];
 
@@ -380,7 +380,8 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 						$core->field_types[ $field['type'] ] = $core->field_types[ $field['type'] ] ?? array();
 
-						$core->field_sections[ $field['type'] ][ $field['id'] ] = $k;
+						//$core->field_sections[ $field['type'] ][ $field['id'] ] = $k;
+						Redux_Core::$field_sections[ $field['type'] ][ $field['id'] ] = $k;
 
 						$display = true;
 
@@ -549,11 +550,11 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 							continue;
 						}
 
-						if ( ! empty( $core->folds[ $field['id'] ]['parent'] ) ) { // This has some fold items, hide it by default.
+						if ( ! empty( Redux_Core::$folds[ $field['id'] ]['parent'] ) ) { // This has some fold items, hide it by default.
 							$field['class'] .= ' fold';
 						}
 
-						if ( ! empty( $core->folds[ $field['id'] ]['children'] ) ) { // Sets the values you shoe fold children on.
+						if ( ! empty( Redux_Core::$folds[ $field['id'] ]['children'] ) ) { // Sets the values you shoe fold children on.
 							$field['class'] .= ' fold-parent';
 						}
 
@@ -583,7 +584,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						do_action( "redux/options/{$core->args['opt_name']}/field/{$field['type']}/register", $field );
 
 						$core->required_class->check_dependencies( $field );
-						$core->field_head[ $field['id'] ] = $th;
+						Redux_Core::$field_head[ $field['id'] ] = $th;
 
 						if ( ! $display || isset( $this->no_panel_section[ $k ] ) ) {
 							$this->no_panel[] = $field['id'];
@@ -629,8 +630,9 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 			if ( isset( $core->transients['run_compiler'] ) && $core->transients['run_compiler'] ) {
 
-				$core->no_output = true;
-				$temp            = $core->args['output_variables_prefix'];
+				Redux_Core::$no_output = true;
+				$temp                  = $core->args['output_variables_prefix'];
+
 				// Allow the override of variable's prefix for use by SCSS or LESS.
 				if ( isset( $core->args['compiler_output_variables_prefix'] ) ) {
 					$core->args['output_variables_prefix'] = $core->args['compiler_output_variables_prefix'];
@@ -707,11 +709,11 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		public function validate_options( array $plugin_options ) {
 			$core = $this->core();
 
-			if ( isset( $core->validation_ran ) ) {
+			if ( true === Redux_Core::$validation_ran ) {
 				return $plugin_options;
 			}
 
-			$core->validation_ran = 1;
+			Redux_Core::$validation_ran = true;
 
 			// Save the values not in the panel.
 			if ( isset( $plugin_options['redux-no_panel'] ) ) {
@@ -741,10 +743,6 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 			$imported_options = array();
 
-			if ( isset( $plugin_options['import_link'] ) && '' !== $plugin_options['import_link'] && ! ! wp_http_validate_url( $plugin_options['import_link'] ) ) {
-				$import           = wp_remote_retrieve_body( wp_remote_get( $plugin_options['import_link'] ) );
-				$imported_options = json_decode( $import, true );
-			}
 			if ( isset( $plugin_options['import_code'] ) && '' !== $plugin_options['import_code'] ) {
 				$imported_options = json_decode( $plugin_options['import_code'], true );
 			}

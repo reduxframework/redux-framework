@@ -22,73 +22,79 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Instance of this class.
 		 *
 		 * @since    1.0.0
-		 * @var      object
+		 * @var      null|Redux_Filesystem
 		 */
-		protected static $instance = null;
+		protected static ?Redux_Filesystem $instance = null;
 
 		/**
 		 * WP Filesystem object.
 		 *
-		 * @var object
+		 * @var null|WP_Filesystem_Direct
 		 */
-		protected static $direct = null;
+		protected static ?WP_Filesystem_Direct $direct = null;
 
 		/**
 		 * File system credentials.
 		 *
 		 * @var array
 		 */
-		private $creds = array();
+		private array $creds = array();
 
 		/**
 		 * ReduxFramework object pointer.
 		 *
-		 * @var object
+		 * @var null|ReduxFramework
 		 */
-		public $parent = null;
+		public ?ReduxFramework $parent = null;
 
 		/**
 		 * Instance of WP_Filesystem
 		 *
 		 * @var WP_Filesystem_Base|null
 		 */
-		private $wp_filesystem;
+		private ?WP_Filesystem_Base $wp_filesystem;
 
 		/**
 		 * If DBI_Filesystem should attempt to use the WP_Filesystem class.
 		 *
 		 * @var bool
 		 */
-		private $use_filesystem = false;
+		private bool $use_filesystem = false;
 
 		/**
 		 * Default chmod octal value for directories.
 		 *
 		 * @var int
 		 */
-		private $chmod_dir;
+		private int $chmod_dir;
 
 		/**
 		 * Default chmod octal value for files.
 		 *
 		 * @var int
 		 */
-		private $chmod_file;
+		private int $chmod_file;
 
 		/**
 		 * Default cache folder.
 		 *
 		 * @var string
 		 */
-		public $cache_folder;
+		public string $cache_folder;
 
 		/**
 		 * Kill switch.
 		 *
 		 * @var bool
 		 */
-		public $killswitch = false;
+		public bool $killswitch = false;
 
+		/**
+		 * FTP Form HTML.
+		 *
+		 * @var string
+		 */
+		public string $ftp_form;
 
 		/**
 		 * Pass `true` when instantiating to skip using WP_Filesystem.
@@ -121,12 +127,12 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * Return an instance of this class.
 		 *
-		 * @param object $me ReduxFramework pointer.
+		 * @param ReduxFramework|null $me ReduxFramework pointer.
 		 *
-		 * @since     1.0.0
 		 * @return    object    A single instance of this class.
+		 * @since     1.0.0
 		 */
-		public static function get_instance( $me = null ) {
+		public static function get_instance( ReduxFramework $me = null ): ?object {
 
 			// If the single instance hasn't been set, set it now.
 			if ( null === self::$instance ) {
@@ -144,7 +150,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * Build an FTP form.
 		 */
 		public function ftp_form() {
-			if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
+			if ( isset( $this->ftp_form ) && ! empty( $this->ftp_form ) ) {
 				echo '<div class="wrap">';
 				echo '<div class="error">';
 				echo '<p>';
@@ -168,10 +174,12 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 			require_once ABSPATH . '/wp-admin/includes/template.php';
 			require_once ABSPATH . '/wp-includes/pluggable.php';
 			require_once ABSPATH . '/wp-admin/includes/file.php';
+
 			ob_start();
 			$credentials = request_filesystem_credentials( '', '', false, false );
 			$ob_contents = ob_get_contents();
 			ob_end_clean();
+
 			if ( @wp_filesystem( $credentials ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors
 				global $wp_filesystem;
 				$this->wp_filesystem  = $wp_filesystem;
@@ -204,8 +212,8 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 
 			/* first attempt to get credentials */
 			if ( false === $this->creds ) {
-				$this->creds            = array();
-				$this->parent->ftp_form = ob_get_contents();
+				$this->creds    = array();
+				$this->ftp_form = ob_get_contents();
 				ob_end_clean();
 
 				/**
@@ -221,7 +229,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$this->creds = array();
 				/* incorrect connection data - ask for credentials again, now with an error message */
 				request_filesystem_credentials( $form_url, '', true, $context );
-				$this->parent->ftp_form = ob_get_contents();
+				$this->ftp_form = ob_get_contents();
 				ob_end_clean();
 
 				return false;
@@ -369,7 +377,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$res = $this->scandir( $file, $include_hidden, $recursive );
 			} elseif ( 'put_contents' === $action && false === $this->killswitch ) {
 				// Write a string to a file.
-				if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
+				if ( isset( $this->ftp_form ) && ! empty( $this->ftp_form ) ) {
 					self::load_direct();
 					$res = self::$direct->put_contents( $file, $content, $chmod );
 				} else {
@@ -391,7 +399,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				$res = $this->chmod( $file, $chmod );
 			} elseif ( 'get_contents' === $action ) {
 				// Reads entire file into a string.
-				if ( isset( $this->parent->ftp_form ) && ! empty( $this->parent->ftp_form ) ) {
+				if ( isset( $this->ftp_form ) && ! empty( $this->ftp_form ) ) {
 					self::load_direct();
 					$res = self::$direct->get_contents( $file );
 				} else {

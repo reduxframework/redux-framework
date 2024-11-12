@@ -88,7 +88,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 			if ( file_exists( $file ) ) {
 
 				// Get the contents of the file and stuff it in a variable.
-				$data = self::$parent->filesystem->execute( 'get_contents', $file );
+				$data = Redux_Core::$filesystem->execute( 'get_contents', $file );
 
 				// Error or null, set the result to false.
 				if ( false === $data || null === $data ) {
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 
 			// Write to its file on the server, return the return value
 			// True on success, false on error.
-			return self::$parent->filesystem->execute( 'put_contents', $file, array( 'content' => $data ) );
+			return Redux_Core::$filesystem->execute( 'put_contents', $file, array( 'content' => $data ) );
 		}
 
 		/**
@@ -182,8 +182,8 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 					self::$parent = $redux;
 				}
 
-				if ( isset( self::$parent->field_sections['social_profiles'] ) ) {
-					return reset( self::$parent->field_sections['social_profiles'] );
+				if ( isset( Redux_Core::$field_sections['social_profiles'] ) ) {
+					return reset( Redux_Core::$field_sections['social_profiles'] );
 				}
 
 				$arr = self::$parent;

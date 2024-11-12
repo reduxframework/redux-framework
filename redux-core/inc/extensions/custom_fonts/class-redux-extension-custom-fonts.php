@@ -116,11 +116,11 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			$this->upload_url = Redux_Core::$upload_url . 'custom-fonts/';
 
 			if ( ! is_dir( $this->upload_dir ) ) {
-				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir );
+				Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir );
 			}
 
 			if ( ! is_dir( $this->upload_dir . '/custom' ) ) {
-				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . '/custom' );
+				Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir . '/custom' );
 			}
 
 			$this->get_fonts();
@@ -265,7 +265,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					'recursive'      => true,
 				);
 
-				$fonts = $this->parent->filesystem->execute( 'dirlist', $this->upload_dir, $params );
+				$fonts = Redux_Core::$filesystem->execute( 'dirlist', $this->upload_dir, $params );
 
 				if ( ! empty( $fonts ) ) {
 					foreach ( $fonts as $section ) {
@@ -336,7 +336,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 				try {
 					if ( isset( $_POST['section'] ) || isset( $_POST['name'] ) ) {
-						$ret = $this->parent->filesystem->execute( 'rmdir', $this->upload_dir . sanitize_file_name( wp_unslash( $_POST['section'] ) ) . '/' . sanitize_file_name( wp_unslash( $_POST['name'] ) ) . '/', array( 'recursive' => true ) );
+						$ret = Redux_Core::$filesystem->execute( 'rmdir', $this->upload_dir . sanitize_file_name( wp_unslash( $_POST['section'] ) ) . '/' . sanitize_file_name( wp_unslash( $_POST['name'] ) ) . '/', array( 'recursive' => true ) );
 
 						if ( true === $ret ) {
 							$result = array( 'type' => 'success' );
@@ -408,7 +408,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'recursive'      => true,
 			);
 
-			$files = $this->parent->filesystem->execute( 'dirlist', $path, $params );
+			$files = Redux_Core::$filesystem->execute( 'dirlist', $path, $params );
 
 			foreach ( $files as $file ) {
 				if ( 'd' === $file['type'] ) {
@@ -454,11 +454,11 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			$subtype = trim( max( $subtype ) );
 
 			if ( ! is_dir( $this->upload_dir ) ) {
-				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir );
+				Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir );
 			}
 
 			if ( ! is_dir( $this->upload_dir . $this->subfolder ) ) {
-				$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder );
+				Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder );
 			}
 
 			$temp                = $this->upload_dir . 'temp';
@@ -502,7 +502,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			$ret = array();
 
 			if ( ! is_dir( $temp ) ) {
-				$this->parent->filesystem->execute( 'mkdir', $temp );
+				Redux_Core::$filesystem->execute( 'mkdir', $temp );
 			}
 
 			if ( 'zip' === $subtype ) {
@@ -529,7 +529,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					}
 
 					if ( ! is_dir( $this->upload_dir . $this->subfolder . $this->font_folder . '/' ) ) {
-						$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/' );
+						Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/' );
 					}
 
 					foreach ( $output as $key => $value ) {
@@ -539,7 +539,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 							'chmod'       => 755,
 						);
 
-						$this->parent->filesystem->execute( 'copy', $value, $param_array );
+						Redux_Core::$filesystem->execute( 'copy', $value, $param_array );
 					}
 
 					if ( true === $this->can_convert && 'true' === $conversion ) {
@@ -547,7 +547,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					}
 				}
 
-				$this->parent->filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
+				Redux_Core::$filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
 
 				$this->generate_css();
 
@@ -562,7 +562,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				}
 
 				if ( ! is_dir( $this->upload_dir . $this->subfolder . $this->font_folder . '/' ) ) {
-					$this->parent->filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/' );
+					Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/' );
 				}
 
 				$output = array( $subtype => $this->selected_file );
@@ -593,7 +593,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 						die;
 				}
 
-				$this->parent->filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
+				Redux_Core::$filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
 
 				$this->generate_css();
 
@@ -634,7 +634,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'chmod'       => 755,
 			);
 
-			return $this->parent->filesystem->execute( 'copy', $this->selected_file, $param_array );
+			return Redux_Core::$filesystem->execute( 'copy', $this->selected_file, $param_array );
 		}
 
 		/**
@@ -670,8 +670,8 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 						)
 					);
 
-					$this->parent->filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
-					$this->parent->filesystem->execute( 'rmdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/', array( 'recursive' => true ) );
+					Redux_Core::$filesystem->execute( 'rmdir', $temp, array( 'recursive' => true ) );
+					Redux_Core::$filesystem->execute( 'rmdir', $this->upload_dir . $this->subfolder . $this->font_folder . '/', array( 'recursive' => true ) );
 
 					die();
 				}
@@ -696,7 +696,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					$payload .= "\r\n";
 					$payload .= 'Content-Disposition: form-data; name="convert"; filename="' . basename( $output[ $main ] ) . '"' . "\r\n";
 					$payload .= "\r\n";
-					$payload .= $this->parent->filesystem->execute( 'get_contents', $output[ $main ] );
+					$payload .= Redux_Core::$filesystem->execute( 'get_contents', $output[ $main ] );
 					$payload .= "\r\n";
 				}
 
@@ -734,7 +734,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 				$zip_file = $temp . DIRECTORY_SEPARATOR . $fontname . '.zip';
 
-				$this->parent->filesystem->execute( 'put_contents', $zip_file, $param_array );
+				Redux_Core::$filesystem->execute( 'put_contents', $zip_file, $param_array );
 
 				if ( 0 === filesize( $zip_file ) ) {
 					return false;
@@ -748,7 +748,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 						'recursive'      => false,
 					);
 
-					$files = $this->parent->filesystem->execute( 'dirlist', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR, $params );
+					$files = Redux_Core::$filesystem->execute( 'dirlist', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR, $params );
 
 					foreach ( $files as $file ) {
 						$param_array = array(
@@ -757,7 +757,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 							'chmod'       => 755,
 						);
 
-						$this->parent->filesystem->execute( 'move', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR . ( $file['name'] ), $param_array );
+						Redux_Core::$filesystem->execute( 'move', $temp . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR . ( $file['name'] ), $param_array );
 					}
 				} else {
 					$path_parts = pathinfo( $output[ $main ] );
@@ -768,7 +768,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 						'chmod'       => 755,
 					);
 
-					$this->parent->filesystem->execute( 'move', $output[ $main ], $param_array );
+					Redux_Core::$filesystem->execute( 'move', $output[ $main ], $param_array );
 
 					if ( in_array( $font_ext, $unsupported, true ) ) {
 						return array(
@@ -836,7 +836,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'recursive'      => true,
 			);
 
-			$fonts = $this->parent->filesystem->execute( 'dirlist', $this->upload_dir . 'custom/', $params );
+			$fonts = Redux_Core::$filesystem->execute( 'dirlist', $this->upload_dir . 'custom' . DIRECTORY_SEPARATOR, $params );
 
 			if ( empty( $fonts ) || ! is_array( $fonts ) ) {
 				return;
@@ -848,7 +848,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				}
 
 				if ( file_exists( $this->upload_dir . 'fonts.css' ) ) {
-					$this->parent->filesystem->execute( 'delete', $this->upload_dir . 'fonts.css' );
+					Redux_Core::$filesystem->execute( 'delete', $this->upload_dir . 'fonts.css' );
 				}
 
 				return;
@@ -858,7 +858,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 
 			foreach ( $fonts as $font ) {
 				if ( 'd' === $font['type'] ) {
-					$css .= $this->generate_font_css( $font['name'], $this->upload_dir . 'custom/' );
+					$css .= $this->generate_font_css( $font['name'], $this->upload_dir . 'custom' . DIRECTORY_SEPARATOR );
 				}
 			}
 
@@ -868,7 +868,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					'chmod'   => FS_CHMOD_FILE,
 				);
 
-				$this->parent->filesystem->execute( 'put_contents', $this->upload_dir . 'fonts.css', $param_array );
+				Redux_Core::$filesystem->execute( 'put_contents', $this->upload_dir . 'fonts.css', $param_array );
 			}
 		}
 
@@ -888,7 +888,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'recursive'      => true,
 			);
 
-			$files = $this->parent->filesystem->execute( 'dirlist', $path, $params );
+			$files = Redux_Core::$filesystem->execute( 'dirlist', $path, $params );
 
 			if ( empty( $files ) ) {
 				return null;

@@ -286,7 +286,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				}
 
 				// Is selected font a Google font.
-				if ( isset( $this->parent->fonts['google'][ $font_family[0] ] ) ) {
+				if ( isset( Redux_Core::$fonts['google'][ $font_family[0] ] ) ) {
 					$is_google_font = '1';
 				}
 
@@ -951,7 +951,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						// translators: Aria title, link title.
 						'error'    => sprintf( esc_html__( 'Update Failed|msg. %1$s', 'redux-framework' ), sprintf( '<a href="#" class="update-google-fonts" data-action="manual" aria-label="%s">%s</a>', esc_html__( 'Retry?', 'redux-framework' ), esc_html__( 'Retry?', 'redux-framework' ) ) ),
 						// translators: Javascript reload command, link title.
-						'success'  => sprintf( esc_html__( 'Updated! %1$s to start using your updated fonts.', 'redux-framework' ), sprintf( '<a href="%1$s">%2$s</a>', 'javascript:location.reload();', esc_html__( 'Reload the page', 'redux-framework' ) ) ),
+						'success'  => sprintf( esc_html__( 'Updated! %1$s to start using your updated fonts.', 'redux-framework' ), sprintf( '<a href="	%1$s">%2$s</a>', 'javascript:location.reload();', esc_html__( 'Reload the page', 'redux-framework' ) ) ),
 					),
 				)
 			);
@@ -1284,16 +1284,16 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						$font['font-family'] = str_replace( ' ', '+', $font['font-family'] );
 
 						// Push data to parent typography variable.
-						if ( empty( $this->parent->typography[ $font['font-family'] ] ) ) {
-							$this->parent->typography[ $font['font-family'] ] = array();
+						if ( empty( Redux_Core::$typography[ $font['font-family'] ] ) ) {
+							Redux_Core::$typography[ $font['font-family'] ] = array();
 						}
 
 						if ( isset( $this->field['all-styles'] ) || isset( $this->field['all-subsets'] ) ) {
 							if ( empty( $font['font-options'] ) ) {
 								$this->get_google_array();
 
-								if ( isset( $this->parent->google_array ) && ! empty( $this->parent->google_array ) && isset( $this->parent->google_array[ $family ] ) ) {
-									$font['font-options'] = $this->parent->google_array[ $family ];
+								if ( isset( Redux_Core::$google_array ) && ! empty( Redux_Core::$google_array ) && isset( Redux_Core::$google_array[ $family ] ) ) {
+									$font['font-options'] = Redux_Core::$google_array[ $family ];
 								}
 							} else {
 								$font['font-options'] = json_decode( $font['font-options'], true );
@@ -1302,10 +1302,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 						if ( isset( $font['font-options'] ) && ! empty( $font['font-options'] ) && isset( $this->field['all-styles'] ) && filter_var( $this->field['all-styles'], FILTER_VALIDATE_BOOLEAN ) ) {
 							if ( ! empty( $font['font-options']['variants'] ) ) {
-								if ( ! isset( $this->parent->typography[ $font['font-family'] ]['all-styles'] ) || empty( $this->parent->typography[ $font['font-family'] ]['all-styles'] ) ) {
-									$this->parent->typography[ $font['font-family'] ]['all-styles'] = array();
+								if ( ! isset( Redux_Core::$typography[ $font['font-family'] ]['all-styles'] ) || empty( Redux_Core::$typography[ $font['font-family'] ]['all-styles'] ) ) {
+									Redux_Core::$typography[ $font['font-family'] ]['all-styles'] = array();
 									foreach ( $font['font-options']['variants'] as $variant ) {
-										$this->parent->typography[ $font['font-family'] ]['all-styles'][] = $variant['id'];
+										Redux_Core::$typography[ $font['font-family'] ]['all-styles'][] = $variant['id'];
 									}
 								}
 							}
@@ -1313,10 +1313,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 						if ( isset( $font['font-options'] ) && ! empty( $font['font-options'] ) && isset( $this->field['all-subsets'] ) && $this->field['all-styles'] ) {
 							if ( ! empty( $font['font-options']['subsets'] ) ) {
-								if ( ! isset( $this->parent->typography[ $font['font-family'] ]['all-subsets'] ) || empty( $this->parent->typography[ $font['font-family'] ]['all-subsets'] ) ) {
-									$this->parent->typography[ $font['font-family'] ]['all-subsets'] = array();
+								if ( ! isset( Redux_Core::$typography[ $font['font-family'] ]['all-subsets'] ) || empty( Redux_Core::$typography[ $font['font-family'] ]['all-subsets'] ) ) {
+									Redux_Core::$typography[ $font['font-family'] ]['all-subsets'] = array();
 									foreach ( $font['font-options']['subsets'] as $variant ) {
-										$this->parent->typography[ $font['font-family'] ]['all-subsets'][] = $variant['id'];
+										Redux_Core::$typography[ $font['font-family'] ]['all-subsets'][] = $variant['id'];
 									}
 								}
 							}
@@ -1325,7 +1325,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 						$style = '';
 
 						if ( ! empty( $font['font-weight'] ) ) {
-							if ( empty( $this->parent->typography[ $font['font-family'] ]['font-weight'] ) || ! in_array( $font['font-weight'], $this->parent->typography[ $font['font-family'] ]['font-weight'], true ) ) {
+							if ( empty( Redux_Core::$typography[ $font['font-family'] ]['font-weight'] ) || ! in_array( $font['font-weight'], Redux_Core::$typography[ $font['font-family'] ]['font-weight'], true ) ) {
 								$style = $font['font-weight'];
 							}
 
@@ -1333,14 +1333,14 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 								$style .= $font['font-style'];
 							}
 
-							if ( empty( $this->parent->typography[ $font['font-family'] ]['font-style'] ) || ! in_array( $style, $this->parent->typography[ $font['font-family'] ]['font-style'], true ) ) {
-								$this->parent->typography[ $font['font-family'] ]['font-style'][] = $style;
+							if ( empty( Redux_Core::$typography[ $font['font-family'] ]['font-style'] ) || ! in_array( $style, Redux_Core::$typography[ $font['font-family'] ]['font-style'], true ) ) {
+								Redux_Core::$typography[ $font['font-family'] ]['font-style'][] = $style;
 							}
 						}
 
 						if ( ! empty( $font['subsets'] ) ) {
-							if ( empty( $this->parent->typography[ $font['font-family'] ]['subset'] ) || ! in_array( $font['subsets'], $this->parent->typography[ $font['font-family'] ]['subset'], true ) ) {
-								$this->parent->typography[ $font['font-family'] ]['subset'][] = $font['subsets'];
+							if ( empty( Redux_Core::$typography[ $font['font-family'] ]['subset'] ) || ! in_array( $font['subsets'], Redux_Core::$typography[ $font['font-family'] ]['subset'], true ) ) {
+								Redux_Core::$typography[ $font['font-family'] ]['subset'][] = $font['subsets'];
 							}
 						}
 					}
@@ -1353,17 +1353,17 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 */
 		private function localize_std_fonts() {
 			if ( false === $this->user_fonts ) {
-				if ( isset( $this->parent->fonts['std'] ) && ! empty( $this->parent->fonts['std'] ) ) {
+				if ( isset( Redux_Core::$fonts['std'] ) && ! empty( Redux_Core::$fonts['std'] ) ) {
 					return;
 				}
 
-				$this->parent->font_groups['std'] = array(
+				Redux_Core::$font_groups['std'] = array(
 					'text'     => esc_html__( 'Standard Fonts', 'redux-framework' ),
 					'children' => array(),
 				);
 
 				foreach ( $this->field['fonts'] as $font => $extra ) {
-					$this->parent->font_groups['std']['children'][] = array(
+					Redux_Core::$font_groups['std']['children'][] = array(
 						'id'          => $font,
 						'text'        => $font,
 						'data-google' => 'false',
@@ -1377,13 +1377,13 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 				if ( ! empty( $this->field['custom_fonts'] ) ) {
 					foreach ( $this->field['custom_fonts'] as $group => $fonts ) {
-						$this->parent->font_groups['customfonts'] = array(
+						Redux_Core::$font_groups['customfonts'] = array(
 							'text'     => $group,
 							'children' => array(),
 						);
 
 						foreach ( $fonts as $family => $v ) {
-							$this->parent->font_groups['customfonts']['children'][] = array(
+							Redux_Core::$font_groups['customfonts']['children'][] = array(
 								'id'          => $family,
 								'text'        => $family,
 								'data-google' => 'false',
@@ -1399,13 +1399,13 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			if ( ! empty( $typekit_fonts ) ) {
 				foreach ( $typekit_fonts as $group => $fonts ) {
-					$this->parent->font_groups['typekitfonts'] = array(
+					Redux_Core::$font_groups['typekitfonts'] = array(
 						'text'     => $group,
 						'children' => array(),
 					);
 
 					foreach ( $fonts as $family => $v ) {
-						$this->parent->font_groups['typekitfonts']['children'][] = array(
+						Redux_Core::$font_groups['typekitfonts']['children'][] = array(
 							'text'        => $family,
 							'id'          => $family,
 							'data-google' => 'false',
@@ -1419,7 +1419,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 *   Construct the Google array from the stored JSON/HTML
 		 */
 		private function get_google_array() {
-			if ( ( isset( $this->parent->fonts['google'] ) && ! empty( $this->parent->fonts['google'] ) ) || isset( $this->parent->fonts['google'] ) && false === $this->parent->fonts['google'] ) {
+			if ( ( ( isset( Redux_Core::$fonts['google'] ) && ! empty( Redux_Core::$fonts['google'] ) ) ) || ( isset( Redux_Core::$fonts['google'] ) && false === Redux_Core::$fonts['google'] ) ) {
 				return;
 			}
 
@@ -1430,24 +1430,24 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			}
 
 			if ( true === $fonts ) {
-				$this->parent->fonts['google'] = false;
+				Redux_Core::$fonts['google'] = false;
 
 				return;
 			}
 
 			if ( isset( $fonts ) && ! empty( $fonts ) && is_array( $fonts ) ) {
-				$this->parent->fonts['google'] = $fonts;
-				$this->parent->google_array    = $fonts;
+				Redux_Core::$fonts['google'] = $fonts;
+				Redux_Core::$google_array    = $fonts;
 
 				// optgroup.
-				$this->parent->font_groups['google'] = array(
+				Redux_Core::$font_groups['google'] = array(
 					'text'     => esc_html__( 'Google Webfonts', 'redux-framework' ),
 					'children' => array(),
 				);
 
 				// options.
-				foreach ( $this->parent->fonts['google'] as $font => $extra ) {
-					$this->parent->font_groups['google']['children'][] = array(
+				foreach ( Redux_Core::$fonts['google'] as $font => $extra ) {
+					Redux_Core::$font_groups['google']['children'][] = array(
 						'id'          => $font,
 						'text'        => $font,
 						'data-google' => 'true',

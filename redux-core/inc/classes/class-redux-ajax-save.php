@@ -72,8 +72,8 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 
 					if ( ! empty( $values ) ) {
 						try {
-							if ( isset( $redux->validation_ran ) ) {
-								unset( $redux->validation_ran );
+							if ( true === Redux_Core::$validation_ran ) {
+								Redux_Core::$validation_ran = false;
 							}
 
 							$redux->options_class->set( $redux->options_class->validate_options( $values ) );
@@ -123,8 +123,8 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 			}
 
 			if ( isset( $core->transients['run_compiler'] ) && $core->transients['run_compiler'] ) {
-				$core->no_output = true;
-				$temp            = $core->args['output_variables_prefix'];
+				Redux_Core::$no_output = true;
+				$temp                  = $core->args['output_variables_prefix'];
 
 				// Allow the override of variable's prefix for use by SCSS or LESS.
 				if ( isset( $core->args['compiler_output_variables_prefix'] ) ) {

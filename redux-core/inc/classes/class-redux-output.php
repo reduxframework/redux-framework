@@ -165,11 +165,11 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 			}
 
 			// For use like in the customizer. Stops the output, but passes the CSS in the variable for the compiler.
-			if ( isset( $core->no_output ) ) {
+			if ( true === Redux_Core::$no_output ) {
 				return;
 			}
 
-			if ( ! empty( $core->typography ) && filter_var( $core->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
+			if ( ! empty( Redux_Core::$typography ) && filter_var( $core->args['output'], FILTER_VALIDATE_BOOLEAN ) ) {
 				$version = ! empty( $core->transients['last_save'] ) ? $core->transients['last_save'] : '';
 				if ( ! class_exists( 'Redux_Typography' ) ) {
 					require_once Redux_Core::$dir . '/inc/fields/typography/class-redux-typography.php';
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 				$typography = new Redux_Typography( null, null, $core );
 
 				if ( ! $core->args['disable_google_fonts_link'] ) {
-					$url = $typography->make_google_web_font_link( $core->typography );
+					$url = $typography->make_google_web_font_link( Redux_Core::$typography );
 					wp_enqueue_style( 'redux-google-fonts-' . $core->args['opt_name'], $url, array(), $version );
 					add_filter( 'style_loader_tag', array( $this, 'add_style_attributes' ), 10, 4 );
 					add_filter( 'wp_resource_hints', array( $this, 'google_fonts_preconnect' ), 10, 2 );
@@ -302,7 +302,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 				return;
 			}
 
-			if ( isset( $core->no_output ) ) {
+			if ( true === Redux_Core::$no_output ) {
 				return;
 			}
 

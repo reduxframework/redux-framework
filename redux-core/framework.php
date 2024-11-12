@@ -49,10 +49,10 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		/**
 		 * ReduxFramework instance storage.
 		 *
-		 * @var null
+		 * @var null|ReduxFramework
 		 * @access public
 		 */
-		public static $instance = null;
+		public static ?ReduxFramework $instance;
 
 		/**
 		 * Redux current version.
@@ -62,7 +62,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @deprecated 4.0.0
 		 */
-		public static $_version = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
+		public static string $_version = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
 		/**
 		 * Absolute directory of the Redux instance.
@@ -72,7 +72,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @deprecated 4.0.0
 		 */
-		public static $_dir = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
+		public static string $_dir = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
 		/**
 		 * Full URL of the Redux instance.
@@ -82,7 +82,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @deprecated 4.0.0
 		 */
-		public static $_url = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
+		public static string $_url = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
 		/**
 		 * Current WordPress upload directory.
@@ -92,7 +92,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @deprecated 4.0.0
 		 */
-		public static $_upload_dir = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
+		public static string $_upload_dir = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
 		/**
 		 * Current WordPress upload URL
@@ -102,7 +102,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 *
 		 * @deprecated 4.0.0
 		 */
-		public static $_upload_url; // phpcs:ignore PSR2.Classes.PropertyDeclaration
+		public static string $_upload_url; // phpcs:ignore PSR2.Classes.PropertyDeclaration
 
 		/**
 		 * Init
@@ -134,13 +134,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @var array
 		 */
 		public $field_types = array();
-
-		/**
-		 * Array of field heads.
-		 *
-		 * @var array
-		 */
-		public $field_head = array();
 
 		/**
 		 * Array of extensions by type used in the panel.
@@ -178,20 +171,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $sanitize = array();
 
 		/**
-		 * Validation ran flag.
-		 *
-		 * @var bool
-		 */
-		public $validation_ran;
-
-		/**
-		 * No output flag.
-		 *
-		 * @var bool
-		 */
-		public $no_output;
-
-		/**
 		 * Array of current option values.
 		 *
 		 * @var array
@@ -211,41 +190,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @var array
 		 */
 		public $compiler_fields = array();
-
-		/**
-		 * Field folding information for localization.
-		 *
-		 * @var array
-		 */
-		public $required = array();
-
-		/**
-		 * Field child-folding information for localization.
-		 *
-		 * @var array
-		 */
-		public $required_child = array();
-
-		/**
-		 * Array of fonts used by the panel for localization.
-		 *
-		 * @var array
-		 */
-		public $fonts = array();
-
-		/**
-		 * Array of Google fonts used by the panel for localization.
-		 *
-		 * @var array
-		 */
-		public $google_array = array();
-
-		/**
-		 * Array of fields to be folded.
-		 *
-		 * @var array
-		 */
-		public $folds = array();
 
 		/**
 		 * Array of fields with CSS output selectors.
@@ -276,27 +220,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public $compilerCSS = ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName
 
 		/**
-		 * Array of fields that didn't pass the fold dependency test and are hidden.
-		 *
-		 * @var array
-		 */
-		public $fields_hidden = array();
-
-		/**
-		 * Array of fields to use as pointers in extensions.
-		 *
-		 * @var array
-		 */
-		public $field_sections = array();
-
-		/**
-		 * Values to generate google font CSS.
-		 *
-		 * @var string
-		 */
-		public $typography = array();
-
-		/**
 		 * Array of global arguments.
 		 *
 		 * @var array|mixed
@@ -309,20 +232,6 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @var string
 		 */
 		public $old_opt_name = '';
-
-		/**
-		 * File system object used for I/O file operations.  DOnr the WordPress way.
-		 *
-		 * @var null|object
-		 */
-		public $filesystem = null;
-
-		/**
-		 * Array of various font groups used within the typography field.
-		 *
-		 * @var array
-		 */
-		public $font_groups = array();
 
 		/**
 		 * Pointer to the Redux_Options_Default class.
@@ -531,7 +440,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 			if ( ! empty( $this->args['opt_name'] ) ) {
 				new Redux_Instances( $this );
 
-				$this->filesystem = Redux_Filesystem::get_instance( $this );
+				Redux_Core::$filesystem = Redux_Filesystem::get_instance( $this );
 
 				/**
 				 * Filter 'redux/options/{opt_name}/sections'

@@ -787,7 +787,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					if ( isset( $params['fields'] ) ) {
 
 						foreach ( $params['fields'] as $field ) {
-							if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
+							if ( in_array( $field['id'], Redux_Core::$fields_hidden, true ) ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 								// Not visible.
 							} elseif ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
 								return true;

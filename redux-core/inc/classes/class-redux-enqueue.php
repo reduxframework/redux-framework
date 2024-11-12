@@ -536,8 +536,8 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 
 			$this->localize_data['font_weights'] = $this->args['font_weights'];
 
-			$this->localize_data['required'] = $core->required;
-			$this->repeater_data['fonts']    = $core->fonts;
+			$this->localize_data['required'] = Redux_Core::$required;
+			$this->repeater_data['fonts']    = Redux_Core::$fonts;
 
 			if ( ! isset( $this->repeater_data['opt_names'] ) ) {
 				$this->repeater_data['opt_names'] = array();
@@ -545,40 +545,40 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 
 			$this->repeater_data['opt_names'][]    = $core->args['opt_name'];
 			$this->repeater_data['folds']          = array();
-			$this->localize_data['required_child'] = $core->required_child;
+			$this->localize_data['required_child'] = Redux_Core::$required_child;
 			$this->localize_data['fields']         = $core->fields;
 
-			if ( isset( $core->font_groups['google'] ) ) {
-				$this->repeater_data['googlefonts'] = $core->font_groups['google'];
+			if ( isset( Redux_Core::$font_groups['google'] ) ) {
+				$this->repeater_data['googlefonts'] = Redux_Core::$font_groups['google'];
 			}
 
-			if ( isset( $core->font_groups['std'] ) ) {
-				$this->repeater_data['stdfonts'] = $core->font_groups['std'];
+			if ( isset( Redux_Core::$font_groups['std'] ) ) {
+				$this->repeater_data['stdfonts'] = Redux_Core::$font_groups['std'];
 			}
 
-			if ( isset( $core->font_groups['customfonts'] ) ) {
-				$this->repeater_data['customfonts'] = $core->font_groups['customfonts'];
+			if ( isset( Redux_Core::$font_groups['customfonts'] ) ) {
+				$this->repeater_data['customfonts'] = Redux_Core::$font_groups['customfonts'];
 			}
 
-			if ( isset( $core->font_groups['typekitfonts'] ) ) {
-				$this->repeater_data['typekitfonts'] = $core->font_groups['typekitfonts'];
+			if ( isset( Redux_Core::$font_groups['typekitfonts'] ) ) {
+				$this->repeater_data['typekitfonts'] = Redux_Core::$font_groups['typekitfonts'];
 			}
 
-			$this->localize_data['folds'] = $core->folds;
+			$this->localize_data['folds'] = Redux_Core::$folds;
 
 			// Make sure the children are all hidden properly.
 			foreach ( $core->fields as $key => $value ) {
-				if ( in_array( $key, $core->fields_hidden, true ) ) {
+				if ( in_array( $key, Redux_Core::$fields_hidden, true ) ) {
 					foreach ( $value as $k => $v ) {
-						if ( ! in_array( $k, $core->fields_hidden, true ) ) {
-							$core->fields_hidden[] = $k;
-							$core->folds[ $k ]     = 'hide';
+						if ( ! in_array( $k, Redux_Core::$fields_hidden, true ) ) {
+							Redux_Core::$fields_hidden[] = $k;
+							Redux_Core::$folds[ $k ]     = 'hide';
 						}
 					}
 				}
 			}
 
-			$this->localize_data['fields_hidden'] = $core->fields_hidden;
+			$this->localize_data['fields_hidden'] = Redux_Core::$fields_hidden;
 			$this->localize_data['options']       = $core->options;
 			$this->localize_data['defaults']      = $core->options_defaults;
 

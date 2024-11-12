@@ -386,67 +386,6 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		}
 
 		/**
-		 * Used to fix 3.x and 4 compatibility for extensions
-		 *
-		 * @param object $extension      The extension parent object.
-		 * @param string $path           - Path of the file.
-		 * @param string $ext_class      - Extension class name.
-		 * @param string $new_class_name - New dynamic class name.
-		 * @param string $name           extension name.
-		 *
-		 * @return object - Extended field class.
-		 */
-		public static function extension_compatibility( $extension, string $path, string $ext_class, string $new_class_name, string $name ) {
-			if ( empty( $new_class_name ) ) {
-				return null;
-			}
-
-			$upload_dir = ReduxFramework::$_upload_dir . '/extension_compatibility/';
-
-			if ( ! file_exists( $upload_dir . $ext_class . '.php' ) ) {
-				if ( ! is_dir( $upload_dir ) ) {
-					$extension->filesystem->mkdir( $upload_dir );
-					$extension->filesystem->put_contents( $upload_dir . 'index.php', '<?php // Silence is golden.' );
-				}
-				if ( ! class_exists( $ext_class ) ) {
-					require_once $path;
-				}
-				if ( ! file_exists( $upload_dir . $new_class_name . '.php' ) ) {
-					$class_file = '<?php' . PHP_EOL . PHP_EOL .
-								'class {{ext_class}} extends Redux_Extension_Abstract {' . PHP_EOL .
-								'    private $c;' . PHP_EOL .
-								'    public function __construct( $parent, $path, $ext_class ) {' . PHP_EOL .
-								'        $this->c = $parent->extensions[\'' . $name . '\'];' . PHP_EOL .
-								'        // Add all the params of the Abstract to this instance.' . PHP_EOL .
-								'        foreach( get_object_vars( $this->c ) as $key => $value ) {' . PHP_EOL .
-								'            $this->$key = $value;' . PHP_EOL .
-								'        }' . PHP_EOL .
-								'        parent::__construct( $parent, $path );' . PHP_EOL .
-								'    }' . PHP_EOL .
-								'    // fake "extends Redux_Extension_Abstract\" using magic function' . PHP_EOL .
-								'    public function __call( $method, $args ) {' . PHP_EOL .
-								'        return call_user_func_array( array( $this->c, $method ), $args );' . PHP_EOL .
-								'    }' . PHP_EOL .
-								'}' . PHP_EOL;
-					$template   = str_replace( '{{ext_class}}', $new_class_name, $class_file );
-					// phpcs:ignore Squiz.PHP.CommentedOutCode.Found
-					// $parent->filesystem->put_contents( $upload_dir . $new_class_name . '.php', $template );
-				}
-
-				if ( file_exists( $upload_dir . $new_class_name . '.php' ) ) {
-					if ( ! class_exists( $new_class_name ) ) {
-						require_once $upload_dir . $new_class_name . '.php';
-					}
-					if ( class_exists( $new_class_name ) ) {
-						return new $new_class_name( $extension, $path, $ext_class );
-					}
-				}
-			}
-
-			return null;
-		}
-
-		/**
 		 * Used to merge two deep arrays.
 		 *
 		 * @param array $a First array to deeply merge.

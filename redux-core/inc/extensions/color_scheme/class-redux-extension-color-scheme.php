@@ -104,7 +104,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 
 			// Create uploads/redux_scheme_colors/ folder.
 			if ( ! is_dir( $upload_dir ) ) {
-				$redux->filesystem->execute( 'mkdir', $upload_dir );
+				Redux_Core::$filesystem->execute( 'mkdir', $upload_dir );
 			}
 		}
 
@@ -237,7 +237,8 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 					$cur_tab = sanitize_text_field( wp_unslash( $_COOKIE['redux_current_tab'] ) );
 
 					// Get the tab/section number field is used on.
-					$tab_num = $this->parent->field_sections['color_scheme'][ $this->field_id ];
+					//$tab_num = $this->parent->field_sections['color_scheme'][ $this->field_id ];
+					$tab_num = Redux_Core::$field_sections['color_scheme'][ $this->field_id ];
 
 					// Match...
 					if ( $cur_tab === $tab_num ) {
@@ -498,7 +499,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 
 					$import_file = Redux_Color_Scheme_Functions::$upload_dir . Redux_Color_Scheme_Functions::$parent->args['opt_name'] . '_' . Redux_Color_Scheme_Functions::$field_id . '.json';
 
-					if ( true === Redux_Color_Scheme_Functions::$parent->filesystem->execute( 'put_contents', $import_file, $param_array ) ) {
+					if ( true === Redux_Core::$filesystem->execute( 'put_contents', $import_file, $param_array ) ) {
 						$result = array(
 							'result' => true,
 							// translators: %s = HTML content.

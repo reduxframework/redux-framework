@@ -782,7 +782,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			if ( strpos( $pagenow, 'edit-' ) !== false ) {
 				if ( isset( $params['fields'] ) ) {
 					foreach ( $params['fields'] as $field ) {
-						if ( in_array( $field['id'], $this->parent->fields_hidden, true ) ) { //phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
+						if ( in_array( $field['id'], Redux_Core::$fields_hidden, true ) ) { //phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
 							// Not visible.
 						} elseif ( isset( $field['add_visibility'] ) && $field['add_visibility'] ) {
 							return true;

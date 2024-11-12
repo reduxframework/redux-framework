@@ -919,8 +919,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return array|WP_Error
 		 */
 		public static function google_fonts_array( bool $download = false ) {
-			if ( ! empty( Redux_Core::$google_fonts ) && ! self::google_fonts_update_needed() ) {
-				return Redux_Core::$google_fonts;
+			if ( ! empty( Redux_Core::$updated_google_fonts ) && ! self::google_fonts_update_needed() ) {
+				return Redux_Core::$updated_google_fonts;
 			}
 
 			$filesystem = Redux_Filesystem::get_instance();
@@ -943,20 +943,20 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 						$body = wp_remote_retrieve_body( $request );
 						if ( ! empty( $body ) ) {
 							$filesystem->put_contents( $path, $body );
-							Redux_Core::$google_fonts = json_decode( $body, true );
+							Redux_Core::$updated_google_fonts = json_decode( $body, true );
 						}
 					} else {
 						return $request;
 					}
 				}
 			} elseif ( file_exists( $path ) ) {
-				Redux_Core::$google_fonts = json_decode( $filesystem->get_contents( $path ), true );
-				if ( empty( Redux_Core::$google_fonts ) ) {
+				Redux_Core::$updated_google_fonts = json_decode( $filesystem->get_contents( $path ), true );
+				if ( empty( Redux_Core::$updated_google_fonts ) ) {
 					$filesystem->unlink( $path );
 				}
 			}
 
-			return Redux_Core::$google_fonts;
+			return Redux_Core::$updated_google_fonts;
 		}
 
 		/**

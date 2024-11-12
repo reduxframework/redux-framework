@@ -40,7 +40,7 @@ if ( ! class_exists( 'Redux_Raw', false ) ) {
 			}
 
 			if ( isset( $this->field['content_path'] ) && ! empty( $this->field['content_path'] ) && file_exists( $this->field['content_path'] ) ) {
-				$this->field['content'] = $this->parent->filesystem->execute( 'get_contents', $this->field['content_path'] );
+				$this->field['content'] = Redux_Core::$filesystem->execute( 'get_contents', $this->field['content_path'] );
 			}
 
 			if ( ! empty( $this->field['content'] ) && isset( $this->field['content'] ) ) {
