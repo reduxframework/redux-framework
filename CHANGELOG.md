@@ -1,5 +1,12 @@
 # Redux Changelog
 
+## 4.5.0.2
+* Fixed: #4037 - `repeater` "Add" button failing when no `editor` field was loaded.
+* Fixed: #4040 - WP 6.7 broke  Redux menus in customizer.
+* Fixed: "Reset Section" resetting everything to blank or zero.
+* Modified: Option panel search bar moved to core (previously an extension).
+* Added: CSS output added to `slider` field.
+
 ## 4.5.0.1
 * Modified: Allow `null` assignments to core variable to prevent fatal errors when devs disable Google Fonts.
 * Added: Minimum PHP 7.4 warning message to admin screen to prevent fatal errors. Some people are, apparently, still using outdated PHP.
