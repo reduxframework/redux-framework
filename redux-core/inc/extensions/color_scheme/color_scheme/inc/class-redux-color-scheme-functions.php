@@ -213,13 +213,9 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 				self::$parent = $redux;
 			}
 
-			//if ( isset( $redux->field_sections['color_scheme'] ) ) {
-			//if ( isset( Redux_Core::$field_sections['color_scheme'] ) ) {
-				//return reset( $redux->field_sections['color_scheme'] );
-				//var_dump(Redux_Core::$field_sections['color_scheme']);
-				//die;
-				//return reset( Redux_Core::$field_sections['color_scheme'] );
-			//}
+			if ( isset( $redux->field_sections['color_scheme'] ) ) {
+				return reset( $redux->field_sections['color_scheme'] );
+			}
 
 			$arr = self::$parent;
 

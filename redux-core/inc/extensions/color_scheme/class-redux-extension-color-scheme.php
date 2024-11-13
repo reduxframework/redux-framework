@@ -237,8 +237,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 					$cur_tab = sanitize_text_field( wp_unslash( $_COOKIE['redux_current_tab'] ) );
 
 					// Get the tab/section number field is used on.
-					//$tab_num = $this->parent->field_sections['color_scheme'][ $this->field_id ];
-					$tab_num = Redux_Core::$field_sections['color_scheme'][ $this->field_id ];
+					$tab_num = $this->parent->field_sections['color_scheme'][ $this->field_id ];
 
 					// Match...
 					if ( $cur_tab === $tab_num ) {

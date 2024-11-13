@@ -150,13 +150,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		public static ?array $typography = array();
 
 		/**
-		 * Array of field sections.
-		 *
-		 * @var null|array
-		 */
-		public static ?array $field_sections = array();
-
-		/**
 		 * Validation ran flag.
 		 *
 		 * @var bool
@@ -197,14 +190,6 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 * @var null|object
 		 */
 		public static ?object $filesystem;
-
-
-		/**
-		 * Array of field heads.
-		 *
-		 * @var null|array
-		 */
-		public static ?array $field_head = array();
 
 		/**
 		 * Pointer to the third party fixes class.

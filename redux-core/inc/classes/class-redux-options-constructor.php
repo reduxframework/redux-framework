@@ -380,8 +380,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 						$core->field_types[ $field['type'] ] = $core->field_types[ $field['type'] ] ?? array();
 
-						//$core->field_sections[ $field['type'] ][ $field['id'] ] = $k;
-						Redux_Core::$field_sections[ $field['type'] ][ $field['id'] ] = $k;
+						$core->field_sections[ $field['type'] ][ $field['id'] ] = $k;
 
 						$display = true;
 
@@ -584,7 +583,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						do_action( "redux/options/{$core->args['opt_name']}/field/{$field['type']}/register", $field );
 
 						$core->required_class->check_dependencies( $field );
-						Redux_Core::$field_head[ $field['id'] ] = $th;
+						$core->field_head[ $field['id'] ] = $th;
 
 						if ( ! $display || isset( $this->no_panel_section[ $k ] ) ) {
 							$this->no_panel[] = $field['id'];

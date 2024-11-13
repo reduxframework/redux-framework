@@ -18,44 +18,44 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 		/**
 		 * ReduxFramework object pointer.
 		 *
-		 * @var object
+		 * @var ReduxFramework
 		 */
-		public static $parent;
+		public static ReduxFramework $parent;
 
 		/**
 		 * Field ID.
 		 *
 		 * @var string
 		 */
-		public static $field_id;
+		public static string $field_id;
 
 		/**
 		 * Field array.
 		 *
 		 * @var array
 		 */
-		public static $field;
+		public static array $field;
 
 		/**
 		 * WordPress upload directory.
 		 *
 		 * @var string
 		 */
-		public static $upload_dir;
+		public static string $upload_dir;
 
 		/**
 		 * WordPress upload URI.
 		 *
 		 * @var string
 		 */
-		public static $upload_url;
+		public static string $upload_url;
 
 		/**
 		 * Init helper library.
 		 *
-		 * @param object $redux ReduxFramework object.
+		 * @param ReduxFramework $redux ReduxFramework object.
 		 */
-		public static function init( $redux ) {
+		public static function init( ReduxFramework $redux ) {
 			self::$parent = $redux;
 
 			if ( empty( self::$field_id ) ) {
@@ -182,8 +182,8 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 					self::$parent = $redux;
 				}
 
-				if ( isset( Redux_Core::$field_sections['social_profiles'] ) ) {
-					return reset( Redux_Core::$field_sections['social_profiles'] );
+				if ( isset( self::$parent->field_sections['social_profiles'] ) ) {
+					return reset( self::$parent->field_sections['social_profiles'] );
 				}
 
 				$arr = self::$parent;
