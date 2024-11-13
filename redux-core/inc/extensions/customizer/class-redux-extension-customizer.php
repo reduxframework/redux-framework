@@ -370,7 +370,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				echo '<tr>';
 			}
 
-			echo '<th scope="row">' . wp_kses_post( Redux_Core::$field_head[ $field['id'] ] ) . '</th>';
+			echo '<th scope="row">' . wp_kses_post( $this->parent->field_head[ $field['id'] ] ) . '</th>';
 			echo '<td>';
 
 			$field['name'] = $field['id'];

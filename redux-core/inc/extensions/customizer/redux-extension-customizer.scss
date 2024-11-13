@@ -54,10 +54,22 @@
         }
     }
 
+    .redux-section,
+    .redux-panel {
+        .accordion-section-title {
+            button.accordion-trigger {
+                all: unset;
+                padding: 10px 0px 11px 4px;
+                display: inline;
+            }
+        }
+    }
+
     .redux-section .accordion-section-title i,
     .redux-field .accordion-field-title i,
     .redux-panel .accordion-section-title i {
         margin-right: 5px;
+        margin-left: 12px;
     }
 
     .accordion-section.redux-main {

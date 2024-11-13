@@ -170,9 +170,11 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 			class="redux-standalone-section redux-customizer-opt-name redux-section accordion-section control-section control-section-{{ data.type }}"
 			data-opt-name="{{ data.opt_name }}"
 			data-width="{{ data.width }}">
-			<h3 class="accordion-section-title" tabindex="0">
-				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>{{ data.title }}
-				<span class="screen-reader-text"><?php esc_html_e( 'Press return or enter to open', 'redux-framework' ); ?></span>
+			<h3 class="accordion-section-title">
+				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>
+				<button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="{{ data.id }}-content">
+					{{ data.title }}
+				</button>
 			</h3>
 			<ul class="accordion-section-content redux-main">
 				<li class="customize-section-description-container">
