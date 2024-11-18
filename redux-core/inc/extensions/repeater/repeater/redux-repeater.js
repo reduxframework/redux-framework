@@ -143,9 +143,9 @@
 				newSlide.find( '.ui-accordion-content' ).html( html );
 
 				if ( newSlide.find( '.redux-container-editor' ) ) {
-					const firstEditorId = $( '.redux-repeater-accordion-repeater:first' ).find( '.redux-container-editor' ).attr( 'data-id' );
+					const firstEditorId = $( '.redux-repeater-accordion-repeater' ).find( '.redux-container-editor:first' ).attr( 'data-id' );
 
-					if ( true === window.tinyMCEPreInit ) {
+					if ( window.tinyMCEPreInit && window.tinyMCEPreInit.mceInit && window.tinyMCEPreInit.mceInit[firstEditorId] ) {
 						editorSettings = window.tinyMCEPreInit.mceInit[firstEditorId];
 					}
 
