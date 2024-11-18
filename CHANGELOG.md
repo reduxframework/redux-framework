@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.5.0.3
+* Fixed: `color_scheme` and `social_profiles` giving `cannot assign null to array` errors when fields not in use.
+* Fixed: #4037 - Additional JavaScript errors in regard to TinyMCE when not loaded via `editor` field. 
+
 ## 4.5.0.2
 * Fixed: #4037 - `repeater` "Add" button failing when no `editor` field was loaded.
 * Fixed: #4040 - WP 6.7 broke  Redux menus in customizer.
