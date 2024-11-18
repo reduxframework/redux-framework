@@ -25,16 +25,16 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 		/**
 		 * Field ID.
 		 *
-		 * @var string
+		 * @var null|string
 		 */
-		public static string $field_id;
+		public static ?string $field_id;
 
 		/**
 		 * Field array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public static array $field;
+		public static ?array $field;
 
 		/**
 		 * WordPress upload directory.
@@ -212,7 +212,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 				}
 			}
 
-			return '';
+			return null;
 		}
 
 		/**

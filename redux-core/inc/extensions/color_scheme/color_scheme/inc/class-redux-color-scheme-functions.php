@@ -19,9 +19,9 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 		/**
 		 * ReduxFramework object.
 		 *
-		 * @var ReduxFramework
+		 * @var null|ReduxFramework
 		 */
-		public static ReduxFramework $parent;
+		public static ?ReduxFramework $parent;
 
 		/**
 		 * Field ID
@@ -40,9 +40,9 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 		/**
 		 * Field array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public static array $field;
+		public static ?array $field;
 
 		/**
 		 * WP Upload directory.

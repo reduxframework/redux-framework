@@ -32,7 +32,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Social Profiles';
+		public string $extension_name = 'Social Profiles';
 
 		/**
 		 * Field ID.
@@ -44,16 +44,16 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		/**
 		 * Field array.
 		 *
-		 * @var array|mixed
+		 * @var array|null
 		 */
-		public $field = array();
+		public ?array $field = array();
 
 		/**
 		 * Panel opt_name.
 		 *
 		 * @var string
 		 */
-		public $opt_name = '';
+		public string $opt_name;
 
 		/**
 		 * Class Constructor. Defines the args for the extensions class

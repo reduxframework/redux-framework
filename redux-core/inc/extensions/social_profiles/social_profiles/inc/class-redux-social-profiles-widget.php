@@ -21,24 +21,24 @@ if ( ! class_exists( 'Redux_Social_Profiles_Widget' ) ) {
 		/**
 		 * Field ID.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public $field_id = '';
+		public ?string $field_id = '';
 
 		/**
 		 * ReduxFramework object pointer.
 		 *
-		 * @var null
+		 * @var ReduxFramework|null
 		 */
-		public $parent = null;
+		public ?ReduxFramework $parent = null;
 
 		/**
 		 * Redux_Social_Profiles_Widget constructor.
 		 *
-		 * @param object $redux   ReduxFramework object.
-		 * @param string $field_id Field ID.
+		 * @param ReduxFramework $redux    ReduxFramework object.
+		 * @param string         $field_id Field ID.
 		 */
-		public function __construct( $redux, string $field_id ) {
+		public function __construct( ReduxFramework $redux, string $field_id ) {
 			return;
 
 			$this->parent   = $redux;
