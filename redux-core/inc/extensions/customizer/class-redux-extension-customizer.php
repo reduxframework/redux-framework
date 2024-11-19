@@ -5,7 +5,7 @@
  *
  * @package ReduxFramework/Extentions
  * @class Redux_Extension_Customizer
- * @version 4.4.11
+ * @version 4.5.1
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.4.11';
+		public static string $version = '4.5.1';
 
 		/**
 		 * Set the name of the field.  Ideally, this will also be your extension's name.

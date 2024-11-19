@@ -41,6 +41,13 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 	public $section = array();
 
 	/**
+	 * Section array.
+	 *
+	 * @var string
+	 */
+	public string $wp_ver;
+
+	/**
 	 * Constructor.
 	 * Any supplied $args override class property defaults.
 	 *
@@ -51,13 +58,19 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 	 * @param array                $args    Section arguments.
 	 */
 	public function __construct( $manager, $id, $args = array() ) {
+		global $wp_version;
+
 		parent::__construct( $manager, $id, $args );
+
 		// Redux addition.
 		if ( isset( $args['section'] ) ) {
 			$this->section     = $args['section'];
 			$this->description = $this->section['desc'] ?? '';
 			$this->opt_name    = $args['opt_name'] ?? '';
 		}
+
+		$version      = explode( '-', $wp_version );
+		$this->wp_ver = $version[0];
 	}
 
 	/**
@@ -171,10 +184,15 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 			data-opt-name="{{ data.opt_name }}"
 			data-width="{{ data.width }}">
 			<h3 class="accordion-section-title">
+			<?php if ( version_compare( $this->wp_ver, '6.6', '<' ) ) { ?>
 				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>
 				<button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="{{ data.id }}-content">
 					{{ data.title }}
 				</button>
+			<?php } else { ?>
+				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>{{ data.title }}
+				<span class="screen-reader-text"><?php esc_html_e( 'Press return or enter to open', 'redux-framework' ); ?></span>
+			<?php } ?>
 			</h3>
 			<ul class="accordion-section-content redux-main">
 				<li class="customize-section-description-container">
