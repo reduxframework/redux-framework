@@ -1,5 +1,12 @@
 # Redux Changelog
 
+## 4.5.0.4
+* Updated: Font Awesome 6.7
+* Fixed: Options Search bar rendering multiple time on customizer UI.
+* Added `null` to multiple typesafe declarations.
+* Fixed: Changed typesafe declarations to transient variables from `array` to `mixed` to prevent fatal errors.
+* Modified: Customizer HTML output to support WordPress installations prior to version 6.7.
+
 ## 4.5.0.3
 * Fixed: `color_scheme` and `social_profiles` giving `cannot assign null to array` errors when fields not in use.
 * Fixed: #4037 - Additional JavaScript errors in regard to TinyMCE when not loaded via `editor` field. 
