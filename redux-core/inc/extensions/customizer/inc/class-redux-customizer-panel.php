@@ -245,7 +245,7 @@ class Redux_Customizer_Panel extends WP_Customize_Panel {
 					{{ data.title }}
 				</button>
 				<?php } else { ?>
-				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>{{ data.title }}
+				<# if ( data.icon ) { #><i class="{{ data.icon }} legacy"></i> <# } #>{{ data.title }}
 				<span class="accordion-trigger screen-reader-text"><?php echo esc_html__( 'Press return or enter to open this panel', 'redux-framework' ); ?></span>
 				<?php } ?>
 			</h3>

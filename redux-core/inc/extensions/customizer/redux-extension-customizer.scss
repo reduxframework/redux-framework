@@ -70,6 +70,10 @@
     .redux-panel .accordion-section-title i {
         margin-right: 5px;
         margin-left: 12px;
+
+        &.legacy {
+            margin-left: 0!important;
+        }
     }
 
     .accordion-section.redux-main {

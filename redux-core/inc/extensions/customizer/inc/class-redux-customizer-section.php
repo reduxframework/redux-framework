@@ -190,7 +190,7 @@ class Redux_Customizer_Section extends WP_Customize_Section {
 					{{ data.title }}
 				</button>
 			<?php } else { ?>
-				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>{{ data.title }}
+				<# if ( data.icon ) { #><i class="{{ data.icon }} legacy"></i> <# } #>{{ data.title }}
 				<span class="screen-reader-text"><?php esc_html_e( 'Press return or enter to open', 'redux-framework' ); ?></span>
 			<?php } ?>
 			</h3>
