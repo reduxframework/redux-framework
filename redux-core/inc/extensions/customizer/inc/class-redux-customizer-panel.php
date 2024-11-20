@@ -239,14 +239,14 @@ class Redux_Customizer_Panel extends WP_Customize_Panel {
 			class="accordion-section redux-panel control-section control-panel control-panel-{{ data.type }}"
 			data-width="{{ data.width }}">
 			<h3 class="accordion-section-title">
-				<?php if ( version_compare( $this->wp_ver, '6.6', '<' ) ) { ?>
-				<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>
-				<button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="{{ data.id }}-content">
-					{{ data.title }}
-				</button>
+				<?php if ( version_compare( $this->wp_ver, '6.7', '<' ) ) { ?>
+					<# if ( data.icon ) { #><i class="{{ data.icon }} legacy"></i> <# } #>{{ data.title }}
+					<span class="accordion-trigger screen-reader-text"><?php echo esc_html__( 'Press return or enter to open this panel', 'redux-framework' ); ?></span>
 				<?php } else { ?>
-				<# if ( data.icon ) { #><i class="{{ data.icon }} legacy"></i> <# } #>{{ data.title }}
-				<span class="accordion-trigger screen-reader-text"><?php echo esc_html__( 'Press return or enter to open this panel', 'redux-framework' ); ?></span>
+					<# if ( data.icon ) { #><i class="{{ data.icon }}"></i> <# } #>
+					<button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="{{ data.id }}-content">
+						{{ data.title }}
+					</button>
 				<?php } ?>
 			</h3>
 			<ul class="accordion-sub-container control-panel-content"></ul>

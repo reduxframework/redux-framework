@@ -59,10 +59,14 @@
         .accordion-section-title {
             button.accordion-trigger {
                 all: unset;
-                padding: 10px 0px 11px 4px;
+                padding: 10px 0 11px 4px;
                 display: inline;
             }
         }
+    }
+
+    .accordion-section-title button.accordion-trigger {
+        height:auto;
     }
 
     .redux-section .accordion-section-title i,
