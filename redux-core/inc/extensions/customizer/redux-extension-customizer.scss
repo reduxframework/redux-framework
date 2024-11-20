@@ -60,7 +60,8 @@
             button.accordion-trigger {
                 all: unset;
                 padding: 10px 0 11px 4px;
-                display: inline;
+                display: inline-flex;
+                width: calc(100% - 50px);
             }
         }
     }
