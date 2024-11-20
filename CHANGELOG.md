@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.5.0.5
+* Updated: Font Awesome 6.7.1
+* Fixed: Entire panel over customizer panel not 'clickable.'
+
 ## 4.5.0.4
 * Updated: Font Awesome 6.7
 * Fixed: Options Search bar rendering multiple time on customizer UI.
