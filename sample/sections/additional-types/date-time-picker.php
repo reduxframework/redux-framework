@@ -13,7 +13,7 @@ Redux::set_section(
 	$opt_name,
 	array(
 		'title'      => esc_html__( 'Date / Time Picker', 'your-textdomain-here' ),
-		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/premium/date-time-picker.html" target="_blank">https://devs.redux.io/premium/date-time-picker.html</a>',
+		'desc'       => esc_html__( 'For full documentation on this field, visit: ', 'your-textdomain-here' ) . '<a href="https://devs.redux.io/core-extensions/date-time-picker.html" target="_blank">https://devs.redux.io/core-extensions/date-time-picker.html</a>',
 		'subsection' => true,
 		'fields'     => array(
 			array(
