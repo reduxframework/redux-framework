@@ -29,7 +29,7 @@ if ( ! class_exists( 'Redux_Extension_Google_Maps' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Google Maps';
+		public string $extension_name = 'Google Maps';
 
 		/**
 		 * ReduxFramework_extension_google_maps constructor.

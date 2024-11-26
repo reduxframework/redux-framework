@@ -9,6 +9,7 @@
  *
  * @noinspection PhpHierarchyChecksInspection
  * @noinspection PhpDocFinalChecksInspection
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -565,12 +565,12 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 				return array();
 			}
 
-			$defaults = array();
-			foreach ( self::$fields[ $opt_name ] as $key => $field ) {
-				$defaults[ $key ] = $field['default'] ?? '';
-			}
-
-			return $defaults;
+			return array_map(
+				function ( $field ) {
+					return $field['default'] ?? '';
+				},
+				self::$fields[ $opt_name ]
+			);
 		}
 
 		/**

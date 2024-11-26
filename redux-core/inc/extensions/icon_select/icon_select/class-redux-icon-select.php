@@ -25,21 +25,21 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		 *
 		 * @var array
 		 */
-		private $stylesheet_url = array();
+		private array $stylesheet_url = array();
 
 		/**
 		 * Stylesheet data array.
 		 *
 		 * @var array
 		 */
-		private $stylesheet_data = array();
+		private array $stylesheet_data = array();
 
 		/**
 		 * Error flag to prevent render and enqueue.
 		 *
 		 * @var bool
 		 */
-		private $is_error = false;
+		private bool $is_error = false;
 		/**
 		 * ReduxFramework_Icon_Select constructor.
 		 *

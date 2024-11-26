@@ -21,9 +21,9 @@ if ( ! class_exists( 'Redux_Google_Maps' ) ) {
 		/**
 		 * API Key.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		private $api_key = '';
+		private ?string $api_key = '';
 
 		/**
 		 * Get field defaults.

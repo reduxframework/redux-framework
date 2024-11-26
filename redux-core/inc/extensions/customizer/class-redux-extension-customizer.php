@@ -360,7 +360,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @param object $control .
 		 */
-		public function render( $control ) {
+		public function render( object $control ) {
 			$field_id = str_replace( $this->parent->args['opt_name'] . '-', '', $control->redux_id );
 			$field    = $this->options[ $field_id ];
 

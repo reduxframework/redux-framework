@@ -6,6 +6,8 @@
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Social_Profiles
  * @version 4.3.17
+ *
+ * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -31,7 +31,7 @@ if ( ! class_exists( 'Redux_Extension_Js_Button' ) ) {
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'JS Button';
+		public string $extension_name = 'JS Button';
 
 		/**
 		 * Class Constructor. Defines the args for the extensions class
