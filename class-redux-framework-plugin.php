@@ -78,13 +78,14 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 			$res  = false;
 
 			if ( function_exists( 'get_plugin_data' ) && file_exists( $path ) ) {
-				$data = get_plugin_data( $path );
+				$data = get_plugin_data( $path, true, false );
 
 				if ( isset( $data['Version'] ) && '' !== $data['Version'] ) {
 					$res = version_compare( $data['Version'], '4', '<' );
 				}
 
-				if ( is_plugin_active( 'redux-framework/redux-framework.php' ) && true === $res ) {
+				// if ( is_plugin_active( 'redux-framework/redux-framework.php' ) && true === $res ) {
+				if ( true === $res && ! in_array( 'redux-framework/redux-framework.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 					echo '<div class="error"><p>' . esc_html__( 'Redux Framework version 4 is activated but not loaded. Redux Framework version 3 is still installed and activated.  Please deactivate Redux Framework version 3.', 'redux-framework' ) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
 					return null;
 				}
