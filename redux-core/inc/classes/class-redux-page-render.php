@@ -950,6 +950,10 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				}
 			} else {
 				foreach ( $field['default'] as $defaultk => $defaultv ) {
+					/* avoids depreciated warnings when floating-point numbers are used as keys */
+					$defaultk = is_numeric($defaultk) ? (string) $defaultk : $defaultk;
+    				$defaultv = is_numeric($defaultv) ? (string) $defaultv : $defaultv;
+
 					if ( ! empty( $field['options'][ $defaultv ]['alt'] ) ) {
 						$default_output .= $field['options'][ $defaultv ]['alt'] . ', ';
 					} elseif ( ! empty( $field['options'][ $defaultv ] ) ) {
