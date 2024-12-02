@@ -1,30 +1,23 @@
 # Redux Changelog
 
-## 4.5.0.5
+## 4.5.1
 * Updated: Font Awesome 6.7.1
-* Fixed: Entire panel over customizer panel not 'clickable.'
-
-## 4.5.0.4
-* Updated: Font Awesome 6.7
 * Fixed: Options Search bar rendering multiple time on customizer UI.
-* Added `null` to multiple typesafe declarations.
 * Fixed: Changed typesafe declarations to transient variables from `array` to `mixed` to prevent fatal errors.
-* Modified: Customizer HTML output to support WordPress installations prior to version 6.7.
-
-## 4.5.0.3
 * Fixed: `color_scheme` and `social_profiles` giving `cannot assign null to array` errors when fields not in use.
-* Fixed: #4037 - Additional JavaScript errors in regard to TinyMCE when not loaded via `editor` field. 
-
-## 4.5.0.2
+* Fixed: #4037 - JavaScript errors in regard to TinyMCE when not loaded via `editor` field. 
 * Fixed: #4037 - `repeater` "Add" button failing when no `editor` field was loaded.
-* Fixed: #4040 - WP 6.7 broke  Redux menus in customizer.
+* Fixed: #4040 - WP 6.7 broke Redux menus in customizer.
 * Fixed: "Reset Section" resetting everything to blank or zero.
+* Fixed: #4043 - Float loses precision in `color_rgba` when `show_default` is set to true. Thanks @andrejarh
+* Fixed: #4042 - `multi_media` field not saving or retaining data in customizer.
+* Modified: Customizer HTML output to support WordPress installations prior to version 6.7.
 * Modified: Option panel search bar moved to core (previously an extension).
-* Added: CSS output added to `slider` field.
-
-## 4.5.0.1
 * Modified: Allow `null` assignments to core variable to prevent fatal errors when devs disable Google Fonts.
+* Added `null` to multiple typesafe declarations.
+* Added: CSS output added to `slider` field.
 * Added: Minimum PHP 7.4 warning message to admin screen to prevent fatal errors. Some people are, apparently, still using outdated PHP.
+* Release date: December 3, 2024
 
 ## 4.5.0
 * Changed: Minimum PHP version now 7.4.
