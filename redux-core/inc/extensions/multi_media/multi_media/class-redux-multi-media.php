@@ -77,11 +77,10 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
 
 			// Hidden inout for file(s).
 			echo '<input
-					name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '"
+					data-name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '"
 					id="' . esc_attr( $field_id ) . '-multi-media"
 					class="redux_upload_file redux_upload_list"
 					type="hidden"
-					value=""
 					size="45" />';
 
 			// Upload button.

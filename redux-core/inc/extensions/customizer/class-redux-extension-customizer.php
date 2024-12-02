@@ -34,63 +34,63 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @var string
 		 */
-		public $field_name = 'customizer';
+		public string $field_name = 'customizer';
 
 		/**
 		 * Set the friendly name of the extension.  This is for display purposes.  No underscores or dashes are required.
 		 *
 		 * @var string
 		 */
-		public $extension_name = 'Customizer';
+		public string $extension_name = 'Customizer';
 
 		/**
 		 * Original options.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		private $orig_options = array();
+		private ?array $orig_options = array();
 
 		/**
 		 * Post values.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		private static $post_values = array();
+		private static ?array $post_values = array();
 
 		/**
 		 * Options array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public $options = array();
+		public ?array $options = array();
 
 		/**
 		 * Controls array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public $controls = array();
+		public ?array $controls = array();
 
 		/**
 		 * Before save array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public $before_save = array();
+		public ?array $before_save = array();
 
 		/**
 		 * Redux object.
 		 *
-		 * @var object
+		 * @var ReduxFramework|null
 		 */
-		protected $redux;
+		protected ?ReduxFramework $redux;
 
 		/**
 		 * Field array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		private $redux_fields = array();
+		private ?array $redux_fields = array();
 
 		/**
 		 * Redux_Extension_my_extension constructor.
@@ -430,7 +430,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				// Not a type that should go on the customizer.
 
 				foreach ( $section['fields'] as $field ) {
-					if ( /* 'color_scheme' === $field['type'] || */ 'divide' === $field['type'] ) {
+					if ( 'color_scheme' === $field['type'] || 'divide' === $field['type'] ) {
 						continue 2;
 					}
 				}

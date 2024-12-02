@@ -167,7 +167,7 @@
 		const $formfield = $( '#' + inputID );
 
 		// Get form name.
-		const formName = $formfield.attr( 'name' );
+		const formName = $formfield.data( 'name' );
 
 		const mainID = selector.attr( 'data-id' );
 
