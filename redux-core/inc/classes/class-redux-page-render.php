@@ -950,6 +950,9 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				}
 			} else {
 				foreach ( $field['default'] as $defaultk => $defaultv ) {
+					$defaultk = is_numeric( $defaultk ) ? (string) $defaultk : $defaultk;
+					$defaultv = is_numeric( $defaultv ) ? (string) $defaultv : $defaultv;
+
 					if ( ! empty( $field['options'][ $defaultv ]['alt'] ) ) {
 						$default_output .= $field['options'][ $defaultv ]['alt'] . ', ';
 					} elseif ( ! empty( $field['options'][ $defaultv ] ) ) {
@@ -957,6 +960,18 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					} elseif ( ! empty( $field['options'][ $defaultk ] ) ) {
 						$default_output .= $field['options'][ $defaultk ] . ', ';
 					} elseif ( ! empty( $defaultv ) ) {
+						if ( is_array( $defaultv ) ) {
+							foreach ( $defaultv as $k => $v ) {
+								if( is_array( $v ) ) {
+									$defaultv = implode( ', ', $v );
+								}
+							}
+
+							if ( is_array( $defaultv ) ) {
+								$defaultv = implode( ', ', $defaultv );
+							}
+						}
+
 						$default_output .= $defaultv . ', ';
 					}
 				}
