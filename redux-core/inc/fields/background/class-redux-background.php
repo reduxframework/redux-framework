@@ -277,7 +277,7 @@ if ( ! class_exists( 'Redux_Background', false ) ) {
 					$this->field['class'] .= ' noPreview';
 				}
 
-				if ( ( ! empty( $this->field['background-image'] ) && true === $this->field['background-image'] ) || isset( $this->field['preview'] ) && false === $this->field['preview'] ) {
+				if ( ( ! empty( $this->field['background-image'] ) && true === $this->field['background-image'] ) || ( isset( $this->field['preview'] ) && false === $this->field['preview'] ) ) {
 					$hide = '';
 				}
 
