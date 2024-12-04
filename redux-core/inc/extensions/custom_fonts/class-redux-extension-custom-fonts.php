@@ -44,23 +44,23 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		/**
 		 * Custom fonts array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public array $custom_fonts = array();
+		public ?array $custom_fonts = array();
 
 		/**
 		 * WordPress upload directory.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $upload_dir = '';
+		public ?string $upload_dir = '';
 
 		/**
 		 * WordPress upload URI.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $upload_url = '';
+		public ?string $upload_url = '';
 
 		/**
 		 * Subfolder name.
@@ -72,23 +72,23 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		/**
 		 * Font folder.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $font_folder = '';
+		public ?string $font_folder = '';
 
 		/**
 		 * Font Filename.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $font_filename = '';
+		public ?string $font_filename = '';
 
 		/**
 		 * File selected in media upload.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $selected_file = '';
+		public ?string $selected_file = '';
 
 		/**
 		 * Is font conversation service available?

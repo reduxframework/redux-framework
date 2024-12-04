@@ -38,44 +38,44 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		/**
 		 * Boxes array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public array $boxes = array();
+		public ?array $boxes = array();
 
 		/**
 		 * Post types array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public array $post_types = array();
+		public ?array $post_types = array();
 
 		/**
 		 * Post type.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $post_type;
+		public ?string $post_type;
 
 		/**
 		 * Sections array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public array $orig_args;
+		public ?array $orig_args;
 
 		/**
 		 * Sections array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public array $sections = array();
+		public ?array $sections = array();
 
 		/**
 		 * CSS output array.
 		 *
-		 * @var array
+		 * @var array|null
 		 */
-		public array $output = array();
+		public ?array $output = array();
 
 		/**
 		 * Options array.
@@ -136,9 +136,9 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		/**
 		 * Base URI.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
-		public string $base_url;
+		public ?string $base_url;
 
 		/**
 		 * WP_Links array.

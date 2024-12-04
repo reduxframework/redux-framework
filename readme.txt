@@ -139,7 +139,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Added `null` to multiple typesafe declarations.
 * Added: CSS output added to `slider` field.
 * Added: Minimum PHP 7.4 warning message to admin screen to prevent fatal errors. Some people are, apparently, still using outdated PHP.
-* Release date: December 3, 2024
+* Release date: December 4, 2024
 
 = 4.5.0 =
 * Changed: Minimum PHP version now 7.4.
