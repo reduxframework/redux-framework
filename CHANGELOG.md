@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.5.3.1
+* Fixed: Filesystem object acting up again. There is no one size fits all solution to this.
+
 ## 4.5.3
 * Removed: Deprecation notice for $filesystem. Too many people think it's an error.  We'll have to support old Redux 3 code for the foreseeable future.
 * Release date: December 5, 2024
