@@ -360,6 +360,15 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		public bool $never_save_to_db;
 
 		/**
+		 * File system object used for I/O file operations.  Done the WordPress way.
+		 *
+		 * @var null|object
+		 *
+		 * @deprecated 4.5.1
+		 */
+		public ?object $filesystem;
+
+		/**
 		 * Deprecated shim for v3 templates.
 		 *
 		 * @var null|array
@@ -402,6 +411,19 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 */
 		public function __wakeup() {
 			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; eh?', 'redux-framework' ), '4.0' );
+		}
+
+		/**
+		 * Add a deprecating notice for all the old themes that still use this method..
+		 *
+		 * @param object $filesystem Filesystem object.
+		 *
+		 * @since 4.0.0
+		 */
+		private function deprecated_filesystem( $filesystem ) {
+			_deprecated_function( esc_html__( 'The global variable "$filesystem" of the ReduxFramework object', 'redux-framework' ), '4.5.1', 'Redux_Core::$filesystem' );
+
+			return $filesystem;
 		}
 
 		/**
@@ -455,6 +477,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 				new Redux_Instances( $this );
 
 				Redux_Core::$filesystem = Redux_Filesystem::get_instance( $this );
+
+				$this->filesystem = $this->deprecated_filesystem( Redux_Core::$filesystem );
 
 				/**
 				 * Filter 'redux/options/{opt_name}/sections'
