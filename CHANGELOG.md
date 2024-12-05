@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.5.3
+* Removed: Deprecation notice for $filesystem. Too many people think it's an error.  We'll have to support old Redux 3 code for the foreseeable future.
+* Release date: December 5, 2024
+
 ## 4.5.2
 * Fixed: New global filesystem access broke old methods used on old extensions. Deprecation notice added.
 * Release date: December 5, 2024

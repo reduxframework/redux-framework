@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 6.7
-Stable tag: 4.5.2
+Stable tag: 4.5.3
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,10 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.3 =
+* Removed: Deprecation notice for $filesystem. Too many people think it's an error.  We'll have to support old Redux 3 code for the foreseeable future.
+* Release date: December 5, 2024
 
 = 4.5.2 =
 * Fixed: New global filesystem access broke old methods used on old extensions. Deprecation notice added.
