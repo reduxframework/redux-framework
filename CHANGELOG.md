@@ -1,5 +1,9 @@
 # Redux Changelog
 
+## 4.5.2
+* Fixed: New global filesystem access broke old methods used on old extensions. Deprecation notice added.
+* Release date: December 5, 2024
+
 ## 4.5.1
 * Updated: Font Awesome 6.7.1
 * Fixed: Options Search bar rendering multiple time on customizer UI.
