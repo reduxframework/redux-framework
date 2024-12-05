@@ -36,9 +36,9 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		/**
 		 * File system credentials.
 		 *
-		 * @var array
+		 * @var array|bool|null
 		 */
-		private array $creds = array();
+		private $creds;
 
 		/**
 		 * ReduxFramework object pointer.
