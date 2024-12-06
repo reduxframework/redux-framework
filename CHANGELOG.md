@@ -1,5 +1,8 @@
 # Redux Changelog
 
+## 4.5.3.2
+* Fixed: `color_scheme` typed property must not be accessed before initialization.
+
 ## 4.5.3.1
 * Fixed: Filesystem object acting up again. There is no one size fits all solution to this.
 
