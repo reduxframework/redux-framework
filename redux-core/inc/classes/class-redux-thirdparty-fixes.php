@@ -35,7 +35,7 @@ if ( ! class_exists( 'Redux_ThirdParty_Fixes', false ) ) {
 			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/custom_fonts', array( $this, 'custom_fonts_extension_override' ) );
 			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/icon_select', array( $this, 'icon_select_extension_override' ) );
 			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/color_scheme', array( $this, 'color_scheme_extension_override' ) );
-			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/search', array( $this, 'search_extension_override' ) );
+			add_filter( 'redux/extension/' . $this->parent->args['opt_name'] . '/accordion', array( $this, 'accordion_extension_override' ) );
 		}
 
 		/**
@@ -43,8 +43,8 @@ if ( ! class_exists( 'Redux_ThirdParty_Fixes', false ) ) {
 		 *
 		 * @return string
 		 */
-		public function search_extension_override(): string {
-			return '';
+		public function accordion_extension_override(): string {
+			return Redux_Core::$dir . 'inc/extensions/accordion/class-redux-extension-accordion.php';
 		}
 
 		/**
