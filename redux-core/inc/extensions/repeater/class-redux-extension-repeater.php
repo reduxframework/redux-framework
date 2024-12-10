@@ -53,5 +53,5 @@ if ( ! class_exists( 'Redux_Extension_Repeater' ) ) {
 		}
 	}
 
-	class_alias( self::class, 'ReduxFramework_Extension_repeater' );
+	class_alias( Redux_Extension_Repeater::class, 'ReduxFramework_Extension_repeater' );
 }

@@ -281,5 +281,5 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		}
 	}
 
-	class_alias( self::class, 'ReduxFramework_Extension_social_profiles' );
+	class_alias( Redux_Extension_Social_Profiles::class, 'ReduxFramework_Extension_social_profiles' );
 }

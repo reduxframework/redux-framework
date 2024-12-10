@@ -126,5 +126,5 @@ if ( ! class_exists( 'Redux_Extension_Icon_Select' ) ) {
 		}
 	}
 
-	class_alias( self::class, 'ReduxFramework_extension_icon_select' );
+	class_alias( Redux_Extension_Icon_Select::class, 'ReduxFramework_extension_icon_select' );
 }

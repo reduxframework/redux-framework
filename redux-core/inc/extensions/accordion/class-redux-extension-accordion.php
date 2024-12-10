@@ -54,5 +54,5 @@ if ( ! class_exists( 'Redux_Extension_Accordion' ) ) {
 		}
 	}
 
-	class_alias( self::class, 'ReduxFramework_Extension_Accordion' );
+	class_alias( Redux_Extension_Accordion::class, 'ReduxFramework_Extension_Accordion' );
 }

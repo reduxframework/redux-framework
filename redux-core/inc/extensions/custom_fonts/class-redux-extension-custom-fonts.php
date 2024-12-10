@@ -974,5 +974,5 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		}
 	}
 
-	class_alias( self::class, 'ReduxFramework_Extension_custom_fonts' );
+	class_alias( Redux_Extension_Custom_Fonts::class, 'ReduxFramework_Extension_custom_fonts' );
 }
