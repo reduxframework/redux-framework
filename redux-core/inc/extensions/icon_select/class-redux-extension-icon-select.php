@@ -125,6 +125,6 @@ if ( ! class_exists( 'Redux_Extension_Icon_Select' ) ) {
 			wp_send_json_success( array( 'content' => $content ) );
 		}
 	}
-}
 
-class_alias( 'Redux_Extension_Icon_Select', 'ReduxFramework_extension_icon_select' );
+	class_alias( self::class, 'ReduxFramework_extension_icon_select' );
+}

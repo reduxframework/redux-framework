@@ -52,6 +52,6 @@ if ( ! class_exists( 'Redux_Extension_Repeater' ) ) {
 			$this->add_field( 'repeater' );
 		}
 	}
-}
 
-class_alias( 'Redux_Extension_Repeater', 'ReduxFramework_Extension_repeater' );
+	class_alias( self::class, 'ReduxFramework_Extension_repeater' );
+}

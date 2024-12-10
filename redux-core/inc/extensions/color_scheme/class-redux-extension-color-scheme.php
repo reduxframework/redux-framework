@@ -784,6 +784,6 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 			return $data;
 		}
 	}
-}
 
-class_alias( 'Redux_Extension_Color_Scheme', 'ReduxFramework_Extension_Color_Scheme' );
+	class_alias( self::class, 'ReduxFramework_Extension_Color_Scheme' );
+}

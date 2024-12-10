@@ -54,6 +54,6 @@ if ( ! class_exists( 'Redux_Extension_Widget_Areas' ) ) {
 			add_action( 'wp_ajax_redux_delete_widget_area', array( $widget_areas, 'redux_delete_widget_area_area' ) );
 		}
 	}
-}
 
-class_alias( 'Redux_Extension_Widget_Areas', 'ReduxFramework_extension_widget_areas' );
+	class_alias( Redux_Extension_Widget_Areas::class, 'ReduxFramework_extension_widget_areas' );
+}
