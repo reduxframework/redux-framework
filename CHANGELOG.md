@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.5.3.3
+* Fixed: Filesystem class $creds not accepting bool value.
+* Fixed: #4045: Old `search` extension throwing `class not found` error.
+* Fixed: `accordion` extension throwing `Type of Redux_Extension_Accordion::$version must be string` error.
+
 ## 4.5.3.2
 * Fixed: `color_scheme` typed property must not be accessed before initialization.
 
