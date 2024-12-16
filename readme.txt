@@ -127,6 +127,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: #4045: Old `search` extension throwing `class not found` error.
 * Fixed: `accordion` extension throwing `Type of Redux_Extension_Accordion::$version must be string` error.
 * Fixed: `color_scheme` typed property must not be accessed before initialization.
+* Release date: December 16, 2024
 
 = 4.5.3 =
 * Removed: Deprecation notice for $filesystem. Too many people think it's an error.  We'll have to support old Redux 3 code for the foreseeable future.
