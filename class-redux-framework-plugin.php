@@ -322,7 +322,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 			if ( false === $result ) {
 
 				// WordPress says get_col is discouraged?  I found no alternative.  So...ignore! - kp.
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+
 				$result = $wpdb->get_col( $wpdb->prepare( "SELECT blog_id FROM $wpdb->blogs WHERE archived = %s AND spam = %s AND deleted = %s", $var, $var, $var ) );
 
 				wp_cache_set( 'redux-blog-ids', $result );
