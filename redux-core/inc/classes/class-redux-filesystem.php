@@ -111,6 +111,19 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 				require_once ABSPATH . '/wp-admin/includes/file.php';
 			}
 
+			// Set default permissions.
+			if ( defined( 'FS_CHMOD_DIR' ) ) {
+				$this->chmod_dir = FS_CHMOD_DIR;
+			} else {
+				$this->chmod_dir = ( fileperms( ABSPATH ) & 0777 | 0755 );
+			}
+
+			if ( defined( 'FS_CHMOD_FILE' ) ) {
+				$this->chmod_file = FS_CHMOD_FILE;
+			} else {
+				$this->chmod_file = ( fileperms( ABSPATH . 'index.php' ) & 0777 | 0644 );
+			}
+
 			if ( ! $force_no_fs && function_exists( 'request_filesystem_credentials' ) ) {
 				if ( ( defined( 'WPMDB_WP_FILESYSTEM' ) && WPMDB_WP_FILESYSTEM ) || ! defined( 'WPMDB_WP_FILESYSTEM' ) ) {
 					$this->maybe_init_wp_filesystem();
@@ -296,20 +309,6 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @return void
 		 */
 		private function generate_default_files() {
-
-			// Set default permissions.
-			if ( defined( 'FS_CHMOD_DIR' ) ) {
-				$this->chmod_dir = FS_CHMOD_DIR;
-			} else {
-				$this->chmod_dir = ( fileperms( ABSPATH ) & 0777 | 0755 );
-			}
-
-			if ( defined( 'FS_CHMOD_FILE' ) ) {
-				$this->chmod_file = FS_CHMOD_FILE;
-			} else {
-				$this->chmod_file = ( fileperms( ABSPATH . 'index.php' ) & 0777 | 0644 );
-			}
-
 			if ( ! $this->is_dir( Redux_Core::$upload_dir ) ) {
 				$this->mkdir( Redux_Core::$upload_dir );
 			}
