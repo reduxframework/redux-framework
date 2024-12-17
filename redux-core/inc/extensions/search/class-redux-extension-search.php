@@ -38,4 +38,6 @@ if ( ! class_exists( 'Redux_Extension_Search' ) ) {
 			// Nothing here.
 		}
 	}
+
+	class_alias( Redux_Extension_Search::class, 'ReduxFramework_Extension_search' );
 }
