@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/class-redux-core.php';
 
-Redux_Core::$version    = '4.5.4.1';
+Redux_Core::$version    = '4.5.4.2';
 Redux_Core::$redux_path = __DIR__;
 Redux_Core::instance();
 

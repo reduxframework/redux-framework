@@ -52,7 +52,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @var WP_Filesystem_Base|null
 		 */
-		private ?WP_Filesystem_Base $wp_filesystem;
+		private ?WP_Filesystem_Base $wp_filesystem = null;
 
 		/**
 		 * If DBI_Filesystem should attempt to use the WP_Filesystem class.
