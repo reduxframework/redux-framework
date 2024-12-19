@@ -22,7 +22,7 @@ abstract class Redux_Extension_Abstract {
 	 *
 	 * @var string
 	 */
-	public static string $version = '1.0.0';
+	public static $version = '1.0.0';
 
 	/**
 	 * The extension URL.
