@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.4.2';
+		public static $version = '4.4.2';
 
 		/**
 		 * Extension friendly name.

@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Extension_Js_Button' ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.3.16';
+		public static $version = '4.3.16';
 
 		/**
 		 * Extension friendly name.

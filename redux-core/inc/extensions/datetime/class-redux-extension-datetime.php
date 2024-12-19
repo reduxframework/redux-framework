@@ -27,7 +27,7 @@ if ( ! class_exists( 'Redux_Extension_Datetime', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.3.15';
+		public static $version = '4.3.15';
 
 		/**
 		 * Extension friendly name.

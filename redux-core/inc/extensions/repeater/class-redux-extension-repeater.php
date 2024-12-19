@@ -27,7 +27,7 @@ if ( ! class_exists( 'Redux_Extension_Repeater' ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.3.13';
+		public static $version = '4.3.13';
 
 		/**
 		 * Extension friendly name.

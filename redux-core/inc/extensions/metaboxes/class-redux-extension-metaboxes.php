@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.2.0';
+		public static $version = '4.2.0';
 
 		/**
 		 * Extension friendly name.

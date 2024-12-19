@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.4.10';
+		public static $version = '4.4.10';
 
 		/**
 		 * Extension friendly name.

@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Tabbed' ) ) {
 		 *
 		 * @var string
 		 */
-		public static string $version = '4.4.8';
+		public static $version = '4.4.8';
 
 		/**
 		 * Extension friendly name.
