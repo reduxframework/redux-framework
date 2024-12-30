@@ -45,7 +45,8 @@
 		"node-gyp": "^8.4.1",
 		"node-sass": "^8.0.0",
 		"npm-force-resolutions": "^0.0.10",
-		"optipng-bin": "^8.1.0"
+		"optipng-bin": "^8.1.0",
+		"sass": "^1.83.0"
 	},
 	"engines": {
 		"node": ">=0.10.33",
