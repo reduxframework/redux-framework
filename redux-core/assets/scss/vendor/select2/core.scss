@@ -1,3 +1,5 @@
+@import "dropdown";
+
 .select2-container {
     box-sizing: border-box;
 
@@ -9,8 +11,6 @@
     @import "single";
     @import "multiple";
 }
-
-@import "dropdown";
 
 .select2-close-mask {
     border: 0;

@@ -126,7 +126,9 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: Setting CHMOD defaults in construct to avoid errors in certain use cases.
 * Fixed: Installed empty placeholder for old `search` extension as WP did not remove it from old versions to updates, thus causing errors.
 * Fixed: `raw` field in sample-config.php trigger WP filesystem error when `FS_METHOD` set to `FTP_EXT` and creds are not entered.
-* Release date: December 18, 2024
+* Updated: Font Awesome 6.7.2
+* Modified: Will pass mandatory PCP checks.
+* Release date: December 31, 2024
 
 = 4.5.4 =
 * Fixed: Filesystem class $creds not accepting bool value.

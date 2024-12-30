@@ -1,7 +1,13 @@
-.redux-container-checkbox label { vertical-align: top; width: 100%; }
-
-.redux-container-checkbox label .field-desc { margin-top: 0; float: left; width: 93%; clear: none; }
-
-/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkdXgtY2hlY2tib3guY3NzIiwic291cmNlcyI6WyJyZWR1eC1jaGVja2JveC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLEFBQ0kseUJBRHFCLENBQ3JCLEtBQUssQ0FBQyxFQUNGLGNBQWMsRUFBRSxHQUFHLEVBQ25CLEtBQUssRUFBRSxJQUFJLEdBUWQ7O0FBWEwsQUFLUSx5QkFMaUIsQ0FDckIsS0FBSyxDQUlELFdBQVcsQ0FBQyxFQUNSLFVBQVUsRUFBRSxDQUFDLEVBQ2IsS0FBSyxFQUFFLElBQUksRUFDWCxLQUFLLEVBQUUsR0FBRyxFQUNWLEtBQUssRUFBRSxJQUFJLEdBQ2QifQ== */
+.redux-container-checkbox label {
+	vertical-align: top;
+	width: 100%;
+}
+.redux-container-checkbox label .field-desc {
+	margin-top: 0;
+	float: left;
+	width: 93%;
+	clear: none;
+}
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlZHV4LWNoZWNrYm94LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0k7Q0FDSTtDQUNBOztBQUVBO0NBQ0k7Q0FDQTtDQUNBO0NBQ0EiLCJmaWxlIjoicmVkdXgtY2hlY2tib3guY3NzIn0= */
 
 /*# sourceMappingURL=redux-checkbox.css.map */
