@@ -8,6 +8,7 @@
  * @noinspection PhpUndefinedVariableInspection
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Redux_Metaboxes' ) ) {
@@ -225,3 +226,4 @@ Redux_Metaboxes::set_box(
 		),
 	)
 );
+// phpcs:enable

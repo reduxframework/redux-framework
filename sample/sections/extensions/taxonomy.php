@@ -6,6 +6,7 @@
  * @package Redux
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Redux_Taxonomy' ) ) {
@@ -224,3 +225,4 @@ Redux_Taxonomy::set_term(
 		),
 	)
 );
+// phpcs:enable

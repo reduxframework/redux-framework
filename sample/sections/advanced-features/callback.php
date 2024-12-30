@@ -6,6 +6,7 @@
  * @package Redux Framework
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 Redux::set_section(
@@ -41,3 +42,4 @@ if ( ! function_exists( 'redux_my_custom_field' ) ) {
 		print_r( $value ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 	}
 }
+// phpcs:enable

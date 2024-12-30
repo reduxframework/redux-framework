@@ -63,6 +63,7 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 						'class'   => $this->field['prefix'],
 						'title'   => basename( $this->field['stylesheet'] ),
 						'icons'   => $this->field['options'],
+						// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Not a WPQuery.
 						'exclude' => $this->field['exclude_icons'],
 					);
 
@@ -79,10 +80,11 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 				}
 
 				foreach ( $arr as $idx => $val ) {
-					$val['url']     = ! empty( $val['url'] ) ? $val['url'] : '';
-					$val['title']   = ! empty( $val['title'] ) ? $val['title'] : basename( $val['url'] );
-					$val['class']   = ! empty( $val['prefix'] ) ? $val['prefix'] : '';
-					$val['icons']   = ! empty( $val['icons'] ) ? $val['icons'] : array();
+					$val['url']   = ! empty( $val['url'] ) ? $val['url'] : '';
+					$val['title'] = ! empty( $val['title'] ) ? $val['title'] : basename( $val['url'] );
+					$val['class'] = ! empty( $val['prefix'] ) ? $val['prefix'] : '';
+					$val['icons'] = ! empty( $val['icons'] ) ? $val['icons'] : array();
+					// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Not a WPQuery.
 					$val['exclude'] = ! empty( $val['exclude'] ) ? $val['exclude'] : '';
 					$val['regex']   = ! empty( $val['regex'] ) ? $val['regex'] : '';
 
@@ -145,9 +147,12 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 						$regex_arr = array( '/.([\w-]+):{2}before{content/mi', '/.([\w-]+):{2}before { content/mi', '/.([\w-]+):{1}before{content:/mi', '/.([\w-]+):{1}before { content:/mi' );
 
 						if ( ! is_array( $sub_arr['exclude'] ) ) {
+							// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Not a WPQuery.
 							if ( empty( $sub_arr['exclude'] ) ) {
+								// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Not a WPQuery.
 								$sub_arr['exclude'] = array();
 							} else {
+								// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Not a WPQuery.
 								$sub_arr['exclude'] = array( $sub_arr['exclude'] );
 							}
 						}

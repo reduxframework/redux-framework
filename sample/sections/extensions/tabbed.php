@@ -6,6 +6,7 @@
  * @package Redux Framework\Sample\Tabbed
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 Redux::set_section(
@@ -183,3 +184,4 @@ Redux::set_section(
 		),
 	)
 );
+// phpcs:enable

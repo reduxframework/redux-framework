@@ -1026,6 +1026,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 
 			$string = '';
 			if ( ( ( isset( $core->args['icon_type'] ) && 'image' === $core->args['icon_type'] ) || ( isset( $section['icon_type'] ) && 'image' === $section['icon_type'] ) ) || ( isset( $section['icon'] ) && false !== strpos( $section['icon'], '/' ) ) ) {
+				// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- No image/icon to enqueue.
 				$icon = ( ! isset( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url( $section['icon'] ) . '" /> ';
 			} else {
 				if ( ! empty( $section['icon_class'] ) ) {
@@ -1096,6 +1097,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 							}
 
 							if ( ( isset( $core->args['icon_type'] ) && 'image' === $core->args['icon_type'] ) || ( isset( $sections[ $next_k ]['icon_type'] ) && 'image' === $sections[ $next_k ]['icon_type'] ) ) {
+								// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- No image/icon to enqueue.
 								$icon = ( ! isset( $sections[ $next_k ]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url( $sections[ $next_k ]['icon'] ) . '" /> ';
 							} else {
 								if ( ! empty( $sections[ $next_k ]['icon_class'] ) ) {

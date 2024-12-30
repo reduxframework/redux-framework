@@ -165,6 +165,7 @@ if ( ! class_exists( 'Redux_Image_Select', false ) ) {
 					if ( ! empty( $this->field['tiles'] ) && true === $this->field['tiles'] ) {
 						echo '<span class="tiles ' . esc_attr( $v['class'] ) . '" style="background-image: url(' . esc_url( $v['img'] ) . ');" rel="' . esc_url( $v['img'] ) . '"">&nbsp;</span>';
 					} else {
+						// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- No image/icon to enqueue.
 						echo '<img src="' . esc_url( $v['img'] ) . '" title="' . esc_attr( $v['alt'] ) . '" alt="' . esc_attr( $v['alt'] ) . '" class="' . esc_attr( $v['class'] ) . '" style="' . esc_attr( $style ) . '"' . esc_attr( $presets ) . esc_attr( $merge ) . ' />';
 					}
 

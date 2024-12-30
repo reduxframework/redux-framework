@@ -6,6 +6,7 @@
  * @package Redux Framework
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 $sample_html = '';
@@ -43,3 +44,4 @@ Redux::set_section(
 		),
 	)
 );
+// phpcs:enable

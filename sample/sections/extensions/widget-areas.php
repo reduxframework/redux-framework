@@ -7,6 +7,7 @@
  * @package Redux
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 // --> Below this line not needed. This is just for demonstration purposes.
@@ -31,3 +32,4 @@ Redux::set_section(
 		),
 	)
 );
+// phpcs:enable

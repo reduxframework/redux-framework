@@ -6,6 +6,7 @@
  * @package Redux Framework
  */
 
+// phpcs:disabled
 if ( ! class_exists( 'Redux' ) ) {
 	return null;
 }
@@ -332,3 +333,4 @@ Redux::set_section( $opt_name, $section );
 /*
  * <--- END SECTIONS
  */
+// phpcs:enable

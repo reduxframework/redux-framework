@@ -6,6 +6,7 @@
  * @package Redux Framework
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 Redux::set_section(
@@ -282,3 +283,4 @@ function redux_select_callback(): array {
 
 	return $options;
 }
+// phpcs:enable

@@ -6,6 +6,7 @@
  * @package Redux Framework
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Redux' ) ) {
@@ -758,3 +759,4 @@ if ( ! function_exists( 'redux_custom_sanitize' ) ) {
 		return $return;
 	}
 }
+// phpcs:enable

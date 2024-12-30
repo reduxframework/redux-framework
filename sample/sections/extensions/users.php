@@ -6,6 +6,7 @@
  * @package Redux
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Redux_Users' ) ) {
@@ -211,3 +212,4 @@ $data = Redux_Users::get_user_meta(
 		'user'     => '',          // User id, else current user ID is returned.
 	)
 );
+// phpcs:enable

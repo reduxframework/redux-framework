@@ -105,6 +105,7 @@ if ( ! class_exists( 'Redux_Color_Scheme' ) ) {
 
 			// Waiting message.
 			echo '<div id="redux-' . esc_attr( $field_id ) . '-scheme-wait-message" style="display:none;">';
+			// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- Icon hard coded for project.
 			echo '   <h1><img alt="Please wait..." src="' . esc_url( $this->url ) . 'img/busy.gif" /> Please wait...</h1>';
 			echo '</div>';
 
