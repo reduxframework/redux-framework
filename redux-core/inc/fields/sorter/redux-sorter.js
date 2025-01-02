@@ -142,7 +142,11 @@
 												optionID = $( this ).parent().parent().attr( 'data-id' );
 											}
 
-											$( this ).prop( 'name', redux.optName.args.opt_name + '[' + optionID + ']' + suffix + '[' + parentID + '][' + listID + ']' );
+											if (undefined === redux.customizer ) {
+												$( this ).prop( 'name', redux.optName.args.opt_name + '[' + optionID + ']' + suffix + '[' + parentID + '][' + listID + ']' );
+											} else {
+												$( this ).prop( 'name', optionID + suffix + '[' + parentID + '][' + listID + ']' );
+											}
 										}
 									);
 								}
