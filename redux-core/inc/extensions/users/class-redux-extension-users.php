@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Users
- * @version 4.4.1
+ * @version 4.5.6
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.19';
+		public static $version = '4.5.6';
 
 		/**
 		 * Extension friendly name.
