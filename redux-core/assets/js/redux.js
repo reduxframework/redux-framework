@@ -395,6 +395,13 @@ function colorNameToHex( colour ) {
 		);
 
 		if ( true === redux.optName.args.search ) {
+			const url          = window.location.href;
+			const wordAfterUrl = url.split( '/' ).pop();
+
+			if ( 'profile.php' === wordAfterUrl || 0 === wordAfterUrl.indexOf( 'edit-tags.php' ) ) {
+				return false;
+			}
+
 			if ( 0 === $( '#customize-controls' ).length ) {
 				$( '.redux-container' ).each(
 					function ( ) {
