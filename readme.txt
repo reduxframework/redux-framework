@@ -128,6 +128,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: `raw` field in sample-config.php trigger WP filesystem error when `FS_METHOD` set to `FTP_EXT` and creds are not entered.
 * Fixed: #4047 - Sorter not saving in customizer.
 * Fixed: #4049 = `users` metabox not saving on some setups.
+* Fixed: Disable search bar on user profile and taxonomy metaboxes.
 * Updated: Font Awesome 6.7.2
 * Modified: Will pass mandatory PCP checks.
 * Release date: January 15, 2025
