@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 6.7
-Stable tag: 4.5.5
+Stable tag: 4.5.6
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -122,13 +122,15 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 == Changelog ==
 
-= 4.5.5 =
+## 4.5.6
 * Fixed: Setting CHMOD defaults in construct to avoid errors in certain use cases.
 * Fixed: Installed empty placeholder for old `search` extension as WP did not remove it from old versions to updates, thus causing errors.
 * Fixed: `raw` field in sample-config.php trigger WP filesystem error when `FS_METHOD` set to `FTP_EXT` and creds are not entered.
+* Fixed: #4047 - Sorter not saving in customizer.
+* Fixed: #4049 = `users` metabox not saving on some setups.
 * Updated: Font Awesome 6.7.2
 * Modified: Will pass mandatory PCP checks.
-* Release date: December 31, 2024
+* Release date: January 15, 2025
 
 = 4.5.4 =
 * Fixed: Filesystem class $creds not accepting bool value.
