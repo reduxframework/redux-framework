@@ -195,7 +195,7 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 						'redux-custom_fonts',
 						$class->upload_url . 'fonts.css',
 						array(),
-						Redux_Core::$version
+						filemtime( $class->upload_dir . 'fonts.css' )
 					);
 				}
 			}

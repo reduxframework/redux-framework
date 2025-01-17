@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com> & Dovy Paukstys <dovy@reduxframework.com>
  * @class   Redux_Extension_Custom_Fonts
- * @version 4.4.2
+ * @version 4.5.6
  *
  * @noinspection PhpHierarchyChecksInspection
  * @noinspection PhpDocFinalChecksInspection
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.2';
+		public static $version = '4.5.6';
 
 		/**
 		 * Extension friendly name.
@@ -232,7 +232,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 					'redux-custom-fonts',
 					$this->upload_url . 'fonts.css',
 					array(),
-					time()
+					filemtime( $this->upload_dir . 'fonts.css' )
 				);
 			}
 		}
