@@ -126,12 +126,13 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: Setting CHMOD defaults in construct to avoid errors in certain use cases.
 * Fixed: Installed empty placeholder for old `search` extension as WP did not remove it from old versions to updates, thus causing errors.
 * Fixed: `raw` field in sample-config.php trigger WP filesystem error when `FS_METHOD` set to `FTP_EXT` and creds are not entered.
-* Fixed: #4047 - Sorter not saving in customizer.
-* Fixed: #4049 = `users` metabox not saving on some setups.
+* Fixed: Sorter not saving in customizer.
+* Fixed: `users` metabox not saving on some setups.
 * Fixed: Disable search bar on user profile and taxonomy metaboxes.
 * Updated: Font Awesome 6.7.2
+* Modified: `custom_fonts` now enqueues local font CSS with a version resource of last modified file time and not current time.
 * Modified: Will pass mandatory PCP checks.
-* Release date: January 15, 2025
+* Release date: January 20, 2025
 
 = 4.5.4 =
 * Fixed: Filesystem class $creds not accepting bool value.
