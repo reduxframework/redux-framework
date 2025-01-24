@@ -42,7 +42,7 @@ if ( ! class_exists( 'Redux_Class', false ) ) {
 		 *
 		 * @param ReduxFramework|null $redux Pointer to ReduxFramework object.
 		 */
-		public function __construct( ReduxFramework $redux = null ) {
+		public function __construct( ?ReduxFramework $redux = null ) {
 			if ( is_object( $redux ) ) {
 				$this->parent   = $redux;
 				$this->args     = $redux->args;

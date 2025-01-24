@@ -92,7 +92,7 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		 *
 		 * @return bool|string|null
 		 */
-		public function blog_info( $atts = array(), string $content = null ) {
+		public function blog_info( $atts = array(), ?string $content = null ) {
 			if ( ! is_array( $atts ) ) {
 				$atts = array();
 			}
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		 *
 		 * @return array|bool|string
 		 */
-		public function theme_info( array $atts = array(), string $content = null ) {
+		public function theme_info( array $atts = array(), ?string $content = null ) {
 			if ( ! is_array( $atts ) ) {
 				$atts = array();
 			}
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		 *
 		 * @return false|string
 		 */
-		public function date( $atts = array(), string $content = null ) {
+		public function date( $atts = array(), ?string $content = null ) {
 			if ( ! is_array( $atts ) ) {
 				$atts = array();
 			}

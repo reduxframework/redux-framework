@@ -208,7 +208,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public static function get_field( ReduxFramework $redux = null ) {
+		public static function get_field( ?ReduxFramework $redux = null ) {
 			if ( ! is_null( $redux ) ) {
 				self::$parent = $redux;
 			}

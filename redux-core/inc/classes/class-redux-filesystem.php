@@ -145,7 +145,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 * @return    object    A single instance of this class.
 		 * @since     1.0.0
 		 */
-		public static function get_instance( ReduxFramework $me = null ): ?object {
+		public static function get_instance( ?ReduxFramework $me = null ): ?object {
 
 			// If the single instance hasn't been set, set it now.
 			if ( null === self::$instance ) {
@@ -524,7 +524,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function put_contents( string $abs_path, string $contents, string $perms = null ): bool {
+		public function put_contents( string $abs_path, string $contents, ?string $perms = null ): bool {
 			$return = false;
 
 			if ( ! $this->is_dir( dirname( $abs_path ) ) ) {
@@ -663,7 +663,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function chmod( string $abs_path, int $perms = null ): bool {
+		public function chmod( string $abs_path, ?int $perms = null ): bool {
 			if ( ! $this->file_exists( $abs_path ) ) {
 				return false;
 			}
@@ -773,7 +773,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function mkdir( string $abs_path, int $perms = null ): bool {
+		public function mkdir( string $abs_path, ?int $perms = null ): bool {
 			if ( is_null( $perms ) ) {
 				$perms = $this->chmod_dir;
 			}
@@ -968,7 +968,7 @@ if ( ! class_exists( 'Redux_Filesystem', false ) ) {
 		 *
 		 * @return bool
 		 */
-		public function move_uploaded_file( string $file, string $destination, int $perms = null ): bool {
+		public function move_uploaded_file( string $file, string $destination, ?int $perms = null ): bool {
 			// TODO: look into replicating more functionality from wp_handle_upload().
 			// phpcs:ignore WordPress.PHP.NoSilencedErrors
 			$return = @move_uploaded_file( $file, $destination );
