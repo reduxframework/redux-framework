@@ -120,6 +120,10 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 			}
 
+			if ( ! is_array( $result ) ) {
+				return;
+			}
+
 			if ( empty( $result ) && empty( $defaults ) ) {
 				return;
 			}
