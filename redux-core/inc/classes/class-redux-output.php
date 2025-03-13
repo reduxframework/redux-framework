@@ -178,7 +178,7 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 				$typography = new Redux_Typography( null, null, $core );
 
 				$core->args['disable_google_fonts_link'] = ( ! isset( $core->args['disable_google_fonts_link'] ) ? false : $core->args['disable_google_fonts_link'] );
-var_dump($core->args['disable_google_fonts_link']);
+
 				if ( ! $core->args['disable_google_fonts_link'] ) {
 					$url = $typography->make_google_web_font_link( Redux_Core::$typography );
 					wp_enqueue_style( 'redux-google-fonts-' . $core->args['opt_name'], $url, array(), $version );
