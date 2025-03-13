@@ -1017,7 +1017,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			if ( ! empty( $subsets ) ) {
 				$link .= '&subset=' . implode( ',', $subsets );
 			}
-			$link .= '&display=' . $this->parent->args['font_display'];
+
+			$display = $this->parent->args['font_display'] ?? 'swap';
+
+			$link .= '&display=' . $display;
 
 			// return 'https://fonts.bunny.net/css?family=' . $link;
 			return 'https://fonts.googleapis.com/css?family=' . $link;
