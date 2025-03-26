@@ -125,8 +125,8 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 = 4.5.7 =
 * Fixed: Bullet-proofed some global args when omitted from the config.
 * Fixed: PHP 8.4 deprecation notices.
-* Fixed: Options constructor how filters out blank strings causing fatal errors. Options must always be in array.
-* Fixed: `gallery` field errors on failed demo imports that do not install images into the WP gallery.
+* Fixed: The Options constructor now filters out blank strings, causing fatal errors. Options must always be in an array.
+* Fixed: `gallery` field errors on failed demo imports not installing images into the WP gallery.
 * Release date: March 26, 2025
 
 = 4.5.6 =
