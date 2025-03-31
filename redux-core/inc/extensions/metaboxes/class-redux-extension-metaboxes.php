@@ -866,10 +866,6 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 						}
 					}
 
-					if ( ( empty( $query['page'] ) ) && ( empty( $query['pagename'] ) ) ) {
-						return 0;
-					}
-
 					$query = new WP_Query( $query );
 
 					if ( ! empty( $query->posts ) && $query->is_singular ) {
@@ -880,7 +876,9 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 						if ( isset( $query->query['post_type'] ) && 'product' === $query->query['post_type'] && class_exists( 'WooCommerce' ) ) {
 							return get_option( 'woocommerce_shop_page_id' );
 						}
+					}
 
+					if ( ( empty( $query['page'] ) ) && ( empty( $query['pagename'] ) ) ) {
 						return 0;
 					}
 				}
