@@ -58,6 +58,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Shortcode' ) ) {
 				foreach ( $social_items as $social_item ) {
 					if ( $social_item['enabled'] ) {
 						$icon       = $social_item['icon'];
+						$class      = $social_item['class'] ?? 'fa';
 						$color      = $social_item['color'];
 						$background = $social_item['background'];
 						$base_url   = $social_item['url'];
@@ -68,7 +69,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Shortcode' ) ) {
 
 						$html .= '<li style="list-style: none;">';
 						$html .= "<a href='" . $url . "'>";
-						$html .= Redux_Social_Profiles_Functions::render_icon( $icon, $color, $background, '', false );
+						$html .= Redux_Social_Profiles_Functions::render_icon( $class, $icon, $color, $background, '', false );
 						$html .= '</a>';
 						$html .= '</li>';
 					}

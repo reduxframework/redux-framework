@@ -26,6 +26,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				0  => array(
 					'id'         => 'adn',
 					'icon'       => 'fa-adn',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'ADN', 'redux-framework' ),
 					'background' => '',
@@ -36,6 +37,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				1  => array(
 					'id'         => 'android',
 					'icon'       => 'fa-android',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Android', 'redux-framework' ),
 					'background' => '',
@@ -46,6 +48,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				2  => array(
 					'id'         => 'apple',
 					'icon'       => 'fa-apple',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Apple', 'redux-framework' ),
 					'style'      => '',
@@ -57,6 +60,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				3  => array(
 					'id'         => 'behance',
 					'icon'       => 'fa-behance',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'behance', 'redux-framework' ),
 					'background' => '',
@@ -67,6 +71,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				4  => array(
 					'id'         => 'behance-square',
 					'icon'       => 'fa-behance-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'behance square', 'redux-framework' ),
 					'background' => '',
@@ -77,6 +82,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				5  => array(
 					'id'         => 'bitbucket',
 					'icon'       => 'fa-bitbucket',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Bitbucket', 'redux-framework' ),
 					'background' => '',
@@ -87,6 +93,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				6  => array(
 					'id'         => 'bitbucket-square',
 					'icon'       => 'fa-bitbucket-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Bitbucket square', 'redux-framework' ),
 					'background' => '',
@@ -97,6 +104,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				7  => array(
 					'id'         => 'bitcoin',
 					'icon'       => 'fa-btc',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Bitcoin', 'redux-framework' ),
 					'background' => '',
@@ -107,6 +115,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				8  => array(
 					'id'         => 'codepen',
 					'icon'       => 'fa-codepen',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'CodePen', 'redux-framework' ),
 					'background' => '',
@@ -117,6 +126,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				9  => array(
 					'id'         => 'css3',
 					'icon'       => 'fa-css3',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'CSS3', 'redux-framework' ),
 					'background' => '',
@@ -127,6 +137,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				10 => array(
 					'id'         => 'delicious',
 					'icon'       => 'fa-delicious',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Delicious', 'redux-framework' ),
 					'background' => '',
@@ -137,6 +148,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				11 => array(
 					'id'         => 'deviantart',
 					'icon'       => 'fa-deviantart',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Deviantart', 'redux-framework' ),
 					'background' => '',
@@ -147,6 +159,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				12 => array(
 					'id'         => 'digg',
 					'icon'       => 'fa-digg',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Digg', 'redux-framework' ),
 					'background' => '',
@@ -157,6 +170,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				13 => array(
 					'id'         => 'dribbble',
 					'icon'       => 'fa-dribbble',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Dribbble', 'redux-framework' ),
 					'background' => '',
@@ -167,6 +181,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				14 => array(
 					'id'         => 'dropbox',
 					'icon'       => 'fa-dropbox',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Dropbox', 'redux-framework' ),
 					'background' => '',
@@ -177,6 +192,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				15 => array(
 					'id'         => 'drupal',
 					'icon'       => 'fa-drupal',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Drupal', 'redux-framework' ),
 					'background' => '',
@@ -187,6 +203,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				16 => array(
 					'id'         => 'empire',
 					'icon'       => 'fa-empire',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Empire', 'redux-framework' ),
 					'background' => '',
@@ -197,6 +214,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				17 => array(
 					'id'         => 'facebook',
 					'icon'       => 'fa-facebook',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Facebook', 'redux-framework' ),
 					'background' => '',
@@ -207,6 +225,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				18 => array(
 					'id'         => 'facebook-square',
 					'icon'       => 'fa-facebook-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Facebook square', 'redux-framework' ),
 					'background' => '',
@@ -217,6 +236,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				19 => array(
 					'id'         => 'flickr',
 					'icon'       => 'fa-flickr',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Flickr', 'redux-framework' ),
 					'background' => '',
@@ -227,6 +247,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				20 => array(
 					'id'         => 'foursquare',
 					'icon'       => 'fa-foursquare',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'FourSquare', 'redux-framework' ),
 					'background' => '',
@@ -237,6 +258,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				21 => array(
 					'id'         => 'git',
 					'icon'       => 'fa-git',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'git', 'redux-framework' ),
 					'background' => '',
@@ -247,6 +269,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				22 => array(
 					'id'         => 'git-square',
 					'icon'       => 'fa-git-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'git square', 'redux-framework' ),
 					'background' => '',
@@ -257,6 +280,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				23 => array(
 					'id'         => 'github',
 					'icon'       => 'fa-github',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'github', 'redux-framework' ),
 					'background' => '',
@@ -267,6 +291,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				24 => array(
 					'id'         => 'github-alt',
 					'icon'       => 'fa-github-alt',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'github alt', 'redux-framework' ),
 					'background' => '',
@@ -277,6 +302,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				25 => array(
 					'id'         => 'github-square',
 					'icon'       => 'fa-github-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'github square', 'redux-framework' ),
 					'background' => '',
@@ -287,6 +313,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				26 => array(
 					'id'         => 'gittip',
 					'icon'       => 'fa-gittip',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'git tip', 'redux-framework' ),
 					'background' => '',
@@ -297,6 +324,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				27 => array(
 					'id'         => 'google',
 					'icon'       => 'fa-google',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Google', 'redux-framework' ),
 					'background' => '',
@@ -307,6 +335,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				28 => array(
 					'id'         => 'google-plus',
 					'icon'       => 'fa-google-plus',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Google Plus', 'redux-framework' ),
 					'background' => '',
@@ -317,6 +346,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				29 => array(
 					'id'         => 'google-plus-square',
 					'icon'       => 'fa-google-plus-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Google Plus square', 'redux-framework' ),
 					'background' => '',
@@ -327,6 +357,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				30 => array(
 					'id'         => 'hacker-news',
 					'icon'       => 'fa-hacker-news',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Hacker News', 'redux-framework' ),
 					'background' => '',
@@ -337,6 +368,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				31 => array(
 					'id'         => 'html5',
 					'icon'       => 'fa-html5',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'HTML5', 'redux-framework' ),
 					'background' => '',
@@ -347,6 +379,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				32 => array(
 					'id'         => 'instagram',
 					'icon'       => 'fa-instagram',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Instagram', 'redux-framework' ),
 					'background' => '',
@@ -357,6 +390,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				33 => array(
 					'id'         => 'joomla',
 					'icon'       => 'fa-joomla',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Joomla', 'redux-framework' ),
 					'background' => '',
@@ -367,6 +401,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				34 => array(
 					'id'         => 'jsfiddle',
 					'icon'       => 'fa-jsfiddle',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'JS Fiddle', 'redux-framework' ),
 					'background' => '',
@@ -377,6 +412,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				35 => array(
 					'id'         => 'linkedin',
 					'icon'       => 'fa-linkedin',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'LinkedIn', 'redux-framework' ),
 					'background' => '',
@@ -387,6 +423,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				36 => array(
 					'id'         => 'linkedin-square',
 					'icon'       => 'fa-linkedin-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'LinkedIn square', 'redux-framework' ),
 					'background' => '',
@@ -397,6 +434,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				37 => array(
 					'id'         => 'linux',
 					'icon'       => 'fa-linux',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Linux', 'redux-framework' ),
 					'background' => '',
@@ -407,6 +445,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				38 => array(
 					'id'         => 'maxcdn',
 					'icon'       => 'fa-maxcdn',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'MaxCDN', 'redux-framework' ),
 					'background' => '',
@@ -417,6 +456,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				39 => array(
 					'id'         => 'openid',
 					'icon'       => 'fa-openid',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'OpenID', 'redux-framework' ),
 					'background' => '',
@@ -427,6 +467,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				40 => array(
 					'id'         => 'pagelines',
 					'icon'       => 'fa-pagelines',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Page Lines', 'redux-framework' ),
 					'background' => '',
@@ -437,6 +478,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				41 => array(
 					'id'         => 'pied-piper',
 					'icon'       => 'fa-pied-piper',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Pied Piper', 'redux-framework' ),
 					'background' => '',
@@ -447,6 +489,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				42 => array(
 					'id'         => 'pied-piper-alt',
 					'icon'       => 'fa-pied-piper-alt',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Pied Piper alt', 'redux-framework' ),
 					'background' => '',
@@ -457,6 +500,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				43 => array(
 					'id'         => 'pinterest',
 					'icon'       => 'fa-pinterest',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Pinterest', 'redux-framework' ),
 					'background' => '',
@@ -467,6 +511,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				44 => array(
 					'id'         => 'pinterest-square',
 					'icon'       => 'fa-pinterest-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Pinterest square', 'redux-framework' ),
 					'background' => '',
@@ -477,6 +522,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				45 => array(
 					'id'         => 'qq',
 					'icon'       => 'fa-qq',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'QQ', 'redux-framework' ),
 					'background' => '',
@@ -487,6 +533,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				46 => array(
 					'id'         => 'rebel',
 					'icon'       => 'fa-rebel',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Rebel', 'redux-framework' ),
 					'background' => '',
@@ -497,6 +544,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				47 => array(
 					'id'         => 'reddit',
 					'icon'       => 'fa-reddit',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Reddit', 'redux-framework' ),
 					'background' => '',
@@ -507,6 +555,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				48 => array(
 					'id'         => 'reddit-square',
 					'icon'       => 'fa-reddit-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Reddit square', 'redux-framework' ),
 					'background' => '',
@@ -517,6 +566,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				49 => array(
 					'id'         => 'renren',
 					'icon'       => 'fa-renren',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Ren Ren', 'redux-framework' ),
 					'background' => '',
@@ -527,6 +577,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				50 => array(
 					'id'         => 'share-alt',
 					'icon'       => 'fa-share-alt',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Share alt', 'redux-framework' ),
 					'background' => '',
@@ -537,6 +588,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				51 => array(
 					'id'         => 'share-alt-square',
 					'icon'       => 'fa-share-alt-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Share square', 'redux-framework' ),
 					'background' => '',
@@ -547,6 +599,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				52 => array(
 					'id'         => 'skype',
 					'icon'       => 'fa-skype',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Skype', 'redux-framework' ),
 					'background' => '',
@@ -557,6 +610,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				53 => array(
 					'id'         => 'slack',
 					'icon'       => 'fa-slack',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Slack', 'redux-framework' ),
 					'background' => '',
@@ -567,6 +621,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				54 => array(
 					'id'         => 'soundcloud',
 					'icon'       => 'fa-soundcloud',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Sound Cloud', 'redux-framework' ),
 					'background' => '',
@@ -577,6 +632,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				55 => array(
 					'id'         => 'spotify',
 					'icon'       => 'fa-spotify',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Spotify', 'redux-framework' ),
 					'background' => '',
@@ -587,6 +643,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				56 => array(
 					'id'         => 'stack-exchange',
 					'icon'       => 'fa-stack-exchange',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Stack Exchange', 'redux-framework' ),
 					'background' => '',
@@ -597,6 +654,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				57 => array(
 					'id'         => 'stack-overflow',
 					'icon'       => 'fa-stack-overflow',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Stack Overflow', 'redux-framework' ),
 					'background' => '',
@@ -607,6 +665,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				58 => array(
 					'id'         => 'steam',
 					'icon'       => 'fa-steam',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Steam', 'redux-framework' ),
 					'background' => '',
@@ -617,6 +676,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				59 => array(
 					'id'         => 'steam-square',
 					'icon'       => 'fa-steam-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Steam square', 'redux-framework' ),
 					'background' => '',
@@ -627,6 +687,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				60 => array(
 					'id'         => 'stumbleupon',
 					'icon'       => 'fa-stumbleupon',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Stumble Upon', 'redux-framework' ),
 					'background' => '',
@@ -637,6 +698,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				61 => array(
 					'id'         => 'stumbleupon-circle',
 					'icon'       => 'fa-stumbleupon-circle',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Stumble Upon circle', 'redux-framework' ),
 					'background' => '',
@@ -647,6 +709,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				62 => array(
 					'id'         => 'tencent-weibo',
 					'icon'       => 'fa-tencent-weibo',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Tencent Weibo', 'redux-framework' ),
 					'background' => '',
@@ -657,6 +720,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				63 => array(
 					'id'         => 'trello',
 					'icon'       => 'fa-trello',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Trello', 'redux-framework' ),
 					'background' => '',
@@ -667,6 +731,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				64 => array(
 					'id'         => 'tumblr',
 					'icon'       => 'fa-tumblr',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Tumblr', 'redux-framework' ),
 					'background' => '',
@@ -677,6 +742,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				65 => array(
 					'id'         => 'tumblr-square',
 					'icon'       => 'fa-tumblr-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Tumblr square', 'redux-framework' ),
 					'background' => '',
@@ -686,9 +752,10 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				),
 				66 => array(
 					'id'         => 'twitter',
-					'icon'       => 'fa-twitter',
+					'icon'       => 'fa-x-twitter',
+					'class'      => 'fa-brands',
 					'enabled'    => false,
-					'name'       => esc_html__( 'Twitter', 'redux-framework' ),
+					'name'       => esc_html__( 'X', 'redux-framework' ),
 					'background' => '',
 					'color'      => '#55acee',
 					'url'        => '',
@@ -696,9 +763,10 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				),
 				67 => array(
 					'id'         => 'twitter-square',
-					'icon'       => 'fa-twitter-square',
+					'icon'       => 'fa-square-x-twitter',
+					'class'      => 'fa-brands',
 					'enabled'    => false,
-					'name'       => esc_html__( 'Twitter square', 'redux-framework' ),
+					'name'       => esc_html__( 'X square', 'redux-framework' ),
 					'background' => '',
 					'color'      => '#55acee',
 					'url'        => '',
@@ -707,6 +775,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				68 => array(
 					'id'         => 'vimeo-square',
 					'icon'       => 'fa-vimeo-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Vimeo square', 'redux-framework' ),
 					'background' => '',
@@ -717,6 +786,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				69 => array(
 					'id'         => 'vine',
 					'icon'       => 'fa-vine',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Vine', 'redux-framework' ),
 					'background' => '',
@@ -727,6 +797,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				70 => array(
 					'id'         => 'vk',
 					'icon'       => 'fa-vk',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'VK', 'redux-framework' ),
 					'background' => '',
@@ -737,6 +808,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				71 => array(
 					'id'         => 'weibo',
 					'icon'       => 'fa-weibo',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Weibo', 'redux-framework' ),
 					'background' => '',
@@ -747,6 +819,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				72 => array(
 					'id'         => 'weixin',
 					'icon'       => 'fa-weixin',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Weixin', 'redux-framework' ),
 					'background' => '',
@@ -757,6 +830,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				73 => array(
 					'id'         => 'windows',
 					'icon'       => 'fa-windows',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Windows', 'redux-framework' ),
 					'background' => '',
@@ -767,6 +841,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				74 => array(
 					'id'         => 'wordpress',
 					'icon'       => 'fa-wordpress',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'WordPress', 'redux-framework' ),
 					'background' => '',
@@ -777,6 +852,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				75 => array(
 					'id'         => 'xing',
 					'icon'       => 'fa-xing',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Xing', 'redux-framework' ),
 					'background' => '',
@@ -787,6 +863,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				76 => array(
 					'id'         => 'xing-square',
 					'icon'       => 'fa-xing-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Xing square', 'redux-framework' ),
 					'background' => '',
@@ -797,6 +874,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				77 => array(
 					'id'         => 'yahoo',
 					'icon'       => 'fa-yahoo',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Yahoo', 'redux-framework' ),
 					'background' => '',
@@ -807,6 +885,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				78 => array(
 					'id'         => 'yelp',
 					'icon'       => 'fa-yelp',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'Yelp', 'redux-framework' ),
 					'background' => '',
@@ -817,6 +896,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				79 => array(
 					'id'         => 'youtube',
 					'icon'       => 'fa-youtube',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'YouTube', 'redux-framework' ),
 					'background' => '',
@@ -827,6 +907,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				80 => array(
 					'id'         => 'youtube-play',
 					'icon'       => 'fa-youtube-play',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'YouTube play', 'redux-framework' ),
 					'background' => '',
@@ -837,6 +918,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Defaults' ) ) {
 				81 => array(
 					'id'         => 'youtube-square',
 					'icon'       => 'fa-youtube-square',
+					'class'      => 'fa',
 					'enabled'    => false,
 					'name'       => esc_html__( 'YouTube square', 'redux-framework' ),
 					'background' => '',

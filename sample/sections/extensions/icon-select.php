@@ -44,7 +44,7 @@ Redux::set_section(
 				'enqueue_frontend' => true,
 
 				// Stylesheet URL.
-				'stylesheet'       => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css',
+				//'stylesheet'       => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css',
 
 				// (Optional) Specify a class prefix if one is needed to initialize the icon.
 				'prefix'           => 'fa',

@@ -75,17 +75,18 @@ if ( ! function_exists( 'redux_render_icon_from_id' ) ) {
 		foreach ( $settings as $arr ) {
 			if ( $id === $arr['id'] ) {
 				if ( $arr['enabled'] ) {
+					$arr['class'] = $arr['class'] ?? 'fa';
 
 					if ( $output ) {
 						echo '<a class="' . esc_attr( $a_class ) . '" href="' . esc_url( $arr['url'] ) . '">';
-						Redux_Social_Profiles_Functions::render_icon( $arr['icon'], $arr['color'], $arr['background'], '' );
+						Redux_Social_Profiles_Functions::render_icon( $arr['class'], $arr['icon'], $arr['color'], $arr['background'], '' );
 						echo '</a>';
 
 						return true;
 					} else {
 						$html = '<a class="' . $a_class . '"href="' . $arr['url'] . '">';
 
-						$html .= Redux_Social_Profiles_Functions::render_icon( $arr['icon'], $arr['color'], $arr['background'], '', false );
+						$html .= Redux_Social_Profiles_Functions::render_icon( $arr['class'], $arr['icon'], $arr['color'], $arr['background'], '', false );
 						$html .= '</a>';
 
 						return $html;

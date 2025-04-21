@@ -244,6 +244,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 
 					if ( ! $skip_add ) {
 						$arr['order']           = $cur_count;
+						$arr['class']           = $arr['class'] ?? 'fa';
 						$defaults[ $cur_count ] = $arr;
 						++$cur_count;
 					}
@@ -303,6 +304,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 		/**
 		 * Static function to render the social icon.
 		 *
+		 * @param string $icon_class Icon class.
 		 * @param string $icon       Icon css.
 		 * @param string $color      Hex color.
 		 * @param string $background Background color.
@@ -311,7 +313,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 		 *
 		 * @return string|void
 		 */
-		public static function render_icon( string $icon, string $color, string $background, string $title, bool $output = true ) {
+		public static function render_icon( string $icon_class, string $icon, string $color, string $background, string $title, bool $output = true ) {
 			if ( $color || $background ) {
 				if ( '' === $color ) {
 					$color = 'transparent';
@@ -326,7 +328,7 @@ if ( ! class_exists( 'Redux_Social_Profiles_Functions' ) ) {
 				$inline = '';
 			}
 
-			$str = '<i class="fa ' . $icon . '" ' . $inline . ' title="' . $title . '"></i>';
+			$str = '<i class="' . $icon_class . ' ' . $icon . '" ' . $inline . ' title="' . $title . '"></i>';
 
 			if ( $output ) {
 				echo $str; // phpcs:ignore WordPress.Security.EscapeOutput

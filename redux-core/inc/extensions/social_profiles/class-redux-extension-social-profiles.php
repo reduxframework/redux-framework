@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Social_Profiles
- * @version 4.3.17
+ * @version 4.5.8
  *
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.3.17';
+		public static $version = '4.5.8';
 
 		/**
 		 * Extension friendly name.
@@ -235,6 +235,7 @@ if ( ! class_exists( 'Redux_Extension_Social_Profiles' ) ) {
 
 						$save_data[] = array(
 							'id'         => $data['id'],
+							'class'      => $data['class'] ?? 'fa',
 							'icon'       => $data['icon'],
 							'enabled'    => $data['enabled'],
 							'url'        => $data['url'],
