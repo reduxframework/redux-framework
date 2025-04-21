@@ -13,7 +13,7 @@ if ( ! function_exists( 'redux_social_profile_value_from_id' ) ) {
 	 *
 	 * @param string $opt_name Redux Framework opt_name.
 	 * @param string $id       Profile ID.
-	 * @param string $value    Social profile value to return (icon, name, background, color, url, or order).
+	 * @param string $value    Social profile value to return (icon, name, class, background, color, url, or order).
 	 *
 	 * @return      string Returns HTML string when $echo is set to false.  Otherwise, true.
 	 * @since       1.0.0
