@@ -471,7 +471,7 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 					break;
 
 				case 'callback':
-					if ( ! empty( $args ) && is_string( $args ) && function_exists( $args ) ) {
+					if ( ! empty( $args ) && is_callable( $args ) ) {
 						$data = call_user_func( $args, $current_value );
 					}
 
