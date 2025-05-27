@@ -773,7 +773,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 			if ( ! isset( $this->validate_class ) ) {
 				$this->validate_class = new Redux_Validation( $this );
 			}
-				return $this->validate_class->validate( $plugin_options, $options, $sections );
+
+			return $this->validate_class->validate( $plugin_options, $options, $sections );
 		}
 
 		/**

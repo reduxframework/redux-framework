@@ -32,6 +32,10 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 		public function validate( array $plugin_options, array $options, array $sections ): array {
 			$core = $this->core();
 
+			if (null === $core) {
+				return $plugin_options;
+			}
+
 			foreach ( $sections as $k => $section ) {
 				if ( isset( $section['fields'] ) ) {
 					foreach ( $section['fields'] as $fkey => $field ) {
