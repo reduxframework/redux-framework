@@ -35,7 +35,7 @@ if ( ! class_exists( 'Redux_Gallery', false ) ) {
 
 				foreach ( $ids as $attachment_id ) {
 					$img = wp_get_attachment_image_src( $attachment_id );
-					if ( ! false === $img ) {
+					if ( false !== $img ) {
 						$alt = wp_prepare_attachment_for_js( $attachment_id );
 						$alt = $alt['alt'] ?? '';
 
