@@ -163,6 +163,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'font_display'                     => 'swap', // block|swap|fallback|optional.
 				'load_on_cron'                     => false,
 				'search'                           => false,
+				'widget_area'                      => false,
 			);
 
 			$args = Redux_Functions::parse_args( $args, $default );

@@ -72,7 +72,9 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 			add_action( 'init', array( &$this, 'register_custom_widget_areas' ), 1000 );
 
 			if ( 'widgets.php' === $pagenow ) {
-				add_action( 'admin_print_scripts', array( $this, 'add_new_widget_area_box' ) );
+				if ( true === $redux->args['widget_area'] ) {
+					add_action( 'admin_print_scripts', array( $this, 'add_new_widget_area_box' ) );
+				}
 				add_action( 'load-widgets.php', array( $this, 'add_widget_area_area' ), 100 );
 				add_action( 'load-widgets.php', array( $this, 'enqueue' ), 100 );
 			}

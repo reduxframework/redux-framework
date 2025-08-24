@@ -28,7 +28,7 @@
 		"website": "https://redux.io/"
 	},
 	"require": {
-		"php": ">=7.1.0",
+		"php": ">=7.4.0",
 		"fortawesome/font-awesome": "^6.0",
 		"oomphinc/composer-installers-extender": "^2.0"
 	},

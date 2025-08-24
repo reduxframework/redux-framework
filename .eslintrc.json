@@ -3,7 +3,7 @@
 		"browser": true,
 		"node": true
 	},
-	"parser": "babel-eslint",
+	//"parser": "babel-eslint",
 	"rules": {
 		"quotes": [
 			2,
@@ -11,7 +11,7 @@
 		]
 	},
 	"plugins": [
-		"react"
+		//"react"
 	],
 	"parserOptions": {
 		"ecmaVersion": 8,
