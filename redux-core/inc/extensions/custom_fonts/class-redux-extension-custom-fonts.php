@@ -107,6 +107,10 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * @access      public
 		 */
 		public function __construct( $redux ) {
+			if ( false === $redux->args['custom_fonts'] ) {
+				return;
+			}
+
 			parent::__construct( $redux, __FILE__ );
 
 			self::$instance = parent::get_instance();

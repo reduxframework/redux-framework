@@ -164,6 +164,7 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'load_on_cron'                     => false,
 				'search'                           => false,
 				'widget_area'                      => false,
+				'custom_fonts'                     => true,
 			);
 
 			$args = Redux_Functions::parse_args( $args, $default );

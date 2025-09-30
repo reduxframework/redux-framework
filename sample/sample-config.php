@@ -219,6 +219,7 @@ $args = array(
 	'network_admin'             => true,
 	'search'                    => true,
 	'widget_area'               => true,
+	'custom_fonts'              => true,
 );
 
 
