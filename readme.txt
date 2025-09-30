@@ -4,11 +4,11 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 4.5.7
+Stable tag: 4.5.8
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
-Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. It ships with an integrated demo.
+Redux is a simple, truly extensible, and fully responsive options framework for WordPress themes and plugins. It ships with an integrated demo.
 
 == Description ==
 Redux was built by developers for developers. We save you months if not years in your development time. Everything we do is to help innovation in the industry.
@@ -121,6 +121,16 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.8
+* Fix: Reported XSS vulnerability in the shortcode extension.
+* Fix: #4074 - Gallery field won't load on screen refresh.
+* Fix: Prevent fatal error for improperly coded CPTs with metaboxes.
+* Added: New global arg `custom_fonts` to enable or disable the extension.
+* Added: New global arg `widget_area` to enable or disable the extension.
+* Added: `social_profiles` now support an argument for FA 6 classnames.
+* Improved: Callback validation for data fetching. Thanks @afonsolpjr
+* Release date: October 01, 2025
 
 = 4.5.7 =
 * Fixed: Bullet-proofed some global args when omitted from the config.
