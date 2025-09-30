@@ -97,6 +97,9 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 				$atts = array();
 			}
 
+			$content = sanitize_text_field( $content );
+			$atts    = array_map( 'sanitize_text_field', wp_unslash( $atts ) );
+
 			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
 				$atts['data'] = $content;
 			}
@@ -150,6 +153,9 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 			if ( ! is_array( $atts ) ) {
 				$atts = array();
 			}
+
+			$content = sanitize_text_field( $content );
+			$atts    = array_map( 'sanitize_text_field', wp_unslash( $atts ) );
 
 			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
 				$atts['data'] = $content;
@@ -206,6 +212,9 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 			if ( ! is_array( $atts ) ) {
 				$atts = array();
 			}
+
+			$content = sanitize_text_field( $content );
+			$atts    = array_map( 'sanitize_text_field', wp_unslash( $atts ) );
 
 			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
 				$atts['data'] = $content;
