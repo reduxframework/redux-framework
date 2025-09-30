@@ -878,7 +878,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 						}
 					}
 
-					if ( ( empty( $query['page'] ) ) && ( empty( $query['pagename'] ) ) ) {
+					if ( ( empty( $query->page ) ) && ( empty( $query->pagename ) ) ) {
 						return 0;
 					}
 				}
