@@ -85,59 +85,94 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		}
 
 		/**
-		 * Get shortcode data.
+		 * Return site/blog info by a validated selector.
+		 * Assumes the return value is printed into HTML (text node).
+		 * If you need raw values for other contexts, remove the esc_* here
+		 * and escape at the final render point instead.
 		 *
 		 * @param array|string $atts    Attributes.
 		 * @param string|null  $content Content.
 		 *
-		 * @return bool|string|null
+		 * @return string Escaped for HTML text (URLs are escaped with esc_url()).
 		 */
-		public function blog_info( $atts = array(), ?string $content = null ) {
-			if ( ! is_array( $atts ) ) {
-				$atts = array();
-			}
+		public function blog_info( $atts = array(), ?string $content = null ): string {
 
-			$content = sanitize_text_field( $content );
-			$atts    = array_map( 'sanitize_text_field', wp_unslash( $atts ) );
+			// Normalize and merge defaults.
+			$atts = is_array( $atts ) ? wp_unslash( $atts ) : array();
+			$atts = shortcode_atts(
+				array(
+					'data' => '',
+				),
+				$atts
+			);
 
-			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
+			// Allow content as fallback for the selector.
+			if ( null !== $content && '' === $atts['data'] ) {
 				$atts['data'] = $content;
 			}
 
-			switch ( $atts['data'] ) {
+			// Validate selector as a key and clamp length.
+			$key = substr( sanitize_key( $atts['data'] ), 0, 64 );
+
+			// Map aliases -> handlers.
+			// Keep your original intent (filesystem paths vs URIs) but make it safe and explicit.
+			switch ( $key ) {
+				// Filesystem paths (escape as text).
 				case 'stylesheet_directory':
 				case 'child_template_directory':
-					return get_stylesheet_directory();
+					return esc_html( get_stylesheet_directory() );
+
+				case 'template_directory':
+					return esc_html( get_template_directory() );
+
+				// Theme URIs.
 				case 'parent_template_url':
-					return get_template_directory_uri();
+					return esc_url( get_template_directory_uri() );
+
 				case 'child_template_url':
 				case 'template_url':
-					return get_stylesheet_directory_uri();
-				case 'template_directory':
-					return get_template_directory();
-				case 'text_direction':
-				case 'text_direction_bool':
-				case 'text_direction_boolean':
-					return is_rtl();
-				case 'is_multisite':
-					return is_multisite();
+					return esc_url( get_stylesheet_directory_uri() );
+
+				// URLs.
 				case 'url':
 					return esc_url( home_url() );
+
 				case 'root_url':
 					return esc_url( site_url() );
+
 				case 'stylesheet_url':
 					return esc_url( get_stylesheet_uri() );
+
 				case 'logout_url':
 					return esc_url( wp_logout_url() );
+
 				case 'login_url':
 					return esc_url( wp_login_url() );
+
 				case 'register_url':
 					return esc_url( wp_registration_url() );
+
 				case 'lostpassword_url':
 				case 'lost_password_url':
 					return esc_url( wp_lostpassword_url() );
+
+				// Booleans.
+				case 'text_direction_bool':
+				case 'text_direction_boolean':
+					return esc_html( is_rtl() ? '1' : '0' );
+
+				case 'is_multisite':
+					return esc_html( is_multisite() ? '1' : '0' );
+
+				// Text direction as string.
+				case 'text_direction':
+					return esc_html( is_rtl() ? 'rtl' : 'ltr' );
+
 				default:
-					return get_bloginfo( $atts['data'] );
+					// Safe fallback: pull raw blog info, then escape as text.
+					// (Avoid over-sanitizing: this is trusted core data).
+					$value = get_bloginfo( $key );
+					return esc_html( (string) $value );
 			}
 		}
 
@@ -147,25 +182,28 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		 * @param array|string $atts    Attributes.
 		 * @param string|null  $content Content.
 		 *
-		 * @return array|bool|string
+		 * @return string
 		 */
-		public function theme_info( array $atts = array(), ?string $content = null ) {
-			if ( ! is_array( $atts ) ) {
-				$atts = array();
-			}
+		public function theme_info( array $atts = array(), ?string $content = null ): string {
+			// Normalize input and merge defaults.
+			$atts = wp_unslash( $atts );
+			$atts = shortcode_atts(
+				array(
+					'data' => '',
+				),
+				$atts
+			);
 
-			$content = sanitize_text_field( $content );
-			$atts    = array_map( 'sanitize_text_field', wp_unslash( $atts ) );
-
-			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
+			// Allow content as a fallback selector.
+			if ( null !== $content && '' === $atts['data'] ) {
 				$atts['data'] = $content;
 			}
 
-			if ( empty( $this->theme_info ) ) {
-				$this->theme_info = wp_get_theme();
-			}
+			// Validate selector as a key.
+			$key = sanitize_key( $atts['data'] );
 
-			$keys = array(
+			// Map aliases -> canonical WP_Theme header keys or special handlers.
+			$map = array(
 				'name'        => 'Name',
 				'themeuri'    => 'ThemeURI',
 				'theme_uri'   => 'ThemeURI',
@@ -181,22 +219,46 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 				'text_domain' => 'TextDomain',
 				'domainpath'  => 'DomainPath',
 				'domain_path' => 'DomainPath',
-				'is_child'    => 'is_child',
+				'is_child'    => 'is_child', // special case.
 			);
 
-			$atts['data'] = $keys[ strtolower( $atts['data'] ) ];
+			// Default to "name" when empty or unknown.
+			if ( '' === $key || ! isset( $map[ $key ] ) ) {
+				$key = 'name';
+			}
 
-			switch ( $atts['data'] ) {
-				case 'is_child':
-					return Redux_Helpers::is_child_theme( get_template_directory() );
+			// Cache theme object.
+			if ( empty( $this->theme_info ) ) {
+				$this->theme_info = wp_get_theme();
+			}
+
+			$canonical = $map[ $key ];
+
+			// Special case: is_child — return "1" or "0" as string.
+			if ( 'is_child' === $canonical ) {
+				$bool = Redux_Helpers::is_child_theme( get_template_directory() );
+				return esc_html( $bool ? '1' : '0' );
+			}
+
+			$value = $this->theme_info->get( $canonical );
+
+			// WP_Theme::get('Tags') may be array; normalize to string.
+			if ( is_array( $value ) ) {
+				$value = implode( ', ', array_filter( array_map( 'trim', $value ) ) );
+			}
+
+			$value = (string) $value;
+
+			// Escape by context.
+			switch ( $canonical ) {
+				case 'ThemeURI':
+				case 'AuthorURI':
+					// If you ultimately print this inside an href, escape at that final context instead.
+					// Here we assume the plain text output of the URL.
+					return esc_url( $value );
+
 				default:
-					$return = $this->theme_info->get( $atts['data'] );
-
-					if ( is_array( $return ) ) {
-						$return = implode( ', ', $return );
-					}
-
-					return $return;
+					return esc_html( $value );
 			}
 		}
 
@@ -206,25 +268,42 @@ if ( ! class_exists( 'Redux_Shortcodes' ) ) {
 		 * @param array|string $atts    Attributes.
 		 * @param string|null  $content Content.
 		 *
-		 * @return false|string
+		 * @return string
 		 */
-		public function date( $atts = array(), ?string $content = null ) {
-			if ( ! is_array( $atts ) ) {
-				$atts = array();
+		public function date( $atts = array(), ?string $content = null ): string {
+
+			// 1) Normalize + unslash
+			$atts = is_array( $atts ) ? wp_unslash( $atts ) : array();
+
+			// 2) Default/merge (if this is a shortcode handler, pass the tag as the 3rd arg)
+			$atts = shortcode_atts(
+				array(
+					'data' => '',
+				),
+				$atts
+			);
+
+			// 3) Allow content as a fallback for the format
+			if ( null !== $content && '' === $atts['data'] ) {
+				// Keep content simple text; strip tags and control chars.
+				$atts['data'] = sanitize_text_field( wp_unslash( $content ) );
 			}
 
-			$content = sanitize_text_field( $content );
-			$atts    = array_map( 'sanitize_text_field', wp_unslash( $atts ) );
+			// 4) Validate and constrain the format string
+			$format = (string) $atts['data'];
+			$format = substr( $format, 0, 64 ); // avoid absurdly long inputs.
 
-			if ( ! empty( $content ) && ! isset( $atts['data'] ) ) {
-				$atts['data'] = $content;
+			// Allow common date format tokens + typical literal punctuation and backslash for escaping.
+			// If invalid chars are present, fall back to a safe default.
+			if ( '' === $format || ! preg_match( '/^[A-Za-z0-9\s:\-.,\/\\\\T]+$/', $format ) ) {
+				$format = 'Y';
 			}
 
-			if ( empty( $atts['data'] ) ) {
-				$atts['data'] = 'Y';
-			}
+			// 5) Use wp_date() to respect WP timezone and locale (date_i18n is deprecated).
+			$output = wp_date( $format );
 
-			return gmdate( $atts['data'] );
+			// 6) Escape for HTML context before returning (safe default for shortcode/rendered output).
+			return esc_html( $output );
 		}
 	}
 }
