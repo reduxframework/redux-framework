@@ -3,8 +3,8 @@ Contributors: kprovance, dovyp, redux
 Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
-Tested up to: 6.8
-Stable tag: 4.5.8
+Tested up to: 6.9
+Stable tag: 4.5.9
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,11 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.8
+* Fix: Deprecation warning in `get_wordpress_data()` function.
+* Improved: Tighter security for shortcode extension.
+* Release date: November 12, 2025
 
 = 4.5.8
 * Fix: Reported XSS vulnerability in the shortcode extension.
