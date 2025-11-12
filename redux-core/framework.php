@@ -421,7 +421,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @since 4.0.0
 		 */
 		private function deprecated_filesystem( $filesystem ) {
-			//_deprecated_function( esc_html__( 'The global variable "$filesystem" of the ReduxFramework object', 'redux-framework' ), '4.5.1', 'Redux_Core::$filesystem' );
+			// _deprecated_function( esc_html__( 'The global variable "$filesystem" of the ReduxFramework object', 'redux-framework' ), '4.5.1', 'Redux_Core::$filesystem' );
 
 			return $filesystem;
 		}
