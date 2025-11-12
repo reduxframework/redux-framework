@@ -45,7 +45,7 @@ if ( ! class_exists( 'Redux_Button_Set', false ) ) {
 					$this->field['args'] = array();
 				}
 
-				$this->field['options'] = $this->parent->get_wordpress_data( $this->field['data'], $this->field['args'], $this->value );
+				$this->field['options'] = $this->parent->wordpress_data->get( $this->field['data'], $this->field['args'], $this->parent->args['opt_name'], $this->value );
 
 				if ( empty( $this->field['options'] ) ) {
 					return;

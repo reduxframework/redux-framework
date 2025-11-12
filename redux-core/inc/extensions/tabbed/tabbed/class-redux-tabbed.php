@@ -117,7 +117,8 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 						if ( ! isset( $field['args'][ $key ] ) ) {
 							$field['args'][ $key ] = array();
 						}
-						$field['options'][ $key ] = $this->parent->get_wordpress_data( $data, $field['args'][ $key ] );
+
+						$field['options'][ $key ] = $this->parent->wordpress_data->get( $data, $field['args'][ $key ], $this->parent->args['opt_name'] );
 					}
 				}
 			}
