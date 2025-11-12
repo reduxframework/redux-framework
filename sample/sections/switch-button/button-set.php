@@ -23,9 +23,14 @@ Redux::set_section(
 				'title'    => esc_html__( 'Button Set Option', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'No validation can be done on this field type', 'your-textdomain-here' ),
 				'desc'     => esc_html__( 'This is the description field, again good for additional info.', 'your-textdomain-here' ),
-				'data'     => 'post',
-				// Must provide key => value pairs for radio options.
 
+				// Must provide key => value pairs for radio options.
+				'options'  => array(
+					'1' => 'Opt 1',
+					'2' => 'Opt 2',
+					'3' => 'Opt 3',
+				),
+				'default'  => '2',
 			),
 			array(
 				'id'       => 'opt-button-set-multi',
