@@ -540,10 +540,12 @@ if ( ! class_exists( 'Redux_WordPress_Data', false ) ) {
 			if ( function_exists( 'icl_object_id' ) ) {
 				if ( has_filter( 'wpml_object_id' ) ) {
 					if ( Redux_Helpers::is_integer( $value ) ) {
+						// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Third party hook. Cannot change.
 						$value = apply_filters( 'wpml_object_id', $value, $post_type, true );
 					} elseif ( is_array( $value ) ) {
 						$value = array_map(
 							function ( $val ) use ( $post_type ) {
+								// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Third party hook. Cannot change.
 								return apply_filters( 'wpml_object_id', $val, $post_type, true );
 							},
 							$value

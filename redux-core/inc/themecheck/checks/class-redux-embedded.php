@@ -77,4 +77,6 @@ class Redux_Embedded implements themecheck {
 	}
 }
 
+
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- WordPress global. Cannot be changed.
 $themechecks[] = new Redux_Embedded();

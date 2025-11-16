@@ -102,7 +102,7 @@ if ( ! function_exists( 'get_redux_instance' ) ) {
 	 *
 	 * @return ReduxFramework class instance
 	 */
-	function get_redux_instance( $opt_name ) {
+	function get_redux_instance( $opt_name ) { // phpcs:ignore Universal.Files.SeparateFunctionsFromOO, WordPress.NamingConventions.PrefixAllGlobals -- Themes use this function. Name cannot be changed for backward compatibility reasons.
 		return Redux_Instances::get_instance( $opt_name );
 	}
 }
@@ -114,7 +114,7 @@ if ( ! function_exists( 'get_all_redux_instances' ) ) {
 	 *
 	 * @return array        format ['opt_name' => $ReduxFramework]
 	 */
-	function get_all_redux_instances(): ?array {
+	function get_all_redux_instances(): ?array { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Themes use this function. Name cannot be changed for backward compatibility reasons.
 		return Redux_Instances::get_all_instances();
 	}
 }

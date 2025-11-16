@@ -84,6 +84,7 @@ if ( ! class_exists( 'Redux_Framework_Plugin', false ) ) {
 					$res = version_compare( $data['Version'], '4', '<' );
 				}
 
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- active_plugins is a WP hook.
 				if ( true === $res && ! in_array( 'redux-framework/redux-framework.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 					echo '<div class="error"><p>' . esc_html__( 'Redux Framework version 4 is activated but not loaded. Redux Framework version 3 is still installed and activated.  Please deactivate Redux Framework version 3.', 'redux-framework' ) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
 					return null;

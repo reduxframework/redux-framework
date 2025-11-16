@@ -12,22 +12,22 @@
 <div class="redux-sidebar">
 	<ul class="redux-group-menu">
 		<?php
-		foreach ( $this->parent->sections as $k => $section ) {
-			$the_title = $section['title'] ?? '';
-			$skip_sec  = false;
-			foreach ( $this->parent->options_class->hidden_perm_sections as $num => $section_title ) {
-				if ( $section_title === $the_title ) {
-					$skip_sec = true;
+		foreach ( $this->parent->sections as $redux_key => $redux_section ) {
+			$redux_the_title = $redux_section['title'] ?? '';
+			$redux_skip_sec  = false;
+			foreach ( $this->parent->options_class->hidden_perm_sections as $redux_num => $redux_section_title ) {
+				if ( $redux_section_title === $redux_the_title ) {
+					$redux_skip_sec = true;
 				}
 			}
 
-			if ( isset( $section['customizer_only'] ) && true === $section['customizer_only'] ) {
+			if ( isset( $redux_section['customizer_only'] ) && true === $redux_section['customizer_only'] ) {
 				continue;
 			}
 
-			if ( false === $skip_sec ) {
-				echo( $this->parent->render_class->section_menu( $k, $section ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-				$skip_sec = false;
+			if ( false === $redux_skip_sec ) {
+				echo( $this->parent->render_class->section_menu( $redux_key, $redux_section ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+				$redux_skip_sec = false;
 			}
 		}
 

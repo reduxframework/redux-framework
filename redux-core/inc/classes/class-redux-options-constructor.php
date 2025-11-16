@@ -77,6 +77,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 				if ( 'fields' === $key ) {
 					foreach ( $section as $field ) {
 						if ( ! empty( $field['id'] ) && ! empty( $field['data'] ) && ! empty( $options_values[ $field['id'] ] ) && Redux_Helpers::is_integer( $options_values[ $field['id'] ] ) ) {
+							//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Third party hook. Cannot change.
 							$options_values[ $field['id'] ] = apply_filters( 'wpml_object_id', $options_values[ $field['id'] ], $field['data'], true );
 						}
 					}
@@ -222,7 +223,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 		 */
 		private function set_global_variable( ?ReduxFramework $core ): void {
 			if ( ! empty( $core->args['global_variable'] ) ) {
-				$options_global = $core->args['global_variable'];
+				$redux_options_global = $core->args['global_variable'];
 
 				/**
 				 * Filter 'redux/options/{opt_name}/global_variable'
@@ -230,8 +231,8 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 				 * @param array $value option value to set global_variable with
 				 */
 
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$GLOBALS[ $options_global ] = apply_filters( "redux/options/{$core->args['opt_name']}/global_variable", $core->options );
+				// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.NamingConventions.PrefixAllGlobals -- Misflag, variable begins with plugin name.
+				$GLOBALS[ $redux_options_global ] = apply_filters( "redux/options/{$core->args['opt_name']}/global_variable", $core->options );
 			}
 		}
 
@@ -465,7 +466,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 
 						// CORRECT URLS if media URLs are wrong, but attachment IDs are present.
 						if ( 'media' === $field['type'] ) {
-							if ( isset( $core->options[ $field['id'] ]['id'] ) && isset( $core->options[ $field['id'] ]['url'] ) && ! empty( $core->options[ $field['id'] ]['url'] ) && strpos( $core->options[ $field['id'] ]['url'], str_replace( 'http://', '', WP_CONTENT_URL ) ) === false ) {
+							if ( isset( $core->options[ $field['id'] ]['id'] ) && isset( $core->options[ $field['id'] ]['url'] ) && ! empty( $core->options[ $field['id'] ]['url'] ) && strpos( $core->options[ $field['id'] ]['url'], str_replace( 'https://', '', WP_CONTENT_URL ) ) === false ) {
 								$data = wp_get_attachment_url( $core->options[ $field['id'] ]['id'] );
 
 								if ( isset( $data ) && ! empty( $data ) ) {
@@ -486,7 +487,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						}
 
 						if ( 'background' === $field['type'] ) {
-							if ( isset( $core->options[ $field['id'] ]['media']['id'] ) && isset( $core->options[ $field['id'] ]['background-image'] ) && ! empty( $core->options[ $field['id'] ]['background-image'] ) && strpos( $core->options[ $field['id'] ]['background-image'], str_replace( array( 'http://', 'https://' ), '', WP_CONTENT_URL ) ) === false ) {
+							if ( isset( $core->options[ $field['id'] ]['media']['id'] ) && isset( $core->options[ $field['id'] ]['background-image'] ) && ! empty( $core->options[ $field['id'] ]['background-image'] ) && strpos( $core->options[ $field['id'] ]['background-image'], str_replace( array( 'https://', 'https://' ), '', WP_CONTENT_URL ) ) === false ) {
 								$data = wp_get_attachment_url( $core->options[ $field['id'] ]['media']['id'] );
 
 								if ( isset( $data ) && ! empty( $data ) ) {
@@ -507,7 +508,7 @@ if ( ! class_exists( 'Redux_Options_Constructor', false ) ) {
 						}
 
 						if ( 'slides' === $field['type'] ) {
-							if ( isset( $core->options[ $field['id'] ] ) && is_array( $core->options[ $field['id'] ] ) && isset( $core->options[ $field['id'] ][0]['attachment_id'] ) && isset( $core->options[ $field['id'] ][0]['image'] ) && ! empty( $core->options[ $field['id'] ][0]['image'] ) && strpos( $core->options[ $field['id'] ][0]['image'], str_replace( array( 'http://', 'https://' ), '', WP_CONTENT_URL ) ) === false ) {
+							if ( isset( $core->options[ $field['id'] ] ) && is_array( $core->options[ $field['id'] ] ) && isset( $core->options[ $field['id'] ][0]['attachment_id'] ) && isset( $core->options[ $field['id'] ][0]['image'] ) && ! empty( $core->options[ $field['id'] ][0]['image'] ) && strpos( $core->options[ $field['id'] ][0]['image'], str_replace( array( 'https://', 'https://' ), '', WP_CONTENT_URL ) ) === false ) {
 								foreach ( $core->options[ $field['id'] ] as $key => $val ) {
 									$data = wp_get_attachment_url( $val['attachment_id'] );
 

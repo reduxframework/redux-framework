@@ -16,7 +16,7 @@
  *
  * @return ReduxFramework                ReduxFramework
  */
-function get_redux_instance( string $opt_name ): ReduxFramework {
+function get_redux_instance( string $opt_name ): ReduxFramework { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Cannot change due to backward compatibility with older themes. Function contains plugin name.
 	_deprecated_function( __FUNCTION__, '4.0', 'Redux::instance($opt_name)' );
 
 	return Redux::instance( $opt_name );
@@ -29,7 +29,7 @@ function get_redux_instance( string $opt_name ): ReduxFramework {
  * @depreciated
  * @return array        format ['opt_name' => $ReduxFramework]
  */
-function get_all_redux_instances(): array {
+function get_all_redux_instances(): array { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Cannot change due to backward compatibility with older themes. Function contains plugin name.
 	_deprecated_function( __FUNCTION__, '4.0', 'Redux::all_instances()' );
 
 	return Redux::all_instances();

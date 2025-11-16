@@ -427,7 +427,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 			 *
 			 * @param array $arr Array.
 			 */
-			function my_serialize( array &$arr ) {
+			function redux_my_serialize( array &$arr ) {
 				$arr = maybe_serialize( $arr );
 			}
 
@@ -436,7 +436,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 			 *
 			 * @param array $arr Array.
 			 */
-			function my_unserialize( &$arr ) {
+			function redux_my_unserialize( &$arr ) {
 				$arr = maybe_unserialize( $arr );
 			}
 
@@ -445,14 +445,14 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 			$second_array_s = $second_array;
 
 			// serialize all sub-arrays.
-			array_walk( $first_array_s, 'my_serialize' );
-			array_walk( $second_array_s, 'my_serialize' );
+			array_walk( $first_array_s, 'redux_my_serialize' );
+			array_walk( $second_array_s, 'redux_my_serialize' );
 
 			// array_diff the serialized versions.
 			$diff = array_diff( $first_array_s, $second_array_s );
 
 			// unserialize the result.
-			array_walk( $diff, 'my_unserialize' );
+			array_walk( $diff, 'redux_my_unserialize' );
 
 			// you've got it!
 			return $diff;

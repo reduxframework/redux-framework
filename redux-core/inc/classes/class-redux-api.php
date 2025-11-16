@@ -348,7 +348,7 @@ if ( ! class_exists( 'Redux', false ) ) {
 					 */
 					global $$option_global;
 
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName
+					// phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.NamingConventions.PrefixAllGlobals
 					$$option_global = apply_filters( 'redux/options/' . $opt_name . '/global_variable', self::$options_defaults[ $opt_name ] );
 				}
 			}
@@ -1311,7 +1311,8 @@ if ( ! class_exists( 'Redux', false ) ) {
 				global $$opt_name;
 
 				if ( empty( $$opt_name ) ) {
-					$values    = get_option( $opt_name );
+					$values = get_option( $opt_name );
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 					$$opt_name = $values;
 				} else {
 					$values = $$opt_name;

@@ -477,6 +477,7 @@ if ( ! class_exists( 'Redux_Functions_Ex', false ) ) {
 		 * @return bool
 		 */
 		public static function is_plugin_active( string $name ): bool {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- active_plugins is a WP hook.
 			if ( in_array( $name . '/' . $name . '.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 				return true;
 			}

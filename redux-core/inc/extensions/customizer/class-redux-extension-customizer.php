@@ -345,6 +345,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 							$key          = str_replace( $this->parent->args['opt_name'] . '[', '', rtrim( $key, ']' ) );
 							$data[ $key ] = $value;
 
+							// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 							$GLOBALS[ $this->parent->args['global_variable'] ][ $key ] = $value;
 							$this->parent->options[ $key ]                             = $value;
 						}

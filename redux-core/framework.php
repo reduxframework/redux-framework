@@ -32,6 +32,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/class-redux-core.php';
 
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Variable is inside a prefixed class.
 Redux_Core::$version    = '4.5.9';
 Redux_Core::$redux_path = __DIR__;
 Redux_Core::instance();

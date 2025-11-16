@@ -15,7 +15,7 @@ if ( ! function_exists( 'create_term_redux_users' ) ) {
 	 *
 	 * @param string $profile_id Profile ID.
 	 */
-	function create_term_redux_users( string $profile_id ) {
+	function create_term_redux_users( string $profile_id ) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Existing API already used in themes. Cannot change due to backward compatibility. Contains the plugin name.
 		$instances = Redux::all_instances();
 
 		foreach ( $_POST as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification
