@@ -126,7 +126,8 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fix: Deprecation warning in `get_wordpress_data()` function.
 * Modified: Compliance with new PCP criteria.
 * Improved: Tighter security for shortcode extension.
-* Release date: November 17, 2025
+* Updated: parsedown.php for PHP 8.5.
+* Release date: November 24, 2025
 
 = 4.5.8
 * Fix: Reported XSS vulnerability in the shortcode extension.
