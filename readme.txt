@@ -122,7 +122,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 == Changelog ==
 
-= 4.5.8
+= 4.5.9
 * Fix: Deprecation warning in `get_wordpress_data()` function.
 * Modified: Compliance with new PCP criteria.
 * Improved: Tighter security for shortcode extension.
