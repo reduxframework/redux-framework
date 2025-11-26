@@ -175,7 +175,7 @@ $args['admin_bar_links'][] = array(
 // SOCIAL ICONS → Set up custom links in the footer for quick links in your panel footer icons.
 $args['share_icons'][] = array(
 	'url'   => '//github.com/ReduxFramework/ReduxFramework',
-	'title' => 'Visit us on GitHub',
+	'title' => esc_html__( 'Visit us on GitHub', 'your-textdomain-here' ),
 	'icon'  => 'el el-github',
 );
 $args['share_icons'][] = array(
