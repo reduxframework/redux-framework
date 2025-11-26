@@ -243,22 +243,22 @@ $args['admin_bar_links'][] = array(
 // If these are left unchanged, they will not display in your panel!
 $args['share_icons'][] = array(
 	'url'   => '//github.com/ReduxFramework/ReduxFramework',
-	'title' => 'Visit us on GitHub',
+	'title' => __( 'Visit us on GitHub', 'your-textdomain-here' ),
 	'icon'  => 'el el-github',
 );
 $args['share_icons'][] = array(
 	'url'   => '//www.facebook.com/pages/Redux-Framework/243141545850368',
-	'title' => 'Like us on Facebook',
+	'title' => __( 'Like us on Facebook', 'your-textdomain-here' ),
 	'icon'  => 'el el-facebook',
 );
 $args['share_icons'][] = array(
 	'url'   => '//twitter.com/reduxframework',
-	'title' => 'Follow us on Twitter',
+	'title' => __( 'Follow us on Twitter', 'your-textdomain-here' ),
 	'icon'  => 'el el-twitter',
 );
 $args['share_icons'][] = array(
 	'url'   => '//www.linkedin.com/company/redux-framework',
-	'title' => 'Find us on LinkedIn',
+	'title' => __( 'Find us on LinkedIn', 'your-textdomain-here' ),
 	'icon'  => 'el el-linkedin',
 );
 
