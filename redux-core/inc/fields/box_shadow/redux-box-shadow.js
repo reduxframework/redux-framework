@@ -129,8 +129,8 @@
 
 							$( this ).next( '#redux-slider-value-' + mainID ).attr( 'value', val );
 
-							$( this ).prev( 'label' ).html(
-								label + ':  <strong>' + val + 'px</strong>'
+							$( this ).prev( 'strong' ).html(
+								val + 'px'
 							);
 
 							redux.field_objects.box_shadow.changeValue( $( this ), true );
