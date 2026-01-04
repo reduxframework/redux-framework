@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.0.0';
+		public static $version = '4.5.10';
 
 		/**
 		 * Is field bit.
