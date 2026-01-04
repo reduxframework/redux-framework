@@ -428,11 +428,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 * @return      void
 		 */
 		public function parse_ajax() {
-			if ( ! is_admin() ) {
-				wp_die();
-			}
-
-			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
 				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
 			}
 
