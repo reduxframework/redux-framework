@@ -428,7 +428,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 * @return      void
 		 */
 		public function parse_ajax() {
-			if ( ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
 				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
 			}
 
@@ -467,6 +467,26 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 */
 		private function import_schemes() {
 			if ( isset( $_REQUEST['content'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+				$opt_name = Redux_Color_Scheme_Functions::$parent->args['opt_name'];
+				if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $opt_name ) ) {
+					$result = array(
+						'result' => false,
+						'data'   => esc_html__( 'Invalid opt_name' ),
+					);
+					echo wp_json_encode( $result );
+					die();
+				}
+
+				$field_id = Redux_Color_Scheme_Functions::$field_id;
+				if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $field_id ) ) {
+					$result = array(
+						'result' => false,
+						'data'   => esc_html__( 'Invalid field_id' ),
+					);
+					echo wp_json_encode( $result );
+					die();
+				}
+
 				$content = wp_unslash( $_REQUEST['content'] ); // phpcs:ignore WordPress.Security.NonceVerification, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$content = is_array( $content ) ? array_map( 'stripslashes_deep', $content ) : stripslashes( $content );
 				$content = json_decode( $content, true );
@@ -493,7 +513,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 						'chmod'     => FS_CHMOD_FILE,
 					);
 
-					$import_file = Redux_Color_Scheme_Functions::$upload_dir . Redux_Color_Scheme_Functions::$parent->args['opt_name'] . '_' . Redux_Color_Scheme_Functions::$field_id . '.json';
+					$import_file = Redux_Color_Scheme_Functions::$upload_dir . sanitize_file_name( $opt_name ) . '_' . sanitize_file_name( $field_id ) . '.json';
 
 					if ( true === Redux_Core::$filesystem->execute( 'put_contents', $import_file, $param_array ) ) {
 						$result = array(

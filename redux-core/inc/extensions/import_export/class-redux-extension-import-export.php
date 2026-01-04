@@ -100,7 +100,7 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		 * Import download options.
 		 */
 		public function download_options() {
-			if ( ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
 				wp_die( esc_html__( 'You do not have permission to export options.', 'redux-framework' ) );
 			}
 
