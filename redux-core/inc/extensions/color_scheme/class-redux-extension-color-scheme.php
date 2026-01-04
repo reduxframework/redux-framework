@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.10';
+		public static $version = '4.5.10';
 
 		/**
 		 * Extension friendly name.
@@ -76,7 +76,6 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 
 			// Ajax hooks.
 			add_action( 'wp_ajax_redux_color_schemes', array( $this, 'parse_ajax' ) );
-			add_action( 'wp_ajax_nopriv_redux_color_schemes', array( $this, 'parse_ajax' ) );
 
 			// Reset hooks.
 			add_action( 'redux/validate/' . $this->parent->args['opt_name'] . '/defaults', array( $this, 'reset_defaults' ), 0, 3 );
@@ -429,35 +428,37 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 * @return      void
 		 */
 		public function parse_ajax() {
-			if ( isset( $_REQUEST['nonce'] ) && isset( $_REQUEST['opt_name'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['nonce'] ) ), 'redux_' . sanitize_text_field( wp_unslash( $_REQUEST['opt_name'] ) ) . '_color_schemes' ) ) {
-				$parent = $this->parent;
+			if ( ! is_admin() ) {
+				wp_die();
+			}
 
-				// Do action.
-				if ( isset( $_REQUEST['type'] ) ) {
+			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
+			}
 
-					// Save scheme.
-					if ( 'save' === $_REQUEST['type'] ) {
-						$this->save_scheme( $parent );
+			$opt_name = $this->parent->args['opt_name'];
+			$parent   = $this->parent;
 
-						// Delete scheme.
-					} elseif ( 'delete' === $_REQUEST['type'] ) {
-						$this->delete_scheme( $parent );
+			$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_key( wp_unslash( $_REQUEST['nonce'] ) ) : '';
+			if ( ! wp_verify_nonce( $nonce, 'redux_' . $opt_name . '_color_schemes' ) ) {
+				wp_die( esc_html__( 'Invalid Security Credentials. Please reload the page and try again.', 'redux-framework' ) );
+			}
 
-						// Scheme change.
-					} elseif ( 'update' === $_REQUEST['type'] ) {
-						$this->get_scheme_html( $parent );
+			$type = isset( $_REQUEST['type'] ) ? sanitize_key( wp_unslash( $_REQUEST['type'] ) ) : '';
+			if ( ! in_array( $type, array( 'save', 'delete', 'update', 'export', 'import' ), true ) ) {
+				wp_die( esc_html__( 'Invalid request.', 'redux-framework' ) );
+			}
 
-						// Export scheme file.
-					} elseif ( 'export' === $_REQUEST['type'] ) {
-						$this->download_schemes();
-
-						// Import scheme file.
-					} elseif ( 'import' === $_REQUEST['type'] ) {
-						$this->import_schemes();
-					}
-				}
-			} else {
-				wp_die( esc_html__( 'Invalid Security Credentials.  Please reload the page and try again.', 'redux-framework' ) );
+			if ( 'save' === $type ) {
+				$this->save_scheme( $parent );
+			} elseif ( 'delete' === $type ) {
+				$this->delete_scheme( $parent );
+			} elseif ( 'update' === $type ) {
+				$this->get_scheme_html( $parent );
+			} elseif ( 'export' === $type ) {
+				$this->download_schemes();
+			} elseif ( 'import' === $type ) {
+				$this->import_schemes();
 			}
 		}
 
