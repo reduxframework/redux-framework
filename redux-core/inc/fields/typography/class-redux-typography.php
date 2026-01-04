@@ -1555,6 +1555,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 * Update google font array via AJAX call.
 		 */
 		public function google_fonts_update_ajax() {
+			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
+			}
+
 			if ( ! isset( $_POST['nonce'] ) || ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_update_google_fonts' ) ) ) {
 				die( 'Security check' );
 			}
