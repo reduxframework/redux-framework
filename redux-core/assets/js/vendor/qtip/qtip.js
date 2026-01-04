@@ -1895,10 +1895,10 @@
 					}
 				}
 
-				let argVal = arguments[1];
-				if ('boolean' === typeof argVal) {
-					arguments[1] = argVal.toString();
-				}
+				//let argVal = arguments[1];
+				//if ('boolean' === typeof argVal) {
+				//	arguments[1] = argVal.toString();
+				//}
 
 				return $.fn['attr'+replaceSuffix].apply(this, arguments);
 			},
