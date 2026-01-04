@@ -49,7 +49,7 @@ if ( ! class_exists( 'Redux_AJAX_Save', false ) ) {
 				die();
 			}
 
-			if ( ! Redux_Helpers::current_user_can( $core->args['page_permissions'] ) ) {
+			if ( ! is_admin() && ! is_user_logged_in() && ! Redux_Helpers::current_user_can( $core->args['page_permissions'] ) ) {
 				echo wp_json_encode(
 					array(
 						'status' => esc_html__( 'Invalid user capability.  Please reload the page and try again.', 'redux-framework' ),

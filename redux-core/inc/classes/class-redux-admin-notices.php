@@ -30,9 +30,15 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		private static array $notices = array();
 
 		/**
+		 * Parent object.
+		 *
+		 * @var ReduxFramework
+		 */
+		private static ReduxFramework $redux;
+		/**
 		 * Redux_Admin_Notices constructor.
 		 *
-		 * @param array $redux ReduxFramework object.
+		 * @param ReduxFramework $redux ReduxFramework object.
 		 * @access public
 		 */
 		public function __construct( $redux ) {
@@ -41,6 +47,8 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 			add_action( 'wp_ajax_redux_hide_admin_notice', array( $this, 'ajax' ) );
 			add_action( 'admin_notices', array( $this, 'notices' ), 99 );
 			add_action( 'admin_init', array( $this, 'dismiss' ), 9 );
+
+			self::$redux = $redux;
 		}
 
 		/**
@@ -75,10 +83,10 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 			// phpcs:ignore WordPress.PHP.DontExtract
 			extract( $data );
 
-			self::$notices[ $parent->args['page_slug'] ][] = array(
+			self::$notices[ self::$redux->args['page_slug'] ][] = array(
 				'type'    => $type,
 				'msg'     => $msg,
-				'id'      => $id . '_' . $parent->args['opt_name'],
+				'id'      => $id . '_' . self::$redux->args['opt_name'],
 				'dismiss' => $dismiss,
 				'color'   => $color ?? '#00A2E3',
 			);
@@ -211,6 +219,12 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 		 */
 		public function ajax() {
 			global $current_user;
+
+			$core = $this->core();
+
+			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $core->args['page_permissions'] ) ) {
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
+			}
 
 			if ( isset( $_POST['id'] ) ) {
 				// Get the notice id.
