@@ -296,7 +296,7 @@
 
 			// If an immediate destroy is needed
 			if((immediate !== TRUE || this.triggering === 'hide') && this.rendered) {
-				this.tooltip.one('tooltiphidden', $.proxy(process, this));
+				this.tooltip.one('tooltiphidden', process.bind(this)) /*$.proxy(process, this)) */;
 				!this.triggering && this.hide();
 			}
 
@@ -586,7 +586,7 @@
 			 * Also set positioning flag so we don't get loads of redundant repositioning calls.
 			 */
 			this.positioning = TRUE;
-			$.each(option, $.proxy(setCallback, this));
+			$.each(option, setCallback.bind(this) /* $.proxy(setCallback, this) */);
 			this.positioning = FALSE;
 
 			// Update position if needed
@@ -1097,23 +1097,24 @@
 			}
 
 			// Define post-animation, state specific properties
-			after = $.proxy(function() {
-				if(state) {
+			after = function() {
+				if (state) {
 					// Prevent antialias from disappearing in IE by removing filter
-					if(BROWSER.ie) { tooltip[0].style.removeAttribute('filter'); }
+					if (BROWSER.ie) {
+						tooltip[0].style.removeAttribute('filter');
+					}
 
 					// Remove overflow setting to prevent tip bugs
 					tooltip.css('overflow', '');
 
 					// Autofocus elements if enabled
-					if('string' === typeof opts.autofocus) {
+					if ('string' === typeof opts.autofocus) {
 						$(this.options.show.autofocus, tooltip).focus();
 					}
 
 					// If set, hide tooltip when inactive for delay period
-					this.options.show.target.trigger('qtip-'+this.id+'-inactive');
-				}
-				else {
+					this.options.show.target.trigger('qtip-' + this.id + '-inactive');
+				} else {
 					// Reset CSS states
 					tooltip.css({
 						display: '',
@@ -1126,7 +1127,7 @@
 
 				// tooltipvisible/tooltiphidden events
 				this._trigger(state ? 'visible' : 'hidden');
-			}, this);
+			}.bind(this);
 
 			// If no effect type is supplied, use a simple toggle
 			if(opts.effect === FALSE || animate === FALSE) {
@@ -1303,7 +1304,8 @@
 			// If tooltip has displayed, start hide timer
 			if(duration > 0) {
 				return setTimeout(
-					$.proxy(callback, this), duration
+					//$.proxy(callback, this), duration
+					callback.bind(this), duration
 				);
 			}
 			else{ callback.call(this); }
@@ -1389,7 +1391,8 @@
 			var ns = '.' + this._id + (suffix ? '-'+suffix : '');
 			$(targets).on(
 				(events.split ? events : events.join(ns + ' ')) + ns,
-				$.proxy(method, context || this)
+				//$.proxy(method, context || this)
+				method.bind(context || this)
 			);
 			return this;
 		};
@@ -1868,6 +1871,10 @@
 		;$.each({
 			/* Allow other plugins to successfully retrieve the title of an element with a qTip applied */
 			attr: function(attr, val) {
+				if ('boolean' === typeof val) {
+					val = val.toString();
+				}
+
 				if(this.length) {
 					var self = this[0],
 						title = 'title',
@@ -1886,6 +1893,11 @@
 						// Use the regular attr method to set, then cache the result
 						return this.attr(oldtitle, val);
 					}
+				}
+
+				let argVal = arguments[1];
+				if ('boolean' === typeof argVal) {
+					arguments[1] = argVal.toString();
 				}
 
 				return $.fn['attr'+replaceSuffix].apply(this, arguments);
