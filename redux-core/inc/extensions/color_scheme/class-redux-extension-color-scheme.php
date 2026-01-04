@@ -6,7 +6,7 @@
  * @author  Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Color_Scheme
  *
- * @version 4.4.10
+ * @version 4.5.10
  *
  * @noinspection PhpIgnoredClassAliasDeclaration
  */

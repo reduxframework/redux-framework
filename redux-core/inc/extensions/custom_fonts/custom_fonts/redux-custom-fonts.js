@@ -159,7 +159,8 @@
 				url: ajaxurl,
 				type: 'POST',
 				data: {
-					action: 'redux_custom_font_timer'
+					action: 'redux_custom_font_timer',
+					nonce: el.find( '.media_add_font' ).attr( 'data-nonce' ),
 				},
 				beforeSend: function () {
 
