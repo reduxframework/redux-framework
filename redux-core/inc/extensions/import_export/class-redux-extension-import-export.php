@@ -50,7 +50,6 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 			$this->add_field( 'import_export' );
 
 			add_action( 'wp_ajax_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
-			add_action( 'wp_ajax_nopriv_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			do_action( 'redux/options/' . $this->parent->args['opt_name'] . '/import', array( $this, 'remove_cookie' ) );
@@ -101,8 +100,16 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 		 * Import download options.
 		 */
 		public function download_options() {
+			if ( ! is_admin() ) {
+				wp_die();
+			}
+
+			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				wp_die( esc_html__( 'You do not have permission to export options.', 'redux-framework' ) );
+			}
+
 			if ( ! isset( $_GET['secret'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['secret'] ) ), 'redux_io_' . $this->parent->args['opt_name'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-				wp_die( 'Invalid Secret for options use.' );
+				wp_die( 'Invalid secret for options use.' );
 			}
 
 			$this->parent->options_class->get();
