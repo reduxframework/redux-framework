@@ -108,7 +108,6 @@
 				const maxVal = $( this ).data( 'max' );
 				const step   = $( this ).data( 'step' );
 				const def    = $( this ).data( 'default' );
-				const label  = $( this ).data( 'label' );
 				const rtl    = Boolean( $( this ).data( 'rtl' ) );
 				const range  = [minVal, maxVal];
 
