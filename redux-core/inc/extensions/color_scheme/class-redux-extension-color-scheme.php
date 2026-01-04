@@ -471,7 +471,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 				if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $opt_name ) ) {
 					$result = array(
 						'result' => false,
-						'data'   => esc_html__( 'Invalid opt_name' ),
+						'data'   => esc_html__( 'Invalid opt_name', 'redux-framework' ),
 					);
 					echo wp_json_encode( $result );
 					die();
@@ -481,7 +481,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 				if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $field_id ) ) {
 					$result = array(
 						'result' => false,
-						'data'   => esc_html__( 'Invalid field_id' ),
+						'data'   => esc_html__( 'Invalid field_id', 'redux-framework' ),
 					);
 					echo wp_json_encode( $result );
 					die();
