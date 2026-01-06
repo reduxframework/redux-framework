@@ -555,10 +555,14 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 		 * @return      void
 		 */
 		private function download_schemes() {
+			if ( ! Redux_Rate_Limiter::check( 'color_schemes' ) ) {
+				wp_die( 'Rate limit exceeded. Please try again later.' );
+			}
+
 			Redux_Color_Scheme_Functions::$parent   = $this->parent;
 			Redux_Color_Scheme_Functions::$field_id = $this->field_id;
 
-			// Read contents of scheme file.
+			// Read the contents of the scheme file.
 			$content = Redux_Color_Scheme_Functions::read_scheme_file();
 			$content = wp_json_encode( $content );
 

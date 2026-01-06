@@ -235,11 +235,12 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 		 */
 		private function init() {
 			self::$server = array(
-				'SERVER_SOFTWARE' => '',
-				'REMOTE_ADDR'     => Redux_Helpers::is_local_host() ? '127.0.0.1' : '',
-				'HTTP_USER_AGENT' => '',
-				'HTTP_HOST'       => '',
-				'REQUEST_URI'     => '',
+				'SERVER_SOFTWARE'      => '',
+				'REMOTE_ADDR'          => Redux_Helpers::is_local_host() ? '127.0.0.1' : '',
+				'HTTP_USER_AGENT'      => '',
+				'HTTP_HOST'            => '',
+				'REQUEST_URI'          => '',
+				'HTTP_X_FORWARDED_FOR' => '',
 			);
 
 			// phpcs:disable WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
@@ -258,7 +259,9 @@ if ( ! class_exists( 'Redux_Core', false ) ) {
 			if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
 				self::$server['REQUEST_URI'] = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 			}
-
+			if ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+				self::$server['HTTP_X_FORWARDED_FOR'] = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+			}
 			// phpcs:enable
 
 			self::$dir = trailingslashit( wp_normalize_path( dirname( realpath( __FILE__ ) ) ) );

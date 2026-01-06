@@ -108,6 +108,10 @@ if ( ! class_exists( 'Redux_Extension_Import_Export', false ) ) {
 				wp_die( 'Invalid secret for options use.' );
 			}
 
+			if ( ! Redux_Rate_Limiter::check( 'download_options' ) ) {
+				wp_die( 'Rate limit exceeded. Please try again later.' );
+			}
+
 			$this->parent->options_class->get();
 			$backup_options                 = $this->parent->options;
 			$backup_options['redux-backup'] = 1;
