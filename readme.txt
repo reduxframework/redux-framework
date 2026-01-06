@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 6.9
-Stable tag: 4.5.9
+Stable tag: 4.5.10
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,12 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.10
+* Fixed: Tighten security in `import_export`, `custom_fonts`, `color_scheme`, and Google Font updating.
+* Fixed: #4085 - `box_shadow` slider not updating value in real-time.
+* Fixed: Missing translations. Thanks, @DAnn2012.
+* Release date: January 07, 2026
 
 = 4.5.9
 * Fix: Deprecation warning in `get_wordpress_data()` function.
