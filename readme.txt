@@ -124,7 +124,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 = 4.5.10
 * Fixed: Tighten security in `import_export`, `custom_fonts`, `color_scheme`, and Google Font updating.
-* Fixed: #4085 - `box_shadow` slider not updating value in real-time.
+* Fixed: `box_shadow` slider not updating value in real-time.
 * Fixed: Missing translations. Thanks, @DAnn2012.
 * Release date: January 07, 2026
 
