@@ -40,7 +40,7 @@
 		"gulp-wp-pot": "^2.5.0",
 		"imagemin-gifsicle": "^7.0.0",
 		"jshint": "^2.13.1",
-		"lodash": "^4.17.21",
+		"lodash": "^4.17.23",
 		"merge-stream": "^2.0.0",
 		"node-gyp": "^8.4.1",
 		"node-sass": "^8.0.0",
