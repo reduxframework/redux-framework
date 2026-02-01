@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"del": "^6.0.0",
-		"eslint": "^8.39.0",
+		"eslint": "^9.26.0",
 		"gifsicle": "^6.1.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
