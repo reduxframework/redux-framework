@@ -34,7 +34,7 @@ if ( ! class_exists( 'Redux_Tabbed', false ) ) {
 		 * @since ReduxFramework 0.0.4
 		 */
 		public function render() {
-			$unallowed = array( 'tabbed', 'social_profiles', 'color_schemes', 'repeater' );
+			$unallowed = array( 'tabbed', 'social_profiles', 'color_schemes', 'repeater', 'icon_select' );
 
 			echo '<div id="' . esc_attr( $this->field['id'] ) . '-tabbed" class="redux-tabbed" rel="' . esc_attr( $this->field['id'] ) . '">';
 			echo '<div class="redux-tabbed-nav" data-id="' . esc_attr( $this->field['id'] ) . '">';
