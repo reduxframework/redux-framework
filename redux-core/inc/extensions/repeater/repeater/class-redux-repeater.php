@@ -56,7 +56,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 		 * @return      void
 		 */
 		public function render() {
-			$unallowed = array( 'tabbed', 'social_profiles', 'color_scheme', 'repeater' );
+			$unallowed = array( 'tabbed', 'social_profiles', 'color_scheme', 'repeater', 'icon_select' );
 
 			if ( isset( $this->field['group_values'] ) && $this->field['group_values'] ) {
 				$this->repeater_values = '[' . $this->field['id'] . ']';
