@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 7.0
-Stable tag: 4.5.11
+Stable tag: 4.5.12
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,10 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.12 =
+* Updated: "Modern" added to theme colors for WP 7.0.
+* Release date: May 25, 2026
 
 = 4.5.11 =
 * Updated: Adjust to WordPress 7.0 Interface changes.
