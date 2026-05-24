@@ -37,8 +37,8 @@ Redux::set_section(
 				'title'    => esc_html__( 'Switch - Nested Children, Enable to show', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Look, it\'s on! Also hidden child elements!', 'your-textdomain-here' ),
 				'default'  => false,
-				'on'       => 'Enabled',
-				'off'      => 'Disabled',
+				'on'       => esc_html__( 'Enabled', 'your-textdomain-here' ),
+				'off'      => esc_html__( 'Disabled', 'your-textdomain-here' ),
 			),
 			array(
 				'id'       => 'switch-child1',

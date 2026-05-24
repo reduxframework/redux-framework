@@ -154,8 +154,8 @@ Redux_Taxonomy::set_term(
 						'title'    => esc_html__( 'Switch - Nested Children, Enable to show', 'your-textdomain-here' ),
 						'subtitle' => esc_html__( 'Look, it\'s on! Also hidden child elements!', 'your-textdomain-here' ),
 						'default'  => 0,
-						'on'       => 'Enabled',
-						'off'      => 'Disabled',
+						'on'       => esc_html__( 'Enabled', 'your-textdomain-here' ),
+						'off'      => esc_html__( 'Disabled', 'your-textdomain-here' ),
 					),
 					array(
 						'id'       => 'tax-switch-child',
