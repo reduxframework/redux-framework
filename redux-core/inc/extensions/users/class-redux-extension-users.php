@@ -1003,7 +1003,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				return false;
 			}
 
-			$check_user_id = sanitize_text_field( wp_unslash( $_POST['checkuser_id'] ?? 1 ) );
+			$check_user_id = sanitize_text_field( wp_unslash( $_POST['checkuser_id'] ?? get_current_user_id() ) );
 
 			$user       = sanitize_text_field( wp_unslash( $_POST['user_id'] ?? get_current_user_id() ) );
 			$this->meta = Redux_Users::get_user_meta( array( 'user' => $user ) );
@@ -1013,24 +1013,30 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$to_delete  = array();
 			$dont_save  = true;
 
-			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ];
+			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ] ?? array();
 
 			foreach ( $_POST[ $this->parent->args['opt_name'] ] as $key => $value ) { // phpcs:ignore WordPress.Security
 				$key = sanitize_text_field( wp_unslash( $key ) );
 
-				if ( ! empty( $field_args[ $key ]['permissions'] ) ) {
-					foreach ( (array) $field_args[ $key ]['permissions'] as $pv ) {
+				if ( ! isset( $field_args[ $key ] ) || $this->is_reserved_user_meta_key( $key ) ) {
+					continue;
+				}
 
-						// Do not save anything the user doesn't have permissions for.
-						if ( isset( $field_args[ $key ] ) ) {
-							if ( user_can( $user_id, $pv ) && user_can( $check_user_id, $pv ) ) {
-								break;
-							}
+				if ( ! empty( $field_args[ $key ]['permissions'] ) ) {
+					$can_save = false;
+
+					foreach ( (array) $field_args[ $key ]['permissions'] as $pv ) {
+						if ( user_can( $check_user_id, $pv ) ) {
+							$can_save = true;
+							break;
 						}
+					}
+
+					if ( ! $can_save ) {
+						continue;
 					}
 				}
 
-				// Have to remove the escaping for array comparison.
 				if ( is_array( $value ) ) {
 					foreach ( $value as $k => $v ) {
 						if ( ! is_array( $v ) ) {
@@ -1060,6 +1066,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( "redux/{$this->parent->args['opt_name']}/users/save/before_validate", $to_save, $to_compare, $this->sections );
+
+			$to_save    = $this->filter_registered_user_meta_keys( $to_save, $field_args );
+			$to_compare = $this->filter_registered_user_meta_keys( $to_compare, $field_args );
+			$to_delete  = $this->filter_registered_user_meta_keys( $to_delete, $field_args );
 
 			$validate = $this->parent->validate_class->validate( $to_save, $to_compare, $this->sections );
 
@@ -1097,6 +1107,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/users/save', $to_save, $to_compare, $this->sections );
+			$to_save = $this->filter_registered_user_meta_keys( $to_save, $field_args );
 
 			foreach ( $to_save as $key => $value ) {
 				$prev_value = $this->meta[ $key ] ?? '';
@@ -1116,6 +1127,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				$prev_value = $this->meta[ $key ] ?? '';
 				delete_user_meta( $user_id, $key, $prev_value );
 			}
+
 			if ( ! empty( $check ) ) {
 				foreach ( $check as $key => $value ) {
 					delete_user_meta( $user_id, $key );
@@ -1143,6 +1155,74 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				echo '<p><strong><span></span> ' . count( $this->notices['warnings'] ) . ' ' . esc_html__( 'warnings(s) were found!', 'redux-framework' ) . '</strong></p>';
 				echo '</div>';
 			}
+		}
+
+		/**
+		 * Determine whether a user meta key must never be saved by the Users extension.
+		 *
+		 * @param string $key User meta key.
+		 *
+		 * @return bool
+		 */
+		private function is_reserved_user_meta_key( string $key ): bool {
+			global $wpdb;
+
+			$reserved = array(
+				'capabilities',
+				'user_level',
+				'session_tokens',
+				'application_passwords',
+				'wp_capabilities',
+				'wp_user_level',
+				$wpdb->base_prefix . 'capabilities',
+				$wpdb->base_prefix . 'user_level',
+				$wpdb->prefix . 'capabilities',
+				$wpdb->prefix . 'user_level',
+			);
+
+			if ( in_array( $key, array_unique( $reserved ), true ) ) {
+				return true;
+			}
+
+			$prefixes = array_unique(
+				array_filter(
+					array(
+						$wpdb->base_prefix,
+						$wpdb->prefix,
+					)
+				)
+			);
+
+			foreach ( $prefixes as $prefix ) {
+				if ( 0 !== strpos( $key, $prefix ) ) {
+					continue;
+				}
+
+				if ( preg_match( '/(?:^|_)(capabilities|user_level)$/', $key ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/**
+		 * Remove any submitted/saved keys that are not registered Redux user fields,
+		 * or that target protected WordPress user meta.
+		 *
+		 * @param array $values     Values to save/delete.
+		 * @param array $field_args Registered Redux user fields.
+		 *
+		 * @return array
+		 */
+		private function filter_registered_user_meta_keys( array $values, array $field_args ): array {
+			foreach ( array_keys( $values ) as $key ) {
+				if ( ! isset( $field_args[ $key ] ) || $this->is_reserved_user_meta_key( (string) $key ) ) {
+					unset( $values[ $key ] );
+				}
+			}
+
+			return $values;
 		}
 	}
 }
