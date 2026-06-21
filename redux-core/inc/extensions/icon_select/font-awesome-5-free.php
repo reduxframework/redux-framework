@@ -6,6 +6,8 @@
  * @author  Kevin Provance <kevin.provance@gmail.com>
  */
 
+defined( 'ABSPATH' ) || exit;
+
 if ( ! function_exists( 'redux_icon_select_fa_5_free' ) ) {
 
 	/**

@@ -8,6 +8,8 @@
  * @version:    4.0.0
  */
 
+defined( 'ABSPATH' ) || exit;
+
 $redux_tip_title = esc_html__( 'Developer Mode Enabled', 'redux-framework' );
 
 if ( $this->parent->args_class->dev_mode_forced ) {

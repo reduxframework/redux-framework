@@ -6,6 +6,8 @@
  * @package Redux Framework
  */
 
+defined( 'ABSPATH' ) || exit;
+
 // phpcs:disabled
 if ( ! class_exists( 'Redux' ) ) {
 	return null;

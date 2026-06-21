@@ -8,6 +8,8 @@
  * @version:    4.3.11
  */
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <div class="redux-sidebar">
 	<ul class="redux-group-menu">

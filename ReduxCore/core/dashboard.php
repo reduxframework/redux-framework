@@ -5,6 +5,8 @@
  * @package Redux Framework
  */
 
+defined( 'ABSPATH' ) || exit;
+
 $redux_theme = wp_get_theme();
 
 // translators: %1$s: template path.

@@ -8,6 +8,8 @@
  * @version:      4.4.2
  */
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <div id="redux-sticky">
 	<div id="info_bar">

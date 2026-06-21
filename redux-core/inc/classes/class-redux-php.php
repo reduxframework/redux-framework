@@ -5,6 +5,8 @@
  * @package redux-framework
  */
 
+defined( 'ABSPATH' ) || exit;
+
 if ( ! class_exists( 'Redux_PHP' ) ) {
 
 	/**

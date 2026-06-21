@@ -7,6 +7,8 @@
  * @deprecated Maintained for backward compatibility with v3.
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Retrieve an instance of ReduxFramework
  *

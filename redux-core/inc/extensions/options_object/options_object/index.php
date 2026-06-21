@@ -5,4 +5,4 @@
  * @package Redux Framework
  */
 
-echo null;
+defined( 'ABSPATH' ) || exit;;

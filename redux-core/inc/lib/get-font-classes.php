@@ -31,6 +31,7 @@ $redux_output .= "\t\t" . 'return array( ' . redux_fa_icons() . ' );' . "\r";
 $redux_output .= "\t" . '}' . "\r";
 $redux_output .= '}' . "\r";
 
+// phpcs:ignore PluginCheck.CodeAnalysis.WriteFile.PluginDirectoryWrite -- This file is only used during the dev gulp pipeline.
 file_put_contents( dirname( __DIR__ ) . '/lib/font-awesome-6-free.php', $redux_output );
 
 /**
@@ -39,6 +40,7 @@ file_put_contents( dirname( __DIR__ ) . '/lib/font-awesome-6-free.php', $redux_o
  * @return false|string
  */
 function redux_fa_icons() {
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- This is a dev only file.
 	$content = file_get_contents( 'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/metadata/icons.json' );
 	$json    = json_decode( $content );
 	$icons   = '';

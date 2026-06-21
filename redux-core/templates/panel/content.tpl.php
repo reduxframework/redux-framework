@@ -8,6 +8,8 @@
  * @version:    4.0.0
  */
 
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <!-- Header Block -->
 <?php $this->get_template( 'header.tpl.php' ); ?>

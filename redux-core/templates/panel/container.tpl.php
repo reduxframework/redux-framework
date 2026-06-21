@@ -8,6 +8,8 @@
  * @version:    4.4.4
  */
 
+defined( 'ABSPATH' ) || exit;
+
 $redux_expanded = ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : ( ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '' );
 $redux_nonce    = wp_create_nonce( 'redux_ajax_nonce' . $this->parent->args['opt_name'] );
 $redux_actionn  = ( 'network' === $this->parent->args['database'] && $this->parent->args['network_admin'] && is_network_admin() ? './edit.php?action=redux_' . $this->parent->args['opt_name'] : './options.php' );
