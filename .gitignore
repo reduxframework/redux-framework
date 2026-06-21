@@ -78,4 +78,7 @@ yarn-error.log*
 redux-templates/classes/library.json
 local_developer.txt
 
+# ai reviewr
+.claude
+
 !/redux-core/assets/js/vendor/jquery.serializeJSON.js

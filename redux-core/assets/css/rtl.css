@@ -19,6 +19,7 @@ html[dir=rtl] .redux-action_bar,
 	border-right: 1px solid #d8d8d8;
 	margin-right: 201px;
 }
+
 .redux-main .redux-typography-container .typography-preview {
 	text-align: center !important;
 	direction: ltr !important;
@@ -28,16 +29,14 @@ html[dir=rtl] .redux-action_bar,
 	padding-left: 0;
 	padding-right: 30px;
 }
+
 .redux-group-tab-link-a i {
-	padding-left: 10px;
+	padding-left: 5px;
 	padding-right: 5px;
-}
-.redux-group-tab-link-a span.group_title {
-	padding-left: 0;
-	padding-right: 30px;
 }
 
 .redux_slider {
+	float: right;
 	margin-left: 0;
 	margin-right: 15px;
 }
@@ -52,7 +51,7 @@ html[dir=rtl] .redux-action_bar,
 }
 
 .redux_field_th {
-	padding: 20px 0 20px 10px !important;
+	padding: 20px 0px 20px 10px !important
 }
 
 .field-desc {
@@ -113,6 +112,173 @@ html[dir=rtl] .redux-action_bar,
 .select2-search-choice-close {
 	left: 23px !important;
 }
+
+#adminmenu .wp-menu-image img {
+	width: 24px;
+	height: 24px;
+	padding: 5px;
+}
+
+.redux-container .redux-main {
+	margin-left: 0;
+	margin-right: 201px;
+}
+
+.redux-container .redux-action_bar #redux-defaults-top,
+.redux-container .redux-action_bar #redux-defaults-bottom {
+	margin-left: 0px;
+	margin-right: 2px;
+}
+
+.redux-container .redux-action_bar #redux-defaults-section-top,
+.redux-container .redux-action_bar #redux-defaults-section-bottom {
+	margin-right: 2px;
+	margin-left: 0px;
+}
+
+.redux-container #redux-header .display_header {
+	float: right;
+}
+
+.redux-container #redux-header .display_header h2 {
+	padding-left: 5px;
+	padding-right: 0;
+}
+
+.redux-container .ui-buttonset,
+.control-section-redux .ui-buttonset,
+.control-panel-redux .ui-buttonset,
+.redux-metabox .ui-buttonset {
+	margin-left: 7px;
+	margin-right: 0;
+	direction: ltr;
+}
+
+fieldset {
+	float: inline-end;
+}
+
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=tel],
+input[type=time],
+input[type=url],
+input[type=week] {
+	text-align: left !important;
+}
+
+input.regular-text.url {
+	text-align: left;
+	direction: ltr;
+}
+
+.redux-container .redux-field-container {
+	width: 100%;
+}
+
+.redux-container-text input {
+	width: inherit;
+}
+
+.redux-container .redux-action_bar .spinner {
+	float: right;
+}
+
+.redux-wp-7 .redux-main .redux_field_search {
+	left: 0;
+	right: 50px;
+}
+
+.redux-container #redux-intro-text {
+	padding-right: 20px;
+	padding-left: 0;
+}
+
+.redux-container #redux-header .display_header .redux-dev-mode-notice-container {
+	right: 20px;
+	left: auto;
+}
+
+.redux-field-heading,
+.redux-field-subheading,
+.redux-field-content,
+.redux-field-submessage {
+	padding-left: 0px;
+	padding-right: 20px;
+}
+
+.redux-main .redux-container-color_palette .colors-wrapper input:checked+label .color-palette-color {
+	right: -15%;
+	left: auto;
+}
+
+.redux-sidebar .redux-group-menu li a {
+	padding: 10px 14px 10px 14px;
+}
+
+.redux-sidebar .redux-group-tab-link-li.hasSubSections:hover .el-rotate {
+	-webkit-transition: 0.1s ease-in-out;
+	transition: 0.1s ease-in-out;
+	-webkit-transform: rotate(-270deg);
+	transform: rotate(-270deg);
+}
+
+.redux-sidebar .redux-group-menu li.active.hasSubSections .active a::after,
+.redux-sidebar .redux-group-menu li.activeChild.hasSubSections .active a::after {
+	left: 0;
+	right: auto;
+	border-right-color: transparent;
+	border-left-color: #fff;
+}
+
+.redux-sidebar .redux-group-menu li.active.hasSubSections ul.subsection li a,
+.redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li a {
+	padding: 7px 15px 7px 7px;
+}
+
+.redux-sidebar .redux-group-menu li.active.hasSubSections ul.subsection li a span.group_title,
+.redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li a span.group_title {
+	padding-right: 5px !important;
+	padding-left: 0px;
+}
+
+.redux-sidebar .redux-group-tab-link-a span.group_title {
+	padding-right: 30px;
+	padding-left: 0;
+}
+
+.redux-sidebar .redux-group-tab-link-li.hasSubSections.redux-section-hover .subsection {
+	right: 201px;
+	left: auto;
+}
+
+.redux-container #redux-footer #redux-share a {
+	margin-left: 10px;
+	margin-right: auto;
+}
+
+.redux-sidebar .redux-group-tab-link-li.hasSubSections.redux-section-hover .subsection .redux-group-tab-link-li .redux-group-tab-link-a .group_title {
+	padding-left: auto;
+	padding-right: 0;
+}
+
+.redux-container .redux-sidebar .redux-group-menu li.hasSubSections.redux-section-hover>a::after {
+	border-left-color: #32373c;
+	border-right-color: transparent;
+	left: 0;
+	right: auto;
+}
+
+.redux-sidebar .redux-group-menu li a:hover {
+	-webkit-box-shadow: inset -4px 0 0 0 currentColor;
+	box-shadow: inset -4px 0 0 0 currentColor;
+}
+
 /*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJ0bC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVJO0FBQUE7Q0FDSTs7O0FBSVI7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7Q0FPSTs7O0FBR0o7Q0FDSTtDQUNBO0NBQ0E7Q0FDQTs7QUFFQTtDQUNJO0NBQ0E7OztBQUlSO0NBQ0k7Q0FDQTs7QUFFQTtDQUNJO0NBQ0E7O0FBR0o7Q0FDSTtDQUNBOzs7QUFJUjtDQUNJO0NBQ0E7OztBQUdKO0NBQ0k7OztBQUdKO0NBQ0k7Q0FDQTs7O0FBR0o7Q0FDSTs7O0FBR0o7Q0FDSTs7O0FBR0o7QUFBQTtBQUFBO0FBQUE7Q0FJSTs7O0FBR0o7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtDQWNJOzs7QUFHSjtDQUNJO0NBQ0E7OztBQUdKO0FBQUE7QUFBQTtDQUdJO0NBQ0E7Q0FDQTs7O0FBSUE7Q0FDSTs7O0FBSVI7Q0FDSTs7O0FBSUE7QUFBQTtBQUFBO0NBR0k7OztBQUlSO0NBQ0kiLCJmaWxlIjoicnRsLmNzcyJ9 */
 
 /*# sourceMappingURL=rtl.css.map */
