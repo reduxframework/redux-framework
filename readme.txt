@@ -125,7 +125,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 = 4.5.12 =
 * Fix: Reported privilege escalation vulnerability in `users` extension. Thanks, Jakub Herman.
 * Updated: "Modern" added to theme colors for WP 7.0.
-* Updated: Improved RYL.CSS. Thanks, @Mr-Alidoosti.
+* Updated: Improved RTL.CSS. Thanks, @Mr-Alidoosti.
 * Release date: June 22, 2026
 
 = 4.5.11 =
