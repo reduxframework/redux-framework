@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.3
 Requires PHP: 7.4
 Tested up to: 7.1
-Stable tag: 4.5.14
+Stable tag: 4.5.13
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -122,7 +122,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 == Changelog ==
 
-= 4.5.12 =
+= 4.5.13 =
 * Fix: Reported privilege escalation vulnerability in `users` extension. Thanks, Jakub Herman.
 * Updated: "Modern" added to theme colors for WP 7.0.
 * Updated: Improved RTL.CSS. Thanks, @Mr-Alidoosti.
