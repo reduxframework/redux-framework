@@ -122,15 +122,11 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 == Changelog ==
 
-= 4.5.14 =
-* Fix: Reported priviledge esclation vulernatbility in `users` extention. Thanks, Jakub Herman.
-* Fix: Redux now mimics new admin colors in WP 7.x.
+= 4.5.12 =
+* Fix: Reported privilege escalation vulnerability in `users` extension. Thanks, Jakub Herman.
+* Updated: "Modern" added to theme colors for WP 7.0.
 * Updated: Improved RYL.CSS. Thanks, @Mr-Alidoosti.
 * Release date: June 22, 2026
-
-= 4.5.12 =
-* Updated: "Modern" added to theme colors for WP 7.0.
-* Release date: May 25, 2026
 
 = 4.5.11 =
 * Updated: Adjust to WordPress 7.0 Interface changes.
