@@ -457,6 +457,16 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * @param string $attachment_id ID.
 		 */
 		public function process_web_font( string $attachment_id ) {
+			if ( ! current_user_can( 'delete_post', $attachment_id ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ),
+					)
+				);
+				die();
+			}
+
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( ! isset( $_POST['conversion'] ) ) {
 				$_POST['conversion'] = 'false';
