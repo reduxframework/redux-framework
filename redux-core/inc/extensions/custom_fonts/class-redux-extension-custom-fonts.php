@@ -402,20 +402,18 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			$this->font_filename = sanitize_file_name( wp_unslash( $_POST['filename'] ) );
 
 			if ( ! empty( $_POST['attachment_id'] ) ) {
-				if ( isset( $_POST['title'] ) || isset( $_POST['mime'] ) ) {
-					$msg = $this->process_web_font( sanitize_key( wp_unslash( $_POST['attachment_id'] ) ), sanitize_text_field( wp_unslash( $_POST['mime'] ) ) );
+				$msg = $this->process_web_font( sanitize_key( wp_unslash( $_POST['attachment_id'] ) ) );
 
-					if ( empty( $msg ) ) {
-						$msg = '';
-					}
-
-					$result = array(
-						'type' => 'success',
-						'msg'  => $msg,
-					);
-
-					echo wp_json_encode( $result );
+				if ( empty( $msg ) ) {
+					$msg = '';
 				}
+
+				$result = array(
+					'type' => 'success',
+					'msg'  => $msg,
+				);
+
+				echo wp_json_encode( $result );
 			}
 
 			die();
@@ -457,9 +455,8 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Take a valid web font and process the missing pieces.
 		 *
 		 * @param string $attachment_id ID.
-		 * @param string $mime_type     Mine type.
 		 */
-		public function process_web_font( string $attachment_id, string $mime_type ) {
+		public function process_web_font( string $attachment_id ) {
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( ! isset( $_POST['conversion'] ) ) {
 				$_POST['conversion'] = 'false';
@@ -479,8 +476,9 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'otf',
 			);
 
-			$subtype = explode( '/', $mime_type );
-			$subtype = trim( max( $subtype ) );
+			$mime_type = get_post_mime_type( $attachment_id );
+			$subtype   = explode( '/', $mime_type );
+			$subtype   = trim( max( $subtype ) );
 
 			if ( ! is_dir( $this->upload_dir ) ) {
 				Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir );
