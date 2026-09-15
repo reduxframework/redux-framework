@@ -164,7 +164,13 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 */
 		public function timer() {
 			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ),
+					)
+				);
+				die();
 			}
 
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_custom_fonts' ) ) {
@@ -336,8 +342,14 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Ajax used within the panel to add and process the fonts
 		 */
 		public function ajax() {
-			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
+			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ),
+					)
+				);
+				die();
 			}
 
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_custom_fonts' ) ) {
