@@ -125,7 +125,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 = 4.5.15 =
 * Fixed: Authenticated (Custom+) stored XSS via the 'user-mediaurl' media field.
 * Fixed: Missing authorization to authenticated (Subscriber+) allowing arbitrary attachment deletion via the 'attachment_id' parameter.
-* Release date: September 18, 2026
+* Release date: September 21, 2026
 
 = 4.5.14 =
 * Fixed: XSS vulnerabilities caused by lack of output escaping and validation.
