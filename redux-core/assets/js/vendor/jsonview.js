@@ -20,6 +20,11 @@
  * Speed Project Approved: 2h
  */
 
+/*
+ * Modified by Redux Framework. This is not the pristine ViewJSON 1.0.
+ * See the git history for the full diff.
+ */
+
 function collapse( evt ) {
 	var collapser = evt.target;
 	var target    = collapser.parentNode.getElementsByClassName( 'collapsible' );
@@ -133,7 +138,7 @@ function jsonView( id, target ) {
 					output += this.decorateWithSpan( value, 'num' );
 				} else if ( valueType === 'string' ) {
 					if ( /^(http|https):\/\/[^\s]+$/.test( value ) ) {
-						output += '<a href="' + value + '">' + this.htmlEncode( value ) + '</a>';
+						output += '<a href="' + this.htmlEncode(value) + '">' + this.htmlEncode( value ) + '</a>';
 					} else {
 						output += this.decorateWithSpan( '"' + value + '"', 'string' );
 					}

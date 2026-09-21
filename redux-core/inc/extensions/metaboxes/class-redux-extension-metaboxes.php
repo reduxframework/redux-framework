@@ -445,10 +445,17 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			$this->parent->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
+			$field_args = Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ] ?? array();
+
 			$meta = $this->get_meta( $this->post_id );
 			$data = wp_parse_args( $meta, $this->options_defaults );
 
 			foreach ( $data as $key => $value ) {
+				if ( ! isset( $field_args[ $key ] ) ) {
+					unset( $data[ $key ] );
+					continue;
+				}
+
 				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
 					$data[ $key ] = $meta[ $key ];
 					continue;
@@ -1397,7 +1404,13 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 				$dont_save = false;
 			}
 
+			$field_args = Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ] ?? array();
+
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
+				if ( ! isset( $field_args[ $key ] ) ) {
+					continue;
+				}
+
 				$save = true;
 
 				// parent_options.

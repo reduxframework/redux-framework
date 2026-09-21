@@ -163,8 +163,14 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Timer.
 		 */
 		public function timer() {
-			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
+			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ),
+					)
+				);
+				die();
 			}
 
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_custom_fonts' ) ) {
@@ -336,8 +342,14 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Ajax used within the panel to add and process the fonts
 		 */
 		public function ajax() {
-			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
+			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ),
+					)
+				);
+				die();
 			}
 
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_custom_fonts' ) ) {
@@ -390,20 +402,18 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 			$this->font_filename = sanitize_file_name( wp_unslash( $_POST['filename'] ) );
 
 			if ( ! empty( $_POST['attachment_id'] ) ) {
-				if ( isset( $_POST['title'] ) || isset( $_POST['mime'] ) ) {
-					$msg = $this->process_web_font( sanitize_key( wp_unslash( $_POST['attachment_id'] ) ), sanitize_text_field( wp_unslash( $_POST['mime'] ) ) );
+				$msg = $this->process_web_font( sanitize_key( wp_unslash( $_POST['attachment_id'] ) ) );
 
-					if ( empty( $msg ) ) {
-						$msg = '';
-					}
-
-					$result = array(
-						'type' => 'success',
-						'msg'  => $msg,
-					);
-
-					echo wp_json_encode( $result );
+				if ( empty( $msg ) ) {
+					$msg = '';
 				}
+
+				$result = array(
+					'type' => 'success',
+					'msg'  => $msg,
+				);
+
+				echo wp_json_encode( $result );
 			}
 
 			die();
@@ -445,9 +455,18 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Take a valid web font and process the missing pieces.
 		 *
 		 * @param string $attachment_id ID.
-		 * @param string $mime_type     Mine type.
 		 */
-		public function process_web_font( string $attachment_id, string $mime_type ) {
+		public function process_web_font( string $attachment_id ) {
+			if ( ! current_user_can( 'delete_post', $attachment_id ) ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'error',
+						'msg'  => esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ),
+					)
+				);
+				die();
+			}
+
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( ! isset( $_POST['conversion'] ) ) {
 				$_POST['conversion'] = 'false';
@@ -467,8 +486,9 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 				'otf',
 			);
 
-			$subtype = explode( '/', $mime_type );
-			$subtype = trim( max( $subtype ) );
+			$mime_type = get_post_mime_type( $attachment_id );
+			$subtype   = explode( '/', $mime_type );
+			$subtype   = trim( max( $subtype ) );
 
 			if ( ! is_dir( $this->upload_dir ) ) {
 				Redux_Core::$filesystem->execute( 'mkdir', $this->upload_dir );
