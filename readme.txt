@@ -125,6 +125,7 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 = 4.5.16 =
 * Fixed: Authenticated (Subscriber+) stored XSS via the 'multi_media' field and client-supplied checkuser_id.
 * Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via /wp-admin/profile.php inline redux_<opt_name> JavaScript.
+* Fixed: Metabox fields registered via the 'redux/metaboxes/{opt_name}/boxes' filter failing to save.
 * Release date: October 12, 2026
 
 = 4.5.15 =
