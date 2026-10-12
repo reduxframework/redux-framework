@@ -237,7 +237,23 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			if ( empty( $this->boxes ) && class_exists( 'Redux_Metaboxes' ) ) {
 				$this->boxes = Redux_Metaboxes::construct_boxes( $this->parent->args['opt_name'] );
 			}
-
+			// Automatically push filter-registered fields into the allowlist.
+			if ( class_exists( 'Redux_Metaboxes' ) && ! empty( $this->boxes ) && is_array( $this->boxes ) ) {
+        		foreach ( $this->boxes as $box ) {
+            if ( isset( $box['sections'] ) && is_array( $box['sections'] ) ) {
+                foreach ( $box['sections'] as $section ) {
+                    if ( isset( $section['fields'] ) && is_array( $section['fields'] ) ) {
+                        foreach ( $section['fields'] as $field ) {
+                            // If the field isn't in the allowlist yet, add it.
+                            if (  ! empty( $field['id'] ) && ! isset( Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ][ $field['id'] ] ) ) {
+                                Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ][ $field['id'] ] = $field;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 			if ( empty( $this->boxes ) || ! is_array( $this->boxes ) ) {
 				return;
 			}
