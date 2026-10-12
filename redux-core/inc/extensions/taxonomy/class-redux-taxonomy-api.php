@@ -113,7 +113,9 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 
 					self::check_opt_name( $opt_name );
 
-					Redux::set_args( $opt_name, self::$args[ $opt_name ] );
+					if ( is_array( self::$args[ $opt_name ] ) ) {
+						Redux::set_args( $opt_name, self::$args[ $opt_name ] );
+					}
 				}
 			}
 		}

@@ -1035,7 +1035,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					$can_save = false;
 
 					foreach ( (array) $field_args[ $key ]['permissions'] as $pv ) {
-						if ( user_can( get_current_user_id(), $pv ) ) {
+						if ( Redux_Helpers::current_user_can( $pv ) ) {
 							$can_save = true;
 							break;
 						}

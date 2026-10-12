@@ -155,6 +155,9 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			add_action( 'admin_notices', array( $this, 'meta_profiles_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
 
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
+
 			if ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) {
 				$this->init();
 
@@ -467,6 +470,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			if ( in_array( $pagenow, $this->pagenows, true ) ) {
 
+				if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
+					return;
+				}
+
 				if ( 'user-new.php' === $pagenow ) {
 					$this->parent->args['disable_save_warn'] = true;
 				}
@@ -519,6 +526,118 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			}
 		}
 
+		/**
+		 * Whether the current user may access the Redux panel.
+		 *
+		 * @return bool
+		 */
+		protected function can_access_panel(): bool {
+			$capability = $this->parent->args['page_permissions'] ?? 'manage_options';
+
+			if ( empty( $capability ) ) {
+				return false;
+			}
+
+			return Redux_Helpers::current_user_can( $capability );
+		}
+
+		/**
+		 * Restricts the localized option set on user profile pages for users without panel access.
+		 * Only the options for the fields rendered on the profile are included,
+		 * so the rest of the panel's option set is not exposed in the page source.
+		 *
+		 * @param array $localize_data Localized data.
+		 *
+		 * @return array
+		 */
+		public function restrict_localize_options( array $localize_data ): array {
+			global $pagenow;
+
+			if ( ! in_array( $pagenow, $this->pagenows, true ) ) {
+				return $localize_data;
+			}
+
+			if ( $this->can_access_panel() ) {
+				return $localize_data;
+			}
+
+			$profile_ids = $this->get_visible_profile_field_ids();
+
+			foreach ( array( 'options', 'defaults' ) as $key ) {
+				if ( ! isset( $localize_data[ $key ] ) || ! is_array( $localize_data[ $key ] ) ) {
+					continue;
+				}
+
+				$restricted = array();
+
+				foreach ( $localize_data[ $key ] as $field_id => $value ) {
+					if ( in_array( $field_id, $profile_ids, true ) ) {
+						$restricted[ $field_id ] = $value;
+					}
+				}
+
+				$localize_data[ $key ] = $restricted;
+			}
+
+			return $localize_data;
+		}
+
+		/**
+		 * Collects the IDs of the profile fields that are rendered for the current user,
+		 * mirroring the visibility and permission checks that generate_profiles() applies.
+		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
+		 *
+		 * @return array
+		 */
+		private function get_visible_profile_field_ids(): array {
+			$ids = array();
+
+			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
+				return $ids;
+			}
+
+			foreach ( $this->profiles as $profile ) {
+				if ( empty( $profile['sections'] ) || ! is_array( $profile['sections'] ) ) {
+					continue;
+				}
+
+				if ( ! empty( $profile['permissions'] ) && ! Redux_Helpers::current_user_can( $profile['permissions'] ) ) {
+					continue;
+				}
+
+				foreach ( $profile['sections'] as $section ) {
+					if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+						continue;
+					}
+
+					if ( ! $this->check_edit_visibility( $section ) ) {
+						continue;
+					}
+
+					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
+						continue;
+					}
+
+					foreach ( $section['fields'] as $field ) {
+						if ( empty( $field['id'] ) ) {
+							continue;
+						}
+
+						if ( ! $this->check_edit_visibility( $field ) ) {
+							continue;
+						}
+
+						if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
+							continue;
+						}
+
+						$ids[ $field['id'] ] = true;
+					}
+				}
+			}
+
+			return array_keys( $ids );
+		}
 
 		/**
 		 * DEPRECATED
@@ -1007,9 +1126,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				return false;
 			}
 
-			$check_user_id = sanitize_text_field( wp_unslash( $_POST['checkuser_id'] ?? get_current_user_id() ) );
-
-			$user       = sanitize_text_field( wp_unslash( $_POST['user_id'] ?? get_current_user_id() ) );
+			$user = sanitize_text_field( wp_unslash( $_POST['user_id'] ?? get_current_user_id() ) );
 			$this->meta = Redux_Users::get_user_meta( array( 'user' => $user ) );
 
 			$to_save    = array();
@@ -1030,7 +1147,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					$can_save = false;
 
 					foreach ( (array) $field_args[ $key ]['permissions'] as $pv ) {
-						if ( user_can( $check_user_id, $pv ) ) {
+						if ( Redux_Helpers::current_user_can( $pv ) ) {
 							$can_save = true;
 							break;
 						}

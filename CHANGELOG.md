@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.5.16
+* Fixed: Authenticated (Subscriber+) stored XSS via the 'multi_media' field and client-supplied checkuser_id.
+* Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via /wp-admin/profile.php inline redux_<opt_name> JavaScript.
+* Release date: October 09, 2026
+
 ## 4.5.15
 * Fixed: Authenticated (Custom+) stored XSS via the 'user-mediaurl' media field.
 * Fixed: Missing authorization to authenticated (Subscriber+) allowing arbitrary attachment deletion via the 'attachment_id' parameter.

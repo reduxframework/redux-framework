@@ -113,7 +113,9 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 
 					self::check_opt_name( $opt_name );
 
-					Redux::set_args( $opt_name, self::$args[ $opt_name ] );
+					if ( is_array( self::$args[ $opt_name ] ) ) {
+						Redux::set_args( $opt_name, self::$args[ $opt_name ] );
+					}
 				}
 			}
 		}
@@ -556,6 +558,10 @@ if ( ! class_exists( 'Redux_Users' ) ) {
 			$single = ! empty( $key );
 
 			$meta = get_user_meta( $user, $key, $single );
+
+			if ( ! $single && false === $meta ) {
+				$meta = array();
+			}
 
 			if ( $single ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement
 				// Do nothing.
