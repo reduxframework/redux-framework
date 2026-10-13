@@ -217,12 +217,14 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 			$this->parent->transients['run_compiler'] = false;
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->terms = apply_filters( 'redux/taxonomy/' . $this->parent->args['opt_name'] . '/terms', $this->terms, $this->parent->args['opt_name'] );
-
-			if ( empty( $this->terms ) && class_exists( 'Redux_Taxonomy' ) ) {
+			if ( class_exists( 'Redux_Taxonomy' ) ) {
 				$this->terms = Redux_Taxonomy::construct_terms( $this->parent->args['opt_name'] );
 			}
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			$filtered = apply_filters( 'redux/taxonomy/' . $this->parent->args['opt_name'] . '/terms', $this->terms, $this->parent->args['opt_name'] );
+
+			$this->terms = is_array( $filtered ) ? $filtered : $this->terms;
 
 			if ( empty( $this->terms ) || ! is_array( $this->terms ) ) {
 				return;
@@ -417,7 +419,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$this->parent->options_class->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
-			$field_args = Redux_Taxonomy::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$field_args = $this->get_declared_fields( $this->terms );
 
 			$meta = $this->get_meta( $this->tag_id );
 			$data = wp_parse_args( $meta, $this->options_defaults );
@@ -429,7 +431,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 				}
 
 				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
-					$data[ $key ] = $meta[ $key ];
 					continue;
 				}
 
@@ -1023,7 +1024,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$to_delete  = array();
 			$dont_save  = true;
 
-			$field_args = Redux_Taxonomy::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$field_args = $this->get_declared_fields( $this->terms );
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
 				if ( ! isset( $field_args[ $key ] ) ) {
