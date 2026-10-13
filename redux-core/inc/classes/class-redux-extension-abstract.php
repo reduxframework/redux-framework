@@ -198,6 +198,36 @@ abstract class Redux_Extension_Abstract {
 	}
 
 	/**
+	 * Builds the set of declared fields.
+	 *
+	 * @param array|null $structures Registered structures (boxes/terms/profiles), each with sections and fields.
+	 *
+	 * @return array
+	 */
+	protected function get_declared_fields( ?array $structures ): array {
+		$fields = array();
+
+		foreach ( (array) $structures as $structure ) {
+			if ( ! isset( $structure['sections'] ) || ! is_array( $structure['sections'] ) ) {
+				continue;
+			}
+			foreach ( $structure['sections'] as $section ) {
+				if ( ! isset( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+					continue;
+				}
+				foreach ( $section['fields'] as $field ) {
+					if ( empty( $field['id'] ) ) {
+						continue;
+					}
+					$fields[ $field['id'] ] = $field;
+				}
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
 	 * Sets the minimum version of Redux to use.  Displays a notice if requirements are not met.
 	 *
 	 * @param string $min_version       Minimum version to evaluate.

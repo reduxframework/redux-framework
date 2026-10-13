@@ -210,12 +210,12 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			$this->parent->transients['run_compiler'] = false;
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->profiles = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
-
-			if ( empty( $this->profiles ) && class_exists( 'Redux_Users' ) ) {
+			if ( class_exists( 'Redux_Users' ) ) {
 				$this->profiles = Redux_Users::construct_profiles( $this->parent->args['opt_name'] );
 			}
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			$this->profiles = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
 
 			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
 				return;
@@ -362,7 +362,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$this->parent->options_class->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
-			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$field_args = $this->get_declared_fields( $this->profiles );
 
 			if ( empty( $this->meta ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification
@@ -375,8 +375,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$data = wp_parse_args( $this->meta, $this->options_defaults );
 
 			foreach ( $data as $key => $value ) {
-				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
-					$data[ $key ] = $meta[ $key ];
+				if ( isset( $this->meta[ $key ] ) && '' !== $this->meta[ $key ] ) {
 					continue;
 				}
 
@@ -1134,7 +1133,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$to_delete  = array();
 			$dont_save  = true;
 
-			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$field_args = $this->get_declared_fields( $this->profiles );
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
 				$key = sanitize_text_field( wp_unslash( $key ) );
