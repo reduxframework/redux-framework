@@ -236,7 +236,9 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			}
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->boxes = apply_filters( 'redux/metaboxes/' . $this->parent->args['opt_name'] . '/boxes', $this->boxes, $this->parent->args['opt_name'] );
+			$filtered = apply_filters( 'redux/metaboxes/' . $this->parent->args['opt_name'] . '/boxes', $this->boxes, $this->parent->args['opt_name'] );
+
+			$this->boxes = is_array( $filtered ) ? $filtered : $this->boxes;
 
 			if ( empty( $this->boxes ) || ! is_array( $this->boxes ) ) {
 				return;

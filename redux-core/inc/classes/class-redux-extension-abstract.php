@@ -208,17 +208,20 @@ abstract class Redux_Extension_Abstract {
 		$fields = array();
 
 		foreach ( (array) $structures as $structure ) {
-			if ( ! isset( $structure['sections'] ) || ! is_array( $structure['sections'] ) ) {
+			if ( ! is_array( $structure ) || ! isset( $structure['sections'] ) || ! is_array( $structure['sections'] ) ) {
 				continue;
 			}
+
 			foreach ( $structure['sections'] as $section ) {
-				if ( ! isset( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+				if ( ! is_array( $section ) || ! isset( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
 					continue;
 				}
+
 				foreach ( $section['fields'] as $field ) {
-					if ( empty( $field['id'] ) ) {
+					if ( ! is_array( $field ) || empty( $field['id'] ) || ! ( is_string( $field['id'] ) || is_numeric( $field['id'] ) ) ) {
 						continue;
 					}
+
 					$fields[ $field['id'] ] = $field;
 				}
 			}

@@ -222,7 +222,9 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			}
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->terms = apply_filters( 'redux/taxonomy/' . $this->parent->args['opt_name'] . '/terms', $this->terms, $this->parent->args['opt_name'] );
+			$filtered = apply_filters( 'redux/taxonomy/' . $this->parent->args['opt_name'] . '/terms', $this->terms, $this->parent->args['opt_name'] );
+
+			$this->terms = is_array( $filtered ) ? $filtered : $this->terms;
 
 			if ( empty( $this->terms ) || ! is_array( $this->terms ) ) {
 				return;

@@ -215,7 +215,9 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			}
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->profiles = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
+			$filtered = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
+
+			$this->profiles = is_array( $filtered ) ? $filtered : $this->profiles;
 
 			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
 				return;
