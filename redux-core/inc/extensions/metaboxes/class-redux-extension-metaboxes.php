@@ -169,6 +169,9 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			$this->extension_dir = trailingslashit( str_replace( '\\', '/', __DIR__ ) );
 			$this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
 
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
+
 			// Only run metaboxes on the pages/posts, not the front-end.
 			// The DOING_AJAX check allows for redux_post_meta to work inside
 			// AJAX calls. - kp.
@@ -1020,9 +1023,10 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 						}
 
 						$args = array(
-							'position' => $box['position'],
-							'sections' => $box['sections'],
-							'key'      => $key,
+							'position'    => $box['position'],
+							'sections'    => $box['sections'],
+							'key'         => $key,
+							'permissions' => $box['permissions'] ?? null,
 						);
 
 						// Override the parent args on a metabox level.
@@ -1193,6 +1197,60 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			}
 
 			return $def_val;
+		}
+
+		/**
+		 * Collects the IDs of the metabox fields that are rendered for the current user,
+		 * mirroring the visibility and permission checks that generate_boxes() applies.
+		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
+		 *
+		 * @return array
+		 */
+		protected function get_visible_field_ids(): array {
+			$ids = array();
+
+			if ( empty( $this->boxes ) || ! is_array( $this->boxes ) ) {
+				return $ids;
+			}
+
+			foreach ( $this->boxes as $box ) {
+				if ( empty( $box['sections'] ) || ! is_array( $box['sections'] ) ) {
+					continue;
+				}
+
+				$post_types = ! empty( $box['post_types'] ) && is_array( $box['post_types'] ) ? $box['post_types'] : array( 'page', 'post' );
+				if ( ! in_array( $this->post_type, $post_types, true ) ) {
+					continue;
+				}
+
+				if ( ! empty( $box['permissions'] ) && ! Redux_Helpers::current_user_can( $box['permissions'] ) ) {
+					continue;
+				}
+
+				foreach ( $box['sections'] as $section ) {
+					if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+						continue;
+					}
+
+					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
+						continue;
+					}
+
+					foreach ( $section['fields'] as $field ) {
+						if ( empty( $field['id'] ) ) {
+							continue;
+						}
+
+						if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
+							continue;
+						}
+
+						$ids[ $field['id'] ] = true;
+					}
+				}
+			}
+
+			return array_keys( $ids );
 		}
 
 		/**

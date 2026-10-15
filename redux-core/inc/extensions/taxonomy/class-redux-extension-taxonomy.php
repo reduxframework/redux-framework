@@ -127,13 +127,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		public int $tag_id = 0;
 
 		/**
-		 * Accepted WordPress screens.
-		 *
-		 * @var array
-		 */
-		private array $pagenows;
-
-		/**
 		 * Notices array.
 		 *
 		 * @var array
@@ -161,6 +154,9 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 			add_action( 'admin_notices', array( $this, 'meta_terms_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
 
 			if ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) {
 				$this->init();
@@ -602,50 +598,51 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 				);
 
 				$term = wp_parse_args( $term, $defaults );
-				if ( ! empty( $term['taxonomy_types'] ) && isset( $_GET['taxonomy'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-					foreach ( $term['taxonomy_types'] as $termtype ) {
-						if ( $_GET['taxonomy'] !== $termtype ) { // phpcs:ignore WordPress.Security.NonceVerification
-							continue;
-						}
 
-						// Override the parent args on a metaterm level.
-						if ( empty( $this->orig_args ) ) {
-							$this->orig_args = $this->parent->args;
-						}
+				if ( empty( $term['taxonomy_types'] ) || ! is_array( $term['taxonomy_types'] ) ) {
+					return;
+				}
 
-						if ( isset( $term['args'] ) ) {
-							$this->parent->args = wp_parse_args( $term['args'], $this->orig_args );
-						} elseif ( $this->parent->args !== $this->orig_args ) {
-							$this->parent->args = $this->orig_args;
-						}
+				if ( ! isset( $_GET['taxonomy'] ) || ! in_array( $_GET['taxonomy'], $term['taxonomy_types'], true ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+					return;
+				}
 
-						if ( ! isset( $term['class'] ) ) {
-							$term['class'] = array();
-						}
+				// Override the parent args on a metaterm level.
+				if ( empty( $this->orig_args ) ) {
+					$this->orig_args = $this->parent->args;
+				}
 
-						if ( ! empty( $term['class'] ) ) {
-							if ( ! is_array( $term['class'] ) ) {
-								$term['class'] = array( $term['class'] );
-							}
-						}
+				if ( isset( $term['args'] ) ) {
+					$this->parent->args = wp_parse_args( $term['args'], $this->orig_args );
+				} elseif ( $this->parent->args !== $this->orig_args ) {
+					$this->parent->args = $this->orig_args;
+				}
 
-						$term['class'] = $this->add_term_classes( $term['class'] );
+				if ( ! isset( $term['class'] ) ) {
+					$term['class'] = array();
+				}
 
-						if ( isset( $term['post_format'] ) ) {
-							$term['class'] = $this->add_term_hide_class( $term['class'] );
-						}
-
-						global $pagenow;
-						if ( strpos( $pagenow, 'edit-' ) !== false ) {
-
-							$term['style']   = 'wp';
-							$term['class'][] = ' edit-page';
-							$term['class'][] = ' redux-wp-style';
-						}
-
-						$this->generate_terms( array( 'args' => $term ) );
+				if ( ! empty( $term['class'] ) ) {
+					if ( ! is_array( $term['class'] ) ) {
+						$term['class'] = array( $term['class'] );
 					}
 				}
+
+				$term['class'] = $this->add_term_classes( $term['class'] );
+
+				if ( isset( $term['post_format'] ) ) {
+					$term['class'] = $this->add_term_hide_class( $term['class'] );
+				}
+
+				global $pagenow;
+				if ( strpos( $pagenow, 'edit-' ) !== false ) {
+
+					$term['style']   = 'wp';
+					$term['class'][] = ' edit-page';
+					$term['class'][] = ' redux-wp-style';
+				}
+
+				$this->generate_terms( array( 'args' => $term ) );
 			}
 		}
 
@@ -991,6 +988,71 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			</div>
 			<?php
 			echo '</div>';
+		}
+
+		/**
+		 * Collects the IDs of the term fields that are rendered for the current user,
+		 * mirroring the visibility and permission checks that generate_terms() applies.
+		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
+		 *
+		 * @return array
+		 */
+		protected function get_visible_field_ids(): array {
+			$ids = array();
+
+			if ( empty( $this->terms ) || ! is_array( $this->terms ) ) {
+				return $ids;
+			}
+
+			foreach ( $this->terms as $term ) {
+				if ( empty( $term['sections'] ) || ! is_array( $term['sections'] ) ) {
+					continue;
+				}
+
+				if ( empty( $term['taxonomy_types'] ) || ! is_array( $term['taxonomy_types'] ) ) {
+					continue;
+				}
+
+				if ( ! isset( $_GET['taxonomy'] ) || ! in_array( $_GET['taxonomy'], $term['taxonomy_types'], true ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+					continue;
+				}
+
+				if ( ! empty( $term['permissions'] ) && ! Redux_Helpers::current_user_can( $term['permissions'] ) ) {
+					continue;
+				}
+
+				foreach ( $term['sections'] as $section ) {
+					if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+						continue;
+					}
+
+					if ( ! $this->check_edit_visibility( $section ) ) {
+						continue;
+					}
+
+					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
+						continue;
+					}
+
+					foreach ( $section['fields'] as $field ) {
+						if ( empty( $field['id'] ) ) {
+							continue;
+						}
+
+						if ( ! $this->check_edit_visibility( $field, false ) ) {
+							continue;
+						}
+
+						if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
+							continue;
+						}
+
+						$ids[ $field['id'] ] = true;
+					}
+				}
+			}
+
+			return array_keys( $ids );
 		}
 
 		/**
