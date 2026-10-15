@@ -120,13 +120,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		public ?array $meta = array();
 
 		/**
-		 * Array of page names.
-		 *
-		 * @var null|array
-		 */
-		public ?array $pagenows;
-
-		/**
 		 * Notices array.
 		 *
 		 * @var null|array
@@ -527,69 +520,13 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		}
 
 		/**
-		 * Whether the current user may access the Redux panel.
-		 *
-		 * @return bool
-		 */
-		protected function can_access_panel(): bool {
-			$capability = $this->parent->args['page_permissions'] ?? 'manage_options';
-
-			if ( empty( $capability ) ) {
-				return false;
-			}
-
-			return Redux_Helpers::current_user_can( $capability );
-		}
-
-		/**
-		 * Restricts the localized option set on user profile pages for users without panel access.
-		 * Only the options for the fields rendered on the profile are included,
-		 * so the rest of the panel's option set is not exposed in the page source.
-		 *
-		 * @param array $localize_data Localized data.
-		 *
-		 * @return array
-		 */
-		public function restrict_localize_options( array $localize_data ): array {
-			global $pagenow;
-
-			if ( ! in_array( $pagenow, $this->pagenows, true ) ) {
-				return $localize_data;
-			}
-
-			if ( $this->can_access_panel() ) {
-				return $localize_data;
-			}
-
-			$profile_ids = $this->get_visible_profile_field_ids();
-
-			foreach ( array( 'options', 'defaults' ) as $key ) {
-				if ( ! isset( $localize_data[ $key ] ) || ! is_array( $localize_data[ $key ] ) ) {
-					continue;
-				}
-
-				$restricted = array();
-
-				foreach ( $localize_data[ $key ] as $field_id => $value ) {
-					if ( in_array( $field_id, $profile_ids, true ) ) {
-						$restricted[ $field_id ] = $value;
-					}
-				}
-
-				$localize_data[ $key ] = $restricted;
-			}
-
-			return $localize_data;
-		}
-
-		/**
 		 * Collects the IDs of the profile fields that are rendered for the current user,
 		 * mirroring the visibility and permission checks that generate_profiles() applies.
 		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
 		 *
 		 * @return array
 		 */
-		private function get_visible_profile_field_ids(): array {
+		protected function get_visible_field_ids(): array {
 			$ids = array();
 
 			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {

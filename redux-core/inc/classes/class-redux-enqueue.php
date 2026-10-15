@@ -113,8 +113,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 
 			$this->enqueue_fields( $core );
 
-			add_filter( "redux/{$core->args['opt_name']}/localize", array( 'Redux_Helpers', 'localize' ) );
-
 			$this->set_localized_data( $core );
 
 			/**
