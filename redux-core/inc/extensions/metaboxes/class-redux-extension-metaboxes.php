@@ -155,6 +155,13 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		private array $notices = array();
 
 		/**
+		 * Accepted WordPress pages.
+		 *
+		 * @var array
+		 */
+		private array $pagenows = array( 'post-new.php', 'post.php' );
+
+		/**
 		 * ReduxFramework_extension_metaboxes constructor.
 		 *
 		 * @param object $redux ReduxFramework object.
@@ -170,7 +177,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			$this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
+			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
 
 			// Only run metaboxes on the pages/posts, not the front-end.
 			// The DOING_AJAX check allows for redux_post_meta to work inside
@@ -1200,17 +1207,26 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		}
 
 		/**
-		 * Collects the IDs of the metabox fields that are rendered for the current user,
+		 * Collects the metabox fields that are rendered for the current user,
 		 * mirroring the visibility and permission checks that generate_boxes() applies.
 		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
 		 *
+		 * @param array $localize_data Localized data.
+		 *
 		 * @return array
 		 */
-		protected function get_visible_field_ids(): array {
-			$ids = array();
+		public function localize_options( array $localize_data ): array {
+			global $pagenow;
+
+			if ( empty( $this->pagenows ) || ! in_array( $pagenow, $this->pagenows, true ) ) {
+				return $localize_data;
+			}
+
+			$localize_data['options']  = array();
+			$localize_data['defaults'] = array();
 
 			if ( empty( $this->boxes ) || ! is_array( $this->boxes ) ) {
-				return $ids;
+				return $localize_data;
 			}
 
 			foreach ( $this->boxes as $box ) {
@@ -1245,12 +1261,13 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 							continue;
 						}
 
-						$ids[ $field['id'] ] = true;
+						$localize_data['options'][ $field['id'] ] = isset( $this->meta[ $this->post_id ][ $field['id'] ] ) ? $this->meta[ $this->post_id ][ $field['id'] ] : ( $this->options_defaults[ $field['id'] ] ?? '' );
+						$localize_data['defaults'][ $field['id'] ] = $this->options_defaults[ $field['id'] ] ?? '';
 					}
 				}
 			}
 
-			return array_keys( $ids );
+			return $localize_data;
 		}
 
 		/**
@@ -1399,7 +1416,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 									$this->meta[ $this->post_id ][ $field['id'] ] = '';
 								}
 
-								$this->parent->render_class->field_input( $field, $this->meta[ $this->post_id ][ $field['id'] ], true );
+								$this->parent->render_class->field_input( $field, $this->meta[ $this->post_id ][ $field['id'] ] );
 								echo '</td></tr>';
 							}
 							echo '</tbody></table>';

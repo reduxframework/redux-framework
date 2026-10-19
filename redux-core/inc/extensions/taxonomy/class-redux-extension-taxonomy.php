@@ -127,6 +127,13 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		public int $tag_id = 0;
 
 		/**
+		 * Accepted WordPress pages.
+		 *
+		 * @var array
+		 */
+		private array $pagenows = array( 'edit-tags.php', 'term.php' );
+
+		/**
 		 * Notices array.
 		 *
 		 * @var array
@@ -148,15 +155,13 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$this->add_field( 'taxonomy' );
 			$this->parent->extensions['taxonomy'] = $this;
 
-			$this->pagenows = array( 'edit-tags.php', 'term.php' );
-
 			include_once __DIR__ . '/redux-taxonomy-helpers.php';
 
 			add_action( 'admin_notices', array( $this, 'meta_terms_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
+			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
 
 			if ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) {
 				$this->init();
@@ -975,7 +980,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 									$this->meta[ $this->tag_id ][ $field['id'] ] = '';
 								}
 
-								$this->parent->render_class->field_input( $field, $this->meta[ $this->tag_id ][ $field['id'] ], true );
+								$this->parent->render_class->field_input( $field, $this->meta[ $this->tag_id ][ $field['id'] ] );
 								echo '</td></tr>';
 							}
 							echo '</tbody></table>';
@@ -991,17 +996,26 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Collects the IDs of the term fields that are rendered for the current user,
+		 * Collects the term fields that are rendered for the current user,
 		 * mirroring the visibility and permission checks that generate_terms() applies.
 		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
 		 *
+		 * @param array $localize_data Localized data.
+		 *
 		 * @return array
 		 */
-		protected function get_visible_field_ids(): array {
-			$ids = array();
+		public function localize_options( array $localize_data ): array {
+			global $pagenow;
+
+			if ( ! in_array( $pagenow, $this->pagenows, true ) ) {
+				return $localize_data;
+			}
+
+			$localize_data['options'] = array();
+			$localize_data['defaults'] = array();
 
 			if ( empty( $this->terms ) || ! is_array( $this->terms ) ) {
-				return $ids;
+				return $localize_data;
 			}
 
 			foreach ( $this->terms as $term ) {
@@ -1047,12 +1061,13 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 							continue;
 						}
 
-						$ids[ $field['id'] ] = true;
+						$localize_data['options'][ $field['id'] ] = isset( $this->meta[ $this->tag_id ][ $field['id'] ] ) ? $this->meta[ $this->tag_id ][ $field['id'] ] : ( $this->options_defaults[ $field['id'] ] ?? '' );
+						$localize_data['defaults'][ $field['id'] ] = $this->options_defaults[ $field['id'] ] ?? '';
 					}
 				}
 			}
 
-			return array_keys( $ids );
+			return $localize_data;
 		}
 
 		/**

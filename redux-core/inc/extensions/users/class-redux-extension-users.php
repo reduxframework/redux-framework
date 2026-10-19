@@ -120,6 +120,13 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		public ?array $meta = array();
 
 		/**
+		 * Accepted WordPress pages.
+		 *
+		 * @var array
+		 */
+		private array $pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
+
+		/**
 		 * Notices array.
 		 *
 		 * @var null|array
@@ -141,15 +148,13 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$this->add_field( 'users' );
 			$this->parent->extensions['users'] = $this;
 
-			$this->pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
-
 			require_once __DIR__ . '/redux-users-helpers.php';
 
 			add_action( 'admin_notices', array( $this, 'meta_profiles_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
+			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
 
 			if ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) {
 				$this->init();
@@ -367,9 +372,8 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			$data = wp_parse_args( $this->meta, $this->options_defaults );
 
-			foreach ( $data as $key => $value ) {
-				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
-					$data[ $key ] = $meta[ $key ];
+			foreach ( $data as $key => $_value ) {
+				if ( isset( $this->meta[ $key ] ) && '' !== $this->meta[ $key ] ) {
 					continue;
 				}
 
@@ -520,17 +524,26 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		}
 
 		/**
-		 * Collects the IDs of the profile fields that are rendered for the current user,
+		 * Collects the profile fields that are rendered for the current user,
 		 * mirroring the visibility and permission checks that generate_profiles() applies.
 		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
 		 *
+		 * @param array $localize_data Localized data.
+		 *
 		 * @return array
 		 */
-		protected function get_visible_field_ids(): array {
-			$ids = array();
+		public function localize_options( array $localize_data ): array {
+			global $pagenow;
+
+			if ( ! in_array( $pagenow, $this->pagenows, true ) ) {
+				return $localize_data;
+			}
+
+			$localize_data['options']  = array();
+			$localize_data['defaults'] = array();
 
 			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
-				return $ids;
+				return $localize_data;
 			}
 
 			foreach ( $this->profiles as $profile ) {
@@ -568,12 +581,13 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 							continue;
 						}
 
-						$ids[ $field['id'] ] = true;
+						$localize_data['options'][ $field['id'] ] = isset( $this->meta[ $field['id'] ] ) ? $this->meta[ $field['id'] ] : ( $this->options_defaults[ $field['id'] ] ?? '' );
+						$localize_data['defaults'][ $field['id'] ] = $this->options_defaults[ $field['id'] ] ?? '';
 					}
 				}
 			}
 
-			return array_keys( $ids );
+			return $localize_data;
 		}
 
 		/**
