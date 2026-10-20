@@ -1023,14 +1023,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 					continue;
 				}
 
-				if ( empty( $term['taxonomy_types'] ) || ! is_array( $term['taxonomy_types'] ) ) {
-					continue;
-				}
-
-				if ( ! isset( $_GET['taxonomy'] ) || ! in_array( $_GET['taxonomy'], $term['taxonomy_types'], true ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-					continue;
-				}
-
 				if ( ! empty( $term['permissions'] ) && ! Redux_Helpers::current_user_can( $term['permissions'] ) ) {
 					continue;
 				}
@@ -1040,20 +1032,12 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 						continue;
 					}
 
-					if ( ! $this->check_edit_visibility( $section ) ) {
-						continue;
-					}
-
 					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
 						continue;
 					}
 
 					foreach ( $section['fields'] as $field ) {
 						if ( empty( $field['id'] ) ) {
-							continue;
-						}
-
-						if ( ! $this->check_edit_visibility( $field, false ) ) {
 							continue;
 						}
 

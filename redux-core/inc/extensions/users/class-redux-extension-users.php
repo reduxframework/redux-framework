@@ -560,20 +560,12 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 						continue;
 					}
 
-					if ( ! $this->check_edit_visibility( $section ) ) {
-						continue;
-					}
-
 					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
 						continue;
 					}
 
 					foreach ( $section['fields'] as $field ) {
 						if ( empty( $field['id'] ) ) {
-							continue;
-						}
-
-						if ( ! $this->check_edit_visibility( $field ) ) {
 							continue;
 						}
 

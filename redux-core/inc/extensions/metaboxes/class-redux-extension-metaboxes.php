@@ -1234,11 +1234,6 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 					continue;
 				}
 
-				$post_types = ! empty( $box['post_types'] ) && is_array( $box['post_types'] ) ? $box['post_types'] : array( 'page', 'post' );
-				if ( ! in_array( $this->post_type, $post_types, true ) ) {
-					continue;
-				}
-
 				if ( ! empty( $box['permissions'] ) && ! Redux_Helpers::current_user_can( $box['permissions'] ) ) {
 					continue;
 				}

@@ -638,12 +638,16 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		 * @return array
 		 */
 		public function localize_options(): array {
-			$fields['options'] = array(
+			$fields = array(
 				'options' => array(),
 				'defaults' => array()
 			);
 
 			if ( empty( $this->sections ) || ! is_array( $this->sections ) ) {
+				return $fields;
+			}
+
+			if ( ! Redux_Helpers::current_user_can( $this->args['page_permissions'] ) ) {
 				return $fields;
 			}
 
