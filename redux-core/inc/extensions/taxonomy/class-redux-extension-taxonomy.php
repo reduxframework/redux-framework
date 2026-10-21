@@ -160,10 +160,10 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			add_action( 'admin_notices', array( $this, 'meta_terms_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
+			if ( in_array( $pagenow, $this->pagenows, true ) ) {
+				// phpcs:ignore WordPress.NamingConventions.ValidHookName
+				add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
 
-			if ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) {
 				$this->init();
 
 				// phpcs:ignore WordPress.Security.NonceVerification
@@ -218,12 +218,14 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 			$this->parent->transients['run_compiler'] = false;
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->terms = apply_filters( 'redux/taxonomy/' . $this->parent->args['opt_name'] . '/terms', $this->terms, $this->parent->args['opt_name'] );
-
-			if ( empty( $this->terms ) && class_exists( 'Redux_Taxonomy' ) ) {
+			if ( class_exists( 'Redux_Taxonomy' ) ) {
 				$this->terms = Redux_Taxonomy::construct_terms( $this->parent->args['opt_name'] );
 			}
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			$filtered = apply_filters( 'redux/taxonomy/' . $this->parent->args['opt_name'] . '/terms', $this->terms, $this->parent->args['opt_name'] );
+
+			$this->terms = is_array( $filtered ) ? $filtered : $this->terms;
 
 			if ( empty( $this->terms ) || ! is_array( $this->terms ) ) {
 				return;
@@ -418,19 +420,18 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$this->parent->options_class->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
-			$field_args = Redux_Taxonomy::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$fields = $this->collect_declared_fields( $this->terms, false );
 
 			$meta = $this->get_meta( $this->tag_id );
 			$data = wp_parse_args( $meta, $this->options_defaults );
 
-			foreach ( $data as $key => $value ) {
-				if ( ! isset( $field_args[ $key ] ) ) {
+			foreach ( $data as $key => $_value ) {
+				if ( ! isset( $fields['allowed'][ $key ] ) ) {
 					unset( $data[ $key ] );
 					continue;
 				}
 
 				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
-					$data[ $key ] = $meta[ $key ];
 					continue;
 				}
 
@@ -996,60 +997,21 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		}
 
 		/**
-		 * Collects the term fields that are rendered for the current user,
-		 * mirroring the visibility and permission checks that generate_terms() applies.
-		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
+		 * Populate the localized options and defaults for the term fields,
+		 * mirroring the permission checks that generate_terms() applies.
 		 *
-		 * @param array $localize_data Localized data.
+		 * @param array $localize_data Existing localized data.
 		 *
 		 * @return array
 		 */
 		public function localize_options( array $localize_data ): array {
-			global $pagenow;
+			$fields = $this->collect_declared_fields(
+				$this->terms, true,
+				fn( $id ) => isset( $this->meta[ $this->tag_id ][ $id ] ) ? $this->meta[ $this->tag_id ][ $id ] : ( $this->options_defaults[ $id ] ?? '' )
+			);
 
-			if ( ! in_array( $pagenow, $this->pagenows, true ) ) {
-				return $localize_data;
-			}
-
-			$localize_data['options'] = array();
-			$localize_data['defaults'] = array();
-
-			if ( empty( $this->terms ) || ! is_array( $this->terms ) ) {
-				return $localize_data;
-			}
-
-			foreach ( $this->terms as $term ) {
-				if ( empty( $term['sections'] ) || ! is_array( $term['sections'] ) ) {
-					continue;
-				}
-
-				if ( ! empty( $term['permissions'] ) && ! Redux_Helpers::current_user_can( $term['permissions'] ) ) {
-					continue;
-				}
-
-				foreach ( $term['sections'] as $section ) {
-					if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
-						continue;
-					}
-
-					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
-						continue;
-					}
-
-					foreach ( $section['fields'] as $field ) {
-						if ( empty( $field['id'] ) ) {
-							continue;
-						}
-
-						if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
-							continue;
-						}
-
-						$localize_data['options'][ $field['id'] ] = isset( $this->meta[ $this->tag_id ][ $field['id'] ] ) ? $this->meta[ $this->tag_id ][ $field['id'] ] : ( $this->options_defaults[ $field['id'] ] ?? '' );
-						$localize_data['defaults'][ $field['id'] ] = $this->options_defaults[ $field['id'] ] ?? '';
-					}
-				}
-			}
+			$localize_data['options'] = $fields['options'];
+			$localize_data['defaults'] = $fields['defaults'];
 
 			return $localize_data;
 		}
@@ -1082,47 +1044,20 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			$to_save    = array();
 			$to_compare = array();
 			$to_delete  = array();
-			$dont_save  = true;
 
-			$field_args = Redux_Taxonomy::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$fields = $this->collect_declared_fields( $this->terms );
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
-				if ( ! isset( $field_args[ $key ] ) ) {
+				// Do not save anything the user doesn't have permissions for.
+				if ( ! isset( $fields['allowed'][ $key ] ) ) {
 					continue;
 				}
 
-				// Do not save anything the user doesn't have permissions for.
-				if ( ! empty( $field_args[ $key ]['permissions'] ) ) {
-					$can_save = false;
-
-					foreach ( (array) $field_args[ $key ]['permissions'] as $pv ) {
-						if ( Redux_Helpers::current_user_can( $pv ) ) {
-							$can_save = true;
-							break;
-						}
-					}
-
-					if ( ! $can_save ) {
-						continue;
-					}
-				}
-
-				$save = true;
-
-				// parent_options.
-				if ( ! $dont_save && isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
-					$save = false;
-				}
-
-				if ( $save && isset( $this->parent_options[ $key ] ) && $this->parent_options[ $key ] !== $value ) {
-					$save = false;
-				}
-
-				if ( $save ) {
+				if ( isset( $this->parent_options[ $key ] ) && $this->parent_options[ $key ] !== $value ) {
+					$to_delete[ $key ] = $value;
+				} else {
 					$to_save[ $key ]    = $value;
 					$to_compare[ $key ] = $this->parent->options[ $key ] ?? '';
-				} else {
-					$to_delete[ $key ] = $value;
 				}
 			}
 

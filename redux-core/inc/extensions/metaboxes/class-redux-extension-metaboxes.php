@@ -176,9 +176,6 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			$this->extension_dir = trailingslashit( str_replace( '\\', '/', __DIR__ ) );
 			$this->extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->extension_dir ) );
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
-
 			// Only run metaboxes on the pages/posts, not the front-end.
 			// The DOING_AJAX check allows for redux_post_meta to work inside
 			// AJAX calls. - kp.
@@ -196,9 +193,12 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 				return;
 			}
 
-			// Must not update the DB when just updating metaboxes. Sheesh.
-			if ( is_admin() && ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) ) {
+			if ( in_array( $pagenow, $this->pagenows, true ) ) {
+				// Must not update the DB when just updating metaboxes.
 				$this->parent->never_save_to_db = true;
+
+				// phpcs:ignore WordPress.NamingConventions.ValidHookName
+				add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
 			}
 
 			include_once Redux_Core::$dir . 'inc/extensions/metaboxes/redux-metaboxes-helpers.php';
@@ -241,29 +241,15 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		public function init() {
 			global $pagenow;
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->boxes = apply_filters( 'redux/metaboxes/' . $this->parent->args['opt_name'] . '/boxes', $this->boxes, $this->parent->args['opt_name'] );
-
-			if ( empty( $this->boxes ) && class_exists( 'Redux_Metaboxes' ) ) {
+			if ( class_exists( 'Redux_Metaboxes' ) ) {
 				$this->boxes = Redux_Metaboxes::construct_boxes( $this->parent->args['opt_name'] );
 			}
-			// Automatically push filter-registered fields into the allowlist.
-			if ( class_exists( 'Redux_Metaboxes' ) && ! empty( $this->boxes ) && is_array( $this->boxes ) ) {
-        		foreach ( $this->boxes as $box ) {
-            if ( isset( $box['sections'] ) && is_array( $box['sections'] ) ) {
-                foreach ( $box['sections'] as $section ) {
-                    if ( isset( $section['fields'] ) && is_array( $section['fields'] ) ) {
-                        foreach ( $section['fields'] as $field ) {
-                            // If the field isn't in the allowlist yet, add it.
-                            if (  ! empty( $field['id'] ) && ! isset( Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ][ $field['id'] ] ) ) {
-                                Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ][ $field['id'] ] = $field;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			$filtered = apply_filters( 'redux/metaboxes/' . $this->parent->args['opt_name'] . '/boxes', $this->boxes, $this->parent->args['opt_name'] );
+
+			$this->boxes = is_array( $filtered ) ? $filtered : $this->boxes;
+
 			if ( empty( $this->boxes ) || ! is_array( $this->boxes ) ) {
 				return;
 			}
@@ -471,19 +457,18 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			$this->parent->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
-			$field_args = Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$fields = $this->collect_declared_fields( $this->boxes, false );
 
 			$meta = $this->get_meta( $this->post_id );
 			$data = wp_parse_args( $meta, $this->options_defaults );
 
-			foreach ( $data as $key => $value ) {
-				if ( ! isset( $field_args[ $key ] ) ) {
+			foreach ( $data as $key => $_value ) {
+				if ( ! isset( $fields['allowed'][ $key ] ) ) {
 					unset( $data[ $key ] );
 					continue;
 				}
 
 				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
-					$data[ $key ] = $meta[ $key ];
 					continue;
 				}
 
@@ -1207,60 +1192,21 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		}
 
 		/**
-		 * Collects the metabox fields that are rendered for the current user,
-		 * mirroring the visibility and permission checks that generate_boxes() applies.
-		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
+		 * Populate the localized options and defaults for the box fields,
+		 * mirroring the permission checks that generate_boxes() applies.
 		 *
-		 * @param array $localize_data Localized data.
+		 * @param array $localize_data Existing localized data.
 		 *
 		 * @return array
 		 */
 		public function localize_options( array $localize_data ): array {
-			global $pagenow;
+			$fields = $this->collect_declared_fields(
+				$this->boxes, true,
+				fn( $id ) => isset( $this->meta[ $this->post_id ][ $id ] ) ? $this->meta[ $this->post_id ][ $id ] : ( $this->options_defaults[ $id ] ?? '' )
+			);
 
-			if ( empty( $this->pagenows ) || ! in_array( $pagenow, $this->pagenows, true ) ) {
-				return $localize_data;
-			}
-
-			$localize_data['options']  = array();
-			$localize_data['defaults'] = array();
-
-			if ( empty( $this->boxes ) || ! is_array( $this->boxes ) ) {
-				return $localize_data;
-			}
-
-			foreach ( $this->boxes as $box ) {
-				if ( empty( $box['sections'] ) || ! is_array( $box['sections'] ) ) {
-					continue;
-				}
-
-				if ( ! empty( $box['permissions'] ) && ! Redux_Helpers::current_user_can( $box['permissions'] ) ) {
-					continue;
-				}
-
-				foreach ( $box['sections'] as $section ) {
-					if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
-						continue;
-					}
-
-					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
-						continue;
-					}
-
-					foreach ( $section['fields'] as $field ) {
-						if ( empty( $field['id'] ) ) {
-							continue;
-						}
-
-						if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
-							continue;
-						}
-
-						$localize_data['options'][ $field['id'] ] = isset( $this->meta[ $this->post_id ][ $field['id'] ] ) ? $this->meta[ $this->post_id ][ $field['id'] ] : ( $this->options_defaults[ $field['id'] ] ?? '' );
-						$localize_data['defaults'][ $field['id'] ] = $this->options_defaults[ $field['id'] ] ?? '';
-					}
-				}
-			}
+			$localize_data['options'] = $fields['options'];
+			$localize_data['defaults'] = $fields['defaults'];
 
 			return $localize_data;
 		}
@@ -1484,23 +1430,23 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 			$to_save    = array();
 			$to_compare = array();
 			$to_delete  = array();
-			$dont_save  = true;
+			$dont_save_defaults = true;
 
 			if ( isset( $this->parent->args['metaboxes_save_defaults'] ) && $this->parent->args['metaboxes_save_defaults'] ) {
-				$dont_save = false;
+				$dont_save_defaults = false;
 			}
 
-			$field_args = Redux_Metaboxes::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$fields = $this->collect_declared_fields( $this->boxes );
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
-				if ( ! isset( $field_args[ $key ] ) ) {
+				// Do not save anything the user doesn't have permissions for.
+				if ( ! isset( $fields['allowed'][ $key ] ) ) {
 					continue;
 				}
 
 				$save = true;
 
-				// parent_options.
-				if ( ! $dont_save && isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
+				if ( $dont_save_defaults && isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
 					$save = false;
 				}
 

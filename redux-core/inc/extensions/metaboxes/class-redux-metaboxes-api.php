@@ -72,13 +72,6 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		public static array $args = array();
 
 		/**
-		 * Code has run flag.
-		 *
-		 * @var bool
-		 */
-		public static bool $has_run = false;
-
-		/**
 		 * Class load.
 		 */
 		public static function load() {
@@ -130,42 +123,6 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 					}
 				}
 			}
-		}
-
-		/**
-		 * Filter Metaboxes function.
-		 *
-		 * @deprecated 4.0.0 No more camelCase.
-		 */
-		public static function filterMetaboxes() { // phpcs:ignore: WordPress.NamingConventions.ValidFunctionName
-			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.3', __CLASS__ . '::filter_metaboxes()' );
-
-			self::filter_metaboxes();
-		}
-
-		/**
-		 * Filter Metaboxes function.
-		 */
-		public static function filter_metaboxes() {
-			if ( true === self::$has_run ) {
-				return;
-			}
-
-			if ( ! class_exists( 'ReduxFramework' ) ) {
-				echo '<div id="message" class="error"><p>Redux Framework is <strong>not installed</strong>. Please install it.</p></div>';
-
-				return;
-			}
-
-			foreach ( self::$boxes as $opt_name => $the_boxes ) {
-				if ( ! self::$init[ $opt_name ] ) {
-
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName
-					add_action( 'redux/metaboxes/' . $opt_name . '/boxes', array( 'Redux_Metaboxes', 'addMetaboxes' ), 2 );
-				}
-			}
-
-			self::$has_run = true;
 		}
 
 		/**

@@ -631,9 +631,8 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
-		 * Collects the main panel fields that are rendered for the current user,
-		 * mirroring the visibility and permission checks that register() applies.
-		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
+		 * Populate the localized options and defaults for the main panel fields,
+		 * mirroring the permission checks that register() applies.
 		 *
 		 * @return array
 		 */
