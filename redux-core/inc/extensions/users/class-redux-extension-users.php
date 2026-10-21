@@ -1093,35 +1093,18 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				}
 			}
 
-			$check = $this->profile_fields;
-
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/users/save', $to_save, $to_compare, $this->sections );
 			$to_save = $this->filter_registered_user_meta_keys( $to_save, $fields['allowed'] );
 
 			foreach ( $to_save as $key => $value ) {
 				$prev_value = $this->meta[ $key ] ?? '';
-
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				update_user_meta( $user_id, $key, $value, $prev_value );
 			}
 
 			foreach ( $to_delete as $key => $value ) {
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				$prev_value = $this->meta[ $key ] ?? '';
 				delete_user_meta( $user_id, $key, $prev_value );
-			}
-
-			if ( ! empty( $check ) ) {
-				foreach ( $check as $key => $value ) {
-					delete_user_meta( $user_id, $key );
-				}
 			}
 
 			return true;

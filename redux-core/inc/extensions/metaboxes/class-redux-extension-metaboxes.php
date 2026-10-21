@@ -1497,36 +1497,17 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 				}
 			}
 
-			if ( isset( $_POST['post_type'] ) ) {
-				$check = $this->post_type_fields[ sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) ];
-			}
-
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/metaboxes/save', $to_save, $to_compare, $this->sections );
 
 			foreach ( $to_save as $key => $value ) {
 				$prev_value = $this->meta[ $post_id ][ $key ] ?? '';
-
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				update_post_meta( $post_id, $key, $value, $prev_value );
 			}
 
 			foreach ( $to_delete as $key => $value ) {
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				$prev_value = $this->meta[ $post_id ][ $key ] ?? '';
 				delete_post_meta( $post_id, $key, $prev_value );
-			}
-
-			if ( ! empty( $check ) ) {
-				foreach ( $check as $key => $value ) {
-					delete_post_meta( $post_id, $key );
-				}
 			}
 
 			return $post_id;

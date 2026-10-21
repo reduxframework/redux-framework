@@ -1096,36 +1096,17 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 				}
 			}
 
-			$post_tax = isset( $_POST['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) ) : '';
-
-			$check = $this->taxonomy_type_fields[ $post_tax ] ?? array();
-
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/taxonomy/save', $to_save, $to_compare, $this->sections );
 
 			foreach ( $to_save as $key => $value ) {
 				$prev_value = $this->meta[ $tag_id ][ $key ] ?? '';
-
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				update_term_meta( $tag_id, $key, $value, $prev_value );
 			}
 
 			foreach ( $to_delete as $key => $value ) {
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				$prev_value = $this->meta[ $tag_id ][ $key ] ?? '';
 				delete_term_meta( $tag_id, $key, $prev_value );
-			}
-
-			if ( ! empty( $check ) ) {
-				foreach ( $check as $key => $value ) {
-					delete_term_meta( $tag_id, $key );
-				}
 			}
 
 			return true;
