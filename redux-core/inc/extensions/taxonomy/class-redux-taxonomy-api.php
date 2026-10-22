@@ -402,6 +402,13 @@ if ( ! class_exists( 'Redux_Taxonomy' ) ) {
 			self::check_opt_name( $opt_name );
 
 			if ( ! empty( $opt_name ) && is_array( $field ) && ! empty( $field ) ) {
+				if ( isset( $field['type'] ) && in_array( $field['type'], Redux::$panel_only_field_types, true ) ) {
+					/* translators: %s: Field type. */
+					self::$errors[ $opt_name ]['field'][ $field['id'] ] = sprintf( esc_html__( 'The %s field is not supported in taxonomies.', 'redux-framework' ), $field['type'] );
+
+					return;
+				}
+
 				if ( ! isset( $field['priority'] ) ) {
 					$field['priority'] = self::get_priority( $opt_name, 'fields' );
 				}

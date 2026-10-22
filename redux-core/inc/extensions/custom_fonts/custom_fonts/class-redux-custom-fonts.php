@@ -150,12 +150,18 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 		 * @access      public
 		 */
 		public function enqueue() {
+			if ( function_exists( 'wp_enqueue_media' ) ) {
+				wp_enqueue_media();
+			} else {
+				wp_enqueue_script( 'media-upload' );
+			}
+
 			$min = Redux_Functions::isMin();
 
 			wp_enqueue_script(
 				'redux-field-custom-fonts',
 				$this->url . '/redux-custom-fonts' . $min . '.js',
-				array( 'jquery', 'redux-block-ui' ),
+				array( 'jquery', 'redux-js', 'redux-block-ui' ),
 				Redux_Extension_Custom_Fonts::$version,
 				true
 			);
