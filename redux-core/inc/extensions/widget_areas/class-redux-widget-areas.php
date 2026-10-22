@@ -253,7 +253,7 @@ if ( ! class_exists( 'Redux_Widget_Areas' ) ) {
 		 * Delete widget area.
 		 */
 		public function redux_delete_widget_area_area() {
-			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
 				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
 			}
 
