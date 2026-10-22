@@ -619,18 +619,6 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
-		 * Compile a localized array.
-		 *
-		 * @param array $localize Array of localized strings.
-		 *
-		 * @return array
-		 */
-		public static function localize( array $localize ): array {
-
-			return $localize;
-		}
-
-		/**
 		 * Check mokama.
 		 *
 		 * @access public

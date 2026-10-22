@@ -103,7 +103,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var null|array
 		 */
-		public ?array $options_defaults = array();
+		public array $options_defaults = array();
 
 		/**
 		 * To replace array.
@@ -120,11 +120,11 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		public ?array $meta = array();
 
 		/**
-		 * Array of page names.
+		 * Accepted WordPress pages.
 		 *
-		 * @var null|array
+		 * @var array
 		 */
-		public ?array $pagenows;
+		private array $pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
 
 		/**
 		 * Notices array.
@@ -148,17 +148,15 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$this->add_field( 'users' );
 			$this->parent->extensions['users'] = $this;
 
-			$this->pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
-
 			require_once __DIR__ . '/redux-users-helpers.php';
 
 			add_action( 'admin_notices', array( $this, 'meta_profiles_show_errors' ), 0 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 20 );
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'restrict_localize_options' ) );
+			if ( in_array( $pagenow, $this->pagenows, true ) ) {
+				// phpcs:ignore WordPress.NamingConventions.ValidHookName
+				add_filter( "redux/{$this->parent->args['opt_name']}/localize", array( $this, 'localize_options' ) );
 
-			if ( is_admin() && in_array( $pagenow, $this->pagenows, true ) ) {
 				$this->init();
 
 				add_action( 'personal_options_update', array( $this, 'user_meta_save' ) );
@@ -210,12 +208,14 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 			$this->parent->transients['run_compiler'] = false;
 
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$this->profiles = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
-
-			if ( empty( $this->profiles ) && class_exists( 'Redux_Users' ) ) {
+			if ( class_exists( 'Redux_Users' ) ) {
 				$this->profiles = Redux_Users::construct_profiles( $this->parent->args['opt_name'] );
 			}
+
+			// phpcs:ignore WordPress.NamingConventions.ValidHookName
+			$filtered = apply_filters( 'redux/users/' . $this->parent->args['opt_name'] . '/profiles', $this->profiles, $this->parent->args['opt_name'] );
+
+			$this->profiles = is_array( $filtered ) ? $filtered : $this->profiles;
 
 			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
 				return;
@@ -362,7 +362,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$this->parent->options_class->default_values();
 			$this->parent_defaults = $this->parent->options_defaults;
 
-			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$fields = $this->collect_declared_fields( $this->profiles, false );
 
 			if ( empty( $this->meta ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification
@@ -370,13 +370,12 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				$this->meta = Redux_Users::get_user_meta( array( 'user' => $user ) );
 			}
 
-			$this->meta = $this->filter_registered_user_meta_keys( $this->meta, $field_args );
+			$this->meta = $this->filter_registered_user_meta_keys( $this->meta, $fields['allowed'] );
 
 			$data = wp_parse_args( $this->meta, $this->options_defaults );
 
-			foreach ( $data as $key => $value ) {
-				if ( isset( $meta[ $key ] ) && '' !== $meta[ $key ] ) {
-					$data[ $key ] = $meta[ $key ];
+			foreach ( $data as $key => $_value ) {
+				if ( isset( $this->meta[ $key ] ) && '' !== $this->meta[ $key ] ) {
 					continue;
 				}
 
@@ -527,116 +526,23 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		}
 
 		/**
-		 * Whether the current user may access the Redux panel.
+		 * Populate the localized options and defaults for the profile fields,
+		 * mirroring the permission checks that generate_profiles() applies.
 		 *
-		 * @return bool
-		 */
-		protected function can_access_panel(): bool {
-			$capability = $this->parent->args['page_permissions'] ?? 'manage_options';
-
-			if ( empty( $capability ) ) {
-				return false;
-			}
-
-			return Redux_Helpers::current_user_can( $capability );
-		}
-
-		/**
-		 * Restricts the localized option set on user profile pages for users without panel access.
-		 * Only the options for the fields rendered on the profile are included,
-		 * so the rest of the panel's option set is not exposed in the page source.
-		 *
-		 * @param array $localize_data Localized data.
+		 * @param array $localize_data Existing localized data.
 		 *
 		 * @return array
 		 */
-		public function restrict_localize_options( array $localize_data ): array {
-			global $pagenow;
+		public function localize_options( array $localize_data ): array {
+			$fields = $this->collect_declared_fields(
+				$this->profiles, true,
+				fn( $id ) => isset( $this->meta[ $id ] ) ? $this->meta[ $id ] : ( $this->options_defaults[ $id ] ?? '' )
+			);
 
-			if ( ! in_array( $pagenow, $this->pagenows, true ) ) {
-				return $localize_data;
-			}
-
-			if ( $this->can_access_panel() ) {
-				return $localize_data;
-			}
-
-			$profile_ids = $this->get_visible_profile_field_ids();
-
-			foreach ( array( 'options', 'defaults' ) as $key ) {
-				if ( ! isset( $localize_data[ $key ] ) || ! is_array( $localize_data[ $key ] ) ) {
-					continue;
-				}
-
-				$restricted = array();
-
-				foreach ( $localize_data[ $key ] as $field_id => $value ) {
-					if ( in_array( $field_id, $profile_ids, true ) ) {
-						$restricted[ $field_id ] = $value;
-					}
-				}
-
-				$localize_data[ $key ] = $restricted;
-			}
+			$localize_data['options'] = $fields['options'];
+			$localize_data['defaults'] = $fields['defaults'];
 
 			return $localize_data;
-		}
-
-		/**
-		 * Collects the IDs of the profile fields that are rendered for the current user,
-		 * mirroring the visibility and permission checks that generate_profiles() applies.
-		 * Fields hidden from the current user are therefore not exposed in the localized option set either.
-		 *
-		 * @return array
-		 */
-		private function get_visible_profile_field_ids(): array {
-			$ids = array();
-
-			if ( empty( $this->profiles ) || ! is_array( $this->profiles ) ) {
-				return $ids;
-			}
-
-			foreach ( $this->profiles as $profile ) {
-				if ( empty( $profile['sections'] ) || ! is_array( $profile['sections'] ) ) {
-					continue;
-				}
-
-				if ( ! empty( $profile['permissions'] ) && ! Redux_Helpers::current_user_can( $profile['permissions'] ) ) {
-					continue;
-				}
-
-				foreach ( $profile['sections'] as $section ) {
-					if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
-						continue;
-					}
-
-					if ( ! $this->check_edit_visibility( $section ) ) {
-						continue;
-					}
-
-					if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
-						continue;
-					}
-
-					foreach ( $section['fields'] as $field ) {
-						if ( empty( $field['id'] ) ) {
-							continue;
-						}
-
-						if ( ! $this->check_edit_visibility( $field ) ) {
-							continue;
-						}
-
-						if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
-							continue;
-						}
-
-						$ids[ $field['id'] ] = true;
-					}
-				}
-			}
-
-			return array_keys( $ids );
 		}
 
 		/**
@@ -1132,57 +1038,28 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$to_save    = array();
 			$to_compare = array();
 			$to_delete  = array();
-			$dont_save  = true;
 
-			$field_args = Redux_Users::$fields[ $this->parent->args['opt_name'] ] ?? array();
+			$fields = $this->collect_declared_fields( $this->profiles );
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
 				$key = sanitize_text_field( wp_unslash( $key ) );
 
-				if ( ! isset( $field_args[ $key ] ) || $this->is_reserved_user_meta_key( $key ) ) {
+				// Do not save anything the user doesn't have permissions for.
+				if ( ! isset( $fields['allowed'][ $key ] ) || $this->is_reserved_user_meta_key( $key ) ) {
 					continue;
 				}
 
-				if ( ! empty( $field_args[ $key ]['permissions'] ) ) {
-					$can_save = false;
-
-					foreach ( (array) $field_args[ $key ]['permissions'] as $pv ) {
-						if ( Redux_Helpers::current_user_can( $pv ) ) {
-							$can_save = true;
-							break;
-						}
-					}
-
-					if ( ! $can_save ) {
-						continue;
-					}
-				}
-
-				$save = true;
-
-				// parent_options.
-				if ( ! $dont_save && isset( $this->options_defaults[ $key ] ) && $value === $this->options_defaults[ $key ] ) {
-					$save = false;
-				}
-
-				if ( $save && isset( $this->parent_options[ $key ] ) && $this->parent_options[ $key ] !== $value ) {
-					$save = false;
-				}
-
-				if ( $save ) {
+				if ( isset( $this->parent_options[ $key ] ) && $this->parent_options[ $key ] !== $value ) {
+					$to_delete[ $key ] = $value;
+				} else {
 					$to_save[ $key ]    = $value;
 					$to_compare[ $key ] = $this->parent->options[ $key ] ?? '';
-				} else {
-					$to_delete[ $key ] = $value;
 				}
 			}
 
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( "redux/{$this->parent->args['opt_name']}/users/save/before_validate", $to_save, $to_compare, $this->sections );
-
-			$to_save    = $this->filter_registered_user_meta_keys( $to_save, $field_args );
-			$to_compare = $this->filter_registered_user_meta_keys( $to_compare, $field_args );
-			$to_delete  = $this->filter_registered_user_meta_keys( $to_delete, $field_args );
+			$to_save    = $this->filter_registered_user_meta_keys( $to_save, $fields['allowed'] );
 
 			$validate = $this->parent->validate_class->validate( $to_save, $to_compare, $this->sections );
 
@@ -1216,35 +1093,18 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				}
 			}
 
-			$check = $this->profile_fields;
-
 			// phpcs:ignore WordPress.NamingConventions.ValidHookName
 			$to_save = apply_filters( 'redux/users/save', $to_save, $to_compare, $this->sections );
-			$to_save = $this->filter_registered_user_meta_keys( $to_save, $field_args );
+			$to_save = $this->filter_registered_user_meta_keys( $to_save, $fields['allowed'] );
 
 			foreach ( $to_save as $key => $value ) {
 				$prev_value = $this->meta[ $key ] ?? '';
-
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				update_user_meta( $user_id, $key, $value, $prev_value );
 			}
 
 			foreach ( $to_delete as $key => $value ) {
-				if ( isset( $check[ $key ] ) ) {
-					unset( $check[ $key ] );
-				}
-
 				$prev_value = $this->meta[ $key ] ?? '';
 				delete_user_meta( $user_id, $key, $prev_value );
-			}
-
-			if ( ! empty( $check ) ) {
-				foreach ( $check as $key => $value ) {
-					delete_user_meta( $user_id, $key );
-				}
 			}
 
 			return true;
