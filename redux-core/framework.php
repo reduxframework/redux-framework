@@ -631,6 +631,54 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 		}
 
 		/**
+		 * Populate the localized options and defaults for the main panel fields,
+		 * mirroring the permission checks that register() applies.
+		 *
+		 * @return array
+		 */
+		public function localize_options(): array {
+			$fields = array(
+				'options' => array(),
+				'defaults' => array()
+			);
+
+			if ( empty( $this->sections ) || ! is_array( $this->sections ) ) {
+				return $fields;
+			}
+
+			if ( ! Redux_Helpers::current_user_can( $this->args['page_permissions'] ) ) {
+				return $fields;
+			}
+
+			$defaults = ! empty( $this->options_defaults ) ? $this->options_defaults : array();
+
+			foreach ( $this->sections as $section ) {
+				if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+					continue;
+				}
+
+				if ( ! empty( $section['permissions'] ) && ! Redux_Helpers::current_user_can( $section['permissions'] ) ) {
+					continue;
+				}
+
+				foreach ( $section['fields'] as $field ) {
+					if ( empty( $field['id'] ) ) {
+						continue;
+					}
+
+					if ( ! empty( $field['permissions'] ) && ! Redux_Helpers::current_user_can( $field['permissions'] ) ) {
+						continue;
+					}
+
+					$fields['options'][ $field['id'] ] = isset( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : ( $defaults[ $field['id'] ] ?? '' );
+					$fields['defaults'][ $field['id'] ] = $defaults[ $field['id'] ] ?? '';
+				}
+			}
+
+			return $fields;
+		}
+
+		/**
 		 * SHIM: check_dependencies
 		 *
 		 * @param array $field Field array.

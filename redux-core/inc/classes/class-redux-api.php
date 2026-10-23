@@ -75,6 +75,13 @@ if ( ! class_exists( 'Redux', false ) ) {
 		public static array $errors = array();
 
 		/**
+		 * Field types that are only supported in the main options panel.
+		 *
+		 * @var array
+		 */
+		public static array $panel_only_field_types = array( 'custom_fonts' );
+
+		/**
 		 * Init.
 		 *
 		 * @var array
