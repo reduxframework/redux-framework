@@ -1,5 +1,12 @@
 # Redux Changelog
 
+## 4.5.17
+* Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via edit-tags.php, term.php, post-new.php, post.php inline redux_<opt_name> JavaScript.
+* Modified: The `custom_fonts` field type is now only supported in the main options panel.
+* Modified: Customizer sections are now only visible to users with `page_permissions`.
+* Deprecated: `Redux_Metaboxes::filter_metaboxes()` no longer performs any action.
+* Release date: October 27, 2026
+
 ## 4.5.16
 * Fixed: Authenticated (Subscriber+) stored XSS via the 'multi_media' field and client-supplied checkuser_id.
 * Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via /wp-admin/profile.php inline redux_<opt_name> JavaScript.

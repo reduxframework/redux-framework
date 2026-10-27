@@ -4,7 +4,7 @@ Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.3
 Requires PHP: 7.4
 Tested up to: 7.1
-Stable tag: 4.5.16
+Stable tag: 4.5.17
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -121,6 +121,13 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.17 =
+* Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via edit-tags.php, term.php, post-new.php, post.php inline redux_<opt_name> JavaScript.
+* Modified: The `custom_fonts` field type is now only supported in the main options panel.
+* Modified: Customizer sections are now only visible to users with `page_permissions`.
+* Deprecated: `Redux_Metaboxes::filter_metaboxes()` no longer performs any action.
+* Release date: October 27, 2026
 
 = 4.5.16 =
 * Fixed: Authenticated (Subscriber+) stored XSS via the 'multi_media' field and client-supplied checkuser_id.

@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/class-redux-core.php';
 
 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Variable is inside a prefixed class.
-Redux_Core::$version    = '4.5.16';
+Redux_Core::$version    = '4.5.17';
 Redux_Core::$redux_path = __DIR__;
 Redux_Core::instance();
 
@@ -632,7 +632,7 @@ if ( ! class_exists( 'ReduxFramework', false ) ) {
 
 		/**
 		 * Populate the localized options and defaults for the main panel fields,
-		 * mirroring the permission checks that register() applies.
+		 * mirroring the permission checks that Redux_Options_Constructor::register() applies.
 		 *
 		 * @return array
 		 */
