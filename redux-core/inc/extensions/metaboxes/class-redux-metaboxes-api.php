@@ -72,6 +72,15 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 		public static array $args = array();
 
 		/**
+		 * Code has run flag.
+		 *
+		 * @var bool
+		 *
+		 * @deprecated 4.5.17
+		 */
+		public static bool $has_run = false;
+
+		/**
 		 * Class load.
 		 */
 		public static function load() {
@@ -123,6 +132,15 @@ if ( ! class_exists( 'Redux_Metaboxes' ) ) {
 					}
 				}
 			}
+		}
+
+		/**
+		 * Filter Metaboxes function.
+		 *
+		 * @deprecated 4.5.17
+		 */
+		public static function filter_metaboxes() {
+			_deprecated_function( __METHOD__, 'Redux 4.5.17' );
 		}
 
 		/**
