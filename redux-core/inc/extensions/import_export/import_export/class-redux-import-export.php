@@ -66,6 +66,11 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 		 * @access      public
 		 */
 		public function render() {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
+				esc_html_e( 'You do not have permission to import/export options.', 'redux-framework' );
+				return;
+			}
+
 			$secret = wp_create_nonce( 'redux_io_' . $this->parent->args['opt_name'] );
 
 			// No errors, please.

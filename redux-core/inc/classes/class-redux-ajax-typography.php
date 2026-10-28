@@ -32,7 +32,7 @@ if ( ! class_exists( 'Redux_AJAX_Typography', false ) ) {
 		 * @return void
 		 */
 		public function google_fonts_update() {
-			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
 				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
 			}
 

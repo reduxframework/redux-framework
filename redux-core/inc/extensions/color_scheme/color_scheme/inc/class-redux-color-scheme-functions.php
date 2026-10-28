@@ -363,7 +363,7 @@ if ( ! class_exists( 'Redux_Color_Scheme_Functions' ) ) {
 
 			// Enum through the dropdown array and append the necessary HTML for the selector.
 			foreach ( $dropdown_values as $k ) {
-				$html .= '<option value="' . $k . '" ' . selected( $k, $selected, false ) . '>' . $k . '</option>';
+				$html .= '<option value="' . esc_attr( $k ) . '" ' . selected( $k, $selected, false ) . '>' . esc_html( $k ) . '</option>';
 			}
 
 			// Send it all packin'.

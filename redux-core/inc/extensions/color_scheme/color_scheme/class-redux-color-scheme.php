@@ -81,6 +81,11 @@ if ( ! class_exists( 'Redux_Color_Scheme' ) ) {
 		 * @return      void
 		 */
 		public function render() {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
+				esc_html_e( 'You do not have permission to configure color schemes.', 'redux-framework' );
+				return;
+			}
+
 			$field_id = esc_attr( $this->field['id'] );
 
 			// Set field ID, just in case.
