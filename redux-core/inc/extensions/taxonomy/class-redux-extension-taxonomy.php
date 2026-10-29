@@ -422,7 +422,11 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 			$fields = $this->collect_declared_fields( $this->terms, false );
 
-			$meta = $this->get_meta( $this->tag_id );
+			if ( empty( $this->meta[ $this->tag_id ] ) ) {
+				$this->meta[ $this->tag_id ] = Redux_Taxonomy::get_term_meta( array( 'taxonomy' => $this->tag_id ) );
+			}
+
+			$meta = $this->meta[ $this->tag_id ];
 			$data = wp_parse_args( $meta, $this->options_defaults );
 
 			foreach ( $data as $key => $_value ) {
@@ -580,7 +584,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 			}
 
 			if ( empty( $this->meta[ $this->tag_id ] ) ) {
-				$this->meta[ $this->tag_id ] = $this->get_meta( $this->tag_id );
+				$this->meta[ $this->tag_id ] = Redux_Taxonomy::get_term_meta( array( 'taxonomy' => $this->tag_id ) );
 			}
 		}
 
@@ -690,94 +694,6 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 
 				return $data;
 			}
-		}
-
-		/**
-		 * Function to get and cache the post-meta.
-		 *
-		 * @param string $id ID.
-		 *
-		 * @return array
-		 */
-		private function get_meta( string $id ): array {
-			if ( ! isset( $this->meta[ $id ] ) ) {
-				$this->meta[ $id ] = array();
-				$o_data            = get_post_meta( $id );
-
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$o_data = apply_filters( "redux/taxonomy/{$this->parent->args['opt_name']}/get_meta", $o_data );
-
-				if ( ! empty( $o_data ) ) {
-					foreach ( $o_data as $key => $value ) {
-						if ( count( $value ) === 1 ) {
-							$this->meta[ $id ][ $key ] = maybe_unserialize( $value[0] );
-						} else {
-							$new_value = array_map( 'maybe_unserialize', $value );
-
-							$this->meta[ $id ][ $key ] = $new_value[0];
-						}
-					}
-				}
-
-				if ( isset( $this->meta[ $id ][ $this->parent->args['opt_name'] ] ) ) {
-					$data = maybe_unserialize( $this->meta[ $id ][ $this->parent->args['opt_name'] ] );
-
-					foreach ( $data as $key => $value ) {
-						$this->meta[ $id ][ $key ] = $value;
-						update_post_meta( $id, $key, $value );
-					}
-
-					unset( $this->meta[ $id ][ $this->parent->args['opt_name'] ] );
-
-					delete_post_meta( $id, $this->parent->args['opt_name'] );
-				}
-			}
-
-			return $this->meta[ $id ];
-		}
-
-		/**
-		 * Get values.
-		 *
-		 * @param mixed  $the_post WP_Post.
-		 * @param string $meta_key Meta key.
-		 * @param string $def_val  Default value.
-		 *
-		 * @return mixed|string
-		 */
-		public function get_values( $the_post, string $meta_key = '', string $def_val = '' ) {
-
-			// Override these values if they differ from the admin panel defaults.
-			if ( isset( $the_post->taxonomy_type ) && in_array( $the_post->taxonomy_type, $this->taxonomy_types, true ) ) {
-				if ( isset( $this->taxonomy_type_values[ $the_post->taxonomy_type ] ) ) {
-					$meta = $this->taxonomy_type_fields[ $the_post->taxonomy_type ];
-				} else {
-					$defaults = array();
-					if ( ! empty( $this->taxonomy_type_fields[ $the_post->taxonomy_type ] ) ) {
-						foreach ( $this->taxonomy_type_fields[ $the_post->taxonomy_type ] as $key => $null ) {
-							if ( isset( $this->options_defaults[ $key ] ) ) {
-								$defaults[ $key ] = $this->options_defaults[ $key ];
-							}
-						}
-					}
-
-					$meta = wp_parse_args( $this->get_meta( $the_post->ID ), $defaults );
-
-					$this->taxonomy_type_fields[ $the_post->taxonomy_type ] = $meta;
-				}
-
-				if ( ! empty( $meta_key ) ) {
-					if ( ! isset( $meta[ $meta_key ] ) ) {
-						$meta[ $meta_key ] = $def_val;
-					}
-
-					return $meta[ $meta_key ];
-				} else {
-					return $meta;
-				}
-			}
-
-			return $def_val;
 		}
 
 		/**

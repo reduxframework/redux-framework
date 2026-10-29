@@ -221,6 +221,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 				return;
 			}
 
+			// phpcs:ignore WordPress.Security.NonceVerification
+			$user       = isset( $_GET['user_id'] ) ? sanitize_text_field( wp_unslash( $_GET['user_id'] ) ) : get_current_user_id();
+			$this->meta = Redux_Users::get_user_meta( array( 'user' => $user ) );
+
 			foreach ( $this->profiles as $bk => $profile ) {
 				$profile['roles'] = isset( $profile['roles'] ) ? (array) $profile['roles'] : array( 'read' );
 
@@ -707,94 +711,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 				return $data;
 			}
-		}
-
-		/**
-		 * Function to get and cache the post-meta.
-		 *
-		 * @param string $id ID.
-		 *
-		 * @return array
-		 */
-		private function get_meta( string $id ): array {
-			if ( ! isset( $this->meta[ $id ] ) ) {
-				$this->meta[ $id ] = array();
-				$o_data            = get_post_meta( $id );
-
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$o_data = apply_filters( "redux/users/{$this->parent->args['opt_name']}/get_meta", $o_data );
-
-				if ( ! empty( $o_data ) ) {
-					foreach ( $o_data as $key => $value ) {
-						if ( count( $value ) === 1 ) {
-							$this->meta[ $id ][ $key ] = maybe_unserialize( $value[0] );
-						} else {
-							$new_value = array_map( 'maybe_unserialize', $value );
-
-							$this->meta[ $id ][ $key ] = $new_value[0];
-						}
-					}
-				}
-
-				if ( isset( $this->meta[ $id ][ $this->parent->args['opt_name'] ] ) ) {
-					$data = maybe_unserialize( $this->meta[ $id ][ $this->parent->args['opt_name'] ] );
-
-					foreach ( $data as $key => $value ) {
-						$this->meta[ $id ][ $key ] = $value;
-						update_post_meta( $id, $key, $value );
-					}
-
-					unset( $this->meta[ $id ][ $this->parent->args['opt_name'] ] );
-
-					delete_post_meta( $id, $this->parent->args['opt_name'] );
-				}
-			}
-
-			return $this->meta[ $id ];
-		}
-
-		/**
-		 * Get values.
-		 *
-		 * @param mixed  $the_post Post array.
-		 * @param string $meta_key Meta key.
-		 * @param string $def_val  Default value.
-		 *
-		 * @return mixed|string
-		 */
-		public function get_values( $the_post, string $meta_key = '', string $def_val = '' ) {
-
-			// Override these values if they differ from the admin panel defaults.  ;).
-			if ( isset( $the_post->users_role ) && in_array( $the_post->users_role, $this->users_roles, true ) ) {
-				if ( isset( $this->users_role_values[ $the_post->users_role ] ) ) {
-					$meta = $this->profile_fields[ $the_post->users_role ];
-				} else {
-					$defaults = array();
-					if ( ! empty( $this->profile_fields[ $the_post->users_role ] ) ) {
-						foreach ( $this->profile_fields[ $the_post->users_role ] as $key => $null ) {
-							if ( isset( $this->options_defaults[ $key ] ) ) {
-								$defaults[ $key ] = $this->options_defaults[ $key ];
-							}
-						}
-					}
-
-					$meta = wp_parse_args( $this->get_meta( $the_post->ID ), $defaults );
-
-					$this->profile_fields[ $the_post->users_role ] = $meta;
-				}
-
-				if ( ! empty( $meta_key ) ) {
-					if ( ! isset( $meta[ $meta_key ] ) ) {
-						$meta[ $meta_key ] = $def_val;
-					}
-
-					return $meta[ $meta_key ];
-				} else {
-					return $meta;
-				}
-			}
-
-			return $def_val;
 		}
 
 		/**
