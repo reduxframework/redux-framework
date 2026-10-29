@@ -1093,25 +1093,29 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Sanitize array keys and values.
 		 *
-		 * @param array $arr Array to sanitize.
+		 * @param array $arr                     Array to sanitize.
+		 * @param bool  $sanitize_top_level_keys Whether to sanitize top level array keys.
 		 */
-		public static function sanitize_array( array $arr ): array {
-			return self::array_map_r( 'wp_kses_post', $arr );
+		public static function sanitize_array( array $arr, bool $sanitize_top_level_keys = false ): array {
+			return self::array_map_r( 'wp_kses_post', $arr, $sanitize_top_level_keys );
 		}
 
 		/**
 		 * Recursive array map.
 		 *
-		 * @param string $func function to run.
-		 * @param array  $arr  Array to clean.
+		 * @param string $func                    Function to run.
+		 * @param array  $arr                     Array to clean.
+		 * @param bool   $sanitize_top_level_keys Whether to sanitize top level array keys.
 		 *
 		 * @return array
 		 */
-		private static function array_map_r( string $func, array $arr ): array {
+		private static function array_map_r( string $func, array $arr, bool $sanitize_top_level_keys ): array {
 			$new_arr = array();
 
 			foreach ( $arr as $key => $value ) {
-				$new_arr[ $key ] = ( is_array( $value ) ? self::array_map_r( $func, $value ) : ( is_array( $func ) ? call_user_func_array( $func, $value ) : $func( $value ) ) );
+				$new_key = $sanitize_top_level_keys ? sanitize_text_field( (string) $key ) : $key;
+
+				$new_arr[ $new_key ] = ( is_array( $value ) ? self::array_map_r( $func, $value, true ) : ( is_array( $func ) ? call_user_func_array( $func, $value ) : $func( $value ) ) );
 			}
 
 			return $new_arr;

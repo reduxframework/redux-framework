@@ -958,8 +958,6 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 			$fields = $this->collect_declared_fields( $this->profiles );
 
 			foreach ( Redux_Helpers::sanitize_array( wp_unslash( $_POST[ $this->parent->args['opt_name'] ] ) ) as $key => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Sanitized with `Redux_Helpers::sanitize_array`.
-				$key = sanitize_text_field( wp_unslash( $key ) );
-
 				// Do not save anything the user doesn't have permissions for.
 				if ( ! isset( $fields['allowed'][ $key ] ) || $this->is_reserved_user_meta_key( $key ) ) {
 					continue;
