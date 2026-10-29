@@ -79,8 +79,17 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 							$default_validation_by_type = array(
 								'spinner' => 'numeric',
 								'slider'  => 'numeric',
-								'color'  => 'color',
-								'date'  => 'date',
+								'color'   => 'color',
+								'date'    => 'date',
+								'link_color'     => 'css',
+								'border'         => 'css',
+								'box_shadow'     => 'css',
+								'background'     => 'css',
+								'typography'     => 'css',
+								'image_select'   => 'css',
+								'color_gradient' => 'css',
+								'spacing'        => 'css',
+								'dimensions'     => 'css',
 							);
 
 							/**

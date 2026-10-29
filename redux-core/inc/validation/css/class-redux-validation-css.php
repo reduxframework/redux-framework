@@ -26,11 +26,7 @@ if ( ! class_exists( 'Redux_Validation_Css', false ) ) {
 		public function validate() {
 			$this->field['msg'] = $this->field['msg'] ?? esc_html__( 'Unsafe strings were found in your CSS and have been filtered out.', 'redux-framework' );
 
-			$data = $this->value;
-
-			$data = wp_filter_nohtml_kses( $data );
-			$data = str_replace( '&gt;', '>', $data );
-			$data = stripslashes( $data );
+			$data = $this->sanitize_css_value( $this->value );
 
 			if ( $data !== $this->value ) {
 				$this->field['current'] = $data;
@@ -38,6 +34,29 @@ if ( ! class_exists( 'Redux_Validation_Css', false ) ) {
 			}
 
 			$this->value = $data;
+		}
+
+		/**
+		 * Sanitize a CSS value, recursing into arrays so nested field
+		 * values (e.g. box_shadow's inset-shadow and drop-shadow fields) are sanitized as well.
+		 *
+		 * @param mixed $value Value to sanitize.
+		 *
+		 * @return mixed
+		 */
+		private function sanitize_css_value( $value ) {
+			if ( is_array( $value ) ) {
+				return array_map( array( $this, 'sanitize_css_value' ), $value );
+			}
+
+			if ( ! is_string( $value ) ) {
+				return $value;
+			}
+
+			$value = wp_kses( $value, 'strip' );
+			$value = str_replace( '&gt;', '>', $value );
+
+			return $value;
 		}
 	}
 }
