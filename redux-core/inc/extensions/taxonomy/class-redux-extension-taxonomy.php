@@ -697,6 +697,22 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		}
 
 		/**
+		 * Get values.
+		 *
+		 * @param mixed  $the_post WP_Post.
+		 * @param string $meta_key Meta key.
+		 * @param string $def_val  Default value.
+		 *
+		 * @return string
+		 *
+		 * @deprecated 4.5.18
+		 */
+		public function get_values( $the_post, string $meta_key = '', string $def_val = '' ): string {
+			_deprecated_function( __METHOD__, 'Redux 4.5.18' );
+			return $def_val;
+		}
+
+		/**
 		 * Check edit visibility.
 		 *
 		 * @param array $params Array.

@@ -619,6 +619,20 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		}
 
 		/**
+		 * Compile a localized array.
+		 *
+		 * @param array $localize Array of localized strings.
+		 *
+		 * @return array
+		 *
+		 * @deprecated 4.5.18
+		 */
+		public static function localize( array $localize ): array {
+			_deprecated_function( __METHOD__, 'Redux 4.5.18' );
+			return $localize;
+		}
+
+		/**
 		 * Check mokama.
 		 *
 		 * @access public

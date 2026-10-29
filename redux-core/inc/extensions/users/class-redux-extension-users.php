@@ -124,7 +124,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var array
 		 */
-		private array $pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
+		public array $pagenows = array( 'user-new.php', 'profile.php', 'user-edit.php' );
 
 		/**
 		 * Notices array.
@@ -711,6 +711,22 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 				return $data;
 			}
+		}
+
+		/**
+		 * Get values.
+		 *
+		 * @param mixed  $the_post Post array.
+		 * @param string $meta_key Meta key.
+		 * @param string $def_val  Default value.
+		 *
+		 * @return string
+		 *
+		 * @deprecated 4.5.18
+		 */
+		public function get_values( $the_post, string $meta_key = '', string $def_val = '' ): string {
+			_deprecated_function( __METHOD__, 'Redux 4.5.18' );
+			return $def_val;
 		}
 
 		/**
