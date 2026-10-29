@@ -1,5 +1,13 @@
 # Redux Changelog
 
+## 4.5.18
+* Fixed: Authenticated (Subscriber+) stored XSS via the 'multi_media' field array key.
+* Fixed: Authenticated (Custom+) stored XSS via CSS-emitting User-profile fields.
+* Deprecated: `Redux_Helpers::localize()`.
+* Deprecated: `Redux_Extension_Taxonomy::get_values`.
+* Deprecated: `Redux_Extension_Users::get_values()`.
+* Release date: October 27, 2026
+
 ## 4.5.17
 * Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via edit-tags.php, term.php, post-new.php, post.php inline redux_<opt_name> JavaScript.
 * Fixed: Authenticated (Subscriber+) stored XSS via a color scheme name.
