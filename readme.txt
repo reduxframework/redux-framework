@@ -124,6 +124,8 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 
 = 4.5.17 =
 * Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via edit-tags.php, term.php, post-new.php, post.php inline redux_<opt_name> JavaScript.
+* Fixed: Authenticated (Subscriber+) stored XSS via a color scheme name.
+* Fixed: Missing authorization to authenticated (Subscriber+) allowing sensitive information disclosure via the download_options AJAX action.
 * Modified: The `custom_fonts` field type is now only supported in the main options panel.
 * Modified: Customizer sections are now only visible to users with `page_permissions`.
 * Deprecated: `Redux_Metaboxes::filter_metaboxes()` no longer performs any action.
