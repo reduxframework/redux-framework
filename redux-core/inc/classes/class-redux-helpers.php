@@ -1129,7 +1129,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 			foreach ( $arr as $key => $value ) {
 				$new_key = $sanitize_top_level_keys ? sanitize_text_field( (string) $key ) : $key;
 
-				$new_arr[ $new_key ] = ( is_array( $value ) ? self::array_map_r( $func, $value, true ) : ( is_array( $func ) ? call_user_func_array( $func, $value ) : $func( $value ) ) );
+				$new_arr[ $new_key ] = ( is_array( $value ) ? self::array_map_r( $func, $value, true ) : $func( $value ) );
 			}
 
 			return $new_arr;
