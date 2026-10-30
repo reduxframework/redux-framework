@@ -625,10 +625,10 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *
 		 * @return array
 		 *
-		 * @deprecated 4.5.18
+		 * @deprecated 4.5.17
 		 */
 		public static function localize( array $localize ): array {
-			_deprecated_function( __METHOD__, 'Redux 4.5.18' );
+			_deprecated_function( __METHOD__, 'Redux 4.5.17' );
 			return $localize;
 		}
 

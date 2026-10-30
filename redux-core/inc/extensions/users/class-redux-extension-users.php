@@ -722,10 +722,10 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @return string
 		 *
-		 * @deprecated 4.5.18
+		 * @deprecated 4.5.17
 		 */
 		public function get_values( $the_post, string $meta_key = '', string $def_val = '' ): string {
-			_deprecated_function( __METHOD__, 'Redux 4.5.18' );
+			_deprecated_function( __METHOD__, 'Redux 4.5.17' );
 			return $def_val;
 		}
 
