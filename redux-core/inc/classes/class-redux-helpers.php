@@ -1117,13 +1117,13 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		/**
 		 * Recursive array map.
 		 *
-		 * @param string $func                    Function to run.
-		 * @param array  $arr                     Array to clean.
-		 * @param bool   $sanitize_top_level_keys Whether to sanitize top level array keys.
+		 * @param callable $func                    Function to run.
+		 * @param array    $arr                     Array to clean.
+		 * @param bool     $sanitize_top_level_keys Whether to sanitize top level array keys.
 		 *
 		 * @return array
 		 */
-		private static function array_map_r( string $func, array $arr, bool $sanitize_top_level_keys ): array {
+		private static function array_map_r( callable $func, array $arr, bool $sanitize_top_level_keys ): array {
 			$new_arr = array();
 
 			foreach ( $arr as $key => $value ) {
