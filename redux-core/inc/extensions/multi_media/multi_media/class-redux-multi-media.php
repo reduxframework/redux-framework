@@ -109,7 +109,7 @@ if ( ! class_exists( 'Redux_Multi_Media' ) ) {
                                     type="hidden"
                                     value="' . esc_attr( $url ) . '"
                                     name="' . esc_attr( $this->field['name'] . $this->field['name_suffix'] ) . '[' . intval( $id ) . ']"
-                                    id="filelist-' . $id . '"
+                                    id="filelist-' . esc_attr( $id ) . '"
                                     class="" />';
 
 					// Check for a valid image extension.

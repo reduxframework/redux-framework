@@ -156,11 +156,6 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 							}
 						}
 					}
-
-					if ( ! empty( $core->outputCSS ) ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-						// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-						$core->outputCSS = html_entity_decode( $core->outputCSS, ENT_QUOTES, 'UTF-8' );
-					}
 				}
 			}
 
@@ -320,8 +315,10 @@ if ( ! class_exists( 'Redux_Output', false ) ) {
 
 			// phpcs:ignore WordPress.NamingConventions.ValidVariableName
 			if ( ! empty( $core->outputCSS ) && ( true === $core->args['output_tag'] || ( isset( $_POST['customized'] ) && isset( $_POST['nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'preview-customize_' . wp_get_theme()->get_stylesheet() ) ) ) ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidVariableName, WordPress.Security.EscapeOutput
-				echo '<style id="' . esc_attr( $core->args['opt_name'] ) . '-dynamic-css" title="dynamic-css" class="redux-options-output">' . $core->outputCSS . '</style>';
+				$safe_css = str_replace( '<', '', (string) $core->outputCSS ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName
+
+				// phpcs:ignore WordPress.Security.EscapeOutput
+				echo '<style id="' . esc_attr( $core->args['opt_name'] ) . '-dynamic-css" title="dynamic-css" class="redux-options-output">' . $safe_css . '</style>';
 			}
 		}
 
