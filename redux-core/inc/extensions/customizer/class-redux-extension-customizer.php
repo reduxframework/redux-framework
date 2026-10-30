@@ -122,6 +122,10 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				return;
 			}
 
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
+				return;
+			}
+
 			// Override the Redux_Core class.
 			add_filter( "redux/extension/{$this->parent->args['opt_name']}/customizer", array( $this, 'remove_core_customizer_class' ) );
 
@@ -173,7 +177,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 			try {
 				$return_array = array();
 
-				if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+				if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
 					wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
 				}
 
@@ -463,7 +467,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					continue;
 				}
 
-				$section['permissions'] = $section['permissions'] ?? 'edit_theme_options';
+				$section['permissions'] = $section['permissions'] ?? $this->parent->args['page_permissions'];
 
 				// No errors please.
 				if ( ! isset( $section['desc'] ) ) {
@@ -558,7 +562,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					$this->options[ $option['id'] ] = $option;
 					add_action( 'redux/customizer/control/render/' . $this->parent->args['opt_name'] . '-' . $option['id'], array( $this, 'render' ) );
 
-					$option['permissions'] = $option['permissions'] ?? 'edit_theme_options';
+					$option['permissions'] = $option['permissions'] ?? $this->parent->args['page_permissions'];
 
 					// Change the item priority if not set.
 					if ( 'heading' !== $option['type'] && ! isset( $option['priority'] ) ) {
@@ -588,6 +592,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 								'transport'         => 'refresh',
 								'opt_name'          => $this->parent->args['opt_name'],
 								'sanitize_callback' => array( $this, 'field_validation' ),
+								'capability'  => $option['permissions'],
 							)
 						);
 					}

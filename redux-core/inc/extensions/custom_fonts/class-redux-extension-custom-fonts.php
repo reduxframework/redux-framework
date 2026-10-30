@@ -163,7 +163,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Timer.
 		 */
 		public function timer() {
-			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
 				echo wp_json_encode(
 					array(
 						'type' => 'error',
@@ -342,7 +342,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 * Ajax used within the panel to add and process the fonts
 		 */
 		public function ajax() {
-			if ( ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
 				echo wp_json_encode(
 					array(
 						'type' => 'error',

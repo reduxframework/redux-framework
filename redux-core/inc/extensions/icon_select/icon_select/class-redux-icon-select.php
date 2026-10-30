@@ -264,6 +264,11 @@ if ( ! class_exists( 'Redux_Icon_Select' ) ) {
 		 * @access      public
 		 */
 		public function render() {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
+				esc_html_e( 'You do not have permission to configure icons.', 'redux-framework' );
+				return;
+			}
+
 			if ( $this->is_error ) {
 				return;
 			}

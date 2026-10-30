@@ -49,10 +49,10 @@
 		l10n = redux_custom_fonts_l10;
 
 		if ( undefined === optName ) {
-			reduxObject = redux;
-		} else {
-			reduxObject = redux.optName;
+			$.redux.getOptName( el );
 		}
+
+		reduxObject = redux.optName;
 
 		el.find( '.checkbox' ).on(
 			'click',

@@ -56,7 +56,7 @@ if ( ! class_exists( 'Redux_Extension_Icon_Select' ) ) {
 		 * @return void
 		 */
 		public function get_icons() {
-			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
 				wp_send_json_error( array( 'error' => esc_html__( 'Error: You do not have permission to perform this action.', 'redux-framework' ) ) );
 			}
 

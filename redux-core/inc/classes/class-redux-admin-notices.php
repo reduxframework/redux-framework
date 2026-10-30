@@ -222,7 +222,7 @@ if ( ! class_exists( 'Redux_Admin_Notices', false ) ) {
 
 			$core = $this->core();
 
-			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $core->args['page_permissions'] ) ) {
+			if ( ! Redux_Helpers::current_user_can( $core->args['page_permissions'] ) ) {
 				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
 			}
 

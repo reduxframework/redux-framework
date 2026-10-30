@@ -43,6 +43,11 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 		 * @access      public
 		 */
 		public function render() {
+			if ( ! Redux_Helpers::current_user_can( $this->parent->args['page_permissions'] ) ) {
+				esc_html_e( 'You do not have permission to configure custom fonts.', 'redux-framework' );
+				return;
+			}
+
 			echo '</fieldset></td></tr>';
 			echo '<tr>';
 			echo '<td colspan="2">';
@@ -150,12 +155,18 @@ if ( ! class_exists( 'Redux_Custom_Fonts' ) ) {
 		 * @access      public
 		 */
 		public function enqueue() {
-			$min = Redux_Functions::isMin();
+			if ( function_exists( 'wp_enqueue_media' ) ) {
+				wp_enqueue_media();
+			} else {
+				wp_enqueue_script( 'media-upload' );
+			}
+
+			$min = Redux_Functions::is_min();
 
 			wp_enqueue_script(
 				'redux-field-custom-fonts',
 				$this->url . '/redux-custom-fonts' . $min . '.js',
-				array( 'jquery', 'redux-block-ui' ),
+				array( 'jquery', 'redux-js', 'redux-block-ui' ),
 				Redux_Extension_Custom_Fonts::$version,
 				true
 			);

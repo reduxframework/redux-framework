@@ -113,8 +113,6 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 
 			$this->enqueue_fields( $core );
 
-			add_filter( "redux/{$core->args['opt_name']}/localize", array( 'Redux_Helpers', 'localize' ) );
-
 			$this->set_localized_data( $core );
 
 			/**
@@ -579,8 +577,10 @@ if ( ! class_exists( 'Redux_Enqueue', false ) ) {
 			}
 
 			$this->localize_data['fields_hidden'] = Redux_Core::$fields_hidden;
-			$this->localize_data['options']       = $core->options;
-			$this->localize_data['defaults']      = $core->options_defaults;
+
+			$fields = $core->localize_options();
+			$this->localize_data['options']  = $fields['options'];
+			$this->localize_data['defaults'] = $fields['defaults'];
 
 			/**
 			 * Save pending string
