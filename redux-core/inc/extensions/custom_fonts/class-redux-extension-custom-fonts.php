@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Kevin Provance <kevin.provance@gmail.com> & Dovy Paukstys <dovy@reduxframework.com>
  * @class   Redux_Extension_Custom_Fonts
- * @version 4.5.10
+ * @version 4.5.18
  *
  * @noinspection PhpHierarchyChecksInspection
  * @noinspection PhpDocFinalChecksInspection
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Custom_Fonts' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.5.10';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension friendly name.

@@ -5,7 +5,7 @@
  * @package Redux Extentions
  * @author  Dovy Paukstys <dovy@reduxframework.com> & Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Icon_Select
- * @version 4.4.2
+ * @version 4.5.18
  *
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Redux_Extension_Icon_Select' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.2';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension friendly name.

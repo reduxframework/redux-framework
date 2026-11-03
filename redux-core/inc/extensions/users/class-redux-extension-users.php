@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Users
- * @version 4.5.6
+ * @version 4.5.18
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -6,7 +6,7 @@
  * @author  Dovy Paukstys <dovy@reduxframework.com> & Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Metaboxes
  *
- * @version 4.2.0
+ * @version 4.5.18
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Metaboxes', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.2.0';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension friendly name.

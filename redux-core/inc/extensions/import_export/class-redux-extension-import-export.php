@@ -3,7 +3,7 @@
  * Redux Import/Export Extension Class
  *
  * @class   Redux_Extension_Import_Export
- * @version 4.5.10
+ * @version 4.5.18
  * @package Redux Framework
  *
  * @noinspection PhpIgnoredClassAliasDeclaration
