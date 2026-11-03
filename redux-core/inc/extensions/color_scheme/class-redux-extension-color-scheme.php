@@ -569,7 +569,7 @@ if ( ! class_exists( 'Redux_Extension_Color_Scheme' ) ) {
 			// Set header info.
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-type: application/txt' );
-			header( 'Content-Disposition: attachment; filename="redux_schemes_' . $this->parent->args['opt_name'] . '_' . $this->field_id . '_' . gmdate( 'm-d-Y' ) . '.json"' );
+			header( 'Content-Disposition: attachment; filename="redux_schemes_' . $this->parent->args['opt_name'] . '_' . $this->field_id . '_' . gmdate( 'm-d-Y-H-i' ) . '.json"' );
 			header( 'Content-Transfer-Encoding: binary' );
 			header( 'Expires: 0' );
 			header( 'Cache-Control: must-revalidate' );
