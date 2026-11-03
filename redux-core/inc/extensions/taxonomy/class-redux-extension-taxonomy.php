@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Taxonomy
- * @version 4.4.6
+ * @version 4.5.18
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Taxonomy' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.19';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension friendly name.
