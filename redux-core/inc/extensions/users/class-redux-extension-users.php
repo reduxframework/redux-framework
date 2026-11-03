@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.5.6';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension friendly name.

@@ -1,5 +1,10 @@
 # Redux Changelog
 
+## 4.5.18
+* Fixed: Authenticated (Subscriber+) stored XSS via the 'color' field validation warning.
+* Modified: Export and download filenames now include the hour and minute.
+* Release date: November 04, 2026
+
 ## 4.5.17
 * Fixed: Authenticated (Subscriber+) stored XSS via the 'multi_media' field array key.
 * Fixed: Authenticated (Custom+) stored XSS via CSS-emitting User-profile fields.
