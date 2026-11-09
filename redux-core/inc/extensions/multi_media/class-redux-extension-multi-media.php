@@ -6,7 +6,7 @@
  * @author Kevin Provance <kevin.provance@gmail.com>
  * @class   Redux_Extension_Multi_Media
  *
- * @version 4.4.1
+ * @version 4.5.18
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Multi_Media' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.1';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension name.

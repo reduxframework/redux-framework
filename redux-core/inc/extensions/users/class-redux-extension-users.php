@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys
  * @class   Redux_Extension_Users
- * @version 4.5.6
+ * @version 4.5.18
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.5.6';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension friendly name.
@@ -481,7 +481,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					$this->parent->args['disable_save_warn'] = true;
 				}
 
-				$this->parent->transients       = get_transient( $this->parent->args['opt_name'] . '-transients-users' );
+				$this->parent->transients       = get_transient( $this->parent->args['opt_name'] . '-transients-users-' . get_current_user_id() );
 				$this->parent->transients_check = $this->parent->transients;
 
 				if ( isset( $this->parent->transients['notices'] ) ) {
@@ -489,7 +489,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 					$this->parent->transients['last_save_mode'] = 'users';
 				}
 
-				delete_transient( $this->parent->args['opt_name'] . '-transients-users' );
+				delete_transient( $this->parent->args['opt_name'] . '-transients-users-' . get_current_user_id() );
 
 				$this->parent->enqueue_class->init();
 
@@ -1019,7 +1019,7 @@ if ( ! class_exists( 'Redux_Extension_Users' ) ) {
 
 				if ( isset( $update_transients ) ) {
 					$this->parent->transients['notices']['override'] = 1;
-					set_transient( $this->parent->args['opt_name'] . '-transients-users', $this->parent->transients );
+					set_transient( $this->parent->args['opt_name'] . '-transients-users-' . get_current_user_id(), $this->parent->transients, DAY_IN_SECONDS );
 				}
 			}
 

@@ -5,7 +5,7 @@
  * @package Redux
  * @author  Dovy Paukstys (dovy)
  * @class   Redux_Extension_Widget_Areas
- * @version 4.3.20
+ * @version 4.5.18
  *
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
@@ -24,7 +24,7 @@ if ( ! class_exists( 'Redux_Extension_Widget_Areas' ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.3.20';
+		public static $version = '4.5.18';
 
 		/**
 		 * Extension Friendly name.
