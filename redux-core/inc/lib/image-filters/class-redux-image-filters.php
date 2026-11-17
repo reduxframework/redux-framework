@@ -86,7 +86,7 @@ if ( ! class_exists( 'Redux_Image_Filters' ) ) {
 				$output .= '<input type="checkbox" id="' . esc_attr( $field['id'] ) . '-' . $filter . '" class="checkbox" value="1"' . checked( $value['filter'][ $filter ]['checked'], '1', false ) . '/>';
 				$output .= '<input type="hidden" data-val="1" value="' . esc_attr( $value['filter'][ $filter ]['checked'] ) . '" class="checkbox-check" name="' . esc_attr( $field['name'] . $field['name_suffix'] ) . '[filter][' . $filter . '][checked]"/>';
 				$output .= ucfirst( $filter ) . ': ';
-				$output .= '<span class="filter-value"><strong>' . $value['filter'][ $filter ]['value'] . $unit . '</strong></span>';
+				$output .= '<span class="filter-value"><strong>' . esc_html( $value['filter'][ $filter ]['value'] ) . $unit . '</strong></span>';
 				$output .= '</label>';
 
 				$output .= '<div ';
