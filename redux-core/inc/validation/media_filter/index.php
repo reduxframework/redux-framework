@@ -5,4 +5,4 @@
  * @package Redux Framework
  */
 
-defined( 'ABSPATH' ) || exit;;
+defined( 'ABSPATH' ) || exit;
