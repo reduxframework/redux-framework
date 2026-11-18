@@ -79,6 +79,7 @@ if ( ! class_exists( 'Redux_Validation', false ) ) {
 							$default_validation_by_type = array(
 								'spinner' => 'numeric',
 								'slider'  => 'numeric',
+								'media'   => 'media_filter',
 								'color'   => 'color',
 								'date'    => 'date',
 								'link_color'     => 'css',
