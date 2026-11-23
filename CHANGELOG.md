@@ -2,7 +2,7 @@
 
 ## 4.5.19
 * Fixed: Authenticated (Subscriber+) stored XSS via the image-filter 'value' sub-key of a `media` field.
-* Release date: November 19, 2026
+* Release date: November 23, 2026
 
 ## 4.5.18
 * Fixed: Authenticated (Subscriber+) stored XSS via the 'color' field validation warning.
