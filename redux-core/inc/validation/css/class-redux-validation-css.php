@@ -54,7 +54,8 @@ if ( ! class_exists( 'Redux_Validation_Css', false ) ) {
 			}
 
 			$value = wp_kses( $value, 'strip' );
-			$value = str_replace( '&gt;', '>', $value );
+ 			$value = str_replace( '&gt;', '>', $value );
+			$value = str_replace( '&amp;', '&', $value );
 
 			return $value;
 		}
