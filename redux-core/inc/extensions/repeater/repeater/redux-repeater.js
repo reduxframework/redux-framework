@@ -10,6 +10,51 @@
 	redux.field_objects          = redux.field_objects || {};
 	redux.field_objects.repeater = redux.field_objects.repeater || {};
 
+	// Helper function to trigger dependency evaluation efficiently
+	redux.field_objects.repeater.triggerDependencyChain = function( container ) {
+		const maxRounds = 3; // Maximum rounds to handle deep nesting
+		let round = 0;
+		
+		function triggerRound() {
+			if ( round >= maxRounds ) {
+				return;
+			}
+			
+			round++;
+			let triggeredAny = false;
+			
+			container.find( '.redux-field select, .redux-field input[type=radio]:checked, .redux-field input[type=checkbox], .redux-field input[type=hidden]' ).each( function() {
+				const field = $( this );
+				if ( field.hasClass( 'in-repeater' ) ) {
+					const value = field.val();
+					if ( value && value !== '' && value !== '0' && value !== 'false' ) {
+						field.trigger( 'change' );
+						triggeredAny = true;
+					}
+				}
+			});
+			
+			// Handle switch fields specifically
+			container.find( '.redux-field input[type=hidden]' ).each( function() {
+				const hiddenField = $( this );
+				if ( hiddenField.hasClass( 'in-repeater' ) && hiddenField.attr( 'name' ) && hiddenField.attr( 'name' ).indexOf( '[' ) > -1 ) {
+					const value = hiddenField.val();
+					if ( value === '1' || value === 'true' ) {
+						hiddenField.trigger( 'change' );
+						triggeredAny = true;
+					}
+				}
+			});
+			
+			// If we triggered any changes, schedule another round to catch dependencies of newly shown fields
+			if ( triggeredAny && round < maxRounds ) {
+				setTimeout( triggerRound, 100 );
+			}
+		}
+		
+		triggerRound();
+	};
+
 	redux.field_objects.repeater.getOptName = function ( el ) {
 		let optName;
 
@@ -78,6 +123,11 @@
 				redux.field_objects.repeater.bindTitle( el );
 				redux.field_objects.repeater.remove( el, gid );
 				redux.field_objects.repeater.add( el );
+
+				// Use efficient dependency chain evaluation instead of performance-heavy recursive checking
+				setTimeout( function() {
+					redux.field_objects.repeater.triggerDependencyChain( el );
+				}, 150 );
 			}
 		);
 	};
@@ -328,6 +378,13 @@
 					let bracket;
 
 					$.redux.initFields();
+
+					// Use efficient dependency evaluation for newly activated panel
+					if ( ui.newPanel && ui.newPanel.length ) {
+						setTimeout( function() {
+							redux.field_objects.repeater.triggerDependencyChain( ui.newPanel );
+						}, 100 );
+					}
 
 					if ( 'function' === typeof reduxRepeaterAccordionActivate ) {
 						a       = $( this ).next( '.redux-repeaters-add' );
