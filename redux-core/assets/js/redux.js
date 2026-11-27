@@ -877,6 +877,20 @@ function colorNameToHex( colour ) {
 		}
 		return selector;
 	};
+
+	$.redux.escapeMarkup = function ( markup ) {
+		var replaceMap = {
+			'&': '&amp;',
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			'\'': '&#39;',
+		};
+
+		return String( markup ).replace( /[&<>"']/g, function ( match ) {
+			return replaceMap[ match ];
+		} );
+	};
 })( jQuery );
 
 /* global redux */
